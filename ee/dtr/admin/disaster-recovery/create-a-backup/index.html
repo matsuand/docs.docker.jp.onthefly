@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-19 18:12:05 +0900 -->
+<!-- Page generated 2019-04-23 20:13:52 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,7 +86,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-19T18:12:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-23T20:13:52+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -96,7 +96,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Data managed by DTR Docker Trusted Registry maintains data about: Data Description Configurations The DTR cluster configurations Repository metadata The metadata about the repositories and images deployed Access control to..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-19T18:12:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-04-23T20:13:52+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="dtr, disaster recovery">
@@ -379,11 +379,12 @@ recommended for that system.</p>
 <h3 id="back-up-dtr-metadata">Back up DTR metadata</h3>
 
 <p>To create a DTR backup, load your UCP client bundle, and run the following
-concatenated commands:</p>
+chained commands:</p>
 
+<p>{% raw %}</p>
 <pre><code class="language-none">DTR_VERSION=$(docker container inspect $(docker container ps -f name=dtr-registry -q) | \
   grep -m1 -Po '(?&lt;=DTR_VERSION=)\d.\d.\d'); \
-REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb --format "" | head -1 | \
+REPLICA_ID=$(docker ps --filter name=dtr-rethinkdb --format "{{ .Names }}" | head -1 | \
   sed 's|.*/||' | sed 's/dtr-rethinkdb-//'); \
 read -p 'ucp-url (The UCP URL including domain and port): ' UCP_URL; \
 read -p 'ucp-username (The UCP administrator username): ' UCP_ADMIN; \
@@ -405,12 +406,12 @@ docker run --log-driver none -i --rm \
   <li><code class="highlighter-rouge">&lt;replica-id&gt;</code> is the DTR replica ID to back up.</li>
 </ul>
 
-<p>The above concatenated commands run through the following tasks:</p>
+<p>The above chained commands run through the following tasks:</p>
 <ol>
   <li>Sets your DTR version and replica ID. To back up
 a specific replica, set the replica ID manually by modifying the
 <code class="highlighter-rouge">--existing-replica-id</code> flag in the backup command.</li>
-  <li>Prompts you for your UCP URL (domain and port), username, and password.</li>
+  <li>Prompts you for your UCP URL (domain and port) and admin username.</li>
   <li>Prompts you for your UCP password without saving it to your disk or printing it on the terminal.</li>
   <li>Retrieves the CA certificate for your specified UCP URL. To skip TLS verification, replace the <code class="highlighter-rouge">--ucp-ca</code>
 flag with <code class="highlighter-rouge">--ucp-insecure-tls</code>. Docker does not recommend this flag for production environments.</li>
@@ -549,7 +550,7 @@ working as expected.</p>
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/zembutsu/docs.docker.jp/edit/master/ee/dtr/admin/disaster-recovery/create-a-backup.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/dtr/admin/disaster-recovery/create-a-backup.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
 										<li><a href="https://github.com/zembutsu/docs.docker.jp/issues/new?body=File: [ee/dtr/admin/disaster-recovery/create-a-backup.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/admin/disaster-recovery/create-a-backup/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>

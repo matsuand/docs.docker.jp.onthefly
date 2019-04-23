@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-19 11:26:32 +0900 -->
+<!-- Page generated 2019-04-22 18:21:54 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-19T11:26:32+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-22T18:21:54+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Dockerfile 記述のベストプラクティス"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="This document covers recommended best practices and methods for building efficient images. Docker builds images automatically by reading the instructions from a Dockerfile -- a text file that contains all..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="このドキュメントは、効果的なイメージを構築するための、お勧めのベストプラクティスや方法について示します。 Docker は Dockerfile に書かれた指示を読み込んで、自動的にイメージを構築します。 これは、あらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。 Dockerfile は所定のフォーマットにこだわっていて、特定の指示を用いることにしています。 その内容は Dockerfile リファレンス に示しています。 Docker イメージは読み取り専用のレイヤにより構成されます。 個々のレイヤは Dockerfile の各コマンドを表現しています。 レイヤは順に積み上げられ、直前のレイヤからの差分を表わします。 以下のような Dockerfile を見てみます。 FROM ubuntu:18.04 COPY . /app RUN make /app CMD..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-19T11:26:32+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-04-22T18:21:54+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="parent image, images, dockerfile, best practices, hub, official image">
@@ -183,23 +183,38 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    30 分
+    36 分
   
 </span>
 
 							
 							
-							<p>This document covers recommended best practices and methods for building
-efficient images.</p>
+							<!--
+This document covers recommended best practices and methods for building
+efficient images.
+-->
+<p>このドキュメントは、効果的なイメージを構築するための、お勧めのベストプラクティスや方法について示します。</p>
 
-<p>Docker builds images automatically by reading the instructions from a
-<code class="highlighter-rouge">Dockerfile</code> -- a text file that contains all commands, in order, needed to
-build a given image. A <code class="highlighter-rouge">Dockerfile</code> adheres to a specific format and set of
-instructions which you can find at <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/">Dockerfile reference</a>.</p>
+<!--
+Docker builds images automatically by reading the instructions from a
+`Dockerfile` -- a text file that contains all commands, in order, needed to
+build a given image. A `Dockerfile` adheres to a specific format and set of
+instructions which you can find at [Dockerfile reference](/engine/reference/builder/).
+-->
+<p>Docker は <code class="highlighter-rouge">Dockerfile</code> に書かれた指示を読み込んで、自動的にイメージを構築します。
+これは、あらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。
+<code class="highlighter-rouge">Dockerfile</code> は所定のフォーマットにこだわっていて、特定の指示を用いることにしています。
+その内容は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/">Dockerfile リファレンス</a> に示しています。</p>
 
-<p>A Docker image consists of read-only layers each of which represents a
+<!--
+A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
-changes from the previous layer. Consider this <code class="highlighter-rouge">Dockerfile</code>:</p>
+changes from the previous layer. Consider this `Dockerfile`:
+-->
+<p>Docker イメージは読み取り専用のレイヤにより構成されます。
+個々のレイヤは Dockerfile の各コマンドを表現しています。
+レイヤは順に積み上げられ、直前のレイヤからの差分を表わします。
+以下のような <code class="highlighter-rouge">Dockerfile</code> を見てみます。</p>
 
 <pre><code class="language-Dockerfile">FROM ubuntu:18.04
 COPY . /app
@@ -207,51 +222,114 @@ RUN make /app
 CMD python /app/app.py
 </code></pre>
 
-<p>Each instruction creates one layer:</p>
+<!--
+Each instruction creates one layer:
+-->
+<p>各コマンドからは 1つずつレイヤーが生成されます。</p>
 
+<!--
+- `FROM` creates a layer from the `ubuntu:18.04` Docker image.
+- `COPY` adds files from your Docker client's current directory.
+- `RUN` builds your application with `make`.
+- `CMD` specifies what command to run within the container.
+-->
 <ul>
-  <li><code class="highlighter-rouge">FROM</code> creates a layer from the <code class="highlighter-rouge">ubuntu:18.04</code> Docker image.</li>
-  <li><code class="highlighter-rouge">COPY</code> adds files from your Docker client’s current directory.</li>
-  <li><code class="highlighter-rouge">RUN</code> builds your application with <code class="highlighter-rouge">make</code>.</li>
-  <li><code class="highlighter-rouge">CMD</code> specifies what command to run within the container.</li>
+  <li><code class="highlighter-rouge">FROM</code> Docker イメージ <code class="highlighter-rouge">ubuntu:18.04</code> からレイヤを 1 つ生成します。</li>
+  <li><code class="highlighter-rouge">COPY</code> Docker クライアントのカレントディレクトリからファイルをコピーします。</li>
+  <li><code class="highlighter-rouge">RUN</code> <code class="highlighter-rouge">make</code> を使ってアプリケーションをビルドします。</li>
+  <li><code class="highlighter-rouge">CMD</code> コンテナー内にて実行するコマンドを指定します。</li>
 </ul>
 
-<p>When you run an image and generate a container, you add a new <em>writable layer</em>
-(the “container layer”) on top of the underlying layers. All changes made to
+<!--
+When you run an image and generate a container, you add a new _writable layer_
+(the "container layer") on top of the underlying layers. All changes made to
 the running container, such as writing new files, modifying existing files, and
-deleting files, are written to this thin writable container layer.</p>
+deleting files, are written to this thin writable container layer.
+-->
+<p>イメージを実行してコンテナーが生成されると、それまであったレイヤの上に_書き込み可能やレイヤ_（”コンテナーレイヤ”）が加えられます。
+実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、その薄くできあがった書き込みレイヤに書き込まれます。</p>
 
-<p>For more on image layers (and how Docker builds and stores images), see
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">About storage drivers</a>.</p>
+<!--
+For more on image layers (and how Docker builds and stores images), see
+[About storage drivers](/storage/storagedriver/).
+-->
+<p>イメージレイヤ（また Docker がイメージをどう作り保存するか）については <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">ストレージドライバーについて</a> を参照してください。</p>
 
-<h2 id="general-guidelines-and-recommendations">General guidelines and recommendations</h2>
+<!--
+## General guidelines and recommendations
+-->
+<h2 id="一般的なガイドラインとアドバイス">一般的なガイドラインとアドバイス</h2>
 
-<h3 id="create-ephemeral-containers">Create ephemeral containers</h3>
+<!--
+### Create ephemeral containers
+-->
+<h3 id="はかない-ephemeral-コンテナーの生成">“はかない” (ephemeral) コンテナーの生成</h3>
 
-<p>The image defined by your <code class="highlighter-rouge">Dockerfile</code> should generate containers that are as
-ephemeral as possible. By “ephemeral”, we mean that the container can be stopped
+<!--
+The image defined by your `Dockerfile` should generate containers that are as
+ephemeral as possible. By "ephemeral", we mean that the container can be stopped
 and destroyed, then rebuilt and replaced with an absolute minimum set up and
-configuration.</p>
+configuration.
+-->
+<p><code class="highlighter-rouge">Dockerfile</code> によって定義されるイメージからコンテナーが作り出されますが、このコンテナーはできる限り “はかないもの”（ephemeral）と考えておくべきです。
+“はかない” という語を使うのは、コンテナーが停止、破棄されて、すぐに新たなものが作り出されるからです。
+最小限の構成や設定があれば、新たなものに置き換えられます。</p>
 
-<p>Refer to <a href="https://12factor.net/processes">Processes</a> under <em>The Twelve-factor App</em>
+<!--
+Refer to [Processes](https://12factor.net/processes) under _The Twelve-factor App_
 methodology to get a feel for the motivations of running containers in such a
-stateless fashion.</p>
+stateless fashion.
+-->
+<p><em>The Twelve-factor App</em> 手法にある<a href="https://12factor.net/processes">プロセス</a>を見てみると、コンテナーの実行の仕方をステートレス（stateless）にしている理由がつかめると思います。</p>
 
-<h3 id="understand-build-context">Understand build context</h3>
+<!--
+### Understand build context
+-->
+<h3 id="ビルドコンテキストを理解する">ビルドコンテキストを理解する</h3>
 
-<p>When you issue a <code class="highlighter-rouge">docker build</code> command, the current working directory is called
-the <em>build context</em>. By default, the Dockerfile is assumed to be located here,
-but you can specify a different location with the file flag (<code class="highlighter-rouge">-f</code>). Regardless
-of where the <code class="highlighter-rouge">Dockerfile</code> actually lives, all recursive contents of files and
+<!--
+When you issue a `docker build` command, the current working directory is called
+the _build context_. By default, the Dockerfile is assumed to be located here,
+but you can specify a different location with the file flag (`-f`). Regardless
+of where the `Dockerfile` actually lives, all recursive contents of files and
 directories in the current directory are sent to the Docker daemon as the build
-context.</p>
+context.
+-->
+<p><code class="highlighter-rouge">docker build</code> コマンドを実行したときの、カレントなワーキングディレクトリのことを <em>ビルドコンテキスト</em>（build context）と呼びます。
+デフォルトで Dockerfile は、カレントなワーキングディレクトリを指すものとしていますが、ファイルフラグ（<code class="highlighter-rouge">-f</code>）を使って別のディレクトリを指定することもできます。
+Regardless of where the <code class="highlighter-rouge">Dockerfile</code> actually lives, all recursive contents of files and
+directories in the current directory are sent to the Docker daemon as the build context.</p>
 
+<!--
+> Build context example
+>
+> Create a directory for the build context and `cd` into it. Write "hello" into
+> a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
+> the image from within the build context (`.`):
+>
+> ```shell
+> mkdir myproject && cd myproject
+> echo "hello" > hello
+> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> docker build -t helloapp:v1 .
+> ```
+>
+> Move `Dockerfile` and `hello` into separate directories and build a second
+> version of the image (without relying on cache from the last build). Use `-f`
+> to point to the Dockerfile and specify the directory of the build context:
+>
+> ```shell
+> mkdir -p dockerfiles context
+> mv Dockerfile dockerfiles && mv hello context
+> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```
+-->
 <blockquote>
-  <p>Build context example</p>
+  <p>ビルドコンテキストの例</p>
 
-  <p>Create a directory for the build context and <code class="highlighter-rouge">cd</code> into it. Write “hello” into
-a text file named <code class="highlighter-rouge">hello</code> and create a Dockerfile that runs <code class="highlighter-rouge">cat</code> on it. Build
-the image from within the build context (<code class="highlighter-rouge">.</code>):</p>
+  <p>ビルドコンテキストとするディレクトリを生成してそこに <code class="highlighter-rouge">cd</code> で移動します。
+テキストファイル <code class="highlighter-rouge">hello</code> に “hello” と書き込み、Dockerfile 上でそのファイルに対して <code class="highlighter-rouge">cat</code> コマンドを与えるようにします。
+ビルドコンテキスト（<code class="highlighter-rouge">.</code>）の中からイメージをビルドします。</p>
 
   <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir myproject <span class="o">&amp;&amp;</span> <span class="nb">cd </span>myproject
 <span class="nb">echo</span> <span class="s2">"hello"</span> <span class="o">&gt;</span> hello
@@ -259,9 +337,8 @@ the image from within the build context (<code class="highlighter-rouge">.</code
 docker build <span class="nt">-t</span> helloapp:v1 <span class="nb">.</span>
 </code></pre></div>  </div>
 
-  <p>Move <code class="highlighter-rouge">Dockerfile</code> and <code class="highlighter-rouge">hello</code> into separate directories and build a second
-version of the image (without relying on cache from the last build). Use <code class="highlighter-rouge">-f</code>
-to point to the Dockerfile and specify the directory of the build context:</p>
+  <p><code class="highlighter-rouge">Dockerfile</code> と <code class="highlighter-rouge">hello</code> をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュには頼らずに）2 つめのイメージをビルドします。
+Dockerfile に対して <code class="highlighter-rouge">-f</code> を使い、ビルドコンテキストとなるディレクトリを指定します。</p>
 
   <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> dockerfiles context
 mv Dockerfile dockerfiles <span class="o">&amp;&amp;</span> mv hello context
@@ -278,7 +355,10 @@ building your <code class="highlighter-rouge">Dockerfile</code>:</p>
 <pre><code class="language-none">Sending build context to Docker daemon  187.8MB
 </code></pre>
 
-<h3 id="pipe-dockerfile-through-stdin">Pipe Dockerfile through <code class="highlighter-rouge">stdin</code></h3>
+<!--
+### Pipe Dockerfile through `stdin`
+-->
+<h3 id="stdin-を通じた-dockerfile-のパイプ"><code class="highlighter-rouge">stdin</code> を通じた Dockerfile のパイプ</h3>
 
 <p>Docker has the ability to build images by piping <code class="highlighter-rouge">Dockerfile</code> through <code class="highlighter-rouge">stdin</code>
 with a <em>local or remote build context</em>. Piping a <code class="highlighter-rouge">Dockerfile</code> through <code class="highlighter-rouge">stdin</code>
@@ -477,33 +557,61 @@ ENTRYPOINT ["/bin/project"]
 CMD ["--help"]
 </code></pre>
 
-<h3 id="dont-install-unnecessary-packages">Don’t install unnecessary packages</h3>
+<!--
+### Don't install unnecessary packages
+-->
+<h3 id="不要なパッケージをインストールしない">不要なパッケージをインストールしない</h3>
 
-<p>To reduce complexity, dependencies, file sizes, and build times, avoid
-installing extra or unnecessary packages just because they might be “nice to
-have.” For example, you don’t need to include a text editor in a database image.</p>
+<!--
+To reduce complexity, dependencies, file sizes, and build times, avoid
+installing extra or unnecessary packages just because they might be "nice to
+have." For example, you don’t need to include a text editor in a database image.
+-->
+<p>複雑さ、依存関係、ファイルサイズ、構築時間をそれぞれ減らすためには、余分な、または必須ではない「あった方が良いだろう」程度のパッケージをインストールすべきではありません。
+例えば、データベースイメージであればテキストエディターは不要でしょう。</p>
 
-<h3 id="decouple-applications">Decouple applications</h3>
+<!--
+### Decouple applications
+-->
+<h3 id="アプリケーションの分割">アプリケーションの分割</h3>
 
-<p>Each container should have only one concern. Decoupling applications into
+<!--
+Each container should have only one concern. Decoupling applications into
 multiple containers makes it easier to scale horizontally and reuse containers.
 For instance, a web application stack might consist of three separate
 containers, each with its own unique image, to manage the web application,
-database, and an in-memory cache in a decoupled manner.</p>
+database, and an in-memory cache in a decoupled manner.
+-->
+<p>1 つのコンテナーにとって関心のあることといえば、ただ 1 つです。
+アプリケーションを複数のコンテナーに分けることにより、スケールアウトやコンテナーの再利用がしやすくなります。
+たとえばウェブアプリケーションが３つの独立したコンテナーにより成り立っているとします。
+それらは個々のイメージを持つものとなり、それぞれに分かれてウェブアプリケーション、データベース、メモリキャッシュを管理するようになります。</p>
 
-<p>Limiting each container to one process is a good rule of thumb, but it is not a
+<!--
+Limiting each container to one process is a good rule of thumb, but it is not a
 hard and fast rule. For example, not only can containers be
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md#specify-an-init-process">spawned with an init process</a>,
+[spawned with an init process](/engine/reference/run.md#specify-an-init-process),
 some programs might spawn additional processes of their own accord. For
-instance, <a href="http://www.celeryproject.org/">Celery</a> can spawn multiple worker
-processes, and <a href="https://httpd.apache.org/">Apache</a> can create one process per
-request.</p>
+instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
+processes, and [Apache](https://httpd.apache.org/) can create one process per
+request.
+-->
+<p>個々のコンテナーを１つのプロセスのみに限定して割り当てることは、優れた経験則となることがありますが、決して厳密な規則というわけでもありません。
+たとえばコンテナーは<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run/#/specifying-an-init-process">初期プロセスにおいて起動</a>することが可能であり、プログラムの中には都合に応じて追加のプロセスを起動するようなものもあります。
+例をあげると、<a href="http://www.celeryproject.org/">Celery</a> はワーカープロセスを複数起動し、<a href="https://httpd.apache.org/">Apache</a> はリクエストごとにプロセスを生成します。</p>
 
-<p>Use your best judgment to keep containers as clean and modular as possible. If
-containers depend on each other, you can use <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/">Docker container networks</a>
-to ensure that these containers can communicate.</p>
+<!--
+Use your best judgment to keep containers as clean and modular as possible. If
+containers depend on each other, you can use [Docker container networks](/engine/userguide/networking/)
+to ensure that these containers can communicate.
+-->
+<p>コンテナーはできる限りすっきりとモジュラー化されるように、適切な判断をしてください。
+コンテナーが互いに依存している場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/&gt;">Docker container ネットワーク</a>を用いることで、コンテナー間の通信を確実に行うことができます。</p>
 
-<h3 id="minimize-the-number-of-layers">Minimize the number of layers</h3>
+<!--
+### Minimize the number of layers
+-->
+<h3 id="レイヤ数は最小に">レイヤ数は最小に</h3>
 
 <p>In older versions of Docker, it was important that you minimized the number of
 layers in your images to ensure they were performant. The following features
@@ -522,14 +630,26 @@ size of the final image.</p>
   </li>
 </ul>
 
-<h3 id="sort-multi-line-arguments">Sort multi-line arguments</h3>
+<!--
+### Sort multi-line arguments
+-->
+<h3 id="複数行にわたる引数は並びを適切に">複数行にわたる引数は並びを適切に</h3>
 
-<p>Whenever possible, ease later changes by sorting multi-line arguments
+<!--
+Whenever possible, ease later changes by sorting multi-line arguments
 alphanumerically. This helps to avoid duplication of packages and make the
 list much easier to update. This also makes PRs a lot easier to read and
-review. Adding a space before a backslash (<code class="highlighter-rouge">\</code>) helps as well.</p>
+review. Adding a space before a backslash (`\`) helps as well.
+-->
+<p>複数行にわたる引数は、できるなら後々の変更を容易にするために、その並びはアルファベット順にしましょう。
+そうしておけば、パッケージを重複指定することはなくなり、一覧の変更も簡単になります。
+プルリクエストを読んだりレビューしたりすることも、さらに楽になります。
+バックスラッシュ（<code class="highlighter-rouge">\</code>） の前に空白を含めておくことも同様です。</p>
 
-<p>Here’s an example from the <a href="https://github.com/docker-library/buildpack-deps"><code class="highlighter-rouge">buildpack-deps</code> image</a>:</p>
+<!--
+Here’s an example from the [`buildpack-deps` image](https://github.com/docker-library/buildpack-deps):
+-->
+<p>以下は <a href="https://github.com/docker-library/buildpack-deps"><code class="highlighter-rouge">buildpack-deps</code> イメージ</a> の記述例です。</p>
 
 <pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
   bzr \
@@ -539,79 +659,142 @@ review. Adding a space before a backslash (<code class="highlighter-rouge">\</co
   subversion
 </code></pre>
 
-<h3 id="leverage-build-cache">Leverage build cache</h3>
+<!--
+### Leverage build cache
+-->
+<h3 id="ビルドキャッシュの利用">ビルドキャッシュの利用</h3>
 
-<p>When building an image, Docker steps through the instructions in your
-<code class="highlighter-rouge">Dockerfile</code>, executing each in the order specified. As each instruction is
+<!--
+When building an image, Docker steps through the instructions in your
+`Dockerfile`, executing each in the order specified. As each instruction is
 examined, Docker looks for an existing image in its cache that it can reuse,
-rather than creating a new (duplicate) image.</p>
+rather than creating a new (duplicate) image.
+-->
+<p>イメージの構築時に Docker は <code class="highlighter-rouge">Dockerfile</code> 内に示されている命令を記述順に実行していきます。
+個々の命令が検査される際に Docker は、既存イメージのキャッシュが再利用できるかどうかを調べます。
+そこでは新たな（同じ）イメージを作ることはしません。</p>
 
-<p>If you do not want to use the cache at all, you can use the <code class="highlighter-rouge">--no-cache=true</code>
-option on the <code class="highlighter-rouge">docker build</code> command. However, if you do let Docker use its
+<!--
+If you do not want to use the cache at all, you can use the `--no-cache=true`
+option on the `docker build` command. However, if you do let Docker use its
 cache, it is important to understand when it can, and cannot, find a matching
-image. The basic rules that Docker follows are outlined below:</p>
+image. The basic rules that Docker follows are outlined below:
+-->
+<p>キャッシュをまったく使いたくない場合は <code class="highlighter-rouge">docker build</code> コマンドに <code class="highlighter-rouge">--no-cache=true</code> オプションをつけて実行します。
+一方で Docker のキャッシュを利用する場合、Docker が適切なイメージを見つけた上で、どのようなときにキャッシュを利用し、どのようなときには利用しないのかを理解しておくことが必要です。
+Docker が従っている規則は以下のとおりです。</p>
 
+<!--
+- Starting with a parent image that is already in the cache, the next
+  instruction is compared against all child images derived from that base
+  image to see if one of them was built using the exact same instruction. If
+  not, the cache is invalidated.
+-->
 <ul>
-  <li>
-    <p>Starting with a parent image that is already in the cache, the next
-instruction is compared against all child images derived from that base
-image to see if one of them was built using the exact same instruction. If
-not, the cache is invalidated.</p>
-  </li>
-  <li>
-    <p>In most cases, simply comparing the instruction in the <code class="highlighter-rouge">Dockerfile</code> with one
-of the child images is sufficient. However, certain instructions require more
-examination and explanation.</p>
-  </li>
-  <li>
-    <p>For the <code class="highlighter-rouge">ADD</code> and <code class="highlighter-rouge">COPY</code> instructions, the contents of the file(s)
-in the image are examined and a checksum is calculated for each file.
-The last-modified and last-accessed times of the file(s) are not considered in
-these checksums. During the cache lookup, the checksum is compared against the
-checksum in the existing images. If anything has changed in the file(s), such
-as the contents and metadata, then the cache is invalidated.</p>
-  </li>
-  <li>
-    <p>Aside from the <code class="highlighter-rouge">ADD</code> and <code class="highlighter-rouge">COPY</code> commands, cache checking does not look at the
-files in the container to determine a cache match. For example, when processing
-a <code class="highlighter-rouge">RUN apt-get -y update</code> command the files updated in the container
-are not examined to determine if a cache hit exists.  In that case just
-the command string itself is used to find a match.</p>
-  </li>
+  <li>キャッシュ内にすでに存在している親イメージから処理を始めます。
+そのベースとなるイメージから派生した子イメージに対して、次の命令が合致するかどうかが比較され、子イメージのいずれかが同一の命令によって構築されているかを確認します。
+そのようなものが存在しなければ、キャッシュは無効になります。</li>
 </ul>
 
-<p>Once the cache is invalidated, all subsequent <code class="highlighter-rouge">Dockerfile</code> commands generate new
-images and the cache is not used.</p>
+<!--
+- In most cases, simply comparing the instruction in the `Dockerfile` with one
+  of the child images is sufficient. However, certain instructions require more
+  examination and explanation.
+-->
+<ul>
+  <li>ほとんどの場合 <code class="highlighter-rouge">Dockerfile</code> 内の命令と子イメージのどれかを単純に比較するだけで十分です。
+しかし命令によっては、多少の検査や解釈が必要となるものもあります。</li>
+</ul>
 
-<h2 id="dockerfile-instructions">Dockerfile instructions</h2>
+<!--
+- For the `ADD` and `COPY` instructions, the contents of the file(s)
+  in the image are examined and a checksum is calculated for each file.
+  The last-modified and last-accessed times of the file(s) are not considered in
+  these checksums. During the cache lookup, the checksum is compared against the
+  checksum in the existing images. If anything has changed in the file(s), such
+  as the contents and metadata, then the cache is invalidated.
+-->
+<ul>
+  <li><code class="highlighter-rouge">ADD</code> 命令や <code class="highlighter-rouge">COPY</code> 命令では、イメージに含まれるファイルの内容が検査され、個々のファイルについてチェックサムが計算されます。
+この計算において、ファイルの最終更新時刻、最終アクセス時刻は考慮されません。
+キャッシュを探す際に、このチェックサムと既存イメージのチェックサムが比較されます。
+ファイル内の何かが変更になったとき、たとえばファイル内容やメタデータが変わっていれば、キャッシュは無効になります。</li>
+</ul>
 
+<!--
+- Aside from the `ADD` and `COPY` commands, cache checking does not look at the
+  files in the container to determine a cache match. For example, when processing
+  a `RUN apt-get -y update` command the files updated in the container
+  are not examined to determine if a cache hit exists.  In that case just
+  the command string itself is used to find a match.
+-->
+<p><code class="highlighter-rouge">ADD</code> と <code class="highlighter-rouge">COPY</code> 以外のコマンドの場合、キャッシュのチェックは、コンテナー内のファイル内容を見ることはなく、それによってキャッシュと合致しているかどうかが決定されるわけでありません。
+  たとえば <code class="highlighter-rouge">RUN apt-get -y update</code> コマンドの処理が行われる際には、コンテナー内にて更新されたファイルは、キャッシュが合致するかどうかの判断のために用いられません。
+  この場合にはコマンド文字列そのものが、キャッシュの合致判断に用いられます。</p>
+
+<!--
+Once the cache is invalidated, all subsequent `Dockerfile` commands generate new
+images and the cache is not used.
+-->
+<p>キャッシュが無効化されると、以降の <code class="highlighter-rouge">Dockerfile</code> 命令ではキャッシュは使われず、新しいイメージを生成します。</p>
+
+<!--
+## Dockerfile instructions
+-->
+<h2 id="dockerfile-コマンド">Dockerfile コマンド</h2>
+
+<!--
+These recommendations are designed to help you create an efficient and
+maintainable `Dockerfile`.
+-->
 <p>These recommendations are designed to help you create an efficient and
 maintainable <code class="highlighter-rouge">Dockerfile</code>.</p>
 
 <h3 id="from">FROM</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#from">Dockerfile reference for the FROM instruction</a></p>
+<!--
+[Dockerfile reference for the FROM instruction](/engine/reference/builder.md#from)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#from">Dockerfile リファレンスの FROM コマンド</a></p>
 
-<p>Whenever possible, use current official images as the basis for your
-images. We recommend the <a href="https://hub.docker.com/_/alpine/">Alpine image</a> as it
+<!--
+Whenever possible, use current official images as the basis for your
+images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
 is tightly controlled and small in size (currently under 5 MB), while still
-being a full Linux distribution.</p>
+being a full Linux distribution.
+-->
+<p>イメージのベースは、できるだけ現時点での公式リポジトリを利用してください。
+<a href="https://hub.docker.com/_/alpine/">Alpine イメージ</a> がお勧めです。
+このイメージはしっかりと管理されていて、充実した Linux ディストリビューションであるにもかかわらず、非常にコンパクトなものになっています（現在 5 MB 以下）。</p>
 
 <h3 id="label">LABEL</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md">Understanding object labels</a></p>
+<!--
+[Understanding object labels](/config/labels-custom-metadata.md)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md">オブジェクトラベルを理解する</a></p>
 
-<p>You can add labels to your image to help organize images by project, record
+<!--
+You can add labels to your image to help organize images by project, record
 licensing information, to aid in automation, or for other reasons. For each
-label, add a line beginning with <code class="highlighter-rouge">LABEL</code> and with one or more key-value pairs.
-The following examples show the different acceptable formats. Explanatory comments are included inline.</p>
+label, add a line beginning with `LABEL` and with one or more key-value pairs.
+The following examples show the different acceptable formats. Explanatory comments are included inline.
+-->
+<p>イメージにラベルを追加するのは、プロジェクト内でのイメージ管理をしやすくしたり、ライセンス情報の記録や自動化の助けとするなど、さまざまな目的があります。
+ラベルを指定するには、 <code class="highlighter-rouge">LABEL</code> で始まる行を追加して、そこにキーと値のペア（key-value pair）をいくつか設定します。
+以下に示す例は、いずれも正しい構文です。
+説明をコメントとしてつけています。</p>
 
+<!--
+> Strings with spaces must be quoted **or** the spaces must be escaped. Inner
+> quote characters (`"`), must also be escaped.
+-->
 <blockquote>
-  <p>Strings with spaces must be quoted <strong>or</strong> the spaces must be escaped. Inner
-quote characters (<code class="highlighter-rouge">"</code>), must also be escaped.</p>
+  <p>文字列に空白が含まれる場合は、引用符でくくるか、<strong>あるいは</strong>エスケープする必要があります。
+文字列内に引用符がある場合も、同様にエスケープしてください。</p>
 </blockquote>
 
-<pre><code class="language-Dockerfile"># Set one or more individual labels
+<pre><code class="language-Dockerfile"># 個々にラベルを設定
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor1="ACME Incorporated"
 LABEL vendor2=ZENITH\ Incorporated
@@ -624,13 +807,16 @@ to combine all labels into a single <code class="highlighter-rouge">LABEL</code>
 from being created. This is no longer necessary, but combining labels is still
 supported.</p>
 
-<pre><code class="language-Dockerfile"># Set multiple labels on one line
+<pre><code class="language-Dockerfile"># 1行でラベルを設定
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 </code></pre>
 
-<p>The above can also be written as:</p>
+<!--
+The above can also be written as:
+-->
+<p>上は以下のように書くこともできます。</p>
 
-<pre><code class="language-Dockerfile"># Set multiple labels at once, using line-continuation characters to break long lines
+<pre><code class="language-Dockerfile"># 複数のラベルを一度に設定、ただし行継続の文字を使い、長い文字列を改行する
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
       com.example.is-production="" \
@@ -646,27 +832,49 @@ objects</a>. See also
 
 <h3 id="run">RUN</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#run">Dockerfile reference for the RUN instruction</a></p>
+<!--
+[Dockerfile reference for the RUN instruction](/engine/reference/builder.md#run)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#run">Dockerfile リファレンスの RUN コマンド</a></p>
 
-<p>Split long or complex <code class="highlighter-rouge">RUN</code> statements on multiple lines separated with
-backslashes to make your <code class="highlighter-rouge">Dockerfile</code> more readable, understandable, and
-maintainable.</p>
+<!--
+Split long or complex `RUN` statements on multiple lines separated with
+backslashes to make your `Dockerfile` more readable, understandable, and
+maintainable.
+-->
+<p><code class="highlighter-rouge">RUN</code> コマンドが複数行にわたって長く複雑になるようであれば、バックスラッシュを使って行を分けてください。
+<code class="highlighter-rouge">Dockerfile</code> を読みやすく理解しやすく、そして保守しやすくするためです。</p>
 
 <h4 id="apt-get">apt-get</h4>
 
-<p>Probably the most common use-case for <code class="highlighter-rouge">RUN</code> is an application of <code class="highlighter-rouge">apt-get</code>.
-Because it installs packages, the <code class="highlighter-rouge">RUN apt-get</code> command has several gotchas to
-look out for.</p>
+<!--
+Probably the most common use-case for `RUN` is an application of `apt-get`.
+Because it installs packages, the `RUN apt-get` command has several gotchas to
+look out for.
+-->
+<p>おそらく <code class="highlighter-rouge">RUN</code> において一番利用する使い方が <code class="highlighter-rouge">apt-get</code> アプリケーションの実行です。
+<code class="highlighter-rouge">RUN apt-get</code> はパッケージをインストールするものであるため、注意点がいくつかあります。</p>
 
-<p>Avoid <code class="highlighter-rouge">RUN apt-get upgrade</code> and <code class="highlighter-rouge">dist-upgrade</code>, as many of the “essential”
+<!--
+Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
 packages from the parent images cannot upgrade inside an
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md#security-configuration">unprivileged container</a>. If a package
+[unprivileged container](/engine/reference/run.md#security-configuration). If a package
 contained in the parent image is out-of-date, contact its maintainers. If you
-know there is a particular package, <code class="highlighter-rouge">foo</code>, that needs to be updated, use
-<code class="highlighter-rouge">apt-get install -y foo</code> to update automatically.</p>
+know there is a particular package, `foo`, that needs to be updated, use
+`apt-get install -y foo` to update automatically.
+-->
+<p><code class="highlighter-rouge">RUN apt-get upgrade</code> や <code class="highlighter-rouge">dist-upgrade</code> の実行は避けてください。
+親イメージに含まれる重要パッケージは、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md#security-configuration">権限が与えられていないコンテナー</a>内ではほとんど更新できないからです。
+親イメージ内のパッケージが古くなっていたら、開発者に連絡をとってください。
+<code class="highlighter-rouge">foo</code> というパッケージを更新する必要があれば <code class="highlighter-rouge">apt-get install -y foo</code> を利用してください。
+これによってパッケージは自動的に更新されます。</p>
 
-<p>Always combine <code class="highlighter-rouge">RUN apt-get update</code> with <code class="highlighter-rouge">apt-get install</code> in the same <code class="highlighter-rouge">RUN</code>
-statement. For example:</p>
+<!--
+Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
+statement. For example:
+-->
+<p><code class="highlighter-rouge">RUN apt-get update</code> と <code class="highlighter-rouge">apt-get install</code> は、同一の <code class="highlighter-rouge">RUN</code> コマンド内にて同時実行するようにしてください。
+たとえば以下のようにします。</p>
 
 <pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
     package-bar \
@@ -674,34 +882,54 @@ statement. For example:</p>
     package-foo
 </code></pre>
 
-<p>Using <code class="highlighter-rouge">apt-get update</code> alone in a <code class="highlighter-rouge">RUN</code> statement causes caching issues and
-subsequent <code class="highlighter-rouge">apt-get install</code> instructions fail. For example, say you have a
-Dockerfile:</p>
+<!--
+Using `apt-get update` alone in a `RUN` statement causes caching issues and
+subsequent `apt-get install` instructions fail. For example, say you have a
+Dockerfile:
+-->
+<p>１つの <code class="highlighter-rouge">RUN</code> コマンド内で <code class="highlighter-rouge">apt-get update</code> だけを使うとキャッシュに問題が発生し、その後の <code class="highlighter-rouge">apt-get install</code> コマンドが失敗します。
+たとえば Dockerfile を以下のように記述したとします。</p>
 
 <pre><code class="language-Dockerfile">FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
 </code></pre>
 
-<p>After building the image, all layers are in the Docker cache. Suppose you later
-modify <code class="highlighter-rouge">apt-get install</code> by adding extra package:</p>
+<!--
+After building the image, all layers are in the Docker cache. Suppose you later
+modify `apt-get install` by adding extra package:
+-->
+<p>イメージが構築されると、レイヤーがすべて Docker のキャッシュに入ります。
+この次に <code class="highlighter-rouge">apt-get install</code> を編集して別のパッケージを追加したとします。</p>
 
 <pre><code class="language-Dockerfile">FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
 </code></pre>
 
-<p>Docker sees the initial and modified instructions as identical and reuses the
-cache from previous steps. As a result the <code class="highlighter-rouge">apt-get update</code> is <em>not</em> executed
-because the build uses the cached version. Because the <code class="highlighter-rouge">apt-get update</code> is not
-run, your build can potentially get an outdated version of the <code class="highlighter-rouge">curl</code> and
-<code class="highlighter-rouge">nginx</code> packages.</p>
+<!--
+Docker sees the initial and modified instructions as identical and reuses the
+cache from previous steps. As a result the `apt-get update` is _not_ executed
+because the build uses the cached version. Because the `apt-get update` is not
+run, your build can potentially get an outdated version of the `curl` and
+`nginx` packages.
+-->
+<p>Docker は当初のコマンドと修正後のコマンドを見て、同一のコマンドであると判断するので、前回の処理において作られたキャッシュを再利用します。
+キャッシュされたものを利用して処理が行われるわけですから、結果として <code class="highlighter-rouge">apt-get update</code> は実行されません。
+<code class="highlighter-rouge">apt-get update</code> が実行されないということは、つまり <code class="highlighter-rouge">curl</code> にしても <code class="highlighter-rouge">nginx</code> にしても、古いバージョンのまま利用する可能性が出てくるということです。</p>
 
-<p>Using <code class="highlighter-rouge">RUN apt-get update &amp;&amp; apt-get install -y</code> ensures your Dockerfile
+<!--
+Using `RUN apt-get update && apt-get install -y` ensures your Dockerfile
 installs the latest package versions with no further coding or manual
-intervention. This technique is known as “cache busting”. You can also achieve
+intervention. This technique is known as "cache busting". You can also achieve
 cache-busting by specifying a package version. This is known as version pinning,
-for example:</p>
+for example:
+-->
+<p><code class="highlighter-rouge">RUN apt-get update &amp;&amp; apt-get install -y</code> というコマンドにすると、 Dockerfile が確実に最新バージョンをインストールしてくれるものとなり、さらにコードを書いたり手作業を加えたりする必要がなくなります。
+これは「キャッシュバスティング（cache busting）」と呼ばれる技術です。
+この技術は、パッケージのバージョンを指定することによっても利用することができます。
+これはバージョンピニング（version pinning）というものです。
+以下に例を示します。</p>
 
 <pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
     package-bar \
@@ -709,12 +937,19 @@ for example:</p>
     package-foo=1.3.*
 </code></pre>
 
-<p>Version pinning forces the build to retrieve a particular version regardless of
+<!--
+Version pinning forces the build to retrieve a particular version regardless of
 what’s in the cache. This technique can also reduce failures due to unanticipated changes
-in required packages.</p>
+in required packages.
+-->
+<p>バージョンピニングでは、キャッシュにどのようなイメージがあろうとも、指定されたバージョンを使ってビルドが行われます。
+この手法を用いれば、そのパッケージの最新版に、思いもよらない変更が加わっていたとしても、ビルド失敗を回避できることもあります。</p>
 
-<p>Below is a well-formed <code class="highlighter-rouge">RUN</code> instruction that demonstrates all the <code class="highlighter-rouge">apt-get</code>
-recommendations.</p>
+<!--
+Below is a well-formed `RUN` instruction that demonstrates all the `apt-get`
+recommendations.
+-->
+<p>以下の <code class="highlighter-rouge">RUN</code> コマンドはきれいに整えられていて <code class="highlighter-rouge">apt-get</code> の推奨する利用方法を示しています。</p>
 
 <pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
     aufs-tools \
@@ -732,45 +967,87 @@ recommendations.</p>
  &amp;&amp; rm -rf /var/lib/apt/lists/*
 </code></pre>
 
-<p>The <code class="highlighter-rouge">s3cmd</code> argument specifies a version <code class="highlighter-rouge">1.1.*</code>. If the image previously
-used an older version, specifying the new one causes a cache bust of <code class="highlighter-rouge">apt-get
-update</code> and ensures the installation of the new version. Listing packages on
-each line can also prevent mistakes in package duplication.</p>
+<!--
+The `s3cmd` argument specifies a version `1.1.*`. If the image previously
+used an older version, specifying the new one causes a cache bust of `apt-get
+update` and ensures the installation of the new version. Listing packages on
+each line can also prevent mistakes in package duplication.
+-->
+<p><code class="highlighter-rouge">s3cmd</code> のコマンド行は、バージョン <code class="highlighter-rouge">1.1.*</code> を指定しています。
+以前に作られたイメージが古いバージョンを使っていたとしても、新たなバージョンの指定により <code class="highlighter-rouge">apt-get update</code> のキャッシュバスティングが働いて、確実に新バージョンがインストールされるようになります。
+パッケージを各行に分けて記述しているのは、パッケージを重複して書くようなミスを防ぐためです。</p>
 
-<p>In addition, when you clean up the apt cache by removing <code class="highlighter-rouge">/var/lib/apt/lists</code> it
+<!--
+In addition, when you clean up the apt cache by removing `/var/lib/apt/lists` it
 reduces the image size, since the apt cache is not stored in a layer. Since the
-<code class="highlighter-rouge">RUN</code> statement starts with <code class="highlighter-rouge">apt-get update</code>, the package cache is always
-refreshed prior to <code class="highlighter-rouge">apt-get install</code>.</p>
+`RUN` statement starts with `apt-get update`, the package cache is always
+refreshed prior to `apt-get install`.
+-->
+<p>apt キャッシュをクリーンアップし <code class="highlighter-rouge">/var/lib/apt/lists</code> を削除するのは、イメージサイズを小さくするためです。
+そもそも apt キャッシュはレイヤー内に保存されません。
+<code class="highlighter-rouge">RUN</code> コマンドを <code class="highlighter-rouge">apt-get update</code> から始めているので、<code class="highlighter-rouge">apt-get install</code> の前に必ずパッケージのキャッシュが更新されることになります。</p>
 
+<!--
+> Official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105),
+> so explicit invocation is not required.
+-->
 <blockquote>
-  <p>Official Debian and Ubuntu images <a href="https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105">automatically run <code class="highlighter-rouge">apt-get clean</code></a>,
-so explicit invocation is not required.</p>
+  <p>公式の Debian と Ubuntu のイメージは<a href="https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105">自動的に <code class="highlighter-rouge">apt-get clean</code> を実行する</a>ので、明示的にこのコマンドを実行する必要はありません。</p>
 </blockquote>
 
-<h4 id="using-pipes">Using pipes</h4>
+<!--
+#### Using pipes
+-->
+<h4 id="パイプの利用">パイプの利用</h4>
 
-<p>Some <code class="highlighter-rouge">RUN</code> commands depend on the ability to pipe the output of one command into another, using the pipe character (<code class="highlighter-rouge">|</code>), as in the following example:</p>
+<!--
+Some `RUN` commands depend on the ability to pipe the output of one command into another, using the pipe character (`|`), as in the following example:
+-->
+<p><code class="highlighter-rouge">RUN</code> コマンドの中には、その出力をパイプを使って他のコマンドへ受け渡すことを前提としているものがあります。
+そのときにはパイプを行う文字（ <code class="highlighter-rouge">|</code> ）を使います。
+たとえば以下のような例があります。</p>
 
 <pre><code class="language-Dockerfile">RUN wget -O - https://some.site | wc -l &gt; /number
 </code></pre>
 
-<p>Docker executes these commands using the <code class="highlighter-rouge">/bin/sh -c</code> interpreter, which only
+<!--
+Docker executes these commands using the `/bin/sh -c` interpreter, which only
 evaluates the exit code of the last operation in the pipe to determine success.
 In the example above this build step succeeds and produces a new image so long
-as the <code class="highlighter-rouge">wc -l</code> command succeeds, even if the <code class="highlighter-rouge">wget</code> command fails.</p>
+as the `wc -l` command succeeds, even if the `wget` command fails.
+-->
+<p>Docker はこういったコマンドを <code class="highlighter-rouge">/bin/sh -c</code> というインタープリター実行により実現します。
+正常処理されたかどうかは、パイプの最後の処理の終了コードにより評価されます。
+上の例では、このビルド処理が成功して新たなイメージが生成されるかどうかは、<code class="highlighter-rouge">wc -l</code> コマンドの成功にかかっています。
+つまり <code class="highlighter-rouge">wget</code> コマンドが成功するかどうかは関係がありません。</p>
 
-<p>If you want the command to fail due to an error at any stage in the pipe,
-prepend <code class="highlighter-rouge">set -o pipefail &amp;&amp;</code> to ensure that an unexpected error prevents the
-build from inadvertently succeeding. For example:</p>
+<!--
+If you want the command to fail due to an error at any stage in the pipe,
+prepend `set -o pipefail &&` to ensure that an unexpected error prevents the
+build from inadvertently succeeding. For example:
+-->
+<p>パイプ内のどの段階でも、エラーが発生したらコマンド失敗としたい場合は、頭に <code class="highlighter-rouge">set -o pipefail &amp;&amp;</code> をつけて実行します。
+こうしておくと、予期しないエラーが発生して、それに気づかずにビルドされてしまう、といったことはなくなります。
+たとえば以下です。</p>
 
 <pre><code class="language-Dockerfile">RUN set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number
 </code></pre>
+<!--
+> Not all shells support the `-o pipefail` option.
+>
+> In cases such as the `dash` shell on
+> Debian-based images, consider using the _exec_ form of `RUN` to explicitly
+> choose a shell that does support the `pipefail` option. For example:
+>
+> ```Dockerfile
+> RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
+> ```
+-->
 <blockquote>
-  <p>Not all shells support the <code class="highlighter-rouge">-o pipefail</code> option.</p>
-
-  <p>In cases such as the <code class="highlighter-rouge">dash</code> shell on
-Debian-based images, consider using the <em>exec</em> form of <code class="highlighter-rouge">RUN</code> to explicitly
-choose a shell that does support the <code class="highlighter-rouge">pipefail</code> option. For example:</p>
+  <p>すべてのシェルが <code class="highlighter-rouge">-o pipefail</code> オプションをサポートしているわけではありません。
+その場合（例えば Debian ベースのイメージにおけるデフォルトシェル <code class="highlighter-rouge">dash</code> である場合）、<code class="highlighter-rouge">RUN</code> コマンドにおける <strong>exec</strong> 形式の利用を考えてみてください。
+これは <code class="highlighter-rouge">pipefail</code> オプションをサポートしているシェルを明示的に指示するものです。
+たとえば以下です。</p>
 
   <pre><code class="language-Dockerfile">RUN ["/bin/bash", "-c", "set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number"]
 </code></pre>
@@ -778,54 +1055,102 @@ choose a shell that does support the <code class="highlighter-rouge">pipefail</c
 
 <h3 id="cmd">CMD</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#cmd">Dockerfile reference for the CMD instruction</a></p>
+<!--
+[Dockerfile reference for the CMD instruction](/engine/reference/builder.md#cmd)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#cmd">Dockerfile リファレンスの CMD コマンド</a></p>
 
-<p>The <code class="highlighter-rouge">CMD</code> instruction should be used to run the software contained by your
-image, along with any arguments. <code class="highlighter-rouge">CMD</code> should almost always be used in the form
-of <code class="highlighter-rouge">CMD ["executable", "param1", "param2"…]</code>. Thus, if the image is for a
-service, such as Apache and Rails, you would run something like <code class="highlighter-rouge">CMD
-["apache2","-DFOREGROUND"]</code>. Indeed, this form of the instruction is recommended
-for any service-based image.</p>
+<!--
+The `CMD` instruction should be used to run the software contained by your
+image, along with any arguments. `CMD` should almost always be used in the form
+of `CMD ["executable", "param1", "param2"…]`. Thus, if the image is for a
+service, such as Apache and Rails, you would run something like `CMD
+["apache2","-DFOREGROUND"]`. Indeed, this form of the instruction is recommended
+for any service-based image.
+-->
+<p><code class="highlighter-rouge">CMD</code> コマンドは、イメージ内に含まれるソフトウェアを実行するために用いるもので、引数を指定して実行します。
+<code class="highlighter-rouge">CMD</code> はほぼ、<code class="highlighter-rouge">CMD ["実行モジュール名", "引数1", "引数2"…]</code> の形式をとります。
+Apache や Rails のようにサービスをともなうイメージに対しては、たとえば <code class="highlighter-rouge">CMD ["apache2","-DFOREGROUND"]</code> といったコマンド実行になります。
+実際にサービスベースのイメージに対しては、この実行形式が推奨されます。</p>
 
-<p>In most other cases, <code class="highlighter-rouge">CMD</code> should be given an interactive shell, such as bash,
-python and perl. For example, <code class="highlighter-rouge">CMD ["perl", "-de0"]</code>, <code class="highlighter-rouge">CMD ["python"]</code>, or <code class="highlighter-rouge">CMD
-["php", "-a"]</code>. Using this form means that when you execute something like
-<code class="highlighter-rouge">docker run -it python</code>, you’ll get dropped into a usable shell, ready to go.
-<code class="highlighter-rouge">CMD</code> should rarely be used in the manner of <code class="highlighter-rouge">CMD ["param", "param"]</code> in
-conjunction with <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#entrypoint"><code class="highlighter-rouge">ENTRYPOINT</code></a>, unless
-you and your expected users are already quite familiar with how <code class="highlighter-rouge">ENTRYPOINT</code>
-works.</p>
+<!--
+In most other cases, `CMD` should be given an interactive shell, such as bash,
+python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
+["php", "-a"]`. Using this form means that when you execute something like
+`docker run -it python`, you’ll get dropped into a usable shell, ready to go.
+`CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
+conjunction with [`ENTRYPOINT`](/engine/reference/builder.md#entrypoint), unless
+you and your expected users are already quite familiar with how `ENTRYPOINT`
+works.
+-->
+<p>上記以外では、<code class="highlighter-rouge">CMD</code> に対して bash、python、perl などインタラクティブシェルを与えることが行われます。
+たとえば <code class="highlighter-rouge">CMD ["perl", "-de0"]</code>、<code class="highlighter-rouge">CMD ["python"]</code>、<code class="highlighter-rouge">CMD ["php", "-a"]</code> といった具合です。
+この実行形式を利用するということは、たとえば <code class="highlighter-rouge">docker run -it python</code> というコマンドを実行したときに、指定したシェルの中に入り込んで、処理を進めていくことを意味します。
+<code class="highlighter-rouge">CMD</code> と <code class="highlighter-rouge">ENTRYPOINT</code> を組み合わせて用いる <code class="highlighter-rouge">CMD ["引数", "引数"]</code> という実行形式がありますが、これを利用するのはまれです。
+開発者自身や利用者にとって <code class="highlighter-rouge">ENTRYPOINT</code> がどのように動作するのかが十分に分かっていないなら、用いないようにしましょう。</p>
 
 <h3 id="expose">EXPOSE</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#expose">Dockerfile reference for the EXPOSE instruction</a></p>
+<!--
+[Dockerfile reference for the EXPOSE instruction](/engine/reference/builder.md#expose)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#expose">Dockerfile リファレンスの EXPOSE コマンド</a></p>
 
-<p>The <code class="highlighter-rouge">EXPOSE</code> instruction indicates the ports on which a container listens
+<!--
+The `EXPOSE` instruction indicates the ports on which a container listens
 for connections. Consequently, you should use the common, traditional port for
 your application. For example, an image containing the Apache web server would
-use <code class="highlighter-rouge">EXPOSE 80</code>, while an image containing MongoDB would use <code class="highlighter-rouge">EXPOSE 27017</code> and
-so on.</p>
+use `EXPOSE 80`, while an image containing MongoDB would use `EXPOSE 27017` and
+so on.
+-->
+<p><code class="highlighter-rouge">EXPOSE</code> コマンドは、コンテナーが接続のためにリッスンするポートを指定します。
+当然のことながらアプリケーションにおいては、標準的なポートを利用します。
+たとえば Apache ウェブサーバーを含んでいるイメージに対しては <code class="highlighter-rouge">EXPOSE 80</code> を使います。
+また MongoDB を含んでいれば <code class="highlighter-rouge">EXPOSE 27017</code> を使うことになります。</p>
 
-<p>For external access, your users can execute <code class="highlighter-rouge">docker run</code> with a flag indicating
+<!--
+For external access, your users can execute `docker run` with a flag indicating
 how to map the specified port to the port of their choice.
 For container linking, Docker provides environment variables for the path from
-the recipient container back to the source (ie, <code class="highlighter-rouge">MYSQL_PORT_3306_TCP</code>).</p>
+the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
+-->
+<p>外部からアクセスできるようにするため、これを実行するユーザーは <code class="highlighter-rouge">docker run</code> にフラグをつけて実行します。
+そのフラグとは、指定されているポートを、自分が取り決めるどのようなポートに割り当てるかを指示するものです。
+Docker のリンク機能においては環境変数が利用できます。
+受け側のコンテナーが提供元をたどることができるようにするものです（例: <code class="highlighter-rouge">MYSQL_PORT_3306_TCP</code> ）。</p>
 
 <h3 id="env">ENV</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#env">Dockerfile reference for the ENV instruction</a></p>
+<!--
+[Dockerfile reference for the ENV instruction](/engine/reference/builder.md#env)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#env">Dockerfile リファレンスの ENV コマンド</a></p>
 
-<p>To make new software easier to run, you can use <code class="highlighter-rouge">ENV</code> to update the
-<code class="highlighter-rouge">PATH</code> environment variable for the software your container installs. For
-example, <code class="highlighter-rouge">ENV PATH /usr/local/nginx/bin:$PATH</code> ensures that <code class="highlighter-rouge">CMD ["nginx"]</code>
-just works.</p>
+<!--
+To make new software easier to run, you can use `ENV` to update the
+`PATH` environment variable for the software your container installs. For
+example, `ENV PATH /usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
+just works.
+-->
+<p>新しいソフトウェアに対しては <code class="highlighter-rouge">ENV</code> を用いれば簡単にそのソフトウェアを実行できます。
+コンテナーがインストールするソフトウェアに必要な環境変数 <code class="highlighter-rouge">PATH</code> を、この <code class="highlighter-rouge">ENV</code> を使って更新します。
+たとえば <code class="highlighter-rouge">ENV PATH /usr/local/nginx/bin:$PATH</code> を実行すれば、 <code class="highlighter-rouge">CMD ["nginx"]</code> が確実に動作するようになります。</p>
 
-<p>The <code class="highlighter-rouge">ENV</code> instruction is also useful for providing required environment
+<!--
+The `ENV` instruction is also useful for providing required environment
 variables specific to services you wish to containerize, such as Postgres’s
-<code class="highlighter-rouge">PGDATA</code>.</p>
+`PGDATA`.
+-->
+<p><code class="highlighter-rouge">ENV</code> コマンドは、必要となる環境変数を設定するときにも利用します。
+たとえば Postgres の <code class="highlighter-rouge">PGDATA</code> のように、コンテナー化したいサービスに固有の環境変数が設定できます。</p>
 
-<p>Lastly, <code class="highlighter-rouge">ENV</code> can also be used to set commonly used version numbers so that
-version bumps are easier to maintain, as seen in the following example:</p>
+<!--
+Lastly, `ENV` can also be used to set commonly used version numbers so that
+version bumps are easier to maintain, as seen in the following example:
+-->
+<p>また <code class="highlighter-rouge">ENV</code> は普段利用している各種バージョン番号を設定しておくときにも利用されます。
+これによってバージョンを混同することなく、管理が容易になります。
+たとえば以下がその例です。</p>
 
 <pre><code class="language-Dockerfile">ENV PG_MAJOR 9.3
 ENV PG_VERSION 9.3.4
@@ -833,9 +1158,13 @@ RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/
 ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
 </code></pre>
 
-<p>Similar to having constant variables in a program (as opposed to hard-coding
-values), this approach lets you change a single <code class="highlighter-rouge">ENV</code> instruction to
-auto-magically bump the version of the software in your container.</p>
+<!--
+Similar to having constant variables in a program (as opposed to hard-coding
+values), this approach lets you change a single `ENV` instruction to
+auto-magically bump the version of the software in your container.
+-->
+<p>プログラムにおける（ハードコーディングではない）定数定義と同じことで、この方法をとっておくのが便利です。
+ただ１つの <code class="highlighter-rouge">ENV</code> コマンドを変更するだけで、コンテナー内のソフトウェアバージョンは、いとも簡単に変えてしまうことができるからです。</p>
 
 <p>Each <code class="highlighter-rouge">ENV</code> line creates a new intermediate layer, just like <code class="highlighter-rouge">RUN</code> commands. This
 means that even if you unset the environment variable in a future layer, it
@@ -872,47 +1201,82 @@ CMD sh
 
 </code></pre></div></div>
 
-<h3 id="add-or-copy">ADD or COPY</h3>
+<!--
+### ADD or COPY
+-->
+<h3 id="add-と-copy">ADD と COPY</h3>
 
+<!--
+- [Dockerfile reference for the ADD instruction](/engine/reference/builder.md#add)
+- [Dockerfile reference for the COPY instruction](/engine/reference/builder.md#copy)
+-->
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#add">Dockerfile reference for the ADD instruction</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#copy">Dockerfile reference for the COPY instruction</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#add">Dockerfile リファレンスの ADD コマンド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#copy">Dockerfile リファレンスの COPY コマンド</a></li>
 </ul>
 
-<p>Although <code class="highlighter-rouge">ADD</code> and <code class="highlighter-rouge">COPY</code> are functionally similar, generally speaking, <code class="highlighter-rouge">COPY</code>
-is preferred. That’s because it’s more transparent than <code class="highlighter-rouge">ADD</code>. <code class="highlighter-rouge">COPY</code> only
-supports the basic copying of local files into the container, while <code class="highlighter-rouge">ADD</code> has
+<!--
+Although `ADD` and `COPY` are functionally similar, generally speaking, `COPY`
+is preferred. That’s because it’s more transparent than `ADD`. `COPY` only
+supports the basic copying of local files into the container, while `ADD` has
 some features (like local-only tar extraction and remote URL support) that are
-not immediately obvious. Consequently, the best use for <code class="highlighter-rouge">ADD</code> is local tar file
-auto-extraction into the image, as in <code class="highlighter-rouge">ADD rootfs.tar.xz /</code>.</p>
+not immediately obvious. Consequently, the best use for `ADD` is local tar file
+auto-extraction into the image, as in `ADD rootfs.tar.xz /`.
+-->
+<p><code class="highlighter-rouge">ADD</code> と <code class="highlighter-rouge">COPY</code> の機能は似ていますが、一般的には <code class="highlighter-rouge">COPY</code> が選ばれます。
+それは <code class="highlighter-rouge">ADD</code> よりも機能がはっきりしているからです。
+<code class="highlighter-rouge">COPY</code> は単に、基本的なコピー機能を使ってローカルファイルをコンテナーにコピーするだけです。
+一方 <code class="highlighter-rouge">ADD</code> には特定の機能（ローカルでの tar 展開やリモート URL サポート）があり、これはすぐにわかるものではありません。
+結局 <code class="highlighter-rouge">ADD</code> の最も適切な利用場面は、ローカルの tar ファイルを自動的に展開してイメージに書き込むときです。
+たとえば <code class="highlighter-rouge">ADD rootfs.tar.xz /</code> といったコマンドになります。</p>
 
-<p>If you have multiple <code class="highlighter-rouge">Dockerfile</code> steps that use different files from your
-context, <code class="highlighter-rouge">COPY</code> them individually, rather than all at once. This ensures that
-each step’s build cache is only invalidated (forcing the step to be re-run) if
-the specifically required files change.</p>
+<!--
+If you have multiple `Dockerfile` steps that use different files from your
+context, `COPY` them individually, rather than all at once. This ensures that
+each step's build cache is only invalidated (forcing the step to be re-run) if
+the specifically required files change.
+-->
+<p><code class="highlighter-rouge">Dockerfile</code> 内の複数ステップにおいて異なるファイルをコピーするときには、一度にすべてをコピーするのではなく、<code class="highlighter-rouge">COPY</code> を使って個別にコピーしてください。
+こうしておくと、個々のステップに対するキャッシュのビルドは最低限に抑えることができます。
+つまり指定されているファイルが変更になったときのみキャッシュが無効化されます（そのステップは再実行されます）。</p>
 
-<p>For example:</p>
+<!--
+For example:
+-->
+<p>例</p>
 
 <pre><code class="language-Dockerfile">COPY requirements.txt /tmp/
 RUN pip install --requirement /tmp/requirements.txt
 COPY . /tmp/
 </code></pre>
 
-<p>Results in fewer cache invalidations for the <code class="highlighter-rouge">RUN</code> step, than if you put the
-<code class="highlighter-rouge">COPY . /tmp/</code> before it.</p>
+<!--
+Results in fewer cache invalidations for the `RUN` step, than if you put the
+`COPY . /tmp/` before it.
+-->
+<p><code class="highlighter-rouge">RUN</code> コマンドのステップより前に <code class="highlighter-rouge">COPY . /tmp/</code> を実行していたとしたら、それに比べて上の例はキャッシュ無効化の可能性が低くなっています。</p>
 
-<p>Because image size matters, using <code class="highlighter-rouge">ADD</code> to fetch packages from remote URLs is
-strongly discouraged; you should use <code class="highlighter-rouge">curl</code> or <code class="highlighter-rouge">wget</code> instead. That way you can
-delete the files you no longer need after they’ve been extracted and you don’t
+<!--
+Because image size matters, using `ADD` to fetch packages from remote URLs is
+strongly discouraged; you should use `curl` or `wget` instead. That way you can
+delete the files you no longer need after they've been extracted and you don't
 have to add another layer in your image. For example, you should avoid doing
-things like:</p>
+things like:
+-->
+<p>イメージサイズの問題があるので、<code class="highlighter-rouge">ADD</code> を用いてリモート URL からパッケージを取得することはやめてください。
+かわりに <code class="highlighter-rouge">curl</code> や <code class="highlighter-rouge">wget</code> を使ってください。
+こうしておくことで、ファイルを取得し展開した後や、イメージ内の他のレイヤにファイルを加える必要がないのであれば、その後にファイルを削除することができます。
+たとえば以下に示すのは、やってはいけない例です。</p>
 
 <pre><code class="language-Dockerfile">ADD http://example.com/big.tar.xz /usr/src/things/
 RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
 </code></pre>
 
-<p>And instead, do something like:</p>
+<!--
+And instead, do something like:
+-->
+<p>そのかわり、次のように記述します。</p>
 
 <pre><code class="language-Dockerfile">RUN mkdir -p /usr/src/things \
     &amp;&amp; curl -SL http://example.com/big.tar.xz \
@@ -920,39 +1284,66 @@ RUN make -C /usr/src/things all
     &amp;&amp; make -C /usr/src/things all
 </code></pre>
 
-<p>For other items (files, directories) that do not require <code class="highlighter-rouge">ADD</code>’s tar
-auto-extraction capability, you should always use <code class="highlighter-rouge">COPY</code>.</p>
+<!--
+For other items (files, directories) that do not require `ADD`’s tar
+auto-extraction capability, you should always use `COPY`.
+-->
+<p><code class="highlighter-rouge">ADD</code> の自動展開機能を必要としないもの（ファイルやディレクトリ）に対しては、常に <code class="highlighter-rouge">COPY</code> を使うようにしてください。</p>
 
 <h3 id="entrypoint">ENTRYPOINT</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#entrypoint">Dockerfile reference for the ENTRYPOINT instruction</a></p>
+<!--
+[Dockerfile reference for the ENTRYPOINT instruction](/engine/reference/builder.md#entrypoint)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#entrypoint">Dockerfile リファレンスの ENTRYPOINT コマンド</a></p>
 
-<p>The best use for <code class="highlighter-rouge">ENTRYPOINT</code> is to set the image’s main command, allowing that
-image to be run as though it was that command (and then use <code class="highlighter-rouge">CMD</code> as the
-default flags).</p>
+<!--
+The best use for `ENTRYPOINT` is to set the image's main command, allowing that
+image to be run as though it was that command (and then use `CMD` as the
+default flags).
+-->
+<p><code class="highlighter-rouge">ENTRYPOINT</code> の最適な利用方法は、イメージに対してメインのコマンドを設定することです。
+これを設定すると、イメージをそのコマンドそのものであるかのようにして実行できます（その次に <code class="highlighter-rouge">CMD</code> を使ってデフォルトフラグを指定します）。</p>
 
-<p>Let’s start with an example of an image for the command line tool <code class="highlighter-rouge">s3cmd</code>:</p>
+<!--
+Let's start with an example of an image for the command line tool `s3cmd`:
+-->
+<p>コマンドラインツール <code class="highlighter-rouge">s3cmd</code> のイメージ例から始めます。</p>
 
 <pre><code class="language-Dockerfile">ENTRYPOINT ["s3cmd"]
 CMD ["--help"]
 </code></pre>
 
-<p>Now the image can be run like this to show the command’s help:</p>
+<!--
+Now the image can be run like this to show the command's help:
+-->
+<p>このイメージが実行されると、コマンドのヘルプが表示されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run s3cmd
 </code></pre></div></div>
 
-<p>Or using the right parameters to execute a command:</p>
+<!--
+Or using the right parameters to execute a command:
+-->
+<p>あるいは適正なパラメーターを指定してコマンドを実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run s3cmd <span class="nb">ls </span>s3://mybucket
 </code></pre></div></div>
 
-<p>This is useful because the image name can double as a reference to the binary as
-shown in the command above.</p>
+<!--
+This is useful because the image name can double as a reference to the binary as
+shown in the command above.
+-->
+<p>このコマンドのようにして、イメージ名がバイナリへの参照としても使えるので便利です。</p>
 
-<p>The <code class="highlighter-rouge">ENTRYPOINT</code> instruction can also be used in combination with a helper
+<!--
+The `ENTRYPOINT` instruction can also be used in combination with a helper
 script, allowing it to function in a similar way to the command above, even
-when starting the tool may require more than one step.</p>
+when starting the tool may require more than one step.
+-->
+<p><code class="highlighter-rouge">ENTRYPOINT</code> コマンドはヘルパースクリプトとの組み合わせにより利用することもできます。
+そのスクリプトは、上記のコマンド例と同じように機能させられます。
+たとえ対象ツールの起動に複数ステップを要するような場合でも、それが可能です。</p>
 
 <p>For example, the <a href="https://hub.docker.com/_/postgres/">Postgres Official Image</a>
 uses the following script as its <code class="highlighter-rouge">ENTRYPOINT</code>:</p>
@@ -982,63 +1373,108 @@ allows the application to receive any Unix signals sent to the container.
 For more, see the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#entrypoint"><code class="highlighter-rouge">ENTRYPOINT</code> reference</a>.</p>
 </blockquote>
 
-<p>The helper script is copied into the container and run via <code class="highlighter-rouge">ENTRYPOINT</code> on
-container start:</p>
+<!--
+The helper script is copied into the container and run via `ENTRYPOINT` on
+container start:
+-->
+<p>ヘルパースクリプトはコンテナーの中にコピーされ、コンテナー開始時に <code class="highlighter-rouge">ENTRYPOINT</code> から実行されます。</p>
 
 <pre><code class="language-Dockerfile">COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]
 </code></pre>
 
-<p>This script allows the user to interact with Postgres in several ways.</p>
+<!--
+This script allows the user to interact with Postgres in several ways.
+-->
+<p>このスクリプトを用いると、Postgres との間で、ユーザーがいろいろな方法でやり取りできるようになります。</p>
 
-<p>It can simply start Postgres:</p>
+<!--
+It can simply start Postgres:
+-->
+<p>以下は単純に Postgres を起動します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run postgres
 </code></pre></div></div>
 
-<p>Or, it can be used to run Postgres and pass parameters to the server:</p>
+<!--
+Or, it can be used to run Postgres and pass parameters to the server:
+-->
+<p>あるいは PostgreSQL 実行時にサーバーに対してパラメーターを渡せます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run postgres postgres <span class="nt">--help</span>
 </code></pre></div></div>
 
-<p>Lastly, it could also be used to start a totally different tool, such as Bash:</p>
+<!--
+Lastly, it could also be used to start a totally different tool, such as Bash:
+-->
+<p>または Bash のような全く異なるツールを起動するために利用することもできます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> postgres bash
 </code></pre></div></div>
 
 <h3 id="volume">VOLUME</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#volume">Dockerfile reference for the VOLUME instruction</a></p>
+<!--
+[Dockerfile reference for the VOLUME instruction](/engine/reference/builder.md#volume)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#volume">Dockerfile リファレンスの VOLUME コマンド</a></p>
 
-<p>The <code class="highlighter-rouge">VOLUME</code> instruction should be used to expose any database storage area,
+<!--
+The `VOLUME` instruction should be used to expose any database storage area,
 configuration storage, or files/folders created by your docker container. You
-are strongly encouraged to use <code class="highlighter-rouge">VOLUME</code> for any mutable and/or user-serviceable
-parts of your image.</p>
+are strongly encouraged to use `VOLUME` for any mutable and/or user-serviceable
+parts of your image.
+-->
+<p><code class="highlighter-rouge">VOLUME</code> コマンドは、データベースストレージ領域、設定用ストレージ、Docker コンテナーによって作成されるファイルやフォルダの公開に使います。
+イメージの可変的な部分、あるいはユーザーが設定可能な部分については VOLUME の利用が強く推奨されます。</p>
 
 <h3 id="user">USER</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#user">Dockerfile reference for the USER instruction</a></p>
+<!--
+[Dockerfile reference for the USER instruction](/engine/reference/builder.md#user)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#user">Dockerfile リファレンスの USER コマンド</a></p>
 
-<p>If a service can run without privileges, use <code class="highlighter-rouge">USER</code> to change to a non-root
-user. Start by creating the user and group in the <code class="highlighter-rouge">Dockerfile</code> with something
-like <code class="highlighter-rouge">RUN groupadd -r postgres &amp;&amp; useradd --no-log-init -r -g postgres postgres</code>.</p>
+<!--
+If a service can run without privileges, use `USER` to change to a non-root
+user. Start by creating the user and group in the `Dockerfile` with something
+like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`.
+-->
+<p>サービスが特権ユーザーでなくても実行できる場合は、<code class="highlighter-rouge">USER</code> を用いて非 root ユーザーに変更します。
+ユーザーとグループを生成するところから始めてください。
+<code class="highlighter-rouge">Dockerfile</code> 内にてたとえば <code class="highlighter-rouge">RUN groupadd -r postgres &amp;&amp; useradd -r -g postgres postgres</code> のようなコマンドを実行します。</p>
 
+<!--
+> Consider an explicit UID/GID
+>
+> Users and groups in an image are assigned a non-deterministic UID/GID in that
+> the "next" UID/GID is assigned regardless of image rebuilds. So, if it’s
+> critical, you should assign an explicit UID/GID.
+-->
 <blockquote>
-  <p>Consider an explicit UID/GID</p>
+  <p>明示的な UID、GID 指定</p>
 
-  <p>Users and groups in an image are assigned a non-deterministic UID/GID in that
-the “next” UID/GID is assigned regardless of image rebuilds. So, if it’s
-critical, you should assign an explicit UID/GID.</p>
+  <p>イメージ内のユーザとグループに割り当てられる UID、GID は確定的なものではありません。
+イメージが再構築されるかどうかには関係なく、「次の」値が UID、GID に割り当てられます。
+これが問題となる場合は、UID、GID を明示的に割り当ててください。</p>
 </blockquote>
 
+<!--
+> Due to an [unresolved bug](https://github.com/golang/go/issues/13548) in the
+> Go archive/tar package's handling of sparse files, attempting to create a user
+> with a significantly large UID inside a Docker container can lead to disk
+> exhaustion because `/var/log/faillog` in the container layer is filled with
+> NULL (\0) characters. A workaround is to pass the `--no-log-init` flag to
+> useradd. The Debian/Ubuntu `adduser` wrapper does not support this flag.
+-->
 <blockquote>
-  <p>Due to an <a href="https://github.com/golang/go/issues/13548">unresolved bug</a> in the
-Go archive/tar package’s handling of sparse files, attempting to create a user
-with a significantly large UID inside a Docker container can lead to disk
-exhaustion because <code class="highlighter-rouge">/var/log/faillog</code> in the container layer is filled with
-NULL (\0) characters. A workaround is to pass the <code class="highlighter-rouge">--no-log-init</code> flag to
-useradd. The Debian/Ubuntu <code class="highlighter-rouge">adduser</code> wrapper does not support this flag.</p>
+  <p>Go 言語の archive/tar パッケージが取り扱うスパースファイルにおいて
+<a href="https://github.com/golang/go/issues/13548">未解決のバグ</a>があります。
+これは Docker コンテナー内にて非常に大きな値の UID を使ってユーザーを生成しようとするため、ディスク消費が異常に発生します。
+コンテナーレイヤ内の <code class="highlighter-rouge">/var/log/faillog</code> が NUL (\0) キャラクターにより埋められてしまいます。
+useradd に対して <code class="highlighter-rouge">--no-log-init</code> フラグをつけることで、とりあえずこの問題は回避できます。
+ただし Debian/Ubuntu の <code class="highlighter-rouge">adduser</code> ラッパーは <code class="highlighter-rouge">--no-log-init</code> フラグをサポートしていないため、利用することはできません。</p>
 </blockquote>
 
 <p>Avoid installing or using <code class="highlighter-rouge">sudo</code> as it has unpredictable TTY and
@@ -1051,41 +1487,80 @@ frequently.</p>
 
 <h3 id="workdir">WORKDIR</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#workdir">Dockerfile reference for the WORKDIR instruction</a></p>
+<!--
+[Dockerfile reference for the WORKDIR instruction](/engine/reference/builder.md#workdir)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#workdir">Dockerfile リファレンスの WORKDIR コマンド</a></p>
 
-<p>For clarity and reliability, you should always use absolute paths for your
-<code class="highlighter-rouge">WORKDIR</code>. Also, you should use <code class="highlighter-rouge">WORKDIR</code> instead of  proliferating instructions
-like <code class="highlighter-rouge">RUN cd … &amp;&amp; do-something</code>, which are hard to read, troubleshoot, and
-maintain.</p>
+<!--
+For clarity and reliability, you should always use absolute paths for your
+`WORKDIR`. Also, you should use `WORKDIR` instead of  proliferating instructions
+like `RUN cd … && do-something`, which are hard to read, troubleshoot, and
+maintain.
+-->
+<p><code class="highlighter-rouge">WORKDIR</code> に設定するパスは、分かり易く確実なものとするために、絶対パス指定としてください。
+また <code class="highlighter-rouge">RUN cd … &amp;&amp; do-something</code> といった長くなる一方のコマンドを書くくらいなら、<code class="highlighter-rouge">WORKDIR</code> を利用してください。
+そのような書き方は読みにくく、トラブル発生時には解決しにくく保守が困難になるためです。</p>
 
 <h3 id="onbuild">ONBUILD</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#onbuild">Dockerfile reference for the ONBUILD instruction</a></p>
+<!--
+[Dockerfile reference for the ONBUILD instruction](/engine/reference/builder.md#onbuild)
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#onbuild">Dockerfile リファレンスの ONBUILD コマンド</a></p>
 
-<p>An <code class="highlighter-rouge">ONBUILD</code> command executes after the current <code class="highlighter-rouge">Dockerfile</code> build completes.
-<code class="highlighter-rouge">ONBUILD</code> executes in any child image derived <code class="highlighter-rouge">FROM</code> the current image.  Think
-of the <code class="highlighter-rouge">ONBUILD</code> command as an instruction the parent <code class="highlighter-rouge">Dockerfile</code> gives
-to the child <code class="highlighter-rouge">Dockerfile</code>.</p>
+<!--
+An `ONBUILD` command executes after the current `Dockerfile` build completes.
+`ONBUILD` executes in any child image derived `FROM` the current image.  Think
+of the `ONBUILD` command as an instruction the parent `Dockerfile` gives
+to the child `Dockerfile`.
+-->
+<p><code class="highlighter-rouge">ONBUILD</code> コマンドは、<code class="highlighter-rouge">Dockerfile</code> によるビルドが完了した後に実行されます。
+<code class="highlighter-rouge">ONBUILD</code> は、現在のイメージから <code class="highlighter-rouge">FROM</code> によって派生した子イメージにおいて実行されます。
+つまり <code class="highlighter-rouge">ONBUILD</code> とは、親の <code class="highlighter-rouge">Dockerfile</code> から子どもの <code class="highlighter-rouge">Dockerfile</code> へ与える命令であると言えます。</p>
 
-<p>A Docker build executes <code class="highlighter-rouge">ONBUILD</code> commands before any command in a child
-<code class="highlighter-rouge">Dockerfile</code>.</p>
+<!--
+A Docker build executes `ONBUILD` commands before any command in a child
+`Dockerfile`.
+-->
+<p>Docker によるビルドにおいては <code class="highlighter-rouge">ONBUILD</code> の実行が済んでから、子イメージのコマンド実行が行われます。</p>
 
-<p><code class="highlighter-rouge">ONBUILD</code> is useful for images that are going to be built <code class="highlighter-rouge">FROM</code> a given
-image. For example, you would use <code class="highlighter-rouge">ONBUILD</code> for a language stack image that
+<!--
+`ONBUILD` is useful for images that are going to be built `FROM` a given
+image. For example, you would use `ONBUILD` for a language stack image that
 builds arbitrary user software written in that language within the
-<code class="highlighter-rouge">Dockerfile</code>, as you can see in <a href="https://github.com/docker-library/ruby/blob/master/2.4/jessie/onbuild/Dockerfile">Ruby’s <code class="highlighter-rouge">ONBUILD</code> variants</a>.</p>
+`Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/master/2.4/jessie/onbuild/Dockerfile).
+-->
+<p><code class="highlighter-rouge">ONBUILD</code> は、所定のイメージから <code class="highlighter-rouge">FROM</code> を使ってイメージをビルドしようとするときに利用できます。
+たとえば特定言語のスタックイメージは <code class="highlighter-rouge">ONBUILD</code> を利用します。
+<code class="highlighter-rouge">Dockerfile</code> 内にて、その言語で書かれたどのようなユーザーソフトウェアであってもビルドすることができます。
+その例として <a href="https://github.com/docker-library/ruby/blob/master/2.1/onbuild/Dockerfile">Ruby’s ONBUILD variants</a> があります。</p>
 
-<p>Images built from <code class="highlighter-rouge">ONBUILD</code> should get a separate tag, for example:
-<code class="highlighter-rouge">ruby:1.9-onbuild</code> or <code class="highlighter-rouge">ruby:2.0-onbuild</code>.</p>
+<!--
+Images built from `ONBUILD` should get a separate tag, for example:
+`ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
+-->
+<p><code class="highlighter-rouge">ONBUILD</code> によって構築するイメージは、異なったタグを指定してください。
+たとえば <code class="highlighter-rouge">ruby:1.9-onbuild</code> と <code class="highlighter-rouge">ruby:2.0-onbuild</code> などです。</p>
 
-<p>Be careful when putting <code class="highlighter-rouge">ADD</code> or <code class="highlighter-rouge">COPY</code> in <code class="highlighter-rouge">ONBUILD</code>. The “onbuild” image
-fails catastrophically if the new build’s context is missing the resource being
+<!--
+Be careful when putting `ADD` or `COPY` in `ONBUILD`. The "onbuild" image
+fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
-allowing the <code class="highlighter-rouge">Dockerfile</code> author to make a choice.</p>
+allowing the `Dockerfile` author to make a choice.
+-->
+<p><code class="highlighter-rouge">ONBUILD</code> において <code class="highlighter-rouge">ADD</code> や <code class="highlighter-rouge">COPY</code> を用いるときは注意してください。
+“onbuild” イメージが新たにビルドされる際に、追加しようとしているリソースが見つからなかったとしたら、このイメージは復旧できない状態になります。上に示したように個別にタグをつけておけば、<code class="highlighter-rouge">Dockerfile</code> の開発者にとっても判断ができるようになるので、不測の事態は軽減されます。</p>
 
-<h2 id="examples-for-official-images">Examples for Official Images</h2>
+<!--
+## Examples for Official Images
+-->
+<h2 id="公式イメージの例">公式イメージの例</h2>
 
-<p>These Official Images have exemplary <code class="highlighter-rouge">Dockerfile</code>s:</p>
+<!--
+These Official Images have exemplary `Dockerfile`s:
+-->
+<p>以下に示すのは代表的な <code class="highlighter-rouge">Dockerfile</code> の例です。</p>
 
 <ul>
   <li><a href="https://hub.docker.com/_/golang/">Go</a></li>
@@ -1094,13 +1569,22 @@ allowing the <code class="highlighter-rouge">Dockerfile</code> author to make a 
   <li><a href="https://hub.docker.com/_/ruby/">Ruby</a></li>
 </ul>
 
-<h2 id="additional-resources">Additional resources:</h2>
+<!--
+## Additional resources:
+-->
+<h2 id="その他の情報">その他の情報</h2>
 
+<!--
+* [Dockerfile Reference](/engine/reference/builder.md)
+* [More about Base Images](/develop/develop-images/baseimages/)
+* [More about Automated Builds](/docker-hub/builds/)
+* [Guidelines for Creating Official Images](/docker-hub/official_images/)
+-->
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md">Dockerfile Reference</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/">More about Base Images</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/">More about Automated Builds</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/official_images/">Guidelines for Creating Official Images</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md">Dockerfile リファレンス</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/">ベースイメージの詳細</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/">自動ビルドの詳細</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/official_images/">公式イメージ作成のガイドライン</a></li>
 </ul>
 
 
@@ -1171,7 +1655,7 @@ allowing the <code class="highlighter-rouge">Dockerfile</code> author to make a 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/zembutsu/docs.docker.jp/edit/master/develop/develop-images/dockerfile_best-practices.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/develop/develop-images/dockerfile_best-practices.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
 										<li><a href="https://github.com/zembutsu/docs.docker.jp/issues/new?body=File: [develop/develop-images/dockerfile_best-practices.md](https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
@@ -1198,21 +1682,21 @@ allowing the <code class="highlighter-rouge">Dockerfile</code> author to make a 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#general-guidelines-and-recommendations" class="nomunge">General guidelines and recommendations</a>
+  <li><a href="#一般的なガイドラインとアドバイス" class="nomunge">一般的なガイドラインとアドバイス</a>
     <ul>
-      <li><a href="#create-ephemeral-containers" class="nomunge">Create ephemeral containers</a></li>
-      <li><a href="#understand-build-context" class="nomunge">Understand build context</a></li>
-      <li><a href="#pipe-dockerfile-through-stdin" class="nomunge">Pipe Dockerfile through stdin</a></li>
+      <li><a href="#はかない-ephemeral-コンテナーの生成" class="nomunge">“はかない” (ephemeral) コンテナーの生成</a></li>
+      <li><a href="#ビルドコンテキストを理解する" class="nomunge">ビルドコンテキストを理解する</a></li>
+      <li><a href="#stdin-を通じた-dockerfile-のパイプ" class="nomunge">stdin を通じた Dockerfile のパイプ</a></li>
       <li><a href="#exclude-with-dockerignore" class="nomunge">Exclude with .dockerignore</a></li>
       <li><a href="#use-multi-stage-builds" class="nomunge">Use multi-stage builds</a></li>
-      <li><a href="#dont-install-unnecessary-packages" class="nomunge">Don’t install unnecessary packages</a></li>
-      <li><a href="#decouple-applications" class="nomunge">Decouple applications</a></li>
-      <li><a href="#minimize-the-number-of-layers" class="nomunge">Minimize the number of layers</a></li>
-      <li><a href="#sort-multi-line-arguments" class="nomunge">Sort multi-line arguments</a></li>
-      <li><a href="#leverage-build-cache" class="nomunge">Leverage build cache</a></li>
+      <li><a href="#不要なパッケージをインストールしない" class="nomunge">不要なパッケージをインストールしない</a></li>
+      <li><a href="#アプリケーションの分割" class="nomunge">アプリケーションの分割</a></li>
+      <li><a href="#レイヤ数は最小に" class="nomunge">レイヤ数は最小に</a></li>
+      <li><a href="#複数行にわたる引数は並びを適切に" class="nomunge">複数行にわたる引数は並びを適切に</a></li>
+      <li><a href="#ビルドキャッシュの利用" class="nomunge">ビルドキャッシュの利用</a></li>
     </ul>
   </li>
-  <li><a href="#dockerfile-instructions" class="nomunge">Dockerfile instructions</a>
+  <li><a href="#dockerfile-コマンド" class="nomunge">Dockerfile コマンド</a>
     <ul>
       <li><a href="#from" class="nomunge">FROM</a></li>
       <li><a href="#label" class="nomunge">LABEL</a></li>
@@ -1220,7 +1704,7 @@ allowing the <code class="highlighter-rouge">Dockerfile</code> author to make a 
       <li><a href="#cmd" class="nomunge">CMD</a></li>
       <li><a href="#expose" class="nomunge">EXPOSE</a></li>
       <li><a href="#env" class="nomunge">ENV</a></li>
-      <li><a href="#add-or-copy" class="nomunge">ADD or COPY</a></li>
+      <li><a href="#add-と-copy" class="nomunge">ADD と COPY</a></li>
       <li><a href="#entrypoint" class="nomunge">ENTRYPOINT</a></li>
       <li><a href="#volume" class="nomunge">VOLUME</a></li>
       <li><a href="#user" class="nomunge">USER</a></li>
@@ -1228,8 +1712,8 @@ allowing the <code class="highlighter-rouge">Dockerfile</code> author to make a 
       <li><a href="#onbuild" class="nomunge">ONBUILD</a></li>
     </ul>
   </li>
-  <li><a href="#examples-for-official-images" class="nomunge">Examples for Official Images</a></li>
-  <li><a href="#additional-resources" class="nomunge">Additional resources:</a></li>
+  <li><a href="#公式イメージの例" class="nomunge">公式イメージの例</a></li>
+  <li><a href="#その他の情報" class="nomunge">その他の情報</a></li>
 </ul>
 
 

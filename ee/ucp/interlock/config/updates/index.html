@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-19 18:12:05 +0900 -->
+<!-- Page generated 2019-04-23 20:13:52 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,7 +86,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-19T18:12:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-23T20:13:52+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -96,7 +96,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="There are two parts to the update process: Update the Interlock configuration to specify the new extension and/or proxy image versions. Update the Interlock service to use the new configuration..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-19T18:12:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-04-23T20:13:52+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="routing, proxy, interlock">
@@ -213,17 +213,67 @@
 <h2 id="update-the-interlock-service">Update the Interlock service</h2>
 <p>Remove the old configuration and specify the new configuration:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service update <span class="nt">--config-rm</span> service.interlock.conf interlock
-<span class="nv">$&gt;</span> docker service update <span class="nt">--config-add</span> <span class="nb">source</span><span class="o">=</span>service.interlock.conf.v2,target<span class="o">=</span>/config.toml interlock
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service update <span class="nt">--config-rm</span> service.interlock.conf ucp-interlock
+<span class="nv">$&gt;</span> docker service update <span class="nt">--config-add</span> <span class="nb">source</span><span class="o">=</span>service.interlock.conf.v2,target<span class="o">=</span>/config.toml ucp-interlock
 </code></pre></div></div>
 
-<p>Next, update the Interlock service to use the new image. The following example updates the Interlock core service to use the <code class="highlighter-rouge">sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51</code>
-version of Interlock. Interlock starts and checks the config object, which has the new extension version, and
+<p>Next, update the Interlock service to use the new image. To pull the latest version of UCP, run the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker pull docker/ucp:latest
+</code></pre></div></div>
+
+<h3 id="example-output">Example output</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>latest: Pulling from docker/ucp
+cd784148e348: Already exists
+3871e7d70c20: Already exists
+cad04e4a4815: Pull <span class="nb">complete
+</span>Digest: sha256:63ca6d3a6c7e94aca60e604b98fccd1295bffd1f69f3d6210031b72fc2467444
+Status: Downloaded newer image <span class="k">for </span>docker/ucp:latest
+docker.io/docker/ucp:latest
+</code></pre></div></div>
+
+<p>Next, list all the latest UCP images. To learn more about <code class="highlighter-rouge">docker/ucp images</code> and available options,
+see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/ucp/3.1/cli/images/">the reference page</a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker run <span class="nt">--rm</span> docker/ucp images <span class="nt">--list</span>
+</code></pre></div></div>
+
+<h3 id="example-output-1">Example output</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker/ucp-agent:3.1.6
+docker/ucp-auth-store:3.1.6
+docker/ucp-auth:3.1.6
+docker/ucp-azure-ip-allocator:3.1.6
+docker/ucp-calico-cni:3.1.6
+docker/ucp-calico-kube-controllers:3.1.6
+docker/ucp-calico-node:3.1.6
+docker/ucp-cfssl:3.1.6
+docker/ucp-compose:3.1.6
+docker/ucp-controller:3.1.6
+docker/ucp-dsinfo:3.1.6
+docker/ucp-etcd:3.1.6
+docker/ucp-hyperkube:3.1.6
+docker/ucp-interlock-extension:3.1.6
+docker/ucp-interlock-proxy:3.1.6
+docker/ucp-interlock:3.1.6
+docker/ucp-kube-compose-api:3.1.6
+docker/ucp-kube-compose:3.1.6
+docker/ucp-kube-dns-dnsmasq-nanny:3.1.6
+docker/ucp-kube-dns-sidecar:3.1.6
+docker/ucp-kube-dns:3.1.6
+docker/ucp-metrics:3.1.6
+docker/ucp-pause:3.1.6
+docker/ucp-swarm:3.1.6
+docker/ucp:3.1.6
+</code></pre></div></div>
+
+<p>Interlock starts and checks the config object, which has the new extension version, and
 performs a rolling deploy to update all extensions.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service update <span class="se">\</span>
-    <span class="nt">--image</span> interlockpreview/interlock@sha256:d173014908eb09e9a70d8e5ed845469a61f7cbf4032c28fad0ed9af3fc04ef51 <span class="se">\</span>
-    interlock
+    <span class="nt">--image</span> docker/ucp-interlock:3.1.6 <span class="se">\</span>
+    ucp-interlock
 </code></pre></div></div>
 
 							<!-- tags -->
@@ -293,7 +343,7 @@ performs a rolling deploy to update all extensions.</p>
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/zembutsu/docs.docker.jp/edit/master/ee/ucp/interlock/config/updates.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/ucp/interlock/config/updates.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
 										<li><a href="https://github.com/zembutsu/docs.docker.jp/issues/new?body=File: [ee/ucp/interlock/config/updates.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/config/updates/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
@@ -321,7 +371,12 @@ performs a rolling deploy to update all extensions.</p>
 									
 <ul id="my_toc" class="inline_toc">
   <li><a href="#update-the-interlock-configuration" class="nomunge">Update the Interlock configuration</a></li>
-  <li><a href="#update-the-interlock-service" class="nomunge">Update the Interlock service</a></li>
+  <li><a href="#update-the-interlock-service" class="nomunge">Update the Interlock service</a>
+    <ul>
+      <li><a href="#example-output" class="nomunge">Example output</a></li>
+      <li><a href="#example-output-1" class="nomunge">Example output</a></li>
+    </ul>
+  </li>
 </ul>
 
 
