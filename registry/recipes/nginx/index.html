@@ -1,0 +1,631 @@
+<!-- Page generated 2019-04-24 08:11:08 +0900 -->
+<!-- relative link basehrefs -->
+
+	
+	
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+
+
+<!-- Logic for 'edit this button' -->
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+<!-- End of logic for 'edit this button' -->
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		@charset "UTF-8";
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak,
+		.ng-hide:not(.ng-hide-animate) {
+			display: none !important;
+		}
+
+		ng\:form {
+			display: block;
+		}
+	</style>
+	<script type="text/javascript">
+	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+	  analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+	  analytics.page();
+	  }}();
+	</script>
+	
+	<!-- favicon -->
+	<link rel="icon" type="image/x-icon" href="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+	<meta name="msapplication-TileImage" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+	<link rel="apple-touch-icon" type="image/x-icon" href="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+	<!-- metadata -->
+	<meta property="og:type" content="website"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-24T08:11:08+09:00"/>
+	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:domain" content="docs.docker.jp"/>
+	<meta name="twitter:site" content="@docker_docs"/>
+	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+	<meta name="twitter:title" itemprop="title name" content="Authenticate proxy with nginx"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Use-case People already relying on a nginx proxy to authenticate their users to other services might want to leverage it and have Registry communications tunneled through the same pipeline. Usually,..." />
+	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
+	<meta name="twitter:image:alt" content="Docker Documentation"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-04-24T08:11:08+09:00"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="registry, on-prem, images, tags, repository, distribution, nginx, proxy, authentication, TLS, recipe, advanced">
+	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
+	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
+	<link id="pagestyle" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/style.css">
+
+	<!-- Go get "Open Sans" font from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<!-- SEO stuff -->
+	<title>Authenticate proxy with nginx | Docker Documentation</title>
+<meta property="og:title" content="Authenticate proxy with nginx" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="Restricting access to your registry using a nginx proxy" />
+<meta property="og:description" content="Restricting access to your registry using a nginx proxy" />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/nginx/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/nginx/" />
+<meta property="og:site_name" content="Docker Documentation" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"Authenticate proxy with nginx","description":"Restricting access to your registry using a nginx proxy","url":"https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/nginx/"}</script>
+	<!-- END SEO STUFF -->
+	
+	<script language="javascript">
+	// Default to assuming this is an archive and hiding some stuff
+	// See js/archive.js and js/docs.js for logic relating to this
+	var isArchive = true;
+	var dockerVersion = 'v18.09';
+	</script>
+</head>
+<body ng-app="Docker" ng-controller="DockerController" class="colums">
+	<header>
+		 <nav class="nav-secondary navbar navbar-fixed-top">
+    <!-- <div class="fan"></div> -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="https://matsuand.github.io/docs.docker.jp.onthefly/"><img class="logo" src="https://matsuand.github.io/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs"></a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="search-form" id="search-div" style="visibility: hidden">
+    <form class="search-form form-inline ng-pristine ng-valid" /id="searchForm" action="/docs.docker.jp.onthefly/search/">
+        <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteContainer">
+            <div id="autocompleteResults"></div>
+        </div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container">
+    <div id="tabs">
+        <ul class="tabs" id="jsTOCHorizontal">
+
+        </ul>
+    </div>
+    <div class="ctrl-right hidden-xs hidden-sm">
+        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+        <div class="btn-group" style="visibility: hidden">
+  <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Docker v18.09 (current)        <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+  </ul>
+</div>
+
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+	</header>
+
+	<div class="wrapper right-open">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-body">
+					<main class="col-content content">
+						<section class="section">
+							
+								
+							<h1>Authenticate proxy with nginx</h1>  <span class="reading-time" title="Estimated reading time">
+  <span class="reading-time-label">読む時間の目安: </span>
+  
+  
+    5 分
+  
+</span>
+
+							
+							
+							<h2 id="use-case">Use-case</h2>
+
+<p>People already relying on a nginx proxy to authenticate their users to other
+services might want to leverage it and have Registry communications tunneled
+through the same pipeline.</p>
+
+<p>Usually, that includes enterprise setups using LDAP/AD on the backend and a SSO
+mechanism fronting their internal http portal.</p>
+
+<h3 id="alternatives">Alternatives</h3>
+
+<p>If you just want authentication for your registry, and are happy maintaining
+users access separately, you should really consider sticking with the native
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/registry/deploying/#native-basic-auth">basic auth registry feature</a>.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>With the method presented here, you implement basic authentication for docker
+engines in a reverse proxy that sits in front of your registry.</p>
+
+<p>While we use a simple htpasswd file as an example, any other nginx
+authentication backend should be fairly easy to implement once you are done with
+the example.</p>
+
+<p>We also implement push restriction (to a limited user group) for the sake of the
+example. Again, you should modify this to fit your mileage.</p>
+
+<h3 id="gotchas">Gotchas</h3>
+
+<p>While this model gives you the ability to use whatever authentication backend
+you want through the secondary authentication mechanism implemented inside your
+proxy, it also requires that you move TLS termination from the Registry to the
+proxy itself.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: Docker does not recommend binding your registry to <code class="highlighter-rouge">localhost:5000</code> without
+authentication. This creates a potential loophole in your Docker Registry security.
+As a result, anyone who can log on to the server where your Docker Registry is running
+can push images without authentication.</p>
+</blockquote>
+
+<p>Furthermore, introducing an extra http layer in your communication pipeline
+makes it more complex to deploy, maintain, and debug. Make sure the extra
+complexity is required.</p>
+
+<p>For instance, Amazon’s Elastic Load Balancer (ELB) in HTTPS mode already sets
+the following client header:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X-Real-IP
+X-Forwarded-For
+X-Forwarded-Proto
+</code></pre></div></div>
+
+<p>So if you have an Nginx instance sitting behind it, remove these lines from the
+example config below:</p>
+
+<pre><code class="language-none">proxy_set_header  Host              $http_host;   # required for docker client's sake
+proxy_set_header  X-Real-IP         $remote_addr; # pass on real client's IP
+proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
+proxy_set_header  X-Forwarded-Proto $scheme;
+</code></pre>
+
+<p>Otherwise Nginx resets the ELB’s values, and the requests are not routed
+properly. For more information, see
+<a href="https://github.com/docker/distribution/issues/970">#970</a>.</p>
+
+<h2 id="setting-things-up">Setting things up</h2>
+
+<p>Review the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/index.md#requirements">requirements</a>, then follow these steps.</p>
+
+<ol>
+  <li>
+    <p>Create the required directories</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> auth data
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create the main nginx configuration. Paste this code block into a new file called <code class="highlighter-rouge">auth/nginx.conf</code>:</p>
+
+    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">events</span> {
+    <span class="n">worker_connections</span>  <span class="m">1024</span>;
+}
+
+<span class="n">http</span> {
+
+  <span class="n">upstream</span> <span class="n">docker</span>-<span class="n">registry</span> {
+    <span class="n">server</span> <span class="n">registry</span>:<span class="m">5000</span>;
+  }
+
+  <span class="c">## Set a variable to help us decide if we need to add the
+</span>  <span class="c">## 'Docker-Distribution-Api-Version' header.
+</span>  <span class="c">## The registry always sets this header.
+</span>  <span class="c">## In the case of nginx performing auth, the header is unset
+</span>  <span class="c">## since nginx is auth-ing before proxying.
+</span>  <span class="n">map</span> $<span class="n">upstream_http_docker_distribution_api_version</span> $<span class="n">docker_distribution_api_version</span> {
+    <span class="s1">''</span> <span class="s1">'registry/2.0'</span>;
+  }
+
+  <span class="n">server</span> {
+    <span class="n">listen</span> <span class="m">443</span> <span class="n">ssl</span>;
+    <span class="n">server_name</span> <span class="n">myregistrydomain</span>.<span class="n">com</span>;
+
+    <span class="c"># SSL
+</span>    <span class="n">ssl_certificate</span> /<span class="n">etc</span>/<span class="n">nginx</span>/<span class="n">conf</span>.<span class="n">d</span>/<span class="n">domain</span>.<span class="n">crt</span>;
+    <span class="n">ssl_certificate_key</span> /<span class="n">etc</span>/<span class="n">nginx</span>/<span class="n">conf</span>.<span class="n">d</span>/<span class="n">domain</span>.<span class="n">key</span>;
+
+    <span class="c"># Recommendations from https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
+</span>    <span class="n">ssl_protocols</span> <span class="n">TLSv1</span>.<span class="m">1</span> <span class="n">TLSv1</span>.<span class="m">2</span>;
+    <span class="n">ssl_ciphers</span> <span class="s1">'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH'</span>;
+    <span class="n">ssl_prefer_server_ciphers</span> <span class="n">on</span>;
+    <span class="n">ssl_session_cache</span> <span class="n">shared</span>:<span class="n">SSL</span>:<span class="m">10</span><span class="n">m</span>;
+
+    <span class="c"># disable any limits to avoid HTTP 413 for large image uploads
+</span>    <span class="n">client_max_body_size</span> <span class="m">0</span>;
+
+    <span class="c"># required to avoid HTTP 411: see Issue #1486 (https://github.com/moby/moby/issues/1486)
+</span>    <span class="n">chunked_transfer_encoding</span> <span class="n">on</span>;
+
+    <span class="n">location</span> /<span class="n">v2</span>/ {
+      <span class="c"># Do not allow connections from docker 1.5 and earlier
+</span>      <span class="c"># docker pre-1.6.0 did not properly set the user agent on ping, catch "Go *" user agents
+</span>      <span class="n">if</span> ($<span class="n">http_user_agent</span> ~ <span class="s2">"^(docker\/1\.(3|4|5(?!\.[0-9]-dev))|Go ).*$"</span> ) {
+        <span class="n">return</span> <span class="m">404</span>;
+      }
+
+      <span class="c"># To add basic authentication to v2 use auth_basic setting.
+</span>      <span class="n">auth_basic</span> <span class="s2">"Registry realm"</span>;
+      <span class="n">auth_basic_user_file</span> /<span class="n">etc</span>/<span class="n">nginx</span>/<span class="n">conf</span>.<span class="n">d</span>/<span class="n">nginx</span>.<span class="n">htpasswd</span>;
+
+      <span class="c">## If $docker_distribution_api_version is empty, the header is not added.
+</span>      <span class="c">## See the map directive above where this variable is defined.
+</span>      <span class="n">add_header</span> <span class="s1">'Docker-Distribution-Api-Version'</span> $<span class="n">docker_distribution_api_version</span> <span class="n">always</span>;
+
+      <span class="n">proxy_pass</span>                          <span class="n">http</span>://<span class="n">docker</span>-<span class="n">registry</span>;
+      <span class="n">proxy_set_header</span>  <span class="n">Host</span>              $<span class="n">http_host</span>;   <span class="c"># required for docker client's sake
+</span>      <span class="n">proxy_set_header</span>  <span class="n">X</span>-<span class="n">Real</span>-<span class="n">IP</span>         $<span class="n">remote_addr</span>; <span class="c"># pass on real client's IP
+</span>      <span class="n">proxy_set_header</span>  <span class="n">X</span>-<span class="n">Forwarded</span>-<span class="n">For</span>   $<span class="n">proxy_add_x_forwarded_for</span>;
+      <span class="n">proxy_set_header</span>  <span class="n">X</span>-<span class="n">Forwarded</span>-<span class="n">Proto</span> $<span class="n">scheme</span>;
+      <span class="n">proxy_read_timeout</span>                  <span class="m">900</span>;
+    }
+  }
+}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a password file <code class="highlighter-rouge">auth/nginx.htpasswd</code> for “testuser” and “testpassword”.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--entrypoint</span> htpasswd registry:2 <span class="nt">-Bbn</span> testuser testpassword <span class="o">&gt;</span> auth/nginx.htpasswd
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p><strong>Note</strong>: If you do not want to use <code class="highlighter-rouge">bcrypt</code>, you can omit the <code class="highlighter-rouge">-B</code> parameter.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Copy your certificate files to the <code class="highlighter-rouge">auth/</code> directory.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>cp domain.crt auth
+<span class="nv">$ </span>cp domain.key auth
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create the compose file. Paste the following YAML into a new file called <code class="highlighter-rouge">docker-compose.yml</code>.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx</span><span class="pi">:</span>
+  <span class="c1"># Note : Only nginx:alpine supports bcrypt.</span>
+  <span class="c1"># If you don't need to use bcrypt, you can use a different tag.</span>
+  <span class="c1"># Ref. https://github.com/nginxinc/docker-nginx/issues/29</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nginx:alpine"</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">5043:443</span>
+  <span class="na">links</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">registry:registry</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">./auth:/etc/nginx/conf.d</span>
+    <span class="pi">-</span> <span class="s">./auth/nginx.conf:/etc/nginx/nginx.conf:ro</span>
+
+<span class="na">registry</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">registry:2</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">127.0.0.1:5000:5000</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">./data:/var/lib/registry</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="starting-and-stopping">Starting and stopping</h2>
+
+<p>Now, start your stack:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up -d
+</code></pre></div></div>
+
+<p>Login with a “push” authorized user (using <code class="highlighter-rouge">testuser</code> and <code class="highlighter-rouge">testpassword</code>), then
+tag and push your first image:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login -u=testuser -p=testpassword -e=root@example.ch myregistrydomain.com:5043
+docker tag ubuntu myregistrydomain.com:5043/test
+docker push myregistrydomain.com:5043/test
+docker pull myregistrydomain.com:5043/test
+</code></pre></div></div>
+
+							<!-- tags -->
+							
+							
+							
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=registry">registry</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=on-prem">on-prem</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=images">images</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=tags">tags</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=repository">repository</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=distribution">distribution</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=nginx">nginx</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=proxy">proxy</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=authentication">authentication</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=TLS">TLS</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=recipe">recipe</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=advanced">advanced</a></span>
+							
+							<!-- link corrections -->
+              <script language="JavaScript">
+							var x = document.links.length;
+							var baseHref = document.getElementsByTagName('base')[0].href
+							for (i = 0; i < x; i++) {
+							  var munged = false;
+							  var thisHREF = document.links[i].href;
+							  var originalURL = "/registry/recipes/nginx/";
+							  if (thisHREF.indexOf(baseHref + "#") > -1) {
+							    // hash fix
+							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+							    thisHREF = originalURL + thisHREF.replace(baseHref, "");
+							    //console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+							  }
+							  if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge") < 0) {
+							    munged = true;
+							    thisHREF = thisHREF.replace(".md", "/").replace("/index/", "/");
+							    document.links[i].setAttribute('href', thisHREF);
+							  }
+							}
+							</script>
+							
+						  <div id="ratings-div" style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
+								<div id="pd_rating_holder_8453675"></div>
+								<script type="text/javascript">
+									PDRTJS_settings_8453675 = {
+										"id": "8453675",
+										"unique_id": "registry/recipes/nginx.md",
+										"title": "Authenticate proxy with nginx",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/registry/recipes/nginx.md"
+									};
+									(function(d, c, j) {
+										if (!document.getElementById(j)) {
+											var pd = d.createElement(c),
+												s;
+											pd.id = j;
+											pd.src = ('https:' == document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
+											s = document.getElementsByTagName(c)[0];
+											s.parentNode.insertBefore(pd, s);
+										}
+									}(document, 'script', 'pd-rating-js'));
+								</script>
+							</div>
+							
+						</section>
+					</main>
+					<nav class="col-nav">
+						<div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+						<div id="navbar" class="nav-sidebar">
+    <ul class="nav" id="jsTOCLeftNav">
+    </ul>
+</div>
+
+						</div>
+					</nav>
+					<div class="col-toc">
+							<div class="sidebar hidden-xs hidden-sm">
+							<div class="toc-nav">
+								<div class="feedback-links">
+									<ul>
+										
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/registry/recipes/nginx.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [registry/recipes/nginx.md](https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/nginx/)"
+															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
+										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
+										<!-- toggle mode -->
+										<li>
+											<div class="toggle-mode">
+												<div class="icon">
+													<i class="fa fa-sun-o" aria-hidden="true"></i>
+												</div>
+												<div class="toggle-switch">
+													<label class="switch">
+														<input type="checkbox" id="switch-style">
+														<div class="slider round"></div>
+												</label>
+												</div>
+												<div class="icon">
+													<i class="fa fa-moon-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								   
+									<div id="side-toc-title">本ページ内</div>
+									
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#use-case" class="nomunge">Use-case</a>
+    <ul>
+      <li><a href="#alternatives" class="nomunge">Alternatives</a></li>
+      <li><a href="#solution" class="nomunge">Solution</a></li>
+      <li><a href="#gotchas" class="nomunge">Gotchas</a></li>
+    </ul>
+  </li>
+  <li><a href="#setting-things-up" class="nomunge">Setting things up</a></li>
+  <li><a href="#starting-and-stopping" class="nomunge">Starting and stopping</a></li>
+</ul>
+
+
+								</div>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<footer class="footer">
+		  
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/what-docker">What is Docker</a></li>
+                        <li><a href="https://www.docker.com/what-container">What is a Container</a></li>
+                        <li><a href="https://www.docker.com/use-cases">Use Cases</a></li>
+                        <li><a href="https://www.docker.com/customers">Customers</a></li>
+                        <li><a href="https://www.docker.com/partners/partner-program">Partners</a></li>
+                        <li class="break"><a href="https://www.docker.com/industry-government">For Government</a></li>
+                        <li><a href="https://www.docker.com/company">About Docker</a></li>
+                        <li><a href="https://www.docker.com/company/management">Management</a></li>
+                        <li><a href="https://www.docker.com/company/news-and-press">Press &amp; News</a></li>
+                        <li><a href="https://www.docker.com/careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/products/overview">Product</a></li>
+                        <li><a href="https://www.docker.com/pricing">Pricing</a></li>
+                        <li><a href="https://www.docker.com/docker-community">Community Edition</a></li>
+                        <li class="break"><a href="https://www.docker.com/enterprise">Enterprise Edition </a></li>
+                        <li><a href="https://www.docker.com/products/docker-datacenter">Docker Datacenter</a></li>
+                        <li><a href="https://hub.docker.com/">Docker Hub</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/">Documentation</a></li>
+                        <li><a href="https://www.docker.com/docker">Learn</a></li>
+                        <li><a href="https://blog.docker.com" target="_blank">Blog</a></li>
+                        <li><a href="https://engineering.docker.com" target="_blank">Engineering Blog</a></li>
+                        <li><a href="https://training.docker.com/" target="_blank">Training</a></li>
+                        <li><a href="https://success.docker.com/support">Support</a></li>
+                        <li><a href="https://success.docker.com/kbase">Knowledge Base</a></li>
+                        <li><a href="https://www.docker.com/products/resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/docker-community">Community</a></li>
+                        <li><a href="https://www.docker.com/technologies/overview">Open Source</a></li>
+                        <li><a href="https://www.docker.com/community/events">Events</a></li>
+                        <li><a href="https://forums.docker.com/" target="_blank">Forums</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker Captains</a></li>
+                        <li><a href="https://www.docker.com/docker-community/scholarships">Scholarships</a></li>
+                        <li><a href="https://blog.docker.com/curated/">Community News</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">Status</a></li>
+                        <li><a href="https://www.docker.com/docker-security">Security</a></li>
+                        <li><a href="https://www.docker.com/legal">Legal</a></li>
+                        <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2019 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-google-plus"><a href="https://plus.google.com/u/0/communities/108146856671494713993">Google</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker/docker">Github</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-reddit"><a href="http://www.reddit.com/r/docker">Reddit</a></li>
+                    <li class="fa fa-slideshare"><a href="http://www.slideshare.net/docker">Slideshare</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+	</footer>
+	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/github.css">
+	
+	<!-- <script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/anchorlinks.js"></script> -->
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/menu.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/jquery.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+	<!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
+	<script language="javascript">
+	// Default to assuming this is an archive and hiding some stuff
+	// See js/archive.js and js/docs.js for logic relating to this
+	var isArchive = true;
+	var dockerVersion = 'v18.09';
+	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
+	var jekyllEnv = 'development';
+	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
+	if (jekyllEnv == 'development') {
+		jekyllEnv = '';
+	}
+	var pageURL = jekyllEnv + '/registry/recipes/nginx/';
+	</script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
+	<script language="javascript">
+	jQuery(document).ready(function(){
+				hookupTOCEvents();
+			});
+	</script>
+</body>
+
+</html>
