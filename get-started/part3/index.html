@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-24 19:49:13 +0900 -->
+<!-- Page generated 2019-04-25 12:41:29 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-24T19:49:13+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-25T12:41:29+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="はじめよう 3部: サービス"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールすること。 Read the orientation in Part 1. Learn how to create containers in Part..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールすること。 Docker Compose を入手していること。 Docker for Mac と Docker for Windows ではすでにインストールされているので、このまま読み進めてください。 Linux システムでは直接インストールが必要です。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-24T19:49:13+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-04-25T12:41:29+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="services, replicas, scale, ports, compose, compose file, stack, networking">
@@ -179,7 +179,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    9 分
+    11 分
   
 </span>
 
@@ -212,67 +212,127 @@ directly](https://github.com/docker/compose/releases). On pre Windows 10 systems
 _without Hyper-V_, use [Docker
 Toolbox](/toolbox/overview.md).
 -->
-
 <ul>
-  <li>
-    <p>Read the orientation in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">Part 1</a>.</p>
-  </li>
-  <li>
-    <p>Learn how to create containers in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">Part 2</a>.</p>
-  </li>
-  <li>
-    <p>Make sure you have published the <code class="highlighter-rouge">friendlyhello</code> image you created by
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">pushing it to a registry</a>. We use that
-shared image here.</p>
-  </li>
-  <li>
-    <p>Be sure your image works as a deployed container. Run this command,
-slotting in your info for <code class="highlighter-rouge">username</code>, <code class="highlighter-rouge">repo</code>, and <code class="highlighter-rouge">tag</code>: <code class="highlighter-rouge">docker run -p 4000:80
-username/repo:tag</code>, then visit <code class="highlighter-rouge">http://localhost:4000/</code>.</p>
-  </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a> を入手していること。
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/index.md">Docker for Mac</a> と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/index.md">Docker for Windows</a> ではすでにインストールされているので、このまま読み進めてください。
+Linux システムでは<a href="https://github.com/docker/compose/releases&gt;">直接インストール</a>が必要です。
+Widows 10 システム上で Hyper-V が入っていない場合は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a> を利用してください。</li>
+</ul>
+
+<!--
+- Read the orientation in [Part 1](/get-started/).
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">1 部</a>の概要説明を読んでいること。</li>
+</ul>
+
+<!--
+- Learn how to create containers in [Part 2](/get-started/part2/).
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で説明した、コンテナーの生成方法を理解していること。</li>
+</ul>
+
+<!--
+- Make sure you have published the `friendlyhello` image you created by
+[pushing it to a registry](/get-started/part2.md#share-your-image). We use that
+shared image here.
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">レジストリに送信</a>して作成した <code class="highlighter-rouge">friendlyhello</code> イメージが共有可能であることを確認します。
+ここではその共有イメージを使います。</li>
+</ul>
+
+<!--
+- Be sure your image works as a deployed container. Run this command,
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 4000:80
+username/repo:tag`, then visit `http://localhost:4000/`.
+-->
+<ul>
+  <li>デプロイしたコンテナーとしてイメージが動作することを確認します。
+以下のコマンドを実行してください。
+<code class="highlighter-rouge">docker run -p 80:80 username/repo:tag</code>
+ここで username、repo、tag の部分は各環境に合わせて書き換えてください。
+そして <code class="highlighter-rouge">http://localhost/</code> にアクセスします。</li>
 </ul>
 
 <h2 id="はじめに">はじめに</h2>
 
-<p>In part 3, we scale our application and enable load-balancing. To do this, we
+<!--
+In part 3, we scale our application and enable load-balancing. To do this, we
 must go one level up in the hierarchy of a distributed application: the
-<strong>service</strong>.</p>
+**service**.
+-->
+<p>3 部ではアプリケーションをスケールアップして、負荷分散（ロードバランシング）を有効にします。
+こうするためには、分散アプリケーションのレベルを一段あげる必要があります。
+<strong>サービス化</strong>するということです。</p>
 
+<!--
+- Stack
+- **Services** (you are here)
+- Container (covered in [part 2](/get-started/part2/))
+-->
 <ul>
-  <li>Stack</li>
-  <li><strong>Services</strong> (you are here)</li>
-  <li>Container (covered in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">part 2</a>)</li>
+  <li>スタック</li>
+  <li><strong>サービス</strong> (ここにいます)</li>
+  <li>コンテナー (<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で説明済)</li>
 </ul>
 
 <h2 id="サービスについて">サービスについて</h2>
 
-<p>In a distributed application, different pieces of the app are called “services”.
+<!--
+In a distributed application, different pieces of the app are called "services".
 For example, if you imagine a video sharing site, it probably includes a service
 for storing application data in a database, a service for video transcoding in
 the background after a user uploads something, a service for the front-end, and
-so on.</p>
+so on.
+-->
+<p>分散アプリケーションにおいては、その中に他の要素とは性格が異なる「サービス」と呼ばれるものがあります。
+たとえば動画共有サイトを考えてみてください。
+おそらくはアプリケーションデータをデータベースに保存するためのサービスがあり、ユーザーがデータをアップロードしたときにバックグラウンドでビデオ変換するサービスがあり、フロントエンドのサービスもあるでしょう。</p>
 
-<p>Services are really just “containers in production.” A service only runs one
-image, but it codifies the way that image runs—what ports it should use,
+<!--
+Services are really just "containers in production." A service only runs one
+image, but it codifies the way that image runs&#8212;what ports it should use,
 how many replicas of the container should run so the service has the capacity it
 needs, and so on. Scaling a service changes the number of container instances
 running that piece of software, assigning more computing resources to the
-service in the process.</p>
+service in the process.
+-->
+<p>サービスとは正に「稼動するコンテナー」なのです。
+どのサービスも実行するイメージはただ一つですが、そこにはイメージの動作方法がコーディングされています。
+ポートは何番を使うか、サービスが持つべき性能を発揮するにはレプリカをいくつ用いればよいか、などです。
+サービスの規模を大きくすると、このソフトウエアを実行するコンテナーインスタンスの数が変わります。
+またプロセス内で実行されるこのサービスへのコンピューターリソース割り当てが増えます。</p>
 
-<p>Luckily it’s very easy to define, run, and scale services with the Docker
-platform -- just write a <code class="highlighter-rouge">docker-compose.yml</code> file.</p>
+<!--
+Luckily it's very easy to define, run, and scale services with the Docker
+platform -- just write a `docker-compose.yml` file.
+-->
+<p>うれしいことに Docker では簡単にサービスの定義、実行、規模変更を行うことができます。
+ただ <code class="highlighter-rouge">docker-compose.yml</code> ファイルを書くだけです。</p>
 
-<h2 id="your-first-docker-composeyml-file">Your first <code class="highlighter-rouge">docker-compose.yml</code> file</h2>
+<!--
+## Your first `docker-compose.yml` file
+-->
+<h2 id="初めての-docker-composeyml-ファイル">初めての <code class="highlighter-rouge">docker-compose.yml</code> ファイル</h2>
 
-<p>A <code class="highlighter-rouge">docker-compose.yml</code> file is a YAML file that defines how Docker containers
-should behave in production.</p>
+<!--
+A `docker-compose.yml` file is a YAML file that defines how Docker containers
+should behave in production.
+-->
+<p><code class="highlighter-rouge">docker-compose.yml</code> ファイルは YAML ファイルであり、Docker コンテナーがどのように動作するかを定義します。</p>
 
 <h3 id="docker-composeyml"><code class="highlighter-rouge">docker-compose.yml</code></h3>
 
-<p>Save this file as <code class="highlighter-rouge">docker-compose.yml</code> wherever you want. Be sure you have
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">pushed the image</a> you created in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">Part
-2</a> to a registry, and update this <code class="highlighter-rouge">.yml</code> by replacing
-<code class="highlighter-rouge">username/repo:tag</code> with your image details.</p>
+<!--
+Save this file as `docker-compose.yml` wherever you want. Be sure you have
+[pushed the image](/get-started/part2.md#share-your-image) you created in [Part
+2](/get-started/part2/) to a registry, and update this `.yml` by replacing
+`username/repo:tag` with your image details.
+-->
+<p>以下の内容を <code class="highlighter-rouge">docker-commpose.yml</code> というファイル名で任意の場所に保存します。
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で行ったレジストリへの<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">送信イメージ</a>を確認し、<code class="highlighter-rouge">.yml</code> ファイルの <code class="highlighter-rouge">username/repo:tag</code> の部分を各自の環境のものへ書き換えます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -295,99 +355,182 @@ should behave in production.</p>
   <span class="na">webnet</span><span class="pi">:</span>
 </code></pre></div></div>
 
-<p>This <code class="highlighter-rouge">docker-compose.yml</code> file tells Docker to do the following:</p>
+<!--
+This `docker-compose.yml` file tells Docker to do the following:
+-->
+<p>この <code class="highlighter-rouge">docker-compose.yml</code> ファイルが Docker に対して以下の指示を行います。</p>
 
+<!--
+- Pull [the image we uploaded in step 2](/get-started/part2/) from the registry.
+-->
 <ul>
-  <li>
-    <p>Pull <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">the image we uploaded in step 2</a> from the registry.</p>
-  </li>
-  <li>
-    <p>Run 5 instances of that image as a service
-called <code class="highlighter-rouge">web</code>, limiting each one to use, at most, 10% of a single core of
-CPU time (this could also be e.g. “1.5” to mean 1 and half core for each),
-and 50MB of RAM.</p>
-  </li>
-  <li>
-    <p>Immediately restart containers if one fails.</p>
-  </li>
-  <li>
-    <p>Map port 4000 on the host to <code class="highlighter-rouge">web</code>’s port 80.</p>
-  </li>
-  <li>
-    <p>Instruct <code class="highlighter-rouge">web</code>’s containers to share port 80 via a load-balanced network
-called <code class="highlighter-rouge">webnet</code>. (Internally, the containers themselves publish to
-<code class="highlighter-rouge">web</code>’s port 80 at an ephemeral port.)</p>
-  </li>
-  <li>
-    <p>Define the <code class="highlighter-rouge">webnet</code> network with the default settings (which is a
-load-balanced overlay network).</p>
-  </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部でアップロードしたイメージ</a>をレジストリから取得。</li>
 </ul>
 
-<h2 id="run-your-new-load-balanced-app">Run your new load-balanced app</h2>
+<!--
+- Run 5 instances of that image as a service
+  called `web`, limiting each one to use, at most, 10% of a single core of
+  CPU time (this could also be e.g. "1.5" to mean 1 and half core for each),
+  and 50MB of RAM.
+-->
+<ul>
+  <li>イメージのインスタンスを 5 つ実行し <code class="highlighter-rouge">web</code> という名前のサービスとして実行。
+それぞれのインスタンスは（全てのコアを通じて）最大で CPU の 10% の利用までに制限し、RAM は 50MB とする。</li>
+</ul>
 
-<p>Before we can use the <code class="highlighter-rouge">docker stack deploy</code> command we first run:</p>
+<!--
+- Immediately restart containers if one fails.
+-->
+<ul>
+  <li>コンテナーが停止したときは、すぐに再起動。</li>
+</ul>
+
+<!--
+- Map port 4000 on the host to `web`'s port 80.
+-->
+<ul>
+  <li>ホスト側のポート 4000 を <code class="highlighter-rouge">web</code> のポート 80 に割り当て。</li>
+</ul>
+
+<!--
+- Instruct `web`'s containers to share port 80 via a load-balanced network
+  called `webnet`. (Internally, the containers themselves publish to
+  `web`'s port 80 at an ephemeral port.)
+-->
+<ul>
+  <li><code class="highlighter-rouge">web</code> のコンテナーに対し、<code class="highlighter-rouge">webnet</code> という名前の負荷分散ネットワークを経由してポート 80 を共有するよう命令（内部では、コンテナー自身の一時的なポートとして <code class="highlighter-rouge">web</code> のポート 80 を公開 ）。</li>
+</ul>
+
+<!--
+- Define the `webnet` network with the default settings (which is a
+  load-balanced overlay network).
+-->
+<p>デフォルトの設定として <code class="highlighter-rouge">webnet</code> ネットワークを定義（負荷分散されるオーバレイネットワーク）。</p>
+
+<!--
+## Run your new load-balanced app
+-->
+<h2 id="新しい負荷分散アプリケーションの実行">新しい負荷分散アプリケーションの実行</h2>
+
+<!--
+Before we can use the `docker stack deploy` command we first run:
+-->
+<p><code class="highlighter-rouge">docker stack deploy</code> コマンドを実行する前に、以下を実行します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm init
 </code></pre></div></div>
 
+<!--
+>**Note**: We get into the meaning of that command in [part 4](/get-started/part4/).
+> If you don't run `docker swarm init` you get an error that "this node is not a swarm manager."
+-->
 <blockquote>
-  <p><strong>Note</strong>: We get into the meaning of that command in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">part 4</a>.
-If you don’t run <code class="highlighter-rouge">docker swarm init</code> you get an error that “this node is not a swarm manager.”</p>
+  <p><strong>メモ</strong></p>
+
+  <p>このコマンドの意味については <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">4 部</a>で説明します。
+<code class="highlighter-rouge">docker swarm init</code> コマンドを実行していないと、”this node is not a swarm manager” （このノードはスウォームマネージャーではありません）というエラーが出ることになります。</p>
 </blockquote>
 
-<p>Now let’s run it. You need to give your app a name. Here, it is set to
-<code class="highlighter-rouge">getstartedlab</code>:</p>
+<!--
+Now let's run it. You need to give your app a name. Here, it is set to
+`getstartedlab`:
+-->
+<p>次のコマンドを実行します。
+アプリには名前をつける必要があるので、ここでは <code class="highlighter-rouge">getstartedlab</code> と指定します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
 </code></pre></div></div>
 
-<p>Our single service stack is running 5 container instances of our deployed image
-on one host. Let’s investigate.</p>
+<!--
+Our single service stack is running 5 container instances of our deployed image
+on one host. Let's investigate.
+-->
+<p>1 つのサービススタックから、ホストにデプロイしたイメージに対するコンテナーインスタンスが５つ稼動しました。
+中身を確認してみましょう。</p>
 
-<p>Get the service ID for the one service in our application:</p>
+<!--
+Get the service ID for the one service in our application:
+-->
+<p>アプリケーション内に稼動しているサービスの ID を取得します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service <span class="nb">ls</span>
 </code></pre></div></div>
 
-<p>Look for output for the <code class="highlighter-rouge">web</code> service, prepended with your app name. If you
+<!--
+Look for output for the `web` service, prepended with your app name. If you
 named it the same as shown in this example, the name is
-<code class="highlighter-rouge">getstartedlab_web</code>. The service ID is listed as well, along with the number of
-replicas, image name, and exposed ports.</p>
+`getstartedlab_web`. The service ID is listed as well, along with the number of
+replicas, image name, and exposed ports.
+-->
+<p><code class="highlighter-rouge">web</code> サービスに関する情報を見てください。
+アプリ名が行先頭に表示されます。
+上で示した例と同じ名前をつけていれば <code class="highlighter-rouge">getstartedlab_web</code> が表示されたはずです。
+サービス ID をはじめ、レプリカ数、イメージ名、公開ポートもともに一覧表示されます。</p>
 
-<p>Alternatively, you can run <code class="highlighter-rouge">docker stack services</code>, followed by the name of
+<!--
+Alternatively, you can run `docker stack services`, followed by the name of
 your stack. The following example command lets you view all services associated with the
-<code class="highlighter-rouge">getstartedlab</code> stack:</p>
+`getstartedlab` stack:
+-->
+<p><code class="highlighter-rouge">docker stack services</code> を実行することもできます。
+コマンドにはスタック名も指定します。
+以下のコマンド例では、<code class="highlighter-rouge">getstartedlab</code> スタックに関連づいたサービスがすべて一覧表示されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack services getstartedlab
 ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
 bqpve1djnk0x        getstartedlab_web   replicated          5/5                 username/repo:tag   <span class="k">*</span>:4000-&gt;80/tcp
 </code></pre></div></div>
 
-<p>A single container running in a service is called a <strong>task</strong>. Tasks are given unique
-IDs that numerically increment, up to the number of <code class="highlighter-rouge">replicas</code> you defined in
-<code class="highlighter-rouge">docker-compose.yml</code>. List the tasks for your service:</p>
+<!--
+A single container running in a service is called a **task**. Tasks are given unique
+IDs that numerically increment, up to the number of `replicas` you defined in
+`docker-compose.yml`. List the tasks for your service:
+-->
+<p>1 つのサービス内に稼動している単一のコンテナーのことを<strong>タスク</strong>と呼びます。
+タスクにはユニークな ID がつけられます。
+この ID は <code class="highlighter-rouge">docker-compose.yml</code> 内に定義された <code class="highlighter-rouge">replicas</code> の値までの数値が加算されて割り当てられます。
+サービスに対するタスクの一覧を表示してみます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service ps getstartedlab_web
 </code></pre></div></div>
 
-<p>Tasks also show up if you just list all the containers on your system, though that
-is not filtered by service:</p>
+<!--
+Tasks also show up if you just list all the containers on your system, though that
+is not filtered by service:
+-->
+<p>タスクは、システム全体のコンテナー一覧を表示することでも確認することができます。
+ただしサービスごとに表示されるわけではありません。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-q</span>
 </code></pre></div></div>
 
-<p>You can run <code class="highlighter-rouge">curl -4 http://localhost:4000</code> several times in a row, or go to that URL in
-your browser and hit refresh a few times.</p>
+<!--
+You can run `curl -4 http://localhost:4000` several times in a row, or go to that URL in
+your browser and hit refresh a few times.
+-->
+<p><code class="highlighter-rouge">curl http://localhost</code> コマンドを順に数回実行するか、あるいはブラウザーでこの URL を表示して何回か再読み込みをしてみてください。</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app80-in-browser.png" alt="Hello World in browser" /></p>
+<!--
+![Hello World in browser](/get-started/images/app80-in-browser.png)
+-->
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app80-in-browser.png" alt="ブラウザー上の Hello World" /></p>
 
-<p>Either way, the container ID changes, demonstrating the
+<!--
+Either way, the container ID changes, demonstrating the
 load-balancing; with each request, one of the 5 tasks is chosen, in a
 round-robin fashion, to respond. The container IDs match your output from
-the previous command (<code class="highlighter-rouge">docker container ls -q</code>).</p>
+the previous command (`docker container ls -q`).
+-->
+<p>どちらの方法でもコンテナー ID が変化して、各リクエストごとに５つのレプリカのうちの１つがラウンドロビン方式により選ばれて応答します。
+これにより負荷分散が機能していることが分かります。
+コンテナー ID は先ほどのコマンド（<code class="highlighter-rouge">docker container ls -q</code>）の出力に合致しているはずです。</p>
 
-<p>To view all tasks of a stack, you can run <code class="highlighter-rouge">docker stack ps</code> followed by your app name, as shown in the following example:</p>
+<!--
+To view all tasks of a stack, you can run `docker stack ps` followed by your app name, as shown in the following example:
+-->
+<p>スタック内のタスクすべてを見るには <code class="highlighter-rouge">docker stack ps</code> を実行します。
+このコマンドにはアプリ名をつけます。
+以下がその実行例です。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack ps getstartedlab
 ID                  NAME                  IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
@@ -398,96 +541,170 @@ c4uuw5i6h02j        getstartedlab_web.3   username/repo:tag   docker-desktop    
 aocrb88ap8b0        getstartedlab_web.5   username/repo:tag   docker-desktop      Running             Running 9 minutes ago
 </code></pre></div></div>
 
+<!--
+> Running Windows 10?
+>
+> Windows 10 PowerShell should already have `curl` available, but if not you can
+> grab a Linux terminal emulator like
+> [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"},
+> or download
+> [wget for Windows](http://gnuwin32.sourceforge.net/packages/wget.htm)
+> which is very similar.
+-->
 <blockquote>
-  <p>Running Windows 10?</p>
+  <p>Windows 10 を利用していたら？</p>
 
-  <p>Windows 10 PowerShell should already have <code class="highlighter-rouge">curl</code> available, but if not you can
-grab a Linux terminal emulator like
-<a href="https://git-for-windows.github.io/" target="_blank" class="_">Git BASH</a>,
-or download
-<a href="http://gnuwin32.sourceforge.net/packages/wget.htm">wget for Windows</a>
-which is very similar.</p>
+  <p>Windows 10 の PowerShell では <code class="highlighter-rouge">curl</code> が利用可能となっています。
+利用できない場合には <a href="https://git-for-windows.github.io/" target="_blank" class="_">Git BASH</a>
+のような Linux ターミナルエミュレーターを使う方法があります。
+あるいは <a href="http://gnuwin32.sourceforge.net/packages/wget.htm">wget for Windows</a> を使うと <code class="highlighter-rouge">curl</code> と同様の作業ができます。</p>
 </blockquote>
 
+<!--
+> Slow response times?
+>
+> Depending on your environment's networking configuration, it may take up to 30
+> seconds for the containers
+> to respond to HTTP requests. This is not indicative of Docker or
+> swarm performance, but rather an unmet Redis dependency that we
+> address later in the tutorial. For now, the visitor counter isn't working
+> for the same reason; we haven't yet added a service to persist data.
+-->
 <blockquote>
-  <p>Slow response times?</p>
+  <p>レスポンスが遅い？</p>
 
-  <p>Depending on your environment’s networking configuration, it may take up to 30
-seconds for the containers
-to respond to HTTP requests. This is not indicative of Docker or
-swarm performance, but rather an unmet Redis dependency that we
-address later in the tutorial. For now, the visitor counter isn’t working
-for the same reason; we haven’t yet added a service to persist data.</p>
+  <p>利用している環境でのネットワーク設定によりますが、コンテナーが HTTP リクエストに応答するのに 30 秒くらいかかることがあります。
+これは Docker や スウォームの性能によるものではなく、Redis の依存関係が満たされていないためです。
+このことはチュートリアル内で後に説明します。
+ですから今の時点でアクセスカウンターは動作しません。
+まだデータを維持するためのサービスを作り出していないということです。</p>
 </blockquote>
 
-<h2 id="scale-the-app">Scale the app</h2>
+<!--
+## Scale the app
+-->
+<h2 id="アプリのスケーリング">アプリのスケーリング</h2>
 
-<p>You can scale the app by changing the <code class="highlighter-rouge">replicas</code> value in <code class="highlighter-rouge">docker-compose.yml</code>,
-saving the change, and re-running the <code class="highlighter-rouge">docker stack deploy</code> command:</p>
+<!--
+You can scale the app by changing the `replicas` value in `docker-compose.yml`,
+saving the change, and re-running the `docker stack deploy` command:
+-->
+<p><code class="highlighter-rouge">docker-compose.yml</code> の <code class="highlighter-rouge">replicas</code> の値を変更すれば、アプリのスケールを変更できます。
+変更を保存したら、<code class="highlighter-rouge">docker stack deploy</code> コマンドを再度実行します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
 </code></pre></div></div>
 
-<p>Docker performs an in-place update, no need to tear the stack down first or kill
-any containers.</p>
+<!--
+Docker performs an in-place update, no need to tear the stack down first or kill
+any containers.
+-->
+<p>Docker は直接書き換える（in-place）更新を行うので、スタックやコンテナーをあらかじめ停止しておく必要はありません。</p>
 
-<p>Now, re-run <code class="highlighter-rouge">docker container ls -q</code> to see the deployed instances reconfigured.
+<!--
+Now, re-run `docker container ls -q` to see the deployed instances reconfigured.
 If you scaled up the replicas, more tasks, and hence, more containers, are
-started.</p>
+started.
+-->
+<p>もう一度 <code class="highlighter-rouge">docker container ls -q</code> を実行してみると、デプロイしたインスタンスが再設定されたことが確認できます。
+レプリカをスケールアップしていれば、より多くのタスクが起動するので、つまりより多くのコンテナーが起動します。</p>
 
-<h3 id="take-down-the-app-and-the-swarm">Take down the app and the swarm</h3>
+<!--
+### Take down the app and the swarm
+-->
+<h3 id="アプリとスウォームの停止">アプリとスウォームの停止</h3>
 
+<!--
+* Take the app down with `docker stack rm`:
+-->
 <ul>
   <li>
-    <p>Take the app down with <code class="highlighter-rouge">docker stack rm</code>:</p>
+    <p><code class="highlighter-rouge">docker stack rm</code> を実行してアプリを停止します。</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack rm getstartedlab
 </code></pre></div>    </div>
   </li>
+</ul>
+
+<!--
+* Take down the swarm.
+-->
+<ul>
   <li>
-    <p>Take down the swarm.</p>
+    <p>スウォームを停止します。</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm leave --force
 </code></pre></div>    </div>
   </li>
 </ul>
 
-<p>It’s as easy as that to stand up and scale your app with Docker. You’ve taken a
+<!--
+It's as easy as that to stand up and scale your app with Docker. You've taken a
 huge step towards learning how to run containers in production. Up next, you
 learn how to run this app as a bonafide swarm on a cluster of Docker
-machines.</p>
+machines.
+-->
+<p>Docker においてはアプリケーションの起動もスケールアップも非常に簡単です。
+ここまでにコンテナーを実稼動させる方法を学びました。
+大きく前進しました。
+次に学ぶのは、複数の Docker マシンによるクラスター上にて、本当の意味でスウォームとしてのアプリを実行する方法です。</p>
 
+<!--
+> **Note**: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using [Docker
+Cloud](/docker-cloud/), or on any hardware or cloud provider you choose with
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition).
+-->
 <blockquote>
-  <p><strong>Note</strong>: Compose files like this are used to define applications with Docker, and can be uploaded to cloud providers using <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-cloud/">Docker
-Cloud</a>, or on any hardware or cloud provider you choose with
-<a href="https://www.docker.com/enterprise-edition">Docker Enterprise Edition</a>.</p>
+  <p><strong>メモ</strong>
+今回使ったような Compose ファイルは Docker においてアプリケーションを定義するために用います。
+そして <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-cloud/">Docker Cloud</a> を用いてクラウドプロバイダーへのアップロードを行います。
+つまり他のハードウェアや、<a href="https://www.docker.com/enterprise-edition">Docker エンタープライズエディション</a>において選定したクラウドプロバイダーへのアップロードを行うものです。</p>
 </blockquote>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" class="button outline-btn">On to “Part 4” &gt;&gt;</a></p>
+<!--
+[On to "Part 4" >>](/get-started/part4/){: class="button outline-btn"}
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" class="button outline-btn">4 部へ &gt;&gt;</a></p>
 
-<h2 id="recap-and-cheat-sheet-optional">Recap and cheat sheet (optional)</h2>
+<!--
+## Recap and cheat sheet (optional)
+-->
+<h2 id="まとめと早見表おまけ">まとめと早見表（おまけ）</h2>
 
-<p>Here’s <a href="https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip">a terminal recording of what was covered on this page</a>:</p>
+<!--
+Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip):
+-->
+<p><a href="https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip">このページで扱った端末操作の録画</a>がこちらです。</p>
 
 <script type="text/javascript" src="https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip.js" id="asciicast-b5gai4rnflh7r0kie01fx6lip" speed="2" async=""></script>
 
-<p>To recap, while typing <code class="highlighter-rouge">docker run</code> is simple enough, the true implementation
+<!--
+To recap, while typing `docker run` is simple enough, the true implementation
 of a container in production is running it as a service. Services codify a
-container’s behavior in a Compose file, and this file can be used to scale,
+container's behavior in a Compose file, and this file can be used to scale,
 limit, and redeploy our app. Changes to the service can be applied in place, as
 it runs, using the same command that launched the service:
-<code class="highlighter-rouge">docker stack deploy</code>.</p>
+`docker stack deploy`.
+-->
+<p>要するに <code class="highlighter-rouge">docker run</code> と入力するのが非常に簡単なことなのですが、実稼動させるコンテナーの真の実現方法は、これをサービスとして稼動させることです。
+サービスは Compose ファイルにおいてコンテナーの動作を定義します。
+このファイルによってアプリのスケールアップ、制限、再デプロイを実現します。
+サービスへの変更は、稼動中であろうとも適切に反映されます。
+その際のコマンドはサービスを起動させたときの <code class="highlighter-rouge">docker stack deploy</code> と同じようにして実現できます。</p>
 
-<p>Some commands to explore at this stage:</p>
+<!--
+Some commands to explore at this stage:
+-->
+<p>ここまでのコマンドをまとめます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack <span class="nb">ls</span>                                            <span class="c"># List stacks or apps</span>
-docker stack deploy <span class="nt">-c</span> &lt;composefile&gt; &lt;appname&gt;  <span class="c"># Run the specified Compose file</span>
-docker service <span class="nb">ls</span>                 <span class="c"># List running services associated with an app</span>
-docker service ps &lt;service&gt;                  <span class="c"># List tasks associated with an app</span>
-docker inspect &lt;task or container&gt;                   <span class="c"># Inspect task or container</span>
-docker container <span class="nb">ls</span> <span class="nt">-q</span>                                      <span class="c"># List container IDs</span>
-docker stack rm &lt;appname&gt;                             <span class="c"># Tear down an application</span>
-docker swarm leave <span class="nt">--force</span>      <span class="c"># Take down a single node swarm from the manager</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack <span class="nb">ls</span>                                         <span class="c"># スタックやアプリの一覧</span>
+docker stack deploy <span class="nt">-c</span> &lt;composefile&gt; &lt;appname&gt; <span class="c"># 指定する Compose ファイルの実行</span>
+docker service <span class="nb">ls</span>                           <span class="c"># アプリに関連する実行中サービス一覧</span>
+docker service ps &lt;service&gt;                         <span class="c"># アプリに関連するタスク一覧</span>
+docker inspect &lt;task or container&gt;                <span class="c"># タスクまたはコンテナーの調査</span>
+docker container <span class="nb">ls</span> <span class="nt">-q</span>                                    <span class="c"># コンテナー ID の一覧</span>
+docker stack rm &lt;appname&gt;                               <span class="c"># アプリケーションの停止</span>
+docker swarm leave <span class="nt">--force</span>          <span class="c"># マネージャーから単一ノードスウォームを停止</span>
 </code></pre></div></div>
 
 							<!-- tags -->
@@ -587,18 +804,18 @@ docker swarm leave <span class="nt">--force</span>      <span class="c"># Take d
   <li><a href="#前提条件" class="nomunge">前提条件</a></li>
   <li><a href="#はじめに" class="nomunge">はじめに</a></li>
   <li><a href="#サービスについて" class="nomunge">サービスについて</a></li>
-  <li><a href="#your-first-docker-composeyml-file" class="nomunge">Your first docker-compose.yml file</a>
+  <li><a href="#初めての-docker-composeyml-ファイル" class="nomunge">初めての docker-compose.yml ファイル</a>
     <ul>
       <li><a href="#docker-composeyml" class="nomunge">docker-compose.yml</a></li>
     </ul>
   </li>
-  <li><a href="#run-your-new-load-balanced-app" class="nomunge">Run your new load-balanced app</a></li>
-  <li><a href="#scale-the-app" class="nomunge">Scale the app</a>
+  <li><a href="#新しい負荷分散アプリケーションの実行" class="nomunge">新しい負荷分散アプリケーションの実行</a></li>
+  <li><a href="#アプリのスケーリング" class="nomunge">アプリのスケーリング</a>
     <ul>
-      <li><a href="#take-down-the-app-and-the-swarm" class="nomunge">Take down the app and the swarm</a></li>
+      <li><a href="#アプリとスウォームの停止" class="nomunge">アプリとスウォームの停止</a></li>
     </ul>
   </li>
-  <li><a href="#recap-and-cheat-sheet-optional" class="nomunge">Recap and cheat sheet (optional)</a></li>
+  <li><a href="#まとめと早見表おまけ" class="nomunge">まとめと早見表（おまけ）</a></li>
 </ul>
 
 
