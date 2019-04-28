@@ -1269,7 +1269,7 @@ var pages = [
 ,
 {
 "url":"/install/linux/docker-ce/fedora/",
-"title":"Get Docker CE for Fedora",
+"title":"Docker CE の入手（Fedora 向け）",
 "description":"Instructions for installing Docker CE on Fedora",
 "keywords":"requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update"
 }
