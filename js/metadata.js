@@ -212,7 +212,7 @@ var pages = [
 ,
 {
 "url":"/install/linux/docker-ce/binaries/",
-"title":"Install Docker CE from binaries",
+"title":"Docker CE の入手（バイナリパッケージ）",
 "description":"Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.",
 "keywords":"binaries, installation, docker, documentation, linux"
 }
@@ -311,7 +311,7 @@ var pages = [
 {
 "url":"/install/linux/docker-ce/centos/",
 "title":"Docker CE の入手（CentOS 向け）",
-"description":"Instructions for installing Docker CE on CentOS",
+"description":"CentOS 上に Docker CE をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -1277,7 +1277,7 @@ var pages = [
 {
 "url":"/install/linux/docker-ce/fedora/",
 "title":"Docker CE の入手（Fedora 向け）",
-"description":"Instructions for installing Docker CE on Fedora",
+"description":"Fedora 上に Docker CE をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -2026,7 +2026,7 @@ var pages = [
 {
 "url":"/compose/install/",
 "title":"Docker Compose のインストール",
-"description":"How to install Docker Compose",
+"description":"Docker Compose のインストール方法。",
 "keywords":"compose, orchestration, install, installation, docker, documentation"
 }
 ,
@@ -4041,8 +4041,8 @@ var pages = [
 ,
 {
 "url":"/install/linux/docker-ce/ubuntu/",
-"title":"Get Docker CE for Ubuntu",
-"description":"Instructions for installing Docker CE on Ubuntu",
+"title":"Docker CE の入手（Ubuntu 向け）",
+"description":"Ubuntu 上に Docker CE をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
 }
 ,
