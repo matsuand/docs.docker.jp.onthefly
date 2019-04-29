@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-19 11:21:43 +0900 -->
+<!-- Page generated 2019-04-29 13:15:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-19T11:21:43+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-29T13:15:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="はじめよう 4部: スウォーム"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Install Docker version 1.13 or higher. Get Docker Compose as described in Part 3 prerequisites. Get Docker..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールしていること。 3 部の前提条件で説明した Docker Compose を入手していること。 Docker Machine を入手していること。 Docker Desktop for Mac と..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-19T11:21:43+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-04-29T13:15:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration">
@@ -179,7 +179,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    20 分
+    22 分
   
 </span>
 
@@ -196,99 +196,202 @@
 
 <h2 id="前提条件">前提条件</h2>
 
+<!--
+- [Install Docker version 1.13 or higher](/engine/installation/index.md).
+-->
 <ul>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/index.md">Install Docker version 1.13 or higher</a>.</p>
-  </li>
-  <li>
-    <p>Get <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a> as described in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#prerequisites">Part 3 prerequisites</a>.</p>
-  </li>
-  <li>
-    <p>Get <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/overview.md">Docker Machine</a>, which is pre-installed with
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/index.md">Docker Desktop for Mac</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/index.md">Docker Desktop for
-Windows</a>, but on Linux systems you need to
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/install-machine/#installing-machine-directly">install it directly</a>. On pre Windows 10 systems <em>without Hyper-V</em>, as well as Windows 10 Home, use
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a>.</p>
-  </li>
-  <li>
-    <p>Read the orientation in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">Part 1</a>.</p>
-  </li>
-  <li>
-    <p>Learn how to create containers in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">Part 2</a>.</p>
-  </li>
-  <li>
-    <p>Make sure you have published the <code class="highlighter-rouge">friendlyhello</code> image you created by
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">pushing it to a registry</a>. We use that
-shared image here.</p>
-  </li>
-  <li>
-    <p>Be sure your image works as a deployed container. Run this command,
-slotting in your info for <code class="highlighter-rouge">username</code>, <code class="highlighter-rouge">repo</code>, and <code class="highlighter-rouge">tag</code>: <code class="highlighter-rouge">docker run -p 80:80
-username/repo:tag</code>, then visit <code class="highlighter-rouge">http://localhost/</code>.</p>
-  </li>
-  <li>
-    <p>Have a copy of your <code class="highlighter-rouge">docker-compose.yml</code> from <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">Part 3</a> handy.</p>
-  </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/index.md">Docker バージョン 1.13 またはそれ以上をインストールしていること</a>。</li>
 </ul>
 
-<h2 id="introduction">Introduction</h2>
+<!--
+- Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#prerequisites">3 部の前提条件</a>で説明した <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a> を入手していること。</li>
+</ul>
 
-<p>In <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">part 3</a>, you took an app you wrote in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">part 2</a>, and
+<!--
+- Get [Docker Machine](/machine/overview.md), which is pre-installed with
+[Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for
+Windows](/docker-for-windows/index.md), but on Linux systems you need to
+[install it directly](/machine/install-machine/#installing-machine-directly). On pre Windows 10 systems _without Hyper-V_, as well as Windows 10 Home, use
+[Docker Toolbox](/toolbox/overview.md).
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/overview.md">Docker Machine</a> を入手していること。
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/index.md">Docker Desktop for Mac</a> と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/index.md">Docker Desktop for Windows</a> ではインストール済みであるが Linux システムでは<a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/install-machine/#installing-machine-directly">直接インストール</a>が必要。
+Widows 10 Home のように Windows 10 システム上に Hyper-V が入っていない場合は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a> が必要。</li>
+</ul>
+
+<!--
+- Read the orientation in [Part 1](/get-started/).
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">1 部</a>の概要説明を読んでいること。</li>
+</ul>
+
+<!--
+- Learn how to create containers in [Part 2](/get-started/part2/).
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で説明した、コンテナーの生成方法を理解していること。</li>
+</ul>
+
+<!--
+- Make sure you have published the `friendlyhello` image you created by
+[pushing it to a registry](/get-started/part2.md#share-your-image). We use that
+shared image here.
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">レジストリに送信</a>して作成した <code class="highlighter-rouge">friendlyhello</code> イメージが共有可能であることを確認します。
+ここではその共有イメージを使います。</li>
+</ul>
+
+<!--
+- Be sure your image works as a deployed container. Run this command,
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
+username/repo:tag`, then visit `http://localhost/`.
+-->
+<ul>
+  <li>デプロイしたコンテナーとしてイメージが動作することを確認します。
+以下のコマンドを実行してください。
+<code class="highlighter-rouge">docker run -p 80:80 username/repo:tag</code>
+ここで username、repo、tag の部分は各環境に合わせて書き換えてください。
+そして <code class="highlighter-rouge">http://localhost/</code> にアクセスします。</li>
+</ul>
+
+<!--
+- Have a copy of your `docker-compose.yml` from [Part 3](/get-started/part3/) handy.
+-->
+<ul>
+  <li><a href="part3">3 部</a>で扱った <code class="highlighter-rouge">docker-compose.yml</code> ファイルが用意できていること。</li>
+</ul>
+
+<!--
+## Introduction
+-->
+<h2 id="はじめに">はじめに</h2>
+
+<!--
+In [part 3](/get-started/part3/), you took an app you wrote in [part 2](/get-started/part2/), and
 defined how it should run in production by turning it into a service, scaling it
-up 5x in the process.</p>
+up 5x in the process.
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">3 部</a>では <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で書いたアプリをもとに、本番環境において実行可能なサービスとして調整したものを定義し、プロセスを 5 倍にスケールアップしました。</p>
 
-<p>Here in part 4, you deploy this application onto a cluster, running it on
+<!--
+Here in part 4, you deploy this application onto a cluster, running it on
 multiple machines. Multi-container, multi-machine applications are made possible
-by joining multiple machines into a “Dockerized” cluster called a <strong>swarm</strong>.</p>
+by joining multiple machines into a "Dockerized" cluster called a **swarm**.
+-->
+<p>この 4 部では、デプロイするアプリケーションをクラスターにして、複数のマシン上で実行します。
+複数コンテナー、複数マシンによるアプリケーションは、各マシンを「Docker化」（Dockerized）したクラスター、すなわち<strong>スウォーム</strong>（swarm）と呼ばれるものに集約することによって実現されます。</p>
 
-<h2 id="understanding-swarm-clusters">Understanding Swarm clusters</h2>
+<!--
+## Understanding Swarm clusters
+-->
+<h2 id="スウォームクラスターの理解">スウォームクラスターの理解</h2>
 
-<p>A swarm is a group of machines that are running Docker and joined into
+<!--
+A swarm is a group of machines that are running Docker and joined into
 a cluster. After that has happened, you continue to run the Docker commands
-you’re used to, but now they are executed on a cluster by a <strong>swarm manager</strong>.
+you're used to, but now they are executed on a cluster by a **swarm manager**.
 The machines in a swarm can be physical or virtual. After joining a swarm, they
-are referred to as <strong>nodes</strong>.</p>
+are referred to as **nodes**.
+-->
+<p>スウォームとは Docker の動作するマシンがひとまとまりとなってクラスターを構成するものです。
+スウォームを使うようになると、これまで使ってきた Docker コマンドは引き続き用いることにはなりますが、今度はクラスターに対しての<strong>スウォームマネージャー</strong>として処理操作を行うものとなります。
+スウォーム内のマシンは物理マシン、仮想マシンのいずれでも構いません。
+マシンをスウォームに含めた後は<strong>ノード</strong>として参照されます。</p>
 
-<p>Swarm managers can use several strategies to run containers, such as “emptiest
-node” -- which fills the least utilized machines with containers. Or “global”,
+<!--
+Swarm managers can use several strategies to run containers, such as "emptiest
+node" -- which fills the least utilized machines with containers. Or "global",
 which ensures that each machine gets exactly one instance of the specified
 container. You instruct the swarm manager to use these strategies in the Compose
-file, just like the one you have already been using.</p>
+file, just like the one you have already been using.
+-->
+<p>スウォームマネージャーでは、コンテナーの実行にあたってストラテジーというものが指定できます。
+たとえば「emptiest node」（最も空いているノード）です。
+これは最も使われていないマシンをコンテナーに割り当てます。
+「global」というものは、個々のマシンには、指定されたコンテナーの１インスタンスのみを割り当てます。
+スウォームマネージャーに対してのストラテジー指定は Compose ファイルにて行います。
+既に利用してきたファイルです。</p>
 
-<p>Swarm managers are the only machines in a swarm that can execute your commands,
-or authorize other machines to join the swarm as <strong>workers</strong>. Workers are just
+<!--
+Swarm managers are the only machines in a swarm that can execute your commands,
+or authorize other machines to join the swarm as **workers**. Workers are just
 there to provide capacity and do not have the authority to tell any other
-machine what it can and cannot do.</p>
+machine what it can and cannot do.
+-->
+<p>スウォームマネージャーは、スウォーム内でコマンド実行ができる唯一のマシンです。
+そして他のマシンのスウォームへの参加を認証します。
+スウォームに参加したマシンは<strong>ワーカー</strong>（worker）と呼ばれます。
+ワーカーは処理提供するために加えられたわけですが、他のマシンの機能を制約する権限を持つわけではありません。</p>
 
-<p>Up until now, you have been using Docker in a single-host mode on your local
-machine. But Docker also can be switched into <strong>swarm mode</strong>, and that’s what
+<!--
+Up until now, you have been using Docker in a single-host mode on your local
+machine. But Docker also can be switched into **swarm mode**, and that's what
 enables the use of swarms. Enabling swarm mode instantly makes the current
 machine a swarm manager. From then on, Docker runs the commands you execute
-on the swarm you’re managing, rather than just on the current machine.</p>
+on the swarm you're managing, rather than just on the current machine.
+-->
+<p>これまではローカルマシン上において、シングルホストモードにより Docker を利用してきました。
+Docker は<strong>スウォームモード</strong>に切り替えることが可能であり、このモードにすることでスウォームが利用できるようになります。
+スウォームを有効にした時点で現在のマシンがスウォームマネージャーとなります。
+これ以降の Docker に対するコマンドはスウォームに対して実行されます。
+もうそれまでのマシンに対して実行するものではなくなります。</p>
 
-<h2 id="set-up-your-swarm">Set up your swarm</h2>
+<!--
+## Set up your swarm
+-->
+<h2 id="スウォームのセットアップ">スウォームのセットアップ</h2>
 
-<p>A swarm is made up of multiple nodes, which can be either physical or virtual
-machines. The basic concept is simple enough: run <code class="highlighter-rouge">docker swarm init</code> to enable
+<!--
+A swarm is made up of multiple nodes, which can be either physical or virtual
+machines. The basic concept is simple enough: run `docker swarm init` to enable
 swarm mode and make your current machine a swarm manager, then run
-<code class="highlighter-rouge">docker swarm join</code> on other machines to have them join the swarm as workers.
+`docker swarm join` on other machines to have them join the swarm as workers.
 Choose a tab below to see how this plays out in various contexts. We use VMs
-to quickly create a two-machine cluster and turn it into a swarm.</p>
+to quickly create a two-machine cluster and turn it into a swarm.
+-->
+<p>スウォームは複数のノードにより構成されます。
+それは物理マシン、仮想マシンのどちらでも構いません。
+基本的な考え方はとても簡単です。
+<code class="highlighter-rouge">docker swarm init</code> の実行によりスウォームモードが有効となり、現在のマシンがスウォームマネージャーになります。
+その後に他のマシンから <code class="highlighter-rouge">docker swarm join</code> を実行すると、そのマシンはワーカーとしてスウォームに参加できます。
+この仕組みがさまざまな環境においてどのように動作するか、以下のタブを切り替えて確認してください。
+以下では VM を用いて、２つのマシンによるクラスターをさっと作り出して、これをスウォームに切り替えます。</p>
 
-<h3 id="create-a-cluster">Create a cluster</h3>
+<!--
+### Create a cluster
+-->
+<h3 id="クラスターの生成">クラスターの生成</h3>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
-  <li><a data-toggle="tab" href="#localwin">Local VMs (Windows 10/Hyper-V)</a></li>
+  <li class="active"><a data-toggle="tab" href="#local">ローカル VM (Mac, Linux, Windows 7 または 8)</a></li>
+  <li><a data-toggle="tab" href="#localwin">ローカル VM (Windows 10/Hyper-V)</a></li>
 </ul>
 <div class="tab-content">
   <div id="local" class="tab-pane fade in active">
-    <h4 id="vms-on-your-local-machine-mac-linux-windows-7-and-8">VMs on your local machine (Mac, Linux, Windows 7 and 8)</h4>
-    <p>You need a hypervisor that can create virtual machines (VMs), so <a href="https://www.virtualbox.org/wiki/Downloads">install Oracle VirtualBox</a> for your machine’s OS.</p>
+    <!--
+#### VMs on your local machine (Mac, Linux, Windows 7 and 8)
+-->
+    <h4 id="ローカルマシン上の-vmmac-linux-windows-7-または-8">ローカルマシン上の VM（Mac, Linux, Windows 7 または 8）</h4>
+    <!--
+You need a hypervisor that can create virtual machines (VMs), so
+[install Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your
+machine's OS.
+-->
+    <p>仮想マシン（virtual machine; VM）を生成するにはハイパーバイザーが必要です。 利用している OS に <a href="https://www.virtualbox.org/wiki/Downloads">Oracle VirtualBox</a> をインストールしてください。</p>
     <blockquote>
-      <p><strong>Note</strong>: If you are on a Windows system that has Hyper-V installed, such as Windows 10, there is no need to install VirtualBox and you should use Hyper-V instead. View the instructions for Hyper-V systems by clicking the Hyper-V tab above. If you are using <a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a>, you should already have VirtualBox installed as part of it, so you are good to go.</p>
+      <p><strong>メモ</strong></p>
+      <p>Windows 10 のように Hyper-V が搭載された Windows システムの場合、VirtualBox のインストールは不要です。 かわりに Hyper-V を利用してください。 上記の Hyper-V に関するタブをクリックして Hyper-V システムの手順を参照してください。 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a> を利用している場合は、その一部としてすでに VirtualBox がインストールされるため、このまま先に進んでください。</p>
     </blockquote>
-    <p>Now, create a couple of VMs using <code class="highlighter-rouge">docker-machine</code>, using the VirtualBox driver:</p>
+    <!--
+Now, create a couple of VMs using `docker-machine`, using the VirtualBox driver:
+-->
+    <p>次に <code class="highlighter-rouge">docker-machine</code> を使って 2 つの仮想マシンを作成します。 ここでは VirtualBox ドライバーを使います。</p>
     <div class="language-shell highlighter-rouge">
       <div class="highlight">
         <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine create --driver virtualbox myvm1
@@ -299,21 +402,43 @@ docker-machine create --driver virtualbox myvm2
   </div>
   <div id="localwin" class="tab-pane fade">
 
-    <h4 id="vms-on-your-local-machine-windows-10">VMs on your local machine (Windows 10)</h4>
+    <!--
+#### VMs on your local machine (Windows 10)
+-->
+    <h4 id="ローカルマシン上の-vmwindows-10">ローカルマシン上の VM（Windows 10）</h4>
 
-    <p>First, quickly create a virtual switch for your virtual machines (VMs) to share, so they can connect to each other.</p>
+    <!--
+First, quickly create a virtual switch for your virtual machines (VMs) to share,
+so they can connect to each other.
+-->
+    <p>はじめに、仮想マシン（virtual machine; VM）が共有する仮想スイッチを作成して、仮想マシンが互いに接続できるようにします。</p>
 
+    <!--
+1. Launch Hyper-V Manager
+2. Click **Virtual Switch Manager** in the right-hand menu
+3. Click **Create Virtual Switch** of type **External**
+4. Give it the name `myswitch`, and check the box to share your host machine's
+   active network adapter
+-->
     <ol>
-      <li>Launch Hyper-V Manager</li>
-      <li>Click <strong>Virtual Switch Manager</strong> in the right-hand menu</li>
-      <li>Click <strong>Create Virtual Switch</strong> of type <strong>External</strong></li>
-      <li>Give it the name <code class="highlighter-rouge">myswitch</code>, and check the box to share your host machine’s active network adapter</li>
+      <li>Hyper-V マネージャーを起動</li>
+      <li>右側のメニューにある <strong>仮想スイッチ マネージャー</strong> をクリック</li>
+      <li><strong>仮想スイッチの作成</strong> のタイプ <strong>外部</strong> をクリック</li>
+      <li><code class="highlighter-rouge">myswitch</code> という名称に設定し、ホストマシンのアクティブネットワークアダプタとの共有ボックスにチェックを入れる</li>
     </ol>
 
-    <p>Now, create a couple of VMs using our node management tool, <code class="highlighter-rouge">docker-machine</code>:</p>
+    <!--
+Now, create a couple of VMs using our node management tool,
+`docker-machine`:
+-->
+    <p>次にノード管理ツール <code class="highlighter-rouge">docker-machine</code> を使い 2 つの仮想マシンを作成します。</p>
 
+    <!--
+> **Note**: you need to run the following as administrator or else you don't have the permission to create hyperv VMs!
+-->
     <blockquote>
-      <p><strong>Note</strong>: you need to run the following as administrator or else you don’t have the permission to create hyperv VMs!</p>
+      <p><strong>メモ</strong></p>
+      <p>以下のコマンドは管理者権限で実行する必要があります。 管理者権限がないと Hyper-V の仮想マシンを生成することができません。</p>
     </blockquote>
 
     <div class="language-shell highlighter-rouge">
@@ -328,20 +453,38 @@ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
   <hr />
 </div>
 
-<h4 id="list-the-vms-and-get-their-ip-addresses">List the VMs and get their IP addresses</h4>
+<!--
+#### List the VMs and get their IP addresses
+-->
+<h4 id="vm-の一覧および各-ip-アドレスの取得">VM の一覧および各 IP アドレスの取得</h4>
 
-<p>You now have two VMs created, named <code class="highlighter-rouge">myvm1</code> and <code class="highlighter-rouge">myvm2</code>.</p>
+<!--
+You now have two VMs created, named `myvm1` and `myvm2`.
+-->
+<p>2 つ作り上げた VM の名前はそれぞれ <code class="highlighter-rouge">myvm1</code>、<code class="highlighter-rouge">myvm2</code> です。</p>
 
-<p>Use this command to list the machines and get their IP addresses.</p>
+<!--
+Use this command to list the machines and get their IP addresses.
+-->
+<p>以下のコマンドを使って、マシンおよび IP アドレスの一覧を得ます。</p>
 
+<!--
+> **Note**: you need to run the following as administrator or else you don't get any resonable output (only "UNKNOWN").
+-->
 <blockquote>
-  <p><strong>Note</strong>: you need to run the following as administrator or else you don’t get any resonable output (only “UNKNOWN”).</p>
+  <p><strong>メモ</strong></p>
+
+  <p>以下のコマンドは管理者権限で実行する必要があります。
+管理者権限がないと有効な情報を得ることができません（”UNKNOWN” が出力されるだけです）。</p>
 </blockquote>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine <span class="nb">ls</span>
 </code></pre></div></div>
 
-<p>Here is example output from this command.</p>
+<!--
+Here is example output from this command.
+-->
+<p>以下はこのコマンドの出力例です。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine <span class="nb">ls
 </span>NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
@@ -349,14 +492,27 @@ myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.
 myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce
 </code></pre></div></div>
 
-<h4 id="initialize-the-swarm-and-add-nodes">Initialize the swarm and add nodes</h4>
+<!--
+#### Initialize the swarm and add nodes
+-->
+<h4 id="スウォームの初期化とノードの追加">スウォームの初期化とノードの追加</h4>
 
-<p>The first machine acts as the manager, which executes management commands
-and authenticates workers to join the swarm, and the second is a worker.</p>
+<!--
+The first machine acts as the manager, which executes management commands
+and authenticates workers to join the swarm, and the second is a worker.
+-->
+<p>1 つめのマシンはマネージャーとして動作します。
+そして管理コマンドの実行と、このスウォームへ参加しようとするワーカーを認証します。
+2 つめのマシンがそのワーカーです。</p>
 
-<p>You can send commands to your VMs using <code class="highlighter-rouge">docker-machine ssh</code>. Instruct <code class="highlighter-rouge">myvm1</code>
-to become a swarm manager with <code class="highlighter-rouge">docker swarm init</code> and look for output like
-this:</p>
+<!--
+You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
+to become a swarm manager with `docker swarm init` and look for output like
+this:
+-->
+<p><code class="highlighter-rouge">docker-machine ssh</code> を利用すると VM に対してコマンドを送ることができます。
+<code class="highlighter-rouge">myvm1</code> に対してスウォームマネージャーとなるように指示するために <code class="highlighter-rouge">docker swarm init</code> を実行します。
+その出力は以下のようになります。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine ssh myvm1 <span class="s2">"docker swarm init --advertise-addr &lt;myvm1 ip&gt;"</span>
 Swarm initialized: current node &lt;node ID&gt; is now a manager.
@@ -370,32 +526,59 @@ To add a worker to this swarm, run the following <span class="nb">command</span>
 To add a manager to this swarm, run <span class="s1">'docker swarm join-token manager'</span> and follow the instructions.
 </code></pre></div></div>
 
+<!--
+> Ports 2377 and 2376
+>
+> Always run `docker swarm init` and `docker swarm join` with port 2377
+> (the swarm management port), or no port at all and let it take the default.
+>
+> The machine IP addresses returned by `docker-machine ls` include port 2376,
+> which is the Docker daemon port. Do not use this port or
+> [you may experience errors](https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2){: target="_blank" class="_"}.
+-->
 <blockquote>
-  <p>Ports 2377 and 2376</p>
+  <p>ポート 2377 と 2376</p>
 
-  <p>Always run <code class="highlighter-rouge">docker swarm init</code> and <code class="highlighter-rouge">docker swarm join</code> with port 2377
-(the swarm management port), or no port at all and let it take the default.</p>
+  <p><code class="highlighter-rouge">docker swarm init</code> と <code class="highlighter-rouge">docker swarm join</code> は必ずポート 2377 で実行してください。
+他にポートはないので、これをデフォルトとしてください。</p>
 
-  <p>The machine IP addresses returned by <code class="highlighter-rouge">docker-machine ls</code> include port 2376,
-which is the Docker daemon port. Do not use this port or
-<a href="https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2" target="_blank" class="_">you may experience errors</a>.</p>
+  <p><code class="highlighter-rouge">docker-machine ls</code> の出力結果にあるマシン IP アドレスは、ポート 2376 と示されています。
+これは Docker デーモン用のポートです。
+このポートを他に利用しないでください。
+利用してしまうと<a href="https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2" target="_blank" class="_">エラーが発生します</a>。</p>
 </blockquote>
 
+<!--
+> Having trouble using SSH? Try the --native-ssh flag
+>
+> Docker Machine has [the option to let you use your own system's SSH](/machine/reference/ssh/#different-types-of-ssh), if
+> for some reason you're having trouble sending commands to your Swarm manager. Just specify the
+> `--native-ssh` flag when invoking the `ssh` command:
+>
+> ```
+> docker-machine --native-ssh ssh myvm1 ...
+> ```
+-->
 <blockquote>
-  <p>Having trouble using SSH? Try the --native-ssh flag</p>
+  <p>SSH でトラブル？ フラグ --native-ssh を試す</p>
 
-  <p>Docker Machine has <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/reference/ssh/#different-types-of-ssh">the option to let you use your own system’s SSH</a>, if
-for some reason you’re having trouble sending commands to your Swarm manager. Just specify the
-<code class="highlighter-rouge">--native-ssh</code> flag when invoking the <code class="highlighter-rouge">ssh</code> command:</p>
+  <p>Docker Machine には、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/reference/ssh/#different-types-of-ssh">システム内の SSH の利用を指示するオプション</a>があります。
+スウォームマネージャーへコマンドを送る際に、何らかの理由で処理に失敗した場合は、<code class="highlighter-rouge">ssh</code> コマンドを実行するときに <code class="highlighter-rouge">--native-ssh</code> フラグを指定して実行してください。</p>
 
   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine --native-ssh ssh myvm1 ...
 </code></pre></div>  </div>
 </blockquote>
 
-<p>As you can see, the response to <code class="highlighter-rouge">docker swarm init</code> contains a pre-configured
-<code class="highlighter-rouge">docker swarm join</code> command for you to run on any nodes you want to add. Copy
-this command, and send it to <code class="highlighter-rouge">myvm2</code> via <code class="highlighter-rouge">docker-machine ssh</code> to have <code class="highlighter-rouge">myvm2</code>
-join your new swarm as a worker:</p>
+<!--
+As you can see, the response to `docker swarm init` contains a pre-configured
+`docker swarm join` command for you to run on any nodes you want to add. Copy
+this command, and send it to `myvm2` via `docker-machine ssh` to have `myvm2`
+join your new swarm as a worker:
+-->
+<p>上で見たように <code class="highlighter-rouge">docker swarm init</code> の出力結果に <code class="highlighter-rouge">docker swarm join</code> コマンドの準備ができていることが示されています。
+このスウォームに加えたいノード上で実行できます。
+コマンドをコピーしたら <code class="highlighter-rouge">docker-machine ssh</code> コマンド経由で <code class="highlighter-rouge">myvm2</code> にコマンドを送ってください。
+<code class="highlighter-rouge">myvm2</code> がスウォームにおけるワーカーとして加わることになります。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine ssh myvm2 <span class="s2">"docker swarm join </span><span class="se">\</span><span class="s2">
 --token &lt;token&gt; </span><span class="se">\</span><span class="s2">
@@ -404,9 +587,15 @@ join your new swarm as a worker:</p>
 This node joined a swarm as a worker.
 </code></pre></div></div>
 
-<p>Congratulations, you have created your first swarm!</p>
+<!--
+Congratulations, you have created your first swarm!
+-->
+<p>おめでとうございます。はじめてのスウォーム作りができました。</p>
 
-<p>Run <code class="highlighter-rouge">docker node ls</code> on the manager to view the nodes in this swarm:</p>
+<!--
+Run `docker node ls` on the manager to view the nodes in this swarm:
+-->
+<p>マネージャー上で <code class="highlighter-rouge">docker node ls</code> を実行すると、スウォーム内のノードを見ることができます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine ssh myvm1 <span class="s2">"docker node ls"</span>
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
@@ -414,13 +603,21 @@ brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
 rihwohkh3ph38fhillhhb84sk <span class="k">*</span>   myvm1               Ready               Active              Leader
 </code></pre></div></div>
 
+<!--
+> Leaving a swarm
+>
+> If you want to start over, you can run `docker swarm leave` from each node.
+-->
 <blockquote>
-  <p>Leaving a swarm</p>
+  <p>スウォームから去る（leave）</p>
 
-  <p>If you want to start over, you can run <code class="highlighter-rouge">docker swarm leave</code> from each node.</p>
+  <p>もう一度やり直したい場合は、個々のノードから <code class="highlighter-rouge">docker swarm leave</code> を実行します。</p>
 </blockquote>
 
-<h2 id="deploy-your-app-on-the-swarm-cluster">Deploy your app on the swarm cluster</h2>
+<!--
+## Deploy your app on the swarm cluster
+-->
+<h2 id="スウォームクラスター上にアプリをデプロイ">スウォームクラスター上にアプリをデプロイ</h2>
 
 <p>The hard part is over. Now you just repeat the process you used in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">part
 3</a> to deploy on your new swarm. Just remember that only swarm managers
@@ -867,30 +1064,30 @@ docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</s
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#前提条件" class="nomunge">前提条件</a></li>
-  <li><a href="#introduction" class="nomunge">Introduction</a></li>
-  <li><a href="#understanding-swarm-clusters" class="nomunge">Understanding Swarm clusters</a></li>
-  <li><a href="#set-up-your-swarm" class="nomunge">Set up your swarm</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#前提条件" class="nomunge">前提条件</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#はじめに" class="nomunge">はじめに</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#スウォームクラスターの理解" class="nomunge">スウォームクラスターの理解</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#スウォームのセットアップ" class="nomunge">スウォームのセットアップ</a>
     <ul>
-      <li><a href="#create-a-cluster" class="nomunge">Create a cluster</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#クラスターの生成" class="nomunge">クラスターの生成</a></li>
     </ul>
   </li>
-  <li><a href="#deploy-your-app-on-the-swarm-cluster" class="nomunge">Deploy your app on the swarm cluster</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#スウォームクラスター上にアプリをデプロイ" class="nomunge">スウォームクラスター上にアプリをデプロイ</a>
     <ul>
-      <li><a href="#configure-a-docker-machine-shell-to-the-swarm-manager" class="nomunge">Configure a docker-machine shell to the swarm manager</a></li>
-      <li><a href="#deploy-the-app-on-the-swarm-manager" class="nomunge">Deploy the app on the swarm manager</a></li>
-      <li><a href="#accessing-your-cluster" class="nomunge">Accessing your cluster</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager" class="nomunge">Configure a docker-machine shell to the swarm manager</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#deploy-the-app-on-the-swarm-manager" class="nomunge">Deploy the app on the swarm manager</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#accessing-your-cluster" class="nomunge">Accessing your cluster</a></li>
     </ul>
   </li>
-  <li><a href="#iterating-and-scaling-your-app" class="nomunge">Iterating and scaling your app</a></li>
-  <li><a href="#cleanup-and-reboot" class="nomunge">Cleanup and reboot</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#iterating-and-scaling-your-app" class="nomunge">Iterating and scaling your app</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#cleanup-and-reboot" class="nomunge">Cleanup and reboot</a>
     <ul>
-      <li><a href="#stacks-and-swarms" class="nomunge">Stacks and swarms</a></li>
-      <li><a href="#unsetting-docker-machine-shell-variable-settings" class="nomunge">Unsetting docker-machine shell variable settings</a></li>
-      <li><a href="#restarting-docker-machines" class="nomunge">Restarting Docker machines</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#stacks-and-swarms" class="nomunge">Stacks and swarms</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#unsetting-docker-machine-shell-variable-settings" class="nomunge">Unsetting docker-machine shell variable settings</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#restarting-docker-machines" class="nomunge">Restarting Docker machines</a></li>
     </ul>
   </li>
-  <li><a href="#recap-and-cheat-sheet-optional" class="nomunge">Recap and cheat sheet (optional)</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#recap-and-cheat-sheet-optional" class="nomunge">Recap and cheat sheet (optional)</a></li>
 </ul>
 
 

@@ -1240,6 +1240,13 @@ var pages = [
 }
 ,
 {
+"url":"/kitematic/faq/",
+"title":"Kitematic: Frequently asked questions (FAQ)",
+"description":"Documentation covering common questions users have about Kitematic",
+"keywords":"docker, documentation, about, technology, kitematic, gui"
+}
+,
+{
 "url":"/docker-for-mac/faqs/",
 "title":"Frequently asked questions (FAQ)",
 "description":"Frequently asked questions",
@@ -1898,6 +1905,13 @@ var pages = [
 }
 ,
 {
+"url":"/kitematic/",
+"title":"Kitematic",
+"description":"Documentation that provides an overview of Kitematic and installation instructions",
+"keywords":"docker, documentation, about, technology, kitematic, gui"
+}
+,
+{
 "url":"/docker-for-azure/",
 "title":"Docker for Azure setup & prerequisites",
 "description":"Setup & Prerequisites",
@@ -2105,6 +2119,13 @@ var pages = [
 "title":"docker-compose kill",
 "description":"Forces running containers to stop.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  kill"
+}
+,
+{
+"url":"/kitematic/known-issues/",
+"title":"Kitematic: Known issues",
+"description":"Information about known issues in Kitematic",
+"keywords":"docker, documentation, about, technology, kitematic, gui"
 }
 ,
 {
@@ -2353,6 +2374,13 @@ var pages = [
 }
 ,
 {
+"url":"/kitematic/minecraft-server/",
+"title":"Kitematic tutorial: Set up a Minecraft server",
+"description":"Tutorial demonstrating the setup of a Minecraft server using Docker and Kitematic",
+"keywords":"docker, documentation, about, technology, kitematic, gui, minecraft, tutorial"
+}
+,
+{
 "url":"/registry/recipes/mirror/",
 "title":"Registry as a pull through cache",
 "description":"Setting-up a local mirror for Docker Hub images",
@@ -2511,6 +2539,13 @@ var pages = [
 "title":"Configure Nginx",
 "description":"Learn how to configure an nginx extension",
 "keywords":"routing, proxy, interlock, load balancing"
+}
+,
+{
+"url":"/kitematic/nginx-web-server/",
+"title":"Kitematic tutorial: Serve a static website with NGINX",
+"description":"Tutorial demonstrating the setup of an Nginx web server using Docker and Kitematic",
+"keywords":"docker, documentation, about, technology, kitematic, gui, nginx, tutorial"
 }
 ,
 {
@@ -2740,7 +2775,7 @@ var pages = [
 {
 "url":"/get-started/part2/",
 "title":"はじめよう 2 部: コンテナー",
-"description":"Learn how to write, build, and run a simple app -- the Docker way.",
+"description":"Docker 風に簡単なアプリを書き、ビルドし実行する方法を学びます。",
 "keywords":"containers, python, code, coding, build, push, run"
 }
 ,
@@ -3169,6 +3204,13 @@ var pages = [
 "title":"Restrict services to worker nodes",
 "description":"Learn how to configure Universal Control Plane to only allow running services in worker nodes.",
 "keywords":"ucp, configuration, worker"
+}
+,
+{
+"url":"/kitematic/rethinkdb-dev-database/",
+"title":"Kitematic tutorial: Create a local RethinkDB database for development",
+"description":"Tutorial demonstrating the setup of an RethinkDB database for development",
+"keywords":"docker, documentation, about, technology, kitematic, gui, rethink, tutorial"
 }
 ,
 {
@@ -4170,6 +4212,13 @@ var pages = [
 "title":"Use your own TLS certificates",
 "description":"Learn how to configure Docker Trusted Registry with your own TLS certificates.",
 "keywords":"dtr, tls"
+}
+,
+{
+"url":"/kitematic/userguide/",
+"title":"Kitematic user guide",
+"description":"Documentation that provides an overview of Kitematic and installation instructions",
+"keywords":"docker, documentation, about, technology, kitematic, gui"
 }
 ,
 {
