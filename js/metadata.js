@@ -36,6 +36,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/swarm/admin_guide/",
+"title":"Administer and maintain a swarm of Docker Engines",
+"description":"Manager administration guide",
+"keywords":"docker, container, swarm, manager, raft"
+}
+,
+{
 "url":"/docker-hub/builds/advanced/",
 "title":"Advanced options for Autobuild and Autotest",
 "description":"Automated builds",
@@ -92,17 +99,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-aws/archive/",
-"title":"Docker for AWS template archive",
-"description":"Template Archive",
-"keywords":"aws, amazon, iaas, release, edge, stable"
-}
-,
-{
 "url":"/docker-for-azure/archive/",
 "title":"Docker for Azure template archive",
 "description":"Template Archive",
 "keywords":"azure, microsoft, iaas, release, edge, stable"
+}
+,
+{
+"url":"/docker-for-aws/archive/",
+"title":"Docker for AWS template archive",
+"description":"Template Archive",
+"keywords":"aws, amazon, iaas, release, edge, stable"
 }
 ,
 {
@@ -239,17 +246,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/build/",
-"title":"docker build",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/build/",
 "title":"docker-compose build",
 "description":"Build or rebuild services.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, build"
+}
+,
+{
+"url":"/engine/reference/commandline/build/",
+"title":"docker build",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -470,17 +477,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/config/",
-"title":"docker config",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/config/",
 "title":"docker-compose config",
 "description":"Config validates and view the compose file.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, config"
+}
+,
+{
+"url":"/engine/reference/commandline/config/",
+"title":"docker config",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -509,6 +516,13 @@ var pages = [
 "title":"docker config rm",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/engine/swarm/configs/",
+"title":"Store configuration data using Docker Configs",
+"description":"How to store configuration data separate from the runtime",
+"keywords":"swarm, configuration, configs"
 }
 ,
 {
@@ -792,17 +806,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/create/",
-"title":"docker create",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/create/",
 "title":"docker-compose create",
 "description":"Create creates containers for a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, create"
+}
+,
+{
+"url":"/engine/reference/commandline/create/",
+"title":"docker create",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -869,6 +883,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-azure/deploy/",
+"title":"Deploy your app on Docker for Azure",
+"description":"Deploying Apps on Docker for Azure",
+"keywords":"azure, microsoft, iaas, deploy"
+}
+,
+{
 "url":"/docker-for-aws/deploy/",
 "title":"Deploy your app on Docker for AWS",
 "description":"Deploying Apps on Docker for AWS",
@@ -880,13 +901,6 @@ var pages = [
 "title":"docker deploy",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/docker-for-azure/deploy/",
-"title":"Deploy your app on Docker for Azure",
-"description":"Deploying Apps on Docker for Azure",
-"keywords":"azure, microsoft, iaas, deploy"
 }
 ,
 {
@@ -995,17 +1009,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/docker-toolbox/",
-"title":"Docker Desktop for Mac vs. Docker Toolbox",
-"description":"Docker Desktop for Mac and Docker Toolbox",
-"keywords":"mac, windows, alpha, beta, toolbox, docker-machine, tutorial"
-}
-,
-{
 "url":"/docker-for-windows/docker-toolbox/",
 "title":"Migrate Docker Toolbox",
 "description":"Docker Desktop for Windows and Docker Toolbox",
 "keywords":"windows, alpha, beta, toolbox, docker-machine, tutorial"
+}
+,
+{
+"url":"/docker-for-mac/docker-toolbox/",
+"title":"Docker Desktop for Mac vs. Docker Toolbox",
+"description":"Docker Desktop for Mac and Docker Toolbox",
+"keywords":"mac, windows, alpha, beta, toolbox, docker-machine, tutorial"
 }
 ,
 {
@@ -1044,17 +1058,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/edge-release-notes/",
-"title":"Docker Desktop for Mac Edge release notes",
-"description":"Change log / release notes per Edge release",
-"keywords":"Docker Desktop for Mac, edge, release notes"
-}
-,
-{
 "url":"/docker-for-windows/edge-release-notes/",
 "title":"Docker Desktop for Windows Edge Release notes",
 "description":"Change log / release notes per edge release",
 "keywords":"Docker Desktop for Windows, edge, release notes"
+}
+,
+{
+"url":"/docker-for-mac/edge-release-notes/",
+"title":"Docker Desktop for Mac Edge release notes",
+"description":"Change log / release notes per Edge release",
+"keywords":"Docker Desktop for Mac, edge, release notes"
 }
 ,
 {
@@ -1170,17 +1184,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/events/",
-"title":"docker events",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/events/",
 "title":"docker-compose events",
 "description":"Receive real time events from containers.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, events"
+}
+,
+{
+"url":"/engine/reference/commandline/events/",
+"title":"docker events",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1191,17 +1205,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/exec/",
-"title":"docker exec",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/exec/",
 "title":"docker-compose exec",
 "description":"docker-compose exec",
 "keywords":"fig, composition, compose, docker, orchestration, cli, exec"
+}
+,
+{
+"url":"/engine/reference/commandline/exec/",
+"title":"docker exec",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1226,13 +1240,6 @@ var pages = [
 }
 ,
 {
-"url":"/engine/faq/",
-"title":"Docker frequently asked questions (FAQ)",
-"description":"Most frequently asked questions.",
-"keywords":"faq, questions, documentation,  docker"
-}
-,
-{
 "url":"/compose/faq/",
 "title":"Frequently asked questions",
 "description":"Docker Compose FAQ",
@@ -1247,10 +1254,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/faqs/",
-"title":"Frequently asked questions (FAQ)",
+"url":"/engine/faq/",
+"title":"Docker frequently asked questions (FAQ)",
+"description":"Most frequently asked questions.",
+"keywords":"faq, questions, documentation,  docker"
+}
+,
+{
+"url":"/docker-for-azure/faqs/",
+"title":"Docker for Azure frequently asked questions (FAQ)",
 "description":"Frequently asked questions",
-"keywords":"mac faqs"
+"keywords":"azure faqs"
 }
 ,
 {
@@ -1261,17 +1275,17 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-mac/faqs/",
+"title":"Frequently asked questions (FAQ)",
+"description":"Frequently asked questions",
+"keywords":"mac faqs"
+}
+,
+{
 "url":"/docker-for-aws/faqs/",
 "title":"Docker for AWS frequently asked questions (FAQ)",
 "description":"Frequently asked questions",
 "keywords":"aws faqs"
-}
-,
-{
-"url":"/docker-for-azure/faqs/",
-"title":"Docker for Azure frequently asked questions (FAQ)",
-"description":"Frequently asked questions",
-"keywords":"azure faqs"
 }
 ,
 {
@@ -1401,17 +1415,17 @@ var pages = [
 }
 ,
 {
-"url":"/registry/help/",
-"title":"Get help",
-"description":"Getting help with the Registry",
-"keywords":"registry, on-prem, images, tags, repository, distribution, help, 101, TL;DR"
-}
-,
-{
 "url":"/compose/reference/help/",
 "title":"docker-compose help",
 "description":"docker-compose help",
 "keywords":"fig, composition, compose, docker, orchestration, cli, help"
+}
+,
+{
+"url":"/registry/help/",
+"title":"Get help",
+"description":"Getting help with the Registry",
+"keywords":"registry, on-prem, images, tags, repository, distribution, help, 101, TL;DR"
 }
 ,
 {
@@ -1555,17 +1569,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/images/",
-"title":"docker images",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/images/",
 "title":"docker-compose images",
 "description":"Lists images used by the project.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, images"
+}
+,
+{
+"url":"/engine/reference/commandline/images/",
+"title":"docker images",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1576,17 +1590,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/",
-"title":"Get started with Docker Desktop for Mac",
-"description":"Getting Started",
-"keywords":"mac, edge, tutorial"
+"url":"/develop/sdk/",
+"title":"Develop with Docker Engine SDKs and API",
+"description":"Using Docker SDKs and APIs to automate Docker tasks in your language of choice",
+"keywords":"developing, api, sdk"
 }
 ,
 {
-"url":"/docker-for-windows/",
-"title":"Get started with Docker for Windows",
-"description":"Getting Started",
-"keywords":"windows, edge, tutorial"
+"url":"/develop/",
+"title":"Docker を用いた開発",
+"description":"Overview of developer resources",
+"keywords":"developer, developing, apps, api, sdk"
 }
 ,
 {
@@ -1601,153 +1615,6 @@ var pages = [
 "title":"Docker Toolbox",
 "description":"Documentation that provides an overview of Docker Toolbox and installation instructions",
 "keywords":"docker, documentation, about, technology, docker toolbox, gui"
-}
-,
-{
-"url":"/docker-hub/publish/",
-"title":"Publisher & Certified Content Overview",
-"description":"Docker Hub programs and policies for publishers",
-"keywords":"Docker, docker, store, publishers, publish images"
-}
-,
-{
-"url":"/docker-hub/builds/",
-"title":"Set up Automated builds",
-"description":"Set up Automated builds",
-"keywords":"automated, build, images"
-}
-,
-{
-"url":"/docker-hub/",
-"title":"Docker Hub クイックスタート",
-"description":"Docker Hub クイックスタート",
-"keywords":"Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams"
-}
-,
-{
-"url":"/ee/ucp/authorization/",
-"title":"Access control model",
-"description":"Manage access to resources with role-based access control.",
-"keywords":"ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/",
-"title":"Deploy a workload to a Kubernetes cluster",
-"description":"Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.",
-"keywords":"UCP, Docker EE, orchestration, Kubernetes, cluster"
-}
-,
-{
-"url":"/ee/ucp/admin/install/",
-"title":"Install UCP for production",
-"description":"Learn how to install Docker Universal Control Plane on production.",
-"keywords":"Universal Control Plane, UCP, install, Docker EE"
-}
-,
-{
-"url":"/ee/ucp/admin/monitor-and-troubleshoot/",
-"title":"Monitor the cluster status",
-"description":"Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.",
-"keywords":"UCP, troubleshoot, health, cluster"
-}
-,
-{
-"url":"/ee/ucp/user-access/",
-"title":"Web-based access",
-"description":"Learn how to access Docker Universal Control Plane from the web browser.",
-"keywords":"ucp, web, administration"
-}
-,
-{
-"url":"/ee/ucp/swarm/",
-"title":"Deploy a single service",
-"description":"Learn how to deploy services to a cluster managed by Universal Control Plane.",
-"keywords":"ucp, deploy, service"
-}
-,
-{
-"url":"/ee/ucp/interlock/config/",
-"title":"Configure layer 7 routing service",
-"description":"Learn how to configure the layer 7 routing solution for UCP.",
-"keywords":"routing, proxy, interlock, load balancing"
-}
-,
-{
-"url":"/ee/ucp/interlock/",
-"title":"Layer 7 routing overview",
-"description":"Learn how to route layer 7 traffic to your Swarm services",
-"keywords":"routing, UCP, interlock, load balancing"
-}
-,
-{
-"url":"/ee/ucp/",
-"title":"Universal Control Plane overview",
-"description":"Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker.\n",
-"keywords":"ucp, overview, orchestration, cluster"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-users/",
-"title":"Authentication and authorization in DTR",
-"description":"Learn about the permission levels available on Docker Trusted Registry.",
-"keywords":"registry, security, permissions, users"
-}
-,
-{
-"url":"/ee/dtr/admin/disaster-recovery/",
-"title":"DTR disaster recovery overview",
-"description":"Learn the multiple disaster recovery strategies you can use with Docker Trusted Registry.",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/dtr/admin/install/",
-"title":"Install Docker Trusted Registry",
-"description":"Learn how to install Docker Trusted Registry for production.",
-"keywords":"dtr, registry, install"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/external-storage/",
-"title":"Configure DTR image storage",
-"description":"Storage configuration for Docker Trusted Registry",
-"keywords":"dtr, storage drivers, NFS, Azure, S3"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/deploy-caches/",
-"title":"DTR cache overview",
-"description":"Deploy DTR caches in different geographical locations for users to pull images faster.",
-"keywords":"DTR, cache"
-}
-,
-{
-"url":"/ee/dtr/admin/monitor-and-troubleshoot/",
-"title":"Monitor Docker Trusted Registry",
-"description":"Learn how to monitor your DTR installation.",
-"keywords":"registry, monitor, troubleshoot"
-}
-,
-{
-"url":"/ee/dtr/",
-"title":"Docker Trusted Registry overview",
-"description":"Learn how to install, configure, and use Docker Trusted Registry.",
-"keywords":"registry, repository, images"
-}
-,
-{
-"url":"/ee/",
-"title":"Docker エンタープライズ",
-"description":"Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.",
-"keywords":"Docker EE, UCP, DTR, orchestration, cluster, Kubernetes"
-}
-,
-{
-"url":"/install/",
-"title":"Docker CE について",
-"description":"インストール方法を一覧列記。",
-"keywords":"docker, installation, install, docker ce, docker ee, docker editions, stable, edge"
 }
 ,
 {
@@ -1779,20 +1646,6 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-aws/",
-"title":"Docker for AWS setup & prerequisites",
-"description":"Setup & Prerequisites",
-"keywords":"aws, amazon, iaas, tutorial"
-}
-,
-{
-"url":"/samples/",
-"title":"Samples",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/get-started/",
 "title":"はじめよう 1部: 概要とセットアップ",
 "description":"Get oriented on some basics of Docker before diving into the walkthrough.",
@@ -1800,38 +1653,171 @@ var pages = [
 }
 ,
 {
-"url":"/registry/recipes/",
-"title":"Recipes overview",
-"description":"Fun stuff to do with your registry",
-"keywords":"registry, on-prem, images, tags, repository, distribution, recipes, advanced"
+"url":"/ee/ucp/swarm/",
+"title":"Deploy a single service",
+"description":"Learn how to deploy services to a cluster managed by Universal Control Plane.",
+"keywords":"ucp, deploy, service"
 }
 ,
 {
-"url":"/registry/",
-"title":"Docker Registry",
-"description":"High-level overview of the Registry",
-"keywords":"registry, on-prem, images, tags, repository, distribution"
+"url":"/ee/ucp/authorization/",
+"title":"Access control model",
+"description":"Manage access to resources with role-based access control.",
+"keywords":"ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes"
 }
 ,
 {
-"url":"/engine/tutorials/",
-"title":"Engine tutorials",
-"description":"Explains how to work with containers",
-"keywords":"docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro"
+"url":"/ee/ucp/kubernetes/",
+"title":"Deploy a workload to a Kubernetes cluster",
+"description":"Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.",
+"keywords":"UCP, Docker EE, orchestration, Kubernetes, cluster"
 }
 ,
 {
-"url":"/engine/",
-"title":"Docker Engine について",
-"description":"Engine",
-"keywords":"Engine"
+"url":"/ee/ucp/admin/monitor-and-troubleshoot/",
+"title":"Monitor the cluster status",
+"description":"Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.",
+"keywords":"UCP, troubleshoot, health, cluster"
 }
 ,
 {
-"url":"/config/daemon/",
-"title":"Configure and troubleshoot the Docker daemon",
-"description":"Configuring and troubleshooting the Docker daemon",
-"keywords":"docker, daemon, configuration, troubleshooting"
+"url":"/ee/ucp/admin/install/",
+"title":"Install UCP for production",
+"description":"Learn how to install Docker Universal Control Plane on production.",
+"keywords":"Universal Control Plane, UCP, install, Docker EE"
+}
+,
+{
+"url":"/ee/ucp/interlock/config/",
+"title":"Configure layer 7 routing service",
+"description":"Learn how to configure the layer 7 routing solution for UCP.",
+"keywords":"routing, proxy, interlock, load balancing"
+}
+,
+{
+"url":"/ee/ucp/interlock/",
+"title":"Layer 7 routing overview",
+"description":"Learn how to route layer 7 traffic to your Swarm services",
+"keywords":"routing, UCP, interlock, load balancing"
+}
+,
+{
+"url":"/ee/ucp/user-access/",
+"title":"Web-based access",
+"description":"Learn how to access Docker Universal Control Plane from the web browser.",
+"keywords":"ucp, web, administration"
+}
+,
+{
+"url":"/ee/ucp/",
+"title":"Universal Control Plane overview",
+"description":"Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker.\n",
+"keywords":"ucp, overview, orchestration, cluster"
+}
+,
+{
+"url":"/ee/dtr/admin/disaster-recovery/",
+"title":"DTR disaster recovery overview",
+"description":"Learn the multiple disaster recovery strategies you can use with Docker Trusted Registry.",
+"keywords":"dtr, disaster recovery"
+}
+,
+{
+"url":"/ee/dtr/admin/configure/external-storage/",
+"title":"Configure DTR image storage",
+"description":"Storage configuration for Docker Trusted Registry",
+"keywords":"dtr, storage drivers, NFS, Azure, S3"
+}
+,
+{
+"url":"/ee/dtr/admin/configure/deploy-caches/",
+"title":"DTR cache overview",
+"description":"Deploy DTR caches in different geographical locations for users to pull images faster.",
+"keywords":"DTR, cache"
+}
+,
+{
+"url":"/ee/dtr/admin/manage-users/",
+"title":"Authentication and authorization in DTR",
+"description":"Learn about the permission levels available on Docker Trusted Registry.",
+"keywords":"registry, security, permissions, users"
+}
+,
+{
+"url":"/ee/dtr/admin/monitor-and-troubleshoot/",
+"title":"Monitor Docker Trusted Registry",
+"description":"Learn how to monitor your DTR installation.",
+"keywords":"registry, monitor, troubleshoot"
+}
+,
+{
+"url":"/ee/dtr/admin/install/",
+"title":"Install Docker Trusted Registry",
+"description":"Learn how to install Docker Trusted Registry for production.",
+"keywords":"dtr, registry, install"
+}
+,
+{
+"url":"/ee/dtr/",
+"title":"Docker Trusted Registry overview",
+"description":"Learn how to install, configure, and use Docker Trusted Registry.",
+"keywords":"registry, repository, images"
+}
+,
+{
+"url":"/ee/",
+"title":"Docker エンタープライズ",
+"description":"Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.",
+"keywords":"Docker EE, UCP, DTR, orchestration, cluster, Kubernetes"
+}
+,
+{
+"url":"/docker-hub/builds/",
+"title":"Set up Automated builds",
+"description":"Set up Automated builds",
+"keywords":"automated, build, images"
+}
+,
+{
+"url":"/docker-hub/publish/",
+"title":"Publisher & Certified Content Overview",
+"description":"Docker Hub programs and policies for publishers",
+"keywords":"Docker, docker, store, publishers, publish images"
+}
+,
+{
+"url":"/docker-hub/",
+"title":"Docker Hub クイックスタート",
+"description":"Docker Hub クイックスタート",
+"keywords":"Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams"
+}
+,
+{
+"url":"/storage/",
+"title":"Manage data in Docker",
+"description":"Overview of persisting data in containers",
+"keywords":"storage, persistence, data persistence, volumes, mounts, bind mounts"
+}
+,
+{
+"url":"/docker-for-azure/",
+"title":"Docker for Azure setup & prerequisites",
+"description":"Setup & Prerequisites",
+"keywords":"azure, microsoft, iaas, tutorial"
+}
+,
+{
+"url":"/docker-id/",
+"title":"Docker ID accounts",
+"description":"Sign up for a Docker ID and log in",
+"keywords":"accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access"
+}
+,
+{
+"url":"/install/",
+"title":"Docker CE について",
+"description":"インストール方法を一覧列記。",
+"keywords":"docker, installation, install, docker ce, docker ee, docker editions, stable, edge"
 }
 ,
 {
@@ -1849,10 +1835,17 @@ var pages = [
 }
 ,
 {
-"url":"/release-notes/",
-"title":"Docker Release Notes",
-"description":"Release notes for Docker",
-"keywords":"docker, documentation, about, technology, understanding,  release"
+"url":"/config/daemon/",
+"title":"Configure and troubleshoot the Docker daemon",
+"description":"Configuring and troubleshooting the Docker daemon",
+"keywords":"docker, daemon, configuration, troubleshooting"
+}
+,
+{
+"url":"/samples/",
+"title":"Samples",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1877,6 +1870,34 @@ var pages = [
 }
 ,
 {
+"url":"/release-notes/",
+"title":"Docker Release Notes",
+"description":"Release notes for Docker",
+"keywords":"docker, documentation, about, technology, understanding,  release"
+}
+,
+{
+"url":"/docker-for-windows/",
+"title":"Get started with Docker for Windows",
+"description":"Getting Started",
+"keywords":"windows, edge, tutorial"
+}
+,
+{
+"url":"/network/",
+"title":"Overview",
+"description":"Overview of Docker networks and networking concepts",
+"keywords":"networking, bridge, routing, routing mesh, overlay, ports"
+}
+,
+{
+"url":"/docker-for-mac/",
+"title":"Get started with Docker Desktop for Mac",
+"description":"Getting Started",
+"keywords":"mac, edge, tutorial"
+}
+,
+{
 "url":"/notary/reference/",
 "title":"Notary configuration files",
 "description":"Configuring the notary client, server and signer.",
@@ -1891,20 +1912,6 @@ var pages = [
 }
 ,
 {
-"url":"/develop/sdk/",
-"title":"Develop with Docker Engine SDKs and API",
-"description":"Using Docker SDKs and APIs to automate Docker tasks in your language of choice",
-"keywords":"developing, api, sdk"
-}
-,
-{
-"url":"/develop/",
-"title":"Docker を用いた開発",
-"description":"Overview of developer resources",
-"keywords":"developer, developing, apps, api, sdk"
-}
-,
-{
 "url":"/kitematic/",
 "title":"Kitematic",
 "description":"Documentation that provides an overview of Kitematic and installation instructions",
@@ -1912,31 +1919,45 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-azure/",
-"title":"Docker for Azure setup & prerequisites",
+"url":"/docker-for-aws/",
+"title":"Docker for AWS setup & prerequisites",
 "description":"Setup & Prerequisites",
-"keywords":"azure, microsoft, iaas, tutorial"
+"keywords":"aws, amazon, iaas, tutorial"
 }
 ,
 {
-"url":"/storage/",
-"title":"Manage data in Docker",
-"description":"Overview of persisting data in containers",
-"keywords":"storage, persistence, data persistence, volumes, mounts, bind mounts"
+"url":"/engine/swarm/",
+"title":"Swarm mode overview",
+"description":"Docker Engine swarm mode overview",
+"keywords":"docker, container, cluster, swarm"
 }
 ,
 {
-"url":"/docker-id/",
-"title":"Docker ID accounts",
-"description":"Sign up for a Docker ID and log in",
-"keywords":"accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access"
+"url":"/engine/tutorials/",
+"title":"Engine tutorials",
+"description":"Explains how to work with containers",
+"keywords":"docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro"
 }
 ,
 {
-"url":"/network/",
-"title":"Overview",
-"description":"Overview of Docker networks and networking concepts",
-"keywords":"networking, bridge, routing, routing mesh, overlay, ports"
+"url":"/engine/",
+"title":"Docker Engine について",
+"description":"Engine",
+"keywords":"Engine"
+}
+,
+{
+"url":"/registry/recipes/",
+"title":"Recipes overview",
+"description":"Fun stuff to do with your registry",
+"keywords":"registry, on-prem, images, tags, repository, distribution, recipes, advanced"
+}
+,
+{
+"url":"/registry/",
+"title":"Docker Registry",
+"description":"High-level overview of the Registry",
+"keywords":"registry, on-prem, images, tags, repository, distribution"
 }
 ,
 {
@@ -1951,6 +1972,13 @@ var pages = [
 "title":"docker info",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/engine/swarm/ingress/",
+"title":"Use swarm mode routing mesh",
+"description":"Use the routing mesh to publish services externally to a swarm",
+"keywords":"guide, swarm mode, swarm, network, ingress, routing mesh"
 }
 ,
 {
@@ -2010,10 +2038,10 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/install/",
-"title":"Install Docker Desktop for Mac",
-"description":"How to install Docker Desktop for Mac",
-"keywords":"mac, beta, alpha, install, download"
+"url":"/compose/install/",
+"title":"Docker Compose のインストール",
+"description":"Docker Compose のインストール方法。",
+"keywords":"compose, orchestration, install, installation, docker, documentation"
 }
 ,
 {
@@ -2024,10 +2052,10 @@ var pages = [
 }
 ,
 {
-"url":"/compose/install/",
-"title":"Docker Compose のインストール",
-"description":"Docker Compose のインストール方法。",
-"keywords":"compose, orchestration, install, installation, docker, documentation"
+"url":"/docker-for-mac/install/",
+"title":"Install Docker Desktop for Mac",
+"description":"How to install Docker Desktop for Mac",
+"keywords":"mac, beta, alpha, install, download"
 }
 ,
 {
@@ -2087,6 +2115,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/swarm/join-nodes/",
+"title":"Join nodes to a swarm",
+"description":"Add worker and manager nodes to a swarm",
+"keywords":"guide, swarm mode, node"
+}
+,
+{
 "url":"/config/containers/logging/journald/",
 "title":"Journald logging driver",
 "description":"Describes how to use the Journald logging driver.",
@@ -2101,6 +2136,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/swarm/key-concepts/",
+"title":"Swarm mode key concepts",
+"description":"Introducing key concepts for Docker Engine swarm mode",
+"keywords":"docker, container, cluster, swarm mode"
+}
+,
+{
 "url":"/machine/reference/kill/",
 "title":"docker-machine kill",
 "description":"Kill (abruptly force stop) a machine.",
@@ -2108,17 +2150,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/kill/",
-"title":"docker kill",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/kill/",
 "title":"docker-compose kill",
 "description":"Forces running containers to stop.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  kill"
+}
+,
+{
+"url":"/engine/reference/commandline/kill/",
+"title":"docker kill",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -2150,17 +2192,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/kubernetes/",
-"title":"Deploy on Kubernetes",
-"description":"Deploying to Kubernetes on Docker Desktop for Mac",
-"keywords":"mac, edge, kubernetes, kubectl, orchestration"
-}
-,
-{
 "url":"/docker-for-windows/kubernetes/",
 "title":"Deploy on Kubernetes",
 "description":"Deploying to Kubernetes on Docker Desktop for Windows",
 "keywords":"windows, edge, kubernetes, kubectl, orchestration"
+}
+,
+{
+"url":"/docker-for-mac/kubernetes/",
+"title":"Deploy on Kubernetes",
+"description":"Deploying to Kubernetes on Docker Desktop for Mac",
+"keywords":"mac, edge, kubernetes, kubectl, orchestration"
 }
 ,
 {
@@ -2283,17 +2325,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/logs/",
-"title":"docker logs",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/logs/",
 "title":"docker-compose logs",
 "description":"Displays log output from services.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  logs"
+}
+,
+{
+"url":"/engine/reference/commandline/logs/",
+"title":"docker logs",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -2315,6 +2357,13 @@ var pages = [
 "title":"Manage and deploy private images",
 "description":"Learn how to push an image to Docker Trusted Registry and deploy it to a Kubernetes cluster managed by Docker Enterprise Edition.",
 "keywords":"Docker EE, DTR, UCP, image, Kubernetes, orchestration, cluster"
+}
+,
+{
+"url":"/engine/swarm/manage-nodes/",
+"title":"Manage nodes in a swarm",
+"description":"Manage existing nodes in a swarm",
+"keywords":"guide, swarm mode, node"
 }
 ,
 {
@@ -2500,10 +2549,10 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/networking/",
-"title":"Networking features in Docker Desktop for Mac",
-"description":"Networking",
-"keywords":"mac, networking"
+"url":"/compose/networking/",
+"title":"Networking in Compose",
+"description":"How Compose sets up networking between containers",
+"keywords":"documentation, docs, docker, compose, orchestration, containers, networking"
 }
 ,
 {
@@ -2514,10 +2563,17 @@ var pages = [
 }
 ,
 {
-"url":"/compose/networking/",
-"title":"Networking in Compose",
-"description":"How Compose sets up networking between containers",
-"keywords":"documentation, docs, docker, compose, orchestration, containers, networking"
+"url":"/docker-for-mac/networking/",
+"title":"Networking features in Docker Desktop for Mac",
+"description":"Networking",
+"keywords":"mac, networking"
+}
+,
+{
+"url":"/engine/swarm/networking/",
+"title":"Manage swarm service networks",
+"description":"Use swarm mode overlay networking features",
+"keywords":"swarm, networking, ingress, overlay, service discovery"
 }
 ,
 {
@@ -2647,7 +2703,7 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/opensource/",
+"url":"/docker-for-azure/opensource/",
 "title":"Open source components and licensing",
 "description":"Docker's use of Open Source",
 "keywords":"docker, opensource"
@@ -2661,14 +2717,14 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-aws/opensource/",
+"url":"/docker-for-mac/opensource/",
 "title":"Open source components and licensing",
 "description":"Docker's use of Open Source",
 "keywords":"docker, opensource"
 }
 ,
 {
-"url":"/docker-for-azure/opensource/",
+"url":"/docker-for-aws/opensource/",
 "title":"Open source components and licensing",
 "description":"Docker's use of Open Source",
 "keywords":"docker, opensource"
@@ -2745,17 +2801,17 @@ var pages = [
 }
 ,
 {
-"url":"/install/overview/",
-"title":"Docker エディションの概要",
-"description":"Learn about the two Docker editions available, Docker Enterprise Edition, and Docker Community Edition.",
-"keywords":"editions, ee, ce,"
-}
-,
-{
 "url":"/machine/overview/",
 "title":"Docker Machine 概要",
 "description":"Introduction and Overview of Machine",
 "keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
+}
+,
+{
+"url":"/install/overview/",
+"title":"Docker エディションの概要",
+"description":"Learn about the two Docker editions available, Docker Enterprise Edition, and Docker Community Edition.",
+"keywords":"editions, ee, ce,"
 }
 ,
 {
@@ -2808,17 +2864,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/pause/",
-"title":"docker pause",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/pause/",
 "title":"docker-compose pause",
 "description":"Pauses running containers for a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, pause"
+}
+,
+{
+"url":"/engine/reference/commandline/pause/",
+"title":"docker pause",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -2829,17 +2885,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-aws/persistent-data-volumes/",
-"title":"Docker for AWS persistent data volumes",
-"description":"Persistent data volumes",
-"keywords":"aws persistent data volumes"
-}
-,
-{
 "url":"/docker-for-azure/persistent-data-volumes/",
 "title":"Docker for Azure persistent data volumes",
 "description":"Persistent data volumes",
 "keywords":"azure persistent data volumes"
+}
+,
+{
+"url":"/docker-for-aws/persistent-data-volumes/",
+"title":"Docker for AWS persistent data volumes",
+"description":"Persistent data volumes",
+"keywords":"aws persistent data volumes"
 }
 ,
 {
@@ -2934,17 +2990,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/port/",
-"title":"docker port",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/port/",
 "title":"docker-compose port",
 "description":"Prints the public port for a port bindings.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  port"
+}
+,
+{
+"url":"/engine/reference/commandline/port/",
+"title":"docker port",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -2983,17 +3039,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/ps/",
-"title":"docker ps",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/ps/",
 "title":"docker-compose ps",
 "description":"Lists containers.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  ps"
+}
+,
+{
+"url":"/engine/reference/commandline/ps/",
+"title":"docker ps",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3018,17 +3074,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/pull/",
-"title":"docker pull",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/pull/",
 "title":"docker-compose pull",
 "description":"Pulls service images.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  pull"
+}
+,
+{
+"url":"/engine/reference/commandline/pull/",
+"title":"docker pull",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3039,13 +3095,6 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/push/",
-"title":"docker push",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/push/",
 "title":"docker-compose push",
 "description":"Pushes service images.",
@@ -3053,10 +3102,24 @@ var pages = [
 }
 ,
 {
+"url":"/engine/reference/commandline/push/",
+"title":"docker push",
+"description":null,
+"keywords":null
+}
+,
+{
 "url":"/machine/drivers/rackspace/",
 "title":"Rackspace",
 "description":"Rackspace driver for machine",
 "keywords":"machine, Rackspace, driver"
+}
+,
+{
+"url":"/engine/swarm/raft/",
+"title":"Raft consensus in swarm mode",
+"description":"Raft consensus algorithm in swarm mode",
+"keywords":"docker, container, cluster, swarm, raft"
 }
 ,
 {
@@ -3081,20 +3144,6 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/release-notes/",
-"title":"Docker for Mac Stable release notes",
-"description":"Change log / release notes per Stable release",
-"keywords":"Docker Desktop for Mac, stable, release notes"
-}
-,
-{
-"url":"/docker-for-windows/release-notes/",
-"title":"Docker Desktop for Windows Stable Release notes",
-"description":"Change log / release notes per stable release",
-"keywords":"Docker Desktop for Windows, stable, release notes"
-}
-,
-{
 "url":"/ee/ucp/release-notes/",
 "title":"UCP release notes",
 "description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
@@ -3109,6 +3158,27 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-azure/release-notes/",
+"title":"Docker for Azure Release Notes",
+"description":"Release notes",
+"keywords":"azure, microsoft, iaas, tutorial, edge, stable"
+}
+,
+{
+"url":"/docker-for-windows/release-notes/",
+"title":"Docker Desktop for Windows Stable Release notes",
+"description":"Change log / release notes per stable release",
+"keywords":"Docker Desktop for Windows, stable, release notes"
+}
+,
+{
+"url":"/docker-for-mac/release-notes/",
+"title":"Docker for Mac Stable release notes",
+"description":"Change log / release notes per Stable release",
+"keywords":"Docker Desktop for Mac, stable, release notes"
+}
+,
+{
 "url":"/docker-for-aws/release-notes/",
 "title":"Docker for AWS release notes",
 "description":"Release notes",
@@ -3120,13 +3190,6 @@ var pages = [
 "title":"Docker Engine release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine CE and EE",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
-}
-,
-{
-"url":"/docker-for-azure/release-notes/",
-"title":"Docker for Azure Release Notes",
-"description":"Release notes",
-"keywords":"azure, microsoft, iaas, tutorial, edge, stable"
 }
 ,
 {
@@ -3179,17 +3242,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/restart/",
-"title":"docker restart",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/restart/",
 "title":"docker-compose restart",
 "description":"Restarts Docker Compose services.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  restart"
+}
+,
+{
+"url":"/engine/reference/commandline/restart/",
+"title":"docker restart",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3228,17 +3291,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/rm/",
-"title":"docker rm",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/rm/",
 "title":"docker-compose rm",
 "description":"Removes stopped service containers.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  rm"
+}
+,
+{
+"url":"/engine/reference/commandline/rm/",
+"title":"docker rm",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3256,17 +3319,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/run/",
-"title":"docker run",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/run/",
 "title":"docker-compose run",
 "description":"Runs a one-off command on a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, run"
+}
+,
+{
+"url":"/engine/reference/commandline/run/",
+"title":"docker run",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3382,6 +3445,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/swarm/secrets/",
+"title":"Manage sensitive data with Docker secrets",
+"description":"How to securely store, retrieve, and use sensitive data with Docker services",
+"keywords":"swarm, secrets, credentials, sensitive strings, sensitive data, security, encryption, encryption at rest"
+}
+,
+{
 "url":"/notary/reference/server-config/",
 "title":"Notary server configuration file",
 "description":"Configuring the notary client, server and signer.",
@@ -3473,6 +3543,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/swarm/services/",
+"title":"Deploy services to a swarm",
+"description":"Deploy services to a swarm",
+"keywords":"guide, swarm mode, swarm, service"
+}
+,
+{
 "url":"/ee/ucp/admin/configure/set-orchestrator-type/",
 "title":"Set the orchestrator type for a node",
 "description":"Learn how to specify the orchestrator for nodes in a Docker Enterprise Edition cluster.",
@@ -3557,6 +3634,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/swarm/stack-deploy/",
+"title":"Deploy a stack to a swarm",
+"description":"How to deploy a stack to a swarm",
+"keywords":"guide, swarm mode, composefile, stack, compose, deploy"
+}
+,
+{
 "url":"/engine/reference/commandline/stack/",
 "title":"docker stack",
 "description":null,
@@ -3613,17 +3697,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/start/",
-"title":"docker start",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/start/",
 "title":"docker-compose start",
 "description":"Starts existing containers for a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  start"
+}
+,
+{
+"url":"/engine/reference/commandline/start/",
+"title":"docker start",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3655,17 +3739,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/stop/",
-"title":"docker stop",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/stop/",
 "title":"docker-compose stop",
 "description":"Stops running containers without removing them. ",
 "keywords":"fig, composition, compose, docker, orchestration, cli, stop"
+}
+,
+{
+"url":"/engine/reference/commandline/stop/",
+"title":"docker stop",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3694,6 +3778,13 @@ var pages = [
 "title":"Get Docker EE for SLES",
 "description":"Instructions for installing Docker EE on SLES",
 "keywords":"requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update"
+}
+,
+{
+"url":"/engine/swarm/swarm-mode/",
+"title":"Run Docker Engine in swarm mode",
+"description":"Run Docker Engine in swarm mode",
+"keywords":"guide, swarm mode, node"
 }
 ,
 {
@@ -3736,6 +3827,13 @@ var pages = [
 "title":"docker swarm leave",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/engine/swarm/swarm_manager_locking/",
+"title":"Lock your swarm to protect its encryption key",
+"description":"Automatically lock Swarm managers to protect encryption keys",
+"keywords":"swarm, manager, lock, unlock, autolock, encryption"
 }
 ,
 {
@@ -3872,17 +3970,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/top/",
-"title":"docker top",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/top/",
 "title":"docker-compose top",
 "description":"Displays the running processes.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, top"
+}
+,
+{
+"url":"/engine/reference/commandline/top/",
+"title":"docker top",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3921,10 +4019,10 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/troubleshoot/",
-"title":"Logs and troubleshooting",
-"description":"Troubleshooting, logs, and known issues",
-"keywords":"mac, troubleshooting, logs, issues"
+"url":"/toolbox/faqs/troubleshoot/",
+"title":"Troubleshooting",
+"description":"Troubleshooting connectivity and certificate issues",
+"keywords":"beginner, getting started, FAQs, troubleshooting, Docker"
 }
 ,
 {
@@ -3935,10 +4033,10 @@ var pages = [
 }
 ,
 {
-"url":"/toolbox/faqs/troubleshoot/",
-"title":"Troubleshooting",
-"description":"Troubleshooting connectivity and certificate issues",
-"keywords":"beginner, getting started, FAQs, troubleshooting, Docker"
+"url":"/docker-for-mac/troubleshoot/",
+"title":"Logs and troubleshooting",
+"description":"Troubleshooting, logs, and known issues",
+"keywords":"mac, troubleshooting, logs, issues"
 }
 ,
 {
@@ -4075,17 +4173,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/unpause/",
-"title":"docker unpause",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/unpause/",
 "title":"docker-compose unpause",
 "description":"Unpauses paused containers for a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, unpause"
+}
+,
+{
+"url":"/engine/reference/commandline/unpause/",
+"title":"docker unpause",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -4117,10 +4215,10 @@ var pages = [
 }
 ,
 {
-"url":"/docker-hub/upgrade/",
-"title":"Upgrading your Plan",
-"description":"Upgrading your Docker Hub Plan",
-"keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
+"url":"/machine/reference/upgrade/",
+"title":"docker-machine upgrade",
+"description":"Upgrade Docker on a machine",
+"keywords":"machine, upgrade, subcommand"
 }
 ,
 {
@@ -4145,17 +4243,10 @@ var pages = [
 }
 ,
 {
-"url":"/machine/reference/upgrade/",
-"title":"docker-machine upgrade",
-"description":"Upgrade Docker on a machine",
-"keywords":"machine, upgrade, subcommand"
-}
-,
-{
-"url":"/docker-for-aws/upgrade/",
-"title":"Docker for AWS upgrades",
-"description":"Upgrading your stack",
-"keywords":"aws, amazon, iaas, tutorial"
+"url":"/docker-hub/upgrade/",
+"title":"Upgrading your Plan",
+"description":"Upgrading your Docker Hub Plan",
+"keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
 }
 ,
 {
@@ -4163,6 +4254,13 @@ var pages = [
 "title":"Docker for Azure upgrades",
 "description":"Upgrading your stack",
 "keywords":"azure, microsoft, iaas, tutorial"
+}
+,
+{
+"url":"/docker-for-aws/upgrade/",
+"title":"Docker for AWS upgrades",
+"description":"Upgrading your stack",
+"keywords":"aws, amazon, iaas, tutorial"
 }
 ,
 {
@@ -4327,17 +4425,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-aws/why/",
-"title":"Why Docker for AWS?",
-"description":"Why Docker for AWS?",
-"keywords":"aws, amazon, iaas, why"
-}
-,
-{
 "url":"/docker-for-azure/why/",
 "title":"Why Docker for Azure?",
 "description":"Why Docker for Azure?",
 "keywords":"azure, microsoft, iaas, why"
+}
+,
+{
+"url":"/docker-for-aws/why/",
+"title":"Why Docker for AWS?",
+"description":"Why Docker for AWS?",
+"keywords":"aws, amazon, iaas, why"
 }
 ,
 {
