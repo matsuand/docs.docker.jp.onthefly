@@ -263,7 +263,7 @@ function renderTagsPage()
       }
     }
     if (glossaryOutput) {
-      $("#glossaryMatch").html("<h2>Definition of: " + tagToLookup + "</h2>" + glossaryOutput);
+      $("#glossaryMatch").html("<h2>用語定義: " + tagToLookup + "</h2>" + glossaryOutput);
     }
     renderTopicsByTagTable(tagToLookup,"topicMatch",true);
   }

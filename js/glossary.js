@@ -57,7 +57,7 @@ var glossary = [
 
 {
 "term": "Docker",
-"def": "<p>The term Docker can refer to</p>\n\n<ul>\n  <li>The Docker project as a whole, which is a platform for developers and sysadmins to\ndevelop, ship, and run applications</li>\n  <li>The docker daemon process running on the host which manages images and containers\n(also called Docker Engine)</li>\n</ul>\n"
+"def": "<p>Docker という語は以下を意味します。</p>\n\n<ul>\n  <li>Docker プロジェクト全体のこと。\n開発者やシステム管理者がアプリケーションの開発、移行、実行を行うプラットフォームのこと。</li>\n  <li>ホスト上で稼動する docker デーモンのこと。\nそのホストはイメージとコンテナーを管理する（Docker Engine とも呼ぶ）。</li>\n</ul>\n"
 },
 
 {
