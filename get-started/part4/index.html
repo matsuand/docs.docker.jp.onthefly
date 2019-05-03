@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-30 08:10:32 +0000 -->
+<!-- Page generated 2019-05-03 12:28:34 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,7 +74,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-03T12:28:34+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -84,7 +84,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールしていること。 3 部の前提条件で説明した Docker Compose を入手していること。 Docker Machine を入手していること。 Docker Desktop for Mac と..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-03T12:28:34+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration">
@@ -179,7 +179,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    23 分
+    25 分
   
 </span>
 
@@ -787,39 +787,74 @@ all services have been redeployed.
 またデプロイ結果も利用できるまでに時間を要します。
 スウォームマネージャー上で <code class="highlighter-rouge">docker service ps &lt;service_name&gt;</code> コマンドを実行すると、デプロイされているサービスすべてを確認することができます。</p>
 
-<p>You are connected to <code class="highlighter-rouge">myvm1</code> by means of the <code class="highlighter-rouge">docker-machine</code> shell
+<!--
+You are connected to `myvm1` by means of the `docker-machine` shell
 configuration, and you still have access to the files on your local host. Make
 sure you are in the same directory as before, which includes the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/#docker-composeyml"><code class="highlighter-rouge">docker-compose.yml</code> file you created in part
-3</a>.</p>
+[`docker-compose.yml` file you created in part
+3](/get-started/part3/#docker-composeyml).
+-->
+<p><code class="highlighter-rouge">docker-machine</code> のシェル設定を使って <code class="highlighter-rouge">myvm1</code> への接続ができました。
+しかもローカルホストのファイルを扱うことができる状態です。
+前と変わらず同じディレクトリにいます。
+そのディレクトリには <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/#docker-composeyml">3 部で生成した <code class="highlighter-rouge">docker-compose.yml</code>
+ファイル</a>があるのです。</p>
 
-<p>Just like before, run the following command to deploy the app on <code class="highlighter-rouge">myvm1</code>.</p>
+<!--
+Just like before, run the following command to deploy the app on `myvm1`.
+-->
+<p>前と同じように以下のコマンドを実行して <code class="highlighter-rouge">myvm1</code> 上のアプリをデプロイします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
 </code></pre></div></div>
 
-<p>And that’s it, the app is deployed on a swarm cluster!</p>
+<!--
+And that's it, the app is deployed on a swarm cluster!
+-->
+<p>まさにこれです。
+スウォームクラスター上にアプリがデプロイできました！</p>
 
+<!--
+> **Note**: If your image is stored on a private registry instead of Docker Hub,
+> you need to be logged in using `docker login <your-registry>` and then you
+> need to add the `--with-registry-auth` flag to the above command. For example:
+>
+> ```bash
+> docker login registry.example.com
+>
+> docker stack deploy --with-registry-auth -c docker-compose.yml getstartedlab
+> ```
+>
+> This passes the login token from your local client to the swarm nodes where the
+> service is deployed, using the encrypted WAL logs. With this information, the
+> nodes are able to log into the registry and pull the image.
+>
+-->
 <blockquote>
-  <p><strong>Note</strong>: If your image is stored on a private registry instead of Docker Hub,
-you need to be logged in using <code class="highlighter-rouge">docker login &lt;your-registry&gt;</code> and then you
-need to add the <code class="highlighter-rouge">--with-registry-auth</code> flag to the above command. For example:</p>
+  <p><strong>メモ</strong></p>
+
+  <p>利用するイメージが Docker Hub 上でなくプライベートリポジトリ上に保存されている場合は、<code class="highlighter-rouge">docker login &lt;レジストリ名&gt;</code> を使ってログインしておく必要があります。そして上のコマンドへは <code class="highlighter-rouge">--with-registry-auth</code> をつけます。
+たとえば以下のとおりです。</p>
 
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login registry.example.com
 
 docker stack deploy <span class="nt">--with-registry-auth</span> <span class="nt">-c</span> docker-compose.yml getstartedlab
 </code></pre></div>  </div>
 
-  <p>This passes the login token from your local client to the swarm nodes where the
-service is deployed, using the encrypted WAL logs. With this information, the
-nodes are able to log into the registry and pull the image.</p>
+  <p>こうするとローカルクライアントから、サービスをデプロイするスウォームノードに向けてログイントークンが送られます。
+その際には暗号化された WAL ログが用いられます。
+この情報を使ってノードからレジストリへのログインが可能になり、イメージを取得できるようになります。</p>
 
 </blockquote>
 
-<p>Now you can use the same <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#run-your-new-load-balanced-app">docker commands you used in part
-3</a>. Only this time notice
+<!--
+Now you can use the same [docker commands you used in part
+3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time notice
 that the services (and associated containers) have been distributed between
-both <code class="highlighter-rouge">myvm1</code> and <code class="highlighter-rouge">myvm2</code>.</p>
+both `myvm1` and `myvm2`.
+-->
+<p>ここから <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#run-your-new-load-balanced-app">3 部でも用いてきた同じ docker コマンド</a> を利用します。
+今回の場合は、サービス（と関連コンテナー）が <code class="highlighter-rouge">myvm1</code> と <code class="highlighter-rouge">myvm2</code> の両者によって提供されているということです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack ps getstartedlab
 
@@ -831,33 +866,51 @@ ghii74p9budx  getstartedlab_web.4   gordon/get-started:part2  myvm1  Running
 0prmarhavs87  getstartedlab_web.5   gordon/get-started:part2  myvm2  Running
 </code></pre></div></div>
 
+<!--
+> Connecting to VMs with `docker-machine env` and `docker-machine ssh`
+>
+> * To set your shell to talk to a different machine like `myvm2`, simply re-run
+`docker-machine env` in the same or a different shell, then run the given
+command to point to `myvm2`. This is always specific to the current shell. If
+you change to an unconfigured shell or open a new one, you need to re-run the
+commands. Use `docker-machine ls` to list machines, see what state they are in,
+get IP addresses, and find out which one, if any, you are connected to. To learn
+more, see the [Docker Machine getting started topics](/machine/get-started.md#create-a-machine).
+>
+> * Alternatively, you can wrap Docker commands in the form of
+`docker-machine ssh <machine> "<command>"`, which logs directly into
+the VM but doesn't give you immediate access to files on your local host.
+>
+> * On Mac and Linux, you can use `docker-machine scp <file> <machine>:~`
+to copy files across machines, but Windows users need a Linux terminal emulator
+like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} for this to work.
+>
+> This tutorial demos both `docker-machine ssh` and
+`docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
+-->
 <blockquote>
-  <p>Connecting to VMs with <code class="highlighter-rouge">docker-machine env</code> and <code class="highlighter-rouge">docker-machine ssh</code></p>
+  <p><code class="highlighter-rouge">docker-machine env</code> と <code class="highlighter-rouge">docker-machine ssh</code> を使った VM への接続</p>
 
   <ul>
     <li>
-      <p>To set your shell to talk to a different machine like <code class="highlighter-rouge">myvm2</code>, simply re-run
-<code class="highlighter-rouge">docker-machine env</code> in the same or a different shell, then run the given
-command to point to <code class="highlighter-rouge">myvm2</code>. This is always specific to the current shell. If
-you change to an unconfigured shell or open a new one, you need to re-run the
-commands. Use <code class="highlighter-rouge">docker-machine ls</code> to list machines, see what state they are in,
-get IP addresses, and find out which one, if any, you are connected to. To learn
-more, see the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/get-started.md#create-a-machine">Docker Machine getting started topics</a>.</p>
+      <p>シェル設定を使って <code class="highlighter-rouge">myvm2</code> のような別のマシンと接続したい場合は、同一シェル上、あるいは別のシェル上にて <code class="highlighter-rouge">docker-machine env</code>
+を実行するだけです。こうすることで実行コマンドは <code class="highlighter-rouge">myvm2</code> に向けて行われます。
+シェル設定を行っていないシェルや、新たに開いたシェルを用いる場合には、再度設定する必要があります。
+<code class="highlighter-rouge">docker-machine ls</code> によりマシン一覧が表示され、状態（state）や IP アドレスを見たり、何があるのか、どれに接続すべきなのかが分かります。
+詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/get-started.md#create-a-machine">Docker Machine をはじめるためのトピック</a>を参照してください。</p>
     </li>
     <li>
-      <p>Alternatively, you can wrap Docker commands in the form of
-<code class="highlighter-rouge">docker-machine ssh &lt;machine&gt; "&lt;command&gt;"</code>, which logs directly into
-the VM but doesn’t give you immediate access to files on your local host.</p>
+      <p>上とは別に <code class="highlighter-rouge">docker-machine ssh &lt;マシン&gt; "&lt;コマンド&gt;"</code> という形で Docker コマンドをラップして実行することもできます。
+これは VM に直接ログインするものですが、ローカルホストにあるファイルを操作することはできなくなります。</p>
     </li>
     <li>
-      <p>On Mac and Linux, you can use <code class="highlighter-rouge">docker-machine scp &lt;file&gt; &lt;machine&gt;:~</code>
-to copy files across machines, but Windows users need a Linux terminal emulator
-like <a href="https://git-for-windows.github.io/" target="_blank" class="_">Git Bash</a> for this to work.</p>
+      <p>Mac や Linux の場合 <code class="highlighter-rouge">docker-machine scp &lt;ファイル&gt; &lt;マシン&gt;:~</code> というコマンドを使って、マシン間でのファイルコピーができます。
+しかし Windows ユーザーがこれを行うためには <a href="https://git-for-windows.github.io/" target="_blank" class="_">Git Bash</a> のような Linux ターミナルエミュレーターを利用する必要があります。</p>
     </li>
   </ul>
 
-  <p>This tutorial demos both <code class="highlighter-rouge">docker-machine ssh</code> and
-<code class="highlighter-rouge">docker-machine env</code>, since these are available on all platforms via the <code class="highlighter-rouge">docker-machine</code> CLI.</p>
+  <p>このチュートリアルでは <code class="highlighter-rouge">docker-machine ssh</code> と <code class="highlighter-rouge">docker-machine env</code> の両方を示します。
+いずれの方法でも、あらゆるプラットフォームにおいて <code class="highlighter-rouge">docker-machine</code> CLI が実行できることになります。</p>
 </blockquote>
 
 <!--
@@ -865,63 +918,118 @@ like <a href="https://git-for-windows.github.io/" target="_blank" class="_">Git 
 -->
 <h3 id="accessing-your-cluster">クラスターへのアクセス</h3>
 
-<p>You can access your app from the IP address of <strong>either</strong> <code class="highlighter-rouge">myvm1</code> or <code class="highlighter-rouge">myvm2</code>.</p>
+<!--
+You can access your app from the IP address of **either** `myvm1` or `myvm2`.
+-->
+<p>アプリに対しては <code class="highlighter-rouge">myvm1</code> や <code class="highlighter-rouge">myvm2</code> の IP アドレスのどちらを使ってもアクセスできます。</p>
 
-<p>The network you created is shared between them and load-balancing. Run
-<code class="highlighter-rouge">docker-machine ls</code> to get your VMs’ IP addresses and visit either of them on a
-browser, hitting refresh (or just <code class="highlighter-rouge">curl</code> them).</p>
+<!--
+The network you created is shared between them and load-balancing. Run
+`docker-machine ls` to get your VMs' IP addresses and visit either of them on a
+browser, hitting refresh (or just `curl` them).
+-->
+<p>作り出されたネットワークは、各マシン間で共有され負荷分散が行われます。
+<code class="highlighter-rouge">docker-machine ls</code> を実行して VM の IP アドレスを確認してください。
+そしてどちらでもよいので、ブラウザーを使ってアクセスし更新ボタンを押してください（あるいは <code class="highlighter-rouge">curl</code> コマンドを使うのでも構いません）。</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app-in-browser-swarm.png" alt="Hello World in browser" /></p>
+<!--
+![Hello World in browser](/get-started/images/app-in-browser-swarm.png)
+-->
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app-in-browser-swarm.png" alt="ブラウザー上の Hello World" /></p>
 
-<p>There are five possible container IDs all cycling by randomly, demonstrating
-the load-balancing.</p>
+<!--
+There are five possible container IDs all cycling by randomly, demonstrating
+the load-balancing.
+-->
+<p>コンテナー ID は 5 つの値がランダムな順に割り当てられます。
+これによって負荷分散が行われていることがわかります。</p>
 
-<p>The reason both IP addresses work is that nodes in a swarm participate in an
-ingress <strong>routing mesh</strong>. This ensures that a service deployed at a certain port
+<!--
+The reason both IP addresses work is that nodes in a swarm participate in an
+ingress **routing mesh**. This ensures that a service deployed at a certain port
 within your swarm always has that port reserved to itself, no matter what node
-is actually running the container. Here’s a diagram of how a routing mesh for a
-service called <code class="highlighter-rouge">my-web</code> published at port <code class="highlighter-rouge">8080</code> on a three-node swarm would
-look:</p>
+is actually running the container. Here's a diagram of how a routing mesh for a
+service called `my-web` published at port `8080` on a three-node swarm would
+look:
+-->
+<p>2 つの IP アドレスが有効になる理由は、スウォーム内の各ノードが ingress の<strong>ルーティングメッシュ</strong>（routing mesh）に属しているからです。
+スウォーム内の特定ポートにおいてデプロイされたサービスは、常にそのポートが割り当てられるようになります。
+どのノードがコンテナー内にて実際に動いているかは関係がありません。
+以下はルーティングメッシュとはどういうものかを示す図です。
+<code class="highlighter-rouge">my-web</code> というサービスが、ノードを 3 つ持つスウォーム上にてポート <code class="highlighter-rouge">8080</code> により公開されている様子です。</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/images/ingress-routing-mesh.png" alt="routing mesh diagram" /></p>
+<!--
+![routing mesh diagram](/engine/swarm/images/ingress-routing-mesh.png)
+-->
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/images/ingress-routing-mesh.png" alt="ルーティングメッシュ図" /></p>
 
+<!--
+> Having connectivity trouble?
+>
+> Keep in mind that to use the ingress network in the swarm,
+> you need to have the following ports open between the swarm nodes
+> before you enable swarm mode:
+>
+> - Port 7946 TCP/UDP for container network discovery.
+> - Port 4789 UDP for the container ingress network.
+>
+> Double check what you have in the ports section under your web
+> service and make sure the ip addresses you enter in your browser
+> or curl reflects that
+-->
 <blockquote>
-  <p>Having connectivity trouble?</p>
+  <p>接続に問題があり？</p>
 
-  <p>Keep in mind that to use the ingress network in the swarm,
-you need to have the following ports open between the swarm nodes
-before you enable swarm mode:</p>
+  <p>スウォーム内で ingress ネットワークを使う際には、スウォームモードを有効にする前に、スウォームノード間において以下のポートを開いておく必要があります。</p>
 
   <ul>
     <li>Port 7946 TCP/UDP for container network discovery.</li>
     <li>Port 4789 UDP for the container ingress network.</li>
   </ul>
 
-  <p>Double check what you have in the ports section under your web
-service and make sure the ip addresses you enter in your browser
-or curl reflects that</p>
+  <p>ウェブサービスのポート設定をよく確認してください。
+またブラウザーあるいは curl コマンドに用いる IP アドレスが適切なものであることも確認してください。</p>
 </blockquote>
 
 <!--
 ## Iterating and scaling your app
 -->
-<h2 id="iterating-and-scaling-your-app">Iterating and scaling your app</h2>
+<h2 id="iterating-and-scaling-your-app">アプリ操作の繰り返しとスケーリング</h2>
 
-<p>From here you can do everything you learned about in parts 2 and 3.</p>
+<!--
+From here you can do everything you learned about in parts 2 and 3.
+-->
+<p>ここからは 2 部と 3 部で学んだ操作をすべて行っていくことができます。</p>
 
-<p>Scale the app by changing the <code class="highlighter-rouge">docker-compose.yml</code> file.</p>
+<!--
+Scale the app by changing the `docker-compose.yml` file.
+-->
+<p>アプリをスケーリングするには <code class="highlighter-rouge">docker-compose.yml</code> ファイルを変更します。</p>
 
-<p>Change the app behavior by editing code, then rebuild, and push the new image.
-(To do this, follow the same steps you took earlier to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/#build-the-app">build the
-app</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/#publish-the-image">publish the
-image</a>).</p>
+<!--
+Change the app behavior by editing code, then rebuild, and push the new image.
+(To do this, follow the same steps you took earlier to [build the
+app](/get-started/part2/#build-the-app) and [publish the
+image](/get-started/part2/#publish-the-image)).
+-->
+<p>アプリの処理内容を変更するには、コードを編集して、新たなイメージの再構築とプッシュを行います。
+（これを行うには、前と同様に<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/#build-the-app">アプリの構築</a>と<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/#publish-the-image">イメージの公開</a>の手順に従います。）</p>
 
-<p>In either case, simply run <code class="highlighter-rouge">docker stack deploy</code> again to deploy these changes.</p>
+<!--
+In either case, simply run `docker stack deploy` again to deploy these changes.
+-->
+<p>どちらにせよ、再度 <code class="highlighter-rouge">docker stack deploy</code> を実行するだけで、変更内容をすぐにデプロイすることができます。</p>
 
-<p>You can join any machine, physical or virtual, to this swarm, using the
-same <code class="highlighter-rouge">docker swarm join</code> command you used on <code class="highlighter-rouge">myvm2</code>, and capacity is added
-to your cluster. Just run <code class="highlighter-rouge">docker stack deploy</code> afterwards, and your app can
-take advantage of the new resources.</p>
+<!--
+You can join any machine, physical or virtual, to this swarm, using the
+same `docker swarm join` command you used on `myvm2`, and capacity is added
+to your cluster. Just run `docker stack deploy` afterwards, and your app can
+take advantage of the new resources.
+-->
+<p>物理マシン仮想マシンを問わず、どのマシンからでもスウォームに加わることができます。
+<code class="highlighter-rouge">myvm2</code> に対して行った <code class="highlighter-rouge">docker swarm join</code> コマンドを同じように実行するだけです。
+クラスターには性能を向上させるマシンが加えられることになります。
+この後に <code class="highlighter-rouge">docker stack deploy</code> を実行すれば、新たなリソースを活用してアプリが稼動します。</p>
 
 <!--
 ## Cleanup and reboot
@@ -931,34 +1039,52 @@ take advantage of the new resources.</p>
 <!--
 ### Stacks and swarms
 -->
-<h3 id="stacks-and-swarms">Stacks and swarms</h3>
+<h3 id="stacks-and-swarms">スタックとスウォーム</h3>
 
 <p>You can tear down the stack with <code class="highlighter-rouge">docker stack rm</code>. For example:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack rm getstartedlab
 </code></pre></div></div>
 
+<!--
+> Keep the swarm or remove it?
+>
+> At some point later, you can remove this swarm if you want to with
+> `docker-machine ssh myvm2 "docker swarm leave"` on the worker
+> and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
+> manager, but _you need this swarm for part 5, so keep it
+> around for now_.
+-->
 <blockquote>
-  <p>Keep the swarm or remove it?</p>
+  <p>スウォームはとっておくか消すか？</p>
 
-  <p>At some point later, you can remove this swarm if you want to with
-<code class="highlighter-rouge">docker-machine ssh myvm2 "docker swarm leave"</code> on the worker
-and <code class="highlighter-rouge">docker-machine ssh myvm1 "docker swarm leave --force"</code> on the
-manager, but <em>you need this swarm for part 5, so keep it
-around for now</em>.</p>
+  <p>この後にスウォームを削除したい場合は、ワーカー上であれば <code class="highlighter-rouge">docker-machine ssh myvm2 "docker swarm leave"</code>、マネージャー上であれば <code class="highlighter-rouge">docker-machine ssh myvm1 "docker swarm leave --force"</code> を実行します。
+ただし 5 部においてこのスウォームを利用するので、このままとっておいてください。</p>
 </blockquote>
 
-<h3 id="unsetting-docker-machine-shell-variable-settings">Unsetting docker-machine shell variable settings</h3>
+<!--
+### Unsetting docker-machine shell variable settings
+-->
+<h3 id="unsetting-docker-machine-shell-variable-settings">docker-machine シェル環境設定の無効化</h3>
 
-<p>You can unset the <code class="highlighter-rouge">docker-machine</code> environment variables in your current shell
-with the given command.</p>
+<!--
+You can unset the `docker-machine` environment variables in your current shell
+with the given command.
+-->
+<p>現在いるシェル上において <code class="highlighter-rouge">docker-machine</code> の環境変数を無効化するには、以下のコマンドを実行します。</p>
 
-<p>On <strong>Mac or Linux</strong> the command is:</p>
+<p><!--
+  On **Mac or Linux** the command is:
+  -->
+  <strong>Mac または Linux</strong> の場合は以下とします。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">eval</span> <span class="k">$(</span>docker-machine env <span class="nt">-u</span><span class="k">)</span>
 </code></pre></div></div>
 
-<p>On <strong>Windows</strong> the command is:</p>
+<p><!--
+  On **Windows** the command is:
+  -->
+  <strong>Windows</strong> の場合は以下とします。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env <span class="nt">-u</span> | Invoke-Expression
 </code></pre></div></div>
@@ -968,9 +1094,16 @@ and allows you to continue working in the same shell, now using native <code cla
 commands (for example, on Docker Desktop for Mac or Docker Desktop for Windows). To learn more,
 see the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/get-started/#unset-environment-variables-in-the-current-shell">Machine topic on unsetting environment variables</a>.</p>
 
-<h3 id="restarting-docker-machines">Restarting Docker machines</h3>
+<!--
+### Restarting Docker machines
+-->
+<h3 id="restarting-docker-machines">Docker マシンの再起動</h3>
 
-<p>If you shut down your local host, Docker machines stops running. You can check the status of machines by running <code class="highlighter-rouge">docker-machine ls</code>.</p>
+<!--
+If you shut down your local host, Docker machines stops running. You can check the status of machines by running `docker-machine ls`.
+-->
+<p>ローカルホストをシャットダウンすると Docker マシンも停止します。
+Docker マシンの状態は <code class="highlighter-rouge">docker-machine ls</code> を実行して確認することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine ls
 NAME    ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
@@ -978,12 +1111,18 @@ myvm1   -        virtualbox   Stopped                 Unknown
 myvm2   -        virtualbox   Stopped                 Unknown
 </code></pre></div></div>
 
-<p>To restart a machine that’s stopped, run:</p>
+<!--
+To restart a machine that's stopped, run:
+-->
+<p>停止しているマシンを再起動するには以下を実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine start &lt;machine-name&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine start &lt;マシン名&gt;
 </code></pre></div></div>
 
-<p>For example:</p>
+<!--
+For example:
+-->
+<p>たとえば以下のとおりです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine start myvm1
 Starting "myvm1"...
@@ -1006,7 +1145,10 @@ Started machines may have new IP addresses. You may need to re-run the `docker-m
 
 <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/" class="button outline-btn">5 部へ &gt;&gt;</a></p>
 
-<h2 id="recap-and-cheat-sheet-optional">Recap and cheat sheet (optional)</h2>
+<!--
+## Recap and cheat sheet (optional)
+-->
+<h2 id="recap-and-cheat-sheet-optional">まとめと早見表（おまけ）</h2>
 
 <p>Here’s <a href="https://asciinema.org/a/113837">a terminal recording of what was covered on this
 page</a>:</p>
@@ -1155,15 +1297,15 @@ docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</s
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#accessing-your-cluster" class="nomunge">クラスターへのアクセス</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#iterating-and-scaling-your-app" class="nomunge">Iterating and scaling your app</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#iterating-and-scaling-your-app" class="nomunge">アプリ操作の繰り返しとスケーリング</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#cleanup-and-reboot" class="nomunge">Cleanup and reboot</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#stacks-and-swarms" class="nomunge">Stacks and swarms</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#unsetting-docker-machine-shell-variable-settings" class="nomunge">Unsetting docker-machine shell variable settings</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#restarting-docker-machines" class="nomunge">Restarting Docker machines</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#stacks-and-swarms" class="nomunge">スタックとスウォーム</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#unsetting-docker-machine-shell-variable-settings" class="nomunge">docker-machine シェル環境設定の無効化</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#restarting-docker-machines" class="nomunge">Docker マシンの再起動</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#recap-and-cheat-sheet-optional" class="nomunge">Recap and cheat sheet (optional)</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#recap-and-cheat-sheet-optional" class="nomunge">まとめと早見表（おまけ）</a></li>
 </ul>
 
 
