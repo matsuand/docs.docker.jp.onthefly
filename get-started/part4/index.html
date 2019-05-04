@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-03 12:28:34 +0900 -->
+<!-- Page generated 2019-05-04 11:36:07 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,7 +74,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-03T12:28:34+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-04T11:36:07+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -84,7 +84,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールしていること。 3 部の前提条件で説明した Docker Compose を入手していること。 Docker Machine を入手していること。 Docker Desktop for Mac と..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-03T12:28:34+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-04T11:36:07+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration">
@@ -99,13 +99,13 @@
 	<title>はじめよう 4部: スウォーム | Docker Documentation</title>
 <meta property="og:title" content="はじめよう 4部: スウォーム" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Learn how to create clusters of Dockerized machines." />
-<meta property="og:description" content="Learn how to create clusters of Dockerized machines." />
+<meta name="description" content="Docker 化したマシンをクラスターとして生成する方法を学ぶ。" />
+<meta property="og:description" content="Docker 化したマシンをクラスターとして生成する方法を学ぶ。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"はじめよう 4部: スウォーム","description":"Learn how to create clusters of Dockerized machines.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"はじめよう 4部: スウォーム","description":"Docker 化したマシンをクラスターとして生成する方法を学ぶ。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -983,8 +983,8 @@ look:
   <p>スウォーム内で ingress ネットワークを使う際には、スウォームモードを有効にする前に、スウォームノード間において以下のポートを開いておく必要があります。</p>
 
   <ul>
-    <li>Port 7946 TCP/UDP for container network discovery.</li>
-    <li>Port 4789 UDP for the container ingress network.</li>
+    <li>ポート 7946 TCP/UDP ネットワーク検出用コンテナー</li>
+    <li>ポート 4789 UDP ingress ネットワーク用コンテナー</li>
   </ul>
 
   <p>ウェブサービスのポート設定をよく確認してください。
@@ -1034,14 +1034,18 @@ take advantage of the new resources.
 <!--
 ## Cleanup and reboot
 -->
-<h2 id="cleanup-and-reboot">Cleanup and reboot</h2>
+<h2 id="cleanup-and-reboot">クリアと再起動</h2>
 
 <!--
 ### Stacks and swarms
 -->
 <h3 id="stacks-and-swarms">スタックとスウォーム</h3>
 
-<p>You can tear down the stack with <code class="highlighter-rouge">docker stack rm</code>. For example:</p>
+<!--
+You can tear down the stack with `docker stack rm`. For example:
+-->
+<p>スタックの削除は <code class="highlighter-rouge">docker stack rm</code> により行います。
+たとえば以下のとおりです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack rm getstartedlab
 </code></pre></div></div>
@@ -1089,10 +1093,17 @@ with the given command.
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env <span class="nt">-u</span> | Invoke-Expression
 </code></pre></div></div>
 
-<p>This disconnects the shell from <code class="highlighter-rouge">docker-machine</code> created virtual machines,
-and allows you to continue working in the same shell, now using native <code class="highlighter-rouge">docker</code>
+<!--
+This disconnects the shell from `docker-machine` created virtual machines,
+and allows you to continue working in the same shell, now using native `docker`
 commands (for example, on Docker Desktop for Mac or Docker Desktop for Windows). To learn more,
-see the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/get-started/#unset-environment-variables-in-the-current-shell">Machine topic on unsetting environment variables</a>.</p>
+see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
+-->
+<p>上のコマンドは、仮想マシンを作り出した <code class="highlighter-rouge">docker-machine</code> のシェルを抜け出ます。
+同じシェル上において作業を進めていきますが、今度は（Docker Desktop for Mac あるいは
+Docker Desktop for Windows の）ネイティブな <code class="highlighter-rouge">docker</code> コマンドを利用することになります。
+より詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/get-started/#unset-environment-variables-in-the-current-shell">Machine のトピック: カレントシェルの環境変数クリア</a>
+を参照してください。</p>
 
 <!--
 ### Restarting Docker machines
@@ -1150,42 +1161,56 @@ Started machines may have new IP addresses. You may need to re-run the `docker-m
 -->
 <h2 id="recap-and-cheat-sheet-optional">まとめと早見表（おまけ）</h2>
 
-<p>Here’s <a href="https://asciinema.org/a/113837">a terminal recording of what was covered on this
-page</a>:</p>
+<!--
+Here's [a terminal recording of what was covered on this
+page](https://asciinema.org/a/113837):
+-->
+<p><a href="https://asciinema.org/a/113837">このページで扱った端末操作の録画</a>がこちらです。</p>
 
 <script type="text/javascript" src="https://asciinema.org/a/113837.js" id="asciicast-113837" speed="2" async=""></script>
 
-<p>In part 4 you learned what a swarm is, how nodes in swarms can be managers or
+<!--
+In part 4 you learned what a swarm is, how nodes in swarms can be managers or
 workers, created a swarm, and deployed an application on it. You saw that the
-core Docker commands didn’t change from part 3, they just had to be targeted to
-run on a swarm master. You also saw the power of Docker’s networking in action,
+core Docker commands didn't change from part 3, they just had to be targeted to
+run on a swarm master. You also saw the power of Docker's networking in action,
 which kept load-balancing requests across containers, even though they were
 running on different machines. Finally, you learned how to iterate and scale
-your app on a cluster.</p>
+your app on a cluster.
+-->
+<p>4 部ではスウォームとはなにかを学びました。
+そしてスォーム内のノードがマネージャーやワーカーとなる様子、スウォームの生成、アプリケーションのデプロイ方法についても学びました。
+ここでわかったことは、基本的な Docker コマンドが 3 部と変わっていないことであり、それがスウォームマネージャー上で実行するように仕向けていました。
+また Docker のネットワークが稼動する様子も見てきました。
+コンテナーが異なるマシン上で稼動していても、その間での負荷分散の要求に応えていくものです。
+最後には、クラスター上におけるアプリ操作の繰り返しとスケーリングに学びました。</p>
 
-<p>Here are some commands you might like to run to interact with your swarm and your VMs a bit:</p>
+<!--
+Here are some commands you might like to run to interact with your swarm and your VMs a bit:
+-->
+<p>スウォームや VM とのやり取りを行うコマンドをここにまとめます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine create <span class="nt">--driver</span> virtualbox myvm1 <span class="c"># Create a VM (Mac, Win7, Linux)</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine create <span class="nt">--driver</span> virtualbox myvm1   <span class="c"># VM (Mac, Win7, Linux) の生成</span>
 docker-machine create <span class="nt">-d</span> hyperv <span class="nt">--hyperv-virtual-switch</span> <span class="s2">"myswitch"</span> myvm1 <span class="c"># Win10</span>
-docker-machine env myvm1                <span class="c"># View basic information about your node</span>
-docker-machine ssh myvm1 <span class="s2">"docker node ls"</span>         <span class="c"># List the nodes in your swarm</span>
-docker-machine ssh myvm1 <span class="s2">"docker node inspect &lt;node ID&gt;"</span>        <span class="c"># Inspect a node</span>
-docker-machine ssh myvm1 <span class="s2">"docker swarm join-token -q worker"</span>   <span class="c"># View join token</span>
-docker-machine ssh myvm1   <span class="c"># Open an SSH session with the VM; type "exit" to end</span>
-docker node <span class="nb">ls</span>                <span class="c"># View nodes in swarm (while logged on to manager)</span>
-docker-machine ssh myvm2 <span class="s2">"docker swarm leave"</span>  <span class="c"># Make the worker leave the swarm</span>
-docker-machine ssh myvm1 <span class="s2">"docker swarm leave -f"</span> <span class="c"># Make master leave, kill swarm</span>
-docker-machine <span class="nb">ls</span> <span class="c"># list VMs, asterisk shows which VM this shell is talking to</span>
-docker-machine start myvm1            <span class="c"># Start a VM that is currently not running</span>
-docker-machine env myvm1      <span class="c"># show environment variables and command for myvm1</span>
-<span class="nb">eval</span> <span class="k">$(</span>docker-machine env myvm1<span class="k">)</span>         <span class="c"># Mac command to connect shell to myvm1</span>
-&amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env myvm1 | Invoke-Expression   <span class="c"># Windows command to connect shell to myvm1</span>
-docker stack deploy <span class="nt">-c</span> &lt;file&gt; &lt;app&gt;  <span class="c"># Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file</span>
-docker-machine scp docker-compose.yml myvm1:~ <span class="c"># Copy file to node's home dir (only required if you use ssh to connect to manager and deploy the app)</span>
-docker-machine ssh myvm1 <span class="s2">"docker stack deploy -c &lt;file&gt; &lt;app&gt;"</span>   <span class="c"># Deploy an app using ssh (you must have first copied the Compose file to myvm1)</span>
-<span class="nb">eval</span> <span class="k">$(</span>docker-machine env <span class="nt">-u</span><span class="k">)</span>     <span class="c"># Disconnect shell from VMs, use native docker</span>
-docker-machine stop <span class="k">$(</span>docker-machine <span class="nb">ls</span> <span class="nt">-q</span><span class="k">)</span>               <span class="c"># Stop all running VMs</span>
-docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</span> <span class="nt">-q</span><span class="k">)</span> <span class="c"># Delete all VMs and their disk images</span>
+docker-machine env myvm1                                  <span class="c"># ノードの基本情報表示</span>
+docker-machine ssh myvm1 <span class="s2">"docker node ls"</span>           <span class="c"># スウォームのノード一覧表示</span>
+docker-machine ssh myvm1 <span class="s2">"docker node inspect &lt;node ID&gt;"</span>      <span class="c"># ノードの詳細表示</span>
+docker-machine ssh myvm1 <span class="s2">"docker swarm join-token -q worker"</span>  <span class="c"># 参加トークン表示</span>
+docker-machine ssh myvm1              <span class="c"># VM への SSHセッション開始, "exit" で終了</span>
+docker node <span class="nb">ls</span>                 <span class="c"># スウォーム内ノード表示 (マネージャーログオン時)</span>
+docker-machine ssh myvm2 <span class="s2">"docker swarm leave"</span>       <span class="c"># スウォームからワーカー削除</span>
+docker-machine ssh myvm1 <span class="s2">"docker swarm leave -f"</span>  <span class="c"># マスター削除、スウォーム削除</span>
+docker-machine <span class="nb">ls</span>                <span class="c"># VM 一覧, 当シェルの対話 VM にアスタリスク表示</span>
+docker-machine start myvm1                                    <span class="c"># 非稼動の VM 開始</span>
+docker-machine env myvm1                        <span class="c"># myvm1 の環境変数とコマンド表示</span>
+<span class="nb">eval</span> <span class="k">$(</span>docker-machine env myvm1<span class="k">)</span>            <span class="c"># Mac コマンド, myvm1 へのシェル接続</span>
+&amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env myvm1 | Invoke-Expression   <span class="c"># Windows コマンド, myvm1 へのシェル接続</span>
+docker stack deploy <span class="nt">-c</span> &lt;file&gt; &lt;app&gt;  <span class="c"># アプリデプロイ,コマンドシェルはマネージャー(myvm1)との対話要, ローカル Compose ファイル利用。</span>
+docker-machine scp docker-compose.yml myvm1:~ <span class="c"># ノードのホームにファイルコピー (マネージャーへssh接続,アプリデプロイ時のみ)</span>
+docker-machine ssh myvm1 <span class="s2">"docker stack deploy -c &lt;file&gt; &lt;app&gt;"</span>   <span class="c"># ssh利用したアプリデプロイ (まずmyvm1へComposeファイルコピーが必要)</span>
+<span class="nb">eval</span> <span class="k">$(</span>docker-machine env <span class="nt">-u</span><span class="k">)</span>       <span class="c"># dockerネイティブコマンド, VMからシェル切断</span>
+docker-machine stop <span class="k">$(</span>docker-machine <span class="nb">ls</span> <span class="nt">-q</span><span class="k">)</span>                 <span class="c"># 稼働中 VM の全停止</span>
+docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</span> <span class="nt">-q</span><span class="k">)</span>   <span class="c"># 全 VM とそのディスクイメージの削除</span>
 </code></pre></div></div>
 
 							<!-- tags -->
@@ -1298,7 +1323,7 @@ docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</s
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#iterating-and-scaling-your-app" class="nomunge">アプリ操作の繰り返しとスケーリング</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#cleanup-and-reboot" class="nomunge">Cleanup and reboot</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#cleanup-and-reboot" class="nomunge">クリアと再起動</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#stacks-and-swarms" class="nomunge">スタックとスウォーム</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#unsetting-docker-machine-shell-variable-settings" class="nomunge">docker-machine シェル環境設定の無効化</a></li>

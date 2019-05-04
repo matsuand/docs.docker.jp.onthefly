@@ -27,7 +27,7 @@ var glossary = [
 
 {
 "term": "build",
-"def": "<p>build is the process of building Docker images using a <a href=\"/glossary/?term=dockerfile\">Dockerfile</a>.\nThe build uses a Dockerfile and a “context”. The context is the set of files in the\ndirectory in which the image is built.</p>\n"
+"def": "<p>build（ビルド）は <a href=\"/glossary/?term=dockerfile\">Dockerfile</a> を使って Docker イメージを構築するプロセスのこと。\nビルドでは Dockerfile と “コンテキスト”（context）を利用する。\nコンテキストとは、イメージが構築されたディレクトリ内にある一連のファイルのこと。</p>\n"
 },
 
 {
@@ -52,12 +52,12 @@ var glossary = [
 
 {
 "term": "container",
-"def": "<p>A container is a runtime instance of a <a href=\"/glossary/?term=image\">docker image</a>.</p>\n\n<p>A Docker container consists of</p>\n\n<ul>\n  <li>A Docker image</li>\n  <li>An execution environment</li>\n  <li>A standard set of instructions</li>\n</ul>\n\n<p>The concept is borrowed from Shipping Containers, which define a standard to ship\ngoods globally. Docker defines a standard to ship software.</p>\n"
+"def": "<p>container（コンテナー）とは <a href=\"/glossary/?term=image\">docker イメージ</a> の実行時インスタンスのこと。</p>\n\n<p>Docker コンテナーは以下により構成される。</p>\n\n<ul>\n  <li>Docker イメージ</li>\n  <li>実行環境</li>\n  <li>命令の標準セット</li>\n</ul>\n\n<p>この考え方は輸送コンテナーからきています。\n輸送コンテナーには標準が定義されていて、どこへでも物を輸送していきます。\nDocker も標準を定義してソフトウェアを導入します。</p>\n"
 },
 
 {
 "term": "Docker",
-"def": "<p>Docker という語は以下を意味します。</p>\n\n<ul>\n  <li>Docker プロジェクト全体のこと。\n開発者やシステム管理者がアプリケーションの開発、移行、実行を行うプラットフォームのこと。</li>\n  <li>ホスト上で稼動する docker デーモンのこと。\nそのホストはイメージとコンテナーを管理する（Docker Engine とも呼ぶ）。</li>\n</ul>\n"
+"def": "<p>Docker とは以下を意味する。</p>\n\n<ul>\n  <li>Docker プロジェクト全体のこと。\n開発者やシステム管理者がアプリケーションの開発、移行、実行を行うプラットフォームのこと。</li>\n  <li>ホスト上で稼動する docker デーモンのこと。\nそのホストはイメージとコンテナーを管理する（Docker Engine とも呼ぶ）。</li>\n</ul>\n"
 },
 
 {
@@ -248,6 +248,11 @@ var glossary = [
 {
 "term": "x86_64",
 "def": "<p>x86_64 (or x86-64) refers to a 64-bit instruction set invented by AMD as an\nextension of Intel’s x86 architecture. AMD calls its x86_64 architecture,\nAMD64, and Intel calls its implementation, Intel 64.</p>\n"
+},
+
+{
+"term": "コンテナー",
+"def": "<p>コンテナー（container）とは <a href=\"/glossary/?term=image\">docker イメージ</a> の実行時インスタンスのこと。</p>\n\n<p>Docker コンテナーは以下により構成される。</p>\n\n<ul>\n  <li>Docker イメージ</li>\n  <li>実行環境</li>\n  <li>命令の標準セット</li>\n</ul>\n\n<p>この考え方は輸送コンテナーからきています。\n輸送コンテナーには標準が定義されていて、どこへでも物を輸送していきます。\nDocker も標準を定義してソフトウェアを導入します。</p>\n"
 }
 
 ]

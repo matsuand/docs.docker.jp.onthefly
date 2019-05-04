@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-30 08:10:32 +0000 -->
+<!-- Page generated 2019-05-04 11:36:07 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-04T11:36:07+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Create a base image"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Most Dockerfiles start from a parent image. If you need to completely control the contents of your image, you might need to create a base image instead. Here’s the difference:..." />
+	<meta name="twitter:title" itemprop="title name" content="ベースイメージの生成"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Dockerfile は普通は親イメージから作り始めます。 イメージ内容を完全にコントロールする場合は、ベースイメージを作り出すこともあります。 その違いは以下のとおりです。 親イメージは基準とするイメージのことです。 Dockerfile 内の FROM ディレクティブによって指定されます。 Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。 Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。 ただしこの用語は混同されて用いられることもあります。 ベースイメージは Dockerfile において FROM 行がないか、あるいは FROM scratch が記述されます。 ここではベースイメージの生成方法をいくつか示します。 パッケージ化しようとしている Linux ディストリビューションに大きく依存する処理操作もあります。 以下に例をあげていきます。 新たなイメージの提供に支障があれば、プルリクエストをあげてください。 tar を使ったフルイメージの生成..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-04T11:36:07+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="images, base image, examples">
@@ -100,16 +100,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Create a base image | Docker Documentation</title>
-<meta property="og:title" content="Create a base image" />
+	<title>ベースイメージの生成 | Docker Documentation</title>
+<meta property="og:title" content="ベースイメージの生成" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="How to create base images" />
-<meta property="og:description" content="How to create base images" />
+<meta name="description" content="ベースイメージを生成する方法。" />
+<meta property="og:description" content="ベースイメージを生成する方法。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Create a base image","description":"How to create base images","url":"https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"ベースイメージの生成","description":"ベースイメージを生成する方法。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -179,48 +179,80 @@
 						<section class="section">
 							
 								
-							<h1>Create a base image</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>ベースイメージの生成</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 
 							
 							
-							<p>Most Dockerfiles start from a parent image. If you need to completely control
+							<!--
+Most Dockerfiles start from a parent image. If you need to completely control
 the contents of your image, you might need to create a base image instead.
-Here’s the difference:</p>
+Here's the difference:
+-->
+<p>Dockerfile は普通は親イメージから作り始めます。
+イメージ内容を完全にコントロールする場合は、ベースイメージを作り出すこともあります。
+その違いは以下のとおりです。</p>
 
+<!--
+- A [parent image](/glossary.md?term=parent%20image) is the image that your
+  image is based on. It refers to the contents of the `FROM` directive in the
+  Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
+  image. Most Dockerfiles start from a parent image, rather than a base image.
+  However, the terms are sometimes used interchangeably.
+-->
 <ul>
   <li>
-    <p>A <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary.md?term=parent%20image">parent image</a> is the image that your
-image is based on. It refers to the contents of the <code class="highlighter-rouge">FROM</code> directive in the
-Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
-image. Most Dockerfiles start from a parent image, rather than a base image.
-However, the terms are sometimes used interchangeably.</p>
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary.md?term=parent%20image">親イメージ</a>は基準とするイメージのことです。
+Dockerfile 内の <code class="highlighter-rouge">FROM</code> ディレクティブによって指定されます。
+Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。
+Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
+ただしこの用語は混同されて用いられることもあります。</p>
+
+    <!--
+- A [base image](/glossary.md?term=base%20image) either has no `FROM` line
+  in its Dockerfile, or has `FROM scratch`.
+-->
   </li>
   <li>
-    <p>A <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary.md?term=base%20image">base image</a> either has no <code class="highlighter-rouge">FROM</code> line
-in its Dockerfile, or has <code class="highlighter-rouge">FROM scratch</code>.</p>
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary.md?term=base%20image">ベースイメージ</a>は Dockerfile において <code class="highlighter-rouge">FROM</code> 行がないか、あるいは <code class="highlighter-rouge">FROM scratch</code> が記述されます。</p>
   </li>
 </ul>
 
-<p>This topic shows you several ways to create a base image. The specific process
+<!--
+This topic shows you several ways to create a base image. The specific process
 will depend heavily on the Linux distribution you want to package. We have some
 examples below, and you are encouraged to submit pull requests to contribute new
-ones.</p>
+ones.
+-->
+<p>ここではベースイメージの生成方法をいくつか示します。
+パッケージ化しようとしている Linux ディストリビューションに大きく依存する処理操作もあります。
+以下に例をあげていきます。
+新たなイメージの提供に支障があれば、プルリクエストをあげてください。</p>
 
-<h2 id="create-a-full-image-using-tar">Create a full image using tar</h2>
+<!--
+## Create a full image using tar
+-->
+<h2 id="create-a-full-image-using-tar">tar を使ったフルイメージの生成</h2>
 
-<p>In general, start with a working machine that is running
-the distribution you’d like to package as a parent image, though that is
-not required for some tools like Debian’s
-<a href="https://wiki.debian.org/Debootstrap">Debootstrap</a>, which you can also
-use to build Ubuntu images.</p>
+<!--
+In general, start with a working machine that is running
+the distribution you'd like to package as a parent image, though that is
+not required for some tools like Debian's
+[Debootstrap](https://wiki.debian.org/Debootstrap), which you can also
+use to build Ubuntu images.
+-->
+<p>通常であれば、作業マシン上に稼動するディストリビューションを使い、これを親イメージとしてパッケージにしていくことになります。
+しかし Debian の <a href="https://wiki.debian.org/Debootstrap">Debootstrap</a> のようなツールを使えば作業マシンは不要であり、ここから Ubuntu イメージを作ることもできます。</p>
 
-<p>It can be as simple as this to create an Ubuntu parent image:</p>
+<!--
+It can be as simple as this to create an Ubuntu parent image:
+-->
+<p>Ubuntu の親イメージを作るのは、同じように簡単にできます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo debootstrap xenial xenial &gt; /dev/null
 $ sudo tar -C xenial -c . | docker import - xenial
@@ -235,8 +267,11 @@ DISTRIB_CODENAME=xenial
 DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 </code></pre></div></div>
 
-<p>There are more example scripts for creating parent images in the Docker
-GitHub Repo:</p>
+<!--
+There are more example scripts for creating parent images in the Docker
+GitHub Repo:
+-->
+<p>Docker GitHub レポジトリには、親イメージを生成するスクリプトの例がいろいろとあります。</p>
 
 <ul>
   <li><a href="https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static">BusyBox</a></li>
@@ -245,7 +280,10 @@ GitHub Repo:</p>
   <li><a href="https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap">Debian / Ubuntu</a></li>
 </ul>
 
-<h2 id="create-a-simple-parent-image-using-scratch">Create a simple parent image using scratch</h2>
+<!--
+## Create a simple parent image using scratch
+-->
+<h2 id="create-a-simple-parent-image-using-scratch">単純な親イメージを一から生成</h2>
 
 <p>You can use Docker’s reserved, minimal image, <code class="highlighter-rouge">scratch</code>, as a starting point for
 building containers. Using the <code class="highlighter-rouge">scratch</code> “image” signals to the build process
@@ -296,6 +334,9 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 If you want to test it out, you can clone
 <a href="https://github.com/docker-library/hello-world">the image repo</a>.</p>
 
+<!--
+## More resources
+-->
 <h2 id="more-resources">More resources</h2>
 
 <p>There are lots more resources available to help you write your <code class="highlighter-rouge">Dockerfile</code>.</p>
@@ -341,7 +382,7 @@ written a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/de
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "develop/develop-images/baseimages.md",
-										"title": "Create a base image",
+										"title": "ベースイメージの生成",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/develop/develop-images/baseimages.md"
 									};
 									(function(d, c, j) {
@@ -401,8 +442,8 @@ written a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/de
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#create-a-full-image-using-tar" class="nomunge">Create a full image using tar</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#create-a-simple-parent-image-using-scratch" class="nomunge">Create a simple parent image using scratch</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#create-a-full-image-using-tar" class="nomunge">tar を使ったフルイメージの生成</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#create-a-simple-parent-image-using-scratch" class="nomunge">単純な親イメージを一から生成</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#more-resources" class="nomunge">More resources</a></li>
 </ul>
 
