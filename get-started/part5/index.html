@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-30 08:10:32 +0000 -->
+<!-- Page generated 2019-05-05 11:23:34 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-05T11:23:34+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="はじめよう 5部: スタック"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Install Docker version 1.13 or higher. Get Docker Compose as described in Part 3 prerequisites. Get Docker..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールしていること。 3 部の前提条件で説明した Docker Compose を入手していること。 4 部の前提条件で説明した Docker Machine を入手していること。 1 部の概要説明を読んでいること。 2..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-05T11:23:34+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="stack, data, persist, dependencies, redis, storage, volume, port">
@@ -179,7 +179,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    10 分
+    13 分
   
 </span>
 
@@ -194,73 +194,151 @@
   <li><a href="part6">6: アプリのデプロイ</a></li>
 </ul>
 
-<h2 id="前提条件">前提条件</h2>
+<!--
+## Prerequisites
+-->
+<h2 id="prerequisites">前提条件</h2>
 
+<!--
+- [Install Docker version 1.13 or higher](/engine/installation/).
+- Get [Docker Compose](/compose/overview.md) as described in [Part 3 prerequisites](/get-started/part3.md#prerequisites).
+- Get [Docker Machine](/machine/overview.md) as described in [Part 4 prerequisites](/get-started/part4.md#prerequisites).
+- Read the orientation in [Part 1](/get-started/).
+- Learn how to create containers in [Part 2](/get-started/part2/).
+-->
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/">Install Docker version 1.13 or higher</a>.</li>
-  <li>Get <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a> as described in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#prerequisites">Part 3 prerequisites</a>.</li>
-  <li>Get <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/overview.md">Docker Machine</a> as described in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#prerequisites">Part 4 prerequisites</a>.</li>
-  <li>Read the orientation in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">Part 1</a>.</li>
-  <li>
-    <p>Learn how to create containers in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">Part 2</a>.</p>
-  </li>
-  <li>
-    <p>Make sure you have published the <code class="highlighter-rouge">friendlyhello</code> image you created by
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">pushing it to a registry</a>. We
-use that shared image here.</p>
-  </li>
-  <li>
-    <p>Be sure your image works as a deployed container. Run this command,
-slotting in your info for <code class="highlighter-rouge">username</code>, <code class="highlighter-rouge">repo</code>, and <code class="highlighter-rouge">tag</code>: <code class="highlighter-rouge">docker run -p 80:80
-username/repo:tag</code>, then visit <code class="highlighter-rouge">http://localhost/</code>.</p>
-  </li>
-  <li>
-    <p>Have a copy of your <code class="highlighter-rouge">docker-compose.yml</code> from <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">Part 3</a> handy.</p>
-  </li>
-  <li>
-    <p>Make sure that the machines you set up in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">part 4</a> are running
-and ready. Run <code class="highlighter-rouge">docker-machine ls</code> to verify this. If the machines are
-stopped, run <code class="highlighter-rouge">docker-machine start myvm1</code> to boot the manager, followed
-by <code class="highlighter-rouge">docker-machine start myvm2</code> to boot the worker.</p>
-  </li>
-  <li>Have the swarm you created in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">part 4</a> running and ready. Run
-<code class="highlighter-rouge">docker-machine ssh myvm1 "docker node ls"</code> to verify this. If the swarm is up,
-both nodes report a <code class="highlighter-rouge">ready</code> status. If not, reinitialize the swarm and join
-the worker as described in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#set-up-your-swarm">Set up your
-swarm</a>.</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/index.md">Docker バージョン 1.13 またはそれ以上をインストールしていること</a>。</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#prerequisites">3 部の前提条件</a>で説明した <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a> を入手していること。</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#prerequisites">4 部の前提条件</a>で説明した <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/overview.md">Docker Machine</a> を入手していること。</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">1 部</a>の概要説明を読んでいること。</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で説明した、コンテナーの生成方法を理解していること。</li>
 </ul>
 
-<h2 id="はじめに">はじめに</h2>
+<!--
+- Make sure you have published the `friendlyhello` image you created by
+[pushing it to a registry](/get-started/part2.md#share-your-image). We
+use that shared image here.
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">レジストリに送信</a>して作成した <code class="highlighter-rouge">friendlyhello</code> イメージが共有可能であることを確認します。
+ここではその共有イメージを使います。</li>
+</ul>
 
-<p>In <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">part 4</a>, you learned how to set up a swarm, which is a cluster of
+<!--
+- Be sure your image works as a deployed container. Run this command,
+slotting in your info for `username`, `repo`, and `tag`: `docker run -p 80:80
+username/repo:tag`, then visit `http://localhost/`.
+-->
+<ul>
+  <li>デプロイしたコンテナーとしてイメージが動作することを確認します。
+以下のコマンドを実行してください。
+<code class="highlighter-rouge">docker run -p 80:80 username/repo:tag</code>
+ここで username、repo、tag の部分は各環境に合わせて書き換えてください。
+そして <code class="highlighter-rouge">http://localhost/</code> にアクセスします。</li>
+</ul>
+
+<!--
+- Have a copy of your `docker-compose.yml` from [Part 3](/get-started/part3/) handy.
+-->
+<ul>
+  <li><a href="part3">3 部</a>で扱った <code class="highlighter-rouge">docker-compose.yml</code> ファイルが用意できていること。</li>
+</ul>
+
+<!--
+- Make sure that the machines you set up in [part 4](/get-started/part4/) are running
+and ready. Run `docker-machine ls` to verify this. If the machines are
+stopped, run `docker-machine start myvm1` to boot the manager, followed
+by `docker-machine start myvm2` to boot the worker.
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">4 部</a>で作り上げたマシンが、稼動していて準備ができていること。
+<code class="highlighter-rouge">docker-machine ls</code> を実行して確認することができます。
+マシンが停止していたら <code class="highlighter-rouge">docker-machine start myvm1</code> を実行してマネージャーを起動し、さらに <code class="highlighter-rouge">docker-machine start myvm2</code> を実行してワーカーを起動します。</li>
+</ul>
+
+<!--
+- Have the swarm you created in [part 4](/get-started/part4/) running and ready. Run
+`docker-machine ssh myvm1 "docker node ls"` to verify this. If the swarm is up,
+both nodes report a `ready` status. If not, reinitialize the swarm and join
+the worker as described in [Set up your
+swarm](/get-started/part4.md#set-up-your-swarm).
+-->
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">4 部</a>で生成したスウォームが稼動していて準備ができていること。
+<code class="highlighter-rouge">docker-machine ssh myvm1 "docker node ls"</code> を実行して確認することができます。
+スウォームがまだ稼動していれば、2 つのノードが <code class="highlighter-rouge">ready</code> の状態として表示されます。
+稼動していない場合はスウォームを再度初期化して、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#set-up-your-swarm">スウォームのセットアップ</a>での説明に従ってワーカーを参加させます。</li>
+</ul>
+
+<!--
+## Introduction
+-->
+<h2 id="introduction">はじめに</h2>
+
+<!--
+In [part 4](/get-started/part4/), you learned how to set up a swarm, which is a cluster of
 machines running Docker, and deployed an application to it, with containers
-running in concert on multiple machines.</p>
+running in concert on multiple machines.
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">4 部</a>ではスウォームの構築方法を学びました。
+スウォームとは Docker が稼動するマシンで構成されたクラスターであり、アプリケーションをデプロイすることができます。
+コンテナーが複数のマシン上において協力して動作するものです。</p>
 
-<p>Here in part 5, you reach the top of the hierarchy of distributed
-applications: the <strong>stack</strong>. A stack is a group of interrelated services that
+<!--
+Here in part 5, you reach the top of the hierarchy of distributed
+applications: the **stack**. A stack is a group of interrelated services that
 share dependencies, and can be orchestrated and scaled together. A single stack
 is capable of defining and coordinating the functionality of an entire
-application (though very complex applications may want to use multiple stacks).</p>
+application (though very complex applications may want to use multiple stacks).
+-->
+<p>この 5 部では分散アプリケーションの最上位層である<strong>スタック</strong>（stack）を扱います。
+スタックは、相互に関連づいたサービス群を指します。
+これが依存パッケージを共有し、互いに協調してスケールに対応します。
+ただ 1 つのスタックであっても、アプリケーション全体における機能を定義し調整を行います。
+（複雑なアプリケーションでは複数のスタックが必要になるかもしれません。）</p>
 
-<p>Some good news is, you have technically been working with stacks since part 3,
-when you created a Compose file and used <code class="highlighter-rouge">docker stack deploy</code>. But that was a
+<!--
+Some good news is, you have technically been working with stacks since part 3,
+when you created a Compose file and used `docker stack deploy`. But that was a
 single service stack running on a single host, which is not usually what takes
-place in production. Here, you can take what you’ve learned, make
-multiple services relate to each other, and run them on multiple machines.</p>
+place in production. Here, you can take what you've learned, make
+multiple services relate to each other, and run them on multiple machines.
+-->
+<p>気づいているかもしれませんが、3 部のときからすでにスタックは操作してきています。
+Compose ファイルを作り <code class="highlighter-rouge">docker stack deploy</code> を実行していました。
+ただしこのときは、1 つのホスト上に稼動するただ 1 つのサービススタックでした。
+こういったものは本番環境では普通は用いません。
+ここではこれまでに学んだことを踏まえて、互いに関連づいているサービスを複数作り出します。
+それを複数のマシン上で動作させます。</p>
 
-<p>You’re doing great, this is the home stretch!</p>
+<!--
+You're doing great, this is the home stretch!
+-->
+<p>ここまで頑張ってきています。
+あと一息です。</p>
 
-<h2 id="新たなサービス追加と再度のデプロイ">新たなサービス追加と再度のデプロイ</h2>
+<!--
+## Add a new service and redeploy
+-->
+<h2 id="add-a-new-service-and-redeploy">新たなサービス追加と再度のデプロイ</h2>
 
-<p><code class="highlighter-rouge">docker-compose.yml</code> ファイルにサービスを追加するのは簡単です。
-First, let’s add
+<!--
+It's easy to add services to our `docker-compose.yml` file. First, let's add
 a free visualizer service that lets us look at how our swarm is scheduling
-containers.</p>
+containers.
+-->
+<p><code class="highlighter-rouge">docker-compose.yml</code> ファイルにサービスを追加するのは簡単です。
+はじめに、自由に使えるビジュアライザー（visualizer）サービスを加えます。
+スウォームがコンテナーをどのようにスケジューリングしているかが見えるものです。</p>
 
+<!--
+1.  Open up `docker-compose.yml` in an editor and replace its contents
+with the following. Be sure to replace `username/repo:tag` with your image details.
+-->
 <ol>
   <li>
     <p>エディターにより <code class="highlighter-rouge">docker-compose.yml</code> を開き、以下に示すような内容にします。
-<code class="highlighter-rouge">username/repo:tag</code> の部分を各イメージに合わせて置き換えてください。</p>
+<code class="highlighter-rouge">username/repo:tag</code> の部分は各イメージに合わせて置き換えてください。</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -294,79 +372,147 @@ containers.</p>
   <span class="na">webnet</span><span class="pi">:</span>
 </code></pre></div>    </div>
 
-    <p>The only thing new here is the peer service to <code class="highlighter-rouge">web</code>, named <code class="highlighter-rouge">visualizer</code>.
-Notice two new things here: a <code class="highlighter-rouge">volumes</code> key, giving the visualizer
-access to the host’s socket file for Docker, and a <code class="highlighter-rouge">placement</code> key, ensuring
+    <!--
+The only thing new here is the peer service to `web`, named `visualizer`.
+Notice two new things here: a `volumes` key, giving the visualizer
+access to the host's socket file for Docker, and a `placement` key, ensuring
 that this service only ever runs on a swarm manager -- never a worker.
-That’s because this container, built from <a href="https://github.com/ManoMarks/docker-swarm-visualizer">an open source project created by
-Docker</a>, displays
-Docker services running on a swarm in a diagram.</p>
+That's because this container, built from [an open source project created by
+Docker](https://github.com/ManoMarks/docker-swarm-visualizer), displays
+Docker services running on a swarm in a diagram.
+-->
+    <p>ここでの新たな内容は <code class="highlighter-rouge">web</code> と対になるサービス <code class="highlighter-rouge">visualizer</code> です。
+そして 2 つの新しい項目があります。
+1 つは <code class="highlighter-rouge">volumes</code> キーです。
+これはビジュアライザーのアクセスを Docker ホストのソケットファイルに与えます。
+もう 1 つは <code class="highlighter-rouge">placement</code> キーです。
+サービスがスウォームマネージャー上でのみ動作するようにします。
+ワーカー上では動作しません。
+こうする理由は、このコンテナーが <a href="https://github.com/ManoMarks/docker-swarm-visualizer">Docker を用いて生成されているオープンソースプロジェクト</a> から構築されていて、スウォーム上で稼動する Docker サービスを図に表現するものであるからです。</p>
 
-    <p>We talk more about placement constraints and volumes in a moment.</p>
+    <!--
+We talk more about placement constraints and volumes in a moment.
+-->
+    <p>placement の制約とボリュームに関してはこの後に説明します。</p>
+
+    <!--
+2.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager)).
+-->
   </li>
   <li>
-    <p>Make sure your shell is configured to talk to <code class="highlighter-rouge">myvm1</code> (full examples are <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager">here</a>).</p>
+    <p>シェル環境が <code class="highlighter-rouge">myvm1</code> と対話できるように設定されていることを確認します。
+（その操作例は<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager">こちら</a>で説明済です。）</p>
 
+    <!--
+* Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next to it.
+-->
+    <ul>
+      <li><code class="highlighter-rouge">docker-machine ls</code> を実行してマシン一覧を表示し、<code class="highlighter-rouge">myvm1</code> に接続していることを確認します。
+マシン名のとなりにアスタリスクが表示されているはずです。</li>
+    </ul>
+
+    <!--
+* If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
+-->
     <ul>
       <li>
-        <p>Run <code class="highlighter-rouge">docker-machine ls</code> to list machines and make sure you are connected to <code class="highlighter-rouge">myvm1</code>, as indicated by an asterisk next to it.</p>
-      </li>
-      <li>
-        <p>If needed, re-run <code class="highlighter-rouge">docker-machine env myvm1</code>, then run the given command to configure the shell.</p>
+        <p>必要であれば <code class="highlighter-rouge">docker-machine env myvm1</code> を再実行し、シェル設定を行うコマンドを実行します。</p>
 
-        <p>On <strong>Mac or Linux</strong> the command is:</p>
+        <!--
+On **Mac or Linux** the command is:
+-->
+        <p><strong>Mac または Linux</strong> では以下のコマンドです。</p>
 
         <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="k">$(</span>docker-machine env myvm1<span class="k">)</span>
 </code></pre></div>        </div>
 
-        <p>On <strong>Windows</strong> the command is:</p>
+        <!--
+On **Windows** the command is:
+-->
+        <p><strong>Windows</strong> では以下のコマンドです。</p>
 
         <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env myvm1 | Invoke-Expression
 </code></pre></div>        </div>
       </li>
     </ul>
+
+    <!--
+3.  Re-run the `docker stack deploy` command on the manager, and
+whatever services need updating are updated:
+-->
   </li>
   <li>
-    <p>Re-run the <code class="highlighter-rouge">docker stack deploy</code> command on the manager, and
-whatever services need updating are updated:</p>
+    <p>マネージャー上で <code class="highlighter-rouge">docker stack deploy</code> を再実行します。
+更新が必要なサービスは更新が行われます。</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
 Updating service getstartedlab_web <span class="o">(</span>id: angi1bf5e4to03qu9f93trnxm<span class="o">)</span>
 Creating service getstartedlab_visualizer <span class="o">(</span>id: l9mnwkeq2jiononb5ihz9u7a4<span class="o">)</span>
 </code></pre></div>    </div>
+
+    <!--
+4.  Take a look at the visualizer.
+-->
   </li>
   <li>
-    <p>Take a look at the visualizer.</p>
+    <p>ビジュアライザーを見てみます。</p>
 
-    <p>You saw in the Compose file that <code class="highlighter-rouge">visualizer</code> runs on port 8080. Get the
-IP address of one of your nodes by running <code class="highlighter-rouge">docker-machine ls</code>. Go
-to either IP address at port 8080 and you can see the visualizer running:</p>
+    <!--
+You saw in the Compose file that `visualizer` runs on port 8080. Get the
+IP address of one of your nodes by running `docker-machine ls`. Go
+to either IP address at port 8080 and you can see the visualizer running:
+-->
+    <p>Compose ファイルでは <code class="highlighter-rouge">visualizer</code> をポート 8080 で稼動することにしていました。
+ノードの IP アドレスは <code class="highlighter-rouge">docker-machine ls</code> で確認できるので、いずれかの IP アドレスとポート 8080 を使って、ビジュアライザーの動作を確認します。</p>
 
-    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/get-started-visualizer1.png" alt="Visualizer screenshot" /></p>
+    <!--
+![Visualizer screenshot](/get-started/images/get-started-visualizer1.png)
+-->
+    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/get-started-visualizer1.png" alt="ビジュアライザーのスクリーンショット" /></p>
 
-    <p>The single copy of <code class="highlighter-rouge">visualizer</code> is running on the manager as you expect, and
-the 5 instances of <code class="highlighter-rouge">web</code> are spread out across the swarm. You can
-corroborate this visualization by running <code class="highlighter-rouge">docker stack ps &lt;stack&gt;</code>:</p>
+    <!--
+The single copy of `visualizer` is running on the manager as you expect, and
+the 5 instances of `web` are spread out across the swarm. You can
+corroborate this visualization by running `docker stack ps <stack>`:
+-->
+    <p>マネージャー上には、想定していたとおり <code class="highlighter-rouge">visualizer</code> のコピーが 1 つ動作しており、<code class="highlighter-rouge">web</code> サービスのインスタンスが 5 つ、スウォーム内にわたって稼動しています。
+この画面表示が正しいかどうかは <code class="highlighter-rouge">docker stack ps &lt;スタック名&gt;</code> を実行して確認できます。</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack ps getstartedlab
 </code></pre></div>    </div>
 
-    <p>The visualizer is a standalone service that can run in any app
-that includes it in the stack. It doesn’t depend on anything else.
-Now let’s create a service that <em>does</em> have a dependency: the Redis
-service that provides a visitor counter.</p>
+    <!--
+The visualizer is a standalone service that can run in any app
+that includes it in the stack. It doesn't depend on anything else.
+Now let's create a service that *does* have a dependency: the Redis
+service that provides a visitor counter.
+-->
+    <p>ビジュアライザーはスタンドアロンのサービスであるため、スタック内のどのようなアプリ上でも利用することができ、特別なものに依存することなく動作します。
+今度は依存関係を<strong>持つ</strong>サービスを生成します。
+アクセスカウンター機能を提供する Redis サービスです。</p>
   </li>
 </ol>
 
-<h2 id="persist-the-data">Persist the data</h2>
+<!--
+## Persist the data
+-->
+<h2 id="persist-the-data">データの保持</h2>
 
-<p>Let’s go through the same workflow once more to add a Redis database for storing
-app data.</p>
+<!--
+Let's go through the same workflow once more to add a Redis database for storing
+app data.
+-->
+<p>これまでと同様の作業をもう一回、今度はアプリデータを保持する Redis データベースを加えていく作業を行います。</p>
 
+<!--
+1.  Save this new `docker-compose.yml` file, which finally adds a
+Redis service. Be sure to replace `username/repo:tag` with your image details.
+-->
 <ol>
   <li>
-    <p>Save this new <code class="highlighter-rouge">docker-compose.yml</code> file, which finally adds a
-Redis service. Be sure to replace <code class="highlighter-rouge">username/repo:tag</code> with your image details.</p>
+    <p>以下を <code class="highlighter-rouge">docker-compose.yml</code> ファイルとして新規に保存します。
+後半に Redis サービスを加えています。
+なお <code class="highlighter-rouge">username/repo:tag</code> の部分はイメージに合わせて書き換えてください。</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -412,74 +558,136 @@ Redis service. Be sure to replace <code class="highlighter-rouge">username/repo:
   <span class="na">webnet</span><span class="pi">:</span>
 </code></pre></div>    </div>
 
-    <p>Redis has an official image in the Docker library and has been granted the
-short <code class="highlighter-rouge">image</code> name of just <code class="highlighter-rouge">redis</code>, so no <code class="highlighter-rouge">username/repo</code> notation here. The
+    <!--
+Redis has an official image in the Docker library and has been granted the
+short `image` name of just `redis`, so no `username/repo` notation here. The
 Redis port, 6379, has been pre-configured by Redis to be exposed from the
 container to the host, and here in our Compose file we expose it from the
 host to the world, so you can actually enter the IP for any of your nodes
-into Redis Desktop Manager and manage this Redis instance, if you so choose.</p>
+into Redis Desktop Manager and manage this Redis instance, if you so choose.
+-->
+    <p>Redis は Docker ライブラリ内に公式イメージが提供されていて、イメージの簡略な名称として <code class="highlighter-rouge">redis</code> の利用が認められています。
+つまり<code class="highlighter-rouge">username/repo</code> という記述形式は必要としません。
+Redis のポート 6379 は、コンテナーからホストに向けて公開するようにあらかじめ設定されています。
+Compose ファイルでは、このポートをさらに外部に向けて公開しています。
+このことから、どのノードからでも IP アドレスを入力すれば Redis デスクトップマネージャーを起動することができ、Redis インスタンスを管理することもできます。</p>
 
-    <p>Most importantly, there are a couple of things in the <code class="highlighter-rouge">redis</code> specification
-that make data persist between deployments of this stack:</p>
+    <!--
+Most importantly, there are a couple of things in the `redis` specification
+that make data persist between deployments of this stack:
+-->
+    <p><code class="highlighter-rouge">redis</code> サービスの重要な処理として以下があります。
+それはこのスタックからデプロイを繰り返しても、データが維持されるということです。</p>
 
+    <!--
+- `redis` always runs on the manager, so it's always using the
+same filesystem.
+- `redis` accesses an arbitrary directory in the host's file system
+as `/data` inside the container, which is where Redis stores data.
+-->
     <ul>
-      <li><code class="highlighter-rouge">redis</code> always runs on the manager, so it’s always using the
-same filesystem.</li>
-      <li><code class="highlighter-rouge">redis</code> accesses an arbitrary directory in the host’s file system
-as <code class="highlighter-rouge">/data</code> inside the container, which is where Redis stores data.</li>
+      <li><code class="highlighter-rouge">redis</code> は常にマネージャー上で動作します。
+これはつまり、同一のファイルシステムを常に利用するということです。</li>
+      <li><code class="highlighter-rouge">redis</code> はホストのファイルシステム内の任意のディレクトリとして、コンテナー内の <code class="highlighter-rouge">/data</code> にアクセスします。そこに Redis がデータを保存します。</li>
     </ul>
 
-    <p>Together, this is creating a “source of truth” in your host’s physical
+    <!--
+Together, this is creating a "source of truth" in your host's physical
 filesystem for the Redis data. Without this, Redis would store its data in
-<code class="highlighter-rouge">/data</code> inside the container’s filesystem, which would get wiped out if that
-container were ever redeployed.</p>
+`/data` inside the container's filesystem, which would get wiped out if that
+container were ever redeployed.
+-->
+    <p>上により、ホストの物理ファイルシステムには Redis のデータが、本当にそこに保存されます。
+これがなかったとしたら、Redis はコンテナー内部の <code class="highlighter-rouge">/data</code> ディレクトリにデータを保存することになります。
+そこに保存してしまうと、コンテナーが再デプロイされたときに、すべてが消えてしまうということです。</p>
 
-    <p>This source of truth has two components:</p>
+    <!--
+This source of truth has two components:
+-->
+    <p>このデータ保存を実現するには、以下の 2 つの要件が必要になります。</p>
 
+    <!--
+- The placement constraint you put on the Redis service, ensuring that it
+  always uses the same host.
+- The volume you created that lets the container access `./data` (on the host) as `/data` (inside the Redis container). While containers come and go, the files stored on `./data` on the specified host persists, enabling continuity.
+-->
     <ul>
-      <li>The placement constraint you put on the Redis service, ensuring that it
-always uses the same host.</li>
-      <li>The volume you created that lets the container access <code class="highlighter-rouge">./data</code> (on the host) as <code class="highlighter-rouge">/data</code> (inside the Redis container). While containers come and go, the files stored on <code class="highlighter-rouge">./data</code> on the specified host persists, enabling continuity.</li>
+      <li>Redis サービスを配置する placement の制約（constraint）として、必ず同一ホストを用いるものとします。</li>
+      <li>volume には、コンテナーがアクセスする（ホスト上の）<code class="highlighter-rouge">./data</code> を（Redis コンテナー内部では）<code class="highlighter-rouge">/data</code> としてアクセスすることを指定します。コンテナーが動作し始めると、指定されたホスト上の <code class="highlighter-rouge">./data</code> に保存されたファイルは保持され続け、継続して利用が可能となります。</li>
     </ul>
 
-    <p>You are ready to deploy your new Redis-using stack.</p>
+    <!--
+You are ready to deploy your new Redis-using stack.
+-->
+    <p>Redis を利用する新たなスタックをデプロイする準備が整いました。</p>
+
+    <!--
+2.  Create a `./data` directory on the manager:
+-->
   </li>
   <li>
-    <p>Create a <code class="highlighter-rouge">./data</code> directory on the manager:</p>
+    <p>マネージャー上に <code class="highlighter-rouge">./data</code> ディレクトリを生成します。</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine ssh myvm1 <span class="s2">"mkdir ./data"</span>
 </code></pre></div>    </div>
+
+    <!--
+3.  Make sure your shell is configured to talk to `myvm1` (full examples are [here](/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager)).
+-->
   </li>
   <li>
-    <p>Make sure your shell is configured to talk to <code class="highlighter-rouge">myvm1</code> (full examples are <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager">here</a>).</p>
+    <p>シェル環境が <code class="highlighter-rouge">myvm1</code> と対話できるように設定されていることを確認します。
+（その操作例は<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/#configure-a-docker-machine-shell-to-the-swarm-manager">こちら</a>で説明済です。）</p>
 
+    <!--
+* Run `docker-machine ls` to list machines and make sure you are connected to `myvm1`, as indicated by an asterisk next to it.
+-->
+    <ul>
+      <li><code class="highlighter-rouge">docker-machine ls</code> を実行してマシン一覧を表示し、<code class="highlighter-rouge">myvm1</code> に接続していることを確認します。
+マシン名のとなりにアスタリスクが表示されているはずです。</li>
+    </ul>
+
+    <!--
+* If needed, re-run `docker-machine env myvm1`, then run the given command to configure the shell.
+-->
     <ul>
       <li>
-        <p>Run <code class="highlighter-rouge">docker-machine ls</code> to list machines and make sure you are connected to <code class="highlighter-rouge">myvm1</code>, as indicated by an asterisk next to it.</p>
-      </li>
-      <li>
-        <p>If needed, re-run <code class="highlighter-rouge">docker-machine env myvm1</code>, then run the given command to configure the shell.</p>
+        <p>必要であれば <code class="highlighter-rouge">docker-machine env myvm1</code> を再実行し、シェル設定を行うコマンドを実行します。</p>
 
-        <p>On <strong>Mac or Linux</strong> the command is:</p>
+        <!--
+On **Mac or Linux** the command is:
+-->
+        <p><strong>Mac または Linux</strong> では以下のコマンドです。</p>
 
         <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="k">$(</span>docker-machine env myvm1<span class="k">)</span>
 </code></pre></div>        </div>
 
-        <p>On <strong>Windows</strong> the command is:</p>
+        <!--
+On **Windows** the command is:
+-->
+        <p><strong>Windows</strong> では以下のコマンドです。</p>
 
         <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env myvm1 | Invoke-Expression
 </code></pre></div>        </div>
       </li>
     </ul>
+
+    <!--
+4.  Run `docker stack deploy` one more time.
+-->
   </li>
   <li>
-    <p>Run <code class="highlighter-rouge">docker stack deploy</code> one more time.</p>
+    <p><code class="highlighter-rouge">docker stack deploy</code> をもう一度実行します。</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
 </code></pre></div>    </div>
+
+    <!--
+5.  Run `docker service ls` to verify that the three services are running as expected.
+-->
   </li>
   <li>
-    <p>Run <code class="highlighter-rouge">docker service ls</code> to verify that the three services are running as expected.</p>
+    <p><code class="highlighter-rouge">docker service ls</code> を実行して、3 つのサービスが期待どおりに稼動していることを確認します。</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
 </span>ID                  NAME                       MODE                REPLICAS            IMAGE                             PORTS
@@ -488,32 +696,60 @@ n5rvhm52ykq7        getstartedlab_visualizer   replicated          1/1          
 mifd433bti1d        getstartedlab_web          replicated          5/5                 gordon/getstarted:latest    <span class="k">*</span>:80-&gt;80/tcp
 
 </code></pre></div>    </div>
+
+    <!--
+6.  Check the web page at one of your nodes, such as `http://192.168.99.101`, and take a look at the results of the visitor counter, which is now live and storing information on Redis.
+-->
   </li>
   <li>
-    <p>Check the web page at one of your nodes, such as <code class="highlighter-rouge">http://192.168.99.101</code>, and take a look at the results of the visitor counter, which is now live and storing information on Redis.</p>
+    <p>ノードのいずれかから、たとえば <code class="highlighter-rouge">http://192.168.99.101</code> からウェブページを表示させます。
+そしてアクセスカウンターの値を確認します。
+カウンターが動作し、その値は Redis 上に保存されます。</p>
 
-    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app-in-browser-redis.png" alt="Hello World in browser with Redis" /></p>
+    <!--
+![Hello World in browser with Redis](/get-started/images/app-in-browser-redis.png)
+-->
+    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app-in-browser-redis.png" alt="ブラウザー上での Redis を用いた Hello World" /></p>
 
-    <p>Also, check the visualizer at port 8080 on either node’s IP address, and notice see the <code class="highlighter-rouge">redis</code> service running along with the <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">visualizer</code> services.</p>
+    <!--
+Also, check the visualizer at port 8080 on either node's IP address, and notice see the `redis` service running along with the `web` and `visualizer` services.
+-->
+    <p>同じく、いずれかのノードの IP アドレスとポート 8080 を用いてビジュアライザーを確認します。
+そして <code class="highlighter-rouge">web</code> や <code class="highlighter-rouge">visualizer</code> サービスとともに <code class="highlighter-rouge">redis</code> サービスも稼動していることを確認します。</p>
 
-    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/visualizer-with-redis.png" alt="Visualizer with redis screenshot" /></p>
+    <!--
+![Visualizer with redis screenshot](/get-started/images/visualizer-with-redis.png)
+-->
+    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/visualizer-with-redis.png" alt="ビジュアライザー上の redis のスクリーンショット" /></p>
   </li>
 </ol>
 
 <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part6/" class="button outline-btn">6 部へ &gt;&gt;</a></p>
 
-<h2 id="recap-optional">Recap (optional)</h2>
+<!--
+## Recap (optional)
+-->
+<h2 id="recap-optional">まとめ（おまけ）</h2>
 
-<p>Here’s <a href="https://asciinema.org/a/113840">a terminal recording of what was covered on this page</a>:</p>
+<!--
+Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/113840):
+-->
+<p><a href="https://asciinema.org/a/113840">このページで扱った端末操作の録画</a>がこちらです。</p>
 
 <script type="text/javascript" src="https://asciinema.org/a/113840.js" speed="2" id="asciicast-113840" async=""></script>
 
-<p>You learned that stacks are inter-related services all running in concert, and
-that -- surprise! -- you’ve been using stacks since part three of this tutorial.
+<!--
+You learned that stacks are inter-related services all running in concert, and
+that -- surprise! -- you've been using stacks since part three of this tutorial.
 You learned that to add more services to your stack, you insert them in your
 Compose file. Finally, you learned that by using a combination of placement
 constraints and volumes you can create a permanent home for persisting data, so
-that your app’s data survives when the container is torn down and redeployed.</p>
+that your app's data survives when the container is torn down and redeployed.
+-->
+<p>ここではスタックというものが、互いに協調して動作するサービスであることを学びました。
+しかも実は、このスタックをチュートリアルの 3 部からずっと使い続けていたのです。
+スタックに新たなサービスを加えるには Compose ファイルに追加すればよいことも知りました。
+そして placement の制約と volume の設定の組み合わせにより、データを保持し続ける方法がわかったので、コンテナーが停止され新たにデプロイされても、アプリのデータは失われることがありません。</p>
 
 							<!-- tags -->
 							
@@ -609,11 +845,11 @@ that your app’s data survives when the container is torn down and redeployed.<
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#前提条件" class="nomunge">前提条件</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#はじめに" class="nomunge">はじめに</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#新たなサービス追加と再度のデプロイ" class="nomunge">新たなサービス追加と再度のデプロイ</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#persist-the-data" class="nomunge">Persist the data</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#recap-optional" class="nomunge">Recap (optional)</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#prerequisites" class="nomunge">前提条件</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#introduction" class="nomunge">はじめに</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#add-a-new-service-and-redeploy" class="nomunge">新たなサービス追加と再度のデプロイ</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#persist-the-data" class="nomunge">データの保持</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/#recap-optional" class="nomunge">まとめ（おまけ）</a></li>
 </ul>
 
 
