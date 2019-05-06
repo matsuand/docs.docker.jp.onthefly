@@ -8,6 +8,34 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/nist/800_190/",
+"title":"NIST SP 800-190 application container security guide",
+"description":"NIST SP 800-190 application container security guide",
+"keywords":"standards, compliance, security"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/nist/800_37/",
+"title":"NIST SP 800-37 (RMF)",
+"description":"NIST 800-37 guidance for Docker EE",
+"keywords":"standards, compliance, security"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/nist/800_53/",
+"title":"NIST SP 800-53",
+"description":"NIST 800-53 compliance guidance for Docker Enterprise Edition",
+"keywords":"standards, compliance, security"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/ac/",
+"title":"Access control",
+"description":"Access control reference",
+"keywords":"standards, compliance, security, 800-53, Access control"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/user/access-tokens/",
 "title":"Manage access tokens",
 "description":"Learn how to create and manage your personal DTR access tokens to securely integrate DTR with other products.",
@@ -78,6 +106,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/examples/apt-cacher-ng/",
+"title":"Dockerize an apt-cacher-ng service",
+"description":"Installing and running an apt-cacher-ng service",
+"keywords":"docker, example, package installation, networking, debian,  ubuntu"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/architecture-specific-images/",
 "title":"Architecture-specific images",
 "description":"Learn how to deploy Docker Universal Control Plane using images that are specific to particular hardware architectures.",
@@ -120,10 +155,24 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/at/",
+"title":"Awareness and training",
+"description":"Awareness and training reference",
+"keywords":"standards, compliance, security, 800-53, Awareness and training"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/attach/",
 "title":"docker attach",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/au/",
+"title":"Audit and accountability",
+"description":"Audit and accountability reference",
+"keywords":"standards, compliance, security, 800-53, Audit and accountability"
 }
 ,
 {
@@ -212,8 +261,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/develop/develop-images/baseimages/",
-"title":"Create a base image",
-"description":"How to create base images",
+"title":"ベースイメージの生成",
+"description":"ベースイメージを生成する方法。",
 "keywords":"images, base image, examples"
 }
 ,
@@ -299,6 +348,13 @@ var pages = [
 "title":"Bring Your Own License (BYOL) products on Docker Hub",
 "description":"Submit a product to be listed on Docker Hub",
 "keywords":"Docker, docker, hub, purchase images"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/ca/",
+"title":"Security assessment and authorization",
+"description":"Security assessment and authorization reference",
+"keywords":"standards, compliance, security, 800-53, Security assessment and authorization"
 }
 ,
 {
@@ -400,6 +456,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/cm/",
+"title":"Configuration management",
+"description":"Configuration management reference",
+"keywords":"standards, compliance, security, 800-53, Configuration management"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/collect-cluster-metrics/",
 "title":"Collect UCP cluster metrics with Prometheus",
 "description":"Collecting UCP cluster metrics with Prometheus",
@@ -436,8 +499,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/completion/",
-"title":"Command-line completion",
-"description":"Compose CLI reference",
+"title":"コマンドライン補完",
+"description":"Compose CLI リファレンス",
 "keywords":"fig, composition, compose, docker, orchestration, cli, reference"
 }
 ,
@@ -736,6 +799,20 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/examples/couchdb_data_volumes/",
+"title":"Dockerize a CouchDB service",
+"description":"Sharing data between 2 couchdb databases",
+"keywords":"docker, example, package installation, networking, couchdb,  data volumes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/cp/",
+"title":"Contingency planning",
+"description":"Contingency planning reference",
+"keywords":"standards, compliance, security, 800-53, Contingency planning"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/cp/",
 "title":"docker cp",
 "description":null,
@@ -808,7 +885,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/create/",
 "title":"docker-compose create",
-"description":"Create creates containers for a service.",
+"description":"create コマンドはサービスのコンテナーを生成します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, create"
 }
 ,
@@ -1041,6 +1118,13 @@ var pages = [
 "title":"View the docs archives",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/examples/dotnetcore/",
+"title":"Dockerize a .NET Core application",
+"description":"Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile.",
+"keywords":"dockerize, dockerizing, dotnet, .NET, Core, article, example, platform, installation, containers, images, image, dockerfile, build, asp.net, asp.net core"
 }
 ,
 {
@@ -1296,6 +1380,27 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/fedramp/",
+"title":"FedRAMP",
+"description":"FedRAMP compliance guidance for Docker Enterprise Edition",
+"keywords":"standards, compliance, security"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/nist/fips140_2/",
+"title":"FIPS 140-2",
+"description":"Docker Enterprise Edition and FIPS 140-2",
+"keywords":"standards, compliance, security"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/fisma/",
+"title":"FISMA",
+"description":"FISMA compliance guidance for Docker Enterprise Edition",
+"keywords":"standards, compliance, security"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/config/containers/logging/fluentd/",
 "title":"Fluentd logging driver",
 "description":"Describes how to use the fluentd logging driver.",
@@ -1389,7 +1494,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/glossary/",
 "title":"Docker 用語",
-"description":"Glossary of terms used around Docker",
+"description":"Docker に関して使われている用語集",
 "keywords":"glossary, docker, terms, definitions"
 }
 ,
@@ -1417,7 +1522,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/help/",
 "title":"docker-compose help",
-"description":"docker-compose help",
+"description":"docker-compose のヘルプ",
 "keywords":"fig, composition, compose, docker, orchestration, cli, help"
 }
 ,
@@ -1461,6 +1566,13 @@ var pages = [
 "title":"Microsoft Hyper-V",
 "description":"Microsoft Hyper-V driver for machine",
 "keywords":"machine, Microsoft Hyper-V, driver"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/ia/",
+"title":"Identification and authentication",
+"description":"Identification and authentication reference",
+"keywords":"standards, compliance, security, 800-53, Identification and authentication"
 }
 ,
 {
@@ -1800,6 +1912,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/opensource/",
+"title":"Contribute to documentation",
+"description":"Overview of contributing",
+"keywords":"open, source, contributing, overview"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-for-azure/",
 "title":"Docker for Azure setup & prerequisites",
 "description":"Setup & Prerequisites",
@@ -1858,14 +1977,14 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/compose-file/",
 "title":"Compose ファイル バージョン 3 リファレンス",
-"description":"Compose file reference",
+"description":"Compose ファイルリファレンス",
 "keywords":"fig, composition, compose, docker"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/",
 "title":"Docker Compose",
-"description":"Introduction and Overview of Compose",
+"description":"Compose の導入と概要",
 "keywords":"documentation, docs,  docker, compose, orchestration,  containers"
 }
 ,
@@ -1888,6 +2007,20 @@ var pages = [
 "title":"Overview",
 "description":"Overview of Docker networks and networking concepts",
 "keywords":"networking, bridge, routing, routing mesh, overlay, ports"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/",
+"title":"NIST SP 800-53 control reference",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/",
+"title":"Docker standards and compliance",
+"description":"Compliance guidance for Docker Enterprise Edition",
+"keywords":"standards, compliance, security"
 }
 ,
 {
@@ -1930,6 +2063,13 @@ var pages = [
 "title":"Swarm mode overview",
 "description":"Docker Engine swarm mode overview",
 "keywords":"docker, container, cluster, swarm"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/examples/",
+"title":"Dockerize an application",
+"description":"Provides examples for using Docker",
+"keywords":"dockerize, dockerizing apps, dockerizing applications, container,  containers"
 }
 ,
 {
@@ -2094,6 +2234,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/ir/",
+"title":"Incident response",
+"description":"Incident response reference",
+"keywords":"standards, compliance, security, 800-53, Incident response"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/authorization/isolate-nodes/",
 "title":"Isolate cluster nodes in Docker Advanced",
 "description":"Create grants that limit access to nodes to specific teams.",
@@ -2105,6 +2252,13 @@ var pages = [
 "title":"Isolate volumes to a specific team",
 "description":"Create grants that limit access to volumes to specific teams.",
 "keywords":"ucp, grant, role, permission, authentication"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/nist/itl_october2017/",
+"title":"NIST ITL October 2017 guidance on application container security",
+"description":"NIST ITL October 2017 NIST Guidance on Application Container Security",
+"keywords":"standards, compliance, security"
 }
 ,
 {
@@ -2346,6 +2500,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/ma/",
+"title":"Maintenance",
+"description":"Maintenance reference",
+"keywords":"standards, compliance, security, 800-53, Maintenance"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/network/macvlan/",
 "title":"Use Macvlan networks",
 "description":"All about using macvlan to make your containers appear like physical machines on the network",
@@ -2441,6 +2602,13 @@ var pages = [
 "title":"docker-machine mount",
 "description":"Mount directory from machine",
 "keywords":"machine, mount, subcommand"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/mp/",
+"title":"Media protection",
+"description":"Media protection reference",
+"keywords":"standards, compliance, security, 800-53, Media protection"
 }
 ,
 {
@@ -2612,6 +2780,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/nist/nistir_8176/",
+"title":"NISTIR 8176 security assurance requirements for linux application container deployments",
+"description":"NISTIR 8176",
+"keywords":"standards, compliance, security"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/node/",
 "title":"docker node",
 "description":null,
@@ -2759,6 +2934,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/oscal/",
+"title":"OSCAL",
+"description":"OSCAL compliance guidance for Docker Enterprise",
+"keywords":"standards, compliance, security, benchmark"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/registry/recipes/osx-setup-guide/",
 "title":"macOS setup guide",
 "description":"Explains how to run a registry on macOS",
@@ -2810,7 +2992,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/install/overview/",
 "title":"Docker エディションの概要",
-"description":"Learn about the two Docker editions available, Docker Enterprise Edition, and Docker Community Edition.",
+"description":"Docker には 2 つのエディション、つまり Docker Enterprise エディションと Docker Community エディションがあることを学びます。",
 "keywords":"editions, ee, ce,"
 }
 ,
@@ -2845,7 +3027,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/get-started/part4/",
 "title":"はじめよう 4部: スウォーム",
-"description":"Learn how to create clusters of Dockerized machines.",
+"description":"Docker 化したマシンをクラスターとして生成する方法を学ぶ。",
 "keywords":"swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration"
 }
 ,
@@ -2859,7 +3041,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/get-started/part6/",
 "title":"はじめよう 6部: アプリのデプロイ",
-"description":"Deploy your app to production using Docker CE or EE.",
+"description":"Docker CE または EE を使ってアプリを本番環境にデプロイする。",
 "keywords":"deploy, production, datacenter, cloud, aws, azure, provider, admin, enterprise"
 }
 ,
@@ -2875,6 +3057,13 @@ var pages = [
 "title":"docker pause",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/pe/",
+"title":"Physical and environmental protection",
+"description":"Physical and environmental protection reference",
+"keywords":"standards, compliance, security, 800-53, Physical and environmental protection"
 }
 ,
 {
@@ -2896,6 +3085,13 @@ var pages = [
 "title":"Docker for AWS persistent data volumes",
 "description":"Persistent data volumes",
 "keywords":"aws persistent data volumes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/pl/",
+"title":"Planning",
+"description":"Planning reference",
+"keywords":"standards, compliance, security, 800-53, Planning"
 }
 ,
 {
@@ -2990,6 +3186,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/pm/",
+"title":"Program management",
+"description":"Program management reference",
+"keywords":"standards, compliance, security, 800-53, Program management"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/port/",
 "title":"docker-compose port",
 "description":"Prints the public port for a port bindings.",
@@ -3001,6 +3204,13 @@ var pages = [
 "title":"docker port",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/examples/postgresql_service/",
+"title":"Dockerize PostgreSQL",
+"description":"Running and installing a PostgreSQL service",
+"keywords":"docker, example, package installation, postgresql"
 }
 ,
 {
@@ -3043,6 +3253,13 @@ var pages = [
 "title":"docker-compose ps",
 "description":"Lists containers.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  ps"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/ps/",
+"title":"Personnel security",
+"description":"Personnel security reference",
+"keywords":"standards, compliance, security, 800-53, Personnel security"
 }
 ,
 {
@@ -3106,6 +3323,13 @@ var pages = [
 "title":"docker push",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/ra/",
+"title":"Risk assessment",
+"description":"Risk assessment reference",
+"keywords":"standards, compliance, security, 800-53, Risk assessment"
 }
 ,
 {
@@ -3347,10 +3571,31 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/examples/running_riak_service/",
+"title":"Dockerize a Riak service",
+"description":"Build a Docker image with Riak pre-installed",
+"keywords":"docker, example, package installation, networking,  riak"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/examples/running_ssh_service/",
+"title":"Dockerize an SSH service",
+"description":"Installing and running an SSHd service on Docker",
+"keywords":"docker, example, package installation,  networking"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/admin/configure/external-storage/s3/",
 "title":"Store images on Amazon S3",
 "description":"Learn how to configure Docker Trusted Registry to store Docker images on Amazon S3",
 "keywords":"dtr, storage driver, s3"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/sa/",
+"title":"System and services acquisition",
+"description":"System and services acquisition reference",
+"keywords":"standards, compliance, security, 800-53, System and services acquisition"
 }
 ,
 {
@@ -3365,6 +3610,13 @@ var pages = [
 "title":"docker save",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/sc/",
+"title":"System and communications protection",
+"description":"System and communications protection reference",
+"keywords":"standards, compliance, security, 800-53, System and communications protection"
 }
 ,
 {
@@ -3578,6 +3830,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/reference/800-53/si/",
+"title":"System and information integrity",
+"description":"System and information integrity reference",
+"keywords":"standards, compliance, security, 800-53, System and information integrity"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/notary/reference/signer-config/",
 "title":"Notary signer configuration file",
 "description":"Configuring the notary client, server and signer.",
@@ -3699,7 +3958,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/start/",
 "title":"docker-compose start",
-"description":"Starts existing containers for a service.",
+"description":"既存のサービスコンテナーを起動します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  start"
 }
 ,
@@ -3915,8 +4174,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/daemon/systemd/",
-"title":"Control Docker with systemd",
-"description":"Controlling and configuring Docker using systemd",
+"title":"systemd における Docker のコントロール",
+"description":"systemd を用いた Docker のコントロールと設定",
 "keywords":"docker, daemon, systemd, configuration"
 }
 ,
@@ -4175,7 +4434,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/unpause/",
 "title":"docker-compose unpause",
-"description":"Unpauses paused containers for a service.",
+"description":"停止中のサービスコンテナーを再開します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, unpause"
 }
 ,
@@ -4314,7 +4573,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/kitematic/userguide/",
-"title":"Kitematic user guide",
+"title":"Kitematic ユーザーガイド",
 "description":"Documentation that provides an overview of Kitematic and installation instructions",
 "keywords":"docker, documentation, about, technology, kitematic, gui"
 }
@@ -4418,6 +4677,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/opensource/ways/",
+"title":"Other ways to contribute",
+"description":"How to support the Docker community, organize meetups, or become a mentor",
+"keywords":"meetups, community, mentoring"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-hub/webhooks/",
 "title":"Docker Hub Webhooks",
 "description":"Docker Hub Webhooks",
@@ -4445,4 +4711,984 @@ var pages = [
 "keywords":"documentation, docs,  docker, compose, orchestration, containers"
 }
 
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/adminer/",
+"title":"adminer",
+"description":"Database management in a single PHP file.",
+"keywords":"library, sample, adminer"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/aerospike/",
+"title":"aerospike",
+"description":"Aerospike – the reliable, high performance, distributed database optimized for flash and RAM.",
+"keywords":"library, sample, aerospike"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/alpine/",
+"title":"alpine",
+"description":"A minimal Docker image based on Alpine Linux with a complete package index and only 5 MB in size!",
+"keywords":"library, sample, alpine"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/alt/",
+"title":"alt",
+"description":"The official build of ALT Linux.",
+"keywords":"library, sample, alt"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/amazoncorretto/",
+"title":"amazoncorretto",
+"description":"Corretto is a no-cost, production-ready distribution of the Open Java Development Kit (OpenJDK).",
+"keywords":"library, sample, amazoncorretto"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/amazonlinux/",
+"title":"amazonlinux",
+"description":"Amazon Linux provides a stable, secure, and high-performance execution environment for applications.",
+"keywords":"library, sample, amazonlinux"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/arangodb/",
+"title":"arangodb",
+"description":"ArangoDB - a distributed database with a flexible data model for documents, graphs, and key-values.",
+"keywords":"library, sample, arangodb"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/backdrop/",
+"title":"backdrop",
+"description":"The comprehensive CMS for small to medium sized businesses and non-profits.",
+"keywords":"library, sample, backdrop"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/bash/",
+"title":"bash",
+"description":"Bash is the GNU Project's Bourne Again SHell",
+"keywords":"library, sample, bash"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/bonita/",
+"title":"bonita",
+"description":"Bonita is an open-source business process management and workflow suite",
+"keywords":"library, sample, bonita"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/buildpack-deps/",
+"title":"buildpack-deps",
+"description":"A collection of common build dependencies used for installing various modules, e.g., gems.",
+"keywords":"library, sample, buildpack-deps"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/busybox/",
+"title":"busybox",
+"description":"Busybox base image.",
+"keywords":"library, sample, busybox"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/cassandra/",
+"title":"cassandra",
+"description":"Apache Cassandra is an open-source distributed storage system.",
+"keywords":"library, sample, cassandra"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/centos/",
+"title":"centos",
+"description":"The official build of CentOS.",
+"keywords":"library, sample, centos"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/chronograf/",
+"title":"chronograf",
+"description":"Chronograf is a visualization tool for time series data in InfluxDB.",
+"keywords":"library, sample, chronograf"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/cirros/",
+"title":"cirros",
+"description":"CirrOS is a Tiny OS that specializes in running on a cloud.",
+"keywords":"library, sample, cirros"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/clearlinux/",
+"title":"clearlinux",
+"description":"Official docker build of Clear Linux OS for Intel Architecture",
+"keywords":"library, sample, clearlinux"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/clefos/",
+"title":"clefos",
+"description":"The official build of ClefOS.",
+"keywords":"library, sample, clefos"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/clojure/",
+"title":"clojure",
+"description":"Clojure is a dialect of Lisp that runs on the JVM.",
+"keywords":"library, sample, clojure"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/composer/",
+"title":"composer",
+"description":"Composer is a dependency manager written in and for PHP.",
+"keywords":"library, sample, composer"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/consul/",
+"title":"consul",
+"description":"Consul is a datacenter runtime that provides service discovery, configuration, and orchestration.",
+"keywords":"library, sample, consul"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/convertigo/",
+"title":"convertigo",
+"description":"Convertigo is an open source MBaaS/MADP platform for mobile application development and back-end.",
+"keywords":"library, sample, convertigo"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/couchbase/",
+"title":"couchbase",
+"description":"Couchbase Server is a NoSQL document database with a distributed architecture.",
+"keywords":"library, sample, couchbase"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/couchdb/",
+"title":"couchdb",
+"description":"CouchDB is a database that uses JSON for documents, an HTTP API, & JavaScript/declarative indexing.",
+"keywords":"library, sample, couchdb"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/crate/",
+"title":"crate",
+"description":"CrateDB is a distributed SQL database handles massive amounts of machine data in real-time.",
+"keywords":"library, sample, crate"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/crux/",
+"title":"crux",
+"description":"CRUX is a lightweight Linux distribution targeted at experienced Linux users",
+"keywords":"library, sample, crux"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/debian/",
+"title":"debian",
+"description":"Debian is a Linux distribution that's composed entirely of free and open-source software.",
+"keywords":"library, sample, debian"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/docker/",
+"title":"docker",
+"description":"Docker in Docker!",
+"keywords":"library, sample, docker"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/drupal/",
+"title":"drupal",
+"description":"Drupal is an open source content management platform powering millions of websites and applications.",
+"keywords":"library, sample, drupal"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/eclipse-mosquitto/",
+"title":"eclipse-mosquitto",
+"description":"Eclipse Mosquitto is an open source message broker which implements MQTT version 3.1 and 3.1.1",
+"keywords":"library, sample, eclipse-mosquitto"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/eggdrop/",
+"title":"eggdrop",
+"description":"The official Docker image of Eggdrop- IRC's oldest actively-developed bot!",
+"keywords":"library, sample, eggdrop"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/elasticsearch/",
+"title":"elasticsearch",
+"description":"Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.",
+"keywords":"library, sample, elasticsearch"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/elixir/",
+"title":"elixir",
+"description":"Elixir is a dynamic, functional language for building scalable and maintainable applications.",
+"keywords":"library, sample, elixir"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/erlang/",
+"title":"erlang",
+"description":"Erlang is a programming language used to build massively scalable systems with high availability.",
+"keywords":"library, sample, erlang"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/euleros/",
+"title":"euleros",
+"description":"The official release of EulerOS.",
+"keywords":"library, sample, euleros"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/express-gateway/",
+"title":"express-gateway",
+"description":"The Official Docker Image of Express Gateway, an API Gateway for APIs and Microservices",
+"keywords":"library, sample, express-gateway"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/fedora/",
+"title":"fedora",
+"description":"Official Docker builds of Fedora",
+"keywords":"library, sample, fedora"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/flink/",
+"title":"flink",
+"description":"Apache Flink® is a powerful open-source distributed stream and batch processing framework.",
+"keywords":"library, sample, flink"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/fluentd/",
+"title":"fluentd",
+"description":"Fluentd is an open source data collector for unified logging layer",
+"keywords":"library, sample, fluentd"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/fsharp/",
+"title":"fsharp",
+"description":"F# is a multi-paradigm language encompassing functional, imperative, and object-oriented styles",
+"keywords":"library, sample, fsharp"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/gazebo/",
+"title":"gazebo",
+"description":"Gazebo is an open source project for simulating robots, offering robust physics and rendering.",
+"keywords":"library, sample, gazebo"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/gcc/",
+"title":"gcc",
+"description":"The GNU Compiler Collection is a compiling system that supports several languages.",
+"keywords":"library, sample, gcc"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/geonetwork/",
+"title":"geonetwork",
+"description":"GeoNetwork is a FOSS catalog for spatially referenced resources.",
+"keywords":"library, sample, geonetwork"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/ghost/",
+"title":"ghost",
+"description":"Ghost is a free and open source blogging platform written in JavaScript",
+"keywords":"library, sample, ghost"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/golang/",
+"title":"golang",
+"description":"Go (golang) is a general purpose, higher-level, imperative programming language.",
+"keywords":"library, sample, golang"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/gradle/",
+"title":"gradle",
+"description":"Gradle is a build tool with a focus on build automation and support for multi-language development.",
+"keywords":"library, sample, gradle"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/groovy/",
+"title":"groovy",
+"description":"Apache Groovy is a multi-faceted language for the Java platform.",
+"keywords":"library, sample, groovy"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/haproxy/",
+"title":"haproxy",
+"description":"HAProxy - The Reliable, High Performance TCP/HTTP Load Balancer",
+"keywords":"library, sample, haproxy"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/haskell/",
+"title":"haskell",
+"description":"Haskell is an advanced purely-functional programming language.",
+"keywords":"library, sample, haskell"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/haxe/",
+"title":"haxe",
+"description":"Haxe is a modern, high level, static typed programming language with multiple compilation targets.",
+"keywords":"library, sample, haxe"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/hello-world/",
+"title":"hello-world",
+"description":"Hello World! (an example of minimal Dockerization)",
+"keywords":"library, sample, hello-world"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/httpd/",
+"title":"httpd",
+"description":"The Apache HTTP Server Project",
+"keywords":"library, sample, httpd"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/hylang/",
+"title":"hylang",
+"description":"Hy is a Lisp dialect that translates expressions into Python's abstract syntax tree.",
+"keywords":"library, sample, hylang"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/ibmjava/",
+"title":"ibmjava",
+"description":"Official IBM® SDK, Java™ Technology Edition Docker Image.",
+"keywords":"library, sample, ibmjava"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/influxdb/",
+"title":"influxdb",
+"description":"InfluxDB is an open source time series database for recording metrics, events, and analytics.",
+"keywords":"library, sample, influxdb"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/irssi/",
+"title":"irssi",
+"description":"irssi - The IRC client of the future",
+"keywords":"library, sample, irssi"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/jetty/",
+"title":"jetty",
+"description":"Jetty provides a Web server and javax.servlet container.",
+"keywords":"library, sample, jetty"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/joomla/",
+"title":"joomla",
+"description":"Joomla! is an open source content management system.",
+"keywords":"library, sample, joomla"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/jruby/",
+"title":"jruby",
+"description":"JRuby (http://www.jruby.org) is an implementation of Ruby (http://www.ruby-lang.org) on the JVM.",
+"keywords":"library, sample, jruby"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/julia/",
+"title":"julia",
+"description":"Julia is a high-level, high-performance dynamic programming language for technical computing.",
+"keywords":"library, sample, julia"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/kaazing-gateway/",
+"title":"kaazing-gateway",
+"description":"Official build of Kaazing Gateway.",
+"keywords":"library, sample, kaazing-gateway"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/kapacitor/",
+"title":"kapacitor",
+"description":"Kapacitor is an open source framework for processing, monitoring, and alerting on time series data.",
+"keywords":"library, sample, kapacitor"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/kibana/",
+"title":"kibana",
+"description":"Kibana gives shape to any kind of data — structured and unstructured — indexed in Elasticsearch.",
+"keywords":"library, sample, kibana"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/known/",
+"title":"known",
+"description":"Blogging, meet social. Known is a social publishing platform.",
+"keywords":"library, sample, known"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/kong/",
+"title":"kong",
+"description":"The Cloud-Native API Gateway & Service Mesh for APIs and Microservices",
+"keywords":"library, sample, kong"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/lightstreamer/",
+"title":"lightstreamer",
+"description":"Lightstreamer is a real-time messaging server optimized for the Internet.",
+"keywords":"library, sample, lightstreamer"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/logstash/",
+"title":"logstash",
+"description":"Logstash is a tool for managing events and logs.",
+"keywords":"library, sample, logstash"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/mageia/",
+"title":"mageia",
+"description":"Official Mageia base image",
+"keywords":"library, sample, mageia"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/mariadb/",
+"title":"mariadb",
+"description":"MariaDB is a community-developed fork of MySQL intended to remain free under the GNU GPL.",
+"keywords":"library, sample, mariadb"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/matomo/",
+"title":"matomo",
+"description":"Matomo is the leading open-source analytics platform that gives you more than powerful analytics.",
+"keywords":"library, sample, matomo"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/maven/",
+"title":"maven",
+"description":"Apache Maven is a software project management and comprehension tool.",
+"keywords":"library, sample, maven"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/mediawiki/",
+"title":"mediawiki",
+"description":"MediaWiki is a free software open source wiki package written in PHP.",
+"keywords":"library, sample, mediawiki"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/memcached/",
+"title":"memcached",
+"description":"Free & open source, high-performance, distributed memory object caching system.",
+"keywords":"library, sample, memcached"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/mongo-express/",
+"title":"mongo-express",
+"description":"Web-based MongoDB admin interface, written with Node.js and express",
+"keywords":"library, sample, mongo-express"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/mongo/",
+"title":"mongo",
+"description":"MongoDB document databases provide high availability and easy scalability.",
+"keywords":"library, sample, mongo"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/mono/",
+"title":"mono",
+"description":"Mono is an open source implementation of Microsoft's .NET Framework",
+"keywords":"library, sample, mono"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/mysql/",
+"title":"mysql",
+"description":"MySQL is a widely used, open-source relational database management system (RDBMS).",
+"keywords":"library, sample, mysql"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/nats-streaming/",
+"title":"nats-streaming",
+"description":"NATS Streaming is an open-source, high-performance, cloud native messaging streaming system.",
+"keywords":"library, sample, nats-streaming"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/nats/",
+"title":"nats",
+"description":"NATS is an open-source, high-performance, cloud native messaging system.",
+"keywords":"library, sample, nats"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/neo4j/",
+"title":"neo4j",
+"description":"Neo4j is a highly scalable, robust native graph database.",
+"keywords":"library, sample, neo4j"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/neurodebian/",
+"title":"neurodebian",
+"description":"NeuroDebian provides neuroscience research software for Debian, Ubuntu, and other derivatives.",
+"keywords":"library, sample, neurodebian"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/nextcloud/",
+"title":"nextcloud",
+"description":"A safe home for all your data",
+"keywords":"library, sample, nextcloud"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/nginx/",
+"title":"nginx",
+"description":"Official build of Nginx.",
+"keywords":"library, sample, nginx"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/node/",
+"title":"node",
+"description":"Node.js is a JavaScript-based platform for server-side and networking applications.",
+"keywords":"library, sample, node"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/notary/",
+"title":"notary",
+"description":"Notary server and signer cooperatively handle signing and distribution of notary repositories.",
+"keywords":"library, sample, notary"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/nuxeo/",
+"title":"nuxeo",
+"description":"Nuxeo is an open source Content Management Platform that is completely customizable.",
+"keywords":"library, sample, nuxeo"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/odoo/",
+"title":"odoo",
+"description":"Odoo (formerly known as OpenERP) is a suite of open-source business apps.",
+"keywords":"library, sample, odoo"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/open-liberty/",
+"title":"open-liberty",
+"description":"Official Open Liberty image.",
+"keywords":"library, sample, open-liberty"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/openjdk/",
+"title":"openjdk",
+"description":"OpenJDK is an open-source implementation of the Java Platform, Standard Edition",
+"keywords":"library, sample, openjdk"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/opensuse/",
+"title":"opensuse",
+"description":"DEPRECATED - for current images by the openSUSE Project see opensuse/leap and opensuse/tumbleweed.",
+"keywords":"library, sample, opensuse"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/oraclelinux/",
+"title":"oraclelinux",
+"description":"Official Docker builds of Oracle Linux.",
+"keywords":"library, sample, oraclelinux"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/orientdb/",
+"title":"orientdb",
+"description":"OrientDB a Multi-Model Open Source NoSQL DBMS that combines graphs and documents.",
+"keywords":"library, sample, orientdb"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/percona/",
+"title":"percona",
+"description":"Percona Server is a fork of the MySQL relational database management system created by Percona.",
+"keywords":"library, sample, percona"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/perl/",
+"title":"perl",
+"description":"Perl is a high-level, general-purpose, interpreted, dynamic programming language.",
+"keywords":"library, sample, perl"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/photon/",
+"title":"photon",
+"description":"Photon OS is an open source minimal Linux container host.",
+"keywords":"library, sample, photon"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/php-zendserver/",
+"title":"php-zendserver",
+"description":"Zend Server - the integrated PHP application platform for mobile and web apps.",
+"keywords":"library, sample, php-zendserver"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/php/",
+"title":"php",
+"description":"While designed for web development, the PHP scripting language also provides general-purpose use.",
+"keywords":"library, sample, php"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/plone/",
+"title":"plone",
+"description":"Plone is a free and open source content management system built on top of Zope.",
+"keywords":"library, sample, plone"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/postfixadmin/",
+"title":"postfixadmin",
+"description":"Postfix Admin - web based administration interface for Postfix mail servers.",
+"keywords":"library, sample, postfixadmin"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/postgres/",
+"title":"postgres",
+"description":"The PostgreSQL object-relational database system provides reliability and data integrity.",
+"keywords":"library, sample, postgres"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/pypy/",
+"title":"pypy",
+"description":"PyPy is a fast, compliant alternative implementation of the Python language.",
+"keywords":"library, sample, pypy"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/python/",
+"title":"python",
+"description":"Python is an interpreted, interactive, object-oriented, open-source programming language.",
+"keywords":"library, sample, python"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/r-base/",
+"title":"r-base",
+"description":"R is a system for statistical computation and graphics.",
+"keywords":"library, sample, r-base"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/rabbitmq/",
+"title":"rabbitmq",
+"description":"RabbitMQ is an open source multi-protocol messaging broker.",
+"keywords":"library, sample, rabbitmq"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/rakudo-star/",
+"title":"rakudo-star",
+"description":"Rakudo Perl 6, or simply Rakudo, is a compiler for the Perl 6 programming language.",
+"keywords":"library, sample, rakudo-star"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/rapidoid/",
+"title":"rapidoid",
+"description":"Rapidoid is a high-performance HTTP server and modern Java web framework / application container.",
+"keywords":"library, sample, rapidoid"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/redis/",
+"title":"redis",
+"description":"Redis is an open source key-value store that functions as a data structure server.",
+"keywords":"library, sample, redis"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/redmine/",
+"title":"redmine",
+"description":"Redmine is a flexible project management web application written using Ruby on Rails framework",
+"keywords":"library, sample, redmine"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/registry/",
+"title":"registry",
+"description":"The Docker Registry 2.0 implementation for storing and distributing Docker images",
+"keywords":"library, sample, registry"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/rethinkdb/",
+"title":"rethinkdb",
+"description":"RethinkDB is an open-source, document database that makes it easy to build and scale realtime apps.",
+"keywords":"library, sample, rethinkdb"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/rocket.chat/",
+"title":"rocket.chat",
+"description":"The Complete Open Source Chat Solution",
+"keywords":"library, sample, rocket.chat"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/ros/",
+"title":"ros",
+"description":"The Robot Operating System (ROS) is an open source project for building robot applications.",
+"keywords":"library, sample, ros"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/ruby/",
+"title":"ruby",
+"description":"Ruby is a dynamic, reflective, object-oriented, general-purpose, open-source programming language.",
+"keywords":"library, sample, ruby"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/rust/",
+"title":"rust",
+"description":"Rust is a systems programming language focused on safety, speed, and concurrency.",
+"keywords":"library, sample, rust"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/scratch/",
+"title":"scratch",
+"description":"an explicitly empty image, especially for building images \"FROM scratch\"",
+"keywords":"library, sample, scratch"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/sentry/",
+"title":"sentry",
+"description":"Sentry is a realtime, platform-agnostic error logging and aggregation platform",
+"keywords":"library, sample, sentry"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/silverpeas/",
+"title":"silverpeas",
+"description":"Silverpeas is a turnkey and open-source Collaborative and Social-Networking Portal.",
+"keywords":"library, sample, silverpeas"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/sl/",
+"title":"sl",
+"description":"Official containers for Scientific Linux(SL)",
+"keywords":"library, sample, sl"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/solr/",
+"title":"solr",
+"description":"Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene™.",
+"keywords":"library, sample, solr"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/sonarqube/",
+"title":"sonarqube",
+"description":"SonarQube is an open source platform for continuous inspection of code quality.",
+"keywords":"library, sample, sonarqube"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/sourcemage/",
+"title":"sourcemage",
+"description":"Source Mage is a source-based GNU/Linux distribution with maximum flexibility in customization.",
+"keywords":"library, sample, sourcemage"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/spiped/",
+"title":"spiped",
+"description":"Spiped is a utility for creating symmetrically encrypted and authenticated pipes between sockets.",
+"keywords":"library, sample, spiped"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/storm/",
+"title":"storm",
+"description":"Apache Storm is a free and open source distributed realtime computation system.",
+"keywords":"library, sample, storm"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/swarm/",
+"title":"swarm",
+"description":"Swarm: a Docker-native clustering system.",
+"keywords":"library, sample, swarm"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/swift/",
+"title":"swift",
+"description":"Swift is a high-performance system programming language, to learn more about Swift visit swift.org.",
+"keywords":"library, sample, swift"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/swipl/",
+"title":"swipl",
+"description":"SWI-Prolog offers a comprehensive free Prolog environment.",
+"keywords":"library, sample, swipl"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/teamspeak/",
+"title":"teamspeak",
+"description":"TeamSpeak is software for quality voice communication via the Internet.",
+"keywords":"library, sample, teamspeak"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/telegraf/",
+"title":"telegraf",
+"description":"Telegraf is an agent for collecting metrics and writing them to InfluxDB or other outputs.",
+"keywords":"library, sample, telegraf"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/thrift/",
+"title":"thrift",
+"description":"Thrift is a framework for generating client and services from an IDL.",
+"keywords":"library, sample, thrift"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/tomcat/",
+"title":"tomcat",
+"description":"Apache Tomcat is an open source implementation of the Java Servlet and JavaServer Pages technologies",
+"keywords":"library, sample, tomcat"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/tomee/",
+"title":"tomee",
+"description":"Apache TomEE is an all-Apache Java EE certified stack where Apache Tomcat is top dog.",
+"keywords":"library, sample, tomee"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/traefik/",
+"title":"traefik",
+"description":"Traefik, The Cloud Native Edge Router",
+"keywords":"library, sample, traefik"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/ubuntu/",
+"title":"ubuntu",
+"description":"Ubuntu is a Debian-based Linux operating system based on free software.",
+"keywords":"library, sample, ubuntu"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/vault/",
+"title":"vault",
+"description":"Vault is a tool for securely accessing secrets via a unified interface and tight access control.",
+"keywords":"library, sample, vault"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/websphere-liberty/",
+"title":"websphere-liberty",
+"description":"Official IBM WebSphere Application Server for Developers Liberty image.",
+"keywords":"library, sample, websphere-liberty"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/wordpress/",
+"title":"wordpress",
+"description":"The WordPress rich content management system can utilize plugins, widgets, and themes.",
+"keywords":"library, sample, wordpress"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/xwiki/",
+"title":"xwiki",
+"description":"XWiki: The Advanced Open Source Enterprise Wiki.",
+"keywords":"library, sample, xwiki"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/yourls/",
+"title":"yourls",
+"description":"YOURLS is a set of PHP scripts that will allow you to run Your Own URL Shortener.",
+"keywords":"library, sample, yourls"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/znc/",
+"title":"znc",
+"description":"ZNC - An advanced IRC bouncer",
+"keywords":"library, sample, znc"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/samples/library/zookeeper/",
+"title":"zookeeper",
+"description":"Apache ZooKeeper is an open-source server which enables highly reliable distributed coordination.",
+"keywords":"library, sample, zookeeper"
+}
 ]
