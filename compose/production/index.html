@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-30 08:10:32 +0000 -->
+<!-- Page generated 2019-05-07 21:17:25 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-07T21:17:25+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use Compose in production"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="When you define your app with Compose in development, you can use this definition to run your application in different environments such as CI, staging, and production. The easiest way..." />
+	<meta name="twitter:title" itemprop="title name" content="本番環境での Compose の利用"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Compose を用いたアプリの定義を開発環境で行っていたら、その定義を別の環境に、たとえば継続インテグレーション（CI）、ステージング環境、本番環境に適用することができます。 アプリケーションをデプロイする一番簡単な方法は、一つのサーバー上で動作させることです。 ちょうど開発環境で動作させている方法に近いものです。 アプリケーションをスケールアップしたいなら、Compose アプリをスウォームクラスター上で実行する方法もあります。 本番環境向け Compose ファイルの修正 アプリケーションの設定を本番環境向けにするには、変更を要するかもしれません。 その変更とは以下のようなものです。 アプリケーションコードからボリュームバインディングは削除します。 コードは内部のみで実現するようにし、外部から変更されないようにします。 ホスト上のポートは別のものを割り当てます。 環境変数は区別して割り当てます。 （たとえば冗長なログ出力とならないようにログレベルを下げる、メール送信を可能にする、など。） 再起動ポリシーを設定します。 例えば restart: always とすることで、システムダウンの時間を減らします。 ログ収集といったような追加サービスを設定します。 このようなことがあるので、追加の Compose ファイルとしてたとえば production.yml といったものを用意して、そこに本番環境固有の設定を行うことを考えておきましょう。 この設定ファイルには、元の Compose ファイルに対して変更したい内容のみを含めておけばよいことになります。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-07T21:17:25+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="compose, orchestration, containers, production">
@@ -96,16 +96,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use Compose in production | Docker Documentation</title>
-<meta property="og:title" content="Use Compose in production" />
+	<title>本番環境での Compose の利用 | Docker Documentation</title>
+<meta property="og:title" content="本番環境での Compose の利用" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Guide to using Docker Compose in production" />
-<meta property="og:description" content="Guide to using Docker Compose in production" />
+<meta name="description" content="本番環境で Compose を利用するためのガイド。" />
+<meta property="og:description" content="本番環境で Compose を利用するためのガイド。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use Compose in production","description":"Guide to using Docker Compose in production","url":"https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"本番環境での Compose の利用","description":"本番環境で Compose を利用するためのガイド。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,95 +175,173 @@
 						<section class="section">
 							
 								
-							<h1>Use Compose in production</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>本番環境での Compose の利用</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    3 分
   
 </span>
 
 							
 							
-							<p>When you define your app with Compose in development, you can use this
+							<!--
+When you define your app with Compose in development, you can use this
 definition to run your application in different environments such as CI,
-staging, and production.</p>
+staging, and production.
+-->
+<p>Compose を用いたアプリの定義を開発環境で行っていたら、その定義を別の環境に、たとえば継続インテグレーション（CI）、ステージング環境、本番環境に適用することができます。</p>
 
-<p>The easiest way to deploy an application is to run it on a single server,
+<!--
+The easiest way to deploy an application is to run it on a single server,
 similar to how you would run your development environment. If you want to scale
-up your application, you can run Compose apps on a Swarm cluster.</p>
+up your application, you can run Compose apps on a Swarm cluster.
+-->
+<p>アプリケーションをデプロイする一番簡単な方法は、一つのサーバー上で動作させることです。
+ちょうど開発環境で動作させている方法に近いものです。
+アプリケーションをスケールアップしたいなら、Compose アプリをスウォームクラスター上で実行する方法もあります。</p>
 
-<h3 id="modify-your-compose-file-for-production">Modify your Compose file for production</h3>
+<!--
+### Modify your Compose file for production
+-->
+<h3 id="modify-your-compose-file-for-production">本番環境向け Compose ファイルの修正</h3>
 
-<p>You probably need to make changes to your app configuration to make it ready for
-production. These changes may include:</p>
+<!--
+You probably need to make changes to your app configuration to make it ready for
+production. These changes may include:
+-->
+<p>アプリケーションの設定を本番環境向けにするには、変更を要するかもしれません。
+その変更とは以下のようなものです。</p>
 
+<!--
+- Removing any volume bindings for application code, so that code stays inside
+  the container and can't be changed from outside
+- Binding to different ports on the host
+- Setting environment variables differently, such as when you need to decrease the verbosity of
+  logging, or to enable email sending)
+- Specifying a restart policy like `restart: always` to avoid downtime
+- Adding extra services such as a log aggregator
+-->
 <ul>
-  <li>Removing any volume bindings for application code, so that code stays inside
-the container and can’t be changed from outside</li>
-  <li>Binding to different ports on the host</li>
-  <li>Setting environment variables differently, such as when you need to decrease the verbosity of
-logging, or to enable email sending)</li>
-  <li>Specifying a restart policy like <code class="highlighter-rouge">restart: always</code> to avoid downtime</li>
-  <li>Adding extra services such as a log aggregator</li>
+  <li>アプリケーションコードからボリュームバインディングは削除します。
+コードは内部のみで実現するようにし、外部から変更されないようにします。</li>
+  <li>ホスト上のポートは別のものを割り当てます。</li>
+  <li>環境変数は区別して割り当てます。
+（たとえば冗長なログ出力とならないようにログレベルを下げる、メール送信を可能にする、など。）</li>
+  <li>再起動ポリシーを設定します。
+例えば <code class="highlighter-rouge">restart: always</code> とすることで、システムダウンの時間を減らします。</li>
+  <li>ログ収集といったような追加サービスを設定します。</li>
 </ul>
 
-<p>For this reason, consider defining an additional Compose file, say
-<code class="highlighter-rouge">production.yml</code>, which specifies production-appropriate
-configuration. This configuration file only needs to include the changes you’d
+<!--
+For this reason, consider defining an additional Compose file, say
+`production.yml`, which specifies production-appropriate
+configuration. This configuration file only needs to include the changes you'd
 like to make from the original Compose file. The additional Compose file
-can be applied over the original <code class="highlighter-rouge">docker-compose.yml</code> to create a new configuration.</p>
+can be applied over the original `docker-compose.yml` to create a new configuration.
+-->
+<p>このようなことがあるので、追加の Compose ファイルとしてたとえば <code class="highlighter-rouge">production.yml</code> といったものを用意して、そこに本番環境固有の設定を行うことを考えておきましょう。
+この設定ファイルには、元の Compose ファイルに対して変更したい内容のみを含めておけばよいことになります。
+つまりこの追加ファイルは、元々の <code class="highlighter-rouge">docker-compose.yml</code> にさらに設定を追加して、新たな設定を作り出すものとなるわけです。</p>
 
-<p>Once you’ve got a second configuration file, tell Compose to use it with the
-<code class="highlighter-rouge">-f</code> option:</p>
+<!--
+Once you've got a second configuration file, tell Compose to use it with the
+`-f` option:
+-->
+<p>このような 2 つめの設定ファイルを用意したら Compose に対してこれを利用するために <code class="highlighter-rouge">-f</code> オプションを用います。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.yml -f production.yml up -d
 </code></pre></div></div>
 
-<p>See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#different-environments">Using multiple compose files</a> for a more
-complete example.</p>
+<!--
+See [Using multiple compose files](/compose/extends/#different-environments) for a more
+complete example.
+-->
+<p>より詳細な例は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#different-environments">複数 compose ファイルの利用</a>を参照してください。</p>
 
-<h3 id="deploying-changes">Deploying changes</h3>
+<!--
+### Deploying changes
+-->
+<h3 id="deploying-changes">アプリ変更後のデプロイ</h3>
 
-<p>When you make changes to your app code, remember to rebuild your image and
-recreate your app’s containers. To redeploy a service called
-<code class="highlighter-rouge">web</code>, use:</p>
+<!--
+When you make changes to your app code, remember to rebuild your image and
+recreate your app's containers. To redeploy a service called
+`web`, use:
+-->
+<p>アプリコードに変更を加えたら、イメージを再ビルドし、アプリのコンテナーを再生成することを忘れないでください。
+<code class="highlighter-rouge">web</code> というサービスを再デプロイするには以下のようにします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-compose build web
 $ docker-compose up --no-deps -d web
 </code></pre></div></div>
 
-<p>This first rebuilds the image for <code class="highlighter-rouge">web</code> and then stop, destroy, and recreate
-<em>just</em> the <code class="highlighter-rouge">web</code> service. The <code class="highlighter-rouge">--no-deps</code> flag prevents Compose from also
-recreating any services which <code class="highlighter-rouge">web</code> depends on.</p>
+<!--
+This first rebuilds the image for `web` and then stop, destroy, and recreate
+*just* the `web` service. The `--no-deps` flag prevents Compose from also
+recreating any services which `web` depends on.
+-->
+<p>はじめに <code class="highlighter-rouge">web</code> のイメージを再ビルドし、次に <code class="highlighter-rouge">web</code> サービス<strong>のみ</strong>を停止、破棄、再生成します。
+<code class="highlighter-rouge">--no-deps</code> フラグは <code class="highlighter-rouge">web</code> サービスが依存している他のサービスを再生成しないことを指示しています。</p>
 
-<h3 id="running-compose-on-a-single-server">Running Compose on a single server</h3>
+<!--
+### Running Compose on a single server
+-->
+<h3 id="running-compose-on-a-single-server">単一サーバー上での Compose の実行</h3>
 
-<p>You can use Compose to deploy an app to a remote Docker host by setting the
-<code class="highlighter-rouge">DOCKER_HOST</code>, <code class="highlighter-rouge">DOCKER_TLS_VERIFY</code>, and <code class="highlighter-rouge">DOCKER_CERT_PATH</code> environment variables
+<!--
+You can use Compose to deploy an app to a remote Docker host by setting the
+`DOCKER_HOST`, `DOCKER_TLS_VERIFY`, and `DOCKER_CERT_PATH` environment variables
 appropriately. For tasks like this,
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/overview.md">Docker Machine</a> makes managing local and
-remote Docker hosts very easy, and is recommended even if you’re not deploying
-remotely.</p>
+[Docker Machine](/machine/overview.md) makes managing local and
+remote Docker hosts very easy, and is recommended even if you're not deploying
+remotely.
+-->
+<p>Compose を使って、リモートの Docker ホストへアプリをデプロイすることができます。
+これを行うには <code class="highlighter-rouge">DOCKER_HOST</code>、<code class="highlighter-rouge">DOCKER_TLS_VERIFY</code>、<code class="highlighter-rouge">DOCKER_CERT_PATH</code> という各環境変数を適切に設定します。
+この作業を行うにあたっては  <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/overview.md">Docker Machine</a> を用いれば、Docker ホストがローカルでもリモートでも簡単に管理することができます。
+リモートへのデプロイを行うことがない場合でも、このツールを用いることをお勧めします。</p>
 
-<p>Once you’ve set up your environment variables, all the normal <code class="highlighter-rouge">docker-compose</code>
-commands work with no further configuration.</p>
+<!--
+Once you've set up your environment variables, all the normal `docker-compose`
+commands work with no further configuration.
+-->
+<p>環境変数を設定していれば、他になにかを設定する必要はなく、通常の <code class="highlighter-rouge">docker-compose</code> コマンドを使っていくことができます。</p>
 
-<h3 id="running-compose-on-a-swarm-cluster">Running Compose on a Swarm cluster</h3>
+<!--
+### Running Compose on a Swarm cluster
+-->
+<h3 id="running-compose-on-a-swarm-cluster">スウォームクラスター上での Compose の実行</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/overview.md">Docker Swarm</a>, a Docker-native clustering
+<!--
+[Docker Swarm](/swarm/overview.md), a Docker-native clustering
 system, exposes the same API as a single Docker host, which means you can use
-Compose against a Swarm instance and run your apps across multiple hosts.</p>
+Compose against a Swarm instance and run your apps across multiple hosts.
+-->
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/overview.md">Docker Swarm</a> は Docker のネイティブなクラスターシステムです。
+単一 Docker ホストと同様の API を提供します。
+つまりスウォームインタンスに対しても Compose を利用することができ、また複数ホストにわたってアプリを実行することができるということです。</p>
 
-<p>Read more about the Compose/Swarm integration in the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/swarm/">integration guide</a>.</p>
+<!--
+Read more about the Compose/Swarm integration in the
+[integration guide](/compose/swarm/).
+-->
+<p>Compose と Swarm の統合に関しては、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/swarm/">統合に関する説明</a>を確認してください。</p>
 
-<h2 id="compose-documentation">Compose documentation</h2>
+<!--
+## Compose documentation
+-->
+<h2 id="compose-documentation">Compose ドキュメント</h2>
 
+<!--
+- [Installing Compose](/compose/install/)
+- [Command line reference](/compose/reference/)
+- [Compose file reference](compose-file.md)
+-->
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install/">Installing Compose</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/">Command line reference</a></li>
-  <li><a href="compose-file.md">Compose file reference</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install/">Compose のインストール</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/">コマンドラインリファレンス</a></li>
+  <li><a href="compose-file.md">Compose ファイルリファレンス</a></li>
 </ul>
 
 							<!-- tags -->
@@ -300,7 +378,7 @@ Compose against a Swarm instance and run your apps across multiple hosts.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "compose/production.md",
-										"title": "Use Compose in production",
+										"title": "本番環境での Compose の利用",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/compose/production.md"
 									};
 									(function(d, c, j) {
@@ -360,14 +438,14 @@ Compose against a Swarm instance and run your apps across multiple hosts.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#modify-your-compose-file-for-production" class="nomunge">Modify your Compose file for production</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#modify-your-compose-file-for-production" class="nomunge">本番環境向け Compose ファイルの修正</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#deploying-changes" class="nomunge">Deploying changes</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#running-compose-on-a-single-server" class="nomunge">Running Compose on a single server</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#running-compose-on-a-swarm-cluster" class="nomunge">Running Compose on a Swarm cluster</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#deploying-changes" class="nomunge">アプリ変更後のデプロイ</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#running-compose-on-a-single-server" class="nomunge">単一サーバー上での Compose の実行</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#running-compose-on-a-swarm-cluster" class="nomunge">スウォームクラスター上での Compose の実行</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#compose-documentation" class="nomunge">Compose documentation</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/#compose-documentation" class="nomunge">Compose ドキュメント</a></li>
 </ul>
 
 
