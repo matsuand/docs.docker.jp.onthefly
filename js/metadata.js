@@ -297,7 +297,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/build/",
 "title":"docker-compose build",
-"description":"Build or rebuild services.",
+"description":"サービスのビルドまたは再ビルド。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, build"
 }
 ,
@@ -3215,8 +3215,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/production/",
-"title":"Use Compose in production",
-"description":"Guide to using Docker Compose in production",
+"title":"本番環境での Compose の利用",
+"description":"本番環境で Compose を利用するためのガイド。",
 "keywords":"compose, orchestration, containers, production"
 }
 ,
@@ -3376,7 +3376,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/dtr/release-notes/",
-"title":"DTR release notes",
+"title":"DTR リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry",
 "keywords":"docker trusted registry, whats new, release notes"
 }
@@ -3411,7 +3411,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
-"title":"Docker Engine release notes",
+"title":"Docker Engine リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine CE and EE",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
 }
@@ -4503,7 +4503,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/upgrade/",
-"title":"Upgrading your Plan",
+"title":"Upgrade your Plan",
 "description":"Upgrading your Docker Hub Plan",
 "keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
 }

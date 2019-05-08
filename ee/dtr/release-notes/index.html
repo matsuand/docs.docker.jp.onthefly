@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-30 08:10:32 +0000 -->
+<!-- Page generated 2019-05-08 11:18:58 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-08T11:18:58+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="DTR release notes"/>
+	<meta name="twitter:title" itemprop="title name" content="DTR リリースノート"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Here you can learn about new features, bug fixes, breaking changes, and known issues for each DTR version. You can then use the upgrade instructions, to upgrade your installation to..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-08T11:18:58+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker trusted registry, whats new, release notes">
@@ -100,8 +100,8 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>DTR release notes | Docker Documentation</title>
-<meta property="og:title" content="DTR release notes" />
+	<title>DTR リリースノート | Docker Documentation</title>
+<meta property="og:title" content="DTR リリースノート" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry" />
 <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry" />
@@ -109,7 +109,7 @@
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"DTR release notes","description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"DTR リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -179,11 +179,11 @@
 						<section class="section">
 							
 								
-							<h1>DTR release notes</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>DTR リリースノート</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    41 分
+    46 分
   
 </span>
 
@@ -203,6 +203,76 @@ to upgrade your installation to the latest release.</p>
 
 <h1 id="version-26">Version 2.6</h1>
 
+<h2 id="266">2.6.6</h2>
+<p>(2019-5-6)</p>
+
+<!--
+### Security
+-->
+<h3 id="セキュリティ">セキュリティ</h3>
+
+<ul>
+  <li>Refer to <a href="https://success.docker.com/article/dtr-image-vulnerabilities">DTR image vulnerabilities</a> for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.</li>
+</ul>
+
+<!--
+### Enhancements
+-->
+<h3 id="機能拡張">機能拡張</h3>
+
+<ul>
+  <li>DTR now supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the <code class="highlighter-rouge">--storage-migrated</code> option when performing an NFS reconfiguration via <code class="highlighter-rouge">docker run docker/dtr reconfigure --nfs-url ...</code>. (docker/dhe-deploy#10246)
+    <ul>
+      <li>To use this option, first write your current storage settings to a JSON file via <code class="highlighter-rouge">curl ... /api/v0/admin/settings/registry &gt; storage.json</code>.</li>
+      <li>Next, add <code class="highlighter-rouge">keep_metadata: true</code> as a top-level key in the JSON you just created and modify it to contain your new storage settings.</li>
+      <li>Finally, update your Registry settings with your modified JSON file via <code class="highlighter-rouge">curl -X PUT .../api/v0/admin/settings/registry -d @storage.json</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<!--
+### Bug Fixes
+-->
+<h3 id="バグフィックス">バグフィックス</h3>
+
+<ul>
+  <li>Fixed an issue where replica version was inferred from DTR volume labels. (docker/dhe-deploy#10266)</li>
+</ul>
+
+<h3 id="security">Security</h3>
+<ul>
+  <li>Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy#10290)</li>
+  <li>Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy#10290)</li>
+</ul>
+
+<h3 id="known-issues">Known issues</h3>
+
+<ul>
+  <li>Docker Engine Enterprise Edition (Docker EE) Upgrade
+    <ul>
+      <li>There are <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/upgrade">important changes to the upgrade process</a> that, if not correctly followed, can have impact on the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any version before <code class="highlighter-rouge">18.09</code> to version <code class="highlighter-rouge">18.09</code> or greater. For DTR-specific changes, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/admin/upgrade/#25-to-26-upgrade">2.5 to 2.6 upgrade</a>.</li>
+    </ul>
+  </li>
+  <li>Web Interface
+    <ul>
+      <li>Poll mirroring for Docker plugins such as <code class="highlighter-rouge">docker/imagefs</code> is currently broken. (docker/dhe-deploy #9490)</li>
+      <li>When viewing the details of a scanned image tag, the header may display a different vulnerability count from the layer details. (docker/dhe-deploy #9474)</li>
+      <li>In order to set a tag limit for pruning purposes, immutability must be turned off for a repository. This limitation is not clear in the <strong>Repository Settings</strong> view. (docker/dhe-deploy #9554)</li>
+    </ul>
+  </li>
+  <li>Webhooks
+    <ul>
+      <li>When configured for “Image promoted from repository” events, a webhook notification is triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)</li>
+      <li>HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)</li>
+    </ul>
+  </li>
+  <li>System
+    <ul>
+      <li>When upgrading from <code class="highlighter-rouge">2.5</code> to <code class="highlighter-rouge">2.6</code>, the system will run a <code class="highlighter-rouge">metadatastoremigration</code> job after a successful upgrade. This is necessary for online garbage collection. If the three system attempts fail, you will have to retrigger the <code class="highlighter-rouge">metadatastoremigration</code> job manually. <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/admin/upgrade/#25-to-26-upgrade">Learn about manual metadata store migration</a>.</li>
+    </ul>
+  </li>
+</ul>
+
 <h2 id="265">2.6.5</h2>
 <p>(2019-4-11)</p>
 
@@ -212,7 +282,7 @@ to upgrade your installation to the latest release.</p>
   <li>Removed <code class="highlighter-rouge">Users</code> tab from the side navigation <a href="https://github.com/docker/dhe-deploy/pull/10222">#10222</a></li>
 </ul>
 
-<h3 id="known-issues">Known issues</h3>
+<h3 id="known-issues-1">Known issues</h3>
 
 <ul>
   <li>Docker Engine Enterprise Edition (Docker EE) Upgrade
@@ -256,7 +326,7 @@ to upgrade your installation to the latest release.</p>
   <li>If you have a repository in DTR 2.4 with manifest lists enabled, <code class="highlighter-rouge">docker pull</code> would fail on images that have been pushed to the repository after you upgrade to 2.5 and opt into garbage collection. This also applied when upgrading from 2.5 to 2.6. The issue has been fixed in DTR 2.6.4. (ENGDTR-330 and docker/dhe-deploy #10105)</li>
 </ul>
 
-<h3 id="known-issues-1">Known issues</h3>
+<h3 id="known-issues-2">Known issues</h3>
 
 <ul>
   <li>Docker Engine Enterprise Edition (Docker EE) Upgrade
@@ -300,7 +370,7 @@ to upgrade your installation to the latest release.</p>
   <li>Users with read-only permissions can no longer see the README edit button for a repository. (docker/dhe-deploy#10056)</li>
 </ul>
 
-<h3 id="known-issues-2">Known issues</h3>
+<h3 id="known-issues-3">Known issues</h3>
 
 <ul>
   <li>Docker Engine Enterprise Edition (Docker EE) Upgrade
@@ -344,7 +414,7 @@ to upgrade your installation to the latest release.</p>
   <li>Fixed a bug where scanning Windows images were stuck in Pending state. (docker/dhe-deploy #9969)</li>
 </ul>
 
-<h3 id="known-issues-3">Known issues</h3>
+<h3 id="known-issues-4">Known issues</h3>
 
 <ul>
   <li>Docker Engine Enterprise Edition (Docker EE) Upgrade
@@ -396,7 +466,7 @@ to upgrade your installation to the latest release.</p>
   <li>GoLang version bump to 1.11.4.</li>
 </ul>
 
-<h3 id="known-issues-4">Known issues</h3>
+<h3 id="known-issues-5">Known issues</h3>
 
 <ul>
   <li>Docker Engine Enterprise Edition (Docker EE) Upgrade
@@ -472,7 +542,7 @@ to upgrade your installation to the latest release.</p>
   </li>
 </ul>
 
-<h3 id="known-issues-5">Known issues</h3>
+<h3 id="known-issues-6">Known issues</h3>
 
 <ul>
   <li>Docker Engine Enterprise Edition (Docker EE) Upgrade
@@ -533,17 +603,77 @@ If you have manifest lists enabled on any of your repositories:</p>
   <p>Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.</p>
 </blockquote>
 
-<h2 id="2510">2.5.10</h2>
+<h2 id="2511">2.5.11</h2>
 
-<p>(2019-3-28)</p>
+<p>(2019-05-06)</p>
+
+<h3 id="security-1">Security</h3>
+
+<ul>
+  <li>Bumped the Golang version for DTR to 1.12.4. (docker/dhe-deploy #10301)</li>
+  <li>Bumped the Alpine version of the base image to 3.9. (docker/dhe-deploy #10301)</li>
+  <li>Bumped Python dependencies to address vulnerabilities. (docker/dhe-deploy #10308 and #10311)</li>
+</ul>
 
 <h3 id="bug-fixes-5">Bug Fixes</h3>
 
 <ul>
-  <li>If you have a repository in DTR 2.4 with manifest lists enabled, <code class="highlighter-rouge">docker pull</code> would fail on images that have been pushed to the repository after you upgrade to 2.5 and opt into garbage collection. This has been fixed in 2.5.10. (docker/dhe-deploy#10106)</li>
+  <li>Fixed an issue where read / write permissions were used when copying files into containers. (docker/dhe-deploy #10207)</li>
+  <li>Fixed an issue where non-admin users could not access their repositories from the Repositories page on the web interface. (docker/dhe-deploy #10294)</li>
 </ul>
 
-<h3 id="known-issues-6">Known Issues</h3>
+<h3 id="known-issues-7">Known Issues</h3>
+
+<ul>
+  <li>Web Interface
+    <ul>
+      <li>The web interface shows “This repository has no tags” in repositories where tags
+have long names. As a workaround, reduce the length of the name for the
+repository and tag.</li>
+      <li>When deleting a repository with signed images, the DTR web interface no longer
+shows instructions on how to delete trust data.</li>
+      <li>There’s no web interface support to update mirroring policies when rotating the TLS
+certificates used by DTR. Use the API instead.</li>
+      <li>The web interface for promotion policies is currently broken if you have a large number
+of repositories.</li>
+      <li>Clicking “Save &amp; Apply” on a promotion policy doesn’t work.</li>
+    </ul>
+  </li>
+  <li>Webhooks
+    <ul>
+      <li>There is no webhook event for when an image is pulled.</li>
+      <li>HTTPS webhooks do not go through HTTPS proxy when configured. (docker/dhe-deploy #9492)</li>
+      <li>When configured for “Image promoted from repository” events, a webhook notification will be triggered twice during an image promotion when scanning is enabled on a repository. (docker/dhe-deploy #9685)</li>
+    </ul>
+  </li>
+  <li>Online garbage collection
+    <ul>
+      <li>The events API won’t report events when tags and manifests are deleted.</li>
+      <li>The events API won’t report blobs deleted by the garbage collection job.</li>
+    </ul>
+  </li>
+  <li>Docker EE Advanced features
+    <ul>
+      <li>Scanning any new push after metadatastore migration will not yet work.</li>
+      <li>Pushes to repos with promotion policies (repo as source) are broken when an
+image has a layer over 100MB.</li>
+      <li>On upgrade the scanningstore container may restart with this error message:
+FATAL:  database files are incompatible with server</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="2510">2.5.10</h2>
+
+<p>(2019-3-28)</p>
+
+<h3 id="bug-fixes-6">Bug Fixes</h3>
+
+<ul>
+  <li>If you have a repository in DTR 2.4 with manifest lists enabled, <code class="highlighter-rouge">docker pull</code> used to fail on images that were pushed to the repository after you upgraded to 2.5 and opted into garbage collection. This has been fixed in 2.5.10. (docker/dhe-deploy#10106)</li>
+</ul>
+
+<h3 id="known-issues-8">Known Issues</h3>
 <ul>
   <li>Web Interface
     <ul>
@@ -593,7 +723,7 @@ FATAL:  database files are incompatible with server</li>
   <li>Bump the Golang version that is used to build DTR to version 1.10.8. (docker/dhe-deploy#10071)</li>
 </ul>
 
-<h3 id="known-issues-7">Known Issues</h3>
+<h3 id="known-issues-9">Known Issues</h3>
 <ul>
   <li>Web Interface
     <ul>
@@ -642,13 +772,13 @@ FATAL:  database files are incompatible with server</li>
 
 <p>(2019-1-29)</p>
 
-<h3 id="bug-fixes-6">Bug Fixes</h3>
+<h3 id="bug-fixes-7">Bug Fixes</h3>
 
 <ul>
   <li>Fixed an issue that prevented vulnerability updates from running if they were previously interrupted. (docker/dhe-deploy #9958)</li>
 </ul>
 
-<h3 id="known-issues-8">Known Issues</h3>
+<h3 id="known-issues-10">Known Issues</h3>
 <ul>
   <li>Web Interface
     <ul>
@@ -697,7 +827,7 @@ FATAL:  database files are incompatible with server</li>
 
 <p>(2019-01-09)</p>
 
-<h3 id="bug-fixes-7">Bug Fixes</h3>
+<h3 id="bug-fixes-8">Bug Fixes</h3>
 
 <ul>
   <li>Fixed a bug where manifest lists were being appended to existing manifests lists when pushed. (docker/dhe-deploy #9811)</li>
@@ -710,7 +840,7 @@ FATAL:  database files are incompatible with server</li>
   <li>GoLang version bump to 1.10.7.</li>
 </ul>
 
-<h3 id="known-issues-9">Known Issues</h3>
+<h3 id="known-issues-11">Known Issues</h3>
 <ul>
   <li>Web Interface
     <ul>
@@ -759,7 +889,7 @@ FATAL:  database files are incompatible with server</li>
 
 <p>(2018-10-25)</p>
 
-<h3 id="bug-fixes-8">Bug Fixes</h3>
+<h3 id="bug-fixes-9">Bug Fixes</h3>
 <ul>
   <li>Fixed a bug where Windows images could not be promoted. (docker/dhe-deploy#9215)</li>
   <li>Removed Python3 from base image. (docker/dhe-deploy#9219)</li>
@@ -770,7 +900,7 @@ FATAL:  database files are incompatible with server</li>
   <li>Removed support sidebar link and associated content. (docker/dhe-deploy#9411)</li>
 </ul>
 
-<h3 id="known-issues-10">Known Issues</h3>
+<h3 id="known-issues-12">Known Issues</h3>
 <ul>
   <li>Web Interface
     <ul>
@@ -819,7 +949,7 @@ FATAL:  database files are incompatible with server</li>
 
 <p>(2018-8-30)</p>
 
-<h3 id="bug-fixes-9">Bug Fixes</h3>
+<h3 id="bug-fixes-10">Bug Fixes</h3>
 
 <ul>
   <li>Fixed bug where repository tag list UI was not loading after a tag migration.</li>
@@ -827,7 +957,7 @@ FATAL:  database files are incompatible with server</li>
   <li>The RethinkDB image has been patched to remove unused components with known vulnerabilities including the RethinkCLI. To get an equivalent interface, run RethinkCLI from a separate image using <code class="highlighter-rouge">docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.3.0 $REPLICA_ID</code>.</li>
 </ul>
 
-<h3 id="known-issues-11">Known Issues</h3>
+<h3 id="known-issues-13">Known Issues</h3>
 <ul>
   <li>Web Interface
     <ul>
@@ -882,7 +1012,7 @@ FATAL:  database files are incompatible with server</li>
   <li>Allow users to adjust DTR log levels for alternative logging solutions.</li>
 </ul>
 
-<h3 id="bug-fixes-10">Bug Fixes</h3>
+<h3 id="bug-fixes-11">Bug Fixes</h3>
 
 <ul>
   <li>Fixed URL redirect to release notes.</li>
@@ -890,7 +1020,7 @@ FATAL:  database files are incompatible with server</li>
   <li>Fixed issue where worker capacities wouldn’t update on minor version upgrades.</li>
 </ul>
 
-<h3 id="known-issues-12">Known Issues</h3>
+<h3 id="known-issues-14">Known Issues</h3>
 <ul>
   <li>Web Interface
     <ul>
@@ -939,13 +1069,13 @@ FATAL:  database files are incompatible with server</li>
 
 <p>(2018-5-21)</p>
 
-<h3 id="bug-fixes-11">Bug fixes</h3>
+<h3 id="bug-fixes-12">Bug fixes</h3>
 
 <ul>
   <li>Fixed a problem where promotion policies based on scanning results would not be executed correctly.</li>
 </ul>
 
-<h3 id="known-issues-13">Known issues</h3>
+<h3 id="known-issues-15">Known issues</h3>
 
 <ul>
   <li>Web Interface
@@ -1000,7 +1130,7 @@ FATAL:  database files are incompatible with server</li>
   <li>Headers added to all API and registry responses to improve security (enforce HTST, XSS Protection, prevent MIME sniffing).</li>
 </ul>
 
-<h3 id="bug-fixes-12">Bug fixes</h3>
+<h3 id="bug-fixes-13">Bug fixes</h3>
 
 <ul>
   <li>Allow for AlibabaCloud as storage backend.</li>
@@ -1025,7 +1155,7 @@ FATAL:  database files are incompatible with server</li>
       <li>Option to skip TLS verification when testing mirroring.</li>
     </ul>
 
-    <h3 id="known-issues-14">Known issues</h3>
+    <h3 id="known-issues-16">Known issues</h3>
   </li>
   <li>Web Interface
     <ul>
@@ -1122,7 +1252,7 @@ has been deprecated. Use <code class="highlighter-rouge">/api/v0/repositories/{n
 instead.</li>
 </ul>
 
-<h3 id="bug-fixes-13">Bug fixes</h3>
+<h3 id="bug-fixes-14">Bug fixes</h3>
 
 <ul>
   <li>Web Interface
@@ -1156,7 +1286,7 @@ specify <code class="highlighter-rouge">--log-protocol</code>.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-15">Known issues</h3>
+<h3 id="known-issues-17">Known issues</h3>
 
 <ul>
   <li>Web Interface
@@ -1211,6 +1341,17 @@ If you have manifest lists enabled on any of your repositories:</p>
 Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.</p>
 </blockquote>
 
+<h2 id="2412">2.4.12</h2>
+
+<p>(2019-05-06)</p>
+
+<h3 id="security-2">Security</h3>
+
+<ul>
+  <li>Bumped the Golang version for DTR to 1.12.4. <a href="https://github.com/docker/dhe-deploy/pull/10303">docker/dhe-deploy #10303</a></li>
+  <li>Bumped Python dependencies to address vulnerabilities. <a href="https://github.com/docker/dhe-deploy/pull/10309">docker/dhe-deploy#10309</a></li>
+</ul>
+
 <h2 id="2411">2.4.11</h2>
 
 <p>(2019-4-11)</p>
@@ -1218,7 +1359,7 @@ Upgrade path from 2.5.x to 2.6: Upgrade directly to 2.6.4.</p>
 <h3 id="changelog-4">Changelog</h3>
 
 <ul>
-  <li>Bump the Golang version that is used to build DTR to version 1.11.5. <a href="https://github.com/docker/dhe-deploy/pull/10155">docker/dhe-deploy#10155</a></li>
+  <li>Bumped the Golang version that is used to build DTR to version 1.11.5. <a href="https://github.com/docker/dhe-deploy/pull/10155">docker/dhe-deploy#10155</a></li>
 </ul>
 
 <h2 id="2410">2.4.10</h2>
@@ -1260,7 +1401,7 @@ of testing the server to find which version works.</li>
 
 <p>(2018-10-25)</p>
 
-<h3 id="bug-fixes-14">Bug Fixes</h3>
+<h3 id="bug-fixes-15">Bug Fixes</h3>
 <ul>
   <li>Added CSP (Content Security Policy). (docker/dhe-deploy#9367 and docker/dhe-deploy#9584)</li>
   <li>Fixed critical vulnerability in RethinkDB. (docker/dhe-deploy#9574)</li>
@@ -1284,7 +1425,7 @@ of testing the server to find which version works.</li>
 
 <p>(2018-07-26)</p>
 
-<h3 id="bug-fixes-15">Bug Fixes</h3>
+<h3 id="bug-fixes-16">Bug Fixes</h3>
 <ul>
   <li>Fixed bug where repository tag list UI was not loading after a tag migration.</li>
   <li>The RethinkDB image has been patched to remove unused components with known vulnerabilities including the rethinkcli. To get an equivalent interface please run the rethinkcli from a separate image using <code class="highlighter-rouge">docker run -it --rm --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli $REPLICA_ID</code>.</li>
@@ -1502,7 +1643,7 @@ of testing the server to find which version works.</li>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "ee/dtr/release-notes.md",
-										"title": "DTR release notes",
+										"title": "DTR リリースノート",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/dtr/release-notes.md"
 									};
 									(function(d, c, j) {
@@ -1564,6 +1705,7 @@ of testing the server to find which version works.</li>
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#version-26" class="nomunge">Version 2.6</a>
     <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#266" class="nomunge">2.6.6</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#265" class="nomunge">2.6.5</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#264" class="nomunge">2.6.4</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#263" class="nomunge">2.6.3</a></li>
@@ -1574,6 +1716,7 @@ of testing the server to find which version works.</li>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#version-25" class="nomunge">Version 2.5</a>
     <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#2511" class="nomunge">2.5.11</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#2510" class="nomunge">2.5.10</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#259" class="nomunge">2.5.9</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#258" class="nomunge">2.5.8</a></li>
@@ -1588,6 +1731,7 @@ of testing the server to find which version works.</li>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#version-24" class="nomunge">Version 2.4</a>
     <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#2412" class="nomunge">2.4.12</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#2411" class="nomunge">2.4.11</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#2410" class="nomunge">2.4.10</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/#version-248" class="nomunge">Version 2.4.8</a></li>

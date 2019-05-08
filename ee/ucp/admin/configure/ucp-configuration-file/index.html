@@ -1,4 +1,4 @@
-<!-- Page generated 2019-04-30 08:10:32 +0000 -->
+<!-- Page generated 2019-05-08 11:18:58 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,7 +86,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-08T11:18:58+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -96,7 +96,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="There are two ways to configure UCP: through the web interface, or by importing and exporting the UCP config in a TOML file. For more information about TOML, see the..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-04-30T08:10:32+00:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-08T11:18:58+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker EE, UCP, configuration, config">
@@ -228,13 +228,19 @@ set the configuration at install time or import after installation.</li>
 
 <p>Use the <code class="highlighter-rouge">config-toml</code> API to export the current settings and write them to a file. Within the directory of a UCP admin user’s <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">client certificate bundle</a>, the following command exports the current configuration for the UCP hostname <code class="highlighter-rouge">UCP_HOST</code> to a file named <code class="highlighter-rouge">ucp-config.toml</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--cacert</span> ca.pem <span class="nt">--cert</span> cert.pem <span class="nt">--key</span> key.pem https://UCP_HOST/api/ucp/config-toml <span class="o">&gt;</span> ucp-config.toml
+<h3 id="get-an-authtoken">Get an authtoken</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AUTHTOKEN=$(curl --silent --insecure --data '{"username":"&lt;username&gt;","password":"&lt;password&gt;"}' https://UCP_HOST/auth/login | jq --raw-output .auth_token)
 </code></pre></div></div>
 
-<p>Edit <code class="highlighter-rouge">ucp-config.toml</code>, then use the following <code class="highlighter-rouge">curl</code> command to import it back into
-UCP and apply your configuration changes:</p>
+<h3 id="download-config-file">Download config file</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--cacert</span> ca.pem <span class="nt">--cert</span> cert.pem <span class="nt">--key</span> key.pem <span class="nt">--upload-file</span> ucp-config.toml https://UCP_HOST/api/ucp/config-toml
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X GET "https://UCP_HOST/api/ucp/config-toml" -H  "accept: application/toml" -H  "Authorization: Bearer $AUTHTOKEN" &gt; ucp-config.toml
+</code></pre></div></div>
+
+<h3 id="upload-config-file">Upload config file</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -X PUT -H  "accept: application/toml" -H "Authorization: Bearer $AUTHTOKEN" --upload-file 'path/to/ucp-config.toml' https://UCP_HOST/api/ucp/config-toml
 </code></pre></div></div>
 
 <h2 id="apply-an-existing-configuration-file-at-install-time">Apply an existing configuration file at install time</h2>
@@ -251,7 +257,7 @@ UCP and apply your configuration changes:</p>
 <p>You can see an example TOML config file that shows how to configure UCP
 settings. From the command line, run UCP with the <code class="highlighter-rouge">example-config</code> option:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--rm</span> docker/ucp:3.1.6 example-config
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--rm</span> docker/ucp:3.1.7 example-config
 </code></pre></div></div>
 
 <h2 id="configuration-options">Configuration options</h2>
@@ -483,6 +489,10 @@ settings. From the command line, run UCP with the <code class="highlighter-rouge
 </table>
 
 <h3 id="log_configuration-table-optional">log_configuration table (optional)</h3>
+
+<blockquote>
+  <p>Note: This feature has been deprecated. Refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#deprecation-notice">Deprecation notice</a> for additional information.</p>
+</blockquote>
 
 <p>Configures the logging options for UCP components.</p>
 
@@ -797,7 +807,13 @@ components. Assigning these values overrides the settings in a container’s
 									
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#the-ucp-configuration-file" class="nomunge">The UCP configuration file</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#export-and-modify-an-existing-configuration" class="nomunge">Export and modify an existing configuration</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#export-and-modify-an-existing-configuration" class="nomunge">Export and modify an existing configuration</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#get-an-authtoken" class="nomunge">Get an authtoken</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#download-config-file" class="nomunge">Download config file</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#upload-config-file" class="nomunge">Upload config file</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#apply-an-existing-configuration-file-at-install-time" class="nomunge">Apply an existing configuration file at install time</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#example-configuration-file" class="nomunge">Example configuration file</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/#configuration-options" class="nomunge">Configuration options</a>
