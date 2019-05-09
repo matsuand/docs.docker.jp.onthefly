@@ -246,6 +246,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/backup/",
+"title":"docker/dtr backup",
+"description":"Create a backup of DTR",
+"keywords":"dtr, cli, backup"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/backup/",
 "title":"Docker EE のバックアップ",
 "description":"Learn how to create a backup of your Docker Enterprise Edition, and how to restore from a backup.",
@@ -1002,6 +1009,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/destroy/",
+"title":"docker/dtr destroy",
+"description":"Destroy a DTR replica's data",
+"keywords":"dtr, cli, destroy"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/develop/dev-best-practices/",
 "title":"Docker development best practices",
 "description":"Rules of thumb for making your life easier as a Docker application developer",
@@ -1167,6 +1181,13 @@ var pages = [
 "title":"Access control design with Docker EE Standard",
 "description":"Learn how to architect multitenancy by using Docker Enterprise Edition Advanced.",
 "keywords":"authorize, authentication, users, teams, groups, sync, UCP, role, access control"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/emergency-repair/",
+"title":"docker/dtr emergency-repair",
+"description":"Recover DTR from loss of quorum",
+"keywords":"dtr, cli, emergency-repair"
 }
 ,
 {
@@ -1486,8 +1507,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/gettingstarted/",
-"title":"Get started with Docker Compose",
-"description":"Get started with Docker Compose",
+"title":"Docker Compose をはじめよう",
+"description":"Docker Compose をはじめよう。",
 "keywords":"documentation, docs, docker, compose, orchestration, containers"
 }
 ,
@@ -1681,6 +1702,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/images/",
+"title":"docker/dtr images",
+"description":"List all the images necessary to install DTR",
+"keywords":"dtr, cli, images"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/images/",
 "title":"docker-compose images",
 "description":"Lists images used by the project.",
@@ -1755,6 +1783,13 @@ var pages = [
 "title":"Docker Machine",
 "description":"Introduction and Overview of Machine",
 "keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/",
+"title":"docker/dtr overview",
+"description":"Learn about the commands available in the docker/dtr image.",
+"keywords":"dtr, install, uninstall, configure"
 }
 ,
 {
@@ -2178,6 +2213,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/install/",
+"title":"docker/dtr install",
+"description":"Install Docker Trusted Registry",
+"keywords":"dtr, cli, install"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/install/",
 "title":"Docker Compose のインストール",
 "description":"Docker Compose のインストール方法。",
@@ -2273,6 +2315,13 @@ var pages = [
 "title":"Join nodes to a swarm",
 "description":"Add worker and manager nodes to a swarm",
 "keywords":"guide, swarm mode, node"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/join/",
+"title":"docker/dtr join",
+"description":"Add a new replica to an existing DTR cluster",
+"keywords":"dtr, cli, join"
 }
 ,
 {
@@ -3006,7 +3055,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/overview/",
 "title":"Docker Compose 概要",
-"description":"Introduction and Overview of Compose",
+"description":"Compose の導入と概要",
 "keywords":"documentation, docs, docker, compose, orchestration, containers"
 }
 ,
@@ -3354,6 +3403,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/reconfigure/",
+"title":"docker/dtr reconfigure",
+"description":"Change DTR configurations",
+"keywords":"dtr, cli, reconfigure"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/",
 "title":"Reference documentation",
 "description":null,
@@ -3414,6 +3470,13 @@ var pages = [
 "title":"Docker Engine リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine CE and EE",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/remove/",
+"title":"docker/dtr remove",
+"description":"Remove a DTR replica from a cluster",
+"keywords":"dtr, cli, remove"
 }
 ,
 {
@@ -3484,6 +3547,13 @@ var pages = [
 "title":"Restore from a backup",
 "description":"Learn how to restore a DTR cluster from an existing backup",
 "keywords":"dtr, disaster recovery"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/restore/",
+"title":"docker/dtr restore",
+"description":"Install and restore DTR from an existing backup",
+"keywords":"dtr, cli, restore"
 }
 ,
 {
@@ -4478,6 +4548,13 @@ var pages = [
 "title":"docker-machine upgrade",
 "description":"Upgrade Docker on a machine",
 "keywords":"machine, upgrade, subcommand"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/upgrade/",
+"title":"docker/dtr upgrade",
+"description":"Upgrade DTR 2.5.x cluster to this version",
+"keywords":"dtr, cli, upgrade"
 }
 ,
 {
