@@ -1,24 +1,24 @@
-<!--
+{% comment %}
 ## Contributing
--->
+{% endcomment %}
 ## 貢献
 
-<!--
+{% comment %}
 We value your documentation contributions, and we want to make it as easy
 as possible to work in this repository. One of the first things to decide is
 which branch to base your work on. If you get confused, just ask and we will
 help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
--->
+{% endcomment %}
 ドキュメントに対する貢献を歓迎します。
 レポジトリ内にて作業をしやすくしたいと思っています。
 はじめに決めていただくのは、どのブランチをもとに作業を進めるかです。
 よく分からなかったら尋ねてください。お手伝いします。
 
-<!--
+{% comment %}
 >**Note**: To contribute code to Docker projects, see the
 [Contribution guidelines](opensource/).
--->
+{% endcomment %}
 >**メモ**: Docker プロジェクトにコード貢献するには [貢献のためのガイドライン](opensource/) を参照してください。
 
 ### Files not edited here
@@ -29,9 +29,9 @@ repositories and should not be edited in this one. Pull requests against these
 files will be rejected. Make your edits to the files in the repository and path
 in the `source:` key in the YAML file.
 
-<!--
+{% comment %}
 ### Quickstart
--->
+{% endcomment %}
 ### クィックスタート
 
 If you spot a problem while reading the documentation and want to try to fix it
@@ -115,9 +115,9 @@ one, the commit will usually be "squash-merged", so that only one commit is
 merged in. On occasion this is not appropriate and all commits will be kept
 separate when merging.
 
-<!--
+{% comment %}
 ## Pull request guidelines
--->
+{% endcomment %}
 ## プルリクエストのガイドライン
 
 Help us review your PRs more quickly by following these guidelines.
