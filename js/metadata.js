@@ -1913,8 +1913,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/",
-"title":"Docker エンタープライズ",
-"description":"Learn about Docker Enterprise Edition, the enterprise-grade cluster management solution from Docker.",
+"title":"Docker Enterprise",
+"description":"Docker Enterprise エディション、つまり Docker によりエンタープライズレベルのクラスター管理ソリューションについて学びます。",
 "keywords":"Docker EE, UCP, DTR, orchestration, cluster, Kubernetes"
 }
 ,

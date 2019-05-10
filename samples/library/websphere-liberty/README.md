@@ -16,34 +16,34 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`beta` (*beta/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/beta/Dockerfile)
--	[`19.0.0.4-kernel`, `kernel` (*ga/19.0.0.4/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/kernel/Dockerfile)
--	[`19.0.0.4-javaee8`, `javaee8`, `latest` (*ga/19.0.0.4/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/javaee8/Dockerfile)
--	[`19.0.0.4-webProfile8`, `webProfile8` (*ga/19.0.0.4/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/webProfile8/Dockerfile)
--	[`19.0.0.4-microProfile1`, `microProfile1` (*ga/19.0.0.4/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/microProfile1/Dockerfile)
--	[`19.0.0.4-microProfile2`, `microProfile2` (*ga/19.0.0.4/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/microProfile2/Dockerfile)
--	[`19.0.0.4-springBoot2`, `springBoot2` (*ga/19.0.0.4/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/springBoot2/Dockerfile)
--	[`19.0.0.4-springBoot1`, `springBoot1` (*ga/19.0.0.4/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/springBoot1/Dockerfile)
--	[`19.0.0.4-webProfile7`, `webProfile7` (*ga/19.0.0.4/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/webProfile7/Dockerfile)
--	[`19.0.0.4-javaee7`, `javaee7` (*ga/19.0.0.4/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.4/javaee7/Dockerfile)
--	[`19.0.0.3-kernel` (*ga/19.0.0.3/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/kernel/Dockerfile)
--	[`19.0.0.3-javaee8` (*ga/19.0.0.3/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/javaee8/Dockerfile)
--	[`19.0.0.3-webProfile8` (*ga/19.0.0.3/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/webProfile8/Dockerfile)
--	[`19.0.0.3-microProfile1` (*ga/19.0.0.3/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/microProfile1/Dockerfile)
--	[`19.0.0.3-microProfile2` (*ga/19.0.0.3/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/microProfile2/Dockerfile)
--	[`19.0.0.3-springBoot2` (*ga/19.0.0.3/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/springBoot2/Dockerfile)
--	[`19.0.0.3-springBoot1` (*ga/19.0.0.3/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/springBoot1/Dockerfile)
--	[`19.0.0.3-webProfile7` (*ga/19.0.0.3/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/webProfile7/Dockerfile)
--	[`19.0.0.3-javaee7` (*ga/19.0.0.3/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/19.0.0.3/javaee7/Dockerfile)
--	[`18.0.0.4-kernel` (*ga/18.0.0.4/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/kernel/Dockerfile)
--	[`18.0.0.4-javaee8` (*ga/18.0.0.4/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/javaee8/Dockerfile)
--	[`18.0.0.4-webProfile8` (*ga/18.0.0.4/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/webProfile8/Dockerfile)
--	[`18.0.0.4-microProfile1` (*ga/18.0.0.4/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/microProfile1/Dockerfile)
--	[`18.0.0.4-microProfile2` (*ga/18.0.0.4/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/microProfile2/Dockerfile)
--	[`18.0.0.4-springBoot2` (*ga/18.0.0.4/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/springBoot2/Dockerfile)
--	[`18.0.0.4-springBoot1` (*ga/18.0.0.4/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/springBoot1/Dockerfile)
--	[`18.0.0.4-webProfile7` (*ga/18.0.0.4/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/webProfile7/Dockerfile)
--	[`18.0.0.4-javaee7` (*ga/18.0.0.4/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/6c1cb64cb8d297120b599f28549e8d148375e8e9/ga/18.0.0.4/javaee7/Dockerfile)
+-	[`beta` (*beta/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/beta/Dockerfile)
+-	[`19.0.0.4-kernel`, `kernel` (*ga/19.0.0.4/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/kernel/Dockerfile)
+-	[`19.0.0.4-javaee8`, `javaee8`, `latest` (*ga/19.0.0.4/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/javaee8/Dockerfile)
+-	[`19.0.0.4-webProfile8`, `webProfile8` (*ga/19.0.0.4/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/webProfile8/Dockerfile)
+-	[`19.0.0.4-microProfile1`, `microProfile1` (*ga/19.0.0.4/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/microProfile1/Dockerfile)
+-	[`19.0.0.4-microProfile2`, `microProfile2` (*ga/19.0.0.4/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/microProfile2/Dockerfile)
+-	[`19.0.0.4-springBoot2`, `springBoot2` (*ga/19.0.0.4/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/springBoot2/Dockerfile)
+-	[`19.0.0.4-springBoot1`, `springBoot1` (*ga/19.0.0.4/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/springBoot1/Dockerfile)
+-	[`19.0.0.4-webProfile7`, `webProfile7` (*ga/19.0.0.4/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/webProfile7/Dockerfile)
+-	[`19.0.0.4-javaee7`, `javaee7` (*ga/19.0.0.4/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/javaee7/Dockerfile)
+-	[`19.0.0.3-kernel` (*ga/19.0.0.3/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/kernel/Dockerfile)
+-	[`19.0.0.3-javaee8` (*ga/19.0.0.3/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/javaee8/Dockerfile)
+-	[`19.0.0.3-webProfile8` (*ga/19.0.0.3/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/webProfile8/Dockerfile)
+-	[`19.0.0.3-microProfile1` (*ga/19.0.0.3/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/microProfile1/Dockerfile)
+-	[`19.0.0.3-microProfile2` (*ga/19.0.0.3/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/microProfile2/Dockerfile)
+-	[`19.0.0.3-springBoot2` (*ga/19.0.0.3/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/springBoot2/Dockerfile)
+-	[`19.0.0.3-springBoot1` (*ga/19.0.0.3/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/springBoot1/Dockerfile)
+-	[`19.0.0.3-webProfile7` (*ga/19.0.0.3/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/webProfile7/Dockerfile)
+-	[`19.0.0.3-javaee7` (*ga/19.0.0.3/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/javaee7/Dockerfile)
+-	[`18.0.0.4-kernel` (*ga/18.0.0.4/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/kernel/Dockerfile)
+-	[`18.0.0.4-javaee8` (*ga/18.0.0.4/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/javaee8/Dockerfile)
+-	[`18.0.0.4-webProfile8` (*ga/18.0.0.4/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/webProfile8/Dockerfile)
+-	[`18.0.0.4-microProfile1` (*ga/18.0.0.4/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/microProfile1/Dockerfile)
+-	[`18.0.0.4-microProfile2` (*ga/18.0.0.4/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/microProfile2/Dockerfile)
+-	[`18.0.0.4-springBoot2` (*ga/18.0.0.4/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/springBoot2/Dockerfile)
+-	[`18.0.0.4-springBoot1` (*ga/18.0.0.4/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/springBoot1/Dockerfile)
+-	[`18.0.0.4-webProfile7` (*ga/18.0.0.4/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/webProfile7/Dockerfile)
+-	[`18.0.0.4-javaee7` (*ga/18.0.0.4/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/javaee7/Dockerfile)
 
 # Quick reference
 
@@ -153,25 +153,11 @@ The images are designed to support a number of different usage patterns. The fol
 
 It is a very strong best practice to create an extending Docker image, we called it the `application image`, that encapsulates an application and its configuration. This creates a robust, self-contained and predictable Docker image that can span new containers upon request, without relying on volumes or other external runtime artifacts that may behave different over time.
 
-If you want to build the smallest possible WebSphere Liberty application image you can start with our `kernel` tag, add your artifacts, and run `installUtility` to grow the set of features to be fit-for-purpose. Scroll up to the `Tags` section for an example.
-
-If you want to start with one of the pre-packaged tags you do not need to run `installUtility` if the tag contains all the features you required, and you may not even need to copy a `server.xml` - unless you have updates you want to make. So one example of building an application image that runs a MicroProfile 2.0 application is:
-
-```dockerfile
-FROM websphere-liberty:microprofile2
-COPY --chown=1001:0  Sample1.war /config/dropins/
-```
-
-You can then build and run this image:
-
-```console
-$ docker build -t app .
-$ docker run -d -p 80:9080 -p 443:9443 app
-```
+If you want to build the smallest possible WebSphere Liberty application image you can start with our `kernel` tag, add your artifacts, and run `configure.sh` to grow the set of features to be fit-for-purpose. Please see our [GitHub page](https://github.com/WASdev/ci.docker#building-an-application-image) for more details.
 
 ## Using volumes for configuration
 
-This pattern can be useful for quick experiments / early development (i.e. `I just want to run the application as I iterate over it`), can should not be used for development scenarios that involve different teams and environments - for these cases the `Application Image` pattern described above is the way to go.
+This pattern can be useful for quick experiments / early development (i.e. `I just want to run the application as I iterate over it`), but should not be used for development scenarios that involve different teams and environments - for these cases the `Application Image` pattern described above is the way to go.
 
 When using `volumes`, an application file can be mounted in the `dropins` directory of this server and run. The following example starts a container in the background running a .WAR file from the host file system with the HTTP and HTTPS ports mapped to 80 and 443 respectively.
 
@@ -197,19 +183,11 @@ For greater flexibility over configuration, it is possible to mount an entire se
 
 The `springBoot` images introduce capabilities specific to the support of Spring Boot applications, including the `springBootUtility` used to separate Spring Boot applications into thin applications and dependency library caches. To elaborate these capabilities this section assumes the standalone Spring Boot 2.0.x application `hellospringboot.jar` exists in the `/tmp` directory.
 
-1.	A Spring Boot application JAR deploys to the `dropins/spring` directory within the default server configuration, not the `dropins` directory. Liberty allows one Spring Boot application per server configuration. The following example starts a container running a Spring Boot application.
-
-	```console
-	$ docker run -d -p 8080:9080 \
-	    -v /tmp/hellospringboot.jar:/config/dropins/spring/hellospringboot.jar \
-	    websphere-liberty:springBoot2
-	```
-
-	Similarly, you can create a Spring Boot application layer over this image by adding the application JAR to the `dropins/spring` directory. In this example we copied `hellospringboot.jar` from `/tmp` to the same directory containing the following Dockerfile.
+1.	A Spring Boot application JAR deploys to the `dropins/spring` directory within the default server configuration, not the `dropins` directory. Liberty allows one Spring Boot application per server configuration. You can create a Spring Boot application layer over this image by adding the application JAR to the `dropins/spring` directory. In this example we copied `hellospringboot.jar` from `/tmp` to the same directory containing the following Dockerfile.
 
 	```dockerfile
 	FROM websphere-liberty:springBoot2
-	COPY hellospringboot.jar /config/dropins/spring/
+	COPY --chown=1001:0 hellospringboot.jar /config/dropins/spring/
 	```
 
 	The custom image can be built and run as follows.
@@ -221,29 +199,11 @@ The `springBoot` images introduce capabilities specific to the support of Spring
 
 2.	The `springBoot` images provide the library cache directory, `lib.index.cache`, which contains an indexed library cache created by the `springBootUtility` command. Use `lib.index.cache` to provide the library cache for a thin application.
 
-	For example, run the following command to thin the `hellospringboot.jar` application.
-
-	```console
-	$ <wlp>/bin/springBootUtility thin \
-	   --sourceAppPath=/tmp/hellospringboot.jar \
-	   --targetLibCachePath=/tmp/lib.index.cache \
-	   --targetThinAppPath=/tmp/thinhellospringboot.jar
-	```
-
-	You can run the thin application by mounting both the target application JAR and library cache when starting the container.
-
-	```console
-	$ docker run -d -p 8080:9080 \
-	    -v /tmp/thinhellospringboot.jar:/config/dropins/spring/thinhellospringboot.jar \
-	    -v /tmp/lib.index.cache:/lib.index.cache \
-	    websphere-liberty:springBoot2
-	```
-
-	Similarly, you can use the `springBootUtility` command to create thin application and library cache layers over a `springBoot` image. The following example uses docker staging to efficiently build an image that deploys a fat Spring Boot application as two layers containing a thin application and a library cache.
+	You can use the `springBootUtility` command to create thin application and library cache layers over a `springBoot` image. The following example uses docker staging to efficiently build an image that deploys a fat Spring Boot application as two layers containing a thin application and a library cache.
 
 	```dockerfile
 	FROM websphere-liberty:springBoot2 as staging
-	COPY hellospringboot.jar /staging/myFatApp.jar
+	COPY --chown=1001:0 hellospringboot.jar /staging/myFatApp.jar
 	RUN springBootUtility thin \
 	   --sourceAppPath=/staging/myFatApp.jar \
 	   --targetThinAppPath=/staging/myThinApp.jar \
