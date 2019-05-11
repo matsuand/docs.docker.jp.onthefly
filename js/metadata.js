@@ -275,7 +275,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/binaries/",
-"title":"Docker CE の入手（バイナリパッケージ）",
+"title":"Docker CE の入手（バイナリモジュール）",
 "description":"Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.",
 "keywords":"binaries, installation, docker, documentation, linux"
 }
@@ -1118,6 +1118,13 @@ var pages = [
 "title":"docker",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/",
+"title":"dockerd",
+"description":"The daemon command description and usage",
+"keywords":"container, daemon, runtime"
 }
 ,
 {
@@ -2466,8 +2473,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/linux-postinstall/",
-"title":"Post-installation steps for Linux",
-"description":"Optional post-installation steps for Linux",
+"title":"Linux インストール後の作業",
+"description":"Linux インストール後の任意の作業。",
 "keywords":"Docker, Docker documentation, requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
 }
 ,
@@ -4041,8 +4048,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/startup-order/",
-"title":"Control startup and shutdown order in Compose",
-"description":"How to control service startup and shutdown order in Docker Compose",
+"title":"Compose における起動、停止順の制御",
+"description":"Docker Compose においてサービスの起動順、停止順を制御する方法を説明します。",
 "keywords":"documentation, docs, docker, compose, startup, shutdown, order"
 }
 ,
