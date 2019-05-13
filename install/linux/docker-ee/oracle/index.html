@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-12 21:00:31 +0900 -->
+<!-- Page generated 2019-05-13 12:54:25 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -82,17 +82,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-12T21:00:31+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-13T12:54:25+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Get Docker EE for Oracle Linux"/>
+	<meta name="twitter:title" itemprop="title name" content="Docker EE の入手（Oracle Linux 向け）"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Enterprise エディション (Docker EE) を Oracle Linux にインストールしアップグレードする方法には二種類あります。 YUM リポジトリ利用: Docker リポジトリを設定して、そこから Docker EE をインストールします。YUM を使ってインストールしアップグレードも行うため、簡単に操作できます。 この方法を推奨します。 RPM パッケージ利用: RPM パッケージをダウンロードして、手動でインストールやアップグレードの管理を行います。この方法は、インターネットへのアクセスができない環境において Docker EE をインストールすることができます。 Docker Community エディション (Docker CE)..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-12T21:00:31+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-13T12:54:25+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update">
@@ -104,16 +104,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Get Docker EE for Oracle Linux | Docker Documentation</title>
-<meta property="og:title" content="Get Docker EE for Oracle Linux" />
+	<title>Docker EE の入手（Oracle Linux 向け） | Docker Documentation</title>
+<meta property="og:title" content="Docker EE の入手（Oracle Linux 向け）" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Instructions for installing Docker EE on Oracle Linux" />
-<meta property="og:description" content="Instructions for installing Docker EE on Oracle Linux" />
+<meta name="description" content="Oracle Linux 上に Docker EE をインストールする手順を説明。" />
+<meta property="og:description" content="Oracle Linux 上に Docker EE をインストールする手順を説明。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Get Docker EE for Oracle Linux","description":"Instructions for installing Docker EE on Oracle Linux","url":"https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker EE の入手（Oracle Linux 向け）","description":"Oracle Linux 上に Docker EE をインストールする手順を説明。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -183,11 +183,11 @@
 						<section class="section">
 							
 								
-							<h1>Get Docker EE for Oracle Linux</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker EE の入手（Oracle Linux 向け）</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    4 分
   
 </span>
 
@@ -208,26 +208,32 @@
 
 <p>Docker Community エディション (Docker CE) は Oracle Linux に対してサポート_されていません_。</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">前提条件</h2>
 
-<p>This section lists what you need to consider before installing Docker EE. Items that require action are explained below.</p>
+<p>ここでは Docker EE をインストールする前に考慮しておくべきことを説明します。
+作業を必要とする項目を以下に示します。</p>
 
 <ul>
-  <li>Use OL 64-bit 7.3 or higher on RHCK 3.10.0-514 or higher.</li>
-  <li>Use the <code class="highlighter-rouge">devicemapper</code> storage driver only (<code class="highlighter-rouge">direct-lvm</code> mode in production).</li>
-  <li>Find the URL for your Docker EE repo at <a href="https://hub.docker.com/my-content" target="_blank" class="_">Docker Hub</a>.</li>
-  <li>Uninstall old versions of Docker.</li>
-  <li>Remove old Docker repos from <code class="highlighter-rouge">/etc/yum.repos.d/</code>.</li>
-  <li>Disable SELinux if installing or upgrading Docker EE 17.06.1 or newer.</li>
+  <li>OL 64 ビット 7.3 またはそれ以上、RHCK 3.10.0-514 またはそれ以上を利用。</li>
+  <li>ストレージドライバーとして <code class="highlighter-rouge">devicemapper</code> のみ（本番環境では <code class="highlighter-rouge">direct-lvm</code> モード）を利用。</li>
+  <li><a href="https://hub.docker.com/my-content" target="_blank" class="_">Docker Hub</a> から Docker EE リポジトリを検索。</li>
+  <li>Docker の旧バージョンはアンインストール。</li>
+  <li><code class="highlighter-rouge">/etc/yum.repos.d/</code> から古い Docker リポジトリは削除。</li>
+  <li>Docker EE 17.06.1 またはそれ以上においてインストールまたはアップグレードを行う場合は SELinux を無効に。</li>
 </ul>
 
-<h3 id="architectures-and-storage-drivers">Architectures and storage drivers</h3>
+<h3 id="architectures-and-storage-drivers">アーキテクチャーとストレージドライバー</h3>
 
-<p>Docker EE supports Oracle Linux 64-bit, versions 7.3 and higher, running the Red Hat Compatible kernel (RHCK) 3.10.0-514 or higher. Older versions of Oracle Linux are not supported.</p>
+<p>Docker EE は Oracle Linux の 64 ビット、バージョン 7.3 またはそれ以上、Red Hat Compatible kernel (RHCK) 3.10.0-514 またはそれ以上をサポートします。
+Oracle Linux の古いバージョンはサポート対象外です。</p>
 
-<p>On Oracle Linux, Docker EE only supports the <code class="highlighter-rouge">devicemapper</code> storage driver. In production, you must use it in <code class="highlighter-rouge">direct-lvm</code> mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">storage guide</a>.</p>
+<p>Oracle Linux において Docker EE は、ストレージドライバー <code class="highlighter-rouge">devicemapper</code> のみをサポートします。
+本番環境では <code class="highlighter-rouge">direct-lvm</code> モードを利用するようにしてください。
+これは専用のブロックデバイスをいくつか必要とします。
+SSD（solid-state media）のような高速なストレージが推奨されます。
+各<a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">ストレージドライバー</a>に応じた設定が適切にできていることを確認してから、Docker を起動してください。</p>
 
-<h3 id="find-your-docker-ee-repo-url">Find your Docker EE repo URL</h3>
+<h3 id="find-your-docker-ee-repo-url">Docker EE のリポジトリ URL</h3>
 
 <p>Docker EE をインストールするには、Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL を必要とします。</p>
 
@@ -240,21 +246,24 @@
 
 <p>上の URL は後の作業において <code class="highlighter-rouge">DOCKERURL</code> という変数を生成する際に利用します。</p>
 
-<h3 id="uninstall-old-docker-versions">Uninstall old Docker versions</h3>
+<h3 id="uninstall-old-docker-versions">Docker の旧バージョンのアンインストール</h3>
 
-<p>The Docker EE package is called <code class="highlighter-rouge">docker-ee</code>. Older versions were called <code class="highlighter-rouge">docker</code> or <code class="highlighter-rouge">docker-engine</code>. Uninstall all older versions and associated dependencies. The contents of <code class="highlighter-rouge">/var/lib/docker/</code> are preserved, including images, containers, volumes, and networks.</p>
+<p>Docker EE パッケージは <code class="highlighter-rouge">docker-ee</code> という名称です。
+古いバージョンでは <code class="highlighter-rouge">docker</code> あるいは <code class="highlighter-rouge">docker-engine</code> というものでした。
+古いバージョンと関連する依存パッケージはすべてアンインストールします。
+<code class="highlighter-rouge">/var/lib/docker/</code> にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum remove docker <span class="se">\</span>
                   docker-engine <span class="se">\</span>
                   docker-engine-selinux
 </code></pre></div></div>
 
-<h2 id="repo-install-and-upgrade">Repo install and upgrade</h2>
+<h2 id="repo-install-and-upgrade">リポジトリからのインストールとアップグレード</h2>
 
 <p>リポジトリを使って Docker EE を（あるいはどんなソフトウェアでも）インストールする利点は、ある程度、自動的に操作を進めることができるところです。
 Oracle Linux のような RPM ベースのディストリビューションでは、YUM というツールを使ってリポジトリを操作し、依存パッケージの管理や自動アップデート機能を提供しています。</p>
 
-<h3 id="set-up-the-repository">Set up the repository</h3>
+<h3 id="set-up-the-repository">リポジトリのセットアップ</h3>
 
 <p>リポジトリをセットアップする必要があるのは一回だけです。
 その後は Docker EE のインストールを、必要であれば何度でも行うことができます。</p>
@@ -291,7 +300,8 @@ Oracle Linux のような RPM ベースのディストリビューションで�
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Enable the <code class="highlighter-rouge">ol7_addons</code> Oracle repository. This ensures access to the <code class="highlighter-rouge">container-selinux</code> package required by <code class="highlighter-rouge">docker-ee</code>.</p>
+    <p>Oracle のリポジトリ <code class="highlighter-rouge">ol7_addons</code> を有効にします。
+これによって <code class="highlighter-rouge">docker-ee</code> が必要としている <code class="highlighter-rouge">container-selinux</code> パッケージへアクセスできるようになります。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> ol7_addons
 </code></pre></div>    </div>
@@ -306,7 +316,7 @@ Oracle Linux のような RPM ベースのディストリビューションで�
   </li>
 </ol>
 
-<h3 id="install-from-the-repository">Install from the repository</h3>
+<h3 id="install-from-the-repository">リポジトリからのインストール</h3>
 
 <blockquote>
   <p><strong>メモ</strong>: Docker EE 2.0 を利用する必要がある場合は、以下の手順を参照してください。</p>
@@ -340,7 +350,7 @@ docker-ee.x86_64      18.09.ee.2-1.el7.oraclelinux      docker-ee-stable-18.09
 </code></pre></div>    </div>
 
     <p>この一覧内容は、どのリポジトリを有効にしているかによって変わります。
-また利用している { linux-dist-long }} のバージョンに応じたものになります（この例では <code class="highlighter-rouge">.e17</code> というサフィックスにより示されるバージョンです）。</p>
+また利用している Oracle Linux のバージョンに応じたものになります（この例では <code class="highlighter-rouge">.e17</code> というサフィックスにより示されるバージョンです）。</p>
 
     <p>b. 特定のバージョンをインストールする場合は、有効なパッケージ名を用います。
    これはパッケージ名（<code class="highlighter-rouge">docker-ce</code>）に加えて、バージョン文字列（２項目め）の初めのコロン（<code class="highlighter-rouge">:</code>）から初めのハイフン（<code class="highlighter-rouge">-</code>）までを、ハイフンでつなげます。
@@ -381,7 +391,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h3 id="upgrade-from-the-repository">Upgrade from the repository</h3>
+<h3 id="upgrade-from-the-repository">リポジトリからのアップグレード</h3>
 
 <ol>
   <li>
@@ -392,20 +402,18 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h2 id="package-install-and-upgrade">Package install and upgrade</h2>
+<h2 id="package-install-and-upgrade">パッケージのインストールとアップグレード</h2>
 
 <p>Docker EE を手動でインストールするには、ディストリビューションに応じた <code class="highlighter-rouge">.rpm</code> ファイルをダウンロードします。
 Docker EE をアップグレードする際には、常に新しいファイルをダウンロードすることが必要です。</p>
 
-<h3 id="install-with-a-package">Install with a package</h3>
+<h3 id="install-with-a-package">パッケージのインストール</h3>
 
 <ol>
   <li>
-    <p>Go to the Docker EE repository URL associated with your
-trial or subscription in your browser. Go to
-<code class="highlighter-rouge">oraclelinux/</code>. Choose your Oracle Linux version,
-architecture, and Docker version. Download the
-<code class="highlighter-rouge">.rpm</code> file from the <code class="highlighter-rouge">Packages</code> directory.</p>
+    <p>ブラウザーから Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL にアクセスします。
+そして <code class="highlighter-rouge">oraclelinux/</code> を開いて、目的とするアーキテクチャーとバージョンの Oracle Linux を選びます。
+<code class="highlighter-rouge">Package</code> ディレクトリから <code class="highlighter-rouge">.rpm</code> ファイルをダウンロードします。</p>
   </li>
   <li>
     <p>Docker EE をインストールします。
@@ -441,7 +449,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h3 id="upgrade-with-a-package">Upgrade with a package</h3>
+<h3 id="upgrade-with-a-package">パッケージのアップグレード</h3>
 
 <ol>
   <li>
@@ -454,7 +462,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h2 id="uninstall-docker-ee">Uninstall Docker EE</h2>
+<h2 id="uninstall-docker-ee">Docker EE のアンインストール</h2>
 
 <ol>
   <li>
@@ -481,7 +489,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
 
 <p>編集した設定ファイルはすべて手動で削除する必要があります。</p>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
 <ul>
   <li>
@@ -527,7 +535,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "install/linux/docker-ee/oracle.md",
-										"title": "Get Docker EE for Oracle Linux",
+										"title": "Docker EE の入手（Oracle Linux 向け）",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/install/linux/docker-ee/oracle.md"
 									};
 									(function(d, c, j) {
@@ -587,28 +595,28 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#prerequisites" class="nomunge">Prerequisites</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#prerequisites" class="nomunge">前提条件</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#architectures-and-storage-drivers" class="nomunge">Architectures and storage drivers</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#find-your-docker-ee-repo-url" class="nomunge">Find your Docker EE repo URL</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#uninstall-old-docker-versions" class="nomunge">Uninstall old Docker versions</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#architectures-and-storage-drivers" class="nomunge">アーキテクチャーとストレージドライバー</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#find-your-docker-ee-repo-url" class="nomunge">Docker EE のリポジトリ URL</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#uninstall-old-docker-versions" class="nomunge">Docker の旧バージョンのアンインストール</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#repo-install-and-upgrade" class="nomunge">Repo install and upgrade</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#repo-install-and-upgrade" class="nomunge">リポジトリからのインストールとアップグレード</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#set-up-the-repository" class="nomunge">Set up the repository</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#install-from-the-repository" class="nomunge">Install from the repository</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#upgrade-from-the-repository" class="nomunge">Upgrade from the repository</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#set-up-the-repository" class="nomunge">リポジトリのセットアップ</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#install-from-the-repository" class="nomunge">リポジトリからのインストール</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#upgrade-from-the-repository" class="nomunge">リポジトリからのアップグレード</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#package-install-and-upgrade" class="nomunge">Package install and upgrade</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#package-install-and-upgrade" class="nomunge">パッケージのインストールとアップグレード</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#install-with-a-package" class="nomunge">Install with a package</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#upgrade-with-a-package" class="nomunge">Upgrade with a package</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#install-with-a-package" class="nomunge">パッケージのインストール</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#upgrade-with-a-package" class="nomunge">パッケージのアップグレード</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#uninstall-docker-ee" class="nomunge">Uninstall Docker EE</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#uninstall-docker-ee" class="nomunge">Docker EE のアンインストール</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/#next-steps" class="nomunge">次のステップ</a></li>
 </ul>
 
 
