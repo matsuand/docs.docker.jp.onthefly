@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-05-15 19:16:21 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -82,7 +82,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-15T19:16:21+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -92,7 +92,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker includes multiple logging mechanisms to help you get information from running containers and services. These mechanisms are called logging drivers. Each Docker daemon has a default logging driver, which..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-15T19:16:21+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, logging, driver">
@@ -187,7 +187,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    7 分
   
 </span>
 
@@ -243,7 +243,7 @@ the default output for commands such as <code class="highlighter-rouge">docker i
 
 <p>To find the current default logging driver for the Docker daemon, run
 <code class="highlighter-rouge">docker info</code> and search for <code class="highlighter-rouge">Logging Driver</code>. You can use the following
-command:</p>
+command on Linux, macOS, or PowerShell on Windows:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info <span class="nt">--format</span> <span class="s1">'{{.LoggingDriver}}'</span>
 
@@ -332,12 +332,12 @@ see more options.</p>
       <td style="text-align: left">No logs are available for the container and <code class="highlighter-rouge">docker logs</code> does not return any output.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/json-file/"><code class="highlighter-rouge">json-file</code></a></td>
-      <td style="text-align: left">The logs are formatted as JSON. The default logging driver for Docker.</td>
+      <td style="text-align: left"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/local/"><code class="highlighter-rouge">local</code></a></td>
+      <td style="text-align: left">Logs are stored in a custom format designed for minimal overhead.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/local/"><code class="highlighter-rouge">local</code></a></td>
-      <td style="text-align: left">Writes logs messages to local filesystem in binary files using Protobuf.</td>
+      <td style="text-align: left"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/json-file/"><code class="highlighter-rouge">json-file</code></a></td>
+      <td style="text-align: left">The logs are formatted as JSON. The default logging driver for Docker.</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/syslog/"><code class="highlighter-rouge">syslog</code></a></td>
@@ -380,9 +380,36 @@ see more options.</p>
 
 <h2 id="limitations-of-logging-drivers">Limitations of logging drivers</h2>
 
-<p>The <code class="highlighter-rouge">docker logs</code> command is not available for drivers other than <code class="highlighter-rouge">json-file</code>
-and <code class="highlighter-rouge">journald</code>.</p>
+<ul>
+  <li>
+    <p>Users of Docker Enterprise can make use of “dual logging”, which enables you to use the <code class="highlighter-rouge">docker logs</code>
+command for any logging driver. Refer to
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/dual-logging/">Reading logs when using remote logging drivers</a> for information about
+using <code class="highlighter-rouge">docker logs</code> to read container logs locally for many third party logging solutions, including:</p>
 
+    <ul>
+      <li>syslog</li>
+      <li>gelf</li>
+      <li>fluentd</li>
+      <li>awslogs</li>
+      <li>splunk</li>
+      <li>etwlogs</li>
+      <li>gcplogs</li>
+      <li>Logentries</li>
+    </ul>
+  </li>
+  <li>
+    <p>When using Docker Community Engine, the <code class="highlighter-rouge">docker logs</code> command is only available on the following drivers:</p>
+
+    <ul>
+      <li><code class="highlighter-rouge">local</code></li>
+      <li><code class="highlighter-rouge">json-file</code></li>
+      <li><code class="highlighter-rouge">journald</code></li>
+    </ul>
+  </li>
+  <li>Reading log information requires decompressing rotated log files, which causes a temporary increase in disk usage (until the log entries from the rotated files are read) and an increased CPU usage while decompressing.</li>
+  <li>The capacity of the host storage where docker’s data directory resides determines the maximum size of the log file information.</li>
+</ul>
 
 							<!-- tags -->
 							

@@ -373,8 +373,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/centos/",
-"title":"Get Docker EE for CentOS",
-"description":"Instructions for installing Docker EE on CentOS",
+"title":"Docker EE の入手（CentOS 向け）",
+"description":"CentOS 上に Docker EE をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -1160,6 +1160,13 @@ var pages = [
 "title":"Use PowerShell DSC",
 "description":"Using DSC to configure a new Docker host",
 "keywords":"powershell, dsc, installation, usage, docker,  documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/config/containers/logging/dual-logging/",
+"title":"Using docker logs to read container logs for remote logging drivers",
+"description":"Learn how to read container logs locally when using a third party logging solution.",
+"keywords":"docker, logging, driver"
 }
 ,
 {
@@ -2242,8 +2249,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/install/",
-"title":"Install Docker Desktop for Mac",
-"description":"How to install Docker Desktop for Mac",
+"title":"Docker Desktop for Mac のインストール",
+"description":"Docker Desktop for Mac のインストール方法。",
 "keywords":"mac, beta, alpha, install, download"
 }
 ,
@@ -2501,9 +2508,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/containers/logging/local/",
-"title":"local binary file Protobuf logging driver",
-"description":"Describes how to use the local binary (Protobuf) logging driver.",
-"keywords":"local, protobuf, docker, logging, driver"
+"title":"Local File logging driver",
+"description":"Describes how to use the local logging driver.",
+"keywords":"local, docker, logging, driver"
 }
 ,
 {
@@ -2970,8 +2977,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/",
-"title":"Get Docker EE for Oracle Linux",
-"description":"Instructions for installing Docker EE on Oracle Linux",
+"title":"Docker EE の入手（Oracle Linux 向け）",
+"description":"Oracle Linux 上に Docker EE をインストールする手順を説明。",
 "keywords":"requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -3579,8 +3586,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/",
-"title":"Get Docker EE for Red Hat Enterprise Linux",
-"description":"Instructions for installing Docker EE on RHEL",
+"title":"Docker EE の入手（Red Hat Enterprise Linux 向け）",
+"description":"RHEL 上に Docker EE をインストールする手順を説明。",
 "keywords":"requirements, installation, rhel, rpm, install, uninstall, upgrade, update"
 }
 ,
