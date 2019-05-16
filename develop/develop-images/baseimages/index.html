@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-05-16 13:12:14 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-16T13:12:14+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Dockerfile は普通は親イメージから作り始めます。 イメージ内容を完全にコントロールする場合は、ベースイメージを作り出すこともあります。 その違いは以下のとおりです。 親イメージは基準とするイメージのことです。 Dockerfile 内の FROM ディレクティブによって指定されます。 Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。 Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。 ただしこの用語は混同されて用いられることもあります。 ベースイメージは Dockerfile において FROM 行がないか、あるいは FROM scratch が記述されます。 ここではベースイメージの生成方法をいくつか示します。 パッケージ化しようとしている Linux ディストリビューションに大きく依存する処理操作もあります。 以下に例をあげていきます。 新たなイメージの提供に支障があれば、プルリクエストをあげてください。 tar を使ったフルイメージの生成..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-16T13:12:14+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="images, base image, examples">
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    1 分
   
 </span>
 
@@ -236,44 +236,37 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 
 <ul>
   <li><a href="https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static">BusyBox</a></li>
-  <li>CentOS / Scientific Linux CERN (SLC) <a href="https://github.com/moby/moby/blob/master/contrib/mkimage/rinse">on Debian/Ubuntu</a> or
-<a href="https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh">on CentOS/RHEL/SLC/etc.</a></li>
+  <li>CentOS / Scientific Linux CERN (SLC)（<a href="https://github.com/moby/moby/blob/master/contrib/mkimage/rinse">Debian/Ubuntu 向け</a>、または<a href="https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh">CentOS/RHEL/SLC/など向け</a>）</li>
   <li><a href="https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap">Debian / Ubuntu</a></li>
 </ul>
 
 <h2 id="create-a-simple-parent-image-using-scratch">単純な親イメージを一から生成</h2>
 
-<p>You can use Docker’s reserved, minimal image, <code class="highlighter-rouge">scratch</code>, as a starting point for
-building containers. Using the <code class="highlighter-rouge">scratch</code> “image” signals to the build process
-that you want the next command in the <code class="highlighter-rouge">Dockerfile</code> to be the first filesystem
-layer in your image.</p>
+<p>Docker が規定する最小イメージ <code class="highlighter-rouge">scratch</code> は、コンテナーを構築するベースイメージとして利用できます。
+<code class="highlighter-rouge">scratch</code> を利用すると「イメージ」は、<code class="highlighter-rouge">Dockerfile</code>内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。</p>
 
-<p>While <code class="highlighter-rouge">scratch</code> appears in Docker’s repository on the hub, you can’t pull it,
-run it, or tag any image with the name <code class="highlighter-rouge">scratch</code>. Instead, you can refer to it
-in your <code class="highlighter-rouge">Dockerfile</code>. For example, to create a minimal container using
-<code class="highlighter-rouge">scratch</code>:</p>
+<p>Docker Hub 上の Docker リポジトリとして <code class="highlighter-rouge">scratch</code> が登場したことにより、<code class="highlighter-rouge">scratch</code> という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
+そのかわり<code class="highlighter-rouge">Dockerfile</code> 内での参照のみが可能です。
+たとえば <code class="highlighter-rouge">scratch</code> を利用した最小コンテナーの生成は以下のようになります。</p>
 
 <pre><code class="language-Dockerfile">FROM scratch
 ADD hello /
 CMD ["/hello"]
 </code></pre>
 
-<p>Assuming you built the “hello” executable example by following the instructions
-at
-<a href="https://github.com/docker-library/hello-world/">https://github.com/docker-library/hello-world/</a>,
-and you compiled it with the <code class="highlighter-rouge">-static</code> flag, you can build this Docker
-image using this <code class="highlighter-rouge">docker build</code> command:</p>
+<p><a href="https://github.com/docker-library/hello-world/">https://github.com/docker-library/hello-world/</a>に示されている手順に従って、”hello” 実行モジュールの例を構築するとします。
+実行モジュールは <code class="highlighter-rouge">-static</code> フラグをつけてコンパイルします。
+Docker イメージは <code class="highlighter-rouge">docker build</code> コマンドによってビルドすることができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> hello <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>Don’t forget the <code class="highlighter-rouge">.</code> character at the end, which sets the build context to the
-current directory.</p>
+<p><code class="highlighter-rouge">.</code> の文字を最後につけるのを忘れないでください。
+これはビルドコンテキストをカレントディレクトリに設定するものです。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Because Docker Desktop for Mac and Docker Desktop for Windows use a Linux VM,
-you need a Linux binary, rather than a Mac or Windows binary.
-You can use a Docker container to build it:</p>
+  <p><strong>メモ</strong>: Docker Desktop for Mac と Docker Desktop for Windows では Linux VM を利用するため、Mac や Windows の実行バイナリではなく Linux の実行バイナリが必要になります。
+Docker コンテナーを使って以下のようにビルドします。</p>
 
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span> <span class="nv">$PWD</span>:/build ubuntu:16.04
 
@@ -283,24 +276,22 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 </code></pre></div>  </div>
 </blockquote>
 
-<p>To run your new image, use the <code class="highlighter-rouge">docker run</code> command:</p>
+<p>新イメージは <code class="highlighter-rouge">docker run</code> コマンドを使って実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> hello
 </code></pre></div></div>
 
-<p>This example creates the hello-world image used in the tutorials.
-If you want to test it out, you can clone
-<a href="https://github.com/docker-library/hello-world">the image repo</a>.</p>
+<p>この例は、チュートリアルにおいて用いられている hello-world イメージを生成します。
+これを試してみたい場合は、<a href="https://github.com/docker-library/hello-world">イメージリポジトリ</a>をクローンすることもできます。</p>
 
-<h2 id="more-resources">More resources</h2>
+<h2 id="more-resources">その他の情報</h2>
 
-<p>There are lots more resources available to help you write your <code class="highlighter-rouge">Dockerfile</code>.</p>
+<p><code class="highlighter-rouge">Dockerfile</code>の書き方については、他にも多く触れています。</p>
 
 <ul>
-  <li>There’s a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md">complete guide to all the instructions</a> available for use in a <code class="highlighter-rouge">Dockerfile</code> in the reference section.</li>
-  <li>To help you write a clear, readable, maintainable <code class="highlighter-rouge">Dockerfile</code>, we’ve also
-written a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code> best practices guide</a>.</li>
-  <li>If your goal is to create a new Official Image, be sure to read up on Docker’s <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/official_images/">Official Images</a>.</li>
+  <li>リファレンスには<code class="highlighter-rouge">Dockerfile</code>にて利用可能な<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md">全コマンドのガイド</a> があります。</li>
+  <li><code class="highlighter-rouge">Dockerfile</code>をわかりやすく読みやすく、保守がしやすくするように、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code>ベストプラクティス</a>も記述しています。</li>
+  <li>公式イメージを作ることが目的であれば Docker の<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/official_images/">公式イメージ</a>を確認してください。</li>
 </ul>
 
 							<!-- tags -->
@@ -399,7 +390,7 @@ written a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/de
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#create-a-full-image-using-tar" class="nomunge">tar を使ったフルイメージの生成</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#create-a-simple-parent-image-using-scratch" class="nomunge">単純な親イメージを一から生成</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#more-resources" class="nomunge">More resources</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/#more-resources" class="nomunge">その他の情報</a></li>
 </ul>
 
 
