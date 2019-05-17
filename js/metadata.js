@@ -5604,7 +5604,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/samples/library/scratch/",
 "title":"scratch",
-"description":"an explicitly empty image, especially for building images \"FROM scratch\"",
+"description":"意図的な空のイメージ。「一から」のイメージ構築用。",
 "keywords":"library, sample, scratch"
 }
 ,
