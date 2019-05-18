@@ -246,6 +246,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/backup/",
+"title":"docker/ucp backup",
+"description":"Create a backup of a UCP manager node",
+"keywords":"ucp, cli, backup"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/backup/",
 "title":"docker/dtr backup",
 "description":"Create a backup of DTR",
@@ -600,6 +607,13 @@ var pages = [
 "title":"DTR cache configuration reference",
 "description":"Learn about the different configuration options for DTR caches.",
 "keywords":"DTR, cache"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/storage/configure-aws-storage/",
+"title":"Configure AWS EBS Storage for Kubernetes",
+"description":"Learn how configure AWS EBS storage for Kubernetes clusters.",
+"keywords":"UCP, Docker Enterprise, Kubernetes, storage, AWS, ELB"
 }
 ,
 {
@@ -1170,6 +1184,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/dump-certs/",
+"title":"docker/ucp dump-certs",
+"description":"Print the public certificates used by this UCP web server",
+"keywords":"ucp, cli, dump-certs"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-for-windows/edge-release-notes/",
 "title":"Docker Desktop for Windows Edge Release notes",
 "description":"Change log / release notes per edge release",
@@ -1314,6 +1335,13 @@ var pages = [
 "title":"docker events",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/example-config/",
+"title":"docker/ucp example-config",
+"description":"Display an example configuration file for UCP",
+"keywords":"ucp, cli, config, configuration"
 }
 ,
 {
@@ -1618,6 +1646,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/id/",
+"title":"docker/ucp id",
+"description":"Print the ID of UCP running on this node",
+"keywords":"ucp, cli, id"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/image/",
 "title":"docker image",
 "description":null,
@@ -1716,6 +1751,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/images/",
+"title":"docker/ucp images",
+"description":"Verify the UCP images on this node",
+"keywords":"ucp, cli, images"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/images/",
 "title":"docker/dtr images",
 "description":"List all the images necessary to install DTR",
@@ -1800,9 +1842,16 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/",
+"title":"docker/ucp overview",
+"description":"Learn about the commands available in the docker/ucp image.",
+"keywords":"ucp, cli, ucp"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/",
-"title":"docker/dtr overview",
-"description":"Learn about the commands available in the docker/dtr image.",
+"title":"docker/dtr 概要",
+"description":"docker/dtr イメージにおいて利用可能なコマンドについて学ぶ。",
 "keywords":"dtr, install, uninstall, configure"
 }
 ,
@@ -2224,6 +2273,13 @@ var pages = [
 "title":"Install UCP on Azure",
 "description":"Learn how to install Docker Universal Control Plane in a Microsoft Azure environment.",
 "keywords":"Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/install/",
+"title":"docker/ucp install",
+"description":"Install UCP on a node",
+"keywords":"ucp, cli, install"
 }
 ,
 {
@@ -2956,7 +3012,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/opensource/",
-"title":"Open source components and licensing",
+"title":"オープンソースコンポーネントとライセンス",
 "description":"Docker's use of Open Source",
 "keywords":"docker, opensource"
 }
@@ -3543,6 +3599,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/restart/",
+"title":"docker/ucp restart",
+"description":"Start or restart UCP components running on this node",
+"keywords":"ucp, cli, restart"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/restart/",
 "title":"docker-compose restart",
 "description":"Restarts Docker Compose services.",
@@ -3561,6 +3624,13 @@ var pages = [
 "title":"Restore from a backup",
 "description":"Learn how to restore a DTR cluster from an existing backup",
 "keywords":"dtr, disaster recovery"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/restore/",
+"title":"docker/ucp restore",
+"description":"Restore a UCP cluster from a backup",
+"keywords":"ucp, cli, restore"
 }
 ,
 {
@@ -4082,6 +4152,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/stop/",
+"title":"docker/ucp stop",
+"description":"Stop UCP components running on this node",
+"keywords":"ucp, cli, stop"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/stop/",
 "title":"docker-compose stop",
 "description":"Stops running containers without removing them. ",
@@ -4107,6 +4184,13 @@ var pages = [
 "title":"Cache deployment strategy",
 "description":"Learn how to deploy DTR caches across multiple datacenters to make image pulls faster.",
 "keywords":"DTR, cache"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/support/",
+"title":"docker/ucp support",
+"description":"Create a support dump for UCP nodes",
+"keywords":"ucp, cli, support, support dump, troubleshooting"
 }
 ,
 {
@@ -4502,6 +4586,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/uninstall-ucp/",
+"title":"docker/ucp uninstall-ucp",
+"description":"Uninstall UCP from this swarm",
+"keywords":"ucp, cli, uninstall-ucp"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/uninstall/",
 "title":"Uninstall UCP",
 "description":"Learn how to uninstall a Docker Universal Control Plane swarm.",
@@ -4562,6 +4653,13 @@ var pages = [
 "title":"docker-machine upgrade",
 "description":"Upgrade Docker on a machine",
 "keywords":"machine, upgrade, subcommand"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/upgrade/",
+"title":"docker/ucp upgrade",
+"description":"Upgrade the UCP components on this node",
+"keywords":"ucp, cli, upgrade"
 }
 ,
 {
@@ -4632,6 +4730,27 @@ var pages = [
 "title":"Use a web proxy",
 "description":"Learn how to configure Docker Content Trust to use a web proxy to reach external services.",
 "keywords":"dtr, configure, http, proxy"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/storage/use-azure-disk/",
+"title":"Configuring Azure Disk Storage for Kubernetes",
+"description":"Learn how to add persistent storage to your Docker Enterprise clusters running on Azure with Azure Disk.",
+"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/storage/use-azure-files/",
+"title":"Configuring Azure Files Storage for Kubernetes",
+"description":"Learn how to add persistent storage to your Docker Enterprise clusters running on Azure with Azure Files.",
+"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/storage/use-nfs-volumes/",
+"title":"Configuring NFS Storage for Kubernetes",
+"description":"Learn how to add support for NFS persistent storage by adding a default storage class.",
+"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
 }
 ,
 {
