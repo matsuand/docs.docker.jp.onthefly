@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-05-21 11:33:34 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -65,7 +65,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-21T11:33:34+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -75,7 +75,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane (UCP), the UI for Docker EE, lets you authorize users to view, edit, and use cluster resources by granting role-based permissions against resource sets. To authorize..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-21T11:33:34+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes">
@@ -170,7 +170,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 
@@ -197,7 +197,7 @@ Kubernetes namespaces.</li>
 
 <h2 id="subjects">Subjects</h2>
 
-<p>A subject represents a user, team, organization, or service account. A subject
+<p>A subject represents a user, team, organization, or a service account. A subject
 can be granted a role that defines permitted operations against one or more
 resource sets.</p>
 
@@ -209,7 +209,7 @@ team can be in one organization only.</li>
   <li><strong>Organization</strong>: A group of teams that share a specific set of permissions,
 defined by the roles of the organization.</li>
   <li><strong>Service account</strong>: A Kubernetes object that enables a workload to access
-cluster resources that are assigned to a namespace.</li>
+cluster resources which are assigned to a namespace.</li>
 </ul>
 
 <p>Learn to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/create-users-and-teams-manually/">create and configure users and teams</a>.</p>
@@ -217,12 +217,12 @@ cluster resources that are assigned to a namespace.</li>
 <h2 id="roles">Roles</h2>
 
 <p>Roles define what operations can be done by whom. A role is a set of permitted
-operations against a type of resource, like a container or volume, that’s
-assigned to a user or team with a grant.</p>
+operations against a type of resource, like a container or volume, which is
+assigned to a user or a team with a grant.</p>
 
-<p>For example, the built-in role, <strong>Restricted Control</strong>, includes permission to
+<p>For example, the built-in role, <strong>Restricted Control</strong>, includes permissions to
 view and schedule nodes but not to update nodes. A custom <strong>DBA</strong> role might
-include permissions to <code class="highlighter-rouge">r-w-x</code> volumes and secrets.</p>
+include permissions to <code class="highlighter-rouge">r-w-x</code> (read, write, and execute) volumes and secrets.</p>
 
 <p>Most organizations use multiple roles to fine-tune the appropriate access. A
 given team or user may have different roles provided to them depending on what
@@ -250,7 +250,7 @@ networks, nodes, services, secrets, and volumes.</p>
 is a logical area for a Kubernetes cluster. Kubernetes comes with a <code class="highlighter-rouge">default</code>
 namespace for your cluster objects, plus two more namespaces for system and
 public resources. You can create custom namespaces, but unlike Swarm
-collections, namespaces <em>can’t be nested</em>. Resource types that users can
+collections, namespaces <em>cannot be nested</em>. Resource types that users can
 access in a Kubernetes namespace include pods, deployments, network policies,
 nodes, services, secrets, and many more.</p>
   </li>
@@ -261,11 +261,12 @@ nodes, services, secrets, and many more.</p>
 
 <h2 id="grants">Grants</h2>
 
-<p>A grant is made up of <em>subject</em>, <em>role</em>, and <em>resource set</em>.</p>
+<p>A grant is made up of a <em>subject</em>, a <em>role</em>, and a <em>resource set</em>.</p>
 
 <p>Grants define which users can access what resources in what way. Grants are
-effectively Access Control Lists (ACLs), and when grouped together, they
-provide comprehensive access policies for an entire organization.</p>
+effectively <strong>Access Control Lists</strong> (ACLs) which
+provide comprehensive access policies for an entire organization when grouped
+together.</p>
 
 <p>Only an administrator can manage grants, subjects, roles, and access to
 resources.</p>
@@ -277,6 +278,38 @@ resources.</p>
 into collections or namespaces, defines roles by selecting allowable operations,
 and applies grants to users and teams.</p>
 </blockquote>
+
+<h2 id="secure-kubernetes-defaults">Secure Kubernetes defaults</h2>
+
+<p>For cluster security, only users and service accounts granted the <code class="highlighter-rouge">cluster-admin</code> ClusterRole for
+all Kubernetes namespaces via a ClusterRoleBinding can deploy pods with privileged options. This prevents a
+platform user from being able to bypass the Universal Control Plane Security Model.</p>
+
+<p>These privileged options include:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">PodSpec.hostIPC</code> - Prevents a user from deploying a pod in the host’s IPC
+Namespace.</li>
+  <li><code class="highlighter-rouge">PodSpec.hostNetwork</code> - Prevents a user from deploying a pod in the host’s
+Network Namespace.</li>
+  <li><code class="highlighter-rouge">PodSpec.hostPID</code> - Prevents a user from deploying a pod in the host’s PID
+Namespace.</li>
+  <li><code class="highlighter-rouge">SecurityContext.allowPrivilegeEscalation</code> - Prevents a child process
+of a container from gaining more privileges than its parent.</li>
+  <li><code class="highlighter-rouge">SecurityContext.capabilities</code> - Prevents additional  <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/security/#linux-kernel-capabilities">Linux
+Capabilities</a>
+from being added to a pod.</li>
+  <li><code class="highlighter-rouge">SecurityContext.privileged</code> - Prevents a user from deploying a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run/#runtime-privilege-and-linux-capabilities">Privileged
+Container</a>.</li>
+  <li><code class="highlighter-rouge">Volume.hostPath</code> - Prevents a user from mounting a path from the host into
+the container. This could be a file, a directory, or even the Docker Socket.</li>
+</ul>
+
+<p>If a user without a cluster admin role tries to deploy a pod with any of these
+privileged options, an error similar to the following example is displayed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error from server <span class="o">(</span>Forbidden<span class="o">)</span>: error when creating <span class="s2">"pod.yaml"</span>: pods <span class="s2">"mypod"</span> is forbidden: user <span class="s2">"&lt;user-id&gt;"</span> is not an admin and does not have permissions to use privileged mode <span class="k">for </span>resource
+</code></pre></div></div>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
@@ -385,6 +418,7 @@ and applies grants to users and teams.</p>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/#roles" class="nomunge">Roles</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/#resource-sets" class="nomunge">Resource sets</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/#grants" class="nomunge">Grants</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/#secure-kubernetes-defaults" class="nomunge">Secure Kubernetes defaults</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
