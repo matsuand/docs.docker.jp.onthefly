@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-05-22 17:42:03 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-22T17:42:03+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Environment variables in Compose"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="There are multiple parts of Compose that deal with environment variables in one sense or another. This page should help you find the information you need. Substitute environment variables in..." />
+	<meta name="twitter:title" itemprop="title name" content="Compose における環境変数"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Compose の複数の場面において環境変数がさまざまに用いられています。 このページでは環境変数について必要となる情報を示します。 Compose ファイル内での環境変数の利用 シェル内にて環境変数を設定し、その値を Compose ファイルにおいて読み込ませることができます。 web: image: "webapp:${TAG}" 詳しくは Compose ファイルリファレンスの変数の置換の項を参照してください。 コンテナー内での環境変数の設定 サービスコンテナーにおいて、たとえばdocker run -e VARIABLE=VALUE ...のようにenvironmentキーを使って、環境変数を設定することができます。 web: environment: - DEBUG=1 コンテナーへの環境変数の受け渡し シェル内の環境変数をenvironmentキーを使って、直接サービスコンテナーに受け渡すことができます。この場合には値を渡すのではなくdocker run -e 変数名 ...のようにできます。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-22T17:42:03+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="compose, orchestration, environment, env file">
@@ -96,16 +96,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Environment variables in Compose | Docker Documentation</title>
-<meta property="og:title" content="Environment variables in Compose" />
+	<title>Compose における環境変数 | Docker Documentation</title>
+<meta property="og:title" content="Compose における環境変数" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="How to set, use and manage environment variables in Compose" />
-<meta property="og:description" content="How to set, use and manage environment variables in Compose" />
+<meta name="description" content="Compose において環境変数を設定、利用、管理する方法について説明。" />
+<meta property="og:description" content="Compose において環境変数を設定、利用、管理する方法について説明。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Environment variables in Compose","description":"How to set, use and manage environment variables in Compose","url":"https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Compose における環境変数","description":"Compose において環境変数を設定、利用、管理する方法について説明。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,89 +175,79 @@
 						<section class="section">
 							
 								
-							<h1>Environment variables in Compose</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Compose における環境変数</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    2 分
   
 </span>
 
 							
 							
-							<p>There are multiple parts of Compose that deal with environment variables in one
-sense or another. This page should help you find the information you need.</p>
+							
+<p>Compose の複数の場面において環境変数がさまざまに用いられています。
+このページでは環境変数について必要となる情報を示します。</p>
 
-<h2 id="substitute-environment-variables-in-compose-files">Substitute environment variables in Compose files</h2>
+<h2 id="substitute-environment-variables-in-compose-files">Compose ファイル内での環境変数の利用</h2>
 
-<p>It’s possible to use environment variables in your shell to populate values
-inside a Compose file:</p>
+<p>シェル内にて環境変数を設定し、その値を Compose ファイルにおいて読み込ませることができます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
   <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">webapp:${TAG}"</span>
 </code></pre></div></div>
 
-<p>For more information, see the
-<a href="compose-file.md#variable-substitution">Variable substitution</a> section in the
-Compose file reference.</p>
+<p>詳しくは Compose ファイルリファレンスの<a href="compose-file.md#variable-substitution">変数の置換</a>の項を参照してください。</p>
 
-<h2 id="set-environment-variables-in-containers">Set environment variables in containers</h2>
+<h2 id="set-environment-variables-in-containers">コンテナー内での環境変数の設定</h2>
 
-<p>You can set environment variables in a service’s containers with the
-<a href="compose-file.md#environment">‘environment’ key</a>, just like with
-<code class="highlighter-rouge">docker run -e VARIABLE=VALUE ...</code>:</p>
+<p>サービスコンテナーにおいて、たとえば<code class="highlighter-rouge">docker run -e VARIABLE=VALUE ...</code>のように<a href="compose-file.md#environment"><code class="highlighter-rouge">environment</code>キー</a>を使って、環境変数を設定することができます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
   <span class="na">environment</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">DEBUG=1</span>
 </code></pre></div></div>
 
-<h2 id="pass-environment-variables-to-containers">Pass environment variables to containers</h2>
+<h2 id="pass-environment-variables-to-containers">コンテナーへの環境変数の受け渡し</h2>
 
-<p>You can pass environment variables from your shell straight through to a
-service’s containers with the <a href="compose-file.md#environment">‘environment’ key</a>
-by not giving them a value, just like with <code class="highlighter-rouge">docker run -e VARIABLE ...</code>:</p>
+<p>シェル内の環境変数を<a href="compose-file.md#environment"><code class="highlighter-rouge">environment</code>キー</a>を使って、直接サービスコンテナーに受け渡すことができます。この場合には値を渡すのではなく<code class="highlighter-rouge">docker run -e 変数名 ...</code>のようにできます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
   <span class="na">environment</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">DEBUG</span>
 </code></pre></div></div>
 
-<p>The value of the <code class="highlighter-rouge">DEBUG</code> variable in the container is taken from the value for
-the same variable in the shell in which Compose is run.</p>
+<p>コンテナー内の<code class="highlighter-rouge">DEBUG</code>変数は、シェル内の<code class="highlighter-rouge">DEBUG</code>変数の値が用いられます。
+このシェルとは Compose が起動しているシェルのことです。</p>
 
-<h2 id="the-env_file-configuration-option">The “env_file” configuration option</h2>
+<h2 id="the-env_file-configuration-option">設定オプション<code class="highlighter-rouge">env_file</code></h2>
 
-<p>You can pass multiple environment variables from an external file through to
-a service’s containers with the <a href="compose-file.md#env_file">‘env_file’ option</a>,
-just like with <code class="highlighter-rouge">docker run --env-file=FILE ...</code>:</p>
+<p>外部ファイルから複数の環境変数をサービスコンテナーに受け渡すには <a href="compose-file.md#env_file"><code class="highlighter-rouge">env_file</code>オプション</a>を利用することができます。
+<code class="highlighter-rouge">docker run --env-file=FILE ...</code>のようにすることもできます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
   <span class="na">env_file</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">web-variables.env</span>
 </code></pre></div></div>
 
-<h2 id="set-environment-variables-with-docker-compose-run">Set environment variables with ‘docker-compose run’</h2>
+<h2 id="set-environment-variables-with-docker-compose-run"><code class="highlighter-rouge">docker-compose run</code>実行時の環境変数の設定</h2>
 
-<p>Just like with <code class="highlighter-rouge">docker run -e</code>, you can set environment variables on a one-off
-container with <code class="highlighter-rouge">docker-compose run -e</code>:</p>
+<p><code class="highlighter-rouge">docker run -e</code>と同じように、<code class="highlighter-rouge">docker-compose run -e</code>の実行によるコンテナーに対しても環境変数を実行することができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">-e</span> <span class="nv">DEBUG</span><span class="o">=</span>1 web python console.py
 </code></pre></div></div>
 
-<p>You can also pass a variable through from the shell by not giving it a value:</p>
+<p>シェル変数を受け渡す際には、値は直接受け渡さずに以下のようにできます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">-e</span> DEBUG web python console.py
 </code></pre></div></div>
 
-<p>The value of the <code class="highlighter-rouge">DEBUG</code> variable in the container is taken from the value for
-the same variable in the shell in which Compose is run.</p>
+<p>コンテナー内の<code class="highlighter-rouge">DEBUG</code>変数は、シェル内の<code class="highlighter-rouge">DEBUG</code>変数の値が用いられます。
+このシェルとは Compose が起動しているシェルのことです。</p>
 
-<h2 id="the-env-file">The “.env” file</h2>
+<h2 id="the-env-file"><code class="highlighter-rouge">.env</code>ファイル</h2>
 
-<p>You can set default values for any environment variables referenced in the
-Compose file, or used to configure Compose, in an <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/env-file/">environment file</a>
-named <code class="highlighter-rouge">.env</code>:</p>
+<p>Compose ファイルが参照する環境変数、あるいは Compose の設定に用いられる環境変数のデフォルト値を設定することができます。これは<code class="highlighter-rouge">.env</code>という<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/env-file/">環境ファイル</a>にて行います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> .env
 <span class="nv">TAG</span><span class="o">=</span>v1.5
@@ -269,10 +259,9 @@ services:
     image: <span class="s2">"webapp:</span><span class="k">${</span><span class="nv">TAG</span><span class="k">}</span><span class="s2">"</span>
 </code></pre></div></div>
 
-<p>When you run <code class="highlighter-rouge">docker-compose up</code>, the <code class="highlighter-rouge">web</code> service defined above uses the
-image <code class="highlighter-rouge">webapp:v1.5</code>. You can verify this with the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/config/">config command</a>, which prints your resolved application
-config to the terminal:</p>
+<p><code class="highlighter-rouge">docker-compose up</code>を実行すると、上で定義されている<code class="highlighter-rouge">web</code>サービスは<code class="highlighter-rouge">webapp:v1.5</code>というイメージを利用します。
+このことは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/config/">config コマンド</a>を使って確認できます。
+このコマンドは変数を置換した後のアプリケーション設定を端末画面に出力します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose config
 
@@ -282,9 +271,8 @@ services:
     image: <span class="s1">'webapp:v1.5'</span>
 </code></pre></div></div>
 
-<p>Values in the shell take precedence over those specified in the <code class="highlighter-rouge">.env</code> file.
-If you set <code class="highlighter-rouge">TAG</code> to a different value in your shell, the substitution in <code class="highlighter-rouge">image</code>
-uses that instead:</p>
+<p>シェル内にて設定される値は、<code class="highlighter-rouge">.env</code>ファイル内のものよりも優先されます。
+たとえばシェル上において<code class="highlighter-rouge">TAG</code>を異なる値に設定していたら、それを使って変数置換された<code class="highlighter-rouge">image</code>が用いられることになります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">TAG</span><span class="o">=</span>v2.0
 <span class="nv">$ </span>docker-compose config
@@ -295,19 +283,17 @@ services:
     image: <span class="s1">'webapp:v2.0'</span>
 </code></pre></div></div>
 
-<p>When you set the same environment variable in multiple files, here’s the
-priority used by Compose to choose which value to use:</p>
+<p>環境変数を複数のファイルなどに設定していた場合に、Compose が値を採用する優先順位は以下のとおりです。</p>
 
 <ol>
-  <li>Compose file</li>
-  <li>Shell environment variables</li>
-  <li>Environment file</li>
+  <li>Compose ファイル</li>
+  <li>シェル内の環境変数</li>
+  <li>環境ファイル</li>
   <li>Dockerfile</li>
-  <li>Variable is not defined</li>
+  <li>未定義の変数</li>
 </ol>
 
-<p>In the example below, we set the same environment variable on an Environment
-file, and the Compose file:</p>
+<p>以下の例では同一の環境変数を、環境ファイルと Compose ファイルに設定しています。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> ./Docker/api/api.env
 <span class="nv">NODE_ENV</span><span class="o">=</span><span class="nb">test</span>
@@ -323,8 +309,7 @@ services:
      - <span class="nv">NODE_ENV</span><span class="o">=</span>production
 </code></pre></div></div>
 
-<p>When you run the container, the environment variable defined in the Compose
-file takes precedence.</p>
+<p>コンテナーを実行すると Compose ファイルに定義された環境変数が優先されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nb">exec </span>api node
 
@@ -332,31 +317,27 @@ file takes precedence.</p>
 <span class="s1">'production'</span>
 </code></pre></div></div>
 
-<p>Having any <code class="highlighter-rouge">ARG</code> or <code class="highlighter-rouge">ENV</code> setting in a <code class="highlighter-rouge">Dockerfile</code> evaluates only if there is
-no Docker Compose entry for <code class="highlighter-rouge">environment</code> or <code class="highlighter-rouge">env_file</code>.</p>
+<p><code class="highlighter-rouge">Dockerfile</code>ファイル内の<code class="highlighter-rouge">ARG</code>や<code class="highlighter-rouge">ENV</code>は、<code class="highlighter-rouge">environment</code>や<code class="highlighter-rouge">env_file</code>による Docker Composeの設定がある場合は評価されません。</p>
 
 <blockquote>
-  <p>Specifics for NodeJS containers</p>
+  <p>NodeJS コンテナーの仕様</p>
 
-  <p>If you have a <code class="highlighter-rouge">package.json</code> entry for <code class="highlighter-rouge">script:start</code> like
-<code class="highlighter-rouge">NODE_ENV=test node server.js</code>, then this overrules any setting in your
-<code class="highlighter-rouge">docker-compose.yml</code> file.</p>
+  <p><code class="highlighter-rouge">script:start</code>に対して<code class="highlighter-rouge">package.json</code>のエントリーを含む場合、たとえば<code class="highlighter-rouge">NODE_ENV=test node server.js</code>のような場合には、<code class="highlighter-rouge">docker-compose.yml</code>ファイルでの設定よりもこちらの設定が優先されます。</p>
 </blockquote>
 
-<h2 id="configure-compose-using-environment-variables">Configure Compose using environment variables</h2>
+<h2 id="configure-compose-using-environment-variables">環境変数を用いた Compose の設定</h2>
 
-<p>Several environment variables are available for you to configure the Docker
-Compose command-line behavior. They begin with <code class="highlighter-rouge">COMPOSE_</code> or <code class="highlighter-rouge">DOCKER_</code>, and are
-documented in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/envvars/">CLI Environment Variables</a>.</p>
+<p>Docker Compose のコマンドラインからの処理設定を行うことができる環境変数がいくつかあります。
+そういった変数は先頭が<code class="highlighter-rouge">COMPOSE_</code>や<code class="highlighter-rouge">DOCKER_</code>で始まります。
+詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/envvars/">CLI 環境変数</a>を参照してください。</p>
 
-<h2 id="environment-variables-created-by-links">Environment variables created by links</h2>
+<h2 id="environment-variables-created-by-links">リンクから生成される環境変数</h2>
 
-<p>When using the <a href="compose-file.md#links">‘links’ option</a> in a
-<a href="compose-file.md#version-1">v1 Compose file</a>, environment variables are created
-for each link. They are documented in
-the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/link-env-deprecated/">Link environment variables reference</a>.</p>
+<p><a href="compose-file.md#version-1">Compose ファイルバージョン 1</a> における<a href="compose-file.md#links"><code class="highlighter-rouge">links</code>オプション</a>を用いると、各リンクに対する環境変数が生成されます。
+このことは<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/link-env-deprecated/">リンク環境変数リファレンス</a>において説明しています。</p>
 
-<p>However, these variables are deprecated. Use the link alias as a hostname instead.</p>
+<p>ただしこの変数は廃止予定となっています。
+リンクはホスト名として利用するようにしてください。</p>
 
 							<!-- tags -->
 							
@@ -392,7 +373,7 @@ the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/link-env
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "compose/environment-variables.md",
-										"title": "Environment variables in Compose",
+										"title": "Compose における環境変数",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/compose/environment-variables.md"
 									};
 									(function(d, c, j) {
@@ -452,14 +433,14 @@ the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/link-env
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#substitute-environment-variables-in-compose-files" class="nomunge">Substitute environment variables in Compose files</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#set-environment-variables-in-containers" class="nomunge">Set environment variables in containers</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#pass-environment-variables-to-containers" class="nomunge">Pass environment variables to containers</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#the-env_file-configuration-option" class="nomunge">The “env_file” configuration option</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#set-environment-variables-with-docker-compose-run" class="nomunge">Set environment variables with ‘docker-compose run’</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#the-env-file" class="nomunge">The “.env” file</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#configure-compose-using-environment-variables" class="nomunge">Configure Compose using environment variables</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#environment-variables-created-by-links" class="nomunge">Environment variables created by links</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#substitute-environment-variables-in-compose-files" class="nomunge">Compose ファイル内での環境変数の利用</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#set-environment-variables-in-containers" class="nomunge">コンテナー内での環境変数の設定</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#pass-environment-variables-to-containers" class="nomunge">コンテナーへの環境変数の受け渡し</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#the-env_file-configuration-option" class="nomunge">設定オプションenv_file</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#set-environment-variables-with-docker-compose-run" class="nomunge">docker-compose run実行時の環境変数の設定</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#the-env-file" class="nomunge">.envファイル</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#configure-compose-using-environment-variables" class="nomunge">環境変数を用いた Compose の設定</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/#environment-variables-created-by-links" class="nomunge">リンクから生成される環境変数</a></li>
 </ul>
 
 
