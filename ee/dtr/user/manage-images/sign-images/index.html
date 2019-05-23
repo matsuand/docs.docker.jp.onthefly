@@ -2,15 +2,6 @@
 <!-- relative link basehrefs -->
 
 	
-	
-	
-		
-			
-		
-	
-		
-			
-			
 
 
 <!-- Logic for 'edit this button' -->
@@ -42,7 +33,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +71,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use macvlan networks"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Some applications, especially legacy applications or applications which monitor network traffic, expect to be directly connected to the physical network. In this type of situation, you can use the macvlan..." />
+	<meta name="twitter:title" itemprop="title name" content="Sign an image"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="2 Key components of the Docker Trusted Registry is the Notary Server and Notary Signer. These 2 containers give us the required components to use Docker Content Trust right out..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-05-23T10:30:18+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="network, macvlan, standalone">
+	<meta name="keywords" content="registry, sign, trust">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +87,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use macvlan networks | Docker Documentation</title>
-<meta property="og:title" content="Use macvlan networks" />
+	<title>Sign an image | Docker Documentation</title>
+<meta property="og:title" content="Sign an image" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<meta property="og:description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
+<meta name="description" content="Learn how to sign the images you push to Docker Trusted Registry." />
+<meta property="og:description" content="Learn how to sign the images you push to Docker Trusted Registry." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use macvlan networks","description":"All about using macvlan to make your containers appear like physical machines on the network","url":"https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Sign an image","description":"Learn how to sign the images you push to Docker Trusted Registry.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,137 +166,251 @@
 						<section class="section">
 							
 								
-							<h1>Use macvlan networks</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Sign an image</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    7 分
   
 </span>
 
 							
 							
-							<p>Some applications, especially legacy applications or applications which monitor
-network traffic, expect to be directly connected to the physical network. In
-this type of situation, you can use the <code class="highlighter-rouge">macvlan</code> network driver to assign a MAC
-address to each container’s virtual network interface, making it appear to be
-a physical network interface directly connected to the physical network. In this
-case, you need to designate a physical interface on your Docker host to use for
-the <code class="highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="highlighter-rouge">macvlan</code>. You can even
-isolate your <code class="highlighter-rouge">macvlan</code> networks using different physical network interfaces.
-Keep the following things in mind:</p>
+							<p>2 Key components of the Docker Trusted Registry is the Notary Server and Notary
+Signer. These 2 containers give us the required components to use Docker Content
+Trust right out of the box. <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Docker Content
+Trust</a> allows us to sign image tags,
+therefore whoever pulls the image can validate that they are getting the image
+you create, or a forged one.</p>
+
+<p>As part of Docker Trusted Registry both the Notary server and the Registry
+server are accessed through a front end Proxy, with both components sharing the
+UCP’s RBAC Engine. Therefore no additional configuration of the Docker Client
+is required to use trust.</p>
+
+<p>Docker Content Trust is integrated into the Docker CLI, allowing you to
+configure repositories, add signers and sign images all through the <code class="highlighter-rouge">$ docker
+trust</code> command.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/sign-an-image-1.svg" alt="image without signature" /></p>
+
+<h2 id="sign-images-that-ucp-can-trust">Sign images that UCP can trust</h2>
+
+<p>UCP has a feature which will prevent <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/run-only-the-images-you-trust/">untrusted
+images</a> from being
+deployed on the cluster. To use this feature, we first need to upload and sign
+images into DTR. To tie the signed images back to UCP, we will actually sign the
+images with private keys of UCP users. Inside of a UCP Client bundle the
+<code class="highlighter-rouge">key.pem</code> can be used a User’s private key, with the <code class="highlighter-rouge">cert.pem</code> being a public
+key within a x509 certificate.</p>
+
+<p>To sign images in a way that UCP trusts them, you need to:</p>
+
+<ol>
+  <li>Download a Client Bundle for a User you want to use to sign the images.</li>
+  <li>Load the private key of the User into your workstations trust store.</li>
+  <li>Initialize trust metadata for the repository.</li>
+  <li>Delegate signing for that repository to the UCP User.</li>
+  <li>Sign the Image.</li>
+</ol>
+
+<p>In this example we’re going to pull a nginx image from the Docker Hub, re-tag it
+as <code class="highlighter-rouge">dtr.example.com/dev/nginx:1</code>, push the image to DTR and sign it in a way
+that is trusted by UCP. If you manage multiple repositories, you’ll have to do
+the same procedure for each repository.</p>
+
+<h3 id="import-a-ucp-users-private-key">Import a UCP User’s Private Key</h3>
+
+<p>Once you have download and extracted a UCP User’s client bundle into your local
+directory, you need to load the Private key into the local Docker trust store
+<code class="highlighter-rouge">(~/.docker/trust)</code>. The name used here is purely metadata to help keep track of
+which keys you have imported.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key load <span class="nt">--name</span> jeff key.pem
+Loading key from <span class="s2">"key.pem"</span>...
+Enter passphrase <span class="k">for </span>new jeff key with ID a453196:
+Repeat passphrase <span class="k">for </span>new jeff key with ID a453196:
+Successfully imported key from key.pem
+</code></pre></div></div>
+
+<h3 id="initialize-the-trust-metadata-and-add-the-public-key">Initialize the trust metadata and add the Public Key</h3>
+
+<p>Next, we need to initiate trust metadata for a DTR repository. If you have not
+done so already, navigate to the <strong>DTR web UI</strong>, and create a repository for
+your image. In this example we’ve created the <code class="highlighter-rouge">prod/nginx</code> repository.</p>
+
+<p>As part of initiating the repository, we will add the public key of the UCP User
+as a signer. You will be asked for a number of passphrases to protect the keys.
+Make a note of these passphrases, and see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server">Managing Delegations in a Notary Server</a>
+to learn more about managing keys.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff dtr.example.com/prod/nginx
+Adding signer <span class="s2">"jeff"</span> to dtr.example.com/prod/nginx...
+Initializing signed repository <span class="k">for </span>dtr.example.com/prod/nginx...
+Enter passphrase <span class="k">for </span>root key with ID 4a72d81:
+Enter passphrase <span class="k">for </span>new repository key with ID e0d15a2:
+Repeat passphrase <span class="k">for </span>new repository key with ID e0d15a2:
+Successfully initialized <span class="s2">"dtr.example.com/prod/nginx"</span>
+Successfully added signer: jeff to dtr.example.com/prod/nginx
+</code></pre></div></div>
+
+<p>We can inspect the trust metadata of the repository to make sure the User has
+been added correctly.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> dtr.example.com/prod/nginx
+
+No signatures <span class="k">for </span>dtr.example.com/prod/nginx
+
+List of signers and their keys <span class="k">for </span>dtr.example.com/prod/nginx
+
+SIGNER              KEYS
+jeff                927f30366699
+
+Administrative keys <span class="k">for </span>dtr.example.com/prod/nginx
+
+  Repository Key:       e0d15a24b741ab049470298734397afbea539400510cb30d3b996540b4a2506b
+  Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
+</code></pre></div></div>
+
+<h3 id="sign-the-image">Sign the Image</h3>
+
+<p>Finally, we will sign an image tag. These steps download the Image from the
+Docker Hub, retag the Image to the DTR repository, push the image up to DTR, as
+well as signing the tag with the UCP User’s keys.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull nginx:latest
+
+<span class="nv">$ </span>docker tag nginx:latest dtr.example.com/prod/nginx:1
+
+<span class="nv">$ </span>docker trust sign dtr.example.com/prod/nginx:1
+Signing and pushing trust data <span class="k">for </span><span class="nb">local </span>image dtr.example.com/prod/nginx:1, may overwrite remote trust data
+The push refers to repository <span class="o">[</span>dtr.example.com/prod/nginx]
+6b5e2ed60418: Pushed
+92c15149e23b: Pushed
+0a07e81f5da3: Pushed
+1: digest: sha256:5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033 size: 948
+Signing and pushing trust metadata
+Enter passphrase <span class="k">for </span>jeff key with ID 927f303:
+Successfully signed dtr.example.com/prod/nginx:1
+</code></pre></div></div>
+
+<p>We can inspect the trust metadata again to make sure the image tag has been
+signed successfully.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> dtr.example.com/prod/nginx:1
+
+Signatures <span class="k">for </span>dtr.example.com/prod/nginx:1
+
+SIGNED TAG          DIGEST                                                             SIGNERS
+1                   5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033   jeff
+
+List of signers and their keys <span class="k">for </span>dtr.example.com/prod/nginx:1
+
+SIGNER              KEYS
+jeff                927f30366699
+
+Administrative keys <span class="k">for </span>dtr.example.com/prod/nginx:1
+
+  Repository Key:       e0d15a24b741ab049470298734397afbea539400510cb30d3b996540b4a2506b
+  Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
+</code></pre></div></div>
+
+<p>Or we can have a look at the signed image from within the <strong>DTR UI</strong>.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/sign-an-image-3.png" alt="DTR" class="with-border" /></p>
+
+<h3 id="adding-additional-delegations">Adding Additional Delegations</h3>
+
+<p>If you wanted to sign this image with multiple UCP Users, maybe if you had a use
+case where an image needed to be signed by a member of the <code class="highlighter-rouge">Security</code> team and a
+member of the <code class="highlighter-rouge">Developers</code> team. Then you can add multiple signers to a
+repository.</p>
+
+<p>To do so, first load a private key from a UCP User of the Security Team’s in to
+the local Docker Trust Store.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key load <span class="nt">--name</span> security key.pem
+Loading key from <span class="s2">"key.pem"</span>...
+Enter passphrase <span class="k">for </span>new security key with ID 5ac7d9a:
+Repeat passphrase <span class="k">for </span>new security key with ID 5ac7d9a:
+Successfully imported key from key.pem
+</code></pre></div></div>
+
+<p>Upload the Public Key to the Notary Server and Sign the Image. You will be asked
+for both the Developers passphrase, as well as the Security Users passphrase to
+sign the tag.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem security dtr.example.com/prod/nginx
+Adding signer <span class="s2">"security"</span> to dtr.example.com/prod/nginx...
+Enter passphrase <span class="k">for </span>repository key with ID e0d15a2:
+Successfully added signer: security to dtr.example.com/prod/nginx
+
+<span class="nv">$ </span>docker trust sign dtr.example.com/prod/nginx:1
+Signing and pushing trust metadata <span class="k">for </span>dtr.example.com/prod/nginx:1
+Existing signatures <span class="k">for </span>tag 1 digest 5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033 from:
+jeff
+Enter passphrase <span class="k">for </span>jeff key with ID 927f303:
+Enter passphrase <span class="k">for </span>security key with ID 5ac7d9a:
+Successfully signed dtr.example.com/prod/nginx:1
+</code></pre></div></div>
+
+<p>Finally, we can check the tag again to make sure it is now signed by 2
+signatures.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> dtr.example.com/prod/nginx:1
+
+Signatures <span class="k">for </span>dtr.example.com/prod/nginx:1
+
+SIGNED TAG          DIGEST                                                             SIGNERS
+1                   5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033   jeff, security
+
+List of signers and their keys <span class="k">for </span>dtr.example.com/prod/nginx:1
+
+SIGNER              KEYS
+jeff                927f30366699
+security            5ac7d9af7222
+
+Administrative keys <span class="k">for </span>dtr.example.com/prod/nginx:1
+
+  Repository Key:       e0d15a24b741ab049470298734397afbea539400510cb30d3b996540b4a2506b
+  Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
+</code></pre></div></div>
+
+<p>For more advanced use cases like this, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/">Delegations for content trust</a>.</p>
+
+<h2 id="delete-trust-data">Delete trust data</h2>
+
+<p>If an Administrator wants to delete a DTR repository that contains Trust
+metadata, they will be prompted to delete the trust metadata first before the
+repository can be removed.</p>
+
+<p>To delete trust metadata we need to use the Notary CLI. For information on how
+to download and configure the Notary CLI head
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/#configuring-the-notary-client">here</a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delete dtr.example.com/prod/nginx <span class="nt">--remote</span>
+Deleting trust data <span class="k">for </span>repository dtr.example.com/prod/nginx
+Enter username: admin
+Enter password:
+Successfully deleted <span class="nb">local </span>and remote trust data <span class="k">for </span>repository dtr.example.com/prod/nginx
+</code></pre></div></div>
+
+<p>If you don’t include the <code class="highlighter-rouge">--remote</code> flag, Notary deletes local cached content
+but will not delete data from the Notary server.</p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
 
 <ul>
-  <li>
-    <p>It is very easy to unintentionally damage your network due to IP address
-exhaustion or to “VLAN spread”, which is a situation in which you have an
-inappropriately large number of unique MAC addresses in your network.</p>
-  </li>
-  <li>
-    <p>Your networking equipment needs to be able to handle “promiscuous mode”,
-where one physical interface can be assigned multiple MAC addresses.</p>
-  </li>
-  <li>
-    <p>If your application can work using a bridge (on a single Docker host) or
-overlay (to communicate across multiple Docker hosts), these solutions may be
-better in the long term.</p>
-  </li>
-</ul>
-
-<h2 id="create-a-macvlan-network">Create a macvlan network</h2>
-
-<p>When you create a <code class="highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
-trunk bridge mode.</p>
-
-<ul>
-  <li>
-    <p>In bridge mode, <code class="highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
-  </li>
-  <li>
-    <p>In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
-which Docker creates on the fly. This allows you to control routing and
-filtering at a more granular level.</p>
-  </li>
-</ul>
-
-<h3 id="bridge-mode">Bridge mode</h3>
-
-<p>To create a <code class="highlighter-rouge">macvlan</code> network which bridges with a given physical network
-interface, use <code class="highlighter-rouge">--driver macvlan</code> with the <code class="highlighter-rouge">docker network create</code> command. You
-also need to specify the <code class="highlighter-rouge">parent</code>, which is the interface the traffic will
-physically go through on the Docker host.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 pub_net
-</code></pre></div></div>
-
-<p>If you need to exclude IP addresses from being used in the <code class="highlighter-rouge">macvlan</code> network, such
-as when a given IP address is already in use, use <code class="highlighter-rouge">--aux-addresses</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>192.168.32.0/24 <span class="se">\</span>
-  <span class="nt">--ip-range</span><span class="o">=</span>192.168.32.128/25 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>192.168.32.254 <span class="se">\</span>
-  <span class="nt">--aux-address</span><span class="o">=</span><span class="s2">"my-router=192.168.32.129"</span> <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 macnet32
-</code></pre></div></div>
-
-<h3 id="8021q-trunk-bridge-mode">802.1q trunk bridge mode</h3>
-
-<p>If you specify a <code class="highlighter-rouge">parent</code> interface name with a dot included, such as <code class="highlighter-rouge">eth0.50</code>,
-Docker interprets that as a sub-interface of <code class="highlighter-rouge">eth0</code> and creates the sub-interface
-automatically.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.50.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.50.1 <span class="se">\</span>
-    <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.50 macvlan50
-</code></pre></div></div>
-
-<h3 id="use-an-ipvlan-instead-of-macvlan">Use an ipvlan instead of macvlan</h3>
-
-<p>In the above example, you are still using a L3 bridge. You can use <code class="highlighter-rouge">ipvlan</code>
-instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.210.0/24 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.212.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.210.254 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.212.254 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan210
-</code></pre></div></div>
-
-<h2 id="use-ipv6">Use IPv6</h2>
-
-<p>If you have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/ipv6.md">configured the Docker daemon to allow IPv6</a>,
-you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> networks.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.216.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.218.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.216.1 <span class="nt">--gateway</span><span class="o">=</span>192.168.218.1 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc8::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc8::10 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.218 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">macvlan_mode</span><span class="o">=</span>bridge macvlan216
-</code></pre></div></div>
-
-<h2 id="next-steps">Next steps</h2>
-
-<ul>
-  <li>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan.md">macvlan networking tutorial</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/container-networking.md">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/bridge.md">bridge networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay.md">overlay networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/host.md">host networking</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan.md">Macvlan networks</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_automation/">Automating Docker Content
+Trust</a></li>
+  <li><a href="./trust-with-remote-ucp/">Using Docker Content Trust with a Remote UCP</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=network">network</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=macvlan">macvlan</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=standalone">standalone</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=registry">registry</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=sign">sign</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=trust">trust</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -314,7 +419,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/network/macvlan/";
+							  var originalURL = "/ee/dtr/user/manage-images/sign-images/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -334,9 +439,9 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "network/macvlan.md",
-										"title": "Use macvlan networks",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/network/macvlan.md"
+										"unique_id": "ee/dtr/user/manage-images/sign-images/index.md",
+										"title": "Sign an image",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/dtr/user/manage-images/sign-images/index.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -368,8 +473,8 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/network/macvlan.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [network/macvlan.md](https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/dtr/user/manage-images/sign-images/index.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/dtr/user/manage-images/sign-images/index.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -395,15 +500,16 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#create-a-macvlan-network" class="nomunge">Create a macvlan network</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#sign-images-that-ucp-can-trust" class="nomunge">Sign images that UCP can trust</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#bridge-mode" class="nomunge">Bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#8021q-trunk-bridge-mode" class="nomunge">802.1q trunk bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-an-ipvlan-instead-of-macvlan" class="nomunge">Use an ipvlan instead of macvlan</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#import-a-ucp-users-private-key" class="nomunge">Import a UCP User’s Private Key</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#initialize-the-trust-metadata-and-add-the-public-key" class="nomunge">Initialize the trust metadata and add the Public Key</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#sign-the-image" class="nomunge">Sign the Image</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#adding-additional-delegations" class="nomunge">Adding Additional Delegations</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-ipv6" class="nomunge">Use IPv6</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#delete-trust-data" class="nomunge">Delete trust data</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 
@@ -519,7 +625,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/network/macvlan/';
+	var pageURL = jekyllEnv + '/ee/dtr/user/manage-images/sign-images/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

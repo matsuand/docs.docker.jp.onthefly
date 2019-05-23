@@ -10,6 +10,18 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 
 
@@ -42,7 +54,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +92,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use macvlan networks"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Some applications, especially legacy applications or applications which monitor network traffic, expect to be directly connected to the physical network. In this type of situation, you can use the macvlan..." />
+	<meta name="twitter:title" itemprop="title name" content="Secure services with TLS"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="After deploying a layer 7 routing solution, you have two options for securing your services with TLS: Let the proxy terminate the TLS connection. All traffic between end-users and the..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-05-23T10:30:18+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="network, macvlan, standalone">
+	<meta name="keywords" content="routing, proxy, tls">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +108,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use macvlan networks | Docker Documentation</title>
-<meta property="og:title" content="Use macvlan networks" />
+	<title>Secure services with TLS | Docker Documentation</title>
+<meta property="og:title" content="Secure services with TLS" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<meta property="og:description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
+<meta name="description" content="Learn how to configure your swarm services with TLS." />
+<meta property="og:description" content="Learn how to configure your swarm services with TLS." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use macvlan networks","description":"All about using macvlan to make your containers appear like physical machines on the network","url":"https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Secure services with TLS","description":"Learn how to configure your swarm services with TLS.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,137 +187,204 @@
 						<section class="section">
 							
 								
-							<h1>Use macvlan networks</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Secure services with TLS</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    5 分
   
 </span>
 
 							
 							
-							<p>Some applications, especially legacy applications or applications which monitor
-network traffic, expect to be directly connected to the physical network. In
-this type of situation, you can use the <code class="highlighter-rouge">macvlan</code> network driver to assign a MAC
-address to each container’s virtual network interface, making it appear to be
-a physical network interface directly connected to the physical network. In this
-case, you need to designate a physical interface on your Docker host to use for
-the <code class="highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="highlighter-rouge">macvlan</code>. You can even
-isolate your <code class="highlighter-rouge">macvlan</code> networks using different physical network interfaces.
-Keep the following things in mind:</p>
+							<p>After <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/">deploying a layer 7 routing solution</a>, you have two options for securing your
+services with TLS:</p>
 
 <ul>
-  <li>
-    <p>It is very easy to unintentionally damage your network due to IP address
-exhaustion or to “VLAN spread”, which is a situation in which you have an
-inappropriately large number of unique MAC addresses in your network.</p>
-  </li>
-  <li>
-    <p>Your networking equipment needs to be able to handle “promiscuous mode”,
-where one physical interface can be assigned multiple MAC addresses.</p>
-  </li>
-  <li>
-    <p>If your application can work using a bridge (on a single Docker host) or
-overlay (to communicate across multiple Docker hosts), these solutions may be
-better in the long term.</p>
-  </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/#let-the-proxy-handle-tls">Let the proxy terminate the TLS connection.</a> All traffic between end-users and
+the proxy is encrypted, but the traffic going between the proxy and your swarm
+service is not secured.</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/#let-your-service-handle-tls">Let your swarm service terminate the TLS connection.</a> The end-to-end traffic
+is encrypted and the proxy service allows TLS traffic to passthrough unchanged.</li>
 </ul>
 
-<h2 id="create-a-macvlan-network">Create a macvlan network</h2>
+<p>Regardless of the option selected to secure swarm services, there are two steps required to
+route traffic with TLS:</p>
 
-<p>When you create a <code class="highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
-trunk bridge mode.</p>
+<ol>
+  <li>Create <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/secrets.md">Docker secrets</a> to manage from a central
+place the private key and certificate used for TLS.</li>
+  <li>Add labels to your swarm service for UCP to reconfigure the proxy service.</li>
+</ol>
 
+<h2 id="let-the-proxy-handle-tls">Let the proxy handle TLS</h2>
+<p>The following example deploys a swarm service and lets the proxy service handle
+the TLS connection. All traffic between the proxy and the swarm service is
+not secured, so use this option only if you trust that no one can
+monitor traffic inside services running in your datacenter.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/interlock-tls-1.png" alt="TLS Termination" /></p>
+
+<p>Start by getting a private key and certificate for the TLS connection. Make
+sure the Common Name in the certificate matches the name where your service
+is going to be available.</p>
+
+<p>You can generate a self-signed certificate for <code class="highlighter-rouge">app.example.org</code> by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl req <span class="se">\</span>
+  <span class="nt">-new</span> <span class="se">\</span>
+  <span class="nt">-newkey</span> rsa:4096 <span class="se">\</span>
+  <span class="nt">-days</span> 3650 <span class="se">\</span>
+  <span class="nt">-nodes</span> <span class="se">\</span>
+  <span class="nt">-x509</span> <span class="se">\</span>
+  <span class="nt">-subj</span> <span class="s2">"/C=US/ST=CA/L=SF/O=Docker-demo/CN=app.example.org"</span> <span class="se">\</span>
+  <span class="nt">-keyout</span> app.example.org.key <span class="se">\</span>
+  <span class="nt">-out</span> app.example.org.cert
+</code></pre></div></div>
+
+<p>Then, create a docker-compose.yml file with the following content:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.2"</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">demo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ehazlett/docker-demo</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="s">com.docker.lb.hosts</span><span class="pi">:</span> <span class="s">app.example.org</span>
+        <span class="s">com.docker.lb.network</span><span class="pi">:</span> <span class="s">demo-network</span>
+        <span class="s">com.docker.lb.port</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="s">com.docker.lb.ssl_cert</span><span class="pi">:</span> <span class="s">demo_app.example.org.cert</span>
+        <span class="s">com.docker.lb.ssl_key</span><span class="pi">:</span> <span class="s">demo_app.example.org.key</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">METADATA</span><span class="pi">:</span> <span class="s">proxy-handles-tls</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">demo-network</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">demo-network</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">overlay</span>
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="s">app.example.org.cert</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./app.example.org.cert</span>
+  <span class="s">app.example.org.key</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./app.example.org.key</span>
+</code></pre></div></div>
+
+<p>Notice that the demo service has labels specifying that the proxy service should
+route <code class="highlighter-rouge">app.example.org</code> traffic to this service. All traffic between the
+service and proxy takes place using the <code class="highlighter-rouge">demo-network</code> network. The service also
+has labels specifying the Docker secrets to use on the proxy service for terminating
+the TLS connection.</p>
+
+<p>Because the private key and certificate are stored as Docker secrets, you can
+easily scale the number of replicas used for running the proxy service. Docker
+distributes the secrets to the replicas.</p>
+
+<p>Set up your CLI client with a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP client bundle</a>,
+and deploy the service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">--compose-file</span> docker-compose.yml demo
+</code></pre></div></div>
+
+<p>The service is now running. To test that everything is working correctly, update your <code class="highlighter-rouge">/etc/hosts</code> file to map <code class="highlighter-rouge">app.example.org</code> to the
+IP address of a UCP node.</p>
+
+<p>In a production deployment, you must create a DNS entry so that
+users can access the service using the domain name of your choice.
+After creating the DNS entry, you can access your service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://&lt;hostname&gt;:&lt;https-port&gt;
+</code></pre></div></div>
+
+<p>FOr this example:</p>
 <ul>
-  <li>
-    <p>In bridge mode, <code class="highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
-  </li>
-  <li>
-    <p>In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
-which Docker creates on the fly. This allows you to control routing and
-filtering at a more granular level.</p>
-  </li>
+  <li><code class="highlighter-rouge">hostname</code> is the name you specified with the <code class="highlighter-rouge">com.docker.lb.hosts</code> label.</li>
+  <li><code class="highlighter-rouge">https-port</code> is the port you configured in the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/">UCP settings</a>.</li>
 </ul>
 
-<h3 id="bridge-mode">Bridge mode</h3>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/interlock-tls-2.png" alt="Browser screenshot" class="with-border" /></p>
 
-<p>To create a <code class="highlighter-rouge">macvlan</code> network which bridges with a given physical network
-interface, use <code class="highlighter-rouge">--driver macvlan</code> with the <code class="highlighter-rouge">docker network create</code> command. You
-also need to specify the <code class="highlighter-rouge">parent</code>, which is the interface the traffic will
-physically go through on the Docker host.</p>
+<p>Because this example uses self-sign certificates, client tools like
+browsers display a warning that the connection is insecure.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 pub_net
+<p>You can also test from the CLI:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--insecure</span> <span class="se">\</span>
+  <span class="nt">--resolve</span> &lt;hostname&gt;:&lt;https-port&gt;:&lt;ucp-ip-address&gt; <span class="se">\</span>
+  https://&lt;hostname&gt;:&lt;https-port&gt;/ping
 </code></pre></div></div>
 
-<p>If you need to exclude IP addresses from being used in the <code class="highlighter-rouge">macvlan</code> network, such
-as when a given IP address is already in use, use <code class="highlighter-rouge">--aux-addresses</code>:</p>
+<p>If everything is properly configured, you should get a JSON payload:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>192.168.32.0/24 <span class="se">\</span>
-  <span class="nt">--ip-range</span><span class="o">=</span>192.168.32.128/25 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>192.168.32.254 <span class="se">\</span>
-  <span class="nt">--aux-address</span><span class="o">=</span><span class="s2">"my-router=192.168.32.129"</span> <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 macnet32
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"instance"</span><span class="p">:</span><span class="s2">"f537436efb04"</span><span class="p">,</span><span class="s2">"version"</span><span class="p">:</span><span class="s2">"0.1"</span><span class="p">,</span><span class="s2">"request_id"</span><span class="p">:</span><span class="s2">"5a6a0488b20a73801aa89940b6f8c5d2"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Because the proxy uses SNI to decide where to route traffic, make sure you are
+using a version of <code class="highlighter-rouge">curl</code> that includes the SNI header with insecure requests.
+Otherwise, <code class="highlighter-rouge">curl</code> displays an error saying that the SSL handshake
+was aborted.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: Currently there is no way to update expired certificates using this method.
+The proper way is to create a new secret then update the corresponding service.</p>
+</blockquote>
+
+<h2 id="let-your-service-handle-tls">Let your service handle TLS</h2>
+<p>The second option for securing with TLS involves encrypting traffic from end users to your swarm service.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/interlock-tls-3.png" alt="End-to-end encryption" /></p>
+
+<p>To do that, deploy your swarm service using the following docker-compose.yml file:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.2"</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">demo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ehazlett/docker-demo</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">--tls-cert=/run/secrets/cert.pem --tls-key=/run/secrets/key.pem</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="s">com.docker.lb.hosts</span><span class="pi">:</span> <span class="s">app.example.org</span>
+        <span class="s">com.docker.lb.network</span><span class="pi">:</span> <span class="s">demo-network</span>
+        <span class="s">com.docker.lb.port</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="s">com.docker.lb.ssl_passthrough</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">METADATA</span><span class="pi">:</span> <span class="s">end-to-end-TLS</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">demo-network</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">source</span><span class="pi">:</span> <span class="s">app.example.org.cert</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/run/secrets/cert.pem</span>
+      <span class="pi">-</span> <span class="na">source</span><span class="pi">:</span> <span class="s">app.example.org.key</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/run/secrets/key.pem</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">demo-network</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">overlay</span>
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="s">app.example.org.cert</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./app.example.org.cert</span>
+  <span class="s">app.example.org.key</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./app.example.org.key</span>
 </code></pre></div></div>
 
-<h3 id="8021q-trunk-bridge-mode">802.1q trunk bridge mode</h3>
+<p>The service is updated to start using the secrets with the
+private key and certificate. The service is also labeled with
+<code class="highlighter-rouge">com.docker.lb.ssl_passthrough: true</code>, signaling UCP to configure the proxy
+service such that TLS traffic for <code class="highlighter-rouge">app.example.org</code> is passed to the service.</p>
 
-<p>If you specify a <code class="highlighter-rouge">parent</code> interface name with a dot included, such as <code class="highlighter-rouge">eth0.50</code>,
-Docker interprets that as a sub-interface of <code class="highlighter-rouge">eth0</code> and creates the sub-interface
-automatically.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.50.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.50.1 <span class="se">\</span>
-    <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.50 macvlan50
-</code></pre></div></div>
-
-<h3 id="use-an-ipvlan-instead-of-macvlan">Use an ipvlan instead of macvlan</h3>
-
-<p>In the above example, you are still using a L3 bridge. You can use <code class="highlighter-rouge">ipvlan</code>
-instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.210.0/24 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.212.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.210.254 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.212.254 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan210
-</code></pre></div></div>
-
-<h2 id="use-ipv6">Use IPv6</h2>
-
-<p>If you have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/ipv6.md">configured the Docker daemon to allow IPv6</a>,
-you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> networks.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.216.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.218.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.216.1 <span class="nt">--gateway</span><span class="o">=</span>192.168.218.1 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc8::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc8::10 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.218 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">macvlan_mode</span><span class="o">=</span>bridge macvlan216
-</code></pre></div></div>
-
-<h2 id="next-steps">Next steps</h2>
-
-<ul>
-  <li>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan.md">macvlan networking tutorial</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/container-networking.md">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/bridge.md">bridge networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay.md">overlay networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/host.md">host networking</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan.md">Macvlan networks</a></li>
-</ul>
+<p>Since the connection is fully encrypted from end-to-end, the proxy service
+cannot add metadata such as version information or request ID to the
+response headers.</p>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=network">network</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=macvlan">macvlan</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=standalone">standalone</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=routing">routing</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=proxy">proxy</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=tls">tls</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -314,7 +393,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/network/macvlan/";
+							  var originalURL = "/ee/ucp/interlock/usage/tls/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -334,9 +413,9 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "network/macvlan.md",
-										"title": "Use macvlan networks",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/network/macvlan.md"
+										"unique_id": "ee/ucp/interlock/usage/tls.md",
+										"title": "Secure services with TLS",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/interlock/usage/tls.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -368,8 +447,8 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/network/macvlan.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [network/macvlan.md](https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/ucp/interlock/usage/tls.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/ucp/interlock/usage/tls.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -395,15 +474,8 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#create-a-macvlan-network" class="nomunge">Create a macvlan network</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#bridge-mode" class="nomunge">Bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#8021q-trunk-bridge-mode" class="nomunge">802.1q trunk bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-an-ipvlan-instead-of-macvlan" class="nomunge">Use an ipvlan instead of macvlan</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-ipv6" class="nomunge">Use IPv6</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/#let-the-proxy-handle-tls" class="nomunge">Let the proxy handle TLS</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/#let-your-service-handle-tls" class="nomunge">Let your service handle TLS</a></li>
 </ul>
 
 
@@ -519,7 +591,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/network/macvlan/';
+	var pageURL = jekyllEnv + '/ee/ucp/interlock/usage/tls/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

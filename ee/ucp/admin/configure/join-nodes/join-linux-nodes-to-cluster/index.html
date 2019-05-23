@@ -10,6 +10,22 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 
 
@@ -42,7 +58,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +96,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use macvlan networks"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Some applications, especially legacy applications or applications which monitor network traffic, expect to be directly connected to the physical network. In this type of situation, you can use the macvlan..." />
+	<meta name="twitter:title" itemprop="title name" content="Join Linux nodes to your cluster"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker EE is designed for scaling horizontally as your applications grow in size and usage. You can add or remove nodes from the cluster to scale it to your needs...." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-05-23T10:30:18+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="network, macvlan, standalone">
+	<meta name="keywords" content="Docker EE, UCP, cluster, scale, worker, manager">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +112,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use macvlan networks | Docker Documentation</title>
-<meta property="og:title" content="Use macvlan networks" />
+	<title>Join Linux nodes to your cluster | Docker Documentation</title>
+<meta property="og:title" content="Join Linux nodes to your cluster" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<meta property="og:description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
+<meta name="description" content="Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes." />
+<meta property="og:description" content="Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use macvlan networks","description":"All about using macvlan to make your containers appear like physical machines on the network","url":"https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Join Linux nodes to your cluster","description":"Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,137 +191,168 @@
 						<section class="section">
 							
 								
-							<h1>Use macvlan networks</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Join Linux nodes to your cluster</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 
 							
 							
-							<p>Some applications, especially legacy applications or applications which monitor
-network traffic, expect to be directly connected to the physical network. In
-this type of situation, you can use the <code class="highlighter-rouge">macvlan</code> network driver to assign a MAC
-address to each container’s virtual network interface, making it appear to be
-a physical network interface directly connected to the physical network. In this
-case, you need to designate a physical interface on your Docker host to use for
-the <code class="highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="highlighter-rouge">macvlan</code>. You can even
-isolate your <code class="highlighter-rouge">macvlan</code> networks using different physical network interfaces.
-Keep the following things in mind:</p>
+							<p>Docker EE is designed for scaling horizontally as your applications grow in
+size and usage. You can add or remove nodes from the cluster to scale it
+to your needs. You can join Windows Server 2016, IBM z System, and Linux nodes
+to the cluster.</p>
+
+<p>Because Docker EE leverages the clustering functionality provided by Docker
+Engine, you use the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/add-nodes.md">docker swarm join</a>
+command to add more nodes to your cluster. When you join a new node, Docker EE
+services start running on the node automatically.</p>
+
+<h2 id="node-roles">Node roles</h2>
+
+<p>When you join a node to a cluster, you specify its role: manager or worker.</p>
 
 <ul>
   <li>
-    <p>It is very easy to unintentionally damage your network due to IP address
-exhaustion or to “VLAN spread”, which is a situation in which you have an
-inappropriately large number of unique MAC addresses in your network.</p>
+    <p><strong>Manager</strong>: Manager nodes are responsible for cluster management
+functionality and dispatching tasks to worker nodes. Having multiple
+manager nodes allows your swarm to be highly available and tolerant of
+node failures.</p>
+
+    <p>Manager nodes also run all Docker EE components in a replicated way, so
+by adding additional manager nodes, you’re also making the cluster highly
+available.
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/enterprise/docker-ee-architecture.md">Learn more about the Docker EE architecture.</a></p>
   </li>
   <li>
-    <p>Your networking equipment needs to be able to handle “promiscuous mode”,
-where one physical interface can be assigned multiple MAC addresses.</p>
-  </li>
-  <li>
-    <p>If your application can work using a bridge (on a single Docker host) or
-overlay (to communicate across multiple Docker hosts), these solutions may be
-better in the long term.</p>
+    <p><strong>Worker</strong>: Worker nodes receive and execute your services and applications.
+Having multiple worker nodes allows you to scale the computing capacity of
+your cluster.</p>
+
+    <p>When deploying Docker Trusted Registry in your cluster, you deploy it to a
+worker node.</p>
   </li>
 </ul>
 
-<h2 id="create-a-macvlan-network">Create a macvlan network</h2>
+<h2 id="join-a-node-to-the-cluster">Join a node to the cluster</h2>
 
-<p>When you create a <code class="highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
-trunk bridge mode.</p>
+<p>You can join Windows Server 2016, IBM z System, and Linux nodes to the cluster,
+but only Linux nodes can be managers.</p>
+
+<p>To join nodes to the cluster, go to the UCP web interface and navigate to the
+<strong>Nodes</strong> page.</p>
+
+<ol>
+  <li>Click <strong>Add Node</strong> to add a new node.</li>
+  <li>Select the type of node to add, <strong>Windows</strong> or <strong>Linux</strong>.</li>
+  <li>Click <strong>Manager</strong> if you want to add the node as a manager.</li>
+  <li>Check the <strong>Use a custom listen address</strong> option to specify the address
+and port where new node listens for inbound cluster management traffic.</li>
+  <li>Check the <strong>Use a custom listen address</strong> option to specify the
+IP address that’s advertised to all members of the cluster for API access.</li>
+</ol>
+
+<p><img src="../../../images/join-nodes-to-cluster-2.png" alt="" class="with-border" /></p>
+
+<p>Copy the displayed command, use SSH to log in to the host that you want to
+join to the cluster, and run the <code class="highlighter-rouge">docker swarm join</code> command on the host.</p>
+
+<p>To add a Windows node, click <strong>Windows</strong> and follow the instructions in
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/">Join Windows worker nodes to a cluster</a>.</p>
+
+<p>After you run the join command in the node, the node is displayed on the
+<strong>Nodes</strong> page in the UCP web interface. From there, you can change the node’s
+cluster configuration, including its assigned orchestrator type.
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/set-orchestrator-type/">Learn how to change the orchestrator for a node</a>.</p>
+
+<h2 id="pause-or-drain-a-node">Pause or drain a node</h2>
+
+<p>Once a node is part of the cluster, you can configure the node’s availability
+so that it is:</p>
 
 <ul>
-  <li>
-    <p>In bridge mode, <code class="highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
-  </li>
-  <li>
-    <p>In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
-which Docker creates on the fly. This allows you to control routing and
-filtering at a more granular level.</p>
-  </li>
+  <li><strong>Active</strong>: the node can receive and execute tasks.</li>
+  <li><strong>Paused</strong>: the node continues running existing tasks, but doesn’t receive
+new tasks.</li>
+  <li><strong>Drained</strong>: the node won’t receive new tasks. Existing tasks are stopped and
+replica tasks are launched in active nodes.</li>
 </ul>
 
-<h3 id="bridge-mode">Bridge mode</h3>
+<p>Pause or drain a node from the <strong>Edit Node</strong> page:</p>
 
-<p>To create a <code class="highlighter-rouge">macvlan</code> network which bridges with a given physical network
-interface, use <code class="highlighter-rouge">--driver macvlan</code> with the <code class="highlighter-rouge">docker network create</code> command. You
-also need to specify the <code class="highlighter-rouge">parent</code>, which is the interface the traffic will
-physically go through on the Docker host.</p>
+<ol>
+  <li>In the UCP web interface, browse to the <strong>Nodes</strong> page and select the node.</li>
+  <li>In the details pane, click <strong>Configure</strong> and select <strong>Details</strong> to open
+the <strong>Edit Node</strong> page.</li>
+  <li>In the <strong>Availability</strong> section, click <strong>Active</strong>, <strong>Pause</strong>, or <strong>Drain</strong>.</li>
+  <li>Click <strong>Save</strong> to change the availability of the node.</li>
+</ol>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 pub_net
+<p><img src="../../../images/join-nodes-to-cluster-3.png" alt="" class="with-border" /></p>
+
+<h2 id="promote-or-demote-a-node">Promote or demote a node</h2>
+
+<p>You can promote worker nodes to managers to make UCP fault tolerant. You can
+also demote a manager node into a worker.</p>
+
+<p>To promote or demote a manager node:</p>
+
+<ol>
+  <li>Navigate to the <strong>Nodes</strong> page, and click the node that you want to demote.</li>
+  <li>In the details pane, click <strong>Configure</strong> and select <strong>Details</strong> to open
+the <strong>Edit Node</strong> page.</li>
+  <li>In the <strong>Role</strong> section, click <strong>Manager</strong> or <strong>Worker</strong>.</li>
+  <li>Click <strong>Save</strong> and wait until the operation completes.</li>
+  <li>Navigate to the <strong>Nodes</strong> page, and confirm that the node role has changed.</li>
+</ol>
+
+<p>If you’re load-balancing user requests to Docker EE across multiple manager
+nodes, don’t forget to remove these nodes from your load-balancing pool when
+you demote them to workers.</p>
+
+<h2 id="remove-a-node-from-the-cluster">Remove a node from the cluster</h2>
+
+<p>You can remove worker nodes from the cluster at any time:</p>
+
+<ol>
+  <li>Shut down the worker node or have it leave the swarm. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/swarm_leave/#extended-description">docker swarm leave</a> for example usage.</li>
+  <li>Navigate to the <strong>Nodes</strong> page, and select the node.</li>
+  <li>In the details pane, click <strong>Actions</strong> and select <strong>Remove</strong>.</li>
+  <li>Click <strong>Confirm</strong> when prompted.</li>
+</ol>
+
+<p>Since manager nodes are important to the cluster overall health, you need to
+be careful when removing one from the cluster.</p>
+
+<p><img src="../../../images/ucp-remove-node.png" alt="" class="with-border" /></p>
+
+<p>To remove a manager node:</p>
+
+<ol>
+  <li>Make sure all nodes in the cluster are healthy. Don’t remove manager nodes
+if that’s not the case.</li>
+  <li>Demote the manager node into a worker.</li>
+  <li>Now you can remove that node from the cluster.</li>
+</ol>
+
+<h2 id="use-the-cli-to-manage-your-nodes">Use the CLI to manage your nodes</h2>
+
+<p>You can use the Docker CLI client to manage your nodes from the CLI. To do
+this, configure your Docker CLI client with a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP client bundle</a>.</p>
+
+<p>Once you do that, you can start managing your UCP nodes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node <span class="nb">ls</span>
 </code></pre></div></div>
-
-<p>If you need to exclude IP addresses from being used in the <code class="highlighter-rouge">macvlan</code> network, such
-as when a given IP address is already in use, use <code class="highlighter-rouge">--aux-addresses</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>192.168.32.0/24 <span class="se">\</span>
-  <span class="nt">--ip-range</span><span class="o">=</span>192.168.32.128/25 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>192.168.32.254 <span class="se">\</span>
-  <span class="nt">--aux-address</span><span class="o">=</span><span class="s2">"my-router=192.168.32.129"</span> <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 macnet32
-</code></pre></div></div>
-
-<h3 id="8021q-trunk-bridge-mode">802.1q trunk bridge mode</h3>
-
-<p>If you specify a <code class="highlighter-rouge">parent</code> interface name with a dot included, such as <code class="highlighter-rouge">eth0.50</code>,
-Docker interprets that as a sub-interface of <code class="highlighter-rouge">eth0</code> and creates the sub-interface
-automatically.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.50.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.50.1 <span class="se">\</span>
-    <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.50 macvlan50
-</code></pre></div></div>
-
-<h3 id="use-an-ipvlan-instead-of-macvlan">Use an ipvlan instead of macvlan</h3>
-
-<p>In the above example, you are still using a L3 bridge. You can use <code class="highlighter-rouge">ipvlan</code>
-instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.210.0/24 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.212.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.210.254 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.212.254 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan210
-</code></pre></div></div>
-
-<h2 id="use-ipv6">Use IPv6</h2>
-
-<p>If you have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/ipv6.md">configured the Docker daemon to allow IPv6</a>,
-you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> networks.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.216.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.218.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.216.1 <span class="nt">--gateway</span><span class="o">=</span>192.168.218.1 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc8::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc8::10 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.218 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">macvlan_mode</span><span class="o">=</span>bridge macvlan216
-</code></pre></div></div>
-
-<h2 id="next-steps">Next steps</h2>
-
-<ul>
-  <li>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan.md">macvlan networking tutorial</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/container-networking.md">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/bridge.md">bridge networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay.md">overlay networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/host.md">host networking</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan.md">Macvlan networks</a></li>
-</ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=network">network</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=macvlan">macvlan</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=standalone">standalone</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Docker EE">Docker EE</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=UCP">UCP</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=scale">scale</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=worker">worker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=manager">manager</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -314,7 +361,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/network/macvlan/";
+							  var originalURL = "/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -334,9 +381,9 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "network/macvlan.md",
-										"title": "Use macvlan networks",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/network/macvlan.md"
+										"unique_id": "ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster.md",
+										"title": "Join Linux nodes to your cluster",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -368,8 +415,8 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/network/macvlan.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [network/macvlan.md](https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -395,15 +442,12 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#create-a-macvlan-network" class="nomunge">Create a macvlan network</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#bridge-mode" class="nomunge">Bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#8021q-trunk-bridge-mode" class="nomunge">802.1q trunk bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-an-ipvlan-instead-of-macvlan" class="nomunge">Use an ipvlan instead of macvlan</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-ipv6" class="nomunge">Use IPv6</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/#node-roles" class="nomunge">Node roles</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/#join-a-node-to-the-cluster" class="nomunge">Join a node to the cluster</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/#pause-or-drain-a-node" class="nomunge">Pause or drain a node</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/#promote-or-demote-a-node" class="nomunge">Promote or demote a node</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/#remove-a-node-from-the-cluster" class="nomunge">Remove a node from the cluster</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/#use-the-cli-to-manage-your-nodes" class="nomunge">Use the CLI to manage your nodes</a></li>
 </ul>
 
 
@@ -519,7 +563,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/network/macvlan/';
+	var pageURL = jekyllEnv + '/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

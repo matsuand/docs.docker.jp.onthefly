@@ -10,6 +10,18 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 
 
@@ -42,7 +54,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +92,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use macvlan networks"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Some applications, especially legacy applications or applications which monitor network traffic, expect to be directly connected to the physical network. In this type of situation, you can use the macvlan..." />
+	<meta name="twitter:title" itemprop="title name" content="Scan images for vulnerabilities"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Trusted Registry can scan images in your repositories to verify that they are free from known security vulnerabilities or exposures, using Docker Security Scanning. The results of these scans..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-05-23T10:30:18+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="network, macvlan, standalone">
+	<meta name="keywords" content="registry, scan, vulnerability">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +108,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use macvlan networks | Docker Documentation</title>
-<meta property="og:title" content="Use macvlan networks" />
+	<title>Scan images for vulnerabilities | Docker Documentation</title>
+<meta property="og:title" content="Scan images for vulnerabilities" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<meta property="og:description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
+<meta name="description" content="Learn how to scan your Docker images for vulnerabilities." />
+<meta property="og:description" content="Learn how to scan your Docker images for vulnerabilities." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use macvlan networks","description":"All about using macvlan to make your containers appear like physical machines on the network","url":"https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Scan images for vulnerabilities","description":"Learn how to scan your Docker images for vulnerabilities.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,137 +187,191 @@
 						<section class="section">
 							
 								
-							<h1>Use macvlan networks</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Scan images for vulnerabilities</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    6 分
   
 </span>
 
 							
 							
-							<p>Some applications, especially legacy applications or applications which monitor
-network traffic, expect to be directly connected to the physical network. In
-this type of situation, you can use the <code class="highlighter-rouge">macvlan</code> network driver to assign a MAC
-address to each container’s virtual network interface, making it appear to be
-a physical network interface directly connected to the physical network. In this
-case, you need to designate a physical interface on your Docker host to use for
-the <code class="highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="highlighter-rouge">macvlan</code>. You can even
-isolate your <code class="highlighter-rouge">macvlan</code> networks using different physical network interfaces.
-Keep the following things in mind:</p>
+							<p><a href="https://www.youtube.com/watch?v=121poCB0Nn8" title="Images Security Scanning" target="_blank" class="_"><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/scanning_video.png" alt="Image Security Scanning" /></a></p>
+
+<p>Docker Trusted Registry can scan images in your repositories to verify that they
+are free from known security vulnerabilities or exposures, using Docker Security
+Scanning. The results of these scans are reported for each image tag in a repository.</p>
+
+<p>Docker Security Scanning is available as an add-on to Docker Trusted Registry,
+and an administrator configures it for your DTR instance. If you do not see
+security scan results available on your repositories, your organization may not
+have purchased the Security Scanning feature or it may be disabled. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/admin/configure/set-up-vulnerability-scans/">Set up
+Security Scanning in DTR</a> for more details.</p>
+
+<blockquote>
+  <p><strong>Tip</strong>: Only users with write access to a repository can manually start a
+scan. Users with read-only access can view the scan results, but cannot start
+a new scan.</p>
+</blockquote>
+
+<h2 id="the-docker-security-scan-process">The Docker Security Scan process</h2>
+
+<p>Scans run either on demand when you click the <strong>Start a Scan</strong> link or
+<strong>Scan</strong> button (see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#manual-scanning">Manual scanning</a> below), or automatically
+on any <code class="highlighter-rouge">docker push</code> to the repository.</p>
+
+<p>First the scanner performs a binary scan on each layer of the image, identifies
+the software components in each layer, and indexes the SHA of each component in
+a bill-of-materials. A binary scan evaluates the components on a bit-by-bit
+level, so vulnerable components are discovered even if they are
+statically linked or under a different name.</p>
+
+<p>The scan then compares the SHA of each component against the US National
+Vulnerability Database that is installed on your DTR instance. When
+this database is updated, DTR reviews the indexed components for newly
+discovered vulnerabilities.</p>
+
+<p>DTR scans both Linux and Windows images, but by default Docker doesn’t push
+foreign image layers for Windows images so DTR won’t be able to scan them. If
+you want DTR to scan your Windows images, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/pull-and-push-images/">configure Docker to always push image
+layers</a>, and it will scan the non-foreign layers.</p>
+
+<h2 id="security-scan-on-push">Security scan on push</h2>
+
+<p>By default, Docker Security Scanning runs automatically on <code class="highlighter-rouge">docker push</code> to an
+image repository.</p>
+
+<p>If your DTR instance is configured in this way, you do not need to do anything
+once your <code class="highlighter-rouge">docker push</code> completes. The scan runs automatically, and the results
+are reported in the repository’s <strong>Tags</strong> tab after the scan finishes.</p>
+
+<h2 id="manual-scanning">Manual scanning</h2>
+
+<p>If your repository owner enabled Docker Security Scanning but disabled automatic
+scanning, you can manually start a scan for images in repositories you
+have <code class="highlighter-rouge">write</code> access to.</p>
+
+<p>To start a security scan, navigate to the repository <strong>Tags</strong> tab on the web interface, click “View details” next to the relevant tag, and click <strong>Scan</strong>.</p>
+
+<p><img src="../../images/scan-images-for-vulns-1.png" alt="" class="with-border" /></p>
+
+<p>DTR begins the scanning process. You will need to refresh the page to see the
+results once the scan is complete.</p>
+
+<h2 id="change-the-scanning-mode">Change the scanning mode</h2>
+
+<p>You can change the scanning mode for each individual repository at any time. You
+might want to disable scanning if you are pushing an image repeatedly during
+troubleshooting and don’t want to waste resources scanning and re-scanning, or
+if a repository contains legacy code that is not used or updated frequently.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: To change an individual repository’s scanning mode, you must have
+<code class="highlighter-rouge">write</code> or <code class="highlighter-rouge">administrator</code> access to the repo.</p>
+</blockquote>
+
+<p>To change the repository scanning mode:</p>
+
+<ol>
+  <li>Navigate to the repository, and click the <strong>Settings</strong> tab.</li>
+  <li>Scroll down to the <strong>Image scanning</strong> section.</li>
+  <li>Select the desired scanning mode.
+<img src="../../images/scan-images-for-vulns-2.png" alt="" class="with-border" /></li>
+</ol>
+
+<h2 id="view-security-scan-results">View security scan results</h2>
+
+<p>Once DTR has run a security scan for an image, you can view the results.</p>
+
+<p>The <strong>Tags</strong> tab for each repository includes a summary of the most recent
+scan results for each image.</p>
+
+<p><img src="../../images/scan-images-for-vulns-3.png" alt="" class="with-border" /></p>
+<ul>
+  <li>The text “Clean” in green indicates that the scan did not find
+any vulnerabilities.</li>
+  <li>A red or orange text indicates that vulnerabilities were found, and
+the number of vulnerabilities is included on that same line according to severity: <strong><em>Critical</em></strong>, <strong><em>Major</em></strong>, <strong><em>Minor</em></strong>.</li>
+</ul>
+
+<p>If the vulnerability scan could not detect the version of a component, it reports
+the vulnerabilities for all versions of that component.</p>
+
+<p>From the repository <strong>Tags</strong> tab, you can click <strong>View details</strong> for a specific tag to see
+the full scan results. The top of the page also includes metadata about the
+image, including the SHA, image size, last push date, user who initiated the push,
+the security scan summary, and the security scan progress.</p>
+
+<p>The scan results for each image include two different modes so you can quickly
+view details about the image, its components, and any vulnerabilities found.</p>
 
 <ul>
   <li>
-    <p>It is very easy to unintentionally damage your network due to IP address
-exhaustion or to “VLAN spread”, which is a situation in which you have an
-inappropriately large number of unique MAC addresses in your network.</p>
+    <p>The <strong>Layers</strong> view lists the layers of the image in the order that they are built
+by Dockerfile.</p>
+
+    <p>This view can help you find exactly which command in the build introduced
+  the vulnerabilities, and which components are associated with that single
+  command. Click a layer to see a summary of its components. You can then
+  click on a component to switch to the <strong>Component</strong> view and get more details
+  about the specific item.</p>
+
+    <blockquote>
+      <p><strong>Tip</strong>: The layers view can be long, so be sure
+  to scroll down if you don’t immediately see the reported vulnerabilities.</p>
+    </blockquote>
+
+    <p><img src="../../images/scan-images-for-vulns-4.png" alt="" class="with-border" /></p>
   </li>
   <li>
-    <p>Your networking equipment needs to be able to handle “promiscuous mode”,
-where one physical interface can be assigned multiple MAC addresses.</p>
-  </li>
-  <li>
-    <p>If your application can work using a bridge (on a single Docker host) or
-overlay (to communicate across multiple Docker hosts), these solutions may be
-better in the long term.</p>
+    <p>The <strong>Components</strong> view lists the individual component libraries indexed by
+the scanning system, in order of severity and number of vulnerabilities found, with the most vulnerable library listed first.</p>
+
+    <p>Click on an individual component to view details about the vulnerability it
+  introduces, including a short summary and a link to the official CVE
+  database report. A single component can have multiple vulnerabilities, and
+  the scan report provides details on each one. The component details also
+  include the license type used by the component, and the filepath to the
+  component in the image.
+<img src="../../images/scan-images-for-vulns-5.png" alt="" class="with-border" /></p>
   </li>
 </ul>
 
-<h2 id="create-a-macvlan-network">Create a macvlan network</h2>
+<h2 id="what-to-do-next">What to do next</h2>
 
-<p>When you create a <code class="highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
-trunk bridge mode.</p>
+<p>If you find that an image in your registry contains vulnerable components, you
+can use the linked CVE scan information in each scan report to evaluate the
+vulnerability and decide what to do.</p>
 
-<ul>
-  <li>
-    <p>In bridge mode, <code class="highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
-  </li>
-  <li>
-    <p>In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
-which Docker creates on the fly. This allows you to control routing and
-filtering at a more granular level.</p>
-  </li>
-</ul>
+<p>If you discover vulnerable components, you should check if there is an updated
+version available where the security vulnerability has been addressed. If
+necessary, you can contact the component’s maintainers to ensure that the
+vulnerability is being addressed in a future version or a patch update.</p>
 
-<h3 id="bridge-mode">Bridge mode</h3>
+<p>If the vulnerability is in a <code class="highlighter-rouge">base layer</code> (such as an operating system) you
+might not be able to correct the issue in the image. In this case, you can
+switch to a different version of the base layer, or you can find an
+equivalent, less vulnerable base layer.</p>
 
-<p>To create a <code class="highlighter-rouge">macvlan</code> network which bridges with a given physical network
-interface, use <code class="highlighter-rouge">--driver macvlan</code> with the <code class="highlighter-rouge">docker network create</code> command. You
-also need to specify the <code class="highlighter-rouge">parent</code>, which is the interface the traffic will
-physically go through on the Docker host.</p>
+<p>Address vulnerabilities in your repositories by updating the images to use
+updated and corrected versions of vulnerable components, or by using a different
+component offering the same functionality. When you have updated the source
+code, run a build to create a new image, tag the image, and push the updated
+image to your DTR instance. You can then re-scan the image to confirm that you
+have addressed the vulnerabilities.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 pub_net
-</code></pre></div></div>
-
-<p>If you need to exclude IP addresses from being used in the <code class="highlighter-rouge">macvlan</code> network, such
-as when a given IP address is already in use, use <code class="highlighter-rouge">--aux-addresses</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>192.168.32.0/24 <span class="se">\</span>
-  <span class="nt">--ip-range</span><span class="o">=</span>192.168.32.128/25 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>192.168.32.254 <span class="se">\</span>
-  <span class="nt">--aux-address</span><span class="o">=</span><span class="s2">"my-router=192.168.32.129"</span> <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 macnet32
-</code></pre></div></div>
-
-<h3 id="8021q-trunk-bridge-mode">802.1q trunk bridge mode</h3>
-
-<p>If you specify a <code class="highlighter-rouge">parent</code> interface name with a dot included, such as <code class="highlighter-rouge">eth0.50</code>,
-Docker interprets that as a sub-interface of <code class="highlighter-rouge">eth0</code> and creates the sub-interface
-automatically.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.50.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.50.1 <span class="se">\</span>
-    <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.50 macvlan50
-</code></pre></div></div>
-
-<h3 id="use-an-ipvlan-instead-of-macvlan">Use an ipvlan instead of macvlan</h3>
-
-<p>In the above example, you are still using a L3 bridge. You can use <code class="highlighter-rouge">ipvlan</code>
-instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.210.0/24 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.212.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.210.254 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.212.254 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan210
-</code></pre></div></div>
-
-<h2 id="use-ipv6">Use IPv6</h2>
-
-<p>If you have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/ipv6.md">configured the Docker daemon to allow IPv6</a>,
-you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> networks.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.216.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.218.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.216.1 <span class="nt">--gateway</span><span class="o">=</span>192.168.218.1 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc8::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc8::10 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.218 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">macvlan_mode</span><span class="o">=</span>bridge macvlan216
-</code></pre></div></div>
-
-<h2 id="next-steps">Next steps</h2>
+<h2 id="where-to-go-next">Where to go next</h2>
 
 <ul>
-  <li>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan.md">macvlan networking tutorial</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/container-networking.md">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/bridge.md">bridge networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay.md">overlay networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/host.md">host networking</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan.md">Macvlan networks</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/override-a-vulnerability/">Override a reported vulnerability</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=network">network</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=macvlan">macvlan</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=standalone">standalone</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=registry">registry</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=scan">scan</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=vulnerability">vulnerability</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -314,7 +380,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/network/macvlan/";
+							  var originalURL = "/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -334,9 +400,9 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "network/macvlan.md",
-										"title": "Use macvlan networks",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/network/macvlan.md"
+										"unique_id": "ee/dtr/user/manage-images/scan-images-for-vulnerabilities.md",
+										"title": "Scan images for vulnerabilities",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/dtr/user/manage-images/scan-images-for-vulnerabilities.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -368,8 +434,8 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/network/macvlan.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [network/macvlan.md](https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/dtr/user/manage-images/scan-images-for-vulnerabilities.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/dtr/user/manage-images/scan-images-for-vulnerabilities.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -395,15 +461,13 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#create-a-macvlan-network" class="nomunge">Create a macvlan network</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#bridge-mode" class="nomunge">Bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#8021q-trunk-bridge-mode" class="nomunge">802.1q trunk bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-an-ipvlan-instead-of-macvlan" class="nomunge">Use an ipvlan instead of macvlan</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-ipv6" class="nomunge">Use IPv6</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#the-docker-security-scan-process" class="nomunge">The Docker Security Scan process</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#security-scan-on-push" class="nomunge">Security scan on push</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#manual-scanning" class="nomunge">Manual scanning</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#change-the-scanning-mode" class="nomunge">Change the scanning mode</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#view-security-scan-results" class="nomunge">View security scan results</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#what-to-do-next" class="nomunge">What to do next</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 
@@ -519,7 +583,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/network/macvlan/';
+	var pageURL = jekyllEnv + '/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

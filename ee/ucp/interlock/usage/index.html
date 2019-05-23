@@ -2,15 +2,6 @@
 <!-- relative link basehrefs -->
 
 	
-	
-	
-		
-			
-		
-	
-		
-			
-			
 
 
 <!-- Logic for 'edit this button' -->
@@ -42,7 +33,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +71,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use macvlan networks"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Some applications, especially legacy applications or applications which monitor network traffic, expect to be directly connected to the physical network. In this type of situation, you can use the macvlan..." />
+	<meta name="twitter:title" itemprop="title name" content="Route traffic to a swarm service"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="After Interlock is deployed, you can launch and publish services and applications. Use Service Labels to configure services to publish themselves to the load balancer. The following examples assume a..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-05-23T10:30:18+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="network, macvlan, standalone">
+	<meta name="keywords" content="routing, proxy">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +87,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use macvlan networks | Docker Documentation</title>
-<meta property="og:title" content="Use macvlan networks" />
+	<title>Route traffic to a swarm service | Docker Documentation</title>
+<meta property="og:title" content="Route traffic to a swarm service" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<meta property="og:description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
+<meta name="description" content="Learn how to deploy your Docker swarm services and applications" />
+<meta property="og:description" content="Learn how to deploy your Docker swarm services and applications" />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use macvlan networks","description":"All about using macvlan to make your containers appear like physical machines on the network","url":"https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Route traffic to a swarm service","description":"Learn how to deploy your Docker swarm services and applications","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,137 +166,177 @@
 						<section class="section">
 							
 								
-							<h1>Use macvlan networks</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Route traffic to a swarm service</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 
 							
 							
-							<p>Some applications, especially legacy applications or applications which monitor
-network traffic, expect to be directly connected to the physical network. In
-this type of situation, you can use the <code class="highlighter-rouge">macvlan</code> network driver to assign a MAC
-address to each container’s virtual network interface, making it appear to be
-a physical network interface directly connected to the physical network. In this
-case, you need to designate a physical interface on your Docker host to use for
-the <code class="highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="highlighter-rouge">macvlan</code>. You can even
-isolate your <code class="highlighter-rouge">macvlan</code> networks using different physical network interfaces.
-Keep the following things in mind:</p>
+							<p>After Interlock is deployed, you can launch and publish services and applications.
+Use <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/service_create/#set-metadata-on-a-service--l-label">Service Labels</a>
+to configure services to publish themselves to the load balancer.</p>
+
+<p>The following examples assume a DNS entry (or local hosts entry if you are testing locally) exists
+for each of the applications.</p>
+
+<h2 id="publish-a-service-with-four-replicas">Publish a service with four replicas</h2>
+<p>Create a Docker Service using two labels:</p>
 
 <ul>
-  <li>
-    <p>It is very easy to unintentionally damage your network due to IP address
-exhaustion or to “VLAN spread”, which is a situation in which you have an
-inappropriately large number of unique MAC addresses in your network.</p>
-  </li>
-  <li>
-    <p>Your networking equipment needs to be able to handle “promiscuous mode”,
-where one physical interface can be assigned multiple MAC addresses.</p>
-  </li>
-  <li>
-    <p>If your application can work using a bridge (on a single Docker host) or
-overlay (to communicate across multiple Docker hosts), these solutions may be
-better in the long term.</p>
-  </li>
+  <li><code class="highlighter-rouge">com.docker.lb.hosts</code></li>
+  <li><code class="highlighter-rouge">com.docker.lb.port</code></li>
 </ul>
 
-<h2 id="create-a-macvlan-network">Create a macvlan network</h2>
+<p>The <code class="highlighter-rouge">com.docker.lb.hosts</code> label instructs Interlock where the service should be available.
+The <code class="highlighter-rouge">com.docker.lb.port</code> label instructs what port the proxy service should use to access
+the upstreams.</p>
 
-<p>When you create a <code class="highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
-trunk bridge mode.</p>
+<p>Publish a demo service to the host <code class="highlighter-rouge">demo.local</code>:</p>
+
+<p>First, create an overlay network so that service traffic is isolated and secure:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo
+1se1glh749q1i4pw0kf26mfx5
+</code></pre></div></div>
+
+<p>Next, deploy the application:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
+    <span class="nt">--name</span> demo <span class="se">\</span>
+    <span class="nt">--network</span> demo <span class="se">\</span>
+    <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo.local <span class="se">\</span>
+    <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8080 <span class="se">\</span>
+    ehazlett/docker-demo
+6r0wiglf5f3bdpcy6zesh1pzx
+</code></pre></div></div>
+
+<p>Interlock detects when the service is available and publishes it. After tasks are running
+and the proxy service is updated, the application is available via <code class="highlighter-rouge">http://demo.local</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> curl <span class="nt">-s</span> <span class="nt">-H</span> <span class="s2">"Host: demo.local"</span> http://127.0.0.1/ping
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"c2f1afe673d4"</span>,<span class="s2">"version"</span>:<span class="s2">"0.1"</span>,request_id<span class="s2">":"</span>7bcec438af14f8875ffc3deab9215bc5<span class="s2">"}
+</span></code></pre></div></div>
+
+<p>To increase service capacity, use the Docker Service <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/scale-service/">Scale</a> command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service scale <span class="nv">demo</span><span class="o">=</span>4
+demo scaled to 4
+</code></pre></div></div>
+
+<p>In this example, four service replicas are configured as upstreams.  The load balancer balances traffic
+across all service replicas.</p>
+
+<h2 id="publish-a-service-with-a-web-interface">Publish a service with a web interface</h2>
+<p>This example deploys a simple service that:</p>
 
 <ul>
-  <li>
-    <p>In bridge mode, <code class="highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
-  </li>
-  <li>
-    <p>In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
-which Docker creates on the fly. This allows you to control routing and
-filtering at a more granular level.</p>
-  </li>
+  <li>Has a JSON endpoint that returns the ID of the task serving the request.</li>
+  <li>Has a web interface that shows how many tasks the service is running.</li>
+  <li>Can be reached at <code class="highlighter-rouge">http://app.example.org</code>.</li>
 </ul>
 
-<h3 id="bridge-mode">Bridge mode</h3>
+<p>Create a <code class="highlighter-rouge">docker-compose.yml</code> file with:</p>
 
-<p>To create a <code class="highlighter-rouge">macvlan</code> network which bridges with a given physical network
-interface, use <code class="highlighter-rouge">--driver macvlan</code> with the <code class="highlighter-rouge">docker network create</code> command. You
-also need to specify the <code class="highlighter-rouge">parent</code>, which is the interface the traffic will
-physically go through on the Docker host.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.2"</span>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 pub_net
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">demo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">ehazlett/docker-demo</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="s">com.docker.lb.hosts</span><span class="pi">:</span> <span class="s">app.example.org</span>
+        <span class="s">com.docker.lb.network</span><span class="pi">:</span> <span class="s">demo_demo-network</span>
+        <span class="s">com.docker.lb.port</span><span class="pi">:</span> <span class="s">8080</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">demo-network</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">demo-network</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">overlay</span>
 </code></pre></div></div>
 
-<p>If you need to exclude IP addresses from being used in the <code class="highlighter-rouge">macvlan</code> network, such
-as when a given IP address is already in use, use <code class="highlighter-rouge">--aux-addresses</code>:</p>
+<p>Note that:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>192.168.32.0/24 <span class="se">\</span>
-  <span class="nt">--ip-range</span><span class="o">=</span>192.168.32.128/25 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>192.168.32.254 <span class="se">\</span>
-  <span class="nt">--aux-address</span><span class="o">=</span><span class="s2">"my-router=192.168.32.129"</span> <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 macnet32
+<ul>
+  <li>The <code class="highlighter-rouge">com.docker.lb.hosts</code> label defines the hostname for the service. When
+the layer 7 routing solution gets a request containing <code class="highlighter-rouge">app.example.org</code> in
+the host header, that request is forwarded to the demo service.</li>
+  <li>The <code class="highlighter-rouge">com.docker.lb.network</code> defines which network the <code class="highlighter-rouge">ucp-interlock-proxy</code>
+should attach to in order to be able to communicate with the demo service.
+To use layer 7 routing, your services need to be attached to at least one network.
+If your service is only attached to a single network, you don’t need to add
+a label to specify which network to use for routing. When using a common stack file for multiple deployments leveraging UCP Interlock / Layer 7 Routing, prefix <code class="highlighter-rouge">com.docker.lb.network</code> with the stack name to ensure traffic will be directed to the correct overlay network.</li>
+  <li>The <code class="highlighter-rouge">com.docker.lb.port</code> label specifies which port the <code class="highlighter-rouge">ucp-interlock-proxy</code>
+service should use to communicate with this demo service.</li>
+  <li>Your service doesn’t need to expose a port in the swarm routing mesh. All
+communications are done using the network you’ve specified.</li>
+</ul>
+
+<p>Set up your CLI client with a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP client bundle</a>,
+and deploy the service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">--compose-file</span> docker-compose.yml demo
 </code></pre></div></div>
 
-<h3 id="8021q-trunk-bridge-mode">802.1q trunk bridge mode</h3>
+<p>The <code class="highlighter-rouge">ucp-interlock</code> service detects that your service is using these labels
+and automatically reconfigures the <code class="highlighter-rouge">ucp-interlock-proxy</code> service.</p>
 
-<p>If you specify a <code class="highlighter-rouge">parent</code> interface name with a dot included, such as <code class="highlighter-rouge">eth0.50</code>,
-Docker interprets that as a sub-interface of <code class="highlighter-rouge">eth0</code> and creates the sub-interface
-automatically.</p>
+<h3 id="test-using-the-cli">Test using the CLI</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.50.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.50.1 <span class="se">\</span>
-    <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.50 macvlan50
+<p>To test that requests are routed to the demo service, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--header</span> <span class="s2">"Host: app.example.org"</span> <span class="se">\</span>
+  http://&lt;ucp-address&gt;:&lt;routing-http-port&gt;/ping
 </code></pre></div></div>
 
-<h3 id="use-an-ipvlan-instead-of-macvlan">Use an ipvlan instead of macvlan</h3>
+<p>Where:</p>
 
-<p>In the above example, you are still using a L3 bridge. You can use <code class="highlighter-rouge">ipvlan</code>
-instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
+<ul>
+  <li><code class="highlighter-rouge">&lt;ucp-address&gt;</code> is the domain name or IP address of a UCP node.</li>
+  <li><code class="highlighter-rouge">&lt;routing-http-port&gt;</code> is the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/">port you’re using to route HTTP traffic</a>.</li>
+</ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.210.0/24 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.212.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.210.254 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.212.254 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan210
-</code></pre></div></div>
+<p>If everything is working correctly, you should get a JSON result like:</p>
 
-<h2 id="use-ipv6">Use IPv6</h2>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"instance"</span><span class="p">:</span><span class="s2">"63b855978452"</span><span class="p">,</span><span class="w"> </span><span class="s2">"version"</span><span class="p">:</span><span class="s2">"0.1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"request_id"</span><span class="p">:</span><span class="s2">"d641430be9496937f2669ce6963b67d6"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
-<p>If you have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/ipv6.md">configured the Docker daemon to allow IPv6</a>,
-you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> networks.</p>
+<h3 id="test-using-a-browser">Test using a browser</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.216.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.218.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.216.1 <span class="nt">--gateway</span><span class="o">=</span>192.168.218.1 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc8::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc8::10 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.218 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">macvlan_mode</span><span class="o">=</span>bridge macvlan216
-</code></pre></div></div>
+<p>Since the demo service exposes an HTTP endpoint, you can also use your browser
+to validate that everything is working.</p>
+
+<p>Make sure the <code class="highlighter-rouge">/etc/hosts</code> file in your system has an entry mapping
+<code class="highlighter-rouge">app.example.org</code> to the IP address of a UCP node. Once you do that, you’ll be
+able to start using the service from your browser.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/route-simple-app-1.png" alt="browser" class="with-border" /></p>
 
 <h2 id="next-steps">Next steps</h2>
 
 <ul>
-  <li>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan.md">macvlan networking tutorial</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/container-networking.md">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/bridge.md">bridge networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay.md">overlay networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/host.md">host networking</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan.md">Macvlan networks</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/canary/">Publish a service as a canary instance</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/context/">Use context or path-based routing</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/interlock-vip-mode/">Publish a default host service</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/interlock-vip-mode/">Specify a routing mode</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/labels-reference/">Use routing labels</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/redirects/">Implement redirects</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/service-clusters/">Implement a service cluster</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/sessions/">Implement persistent (sticky) sessions</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/">Secure services with TLS</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/websockets/">Configure websockets</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=network">network</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=macvlan">macvlan</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=standalone">standalone</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=routing">routing</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=proxy">proxy</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -314,7 +345,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/network/macvlan/";
+							  var originalURL = "/ee/ucp/interlock/usage/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -334,9 +365,9 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "network/macvlan.md",
-										"title": "Use macvlan networks",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/network/macvlan.md"
+										"unique_id": "ee/ucp/interlock/usage/index.md",
+										"title": "Route traffic to a swarm service",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/interlock/usage/index.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -368,8 +399,8 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/network/macvlan.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [network/macvlan.md](https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/ucp/interlock/usage/index.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/ucp/interlock/usage/index.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -395,15 +426,14 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#create-a-macvlan-network" class="nomunge">Create a macvlan network</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/#publish-a-service-with-four-replicas" class="nomunge">Publish a service with four replicas</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/#publish-a-service-with-a-web-interface" class="nomunge">Publish a service with a web interface</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#bridge-mode" class="nomunge">Bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#8021q-trunk-bridge-mode" class="nomunge">802.1q trunk bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-an-ipvlan-instead-of-macvlan" class="nomunge">Use an ipvlan instead of macvlan</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/#test-using-the-cli" class="nomunge">Test using the CLI</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/#test-using-a-browser" class="nomunge">Test using a browser</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-ipv6" class="nomunge">Use IPv6</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/usage/#next-steps" class="nomunge">Next steps</a></li>
 </ul>
 
 
@@ -519,7 +549,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/network/macvlan/';
+	var pageURL = jekyllEnv + '/ee/ucp/interlock/usage/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

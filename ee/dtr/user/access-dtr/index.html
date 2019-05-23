@@ -2,15 +2,6 @@
 <!-- relative link basehrefs -->
 
 	
-	
-	
-		
-			
-		
-	
-		
-			
-			
 
 
 <!-- Logic for 'edit this button' -->
@@ -42,7 +33,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +71,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use macvlan networks"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Some applications, especially legacy applications or applications which monitor network traffic, expect to be directly connected to the physical network. In this type of situation, you can use the macvlan..." />
+	<meta name="twitter:title" itemprop="title name" content="Configure your Docker Engine"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="By default Docker Engine uses TLS when pushing and pulling images to an image registry like Docker Trusted Registry. If DTR is using the default configurations or was configured to..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-05-23T10:30:18+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="network, macvlan, standalone">
+	<meta name="keywords" content="registry, TLS, certificates">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +87,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use macvlan networks | Docker Documentation</title>
-<meta property="og:title" content="Use macvlan networks" />
+	<title>Configure your Docker Engine | Docker Documentation</title>
+<meta property="og:title" content="Configure your Docker Engine" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<meta property="og:description" content="All about using macvlan to make your containers appear like physical machines on the network" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
+<meta name="description" content="Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry." />
+<meta property="og:description" content="Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use macvlan networks","description":"All about using macvlan to make your containers appear like physical machines on the network","url":"https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Configure your Docker Engine","description":"Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,137 +166,140 @@
 						<section class="section">
 							
 								
-							<h1>Use macvlan networks</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Configure your Docker Engine</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    2 分
   
 </span>
 
 							
 							
-							<p>Some applications, especially legacy applications or applications which monitor
-network traffic, expect to be directly connected to the physical network. In
-this type of situation, you can use the <code class="highlighter-rouge">macvlan</code> network driver to assign a MAC
-address to each container’s virtual network interface, making it appear to be
-a physical network interface directly connected to the physical network. In this
-case, you need to designate a physical interface on your Docker host to use for
-the <code class="highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="highlighter-rouge">macvlan</code>. You can even
-isolate your <code class="highlighter-rouge">macvlan</code> networks using different physical network interfaces.
-Keep the following things in mind:</p>
+							<p>By default Docker Engine uses TLS when pushing and pulling images to an
+image registry like Docker Trusted Registry.</p>
+
+<p>If DTR is using the default configurations or was configured to use self-signed
+certificates, you need to configure your Docker Engine to trust DTR. Otherwise,
+when you try to log in, push to, or pull images from DTR, you’ll get an error:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login dtr.example.org
+
+x509: certificate signed by unknown authority
+</code></pre></div></div>
+
+<p>The first step to make your Docker Engine trust the certificate authority used
+by DTR is to get the DTR CA certificate. Then you configure your operating
+system to trust that certificate.</p>
+
+<h2 id="configure-your-host">Configure your host</h2>
+
+<h3 id="macos">macOS</h3>
+
+<p>In your browser navigate to <code class="highlighter-rouge">https://&lt;dtr-url&gt;/ca</code> to download the TLS
+certificate used by DTR. Then
+<a href="https://support.apple.com/kb/PH20129">add that certificate to macOS Keychain</a>.</p>
+
+<p>After adding the CA certificate to Keychain, restart Docker Desktop for Mac.</p>
+
+<h3 id="windows">Windows</h3>
+
+<p>In your browser navigate to <code class="highlighter-rouge">https://&lt;dtr-url&gt;/ca</code> to download the TLS
+certificate used by DTR. Open Windows Explorer, right-click the
+file you’ve downloaded, and choose <strong>Install certificate</strong>.</p>
+
+<p>Then, select the following options:</p>
 
 <ul>
-  <li>
-    <p>It is very easy to unintentionally damage your network due to IP address
-exhaustion or to “VLAN spread”, which is a situation in which you have an
-inappropriately large number of unique MAC addresses in your network.</p>
-  </li>
-  <li>
-    <p>Your networking equipment needs to be able to handle “promiscuous mode”,
-where one physical interface can be assigned multiple MAC addresses.</p>
-  </li>
-  <li>
-    <p>If your application can work using a bridge (on a single Docker host) or
-overlay (to communicate across multiple Docker hosts), these solutions may be
-better in the long term.</p>
-  </li>
+  <li>Store location: local machine</li>
+  <li>Check <strong>place all certificates in the following store</strong></li>
+  <li>Click <strong>Browser</strong>, and select <strong>Trusted Root Certificate Authorities</strong></li>
+  <li>Click <strong>Finish</strong></li>
 </ul>
 
-<h2 id="create-a-macvlan-network">Create a macvlan network</h2>
+<p><a href="https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx#BKMK_addlocal">Learn more about managing TLS certificates</a>.</p>
 
-<p>When you create a <code class="highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
-trunk bridge mode.</p>
+<p>After adding the CA certificate to Windows, restart Docker Desktop for Windows.</p>
 
-<ul>
+<h3 id="ubuntu-debian">Ubuntu/ Debian</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download the DTR CA certificate</span>
+<span class="nb">sudo </span>curl <span class="nt">-k</span> https://&lt;dtr-domain-name&gt;/ca <span class="nt">-o</span> /usr/local/share/ca-certificates/&lt;dtr-domain-name&gt;.crt
+<span class="c"># Refresh the list of certificates to trust</span>
+<span class="nb">sudo </span>update-ca-certificates
+<span class="c"># Restart the Docker daemon</span>
+<span class="nb">sudo </span>service docker restart
+</code></pre></div></div>
+
+<h3 id="rhel-centos">RHEL/ CentOS</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download the DTR CA certificate</span>
+<span class="nb">sudo </span>curl <span class="nt">-k</span> https://&lt;dtr-domain-name&gt;/ca <span class="nt">-o</span> /etc/pki/ca-trust/source/anchors/&lt;dtr-domain-name&gt;.crt
+<span class="c"># Refresh the list of certificates to trust</span>
+<span class="nb">sudo </span>update-ca-trust
+<span class="c"># Restart the Docker daemon</span>
+<span class="nb">sudo</span> /bin/systemctl restart docker.service
+</code></pre></div></div>
+
+<h3 id="boot2docker">Boot2Docker</h3>
+
+<ol>
   <li>
-    <p>In bridge mode, <code class="highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
+    <p>Log into the virtual machine with ssh:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine ssh &lt;machine-name&gt;
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
-which Docker creates on the fly. This allows you to control routing and
-filtering at a more granular level.</p>
+    <p>Create the <code class="highlighter-rouge">bootsync.sh</code> file, and make it executable:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>touch /var/lib/boot2docker/bootsync.sh
+<span class="nb">sudo </span>chmod 755 /var/lib/boot2docker/bootsync.sh
+</code></pre></div>    </div>
   </li>
-</ul>
+  <li>
+    <p>Add the following content to the <code class="highlighter-rouge">bootsync.sh</code> file. You can use nano or vi
+for this.</p>
 
-<h3 id="bridge-mode">Bridge mode</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 
-<p>To create a <code class="highlighter-rouge">macvlan</code> network which bridges with a given physical network
-interface, use <code class="highlighter-rouge">--driver macvlan</code> with the <code class="highlighter-rouge">docker network create</code> command. You
-also need to specify the <code class="highlighter-rouge">parent</code>, which is the interface the traffic will
-physically go through on the Docker host.</p>
+<span class="nb">cat</span> /var/lib/boot2docker/server.pem <span class="o">&gt;&gt;</span> /etc/ssl/certs/ca-certificates.crt
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add the DTR CA certificate to the <code class="highlighter-rouge">server.pem</code> file:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>172.16.86.0/24 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>172.16.86.1 <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 pub_net
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-k</span> https://&lt;dtr-domain-name&gt;/ca | <span class="nb">sudo </span>tee <span class="nt">-a</span> /var/lib/boot2docker/server.pem
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run <code class="highlighter-rouge">bootsync.sh</code> and restart the Docker daemon:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> /var/lib/boot2docker/bootsync.sh
+<span class="nb">sudo</span> /etc/init.d/docker restart
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="log-into-dtr">Log into DTR</h2>
+
+<p>To validate that your Docker daemon trusts DTR, try authenticating against
+DTR.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login dtr.example.org
 </code></pre></div></div>
 
-<p>If you need to exclude IP addresses from being used in the <code class="highlighter-rouge">macvlan</code> network, such
-as when a given IP address is already in use, use <code class="highlighter-rouge">--aux-addresses</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-  <span class="nt">--subnet</span><span class="o">=</span>192.168.32.0/24 <span class="se">\</span>
-  <span class="nt">--ip-range</span><span class="o">=</span>192.168.32.128/25 <span class="se">\</span>
-  <span class="nt">--gateway</span><span class="o">=</span>192.168.32.254 <span class="se">\</span>
-  <span class="nt">--aux-address</span><span class="o">=</span><span class="s2">"my-router=192.168.32.129"</span> <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 macnet32
-</code></pre></div></div>
-
-<h3 id="8021q-trunk-bridge-mode">802.1q trunk bridge mode</h3>
-
-<p>If you specify a <code class="highlighter-rouge">parent</code> interface name with a dot included, such as <code class="highlighter-rouge">eth0.50</code>,
-Docker interprets that as a sub-interface of <code class="highlighter-rouge">eth0</code> and creates the sub-interface
-automatically.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.50.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.50.1 <span class="se">\</span>
-    <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.50 macvlan50
-</code></pre></div></div>
-
-<h3 id="use-an-ipvlan-instead-of-macvlan">Use an ipvlan instead of macvlan</h3>
-
-<p>In the above example, you are still using a L3 bridge. You can use <code class="highlighter-rouge">ipvlan</code>
-instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.210.0/24 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.212.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.210.254 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.212.254 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">ipvlan_mode</span><span class="o">=</span>l2 ipvlan210
-</code></pre></div></div>
-
-<h2 id="use-ipv6">Use IPv6</h2>
-
-<p>If you have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/ipv6.md">configured the Docker daemon to allow IPv6</a>,
-you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> networks.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>192.168.216.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.218.0/24 <span class="se">\</span>
-    <span class="nt">--gateway</span><span class="o">=</span>192.168.216.1 <span class="nt">--gateway</span><span class="o">=</span>192.168.218.1 <span class="se">\</span>
-    <span class="nt">--subnet</span><span class="o">=</span>2001:db8:abc8::/64 <span class="nt">--gateway</span><span class="o">=</span>2001:db8:abc8::10 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0.218 <span class="se">\</span>
-     <span class="nt">-o</span> <span class="nv">macvlan_mode</span><span class="o">=</span>bridge macvlan216
-</code></pre></div></div>
-
-<h2 id="next-steps">Next steps</h2>
+<h2 id="where-to-go-next">Where to go next</h2>
 
 <ul>
-  <li>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan.md">macvlan networking tutorial</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/container-networking.md">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/bridge.md">bridge networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay.md">overlay networks</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/host.md">host networking</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan.md">Macvlan networks</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/use-a-cache/">Use a cache</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=network">network</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=macvlan">macvlan</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=standalone">standalone</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=registry">registry</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=TLS">TLS</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=certificates">certificates</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -314,7 +308,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/network/macvlan/";
+							  var originalURL = "/ee/dtr/user/access-dtr/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -334,9 +328,9 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "network/macvlan.md",
-										"title": "Use macvlan networks",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/network/macvlan.md"
+										"unique_id": "ee/dtr/user/access-dtr/index.md",
+										"title": "Configure your Docker Engine",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/dtr/user/access-dtr/index.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -368,8 +362,8 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/network/macvlan.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [network/macvlan.md](https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/ee/dtr/user/access-dtr/index.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/dtr/user/access-dtr/index.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -395,15 +389,17 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#create-a-macvlan-network" class="nomunge">Create a macvlan network</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#configure-your-host" class="nomunge">Configure your host</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#bridge-mode" class="nomunge">Bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#8021q-trunk-bridge-mode" class="nomunge">802.1q trunk bridge mode</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-an-ipvlan-instead-of-macvlan" class="nomunge">Use an ipvlan instead of macvlan</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#macos" class="nomunge">macOS</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#windows" class="nomunge">Windows</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#ubuntu-debian" class="nomunge">Ubuntu/ Debian</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#rhel-centos" class="nomunge">RHEL/ CentOS</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#boot2docker" class="nomunge">Boot2Docker</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#use-ipv6" class="nomunge">Use IPv6</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#log-into-dtr" class="nomunge">Log into DTR</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 
@@ -519,7 +515,7 @@ you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> 
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/network/macvlan/';
+	var pageURL = jekyllEnv + '/ee/dtr/user/access-dtr/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
