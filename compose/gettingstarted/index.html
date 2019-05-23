@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-05-23 20:30:15 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,7 +74,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-23T20:30:15+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -84,7 +84,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="このページでは、簡単な Python ウェブアプリケーションを Docker Compose 上に作り上げます。 このアプリケーションは Flask フレームワークを利用し、Redis によりアクセスカウンターを管理します。 サンプルでは Python を用いていますが、ここで示す考え方は Python に不慣れな方でも理解できるようにしています。 前提条件 Docker Engine と Docker Compose をインストールしておいてください。 Python や Redis はインストールする必要はありません。 これはいずれも Docker イメージとして提供されます。 ステップ..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-23T20:30:15+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="documentation, docs, docker, compose, orchestration, containers">
@@ -216,7 +216,6 @@ $ cd composetest
 import redis
 from flask import Flask
 
-
 app = Flask(__name__)
 cache = redis.Redis(host='redis', port=6379)
 
@@ -237,9 +236,6 @@ def get_hit_count():
 def hello():
     count = get_hit_count()
     return 'Hello World! I have been seen {} times.\n'.format(count)
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
 </code></pre></div>    </div>
 
     <p>この例において <code class="highlighter-rouge">redis</code> とは、このアプリケーションネットワーク上の redis コンテナーのホスト名です。
@@ -270,21 +266,27 @@ redis
 
 <p>プロジェクト用のディレクトリ内で <code class="highlighter-rouge">Dockerfile</code> という名称のファイルを作成し、次の内容にします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM python:3.4-alpine
-ADD . /code
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM python:3.7-alpine
 WORKDIR /code
+ENV FLASK_APP app.py
+ENV FLASK_RUN_HOST 0.0.0.0
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
+COPY . .
+CMD ["flask", "run"]
 </code></pre></div></div>
 
 <p>これは Docker に対して以下の指示を行います。</p>
 
 <ul>
-  <li>Python 3.4 イメージを使って当イメージを構築する</li>
-  <li>カレントディレクトリ <code class="highlighter-rouge">.</code> をイメージ内のパス <code class="highlighter-rouge">/code</code> に加える</li>
+  <li>Python 3.7 イメージを使って当イメージを構築する</li>
   <li>作業用ディレクトリを <code class="highlighter-rouge">/code</code> に指定する</li>
-  <li>Python の依存パッケージをインストールする</li>
-  <li>コンテナーに対するデフォルトのコマンドを <code class="highlighter-rouge">python app.py</code> にする</li>
+  <li><code class="highlighter-rouge">flask</code>コマンドにより用いられる環境変数を設定する</li>
+  <li>gcc をインストールし、MarkupSafe や SQLAlchemy Python のような Python 依存パッケージこのコンパイルをスピードアップする</li>
+  <li><code class="highlighter-rouge">requirements.txt</code>をコピーして Python 依存パッケージをインストールする</li>
+  <li>このプロジェクトのカレントディレクトリ<code class="highlighter-rouge">.</code>を、イメージ内のワークディレクトリ<code class="highlighter-rouge">.</code>にコピーする</li>
+  <li>コンテナーに対するデフォルトのコマンドを <code class="highlighter-rouge">flask run</code> にする</li>
 </ul>
 
 <p>Dockerfile の書き方の詳細については、 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile&gt;">Docker ユーザーガイド</a>や <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md">Dockerfile リファレンス</a>をご覧ください。</p>
@@ -298,7 +300,7 @@ services:
   web:
     build: .
     ports:
-     - "5000:5000"
+      - "5000:5000"
   redis:
     image: "redis:alpine"
 </code></pre></div></div>
@@ -346,11 +348,11 @@ redis_1  | 1:M 17 Aug 22:11:10.483 * Ready to accept connections
 この例ではビルド時において、コードがイメージ内に静的にコピーされます。</p>
   </li>
   <li>
-    <p>ブラウザーで <code class="highlighter-rouge">http://0.0.0.0:5000/</code> を開き、アプリケーションの動作を確認します。</p>
+    <p>ブラウザーで <code class="highlighter-rouge">http://localhost:5000/</code> を開き、アプリケーションの動作を確認します。</p>
 
     <p>Docker を Linux、Docker Desktop for Mac、Docker Desktop for Windows で直接使っている場合、ウェブアプリは Docker デーモンのホスト上でポート 5000 を開いています。
-ブラウザーから <code class="highlighter-rouge">http://localhost:5000</code> にアクセスして、<code class="highlighter-rouge">Hello World</code> メッセージが表示されることを確認してください。
-接続できなければ <code class="highlighter-rouge">http://0.0.0.0:5000</code> も試してください。</p>
+ブラウザーから http://localhost:5000 にアクセスして、<code class="highlighter-rouge">Hello World</code> メッセージが表示されることを確認してください。
+接続できなければ <code class="highlighter-rouge">http://127.0.0.1:5000</code> も試してください。</p>
 
     <p>Docker Machine on Mac や Docker Machine on Windows を利用している場合は、<code class="highlighter-rouge">docker-machine ip 仮想マシン名</code> を実行して Docker ホスト上の IP アドレスを取得します。
 そしてブラウザーから <code class="highlighter-rouge">http://仮想マシンのIP:5000</code> を開きます。</p>
@@ -402,15 +404,20 @@ services:
   web:
     build: .
     ports:
-     - "5000:5000"
+      - "5000:5000"
     volumes:
-     - .:/code
+      - .:/code
+    environment:
+      FLASK_ENV: development
   redis:
     image: "redis:alpine"
 </code></pre></div></div>
 
 <p>新しい <code class="highlighter-rouge">volumes</code> というキーは、ホスト上のプロジェクトディレクトリ（カレントディレクトリ）を、コンテナー内にある <code class="highlighter-rouge">/code</code> ディレクトリにマウントします。
-こうすることで、イメージを再構築することなく、実行中のコードを修正できるようになります。</p>
+こうすることで、イメージを再構築することなく、実行中のコードを修正できるようになります。
+<code class="highlighter-rouge">environment</code>キーには環境変数<code class="highlighter-rouge">FLASK_ENV</code>を設定しています。
+これは開発モードで<code class="highlighter-rouge">flask run</code>を実行し、コード変更時にリロードするよう指示します。
+このモードは開発時にのみ用いるようにします。</p>
 
 <h2 id="step-6-re-build-and-run-the-app-with-compose">ステップ 6: Compose によるアプリの再構築と実行</h2>
 
