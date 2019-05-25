@@ -372,6 +372,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/canary/",
+"title":"Publish Canary application instances",
+"description":"Learn how to do canary deployments for your Docker swarm services",
+"keywords":"routing, proxy"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/ce-ee-node-activate/",
 "title":"CE-EE Node Activate",
 "description":"Engine",
@@ -820,6 +827,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/context/",
+"title":"Use context and path-based routing",
+"description":"Learn how to route traffic to your Docker swarm services based on a url path.",
+"keywords":"routing, proxy"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/examples/couchdb_data_volumes/",
 "title":"Dockerize a CouchDB service",
 "description":"Sharing data between 2 couchdb databases",
@@ -939,6 +953,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/delete-images/",
+"title":"Delete images",
+"description":"Learn how to delete images from Docker Trusted Registry.",
+"keywords":"registry, delete"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/deploy-application-package/",
 "title":"Deploy an application package",
 "description":"Learn how to deploy an application package in UCP",
@@ -1052,7 +1073,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/django/",
-"title":"Quickstart: Compose and Django",
+"title":"クィックスタート: Compose と Django",
 "description":"Getting started with Docker Compose and Django",
 "keywords":"documentation, docs,  docker, compose, orchestration, containers"
 }
@@ -1304,8 +1325,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/environment-variables/",
-"title":"Environment variables in Compose",
-"description":"How to set, use and manage environment variables in Compose",
+"title":"Compose における環境変数",
+"description":"Compose において環境変数を設定、利用、管理する方法について説明。",
 "keywords":"compose, orchestration, environment, env file"
 }
 ,
@@ -1703,8 +1724,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/develop/develop-images/image_management/",
-"title":"Manage images",
-"description":"Documentation for docker Registry and Registry API",
+"title":"イメージの管理",
+"description":"Docker Registry や Registry API についての説明。",
 "keywords":"docker, registry, api,  hub"
 }
 ,
@@ -1837,7 +1858,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/machine/",
 "title":"Docker Machine",
-"description":"Introduction and Overview of Machine",
+"description":"Docker Machine の導入と概要",
 "keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
 }
 ,
@@ -1884,6 +1905,20 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/external-auth/",
+"title":"Integrate with an LDAP directory",
+"description":"Learn how to integrate UCP with an LDAP service, so that you can manage users from a single place.",
+"keywords":"LDAP, UCP, authentication, user management"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/",
+"title":"Set up high availability",
+"description":"Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures.",
+"keywords":"ucp, high availability, replica"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/monitor-and-troubleshoot/",
 "title":"Monitor the cluster status",
 "description":"Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.",
@@ -1902,6 +1937,20 @@ var pages = [
 "title":"Configure layer 7 routing service",
 "description":"Learn how to configure the layer 7 routing solution for UCP.",
 "keywords":"routing, proxy, interlock, load balancing"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/",
+"title":"Deploy a layer 7 routing solution",
+"description":"Learn the deployment steps for the UCP layer 7 routing solution",
+"keywords":"routing, proxy, interlock"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/",
+"title":"Route traffic to a swarm service",
+"description":"Learn how to deploy your Docker swarm services and applications",
+"keywords":"routing, proxy"
 }
 ,
 {
@@ -1968,9 +2017,44 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/dtr/admin/manage-webhooks/",
+"title":"Manage webhooks",
+"description":"Learn how to create, configure, and test webhooks in Docker Trusted Registry.",
+"keywords":"registry, webhooks"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/",
+"title":"Configure your Docker Engine",
+"description":"Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.",
+"keywords":"registry, TLS, certificates"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/",
+"title":"Sign an image",
+"description":"Learn how to sign the images you push to Docker Trusted Registry.",
+"keywords":"registry, sign, trust"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/",
+"title":"Create a repository",
+"description":"Learn how to create new repositories in Docker Trusted Registry.",
+"keywords":"registry, repository"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/promotion-policies/",
+"title":"Promotion policies overview",
+"description":"Learn how to create a promotion policies that can automatically promote an image or mirror it to a different registry.",
+"keywords":"registry, promotion, mirror"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/",
-"title":"Docker Trusted Registry overview",
-"description":"Learn how to install, configure, and use Docker Trusted Registry.",
+"title":"Docker Trusted Registry 概要",
+"description":"Docker Trusted Registry のインストール、設定、利用について学びます。",
 "keywords":"registry, repository, images"
 }
 ,
@@ -2025,8 +2109,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-id/",
-"title":"Docker ID accounts",
-"description":"Sign up for a Docker ID and log in",
+"title":"Docker ID アカウント",
+"description":"Docker ID のサインアップとログイン。",
 "keywords":"accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access"
 }
 ,
@@ -2105,6 +2189,13 @@ var pages = [
 "title":"Overview",
 "description":"Overview of Docker networks and networking concepts",
 "keywords":"networking, bridge, routing, routing mesh, overlay, ports"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/hackathon/",
+"title":"Docker Docs Hackathon: Results for Austin, April 17-21, 2017",
+"description":null,
+"keywords":"hack, hackathon, dockercon, austin, 2017"
 }
 ,
 {
@@ -2249,8 +2340,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/machine/install-machine/",
-"title":"Install Docker Machine",
-"description":"How to install Docker Machine",
+"title":"Docker Machine のインストール",
+"description":"Docker Machine のインストール方法",
 "keywords":"machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall"
 }
 ,
@@ -2318,6 +2409,20 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/interlock-vip-mode/",
+"title":"Specify a routing mode",
+"description":"Learn about task and VIP backend routing modes for Layer 7 routing",
+"keywords":"routing, proxy, interlock"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/promotion-policies/internal-promotion/",
+"title":"Promote an image using policies",
+"description":"Learn how to create a promotion policies that can automatically promote an image to production if it passes all tests and doesn't have vulnerabilities.",
+"keywords":"registry, promotion, pipeline"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/registry/introduction/",
 "title":"About Registry",
 "description":"Explains what the Registry is, basic use cases and requirements",
@@ -2381,10 +2486,24 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/",
+"title":"Join Linux nodes to your cluster",
+"description":"Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.",
+"keywords":"Docker EE, UCP, cluster, scale, worker, manager"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/swarm/join-nodes/",
 "title":"Join nodes to a swarm",
 "description":"Add worker and manager nodes to a swarm",
 "keywords":"guide, swarm mode, node"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/",
+"title":"Join Windows worker nodes to your cluster",
+"description":"Join worker nodes that are running on Windows Server to a Docker Enterprise cluster.",
+"keywords":"Docker Enterprise, UCP, cluster, scale, worker, Windows"
 }
 ,
 {
@@ -2483,6 +2602,13 @@ var pages = [
 "title":"Docker object labels",
 "description":"Description of labels, which are used to manage metadata on Docker objects.",
 "keywords":"Usage, user guide, labels, metadata, docker, documentation, examples, annotating"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/labels-reference/",
+"title":"Use layer 7 routing labels",
+"description":"Learn about the labels you can use in your swarm services to route layer 7 traffic.",
+"keywords":"routing, proxy"
 }
 ,
 {
@@ -2627,7 +2753,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/network/macvlan/",
-"title":"Use Macvlan networks",
+"title":"Use macvlan networks",
 "description":"All about using macvlan to make your containers appear like physical machines on the network",
 "keywords":"network, macvlan, standalone"
 }
@@ -2997,6 +3123,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/offline-install/",
+"title":"Offline installation considerations",
+"description":"Learn how to to install Interlock on a Docker cluster without internet access.",
+"keywords":"routing, proxy, interlock"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-for-azure/opensource/",
 "title":"Open source components and licensing",
 "description":"Docker's use of Open Source",
@@ -3092,6 +3225,13 @@ var pages = [
 "title":"Use overlay networks",
 "description":"All about using overlay networks",
 "keywords":"network, overlay, user-defined, swarm, service"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/override-a-vulnerability/",
+"title":"Override a vulnerability",
+"description":"Learn how to dismiss a vulnerability reported by the security scanner, when you know it has been addressed",
+"keywords":"registry, security scanner"
 }
 ,
 {
@@ -3333,6 +3473,20 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/prevent-tags-from-being-overwritten/",
+"title":"Prevent tags from being overwritten",
+"description":"Learn how to make your tags immutable and prevent users from overwriting a tag if it already exists",
+"keywords":"registry, immutable"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/production/",
+"title":"Configure layer 7 routing for production",
+"description":"Learn how to configure the layer 7 routing solution for a production environment.",
+"keywords":"routing, proxy, interlock"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/production/",
 "title":"本番環境での Compose の利用",
 "description":"本番環境で Compose を利用するためのガイド。",
@@ -3403,10 +3557,24 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/pull-and-push-images/",
+"title":"Pull and push images",
+"description":"Learn how to pull and push images to Docker Trusted Registry.",
+"keywords":"registry, push, pull"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/authorization/pull-images/",
 "title":"Allow users to pull images",
 "description":"Learn how to grant permissions for users to pull images into a cluster managed with Docker Enterprise Edition.",
 "keywords":"ucp, grant, images"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/promotion-policies/pull-mirror/",
+"title":"Mirror images from another registry",
+"description":"Learn how to set up a repository to poll for changes in another registry and automatically pull new images from it.",
+"keywords":"registry, promotion, mirror"
 }
 ,
 {
@@ -3428,6 +3596,13 @@ var pages = [
 "title":"Use Puppet",
 "description":"Installing and using Puppet",
 "keywords":"puppet, installation, usage, docker, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/promotion-policies/push-mirror/",
+"title":"Mirror images to another registry",
+"description":"Learn how to create a promotion policy that promotes images to an external registry, creating a DTR mirror.",
+"keywords":"registry, promotion, mirror"
 }
 ,
 {
@@ -3477,6 +3652,13 @@ var pages = [
 "title":"docker/dtr reconfigure",
 "description":"Change DTR configurations",
 "keywords":"dtr, cli, reconfigure"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/redirects/",
+"title":"Implement application redirects",
+"description":"Learn how to implement redirects using swarm services and the layer 7 routing solution for UCP.",
+"keywords":"routing, proxy, redirects, interlock"
 }
 ,
 {
@@ -3655,6 +3837,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/review-repository-info/",
+"title":"Review Repository Info",
+"description":"View your repository permissions.",
+"keywords":"dtr, repository, permissions"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/",
 "title":"Docker EE の入手（Red Hat Enterprise Linux 向け）",
 "description":"RHEL 上に Docker EE をインストールする手順を説明。",
@@ -3795,6 +3984,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/",
+"title":"Scan images for vulnerabilities",
+"description":"Learn how to scan your Docker images for vulnerabilities.",
+"keywords":"registry, scan, vulnerability"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/machine/reference/scp/",
 "title":"docker-machine scp",
 "description":"Copy files among machines",
@@ -3862,6 +4058,13 @@ var pages = [
 "title":"Notary server configuration file",
 "description":"Configuring the notary client, server and signer.",
 "keywords":"docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/service-clusters/",
+"title":"Implement service clusters",
+"description":"Learn how to route traffic to different proxies using a service cluster.",
+"keywords":"ucp, interlock, load balancing, routing"
 }
 ,
 {
@@ -3953,6 +4156,13 @@ var pages = [
 "title":"Deploy services to a swarm",
 "description":"Deploy services to a swarm",
 "keywords":"guide, swarm mode, swarm, service"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/sessions/",
+"title":"Implement persistent (sticky) sessions",
+"description":"Learn how to configure your swarm services with persistent sessions using UCP.",
+"keywords":"routing, proxy, cookies, IP hash"
 }
 ,
 {
@@ -4369,10 +4579,24 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/promotion-policies/templates/",
+"title":"Promotion policies templates",
+"description":"Learn how to use templates when setting your promotion policies to rename your images",
+"keywords":"registry, promotion, mirror"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/thank-you-subscribing-docker-weekly/",
 "title":"Thank you for subscribing to Docker weekly",
 "description":"We've sent you a welcome email with links to previous newsletters.",
 "keywords":"Docker, documentation, manual, guide, reference, api"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/",
+"title":"Secure services with TLS",
+"description":"Learn how to configure your swarm services with TLS.",
+"keywords":"routing, proxy, tls"
 }
 ,
 {
@@ -4471,6 +4695,13 @@ var pages = [
 "title":"Troubleshoot volume errors",
 "description":"Troubleshooting volume errors",
 "keywords":"cadvisor, troubleshooting, volumes, bind-mounts"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/",
+"title":"Using Docker Content Trust with a Remote UCP Cluster",
+"description":"Learn how to use a single DTR's trust data with remote UCPs.",
+"keywords":"registry, sign, trust, notary"
 }
 ,
 {
@@ -4677,6 +4908,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/upgrade/",
+"title":"Layer 7 routing upgrade",
+"description":"Learn how to upgrade your existing layer 7 routing solution",
+"keywords":"routing, proxy, hrm"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/admin/upgrade/",
 "title":"Upgrade DTR",
 "description":"Learn how to upgrade your Docker Trusted Registry",
@@ -4716,6 +4954,20 @@ var pages = [
 "title":"docker-machine url",
 "description":"Get the URL of a host",
 "keywords":"machine, url, subcommand"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/user/access-dtr/use-a-cache/",
+"title":"Use a cache",
+"description":"Learn how to configure your Docker Trusted Registry account to pull images from a cache for faster download times.",
+"keywords":"registry, cache"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/use-a-load-balancer/",
+"title":"Use a load balancer",
+"description":"Learn how to set up a load balancer to access the UCP web UI using an hostname.",
+"keywords":"UCP, high-availability, load balancer"
 }
 ,
 {
@@ -4765,6 +5017,20 @@ var pages = [
 "title":"Manage secrets",
 "description":"Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker EE",
 "keywords":"UCP, secret, password, certificate, private key"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/admin/manage-webhooks/use-the-api/",
+"title":"Manage webhooks via the API",
+"description":"Learn how to create, configure, and test webhooks for DTR using the API.",
+"keywords":"dtr, webhooks, api, registry"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/dtr/admin/manage-webhooks/use-the-web-ui/",
+"title":"Manage repository webhooks via the web interface",
+"description":"Learn how to create, configure, and test repository webhooks for DTR using the web interface.",
+"keywords":"dtr, webhooks, ui, web interface, registry"
 }
 ,
 {
@@ -4898,6 +5164,13 @@ var pages = [
 "title":"Docker Hub Webhooks",
 "description":"Docker Hub Webhooks",
 "keywords":"Docker, webhookds, hub, builds"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/websockets/",
+"title":"Use websockets",
+"description":"Learn how to use websockets in your swarm services.",
+"keywords":"routing, proxy, websockets"
 }
 ,
 {

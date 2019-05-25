@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-05-25 20:03:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,7 +86,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-25T20:03:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -96,7 +96,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="SAML is commonly supported by enterprise authentication systems. SAML-based single sign-on (SSO) gives you access to UCP through a SAML 2.0-compliant identity provider. SAML-based single sign-on (SSO) gives you access..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-25T20:03:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="SAML, ucp, authentication, SSO, Okta, ADFS">
@@ -191,7 +191,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
 
@@ -235,22 +235,70 @@ Name: <code class="highlighter-rouge">is-admin</code>, Filter: (user defined) fo
 
 <h3 id="adfs-integration-values">ADFS integration values</h3>
 
-<p>ADFS integration requires these values:</p>
+<p>ADFS integration requires the following steps:</p>
 
-<ul>
-  <li>Service provider metadata URI. This value is the URL for UCP, qualified with <code class="highlighter-rouge">/enzi/v0/saml/metadata</code>. For example, <code class="highlighter-rouge">https://111.111.111.111/enzi/v0/saml/metadata</code>.</li>
-  <li>Attribute Store: Active Directory.
+<ol>
+  <li>
+    <p>Add a relying party trust. For example: https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/create-a-relying-party-trust)</p>
+  </li>
+  <li>
+    <p>Obtain the service provider metadata URI. This value is the URL for UCP, qualified with <code class="highlighter-rouge">/enzi/v0/saml/metadata</code>. For example, <code class="highlighter-rouge">https://111.111.111.111/enzi/v0/saml/metadata</code>.</p>
+  </li>
+  <li>
+    <p>Add claim rules:</p>
+
     <ul>
-      <li>Add LDAP Attribute = Email Address; Outgoing Claim Type: Email Address</li>
-      <li>Add LDAP Attribute = Display-Name; Outgoing Claim Type: Common Name</li>
+      <li>Convert values from AD to SAML
+        <ul>
+          <li>Display-name : Common Name</li>
+          <li>E-Mail-Addresses : E-Mail Address</li>
+          <li>SAM-Account-Name : Name ID</li>
+        </ul>
+      </li>
+      <li>Create full name for UCP (custom rule):
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
+  =&gt; issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value,
+  ValueType = c.ValueType);
+</code></pre></div>        </div>
+      </li>
+      <li>Transform account name to Name ID:
+        <ul>
+          <li>Incoming type: Name ID</li>
+          <li>Incoming format: Unspecified</li>
+          <li>Outgoing claim type: Name ID</li>
+          <li>Outgoing format: Transient ID</li>
+        </ul>
+      </li>
+      <li>Pass admin value to allow admin access based on AD group (send group membership as claim):
+        <ul>
+          <li>Users group : Your admin group</li>
+          <li>Outgoing claim type: is-admin</li>
+          <li>Outgoing claim value: 1</li>
+        </ul>
+      </li>
+      <li>Configure group membership (for more complex organizations with multiple groups to manage access)
+        <ul>
+          <li>Send LDAP attributes as claims</li>
+          <li>Attribute store: Active Directory
+            <ul>
+              <li>Add two rows with the following information:
+                <ul>
+                  <li>LDAP attribute = email address; outgoing claim type: email address</li>
+                  <li>LDAP attribute = Display-Name; outgoing claim type: common name</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Mapping:
+            <ul>
+              <li>Token-Groups - Unqualified Names : member-of</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
     </ul>
   </li>
-  <li>Claim using Custom Rule. For example, <code class="highlighter-rouge">c:[Type == "http://schemas.xmlsoap.org/claims/CommonName"]
- =&gt; issue(Type = "fullname", Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType);</code></li>
-  <li>Outgoing claim type: Name ID</li>
-  <li>Outgoing name ID format: Transient Identifier</li>
-  <li>Pass through all claim values</li>
-</ul>
+</ol>
 
 <h2 id="configure-the-saml-integration">Configure the SAML integration</h2>
 
