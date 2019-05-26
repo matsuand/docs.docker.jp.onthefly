@@ -883,13 +883,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/ee/dtr/user/create-and-manage-webhooks/",
-"title":"Manage webhooks",
-"description":"Learn how to create, configure, and test webhooks in Docker Trusted Registry.",
-"keywords":"registry, webhooks"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/create-service-account/",
 "title":"Create a service account for a Kubernetes app",
 "description":"Learn how to use a service account to give a Kubernetes workload access to cluster resources.",
@@ -1074,7 +1067,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/django/",
 "title":"クィックスタート: Compose と Django",
-"description":"Getting started with Docker Compose and Django",
+"description":"Docker Compose と Django をはじめる。",
 "keywords":"documentation, docs,  docker, compose, orchestration, containers"
 }
 ,
@@ -1199,7 +1192,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/containers/logging/dual-logging/",
-"title":"Using docker logs to read container logs for remote logging drivers",
+"title":"Use docker logs to read container logs for remote logging drivers",
 "description":"Learn how to read container logs locally when using a third party logging solution.",
 "keywords":"docker, logging, driver"
 }
@@ -3642,8 +3635,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/rails/",
-"title":"Quickstart: Compose and Rails",
-"description":"Getting started with Docker Compose and Rails",
+"title":"クィックスタート: Compose と Rails",
+"description":"Docker Compose と Rails をはじめる。",
 "keywords":"documentation, docs, docker, compose, orchestration, containers"
 }
 ,
