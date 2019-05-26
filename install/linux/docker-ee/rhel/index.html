@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-13 12:54:25 +0900 -->
+<!-- Page generated 2019-05-26 17:41:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -82,17 +82,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-13T12:54:25+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-26T17:41:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Get Docker EE for Red Hat Enterprise Linux"/>
+	<meta name="twitter:title" itemprop="title name" content="Docker EE の入手（Red Hat Enterprise Linux 向け）"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Enterprise エディション (Docker EE) を Red Hat Enterprise Linux にインストールしアップグレードする方法には二種類あります。 YUM リポジトリ利用: Docker リポジトリを設定して、そこから Docker EE をインストールします。YUM を使ってインストールしアップグレードも行うため、簡単に操作できます。 この方法を推奨します。 RPM パッケージ利用: RPM パッケージをダウンロードして、手動でインストールやアップグレードの管理を行います。この方法は、インターネットへのアクセスができない環境において Docker EE をインストールすることができます。 Docker Community エディション..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-13T12:54:25+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-26T17:41:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="requirements, installation, rhel, rpm, install, uninstall, upgrade, update">
@@ -104,16 +104,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Get Docker EE for Red Hat Enterprise Linux | Docker Documentation</title>
-<meta property="og:title" content="Get Docker EE for Red Hat Enterprise Linux" />
+	<title>Docker EE の入手（Red Hat Enterprise Linux 向け） | Docker Documentation</title>
+<meta property="og:title" content="Docker EE の入手（Red Hat Enterprise Linux 向け）" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Instructions for installing Docker EE on RHEL" />
-<meta property="og:description" content="Instructions for installing Docker EE on RHEL" />
+<meta name="description" content="RHEL 上に Docker EE をインストールする手順を説明。" />
+<meta property="og:description" content="RHEL 上に Docker EE をインストールする手順を説明。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Get Docker EE for Red Hat Enterprise Linux","description":"Instructions for installing Docker EE on RHEL","url":"https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker EE の入手（Red Hat Enterprise Linux 向け）","description":"RHEL 上に Docker EE をインストールする手順を説明。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -183,11 +183,11 @@
 						<section class="section">
 							
 								
-							<h1>Get Docker EE for Red Hat Enterprise Linux</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker EE の入手（Red Hat Enterprise Linux 向け）</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    10 分
+    7 分
   
 </span>
 
@@ -208,95 +208,104 @@
 
 <p>Docker Community エディション (Docker CE) は Red Hat Enterprise Linux に対してサポート_されていません_。</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">前提条件</h2>
 
-<p>This section lists what you need to consider before installing Docker EE. Items that require action are explained below.</p>
+<p>ここでは Docker EE をインストールする前に考慮しておくべきことを説明します。
+作業を必要とする項目を以下に示します。</p>
 
 <ul>
-  <li>Use RHEL 64-bit 7.4 and higher on <code class="highlighter-rouge">x86_64</code>, or <code class="highlighter-rouge">s390x</code>.</li>
-  <li>Use storage driver <code class="highlighter-rouge">overlay2</code> or <code class="highlighter-rouge">devicemapper</code> (<code class="highlighter-rouge">direct-lvm</code> mode in production).</li>
-  <li>Find the URL for your Docker EE repo at <a href="https://hub.docker.com/my-content" target="_blank" class="_">Docker Hub</a>.</li>
-  <li>Uninstall old versions of Docker.</li>
-  <li>Remove old Docker repos from <code class="highlighter-rouge">/etc/yum.repos.d/</code>.</li>
-  <li>Disable SELinux on <code class="highlighter-rouge">s390x</code> (IBM Z) systems before install/upgrade.</li>
+  <li>RHEL 64 ビット 7.4 またはそれ以上、<code class="highlighter-rouge">x86_64</code>または<code class="highlighter-rouge">s390x</code>を利用。</li>
+  <li>ストレージドライバーとして <code class="highlighter-rouge">overlay2</code> または <code class="highlighter-rouge">devicemapper</code>（本番環境では <code class="highlighter-rouge">direct-lvm</code> モード）を利用。</li>
+  <li><a href="https://hub.docker.com/my-content" target="_blank" class="_">Docker Hub</a> から Docker EE リポジトリを検索。</li>
+  <li>Docker の旧バージョンはアンインストール。</li>
+  <li><code class="highlighter-rouge">/etc/yum.repos.d/</code> から古い Docker リポジトリは削除。</li>
+  <li><code class="highlighter-rouge">s390x</code> (IBM Z) システムではインストール、アップグレード前に SELinux を無効化。</li>
 </ul>
 
-<h3 id="architectures-and-storage-drivers">Architectures and storage drivers</h3>
+<h3 id="architectures-and-storage-drivers">アーキテクチャーとストレージドライバー</h3>
 
-<p>Docker EE supports Red Hat Enterprise Linux 64-bit, versions 7.4 and higher running on one of the following architectures: <code class="highlighter-rouge">x86_64</code>, or <code class="highlighter-rouge">s390x</code> (IBM Z). See <a href="https://success.docker.com/article/compatibility-matrix" target="_blank" class="_">Compatability Matrix</a>) for specific details.</p>
+<p>Docker EE では Red Hat Enterprise Linux 64 ビット、バージョン 7.4 またはそれ以上、<code class="highlighter-rouge">x86_64</code>または<code class="highlighter-rouge">s390x</code> (IBM Z) のアーキテクチャーをサポートします。詳細については<a href="https://success.docker.com/article/compatibility-matrix" target="_blank" class="_">互換性マトリックス</a>（Compatability Matrix）を参照してください。</p>
 
 <blockquote>
-  <p>Little-endian format only</p>
+  <p>リトルエンディアン方式のみ</p>
 
-  <p>On IBM Power systems, Docker EE only supports little-endian format, <code class="highlighter-rouge">ppc64le</code>, even though RHEL 7 ships both big and little-endian versions.</p>
+  <p>RHEL 7 にはビッグエンディアン、リトルエンディアンの両バージョンがありますが、IBM Power システムにおいて Docker EE はリトルエンディアン方式、つまり<code class="highlighter-rouge">ppc64le</code>のみをサポートします。</p>
 </blockquote>
 
-<p>On Red Hat Enterprise Linux, Docker EE supports storage drivers, <code class="highlighter-rouge">overlay2</code> and <code class="highlighter-rouge">devicemapper</code>. In Docker EE 17.06.2-ee-5 and higher, <code class="highlighter-rouge">overlay2</code> is the recommended storage driver. The following limitations apply:</p>
+<p>Red Hat Enterprise Linux において Docker EE はストレージドライバー <code class="highlighter-rouge">overlay2</code> と <code class="highlighter-rouge">devicemapper</code> をサポートします。
+Docker EE 17.06.2-ee-5 およびこれ以上においては、<code class="highlighter-rouge">overlay2</code> の利用が推奨されています。
+利用にあたっては以下の制約があります。</p>
 
 <ul>
   <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver" target="_blank" class="_">OverlayFS</a>: If <code class="highlighter-rouge">selinux</code> is enabled, the <code class="highlighter-rouge">overlay2</code> storage driver is supported on RHEL 7.4 or higher. If <code class="highlighter-rouge">selinux</code> is disabled, <code class="highlighter-rouge">overlay2</code> is supported on RHEL 7.2 or higher with kernel version 3.10.0-693 and higher.</p>
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver" target="_blank" class="_">OverlayFS</a>: <code class="highlighter-rouge">selinux</code> が有効な場合、ストレージドライバー <code class="highlighter-rouge">overlay2</code> は RHEL 7.4 またはそれ以上においてサポートされます。
+<code class="highlighter-rouge">selinux</code> が無効な場合、<code class="highlighter-rouge">overlay2</code> は RHEL 7.2 またはそれ以上、ただしカーネルバージョンは 3.10.0-693 またはそれ以上においてサポートされます。</p>
   </li>
   <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">Device Mapper</a>: On production systems using <code class="highlighter-rouge">devicemapper</code>, you must use <code class="highlighter-rouge">direct-lvm</code> mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">storage guide</a>.</p>
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">Device Mapper</a>: 本番環境において <code class="highlighter-rouge">devicemapper</code> を利用する場合は、<code class="highlighter-rouge">direct-lvm</code> モードを利用するようにしてください。
+これは専用のブロックデバイスをいくつか必要とします。
+SSD（solid-state media）のような高速なストレージが推奨されます。
+各<a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">ストレージドライバー</a>に応じた設定が適切にできていることを確認してから、Docker を起動してください。</p>
   </li>
 </ul>
 
-<h3 id="fips-140-2-cryptographic-module-support">FIPS 140-2 cryptographic module support</h3>
+<h3 id="fips-140-2-cryptographic-module-support">FIPS 140-2 暗号化モジュールのサポート</h3>
 
-<p><a href="https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf">Federal Information Processing Standards (FIPS) Publication 140-2</a> is a United States Federal security requirement for cryptographic modules.</p>
+<p><a href="https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf">連邦情報処理標準（Federal Information Processing Standards; FIPS）文書 140-2</a> は、米国連邦政府が定める暗号化モジュールのセキュリティ要件です。</p>
 
-<p>With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS 140-2 support in RHEL 7.3, 7.4 and 7.5. This includes a FIPS supported cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.</p>
+<p>Docker では、Docker EE 基本ライセンスバージョン 18.03 またはそれ以上にて、RHEL 7.3、7.4、7.5 に対する FIPS 140-2 サポートを提供しています。
+ここには FIPS がサポートする暗号化モジュールも含まれます。
+RHEL におけるモジュールがすでに FIPS サポートを可能としていれば、FIPS は Docker エンジンにおいて自動的に有効となっています。</p>
 
-<p>To verify the FIPS-140-2 module is enabled in the Linux kernel, confirm the file <code class="highlighter-rouge">/proc/sys/crypto/fips_enabled</code> contains <code class="highlighter-rouge">1</code>.</p>
+<p>Linux カーネルにおいて FIPS-140-2 モジュールが有効かどうかは、<code class="highlighter-rouge">/proc/sys/crypto/fips_enabled</code> ファイルに <code class="highlighter-rouge">1</code> が設定されているかどうかでわかります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat /proc/sys/crypto/fips_enabled
 1
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: FIPS is only supported in the Docker Engine EE. UCP and DTR currently do not have support for FIPS-140-2.</p>
+  <p><strong>メモ</strong>: FIPS は Docker Engine EE でのみサポートされます。
+UCP と DTR は今のところ FIPS-140-2 をサポートしていません。</p>
 </blockquote>
 
-<p>To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following:</p>
+<p>FIPS 140-2 モードになっていないシステムにおいて FIPS 140-2 コンプライアンスを有効にするには、以下の手順に従います。</p>
 
-<p>Create a file called <code class="highlighter-rouge">/etc/systemd/system/docker.service.d/fips-module.conf</code>. It needs to contain the following:</p>
+<p><code class="highlighter-rouge">/etc/systemd/system/docker.service.d/fips-module.conf</code> というファイルを生成します。
+そこに以下の内容を記述します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Service]
 Environment="DOCKER_FIPS=1"
 </code></pre></div></div>
 
-<p>Reload the Docker configuration to systemd.</p>
+<p>Docker の設定を systemd に再読み込みさせます。</p>
 
 <p><code class="highlighter-rouge">$ sudo systemctl daemon-reload</code></p>
 
-<p>Restart the Docker service as root.</p>
+<p>root ユーザーにより Docker サービスを再起動します。</p>
 
 <p><code class="highlighter-rouge">$ sudo systemctl restart docker</code></p>
 
-<p>To confirm Docker is running with FIPS-140-2 enabled, run the <code class="highlighter-rouge">docker info</code> command:</p>
+<p>FIPS-140-2 を有効にした Docker が稼動しているかを確認するため <code class="highlighter-rouge">docker info</code> コマンドを実行します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker info --format {{.SecurityOptions}}
 [name=selinux name=fips]
 </code></pre></div></div>
 
-<h3 id="disabling-fips-140-2">Disabling FIPS-140-2</h3>
+<h3 id="disabling-fips-140-2">FIPS-140-2 の無効化</h3>
 
-<p>If the system has the FIPS 140-2 cryptographic module installed on the operating system,
-it is possible to disable FIPS-140-2 compliance.</p>
+<p>オペレーティングシステム内に FIPS 140-2 暗号化モジュールがインストールされている場合に、FIPS-140-2 コンプライアンスを無効にすることもできます。</p>
 
-<p>To disable FIPS 140-2 in Docker but not the operating system, set the value <code class="highlighter-rouge">DOCKER_FIPS=0</code>
-in the <code class="highlighter-rouge">/etc/systemd/system/docker.service.d/fips-module.conf</code>.</p>
+<p>FIPS 140-2 を Docker 上では無効とし、オペレーティングシステム上は有効のままとする場合は、<code class="highlighter-rouge">/etc/systemd/system/docker.service.d/fips-module.conf</code> 内において <code class="highlighter-rouge">DOCKER_FIPS=0</code> と設定します。</p>
 
-<p>Reload the Docker configuration to systemd.</p>
+<p>Docker の設定を systemd に再読み込みさせます。</p>
 
 <p><code class="highlighter-rouge">$ sudo systemctl daemon-reload</code></p>
 
-<p>Restart the Docker service as root.</p>
+<p>root ユーザーにより Docker サービスを再起動します。</p>
 
 <p><code class="highlighter-rouge">$ sudo systemctl restart docker</code></p>
 
-<h3 id="find-your-docker-ee-repo-url">Find your Docker EE repo URL</h3>
+<h3 id="find-your-docker-ee-repo-url">Docker EE のリポジトリ URL</h3>
 
 <p>Docker EE をインストールするには、Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL を必要とします。</p>
 
@@ -309,9 +318,12 @@ in the <code class="highlighter-rouge">/etc/systemd/system/docker.service.d/fips
 
 <p>上の URL は後の作業において <code class="highlighter-rouge">DOCKERURL</code> という変数を生成する際に利用します。</p>
 
-<h3 id="uninstall-old-docker-versions">Uninstall old Docker versions</h3>
+<h3 id="uninstall-old-docker-versions">Docker の旧バージョンのアンインストール</h3>
 
-<p>The Docker EE package is called <code class="highlighter-rouge">docker-ee</code>. Older versions were called <code class="highlighter-rouge">docker</code> or <code class="highlighter-rouge">docker-engine</code>. Uninstall all older versions and associated dependencies. The contents of <code class="highlighter-rouge">/var/lib/docker/</code> are preserved, including images, containers, volumes, and networks.</p>
+<p>Docker EE パッケージは <code class="highlighter-rouge">docker-ee</code> という名称です。
+古いバージョンでは <code class="highlighter-rouge">docker</code> あるいは <code class="highlighter-rouge">docker-engine</code> というものでした。
+古いバージョンと関連する依存パッケージはすべてアンインストールします。
+<code class="highlighter-rouge">/var/lib/docker/</code> にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum remove docker <span class="se">\</span>
                   docker-client <span class="se">\</span>
@@ -325,18 +337,20 @@ in the <code class="highlighter-rouge">/etc/systemd/system/docker.service.d/fips
                   docker-engine
 </code></pre></div></div>
 
-<h2 id="repo-install-and-upgrade">Repo install and upgrade</h2>
+<h2 id="repo-install-and-upgrade">リポジトリからのインストールとアップグレード</h2>
 
 <p>リポジトリを使って Docker EE を（あるいはどんなソフトウェアでも）インストールする利点は、ある程度、自動的に操作を進めることができるところです。
 Red Hat Enterprise Linux のような RPM ベースのディストリビューションでは、YUM というツールを使ってリポジトリを操作し、依存パッケージの管理や自動アップデート機能を提供しています。</p>
 
 <blockquote class="warning">
-  <p>Disable SELinux before installing Docker EE on IBM Z systems</p>
+  <p>Docker EE を IBM Z システムへのインストール時は SELinux を無効に</p>
 
-  <p>There is currently no support for <code class="highlighter-rouge">selinux</code> on IBM Z systems. If you attempt to install or upgrade Docker EE on an IBM Z system with <code class="highlighter-rouge">selinux</code> enabled, an error is thrown that the <code class="highlighter-rouge">container-selinux</code> package is not found. Disable <code class="highlighter-rouge">selinux</code> before installing or upgrading Docker on IBM Z.</p>
+  <p>現在のところ IBM Z システムにおいては <code class="highlighter-rouge">selinux</code> をサポートしていません。
+Docker EE を IBM Z システム上にてインストールまたはアップグレードする際に <code class="highlighter-rouge">selinux</code> を有効にしていると、<code class="highlighter-rouge">container-selinux</code> パッケージが見つからないというエラーが発生します。
+IBM Z システム上にてインストールまたはアップグレードする際には <code class="highlighter-rouge">selinux</code> を無効にしてください。</p>
 </blockquote>
 
-<h3 id="set-up-the-repository">Set up the repository</h3>
+<h3 id="set-up-the-repository">リポジトリのセットアップ</h3>
 
 <p>リポジトリをセットアップする必要があるのは一回だけです。
 その後は Docker EE のインストールを、必要であれば何度でも行うことができます。</p>
@@ -362,7 +376,8 @@ Red Hat Enterprise Linux のような RPM ベースのディストリビュー�
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo</span> <span class="nt">-E</span> sh <span class="nt">-c</span> <span class="s1">'echo "$DOCKERURL/rhel" &gt; /etc/yum/vars/dockerurl'</span>
 </code></pre></div>    </div>
 
-    <p>Also, store your OS version string in <code class="highlighter-rouge">/etc/yum/vars/dockerosversion</code>. Most users should use <code class="highlighter-rouge">7</code>, but you can also use the more specific minor version, starting from <code class="highlighter-rouge">7.2</code>.</p>
+    <p>同様に OS バージョン文字列を <code class="highlighter-rouge">/etc/yum/vars/dockerosversion</code> に保存します。
+たいていのユーザーにとっては <code class="highlighter-rouge">7</code> で十分ですが、<code class="highlighter-rouge">7.2</code> で始まるマイナーバージョンまで指定することもできます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo "7" &gt; /etc/yum/vars/dockerosversion'</span>
 </code></pre></div>    </div>
@@ -378,16 +393,18 @@ Red Hat Enterprise Linux のような RPM ベースのディストリビュー�
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Enable the <code class="highlighter-rouge">extras</code> RHEL repository. This ensures access to the <code class="highlighter-rouge">container-selinux</code> package required by <code class="highlighter-rouge">docker-ee</code>.</p>
+    <p>RHEL の <code class="highlighter-rouge">extras</code> リポジトリを有効にします。
+これにより <code class="highlighter-rouge">docker-ee</code> が必要としている <code class="highlighter-rouge">container-selinux</code> パッケージを入手できるようにします。</p>
 
-    <p>The repository can differ per your architecture and cloud provider, so review the options in this step before running:</p>
+    <p>リポジトリは利用するアーキテクチャーやクラウドプロバイダーにより異なります。
+したがってここに示す内容を確認してから設定を実行してください。</p>
 
-    <p><strong>For all architectures <em>except</em> IBM Power:</strong></p>
+    <p><strong>IBM Power を除くアーキテクチャーすべての場合:</strong></p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> rhel-7-server-extras-rpms
 </code></pre></div>    </div>
 
-    <p><strong>For IBM Power only (little endian):</strong></p>
+    <p><strong>IBM Power の場合（リトルエンディアン）:</strong></p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> extras
 <span class="nv">$ </span><span class="nb">sudo </span>subscription-manager repos <span class="nt">--enable</span><span class="o">=</span>rhel-7-for-power-le-extras-rpms
@@ -395,14 +412,14 @@ Red Hat Enterprise Linux のような RPM ベースのディストリビュー�
 <span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nt">-y</span> install container-selinux
 </code></pre></div>    </div>
 
-    <p>Depending on cloud provider, you may also need to enable another repository:</p>
+    <p>クラウドプロバイダーによっては、別のリポジトリを有効にする必要があるかもしれません。</p>
 
-    <p><strong>For AWS</strong> (where <code class="highlighter-rouge">REGION</code> is a literal, and does <em>not</em> represent the region your machine is running in):</p>
+    <p><strong>AWS の場合</strong> （以下において <code class="highlighter-rouge">REGION</code> は固定の文字列です。マシンを利用する地域を示すわけではありません。）</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> rhui-REGION-rhel-server-extras
 </code></pre></div>    </div>
 
-    <p><strong>For Azure:</strong></p>
+    <p><strong>Azure の場合</strong></p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> rhui-rhel-7-server-rhui-extras-rpms
 </code></pre></div>    </div>
@@ -417,7 +434,7 @@ Red Hat Enterprise Linux のような RPM ベースのディストリビュー�
   </li>
 </ol>
 
-<h3 id="install-from-the-repository">Install from the repository</h3>
+<h3 id="install-from-the-repository">リポジトリからのインストール</h3>
 
 <blockquote>
   <p><strong>メモ</strong>: Docker EE 2.0 を利用する必要がある場合は、以下の手順を参照してください。</p>
@@ -492,7 +509,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h3 id="upgrade-from-the-repository">Upgrade from the repository</h3>
+<h3 id="upgrade-from-the-repository">リポジトリからのアップグレード</h3>
 
 <ol>
   <li>
@@ -503,27 +520,31 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h2 id="package-install-and-upgrade">Package install and upgrade</h2>
+<h2 id="package-install-and-upgrade">パッケージのインストールとアップグレード</h2>
 
 <p>Docker EE を手動でインストールするには、ディストリビューションに応じた <code class="highlighter-rouge">.rpm</code> ファイルをダウンロードします。
 Docker EE をアップグレードする際には、常に新しいファイルをダウンロードすることが必要です。</p>
 
 <blockquote class="warning">
-  <p>Disable SELinux before installing Docker EE on IBM Z systems</p>
+  <p>Docker EE を IBM Z システムへのインストール時は SELinux を無効に</p>
 
-  <p>There is currently no support for <code class="highlighter-rouge">selinux</code> on IBM Z systems. If you attempt to install or upgrade Docker EE on an IBM Z system with <code class="highlighter-rouge">selinux</code> enabled, an error is thrown that the <code class="highlighter-rouge">container-selinux</code> package is not found. Disable <code class="highlighter-rouge">selinux</code> before installing or upgrading Docker on IBM Z.</p>
+  <p>現在のところ IBM Z システムにおいては <code class="highlighter-rouge">selinux</code> をサポートしていません。
+Docker EE を IBM Z システム上にてインストールまたはアップグレードする際に <code class="highlighter-rouge">selinux</code> を有効にしていると、<code class="highlighter-rouge">container-selinux</code> パッケージが見つからないというエラーが発生します。
+IBM Z システム上にてインストールまたはアップグレードする際には <code class="highlighter-rouge">selinux</code> を無効にしてください。</p>
 </blockquote>
 
-<h3 id="install-with-a-package">Install with a package</h3>
+<h3 id="install-with-a-package">パッケージのインストール</h3>
 
 <ol>
   <li>
-    <p>Enable the <code class="highlighter-rouge">extras</code> RHEL repository. This ensures access to the <code class="highlighter-rouge">container-selinux</code> package which is required by <code class="highlighter-rouge">docker-ee</code>:</p>
+    <p>RHEL の <code class="highlighter-rouge">extras</code> リポジトリを有効にします。
+これにより <code class="highlighter-rouge">docker-ee</code> が必要としている <code class="highlighter-rouge">container-selinux</code> パッケージを入手できるようにします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum-config-manager <span class="nt">--enable</span> rhel-7-server-extras-rpms
 </code></pre></div>    </div>
 
-    <p>Alternately, obtain that package manually from Red Hat. There is no way to publicly browse this repository.</p>
+    <p>別の方法として Red Hat から直接パッケージを入手することもできます。
+そのリポジトリは公開されていないので、ブラウザーではアクセスできません。</p>
   </li>
   <li>
     <p>ブラウザーから Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL にアクセスします。
@@ -531,8 +552,7 @@ Docker EE をアップグレードする際には、常に新しいファイル�
 <code class="highlighter-rouge">Package</code> ディレクトリから <code class="highlighter-rouge">.rpm</code> ファイルをダウンロードします。</p>
 
     <blockquote>
-      <p>If you have trouble with <code class="highlighter-rouge">selinux</code> using the packages under the <code class="highlighter-rouge">7</code> directory,
-try choosing the version-specific directory instead, such as <code class="highlighter-rouge">7.3</code>.</p>
+      <p><code class="highlighter-rouge">7</code> ディレクトリ内にあるパッケージを利用する際に <code class="highlighter-rouge">selinux</code> に関連した問題が発生した場合は、別バージョンのディレクトリ、たとえば <code class="highlighter-rouge">7.3</code> などを選んで試してみてください。</p>
     </blockquote>
   </li>
   <li>
@@ -569,7 +589,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h3 id="upgrade-with-a-package">Upgrade with a package</h3>
+<h3 id="upgrade-with-a-package">パッケージのアップグレード</h3>
 
 <ol>
   <li>
@@ -582,7 +602,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
   </li>
 </ol>
 
-<h2 id="uninstall-docker-ee">Uninstall Docker EE</h2>
+<h2 id="uninstall-docker-ee">Docker EE のアンインストール</h2>
 
 <ol>
   <li>
@@ -609,7 +629,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
 
 <p>編集した設定ファイルはすべて手動で削除する必要があります。</p>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
 <ul>
   <li>
@@ -655,7 +675,7 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "install/linux/docker-ee/rhel.md",
-										"title": "Get Docker EE for Red Hat Enterprise Linux",
+										"title": "Docker EE の入手（Red Hat Enterprise Linux 向け）",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/install/linux/docker-ee/rhel.md"
 									};
 									(function(d, c, j) {
@@ -715,30 +735,30 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#prerequisites" class="nomunge">Prerequisites</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#prerequisites" class="nomunge">前提条件</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#architectures-and-storage-drivers" class="nomunge">Architectures and storage drivers</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#fips-140-2-cryptographic-module-support" class="nomunge">FIPS 140-2 cryptographic module support</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#disabling-fips-140-2" class="nomunge">Disabling FIPS-140-2</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#find-your-docker-ee-repo-url" class="nomunge">Find your Docker EE repo URL</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#uninstall-old-docker-versions" class="nomunge">Uninstall old Docker versions</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#architectures-and-storage-drivers" class="nomunge">アーキテクチャーとストレージドライバー</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#fips-140-2-cryptographic-module-support" class="nomunge">FIPS 140-2 暗号化モジュールのサポート</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#disabling-fips-140-2" class="nomunge">FIPS-140-2 の無効化</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#find-your-docker-ee-repo-url" class="nomunge">Docker EE のリポジトリ URL</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#uninstall-old-docker-versions" class="nomunge">Docker の旧バージョンのアンインストール</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#repo-install-and-upgrade" class="nomunge">Repo install and upgrade</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#repo-install-and-upgrade" class="nomunge">リポジトリからのインストールとアップグレード</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#set-up-the-repository" class="nomunge">Set up the repository</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#install-from-the-repository" class="nomunge">Install from the repository</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#upgrade-from-the-repository" class="nomunge">Upgrade from the repository</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#set-up-the-repository" class="nomunge">リポジトリのセットアップ</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#install-from-the-repository" class="nomunge">リポジトリからのインストール</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#upgrade-from-the-repository" class="nomunge">リポジトリからのアップグレード</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#package-install-and-upgrade" class="nomunge">Package install and upgrade</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#package-install-and-upgrade" class="nomunge">パッケージのインストールとアップグレード</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#install-with-a-package" class="nomunge">Install with a package</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#upgrade-with-a-package" class="nomunge">Upgrade with a package</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#install-with-a-package" class="nomunge">パッケージのインストール</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#upgrade-with-a-package" class="nomunge">パッケージのアップグレード</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#uninstall-docker-ee" class="nomunge">Uninstall Docker EE</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#uninstall-docker-ee" class="nomunge">Docker EE のアンインストール</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/#next-steps" class="nomunge">次のステップ</a></li>
 </ul>
 
 
