@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-05-29 12:23:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -82,20 +82,20 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-29T12:23:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Install a CNI plugin"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="For Docker Universal Control Plane, Project Calico provides the secure networking functionality for the container communication with Kubernetes. Docker EE supports Calico and installs the built-in Calico plugin, but you..." />
+	<meta name="twitter:title" itemprop="title name" content="Install an unmanaged CNI plugin"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="For Docker Universal Control Plane (UCP), Calico provides the secure networking functionality for container-to-container communication within Kubernetes. UCP handles the lifecycle of Calico and packages it with UCP installation and..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-05-29T12:23:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="ucp, cli, administration, kubectl, Kubernetes, cni, Container Networking Interface, flannel, weave, ipip, calico">
+	<meta name="keywords" content="ucp, kubernetes, cni, container networking interface, flannel, weave, calico">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -104,16 +104,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Install a CNI plugin | Docker Documentation</title>
-<meta property="og:title" content="Install a CNI plugin" />
+	<title>Install an unmanaged CNI plugin | Docker Documentation</title>
+<meta property="og:title" content="Install an unmanaged CNI plugin" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Learn how to install a Container Networking Interface plugin on Docker Universal Control Plane." />
-<meta property="og:description" content="Learn how to install a Container Networking Interface plugin on Docker Universal Control Plane." />
+<meta name="description" content="Learn how to install a Container Networking Interface (CNI) plugin on Docker Universal Control Plane." />
+<meta property="og:description" content="Learn how to install a Container Networking Interface (CNI) plugin on Docker Universal Control Plane." />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Install a CNI plugin","description":"Learn how to install a Container Networking Interface plugin on Docker Universal Control Plane.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Install an unmanaged CNI plugin","description":"Learn how to install a Container Networking Interface (CNI) plugin on Docker Universal Control Plane.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -183,119 +183,140 @@
 						<section class="section">
 							
 								
-							<h1>Install a CNI plugin</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Install an unmanaged CNI plugin</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 
 							
 							
-							<p>For Docker Universal Control Plane, <a href="https://docs.projectcalico.org/v3.0/introduction/">Project Calico</a>
-provides the secure networking functionality for the container communication with Kubernetes.</p>
+							<p>For Docker Universal Control Plane (UCP), <a href="https://docs.projectcalico.org/v3.7/introduction/">Calico</a>
+provides the secure networking functionality for container-to-container communication within
+Kubernetes. UCP handles the lifecycle of Calico and packages it with UCP
+installation and upgrade. Additionally, the Calico deployment included with
+UCP is fully supported with Docker providing guidance on the
+<a href="https://github.com/projectcalico/cni-plugin">CNI components</a>.</p>
 
-<p>Docker EE supports Calico and installs the
-built-in <a href="https://github.com/projectcalico/cni-plugin">Calico</a> plugin, but you can override that and
-install a Docker certified plugin.</p>
+<p>At install time, UCP can be configured to install an alternative CNI plugin
+to support alternative use cases. The alternative CNI plugin is certified by
+Docker and its partners, and published on Docker Hub. UCP components are still
+fully supported by Docker and respective partners. Docker will provide
+pointers to basic configuration, however for additional guidance on managing third party
+CNI components, the platform operator will need to refer to the partner documentation
+or contact that third party.</p>
 
-<blockquote>
-  <p><strong>Note</strong>: The <code class="highlighter-rouge">--cni-installer-url</code> option is deprecated as of UCP 3.1. It is replaced by the <code class="highlighter-rouge">--unmanaged-cni</code> option.</p>
-</blockquote>
+<h2 id="install-an-unmanaged-cni-plugin-on-docker-ucp">Install an unmanaged CNI plugin on Docker UCP</h2>
 
-<h1 id="install-ucp-with-a-custom-cni-plugin">Install UCP with a custom CNI plugin</h1>
+<p>Once a platform operator has complied with <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements/">UCP system
+requirements</a> and
+taken into consideration any requirements for the custom CNI plugin, you can
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/ucp/3.1/cli/install/">run the UCP install command</a> with the <code class="highlighter-rouge">--unmanaged-cni</code> flag
+to bring up the platform.</p>
 
-<p>Modify the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/#step-4-install-ucp">UCP install command-line</a>
-to add the <code class="highlighter-rouge">--cni-installer-url</code> <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/ucp/3.0/cli/install.md">option</a>,
-providing a URL for the location of the CNI plugin’s YAML file:</p>
+<p>This command will install UCP, and bring up components
+like the user interface and the RBAC engine. UCP components that
+require Kubernetes Networking, such as Metrics, will not start and will stay in
+a <code class="highlighter-rouge">Container Creating</code> state in Kubernetes, until a CNI is installed.</p>
+
+<h3 id="install-ucp-without-a-cni-plugin">Install UCP without a CNI plugin</h3>
+
+<p>Once connected to a manager node with the Docker Enterprise Engine installed,
+you are ready to install UCP with the <code class="highlighter-rouge">--unmanaged-cni</code> flag.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--name</span> ucp <span class="se">\</span>
   <span class="nt">-v</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
   docker/ucp:3.1.7 install <span class="se">\</span>
   <span class="nt">--host-address</span> &lt;node-ip-address&gt; <span class="se">\</span>
-   <span class="nt">--unmanaged-cni</span> &lt;<span class="nb">true</span>|false&gt; <span class="se">\</span>
+  <span class="nt">--unmanaged-cni</span> <span class="se">\</span>
   <span class="nt">--interactive</span>
 </code></pre></div></div>
 
-<blockquote>
-  <p><strong>Note</strong>: Setting <code class="highlighter-rouge">--unmanaged-cni</code> to <code class="highlighter-rouge">true</code> value installs UCP without a managed CNI plugin. UCP and the
-Kubernetes components will be running but pod-to-pod networking will not function until a CNI plugin is manually
-installed. This will impact some functionality of UCP until a CNI plugin is running.</p>
-</blockquote>
+<p>Once the installation is complete, you will be able to access UCP in the browser.
+Note that the manager node will be unhealthy as the kubelet will
+report <code class="highlighter-rouge">NetworkPluginNotReady</code>. Additionally, the metrics in the UCP dashboard
+will also be unavailable, as this runs in a Kubernetes pod.</p>
 
-<p>You must provide a correct YAML installation file for the CNI plugin, but most
-of the default files work on Docker EE with no modification.</p>
+<h3 id="configure-cli-access-to-ucp">Configure CLI access to UCP</h3>
 
-<h2 id="yaml-files-for-cni-plugins">YAML files for CNI plugins</h2>
+<p>Next, a platform operator should log into UCP, download a UCP client bundle, and
+configure the Kubernetes CLI tool, <code class="highlighter-rouge">kubectl</code>. See <a href="ee/ucp/user-access/cli/#download-client-certificates">CLI Based
+Access</a> for more details.</p>
 
-<p>Use the following commands to get the YAML files for popular CNI plugins.</p>
+<p>With <code class="highlighter-rouge">kubectl</code>, you can see that the UCP components running on
+Kubernetes are still pending, waiting for a CNI driver before becoming
+available.</p>
 
-<ul>
-  <li><a href="https://github.com/coreos/flannel">Flannel</a>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Get the URL for the Flannel CNI plugin.</span>
-<span class="nv">CNI_URL</span><span class="o">=</span><span class="s2">"https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml"</span>
-</code></pre></div>    </div>
-  </li>
-  <li><a href="https://www.weave.works/">Weave</a>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Get the URL for the Weave CNI plugin.</span>
-<span class="nv">CNI_URL</span><span class="o">=</span><span class="s2">"https://cloud.weave.works/k8s/net?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiI5IiwgR2l0VmVyc2lvbjoidjEuOS4zIiwgR2l0Q29tbWl0OiJkMjgzNTQxNjU0NGYyOThjOTE5ZTJlYWQzYmUzZDA4NjRiNTIzMjNiIiwgR2l0VHJlZVN0YXRlOiJjbGVhbiIsIEJ1aWxkRGF0ZToiMjAxOC0wMi0wN1QxMjoyMjoyMVoiLCBHb1ZlcnNpb246ImdvMS45LjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQpTZXJ2ZXIgVmVyc2lvbjogdmVyc2lvbi5JbmZve01ham9yOiIxIiwgTWlub3I6IjgrIiwgR2l0VmVyc2lvbjoidjEuOC4yLWRvY2tlci4xNDMrYWYwODAwNzk1OWUyY2UiLCBHaXRDb21taXQ6ImFmMDgwMDc5NTllMmNlYWUxMTZiMDk4ZWNhYTYyNGI0YjI0MjBkODgiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTAyLTAxVDIzOjI2OjE3WiIsIEdvVmVyc2lvbjoiZ28xLjguMyIsIENvbXBpbGVyOiJnYyIsIFBsYXRmb3JtOiJsaW51eC9hbWQ2NCJ9Cg=="</span>
-</code></pre></div>    </div>
-    <p>If you have kubectl available, for example by using
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/kubernetes.md">Docker Desktop for Mac</a>, you can use the following
-command to get the URL for the <a href="https://www.weave.works/">Weave</a> CNI plugin:</p>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Get the URL for the Weave CNI plugin.</span>
-<span class="nv">CNI_URL</span><span class="o">=</span><span class="s2">"https://cloud.weave.works/k8s/net?k8s-version=</span><span class="k">$(</span>kubectl version | base64 | tr <span class="nt">-d</span> <span class="s1">'\n'</span><span class="k">)</span><span class="s2">"</span>
-</code></pre></div>    </div>
-  </li>
-  <li><a href="http://docs.romana.io/">Romana</a>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Get the URL for the Romana CNI plugin.</span>
-<span class="nv">CNI_URL</span><span class="o">=</span><span class="s2">"https://raw.githubusercontent.com/romana/romana/master/docs/kubernetes/romana-kubeadm.yml"</span>
-</code></pre></div>    </div>
-  </li>
-</ul>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl get nodes
+NAME         STATUS     ROLES     AGE       VERSION
+manager-01   NotReady   master    10m       v1.11.9-docker-1
 
-<h2 id="disable-ip-in-ip-overlay-tunneling">Disable IP in IP overlay tunneling</h2>
-
-<p>The Calico CNI plugin supports both overlay (IPIP) and underlay forwarding
-technologies. By default, Docker UCP uses IPIP overlay tunneling.</p>
-
-<p>If you’re used to managing applications at the network level through the
-underlay visibility, or you want to reuse existing networking tools in the
-underlay, you may want to disable the IPIP functionality. Run the following
-commands on the Kubernetes master node to disable IPIP overlay tunneling.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Exec into the Calico Kubernetes controller container.</span>
-docker <span class="nb">exec</span> <span class="nt">-it</span> <span class="k">$(</span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>k8s_calico-kube-controllers_calico-kube-controllers <span class="nt">-q</span><span class="k">)</span> sh
-
-<span class="c"># Download calicoctl</span>
-wget https://github.com/projectcalico/calicoctl/releases/download/v3.1.1/calicoctl <span class="o">&amp;&amp;</span> chmod +x calicoctl
-
-<span class="c"># Get the IP pool configuration.</span>
-./calicoctl get ippool <span class="nt">-o</span> yaml <span class="o">&gt;</span> ippool.yaml
-
-<span class="c"># Edit the file: Disable IPIP in ippool.yaml by setting "ipipMode: Never".</span>
-
-<span class="c"># Apply the edited file to the Calico plugin.</span>
-./calicoctl apply <span class="nt">-f</span> ippool.yaml
-
+<span class="nv">$ </span>kubectl get pods <span class="nt">-n</span> kube-system <span class="nt">-o</span> wide
+NAME                           READY     STATUS              RESTARTS   AGE       IP        NODE         NOMINATED NODE
+compose-565f7cf9ff-gq2gv       0/1       Pending             0          10m       &lt;none&gt;    &lt;none&gt;       &lt;none&gt;
+compose-api-574d64f46f-r4c5g   0/1       Pending             0          10m       &lt;none&gt;    &lt;none&gt;       &lt;none&gt;
+kube-dns-6d96c4d9c6-8jzv7      0/3       Pending             0          10m       &lt;none&gt;    &lt;none&gt;       &lt;none&gt;
+ucp-metrics-nwt2z              0/3       ContainerCreating   0          10m       &lt;none&gt;    manager-01   &lt;none&gt;
 </code></pre></div></div>
 
-<p>These steps disable overlay tunneling, and Calico uses the underlay networking,
-in environments where it’s supported.</p>
+<h3 id="install-an-unmanaged-cni-plugin">Install an unmanaged CNI plugin</h3>
+
+<p>You can use<code class="highlighter-rouge">kubectl</code> to install a custom CNI plugin on UCP.
+Alternative CNI plugins are Weave, Flannel, Canal, Romana and many more.
+Platform operators have complete flexibility on what to install, but Docker
+will not support the CNI plugin.</p>
+
+<p>The steps for installing a CNI plugin typically include:</p>
+<ul>
+  <li>Downloading the relevant upstream CNI binaries from
+https://github.com/containernetworking/cni/releases/tag/</li>
+  <li>Placing them in <code class="highlighter-rouge">/opt/cni/bin</code></li>
+  <li>Downloading the relevant CNI plugin’s Kubernetes Manifest YAML, and</li>
+  <li>Running <code class="highlighter-rouge">$ kubectl apply -f &lt;your-custom-cni-plugin&gt;.yaml</code></li>
+</ul>
+
+<p>Follow the CNI plugin documentation for specific installation
+instructions.</p>
+
+<blockquote>
+  <p>While troubleshooting a custom CNI plugin, you may wish to access logs
+within the kubelet. Connect to a UCP manager node and run
+<code class="highlighter-rouge">$ docker logs ucp-kubelet</code>.</p>
+</blockquote>
+
+<h3 id="verify-the-ucp-installation">Verify the UCP installation</h3>
+
+<p>Upon successful installation of the CNI plugin, the related UCP components should have
+a <code class="highlighter-rouge">Running</code> status as pods start to become available.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl get pods -n kube-system -o wide
+NAME                           READY     STATUS    RESTARTS   AGE       IP            NODE         NOMINATED NODE
+compose-565f7cf9ff-gq2gv       1/1       Running   0          21m       10.32.0.2     manager-01   &lt;none&gt;
+compose-api-574d64f46f-r4c5g   1/1       Running   0          21m       10.32.0.3     manager-01   &lt;none&gt;
+kube-dns-6d96c4d9c6-8jzv7      3/3       Running   0          22m       10.32.0.5     manager-01   &lt;none&gt;
+ucp-metrics-nwt2z              3/3       Running   0          22m       10.32.0.4     manager-01   &lt;none&gt;
+weave-net-wgvcd                2/2       Running   0          8m        172.31.6.95   manager-01   &lt;none&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong>: The above example deployment uses Weave. If you are using an alternative
+CNI plugin, look for the relevant name and review its status.</p>
+</blockquote>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
 <ul>
-  <li><a href="../admin/install.md">Install UCP for production</a></li>
-  <li><a href="../kubernetes.md">Deploy a workload to a Kubernetes cluster</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/#step-6-join-manager-nodes">Make your Cluster Highly Available</a></li>
+  <li><a href="ee/ucp/kubernetes/layer-7-routing/">Install an Ingress Controller on Kubernetes</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ucp">ucp</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=cli">cli</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=administration">administration</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=kubectl">kubectl</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Kubernetes">Kubernetes</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=cni">cni</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Container Networking Interface">Container Networking Interface</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=flannel">flannel</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=weave">weave</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ipip">ipip</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=calico">calico</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ucp">ucp</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=kubernetes">kubernetes</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=cni">cni</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=container networking interface">container networking interface</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=flannel">flannel</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=weave">weave</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=calico">calico</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -325,7 +346,7 @@ in environments where it’s supported.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "ee/ucp/kubernetes/install-cni-plugin.md",
-										"title": "Install a CNI plugin",
+										"title": "Install an unmanaged CNI plugin",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/kubernetes/install-cni-plugin.md"
 									};
 									(function(d, c, j) {
@@ -385,8 +406,14 @@ in environments where it’s supported.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#yaml-files-for-cni-plugins" class="nomunge">YAML files for CNI plugins</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#disable-ip-in-ip-overlay-tunneling" class="nomunge">Disable IP in IP overlay tunneling</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#install-an-unmanaged-cni-plugin-on-docker-ucp" class="nomunge">Install an unmanaged CNI plugin on Docker UCP</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#install-ucp-without-a-cni-plugin" class="nomunge">Install UCP without a CNI plugin</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#configure-cli-access-to-ucp" class="nomunge">Configure CLI access to UCP</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#install-an-unmanaged-cni-plugin" class="nomunge">Install an unmanaged CNI plugin</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#verify-the-ucp-installation" class="nomunge">Verify the UCP installation</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 

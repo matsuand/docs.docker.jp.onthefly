@@ -2326,9 +2326,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/install-cni-plugin/",
-"title":"Install a CNI plugin",
-"description":"Learn how to install a Container Networking Interface plugin on Docker Universal Control Plane.",
-"keywords":"ucp, cli, administration, kubectl, Kubernetes, cni, Container Networking Interface, flannel, weave, ipip, calico"
+"title":"Install an unmanaged CNI plugin",
+"description":"Learn how to install a Container Networking Interface (CNI) plugin on Docker Universal Control Plane.",
+"keywords":"ucp, kubernetes, cni, container networking interface, flannel, weave, calico"
 }
 ,
 {
@@ -3915,8 +3915,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/examples/running_ssh_service/",
-"title":"Dockerize an SSH service",
-"description":"Installing and running an SSHd service on Docker",
+"title":"SSH サービスの Docker 化",
+"description":"Docker 上での SSHd サービスのインストールと起動。",
 "keywords":"docker, example, package installation,  networking"
 }
 ,
