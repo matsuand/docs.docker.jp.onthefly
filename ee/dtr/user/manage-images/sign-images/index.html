@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-26 12:10:05 +0900 -->
+<!-- Page generated 2019-06-05 14:33:10 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -65,17 +65,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-26T12:10:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-05T14:33:10+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Sign an image"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="2 Key components of the Docker Trusted Registry are the Notary Server and Notary Signer. These 2 containers give us the required components to use Docker Content Trust right out..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Two key components of the Docker Trusted Registry are the Notary Server and the Notary Signer. These two containers provide the required components for using Docker Content Trust (DCT) out..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-26T12:10:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-05T14:33:10+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="registry, sign, trust">
@@ -176,21 +176,23 @@
 
 							
 							
-							<p>2 Key components of the Docker Trusted Registry are the Notary Server and Notary
-Signer. These 2 containers give us the required components to use Docker Content
-Trust right out of the box. <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Docker Content
-Trust</a> allows us to sign image tags,
-therefore whoever pulls the image can validate that they are getting the image
-you create, or a forged one.</p>
+							<p>Two key components of the Docker Trusted Registry are the Notary Server and the Notary
+Signer. These two containers provide the required components for using Docker Content
+Trust (DCT) out of the box. <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Docker Content
+Trust</a> allows you to sign image tags,
+therefore giving consumers a way to verify the integrity of your image.</p>
 
-<p>As part of Docker Trusted Registry both the Notary server and the Registry
-server are accessed through a front end Proxy, with both components sharing the
-UCP’s RBAC Engine. Therefore no additional configuration of the Docker Client
-is required to use trust.</p>
+<p>As part of DTR, both the Notary and the Registry
+servers are accessed through a front-end proxy, with both components sharing the
+UCP’s RBAC (Role-based Access Control) Engine. Therefore, you do not need additional Docker client
+configuration in order to use DCT.</p>
 
-<p>Docker Content Trust is integrated into the Docker CLI, allowing you to
-configure repositories, add signers and sign images all through the <code class="highlighter-rouge">$ docker
-trust</code> command.</p>
+<p>DCT is integrated with the Docker CLI, and allows you to:</p>
+<ul>
+  <li>Configure repositories</li>
+  <li>Add signers, and</li>
+  <li>Sign images using the <code class="highlighter-rouge">docker trust</code> command</li>
+</ul>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/sign-an-image-1.svg" alt="image without signature" /></p>
 
@@ -198,33 +200,31 @@ trust</code> command.</p>
 
 <p>UCP has a feature which will prevent <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/run-only-the-images-you-trust/">untrusted
 images</a> from being
-deployed on the cluster. To use this feature, we first need to upload and sign
-images into DTR. To tie the signed images back to UCP, we will actually sign the
-images with private keys of UCP users. Inside of a UCP Client bundle the
-<code class="highlighter-rouge">key.pem</code> can be used a User’s private key, with the <code class="highlighter-rouge">cert.pem</code> being a public
-key within a x509 certificate.</p>
+deployed on the cluster. To use the feature, you need to sign and push images to your DTR.
+To tie the signed images back to UCP, you need to sign the
+images with the private keys of the UCP users. From a UCP client bundle, use
+<code class="highlighter-rouge">key.pem</code> as your private key, and <code class="highlighter-rouge">cert.pem</code> as your public key
+on an <code class="highlighter-rouge">x509</code> certificate.</p>
 
-<p>To sign images in a way that UCP trusts them, you need to:</p>
+<p>To sign images in a way that UCP can trust, you need to:</p>
 
 <ol>
-  <li>Download a Client Bundle for a User you want to use to sign the images.</li>
-  <li>Load the private key of the User into your workstations trust store.</li>
+  <li>Download a client bundle for the user account you want to use for signing the images.</li>
+  <li>Add the user’s private key to your machine’s trust store.</li>
   <li>Initialize trust metadata for the repository.</li>
-  <li>Delegate signing for that repository to the UCP User.</li>
-  <li>Sign the Image.</li>
+  <li>Delegate signing for that repository to the UCP user.</li>
+  <li>Sign the image.</li>
 </ol>
 
-<p>In this example we’re going to pull a nginx image from the Docker Hub, re-tag it
-as <code class="highlighter-rouge">dtr.example.com/dev/nginx:1</code>, push the image to DTR and sign it in a way
-that is trusted by UCP. If you manage multiple repositories, you’ll have to do
-the same procedure for each repository.</p>
+<p>The following example shows the <code class="highlighter-rouge">nginx</code> image getting pulled from Docker Hub, tagged
+as <code class="highlighter-rouge">dtr.example.com/dev/nginx:1</code>, pushed to DTR, and signed in a way
+that is trusted by UCP.</p>
 
-<h3 id="import-a-ucp-users-private-key">Import a UCP User’s Private Key</h3>
+<h3 id="import-a-ucp-users-private-key">Import a UCP user’s private key</h3>
 
-<p>Once you have download and extracted a UCP User’s client bundle into your local
-directory, you need to load the Private key into the local Docker trust store
-<code class="highlighter-rouge">(~/.docker/trust)</code>. The name used here is purely metadata to help keep track of
-which keys you have imported.</p>
+<p>After downloading and extracting a UCP client bundle into your local
+directory, you need to load the private key into the local Docker trust store
+<code class="highlighter-rouge">(~/.docker/trust)</code>. To illustrate the process, we will use <code class="highlighter-rouge">jeff</code> as an example user.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key load <span class="nt">--name</span> jeff key.pem
 Loading key from <span class="s2">"key.pem"</span>...
@@ -233,16 +233,16 @@ Repeat passphrase <span class="k">for </span>new jeff key with ID a453196:
 Successfully imported key from key.pem
 </code></pre></div></div>
 
-<h3 id="initialize-the-trust-metadata-and-add-the-public-key">Initialize the trust metadata and add the Public Key</h3>
+<h3 id="initialize-the-trust-metadata-and-add-the-users-public-certificate">Initialize the trust metadata and add the user’s public certificate</h3>
 
-<p>Next, we need to initiate trust metadata for a DTR repository. If you have not
-done so already, navigate to the <strong>DTR web UI</strong>, and create a repository for
-your image. In this example we’ve created the <code class="highlighter-rouge">prod/nginx</code> repository.</p>
+<p>Next,initiate trust metadata for a DTR repository. If you have not
+already done so, navigate to the <strong>DTR web UI</strong>, and create a repository for
+your image. This example uses the <code class="highlighter-rouge">nginx</code> repository in the <code class="highlighter-rouge">prod</code> namespace.</p>
 
-<p>As part of initiating the repository, we will add the public key of the UCP User
-as a signer. You will be asked for a number of passphrases to protect the keys.
-Make a note of these passphrases, and see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server">Managing Delegations in a Notary Server</a>
-to learn more about managing keys.</p>
+<p>As part of initiating the repository, the public key of the UCP user needs to be added
+to the Notary server as a signer for the repository. You will be asked for a number of
+passphrases to protect the keys.Make a note of these passphrases, and
+see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/#managing-delegations-in-a-notary-server">Managing Delegations in a Notary Server</a> to learn more about managing keys.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff dtr.example.com/prod/nginx
 Adding signer <span class="s2">"jeff"</span> to dtr.example.com/prod/nginx...
@@ -254,7 +254,7 @@ Successfully initialized <span class="s2">"dtr.example.com/prod/nginx"</span>
 Successfully added signer: jeff to dtr.example.com/prod/nginx
 </code></pre></div></div>
 
-<p>We can inspect the trust metadata of the repository to make sure the User has
+<p>Inspect the trust metadata of the repository to make sure the user has
 been added correctly.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> dtr.example.com/prod/nginx
@@ -272,11 +272,10 @@ Administrative keys <span class="k">for </span>dtr.example.com/prod/nginx
   Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
 </code></pre></div></div>
 
-<h3 id="sign-the-image">Sign the Image</h3>
+<h3 id="sign-the-image">Sign the image</h3>
 
-<p>Finally, we will sign an image tag. These steps download the Image from the
-Docker Hub, retag the Image to the DTR repository, push the image up to DTR, as
-well as signing the tag with the UCP User’s keys.</p>
+<p>Finally, user <code class="highlighter-rouge">jeff</code> can sign an image tag. The following steps include downloading the image from Hub, tagging the image for Jeff’s DTR repository, pushing the image to Jeff’s DTR, as
+well as signing the tag with Jeff’s keys.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull nginx:latest
 
@@ -294,7 +293,7 @@ Enter passphrase <span class="k">for </span>jeff key with ID 927f303:
 Successfully signed dtr.example.com/prod/nginx:1
 </code></pre></div></div>
 
-<p>We can inspect the trust metadata again to make sure the image tag has been
+<p>Inspect the trust metadata again to make sure the image tag has been
 signed successfully.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> dtr.example.com/prod/nginx:1
@@ -315,60 +314,59 @@ Administrative keys <span class="k">for </span>dtr.example.com/prod/nginx:1
   Root Key:     b74854cb27cc25220ede4b08028967d1c6e297a759a6939dfef1ea72fbdd7b9a
 </code></pre></div></div>
 
-<p>Or we can have a look at the signed image from within the <strong>DTR UI</strong>.</p>
+<p>Alternatively, you can review the signed image from the DTR web UI.</p>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/sign-an-image-3.png" alt="DTR" class="with-border" /></p>
 
-<h3 id="adding-additional-delegations">Adding Additional Delegations</h3>
+<h3 id="add-delegations">Add delegations</h3>
 
-<p>If you wanted to sign this image with multiple UCP Users, maybe if you had a use
-case where an image needed to be signed by a member of the <code class="highlighter-rouge">Security</code> team and a
-member of the <code class="highlighter-rouge">Developers</code> team. Then you can add multiple signers to a
-repository.</p>
+<p>You have the option to sign an image using multiple UCP users’ keys. For example, an image
+needs to be signed by a member of the <code class="highlighter-rouge">Security</code> team and a
+member of the <code class="highlighter-rouge">Developers</code> team. Let’s assume <code class="highlighter-rouge">jeff</code> is a member of the Developers team.
+In this case, we only need to add a member of the Security team.</p>
 
-<p>To do so, first load a private key from a UCP User of the Security Team’s in to
-the local Docker Trust Store.</p>
+<p>To do so, first add the private key of the Security team member to
+the local Docker trust store.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key load <span class="nt">--name</span> security key.pem
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key load <span class="nt">--name</span> ian key.pem
 Loading key from <span class="s2">"key.pem"</span>...
-Enter passphrase <span class="k">for </span>new security key with ID 5ac7d9a:
-Repeat passphrase <span class="k">for </span>new security key with ID 5ac7d9a:
+Enter passphrase <span class="k">for </span>new ian key with ID 5ac7d9a:
+Repeat passphrase <span class="k">for </span>new ian key with ID 5ac7d9a:
 Successfully imported key from key.pem
 </code></pre></div></div>
 
-<p>Upload the Public Key to the Notary Server and Sign the Image. You will be asked
-for both the Developers passphrase, as well as the Security Users passphrase to
+<p>Upload the user’s public key to the Notary Server and sign the image. You will be asked
+for <code class="highlighter-rouge">jeff</code>, the developer’s passphrase, as well as the <code class="highlighter-rouge">ian</code> user’s passphrase to
 sign the tag.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem security dtr.example.com/prod/nginx
-Adding signer <span class="s2">"security"</span> to dtr.example.com/prod/nginx...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem ian dtr.example.com/prod/nginx
+Adding signer <span class="s2">"ian"</span> to dtr.example.com/prod/nginx...
 Enter passphrase <span class="k">for </span>repository key with ID e0d15a2:
-Successfully added signer: security to dtr.example.com/prod/nginx
+Successfully added signer: ian to dtr.example.com/prod/nginx
 
 <span class="nv">$ </span>docker trust sign dtr.example.com/prod/nginx:1
 Signing and pushing trust metadata <span class="k">for </span>dtr.example.com/prod/nginx:1
 Existing signatures <span class="k">for </span>tag 1 digest 5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033 from:
 jeff
 Enter passphrase <span class="k">for </span>jeff key with ID 927f303:
-Enter passphrase <span class="k">for </span>security key with ID 5ac7d9a:
+Enter passphrase <span class="k">for </span>ian key with ID 5ac7d9a:
 Successfully signed dtr.example.com/prod/nginx:1
 </code></pre></div></div>
 
-<p>Finally, we can check the tag again to make sure it is now signed by 2
-signatures.</p>
+<p>Finally, check the tag again to make sure it includes two signers.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust inspect <span class="nt">--pretty</span> dtr.example.com/prod/nginx:1
 
 Signatures <span class="k">for </span>dtr.example.com/prod/nginx:1
 
 SIGNED TAG          DIGEST                                                             SIGNERS
-1                   5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033   jeff, security
+1                   5b49c8e2c890fbb0a35f6050ed3c5109c5bb47b9e774264f4f3aa85bb69e2033   jeff, ian
 
 List of signers and their keys <span class="k">for </span>dtr.example.com/prod/nginx:1
 
 SIGNER              KEYS
 jeff                927f30366699
-security            5ac7d9af7222
+ian                 5ac7d9af7222
 
 Administrative keys <span class="k">for </span>dtr.example.com/prod/nginx:1
 
@@ -380,13 +378,12 @@ Administrative keys <span class="k">for </span>dtr.example.com/prod/nginx:1
 
 <h2 id="delete-trust-data">Delete trust data</h2>
 
-<p>If an Administrator wants to delete a DTR repository that contains Trust
-metadata, they will be prompted to delete the trust metadata first before the
-repository can be removed.</p>
+<p>If an administrator wants to delete a DTR repository that contains trust
+metadata, they will be prompted to delete the trust metadata first before removing the repository.</p>
 
-<p>To delete trust metadata we need to use the Notary CLI. For information on how
-to download and configure the Notary CLI head
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/#configuring-the-notary-client">here</a></p>
+<p>To delete trust metadata, you need to use the Notary CLI. For information on how
+to download and configure the Notary CLI see
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/#configuring-the-notary-client">Configuring the Notary client</a></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary delete dtr.example.com/prod/nginx <span class="nt">--remote</span>
 Deleting trust data <span class="k">for </span>repository dtr.example.com/prod/nginx
@@ -502,10 +499,10 @@ Trust</a></li>
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#sign-images-that-ucp-can-trust" class="nomunge">Sign images that UCP can trust</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#import-a-ucp-users-private-key" class="nomunge">Import a UCP User’s Private Key</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#initialize-the-trust-metadata-and-add-the-public-key" class="nomunge">Initialize the trust metadata and add the Public Key</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#sign-the-image" class="nomunge">Sign the Image</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#adding-additional-delegations" class="nomunge">Adding Additional Delegations</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#import-a-ucp-users-private-key" class="nomunge">Import a UCP user’s private key</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#initialize-the-trust-metadata-and-add-the-users-public-certificate" class="nomunge">Initialize the trust metadata and add the user’s public certificate</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#sign-the-image" class="nomunge">Sign the image</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#add-delegations" class="nomunge">Add delegations</a></li>
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/sign-images/#delete-trust-data" class="nomunge">Delete trust data</a></li>
