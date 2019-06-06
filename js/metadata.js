@@ -197,6 +197,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/",
+"title":"Use the AUFS storage driver",
+"description":"Learn how to optimize your use of AUFS driver.",
+"keywords":"container, storage, driver, AUFS "
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/admin/manage-jobs/auto-delete-job-logs/",
 "title":"Enable Auto-Deletion of Job Logs",
 "description":"Enable auto-deletion of old or unnecessary job logs for maintenance.",
@@ -306,6 +313,13 @@ var pages = [
 "title":"Use bridge networks",
 "description":"All about using user-defined bridge networks and the default bridge",
 "keywords":"network, bridge, user-defined, standalone"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/",
+"title":"Use the BTRFS storage driver",
+"description":"Learn how to optimize your use of Btrfs driver.",
+"keywords":"container, storage, driver, Btrfs "
 }
 ,
 {
@@ -1048,6 +1062,13 @@ var pages = [
 "title":"Docker development best practices",
 "description":"Rules of thumb for making your life easier as a Docker application developer",
 "keywords":"application, development"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/",
+"title":"Use the Device Mapper storage driver",
+"description":"Learn how to optimize your use of device mapper driver.",
+"keywords":"container, storage, driver, device mapper"
 }
 ,
 {
@@ -2080,6 +2101,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/",
+"title":"About storage drivers",
+"description":"Learn the technologies that support storage drivers.",
+"keywords":"container, storage, driver, AUFS, btfs, devicemapper,zvfs"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/storage/",
 "title":"Manage data in Docker",
 "description":"Overview of persisting data in containers",
@@ -2601,7 +2629,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/labels-reference/",
 "title":"Use layer 7 routing labels",
 "description":"Learn about the labels you can use in your swarm services to route layer 7 traffic.",
-"keywords":"routing, proxy"
+"keywords":"routing, proxy, interlock, load balancing"
 }
 ,
 {
@@ -3218,6 +3246,13 @@ var pages = [
 "title":"Use overlay networks",
 "description":"All about using overlay networks",
 "keywords":"network, overlay, user-defined, swarm, service"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/",
+"title":"Use the OverlayFS storage driver",
+"description":"Learn how to optimize your use of OverlayFS driver.",
+"keywords":"container, storage, driver, OverlayFS, overlay2, overlay"
 }
 ,
 {
@@ -4044,6 +4079,13 @@ var pages = [
 "title":"Manage sensitive data with Docker secrets",
 "description":"How to securely store, retrieve, and use sensitive data with Docker services",
 "keywords":"swarm, secrets, credentials, sensitive strings, sensitive data, security, encryption, encryption at rest"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/select-storage-driver/",
+"title":"Docker storage drivers",
+"description":"Learn how to select the proper storage driver for your container.",
+"keywords":"container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2"
 }
 ,
 {
@@ -5055,6 +5097,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/vfs-driver/",
+"title":"Use the VFS storage driver",
+"description":"Learn how to optimize your use of VFS driver.",
+"keywords":"container, storage, driver, vfs"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/view-namespace-resources/",
 "title":"View Kubernetes objects in a namespace",
 "description":"Learn how to set the Kubernetes namespace context in a Docker Enterprise Edition cluster.",
@@ -5185,6 +5234,13 @@ var pages = [
 "title":"Quickstart: Compose and WordPress",
 "description":"Getting started with Compose and WordPress",
 "keywords":"documentation, docs,  docker, compose, orchestration, containers"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/",
+"title":"Use the ZFS storage driver",
+"description":"Learn how to optimize your use of ZFS driver.",
+"keywords":"container, storage, driver, ZFS "
 }
 
 ,
