@@ -4103,13 +4103,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/ee/ucp/interlock/config/service-labels/",
-"title":"Use application service labels",
-"description":"Learn how applications use service labels for publishing",
-"keywords":"routing, proxy, interlock, load balancing"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/service/",
 "title":"docker service",
 "description":null,
@@ -4965,7 +4958,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/upgrade/",
-"title":"Upgrade your Plan",
+"title":"Upgrade your plan",
 "description":"Upgrading your Docker Hub Plan",
 "keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
 }
