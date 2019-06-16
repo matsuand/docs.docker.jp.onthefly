@@ -548,8 +548,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/",
-"title":"Compose file version 2 reference",
-"description":"Compose file reference",
+"title":"Compose ファイル バージョン 2 リファレンス",
+"description":"Compose ファイルリファレンス",
 "keywords":"fig, composition, compose version 3, docker"
 }
 ,
@@ -618,7 +618,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/swarm/configs/",
-"title":"Store configuration data using Docker Configs",
+"title":"Docker configs を利用した設定データの保存",
 "description":"How to store configuration data separate from the runtime",
 "keywords":"swarm, configuration, configs"
 }
@@ -2270,8 +2270,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/swarm/",
-"title":"Swarm mode overview",
-"description":"Docker Engine swarm mode overview",
+"title":"スウォームモード概要",
+"description":"Docker Engine スウォームモードの概要",
 "keywords":"docker, container, cluster, swarm"
 }
 ,
@@ -2893,8 +2893,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/develop/develop-images/multistage-build/",
-"title":"Use multi-stage builds",
-"description":"Keeping your images small with multi-stage images",
+"title":"マルチステージビルドの利用",
+"description":"マルチステージイメージを使って、イメージサイズを小さく維持する。",
 "keywords":"images, containers, best practices, multi-stage, multistage"
 }
 ,
@@ -4076,7 +4076,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/swarm/secrets/",
-"title":"Manage sensitive data with Docker secrets",
+"title":"Docker secrets を使った機密情報の管理",
 "description":"How to securely store, retrieve, and use sensitive data with Docker services",
 "keywords":"swarm, secrets, credentials, sensitive strings, sensitive data, security, encryption, encryption at rest"
 }

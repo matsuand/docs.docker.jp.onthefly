@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-06-16 10:47:16 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-16T10:47:16+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Store configuration data using Docker Configs"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="About configs Docker 17.06 introduces swarm service configs, which allow you to store non-sensitive information, such as configuration files, outside a service’s image or running containers. This allows you to..." />
+	<meta name="twitter:title" itemprop="title name" content="Docker configs を利用した設定データの保存"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="configs について Docker 17.06 からスウォームサービスの configs が導入されました。 これは設定ファイルのようにそれほど重要ではない情報を、サービスイメージや稼働中のコンテナーの外部に保存できる機能です。 これがあれば、ビルドイメージをできるだけ汎用的なものとして維持できます。 また設定ファイルをコンテナーにバインドマウントしたり、環境変数を利用したりすることも不要になります。 configs は secrets と同じように機能します。 ただし configs は保存の際に暗号化はされません。 またコンテナーのファイルシステム内に直接マウントされますが、RAM ディスクは消費しません。 configs はサービスに対して、どのタイミングであっても追加および削除ができます。 またサービス間で 1 つの config を共有することもできます。 さらに configs と環境変数や Docker..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-16T10:47:16+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="swarm, configuration, configs">
@@ -100,8 +100,8 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Store configuration data using Docker Configs | Docker Documentation</title>
-<meta property="og:title" content="Store configuration data using Docker Configs" />
+	<title>Docker configs を利用した設定データの保存 | Docker Documentation</title>
+<meta property="og:title" content="Docker configs を利用した設定データの保存" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="How to store configuration data separate from the runtime" />
 <meta property="og:description" content="How to store configuration data separate from the runtime" />
@@ -109,7 +109,7 @@
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Store configuration data using Docker Configs","description":"How to store configuration data separate from the runtime","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker configs を利用した設定データの保存","description":"How to store configuration data separate from the runtime","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -179,126 +179,111 @@
 						<section class="section">
 							
 								
-							<h1>Store configuration data using Docker Configs</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker configs を利用した設定データの保存</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    18 分
+    10 分
   
 </span>
 
 							
 							
-							<h2 id="about-configs">About configs</h2>
+							
+<h2 id="about-configs">configs について</h2>
 
-<p>Docker 17.06 introduces swarm service configs, which allow you to store
-non-sensitive information, such as configuration files, outside a service’s
-image or running containers. This allows you to keep your images as generic
-as possible, without the need to bind-mount configuration files into the
-containers or use environment variables.</p>
+<p>Docker 17.06 からスウォームサービスの configs が導入されました。
+これは設定ファイルのようにそれほど重要ではない情報を、サービスイメージや稼働中のコンテナーの外部に保存できる機能です。
+これがあれば、ビルドイメージをできるだけ汎用的なものとして維持できます。
+また設定ファイルをコンテナーにバインドマウントしたり、環境変数を利用したりすることも不要になります。</p>
 
-<p>Configs operate in a similar way to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/secrets/">secrets</a>, except that they are
-not encrypted at rest and are mounted directly into the container’s filesystem
-without the use of RAM disks. Configs can be added or removed from a service at
-any time, and services can share a config. You can even use configs in
-conjunction with environment variables or labels, for maximum flexibility.
-Config values can be generic strings or binary content (up to 500 kb in size).</p>
+<p>configs は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/secrets/">secrets</a> と同じように機能します。
+ただし configs は保存の際に暗号化はされません。
+またコンテナーのファイルシステム内に直接マウントされますが、RAM ディスクは消費しません。
+configs はサービスに対して、どのタイミングであっても追加および削除ができます。
+またサービス間で 1 つの config を共有することもできます。
+さらに configs と環境変数や Docker labels を組み合わせて利用できるので、最大限に柔軟性を持たせることができます。
+configs の値には、通常の文字列やバイナリ（500 KB まで）を指定します。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Docker configs are only available to swarm services, not to
-standalone containers. To use this feature, consider adapting your container
-to run as a service with a scale of 1.</p>
+  <p><strong>メモ</strong>: Docker configs はスウォームサービスにおいて利用可能であり、スタンドアロンのコンテナーでは利用できません。
+この機能を利用するには、コンテナーをサービスとして稼動させ、スケールは 1 としてください。</p>
 </blockquote>
 
-<p>Configs are supported on both Linux and Windows services.</p>
+<p>configs は Linux と Windows においてサポートされます。</p>
 
-<h3 id="windows-support">Windows support</h3>
+<h3 id="windows-support">Windows サポート</h3>
 
-<p>Docker 17.06 and higher include support for configs on Windows containers.
-Where there are differences in the implementations, they are called out in the
-examples below. Keep the following notable differences in mind:</p>
+<p>Docker 17.06 またはそれ以上には、Windows コンテナーに対する configs サポートが含まれます。
+ただし実装には違いがあるため、以降の利用例において示しています。
+重要な違いとして以下があることを覚えておいてください。</p>
 
 <ul>
   <li>
-    <p>Config files with custom targets are not directly bind-mounted into Windows
-containers, since Windows does not support non-directory file bind-mounts.
-Instead, configs for a container are all mounted in
-<code class="highlighter-rouge">C:\ProgramData\Docker\internal\configs</code> (an implementation detail which
-should not be relied upon by applications) within the container. Symbolic
-links are used to point from there to the desired target of the config within
-the container. The default target is <code class="highlighter-rouge">C:\ProgramData\Docker\configs</code>.</p>
+    <p>カスタムターゲットを利用する config ファイルは、Windows コンテナーに対して直接バインドマウントされません。
+Windows では、ディレクトリではないファイルのバインドマウントがサポートされないためです。
+そのかわり、コンテナーに対する configs は、コンテナー内の <code class="highlighter-rouge">C:\ProgramData\Docker\internal\configs</code> （アプリケーションに依存しない実装場所）にすべてマウントされます。
+ここを示すシンボリックリンクが利用され、コンテナー内に必要となる config ターゲットが設定されます。
+デフォルトターゲットは <code class="highlighter-rouge">C:\ProgramData\Docker\configs</code> です。</p>
   </li>
   <li>
-    <p>When creating a service which uses Windows containers, the options to specify
-UID, GID, and mode are not supported for configs. Configs are currently only
-accessible by administrators and users with <code class="highlighter-rouge">system</code> access within the
-container.</p>
+    <p>Windows コンテナーを利用するサービスが生成されるとき、UID、GID を指定するオプションやモードは configs においてサポートされません。
+configs は現在のところ、コンテナー内の administrators か <code class="highlighter-rouge">system</code> アクセス可能なユーザーのみがアクセス可能であるからです。</p>
   </li>
 </ul>
 
-<h2 id="how-docker-manages-configs">How Docker manages configs</h2>
+<h2 id="how-docker-manages-configs">Docker は configs をどう管理しているか</h2>
 
-<p>When you add a config to the swarm, Docker sends the config to the swarm manager
-over a mutual TLS connection. The config is stored in the Raft log, which is
-encrypted. The entire Raft log is replicated across the other managers, ensuring
-the same high availability guarantees for configs as for the rest of the swarm
-management data.</p>
+<p>スウォームに対して config を追加すると、Docker は TLS 相互接続によりスウォームマネージャーに対して config を送信します。
+この config は Raft ログとして暗号化され保存されます。
+Raft ログ全体は、他のマネージャーに向けて複製されますが、スウォームが管理するデータとともに configs の高可用性は確保されます。</p>
 
-<p>When you grant a newly-created or running service access to a config, the config
-is mounted as a file in the container. The location of the mount point within
-the container defaults to <code class="highlighter-rouge">/&lt;config-name&gt;</code> in Linux containers. In Windows
-containers, configs are all mounted into <code class="highlighter-rouge">C:\ProgramData\Docker\configs</code> and
-symbolic links are created to the desired location, which defaults to
-<code class="highlighter-rouge">C:\&lt;config-name&gt;</code>.</p>
+<p>新規生成したサービス、あるいは既存のサービスに対して config へのアクセス許可を行うと、config はコンテナー内において 1 つのファイルとしてマウントされます。
+コンテナー内のマウントポイントのデフォルトは、Linux コンテナーでは <code class="highlighter-rouge">/&lt;config-name&gt;</code> となります。
+Windows コンテナーの場合、configs はすべて <code class="highlighter-rouge">C:\ProgramData\Docker\configs</code> にマウントされ、
+コンテナー内に必要となる config ターゲットが、シンボリックリンクとして生成されます。
+config ターゲットのデフォルトは <code class="highlighter-rouge">C:\&lt;config-name&gt;</code> です。</p>
 
-<p>You can set the ownership (<code class="highlighter-rouge">uid</code> and <code class="highlighter-rouge">gid</code>) for the config, using either the
-numerical ID or the name of the user or group. You can also specify the file
-permissions (<code class="highlighter-rouge">mode</code>). These settings are ignored for Windows containers.</p>
+<p>config の所有（<code class="highlighter-rouge">uid</code> と <code class="highlighter-rouge">gid</code>）を設定するには、ID 値か、あるいはユーザー名やグループ名を用います。
+またファイルパーミッションを設定することもできます。
+この設定は Windows コンテナーにおいては無視されます。</p>
 
 <ul>
-  <li>If not set, the config is owned by the user running the container
-command (often <code class="highlighter-rouge">root</code>) and that user’s default group (also often <code class="highlighter-rouge">root</code>).</li>
-  <li>If not set, the config has world-readable permissions (mode <code class="highlighter-rouge">0444</code>), unless a
-<code class="highlighter-rouge">umask</code> is set within the container, in which case the mode is impacted by
-that <code class="highlighter-rouge">umask</code> value.</li>
+  <li>所有者が設定されていない場合、config を所有するユーザーは、コンテナーコマンドを実行したユーザー（普通は <code class="highlighter-rouge">root</code>）とそのグループ（これも普通は <code class="highlighter-rouge">root</code>）になります。</li>
+  <li>所有者が設定されていない場合、config のパーミッションはすべて読み込み可（<code class="highlighter-rouge">0444</code> モード）となります。
+ただしこれはコンテナー内に <code class="highlighter-rouge">umask</code> が設定されていない場合であり、これが設定されていれば <code class="highlighter-rouge">umask</code> の値設定に従います。</li>
 </ul>
 
-<p>You can update a service to grant it access to additional configs or revoke its
-access to a given config at any time.</p>
+<p>configs を追加した際に、configs にアクセスできるようにサービスをアップデートしたり、configs を再読み込みしたりすることは、どのタイミングでも可能です。</p>
 
-<p>A node only has access to configs if the node is a swarm manager or if it is
-running service tasks which have been granted access to the config. When a
-container task stops running, the configs shared to it are unmounted from the
-in-memory filesystem for that container and flushed from the node’s memory.</p>
+<p>configs へアクセスできるノードはスウォームマネージャーか、あるいはその configs へのアクセスが許可された稼働中のサービスタスクです。
+コンテナータスクが停止すると、共有されていた configs は、そのコンテナーのメモリ内ファイルシステムからアンマウントされ、ノードのメモリからも消去されます。</p>
 
-<p>If a node loses connectivity to the swarm while it is running a task container
-with access to a config, the task container still has access to its configs, but
-cannot receive updates until the node reconnects to the swarm.</p>
+<p>config にアクセスしている稼働中のタスクコンテナーが、スウォームとの接続を失った場合、そのタスクコンテナーの config へのアクセスは維持されます。
+ただし config の更新を受け取ることはできず、これができるようになるのはスウォームに再接続した後です。</p>
 
-<p>You can add or inspect an individual config at any time, or list all
-configs. You cannot remove a config that a running service is
-using. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#example-rotate-a-config">Rotate a config</a> for a way to
-remove a config without disrupting running services.</p>
+<p>個々の config を追加したり確認したり、configs すべてを一覧したりすることはいつでもできます。
+ただし稼働中のサービスが config を利用している場合は、それを削除できません。
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#example-rotate-a-config">config の入れ替え</a>では、実行中のサービスを中断することなく config を削除する方法について説明しています。</p>
 
-<p>To update or roll back configs more easily, consider adding a version
-number or date to the config name. This is made easier by the ability to control
-the mount point of the config within a given container.</p>
+<p>configs のアップデートやロールバックをより簡単に行うために、config 名にバージョン番号や日付をつけることを考えてみてください。
+取り扱うコンテナーの config マウントポイントを自由に管理できれば、より一層簡単になります。</p>
 
-<p>To update a stack, make changes to your Compose file, then re-run <code class="highlighter-rouge">docker
-stack deploy -c &lt;new-compose-file&gt; &lt;stack-name&gt;</code>. If you use a new config in
-that file, your services start using them. Keep in mind that configurations
-are immutable, so you can’t change the file for an existing service.
-Instead, you create a new config to use a different file</p>
+<p>スタックの更新や Compose ファイルの変更を行うには <code class="highlighter-rouge">docker stack deploy -c &lt;new-compose-file&gt; &lt;stack-name&gt;</code> を再実行します。
+新たな config を用いるようにしたのであれば、それを利用してサービスが起動します。
+設定は不変なものであることを忘れないでください。
+つまり既存のサービスに対する設定ファイルは変更することはできません。
+これを行うなら、新たな設定を別のファイルとして生成してください。</p>
 
-<p>You can run <code class="highlighter-rouge">docker stack rm</code> to stop the app and take down the stack. This
-removes any config that was created by <code class="highlighter-rouge">docker stack deploy</code> with the same stack
-name. This removes <em>all</em> configs, including those not referenced by services and
-those remaining after a <code class="highlighter-rouge">docker service update --config-rm</code>.</p>
+<p><code class="highlighter-rouge">docker stack rm</code> を実行すれば、アプリを止めてスタックを停止させることができます。
+このとき、同一のスタック名により <code class="highlighter-rouge">docker stack deploy</code> から生成された config は削除されます。
+これは <strong>すべての</strong> configs が削除されるということです。
+サービスから参照されていなかったものや、<code class="highlighter-rouge">docker service update --config-rm</code> を実行した後に残ったものも、すべて削除されます。</p>
 
-<h2 id="read-more-about-docker-config-commands">Read more about <code class="highlighter-rouge">docker config</code> commands</h2>
+<h2 id="read-more-about-docker-config-commands"><code class="highlighter-rouge">docker config</code> コマンドについての詳細</h2>
 
-<p>Use these links to read about specific commands, or continue to the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#example-use-configs-with-a-service">example about using configs with a service</a>.</p>
+<p>コマンドの詳細は以下のリンクを参照してください。
+また <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#example-use-configs-with-a-service">サービスにおける configs の利用例</a>も参照してください。</p>
 
 <ul>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/config_create.md"><code class="highlighter-rouge">docker config create</code></a></li>
@@ -307,49 +292,46 @@ those remaining after a <code class="highlighter-rouge">docker service update --
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/config_rm.md"><code class="highlighter-rouge">docker config rm</code></a></li>
 </ul>
 
-<h2 id="examples">Examples</h2>
+<h2 id="examples">利用例</h2>
 
-<p>This section includes graduated examples which illustrate how to use
-Docker configs.</p>
+<p>本節では Docker configs の利用例を段階的に示します。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: These examples use a single-Engine swarm and unscaled services for
-simplicity. The examples use Linux containers, but Windows containers also
-support configs.</p>
+  <p><strong>メモ</strong>: ここでの利用例では説明を簡単にするために、単一エンジンによるスウォームとスケールアップしていないサービスを用いることにします。
+Linux コンテナーを例に用いますが、Windows コンテナーでも configs はサポートされています。</p>
 </blockquote>
 
-<h3 id="defining-and-using-configs-in-compose-files">Defining and using configs in compose files</h3>
+<h3 id="defining-and-using-configs-in-compose-files">Compose ファイルにおける configs の定義と利用</h3>
 
-<p>The <code class="highlighter-rouge">docker stack</code> command supports defining configs in a Compose file.
-However, the <code class="highlighter-rouge">configs</code> key is not supported for <code class="highlighter-rouge">docker compose</code>. See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/#configs">the Compose file reference</a> for details.</p>
+<p><code class="highlighter-rouge">docker stack</code> コマンドには、Compose ファイルにて configs を定義する機能がサポートされています。
+しかし <code class="highlighter-rouge">configs</code> キーは <code class="highlighter-rouge">docker compose</code> コマンドではサポートされていません。
+詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/#configs">Compose ファイルリファレンス</a>を参照してください。</p>
 
-<h3 id="simple-example-get-started-with-configs">Simple example: Get started with configs</h3>
+<h3 id="simple-example-get-started-with-configs">簡単な例： configs を利用する</h3>
 
-<p>This simple example shows how configs work in just a few commands. For a
-real-world example, continue to
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#advanced-example-use-configs-with-a-nginx-service">Intermediate example: Use configs with a Nginx service</a>.</p>
+<p>この簡単な例では、コマンドを少し書くだけで configs が動作することを示します。
+現実的な例としては、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#advanced-example-use-configs-with-a-nginx-service">応用例: Nginx サービスに configs を利用する</a>に進んでください。</p>
 
 <ol>
   <li>
-    <p>Add a config to Docker. The <code class="highlighter-rouge">docker config create</code> command reads standard
-input because the last argument, which represents the file to read the
-config from, is set to <code class="highlighter-rouge">-</code>.</p>
+    <p>Docker に config を追加します。
+この <code class="highlighter-rouge">docker config create</code> コマンドは、最後の引数により標準入力から読み込みを行います。
+最後の引数は config をどのファイルから読み込むかを示すものであって、ここではそれを <code class="highlighter-rouge">-</code> としています。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"This is a config"</span> | docker config create my-config -
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a <code class="highlighter-rouge">redis</code> service and grant it access to the config. By default,
-the container can access the config at <code class="highlighter-rouge">/my-config</code>, but
-you can customize the file name on the container using the <code class="highlighter-rouge">target</code> option.</p>
+    <p><code class="highlighter-rouge">redis</code> サービスを生成し、config に対してのアクセスを許可します。
+デフォルトでコンテナーは <code class="highlighter-rouge">/my-config</code> にある config へのアクセスが可能です。
+コンテナー内のそのファイル名は、<code class="highlighter-rouge">target</code> オプションを使って変更することができます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> redis <span class="nt">--config</span> my-config redis:alpine
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the task is running without issues using <code class="highlighter-rouge">docker service ps</code>. If
-everything is working, the output looks similar to this:</p>
+    <p><code class="highlighter-rouge">docker service ps</code> を実行して、タスクが問題なく実行しているかを確認します。
+問題がなければ、出力結果は以下のようになります。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps redis
 
@@ -358,12 +340,11 @@ bkna6bpn8r1a  redis.1  redis:alpine  ip-172-31-46-109  Running        Running 8 
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Get the ID of the <code class="highlighter-rouge">redis</code> service task container using <code class="highlighter-rouge">docker ps</code>, so that
-you can use <code class="highlighter-rouge">docker container exec</code> to connect to the container and read the contents
-of the config data file, which defaults to being readable by all and has the
-same name as the name of the config. The first command below illustrates
-how to find the container ID, and the second and third commands use shell
-completion to do this automatically.</p>
+    <p><code class="highlighter-rouge">docker ps</code> を実行して、<code class="highlighter-rouge">redis</code> サービスのタスクコンテナーに対する ID を取得します。
+これを使って <code class="highlighter-rouge">docker container exec</code> によりコンテナーにアクセスして、config データファイルの内容を読み込むことができます。
+config データファイルはデフォルトで誰でも読むことができ、ファイル名は config 名と同じです。
+以下の最初のコマンドは、コンテナー ID を調べるものです。
+そして 2 つめと 3 つめは、シェルのコマンド補完を用いて自動的に入力しました。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--filter</span> <span class="nv">name</span><span class="o">=</span>redis <span class="nt">-q</span>
 
@@ -379,8 +360,9 @@ This is a config
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Try removing the config. The removal fails because the <code class="highlighter-rouge">redis</code> service is
-running and has access to the config.</p>
+    <p>config を削除してみます。
+ただし削除には失敗します。
+これは <code class="highlighter-rouge">redis</code> サービスが稼働中であり、config にアクセスしているためです。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nv">$ </span>docker config <span class="nb">ls
@@ -396,16 +378,16 @@ Error response from daemon: rpc error: code <span class="o">=</span> 3 desc <spa
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Remove access to the config from the running <code class="highlighter-rouge">redis</code> service by updating the
-service.</p>
+    <p><code class="highlighter-rouge">redis</code> サービスを更新して、稼働中のサービスからの config へのアクセスを取り除きます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--config-rm</span> my-config redis
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Repeat steps 3 and 4 again, verifying that the service no longer has access
-to the config. The container ID is different, because the
-<code class="highlighter-rouge">service update</code> command redeploys the service.</p>
+    <p>手順の 3 と 4 を繰り返してみます。
+このときには、もう config へのアクセスが行われていません。
+コンテナー ID は異なるものになっています。
+<code class="highlighter-rouge">service update</code> コマンドを実行したので、サービスが再デプロイされたためです。</p>
 
     <pre><code class="language-none">$ docker container exec -it $(docker ps --filter name=redis -q) cat /my-config
 
@@ -413,7 +395,8 @@ cat: can't open '/my-config': No such file or directory
 </code></pre>
   </li>
   <li>
-    <p>Stop and remove the service, and remove the config from Docker.</p>
+    <p>サービスを停止して削除します。
+そして Docker から config も削除します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service rm redis
 
@@ -422,17 +405,17 @@ cat: can't open '/my-config': No such file or directory
   </li>
 </ol>
 
-<h3 id="simple-example-use-configs-in-a-windows-service">Simple example: Use configs in a Windows service</h3>
+<h3 id="simple-example-use-configs-in-a-windows-service">簡単な例： Windows サービスにて configs を利用する</h3>
 
-<p>This is a very simple example which shows how to use configs with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-for Windows 17.06 CE on Microsoft Windows 10. It stores the webpage in a config.</p>
+<p>ここでの簡単な例は Windows 上において configs を利用するものです。
+利用にあたっては、Microsoft Windows Server 2016 上の Docker 17.06 EE、または Microsoft Windows 10 上の Docker Windows 17.06 CE を用いて Microsoft IIS サービスを稼動させます。
+この例は config 内にウェブページを保存します。</p>
 
-<p>This example assumes that you have PowerShell installed.</p>
+<p>PowerShell はインストール済であるとします。</p>
 
 <ol>
   <li>
-    <p>Save the following into a new file <code class="highlighter-rouge">index.html</code>.</p>
+    <p>以下のような <code class="highlighter-rouge">index.html</code> を新規生成して保存します。</p>
 
     <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;&lt;title&gt;</span>Hello Docker<span class="nt">&lt;/title&gt;&lt;/head&gt;</span>
@@ -443,19 +426,19 @@ for Windows 17.06 CE on Microsoft Windows 10. It stores the webpage in a config.
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>If you have not already done so, initialize or join the swarm.</p>
+    <p>スウォームの初期化と参加を行っていない場合は、これを行います。</p>
 
     <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm init
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Save the <code class="highlighter-rouge">index.html</code> file as a swarm config named <code class="highlighter-rouge">homepage</code>.</p>
+    <p><code class="highlighter-rouge">index.html</code> ファイルを、スウォームの config ファイルとして <code class="highlighter-rouge">homepage</code> という名前により保存します。</p>
 
     <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker config create homepage index.html
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create an IIS service and grant it access to the <code class="highlighter-rouge">homepage</code> config.</p>
+    <p>IIS サービスを生成して <code class="highlighter-rouge">homepage</code> config へのアクセスを許可します。</p>
 
     <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create
     --name my-iis
@@ -465,11 +448,11 @@ for Windows 17.06 CE on Microsoft Windows 10. It stores the webpage in a config.
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Access the IIS service at <code class="highlighter-rouge">http://localhost:8000/</code>. It should serve
-the HTML content from the first step.</p>
+    <p>IIS サービスを通じて <code class="highlighter-rouge">http://localhost:8000/</code> にアクセスします。
+手順 1 で作り出した HTML 内容が表示されるはずです。</p>
   </li>
   <li>
-    <p>Remove the service and the config.</p>
+    <p>サービスと config を削除します。</p>
 
     <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service <span class="nb">rm </span>my-iis
 
@@ -478,37 +461,33 @@ docker config <span class="nb">rm </span>homepage
   </li>
 </ol>
 
-<h3 id="advanced-example-use-configs-with-a-nginx-service">Advanced example: Use configs with a Nginx service</h3>
+<h3 id="advanced-example-use-configs-with-a-nginx-service">応用例: Nginx サービスに configs を利用する</h3>
 
-<p>This example is divided into two parts.
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#generate-the-site-certificate">The first part</a> is all about generating
-the site certificate and does not directly involve Docker configs at all, but
-it sets up <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#configure-the-nginx-container">the second part</a>, where you store
-and use the site certificate as a series of secrets and the Nginx configuration
-as a config. The example shows how to set options on the config, such as the
-target location within the container and the file permissions (<code class="highlighter-rouge">mode</code>).</p>
+<p>この例は 2 つの部分から構成されます。
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#generate-the-site-certificate">1 つめの部分</a>は、サーバー証明書の生成に関してです。
+Docker configs とは直接関係がありません。
+ただし <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#configure-the-nginx-container">2 つめの部分</a>において、一連の機密情報としてそのサーバー証明書を保存して利用します。
+また Nginx の設定を config として保存します。
+この例では config におけるオプションの設定方法を示しており、たとえばコンテナー内のターゲットを指定したり、ファイルパーミッションを指定したりしています。</p>
 
-<h4 id="generate-the-site-certificate">Generate the site certificate</h4>
+<h4 id="generate-the-site-certificate">サーバー証明書の生成</h4>
 
-<p>Generate a root CA and TLS certificate and key for your site. For production
-sites, you may want to use a service such as <code class="highlighter-rouge">Let’s Encrypt</code> to generate the
-TLS certificate and key, but this example uses command-line tools. This step
-is a little complicated, but is only a set-up step so that you have
-something to store as a Docker secret. If you want to skip these sub-steps,
-you can <a href="https://letsencrypt.org/getting-started/">use Let’s Encrypt</a> to
-generate the site key and certificate, name the files <code class="highlighter-rouge">site.key</code> and
-<code class="highlighter-rouge">site.crt</code>, and skip to
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#configure-the-nginx-container">Configure the Nginx container</a>.</p>
+<p>自サイトに対しての root CA と TLS 証明書および鍵を生成します。
+本番環境向けでは <code class="highlighter-rouge">Let’s Encrypt</code> のようなサービスを利用して、TLS 証明書や鍵を生成するかもしれませんが、この例ではコマンドラインツールを用いることにします。
+ここでの手順は多少複雑です。
+ただしここでは唯一、Docker secret を使って情報を保存する手順を示すものです。
+この手順を行わない場合は、<a href="https://letsencrypt.org/getting-started/">Let’s Encrypt の利用</a>を通じて、サイトの鍵と証明書を生成し、それぞれを <code class="highlighter-rouge">site.key</code>、<code class="highlighter-rouge">site.crt</code> としてください。
+その場合は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#configure-the-nginx-container">Nginx コンテナーの設定</a> に進んでください。</p>
 
 <ol>
   <li>
-    <p>Generate a root key.</p>
+    <p>root 鍵を生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl genrsa <span class="nt">-out</span> <span class="s2">"root-ca.key"</span> 4096
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Generate a CSR using the root key.</p>
+    <p>root 鍵を使って CSR を生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl req <span class="se">\</span>
           <span class="nt">-new</span> <span class="nt">-key</span> <span class="s2">"root-ca.key"</span> <span class="se">\</span>
@@ -517,9 +496,9 @@ generate the site key and certificate, name the files <code class="highlighter-r
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Configure the root CA. Edit a new file called <code class="highlighter-rouge">root-ca.cnf</code> and paste
-the following contents into it. This constrains the root CA to only sign
-leaf certificates and not intermediate CAs.</p>
+    <p>root CA を設定します。
+新規に <code class="highlighter-rouge">root-ca.cnf</code> というファイルを生成して、以下の内容を書き込みます。
+ここでは root CA をリーフ証明書として生成し、中間証明書とはしません。</p>
 
     <pre><code class="language-none">[root_ca]
 basicConstraints = critical,CA:TRUE,pathlen:1
@@ -528,7 +507,7 @@ subjectKeyIdentifier=hash
 </code></pre>
   </li>
   <li>
-    <p>Sign the certificate.</p>
+    <p>証明書にサインします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 3650 <span class="nt">-in</span> <span class="s2">"root-ca.csr"</span> <span class="se">\</span>
                <span class="nt">-signkey</span> <span class="s2">"root-ca.key"</span> <span class="nt">-sha256</span> <span class="nt">-out</span> <span class="s2">"root-ca.crt"</span> <span class="se">\</span>
@@ -537,23 +516,22 @@ subjectKeyIdentifier=hash
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Generate the site key.</p>
+    <p>サイト鍵を生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl genrsa <span class="nt">-out</span> <span class="s2">"site.key"</span> 4096
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Generate the site certificate and sign it with the site key.</p>
+    <p>サイト証明書を生成し、サイト鍵を用いてサインします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl req <span class="nt">-new</span> <span class="nt">-key</span> <span class="s2">"site.key"</span> <span class="nt">-out</span> <span class="s2">"site.csr"</span> <span class="nt">-sha256</span> <span class="se">\</span>
           <span class="nt">-subj</span> <span class="s1">'/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Configure the site certificate. Edit a new file called <code class="highlighter-rouge">site.cnf</code> and
-paste the following contents into it. This constrains the site
-certificate so that it can only be used to authenticate a server and
-can’t be used to sign certificates.</p>
+    <p>サイト証明書を設定します。
+新規に <code class="highlighter-rouge">site.cnf</code> というファイルを生成して、以下の内容を書き込みます。
+この証明書はサーバーを認証するためだけに用いるものとし、他の証明書のサインには用いることができないようにします。</p>
 
     <pre><code class="language-none">[server]
 authorityKeyIdentifier=keyid,issuer
@@ -565,7 +543,7 @@ subjectKeyIdentifier=hash
 </code></pre>
   </li>
   <li>
-    <p>Sign the site certificate.</p>
+    <p>サイト証明書にサインします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 750 <span class="nt">-in</span> <span class="s2">"site.csr"</span> <span class="nt">-sha256</span> <span class="se">\</span>
     <span class="nt">-CA</span> <span class="s2">"root-ca.crt"</span> <span class="nt">-CAkey</span> <span class="s2">"root-ca.key"</span> <span class="nt">-CAcreateserial</span> <span class="se">\</span>
@@ -573,22 +551,21 @@ subjectKeyIdentifier=hash
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">site.csr</code> and <code class="highlighter-rouge">site.cnf</code> files are not needed by the Nginx service, but
-you need them if you want to generate a new site certificate. Protect
-the <code class="highlighter-rouge">root-ca.key</code> file.</p>
+    <p><code class="highlighter-rouge">site.csr</code> と <code class="highlighter-rouge">site.cnf</code> は Nginx サービスにとっては不要です。
+ただし新たなサイト証明書を生成する際には必要になります。
+<code class="highlighter-rouge">root-ca.key</code> は大事に保管しておきます。</p>
   </li>
 </ol>
 
-<h4 id="configure-the-nginx-container">Configure the Nginx container</h4>
+<h4 id="configure-the-nginx-container">Nginx コンテナーの設定</h4>
 
 <ol>
   <li>
-    <p>Produce a very basic Nginx configuration that serves static files over HTTPS.
-The TLS certificate and key are stored as Docker secrets so that they
-can be rotated easily.</p>
+    <p>Nginx の基本的な設定として、HTTPS 越しにスタティックファイルを提供するものを用意します。
+TLS 証明書と鍵は Docker secrets として保存します。
+こうしておけば config の入れ替えも簡単に行うことができます。</p>
 
-    <p>In the current directory, create a new file called <code class="highlighter-rouge">site.conf</code> with the
-following contents:</p>
+    <p>カレントディレクトリにおいて、<code class="highlighter-rouge">site.conf</code> というファイルを新規生成し、内容を以下のようにします。</p>
 
     <pre><code class="language-none">server {
     listen                443 ssl;
@@ -604,10 +581,10 @@ following contents:</p>
 </code></pre>
   </li>
   <li>
-    <p>Create two secrets, representing the key and the certificate. You can store
-any file as a secret as long as it is smaller than 500 KB. This allows you
-to decouple the key and certificate from the services that use them.
-In these examples, the secret name and the file name are the same.</p>
+    <p>鍵と証明書を表わす Docker secrets を 2 つ生成します。
+Docker secrets はどのようなファイルであっても、サイズが 500 KB 以下であれば保存できます。
+こうして鍵と証明書は、これを利用するサービスから切り離すことができます。
+ここでの例では、secrets とファイル名は同一にしています。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker secret create site.key site.key
 
@@ -615,13 +592,13 @@ In these examples, the secret name and the file name are the same.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Save the <code class="highlighter-rouge">site.conf</code> file in a Docker config. The first parameter is the
-name of the config, and the second parameter is the file to read it from.</p>
+    <p>Docker config の中に <code class="highlighter-rouge">site.conf</code> ファイルを保存します。
+第 1 パラメーターは config 名、第 2 パラメーターはそれを読み込むファイル名です。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config create site.conf site.conf
 </code></pre></div>    </div>
 
-    <p>List the configs:</p>
+    <p>configs の一覧を確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config <span class="nb">ls
 
@@ -630,9 +607,8 @@ name of the config, and the second parameter is the file to read it from.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a service that runs Nginx and has access to the two secrets and the
-config. Set the mode to <code class="highlighter-rouge">0440</code> so that the file is only readable by its
-owner and that owner’s group, not the world.</p>
+    <p>Nginx を起動するサービスを生成し、2 つの secrets と config へのアクセスを許可します。
+モードは <code class="highlighter-rouge">0440</code> とし、読み込み可とするのは所有者とそのグループのみ、つまりすべてへの読み込み許可は与えないようにします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
      <span class="nt">--name</span> nginx <span class="se">\</span>
@@ -644,7 +620,7 @@ owner and that owner’s group, not the world.</p>
      sh <span class="nt">-c</span> <span class="s2">"exec nginx -g 'daemon off;'"</span>
 </code></pre></div>    </div>
 
-    <p>Within the running containers, the following three files now exist:</p>
+    <p>稼動中のコンテナー内部では、以下の 3 つのファイルが存在しています。</p>
 
     <ul>
       <li><code class="highlighter-rouge">/run/secrets/site.key</code></li>
@@ -653,7 +629,7 @@ owner and that owner’s group, not the world.</p>
     </ul>
   </li>
   <li>
-    <p>Verify that the Nginx service is running.</p>
+    <p>Nginx サービスが起動していることを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
 
@@ -667,8 +643,8 @@ nginx.1.9ls3yo9ugcls  nginx:latest  moby  Running        Running 3 minutes ago
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the service is operational: you can reach the Nginx
-server, and that the correct TLS certificate is being used.</p>
+    <p>そのサービスが操作可能であることを確認します。
+つまり Nginx サーバーへアクセスができ、正しい TLS 証明書が用いられていることを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--cacert</span> root-ca.crt https://0.0.0.0:3000
 
@@ -740,9 +716,7 @@ SSL-Session:
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Unless you are going to continue to the next example, clean up after running
-this example by removing the <code class="highlighter-rouge">nginx</code> service and the stored secrets and
-config.</p>
+    <p>この例を実行した後に、次に示す例は確認しないのであれば、<code class="highlighter-rouge">nginx</code> サービスと保存した secrets、config を削除します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service rm nginx
 
@@ -753,22 +727,19 @@ config.</p>
   </li>
 </ol>
 
-<p>You have now configured a Nginx service with its configuration decoupled from
-its image. You could run multiple sites with exactly the same image but
-separate configurations, without the need to build a custom image at all.</p>
+<p>ここまでの例から Nginx サービスの設定内容を、そのイメージから切り離した形で実現しました。
+まったく同じイメージを使い異なる設定によって複数サイトを提供しようと思ったら、もう新たなイメージをビルドする必要はなくなったわけです。</p>
 
-<h3 id="example-rotate-a-config">Example: Rotate a config</h3>
+<h3 id="example-rotate-a-config">例： config の入れ替え</h3>
 
-<p>To rotate a config, you first save a new config with a different name than the
-one that is currently in use. You then redeploy the service, removing the old
-config and adding the new config at the same mount point within the container.
-This example builds upon the previous one by rotating the <code class="highlighter-rouge">site.conf</code>
-configuration file.</p>
+<p>config を入れ替えるには、まず新たな config を、現在利用している config とは別の名前で保存しておきます。
+そしてサービスを再デプロイし、古い config を削除して、コンテナー内の同一マウントポイントに新たな config を追加します。
+ここに示す例では、前述の例をもとにして、<code class="highlighter-rouge">site.conf</code> という設定ファイルを切り替える方法を示します。</p>
 
 <ol>
   <li>
-    <p>Edit the <code class="highlighter-rouge">site.conf</code> file locally. Add <code class="highlighter-rouge">index.php</code> to the <code class="highlighter-rouge">index</code> line, and
-save the file.</p>
+    <p>ローカルの <code class="highlighter-rouge">site.conf</code> ファイルを編集します。
+<code class="highlighter-rouge">index</code> 行に <code class="highlighter-rouge">index.php</code> を追加し保存します。</p>
 
     <pre><code class="language-none">server {
     listen                443 ssl;
@@ -784,13 +755,13 @@ save the file.</p>
 </code></pre>
   </li>
   <li>
-    <p>Create a new Docker config using the new <code class="highlighter-rouge">site.conf</code>, called <code class="highlighter-rouge">site-v2.conf</code>.</p>
+    <p>上の <code class="highlighter-rouge">site.conf</code> ファイルを使って、新たな<code class="highlighter-rouge">site-v2.conf</code> という Docker config を生成します。</p>
 
-    <pre><code class="language-bah">$ docker config create site-v2.conf site.conf
-</code></pre>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config create site-v2.conf site.conf
+</code></pre></div>    </div>
   </li>
   <li>
-    <p>Update the <code class="highlighter-rouge">nginx</code> service to use the new config instead of the old one.</p>
+    <p><code class="highlighter-rouge">nginx</code> サービスを更新して、古い config から新しい config を利用するようにします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="se">\</span>
   <span class="nt">--config-rm</span> site.conf <span class="se">\</span>
@@ -799,16 +770,15 @@ save the file.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the <code class="highlighter-rouge">nginx</code> service is fully re-deployed, using
-<code class="highlighter-rouge">docker service ps nginx</code>. When it is, you can remove the old <code class="highlighter-rouge">site.conf</code>
-config.</p>
+    <p><code class="highlighter-rouge">docker service ps nginx</code> を実行して、<code class="highlighter-rouge">nginx</code> サービスが問題なく再デプロイされていることを確認します。
+正常であれば、古い config つまり <code class="highlighter-rouge">site.conf</code> を削除します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker config rm site.conf
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>To clean up, you can remove the <code class="highlighter-rouge">nginx</code> service, as well as the secrets and
-configs.</p>
+    <p>クリーンアップします。
+<code class="highlighter-rouge">nginx</code> サービスを削除し、同じく secrets と configs も削除します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service rm nginx
 
@@ -819,8 +789,7 @@ configs.</p>
   </li>
 </ol>
 
-<p>You have now updated your <code class="highlighter-rouge">nginx</code> service’s configuration without the need to
-rebuild its image.</p>
+<p>こうして <code class="highlighter-rouge">nginx</code> サービスの設定は、イメージを再ビルドすることなく更新することができました。</p>
 
 							<!-- tags -->
 							
@@ -856,7 +825,7 @@ rebuild its image.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "engine/swarm/configs.md",
-										"title": "Store configuration data using Docker Configs",
+										"title": "Docker configs を利用した設定データの保存",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/configs.md"
 									};
 									(function(d, c, j) {
@@ -916,20 +885,20 @@ rebuild its image.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#about-configs" class="nomunge">About configs</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#about-configs" class="nomunge">configs について</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#windows-support" class="nomunge">Windows support</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#windows-support" class="nomunge">Windows サポート</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#how-docker-manages-configs" class="nomunge">How Docker manages configs</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#read-more-about-docker-config-commands" class="nomunge">Read more about docker config commands</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#examples" class="nomunge">Examples</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#how-docker-manages-configs" class="nomunge">Docker は configs をどう管理しているか</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#read-more-about-docker-config-commands" class="nomunge">docker config コマンドについての詳細</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#examples" class="nomunge">利用例</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#defining-and-using-configs-in-compose-files" class="nomunge">Defining and using configs in compose files</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#simple-example-get-started-with-configs" class="nomunge">Simple example: Get started with configs</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#simple-example-use-configs-in-a-windows-service" class="nomunge">Simple example: Use configs in a Windows service</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#advanced-example-use-configs-with-a-nginx-service" class="nomunge">Advanced example: Use configs with a Nginx service</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#example-rotate-a-config" class="nomunge">Example: Rotate a config</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#defining-and-using-configs-in-compose-files" class="nomunge">Compose ファイルにおける configs の定義と利用</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#simple-example-get-started-with-configs" class="nomunge">簡単な例： configs を利用する</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#simple-example-use-configs-in-a-windows-service" class="nomunge">簡単な例： Windows サービスにて configs を利用する</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#advanced-example-use-configs-with-a-nginx-service" class="nomunge">応用例: Nginx サービスに configs を利用する</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/#example-rotate-a-config" class="nomunge">例： config の入れ替え</a></li>
     </ul>
   </li>
 </ul>

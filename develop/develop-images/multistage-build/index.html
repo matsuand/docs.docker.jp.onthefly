@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-06-16 10:47:16 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-16T10:47:16+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use multi-stage builds"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Multi-stage builds are a new feature requiring Docker 17.05 or higher on the daemon and client. Multistage builds are useful to anyone who has struggled to optimize Dockerfiles while keeping..." />
+	<meta name="twitter:title" itemprop="title name" content="マルチステージビルドの利用"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="マルチステージビルドは、Docker 17.05 またはそれ以上の Docker デーモンおよび Docker クライアントにおける新機能です。 マルチステージビルドは、Dockerfile を読みやすく保守しやすくするように、最適化に取り組むユーザーにとって非常にありがたいものです。 感謝: Alex Ellis 氏に感謝します。 氏のブログ投稿 Builder pattern vs. Multi-stage builds in Docker に基づいて、以下の利用例を掲載する許可を頂きました。 マルチステージビルド以前 イメージをビルドする際に取り組むことといえば、ほとんどがそのイメージサイズを小さく抑えることです。 Dockerfile 内の各命令は、イメージに対してレイヤーを追加します。 そこで次のレイヤー処理に入る前には、不要となった生成物はクリーンアップしておくことが必要です。 現実に効果的な Dockerfile を書くためには、いつもながらトリッキーなシェルのテクニックや、レイヤーができる限り小さくなるようなロジックを考えたりすることが必要でした。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-16T10:47:16+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="images, containers, best practices, multi-stage, multistage">
@@ -100,16 +100,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use multi-stage builds | Docker Documentation</title>
-<meta property="og:title" content="Use multi-stage builds" />
+	<title>マルチステージビルドの利用 | Docker Documentation</title>
+<meta property="og:title" content="マルチステージビルドの利用" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Keeping your images small with multi-stage images" />
-<meta property="og:description" content="Keeping your images small with multi-stage images" />
+<meta name="description" content="マルチステージイメージを使って、イメージサイズを小さく維持する。" />
+<meta property="og:description" content="マルチステージイメージを使って、イメージサイズを小さく維持する。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use multi-stage builds","description":"Keeping your images small with multi-stage images","url":"https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"マルチステージビルドの利用","description":"マルチステージイメージを使って、イメージサイズを小さく維持する。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -179,46 +179,40 @@
 						<section class="section">
 							
 								
-							<h1>Use multi-stage builds</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>マルチステージビルドの利用</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    3 分
   
 </span>
 
 							
 							
-							<p>Multi-stage builds are a new feature requiring Docker 17.05 or higher on the
-daemon and client. Multistage builds are useful to anyone who has struggled to
-optimize Dockerfiles while keeping them easy to read and maintain.</p>
+							
+<p>マルチステージビルドは、Docker 17.05 またはそれ以上の Docker デーモンおよび Docker クライアントにおける新機能です。
+マルチステージビルドは、Dockerfile を読みやすく保守しやすくするように、最適化に取り組むユーザーにとって非常にありがたいものです。</p>
 
 <blockquote>
-  <p><strong>Acknowledgment</strong>:
-Special thanks to <a href="https://twitter.com/alexellisuk">Alex Ellis</a> for granting
-permission to use his blog post
-<a href="http://blog.alexellis.io/mutli-stage-docker-builds/">Builder pattern vs. Multi-stage builds in Docker</a>
-as the basis of the examples below.</p>
+  <p><strong>感謝</strong>:
+<a href="https://twitter.com/alexellisuk">Alex Ellis</a> 氏に感謝します。
+氏のブログ投稿 <a href="http://blog.alexellis.io/mutli-stage-docker-builds/">Builder pattern vs. Multi-stage builds in Docker</a> に基づいて、以下の利用例を掲載する許可を頂きました。</p>
 </blockquote>
 
-<h2 id="before-multi-stage-builds">Before multi-stage builds</h2>
+<h2 id="before-multi-stage-builds">マルチステージビルド以前</h2>
 
-<p>One of the most challenging things about building images is keeping the image
-size down. Each instruction in the Dockerfile adds a layer to the image, and you
-need to remember to clean up any artifacts you don’t need before moving on to
-the next layer. To write a really efficient Dockerfile, you have traditionally
-needed to employ shell tricks and other logic to keep the layers as small as
-possible and to ensure that each layer has the artifacts it needs from the
-previous layer and nothing else.</p>
+<p>イメージをビルドする際に取り組むことといえば、ほとんどがそのイメージサイズを小さく抑えることです。
+Dockerfile 内の各命令は、イメージに対してレイヤーを追加します。
+そこで次のレイヤー処理に入る前には、不要となった生成物はクリーンアップしておくことが必要です。
+現実に効果的な Dockerfile を書くためには、いつもながらトリッキーなシェルのテクニックや、レイヤーができる限り小さくなるようなロジックを考えたりすることが必要でした。
+つまり各レイヤーは、それ以前のレイヤーから受け継ぐべき生成物のみを持ち、他のものは一切持たないようにすることが必要であったわけです。</p>
 
-<p>It was actually very common to have one Dockerfile to use for development (which
-contained everything needed to build your application), and a slimmed-down one
-to use for production, which only contained your application and exactly what
-was needed to run it. This has been referred to as the “builder
-pattern”. Maintaining two Dockerfiles is not ideal.</p>
+<p>これまでのごくあたりまえの方法として、開発環境向けの Dockerfile を 1 つ用意し、そこにアプリケーションの構築に必要なものをすべて含めます。
+そこから本番環境向けとしてスリム化したものをもう 1 つ用意して、アプリケーションそのものとそれを動かすために必要なもののみを含めるようにします。
+これは「開発パターン」（builder pattern）と呼ばれてきました。
+ただこの 2 つの Dockerfile を保守していくことは、目指すものではありません。</p>
 
-<p>Here’s an example of a <code class="highlighter-rouge">Dockerfile.build</code> and <code class="highlighter-rouge">Dockerfile</code> which adhere to the
-builder pattern above:</p>
+<p>以下に示すのは <code class="highlighter-rouge">Dockerfile.build</code> と <code class="highlighter-rouge">Dockerfile</code> を用いる例であり、上述の開発パターンにこだわったやり方です。</p>
 
 <p><strong><code class="highlighter-rouge">Dockerfile.build</code></strong>:</p>
 
@@ -229,10 +223,10 @@ builder pattern above:</p>
   &amp;&amp; <span class="n">CGO_ENABLED</span>=<span class="m">0</span> <span class="n">GOOS</span>=<span class="n">linux</span> <span class="n">go</span> <span class="n">build</span> -<span class="n">a</span> -<span class="n">installsuffix</span> <span class="n">cgo</span> -<span class="n">o</span> <span class="n">app</span> .
 </code></pre></div></div>
 
-<p>Notice that this example also artificially compresses two <code class="highlighter-rouge">RUN</code> commands together
-using the Bash <code class="highlighter-rouge">&amp;&amp;</code> operator, to avoid creating an additional layer in the image.
-This is failure-prone and hard to maintain. It’s easy to insert another command
-and forget to continue the line using the <code class="highlighter-rouge">\</code> character, for example.</p>
+<p>上の例を見てわかるように、本来 2 つある <code class="highlighter-rouge">RUN</code> コマンドを Bash の <code class="highlighter-rouge">&amp;&amp;</code> オペレーターによって連結しています。
+これを行うことで、イメージ内に不要なレイヤーが生成されることを防いでいます。
+ただこれでは間違いを起こしやすく、保守もやりづらくなります。
+別のコマンドを挿入するのは簡単なことなので、<code class="highlighter-rouge">\</code> 文字を使って行を分割するようなことは止めにして、以下のようにします。</p>
 
 <p><strong><code class="highlighter-rouge">Dockerfile</code></strong>:</p>
 
@@ -261,21 +255,19 @@ docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> alexe
 rm ./app
 </code></pre></div></div>
 
-<p>When you run the <code class="highlighter-rouge">build.sh</code> script, it needs to build the first image, create
-a container from it to copy the artifact out, then build the second
-image. Both images take up room on your system and you still have the <code class="highlighter-rouge">app</code>
-artifact on your local disk as well.</p>
+<p><code class="highlighter-rouge">build.sh</code> スクリプトを実行すると、1 つめのイメージがビルドされます。
+そこからコンテナーを生成してイメージ内容をコピーし、2 つめのイメージがビルドされます。
+2 つのイメージは、それなりの容量をとるものであり、ローカルディスク上に <code class="highlighter-rouge">app</code> の生成物も残ったままです。</p>
 
-<p>Multi-stage builds vastly simplify this situation!</p>
+<p>マルチステージビルドは、広範囲にわたってこのような状況を簡略化します。</p>
 
-<h2 id="use-multi-stage-builds">Use multi-stage builds</h2>
+<h2 id="use-multi-stage-builds">マルチステージビルドの利用</h2>
 
-<p>With multi-stage builds, you use multiple <code class="highlighter-rouge">FROM</code> statements in your Dockerfile.
-Each <code class="highlighter-rouge">FROM</code> instruction can use a different base, and each of them begins a new
-stage of the build. You can selectively copy artifacts from one stage to
-another, leaving behind everything you don’t want in the final image. To show
-how this works, let’s adapt the Dockerfile from the previous section to use
-multi-stage builds.</p>
+<p>マルチステージビルドを行うには、Dockerfile 内に <code class="highlighter-rouge">FROM</code> 行を複数記述します。
+各 <code class="highlighter-rouge">FROM</code> 命令のベースイメージは、それぞれに異なるものとなり、各命令から新しいビルドステージが開始されます。
+イメージ内に生成された内容を選び出して、一方から他方にコピーすることができます。
+そして最終イメージに含めたくない内容は、放っておくことができます。
+こういったことがどのようにして動作するのかを見るために、前節で示した Dockerfile をマルチステージビルドを使ったものに変更してみます。</p>
 
 <p><strong><code class="highlighter-rouge">Dockerfile</code></strong>:</p>
 
@@ -292,29 +284,31 @@ multi-stage builds.</p>
 <span class="n">CMD</span> [<span class="s2">"./app"</span>]
 </code></pre></div></div>
 
-<p>You only need the single Dockerfile. You don’t need a separate build script,
-either. Just run <code class="highlighter-rouge">docker build</code>.</p>
+<p>Dockerfile はただ 1 つ用意するだけです。
+またビルドスクリプトも個別に用意するわけではありません。
+単に <code class="highlighter-rouge">docker build</code> を実行するだけです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> alexellis2/href-counter:latest <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>The end result is the same tiny production image as before, with a
-significant reduction in complexity. You don’t need to create any intermediate
-images and you don’t need to extract any artifacts to your local system at all.</p>
+<p>最終結果として、以前と変わらずに本番環境向けの小さなイメージができあがりました。
+しかも複雑さが一切なくなっています。
+中間的なイメージを作る必要などありません。
+さらに生成した内容をローカルシステムに抽出することも一切不要です。</p>
 
-<p>How does it work? The second <code class="highlighter-rouge">FROM</code> instruction starts a new build stage with
-the <code class="highlighter-rouge">alpine:latest</code> image as its base. The <code class="highlighter-rouge">COPY --from=0</code> line copies just the
-built artifact from the previous stage into this new stage. The Go SDK and any
-intermediate artifacts are left behind, and not saved in the final image.</p>
+<p>どうやってこれが動いているのでしょう？
+2 つめの <code class="highlighter-rouge">FROM</code> 命令は、<code class="highlighter-rouge">alpine:latest</code> をベースイメージとして新たなビルドステージを開始しています。
+そして <code class="highlighter-rouge">COPY --from=0</code> という行では、直前のステージで作り出された生成内容を、単純に新たなステージにコピーしています。
+Go 言語の SDK やその他の中間生成物は取り残されていて、最終的なイメージには保存されていません。</p>
 
-<h2 id="name-your-build-stages">Name your build stages</h2>
+<h2 id="name-your-build-stages">ビルドステージの命名</h2>
 
-<p>By default, the stages are not named, and you refer to them by their integer
-number, starting with 0 for the first <code class="highlighter-rouge">FROM</code> instruction. However, you can
-name your stages, by adding an <code class="highlighter-rouge">AS &lt;NAME&gt;</code> to the <code class="highlighter-rouge">FROM</code> instruction. This
-example improves the previous one by naming the stages and using the name in
-the <code class="highlighter-rouge">COPY</code> instruction. This means that even if the instructions in your
-Dockerfile are re-ordered later, the <code class="highlighter-rouge">COPY</code> doesn’t break.</p>
+<p>デフォルトではステージに名前はつきません。
+そこでステージを参照するには、ステージを表わす整数値を用います。
+この整数値は、最初の <code class="highlighter-rouge">FROM</code> 命令を 0 として順次割り振られるものです。
+ただし <code class="highlighter-rouge">FROM</code> 命令に <code class="highlighter-rouge">AS &lt;NAME&gt;</code> の構文を加えれば、ステージに名前をつけることができます。
+以下の例はこれまでのものをさらに充実させて、ステージに名前をつけ、<code class="highlighter-rouge">COPY</code> 命令においてその名前を利用します。
+これはつまり、Dockerfile 内の命令の記述順が、後々変更になったとしても、<code class="highlighter-rouge">COPY</code> は確実に動作するということです。</p>
 
 <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">golang</span>:<span class="m">1</span>.<span class="m">7</span>.<span class="m">3</span> <span class="n">AS</span> <span class="n">builder</span>
 <span class="n">WORKDIR</span> /<span class="n">go</span>/<span class="n">src</span>/<span class="n">github</span>.<span class="n">com</span>/<span class="n">alexellis</span>/<span class="n">href</span>-<span class="n">counter</span>/
@@ -329,33 +323,31 @@ Dockerfile are re-ordered later, the <code class="highlighter-rouge">COPY</code>
 <span class="n">CMD</span> [<span class="s2">"./app"</span>]
 </code></pre></div></div>
 
-<h2 id="stop-at-a-specific-build-stage">Stop at a specific build stage</h2>
+<h2 id="stop-at-a-specific-build-stage">ビルドステージの指定</h2>
 
-<p>When you build your image, you don’t necessarily need to build the entire
-Dockerfile including every stage. You can specify a target build stage. The
-following command assumes you are using the previous <code class="highlighter-rouge">Dockerfile</code> but stops at
-the stage named <code class="highlighter-rouge">builder</code>:</p>
+<p>イメージをビルドする際に、Dockerfile 内に含まれるビルドステージをすべてビルドしなければならない、というわけではありません。
+ビルド対象とするステージは指定することができます。
+以下のコマンドは、前述の <code class="highlighter-rouge">Dockerfile</code> を利用しつつ、<code class="highlighter-rouge">builder</code> と名付けたステージのみビルドするものです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--target</span> builder <span class="nt">-t</span> alexellis2/href-counter:latest <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>A few scenarios where this might be very powerful are:</p>
+<p>この機能が役立つ例として以下があります。</p>
 
 <ul>
-  <li>Debugging a specific build stage</li>
-  <li>Using a <code class="highlighter-rouge">debug</code> stage with all debugging symbols or tools enabled, and a
-lean <code class="highlighter-rouge">production</code> stage</li>
-  <li>Using a <code class="highlighter-rouge">testing</code> stage in which your app gets populated with test data, but
-building for production using a different stage which uses real data</li>
+  <li>特定のビルドステージをデバッグすることができます。</li>
+  <li><code class="highlighter-rouge">debug</code> ステージでは、デバッグシンボルやデバッグツールを最大限利用し、<code class="highlighter-rouge">production</code> ステージはスリムなものにすることができます。</li>
+  <li><code class="highlighter-rouge">testing</code> ステージでは、アプリに用いるテストデータを投入し、本番環境向けの別のステージビルドでは、本物のデータを利用できます。</li>
 </ul>
 
-<h2 id="use-an-external-image-as-a-stage">Use an external image as a “stage”</h2>
+<h2 id="use-an-external-image-as-a-stage">外部イメージの「ステージ」としての利用</h2>
 
-<p>When using multi-stage builds, you are not limited to copying from stages you
-created earlier in your Dockerfile. You can use the <code class="highlighter-rouge">COPY --from</code> instruction to
-copy from a separate image, either using the local image name, a tag available
-locally or on a Docker registry, or a tag ID. The Docker client pulls the image
-if necessary and copies the artifact from there. The syntax is:</p>
+<p>マルチステージビルドの利用にあたって、ステージのコピーは Dockerfile 内での直前のステージだけに限定されるものではありません。
+<code class="highlighter-rouge">COPY --from</code> 命令では別のイメージからコピーすることができます。
+その際にはローカルや Docker レジストリ上のイメージ名、タグ名、あるいはタグ ID を指定します。
+Docker クライアントは必要なときにはイメージを取得します。
+そしてそこから構築内容をコピーします。
+コマンド構文は以下のようになります。</p>
 
 <pre><code class="language-Dockerfile">COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 </code></pre>
@@ -395,7 +387,7 @@ if necessary and copies the artifact from there. The syntax is:</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "develop/develop-images/multistage-build.md",
-										"title": "Use multi-stage builds",
+										"title": "マルチステージビルドの利用",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/develop/develop-images/multistage-build.md"
 									};
 									(function(d, c, j) {
@@ -455,11 +447,11 @@ if necessary and copies the artifact from there. The syntax is:</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#before-multi-stage-builds" class="nomunge">Before multi-stage builds</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#use-multi-stage-builds" class="nomunge">Use multi-stage builds</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#name-your-build-stages" class="nomunge">Name your build stages</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage" class="nomunge">Stop at a specific build stage</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#use-an-external-image-as-a-stage" class="nomunge">Use an external image as a “stage”</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#before-multi-stage-builds" class="nomunge">マルチステージビルド以前</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#use-multi-stage-builds" class="nomunge">マルチステージビルドの利用</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#name-your-build-stages" class="nomunge">ビルドステージの命名</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage" class="nomunge">ビルドステージの指定</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/#use-an-external-image-as-a-stage" class="nomunge">外部イメージの「ステージ」としての利用</a></li>
 </ul>
 
 

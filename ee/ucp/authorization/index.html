@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-21 11:33:34 +0900 -->
+<!-- Page generated 2019-06-16 10:47:16 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -65,7 +65,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-21T11:33:34+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-16T10:47:16+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -75,7 +75,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane (UCP), the UI for Docker EE, lets you authorize users to view, edit, and use cluster resources by granting role-based permissions against resource sets. To authorize..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-21T11:33:34+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-16T10:47:16+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes">
@@ -170,7 +170,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
 
@@ -281,11 +281,13 @@ and applies grants to users and teams.</p>
 
 <h2 id="secure-kubernetes-defaults">Secure Kubernetes defaults</h2>
 
-<p>For cluster security, only users and service accounts granted the <code class="highlighter-rouge">cluster-admin</code> ClusterRole for
-all Kubernetes namespaces via a ClusterRoleBinding can deploy pods with privileged options. This prevents a
-platform user from being able to bypass the Universal Control Plane Security Model.</p>
+<p>For cluster security, only users and service accounts granted the
+<code class="highlighter-rouge">cluster-admin</code> ClusterRole for all Kubernetes namespaces via a
+ClusterRoleBinding can deploy pods with privileged options. This prevents a
+platform user from being able to bypass the Universal Control Plane Security
+Model. These privileged options include:</p>
 
-<p>These privileged options include:</p>
+<p>Pods with any of the following defined in the Pod Specification:</p>
 
 <ul>
   <li><code class="highlighter-rouge">PodSpec.hostIPC</code> - Prevents a user from deploying a pod in the host’s IPC
@@ -304,6 +306,21 @@ Container</a>.</li>
   <li><code class="highlighter-rouge">Volume.hostPath</code> - Prevents a user from mounting a path from the host into
 the container. This could be a file, a directory, or even the Docker Socket.</li>
 </ul>
+
+<p>Persistent Volumes using the following storage classes:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Local</code> - Prevents a user from creating a persistent volume with the
+<a href="https://kubernetes.io/docs/concepts/storage/volumes/#local">Local Storage
+Class</a>. The
+Local storage class allows a user to mount directorys from the host into a
+pod. This could be a file, a directory, or even the Docker Socket.</li>
+</ul>
+
+<blockquote>
+  <p>Note: If an Admin has created a persistent volume with the local storage
+class, a non-admin could consume this via a persitent volume claim.</p>
+</blockquote>
 
 <p>If a user without a cluster admin role tries to deploy a pod with any of these
 privileged options, an error similar to the following example is displayed:</p>
