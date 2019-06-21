@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-06-21 10:20:15 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-21T10:20:15+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Quickstart: Compose and ASP.NET Core with SQL Server"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="This quick-start guide demonstrates how to use Docker Engine on Linux and Docker Compose to set up and run the sample ASP.NET Core application using the ASP.NET Core Build image..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="This quick-start guide demonstrates how to use Docker Engine on Linux and Docker Compose to set up and run the sample ASP.NET Core application using the .NET Core SDK image..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-21T10:20:15+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="dotnet, .NET, Core, example, ASP.NET Core, SQL Server, mssql">
@@ -187,15 +187,15 @@
 							
 							<p>This quick-start guide demonstrates how to use Docker Engine on Linux and Docker
 Compose to set up and run the sample ASP.NET Core application using the
-<a href="https://hub.docker.com/r/microsoft/aspnetcore-build/">ASP.NET Core Build image</a>
+<a href="hub.docker.com/_/microsoft-dotnet-core-sdk">.NET Core SDK image</a>
 with the
-<a href="https://hub.docker.com/r/microsoft/mssql-server-linux/">SQL Server on Linux image</a>.
+<a href="https://hub.docker.com/_/microsoft-mssql-server">SQL Server on Linux image</a>.
 You just need to have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/index.md">Docker Engine</a>
 and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install/">Docker Compose</a> installed on your
 platform of choice: Linux, Mac or Windows.</p>
 
 <p>For this sample, we create a sample .NET Core Web Application using the
-<code class="highlighter-rouge">aspnetcore-build</code> Docker image. After that, we create a <code class="highlighter-rouge">Dockerfile</code>,
+<code class="highlighter-rouge">microsoft/dotnet:2.1-sdk</code> Docker image. After that, we create a <code class="highlighter-rouge">Dockerfile</code>,
 configure this app to use our SQL Server database, and then create a
 <code class="highlighter-rouge">docker-compose.yml</code> that defines the behavior of all of these components.</p>
 
@@ -215,11 +215,11 @@ Containers, visit
 need to set up file sharing for the volume that you need to map.</p>
   </li>
   <li>
-    <p>Within your directory, use the <code class="highlighter-rouge">aspnetcore-build</code> Docker image to generate a
+    <p>Within your directory, use the <code class="highlighter-rouge">dotnet:2.1-sdk</code> Docker image to generate a
 sample web application within the container under the <code class="highlighter-rouge">/app</code> directory and
 into your host machine in the working directory:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-v</span> <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>:/app <span class="nt">--workdir</span> /app microsoft/aspnetcore-build:lts dotnet new mvc <span class="nt">--auth</span> Individual
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-v</span> <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>:/app <span class="nt">--workdir</span> /app microsoft/dotnet:2.1-sdk dotnet new mvc <span class="nt">--auth</span> Individual
 </code></pre></div>    </div>
 
     <blockquote>
@@ -230,7 +230,7 @@ or specify the absolute path of your app directory.</p>
   <li>
     <p>Create a <code class="highlighter-rouge">Dockerfile</code> within your app directory and add the following content:</p>
 
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">microsoft</span>/<span class="n">aspnetcore</span>-<span class="n">build</span>:<span class="n">lts</span>
+    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">microsoft</span>/<span class="n">dotnet</span>:<span class="m">2</span>.<span class="m">1</span>-<span class="n">sdk</span>
 <span class="n">COPY</span> . /<span class="n">app</span>
 <span class="n">WORKDIR</span> /<span class="n">app</span>
 <span class="n">RUN</span> [<span class="s2">"dotnet"</span>, <span class="s2">"restore"</span>]
@@ -241,7 +241,7 @@ or specify the absolute path of your app directory.</p>
 </code></pre></div>    </div>
 
     <p>This file defines how to build the web app image. It uses the
-<a href="https://hub.docker.com/r/microsoft/aspnetcore-build/">microsoft/aspnetcore-build</a>,
+<a href="https://hub.docker.com/_/microsoft-dotnet-core-sdk">.NET Core SDK image</a>,
 maps the volume with the generated code, restores the dependencies, builds the
 project and exposes port 80. After that, it calls an <code class="highlighter-rouge">entrypoint</code> script
 that we create in the next step.</p>
@@ -303,6 +303,11 @@ base 10 digits and/or non-alphanumeric symbols.</p>
 
     <p>This file defines the <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">db</code> micro-services, their relationship, the
 ports they are using, and their specific environment variables.</p>
+
+    <blockquote>
+      <p><strong>Note</strong>: You may receive an error if you choose the wrong Compose file
+version. Be sure to choose a verison that is compatible with your system.</p>
+    </blockquote>
   </li>
   <li>
     <p>Go to <code class="highlighter-rouge">Startup.cs</code> and locate the function called <code class="highlighter-rouge">ConfigureServices</code> (Hint:
