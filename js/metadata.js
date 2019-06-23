@@ -3473,6 +3473,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/extend/plugins_services/",
+"title":"Plugins and Services",
+"description":null,
+"keywords":"API, Usage, plugins, documentation, developer"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compliance/reference/800-53/pm/",
 "title":"Program management",
 "description":"Program management reference",
