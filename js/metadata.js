@@ -555,8 +555,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/",
-"title":"Compose file versions and upgrading",
-"description":"Compose file reference",
+"title":"Compose ファイルのバージョンとアップグレード",
+"description":"Compose ファイルリファレンス",
 "keywords":"fig, composition, compose, versions, upgrading, docker"
 }
 ,
@@ -1423,7 +1423,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/faq/",
-"title":"Frequently asked questions",
+"title":"よくたずねられる質問",
 "description":"Docker Compose FAQ",
 "keywords":"documentation, docs,  docker, compose, faq"
 }
@@ -2984,8 +2984,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/networking/",
-"title":"Networking in Compose",
-"description":"How Compose sets up networking between containers",
+"title":"Compose におけるネットワーク機能",
+"description":"Compose はコンテナー間のネットワークをどのように構築するか。",
 "keywords":"documentation, docs, docker, compose, orchestration, containers, networking"
 }
 ,
