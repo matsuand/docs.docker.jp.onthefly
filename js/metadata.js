@@ -4440,8 +4440,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/supported-platforms/",
-"title":"About Docker Enterprise",
-"description":"Information about Docker Enterprise 2.1",
+"title":"Docker Enterprise について",
+"description":"Docker Enterprise 2.1 に関する情報",
 "keywords":"Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported"
 }
 ,
