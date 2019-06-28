@@ -1,4 +1,4 @@
-<!-- Page generated 2019-06-16 10:47:16 +0900 -->
+<!-- Page generated 2019-06-28 11:26:24 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-16T10:47:16+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-28T11:26:24+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Here you can learn about new features, bug fixes, breaking changes, and known issues for the latest UCP version. You can then use the upgrade instructions to upgrade your installation..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-06-16T10:47:16+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-28T11:26:24+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, release notes">
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    78 分
+    83 分
   
 </span>
 
@@ -202,27 +202,62 @@ upgrade your installation to the latest release.</p>
 
 <h1 id="version-31">Version 3.1</h1>
 
-<h2 id="317">3.1.7</h2>
-<p>(2019-05-06)</p>
+<h2 id="318">3.1.8</h2>
+<p>(2019-06-27)</p>
 
-<h3 id="security">Security</h3>
+<blockquote class="important">
+  <p>Upgrading UCP 3.1.8</p>
+
+  <p>UCP 3.1.8 introduces new features such as setting the <code class="highlighter-rouge">kubeletMaxPods</code> option for all nodes in the cluster, and an updated UCP configuration file that allows admins to set default values for Swarm services. These features not available in UCP 3.2.0. Customers using either of those features in UCP 3.1.8 or future versions of 3.1.x must upgrade to UCP 3.2.1 or later to avoid any upgrade issues. For information, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/upgrade/">Upgrading your UCP environment</a>.</p>
+</blockquote>
+
+<h3 id="kubernetes">Kubernetes</h3>
+
 <ul>
-  <li>Refer to <a href="https://success.docker.com/article/ucp-image-vulnerabilities">UCP image vulnerabilities</a> for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.</li>
+  <li>Kubernetes has been updated to version 1.11.10.</li>
 </ul>
 
-<h3 id="bug-fixes">Bug Fixes</h3>
+<h3 id="enhancements">Enhancements</h3>
+
 <ul>
-  <li>Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.</li>
+  <li>A <code class="highlighter-rouge">user_workload_defaults</code> section has been added to the UCP configuration
+file that allows admins to set default field values that will be applied to
+Swarm services if those fields are not explicitly set when the service is
+created. Only a subset of Swarm service fields may be set; see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/">UCP
+Configuration file</a> for more
+details. (ENGORC-2437)</li>
+  <li>Users can now set the <code class="highlighter-rouge">kubeletMaxPods</code> option for all nodes in the cluster,
+see the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/">UCP Configuration
+file</a> for more details.
+(ENGORC-2334)</li>
+  <li>Users can now adjust the internal Kubernetes Service IP Range from the default
+<code class="highlighter-rouge">10.96.0.0/16</code> at install time. See <a href="ee/ucp/admin/install/plan-installation.md#avoid-ip-range-conflicts">Plan
+Installation</a>
+for more details. (ENGCORE-683)</li>
 </ul>
 
-<h3 id="known-issues">Known Issues</h3>
+<h3 id="bug-fixes">Bug fixes</h3>
+
+<ul>
+  <li>Added a migration logic to remove all actions on <code class="highlighter-rouge">pods/exec</code> and <code class="highlighter-rouge">pods/attach</code> Kubernetes subresource from the migrated UCP View-Only role. (ENGORC-2434)</li>
+  <li>Fixed an issue that allows unauthenticated user to list directories. (ENGORC-2175)</li>
+</ul>
+
+<h3 id="deprecated-platforms">Deprecated platforms</h3>
+
+<ul>
+  <li>Removed support for Windows Server 1709 as it is now <a href="https://docs.microsoft.com/en-us/windows-server/get-started/windows-server-release-info">end of
+life</a>.</li>
+</ul>
+
+<h3 id="known-issues">Known issues</h3>
 <ul>
   <li>Upgrading from UCP <code class="highlighter-rouge">3.1.4</code> to <code class="highlighter-rouge">3.1.5</code> causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
     <ul>
       <li>Workaround: Delete any <code class="highlighter-rouge">ucp-*-s390x</code> Swarm services. For example, <code class="highlighter-rouge">ucp-auth-api-s390x</code>.</li>
     </ul>
   </li>
-  <li>There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see <a href="../upgrade">Upgrade Docker</a>.</li>
+  <li>There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about upgrading Docker Enterprise to version 2.1, see <a href="../upgrade">Upgrade Docker</a>.</li>
   <li>To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a <strong>ClusterRoleBinding</strong> with <code class="highlighter-rouge">cluster-admin</code> as the  <strong>ClusterRole</strong>. Restricted Parameters on Containers include:
     <ul>
       <li>Host Bind Mounts</li>
@@ -239,6 +274,71 @@ upgrade your installation to the latest release.</p>
 </ul>
 
 <h3 id="components">Components</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UCP</td>
+      <td>3.1.8</td>
+    </tr>
+    <tr>
+      <td>Kubernetes</td>
+      <td>1.11.10</td>
+    </tr>
+    <tr>
+      <td>Calico</td>
+      <td>3.5.3</td>
+    </tr>
+    <tr>
+      <td>Interlock (nginx)</td>
+      <td>1.14.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="317">3.1.7</h2>
+<p>(2019-05-06)</p>
+
+<h3 id="security">Security</h3>
+<ul>
+  <li>Refer to <a href="https://success.docker.com/article/ucp-image-vulnerabilities">UCP image vulnerabilities</a> for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.</li>
+</ul>
+
+<h3 id="bug-fixes-1">Bug fixes</h3>
+<ul>
+  <li>Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.</li>
+</ul>
+
+<h3 id="known-issues-1">Known issues</h3>
+<ul>
+  <li>Upgrading from UCP <code class="highlighter-rouge">3.1.4</code> to <code class="highlighter-rouge">3.1.5</code> causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
+    <ul>
+      <li>Workaround: Delete any <code class="highlighter-rouge">ucp-*-s390x</code> Swarm services. For example, <code class="highlighter-rouge">ucp-auth-api-s390x</code>.</li>
+    </ul>
+  </li>
+  <li>There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about upgrading Docker Enterprise to version 2.1, see <a href="../upgrade">Upgrade Docker</a>.</li>
+  <li>To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a <strong>ClusterRoleBinding</strong> with <code class="highlighter-rouge">cluster-admin</code> as the  <strong>ClusterRole</strong>. Restricted Parameters on Containers include:
+    <ul>
+      <li>Host Bind Mounts</li>
+      <li>Privileged Mode</li>
+      <li>Extra Capabilities</li>
+      <li>Host Networking</li>
+      <li>Host IPC</li>
+      <li>Host PID</li>
+    </ul>
+  </li>
+  <li>If you delete the built-in <strong>ClusterRole</strong> or <strong>ClusterRoleBinding</strong> for <code class="highlighter-rouge">cluster-admin</code>, restart the <code class="highlighter-rouge">ucp-kube-apiserver</code> container on any manager node to recreate them. (#14483)</li>
+  <li>Pod Security Policies are not supported in this release. (#15105)</li>
+  <li>The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the <code class="highlighter-rouge">/var</code> partition. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements">System Requirements</a> for details.</li>
+</ul>
+
+<h3 id="components-1">Components</h3>
 
 <table>
   <thead>
@@ -270,7 +370,7 @@ upgrade your installation to the latest release.</p>
 <h2 id="316">3.1.6</h2>
 <p>(2019-04-11)</p>
 
-<h3 id="kubernetes">Kubernetes</h3>
+<h3 id="kubernetes-1">Kubernetes</h3>
 <ul>
   <li>Updated Kubernetes to version 1.11.9.</li>
 </ul>
@@ -285,7 +385,7 @@ upgrade your installation to the latest release.</p>
   <li>Accessing the <code class="highlighter-rouge">ListAccount</code> API endpoint now requires an admin user. Accessing the <code class="highlighter-rouge">GetAccount</code> API endpoint now requires an admin user, the actual user, or a member of the organization being inspected. <a href="https://docker.atlassian.net/browse/ENGORC-100">ENGORC-100</a></li>
 </ul>
 
-<h3 id="known-issues-1">Known Issues</h3>
+<h3 id="known-issues-2">Known issues</h3>
 <ul>
   <li>Upgrading from UCP <code class="highlighter-rouge">3.1.4</code> to <code class="highlighter-rouge">3.1.5</code> causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
     <ul>
@@ -308,7 +408,7 @@ upgrade your installation to the latest release.</p>
   <li>The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the <code class="highlighter-rouge">/var</code> partition. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements">System Requirements</a> for details.</li>
 </ul>
 
-<h3 id="components-1">Components</h3>
+<h3 id="components-2">Components</h3>
 
 <table>
   <thead>
@@ -340,7 +440,7 @@ upgrade your installation to the latest release.</p>
 <h2 id="315">3.1.5</h2>
 <p>2019-03-28</p>
 
-<h3 id="kubernetes-1">Kubernetes</h3>
+<h3 id="kubernetes-2">Kubernetes</h3>
 <ul>
   <li>Updated Kubernetes to version 1.11.8. (ENGORC-2024)</li>
 </ul>
@@ -358,14 +458,14 @@ upgrade your installation to the latest release.</p>
   <li>When LDAP or SAML is enabled, provided admin users an option to disable managed password authentication, which includes login and creation of new users. (ENGORC-1999)</li>
 </ul>
 
-<h3 id="bug-fixes-1">Bug Fixes</h3>
+<h3 id="bug-fixes-2">Bug fixes</h3>
 <ul>
   <li>Changed Interlock proxy service default <code class="highlighter-rouge">update-action-failure</code> to rollback. (ENGCORE-117)</li>
   <li>Added validation for service configuration label values. (ENGCORE-114)</li>
   <li>Fixed an issue with continuous interlock reconciliation if <code class="highlighter-rouge">ucp-interlock</code> service image does not match expected version. (ENGORC-2081)</li>
 </ul>
 
-<h3 id="known-issues-2">Known Issues</h3>
+<h3 id="known-issues-3">Known issues</h3>
 
 <ul>
   <li>Upgrading from UCP 3.1.4 to 3.1.5 causes missing Swarm placement constraints banner for some Swarm services (ENGORC-2191). This can cause Swarm services to run unexpectedly on Kubernetes nodes. See https://www.docker.com/ddc-41 for more information.
@@ -389,7 +489,7 @@ upgrade your installation to the latest release.</p>
   <li>The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the <code class="highlighter-rouge">/var</code> partition. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements">System Requirements</a> for details.</li>
 </ul>
 
-<h3 id="components-2">Components</h3>
+<h3 id="components-3">Components</h3>
 
 <table>
   <thead>
@@ -428,28 +528,28 @@ upgrade your installation to the latest release.</p>
   <li>Added support for Oracle 7.6.</li>
 </ul>
 
-<h3 id="kubernetes-2">Kubernetes</h3>
+<h3 id="kubernetes-3">Kubernetes</h3>
 <ul>
   <li>Kubernetes has been updated to version 1.11.7. (docker/orca#16157)</li>
 </ul>
 
-<h3 id="bug-fixes-2">Bug Fixes</h3>
+<h3 id="bug-fixes-3">Bug fixes</h3>
 <ul>
   <li>Bump the Golang version that is used to build UCP to version 1.10.8. (docker/orca#16068)</li>
   <li>Fixed an issue that caused UCP upgrade failure to upgrade with Interlock deployment. (docker/orca#16009)</li>
-  <li>Fixed an issue that caused Windows node ucp-agent(s) to constantly reboot when audit logging is enabled. (docker/orca#16122)</li>
+  <li>Fixed an issue that caused ucp-agent(s) on worker nodes to constantly reboot when audit logging is enabled. (docker/orca#16122)</li>
   <li>Fixed an issue to ensure that non-admin user actions (with the RestrictedControl role) against RBAC resources are read-only. (docker/orca#16121)</li>
   <li>Fixed an issue to prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)</li>
   <li>Fixed an issue to validate Calico certs expiration dates and update accordingly. (escalation#981)</li>
   <li>Kubelet no longer deletes images, starting with the oldest unused images, after exceeding 85% disk space utilization. This was an issue in air-gapped environments. (docker/orca#16082)</li>
 </ul>
 
-<h3 id="enhancements">Enhancements</h3>
+<h3 id="enhancements-1">Enhancements</h3>
 <ul>
   <li>Changed packaging and builds for UCP to build bootstrapper last. This avoids the “upgrade available” banner on all UCPs until the entirety of UCP is available.</li>
 </ul>
 
-<h3 id="known-issues-3">Known Issues</h3>
+<h3 id="known-issues-4">Known issues</h3>
 
 <ul>
   <li>Newly added Windows node reports “Awaiting healthy status in classic node inventory”. <a href="https://success.docker.com/article/newly-added-windows-node-reports-awaiting-healthy-status-in-classic-node-inventory">Learn more</a>.</li>
@@ -470,7 +570,7 @@ upgrade your installation to the latest release.</p>
   <li>The default Kubelet configuration for UCP Manager nodes is expecting 4GB of free disk space in the <code class="highlighter-rouge">/var</code> partition. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements">System Requirements</a> for details.</li>
 </ul>
 
-<h3 id="components-3">Components</h3>
+<h3 id="components-4">Components</h3>
 
 <table>
   <thead>
@@ -515,7 +615,7 @@ upgrade your installation to the latest release.</p>
   <li>Upgraded Calico to version 3.5. (#15884)</li>
 </ul>
 
-<h3 id="bug-fixes-3">Bug Fixes</h3>
+<h3 id="bug-fixes-4">Bug fixes</h3>
 <ul>
   <li>Fixed system hang following UCP backup and docker daemon shutdown. (docker/escalation#841)</li>
   <li>Non-admin users can no longer create <code class="highlighter-rouge">PersistentVolumes</code> using the <code class="highlighter-rouge">Local</code>
@@ -532,7 +632,7 @@ mount host directories. (docker/orca#15936)</li>
   <li>By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)</li>
 </ul>
 
-<h3 id="components-4">Components</h3>
+<h3 id="components-5">Components</h3>
 
 <table>
   <thead>
@@ -577,7 +677,7 @@ mount host directories. (docker/orca#15936)</li>
 now configurable within the UCP web interface. (#15466)</li>
 </ul>
 
-<h3 id="bug-fixes-4">Bug Fixes</h3>
+<h3 id="bug-fixes-5">Bug fixes</h3>
 <ul>
   <li>Core
     <ul>
@@ -596,13 +696,13 @@ now configurable within the UCP web interface. (#15466)</li>
   </li>
 </ul>
 
-<h3 id="known-issues-4">Known Issues</h3>
+<h3 id="known-issues-5">Known issues</h3>
 <ul>
   <li>In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (docker/orca#15503)</li>
   <li>By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment. (docker/orca#16082)</li>
 </ul>
 
-<h3 id="components-5">Components</h3>
+<h3 id="components-6">Components</h3>
 
 <table>
   <thead>
@@ -639,7 +739,7 @@ now configurable within the UCP web interface. (#15466)</li>
   <li>To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using Kubernetes 1.11.5 for UCP 3.1.1.</li>
 </ul>
 
-<h3 id="components-6">Components</h3>
+<h3 id="components-7">Components</h3>
 
 <table>
   <thead>
@@ -672,7 +772,7 @@ now configurable within the UCP web interface. (#15466)</li>
 
 <p>2018-11-08</p>
 
-<h3 id="bug-fixes-5">Bug Fixes</h3>
+<h3 id="bug-fixes-6">Bug fixes</h3>
 
 <ul>
   <li>Swarm placement constraint warning banner no longer shows up for <code class="highlighter-rouge">ucp-auth</code> services (#14539)</li>
@@ -683,9 +783,9 @@ now configurable within the UCP web interface. (#15466)</li>
   <li>Collection deletes are correctly blocked if there is a node in the collection (#13704)</li>
 </ul>
 
-<h3 id="new-features">New Features</h3>
+<h3 id="new-features">New features</h3>
 
-<h3 id="kubernetes-3">Kubernetes</h3>
+<h3 id="kubernetes-4">Kubernetes</h3>
 
 <ul>
   <li>Kubernetes is updated to version 1.11.2.</li>
@@ -738,7 +838,7 @@ now configurable within the UCP web interface. (#15466)</li>
   <li>If you have a pod with a subpath volume PVC, there’s a chance that after the upgrade, it will conflict with some other pod; see <a href="https://github.com/kubernetes/kubernetes/pull/61373">this pull request</a>. It’s not clear if this issue will just prevent those pods from starting or if the whole cluster will fail.</li>
 </ul>
 
-<h3 id="known-issues-5">Known issues</h3>
+<h3 id="known-issues-6">Known issues</h3>
 <ul>
   <li>There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during uprades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about about upgrading Docker Enterprise to version 2.1, see <a href="../upgrade">Upgrade Docker</a></li>
   <li>In the UCP web interface, LDAP settings disappear after submitting them. However, the settings are properly saved. (#15503)</li>
@@ -791,7 +891,7 @@ now configurable within the UCP web interface. (#15466)</li>
   </li>
 </ul>
 
-<h3 id="components-7">Components</h3>
+<h3 id="components-8">Components</h3>
 
 <table>
   <thead>
@@ -822,16 +922,62 @@ now configurable within the UCP web interface. (#15466)</li>
 
 <h1 id="version-30">Version 3.0</h1>
 
+<h2 id="3012">3.0.12</h2>
+<p>2019-06-27</p>
+
+<h3 id="bug-fixes-7">Bug fixes</h3>
+
+<ul>
+  <li>Added migration logic to remove all actions on <code class="highlighter-rouge">pods/exec</code> and <code class="highlighter-rouge">pods/attach</code> Kubernetes subresource from the migrated UCP View-Only role. (ENGORC-2434)</li>
+  <li>Fixed an issue that allows unauthenticated user to list directories. (ENGORC-2175)</li>
+</ul>
+
+<h3 id="deprecated-platforms-1">Deprecated platforms</h3>
+
+<ul>
+  <li>Removed support for Windows Server 1709 as it is now <a href="https://docs.microsoft.com/en-us/windows-server/get-started/windows-server-release-info">end of
+life</a>.</li>
+</ul>
+
+<h3 id="components-9">Components</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>UCP</td>
+      <td>3.0.12</td>
+    </tr>
+    <tr>
+      <td>Kubernetes</td>
+      <td>1.8.15</td>
+    </tr>
+    <tr>
+      <td>Calico</td>
+      <td>3.0.8</td>
+    </tr>
+    <tr>
+      <td>Interlock (nginx)</td>
+      <td>1.13.12</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="3011">3.0.11</h2>
 
 <p>2019-05-06</p>
 
-<h3 id="bug-fixes-6">Bug Fixes</h3>
+<h3 id="bug-fixes-8">Bug fixes</h3>
 <ul>
   <li>Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.</li>
 </ul>
 
-<h3 id="components-8">Components</h3>
+<h3 id="components-10">Components</h3>
 
 <table>
   <thead>
@@ -864,7 +1010,7 @@ now configurable within the UCP web interface. (#15466)</li>
 
 <p>2019-02-28</p>
 
-<h3 id="bug-fixes-7">Bug Fixes</h3>
+<h3 id="bug-fixes-9">Bug fixes</h3>
 <ul>
   <li>Bump the Golang version that is used to build UCP to version 1.10.8.</li>
   <li>Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)</li>
@@ -872,7 +1018,7 @@ now configurable within the UCP web interface. (#15466)</li>
   <li>Validate Calico certs expiration date and update accordingly. (escalation#981)</li>
 </ul>
 
-<h3 id="components-9">Components</h3>
+<h3 id="components-11">Components</h3>
 
 <table>
   <thead>
@@ -910,7 +1056,7 @@ now configurable within the UCP web interface. (#15466)</li>
   <li>Added support for RHEL 7.6 with Devicemapper and Overlay2 storage drivers. (docker/orca#15996)</li>
 </ul>
 
-<h3 id="bug-fixes-8">Bug fixes</h3>
+<h3 id="bug-fixes-10">Bug fixes</h3>
 <ul>
   <li>Upgrading Interlock now also upgrades interlock proxy and interlock extension. (docker/escalation/871)</li>
   <li>Non-admin users can no longer create <code class="highlighter-rouge">PersistentVolumes</code> using the <code class="highlighter-rouge">Local</code>
@@ -924,7 +1070,7 @@ mount host directories. (docker/orca#15936)</li>
   <li>By default, Kubelet begins deleting images, starting with the oldest unused images, after exceeding 85% disk space utilization. This causes an issue in an air-gapped environment.</li>
 </ul>
 
-<h3 id="components-10">Components</h3>
+<h3 id="components-12">Components</h3>
 
 <table>
   <thead>
@@ -957,7 +1103,7 @@ mount host directories. (docker/orca#15936)</li>
 
 <p>2019-01-09</p>
 
-<h3 id="bug-fixes-9">Bug fixes</h3>
+<h3 id="bug-fixes-11">Bug fixes</h3>
 <ul>
   <li>Core
     <ul>
@@ -983,7 +1129,7 @@ to the Interlock proxy. (docker/interlock#169)</li>
   </li>
 </ul>
 
-<h3 id="components-11">Components</h3>
+<h3 id="components-13">Components</h3>
 
 <table>
   <thead>
@@ -1020,7 +1166,7 @@ to the Interlock proxy. (docker/interlock#169)</li>
   <li>To address CVE-2018-1002105, a critical security issue in the Kubernetes API Server, Docker is using a custom build of Kubernetes 1.8.15 for UCP 3.0.7.</li>
 </ul>
 
-<h3 id="components-12">Components</h3>
+<h3 id="components-14">Components</h3>
 
 <table>
   <thead>
@@ -1053,7 +1199,7 @@ to the Interlock proxy. (docker/interlock#169)</li>
 
 <p>2018-10-25</p>
 
-<h3 id="bug-fixes-10">Bug fixes</h3>
+<h3 id="bug-fixes-12">Bug fixes</h3>
 
 <ul>
   <li>Core
@@ -1080,7 +1226,7 @@ to the Interlock proxy. (docker/interlock#169)</li>
   </li>
 </ul>
 
-<h3 id="components-13">Components</h3>
+<h3 id="components-15">Components</h3>
 
 <table>
   <thead>
@@ -1113,7 +1259,7 @@ to the Interlock proxy. (docker/interlock#169)</li>
 
 <p>2018-08-30</p>
 
-<h3 id="bug-fixes-11">Bug fixes</h3>
+<h3 id="bug-fixes-13">Bug fixes</h3>
 
 <ul>
   <li>Security
@@ -1134,7 +1280,7 @@ the system pool when adding client CAs to the server that requires mutual authen
  manually pulling the images.</li>
 </ul>
 
-<h3 id="components-14">Components</h3>
+<h3 id="components-16">Components</h3>
 
 <table>
   <thead>
@@ -1167,7 +1313,7 @@ the system pool when adding client CAs to the server that requires mutual authen
 
 <p>2018-08-09</p>
 
-<h3 id="bug-fixes-12">Bug fixes</h3>
+<h3 id="bug-fixes-14">Bug fixes</h3>
 
 <ul>
   <li>Security
@@ -1183,7 +1329,7 @@ the system pool when adding client CAs to the server that requires mutual authen
   <li>You must manually pull <code class="highlighter-rouge">docker/ucp-agent:3.0.4</code> in the images section of the web interface before upgrading. Alternately, you can just pull <code class="highlighter-rouge">docker/ucp-agent:3.0.4</code> on every manager node.</li>
 </ul>
 
-<h3 id="components-15">Components</h3>
+<h3 id="components-17">Components</h3>
 
 <table>
   <thead>
@@ -1228,7 +1374,7 @@ the system pool when adding client CAs to the server that requires mutual authen
   <li>UCP 3.0.3 now supports IBM Z (s390x) as worker nodes on 3.0.x for SLES 12 SP 3. Interlock is currently not supported for 3.0.x on Z.</li>
 </ul>
 
-<h3 id="bug-fixes-13">Bug Fixes</h3>
+<h3 id="bug-fixes-15">Bug fixes</h3>
 
 <ul>
   <li>Core
@@ -1245,7 +1391,7 @@ the system pool when adding client CAs to the server that requires mutual authen
   </li>
 </ul>
 
-<h3 id="components-16">Components</h3>
+<h3 id="components-18">Components</h3>
 
 <table>
   <thead>
@@ -1278,7 +1424,7 @@ the system pool when adding client CAs to the server that requires mutual authen
 
 <p>2018-06-21</p>
 
-<h3 id="new-features-1">New Features</h3>
+<h3 id="new-features-1">New features</h3>
 
 <ul>
   <li>UCP now supports running Windows Server 1709 workers
@@ -1294,7 +1440,7 @@ the system pool when adding client CAs to the server that requires mutual authen
 Azure Disk when installing UCP with the <code class="highlighter-rouge">--cloud-provider</code> option.</li>
 </ul>
 
-<h3 id="bug-fixes-14">Bug Fixes</h3>
+<h3 id="bug-fixes-16">Bug fixes</h3>
 <ul>
   <li>Core
     <ul>
@@ -1321,7 +1467,7 @@ behavior) instead of a 404.</li>
   </li>
 </ul>
 
-<h3 id="components-17">Components</h3>
+<h3 id="components-19">Components</h3>
 
 <table>
   <thead>
@@ -1354,7 +1500,7 @@ behavior) instead of a 404.</li>
 
 <p>2018-05-17</p>
 
-<h3 id="bug-fixes-15">Bug Fixes</h3>
+<h3 id="bug-fixes-17">Bug fixes</h3>
 <ul>
   <li>Core
     <ul>
@@ -1379,7 +1525,7 @@ config at install time. Instead, it falls back to default CIDR.</li>
   <li>Fixed an issue where UCP banners redirected to older UCP 2.2 documentation.</li>
 </ul>
 
-<h3 id="known-issues-6">Known issues</h3>
+<h3 id="known-issues-7">Known issues</h3>
 
 <ul>
   <li>Encrypted overlay networks may not work after upgrade from 3.0.0.  Apply the following to
@@ -1518,7 +1664,7 @@ using <code class="highlighter-rouge">Restricted Control</code> against collecti
   <li>For increased security UCP now requires clients to use TLS version 1.2.</li>
 </ul>
 
-<h3 id="known-issues-7">Known issues</h3>
+<h3 id="known-issues-8">Known issues</h3>
 
 <ul>
   <li>Platform support
@@ -1610,7 +1756,7 @@ from the UCP web interface. You can configure Docker Engine for this.</li>
 deprecated. Deploy your applications as Swarm services or Kubernetes workloads.</li>
 </ul>
 
-<h3 id="components-18">Components</h3>
+<h3 id="components-20">Components</h3>
 
 <table>
   <thead>
@@ -1641,16 +1787,44 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.<
 
 <h1 id="version-22">Version 2.2</h1>
 
+<h2 id="version-2219">Version 2.2.19</h2>
+<p>2019-06-27</p>
+
+<h3 id="bug-fixes-18">Bug fixes</h3>
+
+<ul>
+  <li>Fixed an issue that allows unauthenticated user to list directories. (ENGORC-2175)</li>
+</ul>
+
+<h3 id="known-issues-9">Known issues</h3>
+
+<ul>
+  <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
+  <li>The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update “Task History Limit”, “Heartbeat Period” and “Node Certificate Expiry” settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.</li>
+  <li>Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.</li>
+  <li>Agent container log is empty even though it’s running correctly.</li>
+  <li>Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.</li>
+  <li>Attempting to load an (unsupported) <code class="highlighter-rouge">tar.gz</code> image results in a poor error
+ message.</li>
+  <li>Searching for images in the UCP images UI doesn’t work.</li>
+  <li>Removing a stack may leave orphaned volumes.</li>
+  <li>Storage metrics are not available for Windows.</li>
+  <li>You can’t create a bridge network from the web interface. As a workaround use
+ <code class="highlighter-rouge">&lt;node-name&gt;/&lt;network-name&gt;</code>.</li>
+</ul>
+
 <h2 id="version-2218">Version 2.2.18</h2>
 
 <p>2019-05-06</p>
 
-<h3 id="bug-fixes-16">Bug Fixes</h3>
+<h3 id="bug-fixes-19">Bug fixes</h3>
 <ul>
   <li>Updated the UCP base image layers to fix a number of old libraries and components that had security vulnerabilities.</li>
 </ul>
 
-<h3 id="known-issues-8">Known issues</h3>
+<h3 id="known-issues-10">Known issues</h3>
 
 <ul>
   <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
@@ -1673,13 +1847,13 @@ instead of the correct image for the worker architecture.</li>
 
 <p>2019-02-28</p>
 
-<h3 id="bug-fixes-17">Bug Fixes</h3>
+<h3 id="bug-fixes-20">Bug fixes</h3>
 <ul>
   <li>Bump the Golang version that is used to build UCP to version 1.10.8.</li>
   <li>Prevent UCP users from updating services with a port that conflicts with the UCP controller port. (escalation#855)</li>
 </ul>
 
-<h3 id="known-issues-9">Known issues</h3>
+<h3 id="known-issues-11">Known issues</h3>
 
 <ul>
   <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
@@ -1702,12 +1876,12 @@ instead of the correct image for the worker architecture.</li>
 
 <p>2019-01-29</p>
 
-<h3 id="bug-fixes-18">Bug fixes</h3>
+<h3 id="bug-fixes-21">Bug fixes</h3>
 <ul>
   <li>Added support for the <code class="highlighter-rouge">limit</code> argument in <code class="highlighter-rouge">docker ps</code>. (#15812)</li>
 </ul>
 
-<h3 id="known-issues-10">Known issues</h3>
+<h3 id="known-issues-12">Known issues</h3>
 
 <ul>
   <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
@@ -1730,7 +1904,7 @@ instead of the correct image for the worker architecture.</li>
 
 <p>2019-01-09</p>
 
-<h3 id="bug-fixes-19">Bug fixes</h3>
+<h3 id="bug-fixes-22">Bug fixes</h3>
 <ul>
   <li>Core
     <ul>
@@ -1741,79 +1915,6 @@ instead of the correct image for the worker architecture.</li>
   <li>Web interface
     <ul>
       <li>Fixed stack creation for non admin user when UCP uses a custom controller port.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="known-issues-11">Known issues</h3>
-
-<ul>
-  <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
-  <li>The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update “Task History Limit”, “Heartbeat Period” and “Node Certificate Expiry” settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.</li>
-  <li>Upgrading heterogeneous swarms from CLI may fail because x86 images are used
-instead of the correct image for the worker architecture.</li>
-  <li>Agent container log is empty even though it’s running correctly.</li>
-  <li>Rapid UI settings updates may cause unintended settings changes for logging
- settings and other admin settings.</li>
-  <li>Attempting to load an (unsupported) <code class="highlighter-rouge">tar.gz</code> image results in a poor error
- message.</li>
-  <li>Searching for images in the UCP images UI doesn’t work.</li>
-  <li>Removing a stack may leave orphaned volumes.</li>
-  <li>Storage metrics are not available for Windows.</li>
-  <li>You can’t create a bridge network from the web interface. As a workaround use
- <code class="highlighter-rouge">&lt;node-name&gt;/&lt;network-name&gt;</code>.</li>
-</ul>
-
-<h2 id="version-2214">Version 2.2.14</h2>
-
-<p>2018-10-25</p>
-
-<h3 id="bug-fixes-20">Bug fixes</h3>
-
-<ul>
-  <li>Core
-    <ul>
-      <li>Resolved an issue where LDAP sync jobs terminated when processing an org admin search result that did not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)</li>
-      <li>Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)</li>
-    </ul>
-  </li>
-  <li>Web Interface
-    <ul>
-      <li>Fixed an issue that prevented “Per User Limit” on Admin Settings from working. (docker/escalation#639)</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="known-issues-12">Known issues</h3>
-
-<ul>
-  <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
-  <li>The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update “Task History Limit”, “Heartbeat Period” and “Node Certificate Expiry” settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.</li>
-  <li>Upgrading heterogeneous swarms from CLI may fail because x86 images are used
-instead of the correct image for the worker architecture.</li>
-  <li>Agent container log is empty even though it’s running correctly.</li>
-  <li>Rapid UI settings updates may cause unintended settings changes for logging
- settings and other admin settings.</li>
-  <li>Attempting to load an (unsupported) <code class="highlighter-rouge">tar.gz</code> image results in a poor error
- message.</li>
-  <li>Searching for images in the UCP images UI doesn’t work.</li>
-  <li>Removing a stack may leave orphaned volumes.</li>
-  <li>Storage metrics are not available for Windows.</li>
-  <li>You can’t create a bridge network from the web interface. As a workaround use
- <code class="highlighter-rouge">&lt;node-name&gt;/&lt;network-name&gt;</code>.</li>
-</ul>
-
-<h2 id="version-2213">Version 2.2.13</h2>
-
-<p>2018-08-30</p>
-
-<h3 id="bug-fixes-21">Bug fixes</h3>
-
-<ul>
-  <li>Security
-    <ul>
-      <li>Fixed a critical security issue to prevent UCP from accepting certificates from
-the system pool when adding client CAs to the server that requires mutual authentication.</li>
     </ul>
   </li>
 </ul>
@@ -1837,11 +1938,84 @@ instead of the correct image for the worker architecture.</li>
  <code class="highlighter-rouge">&lt;node-name&gt;/&lt;network-name&gt;</code>.</li>
 </ul>
 
+<h2 id="version-2214">Version 2.2.14</h2>
+
+<p>2018-10-25</p>
+
+<h3 id="bug-fixes-23">Bug fixes</h3>
+
+<ul>
+  <li>Core
+    <ul>
+      <li>Resolved an issue where LDAP sync jobs terminated when processing an org admin search result that did not correspond to an existing user. (docker/escalation#784 #docker/escalation#888)</li>
+      <li>Fixed an issue that caused RethinkDB client lock contention. (docker/escalation#902 and docker/escalation#906)</li>
+    </ul>
+  </li>
+  <li>Web Interface
+    <ul>
+      <li>Fixed an issue that prevented “Per User Limit” on Admin Settings from working. (docker/escalation#639)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="known-issues-14">Known issues</h3>
+
+<ul>
+  <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
+  <li>The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update “Task History Limit”, “Heartbeat Period” and “Node Certificate Expiry” settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.</li>
+  <li>Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.</li>
+  <li>Agent container log is empty even though it’s running correctly.</li>
+  <li>Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.</li>
+  <li>Attempting to load an (unsupported) <code class="highlighter-rouge">tar.gz</code> image results in a poor error
+ message.</li>
+  <li>Searching for images in the UCP images UI doesn’t work.</li>
+  <li>Removing a stack may leave orphaned volumes.</li>
+  <li>Storage metrics are not available for Windows.</li>
+  <li>You can’t create a bridge network from the web interface. As a workaround use
+ <code class="highlighter-rouge">&lt;node-name&gt;/&lt;network-name&gt;</code>.</li>
+</ul>
+
+<h2 id="version-2213">Version 2.2.13</h2>
+
+<p>2018-08-30</p>
+
+<h3 id="bug-fixes-24">Bug fixes</h3>
+
+<ul>
+  <li>Security
+    <ul>
+      <li>Fixed a critical security issue to prevent UCP from accepting certificates from
+the system pool when adding client CAs to the server that requires mutual authentication.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="known-issues-15">Known issues</h3>
+
+<ul>
+  <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
+  <li>The Swarm admin web interface for UCP versions 2.2.0 and later contain a bug. If used with Docker Engine version 17.06.2-ee5 or earlier, attempting to update “Task History Limit”, “Heartbeat Period” and “Node Certificate Expiry” settings using the UI will cause the cluster to crash on next restart. Using UCP 2.2.X and Docker Engine 17.06-ee6 and later, updating these settings will fail (but not cause the cluster to crash). Users are encouraged to update to Docker Engine version 17.06.2-ee6 and later, and to use the Docker CLI (instead of the UCP UI) to update these settings. Rotating join tokens works with any combination of Docker Engine and UCP versions. Docker Engine versions 17.03 and earlier (which use UCP version 2.1 and earlier) are not affected by this problem.</li>
+  <li>Upgrading heterogeneous swarms from CLI may fail because x86 images are used
+instead of the correct image for the worker architecture.</li>
+  <li>Agent container log is empty even though it’s running correctly.</li>
+  <li>Rapid UI settings updates may cause unintended settings changes for logging
+ settings and other admin settings.</li>
+  <li>Attempting to load an (unsupported) <code class="highlighter-rouge">tar.gz</code> image results in a poor error
+ message.</li>
+  <li>Searching for images in the UCP images UI doesn’t work.</li>
+  <li>Removing a stack may leave orphaned volumes.</li>
+  <li>Storage metrics are not available for Windows.</li>
+  <li>You can’t create a bridge network from the web interface. As a workaround use
+ <code class="highlighter-rouge">&lt;node-name&gt;/&lt;network-name&gt;</code>.</li>
+</ul>
+
 <h2 id="version-2212">Version 2.2.12</h2>
 
 <p>2018-08-09</p>
 
-<h3 id="bug-fixes-22">Bug fixes</h3>
+<h3 id="bug-fixes-25">Bug fixes</h3>
 
 <ul>
   <li>Security
@@ -1854,7 +2028,7 @@ for proper implementation of this fix.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-14">Known issues</h3>
+<h3 id="known-issues-16">Known issues</h3>
 
 <ul>
   <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
@@ -1882,7 +2056,7 @@ instead of the correct image for the worker architecture.</li>
   <li>UCP 2.2.11 is supported running on RHEL 7.5 and Ubuntu 18.04.</li>
 </ul>
 
-<h3 id="bug-fixes-23">Bug fixes</h3>
+<h3 id="bug-fixes-26">Bug fixes</h3>
 
 <ul>
   <li>Security
@@ -1908,7 +2082,7 @@ instead of the correct image for the worker architecture.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-15">Known issues</h3>
+<h3 id="known-issues-17">Known issues</h3>
 
 <ul>
   <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
@@ -1931,7 +2105,7 @@ instead of the correct image for the worker architecture.</li>
 
 <p>2018-05-17</p>
 
-<h3 id="bug-fixes-24">Bug fixes</h3>
+<h3 id="bug-fixes-27">Bug fixes</h3>
 
 <ul>
   <li>Security
@@ -1972,7 +2146,7 @@ instead of the correct image for the worker architecture.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-16">Known issues</h3>
+<h3 id="known-issues-18">Known issues</h3>
 
 <ul>
   <li>Excessive delay is seen when sending <code class="highlighter-rouge">docker service ls</code> through a UCP client
@@ -1997,7 +2171,7 @@ instead of the correct image for the worker architecture.</li>
 
 <p>2018-04-17</p>
 
-<h3 id="bug-fixes-25">Bug fixes</h3>
+<h3 id="bug-fixes-28">Bug fixes</h3>
 
 <ul>
   <li>Security
@@ -2015,7 +2189,7 @@ instead of the correct image for the worker architecture.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-17">Known issues</h3>
+<h3 id="known-issues-19">Known issues</h3>
 
 <ul>
   <li>RethinkDB can only run with up to 127 CPU cores.</li>
@@ -2042,7 +2216,7 @@ is always used, regardless of which one is actually the best match.</li>
 
 <p>2018-03-26</p>
 
-<h3 id="bug-fixes-26">Bug fixes</h3>
+<h3 id="bug-fixes-29">Bug fixes</h3>
 
 <ul>
   <li>Fixed an issue where the minimum TLS version setting is not correctly handled,
@@ -2050,7 +2224,7 @@ leading to non-default values causing <code class="highlighter-rouge">ucp-contro
 restarting.</li>
 </ul>
 
-<h3 id="known-issues-18">Known issues</h3>
+<h3 id="known-issues-20">Known issues</h3>
 
 <ul>
   <li>RethinkDB can only run with up to 127 CPU cores.</li>
@@ -2140,7 +2314,7 @@ organization mentioned used on a grant.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-19">Known issues</h3>
+<h3 id="known-issues-21">Known issues</h3>
 
 <ul>
   <li>RethinkDB can only run with up to 127 CPU cores.</li>
@@ -2167,7 +2341,7 @@ is always used, regardless of which one is actually the best match.</li>
 
 <p>2018-01-16</p>
 
-<h3 id="bug-fixes-27">Bug fixes</h3>
+<h3 id="bug-fixes-30">Bug fixes</h3>
 
 <ul>
   <li>Role-based access control is now enforced for volumes managed by
@@ -2179,7 +2353,7 @@ workflows may have come to rely on lack of access control enforcement when
 manipulating volumes created with 3rd party volume plugins.</li>
 </ul>
 
-<h3 id="known-issues-20">Known issues</h3>
+<h3 id="known-issues-22">Known issues</h3>
 
 <ul>
   <li>UCP role-based access control is not compatible with all third-party volume
@@ -2213,7 +2387,7 @@ for volumes.</li>
   <li>Docker Universal Control Plane now supports running managers on IBM Z on RHEL, SLES and Ubuntu. Previously, only workers were supported on IBM Z.</li>
 </ul>
 
-<h3 id="bug-fixes-28">Bug fixes</h3>
+<h3 id="bug-fixes-31">Bug fixes</h3>
 
 <ul>
   <li>Core
@@ -2240,7 +2414,7 @@ for volumes.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-21">Known issues</h3>
+<h3 id="known-issues-23">Known issues</h3>
 
 <ul>
   <li>Docker currently has limitations related to overlay networking and services using VIP-based endpoints. These limitations apply to use of the HTTP Routing Mesh (HRM). HRM users should familiarize themselves with these limitations. In particular, HRM may encounter virtual IP exhaustion (as evidenced by <code class="highlighter-rouge">failed to allocate network IP for task</code> Docker log messages). If this happens, and if the HRM service is restarted or rescheduled for any reason, HRM may fail to resume operation automatically. See the Docker EE 17.06-ee5 release notes for details.</li>
@@ -2263,7 +2437,7 @@ for volumes.</li>
 
 <p>2017-09-13</p>
 
-<h3 id="bug-fixes-29">Bug fixes</h3>
+<h3 id="bug-fixes-32">Bug fixes</h3>
 
 <ul>
   <li>Core
@@ -2305,7 +2479,7 @@ result when deleting more than one user at a time.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-22">Known issues</h3>
+<h3 id="known-issues-24">Known issues</h3>
 
 <ul>
   <li>Upgrading heterogeneous swarms from CLI may fail because x86 images are used
@@ -2326,7 +2500,7 @@ result when deleting more than one user at a time.</li>
 
 <p>2017-08-30</p>
 
-<h3 id="bug-fixes-30">Bug fixes</h3>
+<h3 id="bug-fixes-33">Bug fixes</h3>
 
 <ul>
   <li>Core
@@ -2364,7 +2538,7 @@ after an upgrade.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-23">Known issues</h3>
+<h3 id="known-issues-25">Known issues</h3>
 
 <ul>
   <li>UI issues:
@@ -2468,7 +2642,7 @@ and the API is fully interactive within the UCP web interface.</li>
   </li>
 </ul>
 
-<h3 id="known-issues-24">Known issues</h3>
+<h3 id="known-issues-26">Known issues</h3>
 
 <ul>
   <li>UI issues:
@@ -2611,6 +2785,7 @@ network prior to attaching Windows services.</li>
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#version-31" class="nomunge">Version 3.1</a>
     <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#318" class="nomunge">3.1.8</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#317" class="nomunge">3.1.7</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#316" class="nomunge">3.1.6</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#315" class="nomunge">3.1.5</a></li>
@@ -2623,6 +2798,7 @@ network prior to attaching Windows services.</li>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#version-30" class="nomunge">Version 3.0</a>
     <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#3012" class="nomunge">3.0.12</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#3011" class="nomunge">3.0.11</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#3010" class="nomunge">3.0.10</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#309" class="nomunge">3.0.9</a></li>
@@ -2639,6 +2815,7 @@ network prior to attaching Windows services.</li>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#version-22" class="nomunge">Version 2.2</a>
     <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#version-2219" class="nomunge">Version 2.2.19</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#version-2218" class="nomunge">Version 2.2.18</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#version-2217" class="nomunge">Version 2.2.17</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/release-notes/#version-2216" class="nomunge">Version 2.2.16</a></li>

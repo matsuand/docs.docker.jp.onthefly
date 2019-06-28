@@ -1,4 +1,4 @@
-<!-- Page generated 2019-06-01 21:35:42 +0900 -->
+<!-- Page generated 2019-06-28 11:26:24 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,7 +86,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-01T21:35:42+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-28T11:26:24+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -96,7 +96,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane helps you manage your container cluster from a centralized place. This article explains what you need to consider before deploying Docker Universal Control Plane for production...." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-06-01T21:35:42+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-28T11:26:24+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, install, Docker EE">
@@ -191,7 +191,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
 
@@ -236,15 +236,31 @@ this.</p>
 
 <h2 id="avoid-ip-range-conflicts">Avoid IP range conflicts</h2>
 
-<p>The <code class="highlighter-rouge">service-cluster-ip-range</code> Kubernetes API Server flag is currently set to <code class="highlighter-rouge">10.96.0.0/16</code> and cannot be changed.</p>
-
 <p>Swarm uses a default address pool of <code class="highlighter-rouge">10.0.0.0/8</code> for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the <code class="highlighter-rouge">--default-address-pool</code> command line option during <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-mode/">Swarm initialization</a>.</p>
 
 <blockquote>
   <p><strong>Note</strong>: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be installed using this flag and UCP must be installed on top of it.</p>
 </blockquote>
 
-<p>Kubernetes uses a default cluster IP pool for pods that is <code class="highlighter-rouge">192.168.0.0/16</code>. If it conflicts with your current networks, please use a custom IP pool by specifying <code class="highlighter-rouge">--pod-cidr</code> during UCP installation.</p>
+<h3 id="kubernetes-ip-range-conflicts">Kubernetes IP Range Conflicts</h3>
+
+<p>There are 2 internal IP ranges used within Kubernetes that may overlap and
+conflict with the underlying infrastructure:</p>
+
+<ul>
+  <li>
+    <p>The Pod Network -  Each Pod in Kubernetes is given an IP address from either
+the Calico or Azure IPAM services. In a default installation Pods are given
+IP addresses on the <code class="highlighter-rouge">192.168.0.0/16</code> range. This can be customised at install
+time using the <code class="highlighter-rouge">--pod-cidr</code> flag.</p>
+  </li>
+  <li>
+    <p>The Services Network - When a user exposes a Service in Kubernetes it is
+accesible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
+this range is <code class="highlighter-rouge">10.96.0.0/16</code>. From UCP 3.1.8 and onwards this value can be
+changed at install time with the <code class="highlighter-rouge">--service-cluster-ip-range</code> flag.</p>
+  </li>
+</ul>
 
 <h2 id="avoid-firewall-conflicts">Avoid firewall conflicts</h2>
 
@@ -430,7 +446,11 @@ manager nodes joining the cluster or being promoted to a manager role.</p>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#system-requirements" class="nomunge">System requirements</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#hostname-strategy" class="nomunge">Hostname strategy</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#static-ip-addresses" class="nomunge">Static IP addresses</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#avoid-ip-range-conflicts" class="nomunge">Avoid IP range conflicts</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#avoid-ip-range-conflicts" class="nomunge">Avoid IP range conflicts</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#kubernetes-ip-range-conflicts" class="nomunge">Kubernetes IP Range Conflicts</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#avoid-firewall-conflicts" class="nomunge">Avoid firewall conflicts</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#time-synchronization" class="nomunge">Time synchronization</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/#load-balancing-strategy" class="nomunge">Load balancing strategy</a></li>

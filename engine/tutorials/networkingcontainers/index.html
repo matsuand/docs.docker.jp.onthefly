@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-06-26 21:36:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-26T21:36:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Network containers"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="If you are working your way through the user guide, you just built and ran a simple application. You’ve also built in your own images. This section teaches you how..." />
+	<meta name="twitter:title" itemprop="title name" content="コンテナーのネットワーク設定"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="ユーザーガイドに従って作業を進めてきたら、単純なアプリケーションはビルドし実行できているはずです。 また自分の Docker イメージもビルドできているでしょう。 ここではそのコンテナーに対するネットワーク設定方法について説明します。 デフォルトネットワークによるコンテナーの起動 Docker では ネットワークドライバー を用いて、コンテナーのネットワーク設定を行う機能がサポートされています。 デフォルトで提供されているネットワークドライバーは 2 つ、つまり bridge ドライバーと overlay ドライバーです。 ネットワークドライバーはプラグインとして記述することが可能であり、独自のドライバーを生成することができます。 ただしこれは高度な作業になります。 Docker Engine をインストールしたときには、自動的に 3 つのデフォルトネットワークが生成されます。 その一覧は以下のようにして見ることができます。 $ docker network ls NETWORK..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-26T21:36:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Examples, Usage, volume, docker, documentation, user guide, data, volumes">
@@ -100,16 +100,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Network containers | Docker Documentation</title>
-<meta property="og:title" content="Network containers" />
+	<title>コンテナーのネットワーク設定 | Docker Documentation</title>
+<meta property="og:title" content="コンテナーのネットワーク設定" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="How to network Docker containers." />
-<meta property="og:description" content="How to network Docker containers." />
+<meta name="description" content="Docker コンテナーのネットワーク設定方法" />
+<meta property="og:description" content="Docker コンテナーのネットワーク設定方法" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Network containers","description":"How to network Docker containers.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーのネットワーク設定","description":"Docker コンテナーのネットワーク設定方法","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -179,28 +179,30 @@
 						<section class="section">
 							
 								
-							<h1>Network containers</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>コンテナーのネットワーク設定</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    3 分
   
 </span>
 
 							
 							
-							<p>If you are working your way through the user guide, you just built and ran a
-simple application. You’ve also built in your own images. This section teaches
-you how to network your containers.</p>
+							
+<p>ユーザーガイドに従って作業を進めてきたら、単純なアプリケーションはビルドし実行できているはずです。
+また自分の Docker イメージもビルドできているでしょう。
+ここではそのコンテナーに対するネットワーク設定方法について説明します。</p>
 
-<h2 id="launch-a-container-on-the-default-network">Launch a container on the default network</h2>
+<h2 id="launch-a-container-on-the-default-network">デフォルトネットワークによるコンテナーの起動</h2>
 
-<p>Docker includes support for networking containers through the use of <strong>network
-drivers</strong>. By default, Docker provides two network drivers for you, the
-<code class="highlighter-rouge">bridge</code> and the <code class="highlighter-rouge">overlay</code> drivers. You can also write a network driver plugin so
-that you can create your own drivers but that is an advanced task.</p>
+<p>Docker では <strong>ネットワークドライバー</strong> を用いて、コンテナーのネットワーク設定を行う機能がサポートされています。
+デフォルトで提供されているネットワークドライバーは 2 つ、つまり <code class="highlighter-rouge">bridge</code> ドライバーと <code class="highlighter-rouge">overlay</code> ドライバーです。
+ネットワークドライバーはプラグインとして記述することが可能であり、独自のドライバーを生成することができます。
+ただしこれは高度な作業になります。</p>
 
-<p>Every installation of the Docker Engine automatically includes three default networks. You can list them:</p>
+<p>Docker Engine をインストールしたときには、自動的に 3 つのデフォルトネットワークが生成されます。
+その一覧は以下のようにして見ることができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network ls
 
@@ -210,7 +212,9 @@ c288470c46f6        host                host
 7b369448dccb        bridge              bridge
 </code></pre></div></div>
 
-<p>The network named <code class="highlighter-rouge">bridge</code> is a special network. Unless you tell it otherwise, Docker always launches your containers in this network. Try this now:</p>
+<p><code class="highlighter-rouge">bridge</code> という名前のネットワークは特別なものです。
+ネットワークに関しての指定を行わなければ、Docker は常にこのネットワーク内にコンテナーを起動します。
+このことを試してみます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -itd --name=networktest ubuntu
 
@@ -219,7 +223,7 @@ c288470c46f6        host                host
 
 <p style="text-align:center;"><img src="bridge1.png" alt="bridge1" /></p>
 
-<p>Inspecting the network is an easy way to find out the container’s IP address.</p>
+<p>ネットワークを調べてみれば、コンテナーの IP アドレスは簡単に分かります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network inspect bridge
 
@@ -263,24 +267,32 @@ c288470c46f6        host                host
 <span class="o">]</span>
 </code></pre></div></div>
 
-<p>You can remove a container from a network by disconnecting the container. To do this, you supply both the network name and the container name. You can also use the container ID. In this example, though, the name is faster.</p>
+<p>ネットワークからコンテナーを削除するには、そのコンテナーを切り離すことで行います。
+そのときには、ネットワーク名とコンテナー名を両方指定します。
+あるいはコンテナー ID を用いることもできます。
+以下の例では、名前を用いるのが簡単なので、名前を指定します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network disconnect bridge networktest
 </code></pre></div></div>
 
-<p>While you can disconnect a container from a network, you cannot remove the
-builtin <code class="highlighter-rouge">bridge</code> network named <code class="highlighter-rouge">bridge</code>. Networks are natural ways to isolate
-containers from other containers or other networks. So, as you get more
-experienced with Docker, create your own networks.</p>
+<p>ネットワークからコンテナーを切り離すことはできますが、ビルトインの <code class="highlighter-rouge">bridge</code> ネットワークを削除することはできません。
+他のコンテナーや他のネットワークから、目的のコンテナーを独立させるようなネットワークとすることは、よく行うことです。
+そこで Docker について十分に経験を積んだ方は、独自のネットワークを生成してください。</p>
 
-<h2 id="create-your-own-bridge-network">Create your own bridge network</h2>
+<h2 id="create-your-own-bridge-network">ブリッジネットワークの生成</h2>
 
-<p>Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, create a bridge network:</p>
+<p>Docker Engine は、ブリッジネットワークとオーバーレイネットワークを両方ともサポートしています。
+ブリッジネットワークは Docker Engine が稼動する単一ホストでの利用に限定されます。
+オーバーレイネットワークは複数ホストを含めることが可能であり、より高度な手段です。
+以下の例ではブリッジネットワークを生成します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create -d bridge my_bridge
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">-d</code> flag tells Docker to use the <code class="highlighter-rouge">bridge</code> driver for the new network. You could have left this flag off as <code class="highlighter-rouge">bridge</code> is the default value for this flag. Go ahead and list the networks on your machine:</p>
+<p><code class="highlighter-rouge">-d</code> フラグは、新たなネットワークに対して <code class="highlighter-rouge">bridge</code> ドライバーを利用することを指示するものです。
+このフラグは省略することができます。
+<code class="highlighter-rouge">bridge</code> がこのフラグのデフォルト値であるからです。
+次にマシン上のネットワークの一覧を確認します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network ls
 
@@ -291,7 +303,7 @@ NETWORK ID          NAME                DRIVER
 c288470c46f6        host                host
 </code></pre></div></div>
 
-<p>If you inspect the network, it has nothing in it.</p>
+<p>ネットワークを調べてみると、中には何も入っていません。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network inspect my_bridge
 
@@ -317,19 +329,20 @@ c288470c46f6        host                host
 ]
 </code></pre></div></div>
 
-<h2 id="add-containers-to-a-network">Add containers to a network</h2>
+<h2 id="ネットワークへのコンテナーの追加">ネットワークへのコンテナーの追加</h2>
 
-<p>To build web applications that act in concert but do so securely, create a
-network. Networks, by definition, provide complete isolation for containers. You
-can add containers to a network when you first run a container.</p>
+<p>ウェブアプリケーションを構築する際に、まわりと連携動作をしつつ、十分に安全に動作させるためには、ネットワークを生成します。
+ネットワークとは元々の意味からすれば、コンテナーを完全に独立して取り扱うものです。
+ネットワークへのコンテナー追加は、コンテナーを起動するときに行うことができます。</p>
 
-<p>Launch a container running a PostgreSQL database and pass it the <code class="highlighter-rouge">--net=my_bridge</code> flag to connect it to your new network:</p>
+<p>PostgreSQL データベースを実行するコンテナーを起動させ、その際に <code class="highlighter-rouge">--net=my_bridge</code> フラグを与えます。
+こうして指定したネットワークに接続されます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --net=my_bridge --name db training/postgres
 </code></pre></div></div>
 
-<p>If you inspect your <code class="highlighter-rouge">my_bridge</code> you can see it has a container attached.
-You can also inspect your container to see where it is connected:</p>
+<p><code class="highlighter-rouge">my_bridge</code> を調べてみると、コンテナーが接続されているのがわかります。
+逆にコンテナーを調べてみると、どこに接続しているかもわかります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{json .NetworkSettings.Networks}}'  db
 
@@ -338,14 +351,17 @@ You can also inspect your container to see where it is connected:</p>
 "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"10.0.0.1","IPAddress":"10.0.0.254","IPPrefixLen":24,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
 </code></pre></div></div>
 
-<p>Now, go ahead and start your by now familiar web application. This time don’t specify a network.</p>
+<p>そこで次に、おなじみのウェブアプリケーションを起動してみます。
+ここではネットワークを指定しません。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --name web training/webapp python app.py
 </code></pre></div></div>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/bridge2.png" alt="bridge2" /></p>
 
-<p>Which network is your <code class="highlighter-rouge">web</code> application running under? Inspect the application to verify that it is running in the default <code class="highlighter-rouge">bridge</code> network.</p>
+<p><code class="highlighter-rouge">web</code> アプリケーションはどのネットワーク上にあるでしょう？
+アプリケーションを調べてみてください。
+これはデフォルトの <code class="highlighter-rouge">bridge</code> ネットワーク上に稼動しています。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{json .NetworkSettings.Networks}}'  web
 
@@ -354,7 +370,7 @@ You can also inspect your container to see where it is connected:</p>
 "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"172.17.0.1","IPAddress":"10.0.0.2","IPPrefixLen":24,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
 </code></pre></div></div>
 
-<p>Then, get the IP address of your <code class="highlighter-rouge">web</code></p>
+<p>そこで <code class="highlighter-rouge">web</code> の IP アドレスを取得します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
 
@@ -362,7 +378,7 @@ You can also inspect your container to see where it is connected:</p>
 172.17.0.2
 </code></pre></div></div>
 
-<p>Now, open a shell to your running <code class="highlighter-rouge">db</code> container:</p>
+<p>稼動している <code class="highlighter-rouge">db</code> コンテナーに対してシェルを開きます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it db bash
 
@@ -374,16 +390,24 @@ PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
 44 packets transmitted, 0 received, 100% packet loss, time 43185ms
 </code></pre></div></div>
 
-<p>After a bit, use <code class="highlighter-rouge">CTRL-C</code> to end the <code class="highlighter-rouge">ping</code> and notice that the ping failed. That is because the two containers are running on different networks. You can fix that. Then, use the <code class="highlighter-rouge">exit</code> command to close the container.</p>
+<p>少ししたら、<code class="highlighter-rouge">CTRL-C</code> により <code class="highlighter-rouge">ping</code> を終了させます。
+ping は失敗しているのがわかります。
+これは 2 つのコンテナーが別々のネットワーク上で動作しているからです。
+これを修正します。
+まずは <code class="highlighter-rouge">exit</code> コマンドを実行して、コンテナーへのアクセスを閉じます。</p>
 
-<p>Docker networking allows you to attach a container to as many networks as you like. You can also attach an already running container. Go ahead and attach your running <code class="highlighter-rouge">web</code> app to the <code class="highlighter-rouge">my_bridge</code>.</p>
+<p>Docker のネットワーク機能では、複数のネットワークを必要に応じて 1 つのコンテナーに割り当てることができます。
+すでに稼動済のコンテナーであっても割り当てられます。
+次は稼動している <code class="highlighter-rouge">web</code> アプリを <code class="highlighter-rouge">my_bridge</code> に割り当てます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network connect my_bridge web
 </code></pre></div></div>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/bridge3.png" alt="bridge3" /></p>
 
-<p>Open a shell into the <code class="highlighter-rouge">db</code> application again and try the ping command. This time just use the container name <code class="highlighter-rouge">web</code> rather than the IP address.</p>
+<p>もう一度、稼動している <code class="highlighter-rouge">db</code> コンテナーに対してシェルを開きます。
+そして ping コマンドを入力してみます。
+今回は IP アドレスではなく、コンテナー名 <code class="highlighter-rouge">web</code> を用います。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container exec -it db bash
 
@@ -398,11 +422,12 @@ PING web (10.0.0.2) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.060/0.073/0.095/0.018 ms
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">ping</code> shows it is contacting a different IP address, the address on the <code class="highlighter-rouge">my_bridge</code> which is different from its address on the <code class="highlighter-rouge">bridge</code> network.</p>
+<p><code class="highlighter-rouge">ping</code> の結果から、別の IP アドレスに接続しているのがわかります。
+<code class="highlighter-rouge">my_bridge</code> 上にあるアドレスは、<code class="highlighter-rouge">bridge</code> ネットワーク上のアドレスとは異なっているわけです。</p>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="次のステップ">次のステップ</h2>
 
-<p>Now that you know how to network containers, see <a href="dockervolumes.md">how to manage data in containers</a>.</p>
+<p>コンテナーのネットワーク設定方法がわかったら、次は <a href="dockervolumes.md">コンテナーにおけるデータ管理方法</a> に進んでください。</p>
 
 							<!-- tags -->
 							
@@ -438,7 +463,7 @@ rtt min/avg/max/mdev = 0.060/0.073/0.095/0.018 ms
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "engine/tutorials/networkingcontainers.md",
-										"title": "Network containers",
+										"title": "コンテナーのネットワーク設定",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/engine/tutorials/networkingcontainers.md"
 									};
 									(function(d, c, j) {
@@ -498,10 +523,10 @@ rtt min/avg/max/mdev = 0.060/0.073/0.095/0.018 ms
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#launch-a-container-on-the-default-network" class="nomunge">Launch a container on the default network</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#create-your-own-bridge-network" class="nomunge">Create your own bridge network</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#add-containers-to-a-network" class="nomunge">Add containers to a network</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#launch-a-container-on-the-default-network" class="nomunge">デフォルトネットワークによるコンテナーの起動</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#create-your-own-bridge-network" class="nomunge">ブリッジネットワークの生成</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#ネットワークへのコンテナーの追加" class="nomunge">ネットワークへのコンテナーの追加</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/networkingcontainers/#次のステップ" class="nomunge">次のステップ</a></li>
 </ul>
 
 

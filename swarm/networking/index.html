@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-06-28 11:26:24 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-28T11:26:24+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Swarm and container networks"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Swarm is fully compatible with Docker’s networking features. This includes the multi-host networking feature which allows creation of custom container networks that span multiple Docker hosts. Before using Swarm..." />
+	<meta name="twitter:title" itemprop="title name" content="Swarm とコンテナーのネットワーク"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Swarm は Docker のネットワーク機能と完全に互換性があります。 マルチホストによるネットワーク機能も含みます。 これは複数の Docker ホストにわたっての独自のコンテナーネットワークを生成できるものです。 独自のネットワークに対して Swarm を使うには、Docker コンテナーのネットワーク についての概念を一通り読んでおいてください。 また マルチホストネットワークをはじめよう の例を試しておくことも必要でしょう。 Swarm クラスターにおける独自ネットワークの生成 マルチホストネットワークでは、キーバリューを保存するストア（store）が必要になります。 このキーバリューストアは、ネットワークの状態を表わす情報を保持するものであり、ネットワーク検出、ネットワーク自体の情報、エンドポイント、IP アドレスなどの情報があります。 Docker の libkv プロジェクトを通じて、Docker では Consul、Etcd、ZooKeeper といったキーバリューストアバックエンドがサポートされます。 サポートしているこのバックエンドの詳細は..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-06-28T11:26:24+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, swarm, clustering,  networking">
@@ -96,16 +96,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Swarm and container networks | Docker Documentation</title>
-<meta property="og:title" content="Swarm and container networks" />
+	<title>Swarm とコンテナーのネットワーク | Docker Documentation</title>
+<meta property="og:title" content="Swarm とコンテナーのネットワーク" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Swarm and container networks" />
-<meta property="og:description" content="Swarm and container networks" />
+<meta name="description" content="Swarm とコンテナーのネットワーク" />
+<meta property="og:description" content="Swarm とコンテナーのネットワーク" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm and container networks","description":"Swarm and container networks","url":"https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm とコンテナーのネットワーク","description":"Swarm とコンテナーのネットワーク","url":"https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/"}</script>
 	<!-- END SEO STUFF -->
 	<meta name="robots" content="noindex" />
 	<script language="javascript">
@@ -175,50 +175,43 @@
 						<section class="section">
 							
 								
-							<h1>Swarm and container networks</h1> 
+							<h1>Swarm とコンテナーのネットワーク</h1> 
 							<blockquote><p><strong>この文書は古いスタンドアロン版の Swarm に関するものです。</strong> ここではスタンドアロン版 Docker Swarm について説明しています。Docker 1.12 およびそれ以降においては、Docker Engine に対して<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/">スウォームモード</a>が組み入れられました。たいていのユーザーは、統合されたスウォームモードを利用してください。これに関して読み進めるべきドキュメントは、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/">スウォームモードをはじめよう</a>、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/index.md#swarm-mode-cli-commands">スウォームモード CLI コマンド</a>、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">Docker ウォークスルー</a> です。スタンドアロン版の Docker Swarm は Docker Engine API や CLI コマンドには統合されていません。</p>
 </blockquote> <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    1 分
   
 </span>
 
 							
 							
-							<p>Docker Swarm is fully compatible with Docker’s networking features. This
-includes the multi-host networking feature which allows creation of custom
-container networks that span multiple Docker hosts.</p>
+							
+<p>Docker Swarm は Docker のネットワーク機能と完全に互換性があります。
+マルチホストによるネットワーク機能も含みます。
+これは複数の Docker ホストにわたっての独自のコンテナーネットワークを生成できるものです。</p>
 
-<p>Before using Swarm with a custom network, read through the conceptual
-information in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/">Docker container
-networking</a>.
-You should also have walked through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/get-started-overlay/">Get started with multi-host
-networking</a>
-example.</p>
+<p>独自のネットワークに対して Swarm を使うには、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/">Docker コンテナーのネットワーク</a> についての概念を一通り読んでおいてください。
+また <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/get-started-overlay/">マルチホストネットワークをはじめよう</a> の例を試しておくことも必要でしょう。</p>
 
-<h2 id="create-a-custom-network-in-a-swarm-cluster">Create a custom network in a Swarm cluster</h2>
+<h2 id="create-a-custom-network-in-a-swarm-cluster">Swarm クラスターにおける独自ネットワークの生成</h2>
 
-<p>Multi-host networks require a key-value store. The key-value store holds
-information about the network state which includes discovery, networks,
-endpoints, IP addresses, and more. Through the Docker’s libkv project, Docker
-supports Consul, Etcd, and ZooKeeper key-value store backends. For details about
-the supported backends, refer to the <a href="https://github.com/docker/libkv">libkv
-project</a>.</p>
+<p>マルチホストネットワークでは、キーバリューを保存するストア（store）が必要になります。
+このキーバリューストアは、ネットワークの状態を表わす情報を保持するものであり、ネットワーク検出、ネットワーク自体の情報、エンドポイント、IP アドレスなどの情報があります。
+Docker の libkv プロジェクトを通じて、Docker では Consul、Etcd、ZooKeeper といったキーバリューストアバックエンドがサポートされます。
+サポートしているこのバックエンドの詳細は <a href="https://github.com/docker/libkv">libkv プロジェクト</a> を参照してください。</p>
 
-<p>To create a custom network, you must choose a key-value store backend and
-implement it on your network. Then, you configure the Docker Engine daemon to
-use this store. Two required parameters,  <code class="highlighter-rouge">--cluster-store</code> and
-<code class="highlighter-rouge">--cluster-advertise</code>, refer to your key-value store server.</p>
+<p>独自のネットワークを生成するには、キーバリューストアバックエンドを 1 つ選んで、ネットワーク上に実装する必要があります。
+そして Docker Engine デーモンにおいて、このストアを利用する設定を行います。
+設定の際には 2 つのパラメーター、<code class="highlighter-rouge">--cluster-store</code>, <code class="highlighter-rouge">--cluster-advertise</code> を使って、キーバリューストアの存在するサーバーを指定します。</p>
 
-<p>Once you’ve configured and restarted the daemon on each Swarm node, you are
-ready to create a network.</p>
+<p>Swarm の各ノード上にてデーモンの設定と再起動を行えば、ネットワークを生成できるようになります。</p>
 
-<h2 id="list-networks">List networks</h2>
+<h2 id="list-networks">ネットワークの一覧確認</h2>
 
-<p>This example assumes there are two nodes <code class="highlighter-rouge">node-0</code> and <code class="highlighter-rouge">node-1</code> in the cluster.
-From a Swarm node, list the networks:</p>
+<p>以下の例では、クラスター内に 2 つのノード <code class="highlighter-rouge">node-0</code>、<code class="highlighter-rouge">node-1</code> があるとします。
+Swarm ノードからネットワーク一覧を確認します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
 </span>NETWORK ID          NAME                   DRIVER
@@ -230,13 +223,13 @@ From a Swarm node, list the networks:</p>
 6382abccd23d        node-1/none            null
 </code></pre></div></div>
 
-<p>As you can see, each network name is prefixed by the node name.</p>
+<p>上に示すように、各ネットワーク名の先頭にはノード名がつきます。</p>
 
-<h2 id="create-a-network">Create a network</h2>
+<h2 id="create-a-network">ネットワークの生成</h2>
 
-<p>By default, Swarm is using the <code class="highlighter-rouge">overlay</code> network driver, a global-scope network
-driver. A global-scope network driver creates a network across an entire Swarm cluster.
-When you create an <code class="highlighter-rouge">overlay</code> network under Swarm, you can omit the <code class="highlighter-rouge">-d</code> option:</p>
+<p>デフォルトで Swarm は、グローバルなスコープを持つネットワークドライバー <code class="highlighter-rouge">overlay</code> を用います。
+グローバルスコープのネットワークドライバーは、Swarm クラスター全体にわたるネットワークを生成します。
+Swarm のもとで <code class="highlighter-rouge">overlay</code> ネットワークを生成する場合、<code class="highlighter-rouge">-d</code> オプションは省略できます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create swarm_network
 42131321acab3233ba342443Ba4312
@@ -252,12 +245,11 @@ When you create an <code class="highlighter-rouge">overlay</code> network under 
 42131321acab        node-1/swarm_network   overlay
 </code></pre></div></div>
 
-<p>As you can see here, both the <code class="highlighter-rouge">node-0/swarm_network</code> and the
-<code class="highlighter-rouge">node-1/swarm_network</code> have the same ID.  This is because when you create a
-network on the cluster, it is accessible from all the nodes.</p>
+<p>上に示されるように <code class="highlighter-rouge">node-0/swarm_network</code> と <code class="highlighter-rouge">node-1/swarm_network</code> は同じ ID を持ちます。
+クラスター上にネットワークを生成すると、ノードすべてがアクセス可能になるわけです。</p>
 
-<p>To create a local scope network (for example with the <code class="highlighter-rouge">bridge</code> network driver) you
-should use <code class="highlighter-rouge">&lt;node&gt;/&lt;name&gt;</code> otherwise your network is created on a random node.</p>
+<p>ローカルなスコープのネットワークを（たとえば <code class="highlighter-rouge">bridge</code> ネットワークドライバーを利用して）生成する場合は、<code class="highlighter-rouge">&lt;node&gt;/&lt;name&gt;</code> という記述を行う必要があります。
+こうしないと、ネットワークがランダムに選び出されたノード上に生成されてしまいます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create node-0/bridge2 <span class="nt">-b</span> bridge
 921817fefea521673217123abab223
@@ -277,13 +269,14 @@ should use <code class="highlighter-rouge">&lt;node&gt;/&lt;name&gt;</code> othe
 5262bbfe5616        node-1/bridge2         bridge
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">--opt encrypted</code> is a feature only available in Docker Swarm mode. It’s not supported in Swarm standalone.
-Network encryption requires key management, which is outside the scope of Swarm.</p>
+<p><code class="highlighter-rouge">--opt encrypted</code> は Docker Swarm モードにおいてのみ利用可能な機能です。
+これはスタンドアロンの Swarm ではサポートされていません。
+ネットワークの暗号化には鍵の管理機能が必要で、これは Swarm の機能範囲には含まれません。</p>
 
-<h2 id="remove-a-network">Remove a network</h2>
+<h2 id="remove-a-network">ネットワークの削除</h2>
 
-<p>To remove a network you can use its ID or its name. If two different networks
-have the same name, include the <code class="highlighter-rouge">&lt;node&gt;</code> value:</p>
+<p>ネットワークを削除するときは、ネットワーク ID かネットワーク名を用いた指定を行います。
+2 つの異なるネットワークが同一名である場合は、<code class="highlighter-rouge">&lt;node&gt;</code> の記述を含めてください。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network rm swarm_network
 42131321acab3233ba342443Ba4312
@@ -300,15 +293,15 @@ have the same name, include the <code class="highlighter-rouge">&lt;node&gt;</co
 5262bbfe5616        node-1/bridge2         bridge
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">swarm_network</code> was removed from every node. The <code class="highlighter-rouge">bridge2</code> was removed only
-from <code class="highlighter-rouge">node-0</code>.</p>
+<p><code class="highlighter-rouge">swarm_network</code> が全ノードから削除されました。
+また <code class="highlighter-rouge">bridge2</code> は <code class="highlighter-rouge">node-0</code> からのみ削除されました。</p>
 
-<h2 id="docker-swarm-documentation-index">Docker Swarm documentation index</h2>
+<h2 id="docker-swarm-documentation-index">Docker Swarm ドキュメントの例</h2>
 
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/">Docker Swarm overview</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/scheduler/strategy/">Scheduler strategies</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/scheduler/filter/">Scheduler filters</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/">Docker Swarm 概要</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/scheduler/strategy/">スケジューラーストラテジー</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/scheduler/filter/">スケジューラーフィルター</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/swarm-api/">Swarm API</a></li>
 </ul>
 
@@ -346,7 +339,7 @@ from <code class="highlighter-rouge">node-0</code>.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "swarm/networking.md",
-										"title": "Swarm and container networks",
+										"title": "Swarm とコンテナーのネットワーク",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/swarm/networking.md"
 									};
 									(function(d, c, j) {
@@ -406,11 +399,11 @@ from <code class="highlighter-rouge">node-0</code>.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#create-a-custom-network-in-a-swarm-cluster" class="nomunge">Create a custom network in a Swarm cluster</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#list-networks" class="nomunge">List networks</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#create-a-network" class="nomunge">Create a network</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#remove-a-network" class="nomunge">Remove a network</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#docker-swarm-documentation-index" class="nomunge">Docker Swarm documentation index</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#create-a-custom-network-in-a-swarm-cluster" class="nomunge">Swarm クラスターにおける独自ネットワークの生成</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#list-networks" class="nomunge">ネットワークの一覧確認</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#create-a-network" class="nomunge">ネットワークの生成</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#remove-a-network" class="nomunge">ネットワークの削除</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm/networking/#docker-swarm-documentation-index" class="nomunge">Docker Swarm ドキュメントの例</a></li>
 </ul>
 
 
