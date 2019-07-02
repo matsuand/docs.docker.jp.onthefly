@@ -1,4 +1,4 @@
-<!-- Page generated 2019-05-10 16:39:30 +0900 -->
+<!-- Page generated 2019-07-02 16:55:15 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-02T16:55:15+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="ファイル間、プロジェクト間での Compose 設定の共有"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Compose がサポートする設定共有には 2 とおりあります。 Compose ファイル全体を 複数の Compose ファイルの利用 により拡張します。 個々のサービスを extends フィールド を使って拡張します（Compose ファイルバージョン 2.1 まで）。 複数の Compose ファイル Using multiple Compose files enables you to customize a Compose..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Compose がサポートする設定共有には 2 つの方法があります。 Compose ファイル全体を 複数の Compose ファイルの利用 により拡張します。 個々のサービスを extends フィールド を使って拡張します（Compose ファイルバージョン 2.1 まで）。 複数の Compose ファイルの利用 Compose ファイルを複数利用することにすれば、Compose によるアプリケーションを異なる環境、異なる作業フローに合わせてカスタマイズできます。 Compose ファイルが複数ある意味 デフォルトにおいて Compose は 2 つのファイルを読み込みます。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-05-10T16:39:30+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-02T16:55:15+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="fig, composition, compose, docker, orchestration, documentation, docs">
@@ -179,63 +179,55 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    7 分
+    3 分
   
 </span>
 
 							
 							
 							
-<p>Compose がサポートする設定共有には 2 とおりあります。</p>
+<p>Compose がサポートする設定共有には 2 つの方法があります。</p>
 
 <ol>
   <li>Compose ファイル全体を <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#multiple-compose-files">複数の Compose ファイルの利用</a> により拡張します。</li>
   <li>個々のサービスを <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#extending-services"><code class="highlighter-rouge">extends</code> フィールド</a> を使って拡張します（Compose ファイルバージョン 2.1 まで）。</li>
 </ol>
 
-<h2 id="multiple-compose-files">複数の Compose ファイル</h2>
+<h2 id="multiple-compose-files">複数の Compose ファイルの利用</h2>
 
-<p>Using multiple Compose files enables you to customize a Compose application
-for different environments or different workflows.</p>
+<p>Compose ファイルを複数利用することにすれば、Compose によるアプリケーションを異なる環境、異なる作業フローに合わせてカスタマイズできます。</p>
 
 <h3 id="understanding-multiple-compose-files">Compose ファイルが複数ある意味</h3>
 
 <p>デフォルトにおいて Compose は 2 つのファイルを読み込みます。
-<code class="highlighter-rouge">docker-compose.yml</code> と、必要に応じて作られるオプションの <code class="highlighter-rouge">docker-compose.override.yml</code> です。
+<code class="highlighter-rouge">docker-compose.yml</code> と、必要に応じて編集する <code class="highlighter-rouge">docker-compose.override.yml</code> です。
 慣習として <code class="highlighter-rouge">docker-compose.yml</code> には基本的な設定を含めます。
-<code class="highlighter-rouge">docker-compose.override.yml</code> ファイルは、オーバーライドという表現が含まれていることから分かるように、既存のサービスあるいは新たに起動する全サービスに対しての追加設定を行うものです。</p>
+<code class="highlighter-rouge">docker-compose.override.yml</code> ファイルは、オーバーライドという表現が含まれていることから分かるように、既存のサービスあるいは新たに起動する全サービスに対しての上書き設定を行うものです。</p>
 
-<p>サービスの定義が両方のファイルに存在した場合、Compose は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#設定の追加とオーバーライド">設定の追加とオーバーライド</a> に示すルールに従って定義設定をマージします。</p>
+<p>サービスの定義が両方のファイルに存在した場合、Compose は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#adding-and-overriding-configuration">設定の追加と上書き</a> に示すルールに従って定義設定をマージします。</p>
 
-<p>To use multiple override files, or an override file with a different name, you
-can use the <code class="highlighter-rouge">-f</code> option to specify the list of files. Compose merges files in
-the order they’re specified on the command line. See the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/overview.md"><code class="highlighter-rouge">docker-compose</code>
-command reference</a> for more information about
-using <code class="highlighter-rouge">-f</code>.</p>
+<p>複数の上書きファイルがある場合、あるいは上書きファイルが 1 つであってもその名前を別にしている場合、<code class="highlighter-rouge">-f</code> オプションを使って、ファイル名を列記して指定することができます。
+Compose はコマンドライン上に指定された順に、設定ファイルをマージします。
+詳細は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/overview.md"><code class="highlighter-rouge">docker-compose</code> コマンドリファレンス</a> の <code class="highlighter-rouge">-f</code> オプションに関する情報を参照してください。</p>
 
-<p>When you use multiple configuration files, you must make sure all paths in the
-files are relative to the base Compose file (the first Compose file specified
-with <code class="highlighter-rouge">-f</code>). This is required because override files need not be valid
-Compose files. Override files can contain small fragments of configuration.
-Tracking which fragment of a service is relative to which path is difficult and
-confusing, so to keep paths easier to understand, all paths must be defined
-relative to the base file.</p>
+<p>複数の設定ファイルを利用する場合、各ファイルに記述されるパスは、基準となる Compose ファイル（1 つめの <code class="highlighter-rouge">-f</code> により指定された Compose ファイル）からの相対パスである必要があります。
+これは上書きするファイルが Compose ファイルとして有効である必要がないからです。
+上書きファイル内は、設定項目が部分的に含まれているだけで構いません。
+サービスに対する定義部分がどのパスからの相対パスとして定義されているのかといったことを追っていくのは、なかなか難しく理解しづらくなります。
+そこでパスを理解しやすくするために、パス指定はすべて、ベースとなるファイルからの相対パスとして定義するものとしています。</p>
 
-<h3 id="example-use-case">Example use case</h3>
+<h3 id="example-use-case">利用例</h3>
 
-<p>In this section, there are two common use cases for multiple Compose files: changing a
-Compose app for different environments, and running administrative tasks
-against a Compose app.</p>
+<p>この節では複数の Compose ファイルを利用する標準的な例を 2 つ示します。
+1 つは Compose アプリを異なる環境向けに切り替えるもの。
+もう 1 つは Compose アプリに対して管理タスクを実行するものです。</p>
 
-<h4 id="different-environments">Different environments</h4>
+<h4 id="different-environments">異なる環境向けの例</h4>
 
-<p>A common use case for multiple files is changing a development Compose app
-for a production-like environment (which may be production, staging or CI).
-To support these differences, you can split your Compose configuration into
-a few different files:</p>
+<p>複数の設定ファイルを利用する例としてよくあるのは、開発環境向けの Compose アプリを、本番環境向けなど（本番環境、ステージング環境、CI 環境など）に切り替える場合です。
+こういった環境の違いに対応するには、Compose 設定ファイルをいくつかの設定ファイルに切り分けて行います。</p>
 
-<p>Start with a base file that defines the canonical configuration for the
-services.</p>
+<p>まずはサービスの標準設定を行うベースファイルから始めます。</p>
 
 <p><strong>docker-compose.yml</strong></p>
 
@@ -252,8 +244,7 @@ cache:
   image: redis:latest
 </code></pre></div></div>
 
-<p>In this example the development configuration exposes some ports to the
-host, mounts our code as a volume, and builds the web image.</p>
+<p>この開発環境向け設定の例では、ホストに対してポートをいくつか公開し、ソースコードをボリュームとしてマウントした上で、ウェブイメージをビルドしています。</p>
 
 <p><strong>docker-compose.override.yml</strong></p>
 
@@ -276,11 +267,10 @@ cache:
     - 6379:6379
 </code></pre></div></div>
 
-<p>When you run <code class="highlighter-rouge">docker-compose up</code> it reads the overrides automatically.</p>
+<p><code class="highlighter-rouge">docker-compose up</code> を実行すると、上書き用の設定ファイルが自動的に読み込まれます。</p>
 
-<p>Now, it would be nice to use this Compose app in a production environment. So,
-create another override file (which might be stored in a different git
-repo or managed by a different team).</p>
+<p>この Compose アプリは、このままでも十分に本番環境向けとすることができます。
+ただここでは、別の上書きファイルを生成します（このファイルは別の git リポジトリに含まれているとか、別の開発チームが管理するものであるかもしれません）。</p>
 
 <p><strong>docker-compose.prod.yml</strong></p>
 
@@ -295,25 +285,21 @@ cache:
     TTL: '500'
 </code></pre></div></div>
 
-<p>To deploy with this production Compose file you can run</p>
+<p>この本番環境向け Compose ファイルをデプロイするために、以下を実行します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 </code></pre></div></div>
 
-<p>This deploys all three services using the configuration in
-<code class="highlighter-rouge">docker-compose.yml</code> and <code class="highlighter-rouge">docker-compose.prod.yml</code> (but not the
-dev configuration in <code class="highlighter-rouge">docker-compose.override.yml</code>).</p>
+<p>これによって 3 つのサービスすべてがデプロイされますが、利用される設定は <code class="highlighter-rouge">docker-compose.yml</code> と <code class="highlighter-rouge">docker-compose.prod.yml</code> から読み込まれたものです（<code class="highlighter-rouge">docker-compose.override.yml</code> 内の開発環境向け設定は利用されません。）。</p>
 
-<p>See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/">production</a> for more information about Compose in
-production.</p>
+<p>本番環境での Compose 利用に関する情報は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/production/">本番環境での Compose の利用</a> を参照してください。</p>
 
-<h4 id="administrative-tasks">Administrative tasks</h4>
+<h4 id="administrative-tasks">管理タスクの例</h4>
 
-<p>Another common use case is running adhoc or administrative tasks against one
-or more services in a Compose app. This example demonstrates running a
-database backup.</p>
+<p>よく行われるもう 1 つの例は、Compose アプリにおけるサービスに対して、特別なタスクあるいは管理タスクを実行する場合です。
+ここでは、データベースバックアップを実行する例を示します。</p>
 
-<p>Start with a <strong>docker-compose.yml</strong>.</p>
+<p><strong>docker-compose.yml</strong> から始めます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   image: example/my_web_app:latest
@@ -324,8 +310,7 @@ db:
   image: postgres:latest
 </code></pre></div></div>
 
-<p>In a <strong>docker-compose.admin.yml</strong> add a new service to run the database
-export or backup.</p>
+<p><strong>docker-compose.admin.yml</strong> において、新しいサービスを追加して、データベースのエクスポートまたはバックアップを行うようにします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dbadmin:
   build: database_admin/
@@ -333,46 +318,38 @@ export or backup.</p>
     - db
 </code></pre></div></div>
 
-<p>To start a normal environment run <code class="highlighter-rouge">docker-compose up -d</code>. To run a database
-backup, include the <code class="highlighter-rouge">docker-compose.admin.yml</code> as well.</p>
+<p>通常の環境を起動するときは <code class="highlighter-rouge">docker-compose up -d</code> を実行します。
+またデータベースバックアップを実行するときは、<code class="highlighter-rouge">docker-compose.admin.yml</code> も含めるようにして実行します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
     run dbadmin db-backup
 </code></pre></div></div>
 
-<h2 id="extending-services">Extending services</h2>
+<h2 id="extending-services">サービスの拡張</h2>
 
 <blockquote>
-  <p><strong>Note</strong>: The <code class="highlighter-rouge">extends</code> keyword is supported in earlier Compose file formats
-up to Compose file version 2.1 (see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#extends">extends in
-v1</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#extends">extends in
-v2</a>), but is not supported in
-Compose version 3.x. See the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning.md#version-3">Version 3
-summary</a> of keys added
-and removed, along with information on <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning.md#upgrading">how to
-upgrade</a>. See
-<a href="https://github.com/moby/moby/issues/31101">moby/moby#31101</a> to follow the
-discussion thread on possibility of adding support for <code class="highlighter-rouge">extends</code> in some form in
-future versions.</p>
+  <p><strong>メモ</strong>: キーワード <code class="highlighter-rouge">extends</code> は、かつての Compose ファイルフォーマットバージョン 2.1 までにおいてサポートされます。
+（<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#extends">バージョン 1 における extends</a> と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#extends">バージョン 2 における extends</a> を参照のこと。）
+これは Compose バージョン 3.x ではサポートされていません。
+キーワードの追加、削除に関しては <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning.md#version-3">バージョン 3 のまとめ</a> や <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning.md#upgrading">アップグレード方法</a> を参照してください。
+また <a href="https://github.com/moby/moby/issues/31101">moby/moby#31101</a> では、将来のバージョンにおいて、何らかの形式で <code class="highlighter-rouge">extends</code> をサポートする可能性について議論するスレッドがありますので、確認してみてください。</p>
 </blockquote>
 
-<p>Docker Compose’s <code class="highlighter-rouge">extends</code> keyword enables sharing of common configurations
-among different files, or even different projects entirely. Extending services
-is useful if you have several services that reuse a common set of configuration
-options. Using <code class="highlighter-rouge">extends</code> you can define a common set of service options in one
-place and refer to it from anywhere.</p>
+<p>Docker Compose の <code class="highlighter-rouge">extends</code> キーワードを使うと、さまざまな設定ファイルに共通する内容を共有することができます。
+それはまったく別のプロジェクト間でも可能です。
+ごく標準的な設定オプションを再利用しているサービスがいくつもある場合に、このサービス拡張機能を活用することができます。
+<code class="highlighter-rouge">extends</code> を使って標準的なサービスオプションを 1 箇所に定義しておけば、それをどこからでも参照することができます。</p>
 
-<p>Keep in mind that <code class="highlighter-rouge">links</code>, <code class="highlighter-rouge">volumes_from</code>, and <code class="highlighter-rouge">depends_on</code> are never shared
-between services using <code class="highlighter-rouge">extends</code>. These exceptions exist to avoid implicit
-dependencies; you always define <code class="highlighter-rouge">links</code> and <code class="highlighter-rouge">volumes_from</code> locally. This ensures
-dependencies between services are clearly visible when reading the current file.
-Defining these locally also ensures that changes to the referenced file don’t
-break anything.</p>
+<p><code class="highlighter-rouge">links</code>、<code class="highlighter-rouge">volumes_from</code>、<code class="highlighter-rouge">depends_on</code> は、<code class="highlighter-rouge">extends</code> を利用したサービス間での共有はされません。
+これらが例外となっているのは、気づかないうちに依存関係が発生してしまうことを避けるためです。
+<code class="highlighter-rouge">links</code> や <code class="highlighter-rouge">volumes_from</code> はいつもローカルな定義に利用するものです。
+こうしているからこそ、そのときの設定ファイルを読めば、サービス間の依存関係がはっきりわかることになります。
+ローカルに定義しておくのは、参照されている側のファイルに変更が加わっても、影響がなく済むことにもつながります。</p>
 
-<h3 id="understand-the-extends-configuration">Understand the extends configuration</h3>
+<h3 id="understand-the-extends-configuration">extends によるサービス拡張設定の理解</h3>
 
-<p>When defining any service in <code class="highlighter-rouge">docker-compose.yml</code>, you can declare that you are
-extending another service like this:</p>
+<p><code class="highlighter-rouge">docker-compose.yml</code> 内にサービスを定義するときには、どのようなサービスであっても、別のサービスを拡張するように宣言できます。
+たとえば以下のとおりです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   extends:
@@ -380,9 +357,8 @@ extending another service like this:</p>
     service: webapp
 </code></pre></div></div>
 
-<p>This instructs Compose to re-use the configuration for the <code class="highlighter-rouge">webapp</code> service
-defined in the <code class="highlighter-rouge">common-services.yml</code> file. Suppose that <code class="highlighter-rouge">common-services.yml</code>
-looks like this:</p>
+<p>上の設定は Compose に対して、<code class="highlighter-rouge">common-services.yml</code> ファイル内に定義されている <code class="highlighter-rouge">webapp</code> サービスの設定を再利用することを指示しています。
+<code class="highlighter-rouge">common-services.yml</code> は以下のようになっているとします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webapp:
   build: .
@@ -392,12 +368,9 @@ looks like this:</p>
     - "/data"
 </code></pre></div></div>
 
-<p>In this case, you get exactly the same result as if you wrote
-<code class="highlighter-rouge">docker-compose.yml</code> with the same <code class="highlighter-rouge">build</code>, <code class="highlighter-rouge">ports</code> and <code class="highlighter-rouge">volumes</code> configuration
-values defined directly under <code class="highlighter-rouge">web</code>.</p>
+<p>この例では、<code class="highlighter-rouge">docker-compose.yml</code> ファイル内の <code class="highlighter-rouge">web</code> の直下に、<code class="highlighter-rouge">build</code>、<code class="highlighter-rouge">ports</code>、<code class="highlighter-rouge">volumes</code> の設定を行った場合と同じ結果を得ることができます。</p>
 
-<p>You can go further and define (or re-define) configuration locally in
-<code class="highlighter-rouge">docker-compose.yml</code>:</p>
+<p>さらに <code class="highlighter-rouge">docker-compose.yml</code> 内には、ローカルでの設定内容を定義あるいは再定義することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   extends:
@@ -412,7 +385,7 @@ important_web:
   cpu_shares: 10
 </code></pre></div></div>
 
-<p>You can also write other services and link your <code class="highlighter-rouge">web</code> service to them:</p>
+<p>また他のサービスを記述して、<code class="highlighter-rouge">web</code> サービスからそのサービスへリンクすることも可能です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   extends:
@@ -427,14 +400,14 @@ db:
   image: postgres
 </code></pre></div></div>
 
-<h3 id="example-use-case-1">Example use case</h3>
+<h3 id="example-use-case">利用例</h3>
 
-<p>Extending an individual service is useful when you have multiple services that
-have a common configuration.  The example below is a Compose app with
-two services: a web application and a queue worker. Both services use the same
-codebase and share many configuration options.</p>
+<p>複数のサービスを利用していてそこに共通設定が存在する場合に、単独のサービスを拡張することができるかもしれません。
+以下の例では Compose アプリにおいて 2 つのサービスがあります。
+ウェブアプリケーションとキューワーカー（queue worker）です。
+この 2 つのサービスは同一のコードを用いるものであり、多くの設定オプションを共有します。</p>
 
-<p>In a <strong>common.yml</strong> we define the common configuration:</p>
+<p><strong>common.yml</strong> では共通する設定を定義します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app:
   build: .
@@ -444,8 +417,7 @@ codebase and share many configuration options.</p>
   cpu_shares: 5
 </code></pre></div></div>
 
-<p>In a <strong>docker-compose.yml</strong> we define the concrete services which use the
-common configuration:</p>
+<p><strong>docker-compose.yml</strong> では、上の共通設定を利用する具体的なサービスを定義します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webapp:
   extends:
@@ -467,15 +439,14 @@ queue_worker:
     - queue
 </code></pre></div></div>
 
-<h2 id="adding-and-overriding-configuration">設定の追加とオーバーライド</h2>
+<h2 id="adding-and-overriding-configuration">設定の追加と上書き</h2>
 
-<p>Compose copies configurations from the original service over to the local one.
-If a configuration option is defined in both the original service and the local
-service, the local value <em>replaces</em> or <em>extends</em> the original value.</p>
+<p>Compose では、元からあったサービスの定義を、ローカルのサービス定義に向けてコピーします。
+設定オプションが元々のサービスとローカルのサービスの両方にて定義されていた場合は、元のサービスの値はローカルの値によって <strong>置き換えられる</strong>か、あるいは<strong>拡張されます</strong>。</p>
 
 <p>1 つの値しか持たないオプション、たとえば <code class="highlighter-rouge">image</code>、<code class="highlighter-rouge">command</code>、<code class="highlighter-rouge">mem_limit</code> のようなものは、古い値が新しい値に置き換えられます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元々のサービス
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 command: python app.py
 
 # ローカル定義のサービス
@@ -488,22 +459,17 @@ command: python otherapp.py
 <blockquote>
   <p>Compose ファイルバージョン 1 における <code class="highlighter-rouge">build</code> と <code class="highlighter-rouge">image</code></p>
 
-  <p>In the case of <code class="highlighter-rouge">build</code> and <code class="highlighter-rouge">image</code>, when using
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md">version 1 of the Compose file format</a>, using one
-option in the local service causes Compose to discard the other option if it
-was defined in the original service.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md">Compose ファイルフォーマットバージョン 1</a> における <code class="highlighter-rouge">build</code> と <code class="highlighter-rouge">image</code> の 2 つについて、ローカル定義に一方を用いた場合に、他方が元々のサービスに定義されていたとすると、その他方のオプションは無視されます。</p>
 
-  <p>For example, if the original service defines <code class="highlighter-rouge">image: webapp</code> and the
-local service defines <code class="highlighter-rouge">build: .</code> then the resulting service has a
-<code class="highlighter-rouge">build: .</code> and no <code class="highlighter-rouge">image</code> option.</p>
+  <p>たとえば元のサービスに <code class="highlighter-rouge">image: webapp</code> が定義されていて、ローカルサービスでは <code class="highlighter-rouge">build: .</code> が定義されているとします。
+このときの結果は <code class="highlighter-rouge">build: .</code> となり、<code class="highlighter-rouge">image</code> オプションはなくなります。</p>
 
-  <p>This is because <code class="highlighter-rouge">build</code> and <code class="highlighter-rouge">image</code> cannot be used together in a version 1
-file.</p>
+  <p>これはファイルフォーマットバージョン 1 においては、<code class="highlighter-rouge">build</code> と <code class="highlighter-rouge">image</code> を同時に用いることができないためです。</p>
 </blockquote>
 
 <p><strong>複数の値を持つオプション</strong>、<code class="highlighter-rouge">ports</code>、<code class="highlighter-rouge">expose</code>、<code class="highlighter-rouge">external_links</code>、<code class="highlighter-rouge">dns</code>、<code class="highlighter-rouge">dns_search</code>、<code class="highlighter-rouge">tmpfs</code> では、両者の設定をつなぎ合わせます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元々のサービス
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 expose:
   - "3000"
 
@@ -521,7 +487,7 @@ expose:
 
 <p><code class="highlighter-rouge">environment</code>、<code class="highlighter-rouge">labels</code>、<code class="highlighter-rouge">volumes</code>、<code class="highlighter-rouge">devices</code> の場合、Compose は設定内容を”マージ”して、ローカル定義の値が優先するようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元々のサービス
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 environment:
   - FOO=original
   - BAR=original
@@ -540,7 +506,7 @@ environment:
 
 <p><code class="highlighter-rouge">volumes</code> や <code class="highlighter-rouge">devices</code> の設定内容は、コンテナーのマウントパスを使ってマージされます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元々のサービス
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 volumes:
   - ./original:/foo
   - ./original:/bar
@@ -664,19 +630,19 @@ volumes:
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#multiple-compose-files" class="nomunge">複数の Compose ファイル</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#multiple-compose-files" class="nomunge">複数の Compose ファイルの利用</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#understanding-multiple-compose-files" class="nomunge">Compose ファイルが複数ある意味</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#example-use-case" class="nomunge">Example use case</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#example-use-case" class="nomunge">利用例</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#extending-services" class="nomunge">Extending services</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#extending-services" class="nomunge">サービスの拡張</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#understand-the-extends-configuration" class="nomunge">Understand the extends configuration</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#example-use-case-1" class="nomunge">Example use case</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#understand-the-extends-configuration" class="nomunge">extends によるサービス拡張設定の理解</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#example-use-case" class="nomunge">利用例</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#adding-and-overriding-configuration" class="nomunge">設定の追加とオーバーライド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#adding-and-overriding-configuration" class="nomunge">設定の追加と上書き</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/#compose-documentation" class="nomunge">Compose ドキュメント</a></li>
 </ul>
 
