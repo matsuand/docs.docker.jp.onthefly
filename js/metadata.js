@@ -374,13 +374,13 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/bundle/",
 "title":"docker-compose bundle",
-"description":"Create a distributed application bundle from the Compose file.",
+"description":"Compose ファイルから分散アプリケーションバンドル（Distributed Application Bundle; DAB）を生成します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, bundle"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/bundles/",
-"title":"Docker stacks and distributed application bundles (experimental)",
+"title":"Docker スタックと配布アプリケーションバンドル（試験的）",
 "description":"Description of Docker and Compose's experimental support for application bundles",
 "keywords":"documentation, docs, docker, compose, bundles, stacks"
 }
@@ -605,7 +605,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/config/",
 "title":"docker-compose config",
-"description":"Config validates and view the compose file.",
+"description":"Compose ファイルを検証して表示します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, config"
 }
 ,
@@ -1851,7 +1851,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/images/",
 "title":"docker-compose images",
-"description":"Lists images used by the project.",
+"description":"プロジェクトにおいて用いられているイメージの一覧を表示します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, images"
 }
 ,
@@ -2221,8 +2221,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/",
-"title":"Compose command-line reference",
-"description":"Compose CLI reference",
+"title":"Compose コマンドラインリファレンス",
+"description":"Compose CLI リファレンス",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  reference"
 }
 ,
@@ -3713,7 +3713,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/push/",
 "title":"docker-compose push",
-"description":"Pushes service images.",
+"description":"サービスのイメージをプッシュします。",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  push"
 }
 ,
@@ -4742,7 +4742,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/reference/top/",
 "title":"docker-compose top",
-"description":"Displays the running processes.",
+"description":"実行中のプロセスを表示します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, top"
 }
 ,
@@ -5343,8 +5343,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-aws/why/",
-"title":"Why Docker for AWS?",
-"description":"Why Docker for AWS?",
+"title":"なぜ Docker for AWS か？",
+"description":"なぜ Docker for AWS か？",
 "keywords":"aws, amazon, iaas, why"
 }
 ,
