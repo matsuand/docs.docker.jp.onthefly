@@ -352,8 +352,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/",
-"title":"Build Enhancements for Docker",
-"description":"Learn the new features of Docker Build",
+"title":"Docker ビルドの拡張",
+"description":"Docker ビルドの新しい機能について学びます。",
 "keywords":"build, security, engine, secret, buildkit"
 }
 ,
@@ -569,8 +569,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/",
-"title":"Compose file version 1 reference",
-"description":"Compose file reference",
+"title":"Compose ファイル バージョン 1 リファレンス",
+"description":"Compose ファイルリファレンス",
 "keywords":"fig, composition, compose version 1, docker"
 }
 ,
@@ -1130,7 +1130,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/django/",
 "title":"クィックスタート: Compose と Django",
-"description":"Docker Compose と Django をはじめる。",
+"description":"Django を使って Docker Compose をはじめる。",
 "keywords":"documentation, docs,  docker, compose, orchestration, containers"
 }
 ,
@@ -2235,9 +2235,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/",
-"title":"Docker Compose",
-"description":"Compose の導入と概要",
-"keywords":"documentation, docs,  docker, compose, orchestration,  containers"
+"title":"Docker Compose の概要",
+"description":"Introduction and Overview of Compose",
+"keywords":"documentation, docs, docker, compose, orchestration, containers"
 }
 ,
 {
@@ -3748,7 +3748,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/compose/rails/",
 "title":"クィックスタート: Compose と Rails",
-"description":"Docker Compose と Rails をはじめる。",
+"description":"Rails を使って Docker Compose をはじめる。",
 "keywords":"documentation, docs, docker, compose, orchestration, containers"
 }
 ,
@@ -3859,8 +3859,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/repos/",
-"title":"Repositories",
-"description":"Using repositories on Docker Hub",
+"title":"リポジトリ",
+"description":"Docker Hub 上のリポジトリの利用",
 "keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
 }
 ,
@@ -5350,8 +5350,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/wordpress/",
-"title":"Quickstart: Compose and WordPress",
-"description":"Getting started with Compose and WordPress",
+"title":"クィックスタート: Compose と WordPress",
+"description":"WordPress を使って Compose をはじめる。",
 "keywords":"documentation, docs,  docker, compose, orchestration, containers"
 }
 ,
