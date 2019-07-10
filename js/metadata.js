@@ -1234,7 +1234,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/examples/dotnetcore/",
-"title":"Dockerize a .NET Core application",
+"title":"Dockerize an ASP.NET Core application",
 "description":"Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile.",
 "keywords":"dockerize, dockerizing, dotnet, .NET, Core, article, example, platform, installation, containers, images, image, dockerfile, build, asp.net, asp.net core"
 }
@@ -3208,8 +3208,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/official_images/",
-"title":"Official Images on Docker Hub",
-"description":"Guidelines for Official Images on Docker Hub",
+"title":"Docker Hub 上の公式イメージ",
+"description":"Docker Hub 上の公式イメージに対するガイドライン。",
 "keywords":"Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, official,image, documentation"
 }
 ,
@@ -3358,13 +3358,6 @@ var pages = [
 "title":"docker-compose コマンド概要",
 "description":"Overview of docker-compose CLI",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  docker-compose"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/compose/overview/",
-"title":"Docker Compose 概要",
-"description":"Compose の導入と概要",
-"keywords":"documentation, docs, docker, compose, orchestration, containers"
 }
 ,
 {
@@ -4671,8 +4664,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/daemon/systemd/",
-"title":"systemd における Docker のコントロール",
-"description":"systemd を用いた Docker のコントロールと設定",
+"title":"Control Docker with systemd",
+"description":"Controlling and configuring Docker using systemd",
 "keywords":"docker, daemon, systemd, configuration"
 }
 ,
