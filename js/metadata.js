@@ -1122,9 +1122,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/machine/drivers/digital-ocean/",
-"title":"Digital Ocean",
-"description":"Digital Ocean driver for machine",
-"keywords":"machine, Digital Ocean, driver"
+"title":"DigitalOcean",
+"description":"DigitalOcean driver for machine",
+"keywords":"machine, digitalocean, driver"
 }
 ,
 {
@@ -3201,9 +3201,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/machine/examples/ocean/",
-"title":"Digital Ocean example",
-"description":"Using Docker Machine to provision hosts on Digital Ocean",
-"keywords":"docker, machine, cloud, digital ocean"
+"title":"DigitalOcean example",
+"description":"Using Docker Machine to provision hosts on DigitalOcean",
+"keywords":"docker, machine, cloud, digitalocean"
 }
 ,
 {
