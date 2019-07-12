@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-10 20:33:01 +0900 -->
+<!-- Page generated 2019-07-12 11:18:39 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-10T20:33:01+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-12T11:18:39+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="リファレンスとガイドライン ここに示す内容は Compose ファイルフォーマット、バージョン 2 です。 Compose と Docker の互換マトリックス Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。 その様子は以下の一覧表に見ることができます。 各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については バージョンとアップグレードについてを参照してください。 以下の一覧表は、Compose ファイルのどのバージョンが Docker リリースをサポートしているかを示すものです。 Compose ファイルフォーマット Docker Engine リリース 3.7 18.06.0 以上 3.6..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-10T20:33:01+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-12T11:18:39+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="fig, composition, compose version 3, docker">
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    34 分
+    30 分
   
 </span>
 
@@ -969,16 +969,13 @@ Docker Client の <code class="highlighter-rouge">--add-host</code> パラメー
 
 <h3 id="group_add">group_add</h3>
 
-<p>Specify additional groups (by name or number) which the user inside the
-container should be a member of. Groups must exist in both the container and the
-host system to be added. An example of where this is useful is when multiple
-containers (running as different users) need to all read or write the same
-file on the host system. That file can be owned by a group shared by all the
-containers, and specified in <code class="highlighter-rouge">group_add</code>. See the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md#additional-groups">Docker documentation</a> for more
-details.</p>
+<p>コンテナー内部のユーザーを所属させたい追加のグループを（グループ名か ID により）指定します。
+追加のグループは、コンテナーとホストシステムの双方に存在している必要があります。
+これが必要になるのは、たとえば複数コンテナーが別々のユーザーによって起動していて、しかもホストシステム上の同一のファイルへの読み書きを行いたいような場合です。
+そのファイルが、コンテナーすべてに共通するグループにより所有されているようにすればよく、これを <code class="highlighter-rouge">group_add</code> により実現できます。
+詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md#additional-groups">Docker ドキュメント</a> を参照してください。</p>
 
-<p>A full example:</p>
+<p>全体的な例として以下です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 services:
@@ -988,20 +985,17 @@ services:
       - mail
 </code></pre></div></div>
 
-<p>Running <code class="highlighter-rouge">id</code> inside the created container shows that the user belongs to
-the <code class="highlighter-rouge">mail</code> group, which would not have been the case if <code class="highlighter-rouge">group_add</code> were not
-used.</p>
+<p>生成されたコンテナー内において <code class="highlighter-rouge">id</code> を実行すると、ユーザーが <code class="highlighter-rouge">mail</code> グループに所属していることがわかります。
+<code class="highlighter-rouge">group_add</code> がなかったとしたら、このようにはなりません。</p>
 
 <h3 id="healthcheck-1">healthcheck</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">Version 2.1 file format</a> and up.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> またはそれ以降。</p>
 </blockquote>
 
-<p>Configure a check that’s run to determine whether or not containers for this
-service are “healthy”. See the docs for the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#healthcheck">HEALTHCHECK Dockerfile instruction</a>
-for details on how healthchecks work.</p>
+<p>このサービスを起動させているコンテナーが「健康」（healthy）かどうかを確認する処理を設定します。
+ヘルスチェックがどのように動作するのかの詳細は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#healthcheck">Dockerfile の HEALTHCHECK 命令</a> を参照してください。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>healthcheck:
   test: ["CMD", "curl", "-f", "http://localhost"]
@@ -1011,37 +1005,35 @@ for details on how healthchecks work.</p>
   start_period: 40s
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">interval</code>, <code class="highlighter-rouge">timeout</code> and <code class="highlighter-rouge">start_period</code> are specified as
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#specifying-durations">durations</a>.</p>
+<p><code class="highlighter-rouge">interval</code>, <code class="highlighter-rouge">timeout</code>, <code class="highlighter-rouge">start_period</code> は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#specifying-durations">時間</a> を設定します。</p>
 
-<p><code class="highlighter-rouge">test</code> must be either a string or a list. If it’s a list, the first item must be
-either <code class="highlighter-rouge">NONE</code>, <code class="highlighter-rouge">CMD</code> or <code class="highlighter-rouge">CMD-SHELL</code>. If it’s a string, it’s equivalent to
-specifying <code class="highlighter-rouge">CMD-SHELL</code> followed by that string.</p>
+<p><code class="highlighter-rouge">test</code> は 1 つの文字列かリスト形式である必要があります。
+リスト形式の場合、第 1 要素は必ず <code class="highlighter-rouge">NONE</code>, <code class="highlighter-rouge">CMD</code>, <code class="highlighter-rouge">CMD-SHELL</code> のいずれかとします。
+文字列の場合は、<code class="highlighter-rouge">CMD-SHELL</code> に続けてその文字列を指定することと同じになります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Hit the local web app
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ローカルのウェブアプリにアクセスします。
 test: ["CMD", "curl", "-f", "http://localhost"]
 
-# As above, but wrapped in /bin/sh. Both forms below are equivalent.
+# 上と同様。ただし /bin/sh によりラップ。両書式は同等。
 test: ["CMD-SHELL", "curl -f http://localhost &amp;&amp; echo 'cool, it works'"]
 test: curl -f https://localhost &amp;&amp; echo 'cool, it works'
 </code></pre></div></div>
 
-<p>To disable any default healthcheck set by the image, you can use <code class="highlighter-rouge">disable:
-true</code>. This is equivalent to specifying <code class="highlighter-rouge">test: ["NONE"]</code>.</p>
+<p>イメージが設定するデフォルトのヘルスチェックを無効にするには、<code class="highlighter-rouge">disable: true</code> を指定します。
+これは <code class="highlighter-rouge">test: ["NONE"]</code> と指定することと同じです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>healthcheck:
   disable: true
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: The <code class="highlighter-rouge">start_period</code> option is a more recent feature and is only
-available with the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-23">2.3 file format</a>.</p>
+  <p><strong>メモ</strong>: <code class="highlighter-rouge">start_period</code> オプションは最新の機能であり、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-23">ファイルフォーマット 2.3</a> においてのみ利用可能です。</p>
 </blockquote>
 
 <h3 id="image">image</h3>
 
-<p>Specify the image to start the container from. Can either be a repository/tag or
-a partial image ID.</p>
+<p>コンテナーを起動させるイメージを設定します。
+リポジトリ/タグの形式か、あるいは部分イメージ ID により指定します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>image: redis
 image: ubuntu:14.04
@@ -1050,18 +1042,17 @@ image: example-registry.com:4000/postgresql
 image: a4bc65fd
 </code></pre></div></div>
 
-<p>If the image does not exist, Compose attempts to pull it, unless you have also
-specified <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#build">build</a>, in which case it builds it using the specified
-options and tags it with the specified tag.</p>
+<p>イメージが存在しなかった場合、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#build">build</a> を指定していなければ Compose はイメージを取得しようとします。
+取得する際には、指定されたオプションを使ってビルドを行い、指定されたタグ名によりタグづけを行います。</p>
 
 <h3 id="init">init</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">Added in version 2.2 file format</a>.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">ファイルフォーマットバージョン 2.2</a> において追加。</p>
 </blockquote>
 
-<p>Run an init inside the container that forwards signals and reaps processes.
-Set this option to <code class="highlighter-rouge">true</code> to enable this feature for the service.</p>
+<p>コンテナー内にて init を実行し、シグナルを送信してプロセスを停止させます。
+このオプションに <code class="highlighter-rouge">true</code> を設定することで、サービスに対するこの機能を有効にします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 services:
@@ -1071,29 +1062,27 @@ services:
 </code></pre></div></div>
 
 <blockquote>
-  <p>The default init binary that is used is <a href="https://github.com/krallin/tini">Tini</a>,
-and is installed in <code class="highlighter-rouge">/usr/libexec/docker-init</code> on the daemon host. You can
-configure the daemon to use a custom init binary through the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file"><code class="highlighter-rouge">init-path</code> configuration option</a>.</p>
+  <p>利用されるデフォルトの init の実行モジュールは <a href="https://github.com/krallin/tini">Tini</a> であり、デーモンホストの <code class="highlighter-rouge">/usr/libexec/docker-init</code> にインストールされています。
+デーモンに対して独自の init 実行モジュールを設定するには、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file"><code class="highlighter-rouge">init-path</code> 設定オプション</a> を利用します。</p>
 </blockquote>
 
 <h3 id="isolation-1">isolation</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">Added in version 2.1 file format</a>.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加。</p>
 </blockquote>
 
-<p>Specify a container’s isolation technology. On Linux, the only supported value
-is <code class="highlighter-rouge">default</code>. On Windows, acceptable values are <code class="highlighter-rouge">default</code>, <code class="highlighter-rouge">process</code> and
-<code class="highlighter-rouge">hyperv</code>. Refer to the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation">Docker Engine docs</a>
-for details.</p>
+<p>コンテナーの分離技術（isolation technology）を設定します。
+Linux においてサポートされるのは <code class="highlighter-rouge">default</code> のみです。
+Windows では <code class="highlighter-rouge">default</code>, <code class="highlighter-rouge">process</code>, <code class="highlighter-rouge">hyperv</code> の設定が可能です。
+詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation">Docker Engine ドキュメント</a> を参照してください。</p>
 
 <h3 id="labels-1">labels</h3>
 
-<p>Add metadata to containers using <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a>. You can use either an array or a dictionary.</p>
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a> を使ってコンテナーにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。</p>
 
-<p>It’s recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.</p>
+<p>他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>labels:
   com.example.description: "Accounting webapp"
@@ -1108,12 +1097,12 @@ labels:
 
 <h3 id="links">links</h3>
 
-<p>Link to containers in another service. Either specify both the service name and
-a link alias (<code class="highlighter-rouge">"SERVICE:ALIAS"</code>), or just the service name.</p>
+<p>他サービスのコンテナーをリンクします。
+サービス名とリンクのエイリアス名（<code class="highlighter-rouge">"SERVICE:ALIAS"</code>）を指定するか、直接サービス名を指定します。</p>
 
 <blockquote>
-  <p>Links are a legacy option. We recommend using
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#networks">networks</a> instead.</p>
+  <p>links は古いオプションです。
+この代わりに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#networks">networks</a> オプションを用いることをお勧めします。</p>
 </blockquote>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
@@ -1123,21 +1112,20 @@ a link alias (<code class="highlighter-rouge">"SERVICE:ALIAS"</code>), or just t
    - "redis"
 </code></pre></div></div>
 
-<p>Containers for the linked service are reachable at a hostname identical to
-the alias, or the service name if no alias was specified.</p>
+<p>リンクされたサービスのコンテナーは、エイリアスと同等のホスト名により到達可能になります。
+エイリアスが設定されていない場合はサービス名により到達可能です。</p>
 
-<p>Links also express dependency between services in the same way as
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#depends_on">depends_on</a>, so they determine the order of service startup.</p>
+<p>Links は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#depends_on">depends_on</a> と同様にサービス間の依存関係を表わします。
+したがってサービスの起動順を設定するものになります。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: If you define both links and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#networks">networks</a>, services with
-links between them must share at least one network in common in order to
-communicate. We recommend using networks instead.</p>
+  <p><strong>メモ</strong>： links と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#networks">networks</a> をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+このオプションではなく networks オプションを用いることをお勧めします。</p>
 </blockquote>
 
 <h3 id="logging">logging</h3>
 
-<p>Logging configuration for the service.</p>
+<p>サービスに対するログ記録の設定をします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>logging:
   driver: syslog
@@ -1145,11 +1133,11 @@ communicate. We recommend using networks instead.</p>
     syslog-address: "tcp://192.168.0.42:123"
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">driver</code>  name specifies a logging driver for the service’s
-containers, as with the <code class="highlighter-rouge">--log-driver</code> option for docker run
-(<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/logging/overview.md">documented here</a>).</p>
+<p><code class="highlighter-rouge">driver</code> 名にはサービスコンテナーにおけるロギングドライバーを指定します。
+これは docker run コマンドに対する <code class="highlighter-rouge">--log-driver</code> オプションと同じです。
+（<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/logging/overview.md">ドキュメントはこちら</a>）</p>
 
-<p>The default value is json-file.</p>
+<p>デフォルトは json-file です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>driver: "json-file"
 driver: "syslog"
@@ -1157,14 +1145,15 @@ driver: "none"
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: Only the <code class="highlighter-rouge">json-file</code> and <code class="highlighter-rouge">journald</code> drivers make the logs available directly from
-<code class="highlighter-rouge">docker-compose up</code> and <code class="highlighter-rouge">docker-compose logs</code>. Using any other driver does not
-print any logs.</p>
+  <p><strong>メモ</strong>: ドライバーのうち <code class="highlighter-rouge">json-file</code> と <code class="highlighter-rouge">journald</code> だけが、<code class="highlighter-rouge">docker-compose up</code> と <code class="highlighter-rouge">docker-compose logs</code> によって直接ログ参照ができます。
+その他のドライバーではログ表示は行われません。</p>
 </blockquote>
 
-<p>Specify logging options for the logging driver with the <code class="highlighter-rouge">options</code> key, as with the <code class="highlighter-rouge">--log-opt</code> option for <code class="highlighter-rouge">docker run</code>.</p>
+<p>ロギングドライバーへのロギングオプションの設定は <code class="highlighter-rouge">options</code> キーにより行います。
+これは <code class="highlighter-rouge">docker run</code> コマンドの <code class="highlighter-rouge">--log-opt</code> オプションと同じです。</p>
 
-<p>Logging options are key-value pairs. An example of <code class="highlighter-rouge">syslog</code> options:</p>
+<p>ロギングオプションはキーバリューのペアで指定します。
+たとえば <code class="highlighter-rouge">syslog</code> オプションは以下のようになります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>driver: "syslog"
 options:
@@ -1174,11 +1163,13 @@ options:
 <h3 id="network_mode">network_mode</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">Version 2 file format</a> and up. Replaces the version 1 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> option.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> またはそれ以降。
+バージョン 1 の <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> オプションに置き換わるものです。</p>
 </blockquote>
 
-<p>Network mode. Use the same values as the docker client <code class="highlighter-rouge">--net</code> parameter, plus
-the special form <code class="highlighter-rouge">service:[service name]</code>.</p>
+<p>ネットワークモードを設定します。
+Docker クライアントの <code class="highlighter-rouge">--net</code> パラメーターと同じ値を設定します。
+これに加えて <code class="highlighter-rouge">service:[service name]</code> という特別な書式も指定可能です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>network_mode: "bridge"
 network_mode: "host"
@@ -1190,11 +1181,12 @@ network_mode: "container:[container name/id]"
 <h3 id="networks">networks</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">Version 2 file format</a> and up. Replaces the version 1 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> option.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> またはそれ以降。
+バージョン 1 の <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> オプションに置き換わるものです。</p>
 </blockquote>
 
-<p>Networks to join, referencing entries under the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference">top-level <code class="highlighter-rouge">networks</code> key</a>.</p>
+<p>ネットワークへの参加を設定します。
+設定には <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference">最上位の <code class="highlighter-rouge">networks</code> キー</a> に設定された値を用います。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
   some-service:
@@ -1205,15 +1197,19 @@ network_mode: "container:[container name/id]"
 
 <h4 id="aliases">aliases</h4>
 
-<p>Aliases (alternative hostnames) for this service on the network. Other containers on the same network can use either the service name or this alias to connect to one of the service’s containers.</p>
+<p>ネットワーク上のサービスに対して、ホスト名の別名となるエイリアスを設定します。
+同じネットワーク上にある他のコンテナーは、この 1 つのサービスコンテナーに対して、サービス名か、あるいはそのエイリアスを使ってアクセスすることができます。</p>
 
-<p>Since <code class="highlighter-rouge">aliases</code> is network-scoped, the same service can have different aliases on different networks.</p>
+<p><code class="highlighter-rouge">aliases</code> はネットワーク範囲内において有効です。
+ネットワークが異なれば、同一サービスに違うエイリアスを持たせることができます。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name resolves to is not guaranteed.</p>
+  <p><strong>メモ</strong>: ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
+それは複数サービス間でも可能です。
+ただしこの場合、名前解決がどのコンテナーに対して行われるかは保証されません。</p>
 </blockquote>
 
-<p>The general format is shown here.</p>
+<p>一般的な書式は以下のとおりです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
   some-service:
@@ -1227,7 +1223,9 @@ network_mode: "container:[container name/id]"
          - alias2
 </code></pre></div></div>
 
-<p>In the example below, three services are provided (<code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">worker</code>, and <code class="highlighter-rouge">db</code>), along with two networks (<code class="highlighter-rouge">new</code> and <code class="highlighter-rouge">legacy</code>). The <code class="highlighter-rouge">db</code> service is reachable at the hostname <code class="highlighter-rouge">db</code> or <code class="highlighter-rouge">database</code> on the <code class="highlighter-rouge">new</code> network, and at <code class="highlighter-rouge">db</code> or <code class="highlighter-rouge">mysql</code> on the <code class="highlighter-rouge">legacy</code> network.</p>
+<p>以下の例では 3 つのサービス（<code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">worker</code>, <code class="highlighter-rouge">db</code>）と 2 つのネットワーク（<code class="highlighter-rouge">new</code> と <code class="highlighter-rouge">legacy</code>）を提供します。
+<code class="highlighter-rouge">db</code> サービスは <code class="highlighter-rouge">new</code> ネットワーク上では、ホスト名 <code class="highlighter-rouge">db</code> あるいは <code class="highlighter-rouge">database</code> としてアクセスできます。
+一方 <code class="highlighter-rouge">legacy</code> ネットワーク上では <code class="highlighter-rouge">db</code> あるいは <code class="highlighter-rouge">mysql</code> としてアクセスできます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 
@@ -1259,11 +1257,13 @@ networks:
 
 <h4 id="ipv4_address-ipv6_address">ipv4_address, ipv6_address</h4>
 
-<p>Specify a static IP address for containers for this service when joining the network.</p>
+<p>サービスをネットワークに参加させる際、そのコンテナーに対してスタティック IP アドレスを設定します。</p>
 
-<p>The corresponding network configuration in the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference">top-level networks section</a> must have an <code class="highlighter-rouge">ipam</code> block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#enableipv6"><code class="highlighter-rouge">enable_ipv6</code></a> option must be set.</p>
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference">最上位の networks セクション</a> の対応するネットワーク設定においては、<code class="highlighter-rouge">ipam</code> ブロックが必要です。
+そこでは各スタティックアドレスに応じたサブネットの設定が必要になります。
+IPv6 アドレスが必要である場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#enableipv6"><code class="highlighter-rouge">enable_ipv6</code></a> オプションの設定が必要になります。</p>
 
-<p>An example:</p>
+<p>以下に例を示します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 
@@ -1292,15 +1292,15 @@ networks:
 <h4 id="link_local_ips">link_local_ips</h4>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">Added in version 2.1 file format</a>.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
-<p>Specify a list of link-local IPs. Link-local IPs are special IPs which belong
-to a well known subnet and are purely managed by the operator, usually
-dependent on the architecture where they are deployed. Therefore they are not
-managed by docker (IPAM driver).</p>
+<p>リンクローカル IP（link-local IP） のリストを設定します。
+リンクローカル IP とは特別な IP アドレスのことであり、よく知られた（well known）サブネットに属し、ユーザーが自由に管理するものを指します。
+普通、このアドレスはデプロイされたアーキテクチャーとはまったく関係のないものです。
+したがって Docker（IPAM ドライバー）によって管理されるものではありません。</p>
 
-<p>Example usage:</p>
+<p>利用例を以下に示します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 services:
@@ -1319,12 +1319,13 @@ networks:
 
 <h4 id="priority">priority</h4>
 
-<p>Specify a priority to indicate in which order Compose should connect the
-service’s containers to its networks. If unspecified, the default value is <code class="highlighter-rouge">0</code>.</p>
+<p>Compose がサービスのコンテナーをネットワークに接続する際に、その接続の優先順位を設定します。
+設定されていない場合のデフォルト値は <code class="highlighter-rouge">0</code> です。</p>
 
-<p>In the following example, the <code class="highlighter-rouge">app</code> service connects to <code class="highlighter-rouge">app_net_1</code> first
-as it has the highest priority. It then connects to <code class="highlighter-rouge">app_net_3</code>, then
-<code class="highlighter-rouge">app_net_2</code>, which uses the default priority value of <code class="highlighter-rouge">0</code>.</p>
+<p>以下の例において <code class="highlighter-rouge">app</code> サービスは初めに <code class="highlighter-rouge">app_net_1</code> に接続します。
+そこに一番高い優先順位が設定されているためです。
+次に接続されるのは <code class="highlighter-rouge">app_net_3</code> です。
+最後に、デフォルトの優先順位である <code class="highlighter-rouge">0</code> が用いられている <code class="highlighter-rouge">app_net_2</code> に接続します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 services:
@@ -1345,8 +1346,7 @@ networks:
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: If multiple networks have the same priority, the connection order
-is undefined.</p>
+  <p><strong>メモ</strong>: 複数のネットワークに同一の優先順位が設定された場合、接続順は定義されません。</p>
 </blockquote>
 
 <h3 id="pid">pid</h3>
