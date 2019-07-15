@@ -227,7 +227,7 @@ not need to recreate them later.</p>
 <h2 id="configure-docker-with-the-devicemapper-storage-driver">Configure Docker with the <code class="highlighter-rouge">devicemapper</code> storage driver</h2>
 
 <p>Before following these procedures, you must first meet all the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/#prerequisites">prerequisites</a>.</p>
+<a href="device-mapper-driver/#prerequisites">prerequisites</a>.</p>
 
 <h3 id="configure-loop-lvm-mode-for-testing">Configure <code class="highlighter-rouge">loop-lvm</code> mode for testing</h3>
 
@@ -245,7 +245,7 @@ therefore only be used to perform rudimentary testing prior to configuring
 <code class="highlighter-rouge">direct-lvm</code>.</p>
 
 <p>For production systems, see
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/#configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</a>.</p>
+<a href="device-mapper-driver/#configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</a>.</p>
 
 <ol>
   <li>
@@ -321,7 +321,7 @@ that the file was empty, add the following contents.</p>
   and a <code class="highlighter-rouge">Metadata loop file</code> are on files under
   <code class="highlighter-rouge">/var/lib/docker/devicemapper</code>. These are loopback-mounted
   sparse files. For production systems, see
-  <a href="https://matsuand.github.io/docs.docker.jp.onthefly/#configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</a>.</p>
+  <a href="device-mapper-driver/#configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</a>.</p>
 
 <h3 id="configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</h3>
 
@@ -331,7 +331,7 @@ using loopback devices, uses system resources more efficiently, and block
 devices can grow as needed. However, more setup is required than in <code class="highlighter-rouge">loop-lvm</code>
 mode.</p>
 
-<p>After you have satisfied the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/#prerequisites">prerequisites</a>, follow the steps
+<p>After you have satisfied the <a href="device-mapper-driver/#prerequisites">prerequisites</a>, follow the steps
 below to configure Docker to use the <code class="highlighter-rouge">devicemapper</code> storage driver in
 <code class="highlighter-rouge">direct-lvm</code> mode.</p>
 
@@ -347,7 +347,7 @@ below to configure Docker to use the <code class="highlighter-rouge">devicemappe
 <p>With Docker <code class="highlighter-rouge">17.06</code> and higher, Docker can manage the block device for you,
 simplifying configuration of <code class="highlighter-rouge">direct-lvm</code> mode. <strong>This is appropriate for fresh
 Docker setups only.</strong> You can only use a single block device. If you need to
-use multiple block devices, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/#configure-direct-lvm-mode-manually">configure direct-lvm mode
+use multiple block devices, <a href="device-mapper-driver/#configure-direct-lvm-mode-manually">configure direct-lvm mode
 manually</a> instead. The following new
 configuration options have been added:</p>
 
@@ -439,7 +439,7 @@ configure the block device for you.</p>
 for you is not supported and causes an error.</p>
 </blockquote>
 
-<p>You still need to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/#manage-devicemapper">perform periodic maintenance tasks</a>.</p>
+<p>You still need to <a href="device-mapper-driver/#manage-devicemapper">perform periodic maintenance tasks</a>.</p>
 
 <h4 id="configure-direct-lvm-mode-manually">Configure direct-lvm mode manually</h4>
 
@@ -700,14 +700,14 @@ See the
 <p>You can increase the capacity of the pool on a running thin-pool device. This is
 useful if the data’s logical volume is full and the volume group is at full
 capacity. The specific procedure depends on whether you are using a
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/#resize-a-loop-lvm-thin-pool">loop-lvm thin pool</a> or a
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/#resize-a-direct-lvm-thin-pool">direct-lvm thin pool</a>.</p>
+<a href="device-mapper-driver/#resize-a-loop-lvm-thin-pool">loop-lvm thin pool</a> or a
+<a href="device-mapper-driver/#resize-a-direct-lvm-thin-pool">direct-lvm thin pool</a>.</p>
 
 <h4 id="resize-a-loop-lvm-thin-pool">Resize a loop-lvm thin pool</h4>
 
 <p>The easiest way to resize a <code class="highlighter-rouge">loop-lvm</code> thin pool is to
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/#use-the-device_tool-utility">use the device_tool utility</a>,
-but you can <a href="https://matsuand.github.io/docs.docker.jp.onthefly/#use-operating-system-utilities">use operating system utilities</a>
+<a href="device-mapper-driver/#use-the-device_tool-utility">use the device_tool utility</a>,
+but you can <a href="device-mapper-driver/#use-operating-system-utilities">use operating system utilities</a>
 instead.</p>
 
 <h5 id="use-the-device_tool-utility">Use the device_tool utility</h5>
@@ -718,7 +718,7 @@ Github repository. You can use this tool to resize a <code class="highlighter-ro
 avoiding the long process above. This tool is not guaranteed to work, but you
 should only be using <code class="highlighter-rouge">loop-lvm</code> on non-production systems.</p>
 
-<p>If you do not want to use <code class="highlighter-rouge">device_tool</code>, you can <a href="https://matsuand.github.io/docs.docker.jp.onthefly/#use-operating-system-utilities">resize the thin pool manually</a> instead.</p>
+<p>If you do not want to use <code class="highlighter-rouge">device_tool</code>, you can <a href="device-mapper-driver/#use-operating-system-utilities">resize the thin pool manually</a> instead.</p>
 
 <ol>
   <li>
@@ -736,7 +736,7 @@ to compile the tool.</p>
 
 <h5 id="use-operating-system-utilities">Use operating system utilities</h5>
 
-<p>If you do not want to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/#use-the-device_tool-utility">use the device-tool utility</a>,
+<p>If you do not want to <a href="device-mapper-driver/#use-the-device_tool-utility">use the device-tool utility</a>,
 you can resize a <code class="highlighter-rouge">loop-lvm</code> thin pool manually using the following procedure.</p>
 
 <p>In <code class="highlighter-rouge">loop-lvm</code> mode, a loopback device is used to store the data, and another
@@ -1230,38 +1230,38 @@ logs externally.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#prerequisites" class="nomunge">Prerequisites</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#configure-docker-with-the-devicemapper-storage-driver" class="nomunge">Configure Docker with the devicemapper storage driver</a>
+  <li><a href="device-mapper-driver/#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="device-mapper-driver/#configure-docker-with-the-devicemapper-storage-driver" class="nomunge">Configure Docker with the devicemapper storage driver</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#configure-loop-lvm-mode-for-testing" class="nomunge">Configure loop-lvm mode for testing</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#configure-direct-lvm-mode-for-production" class="nomunge">Configure direct-lvm mode for production</a></li>
+      <li><a href="device-mapper-driver/#configure-loop-lvm-mode-for-testing" class="nomunge">Configure loop-lvm mode for testing</a></li>
+      <li><a href="device-mapper-driver/#configure-direct-lvm-mode-for-production" class="nomunge">Configure direct-lvm mode for production</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#manage-devicemapper" class="nomunge">Manage devicemapper</a>
+  <li><a href="device-mapper-driver/#manage-devicemapper" class="nomunge">Manage devicemapper</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#monitor-the-thin-pool" class="nomunge">Monitor the thin pool</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#increase-capacity-on-a-running-device" class="nomunge">Increase capacity on a running device</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#activate-the-devicemapper-after-reboot" class="nomunge">Activate the devicemapper after reboot</a></li>
+      <li><a href="device-mapper-driver/#monitor-the-thin-pool" class="nomunge">Monitor the thin pool</a></li>
+      <li><a href="device-mapper-driver/#increase-capacity-on-a-running-device" class="nomunge">Increase capacity on a running device</a></li>
+      <li><a href="device-mapper-driver/#activate-the-devicemapper-after-reboot" class="nomunge">Activate the devicemapper after reboot</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#how-the-devicemapper-storage-driver-works" class="nomunge">How the devicemapper storage driver works</a>
+  <li><a href="device-mapper-driver/#how-the-devicemapper-storage-driver-works" class="nomunge">How the devicemapper storage driver works</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#image-and-container-layers-on-disk" class="nomunge">Image and container layers on-disk</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#image-layering-and-sharing" class="nomunge">Image layering and sharing</a></li>
+      <li><a href="device-mapper-driver/#image-and-container-layers-on-disk" class="nomunge">Image and container layers on-disk</a></li>
+      <li><a href="device-mapper-driver/#image-layering-and-sharing" class="nomunge">Image layering and sharing</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#how-container-reads-and-writes-work-with-devicemapper" class="nomunge">How container reads and writes work with devicemapper</a>
+  <li><a href="device-mapper-driver/#how-container-reads-and-writes-work-with-devicemapper" class="nomunge">How container reads and writes work with devicemapper</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#reading-files" class="nomunge">Reading files</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#writing-files" class="nomunge">Writing files</a></li>
+      <li><a href="device-mapper-driver/#reading-files" class="nomunge">Reading files</a></li>
+      <li><a href="device-mapper-driver/#writing-files" class="nomunge">Writing files</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#device-mapper-and-docker-performance" class="nomunge">Device Mapper and Docker performance</a>
+  <li><a href="device-mapper-driver/#device-mapper-and-docker-performance" class="nomunge">Device Mapper and Docker performance</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#performance-best-practices" class="nomunge">Performance best practices</a></li>
+      <li><a href="device-mapper-driver/#performance-best-practices" class="nomunge">Performance best practices</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/#related-information" class="nomunge">Related Information</a></li>
+  <li><a href="device-mapper-driver/#related-information" class="nomunge">Related Information</a></li>
 </ul>
 
 
