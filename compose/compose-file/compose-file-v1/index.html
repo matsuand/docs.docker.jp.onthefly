@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-08 21:38:19 +0900 -->
+<!-- Page generated 2019-07-17 11:04:33 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-08T21:38:19+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-17T11:04:33+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="リファレンスとガイドライン ここに示す内容は Compose ファイルフォーマット、バージョン 1 です。 これは最も古いバージョンです。 Compose と Docker の互換マトリックス Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。 その様子は以下の一覧表に見ることができます。 各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については バージョンとアップグレードについてを参照してください。 以下の一覧表は、Compose ファイルのどのバージョンが Docker リリースをサポートしているかを示すものです。 Compose ファイルフォーマット Docker Engine リリース 3.7 18.06.0 以上..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-08T21:38:19+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-17T11:04:33+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="fig, composition, compose version 1, docker">
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    10 分
+    7 分
   
 </span>
 
@@ -568,10 +568,10 @@ environment:
 
 <h3 id="external_links">external_links</h3>
 
-<p>Link to containers started outside this <code class="highlighter-rouge">docker-compose.yml</code> or even outside
-of Compose, especially for containers that provide shared or common services.
-<code class="highlighter-rouge">external_links</code> follow semantics similar to <code class="highlighter-rouge">links</code> when specifying both the
-container name and the link alias (<code class="highlighter-rouge">CONTAINER:ALIAS</code>).</p>
+<p>今の <code class="highlighter-rouge">docker-compose.yml</code> からではない別のところから起動されたコンテナーをリンクします。
+あるいは Compose の外から、特に共有サービスや汎用サービスとして提供されるコンテナーをリンクします。
+<code class="highlighter-rouge">external_links</code> の文法は、オプション <code class="highlighter-rouge">links</code> と同様です。
+つまりコンテナー名とリンクのエイリアス名（<code class="highlighter-rouge">CONTAINER:ALIAS</code>）を同時に指定します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>external_links:
  - redis_1
@@ -581,14 +581,16 @@ container name and the link alias (<code class="highlighter-rouge">CONTAINER:ALI
 
 <h3 id="extra_hosts">extra_hosts</h3>
 
-<p>Add hostname mappings. Use the same values as the docker client <code class="highlighter-rouge">--add-host</code> parameter.</p>
+<p>ホスト名のマッピングを追加します。
+Docker Client の <code class="highlighter-rouge">--add-host</code> パラメーターと同じ値を設定してください。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>extra_hosts:
  - "somehost:162.242.195.82"
  - "otherhost:50.31.209.229"
 </code></pre></div></div>
 
-<p>An entry with the ip address and hostname is created in <code class="highlighter-rouge">/etc/hosts</code> inside containers for this service, e.g:</p>
+<p>ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の <code class="highlighter-rouge">/etc/hosts</code> に追加されます。
+たとえば以下のとおりです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>162.242.195.82  somehost
 50.31.209.229   otherhost
@@ -596,8 +598,8 @@ container name and the link alias (<code class="highlighter-rouge">CONTAINER:ALI
 
 <h3 id="image">image</h3>
 
-<p>Specify the image to start the container from. Can either be a repository/tag or
-a partial image ID.</p>
+<p>コンテナーを起動させるイメージを設定します。
+リポジトリ/タグの形式か、あるいは部分イメージ ID により指定します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>image: redis
 image: ubuntu:14.04
@@ -606,20 +608,20 @@ image: example-registry.com:4000/postgresql
 image: a4bc65fd
 </code></pre></div></div>
 
-<p>If the image does not exist, Compose attempts to pull it, unless you have also
-specified <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#build">build</a>, in which case it builds it using the specified
-options and tags it with the specified tag.</p>
+<p>イメージが存在しなかった場合、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#build">build</a> を指定していなければ Compose はイメージを取得しようとします。
+取得する際には、指定されたオプションを使ってビルドを行い、指定されたタグ名によりタグづけを行います。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: In the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">version 1 file format</a>, using <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#build"><code class="highlighter-rouge">build</code></a> together
-with <code class="highlighter-rouge">image</code> is not allowed. Attempting to do so results in an error.</p>
+  <p><strong>メモ</strong>: <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">ファイルフォーマットバージョン 1</a> において <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#build"><code class="highlighter-rouge">build</code></a> を <code class="highlighter-rouge">image</code> とともに利用することはできません。
+これを行うとエラーになります。</p>
 </blockquote>
 
 <h3 id="labels">labels</h3>
 
-<p>Add metadata to containers using <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a>. You can use either an array or a dictionary.</p>
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a> を使ってコンテナーにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。</p>
 
-<p>It’s recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.</p>
+<p>他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>labels:
   com.example.description: "Accounting webapp"
@@ -634,12 +636,12 @@ labels:
 
 <h3 id="links">links</h3>
 
-<p>Link to containers in another service. Either specify both the service name and
-a link alias (<code class="highlighter-rouge">SERVICE:ALIAS</code>), or just the service name.</p>
+<p>他サービスのコンテナーをリンクします。
+サービス名とリンクのエイリアス名（<code class="highlighter-rouge">SERVICE:ALIAS</code>）を指定するか、直接サービス名を指定します。</p>
 
 <blockquote>
-  <p>Links are a legacy option. We recommend using
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#networks">networks</a> instead.</p>
+  <p>links は古いオプションです。
+かわりに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#networks">networks</a> を用いることをお勧めします。</p>
 </blockquote>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
@@ -649,26 +651,25 @@ a link alias (<code class="highlighter-rouge">SERVICE:ALIAS</code>), or just the
    - redis
 </code></pre></div></div>
 
-<p>Containers for the linked service are reachable at a hostname identical to
-the alias, or the service name if no alias was specified.</p>
+<p>リンクされたサービスのコンテナーは、エイリアスと同等のホスト名により到達可能になります。
+エイリアスが設定されていない場合はサービス名により到達可能です。</p>
 
-<p>Links also express dependency between services in the same way as
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#depends_on">depends_on</a>, so they determine the order of service startup.</p>
+<p>Links は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#depends_on">depends_on</a> と同様にサービス間の依存関係を表わします。
+したがってサービスの起動順を設定するものになります。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: If you define both links and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#networks">networks</a>, services with
-links between them must share at least one network in common in order to
-communicate.</p>
+  <p><strong>メモ</strong>： links と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#networks">networks</a> をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。</p>
 </blockquote>
 
 <h3 id="log_driver">log_driver</h3>
 
 <blockquote>
-  <p><a href="compose-versioning#version-1">Version 1 file format</a> only. In version 2 and up, use
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#logging">logging</a>.</p>
+  <p><a href="compose-versioning#version-1">ファイルフォーアットバージョン 1</a> のみ。
+バージョン 2 またはそれ以降においては、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#logging">logging</a> を用いてください。</p>
 </blockquote>
 
-<p>Specify a log driver. The default is <code class="highlighter-rouge">json-file</code>.</p>
+<p>ログドライバーを設定します。
+デフォルトは <code class="highlighter-rouge">json-file</code> です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log_driver: syslog
 </code></pre></div></div>
@@ -676,11 +677,12 @@ communicate.</p>
 <h3 id="log_opt">log_opt</h3>
 
 <blockquote>
-  <p><a href="compose-versioning#version-1">Version 1 file format</a> only. In version 2 and up, use
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#logging">logging</a>.</p>
+  <p><a href="compose-versioning#version-1">ファイルフォーアットバージョン 1</a> のみ。
+バージョン 2 またはそれ以降においては、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#logging">logging</a> を用いてください。</p>
 </blockquote>
 
-<p>Specify logging options as key-value pairs. An example of <code class="highlighter-rouge">syslog</code> options:</p>
+<p>ロギングオプションはキーバリューのペアで設定します。
+たとえば <code class="highlighter-rouge">syslog</code> オプションは以下のようになります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log_opt:
   syslog-address: "tcp://192.168.0.42:123"
@@ -689,13 +691,13 @@ communicate.</p>
 <h3 id="net">net</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">Version 1 file format</a> only. In version 2 and up, use
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#networkmode">network_mode</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#networks">networks</a>.</p>
+  <p><a href="compose-versioning#version-1">ファイルフォーアットバージョン 1</a> のみ。
+バージョン 2 またはそれ以降においては、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#networkmode">network_mode</a> と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#networks">networks</a> を用いてください。</p>
 </blockquote>
 
-<p>Network mode. Use the same values as the docker client <code class="highlighter-rouge">--net</code> parameter.
-The <code class="highlighter-rouge">container:...</code> form can take a service name instead of a container name or
-id.</p>
+<p>ネットワークモードを設定します。
+Docker クライアントの <code class="highlighter-rouge">--net</code> パラメーターと同じ値を設定します。
+<code class="highlighter-rouge">container:...</code> という書式を使えば、コンテナー名や ID ではなく、サービス名を指定することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>net: "bridge"
 net: "host"
@@ -708,21 +710,20 @@ net: "container:[service name or container name/id]"
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pid: "host"
 </code></pre></div></div>
 
-<p>Sets the PID mode to the host PID mode. This turns on sharing between
-container and the host operating system the PID address space. Containers
-launched with this flag can access and manipulate other
-containers in the bare-metal machine’s namespace and vice versa.</p>
+<p>PID モードをホスト PID モードに設定します。
+これはコンテナーとホストオペレーティングシステムとの間で、PID アドレス空間の共有を開始します。
+このフラグを使って起動したコンテナーは、ベアメタルマシンの名前空間にあるコンテナーにアクセスし、操作することが可能になります。
+逆もまた可能です。</p>
 
 <h3 id="ports">ports</h3>
 
-<p>Expose ports. Either specify both ports (<code class="highlighter-rouge">HOST:CONTAINER</code>), or just the container
-port (an ephemeral host port is chosen).</p>
+<p>公開用ポートを設定します。
+設定は両側のポートを指定するか（<code class="highlighter-rouge">HOST:CONTAINER</code>）、あるいはコンテナー側のポートのみを指定します（その場合、ホスト側はエフェメラルポートが採用されます）。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: When mapping ports in the <code class="highlighter-rouge">HOST:CONTAINER</code> format, you may experience
-erroneous results when using a container port lower than 60, because YAML
-parses numbers in the format <code class="highlighter-rouge">xx:yy</code> as a base-60 value. For this reason,
-we recommend always explicitly specifying your port mappings as strings.</p>
+  <p><strong>メモ</strong>: <code class="highlighter-rouge">HOST:CONTAINER</code> の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
+これは YAML パーサーが <code class="highlighter-rouge">xx:yy</code> の書式内にある数値を 60 進数値として解釈するからです。
+このことからポートマッピングを指定する際には、常に文字列として設定することをお勧めします。</p>
 </blockquote>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ports:
@@ -738,7 +739,7 @@ we recommend always explicitly specifying your port mappings as strings.</p>
 
 <h3 id="security_opt">security_opt</h3>
 
-<p>Override the default labeling scheme for each container.</p>
+<p>各コンテナーにおけるデフォルトのラベリングスキーム（labeling scheme）を上書きします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>security_opt:
   - label:user:USER
@@ -747,17 +748,17 @@ we recommend always explicitly specifying your port mappings as strings.</p>
 
 <h3 id="stop_signal">stop_signal</h3>
 
-<p>Sets an alternative signal to stop the container. By default <code class="highlighter-rouge">stop</code> uses
-SIGTERM. Setting an alternative signal using <code class="highlighter-rouge">stop_signal</code> causes
-<code class="highlighter-rouge">stop</code> to send that signal instead.</p>
+<p>コンテナーに対して別の停止シグナルを設定します。
+デフォルトにおいて <code class="highlighter-rouge">stop</code> は SIGTERM を用います。
+<code class="highlighter-rouge">stop_signal</code> を使って別のシグナルを設定すると <code class="highlighter-rouge">stop</code> にはそのシグナルが代わりに送信されます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stop_signal: SIGUSR1
 </code></pre></div></div>
 
 <h3 id="ulimits">ulimits</h3>
 
-<p>Override the default ulimits for a container. You can either specify a single
-limit as an integer or soft/hard limits as a mapping.</p>
+<p>コンテナーにおけるデフォルトの ulimits を上書きします。
+1 つの limit を整数値として指定するか、ソフト、ハードの limit をマッピングとして指定することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ulimits:
   nproc: 65535
@@ -768,62 +769,57 @@ limit as an integer or soft/hard limits as a mapping.</p>
 
 <h3 id="volumes-volume_driver">volumes, volume_driver</h3>
 
-<p>Mount paths or named volumes, optionally specifying a path on the host machine
-(<code class="highlighter-rouge">HOST:CONTAINER</code>), or an access mode (<code class="highlighter-rouge">HOST:CONTAINER:ro</code>).
-For <a href="compose-versioning#version-2">version 2 files</a>, named volumes need to be specified with the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#volume-configuration-reference">top-level <code class="highlighter-rouge">volumes</code> key</a>.
-When using <a href="compose-versioning#version-1">version 1</a>, the Docker Engine creates the named
-volume automatically if it doesn’t exist.</p>
+<p>パスまたは名前つきボリュームをマウントします。
+任意の設定としてホストマシン上のパスを指定したり（<code class="highlighter-rouge">HOST:CONTAINER</code>）、アクセスモードを指定したり(<code class="highlighter-rouge">HOST:CONTAINER:ro</code>)することができます。
+<a href="compose-versioning#version-2">ファイルフォーマットバージョン 2</a> における名前つきボリュームは、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#volume-configuration-reference">最上位の <code class="highlighter-rouge">volumes</code> キー</a> において指定しておく必要があります。
+<a href="compose-versioning#version-1">バージョン 1</a> を利用している場合、名前つきボリュームが存在しないときは Docker Engine が自動的に生成します。</p>
 
-<p>You can mount a relative path on the host, which expands relative to
-the directory of the Compose configuration file being used. Relative paths
-should always begin with <code class="highlighter-rouge">.</code> or <code class="highlighter-rouge">..</code>.</p>
+<p>ホスト上の相対パスをマウントすることができます。
+これは、用いられている Compose 設定ファイルのディレクトリからの相対パスとして展開されます。
+相対パスは <code class="highlighter-rouge">.</code> または <code class="highlighter-rouge">..</code> で書き始める必要があります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volumes:
-  # Just specify a path and let the Engine create a volume
+  # パス指定のみ。Engine にボリュームを生成させます。
   - /var/lib/mysql
 
-  # Specify an absolute path mapping
+  # 絶対パスのマッピングを指定。
   - /opt/data:/var/lib/mysql
 
-  # Path on the host, relative to the Compose file
+  # ホストからのパス指定。Compose ファイルからの相対パス。
   - ./cache:/tmp/cache
 
-  # User-relative path
+  # ユーザーディレクトリからの相対パス。
   - ~/configs:/etc/configs/:ro
 
-  # Named volume
+  # 名前つきボリューム。
   - datavolume:/var/lib/mysql
 </code></pre></div></div>
 
-<p>If you do not use a host path, you may specify a <code class="highlighter-rouge">volume_driver</code>.</p>
+<p>ホストパスを利用せずに <code class="highlighter-rouge">volume_driver</code> を設定することもできます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volume_driver: mydriver
 </code></pre></div></div>
 
-<p>There are several things to note, depending on which
-<a href="compose-versioning#versioning">Compose file version</a> you’re using:</p>
+<p><a href="compose-versioning#versioning">Compose ファイルバージョン</a> に応じて、以下のことを明記しておきます。</p>
 
 <ul>
   <li>
-    <p>For <a href="compose-versioning#version-1">version 1 files</a>, both named volumes and
-container volumes use the specified driver.</p>
+    <p><a href="compose-versioning#version-1">ファイルフォーマットバージョン 1</a> においては, 名前つきボリュームとコンテナーボリュームは、どちらも特定のドライバーを利用します。</p>
   </li>
   <li>
-    <p>No path expansion is done if you have also specified a <code class="highlighter-rouge">volume_driver</code>.
-For example, if you specify a mapping of <code class="highlighter-rouge">./foo:/data</code>, the <code class="highlighter-rouge">./foo</code> part
-is passed straight to the volume driver without being expanded.</p>
+    <p><code class="highlighter-rouge">volume_driver</code> も合わせて指定していた場合、パスの解釈は行われません。
+たとえばパスのマッピングを <code class="highlighter-rouge">./foo:/data</code> としたとします。
+このとき <code class="highlighter-rouge">./foo</code> の部分はボリュームドライバーにそのまま引き渡され、パスが展開されることはありません。</p>
   </li>
 </ul>
 
-<p>See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/dockervolumes.md">Docker Volumes</a> and
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_volume.md">Volume Plugins</a> for more information.</p>
+<p>詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/dockervolumes.md">Docker ボリューム</a> と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_volume.md">ボリュームプラグイン</a> を参照してください。</p>
 
 <h3 id="volumes_from">volumes_from</h3>
 
-<p>Mount all of the volumes from another service or container, optionally
-specifying read-only access (<code class="highlighter-rouge">ro</code>) or read-write (<code class="highlighter-rouge">rw</code>). If no access level
-is specified, then read-write is used.</p>
+<p>別のサービスやコンテナーのボリュームをすべてマウントします。
+任意の設定として、アクセスを読み込み専用（<code class="highlighter-rouge">ro</code>）とするか、読み書き可能（<code class="highlighter-rouge">rw</code>）とするかを指定できます。
+アクセスレベルが何も設定されていないときは、読み書き可能として設定されます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volumes_from:
  - service_name
@@ -832,8 +828,7 @@ is specified, then read-write is used.</p>
 
 <h3 id="cpu_shares-cpu_quota-cpuset-domainname-hostname-ipc-mac_address-mem_limit-memswap_limit-mem_swappiness-privileged-read_only-restart-shm_size-stdin_open-tty-user-working_dir">cpu_shares, cpu_quota, cpuset, domainname, hostname, ipc, mac_address, mem_limit, memswap_limit, mem_swappiness, privileged, read_only, restart, shm_size, stdin_open, tty, user, working_dir</h3>
 
-<p>Each of these is a single value, analogous to its
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md">docker run</a> counterpart.</p>
+<p>ここに示すオプションはいずれも、値 1 つを設定するものであり、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md">docker run</a> のオプションに対応づいています。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cpu_shares: 73
 cpu_quota: 50000
@@ -859,16 +854,16 @@ stdin_open: true
 tty: true
 </code></pre></div></div>
 
-<h2 id="compose-documentation">Compose documentation</h2>
+<h2 id="compose-documentation">Compose ドキュメント</h2>
 
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/index.md">User guide</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install/">Installing Compose</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/">Compose file versions and upgrading</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/django/">Get started with Django</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/rails/">Get started with Rails</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/wordpress/">Get started with WordPress</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/">Command line reference</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/index.md">ユーザーガイド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install/">Compose のインストール</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/">Compose ファイルバージョン and upgrading</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/django/">Django を使ってはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/rails/">Rails を使ってはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/wordpress/">WordPress を使ってはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/">コマンドラインリファレンス</a></li>
 </ul>
 
 							<!-- tags -->
@@ -1005,7 +1000,7 @@ tty: true
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#cpu_shares-cpu_quota-cpuset-domainname-hostname-ipc-mac_address-mem_limit-memswap_limit-mem_swappiness-privileged-read_only-restart-shm_size-stdin_open-tty-user-working_dir" class="nomunge">cpu_shares, cpu_quota, cpuset, domainname, hostname, ipc, mac_address, mem_limit, memswap_limit, mem_swappiness, privileged, read_only, restart, shm_size, stdin_open, tty, user, working_dir</a></li>
         </ul>
       </li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#compose-documentation" class="nomunge">Compose documentation</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1.md#compose-documentation" class="nomunge">Compose ドキュメント</a></li>
     </ul>
   </li>
 </ul>

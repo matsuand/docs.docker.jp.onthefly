@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-14 17:21:52 +0900 -->
+<!-- Page generated 2019-07-17 11:04:33 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-14T17:21:52+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-17T11:04:33+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="リファレンスとガイドライン ここに示す内容は Compose ファイルフォーマット、バージョン 2 です。 Compose と Docker の互換マトリックス Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。 その様子は以下の一覧表に見ることができます。 各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については バージョンとアップグレードについてを参照してください。 以下の一覧表は、Compose ファイルのどのバージョンが Docker リリースをサポートしているかを示すものです。 Compose ファイルフォーマット Docker Engine リリース 3.7 18.06.0 以上 3.6..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-14T17:21:52+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-17T11:04:33+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="fig, composition, compose version 3, docker">
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    24 分
+    22 分
   
 </span>
 
@@ -1152,7 +1152,7 @@ driver: "none"
 <p>ロギングドライバーへのロギングオプションの設定は <code class="highlighter-rouge">options</code> キーにより行います。
 これは <code class="highlighter-rouge">docker run</code> コマンドの <code class="highlighter-rouge">--log-opt</code> オプションと同じです。</p>
 
-<p>ロギングオプションはキーバリューのペアで指定します。
+<p>ロギングオプションはキーバリューのペアで設定します。
 たとえば <code class="highlighter-rouge">syslog</code> オプションは以下のようになります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>driver: "syslog"
@@ -1906,17 +1906,15 @@ Compose が利用する Docker ネットワーク機能に関して、詳細は 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>driver: overlay
 </code></pre></div></div>
 
-<p>Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されます。
-そしてこれは変更できません。</p>
-
-<p>This means that standalone
-containers can connect to overlay networks.</p>
+<p>Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されますが、ただし変更できません。
+スタンドアロンコンテナーであれば、オーバーレイネットワークに接続することができます。</p>
 
 <h3 id="driver_opts-1">driver_opts</h3>
 
-<p>Specify a list of options as key-value pairs to pass to the driver for this
-network. Those options are driver-dependent - consult the driver’s
-documentation for more information. Optional.</p>
+<p>このネットワーク上で利用するドライバーに対して、受け渡したいオプションをキーバリューペアのリストとして設定します。
+このオプションは各ドライバーによって異なります。
+詳しくは各ドライバーのドキュメントを参照してください。
+設定は任意です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  driver_opts:
     foo: "bar"
@@ -1926,32 +1924,32 @@ documentation for more information. Optional.</p>
 <h3 id="enable_ipv6">enable_ipv6</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">Added in version 2.1 file format</a>.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
-<p>Enable IPv6 networking on this network.</p>
+<p>現在のネットワークにおいて IPv6 ネットワークを有効にします。</p>
 
 <h3 id="ipam">ipam</h3>
 
-<p>Specify custom IPAM config. This is an object with several properties, each of
-which is optional:</p>
+<p>独自の IPAM 設定を行います。
+いくつかのプロパティにより表わされるオブジェクトであり、それぞれの指定は任意です。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">driver</code>: Custom IPAM driver, instead of the default.</li>
-  <li><code class="highlighter-rouge">config</code>: A list with zero or more config blocks, each containing any of
-the following keys:
+  <li><code class="highlighter-rouge">driver</code>: デフォルトではない独自の IPAM ドライバーを指定します。</li>
+  <li><code class="highlighter-rouge">config</code>: 設定ブロックを指定します。要素数はゼロでも複数でも可です。
+以下のキーを用いることができます。
     <ul>
-      <li><code class="highlighter-rouge">subnet</code>: Subnet in CIDR format that represents a network segment</li>
-      <li><code class="highlighter-rouge">ip_range</code>: Range of IPs from which to allocate container IPs</li>
-      <li><code class="highlighter-rouge">gateway</code>: IPv4 or IPv6 gateway for the master subnet</li>
-      <li><code class="highlighter-rouge">aux_addresses</code>: Auxiliary IPv4 or IPv6 addresses used by Network driver,
-as a mapping from hostname to IP</li>
+      <li><code class="highlighter-rouge">subnet</code>: ネットワークセグメントを表わす CIDR 形式のサブネットを指定します。</li>
+      <li><code class="highlighter-rouge">ip_range</code>: コンテナー IP としてどこからどこまで割り当てるかの範囲を指定します。</li>
+      <li><code class="highlighter-rouge">gateway</code>: マスターサブネットに対する IPv4 または IPv6 のゲートウェイを指定します。</li>
+      <li><code class="highlighter-rouge">aux_addresses</code>: ネットワークドライバーが利用する追加の IPv4 または IPv6 アドレス。
+ホスト名から IP へのマッピングとして利用されます。</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">options</code>: Driver-specific options as a key-value mapping.</li>
+  <li><code class="highlighter-rouge">options</code>: キーバリューペアによりドライバー固有のオプションを指定します。</li>
 </ul>
 
-<p>A full example:</p>
+<p>すべてを利用した例が以下です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipam:
   driver: default
@@ -1970,22 +1968,20 @@ as a mapping from hostname to IP</li>
 
 <h3 id="internal">internal</h3>
 
-<p>By default, Docker also connects a bridge network to it to provide external
-connectivity. If you want to create an externally isolated overlay network,
-you can set this option to <code class="highlighter-rouge">true</code>.</p>
+<p>デフォルトにおいて Docker はブリッジネットワークに接続する際に、外部接続機能も提供します。
+外部に独立した overlay ネットワークを生成したい場合、本オプションを <code class="highlighter-rouge">true</code> にします。</p>
 
 <h3 id="labels-3">labels</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">Added in version 2.1 file format</a>.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
-<p>Add metadata to containers using
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a>. You can use either
-an array or a dictionary.</p>
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a> を使ってコンテナーにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。</p>
 
-<p>It’s recommended that you use reverse-DNS notation to prevent your labels from
-conflicting with those used by other software.</p>
+<p>ここでは逆 DNS 記法とすることをお勧めします。
+この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>labels:
   com.example.description: "Financial transaction network"
@@ -2000,19 +1996,14 @@ labels:
 
 <h3 id="external-1">external</h3>
 
-<p>If set to <code class="highlighter-rouge">true</code>, specifies that this network has been created outside of
-Compose. <code class="highlighter-rouge">docker-compose up</code> does not attempt to create it, and raises
-an error if it doesn’t exist.</p>
+<p>このオプションを <code class="highlighter-rouge">true</code> に設定することにより、Compose の外部において生成されているボリュームを設定します。
+<code class="highlighter-rouge">docker-compose up</code> はボリュームを生成しないようになりますが、ボリュームが存在しなければエラーとなります。</p>
 
-<p>For version 2.0 of the format, <code class="highlighter-rouge">external</code> cannot be used in conjunction with
-other network configuration keys (<code class="highlighter-rouge">driver</code>, <code class="highlighter-rouge">driver_opts</code>, <code class="highlighter-rouge">ipam</code>, <code class="highlighter-rouge">internal</code>).
-This limitation no longer exists for
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">version 2.1</a> and above.</p>
+<p>バージョン 2.0 にて <code class="highlighter-rouge">external</code> は、他のボリューム設定キー（<code class="highlighter-rouge">driver</code>, <code class="highlighter-rouge">driver_opts</code>, <code class="highlighter-rouge">ipam</code>, <code class="highlighter-rouge">internal</code>）と同時に用いることはできませんでした。
+この制約は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> 以降においてはなくなりました。</p>
 
-<p>In the example below, <code class="highlighter-rouge">proxy</code> is the gateway to the outside world. Instead of
-attempting to create a network called <code class="highlighter-rouge">[projectname]_outside</code>, Compose
-looks for an existing network simply called <code class="highlighter-rouge">outside</code> and connect the <code class="highlighter-rouge">proxy</code>
-service’s containers to it.</p>
+<p>以下の例において <code class="highlighter-rouge">proxy</code> は外部ネットワークとの間のゲートウェイです。
+<code class="highlighter-rouge">[projectname]_outside</code> というネットワークは生成されることはなく、Compose はすでに存在している <code class="highlighter-rouge">outside</code> という単純な名前のネットワークを探しにいって、<code class="highlighter-rouge">proxy</code> サービスのコンテナーに接続します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 
@@ -2032,8 +2023,7 @@ networks:
     external: true
 </code></pre></div></div>
 
-<p>You can also specify the name of the network separately from the name used to
-refer to it within the Compose file:</p>
+<p>ネットワーク名として指定する名前は、Compose ファイル内で参照されている名前以外でも指定することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>networks:
   outside:
@@ -2041,16 +2031,16 @@ refer to it within the Compose file:</p>
       name: actual-name-of-network
 </code></pre></div></div>
 
-<p>Not supported for version 2 <code class="highlighter-rouge">docker-compose</code> files. Use
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#network_mode">network_mode</a> instead.</p>
+<p>バージョン 2 の <code class="highlighter-rouge">docker-compose</code> ファイルではサポートされません。
+かわりに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#network_mode">network_mode</a> を利用してください。</p>
 
 <h3 id="name-1">name</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">Added in version 2.1 file format</a></p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
-<p>Set a custom name for this network.</p>
+<p>ネットワークに対して独自の名前を設定します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 networks:
@@ -2058,7 +2048,7 @@ networks:
     name: my-app-net
 </code></pre></div></div>
 
-<p>It can also be used in conjunction with the <code class="highlighter-rouge">external</code> property:</p>
+<p>これは <code class="highlighter-rouge">external</code> プロパティと同時に利用することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
 networks:
@@ -2067,7 +2057,7 @@ networks:
     name: my-app-net
 </code></pre></div></div>
 
-<h2 id="variable-substitution">Variable substitution</h2>
+<h2 id="variable-substitution">変数の置換</h2>
 
 <p>設定オプションには環境変数を含めることができます。
 Compose は <code class="highlighter-rouge">docker-compose</code> が実行されたシェル環境から変数値を取得します。
@@ -2123,10 +2113,10 @@ Compose はこのファイルを自動的に探しにいきます。
 <p>The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
 （VAR_NOT_INTERPOLATED_BY_COMPOSE は設定されていません。空文字として置換します。）</p>
 
-<h2 id="extension-fields">Extension fields</h2>
+<h2 id="extension-fields">拡張項目</h2>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">Added in version 2.1 file format</a>.</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
 <p>拡張項目（extension fields）を利用することで、設定内容の再利用が可能になります。
@@ -2202,16 +2192,16 @@ Compose はこのファイルを自動的に探しにいきます。
     <span class="na">name</span><span class="pi">:</span> <span class="s">volume-local</span>
 </code></pre></div></div>
 
-<h2 id="compose-documentation">Compose documentation</h2>
+<h2 id="compose-documentation">Compose ドキュメント</h2>
 
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/index.md">User guide</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install.md">Installing Compose</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/">Compose file versions and upgrading</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/django.md">Get started with Django</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/rails.md">Get started with Rails</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/wordpress.md">Get started with WordPress</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/">Command line reference</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/index.md">ユーザーガイド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install.md">Compose のインストール</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/">Compose ファイルのバージョンとアップグレード</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/django.md">Django を使ってはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/rails.md">Rails を使ってはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/wordpress.md">WordPress を使ってはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/">コマンドラインリファレンス</a></li>
 </ul>
 
 							<!-- tags -->
@@ -2420,9 +2410,9 @@ Compose はこのファイルを自動的に探しにいきます。
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#name-1" class="nomunge">name</a></li>
         </ul>
       </li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#variable-substitution" class="nomunge">Variable substitution</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#extension-fields" class="nomunge">Extension fields</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#compose-documentation" class="nomunge">Compose documentation</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#variable-substitution" class="nomunge">変数の置換</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#extension-fields" class="nomunge">拡張項目</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#compose-documentation" class="nomunge">Compose ドキュメント</a></li>
     </ul>
   </li>
 </ul>
