@@ -1,4 +1,4 @@
-<!-- Page generated 2019-06-20 10:48:14 +0900 -->
+<!-- Page generated 2019-07-18 20:19:52 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-06-20T10:48:14+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-18T20:19:52+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Docker development best practices"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="The following development patterns have proven to be helpful for people building applications with Docker. If you have discovered something we should add, let us know. How to keep your..." />
+	<meta name="twitter:title" itemprop="title name" content="Docker 開発のベストプラクティス"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker を使ってアプリケーション開発を行う方々にとって、以下に示す開発パターンが有効であることが明らかになっています。 何かを見つけている場合は お知らせください。 どうやってイメージを小さく保つか イメージが小さければネットワークからの取得が速くなります。 またコンテナーやサービスの起動時に、メモリへのロードも速くなります。 イメージを小さく保つ経験則をいくつか示します。 適切なイメージをベースとして始めます。 たとえば JDK を必要とするのであれば、公式イメージ openjdk をベースとしたイメージ作りとします。 逆に、汎用的な ubuntu イメージから始めて、Dockerfile 内に openjdk をインストールするような方法は取らないようにします。 マルチステージビルド を利用します。 たとえば maven イメージを使うと Java アプリケーションを構築することができます。 これを tomcat イメージとして作り直して、Java..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-06-20T10:48:14+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-18T20:19:52+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="application, development">
@@ -96,16 +96,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Docker development best practices | Docker Documentation</title>
-<meta property="og:title" content="Docker development best practices" />
+	<title>Docker 開発のベストプラクティス | Docker Documentation</title>
+<meta property="og:title" content="Docker 開発のベストプラクティス" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Rules of thumb for making your life easier as a Docker application developer" />
-<meta property="og:description" content="Rules of thumb for making your life easier as a Docker application developer" />
+<meta name="description" content="Docker アプリケーションの開発をより簡単に進めるための経験則を示します。" />
+<meta property="og:description" content="Docker アプリケーションの開発をより簡単に進めるための経験則を示します。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/dev-best-practices/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/dev-best-practices/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Docker development best practices","description":"Rules of thumb for making your life easier as a Docker application developer","url":"https://matsuand.github.io/docs.docker.jp.onthefly/develop/dev-best-practices/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker 開発のベストプラクティス","description":"Docker アプリケーションの開発をより簡単に進めるための経験則を示します。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/develop/dev-best-practices/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,51 +175,46 @@
 						<section class="section">
 							
 								
-							<h1>Docker development best practices</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker 開発のベストプラクティス</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    4 分
   
 </span>
 
 							
 							
-							<p>The following development patterns have proven to be helpful for people
-building applications with Docker. If you have discovered something we should
-add,
-<a href="https://github.com/docker/docker.github.io/issues/new" target="_blank" class="_">let us know</a>.</p>
+							
+<p>Docker を使ってアプリケーション開発を行う方々にとって、以下に示す開発パターンが有効であることが明らかになっています。
+何かを見つけている場合は <a href="https://github.com/docker/docker.github.io/issues/new" target="_blank" class="_">お知らせください</a>。</p>
 
-<h2 id="how-to-keep-your-images-small">How to keep your images small</h2>
+<h2 id="どうやってイメージを小さく保つか">どうやってイメージを小さく保つか</h2>
 
-<p>Small images are faster to pull over the network and faster to load into
-memory when starting containers or services. There are a few rules of thumb to
-keep image size small:</p>
+<p>イメージが小さければネットワークからの取得が速くなります。
+またコンテナーやサービスの起動時に、メモリへのロードも速くなります。
+イメージを小さく保つ経験則をいくつか示します。</p>
 
 <ul>
   <li>
-    <p>Start with an appropriate base image. For instance, if you need a JDK,
-consider basing your image on the official <code class="highlighter-rouge">openjdk</code> image, rather than
-starting with a generic <code class="highlighter-rouge">ubuntu</code> image and installing <code class="highlighter-rouge">openjdk</code> as part of the
-Dockerfile.</p>
+    <p>適切なイメージをベースとして始めます。
+たとえば JDK を必要とするのであれば、公式イメージ <code class="highlighter-rouge">openjdk</code> をベースとしたイメージ作りとします。
+逆に、汎用的な <code class="highlighter-rouge">ubuntu</code> イメージから始めて、Dockerfile 内に <code class="highlighter-rouge">openjdk</code> をインストールするような方法は取らないようにします。</p>
   </li>
   <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/eng-image/multistage-build.md">Use multistage builds</a>. For
-instance, you can use the <code class="highlighter-rouge">maven</code> image to build your Java application, then
-reset to the <code class="highlighter-rouge">tomcat</code> image and copy the Java artifacts into the correct
-location to deploy your app, all in the same Dockerfile. This means that your
-final image doesn’t include all of the libraries and dependencies pulled in by
-the build, but only the artifacts and the environment needed to run them.</p>
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/eng-image/multistage-build.md">マルチステージビルド</a> を利用します。
+たとえば <code class="highlighter-rouge">maven</code> イメージを使うと Java アプリケーションを構築することができます。
+これを <code class="highlighter-rouge">tomcat</code> イメージとして作り直して、Java アプリのコード類を適切な場所に配置してデプロイできるようにします。
+これをすべて同一の Dockerfile 内で行います。
+これはつまり最終的なイメージがビルドされたら、そのイメージ内には、元々のイメージ取得時に存在していたライブラリや依存パッケージがすべて含まれるわけではなく、実行時に必要なモジュールや環境のみが含まれるということを意味します。</p>
 
     <ul>
       <li>
-        <p>If you need to use a version of Docker that does not include multistage
-builds, try to reduce the number of layers in your image by minimizing the
-number of separate <code class="highlighter-rouge">RUN</code> commands in your Dockerfile. You can do this by
-consolidating multiple commands into a single <code class="highlighter-rouge">RUN</code> line and using your
-shell’s mechanisms to combine them together. Consider the following two
-fragments. The first creates two layers in the image, while the second
-only creates one.</p>
+        <p>マルチステージビルドの機能を持たない Docker バージョンを使う必要があるときには、イメージ内に作られるレイヤー数を減らすようにしてください。
+これは Dockerfile 内での <code class="highlighter-rouge">RUN</code> コマンドの実行が、できるだけ分断されないように、その実行数を最小化します。
+これを実現するには、複数の <code class="highlighter-rouge">RUN</code> コマンドはできるだけ 1 つの <code class="highlighter-rouge">RUN</code> コマンドとなるように、シェルの機能を使って互いに連結させます。
+たとえば以下のような 2 つのコマンド実行例があったとします。
+1 つめのコマンドは、イメージ内に 2 つのレイヤーを生成しますが、2 つめのコマンドはレイヤーが 1 つで済みます。</p>
 
         <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RUN</span> <span class="n">apt</span>-<span class="n">get</span> -<span class="n">y</span> <span class="n">update</span>
 <span class="n">RUN</span> <span class="n">apt</span>-<span class="n">get</span> <span class="n">install</span> -<span class="n">y</span> <span class="n">python</span>
@@ -239,8 +234,8 @@ derivative images use memory on the Docker host more efficiently and load more
 quickly.</p>
   </li>
   <li>
-    <p>To keep your production image lean but allow for debugging, consider using the
-production image as the base image for the debug image. Additional testing or
+    <p>本番環境向けのイメージはスリムにしたいものの、デバッグは可能にしたいといった場合は、デバッグ環境向けとして、本番環境イメージをベースイメージとすることを考えてみてください。
+Additional testing or
 debugging tooling can be added on top of the production image.</p>
   </li>
   <li>
@@ -251,14 +246,14 @@ different environments. Do not rely on the automatically-created <code class="hi
   </li>
 </ul>
 
-<h2 id="where-and-how-to-persist-application-data">Where and how to persist application data</h2>
+<h2 id="where-and-how-to-persist-application-data">アプリケーションデータはどこにどう保存するか</h2>
 
 <ul>
   <li><strong>Avoid</strong> storing application data in your container’s writable layer using
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/storagedriver.md">storage drivers</a>. This increases the
 size of your container and is less efficient from an I/O perspective than
 using volumes or bind mounts.</li>
-  <li>Instead, store data using <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/volumes.md">volumes</a>.</li>
+  <li>そのかわりに、データ保存には <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/volumes.md">ボリューム</a> を利用します。</li>
   <li>One case where it is appropriate to use
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/bind-mounts.md">bind mounts</a> is during development,
 when you may want to mount your source directory or a binary you just built
@@ -271,7 +266,7 @@ standalone containers, consider migrating to use single-replica services, so
 that you can take advantage of these service-only features.</li>
 </ul>
 
-<h2 id="use-swarm-services-when-possible">Use swarm services when possible</h2>
+<h2 id="use-swarm-services-when-possible">可能であればスウォームサービスを利用する</h2>
 
 <ul>
   <li>When possible, design your application with the ability to scale using swarm
@@ -379,7 +374,7 @@ development, quality, and security teams.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "develop/dev-best-practices.md",
-										"title": "Docker development best practices",
+										"title": "Docker 開発のベストプラクティス",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/develop/dev-best-practices.md"
 									};
 									(function(d, c, j) {
@@ -439,9 +434,9 @@ development, quality, and security teams.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#how-to-keep-your-images-small" class="nomunge">How to keep your images small</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#where-and-how-to-persist-application-data" class="nomunge">Where and how to persist application data</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#use-swarm-services-when-possible" class="nomunge">Use swarm services when possible</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#どうやってイメージを小さく保つか" class="nomunge">どうやってイメージを小さく保つか</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#where-and-how-to-persist-application-data" class="nomunge">アプリケーションデータはどこにどう保存するか</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#use-swarm-services-when-possible" class="nomunge">可能であればスウォームサービスを利用する</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#use-cicd-for-testing-and-deployment" class="nomunge">Use CI/CD for testing and deployment</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dev-best-practices.md#differences-in-development-and-production-environments" class="nomunge">Differences in development and production environments</a></li>
 </ul>

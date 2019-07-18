@@ -1101,8 +1101,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/develop/dev-best-practices/",
-"title":"Docker development best practices",
-"description":"Rules of thumb for making your life easier as a Docker application developer",
+"title":"Docker 開発のベストプラクティス",
+"description":"Docker アプリケーションの開発をより簡単に進めるための経験則を示します。",
 "keywords":"application, development"
 }
 ,
@@ -1879,7 +1879,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/develop/",
 "title":"Docker を用いた開発",
-"description":"Overview of developer resources",
+"description":"開発リソースの概要。",
 "keywords":"developer, developing, apps, api, sdk"
 }
 ,
@@ -3180,8 +3180,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/network/none/",
-"title":"Disable networking for a container",
-"description":"How to disable networking by using the none driver",
+"title":"コンテナーのネットワーク無効化",
+"description":"none ドライバーを用いることでネットワークを無効にする方法を説明します。",
 "keywords":"network, none, standalone"
 }
 ,
@@ -3775,7 +3775,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/release-notes/",
-"title":"UCP release notes",
+"title":"UCP リリースノート",
 "description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
 "keywords":"UCP, release notes"
 }
@@ -4041,8 +4041,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compose/samples-for-compose/",
-"title":"Sample apps with Compose",
-"description":"Summary of samples related to Compose",
+"title":"Compose を使ったサンプルアプリ",
+"description":"Compose に関するサンプルの概要。",
 "keywords":"documentation, docs, docker, compose, samples"
 }
 ,
