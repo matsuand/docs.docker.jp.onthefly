@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-18 20:19:52 +0900 -->
+<!-- Page generated 2019-07-20 10:03:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,7 +74,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-18T20:19:52+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-20T10:03:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -84,7 +84,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker を使ってアプリケーション開発を行う方々にとって、以下に示す開発パターンが有効であることが明らかになっています。 何かを見つけている場合は お知らせください。 どうやってイメージを小さく保つか イメージが小さければネットワークからの取得が速くなります。 またコンテナーやサービスの起動時に、メモリへのロードも速くなります。 イメージを小さく保つ経験則をいくつか示します。 適切なイメージをベースとして始めます。 たとえば JDK を必要とするのであれば、公式イメージ openjdk をベースとしたイメージ作りとします。 逆に、汎用的な ubuntu イメージから始めて、Dockerfile 内に openjdk をインストールするような方法は取らないようにします。 マルチステージビルド を利用します。 たとえば maven イメージを使うと Java アプリケーションを構築することができます。 これを tomcat イメージとして作り直して、Java..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-18T20:19:52+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-20T10:03:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="application, development">
@@ -179,7 +179,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    3 分
   
 </span>
 
@@ -226,55 +226,44 @@
     </ul>
   </li>
   <li>
-    <p>If you have multiple images with a lot in common, consider creating your own
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/eng-image/baseimages.md">base image</a> with the shared
-components, and basing your unique images on that. Docker only needs to load
-the common layers once, and they are cached. This means that your
-derivative images use memory on the Docker host more efficiently and load more
-quickly.</p>
+    <p>共有するイメージがたくさんある場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/eng-image/baseimages.md">ベースイメージ</a> を作ることを考えてみてください。
+これを用いてコンポーネントを共有し、これをベースとした独自のイメージを作っていくことができます。
+Docker は共通するレイヤーであれば 1 度しかロードする必要がなく、ロードした内容はキャッシュされます。
+つまりベースイメージから派生させたイメージは、Docker ホスト上でのメモリ利用が効率よく行われ、ロードもすばやく行われることになります。</p>
   </li>
   <li>
     <p>本番環境向けのイメージはスリムにしたいものの、デバッグは可能にしたいといった場合は、デバッグ環境向けとして、本番環境イメージをベースイメージとすることを考えてみてください。
-Additional testing or
-debugging tooling can be added on top of the production image.</p>
+さらにテストやデバッグツールを加えたい場合でも、本番環境イメージの上に追加ができます。</p>
   </li>
   <li>
-    <p>When building images, always tag them with useful tags which codify version
-information, intended destination (<code class="highlighter-rouge">prod</code> or <code class="highlighter-rouge">test</code>, for instance), stability,
-or other information that is useful when deploying the application in
-different environments. Do not rely on the automatically-created <code class="highlighter-rouge">latest</code> tag.</p>
+    <p>イメージをビルドする場合には、常にわかりやすいタグをつけるようにします。
+このタグを用いて、バージョン情報をコード化したり、目的とする用途（たとえば <code class="highlighter-rouge">prod</code> や <code class="highlighter-rouge">test</code> など）や安定性など、いろいろな情報を付与したりします。
+こうしておけば、アプリケーションをさまざまな環境にデプロイする際にわかりやすくなります。
+自動的に生成される <code class="highlighter-rouge">latest</code> タグには頼らないようにします。</p>
   </li>
 </ul>
 
 <h2 id="where-and-how-to-persist-application-data">アプリケーションデータはどこにどう保存するか</h2>
 
 <ul>
-  <li><strong>Avoid</strong> storing application data in your container’s writable layer using
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/storagedriver.md">storage drivers</a>. This increases the
-size of your container and is less efficient from an I/O perspective than
-using volumes or bind mounts.</li>
-  <li>そのかわりに、データ保存には <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/volumes.md">ボリューム</a> を利用します。</li>
-  <li>One case where it is appropriate to use
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/bind-mounts.md">bind mounts</a> is during development,
-when you may want to mount your source directory or a binary you just built
-into your container. For production, use a volume instead, mounting it into
-the same location as you mounted a bind mount during development.</li>
-  <li>For production, use <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/secrets.md">secrets</a> to store sensitive
-application data used by services, and use <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs.md">configs</a>
-for non-sensitive data such as configuration files. If you currently use
-standalone containers, consider migrating to use single-replica services, so
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/storagedriver.md">ストレージドライバー</a> によって、コンテナーの書き込み可能レイヤーへデータ保存を行うことができますが、アプリケーションデータの保存を行うことは<strong>避けます</strong>。
+これを行ってしまうと、コンテナーのサイズが増えることになり、I/O 観点で言えば、ボリュームやバインドマウントを用いることに比べて非効率なものになります。</li>
+  <li>そのかわりに、データ保存は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/volumes.md">ボリューム</a> を利用します。</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/bind-mounts.md">バインドマウント</a> を用いるのが適当な例として、開発時での利用が考えられます。
+開発時には、ソースディレクトリや生成したばかりのバイナリを、コンテナー内にマウントしたくなります。
+本番環境ではボリュームを利用しますが、本番環境がマウントする同じ場所を、開発環境時はバインドマウントによりマウントします。</li>
+  <li>本番環境において、サービスが機密情報を利用している場合、その保存には <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/secrets.md">secrets</a> を利用します。そして機密情報ではない設定ファイルなどの情報は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs.md">configs</a> を利用します。
+今利用しているコンテナーがスタンドアロンである場合、
+consider migrating to use single-replica services, so
 that you can take advantage of these service-only features.</li>
 </ul>
 
 <h2 id="use-swarm-services-when-possible">可能であればスウォームサービスを利用する</h2>
 
 <ul>
-  <li>When possible, design your application with the ability to scale using swarm
-services.</li>
-  <li>Even if you only need to run a single instance of your application, swarm
-services provide several advantages over standalone containers. A service’s
-configuration is declarative, and Docker is always working to keep the
-desired and actual state in sync.</li>
+  <li>可能であればスウォームサービスを利用し、スケールが可能なアプリケーション設計とします。</li>
+  <li>アプリケーションの実行インスタンスがただ 1 つあれば良い場合であっても、スタンドアロンコンテナーに比べてスウォームサービスには有用な機能が提供されます。
+サービスの設定は宣言によって行われるため、Docker は常に、設定された内容と実際が同期して動作します。</li>
   <li>Networks and volumes can be connected and disconnected from swarm services,
 and Docker handles redeploying the individual service containers in a
 non-disruptive way. Standalone containers need to be manually stopped, removed,
