@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-13 22:08:15 +0900 -->
+<!-- Page generated 2019-07-24 10:32:57 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -65,7 +65,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-13T22:08:15+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-24T10:32:57+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -75,7 +75,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="リファレンスとガイドライン ここに示す内容は Compose ファイルフォーマット、バージョン 3 です。 これが最新バージョンです。 Compose と Docker の互換マトリックス Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。 その様子は以下の一覧表に見ることができます。 各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については バージョンとアップグレードについてを参照してください。 以下の一覧表は、Compose ファイルのどのバージョンが Docker リリースをサポートしているかを示すものです。 Compose ファイルフォーマット Docker Engine リリース 3.7 18.06.0 以上..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-13T22:08:15+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-24T10:32:57+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="fig, composition, compose, docker">
@@ -103,7 +103,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
@@ -142,10 +142,10 @@
         <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
         <div class="btn-group" style="visibility: hidden">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Docker v18.09 (current)        <span class="caret"></span>
+    Docker v19.03 (current)         <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
   </ul>
 </div>
 
@@ -749,7 +749,8 @@ config を定義しただけでは、サービスに対して config へのア�
 <h3 id="credential_spec">credential_spec</h3>
 
 <blockquote>
-  <p><strong>メモ</strong>: このオプションは v3.3 で追加されました。</p>
+  <p><strong>メモ</strong>: このオプションは v3.3 で追加されました。
+Compopse ファイルにおける group Managed Service Account (gMSA) の設定は Compose バージョン 3.8 においてサポートされています。</p>
 </blockquote>
 
 <p>管理サービスアカウントに対する資格情報スペック（<code class="highlighter-rouge">credential_spec</code>）を設定します。
@@ -774,6 +775,22 @@ Windows における Docker データディレクトリのデフォルトは <co
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">credential_spec</span><span class="pi">:</span>
   <span class="na">registry</span><span class="pi">:</span> <span class="s">my-credential-spec</span>
+</code></pre></div></div>
+
+<h4 id="example-gmsa-configuration">gMSA の設定例</h4>
+
+<p>サービスに対して credential spec における gMSA を設定する場合、credential spec の <code class="highlighter-rouge">config</code> を設定するだけです。
+その例を以下に示します。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3.8"
+services:
+  myservice:
+    image: myimage:latest
+    credential_spec:
+      config: my_credential_spec
+
+configs:
+  my_credentials_spec:
+    file: ./my-credential-spec.json|
 </code></pre></div></div>
 
 <h3 id="depends_on">depends_on</h3>
@@ -3042,7 +3059,11 @@ Compose はこのファイルを自動的に探しにいきます。
             </ul>
           </li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#container_name" class="nomunge">container_name</a></li>
-          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#credential_spec" class="nomunge">credential_spec</a></li>
+          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#credential_spec" class="nomunge">credential_spec</a>
+            <ul>
+              <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#example-gmsa-configuration" class="nomunge">gMSA の設定例</a></li>
+            </ul>
+          </li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#depends_on" class="nomunge">depends_on</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#deploy" class="nomunge">deploy</a>
             <ul>
@@ -3264,7 +3285,7 @@ Compose はこのファイルを自動的に探しにいきます。
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = 'development';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty

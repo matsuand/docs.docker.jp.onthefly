@@ -303,7 +303,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/binaries/",
-"title":"Docker CE の入手（バイナリモジュール）",
+"title":"Docker Engine - Community のインストール（バイナリモジュール）",
 "description":"Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.",
 "keywords":"binaries, installation, docker, documentation, linux"
 }
@@ -317,7 +317,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/breaking_changes/",
-"title":"Breaking changes and incompatibilities",
+"title":"互換性を維持しない変更、非互換性",
 "description":"Breaking changes",
 "keywords":"docker, documentation, about, technology, breaking, incompatibilities"
 }
@@ -410,7 +410,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/engine/ce-ee-node-activate/",
 "title":"CE-EE Node Activate",
 "description":"Engine",
-"keywords":"Engine, CE, EE, node, activation, enterprise, patching"
+"keywords":"Engine, Docker Engine - Community, EE, node, activation, enterprise, patching"
 }
 ,
 {
@@ -422,8 +422,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/centos/",
-"title":"Docker CE の入手（CentOS 向け）",
-"description":"CentOS 上に Docker CE をインストールする手順を説明。",
+"title":"Docker Engine - Community の入手（CentOS 向け）",
+"description":"CentOS 上に Docker Engine - Community をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -438,7 +438,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-hub/publish/certify-images/",
 "title":"Certify Docker images",
 "description":"Run certification tests against your images",
-"keywords":"Docker, docker, store, certified content, images"
+"keywords":"Docker, Docker Hub, store, certified content, images"
 }
 ,
 {
@@ -982,8 +982,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/debian/",
-"title":"Docker CE の入手（Debian 向け）",
-"description":"Debian 上に Docker CE をインストールする手順を説明。",
+"title":"Docker Engine - Community の入手（Debian 向け）",
+"description":"Debian 上に Docker Engine - Community をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, debian, install, uninstall, upgrade, update"
 }
 ,
@@ -1283,8 +1283,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/authorization/ee-advanced/",
-"title":"Access control design with Docker EE Advanced",
-"description":"Learn how to architect multitenancy with Docker Enterprise Edition Advanced.",
+"title":"Access control design with Docker Enterprise",
+"description":"Learn how to architect multitenancy with Docker Enterprise.",
 "keywords":"authorize, authentication, users, teams, groups, sync, UCP, role, access control"
 }
 ,
@@ -1332,8 +1332,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/end-to-end-install/",
-"title":"Deploy Enterprise Edition on Linux servers",
-"description":"Learn how to get a trial license and install Docker Enterprise Edition.",
+"title":"Install individual Docker Enterprise components on Linux servers",
+"description":"Learn how to get a trial license and install Docker Enterprise.",
 "keywords":"ucp, dtr, install, orchestration"
 }
 ,
@@ -1514,8 +1514,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/fedora/",
-"title":"Docker CE の入手（Fedora 向け）",
-"description":"Fedora 上に Docker CE をインストールする手順を説明。",
+"title":"Docker Engine - Community の入手（Fedora 向け）",
+"description":"Fedora 上に Docker Engine - Community をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -1598,7 +1598,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/machine/get-started-cloud/",
-"title":"Use Docker Machine to provision hosts on cloud providers",
+"title":"Docker Machine 利用によるクラウドプロバイダーへのプロビジョニング",
 "description":"Using Docker Machine to provision hosts on cloud providers",
 "keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
 }
@@ -1613,7 +1613,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/get-support/",
 "title":"Get support",
-"description":"Your Docker EE subscription gives you access to prioritized support. You can file tickets via email or the support portal.",
+"description":"Your Docker Enterprise subscription gives you access to prioritized support. You can file tickets via email or the support portal.",
 "keywords":"support, help"
 }
 ,
@@ -1992,7 +1992,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/",
 "title":"Install UCP for production",
 "description":"Learn how to install Docker Universal Control Plane on production.",
-"keywords":"Universal Control Plane, UCP, install, Docker EE"
+"keywords":"Universal Control Plane, UCP, install, Docker Enterprise"
 }
 ,
 {
@@ -2124,8 +2124,8 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/",
 "title":"Docker Enterprise",
-"description":"Docker Enterprise エディション、つまり Docker によりエンタープライズレベルのクラスター管理ソリューションについて学びます。",
-"keywords":"Docker EE, UCP, DTR, orchestration, cluster, Kubernetes"
+"description":"Docker Enterprise、つまり Docker によりエンタープライズレベルのクラスター管理ソリューションについて学びます。",
+"keywords":"Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes"
 }
 ,
 {
@@ -2186,9 +2186,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/",
-"title":"Docker CE について",
+"title":"Docker Engine - Community について",
 "description":"インストール方法を一覧列記。",
-"keywords":"docker, installation, install, docker ce, docker ee, docker editions, stable, edge"
+"keywords":"docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge"
 }
 ,
 {
@@ -2242,7 +2242,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/release-notes/",
-"title":"Docker Release Notes",
+"title":"Docker release notes",
 "description":"Release notes for Docker",
 "keywords":"docker, documentation, about, technology, understanding,  release"
 }
@@ -2573,7 +2573,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/",
 "title":"Join Linux nodes to your cluster",
 "description":"Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.",
-"keywords":"Docker EE, UCP, cluster, scale, worker, manager"
+"keywords":"Docker Engine - Enterprise, UCP, cluster, scale, worker, manager"
 }
 ,
 {
@@ -3264,7 +3264,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/orgs/",
-"title":"Teams & Organizations",
+"title":"チームと組織",
 "description":"Docker Hub Teams & Organizations",
 "keywords":"Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker Hub, docs, documentation"
 }
@@ -3349,8 +3349,8 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/install/overview/",
 "title":"Docker エディションの概要",
-"description":"Docker には 2 つのエディション、つまり Docker Enterprise エディションと Docker Community エディションがあることを学びます。",
-"keywords":"editions, ee, ce,"
+"description":"Docker には 3 つの構成、つまり Docker Enterprise、Docker Engine - Enterprise、Docker Engine - Community が利用できることを学びます。",
+"keywords":"editions, tiers, ee, ce, Docker Engine - Enterprise, Docker Engine - Community"
 }
 ,
 {
@@ -3391,7 +3391,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/get-started/part6/",
 "title":"はじめよう 6部: アプリのデプロイ",
-"description":"Docker CE または EE を使ってアプリを本番環境にデプロイする。",
+"description":"Docker Engine - Community または EE を使ってアプリを本番環境にデプロイする。",
 "keywords":"deploy, production, datacenter, cloud, aws, azure, provider, admin, enterprise"
 }
 ,
@@ -3818,7 +3818,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
 "title":"Docker Engine リリースノート",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine CE and EE",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and EE",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
 }
 ,
@@ -3866,8 +3866,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/containers/resource_constraints/",
-"title":"Limit a container's resources",
-"description":"Limiting the system resources a container can use",
+"title":"Specify a container's resources",
+"description":"Specify the system resources a container can use",
 "keywords":"docker, daemon, configuration"
 }
 ,
@@ -4281,7 +4281,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/set-orchestrator-type/",
 "title":"Set the orchestrator type for a node",
 "description":"Learn how to specify the orchestrator for nodes in a Docker Enterprise Edition cluster.",
-"keywords":"Docker EE, UCP, cluster, orchestrator"
+"keywords":"Docker Enterprise, UCP, cluster, orchestrator"
 }
 ,
 {
@@ -4518,7 +4518,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/supported-platforms/",
 "title":"Docker Enterprise について",
-"description":"Docker Enterprise 2.1 に関する情報",
+"description":"Docker Enterprise の製品情報",
 "keywords":"Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported"
 }
 ,
@@ -4617,7 +4617,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements/",
 "title":"UCP System requirements",
 "description":"Learn about the system requirements for installing Docker Universal Control Plane.",
-"keywords":"UCP, architecture, requirements, Docker EE"
+"keywords":"UCP, architecture, requirements, Docker Engine - Enterprise"
 }
 ,
 {
@@ -4686,7 +4686,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/telemetry/",
 "title":"Manage usage data collection",
-"description":"Understand and manage usage data collected by Docker EE and sent to Docker.",
+"description":"Understand and manage usage data collected by Docker Engine - Enterprise and sent to Docker.",
 "keywords":"enterprise, telemetry, data collection"
 }
 ,
@@ -4937,8 +4937,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/ubuntu/",
-"title":"Docker CE の入手（Ubuntu 向け）",
-"description":"Ubuntu 上に Docker CE をインストールする手順を説明。",
+"title":"Docker Engine - Community の入手（Ubuntu 向け）",
+"description":"Ubuntu 上に Docker Engine - Community をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
 }
 ,
@@ -5042,7 +5042,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/upgrade/",
-"title":"Upgrade to UCP 3.1",
+"title":"Upgrade to UCP 3.2",
 "description":"Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.",
 "keywords":"UCP, upgrade, update"
 }
@@ -5063,15 +5063,15 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/upgrade/",
-"title":"Upgrade Docker EE",
-"description":"Learn how to upgrade your Docker Enterprise Edition, to start using the latest features and security patches.",
+"title":"Upgrade Docker Enterprise",
+"description":"Learn how to upgrade your Docker Enterprise to start using the latest features and security patches.",
 "keywords":"enterprise, upgrade"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/upgrade/",
-"title":"Upgrade your plan",
-"description":"Upgrading your Docker Hub Plan",
+"title":"プランのアップグレード",
+"description":"Docker Hub プランのアップグレード方法。",
 "keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
 }
 ,
@@ -5184,7 +5184,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/dtr/admin/configure/use-your-own-tls-certificates/",
 "title":"Use your own TLS certificates",
 "description":"Learn how to configure Docker Trusted Registry with your own TLS certificates.",
-"keywords":"dtr, tls"
+"keywords":"dtr, tls, certificates, security"
 }
 ,
 {

@@ -37,7 +37,7 @@ var glossary = [
 
 {
 "term": "collection",
-"def": "<p>A collection is a group of swarm resources that Docker EE uses for role-based\naccess control. Collections enable organizing permissions for resources like\nnodes, services, containers, volumes, networks, and secrets. <a href=\"/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/\">Learn how to manage collections</a>.</p>\n"
+"def": "<p>A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based\naccess control. Collections enable organizing permissions for resources like\nnodes, services, containers, volumes, networks, and secrets. <a href=\"/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/\">Learn how to manage collections</a>.</p>\n"
 },
 
 {
@@ -61,8 +61,8 @@ var glossary = [
 },
 
 {
-"term": "Docker Enterprise Edition",
-"def": "<p>Docker Enterprise Edition (Docker EE) is a platform to build, ship, and run\ncontainerized applications, that you can deploy in the cloud or on-premise. It\nincludes a tested and certified version of Docker, web UIs for managing\nyour app resources, and support.</p>\n"
+"term": "Docker Enterprise",
+"def": "<p>Docker Enterprise is a platform to build, ship, and run\ncontainerized applications, that you can deploy in the cloud or on-premise. It\nincludes a tested and certified version of Docker, web UIs for managing\nyour app resources, and support.</p>\n"
 },
 
 {
@@ -97,7 +97,7 @@ var glossary = [
 
 {
 "term": "grant",
-"def": "<p>A grant enables role-based access control for managing how users and\norganizations access Docker EE swarm resources. A grant is made up of a\nsubject, a role, and a collection. For more about grants and role-based access\ncontrol, see <a href=\"/datacenter/ucp/2.2/guides/access-control/grant-permissions/\">Grant permissions to users based on roles</a>.</p>\n"
+"def": "<p>A grant enables role-based access control for managing how users and\norganizations access Docker Engine - Enterprise swarm resources. A grant is made up of a\nsubject, a role, and a collection. For more about grants and role-based access\ncontrol, see <a href=\"/datacenter/ucp/2.2/guides/access-control/grant-permissions/\">Grant permissions to users based on roles</a>.</p>\n"
 },
 
 {
@@ -172,12 +172,12 @@ var glossary = [
 
 {
 "term": "role",
-"def": "<p>A role is a set of permitted API operations on a collection of Docker EE swarm\nresources. As part of a grant, a role is assigned to a subject (a user, team, or\norganization) and a collection. For more about roles, see <a href=\"/datacenter/ucp/2.2/guides/access-control/permission-levels/\">Roles and\npermission levels</a>.</p>\n"
+"def": "<p>A role is a set of permitted API operations on a collection of Docker Engine - Enterprise swarm\nresources. As part of a grant, a role is assigned to a subject (a user, team, or\norganization) and a collection. For more about roles, see <a href=\"/datacenter/ucp/2.2/guides/access-control/permission-levels/\">Roles and\npermission levels</a>.</p>\n"
 },
 
 {
 "term": "role-based access control",
-"def": "<p>Role-based access control enables managing how Docker EE users can access\nswarm resources. UCP administrators create grants to control how users access\nresource collections. A grant is made up of a subject, a role, and a collection.\nA grant defines who (subject) has how much access (role) to a set of resources\n(collection). For more about role-based access control, see\n<a href=\"/datacenter/ucp/2.2/guides/access-control/\">Authentication</a>.</p>\n"
+"def": "<p>Role-based access control enables managing how Docker Engine - Enterprise users can access\nswarm resources. UCP administrators create grants to control how users access\nresource collections. A grant is made up of a subject, a role, and a collection.\nA grant defines who (subject) has how much access (role) to a set of resources\n(collection). For more about role-based access control, see\n<a href=\"/datacenter/ucp/2.2/guides/access-control/\">Authentication</a>.</p>\n"
 },
 
 {
@@ -197,7 +197,7 @@ var glossary = [
 
 {
 "term": "subject",
-"def": "<p>A subject represents a user, team, or organization in Docker EE. A subject is\ngranted a role for access to a collection of swarm resources.\nFor more about role-based access, see <a href=\"/datacenter/ucp/2.2/guides/access-control/\">Authentication</a>.</p>\n"
+"def": "<p>A subject represents a user, team, or organization in Docker Enterprise. A subject is\ngranted a role for access to a collection of swarm resources.\nFor more about role-based access, see <a href=\"/datacenter/ucp/2.2/guides/access-control/\">Authentication</a>.</p>\n"
 },
 
 {

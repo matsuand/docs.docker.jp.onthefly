@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-13 11:13:15 +0900 -->
+<!-- Page generated 2019-07-24 10:32:57 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,7 +86,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-13T11:13:15+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-24T10:32:57+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -96,7 +96,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="All UCP services are exposed using HTTPS, to ensure all communications between clients and UCP are encrypted. By default, this is done using self-signed TLS certificates that are not trusted..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-13T11:13:15+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-24T10:32:57+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Universal Control Plane, UCP, certificate, authentication, tls">
@@ -124,7 +124,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
@@ -163,10 +163,10 @@
         <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
         <div class="btn-group" style="visibility: hidden">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Docker v18.09 (current)        <span class="caret"></span>
+    Docker v19.03 (current)         <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
   </ul>
 </div>
 
@@ -191,7 +191,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    1 分
+    2 分
   
 </span>
 
@@ -232,22 +232,27 @@ navigate to the <strong>Admin Settings</strong> page.</p>
 <p>Upload your certificates and keys:</p>
 
 <ul>
-  <li>A <code class="highlighter-rouge">ca.pem</code> file with the root CA public certificate.</li>
+  <li>A <code class="highlighter-rouge">ca.pem</code> file with the root CA (Certificate Authority) public certificate.</li>
   <li>A <code class="highlighter-rouge">cert.pem</code> file with the TLS certificate for your domain and any intermediate public
 certificates, in this order.</li>
   <li>A <code class="highlighter-rouge">key.pem</code> file with TLS private key. Make sure it is not encrypted with a password.
 Encrypted keys should have <code class="highlighter-rouge">ENCRYPTED</code> in the first line.</li>
 </ul>
 
-<p>Finally, click <strong>Save</strong> for the changes to take effect.</p>
+<p>After replacing the TLS certificates, your users will not be able to authenticate
+with their old client certificate bundles. Ask your users to access the UCP
+web UI and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">download new client certificate bundles</a>.</p>
 
-<p>After replacing the TLS certificates, your users won’t be able to authenticate
-with their old client certificate bundles. Ask your users to go to the UCP
-web UI and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">get new client certificate bundles</a>.</p>
+<p>As of UCP v3.2, the <strong>Certificates</strong> page includes a new text field,
+<strong><em>Client CA</em></strong>, that allows you to paste or upload one or more custom root CA certificates which the UCP Controller will use to
+verify the authenticity of client certificates issued by your corporate or
+trusted third-party CAs. Note that your custom root certificates will be appended to UCP’s internal root CA certificates.</p>
+
+<p>Finally, click <strong>Save</strong> for the changes to take effect.</p>
 
 <p>If you deployed Docker Trusted Registry, you’ll also need to reconfigure it
 to trust the new UCP TLS certificates.
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/dtr/2.6/cli/reconfigure.md">Learn how to configure DTR</a>.</p>
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/dtr/2.7/cli/reconfigure.md">Learn how to configure DTR</a>.</p>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
@@ -459,7 +464,7 @@ to trust the new UCP TLS certificates.
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = 'development';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty

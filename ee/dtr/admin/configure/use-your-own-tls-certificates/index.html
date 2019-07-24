@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-16 12:34:21 +0900 -->
+<!-- Page generated 2019-07-24 10:32:57 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,20 +86,20 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-16T12:34:21+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-24T10:32:57+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Use your own TLS certificates"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="By default the DTR services are exposed using HTTPS, to ensure all communications between clients and DTR is encrypted. Since DTR replicas use self-signed certificates for this, when a client..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Trusted Registry (DTR) services are exposed using HTTPS by default. This ensures encrypted communications between clients and your trusted registry. If you do not pass a PEM-encoded TLS certificate..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-16T12:34:21+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-24T10:32:57+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="dtr, tls">
+	<meta name="keywords" content="dtr, tls, certificates, security">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -124,7 +124,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
@@ -163,10 +163,10 @@
         <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
         <div class="btn-group" style="visibility: hidden">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Docker v18.09 (current)        <span class="caret"></span>
+    Docker v19.03 (current)         <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
   </ul>
 </div>
 
@@ -197,53 +197,55 @@
 
 							
 							
-							<p>By default the DTR services are exposed using HTTPS, to ensure all
-communications between clients and DTR is encrypted. Since DTR
-replicas use self-signed certificates for this, when a client accesses
-DTR, their browsers won’t trust this certificate, so the browser displays a
-warning message.</p>
+							<p>Docker Trusted Registry (DTR) services are exposed using HTTPS by default. This ensures encrypted communications between clients and your trusted registry. If you do not pass a PEM-encoded TLS certificate during installation, DTR will generate a <a href="https://en.wikipedia.org/wiki/Self-signed_certificate">self-signed certificate</a>. This leads to an insecure site warning when accessing DTR through a browser. Additionally, DTR includes an <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS (HTTP Strict-Transport-Security) header</a> in all API responses which can further lead to your browser refusing to load DTR’s web interface.</p>
 
-<p>You can configure DTR to use your own certificates, so that it is automatically
-trusted by your users’ browser and client tools.</p>
+<p>You can configure DTR to use your own TLS certificates, so that it is automatically
+trusted by your users’ browser and client tools. As of v2.7, you can also <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/enable-authentication-via-client-certs/">enable user authentication via client certificates</a> provided by your organization’s public key infrastructure (PKI).</p>
 
 <h2 id="replace-the-server-certificates">Replace the server certificates</h2>
 
-<p>To configure DTR to use your own certificates and keys, go to the
-<strong>DTR web UI</strong>, navigate to the <strong>Settings</strong> page, and scroll down to the
-<strong>Domain</strong> section.</p>
+<p>You can upload your own TLS certificates and keys using the web interface, or pass them as CLI options when installing or reconfiguring your DTR instance.</p>
 
-<p><img src="../../images/use-your-certificates-1.png" alt="" class="with-border" /></p>
+<h3 id="web-interface">Web interface</h3>
 
-<p>Set the DTR domain name and upload the certificates and key:</p>
+<p>Navigate to <code class="highlighter-rouge">https://&lt;dtr-url&gt;</code> and log in with your credentials. Select <strong>System</strong> from the left navigation pane, and scroll down to <strong>Domain &amp; Proxies</strong>.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/use-your-certificates-1.png" alt="" class="with-border" /></p>
+
+<p>Enter your DTR domain name and upload or copy and paste the certificate details:</p>
 
 <ul>
-  <li>Load balancer/public address, is the domain name clients will use to access DTR.</li>
-  <li>TLS certificate, is the server certificate and any intermediate CA public
-certificates. This certificate needs to be valid for the DTR public address,
+  <li><strong><em>Load balancer/public address.</em></strong> The domain name clients will use to access DTR.</li>
+  <li><strong><em>TLS private key.</em></strong> The server private key.</li>
+  <li><strong><em>TLS certificate chain.</em></strong> The server certificate and any intermediate public
+certificates from your certificate authority (CA). This certificate needs to be valid for the DTR public address,
 and have SANs for all addresses used to reach the DTR replicas, including load
 balancers.</li>
-  <li>TLS private key is the server private key.</li>
-  <li>TLS CA is the root CA public certificate.</li>
+  <li><strong><em>TLS CA.</em></strong> The root CA public certificate.</li>
 </ul>
 
-<p>Finally, click <strong>Save</strong> for the changes to take effect.</p>
+<p>Click <strong>Save</strong> to apply your changes.</p>
 
-<p>If you’re using certificates issued by a globally trusted certificate authority,
+<p>If you’ve added certificates issued by a globally trusted CA,
 any web browser or client tool should now trust DTR. If you’re using an internal
-certificate authority, you’ll need to configure your system to trust that
-certificate authority.</p>
+CA, you will need to configure the client systems to trust that
+CA.</p>
+
+<h3 id="command-line-interface">Command line interface</h3>
+
+<p>See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/dtr/2.7/cli/install/">docker/dtr install</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/dtr/2.7/cli/reconfigure/">docker/dtr reconfigure</a> for TLS certificate options and usage.</p>
 
 <h2 id="where-to-go-next">Where to go next</h2>
-
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/admin/configure/external-storage/">Set up external storage</a></li>
+  <li><a href="enable-single-sign-on">Enable single sign-on</a></li>
+  <li><a href="external-storage">Set up external storage</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=dtr">dtr</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=tls">tls</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=dtr">dtr</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=tls">tls</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=certificates">certificates</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=security">security</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -333,7 +335,12 @@ certificate authority.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-your-own-tls-certificates.md#replace-the-server-certificates" class="nomunge">Replace the server certificates</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-your-own-tls-certificates.md#replace-the-server-certificates" class="nomunge">Replace the server certificates</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-your-own-tls-certificates.md#web-interface" class="nomunge">Web interface</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-your-own-tls-certificates.md#command-line-interface" class="nomunge">Command line interface</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-your-own-tls-certificates.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
@@ -443,7 +450,7 @@ certificate authority.</p>
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = 'development';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty

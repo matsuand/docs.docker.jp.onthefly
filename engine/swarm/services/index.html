@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-10 16:31:28 +0900 -->
+<!-- Page generated 2019-07-24 10:32:57 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-10T16:31:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-24T10:32:57+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Swarm services use a declarative model, which means that you define the desired state of the service, and rely upon Docker to maintain this state. The state includes information such..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-10T16:31:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-24T10:32:57+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="guide, swarm mode, swarm, service">
@@ -116,7 +116,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
@@ -155,10 +155,10 @@
         <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
         <div class="btn-group" style="visibility: hidden">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Docker v18.09 (current)        <span class="caret"></span>
+    Docker v19.03 (current)         <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
   </ul>
 </div>
 
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    37 分
+    40 分
   
 </span>
 
@@ -255,6 +255,24 @@ the previous one to use the <code class="highlighter-rouge">alpine:3.6</code> ta
 <p>For more details about image tag resolution, see
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/services.md#specify-the-image-version-the-service-should-use">Specify the image version the service should use</a>.</p>
 
+<h3 id="gmsa-for-swarm">gMSA for Swarm</h3>
+
+<p>Swarm now allows using a Docker Config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they’re used on.</p>
+
+<p>The following example assumes a gMSA and its credential spec (called credspec.json) already exists, and that the nodes being deployed to are correctly configured for the gMSA.</p>
+
+<p>To use a Config as a credential spec, first create the Docker Config containing the credential spec:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker config create credspec credspec.json
+</code></pre></div></div>
+
+<p>Now, you should have a Docker Config named credspec, and you can create a service using this credential spec. To do so, use the --credential-spec flag with the config name, like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create <span class="nt">--credential-spec</span><span class="o">=</span><span class="s2">"config://credspec"</span> &lt;your image&gt;
+</code></pre></div></div>
+
+<p>Your service will use the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec will not be mounted into the container.</p>
+
 <h3 id="create-a-service-using-an-image-on-a-private-registry">Create a service using an image on a private registry</h3>
 
 <p>If your image is available on a private registry which requires login, use the
@@ -273,6 +291,42 @@ a command like the following:</p>
 <p>This passes the login token from your local client to the swarm nodes where the
 service is deployed, using the encrypted WAL logs. With this information, the
 nodes are able to log into the registry and pull the image.</p>
+
+<h3 id="provide-credential-specs-for-managed-service-accounts">Provide credential specs for managed service accounts</h3>
+
+<p>In Enterprise Edition 3.0, security is improved through the centralized distribution and management of Group Managed Service Account(gMSA) credentials using Docker Config functionality. Swarm now allows using a Docker Config as a gMSA credential spec, which reduces the burden of distributing credential specs to the nodes on which they are used.</p>
+
+<p><strong>Note</strong>: This option is only applicable to services using Windows containers.</p>
+
+<p>Credential spec files are applied at runtime, eliminating the need for host-based credential spec files or registry entries - no gMSA credentials are written to disk on worker nodes. You can make credential specs available to Docker Engine running swarm kit worker nodes before a container starts. When deploying a service using a gMSA-based config, the credential spec is passed directly to the runtime of containers in that service.</p>
+
+<p>The <code class="highlighter-rouge">--credential-spec</code> must be one of the following formats:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">file://&lt;filename&gt;</code>: The referenced file must be present in the <code class="highlighter-rouge">CredentialSpecs</code> subdirectory in the docker data directory, which defaults to <code class="highlighter-rouge">C:\ProgramData\Docker\</code> on Windows. For example, specifying <code class="highlighter-rouge">file://spec.json</code> loads <code class="highlighter-rouge">C:\ProgramData\Docker\CredentialSpecs\spec.json</code>.</li>
+  <li><code class="highlighter-rouge">registry://&lt;value-name&gt;</code>: The credential spec is read from the Windows registry on the daemon’s host.</li>
+  <li><code class="highlighter-rouge">config://&lt;config-name&gt;</code>: The config name is automatically converted to the config ID in the CLI.
+The credential spec contained in the specified <code class="highlighter-rouge">config</code> is used.</li>
+</ul>
+
+<p>The following simple example retrieves the gMSA name and JSON contents from your Active Directory (AD) instance:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name="mygmsa"
+contents="{...}"
+echo $contents &gt; contents.json
+</code></pre></div></div>
+<p>Make sure that the nodes to which you are deploying are correctly configured for the gMSA.</p>
+
+<p>To use a Config as a credential spec, create a Docker Config in a credential spec file named <code class="highlighter-rouge">credpspec.json</code>.
+ You can specify any name for the name of the <code class="highlighter-rouge">config</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
+</code></pre></div></div>
+<p>Now you can create a service using this credential spec. Specify the <code class="highlighter-rouge">--credential-spec</code> flag with the config name:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create --credential-spec="config://credspec" &lt;your image&gt;
+</code></pre></div></div>
+
+<p>Your service uses the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec is not mounted into the container.</p>
 
 <h2 id="update-a-service">Update a service</h2>
 
@@ -1356,7 +1410,9 @@ wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/services.md#create-a-service" class="nomunge">Create a service</a>
     <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/services.md#gmsa-for-swarm" class="nomunge">gMSA for Swarm</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/services.md#create-a-service-using-an-image-on-a-private-registry" class="nomunge">Create a service using an image on a private registry</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/services.md#provide-credential-specs-for-managed-service-accounts" class="nomunge">Provide credential specs for managed service accounts</a></li>
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/services.md#update-a-service" class="nomunge">Update a service</a></li>
@@ -1514,7 +1570,7 @@ wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v18.09';
+	var dockerVersion = 'v19.03';
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = 'development';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
