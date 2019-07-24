@@ -71,6 +71,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/assemble/adv-backend-manage/",
+"title":"Advanced backend management",
+"description":"Advanced backend management for Docker Assemble",
+"keywords":"Backend, Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-hub/builds/advanced/",
 "title":"Advanced options for Autobuild and Autotest",
 "description":"Automated builds",
@@ -271,6 +278,20 @@ var pages = [
 "title":"docker/ucp backup",
 "description":"Create a backup of a UCP manager node",
 "keywords":"ucp, cli, backup"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/backup/",
+"title":"docker/ucp backup",
+"description":"Create a backup of a UCP manager node",
+"keywords":"ucp, cli, backup"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/backup/",
+"title":"docker/dtr backup",
+"description":"Create a backup of DTR",
+"keywords":"dtr, cli, backup"
 }
 ,
 {
@@ -498,6 +519,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/assemble/cli-reference/",
+"title":"Docker Assemble CLI reference",
+"description":"Docker Assemble CLI reference",
+"keywords":"Docker, assemble, Spring Boot, ASP .NET, backend"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/user-access/cli/",
 "title":"CLI-based access",
 "description":"Learn how to access Docker Universal Control Plane from the CLI.",
@@ -670,6 +698,13 @@ var pages = [
 "title":"Configure native Kubernetes role-based access control",
 "description":"Learn how to configure native role-based access control for Kubernetes",
 "keywords":"Kubernetes, ucp, RBAC"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/assemble/configure/",
+"title":"Configure Docker Assemble",
+"description":"Installing Docker Assemble",
+"keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
 ,
 {
@@ -1093,6 +1128,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/destroy/",
+"title":"docker/dtr destroy",
+"description":"Destroy a DTR replica's data",
+"keywords":"dtr, cli, destroy"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/destroy/",
 "title":"docker/dtr destroy",
 "description":"Destroy a DTR replica's data",
@@ -1233,6 +1275,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/assemble/dot-net/",
+"title":"Build a C# ASP.NET Core project",
+"description":"Building a C# ASP.NET Core project using Docker Assemble",
+"keywords":"Assemble, Docker Enterprise, Spring Boot, container image"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/examples/dotnetcore/",
 "title":"Dockerize an ASP.NET Core application",
 "description":"Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile.",
@@ -1268,6 +1317,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/dump-certs/",
+"title":"docker/ucp dump-certs",
+"description":"Print the public certificates used by this UCP web server",
+"keywords":"ucp, cli, dump-certs"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-for-windows/edge-release-notes/",
 "title":"Docker Desktop for Windows Edge Release notes",
 "description":"Change log / release notes per edge release",
@@ -1293,6 +1349,13 @@ var pages = [
 "title":"Access control design with Docker EE Standard",
 "description":"Learn how to architect multitenancy by using Docker Enterprise Edition Advanced.",
 "keywords":"authorize, authentication, users, teams, groups, sync, UCP, role, access control"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/emergency-repair/",
+"title":"docker/dtr emergency-repair",
+"description":"Recover DTR from loss of quorum",
+"keywords":"dtr, cli, emergency-repair"
 }
 ,
 {
@@ -1416,6 +1479,13 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/example-config/",
+"title":"docker/ucp example-config",
+"description":"Display an example configuration file for UCP",
+"keywords":"ucp, cli, config, configuration"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/example-config/",
 "title":"docker/ucp example-config",
 "description":"Display an example configuration file for UCP",
 "keywords":"ucp, cli, config, configuration"
@@ -1737,6 +1807,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/id/",
+"title":"docker/ucp id",
+"description":"Print the ID of UCP running on this node",
+"keywords":"ucp, cli, id"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/image/",
 "title":"docker image",
 "description":null,
@@ -1842,10 +1919,31 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/images/",
+"title":"docker/ucp images",
+"description":"Verify the UCP images on this node",
+"keywords":"ucp, cli, images"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/images/",
+"title":"docker/dtr images",
+"description":"List all the images necessary to install DTR",
+"keywords":"dtr, cli, images"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/images/",
 "title":"docker/dtr images",
 "description":"List all the images necessary to install DTR",
 "keywords":"dtr, cli, images"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/assemble/images/",
+"title":"Docker Assemble images",
+"description":"Building Docker Assemble images",
+"keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
 ,
 {
@@ -1930,6 +2028,20 @@ var pages = [
 "title":"docker/ucp overview",
 "description":"Learn about the commands available in the docker/ucp image.",
 "keywords":"ucp, cli, ucp"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/",
+"title":"docker/ucp overview",
+"description":"Learn about the commands available in the docker/ucp image.",
+"keywords":"ucp, cli, ucp"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/",
+"title":"docker/dtr 概要",
+"description":"docker/dtr イメージにおいて利用可能なコマンドについて学ぶ。",
+"keywords":"dtr, install, uninstall, configure"
 }
 ,
 {
@@ -2458,10 +2570,31 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/install/",
+"title":"docker/ucp install",
+"description":"Install UCP on a node",
+"keywords":"ucp, cli, install"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/install/",
+"title":"docker/dtr install",
+"description":"Install Docker Trusted Registry",
+"keywords":"dtr, cli, install"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/install/",
 "title":"docker/dtr install",
 "description":"Install Docker Trusted Registry",
 "keywords":"dtr, cli, install"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/assemble/install/",
+"title":"Docker Assemble (試験的)",
+"description":"Docker Assemble のインストール。",
+"keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
 ,
 {
@@ -2588,6 +2721,13 @@ var pages = [
 "title":"Join Windows worker nodes to your cluster",
 "description":"Join worker nodes that are running on Windows Server to a Docker Enterprise cluster.",
 "keywords":"Docker Enterprise, UCP, cluster, scale, worker, Windows"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/join/",
+"title":"docker/dtr join",
+"description":"Add a new replica to an existing DTR cluster",
+"keywords":"dtr, cli, join"
 }
 ,
 {
@@ -3746,6 +3886,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/reconfigure/",
+"title":"docker/dtr reconfigure",
+"description":"Change DTR configurations",
+"keywords":"dtr, cli, reconfigure"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/reconfigure/",
 "title":"docker/dtr reconfigure",
 "description":"Change DTR configurations",
@@ -3823,6 +3970,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/remove/",
+"title":"docker/dtr remove",
+"description":"Remove a DTR replica from a cluster",
+"keywords":"dtr, cli, remove"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/remove/",
 "title":"docker/dtr remove",
 "description":"Remove a DTR replica from a cluster",
@@ -3886,6 +4040,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/restart/",
+"title":"docker/ucp restart",
+"description":"Start or restart UCP components running on this node",
+"keywords":"ucp, cli, restart"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/restart/",
 "title":"docker-compose restart",
 "description":"Restarts Docker Compose services.",
@@ -3911,6 +4072,20 @@ var pages = [
 "title":"docker/ucp restore",
 "description":"Restore a UCP cluster from a backup",
 "keywords":"ucp, cli, restore"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/restore/",
+"title":"docker/ucp restore",
+"description":"Restore a UCP cluster from a backup",
+"keywords":"ucp, cli, restore"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/restore/",
+"title":"docker/dtr restore",
+"description":"Install and restore DTR from an existing backup",
+"keywords":"dtr, cli, restore"
 }
 ,
 {
@@ -4362,6 +4537,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/assemble/spring-boot/",
+"title":"Build a Spring Boot project",
+"description":"Building a Spring Boot project using Docker Assemble",
+"keywords":"Assemble, Docker Enterprise, Spring Boot, container image"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/machine/reference/ssh/",
 "title":"docker-machine ssh",
 "description":"Log into or run a command on a machine using SSH.",
@@ -4481,6 +4663,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/stop/",
+"title":"docker/ucp stop",
+"description":"Stop UCP components running on this node",
+"keywords":"ucp, cli, stop"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/stop/",
 "title":"docker-compose stop",
 "description":"Stops running containers without removing them. ",
@@ -4510,6 +4699,13 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/support/",
+"title":"docker/ucp support",
+"description":"Create a support dump for UCP nodes",
+"keywords":"ucp, cli, support, support dump, troubleshooting"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/support/",
 "title":"docker/ucp support",
 "description":"Create a support dump for UCP nodes",
 "keywords":"ucp, cli, support, support dump, troubleshooting"
@@ -4964,6 +5160,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/uninstall-ucp/",
+"title":"docker/ucp uninstall-ucp",
+"description":"Uninstall UCP from this swarm",
+"keywords":"ucp, cli, uninstall-ucp"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/uninstall/",
 "title":"Uninstall UCP",
 "description":"Learn how to uninstall a Docker Universal Control Plane swarm.",
@@ -5031,6 +5234,20 @@ var pages = [
 "title":"docker/ucp upgrade",
 "description":"Upgrade the UCP components on this node",
 "keywords":"ucp, cli, upgrade"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/upgrade/",
+"title":"docker/ucp upgrade",
+"description":"Upgrade the UCP components on this node",
+"keywords":"ucp, cli, upgrade"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/upgrade/",
+"title":"docker/dtr upgrade",
+"description":"Upgrade DTR 2.5.x cluster to this version",
+"keywords":"dtr, cli, upgrade"
 }
 ,
 {

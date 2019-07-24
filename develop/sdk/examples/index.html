@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-24 10:32:57 +0900 -->
+<!-- Page generated 2019-07-24 14:46:16 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-24T10:32:57+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-24T14:46:16+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="After you install Docker, you can install the Go and Python SDKs and also try out the Docker Engine API. Each of these examples show how to perform a given..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-24T10:32:57+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-24T14:46:16+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="developing, api, sdk, developers, rest, curl, python, go">
@@ -218,18 +218,18 @@ command prompt:</p>
     <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
 
 </span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
-	</span><span class="s">"io"</span><span class="x">
 	</span><span class="s">"os"</span><span class="x">
 
 	</span><span class="s">"github.com/docker/docker/api/types"</span><span class="x">
 	</span><span class="s">"github.com/docker/docker/api/types/container"</span><span class="x">
+	</span><span class="s">"github.com/docker/docker/pkg/stdcopy"</span><span class="x">
 	</span><span class="s">"github.com/docker/docker/client"</span><span class="x">
 	</span><span class="s">"golang.org/x/net/context"</span><span class="x">
 </span><span class="p">)</span><span class="x">
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -267,7 +267,7 @@ command prompt:</p>
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
 
-	</span><span class="n">io</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span><span class="x"> </span><span class="n">out</span><span class="p">)</span><span class="x">
+	</span><span class="n">stdcopy</span><span class="o">.</span><span class="n">StdCopy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span><span class="x"> </span><span class="n">os</span><span class="o">.</span><span class="n">Stderr</span><span class="p">,</span><span class="x"> </span><span class="n">out</span><span class="p">)</span><span class="x">
 </span><span class="p">}</span><span class="x">
 </span></code></pre></div>    </div>
 
@@ -329,7 +329,7 @@ hello world
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -406,7 +406,8 @@ hello world
 </span><span class="p">)</span><span class="x">
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -479,7 +480,7 @@ the service running in its configured state.</p>
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -555,7 +556,7 @@ to change the hard-coded ID of the container to print the logs for.</p>
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -618,7 +619,8 @@ Reticulating spline 5...
 </span><span class="p">)</span><span class="x">
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -684,7 +686,7 @@ Reticulating spline 5...
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -757,7 +759,7 @@ HTTPS. Private registries should also be configured to use HTTPS.</p>
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
@@ -848,7 +850,7 @@ JSON structure.</p>
 
 </span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
 	</span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewEnvClient</span><span class="p">()</span><span class="x">
+	</span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
 	</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
 		</span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
 	</span><span class="p">}</span><span class="x">
