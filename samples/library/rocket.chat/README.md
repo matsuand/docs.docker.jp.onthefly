@@ -16,7 +16,7 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`1.0.3`, `1.0`, `1`, `latest` (*Dockerfile*)](https://github.com/RocketChat/Docker.Official.Image/blob/1887627741afe9280adc14625e8f6369a6d971b4/Dockerfile)
+-	[`1.2.1`, `1.2`, `1`, `latest`](https://github.com/RocketChat/Docker.Official.Image/blob/8501d842cf576ad54a237aa557f48ebce5d67866/Dockerfile)
 
 # Quick reference
 
@@ -42,9 +42,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `rocket.chat/` directory](https://github.com/docker-library/docs/tree/master/rocket.chat) ([history](https://github.com/docker-library/docs/commits/master/rocket.chat))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # Rocket.Chat
 

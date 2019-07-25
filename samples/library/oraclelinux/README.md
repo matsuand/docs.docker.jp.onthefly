@@ -16,10 +16,12 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`7.6`, `7`, `latest` (*7.6/Dockerfile*)](https://github.com/oracle/container-images/blob/24239f1bcc5080501919f31cf8edc8de8d2b628f/7.6/Dockerfile)
--	[`7-slim` (*7-slim/Dockerfile*)](https://github.com/oracle/container-images/blob/24239f1bcc5080501919f31cf8edc8de8d2b628f/7-slim/Dockerfile)
--	[`6.10`, `6` (*6.10/Dockerfile*)](https://github.com/oracle/container-images/blob/24239f1bcc5080501919f31cf8edc8de8d2b628f/6.10/Dockerfile)
--	[`6-slim` (*6-slim/Dockerfile*)](https://github.com/oracle/container-images/blob/24239f1bcc5080501919f31cf8edc8de8d2b628f/6-slim/Dockerfile)
+-	[`8.0`, `8`](https://github.com/oracle/container-images/blob/9c633ff80efaaa9106a28eec3495cbc47cda534e/8.0/Dockerfile)
+-	[`8-slim`](https://github.com/oracle/container-images/blob/9c633ff80efaaa9106a28eec3495cbc47cda534e/8-slim/Dockerfile)
+-	[`7.6`, `7`, `latest`](https://github.com/oracle/container-images/blob/9c633ff80efaaa9106a28eec3495cbc47cda534e/7.6/Dockerfile)
+-	[`7-slim`](https://github.com/oracle/container-images/blob/9c633ff80efaaa9106a28eec3495cbc47cda534e/7-slim/Dockerfile)
+-	[`6.10`, `6`](https://github.com/oracle/container-images/blob/9c633ff80efaaa9106a28eec3495cbc47cda534e/6.10/Dockerfile)
+-	[`6-slim`](https://github.com/oracle/container-images/blob/9c633ff80efaaa9106a28eec3495cbc47cda534e/6-slim/Dockerfile)
 
 # Quick reference
 
@@ -45,9 +47,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `oraclelinux/` directory](https://github.com/docker-library/docs/tree/master/oraclelinux) ([history](https://github.com/docker-library/docs/commits/master/oraclelinux))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # Oracle Linux
 

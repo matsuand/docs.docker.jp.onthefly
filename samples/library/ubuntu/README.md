@@ -16,12 +16,11 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`18.04`, `bionic-20190515`, `bionic`, `latest` (*bionic/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/010bf9649b1d10e2c34b159a9a9b338d0fdd4939/bionic/Dockerfile)
--	[`18.10`, `cosmic-20190515`, `cosmic` (*cosmic/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/010bf9649b1d10e2c34b159a9a9b338d0fdd4939/cosmic/Dockerfile)
--	[`19.04`, `disco-20190515`, `disco`, `rolling` (*disco/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/010bf9649b1d10e2c34b159a9a9b338d0fdd4939/disco/Dockerfile)
--	[`19.10`, `eoan-20190508`, `eoan`, `devel` (*eoan/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/010bf9649b1d10e2c34b159a9a9b338d0fdd4939/eoan/Dockerfile)
--	[`14.04`, `trusty-20190515`, `trusty` (*trusty/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/010bf9649b1d10e2c34b159a9a9b338d0fdd4939/trusty/Dockerfile)
--	[`16.04`, `xenial-20190515`, `xenial` (*xenial/Dockerfile*)](https://github.com/tianon/docker-brew-ubuntu-core/blob/010bf9649b1d10e2c34b159a9a9b338d0fdd4939/xenial/Dockerfile)
+-	[`18.04`, `bionic-20190718`, `bionic`, `latest`](https://github.com/tianon/docker-brew-ubuntu-core/blob/105329f5da5f205e3d2bcb1f96ce32a472e56239/bionic/Dockerfile)
+-	[`18.10`, `cosmic-20190719`, `cosmic`](https://github.com/tianon/docker-brew-ubuntu-core/blob/105329f5da5f205e3d2bcb1f96ce32a472e56239/cosmic/Dockerfile)
+-	[`19.04`, `disco-20190718`, `disco`, `rolling`](https://github.com/tianon/docker-brew-ubuntu-core/blob/105329f5da5f205e3d2bcb1f96ce32a472e56239/disco/Dockerfile)
+-	[`19.10`, `eoan-20190717.1`, `eoan`, `devel`](https://github.com/tianon/docker-brew-ubuntu-core/blob/105329f5da5f205e3d2bcb1f96ce32a472e56239/eoan/Dockerfile)
+-	[`16.04`, `xenial-20190720`, `xenial`](https://github.com/tianon/docker-brew-ubuntu-core/blob/105329f5da5f205e3d2bcb1f96ce32a472e56239/xenial/Dockerfile)
 
 # Quick reference
 
@@ -47,9 +46,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `ubuntu/` directory](https://github.com/docker-library/docs/tree/master/ubuntu) ([history](https://github.com/docker-library/docs/commits/master/ubuntu))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # What is Ubuntu?
 

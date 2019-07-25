@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-24 10:32:57 +0900 -->
+<!-- Page generated 2019-07-25 21:37:13 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -65,7 +65,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-24T10:32:57+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-25T21:37:13+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -75,7 +75,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Composer is a dependency manager written in and for PHP. GitHub repo: https://github.com/composer/docker Library reference This content is imported from the official Docker Library docs, and is provided by the..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-24T10:32:57+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-25T21:37:13+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="library, sample, composer">
@@ -213,8 +213,8 @@ WARNING:
 <h1 id="supported-tags-and-respective-dockerfile-links">Supported tags and respective <code class="highlighter-rouge">Dockerfile</code> links</h1>
 
 <ul>
-  <li><a href="https://github.com/composer/docker/blob/b09945e1c20d64bc62b20dbc20e77eec93d3ee87/1.8/Dockerfile"><code class="highlighter-rouge">1.8.5</code>, <code class="highlighter-rouge">1.8</code>, <code class="highlighter-rouge">1</code>, <code class="highlighter-rouge">latest</code> (<em>1.8/Dockerfile</em>)</a></li>
-  <li><a href="https://github.com/composer/docker/blob/b09945e1c20d64bc62b20dbc20e77eec93d3ee87/1.7/Dockerfile"><code class="highlighter-rouge">1.7.3</code>, <code class="highlighter-rouge">1.7</code> (<em>1.7/Dockerfile</em>)</a></li>
+  <li><a href="https://github.com/composer/docker/blob/151ce4cdbd0b1cb8216b7c893dd11833e61c4108/1.8/Dockerfile"><code class="highlighter-rouge">1.8.6</code>, <code class="highlighter-rouge">1.8</code>, <code class="highlighter-rouge">1</code>, <code class="highlighter-rouge">latest</code></a></li>
+  <li><a href="https://github.com/composer/docker/blob/08e7cbcf72b58ebb5b9d2b6e08b2ebf029206dd7/1.7/Dockerfile"><code class="highlighter-rouge">1.7.3</code>, <code class="highlighter-rouge">1.7</code></a></li>
 </ul>
 
 <h1 id="quick-reference">Quick reference</h1>
@@ -230,7 +230,7 @@ WARNING:
   </li>
   <li>
     <p><strong>Maintained by</strong>:<br />
-<a href="https://github.com/composer/docker">Composer</a></p>
+<a href="https://github.com/alcohol">Rob Bast</a>, with <a href="https://github.com/composer/docker/graphs/contributors">contributions</a> from the community.</p>
   </li>
   <li>
     <p><strong>Supported architectures</strong>: (<a href="https://github.com/docker-library/official-images#architectures-other-than-amd64">more info</a>)<br />
@@ -249,10 +249,6 @@ WARNING:
   <li>
     <p><strong>Source of this description</strong>:<br />
 <a href="https://github.com/docker-library/docs/tree/master/composer">docs repo’s <code class="highlighter-rouge">composer/</code> directory</a> (<a href="https://github.com/docker-library/docs/commits/master/composer">history</a>)</p>
-  </li>
-  <li>
-    <p><strong>Supported Docker versions</strong>:<br />
-<a href="https://github.com/docker/docker-ce/releases/latest">the latest release</a> (down to 1.6 on a best-effort basis)</p>
   </li>
 </ul>
 
@@ -281,7 +277,7 @@ WARNING:
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
   <span class="nt">--volume</span> <span class="nv">$PWD</span>:/app <span class="se">\</span>
-  <span class="nt">--volume</span> <span class="nv">$COMPOSER_HOME</span>:/tmp <span class="se">\</span>
+  <span class="nt">--volume</span> <span class="k">${</span><span class="nv">COMPOSER_HOME</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.composer</span><span class="k">}</span>:/tmp <span class="se">\</span>
   composer install
 </code></pre></div></div>
 
@@ -289,13 +285,11 @@ WARNING:
 
 <p>Or if you are following the XDG specification:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nv">COMPOSER_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/.config/composer <span class="se">\</span>
-  <span class="nv">COMPOSER_CACHE_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/.cache/composer <span class="se">\</span>
-  docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
   <span class="nt">--env</span> COMPOSER_HOME <span class="se">\</span>
   <span class="nt">--env</span> COMPOSER_CACHE_DIR <span class="se">\</span>
-  <span class="nt">--volume</span> <span class="nv">$COMPOSER_HOME</span>:<span class="nv">$COMPOSER_HOME</span> <span class="se">\</span>
-  <span class="nt">--volume</span> <span class="nv">$COMPOSER_CACHE_DIR</span>:<span class="nv">$COMPOSER_CACHE_DIR</span> <span class="se">\</span>
+  <span class="nt">--volume</span> <span class="k">${</span><span class="nv">COMPOSER_HOME</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.config/composer</span><span class="k">}</span>:<span class="nv">$COMPOSER_HOME</span> <span class="se">\</span>
+  <span class="nt">--volume</span> <span class="k">${</span><span class="nv">COMPOSER_CACHE_DIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.cache/composer</span><span class="k">}</span>:<span class="nv">$COMPOSER_CACHE_DIR</span> <span class="se">\</span>
   <span class="nt">--volume</span> <span class="nv">$PWD</span>:/app <span class="se">\</span>
   composer install
 </code></pre></div></div>
@@ -314,7 +308,8 @@ WARNING:
 
 <p>When you need to access private repositories, you will either need to share your configured credentials, or mount your <code class="highlighter-rouge">ssh-agent</code> socket inside the running container:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">eval</span> <span class="k">$(</span>ssh-agent<span class="k">)</span><span class="p">;</span> <span class="se">\</span>
+  docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
   <span class="nt">--volume</span> <span class="nv">$PWD</span>:/app <span class="se">\</span>
   <span class="nt">--volume</span> <span class="nv">$SSH_AUTH_SOCK</span>:/ssh-auth.sock <span class="se">\</span>
   <span class="nt">--env</span> <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span>/ssh-auth.sock <span class="se">\</span>
@@ -325,7 +320,8 @@ WARNING:
 
 <p>When combining the use of private repositories with running Composer as another user, you might run into non-existent user errors (thrown by ssh). To work around this, simply mount the host passwd and group files (read-only) into the container:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">eval</span> <span class="k">$(</span>ssh-agent<span class="k">)</span><span class="p">;</span> <span class="se">\</span>
+  docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
   <span class="nt">--volume</span> <span class="nv">$PWD</span>:/app <span class="se">\</span>
   <span class="nt">--volume</span> <span class="nv">$SSH_AUTH_SOCK</span>:/ssh-auth.sock <span class="se">\</span>
   <span class="nt">--volume</span> /etc/passwd:/etc/passwd:ro <span class="se">\</span>
@@ -337,54 +333,42 @@ WARNING:
 
 <h1 id="troubleshooting">Troubleshooting</h1>
 
-<h3 id="php-versions">PHP versions</h3>
+<h3 id="php-version--extensions">PHP version &amp; extensions</h3>
 
-<p>Our image is aimed at quickly running Composer without the need for having a PHP runtime installed. You should not rely on the PHP version in our container. We do not provide a Composer image for each supported PHP version because we do not want to encourage using Composer as a base image or a production image.</p>
+<p>Our image is aimed at quickly running Composer without the need for having a PHP runtime installed on your host. You should not rely on the PHP version in our container. We do not provide a Composer image for each supported PHP version because we do not want to encourage using Composer as a base image or a production image.</p>
+
+<p>We try to deliver an image that is as lean as possible, built for running Composer only. Sometimes dependencies or Composer <a href="https://getcomposer.org/doc/articles/scripts.md">scripts</a> require the availability of certain PHP extensions.</p>
 
 <p>Suggestions:</p>
 
 <ul>
   <li>
-    <p>use <a href="https://getcomposer.org/doc/03-cli.md#install-i"><code class="highlighter-rouge">--ignore-platform-reqs</code></a>:</p>
+    <p>(optimal) create your own build image and <a href="https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md">install</a> Composer inside it.</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> composer install <span class="nt">--ignore-platform-reqs</span>
+    <p><strong>Note:</strong> Docker 17.05 introduced <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">multi-stage builds</a>, simplifying this enormously:</p>
+
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> --from=composer /usr/bin/composer /usr/bin/composer</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>specify the target <a href="https://getcomposer.org/doc/06-config.md#platform">platform</a> in your <code class="highlighter-rouge">composer.json</code>:</p>
+    <p>(alternatively) specify the target <a href="https://getcomposer.org/doc/06-config.md#platform">platform</a> / extension(s) in your <code class="highlighter-rouge">composer.json</code>:</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"platform"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"php"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.1.3"</span><span class="w">
+      </span><span class="s2">"php"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAJOR.MINOR.PATCH"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ext-something"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
   </li>
-</ul>
-
-<h3 id="php-extensions">PHP extensions</h3>
-
-<p>We aim to deliver an image that is as lean as possible, built for running Composer only. Sometimes dependencies or Composer <a href="https://getcomposer.org/doc/articles/scripts.md">scripts</a> require the availability of certain PHP extensions.</p>
-
-<p>Suggestions:</p>
-
-<ul>
   <li>
-    <p>pass the <code class="highlighter-rouge">--ignore-platform-reqs</code> and / or <code class="highlighter-rouge">--no-scripts</code> flags to <code class="highlighter-rouge">install</code> or <code class="highlighter-rouge">update</code>:</p>
+    <p>(discouraged) pass the <a href="https://getcomposer.org/doc/03-cli.md#install-i"><code class="highlighter-rouge">--ignore-platform-reqs</code></a> and / or <code class="highlighter-rouge">--no-scripts</code> flags to <code class="highlighter-rouge">install</code> or <code class="highlighter-rouge">update</code>:</p>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">--rm</span> <span class="nt">--interactive</span> <span class="nt">--tty</span> <span class="se">\</span>
   <span class="nt">--volume</span> <span class="nv">$PWD</span>:/app <span class="se">\</span>
   composer install <span class="nt">--ignore-platform-reqs</span> <span class="nt">--no-scripts</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>create your own buid image and <a href="https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md">install</a> Composer inside it.</p>
-
-    <p><strong>Note:</strong> Docker 17.05 introduced <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">multi-stage builds</a>, simplifying this enormously:</p>
-
-    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> --from=composer /usr/bin/composer /usr/bin/composer</span>
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -467,7 +451,7 @@ WARNING:
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v18.09.local/_samples/library/composer/index.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/_samples/library/composer/index.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
 										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [_samples/library/composer/index.md](https://matsuand.github.io/docs.docker.jp.onthefly/samples/library/composer/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
@@ -499,8 +483,7 @@ WARNING:
       <li><a href="#persistent-cache--global-configuration" class="nomunge">Persistent cache / global configuration</a></li>
       <li><a href="#filesystem-permissions" class="nomunge">Filesystem permissions</a></li>
       <li><a href="#private-repositories--ssh-agent" class="nomunge">Private repositories / SSH agent</a></li>
-      <li><a href="#php-versions" class="nomunge">PHP versions</a></li>
-      <li><a href="#php-extensions" class="nomunge">PHP extensions</a></li>
+      <li><a href="#php-version--extensions" class="nomunge">PHP version &amp; extensions</a></li>
     </ul>
   </li>
 </ul>

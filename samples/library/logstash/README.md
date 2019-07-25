@@ -16,8 +16,8 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`7.0.1` (*7/Dockerfile*)](https://github.com/docker-library/logstash/blob/1b02afc41ee115cf8b955d15e962ab68ba657b2d/7/Dockerfile)
--	[`6.7.2` (*6/Dockerfile*)](https://github.com/docker-library/logstash/blob/f91cee2e8b540a9ed6592058f6622ea2b43b749e/6/Dockerfile)
+-	[`7.2.0`](https://github.com/docker-library/logstash/blob/26c49635928bdded0c1bc64df411dbdeb610c3ac/7/Dockerfile)
+-	[`6.8.1`](https://github.com/docker-library/logstash/blob/a3e35795ecb2890e27611b092f8930c26b8d70c9/6/Dockerfile)
 
 # Quick reference
 
@@ -43,9 +43,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `logstash/` directory](https://github.com/docker-library/docs/tree/master/logstash) ([history](https://github.com/docker-library/docs/commits/master/logstash))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # What is Logstash?
 

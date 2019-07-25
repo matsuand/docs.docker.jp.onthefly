@@ -16,34 +16,35 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`beta` (*beta/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/beta/Dockerfile)
--	[`19.0.0.4-kernel`, `kernel` (*ga/19.0.0.4/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/kernel/Dockerfile)
--	[`19.0.0.4-javaee8`, `javaee8`, `latest` (*ga/19.0.0.4/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/javaee8/Dockerfile)
--	[`19.0.0.4-webProfile8`, `webProfile8` (*ga/19.0.0.4/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/webProfile8/Dockerfile)
--	[`19.0.0.4-microProfile1`, `microProfile1` (*ga/19.0.0.4/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/microProfile1/Dockerfile)
--	[`19.0.0.4-microProfile2`, `microProfile2` (*ga/19.0.0.4/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/microProfile2/Dockerfile)
--	[`19.0.0.4-springBoot2`, `springBoot2` (*ga/19.0.0.4/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/springBoot2/Dockerfile)
--	[`19.0.0.4-springBoot1`, `springBoot1` (*ga/19.0.0.4/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/springBoot1/Dockerfile)
--	[`19.0.0.4-webProfile7`, `webProfile7` (*ga/19.0.0.4/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/webProfile7/Dockerfile)
--	[`19.0.0.4-javaee7`, `javaee7` (*ga/19.0.0.4/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.4/javaee7/Dockerfile)
--	[`19.0.0.3-kernel` (*ga/19.0.0.3/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/kernel/Dockerfile)
--	[`19.0.0.3-javaee8` (*ga/19.0.0.3/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/javaee8/Dockerfile)
--	[`19.0.0.3-webProfile8` (*ga/19.0.0.3/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/webProfile8/Dockerfile)
--	[`19.0.0.3-microProfile1` (*ga/19.0.0.3/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/microProfile1/Dockerfile)
--	[`19.0.0.3-microProfile2` (*ga/19.0.0.3/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/microProfile2/Dockerfile)
--	[`19.0.0.3-springBoot2` (*ga/19.0.0.3/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/springBoot2/Dockerfile)
--	[`19.0.0.3-springBoot1` (*ga/19.0.0.3/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/springBoot1/Dockerfile)
--	[`19.0.0.3-webProfile7` (*ga/19.0.0.3/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/webProfile7/Dockerfile)
--	[`19.0.0.3-javaee7` (*ga/19.0.0.3/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/19.0.0.3/javaee7/Dockerfile)
--	[`18.0.0.4-kernel` (*ga/18.0.0.4/kernel/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/kernel/Dockerfile)
--	[`18.0.0.4-javaee8` (*ga/18.0.0.4/javaee8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/javaee8/Dockerfile)
--	[`18.0.0.4-webProfile8` (*ga/18.0.0.4/webProfile8/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/webProfile8/Dockerfile)
--	[`18.0.0.4-microProfile1` (*ga/18.0.0.4/microProfile1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/microProfile1/Dockerfile)
--	[`18.0.0.4-microProfile2` (*ga/18.0.0.4/microProfile2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/microProfile2/Dockerfile)
--	[`18.0.0.4-springBoot2` (*ga/18.0.0.4/springBoot2/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/springBoot2/Dockerfile)
--	[`18.0.0.4-springBoot1` (*ga/18.0.0.4/springBoot1/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/springBoot1/Dockerfile)
--	[`18.0.0.4-webProfile7` (*ga/18.0.0.4/webProfile7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/webProfile7/Dockerfile)
--	[`18.0.0.4-javaee7` (*ga/18.0.0.4/javaee7/Dockerfile*)](https://github.com/WASdev/ci.docker/blob/f648a80c48e140db69380aa4af8d419e109a6431/ga/18.0.0.4/javaee7/Dockerfile)
+-	[`beta`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/beta/Dockerfile)
+-	[`kernel`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/kernel/Dockerfile)
+-	[`javaee8`, `latest`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/javaee8/Dockerfile)
+-	[`webProfile8`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/webProfile8/Dockerfile)
+-	[`microProfile1`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/microProfile1/Dockerfile)
+-	[`microProfile2`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/microProfile2/Dockerfile)
+-	[`microProfile3`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/microProfile3/Dockerfile)
+-	[`springBoot2`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/springBoot2/Dockerfile)
+-	[`springBoot1`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/springBoot1/Dockerfile)
+-	[`webProfile7`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/webProfile7/Dockerfile)
+-	[`javaee7`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/latest/javaee7/Dockerfile)
+-	[`19.0.0.6-kernel`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/kernel/Dockerfile)
+-	[`19.0.0.6-javaee8`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/javaee8/Dockerfile)
+-	[`19.0.0.6-webProfile8`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/webProfile8/Dockerfile)
+-	[`19.0.0.6-microProfile1`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/microProfile1/Dockerfile)
+-	[`19.0.0.6-microProfile2`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/microProfile2/Dockerfile)
+-	[`19.0.0.6-springBoot2`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/springBoot2/Dockerfile)
+-	[`19.0.0.6-springBoot1`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/springBoot1/Dockerfile)
+-	[`19.0.0.6-webProfile7`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/webProfile7/Dockerfile)
+-	[`19.0.0.6-javaee7`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.6/javaee7/Dockerfile)
+-	[`19.0.0.3-kernel`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/kernel/Dockerfile)
+-	[`19.0.0.3-javaee8`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/javaee8/Dockerfile)
+-	[`19.0.0.3-webProfile8`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/webProfile8/Dockerfile)
+-	[`19.0.0.3-microProfile1`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/microProfile1/Dockerfile)
+-	[`19.0.0.3-microProfile2`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/microProfile2/Dockerfile)
+-	[`19.0.0.3-springBoot2`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/springBoot2/Dockerfile)
+-	[`19.0.0.3-springBoot1`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/springBoot1/Dockerfile)
+-	[`19.0.0.3-webProfile7`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/webProfile7/Dockerfile)
+-	[`19.0.0.3-javaee7`](https://github.com/WASdev/ci.docker/blob/3490ca45915923fb8cb3d96e672cf006a62a8aeb/ga/19.0.0.3/javaee7/Dockerfile)
 
 # Quick reference
 
@@ -69,9 +70,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `websphere-liberty/` directory](https://github.com/docker-library/docs/tree/master/websphere-liberty) ([history](https://github.com/docker-library/docs/commits/master/websphere-liberty))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # Overview
 
@@ -177,11 +175,11 @@ Note: If you are using the boot2docker virtual machine on OS X or Windows, you n
 
 For greater flexibility over configuration, it is possible to mount an entire server configuration directory from the host and then specify the server name as a parameter to the run command. Note: This particular example server configuration provides only HTTP access.
 
-	```console
-	$ docker run -d -p 80:9080 \
-	  -v /tmp/DefaultServletEngine:/config \
-	  websphere-liberty:webProfile8
-	```
+```console
+$ docker run -d -p 80:9080 \
+      -v /tmp/DefaultServletEngine:/config \
+      websphere-liberty:webProfile8
+```
 
 # Using `springBoot` images
 

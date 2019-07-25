@@ -16,7 +16,7 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`latest`, `2019.03` (*Dockerfile*)](https://github.com/perl6/docker/blob/2c1918ca12cda5aa3b63408a85f15200162f78fa/Dockerfile)
+-	[`latest`, `2019.03`](https://github.com/perl6/docker/blob/e26d1937190790a6b6110ba8220b98fe3bb97c04/Dockerfile)
 
 # Quick reference
 
@@ -42,9 +42,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `rakudo-star/` directory](https://github.com/docker-library/docs/tree/master/rakudo-star) ([history](https://github.com/docker-library/docs/commits/master/rakudo-star))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # What is Rakudo Star?
 

@@ -120,6 +120,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/app-template/api-reference/",
+"title":"Docker Template API reference",
+"description":"Docker Template API reference",
+"keywords":"application, template, API, definition"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/security/apparmor/",
 "title":"AppArmor security profiles for Docker",
 "description":"Enabling AppArmor in Docker",
@@ -1251,6 +1258,20 @@ var pages = [
 "title":"docker",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/cis/docker_ce/",
+"title":"CIS Docker CE benchmark",
+"description":"CIS Docker CE Benchmark information",
+"keywords":"standards, compliance, security, benchmark"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compliance/cis/docker_ee/",
+"title":"CIS Docker EE benchmark",
+"description":"CIS Docker EE Benchmark information",
+"keywords":"standards, compliance, security, benchmark"
 }
 ,
 {
@@ -2752,6 +2773,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/compliance/cis/k8s/",
+"title":"CIS Kubernetes benchmark",
+"description":"CIS Kubernetes Benchmark information",
+"keywords":"standards, compliance, security, benchmark"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/swarm/key-concepts/",
 "title":"Swarm mode key concepts",
 "description":"Introducing key concepts for Docker Engine swarm mode",
@@ -3418,7 +3446,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/compliance/oscal/",
-"title":"OSCAL",
+"title":"OSCAL (Experimental)",
 "description":"OSCAL compliance guidance for Docker Enterprise",
 "keywords":"standards, compliance, security, benchmark"
 }
@@ -5566,6 +5594,27 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/app/working-with-app/",
+"title":"Working with Docker App (experimental)",
+"description":"Learn about Docker App",
+"keywords":"Docker App, applications, compose, orchestration"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/context/working-with-contexts/",
+"title":"Working with Contexts",
+"description":"Learn about Docker Contexts",
+"keywords":"engine, contexts, cli, kubernetes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/app-template/working-with-template/",
+"title":"Working with Docker Template (experimental)",
+"description":"Working with Docker Application Template",
+"keywords":"Docker, application template, Application Designer,"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/",
 "title":"Use the ZFS storage driver",
 "description":"Learn how to optimize your use of ZFS driver.",
@@ -5779,7 +5828,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/samples/library/eclipse-mosquitto/",
 "title":"eclipse-mosquitto",
-"description":"Eclipse Mosquitto is an open source message broker which implements MQTT version 3.1 and 3.1.1",
+"description":"Eclipse Mosquitto is an open source message broker which implements MQTT version 5, 3.1.1 and 3.1",
 "keywords":"library, sample, eclipse-mosquitto"
 }
 ,

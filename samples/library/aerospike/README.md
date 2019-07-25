@@ -16,9 +16,9 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`4.5.2.2`, `latest` (*Dockerfile*)](https://github.com/aerospike/aerospike-server.docker/blob/18cc1df7736c784a3387457f1f4e0188cdffc36e/Dockerfile)
--	[`4.4.0.15` (*Dockerfile*)](https://github.com/aerospike/aerospike-server.docker/blob/b67f57f9446db09faf983b8946c52c223cb8e58a/Dockerfile)
--	[`4.5.1.7` (*Dockerfile*)](https://github.com/aerospike/aerospike-server.docker/blob/e9924ef6f7f9d7d2a302d05ca722ace536a669f0/Dockerfile)
+-	[`4.5.3.4`, `latest`](https://github.com/aerospike/aerospike-server.docker/blob/9a9834105e61c1e4f4b0db1229fbfc6826837ebf/Dockerfile)
+-	[`4.5.2.4`](https://github.com/aerospike/aerospike-server.docker/blob/41764e219116dcf4a5e1f8107c7cc7e417db32ad/Dockerfile)
+-	[`4.5.1.9`](https://github.com/aerospike/aerospike-server.docker/blob/db264ab583354b33e9cda20b08d2d528f23a8e72/Dockerfile)
 
 # Quick reference
 
@@ -44,9 +44,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `aerospike/` directory](https://github.com/docker-library/docs/tree/master/aerospike) ([history](https://github.com/docker-library/docs/commits/master/aerospike))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # Aerospike
 

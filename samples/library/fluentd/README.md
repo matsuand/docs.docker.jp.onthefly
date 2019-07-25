@@ -16,8 +16,8 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`v1.4.2-2.0`, `v1.4-2`, `latest` (*v1.4/alpine/Dockerfile*)](https://github.com/fluent/fluentd-docker-image/blob/dabca3c327d08be6d43a8919316a57ca2228e603/v1.4/alpine/Dockerfile)
--	[`v1.4.2-debian-2.0`, `v1.4-debian-2` (*v1.4/debian/Dockerfile*)](https://github.com/fluent/fluentd-docker-image/blob/dabca3c327d08be6d43a8919316a57ca2228e603/v1.4/debian/Dockerfile)
+-	[`v1.6.2-1.0`, `v1.6-1`, `latest`](https://github.com/fluent/fluentd-docker-image/blob/afd86b680c14633d7ebdb2d6c24cab5ae6183826/v1.6/alpine/Dockerfile)
+-	[`v1.6.2-debian-1.0`, `v1.6-debian-1`](https://github.com/fluent/fluentd-docker-image/blob/afd86b680c14633d7ebdb2d6c24cab5ae6183826/v1.6/debian/Dockerfile)
 
 # Quick reference
 
@@ -43,9 +43,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `fluentd/` directory](https://github.com/docker-library/docs/tree/master/fluentd) ([history](https://github.com/docker-library/docs/commits/master/fluentd))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # What is Fluentd?
 

@@ -16,12 +16,12 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
--	[`1.8`, `1.8.3` (*telegraf/1.8/Dockerfile*)](https://github.com/influxdata/influxdata-docker/blob/e634c07845190c8bf3798271770e4e8b5c91ad3e/telegraf/1.8/Dockerfile)
--	[`1.8-alpine`, `1.8.3-alpine` (*telegraf/1.8/alpine/Dockerfile*)](https://github.com/influxdata/influxdata-docker/blob/e634c07845190c8bf3798271770e4e8b5c91ad3e/telegraf/1.8/alpine/Dockerfile)
--	[`1.9`, `1.9.5` (*telegraf/1.9/Dockerfile*)](https://github.com/influxdata/influxdata-docker/blob/e634c07845190c8bf3798271770e4e8b5c91ad3e/telegraf/1.9/Dockerfile)
--	[`1.9-alpine`, `1.9.5-alpine` (*telegraf/1.9/alpine/Dockerfile*)](https://github.com/influxdata/influxdata-docker/blob/e634c07845190c8bf3798271770e4e8b5c91ad3e/telegraf/1.9/alpine/Dockerfile)
--	[`1.10`, `1.10.4`, `latest` (*telegraf/1.10/Dockerfile*)](https://github.com/influxdata/influxdata-docker/blob/e634c07845190c8bf3798271770e4e8b5c91ad3e/telegraf/1.10/Dockerfile)
--	[`1.10-alpine`, `1.10.4-alpine`, `alpine` (*telegraf/1.10/alpine/Dockerfile*)](https://github.com/influxdata/influxdata-docker/blob/e634c07845190c8bf3798271770e4e8b5c91ad3e/telegraf/1.10/alpine/Dockerfile)
+-	[`1.9`, `1.9.5`](https://github.com/influxdata/influxdata-docker/blob/aa8020d0f9d4f956a69801ab66e5db07777decef/telegraf/1.9/Dockerfile)
+-	[`1.9-alpine`, `1.9.5-alpine`](https://github.com/influxdata/influxdata-docker/blob/aa8020d0f9d4f956a69801ab66e5db07777decef/telegraf/1.9/alpine/Dockerfile)
+-	[`1.10`, `1.10.4`](https://github.com/influxdata/influxdata-docker/blob/aa8020d0f9d4f956a69801ab66e5db07777decef/telegraf/1.10/Dockerfile)
+-	[`1.10-alpine`, `1.10.4-alpine`](https://github.com/influxdata/influxdata-docker/blob/aa8020d0f9d4f956a69801ab66e5db07777decef/telegraf/1.10/alpine/Dockerfile)
+-	[`1.11`, `1.11.3`, `latest`](https://github.com/influxdata/influxdata-docker/blob/aa8020d0f9d4f956a69801ab66e5db07777decef/telegraf/1.11/Dockerfile)
+-	[`1.11-alpine`, `1.11.3-alpine`, `alpine`](https://github.com/influxdata/influxdata-docker/blob/aa8020d0f9d4f956a69801ab66e5db07777decef/telegraf/1.11/alpine/Dockerfile)
 
 # Quick reference
 
@@ -47,9 +47,6 @@ WARNING:
 
 -	**Source of this description**:  
 	[docs repo's `telegraf/` directory](https://github.com/docker-library/docs/tree/master/telegraf) ([history](https://github.com/docker-library/docs/commits/master/telegraf))
-
--	**Supported Docker versions**:  
-	[the latest release](https://github.com/docker/docker-ce/releases/latest) (down to 1.6 on a best-effort basis)
 
 # Telegraf
 
