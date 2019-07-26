@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-25 21:37:13 +0900 -->
+<!-- Page generated 2019-07-26 10:17:30 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,17 +86,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-25T21:37:13+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-26T10:17:30+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker/ucp support"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Create a support dump for specified UCP nodes. Usage docker container run --rm \ --name ucp \ -v /var/run/docker.sock:/var/run/docker.sock \ docker/ucp \ support [command options] &gt; docker-support.tgz Description This command..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Create a support dump for specified UCP nodes. Usage docker container run --rm \ --name ucp \ --log-driver none \ --volume /var/run/docker.sock:/var/run/docker.sock \ docker/ucp \ support [command options] &gt; docker-support.tgz..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-25T21:37:13+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-26T10:17:30+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, cli, support, support dump, troubleshooting">
@@ -124,7 +124,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v19.03';
+	var dockerVersion = 'v19.03.1';
 	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
@@ -203,16 +203,18 @@
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run --rm \
         --name ucp \
-        -v /var/run/docker.sock:/var/run/docker.sock \
+        --log-driver none \
+        --volume /var/run/docker.sock:/var/run/docker.sock \
         docker/ucp \
         support [command options] &gt; docker-support.tgz
 </code></pre></div></div>
 
 <h2 id="description">Description</h2>
 
-<p>This command creates a support dump file for the specified node(s), and prints it to stdout. This includes
-the ID of the UCP components running on the node. The ID matches what you see when running
-the <code class="highlighter-rouge">docker info</code> command while using a client bundle, and is used by other commands as confirmation.</p>
+<p>This command creates a support dump file for the specified node(s), and prints
+it to stdout. This includes the ID of the UCP components running on the node.
+The ID matches what you see when running the <code class="highlighter-rouge">docker info</code> command while using
+a client bundle, and is used by other commands as confirmation.</p>
 
 <h2 id="options">Options</h2>
 
@@ -225,16 +227,12 @@ the <code class="highlighter-rouge">docker info</code> command while using a cli
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--loglines</code></td>
-      <td style="text-align: left">Specify number of lines to grab from <code class="highlighter-rouge">journalctl</code>. The default is 10,000 lines.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--debug, D</code></td>
+      <td style="text-align: left">Enable debug mode</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--nodes</code></td>
-      <td style="text-align: left">Select specific nodes on which to produce a support dump. Comma-separated node IDs are allowed. The default selects all nodes.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--servicedriller</code></td>
-      <td style="text-align: left">Run the swarm service driller (ssd) tool. For more information on this tool, see <a href="https://github.com/docker/libnetwork/tree/master/cmd/ssd">Docker Swarm Service Driller (ssd)</a> Not run by default.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">--jsonlog</code></td>
+      <td style="text-align: left">Produce json formatted output for easier parsing</td>
     </tr>
   </tbody>
 </table>
@@ -444,7 +442,7 @@ the <code class="highlighter-rouge">docker info</code> command while using a cli
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v19.03';
+	var dockerVersion = 'v19.03.1';
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = 'development';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty

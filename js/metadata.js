@@ -3718,6 +3718,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/port-check-server/",
+"title":"docker/ucp port-check-server",
+"description":"Check the firewall ports for UCP",
+"keywords":"ucp, cli, images"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/port/",
 "title":"docker-compose port",
 "description":"Prints the public port for a port bindings.",
@@ -4062,13 +4069,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/restart/",
-"title":"docker/ucp restart",
-"description":"Start or restart UCP components running on this node",
-"keywords":"ucp, cli, restart"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/restart/",
 "title":"docker/ucp restart",
 "description":"Start or restart UCP components running on this node",
 "keywords":"ucp, cli, restart"
@@ -4685,13 +4685,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/stop/",
-"title":"docker/ucp stop",
-"description":"Stop UCP components running on this node",
-"keywords":"ucp, cli, stop"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/stop/",
 "title":"docker/ucp stop",
 "description":"Stop UCP components running on this node",
 "keywords":"ucp, cli, stop"
@@ -5598,6 +5591,13 @@ var pages = [
 "title":"Working with Docker App (experimental)",
 "description":"Learn about Docker App",
 "keywords":"Docker App, applications, compose, orchestration"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/buildx/working-with-buildx/",
+"title":"Working with Docker Buildx (experimental)",
+"description":"Working with Docker Buildx",
+"keywords":"Docker, buildx, multi-arch"
 }
 ,
 {

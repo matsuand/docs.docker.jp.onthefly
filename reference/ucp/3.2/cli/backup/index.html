@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-25 21:37:13 +0900 -->
+<!-- Page generated 2019-07-26 10:17:30 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,7 +86,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-25T21:37:13+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-26T10:17:30+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -96,7 +96,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Create a backup of a UCP manager node. Usage docker container run --log-driver none --rm -i \ --name ucp \ -v /var/run/docker.sock:/var/run/docker.sock \ docker/ucp \ backup [command options] &gt; backup.tar..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-25T21:37:13+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-26T10:17:30+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, cli, backup">
@@ -124,7 +124,7 @@
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v19.03';
+	var dockerVersion = 'v19.03.1';
 	</script>
 </head>
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
@@ -191,7 +191,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    1 分
   
 </span>
 
@@ -221,21 +221,20 @@ from the backup of any previous manager.</p>
 <p>Note:</p>
 
 <ul>
-  <li>The backup contains private keys and other sensitive information. Use the
+  <li>
+    <p>The backup contains private keys and other sensitive information. Use the
 <code class="highlighter-rouge">--passphrase</code> flag to encrypt the backup with PGP-compatible encryption
-or <code class="highlighter-rouge">--no-passphrase</code> to opt out (not recommended).</li>
-  <li>If using the <code class="highlighter-rouge">--file</code> option, the path to the file must be bind mounted onto the container that is performing the backup, and the filepath must be relative to the container’s file tree. For example:
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  docker run &lt;other options&gt; --mount type=bind,src=/home/user/backup:/backup docker/ucp --file /backup/backup.tar
+or <code class="highlighter-rouge">--no-passphrase</code> to opt out (not recommended).</p>
+  </li>
+  <li>
+    <p>If using the <code class="highlighter-rouge">--file</code> option, the path to the file must be bind mounted
+onto the container that is performing the backup, and the filepath must be
+relative to the container’s file tree. For example:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run &lt;other options&gt; --mount type=bind,src=/home/user/backup:/backup docker/ucp --file /backup/backup.tar
 </code></pre></div>    </div>
   </li>
 </ul>
-
-<blockquote>
-  <p><strong>Note</strong>: A bind mount with a <code class="highlighter-rouge">/backup/</code> target path must be added to the container performing the backup. In this case, the backup file is placed in the source directory of the bind mount. For example:</p>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   docker run -v /nfs/ucp-backups:/backup docker/ucp-backup --file backup1.tar
-</code></pre></div>  </div>
-  <p>This command places the backup under the <code class="highlighter-rouge">/nfs/ucp-backups/backup1.tar</code> path on the host.</p>
-</blockquote>
 
 <h2 id="options">Options</h2>
 
@@ -248,27 +247,27 @@ or <code class="highlighter-rouge">--no-passphrase</code> to opt out (not recomm
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--debug, D</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">--debug, -D</code></td>
       <td style="text-align: left">Enable debug mode</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--file</code></td>
-      <td style="text-align: left">Name of the file for backup contents. This is ignored when <code class="highlighter-rouge">--interactive</code> is specified. If not provided, backup contents are sent to stdout.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--include-logs</code></td>
-      <td style="text-align: left">Only applicable is <code class="highlighter-rouge">--file</code> is specified. If <code class="highlighter-rouge">true</code>, includes logs from the backup execution in a file adjacent to the backup file, specified with the same name but with a <code class="highlighter-rouge">.log</code> extension. <strong>Note</strong>: Log files are not encrypted.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--interactive, i</code></td>
-      <td style="text-align: left">Run in interactive mode and prompt for configuration values</td>
+      <td style="text-align: left">--file <em>value</em></td>
+      <td style="text-align: left">Name of the file to write the backup contents to. Ignored in interactive mode</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">--jsonlog</code></td>
       <td style="text-align: left">Produce json formatted output for easier parsing</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--passphrase</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">--interactive, -i</code></td>
+      <td style="text-align: left">Run in interactive mode and prompt for configuration values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">--no-passphrase</code></td>
+      <td style="text-align: left">Opt out to encrypt the tar file with a passphrase (not recommended)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">--passphrase</code> <em>value</em></td>
       <td style="text-align: left">Encrypt the tar file with a passphrase</td>
     </tr>
   </tbody>
@@ -479,7 +478,7 @@ or <code class="highlighter-rouge">--no-passphrase</code> to opt out (not recomm
 	// Default to assuming this is an archive and hiding some stuff
 	// See js/archive.js and js/docs.js for logic relating to this
 	var isArchive = true;
-	var dockerVersion = 'v19.03';
+	var dockerVersion = 'v19.03.1';
 	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
 	var jekyllEnv = 'development';
 	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
