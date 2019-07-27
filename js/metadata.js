@@ -127,6 +127,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/desktop/app-designer/",
+"title":"Application Designer",
+"description":"Docker Desktop Enterprise Application Designer",
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/security/apparmor/",
 "title":"AppArmor security profiles for Docker",
 "description":"Enabling AppArmor in Docker",
@@ -281,13 +288,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/backup/",
-"title":"docker/ucp backup",
-"description":"Create a backup of a UCP manager node",
-"keywords":"ucp, cli, backup"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/backup/",
 "title":"docker/ucp backup",
 "description":"Create a backup of a UCP manager node",
@@ -296,13 +296,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/backup/",
-"title":"docker/dtr backup",
-"description":"Create a backup of DTR",
-"keywords":"dtr, cli, backup"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/backup/",
 "title":"docker/dtr backup",
 "description":"Create a backup of DTR",
 "keywords":"dtr, cli, backup"
@@ -1142,13 +1135,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/destroy/",
-"title":"docker/dtr destroy",
-"description":"Destroy a DTR replica's data",
-"keywords":"dtr, cli, destroy"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/develop/dev-best-practices/",
 "title":"Docker 開発のベストプラクティス",
 "description":"Docker アプリケーションの開発をより簡単に進めるための経験則を示します。",
@@ -1331,13 +1317,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/dump-certs/",
-"title":"docker/ucp dump-certs",
-"description":"Print the public certificates used by this UCP web server",
-"keywords":"ucp, cli, dump-certs"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/dump-certs/",
 "title":"docker/ucp dump-certs",
 "description":"Print the public certificates used by this UCP web server",
@@ -1374,13 +1353,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/emergency-repair/",
-"title":"docker/dtr emergency-repair",
-"description":"Recover DTR from loss of quorum",
-"keywords":"dtr, cli, emergency-repair"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/emergency-repair/",
 "title":"docker/dtr emergency-repair",
 "description":"Recover DTR from loss of quorum",
 "keywords":"dtr, cli, emergency-repair"
@@ -1496,13 +1468,6 @@ var pages = [
 "title":"docker events",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/example-config/",
-"title":"docker/ucp example-config",
-"description":"Display an example configuration file for UCP",
-"keywords":"ucp, cli, config, configuration"
 }
 ,
 {
@@ -1710,7 +1675,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/notary/getting_started/",
-"title":"Getting started with Docker Notary",
+"title":"Get started with Docker Notary",
 "description":"Performing basic operation to use Notary in tandem with Docker Content Trust.",
 "keywords":"docker, Notary, notary-client, docker content trust, content trust"
 }
@@ -1821,13 +1786,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/id/",
-"title":"docker/ucp id",
-"description":"Print the ID of UCP running on this node",
-"keywords":"ucp, cli, id"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/id/",
 "title":"docker/ucp id",
 "description":"Print the ID of UCP running on this node",
@@ -1933,13 +1891,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/images/",
-"title":"docker/ucp images",
-"description":"Verify the UCP images on this node",
-"keywords":"ucp, cli, images"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/images/",
 "title":"docker/ucp images",
 "description":"Verify the UCP images on this node",
@@ -1948,13 +1899,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/images/",
-"title":"docker/dtr images",
-"description":"List all the images necessary to install DTR",
-"keywords":"dtr, cli, images"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/images/",
 "title":"docker/dtr images",
 "description":"List all the images necessary to install DTR",
 "keywords":"dtr, cli, images"
@@ -2045,13 +1989,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/",
-"title":"docker/ucp overview",
-"description":"Learn about the commands available in the docker/ucp image.",
-"keywords":"ucp, cli, ucp"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/",
 "title":"docker/ucp overview",
 "description":"Learn about the commands available in the docker/ucp image.",
@@ -2060,13 +1997,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/",
-"title":"docker/dtr 概要",
-"description":"docker/dtr イメージにおいて利用可能なコマンドについて学ぶ。",
-"keywords":"dtr, install, uninstall, configure"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/",
 "title":"docker/dtr 概要",
 "description":"docker/dtr イメージにおいて利用可能なコマンドについて学ぶ。",
 "keywords":"dtr, install, uninstall, configure"
@@ -2255,10 +2185,17 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/desktop/",
+"title":"Docker Desktop Enterprise overview",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/",
 "title":"Docker Enterprise",
-"description":"Docker Enterprise、つまり Docker によりエンタープライズレベルのクラスター管理ソリューションについて学びます。",
-"keywords":"Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes"
+"description":"コンテナープラットフォーム分野をリードし、あらゆるインフラストラクチャーにおいてさまざまなアプリケーションを安全にビルド、共有、実行する Docker Enterprise について学びます。",
+"keywords":"Docker EE, Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes, CaaS"
 }
 ,
 {
@@ -2284,7 +2221,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/storage/storagedriver/",
-"title":"About storage drivers",
+"title":"ストレージドライバーについて",
 "description":"Learn the technologies that support storage drivers.",
 "keywords":"container, storage, driver, AUFS, btfs, devicemapper,zvfs"
 }
@@ -2584,13 +2521,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/install/",
-"title":"docker/ucp install",
-"description":"Install UCP on a node",
-"keywords":"ucp, cli, install"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/install/",
 "title":"docker/ucp install",
 "description":"Install UCP on a node",
@@ -2599,13 +2529,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/install/",
-"title":"docker/dtr install",
-"description":"Install Docker Trusted Registry",
-"keywords":"dtr, cli, install"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/install/",
 "title":"docker/dtr install",
 "description":"Install Docker Trusted Registry",
 "keywords":"dtr, cli, install"
@@ -2746,13 +2669,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/join/",
-"title":"docker/dtr join",
-"description":"Add a new replica to an existing DTR cluster",
-"keywords":"dtr, cli, join"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/join/",
 "title":"docker/dtr join",
 "description":"Add a new replica to an existing DTR cluster",
 "keywords":"dtr, cli, join"
@@ -3001,6 +2917,34 @@ var pages = [
 "title":"Maintenance",
 "description":"Maintenance reference",
 "keywords":"standards, compliance, security, 800-53, Maintenance"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/admin/configure/mac-admin/",
+"title":"Configure Docker Desktop Enterprise on Mac",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/troubleshoot/mac-issues/",
+"title":"Troubleshoot Docker Desktop Enterprise issues on Mac",
+"description":"Troubleshoot Mac issues",
+"keywords":"Troubleshoot, diagnose, Mac, issues, Docker Enterprise, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/user/mac-user/",
+"title":"Use Docker Desktop Enterprise on Mac",
+"description":null,
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/admin/install/mac/",
+"title":"Install Docker Desktop Enterprise on Mac",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Mac, Docker Desktop, Enterprise"
 }
 ,
 {
@@ -3928,13 +3872,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/reconfigure/",
-"title":"docker/dtr reconfigure",
-"description":"Change DTR configurations",
-"keywords":"dtr, cli, reconfigure"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/redirects/",
 "title":"Implement application redirects",
 "description":"Learn how to implement redirects using swarm services and the layer 7 routing solution for UCP.",
@@ -3967,6 +3904,20 @@ var pages = [
 "title":"DTR リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry",
 "keywords":"docker trusted registry, whats new, release notes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/release-notes/",
+"title":"Docker Desktop Enterprise release notes",
+"description":"Release notes for Docker Desktop Enterprise",
+"keywords":"Docker Desktop Enterprise, Windows, Mac, Docker Desktop, Enterprise,"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/release-notes/",
+"title":"Docker Enterprise release notes",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Enterprise.",
+"keywords":"engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes"
 }
 ,
 {
@@ -4006,13 +3957,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/remove/",
-"title":"docker/dtr remove",
-"description":"Remove a DTR replica from a cluster",
-"keywords":"dtr, cli, remove"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/remove/",
 "title":"docker/dtr remove",
 "description":"Remove a DTR replica from a cluster",
 "keywords":"dtr, cli, remove"
@@ -4068,13 +4012,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/restart/",
-"title":"docker/ucp restart",
-"description":"Start or restart UCP components running on this node",
-"keywords":"ucp, cli, restart"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/compose/reference/restart/",
 "title":"docker-compose restart",
 "description":"Restarts Docker Compose services.",
@@ -4096,13 +4033,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/restore/",
-"title":"docker/ucp restore",
-"description":"Restore a UCP cluster from a backup",
-"keywords":"ucp, cli, restore"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/restore/",
 "title":"docker/ucp restore",
 "description":"Restore a UCP cluster from a backup",
@@ -4111,13 +4041,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/restore/",
-"title":"docker/dtr restore",
-"description":"Install and restore DTR from an existing backup",
-"keywords":"dtr, cli, restore"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/restore/",
 "title":"docker/dtr restore",
 "description":"Install and restore DTR from an existing backup",
 "keywords":"dtr, cli, restore"
@@ -4684,13 +4607,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/stop/",
-"title":"docker/ucp stop",
-"description":"Stop UCP components running on this node",
-"keywords":"ucp, cli, stop"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/compose/reference/stop/",
 "title":"docker-compose stop",
 "description":"Stops running containers without removing them. ",
@@ -4716,13 +4632,6 @@ var pages = [
 "title":"Cache deployment strategy",
 "description":"Learn how to deploy DTR caches across multiple datacenters to make image pulls faster.",
 "keywords":"DTR, cache"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/support/",
-"title":"docker/ucp support",
-"description":"Create a support dump for UCP nodes",
-"keywords":"ucp, cli, support, support dump, troubleshooting"
 }
 ,
 {
@@ -5174,13 +5083,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/uninstall-ucp/",
-"title":"docker/ucp uninstall-ucp",
-"description":"Uninstall UCP from this swarm",
-"keywords":"ucp, cli, uninstall-ucp"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/uninstall-ucp/",
 "title":"docker/ucp uninstall-ucp",
 "description":"Uninstall UCP from this swarm",
@@ -5251,13 +5153,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/reference/ucp/3.1/cli/upgrade/",
-"title":"docker/ucp upgrade",
-"description":"Upgrade the UCP components on this node",
-"keywords":"ucp, cli, upgrade"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/upgrade/",
 "title":"docker/ucp upgrade",
 "description":"Upgrade the UCP components on this node",
@@ -5266,13 +5161,6 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/reference/dtr/2.7/cli/upgrade/",
-"title":"docker/dtr upgrade",
-"description":"Upgrade DTR 2.5.x cluster to this version",
-"keywords":"dtr, cli, upgrade"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/reference/dtr/2.6/cli/upgrade/",
 "title":"docker/dtr upgrade",
 "description":"Upgrade DTR 2.5.x cluster to this version",
 "keywords":"dtr, cli, upgrade"
@@ -5577,6 +5465,34 @@ var pages = [
 "title":"なぜ Docker for AWS か？",
 "description":"なぜ Docker for AWS か？",
 "keywords":"aws, amazon, iaas, why"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/admin/configure/windows-admin/",
+"title":"Configure Docker Desktop Enterprise on Windows",
+"description":"Learn about Docker Desktop Enterprise configuration",
+"keywords":"Docker Admin, Windows, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/troubleshoot/windows-issues/",
+"title":"Troubleshoot Docker Desktop Enterprise issues on Windows",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Docker Desktop, Enterprise, troubleshoot"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/user/windows-user/",
+"title":"Use Docker Desktop Enterprise on Windows",
+"description":"Exploring the Windows user interface",
+"keywords":"Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, User guide, user"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/desktop/admin/install/windows/",
+"title":"Install Docker Desktop Enterprise on Windows",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Docker Desktop, Enterprise"
 }
 ,
 {
