@@ -260,6 +260,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/cluster/aws/",
+"title":"Get started with Docker Cluster on AWS",
+"description":"Get started with Docker Cluster on AWS",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation, AWS"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/machine/examples/aws/",
 "title":"Amazon Web Services (AWS) EC2 example",
 "description":"Using Docker Machine to provision hosts on AWS",
@@ -544,6 +551,13 @@ var pages = [
 "title":"Notary client configuration file",
 "description":"Configuring the Notary client, server and signer.",
 "keywords":"docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/cluster/cluster-file/",
+"title":"Cluster file version 1 reference",
+"description":"Cluster file reference and guidelines",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
 }
 ,
 {
@@ -1443,6 +1457,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/cluster/reference/envvars/",
+"title":"Cluster CLI environment variables",
+"description":"Cluster CLI environment variables",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/envvars/",
 "title":"Compose CLI 環境変数",
 "description":"Compose CLI environment variables",
@@ -1947,6 +1968,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/cluster/",
+"title":"Overview of Docker Cluster",
+"description":"Introduction and Overview of Docker Cluster",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/toolbox/faqs/",
 "title":"FAQ とトラブルシューティング",
 "description":"FAQs, troubleshooting, and tips index for Toolbox installs",
@@ -2095,7 +2123,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/",
-"title":"Universal Control Plane overview",
+"title":"Universal Control Plane 概要",
 "description":"Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker.\n",
 "keywords":"ucp, overview, orchestration, cluster"
 }
@@ -3915,7 +3943,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/release-notes/",
-"title":"Docker Enterprise release notes",
+"title":"Docker Enterprise リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Enterprise.",
 "keywords":"engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes"
 }
@@ -4293,7 +4321,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/storage/storagedriver/select-storage-driver/",
-"title":"Docker storage drivers",
+"title":"Docker ストレージドライバー",
 "description":"Learn how to select the proper storage driver for your container.",
 "keywords":"container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2"
 }
