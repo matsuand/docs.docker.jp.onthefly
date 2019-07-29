@@ -261,8 +261,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/cluster/aws/",
-"title":"Get started with Docker Cluster on AWS",
-"description":"Get started with Docker Cluster on AWS",
+"title":"AWS 上にて Docker Cluster をはじめよう",
+"description":"AWS 上にて Docker Cluster をはじめよう。",
 "keywords":"documentation, docs, docker, cluster, infrastructure, automation, AWS"
 }
 ,
@@ -1969,8 +1969,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/cluster/",
-"title":"Overview of Docker Cluster",
-"description":"Introduction and Overview of Docker Cluster",
+"title":"Docker Cluster 概要",
+"description":"Docker Cluster の概要と導入。",
 "keywords":"documentation, docs, docker, cluster, infrastructure, automation"
 }
 ,

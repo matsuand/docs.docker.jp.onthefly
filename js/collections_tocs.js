@@ -2,702 +2,702 @@ var collectionsTOC = new Array()
 collectionsTOC["library"] = [
   
   {
-  "path":"/samples/library/adminer/",
+  "path":"/docs.docker.jp.onthefly/samples/library/adminer/",
   "title":"adminer"
   },
   
   {
-  "path":"/samples/library/aerospike/",
+  "path":"/docs.docker.jp.onthefly/samples/library/aerospike/",
   "title":"aerospike"
   },
   
   {
-  "path":"/samples/library/alpine/",
+  "path":"/docs.docker.jp.onthefly/samples/library/alpine/",
   "title":"alpine"
   },
   
   {
-  "path":"/samples/library/alt/",
+  "path":"/docs.docker.jp.onthefly/samples/library/alt/",
   "title":"alt"
   },
   
   {
-  "path":"/samples/library/amazoncorretto/",
+  "path":"/docs.docker.jp.onthefly/samples/library/amazoncorretto/",
   "title":"amazoncorretto"
   },
   
   {
-  "path":"/samples/library/amazonlinux/",
+  "path":"/docs.docker.jp.onthefly/samples/library/amazonlinux/",
   "title":"amazonlinux"
   },
   
   {
-  "path":"/samples/library/arangodb/",
+  "path":"/docs.docker.jp.onthefly/samples/library/arangodb/",
   "title":"arangodb"
   },
   
   {
-  "path":"/samples/library/backdrop/",
+  "path":"/docs.docker.jp.onthefly/samples/library/backdrop/",
   "title":"backdrop"
   },
   
   {
-  "path":"/samples/library/bash/",
+  "path":"/docs.docker.jp.onthefly/samples/library/bash/",
   "title":"bash"
   },
   
   {
-  "path":"/samples/library/bonita/",
+  "path":"/docs.docker.jp.onthefly/samples/library/bonita/",
   "title":"bonita"
   },
   
   {
-  "path":"/samples/library/buildpack-deps/",
+  "path":"/docs.docker.jp.onthefly/samples/library/buildpack-deps/",
   "title":"buildpack-deps"
   },
   
   {
-  "path":"/samples/library/busybox/",
+  "path":"/docs.docker.jp.onthefly/samples/library/busybox/",
   "title":"busybox"
   },
   
   {
-  "path":"/samples/library/cassandra/",
+  "path":"/docs.docker.jp.onthefly/samples/library/cassandra/",
   "title":"cassandra"
   },
   
   {
-  "path":"/samples/library/centos/",
+  "path":"/docs.docker.jp.onthefly/samples/library/centos/",
   "title":"centos"
   },
   
   {
-  "path":"/samples/library/chronograf/",
+  "path":"/docs.docker.jp.onthefly/samples/library/chronograf/",
   "title":"chronograf"
   },
   
   {
-  "path":"/samples/library/cirros/",
+  "path":"/docs.docker.jp.onthefly/samples/library/cirros/",
   "title":"cirros"
   },
   
   {
-  "path":"/samples/library/clearlinux/",
+  "path":"/docs.docker.jp.onthefly/samples/library/clearlinux/",
   "title":"clearlinux"
   },
   
   {
-  "path":"/samples/library/clefos/",
+  "path":"/docs.docker.jp.onthefly/samples/library/clefos/",
   "title":"clefos"
   },
   
   {
-  "path":"/samples/library/clojure/",
+  "path":"/docs.docker.jp.onthefly/samples/library/clojure/",
   "title":"clojure"
   },
   
   {
-  "path":"/samples/library/composer/",
+  "path":"/docs.docker.jp.onthefly/samples/library/composer/",
   "title":"composer"
   },
   
   {
-  "path":"/samples/library/consul/",
+  "path":"/docs.docker.jp.onthefly/samples/library/consul/",
   "title":"consul"
   },
   
   {
-  "path":"/samples/library/convertigo/",
+  "path":"/docs.docker.jp.onthefly/samples/library/convertigo/",
   "title":"convertigo"
   },
   
   {
-  "path":"/samples/library/couchbase/",
+  "path":"/docs.docker.jp.onthefly/samples/library/couchbase/",
   "title":"couchbase"
   },
   
   {
-  "path":"/samples/library/couchdb/",
+  "path":"/docs.docker.jp.onthefly/samples/library/couchdb/",
   "title":"couchdb"
   },
   
   {
-  "path":"/samples/library/crate/",
+  "path":"/docs.docker.jp.onthefly/samples/library/crate/",
   "title":"crate"
   },
   
   {
-  "path":"/samples/library/crux/",
+  "path":"/docs.docker.jp.onthefly/samples/library/crux/",
   "title":"crux"
   },
   
   {
-  "path":"/samples/library/debian/",
+  "path":"/docs.docker.jp.onthefly/samples/library/debian/",
   "title":"debian"
   },
   
   {
-  "path":"/samples/library/docker/",
+  "path":"/docs.docker.jp.onthefly/samples/library/docker/",
   "title":"docker"
   },
   
   {
-  "path":"/samples/library/drupal/",
+  "path":"/docs.docker.jp.onthefly/samples/library/drupal/",
   "title":"drupal"
   },
   
   {
-  "path":"/samples/library/eclipse-mosquitto/",
+  "path":"/docs.docker.jp.onthefly/samples/library/eclipse-mosquitto/",
   "title":"eclipse-mosquitto"
   },
   
   {
-  "path":"/samples/library/eggdrop/",
+  "path":"/docs.docker.jp.onthefly/samples/library/eggdrop/",
   "title":"eggdrop"
   },
   
   {
-  "path":"/samples/library/elasticsearch/",
+  "path":"/docs.docker.jp.onthefly/samples/library/elasticsearch/",
   "title":"elasticsearch"
   },
   
   {
-  "path":"/samples/library/elixir/",
+  "path":"/docs.docker.jp.onthefly/samples/library/elixir/",
   "title":"elixir"
   },
   
   {
-  "path":"/samples/library/erlang/",
+  "path":"/docs.docker.jp.onthefly/samples/library/erlang/",
   "title":"erlang"
   },
   
   {
-  "path":"/samples/library/euleros/",
+  "path":"/docs.docker.jp.onthefly/samples/library/euleros/",
   "title":"euleros"
   },
   
   {
-  "path":"/samples/library/express-gateway/",
+  "path":"/docs.docker.jp.onthefly/samples/library/express-gateway/",
   "title":"express-gateway"
   },
   
   {
-  "path":"/samples/library/fedora/",
+  "path":"/docs.docker.jp.onthefly/samples/library/fedora/",
   "title":"fedora"
   },
   
   {
-  "path":"/samples/library/flink/",
+  "path":"/docs.docker.jp.onthefly/samples/library/flink/",
   "title":"flink"
   },
   
   {
-  "path":"/samples/library/fluentd/",
+  "path":"/docs.docker.jp.onthefly/samples/library/fluentd/",
   "title":"fluentd"
   },
   
   {
-  "path":"/samples/library/fsharp/",
+  "path":"/docs.docker.jp.onthefly/samples/library/fsharp/",
   "title":"fsharp"
   },
   
   {
-  "path":"/samples/library/gazebo/",
+  "path":"/docs.docker.jp.onthefly/samples/library/gazebo/",
   "title":"gazebo"
   },
   
   {
-  "path":"/samples/library/gcc/",
+  "path":"/docs.docker.jp.onthefly/samples/library/gcc/",
   "title":"gcc"
   },
   
   {
-  "path":"/samples/library/geonetwork/",
+  "path":"/docs.docker.jp.onthefly/samples/library/geonetwork/",
   "title":"geonetwork"
   },
   
   {
-  "path":"/samples/library/ghost/",
+  "path":"/docs.docker.jp.onthefly/samples/library/ghost/",
   "title":"ghost"
   },
   
   {
-  "path":"/samples/library/golang/",
+  "path":"/docs.docker.jp.onthefly/samples/library/golang/",
   "title":"golang"
   },
   
   {
-  "path":"/samples/library/gradle/",
+  "path":"/docs.docker.jp.onthefly/samples/library/gradle/",
   "title":"gradle"
   },
   
   {
-  "path":"/samples/library/groovy/",
+  "path":"/docs.docker.jp.onthefly/samples/library/groovy/",
   "title":"groovy"
   },
   
   {
-  "path":"/samples/library/haproxy/",
+  "path":"/docs.docker.jp.onthefly/samples/library/haproxy/",
   "title":"haproxy"
   },
   
   {
-  "path":"/samples/library/haskell/",
+  "path":"/docs.docker.jp.onthefly/samples/library/haskell/",
   "title":"haskell"
   },
   
   {
-  "path":"/samples/library/haxe/",
+  "path":"/docs.docker.jp.onthefly/samples/library/haxe/",
   "title":"haxe"
   },
   
   {
-  "path":"/samples/library/hello-world/",
+  "path":"/docs.docker.jp.onthefly/samples/library/hello-world/",
   "title":"hello-world"
   },
   
   {
-  "path":"/samples/library/httpd/",
+  "path":"/docs.docker.jp.onthefly/samples/library/httpd/",
   "title":"httpd"
   },
   
   {
-  "path":"/samples/library/hylang/",
+  "path":"/docs.docker.jp.onthefly/samples/library/hylang/",
   "title":"hylang"
   },
   
   {
-  "path":"/samples/library/ibmjava/",
+  "path":"/docs.docker.jp.onthefly/samples/library/ibmjava/",
   "title":"ibmjava"
   },
   
   {
-  "path":"/samples/library/influxdb/",
+  "path":"/docs.docker.jp.onthefly/samples/library/influxdb/",
   "title":"influxdb"
   },
   
   {
-  "path":"/samples/library/irssi/",
+  "path":"/docs.docker.jp.onthefly/samples/library/irssi/",
   "title":"irssi"
   },
   
   {
-  "path":"/samples/library/jetty/",
+  "path":"/docs.docker.jp.onthefly/samples/library/jetty/",
   "title":"jetty"
   },
   
   {
-  "path":"/samples/library/joomla/",
+  "path":"/docs.docker.jp.onthefly/samples/library/joomla/",
   "title":"joomla"
   },
   
   {
-  "path":"/samples/library/jruby/",
+  "path":"/docs.docker.jp.onthefly/samples/library/jruby/",
   "title":"jruby"
   },
   
   {
-  "path":"/samples/library/julia/",
+  "path":"/docs.docker.jp.onthefly/samples/library/julia/",
   "title":"julia"
   },
   
   {
-  "path":"/samples/library/kaazing-gateway/",
+  "path":"/docs.docker.jp.onthefly/samples/library/kaazing-gateway/",
   "title":"kaazing-gateway"
   },
   
   {
-  "path":"/samples/library/kapacitor/",
+  "path":"/docs.docker.jp.onthefly/samples/library/kapacitor/",
   "title":"kapacitor"
   },
   
   {
-  "path":"/samples/library/kibana/",
+  "path":"/docs.docker.jp.onthefly/samples/library/kibana/",
   "title":"kibana"
   },
   
   {
-  "path":"/samples/library/known/",
+  "path":"/docs.docker.jp.onthefly/samples/library/known/",
   "title":"known"
   },
   
   {
-  "path":"/samples/library/kong/",
+  "path":"/docs.docker.jp.onthefly/samples/library/kong/",
   "title":"kong"
   },
   
   {
-  "path":"/samples/library/lightstreamer/",
+  "path":"/docs.docker.jp.onthefly/samples/library/lightstreamer/",
   "title":"lightstreamer"
   },
   
   {
-  "path":"/samples/library/logstash/",
+  "path":"/docs.docker.jp.onthefly/samples/library/logstash/",
   "title":"logstash"
   },
   
   {
-  "path":"/samples/library/mageia/",
+  "path":"/docs.docker.jp.onthefly/samples/library/mageia/",
   "title":"mageia"
   },
   
   {
-  "path":"/samples/library/mariadb/",
+  "path":"/docs.docker.jp.onthefly/samples/library/mariadb/",
   "title":"mariadb"
   },
   
   {
-  "path":"/samples/library/matomo/",
+  "path":"/docs.docker.jp.onthefly/samples/library/matomo/",
   "title":"matomo"
   },
   
   {
-  "path":"/samples/library/maven/",
+  "path":"/docs.docker.jp.onthefly/samples/library/maven/",
   "title":"maven"
   },
   
   {
-  "path":"/samples/library/mediawiki/",
+  "path":"/docs.docker.jp.onthefly/samples/library/mediawiki/",
   "title":"mediawiki"
   },
   
   {
-  "path":"/samples/library/memcached/",
+  "path":"/docs.docker.jp.onthefly/samples/library/memcached/",
   "title":"memcached"
   },
   
   {
-  "path":"/samples/library/mongo-express/",
+  "path":"/docs.docker.jp.onthefly/samples/library/mongo-express/",
   "title":"mongo-express"
   },
   
   {
-  "path":"/samples/library/mongo/",
+  "path":"/docs.docker.jp.onthefly/samples/library/mongo/",
   "title":"mongo"
   },
   
   {
-  "path":"/samples/library/mono/",
+  "path":"/docs.docker.jp.onthefly/samples/library/mono/",
   "title":"mono"
   },
   
   {
-  "path":"/samples/library/mysql/",
+  "path":"/docs.docker.jp.onthefly/samples/library/mysql/",
   "title":"mysql"
   },
   
   {
-  "path":"/samples/library/nats-streaming/",
+  "path":"/docs.docker.jp.onthefly/samples/library/nats-streaming/",
   "title":"nats-streaming"
   },
   
   {
-  "path":"/samples/library/nats/",
+  "path":"/docs.docker.jp.onthefly/samples/library/nats/",
   "title":"nats"
   },
   
   {
-  "path":"/samples/library/neo4j/",
+  "path":"/docs.docker.jp.onthefly/samples/library/neo4j/",
   "title":"neo4j"
   },
   
   {
-  "path":"/samples/library/neurodebian/",
+  "path":"/docs.docker.jp.onthefly/samples/library/neurodebian/",
   "title":"neurodebian"
   },
   
   {
-  "path":"/samples/library/nextcloud/",
+  "path":"/docs.docker.jp.onthefly/samples/library/nextcloud/",
   "title":"nextcloud"
   },
   
   {
-  "path":"/samples/library/nginx/",
+  "path":"/docs.docker.jp.onthefly/samples/library/nginx/",
   "title":"nginx"
   },
   
   {
-  "path":"/samples/library/node/",
+  "path":"/docs.docker.jp.onthefly/samples/library/node/",
   "title":"node"
   },
   
   {
-  "path":"/samples/library/notary/",
+  "path":"/docs.docker.jp.onthefly/samples/library/notary/",
   "title":"notary"
   },
   
   {
-  "path":"/samples/library/nuxeo/",
+  "path":"/docs.docker.jp.onthefly/samples/library/nuxeo/",
   "title":"nuxeo"
   },
   
   {
-  "path":"/samples/library/odoo/",
+  "path":"/docs.docker.jp.onthefly/samples/library/odoo/",
   "title":"odoo"
   },
   
   {
-  "path":"/samples/library/open-liberty/",
+  "path":"/docs.docker.jp.onthefly/samples/library/open-liberty/",
   "title":"open-liberty"
   },
   
   {
-  "path":"/samples/library/openjdk/",
+  "path":"/docs.docker.jp.onthefly/samples/library/openjdk/",
   "title":"openjdk"
   },
   
   {
-  "path":"/samples/library/opensuse/",
+  "path":"/docs.docker.jp.onthefly/samples/library/opensuse/",
   "title":"opensuse"
   },
   
   {
-  "path":"/samples/library/oraclelinux/",
+  "path":"/docs.docker.jp.onthefly/samples/library/oraclelinux/",
   "title":"oraclelinux"
   },
   
   {
-  "path":"/samples/library/orientdb/",
+  "path":"/docs.docker.jp.onthefly/samples/library/orientdb/",
   "title":"orientdb"
   },
   
   {
-  "path":"/samples/library/percona/",
+  "path":"/docs.docker.jp.onthefly/samples/library/percona/",
   "title":"percona"
   },
   
   {
-  "path":"/samples/library/perl/",
+  "path":"/docs.docker.jp.onthefly/samples/library/perl/",
   "title":"perl"
   },
   
   {
-  "path":"/samples/library/photon/",
+  "path":"/docs.docker.jp.onthefly/samples/library/photon/",
   "title":"photon"
   },
   
   {
-  "path":"/samples/library/php-zendserver/",
+  "path":"/docs.docker.jp.onthefly/samples/library/php-zendserver/",
   "title":"php-zendserver"
   },
   
   {
-  "path":"/samples/library/php/",
+  "path":"/docs.docker.jp.onthefly/samples/library/php/",
   "title":"php"
   },
   
   {
-  "path":"/samples/library/plone/",
+  "path":"/docs.docker.jp.onthefly/samples/library/plone/",
   "title":"plone"
   },
   
   {
-  "path":"/samples/library/postfixadmin/",
+  "path":"/docs.docker.jp.onthefly/samples/library/postfixadmin/",
   "title":"postfixadmin"
   },
   
   {
-  "path":"/samples/library/postgres/",
+  "path":"/docs.docker.jp.onthefly/samples/library/postgres/",
   "title":"postgres"
   },
   
   {
-  "path":"/samples/library/pypy/",
+  "path":"/docs.docker.jp.onthefly/samples/library/pypy/",
   "title":"pypy"
   },
   
   {
-  "path":"/samples/library/python/",
+  "path":"/docs.docker.jp.onthefly/samples/library/python/",
   "title":"python"
   },
   
   {
-  "path":"/samples/library/r-base/",
+  "path":"/docs.docker.jp.onthefly/samples/library/r-base/",
   "title":"r-base"
   },
   
   {
-  "path":"/samples/library/rabbitmq/",
+  "path":"/docs.docker.jp.onthefly/samples/library/rabbitmq/",
   "title":"rabbitmq"
   },
   
   {
-  "path":"/samples/library/rakudo-star/",
+  "path":"/docs.docker.jp.onthefly/samples/library/rakudo-star/",
   "title":"rakudo-star"
   },
   
   {
-  "path":"/samples/library/rapidoid/",
+  "path":"/docs.docker.jp.onthefly/samples/library/rapidoid/",
   "title":"rapidoid"
   },
   
   {
-  "path":"/samples/library/redis/",
+  "path":"/docs.docker.jp.onthefly/samples/library/redis/",
   "title":"redis"
   },
   
   {
-  "path":"/samples/library/redmine/",
+  "path":"/docs.docker.jp.onthefly/samples/library/redmine/",
   "title":"redmine"
   },
   
   {
-  "path":"/samples/library/registry/",
+  "path":"/docs.docker.jp.onthefly/samples/library/registry/",
   "title":"registry"
   },
   
   {
-  "path":"/samples/library/rethinkdb/",
+  "path":"/docs.docker.jp.onthefly/samples/library/rethinkdb/",
   "title":"rethinkdb"
   },
   
   {
-  "path":"/samples/library/rocket.chat/",
+  "path":"/docs.docker.jp.onthefly/samples/library/rocket.chat/",
   "title":"rocket.chat"
   },
   
   {
-  "path":"/samples/library/ros/",
+  "path":"/docs.docker.jp.onthefly/samples/library/ros/",
   "title":"ros"
   },
   
   {
-  "path":"/samples/library/ruby/",
+  "path":"/docs.docker.jp.onthefly/samples/library/ruby/",
   "title":"ruby"
   },
   
   {
-  "path":"/samples/library/rust/",
+  "path":"/docs.docker.jp.onthefly/samples/library/rust/",
   "title":"rust"
   },
   
   {
-  "path":"/samples/library/scratch/",
+  "path":"/docs.docker.jp.onthefly/samples/library/scratch/",
   "title":"scratch"
   },
   
   {
-  "path":"/samples/library/sentry/",
+  "path":"/docs.docker.jp.onthefly/samples/library/sentry/",
   "title":"sentry"
   },
   
   {
-  "path":"/samples/library/silverpeas/",
+  "path":"/docs.docker.jp.onthefly/samples/library/silverpeas/",
   "title":"silverpeas"
   },
   
   {
-  "path":"/samples/library/sl/",
+  "path":"/docs.docker.jp.onthefly/samples/library/sl/",
   "title":"sl"
   },
   
   {
-  "path":"/samples/library/solr/",
+  "path":"/docs.docker.jp.onthefly/samples/library/solr/",
   "title":"solr"
   },
   
   {
-  "path":"/samples/library/sonarqube/",
+  "path":"/docs.docker.jp.onthefly/samples/library/sonarqube/",
   "title":"sonarqube"
   },
   
   {
-  "path":"/samples/library/sourcemage/",
+  "path":"/docs.docker.jp.onthefly/samples/library/sourcemage/",
   "title":"sourcemage"
   },
   
   {
-  "path":"/samples/library/spiped/",
+  "path":"/docs.docker.jp.onthefly/samples/library/spiped/",
   "title":"spiped"
   },
   
   {
-  "path":"/samples/library/storm/",
+  "path":"/docs.docker.jp.onthefly/samples/library/storm/",
   "title":"storm"
   },
   
   {
-  "path":"/samples/library/swarm/",
+  "path":"/docs.docker.jp.onthefly/samples/library/swarm/",
   "title":"swarm"
   },
   
   {
-  "path":"/samples/library/swift/",
+  "path":"/docs.docker.jp.onthefly/samples/library/swift/",
   "title":"swift"
   },
   
   {
-  "path":"/samples/library/swipl/",
+  "path":"/docs.docker.jp.onthefly/samples/library/swipl/",
   "title":"swipl"
   },
   
   {
-  "path":"/samples/library/teamspeak/",
+  "path":"/docs.docker.jp.onthefly/samples/library/teamspeak/",
   "title":"teamspeak"
   },
   
   {
-  "path":"/samples/library/telegraf/",
+  "path":"/docs.docker.jp.onthefly/samples/library/telegraf/",
   "title":"telegraf"
   },
   
   {
-  "path":"/samples/library/thrift/",
+  "path":"/docs.docker.jp.onthefly/samples/library/thrift/",
   "title":"thrift"
   },
   
   {
-  "path":"/samples/library/tomcat/",
+  "path":"/docs.docker.jp.onthefly/samples/library/tomcat/",
   "title":"tomcat"
   },
   
   {
-  "path":"/samples/library/tomee/",
+  "path":"/docs.docker.jp.onthefly/samples/library/tomee/",
   "title":"tomee"
   },
   
   {
-  "path":"/samples/library/traefik/",
+  "path":"/docs.docker.jp.onthefly/samples/library/traefik/",
   "title":"traefik"
   },
   
   {
-  "path":"/samples/library/ubuntu/",
+  "path":"/docs.docker.jp.onthefly/samples/library/ubuntu/",
   "title":"ubuntu"
   },
   
   {
-  "path":"/samples/library/vault/",
+  "path":"/docs.docker.jp.onthefly/samples/library/vault/",
   "title":"vault"
   },
   
   {
-  "path":"/samples/library/websphere-liberty/",
+  "path":"/docs.docker.jp.onthefly/samples/library/websphere-liberty/",
   "title":"websphere-liberty"
   },
   
   {
-  "path":"/samples/library/wordpress/",
+  "path":"/docs.docker.jp.onthefly/samples/library/wordpress/",
   "title":"wordpress"
   },
   
   {
-  "path":"/samples/library/xwiki/",
+  "path":"/docs.docker.jp.onthefly/samples/library/xwiki/",
   "title":"xwiki"
   },
   
   {
-  "path":"/samples/library/yourls/",
+  "path":"/docs.docker.jp.onthefly/samples/library/yourls/",
   "title":"yourls"
   },
   
   {
-  "path":"/samples/library/znc/",
+  "path":"/docs.docker.jp.onthefly/samples/library/znc/",
   "title":"znc"
   },
   
   {
-  "path":"/samples/library/zookeeper/",
+  "path":"/docs.docker.jp.onthefly/samples/library/zookeeper/",
   "title":"zookeeper"
   }
   
