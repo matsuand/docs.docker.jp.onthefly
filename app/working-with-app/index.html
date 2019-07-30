@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-07-30 10:39:30 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,7 +74,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-30T10:39:30+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -84,7 +84,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This is an experimental feature. 試験的な機能は、将来の製品に搭載される機能をいち早く試すことができるものです。 ただし現段階でのこの機能は、テストとフィードバックのためだけを意図しています。 したがってリリース時には予告なく変更される場合があり、将来のリリースでは完全に削除されることもあります。 試験的な機能は本番環境では利用しないでください。 Docker ではこの試験的機能に対するサポートは行っていません。 詳しくは Experimental features を参照してください。 Docker CLI において試験的機能を有効にするには、config.json ファイルを編集して experimental を有効に設定してください。 Docker Desktop メニューから試験的機能を有効にするには、Settings (macOS の場合は Preferences) &gt; Daemon をクリックして、チェックボックス..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-30T10:39:30+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker App, applications, compose, orchestration">
@@ -597,54 +597,57 @@ port <code class="highlighter-rouge">8080</code> is allowed on the connection fo
 
 <h3 id="push-the-app-to-docker-hub">Push the app to Docker Hub</h3>
 
-<p>As mentioned in the introduction, <code class="highlighter-rouge">docker app</code> lets you manage entire applications the same way that you
-currently manage container images. For example, you can push and pull entire applications from registries like
-Docker Hub with <code class="highlighter-rouge">docker app push</code> and <code class="highlighter-rouge">docker app pull</code>. Other <code class="highlighter-rouge">docker app</code> commands, such
-as <code class="highlighter-rouge">install</code>, <code class="highlighter-rouge">upgrade</code>, <code class="highlighter-rouge">inspect</code> and <code class="highlighter-rouge">render</code> can be performed directly on applications while they are
-stored in a registry.</p>
+<p>As mentioned in the introduction, <code class="highlighter-rouge">docker app</code> lets you manage entire
+applications the same way that you currently manage container images. For
+example, you can push and pull entire applications from registries like Docker
+Hub with <code class="highlighter-rouge">docker app push</code> and <code class="highlighter-rouge">docker app pull</code>. Other <code class="highlighter-rouge">docker app</code> commands,
+such as <code class="highlighter-rouge">install</code>, <code class="highlighter-rouge">upgrade</code>, <code class="highlighter-rouge">inspect</code> and <code class="highlighter-rouge">render</code> can be performed directly
+on applications while they are stored in a registry.</p>
 
-<p>The following section contains some examples.</p>
+<p>Push the application to Docker Hub. To complete this step, you need a valid
+Docker ID and you must be logged in to the registry to which you are pushing
+the app.</p>
 
-<p>Push the application to Docker Hub. To complete this step, you need a valid Docker ID and you must be
-logged in to the registry to which you are pushing the app.</p>
+<p>By default all platform architectures are pushed to the registry. If you are
+pushing an official Docker image as part of your app, you may find your app
+bundle becomes large with all image architectures embedded. To just push the
+architecture required you can add the <code class="highlighter-rouge">--platform</code> flag.</p>
 
-<p>Be sure to replace the registry ID in the following example with your own.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker login
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app push my-app --tag nigelpoulton/app-test:0.1.0
-docker app push hello-world.dockerapp --tag nigelpoulton/app-test:0.1.0
-docker.io/nigelpoulton/app-test:0.1.0-invoc
-hashicorp/http-echo
- application/vnd.docker.distribution.manifest.v2+json [2/2] (sha256:ba27d460...)
-&lt;Snip&gt;
+<span class="nv">$ </span>docker app push my-app <span class="nt">--platform</span><span class="o">=</span><span class="s2">"linux/amd64"</span> <span class="nt">--tag</span> &lt;hub-id&gt;/&lt;repo&gt;:0.1.0
 </code></pre></div></div>
-
-<p>The app is now stored in the container registry.</p>
 
 <h3 id="push-the-app-to-dtr">Push the app to DTR</h3>
 
-<p>Pushing an app to Docker Trusted Registry (DTR) involves the same procedure as <a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-app.md#push-the-app-to-docker-hub">pushing an app to Docker Hub</a> except that you need your DTR user credentials and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/review-repository-info/">your DTR repository information</a>. To use client certificates for DTR authentication, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/enable-client-certificate-authentication/">Enable Client Certificate Authentication</a>.</p>
+<p>Pushing an app to Docker Trusted Registry (DTR) involves the same procedure as
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-app.md#push-the-app-to-docker-hub">pushing an app to Docker Hub</a> except that you
+need your DTR user credentials and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/review-repository-info/">your DTR repository
+information</a>. To use client
+certificates for DTR authentication, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/enable-client-certificate-authentication/">Enable Client Certificate
+Authentication</a>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker app push my-app <span class="nt">--tag</span> &lt;dtr-fqdn&gt;/nigelpoulton/app-test:0.1.0
-&lt;dtr-fqdn&gt;/nigelpoulton/app-test:0.1.0-invoc
-hashicorp/http-echo
- application/vnd.docker.distribution.manifest.v2+json <span class="o">[</span>2/2] <span class="o">(</span>sha256:bd1a813b...<span class="o">)</span>
-Successfully pushed bundle to &lt;dtr-fqdn&gt;/nigelpoulton/app-test:0.1.0.
-Digest is sha256:bd1a813b6301939fa46e617f96711e0cca1e4065d2d724eb86abde6ef7b18e23.
+<p>By default all platform architectures are pushed to DTR. If you are pushing an
+official Docker image as part of your app, you may find your app bundle
+becomes large with all image architectures embedded. To just push the
+architecture required you can add the <code class="highlighter-rouge">--platform</code> flag.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker login dtr.example.com
+
+<span class="nv">$ </span>docker app push my-app <span class="nt">--platform</span><span class="o">=</span><span class="s2">"linux/amd64"</span> <span class="nt">--tag</span> dtr.example.com/&lt;user&gt;/&lt;repo&gt;:0.1.0
 </code></pre></div></div>
-
-<p>The app is now stored in your DTR.</p>
 
 <h3 id="install-the-app-directly-from-docker-hub-or-dtr">Install the app directly from Docker Hub or DTR</h3>
 
 <p>Now that the app is pushed to the registry, try an <code class="highlighter-rouge">inspect</code> and <code class="highlighter-rouge">install</code> command against it.
 The location of your app is different from the one provided in the examples.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app inspect nigelpoulton/app-test:0.1.0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app inspect myuser/hello-world:0.1.0
 hello-world 0.1.0
 
 Service (1) Replicas Ports Image
 ----------- -------- ----- -----
-hello       1        8080  nigelpoulton/app-test@sha256:ba27d460cd1f22a1a4331bdf74f4fccbc025552357e8a3249c40ae216275de96
+hello       1        8080  myuser/hello-world@sha256:ba27d460cd1f22a1a4331bdf74f4fccbc025552357e8a3249c40ae216275de96
 
 Parameters (2) Value
 -------------- -----
@@ -656,7 +659,7 @@ hello.text     Hello world!
 
 <p>Now install it as a native Docker App by referencing the app in the registry, with a different port.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app install nigelpoulton/app-test:0.1.0 --set hello.port=8181
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app install myuser/hello-world:0.1.0 --set hello.port=8181
 Creating network hello-world_default
 Creating service hello-world_hello
 Application "hello-world" installed on context "default"
