@@ -1192,7 +1192,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/docker-ee-architecture/",
-"title":"Docker Enterprise architecture",
+"title":"Docker Enterprise アーキテクチャー",
 "description":"Learn about the architecture of Docker Enterprise  and how it delivers high availability for your workloads.",
 "keywords":"Docker Enterprise, UCP, DTR,  architecture, orchestration, Kubernetes, Swarm, cluster, high availability"
 }
@@ -2795,8 +2795,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/labels-custom-metadata/",
-"title":"Docker object labels",
-"description":"Description of labels, which are used to manage metadata on Docker objects.",
+"title":"Docker オブジェクトラベル",
+"description":"ラベルの説明。これは Docker オブジェクトにおいてメタデータを管理するために用いられます。",
 "keywords":"Usage, user guide, labels, metadata, docker, documentation, examples, annotating"
 }
 ,
@@ -3922,7 +3922,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/release-notes/",
-"title":"UCP リリースノート",
+"title":"UCP release notes",
 "description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
 "keywords":"UCP, release notes"
 }
@@ -3978,7 +3978,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
-"title":"Docker Engine リリースノート",
+"title":"Docker Engine release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and EE",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
 }
@@ -5353,6 +5353,62 @@ var pages = [
 "title":"Isolate containers with a user namespace",
 "description":"Isolate containers within a user namespace",
 "keywords":"security, namespaces"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/v1.18/",
+"title":"Engine API v1.18",
+"description":"API Documentation for Docker",
+"keywords":"API, Docker, rcli, REST, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/v1.19/",
+"title":"Engine API v1.19",
+"description":"API Documentation for Docker",
+"keywords":"API, Docker, rcli, REST, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/v1.20/",
+"title":"Engine API v1.20",
+"description":"API Documentation for Docker",
+"keywords":"API, Docker, rcli, REST, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/v1.21/",
+"title":"Engine API v1.21",
+"description":"API Documentation for Docker",
+"keywords":"API, Docker, rcli, REST, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/v1.22/",
+"title":"Engine API v1.22",
+"description":"API Documentation for Docker",
+"keywords":"API, Docker, rcli, REST, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/v1.23/",
+"title":"Engine API v1.23",
+"description":"API Documentation for Docker",
+"keywords":"API, Docker, rcli, REST, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/v1.24/",
+"title":"Engine API v1.24",
+"description":"API Documentation for Docker",
+"keywords":"API, Docker, rcli, REST, documentation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/version-history/",
+"title":"Engine API version history",
+"description":"Documentation of changes that have been made to Engine API.",
+"keywords":"API, Docker, rcli, REST, documentation"
 }
 ,
 {

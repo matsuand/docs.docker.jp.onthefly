@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-07-31 13:57:05 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-31T13:57:05+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker run reference Docker runs processes in isolated containers. A container is a process which runs on a host. The host may be local or remote. When an operator executes..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-31T13:57:05+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, run, configure, runtime">
@@ -182,7 +182,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    61 分
+    62 分
   
 </span>
 
@@ -479,7 +479,7 @@ CMD ["htop"]
 to running processes in that namespace.  By default, all containers, including
 those with <code class="highlighter-rouge">--network=host</code>, have their own UTS namespace.  The <code class="highlighter-rouge">host</code> setting will
 result in the container using the same UTS namespace as the host.  Note that
-<code class="highlighter-rouge">--hostname</code> is invalid in <code class="highlighter-rouge">host</code> UTS mode.</p>
+<code class="highlighter-rouge">--hostname</code> and <code class="highlighter-rouge">--domainname</code> are invalid in <code class="highlighter-rouge">host</code> UTS mode.</p>
 
 <p>You may wish to share the UTS namespace with the host if you would like the
 hostname of the container to change as the hostname of the host changes.  A
@@ -637,8 +637,8 @@ network stack and all interfaces from the host will be available to the
 container.  The container’s hostname will match the hostname on the host
 system. Note that <code class="highlighter-rouge">--mac-address</code> is invalid in <code class="highlighter-rouge">host</code> netmode. Even in <code class="highlighter-rouge">host</code>
 network mode a container has its own UTS namespace by default. As such
-<code class="highlighter-rouge">--hostname</code> is allowed in <code class="highlighter-rouge">host</code> network mode and will only change the
-hostname inside the container.
+<code class="highlighter-rouge">--hostname</code> and <code class="highlighter-rouge">--domainname</code> are allowed in <code class="highlighter-rouge">host</code> network mode and will
+only change the hostname and domain name inside the container.
 Similar to <code class="highlighter-rouge">--hostname</code>, the <code class="highlighter-rouge">--add-host</code>, <code class="highlighter-rouge">--dns</code>, <code class="highlighter-rouge">--dns-search</code>, and
 <code class="highlighter-rouge">--dns-option</code> options can be used in <code class="highlighter-rouge">host</code> network mode. These options update
 <code class="highlighter-rouge">/etc/hosts</code> or <code class="highlighter-rouge">/etc/resolv.conf</code> inside the container. No change are made to
@@ -1930,39 +1930,39 @@ current value of the named variable is propagated into the container’s environ
 <span class="nv">HOME</span><span class="o">=</span>/root
 </code></pre></div></div>
 
-<pre><code class="language-PowerShell">PS C:\&gt; docker run --rm -e "foo=bar" microsoft/nanoserver cmd /s /c set
-ALLUSERSPROFILE=C:\ProgramData
-APPDATA=C:\Users\ContainerAdministrator\AppData\Roaming
-CommonProgramFiles=C:\Program Files\Common Files
-CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
-CommonProgramW6432=C:\Program Files\Common Files
-COMPUTERNAME=C2FAEFCC8253
-ComSpec=C:\Windows\system32\cmd.exe
-foo=bar
-LOCALAPPDATA=C:\Users\ContainerAdministrator\AppData\Local
-NUMBER_OF_PROCESSORS=8
-OS=Windows_NT
-Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\ContainerAdministrator\AppData\Local\Microsoft\WindowsApps
-PATHEXT=.COM;.EXE;.BAT;.CMD
-PROCESSOR_ARCHITECTURE=AMD64
-PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 62 Stepping 4, GenuineIntel
-PROCESSOR_LEVEL=6
-PROCESSOR_REVISION=3e04
-ProgramData=C:\ProgramData
-ProgramFiles=C:\Program Files
-ProgramFiles(x86)=C:\Program Files (x86)
-ProgramW6432=C:\Program Files
-PROMPT=$P$G
-PUBLIC=C:\Users\Public
-SystemDrive=C:
-SystemRoot=C:\Windows
-TEMP=C:\Users\ContainerAdministrator\AppData\Local\Temp
-TMP=C:\Users\ContainerAdministrator\AppData\Local\Temp
-USERDOMAIN=User Manager
-USERNAME=ContainerAdministrator
-USERPROFILE=C:\Users\ContainerAdministrator
-windir=C:\Windows
-</code></pre>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">PS </span>C:\&gt; docker run --rm -e <span class="s2">"foo=bar"</span> microsoft/nanoserver cmd /s /c <span class="nb">set
+</span><span class="nv">ALLUSERSPROFILE</span><span class="o">=</span>C:\ProgramData
+<span class="nv">APPDATA</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Roaming
+<span class="nv">CommonProgramFiles</span><span class="o">=</span>C:\Program Files\Common Files
+CommonProgramFiles<span class="o">(</span>x86<span class="o">)=</span>C:\Program Files <span class="o">(</span>x86<span class="o">)</span>\Common Files
+<span class="nv">CommonProgramW6432</span><span class="o">=</span>C:\Program Files\Common Files
+<span class="nv">COMPUTERNAME</span><span class="o">=</span>C2FAEFCC8253
+<span class="nv">ComSpec</span><span class="o">=</span>C:\Windows\system32\cmd.exe
+<span class="nv">foo</span><span class="o">=</span>bar
+<span class="nv">LOCALAPPDATA</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Local
+<span class="nv">NUMBER_OF_PROCESSORS</span><span class="o">=</span>8
+<span class="nv">OS</span><span class="o">=</span>Windows_NT
+<span class="nv">Path</span><span class="o">=</span>C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\ContainerAdministrator\AppData\Local\Microsoft\WindowsApps
+<span class="nv">PATHEXT</span><span class="o">=</span>.COM;.EXE;.BAT;.CMD
+<span class="nv">PROCESSOR_ARCHITECTURE</span><span class="o">=</span>AMD64
+<span class="nv">PROCESSOR_IDENTIFIER</span><span class="o">=</span>Intel64 Family 6 Model 62 Stepping 4, GenuineIntel
+<span class="nv">PROCESSOR_LEVEL</span><span class="o">=</span>6
+<span class="nv">PROCESSOR_REVISION</span><span class="o">=</span>3e04
+<span class="nv">ProgramData</span><span class="o">=</span>C:\ProgramData
+<span class="nv">ProgramFiles</span><span class="o">=</span>C:\Program Files
+ProgramFiles<span class="o">(</span>x86<span class="o">)=</span>C:\Program Files <span class="o">(</span>x86<span class="o">)</span>
+<span class="nv">ProgramW6432</span><span class="o">=</span>C:\Program Files
+<span class="nv">PROMPT</span><span class="o">=</span><span class="nv">$P$G</span>
+<span class="nv">PUBLIC</span><span class="o">=</span>C:\Users\Public
+<span class="nv">SystemDrive</span><span class="o">=</span>C:
+<span class="nv">SystemRoot</span><span class="o">=</span>C:\Windows
+<span class="nv">TEMP</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Local\Temp
+<span class="nv">TMP</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Local\Temp
+<span class="nv">USERDOMAIN</span><span class="o">=</span>User Manager
+<span class="nv">USERNAME</span><span class="o">=</span>ContainerAdministrator
+<span class="nv">USERPROFILE</span><span class="o">=</span>C:\Users\ContainerAdministrator
+<span class="nv">windir</span><span class="o">=</span>C:\Windows
+</code></pre></div></div>
 
 <p>Similarly the operator can set the <strong>HOSTNAME</strong> (Linux) or <strong>COMPUTERNAME</strong> (Windows) with <code class="highlighter-rouge">-h</code>.</p>
 

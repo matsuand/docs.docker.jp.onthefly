@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-07-31 13:57:05 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -65,7 +65,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-31T13:57:05+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -75,7 +75,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="SonarQube is an open source platform for continuous inspection of code quality. GitHub repo: https://github.com/SonarSource/docker-sonarqube Library reference This content is imported from the official Docker Library docs, and is provided..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-31T13:57:05+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="library, sample, sonarqube">
@@ -341,6 +341,13 @@ WARNING:
 <span class="gp">$</span> docker run <span class="nt">-ti</span> sonarqube-custom
 </code></pre></div></div>
 
+<h3 id="avoid-hard-termination-of-sonarqube">Avoid hard termination of SonarQube</h3>
+
+<p>Starting from SonarQube 7.8, SonarQube stops gracefully, waiting for any tasks in progress to finish. Waiting for in-progress tasks to finish can take a large amount of time which the docker does not expect by default when stopping. To avoid having the SonarQube instance killed by the Docker daemon after 10 seconds, it is best to configure a timeout to stop the container with <code class="highlighter-rouge">--stop-timeout</code>. For example:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker run --stop-timeout 3600 sonarqube
+</span></code></pre></div></div>
+
 <h2 id="administration">Administration</h2>
 
 <p>The administration guide can be found <a href="https://redirect.sonarsource.com/doc/administration-guide.html">here</a>.</p>
@@ -457,6 +464,7 @@ WARNING:
       <li><a href="#option-2-use-parameters-via-docker-environment-variables" class="nomunge">Option 2: Use parameters via Docker environment variables</a></li>
       <li><a href="#option-3-use-bind-mounted-persistent-volumes" class="nomunge">Option 3: Use bind-mounted persistent volumes</a></li>
       <li><a href="#option-4-customized-image" class="nomunge">Option 4: Customized image</a></li>
+      <li><a href="#avoid-hard-termination-of-sonarqube" class="nomunge">Avoid hard termination of SonarQube</a></li>
     </ul>
   </li>
   <li><a href="#administration" class="nomunge">Administration</a></li>

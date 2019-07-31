@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-07-31 13:57:05 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -82,7 +82,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-31T13:57:05+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -92,7 +92,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="docker To list available commands, either run docker with no parameters or execute docker help: $ docker Usage: docker [OPTIONS] COMMAND [ARG...] docker [ --help | -v | --version ]..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-07-31T13:57:05+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker, Docker documentation, CLI, command line">
@@ -187,7 +187,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    13 分
+    14 分
   
 </span>
 
@@ -215,6 +215,7 @@ A self-sufficient runtime <span class="k">for </span>containers.
 
 Options:
       <span class="nt">--config</span> string      Location of client config files <span class="o">(</span>default <span class="s2">"/root/.docker"</span><span class="o">)</span>
+  <span class="nt">-c</span>, <span class="nt">--context</span> string     Name of the context to use to connect to the daemon <span class="o">(</span>overrides DOCKER_HOST env var and default context <span class="nb">set </span>with <span class="s2">"docker context use"</span><span class="o">)</span>
   <span class="nt">-D</span>, <span class="nt">--debug</span>              Enable debug mode
       <span class="nt">--help</span>               Print usage
   <span class="nt">-H</span>, <span class="nt">--host</span> value         Daemon socket<span class="o">(</span>s<span class="o">)</span> to connect to <span class="o">(</span>default <span class="o">[])</span>
@@ -267,6 +268,8 @@ to the same URL as the registry.</li>
 <code class="highlighter-rouge">docker pull</code>) in <code class="highlighter-rouge">docker help</code> output, and only <code class="highlighter-rouge">Management commands</code> per object-type (e.g., <code class="highlighter-rouge">docker container</code>) are
 printed. This may become the default in a future release, at which point this environment-variable is removed.</li>
   <li><code class="highlighter-rouge">DOCKER_TMPDIR</code> Location for temporary Docker files.</li>
+  <li><code class="highlighter-rouge">DOCKER_CONTEXT</code> Specify the context to use (overrides DOCKER_HOST env var and default context set with “docker context use”)</li>
+  <li><code class="highlighter-rouge">DOCKER_DEFAULT_PLATFORM</code> Specify the default platform for the commands that take the <code class="highlighter-rouge">--platform</code> flag.</li>
 </ul>
 
 <p>Because Docker is developed using Go, you can also use any environment
@@ -415,6 +418,10 @@ Users can override your custom or the default key sequence on a per-container
 basis. To do this, the user specifies the <code class="highlighter-rouge">--detach-keys</code> flag with the <code class="highlighter-rouge">docker
 attach</code>, <code class="highlighter-rouge">docker exec</code>, <code class="highlighter-rouge">docker run</code> or <code class="highlighter-rouge">docker start</code> command.</p>
 
+<p>The property <code class="highlighter-rouge">plugins</code> contains settings specific to CLI plugins. The
+key is the plugin name, while the value is a further map of options,
+which are specific to that plugin.</p>
+
 <p>Following is a sample <code class="highlighter-rouge">config.json</code> file:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -437,7 +444,16 @@ attach</code>, <code class="highlighter-rouge">docker exec</code>, <code class="
     </span><span class="s2">"awesomereg.example.org"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hip-star"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"unicorn.example.com"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vcbait"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"stackOrchestrator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="w">
+  </span><span class="s2">"stackOrchestrator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"plugin1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"option"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"plugin2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"anotheroption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anothervalue"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"athirdoption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"athirdvalue"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div></div>
