@@ -2,6 +2,15 @@
 <!-- relative link basehrefs -->
 
 	
+	
+	
+		
+			
+		
+	
+		
+			
+			
 
 
 <!-- Logic for 'edit this button' -->
@@ -33,7 +42,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -71,14 +80,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="概要"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker コンテナーやサービスの機能が強力である理由は、これらを互いに接続することができ、あるいは Docker ではないシステムとも接続ができる点です。 Docker コンテナーやサービスはどちらも、Docker によってデプロイされたものであるかを知っておく必要がなく、さらに接続された先が Docker によるものかどうかすら、わかっていなくてよいのです。 Docker ホストが Linux や Windows 上で、あるいはその両方が混在した上で動作しているとしても、Docker を使えばプラットフォームに依存せずに Docker ホストを管理することができます。 ここでは Docker ネットワークの基本的な考え方を紹介し、Docker の機能を最大限活用したアプリケーションの設計とデプロイができるようにしていきます。 ここに示す考え方は、ほぼすべての Docker 製品に適用できます。 ただし いくつかの応用機能 については Docker EE..." />
+	<meta name="twitter:title" itemprop="title name" content="Docker Desktop WSL 2 Tech Preview"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Overview Welcome to Docker Desktop WSL 2 Tech Preview. This Tech Preview introduces support to run Docker Desktop with WSL 2. We really appreciate you trialing this Tech Preview. Your..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-08-01T20:52:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="networking, bridge, routing, routing mesh, overlay, ports">
+	<meta name="keywords" content="Docker, WSL, WSL 2, Tech Preview, Windows Subsystem for Linux">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -87,16 +96,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>概要 | Docker Documentation</title>
-<meta property="og:title" content="概要" />
+	<title>Docker Desktop WSL 2 Tech Preview | Docker Documentation</title>
+<meta property="og:title" content="Docker Desktop WSL 2 Tech Preview" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Docker ネットワークとその概念" />
-<meta property="og:description" content="Docker ネットワークとその概念" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/" />
+<meta name="description" content="Docker Desktop WSL 2 Tech Preview" />
+<meta property="og:description" content="Docker Desktop WSL 2 Tech Preview" />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"概要","description":"Docker ネットワークとその概念","url":"https://matsuand.github.io/docs.docker.jp.onthefly/network/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop WSL 2 Tech Preview","description":"Docker Desktop WSL 2 Tech Preview","url":"https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -166,144 +175,74 @@
 						<section class="section">
 							
 								
-							<h1>概要</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker Desktop WSL 2 Tech Preview</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    2 分
   
 </span>
 
 							
 							
-							
-<p>Docker コンテナーやサービスの機能が強力である理由は、これらを互いに接続することができ、あるいは Docker ではないシステムとも接続ができる点です。
-Docker コンテナーやサービスはどちらも、Docker によってデプロイされたものであるかを知っておく必要がなく、さらに接続された先が Docker によるものかどうかすら、わかっていなくてよいのです。
-Docker ホストが Linux や Windows 上で、あるいはその両方が混在した上で動作しているとしても、Docker を使えばプラットフォームに依存せずに Docker ホストを管理することができます。</p>
+							<h1 id="overview">Overview</h1>
 
-<p>ここでは Docker ネットワークの基本的な考え方を紹介し、Docker の機能を最大限活用したアプリケーションの設計とデプロイができるようにしていきます。</p>
+<p>Welcome to Docker Desktop WSL 2 Tech Preview. This Tech Preview introduces support to run Docker Desktop with WSL 2. We really appreciate you trialing this Tech Preview. Your feedback is very important to us. Please let us know your feedback by creating an issue in the <a href="https://github.com/docker/for-win/issues">Docker Desktop for Windows GitHub</a> repository and adding the <strong>WSL 2</strong> label.</p>
 
-<p>ここに示す考え方は、ほぼすべての Docker 製品に適用できます。
-ただし <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#docker-ee-networking-features">いくつかの応用機能</a> については Docker EE の課金ユーザーのみが利用できるものです。</p>
+<p>WSL 2 introduces a significant architectural change as it is a full Linux kernel built by Microsoft, allowing Linux containers to run natively without emulation. With Docker Desktop WSL 2 Tech Preview, users can access Linux workspaces without having to maintain both Linux and Windows build scripts.</p>
 
-<h2 id="scope-of-this-topic">説明を行う範囲</h2>
+<p>Docker Desktop also leverages the dynamic memory allocation feature in WSL 2 to greatly improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources, enabling CPU and memory-intensive tasks such as building a container to run much faster.</p>
 
-<p>This topic does <strong>not</strong> go into OS-specific details about how Docker networks
-work, so you will not find information about how Docker manipulates <code class="highlighter-rouge">iptables</code>
-rules on Linux or how it manipulates routing rules on Windows servers, and you
-will not find detailed information about how Docker forms and encapsulates
-packets or handles encryption. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/iptables.md">Docker and iptables</a>
-and
-<a href="http://success.docker.com/article/networking">Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks</a>
-for a much greater depth of technical detail.</p>
+<p>Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 2 seconds to start the Docker daemon when compared to tens of seconds in the current version of Docker Desktop.</p>
 
-<p>In addition, this topic does not provide any tutorials for how to create,
-manage, and use Docker networks. Each section includes links to relevant
-tutorials and command references.</p>
+<blockquote>
+  <p>Note that it is currently not possible to run Kubernetes while running Docker Desktop on WSL 2. However, you can continue to use Kubernetes in the non-WSL 2 Docker Desktop using the Daemon <strong>Settings</strong> option.</p>
+</blockquote>
 
-<h2 id="network-drivers">ネットワークドライバー</h2>
+<h1 id="prerequisites">Prerequisites</h1>
 
-<p>Docker’s networking subsystem is pluggable, using drivers. Several drivers
-exist by default, and provide core networking functionality:</p>
+<p>Before you install Docker Desktop WSL 2 Tech Preview, you must complete the following steps:</p>
 
-<ul>
+<ol>
+  <li>Install Windows 10 Insider Preview build 18932 or later.</li>
+  <li>Enable WSL 2 feature on Windows. For detailed instructions, refer to the <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-install">Microsoft documentation</a>.</li>
+  <li>Install a default distribution based on Ubuntu 18.04. You can check this with <code class="highlighter-rouge">wsl lsb_release -a</code>. You can download Ubuntu 18.04 from the <a href="https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q">Microsoft store</a>.</li>
   <li>
-    <p><code class="highlighter-rouge">bridge</code>: The default network driver. If you don’t specify a driver, this is
-the type of network you are creating. <strong>Bridge networks are usually used when
-your applications run in standalone containers that need to communicate.</strong> See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/bridge/">bridge networks</a>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">host</code>: For standalone containers, remove network isolation between the
-container and the Docker host, and use the host’s networking directly. <code class="highlighter-rouge">host</code>
-is only available for swarm services on Docker 17.06 and higher. See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/host/">use the host network</a>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">overlay</code>: Overlay networks connect multiple Docker daemons together and
-enable swarm services to communicate with each other. You can also use overlay
-networks to facilitate communication between a swarm service and a standalone
-container, or between two standalone containers on different Docker daemons.
-This strategy removes the need to do OS-level routing between these
-containers. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/overlay/">overlay networks</a>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">macvlan</code>: Macvlan networks allow you to assign a MAC address to a container,
-making it appear as a physical device on your network. The Docker daemon
-routes traffic to containers by their MAC addresses. Using the <code class="highlighter-rouge">macvlan</code>
-driver is sometimes the best choice when dealing with legacy applications that
-expect to be directly connected to the physical network, rather than routed
-through the Docker host’s network stack. See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/">Macvlan networks</a>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">none</code>: For this container, disable all networking. Usually used in
-conjunction with a custom network driver. <code class="highlighter-rouge">none</code> is not available for swarm
-services. See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/none/">disable container networking</a>.</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_services/">Network plugins</a>: You can install and use
-third-party network plugins with Docker. These plugins are available from
-<a href="https://hub.docker.com/search?category=network&amp;q=&amp;type=plugin">Docker Hub</a>
-or from third-party vendors. See the vendor’s documentation for installing and
-using a given network plugin.</p>
-  </li>
-</ul>
+    <p>Ensure the Ubuntu distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.</p>
 
-<h3 id="network-driver-summary">ネットワークドライバーのまとめ</h3>
+    <p>To check the WSL mode, run:</p>
 
-<ul>
-  <li><strong>User-defined bridge networks</strong> are best when you need multiple containers to
-communicate on the same Docker host.</li>
-  <li><strong>Host networks</strong> are best when the network stack should not be isolated from
-the Docker host, but you want other aspects of the container to be isolated.</li>
-  <li><strong>Overlay networks</strong> are best when you need containers running on different
-Docker hosts to communicate, or when multiple applications work together using
-swarm services.</li>
-  <li><strong>Macvlan networks</strong> are best when you are migrating from a VM setup or
-need your containers to look like physical hosts on your network, each with a
-unique MAC address.</li>
-  <li><strong>Third-party network plugins</strong> allow you to integrate Docker with specialized
-network stacks.</li>
-</ul>
+    <p><code class="highlighter-rouge">wsl -l -v</code></p>
 
-<h2 id="docker-ee-networking-features">Docker EE のネットワーク機能</h2>
+    <p>To upgrade to v2, run:</p>
 
-<p>The following two features are only possible when using Docker EE and managing
-your Docker services using Universal Control Plane (UCP):</p>
-
-<ul>
-  <li>
-    <p>The <a href="https://matsuand.github.io/docs.docker.jp.onthefly/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/">HTTP routing mesh</a>
-allows you to share the same network IP address and port among multiple
-services. UCP routes the traffic to the appropriate service using the
-combination of hostname and port, as requested from the client.</p>
+    <p><code class="highlighter-rouge">wsl --set-version &lt;distro name&gt; 2</code></p>
   </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/#sticky-sessions">Session stickiness</a> allows you to specify information in the HTTP header
-which UCP uses to route subsequent requests to the same service task, for
-applications which require stateful sessions.</p>
-  </li>
-</ul>
+</ol>
 
-<h2 id="networking-tutorials">ネットワークに関するチュートリアル</h2>
+<h1 id="download">Download</h1>
 
-<p>Now that you understand the basics about Docker networks, deepen your
-understanding using the following tutorials:</p>
+<p>To download the Tech Preview, click <a href="https://download.docker.com/win/edge/36883/Docker%20Desktop%20Installer.exe">Docker Desktop WSL 2 Tech Preview Installer</a>.</p>
 
-<ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-standalone/">Standalone networking tutorial</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-host/">Host networking tutorial</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-overlay/">Overlay networking tutorial</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network/network-tutorial-macvlan/">Macvlan networking tutorial</a></li>
-</ul>
+<h1 id="installation">Installation</h1>
+
+<p>Ensure you have completed the steps described in the Prerequisites section <strong>before</strong> installing the Tech Preview.</p>
+
+<p>Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop menu displays the <strong>WSL 2 Tech Preview</strong> option.</p>
+
+<p><img src="images/wsl2-ui.png" alt="WSL 2 Tech Preview Desktop UI" /></p>
+
+<p>Select <strong>WSL 2 Tech Preview</strong> from the menu to start, stop, and configure the daemon running in WSL 2. When the WSL 2 daemon starts, a docker CLI context is automatically created for it, and the CLI configuration points to the context. You can list contexts by running <code class="highlighter-rouge">docker context ls</code>.</p>
+
+<p><img src="images/wsl2-context.png" alt="WSL 2 Tech Preview Context" /></p>
+
+<p>Docker Desktop allows you to toggle between the WSL modes. To use the classic daemon, run <code class="highlighter-rouge">docker context use default</code>. To switch to WSL 2, run <code class="highlighter-rouge">docker context use wsl</code>.</p>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=networking">networking</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=bridge">bridge</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=routing">routing</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=routing mesh">routing mesh</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=overlay">overlay</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ports">ports</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Docker">Docker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=WSL">WSL</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=WSL 2">WSL 2</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Tech Preview">Tech Preview</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Windows Subsystem for Linux">Windows Subsystem for Linux</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -312,7 +251,7 @@ understanding using the following tutorials:</p>
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/network/";
+							  var originalURL = "/docker-for-windows/wsl-tech-preview/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -332,9 +271,9 @@ understanding using the following tutorials:</p>
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "network/index.md",
-										"title": "概要",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/network/index.md"
+										"unique_id": "docker-for-windows/wsl-tech-preview.md",
+										"title": "Docker Desktop WSL 2 Tech Preview",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/docker-for-windows/wsl-tech-preview.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -366,8 +305,8 @@ understanding using the following tutorials:</p>
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/network/index.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [network/index.md](https://matsuand.github.io/docs.docker.jp.onthefly/network/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/docker-for-windows/wsl-tech-preview.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-for-windows/wsl-tech-preview.md](https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -393,14 +332,10 @@ understanding using the following tutorials:</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#scope-of-this-topic" class="nomunge">説明を行う範囲</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#network-drivers" class="nomunge">ネットワークドライバー</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#network-driver-summary" class="nomunge">ネットワークドライバーのまとめ</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#docker-ee-networking-features" class="nomunge">Docker EE のネットワーク機能</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#networking-tutorials" class="nomunge">ネットワークに関するチュートリアル</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#overview" class="nomunge">Overview</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#download" class="nomunge">Download</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#installation" class="nomunge">Installation</a></li>
 </ul>
 
 
@@ -516,7 +451,7 @@ understanding using the following tutorials:</p>
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/network/';
+	var pageURL = jekyllEnv + '/docker-for-windows/wsl-tech-preview/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

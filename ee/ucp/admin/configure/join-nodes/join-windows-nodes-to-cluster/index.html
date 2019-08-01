@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-08-01 20:52:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -90,17 +90,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-01T20:52:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Join Windows worker nodes to your cluster"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Enterprise 2.1 supports worker nodes that run on Windows Server 2016, 1709, or 1803. Only worker nodes are supported on Windows, and all manager nodes in the cluster must..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Enterprise 3.0 supports worker nodes that run on Windows Server 2016 and Windows Server 2019. Only worker nodes are supported on Windows, and all manager nodes in the cluster..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-01T20:52:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker Enterprise, UCP, cluster, scale, worker, Windows">
@@ -201,14 +201,15 @@
 
 							
 							
-							<p>Docker Enterprise 2.1 supports worker nodes that run on Windows Server 2016, 1709,
-or 1803. Only worker nodes are supported on Windows, and all manager nodes in the cluster
-must run on Linux.</p>
+							<p>Docker Enterprise 3.0 supports worker nodes that run on Windows Server 2016 and
+Windows Server 2019. Only worker nodes are supported on Windows, and all
+manager nodes in the cluster must run on Linux. Additionally Windows worker
+nodes can only be used by the Swarm Orchestrator.</p>
 
 <p>Follow these steps to enable a worker node on Windows.</p>
 
 <ol>
-  <li>Install Docker Engine - Enterprise on Windows Server 2016, 1709, or 1803.</li>
+  <li>Install Docker Engine - Enterprise on Windows Server 2016 or 2019.</li>
   <li>Configure the Windows node.</li>
   <li>Join the Windows node to the cluster.</li>
 </ol>
@@ -217,9 +218,10 @@ must run on Linux.</p>
 
 <h2 id="install-docker-engine---enterprise-on-windows-server">Install Docker Engine - Enterprise on Windows Server</h2>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee">Install Docker Engine - Enterprise</a>
-on a Windows Server 2016, 1709 or 1803 instance to enable joining a cluster that’s managed by
-Docker Enterprise 2.1.</p>
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/windows/docker-ee/#use-a-script-to-install-docker-ee">Install Docker Engine -
+Enterprise</a>
+on a Windows Server 2016 or 2019 instance before joining the node to a Docker
+Enterprise Cluster.</p>
 
 <h2 id="configure-the-windows-node">Configure the Windows node</h2>
 
@@ -245,12 +247,18 @@ docker/ucp-agent-win:3.2.0
 docker/ucp-dsinfo-win:3.2.0
 </code></pre></div></div>
 
-<p>On Windows Server 2016, in a PowerShell terminal running as Administrator,
-log in to Docker Hub with the <code class="highlighter-rouge">docker login</code> command and pull the listed images.</p>
+<p>On a Windows Server node, in a PowerShell terminal running as Administrator,
+log in to Docker Hub with the <code class="highlighter-rouge">docker login</code> command and pull the listed
+images.</p>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image pull docker/ucp-agent-win:3.2.0
 docker image pull docker/ucp-dsinfo-win:3.2.0
 </code></pre></div></div>
+
+<p>If the cluster is deployed in an offline site, where the nodes do not have
+access to the Docker Hub, UCP images can be sideloaded onto the Windows Server
+nodes. Follow the instructions on the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/install-offline/">install
+offline</a> page to sideload the images.</p>
 
 <h3 id="run-the-windows-node-setup-script">Run the Windows node setup script</h3>
 
@@ -286,12 +294,12 @@ to the corresponding files in <code class="highlighter-rouge">C:\ProgramData\doc
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
 </span><span class="err">...</span><span class="w">
-		</span><span class="s2">"debug"</span><span class="p">:</span><span class="w">     </span><span class="kc">true</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"tls"</span><span class="p">:</span><span class="w">       </span><span class="kc">true</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"tlscacert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\c</span><span class="s2">a.pem"</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"tlscert"</span><span class="p">:</span><span class="w">   </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\c</span><span class="s2">ert.pem"</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"tlskey"</span><span class="p">:</span><span class="w">    </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\k</span><span class="s2">ey.pem"</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"tlsverify"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"debug"</span><span class="p">:</span><span class="w">     </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tls"</span><span class="p">:</span><span class="w">       </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tlscacert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\c</span><span class="s2">a.pem"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tlscert"</span><span class="p">:</span><span class="w">   </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\c</span><span class="s2">ert.pem"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tlskey"</span><span class="p">:</span><span class="w">    </span><span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogramData</span><span class="se">\d</span><span class="s2">ocker</span><span class="se">\d</span><span class="s2">aemoncerts</span><span class="se">\k</span><span class="s2">ey.pem"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tlsverify"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
 </span><span class="err">...</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
@@ -392,14 +400,11 @@ following warning.</p>
 
 <h2 id="windows-nodes-limitations">Windows nodes limitations</h2>
 
-<p>Some features are not yet supported on Windows nodes:</p>
+<p>The following features are not yet supported on Windows Server 2016 or 2019:</p>
 
 <ul>
   <li>Networking
     <ul>
-      <li>The cluster mode routing mesh can’t be used on Windows nodes. You can expose
-a port for your service in the host where it is running, and use the HTTP
-routing mesh to make your service accessible using a domain name.</li>
       <li>Encrypted networks are not supported. If you’ve upgraded from a previous
 version, you’ll also need to recreate the <code class="highlighter-rouge">ucp-hrm</code> network to make it
 unencrypted.</li>
@@ -420,6 +425,23 @@ within the container.</li>
     <ul>
       <li>On Windows, Docker can’t listen on a Unix socket. Use TCP or a named pipe
 instead.</li>
+    </ul>
+  </li>
+  <li>Orchestration
+    <ul>
+      <li>Windows Containers can only be scheduled by the Docker Swarm orchestrator.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The following features are not yet supported on Windows Server 2016:</p>
+
+<ul>
+  <li>Networking
+    <ul>
+      <li>The cluster mode routing mesh can’t be used on Windows nodes. You can expose
+a port for your service in the host where it is running, and use the HTTP
+routing mesh to make your service accessible using a domain name.</li>
     </ul>
   </li>
 </ul>

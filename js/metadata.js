@@ -2354,8 +2354,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/network/",
-"title":"Overview",
-"description":"Overview of Docker networks and networking concepts",
+"title":"概要",
+"description":"Docker ネットワークとその概念",
 "keywords":"networking, bridge, routing, routing mesh, overlay, ports"
 }
 ,
@@ -3124,7 +3124,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/network/network-tutorial-standalone/",
-"title":"Networking with standalone containers",
+"title":"スタンドアロンなコンテナーのネットワーク",
 "description":"Tutorials for networking with standalone containers",
 "keywords":"networking, bridge, routing, ports, overlay"
 }
@@ -5238,7 +5238,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-aws/upgrade/",
-"title":"Docker for AWS upgrades",
+"title":"Docker for AWS のアップグレード",
 "description":"Upgrading your stack",
 "keywords":"aws, amazon, iaas, tutorial"
 }
@@ -5612,6 +5612,13 @@ var pages = [
 "title":"Working with Docker Template (experimental)",
 "description":"Working with Docker Application Template",
 "keywords":"Docker, application template, Application Designer,"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/",
+"title":"Docker Desktop WSL 2 Tech Preview",
+"description":"Docker Desktop WSL 2 Tech Preview",
+"keywords":"Docker, WSL, WSL 2, Tech Preview, Windows Subsystem for Linux"
 }
 ,
 {
