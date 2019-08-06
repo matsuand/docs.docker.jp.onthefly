@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-08-06 10:43:27 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-06T10:43:27+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Dockerfile 記述のベストプラクティス"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="このドキュメントは、効果的なイメージを構築するための、お勧めのベストプラクティスや方法について示します。 Docker は Dockerfile に書かれた指示を読み込んで、自動的にイメージを構築します。 これは、あらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。 Dockerfile は所定のフォーマットにこだわっていて、特定の指示を用いることにしています。 その内容は Dockerfile リファレンス に示しています。 Docker イメージは読み取り専用のレイヤにより構成されます。 個々のレイヤは Dockerfile の各コマンドを表現しています。 レイヤは順に積み上げられ、直前のレイヤからの差分を表わします。 以下のような Dockerfile を見てみます。 FROM ubuntu:18.04 COPY . /app RUN make /app CMD..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="このドキュメントは、効果的なイメージを構築する方法、お勧めのベストプラクティスについて示します。 Docker は Dockerfile に書かれた指示を読み込んで、自動的にイメージを構築します。 このファイルはあらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。 Dockerfile は所定のフォーマットや各種の命令に従います。 その内容は Dockerfile リファレンス に示しています。 Docker イメージは読み取り専用のレイヤーにより構成されます。 個々のレイヤーは Dockerfile の各命令を表現しています。 レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。 以下のような Dockerfile を見てみます。 FROM ubuntu:18.04 COPY . /app RUN make /app CMD..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-06T10:43:27+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="parent image, images, dockerfile, best practices, hub, official image">
@@ -183,23 +183,23 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    18 分
+    13 分
   
 </span>
 
 							
 							
 							
-<p>このドキュメントは、効果的なイメージを構築するための、お勧めのベストプラクティスや方法について示します。</p>
+<p>このドキュメントは、効果的なイメージを構築する方法、お勧めのベストプラクティスについて示します。</p>
 
 <p>Docker は <code class="highlighter-rouge">Dockerfile</code> に書かれた指示を読み込んで、自動的にイメージを構築します。
-これは、あらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。
-<code class="highlighter-rouge">Dockerfile</code> は所定のフォーマットにこだわっていて、特定の指示を用いることにしています。
+このファイルはあらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。
+<code class="highlighter-rouge">Dockerfile</code> は所定のフォーマットや各種の命令に従います。
 その内容は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/">Dockerfile リファレンス</a> に示しています。</p>
 
-<p>Docker イメージは読み取り専用のレイヤにより構成されます。
-個々のレイヤは Dockerfile の各コマンドを表現しています。
-レイヤは順に積み上げられ、直前のレイヤからの差分を表わします。
+<p>Docker イメージは読み取り専用のレイヤーにより構成されます。
+個々のレイヤーは Dockerfile の各命令を表現しています。
+レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。
 以下のような <code class="highlighter-rouge">Dockerfile</code> を見てみます。</p>
 
 <pre><code class="language-Dockerfile">FROM ubuntu:18.04
@@ -208,36 +208,37 @@ RUN make /app
 CMD python /app/app.py
 </code></pre>
 
-<p>各コマンドからは 1つずつレイヤーが生成されます。</p>
+<p>各コマンドからは 1 つずつレイヤーが生成されます。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">FROM</code> Docker イメージ <code class="highlighter-rouge">ubuntu:18.04</code> からレイヤを 1 つ生成します。</li>
+  <li><code class="highlighter-rouge">FROM</code> Docker イメージ <code class="highlighter-rouge">ubuntu:18.04</code> からレイヤーを 1 つ生成します。</li>
   <li><code class="highlighter-rouge">COPY</code> Docker クライアントのカレントディレクトリからファイルをコピーします。</li>
   <li><code class="highlighter-rouge">RUN</code> <code class="highlighter-rouge">make</code> を使ってアプリケーションをビルドします。</li>
   <li><code class="highlighter-rouge">CMD</code> コンテナー内にて実行するコマンドを指定します。</li>
 </ul>
 
-<p>イメージを実行してコンテナーが生成されると、それまであったレイヤの上に_書き込み可能やレイヤ_（”コンテナーレイヤ”）が加えられます。
-実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、その薄くできあがった書き込みレイヤに書き込まれます。</p>
+<p>イメージを実行してコンテナーが生成されると、それまであったレイヤーの上に_書き込み可能なレイヤー（”コンテナーレイヤー”）が加えられます。
+実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、その薄くできあがった書き込みレイヤーに書き込まれます。</p>
 
-<p>イメージレイヤ（また Docker がイメージをどう作り保存するか）については <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">ストレージドライバーについて</a> を参照してください。</p>
+<p>イメージレイヤー（また Docker がイメージをどう作り保存するか）については <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">ストレージドライバーについて</a> を参照してください。</p>
 
 <h2 id="一般的なガイドラインとアドバイス">一般的なガイドラインとアドバイス</h2>
 
-<h3 id="はかない-ephemeral-コンテナーの生成">“はかない” (ephemeral) コンテナーの生成</h3>
+<h3 id="エフェメラルなコンテナーの生成">エフェメラルなコンテナーの生成</h3>
 
-<p><code class="highlighter-rouge">Dockerfile</code> によって定義されるイメージからコンテナーが作り出されますが、このコンテナーはできる限り “はかないもの”（ephemeral）と考えておくべきです。
-“はかない” という語を使うのは、コンテナーが停止、破棄されて、すぐに新たなものが作り出されるからです。
-最小限の構成や設定があれば、新たなものに置き換えられます。</p>
+<p><code class="highlighter-rouge">Dockerfile</code> によって定義されるイメージからコンテナーが作り出されます。
+このコンテナーはできるだけエフェメラルな（ephemeral; はかない）ものとして生成されます。
+「エフェメラル」という語を使うのは、コンテナーが停止、破棄されて、すぐに新たなものが作り出されるからです。
+最小限の構成や設定を行うだけで、新たなものに置き換えられます。</p>
 
 <p><em>The Twelve-factor App</em> 手法にある<a href="https://12factor.net/processes">プロセス</a>を見てみると、コンテナーの実行の仕方をステートレス（stateless）にしている理由がつかめると思います。</p>
 
-<h3 id="ビルドコンテキストを理解する">ビルドコンテキストを理解する</h3>
+<h3 id="ビルドコンテキストの理解">ビルドコンテキストの理解</h3>
 
 <p><code class="highlighter-rouge">docker build</code> コマンドを実行したときの、カレントなワーキングディレクトリのことを <em>ビルドコンテキスト</em>（build context）と呼びます。
-デフォルトで Dockerfile は、カレントなワーキングディレクトリを指すものとしていますが、ファイルフラグ（<code class="highlighter-rouge">-f</code>）を使って別のディレクトリを指定することもできます。
-Regardless of where the <code class="highlighter-rouge">Dockerfile</code> actually lives, all recursive contents of files and
-directories in the current directory are sent to the Docker daemon as the build context.</p>
+デフォルトで Dockerfile は、カレントなワーキングディレクトリにあるものとみなされます。
+ただしファイルフラグ（<code class="highlighter-rouge">-f</code>）を使って別のディレクトリとすることもできます。
+<code class="highlighter-rouge">Dockerfile</code> が実際にどこにあったとしても、カレントディレクトリ配下にあるファイルやディレクトリの内容がすべて、ビルドコンテキストとして Docker デーモンに送られることになります。</p>
 
 <blockquote>
   <p>ビルドコンテキストの例</p>
@@ -252,7 +253,7 @@ directories in the current directory are sent to the Docker daemon as the build 
 docker build <span class="nt">-t</span> helloapp:v1 <span class="nb">.</span>
 </code></pre></div>  </div>
 
-  <p><code class="highlighter-rouge">Dockerfile</code> と <code class="highlighter-rouge">hello</code> をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュには頼らずに）2 つめのイメージをビルドします。
+  <p><code class="highlighter-rouge">Dockerfile</code> と <code class="highlighter-rouge">hello</code> をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュは用いずに）2 つめのイメージをビルドします。
 Dockerfile に対して <code class="highlighter-rouge">-f</code> を使い、ビルドコンテキストとなるディレクトリを指定します。</p>
 
   <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> dockerfiles context
@@ -261,29 +262,24 @@ docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> hello
 </code></pre></div>  </div>
 </blockquote>
 
-<p>Inadvertently including files that are not necessary for building an image
-results in a larger build context and larger image size. This can increase the
-time to build the image, time to pull and push it, and the container runtime
-size. To see how big your build context is, look for a message like this when
-building your <code class="highlighter-rouge">Dockerfile</code>:</p>
+<p>イメージのビルドには必要のないファイルを誤って含めてしまうと、ビルドコンテキストがそれだけ大きくなり、結果としてサイズの大きなイメージが生成されることになります。
+こうしてしまうと、イメージビルドの時間、このイメージをプッシュしたりプルしたりする時間が、その分だけ要することとなり、コンテナーの実行時の容量も増えてしまいます。
+ビルドコンテキストのサイズがどれだけになったかは、<code class="highlighter-rouge">Dockerfile</code> を使ってビルド処理を行った際の以下のようなメッセージを確認すればわかります。</p>
 
 <pre><code class="language-none">Sending build context to Docker daemon  187.8MB
 </code></pre>
 
 <h3 id="stdin-を通じた-dockerfile-のパイプ"><code class="highlighter-rouge">stdin</code> を通じた Dockerfile のパイプ</h3>
 
-<p>Docker has the ability to build images by piping <code class="highlighter-rouge">Dockerfile</code> through <code class="highlighter-rouge">stdin</code>
-with a <em>local or remote build context</em>. Piping a <code class="highlighter-rouge">Dockerfile</code> through <code class="highlighter-rouge">stdin</code>
-can be useful to perform one-off builds without writing a Dockerfile to disk,
-or in situations where the <code class="highlighter-rouge">Dockerfile</code> is generated, and should not persist
-afterwards.</p>
+<p>Docker には、<code class="highlighter-rouge">Dockerfile</code> を <code class="highlighter-rouge">stdin</code> からパイプ入力してイメージをビルドできる機能があります。
+その際には <em>ローカルの、あるいはリモートのビルドコンテキスト</em> を利用することができます。
+<code class="highlighter-rouge">stdin</code> からの <code class="highlighter-rouge">Dockerfile</code> のパイプ入力機能は、Dockerfile をディスクに書き込む必要のない、1 度きりのイメージビルドを行う場合に利用できます。
+あるいは <code class="highlighter-rouge">Dockerfile</code> は生成されているものの、その後は必要がなくなるような場合にも活用できます。</p>
 
 <blockquote>
-  <p>The examples in this section use <a href="http://tldp.org/LDP/abs/html/here-docs.html">here documents</a>
-for convenience, but any method to provide the <code class="highlighter-rouge">Dockerfile</code> on <code class="highlighter-rouge">stdin</code> can be
-used.</p>
+  <p>この節における利用例では、扱いやすい <a href="http://tldp.org/LDP/abs/html/here-docs.html">ヒアドキュメント</a> を使っていますが、<code class="highlighter-rouge">stdin</code> から <code class="highlighter-rouge">Dockerfile</code> を与える方法には、他にもいろいろとあります。</p>
 
-  <p>For example, the following commands are equivalent:</p>
+  <p>たとえば以下の 2 つのコマンドは同じ処理を行います。</p>
 
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-e</span> <span class="s1">'FROM busybox\nRUN echo "hello world"'</span> | docker build -
 </code></pre></div>  </div>
@@ -294,22 +290,21 @@ RUN echo "hello world"
 </span><span class="no">EOF
 </span></code></pre></div>  </div>
 
-  <p>You can substitute the examples with your preferred approach, or the approach
-that best fits your use-case.</p>
+  <p>この例に示している方法は、好みの方法あるいは作業に適した方法に置き換えてください。</p>
 </blockquote>
 
-<h4 id="build-an-image-using-a-dockerfile-from-stdin-without-sending-build-context">Build an image using a Dockerfile from stdin, without sending build context</h4>
+<h4 id="build-an-image-using-a-dockerfile-from-stdin-without-sending-build-context">ビルドコンテキストの送信なく <code class="highlighter-rouge">stdin</code> からの Dockerfile によりイメージをビルド</h4>
 
-<p>Use this syntax to build an image using a <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">stdin</code>, without
-sending additional files as build context. The hyphen (<code class="highlighter-rouge">-</code>) takes the position
-of the <code class="highlighter-rouge">PATH</code>, and instructs Docker to read the build context (which only
-contains a <code class="highlighter-rouge">Dockerfile</code>) from <code class="highlighter-rouge">stdin</code> instead of a directory:</p>
+<p>以下に示す構文は、<code class="highlighter-rouge">stdin</code> から Dockerfile を指定してイメージをビルドしますが、その際にビルドコンテキストとして余計なファイルは送信しないようになります。
+ハイフン（<code class="highlighter-rouge">-</code>）を <code class="highlighter-rouge">PATH</code> の指定場所に記述します。
+こうすると Docker は、ディレクトリからではなく <code class="highlighter-rouge">stdin</code> からビルドコンテキストを読み込むことになります。
+（そこには <code class="highlighter-rouge">Dockerfile</code> しかありません。）</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="o">[</span>OPTIONS] -
 </code></pre></div></div>
 
-<p>The following example builds an image using a <code class="highlighter-rouge">Dockerfile</code> that is passed through
-<code class="highlighter-rouge">stdin</code>. No files are sent as build context to the daemon.</p>
+<p>以下の例は <code class="highlighter-rouge">stdin</code> から受け渡された <code class="highlighter-rouge">Dockerfile</code> を使ってイメージをビルドします。
+ビルドコンテキストからデーモンに送信されるファイルは 1 つもありません。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> myimage:latest -<span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
 FROM busybox
@@ -317,22 +312,20 @@ RUN echo "hello world"
 </span><span class="no">EOF
 </span></code></pre></div></div>
 
-<p>Omitting the build context can be useful in situations where your <code class="highlighter-rouge">Dockerfile</code>
-does not require files to be copied into the image, and improves the build-speed,
-as no files are sent to the daemon.</p>
+<p>ビルドコンテキストを省略するのは、イメージにコピーするファイルが何もないような <code class="highlighter-rouge">Dockerfile</code> を用いる際に利用できます。
+その場合はデーモンへのファイル送信がない分だけ、ビルド時間が短縮されます。</p>
 
-<p>If you want to improve the build-speed by excluding <em>some</em> files from the build-
-context, refer to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#exclude-with-dockerignore">exclude with .dockerignore</a>.</p>
+<p>ビルドコンテキストからファイルを除外することによって、イメージビルドの時間を短縮しようとする場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#exclude-with-dockerignore">.dockerignore によるファイル除外の指定</a> を参照してください。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Attempting to build a Dockerfile that uses <code class="highlighter-rouge">COPY</code> or <code class="highlighter-rouge">ADD</code> will fail
-if this syntax is used. The following example illustrates this:</p>
+  <p><strong>メモ</strong>: この構文を用いる際に、Dockerfile に <code class="highlighter-rouge">COPY</code> や <code class="highlighter-rouge">ADD</code> を含めるとビルドに失敗します。
+以下にその例を説明します。</p>
 
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a directory to work in</span>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 作業ディレクトリを生成します。</span>
 mkdir example
 <span class="nb">cd </span>example
 
-<span class="c"># create an example file</span>
+<span class="c"># サンプルのファイルを生成します。</span>
 touch somefile.txt
 
 docker build <span class="nt">-t</span> myimage:latest -<span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
@@ -341,35 +334,35 @@ COPY somefile.txt .
 RUN cat /somefile.txt
 </span><span class="no">EOF
 
-</span><span class="c"># observe that the build fails</span>
+</span><span class="c"># ビルドが失敗する様子を確認します。</span>
 ...
 Step 2/3 : COPY somefile.txt <span class="nb">.</span>
 COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
 </code></pre></div>  </div>
 </blockquote>
 
-<h4 id="build-from-a-local-build-context-using-a-dockerfile-from-stdin">Build from a local build context, using a Dockerfile from stdin</h4>
+<h4 id="build-from-a-local-build-context-using-a-dockerfile-from-stdin">ローカルのビルドコンテキストを使ったビルド、<code class="highlighter-rouge">stdio</code> からの Dockerfile 利用</h4>
 
-<p>Use this syntax to build an image using files on your local filesystem, but using
-a <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">stdin</code>. The syntax uses the <code class="highlighter-rouge">-f</code> (or <code class="highlighter-rouge">--file</code>) option to
-specify the <code class="highlighter-rouge">Dockerfile</code> to use, using a hyphen (<code class="highlighter-rouge">-</code>) as filename to instruct
-Docker to read the <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">stdin</code>:</p>
+<p>以下の構文により、ローカルファイルシステム上のファイルを使ってイメージをビルドします。
+ただし <code class="highlighter-rouge">Dockerfile</code> は <code class="highlighter-rouge">stdin</code> からの入力とします。
+この構文では <code class="highlighter-rouge">-f</code>（または <code class="highlighter-rouge">--file</code>）オプションによって <code class="highlighter-rouge">Dockerfile</code> を指定します。
+そしてファイル名にはハイフン（<code class="highlighter-rouge">-</code>）を指定することで、<code class="highlighter-rouge">Dockerfile</code> を <code class="highlighter-rouge">stdin</code> から読み込むことを指示しています。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="o">[</span>OPTIONS] <span class="nt">-f-</span> PATH
 </code></pre></div></div>
 
-<p>The example below uses the current directory (<code class="highlighter-rouge">.</code>) as the build context, and builds
-an image using a <code class="highlighter-rouge">Dockerfile</code> that is passed through <code class="highlighter-rouge">stdin</code> using a <a href="http://tldp.org/LDP/abs/html/here-docs.html">here
-document</a>.</p>
+<p>以下の例ではビルドコンテキストとしてカレントディレクトリ（<code class="highlighter-rouge">.</code>）を利用します。
+そして <code class="highlighter-rouge">stdin</code> から受け渡される <code class="highlighter-rouge">Dockerfile</code> を使ってイメージをビルドします。
+この際には <a href="http://tldp.org/LDP/abs/html/here-docs.html">ヒアドキュメント</a> を使っています。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a directory to work in</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 作業ディレクトリを生成します。</span>
 mkdir example
 <span class="nb">cd </span>example
 
-<span class="c"># create an example file</span>
+<span class="c"># サンプルのファイルを生成します。</span>
 touch somefile.txt
 
-<span class="c"># build an image using the current directory as context, and a Dockerfile passed through stdin</span>
+<span class="c"># カレントディレクトリをコンテキストとして stdin から Dockerfile をビルドします。</span>
 docker build <span class="nt">-t</span> myimage:latest <span class="nt">-f-</span> <span class="nb">.</span> <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
 FROM busybox
 COPY somefile.txt .
@@ -377,22 +370,22 @@ RUN cat /somefile.txt
 </span><span class="no">EOF
 </span></code></pre></div></div>
 
-<h4 id="build-from-a-remote-build-context-using-a-dockerfile-from-stdin">Build from a remote build context, using a Dockerfile from stdin</h4>
+<h4 id="build-from-a-remote-build-context-using-a-dockerfile-from-stdin">リモートのビルドコンテキストを使ったビルド、<code class="highlighter-rouge">stdio</code> からの Dockerfile 利用</h4>
 
-<p>Use this syntax to build an image using files from a remote <code class="highlighter-rouge">git</code> repository,
-using a <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">stdin</code>. The syntax uses the <code class="highlighter-rouge">-f</code> (or <code class="highlighter-rouge">--file</code>) option to
-specify the <code class="highlighter-rouge">Dockerfile</code> to use, using a hyphen (<code class="highlighter-rouge">-</code>) as filename to instruct
-Docker to read the <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">stdin</code>:</p>
+<p>以下の構文により、リモートの git リポジトリ上のファイルを使ってイメージをビルドします。
+ここでも <code class="highlighter-rouge">Dockerfile</code> は <code class="highlighter-rouge">stdin</code> からの入力とします。
+この構文では <code class="highlighter-rouge">-f</code>（または <code class="highlighter-rouge">--file</code>）オプションによって <code class="highlighter-rouge">Dockerfile</code> を指定します。
+そしてファイル名にはハイフン（<code class="highlighter-rouge">-</code>）を指定することで、<code class="highlighter-rouge">Dockerfile</code> を <code class="highlighter-rouge">stdin</code> から読み込むことを指示しています。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="o">[</span>OPTIONS] <span class="nt">-f-</span> PATH
 </code></pre></div></div>
 
-<p>This syntax can be useful in situations where you want to build an image from a
-repository does not contain a <code class="highlighter-rouge">Dockerfile</code>, or if you want to build with a custom
-<code class="highlighter-rouge">Dockerfile</code>, without maintaining your own fork of the repository.</p>
+<p>この構文は、イメージをビルドするために利用するリポジトリに <code class="highlighter-rouge">Dockerfile</code> が含まれていないような場合に用いることができます。
+あるいは <code class="highlighter-rouge">Dockerfile</code> には独自のものを使ってビルドを行いたい場合です。
+つまりフォークしたリポジトリを変更しなくて済みます。</p>
 
-<p>The example below builds an image using a <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">stdin</code>, and adds
-the <code class="highlighter-rouge">README.md</code> file from the <a href="https://github.com/docker-library/hello-world">“hello-world” Git repository on GitHub</a>.</p>
+<p>以下の例は <code class="highlighter-rouge">stdin</code> から <code class="highlighter-rouge">Dockerfile</code> を指定してイメージをビルドします。
+そして <a href="https://github.com/docker-library/hello-world">GitHub 上の git リポジトリ “hello-world”</a> から <code class="highlighter-rouge">README.md</code> ファイルを取得して加えます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> myimage:latest <span class="nt">-f-</span> https://github.com/docker-library/hello-world.git <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
 FROM busybox
@@ -401,115 +394,109 @@ COPY README.md .
 </span></code></pre></div></div>
 
 <blockquote>
-  <p><strong>Under the hood</strong></p>
+  <p><strong>内部の処理</strong></p>
 
-  <p>When building an image using a remote Git repository as build context, Docker
-performs a <code class="highlighter-rouge">git clone</code> of the repository on the local machine, and sends
-those files as build context to the daemon. This feature requires <code class="highlighter-rouge">git</code> to be
-installed on the host where you run the <code class="highlighter-rouge">docker build</code> command.</p>
+  <p>ビルドコンテキストとしてリモートの git リポジトリを使ってイメージをビルドする場合、Docker はローカルマシン上において、そのリポジトリに対して <code class="highlighter-rouge">git clone</code> を実行します。
+そして取得されるファイルをビルドコンテキストとしてデーモンに送ります。
+つまりこの機能を実行するには、<code class="highlighter-rouge">docker build</code> コマンドを実行するホスト上に <code class="highlighter-rouge">git</code> をインストールしていることが必要です。</p>
 </blockquote>
 
-<h3 id="exclude-with-dockerignore">Exclude with .dockerignore</h3>
+<h3 id="exclude-with-dockerignore">.dockerignore を使ったファイル除外の指定</h3>
 
-<p>To exclude files not relevant to the build (without restructuring your source
-repository) use a <code class="highlighter-rouge">.dockerignore</code> file. This file supports exclusion patterns
-similar to <code class="highlighter-rouge">.gitignore</code> files. For information on creating one, see the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#dockerignore-file">.dockerignore file</a>.</p>
+<p>ビルドに関係のないファイルを（ソースリポジトリを変更することなく）除外するには <code class="highlighter-rouge">.dockerignore</code> ファイルを利用します。
+このファイルは <code class="highlighter-rouge">.gitignore</code> ファイルと同様のファイル除外指定パターンに対応しています。
+ファイルの生成に関しては <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#dockerignore-file">.dockerignore ファイル</a> を参照してください。</p>
 
-<h3 id="use-multi-stage-builds">Use multi-stage builds</h3>
+<h3 id="use-multi-stage-builds">マルチステージビルドの利用</h3>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">Multi-stage builds</a> allow you to drastically reduce the
-size of your final image, without struggling to reduce the number of intermediate
-layers and files.</p>
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">マルチステージビルド</a> は、最終的なイメージサイズを激減させることができます。
+中間的に生成されるレイヤーやファイルの数を減らすような苦労は必要ありません。</p>
 
-<p>Because an image is built during the final stage of the build process, you can
-minimize image layers by <a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#leverage-build-cache">leveraging build cache</a>.</p>
+<p>イメージというものは、ビルド処理の最終段階で生成されるものです。
+したがってイメージのレイヤーは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#leverage-build-cache">ビルドキャッシュの活用</a> によって最小限に抑えることができます。</p>
 
-<p>For example, if your build contains several layers, you can order them from the
-less frequently changed (to ensure the build cache is reusable) to the more
-frequently changed:</p>
+<p>たとえばビルドするイメージにレイヤーがいくつかある場合、変更があまり行われないもの（ビルドキャッシュが確実に再利用されるもの）から、頻繁に変更されるものへと並び順を定めることができます。</p>
 
 <ul>
   <li>
-    <p>Install tools you need to build your application</p>
+    <p>アプリケーションのビルドに必要なツールのインストール</p>
   </li>
   <li>
-    <p>Install or update library dependencies</p>
+    <p>依存するライブラリのインストールまたはアップデート</p>
   </li>
   <li>
-    <p>Generate your application</p>
+    <p>アプリケーションのビルド</p>
   </li>
 </ul>
 
-<p>A Dockerfile for a Go application could look like:</p>
+<p>たとえば Go 言語アプリケーションの Dockerfile は以下のようになります。</p>
 
 <pre><code class="language-Dockerfile">FROM golang:1.11-alpine AS build
 
-# Install tools required for project
-# Run `docker build --no-cache .` to update dependencies
+# 本プロジェクトに必要なツールをインストール。
+# `docker build --no-cache .` を実行して依存パッケージのアップデート。
 RUN apk add --no-cache git
 RUN go get github.com/golang/dep/cmd/dep
 
-# List project dependencies with Gopkg.toml and Gopkg.lock
-# These layers are only re-built when Gopkg files are updated
+# プロジェクトの依存関係を Gopkg.toml と Gopkg.lock に列記。
+# これに対応するレイヤーは Gopkg ファイルの更新時のみ再ビルド。
 COPY Gopkg.lock Gopkg.toml /go/src/project/
 WORKDIR /go/src/project/
-# Install library dependencies
+# 依存ライブラリをインストール。
 RUN dep ensure -vendor-only
 
-# Copy the entire project and build it
-# This layer is rebuilt when a file changes in the project directory
+# プロジェクト全体をコピーしてビルド。
+# このレイヤーはプロジェクトディレクトリ内のファイル変更時に再ビルド。
 COPY . /go/src/project/
 RUN go build -o /bin/project
 
-# This results in a single layer image
+# 以下によりイメージを 1 レイヤーに。
 FROM scratch
 COPY --from=build /bin/project /bin/project
 ENTRYPOINT ["/bin/project"]
 CMD ["--help"]
 </code></pre>
 
-<h3 id="不要なパッケージをインストールしない">不要なパッケージをインストールしない</h3>
+<h3 id="dont-install-unnecessary-packages">不要なパッケージをインストールしない</h3>
 
-<p>複雑さ、依存関係、ファイルサイズ、構築時間をそれぞれ減らすためには、余分な、または必須ではない「あった方が良いだろう」程度のパッケージをインストールすべきではありません。
-例えば、データベースイメージであればテキストエディターは不要でしょう。</p>
+<p>Dockerfile をわかりやすくして、依存関係、ファイルサイズ、構築時間をいずれも減らすためには、余分で必須ではない「あった方が良いだろう」程度のパッケージはインストールしないようにします。
+例えば、データベースイメージであればテキストエディターは不要のはずです。</p>
 
-<h3 id="アプリケーションの分割">アプリケーションの分割</h3>
+<h3 id="decouple-applications">アプリケーションの分割</h3>
 
-<p>1 つのコンテナーにとって関心のあることといえば、ただ 1 つです。
-アプリケーションを複数のコンテナーに分けることにより、スケールアウトやコンテナーの再利用がしやすくなります。
-たとえばウェブアプリケーションが３つの独立したコンテナーにより成り立っているとします。
-それらは個々のイメージを持つものとなり、それぞれに分かれてウェブアプリケーション、データベース、メモリキャッシュを管理するようになります。</p>
+<p>1 つのコンテナーが取り扱う内容は 1 つにしぼるべきです。
+アプリケーションを複数のコンテナーに分けると、スケールアウトやコンテナーの再利用がしやすくなります。
+たとえばウェブアプリケーションが 3 つの独立したコンテナーにより成り立っているとします。
+それらは個々のイメージを持ち、それぞれに分かれてウェブアプリケーション、データベース、メモリキャッシュを管理するようになります。</p>
 
-<p>個々のコンテナーを１つのプロセスのみに限定して割り当てることは、優れた経験則となることがありますが、決して厳密な規則というわけでもありません。
-たとえばコンテナーは<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run/#/specifying-an-init-process">初期プロセスにおいて起動</a>することが可能であり、プログラムの中には都合に応じて追加のプロセスを起動するようなものもあります。
+<p>個々のコンテナーを 1 つのプロセスのみに限定して割り当てることは、優れた経験則となることがあります。
+しかし決して厳密な規則というわけでもありません。
+たとえばコンテナーは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run/#/specifying-an-init-process">初期プロセスにおいて起動</a> することが可能であり、プログラムの中には必要に応じて追加のプロセスを起動するようなものもあります。
 例をあげると、<a href="http://www.celeryproject.org/">Celery</a> はワーカープロセスを複数起動し、<a href="https://httpd.apache.org/">Apache</a> はリクエストごとにプロセスを生成します。</p>
 
-<p>コンテナーはできる限りすっきりとモジュラー化されるように、適切な判断をしてください。
-コンテナーが互いに依存している場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/&gt;">Docker container ネットワーク</a>を用いることで、コンテナー間の通信を確実に行うことができます。</p>
+<p>コンテナーはできるかぎりすっきりとモジュール分割されるように、適切に判断してください。
+コンテナーが互いに依存している場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/&gt;">Docker container ネットワーク</a> を用いることで、コンテナー間の通信を確実に行うことができます。</p>
 
-<h3 id="レイヤ数は最小に">レイヤ数は最小に</h3>
+<h3 id="minimize-the-number-of-layers">レイヤー数は最小に</h3>
 
-<p>In older versions of Docker, it was important that you minimized the number of
-layers in your images to ensure they were performant. The following features
-were added to reduce this limitation:</p>
+<p>Docker の古いバージョンでは、イメージに含まれるレイヤー数を最小におさえることが重要であり、これにより処理性能を確保していました。
+この制約は後々、以下のような機能が加えられることで軽減されました。</p>
 
 <ul>
   <li>
-    <p>Only the instructions <code class="highlighter-rouge">RUN</code>, <code class="highlighter-rouge">COPY</code>, <code class="highlighter-rouge">ADD</code> create layers. Other instructions
-create temporary intermediate images, and do not increase the size of the build.</p>
+    <p><code class="highlighter-rouge">RUN</code>, <code class="highlighter-rouge">COPY</code>, <code class="highlighter-rouge">ADD</code> の命令のみレイヤーを生成します。
+他の命令は一時的な中間イメージを生成するため、ビルドイメージのサイズは増加させません。</p>
   </li>
   <li>
-    <p>Where possible, use <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">multi-stage builds</a>, and only copy
-the artifacts you need into the final image. This allows you to include tools
-and debug information in your intermediate build stages without increasing the
-size of the final image.</p>
+    <p>可能であれば <a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/">マルチステージビルド</a> を利用します。
+そして必要な成果物のみを最終イメージに含めるようにします。
+途中で利用するツールやデバッグ情報は、中間的なビルドステージの中で取り扱うことができ、最終イメージのサイズを増やさずに済みます。</p>
   </li>
 </ul>
 
-<h3 id="複数行にわたる引数は並びを適切に">複数行にわたる引数は並びを適切に</h3>
+<h3 id="sort-multi-line-arguments">複数行にわたる引数は並びを適切に</h3>
 
-<p>複数行にわたる引数は、できるなら後々の変更を容易にするために、その並びはアルファベット順にしましょう。
+<p>複数行にわたる引数は、後々の変更を容易にするために、できるならその並びはアルファベット順にします。
 そうしておけば、パッケージを重複指定することはなくなり、一覧の変更も簡単になります。
 プルリクエストを読んだりレビューしたりすることも、さらに楽になります。
 バックスラッシュ（<code class="highlighter-rouge">\</code>） の前に空白を含めておくことも同様です。</p>
@@ -524,10 +511,10 @@ size of the final image.</p>
   subversion
 </code></pre>
 
-<h3 id="ビルドキャッシュの利用">ビルドキャッシュの利用</h3>
+<h3 id="leverage-build-cache">ビルドキャッシュの利用</h3>
 
 <p>イメージの構築時に Docker は <code class="highlighter-rouge">Dockerfile</code> 内に示されている命令を記述順に実行していきます。
-個々の命令が検査される際に Docker は、既存イメージのキャッシュが再利用できるかどうかを調べます。
+個々の命令が処理される際に Docker は、既存イメージのキャッシュが再利用できるかどうかを調べます。
 そこでは新たな（同じ）イメージを作ることはしません。</p>
 
 <p>キャッシュをまったく使いたくない場合は <code class="highlighter-rouge">docker build</code> コマンドに <code class="highlighter-rouge">--no-cache=true</code> オプションをつけて実行します。
@@ -550,18 +537,18 @@ Docker が従っている規則は以下のとおりです。</p>
 キャッシュを探す際に、このチェックサムと既存イメージのチェックサムが比較されます。
 ファイル内の何かが変更になったとき、たとえばファイル内容やメタデータが変わっていれば、キャッシュは無効になります。</p>
   </li>
+  <li>
+    <p><code class="highlighter-rouge">ADD</code> と <code class="highlighter-rouge">COPY</code> 以外のコマンドの場合、キャッシュのチェックは、コンテナー内のファイル内容を見ることはなく、それによってキャッシュと合致しているかどうかが決定されるわけでありません。
+たとえば <code class="highlighter-rouge">RUN apt-get -y update</code> コマンドの処理が行われる際には、コンテナー内にて更新されたファイルは、キャッシュが合致するかどうかの判断のために用いられません。
+この場合にはコマンド文字列そのものが、キャッシュの合致判断に用いられます。</p>
+  </li>
 </ul>
-
-<p><code class="highlighter-rouge">ADD</code> と <code class="highlighter-rouge">COPY</code> 以外のコマンドの場合、キャッシュのチェックは、コンテナー内のファイル内容を見ることはなく、それによってキャッシュと合致しているかどうかが決定されるわけでありません。
-  たとえば <code class="highlighter-rouge">RUN apt-get -y update</code> コマンドの処理が行われる際には、コンテナー内にて更新されたファイルは、キャッシュが合致するかどうかの判断のために用いられません。
-  この場合にはコマンド文字列そのものが、キャッシュの合致判断に用いられます。</p>
 
 <p>キャッシュが無効化されると、以降の <code class="highlighter-rouge">Dockerfile</code> 命令ではキャッシュは使われず、新しいイメージを生成します。</p>
 
-<h2 id="dockerfile-コマンド">Dockerfile コマンド</h2>
+<h2 id="dockerfile-instructions">Dockerfile コマンド</h2>
 
-<p>These recommendations are designed to help you create an efficient and
-maintainable <code class="highlighter-rouge">Dockerfile</code>.</p>
+<p>効率のよい保守性に優れた <code class="highlighter-rouge">Dockerfile</code> を生成するために、推奨する内容を以下に示します。</p>
 
 <h3 id="from">FROM</h3>
 
@@ -576,7 +563,7 @@ maintainable <code class="highlighter-rouge">Dockerfile</code>.</p>
 <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md">オブジェクトラベルを理解する</a></p>
 
 <p>イメージにラベルを追加するのは、プロジェクト内でのイメージ管理をしやすくしたり、ライセンス情報の記録や自動化の助けとするなど、さまざまな目的があります。
-ラベルを指定するには、 <code class="highlighter-rouge">LABEL</code> で始まる行を追加して、そこにキーと値のペア（key-value pair）をいくつか設定します。
+ラベルを指定するには、 <code class="highlighter-rouge">LABEL</code> で始まる行を追加して、そこにキーバリューペアをいくつか設定します。
 以下に示す例は、いずれも正しい構文です。
 説明をコメントとしてつけています。</p>
 
@@ -593,12 +580,13 @@ LABEL com.example.release-date="2015-02-12"
 LABEL com.example.version.is-production=""
 </code></pre>
 
-<p>An image can have more than one label. Prior to Docker 1.10, it was recommended
-to combine all labels into a single <code class="highlighter-rouge">LABEL</code> instruction, to prevent extra layers
-from being created. This is no longer necessary, but combining labels is still
-supported.</p>
+<p>イメージには複数のラベルを設定することができます。
+Docker 1.10 以前のバージョンでは、ラベルをすべてまとめて 1 つの <code class="highlighter-rouge">LABEL</code> 命令にすることが推奨されていました。
+これによって余分なレイヤーが生成されることを防ぐためです。
+このことは、現在は必要ではなくなっています。
+ただしラベルをまとめる機能は今もサポートされています。</p>
 
-<pre><code class="language-Dockerfile"># 1行でラベルを設定
+<pre><code class="language-Dockerfile"># 1 行でラベルを設定
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 </code></pre>
 
@@ -612,11 +600,9 @@ LABEL vendor=ACME\ Incorporated \
       com.example.release-date="2015-02-12"
 </code></pre>
 
-<p>See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md">Understanding object labels</a>
-for guidelines about acceptable label keys and values. For information about
-querying labels, refer to the items related to filtering in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md#managing-labels-on-objects">Managing labels on
-objects</a>. See also
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/#label">LABEL</a> in the Dockerfile reference.</p>
+<p>利用可能なラベルのキーおよび値に関するガイドラインが <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md">オブジェクトラベルの理解</a> に示されています。
+ラベルを検索する方法については、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md#managing-labels-on-objects">オブジェクト内のラベル管理</a> に示されているフィルタリングに関する項目を参照してください。
+また Dockerfile リファレンスの <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/#label">LABEL</a> も参考になります。</p>
 
 <h3 id="run">RUN</h3>
 
@@ -794,10 +780,10 @@ ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
 <p>プログラムにおける（ハードコーディングではない）定数定義と同じことで、この方法をとっておくのが便利です。
 ただ１つの <code class="highlighter-rouge">ENV</code> コマンドを変更するだけで、コンテナー内のソフトウェアバージョンは、いとも簡単に変えてしまうことができるからです。</p>
 
-<p>Each <code class="highlighter-rouge">ENV</code> line creates a new intermediate layer, just like <code class="highlighter-rouge">RUN</code> commands. This
-means that even if you unset the environment variable in a future layer, it
-still persists in this layer and its value can be dumped. You can test this by
-creating a Dockerfile like the following, and then building it.</p>
+<p>それぞれの <code class="highlighter-rouge">ENV</code> 行からは新たな中間レイヤーが生成されます。
+<code class="highlighter-rouge">RUN</code> コマンドと同じです。
+ということはつまり、環境変数を先々のレイヤーにおいて無効化したとしても、その中間レイヤーに変数データは残ることになり、データを失うことなく取得することができます。
+このことを確認するには、以下のような Dockerfile を生成してビルドを行ってみればわかります。</p>
 
 <pre><code class="language-Dockerfile">FROM alpine
 ENV ADMIN_USER="mark"
@@ -810,13 +796,13 @@ RUN unset ADMIN_USER
 mark
 </code></pre></div></div>
 
-<p>To prevent this, and really unset the environment variable, use a <code class="highlighter-rouge">RUN</code> command
-with shell commands, to set, use, and unset the variable all in a single layer.
-You can separate your commands with <code class="highlighter-rouge">;</code> or <code class="highlighter-rouge">&amp;&amp;</code>. If you use the second method,
-and one of the commands fails, the <code class="highlighter-rouge">docker build</code> also fails. This is usually a
-good idea. Using <code class="highlighter-rouge">\</code> as a line continuation character for Linux Dockerfiles
-improves readability. You could also put all of the commands into a shell script
-and have the <code class="highlighter-rouge">RUN</code> command just run that shell script.</p>
+<p>このようにはならないように、つまり本当に環境変数を無効化したい場合には、シェルコマンドを用いた <code class="highlighter-rouge">RUN</code> コマンドを利用します。
+そして環境変数への値設定、利用、無効化を、すべて 1 つのレイヤー内にて行うようにします。
+各コマンドの区切りには <code class="highlighter-rouge">;</code> や <code class="highlighter-rouge">&amp;&amp;</code> を使います。
+この 2 つめの方法をとった場合、コマンドが 1 つでも失敗すれば <code class="highlighter-rouge">docker build</code> も失敗します。
+この方が適切なやり方です。
+Linux における Dockerfile では行継続文字を表わす <code class="highlighter-rouge">\</code> を用いると、読みやすくなります。
+あるいは実行する命令をすべてシェルスクリプトに書き入れて、<code class="highlighter-rouge">RUN</code> コマンドによってそのシェルスクリプトを実行するようなこともできます。</p>
 
 <pre><code class="language-Dockerfile">FROM alpine
 RUN export ADMIN_USER="mark" \
@@ -829,7 +815,7 @@ CMD sh
 
 </code></pre></div></div>
 
-<h3 id="add-と-copy">ADD と COPY</h3>
+<h3 id="add-or-copy">ADD と COPY</h3>
 
 <ul>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#add">Dockerfile リファレンスの ADD コマンド</a></li>
@@ -858,7 +844,7 @@ COPY . /tmp/
 
 <p>イメージサイズの問題があるので、<code class="highlighter-rouge">ADD</code> を用いてリモート URL からパッケージを取得することはやめてください。
 かわりに <code class="highlighter-rouge">curl</code> や <code class="highlighter-rouge">wget</code> を使ってください。
-こうしておくことで、ファイルを取得し展開した後や、イメージ内の他のレイヤにファイルを加える必要がないのであれば、その後にファイルを削除することができます。
+こうしておくことで、ファイルを取得し展開した後や、イメージ内の他のレイヤーにファイルを加える必要がないのであれば、その後にファイルを削除することができます。
 たとえば以下に示すのは、やってはいけない例です。</p>
 
 <pre><code class="language-Dockerfile">ADD http://example.com/big.tar.xz /usr/src/things/
@@ -905,8 +891,7 @@ CMD ["--help"]
 そのスクリプトは、上記のコマンド例と同じように機能させられます。
 たとえ対象ツールの起動に複数ステップを要するような場合でも、それが可能です。</p>
 
-<p>For example, the <a href="https://hub.docker.com/_/postgres/">Postgres Official Image</a>
-uses the following script as its <code class="highlighter-rouge">ENTRYPOINT</code>:</p>
+<p>たとえば <a href="https://hub.docker.com/_/postgres/">Postgres 公式イメージ</a> では <code class="highlighter-rouge">ENTRYPOINT</code> として以下のスクリプトを利用しています。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nb">set</span> <span class="nt">-e</span>
@@ -984,7 +969,7 @@ CMD ["postgres"]
   <p>Go 言語の archive/tar パッケージが取り扱うスパースファイルにおいて
 <a href="https://github.com/golang/go/issues/13548">未解決のバグ</a>があります。
 これは Docker コンテナー内にて非常に大きな値の UID を使ってユーザーを生成しようとするため、ディスク消費が異常に発生します。
-コンテナーレイヤ内の <code class="highlighter-rouge">/var/log/faillog</code> が NUL (\0) キャラクターにより埋められてしまいます。
+コンテナーレイヤー内の <code class="highlighter-rouge">/var/log/faillog</code> が NUL (\0) キャラクターにより埋められてしまいます。
 useradd に対して <code class="highlighter-rouge">--no-log-init</code> フラグをつけることで、とりあえずこの問題は回避できます。
 ただし Debian/Ubuntu の <code class="highlighter-rouge">adduser</code> ラッパーは <code class="highlighter-rouge">--no-log-init</code> フラグをサポートしていないため、利用することはできません。</p>
 </blockquote>
@@ -1143,19 +1128,19 @@ frequently.</p>
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#一般的なガイドラインとアドバイス" class="nomunge">一般的なガイドラインとアドバイス</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#はかない-ephemeral-コンテナーの生成" class="nomunge">“はかない” (ephemeral) コンテナーの生成</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#ビルドコンテキストを理解する" class="nomunge">ビルドコンテキストを理解する</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#エフェメラルなコンテナーの生成" class="nomunge">エフェメラルなコンテナーの生成</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#ビルドコンテキストの理解" class="nomunge">ビルドコンテキストの理解</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#stdin-を通じた-dockerfile-のパイプ" class="nomunge">stdin を通じた Dockerfile のパイプ</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#exclude-with-dockerignore" class="nomunge">Exclude with .dockerignore</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#use-multi-stage-builds" class="nomunge">Use multi-stage builds</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#不要なパッケージをインストールしない" class="nomunge">不要なパッケージをインストールしない</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#アプリケーションの分割" class="nomunge">アプリケーションの分割</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#レイヤ数は最小に" class="nomunge">レイヤ数は最小に</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#複数行にわたる引数は並びを適切に" class="nomunge">複数行にわたる引数は並びを適切に</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#ビルドキャッシュの利用" class="nomunge">ビルドキャッシュの利用</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#exclude-with-dockerignore" class="nomunge">.dockerignore を使ったファイル除外の指定</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#use-multi-stage-builds" class="nomunge">マルチステージビルドの利用</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#dont-install-unnecessary-packages" class="nomunge">不要なパッケージをインストールしない</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#decouple-applications" class="nomunge">アプリケーションの分割</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#minimize-the-number-of-layers" class="nomunge">レイヤー数は最小に</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#sort-multi-line-arguments" class="nomunge">複数行にわたる引数は並びを適切に</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#leverage-build-cache" class="nomunge">ビルドキャッシュの利用</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#dockerfile-コマンド" class="nomunge">Dockerfile コマンド</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#dockerfile-instructions" class="nomunge">Dockerfile コマンド</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#from" class="nomunge">FROM</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#label" class="nomunge">LABEL</a></li>
@@ -1163,7 +1148,7 @@ frequently.</p>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#cmd" class="nomunge">CMD</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#expose" class="nomunge">EXPOSE</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#env" class="nomunge">ENV</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#add-と-copy" class="nomunge">ADD と COPY</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#add-or-copy" class="nomunge">ADD と COPY</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#entrypoint" class="nomunge">ENTRYPOINT</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#volume" class="nomunge">VOLUME</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/dockerfile_best-practices.md#user" class="nomunge">USER</a></li>
