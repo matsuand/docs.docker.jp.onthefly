@@ -1,4 +1,4 @@
-<!-- Page generated 2019-08-06 10:43:27 +0900 -->
+<!-- Page generated 2019-08-07 13:53:19 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-06T10:43:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-07T13:53:19+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="このドキュメントは、効果的なイメージを構築する方法、お勧めのベストプラクティスについて示します。 Docker は Dockerfile に書かれた指示を読み込んで、自動的にイメージを構築します。 このファイルはあらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。 Dockerfile は所定のフォーマットや各種の命令に従います。 その内容は Dockerfile リファレンス に示しています。 Docker イメージは読み取り専用のレイヤーにより構成されます。 個々のレイヤーは Dockerfile の各命令を表現しています。 レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。 以下のような Dockerfile を見てみます。 FROM ubuntu:18.04 COPY . /app RUN make /app CMD..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-08-06T10:43:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-07T13:53:19+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="parent image, images, dockerfile, best practices, hub, official image">
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    13 分
+    12 分
   
 </span>
 
@@ -910,12 +910,12 @@ CMD ["--help"]
 </code></pre></div></div>
 
 <blockquote>
-  <p>Configure app as PID 1</p>
+  <p>アプリを PID 1 として実行</p>
 
-  <p>This script uses <a href="http://wiki.bash-hackers.org/commands/builtin/exec">the <code class="highlighter-rouge">exec</code> Bash command</a>
-so that the final running application becomes the container’s PID 1. This
-allows the application to receive any Unix signals sent to the container.
-For more, see the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#entrypoint"><code class="highlighter-rouge">ENTRYPOINT</code> reference</a>.</p>
+  <p>このスクリプトでは <a href="http://wiki.bash-hackers.org/commands/builtin/exec">Bash の <code class="highlighter-rouge">exec</code> コマンド</a> を利用しています。
+このため最後に実行されるアプリケーションが、コンテナーの PID 1 になります。
+したがってコンテナーに送信される Unix シグナルは、そのアプリケーションが受け取ることになります。
+詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#entrypoint"><code class="highlighter-rouge">ENTRYPOINT</code> リファレンス</a> を参照してください。</p>
 </blockquote>
 
 <p>ヘルパースクリプトはコンテナーの中にコピーされ、コンテナー開始時に <code class="highlighter-rouge">ENTRYPOINT</code> から実行されます。</p>
@@ -932,7 +932,7 @@ CMD ["postgres"]
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run postgres
 </code></pre></div></div>
 
-<p>あるいは PostgreSQL 実行時にサーバーに対してパラメーターを渡せます。</p>
+<p>あるいは PostgreSQL 実行時にサーバーに対してパラメーターを渡すことができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run postgres postgres <span class="nt">--help</span>
 </code></pre></div></div>
@@ -974,21 +974,19 @@ useradd に対して <code class="highlighter-rouge">--no-log-init</code> フラ
 ただし Debian/Ubuntu の <code class="highlighter-rouge">adduser</code> ラッパーは <code class="highlighter-rouge">--no-log-init</code> フラグをサポートしていないため、利用することはできません。</p>
 </blockquote>
 
-<p>Avoid installing or using <code class="highlighter-rouge">sudo</code> as it has unpredictable TTY and
-signal-forwarding behavior that can cause problems. If you absolutely need
-functionality similar to <code class="highlighter-rouge">sudo</code>, such as initializing the daemon as <code class="highlighter-rouge">root</code> but
-running it as non-<code class="highlighter-rouge">root</code>, consider using <a href="https://github.com/tianon/gosu">“gosu”</a>.</p>
+<p><code class="highlighter-rouge">sudo</code> のインストールやその利用は避けてください。
+これは予期できない TTY 動作やシグナルフォワーディングが起こってしまい問題となるためです。
+たとえば デーモンは <code class="highlighter-rouge">root</code> で初期化するものの、実行は <code class="highlighter-rouge">root</code> 以外で行うといったように、<code class="highlighter-rouge">sudo</code> と同等の機能が本当に必要なのであれば、<a href="https://github.com/tianon/gosu">“gosu”</a> の利用を検討してみてください。</p>
 
-<p>Lastly, to reduce layers and complexity, avoid switching <code class="highlighter-rouge">USER</code> back and forth
-frequently.</p>
+<p>最後に、レイヤー数を減らしてわかりやすいものとなるように、<code class="highlighter-rouge">USER</code> を何度も切り替えるようなことは避けてください。</p>
 
 <h3 id="workdir">WORKDIR</h3>
 
 <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#workdir">Dockerfile リファレンスの WORKDIR コマンド</a></p>
 
-<p><code class="highlighter-rouge">WORKDIR</code> に設定するパスは、分かり易く確実なものとするために、絶対パス指定としてください。
+<p><code class="highlighter-rouge">WORKDIR</code> に設定するパスは、わかりやすく確実なものとするために、絶対パス指定としてください。
 また <code class="highlighter-rouge">RUN cd … &amp;&amp; do-something</code> といった長くなる一方のコマンドを書くくらいなら、<code class="highlighter-rouge">WORKDIR</code> を利用してください。
-そのような書き方は読みにくく、トラブル発生時には解決しにくく保守が困難になるためです。</p>
+そのような書き方は読みにくいため、トラブル発生時には解決を遅らせ保守が困難になるためです。</p>
 
 <h3 id="onbuild">ONBUILD</h3>
 
