@@ -1633,8 +1633,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/release-notes/docker-engine/",
-"title":"Docker Engine release notes",
-"description":"Release notes for Docker CE",
+"title":"Docker Engine リリースノート",
+"description":"Docker CE リリースノート",
 "keywords":"release notes, community"
 }
 ,
@@ -2767,7 +2767,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/release-notes/",
-"title":"Docker release notes",
+"title":"Docker リリースノート",
 "description":"Release notes for Docker",
 "keywords":"docker, documentation, about, technology, understanding,  release"
 }
