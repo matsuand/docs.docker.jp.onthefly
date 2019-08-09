@@ -3256,6 +3256,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/licensing/",
+"title":"Docker Enterprise licensing",
+"description":"Learn about the Docker Enterprise licensing",
+"keywords":"license, enterprise, engine enterprise, ucp, dtr, desktop enterprise"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/link-env-deprecated/",
 "title":"リンク時の環境変数（機能修正）",
 "description":"Compose CLI リファレンス",
