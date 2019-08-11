@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-08-11 20:45:38 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -82,17 +82,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-11T20:45:38+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Content trust in Docker"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="When transferring data among networked systems, trust is a central concern. In particular, when communicating over an untrusted medium such as the internet, it is critical to ensure the integrity..." />
+	<meta name="twitter:title" itemprop="title name" content="Docker Content Trust"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="ネットワークシステム内においてデータの受け渡しを行う際には、信頼（trust）というものが最も大切になります。 特にインターネットのような信頼性に欠ける媒体との間で通信を行うとき、システムが取り扱うことになるデータはすべて完全性を保ち、発信者が誰であるかを常に確実なものとすることが極めて重要です。 Docker Engine を利用する際には、イメージ（データ）を公開レジストリあるいはプライベートレジストリとの間でプッシュしたりプルしたりします。 Content Trust とは、あやゆるチャネルにわたってレジストリから取得するデータの完全性と公開者情報を検証する機能を提供するものです。 Docker Content Trust について Docker Content Trust (DCT) は、リモートにある Docker レジストリとの間で送受信するデータに対して、デジタル署名を利用する機能を提供します。 この署名によって、特定のタグづけされたイメージに対する完全性と公開者情報を、クライアント側においてあるいは実行時に検証することが可能となります。 DCT を利用することで、イメージ公開者はイメージに署名をつけることができ、一方その利用者は、そのイメージが署名されていることを確認することができます。 公開者とは、個人や組織である場合もあります。 また公開イメージに手動で署名を行っているかもしれませんし、ソフトウェアサプライチェーンのリリース過程において署名を自動化して行っているかもしれません。 イメージタグと DCT 各イメージのレコードには、以下の識別子があります。 [REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG] イメージ REPOSITORYにはタグを複数つけることができます。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-11T20:45:38+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="content, trust, security, docker, documentation">
@@ -104,8 +104,8 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Content trust in Docker | Docker Documentation</title>
-<meta property="og:title" content="Content trust in Docker" />
+	<title>Docker Content Trust | Docker Documentation</title>
+<meta property="og:title" content="Docker Content Trust" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="Enabling content trust in Docker" />
 <meta property="og:description" content="Enabling content trust in Docker" />
@@ -113,7 +113,7 @@
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/content_trust/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Content trust in Docker","description":"Enabling content trust in Docker","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/content_trust/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Content Trust","description":"Enabling content trust in Docker","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/content_trust/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -183,75 +183,67 @@
 						<section class="section">
 							
 								
-							<h1>Content trust in Docker</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker Content Trust</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    13 分
+    11 分
   
 </span>
 
 							
 							
-							<p>When transferring data among networked systems, <em>trust</em> is a central concern. In
-particular, when communicating over an untrusted medium such as the internet, it
-is critical to ensure the integrity and the publisher of all the data a system
-operates on. You use the Docker Engine to push and pull images (data) to a
-public or private registry. Content trust gives you the ability to verify both
-the integrity and the publisher of all the data received from a registry over
-any channel.</p>
+							
+<p>ネットワークシステム内においてデータの受け渡しを行う際には、信頼（<strong>trust</strong>）というものが最も大切になります。
+特にインターネットのような信頼性に欠ける媒体との間で通信を行うとき、システムが取り扱うことになるデータはすべて完全性を保ち、発信者が誰であるかを常に確実なものとすることが極めて重要です。
+Docker Engine を利用する際には、イメージ（データ）を公開レジストリあるいはプライベートレジストリとの間でプッシュしたりプルしたりします。
+Content Trust とは、あやゆるチャネルにわたってレジストリから取得するデータの完全性と公開者情報を検証する機能を提供するものです。</p>
 
-<h2 id="about-docker-content-trust-dct">About Docker Content Trust (DCT)</h2>
+<h2 id="about-docker-content-trust-dct">Docker Content Trust について</h2>
 
-<p>Docker Content Trust (DCT) provides the ability to use digital signatures for
-data sent to and received from remote Docker registries. These signatures allow
-client-side or runtime verification of the integrity and publisher of specific
-image tags.</p>
+<p>Docker Content Trust (DCT) は、リモートにある Docker レジストリとの間で送受信するデータに対して、デジタル署名を利用する機能を提供します。
+この署名によって、特定のタグづけされたイメージに対する完全性と公開者情報を、クライアント側においてあるいは実行時に検証することが可能となります。</p>
 
-<p>Through DCT, image publishers can sign their images and image consumers can
-ensure that the images they use are signed. Publishers could be individuals
-or organizations manually signing their content or automated software supply
-chains signing content as part of their release process.</p>
+<p>DCT を利用することで、イメージ公開者はイメージに署名をつけることができ、一方その利用者は、そのイメージが署名されていることを確認することができます。
+公開者とは、個人や組織である場合もあります。
+また公開イメージに手動で署名を行っているかもしれませんし、ソフトウェアサプライチェーンのリリース過程において署名を自動化して行っているかもしれません。</p>
 
-<h3 id="image-tags-and-dct">Image tags and DCT</h3>
+<h3 id="image-tags-and-dct">イメージタグと DCT</h3>
 
-<p>An individual image record has the following identifier:</p>
+<p>各イメージのレコードには、以下の識別子があります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG]
 </code></pre></div></div>
 
-<p>A particular image <code class="highlighter-rouge">REPOSITORY</code> can have multiple tags. For example, <code class="highlighter-rouge">latest</code> and
- <code class="highlighter-rouge">3.1.2</code> are both tags on the <code class="highlighter-rouge">mongo</code> image. An image publisher can build an image
- and tag combination many times changing the image with each build.</p>
+<p>イメージ <code class="highlighter-rouge">REPOSITORY</code>にはタグを複数つけることができます。
+たとえば <code class="highlighter-rouge">mongo</code> イメージにおいて <code class="highlighter-rouge">latest</code> と <code class="highlighter-rouge">3.1.2</code> という 2 つのタグづけが可能です。
+イメージ公開者としては、イメージビルドとタグづけの組み合わせを何回も行って、イメージを作り変えていくことができます。</p>
 
-<p>DCT is associated with the <code class="highlighter-rouge">TAG</code> portion of an image. Each image repository has
-a set of keys that image publishers use to sign an image tag. Image publishers
-have discretion on which tags they sign.</p>
+<p>DCT はイメージの <code class="highlighter-rouge">TAG</code> 部分に関連づけられます。
+イメージリポジトリでは一連のキーが管理されていて、そこにイメージ公開者がイメージタグに署名した情報が保持されます。
+どのイメージに署名するのかは、イメージ公開者の判断に任されています。</p>
 
-<p>An image repository can contain an image with one tag that is signed and another
-tag that is not. For example, consider <a href="https://hub.docker.com/r/library/mongo/tags/">the Mongo image
-repository</a>. The <code class="highlighter-rouge">latest</code>
-tag could be unsigned while the <code class="highlighter-rouge">3.1.6</code> tag could be signed. It is the
-responsibility of the image publisher to decide if an image tag is signed or
-not. In this representation, some image tags are signed, others are not:</p>
+<p>イメージリポジトリには、署名を行ったタグを持つイメージと、署名を行っていないものを同時に含めることができます。
+たとえば <a href="https://hub.docker.com/r/library/mongo/tags/">Mongo イメージリポジトリ</a> を確認してみてください。
+<code class="highlighter-rouge">latest</code> タグには署名をつけず、<code class="highlighter-rouge">3.1.6</code> タグには署名するといったことが可能です。
+イメージタグに署名するかどうかは、そのイメージ公開者の責任のもとで行うことになります。
+以下の図においては、署名されているタグと署名されていないタグが示されています。</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/images/tag_signing.png" alt="Signed tags" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/images/tag_signing.png" alt="署名されたタグ" /></p>
 
-<p>Publishers can choose to sign a specific tag or not. As a result, the content of
-an unsigned tag and that of a signed tag with the same name may not match. For
-example, a publisher can push a tagged image <code class="highlighter-rouge">someimage:latest</code> and sign it.
-Later, the same publisher can push an unsigned <code class="highlighter-rouge">someimage:latest</code> image. This second
-push replaces the last unsigned tag <code class="highlighter-rouge">latest</code> but does not affect the signed <code class="highlighter-rouge">latest</code> version.
-The ability to choose which tags they can sign, allows publishers to iterate over
-the unsigned version of an image before officially signing it.</p>
+<p>イメージ公開者としては、特定のタグに対して署名するかしないかを選択します。
+結果として同一のイメージ名であっても、署名されていないタグと署名されたタグとでは内容が異なることになります。
+たとえばイメージ公開者が、タグづけしたイメージ <code class="highlighter-rouge">someimage:latest</code> をプッシュして、これに署名をしたとします。
+この後にその人が、署名を行っていない <code class="highlighter-rouge">someimage:latest</code> イメージをプッシュしたとします。
+2 つめにプッシュした内容は、署名を行っていない <code class="highlighter-rouge">latest</code> タグによって置き換えられることになりますが、ただし署名を行っていた <code class="highlighter-rouge">latest</code> バージョンには何ら影響を与えません。
+署名する対象のタグは自由に選択できることから、公開者にとっては署名を行わないイメージ作りを何度も繰り返し行って、最後に公式イメージに署名を行うということもできます。</p>
 
-<p>Image consumers can enable DCT to ensure that images they use were signed. If a
-consumer enables DCT, they can only pull, run, or build with trusted images.
-Enabling DCT is a bit like applying a “filter” to your registry. Consumers “see”
-only signed image tags and the less desirable, unsigned image tags are
-“invisible” to them.</p>
+<p>イメージの利用者は DCT を使って、イメージが署名されているかどうかを確認することができます。
+DCT を有効にしている場合、イメージの利用者は信頼できる署名済イメージのみをプル、実行、ビルドを行うことができます。
+DCT を有効にするというのは、レジストリに対していわば「フィルタリング」を設定するようなものです。
+利用者には署名されたイメージタグのみが「見える」のであって、これに比べて署名されていないイメージタグは好ましくないものとして「見えなくなる」というものです。</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/images/trust_view.png" alt="Trust view" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/images/trust_view.png" alt="信頼する画面" /></p>
 
 <p>To the consumer who has not enabled DCT, nothing about how they work with Docker
 images changes. Every image is visible regardless of whether it is signed or
@@ -378,15 +370,18 @@ Successfully signed dtr.example.com/admin/demo:1
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust inspect --pretty dtr.example.com/admin/demo:1
 
+
 Signatures for dtr.example.com/admin/demo:1
 
 SIGNED TAG          DIGEST                                                             SIGNERS
 1                   3d2e482b82608d153a374df3357c0291589a61cc194ec4a9ca2381073a17f58e   jeff
 
+
 List of signers and their keys for dtr.example.com/admin/demo:1
 
 SIGNER              KEYS
 jeff                8ae710e3ba82
+
 
 Administrative keys for dtr.example.com/admin/demo:1
 
@@ -617,7 +612,7 @@ Digest: sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
 Status: Downloaded newer image for dtr.example.com/user/image@sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
 </code></pre></div></div>
 
-<h2 id="related-information">Related information</h2>
+<h2 id="related-information">関連情報</h2>
 
 <ul>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/">Delegations for content trust</a></li>
@@ -660,7 +655,7 @@ Status: Downloaded newer image for dtr.example.com/user/image@sha256:ee7491c9c31
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "engine/security/trust/content_trust.md",
-										"title": "Content trust in Docker",
+										"title": "Docker Content Trust",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/engine/security/trust/content_trust.md"
 									};
 									(function(d, c, j) {
@@ -720,9 +715,9 @@ Status: Downloaded newer image for dtr.example.com/user/image@sha256:ee7491c9c31
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#about-docker-content-trust-dct" class="nomunge">About Docker Content Trust (DCT)</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#about-docker-content-trust-dct" class="nomunge">Docker Content Trust について</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#image-tags-and-dct" class="nomunge">Image tags and DCT</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#image-tags-and-dct" class="nomunge">イメージタグと DCT</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#docker-content-trust-keys" class="nomunge">Docker Content Trust Keys</a></li>
     </ul>
   </li>
@@ -736,7 +731,7 @@ Status: Downloaded newer image for dtr.example.com/user/image@sha256:ee7491c9c31
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#client-enforcement-with-docker-content-trust" class="nomunge">Client Enforcement with Docker Content Trust</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#related-information" class="nomunge">Related information</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/content_trust.md#related-information" class="nomunge">関連情報</a></li>
 </ul>
 
 

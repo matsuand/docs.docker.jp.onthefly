@@ -1283,7 +1283,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/security/trust/content_trust/",
-"title":"Content trust in Docker",
+"title":"Docker Content Trust",
 "description":"Enabling content trust in Docker",
 "keywords":"content, trust, security, docker, documentation"
 }
@@ -3257,8 +3257,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/licensing/",
-"title":"Docker Enterprise licensing",
-"description":"Learn about the Docker Enterprise licensing",
+"title":"Docker Enterprise ライセンス",
+"description":"Docker Enterprise ライセンスについて学ぶ。",
 "keywords":"license, enterprise, engine enterprise, ucp, dtr, desktop enterprise"
 }
 ,
@@ -6078,8 +6078,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/webhooks/",
-"title":"Docker Hub Webhooks",
-"description":"Docker Hub Webhooks",
+"title":"Docker Hub のウェブフック",
+"description":"Docker Hub のウェブフック。",
 "keywords":"Docker, webhookds, hub, builds"
 }
 ,
