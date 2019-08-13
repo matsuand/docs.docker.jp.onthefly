@@ -10,6 +10,18 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 
 
@@ -42,7 +54,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +92,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Docker Desktop WSL 2 Tech Preview"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Overview Welcome to Docker Desktop WSL 2 Tech Preview. This Tech Preview introduces support to run Docker Desktop with WSL 2. We really appreciate you trialing this Tech Preview. Your..." />
+	<meta name="twitter:title" itemprop="title name" content="Install Cluster Ingress (Experimental)"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-08-13T20:27:01+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="Docker, WSL, WSL 2, Tech Preview, Windows Subsystem for Linux">
+	<meta name="keywords" content="ucp, cluster, ingress, kubernetes">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +108,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Docker Desktop WSL 2 Tech Preview | Docker Documentation</title>
-<meta property="og:title" content="Docker Desktop WSL 2 Tech Preview" />
+	<title>Install Cluster Ingress (Experimental) | Docker Documentation</title>
+<meta property="og:title" content="Install Cluster Ingress (Experimental)" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Docker Desktop WSL 2 Tech Preview" />
-<meta property="og:description" content="Docker Desktop WSL 2 Tech Preview" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/" />
+<meta name="description" content="Learn how to deploy ingress rules using Kubernetes manifests." />
+<meta property="og:description" content="Learn how to deploy ingress rules using Kubernetes manifests." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/install/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/install/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop WSL 2 Tech Preview","description":"Docker Desktop WSL 2 Tech Preview","url":"https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Install Cluster Ingress (Experimental)","description":"Learn how to deploy ingress rules using Kubernetes manifests.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/install/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,79 +187,148 @@
 						<section class="section">
 							
 								
-							<h1>Docker Desktop WSL 2 Tech Preview</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Install Cluster Ingress (Experimental)</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    4 分
   
 </span>
 
 							
 							
-							<h1 id="overview">Overview</h1>
+							<!-- This text will be included in the docs that are marked as experimental -->
 
-<p>Welcome to Docker Desktop WSL 2 Tech Preview. This Tech Preview introduces support to run Docker Desktop with WSL 2. We really appreciate you trialing this Tech Preview. Your feedback is very important to us. Please let us know your feedback by creating an issue in the <a href="https://github.com/docker/for-win/issues">Docker Desktop for Windows GitHub</a> repository and adding the <strong>WSL 2</strong> label.</p>
+<p>Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.</p>
 
-<p>WSL 2 introduces a significant architectural change as it is a full Linux kernel built by Microsoft, allowing Linux containers to run natively without emulation. With Docker Desktop WSL 2 Tech Preview, users can access Linux workspaces without having to maintain both Linux and Windows build scripts.</p>
+<h1 id="install-cluster-ingress">Install Cluster Ingress</h1>
 
-<p>Docker Desktop also leverages the dynamic memory allocation feature in WSL 2 to greatly improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources, enabling CPU and memory-intensive tasks such as building a container to run much faster.</p>
+<p>Cluster Ingress for Kubernetes is currently deployed manually outside of UCP.
+Future plans for UCP include managing the full lifecycle of the Ingress
+components themselves. This guide describes how to manually deploy Ingress using
+Kubernetes deployment manifests.</p>
 
-<p>Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 2 seconds to start the Docker daemon when compared to tens of seconds in the current version of Docker Desktop.</p>
+<h2 id="offline-installation">Offline Installation</h2>
+
+<p>If you are installing Cluster Ingress on a UCP cluster that does not have access
+to the Docker Hub, you will need to pre-pull the Ingress container images. If
+your cluster has access to the Docker Hub, you can move on to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#deploy-cluster-ingress">deploying cluster
+ingress</a></p>
+
+<p>Without access to the Docker Hub, you will need to download the container images
+on a workstation with access to the internet. Container images are distributed
+in a <code class="highlighter-rouge">.tar.gz</code> and can be downloaded at the following
+<a href="https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.tgz">URL</a>.</p>
+
+<p>Once the container images have been downloaded, they would then need to be
+copied on to the hosts in your UCP cluster, and then side loaded in Docker.
+Images can be side loaded with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker load <span class="nt">-i</span> ucp.tar.gz
+</code></pre></div></div>
+
+<p>There images should now be present on your nodes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+docker/node-agent-k8s   1.1.2               4ddd06d05d5d        6 days ago          243MB
+docker/proxy_init       1.1.2               ff9628f32621        6 days ago          145MB
+docker/proxyv2          1.1.2               bebabbe114a4        6 days ago          360MB
+docker/pilot            1.1.2               58b6e18f3545        6 days ago          299MB
+</code></pre></div></div>
+
+<h2 id="deploy-cluster-ingress">Deploy Cluster Ingress</h2>
+
+<p>This step deploys the Ingress controller components <code class="highlighter-rouge">istio-pilot</code> and
+<code class="highlighter-rouge">istio-ingressgateway</code>. Together, these components act as the control-plane and
+data-plane for ingress traffic. These components are a simplified deployment of
+Istio cluster Ingress functionality. Many other custom K8s resources (CRDs) are
+also created that aid in the Ingress functionality.</p>
 
 <blockquote>
-  <p>Note that it is currently not possible to run Kubernetes while running Docker Desktop on WSL 2. However, you can continue to use Kubernetes in the non-WSL 2 Docker Desktop using the Daemon <strong>Settings</strong> option.</p>
+  <p><strong>Note</strong>: This does not deploy the service mesh capabilities of Istio as its
+function in UCP is for Ingress.</p>
 </blockquote>
 
-<h1 id="prerequisites">Prerequisites</h1>
+<p>As Cluster Ingress is not built into UCP in this release, a Cluster Admin will
+need to manually download and apply the following Kubernetes Manifest
+<a href="https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml">file</a>.</p>
 
-<p>Before you install Docker Desktop WSL 2 Tech Preview, you must complete the following steps:</p>
+<p>1) Download the Kubernetes manifest yaml</p>
 
-<ol>
-  <li>Install Windows 10 Insider Preview build 18932 or later.</li>
-  <li>Enable WSL 2 feature on Windows. For detailed instructions, refer to the <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-install">Microsoft documentation</a>.</li>
-  <li>Install a default distribution based on Ubuntu 18.04. You can check this with <code class="highlighter-rouge">wsl lsb_release -a</code>. You can download Ubuntu 18.04 from the <a href="https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q">Microsoft store</a>.</li>
-  <li>
-    <p>Ensure the Ubuntu distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml
+</code></pre></div></div>
+<p>2) Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a></p>
 
-    <p>To check the WSL mode, run:</p>
+<p>3) Deploy the Kubernetes manifest file</p>
 
-    <p><code class="highlighter-rouge">wsl -l -v</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl apply <span class="nt">-f</span> istio-ingress-1.1.2.yaml
+</code></pre></div></div>
 
-    <p>To upgrade to v2, run:</p>
+<p>4) Check the installation has been completely succesfully. It may take a minute
+   or 2 for all pods to become ready.</p>
 
-    <p><code class="highlighter-rouge">wsl --set-version &lt;distro name&gt; 2</code></p>
-  </li>
-  <li>
-    <p>Set Ubuntu 18.04 as the default distribution.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kubectl get pods -n istio-system -o wide
+NAME                                    READY   STATUS    RESTARTS   AGE   IP           NODE         NOMINATED NODE   READINESS GATES
+istio-ingressgateway-747bc6b4cb-fkt6k   2/2     Running   0          44s   172.0.1.23   manager-02   &lt;none&gt;           &lt;none&gt;
+istio-ingressgateway-747bc6b4cb-gr8f7   2/2     Running   0          61s   172.0.1.25   manager-02   &lt;none&gt;           &lt;none&gt;
+istio-pilot-7b74c7568b-ntbjd            1/1     Running   0          61s   172.0.1.22   manager-02   &lt;none&gt;           &lt;none&gt;
+istio-pilot-7b74c7568b-p5skc            1/1     Running   0          44s   172.0.1.24   manager-02   &lt;none&gt;           &lt;none&gt;
 
-    <p><code class="highlighter-rouge">wsl -s ubuntu 18.04</code></p>
-  </li>
-</ol>
+$ kubectl get services -n istio-system -o wide
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                                                                      AGE   SELECTOR
+istio-ingressgateway   NodePort    10.96.32.197    &lt;none&gt;        80:33000/TCP,443:33001/TCP,31400:33002/TCP,15030:34420/TCP,15443:34368/TCP,15020:34300/TCP   86s   app=istio-ingressgateway,istio=ingressgateway,release=istio
+istio-pilot            ClusterIP   10.96.199.152   &lt;none&gt;        15010/TCP,15011/TCP,8080/TCP,15014/TCP                                                       85s   istio=pilot
+</code></pre></div></div>
 
-<h1 id="download">Download</h1>
+<p>5) Test the Ingress Deployment</p>
 
-<p>To download the Tech Preview, click <a href="https://download.docker.com/win/edge/36883/Docker%20Desktop%20Installer.exe">Docker Desktop WSL 2 Tech Preview Installer</a>.</p>
+<p>To test that the Envory proxy is working correclty in the Isitio Gateway pods,
+there is a status port configured on an internal port 15020. From the above
+output we can see that port 15020 is exposed as a Kubernetes NodePort, in the
+output above the NodePort is 34300 put this could be different in each
+environment.</p>
 
-<h1 id="installation">Installation</h1>
+<p>To check the envoy proxy’s status, there is a health endpoint at
+<code class="highlighter-rouge">/healthz/ready</code>.</p>
 
-<p>Ensure you have completed the steps described in the Prerequisites section <strong>before</strong> installing the Tech Preview.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Node Port</span>
+<span class="nv">$ PORT</span><span class="o">=</span><span class="k">$(</span>kubectl get service <span class="nt">-n</span> istio-system istio-ingressgateway <span class="nt">--output</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.ports[?(@.name=="status-port")].nodePort}'</span><span class="k">)</span>
 
-<p>Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop menu displays the <strong>WSL 2 Tech Preview</strong> option.</p>
+<span class="c"># Public IP Address of a Worker or Manager VM in the Cluster</span>
+<span class="nv">$ IPADDR</span><span class="o">=</span>51.141.127.241
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/wsl2-ui.png" alt="WSL 2 Tech Preview Desktop UI" /></p>
+<span class="c"># Use Curl to check the status port is available</span>
+<span class="nv">$ </span>curl <span class="nt">-vvv</span> http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/healthz/ready
+<span class="k">*</span>   Trying 51.141.127.241...
+<span class="k">*</span> TCP_NODELAY <span class="nb">set</span>
+<span class="k">*</span> Connected to 51.141.127.241 <span class="o">(</span>51.141.127.241<span class="o">)</span> port 34300 <span class="o">(</span><span class="c">#0)</span>
+<span class="o">&gt;</span> GET /healthz/ready HTTP/1.1
+<span class="o">&gt;</span> Host: 51.141.127.241:34300
+<span class="o">&gt;</span> User-Agent: curl/7.58.0
+<span class="o">&gt;</span> Accept: <span class="k">*</span>/<span class="k">*</span>
+<span class="o">&gt;</span>
+&lt; HTTP/1.1 200 OK
+&lt; Date: Wed, 19 Jun 2019 13:31:53 GMT
+&lt; Content-Length: 0
+&lt;
+<span class="k">*</span> Connection <span class="c">#0 to host 51.141.127.241 left intact</span>
+</code></pre></div></div>
 
-<p>Select <strong>WSL 2 Tech Preview</strong> from the menu to start, stop, and configure the daemon running in WSL 2. When the WSL 2 daemon starts, a docker CLI context is automatically created for it, and the CLI configuration points to the context. You can list contexts by running <code class="highlighter-rouge">docker context ls</code>.</p>
+<p>If the output is <code class="highlighter-rouge">HTTP/1.1 200 OK</code> Envoy is running correctly, ready to service
+applications.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/wsl2-context.png" alt="WSL 2 Tech Preview Context" /></p>
+<h2 id="where-to-go-next">Where to go next</h2>
 
-<p>Docker Desktop allows you to toggle between the WSL modes. To use the classic daemon, run <code class="highlighter-rouge">docker context use default</code>. To switch to WSL 2, run <code class="highlighter-rouge">docker context use wsl</code>.</p>
+<ul>
+  <li><a href="./ingress/">Deploy a Sample Application</a></li>
+</ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Docker">Docker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=WSL">WSL</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=WSL 2">WSL 2</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Tech Preview">Tech Preview</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Windows Subsystem for Linux">Windows Subsystem for Linux</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ucp">ucp</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ingress">ingress</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=kubernetes">kubernetes</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -256,7 +337,7 @@
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/docker-for-windows/wsl-tech-preview/";
+							  var originalURL = "/ee/ucp/kubernetes/cluster-ingress/install/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -276,9 +357,9 @@
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "docker-for-windows/wsl-tech-preview.md",
-										"title": "Docker Desktop WSL 2 Tech Preview",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/docker-for-windows/wsl-tech-preview.md"
+										"unique_id": "ee/ucp/kubernetes/cluster-ingress/install.md",
+										"title": "Install Cluster Ingress (Experimental)",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/kubernetes/cluster-ingress/install.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -310,8 +391,8 @@
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/docker-for-windows/wsl-tech-preview.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-for-windows/wsl-tech-preview.md](https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/ee/ucp/kubernetes/cluster-ingress/install.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/ucp/kubernetes/cluster-ingress/install.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/install/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -337,10 +418,9 @@
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#overview" class="nomunge">Overview</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#prerequisites" class="nomunge">Prerequisites</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#download" class="nomunge">Download</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#installation" class="nomunge">Installation</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#offline-installation" class="nomunge">Offline Installation</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#deploy-cluster-ingress" class="nomunge">Deploy Cluster Ingress</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 
@@ -456,7 +536,7 @@
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/docker-for-windows/wsl-tech-preview/';
+	var pageURL = jekyllEnv + '/ee/ucp/kubernetes/cluster-ingress/install/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

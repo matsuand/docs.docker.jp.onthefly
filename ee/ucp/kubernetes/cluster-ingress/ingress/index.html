@@ -10,6 +10,18 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 
 
@@ -42,7 +54,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -80,14 +92,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Docker Desktop WSL 2 Tech Preview"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Overview Welcome to Docker Desktop WSL 2 Tech Preview. This Tech Preview introduces support to run Docker Desktop with WSL 2. We really appreciate you trialing this Tech Preview. Your..." />
+	<meta name="twitter:title" itemprop="title name" content="Deploy a Sample Application with Ingress (Experimental)"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-08-13T20:27:01+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="Docker, WSL, WSL 2, Tech Preview, Windows Subsystem for Linux">
+	<meta name="keywords" content="ucp, cluster, ingress, kubernetes">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -96,16 +108,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Docker Desktop WSL 2 Tech Preview | Docker Documentation</title>
-<meta property="og:title" content="Docker Desktop WSL 2 Tech Preview" />
+	<title>Deploy a Sample Application with Ingress (Experimental) | Docker Documentation</title>
+<meta property="og:title" content="Deploy a Sample Application with Ingress (Experimental)" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Docker Desktop WSL 2 Tech Preview" />
-<meta property="og:description" content="Docker Desktop WSL 2 Tech Preview" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/" />
+<meta name="description" content="Learn how to deploy Ingress rules for Kubernetes applications." />
+<meta property="og:description" content="Learn how to deploy Ingress rules for Kubernetes applications." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/ingress/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/ingress/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop WSL 2 Tech Preview","description":"Docker Desktop WSL 2 Tech Preview","url":"https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Deploy a Sample Application with Ingress (Experimental)","description":"Learn how to deploy Ingress rules for Kubernetes applications.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/ingress/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,79 +187,184 @@
 						<section class="section">
 							
 								
-							<h1>Docker Desktop WSL 2 Tech Preview</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Deploy a Sample Application with Ingress (Experimental)</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    5 分
   
 </span>
 
 							
 							
-							<h1 id="overview">Overview</h1>
+							<!-- This text will be included in the docs that are marked as experimental -->
 
-<p>Welcome to Docker Desktop WSL 2 Tech Preview. This Tech Preview introduces support to run Docker Desktop with WSL 2. We really appreciate you trialing this Tech Preview. Your feedback is very important to us. Please let us know your feedback by creating an issue in the <a href="https://github.com/docker/for-win/issues">Docker Desktop for Windows GitHub</a> repository and adding the <strong>WSL 2</strong> label.</p>
+<p>Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.</p>
 
-<p>WSL 2 introduces a significant architectural change as it is a full Linux kernel built by Microsoft, allowing Linux containers to run natively without emulation. With Docker Desktop WSL 2 Tech Preview, users can access Linux workspaces without having to maintain both Linux and Windows build scripts.</p>
+<h1 id="deploy-a-sample-application-with-ingress">Deploy a Sample Application with Ingress</h1>
 
-<p>Docker Desktop also leverages the dynamic memory allocation feature in WSL 2 to greatly improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources, enabling CPU and memory-intensive tasks such as building a container to run much faster.</p>
+<p>Cluster Ingress is capable of routing based on many HTTP attributes, but most
+commonly the HTTP host and path. The following example shows the basics of
+deploying Ingress rules for a Kubernetes application. An example application is
+deployed from this <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml">deployment manifest</a> and L7 Ingress
+rules are applied.</p>
 
-<p>Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 2 seconds to start the Docker daemon when compared to tens of seconds in the current version of Docker Desktop.</p>
+<h2 id="deploy-a-sample-application">Deploy a Sample Application</h2>
 
-<blockquote>
-  <p>Note that it is currently not possible to run Kubernetes while running Docker Desktop on WSL 2. However, you can continue to use Kubernetes in the non-WSL 2 Docker Desktop using the Daemon <strong>Settings</strong> option.</p>
-</blockquote>
+<p>In this example, three different versions of the docker-demo application are
+deployed. The docker-demo application is able to display the container hostname,
+environment variables or labels in its HTTP responses, therefore is good sample
+application for an Ingress controller.</p>
 
-<h1 id="prerequisites">Prerequisites</h1>
+<p>The 3 versions of the sample application are:</p>
 
-<p>Before you install Docker Desktop WSL 2 Tech Preview, you must complete the following steps:</p>
+<ul>
+  <li>v1: a production version with 3 replicas running.</li>
+  <li>v2: a staging version with a single replica running.</li>
+  <li>v3: a development version also with a single replica.</li>
+</ul>
 
-<ol>
-  <li>Install Windows 10 Insider Preview build 18932 or later.</li>
-  <li>Enable WSL 2 feature on Windows. For detailed instructions, refer to the <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-install">Microsoft documentation</a>.</li>
-  <li>Install a default distribution based on Ubuntu 18.04. You can check this with <code class="highlighter-rouge">wsl lsb_release -a</code>. You can download Ubuntu 18.04 from the <a href="https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q">Microsoft store</a>.</li>
-  <li>
-    <p>Ensure the Ubuntu distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.</p>
+<p>An example Kubernetes manifest file container all 3 deployments can be found <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml">here</a></p>
 
-    <p>To check the WSL mode, run:</p>
+<p>1) Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a
+     cluster with Cluster Ingress installed.</p>
 
-    <p><code class="highlighter-rouge">wsl -l -v</code></p>
+<p>2) Download the sample Kubernetes manifest file</p>
 
-    <p>To upgrade to v2, run:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml
+</code></pre></div></div>
 
-    <p><code class="highlighter-rouge">wsl --set-version &lt;distro name&gt; 2</code></p>
-  </li>
-  <li>
-    <p>Set Ubuntu 18.04 as the default distribution.</p>
+<p>3) Deploy the sample Kubernetes manifest file</p>
 
-    <p><code class="highlighter-rouge">wsl -s ubuntu 18.04</code></p>
-  </li>
-</ol>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>kubectl apply <span class="nt">-f</span> demo-app.yaml
+</code></pre></div></div>
 
-<h1 id="download">Download</h1>
+<p>4) Verify the sample applications are running</p>
 
-<p>To download the Tech Preview, click <a href="https://download.docker.com/win/edge/36883/Docker%20Desktop%20Installer.exe">Docker Desktop WSL 2 Tech Preview Installer</a>.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>kubectl get pods <span class="nt">-n</span> default
+  NAME                                  READY   STATUS    RESTARTS   AGE
+  demo-v1-7797b7c7c8-5vts2              1/1     Running   0          3h
+  demo-v1-7797b7c7c8-gfwzj              1/1     Running   0          3h
+  demo-v1-7797b7c7c8-kw6gp              1/1     Running   0          3h
+  demo-v2-6c5b4c6f76-c6zhm              1/1     Running   0          3h
+  demo-v3-d88dddb74-9k7qg               1/1     Running   0          3h
 
-<h1 id="installation">Installation</h1>
+  <span class="nv">$ </span>kubectl get services <span class="nt">-o</span> wide
+  NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>          AGE   SELECTOR
+  demo-service   NodePort    10.96.97.215   &lt;none&gt;        8080:33383/TCP   3h    <span class="nv">app</span><span class="o">=</span>demo
+  kubernetes     ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP          1d    &lt;none&gt;
+</code></pre></div></div>
 
-<p>Ensure you have completed the steps described in the Prerequisites section <strong>before</strong> installing the Tech Preview.</p>
+<p>This first part of the tutorial deployed the pods and a Kubernetes service,
+using Kubernetes NodePorts these pods can be accessed outside of the Cluster
+Ingress. This illustrate the standard L4 load balancing that a Kubernetes
+service applies.</p>
 
-<p>Follow the usual Docker Desktop installation instructions to install the Tech Preview. After a successful installation, the Docker Desktop menu displays the <strong>WSL 2 Tech Preview</strong> option.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Public IP Address of a Worker or Manager VM in the Cluster</span>
+<span class="nv">$ IPADDR</span><span class="o">=</span>51.141.127.241
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/wsl2-ui.png" alt="WSL 2 Tech Preview Desktop UI" /></p>
+<span class="c"># Node Port</span>
+<span class="nv">$ PORT</span><span class="o">=</span><span class="k">$(</span>kubectl get service demo-service <span class="nt">--output</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.ports[?(@.name=="http")].nodePort}'</span><span class="k">)</span>
 
-<p>Select <strong>WSL 2 Tech Preview</strong> from the menu to start, stop, and configure the daemon running in WSL 2. When the WSL 2 daemon starts, a docker CLI context is automatically created for it, and the CLI configuration points to the context. You can list contexts by running <code class="highlighter-rouge">docker context ls</code>.</p>
+<span class="c"># Send traffic directly to the NodePort to bypass L7 Ingress</span>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/wsl2-context.png" alt="WSL 2 Tech Preview Context" /></p>
+<span class="sb">```</span>bash
+<span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span><span class="p">;</span> <span class="k">do </span>curl http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/ping<span class="p">;</span> <span class="k">done</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v3-d88dddb74-9k7qg"</span>,<span class="s2">"version"</span>:<span class="s2">"v3"</span>,<span class="s2">"metadata"</span>:<span class="s2">"dev"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v3-d88dddb74-9k7qg"</span>,<span class="s2">"version"</span>:<span class="s2">"v3"</span>,<span class="s2">"metadata"</span>:<span class="s2">"dev"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v2-6c5b4c6f76-c6zhm"</span>,<span class="s2">"version"</span>:<span class="s2">"v2"</span>,<span class="s2">"metadata"</span>:<span class="s2">"staging"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-gfwzj"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-gfwzj"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span><span class="o">}</span>
+</code></pre></div></div>
 
-<p>Docker Desktop allows you to toggle between the WSL modes. To use the classic daemon, run <code class="highlighter-rouge">docker context use default</code>. To switch to WSL 2, run <code class="highlighter-rouge">docker context use wsl</code>.</p>
+<p>The L4 load balancing is applied to the number of replicas that exist for each
+service. Different scenarios require more complex logic to load balancing.
+Make sure to detach the number of backend instances from the load balancing
+algorithms used by the Ingress.</p>
+
+<h2 id="apply-ingress-rules-to-sample-application">Apply Ingress rules to Sample Application</h2>
+
+<p>To leverage the Cluster Ingress for the sample application, there are three custom resources types that need to be deployed:</p>
+
+<ul>
+  <li>Gateway</li>
+  <li>Virtual Service</li>
+  <li>Destinationrule</li>
+</ul>
+
+<p>For the sample application, an example manifest file with all 3 objects defined is <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml">here</a>.</p>
+
+<p>1) Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a
+     cluster with Cluster Ingress installed.</p>
+
+<p>2) Download the sample Kubernetes manifest file</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml
+</code></pre></div></div>
+
+<p>3) Deploy the sample Kubernetes manifest file</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>kubectl apply <span class="nt">-f</span> ingress-simple.yaml
+
+  <span class="nv">$ </span>kubectl describe virtualservice demo-vs
+  ...
+  Spec:
+    Gateways:
+      cluster-gateway
+    Hosts:
+      demo.example.com
+    Http:
+      Match:  &lt;nil&gt;
+      Route:
+        Destination:
+          Host:  demo-service
+          Port:
+            Number:  8080
+          Subset:    v1
+</code></pre></div></div>
+
+<p>This configuration matches all traffic with <code class="highlighter-rouge">demo.example.com</code> and sends it to
+the backend version=v1 deployment, regardless of the quantity of replicas in
+the backend.</p>
+
+<p>Curl the service again using the port of the Ingress gateway. Because DNS is
+not set up, use the <code class="highlighter-rouge">--header</code> flag from curl to manually set the host header.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Find the Cluster Ingress Node Port</span>
+<span class="nv">$ PORT</span><span class="o">=</span><span class="k">$(</span>kubectl get service <span class="nt">-n</span> istio-system istio-ingressgateway <span class="nt">--output</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.ports[?(@.name=="http2")].nodePort}'</span><span class="k">)</span>
+
+<span class="c"># Public IP Address of a Worker or Manager VM in the Cluster</span>
+<span class="nv">$ IPADDR</span><span class="o">=</span>51.141.127.241
+
+<span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span><span class="p">;</span> <span class="k">do </span>curl <span class="nt">--header</span> <span class="s2">"Host: demo.example.com"</span> http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/ping<span class="p">;</span> <span class="k">done</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-5vts2"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"2558fdd1-0cbd-4ba9-b104-0d4d0b1cef85"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"59f865f5-15fb-4f49-900e-40ab0c44c9e4"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-5vts2"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"fe233ca3-838b-4670-b6a0-3a02cdb91624"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-5vts2"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"842b8d03-8f8a-4b4b-b7f4-543f080c3097"</span><span class="o">}</span>
+<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"197cbb1d-5381-4e40-bc6f-cccec22eccbc"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>To have SNI (Server Name Indication) work with TLS services, use curl’s
+<code class="highlighter-rouge">--resolve</code> flag.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--resolve</span> demo.example.com:<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span> http://demo.example.com/ping
+</code></pre></div></div>
+
+<p>In this instance, the three backend v1 replicas are load balanced and no
+requests are sent to the other versions.</p>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+
+<ul>
+  <li><a href="./canary/">Deploy a Sample Application with a Canary release</a></li>
+  <li><a href="./sticky/">Deploy a Sample Application with Sticky Sessions</a></li>
+</ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Docker">Docker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=WSL">WSL</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=WSL 2">WSL 2</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Tech Preview">Tech Preview</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Windows Subsystem for Linux">Windows Subsystem for Linux</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ucp">ucp</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ingress">ingress</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=kubernetes">kubernetes</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -256,7 +373,7 @@
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/docker-for-windows/wsl-tech-preview/";
+							  var originalURL = "/ee/ucp/kubernetes/cluster-ingress/ingress/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -276,9 +393,9 @@
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "docker-for-windows/wsl-tech-preview.md",
-										"title": "Docker Desktop WSL 2 Tech Preview",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/docker-for-windows/wsl-tech-preview.md"
+										"unique_id": "ee/ucp/kubernetes/cluster-ingress/ingress.md",
+										"title": "Deploy a Sample Application with Ingress (Experimental)",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/kubernetes/cluster-ingress/ingress.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -310,8 +427,8 @@
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/docker-for-windows/wsl-tech-preview.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-for-windows/wsl-tech-preview.md](https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/ee/ucp/kubernetes/cluster-ingress/ingress.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/ucp/kubernetes/cluster-ingress/ingress.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/ingress/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -337,10 +454,9 @@
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#overview" class="nomunge">Overview</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#prerequisites" class="nomunge">Prerequisites</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#download" class="nomunge">Download</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/wsl-tech-preview.md#installation" class="nomunge">Installation</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#deploy-a-sample-application" class="nomunge">Deploy a Sample Application</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#apply-ingress-rules-to-sample-application" class="nomunge">Apply Ingress rules to Sample Application</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 
@@ -456,7 +572,7 @@
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/docker-for-windows/wsl-tech-preview/';
+	var pageURL = jekyllEnv + '/ee/ucp/kubernetes/cluster-ingress/ingress/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
