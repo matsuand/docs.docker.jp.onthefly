@@ -498,6 +498,27 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/admin/backup/back-up-dtr/",
+"title":"Back up DTR",
+"description":"Learn how to create a DTR backup",
+"keywords":"enterprise, backup, dtr, disaster recovery"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/admin/backup/back-up-swarm/",
+"title":"Back up Docker Swarm",
+"description":"Learn how to create a backup of Docker Swarm",
+"keywords":"enterprise, backup, swarm"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/admin/backup/back-up-ucp/",
+"title":"Back up UCP",
+"description":"Learn how to create a backup of UCP",
+"keywords":"enterprise, backup, ucp"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/backup/",
 "title":"docker/ucp backup",
 "description":"Create a backup of a UCP manager node",
@@ -726,6 +747,13 @@ var pages = [
 "title":"Security assessment and authorization",
 "description":"Security assessment and authorization reference",
 "keywords":"standards, compliance, security, 800-53, Security assessment and authorization"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/canary/",
+"title":"Deploy a Sample Application with a Canary release (Experimental)",
+"description":"Stage a canary release using weight-based load balancing between multiple backend applications.",
+"keywords":"ucp, cluster, ingress, kubernetes"
 }
 ,
 {
@@ -1528,8 +1556,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-aws/deploy/",
-"title":"Deploy your app on Docker for AWS",
-"description":"Deploying Apps on Docker for AWS",
+"title":"Docker for AWS におけるアプリのデプロイ",
+"description":"Docker for AWS におけるアプリのデプロイ。",
 "keywords":"aws, amazon, iaas, deploy"
 }
 ,
@@ -1601,6 +1629,13 @@ var pages = [
 "title":"DigitalOcean",
 "description":"DigitalOcean driver for machine",
 "keywords":"machine, digitalocean, driver"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/admin/disaster-recovery/",
+"title":"Disaster recovery",
+"description":"Learn disaster recovery procedures for Docker Enterprise",
+"keywords":"enterprise, recovery, disaster recovery, dtr, ucp, swarm"
 }
 ,
 {
@@ -2228,8 +2263,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-aws/iam-permissions/",
-"title":"Docker for AWS IAM permissions",
-"description":"IAM permissions",
+"title":"Docker for AWS の IAM パーミッション",
+"description":"IAM パーミッション",
 "keywords":"aws iam permissions"
 }
 ,
@@ -2465,6 +2500,20 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/admin/backup/",
+"title":"Back up Docker Enterprise",
+"description":"Learn how to create a backup of your Docker Enterprise.",
+"keywords":"enterprise, backup"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/admin/restore/",
+"title":"Restore Docker Enterprise",
+"description":"Learn how to restore Docker Enterprise platform from a backup.",
+"keywords":"enterprise, restore, recovery"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/swarm/",
 "title":"Deploy a single service",
 "description":"Learn how to deploy services to a cluster managed by Universal Control Plane.",
@@ -2476,6 +2525,13 @@ var pages = [
 "title":"Access control model",
 "description":"Manage access to resources with role-based access control.",
 "keywords":"ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/",
+"title":"Kubernetes Cluster Ingress (Experimental)",
+"description":"Learn about Ingress host and path routing for Kubernetes applications.",
+"keywords":"ucp, cluster, ingress, kubernetes"
 }
 ,
 {
@@ -2837,8 +2893,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-aws/",
-"title":"Docker for AWS setup & prerequisites",
-"description":"Setup & Prerequisites",
+"title":"Docker for AWS のセットアップと前提条件",
+"description":"セットアップと前提条件",
 "keywords":"aws, amazon, iaas, tutorial"
 }
 ,
@@ -2913,6 +2969,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/ingress/",
+"title":"Deploy a Sample Application with Ingress (Experimental)",
+"description":"Learn how to deploy Ingress rules for Kubernetes applications.",
+"keywords":"ucp, cluster, ingress, kubernetes"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/swarm/ingress/",
 "title":"Use swarm mode routing mesh",
 "description":"Use the routing mesh to publish services externally to a swarm",
@@ -2969,6 +3032,20 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-aws/",
+"title":"Install UCP on AWS",
+"description":"Learn how to install Docker Universal Control Plane in an Amazon Web Services (AWS) environment.",
+"keywords":"Universal Control Plane, UCP, install, Docker EE, AWS, Kubernetes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure/",
+"title":"Install UCP on Azure",
+"description":"Learn how to install Docker Universal Control Plane in a Microsoft Azure environment.",
+"keywords":"Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/install-on-azure/",
 "title":"Install UCP on Azure",
 "description":"Learn how to install Docker Universal Control Plane in a Microsoft Azure environment.",
@@ -2987,6 +3064,13 @@ var pages = [
 "title":"docker/dtr install",
 "description":"Install Docker Trusted Registry",
 "keywords":"dtr, cli, install"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/install/",
+"title":"Install Cluster Ingress (Experimental)",
+"description":"Learn how to deploy ingress rules using Kubernetes manifests.",
+"keywords":"ucp, cluster, ingress, kubernetes"
 }
 ,
 {
@@ -4468,8 +4552,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-aws/release-notes/",
-"title":"Docker for AWS release notes",
-"description":"Release notes",
+"title":"Docker for AWS リリースノート",
+"description":"リリースノート",
 "keywords":"aws, amazon, iaas, release, edge, stable"
 }
 ,
@@ -4551,10 +4635,31 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/admin/restore/restore-dtr/",
+"title":"Restore from a backup",
+"description":"Learn how to restore a DTR cluster from an existing backup",
+"keywords":"dtr, disaster recovery"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/admin/disaster-recovery/restore-from-backup/",
 "title":"Restore from a backup",
 "description":"Learn how to restore a DTR cluster from an existing backup",
 "keywords":"dtr, disaster recovery"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/admin/restore/restore-swarm/",
+"title":"Restore Docker Swarm",
+"description":"Learn how to restore Docker Swarm from an existing backup",
+"keywords":"enterprise, restore, swarm"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/admin/restore/restore-ucp/",
+"title":"Restore UCP",
+"description":"Learn how to restore UCP from a backup",
+"keywords":"enterprise, restore, swarm"
 }
 ,
 {
@@ -4727,8 +4832,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-aws/scaling/",
-"title":"Modify Docker install on AWS",
-"description":"Scaling your stack",
+"title":"AWS 上の Docker インストールの変更",
+"description":"スタックをスケール変更します。",
 "keywords":"aws, amazon, iaas, tutorial"
 }
 ,
@@ -5122,6 +5227,13 @@ var pages = [
 "title":"docker-machine status",
 "description":"Get the status of a machine",
 "keywords":"machine, status, subcommand"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/sticky/",
+"title":"Deploy a Sample Application with Sticky Sessions (Experimental)",
+"description":"Learn how to use cookies with Ingress host and path routing.",
+"keywords":"ucp, cluster, ingress, kubernetes"
 }
 ,
 {
@@ -6092,8 +6204,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-azure/why/",
-"title":"Why Docker for Azure?",
-"description":"Why Docker for Azure?",
+"title":"なぜ Docker for Azure か？",
+"description":"なぜ Docker for Azure か？",
 "keywords":"azure, microsoft, iaas, why"
 }
 ,
@@ -6148,8 +6260,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/buildx/working-with-buildx/",
-"title":"Working with Docker Buildx (experimental)",
-"description":"Working with Docker Buildx",
+"title":"Docker Buildx の利用（試験的）",
+"description":"Docker Buildx の利用",
 "keywords":"Docker, buildx, multi-arch"
 }
 ,

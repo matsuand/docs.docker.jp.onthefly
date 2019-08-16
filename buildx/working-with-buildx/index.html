@@ -1,4 +1,4 @@
-<!-- Page generated 2019-08-07 14:16:53 +0900 -->
+<!-- Page generated 2019-08-16 10:38:43 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-07T14:16:53+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-16T10:38:43+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Working with Docker Buildx (experimental)"/>
+	<meta name="twitter:title" itemprop="title name" content="Docker Buildx の利用（試験的）"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="これは試験的な（experimental）機能です。 試験的な機能は、将来の製品に搭載される機能をいち早く試すことができるものです。 ただし現段階でのこの機能は、テストとフィードバックのためだけを意図しています。 したがってリリース時には予告なく変更される場合があり、将来のリリースでは完全に削除されることもあります。 試験的な機能は本番環境では利用しないでください。 Docker ではこの試験的機能に対するサポートは行っていません。 詳しくは Experimental features を参照してください。 Docker CLI において試験的機能を有効にするには、config.json ファイルを編集して experimental を有効に設定してください。 Docker Desktop メニューから試験的機能を有効にするには、Settings (macOS の場合は Preferences) &gt; Daemon をクリックして、チェックボックス Experimental features を選択してください。 概要..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-08-07T14:16:53+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-16T10:38:43+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker, buildx, multi-arch">
@@ -96,16 +96,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Working with Docker Buildx (experimental) | Docker Documentation</title>
-<meta property="og:title" content="Working with Docker Buildx (experimental)" />
+	<title>Docker Buildx の利用（試験的） | Docker Documentation</title>
+<meta property="og:title" content="Docker Buildx の利用（試験的）" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Working with Docker Buildx" />
-<meta property="og:description" content="Working with Docker Buildx" />
+<meta name="description" content="Docker Buildx の利用" />
+<meta property="og:description" content="Docker Buildx の利用" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/" />
 <meta property="og:site_name" content="Docker Documentation" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Working with Docker Buildx (experimental)","description":"Working with Docker Buildx","url":"https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Buildx の利用（試験的）","description":"Docker Buildx の利用","url":"https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,17 +175,18 @@
 						<section class="section">
 							
 								
-							<h1>Working with Docker Buildx (experimental)</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker Buildx の利用（試験的）</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    4 分
   
 </span>
 
 							
 							
-							<blockquote>
+							
+<blockquote>
   <p>これは試験的な（experimental）機能です。</p>
 
   <!-- This text will be included in the CLI plugin docs that are marked as experimental in Docker Enterprise 3.0 release -->
@@ -203,64 +204,86 @@ Docker ではこの試験的機能に対するサポートは行っていませ�
 
 <h2 id="overview">概要</h2>
 
-<p>Docker Buildx is a CLI plugin that extends the docker command with the full support of the features provided by <a href="https://github.com/moby/buildkit">Moby BuildKit</a> builder toolkit. It provides the same user experience as docker build with many new features like creating scoped builder instances and building against multiple nodes concurrently.</p>
+<p>Docker Buildx は Docker コマンドを拡張する CLI プラグインであり、<a href="https://github.com/moby/buildkit">Moby BuildKit</a> ビルダーツールキットにより提供される機能に完全対応するものです。
+Docker ビルドと同様のユーザー操作を提供し、さらにスコープ化されたビルダーインスタンス、複数ノードへの同時ビルドなど、数多くの新機能を提供します。</p>
 
 <h2 id="install">インストール</h2>
 
-<p>Docker Buildx is included in Docker 19.03 and is also bundled with the following Docker Desktop releases. Note that you must enable the ‘Experimental features’ option to use Docker Buildx.</p>
+<p>Docker Buildx は Docker 19.03 に含まれます。
+また以下に示す Docker デスクトップリリースにもバンドルされています。
+なお Docker Buildx を利用するには「Experimental features」オプションを有効にする必要があります。</p>
 
 <ul>
-  <li>Docker Desktop Enterprise version 2.1.0</li>
-  <li>Docker Desktop Edge version 2.0.4.0 or higher</li>
+  <li>Docker Desktop Enterprise バージョン 2.1.0</li>
+  <li>Docker Desktop Edge バージョン 2.0.4.0 またはそれ以降</li>
 </ul>
 
-<p>You can also download the latest <code class="highlighter-rouge">buildx</code> binary from the <a href="https://github.com/docker/buildx/">Docker buildx</a> repository.</p>
+<p><a href="https://github.com/docker/buildx/">Docker buildx</a> リポジトリから、最新の <code class="highlighter-rouge">buildx</code> バイナリをダウンロードすることもできます。</p>
 
-<h2 id="build-with-buildx">Build with <code class="highlighter-rouge">buildx</code></h2>
+<h2 id="build-with-buildx"><code class="highlighter-rouge">buildx</code> を使ったビルド</h2>
 
-<p>To start a new build, run the command <code class="highlighter-rouge">docker buildx build .</code></p>
+<p>新たなビルドを行うには  <code class="highlighter-rouge">docker buildx build</code> を実行します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker buildx build .
 [+] Building 8.4s (23/32)
  =&gt; ...
 </code></pre></div></div>
 
-<p>Buildx builds using the BuildKit engine and does not require <code class="highlighter-rouge">DOCKER_BUILDKIT=1</code> environment variable to start the builds.</p>
+<p>Buildx は Buildx エンジンを使ってビルドを行います。
+ビルドを行うにあたって、環境変数 <code class="highlighter-rouge">DOCKER_BUILDKIT=1</code> を設定する必要はありません。</p>
 
-<p>The <code class="highlighter-rouge">docker buildx build</code> command supports features available for <code class="highlighter-rouge">docker build</code>, including the new features in Docker 19.03 such as outputs configuration, inline build caching, and specifying target platform. In addition, Buildx also supports new features that are not yet available for regular <code class="highlighter-rouge">docker build</code> like building manifest lists, distributed caching, and exporting build results to OCI image tarballs.</p>
+<p><code class="highlighter-rouge">docker buildx build</code> コマンドは <code class="highlighter-rouge">docker build</code> によって利用できる機能はすべて対応しています。
+つまり Docker 19.03 における新機能である、出力設定、インラインビルドキャッシング、ターゲットプラットフォーム指定にも対応します。
+さらに Buildx では、いつもの <code class="highlighter-rouge">docker build</code> では実現できない新機能として、マニフェスト一覧の生成、分散キャッシング、ビルド結果の OCI イメージ tarball への出力も実現します。</p>
 
-<p>You can run Buildx in different configurations that are exposed through a driver concept. Currently, Docker supports a “docker” driver that uses the BuildKit library bundled into the docker daemon binary, and a “docker-container” driver that automatically launches BuildKit inside a Docker container.</p>
+<p>Buildx の実行においては、ドライバーの仕様に基づいて提供されるさまざまな設定を行うことができます。
+現時点にて Docker がサポートするドライバーは以下のとおりです。
+「docker」ドライバーは BuildKit ライブラリを利用しており、Docker デーモンバイナリにバンドルされます。
+「docker-container」ドライバーは Docker コンテナー内部にて BuildKit を自動的に実行します。</p>
 
-<p>The user experience of using Buildx is very similar across drivers. However, there are some features that are not currently supported by the “docker” driver, because the BuildKit library which is bundled into docker daemon uses a different storage component. In contrast, all images built with the “docker” driver are automatically added to the “docker images” view by default, whereas when using other drivers, the method for outputting an image needs to be selected with <code class="highlighter-rouge">--output</code>.</p>
+<p>Buildx の利用するドライバーが違っていても、ユーザー操作は非常によく似ています。
+ただし現在のところ「docker」ドライバーが対応していない機能もあります。
+これは Docker デーモンにバンドルされる BuildKit ライブラリが、さまざまなストレージコンポーネントを利用するためです。
+「docker」ドライバーによりビルドされたイメージは、デフォルトではすべて自動的に「docker images」の一覧に加えられます。
+一方で別のドライバーを用いる場合には、イメージの出力方法を <code class="highlighter-rouge">--output</code> により選択することが必要です。</p>
 
-<h2 id="work-with-builder-instances">Work with builder instances</h2>
+<h2 id="work-with-builder-instances">ビルダーインスタンスを使った操作</h2>
 
-<p>By default, Buildx uses the “docker” driver if it is supported, providing a user experience very similar to the native docker build. Note that you must use a local shared daemon to build your applications.</p>
+<p>Buildx は「docker」ドライバーが対応していれば、デフォルトでこのドライバーを利用します。
+ユーザー操作は、ネイティブな Docker ビルドと非常によく似ています。
+アプリケーションをビルドするには、ローカルで稼動する共有デーモンを利用する必要があります。</p>
 
 <p>Buildx allows you to create new instances of isolated builders. You can use this to get a scoped environment for your CI builds that does not change the state of the shared daemon, or for isolating builds for different projects. You can create a new instance for a set of remote nodes, forming a build farm, and quickly switch between them.</p>
 
-<p>You can create new instances using the <code class="highlighter-rouge">docker buildx create</code> command. This creates a new builder instance with a single node based on your current configuration.</p>
+<p>新たなインスタンスを生成するには <code class="highlighter-rouge">docker buildx create</code> コマンドを利用します。
+このコマンドを実行すると、現時点の設定に基づいて、単一ノードを持つ新たなビルダーインスタンスが生成されます。</p>
 
-<p>To use a remote node you can specify the <code class="highlighter-rouge">DOCKER_HOST</code> or the remote context name while creating the new builder. After creating a new instance, you can manage its lifecycle using the inspect, stop and rm commands. To list all available builders, use ls. After creating a new builder you can also append new nodes to it.</p>
+<p>新たなビルダーの生成時にリモートノードを利用するには、<code class="highlighter-rouge">DOCKER_HOST</code> を設定するか、あるいはリモートコンテキスト名を指定します。
+新たなインスタンスが生成された後は、inspect、stop、rm コマンドを利用していき、そのライフサイクルを管理していきます。
+利用可能なビルダーを一覧表示するには ls を利用します。
+新しいビルダーを生成したら、そこに新たなノードを追加していくことができます。</p>
 
 <p>To switch between different builders use <code class="highlighter-rouge">docker buildx use &lt;name&gt;</code>. After running this command, the build commands will automatically use this builder.</p>
 
 <p>Docker 19.03 also features a new docker context command that you can use to provide names for remote Docker API endpoints. Buildx integrates with docker context to ensure all the contexts automatically get a default builder instance. You can also set the context name as the target when you  create a new builder instance or when you add a node to it.</p>
 
-<h2 id="build-multi-platform-images">Build multi-platform images</h2>
+<h2 id="build-multi-platform-images">マルチプラットフォームのイメージビルド</h2>
 
-<p>BuildKit is designed to work well for building for multiple platforms and not only for the architecture and operating system that the user invoking the build happens to run.</p>
+<p>BuildKit はマルチプラットフォームのビルドを得意とするものとして設計されています。
+対象となるプラットフォームは、ユーザーがビルド時に実行することになるアーキテクチャーやオペレーティングシステムに限りません。</p>
 
-<p>When you invoke a build, you can set the <code class="highlighter-rouge">--platform</code> flag to specify the target platform for the build output, (for example, linux/amd64, linux/arm64, darwin/amd64).</p>
+<p>ビルド実行する際には <code class="highlighter-rouge">--platform</code> フラグを用います。
+このフラグにターゲットプラットフォームを指定しビルド出力します。
+（たとえば linux/amd64, linux/arm64, darwin/amd64）</p>
 
 <p>When the current builder instance is backed by the “docker-container” driver, you can specify multiple platforms together. In this case, it builds a manifest list which contains images for all of the specified architectures. When you use this image in <code class="highlighter-rouge">docker run</code> or <code class="highlighter-rouge">docker service</code>, Docker picks the correct image based on the node’s platform.</p>
 
 <p>You can build multi-platform images using three different strategies that are supported by Buildx and Dockerfiles:</p>
 
 <ol>
-  <li>Using the QEMU emulation support in the kernel</li>
-  <li>Building on multiple native nodes using the same builder instance</li>
-  <li>Using a stage in Dockerfile to cross-compile to different architectures</li>
+  <li>カーネルにおいて QEMU エミュレーションサポートを利用します。</li>
+  <li>同一のビルダーインスタンスを利用して、複数のネイティブなノードをビルドします。</li>
+  <li>Dockerfile 内の 1 つのステージから、さまざまなアーキテクチャーに対するクロスコンパイルを行います。</li>
 </ol>
 
 <p>QEMU is the easiest way to get started if your node already supports it (for example. if you are using Docker Desktop). It requires no changes to your Dockerfile and BuildKit automatically detects the secondary architectures that are available. When BuildKit needs to run a binary for a different architecture, it automatically loads it through a binary registered in the <code class="highlighter-rouge">binfmt_misc</code> handler.</p>
@@ -292,11 +315,12 @@ COPY --from=build /log /log
 
 <p>The <code class="highlighter-rouge">bake</code> command supports building images from compose files, similar to a compose build, but allowing all the services to be built concurrently as part of a single request.</p>
 
-<h2 id="set-buildx-as-the-default-builder">Set <code class="highlighter-rouge">buildx</code> as the default builder</h2>
+<h2 id="set-buildx-as-the-default-builder"><code class="highlighter-rouge">buildx</code> のデフォルトビルダー設定</h2>
 
-<p>Running the command <code class="highlighter-rouge">docker buildx install</code> sets up docker builder command as an alias to <code class="highlighter-rouge">docker buildx</code>. This results in the ability to have <code class="highlighter-rouge">docker build</code> use the current buildx builder.</p>
+<p><code class="highlighter-rouge">docker buildx install</code> コマンドを実行すると、Docker ビルドコマンドのエイリアスとして <code class="highlighter-rouge">docker buildx</code> を設定します。
+これにより <code class="highlighter-rouge">docker build</code> が、現在の buildx ビルダーを利用するようになります。</p>
 
-<p>To remove this alias, run <code class="highlighter-rouge">docker buildx uninstall</code>.</p>
+<p>このエイリアスを削除するには <code class="highlighter-rouge">docker buildx uninstall</code> を実行します。</p>
 
 							<!-- tags -->
 							
@@ -332,7 +356,7 @@ COPY --from=build /log /log
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "buildx/working-with-buildx.md",
-										"title": "Working with Docker Buildx (experimental)",
+										"title": "Docker Buildx の利用（試験的）",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/buildx/working-with-buildx.md"
 									};
 									(function(d, c, j) {
@@ -394,11 +418,11 @@ COPY --from=build /log /log
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#overview" class="nomunge">概要</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#install" class="nomunge">インストール</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#build-with-buildx" class="nomunge">Build with buildx</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#work-with-builder-instances" class="nomunge">Work with builder instances</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#build-multi-platform-images" class="nomunge">Build multi-platform images</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#build-with-buildx" class="nomunge">buildx を使ったビルド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#work-with-builder-instances" class="nomunge">ビルダーインスタンスを使った操作</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#build-multi-platform-images" class="nomunge">マルチプラットフォームのイメージビルド</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#high-level-build-options" class="nomunge">High-level build options</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#set-buildx-as-the-default-builder" class="nomunge">Set buildx as the default builder</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/working-with-buildx.md#set-buildx-as-the-default-builder" class="nomunge">buildx のデフォルトビルダー設定</a></li>
 </ul>
 
 
