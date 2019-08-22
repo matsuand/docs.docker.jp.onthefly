@@ -2865,8 +2865,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/",
-"title":"Get started with Docker Desktop for Mac",
-"description":"Getting Started",
+"title":"Docker Desktop for Mac をはじめよう",
+"description":"はじめよう。",
 "keywords":"mac, edge, tutorial"
 }
 ,
@@ -3089,7 +3089,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-windows/install/",
-"title":"Install Docker Desktop for Windows",
+"title":"Install Docker Desktop on Windows",
 "description":"How to install Docker Desktop for Windows",
 "keywords":"windows, beta, edge, alpha, install, download"
 }
@@ -5105,8 +5105,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/space/",
-"title":"Disk utilization in Docker for Mac",
-"description":"Disk utilization",
+"title":"Docker for Mac におけるディスク利用",
+"description":"ディスク利用。",
 "keywords":"mac, disk"
 }
 ,
@@ -5763,8 +5763,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/ucp-architecture/",
-"title":"UCP architecture",
-"description":"Learn about the architecture of Docker Universal Control Plane.",
+"title":"UCP アーキテクチャー",
+"description":"Docker Universal Control Plane について学ぶ。",
 "keywords":"ucp, architecture"
 }
 ,
@@ -6162,8 +6162,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/storage/volumes/",
-"title":"Use volumes",
-"description":"Using volumes",
+"title":"ボリュームの利用",
+"description":"ボリュームの利用",
 "keywords":"storage, persistence, data persistence, volumes"
 }
 ,
