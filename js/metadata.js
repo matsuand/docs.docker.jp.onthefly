@@ -5958,6 +5958,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/storage/use-csi/",
+"title":"Using CSI drivers",
+"description":"Learn how to deploy a CSI driver with UCP.",
+"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/storage/use-nfs-volumes/",
 "title":"Configuring NFS Storage for Kubernetes",
 "description":"Learn how to add support for NFS persistent storage by adding a default storage class.",
