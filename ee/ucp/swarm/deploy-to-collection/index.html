@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-08-24 10:48:46 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -82,7 +82,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-24T10:48:46+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -92,7 +92,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane enforces role-based access control when you deploy services. By default, you don’t need to do anything, because UCP deploys your services to a default collection, unless..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-24T10:48:46+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, authentication, user management, stack, collection, role, application, resources">
@@ -242,6 +242,8 @@ MySQL, and gives them the access label <code class="highlighter-rouge">/Shared/w
 
   <span class="na">wordpress</span><span class="pi">:</span>
     <span class="na">image</span><span class="pi">:</span> <span class="s">wordpress</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">wp</span>
     <span class="na">ports</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">8080:80</span>
     <span class="na">environment</span><span class="pi">:</span>
@@ -251,11 +253,19 @@ MySQL, and gives them the access label <code class="highlighter-rouge">/Shared/w
         <span class="s">com.docker.ucp.access.label</span><span class="pi">:</span> <span class="s">/Shared/wordpress</span>
   <span class="na">mysql</span><span class="pi">:</span>
     <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:5.7</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">wp</span>
     <span class="na">environment</span><span class="pi">:</span>
       <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">example</span>
     <span class="na">deploy</span><span class="pi">:</span>
       <span class="na">labels</span><span class="pi">:</span>
         <span class="s">com.docker.ucp.access.label</span><span class="pi">:</span> <span class="s">/Shared/wordpress</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">wp</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">overlay</span>
+    <span class="na">labels</span><span class="pi">:</span>
+      <span class="s">com.docker.ucp.access.label</span><span class="pi">:</span> <span class="s">/Shared/wordpress</span>
 </code></pre></div></div>
 
 <p>To deploy the application:</p>
@@ -286,6 +296,19 @@ make sure that the <strong>Collection</strong> is <code class="highlighter-rouge
 </ol>
 
 <p><img src="../images/deploy-stack-to-collection-2.png" alt="" class="with-border" /></p>
+
+<h3 id="notes">Notes</h3>
+
+<p>It is important to note that by default Docker Stacks will create a default <code class="highlighter-rouge">overlay</code>
+network for your stack. It will be
+attached to each container that is deployed. This works if you have full control over
+your Default Collection or are an administrator. If your administrators have locked
+down UCP to only allow you access to specific collections and you manage multiple
+collections, then it can get very difficult to manage the networks as well and you
+might run into permissions errors. To fix this, you must define a custom network
+and attach that to each service. The network must have the same <code class="highlighter-rouge">com.docker.ucp.access.label</code>
+Label as your service. If configured correctly, then your network will correctly
+be grouped with the other resources in your stack.</p>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
@@ -390,7 +413,11 @@ make sure that the <strong>Collection</strong> is <code class="highlighter-rouge
 									
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-to-collection.md#deploy-a-service-to-a-collection-by-using-the-cli" class="nomunge">Deploy a service to a collection by using the CLI</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-to-collection.md#deploy-services-to-a-collection-by-using-a-compose-file" class="nomunge">Deploy services to a collection by using a Compose file</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-to-collection.md#deploy-services-to-a-collection-by-using-a-compose-file" class="nomunge">Deploy services to a collection by using a Compose file</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-to-collection.md#notes" class="nomunge">Notes</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-to-collection.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
