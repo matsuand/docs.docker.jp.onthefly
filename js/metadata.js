@@ -562,8 +562,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/storage/bind-mounts/",
-"title":"Use bind mounts",
-"description":"Using bind mounts",
+"title":"バインドマウントの利用",
+"description":"バインドマウントの利用。",
 "keywords":"storage, persistence, data persistence, mounts, bind mounts"
 }
 ,
@@ -5427,7 +5427,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/daemon/systemd/",
-"title":"Control Docker with systemd",
+"title":"systemd を用いた Docker の管理",
 "description":"Controlling and configuring Docker using systemd",
 "keywords":"docker, daemon, systemd, configuration"
 }

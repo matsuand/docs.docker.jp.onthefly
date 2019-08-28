@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-08-28 16:50:42 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,17 +78,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-28T16:50:42+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Control Docker with systemd"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Many Linux distributions use systemd to start the Docker daemon. This document shows a few examples of how to customize Docker’s settings. Start the Docker daemon Start manually Once Docker..." />
+	<meta name="twitter:title" itemprop="title name" content="systemd を用いた Docker の管理"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Linux ディストリビューションでは、Docker デーモンの起動に systemd を用いるものが多くあります。 このドキュメントでは Docker の設定例をいくつか示します。 Docker デーモンの起動 手動で起動する場合 Docker をインストールしたら Docker デーモンを起動する必要があります。 たいていの Linux ディストリビューションでは systemctl を使ってサービスを起動します。 systemctl がない場合は service コマンドを使ってください。 systemctl の場合 $ sudo systemctl start..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
-	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-28T16:50:42+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, daemon, systemd, configuration">
@@ -100,16 +100,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Control Docker with systemd | Docker Documentation</title>
-<meta property="og:title" content="Control Docker with systemd" />
+	<title>systemd を用いた Docker の管理 | Docker ドキュメント</title>
+<meta property="og:title" content="systemd を用いた Docker の管理" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="Controlling and configuring Docker using systemd" />
 <meta property="og:description" content="Controlling and configuring Docker using systemd" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/systemd/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/systemd/" />
-<meta property="og:site_name" content="Docker Documentation" />
+<meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Control Docker with systemd","description":"Controlling and configuring Docker using systemd","url":"https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/systemd/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"systemd を用いた Docker の管理","description":"Controlling and configuring Docker using systemd","url":"https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/systemd/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -179,64 +179,63 @@
 						<section class="section">
 							
 								
-							<h1>Control Docker with systemd</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>systemd を用いた Docker の管理</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    2 分
   
 </span>
 
 							
 							
-							<p>Many Linux distributions use systemd to start the Docker daemon. This document
-shows a few examples of how to customize Docker’s settings.</p>
+							
+<p>Linux ディストリビューションでは、Docker デーモンの起動に systemd を用いるものが多くあります。
+このドキュメントでは Docker の設定例をいくつか示します。</p>
 
-<h2 id="start-the-docker-daemon">Start the Docker daemon</h2>
+<h2 id="start-the-docker-daemon">Docker デーモンの起動</h2>
 
-<h3 id="start-manually">Start manually</h3>
+<h3 id="start-manually">手動で起動する場合</h3>
 
-<p>Once Docker is installed, you need to start the Docker daemon.
-Most Linux distributions use <code class="highlighter-rouge">systemctl</code> to start services. If you
-do not have <code class="highlighter-rouge">systemctl</code>, use the <code class="highlighter-rouge">service</code> command.</p>
+<p>Docker をインストールしたら Docker デーモンを起動する必要があります。
+たいていの Linux ディストリビューションでは <code class="highlighter-rouge">systemctl</code> を使ってサービスを起動します。
+<code class="highlighter-rouge">systemctl</code> がない場合は <code class="highlighter-rouge">service</code> コマンドを使ってください。</p>
 
 <ul>
   <li>
-    <p><strong><code class="highlighter-rouge">systemctl</code></strong>:</p>
+    <p><strong><code class="highlighter-rouge">systemctl</code> の場合</strong></p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start docker
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><strong><code class="highlighter-rouge">service</code></strong>:</p>
+    <p><strong><code class="highlighter-rouge">service</code> の場合</strong></p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>service docker start
 </code></pre></div>    </div>
   </li>
 </ul>
 
-<h3 id="start-automatically-at-system-boot">Start automatically at system boot</h3>
+<h3 id="start-automatically-at-system-boot">システムブート時に自動起動する場合</h3>
 
-<p>If you want Docker to start at boot, see
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot">Configure Docker to start on boot</a>.</p>
+<p>Docker をシステムブート時に起動したい場合は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot">システムブート時の Docker 起動設定</a> を参照してください。</p>
 
-<h2 id="custom-docker-daemon-options">Custom Docker daemon options</h2>
+<h2 id="custom-docker-daemon-options">Docker デーモンオプションのカスタマイズ</h2>
 
-<p>There are a number of ways to configure the daemon flags and environment variables
-for your Docker daemon. The recommended way is to use the platform-independent
-<code class="highlighter-rouge">daemon.json</code> file, which is located in <code class="highlighter-rouge">/etc/docker/</code> on Linux by default. See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md/#daemon-configuration-file">Daemon configuration file</a>.</p>
+<p>Docker デーモンに対してのデーモンフラグや環境変数を設定する方法はいろいろあります。
+推奨されるのは、プラットフォームに依存しない <code class="highlighter-rouge">daemon.json</code> ファイルを用いる方法です。
+この <code class="highlighter-rouge">daemon.json</code> ファイルは Linux においてはデフォルトで <code class="highlighter-rouge">/etc/docker/</code> に置かれます。
+詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md/#daemon-configuration-file">デーモン設定ファイル</a> を参照してください。</p>
 
-<p>You can configure nearly all daemon configuration options using <code class="highlighter-rouge">daemon.json</code>. The following
-example configures two options. One thing you cannot configure using <code class="highlighter-rouge">daemon.json</code> mechanism is
-a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#http-proxy">HTTP proxy</a>.</p>
+<p><code class="highlighter-rouge">daemon.json</code> を使うと、デーモンオプションはほぼすべて設定することができます。
+以下の例では 2 つのオプションを設定しています。
+<code class="highlighter-rouge">daemon.json</code> による仕組みで設定できないものに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#http-proxy">HTTP プロキシー</a> があります。</p>
 
-<h3 id="runtime-directory-and-storage-driver">Runtime directory and storage driver</h3>
+<h3 id="runtime-directory-and-storage-driver">実行時の利用ディレクトリとストレージドライバー</h3>
 
-<p>You may want to control the disk space used for Docker images, containers,
-and volumes by moving it to a separate partition.</p>
+<p>Docker のイメージ、コンテナー、ボリュームは、別のパーティションを使ってディスク管理を行いたいと考えるかもしれません。</p>
 
-<p>To accomplish this, set the following flags in the <code class="highlighter-rouge">daemon.json</code> file:</p>
+<p>これを行うには <code class="highlighter-rouge">daemon.json</code> ファイルにおいて、以下のようなフラグ設定を行います。</p>
 
 <pre><code class="language-none">{
     "data-root": "/mnt/docker-data",
@@ -244,43 +243,37 @@ and volumes by moving it to a separate partition.</p>
 }
 </code></pre>
 
-<h3 id="httphttps-proxy">HTTP/HTTPS proxy</h3>
+<h3 id="httphttps-proxy">HTTP/HTTPS プロキシー</h3>
 
-<p>The Docker daemon uses the <code class="highlighter-rouge">HTTP_PROXY</code>, <code class="highlighter-rouge">HTTPS_PROXY</code>, and <code class="highlighter-rouge">NO_PROXY</code> environmental variables in
-its start-up environment to configure HTTP or HTTPS proxy behavior. You cannot configure
-these environment variables using the <code class="highlighter-rouge">daemon.json</code> file.</p>
+<p>Docker デーモンではその起動環境において <code class="highlighter-rouge">HTTP_PROXY</code>, <code class="highlighter-rouge">HTTPS_PROXY</code>, <code class="highlighter-rouge">NO_PROXY</code> という環境変数を利用して、HTTP または HTTPS プロキシーの動作を定めています。
+この環境変数による設定は <code class="highlighter-rouge">daemon.json</code> ファイルを用いて行うことはできません。</p>
 
-<p>This example overrides the default <code class="highlighter-rouge">docker.service</code> file.</p>
+<p>以下は、デフォルトの <code class="highlighter-rouge">docker.service</code> ファイルを上書き設定する例です。</p>
 
-<p>If you are behind an HTTP or HTTPS proxy server, for example in corporate settings,
-you need to add this configuration in the Docker systemd service file.</p>
+<p>企業内で設定されるような HTTP あるいは HTTPS プロキシーサーバーを利用している場合は、Docker systemd サービスファイルに、これらの設定を加える必要があります。</p>
 
 <ol>
   <li>
-    <p>Create a systemd drop-in directory for the docker service:</p>
+    <p>Docker サービスに対応した systemd のドロップインディレクトリを生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mkdir <span class="nt">-p</span> /etc/systemd/system/docker.service.d
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a file called <code class="highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code>
-that adds the <code class="highlighter-rouge">HTTP_PROXY</code> environment variable:</p>
+    <p><code class="highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code> というファイルを生成して、そこに環境変数 <code class="highlighter-rouge">HTTP_PROXY</code> の設定を書きます。</p>
 
     <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
 <span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80/"</span>
 </code></pre></div>    </div>
 
-    <p>Or, if you are behind an HTTPS proxy server, create a file called
-<code class="highlighter-rouge">/etc/systemd/system/docker.service.d/https-proxy.conf</code>
-that adds the <code class="highlighter-rouge">HTTPS_PROXY</code> environment variable:</p>
+    <p>また HTTPS プロキシーサーバーを利用している場合には <code class="highlighter-rouge">/etc/systemd/system/docker.service.d/https-proxy.conf</code> というファイルを生成して、そこに環境変数 <code class="highlighter-rouge">HTTPS_PROXY</code> の設定を書きます。</p>
 
     <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
 <span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443/"</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>If you have internal Docker registries that you need to contact without
-proxying you can specify them via the <code class="highlighter-rouge">NO_PROXY</code> environment variable.</p>
+    <p>内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数 <code class="highlighter-rouge">NO_PROXY</code> を通じて設定することができます。</p>
 
     <p>The <code class="highlighter-rouge">NO_PROXY</code> variable specifies a string that contains comma-separated
 values for hosts that should be excluded from proxying. These are the
@@ -301,38 +294,38 @@ a leading “.” matches subdomains only. For example, given the domains
 and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li>
     </ul>
 
-    <p>Config examples:</p>
+    <p>設定例は以下です。</p>
 
     <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
 <span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80/"</span> <span class="s2">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span>
 </code></pre></div>    </div>
 
-    <p>Or, if you are behind an HTTPS proxy server:</p>
+    <p>また HTTPS プロキシーサーバーであれば以下のようになります。</p>
 
     <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
 <span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443/"</span> <span class="s2">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Flush changes:</p>
+    <p>設定を反映します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Restart Docker:</p>
+    <p>Docker を再起動します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart docker
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the configuration has been loaded:</p>
+    <p>設定がロードされていることを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl show <span class="nt">--property</span><span class="o">=</span>Environment docker
 <span class="nv">Environment</span><span class="o">=</span><span class="nv">HTTP_PROXY</span><span class="o">=</span>http://proxy.example.com:80/
 </code></pre></div>    </div>
 
-    <p>Or, if you are behind an HTTPS proxy server:</p>
+    <p>HTTPS プロキシーサーバーの場合は以下のとおりです。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl show <span class="nt">--property</span><span class="o">=</span>Environment docker
 <span class="nv">Environment</span><span class="o">=</span><span class="nv">HTTPS_PROXY</span><span class="o">=</span>https://proxy.example.com:443/
@@ -345,13 +338,10 @@ and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li
 <p>See
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/linux/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections">Configure where the Docker daemon listens for connections</a>.</p>
 
-<h2 id="manually-create-the-systemd-unit-files">Manually create the systemd unit files</h2>
+<h2 id="manually-create-the-systemd-unit-files">systemd ユニットファイルの手動生成</h2>
 
-<p>When installing the binary without a package, you may want
-to integrate Docker with systemd. For this, install the two unit files
-(<code class="highlighter-rouge">service</code> and <code class="highlighter-rouge">socket</code>) from <a href="https://github.com/moby/moby/tree/master/contrib/init/systemd">the github
-repository</a>
-to <code class="highlighter-rouge">/etc/systemd/system</code>.</p>
+<p>パッケージを利用せずにインストールを行った場合は、systemd を用いた Docker の設定が必要になるはずです。
+これを行うには 2 つのユニットファイル（<code class="highlighter-rouge">service</code> と <code class="highlighter-rouge">socket</code>）を <a href="https://github.com/moby/moby/tree/master/contrib/init/systemd">Github リポジトリ</a> から入手して <code class="highlighter-rouge">/etc/systemd/system</code> に置いてください。</p>
 
 							<!-- tags -->
 							
@@ -387,7 +377,7 @@ to <code class="highlighter-rouge">/etc/systemd/system</code>.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "config/daemon/systemd.md",
-										"title": "Control Docker with systemd",
+										"title": "systemd を用いた Docker の管理",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/config/daemon/systemd.md"
 									};
 									(function(d, c, j) {
@@ -447,20 +437,20 @@ to <code class="highlighter-rouge">/etc/systemd/system</code>.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#start-the-docker-daemon" class="nomunge">Start the Docker daemon</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#start-the-docker-daemon" class="nomunge">Docker デーモンの起動</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#start-manually" class="nomunge">Start manually</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#start-automatically-at-system-boot" class="nomunge">Start automatically at system boot</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#start-manually" class="nomunge">手動で起動する場合</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#start-automatically-at-system-boot" class="nomunge">システムブート時に自動起動する場合</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#custom-docker-daemon-options" class="nomunge">Custom Docker daemon options</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#custom-docker-daemon-options" class="nomunge">Docker デーモンオプションのカスタマイズ</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#runtime-directory-and-storage-driver" class="nomunge">Runtime directory and storage driver</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#httphttps-proxy" class="nomunge">HTTP/HTTPS proxy</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#runtime-directory-and-storage-driver" class="nomunge">実行時の利用ディレクトリとストレージドライバー</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#httphttps-proxy" class="nomunge">HTTP/HTTPS プロキシー</a></li>
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#configure-where-the-docker-daemon-listens-for-connections" class="nomunge">Configure where the Docker daemon listens for connections</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#manually-create-the-systemd-unit-files" class="nomunge">Manually create the systemd unit files</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/systemd.md#manually-create-the-systemd-unit-files" class="nomunge">systemd ユニットファイルの手動生成</a></li>
 </ul>
 
 

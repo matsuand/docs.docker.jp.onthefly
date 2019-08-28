@@ -1,4 +1,4 @@
-<!-- Page generated 2019-07-27 12:10:47 +0900 -->
+<!-- Page generated 2019-08-28 16:50:42 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,17 +74,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-07-27T12:10:47+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-28T16:50:42+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use bind mounts"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Bind mounts have been around since the early days of Docker. Bind mounts have limited functionality compared to volumes. When you use a bind mount, a file or directory on..." />
+	<meta name="twitter:title" itemprop="title name" content="バインドマウントの利用"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="バインドマウントは Docker の初期のころから存在しています。 ただし ボリューム に比べると、バインドマウントの機能は限定されます。 バインドマウントを利用すると「ホストマシン」上のファイルやディレクトリがコンテナー内にマウントされます。 そのファイルやディレクトリは、ホストマシン上の絶対パスや相対パスにより参照できます。 これとは違ってボリュームを利用すると、ホストマシン上に新たなディレクトリが生成され、そこが Docker の保存ディレクトリとなります。 そして Docker はそのディレクトリ内の内容を管理していきます。 そのファイルやディレクトリは、Docker ホストに存在している必要がなくなります。 存在してなかったとしても、必要とされるときには生成されます。 バインドマウントは非常に性能の良いものですが、ただしホストマシンのファイルシステムに依存するものとなり、利用可能な特定のディレクトリ構造に従ったものになります。 今から新たに Docker アプリケーションを開発しようとする場合は、これにかわって 名前つきボリューム の利用を考えてみてください。 バインドマウントを管理するために Docker CLI コマンドを直接利用することはできなくなります。 -v または --mount..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
-	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-07-27T12:10:47+09:00"/>
+	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-28T16:50:42+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="storage, persistence, data persistence, mounts, bind mounts">
@@ -96,16 +96,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use bind mounts | Docker Documentation</title>
-<meta property="og:title" content="Use bind mounts" />
+	<title>バインドマウントの利用 | Docker ドキュメント</title>
+<meta property="og:title" content="バインドマウントの利用" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Using bind mounts" />
-<meta property="og:description" content="Using bind mounts" />
+<meta name="description" content="バインドマウントの利用。" />
+<meta property="og:description" content="バインドマウントの利用。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/" />
-<meta property="og:site_name" content="Docker Documentation" />
+<meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use bind mounts","description":"Using bind mounts","url":"https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"バインドマウントの利用","description":"バインドマウントの利用。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -175,120 +175,107 @@
 						<section class="section">
 							
 								
-							<h1>Use bind mounts</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>バインドマウントの利用</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    15 分
+    9 分
   
 </span>
 
 							
 							
-							<p>Bind mounts have been around since the early days of Docker. Bind mounts have
-limited functionality compared to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">volumes</a>. When you use a bind
-mount, a file or directory on the <em>host machine</em> is mounted into a container.
-The file or directory is referenced by its full or relative path on the host
-machine. By contrast, when you use a volume, a new directory is created within
-Docker’s storage directory on the host machine, and Docker manages that
-directory’s contents.</p>
+							
+<p>バインドマウントは Docker の初期のころから存在しています。
+ただし <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">ボリューム</a> に比べると、バインドマウントの機能は限定されます。
+バインドマウントを利用すると「ホストマシン」上のファイルやディレクトリがコンテナー内にマウントされます。
+そのファイルやディレクトリは、ホストマシン上の絶対パスや相対パスにより参照できます。
+これとは違ってボリュームを利用すると、ホストマシン上に新たなディレクトリが生成され、そこが Docker の保存ディレクトリとなります。
+そして Docker はそのディレクトリ内の内容を管理していきます。</p>
 
-<p>The file or directory does not need to exist on the Docker host already. It is
-created on demand if it does not yet exist. Bind mounts are very performant, but
-they rely on the host machine’s filesystem having a specific directory structure
-available. If you are developing new Docker applications, consider using <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">named
-volumes</a> instead. You can’t use Docker CLI commands to directly
-manage bind mounts.</p>
+<p>そのファイルやディレクトリは、Docker ホストに存在している必要がなくなります。
+存在してなかったとしても、必要とされるときには生成されます。
+バインドマウントは非常に性能の良いものですが、ただしホストマシンのファイルシステムに依存するものとなり、利用可能な特定のディレクトリ構造に従ったものになります。
+今から新たに Docker アプリケーションを開発しようとする場合は、これにかわって <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">名前つきボリューム</a> の利用を考えてみてください。
+バインドマウントを管理するために Docker CLI コマンドを直接利用することはできなくなります。</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/storage/images/types-of-mounts-bind.png" alt="bind mounts on the Docker host" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/storage/images/types-of-mounts-bind.png" alt="Docker ホスト上のバインドマウント" /></p>
 
-<h2 id="choose-the--v-or---mount-flag">Choose the -v or --mount flag</h2>
+<h2 id="choose-the--v-or---mount-flag">-v または --mount フラグの選択</h2>
 
-<p>Originally, the <code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code> flag was used for standalone containers and
-the <code class="highlighter-rouge">--mount</code> flag was used for swarm services. However, starting with Docker
-17.06, you can also use <code class="highlighter-rouge">--mount</code> with standalone containers. In general,
-<code class="highlighter-rouge">--mount</code> is more explicit and verbose. The biggest difference is that the <code class="highlighter-rouge">-v</code>
-syntax combines all the options together in one field, while the <code class="highlighter-rouge">--mount</code>
-syntax separates them. Here is a comparison of the syntax for each flag.</p>
+<p>もともと <code class="highlighter-rouge">-v</code> フラグや <code class="highlighter-rouge">--volume</code> フラグはスタンドアロンコンテナーに対して、また <code class="highlighter-rouge">--mount</code> フラグはスウォームサービスに対して用いられてきたものです。
+しかし Docker 17.06 からは <code class="highlighter-rouge">--mount</code> をスタンドアロンコンテナーに対しても利用できるようになりました。
+全般に <code class="highlighter-rouge">--mount</code> の方がわかりやすいものの記述は増えます。
+両者の最大の違いは、<code class="highlighter-rouge">-v</code> の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、<code class="highlighter-rouge">--mount</code> の文法はそれを 1 つずつ個別に分けている点です。
+以下に両フラグにおける文法を比較します。</p>
 
 <blockquote>
-  <p><strong>Tip</strong>: New users should use the <code class="highlighter-rouge">--mount</code> syntax. Experienced users may
-be more familiar with the <code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code> syntax, but are encouraged to
-use <code class="highlighter-rouge">--mount</code>, because research has shown it to be easier to use.</p>
+  <p><strong>ヒント</strong>: はじめて利用する方は <code class="highlighter-rouge">--mount</code> を利用してください。
+上級ユーザーは <code class="highlighter-rouge">-v</code> や <code class="highlighter-rouge">--volume</code> を用いることに慣れているかもしれませんが、<code class="highlighter-rouge">--mount</code> を利用するように心がけてください。
+<code class="highlighter-rouge">--mount</code> の方が簡単に利用することができるとの調査もあります。</p>
 </blockquote>
 
 <ul>
-  <li><strong><code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code></strong>: Consists of three fields, separated by colon characters
-(<code class="highlighter-rouge">:</code>). The fields must be in the correct order, and the meaning of each field
-is not immediately obvious.
+  <li><strong><code class="highlighter-rouge">-v</code> または <code class="highlighter-rouge">--volume</code></strong>: 3 つの項目から構成され、それぞれをコロン（<code class="highlighter-rouge">:</code>）で区切ります。
+各項目は正しい順に記述する必要があります。
+各項目の意味は、そのときどきによって変わります。
     <ul>
-      <li>In the case of bind mounts, the first field is the path to the file or
-directory on the <strong>host machine</strong>.</li>
-      <li>The second field is the path where the file or directory is mounted in
-the container.</li>
-      <li>The third field is optional, and is a comma-separated list of options, such
-as <code class="highlighter-rouge">ro</code>, <code class="highlighter-rouge">consistent</code>, <code class="highlighter-rouge">delegated</code>, <code class="highlighter-rouge">cached</code>, <code class="highlighter-rouge">z</code>, and <code class="highlighter-rouge">Z</code>. These options
-are discussed below.</li>
+      <li>バインドマウントの場合、1 つめの項目は <strong>ホストマシン</strong> 上のファイルまたはディレクトリへのパスです。</li>
+      <li>2 つめは、コンテナー内にマウントされるファイルまたディレクトリのパスです。</li>
+      <li>3 つめは任意の指定項目であり、オプション指定をカンマ区切りで指定します。
+指定内容には <code class="highlighter-rouge">ro</code>, <code class="highlighter-rouge">consistent</code>, <code class="highlighter-rouge">delegated</code>, <code class="highlighter-rouge">cached</code>, <code class="highlighter-rouge">z</code>, <code class="highlighter-rouge">Z</code> があります。
+このオプションに関しては後に説明しています。</li>
     </ul>
   </li>
-  <li><strong><code class="highlighter-rouge">--mount</code></strong>: Consists of multiple key-value pairs, separated by commas and each
-consisting of a <code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code> tuple. The <code class="highlighter-rouge">--mount</code> syntax is more verbose
-than <code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code>, but the order of the keys is not significant, and
-the value of the flag is easier to understand.
+  <li><strong><code class="highlighter-rouge">--mount</code></strong>: 複数のキーバリューペアを指定し、各ペアはカンマにより区切ります。
+そしてそれぞれのペアは <code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code> という記述を行います。
+<code class="highlighter-rouge">--mount</code> における記述は <code class="highlighter-rouge">-v</code> や <code class="highlighter-rouge">--volume</code> におけるものよりも長くなります。
+しかしキーの並び順に意味はなく、このフラグに与えられたキーバリューの内容は容易に理解することができます。
     <ul>
-      <li>The <code class="highlighter-rouge">type</code> of the mount, which can be <code class="highlighter-rouge">bind</code>, <code class="highlighter-rouge">volume</code>, or <code class="highlighter-rouge">tmpfs</code>. This
-topic discusses bind mounts, so the type is always <code class="highlighter-rouge">bind</code>.</li>
-      <li>The <code class="highlighter-rouge">source</code> of the mount. For bind mounts, this is the path to the file
-or directory on the Docker daemon host. May be specified as <code class="highlighter-rouge">source</code> or
-<code class="highlighter-rouge">src</code>.</li>
-      <li>The <code class="highlighter-rouge">destination</code> takes as its value the path where the file or directory
-is mounted in the container. May be specified as <code class="highlighter-rouge">destination</code>, <code class="highlighter-rouge">dst</code>,
-or <code class="highlighter-rouge">target</code>.</li>
-      <li>The <code class="highlighter-rouge">readonly</code> option, if present, causes the bind mount to be <a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#use-a-read-only-bind-mount">mounted into
-the container as read-only</a>.</li>
-      <li>The <code class="highlighter-rouge">bind-propagation</code> option, if present, changes the
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-bind-propagation">bind propagation</a>. May be one of <code class="highlighter-rouge">rprivate</code>,
-<code class="highlighter-rouge">private</code>, <code class="highlighter-rouge">rshared</code>, <code class="highlighter-rouge">shared</code>, <code class="highlighter-rouge">rslave</code>, <code class="highlighter-rouge">slave</code>.</li>
-      <li>The <a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-mount-consistency-for-macos"><code class="highlighter-rouge">consistency</code></a> option, if
-present, may be one of <code class="highlighter-rouge">consistent</code>, <code class="highlighter-rouge">delegated</code>, or <code class="highlighter-rouge">cached</code>. This setting
-only applies to Docker Desktop for Mac, and is ignored on all other platforms.</li>
-      <li>The <code class="highlighter-rouge">--mount</code> flag does not support <code class="highlighter-rouge">z</code> or <code class="highlighter-rouge">Z</code> options for modifying
-selinux labels.</li>
+      <li><code class="highlighter-rouge">type</code> はマウントのタイプであり、<code class="highlighter-rouge">bind</code>, <code class="highlighter-rouge">volume</code>, <code class="highlighter-rouge">tmpfs</code> といった値を指定します。
+ここで説明しているのはバインドマウントであるため、常に <code class="highlighter-rouge">bind</code> であるものとします。</li>
+      <li><code class="highlighter-rouge">source</code> はマウント元です。
+バインドマウントにおいては、Docker デーモンホスト上のファイルまたはディレクトリへのパスになります。
+<code class="highlighter-rouge">source</code> あるいは <code class="highlighter-rouge">src</code> といった指定がよく用いられます。</li>
+      <li><code class="highlighter-rouge">destination</code> には、コンテナー上にてマウントするファイルまたはディレクトリのパスを指定します。
+<code class="highlighter-rouge">destination</code>, <code class="highlighter-rouge">dst</code>, <code class="highlighter-rouge">target</code> といった指定がよく用いられます。</li>
+      <li>オプション <code class="highlighter-rouge">readonly</code> が指定されると、そのバインドマウンドが <a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#use-a-read-only-bind-mount">コンテナーにおける読み込み専用マウント</a> としてマウントされます。</li>
+      <li>オプション <code class="highlighter-rouge">bind-propagation</code> が指定されると、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-bind-propagation">バインドプロパゲーション</a>（bind propagation）の設定変更を行います。
+<code class="highlighter-rouge">rprivate</code>, <code class="highlighter-rouge">private</code>, <code class="highlighter-rouge">rshared</code>, <code class="highlighter-rouge">shared</code>, <code class="highlighter-rouge">rslave</code>, <code class="highlighter-rouge">slave</code> のいずれかが指定されます。</li>
+      <li>オプション <a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-mount-consistency-for-macos"><code class="highlighter-rouge">consistency</code></a> が指定される場合は、<code class="highlighter-rouge">consistent</code>, <code class="highlighter-rouge">delegated</code>, <code class="highlighter-rouge">cached</code> のいずれかを指定します。
+この設定は Docker Desktop for Mac に対してのみ適用されるものであり、これ以外のプラットフォームでは無視されます。</li>
+      <li><code class="highlighter-rouge">--mount</code> フラグは、selinux ラベルを修正するための <code class="highlighter-rouge">z</code> または <code class="highlighter-rouge">Z</code> オプションには対応していません。</li>
     </ul>
   </li>
 </ul>
 
-<p>The examples below show both the <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> syntax where possible, and
-<code class="highlighter-rouge">--mount</code> is presented first.</p>
+<p>これ以降においては、可能なら <code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> の両方の例を示していきます。
+また先に示すのは <code class="highlighter-rouge">--mount</code> とします。</p>
 
-<h3 id="differences-between--v-and---mount-behavior">Differences between <code class="highlighter-rouge">-v</code> and <code class="highlighter-rouge">--mount</code> behavior</h3>
+<h3 id="differences-between--v-and---mount-behavior"><code class="highlighter-rouge">-v</code> と <code class="highlighter-rouge">--mount</code> の動作の違い</h3>
 
-<p>Because the <code class="highlighter-rouge">-v</code> and <code class="highlighter-rouge">--volume</code> flags have been a part of Docker for a long
-time, their behavior cannot be changed. This means that <strong>there is one behavior
-that is different between <code class="highlighter-rouge">-v</code> and <code class="highlighter-rouge">--mount</code>.</strong></p>
+<p><code class="highlighter-rouge">-v</code> および <code class="highlighter-rouge">--volume</code> フラグは、長らく Docker の一部分として実現してきているため、その動作を今さら変更することはできません。
+このことがつまり、<strong><code class="highlighter-rouge">-v</code> と <code class="highlighter-rouge">--mount</code> の動作の 1 つの違い</strong> になります。</p>
 
-<p>If you use <code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code> to bind-mount a file or directory that does not
-yet exist on the Docker host, <code class="highlighter-rouge">-v</code> creates the endpoint for you. <strong>It is
-always created as a directory.</strong></p>
+<p><code class="highlighter-rouge">-v</code> または <code class="highlighter-rouge">--volume</code> を使ってファイルやディレクトリをバインドマウントした際に、そのファイルやディレクトリが Docker ホスト上にまだ存在していなかった場合、<code class="highlighter-rouge">-v</code> はそのマウントエンドポイントを生成します。
+<strong>その場合には常にディレクトリとして生成されます。</strong></p>
 
-<p>If you use <code class="highlighter-rouge">--mount</code> to bind-mount a file or directory that does not
-yet exist on the Docker host, Docker does <strong>not</strong> automatically create it for
-you, but generates an error.</p>
+<p><code class="highlighter-rouge">--mount</code> を使ってファイルやディレクトリをバインドマウントした際に、そのファイルやディレクトリが Docker ホスト上に存在していなかった場合、Docker はそのファイルやディレクトリを自動的に生成することは<strong>しません</strong>。
+かわりにエラーが出力されます。</p>
 
-<h2 id="start-a-container-with-a-bind-mount">Start a container with a bind mount</h2>
+<h2 id="start-a-container-with-a-bind-mount">バインドマウントを用いたコンテナーの起動</h2>
 
-<p>Consider a case where you have a directory <code class="highlighter-rouge">source</code> and that when you build the
-source code, the artifacts are saved into another directory, <code class="highlighter-rouge">source/target/</code>.
-You want the artifacts to be available to the container at <code class="highlighter-rouge">/app/</code>, and you
-want the container to get access to a new build each time you build the source
-on your development host. Use the following command to bind-mount the <code class="highlighter-rouge">target/</code>
-directory into your container at <code class="highlighter-rouge">/app/</code>. Run the command from within the
-<code class="highlighter-rouge">source</code> directory. The <code class="highlighter-rouge">$(pwd)</code> sub-command expands to the current working
-directory on Linux or macOS hosts.</p>
+<p>仮に <code class="highlighter-rouge">source</code> というディレクトリがあって、そこにソースコードが置かれているとします。
+そして成果物はそのサブディレクトリ <code class="highlighter-rouge">source/target/</code> に置かれるものとします。
+ここでコンテナーが <code class="highlighter-rouge">/app/</code> というディレクトリから、その成果物にアクセスできるようにします。
+つまり開発ホスト上のソースディレクトリにおいて成果物をビルドしたら、すぐにその最新の成果物をコンテナーがアクセスできるようにする、というものです。
+これを実現するには以下のようなコマンドにより、<code class="highlighter-rouge">target/</code> ディレクトリをコンテナー内の <code class="highlighter-rouge">/app/</code> にバインドマウントします。
+コマンドは <code class="highlighter-rouge">source</code> ディレクトリから実行します。
+<code class="highlighter-rouge">$(pwd)</code> というサブコマンドは、Linux あるいは macOS ホスト上において、カレントディレクトリに展開されます。</p>
 
-<p>The <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> examples below produce the same result. You
-can’t run them both unless you remove the <code class="highlighter-rouge">devtest</code> container after running the
-first one.</p>
+<p><code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> によるそれぞれの例は、同一の結果になります。
+2 つの例は同時に実行することはできません。
+それをする場合は、1 つを実行した後に <code class="highlighter-rouge">devtest</code> コンテナーを削除しておくことが必要になります。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
@@ -320,8 +307,8 @@ first one.</p>
 </div>
 <!--tab-content-->
 
-<p>Use <code class="highlighter-rouge">docker inspect devtest</code> to verify that the bind mount was created
-correctly. Look for the <code class="highlighter-rouge">Mounts</code> section:</p>
+<p>バインドマウントが正しく生成されたかどうかを <code class="highlighter-rouge">docker inspect devtest</code> により確認します。
+出力の中で <code class="highlighter-rouge">Mounts</code> の項目を見てみます。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"Mounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -335,30 +322,30 @@ correctly. Look for the <code class="highlighter-rouge">Mounts</code> section:</
 </span><span class="p">],</span><span class="w">
 </span></code></pre></div></div>
 
-<p>This shows that the mount is a <code class="highlighter-rouge">bind</code> mount, it shows the correct source and
-destination, it shows that the mount is read-write, and that the propagation is
-set to <code class="highlighter-rouge">rprivate</code>.</p>
+<p>この情報から、マウントは「バインド」マウントであることがわかります。
+そしてマウント元、マウント先が正しいものであること、マウントが読み書き可能であること、プロパゲーションは <code class="highlighter-rouge">rprivate</code> に設定されていることがわかります。</p>
 
-<p>Stop the container:</p>
+<p>コンテナーを停止します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop devtest
 
 <span class="nv">$ </span>docker container rm devtest
 </code></pre></div></div>
 
-<h3 id="mount-into-a-non-empty-directory-on-the-container">Mount into a non-empty directory on the container</h3>
+<h3 id="mount-into-a-non-empty-directory-on-the-container">コンテナー上の空ではないディレクトリへのマウント</h3>
 
-<p>If you bind-mount into a non-empty directory on the container, the directory’s
-existing contents are obscured by the bind mount. This can be beneficial,
-such as when you want to test a new version of your application without
-building a new image. However, it can also be surprising and this behavior
-differs from that of <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">docker volumes</a>.</p>
+<p>バインドマウントする先のコンテナー内ディレクトリが空でなかったとします。
+このときそのディレクトリ内にはじめからあった内容は、バインドマウントによって見えなくなってしまいます。
+そうであっても、このことを便利に利用できる場合もあります。
+たとえばアプリケーションの新バージョンをテストする際に、新たなイメージをビルドせずに実現するような場合です。
+ただしそういった状況には驚くかもしれません。
+またこの動きは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">Docker ボリューム</a> とは異なるものです。</p>
 
-<p>This example is contrived to be extreme, but replaces the contents of the
-container’s <code class="highlighter-rouge">/usr/</code> directory with the <code class="highlighter-rouge">/tmp/</code> directory on the host machine. In
-most cases, this would result in a non-functioning container.</p>
+<p>以下は極端な例です。
+コンテナーの <code class="highlighter-rouge">/usr/</code> ディレクトリをホストマシン上の <code class="highlighter-rouge">/tmp/</code> ディレクトリに置き換えてしまうものです。
+おそらくこのコンテナーは使いものにならなくなります。</p>
 
-<p>The <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> examples have the same end result.</p>
+<p><code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> によるそれぞれの例は、同一の結果になります。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-empty-run"><code>--mount</code></a></li>
@@ -396,23 +383,23 @@ starting container process caused <span class="s2">"exec: </span><span class="se
 </div>
 <!--tab-content-->
 
-<p>The container is created but does not start. Remove it:</p>
+<p>コンテナーは生成されましたが、起動はされませんでした。
+コンテナーはここで削除します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container rm broken-container
 </code></pre></div></div>
 
-<h2 id="use-a-read-only-bind-mount">Use a read-only bind mount</h2>
+<h2 id="use-a-read-only-bind-mount">読み込み専用バインドマウントの利用</h2>
 
-<p>For some development applications, the container needs to
-write into the bind mount, so changes are propagated back to the
-Docker host. At other times, the container only needs read access.</p>
+<p>開発アプリケーションにおいて、バインドマウントに対してコンテナーから書き込みを行う必要があるものも当然あります。
+この場合、その書き込みは Docker ホストに対して行われます。
+一方でコンテナーが読み込みアクセスだけを必要とする場合もあります。</p>
 
-<p>This example modifies the one above but mounts the directory as a read-only
-bind mount, by adding <code class="highlighter-rouge">ro</code> to the (empty by default) list of options, after the
-mount point within the container. Where multiple options are present, separate
-them by commas.</p>
+<p>以下の例では先ほどと同様ながら、ディレクトリは読み込み専用としてバインドマウントするものです。
+以下ではコンテナー内のマウントポイント指定の後に、リスト形式のオプションとして（デフォルトでは何も記述しない箇所に）<code class="highlighter-rouge">ro</code> を加えます。
+複数のオプション指定を行っているので、それぞれをカンマで区切ります。</p>
 
-<p>The <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> examples have the same result.</p>
+<p><code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> によるそれぞれの例は、同一の結果になります。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-readonly"><code>--mount</code></a></li>
@@ -444,8 +431,8 @@ them by commas.</p>
 </div>
 <!--tab-content-->
 
-<p>Use <code class="highlighter-rouge">docker inspect devtest</code> to verify that the bind mount was created
-correctly. Look for the <code class="highlighter-rouge">Mounts</code> section:</p>
+<p>バインドマウントが正しく生成されたかどうかを <code class="highlighter-rouge">docker inspect devtest</code> により確認します。
+出力の中で <code class="highlighter-rouge">Mounts</code> の項目を見てみます。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"Mounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -459,73 +446,70 @@ correctly. Look for the <code class="highlighter-rouge">Mounts</code> section:</
 </span><span class="p">],</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Stop the container:</p>
+<p>コンテナーを停止します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop devtest
 
 <span class="nv">$ </span>docker container rm devtest
 </code></pre></div></div>
 
-<h2 id="configure-bind-propagation">Configure bind propagation</h2>
+<h2 id="configure-bind-propagation">バインドプロパゲーションの設定</h2>
 
-<p>Bind propagation defaults to <code class="highlighter-rouge">rprivate</code> for both bind mounts and volumes. It is
-only configurable for bind mounts, and only on Linux host machines. Bind
-propagation is an advanced topic and many users never need to configure it.</p>
+<p>バインドマウントとボリュームのいずれにおいても、バインドプロパゲーション（bind propagation）のデフォルトは <code class="highlighter-rouge">rprivate</code> です。
+この設定はバインドマウントに対してのみ、また Linux ホストマシン上においてのみ変更可能です。
+バインドプロパゲーションは高度な技術であるため、多くのユーザーは設定する必要はありません。</p>
 
-<p>Bind propagation refers to whether or not mounts created within a given
-bind-mount or named volume can be propagated to replicas of that mount. Consider
-a mount point <code class="highlighter-rouge">/mnt</code>, which is also mounted on <code class="highlighter-rouge">/tmp</code>. The propagation settings
-control whether a mount on <code class="highlighter-rouge">/tmp/a</code> would also be available on <code class="highlighter-rouge">/mnt/a</code>. Each
-propagation setting has a recursive counterpoint. In the case of recursion,
-consider that <code class="highlighter-rouge">/tmp/a</code> is also mounted as <code class="highlighter-rouge">/foo</code>. The propagation settings
-control whether <code class="highlighter-rouge">/mnt/a</code> and/or <code class="highlighter-rouge">/tmp/a</code> would exist.</p>
+<p>バインドプロパゲーションとは、指定されたバインドマウントや名前つきボリュームによって生成されるマウントが、そのレプリカに対して情報伝達（propagate）をするかどうかを表わします。
+ここで <code class="highlighter-rouge">/mnt</code> というマウントポイントを考えます。
+これが <code class="highlighter-rouge">/tmp</code> にマウントされているとします。
+これに対するプロパゲーションの設定は、<code class="highlighter-rouge">/tmp/a</code> 上のマウントが <code class="highlighter-rouge">/mnt/a</code> として利用可能かどうかを制御するものです。
+プロパゲーションの各設定においては、再帰的に対応するマウントポイントが存在します。
+再帰的という点でいうと、仮に <code class="highlighter-rouge">/tmp/a</code> が <code class="highlighter-rouge">/foo</code> としてマウントされていたとします。
+このときプロパゲーション設定は <code class="highlighter-rouge">/mnt/a</code> や <code class="highlighter-rouge">/tmp/a</code> が存在するかどうかを定めるものです。</p>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">Propagation setting</th>
-      <th style="text-align: left">Description</th>
+      <th style="text-align: left">プロパゲーション設定</th>
+      <th style="text-align: left">内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">shared</code></td>
-      <td style="text-align: left">Sub-mounts of the original mount are exposed to replica mounts, and sub-mounts of replica mounts are also propagated to the original mount.</td>
+      <td style="text-align: left">マウント元に対するサブマウントは、マウント先にも公開されます。マウント先に対するサブマウントも、マウント元に対して公開されます。</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">slave</code></td>
-      <td style="text-align: left">similar to a shared mount, but only in one direction. If the original mount exposes a sub-mount, the replica mount can see it. However, if the replica mount exposes a sub-mount, the original mount cannot see it.</td>
+      <td style="text-align: left">shared に類似。ただし一方向のみ。マウント元がサブマウントを公開するなら、マウント先でもこれを見ることができますが、マウント先がサブマウントを公開しても、マウント元からは見ることができません。</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">private</code></td>
-      <td style="text-align: left">The mount is private. Sub-mounts within it are not exposed to replica mounts, and sub-mounts of replica mounts are not exposed to the original mount.</td>
+      <td style="text-align: left">マウントはプライベートなものになります。マウント元におけるサブマウントは、マウント先に公開されません。またマウント先のサブマウントも、マウント元には公開されません。</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rshared</code></td>
-      <td style="text-align: left">The same as shared, but the propagation also extends to and from mount points nested within any of the original or replica mount points.</td>
+      <td style="text-align: left">shared と同様。, but the propagation also extends to and from mount points nested within any of the original or replica mount points.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rslave</code></td>
-      <td style="text-align: left">The same as slave, but the propagation also extends to and from mount points nested within any of the original or replica mount points.</td>
+      <td style="text-align: left">slave と同様。, but the propagation also extends to and from mount points nested within any of the original or replica mount points.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rprivate</code></td>
-      <td style="text-align: left">The default. The same as private, meaning that no mount points anywhere within the original or replica mount points propagate in either direction.</td>
+      <td style="text-align: left">デフォルト。private と同様。つまりマウント元やマウント先に対するサブマウントは、どの方向にも伝播（propagate）しません。</td>
     </tr>
   </tbody>
 </table>
 
-<p>Before you can set bind propagation on a mount point, the host filesystem needs
-to already support bind propagation.</p>
+<p>マウントポイントに対してバインドプロパゲーションを設定するには、ホストのファイルシステムがバインドプロパゲーションに対応している必要があります。</p>
 
-<p>For more information about bind propagation, see the
-<a href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt" target="_blank" class="_">Linux kernel documentation for shared subtree</a>.</p>
+<p>バインドプロパゲーションの詳細は <a href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt" target="_blank" class="_">Linux カーネルドキュメントの shared subtree</a> を参照してください。</p>
 
-<p>The following example mounts the <code class="highlighter-rouge">target/</code> directory into the container twice,
-and the second mount sets both the <code class="highlighter-rouge">ro</code> option and the <code class="highlighter-rouge">rslave</code> bind propagation
-option.</p>
+<p>以下の例では <code class="highlighter-rouge">target/</code> ディレクトリをコンテナーに対して 2 度マウントしています。
+そして 2 つめのマウントでは <code class="highlighter-rouge">ro</code> オプションと、バインドプロパゲーションのオプション <code class="highlighter-rouge">rslave</code> を指定しています。</p>
 
-<p>The <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> examples have the same result.</p>
+<p><code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> によるそれぞれの例は、同一の結果になります。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-propagation"><code>--mount</code></a></li>
@@ -561,33 +545,28 @@ option.</p>
 
 <p>Now if you create <code class="highlighter-rouge">/app/foo/</code>, <code class="highlighter-rouge">/app2/foo/</code> also exists.</p>
 
-<h2 id="configure-the-selinux-label">Configure the selinux label</h2>
+<h2 id="configure-the-selinux-label">selinux ラベルの設定</h2>
 
-<p>If you use <code class="highlighter-rouge">selinux</code> you can add the <code class="highlighter-rouge">z</code> or <code class="highlighter-rouge">Z</code> options to modify the selinux
-label of the <strong>host file or directory</strong> being mounted into the container. This
-affects the file or directory on the host machine itself and can have
-consequences outside of the scope of Docker.</p>
+<p><code class="highlighter-rouge">selinux</code> を利用している場合 <code class="highlighter-rouge">z</code> または <code class="highlighter-rouge">Z</code> オプションを使って、selinux ラベルを修正することができます。
+修正するのは、コンテナーに対してマウントされている <strong>ホスト上のファイルやディレクトリ</strong> です。
+つまりその結果はホストマシンそのもののファイルやディレクトリを変更するため、Docker の範囲外に影響を及ぼします。</p>
 
 <ul>
-  <li>The <code class="highlighter-rouge">z</code> option indicates that the bind mount content is shared among multiple
-containers.</li>
-  <li>The <code class="highlighter-rouge">Z</code> option indicates that the bind mount content is private and unshared.</li>
+  <li><code class="highlighter-rouge">z</code> オプションは、複数コンテナー間においてバインドマウントされた内容を共有します。</li>
+  <li><code class="highlighter-rouge">Z</code> オプションは、バインドマウントされた内容はプライベートなものであって共有はされません。</li>
 </ul>
 
-<p>Use <strong>extreme</strong> caution with these options. Bind-mounting a system directory
-such as <code class="highlighter-rouge">/home</code> or <code class="highlighter-rouge">/usr</code> with the <code class="highlighter-rouge">Z</code> option renders your host machine
-inoperable and you may need to relabel the host machine files by hand.</p>
+<p>このオプションに対しては <strong>最大限</strong> 注意してください。
+<code class="highlighter-rouge">Z</code> オプションを使って、<code class="highlighter-rouge">/home</code> や <code class="highlighter-rouge">/usr</code> などのようなシステムディレクトリをバインドマウントしてしまうと、ホストマシンは制御できなくなり、ホストマシン上のファイルに対するラベル設定を手動で行うことになります。</p>
 
 <blockquote class="important">
-  <p><strong>Important</strong>: When using bind mounts with services, selinux labels
-(<code class="highlighter-rouge">:Z</code> and <code class="highlighter-rouge">:z</code>), as well as <code class="highlighter-rouge">:ro</code> are ignored. See
-<a href="https://github.com/moby/moby/issues/32579">moby/moby #32579</a> for details.</p>
+  <p><strong>重要</strong>: バインドマウントをサービス内にて行った場合には、selinux ラベル（<code class="highlighter-rouge">:Z</code> や <code class="highlighter-rouge">:z</code>）は、<code class="highlighter-rouge">ro</code> と同じように無視されます。
+詳しくは <a href="https://github.com/moby/moby/issues/32579">moby/moby #32579</a> を参照してください。</p>
 </blockquote>
 
-<p>This example sets the <code class="highlighter-rouge">z</code> option to specify that multiple containers can share
-the bind mount’s contents:</p>
+<p>以下は <code class="highlighter-rouge">z</code> オプションの指定により、複数コンテナーがバインドマウント先を共有できるようにする例です。</p>
 
-<p>It is not possible to modify the selinux label using the <code class="highlighter-rouge">--mount</code> flag.</p>
+<p>selinux ラベルの修正は <code class="highlighter-rouge">--mount</code> フラグでは行うことができません。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-it</span> <span class="se">\</span>
@@ -658,12 +637,12 @@ delays before updates made on the host are visible within a container.</p>
 </div>
 <!--tab-content-->
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
 <ul>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">volumes</a>.</li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/">tmpfs mounts</a>.</li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">storage drivers</a>.</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">ボリューム</a> について学ぶ</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/">tmpfs マウント</a> について学ぶ</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">ストレージドライバー</a> について学ぶ</li>
 </ul>
 
 							<!-- tags -->
@@ -700,7 +679,7 @@ delays before updates made on the host are visible within a container.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "storage/bind-mounts.md",
-										"title": "Use bind mounts",
+										"title": "バインドマウントの利用",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/storage/bind-mounts.md"
 									};
 									(function(d, c, j) {
@@ -760,21 +739,21 @@ delays before updates made on the host are visible within a container.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#choose-the--v-or---mount-flag" class="nomunge">Choose the -v or --mount flag</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#choose-the--v-or---mount-flag" class="nomunge">-v または --mount フラグの選択</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#differences-between--v-and---mount-behavior" class="nomunge">Differences between -v and --mount behavior</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#differences-between--v-and---mount-behavior" class="nomunge">-v と --mount の動作の違い</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#start-a-container-with-a-bind-mount" class="nomunge">Start a container with a bind mount</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#start-a-container-with-a-bind-mount" class="nomunge">バインドマウントを用いたコンテナーの起動</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#mount-into-a-non-empty-directory-on-the-container" class="nomunge">Mount into a non-empty directory on the container</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#mount-into-a-non-empty-directory-on-the-container" class="nomunge">コンテナー上の空ではないディレクトリへのマウント</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#use-a-read-only-bind-mount" class="nomunge">Use a read-only bind mount</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-bind-propagation" class="nomunge">Configure bind propagation</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-the-selinux-label" class="nomunge">Configure the selinux label</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#use-a-read-only-bind-mount" class="nomunge">読み込み専用バインドマウントの利用</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-bind-propagation" class="nomunge">バインドプロパゲーションの設定</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-the-selinux-label" class="nomunge">selinux ラベルの設定</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#configure-mount-consistency-for-macos" class="nomunge">Configure mount consistency for macOS</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/bind-mounts.md#next-steps" class="nomunge">次のステップ</a></li>
 </ul>
 
 

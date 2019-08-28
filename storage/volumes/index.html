@@ -1,4 +1,4 @@
-<!-- Page generated 2019-08-22 16:59:44 +0900 -->
+<!-- Page generated 2019-08-28 16:50:42 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,7 +74,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-22T16:59:44+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-28T16:50:42+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -83,8 +83,8 @@
 	<meta name="twitter:title" itemprop="title name" content="ボリュームの利用"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="ボリュームとは、Docker コンテナーにおいて生成され利用されるデータを、永続的に保持する目的で利用される仕組みです。 バインドマウント はホストマシンのディレクトリ構造に依存しますが、ボリュームは完全に Docker によって管理されます。 ボリュームにはバインドマウントに比べて、以下のように優れた点があります。 ボリュームはバインドマウントよりも、バックアップや移行が容易です。 ボリュームは Docker CLI コマンドや Docker API を利用して管理することができます。 ボリュームは Linux と Windows 上のコンテナーにおいて動作します。 ボリュームは複数コンテナー間にて安全に共有できます。 ボリュームドライバーを用いると、リモートホスト上、あるいはクラウドプロバイダー上のボリュームに保存できるようになります。保存の際にはボリューム内データを暗号化することができ、その他にも種々の機能を利用することができます。 New volumes can have their content pre-populated by..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
-	<meta name="twitter:image:alt" content="Docker Documentation"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-08-22T16:59:44+09:00"/>
+	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-08-28T16:50:42+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="storage, persistence, data persistence, volumes">
@@ -96,14 +96,14 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>ボリュームの利用 | Docker Documentation</title>
+	<title>ボリュームの利用 | Docker ドキュメント</title>
 <meta property="og:title" content="ボリュームの利用" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="ボリュームの利用" />
 <meta property="og:description" content="ボリュームの利用" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/" />
-<meta property="og:site_name" content="Docker Documentation" />
+<meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
 {"@context":"http://schema.org","@type":"WebPage","headline":"ボリュームの利用","description":"ボリュームの利用","url":"https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/"}</script>
 	<!-- END SEO STUFF -->
@@ -210,20 +210,21 @@
 <p>Volumes use <code class="highlighter-rouge">rprivate</code> bind propagation, and bind propagation is not
 configurable for volumes.</p>
 
-<h2 id="choose-the--v-or---mount-flag">Choose the -v or --mount flag</h2>
+<h2 id="choose-the--v-or---mount-flag">-v または --mount フラグの選択</h2>
 
-<p>Originally, the <code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code> flag was used for standalone containers and
-the <code class="highlighter-rouge">--mount</code> flag was used for swarm services. However, starting with Docker
-17.06, you can also use <code class="highlighter-rouge">--mount</code> with standalone containers. In general,
+<p>もともと <code class="highlighter-rouge">-v</code> フラグや <code class="highlighter-rouge">--volume</code> フラグはスタンドアロンコンテナーに対して、また <code class="highlighter-rouge">--mount</code> フラグはスウォームサービスに対して用いられてきたものです。
+しかし Docker 17.06 からは <code class="highlighter-rouge">--mount</code> をスタンドアロンコンテナーに対しても利用できるようになりました。
+全般に <code class="highlighter-rouge">--mount</code> の方が明示的であり、
+In general,
 <code class="highlighter-rouge">--mount</code> is more explicit and verbose. The biggest difference is that the <code class="highlighter-rouge">-v</code>
 syntax combines all the options together in one field, while the <code class="highlighter-rouge">--mount</code>
 syntax separates them. Here is a comparison of the syntax for each flag.</p>
 
 <blockquote>
-  <p>New users should try <code class="highlighter-rouge">--mount</code> syntax which is simpler than <code class="highlighter-rouge">--volume</code> syntax.</p>
+  <p>はじめて利用する方は、<code class="highlighter-rouge">--volume</code> よりも <code class="highlighter-rouge">--mount</code> の方が文法は簡単なので、<code class="highlighter-rouge">--mount</code> を利用してください。</p>
 </blockquote>
 
-<p>If you need to specify volume driver options, you must use <code class="highlighter-rouge">--mount</code>.</p>
+<p>ボリュームドライバーのオプションを指定する必要がある場合は、<code class="highlighter-rouge">--mount</code> を用いなければなりません。</p>
 
 <ul>
   <li><strong><code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code></strong>: Consists of three fields, separated by colon characters
@@ -289,7 +290,7 @@ list in the <code class="highlighter-rouge">o</code> parameter. This example sho
 
 <p>When using volumes with services, only <code class="highlighter-rouge">--mount</code> is supported.</p>
 
-<h2 id="create-and-manage-volumes">Create and manage volumes</h2>
+<h2 id="create-and-manage-volumes">ボリュームの生成と管理</h2>
 
 <p>Unlike a bind mount, you can create and manage volumes outside the scope of any
 container.</p>
@@ -808,12 +809,12 @@ the Docker Engine removes the <code class="highlighter-rouge">/foo</code> volume
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/volumes.md#choose-the--v-or---mount-flag" class="nomunge">Choose the -v or --mount flag</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/volumes.md#choose-the--v-or---mount-flag" class="nomunge">-v または --mount フラグの選択</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/volumes.md#differences-between--v-and---mount-behavior" class="nomunge">Differences between -v and --mount behavior</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/volumes.md#create-and-manage-volumes" class="nomunge">Create and manage volumes</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/volumes.md#create-and-manage-volumes" class="nomunge">ボリュームの生成と管理</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/volumes.md#start-a-container-with-a-volume" class="nomunge">Start a container with a volume</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/volumes.md#start-a-service-with-volumes" class="nomunge">Start a service with volumes</a></li>
