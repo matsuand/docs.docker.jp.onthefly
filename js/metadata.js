@@ -1962,7 +1962,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/develop/sdk/examples/",
-"title":"Examples using the Docker Engine SDKs and Docker API",
+"title":"Docker Engine SDK と Docker API の利用例",
 "description":null,
 "keywords":"developing, api, sdk, developers, rest, curl, python, go"
 }
@@ -2607,7 +2607,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/",
 "title":"Universal Control Plane 概要",
-"description":"Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker.\n",
+"description":"Docker Universal Control Plane、つまり Docker が提供するエンタープライズレベルのクラスター管理ソリューションについて学びます。\n",
 "keywords":"ucp, overview, orchestration, cluster"
 }
 ,
@@ -3019,7 +3019,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/install-offline/",
-"title":"Install UCP offline",
+"title":"オフラインでの UCP インストール",
 "description":"Learn how to install Docker Universal Control Plane. on a machine with no internet access.",
 "keywords":"UCP, install, offline, Docker EE"
 }

@@ -1,4 +1,4 @@
-<!-- Page generated 2019-08-28 16:50:42 +0900 -->
+<!-- Page generated 2019-09-02 22:03:45 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -78,7 +78,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-02T22:03:45+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -88,7 +88,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Here you can learn about new features, bug fixes, breaking changes, and known issues for the latest UCP version. You can then use the upgrade instructions to upgrade your installation..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-02T22:03:45+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, release notes">
@@ -520,26 +520,24 @@ In order to optimize user experience and security, support for Internet Explorer
   </li>
   <li>Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
     <ul>
-      <li>Workaround: Create a <code class="highlighter-rouge">ClusterRoleBinding</code> that binds the <code class="highlighter-rouge">persistent-volume-binder</code> serviceaccount
- to a <code class="highlighter-rouge">cluster-admin</code> <code class="highlighter-rouge">ClusterRole</code>, as shown in the following example:
- ```
- apiVersion: rbac.authorization.k8s.io/v1
- kind: ClusterRoleBinding
- metadata:
-   labels:
-     subjectName: kube-system-persistent-volume-binder
-   name: kube-system-persistent-volume-binder:cluster-admin
- roleRef:
-   apiGroup: rbac.authorization.k8s.io
-   kind: ClusterRole
-   name: cluster-admin
- subjects:
-        <ul>
-          <li>kind: ServiceAccount
-name: persistent-volume-binder
-namespace: kube-system
- ```</li>
-        </ul>
+      <li>
+        <p>Workaround: Create a <code class="highlighter-rouge">ClusterRoleBinding</code> that binds the <code class="highlighter-rouge">persistent-volume-binder</code> serviceaccount to a <code class="highlighter-rouge">cluster-admin</code> <code class="highlighter-rouge">ClusterRole</code>, as shown in the following example:</p>
+
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    subjectName: kube-system-persistent-volume-binder
+  name: kube-system-persistent-volume-binder:cluster-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: persistent-volume-binder
+  namespace: kube-system
+</code></pre></div>        </div>
       </li>
     </ul>
   </li>

@@ -36,6 +36,11 @@ var glossary = [
 },
 
 {
+"term": "cluster",
+"def": "<p>A cluster is a group of machines that work together to run workloads and provide high availability.</p>\n"
+},
+
+{
 "term": "collection",
 "def": "<p>A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based\naccess control. Collections enable organizing permissions for resources like\nnodes, services, containers, volumes, networks, and secrets. <a href=\"/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/\">Learn how to manage collections</a>.</p>\n"
 },
@@ -158,6 +163,11 @@ var glossary = [
 {
 "term": "parent image",
 "def": "<p>An image’s <strong>parent image</strong> is the image designated in the <code class=\"highlighter-rouge\">FROM</code> directive\nin the image’s Dockerfile. All subsequent commands are applied to this parent\nimage. A Dockerfile with no <code class=\"highlighter-rouge\">FROM</code> directive has no parent image, and is called\na <strong>base image</strong>.</p>\n"
+},
+
+{
+"term": "persistent storage",
+"def": "<p>Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container’s file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the life cycle of the container, allowing a user to retain state.</p>\n"
 },
 
 {
