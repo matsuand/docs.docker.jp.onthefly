@@ -167,7 +167,7 @@ var glossary = [
 
 {
 "term": "persistent storage",
-"def": "<p>Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container’s file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the life cycle of the container, allowing a user to retain state.</p>\n"
+"def": "<p>Persistent storage or volume storage provides a way for a user to add a persistent layer to the running container’s file system. This persistent layer could live on the container host or an external device. The lifecycle of this persistent layer is not connected to the lifecycle of the container, allowing a user to retain state.</p>\n"
 },
 
 {

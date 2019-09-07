@@ -1,4 +1,4 @@
-<!-- Page generated 2019-08-28 16:50:42 +0900 -->
+<!-- Page generated 2019-09-07 18:03:36 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,17 +86,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-07T18:03:36+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Upgrade to UCP 3.2"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="This page helps you upgrade Docker Universal Control Plane (UCP) to version 3.2.0. Plan the upgrade Before upgrading to a new version of UCP, check the release notes. There you’ll..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="This page helps you upgrade Docker Universal Control Plane (UCP) to version 3.2.1. Plan the upgrade Before upgrading to a new version of UCP, check the release notes. There you’ll..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-07T18:03:36+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, upgrade, update">
@@ -191,13 +191,13 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    14 分
+    15 分
   
 </span>
 
 							
 							
-							<p>This page helps you upgrade Docker Universal Control Plane (UCP) to version 3.2.0.</p>
+							<p>This page helps you upgrade Docker Universal Control Plane (UCP) to version 3.2.1.</p>
 
 <h2 id="plan-the-upgrade">Plan the upgrade</h2>
 
@@ -272,7 +272,7 @@ of the required container images
 online, you can pull the required container images onto your nodes with the
 following command:</p>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm docker/ucp:3.2.0 images --list | xargs -L 1 docker pull
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm docker/ucp:3.2.1 images --list | xargs -L 1 docker pull
 </code></pre></div>        </div>
       </li>
       <li>Load troubleshooting packages (netshoot, etc)</li>
@@ -340,7 +340,7 @@ to install the Docker Enterprise Edition.</p>
 </ol>
 
 <h2 id="upgrade-ucp">Upgrade UCP</h2>
-<p>When upgrading Docker Universal Control Plane (UCP) to version 3.2.0, you can choose from
+<p>When upgrading Docker Universal Control Plane (UCP) to version 3.2.1, you can choose from
 different upgrade workflows:</p>
 <blockquote>
   <p><strong>Important</strong>: In all upgrade workflows, manager nodes are automatically upgraded in place. You cannot control the order
@@ -409,17 +409,20 @@ when upgrading the cluster.</p>
 order in which UCP worker nodes is upgraded is NOT important.</p>
 
 <p>To upgrade UCP, ensure all Docker engines have been upgraded to the
-corresponding new version. Then a user should SSH to a UCP manager node and run
+corresponding new version. Then a user should SSH to one UCP manager node and run
 the following command. The upgrade command should not be run on a workstation
 with a client bundle.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container run --rm -it \
   --name ucp \
   --volume /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp:3.2.0 \
+  docker/ucp:3.2.1 \
   upgrade \
   --interactive
 </code></pre></div></div>
+
+<p>The upgrade command will print messages regarding the progress of the upgrade as
+it automatically upgrades UCP on all nodes in the cluster.</p>
 
 <h3 id="phased-in-place-cluster-upgrade">Phased in-place cluster upgrade</h3>
 
@@ -446,7 +449,7 @@ with a client bundle.</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container run --rm -it \
   --name ucp \
   --volume /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp:3.2.0 \
+  docker/ucp:3.2.1 \
   upgrade \
   --manual-worker-upgrade \
   --interactive
@@ -497,7 +500,7 @@ nodes in the cluster at one time.</p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker container run --rm -it \
    --name ucp \
    --volume /var/run/docker.sock:/var/run/docker.sock \
-   docker/ucp:3.2.0 \
+   docker/ucp:3.2.1 \
    upgrade \
    --manual-worker-upgrade \
    --interactive

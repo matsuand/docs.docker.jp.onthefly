@@ -491,6 +491,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/cluster/azure/",
+"title":"Get started with Docker Cluster on Azure",
+"description":"Get started with Docker Cluster on Azure",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation, Azure"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/machine/drivers/azure/",
 "title":"Microsoft Azure",
 "description":"Microsoft Azure driver for machine",

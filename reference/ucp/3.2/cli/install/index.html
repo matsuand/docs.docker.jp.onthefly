@@ -1,4 +1,4 @@
-<!-- Page generated 2019-08-28 16:50:42 +0900 -->
+<!-- Page generated 2019-09-07 18:03:36 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -86,17 +86,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-07T18:03:36+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker/ucp install"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Install UCP on a node Usage docker container run --rm -it \ --name ucp \ -v /var/run/docker.sock:/var/run/docker.sock \ docker/ucp \ install [command options] Description This command initializes a new swarm,..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Install UCP on a node Usage docker container run \ --rm \ --interactive \ --tty \ --name ucp \ --volume /var/run/docker.sock:/var/run/docker.sock \ docker/ucp \ install [command options] Description This command..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-07T18:03:36+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, cli, install">
@@ -191,7 +191,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    7 分
   
 </span>
 
@@ -201,9 +201,12 @@
 
 <h2 id="usage">Usage</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="se">\</span>
+    <span class="nt">--rm</span> <span class="se">\</span>
+    <span class="nt">--interactive</span> <span class="se">\</span>
+    <span class="nt">--tty</span> <span class="se">\</span>
     <span class="nt">--name</span> ucp <span class="se">\</span>
-    <span class="nt">-v</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
+    <span class="nt">--volume</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
     docker/ucp <span class="se">\</span>
     install <span class="o">[</span><span class="nb">command </span>options]
 </code></pre></div></div>
@@ -230,11 +233,48 @@ firewall:</p>
   <li>4789 (udp) and 7946 (tcp/udp) for overlay networking</li>
 </ul>
 
-<p>If you have SELinux policies enabled for your Docker install, you will need to
-use <code class="highlighter-rouge">docker container run --rm -it --security-opt label=disable ...</code> when running this
-command.</p>
+<h3 id="selinux">SELinux</h3>
 
-<p>If you are installing on Azure, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/install-on-azure/">Install UCP on Azure</a>.</p>
+<p>If you are installing UCP on a manager node with SELinunx enabled at the daemon
+and operating system level, you will need to pass <code class="highlighter-rouge">--security-opt
+label=disable</code> in to your install command. This flag will disable SELinux
+policies on the installation container.  The UCP installation container mounts
+and configures the Docker Socket as part of the UCP installation container,
+therefore the UCP installation will fail with a permission denied error if you
+fail to pass in this flag.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FATA[0000] unable to get valid Docker client: unable to ping Docker daemon: Got
+permission denied while trying to connect to the Docker daemon socket at
+unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/_ping: dial
+unix /var/run/docker.sock: connect: permission denied - If SELinux is enabled
+on the Docker daemon, make sure you run UCP with "docker run --security-opt
+label=disable -v /var/run/docker.sock:/var/run/docker.sock ..."
+</code></pre></div></div>
+
+<p>An installation command for a system with SELinux enabled at the daemon level
+would be:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="se">\</span>
+    <span class="nt">--rm</span> <span class="se">\</span>
+    <span class="nt">--interactive</span> <span class="se">\</span>
+    <span class="nt">--tty</span> <span class="se">\</span>
+    <span class="nt">--name</span> ucp <span class="se">\</span>
+    <span class="nt">--security-opt</span> <span class="nv">label</span><span class="o">=</span>disable <span class="se">\</span>
+    <span class="nt">--volume</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
+    docker/ucp <span class="se">\</span>
+    install <span class="o">[</span><span class="nb">command </span>options]
+</code></pre></div></div>
+
+<h3 id="cloud-providers">Cloud Providers</h3>
+
+<p>If you are installing on a public cloud platform there is cloud specific UCP
+installation documentation:</p>
+
+<ul>
+  <li>For <a href="./cloudproviders/install-on-azure/">Microsoft Azure</a> this is
+<strong>mandatory</strong></li>
+  <li>For <a href="./cloudproviders/install-on-aws/">AWS</a> this is optional.</li>
+</ul>
 
 <h2 id="options">Options</h2>
 
@@ -265,6 +305,10 @@ command.</p>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">--admin-username</code> <em>value</em></td>
       <td style="text-align: left">The UCP administrator username [$UCP_ADMIN_USER]</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">--azure-ip-count</code> <em>value</em></td>
+      <td style="text-align: left">Configure the Number of IP Address to be provisioned for each Azure Virtual Machine (default: “128”)</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">--binpack</code></td>
@@ -525,7 +569,12 @@ command.</p>
 									
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#usage" class="nomunge">Usage</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#description" class="nomunge">Description</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#description" class="nomunge">Description</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#selinux" class="nomunge">SELinux</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#cloud-providers" class="nomunge">Cloud Providers</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#options" class="nomunge">Options</a></li>
 </ul>
 

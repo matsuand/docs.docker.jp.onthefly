@@ -1,4 +1,4 @@
-<!-- Page generated 2019-08-28 16:50:42 +0900 -->
+<!-- Page generated 2019-09-07 18:03:36 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -90,7 +90,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-07T18:03:36+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -100,7 +100,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure, the Calico CNI..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-08-28T16:50:42+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-07T18:03:36+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes">
@@ -195,7 +195,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    11 分
+    10 分
   
 </span>
 
@@ -398,103 +398,56 @@ for each virtual machine in the virtual machine scale set.</p>
 
 <h3 id="adjust-the-ip-count-value">Adjust the IP Count Value</h3>
 
-<p>If you have manually attached additional IP addresses to the Virtual Machines
-(via an ARM Template, Azure CLI or Azure Portal) or you want to reduce the
-number of IP Addresses automatically provisioned by UCP from the default of 128
-addresses, you can alter the <code class="highlighter-rouge">azure_ip_count</code> variable in the UCP
-Configuration file before installation. If you are happy with 128 addresses per
-Virtual Machine, proceed to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#install-ucp">installing UCP</a>.</p>
-
-<p>Once UCP has been installed, the UCP <a href="../configure/ucp-configuration-file/">configuration
-file</a> is managed by UCP and populated with
-all of the cluster configuration data, such as AD/LDAP information or networking
-configuration. As there is no Universal Control Plane deployed yet, we are able
-to stage a <a href="../configure/ucp-configuration-file/">configuration file</a> just
-containing the Azure IP Count value. UCP will populate the rest of the cluster
-variables during and after the installation.</p>
-
-<p>Below are some example configuration files with just the <code class="highlighter-rouge">azure_ip_count</code>
-variable defined. These 3-line files can be preloaded into a Docker Swarm prior
-to installing UCP in order to override the default <code class="highlighter-rouge">azure_ip_count</code> value of 128 IP
-addresses per node. See <a href="../configure/ucp-configuration-file/">UCP configuration file</a>
-to learn more about the configuration file, and other variables that can be staged pre-install.</p>
+<p>During a UCP installation, a user can alter the number of Azure IP addresses
+UCP will automatically provision for pods. By default UCP will provision 128
+addresses, from the same Azure Subnet as the hosts, for each Virtual Machine in
+the cluster. However if you have manually attached additional IP addresses
+to the Virtual Machines (via an ARM Template, Azure CLI or Azure Portal) or you
+are deploying in to small Azure subnet (less than /16), an <code class="highlighter-rouge">--azure-ip-count</code>
+flag can be used at install time.</p>
 
 <blockquote>
-  <p>Note: Do not set the <code class="highlighter-rouge">azure_ip_count</code> to a value of less than 6 if you have not
-manually provisioned additional IP addresses for each Virtual Machine. The UCP
-installation will need at least 6 IP addresses to allocate to the core UCP components
-that run as Kubernetes pods. That is in addition to the Virtual
-Machine’s private IP address.</p>
+  <p>Note: Do not set the <code class="highlighter-rouge">--azure-ip-count</code> variable to a value of less than 6 if
+you have not manually provisioned additional IP addresses for each Virtual
+Machine. The UCP installation will need at least 6 IP addresses to allocate
+to the core UCP components that run as Kubernetes pods. That is in addition
+to the Virtual Machine’s private IP address.</p>
 </blockquote>
 
+<p>Below are some example scenarios which require the <code class="highlighter-rouge">--azure-ip-count</code> variable
+to be defined.</p>
+
+<p><strong>Scenario 1 - Manually Provisioned Addresses</strong></p>
+
 <p>If you have manually provisioned additional IP addresses for each Virtual
-Machine, and want to disallow UCP from dynamically provisioning IP
-addresses for you, then your UCP configuration file would be:</p>
+Machine, and want to disable UCP from dynamically provisioning more IP
+addresses for you, then you would pass <code class="highlighter-rouge">--azure-ip-count 0</code> into the UCP
+installation command.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi example-config-1
-<span class="o">[</span>cluster_config]
-  azure_ip_count <span class="o">=</span> <span class="s2">"0"</span>
-</code></pre></div></div>
+<p><strong>Scenario 2 - Reducing the number of Provisioned Addresses</strong></p>
 
-<p>If you want to reduce the IP addresses dynamically allocated from 128 to a
-custom value, then your UCP configuration file would be:</p>
+<p>If you want to reduce the number of IP addresses dynamically allocated from 128
+addresses to a custom value due to:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi example-config-2
-<span class="o">[</span>cluster_config]
-  azure_ip_count <span class="o">=</span> <span class="s2">"20"</span> <span class="c"># This value may be different for your environment</span>
-</code></pre></div></div>
+<ul>
+  <li>Primarily using the Swarm Orchestrator</li>
+  <li>Deploying UCP on a small Azure subnet (for example /24)</li>
+  <li>Plan to run a small number of Kubernetes pods on each node.</li>
+</ul>
 
-<p>See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#considerations-for-ipam-configuration">Considerations for IPAM
-Configuration</a> to calculate an
-appropriate value.</p>
-
-<p>To preload this configuration file prior to installing UCP:</p>
-
-<ol>
-  <li>
-    <p>Copy the configuration file to a Virtual Machine that you wish to become a UCP Manager Node.</p>
-  </li>
-  <li>
-    <p>Initiate a Swarm on that Virtual Machine.</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>docker swarm init
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Upload the configuration file to the Swarm, by using a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/configs/">Docker Swarm Config</a>.
-This Swarm Config will need to be named <code class="highlighter-rouge">com.docker.ucp.config</code>.</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>docker config create com.docker.ucp.config &lt;local-configuration-file&gt;
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Check that the configuration has been loaded succesfully.</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>docker config list
- ID                          NAME                                                      CREATED             UPDATED
- igca3q30jz9u3e6ecq1ckyofz   com.docker.ucp.config                                     1 days ago          1 days ago
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>You are now ready to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#install-ucp">install UCP</a>. As you have already staged
-a UCP configuration file, you will need to add <code class="highlighter-rouge">--existing-config</code> to the
-install command below.</p>
-  </li>
-</ol>
-
-<p>If you need to adjust this value post-installation, see <a href="../configure/ucp-configuration-file/">instructions</a>
-on how to download the UCP configuration file, change the value, and update the configuration via the API.
-If you reduce the value post-installation, existing virtual machines will not be
-reconciled, and you will have to manually edit the IP count in Azure.</p>
+<p>If you need to adjust this value post-installation, see
+<a href="../configure/ucp-configuration-file/">instructions</a> on how to download the UCP
+configuration file, change the value, and update the configuration via the API.
+If you reduce the value post-installation, existing virtual machines will not
+be reconciled, and you will have to manually edit the IP count in Azure.</p>
 
 <h3 id="install-ucp">Install UCP</h3>
 
 <p>Run the following command to install UCP on a manager node. The <code class="highlighter-rouge">--pod-cidr</code>
 option maps to the IP address range that you have configured for the Azure
 subnet, and the <code class="highlighter-rouge">--host-address</code> maps to the private IP address of the master
-node. Finally if you have set the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#adjusting-the-ip-count-value">Ip Count
-Value</a> you will need to add <code class="highlighter-rouge">--existing-config</code>
-to the install command below.</p>
+node. Finally if you want to adjust the amount of IP addresses provisioned to
+each virtual machine pass <code class="highlighter-rouge">--azure-ip-count</code>.</p>
 
 <blockquote>
   <p>Note: The <code class="highlighter-rouge">pod-cidr</code> range must match the Azure Virtual Network’s Subnet
@@ -506,7 +459,7 @@ attached the hosts. For example, if the Azure Virtual Network had the range
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="se">\</span>
   <span class="nt">--name</span> ucp <span class="se">\</span>
   <span class="nt">--volume</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
-  docker/ucp:3.2.0 install <span class="se">\</span>
+  docker/ucp:3.2.1 install <span class="se">\</span>
   <span class="nt">--host-address</span> &lt;ucp-ip&gt; <span class="se">\</span>
   <span class="nt">--pod-cidr</span> &lt;ip-address-range&gt; <span class="se">\</span>
   <span class="nt">--cloud-provider</span> Azure <span class="se">\</span>
