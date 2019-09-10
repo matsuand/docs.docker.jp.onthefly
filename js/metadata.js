@@ -2718,8 +2718,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/builds/",
-"title":"Set up Automated builds",
-"description":"Set up Automated builds",
+"title":"自動ビルドの設定",
+"description":"自動ビルドを設定します。",
 "keywords":"automated, build, images"
 }
 ,
@@ -4509,6 +4509,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/cluster/release-notes/",
+"title":"Docker Cluster リリースノート",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Cluster.",
+"keywords":"cluster, whats new, release notes"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/release-notes/",
 "title":"UCP release notes",
 "description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
@@ -4534,6 +4541,13 @@ var pages = [
 "title":"Docker Enterprise リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Enterprise.",
 "keywords":"engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/docker-hub/release-notes/",
+"title":"Docker Hub release notes",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Hub",
+"keywords":"docker hub, whats new, release notes"
 }
 ,
 {

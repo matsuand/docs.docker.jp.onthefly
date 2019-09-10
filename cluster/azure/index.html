@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-07 18:03:36 +0900 -->
+<!-- Page generated 2019-09-10 18:57:06 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -74,7 +74,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-07T18:03:36+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-10T18:57:06+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -84,7 +84,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Prerequisites Completed installation of Docker Desktop Enterprise on Windows or Mac, or the Docker Enterprise Engine on Linux. Sign up for the following items for your Azure account: Service Principal..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-07T18:03:36+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-10T18:57:06+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="documentation, docs, docker, cluster, infrastructure, automation, Azure">
@@ -205,18 +205,19 @@
 file which will inject this data into the environment at runtime.  For example, create
 a file named <code class="highlighter-rouge">my-azure-creds.sh</code> similar to the following containing your credentials:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export ARM_CLIENT_ID='aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
-export ARM_CLIENT_SECRET='ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdef='
-export ARM_SUBSCRIPTION_ID='ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj'
-export ARM_TENANT_ID='kkkkkkkk-llll-mmmm-nnnn-oooooooooooo'
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ARM_CLIENT_ID</span><span class="o">=</span><span class="s1">'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'</span>
+<span class="nb">export </span><span class="nv">ARM_CLIENT_SECRET</span><span class="o">=</span><span class="s1">'ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890abcdef='</span>
+<span class="nb">export </span><span class="nv">ARM_SUBSCRIPTION_ID</span><span class="o">=</span><span class="s1">'ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj'</span>
+<span class="nb">export </span><span class="nv">ARM_TENANT_ID</span><span class="o">=</span><span class="s1">'kkkkkkkk-llll-mmmm-nnnn-oooooooooooo'</span>
 </code></pre></div></div>
 
 <p>This file should be treated as sensitive data with file permissions set appropriately.
-To use this file, we <em>don’t</em> source or run this file directly in the shell.  Instead,
+To use this file, we <em>do not</em> source or run this file directly in the shell.  Instead,
 we reference this file via the CLUSTER_SECRETS_FILE variable in our environment before
 running cluster:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export CLUSTER_SECRETS_FILE=~/.my-secrets/my-azure-creds.sh
-$ docker cluster create ....
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">CLUSTER_SECRETS_FILE</span><span class="o">=</span>~/.my-secrets/my-azure-creds.sh
+<span class="nv">$ </span>docker cluster create ....
 </code></pre></div></div>
 
 <p>Docker cluster will bindmount this file into its container runtime to inject the
@@ -233,41 +234,41 @@ credential data as needed.</p>
 
 <p>Create a file called <code class="highlighter-rouge">cluster.yml</code> in your directory and paste this in:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">variable</span><span class="pi">:</span>
-      <span class="na">region</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Azure</span><span class="nv"> </span><span class="s">region</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">deploy"</span>
-      <span class="na">ucp_password</span><span class="pi">:</span>
-        <span class="na">type</span><span class="pi">:</span> <span class="s">prompt</span>
-    <span class="s">​</span>
-    <span class="na">provider</span><span class="pi">:</span>
-      <span class="na">azurerm</span><span class="pi">:</span>
-        <span class="na">region</span><span class="pi">:</span> <span class="s">${region}</span>
-    <span class="s">​</span>
-    <span class="na">cluster</span><span class="pi">:</span>
-      <span class="na">engine</span><span class="pi">:</span>
-        <span class="na">version</span><span class="pi">:</span> <span class="s">ee-stable-19.03</span>
-      <span class="na">ucp</span><span class="pi">:</span>
-        <span class="na">version</span><span class="pi">:</span> <span class="s">docker/ucp:3.2.0</span>
-        <span class="na">username</span><span class="pi">:</span> <span class="s">admin</span>
-        <span class="na">password</span><span class="pi">:</span> <span class="s">${ucp_password}</span>
-      <span class="na">dtr</span><span class="pi">:</span>
-        <span class="na">version</span><span class="pi">:</span> <span class="s">docker/dtr:2.7.1</span>
-    <span class="s">​</span>
-    <span class="na">resource</span><span class="pi">:</span>
-      <span class="na">azurerm_virtual_machine</span><span class="pi">:</span>
-        <span class="na">managers</span><span class="pi">:</span>
-          <span class="na">quantity</span><span class="pi">:</span> <span class="s">3</span>
-        <span class="na">registry</span><span class="pi">:</span>
-          <span class="na">quantity</span><span class="pi">:</span> <span class="s">3</span>
-        <span class="na">workers</span><span class="pi">:</span>
-          <span class="na">quantity</span><span class="pi">:</span> <span class="s">3</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variable</span><span class="pi">:</span>
+  <span class="na">region</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Azure</span><span class="nv"> </span><span class="s">region</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">deploy"</span>
+  <span class="na">ucp_password</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">prompt</span>
 
-      <span class="na">azurerm_lb</span><span class="pi">:</span>
-        <span class="na">ucp</span><span class="pi">:</span>
-          <span class="na">instances</span><span class="pi">:</span>
-          <span class="pi">-</span> <span class="s">managers</span>
-          <span class="na">ports</span><span class="pi">:</span>
-          <span class="pi">-</span> <span class="s2">"</span><span class="s">443:443"</span>
-          <span class="pi">-</span> <span class="s2">"</span><span class="s">6443:6443"</span>
+<span class="na">provider</span><span class="pi">:</span>
+  <span class="na">azurerm</span><span class="pi">:</span>
+    <span class="na">region</span><span class="pi">:</span> <span class="s">${region}</span>
+
+<span class="na">cluster</span><span class="pi">:</span>
+  <span class="na">engine</span><span class="pi">:</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">ee-stable-19.03</span>
+  <span class="na">ucp</span><span class="pi">:</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">docker/ucp:3.2.0</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">admin</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">${ucp_password}</span>
+  <span class="na">dtr</span><span class="pi">:</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">docker/dtr:2.7.1</span>
+
+<span class="na">resource</span><span class="pi">:</span>
+  <span class="na">azurerm_virtual_machine</span><span class="pi">:</span>
+    <span class="na">managers</span><span class="pi">:</span>
+      <span class="na">quantity</span><span class="pi">:</span> <span class="s">3</span>
+    <span class="na">registry</span><span class="pi">:</span>
+      <span class="na">quantity</span><span class="pi">:</span> <span class="s">3</span>
+    <span class="na">workers</span><span class="pi">:</span>
+      <span class="na">quantity</span><span class="pi">:</span> <span class="s">3</span>
+
+  <span class="na">azurerm_lb</span><span class="pi">:</span>
+    <span class="na">ucp</span><span class="pi">:</span>
+      <span class="na">instances</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">managers</span>
+      <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">443:443"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">6443:6443"</span>
 </code></pre></div></div>
 
 <p>Provide values for the variable section.  For instance:</p>
@@ -276,7 +277,7 @@ credential data as needed.</p>
 </code></pre></div></div>
 
 <p>The values will be substituted in the cluster definition.  This makes it
-easy to define a re-usable cluster definition and then change the variables
+easy to define a reusable cluster definition and then change the variables
 to create multiple instances of a cluster.</p>
 
 <p>Run <code class="highlighter-rouge">docker cluster create --file cluster.yml --name quickstart</code></p>
@@ -289,7 +290,7 @@ Planning cluster on azurerm                                                  OK
 Creating: [===========&gt;                                              ]  19%  [ ]
 </code></pre></div></div>
 
-<p>After about 5-10 minutes, depending on amount resources requested, the cluster will be provisioned in the cloud and Docker Enterprise Platform installation will begin:</p>
+<p>After about 5-10 minutes, depending on the number of resources requested, the cluster will be provisioned in the cloud and Docker Enterprise Platform installation will begin:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker cluster create --file cluster.yml --name quickstart
 Please provide a value for ucp_password:
@@ -413,7 +414,7 @@ Current context is now "quickstart"
 
 <p>To verify that the client is connected to the cluster, run <code class="highlighter-rouge">docker version</code></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker version
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker version
 Client: Docker Engine - Enterprise
  Version:           19.03.1
  API version:       1.40
@@ -421,18 +422,18 @@ Client: Docker Engine - Enterprise
  Git commit:        f660560
  Built:             Thu Jul 25 20:56:44 2019
  OS/Arch:           darwin/amd64
- Experimental:      false
+ Experimental:      <span class="nb">false
 
-Server: Docker Enterprise 3.0
+</span>Server: Docker Enterprise 3.0
  Engine:
   Version:          19.03.1
-  API version:      1.40 (minimum version 1.12)
+  API version:      1.40 <span class="o">(</span>minimum version 1.12<span class="o">)</span>
   Go version:       go1.12.5
   Git commit:       f660560
   Built:            Thu Jul 25 20:57:45 2019
   OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
+  Experimental:     <span class="nb">false
+ </span>containerd:
   Version:          1.2.6
   GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
  runc:
@@ -467,14 +468,15 @@ Server: Docker Enterprise 3.0
   kube-controllers: v3.5.7
   node:             v3.5.7
 
-$ docker context use default
+<span class="nv">$ </span>docker context use default
 default
-Current context is now "default"
+Current context is now <span class="s2">"default"</span>
 </code></pre></div></div>
 
 <h2 id="scale-a-cluster">Scale a cluster</h2>
 
 <p>Open <code class="highlighter-rouge">cluster.yml</code>.  Change the number of workers to 6:</p>
+
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">resource</span><span class="pi">:</span>
   <span class="na">azurerm_virtual_machine</span><span class="pi">:</span>
     <span class="na">managers</span><span class="pi">:</span>
@@ -484,6 +486,7 @@ Current context is now "default"
     <span class="na">workers</span><span class="pi">:</span>
       <span class="na">quantity</span><span class="pi">:</span> <span class="s">6</span>
 </code></pre></div></div>
+
 <p>Since the cluster is already created, the next step is to <code class="highlighter-rouge">update</code> the cluster’s
 desired state.  Run  <code class="highlighter-rouge">docker cluster update quickstart --file cluster.yml</code></p>
 
@@ -511,6 +514,7 @@ e58dd2a77567
 </code></pre></div></div>
 
 <p>A quick <code class="highlighter-rouge">docker cluster inspect e58dd2a77567</code> will show the worker count increased:</p>
+
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
     <span class="na">workers</span><span class="pi">:</span>
       <span class="na">data_disk_size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">40"</span>
@@ -544,6 +548,7 @@ Backup of e58dd2a77567 saved to backup-2019-05-07.tar.gz
 <h2 id="upgrade-a-cluster">Upgrade a cluster</h2>
 
 <p>Open <code class="highlighter-rouge">cluster.yml</code>.  Change the cluster versions:</p>
+
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">cluster</span><span class="pi">:</span>
   <span class="na">dtr</span><span class="pi">:</span>
     <span class="na">version</span><span class="pi">:</span> <span class="s">docker/dtr:2.7.0</span>
@@ -552,6 +557,7 @@ Backup of e58dd2a77567 saved to backup-2019-05-07.tar.gz
   <span class="na">ucp</span><span class="pi">:</span>
     <span class="na">version</span><span class="pi">:</span> <span class="s">docker/ucp:3.2.0</span>
 </code></pre></div></div>
+
 <p>Run  <code class="highlighter-rouge">docker cluster update quickstart --file cluster.yml </code></p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker cluster update quickstart --file examples/docs.yml
@@ -569,6 +575,7 @@ e58dd2a77567
 </code></pre></div></div>
 
 <h2 id="destroy-a-cluster">Destroy a cluster</h2>
+
 <p>When the cluster has reached end-of-life, run <code class="highlighter-rouge">docker cluster rm quickstart</code></p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker cluster rm quickstart
