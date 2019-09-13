@@ -282,7 +282,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/dtr/architecture/",
-"title":"DTR architecture",
+"title":"DTR アーキテクチャー",
 "description":"Learn about the architecture of Docker Trusted Registry.",
 "keywords":"registry, dtr, architecture"
 }
@@ -4538,7 +4538,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/release-notes/",
-"title":"Docker Enterprise リリースノート",
+"title":"Docker Enterprise release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Enterprise.",
 "keywords":"engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes"
 }
@@ -4629,9 +4629,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/containers/resource_constraints/",
-"title":"Specify a container's resources",
-"description":"Specify the system resources a container can use",
-"keywords":"docker, daemon, configuration"
+"title":"Runtime options with Memory, CPUs, and GPUs",
+"description":"Specify the runtime options for a container",
+"keywords":"docker, daemon, configuration, runtime"
 }
 ,
 {
