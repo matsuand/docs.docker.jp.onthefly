@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-09-18 20:14:23 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,17 +87,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-18T20:14:23+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker/ucp backup"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Create a backup of a UCP manager node. Usage docker container run --log-driver none --rm -i \ --name ucp \ -v /var/run/docker.sock:/var/run/docker.sock \ docker/ucp \ backup [command options] &gt; backup.tar..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Create a backup of a UCP manager node. Usage docker container run \ --rm \ --interactive \ --name ucp \ --log-driver none \ --volume /var/run/docker.sock:/var/run/docker.sock \ docker/ucp \ backup [command..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-18T20:14:23+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, cli, backup">
@@ -192,7 +192,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    1 分
+    3 分
   
 </span>
 
@@ -202,9 +202,12 @@
 
 <h2 id="usage">Usage</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--log-driver</span> none <span class="nt">--rm</span> <span class="nt">-i</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="se">\</span>
+    <span class="nt">--rm</span> <span class="se">\</span>
+    <span class="nt">--interactive</span> <span class="se">\</span>
     <span class="nt">--name</span> ucp <span class="se">\</span>
-    <span class="nt">-v</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
+    <span class="nt">--log-driver</span> none <span class="se">\</span>
+    <span class="nt">--volume</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
     docker/ucp <span class="se">\</span>
     backup <span class="o">[</span><span class="nb">command </span>options] <span class="o">&gt;</span> backup.tar
 </code></pre></div></div>
@@ -237,6 +240,37 @@ relative to the container’s file tree. For example:</p>
   </li>
 </ul>
 
+<h3 id="selinux">SELinux</h3>
+
+<p>If you are installing UCP on a manager node with SELinunx enabled at the daemon
+and operating system level, you will need to pass <code class="highlighter-rouge">--security-opt
+label=disable</code> in to your install command. This flag will disable SELinux
+policies on the installation container.  The UCP installation container mounts
+and configures the Docker Socket as part of the UCP installation container,
+therefore the UCP installation will fail with a permission denied error if you
+fail to pass in this flag.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FATA[0000] unable to get valid Docker client: unable to ping Docker daemon: Got
+permission denied while trying to connect to the Docker daemon socket at
+unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/_ping: dial
+unix /var/run/docker.sock: connect: permission denied - If SELinux is enabled
+on the Docker daemon, make sure you run UCP with "docker run --security-opt
+label=disable -v /var/run/docker.sock:/var/run/docker.sock ..."
+</code></pre></div></div>
+
+<p>An installation command for a system with SELinux enabled at the daemon level
+would be:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="se">\</span>
+    <span class="nt">--rm</span> <span class="se">\</span>
+    <span class="nt">--interactive</span> <span class="se">\</span>
+    <span class="nt">--name</span> ucp <span class="se">\</span>
+    <span class="nt">--security-opt</span> <span class="nv">label</span><span class="o">=</span>disable <span class="se">\</span>
+    <span class="nt">--volume</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
+    docker/ucp <span class="se">\</span>
+    backup <span class="o">[</span><span class="nb">command </span>options] <span class="o">&gt;</span> backup.tar
+</code></pre></div></div>
+
 <h2 id="options">Options</h2>
 
 <table>
@@ -258,6 +292,10 @@ relative to the container’s file tree. For example:</p>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">--jsonlog</code></td>
       <td style="text-align: left">Produce json formatted output for easier parsing</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">--include-logs</code></td>
+      <td style="text-align: left">Only relevant if <code class="highlighter-rouge">--file</code> is also included. If true, an encrypted <code class="highlighter-rouge">backup.log</code> file will be stored alongside the <code class="highlighter-rouge">backup.tar</code> in the mounted directory. Default is <code class="highlighter-rouge">true</code>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">--interactive, -i</code></td>
@@ -369,7 +407,11 @@ relative to the container’s file tree. For example:</p>
 									
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/backup.md#usage" class="nomunge">Usage</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/backup.md#description" class="nomunge">Description</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/backup.md#description" class="nomunge">Description</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/backup.md#selinux" class="nomunge">SELinux</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/backup.md#options" class="nomunge">Options</a></li>
 </ul>
 
