@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-09-22 15:48:31 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -66,7 +66,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-22T15:48:31+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -76,7 +76,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Trusted Registry (DTR) is a containerized application that runs on a swarm managed by the Universal Control Plane (UCP). It can be installed on-premises or on a cloud infrastructure...." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-22T15:48:31+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="dtr, registry, install">
@@ -171,7 +171,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    6 分
   
 </span>
 
@@ -184,7 +184,8 @@ on-premises or on a cloud infrastructure.</p>
 <h2 id="step-1-validate-the-system-requirements">Step 1. Validate the system requirements</h2>
 
 <p>Before installing DTR, make sure your
-infrastructure meets the <a href="./system-requirements">system requirements</a> that DTR needs to run.</p>
+infrastructure meets the <a href="./system-requirements">system requirements</a> that DTR
+needs to run.</p>
 
 <h2 id="step-2-install-ucp">Step 2. Install UCP</h2>
 
@@ -193,14 +194,19 @@ infrastructure meets the <a href="./system-requirements">system requirements</a>
 
   <p>Before installing DTR:</p>
   <ul>
-    <li>When upgrading, upgrade UCP before DTR for each major version. For example, if you are upgrading four major versions, upgrade one major version at a time, first UCP, then DTR, and then repeat for the remaining three versions.</li>
-    <li>UCP should be installed or upgraded to the most recent version before an initial install of DTR.</li>
-    <li>Docker Engine should be updated to the most recent version before installing or updating UCP.</li>
+    <li>When upgrading, upgrade UCP before DTR for each major version. For example,
+if you are upgrading four major versions, upgrade one major version at a
+time, first UCP, then DTR, and then repeat for the remaining three versions.</li>
+    <li>UCP should be installed or upgraded to the most recent version before an
+initial install of DTR.</li>
+    <li>Docker Engine should be updated to the most recent version before
+installing or updating UCP.</li>
   </ul>
 </blockquote>
 
 <p>Since DTR requires Docker Universal Control Plane (UCP)
-to run, you need to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/">install UCP</a> on all the nodes where you plan to install DTR.</p>
+to run, you need to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/">install UCP</a> on all the nodes
+where you plan to install DTR.</p>
 
 <p>DTR needs to be installed on a worker node that is being managed by UCP.
 You cannot install DTR on a standalone Docker Engine.</p>
@@ -209,65 +215,91 @@ You cannot install DTR on a standalone Docker Engine.</p>
 
 <h2 id="step-3-install-dtr">Step 3. Install DTR</h2>
 
-<p>Once UCP is installed, navigate to the UCP web interface as an admin. Expand your profile on the left
-navigation pane, and select <strong>Admin Settings &gt; Docker Trusted Registry</strong>.</p>
+<ol>
+  <li>
+    <p>Once UCP is installed, navigate to the UCP web interface as an admin. Expand
+your profile on the left navigation pane, and select <strong>Admin Settings &gt; Docker Trusted Registry</strong>.</p>
 
-<p><img src="../../images/install-dtr-2.png" alt="" class="with-border" /></p>
+    <p><img src="../../images/install-dtr-2.png" alt="" class="with-border" /></p>
+  </li>
+  <li>
+    <p>After you configure all the options, you should see a Docker CLI command that you can use to install DTR. Before you run the command, take note of the <code class="highlighter-rouge">--dtr-external-url</code> parameter:</p>
 
-<p>After you configure all the options, you should see a Docker CLI command that you can use
-to install DTR.</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="se">\</span>
+     docker/dtr:2.7.2 install <span class="se">\</span>
+     <span class="nt">--dtr-external-url</span> &lt;dtr.example.com&gt; <span class="se">\</span>
+     <span class="nt">--ucp-node</span> &lt;ucp-node-name&gt; <span class="se">\</span>
+     <span class="nt">--ucp-username</span> admin <span class="se">\</span>
+     <span class="nt">--ucp-url</span> &lt;ucp-url&gt;
+</code></pre></div>    </div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="se">\</span>
-  docker/dtr:2.7.2 install <span class="se">\</span>
-  <span class="nt">--dtr-external-url</span> &lt;dtr.example.com&gt; <span class="se">\</span>
-  <span class="nt">--ucp-node</span> &lt;ucp-node-name&gt; <span class="se">\</span>
-  <span class="nt">--ucp-username</span> admin <span class="se">\</span>
-  <span class="nt">--ucp-url</span> &lt;ucp-url&gt;
-</code></pre></div></div>
+    <p>If you want to point this parameter to a load balancer that uses HTTP for
+ health probes over port <code class="highlighter-rouge">80</code> or <code class="highlighter-rouge">443</code>, temporarily reconfigure the load
+ balancer to use TCP over a known open port. Once DTR is installed, you can configure the load balancer however you need to.</p>
+  </li>
+  <li>
+    <p>Run the DTR install command on any node connected to the UCP cluster, and with the Docker Engine installed. DTR will not be installed on the node you run
+the install command on. DTR will be installed on the UCP worker defined by the
+<code class="highlighter-rouge">--ucp-node</code> flag.</p>
 
-<p>You can run the DTR install command on any node with the Docker Engine
-installed, ensure this node also has connectivity to the UCP Cluster. DTR will
-not be installed on the node you run the install command on. DTR will be
-installed on the ucp worker defined by the <code class="highlighter-rouge">--ucp-node</code> flag.</p>
+    <p>For example, you could SSH into a UCP node and run the DTR install command
+ from there.  Running the installation command in interactive TTY or <code class="highlighter-rouge">-it</code> mode
+ means you will be prompted for any required additional information.  <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/dtr/2.7/cli/install/">Learn more about installing DTR</a>.</p>
 
-<p>As an example, you could SSH into a UCP node and run the DTR install command
-from there.  Running the installation command in interactive TTY or <code class="highlighter-rouge">-it</code> mode
-means you will be prompted for any required additional information.  <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/dtr/2.7/cli/install/">Learn
-more about installing DTR</a>.</p>
-
-<p>To install a specific version of DTR, replace <code class="highlighter-rouge">2.7.2</code> with your
-desired version in the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#step-3-install-dtr">installation command</a> above. Find
-all DTR versions in the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/">DTR release notes</a> page.</p>
-
-<p>DTR is deployed with self-signed certificates by default, so UCP might not be
-able to pull images from DTR. Using the <code class="highlighter-rouge">--dtr-external-url &lt;dtr-domain&gt;:&lt;port&gt;</code>
-optional flag during installation, or during a reconfiguration, so that UCP is
-automatically reconfigured to trust DTR.</p>
-
-<p>To verify, see <code class="highlighter-rouge">https://&lt;ucp-fqdn&gt;/manage/settings/dtr</code> or navigate to <strong>Admin
-Settings &gt; Docker Trusted Registry</strong> from the UCP web UI. Under the hood, UCP
-modifies <code class="highlighter-rouge">/etc/docker/certs.d</code> for each host and adds DTR’s CA certificate. UCP
-can then pull images from DTR because the Docker Engine for each node in the
-UCP swarm has been configured to trust DTR.</p>
-
-<p>Additionally, with DTR 2.7, you can <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/enable-authentication-via-client-certificates/">enable browser authentication via client
-certificates</a> at install
-time. This bypasses the DTR login page and hides the logout button, thereby
-skipping the need for entering your username and password.</p>
+    <p>Here are some useful options you can set during installation:</p>
+    <ul>
+      <li>
+        <p>To install a specific version of DTR, replace <code class="highlighter-rouge">2.7.2</code> with
+ your desired version in the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#step-3-install-dtr">installation command</a>
+ above. Find all DTR versions in the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/release-notes/">DTR release notes</a>
+ page.</p>
+      </li>
+      <li>
+        <p>DTR is deployed with self-signed certificates by default, so UCP might not be
+ able to pull images from DTR. Use the <code class="highlighter-rouge">--dtr-external-url &lt;dtr-domain&gt;:&lt;port&gt;</code>
+ optional flag during installation, or during a reconfiguration, so that UCP is
+ automatically reconfigured to trust DTR.</p>
+      </li>
+      <li>
+        <p>With DTR 2.7, you can <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/enable-authentication-via-client-certificates/">enable browser authentication via client
+ certificates</a> at install
+ time. This bypasses the DTR login page and hides the logout button, thereby
+ skipping the need for entering your username and password.</p>
+      </li>
+    </ul>
+  </li>
+  <li>Verify that DTR is installed. Either:
+    <ul>
+      <li>
+        <p>See <code class="highlighter-rouge">https://&lt;ucp-fqdn&gt;/manage/settings/dtr</code>, or;</p>
+      </li>
+      <li>
+        <p>Navigate to <strong>Admin Settings &gt; Docker Trusted Registry</strong> from the UCP web UI. Under the hood, UCP modifies <code class="highlighter-rouge">/etc/docker/certs.d</code> for each host and adds DTR’s CA certificate. UCP can then pull images from DTR because the Docker Engine for each node in the UCP swarm has been configured to trust DTR.</p>
+      </li>
+    </ul>
+  </li>
+  <li>Reconfigure your load balancer back to your desired protocol and port.</li>
+</ol>
 
 <h2 id="step-4-check-that-dtr-is-running">Step 4. Check that DTR is running</h2>
 
-<p>In your browser, navigate to the UCP
-web interface. Select <strong>Shared Resources &gt; Stacks</strong> from the left navigation pane. You should see
-DTR listed as a stack.</p>
-
-<p>To verify that DTR is accessible from the browser, enter your DTR IP address or FQDN on the address bar.
+<ol>
+  <li>
+    <p>In your browser, navigate to the UCP web interface.</p>
+  </li>
+  <li>
+    <p>Select <strong>Shared Resources &gt; Stacks</strong> from the left navigation pane. You should see DTR listed as a stack.</p>
+  </li>
+  <li>
+    <p>To verify that DTR is accessible from the browser, enter your DTR IP address or FQDN on the address bar.
 Since <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS (HTTP Strict-Transport-Security)
 header</a> is included in all API responses,
 make sure to specify the FQDN (Fully Qualified Domain Name) of your DTR prefixed with <code class="highlighter-rouge">https://</code>,
 or your browser may refuse to load the web interface.</p>
 
-<p><img src="../../images/create-repository-1.png" alt="" class="with-border" /></p>
+    <p><img src="../../images/create-repository-1.png" alt="" class="with-border" /></p>
+  </li>
+</ol>
 
 <h2 id="step-5-configure-dtr">Step 5. Configure DTR</h2>
 
@@ -321,12 +353,6 @@ to be managed by the same UCP.</p>
   <li>
     <p>Run the join command.</p>
 
-    <p>When you join a replica to a DTR cluster, you need to specify the
-ID of a replica that is already part of the cluster. You can find an
-existing replica ID by going to the <strong>Shared Resources &gt; Stacks</strong> page on UCP.</p>
-
-    <p>Then run:</p>
-
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="se">\</span>
   docker/dtr:2.7.2 join <span class="se">\</span>
   <span class="nt">--ucp-node</span> &lt;ucp-node-name&gt; <span class="se">\</span>
@@ -339,6 +365,10 @@ existing replica ID by going to the <strong>Shared Resources &gt; Stacks</strong
       <p>The <code class="highlighter-rouge">&lt;ucp-node-name&gt;</code> following the <code class="highlighter-rouge">--ucp-node</code> flag is the target node to
 install the DTR replica. This is NOT the UCP Manager URL.</p>
     </blockquote>
+
+    <p>When you join a replica to a DTR cluster, you need to specify the
+ID of a replica that is already part of the cluster. You can find an
+existing replica ID by going to the <strong>Shared Resources &gt; Stacks</strong> page on UCP.</p>
   </li>
   <li>
     <p>Check that all replicas are running.</p>

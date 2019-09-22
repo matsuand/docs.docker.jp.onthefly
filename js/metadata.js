@@ -43,6 +43,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/access-tokens/",
+"title":"Managing access tokens",
+"description":"Learn how to create and manage your personal Docker Hub access tokens to securely push and pull images programmatically.",
+"keywords":"docker hub, hub, security, PAT, personal access token"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/machine/reference/active/",
 "title":"docker-machine active",
 "description":"Identify active machines",
@@ -436,8 +443,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/",
-"title":"Use the AUFS storage driver",
-"description":"Learn how to optimize your use of AUFS driver.",
+"title":"AUFS ストレージドライバーの利用",
+"description":"AUFS ドライバーの最適な利用について学びます。",
 "keywords":"container, storage, driver, AUFS "
 }
 ,
@@ -1717,8 +1724,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/docker-toolbox/",
-"title":"Docker Desktop for Mac vs. Docker Toolbox",
-"description":"Docker Desktop for Mac and Docker Toolbox",
+"title":"Docker Desktop on Mac vs. Docker Toolbox",
+"description":"Docker Desktop on Mac and Docker Toolbox",
 "keywords":"mac, windows, alpha, beta, toolbox, docker-machine, tutorial"
 }
 ,
@@ -1846,6 +1853,13 @@ var pages = [
 "title":"Enable audit logging on UCP",
 "description":"Learn how to enable audit logging of all activity in UCP",
 "keywords":"logs, ucp, swarm, kubernetes, audits"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/enable-client-certificate-authentication/",
+"title":"Enable authentication using TLS client certificates",
+"description":"Learn how to enable user authentication via client certificates from your own public key infrastructure (PKI).",
+"keywords":"PKI, Client Certificates, Passwordless Authentication, Docker Enterprise, UCP, DTR, UCP PKI, DTR PKI"
 }
 ,
 {
@@ -3103,8 +3117,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/install/",
-"title":"Docker Desktop for Mac のインストール",
-"description":"Docker Desktop for Mac のインストール方法。",
+"title":"Docker Desktop on Mac のインストール",
+"description":"Docker Desktop on Mac のインストール方法。",
 "keywords":"mac, beta, alpha, install, download"
 }
 ,
