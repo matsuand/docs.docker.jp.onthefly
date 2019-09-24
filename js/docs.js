@@ -98,12 +98,9 @@ function walkTree(tree)
       var subTree = tree[j].section;
       walkTree(subTree);
       outputLetNav.push('</ul></li>');
-    } else if (tree[j].generateTOC) {
-      // auto-generate a TOC from a collection
-      walkTree(collectionsTOC[tree[j].generateTOC])
     } else {
       // just a regular old topic; this is a leaf, not a branch; render a link!
-      outputLetNav.push('<li><a href="/docs.docker.jp.onthefly' + tree[j].path + '"')
+      outputLetNav.push('<li><a href="' + tree[j].path + '"')
       if (tree[j].path == pageURL && !tree[j].nosync)
       {
         sectionToHighlight = currentSection;
@@ -132,19 +129,10 @@ function renderNav(docstoc) {
     {
       outputHorzTabs.push(' class="active"');
     }
-    outputHorzTabs.push('><a href="/docs.docker.jp.onthefly'+docstoc.horizontalnav[i].path+'">'+docstoc.horizontalnav[i].title+'</a></li>\n');
+    outputHorzTabs.push('><a href="'+docstoc.horizontalnav[i].path+'">'+docstoc.horizontalnav[i].title+'</a></li>\n');
   }
   if (outputLetNav.length==0)
   {
-    // didn't find the current topic in the standard TOC; maybe it's a collection;
-    for (var key in collectionsTOC)
-    {
-      var itsHere = findMyTopic(collectionsTOC[key]);
-      if (itsHere) {
-        walkTree(collectionsTOC[key]);
-        break;
-      }
-    }
     // either glossary was true or no left nav has been built; default to glossary
     // show pages tagged with term and highlight term in left nav if applicable
     renderTagsPage()
@@ -152,7 +140,7 @@ function renderNav(docstoc) {
     {
       var highlightGloss = '';
       if (tagToLookup) highlightGloss = (glossary[i].term.toLowerCase()==tagToLookup.toLowerCase()) ? ' class="active currentPage"' : '';
-      outputLetNav.push('<li><a'+highlightGloss+' href="/docs.docker.jp.onthefly/glossary/?term=' + glossary[i].term + '">'+glossary[i].term+'</a></li>');
+      outputLetNav.push('<li><a'+highlightGloss+' href="/glossary/?term=' + glossary[i].term + '">'+glossary[i].term+'</a></li>');
     }
   }
   document.getElementById('jsTOCHorizontal').innerHTML = outputHorzTabs.join('');
