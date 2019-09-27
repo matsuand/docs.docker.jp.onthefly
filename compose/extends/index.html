@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-09-27 21:29:40 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-27T21:29:40+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Compose がサポートする設定共有には 2 つの方法があります。 Compose ファイル全体を 複数の Compose ファイルの利用 により拡張します。 個々のサービスを extends フィールド を使って拡張します（Compose ファイルバージョン 2.1 まで）。 複数の Compose ファイルの利用 Compose ファイルを複数利用することにすれば、Compose によるアプリケーションを異なる環境、異なる作業フローに合わせてカスタマイズできます。 Compose ファイルが複数ある意味 デフォルトにおいて Compose は 2 つのファイルを読み込みます。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-09-27T21:29:40+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="fig, composition, compose, docker, orchestration, documentation, docs">
@@ -234,7 +234,7 @@ Compose はコマンドライン上に指定された順に、設定ファイル
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   image: example/my_web_app:latest
-  links:
+  depends_on:
     - db
     - cache
 
@@ -304,7 +304,7 @@ cache:
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   image: example/my_web_app:latest
-  links:
+  depends_on:
     - db
 
 db:
@@ -315,7 +315,7 @@ db:
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dbadmin:
   build: database_admin/
-  links:
+  depends_on:
     - db
 </code></pre></div></div>
 
@@ -341,9 +341,9 @@ db:
 ごく標準的な設定オプションを再利用しているサービスがいくつもある場合に、このサービス拡張機能を活用することができます。
 <code class="highlighter-rouge">extends</code> を使って標準的なサービスオプションを 1 箇所に定義しておけば、それをどこからでも参照することができます。</p>
 
-<p><code class="highlighter-rouge">links</code>、<code class="highlighter-rouge">volumes_from</code>、<code class="highlighter-rouge">depends_on</code> は、<code class="highlighter-rouge">extends</code> を利用したサービス間での共有はされません。
+<p><code class="highlighter-rouge">volumes_from</code>、<code class="highlighter-rouge">depends_on</code> は、<code class="highlighter-rouge">extends</code> を利用したサービス間での共有はされません。
 これらが例外となっているのは、気づかないうちに依存関係が発生してしまうことを避けるためです。
-<code class="highlighter-rouge">links</code> や <code class="highlighter-rouge">volumes_from</code> はいつもローカルな定義に利用するものです。
+<code class="highlighter-rouge">volumes_from</code> はいつもローカルな定義に利用するものです。
 こうしているからこそ、そのときの設定ファイルを読めば、サービス間の依存関係がはっきりわかることになります。
 ローカルに定義しておくのは、参照されている側のファイルに変更が加わっても、影響がなく済むことにもつながります。</p>
 
@@ -395,7 +395,7 @@ important_web:
   environment:
     - DEBUG=1
   cpu_shares: 5
-  links:
+  depends_on:
     - db
 db:
   image: postgres
@@ -427,7 +427,7 @@ db:
   command: /code/run_web_app
   ports:
     - 8080:8080
-  links:
+  depends_on:
     - queue
     - db
 
@@ -436,7 +436,7 @@ queue_worker:
     file: common.yml
     service: app
   command: /code/run_worker
-  links:
+  depends_on:
     - queue
 </code></pre></div></div>
 
@@ -766,7 +766,6 @@ volumes:
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">
