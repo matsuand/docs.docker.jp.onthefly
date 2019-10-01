@@ -499,8 +499,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/cluster/azure/",
-"title":"Get started with Docker Cluster on Azure",
-"description":"Get started with Docker Cluster on Azure",
+"title":"Azure 上にて Docker Cluster をはじめよう",
+"description":"Azure 上にて Docker Cluster をはじめよう。",
 "keywords":"documentation, docs, docker, cluster, infrastructure, automation, Azure"
 }
 ,
