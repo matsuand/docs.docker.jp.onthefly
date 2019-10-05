@@ -1499,6 +1499,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/deactivate-account/",
+"title":"Deactivating an account or an organization",
+"description":"Learn how to deactivate a Docker Hub account or an organization",
+"keywords":"Docker Hub, delete, deactivate, account, organization"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/debian/",
 "title":"Docker Engine - Community の入手（Debian 向け）",
 "description":"Debian 上に Docker Engine - Community をインストールする手順を説明。",
