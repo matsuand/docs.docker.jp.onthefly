@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-09 17:56:11 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -66,7 +66,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-09T17:56:11+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -76,7 +76,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-09T17:56:11+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="routing, proxy, interlock">
@@ -177,7 +177,7 @@
 
 							
 							
-							<p>This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh.</p>
+							<p>This topic covers deploying a layer 7 routing solution into a Docker Swarm to route traffic to Swarm services. Layer 7 routing is also referred to as an HTTP routing mesh (HRM).</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
@@ -194,8 +194,9 @@ enable this service from the UCP web UI.</p>
 
 <ol>
   <li>Log in to the UCP web UI as an administrator.</li>
-  <li>Navigate to <strong>Admin Settings</strong></li>
-  <li>Select <strong>Layer 7 Routing</strong> and then select <strong>Enable Layer 7 Routing</strong></li>
+  <li>Navigate to <strong>Admin Settings</strong>.</li>
+  <li>Select <strong>Layer 7 Routing</strong>.</li>
+  <li>Select the <strong>Enable Layer 7 Routing</strong> check box.</li>
 </ol>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/interlock-install-4.png" alt="http routing mesh" class="with-border" /></p>
@@ -204,7 +205,7 @@ enable this service from the UCP web UI.</p>
 8443 for HTTPS. Change the ports if you already have services that are using
 them.</p>
 
-<p>When 7 routing is enabled:</p>
+<p>When layer 7 routing is enabled:</p>
 
 <ol>
   <li>UCP creates the <code class="highlighter-rouge">ucp-interlock</code> overlay network.</li>
@@ -223,10 +224,9 @@ the internal components of this service.</li>
 start the <code class="highlighter-rouge">ucp-interlock-proxy</code> service.</li>
 </ol>
 
-<p>At this point everything is ready for you to start using the layer 7 routing
-service with your swarm workloads.</p>
+<p>Now you are ready to use the layer 7 routing service with your Swarm workloads. There are three primary Interlock services: core, extension, and proxy. To learn more about these services, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/config/#toml-file-configuration-options">TOML configuration options</a>.</p>
 
-<p>The following code sample provides a default UCP configuration (this will be created automatically when enabling Interlock as per section <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#enable-layer-7-routing">Enable layer 7 routing</a>):</p>
+<p>The following code sample provides a default UCP configuration. This will be created automatically when enabling Interlock as described in this section.</p>
 
 <div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">ListenAddr</span> <span class="p">=</span> <span class="s">":8080"</span>
 <span class="py">DockerURL</span> <span class="p">=</span> <span class="s">"unix:///var/run/docker.sock"</span>
@@ -235,11 +235,11 @@ service with your swarm workloads.</p>
 
 <span class="nn">[Extensions]</span>
   <span class="nn">[Extensions.default]</span>
-    <span class="py">Image</span> <span class="p">=</span> <span class="s">"docker/ucp-interlock-extension:3.2.1"</span>
+    <span class="py">Image</span> <span class="p">=</span> <span class="s">"docker/ucp-interlock-extension:3.2.2"</span>
     <span class="py">ServiceName</span> <span class="p">=</span> <span class="s">"ucp-interlock-extension"</span>
     <span class="py">Args</span> <span class="p">=</span> <span class="p">[]</span>
     <span class="py">Constraints</span> <span class="p">=</span> <span class="p">[</span><span class="s">"node.labels.com.docker.ucp.orchestrator.swarm==true"</span><span class="p">,</span> <span class="s">"node.platform.os==linux"</span><span class="p">]</span>
-    <span class="py">ProxyImage</span> <span class="p">=</span> <span class="s">"docker/ucp-interlock-proxy:3.2.1"</span>
+    <span class="py">ProxyImage</span> <span class="p">=</span> <span class="s">"docker/ucp-interlock-proxy:3.2.2"</span>
     <span class="py">ProxyServiceName</span> <span class="p">=</span> <span class="s">"ucp-interlock-proxy"</span>
     <span class="py">ProxyConfigPath</span> <span class="p">=</span> <span class="s">"/etc/nginx/nginx.conf"</span>
     <span class="py">ProxyReplicas</span> <span class="p">=</span> <span class="mi">2</span>
@@ -294,7 +294,7 @@ service with your swarm workloads.</p>
 
 <h2 id="enable-layer-7-routing-manually">Enable layer 7 routing manually</h2>
 
-<p>Interlock can also be enabled from the command line by following the below sections.</p>
+<p>Interlock can also be enabled from the command line, as described in the following sections.</p>
 
 <h3 id="work-with-the-core-service-configuration-file">Work with the core service configuration file</h3>
 
@@ -307,9 +307,9 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.default]
-    Image = "docker/ucp-interlock-extension:3.2.1"
+    Image = "docker/ucp-interlock-extension:3.2.2"
     Args = ["-D"]
-    ProxyImage = "docker/ucp-interlock-proxy:3.2.1"
+    ProxyImage = "docker/ucp-interlock-proxy:3.2.2"
     ProxyArgs = []
     ProxyConfigPath = "/etc/nginx/nginx.conf"
     ProxyReplicas = 1
@@ -341,8 +341,8 @@ PollInterval = "3s"
 
 <p>Now you can create the Interlock service. Note the requirement to constrain to a manager. The
 Interlock core service must have access to a Swarm manager, however the extension and proxy services
-are recommended to run on workers.  See the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/production/">Production</a> section for more information
-on setting up for an production environment.</p>
+are recommended to run on workers. See the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/production/">Production</a> section for more information
+on setting up for a production environment.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
     <span class="nt">--name</span> interlock <span class="se">\</span>
@@ -350,7 +350,7 @@ on setting up for an production environment.</p>
     <span class="nt">--network</span> interlock <span class="se">\</span>
     <span class="nt">--constraint</span> node.role<span class="o">==</span>manager <span class="se">\</span>
     <span class="nt">--config</span> <span class="nv">src</span><span class="o">=</span>service.interlock.conf,target<span class="o">=</span>/config.toml <span class="se">\</span>
-    docker/ucp-interlock:3.2.1 <span class="nt">-D</span> run <span class="nt">-c</span> /config.toml
+    docker/ucp-interlock:3.2.2 <span class="nt">-D</span> run <span class="nt">-c</span> /config.toml
 sjpgq7h621exno6svdnsvpv9z
 </code></pre></div></div>
 
@@ -360,8 +360,8 @@ one for the extension service, and one for the proxy service:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service <span class="nb">ls
 </span>ID                  NAME                MODE                REPLICAS            IMAGE                                                       PORTS
 lheajcskcbby        modest_raman        replicated          1/1                 nginx:alpine                                                <span class="k">*</span>:80-&gt;80/tcp <span class="k">*</span>:443-&gt;443/tcp
-oxjvqc6gxf91        keen_clarke         replicated          1/1                 docker/ucp-interlock-extension:3.2.1
-sjpgq7h621ex        interlock           replicated          1/1                 docker/ucp-interlock:3.2.1
+oxjvqc6gxf91        keen_clarke         replicated          1/1                 docker/ucp-interlock-extension:3.2.2
+sjpgq7h621ex        interlock           replicated          1/1                 docker/ucp-interlock:3.2.2
 </code></pre></div></div>
 
 <p>The Interlock traffic layer is now deployed.</p>
@@ -600,7 +600,6 @@ sjpgq7h621ex        interlock           replicated          1/1                 
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

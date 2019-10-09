@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-09 17:56:11 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,17 +87,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-09T17:56:11+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Implement service clusters"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Configure Proxy Services With the node labels, you can re-configure the Interlock Proxy services to be constrained to the workers for each region. FOr example, from a manager, run the..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Configure Proxy Services With the node labels, you can re-configure the Interlock Proxy services to be constrained to the workers for each region. For example, from a manager, run the..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-09T17:56:11+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, interlock, load balancing, routing">
@@ -192,7 +192,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    6 分
   
 </span>
 
@@ -200,7 +200,7 @@
 							
 							<h2 id="configure-proxy-services">Configure Proxy Services</h2>
 <p>With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
-workers for each region. FOr example, from a manager, run the following commands to pin the proxy services to the ingress workers:</p>
+workers for each region. For example, from a manager, run the following commands to pin the proxy services to the ingress workers:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service update <span class="se">\</span>
     <span class="nt">--constraint-add</span> node.labels.nodetype<span class="o">==</span>loadbalancer <span class="se">\</span>
@@ -217,6 +217,14 @@ workers for each region. FOr example, from a manager, run the following commands
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo-east
 <span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo-west
 </code></pre></div></div>
+
+<p>Add the networks to the Interlock configuration file. Interlock automatically adds networks to the proxy service upon the next proxy update. See <em>Minimizing the number of overlay networks</em> in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/architecture/">Interlock architecture</a> for more information.</p>
+
+<blockquote>
+  <p>Note</p>
+
+  <p>Interlock will <em>only</em> connect to the specified networks, and will connect to them all at startup.</p>
+</blockquote>
 
 <p>Next, deploy the application in the <code class="highlighter-rouge">us-east</code> service cluster:</p>
 
@@ -309,7 +317,11 @@ map[nodetype:loadbalancer region:us-west]
 
 <p>Next, create an Interlock configuration object that contains multiple extensions with varying service clusters.</p>
 
-<p>&lt; Important: The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.</p>
+<blockquote>
+  <p>Important</p>
+
+  <p>The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.</p>
+</blockquote>
 
 <p>If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify <code class="highlighter-rouge">com.docker.ucp.interlock.service-clusters.conf</code>.</p>
 
@@ -320,10 +332,10 @@ PollInterval = "3s"
 
 [Extensions]
   [Extensions.us-east]
-    Image = "docker/ucp-interlock-extension:3.2.1"
+    Image = "docker/ucp-interlock-extension:3.2.2"
     Args = []
     ServiceName = "ucp-interlock-extension-us-east"
-    ProxyImage = "docker/ucp-interlock-proxy:3.2.1"
+    ProxyImage = "docker/ucp-interlock-proxy:3.2.2"
     ProxyArgs = []
     ProxyServiceName = "ucp-interlock-proxy-us-east"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
@@ -346,10 +358,10 @@ PollInterval = "3s"
       proxy_region = "us-east"
 
   [Extensions.us-west]
-    Image = "docker/ucp-interlock-extension:3.2.1"
+    Image = "docker/ucp-interlock-extension:3.2.2"
     Args = []
     ServiceName = "ucp-interlock-extension-us-west"
-    ProxyImage = "docker/ucp-interlock-proxy:3.2.1"
+    ProxyImage = "docker/ucp-interlock-proxy:3.2.2"
     ProxyArgs = []
     ProxyServiceName = "ucp-interlock-proxy-us-west"
     ProxyConfigPath = "/etc/nginx/nginx.conf"
@@ -373,9 +385,13 @@ PollInterval = "3s"
 </span><span class="no">EOF
 </span>oqkvv1asncf6p2axhx41vylgt
 </code></pre></div></div>
-<p>Note that “host” mode networking is used in order to use the same ports (<code class="highlighter-rouge">8080</code> and <code class="highlighter-rouge">8443</code>) in the cluster. You cannot use ingress
+<blockquote>
+  <p>Note</p>
+
+  <p>“Host” mode networking is used in order to use the same ports (<code class="highlighter-rouge">8080</code> and <code class="highlighter-rouge">8443</code>) in the cluster. You cannot use ingress
 networking as it reserves the port across all nodes. If you want to use ingress networking, you must use different ports
 for each service cluster.</p>
+</blockquote>
 
 <p>Next, create a dedicated network for Interlock and the extensions:</p>
 
@@ -601,7 +617,6 @@ for each service cluster.</p>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

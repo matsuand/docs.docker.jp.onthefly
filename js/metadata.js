@@ -2158,7 +2158,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/machine/drivers/generic/",
-"title":"Generic",
+"title":"汎用ドライバー",
 "description":"Generic driver for machine",
 "keywords":"machine, Generic, driver"
 }
@@ -2627,8 +2627,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/user-access/",
-"title":"Web-based access",
-"description":"Learn how to access Docker Universal Control Plane from the web browser.",
+"title":"ウェブベースのアクセス",
+"description":"ウェブブラウザーから Docker Universal Control Plane にアクセスする方法について学びます。",
 "keywords":"ucp, web, administration"
 }
 ,
@@ -3887,7 +3887,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/machine/examples/ocean/",
-"title":"DigitalOcean example",
+"title":"DigitalOcean 利用例",
 "description":"Using Docker Machine to provision hosts on DigitalOcean",
 "keywords":"docker, machine, cloud, digitalocean"
 }
@@ -4545,7 +4545,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/dtr/release-notes/",
-"title":"DTR リリースノート",
+"title":"DTR release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry",
 "keywords":"docker trusted registry, whats new, release notes"
 }
@@ -4602,7 +4602,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
 "title":"Docker Engine リリースノート",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and EE",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
 }
 ,

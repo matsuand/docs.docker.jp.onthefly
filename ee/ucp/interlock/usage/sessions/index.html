@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-09 17:56:11 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-09T17:56:11+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="You can publish a service and configure the proxy for persistent (sticky) sessions using: Cookies IP hashing Cookies To configure sticky sessions using cookies: Create an overlay network so that..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-09T17:56:11+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="routing, proxy, cookies, IP hash">
@@ -209,28 +209,25 @@
 <p>To configure sticky sessions using cookies:</p>
 
 <ol>
-  <li>Create an overlay network so that service traffic is isolated and secure, as shown in the following example:</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo
+  <li>Create an overlay network so that service traffic is isolated and secure, as shown in the following example:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo
 1se1glh749q1i4pw0kf26mfx5
-</code></pre></div></div>
-
-<ol>
-  <li>Create a service with the cookie to use for sticky sessions:</li>
+</code></pre></div>    </div>
+  </li>
+  <li>Create a service with the cookie to use for sticky sessions:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
+ <span class="nt">--name</span> demo <span class="se">\</span>
+ <span class="nt">--network</span> demo <span class="se">\</span>
+ <span class="nt">--detach</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+ <span class="nt">--replicas</span><span class="o">=</span>5 <span class="se">\</span>
+ <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo.local <span class="se">\</span>
+ <span class="nt">--label</span> com.docker.lb.sticky_session_cookie<span class="o">=</span>session <span class="se">\</span>
+ <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8080 <span class="se">\</span>
+ <span class="nt">--env</span> <span class="nv">METADATA</span><span class="o">=</span><span class="s2">"demo-sticky"</span> <span class="se">\</span>
+ ehazlett/docker-demo
+</code></pre></div>    </div>
+  </li>
 </ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
-    <span class="nt">--name</span> demo <span class="se">\</span>
-    <span class="nt">--network</span> demo <span class="se">\</span>
-    <span class="nt">--detach</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
-    <span class="nt">--replicas</span><span class="o">=</span>5 <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo.local <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.sticky_session_cookie<span class="o">=</span>session <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8080 <span class="se">\</span>
-    <span class="nt">--env</span> <span class="nv">METADATA</span><span class="o">=</span><span class="s2">"demo-sticky"</span> <span class="se">\</span>
-    ehazlett/docker-demo
-</code></pre></div></div>
 
 <p>Interlock detects when the service is available and publishes it. When tasks are running
 and the proxy service is updated, the application is available via <code class="highlighter-rouge">http://demo.local</code>
@@ -271,28 +268,25 @@ which are pinned to the same instance. If you make a few requests, you will noti
 as cookies but enables workarounds for some applications that cannot use the other method. When using IP hashing, reconfigure Interlock proxy to use <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/config/host-mode-networking/">host mode networking</a>, because the default <code class="highlighter-rouge">ingress</code> networking mode uses SNAT, which obscures client IP addresses.</p>
 
 <ol>
-  <li>Create an overlay network so that service traffic is isolated and secure:</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo
+  <li>Create an overlay network so that service traffic is isolated and secure:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo
 1se1glh749q1i4pw0kf26mfx5
-</code></pre></div></div>
-
-<ol>
-  <li>Create a service with the cookie to use for sticky sessions using IP hashing:</li>
+</code></pre></div>    </div>
+  </li>
+  <li>Create a service with the cookie to use for sticky sessions using IP hashing:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
+ <span class="nt">--name</span> demo <span class="se">\</span>
+ <span class="nt">--network</span> demo <span class="se">\</span>
+ <span class="nt">--detach</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+ <span class="nt">--replicas</span><span class="o">=</span>5 <span class="se">\</span>
+ <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo.local <span class="se">\</span>
+ <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8080 <span class="se">\</span>
+ <span class="nt">--label</span> com.docker.lb.ip_hash<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+ <span class="nt">--env</span> <span class="nv">METADATA</span><span class="o">=</span><span class="s2">"demo-sticky"</span> <span class="se">\</span>
+ ehazlett/docker-demo
+</code></pre></div>    </div>
+  </li>
 </ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
-    <span class="nt">--name</span> demo <span class="se">\</span>
-    <span class="nt">--network</span> demo <span class="se">\</span>
-    <span class="nt">--detach</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
-    <span class="nt">--replicas</span><span class="o">=</span>5 <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo.local <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8080 <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.ip_hash<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
-    <span class="nt">--env</span> <span class="nv">METADATA</span><span class="o">=</span><span class="s2">"demo-sticky"</span> <span class="se">\</span>
-    ehazlett/docker-demo
-</code></pre></div></div>
 
 <p>Interlock detects when the service is available and publishes it. When tasks are running
 and the proxy service is updated, the application is available via <code class="highlighter-rouge">http://demo.local</code>
@@ -326,7 +320,9 @@ and is configured to use sticky sessions:</p>
 to a specific backend.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
+  <p>Note</p>
+
+  <p>Due to the way the IP hashing works for extensions, you will notice a new upstream address when scaling replicas.  This is
 expected, because internally the proxy uses the new set of replicas to determine a backend on which to pin. When the upstreams are
 determined, a new “sticky” backend is chosen as the dedicated upstream.</p>
 </blockquote>
@@ -548,7 +544,6 @@ determined, a new “sticky” backend is chosen as the dedicated upstream.</p>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">
