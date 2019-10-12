@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Access control design with Docker Enterprise"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Go through the Docker Enterprise Standard tutorial, before continuing here with Docker Enterprise Advanced. In the first tutorial, the fictional company, OrcaBank, designed an architecture with role-based access control (RBAC)..." />
+	<meta name="twitter:title" itemprop="title name" content="Access control design using additional security requirements"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Go through the Docker Enterprise tutorial, before completing the following tutorial. In the first tutorial, the fictional company, OrcaBank, designed an architecture with role-based access control (RBAC) to meet their..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="authorize, authentication, users, teams, groups, sync, UCP, role, access control">
@@ -105,16 +105,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Access control design with Docker Enterprise | Docker ドキュメント</title>
-<meta property="og:title" content="Access control design with Docker Enterprise" />
+	<title>Access control design using additional security requirements | Docker ドキュメント</title>
+<meta property="og:title" content="Access control design using additional security requirements" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Learn how to architect multitenancy with Docker Enterprise." />
-<meta property="og:description" content="Learn how to architect multitenancy with Docker Enterprise." />
+<meta name="description" content="Learn how to architect multi-tenancy with Docker Enterprise." />
+<meta property="og:description" content="Learn how to architect multi-tenancy with Docker Enterprise." />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/ee-advanced/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/ee-advanced/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Access control design with Docker Enterprise","description":"Learn how to architect multitenancy with Docker Enterprise.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/ee-advanced/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Access control design using additional security requirements","description":"Learn how to architect multi-tenancy with Docker Enterprise.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/ee-advanced/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -184,7 +184,7 @@
 						<section class="section">
 							
 								
-							<h1>Access control design with Docker Enterprise</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Access control design using additional security requirements</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
@@ -194,8 +194,8 @@
 
 							
 							
-							<p>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/ee-standard/">Docker Enterprise Standard tutorial</a>,
-before continuing here with Docker Enterprise Advanced.</p>
+							<p>Go through the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/ee-standard/">Docker Enterprise tutorial</a>,
+before completing the following tutorial.</p>
 
 <p>In the first tutorial, the fictional company, OrcaBank, designed an architecture
 with role-based access control (RBAC) to meet their organization’s security
@@ -205,17 +205,20 @@ collection boundaries on a single platform.</p>
 <p>In this tutorial, OrcaBank implements new and more stringent security
 requirements for production applications:</p>
 
-<p>First, OrcaBank adds staging zone to their deployment model. They will no longer
-move developed appliciatons directly in to production. Instead, they will deploy
-apps from their dev cluster to staging for testing, and then to production.</p>
-
-<p>Second, production applications are no longer permitted to share any physical
+<ol>
+  <li>First, OrcaBank adds staging zone to their deployment model. They will no longer
+move developed applications directly in to production. Instead, they will deploy
+apps from their dev cluster to staging for testing, and then to production.</li>
+  <li>Second, production applications are no longer permitted to share any physical
 infrastructure with non-production infrastructure. OrcaBank segments the
-scheduling and access of applications with <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/isolate-nodes/">Node Access Control</a>.</p>
+scheduling and access of applications with <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/isolate-nodes/">Node Access Control</a>.</li>
+</ol>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/isolate-nodes/">Node Access Control</a> is a feature of Docker EE
-Advanced and provides secure multi-tenancy with node-based isolation. Nodes
+  <p>Note</p>
+
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/isolate-nodes/">Node Access Control</a> is a feature of Docker Enterprise
+and provides secure multi-tenancy with node-based isolation. Nodes
 can be placed in different collections so that resources can be scheduled and
 isolated on disparate physical or virtual hardware resources.</p>
 </blockquote>
@@ -306,7 +309,7 @@ access shared <code class="highlighter-rouge">db</code> networks and secrets.</p
 
 <h2 id="orcabank-access-architecture">OrcaBank access architecture</h2>
 
-<p>The resulting access architecture, designed with Docker EE Advanced, provides
+<p>The resulting access architecture, designed with Docker Enterprise, provides
 physical segmentation between production and staging using node access control.</p>
 
 <p>Applications are scheduled only on UCP worker nodes in the dedicated application
@@ -366,7 +369,7 @@ that are provided by the <code class="highlighter-rouge">db</code> team.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "ee/ucp/authorization/ee-advanced.md",
-										"title": "Access control design with Docker Enterprise",
+										"title": "Access control design using additional security requirements",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/authorization/ee-advanced.md"
 									};
 									(function(d, c, j) {
@@ -557,7 +560,6 @@ that are provided by the <code class="highlighter-rouge">db</code> team.</p>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

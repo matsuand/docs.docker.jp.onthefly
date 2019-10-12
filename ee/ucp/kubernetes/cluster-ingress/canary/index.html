@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, cluster, ingress, kubernetes">
@@ -112,13 +112,13 @@
 	<title>Deploy a Sample Application with a Canary release (Experimental) | Docker ドキュメント</title>
 <meta property="og:title" content="Deploy a Sample Application with a Canary release (Experimental)" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Stage a canary release using weight-based load balancing between multiple backend applications." />
-<meta property="og:description" content="Stage a canary release using weight-based load balancing between multiple backend applications." />
+<meta name="description" content="Stage a canary release using weight-based load balancing between multiple back-end applications." />
+<meta property="og:description" content="Stage a canary release using weight-based load balancing between multiple back-end applications." />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/canary/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/canary/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Deploy a Sample Application with a Canary release (Experimental)","description":"Stage a canary release using weight-based load balancing between multiple backend applications.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/canary/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Deploy a Sample Application with a Canary release (Experimental)","description":"Stage a canary release using weight-based load balancing between multiple back-end applications.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/canary/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -202,14 +202,16 @@
 
 <p>Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.</p>
 
-<h1 id="deploy-a-sample-application-with-a-canary-release">Deploy a Sample Application with a Canary release</h1>
+<h2 id="overview">Overview</h2>
 
 <p>This example stages a canary release using weight-based load balancing between
-multiple backend applications.</p>
+multiple back-end applications.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: This guide assumes the <a href="./ingress/">Deploy Sample Application</a>
-tutorial was followed, with the artefacts still running on the cluster. If
+  <p>Note</p>
+
+  <p>This guide assumes the <a href="./ingress/">Deploy Sample Application</a>
+tutorial was followed, with the artifacts still running on the cluster. If
 they are not, please go back and follow this guide.</p>
 </blockquote>
 
@@ -220,18 +222,16 @@ they are not, please go back and follow this guide.</p>
   <li>All test traffic using the header <code class="highlighter-rouge">stage=dev</code> is sent to the v3 service.</li>
 </ul>
 
-<p>A new Kubernetes manifest file with updated ingress rules can be found
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml">here</a></p>
+<p>A new Kubernetes manifest file with updated ingress rules can be found <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml">here</a>.</p>
 
-<p>1) Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a
-     cluster with Cluster Ingress installed.</p>
-
-<p>2) Download the sample Kubernetes manifest file</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ wget https://github.com/docker/docker.github.io/tree/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml
-</code></pre></div></div>
-
-<p>3) Deploy the Kubernetes manifest file</p>
+<ol>
+  <li>Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a cluster with Cluster Ingress installed.</li>
+  <li>Download the sample Kubernetes manifest file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://github.com/docker/docker.github.io/tree/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-weighted.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Deploy the Kubernetes manifest file.</li>
+</ol>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>kubectl apply <span class="nt">-f</span> ingress-weighted.yaml
 
@@ -262,20 +262,19 @@ they are not, please go back and follow this guide.</p>
             Number:  8080
           Subset:    v2
         Weight:      20
-    <span class="sb">```</span>
+</code></pre></div></div>
 
-This virtual service performs the following actions:
+<p>This virtual service performs the following actions:</p>
+<ul>
+  <li>Receives all traffic with host=demo.example.com.</li>
+  <li>If an exact match for HTTP header <code class="highlighter-rouge">stage=dev</code> is found, traffic is routed to v3.</li>
+  <li>All other traffic is routed to v1 and v2 in an 80:20 ratio.</li>
+</ul>
 
-  - Receives all traffic with <span class="nv">host</span><span class="o">=</span>demo.example.com.
-  - If an exact match <span class="k">for </span>HTTP header <span class="sb">`</span><span class="nv">stage</span><span class="o">=</span>dev<span class="sb">`</span> is found, traffic is routed
-      to v3.
-  - All other traffic is routed to v1 and v2 <span class="k">in </span>an 80:20 ratio.
+<p>Now we can send traffic to the application to view the applied load balancing
+algorithms.</p>
 
-Now we can send traffic to the application to view the applied load balancing
-algorithms.
-
-<span class="sb">```</span>bash
-<span class="c"># Public IP Address of a Worker or Manager VM in the Cluster</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Public IP Address of a Worker or Manager VM in the Cluster</span>
 <span class="nv">$ IPADDR</span><span class="o">=</span>51.141.127.241
 
 <span class="c"># Node Port</span>
@@ -290,10 +289,10 @@ algorithms.
 </code></pre></div></div>
 
 <p>The split between v1 and v2 corresponds to the specified criteria. Within the
-v1 service, requests are load-balanced across the 3 backend replicas. v3 does
+v1 service, requests are load-balanced across the three back-end replicas. v3 does
 not appear in the requests.</p>
 
-<p>To send traffic to the 3rd service, we can add the HTTP header <code class="highlighter-rouge">stage=dev</code>.</p>
+<p>To send traffic to the third service, add the HTTP header <code class="highlighter-rouge">stage=dev</code>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span><span class="p">;</span> <span class="k">do </span>curl <span class="nt">-H</span> <span class="s2">"Host: demo.example.com"</span> <span class="nt">-H</span> <span class="s2">"Stage: dev"</span> http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/ping<span class="p">;</span> <span class="k">done</span>
 <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v3-d88dddb74-9k7qg"</span>,<span class="s2">"version"</span>:<span class="s2">"v3"</span>,<span class="s2">"metadata"</span>:<span class="s2">"dev"</span>,<span class="s2">"request_id"</span>:<span class="s2">"52d7afe7-befb-4e17-a49c-ee63b96d0daf"</span><span class="o">}</span>
@@ -303,8 +302,7 @@ not appear in the requests.</p>
 <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v3-d88dddb74-9k7qg"</span>,<span class="s2">"version"</span>:<span class="s2">"v3"</span>,<span class="s2">"metadata"</span>:<span class="s2">"dev"</span>,<span class="s2">"request_id"</span>:<span class="s2">"bae52f09-0510-42d9-aec0-ca6bbbaae168"</span><span class="o">}</span>
 </code></pre></div></div>
 
-<p>In this case, 100% of the traffic with the stage=dev header is sent to the v3
-service.</p>
+<p>In this case, 100% of the traffic with the <code class="highlighter-rouge">stage=dev</code> header is sent to the v3 service.</p>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
@@ -406,6 +404,7 @@ service.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/canary.md#overview" class="nomunge">Overview</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/canary.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
@@ -528,7 +527,6 @@ service.</p>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

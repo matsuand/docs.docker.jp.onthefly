@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-27 21:29:40 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-27T21:29:40+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This page helps you upgrade Docker Universal Control Plane (UCP) to version 3.2.1. Plan the upgrade Before upgrading to a new version of UCP, check the release notes. There you’ll..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-27T21:29:40+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, upgrade, update">
@@ -218,91 +218,64 @@ This can lead to misconfigurations that are difficult to troubleshoot.</p>
 <h3 id="environment-checklist">Environment checklist</h3>
 <p>Complete the following checks:</p>
 
+<h4 id="systems">Systems</h4>
 <ul>
-  <li>
-    <p>Systems:</p>
+  <li>Confirm time sync across all nodes (and check time daemon logs for any large time drifting)</li>
+  <li>Check system requirements <code class="highlighter-rouge">PROD=4</code> <code class="highlighter-rouge">vCPU/16GB</code> for UCP managers and DTR replicas</li>
+  <li>Review the full UCP/DTR/Engine port requirements</li>
+  <li>Ensure that your cluster nodes meet the minimum requirements</li>
+  <li>Before performing any upgrade, ensure that you meet all minimum requirements listed in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements/">UCP System requirements</a>, including port openings (UCP 3.x added more required ports for Kubernetes), memory, and disk space. For example, manager nodes must have at least 8GB of memory.</li>
+</ul>
 
-    <ul>
-      <li>Confirm time sync across all nodes (and check time daemon logs for any large time drifting)</li>
-      <li>Check system requirements <code class="highlighter-rouge">PROD=4</code> <code class="highlighter-rouge">vCPU/16GB</code> for UCP managers and DTR replicas</li>
-      <li>Review the full UCP/DTR/Engine port requirements</li>
-      <li>Ensure that your cluster nodes meet the minimum requirements</li>
-      <li>Before performing any upgrade, ensure that you meet all minimum requirements listed
-  in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements/">UCP System requirements</a>, including port openings (UCP 3.x added more
-  required ports for Kubernetes), memory, and disk space. For example, manager nodes must have at least 8GB of memory.
-        <blockquote>
-          <p><strong>Note</strong>: If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft
-Azure then please ensure all of the Azure <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/install-on-azure/#azure-prerequisites">prerequisites</a>
+<blockquote>
+  <p>Note</p>
+
+  <p>If you are upgrading a cluster to UCP 3.0.2 or higher on Microsoft
+Azure, please ensure that all of the Azure <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/install-on-azure/#azure-prerequisites">prerequisites</a>
 are met.</p>
-        </blockquote>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p>Storage:</p>
+</blockquote>
 
-    <ul>
-      <li>Check <code class="highlighter-rouge">/var/</code> storage allocation and increase if it is over 70% usage.</li>
-      <li>In addition, check all nodes’ local filesystems for any disk storage issues (and DTR backend storage, for example, NFS).</li>
-      <li>If not using Overlay2 storage drivers please take this opportunity to do so, you will find stability there. (Note:
-  The transition from Device mapper to Overlay2 is a destructive rebuild.)</li>
-    </ul>
-  </li>
-  <li>
-    <p>Operating system:</p>
+<h4 id="storage">Storage</h4>
+<ul>
+  <li>Check <code class="highlighter-rouge">/var/</code> storage allocation and increase if it is over 70% usage.</li>
+  <li>In addition, check all nodes’ local file systems for any disk storage issues (and DTR back-end storage, for example, NFS).</li>
+  <li>If not using Overlay2 storage drivers please take this opportunity to do so, you will find stability there. Note that the transition from Device mapper to Overlay2 is a destructive rebuild.</li>
+</ul>
 
-    <ul>
-      <li>If cluster nodes OS branch is older (Ubuntu 14.x, RHEL 7.3, etc), consider patching all relevant packages to the
-  most recent (including kernel).</li>
-      <li>Rolling restart of each node before upgrade (to confirm in-memory settings are the same as startup-scripts).</li>
-      <li>Run <code class="highlighter-rouge">check-config.sh</code> on each cluster node (after rolling restart) for any kernel compatibility issues.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Procedural:</p>
+<h4 id="operating-system">Operating system</h4>
+<ul>
+  <li>If cluster nodes OS branch is older (Ubuntu 14.x, RHEL 7.3, etc), consider patching all relevant packages to the most recent (including kernel).</li>
+  <li>Rolling restart of each node before upgrade (to confirm in-memory settings are the same as startup-scripts).</li>
+  <li>Run <code class="highlighter-rouge">check-config.sh</code> on each cluster node (after rolling restart) for any kernel compatibility issues.</li>
+</ul>
 
-    <ul>
-      <li>Perform a Swarm, UCP and DTR backups pre-upgrade</li>
-      <li>Gather compose file/service/stack files</li>
-      <li>Generate a UCP Support dump (for point in time) pre-upgrade</li>
-      <li>
-        <p>Preload Engine/UCP/DTR images. If your cluster is offline (with no
-connection to the internet) then Docker provides tarballs containing all
-of the required container images
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/upgrade-offline/">here</a>. If your cluster is
-online, you can pull the required container images onto your nodes with the
-following command:</p>
+<h4 id="procedural">Procedural</h4>
+<ul>
+  <li>Perform Swarm, UCP and DTR backups before upgrading</li>
+  <li>Gather Compose file/service/stack files</li>
+  <li>Generate a UCP Support dump (for point in time) before upgrading</li>
+  <li>Preinstall Engine/UCP/DTR images. If your cluster is offline (with no connection to the internet), then Docker provides tarballs containing all of the required container images <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/upgrade-offline/">here</a>. If your cluster is
+online, you can pull the required container images onto your nodes with the following command:</li>
+</ul>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm docker/ucp:3.2.1 images --list | xargs -L 1 docker pull
-</code></pre></div>        </div>
-      </li>
-      <li>Load troubleshooting packages (netshoot, etc)</li>
-      <li>Best order for upgrades: Engine, UCP, and then DTR. Note: The scope of this topic is limited to upgrade instructions for UCP.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Upgrade strategy:
-For each worker node that requires an upgrade, you can upgrade that node in place or you can replace the node
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> docker/ucp:3.2.1 images <span class="nt">--list</span> | xargs <span class="nt">-L</span> 1 docker pull
+</code></pre></div></div>
+<ul>
+  <li>Load troubleshooting packages (netshoot, etc)</li>
+  <li>Best order for upgrades: Engine, UCP, and then DTR. Note that the scope of this topic is limited to upgrade instructions for UCP.</li>
+</ul>
+
+<h4 id="upgrade-strategy">Upgrade strategy</h4>
+
+<p>For each worker node that requires an upgrade, you can upgrade that node in place or you can replace the node
 with a new worker node. The type of upgrade you perform depends on what is needed for each node:</p>
 
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#automated-in-place-cluster-upgrade">Automated, in-place cluster upgrade</a>: Performed on any manager node. Automatically upgrades the entire cluster.</li>
+  <li>Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more advanced than the automated, in-place cluster upgrade.
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#automated-in-place-cluster-upgrade">Automated, in-place cluster upgrade</a>: Performed on any
-  manager node. Automatically upgrades the entire cluster.</li>
-      <li>Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager
-  nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
-  advanced than the automated, in-place cluster upgrade.
-        <ul>
-          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#phased-in-place-cluster-upgrade">Upgrade existing nodes in place</a>: Performed using the CLI.
-  Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.</li>
-          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#replace-existing-worker-nodes-using-blue-green-deployment">Replace all worker nodes using blue-green deployment</a>:
-  Performed using the CLI. This type of upgrade allows you to
-  stand up a new cluster in parallel to the current code
-  and cut over when complete. This type of upgrade allows you to join new worker nodes,
-  schedule workloads to run on new nodes, pause, drain, and remove old worker nodes
-  in batches of multiple nodes rather than one at a time, and shut down servers to
-  remove worker nodes. This type of upgrade is the most advanced.</li>
-        </ul>
-      </li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#phased-in-place-cluster-upgrade">Upgrade existing nodes in place</a>: Performed using the CLI. Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.</li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#replace-existing-worker-nodes-using-blue-green-deployment">Replace all worker nodes using blue-green deployment</a>: Performed using the CLI. This type of upgrade allows you to stand up a new cluster in parallel to the current code and cut over when complete. This type of upgrade allows you to join new worker nodes, schedule workloads to run on new nodes, pause, drain, and remove old worker nodes in batches of multiple nodes rather than one at a time, and shut down servers to remove worker nodes. This type of upgrade is the most advanced.</li>
     </ul>
   </li>
 </ul>
@@ -316,6 +289,8 @@ occurs, this makes it easier to find and troubleshoot it.</p>
 This allows you to recover if something goes wrong during the upgrade process.</p>
 
 <blockquote>
+  <p>Note</p>
+
   <p>The backup archive is version-specific, so you can’t use it during the
 upgrade process. For example, if you create a backup archive for a UCP 2.2
 cluster, you can’t use the archive file after you upgrade to UCP 3.0.</p>
@@ -332,19 +307,23 @@ to install the Docker Enterprise Edition.</p>
 <ol>
   <li>Log into the node using ssh.</li>
   <li>Upgrade the Docker Engine to version 18.09.0 or higher. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/upgrade/">Upgrade Docker EE</a>.</li>
-  <li>
-    <p>Make sure the node is healthy.</p>
-
-    <p>In your browser, navigate to <strong>Nodes</strong> in the UCP web interface,
- and check that the node is healthy and is part of the cluster.</p>
-  </li>
+  <li>Make sure the node is healthy.</li>
 </ol>
 
-<h2 id="upgrade-ucp">Upgrade UCP</h2>
-<p>When upgrading Docker Universal Control Plane (UCP) to version 3.2.1, you can choose from
-different upgrade workflows:</p>
 <blockquote>
-  <p><strong>Important</strong>: In all upgrade workflows, manager nodes are automatically upgraded in place. You cannot control the order
+  <p>Note</p>
+
+  <p>In your browser, navigate to <strong>Nodes</strong> in the UCP web interface, and check that the node is healthy and is part of the cluster.</p>
+</blockquote>
+
+<h2 id="upgrade-ucp">Upgrade UCP</h2>
+<p>When upgrading UCP to version 3.2.1, you can choose from
+different upgrade workflows:</p>
+
+<blockquote class="important">
+  <p>Note</p>
+
+  <p>In all upgrade workflows, manager nodes are automatically upgraded in place. You cannot control the order
 of manager node upgrades.</p>
 </blockquote>
 
@@ -355,15 +334,8 @@ manager node. Automatically upgrades the entire cluster.</li>
 nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
 advanced than the automated, in-place cluster upgrade.
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#phased-in-place-cluster-upgrade">Upgrade existing nodes in place</a>: Performed using the CLI.
-  Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.</li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#replace-existing-worker-nodes-using-blue-green-deployment">Replace all worker nodes using blue-green deployment</a>:
-  Performed using the CLI. This type of upgrade allows you to
-  stand up a new cluster in parallel to the current code
-  and cut over when complete. This type of upgrade allows you to join new worker nodes,
-  schedule workloads to run on new nodes, pause, drain, and remove old worker nodes
-  in batches of multiple nodes rather than one at a time, and shut down servers to
-  remove worker nodes. This type of upgrade is the most advanced.</li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#phased-in-place-cluster-upgrade">Upgrade existing nodes in place</a>: Performed using the CLI. Automatically upgrades manager nodes and allows you to control the order of worker node upgrades.</li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/upgrade.md#replace-existing-worker-nodes-using-blue-green-deployment">Replace all worker nodes using blue-green deployment</a>: Performed using the CLI. This type of upgrade allows you to stand up a new cluster in parallel to the current code and cut over when complete. This type of upgrade allows you to join new worker nodes, schedule workloads to run on new nodes, pause, drain, and remove old worker nodes in batches of multiple nodes rather than one at a time, and shut down servers to remove worker nodes. This type of upgrade is the most advanced.</li>
     </ul>
   </li>
 </ul>
@@ -436,16 +408,20 @@ with a client bundle.</p>
 nodes. UCP will be constantly monitor this label, and if that label is removed
 UCP will then upgrade the node.</p>
 
-<p>In order to trigger the upgrade on a worker node, you will have to remove the
+<p>To trigger the upgrade on a worker node, you will have to remove the
 label.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node update --label-rm com.docker.ucp.upgrade-hold &lt;node name or id&gt;
 </code></pre></div></div>
 
-<p>(Optional) Joining new worker nodes to the cluster. Once the manager nodes have
+<blockquote>
+  <p>Optional</p>
+
+  <p>Joining new worker nodes to the cluster. Once the manager nodes have
 been upgraded to a new UCP version, new worker nodes can be added to the
 cluster, assuming they are running the corresponding new docker engine
 version.</p>
+</blockquote>
 
 <p>The swarm join token can be found in the UCP UI, or while ssh’d on a UCP
 manager node. More information on finding the swarm token can be found
@@ -461,7 +437,9 @@ worker node engines without disrupting workloads, and allows traffic to be migra
 worker node rollback capability. This type of upgrade creates a parallel environment for reduced downtime and workload disruption.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Steps 2 through 6 can be repeated for groups of nodes - you do not have to replace all worker
+  <p>Note</p>
+
+  <p>Steps 2 through 6 can be repeated for groups of nodes - you do not have to replace all worker
 nodes in the cluster at one time.</p>
 </blockquote>
 
@@ -556,72 +534,64 @@ nodes in the cluster at one time.</p>
 <h3 id="troubleshooting">Troubleshooting</h3>
 
 <ul>
-  <li>
-    <p>Upgrade compatibility</p>
-
+  <li>Upgrade compatibility
     <ul>
       <li>The upgrade command automatically checks for multiple <code class="highlighter-rouge">ucp-worker-agents</code> before
-proceeding with the upgrade. The existence of multiple <code class="highlighter-rouge">ucp-worker-agents</code> might indicate
-that the cluster still in the middle of a prior manual upgrade and you must resolve the
-conflicting node labels issues before proceeding with the upgrade.</li>
+  proceeding with the upgrade. The existence of multiple <code class="highlighter-rouge">ucp-worker-agents</code> might indicate
+  that the cluster still in the middle of a prior manual upgrade and you must resolve the
+  conflicting node labels issues before proceeding with the upgrade.</li>
     </ul>
   </li>
   <li>Upgrade failures
     <ul>
       <li>For worker nodes, an upgrade failure can be rolled back by changing the node label back
-to the previous target version. Rollback of manager nodes is not supported.</li>
+  to the previous target version. Rollback of manager nodes is not supported.</li>
     </ul>
   </li>
-  <li>
-    <p>Kubernetes errors in node state messages after upgrading UCP
-(from https://github.com/docker/kbase/how-to-resolve-kubernetes-errors-after-upgrading-ucp/readme.md)</p>
-  </li>
-  <li>
-    <p>The following information applies If you have upgraded to UCP 3.0.0 or newer:</p>
-
+  <li>Kubernetes errors in node state messages after upgrading UCP
+(from https://github.com/docker/kbase/how-to-resolve-kubernetes-errors-after-upgrading-ucp/readme.md)</li>
+  <li>The following information applies if you have upgraded to UCP 3.0.0 or newer:
     <ul>
       <li>After performing a UCP upgrade from 2.2.x to 3.x.x, you might see unhealthy nodes in your UCP
-dashboard with any of the following errors listed:
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Awaiting healthy status in Kubernetes node inventory
-Kubelet is unhealthy: Kubelet stopped posting node status
+  dashboard with any of the following errors listed:
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Awaiting healthy status in Kubernetes node inventory
+  Kubelet is unhealthy: Kubelet stopped posting node status
 </code></pre></div>        </div>
       </li>
       <li>Alternatively, you may see other port errors such as the one below in the ucp-controller
-container logs:
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http: proxy error: dial tcp 10.14.101.141:12388: connect: no route to host
+  container logs:
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http: proxy error: dial tcp 10.14.101.141:12388: connect: no route to host
 </code></pre></div>        </div>
       </li>
     </ul>
   </li>
-  <li>
-    <p>UCP 3.x.x requires additional opened ports for Kubernetes use. For ports that are used by the
+  <li>UCP 3.x.x requires additional opened ports for Kubernetes use. For ports that are used by the
 latest UCP versions and the scope of port use, refer to
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements/#ports-used">this page</a>.</p>
-
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/system-requirements/#ports-used">this page</a>.
     <ul>
-      <li>
-        <p>If you have upgraded from UCP 2.2.x to 3.0.x, verify that the ports 179, 6443, 6444 and 10250 are
-  open for Kubernetes traffic.</p>
-      </li>
-      <li>
-        <p>If you have upgraded to UCP 3.1.x, in addition to the ports listed above, do also open
-  ports 9099 and 12388.</p>
-      </li>
+      <li>If you have upgraded from UCP 2.2.x to 3.0.x, verify that the ports 179, 6443, 6444, and 10250 are
+open for Kubernetes traffic.</li>
+      <li>If you have upgraded to UCP 3.1.x, in addition to the ports listed above, also open
+ports 9099 and 12388.</li>
     </ul>
   </li>
 </ul>
 
 <h3 id="recommended-upgrade-paths">Recommended upgrade paths</h3>
 
-<p>From UCP 3.0: UCP 3.0 -&gt; UCP 3.1 -&gt; UCP 3.2
-From UCP 2.2: UCP 2.2 -&gt; UCP 3.0 -&gt; UCP 3.1 -&gt; UCP 3.2</p>
+<ul>
+  <li>From UCP 3.0: UCP 3.0 &gt; UCP 3.1 &gt; UCP 3.2</li>
+  <li>From UCP 2.2: UCP 2.2 &gt; UCP 3.0 &gt; UCP 3.1 &gt; UCP 3.2</li>
+</ul>
 
 <p>If you’re running a UCP version earlier than 2.1, first upgrade to the latest
 2.1 version, then upgrade to 2.2. Use the following rules for your upgrade path
 to UCP 2.2:</p>
 
-<p>From UCP 1.1: UCP 1.1 -&gt; UCP 2.1 -&gt; UCP 2.2
-From UCP 2.0: UCP 2.0 -&gt; UCP 2.1 -&gt; UCP 2.2</p>
+<ul>
+  <li>From UCP 1.1: UCP 1.1 &gt; UCP 2.1 &gt; UCP 2.2</li>
+  <li>From UCP 2.0: UCP 2.0 &gt; UCP 2.1 &gt; UCP 2.2</li>
+</ul>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 

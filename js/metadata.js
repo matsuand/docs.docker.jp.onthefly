@@ -766,7 +766,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/canary/",
 "title":"Deploy a Sample Application with a Canary release (Experimental)",
-"description":"Stage a canary release using weight-based load balancing between multiple backend applications.",
+"description":"Stage a canary release using weight-based load balancing between multiple back-end applications.",
 "keywords":"ucp, cluster, ingress, kubernetes"
 }
 ,
@@ -1836,15 +1836,15 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/authorization/ee-advanced/",
-"title":"Access control design with Docker Enterprise",
-"description":"Learn how to architect multitenancy with Docker Enterprise.",
+"title":"Access control design using additional security requirements",
+"description":"Learn how to architect multi-tenancy with Docker Enterprise.",
 "keywords":"authorize, authentication, users, teams, groups, sync, UCP, role, access control"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/authorization/ee-standard/",
-"title":"Access control design with Docker EE Standard",
-"description":"Learn how to architect multitenancy by using Docker Enterprise Edition Advanced.",
+"title":"Access control design",
+"description":"Learn how to architect multi-tenancy by using Docker Enterprise.",
 "keywords":"authorize, authentication, users, teams, groups, sync, UCP, role, access control"
 }
 ,
@@ -2523,8 +2523,8 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/get-started/",
 "title":"はじめよう 1部: 概要とセットアップ",
-"description":"Get oriented on some basics of Docker before diving into the walkthrough.",
-"keywords":"get started, setup, orientation, quickstart, intro, concepts, containers"
+"description":"Get oriented on some basics of Docker and install Docker Desktop.",
+"keywords":"get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop"
 }
 ,
 {
@@ -2592,8 +2592,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/",
-"title":"Install UCP for production",
-"description":"Learn how to install Docker Universal Control Plane on production.",
+"title":"本番環境向け UCP インストール",
+"description":"本番環境に Docker Universal Control Plane をインストールします。",
 "keywords":"Universal Control Plane, UCP, install, Docker Enterprise"
 }
 ,
@@ -3187,7 +3187,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/authorization/isolate-nodes/",
-"title":"Isolate cluster nodes in Docker Advanced",
+"title":"Isolate cluster nodes",
 "description":"Create grants that limit access to nodes to specific teams.",
 "keywords":"ucp, grant, role, permission, authentication, node, Kubernetes"
 }
@@ -4048,30 +4048,30 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part2/",
-"title":"はじめよう 2 部: コンテナー",
-"description":"Docker 風に簡単なアプリを書き、ビルドし実行する方法を学びます。",
-"keywords":"containers, python, code, coding, build, push, run"
+"title":"はじめよう 2 部: アプリのコンテナー化",
+"description":"Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.",
+"keywords":"containers, images, dockerfiles, node, code, coding, build, push, run"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part3/",
-"title":"はじめよう 3部: サービス",
-"description":"Learn how to define load-balanced and scalable service that runs containers.",
-"keywords":"services, replicas, scale, ports, compose, compose file, stack, networking"
+"title":"はじめよう 3部: Kubernetes へのデプロイ",
+"description":"Learn how to describe and deploy a simple application on Kubernetes.",
+"keywords":"kubernetes, pods, deployments, kubernetes services"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part4/",
-"title":"はじめよう 4部: スウォーム",
-"description":"Docker 化したマシンをクラスターとして生成する方法を学ぶ。",
-"keywords":"swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration"
+"title":"Get Started, Part 4: Deploying to Swarm",
+"description":"Learn how to describe and deploy a simple application on Docker Swarm.",
+"keywords":"swarm, swarm services, stacks"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part5/",
-"title":"はじめよう 5部: スタック",
-"description":"Learn how to create a multi-container application that uses all the machines in a cluster.",
-"keywords":"stack, data, persist, dependencies, redis, storage, volume, port"
+"title":"Get Started, Part 5: Sharing Images on Docker Hub",
+"description":"Learn how to share images on Docker Hub.",
+"keywords":"docker hub, push, images"
 }
 ,
 {
@@ -4545,7 +4545,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/dtr/release-notes/",
-"title":"DTR release notes",
+"title":"DTR リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry",
 "keywords":"docker trusted registry, whats new, release notes"
 }

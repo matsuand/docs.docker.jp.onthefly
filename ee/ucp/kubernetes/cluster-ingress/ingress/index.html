@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, cluster, ingress, kubernetes">
@@ -202,7 +202,7 @@
 
 <p>Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.</p>
 
-<h1 id="deploy-a-sample-application-with-ingress">Deploy a Sample Application with Ingress</h1>
+<h2 id="overview">Overview</h2>
 
 <p>Cluster Ingress is capable of routing based on many HTTP attributes, but most
 commonly the HTTP host and path. The following example shows the basics of
@@ -217,30 +217,32 @@ deployed. The docker-demo application is able to display the container hostname,
 environment variables or labels in its HTTP responses, therefore is good sample
 application for an Ingress controller.</p>
 
-<p>The 3 versions of the sample application are:</p>
+<p>The three versions of the sample application are:</p>
 
 <ul>
-  <li>v1: a production version with 3 replicas running.</li>
+  <li>v1: a production version with three replicas running.</li>
   <li>v2: a staging version with a single replica running.</li>
   <li>v3: a development version also with a single replica.</li>
 </ul>
 
-<p>An example Kubernetes manifest file container all 3 deployments can be found <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml">here</a></p>
+<blockquote>
+  <p>Note</p>
 
-<p>1) Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a
-     cluster with Cluster Ingress installed.</p>
+  <p>An example Kubernetes manifest file containing all three deployments can be found <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml">here</a>.</p>
+</blockquote>
 
-<p>2) Download the sample Kubernetes manifest file</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml
-</code></pre></div></div>
-
-<p>3) Deploy the sample Kubernetes manifest file</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>kubectl apply <span class="nt">-f</span> demo-app.yaml
-</code></pre></div></div>
-
-<p>4) Verify the sample applications are running</p>
+<ol>
+  <li>Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a cluster with Cluster Ingress installed.</li>
+  <li>Download the sample Kubernetes manifest file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/demo-app.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Deploy the sample Kubernetes manifest file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl apply <span class="nt">-f</span> demo-app.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Verify that the sample applications are running.</li>
+</ol>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>kubectl get pods <span class="nt">-n</span> default
   NAME                                  READY   STATUS    RESTARTS   AGE
@@ -256,9 +258,9 @@ application for an Ingress controller.</p>
   kubernetes     ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP          1d    &lt;none&gt;
 </code></pre></div></div>
 
-<p>This first part of the tutorial deployed the pods and a Kubernetes service,
-using Kubernetes NodePorts these pods can be accessed outside of the Cluster
-Ingress. This illustrate the standard L4 load balancing that a Kubernetes
+<p>This first part of the tutorial deployed the pods and a Kubernetes service.
+Using Kubernetes NodePorts, these pods can be accessed outside of the Cluster
+Ingress. This illustrates the standard L4 load balancing that a Kubernetes
 service applies.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Public IP Address of a Worker or Manager VM in the Cluster</span>
@@ -268,8 +270,6 @@ service applies.</p>
 <span class="nv">$ PORT</span><span class="o">=</span><span class="k">$(</span>kubectl get service demo-service <span class="nt">--output</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.ports[?(@.name=="http")].nodePort}'</span><span class="k">)</span>
 
 <span class="c"># Send traffic directly to the NodePort to bypass L7 Ingress</span>
-
-<span class="sb">```</span>bash
 <span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span><span class="p">;</span> <span class="k">do </span>curl http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/ping<span class="p">;</span> <span class="k">done</span>
 <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v3-d88dddb74-9k7qg"</span>,<span class="s2">"version"</span>:<span class="s2">"v3"</span>,<span class="s2">"metadata"</span>:<span class="s2">"dev"</span><span class="o">}</span>
 <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v3-d88dddb74-9k7qg"</span>,<span class="s2">"version"</span>:<span class="s2">"v3"</span>,<span class="s2">"metadata"</span>:<span class="s2">"dev"</span><span class="o">}</span>
@@ -280,30 +280,32 @@ service applies.</p>
 
 <p>The L4 load balancing is applied to the number of replicas that exist for each
 service. Different scenarios require more complex logic to load balancing.
-Make sure to detach the number of backend instances from the load balancing
+Make sure to detach the number of back-end instances from the load balancing
 algorithms used by the Ingress.</p>
 
-<h2 id="apply-ingress-rules-to-sample-application">Apply Ingress rules to Sample Application</h2>
+<h2 id="apply-ingress-rules-to-the-sample-application">Apply Ingress Rules to the Sample Application</h2>
 
 <p>To leverage the Cluster Ingress for the sample application, there are three custom resources types that need to be deployed:</p>
-
 <ul>
   <li>Gateway</li>
   <li>Virtual Service</li>
   <li>Destinationrule</li>
 </ul>
 
-<p>For the sample application, an example manifest file with all 3 objects defined is <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml">here</a>.</p>
+<blockquote>
+  <p>Note</p>
 
-<p>1) Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a
-     cluster with Cluster Ingress installed.</p>
+  <p>For the sample application, an example manifest file with all three objects defined can be found <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml">here</a>.</p>
+</blockquote>
 
-<p>2) Download the sample Kubernetes manifest file</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml
-</code></pre></div></div>
-
-<p>3) Deploy the sample Kubernetes manifest file</p>
+<ol>
+  <li>Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a cluster with Cluster Ingress installed.</li>
+  <li>Download the sample Kubernetes manifest file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-simple.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Deploy the sample Kubernetes manifest file.</li>
+</ol>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>kubectl apply <span class="nt">-f</span> ingress-simple.yaml
 
@@ -325,8 +327,8 @@ algorithms used by the Ingress.</p>
 </code></pre></div></div>
 
 <p>This configuration matches all traffic with <code class="highlighter-rouge">demo.example.com</code> and sends it to
-the backend version=v1 deployment, regardless of the quantity of replicas in
-the backend.</p>
+the back end version=v1 deployment, regardless of the quantity of replicas in
+the back end.</p>
 
 <p>Curl the service again using the port of the Ingress gateway. Because DNS is
 not set up, use the <code class="highlighter-rouge">--header</code> flag from curl to manually set the host header.</p>
@@ -345,13 +347,12 @@ not set up, use the <code class="highlighter-rouge">--header</code> flag from cu
 <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"197cbb1d-5381-4e40-bc6f-cccec22eccbc"</span><span class="o">}</span>
 </code></pre></div></div>
 
-<p>To have SNI (Server Name Indication) work with TLS services, use curl’s
-<code class="highlighter-rouge">--resolve</code> flag.</p>
+<p>To have Server Name Indication (SNI) work with TLS services, use curl’s <code class="highlighter-rouge">--resolve</code> flag.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--resolve</span> demo.example.com:<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span> http://demo.example.com/ping
 </code></pre></div></div>
 
-<p>In this instance, the three backend v1 replicas are load balanced and no
+<p>In this instance, the three back-end v1 replicas are load balanced and no
 requests are sent to the other versions.</p>
 
 <h2 id="where-to-go-next">Where to go next</h2>
@@ -455,8 +456,9 @@ requests are sent to the other versions.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#overview" class="nomunge">Overview</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#deploy-a-sample-application" class="nomunge">Deploy a Sample Application</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#apply-ingress-rules-to-sample-application" class="nomunge">Apply Ingress rules to Sample Application</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#apply-ingress-rules-to-the-sample-application" class="nomunge">Apply Ingress Rules to the Sample Application</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ingress.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
@@ -579,7 +581,6 @@ requests are sent to the other versions.</p>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

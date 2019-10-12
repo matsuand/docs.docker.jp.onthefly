@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-24 18:37:29 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-24T18:37:29+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-24T18:37:29+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, cluster, ingress, kubernetes">
@@ -202,7 +202,7 @@
 
 <p>Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.</p>
 
-<h1 id="install-cluster-ingress">Install Cluster Ingress</h1>
+<h2 id="overview">Overview</h2>
 
 <p>Cluster Ingress for Kubernetes is currently deployed manually outside of UCP.
 Future plans for UCP include managing the full lifecycle of the Ingress
@@ -214,12 +214,12 @@ Kubernetes deployment manifests.</p>
 <p>If you are installing Cluster Ingress on a UCP cluster that does not have access
 to the Docker Hub, you will need to pre-pull the Ingress container images. If
 your cluster has access to the Docker Hub, you can move on to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#deploy-cluster-ingress">deploying cluster
-ingress</a></p>
+ingress</a>.</p>
 
 <p>Without access to the Docker Hub, you will need to download the container images
 on a workstation with access to the internet. Container images are distributed
-in a <code class="highlighter-rouge">.tar.gz</code> and can be downloaded at the following
-<a href="https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.tgz">URL</a>.</p>
+in a <code class="highlighter-rouge">.tar.gz</code> and can be downloaded from
+<a href="https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.tgz">here</a>.</p>
 
 <p>Once the container images have been downloaded, they would then need to be
 copied on to the hosts in your UCP cluster, and then side loaded in Docker.
@@ -243,55 +243,53 @@ docker/pilot            1.1.2               58b6e18f3545        6 days ago      
 <p>This step deploys the Ingress controller components <code class="highlighter-rouge">istio-pilot</code> and
 <code class="highlighter-rouge">istio-ingressgateway</code>. Together, these components act as the control-plane and
 data-plane for ingress traffic. These components are a simplified deployment of
-Istio cluster Ingress functionality. Many other custom K8s resources (CRDs) are
+Istio cluster Ingress functionality. Many other custom Kubernetes resources (CRDs) are
 also created that aid in the Ingress functionality.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: This does not deploy the service mesh capabilities of Istio as its
+  <p>Note</p>
+
+  <p>This does not deploy the service mesh capabilities of Istio as its
 function in UCP is for Ingress.</p>
 </blockquote>
 
-<p>As Cluster Ingress is not built into UCP in this release, a Cluster Admin will
-need to manually download and apply the following Kubernetes Manifest
-<a href="https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml">file</a>.</p>
+<blockquote>
+  <p>Note</p>
 
-<p>1) Download the Kubernetes manifest yaml</p>
+  <p>As Cluster Ingress is not built into UCP in this release, a Cluster Admin will
+need to manually download and apply the following Kubernetes Manifest <a href="https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml">file</a>.</p>
+</blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml
-</code></pre></div></div>
-<p>2) Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a></p>
+<ol>
+  <li>Download the Kubernetes manifest file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://s3.amazonaws.com/docker-istio/istio-ingress-1.1.2.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Source a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP Client Bundle</a>.</li>
+  <li>Deploy the Kubernetes manifest file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl apply <span class="nt">-f</span> istio-ingress-1.1.2.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Verify that the installation was successful. It may take 1-2 minutes for all pods to become ready.</li>
+</ol>
 
-<p>3) Deploy the Kubernetes manifest file</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl apply <span class="nt">-f</span> istio-ingress-1.1.2.yaml
-</code></pre></div></div>
-
-<p>4) Check the installation has been completely succesfully. It may take a minute
-   or 2 for all pods to become ready.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kubectl get pods -n istio-system -o wide
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl get pods <span class="nt">-n</span> istio-system <span class="nt">-o</span> wide
 NAME                                    READY   STATUS    RESTARTS   AGE   IP           NODE         NOMINATED NODE   READINESS GATES
 istio-ingressgateway-747bc6b4cb-fkt6k   2/2     Running   0          44s   172.0.1.23   manager-02   &lt;none&gt;           &lt;none&gt;
 istio-ingressgateway-747bc6b4cb-gr8f7   2/2     Running   0          61s   172.0.1.25   manager-02   &lt;none&gt;           &lt;none&gt;
 istio-pilot-7b74c7568b-ntbjd            1/1     Running   0          61s   172.0.1.22   manager-02   &lt;none&gt;           &lt;none&gt;
 istio-pilot-7b74c7568b-p5skc            1/1     Running   0          44s   172.0.1.24   manager-02   &lt;none&gt;           &lt;none&gt;
 
-$ kubectl get services -n istio-system -o wide
-NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                                                                      AGE   SELECTOR
-istio-ingressgateway   NodePort    10.96.32.197    &lt;none&gt;        80:33000/TCP,443:33001/TCP,31400:33002/TCP,15030:34420/TCP,15443:34368/TCP,15020:34300/TCP   86s   app=istio-ingressgateway,istio=ingressgateway,release=istio
-istio-pilot            ClusterIP   10.96.199.152   &lt;none&gt;        15010/TCP,15011/TCP,8080/TCP,15014/TCP                                                       85s   istio=pilot
+<span class="nv">$ </span>kubectl get services <span class="nt">-n</span> istio-system <span class="nt">-o</span> wide
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>                                                                                      AGE   SELECTOR
+istio-ingressgateway   NodePort    10.96.32.197    &lt;none&gt;        80:33000/TCP,443:33001/TCP,31400:33002/TCP,15030:34420/TCP,15443:34368/TCP,15020:34300/TCP   86s   <span class="nv">app</span><span class="o">=</span>istio-ingressgateway,istio<span class="o">=</span>ingressgateway,release<span class="o">=</span>istio
+istio-pilot            ClusterIP   10.96.199.152   &lt;none&gt;        15010/TCP,15011/TCP,8080/TCP,15014/TCP                                                       85s   <span class="nv">istio</span><span class="o">=</span>pilot
 </code></pre></div></div>
 
-<p>5) Test the Ingress Deployment</p>
-
-<p>To test that the Envoy proxy is working correclty in the Isitio Gateway pods,
-there is a status port configured on an internal port 15020. From the above
-output we can see that port 15020 is exposed as a Kubernetes NodePort, in the
-output above the NodePort is 34300 but this could be different in each
+<p>Now you can test the Ingress deployment. To test that the Envoy proxy is working correctly in the Istio Gateway pods, there is a status port configured on an internal port 15020. From the above output, we can see that port 15020 is exposed as a Kubernetes NodePort. In the output above, the NodePort is 34300, but this could be different in each
 environment.</p>
 
-<p>To check the envoy proxy’s status, there is a health endpoint at
-<code class="highlighter-rouge">/healthz/ready</code>.</p>
+<p>To check the envoy proxy’s status, there is a health endpoint at <code class="highlighter-rouge">/healthz/ready</code>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Node Port</span>
 <span class="nv">$ PORT</span><span class="o">=</span><span class="k">$(</span>kubectl get service <span class="nt">-n</span> istio-system istio-ingressgateway <span class="nt">--output</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.ports[?(@.name=="status-port")].nodePort}'</span><span class="k">)</span>
@@ -316,8 +314,7 @@ environment.</p>
 <span class="k">*</span> Connection <span class="c">#0 to host 51.141.127.241 left intact</span>
 </code></pre></div></div>
 
-<p>If the output is <code class="highlighter-rouge">HTTP/1.1 200 OK</code> Envoy is running correctly, ready to service
-applications.</p>
+<p>If the output is <code class="highlighter-rouge">HTTP/1.1 200 OK</code>, then Envoy is running correctly, ready to service applications.</p>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
@@ -419,6 +416,7 @@ applications.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#overview" class="nomunge">Overview</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#offline-installation" class="nomunge">Offline Installation</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#deploy-cluster-ingress" class="nomunge">Deploy Cluster Ingress</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#where-to-go-next" class="nomunge">Where to go next</a></li>

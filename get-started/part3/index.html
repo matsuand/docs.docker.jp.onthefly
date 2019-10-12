@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,20 +75,20 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="はじめよう 3部: サービス"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールしていること。 Docker Compose を入手していること。 Docker for Mac と Docker for Windows ではすでにインストールされているので、このまま読み進めてください。 Linux システムでは直接インストールが必要です。..." />
+	<meta name="twitter:title" itemprop="title name" content="はじめよう 3部: Kubernetes へのデプロイ"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要と準備 2: アプリのコンテナー化 3: Kubernetes へのデプロイ 4: Swarm へのデプロイ 5: Docker Hub 上のイメージ共有 前提条件 Work through containerizing an application in Part 2. Make sure that Kubernetes is enabled on..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="services, replicas, scale, ports, compose, compose file, stack, networking">
+	<meta name="keywords" content="kubernetes, pods, deployments, kubernetes services">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -97,16 +97,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>はじめよう 3部: サービス | Docker ドキュメント</title>
-<meta property="og:title" content="はじめよう 3部: サービス" />
+	<title>はじめよう 3部: Kubernetes へのデプロイ | Docker ドキュメント</title>
+<meta property="og:title" content="はじめよう 3部: Kubernetes へのデプロイ" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Learn how to define load-balanced and scalable service that runs containers." />
-<meta property="og:description" content="Learn how to define load-balanced and scalable service that runs containers." />
+<meta name="description" content="Learn how to describe and deploy a simple application on Kubernetes." />
+<meta property="og:description" content="Learn how to describe and deploy a simple application on Kubernetes." />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"はじめよう 3部: サービス","description":"Learn how to define load-balanced and scalable service that runs containers.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"はじめよう 3部: Kubernetes へのデプロイ","description":"Learn how to describe and deploy a simple application on Kubernetes.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -176,305 +176,175 @@
 						<section class="section">
 							
 								
-							<h1>はじめよう 3部: サービス</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>はじめよう 3部: Kubernetes へのデプロイ</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    6 分
   
 </span>
 
 							
 							
 							<ul class="pagination">
-  <li><a href="part1">1: 概要</a></li>
-  <li><a href="part2">2: コンテナー</a></li>
-  <li class="active"><a href="part3">3: サービス</a></li>
-  <li><a href="part4">4: スウォーム</a></li>
-  <li><a href="part5">5: スタック</a></li>
-  <li><a href="part6">6: アプリのデプロイ</a></li>
+  <li><a href="part1">1: 概要と準備</a></li>
+  <li><a href="part2">2: アプリのコンテナー化</a></li>
+  <li class="active"><a href="part3">3: Kubernetes へのデプロイ</a></li>
+  <li><a href="part4">4: Swarm へのデプロイ</a></li>
+  <li><a href="part5">5: Docker Hub 上のイメージ共有</a></li>
 </ul>
 
 <h2 id="prerequisites">前提条件</h2>
 
 <ul>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/index.md">Docker バージョン 1.13 またはそれ以上をインストールしていること</a>。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a> を入手していること。
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/index.md">Docker for Mac</a> と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/index.md">Docker for Windows</a> ではすでにインストールされているので、このまま読み進めてください。
-Linux システムでは<a href="https://github.com/docker/compose/releases&gt;">直接インストール</a>が必要です。
-Widows 10 システム上で Hyper-V が入っていない場合は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a> を利用してください。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">1 部</a>の概要説明を読んでいること。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で説明した、コンテナーの生成方法を理解していること。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">レジストリに送信</a>して作成した <code class="highlighter-rouge">friendlyhello</code> イメージが共有可能であることを確認します。
-ここではその共有イメージを使います。</p>
-  </li>
-  <li>
-    <p>デプロイしたコンテナーとしてイメージが動作することを確認します。
-以下のコマンドを実行してください。
-<code class="highlighter-rouge">docker run -p 80:80 username/repo:tag</code>
-ここで username、repo、tag の部分は各環境に合わせて書き換えてください。
-そして <code class="highlighter-rouge">http://localhost/</code> にアクセスします。</p>
+  <li>Work through containerizing an application in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">Part 2</a>.</li>
+  <li>Make sure that Kubernetes is enabled on your Docker Desktop:
+    <ul>
+      <li><strong>OSX</strong>: click the Docker icon in your menu bar and make sure there’s a green light beside ‘Kubernetes is Running’</li>
+      <li><strong>Windows</strong>: click the Docker icon in the system tray and navigate to Kubernetes, and make sure there’s a green light beside ‘Kubernetes is Running’.</li>
+    </ul>
+
+    <p>If Kubernetes isn’t running, follow the instructions in <a href="part1.md">Part 1</a> of this tutorial to finish setting it up.</p>
   </li>
 </ul>
 
-<h2 id="introduction">はじめに</h2>
+<h2 id="introduction">Introduction</h2>
 
-<p>3 部ではアプリケーションをスケールアップして、負荷分散（ロードバランシング）を有効にします。
-こうするためには、分散アプリケーションのレベルを一段あげる必要があります。
-<strong>サービス化</strong>するということです。</p>
+<p>Now that we’ve demonstrated that the individual components of our application run as stand-alone containers, it’s time to arrange for them to be managed by an orchestrator like Kubernetes. Kubernetes provides many tools for scaling, networking, securing and maintaining your containerized applications, above and beyond the abilities of containers themselves.</p>
 
-<ul>
-  <li>スタック</li>
-  <li><strong>サービス</strong> (ここにいます)</li>
-  <li>コンテナー (<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で説明済)</li>
-</ul>
+<p>In order to validate that our containerized application works well on Kubernetes, we’ll use Docker Desktop’s built in Kubernetes environment right on our development machine to deploy our application, before handing it off to run on a full Kubernetes cluster in production. The Kubernetes environment created by Docker Desktop is <em>fully featured</em>, meaning it has all the Kubernetes features your app will enjoy on a real cluster, accessible from the convenience of your development machine.</p>
 
-<h2 id="about-services">サービスについて</h2>
+<h2 id="describing-apps-using-kubernetes-yaml">Describing Apps Using Kubernetes YAML</h2>
 
-<p>分散アプリケーションにおいては、その中に他の要素とは性格が異なる「サービス」と呼ばれるものがあります。
-たとえば動画共有サイトを考えてみてください。
-おそらくはアプリケーションデータをデータベースに保存するためのサービスがあり、ユーザーがデータをアップロードしたときにバックグラウンドでビデオ変換するサービスがあり、フロントエンドのサービスもあるでしょう。</p>
+<p>All containers in Kubernetes are scheduled as <em>pods</em>, which are groups of co-located containers that share some resources. Furthermore, in a realistic application we almost never create individual pods; instead, most of our workloads are scheduled as <em>deployments</em>, which are scalable groups of pods maintained automatically by Kubernetes. Lastly, all Kubernetes objects can and should be described in manifests called <em>Kubernetes YAML</em> files; these YAML files describe all the components and configurations of your Kubernetes app, and can be used to easily create and destroy your app in any Kubernetes environment.</p>
 
-<p>サービスとは正に「稼動するコンテナー」なのです。
-どのサービスも実行するイメージはただ一つですが、そこにはイメージの動作方法がコーディングされています。
-ポートは何番を使うか、サービスが持つべき性能を発揮するにはレプリカをいくつ用いればよいか、などです。
-サービスの規模を大きくすると、このソフトウエアを実行するコンテナーインスタンスの数が変わります。
-またプロセス内で実行されるこのサービスへのコンピューターリソース割り当てが増えます。</p>
-
-<p>うれしいことに Docker では簡単にサービスの定義、実行、規模変更を行うことができます。
-ただ <code class="highlighter-rouge">docker-compose.yml</code> ファイルを書くだけです。</p>
-
-<h2 id="your-first-docker-composeyml-file">初めての <code class="highlighter-rouge">docker-compose.yml</code> ファイル</h2>
-
-<p><code class="highlighter-rouge">docker-compose.yml</code> ファイルは YAML ファイルであり、Docker コンテナーがどのように動作するかを定義します。</p>
-
-<h3 id="docker-composeyml"><code class="highlighter-rouge">docker-compose.yml</code></h3>
-
-<p>以下の内容を <code class="highlighter-rouge">docker-commpose.yml</code> というファイル名で任意の場所に保存します。
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で行ったレジストリへの<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">送信イメージ</a>を確認し、<code class="highlighter-rouge">.yml</code> ファイルの <code class="highlighter-rouge">username/repo:tag</code> の部分を各自の環境のものへ書き換えます。</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3"</span>
-<span class="na">services</span><span class="pi">:</span>
-  <span class="na">web</span><span class="pi">:</span>
-    <span class="c1"># replace username/repo:tag with your name and image details</span>
-    <span class="na">image</span><span class="pi">:</span> <span class="s">username/repo:tag</span>
-    <span class="na">deploy</span><span class="pi">:</span>
-      <span class="na">replicas</span><span class="pi">:</span> <span class="s">5</span>
-      <span class="na">resources</span><span class="pi">:</span>
-        <span class="na">limits</span><span class="pi">:</span>
-          <span class="na">cpus</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0.1"</span>
-          <span class="na">memory</span><span class="pi">:</span> <span class="s">50M</span>
-      <span class="na">restart_policy</span><span class="pi">:</span>
-        <span class="na">condition</span><span class="pi">:</span> <span class="s">on-failure</span>
-    <span class="na">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s2">"</span><span class="s">4000:80"</span>
-    <span class="na">networks</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">webnet</span>
-<span class="na">networks</span><span class="pi">:</span>
-  <span class="na">webnet</span><span class="pi">:</span>
-</code></pre></div></div>
-
-<p>この <code class="highlighter-rouge">docker-compose.yml</code> ファイルが Docker に対して以下の指示を行います。</p>
-
-<ul>
+<ol>
   <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部でアップロードしたイメージ</a>をレジストリから取得。</p>
+    <p>You already wrote a very basic Kubernetes YAML file in the first part of this tutorial; let’s write a slightly more sophisticated one now, to run and manage our bulletin board. Place the following in a file called <code class="highlighter-rouge">bb.yaml</code>and save it in the same place you put the other yaml file.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">bb-demo</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">bb</span><span class="pi">:</span> <span class="s">web</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">bb</span><span class="pi">:</span> <span class="s">web</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">bb-site</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">bulletinboard:1.0</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">bb-entrypoint</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">bb</span><span class="pi">:</span> <span class="s">web</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">8080</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="s">8080</span>
+    <span class="na">nodePort</span><span class="pi">:</span> <span class="s">30001</span>
+</code></pre></div>    </div>
+
+    <p>In this Kubernetes YAML file, we have two objects, separated by the <code class="highlighter-rouge">---</code>:</p>
+    <ul>
+      <li>A <code class="highlighter-rouge">Deployment</code>, describing a scalable group of identical pods. In this case, you’ll get just one <code class="highlighter-rouge">replica</code>, or copy, of your pod, and that pod (which is described under the <code class="highlighter-rouge">template:</code> key) has just one container in it, based off of your <code class="highlighter-rouge">bulletinboard:1.0</code> image from the previous step in this tutorial.</li>
+      <li>A <code class="highlighter-rouge">NodePort</code> service, which will route traffic from port 30001 on your host to port 8080 inside the pods it routes to, allowing you to reach your bulletin board from the network.</li>
+    </ul>
+
+    <p>Also notice that while Kubernetes YAML can appear long and complicated at first, it almost always follows the same pattern:</p>
+    <ul>
+      <li>The <code class="highlighter-rouge">apiVersion</code>, which indicates the Kubernetes API that parses this object</li>
+      <li>The <code class="highlighter-rouge">kind</code>, indicating what sort of object this is</li>
+      <li>Some <code class="highlighter-rouge">metadata</code>, applying things like names to your objects</li>
+      <li>The <code class="highlighter-rouge">spec</code>, specifying all the parameters and configurations of your object.</li>
+    </ul>
   </li>
+</ol>
+
+<h2 id="deploying-and-checking-your-application">Deploying and Checking Your Application</h2>
+
+<ol>
   <li>
-    <p>イメージのインスタンスを 5 つ実行し <code class="highlighter-rouge">web</code> という名前のサービスとして実行。
-それぞれのインスタンスは（全てのコアを通じて）最大で CPU の 10% の利用までに制限し、RAM は 50MB とする。</p>
-  </li>
-  <li>
-    <p>コンテナーが停止したときは、すぐに再起動。</p>
-  </li>
-  <li>
-    <p>ホスト側のポート 4000 を <code class="highlighter-rouge">web</code> のポート 80 に割り当て。</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">web</code> のコンテナーに対し、<code class="highlighter-rouge">webnet</code> という名前の負荷分散ネットワークを経由してポート 80 を共有するよう命令（内部では、コンテナー自身の一時的なポートとして <code class="highlighter-rouge">web</code> のポート 80 を公開 ）。</p>
-  </li>
-</ul>
+    <p>In a terminal, navigate to where you created <code class="highlighter-rouge">bb.yaml</code> and deploy your application to Kubernetes:</p>
 
-<p>デフォルトの設定として <code class="highlighter-rouge">webnet</code> ネットワークを定義（負荷分散されるオーバレイネットワーク）。</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl apply <span class="nt">-f</span> bb.yaml
+</code></pre></div>    </div>
 
-<h2 id="run-your-new-load-balanced-app">新しい負荷分散アプリケーションの実行</h2>
+    <p>you should see output that looks like the following, indicating your Kubernetes objects were created successfully:</p>
 
-<p><code class="highlighter-rouge">docker stack deploy</code> コマンドを実行する前に、以下を実行します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm init
-</code></pre></div></div>
-
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>このコマンドの意味については <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/">4 部</a>で説明します。
-<code class="highlighter-rouge">docker swarm init</code> コマンドを実行していないと、”this node is not a swarm manager” （このノードはスウォームマネージャーではありません）というエラーが出ることになります。</p>
-</blockquote>
-
-<p>次のコマンドを実行します。
-アプリには名前をつける必要があるので、ここでは <code class="highlighter-rouge">getstartedlab</code> と指定します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
-</code></pre></div></div>
-
-<p>1 つのサービススタックから、ホストにデプロイしたイメージに対するコンテナーインスタンスが５つ稼動しました。
-中身を確認してみましょう。</p>
-
-<p>アプリケーション内に稼動しているサービスの ID を取得します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service <span class="nb">ls</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">web</code> サービスに関する情報を見てください。
-アプリ名が行先頭に表示されます。
-上で示した例と同じ名前をつけていれば <code class="highlighter-rouge">getstartedlab_web</code> が表示されたはずです。
-サービス ID をはじめ、レプリカ数、イメージ名、公開ポートもともに一覧表示されます。</p>
-
-<p><code class="highlighter-rouge">docker stack services</code> を実行することもできます。
-コマンドにはスタック名も指定します。
-以下のコマンド例では、<code class="highlighter-rouge">getstartedlab</code> スタックに関連づいたサービスがすべて一覧表示されます。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack services getstartedlab
-ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-bqpve1djnk0x        getstartedlab_web   replicated          5/5                 username/repo:tag   <span class="k">*</span>:4000-&gt;80/tcp
-</code></pre></div></div>
-
-<p>1 つのサービス内に稼動している単一のコンテナーのことを<strong>タスク</strong>と呼びます。
-タスクにはユニークな ID がつけられます。
-この ID は <code class="highlighter-rouge">docker-compose.yml</code> 内に定義された <code class="highlighter-rouge">replicas</code> の値までの数値が加算されて割り当てられます。
-サービスに対するタスクの一覧を表示してみます。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service ps getstartedlab_web
-</code></pre></div></div>
-
-<p>タスクは、システム全体のコンテナー一覧を表示することでも確認することができます。
-ただしサービスごとに表示されるわけではありません。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span> <span class="nt">-q</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">curl http://localhost</code> コマンドを順に数回実行するか、あるいはブラウザーでこの URL を表示して何回か再読み込みをしてみてください。</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app80-in-browser.png" alt="ブラウザー上の Hello World" /></p>
-
-<p>どちらの方法でもコンテナー ID が変化して、各リクエストごとに５つのレプリカのうちの１つがラウンドロビン方式により選ばれて応答します。
-これにより負荷分散が機能していることが分かります。
-コンテナー ID は先ほどのコマンド（<code class="highlighter-rouge">docker container ls -q</code>）の出力に合致しているはずです。</p>
-
-<p>スタック内のタスクすべてを見るには <code class="highlighter-rouge">docker stack ps</code> を実行します。
-このコマンドにはアプリ名をつけます。
-以下がその実行例です。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack ps getstartedlab
-ID                  NAME                  IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-uwiaw67sc0eh        getstartedlab_web.1   username/repo:tag   docker-desktop      Running             Running 9 minutes ago
-sk50xbhmcae7        getstartedlab_web.2   username/repo:tag   docker-desktop      Running             Running 9 minutes ago
-c4uuw5i6h02j        getstartedlab_web.3   username/repo:tag   docker-desktop      Running             Running 9 minutes ago
-0dyb70ixu25s        getstartedlab_web.4   username/repo:tag   docker-desktop      Running             Running 9 minutes ago
-aocrb88ap8b0        getstartedlab_web.5   username/repo:tag   docker-desktop      Running             Running 9 minutes ago
-</code></pre></div></div>
-
-<blockquote>
-  <p>Windows 10 を利用していたら？</p>
-
-  <p>Windows 10 の PowerShell では <code class="highlighter-rouge">curl</code> が利用可能となっています。
-利用できない場合には <a href="https://git-for-windows.github.io/" target="_blank" class="_">Git BASH</a>
-のような Linux ターミナルエミュレーターを使う方法があります。
-あるいは <a href="http://gnuwin32.sourceforge.net/packages/wget.htm">wget for Windows</a> を使うと <code class="highlighter-rouge">curl</code> と同様の作業ができます。</p>
-</blockquote>
-
-<blockquote>
-  <p>レスポンスが遅い？</p>
-
-  <p>利用している環境でのネットワーク設定によりますが、コンテナーが HTTP リクエストに応答するのに 30 秒くらいかかることがあります。
-これは Docker や スウォームの性能によるものではなく、Redis の依存関係が満たされていないためです。
-このことはチュートリアル内で後に説明します。
-ですから今の時点でアクセスカウンターは動作しません。
-まだデータを維持するためのサービスを作り出していないということです。</p>
-</blockquote>
-
-<h2 id="scale-the-app">アプリのスケーリング</h2>
-
-<p><code class="highlighter-rouge">docker-compose.yml</code> の <code class="highlighter-rouge">replicas</code> の値を変更すれば、アプリのスケールを変更できます。
-変更を保存したら、<code class="highlighter-rouge">docker stack deploy</code> コマンドを再度実行します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
-</code></pre></div></div>
-
-<p>Docker は直接書き換える（in-place）更新を行うので、スタックやコンテナーをあらかじめ停止しておく必要はありません。</p>
-
-<p>もう一度 <code class="highlighter-rouge">docker container ls -q</code> を実行してみると、デプロイしたインスタンスが再設定されたことが確認できます。
-レプリカをスケールアップしていれば、より多くのタスクが起動するので、つまりより多くのコンテナーが起動します。</p>
-
-<h3 id="take-down-the-app-and-the-swarm">アプリとスウォームの停止</h3>
-
-<ul>
-  <li>
-    <p><code class="highlighter-rouge">docker stack rm</code> を実行してアプリを停止します。</p>
-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack rm getstartedlab
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deployment.apps/bb-demo created
+service/bb-entrypoint created
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>スウォームを停止します。</p>
+    <p>Make sure everything worked by listing your deployments:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker swarm leave --force
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get deployments
+</code></pre></div>    </div>
+
+    <p>if all is well, your deployment should be listed as follows:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+bb-demo   1         1         1            1           48s
+</code></pre></div>    </div>
+
+    <p>This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get services
+
+NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>          AGE
+bb-entrypoint   NodePort    10.106.145.116   &lt;none&gt;        8080:30001/TCP   53s
+kubernetes      ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP          138d
+</code></pre></div>    </div>
+
+    <p>In addition to the default <code class="highlighter-rouge">kubernetes</code> service, we see our <code class="highlighter-rouge">bb-entrypoint</code> service, accepting traffic on port 30001/TCP.</p>
+  </li>
+  <li>
+    <p>Open a browser and visit your bulletin board at <code class="highlighter-rouge">localhost:30001</code>; you should see your bulletin board, the same as when we ran it as a stand-alone container in the previous step of this tutorial.</p>
+  </li>
+  <li>
+    <p>Once satisfied, tear down your application:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete <span class="nt">-f</span> bb.yaml
 </code></pre></div>    </div>
   </li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Kubernetes environment on our development machine. We haven’t done much with Kubernetes yet, but the door is now open: you can begin adding other components to your app and taking advantage of all the features and power of Kubernetes, right on your own machine.</p>
+
+<p>In addition to deploying to Kubernetes, we have also described our application as a Kubernetes YAML file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.</p>
+
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%">On to Part 4 &gt;&gt;</a></p>
+
+<h2 id="kubernetes-references">Kubernetes References</h2>
+
+<p>Further documentation for all new Kubernetes objects used in this article are available here:</p>
+
+<ul>
+  <li><a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Kubernetes Pods</a></li>
+  <li><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Kubernetes Deployments</a></li>
+  <li><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Kubernetes Services</a></li>
 </ul>
 
-<p>Docker においてはアプリケーションの起動もスケールアップも非常に簡単です。
-ここまでにコンテナーを実稼動させる方法を学びました。
-大きく前進しました。
-次に学ぶのは、複数の Docker マシンによるクラスター上にて、本当の意味でスウォームとしてのアプリを実行する方法です。</p>
-
-<blockquote>
-  <p><strong>メモ</strong>
-今回使ったような Compose ファイルは Docker においてアプリケーションを定義するために用います。
-そして <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-cloud/">Docker Cloud</a> を用いてクラウドプロバイダーへのアップロードを行います。
-つまり他のハードウェアや、<a href="https://www.docker.com/enterprise-edition">Docker エンタープライズエディション</a>において選定したクラウドプロバイダーへのアップロードを行うものです。</p>
-</blockquote>
-
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" class="button outline-btn">4 部へ &gt;&gt;</a></p>
-
-<h2 id="recap-and-cheat-sheet-optional">まとめと早見表（おまけ）</h2>
-
-<p><a href="https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip">このページで扱った端末操作の録画</a>がこちらです。</p>
-
-<script type="text/javascript" src="https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip.js" id="asciicast-b5gai4rnflh7r0kie01fx6lip" speed="2" async=""></script>
-
-<p>要するに <code class="highlighter-rouge">docker run</code> と入力するのが非常に簡単なことなのですが、実稼動させるコンテナーの真の実現方法は、これをサービスとして稼動させることです。
-サービスは Compose ファイルにおいてコンテナーの動作を定義します。
-このファイルによってアプリのスケールアップ、制限、再デプロイを実現します。
-サービスへの変更は、稼動中であろうとも適切に反映されます。
-その際のコマンドはサービスを起動させたときの <code class="highlighter-rouge">docker stack deploy</code> と同じようにして実現できます。</p>
-
-<p>ここまでのコマンドをまとめます。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack <span class="nb">ls</span>                                         <span class="c"># スタックやアプリの一覧</span>
-docker stack deploy <span class="nt">-c</span> &lt;composefile&gt; &lt;appname&gt; <span class="c"># 指定する Compose ファイルの実行</span>
-docker service <span class="nb">ls</span>                           <span class="c"># アプリに関連する実行中サービス一覧</span>
-docker service ps &lt;service&gt;                         <span class="c"># アプリに関連するタスク一覧</span>
-docker inspect &lt;task or container&gt;                <span class="c"># タスクまたはコンテナーの調査</span>
-docker container <span class="nb">ls</span> <span class="nt">-q</span>                                    <span class="c"># コンテナー ID の一覧</span>
-docker stack rm &lt;appname&gt;                               <span class="c"># アプリケーションの停止</span>
-docker swarm leave <span class="nt">--force</span>          <span class="c"># マネージャーから単一ノードスウォームを停止</span>
-</code></pre></div></div>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=services">services</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=replicas">replicas</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=scale">scale</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ports">ports</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=compose">compose</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=compose file">compose file</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=stack">stack</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=networking">networking</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=kubernetes">kubernetes</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=pods">pods</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=deployments">deployments</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=kubernetes services">kubernetes services</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -504,7 +374,7 @@ docker swarm leave <span class="nt">--force</span>          <span class="c"># �
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "get-started/part3.md",
-										"title": "はじめよう 3部: サービス",
+										"title": "はじめよう 3部: Kubernetes へのデプロイ",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/get-started/part3.md"
 									};
 									(function(d, c, j) {
@@ -565,20 +435,11 @@ docker swarm leave <span class="nt">--force</span>          <span class="c"># �
 									
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#prerequisites" class="nomunge">前提条件</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#introduction" class="nomunge">はじめに</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#about-services" class="nomunge">サービスについて</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#your-first-docker-composeyml-file" class="nomunge">初めての docker-compose.yml ファイル</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#docker-composeyml" class="nomunge">docker-compose.yml</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#run-your-new-load-balanced-app" class="nomunge">新しい負荷分散アプリケーションの実行</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#scale-the-app" class="nomunge">アプリのスケーリング</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#take-down-the-app-and-the-swarm" class="nomunge">アプリとスウォームの停止</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#recap-and-cheat-sheet-optional" class="nomunge">まとめと早見表（おまけ）</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#introduction" class="nomunge">Introduction</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#describing-apps-using-kubernetes-yaml" class="nomunge">Describing Apps Using Kubernetes YAML</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#deploying-and-checking-your-application" class="nomunge">Deploying and Checking Your Application</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#conclusion" class="nomunge">Conclusion</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#kubernetes-references" class="nomunge">Kubernetes References</a></li>
 </ul>
 
 
@@ -700,7 +561,6 @@ docker swarm leave <span class="nt">--force</span>          <span class="c"># �
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

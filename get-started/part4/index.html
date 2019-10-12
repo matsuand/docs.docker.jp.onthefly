@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,20 +75,20 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="はじめよう 4部: スウォーム"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールしていること。 3 部の前提条件で説明した Docker Compose を入手していること。 Docker Machine を入手していること。 Docker Desktop for Mac と..." />
+	<meta name="twitter:title" itemprop="title name" content="Get Started, Part 4: Deploying to Swarm"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要と準備 2: アプリのコンテナー化 3: Kubernetes へのデプロイ 4: Swarm へのデプロイ 5: Docker Hub 上のイメージ共有 Prerequisites Work through containerizing an application in Part 2. Make sure that Swarm is enabled on..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration">
+	<meta name="keywords" content="swarm, swarm services, stacks">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -97,16 +97,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>はじめよう 4部: スウォーム | Docker ドキュメント</title>
-<meta property="og:title" content="はじめよう 4部: スウォーム" />
+	<title>Get Started, Part 4: Deploying to Swarm | Docker ドキュメント</title>
+<meta property="og:title" content="Get Started, Part 4: Deploying to Swarm" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Docker 化したマシンをクラスターとして生成する方法を学ぶ。" />
-<meta property="og:description" content="Docker 化したマシンをクラスターとして生成する方法を学ぶ。" />
+<meta name="description" content="Learn how to describe and deploy a simple application on Docker Swarm." />
+<meta property="og:description" content="Learn how to describe and deploy a simple application on Docker Swarm." />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"はじめよう 4部: スウォーム","description":"Docker 化したマシンをクラスターとして生成する方法を学ぶ。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Get Started, Part 4: Deploying to Swarm","description":"Learn how to describe and deploy a simple application on Docker Swarm.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -176,600 +176,133 @@
 						<section class="section">
 							
 								
-							<h1>はじめよう 4部: スウォーム</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Get Started, Part 4: Deploying to Swarm</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    10 分
+    5 分
   
 </span>
 
 							
 							
 							<ul class="pagination">
-  <li><a href="part1">1: 概要</a></li>
-  <li><a href="part2">2: コンテナー</a></li>
-  <li><a href="part3">3: サービス</a></li>
-  <li class="active"><a href="part4">4: スウォーム</a></li>
-  <li><a href="part5">5: スタック</a></li>
-  <li><a href="part6">6: アプリのデプロイ</a></li>
+  <li><a href="part1">1: 概要と準備</a></li>
+  <li><a href="part2">2: アプリのコンテナー化</a></li>
+  <li><a href="part3">3: Kubernetes へのデプロイ</a></li>
+  <li class="active"><a href="part4">4: Swarm へのデプロイ</a></li>
+  <li><a href="part5">5: Docker Hub 上のイメージ共有</a></li>
 </ul>
 
-<h2 id="prerequisites">前提条件</h2>
+<h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
+  <li>Work through containerizing an application in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">Part 2</a>.</li>
   <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/index.md">Docker バージョン 1.13 またはそれ以上をインストールしていること</a>。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#prerequisites">3 部の前提条件</a>で説明した <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a> を入手していること。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/overview.md">Docker Machine</a> を入手していること。
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/index.md">Docker Desktop for Mac</a> と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/index.md">Docker Desktop for Windows</a> ではインストール済みであるが Linux システムでは<a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/install-machine/#installing-machine-directly">直接インストール</a>が必要。
-Widows 10 Home のように Windows 10 システム上に Hyper-V が入っていない場合は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a> が必要。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">1 部</a>の概要説明を読んでいること。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で説明した、コンテナーの生成方法を理解していること。</p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image">レジストリに送信</a>して作成した <code class="highlighter-rouge">friendlyhello</code> イメージが共有可能であることを確認します。
-ここではその共有イメージを使います。</p>
-  </li>
-  <li>
-    <p>デプロイしたコンテナーとしてイメージが動作することを確認します。
-以下のコマンドを実行してください。
-<code class="highlighter-rouge">docker run -p 80:80 username/repo:tag</code>
-ここで username、repo、tag の部分は各環境に合わせて書き換えてください。
-そして <code class="highlighter-rouge">http://localhost/</code> にアクセスします。</p>
-  </li>
-  <li>
-    <p><a href="part3">3 部</a>で扱った <code class="highlighter-rouge">docker-compose.yml</code> ファイルが用意できていること。</p>
+    <p>Make sure that Swarm is enabled on your Docker Desktop by typing <code class="highlighter-rouge">docker system info</code>, and looking for a message <code class="highlighter-rouge">Swarm: active</code> (you might have to scroll up a little).</p>
+
+    <p>If Swarm isn’t running, simply type <code class="highlighter-rouge">docker swarm init</code> at a shell prompt to set it up.</p>
   </li>
 </ul>
 
-<h2 id="introduction">はじめに</h2>
+<h2 id="introduction">Introduction</h2>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">3 部</a>では <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/">2 部</a>で書いたアプリをもとに、本番環境において実行可能なサービスとして調整したものを定義し、プロセスを 5 倍にスケールアップしました。</p>
+<p>Now that we’ve demonstrated that the individual components of our application run as stand-alone containers and shown how to deploy it using Kubernetes, let’s look at how to arrange for them to be managed by Docker Swarm. Swarm provides many tools for scaling, networking, securing and maintaining your containerized applications, above and beyond the abilities of containers themselves.</p>
 
-<p>この 4 部では、デプロイするアプリケーションをクラスターにして、複数のマシン上で実行します。
-複数コンテナー、複数マシンによるアプリケーションは、各マシンを「Docker化」（Dockerized）したクラスター、すなわち<strong>スウォーム</strong>（swarm）と呼ばれるものに集約することによって実現されます。</p>
+<p>In order to validate that our containerized application works well on Swarm, we’ll use Docker Desktop’s built in Swarm environment right on our development machine to deploy our application, before handing it off to run on a full Swarm cluster in production. The Swarm environment created by Docker Desktop is <em>fully featured</em>, meaning it has all the Swarm features your app will enjoy on a real cluster, accessible from the convenience of your development machine.</p>
 
-<h2 id="understanding-swarm-clusters">スウォームクラスターの理解</h2>
+<h2 id="describing-apps-using-stack-files">Describing Apps Using Stack Files</h2>
 
-<p>スウォームとは Docker の動作するマシンがひとまとまりとなってクラスターを構成するものです。
-スウォームを使うようになると、これまで使ってきた Docker コマンドは引き続き用いることにはなりますが、今度はクラスターに対しての<strong>スウォームマネージャー</strong>として処理操作を行うものとなります。
-スウォーム内のマシンは物理マシン、仮想マシンのいずれでも構いません。
-マシンをスウォームに含めた後は<strong>ノード</strong>として参照されます。</p>
+<p>Swarm never creates individual containers like we did in the previous step of this tutorial; instead, all Swarm workloads are scheduled as <em>services</em>, which are scalable groups of containers with added networking features maintained automatically by Swarm. Furthermore, all Swarm objects can and should be described in manifests called <em>stack files</em>; these YAML files describe all the components and configurations of your Swarm app, and can be used to easily create and destroy your app in any Swarm environment.</p>
 
-<p>スウォームマネージャーでは、コンテナーの実行にあたってストラテジーというものが指定できます。
-たとえば「emptiest node」（最も空いているノード）です。
-これは最も使われていないマシンをコンテナーに割り当てます。
-「global」というものは、個々のマシンには、指定されたコンテナーの１インスタンスのみを割り当てます。
-スウォームマネージャーに対してのストラテジー指定は Compose ファイルにて行います。
-既に利用してきたファイルです。</p>
+<ol>
+  <li>
+    <p>Let’s write a simple stack file to run and manage our bulletin board. Place the following in a file called <code class="highlighter-rouge">bb-stack.yaml</code>:</p>
 
-<p>スウォームマネージャーは、スウォーム内でコマンド実行ができる唯一のマシンです。
-そして他のマシンのスウォームへの参加を認証します。
-スウォームに参加したマシンは<strong>ワーカー</strong>（worker）と呼ばれます。
-ワーカーは処理提供するために加えられたわけですが、他のマシンの機能を制約する権限を持つわけではありません。</p>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.7'</span>
 
-<p>これまではローカルマシン上において、シングルホストモードにより Docker を利用してきました。
-Docker は<strong>スウォームモード</strong>に切り替えることが可能であり、このモードにすることでスウォームが利用できるようになります。
-スウォームを有効にした時点で現在のマシンがスウォームマネージャーとなります。
-これ以降の Docker に対するコマンドはスウォームに対して実行されます。
-もうそれまでのマシンに対して実行するものではなくなります。</p>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">bb-app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">bulletinboard:1.0</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:8080"</span>
+</code></pre></div>    </div>
 
-<h2 id="set-up-your-swarm">スウォームのセットアップ</h2>
-
-<p>スウォームは複数のノードにより構成されます。
-それは物理マシン、仮想マシンのどちらでも構いません。
-基本的な考え方はとても簡単です。
-<code class="highlighter-rouge">docker swarm init</code> の実行によりスウォームモードが有効となり、現在のマシンがスウォームマネージャーになります。
-その後に他のマシンから <code class="highlighter-rouge">docker swarm join</code> を実行すると、そのマシンはワーカーとしてスウォームに参加できます。
-この仕組みがさまざまな環境においてどのように動作するか、以下のタブを切り替えて確認してください。
-以下では VM を用いて、２つのマシンによるクラスターをさっと作り出して、これをスウォームに切り替えます。</p>
-
-<h3 id="create-a-cluster">クラスターの生成</h3>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#local">ローカル VM (Mac, Linux, Windows 7 または 8)</a></li>
-  <li><a data-toggle="tab" href="#localwin">ローカル VM (Windows 10/Hyper-V)</a></li>
-</ul>
-<div class="tab-content">
-  <div id="local" class="tab-pane fade in active">
-    <h4 id="vms-on-your-local-machine-mac-linux-windows-7-and-8">ローカルマシン上の VM（Mac, Linux, Windows 7 または 8）</h4>
-    <p>仮想マシン（virtual machine; VM）を生成するにはハイパーバイザーが必要です。 利用している OS に <a href="https://www.virtualbox.org/wiki/Downloads">Oracle VirtualBox</a> をインストールしてください。</p>
-    <blockquote>
-      <p><strong>メモ</strong></p>
-      <p>Windows 10 のように Hyper-V が搭載された Windows システムの場合、VirtualBox のインストールは不要です。 かわりに Hyper-V を利用してください。 上記の Hyper-V に関するタブをクリックして Hyper-V システムの手順を参照してください。 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/toolbox/overview.md">Docker Toolbox</a> を利用している場合は、その一部としてすでに VirtualBox がインストールされるため、このまま先に進んでください。</p>
-    </blockquote>
-    <p>次に <code class="highlighter-rouge">docker-machine</code> を使って 2 つの仮想マシンを作成します。 ここでは VirtualBox ドライバーを使います。</p>
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine create --driver virtualbox myvm1
-docker-machine create --driver virtualbox myvm2
-</code></pre></div>        </div>
-      </div>
-    </div>
-  </div>
-  <div id="localwin" class="tab-pane fade">
-
-    <h4 id="vms-on-your-local-machine-windows-10">ローカルマシン上の VM（Windows 10）</h4>
-
-    <p>はじめに、仮想マシン（virtual machine; VM）が共有する仮想スイッチを作成して、仮想マシンが互いに接続できるようにします。</p>
-
-    <ol>
-      <li>Hyper-V マネージャーを起動</li>
-      <li>右側のメニューにある <strong>仮想スイッチ マネージャー</strong> をクリック</li>
-      <li><strong>仮想スイッチの作成</strong> のタイプ <strong>外部</strong> をクリック</li>
-      <li><code class="highlighter-rouge">myswitch</code> という名称に設定し、ホストマシンのアクティブネットワークアダプタとの共有ボックスにチェックを入れる</li>
-    </ol>
-
-    <p>次にノード管理ツール <code class="highlighter-rouge">docker-machine</code> を使い 2 つの仮想マシンを作成します。</p>
+    <p>In this Swarm YAML file, we have just one object: a <code class="highlighter-rouge">service</code>, describing a scalable group of identical containers. In this case, you’ll get just one container (the default), and that container will be based off of your <code class="highlighter-rouge">bulletinboard:1.0</code> image from step 2 of this tutorial. We’ve furthermore asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 8080 inside our bulletin board container.</p>
 
     <blockquote>
-      <p><strong>メモ</strong></p>
-      <p>以下のコマンドは管理者権限で実行する必要があります。 管理者権限がないと Hyper-V の仮想マシンを生成することができません。</p>
+      <p><strong>Kubernetes Services and Swarm Services are very different!</strong> Despite the similar name, the two orchestrators mean very different things by the term ‘service’. In Swarm, a service provides both scheduling <em>and</em> networking facilities, creating containers and providing tools for routing traffic to them. In Kubernetes, scheduling and networking are handled separately: <em>deployments</em> (or other controllers) handle the scheduling of containers as pods, while <em>services</em> are responsible only for adding networking features to those pods.</p>
     </blockquote>
+  </li>
+</ol>
 
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
-docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
-</code></pre></div>        </div>
-      </div>
-    </div>
+<h2 id="deploying-and-checking-your-application">Deploying and Checking Your Application</h2>
 
-  </div>
-  <hr />
-</div>
+<ol>
+  <li>
+    <p>Deploy your application to Swarm:</p>
 
-<h4 id="list-the-vms-and-get-their-ip-addresses">VM の一覧および各 IP アドレスの取得</h4>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">-c</span> bb-stack.yaml demo
+</code></pre></div>    </div>
 
-<p>2 つ作り上げた VM の名前はそれぞれ <code class="highlighter-rouge">myvm1</code>、<code class="highlighter-rouge">myvm2</code> です。</p>
+    <p>If all goes well, Swarm will report creating all your stack objects with no complaints:</p>
 
-<p>以下のコマンドを使って、マシンおよび IP アドレスの一覧を得ます。</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating network demo_default
+Creating service demo_bb-app
+</code></pre></div>    </div>
 
-<blockquote>
-  <p><strong>メモ</strong></p>
+    <p>Notice that in addition to your service, Swarm also creates a Docker network by default to isolate the containers deployed as part of your stack.</p>
+  </li>
+  <li>
+    <p>Make sure everything worked by listing your service:</p>
 
-  <p>以下のコマンドは管理者権限で実行する必要があります。
-管理者権限がないと有効な情報を得ることができません（”UNKNOWN” が出力されるだけです）。</p>
-</blockquote>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service <span class="nb">ls</span>
+</code></pre></div>    </div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine <span class="nb">ls</span>
-</code></pre></div></div>
+    <p>If all has gone well, your service will report with 1/1 of its replicas created:</p>
 
-<p>以下はこのコマンドの出力例です。</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+il7elwunymbs        demo_bb-app         replicated          1/1                 bulletinboard:1.0   <span class="k">*</span>:8000-&gt;8080/tcp
+</code></pre></div>    </div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine <span class="nb">ls
-</span>NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-myvm1   -        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
-myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce
-</code></pre></div></div>
+    <p>This indicates 1/1 containers you asked for as part of your services are up and running. Also, we see that port 8000 on your development machine is getting forwarded to port 8080 in your bulletin board container.</p>
+  </li>
+  <li>
+    <p>Open a browser and visit your bulletin board at <code class="highlighter-rouge">localhost:8000</code>; you should see your bulletin board, the same as when we ran it as a stand-alone container in Step 2 of this tutorial.</p>
+  </li>
+  <li>
+    <p>Once satisfied, tear down your application:</p>
 
-<h4 id="initialize-the-swarm-and-add-nodes">スウォームの初期化とノードの追加</h4>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack rm demo
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<p>1 つめのマシンはマネージャーとして動作します。
-そして管理コマンドの実行と、このスウォームへ参加しようとするワーカーを認証します。
-2 つめのマシンがそのワーカーです。</p>
+<h2 id="conclusion">Conclusion</h2>
 
-<p><code class="highlighter-rouge">docker-machine ssh</code> を利用すると VM に対してコマンドを送ることができます。
-<code class="highlighter-rouge">myvm1</code> に対してスウォームマネージャーとなるように指示するために <code class="highlighter-rouge">docker swarm init</code> を実行します。
-その出力は以下のようになります。</p>
+<p>At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Swarm environment on our development machine. We haven’t done much with Swarm yet, but the door is now open: you can begin adding other components to your app and taking advantage of all the features and power of Swarm, right on your own machine.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine ssh myvm1 <span class="s2">"docker swarm init --advertise-addr &lt;myvm1 ip&gt;"</span>
-Swarm initialized: current node &lt;node ID&gt; is now a manager.
+<p>In addition to deploying to Swarm, we have also described our application as a stack file. This simple text file contains everything we need to create our application in a running state; we can check it into version control and share it with our colleagues, allowing us to distribute our applications to other clusters (like the testing and production clusters that probably come after our development environments) easily.</p>
 
-To add a worker to this swarm, run the following <span class="nb">command</span>:
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/" class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%">On to Part 5 &gt;&gt;</a></p>
 
-  docker swarm join <span class="se">\</span>
-  <span class="nt">--token</span> &lt;token&gt; <span class="se">\</span>
-  &lt;myvm ip&gt;:&lt;port&gt;
+<h2 id="swarm--cli-references">Swarm &amp; CLI References</h2>
 
-To add a manager to this swarm, run <span class="s1">'docker swarm join-token manager'</span> and follow the instructions.
-</code></pre></div></div>
+<p>Further documentation for all new Swarm objects and CLI commands used in this article are available here:</p>
 
-<blockquote>
-  <p>ポート 2377 と 2376</p>
-
-  <p><code class="highlighter-rouge">docker swarm init</code> と <code class="highlighter-rouge">docker swarm join</code> は必ずポート 2377 で実行してください。
-他にポートはないので、これをデフォルトとしてください。</p>
-
-  <p><code class="highlighter-rouge">docker-machine ls</code> の出力結果にあるマシン IP アドレスは、ポート 2376 と示されています。
-これは Docker デーモン用のポートです。
-このポートを他に利用しないでください。
-利用してしまうと<a href="https://forums.docker.com/t/docker-swarm-join-with-virtualbox-connection-error-13-bad-certificate/31392/2" target="_blank" class="_">エラーが発生します</a>。</p>
-</blockquote>
-
-<blockquote>
-  <p>SSH でトラブル？ フラグ --native-ssh を試す</p>
-
-  <p>Docker Machine には、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/reference/ssh/#different-types-of-ssh">システム内の SSH の利用を指示するオプション</a>があります。
-スウォームマネージャーへコマンドを送る際に、何らかの理由で処理に失敗した場合は、<code class="highlighter-rouge">ssh</code> コマンドを実行するときに <code class="highlighter-rouge">--native-ssh</code> フラグを指定して実行してください。</p>
-
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine --native-ssh ssh myvm1 ...
-</code></pre></div>  </div>
-</blockquote>
-
-<p>上で見たように <code class="highlighter-rouge">docker swarm init</code> の出力結果に <code class="highlighter-rouge">docker swarm join</code> コマンドの準備ができていることが示されています。
-このスウォームに加えたいノード上で実行できます。
-コマンドをコピーしたら <code class="highlighter-rouge">docker-machine ssh</code> コマンド経由で <code class="highlighter-rouge">myvm2</code> にコマンドを送ってください。
-<code class="highlighter-rouge">myvm2</code> がスウォームにおけるワーカーとして加わることになります。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine ssh myvm2 <span class="s2">"docker swarm join </span><span class="se">\</span><span class="s2">
---token &lt;token&gt; </span><span class="se">\</span><span class="s2">
-&lt;ip&gt;:2377"</span>
-
-This node joined a swarm as a worker.
-</code></pre></div></div>
-
-<p>おめでとうございます。はじめてのスウォーム作りができました。</p>
-
-<p>マネージャー上で <code class="highlighter-rouge">docker node ls</code> を実行すると、スウォーム内のノードを見ることができます。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine ssh myvm1 <span class="s2">"docker node ls"</span>
-ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-brtu9urxwfd5j0zrmkubhpkbd     myvm2               Ready               Active
-rihwohkh3ph38fhillhhb84sk <span class="k">*</span>   myvm1               Ready               Active              Leader
-</code></pre></div></div>
-
-<blockquote>
-  <p>スウォームから去る（leave）</p>
-
-  <p>もう一度やり直したい場合は、個々のノードから <code class="highlighter-rouge">docker swarm leave</code> を実行します。</p>
-</blockquote>
-
-<h2 id="deploy-your-app-on-the-swarm-cluster">スウォームクラスター上にアプリをデプロイ</h2>
-
-<p>面倒な部分はここまでです。
-ここからは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">3 部</a>で行ったことを繰り返して、今度はスウォームをデプロイします。
-Docker コマンドを実行できるのは <code class="highlighter-rouge">myvm1</code> のようなスウォームマネージャーだけです。
-ワーカーは単に処理性能をあげるためにあるだけです。</p>
-
-<h3 id="configure-a-docker-machine-shell-to-the-swarm-manager">スウォームマネージャーに対する <code class="highlighter-rouge">docker-machine</code> シェル設定</h3>
-
-<p>ここまでの Docker コマンドは <code class="highlighter-rouge">docker-machine ssh</code> というコマンドでラッピングしながら VM との対話を行ってきました。
-これに対する別のやり方として <code class="highlighter-rouge">docker-machine env &lt;machine&gt;</code> を実行する方法があります。
-これを使うと VM 上の Docker デーモンとの対話を行うように、カレントシェルを設定するコマンドが使えるようになり実行ができます。
-この方法は次のステップにおいて、より効果的に動作します。
-それはローカルにある <code class="highlighter-rouge">docker-compose.yml</code> ファイルを使って、”リモートの”アプリをデプロイできるようになるからです。
-このファイルをどこかにコピーする必要はありません。</p>
-
-<p><code class="highlighter-rouge">docker-machine env myvm1</code> と入力します。
-そして出力結果の最終行のコマンドをコピーペーストして実行します。
-これはスウォームマネージャーである <code class="highlighter-rouge">myvm1</code> との対話を行うために、シェルに対して設定を行うものです。</p>
-
-<p>シェルの設定を行う上記のコマンドは、Mac、Linux、Windows のいずれを用いているかによって異なります。
-したがってその例は、以下のタブごとに示します。</p>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#mac-linux-machine">Mac, Linux</a></li>
-  <li><a data-toggle="tab" href="#win-machine">Windows</a></li>
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/services/">Swarm Services</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/stack-deploy/">Swarm Stacks</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/stack/"><code class="highlighter-rouge">docker stack *</code></a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/service/"><code class="highlighter-rouge">docker service *</code></a></li>
 </ul>
-<div class="tab-content">
-  <div id="mac-linux-machine" class="tab-pane fade in active">
-    <h4 id="docker-machine-shell-environment-on-mac-or-linux">Mac または Linux における Docker Machine シェル環境設定</h4>
-    <p><code class="highlighter-rouge">docker-machine env myvm1</code> を実行して、シェル設定を行うコマンドを得ます。 これは <code class="highlighter-rouge">myvm1</code> との対話を行うためのものです。</p>
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine env myvm1
-export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://192.168.99.100:2376"
-export DOCKER_CERT_PATH="/Users/sam/.docker/machine/machines/myvm1"
-export DOCKER_MACHINE_NAME="myvm1"
-# Run this command to configure your shell:
-# eval $(docker-machine env myvm1)
-</code></pre></div>        </div>
-      </div>
-    </div>
-    <p>表示されたコマンドを実行して、<code class="highlighter-rouge">myvm1</code> と対話するためのシェル設定を行います。</p>
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eval $(docker-machine env myvm1)
-</code></pre></div>        </div>
-      </div>
-    </div>
-    <p><code class="highlighter-rouge">docker-machine ls</code> すると <code class="highlighter-rouge">myvm1</code> がアクティブマシンとなっていることが分かります。 マシン名のとなりにあるアスタリスクが、アクティブであることを示しています。</p>
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine ls
-NAME    ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-myvm1   *        virtualbox   Running   tcp://192.168.99.100:2376           v17.06.2-ce
-myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.06.2-ce
-</code></pre></div>        </div>
-      </div>
-    </div>
-  </div>
-  <div id="win-machine" class="tab-pane fade">
-    <h4 id="docker-machine-shell-environment-on-windows">Windows における Docker Machine シェル環境設定</h4>
-    <p><code class="highlighter-rouge">docker-machine env myvm1</code> を実行して、シェル設定を行うコマンドを得ます。 これは <code class="highlighter-rouge">myvm1</code> との対話を行うためのものです。</p>
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\Users\sam\sandbox\get-started&gt; docker-machine env myvm1
-$Env:DOCKER_TLS_VERIFY = "1"
-$Env:DOCKER_HOST = "tcp://192.168.203.207:2376"
-$Env:DOCKER_CERT_PATH = "C:\Users\sam\.docker\machine\machines\myvm1"
-$Env:DOCKER_MACHINE_NAME = "myvm1"
-$Env:COMPOSE_CONVERT_WINDOWS_PATHS = "true"
-# Run this command to configure your shell:
-# &amp; "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
-</code></pre></div>        </div>
-      </div>
-    </div>
-    <p>表示されたコマンドを実行して、<code class="highlighter-rouge">myvm1</code> と対話するためのシェル設定を行います。</p>
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp; "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
-</code></pre></div>        </div>
-      </div>
-    </div>
-    <p><code class="highlighter-rouge">docker-machine ls</code> すると <code class="highlighter-rouge">myvm1</code> がアクティブマシンとなっていることが分かります。 マシン名のとなりにあるアスタリスクが、アクティブであることを示しています。</p>
-    <div class="language-shell highlighter-rouge">
-      <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:PATH&gt; docker-machine ls
-NAME    ACTIVE   DRIVER   STATE     URL                          SWARM   DOCKER        ERRORS
-myvm1   *        hyperv   Running   tcp://192.168.203.207:2376           v17.06.2-ce
-myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.2-ce
-</code></pre></div>        </div>
-      </div>
-    </div>
-  </div>
-  <hr />
-</div>
 
-<h3 id="deploy-the-app-on-the-swarm-manager">スウォームマネージャーからのアプリのデプロイ</h3>
-
-<p>ここで設定をし終えた <code class="highlighter-rouge">myvm1</code> は、スウォームマネージャーとしての機能を持ったことになります。
-ちょうど 3 部における <code class="highlighter-rouge">myvm1</code> で用いた <code class="highlighter-rouge">docker stack deploy</code> というコマンドを、同じく用いてアプリをデプロイできます。
-ローカルにある <code class="highlighter-rouge">docker-compose.yml</code> についても同じです。
-コマンド実行は処理を終えるのに多少時間がかかります。
-またデプロイ結果も利用できるまでに時間を要します。
-スウォームマネージャー上で <code class="highlighter-rouge">docker service ps &lt;service_name&gt;</code> コマンドを実行すると、デプロイされているサービスすべてを確認することができます。</p>
-
-<p><code class="highlighter-rouge">docker-machine</code> のシェル設定を使って <code class="highlighter-rouge">myvm1</code> への接続ができました。
-しかもローカルホストのファイルを扱うことができる状態です。
-前と変わらず同じディレクトリにいます。
-そのディレクトリには <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/#docker-composeyml">3 部で生成した <code class="highlighter-rouge">docker-compose.yml</code>
-ファイル</a>があるのです。</p>
-
-<p>前と同じように以下のコマンドを実行して <code class="highlighter-rouge">myvm1</code> 上のアプリをデプロイします。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">-c</span> docker-compose.yml getstartedlab
-</code></pre></div></div>
-
-<p>まさにこれです。
-スウォームクラスター上にアプリがデプロイできました！</p>
-
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>利用するイメージが Docker Hub 上でなくプライベートリポジトリ上に保存されている場合は、<code class="highlighter-rouge">docker login &lt;レジストリ名&gt;</code> を使ってログインしておく必要があります。そして上のコマンドへは <code class="highlighter-rouge">--with-registry-auth</code> をつけます。
-たとえば以下のとおりです。</p>
-
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker login registry.example.com
-
-docker stack deploy <span class="nt">--with-registry-auth</span> <span class="nt">-c</span> docker-compose.yml getstartedlab
-</code></pre></div>  </div>
-
-  <p>こうするとローカルクライアントから、サービスをデプロイするスウォームノードに向けてログイントークンが送られます。
-その際には暗号化された WAL ログが用いられます。
-この情報を使ってノードからレジストリへのログインが可能になり、イメージを取得できるようになります。</p>
-
-</blockquote>
-
-<p>ここから <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3.md#run-your-new-load-balanced-app">3 部でも用いてきた同じ docker コマンド</a> を利用します。
-今回の場合は、サービス（と関連コンテナー）が <code class="highlighter-rouge">myvm1</code> と <code class="highlighter-rouge">myvm2</code> の両者によって提供されているということです。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack ps getstartedlab
-
-ID            NAME                  IMAGE                   NODE   DESIRED STATE
-jq2g3qp8nzwx  getstartedlab_web.1   gordon/get-started:part2  myvm1  Running
-88wgshobzoxl  getstartedlab_web.2   gordon/get-started:part2  myvm2  Running
-vbb1qbkb0o2z  getstartedlab_web.3   gordon/get-started:part2  myvm2  Running
-ghii74p9budx  getstartedlab_web.4   gordon/get-started:part2  myvm1  Running
-0prmarhavs87  getstartedlab_web.5   gordon/get-started:part2  myvm2  Running
-</code></pre></div></div>
-
-<blockquote>
-  <p><code class="highlighter-rouge">docker-machine env</code> と <code class="highlighter-rouge">docker-machine ssh</code> を使った VM への接続</p>
-
-  <ul>
-    <li>
-      <p>シェル設定を使って <code class="highlighter-rouge">myvm2</code> のような別のマシンと接続したい場合は、同一シェル上、あるいは別のシェル上にて <code class="highlighter-rouge">docker-machine env</code>
-を実行するだけです。こうすることで実行コマンドは <code class="highlighter-rouge">myvm2</code> に向けて行われます。
-シェル設定を行っていないシェルや、新たに開いたシェルを用いる場合には、再度設定する必要があります。
-<code class="highlighter-rouge">docker-machine ls</code> によりマシン一覧が表示され、状態（state）や IP アドレスを見たり、何があるのか、どれに接続すべきなのかが分かります。
-詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/get-started.md#create-a-machine">Docker Machine をはじめるためのトピック</a>を参照してください。</p>
-    </li>
-    <li>
-      <p>上とは別に <code class="highlighter-rouge">docker-machine ssh &lt;マシン&gt; "&lt;コマンド&gt;"</code> という形で Docker コマンドをラップして実行することもできます。
-これは VM に直接ログインするものですが、ローカルホストにあるファイルを操作することはできなくなります。</p>
-    </li>
-    <li>
-      <p>Mac や Linux の場合 <code class="highlighter-rouge">docker-machine scp &lt;ファイル&gt; &lt;マシン&gt;:~</code> というコマンドを使って、マシン間でのファイルコピーができます。
-しかし Windows ユーザーがこれを行うためには <a href="https://git-for-windows.github.io/" target="_blank" class="_">Git Bash</a> のような Linux ターミナルエミュレーターを利用する必要があります。</p>
-    </li>
-  </ul>
-
-  <p>このチュートリアルでは <code class="highlighter-rouge">docker-machine ssh</code> と <code class="highlighter-rouge">docker-machine env</code> の両方を示します。
-いずれの方法でも、あらゆるプラットフォームにおいて <code class="highlighter-rouge">docker-machine</code> CLI が実行できることになります。</p>
-</blockquote>
-
-<h3 id="accessing-your-cluster">クラスターへのアクセス</h3>
-
-<p>アプリに対しては <code class="highlighter-rouge">myvm1</code> や <code class="highlighter-rouge">myvm2</code> の IP アドレスのどちらを使ってもアクセスできます。</p>
-
-<p>作り出されたネットワークは、各マシン間で共有され負荷分散が行われます。
-<code class="highlighter-rouge">docker-machine ls</code> を実行して VM の IP アドレスを確認してください。
-そしてどちらでもよいので、ブラウザー上からポート 4000 番にして更新ボタンを押してください（あるいは <code class="highlighter-rouge">curl</code> コマンドを使うのでも構いません）。</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app-in-browser-swarm.png" alt="ブラウザー上の Hello World" /></p>
-
-<p>コンテナー ID は 5 つの値がランダムな順に割り当てられます。
-これによって負荷分散が行われていることがわかります。</p>
-
-<p>2 つの IP アドレスが有効になる理由は、スウォーム内の各ノードが ingress の<strong>ルーティングメッシュ</strong>（routing mesh）に属しているからです。
-スウォーム内の特定ポートにおいてデプロイされたサービスは、常にそのポートが割り当てられるようになります。
-どのノードがコンテナー内にて実際に動いているかは関係がありません。
-以下はルーティングメッシュとはどういうものかを示す図です。
-<code class="highlighter-rouge">my-web</code> というサービスが、ノードを 3 つ持つスウォーム上にてポート <code class="highlighter-rouge">8080</code> により公開されている様子です。</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/images/ingress-routing-mesh.png" alt="ルーティングメッシュ図" /></p>
-
-<blockquote>
-  <p>接続に問題があり？</p>
-
-  <p>スウォーム内で ingress ネットワークを使う際には、スウォームモードを有効にする前に、スウォームノード間において以下のポートを開いておく必要があります。</p>
-
-  <ul>
-    <li>ポート 7946 TCP/UDP ネットワーク検出用コンテナー</li>
-    <li>ポート 4789 UDP ingress ネットワーク用コンテナー</li>
-  </ul>
-
-  <p>ウェブサービスのポート設定をよく確認してください。
-またブラウザーあるいは curl コマンドに用いる IP アドレスが適切なものであることも確認してください。</p>
-</blockquote>
-
-<h2 id="iterating-and-scaling-your-app">アプリ操作の繰り返しとスケーリング</h2>
-
-<p>ここからは 2 部と 3 部で学んだ操作をすべて行っていくことができます。</p>
-
-<p>アプリをスケーリングするには <code class="highlighter-rouge">docker-compose.yml</code> ファイルを変更します。</p>
-
-<p>アプリの処理内容を変更するには、コードを編集して、新たなイメージの再構築とプッシュを行います。
-（これを行うには、前と同様に<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/#build-the-app">アプリの構築</a>と<a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/#publish-the-image">イメージの公開</a>の手順に従います。）</p>
-
-<p>どちらにせよ、再度 <code class="highlighter-rouge">docker stack deploy</code> を実行するだけで、変更内容をすぐにデプロイすることができます。</p>
-
-<p>物理マシン仮想マシンを問わず、どのマシンからでもスウォームに加わることができます。
-<code class="highlighter-rouge">myvm2</code> に対して行った <code class="highlighter-rouge">docker swarm join</code> コマンドを同じように実行するだけです。
-クラスターには性能を向上させるマシンが加えられることになります。
-この後に <code class="highlighter-rouge">docker stack deploy</code> を実行すれば、新たなリソースを活用してアプリが稼動します。</p>
-
-<h2 id="cleanup-and-reboot">クリアと再起動</h2>
-
-<h3 id="stacks-and-swarms">スタックとスウォーム</h3>
-
-<p>スタックの削除は <code class="highlighter-rouge">docker stack rm</code> により行います。
-たとえば以下のとおりです。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack rm getstartedlab
-</code></pre></div></div>
-
-<blockquote>
-  <p>スウォームはとっておくか消すか？</p>
-
-  <p>この後にスウォームを削除したい場合は、ワーカー上であれば <code class="highlighter-rouge">docker-machine ssh myvm2 "docker swarm leave"</code>、マネージャー上であれば <code class="highlighter-rouge">docker-machine ssh myvm1 "docker swarm leave --force"</code> を実行します。
-ただし 5 部においてこのスウォームを利用するので、このままとっておいてください。</p>
-</blockquote>
-
-<h3 id="unsetting-docker-machine-shell-variable-settings">docker-machine シェル環境設定の無効化</h3>
-
-<p>現在いるシェル上において <code class="highlighter-rouge">docker-machine</code> の環境変数を無効化するには、以下のコマンドを実行します。</p>
-
-<p><strong>Mac または Linux</strong> の場合は以下とします。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">eval</span> <span class="k">$(</span>docker-machine env <span class="nt">-u</span><span class="k">)</span>
-</code></pre></div></div>
-
-<p><strong>Windows</strong> の場合は以下とします。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env <span class="nt">-u</span> | Invoke-Expression
-</code></pre></div></div>
-
-<p>上のコマンドは、仮想マシンを作り出した <code class="highlighter-rouge">docker-machine</code> のシェルを抜け出ます。
-同じシェル上において作業を進めていきますが、今度は（Docker Desktop for Mac あるいは
-Docker Desktop for Windows の）ネイティブな <code class="highlighter-rouge">docker</code> コマンドを利用することになります。
-より詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/get-started/#unset-environment-variables-in-the-current-shell">Machine のトピック: カレントシェルの環境変数クリア</a>
-を参照してください。</p>
-
-<h3 id="restarting-docker-machines">Docker マシンの再起動</h3>
-
-<p>ローカルホストをシャットダウンすると Docker マシンも停止します。
-Docker マシンの状態は <code class="highlighter-rouge">docker-machine ls</code> を実行して確認することができます。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine ls
-NAME    ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
-myvm1   -        virtualbox   Stopped                 Unknown
-myvm2   -        virtualbox   Stopped                 Unknown
-</code></pre></div></div>
-
-<p>停止しているマシンを再起動するには以下を実行します。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine start &lt;マシン名&gt;
-</code></pre></div></div>
-
-<p>たとえば以下のとおりです。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine start myvm1
-Starting "myvm1"...
-(myvm1) Check network to re-create if needed...
-(myvm1) Waiting for an IP...
-Machine "myvm1" was started.
-Waiting for SSH to be available...
-Detecting the provisioner...
-Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
-
-$ docker-machine start myvm2
-Starting "myvm2"...
-(myvm2) Check network to re-create if needed...
-(myvm2) Waiting for an IP...
-Machine "myvm2" was started.
-Waiting for SSH to be available...
-Detecting the provisioner...
-Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
-</code></pre></div></div>
-
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/" class="button outline-btn">5 部へ &gt;&gt;</a></p>
-
-<h2 id="recap-and-cheat-sheet-optional">まとめと早見表（おまけ）</h2>
-
-<p><a href="https://asciinema.org/a/113837">このページで扱った端末操作の録画</a>がこちらです。</p>
-
-<script type="text/javascript" src="https://asciinema.org/a/113837.js" id="asciicast-113837" speed="2" async=""></script>
-
-<p>4 部ではスウォームとはなにかを学びました。
-そしてスォーム内のノードがマネージャーやワーカーとなる様子、スウォームの生成、アプリケーションのデプロイ方法についても学びました。
-ここでわかったことは、基本的な Docker コマンドが 3 部と変わっていないことであり、それがスウォームマネージャー上で実行するように仕向けていました。
-また Docker のネットワークが稼動する様子も見てきました。
-コンテナーが異なるマシン上で稼動していても、その間での負荷分散の要求に応えていくものです。
-最後には、クラスター上におけるアプリ操作の繰り返しとスケーリングに学びました。</p>
-
-<p>スウォームや VM とのやり取りを行うコマンドをここにまとめます。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-machine create <span class="nt">--driver</span> virtualbox myvm1   <span class="c"># VM (Mac, Win7, Linux) の生成</span>
-docker-machine create <span class="nt">-d</span> hyperv <span class="nt">--hyperv-virtual-switch</span> <span class="s2">"myswitch"</span> myvm1 <span class="c"># Win10</span>
-docker-machine env myvm1                                  <span class="c"># ノードの基本情報表示</span>
-docker-machine ssh myvm1 <span class="s2">"docker node ls"</span>           <span class="c"># スウォームのノード一覧表示</span>
-docker-machine ssh myvm1 <span class="s2">"docker node inspect &lt;node ID&gt;"</span>      <span class="c"># ノードの詳細表示</span>
-docker-machine ssh myvm1 <span class="s2">"docker swarm join-token -q worker"</span>  <span class="c"># 参加トークン表示</span>
-docker-machine ssh myvm1              <span class="c"># VM への SSHセッション開始, "exit" で終了</span>
-docker node <span class="nb">ls</span>                 <span class="c"># スウォーム内ノード表示 (マネージャーログオン時)</span>
-docker-machine ssh myvm2 <span class="s2">"docker swarm leave"</span>       <span class="c"># スウォームからワーカー削除</span>
-docker-machine ssh myvm1 <span class="s2">"docker swarm leave -f"</span>  <span class="c"># マスター削除、スウォーム削除</span>
-docker-machine <span class="nb">ls</span>                <span class="c"># VM 一覧, 当シェルの対話 VM にアスタリスク表示</span>
-docker-machine start myvm1                                    <span class="c"># 非稼動の VM 開始</span>
-docker-machine env myvm1                        <span class="c"># myvm1 の環境変数とコマンド表示</span>
-<span class="nb">eval</span> <span class="k">$(</span>docker-machine env myvm1<span class="k">)</span>            <span class="c"># Mac コマンド, myvm1 へのシェル接続</span>
-&amp; <span class="s2">"C:</span><span class="se">\P</span><span class="s2">rogram Files</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\D</span><span class="s2">ocker</span><span class="se">\R</span><span class="s2">esources</span><span class="se">\b</span><span class="s2">in</span><span class="se">\d</span><span class="s2">ocker-machine.exe"</span> env myvm1 | Invoke-Expression   <span class="c"># Windows コマンド, myvm1 へのシェル接続</span>
-docker stack deploy <span class="nt">-c</span> &lt;file&gt; &lt;app&gt;  <span class="c"># アプリデプロイ,コマンドシェルはマネージャー(myvm1)との対話要, ローカル Compose ファイル利用。</span>
-docker-machine scp docker-compose.yml myvm1:~ <span class="c"># ノードのホームにファイルコピー (マネージャーへssh接続,アプリデプロイ時のみ)</span>
-docker-machine ssh myvm1 <span class="s2">"docker stack deploy -c &lt;file&gt; &lt;app&gt;"</span>   <span class="c"># ssh利用したアプリデプロイ (まずmyvm1へComposeファイルコピーが必要)</span>
-<span class="nb">eval</span> <span class="k">$(</span>docker-machine env <span class="nt">-u</span><span class="k">)</span>       <span class="c"># dockerネイティブコマンド, VMからシェル切断</span>
-docker-machine stop <span class="k">$(</span>docker-machine <span class="nb">ls</span> <span class="nt">-q</span><span class="k">)</span>                 <span class="c"># 稼働中 VM の全停止</span>
-docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</span> <span class="nt">-q</span><span class="k">)</span>   <span class="c"># 全 VM とそのディスクイメージの削除</span>
-</code></pre></div></div>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=swarm">swarm</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=scale">scale</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=machine">machine</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=vm">vm</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=manager">manager</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=worker">worker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=deploy">deploy</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=ssh">ssh</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=orchestration">orchestration</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=swarm">swarm</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=swarm services">swarm services</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=stacks">stacks</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -799,7 +332,7 @@ docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</s
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "get-started/part4.md",
-										"title": "はじめよう 4部: スウォーム",
+										"title": "Get Started, Part 4: Deploying to Swarm",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/get-started/part4.md"
 									};
 									(function(d, c, j) {
@@ -859,30 +392,12 @@ docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</s
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#prerequisites" class="nomunge">前提条件</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#introduction" class="nomunge">はじめに</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#understanding-swarm-clusters" class="nomunge">スウォームクラスターの理解</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#set-up-your-swarm" class="nomunge">スウォームのセットアップ</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#create-a-cluster" class="nomunge">クラスターの生成</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#deploy-your-app-on-the-swarm-cluster" class="nomunge">スウォームクラスター上にアプリをデプロイ</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#configure-a-docker-machine-shell-to-the-swarm-manager" class="nomunge">スウォームマネージャーに対する docker-machine シェル設定</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#deploy-the-app-on-the-swarm-manager" class="nomunge">スウォームマネージャーからのアプリのデプロイ</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#accessing-your-cluster" class="nomunge">クラスターへのアクセス</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#iterating-and-scaling-your-app" class="nomunge">アプリ操作の繰り返しとスケーリング</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#cleanup-and-reboot" class="nomunge">クリアと再起動</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#stacks-and-swarms" class="nomunge">スタックとスウォーム</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#unsetting-docker-machine-shell-variable-settings" class="nomunge">docker-machine シェル環境設定の無効化</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#restarting-docker-machines" class="nomunge">Docker マシンの再起動</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#recap-and-cheat-sheet-optional" class="nomunge">まとめと早見表（おまけ）</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#introduction" class="nomunge">Introduction</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#describing-apps-using-stack-files" class="nomunge">Describing Apps Using Stack Files</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#deploying-and-checking-your-application" class="nomunge">Deploying and Checking Your Application</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#conclusion" class="nomunge">Conclusion</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part4.md#swarm--cli-references" class="nomunge">Swarm &amp; CLI References</a></li>
 </ul>
 
 
@@ -1004,7 +519,6 @@ docker-machine rm <span class="k">$(</span>docker-machine <span class="nb">ls</s
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

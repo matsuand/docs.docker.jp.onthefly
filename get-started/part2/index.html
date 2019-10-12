@@ -1,4 +1,4 @@
-<!-- Page generated 2019-10-05 17:07:01 +0900 -->
+<!-- Page generated 2019-10-12 15:29:48 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,20 +75,20 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-05T17:07:01+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-12T15:29:48+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="はじめよう 2 部: コンテナー"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要 2: コンテナー 3: サービス 4: スウォーム 5: スタック 6: アプリのデプロイ 前提条件 Docker バージョン 1.13 またはそれ以上をインストールしていること。 1 部 の概要を読んでいること。 以下のような簡単なコマンドを通じて、環境のセットアップ確認ができていること。 docker run hello-world はじめに Docker におけるアプリケーション構築を始めましょう。 アプリケーション階層の最下部となるところから始めることにします。 これがコンテナーであり、このページにて取り扱います。 このレベルの上位にあるのがサービスです。..." />
+	<meta name="twitter:title" itemprop="title name" content="はじめよう 2 部: アプリのコンテナー化"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="1: 概要と準備 2: アプリのコンテナー化 3: Kubernetes へのデプロイ 4: Swarm へのデプロイ 5: Docker Hub 上のイメージ共有 前提条件 1 部 での設定、導入をひととおり終えていること。 はじめに Now that we’ve got our orchestrator of choice set up in..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-10-05T17:07:01+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-12T15:29:48+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="containers, python, code, coding, build, push, run">
+	<meta name="keywords" content="containers, images, dockerfiles, node, code, coding, build, push, run">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -97,16 +97,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>はじめよう 2 部: コンテナー | Docker ドキュメント</title>
-<meta property="og:title" content="はじめよう 2 部: コンテナー" />
+	<title>はじめよう 2 部: アプリのコンテナー化 | Docker ドキュメント</title>
+<meta property="og:title" content="はじめよう 2 部: アプリのコンテナー化" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Docker 風に簡単なアプリを書き、ビルドし実行する方法を学びます。" />
-<meta property="og:description" content="Docker 風に簡単なアプリを書き、ビルドし実行する方法を学びます。" />
+<meta name="description" content="Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container." />
+<meta property="og:description" content="Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container." />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"はじめよう 2 部: コンテナー","description":"Docker 風に簡単なアプリを書き、ビルドし実行する方法を学びます。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"はじめよう 2 部: アプリのコンテナー化","description":"Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -176,7 +176,7 @@
 						<section class="section">
 							
 								
-							<h1>はじめよう 2 部: コンテナー</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>はじめよう 2 部: アプリのコンテナー化</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
@@ -187,438 +187,148 @@
 							
 							
 							<ul class="pagination">
-  <li><a href="part1">1: 概要</a></li>
-  <li class="active"><a href="part2">2: コンテナー</a></li>
-  <li><a href="part3">3: サービス</a></li>
-  <li><a href="part4">4: スウォーム</a></li>
-  <li><a href="part5">5: スタック</a></li>
-  <li><a href="part6">6: アプリのデプロイ</a></li>
+  <li><a href="part1">1: 概要と準備</a></li>
+  <li class="active"><a href="part2">2: アプリのコンテナー化</a></li>
+  <li><a href="part3">3: Kubernetes へのデプロイ</a></li>
+  <li><a href="part4">4: Swarm へのデプロイ</a></li>
+  <li><a href="part5">5: Docker Hub 上のイメージ共有</a></li>
 </ul>
 
 <h2 id="prerequisites">前提条件</h2>
 
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/installation/">Docker バージョン 1.13 またはそれ以上をインストールしていること</a>。</li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">1 部</a> の概要を読んでいること。</li>
-  <li>
-    <p>以下のような簡単なコマンドを通じて、環境のセットアップ確認ができていること。</p>
-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run hello-world
-</code></pre></div>    </div>
-  </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">1 部</a> での設定、導入をひととおり終えていること。</li>
 </ul>
 
 <h2 id="introduction">はじめに</h2>
 
-<p>Docker におけるアプリケーション構築を始めましょう。
-アプリケーション階層の最下部となるところから始めることにします。
-これがコンテナーであり、このページにて取り扱います。
-このレベルの上位にあるのがサービスです。
-サービスは、アプリケーション実行中のコンテナーの動きを定義します。
-このことは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/">3 部</a> で扱います。
-最後に、最上位にあるのがスタックです。
-サービス間の対話方法を定義します。
-これは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part5/">5 部</a> で扱います。</p>
+<p>Now that we’ve got our orchestrator of choice set up in our development environment thanks to Docker Desktop,
+we can begin to develop containerized applications. In general, the development workflow looks like this:</p>
+
+<ol>
+  <li>Create and test individual containers for each component of your application by first creating Docker images.</li>
+  <li>Assemble your containers and supporting infrastructure into a complete application, expressed either as a <em>Docker stack file</em> or in Kubernetes YAML.</li>
+  <li>Test, share and deploy your complete containerized application.</li>
+</ol>
+
+<p>In this stage of the tutorial, let’s focus on step 1 of this workflow: creating the images that our containers will be based on. Remember, a Docker image captures the private filesystem that our containerized processes will run in; we need to create an image that contains just what our application needs to run.</p>
+
+<blockquote>
+  <p><strong>Containerized development environments</strong> are easier to set up than traditional development environments, once you learn how to build images as we’ll discuss below. This is because a containerized development environment will isolate all the dependencies your app needs inside your Docker image; there’s no need to install anything other than Docker on your development machine. In this way, you can easily develop applications for different stacks without changing anything on your development machine.</p>
+</blockquote>
+
+<h2 id="setting-up">Setting Up</h2>
+
+<ol>
+  <li>
+    <p>Clone an example project from GitHub (if you don’t have git installed, see the <a href="install instructions">https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</a> first):</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">-b</span> v1 https://github.com/docker-training/node-bulletin-board
+<span class="nb">cd </span>node-bulletin-board/bulletin-board-app
+</code></pre></div>    </div>
+
+    <p>This is a simple bulletin board application, written in node.js. In this example, let’s imagine you wrote this app, and are now trying to containerize it.</p>
+  </li>
+  <li>
+    <p>Have a look at the file called <code class="highlighter-rouge">Dockerfile</code>. Dockerfiles describe how to assemble a private filesystem for a container, and can also contain some metadata describing how to run a container based on this image. The bulletin board app Dockerfile looks like this:</p>
+
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:6.11.5</span>
+
+<span class="k">WORKDIR</span><span class="s"> /usr/src/app</span>
+<span class="k">COPY</span><span class="s"> package.json .</span>
+<span class="k">RUN </span>npm install
+<span class="k">COPY</span><span class="s"> . .</span>
+
+<span class="k">CMD</span><span class="s"> [ "npm", "start" ]</span>
+</code></pre></div>    </div>
+
+    <p>Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up our image. This one takes the following steps:</p>
+
+    <ul>
+      <li>Start <code class="highlighter-rouge">FROM</code> the pre-existing <code class="highlighter-rouge">node:6.11.5</code> image. This is an <em>official image</em>, built by the node.js vendors and validated by Docker to be a high-quality image containing the node 6.11.5 interpreter and basic dependencies.</li>
+      <li>Use <code class="highlighter-rouge">WORKDIR</code> to specify that all subsequent actions should be taken from the directory <code class="highlighter-rouge">/usr/src/app</code> <em>in your image filesystem</em> (never the host’s filesystem).</li>
+      <li><code class="highlighter-rouge">COPY</code> the file <code class="highlighter-rouge">package.json</code> from your host to the present location (<code class="highlighter-rouge">.</code>) in your image (so in this case, to <code class="highlighter-rouge">/usr/src/app/package.json</code>)</li>
+      <li><code class="highlighter-rouge">RUN</code> the command <code class="highlighter-rouge">npm install</code> inside your image filesystem (which will read <code class="highlighter-rouge">package.json</code> to determine your app’s node dependencies, and install them)</li>
+      <li><code class="highlighter-rouge">COPY</code> in the rest of your app’s source code from your host to your image filesystem.</li>
+    </ul>
+
+    <p>You can see that these are much the same steps you might have taken to set up and install your app on your host - but capturing these as a Dockerfile allows us to do the same thing inside a portable, isolated Docker image.</p>
+
+    <p>The steps above built up the filesystem of our image, but there’s one more line in our Dockerfile. The <code class="highlighter-rouge">CMD</code> directive is our first example of specifying some metadata in our image that describes how to run a container based off of this image. In this case, it’s saying that the containerized process that this image is meant to support is <code class="highlighter-rouge">npm start</code>.</p>
+
+    <p>What you see above is a good way to organize a simple Dockerfile; always start with a <code class="highlighter-rouge">FROM</code> command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few we see above; for a complete list, see the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/">Dockerfile reference</a>.</p>
+  </li>
+</ol>
+
+<h2 id="build-and-test-your-image">Build and Test Your Image</h2>
+
+<p>Now that we have some source code and a Dockerfile, it’s time to build our first image, and make sure the containers launched from it work as expected.</p>
+
+<blockquote>
+  <p><strong>Windows users</strong>: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking ‘Switch to Linux containers...’ if the option appears. Don’t worry - everything you’ll learn in this tutorial works the exact same way for Windows containers.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Make sure you’re in the directory <code class="highlighter-rouge">node-bulletin-board/bulletin-board-app</code> in a terminal or powershell, and build your bulletin board image:</p>
+
+    <pre><code class="language-script">docker image build -t bulletinboard:1.0 .
+</code></pre>
+
+    <p>You’ll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message <code class="highlighter-rouge">Successfully tagged bulletinboard:1.0</code>.</p>
+
+    <blockquote>
+      <p><strong>Windows Users:</strong> you may receive a message titled ‘SECURITY WARNING’ at this step, noting the read, write and execute permissions being set for files added to your image; we aren’t handling any sensitive information in this example, so feel free to disregard this warning in this example.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Start a container based on your new image:</p>
+
+    <pre><code class="language-script">docker container run --publish 8000:8080 --detach --name bb bulletinboard:1.0
+</code></pre>
+
+    <p>We used a couple of common flags here:</p>
+
+    <ul>
+      <li><code class="highlighter-rouge">--publish</code> asks Docker to forward traffic incoming on the host’s port 8000, to the container’s port 8080 (containers have their own private set of ports, so if we want to reach one from the network, we have to forward traffic to it in this way; otherwise, firewall rules will prevent all network traffic from reaching your container, as a default security posture).</li>
+      <li><code class="highlighter-rouge">--detach</code> asks Docker to run this container in the background.</li>
+      <li><code class="highlighter-rouge">--name</code> lets us specify a name with which we can refer to our container in subsequent commands, in this case <code class="highlighter-rouge">bb</code>.</li>
+    </ul>
+
+    <p>Also notice, we didn’t specify what process we wanted our container to run. We didn’t have to, since we used the <code class="highlighter-rouge">CMD</code> directive when building our Dockerfile; thanks to this, Docker knows to automatically run the process <code class="highlighter-rouge">npm start</code> inside our container when it starts up.</p>
+  </li>
+  <li>
+    <p>Visit your application in a browser at <code class="highlighter-rouge">localhost:8000</code>. You should see your bulletin board application up and running. At this step, we would normally do everything we could to ensure our container works the way we expected; now would be the time to run unit tests, for example.</p>
+  </li>
+  <li>
+    <p>Once you’re satisfied that your bulletin board container works correctly, delete it:</p>
+
+    <pre><code class="language-script">docker container rm --force bb
+</code></pre>
+  </li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>At this point, we’ve performed a simple containerization of an application, and confirmed that our app runs successfully in its container. The next step will be to write the Kubernetes yaml that describes how to run and manage these containers on Kubernetes which we’ll study in Part 3 of this tutorial, or to write the stack file that will let us do the same on Docker Swarm, which we discuss in Part 4.</p>
+
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/" class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%">On to Part 3 &gt;&gt;</a></p>
+
+<h2 id="cli-references">CLI References</h2>
+
+<p>Further documentation for all CLI commands used in this article are available here:</p>
 
 <ul>
-  <li>スタック</li>
-  <li>サービス</li>
-  <li><strong>コンテナー</strong> (いまここにいます)</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/image/">docker image *</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/container/">docker container *</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/">Dockerfile reference</a></li>
 </ul>
-
-<h2 id="your-new-development-environment">新しい開発環境</h2>
-
-<p>Python アプリケーションを書き始めるにあたり、自分のマシン上に Python ランタイムをインストールするのが、これまでは一番初めの仕事でした。しかし、サーバー上でもアプリケーションが期待するとおりに問題なく動作するには、マシンと同じ環境を作成しなくてはいけません。</p>
-
-<p>Docker であれば、移動可能な Python ランタイムをイメージ内に収容しているため、インストールは不要です。
-そして、ベース Python イメージにはアプリのコードも一緒に構築できますし、アプリを確実に動かすための依存関係やランタイムもすべて運べます。</p>
-
-<p>移動可能なイメージは <code class="highlighter-rouge">Dockerfile</code> と呼ばれるファイルにより定義します。</p>
-
-<h2 id="define-a-container-with-Dockerfile"><code class="highlighter-rouge">Dockerfile</code> によるコンテナー定義</h2>
-
-<p><code class="highlighter-rouge">Dockerfile</code> では、コンテナー内の環境で何をするかを定義します。
-ネットワークインターフェースとディスクドライバーのようなリソースは、システム上の他の環境からは隔離された環境内に仮想化されています。
-このようなリソースに接続するには、ポートを外の世界にマッピング（割り当て）する必要がありますし、どのファイルを環境に「複製」（copy in）するか指定する必要もあります。
-しかしながら、これらの作業を <code class="highlighter-rouge">Dockerfile</code> における構築時の定義で済ませておけば、どこで実行しても同じ挙動となります。</p>
-
-<h3 id="dockerfile"><code class="highlighter-rouge">Dockerfile</code></h3>
-
-<p>空ディレクトリを作成します。
-新しいディレクトリ内にディレクトリを変更（<code class="highlighter-rouge">cd</code>）し、<code class="highlighter-rouge">Dockerfile</code> という名前のファイルを作成し、以降の内容をファイルにコピー＆ペーストし、保存します。
-なお、Dockerfile のコメントは、各命令文に対する説明です。</p>
-
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 公式 Python ランタイムを親イメージとして使用</span>
-<span class="k">FROM</span><span class="s"> python:2.7-slim</span>
-
-<span class="c"># 作業ディレクトリを /app に設定</span>
-<span class="k">WORKDIR</span><span class="s"> /app</span>
-
-<span class="c"># 現在のディレクトリの内容を、コンテナー内の /app にコピー</span>
-<span class="k">COPY</span><span class="s"> . /app</span>
-
-<span class="c"># requirements.txt で指定された必要なパッケージをすべてインストール</span>
-<span class="k">RUN </span>pip install <span class="nt">--trusted-host</span> pypi.python.org <span class="nt">-r</span> requirements.txt
-
-<span class="c"># ポート 80 番をコンテナーの外の世界でも利用可能に</span>
-<span class="k">EXPOSE</span><span class="s"> 80</span>
-
-<span class="c"># 環境変数の定義</span>
-<span class="k">ENV</span><span class="s"> NAME World</span>
-
-<span class="c"># コンテナー起動時に app.py を実行</span>
-<span class="k">CMD</span><span class="s"> ["python", "app.py"]</span>
-</code></pre></div></div>
-
-<p>この <code class="highlighter-rouge">Dockerfile</code> は、<code class="highlighter-rouge">app.py</code> と <code class="highlighter-rouge">requirements.txt</code> といった、まだ作成していないファイルを参照しています。
-次はこれらを作りましょう。</p>
-
-<h2 id="the-app-itself">アプリそのもの</h2>
-
-<p>さらに 2 つのファイルを作成します。
-<code class="highlighter-rouge">requirements.txt</code> と <code class="highlighter-rouge">app.py</code> です。
-これらを <code class="highlighter-rouge">Dockerfile</code> と同じフォルダに入れます。
-アプリは見てのとおり、極めて単純になります。
-先ほどの <code class="highlighter-rouge">Dockerfile</code> でイメージの構築時、 <code class="highlighter-rouge">Dockerfile</code> の <code class="highlighter-rouge">COPY</code> 命令で <code class="highlighter-rouge">app.py</code> と <code class="highlighter-rouge">requirements.txt</code> をイメージの中に組み込みます。</p>
-
-<h3 id="requirementstxt"><code class="highlighter-rouge">requirements.txt</code></h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flask
-Redis
-</code></pre></div></div>
-
-<h3 id="apppy"><code class="highlighter-rouge">app.py</code></h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">redis</span> <span class="kn">import</span> <span class="n">Redis</span><span class="p">,</span> <span class="n">RedisError</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">socket</span>
-
-<span class="c"># Redis に接続</span>
-<span class="n">redis</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">"redis"</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">socket_connect_timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">visits</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s">"counter"</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">RedisError</span><span class="p">:</span>
-        <span class="n">visits</span> <span class="o">=</span> <span class="s">"&lt;i&gt;cannot connect to Redis, counter disabled&lt;/i&gt;"</span>
-
-    <span class="n">html</span> <span class="o">=</span> <span class="s">"&lt;h3&gt;Hello {name}!&lt;/h3&gt;"</span> \
-           <span class="s">"&lt;b&gt;Hostname:&lt;/b&gt; {hostname}&lt;br/&gt;"</span> \
-           <span class="s">"&lt;b&gt;Visits:&lt;/b&gt; {visits}"</span>
-    <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"NAME"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">),</span> <span class="n">hostname</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">(),</span> <span class="n">visits</span><span class="o">=</span><span class="n">visits</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">'0.0.0.0'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>先ほどの <code class="highlighter-rouge">pip install -r requirements.txt</code> で Python 用の Flask と Redis ライブラリをインストールします。
-そして、アプリは環境変数 <code class="highlighter-rouge">NAME</code> を表示し、また <code class="highlighter-rouge">socket.gethostname()</code> を呼び出した結果も出力します。
-しかしながら、 Redis は実行できないため（Python ライブラリをインストールしただけであり、 Redis 自身は入っていません）、実行を試みても失敗し、エラーメッセージを表示するでしょう。</p>
-
-<blockquote>
-  <p><strong>メモ</strong>: コンテナー内でホスト名の取得を試みると、コンテナー ID を返します。
-コンテナー ID は実行バイナリにおけるプロセス ID のようなものです。</p>
-</blockquote>
-
-<p>以上です！
-システム上に Python や <code class="highlighter-rouge">requirements.txt</code> に書かれているどれもが不要であり、それどころか、システム上にイメージの構築や実行も不要なのです。
-一見しますと環境に Python と Flask をインストールしていませんが、すでに持っているのです。</p>
-
-<h2 id="build-the-app">アプリの構築</h2>
-
-<p>アプリを構築する準備が整いました。
-まだ、新しく作成したディレクトリのトップレベルにいるのを確認します。
-ここでは <code class="highlighter-rouge">ls</code> は次のようになるでしょう。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
-</span>Dockerfile		app.py			requirements.txt
-</code></pre></div></div>
-
-<p>次は構築コマンドを実行します。
-これは Docker イメージを作成します。
-イメージには分かりやすい名前として <code class="highlighter-rouge">--tag</code> オプションによりタグを指定します。
-短いオプションとして <code class="highlighter-rouge">-t</code> を使っても構いません。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span><span class="o">=</span>friendlyhello <span class="nb">.</span>
-</code></pre></div></div>
-
-<p>構築したイメージはどこにあるのでしょうか？
-マシン上のローカルにある Docker イメージレジストリの中です。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image <span class="nb">ls
-
-</span>REPOSITORY            TAG                 IMAGE ID
-friendlyhello         latest              326387cea398
-
-</code></pre></div></div>
-
-<p>タグ名がデフォルトの <code class="highlighter-rouge">latest</code> となったことに注意してください。
-タグオプションの適切な文法は <code class="highlighter-rouge">--tag=friendlyhello:v0.0.1</code> というものです。</p>
-
-<blockquote>
-  <p>Linux ユーザー向けのトラブルシューティング</p>
-
-  <p><em>Proxy サーバー設定</em></p>
-
-  <p>プロキシーサーバーが稼動していると、ウェブアプリへの接続がブロックされることがあります。
-プロキシーサーバーを動かしているなら、Dockerfile における <code class="highlighter-rouge">RUN pip</code> の記述行より前に、以下の記述を追加してください。
-これは <code class="highlighter-rouge">ENV</code> コマンドを使って、プロキシーサーバーのホストとポートを指定するものです。</p>
-
-  <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># プロキシーサーバー設定、host:port 部分は各自のサーバー向けに置き換える
-</span><span class="n">ENV</span> <span class="n">http_proxy</span> <span class="n">host</span>:<span class="n">port</span>
-<span class="n">ENV</span> <span class="n">https_proxy</span> <span class="n">host</span>:<span class="n">port</span>
-</code></pre></div>  </div>
-
-  <p><em>DNS セッティング</em></p>
-
-  <p>DNS 設定に誤りがあると <code class="highlighter-rouge">pip</code> において問題が発生することがあります。
-<code class="highlighter-rouge">pip</code> を正しく動作させるためには、DNS サーバーアドレスを正しく設定する必要があります。
-Docker デーモンの DNS 設定を変更することになります。
-設定ファイル <code class="highlighter-rouge">/etc/docker/daemon.json</code> を編集（または新規生成）し、以下のように <code class="highlighter-rouge">dns</code> キーを加えます。</p>
-
-  <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"dns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"your_dns_address"</span><span class="p">,</span><span class="w"> </span><span class="s2">"8.8.8.8"</span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>  </div>
-
-  <p>上の例においてリストの 1 つめは DNS サーバーのアドレスです。
-また 2 つめは Google の DNS サーバーのアドレスであり、1 つめが利用できないときに利用されます。</p>
-
-  <p>設定を有効にするには <code class="highlighter-rouge">daemon.json</code> を保存し、docker サービスを再起動します。</p>
-
-  <p><code class="highlighter-rouge">sudo service docker restart</code></p>
-
-  <p>設定ができたら、再度 <code class="highlighter-rouge">build</code> コマンドを実行します。</p>
-
-  <p><em>MTU 設定</em></p>
-
-  <p>デフォルトブリッジネットワーク上の MTU（デフォルトは 1500）がホストの外部ネットワークにおける MTU を越えている場合には <code class="highlighter-rouge">pip</code> が失敗します。
-この場合は Docker ブリッジネットワークの MTU の値をホストに合わせるようにしてください。
-これは設定ファイル <code class="highlighter-rouge">/etc/docker/daemon.json</code> を編集（または新規生成）して、キー項目 <code class="highlighter-rouge">mtu</code> を以下のように設定します。</p>
-
-  <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"mtu"</span><span class="p">:</span><span class="w"> </span><span class="mi">1450</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>  </div>
-  <p>処理を進めるには、まずこの <code class="highlighter-rouge">daemon.json</code> を保存した上で Docker サービスを再起動します。</p>
-
-  <p><code class="highlighter-rouge">sudo systemctl restart docker</code></p>
-
-  <p>そしてもう一度 <code class="highlighter-rouge">build</code> コマンドを実行してください。</p>
-</blockquote>
-
-<h2 id="run-the-app">アプリの実行</h2>
-
-<p>アプリの実行にあたり、マシン側のポート 4000 をコンテナーの公開ポート 80 に割り当てるには <code class="highlighter-rouge">-p</code> を使います。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-p</span> 4000:80 friendlyhello
-</code></pre></div></div>
-
-<p>Python がアプリに提供するのは <code class="highlighter-rouge">http://0.0.0.0:80</code> であることに注意して下さい。
-しかしこれはコンテナー内で表示されるメッセージであり、コンテナー内からはコンテナーのポート 80 番からポート 4000 への割り当ては分かりません。
-適切な URL は <code class="highlighter-rouge">http://localhost:4000</code> です。</p>
-
-<p>ウェブブラウザーで URL を開いて、出力内容がウェブページに表示されていることを確認してください。</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/images/app-in-browser.png" alt="Hello World in browser" /></p>
-
-<blockquote>
-  <p><strong>メモ</strong>: Windows 7 上でDocker Toolbox を利用している場合は、<code class="highlighter-rouge">localhost</code> ではなく Docker Machine の IP アドレスを利用してください。
-たとえば http://192.168.99.100:4000/ といった具合です。
-IP アドレスを調べるには <code class="highlighter-rouge">docker-machine ip</code> コマンドを実行します。</p>
-</blockquote>
-
-<p>シェル上で <code class="highlighter-rouge">curl</code> コマンドを実行しても、同じ内容を表示します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:4000
-
-&lt;h3&gt;Hello World!&lt;/h3&gt;&lt;b&gt;Hostname:&lt;/b&gt; 8fc990912a14&lt;br/&gt;&lt;b&gt;Visits:&lt;/b&gt; &lt;i&gt;cannot connect to Redis, counter disabled&lt;/i&gt;
-</code></pre></div></div>
-
-<p>このポート <code class="highlighter-rouge">4000:80</code> の再割り当ては、<code class="highlighter-rouge">Dockerfile</code>の <code class="highlighter-rouge">EXPOSE</code> での指定とは異なるポートを指定できるデモです。
-ここでは、<code class="highlighter-rouge">docker run -p</code> で何を公開（<code class="highlighter-rouge">publish</code>）するかを指定しました。
-後の手順では、ホストのポート 80 をコンテナー内のポート 80 に割り当て、<code class="highlighter-rouge">http://localhost</code> で接続します。</p>
-
-<p>ターミナル上で <code class="highlighter-rouge">CTRL+C</code> を実行し、終了します。</p>
-
-<blockquote>
-  <p>Windows においてはコンテナーを明示的に停止</p>
-
-  <p>Windows システムでは <code class="highlighter-rouge">CTRL+C</code> を入力してもコンテナーを止めることはできません。
-このため、まず <code class="highlighter-rouge">CTRL+C</code> を入力してプロンプトに戻り（あるいは別のシェルを起動して）、
-<code class="highlighter-rouge">docker container ls</code> を入力して実行中のコンテナーを確認します。
-そして <code class="highlighter-rouge">docker container stop &lt;コンテナー名 または コンテナー ID&gt;</code> を入力してコンテナーを停止させます。
-こうしておかないと、次にコンテナーを再起動しようとしたときに、デーモンがエラーを出力することになります。</p>
-</blockquote>
-
-<p>次はアプリをバックグラウンドで起動するため、デタッチモード（detached mode）で実行します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">-p</span> 4000:80 friendlyhello
-</code></pre></div></div>
-
-<p>コマンドを実行しますと、アプリの長いコンテナー ID を表示し、ターミナルに戻ります。
-コンテナーはバックグラウンドで実行中です。
-なお、<code class="highlighter-rouge">docker container ls</code> で短縮コンテナー ID を確認できます（コマンド実行時は、長いコンテナー ID と短縮 ID のどちらも利用できます）。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container <span class="nb">ls
-</span>CONTAINER ID        IMAGE               COMMAND             CREATED
-1fa4ab2cf395        friendlyhello       <span class="s2">"python app.py"</span>     28 seconds ago
-</code></pre></div></div>
-
-<p>このように <code class="highlighter-rouge">http://localhost:4000</code> で表示したものと同じコンテナー ID （<code class="highlighter-rouge">CONTAINER ID</code>）が表示されます。</p>
-
-<p>あとは、プロセスを停止するために <code class="highlighter-rouge">docker stop</code> コマンドでコンテナー ID を次のように指定します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container stop 1fa4ab2cf395
-</code></pre></div></div>
-
-<h2 id="share-your-image">イメージの共有</h2>
-
-<p>生成したばかりのイメージの可搬性を示すため、このイメージを別のところにアップロードしてみます。
-なお、コンテナーを本番環境へデプロイするには、レジストリへ送信する方法を知っておく必要があります。</p>
-
-<p>レジストリというものはレポジトリの集まりのことです。
-そのレポジトリとはイメージの集まりです。
-GitHub リポジトリのようなものです。
-ただしコードのビルドがすでに済んでいるというところが GitHub とは違います。
-レジストリのアカウントからはレポジトリをたくさん作ることができます。
-<code class="highlighter-rouge">docker</code> CLI はデフォルトとして Docker 公開リポジトリを利用します。</p>
-
-<blockquote>
-  <p><strong>メモ</strong>: Docker 公開リポジトリをここで利用するのは、これが無償であり事前に設定されているものだからです。
-ただし公開リポジトリは他にもあるので自由に選んでください。
-あるいは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/datacenter/dtr/2.2/guides/">Docker Trusted Registry</a> を利用すれば、独自のプライベートレジストリを設定することもできます。</p>
-</blockquote>
-
-<h3 id="log-in-with-your-docker-id">Docker ID でログイン</h3>
-
-<p>Docker アカウントを持っていない方は、<a href="https://hub.docker.com" target="_blank" class="_">hub.docker.com</a>
-にサインアップして取得してください。
-ユーザー名は控えておいてください。</p>
-
-<p>ローカルマシンから Docker の公開レジストリへログインします。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker login
-</code></pre></div></div>
-
-<h3 id="tag-the-image">イメージへのタグづけ</h3>
-
-<p>レジストリ内のレポジトリをローカルイメージに関連づけるには <code class="highlighter-rouge">username/repository:tag</code> という書き方をします。
-タグ（tag）はオプションですが、指定することが推奨されます。
-というのも、これによってレジストリが Docker イメージに対してバージョンを与える方法となるからです。
-状況に合わせてレポジトリとタグには、たとえば <code class="highlighter-rouge">get-started:part2</code> といったように意味を持つ名前をつけてください。
-これによりそのイメージが <code class="highlighter-rouge">get-started</code> レポジトリ内に <code class="highlighter-rouge">part2</code> というタグがつけられた上で保存されます。</p>
-
-<p>そこでイメージにタグをつけます。
-<code class="highlighter-rouge">docker tag image</code> の実行時にユーザー名、リポジトリ名、タグ名を指定します。
-イメージは指定した名前でアップロードされます。
-このコマンドの文法は以下のとおりです。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag image username/repository:tag
-</code></pre></div></div>
-
-<p>例：</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag friendlyhello gordon/get-started:part2
-</code></pre></div></div>
-
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/image_ls/">docker image ls</a> を実行して、タグづけした新しいイメージを確認してみます。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image <span class="nb">ls
-
-</span>REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
-friendlyhello            latest              d9e555c53008        3 minutes ago       195MB
-gordon/get-started         part2               d9e555c53008        3 minutes ago       195MB
-python                   2.7-slim            1c7128a655f6        5 days ago          183MB
-...
-</code></pre></div></div>
-
-<h3 id="publish-the-image">イメージの公開</h3>
-
-<p>タグづけされたイメージをリポジトリにアップロードします。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push username/repository:tag
-</code></pre></div></div>
-
-<p>上のコマンドが成功すれば、アップロードした結果が公開され利用可能となります。
-<a href="https://hub.docker.com/">Docker Hub</a> にログインすれば、新しいイメージがアップロードされているのを確認できます。
-これは pull コマンドで取得可能です。</p>
-
-<h3 id="pull-and-run-the-image-from-the-remote-repository">リモートリポジトリからのイメージの取得と実行</h3>
-
-<p>ここからは <code class="highlighter-rouge">docker run</code> を利用していきます。
-どのマシン上であっても、アプリの実行にはこのコマンドを使います。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-p</span> 4000:80 username/repository:tag
-</code></pre></div></div>
-
-<p>ローカルマシン上にそのイメージがない場合、Docker はリポジトリからイメージを取得します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-p</span> 4000:80 gordon/get-started:part2
-Unable to find image <span class="s1">'gordon/get-started:part2'</span> locally
-part2: Pulling from gordon/get-started
-10a267c67f42: Already exists
-f68a39a6a5e4: Already exists
-9beaffc0cf19: Already exists
-3c1fe835fb6b: Already exists
-4c9f1fa8fcb8: Already exists
-ee7d8f576a14: Already exists
-fbccdcced46e: Already exists
-Digest: sha256:0601c866aab2adcc6498200efd0f754037e909e5fd42069adeff72d1e2439068
-Status: Downloaded newer image <span class="k">for </span>gordon/get-started:part2
- <span class="k">*</span> Running on http://0.0.0.0:80/ <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">docker run</code> をどこで実行してもイメージが取得できます。
-しかも <code class="highlighter-rouge">requirements.txt</code> に書かれた Python や依存パッケージもすべて含まれていて、アプリコードも実行できます。
-すっきりとまとまったこのパッケージはどこにでも持ち運びできて、
-Docker を実行するからといって、ホストマシンには何もインストールする必要がないのです。</p>
-
-<h2 id="conclusion-of-part-two">2 部のまとめ</h2>
-
-<p>このページの内容はここまでです。
-次はアプリケーションをスケールアップして、コンテナーを<strong>サービス</strong>として起動することを学びます。</p>
-
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/" class="button outline-btn">3 部へ &gt;&gt;</a></p>
-
-<p>あるいは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/machine/examples/ocean/" target="_blank" class="_">DigitalOcean を使って自マシン内でコンテナーを起動する</a> 方法もあります。</p>
-
-<h2 id="recap-and-cheat-sheet-optional">まとめと早見表（おまけ）</h2>
-
-<p><a href="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g">このページで扱った端末操作の録画</a> がこちらです。</p>
-
-<script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" speed="2" async=""></script>
-
-<p>このページで扱った基本的な Docker コマンドの一覧を示します。
-またこの先に進むにあたって必要となりそうな関連コマンドも示します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> friendlyhello <span class="nb">.</span>                 <span class="c"># Dockerfileのディレクトリにてイメージ生成</span>
-docker run <span class="nt">-p</span> 4000:80 friendlyhello  <span class="c"># "friendlyname" の実行; ポート 4000 を 80 に割り当て</span>
-docker run <span class="nt">-d</span> <span class="nt">-p</span> 4000:80 friendlyhello                        <span class="c"># 同上、ただしデタッチモード</span>
-docker container <span class="nb">ls</span>                                         <span class="c"># 実行中のコンテナー一覧の表示</span>
-docker container <span class="nb">ls</span> <span class="nt">-a</span>                      <span class="c"># 実行していないものを含めコンテナー一覧の表示</span>
-docker container stop &lt;<span class="nb">hash</span><span class="o">&gt;</span>                                  <span class="c"># 指定コンテナーを適切に停止</span>
-docker container <span class="nb">kill</span> &lt;<span class="nb">hash</span><span class="o">&gt;</span>                          <span class="c"># 指定コンテナーを強制シャットダウン</span>
-docker container rm &lt;<span class="nb">hash</span><span class="o">&gt;</span>                                <span class="c"># マシンから指定コンテナーを削除</span>
-docker container rm <span class="k">$(</span>docker container <span class="nb">ls</span> <span class="nt">-a</span> <span class="nt">-q</span><span class="k">)</span>                  <span class="c"># コンテナーをすべて削除</span>
-docker image <span class="nb">ls</span> <span class="nt">-a</span>                                    <span class="c"># マシン上のイメージすべての一覧表示</span>
-docker image rm &lt;image id&gt;                                  <span class="c"># マシン上の指定イメージを削除</span>
-docker image rm <span class="k">$(</span>docker image <span class="nb">ls</span> <span class="nt">-a</span> <span class="nt">-q</span><span class="k">)</span>                <span class="c"># マシン上からイメージすべてを削除</span>
-docker login                                         <span class="c"># CLIセッションによりDockerへログイン</span>
-docker tag &lt;image&gt; username/repository:tag   <span class="c"># レジストリアップロードにて&lt;image&gt;にタグづけ</span>
-docker push username/repository:tag             <span class="c"># タグつきイメージをレジストリアップロード</span>
-docker run username/repository:tag                            <span class="c"># レジストリからイメージ実行</span>
-</code></pre></div></div>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=containers">containers</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=python">python</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=code">code</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=coding">coding</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=build">build</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=push">push</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=run">run</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=containers">containers</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=images">images</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=dockerfiles">dockerfiles</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=node">node</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=code">code</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=coding">coding</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=build">build</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=push">push</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=run">run</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -648,7 +358,7 @@ docker run username/repository:tag                            <span class="c"># 
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "get-started/part2.md",
-										"title": "はじめよう 2 部: コンテナー",
+										"title": "はじめよう 2 部: アプリのコンテナー化",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/get-started/part2.md"
 									};
 									(function(d, c, j) {
@@ -710,30 +420,10 @@ docker run username/repository:tag                            <span class="c"># 
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#prerequisites" class="nomunge">前提条件</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#introduction" class="nomunge">はじめに</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#your-new-development-environment" class="nomunge">新しい開発環境</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#define-a-container-with-Dockerfile" class="nomunge">Dockerfile によるコンテナー定義</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#dockerfile" class="nomunge">Dockerfile</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#the-app-itself" class="nomunge">アプリそのもの</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#requirementstxt" class="nomunge">requirements.txt</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#apppy" class="nomunge">app.py</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#build-the-app" class="nomunge">アプリの構築</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#run-the-app" class="nomunge">アプリの実行</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#share-your-image" class="nomunge">イメージの共有</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#log-in-with-your-docker-id" class="nomunge">Docker ID でログイン</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#tag-the-image" class="nomunge">イメージへのタグづけ</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#publish-the-image" class="nomunge">イメージの公開</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#pull-and-run-the-image-from-the-remote-repository" class="nomunge">リモートリポジトリからのイメージの取得と実行</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#conclusion-of-part-two" class="nomunge">2 部のまとめ</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#recap-and-cheat-sheet-optional" class="nomunge">まとめと早見表（おまけ）</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#setting-up" class="nomunge">Setting Up</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#build-and-test-your-image" class="nomunge">Build and Test Your Image</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#conclusion" class="nomunge">Conclusion</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#cli-references" class="nomunge">CLI References</a></li>
 </ul>
 
 
