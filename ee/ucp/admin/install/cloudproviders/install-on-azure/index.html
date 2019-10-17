@@ -1,4 +1,4 @@
-<!-- Page generated 2019-10-05 17:07:01 +0900 -->
+<!-- Page generated 2019-10-17 18:00:24 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -91,7 +91,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-05T17:07:01+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-17T18:00:24+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -101,7 +101,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure, the Calico CNI..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-10-05T17:07:01+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-17T18:00:24+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes">
@@ -196,7 +196,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    10 分
+    11 分
   
 </span>
 
@@ -255,6 +255,19 @@ to communicate with the Azure API. The Service Principal ID and Secret Key are
 needed as part of the UCP prerequisites. If you are using a separate Resource
 Group for the networking components, the same Service Principal will need
 <code class="highlighter-rouge">Network Contributor</code> access to this Resource Group.</li>
+  <li>Kubernetes pods integrate into the underlying Azure networking stack, from
+an IPAM and routing perspective with the Azure CNI IPAM module. Therefore
+Azure Network Security Groups (NSG) impact pod to pod communication. End users
+may expose containerized services on a range of underlying ports, resulting in
+a manual process to open an NSG port every time a new containerized service is
+deployed on to the platform. This would only affect workloads deployed on to
+the Kubernetes orchestrator. It is advisable to have an “open” NSG between
+all IPs on the Azure Subnet passed into UCP at <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#install-ucp">install time</a>.
+To limit exposure, this Azure subnet should be locked down to only be used
+for Container Host VMs and Kubernetes Pods.  Additionally, end users can
+leverage <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">Kubernetes Network
+Policies</a>
+to provide micro segmentation for containerized applications and services.</li>
 </ul>
 
 <p>UCP requires the following information for the installation:</p>

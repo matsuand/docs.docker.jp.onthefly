@@ -884,7 +884,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/cli/",
-"title":"Docker コマンドラインの利用",
+"title":"Use the Docker command line",
 "description":"Docker's CLI command description and usage",
 "keywords":"Docker, Docker documentation, CLI, command line"
 }
@@ -1325,7 +1325,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/security/trust/content_trust/",
-"title":"Docker Content Trust",
+"title":"Content trust in Docker",
 "description":"Enabling content trust in Docker",
 "keywords":"content, trust, security, docker, documentation"
 }
@@ -4069,7 +4069,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part5/",
-"title":"Get Started, Part 5: Sharing Images on Docker Hub",
+"title":"はじめよう 5部: Docker Hub でのイメージ共有",
 "description":"Learn how to share images on Docker Hub.",
 "keywords":"docker hub, push, images"
 }

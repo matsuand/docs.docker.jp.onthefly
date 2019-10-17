@@ -12,7 +12,7 @@ var glossary = [
 
 {
 "term": "base image",
-"def": "<p>An image that has no parent is a <strong>base image</strong>.</p>\n"
+"def": "<p>A <strong>base image</strong> has no parent image specified in its Dockerfile. It is created\nusing a Dockerfile with the <code class=\"highlighter-rouge\">FROM scratch</code> directive.</p>\n"
 },
 
 {
@@ -162,7 +162,7 @@ var glossary = [
 
 {
 "term": "parent image",
-"def": "<p>An image’s <strong>parent image</strong> is the image designated in the <code class=\"highlighter-rouge\">FROM</code> directive\nin the image’s Dockerfile. All subsequent commands are applied to this parent\nimage. A Dockerfile with no <code class=\"highlighter-rouge\">FROM</code> directive has no parent image, and is called\na <strong>base image</strong>.</p>\n"
+"def": "<p>An image’s <strong>parent image</strong> is the image designated in the <code class=\"highlighter-rouge\">FROM</code> directive\nin the image’s Dockerfile. All subsequent commands are based on this parent\nimage. A Dockerfile with the <code class=\"highlighter-rouge\">FROM scratch</code> directive uses no parent image, and creates\na <strong>base image</strong>.</p>\n"
 },
 
 {
@@ -252,7 +252,7 @@ var glossary = [
 
 {
 "term": "volume",
-"def": "<p>A volume is a specially-designated directory within one or more containers\nthat bypasses the Union File System. Volumes are designed to persist data,\nindependent of the container’s life cycle. Docker therefore never automatically\ndelete volumes when you remove a container, nor will it “garbage collect”\nvolumes that are no longer referenced by a container.\n<em>Also known as: data volume</em></p>\n\n<p>There are three types of volumes: <em>host, anonymous, and named</em>:</p>\n\n<ul>\n  <li>\n    <p>A <strong>host volume</strong> lives on the Docker host’s filesystem and can be accessed from within the container.</p>\n  </li>\n  <li>\n    <p>A <strong>named volume</strong> is a volume which Docker manages where on disk the volume is created,\nbut it is given a name.</p>\n  </li>\n  <li>\n    <p>An <strong>anonymous volume</strong> is similar to a named volume, however, it can be difficult, to refer to\nthe same volume over time when it is an anonymous volumes. Docker handle where the files are stored.</p>\n  </li>\n</ul>\n"
+"def": "<p>A volume is a specially-designated directory within one or more containers\nthat bypasses the Union File System. Volumes are designed to persist data,\nindependent of the container’s life cycle. Docker therefore never automatically\ndeletes volumes when you remove a container, nor will it “garbage collect”\nvolumes that are no longer referenced by a container.\n<em>Also known as: data volume</em></p>\n\n<p>There are three types of volumes: <em>host, anonymous, and named</em>:</p>\n\n<ul>\n  <li>\n    <p>A <strong>host volume</strong> lives on the Docker host’s filesystem and can be accessed from within the container.</p>\n  </li>\n  <li>\n    <p>A <strong>named volume</strong> is a volume which Docker manages where on disk the volume is created,\nbut it is given a name.</p>\n  </li>\n  <li>\n    <p>An <strong>anonymous volume</strong> is similar to a named volume, however, it can be difficult, to refer to\nthe same volume over time when it is an anonymous volumes. Docker handle where the files are stored.</p>\n  </li>\n</ul>\n"
 },
 
 {
