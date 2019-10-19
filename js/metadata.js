@@ -1401,6 +1401,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/convert-account/",
+"title":"Convert an account into an organization",
+"description":"Convert your Docker Hub user account into an organization",
+"keywords":"docker hub, hub, organization"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/examples/couchdb_data_volumes/",
 "title":"Dockerize a CouchDB service",
 "description":"Sharing data between 2 couchdb databases",
@@ -4075,13 +4082,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/get-started/part6/",
-"title":"はじめよう 6部: アプリのデプロイ",
-"description":"Docker Engine - Community または EE を使ってアプリを本番環境にデプロイする。",
-"keywords":"deploy, production, datacenter, cloud, aws, azure, provider, admin, enterprise"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/compose/reference/pause/",
 "title":"docker-compose pause",
 "description":"Pauses running containers for a service.",
@@ -4653,6 +4653,13 @@ var pages = [
 "title":"Runtime options with Memory, CPUs, and GPUs",
 "description":"Specify the runtime options for a container",
 "keywords":"docker, daemon, configuration, runtime"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/get-started/resources/",
+"title":"Educational resources",
+"description":"Get started resources learning docker",
+"keywords":"get started, setup, orientation, quickstart, intro, concepts, kubernetes, docker desktop"
 }
 ,
 {
