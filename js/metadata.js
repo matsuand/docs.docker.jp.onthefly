@@ -1660,6 +1660,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/2fa/disable-2fa/",
+"title":"Disable two-factor authentication on Docker Hub",
+"description":"Disable two-factor authentication on Docker Hub",
+"keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/admin/disaster-recovery/",
 "title":"Disaster recovery",
 "description":"Learn disaster recovery procedures for Docker Enterprise",
@@ -2752,6 +2759,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/2fa/",
+"title":"Enable two-factor authentication for Docker Hub",
+"description":"Enabling two-factor authentication on Docker Hub",
+"keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-hub/publish/",
 "title":"Publisher & Certified Content Overview",
 "description":"Docker Hub programs and policies for publishers",
@@ -3774,6 +3788,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/2fa/new-recovery-code/",
+"title":"Generate a new recovery code",
+"description":"Generate a new 2fa recovery code",
+"keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/admin/configure/external-storage/nfs/",
 "title":"Use NFS",
 "description":"Learn how to integrate Docker Trusted Registry with NFS",
@@ -4446,6 +4467,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/2fa/recover-hub-account/",
+"title":"Recover your Docker Hub account",
+"description":"Recover your Docker Hub account",
+"keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/redirects/",
 "title":"Implement application redirects",
 "description":"Learn how to implement redirects using swarm services and the layer 7 routing solution for UCP.",
@@ -4657,7 +4685,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/resources/",
-"title":"Educational resources",
+"title":"学習のための各種情報",
 "description":"Get started resources learning docker",
 "keywords":"get started, setup, orientation, quickstart, intro, concepts, kubernetes, docker desktop"
 }
