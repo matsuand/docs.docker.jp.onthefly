@@ -778,6 +778,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/docker-hub/cancel-downgrade/",
+"title":"Cancel or downgrade your plan",
+"description":"You can cancel or downgrade a private repository subscription through Docker Hub",
+"keywords":"cancel, downgrade, private repo, private repository, Docker Hub, Hub"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/ce-ee-node-activate/",
 "title":"CE-EE Node Activate",
 "description":"Engine",
@@ -1523,7 +1530,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/ucp/authorization/define-roles/",
 "title":"Define roles with authorized API operations",
 "description":"Learn how to create roles and set permissions in Docker Universal Control Plane.",
-"keywords":"rbac, authorization, authentication, users, teams, UCP"
+"keywords":"rbac, authorization, authentication, users, teams, UCP, swarm"
 }
 ,
 {
@@ -2214,7 +2221,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/glossary/",
-"title":"Docker 用語",
+"title":"用語",
 "description":"Docker に関して使われている用語集",
 "keywords":"glossary, docker, terms, definitions"
 }
@@ -6074,6 +6081,13 @@ var pages = [
 "title":"Manage repository webhooks via the web interface",
 "description":"Learn how to create, configure, and test repository webhooks for DTR using the web interface.",
 "keywords":"dtr, webhooks, ui, web interface, registry"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/storage/use-vsphere-volumes/",
+"title":"Configuring vSphere Volumes for Kubernetes",
+"description":"Learn how to add persistent storage to your Docker Enterprise clusters using vSphere Volumes.",
+"keywords":"Universal Control Plane, UCP, Docker Enterprise, Kubernetes, storage, volume"
 }
 ,
 {

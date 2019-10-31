@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-31 13:38:56 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,20 +83,20 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-31T13:38:56+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Define roles with authorized API operations"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="A role defines a set of API operations permitted against a resource set. You apply roles to users and teams by creating grants. Default roles You can define custom roles..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="A role defines a set of API operations permitted against a resource set. You apply roles to users and teams by creating grants. Some important rules regarding roles: Roles are..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-31T13:38:56+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="rbac, authorization, authentication, users, teams, UCP">
+	<meta name="keywords" content="rbac, authorization, authentication, users, teams, UCP, swarm">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -188,7 +188,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    4 分
   
 </span>
 
@@ -198,6 +198,16 @@
 You apply roles to users and teams by creating grants.</p>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/permissions-ucp.svg" alt="Diagram showing UCP permission levels" /></p>
+
+<blockquote>
+  <p><strong>Some important rules regarding roles</strong>:</p>
+  <ul>
+    <li>Roles are always enabled.</li>
+    <li>Roles can’t be edited. To edit a role, you must delete and recreate it.</li>
+    <li>Roles used within a grant can be deleted only after first deleting the grant.</li>
+    <li>Only administrators can create and delete roles.</li>
+  </ul>
+</blockquote>
 
 <h2 id="default-roles">Default roles</h2>
 
@@ -237,7 +247,7 @@ You apply roles to users and teams by creating grants.</p>
 <h2 id="create-a-custom-role-for-swarm">Create a custom role for Swarm</h2>
 
 <p>When creating custom roles to use with Swarm, the <strong>Roles</strong> page lists all default and custom roles applicable in the
-organization. To create custom roles for Kubernetes, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/configure-rbac-kube/">Configure native Kubernetes role-based access control</a>.</p>
+organization.</p>
 
 <p>You can give a role a global name, such as “Remove Images”, which might enable the
 <strong>Remove</strong> and <strong>Force Remove</strong> operations for images. You can apply a role with
@@ -246,23 +256,99 @@ the same name to different resource sets.</p>
 <ol>
   <li>Click <strong>Roles</strong> under <strong>User Management</strong>.</li>
   <li>Click <strong>Create Role</strong>.</li>
-  <li>Input the role name on the <strong>Details</strong> page.</li>
-  <li>Click <strong>Operations</strong>. All available API operations are displayed.</li>
+  <li>Enter the role name on the <strong>Details</strong> page.</li>
+  <li>Click <strong>Operations</strong>. All available API operations are displayed. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/define-roles.md#swarm-operations-roles">Swarm operations roles</a> for a description of the available API operations.</li>
   <li>Select the permitted operations per resource type.</li>
   <li>Click <strong>Create</strong>.</li>
 </ol>
 
 <p><img src="../images/custom-role-30.png" alt="" class="with-border" /></p>
 
-<blockquote>
-  <p><strong>Some important rules regarding roles</strong>:</p>
-  <ul>
-    <li>Roles are always enabled.</li>
-    <li>Roles can’t be edited. To edit a role, you must delete and recreate it.</li>
-    <li>Roles used within a grant can be deleted only after first deleting the grant.</li>
-    <li>Only administrators can create and delete roles.</li>
-  </ul>
-</blockquote>
+<h3 id="swarm-operations-roles">Swarm operations roles</h3>
+
+<p>This section describes the set of operations (calls) that can be executed to the Swarm resources. Be aware that each permission corresponds to a CLI command and enables the user to execute that command.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Config</td>
+      <td><code class="highlighter-rouge">docker config</code></td>
+      <td>Manage Docker configurations. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/config/#child-commands">child commands</a> for specific examples.</td>
+    </tr>
+    <tr>
+      <td>Container</td>
+      <td><code class="highlighter-rouge">docker container</code></td>
+      <td>Manage containers. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/container/#child-commands">child commands</a> for more information.</td>
+    </tr>
+    <tr>
+      <td>Container</td>
+      <td><code class="highlighter-rouge">docker container create</code></td>
+      <td>Create a new container. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/create/#extended-description">extended description</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/create/#examples">examples</a> for more information.</td>
+    </tr>
+    <tr>
+      <td>Container</td>
+      <td><code class="highlighter-rouge">docker create [OPTIONS] IMAGE [COMMAND] [ARG...]</code></td>
+      <td>Create new containers. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/create/#extended-description">extended description</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/create/#examples">examples</a> for more information.</td>
+    </tr>
+    <tr>
+      <td>Container</td>
+      <td><code class="highlighter-rouge">docker update [OPTIONS] CONTAINER [CONTAINER...]</code></td>
+      <td>Update configuration of one or more containers. Using this command can also prevent containers from consuming too many resources from their Docker host. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/update/#extended-description">extended description</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/update/#examples">examples</a> for more information.</td>
+    </tr>
+    <tr>
+      <td>Container</td>
+      <td><code class="highlighter-rouge">docker rm [OPTIONS] CONTAINER [CONTAINER...]</code></td>
+      <td>Remove one or more containers. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/rm/#options">options</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/rm/#examples">examples</a> for more information.</td>
+    </tr>
+    <tr>
+      <td>Image</td>
+      <td><code class="highlighter-rouge">docker image COMMAND</code></td>
+      <td>Manage images. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/image/#child-commands">child commands</a> for examples.</td>
+    </tr>
+    <tr>
+      <td>Image</td>
+      <td><code class="highlighter-rouge">docker image remove</code></td>
+      <td>Remove one or more images. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/image/#child-commands">child commands</a> for examples.</td>
+    </tr>
+    <tr>
+      <td>Network</td>
+      <td><code class="highlighter-rouge">docker network</code></td>
+      <td>Manage networks. You can use <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/network/#child-commands">child commands</a> to create, inspect, list, remove, prune, connect, and disconnect networks.</td>
+    </tr>
+    <tr>
+      <td>Node</td>
+      <td><code class="highlighter-rouge">docker node COMMAND</code></td>
+      <td>Manage Swarm nodes. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/node/#child-commands">child commands</a> for examples.</td>
+    </tr>
+    <tr>
+      <td>Secret</td>
+      <td><code class="highlighter-rouge">docker secret COMMAND</code></td>
+      <td>Manage Docker secrets. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/secret/#child-commands">child commands</a> for sample usage and options.</td>
+    </tr>
+    <tr>
+      <td>Service</td>
+      <td><code class="highlighter-rouge">docker service COMMAND</code></td>
+      <td>Manage services. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/service/#extended-description">child commands</a> for sample usage and options.</td>
+    </tr>
+    <tr>
+      <td>Volume</td>
+      <td><code class="highlighter-rouge">docker volume create [OPTIONS] [VOLUME]</code></td>
+      <td>Create a new volume that containers can consume and store data in. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/volume_create/#examples">examples</a> for more information.</td>
+    </tr>
+    <tr>
+      <td>Volume</td>
+      <td><code class="highlighter-rouge">docker volume rm [OPTIONS] VOLUME [VOLUME...]</code></td>
+      <td>Remove one or more volumes. Users cannot remove a volume that is in use by a container. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/volume_rm/#related-commands">related commands</a> for more information.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
@@ -270,13 +356,14 @@ the same name to different resource sets.</p>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/create-users-and-teams-manually/">Create and configure users and teams</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/group-resources/">Group and isolate cluster resources</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/authorization/grant-permissions/">Grant role-access to cluster resources</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/cli/">Use the Docker command line</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=rbac">rbac</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=authorization">authorization</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=authentication">authentication</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=users">users</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=teams">teams</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=UCP">UCP</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=rbac">rbac</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=authorization">authorization</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=authentication">authentication</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=users">users</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=teams">teams</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=UCP">UCP</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=swarm">swarm</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -367,7 +454,11 @@ the same name to different resource sets.</p>
 									
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/define-roles.md#default-roles" class="nomunge">Default roles</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/define-roles.md#create-a-custom-role-for-swarm" class="nomunge">Create a custom role for Swarm</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/define-roles.md#create-a-custom-role-for-swarm" class="nomunge">Create a custom role for Swarm</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/define-roles.md#swarm-operations-roles" class="nomunge">Swarm operations roles</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/define-roles.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
@@ -490,7 +581,6 @@ the same name to different resource sets.</p>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

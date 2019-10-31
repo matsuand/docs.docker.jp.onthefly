@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-10-26 18:15:42 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-26T18:15:42+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Trusted Registry allows you to create mirroring policies for a repository. When an image gets pushed to a repository and meets the mirroring criteria, DTR automatically pushes it to..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-10-26T18:15:42+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="registry, promotion, mirror">
@@ -192,7 +192,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
 
@@ -223,34 +223,58 @@ cluster.</p>
 
 <p>You need to have permissions to push to the destination repository in order to set up the mirroring policy.</p>
 
-<h2 id="configure-your-repository">Configure your repository</h2>
+<h2 id="configure-your-repository-connection">Configure your repository connection</h2>
 
 <p>Once you have <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/manage-images/">created the repository</a>, navigate to
-the repository page on the web interface, and select the
-<strong>Mirrors</strong> tab.</p>
+the repository page on the web interface, and select the <strong>Mirrors</strong> tab.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/push-mirror-2.png" alt="create integration" class="with-border" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/push-mirror-2.png" alt="create integration" /></p>
 
-<p>Click <strong>New mirror</strong>, and define where the image will be pushed if
-it meets the mirroring criteria. Make sure the account you use for the integration
-has permissions to write to the remote repository. Under <strong>Mirror direction</strong>, choose <strong>Push to remote registry</strong>.</p>
+<p>Click <strong>New mirror</strong> to define where the image will be pushed if it meets the mirroring criteria.</p>
 
-<p>In this example, the image gets pushed to the <code class="highlighter-rouge">qa/website</code> repository of a
+<p>Under <strong>Mirror direction</strong>, choose <strong>Push to remote registry</strong>. Specify the following details:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Registry type</td>
+      <td style="text-align: left">You can choose between <strong>Docker Trusted Registry</strong> and <strong>Docker Hub</strong>. If you choose DTR, enter your DTR URL. Otherwise, <strong>Docker Hub</strong> defaults to <code class="highlighter-rouge">https://index.docker.io</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Username and password or access token</td>
+      <td style="text-align: left">Your credentials in the remote repository you wish to push to. To use an access token instead of your password, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/user/access-tokens/">authentication token</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Repository</td>
+      <td style="text-align: left">Enter the <code class="highlighter-rouge">namespace</code> and the <code class="highlighter-rouge">repository_name</code> after the <code class="highlighter-rouge">/</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Show advanced settings</td>
+      <td style="text-align: left">Enter the TLS details for the remote repository or check <code class="highlighter-rouge">Skip TLS verification</code>. If the DTR remote repository is using self-signed TLS certificates or certificates signed by your own certificate authority, you also need to provide the public key certificate for that CA. You can retrieve the certificate by accessing <code class="highlighter-rouge">https://&lt;dtr-domain&gt;/ca</code>. “Remote certificate authority” is optional for a remote repository in Docker Hub.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Note: Make sure the account you use for the integration
+has permissions to write to the remote repository.</p>
+</blockquote>
+
+<p>Click <strong>Connect</strong> to test the integration.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/push-mirror-2.7.png" alt="Setting up a push mirroring policy" /></p>
+
+<p>In this example, the image gets pushed to the <code class="highlighter-rouge">qa/example</code> repository of a
 DTR deployment available at <code class="highlighter-rouge">qa-example.com</code> using a service account
-that was created just for mirroring images between repositories. Note that you may use a password or access token to log in to your remote registry.</p>
+that was created just for mirroring images between repositories.</p>
 
-<p>If the destination DTR deployment is using self-signed TLS certificates or
-certificates issued by your own certificate authority, click
-<strong>Show advanced settings</strong> to provide the CA certificate used by the
-DTR where the image will be pushed.</p>
-
-<p>You can get that CA certificate by accessing <code class="highlighter-rouge">https://&lt;destination-dtr&gt;/ca</code>.</p>
-
-<p>Once you’re done, click <strong>Connect</strong> to test the integration.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/push-mirror-3.png" alt="test connection" class="with-border" /></p>
-
-<p>DTR allows you to set your mirroring policy based on the following image attributes:</p>
+<p>Next, set your push triggers. DTR allows you to set your mirroring policy based on the following image attributes:</p>
 
 <table>
   <thead>
@@ -284,19 +308,19 @@ DTR where the image will be pushed.</p>
   </tbody>
 </table>
 
-<p>Finally you can choose to keep the image tag, or transform the tag into
+<p>You can choose to keep the image tag, or transform the tag into
 something more meaningful in the remote registry by using a tag template.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/push-mirror-4.png" alt="choose policy" class="with-border" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/dtr/images/push-mirror-4.png" alt="choose policy" /></p>
 
 <p>In this example, if an image in the <code class="highlighter-rouge">dev/website</code> repository is tagged with
 a word that ends in “stable”, DTR will automatically push that image to
 the DTR deployment available at <code class="highlighter-rouge">qa-example.com</code>. The image is pushed to the
-<code class="highlighter-rouge">qa/website</code> repository and is tagged with the timestamp of when the image
+<code class="highlighter-rouge">qa/example</code> repository and is tagged with the timestamp of when the image
 was promoted.</p>
 
 <p>Everything is set up! Once the development team pushes an image that complies
-with the policy, it automatically gets promoted to <code class="highlighter-rouge">qa/website</code> in the remote trusted registry at <code class="highlighter-rouge">qa-example.com</code>.</p>
+with the policy, it automatically gets promoted to <code class="highlighter-rouge">qa/example</code> in the remote trusted registry at <code class="highlighter-rouge">qa-example.com</code>.</p>
 
 <h2 id="metadata-persistence">Metadata persistence</h2>
 
@@ -406,7 +430,7 @@ the image pushed. If you want the image to be signed, you need to do it manually
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/push-mirror.md#configure-your-repository" class="nomunge">Configure your repository</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/push-mirror.md#configure-your-repository-connection" class="nomunge">Configure your repository connection</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/push-mirror.md#metadata-persistence" class="nomunge">Metadata persistence</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/push-mirror.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
@@ -530,7 +554,6 @@ the image pushed. If you want the image to be signed, you need to do it manually
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">
