@@ -3095,6 +3095,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/",
+"title":"Custom Azure Roles",
+"description":"Learn how to create custom RBAC roles to run Docker Enterprise on Azure.",
+"keywords":"Universal Control Plane, UCP, install, Docker Enterprise, Azure, Swarm"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure/",
 "title":"Install UCP on Azure",
 "description":"Learn how to install Docker Universal Control Plane in a Microsoft Azure environment.",

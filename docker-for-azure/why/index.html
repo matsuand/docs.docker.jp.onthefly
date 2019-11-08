@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-11-07 13:27:02 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-07T13:27:02+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker for Azure プロジェクトは開始されて以来、活発に活動を続けています。 そして Docker ユーザーへは、Azure 上に即座に実現できる優れた環境を提供しています。 今この環境は広く入手可能となり、どなたでも利用できるものとなりました。 知識を豊富に持つユーザーであれば、このプロジェクトがどのように開発環境を動作させ、ステージングを行い、本番環境における作業を行うものか知りたいところでしょう。 Docker ネイティブであること Docker for Azure は Docker ネイティブなソリューションを提供するものです。 操作が複雑になるわけでなく、Docker スタックに対して不必要に API を加えたりするようなこともありません。 Docker for Azure は Docker を使った直接の操作（ネイティブな Docker オーケストレーションを含む）を可能としています。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-11-07T13:27:02+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="azure, microsoft, iaas, why">
@@ -180,7 +180,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    1 分
   
 </span>
 
@@ -235,32 +235,27 @@ Docker では数多くの自動化が組み入れられているため、ユー�
 Docker の独自 Linux ディストリビューションは、ただ 1 点を目指しています。
 それはユーザーや開発チームが、最大限 <em>Docker</em> を利用できるようにすることです。</p>
 
-<h2 id="self-cleaning-and-self-healing">Self-cleaning and self-healing</h2>
+<h2 id="self-cleaning-and-self-healing">自動クリーン機能と自動修正機能</h2>
 
-<p>Even the most conscientious admin can be caught off guard by issues such as
-unexpectedly aggressive logging or the Linux kernel killing memory-hungry
-processes. In Docker for Azure, your cluster is resilient to a
-variety of such issues by default.</p>
+<p>たとえ慎重な管理を行っていたとしても、不意に発生する問題というものがあります。
+たとえば予想に反してログ出力が頻繁に発生したり、Linux カーネルのメモリを大量消費するプロセスが停止したり、といったことです。
+これが Docker for Azure であれば、そういった諸問題に対してクラスターをすばやく復旧させる能力をデフォルトで有しています。</p>
 
-<p>Log rotation native to the host is configured for you automatically, so chatty
-logs don’t use up all of your disk space. Likewise, the “system prune” option
-allows you to ensure unused Docker resources such as old images are cleaned up
-automatically. The lifecycle of nodes is managed using auto-scaling groups or
-similar constructs, so that if a node enters an unhealthy state for unforeseen
-reasons, the node is taken out of load balancer rotation and/or replaced
-automatically and all of its container tasks are rescheduled.</p>
+<p>ログローテーションの設定は、ホストに適応したものが自動的に設定されます。
+長々としたログであったとしても、ディスク容量をくいつぶすようなことにはなりません。
+同じようなこととして、Docker には「system prune」オプションなるものがあります。
+これにより、古いイメージなど未使用の Docker リソースは自動的に削除されるようになっています。
+ノードの存続期間は、自動スケーリンググループや同様の構成により管理されるので、予期しない理由によりノードが不健康な状態におちいったとすると、そのノードはロードバランサーのローテーションから除外されたり、自動的に置き換えられたりします。
+そしてコンテナー内のタスクはすべて、再スケジュールされることになります。</p>
 
-<p>These self-cleaning and self-healing properties are enabled by default and don’t
-need configuration, so you can breathe easier as the risk of downtime is
-reduced.</p>
+<p>このような自動クリーン機能や自動修正機能は、デフォルトにおいて有効になっているため、設定は不要です。
+ダウンタイムのリスクは軽減されるので安心して利用できます。</p>
 
-<h2 id="logging-native-to-the-platforms">Logging native to the platforms</h2>
+<h2 id="logging-native-to-the-platforms">プラットフォームに適応したログ出力</h2>
 
-<p>Centralized logging is a critical component of many modern infrastructure
-stacks. To have these logs indexed and searchable proves invaluable for
-debugging application and system issues as they come up. Out of the box, Docker
-for Azure forwards logs from containers to a native cloud provider
-abstraction (a storage account in the created resource group).</p>
+<p>現代のインフラストラクチャースタックにおいて、ログ処理を集中管理することは欠かせない重要な機能です。
+そのログをインデックスづけして検索可能にしておくことが、アプリケーションのデバッグやシステム障害への備えとして重要です。
+そして Docker for Azure は、コンテナー内のログをネイティブなクラウドプロバイダー（a storage account in the created resource group）へ出力します。</p>
 
 <h2 id="next-generation-docker-bug-reporting-tools">次世代の Docker バグレポートツール</h2>
 
@@ -274,11 +269,11 @@ Docker support staff to reduce the traditional
 “please-post-the-output-of-this-command” back and forth frequently encountered
 in bug reports.</p>
 
-<h1 id="try-it-today">Try it today</h1>
+<h1 id="try-it-today">すぐにはじめましょう</h1>
 
-<p>Ready to get started? <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-azure/">Try Docker for Azure today</a>.
-Search for existing issues, or create a new one, within the
-<a href="https://github.com/docker/for-azure">for Azure</a> repository.</p>
+<p>準備はいいですか？
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-azure/">今すぐに Docker for Azure を試してみてください</a>。
+なにかの問題を検索したり、報告したりする場合は <a href="https://github.com/docker/for-azure">Docker for Azure</a> リポジトリを利用してください。</p>
 
 
 							<!-- tags -->
@@ -378,8 +373,8 @@ Search for existing issues, or create a new one, within the
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#native-to-docker" class="nomunge">Docker ネイティブであること</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#skip-the-boilerplate-and-maintenance-work" class="nomunge">定型的作業や保守作業の省略</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#minimal-docker-focused-base" class="nomunge">Docker に焦点をあてて必要最小限に</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#self-cleaning-and-self-healing" class="nomunge">Self-cleaning and self-healing</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#logging-native-to-the-platforms" class="nomunge">Logging native to the platforms</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#self-cleaning-and-self-healing" class="nomunge">自動クリーン機能と自動修正機能</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#logging-native-to-the-platforms" class="nomunge">プラットフォームに適応したログ出力</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/why.md#next-generation-docker-bug-reporting-tools" class="nomunge">次世代の Docker バグレポートツール</a></li>
 </ul>
 
@@ -502,7 +497,6 @@ Search for existing issues, or create a new one, within the
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">

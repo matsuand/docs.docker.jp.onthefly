@@ -14,6 +14,18 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 
 
@@ -46,7 +58,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -85,14 +97,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="ベースイメージの生成"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Dockerfile は普通は親イメージから作り始めます。 イメージ内容を完全にコントロールする場合は、ベースイメージを作り出すこともあります。 その違いは以下のとおりです。 親イメージ は基準とするイメージのことです。 Dockerfile 内の FROM ディレクティブによって指定されます。 Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。 Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。 ただしこの用語は混同されて用いられることもあります。 ベースイメージ は Dockerfile において FROM scratch に記述されるものです。 ここではベースイメージの生成方法をいくつか示します。 パッケージ化しようとしている Linux ディストリビューションに大きく依存する処理操作もあります。 以下に例をあげていきます。 新たなイメージを提供して頂ける場合は、プルリクエストをあげることをお願いします。 tar を使ったフルイメージの生成..." />
+	<meta name="twitter:title" itemprop="title name" content="Custom Azure Roles"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Overview This document describes how to create Azure custom roles to deploy Docker Enterprise resources. Deploy a Docker Enterprise Cluster into a single resource group A resource group is a..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2019-11-07T13:27:02+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="images, base image, examples">
+	<meta name="keywords" content="Universal Control Plane, UCP, install, Docker Enterprise, Azure, Swarm">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -101,16 +113,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>ベースイメージの生成 | Docker ドキュメント</title>
-<meta property="og:title" content="ベースイメージの生成" />
+	<title>Custom Azure Roles | Docker ドキュメント</title>
+<meta property="og:title" content="Custom Azure Roles" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="ベースイメージを生成する方法。" />
-<meta property="og:description" content="ベースイメージを生成する方法。" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/" />
+<meta name="description" content="Learn how to create custom RBAC roles to run Docker Enterprise on Azure." />
+<meta property="og:description" content="Learn how to create custom RBAC roles to run Docker Enterprise on Azure." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"ベースイメージの生成","description":"ベースイメージを生成する方法。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Custom Azure Roles","description":"Learn how to create custom RBAC roles to run Docker Enterprise on Azure.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -180,126 +192,197 @@
 						<section class="section">
 							
 								
-							<h1>ベースイメージの生成</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Custom Azure Roles</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    1 分
+    3 分
   
 </span>
 
 							
 							
-							
-<p>Dockerfile は普通は親イメージから作り始めます。
-イメージ内容を完全にコントロールする場合は、ベースイメージを作り出すこともあります。
-その違いは以下のとおりです。</p>
+							<h2 id="overview">Overview</h2>
 
-<ul>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary.md#parent_image">親イメージ</a> は基準とするイメージのことです。
-Dockerfile 内の <code class="highlighter-rouge">FROM</code> ディレクティブによって指定されます。
-Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。
-Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
-ただしこの用語は混同されて用いられることもあります。</p>
+<p>This document describes how to create Azure custom roles to deploy Docker Enterprise resources.</p>
+
+<h2 id="deploy-a-docker-enterprise-cluster-into-a-single-resource-group">Deploy a Docker Enterprise Cluster into a single resource group</h2>
+
+<p>A <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview#resource-groups">resource group</a> is a container that holds resources for an Azure solution. These resources are the virtual machines (VMs), networks, and storage accounts associated with the swarm.</p>
+
+<p>To create a custom, all-in-one role with permissions to deploy a Docker Enterprise cluster into a single resource group:</p>
+
+<ol>
+  <li>Create the role permissions JSON file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"Name"</span>: <span class="s2">"Docker Platform All-in-One"</span>,
+  <span class="s2">"IsCustom"</span>: <span class="nb">true</span>,
+  <span class="s2">"Description"</span>: <span class="s2">"Can install and manage Docker platform."</span>,
+  <span class="s2">"Actions"</span>: <span class="o">[</span>
+ <span class="s2">"Microsoft.Authorization/*/read"</span>,
+ <span class="s2">"Microsoft.Authorization/roleAssignments/write"</span>,
+ <span class="s2">"Microsoft.Compute/availabilitySets/read"</span>,
+ <span class="s2">"Microsoft.Compute/availabilitySets/write"</span>,
+ <span class="s2">"Microsoft.Compute/disks/read"</span>,
+ <span class="s2">"Microsoft.Compute/disks/write"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/extensions/read"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/extensions/write"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/read"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/write"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/read"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/write"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/backendAddressPools/join/action"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/read"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/write"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/join/action"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/read"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/write"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/join/action"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/securityRules/read"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/securityRules/write"</span>,
+ <span class="s2">"Microsoft.Network/publicIPAddresses/read"</span>,
+ <span class="s2">"Microsoft.Network/publicIPAddresses/write"</span>,
+ <span class="s2">"Microsoft.Network/publicIPAddresses/join/action"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/read"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/write"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/read"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/write"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/join/action"</span>,
+ <span class="s2">"Microsoft.Resources/subscriptions/resourcegroups/read"</span>,
+ <span class="s2">"Microsoft.Resources/subscriptions/resourcegroups/write"</span>,
+ <span class="s2">"Microsoft.Security/advancedThreatProtectionSettings/read"</span>,
+ <span class="s2">"Microsoft.Security/advancedThreatProtectionSettings/write"</span>,
+ <span class="s2">"Microsoft.Storage/*/read"</span>,
+ <span class="s2">"Microsoft.Storage/storageAccounts/listKeys/action"</span>,
+ <span class="s2">"Microsoft.Storage/storageAccounts/write"</span>
+  <span class="o">]</span>,
+  <span class="s2">"NotActions"</span>: <span class="o">[]</span>,
+  <span class="s2">"AssignableScopes"</span>: <span class="o">[</span>
+ <span class="s2">"/subscriptions/6096d756-3192-4c1f-ac62-35f1c823085d"</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
   </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary.md#base_image">ベースイメージ</a> は Dockerfile において <code class="highlighter-rouge">FROM scratch</code> に記述されるものです。</p>
+  <li>Create the Azure RBAC role.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az role definition create <span class="nt">--role-definition</span> all-in-one-role.json
+</code></pre></div>    </div>
   </li>
-</ul>
+</ol>
 
-<p>ここではベースイメージの生成方法をいくつか示します。
-パッケージ化しようとしている Linux ディストリビューションに大きく依存する処理操作もあります。
-以下に例をあげていきます。
-新たなイメージを提供して頂ける場合は、プルリクエストをあげることをお願いします。</p>
+<h2 id="deploy-docker-enterprise-compute-resources">Deploy Docker Enterprise compute resources</h2>
 
-<h2 id="create-a-full-image-using-tar">tar を使ったフルイメージの生成</h2>
+<p>Compute resources act as servers for running containers.</p>
 
-<p>通常であれば、作業マシン上に稼動するディストリビューションを使い、これを親イメージとしてパッケージにしていくことになります。
-しかし Debian の <a href="https://wiki.debian.org/Debootstrap">Debootstrap</a> のようなツールを使えば作業マシンは不要であり、ここから Ubuntu イメージを作ることもできます。</p>
+<p>To create a custom role to deploy Docker Enterprise compute resources only:</p>
 
-<p>Ubuntu の親イメージを作るのは、以下のように簡単にできます。</p>
+<ol>
+  <li>Create the role permissions JSON file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"Name"</span>: <span class="s2">"Docker Platform"</span>,
+  <span class="s2">"IsCustom"</span>: <span class="nb">true</span>,
+  <span class="s2">"Description"</span>: <span class="s2">"Can install and run Docker platform."</span>,
+  <span class="s2">"Actions"</span>: <span class="o">[</span>
+ <span class="s2">"Microsoft.Authorization/*/read"</span>,
+ <span class="s2">"Microsoft.Authorization/roleAssignments/write"</span>,
+ <span class="s2">"Microsoft.Compute/availabilitySets/read"</span>,
+ <span class="s2">"Microsoft.Compute/availabilitySets/write"</span>,
+ <span class="s2">"Microsoft.Compute/disks/read"</span>,
+ <span class="s2">"Microsoft.Compute/disks/write"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/extensions/read"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/extensions/write"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/read"</span>,
+ <span class="s2">"Microsoft.Compute/virtualMachines/write"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/read"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/write"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/read"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/write"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/join/action"</span>,
+ <span class="s2">"Microsoft.Network/publicIPAddresses/read"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/read"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/read"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/join/action"</span>,
+ <span class="s2">"Microsoft.Resources/subscriptions/resourcegroups/read"</span>,
+ <span class="s2">"Microsoft.Resources/subscriptions/resourcegroups/write"</span>,
+ <span class="s2">"Microsoft.Security/advancedThreatProtectionSettings/read"</span>,
+ <span class="s2">"Microsoft.Security/advancedThreatProtectionSettings/write"</span>,
+ <span class="s2">"Microsoft.Storage/storageAccounts/read"</span>,
+ <span class="s2">"Microsoft.Storage/storageAccounts/listKeys/action"</span>,
+ <span class="s2">"Microsoft.Storage/storageAccounts/write"</span>
+  <span class="o">]</span>,
+  <span class="s2">"NotActions"</span>: <span class="o">[]</span>,
+  <span class="s2">"AssignableScopes"</span>: <span class="o">[</span>
+ <span class="s2">"/subscriptions/6096d756-3192-4c1f-ac62-35f1c823085d"</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Create the Docker Platform RBAC role.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az role definition create <span class="nt">--role-definition</span> platform-role.json
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo debootstrap xenial xenial &gt; /dev/null
-$ sudo tar -C xenial -c . | docker import - xenial
+<h2 id="deploy-docker-enterprise-network-resources">Deploy Docker Enterprise network resources</h2>
 
-a29c15f1bf7a
+<p>Network resources are services inside your cluster. These resources can include virtual networks, security groups, address pools, and gateways.</p>
 
-$ docker run xenial cat /etc/lsb-release
+<p>To create a custom role to deploy Docker Enterprise network resources only:</p>
 
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=16.04
-DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
-</code></pre></div></div>
+<ol>
+  <li>Create the role permissions JSON file.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+  <span class="s2">"Name"</span>: <span class="s2">"Docker Networking"</span>,
+  <span class="s2">"IsCustom"</span>: <span class="nb">true</span>,
+  <span class="s2">"Description"</span>: <span class="s2">"Can install and manage Docker platform networking."</span>,
+  <span class="s2">"Actions"</span>: <span class="o">[</span>
+ <span class="s2">"Microsoft.Authorization/*/read"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/read"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/write"</span>,
+ <span class="s2">"Microsoft.Network/loadBalancers/backendAddressPools/join/action"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/read"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/write"</span>,
+ <span class="s2">"Microsoft.Network/networkInterfaces/join/action"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/read"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/write"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/join/action"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/securityRules/read"</span>,
+ <span class="s2">"Microsoft.Network/networkSecurityGroups/securityRules/write"</span>,
+ <span class="s2">"Microsoft.Network/publicIPAddresses/read"</span>,
+ <span class="s2">"Microsoft.Network/publicIPAddresses/write"</span>,
+ <span class="s2">"Microsoft.Network/publicIPAddresses/join/action"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/read"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/write"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/read"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/write"</span>,
+ <span class="s2">"Microsoft.Network/virtualNetworks/subnets/join/action"</span>,
+ <span class="s2">"Microsoft.Resources/subscriptions/resourcegroups/read"</span>,
+ <span class="s2">"Microsoft.Resources/subscriptions/resourcegroups/write"</span>
+  <span class="o">]</span>,
+  <span class="s2">"NotActions"</span>: <span class="o">[]</span>,
+  <span class="s2">"AssignableScopes"</span>: <span class="o">[</span>
+ <span class="s2">"/subscriptions/6096d756-3192-4c1f-ac62-35f1c823085d"</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Create the Docker Networking RBAC role.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az role definition create <span class="nt">--role-definition</span> networking-role.json
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<p>Docker GitHub レポジトリには、親イメージを生成するスクリプトの例がいろいろとあります。</p>
-
+<h2 id="where-to-go-next">Where to go next</h2>
 <ul>
-  <li><a href="https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static">BusyBox</a></li>
-  <li>CentOS / Scientific Linux CERN (SLC)（<a href="https://github.com/moby/moby/blob/master/contrib/mkimage/rinse">Debian/Ubuntu 向け</a>、または<a href="https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh">CentOS/RHEL/SLC/など向け</a>）</li>
-  <li><a href="https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap">Debian / Ubuntu</a></li>
-</ul>
-
-<h2 id="create-a-simple-parent-image-using-scratch">単純な親イメージを一から生成</h2>
-
-<p>Docker が規定する最小イメージ <code class="highlighter-rouge">scratch</code> は、コンテナーを構築するベースイメージとして利用できます。
-<code class="highlighter-rouge">scratch</code> を利用すると「イメージ」は、<code class="highlighter-rouge">Dockerfile</code>内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。</p>
-
-<p>Docker Hub 上の Docker リポジトリとして <code class="highlighter-rouge">scratch</code> が登場したことにより、<code class="highlighter-rouge">scratch</code> という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
-そのかわり<code class="highlighter-rouge">Dockerfile</code> 内での参照のみが可能です。
-たとえば <code class="highlighter-rouge">scratch</code> を利用した最小コンテナーの生成は以下のようになります。</p>
-
-<pre><code class="language-Dockerfile">FROM scratch
-ADD hello /
-CMD ["/hello"]
-</code></pre>
-
-<p><a href="https://github.com/docker-library/hello-world/">https://github.com/docker-library/hello-world/</a>に示されている手順に従って、”hello” 実行モジュールの例を構築するとします。
-実行モジュールは <code class="highlighter-rouge">-static</code> フラグをつけてコンパイルします。
-Docker イメージは <code class="highlighter-rouge">docker build</code> コマンドによってビルドすることができます。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> hello <span class="nb">.</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">.</code> の文字を最後につけるのを忘れないでください。
-これはビルドコンテキストをカレントディレクトリに設定するものです。</p>
-
-<blockquote>
-  <p><strong>メモ</strong>: Docker Desktop for Mac と Docker Desktop for Windows では Linux VM を利用するため、Mac や Windows の実行バイナリではなく Linux の実行バイナリが必要になります。
-Docker コンテナーを使って以下のようにビルドします。</p>
-
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span> <span class="nv">$PWD</span>:/build ubuntu:16.04
-
-container# apt-get update <span class="o">&amp;&amp;</span> apt-get install build-essential
-container# <span class="nb">cd</span> /build
-container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> <span class="nt">-nostartfiles</span> hello.c
-</code></pre></div>  </div>
-</blockquote>
-
-<p>新イメージは <code class="highlighter-rouge">docker run</code> コマンドを使って実行します。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> hello
-</code></pre></div></div>
-
-<p>この例は、チュートリアルにおいて用いられている hello-world イメージを生成します。
-これを試してみたい場合は、<a href="https://github.com/docker-library/hello-world">イメージリポジトリ</a>をクローンすることができます。</p>
-
-<h2 id="more-resources">その他の情報</h2>
-
-<p><code class="highlighter-rouge">Dockerfile</code>の書き方については、他にも多く触れています。</p>
-
-<ul>
-  <li>リファレンスには<code class="highlighter-rouge">Dockerfile</code>にて利用可能な<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md">全コマンドのガイド</a> があります。</li>
-  <li><code class="highlighter-rouge">Dockerfile</code>をわかりやすく読みやすく、保守がしやすくするように、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code>ベストプラクティス</a>も記述しています。</li>
-  <li>公式イメージを作ることが目的であれば Docker の<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/official_images/">公式イメージ</a>を確認してください。</li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/container-instances/">Azure Container Instances documentation</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/ucp/3.2/cli/">docker/ucp overview</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/">Universal Control Plane overview</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=images">images</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=base image">base image</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=examples">examples</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Universal Control Plane">Universal Control Plane</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=UCP">UCP</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=install">install</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Docker Enterprise">Docker Enterprise</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Azure">Azure</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Swarm">Swarm</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -308,7 +391,7 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/develop/develop-images/baseimages/";
+							  var originalURL = "/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -328,9 +411,9 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "develop/develop-images/baseimages.md",
-										"title": "ベースイメージの生成",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/develop/develop-images/baseimages.md"
+										"unique_id": "ee/ucp/admin/install/cloudproviders/install-on-azure-custom.md",
+										"title": "Custom Azure Roles",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/admin/install/cloudproviders/install-on-azure-custom.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -362,8 +445,8 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/develop/develop-images/baseimages.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [develop/develop-images/baseimages.md](https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/ee/ucp/admin/install/cloudproviders/install-on-azure-custom.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/ucp/admin/install/cloudproviders/install-on-azure-custom.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -389,9 +472,11 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/baseimages.md#create-a-full-image-using-tar" class="nomunge">tar を使ったフルイメージの生成</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/baseimages.md#create-a-simple-parent-image-using-scratch" class="nomunge">単純な親イメージを一から生成</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/baseimages.md#more-resources" class="nomunge">その他の情報</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure-custom.md#overview" class="nomunge">Overview</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure-custom.md#deploy-a-docker-enterprise-cluster-into-a-single-resource-group" class="nomunge">Deploy a Docker Enterprise Cluster into a single resource group</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure-custom.md#deploy-docker-enterprise-compute-resources" class="nomunge">Deploy Docker Enterprise compute resources</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure-custom.md#deploy-docker-enterprise-network-resources" class="nomunge">Deploy Docker Enterprise network resources</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure-custom.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 
@@ -507,7 +592,7 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/develop/develop-images/baseimages/';
+	var pageURL = jekyllEnv + '/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
