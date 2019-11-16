@@ -2185,6 +2185,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/get-docker/",
+"title":"Get Docker",
+"description":"Home page for Get Docker",
+"keywords":"Docker, documentation, manual"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/machine/get-started-cloud/",
 "title":"Docker Machine 利用によるクラウドプロバイダーへのプロビジョニング",
 "description":"Using Docker Machine to provision hosts on cloud providers",
@@ -2543,7 +2550,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/",
-"title":"はじめよう 1部: 概要とセットアップ",
+"title":"概要とセットアップ",
 "description":"Get oriented on some basics of Docker and install Docker Desktop.",
 "keywords":"get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop"
 }
@@ -2762,7 +2769,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-hub/builds/",
 "title":"自動ビルドの設定",
 "description":"自動ビルドを設定します。",
-"keywords":"automated, build, images"
+"keywords":"automated, build, images, Docker Hub"
 }
 ,
 {
@@ -3138,7 +3145,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/assemble/install/",
-"title":"Docker Assemble (試験的)",
+"title":"Docker Assemble",
 "description":"Docker Assemble のインストール。",
 "keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
@@ -3418,9 +3425,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/builds/link-source/",
-"title":"Configure Automated Builds from GitHub and BitBucket",
+"title":"Configure automated builds from GitHub and BitBucket",
 "description":"Link to GitHub and BitBucket",
-"keywords":"Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, GitHub"
+"keywords":"Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, trusted, builds, trusted builds, automated builds, GitHub"
 }
 ,
 {
@@ -4090,28 +4097,28 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part2/",
-"title":"はじめよう 2 部: アプリのコンテナー化",
+"title":"アプリのコンテナー化",
 "description":"Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.",
 "keywords":"containers, images, dockerfiles, node, code, coding, build, push, run"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part3/",
-"title":"はじめよう 3部: Kubernetes へのデプロイ",
+"title":"Kubernetes へのデプロイ",
 "description":"Learn how to describe and deploy a simple application on Kubernetes.",
 "keywords":"kubernetes, pods, deployments, kubernetes services"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part4/",
-"title":"Get Started, Part 4: Deploying to Swarm",
+"title":"Deploying to Swarm",
 "description":"Learn how to describe and deploy a simple application on Docker Swarm.",
 "keywords":"swarm, swarm services, stacks"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part5/",
-"title":"はじめよう 5部: Docker Hub でのイメージ共有",
+"title":"Docker Hub でのイメージ共有",
 "description":"Learn how to share images on Docker Hub.",
 "keywords":"docker hub, push, images"
 }
@@ -4167,7 +4174,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/",
-"title":"Plan a production UCP installation",
+"title":"Plan your installation",
 "description":"Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.",
 "keywords":"UCP, install, Docker EE"
 }
@@ -4587,7 +4594,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/dtr/release-notes/",
-"title":"DTR リリースノート",
+"title":"DTR release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry",
 "keywords":"docker trusted registry, whats new, release notes"
 }
@@ -4643,7 +4650,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
-"title":"Docker Engine リリースノート",
+"title":"Docker Engine release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
 }
@@ -4679,7 +4686,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/docker-hub/repos/",
 "title":"リポジトリ",
-"description":"Docker Hub 上のリポジトリの利用",
+"description":"Docker Hub 上のリポジトリを利用する。",
 "keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
 }
 ,
@@ -4790,8 +4797,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/",
-"title":"Docker EE の入手（Red Hat Enterprise Linux 向け）",
-"description":"RHEL 上に Docker EE をインストールする手順を説明。",
+"title":"Docker Engine - Enterprise の入手（Red Hat Enterprise Linux 向け）",
+"description":"RHEL 上に Docker Engine - Enterprise をインストールする手順を説明。",
 "keywords":"requirements, installation, rhel, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -6358,28 +6365,28 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/app/working-with-app/",
-"title":"Working with Docker App (experimental)",
+"title":"Docker App",
 "description":"Learn about Docker App",
 "keywords":"Docker App, applications, compose, orchestration"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/buildx/working-with-buildx/",
-"title":"Docker Buildx の利用（試験的）",
+"title":"Docker Buildx",
 "description":"Docker Buildx の利用",
 "keywords":"Docker, buildx, multi-arch"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/context/working-with-contexts/",
-"title":"Working with Contexts",
-"description":"Learn about Docker Contexts",
-"keywords":"engine, contexts, cli, kubernetes"
+"title":"Docker Context",
+"description":"Learn about Docker Context",
+"keywords":"engine, context, cli, kubernetes"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/app-template/working-with-template/",
-"title":"Working with Docker Template (experimental)",
+"title":"Docker Template",
 "description":"Working with Docker Application Template",
 "keywords":"Docker, application template, Application Designer,"
 }

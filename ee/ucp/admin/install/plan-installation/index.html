@@ -1,4 +1,4 @@
-<!-- Page generated 2019-09-11 17:40:27 +0900 -->
+<!-- Page generated 2019-11-16 14:25:28 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,17 +87,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Plan a production UCP installation"/>
+	<meta name="twitter:title" itemprop="title name" content="Plan your installation"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane helps you manage your container cluster from a centralized place. This article explains what you need to consider before deploying Docker Universal Control Plane for production...." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-09-11T17:40:27+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, install, Docker EE">
@@ -109,8 +109,8 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Plan a production UCP installation | Docker ドキュメント</title>
-<meta property="og:title" content="Plan a production UCP installation" />
+	<title>Plan your installation | Docker ドキュメント</title>
+<meta property="og:title" content="Plan your installation" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production." />
 <meta property="og:description" content="Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production." />
@@ -118,7 +118,7 @@
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Plan a production UCP installation","description":"Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Plan your installation","description":"Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/plan-installation/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -188,11 +188,11 @@
 						<section class="section">
 							
 								
-							<h1>Plan a production UCP installation</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Plan your installation</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    8 分
+    9 分
   
 </span>
 
@@ -204,7 +204,7 @@ deploying Docker Universal Control Plane for production.</p>
 
 <h2 id="system-requirements">System requirements</h2>
 
-<p>Before installing UCP you should make sure that all nodes (physical or virtual
+<p>Before installing UCP, make sure that all nodes (physical or virtual
 machines) that you’ll manage with UCP:</p>
 
 <ul>
@@ -231,17 +231,56 @@ node3.company.example.com
 
 <h2 id="static-ip-addresses">Static IP addresses</h2>
 
-<p>Docker UCP requires each node on the cluster to have a static IP address.
+<p>Docker UCP requires each node on the cluster to have a static IPv4 address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.</p>
 
 <h2 id="avoid-ip-range-conflicts">Avoid IP range conflicts</h2>
 
-<p>Engine <code class="highlighter-rouge">fixed-cidr</code> - CIDR range for <code class="highlighter-rouge">docker0</code> interface and local containers, default <code class="highlighter-rouge">172.17.0.0/16</code>.
-Engine <code class="highlighter-rouge">default-address-pools</code> - CIDR range for <code class="highlighter-rouge">docker_gwbridge</code> interface and bridge networks, default <code class="highlighter-rouge">172.18.0.0/16</code>.
-Swarm <code class="highlighter-rouge">default-addr-pool</code> - CIDR range for Swarm overlay networks, default <code class="highlighter-rouge">10.0.0.0/8</code>.
-Kubernetes <code class="highlighter-rouge">pod-cidr</code> - CIDR range for Kubernetes pods, default <code class="highlighter-rouge">192.168.0.0/16</code>.
-Kubernetes <code class="highlighter-rouge">service-cluster-ip-range</code> - CIDR range for Kubernetes services, default <code class="highlighter-rouge">10.96.0.0/16</code>.</p>
+<p>The following table lists recommendations to avoid IP range conflicts.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Subnet</th>
+      <th>Range</th>
+      <th>Default IP address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Engine</td>
+      <td><code class="highlighter-rouge">fixed-cidr</code></td>
+      <td>CIDR range for <code class="highlighter-rouge">docker0</code> interface and local containers</td>
+      <td>172.17.0.0/16</td>
+    </tr>
+    <tr>
+      <td>Engine</td>
+      <td><code class="highlighter-rouge">default-address-pools</code></td>
+      <td>CIDR range for <code class="highlighter-rouge">docker_gwbridge</code> interface and bridge networks</td>
+      <td>172.18.0.0/16</td>
+    </tr>
+    <tr>
+      <td>Swarm</td>
+      <td><code class="highlighter-rouge">default-addr-pool</code></td>
+      <td>CIDR range for Swarm overlay networks</td>
+      <td>10.0.0.0/8</td>
+    </tr>
+    <tr>
+      <td>Kubernetes</td>
+      <td><code class="highlighter-rouge">pod-cidr</code></td>
+      <td>CIDR range for Kubernetes pods</td>
+      <td>192.168.0.0/16</td>
+    </tr>
+    <tr>
+      <td>Kubernetes</td>
+      <td><code class="highlighter-rouge">service-cluster-ip-range</code></td>
+      <td>CIDR range for Kubernetes services</td>
+      <td>10.96.0.0/16</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="engine">Engine</h3>
 
@@ -271,7 +310,9 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 <p>The <code class="highlighter-rouge">docker_gwbridge</code> is a virtual bridge that connects the overlay networks (including the <code class="highlighter-rouge">ingress</code> network) to an individual Docker engine’s physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for <code class="highlighter-rouge">docker_gwbridge</code> is <code class="highlighter-rouge">172.18.0.0/16</code>.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: If you need to customize the <code class="highlighter-rouge">docker_gwbridge</code> settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.</p>
+  <p>Note</p>
+
+  <p>If you need to customize the <code class="highlighter-rouge">docker_gwbridge</code> settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.</p>
 </blockquote>
 
 <p>The recommended way to configure the <code class="highlighter-rouge">docker_gwbridge</code> settings is to use the <code class="highlighter-rouge">daemon.json</code> file. You can specify one or more of the following settings to configure the interface:</p>
@@ -295,31 +336,31 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
 <p>Swarm uses a default address pool of <code class="highlighter-rouge">10.0.0.0/8</code> for its overlay networks. If this conflicts with your current network implementation, please use a custom IP address pool. To specify a custom IP address pool, use the <code class="highlighter-rouge">--default-addr-pool</code> command line option during <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/swarm-mode/">Swarm initialization</a>.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: The Swarm <code class="highlighter-rouge">default-addr-pool</code> setting is separate from the Docker engine <code class="highlighter-rouge">default-address-pools</code> setting. They are two separate ranges that are used for different purposes.</p>
+  <p>Note</p>
+
+  <p>The Swarm <code class="highlighter-rouge">default-addr-pool</code> setting is separate from the Docker engine <code class="highlighter-rouge">default-address-pools</code> setting. They are two separate ranges that are used for different purposes.</p>
 </blockquote>
 
 <blockquote>
-  <p><strong>Note</strong>: Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be initialized using this flag and UCP must be installed on top of it.</p>
+  <p>Note</p>
+
+  <p>Currently, the UCP installation process does not support this flag. To deploy with a custom IP pool, Swarm must first be initialized using this flag and UCP must be installed on top of it.</p>
 </blockquote>
 
 <h3 id="kubernetes">Kubernetes</h3>
 
-<p>There are 2 internal IP ranges used within Kubernetes that may overlap and
+<p>There are two internal IP ranges used within Kubernetes that may overlap and
 conflict with the underlying infrastructure:</p>
 
 <ul>
-  <li>
-    <p>The Pod Network -  Each Pod in Kubernetes is given an IP address from either
+  <li>The Pod Network -  Each Pod in Kubernetes is given an IP address from either
 the Calico or Azure IPAM services. In a default installation Pods are given
-IP addresses on the <code class="highlighter-rouge">192.168.0.0/16</code> range. This can be customized at install
-time using the <code class="highlighter-rouge">--pod-cidr</code> flag.</p>
-  </li>
-  <li>
-    <p>The Services Network - When a user exposes a Service in Kubernetes it is
+IP addresses on the <code class="highlighter-rouge">192.168.0.0/16</code> range. This can be customized at install time by passing the <code class="highlighter-rouge">--pod-cidr</code> flag to the
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/ucp/3.2/cli/install/">UCP install command</a>.</li>
+  <li>The Services Network - When a user exposes a Service in Kubernetes it is
 accessible via a VIP, this VIP comes from a Cluster IP Range. By default on UCP
-this range is <code class="highlighter-rouge">10.96.0.0/16</code>. From UCP 3.1.8 and onwards this value can be
-changed at install time with the <code class="highlighter-rouge">--service-cluster-ip-range</code> flag.</p>
-  </li>
+this range is <code class="highlighter-rouge">10.96.0.0/16</code>. Beginning with 3.1.8, this value can be
+changed at install time with the <code class="highlighter-rouge">--service-cluster-ip-range</code> flag.</li>
 </ul>
 
 <h2 id="avoid-firewall-conflicts">Avoid firewall conflicts</h2>
@@ -328,14 +369,19 @@ changed at install time with the <code class="highlighter-rouge">--service-clust
 
 <p>To turn off the FW_LO_NOTRACK option, edit the <code class="highlighter-rouge">/etc/sysconfig/SuSEfirewall2</code> file and set <code class="highlighter-rouge">FW_LO_NOTRACK="no"</code>. Save the file and restart the firewall or reboot.</p>
 
-<p>For For SUSE Linux Enterprise Server 12 SP3, the default value for <code class="highlighter-rouge">FW_LO_NOTRACK</code> was changed to <code class="highlighter-rouge">no</code>.</p>
+<p>For SUSE Linux Enterprise Server 12 SP3, the default value for <code class="highlighter-rouge">FW_LO_NOTRACK</code> was changed to <code class="highlighter-rouge">no</code>.</p>
 
+<p>For Red Hat Enterprise Linux (RHEL) 8, if firewalld is running and <code class="highlighter-rouge">FirewallBackend=nftables</code> is set in <code class="highlighter-rouge">/etc/firewalld/firewalld.conf</code>, change this to <code class="highlighter-rouge">FirewallBackend=iptables</code>, or you can explicitly run the following commands to allow traffic to enter the default bridge (docker0) network:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firewall-cmd --permanent --zone=trusted --add-interface=docker0
+firewall-cmd --reload
+</code></pre></div></div>
 <h2 id="time-synchronization">Time synchronization</h2>
 
 <p>In distributed systems like Docker UCP, time synchronization is critical
 to ensure proper operation. As a best practice to ensure consistency between
 the engines in a UCP cluster, all engines should regularly synchronize time
-with a Network Time Protocol (NTP) server. If a server’s clock is skewed,
+with a Network Time Protocol (NTP) server. If a host node’s clock is skewed,
 unexpected behavior may cause poor performance or even failures.</p>
 
 <h2 id="load-balancing-strategy">Load balancing strategy</h2>
@@ -359,7 +405,7 @@ address or port number.</p>
 <ul>
   <li>If you want to configure your load balancer to listen on port 443:
     <ul>
-      <li>Use one load balancer for UCP and another for DTR,</li>
+      <li>Use one load balancer for UCP and another for DTR.</li>
       <li>Use the same load balancer with multiple virtual IPs.</li>
     </ul>
   </li>
@@ -369,7 +415,8 @@ address or port number.</p>
 <p>If you want to install UCP in a high-availability configuration that uses
 a load balancer in front of your UCP controllers, include the appropriate IP
 address and FQDN of the load balancer’s VIP by using
-one or more <code class="highlighter-rouge">--san</code> flags in the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/ucp/3.0/cli/install.md">install command</a>
+one or more <code class="highlighter-rouge">--san</code> flags in the
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/ucp/3.2/cli/install/">UCP install command</a>
 or when you’re asked for additional SANs in interactive mode.
 <a href="../configure/set-up-high-availability.md">Learn about high availability</a>.</p>
 
@@ -413,7 +460,7 @@ manager nodes joining the cluster or being promoted to a manager role.</p>
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=UCP">UCP</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=install">install</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary/?term=Docker EE">Docker EE</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=UCP">UCP</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=install">install</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=Docker EE">Docker EE</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -443,7 +490,7 @@ manager nodes joining the cluster or being promoted to a manager role.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "ee/ucp/admin/install/plan-installation.md",
-										"title": "Plan a production UCP installation",
+										"title": "Plan your installation",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/admin/install/plan-installation.md"
 									};
 									(function(d, c, j) {
@@ -640,7 +687,6 @@ manager nodes joining the cluster or being promoted to a manager role.</p>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
-	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/collections_tocs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
 	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
 	<script language="javascript">
