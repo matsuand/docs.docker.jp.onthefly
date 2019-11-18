@@ -1,0 +1,756 @@
+<!-- Page generated 2019-11-18 21:06:02 +0900 -->
+<!-- relative link basehrefs -->
+
+	
+	
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+
+
+<!-- Logic for 'edit this button' -->
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+<!-- End of logic for 'edit this button' -->
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		@charset "UTF-8";
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak,
+		.ng-hide:not(.ng-hide-animate) {
+			display: none !important;
+		}
+
+		ng\:form {
+			display: block;
+		}
+	</style>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-WL2QLG5');</script>
+	<!-- End Google Tag Manager -->
+	
+	<!-- favicon -->
+	<link rel="icon" type="image/x-icon" href="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+	<meta name="msapplication-TileImage" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+	<link rel="apple-touch-icon" type="image/x-icon" href="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+	<!-- metadata -->
+	<meta property="og:type" content="website"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-18T21:06:02+09:00"/>
+	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:domain" content="docs.docker.jp"/>
+	<meta name="twitter:site" content="@docker_docs"/>
+	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+	<meta name="twitter:title" itemprop="title name" content="Run the Docker daemon as a non-root user (Rootless mode)"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="Rootless mode allows running the Docker daemon and containers as a non-root user, for the sake of mitigating potentail vulnerabilities in the daemon and the container runtime. Rootless mode does..." />
+	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
+	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-11-18T21:06:02+09:00"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="security, namespaces, rootless">
+	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
+	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
+	<link id="pagestyle" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/style.css">
+
+	<!-- Go get "Open Sans" font from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<!-- SEO stuff -->
+	<title>Run the Docker daemon as a non-root user (Rootless mode) | Docker ドキュメント</title>
+<meta property="og:title" content="Run the Docker daemon as a non-root user (Rootless mode)" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="Run the Docker daemon as a non-root user (Rootless mode)" />
+<meta property="og:description" content="Run the Docker daemon as a non-root user (Rootless mode)" />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/" />
+<meta property="og:site_name" content="Docker ドキュメント" />
+<script type="application/ld+json">
+{"@context":"http://schema.org","@type":"WebPage","headline":"Run the Docker daemon as a non-root user (Rootless mode)","description":"Run the Docker daemon as a non-root user (Rootless mode)","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/"}</script>
+	<!-- END SEO STUFF -->
+	
+	<script language="javascript">
+	// Default to assuming this is an archive and hiding some stuff
+	// See js/archive.js and js/docs.js for logic relating to this
+	var isArchive = true;
+	var dockerVersion = 'v19.03';
+	</script>
+</head>
+<body ng-app="Docker" ng-controller="DockerController" class="colums">
+	<header>
+		 <nav class="nav-secondary navbar navbar-fixed-top">
+    <!-- <div class="fan"></div> -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="https://matsuand.github.io/docs.docker.jp.onthefly/"><img class="logo" src="https://matsuand.github.io/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs"></a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="search-form" id="search-div" style="visibility: hidden">
+    <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="https://matsuand.github.io/docs.docker.jp.onthefly/search/">
+        <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteContainer">
+            <div id="autocompleteResults"></div>
+        </div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container">
+    <div id="tabs">
+        <ul class="tabs" id="jsTOCHorizontal">
+
+        </ul>
+    </div>
+    <div class="ctrl-right hidden-xs hidden-sm">
+        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+        <div class="btn-group" style="visibility: hidden">
+  <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Docker v19.03 (current)         <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/edge/">Docker edge</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+  </ul>
+</div>
+
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+	</header>
+
+	<div class="wrapper right-open">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-body">
+					<main class="col-content content">
+						<section class="section">
+							
+								
+							<h1>Run the Docker daemon as a non-root user (Rootless mode)</h1>  <span class="reading-time" title="Estimated reading time">
+  <span class="reading-time-label">読む時間の目安: </span>
+  
+  
+    7 分
+  
+</span>
+
+							
+							
+							<p>Rootless mode allows running the Docker daemon and containers as a non-root
+user, for the sake of mitigating potentail vulnerabilities in the daemon and
+the container runtime.</p>
+
+<p>Rootless mode does not require root privileges even for installation of the
+Docker daemon, as long as <a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#prerequiresites">the prerequisites</a> are satisfied.</p>
+
+<p>Rootless mode was introduced in Docker Engine 19.03.</p>
+
+<blockquote>
+  <p><strong>Note</strong>:
+Rootless mode is an experimental feature and has <a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#known-limitations">limitations</a>.</p>
+</blockquote>
+
+<h2 id="how-it-works">How it works</h2>
+<p>Rootless mode executes the Docker daemon and containers inside a user namespace.
+This is very similar to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/userns-remap/"><code class="highlighter-rouge">userns-remap</code> mode</a>, except that
+with <code class="highlighter-rouge">userns-remap</code> mode, the daemon itself is running with root privileges, whereas in
+rootless mode, both the daemon and the container are running without root privileges.</p>
+
+<p>Rootless mode does not use binaries with SETUID bits or file capabilities,
+except <code class="highlighter-rouge">newuidmap</code> and <code class="highlighter-rouge">newgidmap</code>, which are needed to allow multiple
+UIDs/GIDs to be used in the user namespace.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">newuidmap</code> and <code class="highlighter-rouge">newgidmap</code> need to be installed on the host. These commands
+are provided by the <code class="highlighter-rouge">uidmap</code> package on most distros.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">/etc/subuid</code> and <code class="highlighter-rouge">/etc/subgid</code> should contain at least 65,536 subordinate
+UIDs/GIDs for the user. In the following example, the user <code class="highlighter-rouge">testuser</code> has
+65,536 subordinate UIDs/GIDs (231072-296607).</p>
+  </li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> id <span class="nt">-u</span>
+<span class="go">1001
+</span><span class="gp">$</span> whoami
+<span class="go">testuser
+</span><span class="gp">$</span> <span class="nb">grep</span> ^<span class="k">$(</span>whoami<span class="k">)</span>: /etc/subuid
+<span class="go">testuser:231072:65536
+</span><span class="gp">$</span> <span class="nb">grep</span> ^<span class="k">$(</span>whoami<span class="k">)</span>: /etc/subgid
+<span class="go">testuser::231072:65536
+</span></code></pre></div></div>
+
+<h3 id="distribution-specific-hint">Distribution-specific hint</h3>
+
+<blockquote>
+  <p>Note: Using Ubuntu kernel is recommended.</p>
+</blockquote>
+
+<h4 id="ubuntu">Ubuntu</h4>
+<ul>
+  <li>
+    <p>No preparation is needed.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">overlay2</code> storage driver  is enabled by default
+(<a href="https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144">Ubuntu-specific kernel patch</a>).</p>
+  </li>
+  <li>
+    <p>Known to work on Ubuntu 16.04 and 18.04.</p>
+  </li>
+</ul>
+
+<h4 id="debian-gnulinux">Debian GNU/Linux</h4>
+<ul>
+  <li>
+    <p>Add <code class="highlighter-rouge">kernel.unprivileged_userns_clone=1</code> to <code class="highlighter-rouge">/etc/sysctl.conf</code> (or
+<code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code>.</p>
+  </li>
+  <li>
+    <p>To use the <code class="highlighter-rouge">overlay2</code> storage driver (recommended), run
+<code class="highlighter-rouge">sudo modprobe overlay permit_mounts_in_userns=1</code>
+ (<a href="https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch">Debian-specific kernel patch, introduced in Debian 10</a>).
+ Put the configuration to <code class="highlighter-rouge">/etc/modprobe.d</code> for persistence.</p>
+  </li>
+  <li>
+    <p>Known to work on Debian 9 and 10.
+<code class="highlighter-rouge">overlay2</code> is only supported since Debian 10 and needs <code class="highlighter-rouge">modprobe</code>
+configuration described above.</p>
+  </li>
+</ul>
+
+<h4 id="arch-linux">Arch Linux</h4>
+<ul>
+  <li>Add <code class="highlighter-rouge">kernel.unprivileged_userns_clone=1</code> to <code class="highlighter-rouge">/etc/sysctl.conf</code> (or
+<code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code></li>
+</ul>
+
+<h4 id="opensuse">openSUSE</h4>
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter</code> is required.
+This is might be required on other distros as well depending on the configuration.</p>
+  </li>
+  <li>
+    <p>Known to work on openSUSE 15.</p>
+  </li>
+</ul>
+
+<h4 id="fedora-31-and-later">Fedora 31 and later</h4>
+<ul>
+  <li>Fedora 31 uses cgroup v2 by default, which is not yet supported by the containerd runtime.
+Run <code class="highlighter-rouge">sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"</code>
+to use cgroup v1.</li>
+</ul>
+
+<h4 id="fedora-30">Fedora 30</h4>
+<ul>
+  <li>No preparation is needed</li>
+</ul>
+
+<h4 id="centos-8">CentOS 8</h4>
+<ul>
+  <li>No preparation is needed</li>
+</ul>
+
+<h4 id="centos-7">CentOS 7</h4>
+<ul>
+  <li>
+    <p>Add <code class="highlighter-rouge">user.max_user_namespaces=28633</code> to <code class="highlighter-rouge">/etc/sysctl.conf</code> (or
+<code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code>.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">systemctl --user</code> does not work by default.
+Run the daemon directly without systemd:
+<code class="highlighter-rouge">dockerd-rootless.sh --experimental --storage-driver vfs</code></p>
+  </li>
+  <li>
+    <p>Known to work on CentOS 7.7. Older releases require extra configuration
+steps.</p>
+  </li>
+  <li>
+    <p>CentOS 7.6 and older releases require <a href="https://copr.fedorainfracloud.org/coprs/vbatts/shadow-utils-newxidmap/">COPR package <code class="highlighter-rouge">vbatts/shadow-utils-newxidmap</code></a> to be installed.</p>
+  </li>
+  <li>
+    <p>CentOS 7.5 and older releases require running
+<code class="highlighter-rouge">sudo grubby --update-kernel=ALL --args="user_namespace.enable=1"</code> and reboot.</p>
+  </li>
+</ul>
+
+<h2 id="known-limitations">Known limitations</h2>
+
+<ul>
+  <li>
+    <p>Only <code class="highlighter-rouge">vfs</code> graphdriver is supported. However, on Ubuntu and Debian 10,
+<code class="highlighter-rouge">overlay2</code> and <code class="highlighter-rouge">overlay</code> are also supported.</p>
+  </li>
+  <li>Following features are not supported:
+    <ul>
+      <li>Cgroups (including <code class="highlighter-rouge">docker top</code>, which depends on the cgroups)</li>
+      <li>AppArmor</li>
+      <li>Checkpoint</li>
+      <li>Overlay network</li>
+      <li>Exposing SCTP ports</li>
+    </ul>
+  </li>
+  <li>
+    <p>To use <code class="highlighter-rouge">ping</code> command, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#routing-ping-packets">Routing ping packets</a></p>
+  </li>
+  <li>To expose privileged TCP/UDP ports (&lt; 1024), see [Exposing privileged ports]
+(#exposing-privileged-ports)</li>
+</ul>
+
+<h2 id="install">Install</h2>
+
+<p>The installation script is available at https://get.docker.com/rootless .</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">-fsSL</span> https://get.docker.com/rootless | sh
+</code></pre></div></div>
+
+<p>Make sure to run the script as a non-root user.</p>
+
+<p>The script will show the environment variables that are needed to be set:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">-fsSL</span> https://get.docker.com/rootless | sh
+<span class="c">...
+</span><span class="gp">#</span> Docker binaries are installed <span class="k">in</span> /home/testuser/bin
+<span class="gp">#</span> WARN: dockerd is not <span class="k">in </span>your current PATH or pointing to /home/testuser/bin/dockerd
+<span class="gp">#</span> Make sure the following environment variables are <span class="nb">set</span> <span class="o">(</span>or add them to ~/.bashrc<span class="o">)</span>:
+<span class="go">
+</span><span class="gp">export PATH=/home/testuser:/bin:$</span>PATH
+<span class="gp">export PATH=$</span>PATH:/sbin
+<span class="go">export DOCKER_HOST=unix:///run/user/1001/docker.sock
+
+</span><span class="gp">#</span>
+<span class="gp">#</span> To control docker service run:
+<span class="gp">#</span> systemctl <span class="nt">--user</span> <span class="o">(</span>start|stop|restart<span class="o">)</span> docker
+<span class="gp">#</span>
+</code></pre></div></div>
+
+<p>To install the binaries manually without using the installer, extract
+<code class="highlighter-rouge">docker-rootless-extras-&lt;version&gt;.tar.gz</code> along with <code class="highlighter-rouge">docker-&lt;version&gt;.tar.gz</code>:
+https://download.docker.com/linux/static/stable/x86_64/</p>
+
+<h2 id="usage">Usage</h2>
+
+<h3 id="daemon">Daemon</h3>
+
+<p>Use <code class="highlighter-rouge">systemctl --user</code> to manage the lifecycle of the daemon:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> systemctl <span class="nt">--user</span> start docker
+</code></pre></div></div>
+
+<p>To launch the daemon on system startup, enable systemd lingering:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>loginctl enable-linger <span class="k">$(</span>whoami<span class="k">)</span>
+</code></pre></div></div>
+
+<p>To run the daemon directly without systemd, you need to run
+<code class="highlighter-rouge">dockerd-rootless.sh</code> instead of <code class="highlighter-rouge">dockerd</code>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> dockerd-rootless.sh <span class="nt">--experimental</span> <span class="nt">--storage-driver</span> vfs
+</code></pre></div></div>
+
+<p>As Rootless mode is experimental, currently you always need to run
+<code class="highlighter-rouge">dockerd-rootless.sh</code> with <code class="highlighter-rouge">--experimental</code>.
+You also need <code class="highlighter-rouge">--storage-driver vfs</code> unless using Ubuntu or Debian 10 kernel.
+You don’t need to care these flags if you manage the daemon using systemd, as
+these flags are automatically added to the systemd unit file.</p>
+
+<p>Remarks about directory paths:</p>
+<ul>
+  <li>The socket path is set to <code class="highlighter-rouge">$XDG_RUNTIME_DIR/docker.sock</code> by default.
+<code class="highlighter-rouge">$XDG_RUNTIME_DIR</code> is typically set to <code class="highlighter-rouge">/run/user/$UID</code>.</li>
+  <li>The data dir is set to <code class="highlighter-rouge">~/.local/share/docker</code> by default.</li>
+  <li>The exec dir is set to <code class="highlighter-rouge">$XDG_RUNTIME_DIR/docker</code> by default.</li>
+  <li>The daemon config dir is set to <code class="highlighter-rouge">~/.config/docker</code> (not <code class="highlighter-rouge">~/.docker</code>, which is
+used by the client) by default.</li>
+</ul>
+
+<p>Other remarks:</p>
+<ul>
+  <li>The <code class="highlighter-rouge">dockerd-rootless.sh</code> script executes <code class="highlighter-rouge">dockerd</code> in its own user, mount,
+and network namespaces. You can enter the namespaces by running
+<code class="highlighter-rouge">nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)</code>.</li>
+  <li><code class="highlighter-rouge">docker info</code> shows <code class="highlighter-rouge">rootless</code> in <code class="highlighter-rouge">SecurityOptions</code></li>
+  <li><code class="highlighter-rouge">docker info</code> shows <code class="highlighter-rouge">none</code> as <code class="highlighter-rouge">Cgroup Driver</code></li>
+</ul>
+
+<h3 id="client">Client</h3>
+
+<p>You need to set the socket path explicitly.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>unix://<span class="nv">$XDG_RUNTIME_DIR</span>/docker.sock
+<span class="gp">$</span> docker run <span class="nt">-d</span> nginx
+</code></pre></div></div>
+
+<h2 id="tips">Tips</h2>
+
+<h3 id="rootless-docker-in-docker">Rootless Docker in Docker</h3>
+
+<p>To run Rootless Docker inside “rootful” Docker, use <code class="highlighter-rouge">docker:&lt;version&gt;-dind-rootless</code>
+image instead of <code class="highlighter-rouge">docker:&lt;version&gt;-dind</code> image.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="nt">--name</span> dind-rootless <span class="nt">--privileged</span> docker:19.03-dind-rootless <span class="nt">--experimental</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">docker:&lt;version&gt;-dind-rootless</code> image runs as a non-root user (UID 1000).
+However, <code class="highlighter-rouge">--privileged</code> is required for disabling seccomp, AppArmor, and mount
+masks.</p>
+
+<h3 id="expose-docker-api-socket-via-tcp">Expose Docker API socket via TCP</h3>
+
+<p>To expose the Docker API socket via TCP, you need to launch <code class="highlighter-rouge">dockerd-rootless.sh</code>
+with <code class="highlighter-rouge">DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nv">DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS</span><span class="o">=</span><span class="s2">"-p 0.0.0.0:2376:2376/tcp"</span> <span class="se">\</span>
+  dockerd-rootless.sh <span class="nt">--experimental</span> <span class="se">\</span>
+  <span class="nt">-H</span> tcp://0.0.0.0:2376 <span class="se">\</span>
+  <span class="nt">--tlsverify</span> <span class="nt">--tlscacert</span><span class="o">=</span>ca.pem <span class="nt">--tlscert</span><span class="o">=</span>cert.pem <span class="nt">--tlskey</span><span class="o">=</span>key.pem
+</code></pre></div></div>
+
+<h3 id="routing-ping-packets">Routing ping packets</h3>
+
+<p><code class="highlighter-rouge">ping</code> command does not work by default.</p>
+
+<p>Add <code class="highlighter-rouge">net.ipv4.ping_group_range = 0   2147483647</code> to <code class="highlighter-rouge">/etc/sysctl.conf</code> (or
+<code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code> to allow using <code class="highlighter-rouge">ping</code>.</p>
+
+<h3 id="exposing-privileged-ports">Exposing privileged ports</h3>
+
+<p>To expose privileged ports (&lt; 1024), set <code class="highlighter-rouge">CAP_NET_BIND_SERVICE</code> on <code class="highlighter-rouge">rootlesskit</code> binary.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>setcap <span class="nv">cap_net_bind_service</span><span class="o">=</span>ep <span class="nv">$HOME</span>/bin/rootlesskit
+</code></pre></div></div>
+
+<p>Or add <code class="highlighter-rouge">net.ipv4.ip_unprivileged_port_start=0</code> to <code class="highlighter-rouge">/etc/sysctl.conf</code> (or
+<code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code>.</p>
+
+<h3 id="limiting-resources">Limiting resources</h3>
+
+<p>Currently rootless mode ignores cgroup-related <code class="highlighter-rouge">docker run</code> flags such as
+<code class="highlighter-rouge">--cpus</code> and <code class="highlighter-rouge">memory</code>.</p>
+
+<p>However, traditional <code class="highlighter-rouge">ulimit</code> and <a href="https://github.com/opsengine/cpulimit"><code class="highlighter-rouge">cpulimit</code></a>
+can be still used, though they work in process-granularity rather than in container-granularity.</p>
+
+<h3 id="changing-network-stack">Changing network stack</h3>
+
+<p><code class="highlighter-rouge">dockerd-rootless.sh</code> uses <a href="https://github.com/rootless-containers/slirp4netns">slirp4netns</a>
+(if installed) or <a href="https://github.com/moby/vpnkit">VPNKit</a> as the network stack
+by default.</p>
+
+<p>These network stacks run in userspace and might have performance overhead.
+See <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.7.0#network-drivers">RootlessKit documentation</a> for further information.</p>
+
+<p>Optionally, you can use <code class="highlighter-rouge">lxc-user-nic</code> instead for the best performance.
+To use <code class="highlighter-rouge">lxc-user-nic</code>, you need to edit <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.7.0#--netlxc-user-nic-experimental"><code class="highlighter-rouge">/etc/lxc/lxc-usernet</code></a>
+and set <code class="highlighter-rouge">$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic</code>.</p>
+
+							<!-- tags -->
+							
+							
+							
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=security">security</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=namespaces">namespaces</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=rootless">rootless</a></span>
+							
+							<!-- link corrections -->
+              <script language="JavaScript">
+							var x = document.links.length;
+							var baseHref = document.getElementsByTagName('base')[0].href
+							for (i = 0; i < x; i++) {
+							  var munged = false;
+							  var thisHREF = document.links[i].href;
+							  var originalURL = "/engine/security/rootless/";
+							  if (thisHREF.indexOf(baseHref + "#") > -1) {
+							    // hash fix
+							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+							    thisHREF = originalURL + thisHREF.replace(baseHref, "");
+							    //console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+							  }
+							  if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge") < 0) {
+							    munged = true;
+							    thisHREF = thisHREF.replace(".md", "/").replace("/index/", "/");
+							    document.links[i].setAttribute('href', thisHREF);
+							  }
+							}
+							</script>
+							
+						  <div id="ratings-div" style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
+								<div id="pd_rating_holder_8453675"></div>
+								<script type="text/javascript">
+									PDRTJS_settings_8453675 = {
+										"id": "8453675",
+										"unique_id": "engine/security/rootless.md",
+										"title": "Run the Docker daemon as a non-root user (Rootless mode)",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/engine/security/rootless.md"
+									};
+									(function(d, c, j) {
+										if (!document.getElementById(j)) {
+											var pd = d.createElement(c),
+												s;
+											pd.id = j;
+											pd.src = ('https:' == document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
+											s = document.getElementsByTagName(c)[0];
+											s.parentNode.insertBefore(pd, s);
+										}
+									}(document, 'script', 'pd-rating-js'));
+								</script>
+							</div>
+							
+						</section>
+					</main>
+					<nav class="col-nav">
+						<div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+						<div id="navbar" class="nav-sidebar">
+    <ul class="nav" id="jsTOCLeftNav">
+    </ul>
+</div>
+
+						</div>
+					</nav>
+					<div class="col-toc">
+							<div class="sidebar hidden-xs hidden-sm">
+							<div class="toc-nav">
+								<div class="feedback-links">
+									<ul>
+										
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/engine/security/rootless.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [engine/security/rootless.md](https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/)"
+															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
+										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
+										<!-- toggle mode -->
+										<li>
+											<div class="toggle-mode">
+												<div class="icon">
+													<i class="fa fa-sun-o" aria-hidden="true"></i>
+												</div>
+												<div class="toggle-switch">
+													<label class="switch">
+														<input type="checkbox" id="switch-style">
+														<div class="slider round"></div>
+												</label>
+												</div>
+												<div class="icon">
+													<i class="fa fa-moon-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								   
+									<div id="side-toc-title">本ページ内</div>
+									
+<ul id="my_toc" class="inline_toc">
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#how-it-works" class="nomunge">How it works</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#prerequisites" class="nomunge">Prerequisites</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#distribution-specific-hint" class="nomunge">Distribution-specific hint</a></li>
+    </ul>
+  </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#known-limitations" class="nomunge">Known limitations</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#install" class="nomunge">Install</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#usage" class="nomunge">Usage</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#daemon" class="nomunge">Daemon</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#client" class="nomunge">Client</a></li>
+    </ul>
+  </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#tips" class="nomunge">Tips</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#rootless-docker-in-docker" class="nomunge">Rootless Docker in Docker</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#expose-docker-api-socket-via-tcp" class="nomunge">Expose Docker API socket via TCP</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#routing-ping-packets" class="nomunge">Routing ping packets</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#exposing-privileged-ports" class="nomunge">Exposing privileged ports</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#limiting-resources" class="nomunge">Limiting resources</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/rootless.md#changing-network-stack" class="nomunge">Changing network stack</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+								</div>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<footer class="footer">
+		  
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/what-docker">What is Docker</a></li>
+                        <li><a href="https://www.docker.com/what-container">What is a Container</a></li>
+                        <li><a href="https://www.docker.com/use-cases">Use Cases</a></li>
+                        <li><a href="https://www.docker.com/customers">Customers</a></li>
+                        <li><a href="https://www.docker.com/partners/partner-program">Partners</a></li>
+                        <li class="break"><a href="https://www.docker.com/industry-government">For Government</a></li>
+                        <li><a href="https://www.docker.com/company">About Docker</a></li>
+                        <li><a href="https://www.docker.com/company/management">Management</a></li>
+                        <li><a href="https://www.docker.com/company/news-and-press">Press &amp; News</a></li>
+                        <li><a href="https://www.docker.com/careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/products/overview">Product</a></li>
+                        <li><a href="https://www.docker.com/pricing">Pricing</a></li>
+                        <li><a href="https://www.docker.com/docker-community">Community Edition</a></li>
+                        <li class="break"><a href="https://www.docker.com/enterprise">Enterprise Edition </a></li>
+                        <li><a href="https://www.docker.com/products/docker-datacenter">Docker Datacenter</a></li>
+                        <li><a href="https://hub.docker.com/">Docker Hub</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/">Documentation</a></li>
+                        <li><a href="https://www.docker.com/docker">Learn</a></li>
+                        <li><a href="https://blog.docker.com" target="_blank">Blog</a></li>
+                        <li><a href="https://engineering.docker.com" target="_blank">Engineering Blog</a></li>
+                        <li><a href="https://training.docker.com/" target="_blank">Training</a></li>
+                        <li><a href="https://success.docker.com/support">Support</a></li>
+                        <li><a href="https://success.docker.com/kbase">Knowledge Base</a></li>
+                        <li><a href="https://www.docker.com/products/resources">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/docker-community">Community</a></li>
+                        <li><a href="https://www.docker.com/technologies/overview">Open Source</a></li>
+                        <li><a href="https://www.docker.com/community/events">Events</a></li>
+                        <li><a href="https://forums.docker.com/" target="_blank">Forums</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker Captains</a></li>
+                        <li><a href="https://www.docker.com/docker-community/scholarships">Scholarships</a></li>
+                        <li><a href="https://blog.docker.com/curated/">Community News</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">Status</a></li>
+                        <li><a href="https://www.docker.com/docker-security">Security</a></li>
+                        <li><a href="https://www.docker.com/legal">Legal</a></li>
+                        <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2019 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-reddit"><a href="http://www.reddit.com/r/docker">Reddit</a></li>
+                    <li class="fa fa-slideshare"><a href="http://www.slideshare.net/docker">Slideshare</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+	</footer>
+	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/github.css">
+	
+	<!-- <script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/anchorlinks.js"></script> -->
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/menu.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/jquery.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+	<!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
+	<script language="javascript">
+	// Default to assuming this is an archive and hiding some stuff
+	// See js/archive.js and js/docs.js for logic relating to this
+	var isArchive = true;
+	var dockerVersion = 'v19.03';
+	// In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
+	var jekyllEnv = 'development';
+	// If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
+	if (jekyllEnv == 'development') {
+		jekyllEnv = '';
+	}
+	var pageURL = jekyllEnv + '/engine/security/rootless/';
+	</script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/metadata.js"></script>
+	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/glossary.js"></script>
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/docs.js"></script>
+	<script defer src="https://matsuand.github.io/docs.docker.jp.onthefly/js/toc.js"></script>
+	<script language="javascript">
+	jQuery(document).ready(function(){
+				hookupTOCEvents();
+			});
+	</script>
+</body>
+
+</html>

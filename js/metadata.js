@@ -869,13 +869,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/docker-hub/builds/classic/",
-"title":"Classic Automated Builds",
-"description":"Explains the difference between Classic and new Automated Builds",
-"keywords":"automated, build, images"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/assemble/cli-reference/",
 "title":"Docker Assemble CLI reference",
 "description":"Docker Assemble CLI reference",
@@ -4828,6 +4821,13 @@ var pages = [
 "title":"docker rmi",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/security/rootless/",
+"title":"Run the Docker daemon as a non-root user (Rootless mode)",
+"description":"Run the Docker daemon as a non-root user (Rootless mode)",
+"keywords":"security, namespaces, rootless"
 }
 ,
 {
