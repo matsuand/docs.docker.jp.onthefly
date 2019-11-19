@@ -142,7 +142,7 @@ var glossary = [
 
 {
 "term": "<a class=\"glossary\" name=\"machine\">Machine</a>",
-"def": "<p><a href=\"https://github.com/docker/machine\">Machine</a> is a Docker tool which\nmakes it really easy to create Docker hosts on  your computer, on\ncloud providers and inside your own data center. It creates servers,\ninstalls Docker on them, then configures the Docker client to talk to them.</p>\n\n<p><em>Also known as : docker-machine</em></p>\n"
+"def": "<p><a href=\"https://github.com/docker/machine\">Machine</a> is a Docker tool which\nmakes it really easy to create Docker hosts on  your computer, on\ncloud providers and inside your own data center. It creates servers,\ninstalls Docker on them, then configures the Docker client to talk to them.\nAs of July 2018, Docker Machine is in maintenance mode. Only bugfixes will be added</p>\n\n<p><em>Also known as : docker-machine</em></p>\n"
 },
 
 {
