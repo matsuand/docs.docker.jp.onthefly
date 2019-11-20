@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2019-11-20 19:25:03 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,17 +87,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-20T19:25:03+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="SAML integration"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="SAML integration Typical steps involved in SAML integration: Configure IdP. Enable SAML and configure UCP as the Service Provider in Admin Settings -&gt; Authentication and Authorization. Create (Edit) Teams to..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="SAML integration Security Assertion Markup Language (SAML) is an open standard for exchanging authentication and authorization data between parties. The SAML integration process is described below. Configure the Identity Provider..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-11-20T19:25:03+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="cluster, node, join">
@@ -192,42 +192,42 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    3 分
   
 </span>
 
 							
 							
-							<h1 id="saml-integration">SAML integration</h1>
+							<h2 id="saml-integration">SAML integration</h2>
 
-<h2 id="typical-steps-involved-in-saml-integration">Typical steps involved in SAML integration:</h2>
+<p>Security Assertion Markup Language (SAML) is an open standard for exchanging authentication and authorization data between parties. The SAML integration process is described below.</p>
+
 <ol>
-  <li>Configure IdP.</li>
-  <li>Enable SAML and configure UCP as the Service Provider in <strong>Admin Settings</strong> -&gt; <strong>Authentication and Authorization</strong>.</li>
+  <li>Configure the Identity Provider (IdP).</li>
+  <li>Enable SAML and configure UCP as the Service Provider under <strong>Admin Settings &gt; Authentication and Authorization</strong>.</li>
   <li>Create (Edit) Teams to link with the Group memberships. This updates team membership information when a user signs in with SAML.</li>
 </ol>
 
-<h3 id="configure-idp">Configure IdP:</h3>
+<h3 id="configure-idp">Configure IdP</h3>
 <p>Service Provider metadata is available at <code class="highlighter-rouge">https://&lt;SP Host&gt;/enzi/v0/saml/metadata</code>
 after SAML is enabled. The metadata link is also labeled as <code class="highlighter-rouge">entityID</code>.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Only <code class="highlighter-rouge">POST</code> binding is supported for the ‘Assertion Consumer Service’, which is located
+  <p>Note</p>
+
+  <p>Only <code class="highlighter-rouge">POST</code> binding is supported for the ‘Assertion Consumer Service’, which is located
 at <code class="highlighter-rouge">https://&lt;SP Host&gt;/enzi/v0/saml/acs</code>.</p>
 </blockquote>
 
 <h3 id="enable-saml-and-configure-ucp">Enable SAML and configure UCP</h3>
-<p>After UCP sends an <code class="highlighter-rouge">AuthnRequest</code> to the IdP, the following <code class="highlighter-rouge">Assertion</code>
-is expected:</p>
+<p>After UCP sends an <code class="highlighter-rouge">AuthnRequest</code> to the IdP, the following <code class="highlighter-rouge">Assertion</code> is expected:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">Subject</code> includes a <code class="highlighter-rouge">NameID</code> that is identified as the UCP username.
-In <code class="highlighter-rouge">AuthnRequest</code>, <code class="highlighter-rouge">NameIDFormat</code> is set to <code class="highlighter-rouge">urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</code>.
-This allows maximum compatibility for various Identity Providers.</li>
+  <li><code class="highlighter-rouge">Subject</code> includes a <code class="highlighter-rouge">NameID</code> that is identified as the username for UCP. In <code class="highlighter-rouge">AuthnRequest</code>, <code class="highlighter-rouge">NameIDFormat</code> is set to <code class="highlighter-rouge">urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</code>. This allows maximum compatibility for various Identity Providers.</li>
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;saml2:Subject&gt;</span>
-    <span class="nt">&lt;saml2:NameID</span> <span class="na">Format=</span><span class="s">"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"</span><span class="nt">&gt;</span>ry4nz<span class="nt">&lt;/saml2:NameID&gt;</span>
+    <span class="nt">&lt;saml2:NameID</span> <span class="na">Format=</span><span class="s">"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"</span><span class="nt">&gt;</span>mobywhale<span class="nt">&lt;/saml2:NameID&gt;</span>
     <span class="nt">&lt;saml2:SubjectConfirmation</span> <span class="na">Method=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:cm:bearer"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;saml2:SubjectConfirmationData</span> <span class="na">NotOnOrAfter=</span><span class="s">"2018-09-10T20:04:48.001Z"</span> <span class="na">Recipient=</span><span class="s">"https://18.237.224.122/enzi/v0/saml/acs"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/saml2:SubjectConfirmation&gt;</span>
@@ -235,12 +235,13 @@ This allows maximum compatibility for various Identity Providers.</li>
 </code></pre></div></div>
 
 <ul>
-  <li>Optional <code class="highlighter-rouge">Attribute</code> named <code class="highlighter-rouge">fullname</code> is mapped to the <strong>Full Name</strong> field
-in the UCP account.</li>
+  <li>An optional <code class="highlighter-rouge">Attribute</code> named <code class="highlighter-rouge">fullname</code> is mapped to the <strong>Full Name</strong> field in the UCP account.</li>
 </ul>
 
 <blockquote>
-  <p><strong>Note</strong>: UCP uses the value of the first occurrence of an <code class="highlighter-rouge">Attribute</code> with <code class="highlighter-rouge">Name="fullname"</code> as the <strong>Full Name</strong>.</p>
+  <p>Note</p>
+
+  <p>UCP uses the value of the first occurrence of an <code class="highlighter-rouge">Attribute</code> with <code class="highlighter-rouge">Name="fullname"</code> as the <strong>Full Name</strong>.</p>
 </blockquote>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;saml2:Attribute</span> <span class="na">Name=</span><span class="s">"fullname"</span> <span class="na">NameFormat=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"</span><span class="nt">&gt;</span>
@@ -252,12 +253,13 @@ in the UCP account.</li>
 </code></pre></div></div>
 
 <ul>
-  <li>Optional <code class="highlighter-rouge">Attribute</code> named <code class="highlighter-rouge">member-of</code> is linked to the UCP team.
-Values are set in the UCP interface.</li>
+  <li>An optional <code class="highlighter-rouge">Attribute</code> named <code class="highlighter-rouge">member-of</code> is linked to the UCP team. The values are set in the UCP interface.</li>
 </ul>
 
 <blockquote>
-  <p><strong>Note</strong>: UCP uses all <code class="highlighter-rouge">AttributeStatements</code> and <code class="highlighter-rouge">Attributes</code> in the <code class="highlighter-rouge">Assertion</code> with <code class="highlighter-rouge">Name="member-of"</code>.</p>
+  <p>Note</p>
+
+  <p>UCP uses all <code class="highlighter-rouge">AttributeStatements</code> and <code class="highlighter-rouge">Attributes</code> in the <code class="highlighter-rouge">Assertion</code> with <code class="highlighter-rouge">Name="member-of"</code>.</p>
 </blockquote>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;saml2:Attribute</span> <span class="na">Name=</span><span class="s">"member-of"</span> <span class="na">NameFormat=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"</span><span class="nt">&gt;</span>
@@ -267,10 +269,15 @@ Values are set in the UCP interface.</li>
     <span class="nt">&lt;/saml2:AttributeValue&gt;</span>
 <span class="nt">&lt;/saml2:Attribute&gt;</span>
 </code></pre></div></div>
-
 <ul>
-  <li>Optional <code class="highlighter-rouge">Attribute</code> named <code class="highlighter-rouge">is-admin</code> determines if the user is an administrator. The content in the <code class="highlighter-rouge">AttributeValue</code> is ignored.</li>
+  <li>An optional <code class="highlighter-rouge">Attribute</code> with the name <code class="highlighter-rouge">is-admin</code> is used to identify if the user is an administrator.</li>
 </ul>
+
+<blockquote>
+  <p>Note</p>
+
+  <p>When there is an <code class="highlighter-rouge">Attribute</code> with the name <code class="highlighter-rouge">is-admin</code>, the user is an administrator. The content in the <code class="highlighter-rouge">AttributeValue</code> is ignored.</p>
+</blockquote>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;saml2:Attribute</span> <span class="na">Name=</span><span class="s">"is-admin"</span> <span class="na">NameFormat=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;saml2:AttributeValue</span>
@@ -280,23 +287,23 @@ Values are set in the UCP interface.</li>
 <span class="nt">&lt;/saml2:Attribute&gt;</span>
 </code></pre></div></div>
 
-<h4 id="okta-configuration">Okta Configuration</h4>
-<p>Configuring with Okta is straightforward, as shown in the following examples:
-<img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/saml_okta_2.png" alt="Configure in Okta" />
+<h4 id="okta-configuration">Okta configuration</h4>
+<p>The Okta configuration is shown in the following examples.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/saml_okta_2.png" alt="Configure in Okta" />
 <img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/saml_okta_1.png" alt="Configure in UCP" /></p>
 
-<p>When two or more group names are expected to return with the Assertion, use the <code class="highlighter-rouge">regex</code> filter. For example, use the value <code class="highlighter-rouge">apple|orange</code>
-to return groups <code class="highlighter-rouge">apple</code> and <code class="highlighter-rouge">orange</code>.
-<img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/saml_okta_3.png" alt="Regex_filter_for_group_Okta" /></p>
+<p>When two or more group names are expected to return with the Assertion, use the <code class="highlighter-rouge">regex</code> filter. For example, use the value <code class="highlighter-rouge">apple|orange</code> to return groups <code class="highlighter-rouge">apple</code> and <code class="highlighter-rouge">orange</code>.</p>
 
-<h3 id="service-provider-configuration">Service Provider Configuration</h3>
-<p>Enter the Identity Provider’s metadata URL to obtain its metadata. To access the URL, you might need to
-provide the CA certificate that can verify the remote server.</p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/saml_okta_3.png" alt="Regex_filter_for_group_Okta" /></p>
 
-<h3 id="link-group-memeberships-with-users">Link Group memeberships with users</h3>
-<p>Use the ‘edit’ or ‘create’ team dialog to associate SAML group assertion with
-the UCP team so that user team membership is synchronized when the user logs in.
-<img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/saml_okta_4.png" alt="Link UCP team with IdP group" /></p>
+<h3 id="service-provider-configuration">Service Provider configuration</h3>
+<p>Enter the Identity Provider’s metadata URL to obtain its metadata. To access the URL, you may need to provide the CA certificate that can verify the remote server.</p>
+
+<h3 id="link-group-memberships-with-users">Link Group memberships with users</h3>
+<p>Use the ‘edit’ or ‘create’ team dialog to associate SAML group assertion with the UCP team to synchronize user team membership when the user logs in.</p>
+
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/saml_okta_4.png" alt="Link UCP team with IdP group" /></p>
 
 							<!-- tags -->
 							
@@ -392,12 +399,12 @@ the UCP team so that user team membership is synchronized when the user logs in.
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#typical-steps-involved-in-saml-integration" class="nomunge">Typical steps involved in SAML integration:</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#saml-integration" class="nomunge">SAML integration</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#configure-idp" class="nomunge">Configure IdP:</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#configure-idp" class="nomunge">Configure IdP</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#enable-saml-and-configure-ucp" class="nomunge">Enable SAML and configure UCP</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#service-provider-configuration" class="nomunge">Service Provider Configuration</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#link-group-memeberships-with-users" class="nomunge">Link Group memeberships with users</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#service-provider-configuration" class="nomunge">Service Provider configuration</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/integrate-saml.md#link-group-memberships-with-users" class="nomunge">Link Group memberships with users</a></li>
     </ul>
   </li>
 </ul>
