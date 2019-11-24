@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-20 19:25:03 +0900 -->
+<!-- Page generated 2019-11-24 21:38:14 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-20T19:25:03+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-24T21:38:14+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Enterprise を Red Hat Enterprise Linux にインストールしアップグレードする方法には二種類あります。 YUM リポジトリ利用: Docker リポジトリを設定して、そこから Docker Engine - Enterprise をインストールします。 YUM を使ってインストールしアップグレードも行うため、簡単に操作できます。 この方法を推奨します。 RPM パッケージ利用: RPM パッケージをダウンロードして、手動でインストールやアップグレードの管理を行います。この方法は、インターネットへのアクセスができない環境において Docker Engine - Enterprise をインストールすることができます。 Docker..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-20T19:25:03+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-11-24T21:38:14+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="requirements, installation, rhel, rpm, install, uninstall, upgrade, update">
@@ -212,39 +212,43 @@ YUM を使ってインストールしアップグレードも行うため、簡�
 
 <h2 id="prerequisites">前提条件</h2>
 
-<p>ここでは Docker EE をインストールする前に考慮しておくべきことを説明します。
+<p>ここでは Docker Engine - Enterprise をインストールする前に考慮しておくべきことを説明します。
 作業を必要とする項目を以下に示します。</p>
 
 <ul>
-  <li>RHEL 64 ビット 7.4 またはそれ以上、<code class="highlighter-rouge">x86_64</code>または<code class="highlighter-rouge">s390x</code>を利用。</li>
+  <li><code class="highlighter-rouge">x86_64</code> 上において RHEL 64 ビット 7.4 またはそれ以上を利用。</li>
   <li>ストレージドライバーとして <code class="highlighter-rouge">overlay2</code> または <code class="highlighter-rouge">devicemapper</code>（本番環境では <code class="highlighter-rouge">direct-lvm</code> モード）を利用。</li>
-  <li><a href="https://hub.docker.com/my-content" target="_blank" class="_">Docker Hub</a> から Docker EE リポジトリを検索。</li>
+  <li><a href="https://hub.docker.com/my-content" target="_blank" class="_">Docker Hub</a> から Docker Engine - Enterprise リポジトリの URL を検索。</li>
   <li>Docker の旧バージョンはアンインストール。</li>
   <li><code class="highlighter-rouge">/etc/yum.repos.d/</code> から古い Docker リポジトリは削除。</li>
-  <li><code class="highlighter-rouge">s390x</code> (IBM Z) システムではインストール、アップグレード前に SELinux を無効化。</li>
 </ul>
+
+<blockquote>
+  <p><strong>Note:</strong>
+IBM Z (<code class="highlighter-rouge">s390x</code>) is supported for Docker Engine - Enterprise 17.06.xx only. If
+you’re going to install Docker on an IBM Z system, disable SELinux before
+installing/upgrading and make sure you’re installing Docker Engine -
+Enterprise 17.06.xx.</p>
+</blockquote>
 
 <h3 id="architectures-and-storage-drivers">アーキテクチャーとストレージドライバー</h3>
 
-<p>Docker EE では Red Hat Enterprise Linux 64 ビット、バージョン 7.4 またはそれ以上、<code class="highlighter-rouge">x86_64</code>または<code class="highlighter-rouge">s390x</code> (IBM Z) のアーキテクチャーをサポートします。詳細については<a href="https://success.docker.com/article/compatibility-matrix" target="_blank" class="_">互換性マトリックス</a>（Compatability Matrix）を参照してください。</p>
+<p>Docker Engine - Enterprise では Red Hat Enterprise Linux 64 ビット、バージョン 7.4 またはそれ以上、<code class="highlighter-rouge">x86_64</code> のアーキテクチャーをサポートします。
+詳細については<a href="https://success.docker.com/article/compatibility-matrix" target="_blank" class="_">互換性マトリックス</a>（Compatability Matrix）を参照してください。</p>
 
-<blockquote>
-  <p>リトルエンディアン方式のみ</p>
-
-  <p>RHEL 7 にはビッグエンディアン、リトルエンディアンの両バージョンがありますが、IBM Power システムにおいて Docker Engine - Enterprise はリトルエンディアン方式、つまり <code class="highlighter-rouge">ppc64le</code> のみをサポートします。</p>
-</blockquote>
-
-<p>Red Hat Enterprise Linux において Docker EE はストレージドライバー <code class="highlighter-rouge">overlay2</code> と <code class="highlighter-rouge">devicemapper</code> をサポートします。
-Docker EE 17.06.2-ee-5 およびこれ以上においては、<code class="highlighter-rouge">overlay2</code> の利用が推奨されています。
+<p>Red Hat Enterprise Linux において Docker Engine - Enterprise はストレージドライバー <code class="highlighter-rouge">overlay2</code> と <code class="highlighter-rouge">devicemapper</code> をサポートします。
+Docker Engine - Enterprise 17.06.2-ee-5 およびこれ以上においては、<code class="highlighter-rouge">overlay2</code> の利用が推奨されています。
 利用にあたっては以下の制約があります。</p>
 
 <ul>
   <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver" target="_blank" class="_">OverlayFS</a>: <code class="highlighter-rouge">selinux</code> が有効な場合、ストレージドライバー <code class="highlighter-rouge">overlay2</code> は RHEL 7.4 またはそれ以上においてサポートされます。
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver" target="_blank" class="_">OverlayFS</a>:
+<code class="highlighter-rouge">selinux</code> が有効な場合、ストレージドライバー <code class="highlighter-rouge">overlay2</code> は RHEL 7.4 またはそれ以上においてサポートされます。
 <code class="highlighter-rouge">selinux</code> が無効な場合、<code class="highlighter-rouge">overlay2</code> は RHEL 7.2 またはそれ以上、ただしカーネルバージョンは 3.10.0-693 またはそれ以上においてサポートされます。</p>
   </li>
   <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">Device Mapper</a>: 本番環境において <code class="highlighter-rouge">devicemapper</code> を利用する場合は、<code class="highlighter-rouge">direct-lvm</code> モードを利用するようにしてください。
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">Device Mapper</a>:
+本番環境において <code class="highlighter-rouge">devicemapper</code> を利用する場合は、<code class="highlighter-rouge">direct-lvm</code> モードを利用するようにしてください。
 これは専用のブロックデバイスをいくつか必要とします。
 SSD（solid-state media）のような高速なストレージが推奨されます。
 各<a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" target="_blank" class="_">ストレージドライバー</a>に応じた設定が適切にできていることを確認してから、Docker を起動してください。</p>
@@ -267,7 +271,8 @@ RHEL 実装内にて FIPS サポートが有効になっていない場合は、
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: FIPS は Docker Engine - Enterprise でのみサポートされます。
+  <p><strong>メモ</strong>:
+FIPS は Docker Engine - Enterprise でのみサポートされます。
 UCP と DTR は今のところ FIPS-140-2 をサポートしていません。</p>
 </blockquote>
 
@@ -325,7 +330,7 @@ Environment="DOCKER_FIPS=1"
 
 <h3 id="uninstall-old-docker-versions">Docker の旧バージョンのアンインストール</h3>
 
-<p>Docker EE パッケージは <code class="highlighter-rouge">docker-ee</code> という名称です。
+<p>Docker Engine - Enterprise パッケージは <code class="highlighter-rouge">docker-ee</code> という名称です。
 古いバージョンでは <code class="highlighter-rouge">docker</code> あるいは <code class="highlighter-rouge">docker-engine</code> というものでした。
 古いバージョンと関連する依存パッケージはすべてアンインストールします。
 <code class="highlighter-rouge">/var/lib/docker/</code> にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。</p>
@@ -348,11 +353,12 @@ Environment="DOCKER_FIPS=1"
 Red Hat Enterprise Linux のような RPM ベースのディストリビューションでは、YUM というツールを使ってリポジトリを操作し、依存パッケージの管理や自動アップデート機能を提供しています。</p>
 
 <blockquote class="warning">
-  <p>Docker EE を IBM Z システムへのインストール時は SELinux を無効に</p>
+  <p>Docker Engine - Enterprise を IBM Z システムへのインストール時は SELinux を無効に</p>
 
   <p>現在のところ IBM Z システムにおいては <code class="highlighter-rouge">selinux</code> をサポートしていません。
 Docker EE を IBM Z システム上にてインストールまたはアップグレードする際に <code class="highlighter-rouge">selinux</code> を有効にしていると、<code class="highlighter-rouge">container-selinux</code> パッケージが見つからないというエラーが発生します。
-IBM Z システム上にてインストールまたはアップグレードする際には <code class="highlighter-rouge">selinux</code> を無効にしてください。</p>
+IBM Z システム上にてインストールまたはアップグレードする際には <code class="highlighter-rouge">selinux</code> を無効にしてください。
+IBM Z システムがサポートされるのは Docker Engine - Enterprise バージョン 17.06.xx のみです。</p>
 </blockquote>
 
 <h3 id="set-up-the-repository">リポジトリのセットアップ</h3>
@@ -585,11 +591,12 @@ Docker コマンドの実行には <code class="highlighter-rouge">sudo</code> �
 Docker Enterprise をアップグレードする際には、常に新しいファイルをダウンロードすることが必要です。</p>
 
 <blockquote class="warning">
-  <p>Docker EE を IBM Z システムへのインストール時は SELinux を無効に</p>
+  <p>Docker Engine - Enterprise を IBM Z システムへのインストール時は SELinux を無効に</p>
 
   <p>現在のところ IBM Z システムにおいては <code class="highlighter-rouge">selinux</code> をサポートしていません。
 Docker EE を IBM Z システム上にてインストールまたはアップグレードする際に <code class="highlighter-rouge">selinux</code> を有効にしていると、<code class="highlighter-rouge">container-selinux</code> パッケージが見つからないというエラーが発生します。
-IBM Z システム上にてインストールまたはアップグレードする際には <code class="highlighter-rouge">selinux</code> を無効にしてください。</p>
+IBM Z システム上にてインストールまたはアップグレードする際には <code class="highlighter-rouge">selinux</code> を無効にしてください。
+IBM Z システムがサポートされるのは Docker Engine - Enterprise バージョン 17.06.xx のみです。</p>
 </blockquote>
 
 <h3 id="install-with-a-package">パッケージのインストール</h3>

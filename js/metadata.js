@@ -793,8 +793,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/centos/",
-"title":"Docker EE の入手（CentOS 向け）",
-"description":"CentOS 上に Docker EE をインストールする手順を説明。",
+"title":"Docker Engine - Enterprise の入手（CentOS 向け）",
+"description":"CentOS 上に Docker Engine - Enterprise をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -3985,8 +3985,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/oracle/",
-"title":"Docker EE の入手（Oracle Linux 向け）",
-"description":"Oracle Linux 上に Docker EE をインストールする手順を説明。",
+"title":"Docker Engine - Enterprise の入手（Oracle Linux 向け）",
+"description":"Oracle Linux 上に Docker Engine - Enterprise をインストールする手順を説明。",
 "keywords":"requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -5385,8 +5385,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/suse/",
-"title":"Get Docker EE for SLES",
-"description":"Instructions for installing Docker EE on SLES",
+"title":"Get Docker Engine - Enterprise for SLES",
+"description":"Instructions for installing Docker Engine - Enterprise on SLES",
 "keywords":"requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -5847,8 +5847,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/ubuntu/",
-"title":"Get Docker EE for Ubuntu",
-"description":"Instructions for installing Docker EE on Ubuntu",
+"title":"Get Docker Engine - Enterprise for Ubuntu",
+"description":"Instructions for installing Docker Engine - Enterprise on Ubuntu",
 "keywords":"requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
 }
 ,
@@ -6393,9 +6393,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/",
-"title":"Docker Desktop WSL 2 Tech Preview",
-"description":"Docker Desktop WSL 2 Tech Preview",
-"keywords":"Docker, WSL, WSL 2, Tech Preview, Windows Subsystem for Linux"
+"title":"Docker Desktop WSL 2 backend",
+"description":"Docker Desktop WSL 2 backend",
+"keywords":"WSL, WSL 2 Tech Preview, Windows Subsystem for Linux"
 }
 ,
 {
