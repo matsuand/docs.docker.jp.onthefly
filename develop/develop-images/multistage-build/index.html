@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2019-12-11 13:19:54 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-12-11T13:19:54+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="マルチステージビルドは、Docker 17.05 またはそれ以上の Docker デーモンおよび Docker クライアントにおける新機能です。 マルチステージビルドは、Dockerfile を読みやすく保守しやすくするように、最適化に取り組むユーザーにとって非常にありがたいものです。 感謝: Alex Ellis 氏に感謝します。 氏のブログ投稿 Builder pattern vs. Multi-stage builds in Docker に基づいて、以下の利用例を掲載する許可を頂きました。 マルチステージビルド以前 イメージをビルドする際に取り組むことといえば、ほとんどがそのイメージサイズを小さく抑えることです。 Dockerfile 内の各命令は、イメージに対してレイヤーを追加します。 そこで次のレイヤー処理に入る前には、不要となった生成物はクリーンアップしておくことが必要です。 現実に効果的な Dockerfile を書くためには、いつもながらトリッキーなシェルのテクニックや、レイヤーができる限り小さくなるようなロジックを考えたりすることが必要でした。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-12-11T13:19:54+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="images, containers, best practices, multi-stage, multistage">
@@ -353,6 +353,21 @@ Docker クライアントは必要なときにはイメージを取得します�
 <pre><code class="language-Dockerfile">COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 </code></pre>
 
+<h2 id="use-a-previous-stage-as-a-new-stage">Use a previous stage as a new stage</h2>
+
+<p>You can pick up where a previous stage left off by referring to it when using the <code class="highlighter-rouge">FROM</code> directive. For example:</p>
+
+<pre><code class="language-Dockerfile">FROM alpine:latest as builder
+RUN apk --no-cache add build-base
+
+FROM builder as build1
+COPY source1.cpp source.cpp
+RUN g++ -o /binary source.cpp
+
+FROM builder as build2
+COPY source2.cpp source.cpp
+RUN g++ -o /binary source.cpp
+</code></pre>
 
 							<!-- tags -->
 							
@@ -453,6 +468,7 @@ Docker クライアントは必要なときにはイメージを取得します�
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/multistage-build.md#name-your-build-stages" class="nomunge">ビルドステージの命名</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/multistage-build.md#stop-at-a-specific-build-stage" class="nomunge">ビルドステージの指定</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/multistage-build.md#use-an-external-image-as-a-stage" class="nomunge">外部イメージの「ステージ」としての利用</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/multistage-build.md#use-a-previous-stage-as-a-new-stage" class="nomunge">Use a previous stage as a new stage</a></li>
 </ul>
 
 
