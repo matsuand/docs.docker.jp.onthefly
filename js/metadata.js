@@ -5378,7 +5378,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/supported-platforms/",
-"title":"Docker Enterprise について",
+"title":"概要",
 "description":"Docker Enterprise の製品情報",
 "keywords":"Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported"
 }

@@ -46,11 +46,6 @@ var glossary = [
 },
 
 {
-"term": "<a class=\"glossary\" name=\"collection\">collection</a>",
-"def": "<p>A collection is a group of swarm resources that Docker Engine - Enterprise uses for role-based\naccess control. Collections enable organizing permissions for resources like\nnodes, services, containers, volumes, networks, and secrets. <a href=\"/datacenter/ucp/2.2/guides/access-control/manage-access-with-collections/\">Learn how to manage collections</a>.</p>\n"
-},
-
-{
 "term": "<a class=\"glossary\" name=\"compose\">Compose</a>",
 "def": "<p><a href=\"https://github.com/docker/compose\">Compose</a> is a tool for defining and\nrunning complex applications with Docker. With Compose, you define a\nmulti-container application in a single file, then spin your\napplication up in a single command which does everything that needs to\nbe done to get it running.</p>\n\n<p><em>Also known as : docker-compose, fig</em></p>\n"
 },
@@ -72,7 +67,7 @@ var glossary = [
 
 {
 "term": "<a class=\"glossary\" name=\"docker_enterprise\">Docker Enterprise</a>",
-"def": "<p>Docker Enterprise is a platform to build, ship, and run\ncontainerized applications, that you can deploy in the cloud or on-premise. It\nincludes a tested and certified version of Docker, web UIs for managing\nyour app resources, and support.</p>\n"
+"def": "<p>Docker Enterprise is a platform to build, ship, and run containerized applications, that\nyou can deploy in the cloud or on-premise. It includes a tested and certified version of Docker,\nweb UIs for managing your app resources, and support.</p>\n"
 },
 
 {
@@ -103,11 +98,6 @@ var glossary = [
 {
 "term": "<a class=\"glossary\" name=\"filesystem\">filesystem</a>",
 "def": "<p>A file system is the method an operating system uses to name files\nand assign them locations for efficient storage and retrieval.</p>\n\n<p>Examples :</p>\n\n<ul>\n  <li>Linux : ext4, aufs, btrfs, zfs</li>\n  <li>Windows : NTFS</li>\n  <li>macOS : HFS+</li>\n</ul>\n"
-},
-
-{
-"term": "<a class=\"glossary\" name=\"grant\">grant</a>",
-"def": "<p>A grant enables role-based access control for managing how users and\norganizations access Docker Engine - Enterprise swarm resources. A grant is made up of a\nsubject, a role, and a collection. For more about grants and role-based access\ncontrol, see <a href=\"/datacenter/ucp/2.2/guides/access-control/grant-permissions/\">Grant permissions to users based on roles</a>.</p>\n"
 },
 
 {
@@ -186,16 +176,6 @@ var glossary = [
 },
 
 {
-"term": "<a class=\"glossary\" name=\"role\">role</a>",
-"def": "<p>A role is a set of permitted API operations on a collection of Docker Engine - Enterprise swarm\nresources. As part of a grant, a role is assigned to a subject (a user, team, or\norganization) and a collection. For more about roles, see <a href=\"/datacenter/ucp/2.2/guides/access-control/permission-levels/\">Roles and\npermission levels</a>.</p>\n"
-},
-
-{
-"term": "<a class=\"glossary\" name=\"role-based_access_control\">role-based access control</a>",
-"def": "<p>Role-based access control enables managing how Docker Engine - Enterprise users can access\nswarm resources. UCP administrators create grants to control how users access\nresource collections. A grant is made up of a subject, a role, and a collection.\nA grant defines who (subject) has how much access (role) to a set of resources\n(collection). For more about role-based access control, see\n<a href=\"/datacenter/ucp/2.2/guides/access-control/\">Authentication</a>.</p>\n"
-},
-
-{
 "term": "<a class=\"glossary\" name=\"SSH\">SSH</a>",
 "def": "<p>SSH (secure shell) is a secure protocol for accessing remote machines and applications.\nIt provides authentication and encrypts data communication over insecure networks such\nas the Internet. SSH uses public/private key pairs to authenticate logins.</p>\n"
 },
@@ -208,11 +188,6 @@ var glossary = [
 {
 "term": "<a class=\"glossary\" name=\"service_discovery\">service discovery</a>",
 "def": "<p>Swarm mode <a href=\"/engine/swarm/networking/#use-swarm-mode-service-discovery\">service discovery</a> is a DNS component\ninternal to the swarm that automatically assigns each service on an overlay\nnetwork in the swarm a VIP and DNS entry. Containers on the network share DNS\nmappings for the service via gossip so any container on the network can access\nthe service via its service name.</p>\n\n<p>You don’t need to expose service-specific ports to make the service available to\nother services on the same overlay network. The swarm’s internal load balancer\nautomatically distributes requests to the service VIP among the active tasks.</p>\n"
-},
-
-{
-"term": "<a class=\"glossary\" name=\"subject\">subject</a>",
-"def": "<p>A subject represents a user, team, or organization in Docker Enterprise. A subject is\ngranted a role for access to a collection of swarm resources.\nFor more about role-based access, see <a href=\"/datacenter/ucp/2.2/guides/access-control/\">Authentication</a>.</p>\n"
 },
 
 {
