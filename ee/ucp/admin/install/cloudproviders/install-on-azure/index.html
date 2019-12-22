@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-24 21:38:14 +0900 -->
+<!-- Page generated 2019-12-22 13:42:00 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -91,7 +91,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-24T21:38:14+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-12-22T13:42:00+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -101,7 +101,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Universal Control Plane (UCP) closely integrates with Microsoft Azure for its Kubernetes Networking and Persistent Storage feature set. UCP deploys the Calico CNI provider. In Azure, the Calico CNI..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-24T21:38:14+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-12-22T13:42:00+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes">
@@ -216,16 +216,13 @@ addresses for Kubernetes pods. The Azure IPAM module requires each Azure virtual
 machine which is part of the Kubernetes cluster to be configured with a pool of IP
 addresses.</p>
 
-<p>There are two options for provisoning IPs for the Kubernetes cluster on Azure:</p>
+<p>There are two options for provisioning IPs for the Kubernetes cluster on Azure:</p>
 
 <ul>
-  <li><em>An automated mechanism provided by UCP which allows for IP pool configuration and maintenance
-for standalone Azure virtual machines.</em> This service runs within the
-<code class="highlighter-rouge">calico-node</code> daemonset and provisions 128 IP addresses for each
-node by default. For information on customizing this value, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#adjust-the-ip-count-value">Adjust the IP count value</a>.</li>
-  <li><em>Manual provision of additional IP address for each Azure virtual machine.</em> This
-could be done through the Azure Portal, the Azure CLI <code class="highlighter-rouge">$ az network nic ip-config create</code>,
-or an ARM template. You can find an example of an ARM template
+  <li><strong>An automated mechanism provided by UCP which allows for IP pool configuration and maintenance for standalone Azure virtual machines (VMs).</strong> This service runs within the
+<code class="highlighter-rouge">calico-node</code> daemonset and provisions 128 IP addresses for each node by default. For information on customizing this value, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#adjust-the-ip-count-value">Adjust the IP count value</a>.</li>
+  <li><strong>Manual provision of additional IP address for each Azure VM.</strong> This
+could be done through the Azure Portal, the Azure CLI <code class="highlighter-rouge">$ az network nic ip-config create</code>, or an ARM template. You can find an example of an ARM template
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#manually-provision-ip-address-pools-as-part-of-an-azure-virtual-machine-scale-set">here</a>.</li>
 </ul>
 
@@ -330,38 +327,31 @@ installation process.</p>
 </blockquote>
 
 <p>The subnet and the virtual network associated with the primary interface of the
-Azure virtual machines need to be configured with a large enough address
-prefix/range. The number of required IP addresses depends on the workload and
-the number of nodes in the cluster.</p>
+Azure VMs need to be configured with a large enough address prefix/range. The number of required IP addresses depends on the workload and the number of nodes in the cluster.</p>
 
-<p>For example, in a cluster of 256 nodes, make sure that the address space of the subnet and the
-virtual network can allocate at least 128 * 256 IP addresses, in order to run a maximum of 128 pods
-concurrently on a node. This would be <strong><em>in addition to</em></strong> initial IP allocations to virtual machine
-NICs (network interfaces) during Azure resource creation.</p>
+<p>For example, in a cluster of 256 nodes, make sure that the address space of the subnet and the virtual network can allocate at least 128 * 256 IP addresses, in order to run a maximum of 128 pods concurrently on a node. This would be <strong><em>in addition to</em></strong> initial IP allocations to VM network interface cards (NICs) during Azure resource creation.</p>
 
-<p>Accounting for IP addresses that are allocated to NICs during virtual machine bring-up, set
+<p>Accounting for IP addresses that are allocated to NICs during VM bring up, set
 the address space of the subnet and virtual network to <code class="highlighter-rouge">10.0.0.0/16</code>. This
 ensures that the network can dynamically allocate at least 32768 addresses,
 plus a buffer for initial allocations for primary IP addresses.</p>
 
 <blockquote class="important">
-  <p>Azure IPAM, UCP, and Kubernetes</p>
+  <p>Note</p>
 
-  <p>The Azure IPAM module queries an Azure virtual machine’s metadata to obtain
-a list of IP addresses which are assigned to the virtual machine’s NICs. The
+  <p>The Azure IPAM module queries an Azure VM’s metadata to obtain
+a list of IP addresses which are assigned to the VM’s NICs. The
 IPAM module allocates these IP addresses to Kubernetes pods. You configure the
-IP addresses as <code class="highlighter-rouge">ipConfigurations</code> in the NICs associated with a virtual machine
-or scale set member, so that Azure IPAM can provide them to Kubernetes when
-requested.</p>
+IP addresses as <code class="highlighter-rouge">ipConfigurations</code> in the NICs associated with a VM or scale set member, so that Azure IPAM can provide them to Kubernetes when requested.</p>
 </blockquote>
 
-<h2 id="manually-provision-ip-address-pools-as-part-of-an-azure-virtual-machine-scale-set">Manually provision IP address pools as part of an Azure virtual machine scale set</h2>
+<h2 id="manually-provision-ip-address-pools-as-part-of-an-azure-vm-scale-set">Manually provision IP address pools as part of an Azure VM scale set</h2>
 
-<p>Configure IP Pools for each member of the virtual machine scale set during provisioning by
+<p>Configure IP Pools for each member of the VM scale set during provisioning by
 associating multiple <code class="highlighter-rouge">ipConfigurations</code> with the scale set’s
-<code class="highlighter-rouge">networkInterfaceConfigurations</code>. Here’s an example <code class="highlighter-rouge">networkProfile</code>
+<code class="highlighter-rouge">networkInterfaceConfigurations</code>. The following is an example <code class="highlighter-rouge">networkProfile</code>
 configuration for an ARM template that configures pools of 32 IP addresses
-for each virtual machine in the virtual machine scale set.</p>
+for each VM in the VM scale set.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"networkProfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="s2">"networkInterfaceConfigurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -420,19 +410,21 @@ for each virtual machine in the virtual machine scale set.</p>
 <h3 id="adjust-the-ip-count-value">Adjust the IP Count Value</h3>
 
 <p>During a UCP installation, a user can alter the number of Azure IP addresses
-UCP will automatically provision for pods. By default UCP will provision 128
-addresses, from the same Azure Subnet as the hosts, for each Virtual Machine in
-the cluster. However if you have manually attached additional IP addresses
-to the Virtual Machines (via an ARM Template, Azure CLI or Azure Portal) or you
+UCP will automatically provision for pods. By default, UCP will provision 128
+addresses, from the same Azure Subnet as the hosts, for each VM in
+the cluster. However, if you have manually attached additional IP addresses
+to the VMs (via an ARM Template, Azure CLI or Azure Portal) or you
 are deploying in to small Azure subnet (less than /16), an <code class="highlighter-rouge">--azure-ip-count</code>
 flag can be used at install time.</p>
 
 <blockquote>
-  <p>Note: Do not set the <code class="highlighter-rouge">--azure-ip-count</code> variable to a value of less than 6 if
+  <p>Note</p>
+
+  <p>Do not set the <code class="highlighter-rouge">--azure-ip-count</code> variable to a value of less than 6 if
 you have not manually provisioned additional IP addresses for each Virtual
 Machine. The UCP installation will need at least 6 IP addresses to allocate
-to the core UCP components that run as Kubernetes pods. That is in addition
-to the Virtual Machine’s private IP address.</p>
+to the core UCP components that run as Kubernetes pods. This is in addition
+to the VM’s private IP address.</p>
 </blockquote>
 
 <p>Below are some example scenarios which require the <code class="highlighter-rouge">--azure-ip-count</code> variable
@@ -456,13 +448,13 @@ addresses to a custom value due to:</p>
   <li>Plan to run a small number of Kubernetes pods on each node.</li>
 </ul>
 
-<p>For example if you wanted to provision 16 addresses per virtual machine, then
+<p>For example if you wanted to provision 16 addresses per VM, then
 you would pass <code class="highlighter-rouge">--azure-ip-count 16</code> into the UCP installation command.</p>
 
 <p>If you need to adjust this value post-installation, see
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/ucp-configuration-file/">instructions</a> on how to download the UCP
 configuration file, change the value, and update the configuration via the API.
-If you reduce the value post-installation, existing virtual machines will not
+If you reduce the value post-installation, existing VMs will not
 be reconciled, and you will have to manually edit the IP count in Azure.</p>
 
 <h3 id="install-ucp">Install UCP</h3>
@@ -471,14 +463,14 @@ be reconciled, and you will have to manually edit the IP count in Azure.</p>
 option maps to the IP address range that you have configured for the Azure
 subnet, and the <code class="highlighter-rouge">--host-address</code> maps to the private IP address of the master
 node. Finally if you want to adjust the amount of IP addresses provisioned to
-each virtual machine pass <code class="highlighter-rouge">--azure-ip-count</code>.</p>
+each VM pass <code class="highlighter-rouge">--azure-ip-count</code>.</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p>Note</p>
 
   <p>The <code class="highlighter-rouge">pod-cidr</code> range must match the Azure Virtual Network’s Subnet
 attached the hosts. For example, if the Azure Virtual Network had the range
-<code class="highlighter-rouge">172.0.0.0/16</code> with Virtual Machines provisioned on an Azure Subnet of
+<code class="highlighter-rouge">172.0.0.0/16</code> with VMs provisioned on an Azure Subnet of
 <code class="highlighter-rouge">172.0.1.0/24</code>, then the Pod CIDR should also be <code class="highlighter-rouge">172.0.1.0/24</code>.</p>
 </blockquote>
 
@@ -593,7 +585,7 @@ attached the hosts. For example, if the Azure Virtual Network had the range
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#guidelines-for-ipam-configuration" class="nomunge">Guidelines for IPAM Configuration</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#manually-provision-ip-address-pools-as-part-of-an-azure-virtual-machine-scale-set" class="nomunge">Manually provision IP address pools as part of an Azure virtual machine scale set</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#manually-provision-ip-address-pools-as-part-of-an-azure-vm-scale-set" class="nomunge">Manually provision IP address pools as part of an Azure VM scale set</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#ucp-installation" class="nomunge">UCP Installation</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install-on-azure.md#adjust-the-ip-count-value" class="nomunge">Adjust the IP Count Value</a></li>

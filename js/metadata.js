@@ -50,13 +50,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/active/",
-"title":"docker-machine active",
-"description":"Identify active machines",
-"keywords":"machine, active, subcommand"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/add-labels-to-cluster-nodes/",
 "title":"Add labels to cluster nodes",
 "description":"Learn how to add metadata to cluster nodes that can be used to specify constraints when deploying services.",
@@ -477,20 +470,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/examples/aws/",
-"title":"Amazon Web Services (AWS) EC2 example",
-"description":"Using Docker Machine to provision hosts on AWS",
-"keywords":"docker, machine, cloud, aws"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/aws/",
-"title":"Amazon Web Services",
-"description":"Amazon Web Services driver for machine",
-"keywords":"machine, Amazon Web Services, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/config/containers/logging/awslogs/",
 "title":"Amazon CloudWatch Logs logging driver",
 "description":"Describes how to use the Amazon CloudWatch Logs logging driver.",
@@ -502,13 +481,6 @@ var pages = [
 "title":"Azure 上にて Docker Cluster をはじめよう",
 "description":"Azure 上にて Docker Cluster をはじめよう。",
 "keywords":"documentation, docs, docker, cluster, infrastructure, automation, Azure"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/azure/",
-"title":"Microsoft Azure",
-"description":"Microsoft Azure driver for machine",
-"keywords":"machine, Microsoft Azure, driver"
 }
 ,
 {
@@ -792,6 +764,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/docker-ee/centos/",
+"title":"Docker Engine - Enterprise の入手（CentOS 向け）",
+"description":"CentOS 上に Docker Engine - Enterprise をインストールする手順を説明。",
+"keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/centos/",
 "title":"Docker Engine - Enterprise の入手（CentOS 向け）",
 "description":"CentOS 上に Docker Engine - Enterprise をインストールする手順を説明。",
@@ -1041,13 +1020,6 @@ var pages = [
 "title":"Machine concepts and getting help",
 "description":"Understand concepts for Docker Machine, including drivers, base OS, IP addresses, environment variables",
 "keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/config/",
-"title":"docker-machine config",
-"description":"Show client configuration",
-"keywords":"machine, config, subcommand"
 }
 ,
 {
@@ -1653,13 +1625,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/digital-ocean/",
-"title":"DigitalOcean",
-"description":"DigitalOcean driver for machine",
-"keywords":"machine, digitalocean, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/docker-hub/2fa/disable-2fa/",
 "title":"Disable two-factor authentication on Docker Hub",
 "description":"Disable two-factor authentication on Docker Hub",
@@ -1692,6 +1657,13 @@ var pages = [
 "title":"Docker Enterprise アーキテクチャー",
 "description":"Learn about the architecture of Docker Enterprise  and how it delivers high availability for your workloads.",
 "keywords":"Docker Enterprise, UCP, DTR,  architecture, orchestration, Kubernetes, Swarm, cluster, high availability"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/docker-ee/windows/docker-ee/",
+"title":"Install Docker Engine - Enterprise on Windows Servers",
+"description":"How to install Docker Engine - Enterprise for Windows Server",
+"keywords":"Windows, Windows Server, install, download, ucp, Docker Engine - Enterprise"
 }
 ,
 {
@@ -1947,13 +1919,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/env/",
-"title":"docker-machine env",
-"description":"Set environment variables on a machine",
-"keywords":"machine, env, subcommand"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/compose/environment-variables/",
 "title":"Compose における環境変数",
 "description":"Compose において環境変数を設定、利用、管理する方法について説明。",
@@ -2021,13 +1986,6 @@ var pages = [
 "title":"docker exec",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/exoscale/",
-"title":"Exoscale",
-"description":"Exoscale driver for machine",
-"keywords":"machine, exoscale, driver"
 }
 ,
 {
@@ -2150,13 +2108,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/gce/",
-"title":"Google Compute Engine",
-"description":"Google Compute Engine driver for machine",
-"keywords":"machine, Google Compute Engine, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/config/containers/logging/gcplogs/",
 "title":"Google Cloud Logging driver",
 "description":"Describes how to use the Google Cloud Logging driver.",
@@ -2171,31 +2122,10 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/generic/",
-"title":"汎用ドライバー",
-"description":"Generic driver for machine",
-"keywords":"machine, Generic, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/get-docker/",
 "title":"Get Docker",
 "description":"Home page for Get Docker",
-"keywords":"Docker, documentation, manual"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/get-started-cloud/",
-"title":"Docker Machine 利用によるクラウドプロバイダーへのプロビジョニング",
-"description":"Using Docker Machine to provision hosts on cloud providers",
-"keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/get-started/",
-"title":"Docker Machine をローカル VM で始めるには",
-"description":"Get started with Docker Machine and a local VM",
-"keywords":"docker, machine, virtualbox, local"
+"keywords":"Docker, download, documentation, manual"
 }
 ,
 {
@@ -2238,13 +2168,6 @@ var pages = [
 "title":"Group and isolate cluster resources",
 "description":"Learn how to group resources into collections or namespaces to control user access.",
 "keywords":"rbac, ucp, grant, role, permission, authentication, resource set, collection, namespace, Kubernetes"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/help/",
-"title":"docker-machine help",
-"description":"Show command help",
-"keywords":"machine, help, subcommand"
 }
 ,
 {
@@ -2294,13 +2217,6 @@ var pages = [
 "title":"Protect the Docker daemon socket",
 "description":"How to setup and run Docker with HTTPS",
 "keywords":"docker, docs, article, example, https, daemon, tls, ca,  certificate"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/hyper-v/",
-"title":"Microsoft Hyper-V",
-"description":"Microsoft Hyper-V driver for machine",
-"keywords":"machine, Microsoft Hyper-V, driver"
 }
 ,
 {
@@ -2486,6 +2402,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/manuals/",
+"title":"Product Manuals",
+"description":"Learn about Docker Engine - Community",
+"keywords":"Docker Engine - Community, Docker Community"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/toolbox/faqs/",
 "title":"FAQ とトラブルシューティング",
 "description":"FAQs, troubleshooting, and tips index for Toolbox installs",
@@ -2497,34 +2420,6 @@ var pages = [
 "title":"Docker Toolbox",
 "description":"Documentation that provides an overview of Docker Toolbox and installation instructions",
 "keywords":"docker, documentation, about, technology, docker toolbox, gui"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/",
-"title":"Docker Machine コマンドラインリファレンス",
-"description":"Docker Machine Commands Overview",
-"keywords":"machine, commands"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/examples/",
-"title":"Learn by example",
-"description":"Examples of cloud installs",
-"keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/",
-"title":"Machine drivers",
-"description":"Reference for drivers Docker Machine supports",
-"keywords":"machine, drivers, supports"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/",
-"title":"Docker Machine",
-"description":"Docker Machine の導入と概要",
-"keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
 }
 ,
 {
@@ -2642,7 +2537,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/interlock/",
 "title":"Layer 7 routing overview",
-"description":"Learn how to route layer 7 traffic to your Swarm services",
+"description":"Learn how to route Layer 7 traffic to your Swarm services",
 "keywords":"routing, UCP, interlock, load balancing"
 }
 ,
@@ -2754,8 +2649,8 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/",
 "title":"Docker Enterprise",
-"description":"コンテナープラットフォーム分野をリードし、あらゆるインフラストラクチャーにおいてさまざまなアプリケーションを安全にビルド、共有、実行する Docker Enterprise について学びます。",
-"keywords":"Docker EE, Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes, CaaS"
+"description":"Home page for Docker Enterprise documentation",
+"keywords":"Docker Enterprise, documentation, manual, guide, reference, api, CLI"
 }
 ,
 {
@@ -2823,7 +2718,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/install/",
-"title":"Docker Engine - Community について",
+"title":"Docker Engine 概要",
 "description":"インストール方法を一覧列記。",
 "keywords":"docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge"
 }
@@ -2888,7 +2783,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-for-windows/",
 "title":"Get started with Docker for Windows",
 "description":"Getting Started",
-"keywords":"windows, edge, tutorial"
+"keywords":"windows, edge, tutorial, run, docker, local, machine"
 }
 ,
 {
@@ -2923,7 +2818,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-for-mac/",
 "title":"Docker Desktop for Mac をはじめよう",
 "description":"はじめよう。",
-"keywords":"mac, edge, tutorial"
+"keywords":"mac, tutorial, run, docker, local, machine"
 }
 ,
 {
@@ -3046,13 +2941,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/inspect/",
-"title":"docker-machine inspect",
-"description":"Inspect information about a machine",
-"keywords":"machine, inspect, subcommand"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/inspect/",
 "title":"docker inspect",
 "description":null,
@@ -3064,13 +2952,6 @@ var pages = [
 "title":"Install an unmanaged CNI plugin",
 "description":"Learn how to install a Container Networking Interface (CNI) plugin on Docker Universal Control Plane.",
 "keywords":"ucp, kubernetes, cni, container networking interface, flannel, weave, calico"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/install-machine/",
-"title":"Docker Machine のインストール",
-"description":"Docker Machine のインストール方法",
-"keywords":"machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall"
 }
 ,
 {
@@ -3154,14 +3035,14 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-for-windows/install/",
 "title":"Install Docker Desktop on Windows",
 "description":"How to install Docker Desktop for Windows",
-"keywords":"windows, beta, edge, alpha, install, download"
+"keywords":"windows, install, download, run, docker, local, machine,"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/install/",
 "title":"Docker Desktop on Mac のインストール",
 "description":"Docker Desktop on Mac のインストール方法。",
-"keywords":"mac, beta, alpha, install, download"
+"keywords":"mac, install, download, run, docker, local, machine"
 }
 ,
 {
@@ -3190,13 +3071,6 @@ var pages = [
 "title":"About Registry",
 "description":"Explains what the Registry is, basic use cases and requirements",
 "keywords":"registry, on-prem, images, tags, repository, distribution, use cases, requirements"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/ip/",
-"title":"docker-machine ip",
-"description":"Show client configuration",
-"keywords":"machine, ip, subcommand"
 }
 ,
 {
@@ -3252,7 +3126,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/",
 "title":"Join Linux nodes to your cluster",
 "description":"Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.",
-"keywords":"Docker Engine - Enterprise, UCP, cluster, scale, worker, manager"
+"keywords":"Docker Enterprise, UCP, cluster, scale, worker, manager"
 }
 ,
 {
@@ -3302,13 +3176,6 @@ var pages = [
 "title":"Swarm mode key concepts",
 "description":"Introducing key concepts for Docker Engine swarm mode",
 "keywords":"docker, container, cluster, swarm mode"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/kill/",
-"title":"docker-machine kill",
-"description":"Kill (abruptly force stop) a machine.",
-"keywords":"machine, kill, subcommand"
 }
 ,
 {
@@ -3431,13 +3298,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/linode/",
-"title":"Linode",
-"description":"Linode driver for machine",
-"keywords":"machine, Linode, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/install/linux/linux-postinstall/",
 "title":"Linux インストール後の作業",
 "description":"Linux インストール後の任意の作業。",
@@ -3512,13 +3372,6 @@ var pages = [
 "title":"docker logs",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/ls/",
-"title":"docker-machine ls",
-"description":"List machines",
-"keywords":"machine, ls, subcommand"
 }
 ,
 {
@@ -3620,13 +3473,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/migrate-to-machine/",
-"title":"Migrate from Boot2Docker to Machine",
-"description":"Migrate from Boot2Docker to Docker Machine",
-"keywords":"machine, commands, boot2docker, migrate, docker"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/migration/",
 "title":"Migrate to Engine 1.10",
 "description":"Migrate to Engine 1.10",
@@ -3645,13 +3491,6 @@ var pages = [
 "title":"Registry as a pull through cache",
 "description":"Setting-up a local mirror for Docker Hub images",
 "keywords":"registry, on-prem, images, tags, repository, distribution, mirror, Hub, recipe, advanced"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/mount/",
-"title":"docker-machine mount",
-"description":"Mount directory from machine",
-"keywords":"machine, mount, subcommand"
 }
 ,
 {
@@ -3928,13 +3767,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/examples/ocean/",
-"title":"DigitalOcean 利用例",
-"description":"Using Docker Machine to provision hosts on DigitalOcean",
-"keywords":"docker, machine, cloud, digitalocean"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/docker-hub/official_images/",
 "title":"Docker Hub 上の公式イメージ",
 "description":"Docker Hub 上の公式イメージに対するガイドライン。",
@@ -3977,10 +3809,10 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/openstack/",
-"title":"OpenStack",
-"description":"OpenStack driver for machine",
-"keywords":"machine, OpenStack, driver"
+"url":"/docs.docker.jp.onthefly/ee/docker-ee/oracle/",
+"title":"Get Docker Engine - Enterprise for Oracle Linux",
+"description":"Instructions for installing Docker Engine - Enterprise on Oracle Linux",
+"keywords":"requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
@@ -3995,13 +3827,6 @@ var pages = [
 "title":"チームと組織",
 "description":"Docker Hub Teams & Organizations",
 "keywords":"Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker Hub, docs, documentation"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/os-base/",
-"title":"Driver options and operating system defaults",
-"description":"Identify active machines",
-"keywords":"machine, driver, base, operating system"
 }
 ,
 {
@@ -4065,20 +3890,6 @@ var pages = [
 "title":"Docker Toolbox 概要",
 "description":"Toolbox の概要を説明",
 "keywords":"docker, documentation, about, technology, kitematic, gui, toolbox"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/overview/",
-"title":"Docker Machine 概要",
-"description":"Introduction and Overview of Machine",
-"keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/install/overview/",
-"title":"Docker エディションの概要",
-"description":"Docker には 3 つの構成、つまり Docker Enterprise、Docker Engine - Enterprise、Docker Engine - Community が利用できることを学びます。",
-"keywords":"editions, tiers, ee, ce, Docker Engine - Enterprise, Docker Engine - Community"
 }
 ,
 {
@@ -4327,13 +4138,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/provision/",
-"title":"docker-machine provision",
-"description":"Re-run provisioning on a created machine.",
-"keywords":"machine, provision, subcommand"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/network/proxy/",
 "title":"Configure Docker to use a proxy server",
 "description":"How to configure the Docker client to use a proxy server",
@@ -4453,13 +4257,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/rackspace/",
-"title":"Rackspace",
-"description":"Rackspace driver for machine",
-"keywords":"machine, Rackspace, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/swarm/raft/",
 "title":"Raft consensus in swarm mode",
 "description":"Raft consensus algorithm in swarm mode",
@@ -4490,7 +4287,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/redirects/",
 "title":"Implement application redirects",
-"description":"Learn how to implement redirects using swarm services and the layer 7 routing solution for UCP.",
+"description":"Learn how to implement redirects using swarm services and the Layer 7 routing solution for UCP.",
 "keywords":"routing, proxy, redirects, interlock"
 }
 ,
@@ -4499,13 +4296,6 @@ var pages = [
 "title":"Reference documentation",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/regenerate-certs/",
-"title":"docker-machine regenerate-certs",
-"description":"Regenerate and update TLS certificates",
-"keywords":"machine, regenerate-certs, subcommand"
 }
 ,
 {
@@ -4579,6 +4369,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/docker-ee/release-notes/",
+"title":"Docker Engine release notes",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise",
+"keywords":"docker, docker engine, ee, ce, whats new, release notes"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/ucp/release-notes/",
 "title":"UCP release notes",
 "description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
@@ -4601,7 +4398,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/release-notes/",
-"title":"Docker Enterprise release notes",
+"title":"Install or upgrade Docker Enterprise components",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Enterprise.",
 "keywords":"engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes"
 }
@@ -4644,8 +4441,8 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
 "title":"Docker Engine release notes",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise",
-"keywords":"docker, docker engine, ee, ce, whats new, release notes"
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community",
+"keywords":"docker, docker engine, ce, whats new, release notes"
 }
 ,
 {
@@ -4702,13 +4499,6 @@ var pages = [
 "title":"学習のための各種情報",
 "description":"Get started resources learning docker",
 "keywords":"get started, setup, orientation, quickstart, intro, concepts, kubernetes, docker desktop"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/restart/",
-"title":"docker-machine restart",
-"description":"Restart a machine",
-"keywords":"machine, restart, subcommand"
 }
 ,
 {
@@ -4789,17 +4579,17 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/",
-"title":"Docker Engine - Enterprise の入手（Red Hat Enterprise Linux 向け）",
-"description":"RHEL 上に Docker Engine - Enterprise をインストールする手順を説明。",
+"url":"/docs.docker.jp.onthefly/ee/docker-ee/rhel/",
+"title":"Get Docker Engine - Enterprise for Red Hat Enterprise Linux",
+"description":"Instructions for installing Docker Engine - Enterprise on RHEL",
 "keywords":"requirements, installation, rhel, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/rm/",
-"title":"docker-machine rm",
-"description":"Remove a machine.",
-"keywords":"machine, rm, subcommand"
+"url":"/docs.docker.jp.onthefly/install/linux/docker-ee/rhel/",
+"title":"Docker Engine - Enterprise の入手（Red Hat Enterprise Linux 向け）",
+"description":"RHEL 上に Docker Engine - Enterprise をインストールする手順を説明。",
+"keywords":"requirements, installation, rhel, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
@@ -4940,13 +4730,6 @@ var pages = [
 "title":"Scan images for vulnerabilities",
 "description":"Learn how to scan your Docker images for vulnerabilities.",
 "keywords":"registry, scan, vulnerability"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/scp/",
-"title":"docker-machine scp",
-"description":"Copy files among machines",
-"keywords":"machine, scp, subcommand"
 }
 ,
 {
@@ -5195,13 +4978,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/soft-layer/",
-"title":"IBM Softlayer",
-"description":"IBM Softlayer driver for machine",
-"keywords":"machine, IBM Softlayer, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/docker-for-mac/space/",
 "title":"Docker for Mac におけるディスク利用",
 "description":"ディスク利用。",
@@ -5220,13 +4996,6 @@ var pages = [
 "title":"Build a Spring Boot project",
 "description":"Building a Spring Boot project using Docker Assemble",
 "keywords":"Assemble, Docker Enterprise, Spring Boot, container image"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/ssh/",
-"title":"docker-machine ssh",
-"description":"Log into or run a command on a machine using SSH.",
-"keywords":"machine, ssh, subcommand"
 }
 ,
 {
@@ -5286,13 +5055,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/start/",
-"title":"docker-machine start",
-"description":"Start a machine",
-"keywords":"machine, start, subcommand"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/compose/reference/start/",
 "title":"docker-compose start",
 "description":"既存のサービスコンテナーを起動します。",
@@ -5321,24 +5083,10 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/status/",
-"title":"docker-machine status",
-"description":"Get the status of a machine",
-"keywords":"machine, status, subcommand"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/sticky/",
 "title":"Deploy a Sample Application with Sticky Sessions (Experimental)",
 "description":"Learn how to use cookies with Ingress host and path routing.",
 "keywords":"ucp, cluster, ingress, kubernetes"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/stop/",
-"title":"docker-machine stop",
-"description":"Gracefully stop a machine",
-"keywords":"machine, stop, subcommand"
 }
 ,
 {
@@ -5381,6 +5129,13 @@ var pages = [
 "title":"概要",
 "description":"Docker Enterprise の製品情報",
 "keywords":"Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/docker-ee/suse/",
+"title":"Get Docker Engine - Enterprise for SLES",
+"description":"Instructions for installing Docker Engine - Enterprise on SLES",
+"keywords":"requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
@@ -5846,6 +5601,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/docker-ee/ubuntu/",
+"title":"Get Docker Engine - Enterprise for Ubuntu",
+"description":"Instructions for installing Docker Engine - Enterprise on Ubuntu",
+"keywords":"requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ee/ubuntu/",
 "title":"Get Docker Engine - Enterprise for Ubuntu",
 "description":"Instructions for installing Docker Engine - Enterprise on Ubuntu",
@@ -5937,13 +5699,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/reference/upgrade/",
-"title":"docker-machine upgrade",
-"description":"Upgrade Docker on a machine",
-"keywords":"machine, upgrade, subcommand"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/reference/ucp/3.2/cli/upgrade/",
 "title":"docker/ucp upgrade",
 "description":"Upgrade the UCP components on this node",
@@ -6004,13 +5759,6 @@ var pages = [
 "title":"Docker for AWS のアップグレード",
 "description":"Upgrading your stack",
 "keywords":"aws, amazon, iaas, tutorial"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/reference/url/",
-"title":"docker-machine url",
-"description":"Get the URL of a host",
-"keywords":"machine, url, subcommand"
 }
 ,
 {
@@ -6210,27 +5958,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/machine/drivers/virtualbox/",
-"title":"Oracle VirtualBox",
-"description":"Oracle VirtualBox driver for machine",
-"keywords":"machine, Oracle VirtualBox, driver"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/vm-cloud/",
-"title":"VMware vCloud Air",
-"description":"VMware vCloud Air driver for machine",
-"keywords":"machine, VMware vCloud Air, driver"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/vm-fusion/",
-"title":"VMware Fusion",
-"description":"VMware Fusion driver for machine",
-"keywords":"machine, VMware Fusion, driver"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/volume/",
 "title":"docker volume",
 "description":null,
@@ -6277,13 +6004,6 @@ var pages = [
 "title":"ボリュームの利用",
 "description":"ボリュームの利用",
 "keywords":"storage, persistence, data persistence, volumes"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/machine/drivers/vsphere/",
-"title":"VMware vSphere",
-"description":"VMware vSphere driver for machine",
-"keywords":"machine, VMware vSphere, driver"
 }
 ,
 {

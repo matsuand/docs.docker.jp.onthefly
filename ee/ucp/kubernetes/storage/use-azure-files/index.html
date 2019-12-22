@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2019-12-22 13:42:00 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-12-22T13:42:00+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Platform operators can provide persistent storage for workloads running on Docker Enterprise and Microsoft Azure by using Azure Files. You can either pre-provision Azure Files Shares to be consumed by..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-12-22T13:42:00+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume">
@@ -192,7 +192,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    7 分
   
 </span>
 
@@ -348,6 +348,8 @@ mountOptions:
   - gid=1000
 parameters:
   skuName: Standard_LRS
+  storageAccount: &lt;existingstorageaccount&gt; # Optional
+  location: &lt;existingstorageaccountlocation&gt; # Optional
 </span><span class="no">EOF
 </span></code></pre></div></div>
 
@@ -362,8 +364,7 @@ azurefile  kubernetes.io/azure-file   1m
 
 <p>After you create a Storage Class, you can use Kubernetes
 Objects to dynamically provision Azure Files Shares. This is done using
-Kubernetes Persistent Volumes Claims
-<a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction">PVCs</a>.
+Kubernetes <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction">Persistent Volumes Claims</a>.
 Kubernetes uses an existing Azure Storage Account if one exists inside of the
 Azure Resource Group. If an Azure Storage Account does not exist,
 Kubernetes creates one.</p>
@@ -425,6 +426,47 @@ spec:
        claimName: azure-file-pvc
 </span><span class="no">EOF
 </span></code></pre></div></div>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+<p>When creating Persistent Volume Claims, the volume may constantly stay in a
+<code class="highlighter-rouge">Pending</code> state.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl get pvc
+NAME             STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+azure-file-pvc   Pending                                      standard       32s
+</code></pre></div></div>
+
+<p>If that is the case, the <code class="highlighter-rouge">persistent-volume-binder</code> service account does not
+have the relevant Kubernetes RBAC permissions. The storage account creates a
+Kubernetes secret to store the Azure Files Storage Account Key.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl describe pvc azure-file-pvc
+...
+Warning    ProvisioningFailed  7s (x3 over 37s)  persistentvolume-controller
+Failed to provision volume with StorageClass "standard": Couldn't create secret
+secrets is forbidden: User "system:serviceaccount:kube-system:persistent-volume-binder"
+cannot create resource "secrets" in API group "" in the namespace "default": access denied
+</code></pre></div></div>
+
+<p>To grant the <code class="highlighter-rouge">persistent-volume-binder</code> service account the relevant the RBAC
+permissions, create the following RBAC ClusterRole.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    subjectName: kube-system-persistent-volume-binder
+  name: kube-system-persistent-volume-binder:cluster-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: persistent-volume-binder
+  namespace: kube-system
+</code></pre></div></div>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
@@ -543,6 +585,7 @@ Kubernetes</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-azure-files.md#defining-the-azure-disk-storage-class" class="nomunge">Defining the Azure Disk Storage Class</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-azure-files.md#creating-an-azure-files-share-using-a-persistent-volume-claim" class="nomunge">Creating an Azure Files Share using a Persistent Volume Claim</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-azure-files.md#attach-the-new-azure-files-share-to-a-kubernetes-pod" class="nomunge">Attach the new Azure Files Share to a Kubernetes Pod</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-azure-files.md#troubleshooting" class="nomunge">Troubleshooting</a></li>
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/use-azure-files.md#where-to-go-next" class="nomunge">Where to go next</a></li>

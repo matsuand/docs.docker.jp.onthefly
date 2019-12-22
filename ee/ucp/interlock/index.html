@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2019-12-22 13:42:00 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -66,7 +66,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-12-22T13:42:00+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -76,7 +76,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Application-layer (Layer 7) routing is the application routing and load balancing (ingress routing) system included with Docker Enterprise for Swarm orchestration. Interlock architecture takes advantage of the underlying Swarm components..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-12-22T13:42:00+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="routing, UCP, interlock, load balancing">
@@ -91,13 +91,13 @@
 	<title>Layer 7 routing overview | Docker ドキュメント</title>
 <meta property="og:title" content="Layer 7 routing overview" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Learn how to route layer 7 traffic to your Swarm services" />
-<meta property="og:description" content="Learn how to route layer 7 traffic to your Swarm services" />
+<meta name="description" content="Learn how to route Layer 7 traffic to your Swarm services" />
+<meta property="og:description" content="Learn how to route Layer 7 traffic to your Swarm services" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Layer 7 routing overview","description":"Learn how to route layer 7 traffic to your Swarm services","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Layer 7 routing overview","description":"Learn how to route Layer 7 traffic to your Swarm services","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -179,16 +179,21 @@
 							
 							<p>Application-layer (Layer 7) routing is the application routing and load balancing (ingress routing) system included with Docker Enterprise for Swarm orchestration. Interlock architecture takes advantage of the underlying Swarm components to provide scalable Layer 7 routing and Layer 4 VIP mode functionality.</p>
 
+<blockquote>
+  <p>Note</p>
+
+  <p>The HTTP routing mesh functionality was redesigned in UCP 3.0 for greater security and flexibility. The functionality was also renamed to “Layer 7 routing” to make it easier for new users to get started.</p>
+</blockquote>
+
 <p>Interlock is specific to the Swarm orchestrator. If you’re trying to route
-traffic to your Kubernetes applications, check
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/layer-7-routing/">layer 7 routing with Kubernetes.</a></p>
+traffic to your Kubernetes applications, refer to <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/layer-7-routing/">Layer 7 routing with Kubernetes</a> for more information.</p>
 
 <p>Interlock uses the Docker Remote API to automatically configure extensions such as NGINX or HAProxy for application traffic. Interlock is designed for:</p>
 
 <ul>
   <li>Full integration with Docker (Swarm, Services, Secrets, Configs)</li>
   <li>Enhanced configuration (context roots, TLS, zero downtime deploy, rollback)</li>
-  <li>Support for external load balancers (nginx, haproxy, F5, etc) via extensions</li>
+  <li>Support for external load balancers (NGINX, HAProxy, F5, etc) via extensions</li>
   <li>Least privilege for extensions (no Docker API access)</li>
 </ul>
 
@@ -203,15 +208,15 @@ mesh. Even though the service is running on a single node, users can access
 WordPress using the domain name or IP of any of the nodes that are part of
 the swarm.</p>
 
-<p>UCP extends this one step further with layer 7 layer routing (also known as
-application layer 7), allowing users to access Docker services using domain names
+<p>UCP extends this one step further with Layer 7 layer routing (also known as
+application Layer 7), allowing users to access Docker services using domain names
 instead of IP addresses. This functionality is made available through the Interlock component.</p>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/interlock-overview-2.svg" alt="layer 7 routing" /></p>
 
 <p>Using Interlock in the previous example, users can access the WordPress service using
 <code class="highlighter-rouge">http://wordpress.example.org</code>. Interlock takes care of routing traffic to
-the right place.</p>
+the correct place.</p>
 
 <h2 id="terminology">Terminology</h2>
 
@@ -219,7 +224,7 @@ the right place.</p>
   <li>Cluster: A group of compute resources running Docker</li>
   <li>Swarm: A Docker cluster running in Swarm mode</li>
   <li>Upstream: An upstream container that serves an application</li>
-  <li>Proxy Service: A service that provides load balancing and proxying (such as Nginx)</li>
+  <li>Proxy Service: A service that provides load balancing and proxying (such as NGINX)</li>
   <li>Extension Service: A helper service that configures the proxy service</li>
   <li>Service Cluster: A service cluster is an Interlock extension+proxy service</li>
   <li>gRPC: A high-performance RPC framework</li>
@@ -228,29 +233,28 @@ the right place.</p>
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/interlock-design.png" alt="Interlock Design" /></p>
 
 <h2 id="interlock-services">Interlock services</h2>
-<p>Interlock has
-three primary services:</p>
+<p>Interlock has three primary services:</p>
 
 <ul>
-  <li><strong>Interlock</strong>: This is the central piece of the layer 7 routing solution.
+  <li><strong>Interlock</strong>: This is the central piece of the Layer 7 routing solution.
 The core service is responsible for interacting with the Docker Remote API and building
 an upstream configuration for the extensions. It uses the Docker API to monitor events, and manages the extension and
 proxy services. This is served on a gRPC API that the
 extensions are configured to access.</li>
   <li><strong>Interlock-extension</strong>: This is a helper service that queries the Interlock gRPC API for the
 upstream configuration. The extension service uses this to configure
-the proxy service.  For proxy services that use files such as Nginx or HAProxy, the
+the proxy service. For proxy services that use files such as NGINX or HAProxy, the
 extension service generates the file and sends it to Interlock using the gRPC API. Interlock
 then updates the corresponding Docker Config object for the proxy service.</li>
-  <li><strong>Interlock-proxy</strong>: This is a proxy/load-balancing service that handles requests for the upstream application services.  These
+  <li><strong>Interlock-proxy</strong>: This is a proxy/load-balancing service that handles requests for the upstream application services. These
 are configured using the data created by the corresponding extension service. By default, this service is a containerized
 NGINX deployment.</li>
 </ul>
 
 <p>Interlock manages both extension and proxy service updates for both configuration changes
-and application service deployments.  There is no intervention from the operator required.</p>
+and application service deployments. There is no intervention from the operator required.</p>
 
-<p>The following image shows the default Interlock configuration, once you enable layer 7
+<p>The following image shows the default Interlock configuration, once you enable Layer 7
 routing in UCP:</p>
 
 <p><img src="../images/interlock-architecture-1.svg" alt="" /></p>
@@ -267,7 +271,7 @@ components run on manager nodes.</p>
 <p>Layer 7 routing in UCP supports:</p>
 
 <ul>
-  <li><strong>High availability</strong>: All the components used for layer 7 routing leverage
+  <li><strong>High availability</strong>: All the components used for Layer 7 routing leverage
 Docker swarm for high availability, and handle failures gracefully.</li>
   <li><strong>Automatic configuration</strong>: Interlock uses the Docker API for configuration. You do not have to manually
 update or restart anything to make services available. UCP monitors your services and automatically
@@ -277,20 +281,20 @@ operator to individually customize and scale the proxy layer to handle user requ
   <li><strong>TLS</strong>: You can leverage Docker secrets to securely manage TLS Certificates
 and keys for your services. Both TLS termination and TCP passthrough are supported.</li>
   <li><strong>Context-based routing</strong>: Interlock supports advanced application request routing by context or path.</li>
-  <li><strong>Host mode networking</strong>: By default, layer 7 routing leverages the Docker Swarm
+  <li><strong>Host mode networking</strong>: By default, Layer 7 routing leverages the Docker Swarm
 routing mesh, but Interlock supports running proxy and application services in “host” mode networking, allowing
 you to bypass the routing mesh completely. This is beneficial if you want
 maximum performance for your applications.</li>
-  <li><strong>Security</strong>: The layer 7 routing components that are exposed to the outside
-world run on worker nodes. Even if they are compromised, your cluster aren’t.</li>
-  <li><strong>SSL</strong>: Interlock leverages Docker Secrets to securely store and use SSL certificates for services.  Both
+  <li><strong>Security</strong>: The Layer 7 routing components that are exposed to the outside
+world run on worker nodes. Even if they are compromised, your cluster is not affected.</li>
+  <li><strong>SSL</strong>: Interlock leverages Docker Secrets to securely store and use SSL certificates for services. Both
 SSL termination and TCP passthrough are supported.</li>
-  <li><strong>Blue-Green and Canary Service Deployment</strong>: Interlock supports blue-green service deployment allowing an operator to deploy a new application while the current version is serving.  Once traffic is verified to the new application, the operator
-can scale the older version to zero.  If there is a problem, the operation is easily reversible.</li>
+  <li><strong>Blue-Green and Canary Service Deployment</strong>: Interlock supports blue-green service deployment allowing an operator to deploy a new application while the current version is serving. Once traffic is verified to the new application, the operator
+can scale the older version to zero. If there is a problem, the operation is easily reversible.</li>
   <li><strong>Service Cluster Support</strong>: Interlock supports multiple extension+proxy combinations allowing for operators to partition load
 balancing resources for uses such as region or organization based load balancing.</li>
   <li><strong>Least Privilege</strong>: Interlock supports (and recommends) being deployed where the load balancing
-proxies do not need to be colocated with a Swarm manager.  This makes the
+proxies do not need to be colocated with a Swarm manager. This makes the
 deployment more secure by not exposing the Docker API access to the extension or proxy services.</li>
 </ul>
 
