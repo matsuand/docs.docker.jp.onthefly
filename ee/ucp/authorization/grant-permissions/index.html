@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2019-12-27 22:19:47 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-12-27T22:19:47+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Enterprise administrators can create grants to control how users and organizations access resource sets. A grant defines who has how much access to what resources. Each grant is a..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2019-12-27T22:19:47+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="rbac, ucp, grant, role, permission, authentication, authorization, namespace, Kubernetes">
@@ -188,7 +188,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    1 分
+    2 分
   
 </span>
 
@@ -212,12 +212,24 @@ per type of resource.</li>
   <li>Create <strong>grants</strong> by combining subject + role + resource set.</li>
 </ul>
 
-<h2 id="kubernetes-grants">Kubernetes grants</h2>
+<h2 id="creating-grants">Creating grants</h2>
+<p>To create a grant:</p>
+
+<ol>
+  <li>Log in to the UCP web UI.</li>
+  <li>Click <strong>Access Control</strong>.</li>
+  <li>Click <strong>Grants</strong>.</li>
+  <li>In the Grants window, select <strong>Kubernetes</strong> or <strong>Swarm</strong>.</li>
+</ol>
+
+<h3 id="kubernetes-grants">Kubernetes grants</h3>
 
 <p>With Kubernetes orchestration, a grant is made up of <em>subject</em>, <em>role</em>, and
 <em>namespace</em>.</p>
 
 <blockquote class="important">
+  <p>Note</p>
+
   <p>This section assumes that you have created objects for the grant: subject, role,
 namespace.</p>
 </blockquote>
@@ -225,22 +237,29 @@ namespace.</p>
 <p>To create a Kubernetes grant (role binding) in UCP:</p>
 
 <ol>
-  <li>Click <strong>Grants</strong> under <strong>Access Control</strong>.</li>
   <li>Click <strong>Create Role Binding</strong>.</li>
-  <li>Click <strong>Namespaces</strong> under <strong>Kubernetes</strong>.</li>
-  <li>Find the desired namespace and click <strong>Select Namespace</strong>.</li>
-  <li>On the <strong>Roles</strong> tab, select a role.</li>
-  <li>On the <strong>Subjects</strong> tab, select a user, team, organization, or service
-account to authorize.</li>
+  <li>Under Subject, select <strong>Users</strong>, <strong>Organizations</strong>, or <strong>Service Account</strong>.
+    <ul>
+      <li>For Users, select the user from the pull-down menu (these should have already been created as objects).</li>
+      <li>For Organizations, select the Organization and Team (optional) from the pull-down menu.</li>
+      <li>For Service Account, select the Namespace and Service Account from the pull-down menu.</li>
+    </ul>
+  </li>
+  <li>Click <strong>Next</strong> to save your selections.</li>
+  <li>Under Resource Set, toggle the <strong>Apply Role Binding to all namespaces (Cluster Role Binding)</strong> switch.</li>
+  <li>Click <strong>Next</strong>.</li>
+  <li>Under Role, select a cluster role.</li>
   <li>Click <strong>Create</strong>.</li>
 </ol>
 
-<h2 id="swarm-grants">Swarm grants</h2>
+<h3 id="swarm-grants">Swarm grants</h3>
 
 <p>With Swarm orchestration, a grant is made up of <em>subject</em>, <em>role</em>, and
 <em>collection</em>.</p>
 
 <blockquote>
+  <p>Note</p>
+
   <p>This section assumes that you have created objects to grant: teams/users,
 roles (built-in or custom), and a collection.</p>
 </blockquote>
@@ -248,23 +267,30 @@ roles (built-in or custom), and a collection.</p>
 <p><img src="../images/ucp-grant-model-0.svg" alt="" class="with-border" />
 <img src="../images/ucp-grant-model.svg" alt="" class="with-border" /></p>
 
-<p>To create a grant in UCP:</p>
+<p>To create a Swarm grant in UCP:</p>
 
 <ol>
-  <li>Click <strong>Grants</strong> under <strong>Access Control</strong>.</li>
-  <li>Click <strong>Swarm</strong></li>
   <li>Click <strong>Create Grant</strong>.</li>
-  <li>In the <strong>Select Subject Type</strong> section, select <strong>Users</strong> or <strong>Organizations</strong>.</li>
-  <li>Click <strong>View Children</strong> until you get to the desired collection and <strong>Select</strong>.</li>
-  <li>On the <strong>Roles</strong> tab, select a role.</li>
-  <li>On the <strong>Subjects</strong> tab, select a user, team, or organization to authorize.</li>
+  <li>Under Subject, select <strong>Users</strong> or <strong>Organizations</strong>.
+    <ul>
+      <li>For Users, select a user from the pull-down menu.</li>
+      <li>For Organizations, select the Organization and Team (optional) from the pull-down menu.</li>
+    </ul>
+  </li>
+  <li>Click <strong>Next</strong>.</li>
+  <li>Under Resource Set, click <strong>View Children</strong> until you get to the desired collection.</li>
+  <li>Click <strong>Select Collection</strong>.</li>
+  <li>Click <strong>Next</strong>.</li>
+  <li>Under Role, select a role from the pull-down menu.</li>
   <li>Click <strong>Create</strong>.</li>
 </ol>
 
 <blockquote class="important">
+  <p>Note</p>
+
   <p>By default, all new users are placed in the <code class="highlighter-rouge">docker-datacenter</code> organization.
-To apply permissions to all Docker EE users, create a grant with the
-<code class="highlighter-rouge">docker-datacenter</code> org as a subject.</p>
+To apply permissions to all Docker Enterprise users, create a grant with the
+<code class="highlighter-rouge">docker-datacenter</code> organization as a subject.</p>
 </blockquote>
 
 <h2 id="where-to-go-next">Where to go next</h2>
@@ -367,8 +393,12 @@ To apply permissions to all Docker EE users, create a grant with the
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/grant-permissions.md#kubernetes-grants" class="nomunge">Kubernetes grants</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/grant-permissions.md#swarm-grants" class="nomunge">Swarm grants</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/grant-permissions.md#creating-grants" class="nomunge">Creating grants</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/grant-permissions.md#kubernetes-grants" class="nomunge">Kubernetes grants</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/grant-permissions.md#swarm-grants" class="nomunge">Swarm grants</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/grant-permissions.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
