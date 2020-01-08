@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2020-01-08 19:30:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,17 +87,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-08T19:30:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Enable audit logging on UCP"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Audit logs are a chronological record of security-relevant activities by individual users, administrators or software components that have affected the system. They are focused on external user/agent actions and security..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-08T19:30:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="logs, ucp, swarm, kubernetes, audits">
@@ -198,15 +198,22 @@
 
 							
 							
-							<p>Audit logs are a chronological record of security-relevant activities by
+							<blockquote>
+  <!-- This text will be included on all Docker pages that document Enterprise products, features, and technologies that are transitioning to Mirantis. -->
+  <p>This topic applies to Docker Enterprise.</p>
+
+  <p>The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the <a href="https://www.docker.com/faq-for-docker-enterprise-customers-and-partners">Docker Enterprise Customer FAQ</a>.</p>
+</blockquote>
+
+<p>Audit logs are a chronological record of security-relevant activities by
 individual users, administrators or software components that have affected the
 system. They are focused on external user/agent actions and security rather than
 understanding state or events of the system itself.</p>
 
-<p>Audit Logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP
+<p>Audit logs capture all HTTP actions (GET, PUT, POST, PATCH, DELETE) to all UCP
 API, Swarm API and Kubernetes API endpoints that are invoked (except for the
 ignored list) and sent to Docker Engine via stdout. Creating audit logs is a UCP
-component that integrates with Swarm, K8s, and UCP APIs.</p>
+component that integrates with Swarm, Kubernetes, and UCP APIs.</p>
 
 <h2 id="logging-levels">Logging levels</h2>
 
@@ -234,6 +241,8 @@ request payload.</li>
 </ul>
 
 <blockquote>
+  <p>Note</p>
+
   <p>Once UCP audit logging has been enabled, audit logs can be found within the
 container logs of the <code class="highlighter-rouge">ucp-controller</code> container on each UCP manager node.
 Please ensure you have a
@@ -248,11 +257,11 @@ generate a lot of data.</p>
 
 <ul>
   <li>
-    <p><strong>Historical Troubleshooting</strong> - Audit logs are helpful in determining a
-sequence of past events that explain why an issue occured.</p>
+    <p><strong>Historical troubleshooting</strong> - Audit logs are helpful in determining a
+sequence of past events that explain why an issue occurred.</p>
   </li>
   <li>
-    <p><strong>Security Analysis and Auditing</strong> - Security is one of the primary uses for
+    <p><strong>Security analysis and auditing</strong> - Security is one of the primary uses for
 audit logs. A full record of all user interactions with the container
 infrastructure gives your security team full visibility to questionable or
 attempted unauthorized accesses.</p>
@@ -268,27 +277,27 @@ generate alerts for ops teams (PagerDuty, OpsGenie, Slack, or custom solutions).
   </li>
 </ul>
 
-<h2 id="enabling-ucp-audit-logging">Enabling UCP Audit Logging</h2>
+<h2 id="enabling-ucp-audit-logging">Enabling UCP audit logging</h2>
 
 <p>UCP audit logging can be enabled via the UCP web user interface, the UCP API or
 via the UCP configuration file.</p>
 
-<h3 id="enabling-ucp-audit-logging-via-ui">Enabling UCP Audit Logging via UI</h3>
+<h3 id="enabling-ucp-audit-logging-using-the-web-ui">Enabling UCP audit logging using the web UI</h3>
 
-<p>1) Log in to the <strong>UCP</strong> Web User Interface</p>
-
-<p>2) Navigate to <strong>Admin Settings</strong></p>
-
-<p>3) Select <strong>Audit Logs</strong></p>
-
-<p>4) In the <strong>Configure Audit Log Level</strong> section, select the relevant logging
+<ol>
+  <li>Log in to the <strong>UCP</strong> Web User Interface</li>
+  <li>Navigate to <strong>Admin Settings</strong></li>
+  <li>Select <strong>Audit Logs</strong></li>
+  <li>
+    <p>In the <strong>Configure Audit Log Level</strong> section, select the relevant logging
 level.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/auditlogging.png" alt="Enabling Audit Logging in UCP" class="with-border" /></p>
+    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/auditlogging.png" alt="Enabling Audit Logging in UCP" class="with-border" /></p>
+  </li>
+  <li>Click <strong>Save</strong></li>
+</ol>
 
-<p>5) Click <strong>Save</strong></p>
-
-<h3 id="enabling-ucp-audit-logging-via-api">Enabling UCP Audit Logging via API</h3>
+<h3 id="enabling-ucp-audit-logging-using-the-api">Enabling UCP audit logging using the API</h3>
 
 <ol>
   <li>
@@ -319,11 +328,10 @@ level.</p>
   </li>
 </ol>
 
-<h3 id="enabling-ucp-audit-logging-via-config-file">Enabling UCP Audit Logging via Config File</h3>
+<h3 id="enabling-ucp-audit-logging-using-the-configuration-file">Enabling UCP audit logging using the configuration file</h3>
 
-<p>Enabling UCP audit logging via the UCP Configuration file can be done before
-or after a UCP installation. Following the UCP Configuration file documentation
-<a href="./ucp-configuration-file/">here</a>.</p>
+<p>Enabling UCP audit logging via the UCP configuration file can be done before
+or after a UCP installation. Refer to the <a href="./ucp-configuration-file/">UCP configuration file</a> topic for more information.</p>
 
 <p>The section of the UCP configuration file that controls UCP auditing logging is:</p>
 
@@ -334,22 +342,27 @@ or after a UCP installation. Following the UCP Configuration file documentation
 
 <p>The supported variables for <code class="highlighter-rouge">level</code> are <code class="highlighter-rouge">""</code>, <code class="highlighter-rouge">"metadata"</code> or <code class="highlighter-rouge">"request"</code>.</p>
 
-<blockquote>
-  <p>Important: The <code class="highlighter-rouge">support_dump_include_audit_logs</code> flag specifies whether user identification information from the ucp-controller container logs is included in the support dump. To prevent this information from being sent with the support dump, make sure that <code class="highlighter-rouge">support_dump_include_audit_logs</code> is set to <code class="highlighter-rouge">false</code>.  When disabled, the support dump collection tool filters out any lines from the <code class="highlighter-rouge">ucp-controller</code> container logs that contain the substring <code class="highlighter-rouge">auditID</code>.</p>
+<blockquote class="important">
+  <p>Note</p>
+
+  <p>The <code class="highlighter-rouge">support_dump_include_audit_logs</code> flag specifies whether user identification information from the ucp-controller container logs is included in the support dump. To prevent this information from being sent with the support dump, make sure that <code class="highlighter-rouge">support_dump_include_audit_logs</code> is set to <code class="highlighter-rouge">false</code>.  When disabled, the support dump collection tool filters out any lines from the <code class="highlighter-rouge">ucp-controller</code> container logs that contain the substring <code class="highlighter-rouge">auditID</code>.</p>
 </blockquote>
 
-<h2 id="accessing-audit-logs">Accessing Audit Logs</h2>
+<h2 id="accessing-audit-logs">Accessing audit logs</h2>
 
 <p>The audit logs are exposed today through the <code class="highlighter-rouge">ucp-controller</code> logs. You can
-access these logs locally through the Docker cli or through an external
+access these logs locally through the Docker CLI or through an external
 container logging solution, such as <a href="https://success.docker.com/article/elasticsearch-logstash-kibana-logging">ELK</a></p>
 
-<h3 id="accessing-audit-logs-via-the-docker-cli">Accessing Audit Logs via the Docker Cli</h3>
+<h3 id="accessing-audit-logs-using-the-docker-cli">Accessing audit logs using the Docker CLI</h3>
 
-<p>1) Source a UCP Client Bundle</p>
+<p>To access audit logs using the Docker CLI:</p>
 
-<p>2) Run <code class="highlighter-rouge">docker logs</code> to obtain audit logs. In the following example,
-we are tailing the command to show the last log entry.</p>
+<ol>
+  <li>Source a UCP Client Bundle</li>
+  <li>Run <code class="highlighter-rouge">docker logs</code> to obtain audit logs. In the following example,
+we are tailing the command to show the last log entry.</li>
+</ol>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker logs ucp-controller --tail 1
 {"audit":{"auditID":"f8ce4684-cb55-4c88-652c-d2ebd2e9365e","kind":"docker-swarm","level":"metadata","metadata":{"creationTimestamp":null},"requestReceivedTimestamp":"2019-01-30T17:21:45.316157Z","requestURI":"/metricsservice/query?query=(%20(sum%20by%20(instance)%20(ucp_engine_container_memory_usage_bytes%7Bmanager%3D%22true%22%7D))%20%2F%20(sum%20by%20(instance)%20(ucp_engine_memory_total_bytes%7Bmanager%3D%22true%22%7D))%20)%20*%20100\u0026time=2019-01-30T17%3A21%3A45.286Z","sourceIPs":["172.31.45.250:48516"],"stage":"RequestReceived","stageTimestamp":null,"timestamp":null,"user":{"extra":{"licenseKey":["FHy6u1SSg_U_Fbo24yYUmtbH-ixRlwrpEQpdO_ntmkoz"],"username":["admin"]},"uid":"4ec3c2fc-312b-4e66-bb4f-b64b8f0ee42a","username":"4ec3c2fc-312b-4e66-bb4f-b64b8f0ee42a"},"verb":"GET"},"level":"info","msg":"audit","time":"2019-01-30T17:21:45Z"}
@@ -419,7 +432,7 @@ events and may create a large amount of log entries.</p>
   <li><code class="highlighter-rouge">/swarm/join</code> (POST)</li>
   <li><code class="highlighter-rouge">/swarm/update</code> (POST)
 -<code class="highlighter-rouge">/auth/login</code> (POST)</li>
-  <li>Kube secrete create/update endpoints</li>
+  <li>Kubernetes secrete create/update endpoints</li>
 </ul>
 
 <h2 id="where-to-go-next">Where to go next</h2>
@@ -525,16 +538,16 @@ events and may create a large amount of log entries.</p>
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#logging-levels" class="nomunge">Logging levels</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#benefits" class="nomunge">Benefits</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging" class="nomunge">Enabling UCP Audit Logging</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging" class="nomunge">Enabling UCP audit logging</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging-via-ui" class="nomunge">Enabling UCP Audit Logging via UI</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging-via-api" class="nomunge">Enabling UCP Audit Logging via API</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging-via-config-file" class="nomunge">Enabling UCP Audit Logging via Config File</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging-using-the-web-ui" class="nomunge">Enabling UCP audit logging using the web UI</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging-using-the-api" class="nomunge">Enabling UCP audit logging using the API</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#enabling-ucp-audit-logging-using-the-configuration-file" class="nomunge">Enabling UCP audit logging using the configuration file</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#accessing-audit-logs" class="nomunge">Accessing Audit Logs</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#accessing-audit-logs" class="nomunge">Accessing audit logs</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#accessing-audit-logs-via-the-docker-cli" class="nomunge">Accessing Audit Logs via the Docker Cli</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#accessing-audit-logs-using-the-docker-cli" class="nomunge">Accessing audit logs using the Docker CLI</a></li>
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/enable-audit-logging.md#sample-logs" class="nomunge">Sample logs</a></li>
