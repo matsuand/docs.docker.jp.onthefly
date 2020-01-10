@@ -1681,13 +1681,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/docker-for-ibm-cloud/",
-"title":"Docker for IBM Cloud",
-"description":"Docker for IBM Cloud has been deprecated. Check Docker Certified Infrastructure",
-"keywords":null
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/release-notes/docker-machine/",
 "title":"Docker Machine release notes",
 "description":"Release notes for Docker Machine",
@@ -5370,13 +5363,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/thank-you-subscribing-docker-weekly/",
-"title":"Thank you for subscribing to Docker weekly",
-"description":"We've sent you a welcome email with links to previous newsletters.",
-"keywords":"Docker, documentation, manual, guide, reference, api"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/ee/ucp/interlock/usage/tls/",
 "title":"Secure services with TLS",
 "description":"Learn how to configure your swarm services with TLS.",
@@ -5645,7 +5631,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/install/uninstall/",
 "title":"Uninstall UCP",
-"description":"Learn how to uninstall a Docker Universal Control Plane swarm.",
+"description":"Learn how to uninstall a Docker Universal Control Plane.",
 "keywords":"UCP, uninstall, install, Docker EE"
 }
 ,
