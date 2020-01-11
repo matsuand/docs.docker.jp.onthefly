@@ -2,15 +2,6 @@
 <!-- relative link basehrefs -->
 
 	
-	
-	
-		
-			
-		
-	
-		
-			
-			
 
 
 <!-- Logic for 'edit this button' -->
@@ -42,7 +33,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/cluster/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -81,14 +72,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Docker Cluster リリースノート"/>
+	<meta name="twitter:title" itemprop="title name" content="Docker Cluster 概要"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2020-01-11T17:36:05+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="cluster, whats new, release notes">
+	<meta name="keywords" content="documentation, docs, docker, cluster, infrastructure, automation">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -97,16 +88,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Docker Cluster リリースノート | Docker ドキュメント</title>
-<meta property="og:title" content="Docker Cluster リリースノート" />
+	<title>Docker Cluster 概要 | Docker ドキュメント</title>
+<meta property="og:title" content="Docker Cluster 概要" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Learn about the new features, bug fixes, and breaking changes for Docker Cluster." />
-<meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Cluster." />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/cluster/release-notes/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/cluster/release-notes/" />
+<meta name="description" content="Docker Cluster の概要と導入。" />
+<meta property="og:description" content="Docker Cluster の概要と導入。" />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Cluster リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Cluster.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/cluster/release-notes/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Cluster 概要","description":"Docker Cluster の概要と導入。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -176,7 +167,7 @@
 						<section class="section">
 							
 								
-							<h1>Docker Cluster リリースノート</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Docker Cluster 概要</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
@@ -193,71 +184,87 @@
   <p>The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the <a href="https://www.docker.com/faq-for-docker-enterprise-customers-and-partners">Docker Enterprise Customer FAQ</a>.</p>
 </blockquote>
 
-<p>このページでは Docker Cluster の各バージョン情報を示します。</p>
+<p>Docker Cluster は Docker によるクラスターのライフサイクル管理を行うツールです。
+Docker Cluster では YAML ファイルを使って、プロバイダーリソースの設定を行います。
+そして単純な 1 つのコマンドを使い、設定したリソースすべてを導入（provision）してインストールします。</p>
 
-<h1 id="version-1">バージョン 1</h1>
+<p>Docker Cluster を使うには 3 つの手順を行います。</p>
 
-<h2 id="120">1.2.0</h2>
-<p>(2019-10-8)</p>
-
-<h3 id="features">Features</h3>
-
-<ul>
-  <li>Added new env variable type which allows users to supply cluster variable values as an environment variable (DCIS-509)</li>
-</ul>
-
-<h3 id="fixes">Fixes</h3>
-
-<ul>
+<ol>
   <li>
-    <p>Fixed an issue where errors in the cluster commands would return exit code of 0 (DCIS-508)</p>
+    <p>クラスターの導入に必要となる認証情報を持っていることを確認します。</p>
   </li>
   <li>
-    <p>New error message displayed when a docker login is required:
-<code class="highlighter-rouge">Checking for licenses on Docker Hub
- Error: no Hub login info found; please run 'docker login' first
-</code></p>
+    <p>クラスターを構成するリソースを <code class="highlighter-rouge">cluster.yml</code> に定義します。</p>
   </li>
-</ul>
+  <li>
+    <p><code class="highlighter-rouge">docker cluster create</code> を実行して、Cluster がリソース上に Docker Enterprise の導入とインストールを行うようにします。</p>
+  </li>
+</ol>
 
-<h2 id="version-110">バージョン 1.1.0</h2>
-<p>(2019-09-03)</p>
+<p><code class="highlighter-rouge">cluster.yml</code> ファイルは以下の例のようになります。</p>
 
-<h3 id="whats-new">新機能</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">variable</span><span class="pi">:</span>
+  <span class="na">region</span><span class="pi">:</span> <span class="s">us-east-2</span>
+  <span class="na">ucp_password</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">prompt</span>
+
+<span class="na">provider</span><span class="pi">:</span>
+  <span class="na">aws</span><span class="pi">:</span>
+    <span class="na">region</span><span class="pi">:</span> <span class="s">${region}</span>
+
+<span class="na">cluster</span><span class="pi">:</span>
+  <span class="na">engine</span><span class="pi">:</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ee-stable-18.09.5"</span>
+  <span class="na">ucp</span><span class="pi">:</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">docker/ucp:3.1.6"</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s2">"</span><span class="s">admin"</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">${ucp_password}</span>
+
+<span class="na">resource</span><span class="pi">:</span>
+  <span class="na">aws_instance</span><span class="pi">:</span>
+    <span class="na">managers</span><span class="pi">:</span>
+       <span class="na">quantity</span><span class="pi">:</span> <span class="s">1</span>
+</code></pre></div></div>
+
+<p>Cluster ファイルに関する詳細は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster/cluster-file/">Cluster ファイルリファレンス</a> を参照してください。</p>
+
+<p>Docker Cluster には、クラスターの全ライフサイクルを管理するコマンドがあります。</p>
 
 <ul>
-  <li>Azure cloud プロバイダーへの対応。</li>
-  <li>オペレーティングシステム RHEL 8 への対応。</li>
+  <li>クラスターの生成と削除</li>
+  <li>クラスターのスケールアップまたはスケールダウン</li>
+  <li>クラスターの更新</li>
+  <li>クラスターの状態確認</li>
+  <li>クラスターのバックアップと復元</li>
 </ul>
 
-<h3 id="bug-fixes">バグフィックス</h3>
+<h2 id="export-docker-cluster-artifacts">Export Docker Cluster artifacts</h2>
+
+<p>コンポーネントをスタンドアロンにデプロイするため、あるいは設定をカスタマイズするために、Terraform と Ansible によるスクリプトがエクスポートできるようになっています。
+以下のコマンドによりそのようなスクリプトをエクスポートします。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--detach</span> <span class="nt">--name</span> dci <span class="nt">--entrypoint</span> sh docker/cluster:latest
+docker container cp dci:/cluster/terraform terraform
+docker container cp dci:/cluster/ansible ansible
+docker container stop dci
+docker container rm dci
+</code></pre></div></div>
+
+<h2 id="where-to-go-next">次に読むものは</h2>
 
 <ul>
-  <li>linux 上での Container ファイルのパーミッション。(DCIS-346)</li>
-  <li>License check failure with non-Docker subscriptions (DCIS-465)</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster/aws/">AWS 上にて Docker Cluster をはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/cluster/">コマンドラインリファレンス</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster-file.md">Cluster ファイルリファレンス</a></li>
 </ul>
-
-<h2 id="version-101">バージョン 1.0.1</h2>
-<p>(2019-07-19)</p>
-
-<h3 id="whats-new-1">新機能</h3>
-
-<ul>
-  <li>SLES 12.4 への対応。</li>
-  <li>Windows Server 2016 への対応。</li>
-</ul>
-
-<h2 id="version-10">バージョン 1.0</h2>
-<p>(2019-06-25)</p>
-
-<p>メジャーリリース。</p>
 
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=whats new">whats new</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=release notes">release notes</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=infrastructure">infrastructure</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=automation">automation</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -266,7 +273,7 @@
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/cluster/release-notes/";
+							  var originalURL = "/ee/cluster/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -286,9 +293,9 @@
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "cluster/release-notes.md",
-										"title": "Docker Cluster リリースノート",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/cluster/release-notes.md"
+										"unique_id": "ee/cluster/index.md",
+										"title": "Docker Cluster 概要",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/cluster/index.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -320,8 +327,8 @@
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/cluster/release-notes.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [cluster/release-notes.md](https://matsuand.github.io/docs.docker.jp.onthefly/cluster/release-notes/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/ee/cluster/index.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/cluster/index.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/cluster/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -347,24 +354,8 @@
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#120" class="nomunge">1.2.0</a>
-    <ul>
-      <li><a href="#features" class="nomunge">Features</a></li>
-      <li><a href="#fixes" class="nomunge">Fixes</a></li>
-    </ul>
-  </li>
-  <li><a href="#version-110" class="nomunge">バージョン 1.1.0</a>
-    <ul>
-      <li><a href="#whats-new" class="nomunge">新機能</a></li>
-      <li><a href="#bug-fixes" class="nomunge">バグフィックス</a></li>
-    </ul>
-  </li>
-  <li><a href="#version-101" class="nomunge">バージョン 1.0.1</a>
-    <ul>
-      <li><a href="#whats-new-1" class="nomunge">新機能</a></li>
-    </ul>
-  </li>
-  <li><a href="#version-10" class="nomunge">バージョン 1.0</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#export-docker-cluster-artifacts" class="nomunge">Export Docker Cluster artifacts</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#where-to-go-next" class="nomunge">次に読むものは</a></li>
 </ul>
 
 
@@ -480,7 +471,7 @@
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/cluster/release-notes/';
+	var pageURL = jekyllEnv + '/ee/cluster/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

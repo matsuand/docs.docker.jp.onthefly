@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-08 19:30:17 +0900 -->
+<!-- Page generated 2020-01-11 17:36:05 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-11T17:36:05+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-11T17:36:05+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, grant, role, permission, authentication, node, Kubernetes">
@@ -188,7 +188,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    10 分
+    9 分
   
 </span>
 
@@ -399,25 +399,17 @@ collection. In this case, the user sets the value of the service’s access labe
 <code class="highlighter-rouge">com.docker.ucp.access.label</code>, to the new collection or one of its children
 that has a <code class="highlighter-rouge">Service Create</code> grant for the user.</p>
 
-<h2 id="deploy-a-kubernetes-application">Deploy a Kubernetes application</h2>
+<h2 id="isolating-nodes-to-kubernetes-namespaces">Isolating nodes to Kubernetes namespaces</h2>
 
 <p>Starting in Docker Enterprise Edition 2.0, you can deploy a Kubernetes workload
 to worker nodes, based on a Kubernetes namespace.</p>
 
 <ol>
-  <li>Convert a node to use the Kubernetes orchestrator.</li>
   <li>Create a Kubernetes namespace.</li>
   <li>Create a grant for the namespace.</li>
-  <li>Link the namespace to a node collection.</li>
+  <li>Associate nodes with the namespace.</li>
   <li>Deploy a Kubernetes workload.</li>
 </ol>
-
-<h3 id="convert-a-node-to-kubernetes">Convert a node to Kubernetes</h3>
-
-<p>To deploy Kubernetes workloads, an administrator must convert a worker node to
-use the Kubernetes orchestrator.
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/set-orchestrator-type/">Learn how to set the orchestrator type</a>
-for your nodes in the <code class="highlighter-rouge">/Prod</code> collection.</p>
 
 <h3 id="create-a-kubernetes-namespace">Create a Kubernetes namespace</h3>
 
@@ -433,87 +425,53 @@ for Kubernetes workloads.</p>
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Namespace</span>
 <span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">Name</span><span class="pi">:</span> <span class="s">ops-nodes</span>
+  <span class="na">Name</span><span class="pi">:</span> <span class="s">namespace-name</span>
 </code></pre></div>    </div>
   </li>
-  <li>Click <strong>Create</strong> to create the <code class="highlighter-rouge">ops-nodes</code> namespace.</li>
+  <li>Click <strong>Create</strong> to create the <code class="highlighter-rouge">namespace-name</code> namespace.</li>
 </ol>
 
 <h3 id="grant-access-to-the-kubernetes-namespace">Grant access to the Kubernetes namespace</h3>
 
-<p>Create a grant to the <code class="highlighter-rouge">ops-nodes</code> namespace for the <code class="highlighter-rouge">Ops</code> team by following the
-same steps that you used to grant access to the <code class="highlighter-rouge">/Prod</code> collection, only this
-time, on the <strong>Create Grant</strong> page, pick <strong>Namespaces</strong>, instead of
-<strong>Collections</strong>.</p>
-
-<p><img src="../images/isolate-nodes-5.png" alt="" class="with-border" /></p>
-
-<p>Select the <strong>ops-nodes</strong> namespace, and create a <code class="highlighter-rouge">Full Control</code> grant for the
-<code class="highlighter-rouge">Ops</code> team.</p>
-
-<p><img src="../images/isolate-nodes-6.png" alt="" class="with-border" /></p>
-
-<h3 id="link-the-namespace-to-a-node-collection">Link the namespace to a node collection</h3>
-
-<p>The last step is to link the Kubernetes namespace the <code class="highlighter-rouge">/Prod</code> collection.</p>
+<p>Create a grant to the <code class="highlighter-rouge">namespace-name</code> namespace:</p>
 
 <ol>
-  <li>Navigate to the <strong>Namespaces</strong> page, and find the <strong>ops-nodes</strong> namespace
-in the list.</li>
   <li>
-    <p>Click the <strong>More options</strong> icon and select <strong>Link nodes in collection</strong>.</p>
+    <p>On the <strong>Create Grant</strong> page, select <strong>Namespaces</strong>.</p>
 
-    <p><img src="../images/isolate-nodes-7.png" alt="" class="with-border" /></p>
+    <p><img src="../images/isolate-nodes-5.png" alt="" class="with-border" /></p>
   </li>
-  <li>In the <strong>Choose collection</strong> section, click <strong>View children</strong> on the
-<strong>Swarm</strong> collection to navigate to the <strong>Prod</strong> collection.</li>
-  <li>On the <strong>Prod</strong> collection, click <strong>Select collection</strong>.</li>
   <li>
-    <p>Click <strong>Confirm</strong> to link the namespace to the collection.</p>
+    <p>Select the <strong>namespace-name</strong> namespace, and create a <code class="highlighter-rouge">Full Control</code> grant.</p>
 
-    <p><img src="../images/isolate-nodes-8.png" alt="" class="with-border" /></p>
+    <p><img src="../images/isolate-nodes-6.png" alt="" class="with-border" /></p>
   </li>
 </ol>
 
-<h3 id="deploy-a-kubernetes-workload-to-the-node-collection">Deploy a Kubernetes workload to the node collection</h3>
+<h3 id="associate-nodes-with-the-namespace">Associate nodes with the namespace</h3>
 
+<p>Namespaces can be associated with a node collection in either of the following ways:
+    - Define an annotation key during namespace creation. This is described in the following paragraphs.
+    - <a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#configuration-file-format-1">Provide the namespace definition information in a configuration file</a>.</p>
+
+<h4 id="annotation-file">Annotation file</h4>
+<p>The <code class="highlighter-rouge">scheduler.alpha.kubernetes.io/node-selector</code> annotation key assigns node selectors to namespaces. If you define a <code class="highlighter-rouge">scheduler.alpha.kubernetes.io/node-selector: name-of-node-selector</code> annotation key when creating a namespace, all applications deployed in that namespace are pinned to the nodes with the node selector specified.</p>
+
+<p>The following example labels nodes as <code class="highlighter-rouge">example-zone</code>, and adds a scheduler node selector annotation as part of the <code class="highlighter-rouge">ops-nodes</code> namespace definition:</p>
+
+<p>For example, to pin all applications deployed in the <code class="highlighter-rouge">ops-nodes</code> namespace to nodes in the <code class="highlighter-rouge">example-zone</code> region:</p>
 <ol>
-  <li>Log in in as a non-admin who’s on the <code class="highlighter-rouge">Ops</code> team.</li>
-  <li>In the left pane, open the <strong>Kubernetes</strong> section.</li>
-  <li>Confirm that <strong>ops-nodes</strong> is displayed under <strong>Namespaces</strong>.</li>
+  <li>Label the nodes with <code class="highlighter-rouge">example-zone</code>.</li>
   <li>
-    <p>Click <strong>Create</strong>, and in the <strong>Object YAML</strong> editor, paste the following
-YAML definition for an NGINX server.</p>
+    <p>Add an scheduler node selector annotation as part of the namespace definition.</p>
 
-    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
-<span class="na">kind</span><span class="pi">:</span> <span class="s">ReplicationController</span>
-<span class="na">metadata</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
-<span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
-  <span class="na">selector</span><span class="pi">:</span>
-    <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
-  <span class="na">template</span><span class="pi">:</span>
-    <span class="na">metadata</span><span class="pi">:</span>
-      <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
-      <span class="na">labels</span><span class="pi">:</span>
-        <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
-    <span class="na">spec</span><span class="pi">:</span>
-      <span class="na">containers</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
-        <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
-        <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">80</span>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> apiVersion: v1
+     kind: Namespace
+     metadata:
+       annotations:
+         scheduler.alpha.kubernetes.io/node-selector: zone=example-zone
+       name: ops-nodes
 </code></pre></div>    </div>
-
-    <p><img src="../images/isolate-nodes-9.png" alt="" class="with-border" /></p>
-  </li>
-  <li>Click <strong>Create</strong> to deploy the workload.</li>
-  <li>
-    <p>In the left pane, click <strong>Pods</strong> and confirm that the workload is running
-on pods in the <code class="highlighter-rouge">ops-nodes</code> namespace.</p>
-
-    <p><img src="../images/isolate-nodes-10.png" alt="" class="with-border" /></p>
   </li>
 </ol>
 
@@ -626,13 +584,11 @@ on pods in the <code class="highlighter-rouge">ops-nodes</code> namespace.</p>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#alternative-use-a-grant-instead-of-the-default-collection" class="nomunge">Alternative: Use a grant instead of the default collection</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#deploy-a-kubernetes-application" class="nomunge">Deploy a Kubernetes application</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#isolating-nodes-to-kubernetes-namespaces" class="nomunge">Isolating nodes to Kubernetes namespaces</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#convert-a-node-to-kubernetes" class="nomunge">Convert a node to Kubernetes</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#create-a-kubernetes-namespace" class="nomunge">Create a Kubernetes namespace</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#grant-access-to-the-kubernetes-namespace" class="nomunge">Grant access to the Kubernetes namespace</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#link-the-namespace-to-a-node-collection" class="nomunge">Link the namespace to a node collection</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#deploy-a-kubernetes-workload-to-the-node-collection" class="nomunge">Deploy a Kubernetes workload to the node collection</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#associate-nodes-with-the-namespace" class="nomunge">Associate nodes with the namespace</a></li>
     </ul>
   </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/isolate-nodes.md#where-to-go-next" class="nomunge">Where to go next</a></li>

@@ -470,6 +470,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/cluster/aws/",
+"title":"AWS 上にて Docker Cluster をはじめよう",
+"description":"AWS 上にて Docker Cluster をはじめよう。",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation, AWS"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/config/containers/logging/awslogs/",
 "title":"Amazon CloudWatch Logs logging driver",
 "description":"Describes how to use the Amazon CloudWatch Logs logging driver.",
@@ -478,6 +485,13 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/cluster/azure/",
+"title":"Azure 上にて Docker Cluster をはじめよう",
+"description":"Azure 上にて Docker Cluster をはじめよう。",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation, Azure"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/cluster/azure/",
 "title":"Azure 上にて Docker Cluster をはじめよう",
 "description":"Azure 上にて Docker Cluster をはじめよう。",
 "keywords":"documentation, docs, docker, cluster, infrastructure, automation, Azure"
@@ -877,6 +891,13 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/cluster/cluster-file/",
+"title":"Cluster file version 1 reference",
+"description":"Cluster file reference and guidelines",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/cluster/cluster-file/",
 "title":"Cluster file version 1 reference",
 "description":"Cluster file reference and guidelines",
 "keywords":"documentation, docs, docker, cluster, infrastructure, automation"
@@ -1926,6 +1947,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/cluster/reference/envvars/",
+"title":"Cluster CLI environment variables",
+"description":"Cluster CLI environment variables",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/reference/envvars/",
 "title":"Compose CLI 環境変数",
 "description":"Compose CLI environment variables",
@@ -2434,6 +2462,13 @@ var pages = [
 "title":"概要とセットアップ",
 "description":"Get oriented on some basics of Docker and install Docker Desktop.",
 "keywords":"get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/cluster/",
+"title":"Docker Cluster 概要",
+"description":"Docker Cluster の概要と導入。",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
 }
 ,
 {
@@ -4356,6 +4391,13 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/cluster/release-notes/",
+"title":"Docker Cluster リリースノート",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Cluster.",
+"keywords":"cluster, whats new, release notes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/cluster/release-notes/",
 "title":"Docker Cluster リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Cluster.",
 "keywords":"cluster, whats new, release notes"
