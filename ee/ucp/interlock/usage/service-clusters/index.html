@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-08 19:30:17 +0900 -->
+<!-- Page generated 2020-01-15 20:37:42 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-15T20:37:42+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-15T20:37:42+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, interlock, load balancing, routing">
@@ -192,7 +192,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    8 分
   
 </span>
 
@@ -205,208 +205,294 @@
   <p>The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the <a href="https://www.docker.com/faq-for-docker-enterprise-customers-and-partners">Docker Enterprise Customer FAQ</a>.</p>
 </blockquote>
 
-<h2 id="configure-proxy-services">Configure Proxy Services</h2>
-<p>With the node labels, you can re-configure the Interlock Proxy services to be constrained to the
-workers for each region. For example, from a manager, run the following commands to pin the proxy services to the ingress workers:</p>
+<p>Reconfiguring Interlock’s proxy can take 1-2 seconds per overlay
+network managed by that proxy. To scale up to larger number of Docker
+networks and services routed to by Interlock, you may consider implementing
+<em>service clusters</em>. Service clusters are multiple proxy services managed by
+Interlock (rather than the default single proxy service), each responsible for
+routing to a separate set of Docker services and their corresponding networks,
+thereby minimizing proxy reconfiguration time.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service update <span class="se">\</span>
-    <span class="nt">--constraint-add</span> node.labels.nodetype<span class="o">==</span>loadbalancer <span class="se">\</span>
-    <span class="nt">--constraint-add</span> node.labels.region<span class="o">==</span>us-east <span class="se">\</span>
-    ucp-interlock-proxy-us-east
-<span class="nv">$&gt;</span> docker service update <span class="se">\</span>
-    <span class="nt">--constraint-add</span> node.labels.nodetype<span class="o">==</span>loadbalancer <span class="se">\</span>
-    <span class="nt">--constraint-add</span> node.labels.region<span class="o">==</span>us-west <span class="se">\</span>
-    ucp-interlock-proxy-us-west
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>In this example, we’ll assume you have a UCP cluster set up with at least two
+worker nodes, <code class="highlighter-rouge">ucp-node-0</code> and <code class="highlighter-rouge">ucp-node-1</code>; we’ll use these as dedicated
+proxy servers for two independent Interlock service clusters.</p>
+
+<p>We’ll also assume you’ve already enabled Interlock, per the
+<a href="../deploy/">instructions here</a>,
+with an HTTP port of 80 and an HTTPS port of 8443.</p>
+
+<h2 id="setting-up-interlock-service-clusters">Setting up Interlock service clusters</h2>
+
+<p>First, apply some node labels to the UCP workers you’ve chosen to use
+as your proxy servers. From a UCP manager:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node update <span class="nt">--label-add</span> <span class="nv">nodetype</span><span class="o">=</span>loadbalancer <span class="nt">--label-add</span> <span class="nv">region</span><span class="o">=</span>east ucp-node-0
+docker node update <span class="nt">--label-add</span> <span class="nv">nodetype</span><span class="o">=</span>loadbalancer <span class="nt">--label-add</span> <span class="nv">region</span><span class="o">=</span>west ucp-node-1
 </code></pre></div></div>
 
-<p>You are now ready to deploy applications. First, create individual networks for each application:</p>
+<p>We’ve labeled <code class="highlighter-rouge">ucp-node-0</code> to be the proxy for our <code class="highlighter-rouge">east</code> region, and
+<code class="highlighter-rouge">ucp-node-1</code> to be the proxy for our <code class="highlighter-rouge">west</code> region.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo-east
-<span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay demo-west
+<p>Let’s also create a dedicated overlay network for each region’s proxy to manage
+traffic on. We could create many for each, but bear in mind the cumulative
+performance hit that incurs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker network create <span class="nt">--driver</span> overlay eastnet
+docker network create <span class="nt">--driver</span> overlay westnet
 </code></pre></div></div>
 
-<p>Add the networks to the Interlock configuration file. Interlock automatically adds networks to the proxy service upon the next proxy update. See <em>Minimizing the number of overlay networks</em> in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/architecture/">Interlock architecture</a> for more information.</p>
+<p>Next, modify Interlock’s configuration to create two service clusters. Start
+by writing its current configuration out to a file which you can modify:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CURRENT_CONFIG_NAME</span><span class="o">=</span><span class="k">$(</span>docker service inspect <span class="nt">--format</span> <span class="s1">''</span> ucp-interlock<span class="k">)</span>
+docker config inspect <span class="nt">--format</span> <span class="s1">''</span> <span class="nv">$CURRENT_CONFIG_NAME</span> <span class="o">&gt;</span> old_config.toml
+</code></pre></div></div>
+
+<p>Make a new config file called <code class="highlighter-rouge">config.toml</code> with the following content,
+which declares two service clusters, <code class="highlighter-rouge">east</code> and <code class="highlighter-rouge">west</code>.</p>
 
 <blockquote>
-  <p>Note</p>
-
-  <p>Interlock will <em>only</em> connect to the specified networks, and will connect to them all at startup.</p>
+  <p><strong>Note</strong> you will have to change the UCP version
+(<code class="highlighter-rouge">3.2.3</code> in the example below) to match yours,
+as well as all instances of <code class="highlighter-rouge">*.ucp.InstanceID</code>
+(<code class="highlighter-rouge">vl5umu06ryluu66uzjcv5h1bo</code> below):</p>
 </blockquote>
 
-<p>Next, deploy the application in the <code class="highlighter-rouge">us-east</code> service cluster:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
-    <span class="nt">--name</span> demo-east <span class="se">\</span>
-    <span class="nt">--network</span> demo-east <span class="se">\</span>
-    <span class="nt">--detach</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo-east.local <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8080 <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.service_cluster<span class="o">=</span>us-east <span class="se">\</span>
-    <span class="nt">--env</span> <span class="nv">METADATA</span><span class="o">=</span><span class="s2">"us-east"</span> <span class="se">\</span>
-    ehazlett/docker-demo
-</code></pre></div></div>
-
-<p>Now deploy the application in the <code class="highlighter-rouge">us-west</code> service cluster:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker service create <span class="se">\</span>
-    <span class="nt">--name</span> demo-west <span class="se">\</span>
-    <span class="nt">--network</span> demo-west <span class="se">\</span>
-    <span class="nt">--detach</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo-west.local <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8080 <span class="se">\</span>
-    <span class="nt">--label</span> com.docker.lb.service_cluster<span class="o">=</span>us-west <span class="se">\</span>
-    <span class="nt">--env</span> <span class="nv">METADATA</span><span class="o">=</span><span class="s2">"us-west"</span> <span class="se">\</span>
-    ehazlett/docker-demo
-</code></pre></div></div>
-
-<p>Only the designated service cluster is configured for the applications. For example, the <code class="highlighter-rouge">us-east</code> service cluster
-is not configured to serve traffic for the <code class="highlighter-rouge">us-west</code> service cluster and vice versa. You can observe this when you
-send requests to each service cluster.</p>
-
-<p>When you send a request to the <code class="highlighter-rouge">us-east</code> service cluster, it only knows about the <code class="highlighter-rouge">us-east</code> application. This example uses IP address lookup from the swarm API, so you must <code class="highlighter-rouge">ssh</code> to a manager node or configure your shell with a UCP client bundle before testing:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nv">$&gt;</span> curl <span class="nt">-H</span> <span class="s2">"Host: demo-east.local"</span> http://<span class="k">$(</span>docker node inspect <span class="nt">-f</span> <span class="s1">'{{ .Status.Addr  }}'</span> lb-00<span class="k">)</span>:8080/ping
-<span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"1b2d71619592"</span>,<span class="s2">"version"</span>:<span class="s2">"0.1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"us-east"</span>,<span class="s2">"request_id"</span>:<span class="s2">"3d57404cf90112eee861f9d7955d044b"</span><span class="o">}</span>
-<span class="nv">$&gt;</span> curl <span class="nt">-H</span> <span class="s2">"Host: demo-west.local"</span> http://<span class="k">$(</span>docker node inspect <span class="nt">-f</span> <span class="s1">'{{ .Status.Addr  }}'</span> lb-00<span class="k">)</span>:8080/ping
-&lt;html&gt;
-&lt;head&gt;&lt;title&gt;404 Not Found&lt;/title&gt;&lt;/head&gt;
-&lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">"white"</span><span class="o">&gt;</span>
-&lt;center&gt;&lt;h1&gt;404 Not Found&lt;/h1&gt;&lt;/center&gt;
-&lt;hr&gt;&lt;center&gt;nginx/1.13.6&lt;/center&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-</code></pre></div></div>
-
-<p>Application traffic is isolated to each service cluster.  Interlock also ensures that a proxy is updated only if it has corresponding updates to its designated service cluster. In this example, updates to the <code class="highlighter-rouge">us-east</code> cluster do not affect the <code class="highlighter-rouge">us-west</code> cluster.  If there is a problem, the others are not affected.</p>
-
-<h2 id="usage">Usage</h2>
-
-<p>The following example configures an eight (8) node Swarm cluster that uses service clusters
-to route traffic to different proxies. This example includes:</p>
-
-<ul>
-  <li>Three (3) managers and five (5) workers</li>
-  <li>Four workers that are configured with node labels to be dedicated
-ingress cluster load balancer nodes. These nodes receive all application traffic.</li>
-</ul>
-
-<p>This example does not cover infrastructure deployment.
-It assumes you have a vanilla Swarm cluster (<code class="highlighter-rouge">docker init</code> and <code class="highlighter-rouge">docker swarm join</code> from the nodes).
-See the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/">Swarm</a> documentation if you need help
-getting a Swarm cluster deployed.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/interlock_service_clusters.png" alt="Interlock Service Clusters" /></p>
-
-<p>Configure four load balancer worker nodes (<code class="highlighter-rouge">lb-00</code> through <code class="highlighter-rouge">lb-03</code>) with node labels in order to pin the Interlock Proxy
-service for each Interlock service cluster.  After you log in to one of the Swarm managers, run the following commands to add node labels to the dedicated ingress workers:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker node update <span class="nt">--label-add</span> <span class="nv">nodetype</span><span class="o">=</span>loadbalancer <span class="nt">--label-add</span> <span class="nv">region</span><span class="o">=</span>us-east lb-00
-lb-00
-<span class="nv">$&gt;</span> docker node update <span class="nt">--label-add</span> <span class="nv">nodetype</span><span class="o">=</span>loadbalancer <span class="nt">--label-add</span> <span class="nv">region</span><span class="o">=</span>us-east lb-01
-lb-01
-<span class="nv">$&gt;</span> docker node update <span class="nt">--label-add</span> <span class="nv">nodetype</span><span class="o">=</span>loadbalancer <span class="nt">--label-add</span> <span class="nv">region</span><span class="o">=</span>us-west lb-02
-lb-02
-<span class="nv">$&gt;</span> docker node update <span class="nt">--label-add</span> <span class="nv">nodetype</span><span class="o">=</span>loadbalancer <span class="nt">--label-add</span> <span class="nv">region</span><span class="o">=</span>us-west lb-03
-lb-03
-</code></pre></div></div>
-
-<p>Inspect each node to ensure the labels were successfully added:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nv">$&gt;</span> docker node inspect <span class="nt">-f</span> <span class="s1">'{{ .Spec.Labels  }}'</span> lb-00
-map[nodetype:loadbalancer region:us-east]
-<span class="nv">$&gt;</span> docker node inspect <span class="nt">-f</span> <span class="s1">'{{ .Spec.Labels  }}'</span> lb-02
-map[nodetype:loadbalancer region:us-west]
-
-</code></pre></div></div>
-
-<p>Next, create an Interlock configuration object that contains multiple extensions with varying service clusters.</p>
-
-<blockquote>
-  <p>Important</p>
-
-  <p>The configuration object specified in the following code sample applies to
-UCP versions 3.0.10 and later, and versions 3.1.4 and later. If you are
-working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, the config object
-should be named <code class="highlighter-rouge">com.docker.ucp.interlock.service-clusters.conf</code>.</p>
-</blockquote>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> <span class="nb">cat</span> <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh"> | docker config create com.docker.ucp.interlock.conf-1 -
-ListenAddr = ":8080"
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ListenAddr = ":8080"
 DockerURL = "unix:///var/run/docker.sock"
+AllowInsecure = false
 PollInterval = "3s"
 
 [Extensions]
-  [Extensions.us-east]
-    Image = "docker/ucp-interlock-extension:3.2.4"
+  [Extensions.east]
+    Image = "docker/ucp-interlock-extension:3.2.3"
+    ServiceName = "ucp-interlock-extension-east"
     Args = []
-    ServiceName = "ucp-interlock-extension-us-east"
-    ProxyImage = "docker/ucp-interlock-proxy:3.2.4"
-    ProxyArgs = []
-    ProxyServiceName = "ucp-interlock-proxy-us-east"
+    Constraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
+    ConfigImage = "docker/ucp-interlock-config:3.2.3"
+    ConfigServiceName = "ucp-interlock-config-east"
+    ProxyImage = "docker/ucp-interlock-proxy:3.2.3"
+    ProxyServiceName = "ucp-interlock-proxy-east"
+    ServiceCluster="east"
+    Networks=["eastnet"]
     ProxyConfigPath = "/etc/nginx/nginx.conf"
-    ProxyReplicas = 2
-    ServiceCluster = "us-east"
+    ProxyReplicas = 1
+    ProxyStopSignal = "SIGQUIT"
+    ProxyStopGracePeriod = "5s"
+    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux", "node.labels.region==east"]
     PublishMode = "host"
-    PublishedPort = 8080
+    PublishedPort = 80
     TargetPort = 80
     PublishedSSLPort = 8443
     TargetSSLPort = 443
-    [Extensions.us-east.Config]
+    [Extensions.east.Labels]
+      "ext_region" = "east"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.ContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.ProxyLabels]
+      "proxy_region" = "east"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.ProxyContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.east.Config]
+      Version = ""
+      HTTPVersion = "1.1"
       User = "nginx"
       PidPath = "/var/run/proxy.pid"
+      MaxConnections = 1024
+      ConnectTimeout = 5
+      SendTimeout = 600
+      ReadTimeout = 600
+      IPHash = false
+      AdminUser = ""
+      AdminPass = ""
+      SSLOpts = ""
+      SSLDefaultDHParam = 1024
+      SSLDefaultDHParamPath = ""
+      SSLVerify = "required"
       WorkerProcesses = 1
-      RlimitNoFile = 65535
-      MaxConnections = 2048
-    [Extensions.us-east.Labels]
-      ext_region = "us-east"
-    [Extensions.us-east.ProxyLabels]
-      proxy_region = "us-east"
+      RLimitNoFile = 65535
+      SSLCiphers = "HIGH:!aNULL:!MD5"
+      SSLProtocols = "TLSv1.2"
+      AccessLogPath = "/dev/stdout"
+      ErrorLogPath = "/dev/stdout"
+      MainLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" '\n\t\t    '$status $body_bytes_sent \"$http_referer\" '\n\t\t    '\"$http_user_agent\" \"$http_x_forwarded_for\"';"
+      TraceLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" $status '\n\t\t    '$body_bytes_sent \"$http_referer\" \"$http_user_agent\" '\n\t\t    '\"$http_x_forwarded_for\" $reqid $msec $request_time '\n\t\t    '$upstream_connect_time $upstream_header_time $upstream_response_time';"
+      KeepaliveTimeout = "75s"
+      ClientMaxBodySize = "32m"
+      ClientBodyBufferSize = "8k"
+      ClientHeaderBufferSize = "1k"
+      LargeClientHeaderBuffers = "4 8k"
+      ClientBodyTimeout = "60s"
+      UnderscoresInHeaders = false
+      UpstreamZoneSize = 64
+      ServerNamesHashBucketSize = 128
+      GlobalOptions = []
+      HTTPOptions = []
+      TCPOptions = []
+      HideInfoHeaders = false
 
-  [Extensions.us-west]
-    Image = "docker/ucp-interlock-extension:3.2.4"
+  [Extensions.west]
+    Image = "docker/ucp-interlock-extension:3.2.3"
+    ServiceName = "ucp-interlock-extension-west"
     Args = []
-    ServiceName = "ucp-interlock-extension-us-west"
-    ProxyImage = "docker/ucp-interlock-proxy:3.2.4"
-    ProxyArgs = []
-    ProxyServiceName = "ucp-interlock-proxy-us-west"
+    Constraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux"]
+    ConfigImage = "docker/ucp-interlock-config:3.2.3"
+    ConfigServiceName = "ucp-interlock-config-west"
+    ProxyImage = "docker/ucp-interlock-proxy:3.2.3"
+    ProxyServiceName = "ucp-interlock-proxy-west"
+    ServiceCluster="west"
+    Networks=["westnet"]
     ProxyConfigPath = "/etc/nginx/nginx.conf"
-    ProxyReplicas = 2
-    ServiceCluster = "us-west"
+    ProxyReplicas = 1
+    ProxyStopSignal = "SIGQUIT"
+    ProxyStopGracePeriod = "5s"
+    ProxyConstraints = ["node.labels.com.docker.ucp.orchestrator.swarm==true", "node.platform.os==linux", "node.labels.region==west"]
     PublishMode = "host"
-    PublishedPort = 8080
+    PublishedPort = 80
     TargetPort = 80
     PublishedSSLPort = 8443
     TargetSSLPort = 443
-    [Extensions.us-west.Config]
+    [Extensions.west.Labels]
+      "ext_region" = "west"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.ContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.ProxyLabels]
+      "proxy_region" = "west"
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.ProxyContainerLabels]
+      "com.docker.ucp.InstanceID" = "vl5umu06ryluu66uzjcv5h1bo"
+    [Extensions.west.Config]
+      Version = ""
+      HTTPVersion = "1.1"
       User = "nginx"
       PidPath = "/var/run/proxy.pid"
+      MaxConnections = 1024
+      ConnectTimeout = 5
+      SendTimeout = 600
+      ReadTimeout = 600
+      IPHash = false
+      AdminUser = ""
+      AdminPass = ""
+      SSLOpts = ""
+      SSLDefaultDHParam = 1024
+      SSLDefaultDHParamPath = ""
+      SSLVerify = "required"
       WorkerProcesses = 1
-      RlimitNoFile = 65535
-      MaxConnections = 2048
-    [Extensions.us-west.Labels]
-      ext_region = "us-west"
-    [Extensions.us-west.ProxyLabels]
-      proxy_region = "us-west"
-</span><span class="no">EOF
-</span>oqkvv1asncf6p2axhx41vylgt
+      RLimitNoFile = 65535
+      SSLCiphers = "HIGH:!aNULL:!MD5"
+      SSLProtocols = "TLSv1.2"
+      AccessLogPath = "/dev/stdout"
+      ErrorLogPath = "/dev/stdout"
+      MainLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" '\n\t\t    '$status $body_bytes_sent \"$http_referer\" '\n\t\t    '\"$http_user_agent\" \"$http_x_forwarded_for\"';"
+      TraceLogFormat = "'$remote_addr - $remote_user [$time_local] \"$request\" $status '\n\t\t    '$body_bytes_sent \"$http_referer\" \"$http_user_agent\" '\n\t\t    '\"$http_x_forwarded_for\" $reqid $msec $request_time '\n\t\t    '$upstream_connect_time $upstream_header_time $upstream_response_time';"
+      KeepaliveTimeout = "75s"
+      ClientMaxBodySize = "32m"
+      ClientBodyBufferSize = "8k"
+      ClientHeaderBufferSize = "1k"
+      LargeClientHeaderBuffers = "4 8k"
+      ClientBodyTimeout = "60s"
+      UnderscoresInHeaders = false
+      UpstreamZoneSize = 64
+      ServerNamesHashBucketSize = 128
+      GlobalOptions = []
+      HTTPOptions = []
+      TCPOptions = []
+      HideInfoHeaders = false
 </code></pre></div></div>
-<blockquote>
-  <p>Note</p>
 
-  <p>“Host” mode networking is used in order to use the same ports (<code class="highlighter-rouge">8080</code> and <code class="highlighter-rouge">8443</code>) in the cluster. You cannot use ingress
-networking as it reserves the port across all nodes. If you want to use ingress networking, you must use different ports
-for each service cluster.</p>
-</blockquote>
+<p>If instead you prefer to modify the config file Interlock creates by default,
+the crucial parts to adjust for a service cluster are:</p>
 
-<p>Next, create a dedicated network for Interlock and the extensions:</p>
+<ul>
+  <li>Replace <code class="highlighter-rouge">[Extensions.default]</code> with <code class="highlighter-rouge">[Extensions.east]</code></li>
+  <li>Change <code class="highlighter-rouge">ServiceName</code> to <code class="highlighter-rouge">"ucp-interlock-extension-east"</code></li>
+  <li>Change <code class="highlighter-rouge">ProxyServiceName</code> to <code class="highlighter-rouge">"ucp-interlock-proxy-east"</code></li>
+  <li>Add the constraint <code class="highlighter-rouge">"node.labels.region==east"</code> to the list <code class="highlighter-rouge">ProxyConstraints</code></li>
+  <li>Add the key <code class="highlighter-rouge">ServiceCluster="east"</code> immediately below and inline with <code class="highlighter-rouge">ProxyServiceName</code></li>
+  <li>Add the key <code class="highlighter-rouge">Networks=["eastnet"]</code> immediately below and inline with <code class="highlighter-rouge">ServiceCluster</code> (<em>Note this list can contain as many overlay networks as you like; Interlock will _only_ connect to the specified networks, and will connect to them all at startup.</em>)</li>
+  <li>Change <code class="highlighter-rouge">PublishMode="ingress"</code> to <code class="highlighter-rouge">PublishMode="host"</code></li>
+  <li>Change the section title <code class="highlighter-rouge">[Extensions.default.Labels]</code> to <code class="highlighter-rouge">[Extensions.east.Labels]</code></li>
+  <li>Add the key <code class="highlighter-rouge">"ext_region" = "east"</code> under the <code class="highlighter-rouge">[Extensions.east.Labels]</code> section</li>
+  <li>Change the section title <code class="highlighter-rouge">[Extensions.default.ContainerLabels]</code> to <code class="highlighter-rouge">[Extensions.east.ContainerLabels]</code></li>
+  <li>Change the section title <code class="highlighter-rouge">[Extensions.default.ProxyLabels]</code> to <code class="highlighter-rouge">[Extensions.east.ProxyLabels]</code></li>
+  <li>Add the key <code class="highlighter-rouge">"proxy_region" = "east"</code> under the <code class="highlighter-rouge">[Extensions.east.ProxyLabels]</code> section</li>
+  <li>Change the section title <code class="highlighter-rouge">[Extensions.default.ProxyContainerLabels]</code> to <code class="highlighter-rouge">[Extensions.east.ProxyContainerLabels]</code></li>
+  <li>Change the section title <code class="highlighter-rouge">[Extensions.default.Config]</code> to <code class="highlighter-rouge">[Extensions.east.Config]</code></li>
+  <li>[Optional] change <code class="highlighter-rouge">ProxyReplicas=2</code> to <code class="highlighter-rouge">ProxyReplicas=1</code>, necessary only if there is a single node labeled to be a proxy for each service cluster.</li>
+  <li>Copy the entire <code class="highlighter-rouge">[Extensions.east]</code> block a second time, changing <code class="highlighter-rouge">east</code> to <code class="highlighter-rouge">west</code> for your <code class="highlighter-rouge">west</code> service cluster.</li>
+</ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> docker network create <span class="nt">-d</span> overlay ucp-interlock
+<p>Create a new <code class="highlighter-rouge">docker config</code> object from this configuration file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">NEW_CONFIG_NAME</span><span class="o">=</span><span class="s2">"com.docker.ucp.interlock.conf-</span><span class="k">$((</span> <span class="k">$(</span>cut <span class="nt">-d</span> <span class="s1">'-'</span> <span class="nt">-f</span> 2 <span class="o">&lt;&lt;&lt;</span> <span class="s2">"</span><span class="nv">$CURRENT_CONFIG_NAME</span><span class="s2">"</span><span class="k">)</span> <span class="o">+</span> <span class="m">1</span> <span class="k">))</span><span class="s2">"</span>
+docker config create <span class="nv">$NEW_CONFIG_NAME</span> config.toml
 </code></pre></div></div>
 
-<p>Now <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/interlock/deploy/#enable-layer-7-routing">enable the Interlock service</a>.</p>
+<p>Update the <code class="highlighter-rouge">ucp-interlock</code> service to start using this new configuration:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service update <span class="se">\</span>
+  <span class="nt">--config-rm</span> <span class="nv">$CURRENT_CONFIG_NAME</span> <span class="se">\</span>
+  <span class="nt">--config-add</span> <span class="nb">source</span><span class="o">=</span><span class="nv">$NEW_CONFIG_NAME</span>,target<span class="o">=</span>/config.toml <span class="se">\</span>
+  ucp-interlock
+</code></pre></div></div>
+
+<p>Finally, do a <code class="highlighter-rouge">docker service ls</code>. You should see two services providing
+Interlock proxies, <code class="highlighter-rouge">ucp-interlock-proxy-east</code> and <code class="highlighter-rouge">-west</code>. If you only see
+one Interlock proxy service, delete it with <code class="highlighter-rouge">docker service rm</code>.
+After a moment, the two new proxy services should be created, and Interlock
+will be successfully configured with two service clusters.</p>
+
+<h2 id="deploying-services-in-separate-service-clusters">Deploying services in separate service clusters</h2>
+
+<p>Now that you’ve set up your service clusters, you can deploy services to be
+routed to by each proxy by using the <code class="highlighter-rouge">service_cluster</code> label. Create two example
+services:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service create <span class="nt">--name</span> demoeast <span class="se">\</span>
+        <span class="nt">--network</span> eastnet <span class="se">\</span>
+        <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo.A <span class="se">\</span>
+        <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8000 <span class="se">\</span>
+        <span class="nt">--label</span> com.docker.lb.service_cluster<span class="o">=</span>east <span class="se">\</span>
+        training/whoami:latest
+
+docker service create <span class="nt">--name</span> demowest <span class="se">\</span>
+        <span class="nt">--network</span> westnet <span class="se">\</span>
+        <span class="nt">--label</span> com.docker.lb.hosts<span class="o">=</span>demo.B <span class="se">\</span>
+        <span class="nt">--label</span> com.docker.lb.port<span class="o">=</span>8000 <span class="se">\</span>
+        <span class="nt">--label</span> com.docker.lb.service_cluster<span class="o">=</span>west <span class="se">\</span>
+        training/whoami:latest
+</code></pre></div></div>
+
+<p>Recall that <code class="highlighter-rouge">ucp-node-0</code> was your proxy for the <code class="highlighter-rouge">east</code> service cluster.
+Attempt to reach your <code class="highlighter-rouge">whoami</code> service there:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Host: demo.A"</span> http://&lt;ucp-node-0 public IP&gt;
+</code></pre></div></div>
+
+<p>You should receive a response indicating the container ID of the <code class="highlighter-rouge">whoami</code>
+container declared by the <code class="highlighter-rouge">demoeast</code> service. Attempt the same <code class="highlighter-rouge">curl</code> at
+<code class="highlighter-rouge">ucp-node-1</code>’s IP, and it will fail: the Interlock proxy running there only
+routes traffic to services with the <code class="highlighter-rouge">service_cluster=west</code> label, connected
+to the <code class="highlighter-rouge">westnet</code> Docker network you listed in that service cluster’s
+configuration.</p>
+
+<p>Finally, make sure your second service cluster is working analogously to the
+first:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Host: demo.B"</span> http://&lt;ucp-node-1 public IP&gt;
+</code></pre></div></div>
+
+<p>The service routed by <code class="highlighter-rouge">Host: demo.B</code> is reachable via (and only via) the
+Interlock proxy mapped to port 80 on <code class="highlighter-rouge">ucp-node-1</code>. At this point, you have
+successfully set up and demonstrated that Interlock can manage multiple
+proxies routing only to services attached to a select subset of Docker
+networks.</p>
+
 
 							<!-- tags -->
 							
@@ -502,8 +588,9 @@ for each service cluster.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service-clusters.md#configure-proxy-services" class="nomunge">Configure Proxy Services</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service-clusters.md#usage" class="nomunge">Usage</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service-clusters.md#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service-clusters.md#setting-up-interlock-service-clusters" class="nomunge">Setting up Interlock service clusters</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service-clusters.md#deploying-services-in-separate-service-clusters" class="nomunge">Deploying services in separate service clusters</a></li>
 </ul>
 
 

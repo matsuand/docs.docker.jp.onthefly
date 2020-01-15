@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-08 19:30:17 +0900 -->
+<!-- Page generated 2020-01-15 20:37:42 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-15T20:37:42+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-15T20:37:42+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Universal Control Plane, UCP, certificate, authentication, tls">
@@ -192,7 +192,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    3 分
   
 </span>
 
@@ -230,35 +230,57 @@ will have to download new ones to <a href="https://matsuand.github.io/docs.docke
 
 <h2 id="configure-ucp-to-use-your-own-tls-certificates-and-keys">Configure UCP to use your own TLS certificates and keys</h2>
 
-<p>In the UCP web UI, log in with administrator credentials and
-navigate to the <strong>Admin Settings</strong> page.</p>
+<p>To configure UCP to use your own TLS certificates and keys:</p>
 
-<p>In the left pane, click <strong>Certificates</strong>.</p>
+<ol>
+  <li>
+    <p>Log into the UCP web UI with administrator credentials and navigate to the <strong>Admin Settings</strong> page.</p>
+  </li>
+  <li>
+    <p>Click <strong>Certificates</strong>.</p>
 
-<p><img src="../../images/use-externally-signed-certs-2.png" alt="" /></p>
+    <p><img src="../../images/use-externally-signed-certs-2.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Upload your certificates and keys based on the following table:</p>
 
-<p>Upload your certificates and keys:</p>
-
-<ul>
-  <li>A <code class="highlighter-rouge">ca.pem</code> file with the root CA (Certificate Authority) public certificate.</li>
-  <li>A <code class="highlighter-rouge">cert.pem</code> file with the TLS certificate for your domain and any intermediate public
-certificates, in this order.</li>
-  <li>A <code class="highlighter-rouge">key.pem</code> file with TLS private key. Make sure it is not encrypted with a password.
-Encrypted keys should have <code class="highlighter-rouge">ENCRYPTED</code> in the first line.</li>
-</ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Private key</td>
+          <td>The unencrypted private key of UCP. This key must correspond to the public key used in the server certificate. Click <strong>Upload Key</strong>.</td>
+        </tr>
+        <tr>
+          <td>Server certificate</td>
+          <td>The public key certificate of UCP followed by the certificates of any intermediate certificate authorities which establishes a chain of trust up to the root CA certificate. Click <strong>Upload Certificate</strong> to upload a PEM file.</td>
+        </tr>
+        <tr>
+          <td>CA certificate</td>
+          <td>The public key certificate of the root certificate authority that issued the UCP server certificate. If you don’t have one, use the top-most intermediate certificate instead. Click <strong>Upload CA Certificate</strong> to upload a PEM file.</td>
+        </tr>
+        <tr>
+          <td>Client CA</td>
+          <td>This field is available in UCP 3.2. This field may contain one or more Root CA certificates which the UCP Controller will use to verify that client certificates are issued by a trusted entity. UCP is automatically configured to trust its internal CAs which issue client certificates as part of generated client bundles, however, you may supply UCP with additional custom root CA certificates here so that UCP may trust client certificates issued by your corporate or trusted third-party certificate authorities. Note that your custom root certificates will be appended to UCP’s internal root CA certificates. Click <strong>Upload CA Certificate</strong> to upload a PEM file. Click <strong>Download UCP Server CA Certificate</strong> to download the certificate as a PEM file.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Click <strong>Save</strong>.</p>
+  </li>
+</ol>
 
 <p>After replacing the TLS certificates, your users will not be able to authenticate
 with their old client certificate bundles. Ask your users to access the UCP
 web UI and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">download new client certificate bundles</a>.</p>
 
-<p>As of UCP v3.2, the <strong>Certificates</strong> page includes a new text field,
-<strong><em>Client CA</em></strong>, that allows you to paste or upload one or more custom root CA certificates which the UCP Controller will use to
-verify the authenticity of client certificates issued by your corporate or
-trusted third-party CAs. Note that your custom root certificates will be appended to UCP’s internal root CA certificates.</p>
-
-<p>Finally, click <strong>Save</strong> for the changes to take effect.</p>
-
-<p>If you deployed Docker Trusted Registry, you’ll also need to reconfigure it
+<p>If you deployed Docker Trusted Registry (DTR), you’ll also need to reconfigure it
 to trust the new UCP TLS certificates.
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/reference/dtr/2.7/cli/reconfigure.md">Learn how to configure DTR</a>.</p>
 
