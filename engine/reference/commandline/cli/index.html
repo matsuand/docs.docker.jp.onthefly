@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2020-01-16 21:38:03 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-16T21:38:03+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="docker To list available commands, either run docker with no parameters or execute docker help: $ docker Usage: docker [OPTIONS] COMMAND [ARG...] docker [ --help | -v | --version ]..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-16T21:38:03+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker, Docker documentation, CLI, command line">
@@ -188,7 +188,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    14 分
+    15 分
   
 </span>
 
@@ -243,7 +243,7 @@ each <code class="highlighter-rouge">docker</code> command with <code class="hig
 <p>For more information about installing Docker or <code class="highlighter-rouge">sudo</code> configuration, refer to
 the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/">installation</a> instructions for your operating system.</p>
 
-<h3 id="environment-variables">Environment variables</h3>
+<h2 id="environment-variables">Environment variables</h2>
 
 <p>For easy reference, the following list of environment variables are supported
 by the <code class="highlighter-rouge">docker</code> command line:</p>
@@ -289,29 +289,40 @@ variables.</p>
 <h3 id="configuration-files">Configuration files</h3>
 
 <p>By default, the Docker command line stores its configuration files in a
-directory called <code class="highlighter-rouge">.docker</code> within your <code class="highlighter-rouge">$HOME</code> directory. However, you can
-specify a different location via the <code class="highlighter-rouge">DOCKER_CONFIG</code> environment variable
-or the <code class="highlighter-rouge">--config</code> command line option. If both are specified, then the
-<code class="highlighter-rouge">--config</code> option overrides the <code class="highlighter-rouge">DOCKER_CONFIG</code> environment variable.
-For example:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker --config ~/testconfigs/ ps
-</code></pre></div></div>
-
-<p>Instructs Docker to use the configuration files in your <code class="highlighter-rouge">~/testconfigs/</code>
-directory when running the <code class="highlighter-rouge">ps</code> command.</p>
+directory called <code class="highlighter-rouge">.docker</code> within your <code class="highlighter-rouge">$HOME</code> directory.</p>
 
 <p>Docker manages most of the files in the configuration directory
-and you should not modify them. However, you <em>can modify</em> the
+and you should not modify them. However, you <em>can</em> modify the
 <code class="highlighter-rouge">config.json</code> file to control certain aspects of how the <code class="highlighter-rouge">docker</code>
 command behaves.</p>
 
-<p>Currently, you can modify the <code class="highlighter-rouge">docker</code> command behavior using environment
+<p>You can modify the <code class="highlighter-rouge">docker</code> command behavior using environment
 variables or command-line options. You can also use options within
-<code class="highlighter-rouge">config.json</code> to modify some of the same behavior. When using these
-mechanisms, you must keep in mind the order of precedence among them. Command
-line options override environment variables and environment variables override
-properties you specify in a <code class="highlighter-rouge">config.json</code> file.</p>
+<code class="highlighter-rouge">config.json</code> to modify some of the same behavior. If an environment variable
+and the <code class="highlighter-rouge">--config</code> flag are set, the flag takes precedent over the environment
+variable. Command line options override environment variables and environment
+variables override properties you specify in a <code class="highlighter-rouge">config.json</code> file.</p>
+
+<h3 id="change-the-docker-directory">Change the <code class="highlighter-rouge">.docker</code> directory</h3>
+
+<p>To specify a different directory, use the <code class="highlighter-rouge">DOCKER_CONFIG</code>
+environment variable or the <code class="highlighter-rouge">--config</code> command line option. If both are
+specified, then the <code class="highlighter-rouge">--config</code> option overrides the <code class="highlighter-rouge">DOCKER_CONFIG</code> environment
+variable. The example below overrides the <code class="highlighter-rouge">docker ps</code> command using a
+<code class="highlighter-rouge">config.json</code> file located in the <code class="highlighter-rouge">~/testconfigs/</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nt">--config</span> ~/testconfigs/ ps
+</code></pre></div></div>
+
+<p>This flag only applies to whatever command is being ran. For persistent
+configuration, you can set the <code class="highlighter-rouge">DOCKER_CONFIG</code> environment variable in your
+shell (e.g. <code class="highlighter-rouge">~/.profile</code> or <code class="highlighter-rouge">~/.bashrc</code>). The example below sets the new
+directory to be <code class="highlighter-rouge">HOME/newdir/.docker</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo export </span><span class="nv">DOCKER_CONFIG</span><span class="o">=</span><span class="nv">$HOME</span>/newdir/.docker <span class="o">&gt;</span> ~/.profile
+</code></pre></div></div>
+
+<h3 id="configjson-properties"><code class="highlighter-rouge">config.json</code> properties</h3>
 
 <p>The <code class="highlighter-rouge">config.json</code> file stores a JSON encoding of several properties:</p>
 
@@ -458,6 +469,31 @@ which are specific to that plugin.</p>
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div></div>
+
+<h3 id="experimental-features">Experimental features</h3>
+
+<p>Experimental features provide early access to future product functionality.
+These features are intended only for testing and feedback as they may change
+between releases without warning or can be removed entirely from a future
+release.</p>
+
+<blockquote class="warning">
+  <p>Experimental features must not be used in production environments.</p>
+</blockquote>
+
+<p>To enable experimental features, edit the <code class="highlighter-rouge">config.json</code> file and set
+<code class="highlighter-rouge">experimental</code> to <code class="highlighter-rouge">enabled</code>. The example below enables experimental features
+in a <code class="highlighter-rouge">config.json</code> file that already enables a debug feature.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"experimental"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"debug"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can also enable experimental features from the Docker Desktop menu. See the
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac#experimental-features">Docker Desktop Getting Started page</a>
+for more information.</p>
 
 <h3 id="notary">Notary</h3>
 
@@ -631,10 +667,13 @@ expect an integer, and they can only be specified once.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#description" class="nomunge">Description</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#description" class="nomunge">Description</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#environment-variables" class="nomunge">Environment variables</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#environment-variables" class="nomunge">Environment variables</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#configuration-files" class="nomunge">Configuration files</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#change-the-docker-directory" class="nomunge">Change the .docker directory</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#configjson-properties" class="nomunge">config.json properties</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#experimental-features" class="nomunge">Experimental features</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/cli.md#notary" class="nomunge">Notary</a></li>
     </ul>
   </li>

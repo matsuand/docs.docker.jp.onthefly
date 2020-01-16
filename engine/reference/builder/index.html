@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2020-01-16 21:38:03 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-16T21:38:03+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Dockerfile リファレンス Docker は Dockerfile から命令を読み込んで、自動的にイメージをビルドします。 Dockerfile はテキストファイルであり、イメージを作り上げるために実行するコマンドラインコマンドを、すべてこのファイルに含めることができます。 docker build を実行すると、順次コマンドライン命令を自動化した処理が行われて、ビルド結果となるイメージが得られます。 ここでは Dockerfile において利用可能なコマンドを説明します。 このページを読み終えたら、さまざまなガイドとなる Dockerfile ベストプラクティスを参照してください。 利用方法 docker buildコマンドは、Dockerfile とコンテキスト（context）からイメージをビルドします。 ビルドにおけるコンテキストとは、指定されたPATHまたはURLにある一連のファイルのことです。 PATHはローカルファイルシステム内のディレクトリを表わします。 URLは Git のリポジトリ URL のことです。 コンテキストは再帰的に処理されます。 つまり..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-16T21:38:03+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="builder, docker, Dockerfile, automation, image creation">
@@ -183,7 +183,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    34 分
+    35 分
   
 </span>
 
@@ -334,7 +334,8 @@ INSTRUCTION arguments
 
 <p>Docker は <code class="highlighter-rouge">Dockerfile</code> 内の命令を記述順に実行します。
 <code class="highlighter-rouge">Dockerfile</code> は必ず<strong><code class="highlighter-rouge">FROM</code>命令</strong>で始めなければなりません。
-<code class="highlighter-rouge">FROM</code> 命令は、ビルドするイメージに対しての<a href="glossary.md#base-image"><em>ベースイメージ</em></a>を指定するものです。
+この命令より前に記述できるのは、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/builder.md#parser-directives">パーサーディレクティブ</a>、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/builder.md#format">コメント</a>、グローバル定義された <a href="https://matsuand.github.io/docs.docker.jp.onthefly/builder.md#arg">ARG</a> です。
+<code class="highlighter-rouge">FROM</code> 命令は、ビルドするイメージに対しての <a href="glossary.md#parent-image"><em>親イメージ</em></a> を指定するものです。
 <code class="highlighter-rouge">FROM</code> よりも先に記述できる命令として <code class="highlighter-rouge">ARG</code> があります。
 これは <code class="highlighter-rouge">FROM</code> において用いられる引数を宣言するものです。</p>
 
@@ -743,17 +744,17 @@ temp?
 
 <h2 id="from">FROM</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM &lt;image&gt; [AS &lt;name&gt;]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt; [AS &lt;name&gt;]
 </code></pre></div></div>
 
 <p>または</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM &lt;image&gt;[:&lt;tag&gt;] [AS &lt;name&gt;]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[:&lt;tag&gt;] [AS &lt;name&gt;]
 </code></pre></div></div>
 
 <p>または</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM &lt;image&gt;[@&lt;digest&gt;] [AS &lt;name&gt;]
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[@&lt;digest&gt;] [AS &lt;name&gt;]
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">FROM</code> 命令は、イメージビルドのための処理ステージを初期化し、<a href="glossary.md#base-image"><em>ベースイメージ</em></a>を設定します。後続の命令がこれに続きます。
@@ -783,6 +784,14 @@ temp?
 <code class="highlighter-rouge">tag</code> の値に合致するものがなければ、エラーが返されます。</p>
   </li>
 </ul>
+
+<p>The optional <code class="highlighter-rouge">--platform</code> flag can be used to specify the platform of the image
+in case <code class="highlighter-rouge">FROM</code> references a multi-platform image. For example, <code class="highlighter-rouge">linux/amd64</code>,
+<code class="highlighter-rouge">linux/arm64</code>, or <code class="highlighter-rouge">windows/amd64</code>. By default, the target platform of the build
+request is used. Global build arguments can be used in the value of this flag,
+for example <a href="https://matsuand.github.io/docs.docker.jp.onthefly/builder.md#automatic-platform-args-in-the-global-scope">automatic platform ARGs</a>
+allow you to force a stage to native build platform (<code class="highlighter-rouge">--platform=$BUILDPLATFORM</code>),
+and use it to cross-compile to the target platform inside the stage.</p>
 
 <h3 id="understand-how-arg-and-from-interact">ARG と FROM の関連について</h3>
 
