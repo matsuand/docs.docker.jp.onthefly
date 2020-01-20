@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-16 21:38:03 +0900 -->
+<!-- Page generated 2020-01-20 17:57:32 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-16T21:38:03+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-20T17:57:32+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="docker To list available commands, either run docker with no parameters or execute docker help: $ docker Usage: docker [OPTIONS] COMMAND [ARG...] docker [ --help | -v | --version ]..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-16T21:38:03+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-20T17:57:32+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker, Docker documentation, CLI, command line">
@@ -188,7 +188,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    15 分
+    16 分
   
 </span>
 
@@ -410,6 +410,27 @@ running <code class="highlighter-rouge">docker stack</code> management commands.
 <code class="highlighter-rouge">"kubernetes"</code>, and <code class="highlighter-rouge">"all"</code>. This property can be overridden with the
 <code class="highlighter-rouge">DOCKER_STACK_ORCHESTRATOR</code> environment variable, or the <code class="highlighter-rouge">--orchestrator</code> flag.</p>
 
+<p>The property <code class="highlighter-rouge">proxies</code> specifies proxy environment variables to be automatically
+set on containers, and set as <code class="highlighter-rouge">--build-arg</code> on containers used during <code class="highlighter-rouge">docker build</code>.
+A <code class="highlighter-rouge">"default"</code> set of proxies can be configured, and will be used for any docker
+daemon that the client connects to, or a configuration per host (docker daemon),
+for example, “https://docker-daemon1.example.com”. The following properties can
+be set for each environment:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">httpProxy</code> (sets the value of <code class="highlighter-rouge">HTTP_PROXY</code> and <code class="highlighter-rouge">http_proxy</code>)</li>
+  <li><code class="highlighter-rouge">httpsProxy</code> (sets the value of <code class="highlighter-rouge">HTTPS_PROXY</code> and <code class="highlighter-rouge">https_proxy</code>)</li>
+  <li><code class="highlighter-rouge">ftpProxy</code> (sets the value of <code class="highlighter-rouge">FTP_PROXY</code> and <code class="highlighter-rouge">ftp_proxy</code>)</li>
+  <li><code class="highlighter-rouge">noProxy</code> (sets the value of <code class="highlighter-rouge">NO_PROXY</code> and <code class="highlighter-rouge">no_proxy</code>)</li>
+</ul>
+
+<blockquote>
+  <p><strong>Warning</strong>: Proxy settings may contain sensitive information (for example,
+if the proxy requires authentication). Environment variables are stored as
+plain text in the container’s configuration, and as such can be inspected
+through the remote API or committed to an image when using <code class="highlighter-rouge">docker commit</code>.</p>
+</blockquote>
+
 <p>Once attached to a container, users detach from it and leave it running using
 the using <code class="highlighter-rouge">CTRL-p CTRL-q</code> key sequence. This detach key sequence is customizable
 using the <code class="highlighter-rouge">detachKeys</code> property. Specify a <code class="highlighter-rouge">&lt;sequence&gt;</code> value for the
@@ -465,6 +486,18 @@ which are specific to that plugin.</p>
       </span><span class="s2">"anotheroption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"anothervalue"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"athirdoption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"athirdvalue"</span><span class="w">
     </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"httpProxy"</span><span class="p">:</span><span class="w">  </span><span class="s2">"http://user:pass@example.com:3128"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"httpsProxy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://user:pass@example.com:3128"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"noProxy"</span><span class="p">:</span><span class="w">    </span><span class="s2">"http://user:pass@example.com:3128"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ftpProxy"</span><span class="p">:</span><span class="w">   </span><span class="s2">"http://user:pass@example.com:3128"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"https://manager1.mycorp.example.com:2377"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"httpProxy"</span><span class="p">:</span><span class="w">  </span><span class="s2">"http://user:pass@example.com:3128"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"httpsProxy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://user:pass@example.com:3128"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
