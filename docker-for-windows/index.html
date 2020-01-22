@@ -1,4 +1,4 @@
-<!-- Page generated 2019-12-22 13:42:00 +0900 -->
+<!-- Page generated 2020-01-22 16:56:19 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -66,7 +66,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-12-22T13:42:00+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-22T16:56:19+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -76,7 +76,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Welcome to Docker Desktop! The Docker Desktop for Windows section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the Edge..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-12-22T13:42:00+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-01-22T16:56:19+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="windows, edge, tutorial, run, docker, local, machine">
@@ -363,7 +363,7 @@ and more.</p>
 
 <p>On the <strong>General</strong> tab of the Settings dialog, you can configure when to start and update Docker.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-general.png" alt="Settings" width="600px" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-general.png" alt="Settings" width="750px" /></p>
 
 <ul>
   <li>
@@ -376,40 +376,57 @@ version). You can manually update by choosing <strong>Check for Updates</strong>
 main Docker menu.</p>
   </li>
   <li>
+    <p><strong>Expose daemon on tcp://localhost:2375 without TLS</strong> - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.</p>
+  </li>
+  <li>
     <p><strong>Send usage statistics</strong> - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.</p>
   </li>
-  <li>
-    <p><strong>Expose daemon on tcp://localhost:2375 without TLS</strong> - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.</p>
-  </li>
 </ul>
 
-<h3 id="shared-drives">Shared drives</h3>
+<h3 id="resources">Resources</h3>
 
-<p>Share your local drives (volumes) with Docker Desktop, so that they are
-available to your <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#switch-between-windows-and-linux-containers">Linux containers</a>.</p>
+<p>The <strong>Resources</strong> tab allows you to configure CPU, memory, disk, proxies, network, and other resources.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-shared-drives.png" alt="Shared drives" width="600px" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-resources.png" alt="Resources" width="750px" /></p>
 
-<p>Permission for shared drives are tied to the credentials you provide here. If
+<h4 id="advanced">Advanced</h4>
+
+<p>Use the <strong>Advanced</strong> tab to limit resources available to Docker.</p>
+
+<p><strong>CPUs</strong>: By default, Docker Desktop is set to use half the number of processors
+available on the host machine. To increase processing power, set this to a
+higher number; to decrease, lower the number.</p>
+
+<p><strong>Memory</strong>: By default, Docker Desktop is set to use <code class="highlighter-rouge">2</code> GB runtime memory,
+allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.</p>
+
+<p><strong>Swap</strong>: Configure swap file size as needed. The default is 1 GB.</p>
+
+<p><strong>Disk image size</strong>: Specify the size of the disk image.</p>
+
+<p><strong>Disk image location</strong>: Specify the location of the Linux volume where containers and images are stored.</p>
+
+<p>You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you get a prompt asking if you want to use the existing image or replace it.</p>
+
+<h4 id="file-sharing">File sharing</h4>
+
+<p>Choose the local directories you’d like to share with your Linux containers. File sharing is required for mounting volumes in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#switch-between-windows-and-linux-containers">Linux containers</a>,
+ not for Windows containers. For Linux containers, you need to share the drive
+ where the Dockerfile and volume are located. Otherwise, you get <code class="highlighter-rouge">file not found</code> or <code class="highlighter-rouge">cannot start service</code> errors at runtime. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#volume-mounting-requires-shared-drives-for-linux-containers">Volume mounting requires shared drives for Linux containers</a>.</p>
+
+<p>File sharing permissions are tied to the credentials you provide here. If
 you run <code class="highlighter-rouge">docker</code> commands under a different username than the one configured
 here, your containers cannot access the mounted volumes.</p>
 
-<p>To apply shared drives, you are prompted for your Windows system (domain)
-username and password. You can select an option to have Docker store the
-credentials so that you don’t need to enter them every time.</p>
+<p>When you select a local drive to share with your containers, Docker Desktop prompts you for your Windows system (domain)
+username and password. Enter your credentials and then click <strong>Apply &amp; Restart</strong>.</p>
 
 <blockquote>
   <p>Tips on shared drives, permissions, and volume mounts</p>
 
   <ul>
-    <li>
-      <p>Shared drives are only required for mounting volumes in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#switch-between-windows-and-linux-containers">Linux containers</a>,
- not for Windows containers. For Linux containers, you need to share the drive
- where the Dockerfile and volume are located. If you get errors such as <code class="highlighter-rouge">file not found</code>
- or <code class="highlighter-rouge">cannot start service</code> you may need to enable shared drives. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#volume-mounting-requires-shared-drives-for-linux-containers">Volume mounting requires shared drives for Linux containers</a>.)</p>
-    </li>
     <li>
       <p>If possible, avoid volume mounts from the Windows host, and instead mount on
  the Linux VM, or use a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockervolumes.md#data-volumes">data volume</a>
@@ -461,58 +478,12 @@ containers. Alternatively, you can opt not to share it by selecting <strong>Canc
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/shared-drive-on-demand.png" alt="Shared drive on demand" width="600px" /></p>
 
-<h3 id="advanced">Advanced</h3>
-
-<p>The Linux VM restarts after changing the settings on the Advanced tab. This takes a few seconds.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-advanced.png" alt="CPU and Memory settings" width="600px" /></p>
-
-<ul>
-  <li>
-    <p><strong>CPUs</strong> - Change the number of processors assigned to the Linux VM.</p>
-  </li>
-  <li>
-    <p><strong>Memory</strong> - Change the amount of memory the Docker Desktop Linux VM uses.</p>
-  </li>
-  <li>
-    <p><strong>Swap</strong> - Configure the swap file size.</p>
-  </li>
-</ul>
-
-<h3 id="network">Network</h3>
-
-<p>You can configure Docker Desktop networking to work on a virtual private network (VPN).</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-network.png" alt="Network settings" width="600px" /></p>
-
-<ul>
-  <li>
-    <p><strong>Internal Virtual Switch</strong> - You can specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.</p>
-  </li>
-  <li>
-    <p><strong>DNS Server</strong> - You can configure the DNS server to use dynamic or static IP addressing.</p>
-  </li>
-</ul>
-
-<blockquote>
-  <p><strong>Note</strong>: Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
-<code class="highlighter-rouge">docker</code> commands that pull images from Docker Hub that are not already
-downloaded, such as a first time run of <code class="highlighter-rouge">docker run hello-world</code>. If you
-encounter this, reset the DNS server to use the Google DNS fixed address:
-<code class="highlighter-rouge">8.8.8.8</code>. For more information, see
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#networking-issues">Networking issues</a> in Troubleshooting.</p>
-</blockquote>
-
-<p>Updating these settings requires a reconfiguration and reboot of the Linux VM.</p>
-
-<h3 id="proxies">Proxies</h3>
+<h4 id="proxies">Proxies</h4>
 
 <p>Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
 automatically propagates these to Docker and to your containers.  For example,
 if you set your proxy settings to <code class="highlighter-rouge">http://proxy.example.com</code>, Docker uses this
 proxy when pulling containers.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-proxies.png" alt="Proxies" width="600px" /></p>
 
 <p>When you start a container, your proxy settings propagate into the containers. For example:</p>
 
@@ -533,13 +504,37 @@ automatically to pick up the new settings. If you have containers that you wish
 to keep running across restarts, you should consider using
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run/#restart-policies-restart">restart policies</a>.</p>
 
-<h3 id="daemon">Daemon</h3>
+<h4 id="network">Network</h4>
 
-<p>You can configure the Docker daemon to hone how your containers run.
-<strong>Advanced mode</strong> lets you edit the JSON directly. <strong>Basic mode</strong> lets you
-configure the common daemon options with interactive settings.</p>
+<p>You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-daemon-basic.png" alt="Docker Daemon" width="600px" /></p>
+<p><strong>DNS Server</strong>: You can configure the DNS server to use dynamic or static IP addressing.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
+<code class="highlighter-rouge">docker</code> commands that pull images from Docker Hub that are not already
+downloaded, such as a first time run of <code class="highlighter-rouge">docker run hello-world</code>. If you
+encounter this, reset the DNS server to use the Google DNS fixed address:
+<code class="highlighter-rouge">8.8.8.8</code>. For more information, see
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#networking-issues">Networking issues</a> in Troubleshooting.</p>
+</blockquote>
+
+<p>Updating these settings requires a reconfiguration and reboot of the Linux VM.</p>
+
+<h3 id="docker-engine">Docker Engine</h3>
+
+<p>The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.</p>
+
+<p>Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md" target="_blank" class="_">dockerd commandline
+reference</a>.</p>
+
+<p>Click <strong>Apply &amp; Restart</strong> to save your settings and restart Docker Desktop.</p>
+
+<h3 id="command-line">Command Line</h3>
+
+<p>On the Command Line page, you can specify whether or not to enable experimental features.</p>
+
+<p>On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.</p>
 
 <h4 id="experimental-features">Experimental features</h4>
 
@@ -598,48 +593,11 @@ Client: Docker Engine - Community
   GitCommit:        fec3683
 </code></pre></div></div>
 
-<h4 id="insecure-registries">Insecure registries</h4>
-
-<p>You can set up your own <a href="https://matsuand.github.io/docs.docker.jp.onthefly/registry/introduction.md">registries</a> on the <strong>Basic</strong>
-Daemon settings.</p>
-
-<p>Normally, you store public or private images in <a href="https://hub.docker.com/">Docker Hub</a>
-and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/datacenter/dtr/2.4/guides/index.md">Docker Trusted Registry</a>. Here, you
-can use Docker to set up your own insecure <a href="https://matsuand.github.io/docs.docker.jp.onthefly/registry/introduction.md">registry</a>. Simply add URLs for insecure registries and registry mirrors on which to host your images.</p>
-
-<p>For more information, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates">How do I add custom CA certificates?</a>
-and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/faqs/#how-do-i-add-client-certificates">How do I add client certificates?</a> in the FAQs.</p>
-
-<h4 id="daemon-configuration-file">Daemon configuration file</h4>
-
-<p>The <strong>Advanced</strong> daemon settings provide the original option to directly edit
-the JSON configuration file for the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md">daemon</a>.</p>
-
-<blockquote>
-  <p>Updating these settings requires a reconfiguration and reboot of the Linux VM.</p>
-</blockquote>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-daemon-advanced.png" alt="Docker Daemon" width="600px" /></p>
-
-<p>For a full list of options on the Docker daemon, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md">daemon</a>, and also sub-topics:</p>
-
-<ul>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#daemon-configuration-file">Daemon configuration file</a></p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#linux-configuration-file">Linux configuration file</a></p>
-  </li>
-  <li>
-    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#windows-configuration-file">Windows configuration file</a></p>
-  </li>
-</ul>
-
 <h3 id="kubernetes">Kubernetes</h3>
 
 <p>Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-kubernetes.png" alt="Enable Kubernetes" width="600px" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-kubernetes.png" alt="Enable Kubernetes" width="750px" /></p>
 
 <p>The Kubernetes client command, <code class="highlighter-rouge">kubectl</code>, is included and configured to connect
 to the local Kubernetes server. If you have <code class="highlighter-rouge">kubectl</code> already installed and
@@ -650,29 +608,35 @@ to change context so that <code class="highlighter-rouge">kubectl</code> is poin
 <span class="o">&gt;</span> kubectl config use-context docker-for-desktop
 </code></pre></div></div>
 
-<p>You can also change it through the Docker Desktop menu:</p>
+<p>To enable Kubernetes support and install a standalone instance of Kubernetes
+  running as a Docker container, select <strong>Enable Kubernetes</strong>.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/docker-menu-context-switch.png" alt="Change Kubernetes Context" width="450px" /></p>
+<p>To set Kubernetes as the
+  <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/kubernetes/#override-the-default-orchestrator">default orchestrator</a>, select <strong>Deploy Docker Stacks to Kubernetes by default</strong>.</p>
 
-<p>If you installed <code class="highlighter-rouge">kubectl</code> by another method, and
-experience conflicts, remove it.</p>
+<p>By default, Kubernetes containers are hidden from commands like <code class="highlighter-rouge">docker
+service ls</code>, because managing them manually is not supported. To make them
+visible, select <strong>Show system containers (advanced)</strong>. Most users do not need this option.</p>
+
+<p>Click <strong>Apply &amp; Restart</strong> to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the <code class="highlighter-rouge">kubectl.exe</code> command in the path.</p>
 
 <ul>
   <li>
-    <p>To enable Kubernetes support and install a standalone instance of Kubernetes
-running as a Docker container, select <strong>Enable Kubernetes</strong> and click the
-<strong>Apply</strong> button. This instantiates images required to run the Kubernetes server as containers, and installs the <code class="highlighter-rouge">kubectl.exe</code> command in the path.</p>
+    <p>When Kubernetes is enabled and running, an additional status bar item displays
+at the bottom right of the Docker Desktop Settings dialog. The status of Kubernetes shows in the Docker menu and the context points to
+<code class="highlighter-rouge">docker-desktop</code>.</p>
   </li>
   <li>
-    <p>By default, Kubernetes containers are hidden from commands like <code class="highlighter-rouge">docker
-service ls</code>, because managing them manually is not supported. To make them
-visible, select <strong>Show system containers (advanced)</strong> and click <strong>Apply</strong>.
-Most users do not need this option.</p>
-  </li>
-  <li>
-    <p>To disable Kubernetes support at any time, deselect <strong>Enable Kubernetes</strong>.
+    <p>To disable Kubernetes support at any time, clear the <strong>Enable Kubernetes</strong> check box.
 The Kubernetes containers are stopped and removed, and the
 <code class="highlighter-rouge">/usr/local/bin/kubectl</code> command is removed.</p>
+  </li>
+  <li>
+    <p>To delete all stacks and Kubernetes resources, select <strong>Reset Kubernetes Cluster</strong>.</p>
+  </li>
+  <li>
+    <p>If you installed <code class="highlighter-rouge">kubectl</code> by another method, and
+experience conflicts, remove it.</p>
 
     <p>For more information on using the Kubernetes integration with Docker Desktop, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/kubernetes/">Deploy on Kubernetes</a>.</p>
   </li>
@@ -680,28 +644,7 @@ The Kubernetes containers are stopped and removed, and the
 
 <h3 id="reset">Reset</h3>
 
-<blockquote>
-  <p>Reset and Restart options</p>
-
-  <p>On Edge releases, the <strong>Restart Docker Desktop</strong>, <strong>Reset Kubernetes Cluster</strong>, and <strong>Reset to factory defaults</strong> options are available on the <strong>Troubleshoot</strong> menu.</p>
-</blockquote>
-
-<p>On Stable releases, you can restart Docker or reset its configuration using the Reset tab.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/settings-reset.png" alt="Reset" width="600px" /></p>
-
-<ul>
-  <li>
-    <p><strong>Restart Docker Desktop</strong> - Shuts down and restarts the Docker application.</p>
-  </li>
-  <li>
-    <p><strong>Reset Kubernetes Cluster</strong> - Deletes all stacks and Kubernetes resources.</p>
-  </li>
-  <li>
-    <p><strong>Reset to factory defaults</strong> - Resets Docker to factory defaults. This is
-useful in cases where Docker stops working or becomes unresponsive.</p>
-  </li>
-</ul>
+<p>The <strong>Restart Docker Desktop</strong> and <strong>Reset to factory defaults</strong> options are now available on the <strong>Troubleshoot</strong> menu. For information, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/">Logs and Troubleshooting</a>.</p>
 
 <h3 id="troubleshoot">Troubleshoot</h3>
 
@@ -719,8 +662,6 @@ useful in cases where Docker stops working or becomes unresponsive.</p>
 the Docker CLI talks to. Select <strong>Switch to Windows containers</strong> to use Windows
 containers, or select <strong>Switch to Linux containers</strong> to use Linux containers
 (the default).</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/docker-menu-switch.png" alt="Windows-Linux container types switch" width="300px" /></p>
 
 <p>For more information on Windows containers, refer to the following documentation:</p>
 
@@ -763,6 +704,10 @@ apply only on Windows containers. If you switch back to Linux containers,
 proxies and daemon configurations return to what you had set for Linux
 containers. Your Windows container settings are retained and become available
 again when you switch back.</p>
+
+<h2 id="dashboard">Dashboard</h2>
+
+<p>The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/dashboard/">Docker Desktop Dashboard</a>.</p>
 
 <h2 id="docker-hub">Docker Hub</h2>
 
@@ -950,34 +895,17 @@ in the Docker Engine topics.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#test-your-installation" class="nomunge">Test your installation</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#explore-the-application" class="nomunge">Explore the application</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#docker-settings-dialog" class="nomunge">Docker Settings dialog</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#test-your-installation" class="nomunge">Test your installation</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#general" class="nomunge">General</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#shared-drives" class="nomunge">Shared drives</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#advanced" class="nomunge">Advanced</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#network" class="nomunge">Network</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#proxies" class="nomunge">Proxies</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#daemon" class="nomunge">Daemon</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#kubernetes" class="nomunge">Kubernetes</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#reset" class="nomunge">Reset</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#troubleshoot" class="nomunge">Troubleshoot</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#explore-the-application" class="nomunge">Explore the application</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#docker-settings-dialog" class="nomunge">Docker Settings dialog</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#switch-between-windows-and-linux-containers" class="nomunge">Switch between Windows and Linux containers</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#dashboard" class="nomunge">Dashboard</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#docker-hub" class="nomunge">Docker Hub</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#adding-tls-certificates" class="nomunge">Adding TLS certificates</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#where-to-go-next" class="nomunge">Where to go next</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#switch-between-windows-and-linux-containers" class="nomunge">Switch between Windows and Linux containers</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#docker-hub" class="nomunge">Docker Hub</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#two-factor-authentication" class="nomunge">Two-factor authentication</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#adding-tls-certificates" class="nomunge">Adding TLS certificates</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#how-do-i-add-custom-ca-certificates" class="nomunge">How do I add custom CA certificates?</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#how-do-i-add-client-certificates" class="nomunge">How do I add client certificates?</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 

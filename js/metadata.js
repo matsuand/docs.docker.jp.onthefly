@@ -569,7 +569,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/",
-"title":"Use the BTRFS storage driver",
+"title":"BTRFS ストレージドライバーの利用",
 "description":"Learn how to optimize your use of Btrfs driver.",
 "keywords":"container, storage, driver, Btrfs "
 }
@@ -1475,6 +1475,20 @@ var pages = [
 "title":"Docker Hub Publisher & Certified Content FAQs",
 "description":"Publisher & Certified Content FAQs",
 "keywords":"Docker, docker, store, purchase images"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/docker-for-windows/dashboard/",
+"title":"Docker Desktop Dashboard",
+"description":"Docker Desktop Dashboard",
+"keywords":"Docker Desktop Dashboard, container view"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/docker-for-mac/dashboard/",
+"title":"Docker Desktop Dashboard",
+"description":"Docker Desktop Dashboard",
+"keywords":"Docker Desktop Dashboard, container view"
 }
 ,
 {
