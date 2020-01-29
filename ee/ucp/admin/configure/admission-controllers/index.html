@@ -10,6 +10,18 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 
 
@@ -42,7 +54,7 @@
 <html lang="ja">
 
 <head>
-	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/" />
+	<base href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 		@charset "UTF-8";
@@ -81,14 +93,14 @@
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Install Docker Desktop on Windows"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Desktop for Windows is the Community version of Docker for Microsoft Windows. You can download Docker Desktop for Windows from Docker Hub. Download from Docker Hub By downloading Docker..." />
+	<meta name="twitter:title" itemprop="title name" content="Admission controllers"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
 	<meta property="article:published_time" itemprop="datePublished" content="2020-01-29T10:51:31+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="windows, install, download, run, docker, local">
+	<meta name="keywords" content="cluster, psp, security">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/bootstrap.min.css">
 	<link id="pygments" rel="stylesheet" href="https://matsuand.github.io/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -97,16 +109,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Install Docker Desktop on Windows | Docker ドキュメント</title>
-<meta property="og:title" content="Install Docker Desktop on Windows" />
+	<title>Admission controllers | Docker ドキュメント</title>
+<meta property="og:title" content="Admission controllers" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="How to install Docker Desktop for Windows" />
-<meta property="og:description" content="How to install Docker Desktop for Windows" />
-<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/install/" />
-<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/install/" />
+<meta name="description" content="Learn about how admission controllers are used in Docker." />
+<meta property="og:description" content="Learn about how admission controllers are used in Docker." />
+<link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/admission-controllers/" />
+<meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/admission-controllers/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Install Docker Desktop on Windows","description":"How to install Docker Desktop for Windows","url":"https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/install/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Admission controllers","description":"Learn about how admission controllers are used in Docker.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/admission-controllers/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -176,206 +188,92 @@
 						<section class="section">
 							
 								
-							<h1>Install Docker Desktop on Windows</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Admission controllers</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    2 分
   
 </span>
 
 							
 							
-							<p>Docker Desktop for Windows is the <a href="https://www.docker.com/community-edition">Community</a> version of Docker for Microsoft Windows.
-You can download Docker Desktop for Windows from Docker Hub.</p>
+							<blockquote>
+  <!-- This text will be included on all Docker pages that document Enterprise products, features, and technologies that are transitioning to Mirantis. -->
+  <p>This topic applies to Docker Enterprise.</p>
 
-<p><a href="https://hub.docker.com/?overlay=onboarding" class="button outline-btn">Download from Docker
-Hub</a></p>
+  <p>The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the <a href="https://www.docker.com/faq-for-docker-enterprise-customers-and-partners">Docker Enterprise Customer FAQ</a>.</p>
+</blockquote>
 
-<p>By downloading Docker Desktop, you agree to the terms of the <a href="https://www.docker.com/legal/docker-software-end-user-license-agreement" target="_blank" class="_">Docker Software End User License Agreement</a> and the <a href="https://www.docker.com/legal/data-processing-agreement" target="_blank" class="_">Docker Data Processing Agreement</a>.</p>
+<p>Admission controllers are plugins that govern and enforce how the cluster is used. There are two types of admission controllers used, <strong>Default</strong> and <strong>Custom</strong>.</p>
 
-<h2 id="what-to-know-before-you-install">What to know before you install</h2>
-
-<h3 id="system-requirements">System Requirements</h3>
-
+<h3 id="default">Default</h3>
 <ul>
-  <li>Windows 10 64-bit: Pro, Enterprise, or Education (Build 15063 or later).</li>
-  <li>Hyper-V and Containers Windows features must be enabled.</li>
-  <li>
-    <p>The following hardware prerequisites are required to successfully run Client
-Hyper-V on Windows 10:</p>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#namespacelifecycle">NamespaceLifecycle</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#limitranger">LimitRanger</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#serviceaccount">ServiceAccount</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#persistentvolumelabel">PersistentVolumeLabel</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#defaultstorageclass">DefaultStorageClass</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#defaulttolerationseconds">DefaultTolerationSeconds</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction">NodeRestriction</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#resourcequota">ResourceQuota</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podnodeselector">PodNodeSelector</a></li>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podsecuritypolicy">PodSecurityPolicy</a></li>
+</ul>
 
+<h3 id="custom">Custom</h3>
+<ul>
+  <li><strong>UCPAuthorization:</strong>
     <ul>
-      <li>64 bit processor with <a href="http://en.wikipedia.org/wiki/Second_Level_Address_Translation">Second Level Address Translation (SLAT)</a></li>
-      <li>4GB system RAM</li>
-      <li>BIOS-level hardware virtualization support must be enabled in the
-BIOS settings.  For more information, see
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#virtualization-must-be-enabled">Virtualization</a>.</li>
+      <li>Annotates Docker Compose-on-Kubernetes <code class="highlighter-rouge">Stack</code> resources with the identity
+of the user performing the request so that the Docker Compose-on-Kubernetes
+resource controller can manage <code class="highlighter-rouge">Stacks</code> with correct user authorization.</li>
+      <li>Detects when <code class="highlighter-rouge">ServiceAccount</code> resources are deleted so that they can be
+correctly removed from UCP’s Node scheduling authorization backend.</li>
+      <li>Simplifies creation of <code class="highlighter-rouge">RoleBindings</code> and <code class="highlighter-rouge">ClusterRoleBindings</code> resources by
+automatically converting user, organization, and team Subject names into
+their corresponding unique identifiers.</li>
+      <li>Prevents users from deleting the built-in <code class="highlighter-rouge">cluster-admin</code> <code class="highlighter-rouge">ClusterRole</code> or
+<code class="highlighter-rouge">ClusterRoleBinding</code> resources.</li>
+      <li>Prevents under-privileged users from creating or updating <code class="highlighter-rouge">PersistintVolume</code>
+resources with host paths.</li>
+      <li>Works in conjunction with the built-in <code class="highlighter-rouge">PodSecurityPolicies</code> admission
+controller to prevent under-privileged users from creating <code class="highlighter-rouge">Pods</code> with
+privileged options.</li>
     </ul>
   </li>
+  <li><strong>CheckImageSigning:</strong>
+Enforces UCP’s Docker Content Trust policy which, if enabled, requires that all
+pods use container images which have been digitally signed by trusted and
+authorized users which are members of one or more teams in UCP.</li>
+  <li><strong>UCPNodeSelector:</strong>
+Adds a <code class="highlighter-rouge">com.docker.ucp.orchestrator.kubernetes:*</code> toleration to pods in the
+kube-system namespace and removes <code class="highlighter-rouge">com.docker.ucp.orchestrator.kubernetes</code>
+tolerations from pods in other namespaces. This ensures that user workloads do
+not run on swarm-only nodes, which UCP taints with
+<code class="highlighter-rouge">com.docker.ucp.orchestrator.kubernetes:NoExecute</code>. It also adds a node
+affinity to prevent pods from running on manager nodes depending on UCP’s
+settings.</li>
 </ul>
 
 <blockquote>
-  <p><strong>Note:</strong> Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the <a href="https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet">Windows lifecycle fact sheet</a>.</p>
+  <p><strong>Note</strong></p>
+
+  <p>Custom admission controllers cannot be enabled or disabled by the user. For more information, see <a href="https://success.docker.com/article/supportability-of-custom-kubernetes-flags-in-universal-control-plane">Supportability of custom Kubernetes flags in universal control plane</a>.</p>
 </blockquote>
-
-<p><strong>README for Docker Toolbox and Docker Machine users</strong>: Microsoft Hyper-V is required to run Docker Desktop. The Docker Desktop Windows installer enables Hyper-V if required, and restarts your machine. When Hyper-V is enabled, VirtualBox no longer works. However, any existing VirtualBox VM images are retained.</p>
-
-<p>VirtualBox VMs created with <code class="highlighter-rouge">docker-machine</code> (including the <code class="highlighter-rouge">default</code> one
-typically created during Toolbox install) no longer start. These VMs cannot be
-used side-by-side with Docker Desktop. However, you can still use
-<code class="highlighter-rouge">docker-machine</code> to manage remote VMs.</p>
-
-<h3 id="whats-included-in-the-installer">What’s included in the installer</h3>
-
-<p>The Docker Desktop installation includes <a href="https://matsuand.github.io/docs.docker.jp.onthefly/install/">Docker Engine</a>, Docker CLI client, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/overview.md">Docker Compose</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/notary/getting_started/">Notary</a>, <a href="https://github.com/kubernetes/kubernetes/">Kubernetes</a>, and <a href="https://github.com/docker/docker-credential-helpers/">Credential Helper</a>.</p>
-
-<p>Containers and images created with Docker Desktop are shared between all
-user accounts on machines where it is installed. This is because all Windows
-accounts use the same VM to build and run containers.</p>
-
-<p>Nested virtualization scenarios, such as running Docker Desktop on a
-VMWare or Parallels instance might work, but there are no guarantees. For
-more information, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#running-docker-desktop-for-windows-in-nested-virtualization-scenarios">Running Docker Desktop in nested virtualization scenarios</a>.</p>
-
-<p><strong>Note</strong>: Refer to the <a href="https://success.docker.com/article/compatibility-matrix">Docker compatibility matrix</a> for complete Docker compatibility information with Windows Server.</p>
-
-<h3 id="about-windows-containers">About Windows containers</h3>
-
-<p>Looking for information on using Windows containers?</p>
-
-<ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/index.md#switch-between-windows-and-linux-containers">Switch between Windows and Linux
-containers</a>
-describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.</li>
-  <li><a href="https://github.com/docker/labs/blob/master/windows/windows-containers/README.md">Getting Started with Windows Containers
-(Lab)</a>
-provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
-with Windows containers.</li>
-  <li>Docker Container Platform for Windows <a href="https://www.docker.com/microsoft/">articles and blog
-posts</a> on the Docker website.</li>
-</ul>
-
-<h2 id="install-docker-desktop-on-windows">Install Docker Desktop on Windows</h2>
-
-<ol>
-  <li>
-    <p>Double-click <strong>Docker Desktop Installer.exe</strong> to run the installer.</p>
-
-    <p>If you haven’t already downloaded the installer (<code class="highlighter-rouge">Docker Desktop Installer.exe</code>), you can get it from
- <a href="https://hub.docker.com/?overlay=onboarding"><strong>Docker Hub</strong></a>.
- It typically downloads to your <code class="highlighter-rouge">Downloads</code> folder, or you can run it from
- the recent downloads bar at the bottom of your web browser.</p>
-  </li>
-  <li>
-    <p>Follow the instructions on the installation wizard to accept the license, authorize the installer, and proceed with the install.</p>
-
-    <p>When prompted, authorize the Docker Desktop Installer with your system password during the
- install process. Privileged access is needed to install networking
- components, links to the Docker apps, and manage the Hyper-V VMs.</p>
-  </li>
-  <li>
-    <p>Click <strong>Finish</strong> on the setup complete dialog and launch the Docker Desktop application.</p>
-  </li>
-</ol>
-
-<h2 id="start-docker-desktop">Start Docker Desktop</h2>
-
-<p>Docker Desktop does not start automatically after installation. To start Docker Desktop, search for Docker, and select <strong>Docker Desktop</strong> in the search results.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/docker-app-search.png" alt="search for Docker app" width="400px" /></p>
-
-<p>When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/whale-icon-systray.png" alt="whale on taskbar" /></p>
-
-<p>If the whale icon is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/index.md#docker-settings-dialog">Docker Settings</a>.</p>
-
-<p>After installing the Docker Desktop app, you also get a pop-up success message with
-suggested next steps, and a link to this documentation.</p>
-
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/docker-app-welcome.png" alt="Startup information" width="400px" /></p>
-
-<p>When initialization is complete, click the whale icon in the Notifications area and select <strong>About Docker Desktop</strong> to verify that you have the latest version.</p>
-
-<p>Congratulations! You are successfully running Docker Desktop on Windows.</p>
-
-<h2 id="uninstall-docker-desktop">Uninstall Docker Desktop</h2>
-
-<p>To uninstall Docker Desktop from your Windows machine:</p>
-
-<ol>
-  <li>From the Windows <strong>Start</strong> menu, select <strong>Settings</strong> &gt; <strong>Apps</strong> &gt; <strong>Apps &amp; features</strong>.</li>
-  <li>Select <strong>Docker Desktop</strong> from the <strong>Apps &amp; features</strong> list and then select <strong>Uninstall</strong>.</li>
-  <li>Click <strong>Uninstall</strong> to confirm your selection.</li>
-</ol>
-
-<blockquote>
-  <p><strong>Note:</strong> Uninstalling Docker Desktop will destroy Docker containers and images local to the machine and remove the files generated by the application.</p>
-</blockquote>
-
-<h2 id="switch-between-stable-and-edge-versions">Switch between Stable and Edge versions</h2>
-
-<p>Docker Desktop allows you to switch between Stable and Edge releases. However, <strong>you can only have one version of Docker Desktop installed at a time</strong>. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.</p>
-
-<p>For example, containers created with a newer Edge version of Docker Desktop may
-not work after you switch back to Stable because they may have been created
-using Edge features that aren’t in Stable yet. Keep this in mind as
-you create and work with Edge containers, perhaps in the spirit of a playground
-space where you are prepared to troubleshoot or start over.</p>
-
-<p>To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section <em>Save and Restore data</em> below.</p>
-
-<h3 id="save-and-restore-data">Save and restore data</h3>
-
-<p>You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:</p>
-
-<ol>
-  <li>
-    <p>Use <code class="highlighter-rouge">docker save -o images.tar image1 [image2 ...]</code> to save any images you
- want to keep. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/save">save</a> in the Docker
- Engine command line reference.</p>
-  </li>
-  <li>
-    <p>Use <code class="highlighter-rouge">docker export -o myContainner1.tar container1</code> to export containers you
- want to keep. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/export">export</a> in the
- Docker Engine command line reference.</p>
-  </li>
-  <li>
-    <p>Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.</p>
-  </li>
-  <li>
-    <p>Use <code class="highlighter-rouge">docker load -i images.tar</code> to reload previously saved images. See
- <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/load">load</a> in the Docker Engine.</p>
-  </li>
-  <li>
-    <p>Use <code class="highlighter-rouge">docker import -i myContainer1.tar</code> to create a file system image
- corresponding to the previously exported containers. See
- <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/import">import</a> in the Docker Engine.</p>
-  </li>
-</ol>
-
-<p>For information on how to back up and restore data volumes, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/#backup-restore-or-migrate-data-volumes">Backup, restore, or migrate data volumes</a>.</p>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 
 <ul>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/">Getting started</a> introduces Docker Desktop for Windows.</li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/">Get started with Docker</a> is a tutorial that teaches you how to
-deploy a multi-service stack.</li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/">Troubleshooting</a> describes common problems, workarounds, and
-how to get support.</li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/faqs/">FAQs</a> provides answers to frequently asked questions.</li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/release-notes/">Stable Release Notes</a> or <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/edge-release-notes/">Edge Release
-Notes</a>.</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/pod-security-policies.md">Pod security policies</a></li>
+  <li><a href="https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/">A Guide to Kubernetes Admission Controllers</a></li>
 </ul>
 
 							<!-- tags -->
 							
 							
 							
-							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=windows">windows</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=install">install</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=download">download</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=run">run</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=local">local</a></span>
+							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=psp">psp</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=security">security</a></span>
 							
 							<!-- link corrections -->
               <script language="JavaScript">
@@ -384,7 +282,7 @@ Notes</a>.</li>
 							for (i = 0; i < x; i++) {
 							  var munged = false;
 							  var thisHREF = document.links[i].href;
-							  var originalURL = "/docker-for-windows/install/";
+							  var originalURL = "/ee/ucp/admin/configure/admission-controllers/";
 							  if (thisHREF.indexOf(baseHref + "#") > -1) {
 							    // hash fix
 							    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
@@ -404,9 +302,9 @@ Notes</a>.</li>
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
-										"unique_id": "docker-for-windows/install.md",
-										"title": "Install Docker Desktop on Windows",
-										"permalink": "https://github.com/docker/docker.github.io/blob/master/docker-for-windows/install.md"
+										"unique_id": "ee/ucp/admin/configure/admission-controllers.md",
+										"title": "Admission controllers",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/admin/configure/admission-controllers.md"
 									};
 									(function(d, c, j) {
 										if (!document.getElementById(j)) {
@@ -438,8 +336,8 @@ Notes</a>.</li>
 								<div class="feedback-links">
 									<ul>
 										
-										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/docker-for-windows/install.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [docker-for-windows/install.md](https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/install/)"
+										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/ee/ucp/admin/configure/admission-controllers.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ee/ucp/admin/configure/admission-controllers.md](https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/admission-controllers/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
 										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
@@ -465,22 +363,12 @@ Notes</a>.</li>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#what-to-know-before-you-install" class="nomunge">What to know before you install</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/admission-controllers.md#default" class="nomunge">Default</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#system-requirements" class="nomunge">System Requirements</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#whats-included-in-the-installer" class="nomunge">What’s included in the installer</a></li>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#about-windows-containers" class="nomunge">About Windows containers</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/admission-controllers.md#custom" class="nomunge">Custom</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#install-docker-desktop-on-windows" class="nomunge">Install Docker Desktop on Windows</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#start-docker-desktop" class="nomunge">Start Docker Desktop</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#uninstall-docker-desktop" class="nomunge">Uninstall Docker Desktop</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#switch-between-stable-and-edge-versions" class="nomunge">Switch between Stable and Edge versions</a>
-    <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#save-and-restore-data" class="nomunge">Save and restore data</a></li>
-    </ul>
-  </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/install.md#where-to-go-next" class="nomunge">Where to go next</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/admission-controllers.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 
@@ -596,7 +484,7 @@ Notes</a>.</li>
 	if (jekyllEnv == 'development') {
 		jekyllEnv = '';
 	}
-	var pageURL = jekyllEnv + '/docker-for-windows/install/';
+	var pageURL = jekyllEnv + '/ee/ucp/admin/configure/admission-controllers/';
 	</script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/archive.js"></script>
 	<script src="https://matsuand.github.io/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>

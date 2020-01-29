@@ -71,6 +71,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/admission-controllers/",
+"title":"Admission controllers",
+"description":"Learn about how admission controllers are used in Docker.",
+"keywords":"cluster, psp, security"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/assemble/adv-backend-manage/",
 "title":"Advanced backend management",
 "description":"Advanced backend management for Docker Assemble",
@@ -708,20 +715,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/compose/reference/bundle/",
-"title":"docker-compose bundle",
-"description":"Compose ファイルから分散アプリケーションバンドル（Distributed Application Bundle; DAB）を生成します。",
-"keywords":"fig, composition, compose, docker, orchestration, cli, bundle"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/compose/bundles/",
-"title":"Docker スタックと配布アプリケーションバンドル（試験的）",
-"description":"Description of Docker and Compose's experimental support for application bundles",
-"keywords":"documentation, docs, docker, compose, bundles, stacks"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/docker-hub/publish/byol/",
 "title":"Bring Your Own License (BYOL) products on Docker Hub",
 "description":"Submit a product to be listed on Docker Hub",
@@ -754,13 +747,6 @@ var pages = [
 "title":"Cancel or downgrade your plan",
 "description":"You can cancel or downgrade a private repository subscription through Docker Hub",
 "keywords":"cancel, downgrade, private repo, private repository, Docker Hub, Hub"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/ce-ee-node-activate/",
-"title":"CE-EE Node Activate",
-"description":"Engine",
-"keywords":"Engine, Docker Engine - Community, EE, node, activation, enterprise, patching"
 }
 ,
 {
@@ -1891,34 +1877,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/engine/",
-"title":"docker engine",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/engine_activate/",
-"title":"docker engine activate",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/engine_check/",
-"title":"docker engine check",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/engine_update/",
-"title":"docker engine update",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/compose/env-file/",
 "title":"環境変数のデフォルトをファイル内に定義する",
 "description":"Declare default environment variables in a file",
@@ -3021,7 +2979,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-for-windows/install/",
 "title":"Install Docker Desktop on Windows",
 "description":"How to install Docker Desktop for Windows",
-"keywords":"windows, install, download, run, docker, local, machine,"
+"keywords":"windows, install, download, run, docker, local"
 }
 ,
 {
@@ -3035,7 +2993,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-for-mac/install/",
 "title":"Docker Desktop on Mac のインストール",
 "description":"Docker Desktop on Mac のインストール方法。",
-"keywords":"mac, install, download, run, docker, local, machine"
+"keywords":"mac, install, download, run, docker, local"
 }
 ,
 {
@@ -3197,6 +3155,13 @@ var pages = [
 "title":"docker-compose kill",
 "description":"Forces running containers to stop.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  kill"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/kms-plugin/",
+"title":"KMS plugin support for UCP",
+"description":"Learn about the KMS plugin for UCP.",
+"keywords":"ucp, kms, kubernetes, plugin, configuration"
 }
 ,
 {
