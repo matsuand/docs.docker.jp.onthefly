@@ -1,4 +1,4 @@
-<!-- Page generated 2019-11-16 14:25:28 +0900 -->
+<!-- Page generated 2020-02-02 14:31:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-02T14:31:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="osxfs is a new shared file system solution, exclusive to Docker Desktop for Mac. osxfs provides a close-to-native user experience for bind mounting macOS file system trees into Docker containers...." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-11-16T14:25:28+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-02T14:31:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="mac, osxfs">
@@ -180,7 +180,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    14 分
+    15 分
   
 </span>
 
@@ -338,6 +338,36 @@ yet. Character and block device files are not supported.</p>
 
 <p><code class="highlighter-rouge">osxfs</code> does not use OSXFUSE. <code class="highlighter-rouge">osxfs</code> does not run under, inside, or
 between macOS userspace processes and the macOS kernel.</p>
+
+<h3 id="ssh-agent-forwarding">SSH agent forwarding</h3>
+
+<p>Docker Desktop for Mac allows you to use the host’s SSH agent inside a container. To do this:</p>
+
+<ol>
+  <li>
+    <p>Bind mount the SSH agent socket by adding the following parameter to your <code class="highlighter-rouge">docker run</code> command:</p>
+
+    <p><code class="highlighter-rouge">--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock</code></p>
+  </li>
+  <li>
+    <p>Add the <code class="highlighter-rouge">SSH_AUTH_SOCK</code> environment variable in your container:</p>
+
+    <p><code class="highlighter-rouge">-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"</code></p>
+  </li>
+</ol>
+
+<p>To enable the SSH agent in Docker Compose, add the following flags to your service:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:alpine</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">bind</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">/run/host-services/ssh-auth.sock</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/run/host-services/ssh-auth.sock</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock</span>
+</code></pre></div></div>
 
 <h3 id="performance-issues-solutions-and-roadmap">Performance issues, solutions, and roadmap</h3>
 
@@ -657,6 +687,7 @@ forward to collaborating with you on ideas and on the source code itself.</p>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/osxfs.md#file-types" class="nomunge">File types</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/osxfs.md#extended-attributes" class="nomunge">Extended attributes</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/osxfs.md#technology" class="nomunge">Technology</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/osxfs.md#ssh-agent-forwarding" class="nomunge">SSH agent forwarding</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/osxfs.md#performance-issues-solutions-and-roadmap" class="nomunge">Performance issues, solutions, and roadmap</a></li>
     </ul>
   </li>
