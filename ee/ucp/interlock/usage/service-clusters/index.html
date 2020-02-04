@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-15 20:37:42 +0900 -->
+<!-- Page generated 2020-02-04 20:29:19 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-15T20:37:42+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-04T20:29:19+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-15T20:37:42+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-04T20:29:19+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, interlock, load balancing, routing">
@@ -246,18 +246,20 @@ docker network create <span class="nt">--driver</span> overlay westnet
 <p>Next, modify Interlock’s configuration to create two service clusters. Start
 by writing its current configuration out to a file which you can modify:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CURRENT_CONFIG_NAME</span><span class="o">=</span><span class="k">$(</span>docker service inspect <span class="nt">--format</span> <span class="s1">''</span> ucp-interlock<span class="k">)</span>
-docker config inspect <span class="nt">--format</span> <span class="s1">''</span> <span class="nv">$CURRENT_CONFIG_NAME</span> <span class="o">&gt;</span> old_config.toml
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CURRENT_CONFIG_NAME</span><span class="o">=</span><span class="k">$(</span>docker service inspect <span class="nt">--format</span> <span class="s1">'{{ (index .Spec.TaskTemplate.ContainerSpec.Configs 0).ConfigName }}'</span> ucp-interlock<span class="k">)</span>
+docker config inspect <span class="nt">--format</span> <span class="s1">'{{ printf "%s" .Spec.Data }}'</span> <span class="nv">$CURRENT_CONFIG_NAME</span> <span class="o">&gt;</span> old_config.toml
 </code></pre></div></div>
 
 <p>Make a new config file called <code class="highlighter-rouge">config.toml</code> with the following content,
 which declares two service clusters, <code class="highlighter-rouge">east</code> and <code class="highlighter-rouge">west</code>.</p>
 
 <blockquote>
-  <p><strong>Note</strong> you will have to change the UCP version
+  <p><strong>Note</strong></p>
+
+  <p>You will have to change the UCP version
 (<code class="highlighter-rouge">3.2.3</code> in the example below) to match yours,
 as well as all instances of <code class="highlighter-rouge">*.ucp.InstanceID</code>
-(<code class="highlighter-rouge">vl5umu06ryluu66uzjcv5h1bo</code> below):</p>
+(<code class="highlighter-rouge">vl5umu06ryluu66uzjcv5h1bo</code> below).</p>
 </blockquote>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ListenAddr = ":8080"
@@ -405,7 +407,7 @@ PollInterval = "3s"
       HideInfoHeaders = false
 </code></pre></div></div>
 
-<p>If instead you prefer to modify the config file Interlock creates by default,
+<p>If instead you prefer to modify the configuration file Interlock creates by default,
 the crucial parts to adjust for a service cluster are:</p>
 
 <ul>
@@ -492,7 +494,6 @@ Interlock proxy mapped to port 80 on <code class="highlighter-rouge">ucp-node-1<
 successfully set up and demonstrated that Interlock can manage multiple
 proxies routing only to services attached to a select subset of Docker
 networks.</p>
-
 
 							<!-- tags -->
 							
