@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-08 19:30:17 +0900 -->
+<!-- Page generated 2020-02-08 13:04:30 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-08T13:04:30+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-08T13:04:30+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Kubernetes, ucp, RBAC">
@@ -214,13 +214,10 @@
 
 <p>Kubernetes RBAC is turned on by default for Kubernetes clusters when customers upgrade to UCP 3.1. See <a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">Using RBAC Authorization</a> in the v1.11 documentation for more information about Kubernetes role-based access control.</p>
 
-<p>Starting with UCP 3.1, Kubernetes and Swarm roles have separate views. You can view all the roles for a particular cluster under <strong>Access Control</strong> then <strong>Roles</strong>. Select Kubernetes or Swarm to view the specific roles for each.</p>
+<p>Starting with UCP 3.1, Kubernetes and Swarm roles have separate views. You can view all of the roles for a particular cluster under <strong>Access Control</strong> &gt; <strong>Roles</strong>. Select <strong>Kubernetes</strong> or <strong>Swarm</strong> to view the specific roles for each.</p>
 
 <h2 id="creating-roles">Creating roles</h2>
-
-<p>You create Kubernetes roles either through the CLI using <code class="highlighter-rouge">kubectl</code> or through the UCP web interface.</p>
-
-<p>To create a Kubernetes role in the UCP web interface:</p>
+<p>You can create Kubernetes roles through either the CLI using <a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl</a> or the UCP user interface (the procedure that follows).</p>
 
 <ol>
   <li>From the UCP UI, select <strong>Access Control</strong>.</li>
@@ -229,44 +226,39 @@
   <li>Select the <strong>Kubernetes</strong> tab at the top of the window.</li>
   <li>Select <strong>Create</strong> to create a Kubernetes role object in the following dialog:
  <img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/kube-role-create.png" alt="Kubernetes Role Creation in UCP" /></li>
-  <li>Select a namespace from the <strong>Namespace</strong> drop-down list. Selecting a specific namespace creates a role for use in that namespace, but selecting all namespaces creates a <code class="highlighter-rouge">ClusterRole</code> where you can create rules for cluster-scoped Kubernetes resources as well as namespaced resources.</li>
+  <li>Select a namespace from the <strong>Namespace</strong> drop-down list. Selecting a specific namespace creates a role for use in that namespace, however selecting all namespaces creates a ClusterRole where you can create rules for cluster-scoped Kubernetes resources as well as namespaced resources.</li>
   <li>Provide the YAML for the role, either by entering it in the <strong>Object YAML</strong> editor or select <strong>Click to upload a .yml file</strong> to choose and upload a .yml file instead.</li>
-  <li>When you have finished specifying the YAML, Select <strong>Create</strong> to complete role creation.</li>
+  <li>Select <strong>Create</strong>.</li>
 </ol>
 
 <h2 id="creating-role-grants">Creating role grants</h2>
 
-<p>Kubernetes provides 2 types of role grants:</p>
+<p>Kubernetes provides two types of role grants, <strong>ClusterRoleBinding</strong> (which applies to all namespaces) and <strong>RoleBinding</strong> (which applies to a specific namespace).</p>
 
-<ul>
-  <li><code class="highlighter-rouge">ClusterRoleBinding</code> which applies to all namespaces</li>
-  <li><code class="highlighter-rouge">RoleBinding</code> which applies to a specific namespace</li>
-</ul>
-
-<p>To create a grant for a Kubernetes role in the UCP web interface:</p>
+<p>To create a grant for a Kubernetes role in the UCP UI:</p>
 
 <ol>
-  <li>From the UCP UI, select <strong>Access Control</strong>.</li>
+  <li>Select <strong>Access Control</strong>.</li>
   <li>From the left navigation menu, select  <strong>Grants</strong>.
  <img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/v32grants.png" alt="Kubernetes Grants in UCP" /></li>
-  <li>Select the <strong>Kubernetes</strong> tab at the top of the window. All grants to Kubernetes roles can be viewed in the Kubernetes tab.</li>
-  <li>Select <strong>Create New Grant</strong> to start the Create Role Binding wizard and create a new grant for a given user, team or service.
+  <li>Select the <strong>Kubernetes</strong> tab at the top of the window to view all of the grants available to Kubernetes roles.</li>
+  <li>Select <strong>Create New Grant</strong> to start the Create Role Binding wizard and create a new grant for a given user, team, or service.
  <img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/kube-grant-wizard.png" alt="Kubernetes Create Role Binding in UCP" /></li>
-  <li>Select the subject type. Your choices are:
-    <ul>
-      <li><strong>All Users</strong></li>
-      <li><strong>Organizations</strong></li>
-      <li><strong>Service account</strong></li>
-    </ul>
-  </li>
+  <li>Select the subject type, <strong>All Users</strong>, <strong>Organizations</strong>, or <strong>Service Account</strong>.</li>
   <li>To create a user role binding, select a username from the <strong>Users</strong> drop-down list then select <strong>Next</strong>.</li>
   <li>Select a resource set for the subject. The <strong>default</strong> namespace is automatically selected. To use a different namespace, select the <strong>Select Namespace</strong> button next to the desired namespace. For <code class="highlighter-rouge">Cluster Role Binding</code>, slide the <strong>Apply Role Binding to all namespaces</strong> selector to the right.
  <img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/kube-grant-rolebinding.png" alt="Kubernetes Create User Role Binding in UCP" /></li>
-  <li>Select <strong>Next</strong> to continue.</li>
-  <li>Select the <strong>Cluster Role</strong> from the drop-down list. If you create a <code class="highlighter-rouge">ClusterRoleBinding</code> (by selecting <strong>Apply Role Binding to all namespaces</strong>) then you may only select ClusterRoles. If you select a specific namespace, you can choose any role from that namespace or any ClusterRole.
+  <li>Select <strong>Next</strong>.</li>
+  <li>Select the <strong>Cluster Role</strong> from the drop-down list. If you select <strong>Apply Roles Binding to all namespaces</strong> to create a ClusterRolebinding, only <strong>ClusterRoles</strong> can be selected. If, though, you select a specific namespace you can choose any role from that namespace or any ClusterRole.
  <img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/kube-grant-roleselect.png" alt="Kubernetes Select Cluster Role in UCP" /></li>
-  <li>Select <strong>Create</strong> to complete creating the grant.</li>
+  <li>Select <strong>Create</strong>.</li>
 </ol>
+
+<h2 id="where-to-go-next">Where to go next</h2>
+<ul>
+  <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">Using RBAC Authorization</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/kube-resources/">Find Kubernetes Resources</a></li>
+</ul>
 
 							<!-- tags -->
 							
@@ -364,6 +356,7 @@
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/configure-rbac-kube.md#creating-roles" class="nomunge">Creating roles</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/configure-rbac-kube.md#creating-role-grants" class="nomunge">Creating role grants</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/configure-rbac-kube.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 

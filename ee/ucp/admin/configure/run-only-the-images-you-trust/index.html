@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-08 19:30:17 +0900 -->
+<!-- Page generated 2020-02-08 13:04:30 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-08T13:04:30+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-08T13:04:30+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="ucp, dtr, security, trust">
@@ -205,57 +205,54 @@
   <p>The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the <a href="https://www.docker.com/faq-for-docker-enterprise-customers-and-partners">Docker Enterprise Customer FAQ</a>.</p>
 </blockquote>
 
-<p>With Docker Universal Control Plane you can enforce applications to only use
-Docker images signed by UCP users you trust. When a user tries to deploy an
-application to the cluster, UCP checks if the application uses a Docker image
-that is not trusted, and won’t continue with the deployment if that’s the case.</p>
+<p>With Docker Universal Control Plane (UCP), you can enforce applications to only use Docker images signed by UCP users you trust. Each time a user attempts to deploy an application to the cluster, UCP checks whether the application is using a trusted Docker image (and will halt the deployment if that is not the case).</p>
 
 <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/run-only-the-images-you-trust-1.svg" alt="Enforce image signing" /></p>
 
-<p>By signing and verifying the Docker images, you ensure that the images being
-used in your cluster are the ones you trust and haven’t been altered either in
-the image registry or on their way from the image registry to your UCP cluster.</p>
+<p>By signing and verifying Docker images, you ensure that:</p>
+
+<ul>
+  <li>The images used in your cluster are ones that you trust.</li>
+  <li>The images have not been altered either in the image registry or on their way from the image registry to your UCP cluster.</li>
+</ul>
 
 <h2 id="example-workflow">Example workflow</h2>
 
-<p>Here’s an example of a typical workflow:</p>
-
 <ol>
-  <li>A developer makes changes to a service and pushes their changes to a version
-control system.</li>
-  <li>A CI system creates a build, runs tests, and pushes an image to DTR with the
-new changes.</li>
-  <li>The quality engineering team pulls the image and runs more tests. If
-everything looks good they sign and push the image.</li>
-  <li>The IT operations team deploys a service. If the image used for the service
-was signed by the QA team, UCP deploys it. Otherwise UCP refuses to deploy.</li>
+  <li>A developer makes changes to a service and pushes the changes to a version control system.</li>
+  <li>A continuous integration (CI) system creates a build, runs tests, and pushes an image to Docker Trusted Registry (DTR) with the new changes.</li>
+  <li>The quality engineering team pulls the image and runs more tests. If the tests are successful, the team signs and then pushes the image.</li>
+  <li>The IT operations team deploys a service. If the image used for the service was signed by the QA team, UCP deploys it. Otherwise, UCP refuses to deploy the image.</li>
 </ol>
 
 <h2 id="configure-ucp">Configure UCP</h2>
 
-<p>To configure UCP to only allow running services that use Docker images you
-trust, go to the UCP web UI, navigate to the <strong>Admin Settings</strong> page, and in
-the left pane, click <strong>Docker Content Trust</strong>.</p>
+<p>To configure UCP to only allow running services that use Docker trusted images:</p>
 
-<p>Select the <strong>Run Only Signed Images</strong> option to only allow deploying
-applications if they use images you trust.</p>
+<ol>
+  <li>Access the UCP UI and browse to the <strong>Admin Settings</strong> page.</li>
+  <li>In the left navigation pane, click <strong>Docker Content Trust</strong>.</li>
+  <li>
+    <p>Select the <strong>Run only signed images</strong> option.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/run-only-the-images-you-trust-2.png" alt="UCP settings" class="with-border" /></p>
+    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/run-only-the-images-you-trust-2.png" alt="UCP settings" class="with-border" /></p>
 
-<p>With this setting, UCP allows deploying any image as long as the image has
-been signed. It doesn’t matter who signed the image.</p>
+    <p>With this setting, UCP allows deploying any image as long as the image has
+ been signed.</p>
 
-<p>To enforce that the image needs to be signed by specific teams, click <strong>Add Team</strong>
-and select those teams from the list.</p>
+    <p>To enforce the requirement that the image be signed by specific teams, click <strong>Add Team</strong> and select the pertinent teams from the list.</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/run-only-the-images-you-trust-3.png" alt="UCP settings" class="with-border" /></p>
+    <p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/images/run-only-the-images-you-trust-3.png" alt="UCP settings" class="with-border" /></p>
 
-<p>If you specify multiple teams, the image needs to be signed by a member of each
-team, or someone that is a member of all those teams.</p>
+    <p>If you specify multiple teams, the image needs to be signed by a member of each
+ team, or by someone that is a member of all of those teams.</p>
+  </li>
+  <li>
+    <p>Click <strong>Save.</strong></p>
 
-<p>Click <strong>Save</strong> for UCP to start enforcing the policy. From now on, existing
-services will continue running and can be restarted if needed, but UCP will only
-allow deploying new services that use a trusted image.</p>
+    <p>At this point, UCP starts enforcing the policy. Existing services will continue running and can be restarted if needed, however UCP only allows the deployment of new services that use a trusted image.</p>
+  </li>
+</ol>
 
 <h2 id="where-to-go-next">Where to go next</h2>
 

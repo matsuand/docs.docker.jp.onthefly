@@ -1836,8 +1836,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/enable-audit-logging/",
-"title":"Enable audit logging on UCP",
-"description":"Learn how to enable audit logging of all activity in UCP",
+"title":"Audit logging on UCP",
+"description":"Learn how to enable audit logging of all activity in UCP.",
 "keywords":"logs, ucp, swarm, kubernetes, audits"
 }
 ,
