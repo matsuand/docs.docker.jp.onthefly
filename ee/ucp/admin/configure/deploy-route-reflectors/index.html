@@ -1,4 +1,4 @@
-<!-- Page generated 2020-01-08 19:30:17 +0900 -->
+<!-- Page generated 2020-02-11 21:42:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,17 +87,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-11T21:42:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Improve network performance with Route Reflectors"/>
+	<meta name="twitter:title" itemprop="title name" content="Improve network performance with route reflectors"/>
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-01-08T19:30:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-11T21:42:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="cluster, node, label, certificate, SAN">
@@ -109,16 +109,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Improve network performance with Route Reflectors | Docker ドキュメント</title>
-<meta property="og:title" content="Improve network performance with Route Reflectors" />
+	<title>Improve network performance with route reflectors | Docker ドキュメント</title>
+<meta property="og:title" content="Improve network performance with route reflectors" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Learn how to deploy Calico Route Reflectors to improve performance of Kubernetes networking" />
-<meta property="og:description" content="Learn how to deploy Calico Route Reflectors to improve performance of Kubernetes networking" />
+<meta name="description" content="Learn how to deploy Calico route reflectors to improve the performance of Kubernetes networking." />
+<meta property="og:description" content="Learn how to deploy Calico route reflectors to improve the performance of Kubernetes networking." />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/deploy-route-reflectors/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/deploy-route-reflectors/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Improve network performance with Route Reflectors","description":"Learn how to deploy Calico Route Reflectors to improve performance of Kubernetes networking","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/deploy-route-reflectors/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"Improve network performance with route reflectors","description":"Learn how to deploy Calico route reflectors to improve the performance of Kubernetes networking.","url":"https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/deploy-route-reflectors/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -188,11 +188,11 @@
 						<section class="section">
 							
 								
-							<h1>Improve network performance with Route Reflectors</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>Improve network performance with route reflectors</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    6 分
   
 </span>
 
@@ -205,127 +205,129 @@
   <p>The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the <a href="https://www.docker.com/faq-for-docker-enterprise-customers-and-partners">Docker Enterprise Customer FAQ</a>.</p>
 </blockquote>
 
-<p>UCP uses Calico as the default Kubernetes networking solution. Calico is
-configured to create a BGP mesh between all nodes in the cluster.</p>
+<p>Docker Universal Control Plane (UCP) uses <a href="https://docs.projectcalico.org/v3.11/introduction/">Calico</a> as the default Kubernetes networking solution. Calico is configured to create a Border Gateway Protocol (BGP) mesh between all nodes in the cluster.</p>
 
-<p>As you add more nodes to the cluster, networking performance starts decreasing.
-If your cluster has more than 100 nodes, you should reconfigure Calico to use
-Route Reflectors instead of a node-to-node mesh.</p>
+<p>As you add more nodes to the cluster, networking performance starts decreasing. In fact, if your cluster has more than 100 nodes, you should reconfigure Calico to use route reflectors instead of a node-to-node mesh.</p>
 
-<p>This article guides you in deploying Calico Route Reflectors in a UCP cluster.
-UCP running on Microsoft Azure uses Azure SDN instead of Calico for
-multi-host networking.
-If your UCP deployment is running on Azure, you don’t need to configure it this
-way.</p>
+<p>Route reflectors are useful in large scale deployments to reduce the number of BGP connections needed for correct and complete route propagation.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>UCP running on Microsoft Azure uses Azure Software Defined Networking (SDN) instead of Calico for multi-host networking. If your UCP deployment is running on Azure, you don’t need to configure it this way. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/install/cloudproviders/install-on-azure/">Install UCP on Azure</a> for more information.</p>
+</blockquote>
 
 <h2 id="before-you-begin">Before you begin</h2>
 
-<p>For production-grade systems, you should deploy at least two Route Reflectors,
-each running on a dedicated node. These nodes should not be running any other
-workloads.</p>
-
-<p>If Route Reflectors are running on a same node as other workloads, swarm ingress
-and NodePorts might not work in these workloads.</p>
+<p>For production-grade systems, deploy at least two route reflectors, each running on its own node. These nodes should be dedicated solely to the purpose, too, because Swarm ingress and NodePorts may not function on any other workloads running on a route reflector node.</p>
 
 <h2 id="choose-dedicated-nodes">Choose dedicated nodes</h2>
 
-<p>Start by tainting the nodes, so that no other workload runs there. <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">Configure
-your CLI with a UCP client bundle</a>, and for each dedicated node, run:</p>
+<ol>
+  <li>
+    <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/configure/restrict-services-to-worker-nodes/">Taint the nodes</a> to ensure that they are unable to run other workloads. To do this, configure the CLI with a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">UCP client bundle</a>.</p>
+  </li>
+  <li>
+    <p>For each dedicated node:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl taint node &lt;node-name&gt; \
-  com.docker.ucp.kubernetes.calico/route-reflector=true:NoSchedule
-</code></pre></div></div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kubectl taint node &lt;node-name&gt; \
+ com.docker.ucp.kubernetes.calico/route-reflector=true:NoSchedule
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add labels to each of the dedicated nodes:</p>
 
-<p>Then add labels to those nodes, so that you can target them when deploying the
-Route Reflectors. For each dedicated node, run:</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kubectl label nodes &lt;node-name&gt; \
+ com.docker.ucp.kubernetes.calico/route-reflector=true
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl label nodes &lt;node-name&gt; \
-  com.docker.ucp.kubernetes.calico/route-reflector=true
-</code></pre></div></div>
+<h2 id="deploy-the-route-reflectors">Deploy the route reflectors</h2>
 
-<h2 id="deploy-the-route-reflectors">Deploy the Route Reflectors</h2>
+<ol>
+  <li>
+    <p>Create a <code class="highlighter-rouge">calico-rr.yaml</code> file with the following content:</p>
 
-<p>Create a <code class="highlighter-rouge">calico-rr.yaml</code> file with the following content:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kind: DaemonSet
-apiVersion: extensions/v1beta1
-metadata:
-  name: calico-rr
-  namespace: kube-system
-  labels:
-    app: calico-rr
-spec:
-  updateStrategy:
-    type: RollingUpdate
-  selector:
-    matchLabels:
-      k8s-app: calico-rr
-  template:
-    metadata:
-      labels:
-        k8s-app: calico-rr
-      annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ''
-    spec:
-      tolerations:
-        - key: com.docker.ucp.kubernetes.calico/route-reflector
-          value: "true"
-          effect: NoSchedule
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kind: DaemonSet
+ apiVersion: extensions/v1beta1
+ metadata:
+ name: calico-rr
+ namespace: kube-system
+ labels:
+     app: calico-rr
+ spec:
+ updateStrategy:
+     type: RollingUpdate
+ selector:
+     matchLabels:
+     k8s-app: calico-rr
+ template:
+     metadata:
+     labels:
+         k8s-app: calico-rr
+     annotations:
+         scheduler.alpha.kubernetes.io/critical-pod: ''
+  spec:
+     tolerations:
+         - key: com.docker.ucp.kubernetes.calico/route-reflector
+         value: "true"
+         effect: NoSchedule
       hostNetwork: true
-      containers:
-        - name: calico-rr
-          image: calico/routereflector:v0.6.1
-          env:
-            - name: ETCD_ENDPOINTS
-              valueFrom:
-                configMapKeyRef:
-                  name: calico-config
-                  key: etcd_endpoints
-            - name: ETCD_CA_CERT_FILE
-              valueFrom:
-                configMapKeyRef:
-                  name: calico-config
-                  key: etcd_ca
-            # Location of the client key for etcd.
-            - name: ETCD_KEY_FILE
-              valueFrom:
-                configMapKeyRef:
-                  name: calico-config
-                  key: etcd_key # Location of the client certificate for etcd.
-            - name: ETCD_CERT_FILE
-              valueFrom:
-                configMapKeyRef:
-                  name: calico-config
-                  key: etcd_cert
-            - name: IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-          volumeMounts:
-            - mountPath: /calico-secrets
-              name: etcd-certs
-          securityContext:
-            privileged: true
-      nodeSelector:
-        com.docker.ucp.kubernetes.calico/route-reflector: "true"
-      volumes:
-      # Mount in the etcd TLS secrets.
-        - name: etcd-certs
-          secret:
-            secretName: calico-etcd-secrets
-</code></pre></div></div>
+     containers:
+         - name: calico-rr
+         image: calico/routereflector:v0.6.1
+           env:
+             - name: ETCD_ENDPOINTS
+               valueFrom:
+                 configMapKeyRef:
+                   name: calico-config
+                   key: etcd_endpoints
+             - name: ETCD_CA_CERT_FILE
+               valueFrom:
+                 configMapKeyRef:
+                   name: calico-config
+                   key: etcd_ca
+             # Location of the client key for etcd.
+             - name: ETCD_KEY_FILE
+               valueFrom:
+                 configMapKeyRef:
+                   name: calico-config
+                   key: etcd_key # Location of the client certificate for etcd.
+             - name: ETCD_CERT_FILE
+               valueFrom:
+                 configMapKeyRef:
+                   name: calico-config
+                   key: etcd_cert
+             - name: IP
+               valueFrom:
+                 fieldRef:
+                   fieldPath: status.podIP
+           volumeMounts:
+             - mountPath: /calico-secrets
+               name: etcd-certs
+           securityContext:
+             privileged: true
+       nodeSelector:
+         com.docker.ucp.kubernetes.calico/route-reflector: "true"
+       volumes:
+       # Mount in the etcd TLS secrets.
+         - name: etcd-certs
+           secret:
+             secretName: calico-etcd-secrets
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Deploy the DaemonSet:</p>
 
-<p>Then, deploy the DaemonSet using:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create -f calico-rr.yaml
-</code></pre></div></div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> kubectl create -f calico-rr.yaml
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <h2 id="configure-calicoctl">Configure calicoctl</h2>
 
-<p>To reconfigure Calico to use Route Reflectors instead of a node-to-node mesh,
-you’ll need to tell <code class="highlighter-rouge">calicoctl</code> where to find the etcd key-value store managed
-by UCP.  From a CLI with a UCP client bundle, create a shell alias to start
-<code class="highlighter-rouge">calicoctl</code> using the <code class="highlighter-rouge">docker/ucp-dsinfo</code> image:</p>
+<p>To reconfigure Calico to use route reflectors instead of a node-to-node mesh, <code class="highlighter-rouge">calicoctl</code> needs to be able to locate the etcd key-value store managed by UCP. From a CLI configured with a UCP client bundle, create a shell alias to start <code class="highlighter-rouge">calicoctl</code> using the <code class="highlighter-rouge">docker/ucp-dsinfo</code> image:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UCP_VERSION=$(docker version --format '{{index (split .Server.Version "/") 1}}')
 alias calicoctl="\
@@ -346,13 +348,12 @@ docker run -i --rm \
 
 <h2 id="disable-node-to-node-bgp-mesh">Disable node-to-node BGP mesh</h2>
 
-<p>Now that you’ve configured <code class="highlighter-rouge">calicoctl</code>, you can check the current Calico BGP
-configuration:</p>
+<p>After configuring <code class="highlighter-rouge">calicoctl</code>, check the current Calico BGP configuration:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>calicoctl get bgpconfig
 </code></pre></div></div>
 
-<p>If you don’t see any configuration listed, create one by running:</p>
+<p>If you don’t see any configuration listed, create one:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>calicoctl create -f - &lt;&lt;EOF
 apiVersion: projectcalico.org/v3
@@ -366,29 +367,34 @@ spec:
 EOF
 </code></pre></div></div>
 
-<p>This creates a new configuration with node-to-node mesh BGP disabled.
-If you have a configuration, and <code class="highlighter-rouge">meshenabled</code> is set to <code class="highlighter-rouge">true</code>, update your
-configuration:</p>
+<p>This action creates a new configuration with node-to-node mesh BGP disabled.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>calicoctl get bgpconfig --output yaml &gt; bgp.yaml
-</code></pre></div></div>
+<p>If you have a configuration, and <code class="highlighter-rouge">meshenabled</code> is set to <code class="highlighter-rouge">true</code>:</p>
 
-<p>Edit the <code class="highlighter-rouge">bgp.yaml</code> file, updating <code class="highlighter-rouge">nodeToNodeMeshEnabled</code> to <code class="highlighter-rouge">false</code>. Then
-update Calico configuration by running:</p>
+<ol>
+  <li>
+    <p>Update your configuration:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>calicoctl replace -f - &lt; bgp.yaml
-</code></pre></div></div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> calicoctl get bgpconfig --output yaml &gt; bgp.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>Edit the <code class="highlighter-rouge">bgp.yaml</code> file, changing <code class="highlighter-rouge">nodeToNodeMeshEnabled</code> to <code class="highlighter-rouge">false</code>.</li>
+  <li>
+    <p>Update the Calico configuration:</p>
 
-<h2 id="configure-calico-to-use-route-reflectors">Configure Calico to use Route Reflectors</h2>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> calicoctl replace -f - &lt; bgp.yaml
+</code></pre></div>    </div>
+  </li>
+</ol>
 
-<p>To configure Calico to use the Route Reflectors you need to know the AS number
-for your network first. For that, run:</p>
+<h2 id="configure-calico-to-use-route-reflectors">Configure Calico to use route reflectors</h2>
+
+<p>To configure Calico to use route reflectors, you first need to get the Autonomous System (AS) number for the network. To get the AS number for your network:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>calicoctl get nodes --output=wide
 </code></pre></div></div>
 
-<p>Now that you have the AS number, you can create the Calico configuration.
-For each Route Reflector, customize and run the following snippet:</p>
+<p>Using the AS number, create the Calico configuration by customizing and running the following snipped for each route reflector:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>calicoctl create -f - &lt;&lt; EOF
 apiVersion: projectcalico.org/v3
@@ -403,7 +409,7 @@ EOF
 
 <p>Where:</p>
 <ul>
-  <li><code class="highlighter-rouge">IP_RR</code> is the IP of the node where the Route Reflector pod is deployed.</li>
+  <li><code class="highlighter-rouge">IP_RR</code> is the IP address of the node on which the route reflector pod is deployed.</li>
   <li><code class="highlighter-rouge">AS_NUMBER</code> is the same <code class="highlighter-rouge">AS number</code> for your nodes.</li>
 </ul>
 
@@ -412,11 +418,14 @@ EOF
 
 <h2 id="stop-calico-node-pods">Stop calico-node pods</h2>
 
-<p>If you have <code class="highlighter-rouge">calico-node</code> pods running on the nodes dedicated for running the
-Route Reflector, manually delete them. This ensures that you don’t have them
-both running on the same node.</p>
-
-<p>Using your UCP client bundle, run:</p>
+<ol>
+  <li>
+    <p>Manually delete any <code class="highlighter-rouge">calico-node</code> pods that are running on nodes dedicated to the running of route reflectors, as this will ensure that there are no instances in which pods and route reflectors are running on the same node.</p>
+  </li>
+  <li>
+    <p>Using your UCP client bundle:</p>
+  </li>
+</ol>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Find the Pod name
 kubectl -n kube-system \
@@ -429,9 +438,10 @@ kubectl -n kube-system delete pod &lt;pod-name&gt;
 
 <h2 id="validate-peers">Validate peers</h2>
 
-<p>Now you can check that <code class="highlighter-rouge">calico-node</code> pods running on other nodes are peering
-with the Route Reflector.  From a CLI with a UCP client bundle, use a Swarm affinity filter to run <code class="highlighter-rouge">calicoctl node
-status</code> on any node running <code class="highlighter-rouge">calico-node</code>:</p>
+<ol>
+  <li>Verify that the <code class="highlighter-rouge">calico-node</code> pods running on other nodes are peering with the route reflector.</li>
+  <li>From a CLI configured with a UCP client bundle, use a Swarm affinity filter to run <code class="highlighter-rouge">calicoctl node status</code> on any node running <code class="highlighter-rouge">calico-node</code>:</li>
+</ol>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UCP_VERSION=$(docker version --format '{{index (split .Server.Version "/") 1}}')
 docker run -i --rm \
@@ -448,7 +458,7 @@ docker run -i --rm \
   calicoctl node status
 </code></pre></div></div>
 
-<p>You should see something like:</p>
+<p>The following is a sample output.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IPv4 BGP status
 +--------------+-----------+-------+----------+-------------+
@@ -460,6 +470,10 @@ docker run -i --rm \
 IPv6 BGP status
 No IPv6 peers found.
 </code></pre></div></div>
+<h2 id="where-to-go-next">Where to go next</h2>
+<ul>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/admin/monitor-and-troubleshoot/">Monitor the cluster status</a></li>
+</ul>
 
 							<!-- tags -->
 							
@@ -495,7 +509,7 @@ No IPv6 peers found.
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "ee/ucp/admin/configure/deploy-route-reflectors.md",
-										"title": "Improve network performance with Route Reflectors",
+										"title": "Improve network performance with route reflectors",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/admin/configure/deploy-route-reflectors.md"
 									};
 									(function(d, c, j) {
@@ -557,12 +571,13 @@ No IPv6 peers found.
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#before-you-begin" class="nomunge">Before you begin</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#choose-dedicated-nodes" class="nomunge">Choose dedicated nodes</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#deploy-the-route-reflectors" class="nomunge">Deploy the Route Reflectors</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#deploy-the-route-reflectors" class="nomunge">Deploy the route reflectors</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#configure-calicoctl" class="nomunge">Configure calicoctl</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#disable-node-to-node-bgp-mesh" class="nomunge">Disable node-to-node BGP mesh</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#configure-calico-to-use-route-reflectors" class="nomunge">Configure Calico to use Route Reflectors</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#configure-calico-to-use-route-reflectors" class="nomunge">Configure Calico to use route reflectors</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#stop-calico-node-pods" class="nomunge">Stop calico-node pods</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#validate-peers" class="nomunge">Validate peers</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/deploy-route-reflectors.md#where-to-go-next" class="nomunge">Where to go next</a></li>
 </ul>
 
 

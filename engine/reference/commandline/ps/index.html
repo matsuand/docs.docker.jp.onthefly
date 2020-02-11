@@ -1,4 +1,4 @@
-<!-- Page generated 2019-10-17 18:00:24 +0900 -->
+<!-- Page generated 2020-02-11 21:42:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-17T18:00:24+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-11T21:42:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 List containers 利用方法 docker ps [OPTIONS] オプション 名前／省略形 デフォルト 説明 --all , -a Show all containers (default shows just running) --filter , -f Filter output based on conditions provided..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-10-17T18:00:24+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-11T21:42:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -412,6 +412,22 @@ containers, use the <code class="highlighter-rouge">-a</code> (or <code class="h
 <p><code class="highlighter-rouge">docker ps</code> groups exposed ports into a single range if possible. E.g., a
 container that exposes TCP ports <code class="highlighter-rouge">100, 101, 102</code> displays <code class="highlighter-rouge">100-102/tcp</code> in
 the <code class="highlighter-rouge">PORTS</code> column.</p>
+
+<h3 id="show-disk-usage-by-container">Show disk usage by container</h3>
+
+<p>The <code class="highlighter-rouge">docker ps -s</code> command displays two different on-disk-sizes for each container:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-s</span>
+CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS   NAMES        SIZE                                                                                      SIZE
+e90b8831a4b8   nginx          <span class="s2">"/bin/bash -c 'mkdir "</span>   11 weeks ago   Up 4 hours           my_nginx     35.58 kB <span class="o">(</span>virtual 109.2 MB<span class="o">)</span>
+00c6131c5e30   telegraf:1.5   <span class="s2">"/entrypoint.sh"</span>         11 weeks ago   Up 11 weeks          my_telegraf  0 B <span class="o">(</span>virtual 209.5 MB<span class="o">)</span>
+</code></pre></div></div>
+<ul>
+  <li>The “size” information shows the amount of data (on disk) that is used for the <em>writable</em> layer of each container</li>
+  <li>The “virtual size” is the total amount of disk-space used for the read-only <em>image</em> data used by the container and the writable layer.</li>
+</ul>
+
+<p>For more information, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/#container-size-on-disk">container size on disk</a> section.</p>
 
 <h3 id="filtering">Filtering</h3>
 
@@ -948,6 +964,7 @@ c1d3b0166030        com.docker.swarm.node<span class="o">=</span>debian,com.dock
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ps.md#prevent-truncating-output" class="nomunge">Prevent truncating output</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ps.md#show-both-running-and-stopped-containers" class="nomunge">Show both running and stopped containers</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ps.md#show-disk-usage-by-container" class="nomunge">Show disk usage by container</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ps.md#filtering" class="nomunge">Filtering</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/ps.md#formatting" class="nomunge">Formatting</a></li>
     </ul>

@@ -1,4 +1,4 @@
-<!-- Page generated 2019-10-17 18:00:24 +0900 -->
+<!-- Page generated 2020-02-11 21:42:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-17T18:00:24+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-11T21:42:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Build an image from a Dockerfile 利用方法 docker build [OPTIONS] PATH | URL | - オプション 名前／省略形 デフォルト 説明 --add-host Add a custom host-to-IP mapping (host:ip) --build-arg Set build-time..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-10-17T18:00:24+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-11T21:42:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -1138,7 +1138,15 @@ Successfully built 99cc1ad10469
 <p>This example shows the use of the <code class="highlighter-rouge">.dockerignore</code> file to exclude the <code class="highlighter-rouge">.git</code>
 directory from the context. Its effect can be seen in the changed size of the
 uploaded context. The builder reference contains detailed information on
-<a href="../builder.md#dockerignore-file">creating a .dockerignore file</a></p>
+<a href="../builder.md#dockerignore-file">creating a .dockerignore file</a>.</p>
+
+<p>When using the <a href="../builder.md#buildkit">BuildKit backend</a>, <code class="highlighter-rouge">docker build</code> searches
+for a <code class="highlighter-rouge">.dockerignore</code> file relative to the Dockerfile name. For example, running
+<code class="highlighter-rouge">docker build -f myapp.Dockerfile .</code> will first look for an ignore file named
+<code class="highlighter-rouge">myapp.Dockerfile.dockerignore</code>. If such a file is not found, the <code class="highlighter-rouge">.dockerignore</code>
+file is used if present. Using a Dockerfile based <code class="highlighter-rouge">.dockerignore</code> is useful if a
+project contains multiple Dockerfiles that expect to ignore different sets of
+files.</p>
 
 <h3 id="tag-an-image--t">Tag an image (-t)</h3>
 
@@ -1312,6 +1320,133 @@ FROM alpine AS production-env
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> mybuildimage <span class="nt">--target</span> build-env <span class="nb">.</span>
 </code></pre></div></div>
+
+<h3 id="custom-build-outputs">Custom build outputs</h3>
+
+<p>By default, a local container image is created from the build result. The
+<code class="highlighter-rouge">--output</code> (or <code class="highlighter-rouge">-o</code>) flag allows you to override this behavior, and a specify a
+custom exporter. For example, custom exporters allow you to export the build
+artifacts as files on the local filesystem instead of a Docker image, which can
+be useful for generating local binaries, code generation etc.</p>
+
+<p>The value for <code class="highlighter-rouge">--output</code> is a CSV-formatted string defining the exporter type
+and options. Currently, <code class="highlighter-rouge">local</code> and <code class="highlighter-rouge">tar</code> exporters are supported. The <code class="highlighter-rouge">local</code>
+exporter writes the resulting build files to a directory on the client side. The
+<code class="highlighter-rouge">tar</code> exporter is similar but writes the files as a single tarball (<code class="highlighter-rouge">.tar</code>).</p>
+
+<p>If no type is specified, the value defaults to the output directory of the local
+exporter. Use a hyphen (<code class="highlighter-rouge">-</code>) to write the output tarball to standard output
+(<code class="highlighter-rouge">STDOUT</code>).</p>
+
+<p>The following example builds an image using the current directory (<code class="highlighter-rouge">.</code>) as build
+context, and exports the files to a directory named <code class="highlighter-rouge">out</code> in the current directory.
+If the directory does not exist, Docker creates the directory automatically:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-o</span> out <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>The example above uses the short-hand syntax, omitting the <code class="highlighter-rouge">type</code> options, and
+thus uses the default (<code class="highlighter-rouge">local</code>) exporter. The example below shows the equivalent
+using the long-hand CSV syntax, specifying both <code class="highlighter-rouge">type</code> and <code class="highlighter-rouge">dest</code> (destination
+path):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--output</span> <span class="nb">type</span><span class="o">=</span><span class="nb">local</span>,dest<span class="o">=</span>out <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Use the <code class="highlighter-rouge">tar</code> type to export the files as a <code class="highlighter-rouge">.tar</code> archive:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--output</span> <span class="nb">type</span><span class="o">=</span><span class="nb">tar</span>,dest<span class="o">=</span>out.tar <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>The example below shows the equivalent when using the short-hand syntax. In this
+case, <code class="highlighter-rouge">-</code> is specified as destination, which automatically selects the <code class="highlighter-rouge">tar</code> type,
+and writes the output tarball to standard output, which is then redirected to
+the <code class="highlighter-rouge">out.tar</code> file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-o</span> - <span class="nb">.</span> <span class="o">&gt;</span> out.tar
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">--output</code> option exports all files from the target stage. A common pattern
+for exporting only specific files is to do multi-stage builds and to copy the
+desired files to a new scratch stage with <a href="../builder.md#copy"><code class="highlighter-rouge">COPY --from</code></a>.</p>
+
+<p>The example <code class="highlighter-rouge">Dockerfile</code> below uses a separate stage to collect the
+build-artifacts for exporting:</p>
+
+<pre><code class="language-Dockerfile">FROM golang AS build-stage
+RUN go get -u github.com/LK4D4/vndr
+
+FROM scratch AS export-stage
+COPY --from=build-stage /go/bin/vndr /
+</code></pre>
+
+<p>When building the Dockerfile with the <code class="highlighter-rouge">-o</code> option, only the files from the final
+stage are exported to the <code class="highlighter-rouge">out</code> directory, in this case, the <code class="highlighter-rouge">vndr</code> binary:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-o</span> out <span class="nb">.</span>
+
+<span class="o">[</span>+] Building 2.3s <span class="o">(</span>7/7<span class="o">)</span> FINISHED
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile                                                                          0.1s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 176B                                                                                          0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore                                                                                             0.0s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 2B                                                                                               0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/golang:latest                                                              1.6s
+ <span class="o">=&gt;</span> <span class="o">[</span>build-stage 1/2] FROM docker.io/library/golang@sha256:2df96417dca0561bf1027742dcc5b446a18957cd28eba6aa79269f23f1846d3f   0.0s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> resolve docker.io/library/golang@sha256:2df96417dca0561bf1027742dcc5b446a18957cd28eba6aa79269f23f1846d3f               0.0s
+ <span class="o">=&gt;</span> CACHED <span class="o">[</span>build-stage 2/2] RUN go get <span class="nt">-u</span> github.com/LK4D4/vndr                                                              0.0s
+ <span class="o">=&gt;</span> <span class="o">[</span>export-stage 1/1] COPY <span class="nt">--from</span><span class="o">=</span>build-stage /go/bin/vndr /                                                                 0.2s
+ <span class="o">=&gt;</span> exporting to client                                                                                                       0.4s
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> copying files 10.30MB                                                                                                  0.3s
+
+<span class="nv">$ </span><span class="nb">ls</span> ./out
+vndr
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong>: This feature requires the BuildKit backend. You can either
+<a href="../builder.md#buildkit">enable BuildKit</a> or use the <a href="https://github.com/docker/buildx">buildx</a>
+plugin which provides more output type options.</p>
+</blockquote>
+
+<h3 id="specifying-external-cache-sources">Specifying external cache sources</h3>
+
+<p>In addition to local build cache, the builder can reuse the cache generated from
+previous builds with the <code class="highlighter-rouge">--cache-from</code> flag pointing to an image in the registry.</p>
+
+<p>To use an image as a cache source, cache metadata needs to be written into the
+image on creation. This can be done by setting <code class="highlighter-rouge">--build-arg BUILDKIT_INLINE_CACHE=1</code>
+when building the image. After that, the built image can be used as a cache source
+for subsequent builds.</p>
+
+<p>Upon importing the cache, the builder will only pull the JSON metadata from the
+registry and determine possible cache hits based on that information. If there
+is a cache hit, the matched layers are pulled into the local environment.</p>
+
+<p>In addition to images, the cache can also be pulled from special cache manifests
+generated by <a href="https://github.com/docker/buildx"><code class="highlighter-rouge">buildx</code></a> or the BuildKit CLI
+(<code class="highlighter-rouge">buildctl</code>). These manifests (when built with the <code class="highlighter-rouge">type=registry</code> and <code class="highlighter-rouge">mode=max</code>
+options) allow pulling layer data for intermediate stages in multi-stage builds.</p>
+
+<p>The following example builds an image with inline-cache metadata and pushes it
+to a registry, then uses the image as a cache source on another machine:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> myname/myapp <span class="nt">--build-arg</span> <span class="nv">BUILDKIT_INLINE_CACHE</span><span class="o">=</span>1 <span class="nb">.</span>
+<span class="nv">$ </span>docker push myname/myapp
+</code></pre></div></div>
+
+<p>After pushing the image, the image is used as cache source on another machine.
+BuildKit automatically pulls the image from the registry if needed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># on another machine</span>
+<span class="nv">$ </span>docker build <span class="nt">--cache-from</span> myname/myapp <span class="nb">.</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong>: This feature requires the BuildKit backend. You can either
+<a href="../builder.md#buildkit">enable BuildKit</a> or use the <a href="https://github.com/docker/buildx">buildx</a>
+plugin. The previous builder has limited support for reusing cache from
+pre-pulled images.</p>
+</blockquote>
 
 <h3 id="squash-an-images-layers---squash-experimental">Squash an image’s layers (--squash) (experimental)</h3>
 
@@ -1553,6 +1688,8 @@ RUN rm /remove_me
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#specify-isolation-technology-for-container---isolation" class="nomunge">Specify isolation technology for container (--isolation)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#add-entries-to-container-hosts-file---add-host" class="nomunge">Add entries to container hosts file (--add-host)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#specifying-target-build-stage---target" class="nomunge">Specifying target build stage (--target)</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#custom-build-outputs" class="nomunge">Custom build outputs</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#specifying-external-cache-sources" class="nomunge">Specifying external cache sources</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#squash-an-images-layers---squash-experimental" class="nomunge">Squash an image’s layers (--squash) (experimental)</a></li>
     </ul>
   </li>

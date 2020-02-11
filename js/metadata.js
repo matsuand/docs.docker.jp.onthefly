@@ -1521,8 +1521,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/deploy-route-reflectors/",
-"title":"Improve network performance with Route Reflectors",
-"description":"Learn how to deploy Calico Route Reflectors to improve performance of Kubernetes networking",
+"title":"Improve network performance with route reflectors",
+"description":"Learn how to deploy Calico route reflectors to improve the performance of Kubernetes networking.",
 "keywords":"cluster, node, label, certificate, SAN"
 }
 ,

@@ -1,4 +1,4 @@
-<!-- Page generated 2019-10-17 18:00:24 +0900 -->
+<!-- Page generated 2020-02-11 21:42:49 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2019-10-17T18:00:24+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-11T21:42:49+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Create a new service API 1.24 以上  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.24 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 Swarm This command works with the Swarm orchestrator. 利用方法 docker service..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2019-10-17T18:00:24+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-11T21:42:49+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -1514,8 +1514,13 @@ https://github.com/docker/cli
 
 <h2 id="extended-description">追加説明</h2>
 
-<p>Creates a service as described by the specified parameters. You must run this
-command on a manager node.</p>
+<p>Creates a service as described by the specified parameters.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: This is a cluster management command, and must be executed on a swarm
+manager node. To learn about managers and workers, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/">Swarm mode
+section</a> in the documentation.</p>
+</blockquote>
 
 <h2 id="examples">利用例</h2>
 
@@ -1612,11 +1617,38 @@ equal to the desired number:</p>
 
 <p>To grant a service access to multiple secrets, use multiple <code class="highlighter-rouge">--secret</code> flags.</p>
 
-<p>Secrets are located in <code class="highlighter-rouge">/run/secrets</code> in the container.  If no target is
-specified, the name of the secret will be used as the in memory file in the
-container.  If a target is specified, that will be the filename.  In the
-example above, two files will be created: <code class="highlighter-rouge">/run/secrets/ssh</code> and
+<p>Secrets are located in <code class="highlighter-rouge">/run/secrets</code> in the container if no target is specified.
+If no target is specified, the name of the secret is used as the in memory file
+in the container. If a target is specified, that is used as the filename. In the
+example above, two files are created: <code class="highlighter-rouge">/run/secrets/ssh</code> and
 <code class="highlighter-rouge">/run/secrets/app</code> for each of the secret targets specified.</p>
+
+<h3 id="create-a-service-with-configs">Create a service with configs</h3>
+
+<p>Use the <code class="highlighter-rouge">--config</code> flag to give a container access to a
+<a href="config_create.md">config</a>.</p>
+
+<p>Create a service with a config. The config will be mounted into <code class="highlighter-rouge">redis-config</code>,
+be owned by the user who runs the command inside the container (often <code class="highlighter-rouge">root</code>),
+and have file mode <code class="highlighter-rouge">0444</code> or world-readable. You can specify the <code class="highlighter-rouge">uid</code> and <code class="highlighter-rouge">gid</code>
+as numerical IDs or names. When using names, the provided group/user names must
+pre-exist in the container. The <code class="highlighter-rouge">mode</code> is specified as a 4-number sequence such
+as <code class="highlighter-rouge">0755</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span><span class="o">=</span>redis <span class="nt">--config</span> redis-conf redis:3.0.6
+</code></pre></div></div>
+
+<p>Create a service with a config and specify the target location and file mode:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> redis <span class="se">\</span>
+  <span class="nt">--config</span> <span class="nb">source</span><span class="o">=</span>redis-conf,target<span class="o">=</span>/etc/redis/redis.conf,mode<span class="o">=</span>0400 redis:3.0.6
+</code></pre></div></div>
+
+<p>To grant a service access to multiple configs, use multiple <code class="highlighter-rouge">--config</code> flags.</p>
+
+<p>Configs are located in <code class="highlighter-rouge">/</code> in the container if no target is specified. If no
+target is specified, the name of the config is used as the name of the file in
+the container. If a target is specified, that is used as the filename.</p>
 
 <h3 id="create-a-service-with-a-rolling-update-policy">Create a service with a rolling update policy</h3>
 
@@ -1834,7 +1866,7 @@ volumes in a service:</p>
 
 <p>Bind propagation refers to whether or not mounts created within a given
 bind mount or named volume can be propagated to replicas of that mount. Consider
-a mount point <code class="highlighter-rouge">/mnt</code>, which is also mounted on <code class="highlighter-rouge">/tmp</code>. The propation settings
+a mount point <code class="highlighter-rouge">/mnt</code>, which is also mounted on <code class="highlighter-rouge">/tmp</code>. The propagation settings
 control whether a mount on <code class="highlighter-rouge">/tmp/a</code> would also be available on <code class="highlighter-rouge">/mnt/a</code>. Each
 propagation setting has a recursive counterpoint. In the case of recursion,
 consider that <code class="highlighter-rouge">/tmp/a</code> is also mounted as <code class="highlighter-rouge">/foo</code>. The propagation settings
@@ -2045,54 +2077,102 @@ service runs on each active node in the swarm.</p>
 <h3 id="specify-service-constraints---constraint">Specify service constraints (--constraint)</h3>
 
 <p>You can limit the set of nodes where a task can be scheduled by defining
-constraint expressions. Multiple constraints find nodes that satisfy every
+constraint expressions. Constraint expressions can either use a <em>match</em> (<code class="highlighter-rouge">==</code>)
+or <em>exclude</em> (<code class="highlighter-rouge">!=</code>) rule. Multiple constraints find nodes that satisfy every
 expression (AND match). Constraints can match node or Docker Engine labels as
 follows:</p>
 
 <table>
-  <tr>
-    <th>node attribute</th>
-    <th>matches</th>
-    <th>example</th>
-  </tr>
-  <tr>
-    <td><tt>node.id</tt></td>
-    <td>Node ID</td>
-    <td><tt>node.id==2ivku8v2gvtg4</tt></td>
-  </tr>
-  <tr>
-    <td><tt>node.hostname</tt></td>
-    <td>Node hostname</td>
-    <td><tt>node.hostname!=node-2</tt></td>
-  </tr>
-  <tr>
-    <td><tt>node.role</tt></td>
-    <td>Node role</td>
-    <td><tt>node.role==manager</tt></td>
-  </tr>
-  <tr>
-    <td><tt>node.labels</tt></td>
-    <td>user defined node labels</td>
-    <td><tt>node.labels.security==high</tt></td>
-  </tr>
-  <tr>
-    <td><tt>engine.labels</tt></td>
-    <td>Docker Engine's labels</td>
-    <td><tt>engine.labels.operatingsystem==ubuntu 14.04</tt></td>
-  </tr>
+  <thead>
+    <tr>
+      <th>node attribute</th>
+      <th>matches</th>
+      <th>example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">node.id</code></td>
+      <td>Node ID</td>
+      <td><code class="highlighter-rouge">node.id==2ivku8v2gvtg4</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">node.hostname</code></td>
+      <td>Node hostname</td>
+      <td><code class="highlighter-rouge">node.hostname!=node-2</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">node.role</code></td>
+      <td>Node role (<code class="highlighter-rouge">manager</code>/<code class="highlighter-rouge">worker</code>)</td>
+      <td><code class="highlighter-rouge">node.role==manager</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">node.platform.os</code></td>
+      <td>Node operating system</td>
+      <td><code class="highlighter-rouge">node.platform.os==windows</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">node.platform.arch</code></td>
+      <td>Node architecture</td>
+      <td><code class="highlighter-rouge">node.platform.arch==x86_64</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">node.labels</code></td>
+      <td>User-defined node labels</td>
+      <td><code class="highlighter-rouge">node.labels.security==high</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">engine.labels</code></td>
+      <td>Docker Engine’s labels</td>
+      <td><code class="highlighter-rouge">engine.labels.operatingsystem==ubuntu-14.04</code></td>
+    </tr>
+  </tbody>
 </table>
 
-<p><code class="highlighter-rouge">engine.labels</code> apply to Docker Engine labels like operating system,
-drivers, etc. Swarm administrators add <code class="highlighter-rouge">node.labels</code> for operational purposes by
-using the <a href="node_update.md"><code class="highlighter-rouge">docker node update</code></a> command.</p>
+<p><code class="highlighter-rouge">engine.labels</code> apply to Docker Engine labels like operating system, drivers,
+etc. Swarm administrators add <code class="highlighter-rouge">node.labels</code> for operational purposes by using
+the <a href="node_update.md"><code class="highlighter-rouge">docker node update</code></a> command.</p>
 
 <p>For example, the following limits tasks for the redis service to nodes where the
 node type label equals queue:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
   <span class="nt">--name</span> redis_2 <span class="se">\</span>
-  <span class="nt">--constraint</span> <span class="s1">'node.labels.type == queue'</span> <span class="se">\</span>
+  <span class="nt">--constraint</span> node.platform.os<span class="o">==</span>linux <span class="se">\</span>
+  <span class="nt">--constraint</span> node.labels.type<span class="o">==</span>queue <span class="se">\</span>
   redis:3.0.6
+</code></pre></div></div>
+
+<p>If the service constraints exclude all nodes in the cluster, a message is printed
+that no suitable node is found, but the scheduler will start a reconciliation
+loop and deploy the service once a suitable node becomes available.</p>
+
+<p>In the example below, no node satisfying the constraint was found, causing the
+service to not reconcile with the desired state:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
+  <span class="nt">--name</span> web <span class="se">\</span>
+  <span class="nt">--constraint</span> node.labels.region<span class="o">==</span>east <span class="se">\</span>
+  nginx:alpine
+
+lx1wrhhpmbbu0wuk0ybws30bc
+overall progress: 0 out of 1 tasks
+1/1: no suitable node <span class="o">(</span>scheduling constraints not satisfied on 5 nodes<span class="o">)</span>
+
+<span class="nv">$ </span>docker service <span class="nb">ls
+</span>ID                  NAME     MODE         REPLICAS   IMAGE               PORTS
+b6lww17hrr4e        web      replicated   0/1        nginx:alpine
+</code></pre></div></div>
+
+<p>After adding the <code class="highlighter-rouge">region=east</code> label to a node in the cluster, the service
+reconciles, and the desired number of replicas are deployed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node update <span class="nt">--label-add</span> <span class="nv">region</span><span class="o">=</span>east yswe2dm4c5fdgtsrli1e8ya5l 
+yswe2dm4c5fdgtsrli1e8ya5l
+
+<span class="nv">$ </span>docker service <span class="nb">ls
+</span>ID                  NAME     MODE         REPLICAS   IMAGE               PORTS
+b6lww17hrr4e        web      replicated   1/1        nginx:alpine
 </code></pre></div></div>
 
 <h3 id="specify-service-placement-preferences---placement-pref">Specify service placement preferences (--placement-pref)</h3>
@@ -2104,7 +2184,7 @@ of datacenters or availability zones. The example below illustrates this:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 9 <span class="se">\</span>
   <span class="nt">--name</span> redis_2 <span class="se">\</span>
-  <span class="nt">--placement-pref</span> <span class="s1">'spread=node.labels.datacenter'</span> <span class="se">\</span>
+  <span class="nt">--placement-pref</span> <span class="nv">spread</span><span class="o">=</span>node.labels.datacenter <span class="se">\</span>
   redis:3.0.6
 </code></pre></div></div>
 
@@ -2165,6 +2245,77 @@ Tasks are spread first over the various datacenters, and then over racks
 appends a new placement preference after all existing placement preferences.
 <code class="highlighter-rouge">--placement-pref-rm</code> removes an existing placement preference that matches the
 argument.</p>
+
+<h3 id="specify-memory-requirements-and-constraints-for-a-service---reserve-memory-and---limit-memory">Specify memory requirements and constraints for a service (--reserve-memory and --limit-memory)</h3>
+
+<p>If your service needs a minimum amount of memory in order to run correctly,
+you can use <code class="highlighter-rouge">--reserve-memory</code> to specify that the service should only be
+scheduled on a node with this much memory available to reserve. If no node is
+available that meets the criteria, the task is not scheduled, but remains in a
+pending state.</p>
+
+<p>The following example requires that 4GB of memory be available and reservable
+on a given node before scheduling the service to run on that node.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--reserve-memory</span><span class="o">=</span>4GB <span class="nt">--name</span><span class="o">=</span>too-big nginx:alpine
+</code></pre></div></div>
+
+<p>The managers won’t schedule a set of containers on a single node whose combined
+reservations exceed the memory available on that node.</p>
+
+<p>After a task is scheduled and running, <code class="highlighter-rouge">--reserve-memory</code> does not enforce a
+memory limit. Use <code class="highlighter-rouge">--limit-memory</code> to ensure that a task uses no more than a
+given amount of memory on a node. This example limits the amount of memory used
+by the task to 4GB. The task will be scheduled even if each of your nodes has
+only 2GB of memory, because <code class="highlighter-rouge">--limit-memory</code> is an upper limit.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--limit-memory</span><span class="o">=</span>4GB <span class="nt">--name</span><span class="o">=</span>too-big nginx:alpine
+</code></pre></div></div>
+
+<p>Using <code class="highlighter-rouge">--reserve-memory</code> and <code class="highlighter-rouge">--limit-memory</code> does not guarantee that Docker
+will not use more memory on your host than you want. For instance, you could
+create many services, the sum of whose memory usage could exhaust the available
+memory.</p>
+
+<p>You can prevent this scenario from exhausting the available memory by taking
+into account other (non-containerized) software running on the host as well. If
+<code class="highlighter-rouge">--reserve-memory</code> is greater than or equal to <code class="highlighter-rouge">--limit-memory</code>, Docker won’t
+schedule a service on a host that doesn’t have enough memory. <code class="highlighter-rouge">--limit-memory</code>
+will limit the service’s memory to stay within that limit, so if every service
+has a memory-reservation and limit set, Docker services will be less likely to
+saturate the host. Other non-service containers or applications running directly
+on the Docker host could still exhaust memory.</p>
+
+<p>There is a downside to this approach. Reserving memory also means that you may
+not make optimum use of the memory available on the node. Consider a service
+that under normal circumstances uses 100MB of memory, but depending on load can
+“peak” at 500MB. Reserving 500MB for that service (to guarantee can have 500MB
+for those “peaks”) results in 400MB of memory being wasted most of the time.</p>
+
+<p>In short, you can take a more conservative or more flexible approach:</p>
+
+<ul>
+  <li>
+    <p><strong>Conservative</strong>: reserve 500MB, and limit to 500MB. Basically you’re now
+treating the service containers as VMs, and you may be losing a big advantage
+containers, which is greater density of services per host.</p>
+  </li>
+  <li>
+    <p><strong>Flexible</strong>: limit to 500MB in the assumption that if the service requires
+more than 500MB, it is malfunctioning. Reserve something between the 100MB
+“normal” requirement and the 500MB “peak” requirement”. This assumes that when
+this service is at “peak”, other services or non-container workloads probably
+won’t be.</p>
+  </li>
+</ul>
+
+<p>The approach you take depends heavily on the memory-usage patterns of your
+workloads. You should test under normal and peak conditions before settling
+on an approach.</p>
+
+<p>On Linux, you can also limit a service’s overall memory footprint on a given
+host at the level of the host operating system, using <code class="highlighter-rouge">cgroups</code> or other
+relevant operating system tools.</p>
 
 <h3 id="specify-maximum-replicas-per-node---replicas-max-per-node">Specify maximum replicas per node (--replicas-max-per-node)</h3>
 
@@ -2515,6 +2666,7 @@ the <code class="highlighter-rouge">--isolation</code> flag:</p>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#create-a-service" class="nomunge">Create a service</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#create-a-service-with-5-replica-tasks---replicas" class="nomunge">Create a service with 5 replica tasks (--replicas)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#create-a-service-with-secrets" class="nomunge">Create a service with secrets</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#create-a-service-with-configs" class="nomunge">Create a service with configs</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#create-a-service-with-a-rolling-update-policy" class="nomunge">Create a service with a rolling update policy</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#set-environment-variables--e---env" class="nomunge">Set environment variables (-e, --env)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#create-a-service-with-specific-hostname---hostname" class="nomunge">Create a service with specific hostname (--hostname)</a></li>
@@ -2523,6 +2675,7 @@ the <code class="highlighter-rouge">--isolation</code> flag:</p>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#set-service-mode---mode" class="nomunge">Set service mode (--mode)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#specify-service-constraints---constraint" class="nomunge">Specify service constraints (--constraint)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#specify-service-placement-preferences---placement-pref" class="nomunge">Specify service placement preferences (--placement-pref)</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#specify-memory-requirements-and-constraints-for-a-service---reserve-memory-and---limit-memory" class="nomunge">Specify memory requirements and constraints for a service (--reserve-memory and --limit-memory)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#specify-maximum-replicas-per-node---replicas-max-per-node" class="nomunge">Specify maximum replicas per node (--replicas-max-per-node)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#attach-a-service-to-an-existing-network---network" class="nomunge">Attach a service to an existing network (--network)</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_create.md#publish-service-ports-externally-to-the-swarm--p---publish" class="nomunge">Publish service ports externally to the swarm (-p, --publish)</a></li>
