@@ -1087,7 +1087,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/assemble/configure/",
-"title":"Configure Docker Assemble",
+"title":"Docker Assemble の設定",
 "description":"Installing Docker Assemble",
 "keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
@@ -2102,7 +2102,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/notary/getting_started/",
-"title":"Get started with Docker Notary",
+"title":"Get started with Notary",
 "description":"Performing basic operation to use Notary in tandem with Docker Content Trust.",
 "keywords":"docker, Notary, notary-client, docker content trust, content trust"
 }
@@ -2550,7 +2550,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/notary/",
-"title":"Docker Notary",
+"title":"Notary",
 "description":"List of Notary Documentation",
 "keywords":"docker, notary, trust, image, signing, repository, tuf"
 }
@@ -3169,6 +3169,13 @@ var pages = [
 "title":"Kitematic: Known issues",
 "description":"Information about known issues in Kitematic",
 "keywords":"docker, documentation, about, technology, kitematic, gui"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/get-started/kube-deploy/",
+"title":"Deploy to Kubernetes",
+"description":"Learn how to describe and deploy a simple application on Kubernetes.",
+"keywords":"kubernetes, pods, deployments, kubernetes services"
 }
 ,
 {
@@ -3795,6 +3802,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/get-started/orchestration/",
+"title":"Orchestration",
+"description":"Get oriented on some basics of Docker and install Docker Desktop.",
+"keywords":"orchestration, deploy, kubernetes, swarm,"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/docker-hub/orgs/",
 "title":"チームと組織",
 "description":"Docker Hub Teams & Organizations",
@@ -3873,16 +3887,16 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part2/",
-"title":"アプリのコンテナー化",
+"title":"イメージの構築と起動",
 "description":"Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.",
 "keywords":"containers, images, dockerfiles, node, code, coding, build, push, run"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part3/",
-"title":"Kubernetes へのデプロイ",
-"description":"Learn how to describe and deploy a simple application on Kubernetes.",
-"keywords":"kubernetes, pods, deployments, kubernetes services"
+"title":"Share images on Docker Hub",
+"description":"Learn how to share images on Docker Hub.",
+"keywords":"docker hub, push, images"
 }
 ,
 {
@@ -4532,7 +4546,7 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/ee/ucp/admin/configure/restrict-services-to-worker-nodes/",
 "title":"Restrict services to worker nodes",
-"description":"Learn how to configure Universal Control Plane to only allow running services in worker nodes.",
+"description":"Learn how to configure Docker Universal Control Plane to only allow running services in worker nodes.",
 "keywords":"ucp, configuration, worker"
 }
 ,
@@ -5115,6 +5129,13 @@ var pages = [
 "title":"Get Docker Engine - Enterprise for SLES",
 "description":"Instructions for installing Docker Engine - Enterprise on SLES",
 "keywords":"requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/get-started/swarm-deploy/",
+"title":"Deploy to Swarm",
+"description":"Learn how to describe and deploy a simple application on Docker Swarm.",
+"keywords":"swarm, swarm services, stacks"
 }
 ,
 {
