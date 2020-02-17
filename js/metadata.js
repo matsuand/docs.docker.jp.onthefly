@@ -2599,8 +2599,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/opensource/",
-"title":"Contribute to documentation",
-"description":"Overview of contributing",
+"title":"ドキュメントへの貢献",
+"description":"貢献方法の概要",
 "keywords":"open, source, contributing, overview"
 }
 ,
@@ -3887,28 +3887,14 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part2/",
-"title":"イメージの構築と起動",
+"title":"イメージの構築と実行",
 "description":"Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.",
 "keywords":"containers, images, dockerfiles, node, code, coding, build, push, run"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/part3/",
-"title":"Share images on Docker Hub",
-"description":"Learn how to share images on Docker Hub.",
-"keywords":"docker hub, push, images"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/get-started/part4/",
-"title":"Deploying to Swarm",
-"description":"Learn how to describe and deploy a simple application on Docker Swarm.",
-"keywords":"swarm, swarm services, stacks"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/get-started/part5/",
-"title":"Docker Hub でのイメージ共有",
+"title":"Docker Hub におけるイメージ共有",
 "description":"Learn how to share images on Docker Hub.",
 "keywords":"docker hub, push, images"
 }
