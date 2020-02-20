@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-15 16:32:32 +0900 -->
+<!-- Page generated 2020-02-20 16:16:12 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,17 +75,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-15T16:32:32+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-20T16:16:12+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="Docker and iptables"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="On Linux, Docker manipulates iptables rules to provide network isolation. This is an implementation detail, and you should not modify the rules Docker inserts into your iptables policies. Add iptables..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="On Linux, Docker manipulates iptables rules to provide network isolation. While this is an implementation detail and you should not modify the rules Docker inserts into your iptables policies, it..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-15T16:32:32+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-20T16:16:12+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="network, iptables">
@@ -180,36 +180,54 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    4 分
   
 </span>
 
 							
 							
 							<p>On Linux, Docker manipulates <code class="highlighter-rouge">iptables</code> rules to provide network isolation.
-This is an implementation detail, and you should not modify the rules Docker
-inserts into your <code class="highlighter-rouge">iptables</code> policies.</p>
+While this is an implementation detail and you should not modify the rules
+Docker inserts into your <code class="highlighter-rouge">iptables</code> policies, it does have some implications
+on what you need to do if you want to have your own policies in addition to
+those managed by Docker.</p>
+
+<p>If you’re running Docker on a host that is exposed to the Internet, you will
+probably want to have iptables policies in place that prevent unauthorized
+access to containers or other services running on your host. This page
+describes how to achieve that, and what caveats you need to be aware of.</p>
 
 <h2 id="add-iptables-policies-before-dockers-rules">Add iptables policies before Docker’s rules</h2>
 
+<p>Docker installs two custom iptables chains named <code class="highlighter-rouge">DOCKER-USER</code> and <code class="highlighter-rouge">DOCKER</code>,
+and it ensures that incoming packets are always checked by these two chains
+first.</p>
+
 <p>All of Docker’s <code class="highlighter-rouge">iptables</code> rules are added to the <code class="highlighter-rouge">DOCKER</code> chain. Do not
-manipulate this table manually. If you need to add rules which load before
-Docker’s rules, add them to the <code class="highlighter-rouge">DOCKER-USER</code> chain. These rules are loaded
+manipulate this chain manually. If you need to add rules which load before
+Docker’s rules, add them to the <code class="highlighter-rouge">DOCKER-USER</code> chain. These rules are applied
 before any rules Docker creates automatically.</p>
 
-<h3 id="restrict-connections-to-the-docker-daemon">Restrict connections to the Docker daemon</h3>
+<p>Rules added to the <code class="highlighter-rouge">FORWARD</code> chain -- either manually, or by another
+iptables-based firewall -- are evaluated <em>after</em> these chains. This means that
+if you expose a port through Docker, this port gets exposed no matter what
+rules your firewall has configured. If you want those rules to apply even
+when a port gets exposed through Docker, you <em>must</em> add these rules to the
+<code class="highlighter-rouge">DOCKER-USER</code> chain.</p>
 
-<p>By default, all external source IPs are allowed to connect to the Docker daemon.
+<h3 id="restrict-connections-to-the-docker-host">Restrict connections to the Docker host</h3>
+
+<p>By default, all external source IPs are allowed to connect to the Docker host.
 To allow only a specific IP or network to access the containers, insert a
-negated rule at the top of the DOCKER filter chain. For example, the following
-rule restricts external access to all IP addresses except 192.168.1.1:</p>
+negated rule at the top of the <code class="highlighter-rouge">DOCKER-USER</code> filter chain. For example, the
+following rule restricts external access from all IP addresses except <code class="highlighter-rouge">192.168.1.1</code>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.1 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
 <p>Please note that you will need to change <code class="highlighter-rouge">ext_if</code> to correspond with your
 host’s actual external interface. You could instead allow connections from a
-source subnet. The following rule only allows access from the subnet 192.168.1.0/24:</p>
+source subnet. The following rule only allows access from the subnet <code class="highlighter-rouge">192.168.1.0/24</code>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.0/24 <span class="nt">-j</span> DROP
 </code></pre></div></div>
@@ -222,18 +240,37 @@ source subnet. The following rule only allows access from the subnet 192.168.1.0
 
 <p>You can combine <code class="highlighter-rouge">-s</code> or <code class="highlighter-rouge">--src-range</code> with <code class="highlighter-rouge">-d</code> or <code class="highlighter-rouge">--dst-range</code> to control both
 the source and destination. For instance, if the Docker daemon listens on both
-192.168.1.99 and 10.1.2.3, you can make rules specific to <code class="highlighter-rouge">10.1.2.3</code> and leave
+<code class="highlighter-rouge">192.168.1.99</code> and <code class="highlighter-rouge">10.1.2.3</code>, you can make rules specific to <code class="highlighter-rouge">10.1.2.3</code> and leave
 <code class="highlighter-rouge">192.168.1.99</code> open.</p>
 
 <p><code class="highlighter-rouge">iptables</code> is complicated and more complicated rules are out of scope for this
 topic. See the <a href="https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html">Netfilter.org HOWTO</a>
 for a lot more information.</p>
 
+<h2 id="docker-on-a-router">Docker on a router</h2>
+
+<p>Docker also sets the policy for the <code class="highlighter-rouge">FORWARD</code> chain to <code class="highlighter-rouge">DROP</code>. If your Docker
+host also acts as a router, this will result in that router not forwarding
+any traffic anymore. If you want your system to continue functioning as a
+router, you can add explicit <code class="highlighter-rouge">ACCEPT</code> rules to the <code class="highlighter-rouge">DOCKER-USER</code> chain to
+allow it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> src_if <span class="nt">-o</span> dst_if <span class="nt">-j</span> ACCEPT
+</code></pre></div></div>
+
 <h2 id="prevent-docker-from-manipulating-iptables">Prevent Docker from manipulating iptables</h2>
 
 <p>It is possible to set the <code class="highlighter-rouge">iptables</code> key to <code class="highlighter-rouge">false</code> in the Docker engine’s configuration file at <code class="highlighter-rouge">/etc/docker/daemon.json</code>, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating <code class="highlighter-rouge">iptables</code> rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions. Setting <code class="highlighter-rouge">iptables</code> to <code class="highlighter-rouge">false</code> will more than likely break container networking for the Docker engine.</p>
 
 <p>For system integrators who wish to build the Docker runtime into other applications, explore the <a href="https://mobyproject.org/"><code class="highlighter-rouge">moby</code> project</a>.</p>
+
+<h2 id="setting-the-default-bind-address-for-containers">Setting the default bind address for containers</h2>
+
+<p>By default, the Docker daemon will expose ports on the <code class="highlighter-rouge">0.0.0.0</code> address, i.e.
+any address on the host. If you want to change that behavior to only
+expose ports on an internal IP address, you can use the <code class="highlighter-rouge">--ip</code> option to
+specify a different IP address. However, setting <code class="highlighter-rouge">--ip</code> only changes the
+<em>default</em>, it does not <em>restrict</em> services to that IP.</p>
 
 <h2 id="next-steps">Next steps</h2>
 
@@ -337,10 +374,12 @@ for a lot more information.</p>
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/iptables.md#add-iptables-policies-before-dockers-rules" class="nomunge">Add iptables policies before Docker’s rules</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/iptables.md#restrict-connections-to-the-docker-daemon" class="nomunge">Restrict connections to the Docker daemon</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/iptables.md#restrict-connections-to-the-docker-host" class="nomunge">Restrict connections to the Docker host</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/iptables.md#docker-on-a-router" class="nomunge">Docker on a router</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/iptables.md#prevent-docker-from-manipulating-iptables" class="nomunge">Prevent Docker from manipulating iptables</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/iptables.md#setting-the-default-bind-address-for-containers" class="nomunge">Setting the default bind address for containers</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/iptables.md#next-steps" class="nomunge">Next steps</a></li>
 </ul>
 
