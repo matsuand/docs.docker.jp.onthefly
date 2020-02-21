@@ -3487,6 +3487,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/swarm/multi-host-networking/",
+"title":"Multi-host networking with standalone swarms",
+"description":"Use overlay for multi-host networking",
+"keywords":"Examples, Usage, network, docker, documentation, user guide, multihost, cluster"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/config/containers/multi-service_container/",
 "title":"Run multiple services in a container",
 "description":"How to run more than one process in a container",
