@@ -484,6 +484,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/azure/",
+"title":"Microsoft Azure storage driver",
+"description":"Explains how to use the Azure storage drivers",
+"keywords":"registry, service, driver, images, storage,  azure"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/cluster/azure/",
 "title":"Azure 上にて Docker Cluster をはじめよう",
 "description":"Azure 上にて Docker Cluster をはじめよう。",
@@ -1933,6 +1940,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/api/sdk/examples/",
+"title":"Examples using the Docker Engine SDKs and Docker API",
+"description":null,
+"keywords":"developing, api, sdk, developers, rest, curl, python, go"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/develop/sdk/examples/",
 "title":"Docker Engine SDK と Docker API の利用例",
 "description":null,
@@ -2031,6 +2045,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/filesystem/",
+"title":"Filesystem storage driver",
+"description":"Explains how to use the filesystem storage drivers",
+"keywords":"registry, service, driver, images, storage,  filesystem"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compliance/nist/fips140_2/",
 "title":"FIPS 140-2",
 "description":"Docker Enterprise Edition and FIPS 140-2",
@@ -2077,6 +2098,13 @@ var pages = [
 "title":"Google Cloud Logging driver",
 "description":"Describes how to use the Google Cloud Logging driver.",
 "keywords":"gcplogs, google, docker, logging, driver"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/gcs/",
+"title":"Google Cloud Storage driver",
+"description":"Explains how to use the Google Cloud Storage drivers",
+"keywords":"registry, service, driver, images, storage,  gcs, google, cloud"
 }
 ,
 {
@@ -2430,6 +2458,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/",
+"title":"Docker Registry storage driver",
+"description":"Explains how to use storage drivers",
+"keywords":"registry, on-prem, images, tags, repository, distribution, storage drivers, advanced"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/registry/",
 "title":"Docker Registry",
 "description":"High-level overview of the Registry",
@@ -2448,6 +2483,20 @@ var pages = [
 "title":"Engine チュートリアル",
 "description":"コンテナーとどのように動作するかの説明。",
 "keywords":"docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/sdk/",
+"title":"Develop with Docker Engine SDKs",
+"description":"Using Docker SDKs to automate Docker tasks in your language of choice",
+"keywords":"developing, sdk"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/api/",
+"title":"Develop with Docker Engine API",
+"description":"Using Docker APIs to automate Docker tasks in your language of choice",
+"keywords":"developing, api"
 }
 ,
 {
@@ -2896,6 +2945,13 @@ var pages = [
 "title":"Deploy a Sample Application with Ingress (Experimental)",
 "description":"Learn how to deploy Ingress rules for Kubernetes applications.",
 "keywords":"ucp, cluster, ingress, kubernetes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/inmemory/",
+"title":"In-memory storage driver (testing only)",
+"description":"Explains how to use the in-memory storage drivers",
+"keywords":"registry, service, driver, images, storage,  in-memory"
 }
 ,
 {
@@ -3830,6 +3886,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/oss/",
+"title":"Aliyun OSS storage driver",
+"description":"Explains how to use the Aliyun OSS storage driver",
+"keywords":"registry, service, driver, images, storage, OSS, aliyun"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/registry/recipes/osx-setup-guide/",
 "title":"macOS setup guide",
 "description":"Explains how to run a registry on macOS",
@@ -4649,6 +4712,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/s3/",
+"title":"S3 storage driver",
+"description":"Explains how to use the S3 storage drivers",
+"keywords":"registry, service, driver, images, storage,  S3"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/ee/dtr/admin/configure/external-storage/s3/",
 "title":"Store images on Amazon S3",
 "description":"Learn how to configure Docker Trusted Registry to store Docker images on Amazon S3",
@@ -5206,6 +5276,13 @@ var pages = [
 "title":"docker swarm update",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/registry/storage-drivers/swift/",
+"title":"OpenStack Swift storage driver",
+"description":"Explains how to use the OpenStack swift storage driver",
+"keywords":"registry, service, driver, images, storage, swift"
 }
 ,
 {

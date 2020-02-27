@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-15 16:32:32 +0900 -->
+<!-- Page generated 2020-02-27 14:41:05 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-15T16:32:32+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="In terms of networking, a bridge network is a Link Layer device which forwards traffic between network segments. A bridge can be a hardware device or a software device running..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-15T16:32:32+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="network, bridge, user-defined, standalone">
@@ -152,10 +152,10 @@
         <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
         <div class="btn-group" style="visibility: hidden">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Docker v19.03 (current)        <span class="caret"></span>
+    Docker v19.03 (current)     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li>
   </ul>
 </div>
 
@@ -180,7 +180,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    9 分
+    8 分
   
 </span>
 
@@ -212,26 +212,6 @@ network.</strong></p>
 
 <ul>
   <li>
-    <p><strong>User-defined bridges provide better isolation and interoperability between containerized applications</strong>.</p>
-
-    <p>Containers connected to the same user-defined bridge network automatically
-expose <strong>all ports</strong> to each other, and <strong>no ports</strong> to the outside world. This allows
-containerized applications to communicate with each other easily, without
-accidentally opening access to the outside world.</p>
-
-    <p>Imagine an application with a web front-end and a database back-end. The
-outside world needs access to the web front-end (perhaps on port 80), but only
-the back-end itself needs access to the database host and port. Using a
-user-defined bridge, only the web port needs to be opened, and the database
-application doesn’t need any ports open, since the web front-end can reach it
-over the user-defined bridge.</p>
-
-    <p>If you run the same application stack on the default bridge network, you need
-to open both the web port and the database port, using the <code class="highlighter-rouge">-p</code> or <code class="highlighter-rouge">--publish</code>
-flag for each. This means the Docker host needs to block access to the
-database port by other means.</p>
-  </li>
-  <li>
     <p><strong>User-defined bridges provide automatic DNS resolution between containers</strong>.</p>
 
     <p>Containers on the default bridge network can only access each other by IP
@@ -239,10 +219,9 @@ addresses, unless you use the <a href="https://matsuand.github.io/docs.docker.jp
 considered legacy. On a user-defined bridge network, containers can resolve
 each other by name or alias.</p>
 
-    <p>Imagine the same application as in the previous point, with a web front-end
-and a database back-end. If you call your containers <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">db</code>, the web
-container can connect to the db container at <code class="highlighter-rouge">db</code>, no matter which Docker host
-the application stack is running on.</p>
+    <p>Imagine an application with a web front-end and a database back-end. If you call
+your containers <code class="highlighter-rouge">web</code> and <code class="highlighter-rouge">db</code>, the web container can connect to the db container
+at <code class="highlighter-rouge">db</code>, no matter which Docker host the application stack is running on.</p>
 
     <p>If you run the same application stack on the default bridge network, you need
 to manually create links between the containers (using the legacy <code class="highlighter-rouge">--link</code>
@@ -250,6 +229,13 @@ flag). These links need to be created in both directions, so you can see this
 gets complex with more than two containers which need to communicate.
 Alternatively, you can manipulate the <code class="highlighter-rouge">/etc/hosts</code> files within the containers,
 but this creates problems that are difficult to debug.</p>
+  </li>
+  <li>
+    <p><strong>User-defined bridges provide better isolation</strong>.</p>
+
+    <p>All containers without a <code class="highlighter-rouge">--network</code> specified, are attached to the default bridge network. This can be a risk, as unrelated stacks/services/containers are then able to communicate.</p>
+
+    <p>Using a user-defined network provides a scoped network in which only containers attached to that network are able to communicate.</p>
   </li>
   <li>
     <p><strong>Containers can be attached and detached from user-defined networks on the fly</strong>.</p>

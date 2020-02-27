@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-15 16:32:32 +0900 -->
+<!-- Page generated 2020-02-27 14:41:05 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -87,7 +87,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-15T16:32:32+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -97,7 +97,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-15T16:32:32+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="UCP, install, Docker EE">
@@ -164,10 +164,10 @@
         <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
         <div class="btn-group" style="visibility: hidden">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Docker v19.03 (current)        <span class="caret"></span>
+    Docker v19.03 (current)     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.12/">Docker v17.12</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.09/">Docker v17.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.03/">Docker v17.03</a></li>
+    <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li>
   </ul>
 </div>
 
@@ -192,7 +192,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    9 分
+    14 分
   
 </span>
 
@@ -258,15 +258,9 @@ this.</p>
   <tbody>
     <tr>
       <td>Engine</td>
-      <td><code class="highlighter-rouge">fixed-cidr</code></td>
-      <td>CIDR range for <code class="highlighter-rouge">docker0</code> interface and local containers</td>
-      <td>172.17.0.0/16</td>
-    </tr>
-    <tr>
-      <td>Engine</td>
       <td><code class="highlighter-rouge">default-address-pools</code></td>
-      <td>CIDR range for <code class="highlighter-rouge">docker_gwbridge</code> interface and bridge networks</td>
-      <td>172.18.0.0/16</td>
+      <td>CIDR range for interface and bridge networks</td>
+      <td>172.17.0.0/16 - 172.30.0.0/16, 192.168.0.0/16</td>
     </tr>
     <tr>
       <td>Swarm</td>
@@ -293,28 +287,114 @@ this.</p>
 
 <p>There are two IP ranges used by the engine for the <code class="highlighter-rouge">docker0</code> and <code class="highlighter-rouge">docker_gwbridge</code> interface:</p>
 
+<h4 id="default-address-pools">default-address-pools</h4>
+
+<p><code class="highlighter-rouge">default-address-pools</code> defines a pool of CIDR ranges that are used to allocated subnets for local bridge networks. By default the first available subnet(<code class="highlighter-rouge">172.17.0.0/16</code>) is assigned to <code class="highlighter-rouge">docker0</code> and the next available subnet(<code class="highlighter-rouge">172.18.0.0/16</code>) is assigned to <code class="highlighter-rouge">docker_gwbridge</code>. Both the <code class="highlighter-rouge">docker0</code> and <code class="highlighter-rouge">docker_gwbridge</code> subnet can be modified by changing the <code class="highlighter-rouge">default-address-pools</code> value or as described in their individual sections below.</p>
+
+<p>The default value for <code class="highlighter-rouge">default-address-pools</code> is:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"default-address-pools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.17.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w"> </span><span class="err">&lt;--</span><span class="w"> </span><span class="err">docker</span><span class="mi">0</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.18.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w"> </span><span class="err">&lt;--</span><span class="w"> </span><span class="err">docker_gwbridge</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.19.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.20.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.21.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.22.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.23.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.24.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.25.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.26.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.27.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.28.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.29.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.30.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"192.168.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span><span class="w">
+     </span><span class="p">]</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">default-address-pools</code>:  A list of IP address pools for local bridge networks. Each entry in the list contain the following:</p>
+
+<p><code class="highlighter-rouge">base</code>: CIDR range to be allocated for bridge networks.</p>
+
+<p><code class="highlighter-rouge">size</code>: CIDR netmask that determines the subnet size to allocate from the <code class="highlighter-rouge">base</code> pool</p>
+
+<p>As an example, <code class="highlighter-rouge">{"base":"192.168.0.0/16","size":20}</code> will allocate <code class="highlighter-rouge">/20</code> subnets from <code class="highlighter-rouge">192.168.0.0/16</code> yielding the following subnets for bridge networks:\
+<code class="highlighter-rouge">192.168.0.0/20</code> (<code class="highlighter-rouge">192.168.0.0</code> - <code class="highlighter-rouge">192.168.15.255</code>)\
+<code class="highlighter-rouge">192.168.16.0/20</code> (<code class="highlighter-rouge">192.168.16.0</code> - <code class="highlighter-rouge">192.168.31.255</code>)\
+<code class="highlighter-rouge">192.168.32.0/20</code> (<code class="highlighter-rouge">192.168.32.0</code> - <code class="highlighter-rouge">192.168.47.255</code>)\
+<code class="highlighter-rouge">192.168.48.0/20</code> (<code class="highlighter-rouge">192.168.32.0</code> - <code class="highlighter-rouge">192.168.63.255</code>)\
+<code class="highlighter-rouge">192.168.64.0/20</code> (<code class="highlighter-rouge">192.168.64.0</code> - <code class="highlighter-rouge">192.168.79.255</code>)\
+...\
+<code class="highlighter-rouge">192.168.240.0/20</code> (<code class="highlighter-rouge">192.168.240.0</code> - <code class="highlighter-rouge">192.168.255.255</code>)</p>
+
+<blockquote>
+  <p>Note</p>
+
+  <p>If the <code class="highlighter-rouge">size</code> matches the netmask of the <code class="highlighter-rouge">base</code>, then that pool only containers one subnet.</p>
+
+  <p>For example, <code class="highlighter-rouge">{"base":"172.17.0.0/16","size":16}</code> will only yield one subnet <code class="highlighter-rouge">172.17.0.0/16</code> (<code class="highlighter-rouge">172.17.0.0</code> - <code class="highlighter-rouge">172.17.255.255</code>).</p>
+</blockquote>
+
 <h4 id="docker0">docker0</h4>
 
-<p>By default, the Docker engine creates and configures the host system with a network interface called <code class="highlighter-rouge">docker0</code>, which is an ethernet bridge device. If you don’t specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container.</p>
+<p>By default, the Docker engine creates and configures the host system with a virtual network interface called <code class="highlighter-rouge">docker0</code>, which is an ethernet bridge device. If you don’t specify a different network when starting a container, the container is connected to the bridge and all traffic coming from and going to the container flows over the bridge to the Docker engine, which handles routing on behalf of the container.</p>
 
-<p>Docker engine creates <code class="highlighter-rouge">docker0</code> with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to <code class="highlighter-rouge">docker</code> unless you specify otherwise. The default subnet for <code class="highlighter-rouge">docker0</code> is <code class="highlighter-rouge">172.17.0.0/16</code>.</p>
+<p>Docker engine creates <code class="highlighter-rouge">docker0</code> with a configurable IP range. Containers which are connected to the default bridge are allocated IP addresses within this range. Certain default settings apply to <code class="highlighter-rouge">docker0</code> unless you specify otherwise. The default subnet for <code class="highlighter-rouge">docker0</code> is the first pool in <code class="highlighter-rouge">default-address-pools</code> which is <code class="highlighter-rouge">172.17.0.0/16</code>.</p>
 
-<p>The recommended way to configure the <code class="highlighter-rouge">docker0</code> settings is to use the <code class="highlighter-rouge">daemon.json</code> file. You can specify one or more of the following settings to configure the <code class="highlighter-rouge">docker0</code> interface:</p>
+<p>The recommended way to configure the <code class="highlighter-rouge">docker0</code> settings is to use the <code class="highlighter-rouge">daemon.json</code> file.</p>
+
+<p>If only the subnet needs to be customized, it can be changed by modifying the first pool of <code class="highlighter-rouge">default-address-pools</code>  in the <code class="highlighter-rouge">daemon.json</code> file.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"default-address-pools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.17.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w"> </span><span class="err">&lt;--</span><span class="w"> </span><span class="err">Modify</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">value</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.18.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.19.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.20.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.21.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.22.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.23.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.24.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.25.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.26.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.27.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.28.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.29.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.30.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"192.168.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span><span class="w">
+     </span><span class="p">]</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Note</p>
+
+  <p>Modifying this value can also affect the <code class="highlighter-rouge">docker_gwbridge</code> if the <code class="highlighter-rouge">size</code> doesn’t match the netmask of the <code class="highlighter-rouge">base</code>.</p>
+</blockquote>
+
+<p>To configure a CIDR range and not rely on <code class="highlighter-rouge">default-address-pools</code>, the <code class="highlighter-rouge">fixed-cidr</code> setting can used:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"bip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.1/16"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"fixed-cidr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.0/16"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><code class="highlighter-rouge">bip</code>: Supply a specific bridge IP range for the <code class="highlighter-rouge">docker0</code> interface, using standard CIDR notation. Default is <code class="highlighter-rouge">172.17.0.1/16</code>.</p>
+<p><code class="highlighter-rouge">fixed-cidr</code>: Specify the subnet for <code class="highlighter-rouge">docker0</code>, using standard CIDR notation. Default is <code class="highlighter-rouge">172.17.0.0/16</code>, the network gateway will be <code class="highlighter-rouge">172.17.0.1</code> and IPs for your containers will be allocated from (<code class="highlighter-rouge">172.17.0.2</code> - <code class="highlighter-rouge">172.17.255.254</code>).</p>
 
-<p><code class="highlighter-rouge">fixed-cidr</code>: Restrict the IP range for <code class="highlighter-rouge">docker0</code>, using standard CIDR notation. Default is <code class="highlighter-rouge">172.17.0.0/16</code>.
-This range must be an IPv4 range for fixed IPs, and must be a subset of the bridge IP range (<code class="highlighter-rouge">bip</code> in <code class="highlighter-rouge">daemon.json</code>). For example, with <code class="highlighter-rouge">172.17.0.0/17</code>, IPs for your containers will be chosen from the first half of addresses(<code class="highlighter-rouge">172.17.0.1</code> - <code class="highlighter-rouge">172.17.127.254</code>) included in the <code class="highlighter-rouge">bip</code>(<code class="highlighter-rouge">172.17.0.0/16</code>) subnet.</p>
+<p>To configure a gateway IP and CIDR range while not relying on <code class="highlighter-rouge">default-address-pools</code>, the <code class="highlighter-rouge">bip</code> setting can used:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"bip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"172.17.0.1/16"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">bip</code>: Specific a gateway IP address and CIDR netmask of the <code class="highlighter-rouge">docker0</code> network. The notation is <code class="highlighter-rouge">&lt;gateway IP&gt;/&lt;CIDR netmask&gt;</code> and the default is <code class="highlighter-rouge">172.17.0.1/16</code> which will make the <code class="highlighter-rouge">docker0</code> network gateway <code class="highlighter-rouge">172.17.0.1</code> and subnet <code class="highlighter-rouge">172.17.0.0/16</code>.</p>
 
 <h4 id="docker_gwbridge">docker_gwbridge</h4>
 
-<p>The <code class="highlighter-rouge">docker_gwbridge</code> is a virtual bridge that connects the overlay networks (including the <code class="highlighter-rouge">ingress</code> network) to an individual Docker engine’s physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for <code class="highlighter-rouge">docker_gwbridge</code> is <code class="highlighter-rouge">172.18.0.0/16</code>.</p>
+<p>The <code class="highlighter-rouge">docker_gwbridge</code> is a virtual network interface that connects the overlay networks (including the <code class="highlighter-rouge">ingress</code> network) to an individual Docker engine’s physical network. Docker creates it automatically when you initialize a swarm or join a Docker host to a swarm, but it is not a Docker device. It exists in the kernel of the Docker host. The default subnet for <code class="highlighter-rouge">docker_gwbridge</code> is the next available subnet in <code class="highlighter-rouge">default-address-pools</code> which with defaults is <code class="highlighter-rouge">172.18.0.0/16</code>.</p>
 
 <blockquote>
   <p>Note</p>
@@ -322,21 +402,30 @@ This range must be an IPv4 range for fixed IPs, and must be a subset of the brid
   <p>If you need to customize the <code class="highlighter-rouge">docker_gwbridge</code> settings, you must do so before joining the host to the swarm, or after temporarily removing the host from the swarm.</p>
 </blockquote>
 
-<p>The recommended way to configure the <code class="highlighter-rouge">docker_gwbridge</code> settings is to use the <code class="highlighter-rouge">daemon.json</code> file. You can specify one or more of the following settings to configure the interface:</p>
+<p>The recommended way to configure the <code class="highlighter-rouge">docker_gwbridge</code> settings is to use the <code class="highlighter-rouge">daemon.json</code> file.</p>
+
+<p>For <code class="highlighter-rouge">docker_gwbridge</code>, the second available subnet will be allocated from <code class="highlighter-rouge">default-address-pools</code>. If any customizations where made to the <code class="highlighter-rouge">docker0</code> interface it could affect which subnet is allocated. With the default <code class="highlighter-rouge">default-address-pools</code> settings you would modify the second pool.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
      </span><span class="s2">"default-address-pools"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-         </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.18.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">24</span><span class="p">},</span><span class="w">
-         </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"###.###.###.###/##"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="err">##</span><span class="p">}</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.17.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.18.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w"> </span><span class="err">&lt;--</span><span class="w"> </span><span class="err">Modify</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">value</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.19.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.20.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.21.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.22.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.23.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.24.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.25.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.26.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.27.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.28.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.29.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"172.30.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">16</span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="s2">"base"</span><span class="p">:</span><span class="s2">"192.168.0.0/16"</span><span class="p">,</span><span class="s2">"size"</span><span class="p">:</span><span class="mi">20</span><span class="p">}</span><span class="w">
      </span><span class="p">]</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
-
-<p><code class="highlighter-rouge">default-address-pools</code>:  A list of IP address pools for local bridge networks, the default is a single pool <code class="highlighter-rouge">{"base":"172.18.0.0/16","size":24}</code>. This allocates <code class="highlighter-rouge">/24</code> network from the <code class="highlighter-rouge">172.18.0.0/16</code> CIDR range for local bridge networks. Each entry in the list contain the following:</p>
-
-<p><code class="highlighter-rouge">base</code>: CIDR range to be divided up for bridge networks, the default is <code class="highlighter-rouge">172.18.0.0/16</code></p>
-
-<p><code class="highlighter-rouge">size</code>: CIDR netmask that determines the default network size to allocate from the <code class="highlighter-rouge">base</code> pool, the default is <code class="highlighter-rouge">24</code></p>
 
 <h3 id="swarm">Swarm</h3>
 
