@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-02-28 21:13:38 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-28T21:13:38+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This page contains information on how to diagnose and troubleshoot problems, send logs and communicate with the Docker Desktop team, use our forums and Knowledge Hub, browse and log issues..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-02-28T21:13:38+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="windows, troubleshooting, logs, issues">
@@ -180,7 +180,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    21 分
+    17 分
   
 </span>
 
@@ -299,15 +299,10 @@ volume defaults at container runtime, you need to either use non-host-mounted
 volumes or find a way to make the applications work with the default file
 permissions.</p>
 
-<p>Docker Desktop currently implements host-mounted volumes based on <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx">Microsoft SMB
-protocol</a>, which does not support fine-grained, <code class="highlighter-rouge">chmod</code> control over these permissions.</p>
-
 <p>See also, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/faqs/#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements">Can I change permissions on shared volumes for container-specific
 deployment
 requirements?</a>
-in the FAQs, and for more of an explanation, the GitHub issue, <a href="https://github.com/docker/docker.github.io/issues/3298">Controlling
-Unix-style perms on directories passed through from shared Windows
-drives</a>.</p>
+in the FAQs.</p>
 
 <h4 id="inotify-on-shared-drives-does-not-work">inotify on shared drives does not work</h4>
 
@@ -339,122 +334,6 @@ you might need to enable <a href="https://matsuand.github.io/docs.docker.jp.onth
 containers). Click <img src="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/images/whale-x.png" alt="whale menu" class="inline" />
  and then <strong>Settings</strong> &gt; <strong>Shared Drives</strong> and share the drive that contains the
 Dockerfile and volume.</p>
-
-<h4 id="verify-domain-user-has-permissions-for-shared-drives-volumes">Verify domain user has permissions for shared drives (volumes)</h4>
-
-<blockquote>
-  <p><strong>Tip</strong>: Shared drives are only required for volume mounting <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/#switch-between-windows-and-linux-containers">Linux
-containers</a>, not Windows
-containers.</p>
-</blockquote>
-
-<p>Permissions to access shared drives are tied to the username and password you
-use to set up <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/#shared-drives">shared drives</a>. If you run <code class="highlighter-rouge">docker</code>
-commands and tasks under a different username than the one used to set up shared
-drives, your containers don’t have permissions to access the mounted volumes.
-The volumes show as empty.</p>
-
-<p>The solution to this is to switch to the domain user account and reset
-credentials on shared drives.</p>
-
-<p>Here is an example of how to debug this problem, given a scenario where you
-shared the <code class="highlighter-rouge">C</code> drive as a local user instead of as the domain user. Assume the
-local user is <code class="highlighter-rouge">samstevens</code> and the domain user is <code class="highlighter-rouge">merlin</code>.</p>
-
-<ol>
-  <li>
-    <p>Make sure you are logged in as the Windows domain user (for our example,
-<code class="highlighter-rouge">merlin</code>).</p>
-  </li>
-  <li>
-    <p>Run <code class="highlighter-rouge">net share c</code> to view user permissions for <code class="highlighter-rouge">&lt;host&gt;\&lt;username&gt;, FULL</code>.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; net share c
-
-Share name        C
-Path              C:\
-Remark
-Maximum users     No limit
-Users             SAMSTEVENS
-Caching           Caching disabled
-Permission        windowsbox\samstevens, FULL
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Run the following command to remove the share.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; net share c /delete
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Re-share the drive via the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/#shared-drives">Shared Drives dialog</a>,
-and provide the Windows domain user account credentials.</p>
-  </li>
-  <li>
-    <p>Re-run <code class="highlighter-rouge">net share c</code>.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; net share c
-
-Share name        C
-Path              C:\
-Remark
-Maximum users     No limit
-Users             MERLIN
-Caching           Caching disabled
-Permission        windowsbox\merlin, FULL
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<p>See also, the related issue on GitHub, <a href="https://github.com/docker/for-win/issues/25">Mounted volumes are empty in the
-container</a>.</p>
-
-<h4 id="volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking">Volume mounts from host paths use a <code class="highlighter-rouge">nobrl</code> option to override database locking</h4>
-
-<p>You may encounter problems using volume mounts on the host, depending on the
-database software and which options are enabled. Docker Desktop for Windows uses
-<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365233(v=vs.85).aspx">SMB/CIFS
-protocols</a>
-to mount host paths, and mounts them with the <code class="highlighter-rouge">nobrl</code> option, which prevents
-lock requests from being sent to the database server
-(<a href="https://github.com/docker/for-win/issues/11">docker/for-win#11</a>,
-<a href="https://github.com/docker/for-win/issues/694">docker/for-win#694</a>). This is
-done to ensure container access to database files shared from the host. Although
-it solves the over-the-network database access problem, this “unlocked” strategy
-can interfere with other aspects of database functionality (for example,
-write-ahead logging (WAL) with SQLite, as described in
-<a href="https://github.com/Sonarr/Sonarr/issues/1886">docker/for-win#1886</a>).</p>
-
-<p>If possible, avoid using shared drives for volume mounts on the host with
-network paths, and instead mount on the MobyVM, or create a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockervolumes.md#data-volumes">data
-volume</a> (named volume) or <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container">data
-container</a>.
-See also, the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#volumes">volumes key under service
-configuration</a> and the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/index.md#volume-configuration-reference">volume
-configuration
-reference</a> in the
-Compose file documentation.</p>
-
-<h4 id="local-security-policies-can-block-shared-drives-and-cause-login-errors">Local security policies can block shared drives and cause login errors</h4>
-
-<p>You need permissions to mount shared drives to use the Docker Desktop for Windows
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/#shared-drives">shared drives</a> feature.</p>
-
-<p>If local policy prevents this, you get errors when you attempt to enable shared
-drives on Docker. This is not something Docker can resolve, since you do need
-these permissions to use the feature.</p>
-
-<p>Here are snip-its from example error messages:</p>
-
-<pre><code class="language-none">Logon failure: the user has not been granted the requested logon type at
-this computer.
-
-[19:53:26.900][SambaShare     ][Error  ] Unable to mount C drive: mount
-error(5): I/O error Refer to the mount.cifs(8) manual page (e.g. man mount.cifs)
-mount: mounting //10.0.75.1/C on /c failed: Invalid argument
-</code></pre>
-
-<p>See also, <a href="https://github.com/docker/for-win/issues/98">Docker for Windows issue #98</a>.</p>
 
 <h4 id="understand-symlinks-limitations">Understand symlinks limitations</h4>
 
