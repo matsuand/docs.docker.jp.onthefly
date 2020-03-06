@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-06 15:06:30 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-06T15:06:30+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker Swarm comes with multiple discovery backends. You use a hosted discovery service with Docker Swarm. The service maintains a list of IPs in your cluster. This page describes the..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-06T15:06:30+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, swarm, clustering, discovery">
@@ -182,7 +182,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    4 分
   
 </span>
 
@@ -193,15 +193,13 @@ This page describes the different types of hosted discovery. These are:</p>
 
 <h2 id="use-a-distributed-keyvalue-store">Use a distributed key/value store</h2>
 
-<p>The recommended way to do node discovery in Swarm is Docker’s libkv project. The libkv project is an abstraction layer over existing distributed key/value stores. As of this writing, the project supports:</p>
+<p>Swarm node discovery supports the following backends:</p>
 
 <ul>
   <li>Consul 0.5.1 or higher</li>
   <li>Etcd 2.0 or higher</li>
   <li>ZooKeeper 3.4.5 or higher</li>
 </ul>
-
-<p>For details about libkv and a detailed technical overview of the supported backends, refer to the <a href="https://github.com/docker/libkv">libkv project</a>.</p>
 
 <h3 id="use-a-hosted-discovery-key-store">Use a hosted discovery key store</h3>
 
@@ -391,68 +389,12 @@ store.</p>
 
 <h2 id="docker-hub-as-a-hosted-discovery-service">Docker Hub as a hosted discovery service</h2>
 
-<blockquote class="info">
+<blockquote class="warning">
   <h3 id="deprecation-notice">Deprecation Notice</h3>
 
-  <p>The Docker Hub Hosted Discovery Service will be removed on June 19th, 2019. Please switch to one of the other discovery mechanisms. Several brownouts of the service will take place in the weeks leading up to the removal in order for users to find places where this is still used and give them time to prepare.</p>
+  <p>The Docker Hub Hosted Discovery Service has been removed on June 19th, 2019.
+Please switch to one of the other discovery mechanisms.</p>
 </blockquote>
-
-<blockquote class="warning">
-  <p><strong>Warning</strong>:
-The Docker Hub Hosted Discovery Service <strong>is not recommended</strong> for production use. It’s intended to be used for testing/development. See the discovery backends for production use.</p>
-</blockquote>
-
-<p>This example uses the hosted discovery service on Docker Hub. Using
-Docker Hub’s hosted discovery service requires that each node in the
-swarm is connected to the public internet. To create your cluster:</p>
-
-<ol>
-  <li>
-    <p>Create a cluster.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ swarm create
- 6856663cdefdec325839a4b7e1de38e8 # &lt;- this is your unique &lt;cluster_id&gt;
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Create each node and join them to the cluster.</p>
-
-    <p>On each of your nodes, start the swarm agent. The node IP address doesn’t need to be public (eg. 192.168.0.X) but the swarm manager must be able to access it.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ swarm join --advertise=&lt;node_ip:2375&gt; token://&lt;cluster_id&gt;
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Start the swarm manager.</p>
-
-    <p>This can be on any machine or even your laptop.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ swarm manage -H tcp://&lt;swarm_ip:swarm_port&gt; token://&lt;cluster_id&gt;
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Use regular Docker commands to interact with your cluster.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker -H tcp://&lt;swarm_ip:swarm_port&gt; info
- docker -H tcp://&lt;swarm_ip:swarm_port&gt; run ...
- docker -H tcp://&lt;swarm_ip:swarm_port&gt; ps
- docker -H tcp://&lt;swarm_ip:swarm_port&gt; logs ...
- ...
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>List the nodes in your cluster.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> swarm list token://&lt;cluster_id&gt;
- &lt;node_ip:2375&gt;
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h2 id="contribute-a-new-discovery-backend">Contribute a new discovery backend</h2>
-
-<p>You can contribute a new discovery backend to Swarm. For information on how to
-do this, see <a href="https://github.com/moby/moby/tree/master/pkg/discovery"> github.com/moby/moby/pkg/discovery</a>.</p>
 
 <h2 id="docker-swarm-documentation-index">Docker Swarm documentation index</h2>
 
@@ -574,7 +516,6 @@ do this, see <a href="https://github.com/moby/moby/tree/master/pkg/discovery"> g
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/discovery.md#deprecation-notice" class="nomunge">Deprecation Notice</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/discovery.md#contribute-a-new-discovery-backend" class="nomunge">Contribute a new discovery backend</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/discovery.md#docker-swarm-documentation-index" class="nomunge">Docker Swarm documentation index</a></li>
 </ul>
 
