@@ -2116,7 +2116,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-docker/",
-"title":"Get Docker",
+"title":"Docker の入手",
 "description":"Home page for Get Docker",
 "keywords":"Docker, download, documentation, manual"
 }

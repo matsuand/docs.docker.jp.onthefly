@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-11 14:21:27 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,17 +75,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-11T14:21:27+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="イメージの構築と実行"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="概要と準備 イメージの構築と実行 Docker Hub におけるイメージ共有 前提条件 1 部 でのオリエンテーション、設定をひととおり終えていること。 はじめに Docker Desktop というもののおかげで、開発環境を設定することができました。 ここからはコンテナー化されたアプリケーションを作り出していくことにします。 構築の手順は一般には以下のようになります。 Create and test individual containers for each component of your application by first creating Docker..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="概要と準備 イメージの構築と実行 Docker Hub におけるイメージ共有 前提条件 1 部 でのオリエンテーション、設定をひととおり終えていること。 はじめに Docker Desktop というもののおかげで、開発環境を整えることができました。 ここからはコンテナー化されたアプリケーションを作り出していくことにします。 構築の手順は一般に以下のようになります。 アプリケーションの各コンポーネントに対応するコンテナーを生成しテストします。 その前にまずは Docker イメージを生成します。 コンテナーとこれを支えるインフラストラクチャーを整えて、一体となったアプリケーションとします。 完全にコンテナー化されたアプリケーションをテスト、共有しデプロイを行います。 In this stage of the tutorial, let’s focus on..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-11T14:21:27+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="containers, images, dockerfiles, node, code, coding, build, push, run">
@@ -180,7 +180,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    8 分
+    6 分
   
 </span>
 
@@ -198,14 +198,15 @@
 
 <h2 id="introduction">はじめに</h2>
 
-<p>Docker Desktop というもののおかげで、開発環境を設定することができました。
+<p>Docker Desktop というもののおかげで、開発環境を整えることができました。
 ここからはコンテナー化されたアプリケーションを作り出していくことにします。
-構築の手順は一般には以下のようになります。</p>
+構築の手順は一般に以下のようになります。</p>
 
 <ol>
-  <li>Create and test individual containers for each component of your application by first creating Docker images.</li>
-  <li>Assemble your containers and supporting infrastructure into a complete application.</li>
-  <li>Test, share, and deploy your complete containerized application.</li>
+  <li>アプリケーションの各コンポーネントに対応するコンテナーを生成しテストします。
+その前にまずは Docker イメージを生成します。</li>
+  <li>コンテナーとこれを支えるインフラストラクチャーを整えて、一体となったアプリケーションとします。</li>
+  <li>完全にコンテナー化されたアプリケーションをテスト、共有しデプロイを行います。</li>
 </ol>
 
 <p>In this stage of the tutorial, let’s focus on step 1 of this workflow: creating the images that your containers will be based on. Remember, a Docker image captures the private filesystem that your containerized processes will run in; you need to create an image that contains just what your application needs to run.</p>
@@ -216,7 +217,7 @@
 
 <h2 id="set-up">設定</h2>
 
-<p>Let us download an example project from the <a href="https://github.com/dockersamples/node-bulletin-board">Docker Samples</a> page.</p>
+<p><a href="https://github.com/dockersamples/node-bulletin-board">Docker サンプル</a> のページから、サンプルプロジェクトをダウンロードすることにします。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#clonegit">Git</a></li>
@@ -239,7 +240,7 @@ cd node-bulletin-board/bulletin-board-app
 
     <h3 id="windows-git-がない場合">Windows (Git がない場合)</h3>
 
-    <p>If you are using a Windows machine and prefer to download the example project without installing Git, run the following commands in PowerShell:</p>
+    <p>Windows ユーザーであって Git をインストールせずにサンプルプロジェクトをダウンロードしたい場合は、PowerShell から以下のコマンドを実行します。</p>
 
     <div class="language-shell highlighter-rouge">
       <div class="highlight">
@@ -255,7 +256,7 @@ cd node-bulletin-board-master\bulletin-board-app
 
     <h3 id="mac-または-linux-git-がない場合">Mac または Linux (Git がない場合)</h3>
 
-    <p>If you are using a Mac or a Linux machine and prefer to download the example project without installing Git, run the following commands in a terminal:</p>
+    <p>Mac ユーザーあるいは Linux ユーザーであって Git をインストールせずにサンプルプロジェクトをダウンロードしたい場合は、端末画面から以下のコマンドを実行します。</p>
 
     <div class="language-shell highlighter-rouge">
       <div class="highlight">
@@ -270,35 +271,41 @@ cd node-bulletin-board-master/bulletin-board-app
   <hr />
 </div>
 
-<p>The <code class="highlighter-rouge">node-bulletin-board</code> project is a simple bulletin board application, written in Node.js. In this example, let’s imagine you wrote this app, and are now trying to containerize it.</p>
+<p><code class="highlighter-rouge">node-bulletin-board</code> プロジェクトは簡易な掲示板（bulletin board）アプリケーションであり、Node.js を用いて開発されているものです。
+この例では、すでに作り上げているアプリケーションを、これからコンテナー化していく状況にあると考えてください。</p>
 
-<h2 id="define-a-container-with-dockerfile">Define a container with Dockerfile</h2>
+<h2 id="dockerfile-におけるコンテナーの定義">Dockerfile におけるコンテナーの定義</h2>
 
-<p>Take a look at the file called <code class="highlighter-rouge">Dockerfile</code> in the bulletin board application. Dockerfiles describe how to assemble a private filesystem for a container, and can also contain some metadata describing how to run a container based on this image. The bulletin board app Dockerfile looks like this:</p>
+<p>掲示板アプリケーションに対応する <code class="highlighter-rouge">Dockerfile</code> というファイルを見てみます。
+Dockerfile というものには、コンテナーにはどのようなプライベートファイルシステムを用いるのかが記述されます。
+あるいはそのイメージに基づくコンテナーをどのように起動させるかを表わすメタデータを含ませることもあります。
+掲示板アプリケーションの Dockerfile はたとえば以下のようになります。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Use the official image as a parent image</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 親イメージとして公式イメージを利用</span>
 <span class="k">FROM</span><span class="s"> node:current-slim</span>
 
-<span class="c"># Set the working directory</span>
+<span class="c"># ワーキングディレクトリの設定</span>
 <span class="k">WORKDIR</span><span class="s"> /usr/src/app</span>
 
-<span class="c"># Copy the file from your host to your current location</span>
+<span class="c"># ホストシステム内からカレントディレクトリにファイルをコピー</span>
 <span class="k">COPY</span><span class="s"> package.json .</span>
 
-<span class="c"># Run the command inside your image filesystem</span>
+<span class="c"># イメージのファイルシステム内からコマンドを実行</span>
 <span class="k">RUN </span>npm install
 
-<span class="c"># Inform Docker that the container is listening on the specified port at runtime.</span>
+<span class="c"># コンテナーが実行中に利用するポート番号を指定</span>
 <span class="k">EXPOSE</span><span class="s"> 8080</span>
 
-<span class="c"># Run the specified command within the container.</span>
+<span class="c"># コンテナー内から所定のコマンドを実行</span>
 <span class="k">CMD</span><span class="s"> [ "npm", "start" ]</span>
 
-<span class="c"># Copy the rest of your app's source code from your host to your image filesystem.</span>
+<span class="c"># アプリソースの残りすべてを、ホストからイメージ内ファイルシステムへコピー</span>
 <span class="k">COPY</span><span class="s"> . .</span>
 </code></pre></div></div>
 
-<p>Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up your image. This one takes the following steps:</p>
+<p>Dockerfile を記述することが、アプリケーションコンテナー化の第一歩です。
+この Dockerfile に記述するコマンドは、いってみればイメージの構築方法を順に示すレシピのようなものです。
+このファイルでは以下の手順を行います。</p>
 
 <ul>
   <li>Start <code class="highlighter-rouge">FROM</code> the pre-existing <code class="highlighter-rouge">node:current-slim</code> image. This is an <em>official image</em>, built by the node.js vendors and validated by Docker to be a high-quality image containing the Node.js Long Term Support (LTS) interpreter and basic dependencies.</li>
@@ -488,7 +495,7 @@ cd node-bulletin-board-master/bulletin-board-app
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#mac-または-linux-git-がない場合" class="nomunge">Mac または Linux (Git がない場合)</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#define-a-container-with-dockerfile" class="nomunge">Define a container with Dockerfile</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#dockerfile-におけるコンテナーの定義" class="nomunge">Dockerfile におけるコンテナーの定義</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#build-and-test-your-image" class="nomunge">Build and test your image</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#run-your-image-as-a-container" class="nomunge">Run your image as a container</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part2.md#conclusion" class="nomunge">まとめ</a></li>
