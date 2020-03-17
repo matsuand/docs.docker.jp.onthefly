@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker logs"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Fetch the logs of a container 利用方法 docker logs [OPTIONS] CONTAINER オプション 名前／省略形 デフォルト 説明 --details Show extra details provided to logs --follow , -f Follow log output --since..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Fetch the logs of a container 利用方法 docker logs [OPTIONS] CONTAINER Extended description The docker logs command batch-retrieves logs present at the time of execution. Note: this command is..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -205,16 +205,53 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker logs [OPTIONS] CONTAINER
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>The <code class="highlighter-rouge">docker logs</code> command batch-retrieves logs present at the time of execution.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: this command is only functional for containers that are started with
+the <code class="highlighter-rouge">json-file</code> or <code class="highlighter-rouge">journald</code> logging driver.</p>
+</blockquote>
+
+<p>For more information about selecting and configuring logging drivers, refer to
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/configure/">Configure logging drivers</a>.</p>
+
+<p>The <code class="highlighter-rouge">docker logs --follow</code> command will continue streaming the new output from
+the container’s <code class="highlighter-rouge">STDOUT</code> and <code class="highlighter-rouge">STDERR</code>.</p>
+
+<p>Passing a negative number or a non-integer to <code class="highlighter-rouge">--tail</code> is invalid and the
+value is set to <code class="highlighter-rouge">all</code> in that case.</p>
+
+<p>The <code class="highlighter-rouge">docker logs --timestamps</code> command will add an <a href="https://golang.org/pkg/time/#pkg-constants">RFC3339Nano timestamp</a>
+, for example <code class="highlighter-rouge">2014-09-16T06:17:46.000000000Z</code>, to each
+log entry. To ensure that the timestamps are aligned the
+nano-second part of the timestamp will be padded with zero when necessary.</p>
+
+<p>The <code class="highlighter-rouge">docker logs --details</code> command will add on extra attributes, such as
+environment variables and labels, provided to <code class="highlighter-rouge">--log-opt</code> when creating the
+container.</p>
+
+<p>The <code class="highlighter-rouge">--since</code> option shows only the container logs generated after
+a given date. You can specify the date as an RFC 3339 date, a UNIX
+timestamp, or a Go duration string (e.g. <code class="highlighter-rouge">1m30s</code>, <code class="highlighter-rouge">3h</code>). Besides RFC3339 date
+format you may also use RFC3339Nano, <code class="highlighter-rouge">2006-01-02T15:04:05</code>,
+<code class="highlighter-rouge">2006-01-02T15:04:05.999999999</code>, <code class="highlighter-rouge">2006-01-02Z07:00</code>, and <code class="highlighter-rouge">2006-01-02</code>. The local
+timezone on the client will be used if you do not provide either a <code class="highlighter-rouge">Z</code> or a
+<code class="highlighter-rouge">+-00:00</code> timezone offset at the end of the timestamp. When providing Unix
+timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
+that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
+seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
+fraction of a second no more than nine digits long. You can combine the
+<code class="highlighter-rouge">--since</code> option with either or both of the <code class="highlighter-rouge">--follow</code> or <code class="highlighter-rouge">--tail</code> options.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -326,7 +363,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--until</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.35/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.35 以上</span></a><br />Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.35/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.35+</span></a><br />Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)</td>
   </tr>
 
  <!-- end for option -->
@@ -334,6 +371,21 @@ https://github.com/docker/cli
 </table>
 
 <p><!-- end if options --></p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="retrieve-logs-until-a-specific-point-in-time">Retrieve logs until a specific point in time</h3>
+
+<p>In order to retrieve logs before a specific point in time, run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">-d</span> busybox sh <span class="nt">-c</span> <span class="s2">"while true; do </span><span class="k">$(</span><span class="nb">echo </span>date<span class="k">)</span><span class="s2">; sleep 1; done"</span>
+<span class="nv">$ </span>date
+Tue 14 Nov 2017 16:40:00 CET
+<span class="nv">$ </span>docker logs <span class="nt">-f</span> <span class="nt">--until</span><span class="o">=</span>2s
+Tue 14 Nov 2017 16:40:00 CET
+Tue 14 Nov 2017 16:40:01 CET
+Tue 14 Nov 2017 16:40:02 CET
+</code></pre></div></div>
 
 <h2 id="parent-command">上位コマンド</h2>
 
@@ -351,61 +403,6 @@ https://github.com/docker/cli
     </tr>
   </tbody>
 </table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>The <code class="highlighter-rouge">docker logs</code> command batch-retrieves logs present at the time of execution.</p>
-
-<blockquote>
-  <p><strong>Note</strong>: this command is only functional for containers that are started with
-the <code class="highlighter-rouge">json-file</code> or <code class="highlighter-rouge">journald</code> logging driver.</p>
-</blockquote>
-
-<p>For more information about selecting and configuring logging drivers, refer to
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/configure/">Configure logging drivers</a>.</p>
-
-<p>The <code class="highlighter-rouge">docker logs --follow</code> command will continue streaming the new output from
-the container’s <code class="highlighter-rouge">STDOUT</code> and <code class="highlighter-rouge">STDERR</code>.</p>
-
-<p>Passing a negative number or a non-integer to <code class="highlighter-rouge">--tail</code> is invalid and the
-value is set to <code class="highlighter-rouge">all</code> in that case.</p>
-
-<p>The <code class="highlighter-rouge">docker logs --timestamps</code> command will add an <a href="https://golang.org/pkg/time/#pkg-constants">RFC3339Nano timestamp</a>
-, for example <code class="highlighter-rouge">2014-09-16T06:17:46.000000000Z</code>, to each
-log entry. To ensure that the timestamps are aligned the
-nano-second part of the timestamp will be padded with zero when necessary.</p>
-
-<p>The <code class="highlighter-rouge">docker logs --details</code> command will add on extra attributes, such as
-environment variables and labels, provided to <code class="highlighter-rouge">--log-opt</code> when creating the
-container.</p>
-
-<p>The <code class="highlighter-rouge">--since</code> option shows only the container logs generated after
-a given date. You can specify the date as an RFC 3339 date, a UNIX
-timestamp, or a Go duration string (e.g. <code class="highlighter-rouge">1m30s</code>, <code class="highlighter-rouge">3h</code>). Besides RFC3339 date
-format you may also use RFC3339Nano, <code class="highlighter-rouge">2006-01-02T15:04:05</code>,
-<code class="highlighter-rouge">2006-01-02T15:04:05.999999999</code>, <code class="highlighter-rouge">2006-01-02Z07:00</code>, and <code class="highlighter-rouge">2006-01-02</code>. The local
-timezone on the client will be used if you do not provide either a <code class="highlighter-rouge">Z</code> or a
-<code class="highlighter-rouge">+-00:00</code> timezone offset at the end of the timestamp. When providing Unix
-timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
-that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
-seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
-fraction of a second no more than nine digits long. You can combine the
-<code class="highlighter-rouge">--since</code> option with either or both of the <code class="highlighter-rouge">--follow</code> or <code class="highlighter-rouge">--tail</code> options.</p>
-
-<h2 id="examples">利用例</h2>
-
-<h3 id="retrieve-logs-until-a-specific-point-in-time">Retrieve logs until a specific point in time</h3>
-
-<p>In order to retrieve logs before a specific point in time, run:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">-d</span> busybox sh <span class="nt">-c</span> <span class="s2">"while true; do </span><span class="k">$(</span><span class="nb">echo </span>date<span class="k">)</span><span class="s2">; sleep 1; done"</span>
-<span class="nv">$ </span>date
-Tue 14 Nov 2017 16:40:00 CET
-<span class="nv">$ </span>docker logs <span class="nt">-f</span> <span class="nt">--until</span><span class="o">=</span>2s
-Tue 14 Nov 2017 16:40:00 CET
-Tue 14 Nov 2017 16:40:01 CET
-Tue 14 Nov 2017 16:40:02 CET
-</code></pre></div></div>
 
 
 							<!-- tags -->
@@ -504,14 +501,14 @@ Tue 14 Nov 2017 16:40:02 CET
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#retrieve-logs-until-a-specific-point-in-time" class="nomunge">Retrieve logs until a specific point in time</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/logs.md#parent-command" class="nomunge">上位コマンド</a></li>
 </ul>
 
 

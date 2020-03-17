@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker trust revoke"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Remove trust for an image 利用方法 docker trust revoke [OPTIONS] IMAGE[:TAG] オプション 名前／省略形 デフォルト 説明 --yes , -y Do not prompt for confirmation 上位コマンド コマンド 説明 docker trust Manage..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Remove trust for an image 利用方法 docker trust revoke [OPTIONS] IMAGE[:TAG] Extended description docker trust revoke removes signatures from tags in signed repositories. For example uses of this command,..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -206,16 +206,17 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker trust revoke [OPTIONS] IMAGE[:TAG]
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p><code class="highlighter-rouge">docker trust revoke</code> removes signatures from tags in signed repositories.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -246,6 +247,98 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<h3 id="revoke-signatures-from-a-signed-tag">Revoke signatures from a signed tag</h3>
+
+<p>Here’s an example of a repo with two signed tags:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+SIGNED TAG          DIGEST                                                              SIGNERS
+red                 852cc04935f930a857b630edc4ed6131e91b22073bcc216698842e44f64d2943    alice
+blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
+
+List of signers and their keys <span class="k">for </span>example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
+<p>When <code class="highlighter-rouge">alice</code>, one of the signers, runs <code class="highlighter-rouge">docker trust revoke</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust revoke example/trust-demo:red
+Enter passphrase <span class="k">for </span>delegation key with ID 27d42a8:
+Successfully deleted signature <span class="k">for </span>example/trust-demo:red
+</code></pre></div></div>
+
+<p>After revocation, the tag is removed from the list of released tags:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+SIGNED TAG          DIGEST                                                              SIGNERS
+blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
+
+List of signers and their keys <span class="k">for </span>example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
+<h3 id="revoke-signatures-on-all-tags-in-a-repository">Revoke signatures on all tags in a repository</h3>
+
+<p>When no tag is specified, <code class="highlighter-rouge">docker trust</code> revokes all signatures that you have a signing key for.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+SIGNED TAG          DIGEST                                                              SIGNERS
+red                 852cc04935f930a857b630edc4ed6131e91b22073bcc216698842e44f64d2943    alice
+blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
+
+List of signers and their keys <span class="k">for </span>example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
+<p>When <code class="highlighter-rouge">alice</code>, one of the signers, runs <code class="highlighter-rouge">docker trust revoke</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust revoke example/trust-demo
+Please confirm you would like to delete all signature data <span class="k">for </span>example/trust-demo? <span class="o">[</span>y/N] y
+Enter passphrase <span class="k">for </span>delegation key with ID 27d42a8:
+Successfully deleted signature <span class="k">for </span>example/trust-demo
+</code></pre></div></div>
+
+<p>All tags that have <code class="highlighter-rouge">alice</code>’s signature on them are removed from the list of released tags:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+
+No signatures <span class="k">for </span>example/trust-demo
+
+
+List of signers and their keys <span class="k">for </span>example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -268,10 +361,6 @@ https://github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -310,102 +399,6 @@ https://github.com/docker/cli
 
 </tbody>
 </table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p><code class="highlighter-rouge">docker trust revoke</code> removes signatures from tags in signed repositories.</p>
-
-<h2 id="examples">利用例</h2>
-
-<h3 id="revoke-signatures-from-a-signed-tag">Revoke signatures from a signed tag</h3>
-
-<p>Here’s an example of a repo with two signed tags:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-SIGNED TAG          DIGEST                                                              SIGNERS
-red                 852cc04935f930a857b630edc4ed6131e91b22073bcc216698842e44f64d2943    alice
-blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
-
-List of signers and their keys <span class="k">for </span>example/trust-demo:
-
-SIGNER              KEYS
-alice               05e87edcaecb
-bob                 5600f5ab76a2
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
-Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
-</code></pre></div></div>
-
-<p>When <code class="highlighter-rouge">alice</code>, one of the signers, runs <code class="highlighter-rouge">docker trust revoke</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust revoke example/trust-demo:red
-Enter passphrase <span class="k">for </span>delegation key with ID 27d42a8:
-Successfully deleted signature <span class="k">for </span>example/trust-demo:red
-</code></pre></div></div>
-
-<p>After revocation, the tag is removed from the list of released tags:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-SIGNED TAG          DIGEST                                                              SIGNERS
-blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
-
-List of signers and their keys <span class="k">for </span>example/trust-demo:
-
-SIGNER              KEYS
-alice               05e87edcaecb
-bob                 5600f5ab76a2
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
-Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
-</code></pre></div></div>
-
-<h3 id="revoke-signatures-on-all-tags-in-a-repository">Revoke signatures on all tags in a repository</h3>
-
-<p>When no tag is specified, <code class="highlighter-rouge">docker trust</code> revokes all signatures that you have a signing key for.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-SIGNED TAG          DIGEST                                                              SIGNERS
-red                 852cc04935f930a857b630edc4ed6131e91b22073bcc216698842e44f64d2943    alice
-blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
-
-List of signers and their keys <span class="k">for </span>example/trust-demo:
-
-SIGNER              KEYS
-alice               05e87edcaecb
-bob                 5600f5ab76a2
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
-Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
-</code></pre></div></div>
-
-<p>When <code class="highlighter-rouge">alice</code>, one of the signers, runs <code class="highlighter-rouge">docker trust revoke</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust revoke example/trust-demo
-Please confirm you would like to delete all signature data <span class="k">for </span>example/trust-demo? <span class="o">[</span>y/N] y
-Enter passphrase <span class="k">for </span>delegation key with ID 27d42a8:
-Successfully deleted signature <span class="k">for </span>example/trust-demo
-</code></pre></div></div>
-
-<p>All tags that have <code class="highlighter-rouge">alice</code>’s signature on them are removed from the list of released tags:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-
-No signatures <span class="k">for </span>example/trust-demo
-
-
-List of signers and their keys <span class="k">for </span>example/trust-demo:
-
-SIGNER              KEYS
-alice               05e87edcaecb
-bob                 5600f5ab76a2
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
-Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
-</code></pre></div></div>
 
 
 							<!-- tags -->
@@ -504,16 +497,16 @@ Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#revoke-signatures-from-a-signed-tag" class="nomunge">Revoke signatures from a signed tag</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#revoke-signatures-on-all-tags-in-a-repository" class="nomunge">Revoke signatures on all tags in a repository</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#parent-command" class="nomunge">上位コマンド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_revoke.md#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>
 
 

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker trust sign"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Sign an image 利用方法 docker trust sign IMAGE:TAG オプション 名前／省略形 デフォルト 説明 --local Sign a locally tagged image 上位コマンド コマンド 説明 docker trust Manage trust on Docker images 関連コマンド..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Sign an image 利用方法 docker trust sign IMAGE:TAG Extended description docker trust sign adds signatures to tags to create signed repositories. For example uses of this command, refer to..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -206,16 +206,17 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker trust sign IMAGE:TAG
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p><code class="highlighter-rouge">docker trust sign</code> adds signatures to tags to create signed repositories.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -246,6 +247,104 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<h3 id="sign-a-tag-as-a-repo-admin">Sign a tag as a repo admin</h3>
+
+<p>Given an image:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+SIGNED TAG          DIGEST                                                             SIGNERS
+v1                  c24134c079c35e698060beabe110bb83ab285d0d978de7d92fed2c8c83570a41   <span class="o">(</span>Repo Admin<span class="o">)</span>
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: 36d4c3601102fa7c5712a343c03b94469e5835fb27c191b529c06fd19c14a942
+Root Key:       246d360f7c53a9021ee7d4259e3c5692f3f1f7ad4737b1ea8c7b8da741ad980b
+</code></pre></div></div>
+
+<p>Sign a new tag with <code class="highlighter-rouge">docker trust sign</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust sign example/trust-demo:v2
+Signing and pushing trust metadata <span class="k">for </span>example/trust-demo:v2
+The push refers to a repository <span class="o">[</span>docker.io/example/trust-demo]
+eed4e566104a: Layer already exists
+77edfb6d1e3c: Layer already exists
+c69f806905c2: Layer already exists
+582f327616f1: Layer already exists
+a3fbb648f0bd: Layer already exists
+5eac2de68a97: Layer already exists
+8d4d1ab5ff74: Layer already exists
+v2: digest: sha256:8f6f460abf0436922df7eb06d28b3cdf733d2cac1a185456c26debbff0839c56 size: 1787
+Signing and pushing trust metadata
+Enter passphrase <span class="k">for </span>repository key with ID 36d4c36:
+Successfully signed docker.io/example/trust-demo:v2
+</code></pre></div></div>
+
+<p>Use <code class="highlighter-rouge">docker trust view</code> to list the new signature:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+SIGNED TAG          DIGEST                                                             SIGNERS
+v1                  c24134c079c35e698060beabe110bb83ab285d0d978de7d92fed2c8c83570a41   <span class="o">(</span>Repo Admin<span class="o">)</span>
+v2                  8f6f460abf0436922df7eb06d28b3cdf733d2cac1a185456c26debbff0839c56   <span class="o">(</span>Repo Admin<span class="o">)</span>
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: 36d4c3601102fa7c5712a343c03b94469e5835fb27c191b529c06fd19c14a942
+Root Key:       246d360f7c53a9021ee7d4259e3c5692f3f1f7ad4737b1ea8c7b8da741ad980b
+</code></pre></div></div>
+
+<h3 id="sign-a-tag-as-a-signer">Sign a tag as a signer</h3>
+
+<p>Given an image:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+
+No signatures <span class="k">for </span>example/trust-demo
+
+
+List of signers and their keys <span class="k">for </span>example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
+<p>Sign a new tag with <code class="highlighter-rouge">docker trust sign</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust sign example/trust-demo:v1
+Signing and pushing trust metadata <span class="k">for </span>example/trust-demo:v1
+The push refers to a repository <span class="o">[</span>docker.io/example/trust-demo]
+26b126eb8632: Layer already exists
+220d34b5f6c9: Layer already exists
+8a5132998025: Layer already exists
+aca233ed29c3: Layer already exists
+e5d2f035d7a4: Layer already exists
+v1: digest: sha256:74d4bfa917d55d53c7df3d2ab20a8d926874d61c3da5ef6de15dd2654fc467c4 size: 1357
+Signing and pushing trust metadata
+Enter passphrase <span class="k">for </span>delegation key with ID 27d42a8:
+Successfully signed docker.io/example/trust-demo:v1
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">docker trust view</code> lists the new signature:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+SIGNED TAG          DIGEST                                                             SIGNERS
+v1                  74d4bfa917d55d53c7df3d2ab20a8d926874d61c3da5ef6de15dd2654fc467c4   alice
+
+List of signers and their keys <span class="k">for </span>example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -268,10 +367,6 @@ https://github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -310,108 +405,6 @@ https://github.com/docker/cli
 
 </tbody>
 </table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p><code class="highlighter-rouge">docker trust sign</code> adds signatures to tags to create signed repositories.</p>
-
-<h2 id="examples">利用例</h2>
-
-<h3 id="sign-a-tag-as-a-repo-admin">Sign a tag as a repo admin</h3>
-
-<p>Given an image:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-SIGNED TAG          DIGEST                                                             SIGNERS
-v1                  c24134c079c35e698060beabe110bb83ab285d0d978de7d92fed2c8c83570a41   <span class="o">(</span>Repo Admin<span class="o">)</span>
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	36d4c3601102fa7c5712a343c03b94469e5835fb27c191b529c06fd19c14a942
-Root Key:	246d360f7c53a9021ee7d4259e3c5692f3f1f7ad4737b1ea8c7b8da741ad980b
-</code></pre></div></div>
-
-<p>Sign a new tag with <code class="highlighter-rouge">docker trust sign</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust sign example/trust-demo:v2
-Signing and pushing trust metadata <span class="k">for </span>example/trust-demo:v2
-The push refers to a repository <span class="o">[</span>docker.io/example/trust-demo]
-eed4e566104a: Layer already exists
-77edfb6d1e3c: Layer already exists
-c69f806905c2: Layer already exists
-582f327616f1: Layer already exists
-a3fbb648f0bd: Layer already exists
-5eac2de68a97: Layer already exists
-8d4d1ab5ff74: Layer already exists
-v2: digest: sha256:8f6f460abf0436922df7eb06d28b3cdf733d2cac1a185456c26debbff0839c56 size: 1787
-Signing and pushing trust metadata
-Enter passphrase <span class="k">for </span>repository key with ID 36d4c36:
-Successfully signed docker.io/example/trust-demo:v2
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">docker trust view</code> lists the new signature:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-SIGNED TAG          DIGEST                                                             SIGNERS
-v1                  c24134c079c35e698060beabe110bb83ab285d0d978de7d92fed2c8c83570a41   <span class="o">(</span>Repo Admin<span class="o">)</span>
-v2                  8f6f460abf0436922df7eb06d28b3cdf733d2cac1a185456c26debbff0839c56   <span class="o">(</span>Repo Admin<span class="o">)</span>
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	36d4c3601102fa7c5712a343c03b94469e5835fb27c191b529c06fd19c14a942
-Root Key:	246d360f7c53a9021ee7d4259e3c5692f3f1f7ad4737b1ea8c7b8da741ad980b
-</code></pre></div></div>
-
-<h3 id="sign-a-tag-as-a-signer">Sign a tag as a signer</h3>
-
-<p>Given an image:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-
-No signatures <span class="k">for </span>example/trust-demo
-
-
-List of signers and their keys <span class="k">for </span>example/trust-demo:
-
-SIGNER              KEYS
-alice               05e87edcaecb
-bob                 5600f5ab76a2
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
-Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
-</code></pre></div></div>
-
-<p>Sign a new tag with <code class="highlighter-rouge">docker trust sign</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust sign example/trust-demo:v1
-Signing and pushing trust metadata <span class="k">for </span>example/trust-demo:v1
-The push refers to a repository <span class="o">[</span>docker.io/example/trust-demo]
-26b126eb8632: Layer already exists
-220d34b5f6c9: Layer already exists
-8a5132998025: Layer already exists
-aca233ed29c3: Layer already exists
-e5d2f035d7a4: Layer already exists
-v1: digest: sha256:74d4bfa917d55d53c7df3d2ab20a8d926874d61c3da5ef6de15dd2654fc467c4 size: 1357
-Signing and pushing trust metadata
-Enter passphrase <span class="k">for </span>delegation key with ID 27d42a8:
-Successfully signed docker.io/example/trust-demo:v1
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">docker trust view</code> lists the new signature:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
-SIGNED TAG          DIGEST                                                             SIGNERS
-v1                  74d4bfa917d55d53c7df3d2ab20a8d926874d61c3da5ef6de15dd2654fc467c4   alice
-
-List of signers and their keys <span class="k">for </span>example/trust-demo:
-
-SIGNER              KEYS
-alice               05e87edcaecb
-bob                 5600f5ab76a2
-
-Administrative keys <span class="k">for </span>example/trust-demo:
-Repository Key:	ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
-Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
-</code></pre></div></div>
 
 
 							<!-- tags -->
@@ -510,16 +503,16 @@ Root Key:	3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#sign-a-tag-as-a-repo-admin" class="nomunge">Sign a tag as a repo admin</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#sign-a-tag-as-a-signer" class="nomunge">Sign a tag as a signer</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#parent-command" class="nomunge">上位コマンド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_sign.md#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>
 
 

@@ -2578,8 +2578,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/daemon/",
-"title":"Configure and troubleshoot the Docker daemon",
-"description":"Configuring and troubleshooting the Docker daemon",
+"title":"Docker デーモンの設定とトラブルシュート",
+"description":"Docker デーモンの設定とトラブルシュート",
 "keywords":"docker, daemon, configuration, troubleshooting"
 }
 ,
@@ -4188,7 +4188,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/pruning/",
-"title":"Prune unused Docker objects",
+"title":"未使用 Docker オブジェクトの取り除き (prune)",
 "description":"Pruning unused objects",
 "keywords":"pruning, prune, images, volumes, containers, networks, disk, administration, garbage collection"
 }

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker stats"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Display a live stream of container(s) resource usage statistics 利用方法 docker stats [OPTIONS] [CONTAINER...] オプション 名前／省略形 デフォルト 説明 --all , -a Show all containers (default shows just running) --format..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Display a live stream of container(s) resource usage statistics 利用方法 docker stats [OPTIONS] [CONTAINER...] Extended description The docker stats command returns a live data stream for running containers. To..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -206,16 +206,27 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker stats [OPTIONS] [CONTAINER...]
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>The <code class="highlighter-rouge">docker stats</code> command returns a live data stream for running containers. To limit data to one or more specific containers, specify a list of container names or ids separated by a space. You can specify a stopped container but stopped containers do not return any data.</p>
+
+<p>If you want more detailed information about a container’s resource usage, use the <code class="highlighter-rouge">/containers/(id)/stats</code> API endpoint.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: On Linux, the Docker CLI reports memory usage by subtracting page cache usage from the total memory usage. The API does not perform such a calculation but rather provides the total memory usage and the amount from the page cache so that clients can use the data as needed.</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Note</strong>: The <code class="highlighter-rouge">PIDS</code> column contains the number of processes and kernel threads created by that container. Threads is the term used by Linux kernel. Other equivalent terms are “lightweight process” or “kernel task”, etc. A large number in the <code class="highlighter-rouge">PIDS</code> column combined with a small number of processes (as reported by <code class="highlighter-rouge">ps</code> or <code class="highlighter-rouge">top</code>) may indicate that something in the container is creating many threads.</p>
+</blockquote>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -300,38 +311,7 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
-<h2 id="parent-command">上位コマンド</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>コマンド</th>
-      <th>説明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="docker">docker</a></td>
-      <td>Docker CLI のベースとなるコマンド。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>The <code class="highlighter-rouge">docker stats</code> command returns a live data stream for running containers. To limit data to one or more specific containers, specify a list of container names or ids separated by a space. You can specify a stopped container but stopped containers do not return any data.</p>
-
-<p>If you want more detailed information about a container’s resource usage, use the <code class="highlighter-rouge">/containers/(id)/stats</code> API endpoint.</p>
-
-<blockquote>
-  <p><strong>Note</strong>: On Linux, the Docker CLI reports memory usage by subtracting page cache usage from the total memory usage. The API does not perform such a calculation but rather provides the total memory usage and the amount from the page cache so that clients can use the data as needed.</p>
-</blockquote>
-
-<blockquote>
-  <p><strong>Note</strong>: The <code class="highlighter-rouge">PIDS</code> column contains the number of processes and kernel threads created by that container. Threads is the term used by Linux kernel. Other equivalent terms are “lightweight process” or “kernel task”, etc. A large number in the <code class="highlighter-rouge">PIDS</code> column combined with a small number of processes (as reported by <code class="highlighter-rouge">ps</code> or <code class="highlighter-rouge">top</code>) may indicate that something in the container is creating many threads.</p>
-</blockquote>
-
-<h2 id="examples">利用例</h2>
+<h2 id="examples">Examples</h2>
 
 <p>Running <code class="highlighter-rouge">docker stats</code> on all running containers against a Linux daemon.</p>
 
@@ -523,6 +503,23 @@ d1ea048f04e4        0.03%               4.583 MiB / 64 MiB
 instead of <code class="highlighter-rouge">{{.ID}}\t{{.Name}}</code>.</p>
 </blockquote>
 
+<h2 id="parent-command">上位コマンド</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>コマンド</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="docker">docker</a></td>
+      <td>Docker CLI のベースとなるコマンド。</td>
+    </tr>
+  </tbody>
+</table>
+
 
 							<!-- tags -->
 							
@@ -620,14 +617,14 @@ instead of <code class="highlighter-rouge">{{.ID}}\t{{.Name}}</code>.</p>
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#formatting" class="nomunge">Formatting</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/stats.md#parent-command" class="nomunge">上位コマンド</a></li>
 </ul>
 
 

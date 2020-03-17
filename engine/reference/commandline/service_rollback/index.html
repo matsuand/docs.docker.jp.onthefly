@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker service rollback"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Revert changes to a service’s configuration API 1.31 以上  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.31 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 Swarm This command works with the Swarm orchestrator. 利用方法..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Revert changes to a service’s configuration API 1.31+  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.31 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 Swarm This command works with the Swarm orchestrator. 利用方法 docker..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -201,7 +201,7 @@ https://www.github.com/docker/cli
 
 <p>Revert changes to a service’s configuration</p>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.31/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.31 API reference (in a new window)">API 1.31 以上</span></a> 
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.31/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.31 API reference (in a new window)">API 1.31+</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.31/" target="_blank" class="_">1.31</a>
 である必要があります。
@@ -214,16 +214,23 @@ https://www.github.com/docker/cli
 <pre><code class="language-none">docker service rollback [OPTIONS] SERVICE
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>Roll back a specified service to its previous version from the swarm.</p>
+
+<blockquote>
+  <p><strong>Note</strong>: This is a cluster management command, and must be executed on a swarm
+manager node. To learn about managers and workers, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/">Swarm mode
+section</a> in the documentation.</p>
+</blockquote>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -245,7 +252,7 @@ https://www.github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--detach , -d</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.29/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.31 API reference (in a new window)">API 1.29 以上</span></a><br />Exit immediately instead of waiting for the service to converge</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.29/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.31 API reference (in a new window)">API 1.29+</span></a><br />Exit immediately instead of waiting for the service to converge</td>
   </tr>
 
 
@@ -272,6 +279,53 @@ https://www.github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<h3 id="roll-back-to-the-previous-version-of-a-service">Roll back to the previous version of a service</h3>
+
+<p>Use the <code class="highlighter-rouge">docker service rollback</code> command to roll back to the previous version
+of a service. After executing this command, the service is reverted to the
+configuration that was in place before the most recent <code class="highlighter-rouge">docker service update</code>
+command.</p>
+
+<p>The following example creates a service with a single replica, updates the
+service to use three replicas, and then rolls back the service to the
+previous version, having one replica.</p>
+
+<p>Create a service with a single replica:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> my-service <span class="nt">-p</span> 8080:80 nginx:alpine
+</code></pre></div></div>
+
+<p>Confirm that the service is running with a single replica:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
+
+</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
+</code></pre></div></div>
+
+<p>Update the service to use three replicas:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--replicas</span><span class="o">=</span>3 my-service
+
+<span class="nv">$ </span>docker service <span class="nb">ls
+
+</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+xbw728mf6q0d        my-service          replicated          3/3                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
+</code></pre></div></div>
+
+<p>Now roll back the service to its previous version, and confirm it is
+running a single replica again:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service rollback my-service
+
+<span class="nv">$ </span>docker service <span class="nb">ls
+
+</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
+</code></pre></div></div>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -294,10 +348,6 @@ https://www.github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -360,63 +410,6 @@ https://www.github.com/docker/cli
 
 </tbody>
 </table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>Roll back a specified service to its previous version from the swarm.</p>
-
-<blockquote>
-  <p><strong>Note</strong>: This is a cluster management command, and must be executed on a swarm
-manager node. To learn about managers and workers, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/">Swarm mode
-section</a> in the documentation.</p>
-</blockquote>
-
-<h2 id="examples">利用例</h2>
-
-<h3 id="roll-back-to-the-previous-version-of-a-service">Roll back to the previous version of a service</h3>
-
-<p>Use the <code class="highlighter-rouge">docker service rollback</code> command to roll back to the previous version
-of a service. After executing this command, the service is reverted to the
-configuration that was in place before the most recent <code class="highlighter-rouge">docker service update</code>
-command.</p>
-
-<p>The following example creates a service with a single replica, updates the
-service to use three replicas, and then rolls back the service to the
-previous version, having one replica.</p>
-
-<p>Create a service with a single replica:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> my-service <span class="nt">-p</span> 8080:80 nginx:alpine
-</code></pre></div></div>
-
-<p>Confirm that the service is running with a single replica:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
-</code></pre></div></div>
-
-<p>Update the service to use three replicas:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--replicas</span><span class="o">=</span>3 my-service
-
-<span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-xbw728mf6q0d        my-service          replicated          3/3                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
-</code></pre></div></div>
-
-<p>Now roll back the service to its previous version, and confirm it is
-running a single replica again:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service rollback my-service
-
-<span class="nv">$ </span>docker service <span class="nb">ls
-
-</span>ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        <span class="k">*</span>:8080-&gt;80/tcp
-</code></pre></div></div>
 
 
 							<!-- tags -->
@@ -515,15 +508,15 @@ xbw728mf6q0d        my-service          replicated          1/1                 
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#roll-back-to-the-previous-version-of-a-service" class="nomunge">Roll back to the previous version of a service</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#parent-command" class="nomunge">上位コマンド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/service_rollback.md#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>
 
 

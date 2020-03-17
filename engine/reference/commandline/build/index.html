@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker build"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Build an image from a Dockerfile 利用方法 docker build [OPTIONS] PATH | URL | - オプション 名前／省略形 デフォルト 説明 --add-host Add a custom host-to-IP mapping (host:ip) --build-arg Set build-time..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Build an image from a Dockerfile 利用方法 docker build [OPTIONS] PATH | URL | - Extended description The docker build command builds Docker images from a Dockerfile and a..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -205,16 +205,156 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker build [OPTIONS] PATH | URL | -
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>The <code class="highlighter-rouge">docker build</code> command builds Docker images from a Dockerfile and a
+“context”. A build’s context is the set of files located in the specified
+<code class="highlighter-rouge">PATH</code> or <code class="highlighter-rouge">URL</code>. The build process can refer to any of the files in the
+context. For example, your build can use a <a href="../builder.md#copy"><em>COPY</em></a>
+instruction to reference a file in the context.</p>
+
+<p>The <code class="highlighter-rouge">URL</code> parameter can refer to three kinds of resources: Git repositories,
+pre-packaged tarball contexts and plain text files.</p>
+
+<h3 id="git-repositories">Git repositories</h3>
+
+<p>When the <code class="highlighter-rouge">URL</code> parameter points to the location of a Git repository, the
+repository acts as the build context. The system recursively fetches the
+repository and its submodules. The commit history is not preserved. A
+repository is first pulled into a temporary directory on your local host. After
+that succeeds, the directory is sent to the Docker daemon as the context.
+Local copy gives you the ability to access private repositories using local
+user credentials, VPN’s, and so forth.</p>
+
+<blockquote>
+  <p><strong>Note:</strong>
+If the <code class="highlighter-rouge">URL</code> parameter contains a fragment the system will recursively clone
+the repository and its submodules using a <code class="highlighter-rouge">git clone --recursive</code> command.</p>
+</blockquote>
+
+<p>Git URLs accept context configuration in their fragment section, separated by a
+colon <code class="highlighter-rouge">:</code>.  The first part represents the reference that Git will check out,
+and can be either a branch, a tag, or a remote reference. The second part
+represents a subdirectory inside the repository that will be used as a build
+context.</p>
+
+<p>For example, run this command to use a directory called <code class="highlighter-rouge">docker</code> in the branch
+<code class="highlighter-rouge">container</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build https://github.com/docker/rootfs.git#container:docker
+</code></pre></div></div>
+
+<p>The following table represents all the valid suffixes with their build
+contexts:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Build Syntax Suffix</th>
+      <th>Commit Used</th>
+      <th>Build Context Used</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git</code></td>
+      <td><code class="highlighter-rouge">refs/heads/master</code></td>
+      <td><code class="highlighter-rouge">/</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git#mytag</code></td>
+      <td><code class="highlighter-rouge">refs/tags/mytag</code></td>
+      <td><code class="highlighter-rouge">/</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git#mybranch</code></td>
+      <td><code class="highlighter-rouge">refs/heads/mybranch</code></td>
+      <td><code class="highlighter-rouge">/</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git#pull/42/head</code></td>
+      <td><code class="highlighter-rouge">refs/pull/42/head</code></td>
+      <td><code class="highlighter-rouge">/</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git#:myfolder</code></td>
+      <td><code class="highlighter-rouge">refs/heads/master</code></td>
+      <td><code class="highlighter-rouge">/myfolder</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git#master:myfolder</code></td>
+      <td><code class="highlighter-rouge">refs/heads/master</code></td>
+      <td><code class="highlighter-rouge">/myfolder</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git#mytag:myfolder</code></td>
+      <td><code class="highlighter-rouge">refs/tags/mytag</code></td>
+      <td><code class="highlighter-rouge">/myfolder</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">myrepo.git#mybranch:myfolder</code></td>
+      <td><code class="highlighter-rouge">refs/heads/mybranch</code></td>
+      <td><code class="highlighter-rouge">/myfolder</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="tarball-contexts">Tarball contexts</h3>
+
+<p>If you pass an URL to a remote tarball, the URL itself is sent to the daemon:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build http://server/context.tar.gz
+</code></pre></div></div>
+
+<p>The download operation will be performed on the host the Docker daemon is
+running on, which is not necessarily the same host from which the build command
+is being issued. The Docker daemon will fetch <code class="highlighter-rouge">context.tar.gz</code> and use it as the
+build context. Tarball contexts must be tar archives conforming to the standard
+<code class="highlighter-rouge">tar</code> UNIX format and can be compressed with any one of the ‘xz’, ‘bzip2’,
+‘gzip’ or ‘identity’ (no compression) formats.</p>
+
+<h3 id="text-files">Text files</h3>
+
+<p>Instead of specifying a context, you can pass a single <code class="highlighter-rouge">Dockerfile</code> in the
+<code class="highlighter-rouge">URL</code> or pipe the file in via <code class="highlighter-rouge">STDIN</code>. To pipe a <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">STDIN</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build - &lt; Dockerfile
+</code></pre></div></div>
+
+<p>With Powershell on Windows, you can run:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Get-Content </span>Dockerfile | docker build -
+</code></pre></div></div>
+
+<p>If you use <code class="highlighter-rouge">STDIN</code> or specify a <code class="highlighter-rouge">URL</code> pointing to a plain text file, the system
+places the contents into a file called <code class="highlighter-rouge">Dockerfile</code>, and any <code class="highlighter-rouge">-f</code>, <code class="highlighter-rouge">--file</code>
+option is ignored. In this scenario, there is no context.</p>
+
+<p>By default the <code class="highlighter-rouge">docker build</code> command will look for a <code class="highlighter-rouge">Dockerfile</code> at the root
+of the build context. The <code class="highlighter-rouge">-f</code>, <code class="highlighter-rouge">--file</code>, option lets you specify the path to
+an alternative file to use instead. This is useful in cases where the same set
+of files are used for multiple builds. The path must be to a file within the
+build context. If a relative path is specified then it is interpreted as
+relative to the root of the context.</p>
+
+<p>In most cases, it’s best to put each Dockerfile in an empty directory. Then,
+add to that directory only the files needed for building the Dockerfile. To
+increase the build’s performance, you can exclude files and directories by
+adding a <code class="highlighter-rouge">.dockerignore</code> file to that directory as well. For information on
+creating one, see the <a href="../builder.md#dockerignore-file">.dockerignore file</a>.</p>
+
+<p>If the Docker client loses connection to the daemon, the build is canceled.
+This happens if you interrupt the Docker client with <code class="highlighter-rouge">CTRL-c</code> or if the Docker
+client is killed for any reason. If the build initiated a pull which is still
+running at the time the build is cancelled, the pull is cancelled as well.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -560,7 +700,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--network</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.25 以上</span></a><br />Set the networking mode for the RUN instructions during build</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.25+</span></a><br />Set the networking mode for the RUN instructions during build</td>
   </tr>
 
 
@@ -596,7 +736,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--output , -o</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.40/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.40 以上</span></a><br />Output destination (format: type=local,dest=path)</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.40/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.40+</span></a><br />Output destination (format: type=local,dest=path)</td>
   </tr>
 
 
@@ -614,7 +754,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--platform</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.32/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.32 以上</span></a><br />Set platform if server is multi-platform capable</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.38/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.38+</span></a><br />Set platform if server is multi-platform capable</td>
   </tr>
 
 
@@ -704,7 +844,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--secret</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.39 以上</span></a><br />Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.39+</span></a><br />Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret</td>
   </tr>
 
 
@@ -758,7 +898,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--squash</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.25 以上</span></a><br />Squash newly built layers into a single new layer</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.25+</span></a><br />Squash newly built layers into a single new layer</td>
   </tr>
 
 
@@ -776,7 +916,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--ssh</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.39 以上</span></a><br />SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format: default|<id>[=<socket>|<key>[,<key>]])</key></key></socket></id></td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.39+</span></a><br />SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format: default|<id>[=<socket>|<key>[,<key>]])</key></key></socket></id></td>
   </tr>
 
 
@@ -794,7 +934,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--stream</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.31/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.31 以上</span></a><br />Stream attaches to server to negotiate build context</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/dockerd.md#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.31/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API reference (in a new window)">API 1.31+</span></a><br />Stream attaches to server to negotiate build context</td>
   </tr>
 
 
@@ -857,167 +997,7 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
-<h2 id="parent-command">上位コマンド</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>コマンド</th>
-      <th>説明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="docker">docker</a></td>
-      <td>Docker CLI のベースとなるコマンド。</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>The <code class="highlighter-rouge">docker build</code> command builds Docker images from a Dockerfile and a
-“context”. A build’s context is the set of files located in the specified
-<code class="highlighter-rouge">PATH</code> or <code class="highlighter-rouge">URL</code>. The build process can refer to any of the files in the
-context. For example, your build can use a <a href="../builder.md#copy"><em>COPY</em></a>
-instruction to reference a file in the context.</p>
-
-<p>The <code class="highlighter-rouge">URL</code> parameter can refer to three kinds of resources: Git repositories,
-pre-packaged tarball contexts and plain text files.</p>
-
-<h3 id="git-repositories">Git repositories</h3>
-
-<p>When the <code class="highlighter-rouge">URL</code> parameter points to the location of a Git repository, the
-repository acts as the build context. The system recursively fetches the
-repository and its submodules. The commit history is not preserved. A
-repository is first pulled into a temporary directory on your local host. After
-that succeeds, the directory is sent to the Docker daemon as the context.
-Local copy gives you the ability to access private repositories using local
-user credentials, VPN’s, and so forth.</p>
-
-<blockquote>
-  <p><strong>Note:</strong>
-If the <code class="highlighter-rouge">URL</code> parameter contains a fragment the system will recursively clone
-the repository and its submodules using a <code class="highlighter-rouge">git clone --recursive</code> command.</p>
-</blockquote>
-
-<p>Git URLs accept context configuration in their fragment section, separated by a
-colon <code class="highlighter-rouge">:</code>.  The first part represents the reference that Git will check out,
-and can be either a branch, a tag, or a remote reference. The second part
-represents a subdirectory inside the repository that will be used as a build
-context.</p>
-
-<p>For example, run this command to use a directory called <code class="highlighter-rouge">docker</code> in the branch
-<code class="highlighter-rouge">container</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build https://github.com/docker/rootfs.git#container:docker
-</code></pre></div></div>
-
-<p>The following table represents all the valid suffixes with their build
-contexts:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Build Syntax Suffix</th>
-      <th>Commit Used</th>
-      <th>Build Context Used</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git</code></td>
-      <td><code class="highlighter-rouge">refs/heads/master</code></td>
-      <td><code class="highlighter-rouge">/</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git#mytag</code></td>
-      <td><code class="highlighter-rouge">refs/tags/mytag</code></td>
-      <td><code class="highlighter-rouge">/</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git#mybranch</code></td>
-      <td><code class="highlighter-rouge">refs/heads/mybranch</code></td>
-      <td><code class="highlighter-rouge">/</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git#pull/42/head</code></td>
-      <td><code class="highlighter-rouge">refs/pull/42/head</code></td>
-      <td><code class="highlighter-rouge">/</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git#:myfolder</code></td>
-      <td><code class="highlighter-rouge">refs/heads/master</code></td>
-      <td><code class="highlighter-rouge">/myfolder</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git#master:myfolder</code></td>
-      <td><code class="highlighter-rouge">refs/heads/master</code></td>
-      <td><code class="highlighter-rouge">/myfolder</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git#mytag:myfolder</code></td>
-      <td><code class="highlighter-rouge">refs/tags/mytag</code></td>
-      <td><code class="highlighter-rouge">/myfolder</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">myrepo.git#mybranch:myfolder</code></td>
-      <td><code class="highlighter-rouge">refs/heads/mybranch</code></td>
-      <td><code class="highlighter-rouge">/myfolder</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="tarball-contexts">Tarball contexts</h3>
-
-<p>If you pass an URL to a remote tarball, the URL itself is sent to the daemon:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build http://server/context.tar.gz
-</code></pre></div></div>
-
-<p>The download operation will be performed on the host the Docker daemon is
-running on, which is not necessarily the same host from which the build command
-is being issued. The Docker daemon will fetch <code class="highlighter-rouge">context.tar.gz</code> and use it as the
-build context. Tarball contexts must be tar archives conforming to the standard
-<code class="highlighter-rouge">tar</code> UNIX format and can be compressed with any one of the ‘xz’, ‘bzip2’,
-‘gzip’ or ‘identity’ (no compression) formats.</p>
-
-<h3 id="text-files">Text files</h3>
-
-<p>Instead of specifying a context, you can pass a single <code class="highlighter-rouge">Dockerfile</code> in the
-<code class="highlighter-rouge">URL</code> or pipe the file in via <code class="highlighter-rouge">STDIN</code>. To pipe a <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">STDIN</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build - &lt; Dockerfile
-</code></pre></div></div>
-
-<p>With Powershell on Windows, you can run:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Get-Content </span>Dockerfile | docker build -
-</code></pre></div></div>
-
-<p>If you use <code class="highlighter-rouge">STDIN</code> or specify a <code class="highlighter-rouge">URL</code> pointing to a plain text file, the system
-places the contents into a file called <code class="highlighter-rouge">Dockerfile</code>, and any <code class="highlighter-rouge">-f</code>, <code class="highlighter-rouge">--file</code>
-option is ignored. In this scenario, there is no context.</p>
-
-<p>By default the <code class="highlighter-rouge">docker build</code> command will look for a <code class="highlighter-rouge">Dockerfile</code> at the root
-of the build context. The <code class="highlighter-rouge">-f</code>, <code class="highlighter-rouge">--file</code>, option lets you specify the path to
-an alternative file to use instead. This is useful in cases where the same set
-of files are used for multiple builds. The path must be to a file within the
-build context. If a relative path is specified then it is interpreted as
-relative to the root of the context.</p>
-
-<p>In most cases, it’s best to put each Dockerfile in an empty directory. Then,
-add to that directory only the files needed for building the Dockerfile. To
-increase the build’s performance, you can exclude files and directories by
-adding a <code class="highlighter-rouge">.dockerignore</code> file to that directory as well. For information on
-creating one, see the <a href="../builder.md#dockerignore-file">.dockerignore file</a>.</p>
-
-<p>If the Docker client loses connection to the daemon, the build is canceled.
-This happens if you interrupt the Docker client with <code class="highlighter-rouge">CTRL-c</code> or if the Docker
-client is killed for any reason. If the build initiated a pull which is still
-running at the time the build is cancelled, the pull is cancelled as well.</p>
-
-<h2 id="examples">利用例</h2>
+<h2 id="examples">Examples</h2>
 
 <h3 id="build-with-path">Build with PATH</h3>
 
@@ -1567,6 +1547,23 @@ RUN rm /remove_me
 
 <p>Test the image, check for <code class="highlighter-rouge">/remove_me</code> being gone, make sure <code class="highlighter-rouge">hello\nworld</code> is in <code class="highlighter-rouge">/hello</code>, make sure the <code class="highlighter-rouge">HELLO</code> envvar’s value is <code class="highlighter-rouge">world</code>.</p>
 
+<h2 id="parent-command">上位コマンド</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>コマンド</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="docker">docker</a></td>
+      <td>Docker CLI のベースとなるコマンド。</td>
+    </tr>
+  </tbody>
+</table>
+
 
 							<!-- tags -->
 							
@@ -1664,16 +1661,15 @@ RUN rm /remove_me
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#usage" class="nomunge">利用方法</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#extended-description" class="nomunge">追加説明</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#extended-description" class="nomunge">Extended description</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#git-repositories" class="nomunge">Git repositories</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#tarball-contexts" class="nomunge">Tarball contexts</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#text-files" class="nomunge">Text files</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#options" class="nomunge">オプション</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#build-with-path" class="nomunge">Build with PATH</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#build-with-url" class="nomunge">Build with URL</a></li>
@@ -1693,6 +1689,7 @@ RUN rm /remove_me
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#squash-an-images-layers---squash-experimental" class="nomunge">Squash an image’s layers (--squash) (experimental)</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/build.md#parent-command" class="nomunge">上位コマンド</a></li>
 </ul>
 
 

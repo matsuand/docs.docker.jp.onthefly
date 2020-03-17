@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker plugin upgrade"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Upgrade an existing plugin API 1.26 以上  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.26 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 利用方法 docker plugin upgrade [OPTIONS] PLUGIN [REMOTE] オプション 名前／省略形 デフォルト 説明..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Upgrade an existing plugin API 1.26+  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.26 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 利用方法 docker plugin upgrade [OPTIONS] PLUGIN [REMOTE] Extended description Upgrades an existing..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -200,7 +200,7 @@ https://github.com/docker/cli
 
 <p>Upgrade an existing plugin</p>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.26/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.26 API reference (in a new window)">API 1.26 以上</span></a> 
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.26/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.26 API reference (in a new window)">API 1.26+</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.26/" target="_blank" class="_">1.26</a>
 である必要があります。
@@ -211,16 +211,20 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker plugin upgrade [OPTIONS] PLUGIN [REMOTE]
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>Upgrades an existing plugin to the specified remote plugin image. If no remote
+is specified, Docker will re-pull the current image and use the updated version.
+All existing references to the plugin will continue to work.
+The plugin must be disabled before running the upgrade.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -287,6 +291,58 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<p>The following example installs <code class="highlighter-rouge">vieus/sshfs</code> plugin, uses it to create and use
+a volume, then upgrades the plugin.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin install vieux/sshfs <span class="nv">DEBUG</span><span class="o">=</span>1
+
+Plugin <span class="s2">"vieux/sshfs:next"</span> is requesting the following privileges:
+ - network: <span class="o">[</span>host]
+ - device: <span class="o">[</span>/dev/fuse]
+ - capabilities: <span class="o">[</span>CAP_SYS_ADMIN]
+Do you grant the above permissions? <span class="o">[</span>y/N] y
+vieux/sshfs:next
+
+<span class="nv">$ </span>docker volume create <span class="nt">-d</span> vieux/sshfs:next <span class="nt">-o</span> <span class="nv">sshcmd</span><span class="o">=</span>root@1.2.3.4:/tmp/shared <span class="nt">-o</span> <span class="nv">password</span><span class="o">=</span>XXX sshvolume
+
+sshvolume
+
+<span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">-v</span> sshvolume:/data alpine sh <span class="nt">-c</span> <span class="s2">"touch /data/hello"</span>
+
+<span class="nv">$ </span>docker plugin disable <span class="nt">-f</span> vieux/sshfs:next
+
+viex/sshfs:next
+
+<span class="c"># Here docker volume ls doesn't show 'sshfsvolume', since the plugin is disabled</span>
+<span class="nv">$ </span>docker volume <span class="nb">ls
+
+</span>DRIVER              VOLUME NAME
+
+<span class="nv">$ </span>docker plugin upgrade vieux/sshfs:next vieux/sshfs:next
+
+Plugin <span class="s2">"vieux/sshfs:next"</span> is requesting the following privileges:
+ - network: <span class="o">[</span>host]
+ - device: <span class="o">[</span>/dev/fuse]
+ - capabilities: <span class="o">[</span>CAP_SYS_ADMIN]
+Do you grant the above permissions? <span class="o">[</span>y/N] y
+Upgrade plugin vieux/sshfs:next to vieux/sshfs:next
+
+<span class="nv">$ </span>docker plugin <span class="nb">enable </span>vieux/sshfs:next
+
+viex/sshfs:next
+
+<span class="nv">$ </span>docker volume <span class="nb">ls
+
+</span>DRIVER              VOLUME NAME
+viuex/sshfs:next    sshvolume
+
+<span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">-v</span> sshvolume:/data alpine sh <span class="nt">-c</span> <span class="s2">"ls /data"</span>
+
+hello
+</code></pre></div></div>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -309,10 +365,6 @@ https://github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -381,65 +433,6 @@ https://github.com/docker/cli
 
 </tbody>
 </table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>Upgrades an existing plugin to the specified remote plugin image. If no remote
-is specified, Docker will re-pull the current image and use the updated version.
-All existing references to the plugin will continue to work.
-The plugin must be disabled before running the upgrade.</p>
-
-<h2 id="examples">利用例</h2>
-
-<p>The following example installs <code class="highlighter-rouge">vieus/sshfs</code> plugin, uses it to create and use
-a volume, then upgrades the plugin.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin install vieux/sshfs <span class="nv">DEBUG</span><span class="o">=</span>1
-
-Plugin <span class="s2">"vieux/sshfs:next"</span> is requesting the following privileges:
- - network: <span class="o">[</span>host]
- - device: <span class="o">[</span>/dev/fuse]
- - capabilities: <span class="o">[</span>CAP_SYS_ADMIN]
-Do you grant the above permissions? <span class="o">[</span>y/N] y
-vieux/sshfs:next
-
-<span class="nv">$ </span>docker volume create <span class="nt">-d</span> vieux/sshfs:next <span class="nt">-o</span> <span class="nv">sshcmd</span><span class="o">=</span>root@1.2.3.4:/tmp/shared <span class="nt">-o</span> <span class="nv">password</span><span class="o">=</span>XXX sshvolume
-
-sshvolume
-
-<span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">-v</span> sshvolume:/data alpine sh <span class="nt">-c</span> <span class="s2">"touch /data/hello"</span>
-
-<span class="nv">$ </span>docker plugin disable <span class="nt">-f</span> vieux/sshfs:next
-
-viex/sshfs:next
-
-<span class="c"># Here docker volume ls doesn't show 'sshfsvolume', since the plugin is disabled</span>
-<span class="nv">$ </span>docker volume <span class="nb">ls
-
-</span>DRIVER              VOLUME NAME
-
-<span class="nv">$ </span>docker plugin upgrade vieux/sshfs:next vieux/sshfs:next
-
-Plugin <span class="s2">"vieux/sshfs:next"</span> is requesting the following privileges:
- - network: <span class="o">[</span>host]
- - device: <span class="o">[</span>/dev/fuse]
- - capabilities: <span class="o">[</span>CAP_SYS_ADMIN]
-Do you grant the above permissions? <span class="o">[</span>y/N] y
-Upgrade plugin vieux/sshfs:next to vieux/sshfs:next
-
-<span class="nv">$ </span>docker plugin <span class="nb">enable </span>vieux/sshfs:next
-
-viex/sshfs:next
-
-<span class="nv">$ </span>docker volume <span class="nb">ls
-
-</span>DRIVER              VOLUME NAME
-viuex/sshfs:next    sshvolume
-
-<span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">-v</span> sshvolume:/data alpine sh <span class="nt">-c</span> <span class="s2">"ls /data"</span>
-
-hello
-</code></pre></div></div>
 
 
 							<!-- tags -->
@@ -538,11 +531,11 @@ hello
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#options" class="nomunge">オプション</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#examples" class="nomunge">Examples</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#parent-command" class="nomunge">上位コマンド</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_upgrade.md#examples" class="nomunge">利用例</a></li>
 </ul>
 
 

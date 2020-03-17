@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker trust signer add"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Add a signer 利用方法 docker trust signer add OPTIONS NAME REPOSITORY [REPOSITORY...] オプション 名前／省略形 デフォルト 説明 --key Path to the signer’s public key file 上位コマンド コマンド 説明 docker trust..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Add a signer 利用方法 docker trust signer add OPTIONS NAME REPOSITORY [REPOSITORY...] Extended description docker trust signer add adds signers to signed repositories. For example uses of this command,..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -206,16 +206,17 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker trust signer add OPTIONS NAME REPOSITORY [REPOSITORY...]
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p><code class="highlighter-rouge">docker trust signer add</code> adds signers to signed repositories.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -246,6 +247,53 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<h3 id="add-a-signer-to-a-repo">Add a signer to a repo</h3>
+
+<p>To add a new signer, <code class="highlighter-rouge">alice</code>, to this repository:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+
+No signatures <span class="k">for </span>example/trust-demo
+
+
+List of signers and their keys:
+
+SIGNER              KEYS
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
+<p>Add <code class="highlighter-rouge">alice</code> with <code class="highlighter-rouge">docker trust signer add</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add alice example/trust-demo <span class="nt">--key</span> alice.crt
+  Adding signer <span class="s2">"alice"</span> to example/trust-demo...
+  Enter passphrase <span class="k">for </span>repository key with ID 642692c:
+Successfully added signer: alice to example/trust-demo
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">docker trust view</code> now lists <code class="highlighter-rouge">alice</code> as a valid signer:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust view example/trust-demo
+
+No signatures <span class="k">for </span>example/trust-demo
+
+
+List of signers and their keys:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys <span class="k">for </span>example/trust-demo:
+Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre></div></div>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -268,10 +316,6 @@ https://github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -390,7 +434,13 @@ https://github.com/docker/cli
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#options" class="nomunge">オプション</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#examples" class="nomunge">Examples</a>
+    <ul>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#add-a-signer-to-a-repo" class="nomunge">Add a signer to a repo</a></li>
+    </ul>
+  </li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#parent-command" class="nomunge">上位コマンド</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/trust_signer_add.md#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>

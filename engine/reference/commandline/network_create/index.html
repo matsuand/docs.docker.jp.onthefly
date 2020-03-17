@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker network create"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 ネットワークの生成 API 1.21 以上  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.21 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 利用方法 docker network create [OPTIONS] NETWORK オプション 名前／省略形 デフォルト 説明 --attachable API 1.25 以上Enable..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 ネットワークの生成 API 1.21+  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.21 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 利用方法 docker network create [OPTIONS] NETWORK Extended description 新たなネットワークを生成します。 The DRIVER accepts bridge or overlay..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -200,7 +200,7 @@ https://github.com/docker/cli
 
 <p>ネットワークの生成</p>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.21/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.21 API reference (in a new window)">API 1.21 以上</span></a> 
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.21/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.21 API reference (in a new window)">API 1.21+</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.21/" target="_blank" class="_">1.21</a>
 である必要があります。
@@ -211,16 +211,78 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker network create [OPTIONS] NETWORK
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>新たなネットワークを生成します。
+The <code class="highlighter-rouge">DRIVER</code> accepts <code class="highlighter-rouge">bridge</code> or <code class="highlighter-rouge">overlay</code> which are the
+built-in network drivers. If you have installed a third party or your own custom
+network driver you can specify that <code class="highlighter-rouge">DRIVER</code> here also. If you don’t specify the
+<code class="highlighter-rouge">--driver</code> option, the command automatically creates a <code class="highlighter-rouge">bridge</code> network for you.
+When you install Docker Engine it creates a <code class="highlighter-rouge">bridge</code> network automatically. This
+network corresponds to the <code class="highlighter-rouge">docker0</code> bridge that Engine has traditionally relied
+on. When you launch a new container with  <code class="highlighter-rouge">docker run</code> it automatically connects to
+this bridge network. You cannot remove this default bridge network, but you can
+create new ones using the <code class="highlighter-rouge">network create</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> bridge my-bridge-network
+</code></pre></div></div>
+
+<p>Bridge networks are isolated networks on a single Engine installation. If you
+want to create a network that spans multiple Docker hosts each running an
+Engine, you must create an <code class="highlighter-rouge">overlay</code> network. Unlike <code class="highlighter-rouge">bridge</code> networks, overlay
+networks require some pre-existing conditions before you can create one. These
+conditions are:</p>
+
+<ul>
+  <li>Access to a key-value store. Engine supports Consul, Etcd, and ZooKeeper (Distributed store) key-value stores.</li>
+  <li>A cluster of hosts with connectivity to the key-value store.</li>
+  <li>A properly configured Engine <code class="highlighter-rouge">daemon</code> on each host in the cluster.</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">dockerd</code> options that support the <code class="highlighter-rouge">overlay</code> network are:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--cluster-store</code></li>
+  <li><code class="highlighter-rouge">--cluster-store-opt</code></li>
+  <li><code class="highlighter-rouge">--cluster-advertise</code></li>
+</ul>
+
+<p>To read more about these options and how to configure them, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/get-started-overlay">“<em>Get started
+with multi-host network</em>”</a>.</p>
+
+<p>While not required, it is a good idea to install Docker Swarm to
+manage the cluster that makes up your network. Swarm provides sophisticated
+discovery and server management tools that can assist your implementation.</p>
+
+<p>Once you have prepared the <code class="highlighter-rouge">overlay</code> network prerequisites you simply choose a
+Docker host in the cluster and issue the following to create the network:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay my-multihost-network
+</code></pre></div></div>
+
+<p>Network names must be unique. The Docker daemon attempts to identify naming
+conflicts but this is not guaranteed. It is the user’s responsibility to avoid
+name conflicts.</p>
+
+<h3 id="overlay-network-limitations">Overlay network limitations</h3>
+
+<p>You should create overlay networks with <code class="highlighter-rouge">/24</code> blocks (the default), which limits
+you to 256 IP addresses, when you create networks using the default VIP-based
+endpoint-mode. This recommendation addresses
+<a href="https://github.com/moby/moby/issues/30820">limitations with swarm mode</a>. If you
+need more than 256 IP addresses, do not increase the IP block size. You can
+either use <code class="highlighter-rouge">dnsrr</code> endpoint mode with an external load balancer, or use multiple
+smaller overlay networks. See
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/networking/#configure-service-discovery">Configure service discovery</a>
+for more information about different endpoint modes.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -242,7 +304,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--attachable</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.25 以上</span></a><br />Enable manual container attachment</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.25+</span></a><br />Enable manual container attachment</td>
   </tr>
 
 
@@ -278,7 +340,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--config-from</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.30/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.30 以上</span></a><br />The network from which copying the configuration</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.30/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.30+</span></a><br />The network from which copying the configuration</td>
   </tr>
 
 
@@ -296,7 +358,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--config-only</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.30/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.30 以上</span></a><br />Create a configuration only network</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.30/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.30+</span></a><br />Create a configuration only network</td>
   </tr>
 
 
@@ -350,7 +412,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--ingress</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.29/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.29 以上</span></a><br />Create swarm routing-mesh network</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.29/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.29+</span></a><br />Create swarm routing-mesh network</td>
   </tr>
 
 
@@ -494,7 +556,7 @@ https://github.com/docker/cli
   <tr>
     <td><code class="highlighter-rouge">--scope</code></td>
     <td></td>
-    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.30/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.30 以上</span></a><br />Control the network’s scope</td>
+    <td><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.30/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the 1.21 API reference (in a new window)">API 1.30+</span></a><br />Control the network’s scope</td>
   </tr>
 
 
@@ -521,149 +583,7 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
-<h2 id="parent-command">上位コマンド</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>コマンド</th>
-      <th>説明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="network">docker network</a></td>
-      <td>Manage networks</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="related-commands">関連コマンド</h2>
-
-<table>
-<thead>
-  <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
-    <td>コマンド</td>
-    <td>説明</td>
-  </tr>
-</thead>
-<tbody>
-
-  
-  <tr>
-    <td><a href="network_connect/">docker network connect</a></td>
-    <td>Connect a container to a network</td>
-  </tr>
-
-  
-  <tr>
-    <td><a href="network_create/">docker network create</a></td>
-    <td>ネットワークの生成</td>
-  </tr>
-
-  
-  <tr>
-    <td><a href="network_disconnect/">docker network disconnect</a></td>
-    <td>Disconnect a container from a network</td>
-  </tr>
-
-  
-  <tr>
-    <td><a href="network_inspect/">docker network inspect</a></td>
-    <td>Display detailed information on one or more networks</td>
-  </tr>
-
-  
-  <tr>
-    <td><a href="network_ls/">docker network ls</a></td>
-    <td>List networks</td>
-  </tr>
-
-  
-  <tr>
-    <td><a href="network_prune/">docker network prune</a></td>
-    <td>Remove all unused networks</td>
-  </tr>
-
-  
-  <tr>
-    <td><a href="network_rm/">docker network rm</a></td>
-    <td>Remove one or more networks</td>
-  </tr>
-
-</tbody>
-</table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>新たなネットワークを生成します。
-The <code class="highlighter-rouge">DRIVER</code> accepts <code class="highlighter-rouge">bridge</code> or <code class="highlighter-rouge">overlay</code> which are the
-built-in network drivers. If you have installed a third party or your own custom
-network driver you can specify that <code class="highlighter-rouge">DRIVER</code> here also. If you don’t specify the
-<code class="highlighter-rouge">--driver</code> option, the command automatically creates a <code class="highlighter-rouge">bridge</code> network for you.
-When you install Docker Engine it creates a <code class="highlighter-rouge">bridge</code> network automatically. This
-network corresponds to the <code class="highlighter-rouge">docker0</code> bridge that Engine has traditionally relied
-on. When you launch a new container with  <code class="highlighter-rouge">docker run</code> it automatically connects to
-this bridge network. You cannot remove this default bridge network, but you can
-create new ones using the <code class="highlighter-rouge">network create</code> command.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> bridge my-bridge-network
-</code></pre></div></div>
-
-<p>Bridge networks are isolated networks on a single Engine installation. If you
-want to create a network that spans multiple Docker hosts each running an
-Engine, you must create an <code class="highlighter-rouge">overlay</code> network. Unlike <code class="highlighter-rouge">bridge</code> networks, overlay
-networks require some pre-existing conditions before you can create one. These
-conditions are:</p>
-
-<ul>
-  <li>Access to a key-value store. Engine supports Consul, Etcd, and ZooKeeper (Distributed store) key-value stores.</li>
-  <li>A cluster of hosts with connectivity to the key-value store.</li>
-  <li>A properly configured Engine <code class="highlighter-rouge">daemon</code> on each host in the cluster.</li>
-</ul>
-
-<p>The <code class="highlighter-rouge">dockerd</code> options that support the <code class="highlighter-rouge">overlay</code> network are:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">--cluster-store</code></li>
-  <li><code class="highlighter-rouge">--cluster-store-opt</code></li>
-  <li><code class="highlighter-rouge">--cluster-advertise</code></li>
-</ul>
-
-<p>To read more about these options and how to configure them, see <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/networking/get-started-overlay">“<em>Get started
-with multi-host network</em>”</a>.</p>
-
-<p>While not required, it is a good idea to install Docker Swarm to
-manage the cluster that makes up your network. Swarm provides sophisticated
-discovery and server management tools that can assist your implementation.</p>
-
-<p>Once you have prepared the <code class="highlighter-rouge">overlay</code> network prerequisites you simply choose a
-Docker host in the cluster and issue the following to create the network:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay my-multihost-network
-</code></pre></div></div>
-
-<p>Network names must be unique. The Docker daemon attempts to identify naming
-conflicts but this is not guaranteed. It is the user’s responsibility to avoid
-name conflicts.</p>
-
-<h3 id="overlay-network-limitations">Overlay network limitations</h3>
-
-<p>You should create overlay networks with <code class="highlighter-rouge">/24</code> blocks (the default), which limits
-you to 256 IP addresses, when you create networks using the default VIP-based
-endpoint-mode. This recommendation addresses
-<a href="https://github.com/moby/moby/issues/30820">limitations with swarm mode</a>. If you
-need more than 256 IP addresses, do not increase the IP block size. You can
-either use <code class="highlighter-rouge">dnsrr</code> endpoint mode with an external load balancer, or use multiple
-smaller overlay networks. See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/networking/#configure-service-discovery">Configure service discovery</a>
-for more information about different endpoint modes.</p>
-
-<h2 id="examples">利用例</h2>
+<h2 id="examples">Examples</h2>
 
 <h3 id="connect-containers">Connect containers</h3>
 
@@ -840,6 +760,79 @@ is also available when creating the ingress network, besides the <code class="hi
   my-ingress-network
 </code></pre></div></div>
 
+<h2 id="parent-command">上位コマンド</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>コマンド</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="network">docker network</a></td>
+      <td>Manage networks</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="related-commands">関連コマンド</h2>
+
+<table>
+<thead>
+  <tr>
+    <td>コマンド</td>
+    <td>説明</td>
+  </tr>
+</thead>
+<tbody>
+
+  
+  <tr>
+    <td><a href="network_connect/">docker network connect</a></td>
+    <td>Connect a container to a network</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="network_create/">docker network create</a></td>
+    <td>ネットワークの生成</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="network_disconnect/">docker network disconnect</a></td>
+    <td>Disconnect a container from a network</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="network_inspect/">docker network inspect</a></td>
+    <td>Display detailed information on one or more networks</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="network_ls/">docker network ls</a></td>
+    <td>List networks</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="network_prune/">docker network prune</a></td>
+    <td>Remove all unused networks</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="network_rm/">docker network rm</a></td>
+    <td>Remove one or more networks</td>
+  </tr>
+
+</tbody>
+</table>
+
 
 							<!-- tags -->
 							
@@ -937,15 +930,13 @@ is also available when creating the ingress network, besides the <code class="hi
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#usage" class="nomunge">利用方法</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#extended-description" class="nomunge">追加説明</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#extended-description" class="nomunge">Extended description</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#overlay-network-limitations" class="nomunge">Overlay network limitations</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#options" class="nomunge">オプション</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#connect-containers" class="nomunge">Connect containers</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#specify-advanced-options" class="nomunge">Specify advanced options</a></li>
@@ -954,6 +945,8 @@ is also available when creating the ingress network, besides the <code class="hi
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#network-ingress-mode" class="nomunge">Network ingress mode</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#parent-command" class="nomunge">上位コマンド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/network_create.md#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>
 
 

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker swarm leave"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 スウォームからノードを削除します。 API 1.24 以上  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.24 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 Swarm This command works with the Swarm orchestrator. 利用方法 docker swarm leave [OPTIONS] オプション..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 スウォームからノードを削除します。 API 1.24+  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.24 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 Swarm This command works with the Swarm orchestrator. 利用方法 docker swarm leave [OPTIONS] Extended description..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -201,7 +201,7 @@ https://github.com/docker/cli
 
 <p>スウォームからノードを削除します。</p>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.24/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.24 API reference (in a new window)">API 1.24 以上</span></a> 
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.24/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.24 API reference (in a new window)">API 1.24+</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.24/" target="_blank" class="_">1.24</a>
 である必要があります。
@@ -214,16 +214,24 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker swarm leave [OPTIONS]
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>このコマンドをワーカー上で実行した場合、そのワーカーがスウォームから去ります（leave）。</p>
+
+<p>マネージャー上において <code class="highlighter-rouge">--force</code> オプションをつけて実行すると、スウォームからマネージャーを削除します。
+しかしスォーム内においてマネージャーの最低必要数（quorum）を維持しているかどうか、これを確認して再設定を行うことはしません。
+スウォームからマネージャーを削除する安全な方法は、マネージャーをワーカーに格下げし、最低必要数から除かれるように指示することです。
+そのときには <code class="highlighter-rouge">--force</code> オプションをつけずにコマンド実行します。
+<code class="highlighter-rouge">--force</code> オプションを利用するのは、マネージャーが去ってしまった後には、もうそのスウォームを利用しない場合にのみ利用するようにしてください。
+それはつまりシングルモードスウォームにおける場合などです。</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -254,6 +262,28 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<p>以下のようなスウォームがあるとします。これはマネージャーから見たものです。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node <span class="nb">ls
+</span>ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+7ln70fl22uw2dvjn2ft53m3q5    worker2   Ready   Active
+dkp8vy1dq1kxleu9g4u78tlag    worker1   Ready   Active
+dvfxp4zseq4s0rih1selh0d20 <span class="k">*</span>  manager1  Ready   Active        Leader
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">worker2</code> を削除するには <code class="highlighter-rouge">worker2</code> そのものから以下のコマンドを実行します。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm leave
+Node left the default swarm.
+</code></pre></div></div>
+
+<p>このノードはノード一覧内にまだ含まれますが <code class="highlighter-rouge">down</code> として印づけされます。
+これ以降、スウォーム動作には関わりません。
+ただし <code class="highlighter-rouge">down</code> ノードがたくさん表示されると、ノード一覧がわかりにくくなります。
+アクティブでないノードを一覧から除くには <a href="node_rm.md"><code class="highlighter-rouge">node rm</code></a> コマンドを使います。</p>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -276,10 +306,6 @@ https://github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -336,39 +362,6 @@ https://github.com/docker/cli
 
 </tbody>
 </table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>このコマンドをワーカー上で実行した場合、そのワーカーがスウォームから去ります（leave）。</p>
-
-<p>マネージャー上において <code class="highlighter-rouge">--force</code> オプションをつけて実行すると、スウォームからマネージャーを削除します。
-しかしスォーム内においてマネージャーの最低必要数（quorum）を維持しているかどうか、これを確認して再設定を行うことはしません。
-スウォームからマネージャーを削除する安全な方法は、マネージャーをワーカーに格下げし、最低必要数から除かれるように指示することです。
-そのときには <code class="highlighter-rouge">--force</code> オプションをつけずにコマンド実行します。
-<code class="highlighter-rouge">--force</code> オプションを利用するのは、マネージャーが去ってしまった後には、もうそのスウォームを利用しない場合にのみ利用するようにしてください。
-それはつまりシングルモードスウォームにおける場合などです。</p>
-
-<h2 id="examples">利用例</h2>
-
-<p>以下のようなスウォームがあるとします。これはマネージャーから見たものです。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node <span class="nb">ls
-</span>ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
-7ln70fl22uw2dvjn2ft53m3q5    worker2   Ready   Active
-dkp8vy1dq1kxleu9g4u78tlag    worker1   Ready   Active
-dvfxp4zseq4s0rih1selh0d20 <span class="k">*</span>  manager1  Ready   Active        Leader
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">worker2</code> を削除するには <code class="highlighter-rouge">worker2</code> そのものから以下のコマンドを実行します。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm leave
-Node left the default swarm.
-</code></pre></div></div>
-
-<p>このノードはノード一覧内にまだ含まれますが <code class="highlighter-rouge">down</code> として印づけされます。
-これ以降、スウォーム動作には関わりません。
-ただし <code class="highlighter-rouge">down</code> ノードがたくさん表示されると、ノード一覧がわかりにくくなります。
-アクティブでないノードを一覧から除くには <a href="node_rm.md"><code class="highlighter-rouge">node rm</code></a> コマンドを使います。</p>
 
 
 							<!-- tags -->
@@ -467,11 +460,11 @@ Node left the default swarm.
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#options" class="nomunge">オプション</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#examples" class="nomunge">Examples</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#parent-command" class="nomunge">上位コマンド</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/swarm_leave.md#examples" class="nomunge">利用例</a></li>
 </ul>
 
 

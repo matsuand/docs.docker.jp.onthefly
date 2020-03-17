@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-28 21:13:38 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -66,7 +66,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-28T21:13:38+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -76,7 +76,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Welcome to Docker Desktop! The Docker Desktop for Windows section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the Edge..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-28T21:13:38+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="windows, edge, tutorial, run, docker, local, machine">
@@ -171,7 +171,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    19 分
+    20 分
   
 </span>
 
@@ -412,32 +412,32 @@ allocated from the total available memory on your machine. To increase the RAM, 
 
 <h4 id="file-sharing">File sharing</h4>
 
-<p>Choose the local directories you’d like to share with your Linux containers. File sharing is required for mounting volumes in <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#switch-between-windows-and-linux-containers">Linux containers</a>,
- not for Windows containers. For Linux containers, you need to share the drive
- where the Dockerfile and volume are located. Otherwise, you get <code class="highlighter-rouge">file not found</code> or <code class="highlighter-rouge">cannot start service</code> errors at runtime. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#volume-mounting-requires-shared-drives-for-linux-containers">Volume mounting requires shared drives for Linux containers</a>.</p>
+<p>Use File sharing to allow local drives on Windows to be shared with Linux containers.
+This is especially useful for
+editing source code in an IDE on the host while running and testing the code in a container.
+Note that configuring file sharing is not necessary for Windows containers, only <a href="https://matsuand.github.io/docs.docker.jp.onthefly/index.md#switch-between-windows-and-linux-containers">Linux containers</a>.
+ If a drive is not shared with a Linux container you may get <code class="highlighter-rouge">file not found</code> or <code class="highlighter-rouge">cannot start service</code> errors at runtime. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#volume-mounting-requires-shared-drives-for-linux-containers">Volume mounting requires shared drives for Linux containers</a>.</p>
 
-<p><strong>Apply &amp; Restart</strong> makes the directory available to containers using Docker’s bind mount (<code class="highlighter-rouge">-v</code>) feature.</p>
+<p><strong>Apply &amp; Restart</strong> makes the drives available to containers using Docker’s bind mount (<code class="highlighter-rouge">-v</code>) feature.</p>
 
 <blockquote>
   <p>Tips on shared drives, permissions, and volume mounts</p>
 
   <ul>
     <li>
-      <p>If possible, avoid volume mounts from the Windows host, and instead mount on
- the Linux VM, or use a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockervolumes.md#data-volumes">data volume</a>
- (named volume) or <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container">data container</a>. There are a number of issues with using host-mounted volumes and network paths
- for database files. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking">Volume mounts from host paths use a nobrl option to override database locking</a>.</p>
+      <p>Shared drives are designed to allow application code to be edited on the host while being executed in containers. For non-code items
+ such as cache directories or databases, the performance will be much better if they are stored in
+ the Linux VM, using a <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockervolumes.md#data-volumes">data volume</a>
+ (named volume) or <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/tutorials/dockervolumes.md#creating-and-mounting-a-data-volume-container">data container</a>.</p>
     </li>
     <li>
       <p>Docker Desktop sets permissions to read/write/execute for users, groups and others <a href="http://permissions-calculator.org/decode/0777/">0777 or a+rwx</a>.
 This is not configurable. See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#permissions-errors-on-data-directories-for-shared-volumes">Permissions errors on data directories for shared volumes</a>.</p>
     </li>
     <li>
-      <p>You can share local drives with your <em>containers</em> but not with Docker Machine
-nodes. See the FAQ, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/faqs/#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms">Can I share local drives and filesystem with my Docker Machine VMs?</a>.</p>
+      <p>Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: <code class="highlighter-rouge">test</code> and <code class="highlighter-rouge">Test</code>, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called <code class="highlighter-rouge">test</code>, it must be opened as <code class="highlighter-rouge">test</code>. Attempts to open <code class="highlighter-rouge">Test</code> will fail with “No such file or directory”. Similarly once a file called <code class="highlighter-rouge">test</code> is created, attempts to create a second file called <code class="highlighter-rouge">Test</code> will fail.</p>
     </li>
   </ul>
-
 </blockquote>
 
 <h4 id="shared-drives-on-demand">Shared drives on demand</h4>

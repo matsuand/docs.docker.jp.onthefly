@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker container prune"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Remove all stopped containers API 1.25 以上  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.25 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 利用方法 docker container prune [OPTIONS] オプション 名前／省略形 デフォルト 説明 --filter Provide..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Remove all stopped containers API 1.25+  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.25 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。 利用方法 docker container prune [OPTIONS] Extended description Removes all stopped containers. For..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -201,7 +201,7 @@ https://github.com/docker/cli
 
 <p>Remove all stopped containers</p>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.25 API reference (in a new window)">API 1.25 以上</span></a> 
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.25 API reference (in a new window)">API 1.25+</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_">1.25</a>
 である必要があります。
@@ -212,16 +212,17 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker container prune [OPTIONS]
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>Removes all stopped containers.</p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -270,6 +271,91 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<h3 id="prune-containers">Prune containers</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N] y
+Deleted Containers:
+4a7f7eebae0f63178aff7eb0aa39cd3f0627a203ab2df258c1a00b456cf20063
+f98f9c2aa1eaf727e4ec9c0283bc7d4aa4762fbdba7f26191f26c97f64090360
+
+Total reclaimed space: 212 B
+</code></pre></div></div>
+
+<h3 id="filtering">Filtering</h3>
+
+<p>The filtering flag (<code class="highlighter-rouge">--filter</code>) format is of “key=value”. If there is more
+than one filter, then pass multiple flags (e.g., <code class="highlighter-rouge">--filter "foo=bar" --filter "bif=baz"</code>)</p>
+
+<p>The currently supported filters are:</p>
+
+<ul>
+  <li>until (<code class="highlighter-rouge">&lt;timestamp&gt;</code>) - only remove containers created before given timestamp</li>
+  <li>label (<code class="highlighter-rouge">label=&lt;key&gt;</code>, <code class="highlighter-rouge">label=&lt;key&gt;=&lt;value&gt;</code>, <code class="highlighter-rouge">label!=&lt;key&gt;</code>, or <code class="highlighter-rouge">label!=&lt;key&gt;=&lt;value&gt;</code>) - only remove containers with (or without, in case <code class="highlighter-rouge">label!=...</code> is used) the specified labels.</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">until</code> filter can be Unix timestamps, date formatted
+timestamps, or Go duration strings (e.g. <code class="highlighter-rouge">10m</code>, <code class="highlighter-rouge">1h30m</code>) computed
+relative to the daemon machine’s time. Supported formats for date
+formatted time stamps include RFC3339Nano, RFC3339, <code class="highlighter-rouge">2006-01-02T15:04:05</code>,
+<code class="highlighter-rouge">2006-01-02T15:04:05.999999999</code>, <code class="highlighter-rouge">2006-01-02Z07:00</code>, and <code class="highlighter-rouge">2006-01-02</code>. The local
+timezone on the daemon will be used if you do not provide either a <code class="highlighter-rouge">Z</code> or a
+<code class="highlighter-rouge">+-00:00</code> timezone offset at the end of the timestamp.  When providing Unix
+timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
+that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
+seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
+fraction of a second no more than nine digits long.</p>
+
+<p>The <code class="highlighter-rouge">label</code> filter accepts two formats. One is the <code class="highlighter-rouge">label=...</code> (<code class="highlighter-rouge">label=&lt;key&gt;</code> or <code class="highlighter-rouge">label=&lt;key&gt;=&lt;value&gt;</code>),
+which removes containers with the specified labels. The other
+format is the <code class="highlighter-rouge">label!=...</code> (<code class="highlighter-rouge">label!=&lt;key&gt;</code> or <code class="highlighter-rouge">label!=&lt;key&gt;=&lt;value&gt;</code>), which removes
+containers without the specified labels.</p>
+
+<p>The following removes containers created more than 5 minutes ago:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
+61b9efa71024        busybox             <span class="s2">"sh"</span>                2017-01-04 13:23:33 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 41 seconds ago
+53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 12 minutes ago
+
+<span class="nv">$ </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=5m"</span>
+
+Deleted Containers:
+53a9bc23a5168b6caa2bfbefddf1b30f93c7ad57f3dec271fd32707497cb9369
+
+Total reclaimed space: 25 B
+
+<span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
+61b9efa71024        busybox             <span class="s2">"sh"</span>                2017-01-04 13:23:33 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 44 seconds ago
+</code></pre></div></div>
+
+<p>The following removes containers created before <code class="highlighter-rouge">2017-01-04T13:10:00</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
+53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 7 minutes ago
+4a75091a6d61        busybox             <span class="s2">"sh"</span>                2017-01-04 13:09:53 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 9 minutes ago
+
+<span class="nv">$ </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=2017-01-04T13:10:00"</span>
+
+Deleted Containers:
+4a75091a6d618526fcd8b33ccd6e5928ca2a64415466f768a6180004b0c72c6c
+
+Total reclaimed space: 27 B
+
+<span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
+53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 9 minutes ago
+</code></pre></div></div>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -292,10 +378,6 @@ https://github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -455,95 +537,6 @@ https://github.com/docker/cli
 </tbody>
 </table>
 
-<h2 id="extended-description">追加説明</h2>
-
-<p>Removes all stopped containers.</p>
-
-<h2 id="examples">利用例</h2>
-
-<h3 id="prune-containers">Prune containers</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container prune
-WARNING! This will remove all stopped containers.
-Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N] y
-Deleted Containers:
-4a7f7eebae0f63178aff7eb0aa39cd3f0627a203ab2df258c1a00b456cf20063
-f98f9c2aa1eaf727e4ec9c0283bc7d4aa4762fbdba7f26191f26c97f64090360
-
-Total reclaimed space: 212 B
-</code></pre></div></div>
-
-<h3 id="filtering">Filtering</h3>
-
-<p>The filtering flag (<code class="highlighter-rouge">--filter</code>) format is of “key=value”. If there is more
-than one filter, then pass multiple flags (e.g., <code class="highlighter-rouge">--filter "foo=bar" --filter "bif=baz"</code>)</p>
-
-<p>The currently supported filters are:</p>
-
-<ul>
-  <li>until (<code class="highlighter-rouge">&lt;timestamp&gt;</code>) - only remove containers created before given timestamp</li>
-  <li>label (<code class="highlighter-rouge">label=&lt;key&gt;</code>, <code class="highlighter-rouge">label=&lt;key&gt;=&lt;value&gt;</code>, <code class="highlighter-rouge">label!=&lt;key&gt;</code>, or <code class="highlighter-rouge">label!=&lt;key&gt;=&lt;value&gt;</code>) - only remove containers with (or without, in case <code class="highlighter-rouge">label!=...</code> is used) the specified labels.</li>
-</ul>
-
-<p>The <code class="highlighter-rouge">until</code> filter can be Unix timestamps, date formatted
-timestamps, or Go duration strings (e.g. <code class="highlighter-rouge">10m</code>, <code class="highlighter-rouge">1h30m</code>) computed
-relative to the daemon machine’s time. Supported formats for date
-formatted time stamps include RFC3339Nano, RFC3339, <code class="highlighter-rouge">2006-01-02T15:04:05</code>,
-<code class="highlighter-rouge">2006-01-02T15:04:05.999999999</code>, <code class="highlighter-rouge">2006-01-02Z07:00</code>, and <code class="highlighter-rouge">2006-01-02</code>. The local
-timezone on the daemon will be used if you do not provide either a <code class="highlighter-rouge">Z</code> or a
-<code class="highlighter-rouge">+-00:00</code> timezone offset at the end of the timestamp.  When providing Unix
-timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
-that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
-seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
-fraction of a second no more than nine digits long.</p>
-
-<p>The <code class="highlighter-rouge">label</code> filter accepts two formats. One is the <code class="highlighter-rouge">label=...</code> (<code class="highlighter-rouge">label=&lt;key&gt;</code> or <code class="highlighter-rouge">label=&lt;key&gt;=&lt;value&gt;</code>),
-which removes containers with the specified labels. The other
-format is the <code class="highlighter-rouge">label!=...</code> (<code class="highlighter-rouge">label!=&lt;key&gt;</code> or <code class="highlighter-rouge">label!=&lt;key&gt;=&lt;value&gt;</code>), which removes
-containers without the specified labels.</p>
-
-<p>The following removes containers created more than 5 minutes ago:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
-CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-61b9efa71024        busybox             <span class="s2">"sh"</span>                2017-01-04 13:23:33 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 41 seconds ago
-53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 12 minutes ago
-
-<span class="nv">$ </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=5m"</span>
-
-Deleted Containers:
-53a9bc23a5168b6caa2bfbefddf1b30f93c7ad57f3dec271fd32707497cb9369
-
-Total reclaimed space: 25 B
-
-<span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
-CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-61b9efa71024        busybox             <span class="s2">"sh"</span>                2017-01-04 13:23:33 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 44 seconds ago
-</code></pre></div></div>
-
-<p>The following removes containers created before <code class="highlighter-rouge">2017-01-04T13:10:00</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
-CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 7 minutes ago
-4a75091a6d61        busybox             <span class="s2">"sh"</span>                2017-01-04 13:09:53 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 9 minutes ago
-
-<span class="nv">$ </span>docker container prune <span class="nt">--force</span> <span class="nt">--filter</span> <span class="s2">"until=2017-01-04T13:10:00"</span>
-
-Deleted Containers:
-4a75091a6d618526fcd8b33ccd6e5928ca2a64415466f768a6180004b0c72c6c
-
-Total reclaimed space: 27 B
-
-<span class="nv">$ </span>docker ps <span class="nt">-a</span> <span class="nt">--format</span> <span class="s1">'table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.CreatedAt}}\t{{.Status}}'</span>
-
-CONTAINER ID        IMAGE               COMMAND             CREATED AT                      STATUS
-53a9bc23a516        busybox             <span class="s2">"sh"</span>                2017-01-04 13:11:59 <span class="nt">-0800</span> PST   Exited <span class="o">(</span>0<span class="o">)</span> 9 minutes ago
-</code></pre></div></div>
-
 
 							<!-- tags -->
 							
@@ -641,16 +634,16 @@ CONTAINER ID        IMAGE               COMMAND             CREATED AT          
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#options" class="nomunge">オプション</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#parent-command" class="nomunge">上位コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#examples" class="nomunge">利用例</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#examples" class="nomunge">Examples</a>
     <ul>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#prune-containers" class="nomunge">Prune containers</a></li>
       <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#filtering" class="nomunge">Filtering</a></li>
     </ul>
   </li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#parent-command" class="nomunge">上位コマンド</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/container_prune.md#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>
 
 

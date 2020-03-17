@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-17 22:22:17 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,17 +83,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
 	<meta name="twitter:title" itemprop="title name" content="docker plugin create"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Create a plugin from a rootfs and configuration. Plugin data directory must contain config.json and rootfs directory. API 1.25 以上  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.25 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの..." />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Create a plugin from a rootfs and configuration. Plugin data directory must contain config.json and rootfs directory. API 1.25+  このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも 1.25 である必要があります。 クライアント上において docker version コマンドを実行して、クライアントとデーモンの API..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -200,7 +200,7 @@ https://github.com/docker/cli
 
 <p>Create a plugin from a rootfs and configuration. Plugin data directory must contain config.json and rootfs directory.</p>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.25 API reference (in a new window)">API 1.25 以上</span></a> 
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the 1.25 API reference (in a new window)">API 1.25+</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/v1.25/" target="_blank" class="_">1.25</a>
 である必要があります。
@@ -211,16 +211,18 @@ https://github.com/docker/cli
 <pre><code class="language-none">docker plugin create [OPTIONS] PLUGIN PLUGIN-DATA-DIR
 </code></pre>
 
+<h2 id="extended-description">Extended description</h2>
+
+<p>Creates a plugin. Before creating the plugin, prepare the plugin’s root filesystem as well as
+<a href="../../extend/config.md">the config.json</a></p>
+
+<p>For example uses of this command, refer to the <a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#examples">examples section</a> below.</p>
+
 <h2 id="options">オプション</h2>
 
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Name, shorthand</td>
-    <td>Default</td>
-    <td>Description</td>
-    -->
     <td>名前／省略形</td>
     <td>デフォルト</td>
     <td>説明</td>
@@ -251,6 +253,28 @@ https://github.com/docker/cli
 
 <p><!-- end if options --></p>
 
+<h2 id="examples">Examples</h2>
+
+<p>The following example shows how to create a sample <code class="highlighter-rouge">plugin</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-ls</span> /home/pluginDir
+
+total 4
+4 <span class="nt">-rw-r--r--</span>  1 root root 431 Nov  7 01:40 config.json
+0 drwxr-xr-x 19 root root 420 Nov  7 01:40 rootfs
+
+<span class="nv">$ </span>docker plugin create plugin /home/pluginDir
+
+plugin
+
+<span class="nv">$ </span>docker plugin <span class="nb">ls
+
+</span>ID                  NAME                TAG                 DESCRIPTION                  ENABLED
+672d8144ec02        plugin              latest              A sample plugin <span class="k">for </span>Docker   <span class="nb">false</span>
+</code></pre></div></div>
+
+<p>The plugin can subsequently be enabled for local use or pushed to the public registry.</p>
+
 <h2 id="parent-command">上位コマンド</h2>
 
 <table>
@@ -273,10 +297,6 @@ https://github.com/docker/cli
 <table>
 <thead>
   <tr>
-    <!--
-    <td>Command</td>
-    <td>Description</td>
-    -->
     <td>コマンド</td>
     <td>説明</td>
   </tr>
@@ -345,33 +365,6 @@ https://github.com/docker/cli
 
 </tbody>
 </table>
-
-<h2 id="extended-description">追加説明</h2>
-
-<p>Creates a plugin. Before creating the plugin, prepare the plugin’s root filesystem as well as
-<a href="../../extend/config.md">the config.json</a></p>
-
-<h2 id="examples">利用例</h2>
-
-<p>The following example shows how to create a sample <code class="highlighter-rouge">plugin</code>.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-ls</span> /home/pluginDir
-
-total 4
-4 <span class="nt">-rw-r--r--</span>  1 root root 431 Nov  7 01:40 config.json
-0 drwxr-xr-x 19 root root 420 Nov  7 01:40 rootfs
-
-<span class="nv">$ </span>docker plugin create plugin /home/pluginDir
-
-plugin
-
-<span class="nv">$ </span>docker plugin <span class="nb">ls
-
-</span>ID                  NAME                TAG                 DESCRIPTION                  ENABLED
-672d8144ec02        plugin              latest              A sample plugin <span class="k">for </span>Docker   <span class="nb">false</span>
-</code></pre></div></div>
-
-<p>The plugin can subsequently be enabled for local use or pushed to the public registry.</p>
 
 
 							<!-- tags -->
@@ -470,11 +463,11 @@ plugin
 <ul id="my_toc" class="inline_toc">
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#description" class="nomunge">説明</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#usage" class="nomunge">利用方法</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#extended-description" class="nomunge">Extended description</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#options" class="nomunge">オプション</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#examples" class="nomunge">Examples</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#parent-command" class="nomunge">上位コマンド</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#related-commands" class="nomunge">関連コマンド</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#extended-description" class="nomunge">追加説明</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/plugin_create.md#examples" class="nomunge">利用例</a></li>
 </ul>
 
 
