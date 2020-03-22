@@ -1,4 +1,4 @@
-<!-- Page generated 2020-03-17 22:22:17 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -83,7 +83,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +93,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="説明 Build an image from a Dockerfile 利用方法 docker build [OPTIONS] PATH | URL | - Extended description The docker build command builds Docker images from a Dockerfile and a..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -188,9 +188,9 @@
 							
 							
 							<!--
-Sorry, but the contents of this page are automatically generated from
-Docker's source code. If you want to suggest a change to the text that appears
-here, you'll need to find the string by searching this repo:
+This page is automatically generated from Docker's source code. If you want to
+suggest a change to the text that appears here, open a ticket or pull request
+in the source repository on GitHub:
 
 https://github.com/docker/cli
 -->
@@ -1291,12 +1291,12 @@ more <code class="highlighter-rouge">--add-host</code> flags. This example adds 
 specify an intermediate build stage by name as a final stage for the resulting
 image. Commands after the target stage will be skipped.</p>
 
-<pre><code class="language-Dockerfile">FROM debian AS build-env
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> debian AS build-env</span>
 ...
 
-FROM alpine AS production-env
+<span class="k">FROM</span><span class="s"> alpine AS production-env</span>
 ...
-</code></pre>
+</code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> mybuildimage <span class="nt">--target</span> build-env <span class="nb">.</span>
 </code></pre></div></div>
@@ -1353,12 +1353,12 @@ desired files to a new scratch stage with <a href="../builder.md#copy"><code cla
 <p>The example <code class="highlighter-rouge">Dockerfile</code> below uses a separate stage to collect the
 build-artifacts for exporting:</p>
 
-<pre><code class="language-Dockerfile">FROM golang AS build-stage
-RUN go get -u github.com/LK4D4/vndr
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang AS build-stage</span>
+<span class="k">RUN </span>go get <span class="nt">-u</span> github.com/LK4D4/vndr
 
-FROM scratch AS export-stage
-COPY --from=build-stage /go/bin/vndr /
-</code></pre>
+<span class="k">FROM</span><span class="s"> scratch AS export-stage</span>
+<span class="k">COPY</span><span class="s"> --from=build-stage /go/bin/vndr /</span>
+</code></pre></div></div>
 
 <p>When building the Dockerfile with the <code class="highlighter-rouge">-o</code> option, only the files from the final
 stage are exported to the <code class="highlighter-rouge">out</code> directory, in this case, the <code class="highlighter-rouge">vndr</code> binary:</p>
@@ -1513,13 +1513,13 @@ the squash step will fail (see <a href="https://github.com/moby/moby/issues/3382
 
 <p>The following is an example of docker build with <code class="highlighter-rouge">--squash</code> argument</p>
 
-<pre><code class="language-Dockerfile">FROM busybox
-RUN echo hello &gt; /hello
-RUN echo world &gt;&gt; /hello
-RUN touch remove_me /remove_me
-ENV HELLO world
-RUN rm /remove_me
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> busybox</span>
+<span class="k">RUN </span><span class="nb">echo </span>hello <span class="o">&gt;</span> /hello
+<span class="k">RUN </span><span class="nb">echo </span>world <span class="o">&gt;&gt;</span> /hello
+<span class="k">RUN </span>touch remove_me /remove_me
+<span class="k">ENV</span><span class="s"> HELLO world</span>
+<span class="k">RUN </span>rm /remove_me
+</code></pre></div></div>
 
 <p>An image named <code class="highlighter-rouge">test</code> is built with <code class="highlighter-rouge">--squash</code> argument.</p>
 

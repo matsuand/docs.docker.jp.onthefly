@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Copy files from your local host to a machine, from machine to machine, or from a machine to your local host using scp. The notation is machinename:/path/to/files for the arguments;..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="machine, scp, subcommand">
@@ -200,16 +200,18 @@ machine’s case, you don’t need to specify the name, just the path.</p>
 
 <p>Consider the following example:</p>
 
-<pre><code class="language-none">$ cat foo.txt
-cat: foo.txt: No such file or directory
-$ docker-machine ssh dev pwd
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>foo.txt
+<span class="nb">cat</span>: foo.txt: No such file or directory
+
+<span class="nv">$ </span>docker-machine ssh dev <span class="nb">pwd</span>
 /home/docker
-$ docker-machine ssh dev 'echo A file created remotely! &gt;foo.txt'
-$ docker-machine scp dev:/home/docker/foo.txt .
+
+<span class="nv">$ </span>docker-machine ssh dev <span class="s1">'echo A file created remotely! &gt;foo.txt'</span>
+<span class="nv">$ </span>docker-machine scp dev:/home/docker/foo.txt <span class="nb">.</span>
 foo.txt                                                           100%   28     0.0KB/s   00:00
-$ cat foo.txt
+<span class="nv">$ </span><span class="nb">cat </span>foo.txt
 A file created remotely!
-</code></pre>
+</code></pre></div></div>
 
 <p>Just like how <code class="highlighter-rouge">scp</code> has a <code class="highlighter-rouge">-r</code> flag for copying files recursively,
 <code class="highlighter-rouge">docker-machine</code> has a <code class="highlighter-rouge">-r</code> flag for this feature.</p>
@@ -224,12 +226,12 @@ transferring all of the files.</p>
 <p>When transferring directories and not just files, avoid rsync surprises
 by using trailing slashes on both the source and destination. For example:</p>
 
-<pre><code class="language-none">$ mkdir -p bar
-$ touch bar/baz
-$ docker-machine scp -r -d bar/ dev:/home/docker/bar/
-$ docker-machine ssh dev ls bar
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir <span class="nt">-p</span> bar
+<span class="nv">$ </span>touch bar/baz
+<span class="nv">$ </span>docker-machine scp <span class="nt">-r</span> <span class="nt">-d</span> bar/ dev:/home/docker/bar/
+<span class="nv">$ </span>docker-machine ssh dev <span class="nb">ls </span>bar
 baz
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="specifying-file-paths-for-remote-deployments">Specifying file paths for remote deployments</h2>
 
@@ -244,8 +246,8 @@ paths both for the location on the Docker daemon and within the container.</p>
 container on the remote host. If the remote user is <code class="highlighter-rouge">ubuntu</code>, use a command like
 this:</p>
 
-<pre><code class="language-none">$ docker-machine scp -r /Users/&lt;username&gt;/webapp MACHINE-NAME:/home/ubuntu/webapp
-</code></pre>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine scp <span class="nt">-r</span> /Users/&lt;username&gt;/webapp MACHINE-NAME:/home/ubuntu/webapp
+</code></pre></div></div>
 
 <p>Then write a docker-compose file that bind mounts it in:</p>
 
@@ -260,9 +262,9 @@ services:
 
 <p>And we can try it out like so:</p>
 
-<pre><code class="language-none">$ eval $(docker-machine env MACHINE-NAME)
-$ docker-compose run webapp
-</code></pre>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="k">$(</span>docker-machine env MACHINE-NAME<span class="k">)</span>
+<span class="nv">$ </span>docker-compose run webapp
+</code></pre></div></div>
 
 							<!-- tags -->
 							

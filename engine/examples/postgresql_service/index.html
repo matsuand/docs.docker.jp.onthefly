@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Install PostgreSQL on Docker Assuming there is no Docker image that suits your needs on the Docker Hub, you can create one yourself. Start by creating a new Dockerfile: Note:..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, example, package installation, postgresql">
@@ -204,54 +204,54 @@ PostgreSQL documentation to fine-tune these settings so that it is
 suitably secure.</p>
 </blockquote>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#
-# example Dockerfile for https://matsuand.github.io/docs.docker.jp.onthefly/engine/examples/postgresql_service/
-#
-</span>
-<span class="n">FROM</span> <span class="n">ubuntu</span>:<span class="m">16</span>.<span class="m">04</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#</span>
+<span class="c"># example Dockerfile for https://matsuand.github.io/docs.docker.jp.onthefly/engine/examples/postgresql_service/</span>
+<span class="c">#</span>
 
-<span class="c"># Add the PostgreSQL PGP key to verify their Debian packages.
-# It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
-</span><span class="n">RUN</span> <span class="n">apt</span>-<span class="n">key</span> <span class="n">adv</span> --<span class="n">keyserver</span> <span class="n">hkp</span>://<span class="n">p80</span>.<span class="n">pool</span>.<span class="n">sks</span>-<span class="n">keyservers</span>.<span class="n">net</span>:<span class="m">80</span> --<span class="n">recv</span>-<span class="n">keys</span> <span class="n">B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8</span>
+<span class="k">FROM</span><span class="s"> ubuntu:16.04</span>
 
-<span class="c"># Add PostgreSQL's repository. It contains the most recent stable release
-#     of PostgreSQL, ``9.3``.
-</span><span class="n">RUN</span> <span class="n">echo</span> <span class="s2">"deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"</span> &gt; /<span class="n">etc</span>/<span class="n">apt</span>/<span class="n">sources</span>.<span class="n">list</span>.<span class="n">d</span>/<span class="n">pgdg</span>.<span class="n">list</span>
+<span class="c"># Add the PostgreSQL PGP key to verify their Debian packages.</span>
+<span class="c"># It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc</span>
+<span class="k">RUN </span>apt-key adv <span class="nt">--keyserver</span> hkp://p80.pool.sks-keyservers.net:80 <span class="nt">--recv-keys</span> B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 
-<span class="c"># Install ``python-software-properties``, ``software-properties-common`` and PostgreSQL 9.3
-#  There are some warnings (in red) that show up during the build. You can hide
-#  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive
-</span><span class="n">RUN</span> <span class="n">apt</span>-<span class="n">get</span> <span class="n">update</span> &amp;&amp; <span class="n">apt</span>-<span class="n">get</span> <span class="n">install</span> -<span class="n">y</span> <span class="n">python</span>-<span class="n">software</span>-<span class="n">properties</span> <span class="n">software</span>-<span class="n">properties</span>-<span class="n">common</span> <span class="n">postgresql</span>-<span class="m">9</span>.<span class="m">3</span> <span class="n">postgresql</span>-<span class="n">client</span>-<span class="m">9</span>.<span class="m">3</span> <span class="n">postgresql</span>-<span class="n">contrib</span>-<span class="m">9</span>.<span class="m">3</span>
+<span class="c"># Add PostgreSQL's repository. It contains the most recent stable release</span>
+<span class="c">#     of PostgreSQL, ``9.3``.</span>
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"</span> <span class="o">&gt;</span> /etc/apt/sources.list.d/pgdg.list
 
-<span class="c"># Note: The official Debian and Ubuntu images automatically ``apt-get clean``
-# after each ``apt-get``
-</span>
-<span class="c"># Run the rest of the commands as the ``postgres`` user created by the ``postgres-9.3`` package when it was ``apt-get installed``
-</span><span class="n">USER</span> <span class="n">postgres</span>
+<span class="c"># Install ``python-software-properties``, ``software-properties-common`` and PostgreSQL 9.3</span>
+<span class="c">#  There are some warnings (in red) that show up during the build. You can hide</span>
+<span class="c">#  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
 
-<span class="c"># Create a PostgreSQL role named ``docker`` with ``docker`` as the password and
-# then create a database `docker` owned by the ``docker`` role.
-# Note: here we use ``&amp;&amp;\`` to run commands one after the other - the ``\``
-#       allows the RUN command to span multiple lines.
-</span><span class="n">RUN</span>    /<span class="n">etc</span>/<span class="n">init</span>.<span class="n">d</span>/<span class="n">postgresql</span> <span class="n">start</span> &amp;&amp;\
-    <span class="n">psql</span> --<span class="n">command</span> <span class="s2">"CREATE USER docker WITH SUPERUSER PASSWORD 'docker';"</span> &amp;&amp;\
-    <span class="n">createdb</span> -<span class="n">O</span> <span class="n">docker</span> <span class="n">docker</span>
+<span class="c"># Note: The official Debian and Ubuntu images automatically ``apt-get clean``</span>
+<span class="c"># after each ``apt-get``</span>
 
-<span class="c"># Adjust PostgreSQL configuration so that remote connections to the
-# database are possible.
-</span><span class="n">RUN</span> <span class="n">echo</span> <span class="s2">"host all  all    0.0.0.0/0  md5"</span> &gt;&gt; /<span class="n">etc</span>/<span class="n">postgresql</span>/<span class="m">9</span>.<span class="m">3</span>/<span class="n">main</span>/<span class="n">pg_hba</span>.<span class="n">conf</span>
+<span class="c"># Run the rest of the commands as the ``postgres`` user created by the ``postgres-9.3`` package when it was ``apt-get installed``</span>
+<span class="k">USER</span><span class="s"> postgres</span>
 
-<span class="c"># And add ``listen_addresses`` to ``/etc/postgresql/9.3/main/postgresql.conf``
-</span><span class="n">RUN</span> <span class="n">echo</span> <span class="s2">"listen_addresses='*'"</span> &gt;&gt; /<span class="n">etc</span>/<span class="n">postgresql</span>/<span class="m">9</span>.<span class="m">3</span>/<span class="n">main</span>/<span class="n">postgresql</span>.<span class="n">conf</span>
+<span class="c"># Create a PostgreSQL role named ``docker`` with ``docker`` as the password and</span>
+<span class="c"># then create a database `docker` owned by the ``docker`` role.</span>
+<span class="c"># Note: here we use ``&amp;&amp;\`` to run commands one after the other - the ``\``</span>
+<span class="c">#       allows the RUN command to span multiple lines.</span>
+<span class="k">RUN    </span>/etc/init.d/postgresql start <span class="o">&amp;&amp;</span><span class="se">\
+</span>    psql <span class="nt">--command</span> <span class="s2">"CREATE USER docker WITH SUPERUSER PASSWORD 'docker';"</span> <span class="o">&amp;&amp;</span><span class="se">\
+</span>    createdb <span class="nt">-O</span> docker docker
 
-<span class="c"># Expose the PostgreSQL port
-</span><span class="n">EXPOSE</span> <span class="m">5432</span>
+<span class="c"># Adjust PostgreSQL configuration so that remote connections to the</span>
+<span class="c"># database are possible.</span>
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"host all  all    0.0.0.0/0  md5"</span> <span class="o">&gt;&gt;</span> /etc/postgresql/9.3/main/pg_hba.conf
 
-<span class="c"># Add VOLUMEs to allow backup of config, logs and databases
-</span><span class="n">VOLUME</span>  [<span class="s2">"/etc/postgresql"</span>, <span class="s2">"/var/log/postgresql"</span>, <span class="s2">"/var/lib/postgresql"</span>]
+<span class="c"># And add ``listen_addresses`` to ``/etc/postgresql/9.3/main/postgresql.conf``</span>
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"listen_addresses='*'"</span> <span class="o">&gt;&gt;</span> /etc/postgresql/9.3/main/postgresql.conf
 
-<span class="c"># Set the default command to run when starting the container
-</span><span class="n">CMD</span> [<span class="s2">"/usr/lib/postgresql/9.3/bin/postgres"</span>, <span class="s2">"-D"</span>, <span class="s2">"/var/lib/postgresql/9.3/main"</span>, <span class="s2">"-c"</span>, <span class="s2">"config_file=/etc/postgresql/9.3/main/postgresql.conf"</span>]
+<span class="c"># Expose the PostgreSQL port</span>
+<span class="k">EXPOSE</span><span class="s"> 5432</span>
+
+<span class="c"># Add VOLUMEs to allow backup of config, logs and databases</span>
+<span class="k">VOLUME</span><span class="s">  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]</span>
+
+<span class="c"># Set the default command to run when starting the container</span>
+<span class="k">CMD</span><span class="s"> ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]</span>
 </code></pre></div></div>
 
 <p>Build an image from the Dockerfile and assign it a name.</p>

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="You use Docker Swarm to host and schedule a cluster of Docker containers. This section introduces you to Docker Swarm by teaching you how to create a swarm on your..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, swarm, clustering, discovery, release, notes">
@@ -249,7 +249,8 @@ INFO[0050] <span class="s2">"local"</span> has been created and is now the activ
 haven’t got the <code class="highlighter-rouge">swarm:latest</code> image on your local machine, Docker pulls it
 for you.</p>
 
-    <pre><code class="language-none">$ docker run swarm create
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run swarm create
+<span class="go">
 Unable to find image 'swarm:latest' locally
 latest: Pulling from swarm
 de939d6ed512: Pull complete
@@ -263,7 +264,7 @@ swarm:latest: The image you are pulling has been verified. Important: image veri
 Digest: sha256:aaaf6c18b8be01a75099cc554b4fb372b8ec677ae81764dcdf85470279a61d6f
 Status: Downloaded newer image for swarm:latest
 fe0cc96a72cf04dba8c1c4aa79536ec3
-</code></pre>
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
@@ -308,14 +309,15 @@ daemons and you can communicate with them using the Docker Engine API.</p>
 
     <p>For example:</p>
 
-    <pre><code class="language-none">$ docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://fe0cc96a72cf04dba8c1c4aa79536ec3 swarm-master
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-machine create <span class="nt">-d</span> virtualbox <span class="nt">--swarm</span> <span class="nt">--swarm-master</span> <span class="nt">--swarm-discovery</span> token://fe0cc96a72cf04dba8c1c4aa79536ec3 swarm-master
+<span class="go">
 INFO[0000] Creating SSH key...
 INFO[0000] Creating VirtualBox VM...
 INFO[0005] Starting VirtualBox VM...
 INFO[0005] Waiting for VM to start...
 INFO[0060] "swarm-master" has been created and is now the active machine.
-INFO[0060] To point your Docker client at it, run this in your shell: eval "$(docker-machine env swarm-master)"
-</code></pre>
+</span><span class="gp">INFO[0060] To point your Docker client at it, run this in your shell: eval "$</span><span class="o">(</span>docker-machine env swarm-master<span class="o">)</span><span class="s2">"
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>Open your VirtualBox Manager, it should contain the <code class="highlighter-rouge">local</code> machine and the
@@ -370,6 +372,7 @@ your swarm, and start an image on your swarm.</p>
     <p>Get information on your new swarm using the <code class="highlighter-rouge">docker</code> command.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
+
 Containers: 4
 Strategy: spread
 Filters: affinity, health, constraint, port, dependency
@@ -394,18 +397,20 @@ Nodes: 3
   <li>
     <p>Check the images currently running on your swarm.</p>
 
-    <pre><code class="language-none">$ docker ps  -a
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker ps  <span class="nt">-a</span>
+<span class="go">
 CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                     NAMES
 78be991b58d1        swarm:latest        "/swarm join --addr    3 minutes ago       Up 2 minutes        2375/tcp                                  swarm-agent-01/swarm-agent
 da5127e4f0f9        swarm:latest        "/swarm join --addr    6 minutes ago       Up 6 minutes        2375/tcp                                  swarm-agent-00/swarm-agent
 ef395f316c59        swarm:latest        "/swarm join --addr    16 minutes ago      Up 16 minutes       2375/tcp                                  swarm-master/swarm-agent
-45821ca5208e        swarm:latest        "/swarm manage --tls   16 minutes ago      Up 16 minutes       2375/tcp, 192.168.99.104:3376-&gt;3376/tcp   swarm-master/swarm-agent-master
-</code></pre>
+</span><span class="gp">45821ca5208e        swarm:latest        "/swarm manage --tls   16 minutes ago      Up 16 minutes       2375/tcp, 192.168.99.104:3376-&gt;</span>3376/tcp   swarm-master/swarm-agent-master
+</code></pre></div>    </div>
   </li>
   <li>
     <p>Run the Docker <code class="highlighter-rouge">hello-world</code> test image on your swarm.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run hello-world
+
 Hello from Docker.
 This message shows that your installation appears to be working correctly.
 
@@ -430,6 +435,7 @@ To generate this message, Docker took the following steps:
     <p>Use the <code class="highlighter-rouge">docker ps</code> command to find out which node the container ran on.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span>
+
 CONTAINER ID        IMAGE                COMMAND                CREATED             STATUS                     PORTS                                     NAMES
 54a8690043dd        hello-world:latest   <span class="s2">"/hello"</span>               22 seconds ago      Exited <span class="o">(</span>0<span class="o">)</span> 3 seconds ago                                             swarm-agent-00/modest_goodall
 78be991b58d1        swarm:latest         <span class="s2">"/swarm join --addr    5 minutes ago       Up 4 minutes               2375/tcp                                  swarm-agent-01/swarm-agent

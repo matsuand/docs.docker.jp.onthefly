@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="A container’s main running process is the ENTRYPOINT and/or CMD at the end of the Dockerfile. It is generally recommended that you separate areas of concern by using one service..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, supervisor, process management">
@@ -258,11 +258,11 @@ done</span>
 
     <p>Next, the Dockerfile:</p>
 
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">ubuntu</span>:<span class="n">latest</span>
-<span class="n">COPY</span> <span class="n">my_first_process</span> <span class="n">my_first_process</span>
-<span class="n">COPY</span> <span class="n">my_second_process</span> <span class="n">my_second_process</span>
-<span class="n">COPY</span> <span class="n">my_wrapper_script</span>.<span class="n">sh</span> <span class="n">my_wrapper_script</span>.<span class="n">sh</span>
-<span class="n">CMD</span> ./<span class="n">my_wrapper_script</span>.<span class="n">sh</span>
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
+<span class="k">COPY</span><span class="s"> my_first_process my_first_process</span>
+<span class="k">COPY</span><span class="s"> my_second_process my_second_process</span>
+<span class="k">COPY</span><span class="s"> my_wrapper_script.sh my_wrapper_script.sh</span>
+<span class="k">CMD</span><span class="s"> ./my_wrapper_script.sh</span>
 </code></pre></div>    </div>
   </li>
   <li>
@@ -270,8 +270,10 @@ done</span>
 you temporarily need to run some other processes (perhaps to interact with
 the main process) then you can use bash’s job control to facilitate that.
 First, the wrapper script:</p>
+  </li>
+</ul>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
 <span class="c"># turn on bash's job control</span>
 <span class="nb">set</span> <span class="nt">-m</span>
@@ -289,35 +291,34 @@ First, the wrapper script:</p>
 <span class="c"># now we bring the primary process back into the foreground</span>
 <span class="c"># and leave it there</span>
 <span class="nb">fg</span> %1
-</code></pre></div>    </div>
+</code></pre></div></div>
 
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">ubuntu</span>:<span class="n">latest</span>
-<span class="n">COPY</span> <span class="n">my_main_process</span> <span class="n">my_main_process</span>
-<span class="n">COPY</span> <span class="n">my_helper_process</span> <span class="n">my_helper_process</span>
-<span class="n">COPY</span> <span class="n">my_wrapper_script</span>.<span class="n">sh</span> <span class="n">my_wrapper_script</span>.<span class="n">sh</span>
-<span class="n">CMD</span> ./<span class="n">my_wrapper_script</span>.<span class="n">sh</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Use a process manager like <code class="highlighter-rouge">supervisord</code>. This is a moderately heavy-weight
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
+<span class="k">COPY</span><span class="s"> my_main_process my_main_process</span>
+<span class="k">COPY</span><span class="s"> my_helper_process my_helper_process</span>
+<span class="k">COPY</span><span class="s"> my_wrapper_script.sh my_wrapper_script.sh</span>
+<span class="k">CMD</span><span class="s"> ./my_wrapper_script.sh</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Use a process manager like <code class="highlighter-rouge">supervisord</code>. This is a moderately heavy-weight
 approach that requires you to package <code class="highlighter-rouge">supervisord</code> and its configuration in
 your image (or base your image on one that includes <code class="highlighter-rouge">supervisord</code>), along with
 the different applications it manages. Then you start <code class="highlighter-rouge">supervisord</code>, which
 manages your processes for you. Here is an example Dockerfile using this
 approach, that assumes the pre-written <code class="highlighter-rouge">supervisord.conf</code>, <code class="highlighter-rouge">my_first_process</code>,
 and <code class="highlighter-rouge">my_second_process</code> files all exist in the same directory as your
-Dockerfile.</p>
-
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">ubuntu</span>:<span class="n">latest</span>
-<span class="n">RUN</span> <span class="n">apt</span>-<span class="n">get</span> <span class="n">update</span> &amp;&amp; <span class="n">apt</span>-<span class="n">get</span> <span class="n">install</span> -<span class="n">y</span> <span class="n">supervisor</span>
-<span class="n">RUN</span> <span class="n">mkdir</span> -<span class="n">p</span> /<span class="n">var</span>/<span class="n">log</span>/<span class="n">supervisor</span>
-<span class="n">COPY</span> <span class="n">supervisord</span>.<span class="n">conf</span> /<span class="n">etc</span>/<span class="n">supervisor</span>/<span class="n">conf</span>.<span class="n">d</span>/<span class="n">supervisord</span>.<span class="n">conf</span>
-<span class="n">COPY</span> <span class="n">my_first_process</span> <span class="n">my_first_process</span>
-<span class="n">COPY</span> <span class="n">my_second_process</span> <span class="n">my_second_process</span>
-<span class="n">CMD</span> [<span class="s2">"/usr/bin/supervisord"</span>]
-</code></pre></div>    </div>
-  </li>
+Dockerfile.</li>
 </ul>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> supervisor
+<span class="k">RUN </span>mkdir <span class="nt">-p</span> /var/log/supervisor
+<span class="k">COPY</span><span class="s"> supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span>
+<span class="k">COPY</span><span class="s"> my_first_process my_first_process</span>
+<span class="k">COPY</span><span class="s"> my_second_process my_second_process</span>
+<span class="k">CMD</span><span class="s"> ["/usr/bin/supervisord"]</span>
+</code></pre></div></div>
 
 							<!-- tags -->
 							

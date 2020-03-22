@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="このドキュメントは、効果的なイメージを構築する方法、お勧めのベストプラクティスについて示します。 Docker は Dockerfile に書かれた指示を読み込んで、自動的にイメージを構築します。 このファイルはあらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。 Dockerfile は所定のフォーマットや各種の命令に従います。 その内容は Dockerfile リファレンス に示しています。 Docker イメージは読み取り専用のレイヤーにより構成されます。 個々のレイヤーは Dockerfile の各命令を表現しています。 レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。 以下のような Dockerfile を見てみます。 FROM ubuntu:18.04 COPY . /app RUN make /app CMD..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="parent image, images, dockerfile, best practices, hub, official image">
@@ -184,7 +184,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    12 分
+    14 分
   
 </span>
 
@@ -203,11 +203,11 @@
 レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。
 以下のような <code class="highlighter-rouge">Dockerfile</code> を見てみます。</p>
 
-<pre><code class="language-Dockerfile">FROM ubuntu:18.04
-COPY . /app
-RUN make /app
-CMD python /app/app.py
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<span class="k">COPY</span><span class="s"> . /app</span>
+<span class="k">RUN </span>make /app
+<span class="k">CMD</span><span class="s"> python /app/app.py</span>
+</code></pre></div></div>
 
 <p>各コマンドからは 1 つずつレイヤーが生成されます。</p>
 
@@ -432,31 +432,31 @@ COPY hello.c .
 
 <p>たとえば Go 言語アプリケーションの Dockerfile は以下のようになります。</p>
 
-<pre><code class="language-Dockerfile">FROM golang:1.11-alpine AS build
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.11-alpine AS build</span>
 
-# 本プロジェクトに必要なツールをインストール。
-# `docker build --no-cache .` を実行して依存パッケージのアップデート。
-RUN apk add --no-cache git
-RUN go get github.com/golang/dep/cmd/dep
+<span class="c"># 本プロジェクトに必要なツールをインストール。</span>
+<span class="c"># `docker build --no-cache .` を実行して依存パッケージのアップデート。</span>
+<span class="k">RUN </span>apk add <span class="nt">--no-cache</span> git
+<span class="k">RUN </span>go get github.com/golang/dep/cmd/dep
 
-# プロジェクトの依存関係を Gopkg.toml と Gopkg.lock に列記。
-# これに対応するレイヤーは Gopkg ファイルの更新時のみ再ビルド。
-COPY Gopkg.lock Gopkg.toml /go/src/project/
-WORKDIR /go/src/project/
-# 依存ライブラリをインストール。
-RUN dep ensure -vendor-only
+<span class="c"># プロジェクトの依存関係を Gopkg.toml と Gopkg.lock に列記。</span>
+<span class="c"># これに対応するレイヤーは Gopkg ファイルの更新時のみ再ビルド。</span>
+<span class="k">COPY</span><span class="s"> Gopkg.lock Gopkg.toml /go/src/project/</span>
+<span class="k">WORKDIR</span><span class="s"> /go/src/project/</span>
+<span class="c"># 依存ライブラリをインストール。</span>
+<span class="k">RUN </span>dep ensure <span class="nt">-vendor-only</span>
 
-# プロジェクト全体をコピーしてビルド。
-# このレイヤーはプロジェクトディレクトリ内のファイル変更時に再ビルド。
-COPY . /go/src/project/
-RUN go build -o /bin/project
+<span class="c"># プロジェクト全体をコピーしてビルド。</span>
+<span class="c"># このレイヤーはプロジェクトディレクトリ内のファイル変更時に再ビルド。</span>
+<span class="k">COPY</span><span class="s"> . /go/src/project/</span>
+<span class="k">RUN </span>go build <span class="nt">-o</span> /bin/project
 
-# 以下によりイメージを 1 レイヤーに。
-FROM scratch
-COPY --from=build /bin/project /bin/project
-ENTRYPOINT ["/bin/project"]
-CMD ["--help"]
-</code></pre>
+<span class="c"># 以下によりイメージを 1 レイヤーに。</span>
+<span class="k">FROM</span><span class="s"> scratch</span>
+<span class="k">COPY</span><span class="s"> --from=build /bin/project /bin/project</span>
+<span class="k">ENTRYPOINT</span><span class="s"> ["/bin/project"]</span>
+<span class="k">CMD</span><span class="s"> ["--help"]</span>
+</code></pre></div></div>
 
 <h3 id="dont-install-unnecessary-packages">不要なパッケージをインストールしない</h3>
 
@@ -504,13 +504,13 @@ CMD ["--help"]
 
 <p>以下は <a href="https://github.com/docker-library/buildpack-deps"><code class="highlighter-rouge">buildpack-deps</code> イメージ</a> の記述例です。</p>
 
-<pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
-  bzr \
-  cvs \
-  git \
-  mercurial \
-  subversion
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> <span class="se">\
+</span>  bzr <span class="se">\
+</span>  cvs <span class="se">\
+</span>  git <span class="se">\
+</span>  mercurial <span class="se">\
+</span>  subversion
+</code></pre></div></div>
 
 <h3 id="leverage-build-cache">ビルドキャッシュの利用</h3>
 
@@ -573,13 +573,13 @@ Docker が従っている規則は以下のとおりです。</p>
 文字列内に引用符がある場合も、同様にエスケープしてください。</p>
 </blockquote>
 
-<pre><code class="language-Dockerfile"># 個々にラベルを設定
-LABEL com.example.version="0.0.1-beta"
-LABEL vendor1="ACME Incorporated"
-LABEL vendor2=ZENITH\ Incorporated
-LABEL com.example.release-date="2015-02-12"
-LABEL com.example.version.is-production=""
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 個々にラベルを設定</span>
+<span class="k">LABEL</span><span class="s"> com.example.version="0.0.1-beta"</span>
+<span class="k">LABEL</span><span class="s"> vendor1="ACME Incorporated"</span>
+<span class="k">LABEL</span><span class="s"> vendor2=ZENITH\ Incorporated</span>
+<span class="k">LABEL</span><span class="s"> com.example.release-date="2015-02-12"</span>
+<span class="k">LABEL</span><span class="s"> com.example.version.is-production=""</span>
+</code></pre></div></div>
 
 <p>イメージには複数のラベルを設定することができます。
 Docker 1.10 以前のバージョンでは、ラベルをすべてまとめて 1 つの <code class="highlighter-rouge">LABEL</code> 命令にすることが推奨されていました。
@@ -587,19 +587,19 @@ Docker 1.10 以前のバージョンでは、ラベルをすべてまとめて 1
 このことは、現在は必要ではなくなっています。
 ただしラベルをまとめる機能は今もサポートされています。</p>
 
-<pre><code class="language-Dockerfile"># 1 行でラベルを設定
-LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1 行でラベルを設定</span>
+<span class="k">LABEL</span><span class="s"> com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"</span>
+</code></pre></div></div>
 
 <p>上は以下のように書くこともできます。</p>
 
-<pre><code class="language-Dockerfile"># 複数のラベルを一度に設定、ただし行継続の文字を使い、長い文字列を改行する
-LABEL vendor=ACME\ Incorporated \
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 複数のラベルを一度に設定、ただし行継続の文字を使い、長い文字列を改行する</span>
+<span class="k">LABEL</span><span class="s"> vendor=ACME\ Incorporated \</span>
       com.example.is-beta= \
       com.example.is-production="" \
       com.example.version="0.0.1-beta" \
       com.example.release-date="2015-02-12"
-</code></pre>
+</code></pre></div></div>
 
 <p>利用可能なラベルのキーおよび値に関するガイドラインが <a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md">オブジェクトラベルの理解</a> に示されています。
 ラベルを検索する方法については、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/config/labels-custom-metadata.md#managing-labels-on-objects">オブジェクト内のラベル管理</a> に示されているフィルタリングに関する項目を参照してください。
@@ -626,27 +626,27 @@ LABEL vendor=ACME\ Incorporated \
 <p><code class="highlighter-rouge">RUN apt-get update</code> と <code class="highlighter-rouge">apt-get install</code> は、同一の <code class="highlighter-rouge">RUN</code> コマンド内にて同時実行するようにしてください。
 たとえば以下のようにします。</p>
 
-<pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
-    package-bar \
-    package-baz \
-    package-foo
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> <span class="se">\
+</span>    package-bar <span class="se">\
+</span>    package-baz <span class="se">\
+</span>    package-foo
+</code></pre></div></div>
 
 <p>１つの <code class="highlighter-rouge">RUN</code> コマンド内で <code class="highlighter-rouge">apt-get update</code> だけを使うとキャッシュに問題が発生し、その後の <code class="highlighter-rouge">apt-get install</code> コマンドが失敗します。
 たとえば Dockerfile を以下のように記述したとします。</p>
 
-<pre><code class="language-Dockerfile">FROM ubuntu:18.04
-RUN apt-get update
-RUN apt-get install -y curl
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<span class="k">RUN </span>apt-get update
+<span class="k">RUN </span>apt-get install <span class="nt">-y</span> curl
+</code></pre></div></div>
 
 <p>イメージが構築されると、レイヤーがすべて Docker のキャッシュに入ります。
 この次に <code class="highlighter-rouge">apt-get install</code> を編集して別のパッケージを追加したとします。</p>
 
-<pre><code class="language-Dockerfile">FROM ubuntu:18.04
-RUN apt-get update
-RUN apt-get install -y curl nginx
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<span class="k">RUN </span>apt-get update
+<span class="k">RUN </span>apt-get install <span class="nt">-y</span> curl nginx
+</code></pre></div></div>
 
 <p>Docker は当初のコマンドと修正後のコマンドを見て、同一のコマンドであると判断するので、前回の処理において作られたキャッシュを再利用します。
 キャッシュされたものを利用して処理が行われるわけですから、結果として <code class="highlighter-rouge">apt-get update</code> は実行されません。
@@ -658,32 +658,32 @@ RUN apt-get install -y curl nginx
 これはバージョンピニング（version pinning）というものです。
 以下に例を示します。</p>
 
-<pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
-    package-bar \
-    package-baz \
-    package-foo=1.3.*
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> <span class="se">\
+</span>    package-bar <span class="se">\
+</span>    package-baz <span class="se">\
+</span>    package-foo<span class="o">=</span>1.3.<span class="k">*</span>
+</code></pre></div></div>
 
 <p>バージョンピニングでは、キャッシュにどのようなイメージがあろうとも、指定されたバージョンを使ってビルドが行われます。
 この手法を用いれば、そのパッケージの最新版に、思いもよらない変更が加わっていたとしても、ビルド失敗を回避できることもあります。</p>
 
 <p>以下の <code class="highlighter-rouge">RUN</code> コマンドはきれいに整えられていて <code class="highlighter-rouge">apt-get</code> の推奨する利用方法を示しています。</p>
 
-<pre><code class="language-Dockerfile">RUN apt-get update &amp;&amp; apt-get install -y \
-    aufs-tools \
-    automake \
-    build-essential \
-    curl \
-    dpkg-sig \
-    libcap-dev \
-    libsqlite3-dev \
-    mercurial \
-    reprepro \
-    ruby1.9.1 \
-    ruby1.9.1-dev \
-    s3cmd=1.1.* \
- &amp;&amp; rm -rf /var/lib/apt/lists/*
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> <span class="se">\
+</span>    aufs-tools <span class="se">\
+</span>    automake <span class="se">\
+</span>    build-essential <span class="se">\
+</span>    curl <span class="se">\
+</span>    dpkg-sig <span class="se">\
+</span>    libcap-dev <span class="se">\
+</span>    libsqlite3-dev <span class="se">\
+</span>    mercurial <span class="se">\
+</span>    reprepro <span class="se">\
+</span>    ruby1.9.1 <span class="se">\
+</span>    ruby1.9.1-dev <span class="se">\
+</span>    <span class="nv">s3cmd</span><span class="o">=</span>1.1.<span class="k">*</span> <span class="se">\
+</span> <span class="o">&amp;&amp;</span> rm <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>
+</code></pre></div></div>
 
 <p><code class="highlighter-rouge">s3cmd</code> のコマンド行は、バージョン <code class="highlighter-rouge">1.1.*</code> を指定しています。
 以前に作られたイメージが古いバージョンを使っていたとしても、新たなバージョンの指定により <code class="highlighter-rouge">apt-get update</code> のキャッシュバスティングが働いて、確実に新バージョンがインストールされるようになります。
@@ -703,8 +703,8 @@ RUN apt-get install -y curl nginx
 そのときにはパイプを行う文字（ <code class="highlighter-rouge">|</code> ）を使います。
 たとえば以下のような例があります。</p>
 
-<pre><code class="language-Dockerfile">RUN wget -O - https://some.site | wc -l &gt; /number
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>wget <span class="nt">-O</span> - https://some.site | wc <span class="nt">-l</span> <span class="o">&gt;</span> /number
+</code></pre></div></div>
 
 <p>Docker はこういったコマンドを <code class="highlighter-rouge">/bin/sh -c</code> というインタープリター実行により実現します。
 正常処理されたかどうかは、パイプの最後の処理の終了コードにより評価されます。
@@ -715,8 +715,8 @@ RUN apt-get install -y curl nginx
 こうしておくと、予期しないエラーが発生して、それに気づかずにビルドされてしまう、といったことはなくなります。
 たとえば以下です。</p>
 
-<pre><code class="language-Dockerfile">RUN set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span><span class="nb">set</span> <span class="nt">-o</span> pipefail <span class="o">&amp;&amp;</span> wget <span class="nt">-O</span> - https://some.site | wc <span class="nt">-l</span> <span class="o">&gt;</span> /number
+</code></pre></div></div>
 
 <blockquote>
   <p>すべてのシェルが <code class="highlighter-rouge">-o pipefail</code> オプションをサポートしているわけではありません。
@@ -724,8 +724,8 @@ RUN apt-get install -y curl nginx
 これは <code class="highlighter-rouge">pipefail</code> オプションをサポートしているシェルを明示的に指示するものです。
 たとえば以下です。</p>
 
-  <pre><code class="language-Dockerfile">RUN ["/bin/bash", "-c", "set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number"]
-</code></pre>
+  <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span><span class="o">[</span><span class="s2">"/bin/bash"</span>, <span class="s2">"-c"</span>, <span class="s2">"set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number"</span><span class="o">]</span>
+</code></pre></div>  </div>
 </blockquote>
 
 <h3 id="cmd">CMD</h3>
@@ -772,11 +772,11 @@ Docker のリンク機能においては環境変数が利用できます。
 これによってバージョンを混同することなく、管理が容易になります。
 たとえば以下がその例です。</p>
 
-<pre><code class="language-Dockerfile">ENV PG_MAJOR 9.3
-ENV PG_VERSION 9.3.4
-RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress &amp;&amp; …
-ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ENV</span><span class="s"> PG_MAJOR 9.3</span>
+<span class="k">ENV</span><span class="s"> PG_VERSION 9.3.4</span>
+<span class="k">RUN </span>curl <span class="nt">-SL</span> http://example.com/postgres-<span class="nv">$PG_VERSION</span>.tar.xz | <span class="nb">tar</span> <span class="nt">-xJC</span> /usr/src/postgress <span class="o">&amp;&amp;</span> …
+<span class="k">ENV</span><span class="s"> PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH</span>
+</code></pre></div></div>
 
 <p>プログラムにおける（ハードコーディングではない）定数定義と同じことで、この方法をとっておくのが便利です。
 ただ１つの <code class="highlighter-rouge">ENV</code> コマンドを変更するだけで、コンテナー内のソフトウェアバージョンは、いとも簡単に変えてしまうことができるからです。</p>
@@ -786,11 +786,11 @@ ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
 ということはつまり、環境変数を先々のレイヤーにおいて無効化したとしても、その中間レイヤーに変数データは残ることになり、この値を消すことはできません。
 このことを確認するには、以下のような Dockerfile を生成してビルドを行ってみればわかります。</p>
 
-<pre><code class="language-Dockerfile">FROM alpine
-ENV ADMIN_USER="mark"
-RUN echo $ADMIN_USER &gt; ./mark
-RUN unset ADMIN_USER
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine</span>
+<span class="k">ENV</span><span class="s"> ADMIN_USER="mark"</span>
+<span class="k">RUN </span><span class="nb">echo</span> <span class="nv">$ADMIN_USER</span> <span class="o">&gt;</span> ./mark
+<span class="k">RUN </span><span class="nb">unset </span>ADMIN_USER
+</code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nb">test </span>sh <span class="nt">-c</span> <span class="s1">'echo $ADMIN_USER'</span>
 
@@ -805,12 +805,12 @@ mark
 Linux における Dockerfile では行継続文字を表わす <code class="highlighter-rouge">\</code> を用いると、読みやすくなります。
 あるいは実行する命令をすべてシェルスクリプトに書き入れて、<code class="highlighter-rouge">RUN</code> コマンドによってそのシェルスクリプトを実行するようなこともできます。</p>
 
-<pre><code class="language-Dockerfile">FROM alpine
-RUN export ADMIN_USER="mark" \
-    &amp;&amp; echo $ADMIN_USER &gt; ./mark \
-    &amp;&amp; unset ADMIN_USER
-CMD sh
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine</span>
+<span class="k">RUN </span><span class="nb">export </span><span class="nv">ADMIN_USER</span><span class="o">=</span><span class="s2">"mark"</span> <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nv">$ADMIN_USER</span> <span class="o">&gt;</span> ./mark <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">unset </span>ADMIN_USER
+<span class="k">CMD</span><span class="s"> sh</span>
+</code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nb">test </span>sh <span class="nt">-c</span> <span class="s1">'echo $ADMIN_USER'</span>
 
@@ -836,10 +836,10 @@ CMD sh
 
 <p>例</p>
 
-<pre><code class="language-Dockerfile">COPY requirements.txt /tmp/
-RUN pip install --requirement /tmp/requirements.txt
-COPY . /tmp/
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> requirements.txt /tmp/</span>
+<span class="k">RUN </span>pip install <span class="nt">--requirement</span> /tmp/requirements.txt
+<span class="k">COPY</span><span class="s"> . /tmp/</span>
+</code></pre></div></div>
 
 <p><code class="highlighter-rouge">RUN</code> コマンドのステップより前に <code class="highlighter-rouge">COPY . /tmp/</code> を実行していたとしたら、それに比べて上の例はキャッシュ無効化の可能性が低くなっています。</p>
 
@@ -848,18 +848,18 @@ COPY . /tmp/
 こうしておくことで、ファイルを取得し展開した後や、イメージ内の他のレイヤーにファイルを加える必要がないのであれば、その後にファイルを削除することができます。
 たとえば以下に示すのは、やってはいけない例です。</p>
 
-<pre><code class="language-Dockerfile">ADD http://example.com/big.tar.xz /usr/src/things/
-RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
-RUN make -C /usr/src/things all
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ADD</span><span class="s"> http://example.com/big.tar.xz /usr/src/things/</span>
+<span class="k">RUN </span><span class="nb">tar</span> <span class="nt">-xJf</span> /usr/src/things/big.tar.xz <span class="nt">-C</span> /usr/src/things
+<span class="k">RUN </span>make <span class="nt">-C</span> /usr/src/things all
+</code></pre></div></div>
 
 <p>そのかわり、次のように記述します。</p>
 
-<pre><code class="language-Dockerfile">RUN mkdir -p /usr/src/things \
-    &amp;&amp; curl -SL http://example.com/big.tar.xz \
-    | tar -xJC /usr/src/things \
-    &amp;&amp; make -C /usr/src/things all
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>mkdir <span class="nt">-p</span> /usr/src/things <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> curl <span class="nt">-SL</span> http://example.com/big.tar.xz <span class="se">\
+</span>    | <span class="nb">tar</span> <span class="nt">-xJC</span> /usr/src/things <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> make <span class="nt">-C</span> /usr/src/things all
+</code></pre></div></div>
 
 <p><code class="highlighter-rouge">ADD</code> の自動展開機能を必要としないもの（ファイルやディレクトリ）に対しては、常に <code class="highlighter-rouge">COPY</code> を使うようにしてください。</p>
 
@@ -872,9 +872,9 @@ RUN make -C /usr/src/things all
 
 <p>コマンドラインツール <code class="highlighter-rouge">s3cmd</code> のイメージ例から始めます。</p>
 
-<pre><code class="language-Dockerfile">ENTRYPOINT ["s3cmd"]
-CMD ["--help"]
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ENTRYPOINT</span><span class="s"> ["s3cmd"]</span>
+<span class="k">CMD</span><span class="s"> ["--help"]</span>
+</code></pre></div></div>
 
 <p>このイメージが実行されると、コマンドのヘルプが表示されます。</p>
 
@@ -921,10 +921,10 @@ CMD ["--help"]
 
 <p>ヘルパースクリプトはコンテナーの中にコピーされ、コンテナー開始時に <code class="highlighter-rouge">ENTRYPOINT</code> から実行されます。</p>
 
-<pre><code class="language-Dockerfile">COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["postgres"]
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> ./docker-entrypoint.sh /</span>
+<span class="k">ENTRYPOINT</span><span class="s"> ["/docker-entrypoint.sh"]</span>
+<span class="k">CMD</span><span class="s"> ["postgres"]</span>
+</code></pre></div></div>
 
 <p>このスクリプトを用いると、Postgres との間で、ユーザーがいろいろな方法でやり取りできるようになります。</p>
 

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-03-17 22:22:17 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-17T22:22:17+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="リファレンスとガイドライン ここに示す内容は Compose ファイルフォーマット、バージョン 2 です。 Compose と Docker の互換マトリックス Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。 その様子は以下の一覧表に見ることができます。 各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については バージョンとアップグレードについてを参照してください。 以下の一覧表は、Compose ファイルのどのバージョンが Docker リリースをサポートしているかを示すものです。 Compose ファイルフォーマット Docker Engine リリース 3.7 18.06.0 以上 3.6..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-03-17T22:22:17+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="fig, composition, compose version 3, docker">
@@ -184,7 +184,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    22 分
+    32 分
   
 </span>
 
@@ -285,7 +285,7 @@ Compose ファイルのデフォルトパスは <code class="highlighter-rouge">
 いずれでも動作します。</p>
 </blockquote>
 
-<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/glossary.md#container">コンテナー</a> の定義とは、対応するサービスを起動する各コンテナーに適用される設定を行うことです。
+<p>サービスの定義には、対応するサービスを起動する各コンテナーに適用される設定を行ないます。
 コマンドラインから <code class="highlighter-rouge">docker run</code> のパラメーターを受け渡すことと、非常によく似ています。
 同様に、ネットワークの定義、ボリュームの定義は、それぞれ <code class="highlighter-rouge">docker network create</code> と <code class="highlighter-rouge">docker volume create</code> のコマンドに対応づくものです。</p>
 
@@ -363,48 +363,40 @@ services:
 
 <p>この設定オプションはビルド時に適用されます。</p>
 
-<p><code class="highlighter-rouge">build</code> の指定は 1 つには、ビルドコンテキストへのパスを表わす文字列を指定します。
-あるいは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#context">context</a> の指定のもとにパスを指定し、オプションとして <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#dockerfile">Dockerfile</a> や <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#args">args</a> を記述する方法をとります。</p>
+<p><code class="highlighter-rouge">build</code> の指定は 1 つには、ビルドコンテキストへのパスを表わす文字列を指定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build: ./dir
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">./dir</span>
+</code></pre></div></div>
 
-build:
-  context: ./dir
-  dockerfile: Dockerfile-alternate
-  args:
-    buildno: 1
+<p>あるいは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#context">コンテキスト</a> 内にあるパスを指定したオブジェクトとし、必要に応じて <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#dockerfile">Dockerfile</a> や <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#args">引数</a> を指定します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">context</span><span class="pi">:</span> <span class="s">./dir</span>
+      <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">Dockerfile-alternate</span>
+      <span class="na">args</span><span class="pi">:</span>
+        <span class="na">buildno</span><span class="pi">:</span> <span class="s">1</span>
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">build</code> に加えて <code class="highlighter-rouge">image</code> も指定した場合、Compose はビルドイメージに名前をつけます。
 たとえば以下のように <code class="highlighter-rouge">image</code> を指定すると、イメージ名を <code class="highlighter-rouge">webapp</code>、オプションのタグを <code class="highlighter-rouge">tag</code> という名前にします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build: ./dir
-image: webapp:tag
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span> <span class="s">./dir</span>
+<span class="na">image</span><span class="pi">:</span> <span class="s">webapp:tag</span>
 </code></pre></div></div>
 
 <p>結果としてイメージ名は <code class="highlighter-rouge">webapp</code> であり <code class="highlighter-rouge">tag</code> というタグづけが行われます。
 そしてこのイメージは <code class="highlighter-rouge">./dir</code> から作り出されます。</p>
 
-<h4 id="cache_from">cache_from</h4>
-
-<blockquote>
-  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">バージョン 2.2</a> において追加されました。</p>
-</blockquote>
-
-<p>エンジンがキャッシュ解決のために利用するイメージを設定します。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build:
-  context: .
-  cache_from:
-    - alpine:latest
-    - corp/web_app:3.14
-</code></pre></div></div>
-
 <h4 id="context">context</h4>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> またはそれ以降。
-バージョン 1 の場合は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#build">build</a> を用いてください。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">バージョン 2.0</a> において追加されました。</p>
 </blockquote>
 
 <p>Dockerfile を含むディレクトリへのパスか、あるいは git リポジトリの URL を設定します。</p>
@@ -414,8 +406,8 @@ image: webapp:tag
 
 <p>Compose は指定された名前により、イメージのビルドとタグづけを行い、後々これを利用します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build:
-  context: ./dir
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">./dir</span>
 </code></pre></div></div>
 
 <h4 id="dockerfile">dockerfile</h4>
@@ -425,15 +417,15 @@ image: webapp:tag
 <p>Compose は指定された別の Dockerfile を使ってビルドを行います。
 このときは、ビルドパスを同時に指定しなければなりません。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build:
-  context: .
-  dockerfile: Dockerfile-alternate
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">Dockerfile-alternate</span>
 </code></pre></div></div>
 
 <h4 id="args">args</h4>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> またはそれ以降。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">バージョン 2.0</a> において追加されました。</p>
 </blockquote>
 
 <p>ビルド引数を追加します。
@@ -441,63 +433,83 @@ image: webapp:tag
 
 <p>Dockerfile 内にてはじめにビルド引数を指定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ARG buildno
-ARG gitcommithash
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ARG</span><span class="s"> buildno</span>
+<span class="k">ARG</span><span class="s"> gitcommithash</span>
 
-RUN echo "Build number: $buildno"
-RUN echo "Based on commit: $gitcommithash"
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"Build number: </span><span class="nv">$buildno</span><span class="s2">"</span>
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"Based on commit: </span><span class="nv">$gitcommithash</span><span class="s2">"</span>
 </code></pre></div></div>
 
 <p>そして <code class="highlighter-rouge">build</code> キーのもとにその引数を指定します。
 指定は個々をマッピングする形式か、リストとする形式が可能です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build:
-  context: .
-  args:
-    buildno: 1
-    gitcommithash: cdc3b19
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">args</span><span class="pi">:</span>
+    <span class="na">buildno</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="na">gitcommithash</span><span class="pi">:</span> <span class="s">cdc3b19</span>
+</code></pre></div></div>
 
-build:
-  context: .
-  args:
-    - buildno=1
-    - gitcommithash=cdc3b19
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">args</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">buildno=1</span>
+    <span class="pi">-</span> <span class="s">gitcommithash=cdc3b19</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: Dockerfile にて <code class="highlighter-rouge">FROM</code> 命令の前に <code class="highlighter-rouge">ARG</code> 命令を指定した場合、<code class="highlighter-rouge">FROM</code> 以降のビルド命令において <code class="highlighter-rouge">ARG</code> の値は利用することができません。
-<code class="highlighter-rouge">FROM</code> の前後どこでも、そして特に <code class="highlighter-rouge">FROM</code> 命令の後でもその値を利用したい場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/#understand-how-arg-and-from-interact">ARG と FROM の関連について</a>を参照してください。</p>
+  <p>ビルド引数のスコープ</p>
+
+  <p>Dockerfile にて <code class="highlighter-rouge">FROM</code> 命令の前に <code class="highlighter-rouge">ARG</code> 命令を指定した場合、<code class="highlighter-rouge">FROM</code> 以降のビルド命令において <code class="highlighter-rouge">ARG</code> の値は利用することができません。
+<code class="highlighter-rouge">FROM</code> の前後どこでも、そして特に <code class="highlighter-rouge">FROM</code> 命令の後でもその値を利用したい場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/#understand-how-arg-and-from-interact">ARG と FROM の関連について</a> を参照してください。</p>
 </blockquote>
 
 <p>ビルド引数の指定にあたって、その値設定を省略することができます。
 この場合、ビルド時におけるその値は、Compose を起動している環境での値になります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>args:
-  - buildno
-  - gitcommithash
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">args</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">buildno</span>
+  <span class="pi">-</span> <span class="s">gitcommithash</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: YAML のブール値 (<code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">false</code>, <code class="highlighter-rouge">yes</code>, <code class="highlighter-rouge">no</code>, <code class="highlighter-rouge">on</code>, <code class="highlighter-rouge">off</code>) を用いる場合は、クォートで囲む必要があります。
+  <p>ブール値利用時のメモ</p>
+
+  <p>YAML のブール値 (<code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">false</code>, <code class="highlighter-rouge">yes</code>, <code class="highlighter-rouge">no</code>, <code class="highlighter-rouge">on</code>, <code class="highlighter-rouge">off</code>) を用いる場合は、クォートで囲む必要があります。
 そうすることで、これらの値は文字列として解釈されます。</p>
 </blockquote>
+
+<h4 id="cache_from">cache_from</h4>
+
+<blockquote>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">バージョン 2.2</a> において追加されました。</p>
+</blockquote>
+
+<p>エンジンがキャッシュ解決のために利用するイメージを設定します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">cache_from</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">alpine:latest</span>
+    <span class="pi">-</span> <span class="s">corp/web_app:3.14</span>
+</code></pre></div></div>
 
 <h4 id="extra_hosts">extra_hosts</h4>
 
 <p>ビルド時におけるホスト名のマッピングを追加します。
 Docker Client の <code class="highlighter-rouge">--add-host</code> パラメーターと同じ値を設定してください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>extra_hosts:
- - "somehost:162.242.195.82"
- - "otherhost:50.31.209.229"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extra_hosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">somehost:162.242.195.82"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">otherhost:50.31.209.229"</span>
 </code></pre></div></div>
 
 <p>ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の <code class="highlighter-rouge">/etc/hosts</code> に追加されます。
 たとえば以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>162.242.195.82  somehost
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">162.242.195.82  somehost
 50.31.209.229   otherhost
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h4 id="isolation">isolation</h4>
 
@@ -523,20 +535,20 @@ Windows では <code class="highlighter-rouge">default</code>, <code class="high
 
 <p>他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build:
-  context: .
-  labels:
-    com.example.description: "Accounting webapp"
-    com.example.department: "Finance"
-    com.example.label-with-empty-value: ""
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+    <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Finance"</span>
+    <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
 
-
-build:
-  context: .
-  labels:
-    - "com.example.description=Accounting webapp"
-    - "com.example.department=Finance"
-    - "com.example.label-with-empty-value"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=Finance"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
 </code></pre></div></div>
 
 <h4 id="network">network</h4>
@@ -547,14 +559,14 @@ build:
 
 <p>ビルド時の <code class="highlighter-rouge">RUN</code> 命令において接続するネットワークコンテナーを設定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build:
-  context: .
-  network: host
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">network</span><span class="pi">:</span> <span class="s">host</span>
+</code></pre></div></div>
 
-
-build:
-  context: .
-  network: custom_network_1
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">network</span><span class="pi">:</span> <span class="s">custom_network_1</span>
 </code></pre></div></div>
 
 <h4 id="shm_size">shm_size</h4>
@@ -566,14 +578,14 @@ build:
 <p>このビルドコンテナーにおける <code class="highlighter-rouge">/dev/shm</code> パーティションのサイズを設定します。
 指定する値は、バイト数を表わす整数値か、あるいは<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#specifying-byte-values">バイト表現</a>によって表わされる文字列とします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build:
-  context: .
-  shm_size: '2gb'
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">shm_size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2gb'</span>
+</code></pre></div></div>
 
-
-build:
-  context: .
-  shm_size: 10000000
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">shm_size</span><span class="pi">:</span> <span class="s">10000000</span>
 </code></pre></div></div>
 
 <h4 id="target">target</h4>
@@ -584,9 +596,9 @@ build:
 
 <p><code class="highlighter-rouge">Dockerfile</code> 内部に定義されている特定のステージをビルドする方法は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/eng-image/multistage-build.md">マルチステージビルド</a>を参照してください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  build:
-    context: .
-    target: prod
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">build</span><span class="pi">:</span>
+  <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">target</span><span class="pi">:</span> <span class="s">prod</span>
 </code></pre></div></div>
 
 <h3 id="cap_add-cap_drop">cap_add, cap_drop</h3>
@@ -594,38 +606,38 @@ build:
 <p>コンテナーケーパビリティーの機能を追加または削除します。
 詳細な一覧は <code class="highlighter-rouge">man 7 capabilities</code> を参照してください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cap_add:
-  - ALL
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">cap_add</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">ALL</span>
 
-cap_drop:
-  - NET_ADMIN
-  - SYS_ADMIN
-</code></pre></div></div>
-
-<h3 id="command">command</h3>
-
-<p>デフォルトコマンドを上書きします。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>command: bundle exec thin -p 3000
-</code></pre></div></div>
-
-<p>このコマンドは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#cmd">dockerfile</a> の場合と同じように、リスト形式により指定することもできます。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>command: ["bundle", "exec", "thin", "-p", "3000"]
+<span class="na">cap_drop</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">NET_ADMIN</span>
+  <span class="pi">-</span> <span class="s">SYS_ADMIN</span>
 </code></pre></div></div>
 
 <h3 id="cgroup_parent">cgroup_parent</h3>
 
 <p>コンテナーに対して、オプションで指定する親の cgroup を指定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cgroup_parent: m-executor-abcd
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">cgroup_parent</span><span class="pi">:</span> <span class="s">m-executor-abcd</span>
+</code></pre></div></div>
+
+<h3 id="command">command</h3>
+
+<p>デフォルトコマンドを上書きします。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">command</span><span class="pi">:</span> <span class="s">bundle exec thin -p 3000</span>
+</code></pre></div></div>
+
+<p>このコマンドは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#cmd">dockerfile</a> の場合と同じように、リスト形式により指定することもできます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">bundle"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">exec"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">thin"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-p"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">3000"</span><span class="pi">]</span>
 </code></pre></div></div>
 
 <h3 id="container_name">container_name</h3>
 
 <p>デフォルトのコンテナー名ではない、独自のコンテナー名を設定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>container_name: my-web-container
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">container_name</span><span class="pi">:</span> <span class="s">my-web-container</span>
 </code></pre></div></div>
 
 <p>Docker コンテナー名はユニークである必要があります。
@@ -640,12 +652,14 @@ cap_drop:
 
 <p>Docker デーモンのリアルタイムスケジューラーが利用する CPU 割り当てパラメーターを設定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cpu_rt_runtime: '400ms'
-cpu_rt_period: '1400us'
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">cpu_rt_runtime</span><span class="pi">:</span> <span class="s1">'</span><span class="s">400ms'</span>
+<span class="na">cpu_rt_period</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1400us'</span>
+</code></pre></div></div>
 
-# マイクロ秒単位で整数値を指定します。
-cpu_rt_runtime: 95000
-cpu_rt_period: 11000
+<p>マイクロ秒単位で整数値を指定します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">cpu_rt_runtime</span><span class="pi">:</span> <span class="s">95000</span>
+<span class="na">cpu_rt_period</span><span class="pi">:</span> <span class="s">11000</span>
 </code></pre></div></div>
 
 <h3 id="device_cgroup_rules">device_cgroup_rules</h3>
@@ -656,9 +670,9 @@ cpu_rt_period: 11000
 
 <p>cgroup としてアクセス許可されているデバイスリストにルールを追加します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>device_cgroup_rules:
-  - 'c 1:3 mr'
-  - 'a 7:* rmw'
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">device_cgroup_rules</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">c</span><span class="nv"> </span><span class="s">1:3</span><span class="nv"> </span><span class="s">mr'</span>
+  <span class="pi">-</span> <span class="s1">'</span><span class="s">a</span><span class="nv"> </span><span class="s">7:*</span><span class="nv"> </span><span class="s">rmw'</span>
 </code></pre></div></div>
 
 <h3 id="devices">devices</h3>
@@ -666,14 +680,14 @@ cpu_rt_period: 11000
 <p>デバイスのマッピングをリスト形式で設定します。
 Docker クライアントの create オプションの <code class="highlighter-rouge">--device</code> と同じ書式にします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>devices:
-  - "/dev/ttyUSB0:/dev/ttyUSB0"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">devices</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">/dev/ttyUSB0:/dev/ttyUSB0"</span>
 </code></pre></div></div>
 
 <h3 id="depends_on">depends_on</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> またはそれ以降。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-23">バージョン 2.0</a> において追加されました。</p>
 </blockquote>
 
 <p>サービス間の依存関係を表わします。
@@ -684,33 +698,33 @@ Docker クライアントの create オプションの <code class="highlighter-
     <p><code class="highlighter-rouge">docker-compose up</code> は依存関係の順にサービスを起動します。
 以下の例において <code class="highlighter-rouge">db</code> と <code class="highlighter-rouge">redis</code> は <code class="highlighter-rouge">web</code> の後に起動します。</p>
   </li>
-  <li>
-    <p><code class="highlighter-rouge">docker-compose up SERVICE</code> を実行すると <code class="highlighter-rouge">SERVICE</code> における依存関係をもとに動作します。
-以下の例において <code class="highlighter-rouge">docker-compose up web</code> を実行すると <code class="highlighter-rouge">db</code> と <code class="highlighter-rouge">redis</code> を生成して起動します。</p>
-  </li>
+  <li><code class="highlighter-rouge">docker-compose up SERVICE</code> を実行すると <code class="highlighter-rouge">SERVICE</code> における依存関係をもとに動作します。
+以下の例において <code class="highlighter-rouge">docker-compose up web</code> を実行すると <code class="highlighter-rouge">db</code> と <code class="highlighter-rouge">redis</code> を生成して起動します。</li>
+  <li><code class="highlighter-rouge">docker-compose stop</code> stops services in dependency order. In the following
+example, <code class="highlighter-rouge">web</code> is stopped before <code class="highlighter-rouge">db</code> and <code class="highlighter-rouge">redis</code>.</li>
 </ul>
 
 <p>以下がその簡単な例です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-services:
-  web:
-    build: .
-    depends_on:
-      - db
-      - redis
-  redis:
-    image: redis
-  db:
-    image: postgres
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+      <span class="pi">-</span> <span class="s">redis</span>
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: <code class="highlighter-rouge">depends_on</code> では <code class="highlighter-rouge">db</code> や <code class="highlighter-rouge">redis</code> が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに <code class="highlighter-rouge">web</code> を起動します。
-  準備状態になるのを待ってから次のサービスを起動することが必要な場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/startup-order.md">Compose における起動順の制御</a>にて示す内容と解決方法を確認してください。</p>
-</blockquote>
+  <p><strong>メモ</strong></p>
 
-<h3 id="healthcheck">healthcheck</h3>
+  <p><code class="highlighter-rouge">depends_on</code> では <code class="highlighter-rouge">db</code> や <code class="highlighter-rouge">redis</code> が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに <code class="highlighter-rouge">web</code> を起動します。
+準備状態になるのを待ってから次のサービスを起動することが必要な場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/startup-order.md">Compose における起動順の制御</a>にて示す内容と解決方法を確認してください。</p>
+</blockquote>
 
 <blockquote>
   <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
@@ -721,21 +735,21 @@ services:
 
 <p>以下がその例です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-services:
-  web:
-    build: .
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
-  redis:
-    image: redis
-  db:
-    image: redis
-    healthcheck:
-      test: "exit 0"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="na">db</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">service_healthy</span>
+      <span class="na">redis</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">service_started</span>
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis</span>
+    <span class="na">healthcheck</span><span class="pi">:</span>
+      <span class="na">test</span><span class="pi">:</span> <span class="s2">"</span><span class="s">exit</span><span class="nv"> </span><span class="s">0"</span>
 </code></pre></div></div>
 
 <p>上の例において Compose は <code class="highlighter-rouge">redis</code> サービスが起動するのを待ちます（従来からの動作）。
@@ -748,19 +762,21 @@ services:
 <p>DNS サーバーを設定します。
 設定は 1 つだけとするか、リストにすることができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dns: 8.8.8.8
-dns:
-  - 8.8.8.8
-  - 9.9.9.9
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns</span><span class="pi">:</span> <span class="s">8.8.8.8</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">8.8.8.8</span>
+  <span class="pi">-</span> <span class="s">9.9.9.9</span>
 </code></pre></div></div>
 
 <h3 id="dns_opt">dns_opt</h3>
 
 <p>コンテナーの <code class="highlighter-rouge">resolv.conf</code> ファイルに追加する独自の DNS オプションを、リスト形式で設定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dns_opt:
-  - use-vc
-  - no-tld-query
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns_opt</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">use-vc</span>
+  <span class="pi">-</span> <span class="s">no-tld-query</span>
 </code></pre></div></div>
 
 <h3 id="dns_search">dns_search</h3>
@@ -768,44 +784,31 @@ dns:
 <p>DNS 検索ドメインを設定します。
 設定は 1 つだけとするか、リストにすることができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dns_search: example.com
-dns_search:
-  - dc1.example.com
-  - dc2.example.com
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns_search</span><span class="pi">:</span> <span class="s">example.com</span>
 </code></pre></div></div>
 
-<h3 id="tmpfs">tmpfs</h3>
-
-<p>コンテナー内においてテンポラリファイルシステムをマウントします。
-設定は 1 つだけとするか、リストにすることができます。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tmpfs: /run
-tmpfs:
-  - /run
-  - /tmp
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dns_search</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">dc1.example.com</span>
+  <span class="pi">-</span> <span class="s">dc2.example.com</span>
 </code></pre></div></div>
 
 <h3 id="entrypoint">entrypoint</h3>
 
 <p>デフォルトのエントリーポイントを上書きします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>entrypoint: /code/entrypoint.sh
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">entrypoint</span><span class="pi">:</span> <span class="s">/code/entrypoint.sh</span>
 </code></pre></div></div>
 
 <p>エントリーポイントはリスト形式で設定することができます。
 その指定方法は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#entrypoint">Dockerfile</a> と同様です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>entrypoint:
-    - php
-    - -d
-    - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
-    - -d
-    - memory_limit=-1
-    - vendor/bin/phpunit
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">entrypoint</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">php"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-d"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">memory_limit=-1"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">vendor/bin/phpunit"</span><span class="pi">]</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: <code class="highlighter-rouge">entrypoint</code> を設定すると、サービスイメージ内に Dockerfile 命令の <code class="highlighter-rouge">ENTRYPOINT</code> によって設定されているデフォルトのエントリーポイントは上書きされ、<strong>さらに</strong>イメージ内のあらゆるデフォルトコマンドもクリアされます。
+  <p><strong>メモ</strong></p>
+
+  <p><code class="highlighter-rouge">entrypoint</code> を設定すると、サービスイメージ内に Dockerfile 命令の <code class="highlighter-rouge">ENTRYPOINT</code> によって設定されているデフォルトのエントリーポイントは上書きされ、<strong>さらに</strong>イメージ内のあらゆるデフォルトコマンドもクリアされます。
 これはつまり、Dockerfile に <code class="highlighter-rouge">CMD</code> 命令があったとしたら無視されるということです。</p>
 </blockquote>
 
@@ -819,24 +822,27 @@ tmpfs:
 <p>環境変数が <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#environment">environment</a> の項に宣言されていれば、ここでの設定を<strong>オーバーライド</strong>します。
 たとえ設定値が空や未定義であっても、これは変わりません。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>env_file: .env
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env_file</span><span class="pi">:</span> <span class="s">.env</span>
+</code></pre></div></div>
 
-env_file:
-  - ./common.env
-  - ./apps/web.env
-  - /opt/secrets.env
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">env_file</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">./common.env</span>
+  <span class="pi">-</span> <span class="s">./apps/web.env</span>
+  <span class="pi">-</span> <span class="s">/opt/runtime_opts.env</span>
 </code></pre></div></div>
 
 <p>env ファイルの各行は <code class="highlighter-rouge">VAR=VAL</code> の書式とします。
 行先頭に <code class="highlighter-rouge">#</code> があると、コメント行となり無視されます。
 空行も無視されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Set Rails/Rack environment
-RACK_ENV=development
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> Set Rails/Rack environment
+<span class="go">RACK_ENV=development
+</span></code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: サービスに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#build">build</a> オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+  <p><strong>メモ</strong></p>
+
+  <p>サービスに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#build">build</a> オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
 その場合は <code class="highlighter-rouge">build</code> のサブオプション <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#args">args</a> を利用して、ビルド時の環境変数を設定してください。</p>
 </blockquote>
 
@@ -860,13 +866,13 @@ RACK_ENV=development
 
 <p>ファイルの内容は以下であるとします。</p>
 
-<pre><code class="language-none"># a.env
-VAR=1
-</code></pre>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> a.env
+<span class="go">VAR=1
+</span></code></pre></div></div>
 
-<pre><code class="language-none"># b.env
-VAR=hello
-</code></pre>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> b.env
+<span class="go">VAR=hello
+</span></code></pre></div></div>
 
 <p>この結果 <code class="highlighter-rouge">$VAR</code> は <code class="highlighter-rouge">hello</code> になります。</p>
 
@@ -874,24 +880,27 @@ VAR=hello
 
 <p>環境変数を追加します。
 配列形式または辞書形式での指定が可能です。
-ブール値 <code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">false</code>, <code class="highlighter-rouge">yes</code>, <code class="highlighter-rouge">no</code> を用いる場合は、クォートで囲むことで YML パーサーによって True や False に変換されてしまうのを防ぐ必要があります。</p>
+ブール値（<code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">false</code>, <code class="highlighter-rouge">yes</code>, <code class="highlighter-rouge">no</code>）を用いる場合は、クォートで囲むことで YML パーサーによって True や False に変換されてしまうのを防ぐ必要があります。</p>
 
 <p>環境変数だけが記述されている場合は、Compose が起動しているマシン上にて定義されている値が設定されます。
 これは機密情報やホスト固有の値を設定する場合に利用できます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>environment:
-  RACK_ENV: development
-  SHOW: 'true'
-  SESSION_SECRET:
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">environment</span><span class="pi">:</span>
+  <span class="na">RACK_ENV</span><span class="pi">:</span> <span class="s">development</span>
+  <span class="na">SHOW</span><span class="pi">:</span> <span class="s1">'</span><span class="s">true'</span>
+  <span class="na">SESSION_SECRET</span><span class="pi">:</span>
+</code></pre></div></div>
 
-environment:
-  - RACK_ENV=development
-  - SHOW=true
-  - SESSION_SECRET
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">environment</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">RACK_ENV=development</span>
+  <span class="pi">-</span> <span class="s">SHOW=true</span>
+  <span class="pi">-</span> <span class="s">SESSION_SECRET</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: サービスに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#build">build</a> オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+  <p><strong>メモ</strong></p>
+
+  <p>サービスに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#build">build</a> オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
 その場合は <code class="highlighter-rouge">build</code> のサブオプション <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#args">args</a> を利用して、ビルド時の環境変数を設定してください。</p>
 </blockquote>
 
@@ -901,9 +910,9 @@ environment:
 これはリンクされたサービスのみアクセスが可能になります。
 内部ポートのみが指定できます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>expose:
- - "3000"
- - "8000"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">expose</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">3000"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">8000"</span>
 </code></pre></div></div>
 
 <h3 id="extends">extends</h3>
@@ -915,9 +924,9 @@ environment:
 <code class="highlighter-rouge">extends</code> に設定する値は辞書形式であり、<code class="highlighter-rouge">service</code> キーが必須です。
 また必要に応じて指定する <code class="highlighter-rouge">file</code> キーがあります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>extends:
-  file: common.yml
-  service: webapp
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extends</span><span class="pi">:</span>
+  <span class="na">file</span><span class="pi">:</span> <span class="s">common.yml</span>
+  <span class="na">service</span><span class="pi">:</span> <span class="s">webapp</span>
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">service</code> は拡張するサービスの名前を指定します。
@@ -938,17 +947,20 @@ environment:
 
 <p>今の <code class="highlighter-rouge">docker-compose.yml</code> からではない別のところから起動されたコンテナーをリンクします。
 あるいは Compose の外から、特に共有サービスや汎用サービスとして提供されるコンテナーをリンクします。
-<code class="highlighter-rouge">external_links</code> の文法は、オプション <code class="highlighter-rouge">links</code> と同様です。
+<code class="highlighter-rouge">external_links</code> の文法は、古いオプション <code class="highlighter-rouge">links</code> と同様です。
 つまりコンテナー名とリンクのエイリアス名（<code class="highlighter-rouge">CONTAINER:ALIAS</code>）を同時に指定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>external_links:
- - redis_1
- - project_db_1:mysql
- - project_db_1:postgresql
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">external_links</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">redis_1</span>
+  <span class="pi">-</span> <span class="s">project_db_1:mysql</span>
+  <span class="pi">-</span> <span class="s">project_db_1:postgresql</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: ファイルフォーマットバージョン 2 を利用しているときに、外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>ファイルフォーマット <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">バージョン 2</a> 以降を利用しているときに、外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
+<a href="compose-file-v2#links">Links</a> オプションは古いものなので、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#networks">networks</a> オプションを用いてください。</p>
 </blockquote>
 
 <h3 id="extra_hosts-1">extra_hosts</h3>
@@ -956,17 +968,17 @@ environment:
 <p>ホスト名のマッピングを追加します。
 Docker Client の <code class="highlighter-rouge">--add-host</code> パラメーターと同じ値を設定してください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>extra_hosts:
- - "somehost:162.242.195.82"
- - "otherhost:50.31.209.229"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">extra_hosts</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">somehost:162.242.195.82"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">otherhost:50.31.209.229"</span>
 </code></pre></div></div>
 
 <p>ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の <code class="highlighter-rouge">/etc/hosts</code> に追加されます。
 たとえば以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>162.242.195.82  somehost
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">162.242.195.82  somehost
 50.31.209.229   otherhost
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h3 id="group_add">group_add</h3>
 
@@ -978,69 +990,80 @@ Docker Client の <code class="highlighter-rouge">--add-host</code> パラメー
 
 <p>全体的な例として以下です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-services:
-  myservice:
-    image: alpine
-    group_add:
-      - mail
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">myservice</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">alpine</span>
+    <span class="na">group_add</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mail</span>
 </code></pre></div></div>
 
 <p>生成されたコンテナー内において <code class="highlighter-rouge">id</code> を実行すると、ユーザーが <code class="highlighter-rouge">mail</code> グループに所属していることがわかります。
 <code class="highlighter-rouge">group_add</code> がなかったとしたら、このようにはなりません。</p>
 
-<h3 id="healthcheck-1">healthcheck</h3>
+<h3 id="healthcheck">healthcheck</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> またはそれ以降。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
 <p>このサービスを起動させているコンテナーが「健康」（healthy）かどうかを確認する処理を設定します。
 ヘルスチェックがどのように動作するのかの詳細は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder.md#healthcheck">Dockerfile の HEALTHCHECK 命令</a> を参照してください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>healthcheck:
-  test: ["CMD", "curl", "-f", "http://localhost"]
-  interval: 1m30s
-  timeout: 10s
-  retries: 3
-  start_period: 40s
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">healthcheck</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-f"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">http://localhost"</span><span class="pi">]</span>
+  <span class="na">interval</span><span class="pi">:</span> <span class="s">1m30s</span>
+  <span class="na">timeout</span><span class="pi">:</span> <span class="s">10s</span>
+  <span class="na">retries</span><span class="pi">:</span> <span class="s">3</span>
+  <span class="na">start_period</span><span class="pi">:</span> <span class="s">40s</span>
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">interval</code>, <code class="highlighter-rouge">timeout</code>, <code class="highlighter-rouge">start_period</code> は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#specifying-durations">時間</a> を設定します。</p>
+
+<blockquote>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-23">バージョン 2.3</a> において追加されました。</p>
+
+  <p><code class="highlighter-rouge">start_period</code> オプションはファイルフォーマット 2.3 において加えられたものです。</p>
+</blockquote>
 
 <p><code class="highlighter-rouge">test</code> は 1 つの文字列かリスト形式である必要があります。
 リスト形式の場合、第 1 要素は必ず <code class="highlighter-rouge">NONE</code>, <code class="highlighter-rouge">CMD</code>, <code class="highlighter-rouge">CMD-SHELL</code> のいずれかとします。
 文字列の場合は、<code class="highlighter-rouge">CMD-SHELL</code> に続けてその文字列を指定することと同じになります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ローカルのウェブアプリにアクセスします。
-test: ["CMD", "curl", "-f", "http://localhost"]
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ローカルのウェブアプリにアクセスします。</span>
+<span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-f"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">http://localhost"</span><span class="pi">]</span>
+</code></pre></div></div>
 
-# 上と同様。ただし /bin/sh によりラップ。両書式は同等。
-test: ["CMD-SHELL", "curl -f http://localhost &amp;&amp; echo 'cool, it works'"]
-test: curl -f https://localhost &amp;&amp; echo 'cool, it works'
+<p>上と同様ですが <code class="highlighter-rouge">/bin/sh</code> によりラップします。
+両書式は同等になります。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD-SHELL"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl</span><span class="nv"> </span><span class="s">-f</span><span class="nv"> </span><span class="s">http://localhost</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">exit</span><span class="nv"> </span><span class="s">1"</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span> <span class="s">curl -f https://localhost || exit 1</span>
 </code></pre></div></div>
 
 <p>イメージが設定するデフォルトのヘルスチェックを無効にするには、<code class="highlighter-rouge">disable: true</code> を指定します。
 これは <code class="highlighter-rouge">test: ["NONE"]</code> と指定することと同じです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>healthcheck:
-  disable: true
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">healthcheck</span><span class="pi">:</span>
+  <span class="na">disable</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div></div>
-
-<blockquote>
-  <p><strong>メモ</strong>: <code class="highlighter-rouge">start_period</code> オプションは最新の機能であり、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-23">ファイルフォーマット 2.3</a> においてのみ利用可能です。</p>
-</blockquote>
 
 <h3 id="image">image</h3>
 
 <p>コンテナーを起動させるイメージを設定します。
 リポジトリ/タグの形式か、あるいは部分イメージ ID により指定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>image: redis
-image: ubuntu:14.04
-image: tutum/influxdb
-image: example-registry.com:4000/postgresql
-image: a4bc65fd
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">redis</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">ubuntu:18.04</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">tutum/influxdb</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">example-registry.com:4000/postgresql</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">image</span><span class="pi">:</span> <span class="s">a4bc65fd</span>
 </code></pre></div></div>
 
 <p>イメージが存在しなかった場合、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#build">build</a> を指定していなければ Compose はイメージを取得しようとします。
@@ -1049,17 +1072,17 @@ image: a4bc65fd
 <h3 id="init">init</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">ファイルフォーマットバージョン 2.2</a> において追加。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">バージョン 2.2</a> において追加されました。</p>
 </blockquote>
 
 <p>コンテナー内にて init を実行し、シグナルを送信してプロセスを停止させます。
 このオプションに <code class="highlighter-rouge">true</code> を設定することで、サービスに対するこの機能を有効にします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-services:
-  web:
-    image: alpine:latest
-    init: true
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">alpine:latest</span>
+    <span class="na">init</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -1070,7 +1093,7 @@ services:
 <h3 id="isolation-1">isolation</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
 <p>コンテナーの分離技術（isolation technology）を設定します。
@@ -1085,15 +1108,16 @@ Windows では <code class="highlighter-rouge">default</code>, <code class="high
 
 <p>他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>labels:
-  com.example.description: "Accounting webapp"
-  com.example.department: "Finance"
-  com.example.label-with-empty-value: ""
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+  <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Finance"</span>
+  <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
 
-labels:
-  - "com.example.description=Accounting webapp"
-  - "com.example.department=Finance"
-  - "com.example.label-with-empty-value"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Accounting</span><span class="nv"> </span><span class="s">webapp"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=Finance"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
 </code></pre></div></div>
 
 <h3 id="links">links</h3>
@@ -1106,21 +1130,27 @@ labels:
 この代わりに <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#networks">networks</a> オプションを用いることをお勧めします。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
-  links:
-   - "db"
-   - "db:database"
-   - "redis"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
+  <span class="na">links</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">db"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">db:database"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">redis"</span>
 </code></pre></div></div>
 
 <p>リンクされたサービスのコンテナーは、エイリアスと同等のホスト名により到達可能になります。
 エイリアスが設定されていない場合はサービス名により到達可能です。</p>
 
+<p>Links are not required to enable services to communicate - by default,
+any service can reach any other service at that service’s name. (See also, the
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/networking.md#links">Links topic in Networking in Compose</a>.)</p>
+
 <p>Links は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#depends_on">depends_on</a> と同様にサービス間の依存関係を表わします。
 したがってサービスの起動順を設定するものになります。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>： links と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#networks">networks</a> をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+  <p><strong>メモ</strong></p>
+
+  <p>links と <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#networks">networks</a> をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
 このオプションではなく networks オプションを用いることをお勧めします。</p>
 </blockquote>
 
@@ -1128,10 +1158,10 @@ labels:
 
 <p>サービスに対するログ記録の設定をします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>logging:
-  driver: syslog
-  options:
-    syslog-address: "tcp://192.168.0.42:123"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logging</span><span class="pi">:</span>
+  <span class="na">driver</span><span class="pi">:</span> <span class="s">syslog</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">syslog-address</span><span class="pi">:</span> <span class="s2">"</span><span class="s">tcp://192.168.0.42:123"</span>
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">driver</code> 名にはサービスコンテナーにおけるロギングドライバーを指定します。
@@ -1140,13 +1170,17 @@ labels:
 
 <p>デフォルトは json-file です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>driver: "json-file"
-driver: "syslog"
-driver: "none"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s2">"</span><span class="s">json-file"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s2">"</span><span class="s">syslog"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s2">"</span><span class="s">none"</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: ドライバーのうち <code class="highlighter-rouge">json-file</code> と <code class="highlighter-rouge">journald</code> だけが、<code class="highlighter-rouge">docker-compose up</code> と <code class="highlighter-rouge">docker-compose logs</code> によって直接ログ参照ができます。
+  <p><strong>メモ</strong></p>
+
+  <p>ドライバーのうち <code class="highlighter-rouge">json-file</code> と <code class="highlighter-rouge">journald</code> だけが、<code class="highlighter-rouge">docker-compose up</code> と <code class="highlighter-rouge">docker-compose logs</code> によって直接ログ参照ができます。
 その他のドライバーではログ表示は行われません。</p>
 </blockquote>
 
@@ -1156,44 +1190,50 @@ driver: "none"
 <p>ロギングオプションはキーバリューのペアで設定します。
 たとえば <code class="highlighter-rouge">syslog</code> オプションは以下のようになります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>driver: "syslog"
-options:
-  syslog-address: "tcp://192.168.0.42:123"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s2">"</span><span class="s">syslog"</span>
+<span class="na">options</span><span class="pi">:</span>
+  <span class="na">syslog-address</span><span class="pi">:</span> <span class="s2">"</span><span class="s">tcp://192.168.0.42:123"</span>
 </code></pre></div></div>
 
 <h3 id="network_mode">network_mode</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> またはそれ以降。
-バージョン 1 の <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> オプションに置き換わるものです。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">バージョン 2</a> において変更されました。</p>
+
+  <p><code class="highlighter-rouge">network_mode</code> オプションは、バージョン 1 の <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> オプションに置き換わるものです。</p>
 </blockquote>
 
 <p>ネットワークモードを設定します。
-Docker クライアントの <code class="highlighter-rouge">--net</code> パラメーターと同じ値を設定します。
+Docker クライアントの <code class="highlighter-rouge">--network</code> パラメーターと同じ値を設定します。
 これに加えて <code class="highlighter-rouge">service:[service name]</code> という特別な書式も指定可能です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>network_mode: "bridge"
-network_mode: "host"
-network_mode: "none"
-network_mode: "service:[service name]"
-network_mode: "container:[container name/id]"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">net</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bridge"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">net</span><span class="pi">:</span> <span class="s2">"</span><span class="s">host"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">net</span><span class="pi">:</span> <span class="s2">"</span><span class="s">none"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">net</span><span class="pi">:</span> <span class="s2">"</span><span class="s">service:[service</span><span class="nv"> </span><span class="s">name]"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">net</span><span class="pi">:</span> <span class="s2">"</span><span class="s">container:[container</span><span class="nv"> </span><span class="s">name/id]"</span>
 </code></pre></div></div>
 
 <h3 id="networks">networks</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> またはそれ以降。
-バージョン 1 の <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> オプションに置き換わるものです。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">バージョン 2</a> において変更されました。</p>
+
+  <p><code class="highlighter-rouge">networks</code> オプションは、バージョン 1 の <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#net">net</a> オプションに置き換わるものです。</p>
 </blockquote>
 
 <p>ネットワークへの参加を設定します。
 設定には <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#network-configuration-reference">最上位の <code class="highlighter-rouge">networks</code> キー</a> に設定された値を用います。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
-  some-service:
-    networks:
-     - some-network
-     - other-network
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">some-service</span><span class="pi">:</span>
+    <span class="na">networks</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">some-network</span>
+     <span class="pi">-</span> <span class="s">other-network</span>
 </code></pre></div></div>
 
 <h4 id="aliases">aliases</h4>
@@ -1205,55 +1245,57 @@ network_mode: "container:[container name/id]"
 ネットワークが異なれば、同一サービスに違うエイリアスを持たせることができます。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
+  <p><strong>メモ</strong></p>
+
+  <p>ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
 それは複数サービス間でも可能です。
 ただしこの場合、名前解決がどのコンテナーに対して行われるかは保証されません。</p>
 </blockquote>
 
 <p>一般的な書式は以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>services:
-  some-service:
-    networks:
-      some-network:
-        aliases:
-         - alias1
-         - alias3
-      other-network:
-        aliases:
-         - alias2
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">some-service</span><span class="pi">:</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">some-network</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">alias1</span>
+          <span class="pi">-</span> <span class="s">alias3</span>
+      <span class="na">other-network</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">alias2</span>
 </code></pre></div></div>
 
 <p>以下の例では 3 つのサービス（<code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">worker</code>, <code class="highlighter-rouge">db</code>）と 2 つのネットワーク（<code class="highlighter-rouge">new</code> と <code class="highlighter-rouge">legacy</code>）を提供します。
 <code class="highlighter-rouge">db</code> サービスは <code class="highlighter-rouge">new</code> ネットワーク上では、ホスト名 <code class="highlighter-rouge">db</code> あるいは <code class="highlighter-rouge">database</code> としてアクセスできます。
 一方 <code class="highlighter-rouge">legacy</code> ネットワーク上では <code class="highlighter-rouge">db</code> あるいは <code class="highlighter-rouge">mysql</code> としてアクセスできます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
 
-services:
-  web:
-    build: ./web
-    networks:
-      - new
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nginx:alpine"</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">new</span>
 
-  worker:
-    build: ./worker
-    networks:
-      - legacy
+  <span class="na">worker</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">my-worker-image:latest"</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">legacy</span>
 
-  db:
-    image: mysql
-    networks:
-      new:
-        aliases:
-          - database
-      legacy:
-        aliases:
-          - mysql
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">new</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">database</span>
+      <span class="na">legacy</span><span class="pi">:</span>
+        <span class="na">aliases</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">mysql</span>
 
-networks:
-  new:
-  legacy:
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">new</span><span class="pi">:</span>
+  <span class="na">legacy</span><span class="pi">:</span>
 </code></pre></div></div>
 
 <h4 id="ipv4_address-ipv6_address">ipv4_address, ipv6_address</h4>
@@ -1261,39 +1303,42 @@ networks:
 <p>サービスをネットワークに参加させる際、そのコンテナーに対してスタティック IP アドレスを設定します。</p>
 
 <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#network-configuration-reference">最上位の networks セクション</a> の対応するネットワーク設定においては、<code class="highlighter-rouge">ipam</code> ブロックが必要です。
-そこでは各スタティックアドレスに応じたサブネットの設定が必要になります。
-IPv6 アドレスが必要である場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#enableipv6"><code class="highlighter-rouge">enable_ipv6</code></a> オプションの設定が必要になります。</p>
+そこでは各スタティックアドレスに応じたサブネットの設定が必要になります。</p>
+
+<blockquote>
+  <p>IPv6 アドレスが必要である場合は、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#enableipv6"><code class="highlighter-rouge">enable_ipv6</code></a> オプションの設定が必要になります。</p>
+</blockquote>
 
 <p>以下に例を示します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
 
-services:
-  app:
-    image: busybox
-    command: ifconfig
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.10
-        ipv6_address: 2001:3984:3989::10
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">ifconfig</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">app_net</span><span class="pi">:</span>
+        <span class="na">ipv4_address</span><span class="pi">:</span> <span class="s">172.16.238.10</span>
+        <span class="na">ipv6_address</span><span class="pi">:</span> <span class="s">2001:3984:3989::10</span>
 
-networks:
-  app_net:
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.16.238.0/24
-        gateway: 172.16.238.1
-      - subnet: 2001:3984:3989::/64
-        gateway: 2001:3984:3989::1
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">app_net</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
+    <span class="na">enable_ipv6</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">ipam</span><span class="pi">:</span>
+      <span class="na">driver</span><span class="pi">:</span> <span class="s">default</span>
+      <span class="na">config</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">subnet</span><span class="pi">:</span> <span class="s">172.16.238.0/24</span>
+          <span class="na">gateway</span><span class="pi">:</span> <span class="s">172.16.238.1</span>
+        <span class="pi">-</span> <span class="na">subnet</span><span class="pi">:</span> <span class="s">2001:3984:3989::/64</span>
+          <span class="na">gateway</span><span class="pi">:</span> <span class="s">2001:3984:3989::1</span>
 </code></pre></div></div>
 
 <h4 id="link_local_ips">link_local_ips</h4>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
 <p>リンクローカル IP（link-local IP） のリストを設定します。
@@ -1303,19 +1348,19 @@ networks:
 
 <p>利用例を以下に示します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-services:
-  app:
-    image: busybox
-    command: top
-    networks:
-      app_net:
-        link_local_ips:
-          - 57.123.22.11
-          - 57.123.22.13
-networks:
-  app_net:
-    driver: bridge
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">top</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">app_net</span><span class="pi">:</span>
+        <span class="na">link_local_ips</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">57.123.22.11</span>
+          <span class="pi">-</span> <span class="s">57.123.22.13</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">app_net</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
 </code></pre></div></div>
 
 <h4 id="priority">priority</h4>
@@ -1328,33 +1373,37 @@ networks:
 次に接続されるのは <code class="highlighter-rouge">app_net_3</code> です。
 最後に、デフォルトの優先順位である <code class="highlighter-rouge">0</code> が用いられている <code class="highlighter-rouge">app_net_2</code> に接続します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-services:
-  app:
-    image: busybox
-    command: top
-    networks:
-      app_net_1:
-        priority: 1000
-      app_net_2:
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">busybox</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">top</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="na">app_net_1</span><span class="pi">:</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">1000</span>
+      <span class="na">app_net_2</span><span class="pi">:</span>
 
-      app_net_3:
-        priority: 100
-networks:
-  app_net_1:
-  app_net_2:
-  app_net_3:
+      <span class="na">app_net_3</span><span class="pi">:</span>
+        <span class="na">priority</span><span class="pi">:</span> <span class="s">100</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">app_net_1</span><span class="pi">:</span>
+  <span class="na">app_net_2</span><span class="pi">:</span>
+  <span class="na">app_net_3</span><span class="pi">:</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: 複数のネットワークに同一の優先順位が設定された場合、接続順は定義されません。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>複数のネットワークに同一の優先順位が設定された場合、接続順は定義されません。</p>
 </blockquote>
 
 <h3 id="pid">pid</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pid: "host"
-pid: "container:custom_container_1"
-pid: "service:foobar"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">pid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">host"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">pid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">container:custom_container_1"</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">pid</span><span class="pi">:</span> <span class="s2">"</span><span class="s">service:foobar"</span>
 </code></pre></div></div>
 
 <p>これが <code class="highlighter-rouge">container:&lt;container_name&gt;</code>、または <code class="highlighter-rouge">service:&lt;service_name&gt;</code> の形で設定された場合は、そのサービスは、指定されたコンテナーまたはサービスの PID アドレス空間を共有します。</p>
@@ -1365,33 +1414,37 @@ pid: "service:foobar"
 逆もまた可能です。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: <code class="highlighter-rouge">service:</code> と <code class="highlighter-rouge">container:</code> の書式を利用するには <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> またはそれ以降である必要があります。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
+
+  <p><code class="highlighter-rouge">service:</code> と <code class="highlighter-rouge">container:</code> の書式を利用するには <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> またはそれ以降である必要があります。</p>
 </blockquote>
 
 <h3 id="pids_limit">pids_limit</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
 <p>コンテナーの PID 上限を設定します。
 <code class="highlighter-rouge">-1</code> に設定すると無制限になります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pids_limit: 10
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">pids_limit</span><span class="pi">:</span> <span class="s">10</span>
 </code></pre></div></div>
 
 <h3 id="platform">platform</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-24">ファイルフォーマットバージョン 2.4</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-24">バージョン 2.4</a> において追加されました。</p>
 </blockquote>
 
 <p>サービスのコンテナーが稼動することになるプラットフォームを設定します。
 その記述は <code class="highlighter-rouge">os[/arch[/variant]]</code> といった書式で行います。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>platform: osx
-platform: windows/amd64
-platform: linux/arm64/v8
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">platform</span><span class="pi">:</span> <span class="s">osx</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">platform</span><span class="pi">:</span> <span class="s">windows/amd64</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">platform</span><span class="pi">:</span> <span class="s">linux/arm64/v8</span>
 </code></pre></div></div>
 
 <p>このパラメーターは、どのバージョンのイメージを取得するのか、あるいはサービスがどのプラットフォームでビルドされるかを決定します。</p>
@@ -1402,21 +1455,23 @@ platform: linux/arm64/v8
 設定は両側のポートを指定するか（<code class="highlighter-rouge">HOST:CONTAINER</code>）、あるいはコンテナー側のポートのみを指定します（その場合、ホスト側はエフェメラルポートが採用されます）。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: <code class="highlighter-rouge">HOST:CONTAINER</code> の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
+  <p><strong>メモ</strong></p>
+
+  <p><code class="highlighter-rouge">HOST:CONTAINER</code> の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
 これは YAML パーサーが <code class="highlighter-rouge">xx:yy</code> の書式内にある数値を 60 進数値として解釈するからです。
 このことからポートマッピングを指定する際には、常に文字列として設定することをお勧めします。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ports:
- - "3000"
- - "3000-3005"
- - "8000:8000"
- - "9090-9091:8080-8081"
- - "49100:22"
- - "127.0.0.1:8001:8001"
- - "127.0.0.1:5000-5010:5000-5010"
- - "6060:6060/udp"
- - "12400-12500:1240"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">3000"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">3000-3005"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:8000"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">9090-9091:8080-8081"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">49100:22"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">127.0.0.1:8001:8001"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">127.0.0.1:5000-5010:5000-5010"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">6060:6060/udp"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">12400-12500:1240"</span>
 </code></pre></div></div>
 
 <h3 id="runtime">runtime</h3>
@@ -1428,10 +1483,10 @@ platform: linux/arm64/v8
 <p>サービスのコンテナーにおいてどのランタイム（runtime）を用いるかを設定します。
 デフォルトのランタイムおよび利用可能なランタイムは、<code class="highlighter-rouge">docker info</code> 出力から確認できます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
-  image: busybox:latest
-  command: true
-  runtime: runc
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">busybox:latest</span>
+  <span class="na">command</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">runtime</span><span class="pi">:</span> <span class="s">runc</span>
 </code></pre></div></div>
 
 <h3 id="scale">scale</h3>
@@ -1444,19 +1499,19 @@ platform: linux/arm64/v8
 <code class="highlighter-rouge">docker-compose up</code> を実行したとき、Compose はこの設定数に従ってコンテナーの生成や削除を行います。
 この値は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/up.md"><code class="highlighter-rouge">--scale</code></a> フラグを使って上書きすることができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
-  image: busybox:latest
-  command: echo 'scaled'
-  scale: 3
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">web</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">busybox:latest</span>
+  <span class="na">command</span><span class="pi">:</span> <span class="s">echo 'scaled'</span>
+  <span class="na">scale</span><span class="pi">:</span> <span class="s">3</span>
 </code></pre></div></div>
 
 <h3 id="security_opt">security_opt</h3>
 
 <p>各コンテナーにおけるデフォルトのラベリングスキーム（labeling scheme）を上書きします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>security_opt:
-  - label:user:USER
-  - label:role:ROLE
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">security_opt</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">label:user:USER</span>
+  <span class="pi">-</span> <span class="s">label:role:ROLE</span>
 </code></pre></div></div>
 
 <h3 id="stop_grace_period">stop_grace_period</h3>
@@ -1464,8 +1519,10 @@ platform: linux/arm64/v8
 <p>コンテナーが SIGKILL を送信するまでに、SIGTERM（あるいは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#stopsignal"><code class="highlighter-rouge">stop_signal</code></a> によって設定されたストップシグナル）をどれだけ待つかを設定します。
 指定には <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#specifying-durations">時間</a> を用います。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stop_grace_period: 1s
-stop_grace_period: 1m30s
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">stop_grace_period</span><span class="pi">:</span> <span class="s">1s</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">stop_grace_period</span><span class="pi">:</span> <span class="s">1m30s</span>
 </code></pre></div></div>
 
 <p>デフォルトで、コンテナーが SIGKILL を送信する前に <code class="highlighter-rouge">stop</code> は 10 秒待ちます。</p>
@@ -1476,7 +1533,7 @@ stop_grace_period: 1m30s
 デフォルトにおいて <code class="highlighter-rouge">stop</code> は SIGTERM を用います。
 <code class="highlighter-rouge">stop_signal</code> を使って別のシグナルを設定すると <code class="highlighter-rouge">stop</code> にはそのシグナルが代わりに送信されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stop_signal: SIGUSR1
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">stop_signal</span><span class="pi">:</span> <span class="s">SIGUSR1</span>
 </code></pre></div></div>
 
 <h3 id="storage_opt">storage_opt</h3>
@@ -1487,8 +1544,8 @@ stop_grace_period: 1m30s
 
 <p>本サービスに対するストレージドライバーのオプションを設定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>storage_opt:
-  size: '1G'
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">storage_opt</span><span class="pi">:</span>
+  <span class="na">size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">1G'</span>
 </code></pre></div></div>
 
 <h3 id="sysctls">sysctls</h3>
@@ -1500,13 +1557,27 @@ stop_grace_period: 1m30s
 <p>コンテナーに設定するカーネルパラメーターを設定します。
 配列または辞書形式での指定ができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sysctls:
-  net.core.somaxconn: 1024
-  net.ipv4.tcp_syncookies: 0
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sysctls</span><span class="pi">:</span>
+  <span class="s">net.core.somaxconn</span><span class="pi">:</span> <span class="s">1024</span>
+  <span class="s">net.ipv4.tcp_syncookies</span><span class="pi">:</span> <span class="s">0</span>
+</code></pre></div></div>
 
-sysctls:
-  - net.core.somaxconn=1024
-  - net.ipv4.tcp_syncookies=0
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sysctls</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">net.core.somaxconn=1024</span>
+  <span class="pi">-</span> <span class="s">net.ipv4.tcp_syncookies=0</span>
+</code></pre></div></div>
+
+<h3 id="tmpfs">tmpfs</h3>
+
+<p>コンテナー内においてテンポラリファイルシステムをマウントします。
+設定は 1 つだけとするか、リストにすることができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tmpfs</span><span class="pi">:</span> <span class="s">/run</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tmpfs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">/run</span>
+  <span class="pi">-</span> <span class="s">/tmp</span>
 </code></pre></div></div>
 
 <h3 id="ulimits">ulimits</h3>
@@ -1514,11 +1585,11 @@ sysctls:
 <p>コンテナーにおけるデフォルトの ulimits を上書きします。
 1 つの limit を整数値として指定するか、ソフト、ハードの limit をマッピングとして指定することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ulimits:
-  nproc: 65535
-  nofile:
-    soft: 20000
-    hard: 40000
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ulimits</span><span class="pi">:</span>
+  <span class="na">nproc</span><span class="pi">:</span> <span class="s">65535</span>
+  <span class="na">nofile</span><span class="pi">:</span>
+    <span class="na">soft</span><span class="pi">:</span> <span class="s">20000</span>
+    <span class="na">hard</span><span class="pi">:</span> <span class="s">40000</span>
 </code></pre></div></div>
 
 <h3 id="userns_mode">userns_mode</h3>
@@ -1527,7 +1598,7 @@ sysctls:
   <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>userns_mode: "host"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">userns_mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">host"</span>
 </code></pre></div></div>
 
 <p>Docker デーモンにおいてユーザー名前空間が設定されていても、サービスに対してユーザー名前空間を無効にします。
@@ -1535,12 +1606,8 @@ sysctls:
 
 <h3 id="volumes">volumes</h3>
 
-<p>マウントホストフォルダーや名前つきボリュームをマウントします。
+<p>マウントホストパスや名前つきボリュームをマウントします。
 名前つきボリュームは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#volume-configuration-reference">最上位の <code class="highlighter-rouge">volumes</code> キー</a> として設定する必要があります。</p>
-
-<p>ホスト上の相対パスをマウントすることができます。
-これは、用いられている Compose 設定ファイルのディレクトリからの相対パスとして展開されます。
-相対パスは <code class="highlighter-rouge">.</code> または <code class="highlighter-rouge">..</code> で書き始める必要があります。</p>
 
 <h4 id="short-syntax">短い文法</h4>
 
@@ -1549,22 +1616,35 @@ sysctls:
 <code class="highlighter-rouge">TARGET</code> はボリュームがマウントされるコンテナーパスです。
 標準的なモードは、読み込み専用の場合 <code class="highlighter-rouge">ro</code>、読み書き可能の場合 <code class="highlighter-rouge">rw</code>（デフォルト）です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volumes:
-  # パス指定のみ。Engine にボリュームを生成させます。
-  - /var/lib/mysql
+<p>You can mount a relative path on the host, which expands relative to
+the directory of the Compose configuration file being used. Relative paths
+should always begin with <code class="highlighter-rouge">.</code> or <code class="highlighter-rouge">..</code>.</p>
 
-  # 絶対パスのマッピングを指定。
-  - /opt/data:/var/lib/mysql
+<p>volumes:
+  # パス指定のみ。Engine にボリュームを生成させます。</p>
+<ul>
+  <li>/var/lib/mysql</li>
+</ul>
 
-  # ホストからのパス指定。Compose ファイルからの相対パス。
-  - ./cache:/tmp/cache
+<p># 絶対パスのマッピングを指定。</p>
+<ul>
+  <li>/opt/data:/var/lib/mysql</li>
+</ul>
 
-  # ユーザーディレクトリからの相対パス。
-  - ~/configs:/etc/configs/:ro
+<p># ホストからのパス指定。Compose ファイルからの相対パス。</p>
+<ul>
+  <li>./cache:/tmp/cache</li>
+</ul>
 
-  # 名前つきボリューム。
-  - datavolume:/var/lib/mysql
-</code></pre></div></div>
+<p># ユーザーディレクトリからの相対パス。</p>
+<ul>
+  <li>~/configs:/etc/configs/:ro</li>
+</ul>
+
+<p># 名前つきボリューム。</p>
+<ul>
+  <li>datavolume:/var/lib/mysql</li>
+</ul>
 
 <h4 id="long-syntax">長い文法</h4>
 
@@ -1598,31 +1678,33 @@ tmpfs マウントはできません。</li>
   </li>
 </ul>
 
-<pre><code class="language-none">version: "2.4"
-services:
-  web:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-    volumes:
-      - type: volume
-        source: mydata
-        target: /data
-        volume:
-          nocopy: true
-      - type: bind
-        source: ./static
-        target: /opt/app/static
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:alpine</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">80:80"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">volume</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">mydata</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/data</span>
+        <span class="na">volume</span><span class="pi">:</span>
+          <span class="na">nocopy</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">bind</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">./static</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/opt/app/static</span>
 
-networks:
-  webnet:
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">webnet</span><span class="pi">:</span>
 
-volumes:
-  mydata:
-</code></pre>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">mydata</span><span class="pi">:</span>
+</code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: 長い文法を使ってバインドマウントを生成する際には、参照されるフォルダーをあらかじめ生成しておく必要があります。
+  <p><strong>Note</strong></p>
+
+  <p>長い文法を使ってバインドマウントを生成する際には、参照されるフォルダーをあらかじめ生成しておく必要があります。
 短い文法を利用する場合、そのフォルダーが存在しなければ生成されます。
 詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior">バインドマウントのドキュメント</a> を参照してください。</p>
 </blockquote>
@@ -1631,11 +1713,13 @@ volumes:
 
 <p>本サービス上に宣言されているボリュームすべてに対して、利用するデフォルトのボリュームドライバーを設定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volume_driver: mydriver
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volume_driver</span><span class="pi">:</span> <span class="s">mydriver</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>: <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> においてこのオプションは、無名ボリューム（anonymous volume）に対してのみ適用されます。
+  <p><strong>メモ</strong></p>
+
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> においてこのオプションは、無名ボリューム（anonymous volume）に対してのみ適用されます。
 （これはイメージ内で無名として設定されるか、あるいは <code class="highlighter-rouge">volumes</code> キー配下において明示的な名前やホストパスが指定されずに設定されるものです。）
 名前つきボリュームに対してドライバーを設定するには、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#volume-configuration-reference">最上位の <code class="highlighter-rouge">volumes</code> オプション</a> の配下にて <code class="highlighter-rouge">driver</code> キーを使ってください。</p>
 </blockquote>
@@ -1648,31 +1732,24 @@ volumes:
 任意の設定として、アクセスを読み込み専用（<code class="highlighter-rouge">ro</code>）とするか、読み書き可能（<code class="highlighter-rouge">rw</code>）とするかを指定できます。
 アクセスレベルが何も設定されていないときは、読み書き可能として設定されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volumes_from:
- - service_name
- - service_name:ro
- - container:container_name
- - container:container_name:rw
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes_from</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">service_name</span>
+  <span class="pi">-</span> <span class="s">service_name:ro</span>
+  <span class="pi">-</span> <span class="s">container:container_name</span>
+  <span class="pi">-</span> <span class="s">container:container_name:rw</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong></p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">バージョン 2</a> において変更されました。</p>
 
-  <ul>
-    <li>
-      <p><code class="highlighter-rouge">container:...</code> という書式は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> においてのみサポートされます。</p>
-    </li>
-    <li>
-      <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">バージョン 1</a> の場合、コンテナー名は以下のように <code class="highlighter-rouge">container:</code> をつけずに設定することができます。</p>
+  <p><code class="highlighter-rouge">container:...</code> という書式は <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-2">ファイルフォーマットバージョン 2</a> においてのみサポートされます。
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">バージョン 1</a> の場合、コンテナー名は以下のように <code class="highlighter-rouge">container:</code> をつけずに設定することができます。</p>
 
-      <ul>
-        <li><code class="highlighter-rouge">service_name</code></li>
-        <li><code class="highlighter-rouge">service_name:ro</code></li>
-        <li><code class="highlighter-rouge">container_name</code></li>
-        <li><code class="highlighter-rouge">container_name:rw</code></li>
-      </ul>
-    </li>
-  </ul>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- `service_name`
+- `service_name:ro`
+- `container_name`
+- `container_name:rw`
+</code></pre></div>  </div>
 </blockquote>
 
 <h3 id="restart">restart</h3>
@@ -1682,10 +1759,13 @@ volumes:
 <code class="highlighter-rouge">always</code> を指定した場合、コンテナーは常に再起動することになります。
 また <code class="highlighter-rouge">on-failure</code> ポリシーでは、終了コードが on-failure エラーを表わしている場合にコンテナーが再起動します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - restart: no
-  - restart: always
-  - restart: on-failure
-  - restart: unless-stopped
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">restart</span><span class="pi">:</span> <span class="s">no</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">restart</span><span class="pi">:</span> <span class="s">on-failure</span>
+</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">restart</span><span class="pi">:</span> <span class="s">unless-stopped</span>
 </code></pre></div></div>
 
 <h3 id="cpu-and-other-resources">cpu_count, cpu_percent, cpu_shares, cpu_period, cpu_quota, cpus, cpuset, domainname, hostname, ipc, mac_address, mem_limit, memswap_limit, mem_swappiness, mem_reservation, oom_kill_disable, oom_score_adj, privileged, read_only, shm_size, stdin_open, tty, user, working_dir</h3>
@@ -1693,38 +1773,45 @@ volumes:
 <p>ここに示すオプションはいずれも、値 1 つを設定するものであり、<a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run.md#runtime-constraints-on-resources">docker run</a> のオプションに対応づいています。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: <code class="highlighter-rouge">cpu_count</code>, <code class="highlighter-rouge">cpu_percent</code>, <code class="highlighter-rouge">cpus</code> の各オプションは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">バージョン 2.2</a> において追加されました。
-また <code class="highlighter-rouge">oom_kill_disable</code>, <code class="highlighter-rouge">cpu_period</code> のオプションは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">バージョン 2.2</a> における追加</p>
+
+  <p><code class="highlighter-rouge">cpu_count</code>, <code class="highlighter-rouge">cpu_percent</code>, <code class="highlighter-rouge">cpus</code> の各オプションは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-22">バージョン 2.2</a> において追加されました。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cpu_count: 2
-cpu_percent: 50
-cpus: 0.5
-cpu_shares: 73
-cpu_quota: 50000
-cpu_period: 20ms
-cpuset: 0,1
+<blockquote>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> における追加</p>
 
-user: postgresql
-working_dir: /code
+  <p><code class="highlighter-rouge">oom_kill_disable</code>, <code class="highlighter-rouge">cpu_period</code> のオプションは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において追加されました。</p>
+</blockquote>
 
-domainname: foo.com
-hostname: foo
-ipc: host
-mac_address: 02:42:ac:11:65:43
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">cpu_count</span><span class="pi">:</span> <span class="s">2</span>
+<span class="na">cpu_percent</span><span class="pi">:</span> <span class="s">50</span>
+<span class="na">cpus</span><span class="pi">:</span> <span class="s">0.5</span>
+<span class="na">cpu_shares</span><span class="pi">:</span> <span class="s">73</span>
+<span class="na">cpu_quota</span><span class="pi">:</span> <span class="s">50000</span>
+<span class="na">cpu_period</span><span class="pi">:</span> <span class="s">20ms</span>
+<span class="na">cpuset</span><span class="pi">:</span> <span class="s">0,1</span>
 
-mem_limit: 1000000000
-memswap_limit: 2000000000
-mem_reservation: 512m
-privileged: true
+<span class="na">user</span><span class="pi">:</span> <span class="s">postgresql</span>
+<span class="na">working_dir</span><span class="pi">:</span> <span class="s">/code</span>
 
-oom_score_adj: 500
-oom_kill_disable: true
+<span class="na">domainname</span><span class="pi">:</span> <span class="s">foo.com</span>
+<span class="na">hostname</span><span class="pi">:</span> <span class="s">foo</span>
+<span class="na">ipc</span><span class="pi">:</span> <span class="s">host</span>
+<span class="na">mac_address</span><span class="pi">:</span> <span class="s">02:42:ac:11:65:43</span>
 
-read_only: true
-shm_size: 64M
-stdin_open: true
-tty: true
+<span class="na">mem_limit</span><span class="pi">:</span> <span class="s">1000000000</span>
+<span class="na">memswap_limit</span><span class="pi">:</span> <span class="s">2000000000</span>
+<span class="na">mem_reservation</span><span class="pi">:</span> <span class="s">512m</span>
+<span class="na">privileged</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">oom_score_adj</span><span class="pi">:</span> <span class="s">500</span>
+<span class="na">oom_kill_disable</span><span class="pi">:</span> <span class="no">true</span>
+
+<span class="na">read_only</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">shm_size</span><span class="pi">:</span> <span class="s">64M</span>
+<span class="na">stdin_open</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">tty</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div></div>
 
 <h2 id="specifying-durations">時間の指定</h2>
@@ -1762,24 +1849,27 @@ tty: true
 このボリュームは、複数のサービスにわたっての再利用が可能であり、docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
 詳しくは <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/volume_create.md">docker volume</a> のサブコマンドを確認してください。</p>
 
+<p>See <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/admin/volumes/volumes.md">use volumes</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_volume.md">volume
+plugins</a> for general information on volumes.</p>
+
 <p>以下の例では 2 つのサービスを用います。
 データベースのデータディレクトリは、もう一方のサービスに対してボリュームとして共有させます。
 これによりデータが定期的に反映されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
 
-services:
-  db:
-    image: db
-    volumes:
-      - data-volume:/var/lib/db
-  backup:
-    image: backup-service
-    volumes:
-      - data-volume:/var/lib/backup/data
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">db</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">data-volume:/var/lib/db</span>
+  <span class="na">backup</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">backup-service</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">data-volume:/var/lib/backup/data</span>
 
-volumes:
-  data-volume:
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data-volume</span><span class="pi">:</span>
 </code></pre></div></div>
 
 <p>最上位の <code class="highlighter-rouge">volumes</code> キーは指定しないようにすることもできます。
@@ -1794,7 +1884,7 @@ volumes:
 たいていは <code class="highlighter-rouge">local</code> です。
 ドライバーが利用できない場合、<code class="highlighter-rouge">docker-compose up</code> によってボリューム生成が行われる際に Engine がエラーを返します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> driver: foobar
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s">foobar</span>
 </code></pre></div></div>
 
 <h3 id="driver_opts">driver_opts</h3>
@@ -1804,9 +1894,12 @@ volumes:
 詳しくは各ドライバーのドキュメントを参照してください。
 設定は任意です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> driver_opts:
-   foo: "bar"
-   baz: 1
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">example</span><span class="pi">:</span>
+    <span class="na">driver_opts</span><span class="pi">:</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">nfs"</span>
+      <span class="na">o</span><span class="pi">:</span> <span class="s2">"</span><span class="s">addr=10.40.0.199,nolock,soft,rw"</span>
+      <span class="na">device</span><span class="pi">:</span> <span class="s2">"</span><span class="s">:/docker/example"</span>
 </code></pre></div></div>
 
 <h3 id="external">external</h3>
@@ -1820,35 +1913,37 @@ volumes:
 <p>以下の例では <code class="highlighter-rouge">[projectname]_data</code> というボリュームは生成されることはなく、Compose はすでに存在している <code class="highlighter-rouge">data</code> という単純な名前のボリュームを探しにいきます。
 そしてこれを <code class="highlighter-rouge">db</code> サービスコンテナー内にマウントします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
 
-services:
-  db:
-    image: postgres
-    volumes:
-      - data:/var/lib/postgresql/data
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">data:/var/lib/postgresql/data</span>
 
-volumes:
-  data:
-    external: true
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div></div>
 
 <p>ボリューム名として指定する名前は、Compose ファイル内で参照されている名前以外でも指定することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>volumes:
-  data:
-    external:
-      name: actual-name-of-volume
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">actual-name-of-volume</span>
 </code></pre></div></div>
 
-<blockquote>
-  <p><strong>Note</strong>: 最近の Compose バージョンでは、<code class="highlighter-rouge">external.name</code> プロパティは廃止予定となり、単純に <code class="highlighter-rouge">name</code> プロパティを用いるものになっています。</p>
+<blockquote class="important">
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> において廃止予定</p>
+
+  <p>ファイルフォーマットバージョン 2.1 において <code class="highlighter-rouge">external.name</code> プロパティは廃止予定となったため <code class="highlighter-rouge">name</code> プロパティを用いてください。</p>
 </blockquote>
 
 <h3 id="labels-2">labels</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> における追加</p>
 </blockquote>
 
 <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a> を使ってコンテナーにメタデータを追加します。
@@ -1857,38 +1952,41 @@ volumes:
 <p>ここでは逆 DNS 記法とすることをお勧めします。
 この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>labels:
-  com.example.description: "Database volume"
-  com.example.department: "IT/Ops"
-  com.example.label-with-empty-value: ""
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Database</span><span class="nv"> </span><span class="s">volume"</span>
+  <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">IT/Ops"</span>
+  <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
 
-labels:
-  - "com.example.description=Database volume"
-  - "com.example.department=IT/Ops"
-  - "com.example.label-with-empty-value"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Database</span><span class="nv"> </span><span class="s">volume"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=IT/Ops"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
 </code></pre></div></div>
 
 <h3 id="name">name</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> における追加</p>
 </blockquote>
 
-<p>ボリュームに対して独自の名前を設定します。</p>
+<p>ボリュームに対して独自の名前を設定します。
+name は特殊な文字を含んだボリューム名を参照するために利用できます。
+name は記述されたとおりに扱われ、スタック名によってスコープされません。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-volumes:
-  data:
-    name: my-app-data
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">my-app-data</span>
 </code></pre></div></div>
 
 <p>これは <code class="highlighter-rouge">external</code> プロパティと同時に利用することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-volumes:
-  data:
-    external: true
-    name: my-app-data
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">my-app-data</span>
 </code></pre></div></div>
 
 <h2 id="network-configuration-reference">ネットワーク設定リファレンス</h2>
@@ -1905,11 +2003,15 @@ Compose が利用する Docker ネットワーク機能に関して、詳細は 
 
 <p>ドライバーが利用できない場合、Docker Engine はエラーを返します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>driver: overlay
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver</span><span class="pi">:</span> <span class="s">overlay</span>
 </code></pre></div></div>
 
-<p>Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されますが、ただし変更できません。
+<blockquote>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> における変更</p>
+
+  <p>Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されますが、ただし変更できません。
 スタンドアロンコンテナーであれば、オーバーレイネットワークに接続することができます。</p>
+</blockquote>
 
 <h3 id="driver_opts-1">driver_opts</h3>
 
@@ -1918,15 +2020,15 @@ Compose が利用する Docker ネットワーク機能に関して、詳細は 
 詳しくは各ドライバーのドキュメントを参照してください。
 設定は任意です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  driver_opts:
-    foo: "bar"
-    baz: 1
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">driver_opts</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">bar"</span>
+  <span class="na">baz</span><span class="pi">:</span> <span class="s">1</span>
 </code></pre></div></div>
 
 <h3 id="enable_ipv6">enable_ipv6</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> における追加</p>
 </blockquote>
 
 <p>現在のネットワークにおいて IPv6 ネットワークを有効にします。</p>
@@ -1953,19 +2055,19 @@ Compose が利用する Docker ネットワーク機能に関して、詳細は 
 
 <p>すべてを利用した例が以下です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipam:
-  driver: default
-  config:
-    - subnet: 172.28.0.0/16
-      ip_range: 172.28.5.0/24
-      gateway: 172.28.5.254
-      aux_addresses:
-        host1: 172.28.1.5
-        host2: 172.28.1.6
-        host3: 172.28.1.7
-  options:
-    foo: bar
-    baz: "0"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ipam</span><span class="pi">:</span>
+  <span class="na">driver</span><span class="pi">:</span> <span class="s">default</span>
+  <span class="na">config</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">subnet</span><span class="pi">:</span> <span class="s">172.28.0.0/16</span>
+      <span class="na">ip_range</span><span class="pi">:</span> <span class="s">172.28.5.0/24</span>
+      <span class="na">gateway</span><span class="pi">:</span> <span class="s">172.28.5.254</span>
+      <span class="na">aux_addresses</span><span class="pi">:</span>
+        <span class="na">host1</span><span class="pi">:</span> <span class="s">172.28.1.5</span>
+        <span class="na">host2</span><span class="pi">:</span> <span class="s">172.28.1.6</span>
+        <span class="na">host3</span><span class="pi">:</span> <span class="s">172.28.1.7</span>
+  <span class="na">options</span><span class="pi">:</span>
+    <span class="na">foo</span><span class="pi">:</span> <span class="s">bar</span>
+    <span class="na">baz</span><span class="pi">:</span> <span class="s2">"</span><span class="s">0"</span>
 </code></pre></div></div>
 
 <h3 id="internal">internal</h3>
@@ -1976,7 +2078,7 @@ Compose が利用する Docker ネットワーク機能に関して、詳細は 
 <h3 id="labels-3">labels</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> における追加</p>
 </blockquote>
 
 <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/engine/userguide/labels-custom-metadata.md">Docker labels</a> を使ってコンテナーにメタデータを追加します。
@@ -1985,15 +2087,16 @@ Compose が利用する Docker ネットワーク機能に関して、詳細は 
 <p>ここでは逆 DNS 記法とすることをお勧めします。
 この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>labels:
-  com.example.description: "Financial transaction network"
-  com.example.department: "Finance"
-  com.example.label-with-empty-value: ""
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="s">com.example.description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Financial</span><span class="nv"> </span><span class="s">transaction</span><span class="nv"> </span><span class="s">network"</span>
+  <span class="s">com.example.department</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Finance"</span>
+  <span class="s">com.example.label-with-empty-value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
 
-labels:
-  - "com.example.description=Financial transaction network"
-  - "com.example.department=Finance"
-  - "com.example.label-with-empty-value"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">labels</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.description=Financial</span><span class="nv"> </span><span class="s">transaction</span><span class="nv"> </span><span class="s">network"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.department=Finance"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">com.example.label-with-empty-value"</span>
 </code></pre></div></div>
 
 <h3 id="external-1">external</h3>
@@ -2007,30 +2110,31 @@ labels:
 <p>以下の例において <code class="highlighter-rouge">proxy</code> は外部ネットワークとの間のゲートウェイです。
 <code class="highlighter-rouge">[projectname]_outside</code> というネットワークは生成されることはなく、Compose はすでに存在している <code class="highlighter-rouge">outside</code> という単純な名前のネットワークを探しにいって、<code class="highlighter-rouge">proxy</code> サービスのコンテナーに接続します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
 
-services:
-  proxy:
-    build: ./proxy
-    networks:
-      - outside
-      - default
-  app:
-    build: ./app
-    networks:
-      - default
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">proxy</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">./proxy</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">outside</span>
+      <span class="pi">-</span> <span class="s">default</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">./app</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">default</span>
 
-networks:
-  outside:
-    external: true
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">outside</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div></div>
 
 <p>ネットワーク名として指定する名前は、Compose ファイル内で参照されている名前以外でも指定することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>networks:
-  outside:
-    external:
-      name: actual-name-of-network
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">outside</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">actual-name-of-network</span>
 </code></pre></div></div>
 
 <p>バージョン 2 の <code class="highlighter-rouge">docker-compose</code> ファイルではサポートされません。
@@ -2039,24 +2143,26 @@ networks:
 <h3 id="name-1">name</h3>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> における追加</p>
 </blockquote>
 
-<p>ネットワークに対して独自の名前を設定します。</p>
+<p>ネットワークに対して独自の名前を設定します。
+name は特殊な文字を含んだネットワーク名を参照するために利用できます。
+name は記述されたとおりに扱われ、スタック名によってスコープされません。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-networks:
-  network1:
-    name: my-app-net
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">network1</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">my-app-net</span>
 </code></pre></div></div>
 
 <p>これは <code class="highlighter-rouge">external</code> プロパティと同時に利用することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2.4"
-networks:
-  network1:
-    external: true
-    name: my-app-net
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2.4"</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">network1</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">my-app-net</span>
 </code></pre></div></div>
 
 <h2 id="variable-substitution">変数の置換</h2>
@@ -2080,7 +2186,7 @@ Compose はこのファイルを自動的に探しにいきます。
 <code class="highlighter-rouge">.env</code> ファイルで定義されたものよりも、シェル環境で設定された値が優先されます。</p>
 
 <blockquote class="important">
-  <p><strong>重要</strong>： <code class="highlighter-rouge">.env</code> ファイルによる機能は <code class="highlighter-rouge">docker-compose up</code> コマンドを使うときだけ動作します。
+  <p><code class="highlighter-rouge">.env</code> ファイルによる機能は <code class="highlighter-rouge">docker-compose up</code> コマンドを使うときだけ動作します。
 <code class="highlighter-rouge">docker stack deploy</code> コマンドでは動作しません。</p>
 </blockquote>
 
@@ -2118,7 +2224,7 @@ Compose はこのファイルを自動的に探しにいきます。
 <h2 id="extension-fields">拡張項目</h2>
 
 <blockquote>
-  <p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">ファイルフォーマットバージョン 2.1</a> において追加されました。</p>
+  <p>ファイルフォーマット<a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-21">バージョン 2.1</a> における追加</p>
 </blockquote>
 
 <p>拡張項目（extension fields）を利用することで、設定内容の再利用が可能になります。
@@ -2200,9 +2306,7 @@ Compose はこのファイルを自動的に探しにいきます。
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/index.md">ユーザーガイド</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/install.md">Compose のインストール</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/">Compose ファイルのバージョンとアップグレード</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/django.md">Django を使ってはじめよう</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/rails.md">Rails を使ってはじめよう</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/wordpress.md">WordPress を使ってはじめよう</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/samples/">サンプル</a></li>
   <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/">コマンドラインリファレンス</a></li>
 </ul>
 
@@ -2315,10 +2419,10 @@ Compose はこのファイルを自動的に探しにいきます。
           </li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#build" class="nomunge">build</a>
             <ul>
-              <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#cache_from" class="nomunge">cache_from</a></li>
               <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#context" class="nomunge">context</a></li>
               <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#dockerfile" class="nomunge">dockerfile</a></li>
               <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#args" class="nomunge">args</a></li>
+              <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#cache_from" class="nomunge">cache_from</a></li>
               <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#extra_hosts" class="nomunge">extra_hosts</a></li>
               <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#isolation" class="nomunge">isolation</a></li>
               <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#labels" class="nomunge">labels</a></li>
@@ -2328,18 +2432,16 @@ Compose はこのファイルを自動的に探しにいきます。
             </ul>
           </li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#cap_add-cap_drop" class="nomunge">cap_add, cap_drop</a></li>
-          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#command" class="nomunge">command</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#cgroup_parent" class="nomunge">cgroup_parent</a></li>
+          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#command" class="nomunge">command</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#container_name" class="nomunge">container_name</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#cpu_rt_runtime-cpu_rt_period" class="nomunge">cpu_rt_runtime, cpu_rt_period</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#device_cgroup_rules" class="nomunge">device_cgroup_rules</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#devices" class="nomunge">devices</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#depends_on" class="nomunge">depends_on</a></li>
-          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#healthcheck" class="nomunge">healthcheck</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#dns" class="nomunge">dns</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#dns_opt" class="nomunge">dns_opt</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#dns_search" class="nomunge">dns_search</a></li>
-          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#tmpfs" class="nomunge">tmpfs</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#entrypoint" class="nomunge">entrypoint</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#env_file" class="nomunge">env_file</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#environment" class="nomunge">environment</a></li>
@@ -2348,7 +2450,7 @@ Compose はこのファイルを自動的に探しにいきます。
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#external_links" class="nomunge">external_links</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#extra_hosts-1" class="nomunge">extra_hosts</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#group_add" class="nomunge">group_add</a></li>
-          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#healthcheck-1" class="nomunge">healthcheck</a></li>
+          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#healthcheck" class="nomunge">healthcheck</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#image" class="nomunge">image</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#init" class="nomunge">init</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#isolation-1" class="nomunge">isolation</a></li>
@@ -2375,6 +2477,7 @@ Compose はこのファイルを自動的に探しにいきます。
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#stop_signal" class="nomunge">stop_signal</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#storage_opt" class="nomunge">storage_opt</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#sysctls" class="nomunge">sysctls</a></li>
+          <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#tmpfs" class="nomunge">tmpfs</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#ulimits" class="nomunge">ulimits</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#userns_mode" class="nomunge">userns_mode</a></li>
           <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2.md#volumes" class="nomunge">volumes</a>

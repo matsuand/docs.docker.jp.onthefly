@@ -1,6 +1,118 @@
 var pages = [
 
 {
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.03/",
+"title":"Docker Engine 17.03 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.04/",
+"title":"Docker Engine 17.04 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.05/",
+"title":"Docker Engine 17.05 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.06/",
+"title":"Docker Engine 17.06 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.07/",
+"title":"Docker Engine 17.07 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.09/",
+"title":"Docker Engine 17.09 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.10/",
+"title":"Docker Engine 17.11 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.11/",
+"title":"Docker Engine 17.11 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/17.12/",
+"title":"Docker Engine 17.12 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/18.01/",
+"title":"Docker Engine 18.01 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/18.02/",
+"title":"Docker Engine 18.02 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/18.03/",
+"title":"Docker Engine 18.03 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/18.04/",
+"title":"Docker Engine 18.04 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/18.05/",
+"title":"Docker Engine 18.05 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/18.06/",
+"title":"Docker Engine 18.06 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/release-notes/18.09/",
+"title":"Docker Engine 18.09 release notes",
+"description":null,
+"keywords":null
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/404.html",
 "title":"申し訳ありません。ページが見つかりません。",
 "description":null,
@@ -103,13 +215,6 @@ var pages = [
 "title":"Allow users to create repositories when pushing",
 "description":"By default Docker Trusted Registry only allows pushing images to existing repositories. Learn how to change that.",
 "keywords":"dtr, repository"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/config/thirdparty/ansible/",
-"title":"Use Ansible",
-"description":"Installation and using Docker via Ansible",
-"keywords":"ansible, installation, usage, docker, documentation"
 }
 ,
 {
@@ -834,13 +939,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/config/thirdparty/chef/",
-"title":"Use Chef",
-"description":"Installation and using Docker via Chef",
-"keywords":"chef, installation, usage, docker, documentation"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/assemble/cli-reference/",
 "title":"Docker Assemble CLI reference",
 "description":"Docker Assemble CLI reference",
@@ -985,13 +1083,6 @@ var pages = [
 "title":"Command-line completion",
 "description":"Install Machine command-line completion",
 "keywords":"machine, docker, orchestration, cli, reference"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/",
-"title":"Compose ファイル バージョン 1 リファレンス",
-"description":"Compose ファイルリファレンス",
-"keywords":"fig, composition, compose version 1, docker"
 }
 ,
 {
@@ -1786,13 +1877,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/config/thirdparty/dsc/",
-"title":"Use PowerShell DSC",
-"description":"Using DSC to configure a new Docker host",
-"keywords":"powershell, dsc, installation, usage, docker,  documentation"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/config/containers/logging/dual-logging/",
 "title":"Use docker logs to read container logs for remote logging drivers",
 "description":"Learn how to read container logs locally when using a third party logging solution.",
@@ -2521,6 +2605,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/release-notes/",
+"title":"Docker Engine release notes",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community",
+"keywords":"docker, docker engine, ce, whats new, release notes"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/",
 "title":"Docker Engine について",
 "description":"Engine",
@@ -2567,13 +2658,6 @@ var pages = [
 "title":"View logs for a container or service",
 "description":"How to write to and view a container's logs",
 "keywords":"docker, logging"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/config/thirdparty/",
-"title":"Work with third-party monitoring tools",
-"description":"Third-party configuration tools",
-"keywords":"third-party, tools, monitoring, configuration, usage, docker, daemon"
 }
 ,
 {
@@ -2900,7 +2984,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/release-notes/",
-"title":"Docker リリースノート",
+"title":"Docker release notes",
 "description":"Release notes for Docker",
 "keywords":"docker, documentation, about, technology, understanding,  release"
 }
@@ -4159,6 +4243,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/release-notes/prior-releases/",
+"title":"Docker Engine リリースノート",
+"description":"Release notes for Docker CE",
+"keywords":"release notes, community"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/compose/production/",
 "title":"本番環境での Compose の利用",
 "description":"本番環境で Compose を利用するためのガイド。",
@@ -4173,7 +4264,7 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/config/thirdparty/prometheus/",
+"url":"/docs.docker.jp.onthefly/config/daemon/prometheus/",
 "title":"Collect Docker metrics with Prometheus",
 "description":"Collecting Docker metrics with Prometheus",
 "keywords":"prometheus, metrics"
@@ -4261,13 +4352,6 @@ var pages = [
 "title":"docker-compose pull",
 "description":"Pulls service images.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  pull"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/config/thirdparty/puppet/",
-"title":"Use Puppet",
-"description":"Installing and using Puppet",
-"keywords":"puppet, installation, usage, docker, documentation"
 }
 ,
 {
@@ -4418,10 +4502,24 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/swarm/release-notes/",
+"title":"Docker Swarm (standalone) release notes",
+"description":"Release notes for Docker Swarm (standalone)",
+"keywords":"release notes, swarm"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
 "title":"Docker Engine release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community",
 "keywords":"docker, docker engine, ce, whats new, release notes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/compose/release-notes/",
+"title":"Docker Compose release notes",
+"description":"Release notes for Docker Compose",
+"keywords":"release notes, compose"
 }
 ,
 {
@@ -4454,8 +4552,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/ee/docker-ee/release-notes/",
-"title":"Docker Engine release notes",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and Enterprise",
+"title":"Docker Engine - Enterprise release notes",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Enterprise",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
 }
 ,
@@ -4485,6 +4583,13 @@ var pages = [
 "title":"Install or upgrade Docker Enterprise components",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Enterprise.",
 "keywords":"engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/machine/release-notes/",
+"title":"Docker Machine release notes",
+"description":"Release notes for Docker Machine",
+"keywords":"release notes, machine"
 }
 ,
 {

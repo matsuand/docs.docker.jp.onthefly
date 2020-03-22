@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -79,7 +79,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -89,7 +89,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="マルチステージビルドは、Docker 17.05 またはそれ以上の Docker デーモンおよび Docker クライアントにおける新機能です。 マルチステージビルドは、Dockerfile を読みやすく保守しやすくするように、最適化に取り組むユーザーにとって非常にありがたいものです。 感謝: Alex Ellis 氏に感謝します。 氏のブログ投稿 Builder pattern vs. Multi-stage builds in Docker に基づいて、以下の利用例を掲載する許可を頂きました。 マルチステージビルド以前 イメージをビルドする際に取り組むことといえば、ほとんどがそのイメージサイズを小さく抑えることです。 Dockerfile 内の各命令は、イメージに対してレイヤーを追加します。 そこで次のレイヤー処理に入る前には、不要となった生成物はクリーンアップしておくことが必要です。 現実に効果的な Dockerfile を書くためには、いつもながらトリッキーなシェルのテクニックや、レイヤーができる限り小さくなるようなロジックを考えたりすることが必要でした。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="images, containers, best practices, multi-stage, multistage">
@@ -217,11 +217,11 @@ Dockerfile 内の各命令は、イメージに対してレイヤーを追加し
 
 <p><strong><code class="highlighter-rouge">Dockerfile.build</code></strong>:</p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">golang</span>:<span class="m">1</span>.<span class="m">7</span>.<span class="m">3</span>
-<span class="n">WORKDIR</span> /<span class="n">go</span>/<span class="n">src</span>/<span class="n">github</span>.<span class="n">com</span>/<span class="n">alexellis</span>/<span class="n">href</span>-<span class="n">counter</span>/
-<span class="n">COPY</span> <span class="n">app</span>.<span class="n">go</span> .
-<span class="n">RUN</span> <span class="n">go</span> <span class="n">get</span> -<span class="n">d</span> -<span class="n">v</span> <span class="n">golang</span>.<span class="n">org</span>/<span class="n">x</span>/<span class="n">net</span>/<span class="n">html</span> \
-  &amp;&amp; <span class="n">CGO_ENABLED</span>=<span class="m">0</span> <span class="n">GOOS</span>=<span class="n">linux</span> <span class="n">go</span> <span class="n">build</span> -<span class="n">a</span> -<span class="n">installsuffix</span> <span class="n">cgo</span> -<span class="n">o</span> <span class="n">app</span> .
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.7.3</span>
+<span class="k">WORKDIR</span><span class="s"> /go/src/github.com/alexellis/href-counter/</span>
+<span class="k">COPY</span><span class="s"> app.go .</span>
+<span class="k">RUN </span>go get <span class="nt">-d</span> <span class="nt">-v</span> golang.org/x/net/html <span class="se">\
+</span>  <span class="o">&amp;&amp;</span> <span class="nv">CGO_ENABLED</span><span class="o">=</span>0 <span class="nv">GOOS</span><span class="o">=</span>linux go build <span class="nt">-a</span> <span class="nt">-installsuffix</span> cgo <span class="nt">-o</span> app .
 </code></pre></div></div>
 
 <p>上の例を見てわかるように、本来 2 つある <code class="highlighter-rouge">RUN</code> コマンドを Bash の <code class="highlighter-rouge">&amp;&amp;</code> オペレーターによって連結しています。
@@ -231,11 +231,11 @@ Dockerfile 内の各命令は、イメージに対してレイヤーを追加し
 
 <p><strong><code class="highlighter-rouge">Dockerfile</code></strong>:</p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">alpine</span>:<span class="n">latest</span>
-<span class="n">RUN</span> <span class="n">apk</span> --<span class="n">no</span>-<span class="n">cache</span> <span class="n">add</span> <span class="n">ca</span>-<span class="n">certificates</span>
-<span class="n">WORKDIR</span> /<span class="n">root</span>/
-<span class="n">COPY</span> <span class="n">app</span> .
-<span class="n">CMD</span> [<span class="s2">"./app"</span>]
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine:latest</span>
+<span class="k">RUN </span>apk <span class="nt">--no-cache</span> add ca-certificates
+<span class="k">WORKDIR</span><span class="s"> /root/</span>
+<span class="k">COPY</span><span class="s"> app .</span>
+<span class="k">CMD</span><span class="s"> ["./app"]</span>
 </code></pre></div></div>
 
 <p><strong><code class="highlighter-rouge">build.sh</code></strong>:</p>
@@ -272,17 +272,17 @@ rm ./app
 
 <p><strong><code class="highlighter-rouge">Dockerfile</code></strong>:</p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">golang</span>:<span class="m">1</span>.<span class="m">7</span>.<span class="m">3</span>
-<span class="n">WORKDIR</span> /<span class="n">go</span>/<span class="n">src</span>/<span class="n">github</span>.<span class="n">com</span>/<span class="n">alexellis</span>/<span class="n">href</span>-<span class="n">counter</span>/
-<span class="n">RUN</span> <span class="n">go</span> <span class="n">get</span> -<span class="n">d</span> -<span class="n">v</span> <span class="n">golang</span>.<span class="n">org</span>/<span class="n">x</span>/<span class="n">net</span>/<span class="n">html</span>
-<span class="n">COPY</span> <span class="n">app</span>.<span class="n">go</span> .
-<span class="n">RUN</span> <span class="n">CGO_ENABLED</span>=<span class="m">0</span> <span class="n">GOOS</span>=<span class="n">linux</span> <span class="n">go</span> <span class="n">build</span> -<span class="n">a</span> -<span class="n">installsuffix</span> <span class="n">cgo</span> -<span class="n">o</span> <span class="n">app</span> .
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.7.3</span>
+<span class="k">WORKDIR</span><span class="s"> /go/src/github.com/alexellis/href-counter/</span>
+<span class="k">RUN </span>go get <span class="nt">-d</span> <span class="nt">-v</span> golang.org/x/net/html
+<span class="k">COPY</span><span class="s"> app.go .</span>
+<span class="k">RUN </span><span class="nv">CGO_ENABLED</span><span class="o">=</span>0 <span class="nv">GOOS</span><span class="o">=</span>linux go build <span class="nt">-a</span> <span class="nt">-installsuffix</span> cgo <span class="nt">-o</span> app .
 
-<span class="n">FROM</span> <span class="n">alpine</span>:<span class="n">latest</span>
-<span class="n">RUN</span> <span class="n">apk</span> --<span class="n">no</span>-<span class="n">cache</span> <span class="n">add</span> <span class="n">ca</span>-<span class="n">certificates</span>
-<span class="n">WORKDIR</span> /<span class="n">root</span>/
-<span class="n">COPY</span> --<span class="n">from</span>=<span class="m">0</span> /<span class="n">go</span>/<span class="n">src</span>/<span class="n">github</span>.<span class="n">com</span>/<span class="n">alexellis</span>/<span class="n">href</span>-<span class="n">counter</span>/<span class="n">app</span> .
-<span class="n">CMD</span> [<span class="s2">"./app"</span>]
+<span class="k">FROM</span><span class="s"> alpine:latest</span>
+<span class="k">RUN </span>apk <span class="nt">--no-cache</span> add ca-certificates
+<span class="k">WORKDIR</span><span class="s"> /root/</span>
+<span class="k">COPY</span><span class="s"> --from=0 /go/src/github.com/alexellis/href-counter/app .</span>
+<span class="k">CMD</span><span class="s"> ["./app"]</span>
 </code></pre></div></div>
 
 <p>Dockerfile はただ 1 つ用意するだけです。
@@ -311,17 +311,17 @@ Go 言語の SDK やその他の中間生成物は取り残されていて、最
 以下の例はこれまでのものをさらに充実させて、ステージに名前をつけ、<code class="highlighter-rouge">COPY</code> 命令においてその名前を利用します。
 これはつまり、Dockerfile 内の命令の記述順が、後々変更になったとしても、<code class="highlighter-rouge">COPY</code> は確実に動作するということです。</p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">golang</span>:<span class="m">1</span>.<span class="m">7</span>.<span class="m">3</span> <span class="n">AS</span> <span class="n">builder</span>
-<span class="n">WORKDIR</span> /<span class="n">go</span>/<span class="n">src</span>/<span class="n">github</span>.<span class="n">com</span>/<span class="n">alexellis</span>/<span class="n">href</span>-<span class="n">counter</span>/
-<span class="n">RUN</span> <span class="n">go</span> <span class="n">get</span> -<span class="n">d</span> -<span class="n">v</span> <span class="n">golang</span>.<span class="n">org</span>/<span class="n">x</span>/<span class="n">net</span>/<span class="n">html</span>
-<span class="n">COPY</span> <span class="n">app</span>.<span class="n">go</span>    .
-<span class="n">RUN</span> <span class="n">CGO_ENABLED</span>=<span class="m">0</span> <span class="n">GOOS</span>=<span class="n">linux</span> <span class="n">go</span> <span class="n">build</span> -<span class="n">a</span> -<span class="n">installsuffix</span> <span class="n">cgo</span> -<span class="n">o</span> <span class="n">app</span> .
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.7.3 AS builder</span>
+<span class="k">WORKDIR</span><span class="s"> /go/src/github.com/alexellis/href-counter/</span>
+<span class="k">RUN </span>go get <span class="nt">-d</span> <span class="nt">-v</span> golang.org/x/net/html
+<span class="k">COPY</span><span class="s"> app.go    .</span>
+<span class="k">RUN </span><span class="nv">CGO_ENABLED</span><span class="o">=</span>0 <span class="nv">GOOS</span><span class="o">=</span>linux go build <span class="nt">-a</span> <span class="nt">-installsuffix</span> cgo <span class="nt">-o</span> app .
 
-<span class="n">FROM</span> <span class="n">alpine</span>:<span class="n">latest</span>
-<span class="n">RUN</span> <span class="n">apk</span> --<span class="n">no</span>-<span class="n">cache</span> <span class="n">add</span> <span class="n">ca</span>-<span class="n">certificates</span>
-<span class="n">WORKDIR</span> /<span class="n">root</span>/
-<span class="n">COPY</span> --<span class="n">from</span>=<span class="n">builder</span> /<span class="n">go</span>/<span class="n">src</span>/<span class="n">github</span>.<span class="n">com</span>/<span class="n">alexellis</span>/<span class="n">href</span>-<span class="n">counter</span>/<span class="n">app</span> .
-<span class="n">CMD</span> [<span class="s2">"./app"</span>]
+<span class="k">FROM</span><span class="s"> alpine:latest</span>
+<span class="k">RUN </span>apk <span class="nt">--no-cache</span> add ca-certificates
+<span class="k">WORKDIR</span><span class="s"> /root/</span>
+<span class="k">COPY</span><span class="s"> --from=builder /go/src/github.com/alexellis/href-counter/app .</span>
+<span class="k">CMD</span><span class="s"> ["./app"]</span>
 </code></pre></div></div>
 
 <h2 id="stop-at-a-specific-build-stage">ビルドステージの指定</h2>
@@ -350,24 +350,24 @@ Docker クライアントは必要なときにはイメージを取得します�
 そしてそこから構築内容をコピーします。
 コマンド構文は以下のようになります。</p>
 
-<pre><code class="language-Dockerfile">COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
-</code></pre>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf</span>
+</code></pre></div></div>
 
 <h2 id="use-a-previous-stage-as-a-new-stage">Use a previous stage as a new stage</h2>
 
 <p>You can pick up where a previous stage left off by referring to it when using the <code class="highlighter-rouge">FROM</code> directive. For example:</p>
 
-<pre><code class="language-Dockerfile">FROM alpine:latest as builder
-RUN apk --no-cache add build-base
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine:latest as builder</span>
+<span class="k">RUN </span>apk <span class="nt">--no-cache</span> add build-base
 
-FROM builder as build1
-COPY source1.cpp source.cpp
-RUN g++ -o /binary source.cpp
+<span class="k">FROM</span><span class="s"> builder as build1</span>
+<span class="k">COPY</span><span class="s"> source1.cpp source.cpp</span>
+<span class="k">RUN </span>g++ <span class="nt">-o</span> /binary source.cpp
 
-FROM builder as build2
-COPY source2.cpp source.cpp
-RUN g++ -o /binary source.cpp
-</code></pre>
+<span class="k">FROM</span><span class="s"> builder as build2</span>
+<span class="k">COPY</span><span class="s"> source2.cpp source.cpp</span>
+<span class="k">RUN </span>g++ <span class="nt">-o</span> /binary source.cpp
+</code></pre></div></div>
 
 							<!-- tags -->
 							

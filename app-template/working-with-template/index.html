@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-22 21:10:44 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,7 +75,7 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-22T21:10:44+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -85,7 +85,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="This is an experimental feature. 試験的な機能は、将来の製品に搭載される機能をいち早く試すことができるものです。 ただし現段階でのこの機能は、テストとフィードバックのためだけを意図しています。 したがってリリース時には予告なく変更される場合があり、将来のリリースでは完全に削除されることもあります。 試験的な機能は本番環境では利用しないでください。 Docker ではこの試験的機能に対するサポートは行っていません。 Docker CLI において試験的機能を有効にするには、config.json ファイルを編集して experimental を有効に設定してください。 Docker Desktop メニューから試験的機能を有効にするには、Settings (macOS の場合は Preferences) &gt; Command Line をクリックし、Enable experimental features チェックを有効にします。..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-22T21:10:44+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Docker, application template, Application Designer,">
@@ -299,11 +299,11 @@ optional volumes or secrets.</p>
 
 <p><code class="highlighter-rouge">my-service/Dockerfile</code></p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">alpine</span>
-<span class="n">COPY</span> <span class="n">assets</span> /<span class="n">assets</span>
-<span class="n">CMD</span> [<span class="s2">"cp"</span>, <span class="s2">"/assets"</span>, <span class="s2">"/project"</span>]
-<span class="n">FROM</span> <span class="n">dockertemplate</span>/<span class="n">interpolator</span>:<span class="n">v0</span>.<span class="m">1</span>.<span class="m">5</span> <span class="n">as</span> <span class="n">interpolator</span>
-<span class="n">COPY</span> <span class="n">assets</span> /<span class="n">assets</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine</span>
+<span class="k">COPY</span><span class="s"> assets /assets</span>
+<span class="k">CMD</span><span class="s"> ["cp", "/assets", "/project"]</span>
+<span class="k">FROM</span><span class="s"> dockertemplate/interpolator:v0.1.5 as interpolator</span>
+<span class="k">COPY</span><span class="s"> assets /assets</span>
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">my-service/assets/docker-compose.yaml</code></p>
@@ -318,12 +318,12 @@ optional volumes or secrets.</p>
 
 <p><code class="highlighter-rouge">my-service/assets/Dockerfile</code></p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">NODE</span>:<span class="m">9</span>
-<span class="n">WORKDIR</span> /<span class="n">app</span>
-<span class="n">COPY</span> <span class="n">package</span>.<span class="n">json</span> .
-<span class="n">RUN</span> <span class="n">yarn</span> <span class="n">install</span>
-<span class="n">COPY</span> . .
-<span class="n">CMD</span> [<span class="s2">"yarn"</span>, <span class="s2">"run"</span>, <span class="s2">"start"</span>]
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> NODE:9</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> package.json .</span>
+<span class="k">RUN </span>yarn install
+<span class="k">COPY</span><span class="s"> . .</span>
+<span class="k">CMD</span><span class="s"> ["yarn", "run", "start"]</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -458,8 +458,8 @@ is used to interpolate the variables. Therefore, we provide a utility called
 <p>To use the <code class="highlighter-rouge">interpolator</code> image, update <code class="highlighter-rouge">my-service/Dockerfile</code> to use the
 following Dockerfile:</p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FROM</span> <span class="n">dockertemplate</span>/<span class="n">interpolator</span>:<span class="n">v0</span>.<span class="m">1</span>.<span class="m">5</span>
-<span class="n">COPY</span> <span class="n">assets</span> .
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> dockertemplate/interpolator:v0.1.5</span>
+<span class="k">COPY</span><span class="s"> assets .</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -471,8 +471,8 @@ Template. Verify this using the <code class="highlighter-rouge">docker template 
 folder to the target <code class="highlighter-rouge">/project</code> folder. If you prefer to do this manually, use
 a Dockerfile instead:</p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">WORKDIR</span> /<span class="n">assets</span>
-<span class="n">CMD</span> [<span class="s2">"/interpolator"</span>, <span class="s2">"-config"</span>, <span class="s2">"/run/configuration"</span>, <span class="s2">"-source"</span>, <span class="s2">"/assets"</span>, <span class="s2">"-destination"</span>, <span class="s2">"/project"</span>]
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WORKDIR</span><span class="s"> /assets</span>
+<span class="k">CMD</span><span class="s"> ["/interpolator", "-config", "/run/configuration", "-source", "/assets", "-destination", "/project"]</span>
 </code></pre></div></div>
 
 <p>When this is complete, use the newly added node option in
