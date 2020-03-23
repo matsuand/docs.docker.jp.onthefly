@@ -77,7 +77,7 @@ function walkTree(tree) {
             outputLetNav.push("</ul></li>");
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
-            outputLetNav.push('<li><a href="' + tree[j].path + '"')
+            outputLetNav.push('<li><a href="/docs.docker.jp.onthefly' + tree[j].path + '"')
             if (tree[j].path === pageURL && !tree[j].nosync) {
                 sectionToHighlight = currentSection;
                 outputLetNav.push('class="active currentPage"')
