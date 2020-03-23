@@ -102,7 +102,7 @@ function renderNav(docstoc) {
         if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
             outputHorzTabs.push(' class="active"');
         }
-        outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
+        outputHorzTabs.push('><a href="/docs.docker.jp.onthefly' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
     }
     document.getElementById("jsTOCHorizontal").innerHTML = outputHorzTabs.join("");
     document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
