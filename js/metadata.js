@@ -709,9 +709,9 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/",
-"title":"Docker ビルドの拡張",
-"description":"Docker ビルドの新しい機能について学びます。",
-"keywords":"build, security, engine, secret, buildkit"
+"title":"BuildKit によるイメージ構築",
+"description":"BuildKit により Docker ビルドについて学びます。",
+"keywords":"build, security, engine, secret, BuildKit"
 }
 ,
 {
