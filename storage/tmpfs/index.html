@@ -1,4 +1,4 @@
-<!-- Page generated 2020-02-27 14:41:05 +0900 -->
+<!-- Page generated 2020-03-25 21:26:22 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -75,17 +75,17 @@
 	<meta property="og:image" content="https://matsuand.github.io/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-25T21:26:22+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Use tmpfs mounts"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="Volumes and bind mounts let you share files between the host machine and container so that you can persist data even after the container is stopped. If you’re running Docker..." />
+	<meta name="twitter:title" itemprop="title name" content="tmpfs マウントの利用"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="ボリューム や バインドマウント を利用すれば、ホストマシンとコンテナー間にてファイル共有ができました。 これによりコンテナーが停止した後でも、データを保持できるようになります。 Docker を Linux 上にて稼動させている場合は、さらに 3 つめの方法があります。 それが tmpfs マウントです。 tmpfs マウントを用いてコンテナーを生成した場合、コンテナーが書き込むファイルは、コンテナーの外部にある書き込みレイヤーに生成されます。 ボリュームやバインドマウントとは違って tmpfs マウントは一時的なものであり、ホストマシンのメモリ上にのみ存在します。 コンテナーが停止されると tmpfs マウントは削除されてしまうため、そこに書き込まれたファイルを保持し続けることはできません。 これが有用になるのは、重要な情報を含んだファイルを一時的に保存したい場合です。 こういった情報は、ホスト上およびコンテナーの書き込みレイヤー上のいずれであっても、ずっと残しておくわけにはいかないものです。 tmpfs マウントの制約 ボリュームやバインドマウントとは違って、tmpfs マウントはコンテナー間で共有することはできません。 この機能は Docker..." />
 	<meta name="twitter:image:src" content="https://matsuand.github.io/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-02-27T14:41:05+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-03-25T21:26:22+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="storage, persistence, data persistence, tmpfs">
@@ -97,16 +97,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Use tmpfs mounts | Docker ドキュメント</title>
-<meta property="og:title" content="Use tmpfs mounts" />
+	<title>tmpfs マウントの利用 | Docker ドキュメント</title>
+<meta property="og:title" content="tmpfs マウントの利用" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Using tmpfs mounts" />
-<meta property="og:description" content="Using tmpfs mounts" />
+<meta name="description" content="tmpfs マウントの利用。" />
+<meta property="og:description" content="tmpfs マウントの利用。" />
 <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Use tmpfs mounts","description":"Using tmpfs mounts","url":"https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"tmpfs マウントの利用","description":"tmpfs マウントの利用。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -176,88 +176,84 @@
 						<section class="section">
 							
 								
-							<h1>Use tmpfs mounts</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>tmpfs マウントの利用</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    2 分
   
 </span>
 
 							
 							
-							<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">Volumes</a> and <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/">bind mounts</a> let you share files
-between the host machine and container so that you can persist data even after
-the container is stopped.</p>
+							
+<p><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">ボリューム</a> や <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/">バインドマウント</a> を利用すれば、ホストマシンとコンテナー間にてファイル共有ができました。
+これによりコンテナーが停止した後でも、データを保持できるようになります。</p>
 
-<p>If you’re running Docker on Linux, you have a third option: <code class="highlighter-rouge">tmpfs</code> mounts.
-When you create a container with a <code class="highlighter-rouge">tmpfs</code> mount, the container can create
-files outside the container’s writable layer.</p>
+<p>Docker を Linux 上にて稼動させている場合は、さらに 3 つめの方法があります。
+それが <code class="highlighter-rouge">tmpfs</code> マウントです。
+<code class="highlighter-rouge">tmpfs</code> マウントを用いてコンテナーを生成した場合、コンテナーが書き込むファイルは、コンテナーの外部にある書き込みレイヤーに生成されます。</p>
 
-<p>As opposed to volumes and bind mounts, a <code class="highlighter-rouge">tmpfs</code> mount is temporary, and only
-persisted in the host memory. When the container stops, the <code class="highlighter-rouge">tmpfs</code> mount is
-removed, and files written there won’t be persisted.</p>
+<p>ボリュームやバインドマウントとは違って <code class="highlighter-rouge">tmpfs</code> マウントは一時的なものであり、ホストマシンのメモリ上にのみ存在します。
+コンテナーが停止されると <code class="highlighter-rouge">tmpfs</code> マウントは削除されてしまうため、そこに書き込まれたファイルを保持し続けることはできません。</p>
 
-<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/storage/images/types-of-mounts-tmpfs.png" alt="tmpfs on the Docker host" /></p>
+<p><img src="https://matsuand.github.io/docs.docker.jp.onthefly/storage/images/types-of-mounts-tmpfs.png" alt="Docker ホスト上の tmpfs" /></p>
 
-<p>This is useful to temporarily store sensitive files that you don’t want to
-persist in either the host or the container writable layer.</p>
+<p>これが有用になるのは、重要な情報を含んだファイルを一時的に保存したい場合です。
+こういった情報は、ホスト上およびコンテナーの書き込みレイヤー上のいずれであっても、ずっと残しておくわけにはいかないものです。</p>
 
-<h2 id="limitations-of-tmpfs-mounts">Limitations of tmpfs mounts</h2>
+<h2 id="limitations-of-tmpfs-mounts">tmpfs マウントの制約</h2>
 
 <ul>
-  <li>Unlike volumes and bind mounts, you can’t share <code class="highlighter-rouge">tmpfs</code> mounts between
-containers.</li>
-  <li>This functionality is only available if you’re running Docker on Linux.</li>
+  <li>ボリュームやバインドマウントとは違って、<code class="highlighter-rouge">tmpfs</code> マウントはコンテナー間で共有することはできません。</li>
+  <li>この機能は Docker on Linux を稼動させている場合にのみ利用可能です。</li>
 </ul>
 
-<h2 id="choose-the---tmpfs-or---mount-flag">Choose the --tmpfs or --mount flag</h2>
+<h2 id="choose-the---tmpfs-or---mount-flag">--tmpfs フラグ、--mount フラグの使い分け</h2>
 
-<p>Originally, the <code class="highlighter-rouge">--tmpfs</code> flag was used for standalone containers and
-the <code class="highlighter-rouge">--mount</code> flag was used for swarm services. However, starting with Docker
-17.06, you can also use <code class="highlighter-rouge">--mount</code> with standalone containers. In general,
-<code class="highlighter-rouge">--mount</code> is more explicit and verbose. The biggest difference is that the
-<code class="highlighter-rouge">--tmpfs</code> flag does not support any configurable options.</p>
+<p>元々<code class="highlighter-rouge">--tmpfs</code> フラグはスタンドアロンコンテナー向けに用いられ、<code class="highlighter-rouge">--mount</code> フラグは Swarm サービス向けに用いられていました。
+しかし Docker 17.06 以降では <code class="highlighter-rouge">--mount</code> がスタンドアロンコンテナーに対しても利用できるようになりました。
+一般に <code class="highlighter-rouge">--mount</code> の方が、より明示的なものであり多くの記述を必要とします。
+はっきりとした違いは <code class="highlighter-rouge">--tmpfs</code> フラグでは設定変更可能なオプションが用意されていないということです。</p>
 
 <ul>
   <li>
-    <p><strong><code class="highlighter-rouge">--tmpfs</code></strong>: Mounts a <code class="highlighter-rouge">tmpfs</code> mount without allowing you to specify any
-configurable options, and can only be used with standalone containers.</p>
+    <p><strong><code class="highlighter-rouge">--tmpfs</code></strong>: <code class="highlighter-rouge">tmpfs</code> マウントを行いますが、設定変更が行えるようなオプション指定はありません。
+またこのオプションはスタンドアロンコンテナーに対してしか用いることはできません。</p>
   </li>
   <li>
-    <p><strong><code class="highlighter-rouge">--mount</code></strong>: Consists of multiple key-value pairs, separated by commas and each
-consisting of a <code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code> tuple. The <code class="highlighter-rouge">--mount</code> syntax is more verbose
-than <code class="highlighter-rouge">--tmpfs</code>:</p>
+    <p><strong><code class="highlighter-rouge">--mount</code></strong>: 複数のキーバリューペアを指定し、個々は <code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code> の記述としてそれぞれをカンマで区切ります。
+<code class="highlighter-rouge">--mount</code> の書式は <code class="highlighter-rouge">--tmpfs</code> に比べて多くの記述を必要とします。</p>
     <ul>
-      <li>The <code class="highlighter-rouge">type</code> of the mount, which can be <a href="bind-mounts-md"><code class="highlighter-rouge">bind</code></a>, <code class="highlighter-rouge">volume</code>, or
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/"><code class="highlighter-rouge">tmpfs</code></a>. This topic discusses <code class="highlighter-rouge">tmpfs</code>, so the type is always
-<code class="highlighter-rouge">tmpfs</code>.</li>
-      <li>The <code class="highlighter-rouge">destination</code> takes as its value the path where the <code class="highlighter-rouge">tmpfs</code> mount
-is mounted in the container. May be specified as <code class="highlighter-rouge">destination</code>, <code class="highlighter-rouge">dst</code>,
-or <code class="highlighter-rouge">target</code>.</li>
-      <li>The <code class="highlighter-rouge">tmpfs-size</code> and <code class="highlighter-rouge">tmpfs-mode</code> options. See
-<a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#specify-tmpfs-options">tmpfs options</a>.</li>
+      <li><code class="highlighter-rouge">type</code> によりマウントのタイプ、つまり <a href="bind-mounts-md"><code class="highlighter-rouge">bind</code></a>, <code class="highlighter-rouge">volume</code>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/tmpfs/"><code class="highlighter-rouge">tmpfs</code></a> のいずれかを指定します。
+<code class="highlighter-rouge">tmpfs</code> の説明を行っていますから、ここでは <code class="highlighter-rouge">tmpfs</code> とします。</li>
+      <li><code class="highlighter-rouge">destination</code> はバリューにパスを指定します。
+これはコンテナー内にて <code class="highlighter-rouge">tmpfs</code> マウントを行うパスを表わします。
+<code class="highlighter-rouge">destination</code>、<code class="highlighter-rouge">dst</code>、<code class="highlighter-rouge">target</code> として指定することもできます。</li>
+      <li><code class="highlighter-rouge">tmpfs-size</code> と <code class="highlighter-rouge">tmpfs-mode</code> オプションがあります。
+<a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#specify-tmpfs-options">tmpfs オプション</a> を参照してください。</li>
     </ul>
   </li>
 </ul>
 
-<p>The examples below show both the <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">--tmpfs</code> syntax where possible,
-and <code class="highlighter-rouge">--mount</code> is presented first.</p>
+<p>以降では <code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">--tmpfs</code> の両方について、利用可能な書式を示します。
+はじめに示すのは <code class="highlighter-rouge">--mount</code> です。</p>
 
-<h3 id="differences-between---tmpfs-and---mount-behavior">Differences between <code class="highlighter-rouge">--tmpfs</code> and <code class="highlighter-rouge">--mount</code> behavior</h3>
+<h3 id="differences-between---tmpfs-and---mount-behavior"><code class="highlighter-rouge">--tmpfs</code> と <code class="highlighter-rouge">--mount</code> の違い</h3>
 
 <ul>
-  <li>The <code class="highlighter-rouge">--tmpfs</code> flag does not allow you to specify any configurable options.</li>
-  <li>The <code class="highlighter-rouge">--tmpfs</code> flag cannot be used with swarm services. You must use <code class="highlighter-rouge">--mount</code>.</li>
+  <li><code class="highlighter-rouge">--tmpfs</code> フラグには設定変更可能なオプションの指定はありません。</li>
+  <li><code class="highlighter-rouge">--tmpfs</code> フラグは Swarm サービスに対して用いることはできません。
+その場合は <code class="highlighter-rouge">--mount</code> を用います。</li>
 </ul>
 
-<h2 id="use-a-tmpfs-mount-in-a-container">Use a tmpfs mount in a container</h2>
+<h2 id="use-a-tmpfs-mount-in-a-container">コンテナー内での tmpfs マウントの利用</h2>
 
-<p>To use a <code class="highlighter-rouge">tmpfs</code> mount in a container, use the <code class="highlighter-rouge">--tmpfs</code> flag, or use the
-<code class="highlighter-rouge">--mount</code> flag with <code class="highlighter-rouge">type=tmpfs</code> and <code class="highlighter-rouge">destination</code> options. There is no
-<code class="highlighter-rouge">source</code> for <code class="highlighter-rouge">tmpfs</code> mounts. The following example creates a <code class="highlighter-rouge">tmpfs</code> mount at
-<code class="highlighter-rouge">/app</code> in a Nginx container. The first example uses the <code class="highlighter-rouge">--mount</code> flag and the
-second uses the <code class="highlighter-rouge">--tmpfs</code> flag.</p>
+<p>コンテナー内にて <code class="highlighter-rouge">tmpfs</code> マウントを利用するには <code class="highlighter-rouge">--tmpfs</code> フラグを用います。
+あるいは <code class="highlighter-rouge">--mount</code> フラグにて <code class="highlighter-rouge">type=tmpfs</code> と <code class="highlighter-rouge">destination</code> オプションを指定します。
+<code class="highlighter-rouge">tmpfs</code> マウントに <code class="highlighter-rouge">source</code> オプションは存在しません。
+以下の利用例は Nginx コンテナー内の <code class="highlighter-rouge">/app</code> に対して <code class="highlighter-rouge">tmpfs</code> マウントを生成するものです。
+1 例めでは <code class="highlighter-rouge">--mount</code> フラグ、2 例めでは <code class="highlighter-rouge">--tmpfs</code> フラグを用いています。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
@@ -289,48 +285,50 @@ second uses the <code class="highlighter-rouge">--tmpfs</code> flag.</p>
 </div>
 <!--tab-content-->
 
-<p>Verify that the mount is a <code class="highlighter-rouge">tmpfs</code> mount by running <code class="highlighter-rouge">docker container inspect
-tmptest</code> and looking for the <code class="highlighter-rouge">Mounts</code> section:</p>
+<p>マウントが <code class="highlighter-rouge">tmpfs</code> マウントであることを確認するために <code class="highlighter-rouge">docker container inspect
+tmptest</code> を実行します。
+結果は <code class="highlighter-rouge">Mounts</code> の項に示されます。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"Tmpfs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"/app"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Remove the container:</p>
+<p>コンテナーを削除します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop tmptest
 
 <span class="nv">$ </span>docker container rm tmptest
 </code></pre></div></div>
 
-<h3 id="specify-tmpfs-options">Specify tmpfs options</h3>
+<h3 id="specify-tmpfs-options">tmpfs オプションの指定</h3>
 
-<p><code class="highlighter-rouge">tmpfs</code> mounts allow for two configuration options, neither of which is
-required. If you need to specify these options, you must use the <code class="highlighter-rouge">--mount</code> flag,
-as the <code class="highlighter-rouge">--tmpfs</code> flag does not support them.</p>
+<p><code class="highlighter-rouge">tmpfs</code> マウントには設定変更可能なオプションが 2 つあります。
+いずれも任意指定です。
+これを指定する場合は <code class="highlighter-rouge">--mount</code> フラグを用います。
+<code class="highlighter-rouge">--tmpfs</code> フラグではこれを指定することはできません。</p>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">Option</th>
-      <th style="text-align: left">Description</th>
+      <th style="text-align: left">オプション</th>
+      <th style="text-align: left">内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">tmpfs-size</code></td>
-      <td style="text-align: left">Size of the tmpfs mount in bytes. Unlimited by default.</td>
+      <td style="text-align: left">tmpfs マウントサイズをバイト単位で指定します。デフォルトは無制限です。</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">tmpfs-mode</code></td>
-      <td style="text-align: left">File mode of the tmpfs in octal. For instance, <code class="highlighter-rouge">700</code> or <code class="highlighter-rouge">0770</code>. Defaults to <code class="highlighter-rouge">1777</code> or world-writable.</td>
+      <td style="text-align: left">tmpfs のファイルモードを 8 進数表記で指定します。たとえば <code class="highlighter-rouge">700</code>、<code class="highlighter-rouge">0770</code> などです。デフォルトはすべて書き込み可能な <code class="highlighter-rouge">1777</code> です。</td>
     </tr>
   </tbody>
 </table>
 
-<p>The following example sets the <code class="highlighter-rouge">tmpfs-mode</code> to <code class="highlighter-rouge">1770</code>, so that it is not
-world-readable within the container.</p>
+<p>以下の例では <code class="highlighter-rouge">tmpfs-mode</code> に <code class="highlighter-rouge">1770</code> を指定しています。
+つまりこのコンテナー内においては、全ユーザーからの読み取りが制限されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-it</span> <span class="se">\</span>
@@ -339,12 +337,12 @@ world-readable within the container.</p>
   nginx:latest
 </code></pre></div></div>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
 <ul>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">volumes</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/">bind mounts</a></li>
-  <li>Learn about <a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">storage drivers</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/">ボリューム</a> について</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/bind-mounts/">バインドマウント</a> について</li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/">ストレージドライバー</a> について</li>
 </ul>
 
 							<!-- tags -->
@@ -381,7 +379,7 @@ world-readable within the container.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "storage/tmpfs.md",
-										"title": "Use tmpfs mounts",
+										"title": "tmpfs マウントの利用",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/storage/tmpfs.md"
 									};
 									(function(d, c, j) {
@@ -441,18 +439,18 @@ world-readable within the container.</p>
 									<div id="side-toc-title">本ページ内</div>
 									
 <ul id="my_toc" class="inline_toc">
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#limitations-of-tmpfs-mounts" class="nomunge">Limitations of tmpfs mounts</a></li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#choose-the---tmpfs-or---mount-flag" class="nomunge">Choose the --tmpfs or --mount flag</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#limitations-of-tmpfs-mounts" class="nomunge">tmpfs マウントの制約</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#choose-the---tmpfs-or---mount-flag" class="nomunge">--tmpfs フラグ、--mount フラグの使い分け</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#differences-between---tmpfs-and---mount-behavior" class="nomunge">Differences between --tmpfs and --mount behavior</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#differences-between---tmpfs-and---mount-behavior" class="nomunge">--tmpfs と --mount の違い</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#use-a-tmpfs-mount-in-a-container" class="nomunge">Use a tmpfs mount in a container</a>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#use-a-tmpfs-mount-in-a-container" class="nomunge">コンテナー内での tmpfs マウントの利用</a>
     <ul>
-      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#specify-tmpfs-options" class="nomunge">Specify tmpfs options</a></li>
+      <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#specify-tmpfs-options" class="nomunge">tmpfs オプションの指定</a></li>
     </ul>
   </li>
-  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/tmpfs.md#next-steps" class="nomunge">次のステップ</a></li>
 </ul>
 
 

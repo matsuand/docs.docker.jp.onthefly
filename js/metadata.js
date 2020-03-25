@@ -190,13 +190,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/assemble/adv-backend-manage/",
-"title":"Advanced backend management",
-"description":"Advanced backend management for Docker Assemble",
-"keywords":"Backend, Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/docker-hub/builds/advanced/",
 "title":"Advanced options for Autobuild and Autotest",
 "description":"Automated builds",
@@ -229,13 +222,6 @@ var pages = [
 "title":"Authenticate proxy with apache",
 "description":"Restricting access to your registry using an apache proxy",
 "keywords":"registry, on-prem, images, tags, repository, distribution, authentication, proxy, apache, httpd, TLS, recipe, advanced"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/app-template/api-reference/",
-"title":"Docker Template API reference",
-"description":"Docker Template API reference",
-"keywords":"application, template, API, definition"
 }
 ,
 {
@@ -418,90 +404,6 @@ var pages = [
 "title":"Quickstart: Compose and ASP.NET Core with SQL Server",
 "description":"Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker.",
 "keywords":"dotnet, .NET, Core, example, ASP.NET Core, SQL Server, mssql"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble/",
-"title":"docker assemble",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend/",
-"title":"docker assemble backend",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_cache/",
-"title":"docker assemble backend cache",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_cache_purge/",
-"title":"docker assemble backend cache purge",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_cache_usage/",
-"title":"docker assemble backend cache usage",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_image/",
-"title":"docker assemble backend image",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_info/",
-"title":"docker assemble backend info",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_logs/",
-"title":"docker assemble backend logs",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_start/",
-"title":"docker assemble backend start",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_backend_stop/",
-"title":"docker assemble backend stop",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_build/",
-"title":"docker assemble build",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/assemble_version/",
-"title":"docker assemble version",
-"description":null,
-"keywords":null
 }
 ,
 {
@@ -939,13 +841,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/assemble/cli-reference/",
-"title":"Docker Assemble CLI reference",
-"description":"Docker Assemble CLI reference",
-"keywords":"Docker, assemble, Spring Boot, ASP .NET, backend"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/reference/commandline/cli/",
 "title":"Use the Docker command line",
 "description":"Docker's CLI command description and usage",
@@ -1181,13 +1076,6 @@ var pages = [
 "title":"Configure logging drivers",
 "description":"Configure logging driver.",
 "keywords":"docker, logging, driver"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/assemble/configure/",
-"title":"Docker Assemble の設定",
-"description":"Installing Docker Assemble",
-"keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
 ,
 {
@@ -1856,13 +1744,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/assemble/dot-net/",
-"title":"Build a C# ASP.NET Core project",
-"description":"Building a C# ASP.NET Core project using Docker Assemble",
-"keywords":"Assemble, Docker Enterprise, Spring Boot, container image"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/examples/dotnetcore/",
 "title":"Dockerize an ASP.NET Core application",
 "description":"Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile.",
@@ -2441,13 +2322,6 @@ var pages = [
 "title":"docker-compose images",
 "description":"プロジェクトにおいて用いられているイメージの一覧を表示します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, images"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/assemble/images/",
-"title":"Docker Assemble images",
-"description":"Building Docker Assemble images",
-"keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
 ,
 {
@@ -3134,13 +3008,6 @@ var pages = [
 "title":"Docker Desktop on Mac のインストール",
 "description":"Docker Desktop on Mac のインストール方法。",
 "keywords":"mac, install, download, run, docker, local"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/assemble/install/",
-"title":"Docker Assemble",
-"description":"Docker Assemble のインストール。",
-"keywords":"Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#"
 }
 ,
 {
@@ -5146,13 +5013,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/assemble/spring-boot/",
-"title":"Build a Spring Boot project",
-"description":"Building a Spring Boot project using Docker Assemble",
-"keywords":"Assemble, Docker Enterprise, Spring Boot, container image"
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/engine/swarm/stack-deploy/",
 "title":"Deploy a stack to a swarm",
 "description":"How to deploy a stack to a swarm",
@@ -5475,62 +5335,6 @@ var pages = [
 }
 ,
 {
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template/",
-"title":"docker template",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template_config/",
-"title":"docker template config",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template_config_set/",
-"title":"docker template config set",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template_config_view/",
-"title":"docker template config view",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template_inspect/",
-"title":"docker template inspect",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template_list/",
-"title":"docker template list",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template_scaffold/",
-"title":"docker template scaffold",
-"description":null,
-"keywords":null
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/engine/reference/commandline/template_version/",
-"title":"docker template version",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/docs.docker.jp.onthefly/ee/dtr/user/promotion-policies/templates/",
 "title":"Promotion policies templates",
 "description":"Learn how to use templates when setting your promotion policies to rename your images",
@@ -5546,8 +5350,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/storage/tmpfs/",
-"title":"Use tmpfs mounts",
-"description":"Using tmpfs mounts",
+"title":"tmpfs マウントの利用",
+"description":"tmpfs マウントの利用。",
 "keywords":"storage, persistence, data persistence, tmpfs"
 }
 ,
@@ -6263,13 +6067,6 @@ var pages = [
 "title":"Docker Context",
 "description":"Learn about Docker Context",
 "keywords":"engine, context, cli, kubernetes"
-}
-,
-{
-"url":"/docs.docker.jp.onthefly/app-template/working-with-template/",
-"title":"Docker Template",
-"description":"Working with Docker Application Template",
-"keywords":"Docker, application template, Application Designer,"
 }
 ,
 {
