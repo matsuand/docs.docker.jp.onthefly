@@ -4132,8 +4132,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/daemon/prometheus/",
-"title":"Collect Docker metrics with Prometheus",
-"description":"Collecting Docker metrics with Prometheus",
+"title":"Prometheus を用いた Docker メトリックスの収集",
+"description":"Prometheus を用いた Docker メトリックスの収集。",
 "keywords":"prometheus, metrics"
 }
 ,
@@ -5063,8 +5063,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/config/containers/start-containers-automatically/",
-"title":"Start containers automatically",
-"description":"How to start containers automatically",
+"title":"コンテナーの自動起動",
+"description":"コンテナーを自動起動する方法。",
 "keywords":"containers, restart, policies, automation, administration"
 }
 ,
