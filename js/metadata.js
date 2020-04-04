@@ -3817,7 +3817,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/get-started/orchestration/",
-"title":"Orchestration",
+"title":"オーケストレーション",
 "description":"Get oriented on some basics of Docker and install Docker Desktop.",
 "keywords":"orchestration, deploy, kubernetes, swarm,"
 }
@@ -5833,7 +5833,7 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/kitematic/userguide/",
-"title":"Kitematic ユーザーガイド",
+"title":"Kitematic user guide",
 "description":"Documentation that provides an overview of Kitematic and installation instructions",
 "keywords":"docker, documentation, about, technology, kitematic, gui"
 }
@@ -6073,7 +6073,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-for-windows/wsl-tech-preview/",
 "title":"Docker Desktop WSL 2 backend",
 "description":"Docker Desktop WSL 2 backend",
-"keywords":"WSL, WSL 2 Tech Preview, Windows Subsystem for Linux"
+"keywords":"WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker"
 }
 ,
 {
