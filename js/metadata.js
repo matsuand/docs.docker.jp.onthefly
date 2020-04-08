@@ -561,6 +561,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/install/binaries/",
+"title":"バイナリからの Docker Engine インストール",
+"description":"Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.",
+"keywords":"binaries, installation, docker, documentation, linux"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/binaries/",
 "title":"Docker Engine - Community のインストール（バイナリモジュール）",
 "description":"Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.",
@@ -761,6 +768,13 @@ var pages = [
 "title":"Cancel or downgrade your plan",
 "description":"You can cancel or downgrade a private repository subscription through Docker Hub",
 "keywords":"cancel, downgrade, private repo, private repository, Docker Hub, Hub"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/install/centos/",
+"title":"Docker Engine インストール（CentOS 向け）",
+"description":"CentOS 上に Docker Engine をインストールする手順を説明。",
+"keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
@@ -1471,6 +1485,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/install/debian/",
+"title":"Docker Engine インストール（Debian 向け）",
+"description":"Debian 上に Docker Engine をインストールする手順を説明。",
+"keywords":"requirements, apt, installation, debian, install, uninstall, upgrade, update"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/debian/",
 "title":"Docker Engine - Community の入手（Debian 向け）",
 "description":"Debian 上に Docker Engine - Community をインストールする手順を説明。",
@@ -1996,6 +2017,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/install/fedora/",
+"title":"Docker Engine インストール（Fedora 向け）",
+"description":"Fedora 上に Docker Engine をインストールする手順を説明。",
+"keywords":"requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/docker-ce/fedora/",
 "title":"Docker Engine - Community の入手（Fedora 向け）",
 "description":"Fedora 上に Docker Engine - Community をインストールする手順を説明。",
@@ -2481,13 +2509,13 @@ var pages = [
 {
 "url":"/docs.docker.jp.onthefly/engine/release-notes/",
 "title":"Docker Engine release notes",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine",
 "keywords":"docker, docker engine, ce, whats new, release notes"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/",
-"title":"Docker Engine について",
+"title":"Docker Engine overview",
 "description":"Engine",
 "keywords":"Engine"
 }
@@ -3284,6 +3312,13 @@ var pages = [
 }
 ,
 {
+"url":"/docs.docker.jp.onthefly/engine/install/linux-postinstall/",
+"title":"Linux インストール後の作業",
+"description":"Linux インストール後の任意の作業。",
+"keywords":"Docker, Docker documentation, requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
+}
+,
+{
 "url":"/docs.docker.jp.onthefly/install/linux/linux-postinstall/",
 "title":"Linux インストール後の作業",
 "description":"Linux インストール後の任意の作業。",
@@ -3904,6 +3939,13 @@ var pages = [
 "title":"docker-compose コマンド概要",
 "description":"Overview of docker-compose CLI",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  docker-compose"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/get-started/overview/",
+"title":"Docker 概要",
+"description":"Docker explained in depth",
+"keywords":"docker, introduction, documentation, about, technology, understanding"
 }
 ,
 {
@@ -5563,6 +5605,13 @@ var pages = [
 "title":"Tune the proxy service",
 "description":"Learn how to tune the proxy service for environment optimization",
 "keywords":"routing, proxy, interlock"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/install/ubuntu/",
+"title":"Docker Engine インストール（Ubuntu 向け）",
+"description":"Ubuntu 上に Docker Engine をインストールする手順を説明。",
+"keywords":"requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
 }
 ,
 {
