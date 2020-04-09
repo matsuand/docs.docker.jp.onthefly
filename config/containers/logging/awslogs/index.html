@@ -1,4 +1,4 @@
-<!-- Page generated 2020-03-27 20:43:18 +0900 -->
+<!-- Page generated 2020-04-09 21:14:21 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -23,8 +23,6 @@
 
 <!-- Logic for 'edit this button' -->
 
-
-	
 
 	
 
@@ -83,7 +81,7 @@
 	<meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-27T20:43:18+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-09T21:14:21+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +91,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="The awslogs logging driver sends container logs to Amazon CloudWatch Logs. Log entries can be retrieved through the AWS Management Console or the AWS SDKs and Command Line Tools. Usage..." />
 	<meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-03-27T20:43:18+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-04-09T21:14:21+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="AWS, Amazon, CloudWatch, logging, driver">
@@ -188,7 +186,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    9 分
+    10 分
   
 </span>
 
@@ -224,7 +222,7 @@ The following example sets the log driver to <code class="highlighter-rouge">aws
 <p>You can set the logging driver for a specific container by using the
 <code class="highlighter-rouge">--log-driver</code> option to <code class="highlighter-rouge">docker run</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=awslogs ...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>awslogs ...
 </code></pre></div></div>
 
 <p>If you are using Docker Compose, set <code class="highlighter-rouge">awslogs</code> using the following declaration example:</p>
@@ -249,8 +247,23 @@ the <code class="highlighter-rouge">awslogs-region</code> log option or the <cod
 the region. By default, if your Docker daemon is running on an EC2 instance
 and no region is set, the driver uses the instance’s region.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 ...
 </code></pre></div></div>
+
+<h3 id="awslogs-endpoint">awslogs-endpoint</h3>
+
+<p>By default, Docker uses either the <code class="highlighter-rouge">awslogs-region</code> log option or the
+detected region to construct the remote CloudWatch Logs API endpoint.
+Use the <code class="highlighter-rouge">awslogs-endpoint</code> log option to override the default endpoint
+with the provided endpoint.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>The <code class="highlighter-rouge">awslogs-region</code> log option or detected region controls the
+region used for signing. You may experience signature errors if the
+endpoint you’ve specified with <code class="highlighter-rouge">awslogs-endpoint</code> uses a different region.</p>
+</blockquote>
 
 <h3 id="awslogs-group">awslogs-group</h3>
 
@@ -259,7 +272,7 @@ and no region is set, the driver uses the instance’s region.</p>
 for the <code class="highlighter-rouge">awslogs</code> logging driver. You can specify the log group with the
 <code class="highlighter-rouge">awslogs-group</code> log option:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 <span class="nt">--log-opt</span> awslogs-group<span class="o">=</span>myLogGroup ...
 </code></pre></div></div>
 
 <h3 id="awslogs-stream">awslogs-stream</h3>
@@ -270,8 +283,9 @@ should be used, you can specify the <code class="highlighter-rouge">awslogs-stre
 specified, the container ID is used as the log stream.</p>
 
 <blockquote>
-  <p><strong>Note</strong>:
-Log streams within a given log group should only be used by one container
+  <p><strong>Note</strong></p>
+
+  <p>Log streams within a given log group should only be used by one container
 at a time. Using the same log stream for multiple containers concurrently
 can cause reduced logging performance.</p>
 </blockquote>
@@ -282,16 +296,19 @@ can cause reduced logging performance.</p>
 <code class="highlighter-rouge">awslogs-create-group</code> to <code class="highlighter-rouge">true</code> to automatically create the log group as needed.
 The <code class="highlighter-rouge">awslogs-create-group</code> option defaults to <code class="highlighter-rouge">false</code>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-group<span class="o">=</span>myLogGroup <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-create-group<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
-             ...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+    <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-group<span class="o">=</span>myLogGroup <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-create-group<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+    ...
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>:
-Your AWS IAM policy must include the <code class="highlighter-rouge">logs:CreateLogGroup</code> permission before you attempt to use <code class="highlighter-rouge">awslogs-create-group</code>.</p>
+  <p><strong>Note</strong></p>
+
+  <p>Your AWS IAM policy must include the <code class="highlighter-rouge">logs:CreateLogGroup</code> permission before
+you attempt to use <code class="highlighter-rouge">awslogs-create-group</code>.</p>
 </blockquote>
 
 <h3 id="awslogs-datetime-format">awslogs-datetime-format</h3>
@@ -310,45 +327,47 @@ single entry.</p>
 <code class="highlighter-rouge">awslogs-multiline-pattern</code> are configured.</p>
 
 <blockquote>
-  <p><strong>Note</strong>:
-Multiline logging performs regular expression parsing and matching of all log
+  <p><strong>Note</strong></p>
+
+  <p>Multiline logging performs regular expression parsing and matching of all log
 messages, which may have a negative impact on logging performance.</p>
 </blockquote>
 
 <p>Consider the following log stream, where new log messages start with a
 timestamp:</p>
 
-<pre><code class="language-none">[May 01, 2017 19:00:01] A message was logged
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[May 01, 2017 19:00:01] A message was logged
 [May 01, 2017 19:00:04] Another multiline message was logged
 Some random message
 with some random words
 [May 01, 2017 19:01:32] Another message was logged
-</code></pre>
+</span></code></pre></div></div>
 
 <p>The format can be expressed as a <code class="highlighter-rouge">strftime</code> expression of
 <code class="highlighter-rouge">[%b %d, %Y %H:%M:%S]</code>, and the <code class="highlighter-rouge">awslogs-datetime-format</code> value can be set to
 that expression:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-group<span class="o">=</span>myLogGroup <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-datetime-format<span class="o">=</span><span class="s1">'\[%b %d, %Y %H:%M:%S\]'</span> <span class="se">\</span>
-             ...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+    <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-group<span class="o">=</span>myLogGroup <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-datetime-format<span class="o">=</span><span class="s1">'\[%b %d, %Y %H:%M:%S\]'</span> <span class="se">\</span>
+    ...
 </code></pre></div></div>
 
 <p>This parses the logs into the following CloudWatch log events:</p>
 
-<pre><code class="language-none"># First event
-[May 01, 2017 19:00:01] A message was logged
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> First event
+<span class="go">[May 01, 2017 19:00:01] A message was logged
 
-# Second event
-[May 01, 2017 19:00:04] Another multiline message was logged
+</span><span class="gp">#</span> Second event
+<span class="go">[May 01, 2017 19:00:04] Another multiline message was logged
 Some random message
 with some random words
 
-# Third event
-[May 01, 2017 19:01:32] Another message was logged
-</code></pre>
+</span><span class="gp">#</span> Third event
+<span class="go">[May 01, 2017 19:01:32] Another message was logged
+</span></code></pre></div></div>
 
 <p>The following <code class="highlighter-rouge">strftime</code> codes are supported:</p>
 
@@ -479,49 +498,61 @@ messages. This may have a negative impact on logging performance.</p>
 <p>Consider the following log stream, where each log message should start with the
 patther <code class="highlighter-rouge">INFO</code>:</p>
 
-<pre><code class="language-none">INFO A message was logged
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">INFO A message was logged
 INFO Another multiline message was logged
      Some random message
 INFO Another message was logged
-</code></pre>
+</span></code></pre></div></div>
 
 <p>You can use the regular expression of <code class="highlighter-rouge">^INFO</code>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-group<span class="o">=</span>myLogGroup <span class="se">\</span>
-             <span class="nt">--log-opt</span> awslogs-multiline-pattern<span class="o">=</span><span class="s1">'^INFO'</span> <span class="se">\</span>
-             ...
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+    <span class="nt">--log-driver</span><span class="o">=</span>awslogs <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-region<span class="o">=</span>us-east-1 <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-group<span class="o">=</span>myLogGroup <span class="se">\</span>
+    <span class="nt">--log-opt</span> awslogs-multiline-pattern<span class="o">=</span><span class="s1">'^INFO'</span> <span class="se">\</span>
+    ...
 </code></pre></div></div>
 
 <p>This parses the logs into the following CloudWatch log events:</p>
 
-<pre><code class="language-none"># First event
-INFO A message was logged
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> First event
+<span class="go">INFO A message was logged
 
-# Second event
-INFO Another multiline message was logged
+</span><span class="gp">#</span> Second event
+<span class="go">INFO Another multiline message was logged
      Some random message
 
-# Third event
-INFO Another message was logged
-</code></pre>
+</span><span class="gp">#</span> Third event
+<span class="go">INFO Another message was logged
+</span></code></pre></div></div>
 
 <h3 id="tag">tag</h3>
 
-<p>Specify <code class="highlighter-rouge">tag</code> as an alternative to the <code class="highlighter-rouge">awslogs-stream</code> option. <code class="highlighter-rouge">tag</code> interprets Go template markup, such as <code class="highlighter-rouge">{{.ID}}</code>, <code class="highlighter-rouge">{{.FullID}}</code> or <code class="highlighter-rouge">{{.Name}}</code> <code class="highlighter-rouge">docker.{{.ID}}</code>.
-See the <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">tag option documentation</a> for details on all supported template substitutions.</p>
+<p>Specify <code class="highlighter-rouge">tag</code> as an alternative to the <code class="highlighter-rouge">awslogs-stream</code> option. <code class="highlighter-rouge">tag</code> interprets
+Go template markup, such as <code class="highlighter-rouge">{{.ID}}</code>, <code class="highlighter-rouge">{{.FullID}}</code>
+or <code class="highlighter-rouge">{{.Name}}</code> <code class="highlighter-rouge">docker.{{.ID}}</code>. See
+the <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">tag option documentation</a> for details on supported template
+substitutions.</p>
 
-<p>When both <code class="highlighter-rouge">awslogs-stream</code> and <code class="highlighter-rouge">tag</code> are specified, the value supplied for <code class="highlighter-rouge">awslogs-stream</code> overrides the template specified with <code class="highlighter-rouge">tag</code>.</p>
+<p>When both <code class="highlighter-rouge">awslogs-stream</code> and <code class="highlighter-rouge">tag</code> are specified, the value supplied for
+<code class="highlighter-rouge">awslogs-stream</code> overrides the template specified with <code class="highlighter-rouge">tag</code>.</p>
 
 <p>If not specified, the container ID is used as the log stream.</p>
 
 <blockquote>
-  <p><strong>Note</strong>:
-The CloudWatch log API doesn’t support <code class="highlighter-rouge">:</code> in the log name. This can cause some issues when using the <code class="highlighter-rouge">{{ .ImageName }}</code> as a tag, since a docker image has a format of <code class="highlighter-rouge">IMAGE:TAG</code>, such as <code class="highlighter-rouge">alpine:latest</code>.
-Template markup can be used to get the proper format.
-To get the image name and the first 12 characters of the container ID, you can use: <code class="highlighter-rouge">--log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'</code>
-the output is something like: <code class="highlighter-rouge">alpine_latest-bf0072049c76</code></p>
+  <p><strong>Note</strong></p>
+
+  <p>The CloudWatch log API does not support <code class="highlighter-rouge">:</code> in the log name. This can cause
+some issues when using the <code class="highlighter-rouge">{{ .ImageName }}</code> as a tag,
+since a docker image has a format of <code class="highlighter-rouge">IMAGE:TAG</code>, such as <code class="highlighter-rouge">alpine:latest</code>.
+Template markup can be used to get the proper format. To get the image name
+and the first 12 characters of the container ID, you can use:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--log-opt</span> <span class="nv">tag</span><span class="o">=</span><span class="s1">'{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'</span>
+</code></pre></div>  </div>
+
+  <p>the output is something like: <code class="highlighter-rouge">alpine_latest-bf0072049c76</code></p>
 </blockquote>
 
 <h2 id="credentials">Credentials</h2>
@@ -530,30 +561,28 @@ the output is something like: <code class="highlighter-rouge">alpine_latest-bf00
 logging driver. You can provide these credentials with the <code class="highlighter-rouge">AWS_ACCESS_KEY_ID</code>,
 <code class="highlighter-rouge">AWS_SECRET_ACCESS_KEY</code>, and <code class="highlighter-rouge">AWS_SESSION_TOKEN</code> environment variables, the
 default AWS shared credentials file (<code class="highlighter-rouge">~/.aws/credentials</code> of the root user), or
-(if you are running the Docker daemon on an Amazon EC2 instance) the Amazon EC2
+if you are running the Docker daemon on an Amazon EC2 instance, the Amazon EC2
 instance profile.</p>
 
 <p>Credentials must have a policy applied that allows the <code class="highlighter-rouge">logs:CreateLogStream</code>
 and <code class="highlighter-rouge">logs:PutLogEvents</code> actions, as shown in the following example.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-</code></pre></div></div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"logs:CreateLogStream"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"logs:PutLogEvents"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
 							<!-- tags -->
-							
-							
 							
 							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=AWS">AWS</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=Amazon">Amazon</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=CloudWatch">CloudWatch</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=logging">logging</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=driver">driver</a></span>
 							
@@ -621,7 +650,6 @@ and <code class="highlighter-rouge">logs:PutLogEvents</code> actions, as shown i
 										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/config/containers/logging/awslogs.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
 										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [config/containers/logging/awslogs.md](https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/awslogs/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
-										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
 										<li>
 											<div class="toggle-mode">
@@ -649,6 +677,7 @@ and <code class="highlighter-rouge">logs:PutLogEvents</code> actions, as shown i
   <li><a href="/docs.docker.jp.onthefly/awslogs.md#amazon-cloudwatch-logs-options" class="nomunge">Amazon CloudWatch Logs options</a>
     <ul>
       <li><a href="/docs.docker.jp.onthefly/awslogs.md#awslogs-region" class="nomunge">awslogs-region</a></li>
+      <li><a href="/docs.docker.jp.onthefly/awslogs.md#awslogs-endpoint" class="nomunge">awslogs-endpoint</a></li>
       <li><a href="/docs.docker.jp.onthefly/awslogs.md#awslogs-group" class="nomunge">awslogs-group</a></li>
       <li><a href="/docs.docker.jp.onthefly/awslogs.md#awslogs-stream" class="nomunge">awslogs-stream</a></li>
       <li><a href="/docs.docker.jp.onthefly/awslogs.md#awslogs-create-group" class="nomunge">awslogs-create-group</a></li>
@@ -678,49 +707,41 @@ and <code class="highlighter-rouge">logs:PutLogEvents</code> actions, as shown i
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><a href="https://www.docker.com/what-docker">What is Docker</a></li>
+                        <li><b><a href="https://www.docker.com/why-docker">Why Docker</a></b></li>
                         <li><a href="https://www.docker.com/what-container">What is a Container</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">Products</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Features</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">Container Runtime</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">Developer Tools</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Developers</a></b></li>
                         <li><a href="https://www.docker.com/use-cases">Use Cases</a></li>
-                        <li><a href="https://www.docker.com/customers">Customers</a></li>
-                        <li><a href="https://www.docker.com/partners/partner-program">Partners</a></li>
-                        <li class="break"><a href="https://www.docker.com/industry-government">For Government</a></li>
-                        <li><a href="https://www.docker.com/company">About Docker</a></li>
-                        <li><a href="https://www.docker.com/company/management">Management</a></li>
-                        <li><a href="https://www.docker.com/company/news-and-press">Press &amp; News</a></li>
-                        <li><a href="https://www.docker.com/careers">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
-                        <li><a href="https://www.docker.com/products/overview">Product</a></li>
-                        <li><a href="https://www.docker.com/pricing">Pricing</a></li>
-                        <li><a href="https://www.docker.com/docker-community">Community Edition</a></li>
-                        <li class="break"><a href="https://www.docker.com/enterprise">Enterprise Edition </a></li>
-                        <li><a href="https://www.docker.com/products/docker-datacenter">Docker Datacenter</a></li>
-                        <li><a href="https://hub.docker.com/">Docker Hub</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
-                        <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/">Documentation</a></li>
-                        <li><a href="https://www.docker.com/docker">Learn</a></li>
-                        <li><a href="https://blog.docker.com" target="_blank">Blog</a></li>
-                        <li><a href="https://engineering.docker.com" target="_blank">Engineering Blog</a></li>
-                        <li><a href="https://training.docker.com/" target="_blank">Training</a></li>
-                        <li><a href="https://success.docker.com/support">Support</a></li>
-                        <li><a href="https://success.docker.com/kbase">Knowledge Base</a></li>
-                        <li><a href="https://www.docker.com/products/resources">Resources</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/play-with-docker">Play with Docker</a></li>
                         <li><a href="https://www.docker.com/docker-community">Community</a></li>
-                        <li><a href="https://www.docker.com/technologies/overview">Open Source</a></li>
-                        <li><a href="https://www.docker.com/community/events">Events</a></li>
-                        <li><a href="https://forums.docker.com/" target="_blank">Forums</a></li>
+                        <li><a href="https://www.docker.com/open-source">Open Source</a></li>
                         <li><a href="https://www.docker.com/community/docker-captains">Docker Captains</a></li>
-                        <li><a href="https://www.docker.com/docker-community/scholarships">Scholarships</a></li>
-                        <li><a href="https://blog.docker.com/curated/">Community News</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank">Company</a></b></li>
+                        <li><a href="https://www.docker.com/company">About Us</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank">Blog</a></li>
+                        <li><a href="https://www.docker.com/customers">Customers</a></li>
+                        <li><a href="https://www.docker.com/partners">Partners</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">Newsroom</a></li>
+                        <li><a href="https://www.docker.com/careers">Careers</a></li>
+                        <li><a href="https://www.docker.com/company/contact">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -738,7 +759,7 @@ and <code class="highlighter-rouge">logs:PutLogEvents</code> actions, as shown i
         <div class="bottom_footer">
             <div class="footer-copyright col-xs-12 col-md-8">
                 <p class="copyright">
-                    Copyright &copy; 2019 Docker Inc. All rights reserved. </p>
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
             </div>
             <div class="footer_social_nav">
                 <ul class="nav-social">
@@ -747,8 +768,8 @@ and <code class="highlighter-rouge">logs:PutLogEvents</code> actions, as shown i
                     <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
                     <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
                     <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
-                    <li class="fa fa-reddit"><a href="http://www.reddit.com/r/docker">Reddit</a></li>
-                    <li class="fa fa-slideshare"><a href="http://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
                 </ul>
             </div>
         </div>

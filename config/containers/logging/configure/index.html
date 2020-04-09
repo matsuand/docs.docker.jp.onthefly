@@ -1,4 +1,4 @@
-<!-- Page generated 2020-03-27 20:43:18 +0900 -->
+<!-- Page generated 2020-04-09 21:14:21 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -23,8 +23,6 @@
 
 <!-- Logic for 'edit this button' -->
 
-
-	
 
 	
 
@@ -83,7 +81,7 @@
 	<meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-27T20:43:18+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-09T21:14:21+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +91,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Docker includes multiple logging mechanisms to help you get information from running containers and services. These mechanisms are called logging drivers. Each Docker daemon has a default logging driver, which..." />
 	<meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-03-27T20:43:18+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-04-09T21:14:21+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, logging, driver">
@@ -195,14 +193,14 @@
 							
 							
 							<p>Docker includes multiple logging mechanisms to help you
-<a href="/docs.docker.jp.onthefly/engine/admin/logging/view_container_logs.md">get information from running containers and services</a>.
+<a href="/docs.docker.jp.onthefly/config/containers/logging/">get information from running containers and services</a>.
 These mechanisms are called logging drivers.</p>
 
 <p>Each Docker daemon has a default logging driver, which each container uses
 unless you configure it to use a different logging driver.</p>
 
 <p>In addition to using the logging drivers included with Docker, you can also
-implement and use <a href="/docs.docker.jp.onthefly/engine/admin/logging/plugins.md">logging driver plugins</a>.</p>
+implement and use <a href="/docs.docker.jp.onthefly/config/containers/logging/plugins/">logging driver plugins</a>.</p>
 
 <h2 id="configure-the-default-logging-driver">Configure the default logging driver</h2>
 
@@ -234,9 +232,11 @@ example sets two configurable options on the <code class="highlighter-rouge">jso
 </span></code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: <code class="highlighter-rouge">log-opts</code> configuration options in the <code class="highlighter-rouge">daemon.json</code> configuration
-file must be provided as strings. Boolean and numeric values (such as the value
-for <code class="highlighter-rouge">max-file</code> in the example above) must therefore be enclosed in quotes (<code class="highlighter-rouge">"</code>).</p>
+  <p><strong>Note</strong></p>
+
+  <p><code class="highlighter-rouge">log-opts</code> configuration options in the <code class="highlighter-rouge">daemon.json</code> configuration file must
+be provided as strings. Boolean and numeric values (such as the value for
+<code class="highlighter-rouge">max-file</code> in the example above) must therefore be enclosed in quotes (<code class="highlighter-rouge">"</code>).</p>
 </blockquote>
 
 <p>If you do not specify a logging driver, the default is <code class="highlighter-rouge">json-file</code>. Thus,
@@ -275,24 +275,35 @@ json-file
 
 <h2 id="configure-the-delivery-mode-of-log-messages-from-container-to-log-driver">Configure the delivery mode of log messages from container to log driver</h2>
 
-<p>Docker provides two modes for delivering messages from the container to the log driver:</p>
+<p>Docker provides two modes for delivering messages from the container to the log
+driver:</p>
 
 <ul>
   <li>(default) direct, blocking delivery from container to driver</li>
-  <li>non-blocking delivery that stores log messages in an intermediate per-container ring buffer for consumption by driver</li>
+  <li>non-blocking delivery that stores log messages in an intermediate per-container
+ring buffer for consumption by driver</li>
 </ul>
 
-<p>The <code class="highlighter-rouge">non-blocking</code> message delivery mode prevents applications from blocking due to logging back pressure. Applications are likely to fail in unexpected ways when STDERR or STDOUT streams block.</p>
+<p>The <code class="highlighter-rouge">non-blocking</code> message delivery mode prevents applications from blocking due
+to logging back pressure. Applications are likely to fail in unexpected ways when
+STDERR or STDOUT streams block.</p>
 
 <blockquote class="warning">
-  <p><strong>WARNING</strong>: When the buffer is full and a new message is enqueued, the oldest message in memory is dropped.  Dropping messages is often preferred to blocking the log-writing process of an application.</p>
+  <p><strong>WARNING</strong>
+When the buffer is full and a new message is enqueued, the oldest message in
+memory is dropped.  Dropping messages is often preferred to blocking the
+log-writing process of an application.</p>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">mode</code> log option controls whether to use the <code class="highlighter-rouge">blocking</code> (default) or <code class="highlighter-rouge">non-blocking</code> message delivery.</p>
+<p>The <code class="highlighter-rouge">mode</code> log option controls whether to use the <code class="highlighter-rouge">blocking</code> (default) or
+<code class="highlighter-rouge">non-blocking</code> message delivery.</p>
 
-<p>The <code class="highlighter-rouge">max-buffer-size</code> log option controls the size of the ring buffer used for intermediate message storage when <code class="highlighter-rouge">mode</code> is set to <code class="highlighter-rouge">non-blocking</code>.  <code class="highlighter-rouge">max-buffer-size</code> defaults to 1 megabyte.</p>
+<p>The <code class="highlighter-rouge">max-buffer-size</code> log option controls the size of the ring buffer used for
+intermediate message storage when <code class="highlighter-rouge">mode</code> is set to <code class="highlighter-rouge">non-blocking</code>. <code class="highlighter-rouge">max-buffer-size</code>
+defaults to 1 megabyte.</p>
 
-<p>The following example starts an Alpine container with log output in non-blocking mode and a 4 megabyte buffer:</p>
+<p>The following example starts an Alpine container with log output in non-blocking
+mode and a 4 megabyte buffer:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--log-opt</span> <span class="nv">mode</span><span class="o">=</span>non-blocking <span class="nt">--log-opt</span> max-buffer-size<span class="o">=</span>4m alpine ping 127.0.0.1
 </code></pre></div></div>
@@ -317,7 +328,7 @@ output. The following output is generated by the <code class="highlighter-rouge"
 
 <p>The following logging drivers are supported. See the link to each driver’s
 documentation for its configurable options, if applicable. If you are using
-<a href="/docs.docker.jp.onthefly/engine/admin/logging/plugins.md">logging driver plugins</a>, you may
+<a href="/docs.docker.jp.onthefly/config/containers/logging/plugins/">logging driver plugins</a>, you may
 see more options.</p>
 
 <table>
@@ -382,39 +393,38 @@ see more options.</p>
 <h2 id="limitations-of-logging-drivers">Limitations of logging drivers</h2>
 
 <ul>
-  <li>
-    <p>Users of Docker Enterprise can make use of “dual logging”, which enables you to use the <code class="highlighter-rouge">docker logs</code>
-command for any logging driver. Refer to
-<a href="/docs.docker.jp.onthefly/config/containers/logging/dual-logging/">Reading logs when using remote logging drivers</a> for information about
-using <code class="highlighter-rouge">docker logs</code> to read container logs locally for many third party logging solutions, including:</p>
-
+  <li>Users of Docker Enterprise can make use of “dual logging”, which enables you
+to use the <code class="highlighter-rouge">docker logs</code> command for any logging driver. Refer to
+<a href="/docs.docker.jp.onthefly/config/containers/logging/dual-logging/">reading logs when using remote logging drivers</a> for
+information about using <code class="highlighter-rouge">docker logs</code> to read container logs locally for many
+third party logging solutions, including:
     <ul>
-      <li>syslog</li>
-      <li>gelf</li>
-      <li>fluentd</li>
-      <li>awslogs</li>
-      <li>splunk</li>
-      <li>etwlogs</li>
-      <li>gcplogs</li>
-      <li>Logentries</li>
+      <li><code class="highlighter-rouge">syslog</code></li>
+      <li><code class="highlighter-rouge">gelf</code></li>
+      <li><code class="highlighter-rouge">fluentd</code></li>
+      <li><code class="highlighter-rouge">awslogs</code></li>
+      <li><code class="highlighter-rouge">splunk</code></li>
+      <li><code class="highlighter-rouge">etwlogs</code></li>
+      <li><code class="highlighter-rouge">gcplogs</code></li>
+      <li><code class="highlighter-rouge">Logentries</code></li>
     </ul>
   </li>
-  <li>
-    <p>When using Docker Community Engine, the <code class="highlighter-rouge">docker logs</code> command is only available on the following drivers:</p>
-
+  <li>When using Docker Community Engine, the <code class="highlighter-rouge">docker logs</code> command is only available
+on the following drivers:
     <ul>
       <li><code class="highlighter-rouge">local</code></li>
       <li><code class="highlighter-rouge">json-file</code></li>
       <li><code class="highlighter-rouge">journald</code></li>
     </ul>
   </li>
-  <li>Reading log information requires decompressing rotated log files, which causes a temporary increase in disk usage (until the log entries from the rotated files are read) and an increased CPU usage while decompressing.</li>
-  <li>The capacity of the host storage where docker’s data directory resides determines the maximum size of the log file information.</li>
+  <li>Reading log information requires decompressing rotated log files, which causes
+a temporary increase in disk usage (until the log entries from the rotated
+files are read) and an increased CPU usage while decompressing.</li>
+  <li>The capacity of the host storage where the Docker data directory resides
+determines the maximum size of the log file information.</li>
 </ul>
 
 							<!-- tags -->
-							
-							
 							
 							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=logging">logging</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=driver">driver</a></span>
 							
@@ -482,7 +492,6 @@ using <code class="highlighter-rouge">docker logs</code> to read container logs 
 										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/config/containers/logging/configure.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
 										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [config/containers/logging/configure.md](https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/configure/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
-										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
 										<li>
 											<div class="toggle-mode">
@@ -535,49 +544,41 @@ using <code class="highlighter-rouge">docker logs</code> to read container logs 
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><a href="https://www.docker.com/what-docker">What is Docker</a></li>
+                        <li><b><a href="https://www.docker.com/why-docker">Why Docker</a></b></li>
                         <li><a href="https://www.docker.com/what-container">What is a Container</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">Products</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Features</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">Container Runtime</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">Developer Tools</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Developers</a></b></li>
                         <li><a href="https://www.docker.com/use-cases">Use Cases</a></li>
-                        <li><a href="https://www.docker.com/customers">Customers</a></li>
-                        <li><a href="https://www.docker.com/partners/partner-program">Partners</a></li>
-                        <li class="break"><a href="https://www.docker.com/industry-government">For Government</a></li>
-                        <li><a href="https://www.docker.com/company">About Docker</a></li>
-                        <li><a href="https://www.docker.com/company/management">Management</a></li>
-                        <li><a href="https://www.docker.com/company/news-and-press">Press &amp; News</a></li>
-                        <li><a href="https://www.docker.com/careers">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
-                        <li><a href="https://www.docker.com/products/overview">Product</a></li>
-                        <li><a href="https://www.docker.com/pricing">Pricing</a></li>
-                        <li><a href="https://www.docker.com/docker-community">Community Edition</a></li>
-                        <li class="break"><a href="https://www.docker.com/enterprise">Enterprise Edition </a></li>
-                        <li><a href="https://www.docker.com/products/docker-datacenter">Docker Datacenter</a></li>
-                        <li><a href="https://hub.docker.com/">Docker Hub</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
-                        <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/">Documentation</a></li>
-                        <li><a href="https://www.docker.com/docker">Learn</a></li>
-                        <li><a href="https://blog.docker.com" target="_blank">Blog</a></li>
-                        <li><a href="https://engineering.docker.com" target="_blank">Engineering Blog</a></li>
-                        <li><a href="https://training.docker.com/" target="_blank">Training</a></li>
-                        <li><a href="https://success.docker.com/support">Support</a></li>
-                        <li><a href="https://success.docker.com/kbase">Knowledge Base</a></li>
-                        <li><a href="https://www.docker.com/products/resources">Resources</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/play-with-docker">Play with Docker</a></li>
                         <li><a href="https://www.docker.com/docker-community">Community</a></li>
-                        <li><a href="https://www.docker.com/technologies/overview">Open Source</a></li>
-                        <li><a href="https://www.docker.com/community/events">Events</a></li>
-                        <li><a href="https://forums.docker.com/" target="_blank">Forums</a></li>
+                        <li><a href="https://www.docker.com/open-source">Open Source</a></li>
                         <li><a href="https://www.docker.com/community/docker-captains">Docker Captains</a></li>
-                        <li><a href="https://www.docker.com/docker-community/scholarships">Scholarships</a></li>
-                        <li><a href="https://blog.docker.com/curated/">Community News</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank">Company</a></b></li>
+                        <li><a href="https://www.docker.com/company">About Us</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank">Blog</a></li>
+                        <li><a href="https://www.docker.com/customers">Customers</a></li>
+                        <li><a href="https://www.docker.com/partners">Partners</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">Newsroom</a></li>
+                        <li><a href="https://www.docker.com/careers">Careers</a></li>
+                        <li><a href="https://www.docker.com/company/contact">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -595,7 +596,7 @@ using <code class="highlighter-rouge">docker logs</code> to read container logs 
         <div class="bottom_footer">
             <div class="footer-copyright col-xs-12 col-md-8">
                 <p class="copyright">
-                    Copyright &copy; 2019 Docker Inc. All rights reserved. </p>
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
             </div>
             <div class="footer_social_nav">
                 <ul class="nav-social">
@@ -604,8 +605,8 @@ using <code class="highlighter-rouge">docker logs</code> to read container logs 
                     <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
                     <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
                     <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
-                    <li class="fa fa-reddit"><a href="http://www.reddit.com/r/docker">Reddit</a></li>
-                    <li class="fa fa-slideshare"><a href="http://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
                 </ul>
             </div>
         </div>

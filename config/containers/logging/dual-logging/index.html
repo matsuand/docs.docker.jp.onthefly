@@ -1,4 +1,4 @@
-<!-- Page generated 2020-03-27 20:43:18 +0900 -->
+<!-- Page generated 2020-04-09 21:14:21 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -23,8 +23,6 @@
 
 <!-- Logic for 'edit this button' -->
 
-
-	
 
 	
 
@@ -83,7 +81,7 @@
 	<meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-03-27T20:43:18+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-09T21:14:21+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -93,7 +91,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="Overview Prior to Docker Engine Enterprise 18.03, the jsonfile and journald log drivers supported reading container logs using docker logs. However, many third party logging drivers had no support for..." />
 	<meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-03-27T20:43:18+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-04-09T21:14:21+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="docker, logging, driver">
@@ -196,70 +194,79 @@
 							
 							<h2 id="overview">Overview</h2>
 
-<p>Prior to Docker Engine Enterprise 18.03, the <code class="highlighter-rouge">jsonfile</code> and <code class="highlighter-rouge">journald</code> log drivers supported reading
-container logs using <code class="highlighter-rouge">docker logs</code>. However, many third party logging drivers had no
-support for locally reading logs using <code class="highlighter-rouge">docker logs</code>, including:</p>
+<p>Prior to Docker Engine Enterprise 18.03, the <code class="highlighter-rouge">jsonfile</code> and <code class="highlighter-rouge">journald</code> log
+drivers supported reading container logs using <code class="highlighter-rouge">docker logs</code>. However, many
+third party logging drivers had no support for locally reading logs using
+<code class="highlighter-rouge">docker logs</code>, including:</p>
 
 <ul>
-  <li>syslog</li>
-  <li>gelf</li>
-  <li>fluentd</li>
-  <li>awslogs</li>
-  <li>splunk</li>
-  <li>etwlogs</li>
-  <li>gcplogs</li>
-  <li>Logentries</li>
+  <li><code class="highlighter-rouge">syslog</code></li>
+  <li><code class="highlighter-rouge">gelf</code></li>
+  <li><code class="highlighter-rouge">fluentd</code></li>
+  <li><code class="highlighter-rouge">awslogs</code></li>
+  <li><code class="highlighter-rouge">splunk</code></li>
+  <li><code class="highlighter-rouge">etwlogs</code></li>
+  <li><code class="highlighter-rouge">gcplogs</code></li>
+  <li><code class="highlighter-rouge">logentries</code></li>
 </ul>
 
-<p>This created multiple problems, especially with UCP, when attempting to gather log data in an
-automated and standard way. Log information could only be accessed and viewed through the
-third-party solution in the format specified by that third-party tool.</p>
+<p>This created multiple problems when attempting to gather log data in an
+automated and standard way. Log information could only be accessed and viewed
+through the third-party solution in the format specified by that
+third-party tool.</p>
 
-<p>Starting with Docker Engine Enterprise 18.03.1-ee-1, you can use <code class="highlighter-rouge">docker logs</code> to read container
-logs regardless of the configured logging driver or plugin. This capability, sometimes referred to
-as dual logging, allows you to use <code class="highlighter-rouge">docker logs</code> to read container logs locally in a consistent format,
-regardless of the remote log driver used, because the engine is configured to log information to the “local”
-logging driver. Refer to <a href="/docs.docker.jp.onthefly/config/containers/logging/configure">Configure the default logging driver</a> for additional information.</p>
+<p>Starting with Docker Engine Enterprise 18.03.1-ee-1, you can use <code class="highlighter-rouge">docker logs</code>
+to read container logs regardless of the configured logging driver or plugin.
+This capability, sometimes referred to as dual logging, allows you to use
+<code class="highlighter-rouge">docker logs</code> to read container logs locally in a consistent format, regardless
+of the remote log driver used, because the engine is configured to log
+information to the “local” logging driver. Refer to
+<a href="/docs.docker.jp.onthefly/config/containers/logging/configure">Configure the default logging driver</a> for
+additional information.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
-<ul>
-  <li>Docker Enterprise - Dual logging is only supported for Docker Enterprise, and is enabled by default starting with
-Engine Enterprise 18.03.1-ee-1.</li>
-</ul>
+<p>Dual logging is only supported for Docker Enterprise, and is enabled by default
+starting with Engine Enterprise 18.03.1-ee-1.</p>
 
 <h2 id="usage">Usage</h2>
-<p>Dual logging is enabled by default. You must configure either the docker daemon or the container with remote logging driver.</p>
 
-<p>The following example shows the results of running a <code class="highlighter-rouge">docker logs</code> command with and without dual logging availability:</p>
+<p>Dual logging is enabled by default. You must configure either the docker daemon
+or the container with remote logging driver.</p>
+
+<p>The following example shows the results of running a <code class="highlighter-rouge">docker logs</code> command with
+and without dual logging availability:</p>
 
 <h3 id="without-dual-logging-capability">Without dual logging capability:</h3>
-<p>When a container or <code class="highlighter-rouge">dockerd</code> was configured with a remote logging driver such as splunk, an error was
-displayed when attempting to read container logs locally:</p>
+
+<p>When a container or <code class="highlighter-rouge">dockerd</code> was configured with a remote logging driver such
+as <code class="highlighter-rouge">splunk</code>, an error was displayed when attempting to read container logs
+locally:</p>
 
 <ul>
   <li>
     <p>Step 1: Configure Docker daemon</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ cat /etc/docker/daemon.json
-  {
-    "log-driver": "splunk",
-    "log-opts": {
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">cat</span> /etc/docker/daemon.json
+  <span class="o">{</span>
+    <span class="s2">"log-driver"</span>: <span class="s2">"splunk"</span>,
+    <span class="s2">"log-opts"</span>: <span class="o">{</span>
       ...
-    }
-  }
+    <span class="o">}</span>
+  <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Step 2: Start the container</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ docker run -d busybox --name testlog top
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker run <span class="nt">-d</span> busybox <span class="nt">--name</span> testlog top
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Step 3: Read the container logs</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ docker logs 7d6ac83a89a0
-  The docker logs command was not available for drivers other than json-file and journald.
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker logs 7d6ac83a89a0
+  The docker logs <span class="nb">command </span>was not available <span class="k">for </span>drivers other than json-file and journald.
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -268,52 +275,62 @@ displayed when attempting to read container logs locally:</p>
 <p>To configure a container or docker with a remote logging driver such as splunk:</p>
 
 <ul>
-  <li>Step 1: Configure Docker daemon
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ cat /etc/docker/daemon.json
-  {
-    "log-driver": "splunk",
-    "log-opts": {
+  <li>
+    <p>Step 1: Configure Docker daemon</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">cat</span> /etc/docker/daemon.json
+  <span class="o">{</span>
+    <span class="s2">"log-driver"</span>: <span class="s2">"splunk"</span>,
+    <span class="s2">"log-opts"</span>: <span class="o">{</span>
       ...
-    }
-  }
+    <span class="o">}</span>
+  <span class="o">}</span>
 </code></pre></div>    </div>
   </li>
-  <li>Step 2: Start the container
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ docker run -d busybox --name testlog top
+  <li>
+    <p>Step 2: Start the container</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker run <span class="nt">-d</span> busybox <span class="nt">--name</span> testlog top
 </code></pre></div>    </div>
   </li>
-  <li>Step 3: Read the container logs
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  $ docker logs 7d6ac83a89a0
-  2019-02-04T19:48:15.423Z [INFO]  core: marked as sealed                                          	
-  2019-02-04T19:48:15.423Z [INFO]  core: pre-seal teardown starting                                                                                                 	
-  2019-02-04T19:48:15.423Z [INFO]  core: stopping cluster listeners                                                                                             	
-  2019-02-04T19:48:15.423Z [INFO]  core: shutting down forwarding rpc listeners                                                                                 	
-  2019-02-04T19:48:15.423Z [INFO]  core: forwarding rpc listeners stopped
-  2019-02-04T19:48:15.599Z [INFO]  core: rpc listeners successfully shut down
-  2019-02-04T19:48:15.599Z [INFO]  core: cluster listeners successfully shut down	
+  <li>
+    <p>Step 3: Read the container logs</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker logs 7d6ac83a89a0
+  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: marked as sealed                                          	
+  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: pre-seal teardown starting                                                                                                 	
+  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: stopping cluster listeners                                                                                             	
+  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: shutting down forwarding rpc listeners                                                                                 	
+  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: forwarding rpc listeners stopped
+  2019-02-04T19:48:15.599Z <span class="o">[</span>INFO]  core: rpc listeners successfully shut down
+  2019-02-04T19:48:15.599Z <span class="o">[</span>INFO]  core: cluster listeners successfully shut down	
 </code></pre></div>    </div>
   </li>
 </ul>
 
-<p>Note:
-For a local driver, such as json-file and journald, there is no difference in functionality
-before or after the dual logging capability became available. The log is locally visible in both scenarios.</p>
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>For a local driver, such as json-file and journald, there is no difference in
+functionality before or after the dual logging capability became available.
+The log is locally visible in both scenarios.</p>
+</blockquote>
 
 <h2 id="limitations">Limitations</h2>
 
 <ul>
   <li>You cannot specify more than one log driver.</li>
-  <li>If a container using a logging driver or plugin that sends logs remotely suddenly has a “network” issue,
-no ‘write’ to the local cache occurs.</li>
-  <li>If a write to <code class="highlighter-rouge">logdriver</code> fails for any reason (file system full, write permissions removed),
-the cache write fails and is logged in the daemon log. The log entry to the cache is not retried.</li>
-  <li>Some logs might be lost from the cache in the default configuration because a ring buffer is used to
-prevent blocking the stdio of the container in case of slow file writes. An admin must repair these while the daemon is shut down.</li>
+  <li>If a container using a logging driver or plugin that sends logs remotely
+suddenly has a “network” issue, no ‘write’ to the local cache occurs.</li>
+  <li>If a write to <code class="highlighter-rouge">logdriver</code> fails for any reason (file system full, write
+permissions removed), the cache write fails and is logged in the daemon log.
+The log entry to the cache is not retried.</li>
+  <li>Some logs might be lost from the cache in the default configuration because a
+ring buffer is used to prevent blocking the stdio of the container in case of
+slow file writes. An admin must repair these while the daemon is shut down.</li>
 </ul>
 
 							<!-- tags -->
-							
-							
 							
 							<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=logging">logging</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=driver">driver</a></span>
 							
@@ -381,7 +398,6 @@ prevent blocking the stdio of the container in case of slow file writes. An admi
 										<li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/config/containers/logging/dual-logging.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
 										<li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [config/containers/logging/dual-logging.md](https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/dual-logging/)"
 															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
-										<li><a href="https://success.docker.com/support"><i class="fa fa-question" aria-hidden="true"></i> サポート依頼</a></li>
 										<!-- toggle mode -->
 										<li>
 											<div class="toggle-mode">
@@ -434,49 +450,41 @@ prevent blocking the stdio of the container in case of slow file writes. An admi
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><a href="https://www.docker.com/what-docker">What is Docker</a></li>
+                        <li><b><a href="https://www.docker.com/why-docker">Why Docker</a></b></li>
                         <li><a href="https://www.docker.com/what-container">What is a Container</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">Products</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Features</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">Container Runtime</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">Developer Tools</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Developers</a></b></li>
                         <li><a href="https://www.docker.com/use-cases">Use Cases</a></li>
-                        <li><a href="https://www.docker.com/customers">Customers</a></li>
-                        <li><a href="https://www.docker.com/partners/partner-program">Partners</a></li>
-                        <li class="break"><a href="https://www.docker.com/industry-government">For Government</a></li>
-                        <li><a href="https://www.docker.com/company">About Docker</a></li>
-                        <li><a href="https://www.docker.com/company/management">Management</a></li>
-                        <li><a href="https://www.docker.com/company/news-and-press">Press &amp; News</a></li>
-                        <li><a href="https://www.docker.com/careers">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
-                        <li><a href="https://www.docker.com/products/overview">Product</a></li>
-                        <li><a href="https://www.docker.com/pricing">Pricing</a></li>
-                        <li><a href="https://www.docker.com/docker-community">Community Edition</a></li>
-                        <li class="break"><a href="https://www.docker.com/enterprise">Enterprise Edition </a></li>
-                        <li><a href="https://www.docker.com/products/docker-datacenter">Docker Datacenter</a></li>
-                        <li><a href="https://hub.docker.com/">Docker Hub</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
-                        <li><a href="https://matsuand.github.io/docs.docker.jp.onthefly/">Documentation</a></li>
-                        <li><a href="https://www.docker.com/docker">Learn</a></li>
-                        <li><a href="https://blog.docker.com" target="_blank">Blog</a></li>
-                        <li><a href="https://engineering.docker.com" target="_blank">Engineering Blog</a></li>
-                        <li><a href="https://training.docker.com/" target="_blank">Training</a></li>
-                        <li><a href="https://success.docker.com/support">Support</a></li>
-                        <li><a href="https://success.docker.com/kbase">Knowledge Base</a></li>
-                        <li><a href="https://www.docker.com/products/resources">Resources</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-3 col-md-3">
-                    <ul class="footer_links">
+                        <li><a href="https://www.docker.com/play-with-docker">Play with Docker</a></li>
                         <li><a href="https://www.docker.com/docker-community">Community</a></li>
-                        <li><a href="https://www.docker.com/technologies/overview">Open Source</a></li>
-                        <li><a href="https://www.docker.com/community/events">Events</a></li>
-                        <li><a href="https://forums.docker.com/" target="_blank">Forums</a></li>
+                        <li><a href="https://www.docker.com/open-source">Open Source</a></li>
                         <li><a href="https://www.docker.com/community/docker-captains">Docker Captains</a></li>
-                        <li><a href="https://www.docker.com/docker-community/scholarships">Scholarships</a></li>
-                        <li><a href="https://blog.docker.com/curated/">Community News</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank">Company</a></b></li>
+                        <li><a href="https://www.docker.com/company">About Us</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank">Blog</a></li>
+                        <li><a href="https://www.docker.com/customers">Customers</a></li>
+                        <li><a href="https://www.docker.com/partners">Partners</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">Newsroom</a></li>
+                        <li><a href="https://www.docker.com/careers">Careers</a></li>
+                        <li><a href="https://www.docker.com/company/contact">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -494,7 +502,7 @@ prevent blocking the stdio of the container in case of slow file writes. An admi
         <div class="bottom_footer">
             <div class="footer-copyright col-xs-12 col-md-8">
                 <p class="copyright">
-                    Copyright &copy; 2019 Docker Inc. All rights reserved. </p>
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
             </div>
             <div class="footer_social_nav">
                 <ul class="nav-social">
@@ -503,8 +511,8 @@ prevent blocking the stdio of the container in case of slow file writes. An admi
                     <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
                     <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
                     <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
-                    <li class="fa fa-reddit"><a href="http://www.reddit.com/r/docker">Reddit</a></li>
-                    <li class="fa fa-slideshare"><a href="http://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
                 </ul>
             </div>
         </div>
