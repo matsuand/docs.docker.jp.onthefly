@@ -1465,15 +1465,15 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-windows/dashboard/",
-"title":"Docker Desktop Dashboard",
-"description":"Docker Desktop Dashboard",
+"title":"Docker Desktop ダッシュボード",
+"description":"Docker Desktop ダッシュボード",
 "keywords":"Docker Desktop Dashboard, container view"
 }
 ,
 {
 "url":"/docs.docker.jp.onthefly/docker-for-mac/dashboard/",
-"title":"Docker Desktop Dashboard",
-"description":"Docker Desktop Dashboard",
+"title":"Docker Desktop ダッシュボード",
+"description":"Docker Desktop ダッシュボード",
 "keywords":"Docker Desktop Dashboard, container view"
 }
 ,
