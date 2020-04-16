@@ -1,4 +1,4 @@
-<!-- Page generated 2020-04-13 12:18:52 +0900 -->
+<!-- Page generated 2020-04-16 17:54:55 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -73,7 +73,7 @@
 	<meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-13T12:18:52+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-16T17:54:55+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
@@ -83,7 +83,7 @@
 	<meta name="twitter:description" property="og:description" itemprop="description" content="サービスの起動順や停止順は、depends_on オプションを使って制御することができます。 Compose では必ず依存順に応じて、コンテナーの起動または停止を行いますが、この依存順とは depends_on、links、volumes_from、network_mode: "service:..." によって決定します。 しかし起動時の場合、Compose はコンテナーが “準備状態” になって初めて制御を待ちます。 （これがアプリケーションにとってどのような意味になるかには無関係です。） つまり稼動していることが必要です。 これには十分な理由があります。 たとえばデータベースが準備状態になるまで待ち続けたとすると、分散システムにおいては非常に大きな問題となります。 本番環境であれば利用不能となって、すぐにホストを切り替えなければならなくなります。 アプリケーションは、このような状況に柔軟に対応できるものでなくてはなりません。 こういったことを取り扱う際には、データベースへの接続に失敗した後に、接続を再度確立するようにアプリケーションを設計しておくことが必要です。 アプリケーションが再接続を行えば、そのうちデータベースへの接続が成功します。 最適な方法は、再接続をアプリケーションコード内で行うことです。 これは起動時にも行い、さらに何らかの理由で接続が断たれた際にも行います。 もっともそれほどの柔軟性を必要としないのであれば、以下のようなラッパースクリプトを使ってこの問題を回避する方法もあります。 wait-for-it、 dockerize、あるいはシェル互換の wait-for を利用します。 これは非常に小さなラッパースクリプトです。 これをアプリケーションイメージに含めて、指定されたホストが TCP 接続を受け入れるまでの間、指定ポートに問い合わせを行うようにすることができます。..." />
 	<meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-04-13T12:18:52+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-04-16T17:54:55+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="documentation, docs, docker, compose, startup, shutdown, order">
@@ -213,30 +213,32 @@ Compose では必ず依存順に応じて、コンテナーの起動または停
 
     <p>たとえば <code class="highlighter-rouge">wait-for-it.sh</code> または <code class="highlighter-rouge">wait-for</code> を使って、サービスコマンドをラップするには以下のようにします。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "2"
-services:
-  web:
-    build: .
-    ports:
-      - "80:8000"
-    depends_on:
-      - "db"
-    command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
-  db:
-    image: postgres
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">80:8000"</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">db"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">./wait-for-it.sh"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">db:5432"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">--"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">python"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">app.py"</span><span class="pi">]</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
 </code></pre></div>    </div>
 
     <blockquote>
-      <p><strong>ヒント</strong>: この解決方法には限界があります。
+      <p><strong>ヒント</strong></p>
+
+      <p>この解決方法には限界があります。
 たとえば指定するサービスが、本当に準備状態であるかどうかは確認できません。
 コマンドにさらに引数を追加して <code class="highlighter-rouge">bash shift</code> を利用し、ループによって対処するのが次の例です。</p>
     </blockquote>
   </li>
   <li>
     <p>別の方法として、独自にラッパースクリプトを用意して、アプリケーション特有のヘルスチェックを実現することも考えられます。
-たとえば、Postgres が完全に準備状態になって、コマンドを受け付けるようになるまで待ちたいとするなら、以下のスクリプトを用意します。</p>
+たとえば Postgres が完全に準備状態になって、コマンドを受け付けるようになるまで待ちたいとするなら、以下のスクリプトを用意します。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 <span class="c"># wait-for-postgres.sh</span>
 
 <span class="nb">set</span> <span class="nt">-e</span>
@@ -256,8 +258,8 @@ services:
 
     <p>このラッパースクリプトを先の例において利用するには、以下のように設定します。</p>
 
-    <pre><code class="language-none">command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
-</code></pre>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">./wait-for-postgres.sh"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">db"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">python"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">app.py"</span><span class="pi">]</span>
+</code></pre></div>    </div>
   </li>
 </ul>
 

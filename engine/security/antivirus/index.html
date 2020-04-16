@@ -1,4 +1,4 @@
-<!-- Page generated 2020-04-13 12:18:52 +0900 -->
+<!-- Page generated 2020-04-16 17:54:55 +0900 -->
 <!-- relative link basehrefs -->
 
 	
@@ -77,17 +77,24 @@
 	<meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
 	<!-- metadata -->
 	<meta property="og:type" content="website"/>
-	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-13T12:18:52+09:00"/>
+	<meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-16T17:54:55+09:00"/>
 	<meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:domain" content="docs.docker.jp"/>
 	<meta name="twitter:site" content="@docker_docs"/>
 	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-	<meta name="twitter:title" itemprop="title name" content="Antivirus software and Docker"/>
-	<meta name="twitter:description" property="og:description" itemprop="description" content="When antivirus software scans files used by Docker, these files may be locked in a way that causes Docker commands to hang. One way to reduce these problems is to..." />
+	<meta name="twitter:title" itemprop="title name" content="ウィルス対策ソフトウェアと Docker"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="
+Docker が利用するファイルがウィルス対策ソフトウェアによってスキャンされた際に、ファイルがロックされる場合があります。
+これが原因となって Docker コマンドがハングすることがあります。
+
+この状況の発生を軽減するには、ウィルス対策ソフトウェアの除外リストに Docker データディレクトリ（Linux では /var/lib/docker、Windows Server では %ProgramData%\docker、Mac では $HOME/Library/Containers/com.docker.docker/）を加えるという方法があります。
+ただしこれにはトレードオフがあり、Docker イメージ、コンテナーの書き込みレイヤー、ボリュームの各データ内にて、ウィルスやマルウェアが検出できなくなります。
+このようにウィルススキャンのバックグランド実行から  Docker データディレクトリを除外する方法をとった場合は、Docker の停止、データディレクトリのスキャン、Docker の再起動といったタスクをスケジュールすることが必要になります。
+" />
 	<meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
 	<meta name="twitter:image:alt" content="Docker ドキュメント"/>
-	<meta property="article:published_time" itemprop="datePublished" content="2020-04-13T12:18:52+09:00"/>
+	<meta property="article:published_time" itemprop="datePublished" content="2020-04-16T17:54:55+09:00"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="antivirus, security">
@@ -99,16 +106,16 @@
 	<!-- Go get "Open Sans" font from Google -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<!-- SEO stuff -->
-	<title>Antivirus software and Docker | Docker ドキュメント</title>
-<meta property="og:title" content="Antivirus software and Docker" />
+	<title>ウィルス対策ソフトウェアと Docker | Docker ドキュメント</title>
+<meta property="og:title" content="ウィルス対策ソフトウェアと Docker" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="General guidelines for using antivirus software with Docker" />
-<meta property="og:description" content="General guidelines for using antivirus software with Docker" />
+<meta name="description" content="Docker とともにウィルス対策ソフトウェアを利用する際の一般的なガイドライン。" />
+<meta property="og:description" content="Docker とともにウィルス対策ソフトウェアを利用する際の一般的なガイドライン。" />
 <link rel="canonical" href="/docs.docker.jp.onthefly/engine/security/antivirus/" />
 <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/antivirus/" />
 <meta property="og:site_name" content="Docker ドキュメント" />
 <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"WebPage","headline":"Antivirus software and Docker","description":"General guidelines for using antivirus software with Docker","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/antivirus/"}</script>
+{"@context":"http://schema.org","@type":"WebPage","headline":"ウィルス対策ソフトウェアと Docker","description":"Docker とともにウィルス対策ソフトウェアを利用する際の一般的なガイドライン。","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/antivirus/"}</script>
 	<!-- END SEO STUFF -->
 	
 	<script language="javascript">
@@ -178,7 +185,7 @@
 						<section class="section">
 							
 								
-							<h1>Antivirus software and Docker</h1>  <span class="reading-time" title="Estimated reading time">
+							<h1>ウィルス対策ソフトウェアと Docker</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
@@ -188,16 +195,13 @@
 
 							
 							
-							<p>When antivirus software scans files used by Docker, these files may be locked
-in a way that causes Docker commands to hang.</p>
+							
+<p>Docker が利用するファイルがウィルス対策ソフトウェアによってスキャンされた際に、ファイルがロックされる場合があります。
+これが原因となって Docker コマンドがハングすることがあります。</p>
 
-<p>One way to reduce these problems is to add the Docker data directory
-(<code class="highlighter-rouge">/var/lib/docker</code> on Linux, <code class="highlighter-rouge">%ProgramData%\docker</code> on Windows Server, or <code class="highlighter-rouge">$HOME/Library/Containers/com.docker.docker/</code> on Mac) to the
-antivirus’s exclusion list. However, this comes with the trade-off that viruses
-or malware in Docker images, writable layers of containers, or volumes are not
-detected. If you do choose to exclude Docker’s data directory from background
-virus scanning, you may want to schedule a recurring task that stops Docker,
-scans the data directory, and restarts Docker.</p>
+<p>この状況の発生を軽減するには、ウィルス対策ソフトウェアの除外リストに Docker データディレクトリ（Linux では <code class="highlighter-rouge">/var/lib/docker</code>、Windows Server では <code class="highlighter-rouge">%ProgramData%\docker</code>、Mac では <code class="highlighter-rouge">$HOME/Library/Containers/com.docker.docker/</code>）を加えるという方法があります。
+ただしこれにはトレードオフがあり、Docker イメージ、コンテナーの書き込みレイヤー、ボリュームの各データ内にて、ウィルスやマルウェアが検出できなくなります。
+このようにウィルススキャンのバックグランド実行から  Docker データディレクトリを除外する方法をとった場合は、Docker の停止、データディレクトリのスキャン、Docker の再起動といったタスクをスケジュールすることが必要になります。</p>
 
 							<!-- tags -->
 							
@@ -231,7 +235,7 @@ scans the data directory, and restarts Docker.</p>
 									PDRTJS_settings_8453675 = {
 										"id": "8453675",
 										"unique_id": "engine/security/antivirus.md",
-										"title": "Antivirus software and Docker",
+										"title": "ウィルス対策ソフトウェアと Docker",
 										"permalink": "https://github.com/docker/docker.github.io/blob/master/engine/security/antivirus.md"
 									};
 									(function(d, c, j) {

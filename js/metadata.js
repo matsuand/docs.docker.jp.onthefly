@@ -212,8 +212,8 @@ var pages = [
 ,
 {
 "url":"/docs.docker.jp.onthefly/engine/security/antivirus/",
-"title":"Antivirus software and Docker",
-"description":"General guidelines for using antivirus software with Docker",
+"title":"ウィルス対策ソフトウェアと Docker",
+"description":"Docker とともにウィルス対策ソフトウェアを利用する際の一般的なガイドライン。",
 "keywords":"antivirus, security"
 }
 ,
@@ -2511,6 +2511,13 @@ var pages = [
 "title":"Docker Engine release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine",
 "keywords":"docker, docker engine, ce, whats new, release notes"
+}
+,
+{
+"url":"/docs.docker.jp.onthefly/engine/install/",
+"title":"Install Docker Engine",
+"description":"Lists the installation methods",
+"keywords":"docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge"
 }
 ,
 {
@@ -6038,7 +6045,7 @@ var pages = [
 "url":"/docs.docker.jp.onthefly/docker-hub/webhooks/",
 "title":"Docker Hub のウェブフック",
 "description":"Docker Hub のウェブフック。",
-"keywords":"Docker, webhookds, hub, builds"
+"keywords":"Docker, webhooks, hub, builds"
 }
 ,
 {
