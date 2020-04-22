@@ -1,1 +1,0 @@
-[VMware](%%GITHUB-REPO%%)

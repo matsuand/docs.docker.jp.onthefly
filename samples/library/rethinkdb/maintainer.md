@@ -1,1 +1,0 @@
-[RethinkDB](%%GITHUB-REPO%%)

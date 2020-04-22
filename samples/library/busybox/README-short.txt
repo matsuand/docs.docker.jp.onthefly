@@ -1,1 +1,0 @@
-Busybox base image.

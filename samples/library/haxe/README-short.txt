@@ -1,1 +1,0 @@
-Haxe is a modern, high level, static typed programming language with multiple compilation targets.

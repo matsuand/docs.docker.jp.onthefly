@@ -1,1 +1,0 @@
-[Zend Technologies](%%GITHUB-REPO%%)

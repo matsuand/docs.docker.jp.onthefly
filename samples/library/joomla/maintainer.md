@@ -1,1 +1,0 @@
-[Joomla!](%%GITHUB-REPO%%)

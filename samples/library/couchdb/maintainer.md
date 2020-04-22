@@ -1,1 +1,0 @@
-[Apache CouchDB](%%GITHUB-REPO%%)

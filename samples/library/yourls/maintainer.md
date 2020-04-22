@@ -1,1 +1,0 @@
-[YOURLS](%%GITHUB-REPO%%)

@@ -1,1 +1,0 @@
-[Aerospike, Inc.](%%GITHUB-REPO%%)

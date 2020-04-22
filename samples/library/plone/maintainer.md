@@ -1,1 +1,0 @@
-[Plone Community](%%GITHUB-REPO%%)

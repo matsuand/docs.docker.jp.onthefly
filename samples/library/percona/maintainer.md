@@ -1,1 +1,0 @@
-[Percona](%%GITHUB-REPO%%)

@@ -1,1 +1,0 @@
-[Mageia Developers](%%GITHUB-REPO%%)

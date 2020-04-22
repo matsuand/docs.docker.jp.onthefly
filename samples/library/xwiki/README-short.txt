@@ -1,1 +1,0 @@
-XWiki: The Advanced Open Source Enterprise Wiki.

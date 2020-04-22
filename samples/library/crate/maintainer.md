@@ -1,1 +1,0 @@
-[Crate.io](%%GITHUB-REPO%%)

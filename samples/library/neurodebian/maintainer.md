@@ -1,1 +1,0 @@
-[NeuroDebian](%%GITHUB-REPO%%)

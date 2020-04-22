@@ -1,1 +1,0 @@
-[OrientDB](%%GITHUB-REPO%%)

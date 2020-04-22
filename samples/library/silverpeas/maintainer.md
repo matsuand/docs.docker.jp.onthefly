@@ -1,1 +1,0 @@
-[Silverpeas](%%GITHUB-REPO%%)

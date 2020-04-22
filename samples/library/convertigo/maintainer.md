@@ -1,1 +1,0 @@
-[Convertigo](%%GITHUB-REPO%%)

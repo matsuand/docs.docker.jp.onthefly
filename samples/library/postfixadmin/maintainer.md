@@ -1,1 +1,0 @@
-[Postfix Admin](%%GITHUB-REPO%%)

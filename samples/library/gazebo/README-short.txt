@@ -1,1 +1,0 @@
-Gazebo is an open source project for simulating robots, offering robust physics and rendering.

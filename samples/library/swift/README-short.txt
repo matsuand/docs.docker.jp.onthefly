@@ -1,1 +1,0 @@
-Swift is a high-performance system programming language, to learn more about Swift visit swift.org.

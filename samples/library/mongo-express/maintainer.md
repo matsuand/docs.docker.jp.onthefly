@@ -1,1 +1,0 @@
-[mongo-express](%%GITHUB-REPO%%)
