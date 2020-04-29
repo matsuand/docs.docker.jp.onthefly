@@ -1,0 +1,541 @@
+<!-- Page generated 2020-04-29 18:02:58 +0900 -->
+<!-- Logic for 'edit this button'
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        @charset "UTF-8";
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak,
+        .ng-hide:not(.ng-hide-animate) {
+            display: none !important;
+        }
+
+        ng\:form {
+            display: block;
+        }
+    </style>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WL2QLG5');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+    <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+    <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+    <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+    <!-- metadata -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-29T18:02:58+09:00"/>
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:domain" content="docs.docker.com"/>
+    <meta name="twitter:site" content="@docker_docs"/>
+    <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+    <meta name="twitter:title" itemprop="title name" content="Token Authentication Specification"/>
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Registry v2 authentication via central service This document outlines the v2 Docker registry authentication scheme: Attempt to begin a push/pull operation with the registry. If the registry requires authorization..." />
+    <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+    <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+    <meta property="article:published_time" itemprop="datePublished" content="2020-04-29T18:02:58+09:00"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="registry, on-prem, images, tags, repository, distribution, Bearer authentication, advanced">
+    <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+    <link id="pygments" rel="stylesheet" href="/docs.docker.jp.onthefly/css/pygments/perldoc.css">
+    <link id="pagestyle" rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css">
+
+    <!-- Go get "Open Sans" font from Google -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- SEO stuff -->
+    <title>Token Authentication Specification | Docker ドキュメント</title>
+    <meta property="og:title" content="Token Authentication Specification" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="description" content="Specifies the Docker Registry v2 authentication" />
+    <meta property="og:description" content="Specifies the Docker Registry v2 authentication" />
+    <link rel="canonical" href="/docs.docker.jp.onthefly/registry/spec/auth/token/" />
+    <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/spec/auth/token/" />
+    <meta property="og:site_name" content="Docker ドキュメント" />
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Token Authentication Specification","description":"Specifies the Docker Registry v2 authentication","url":"https://docs.docker.com/registry/spec/auth/token/"}</script>
+    <!-- END SEO STUFF -->
+    
+    <script>
+    // Default to assuming this is an archive and hiding some stuff
+    // See js/archive.js and js/docs.js for logic relating to this
+    var isArchive = true;
+    var dockerVersion = 'v19.03';
+    </script>
+</head>
+<body ng-app="Docker" ng-controller="DockerController" class="colums">
+    <header>
+        
+            <nav class="nav-secondary navbar navbar-fixed-top">
+    <!-- <div class="fan"></div> -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/"><img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs"></a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="search-form" id="search-div" style="visibility: hidden">
+    <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/docs.docker.jp.onthefly/search/">
+        <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteContainer">
+            <div id="autocompleteResults"></div>
+        </div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container">
+    <div id="tabs">
+        <ul class="tabs" id="jsTOCHorizontal">
+
+        </ul>
+    </div>
+    <div class="ctrl-right hidden-xs hidden-sm">
+        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+        <div class="btn-group" style="visibility: hidden">
+  <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Docker v19.03 (最新)     <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="/docs.docker.jp.onthefly/v18.09/">Docker v18.09</a></li><li><a href="/docs.docker.jp.onthefly/v18.03/">Docker v18.03</a></li><li><a href="/docs.docker.jp.onthefly/v17.06/">Docker v17.06</a></li>
+  </ul>
+</div>
+
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+        
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section">
+                            
+                                
+                            <h1>Token Authentication Specification</h1>  <span class="reading-time" title="Estimated reading time">
+  <span class="reading-time-label">読む時間の目安: </span>
+  
+  
+    7 分
+  
+</span>
+
+                            
+                            
+                            <h1 id="docker-registry-v2-authentication-via-central-service">Docker Registry v2 authentication via central service</h1>
+
+<p>This document outlines the v2 Docker registry authentication scheme:</p>
+
+<p><img src="/docs.docker.jp.onthefly/registry/spec/images/v2-registry-auth.png" alt="v2 registry auth" /></p>
+
+<ol>
+  <li>Attempt to begin a push/pull operation with the registry.</li>
+  <li>If the registry requires authorization it will return a <code class="highlighter-rouge">401 Unauthorized</code>
+HTTP response with information on how to authenticate.</li>
+  <li>The registry client makes a request to the authorization service for a
+Bearer token.</li>
+  <li>The authorization service returns an opaque Bearer token representing the
+client’s authorized access.</li>
+  <li>The client retries the original request with the Bearer token embedded in
+the request’s Authorization header.</li>
+  <li>The Registry authorizes the client by validating the Bearer token and the
+claim set embedded within it and begins the push/pull session as usual.</li>
+</ol>
+
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li>Registry clients which can understand and respond to token auth challenges
+returned by the resource server.</li>
+  <li>An authorization server capable of managing access controls to their
+resources hosted by any given service (such as repositories in a Docker
+Registry).</li>
+  <li>A Docker Registry capable of trusting the authorization server to sign tokens
+which clients can use for authorization and the ability to verify these
+tokens for single use or for use during a sufficiently short period of time.</li>
+</ul>
+
+<h2 id="authorization-server-endpoint-descriptions">Authorization Server Endpoint Descriptions</h2>
+
+<p>The described server is meant to serve as a standalone access control manager
+for resources hosted by other services which wish to authenticate and manage
+authorizations using a separate access control manager.</p>
+
+<p>A service like this is used by the official Docker Registry to authenticate
+clients and verify their authorization to Docker image repositories.</p>
+
+<p>As of Docker 1.6, the registry client within the Docker Engine has been updated
+to handle such an authorization workflow.</p>
+
+<h2 id="how-to-authenticate">How to authenticate</h2>
+
+<p>Registry V1 clients first contact the index to initiate a push or pull. Under
+the Registry V2 workflow, clients should contact the registry first. If the
+registry server requires authentication it will return a <code class="highlighter-rouge">401 Unauthorized</code>
+response with a <code class="highlighter-rouge">WWW-Authenticate</code> header detailing how to authenticate to this
+registry.</p>
+
+<p>For example, say I (username <code class="highlighter-rouge">jlhawn</code>) am attempting to push an image to the
+repository <code class="highlighter-rouge">samalba/my-app</code>. For the registry to authorize this, I will need
+<code class="highlighter-rouge">push</code> access to the <code class="highlighter-rouge">samalba/my-app</code> repository. The registry will first
+return this response:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 401 Unauthorized
+Content-Type: application/json; charset=utf-8
+Docker-Distribution-Api-Version: registry/2.0
+Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"
+Date: Thu, 10 Sep 2015 19:32:31 GMT
+Content-Length: 235
+Strict-Transport-Security: max-age=31536000
+
+{"errors":[{"code":"UNAUTHORIZED","message":"access to the requested resource is not authorized","detail":[{"Type":"repository","Name":"samalba/my-app","Action":"pull"},{"Type":"repository","Name":"samalba/my-app","Action":"push"}]}]}
+</code></pre></div></div>
+
+<p>Note the HTTP Response Header indicating the auth challenge:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:samalba/my-app:pull,push"
+</code></pre></div></div>
+
+<p>This format is documented in <a href="https://tools.ietf.org/html/rfc6750#section-3">Section 3 of RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></p>
+
+<p>This challenge indicates that the registry requires a token issued by the
+specified token server and that the request the client is attempting will
+need to include sufficient access entries in its claim set. To respond to this
+challenge, the client will need to make a <code class="highlighter-rouge">GET</code> request to the URL
+<code class="highlighter-rouge">https://auth.docker.io/token</code> using the <code class="highlighter-rouge">service</code> and <code class="highlighter-rouge">scope</code> values from the
+<code class="highlighter-rouge">WWW-Authenticate</code> header.</p>
+
+<h2 id="requesting-a-token">Requesting a Token</h2>
+
+<p>Defines getting a bearer and refresh token using the token endpoint.</p>
+
+<h4 id="query-parameters">Query Parameters</h4>
+
+<dl>
+  <dt><code class="highlighter-rouge">service</code></dt>
+  <dd>The name of the service which hosts the resource.</dd>
+  <dt><code class="highlighter-rouge">offline_token</code></dt>
+  <dd>Whether to return a refresh token along with the bearer token. A refresh token is capable of getting additional bearer tokens for the same subject with different scopes. The refresh token does not have an expiration and should be considered completely opaque to the client.</dd>
+  <dt><code class="highlighter-rouge">client_id</code></dt>
+  <dd>String identifying the client. This client_id does not need to be registered with the authorization server but should be set to a meaningful value in order to allow auditing keys created by unregistered clients. Accepted syntax is defined in [RFC6749 Appendix A.1](https://tools.ietf.org/html/rfc6749#appendix-A.1).</dd>
+  <dt><code class="highlighter-rouge">scope</code></dt>
+  <dd>The resource in question, formatted as one of the space-delimited entries from the <code class="highlighter-rouge">scope</code> parameters from the <code class="highlighter-rouge">WWW-Authenticate</code> header shown above. This query parameter should be specified multiple times if there is more than one <code class="highlighter-rouge">scope</code> entry from the <code class="highlighter-rouge">WWW-Authenticate</code> header. The above example would be specified as: <code class="highlighter-rouge">scope=repository:samalba/my-app:push</code>. The scope field may be empty to request a refresh token without providing any resource permissions to the returned bearer token.</dd>
+</dl>
+
+<h4 id="token-response-fields">Token Response Fields</h4>
+
+<dl>
+  <dt><code class="highlighter-rouge">token</code></dt>
+  <dd>An opaque <code class="highlighter-rouge">Bearer</code> token that clients should supply to subsequent requests in the <code class="highlighter-rouge">Authorization</code> header.</dd>
+  <dt><code class="highlighter-rouge">access_token</code></dt>
+  <dd>For compatibility with OAuth 2.0, we will also accept <code class="highlighter-rouge">token</code> under the name <code class="highlighter-rouge">access_token</code>. At least one of these fields <strong>must</strong> be specified, but both may also appear (for compatibility with older clients). When both are specified, they should be equivalent; if they differ the client's choice is undefined.</dd>
+  <dt><code class="highlighter-rouge">expires_in</code></dt>
+  <dd>(Optional) The duration in seconds since the token was issued that it will remain valid. When omitted, this defaults to 60 seconds. For compatibility with older clients, a token should never be returned with less than 60 seconds to live.</dd>
+  <dt><code class="highlighter-rouge">issued_at</code></dt>
+  <dd>(Optional) The <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a>-serialized UTC standard time at which a given token was issued. If <code class="highlighter-rouge">issued_at</code> is omitted, the expiration is from when the token exchange completed.</dd>
+  <dt><code class="highlighter-rouge">refresh_token</code></dt>
+  <dd>(Optional) Token which can be used to get additional access tokens for the same subject with different scopes. This token should be kept secure by the client and only sent to the authorization server which issues bearer tokens. This field will only be set when `offline_token=true` is provided in the request.</dd>
+</dl>
+
+<h4 id="example">Example</h4>
+
+<p>For this example, the client makes an HTTP GET request to the following URL:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:samalba/my-app:pull,push
+</code></pre></div></div>
+
+<p>The token server should first attempt to authenticate the client using any
+authentication credentials provided with the request. From Docker 1.11 the
+Docker engine supports both Basic Authentication and <a href="/docs.docker.jp.onthefly/registry/spec/auth/oauth/">OAuth2</a> for
+getting tokens. Docker 1.10 and before, the registry client in the Docker Engine
+only supports Basic Authentication. If an attempt to authenticate to the token
+server fails, the token server should return a <code class="highlighter-rouge">401 Unauthorized</code> response
+indicating that the provided credentials are invalid.</p>
+
+<p>Whether the token server requires authentication is up to the policy of that
+access control provider. Some requests may require authentication to determine
+access (such as pushing or pulling a private repository) while others may not
+(such as pulling from a public repository).</p>
+
+<p>After authenticating the client (which may simply be an anonymous client if
+no attempt was made to authenticate), the token server must next query its
+access control list to determine whether the client has the requested scope. In
+this example request, if I have authenticated as user <code class="highlighter-rouge">jlhawn</code>, the token
+server will determine what access I have to the repository <code class="highlighter-rouge">samalba/my-app</code>
+hosted by the entity <code class="highlighter-rouge">registry.docker.io</code>.</p>
+
+<p>Once the token server has determined what access the client has to the
+resources requested in the <code class="highlighter-rouge">scope</code> parameter, it will take the intersection of
+the set of requested actions on each resource and the set of actions that the
+client has in fact been granted. If the client only has a subset of the
+requested access <strong>it must not be considered an error</strong> as it is not the
+responsibility of the token server to indicate authorization errors as part of
+this workflow.</p>
+
+<p>Continuing with the example request, the token server will find that the
+client’s set of granted access to the repository is <code class="highlighter-rouge">[pull, push]</code> which when
+intersected with the requested access <code class="highlighter-rouge">[pull, push]</code> yields an equal set. If
+the granted access set was found only to be <code class="highlighter-rouge">[pull]</code> then the intersected set
+would only be <code class="highlighter-rouge">[pull]</code>. If the client has no access to the repository then the
+intersected set would be empty, <code class="highlighter-rouge">[]</code>.</p>
+
+<p>It is this intersected set of access which is placed in the returned token.</p>
+
+<p>The server then constructs an implementation-specific token with this
+intersected set of access, and returns it to the Docker client to use to
+authenticate to the audience service (within the indicated window of time):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w", "expires_in": 3600,"issued_at": "2009-11-10T23:00:00Z"}
+</code></pre></div></div>
+
+<h2 id="using-the-bearer-token">Using the Bearer token</h2>
+
+<p>Once the client has a token, it will try the registry request again with the
+token placed in the HTTP <code class="highlighter-rouge">Authorization</code> header like so:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IkJWM0Q6MkFWWjpVQjVaOktJQVA6SU5QTDo1RU42Ok40SjQ6Nk1XTzpEUktFOkJWUUs6M0ZKTDpQT1RMIn0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJCQ0NZOk9VNlo6UUVKNTpXTjJDOjJBVkM6WTdZRDpBM0xZOjQ1VVc6NE9HRDpLQUxMOkNOSjU6NUlVTCIsImF1ZCI6InJlZ2lzdHJ5LmRvY2tlci5jb20iLCJleHAiOjE0MTUzODczMTUsIm5iZiI6MTQxNTM4NzAxNSwiaWF0IjoxNDE1Mzg3MDE1LCJqdGkiOiJ0WUpDTzFjNmNueXk3a0FuMGM3cktQZ2JWMUgxYkZ3cyIsInNjb3BlIjoiamxoYXduOnJlcG9zaXRvcnk6c2FtYWxiYS9teS1hcHA6cHVzaCxwdWxsIGpsaGF3bjpuYW1lc3BhY2U6c2FtYWxiYTpwdWxsIn0.Y3zZSwaZPqy4y9oRBVRImZyv3m_S9XDHF1tWwN7mL52C_IiA73SJkWVNsvNqpJIn5h7A2F8biv_S2ppQ1lgkbw
+</code></pre></div></div>
+
+<p>This is also described in <a href="https://tools.ietf.org/html/rfc6750#section-2.1">Section 2.1 of RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></p>
+
+                            <!-- tags -->
+                            
+                                <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=registry">registry</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=on-prem">on-prem</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=tags">tags</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=repository">repository</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=distribution">distribution</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=Bearer authentication">Bearer authentication</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=advanced">advanced</a></span>
+                                
+                            
+                            <div id="ratings-div" style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
+                                <div id="pd_rating_holder_8453675"></div>
+                                <script type="text/javascript">
+                                    PDRTJS_settings_8453675 = {
+                                        "id": "8453675",
+                                        "unique_id": "registry/spec/auth/token.md",
+                                        "title": "Token Authentication Specification",
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/registry/spec/auth/token.md"
+                                    };
+                                    (function(d, c, j) {
+                                        if (!document.getElementById(j)) {
+                                            var pd = d.createElement(c),
+                                                s;
+                                            pd.id = j;
+                                            pd.src = ('https:' == document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
+                                            s = document.getElementsByTagName(c)[0];
+                                            s.parentNode.insertBefore(pd, s);
+                                        }
+                                    }(document, 'script', 'pd-rating-js'));
+                                </script>
+                            </div>
+                            
+                        </section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                        <div id="navbar" class="nav-sidebar">
+    <ul class="nav" id="jsTOCLeftNav">
+    </ul>
+</div>
+
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul>
+                                        
+                                        <li style="visibility: hidden"><a href="https://github.com/docker/docker.github.io/edit/master/registry/spec/auth/token.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [registry/spec/auth/token.md](https://docs.docker.com/registry/spec/auth/token/)"
+                                                            class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
+                                        <!-- toggle mode -->
+                                        <li>
+                                            <div class="toggle-mode">
+                                                <div class="icon">
+                                                    <i class="fa fa-sun-o" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="toggle-switch">
+                                                    <label class="switch">
+                                                        <input type="checkbox" id="switch-style">
+                                                        <div class="slider round"></div>
+                                                </label>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-moon-o" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                   
+                                <div id="side-toc-title">本ページ内:</div>
+                                    
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#requirements" class="nomunge">Requirements</a></li>
+  <li><a href="#authorization-server-endpoint-descriptions" class="nomunge">Authorization Server Endpoint Descriptions</a></li>
+  <li><a href="#how-to-authenticate" class="nomunge">How to authenticate</a></li>
+  <li><a href="#requesting-a-token" class="nomunge">Requesting a Token</a></li>
+  <li><a href="#using-the-bearer-token" class="nomunge">Using the Bearer token</a></li>
+</ul>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">Why Docker</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">What is a Container</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">Products</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Features</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">Container Runtime</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">Developer Tools</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">Developers</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">Use Cases</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Play with Docker</a></li>
+                        <li><a href="https://www.docker.com/docker-community">Community</a></li>
+                        <li><a href="https://www.docker.com/open-source">Open Source</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker Captains</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank">Company</a></b></li>
+                        <li><a href="https://www.docker.com/company">About Us</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank">Blog</a></li>
+                        <li><a href="https://www.docker.com/customers">Customers</a></li>
+                        <li><a href="https://www.docker.com/partners">Partners</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">Newsroom</a></li>
+                        <li><a href="https://www.docker.com/careers">Careers</a></li>
+                        <li><a href="https://www.docker.com/company/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">Status</a></li>
+                        <li><a href="https://www.docker.com/docker-security">Security</a></li>
+                        <li><a href="https://www.docker.com/legal">Legal</a></li>
+                        <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/github.css">
+    
+    <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/menu.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+    <!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
+    <script>
+    // Default to assuming this is an archive and hiding some stuff
+    // See js/archive.js and js/docs.js for logic relating to this
+    var isArchive = true;
+    var dockerVersion = 'v19.03';
+    // In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
+    var jekyllEnv = 'development';
+    // If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
+    if (jekyllEnv === 'development') {
+        jekyllEnv = '';
+    }
+    var pageURL = jekyllEnv + '/registry/spec/auth/token/';
+    </script>
+    <script src="/docs.docker.jp.onthefly/js/archive.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/metadata.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/glossary.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/toc.js"></script>
+    <script>
+    jQuery(document).ready(function(){hookupTOCEvents();});
+    </script>
+</body>
+</html>

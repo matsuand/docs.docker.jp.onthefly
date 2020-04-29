@@ -1,4 +1,4 @@
-<!-- Page generated 2020-04-25 17:47:28 +0900 -->
+<!-- Page generated 2020-04-29 18:02:58 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,43 +54,20 @@
     <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
     <!-- metadata -->
     <meta property="og:type" content="website"/>
-    <meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-25T17:47:28+09:00"/>
+    <meta property="og:updated_time" itemprop="dateUpdated" content="2020-04-29T18:02:58+09:00"/>
     <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:domain" content="docs.docker.com"/>
     <meta name="twitter:site" content="@docker_docs"/>
     <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-    <meta name="twitter:title" itemprop="title name" content="docker deploy"/>
-    <meta name="twitter:description" property="og:description" itemprop="description" content="
-
-
-説明
-
-
-
-関連コマンド
-
-
-
-  
-    コマンド
-    説明
-  
-
-
-
-
-
-
-
-
-" />
+    <meta name="twitter:title" itemprop="title name" content="Image Manifest V 2, Schema 1 "/>
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Image Manifest Version 2, Schema 1 This document outlines the format of the V2 image manifest. The image manifest described herein was introduced in the Docker daemon in the v1.3.0..." />
     <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
     <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-    <meta property="article:published_time" itemprop="datePublished" content="2020-04-25T17:47:28+09:00"/>
+    <meta property="article:published_time" itemprop="datePublished" content="2020-04-29T18:02:58+09:00"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
+    <meta name="keywords" content="registry, on-prem, images, tags, repository, distribution, api, advanced, manifest">
     <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
     <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
     <link id="pygments" rel="stylesheet" href="/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -99,15 +76,15 @@
     <!-- Go get "Open Sans" font from Google -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- SEO stuff -->
-    <title>docker deploy | Docker ドキュメント</title>
-    <meta property="og:title" content="docker deploy" />
+    <title>Image Manifest V 2, Schema 1  | Docker ドキュメント</title>
+    <meta property="og:title" content="Image Manifest V 2, Schema 1 " />
     <meta property="og:locale" content="ja_JP" />
-    <meta name="description" content="" />
-    <meta property="og:description" content="" />
-    <link rel="canonical" href="/docs.docker.jp.onthefly/engine/reference/commandline/deploy/" />
-    <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/deploy/" />
+    <meta name="description" content="image manifest for the Registry." />
+    <meta property="og:description" content="image manifest for the Registry." />
+    <link rel="canonical" href="/docs.docker.jp.onthefly/registry/spec/manifest-v2-1/" />
+    <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/spec/manifest-v2-1/" />
     <meta property="og:site_name" content="Docker ドキュメント" />
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker deploy","description":"","url":"https://docs.docker.com/engine/reference/commandline/deploy/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Image Manifest V 2, Schema 1 ","description":"image manifest for the Registry.","url":"https://docs.docker.com/registry/spec/manifest-v2-1/"}</script>
     <!-- END SEO STUFF -->
     
     <script>
@@ -178,94 +155,211 @@
                         <section class="section">
                             
                                 
-                            <h1>docker deploy</h1>  
+                            <h1>Image Manifest V 2, Schema 1 </h1>  <span class="reading-time" title="Estimated reading time">
+  <span class="reading-time-label">読む時間の目安: </span>
+  
+  
+    3 分
+  
+</span>
+
                             
                             
-                            <!--
-This page is automatically generated from Docker's source code. If you want to
-suggest a change to the text that appears here, open a ticket or pull request
-in the source repository on GitHub:
+                            <h1 id="image-manifest-version-2-schema-1">Image Manifest Version 2, Schema 1</h1>
 
-https://github.com/docker/cli
--->
-<!-- Make sure atom is using hard tabs -->
+<p>This document outlines the format of the V2 image manifest. The image
+manifest described herein was introduced in the Docker daemon in the <a href="https://github.com/docker/docker/commit/9f482a66ab37ec396ac61ed0c00d59122ac07453">v1.3.0
+release</a>.
+It is a provisional manifest to provide a compatibility with the <a href="https://github.com/docker/docker/blob/master/image/spec/v1.md">V1 Image
+format</a>, as the
+requirements are defined for the <a href="https://github.com/docker/distribution/pull/62">V2 Schema 2
+image</a>.</p>
 
-<h2 id="description">説明</h2>
-
-<p><!-- end if options --></p>
-
-<h2 id="related-commands">関連コマンド</h2>
+<p>Image manifests describe the various constituents of a docker image.  Image
+manifests can be serialized to JSON format with the following media types:</p>
 
 <table>
-<thead>
-  <tr>
-    <td>コマンド</td>
-    <td>説明</td>
-  </tr>
-</thead>
-<tbody>
-
-</tbody>
+  <thead>
+    <tr>
+      <th>Manifest Type</th>
+      <th>Media Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>manifest</td>
+      <td>“application/vnd.docker.distribution.manifest.v1+json”</td>
+    </tr>
+    <tr>
+      <td>signed manifest</td>
+      <td>“application/vnd.docker.distribution.manifest.v1+prettyjws”</td>
+    </tr>
+  </tbody>
 </table>
 
-<script>
-    // This is a horrible hack, and cute little kittens are sacrificed every time it's run, so we
-    // need to remove it as soon as possible.
-    //
-    // Fix up links to markdown pages that weren't resolved by Jekyll (or the "jekyll-relative-links"
-    // plugin). This is a horrible hack, and should not rely on JavaScript (perhaps be re-implemented
-    // using Liquid). We need this hack to work around two bugs in the "jekyll-relative-links" plugin;
-    // 1. As reported in https://github.com/benbalter/jekyll-relative-links/issues/54, (relative) links
-    //    to markdown pages in includes are not processed by Jekyll. This means that (for example) our
-    //    reference pages (which use includes) contain broken links. We can work around this by modifying
-    //    the markdown for those pages to use "absolute" "html" links (/link/to/other/page/#some-anchor),
-    //    but doing so would render the links broken when viewed on GitHub. Instead, we're fixing them up
-    //    here, hoping the bug will be fixed, and it's only temporarily.
-    // 2. As reported in https://github.com/benbalter/jekyll-relative-links/issues/61, (relative) links
-    //    to markdown pages are not resolved if the link's caption/title is wrapped.
-    //
-    Array.prototype.forEach.call(document.querySelectorAll("section.section a:not(.nomunge)"), function (el) {
-        let href = el.getAttribute("href");
-        if (href.startsWith("/") || href.startsWith("#") || href.includes("://") || !href.includes('.md')) {
-            // Don't modify anchor links, absolute links, links to external websites,
-            // or links not pointing to a .md file; we assume those were
-            // resolved successfully by Jekyll.
-            return
-        }
-        if (href.startsWith("./")) {
-            href = href.substr(2)
-        }
-        if ("deploy.md" !== "index.md") {
-            // For non-index pages, things are a bit hairy. For example, for /foo/bar/mypage.md, Jekyll
-            // will generate a page named /foo/bar/mypage/index.html. This means that all links relative
-            // to mypage.md expect those links to be relative to the /foo/bar/ directory, but end up
-            // being relative to /foo/bar/mypage/.
-            //
-            // For files "next to", or "below" this file, such as "file.md" or "nested/dir/file.md" we
-            // prepend the "parent-dir" to the URL.
-            //
-            // For links to files "up" the directory tree, we prepend
-            // "../" to the URL and have the browser handle this. For example, "../file.md" and "../../file.md"
-            // become "../../file.md" and "../../../file.md".
-            if (href.startsWith("../")) {
-                href = "../" + href
-            } else {
-                // Generate "parentPath" with Liquid, which is used below. Liquid's page.path (and page.dir)
-                // are relative to the _generated_ HTML page, not the source page, so we have to remove the
-                // last part of the path:
-                // {% assign parentPath = page.path | prepend: "/" | remove: page.name %}
-                // 
-                href = "/engine/reference/commandline/" + href
-            }
-        }
-        // finally, we replace the .md extension for a slash, and update the link's href
-        el.setAttribute("href", href.replace(".md", "/"))
-    });
-</script>
+<p><em>Note that “application/json” will also be accepted for schema 1.</em></p>
 
+<p>References:</p>
+
+<ul>
+  <li><a href="https://github.com/docker/docker/issues/9015">Proposal: JSON Registry API V2.1</a></li>
+  <li><a href="https://github.com/docker/docker/issues/8093">Proposal: Provenance step 1 - Transform images for validation and verification</a></li>
+</ul>
+
+<h2 id="manifest-field-descriptions"><em>Manifest</em> Field Descriptions</h2>
+
+<p>Manifest provides the base accessible fields for working with V2 image format
+ in the registry.</p>
+
+<ul>
+  <li>
+    <p><strong><code class="highlighter-rouge">name</code></strong> <em>string</em></p>
+
+    <p>name is the name of the image’s repository</p>
+  </li>
+  <li>
+    <p><strong><code class="highlighter-rouge">tag</code></strong> <em>string</em></p>
+
+    <p>tag is the tag of the image</p>
+  </li>
+  <li>
+    <p><strong><code class="highlighter-rouge">architecture</code></strong> <em>string</em></p>
+
+    <p>architecture is the host architecture on which this image is intended to
+ run.  This is for information purposes and not currently used by the engine</p>
+  </li>
+  <li>
+    <p><strong><code class="highlighter-rouge">fsLayers</code></strong> <em>array</em></p>
+
+    <p>fsLayers is a list of filesystem layer blob sums contained in this image.</p>
+
+    <p>An fsLayer is a struct consisting of the following fields
+    - <strong><code class="highlighter-rouge">blobSum</code></strong> <em>digest.Digest</em></p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>blobSum is the digest of the referenced filesystem image layer. A
+digest must be a sha256 hash.
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong><code class="highlighter-rouge">history</code></strong> <em>array</em></p>
+
+    <p>history is a list of unstructured historical data for v1 compatibility. It
+ contains ID of the image layer and ID of the layer’s parent layers.</p>
+
+    <p>history is a struct consisting of the following fields</p>
+    <ul>
+      <li>
+        <p><strong><code class="highlighter-rouge">v1Compatibility</code></strong> string</p>
+
+        <p>V1Compatibility is the raw V1 compatibility information. This will
+ contain the JSON object describing the V1 of this image.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong><code class="highlighter-rouge">schemaVersion</code></strong> <em>int</em></p>
+
+    <p>SchemaVersion is the image manifest schema that this image follows.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p><strong>Note</strong>:the length of <code class="highlighter-rouge">history</code> must be equal to the length of <code class="highlighter-rouge">fsLayers</code> and
+entries in each are correlated by index.</p>
+</blockquote>
+
+<h2 id="signed-manifests">Signed Manifests</h2>
+
+<p>Signed manifests provides an envelope for a signed image manifest.  A signed
+manifest consists of an image manifest along with an additional field
+containing the signature of the manifest.</p>
+
+<p>The docker client can verify signed manifests and displays a message to the user.</p>
+
+<h3 id="signing-manifests">Signing Manifests</h3>
+
+<p>Image manifests can be signed in two different ways: with a <em>libtrust</em> private
+ key or an x509 certificate chain.  When signing with an x509 certificate chain,
+ the public key of the first element in the chain must be the public key
+ corresponding with the sign key.</p>
+
+<h3 id="signed-manifest-field-description">Signed Manifest Field Description</h3>
+
+<p>Signed manifests include an image manifest and a list of signatures generated
+by <em>libtrust</em>.  A signature consists of the following fields:</p>
+
+<ul>
+  <li>
+    <p><strong><code class="highlighter-rouge">header</code></strong> <em><a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-31#section-2">JOSE</a></em></p>
+
+    <p>A <a href="http://self-issued.info/docs/draft-ietf-jose-json-web-signature.html">JSON Web Signature</a></p>
+  </li>
+  <li>
+    <p><strong><code class="highlighter-rouge">signature</code></strong> <em>string</em></p>
+
+    <p>A signature for the image manifest, signed by a <em>libtrust</em> private key</p>
+  </li>
+  <li>
+    <p><strong><code class="highlighter-rouge">protected</code></strong> <em>string</em></p>
+
+    <p>The signed protected header</p>
+  </li>
+</ul>
+
+<h2 id="example-manifest">Example Manifest</h2>
+
+<p><em>Example showing the official ‘hello-world’ image manifest.</em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+   "name": "hello-world",
+   "tag": "latest",
+   "architecture": "amd64",
+   "fsLayers": [
+      {
+         "blobSum": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+         "blobSum": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+         "blobSum": "sha256:cc8567d70002e957612902a8e985ea129d831ebe04057d88fb644857caa45d11"
+      },
+      {
+         "blobSum": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      }
+   ],
+   "history": [
+      {
+         "v1Compatibility": "{\"id\":\"e45a5af57b00862e5ef5782a9925979a02ba2b12dff832fd0991335f4a11e5c5\",\"parent\":\"31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\",\"created\":\"2014-12-31T22:57:59.178729048Z\",\"container\":\"27b45f8fb11795b52e9605b686159729b0d9ca92f76d40fb4f05a62e19c46b4f\",\"container_config\":{\"Hostname\":\"8ce6509d66e2\",\"Domainname\":\"\",\"User\":\"\",\"Memory\":0,\"MemorySwap\":0,\"CpuShares\":0,\"Cpuset\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"PortSpecs\":null,\"ExposedPorts\":null,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":[\"/bin/sh\",\"-c\",\"#(nop) CMD [/hello]\"],\"Image\":\"31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"NetworkDisabled\":false,\"MacAddress\":\"\",\"OnBuild\":[],\"SecurityOpt\":null,\"Labels\":null},\"docker_version\":\"1.4.1\",\"config\":{\"Hostname\":\"8ce6509d66e2\",\"Domainname\":\"\",\"User\":\"\",\"Memory\":0,\"MemorySwap\":0,\"CpuShares\":0,\"Cpuset\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"PortSpecs\":null,\"ExposedPorts\":null,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":[\"/hello\"],\"Image\":\"31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"NetworkDisabled\":false,\"MacAddress\":\"\",\"OnBuild\":[],\"SecurityOpt\":null,\"Labels\":null},\"architecture\":\"amd64\",\"os\":\"linux\",\"Size\":0}\n"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"e45a5af57b00862e5ef5782a9925979a02ba2b12dff832fd0991335f4a11e5c5\",\"parent\":\"31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\",\"created\":\"2014-12-31T22:57:59.178729048Z\",\"container\":\"27b45f8fb11795b52e9605b686159729b0d9ca92f76d40fb4f05a62e19c46b4f\",\"container_config\":{\"Hostname\":\"8ce6509d66e2\",\"Domainname\":\"\",\"User\":\"\",\"Memory\":0,\"MemorySwap\":0,\"CpuShares\":0,\"Cpuset\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"PortSpecs\":null,\"ExposedPorts\":null,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":[\"/bin/sh\",\"-c\",\"#(nop) CMD [/hello]\"],\"Image\":\"31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"NetworkDisabled\":false,\"MacAddress\":\"\",\"OnBuild\":[],\"SecurityOpt\":null,\"Labels\":null},\"docker_version\":\"1.4.1\",\"config\":{\"Hostname\":\"8ce6509d66e2\",\"Domainname\":\"\",\"User\":\"\",\"Memory\":0,\"MemorySwap\":0,\"CpuShares\":0,\"Cpuset\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"PortSpecs\":null,\"ExposedPorts\":null,\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"],\"Cmd\":[\"/hello\"],\"Image\":\"31cbccb51277105ba3ae35ce33c22b69c9e3f1002e76e4c736a2e8ebff9d7b5d\",\"Volumes\":null,\"WorkingDir\":\"\",\"Entrypoint\":null,\"NetworkDisabled\":false,\"MacAddress\":\"\",\"OnBuild\":[],\"SecurityOpt\":null,\"Labels\":null},\"architecture\":\"amd64\",\"os\":\"linux\",\"Size\":0}\n"
+      },
+   ],
+   "schemaVersion": 1,
+   "signatures": [
+      {
+         "header": {
+            "jwk": {
+               "crv": "P-256",
+               "kid": "OD6I:6DRK:JXEJ:KBM4:255X:NSAA:MUSF:E4VM:ZI6W:CUN2:L4Z6:LSF4",
+               "kty": "EC",
+               "x": "3gAwX48IQ5oaYQAYSxor6rYYc_6yjuLCjtQ9LUakg4A",
+               "y": "t72ge6kIA1XOjqjVoEOiPPAURltJFBMGDSQvEGVB010"
+            },
+            "alg": "ES256"
+         },
+         "signature": "XREm0L8WNn27Ga_iE_vRnTxVMhhYY0Zst_FfkKopg6gWSoTOZTuW4rK0fg_IqnKkEKlbD83tD46LKEGi5aIVFg",
+         "protected": "eyJmb3JtYXRMZW5ndGgiOjY2MjgsImZvcm1hdFRhaWwiOiJDbjAiLCJ0aW1lIjoiMjAxNS0wNC0wOFQxODo1Mjo1OVoifQ"
+      }
+   ]
+}
+
+</code></pre></div></div>
 
                             <!-- tags -->
                             
+                                <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=registry">registry</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=on-prem">on-prem</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=tags">tags</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=repository">repository</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=distribution">distribution</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=api">api</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=advanced">advanced</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=manifest">manifest</a></span>
                                 
                             
                             <div id="ratings-div" style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
@@ -273,9 +367,9 @@ https://github.com/docker/cli
                                 <script type="text/javascript">
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
-                                        "unique_id": "engine/reference/commandline/deploy.md",
-                                        "title": "docker deploy",
-                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/reference/commandline/deploy.md"
+                                        "unique_id": "registry/spec/manifest-v2-1.md",
+                                        "title": "Image Manifest V 2, Schema 1 ",
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/registry/spec/manifest-v2-1.md"
                                     };
                                     (function(d, c, j) {
                                         if (!document.getElementById(j)) {
@@ -307,8 +401,8 @@ https://github.com/docker/cli
                                 <div class="feedback-links">
                                     <ul>
                                         
-                                        <li style="visibility: hidden"><a href="https://github.com/docker/docker.github.io/edit/master/engine/reference/commandline/deploy.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [engine/reference/commandline/deploy.md](https://docs.docker.com/engine/reference/commandline/deploy/)"
+                                        <li style="visibility: hidden"><a href="https://github.com/docker/docker.github.io/edit/master/registry/spec/manifest-v2-1.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [registry/spec/manifest-v2-1.md](https://docs.docker.com/registry/spec/manifest-v2-1/)"
                                                             class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
                                         <!-- toggle mode -->
                                         <li>
@@ -333,8 +427,14 @@ https://github.com/docker/cli
                                 <div id="side-toc-title">本ページ内:</div>
                                     
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#description" class="nomunge">説明</a></li>
-  <li><a href="#related-commands" class="nomunge">関連コマンド</a></li>
+  <li><a href="#manifest-field-descriptions" class="nomunge">Manifest Field Descriptions</a></li>
+  <li><a href="#signed-manifests" class="nomunge">Signed Manifests</a>
+    <ul>
+      <li><a href="#signing-manifests" class="nomunge">Signing Manifests</a></li>
+      <li><a href="#signed-manifest-field-description" class="nomunge">Signed Manifest Field Description</a></li>
+    </ul>
+  </li>
+  <li><a href="#example-manifest" class="nomunge">Example Manifest</a></li>
 </ul>
 
 
@@ -442,7 +542,7 @@ https://github.com/docker/cli
     if (jekyllEnv === 'development') {
         jekyllEnv = '';
     }
-    var pageURL = jekyllEnv + '/engine/reference/commandline/deploy/';
+    var pageURL = jekyllEnv + '/registry/spec/manifest-v2-1/';
     </script>
     <script src="/docs.docker.jp.onthefly/js/archive.js"></script>
     <script src="/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
