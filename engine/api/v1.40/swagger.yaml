@@ -24,15 +24,15 @@ info:
   title: "Docker Engine API"
   version: "1.40"
   x-logo:
-    url: "https://docs.docker.com/images/logo-docker-main.png"
+    url: "__URL____BASEURL__/images/logo-docker-main.png"
   description: |
-    The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.
+    Engine API は Docker Engine により提供される HTTP API です。これは Docker クライアントが Engine との通信において利用している API です。したがって Docker クライアントが行っていることは、すべて API を使って行うことができます。
 
-    Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.
+    クライアントコマンドは、ほとんどが API エンドポイントに直接対応づけられています（`docker ps` は `GET /containers/json` に）。 明らかに例外となるのが実行中のコンテナーであり、これはいくつもの API 呼び出しによって構成されています。
 
-    # Errors
+    # エラー
 
-    The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:
+    API は標準的な HTTP ステータスコードを用いて、API 呼び出しの成功や失敗を示します。レスポンスの本体は以下のような JSON フォーマットです。
 
     ```
     {
@@ -40,30 +40,28 @@ info:
     }
     ```
 
-    # Versioning
+    # バージョン指定
 
-    The API is usually changed in each release, so API calls are versioned to
-    ensure that clients don't break. To lock to a specific version of the API,
-    you prefix the URL with its version, for example, call `/v1.30/info` to use
-    the v1.30 version of the `/info` endpoint. If the API version specified in
-    the URL is not supported by the daemon, a HTTP `400 Bad Request` error message
-    is returned.
+    API は各リリースごとに更新されるのが通常です。
+    そこで API 呼び出しはバージョンづけされており、クライアントが停止しないようにしています。
+    API の特定バージョンを指定するには URL 指定の前にバージョン番号をつけます。
+    たとえばエンドポイント `/info` をバージョン v1.30 で呼び出すには `/v1.30/info` とします。
+    URL のなかに指定された API バージョンがデーモンにおいてサポートされていない場合、HTTP のエラーメッセージ `400 Bad Request` が返されます。
 
-    If you omit the version-prefix, the current version of the API (v1.40) is used.
-    For example, calling `/info` is the same as calling `/v1.40/info`. Using the
-    API without a version-prefix is deprecated and will be removed in a future release.
+    バージョン指定をつけなかった場合は、現行最新の API（v1.40）が用いられます。
+    たとえば `/info` という呼び出しは `/v1.40/info` と同じです。
+    バージョン指定のない API 呼び出しは廃止予定になっており、将来のリリースにおいて削除されます。
 
-    Engine releases in the near future should support this version of the API,
-    so your client will continue to work even if it is talking to a newer Engine.
+    今後の Engine リリースにおいても、しばらくは本バージョンの API がサポートされます。
+    したがって Engine がより最新のものに更新されても、クライアントは動作するはずです
 
-    The API uses an open schema model, which means server may add extra properties
-    to responses. Likewise, the server will ignore any extra query parameters and
-    request body properties. When you write clients, you need to ignore additional
-    properties in responses to ensure they do not break when talking to newer
-    daemons.
+    API ではオープンスキーマモデルが採用されています。
+    つまりサーバーのレスポンスには、プロパティを追加することができるということです。
+    さらにサーバーは、追加されたクエリーパラメーターやリクエスト内のプロパティを無視することもできます。
+    クライアントプログラムを構築する際に、より最新バージョンのデーモンとの間での通信を正常に行うために、時には追加のプロパティを無視することが必要になるかもしれません。
 
 
-    # Authentication
+    # 認証
 
     Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:
 
