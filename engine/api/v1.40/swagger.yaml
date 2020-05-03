@@ -63,7 +63,11 @@ info:
 
     # 認証
 
-    Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:
+    レジストリに対する認証処理はクライアントサイドで行われます。
+    クライアントは認証に関するさまざまな情報をエンドポイントに送信する必要があります。
+    たとえば `POST /images/(name)/push` などのようにして、レジストリとの通信を行うエンドポイントを扱います。
+    このような情報は Base64 によりエンコードされた (JSON) 文字列による `X-Registry-Auth` ヘッダーとして送信されます。
+    その構造は以下のようになります。
 
     ```
     {
@@ -74,9 +78,10 @@ info:
     }
     ```
 
-    The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.
+    `serveraddress` はプロトコル指定を含まないドメイン名または IP です。
+    上記の書式は、各項目をダブルクォートでくくる必要があります。
 
-    If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:
+    アイデンティティトークンを [`/auth` エンドポイント](#operation/SystemAuth) から取得している場合、認証情報の代わりにこれを受け渡すことができます。
 
     ```
     {
@@ -94,16 +99,16 @@ info:
 tags:
   # Primary objects
   - name: "Container"
-    x-displayName: "Containers"
+    x-displayName: "コンテナー"
     description: |
-      Create and manage containers.
-  - name: "Image"
+      コンテナーの生成と管理
+  - name: "イメージ"
     x-displayName: "Images"
-  - name: "Network"
+  - name: "ネットワーク"
     x-displayName: "Networks"
     description: |
       Networks are user-defined networks that containers can be attached to. See the [networking documentation](https://docs.docker.com/engine/userguide/networking/) for more information.
-  - name: "Volume"
+  - name: "ボリューム"
     x-displayName: "Volumes"
     description: |
       Create and manage persistent storage that can be attached to containers.
@@ -4408,7 +4413,7 @@ definitions:
 paths:
   /containers/json:
     get:
-      summary: "List containers"
+      summary: "コンテナーの一覧出力"
       description: |
         Returns a list of containers. For details on the format, see [the inspect endpoint](#operation/ContainerInspect).
 
@@ -6266,7 +6271,7 @@ paths:
       tags: ["Container"]
   /images/json:
     get:
-      summary: "List Images"
+      summary: "イメージの一覧出力"
       description: "Returns a list of images on the server. Note that it uses a different, smaller representation of an image than inspecting a single image."
       operationId: "ImageList"
       produces:
