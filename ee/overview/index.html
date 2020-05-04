@@ -60,14 +60,14 @@
     <meta name="twitter:domain" content="docs.docker.com"/>
     <meta name="twitter:site" content="@docker_docs"/>
     <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-    <meta name="twitter:title" itemprop="title name" content="Deploy a Sample Application with Sticky Sessions (Experimental)"/>
-    <meta name="twitter:description" property="og:description" itemprop="description" content="This topic applies to Docker Enterprise. The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition..." />
+    <meta name="twitter:title" itemprop="title name" content="Docker Enterprise"/>
+    <meta name="twitter:description" property="og:description" itemprop="description" content="The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker Enterprise is the only independent container platform that enables developers to seamlessly build and share any..." />
     <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
     <meta name="twitter:image:alt" content="Docker ドキュメント"/>
     <meta property="article:published_time" itemprop="datePublished" content="2020-05-04T22:52:55+09:00"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="ucp, cluster, ingress, kubernetes">
+    <meta name="keywords" content="Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes">
     <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
     <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
     <link id="pygments" rel="stylesheet" href="/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -76,15 +76,15 @@
     <!-- Go get "Open Sans" font from Google -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- SEO stuff -->
-    <title>Deploy a Sample Application with Sticky Sessions (Experimental) | Docker ドキュメント</title>
-    <meta property="og:title" content="Deploy a Sample Application with Sticky Sessions (Experimental)" />
+    <title>Docker Enterprise | Docker ドキュメント</title>
+    <meta property="og:title" content="Docker Enterprise" />
     <meta property="og:locale" content="ja_JP" />
-    <meta name="description" content="Learn how to use cookies with Ingress host and path routing." />
-    <meta property="og:description" content="Learn how to use cookies with Ingress host and path routing." />
-    <link rel="canonical" href="/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/sticky/" />
-    <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/sticky/" />
+    <meta name="description" content="Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure." />
+    <meta property="og:description" content="Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure." />
+    <link rel="canonical" href="/docs.docker.jp.onthefly/ee/overview/" />
+    <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ee/overview/" />
     <meta property="og:site_name" content="Docker ドキュメント" />
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Deploy a Sample Application with Sticky Sessions (Experimental)","description":"Learn how to use cookies with Ingress host and path routing.","url":"https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/sticky/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Enterprise","description":"Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure.","url":"https://docs.docker.com/ee/overview/"}</script>
     <!-- END SEO STUFF -->
     
     <script>
@@ -155,121 +155,194 @@
                         <section class="section">
                             
                                 
-                            <h1>Deploy a Sample Application with Sticky Sessions (Experimental)</h1>  <span class="reading-time" title="Estimated reading time">
+                            <h1>Docker Enterprise</h1>  <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
 
                             
                             
-                            <blockquote>
-  <!-- This text will be included on all Docker pages that document Enterprise products, features, and technologies that are transitioning to Mirantis. -->
-  <p>This topic applies to Docker Enterprise.</p>
+                            <p>The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker Enterprise is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.</p>
 
-  <p>The Docker Enterprise platform business, including products, customers, and employees, has been acquired by Mirantis, inc., effective 13-November-2019. For more information on the acquisition and how it may affect you and your business, refer to the <a href="https://www.docker.com/faq-for-docker-enterprise-customers-and-partners">Docker Enterprise Customer FAQ</a>.</p>
-</blockquote>
+<p>Docker Enterprise enables deploying highly available workloads using either the Docker Kubernetes Service or Docker Swarm. Docker Enterprise automates many of the tasks that orchestration requires, like provisioning pods, containers, and cluster
+resources. Self-healing components ensure that Docker Enterprise clusters remain highly available.</p>
 
-<!-- This text will be included in the docs that are marked as experimental -->
+<p>Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
+communication within the cluster is secured with TLS.
+<a href="/engine/security/trust/content_trust/">Docker Content Trust</a> is enforced
+for images on all of the orchestrators.</p>
 
-<p>Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.</p>
+<p>Docker Enterprise includes Docker Universal Control Plane (UCP), the
+cluster management solution from Docker. UCP can be installed
+on-premises or in your public cloud of choice, and helps manage your
+cluster and applications through a single interface.</p>
 
-<h2 id="overview">Overview</h2>
+<p><img src="images/docker-ee-overview-1.png" alt="" class="with-border" /></p>
 
-<p>With persistent sessions, the Ingress controller can use a predetermined header
-or dynamically generate a HTTP header cookie for a client session to use, so
-that a clients requests are sent to the same back end.</p>
+<h3 id="docker-kubernetes-service">Docker Kubernetes Service</h3>
 
-<blockquote>
-  <p>Note</p>
+<p>The Docker Kubernetes Service fully supports all Docker Enterprise features, including role-based access control, LDAP/AD integration, image scanning and signing enforcement policies, and security policies.</p>
 
-  <p>This guide assumes the <a href="/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/ingress/">Deploy Sample Application</a>
-tutorial was followed, with the artifacts still running on the cluster. If
-they are not, please go back and follow this guide.</p>
-</blockquote>
-
-<p>This is specified within the Istio Object <code class="highlighter-rouge">DestinationRule</code> via a
-<code class="highlighter-rouge">TrafficPolicy</code> for a given host. In the following example configuration,
-consistentHash is chosen as the load balancing method and a cookie named
-“session” is used to determine the consistent hash. If incoming requests do not
-have the “session” cookie set, the Ingress proxy sets it for use in future
-requests.</p>
-
-<blockquote>
-  <p>Note</p>
-
-  <p>A Kubernetes manifest file with an updated DestinationRule can be found <a href="/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-sticky.yaml">here</a>.</p>
-</blockquote>
-
-<ol>
-  <li>Source a <a href="/ee/ucp/user-access/cli/">UCP Client Bundle</a> attached to a cluster with Cluster Ingress installed.</li>
-  <li>Download the sample Kubernetes manifest file.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://raw.githubusercontent.com/docker/docker.github.io/master/ee/ucp/kubernetes/cluster-ingress/yaml/ingress-sticky.yaml
-</code></pre></div>    </div>
-  </li>
-  <li>Deploy the Kubernetes manifest file with the new DestinationRule. This file includes the consistentHash loadBalancer policy.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl apply <span class="nt">-f</span> ingress-sticky.yaml
-</code></pre></div>    </div>
-  </li>
-  <li>Curl the service to view how requests are load balanced without using cookies. In this example, requests are bounced between different v1 services.</li>
-</ol>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># Public IP Address of a Worker or Manager VM in the Cluster</span>
-  <span class="nv">$ IPADDR</span><span class="o">=</span>51.141.127.241
-
-  <span class="c"># Node Port</span>
-  <span class="nv">$ PORT</span><span class="o">=</span><span class="k">$(</span>kubectl get service demo-service <span class="nt">--output</span> <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.ports[?(@.name=="http")].nodePort}'</span><span class="k">)</span>
-
-  <span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span><span class="p">;</span> <span class="k">do </span>curl <span class="nt">-H</span> <span class="s2">"Host: demo.example.com"</span> http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/ping<span class="p">;</span> <span class="k">done</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-gfwzj"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"b40a0294-2629-413b-b876-76b59d72189b"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"721fe4ba-a785-484a-bba0-627ee6e47188"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-gfwzj"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"77ed801b-81aa-4c02-8cc9-7e3bd3244807"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-gfwzj"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"36d8aaed-fcdf-4489-a85e-76ea96949d6c"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"4693b6ad-286b-4470-9eea-c8656f6801ae"</span><span class="o">}</span>
-</code></pre></div></div>
-
-<p>Now curl again and inspect the headers returned from the proxy.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>curl <span class="nt">-i</span> <span class="nt">-H</span> <span class="s2">"Host: demo.example.com"</span> http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/ping
-  HTTP/1.1 200 OK
-  set-cookie: <span class="nv">session</span><span class="o">=</span>1555389679134464956<span class="p">;</span> <span class="nv">Path</span><span class="o">=</span>/<span class="p">;</span> <span class="nv">Expires</span><span class="o">=</span>Wed, 17 Apr 2019 04:41:19 GMT<span class="p">;</span> Max-Age<span class="o">=</span>86400
-  date: Tue, 16 Apr 2019 04:41:18 GMT
-  content-length: 131
-  content-type: text/plain<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
-  x-envoy-upstream-service-time: 0
-  set-cookie: <span class="nv">session</span><span class="o">=</span><span class="s2">"d7227d32eeb0524b"</span><span class="p">;</span> Max-Age<span class="o">=</span>60<span class="p">;</span> HttpOnly
-  server: istio-envoy
-
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"011d5fdf-2285-4ce7-8644-c2df6481c584"</span><span class="o">}</span>
-</code></pre></div></div>
-
-<p>The Ingress proxy sets a 60 second TTL cookie named <code class="highlighter-rouge">session</code> on this HTTP request. A browser or other client application can use that value in future
-requests.</p>
-
-<p>Now curl the service again using the flags that save cookies persistently across sessions. The header information shows the session is being set,
-persisted across requests, and that for a given session header, the responses are coming from the same back end.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span><span class="p">;</span> <span class="k">do </span>curl <span class="nt">-c</span> cookie.txt <span class="nt">-b</span> cookie.txt <span class="nt">-H</span> <span class="s2">"Host: demo.example.com"</span> http://<span class="nv">$IPADDR</span>:<span class="nv">$PORT</span>/ping<span class="p">;</span> <span class="k">done</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"72b35296-d6bd-462a-9e62-0bd0249923d7"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"c8872f6c-f77c-4411-aed2-d7aa6d1d92e9"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"0e7b8725-c550-4923-acea-db94df1eb0e4"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"9996fe77-8260-4225-89df-0eaf7581e961"</span><span class="o">}</span>
-  <span class="o">{</span><span class="s2">"instance"</span>:<span class="s2">"demo-v1-7797b7c7c8-kw6gp"</span>,<span class="s2">"version"</span>:<span class="s2">"v1"</span>,<span class="s2">"metadata"</span>:<span class="s2">"production"</span>,<span class="s2">"request_id"</span>:<span class="s2">"d35c380e-31d6-44ce-a5d0-f9f6179715ab"</span><span class="o">}</span>
-</code></pre></div></div>
-
-<p>When the HTTP uses the cookie that is set by the Ingress proxy, all requests are sent to the same back end, <code class="highlighter-rouge">demo-v1-7797b7c7c8-kw6gp</code>.</p>
-
-<h2 id="where-to-go-next">Where to go next</h2>
+<p>Docker Kubernetes Services features include:</p>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/ee/ucp/kubernetes/cluster-ingress/ingress/">Cluster Ingress Overview</a></li>
+  <li>Kubernetes orchestration full feature set</li>
+  <li>CNCF Certified Kubernetes conformance</li>
+  <li>Kubernetes app deployment via UCP web UI or CLI (<code class="highlighter-rouge">kubectl</code>)</li>
+  <li>Compose stack deployment for Swarm and Kubernetes apps (<code class="highlighter-rouge">docker stack deploy</code>)</li>
+  <li>Role-based access control for Kubernetes workloads</li>
+  <li>Blue-Green deployments, for load balancing to different app versions</li>
+  <li>Ingress Controllers with Kubernetes L7 routing</li>
+  <li><a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/">Pod Security Policies</a> to define a set of conditions that a pod must run with in order to be accepted into the system
+    <ul>
+      <li>Note: Pod Security Policies are currently <code class="highlighter-rouge">Beta</code> status in Kubernetes 1.14</li>
+    </ul>
+  </li>
+  <li>Container Storage Interface (CSI) support</li>
+  <li>iSCSI support for Kubernetes</li>
+  <li>Non-disruptive Docker Enterprise platform upgrades (blue-green upgrades)</li>
+  <li>Experimental features (planned for full GA in subsequent Docker Enterprise releases):
+    <ul>
+      <li>Kubernetes-native ingress (Istio)</li>
+    </ul>
+  </li>
 </ul>
+
+<p>In addition, UCP integrates with Kubernetes by using admission controllers,
+which enable:</p>
+
+<ul>
+  <li>Authenticating user client bundle certificates when communicating directly
+with the Kubernetes API server</li>
+  <li>Authorizing requests via the UCP role-based access control model</li>
+  <li>Assigning nodes to a namespace by injecting a <code class="highlighter-rouge">NodeSelector</code> automatically
+to workloads via admission control</li>
+  <li>Keeping all nodes in both Kubernetes and Swarm orchestrator inventories</li>
+  <li>Fine-grained access control and privilege escalation prevention without
+the <code class="highlighter-rouge">PodSecurityPolicy</code> admission controller</li>
+  <li>Resolving images of deployed workloads automatically, and accepting or
+rejecting images based on UCP’s signing-policy feature</li>
+</ul>
+
+<p>The default Docker Enterprise installation includes both Kubernetes and Swarm
+components across the cluster, so every newly joined worker node is ready
+to schedule Kubernetes or Swarm workloads.</p>
+
+<h3 id="orchestration-platform-features">Orchestration platform features</h3>
+
+<p><img src="images/docker-ee-overview-4.png" alt="" class="with-border" /></p>
+
+<ul>
+  <li>Docker Enterprise manager nodes are both Swarm managers and Kubernetes masters,
+to enable high availability</li>
+  <li>Allocate worker nodes for Swarm or Kubernetes workloads (or both)</li>
+  <li>Single pane of glass for monitoring apps</li>
+  <li>Enhanced Swarm hostname routing mesh with Interlock 2.0</li>
+  <li>One platform-wide management plane: secure software supply chain, secure
+multi-tenancy, and secure and highly available node management</li>
+</ul>
+
+<h3 id="secure-supply-chain">Secure supply chain</h3>
+
+<p><img src="images/docker-ee-overview-3.png" alt="" class="with-border" /></p>
+
+<ul>
+  <li>DTR support for the Docker App format, based on the <a href="https://cnab.io">CNAB</a> specification
+    <ul>
+      <li>Note: Docker Apps can be deployed to clusters managed by UCP, where they will be displayed as <em>Stacks</em></li>
+    </ul>
+  </li>
+  <li>Image signing and scanning of Kubernetes and Swarm images and Docker Apps for validating and verifying content</li>
+  <li>Image promotion with mirroring between registries as well as Docker Hub</li>
+  <li>Define policies for automating image promotions across the app development
+lifecycle of Kubernetes and Swarm apps</li>
+</ul>
+
+<h3 id="centralized-cluster-management">Centralized cluster management</h3>
+
+<p>With Docker, you can join thousands of physical or virtual machines
+together to create a cluster, allowing you to deploy your
+applications at scale. Docker Enterprise extends the functionality provided by Docker
+Engine to make it easier to manage your cluster from a centralized place.</p>
+
+<p>You can manage and monitor your container cluster using a graphical web interface.</p>
+
+<h3 id="deploy-manage-and-monitor">Deploy, manage, and monitor</h3>
+
+<p>With Docker Enterprise, you can manage all of the infrastructure
+resources you have available, like nodes, volumes, and networks, from a central console.</p>
+
+<p>You can also deploy and monitor your applications and services.</p>
+
+<h3 id="built-in-security-and-access-control">Built-in security and access control</h3>
+
+<p>Docker Enterprise has its own built-in authentication mechanism with role-based access
+control (RBAC), so that you can control who can access and make changes to your
+cluster and applications. Also, Docker Enterprise authentication integrates with LDAP
+services and supports SAML SCIM to proactively synchronize with authentication providers.
+<a href="/docs.docker.jp.onthefly/ee/ucp/authorization/">Learn about role-based access control</a>. You can also opt to enable <a href="/docs.docker.jp.onthefly/ee/enable-client-certificate-authentication/">PKI authentication</a> to use client certificates, rather than username and password.</p>
+
+<p><img src="images/docker-ee-overview-2.png" alt="" class="with-border" /></p>
+
+<p>Docker Enterprise integrates with Docker Trusted Registry so that you can keep the
+Docker images you use for your applications behind your firewall, where they
+are safe and can’t be tampered with. You can also enforce security policies and only allow running applications
+that use Docker images you know and trust.</p>
+
+<h4 id="windows-application-security">Windows Application Security</h4>
+<p>Windows applications typically require Active Directory authentication in order to communicate with other services on the network. Container-based applications use Group Managed Service Accounts (gMSA) to provide this authentication. Docker Swarm fully supports the use of gMSAs with Windows containers.</p>
+
+<h2 id="docker-enterprise-and-the-cli">Docker Enterprise and the CLI</h2>
+
+<p>Docker Enterprise exposes the standard Docker API, so you can continue using the tools
+that you already know, <a href="/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">including the Docker CLI client</a>,
+to deploy and manage your applications.</p>
+
+<p>For example, you can use the <code class="highlighter-rouge">docker info</code> command to check the
+status of a Swarm managed by Docker Enterprise:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker info
+</code></pre></div></div>
+
+<p>Which produces output similar to the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Containers: 38
+Running: 23
+Paused: 0
+Stopped: 15
+Images: 17
+Server Version: 17.06
+...
+Swarm: active
+NodeID: ocpv7el0uz8g9q7dmw8ay4yps
+Is Manager: <span class="nb">true
+</span>ClusterID: tylpv1kxjtgoik2jnrg8pvkg6
+Managers: 1
+…
+</code></pre></div></div>
+
+<h2 id="use-the-kubernetes-cli">Use the Kubernetes CLI</h2>
+
+<p>Docker Enterprise exposes the standard Kubernetes API, so you can use
+<a href="/docs.docker.jp.onthefly/ee/ucp/user-access/cli/">kubectl to manage your Kubernetes workloads</a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl cluster-info
+</code></pre></div></div>
+
+<p>Which produces output similar to the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Kubernetes master is running at https://54.200.115.43:6443
+KubeDNS is running at https://54.200.115.43:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use <span class="s1">'kubectl cluster-info dump'</span><span class="nb">.</span>
+</code></pre></div></div>
 
                             <!-- tags -->
                             
-                                <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=ucp">ucp</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=ingress">ingress</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=kubernetes">kubernetes</a></span>
+                                <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=Docker Enterprise">Docker Enterprise</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=UCP">UCP</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=DTR">DTR</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=orchestration">orchestration</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=cluster">cluster</a>, <a href="https://matsuand.github.io/docs.docker.jp.onthefly/search/?q=Kubernetes">Kubernetes</a></span>
                                 
                             
                             <div id="ratings-div" style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
@@ -277,9 +350,9 @@ persisted across requests, and that for a given session header, the responses ar
                                 <script type="text/javascript">
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
-                                        "unique_id": "ee/ucp/kubernetes/cluster-ingress/sticky.md",
-                                        "title": "Deploy a Sample Application with Sticky Sessions (Experimental)",
-                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/ee/ucp/kubernetes/cluster-ingress/sticky.md"
+                                        "unique_id": "ee/overview.md",
+                                        "title": "Docker Enterprise",
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/ee/overview.md"
                                     };
                                     (function(d, c, j) {
                                         if (!document.getElementById(j)) {
@@ -311,8 +384,8 @@ persisted across requests, and that for a given session header, the responses ar
                                 <div class="feedback-links">
                                     <ul>
                                         
-                                        <li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/ee/ucp/kubernetes/cluster-ingress/sticky.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [ee/ucp/kubernetes/cluster-ingress/sticky.md](https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/sticky/)"
+                                        <li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/ee/overview.md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [ee/overview.md](https://docs.docker.com/ee/overview/)"
                                                             class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
                                         <!-- toggle mode -->
                                         <li>
@@ -337,8 +410,17 @@ persisted across requests, and that for a given session header, the responses ar
                                 <div id="side-toc-title">本ページ内:</div>
                                     
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#overview" class="nomunge">Overview</a></li>
-  <li><a href="#where-to-go-next" class="nomunge">Where to go next</a></li>
+  <li><a href="#docker-kubernetes-service" class="nomunge">Docker Kubernetes Service</a>
+    <ul>
+      <li><a href="#orchestration-platform-features" class="nomunge">Orchestration platform features</a></li>
+      <li><a href="#secure-supply-chain" class="nomunge">Secure supply chain</a></li>
+      <li><a href="#centralized-cluster-management" class="nomunge">Centralized cluster management</a></li>
+      <li><a href="#deploy-manage-and-monitor" class="nomunge">Deploy, manage, and monitor</a></li>
+      <li><a href="#built-in-security-and-access-control" class="nomunge">Built-in security and access control</a></li>
+    </ul>
+  </li>
+  <li><a href="#docker-enterprise-and-the-cli" class="nomunge">Docker Enterprise and the CLI</a></li>
+  <li><a href="#use-the-kubernetes-cli" class="nomunge">Use the Kubernetes CLI</a></li>
 </ul>
 
 
@@ -446,7 +528,7 @@ persisted across requests, and that for a given session header, the responses ar
     if (jekyllEnv === 'development') {
         jekyllEnv = '';
     }
-    var pageURL = jekyllEnv + '/ee/ucp/kubernetes/cluster-ingress/sticky/';
+    var pageURL = jekyllEnv + '/ee/overview/';
     </script>
     <script src="/docs.docker.jp.onthefly/js/archive.js"></script>
     <script src="/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
