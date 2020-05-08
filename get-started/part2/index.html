@@ -1,4 +1,4 @@
-<!-- Page generated 2020-05-04 20:51:08 +0900 -->
+<!-- Page generated 2020-05-08 22:10:35 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
     <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
     <!-- metadata -->
     <meta property="og:type" content="website"/>
-    <meta property="og:updated_time" itemprop="dateUpdated" content="2020-05-04T20:51:08+09:00"/>
+    <meta property="og:updated_time" itemprop="dateUpdated" content="2020-05-08T22:10:35+09:00"/>
     <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
     <meta name="twitter:description" property="og:description" itemprop="description" content="概要と準備 イメージの構築と実行 Docker Hub におけるイメージ共有 前提条件 1 部 でのオリエンテーション、設定をひととおり終えていること。 はじめに Docker Desktop というもののおかげで、開発環境を整えることができました。 ここからはコンテナー化されたアプリケーションを作り出していくことにします。 構築の手順は一般に以下のようになります。 初めての Docker イメージを生成した上で、アプリケーションの各コンポーネントに対応するコンテナーを生成しテストします。 コンテナーとこれを支えるインフラストラクチャーを整えて、一体となったアプリケーションとします。 完全にコンテナー化されたアプリケーションをテスト、共有しデプロイを行います。 チュートリアルのこの段階にて、1 部に示した手順として、コンテナーが生成される元となるイメージの生成について着目します。 Docker イメージは、コンテナー化されたプロセスが実行されることになる、プライベートなファイルシステムを用いることを思い出してください。 イメージを生成する際には、アプリケーション実行に必要なものだけを含んだイメージを生成するようにします。 コンテナー化開発環境 は、後述するイメージビルド方法を理解しさえすれば、従来の開発環境よりも簡単に構築することができます。 なぜならコンテナー化開発環境は、Docker イメージ内でアプリケーションが必要とするパッケージをすべて分離して扱うからです。 つまり開発マシンには..." />
     <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
     <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-    <meta property="article:published_time" itemprop="datePublished" content="2020-05-04T20:51:08+09:00"/>
+    <meta property="article:published_time" itemprop="datePublished" content="2020-05-08T22:10:35+09:00"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="containers, images, dockerfiles, node, code, coding, build, push, run">
@@ -159,7 +159,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    3 分
   
 </span>
 
@@ -318,7 +318,7 @@ Dockerfile というものには、コンテナーにはどのようなプライ
 上に示した Dockerfile ディレクティブはほんのわずかであって、まだまだたくさんのものがあります。
 ディレクティブの一覧は <a href="https://docs.docker.com/engine/reference/builder/">Dockerfile リファレンス</a> を参照してください。</p>
 
-<h2 id="build-and-test-your-image">イメージの構築とテスト</h2>
+<h2 id="build-and-test-your-image">イメージの構築と確認</h2>
 
 <p>ここにソースコードと Dockerfile の準備が整いました。
 そこで初めてのイメージビルドを行います。
@@ -331,15 +331,20 @@ Dockerfile というものには、コンテナーにはどのようなプライ
 本チュートリアルのコマンドはすべて、Windows コンテナーに対しても全く同じ方法で動作しますから、心配はいりません。</p>
 </blockquote>
 
-<p>Make sure you’re in the directory <code class="highlighter-rouge">node-bulletin-board/bulletin-board-app</code> in a terminal or PowerShell using the <code class="highlighter-rouge">cd</code> command. Let’s build your bulletin board image:</p>
+<p>端末画面あるいは PowerShell から <code class="highlighter-rouge">cd</code> コマンドを使って <code class="highlighter-rouge">node-bulletin-board/bulletin-board-app</code> ディレクトリに移動します。
+ここから掲示板アプリのイメージを作り上げていきます。</p>
 
 <pre><code class="language-script">docker build --tag bulletinboard:1.0 .
 </code></pre>
 
-<p>You’ll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message <code class="highlighter-rouge">Successfully tagged bulletinboard:1.0</code>.</p>
+<p>Docker の処理ステップは Dockerfile に記述された各命令を見ればわかります。
+命令が進むにつれてイメージが作られていきます。
+ビルド処理が正常に終了すれば、最後に <code class="highlighter-rouge">Successfully tagged bulletinboard:1.0</code> というメッセージが表示されます。</p>
 
 <blockquote>
-  <p><strong>Windows users:</strong> you may receive a message titled ‘SECURITY WARNING’ at this step, noting the read, write, and execute permissions being set for files added to your image. We aren’t handling any sensitive information in this example, so feel free to disregard the warning in this example.</p>
+  <p><strong>Windows ユーザー:</strong> この段階において、’SECURITY WARNING’ というタイトルがついたメッセージが表示される場合があります。
+そこでは、イメージ内のファイルに対して読み書きや実行の許可が設定されたことが示されます。
+ここに示す例において機密情報は何も用いませんので、この警告メッセージはここでは無視して構いません。</p>
 </blockquote>
 
 <h2 id="run-your-image-as-a-container">イメージをコンテナーとして実行</h2>
@@ -351,38 +356,55 @@ Dockerfile というものには、コンテナーにはどのようなプライ
     <pre><code class="language-script">docker run --publish 8000:8080 --detach --name bb bulletinboard:1.0
 </code></pre>
 
-    <p>There are a couple of common flags here:</p>
+    <p>ここでは、よく用いるフラグが登場します。</p>
 
     <ul>
-      <li><code class="highlighter-rouge">--publish</code> asks Docker to forward traffic incoming on the host’s port 8000, to the container’s port 8080. Containers have their own private set of ports, so if you want to reach one from the network, you have to forward traffic to it in this way. Otherwise, firewall rules will prevent all network traffic from reaching your container, as a default security posture.</li>
-      <li><code class="highlighter-rouge">--detach</code> asks Docker to run this container in the background.</li>
-      <li><code class="highlighter-rouge">--name</code> specifies a name with which you can refer to your container in subsequent commands, in this case <code class="highlighter-rouge">bb</code>.</li>
+      <li><code class="highlighter-rouge">--publish</code> は、ホストのポート 8000 への受信トラフィックをコンテナのポート 8080 に転送することを Docker に指示します。
+ コンテナーにはそれぞれに独自のポートがあります。
+ そこでネットワークからどこか 1 つにアクセスしたい場合、この方法によりトラフィックを転送する必要があります。
+ これを行っておかないとファイアウォールルールによって、コンテナーへのネットワークトラフィック転送が遮断されてしまいます。
+ これはセキュリティ上のデフォルトの動作です。</li>
+      <li><code class="highlighter-rouge">--detach</code> は Docker に対して、コンテナーをバックグラウンドで実行することを指示します。</li>
+      <li><code class="highlighter-rouge">--name</code> はコンテナー名を指定するものです。
+この後のコマンドにおいてその名称により参照されます。
+この例では <code class="highlighter-rouge">bb</code> というものにしています。</li>
     </ul>
 
-    <p>Also notice, you didn’t specify what process you wanted your container to run. You didn’t have to, as you’ve used the <code class="highlighter-rouge">CMD</code> directive when building your Dockerfile; thanks to this, Docker knows to automatically run the process <code class="highlighter-rouge">npm start</code> inside the container when it starts up.</p>
+    <p>さらに見ておくべきことは、コンテナーに対してどのようなプロセスを起動させるかを指定していない点です。
+ここでそれを行う必要はありません。
+すでに Dockerfile を生成した際に <code class="highlighter-rouge">CMD</code> ディレクティブを使っているからです。
+この仕組みによって、Docker はコンテナーが起動した際に、そのコンテナー内にて <code class="highlighter-rouge">npm start</code> というプロセスを自動起動できるようになります。</p>
   </li>
   <li>
-    <p>Visit your application in a browser at <code class="highlighter-rouge">localhost:8000</code>. You should see your bulletin board application up and running. At this step, you would normally do everything you could to ensure your container works the way you expected; now would be the time to run unit tests, for example.</p>
+    <p>ブラウザから <code class="highlighter-rouge">localhost:8000</code> を入力し、アプリケーションにアクセスします。
+掲示板アプリケーションが実行されていることが確認できます。
+ここでやりたいことを好きなようにやってみてください。
+思ったとおりにコンテナーが動作していることがわかります。
+その次にはユニットテストを行うといったこともできます。</p>
   </li>
   <li>
-    <p>Once you’re satisfied that your bulletin board container works correctly, you can delete it:</p>
+    <p>掲示板アプリのコンテナーが正しく動作したことを確認したら、コンテナーを削除します。</p>
 
     <pre><code class="language-script">docker rm --force bb
 </code></pre>
 
-    <p>The <code class="highlighter-rouge">--force</code> option removes the running container. If you stop the container running with <code class="highlighter-rouge">docker stop bb</code> you do not need to use <code class="highlighter-rouge">--force</code>.</p>
+    <p><code class="highlighter-rouge">--force</code> オプションは実行中のコンテナーを削除します。
+コンテナーを停止するだけの場合は <code class="highlighter-rouge">docker stop bb</code> とし <code class="highlighter-rouge">--force</code> をつける必要はありません。</p>
   </li>
 </ol>
 
 <h2 id="conclusion">まとめ</h2>
 
-<p>At this point, you’ve successfully built an image, performed a simple containerization of an application, and confirmed that your app runs successfully in its container. The next step will be to share your images on <a href="https://hub.docker.com/">Docker Hub</a>, so they can be easily downloaded and run on any destination machine.</p>
+<p>このようにしてイメージの構築がうまくできました。
+アプリケーションが簡単にコンテナー化されて、そのコンテナー内においてアプリケーションが正常動作することを確認できました。
+次はそのイメージを <a href="https://hub.docker.com/">Docker Hub</a> 上にて共有していきます。
+そうすればそのイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができるようになります。</p>
 
 <p><a href="/docs.docker.jp.onthefly/get-started/part3/" class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%">3 部へ &gt;&gt;</a></p>
 
 <h2 id="cli-references">CLI リファレンス</h2>
 
-<p>Further documentation for all CLI commands used in this article are available here:</p>
+<p>ここまでに示した CLI コマンドをすべて確認するには、以下を参考にしてください。</p>
 
 <ul>
   <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/image/">docker image</a></li>
@@ -470,7 +492,7 @@ Dockerfile というものには、コンテナーにはどのようなプライ
     </ul>
   </li>
   <li><a href="#dockerfile-におけるコンテナーの定義" class="nomunge">Dockerfile におけるコンテナーの定義</a></li>
-  <li><a href="#build-and-test-your-image" class="nomunge">イメージの構築とテスト</a></li>
+  <li><a href="#build-and-test-your-image" class="nomunge">イメージの構築と確認</a></li>
   <li><a href="#run-your-image-as-a-container" class="nomunge">イメージをコンテナーとして実行</a></li>
   <li><a href="#conclusion" class="nomunge">まとめ</a></li>
   <li><a href="#cli-references" class="nomunge">CLI リファレンス</a></li>
