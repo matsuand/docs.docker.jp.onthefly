@@ -239,6 +239,13 @@ var pages = [
 }
 ,
 {
+"url":"/desktop/enterprise/app-designer/",
+"title":"Application Designer",
+"description":"Docker Desktop Enterprise Application Designer",
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer"
+}
+,
+{
 "url":"/ee/desktop/app-designer/",
 "title":"Application Designer",
 "description":"Docker Desktop Enterprise Application Designer",
@@ -1457,6 +1464,13 @@ var pages = [
 }
 ,
 {
+"url":"/desktop/dashboard/",
+"title":"Docker Desktop ダッシュボード",
+"description":"Docker Desktop ダッシュボード",
+"keywords":"Docker Desktop Dashboard, container view"
+}
+,
+{
 "url":"/docker-hub/deactivate-account/",
 "title":"Deactivating an account or an organization",
 "description":"Learn how to deactivate a Docker Hub account or an organization",
@@ -2452,7 +2466,7 @@ var pages = [
 ,
 {
 "url":"/engine/install/",
-"title":"Install Docker Engine",
+"title":"Docker Engine のインストール",
 "description":"Lists the installation methods",
 "keywords":"docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge"
 }
@@ -2532,6 +2546,20 @@ var pages = [
 "title":"Samples",
 "description":null,
 "keywords":null
+}
+,
+{
+"url":"/desktop/enterprise/",
+"title":"Docker Desktop Enterprise overview",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/desktop/",
+"title":"Docker Desktop overview",
+"description":"Docker Desktop overview",
+"keywords":"Desktop, Docker, GUI, run, docker, local, machine"
 }
 ,
 {
@@ -2920,6 +2948,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-windows/install-windows-home/",
+"title":"Install Docker Desktop on Windows Home",
+"description":"How to install Docker Desktop on Windows 10 Home",
+"keywords":"Windows 10 Home, Home, Windows, install, download, run, Docker, local"
+}
+,
+{
 "url":"/reference/dtr/2.7/cli/install/",
 "title":"docker/dtr install",
 "description":"Install Docker Trusted Registry",
@@ -3305,10 +3340,24 @@ var pages = [
 }
 ,
 {
+"url":"/desktop/enterprise/admin/configure/mac-admin/",
+"title":"Configure Docker Desktop Enterprise on Mac",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
 "url":"/ee/desktop/admin/configure/mac-admin/",
 "title":"Configure Docker Desktop Enterprise on Mac",
 "description":"Learn about Docker Desktop Enterprise",
 "keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/desktop/enterprise/troubleshoot/mac-issues/",
+"title":"Troubleshoot Docker Desktop Enterprise issues on Mac",
+"description":"Troubleshoot Mac issues",
+"keywords":"Troubleshoot, diagnose, Mac, issues, Docker Enterprise, Docker Desktop, Enterprise"
 }
 ,
 {
@@ -3319,10 +3368,24 @@ var pages = [
 }
 ,
 {
+"url":"/desktop/enterprise/user/mac-user/",
+"title":"Use Docker Desktop Enterprise on Mac",
+"description":null,
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
 "url":"/ee/desktop/user/mac-user/",
 "title":"Use Docker Desktop Enterprise on Mac",
 "description":null,
 "keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/desktop/enterprise/admin/install/mac/",
+"title":"Install Docker Desktop Enterprise on Mac",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Mac, Docker Desktop, Enterprise"
 }
 ,
 {
@@ -3760,6 +3823,13 @@ var pages = [
 }
 ,
 {
+"url":"/desktop/opensource/",
+"title":"オープンソースコンポーネントとライセンス",
+"description":"Docker's use of Open Source",
+"keywords":"docker, opensource"
+}
+,
+{
 "url":"/ee/docker-ee/oracle/",
 "title":"Get Docker Engine - Enterprise for Oracle Linux",
 "description":"Instructions for installing Docker Engine - Enterprise on Oracle Linux",
@@ -3855,6 +3925,13 @@ var pages = [
 "title":"Docker 概要",
 "description":"Docker explained in depth",
 "keywords":"docker, introduction, documentation, about, technology, understanding"
+}
+,
+{
+"url":"/ee/overview/",
+"title":"Docker Enterprise",
+"description":"Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure.",
+"keywords":"Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes"
 }
 ,
 {
@@ -4019,6 +4096,13 @@ var pages = [
 }
 ,
 {
+"url":"/ee/ucp/kubernetes/pod-security-policies/",
+"title":"Use Pod Security Policies in UCP",
+"description":"Learn how to use Pod Security Policies to lock down Kubernetes as part of Universal Control Plane.",
+"keywords":"UCP, Kubernetes, psps, pod security policies"
+}
+,
+{
 "url":"/reference/ucp/3.2/cli/port-check-server/",
 "title":"docker/ucp port-check-server",
 "description":"Check the firewall ports for UCP",
@@ -4090,8 +4174,8 @@ var pages = [
 ,
 {
 "url":"/config/pruning/",
-"title":"未使用 Docker オブジェクトの取り除き (prune)",
-"description":"Pruning unused objects",
+"title":"未使用 Docker オブジェクトの取り除き",
+"description":"未使用オブジェクトを取り除く。",
 "keywords":"pruning, prune, images, volumes, containers, networks, disk, administration, garbage collection"
 }
 ,
@@ -4331,6 +4415,13 @@ var pages = [
 "title":"Docker for Mac Stable release notes",
 "description":"Change log / release notes per Stable release",
 "keywords":"Docker Desktop for Mac, stable, release notes"
+}
+,
+{
+"url":"/desktop/enterprise/release-notes/",
+"title":"Docker Desktop Enterprise release notes",
+"description":"Release notes for Docker Desktop Enterprise",
+"keywords":"Docker Desktop Enterprise, Windows, Mac, Docker Desktop, Enterprise,"
 }
 ,
 {
@@ -5923,10 +6014,24 @@ var pages = [
 }
 ,
 {
+"url":"/desktop/enterprise/admin/configure/windows-admin/",
+"title":"Configure Docker Desktop Enterprise on Windows",
+"description":"Learn about Docker Desktop Enterprise configuration",
+"keywords":"Docker Admin, Windows, Docker Desktop, Enterprise"
+}
+,
+{
 "url":"/ee/desktop/admin/configure/windows-admin/",
 "title":"Configure Docker Desktop Enterprise on Windows",
 "description":"Learn about Docker Desktop Enterprise configuration",
 "keywords":"Docker Admin, Windows, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/desktop/enterprise/troubleshoot/windows-issues/",
+"title":"Troubleshoot Docker Desktop Enterprise issues on Windows",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Docker Desktop, Enterprise, troubleshoot"
 }
 ,
 {
@@ -5937,10 +6042,24 @@ var pages = [
 }
 ,
 {
+"url":"/desktop/enterprise/user/windows-user/",
+"title":"Use Docker Desktop Enterprise on Windows",
+"description":"Exploring the Windows user interface",
+"keywords":"Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, User guide, user"
+}
+,
+{
 "url":"/ee/desktop/user/windows-user/",
 "title":"Use Docker Desktop Enterprise on Windows",
 "description":"Exploring the Windows user interface",
 "keywords":"Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, User guide, user"
+}
+,
+{
+"url":"/desktop/enterprise/admin/install/windows/",
+"title":"Install Docker Desktop Enterprise on Windows",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Docker Desktop, Enterprise"
 }
 ,
 {
@@ -5960,7 +6079,7 @@ var pages = [
 {
 "url":"/app/working-with-app/",
 "title":"Docker App",
-"description":"Learn about Docker App",
+"description":"Docker App について",
 "keywords":"Docker App, applications, compose, orchestration"
 }
 ,
