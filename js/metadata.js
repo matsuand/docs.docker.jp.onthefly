@@ -6105,6 +6105,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-windows/wsl/",
+"title":"Docker Desktop WSL 2 backend",
+"description":"Docker Desktop WSL 2 backend",
+"keywords":"WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker"
+}
+,
+{
 "url":"/storage/storagedriver/zfs-driver/",
 "title":"Use the ZFS storage driver",
 "description":"Learn how to optimize your use of ZFS driver.",

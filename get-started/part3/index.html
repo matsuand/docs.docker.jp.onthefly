@@ -1,4 +1,4 @@
-<!-- Page generated 2020-05-12 14:45:48 +0900 -->
+<!-- Page generated 2020-05-13 16:42:27 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
     <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
     <!-- metadata -->
     <meta property="og:type" content="website"/>
-    <meta property="og:updated_time" itemprop="dateUpdated" content="2020-05-12T14:45:48+09:00"/>
+    <meta property="og:updated_time" itemprop="dateUpdated" content="2020-05-13T16:42:27+09:00"/>
     <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
     <meta name="twitter:description" property="og:description" itemprop="description" content="概要と準備 イメージの構築と実行 Docker Hub におけるイメージ共有 前提条件 2 部 にてイメージをビルドし、コンテナー化アプリケーションとして実行できていること。 はじめに ここでは 2 部 での作業を通じて、ローカル開発マシン上にコンテナー化されたアプリケーションが構築できているものとします。 最後の作業として、開発しているコンテナー化アプリケーションを、Docker Hub のようなレジストリ上にてイメージを共有していきます。 こうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。 Docker Hub アカウントの設定 まだ Docker ID を持っていない場合は、以下の手順により取得します。 これを行っておくことで Docker Hub 上でのイメージの共有ができるようになります。 Docker..." />
     <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
     <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-    <meta property="article:published_time" itemprop="datePublished" content="2020-05-12T14:45:48+09:00"/>
+    <meta property="article:published_time" itemprop="datePublished" content="2020-05-13T16:42:27+09:00"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="docker hub, push, images">
@@ -159,7 +159,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    2 分
   
 </span>
 
@@ -211,33 +211,45 @@
 
 <h2 id="create-a-docker-hub-repository-and-push-your-image">Docker Hub リポジトリの生成とイメージプッシュ</h2>
 
-<p>At this point, you’ve set up your Docker Hub account and have connected it to your Docker Desktop. Now let’s make our first repo, and share our bulletin board app there.</p>
+<p>ここまでに Docker Hub アカウントを設定し、Docker Desktop に接続しました。
+それでは初めてのリポジトリを生成し、掲示板アプリを共有しましょう。</p>
 
 <ol>
   <li>
-    <p>Click on the Docker icon in your menu bar, and navigate to <strong>Repositories &gt; Create</strong>. You’ll be taken to a Docker Hub page to create a new repository.</p>
+    <p>メニューバー上の Docker アイコンをクリックして <strong>Repositories &gt; Create</strong> を実行します。
+Docker Hub ページが開くので、新たなリポジトリを生成していきます。</p>
   </li>
   <li>
-    <p>Fill out the repository name as <code class="highlighter-rouge">bulletinboard</code>. Leave all the other options alone for now, and click <strong>Create</strong> at the bottom.</p>
+    <p>リポジトリ名に <code class="highlighter-rouge">bulletinboard</code> と入力します。
+これ以外の欄は、ここではとりあえずそのままとします。
+そして下段にある <strong>Create</strong> をクリックします。</p>
 
-    <p><img src="/docs.docker.jp.onthefly/get-started/images/newrepo.png" alt="make a repo" width="100%" /></p>
+    <p><img src="/docs.docker.jp.onthefly/get-started/images/newrepo.png" alt="リポジトリの生成" width="100%" /></p>
   </li>
   <li>
-    <p>Now you are ready to share your image on Docker Hub, but there’s one thing you must do first: images must be <em>namespaced correctly</em> to share on Docker Hub. Specifically, you must name images like <code class="highlighter-rouge">&lt;Docker ID&gt;/&lt;Repository Name&gt;:&lt;tag&gt;</code>. You can relabel your <code class="highlighter-rouge">bulletinboard:1.0</code> image like this (of course, please replace <code class="highlighter-rouge">gordon</code> with your Docker ID):</p>
+    <p>Docker Hub 上においてイメージを共有できる状態になりました。
+ただし共有する前に、まずやっておくべきことがあります。
+Docker Hub 上にイメージを共有するには、イメージの名前空間を適切に設定しておかなければなりません。
+具体的には、イメージ名を <code class="highlighter-rouge">&lt;Docker ID&gt;/&lt;リポジトリ名&gt;:&lt;タグ&gt;</code> とする必要があります。
+つまり <code class="highlighter-rouge">bulletinboard:1.0</code> イメージは、以下のようにしてリネームします。
+(もちろん <code class="highlighter-rouge">gordon</code> の部分は、自分の Docker ID に代えてください。)</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag bulletinboard:1.0 gordon/bulletinboard:1.0
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Finally, push your image to Docker Hub:</p>
+    <p>最後にイメージを Docker Hub にプッシュします。</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push gordon/bulletinboard:1.0
 </code></pre></div>    </div>
 
-    <p>Visit your repository in Docker Hub, and you’ll see your new image there. Remember, Docker Hub repositories are public by default.</p>
+    <p>Docker Hub においてこのリポジトリにアクセスしてみると、新たなイメージがそこに表示されています。
+Docker Hub リポジトリは、デフォルトで公開されている（public となっている）ことに注意してください。</p>
 
     <blockquote>
-      <p><strong>Having trouble pushing?</strong> Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps. If the push seemed to work, but you don’t see it in Docker Hub, refresh your browser after a couple of minutes and check again.</p>
+      <p><strong>プッシュに失敗した場合</strong> Docker Hub へは Docker Desktop から、あるいはコマンドラインからサインインしていることが必要です。
+また上記の手順にて示したように、イメージは適切な名称としていなければなりません。
+プッシュを行っても Docker Hub 上に表示されていない場合は、数分待ってからブラウザーを再表示して確認してください。</p>
     </blockquote>
   </li>
 </ol>
