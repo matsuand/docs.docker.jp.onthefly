@@ -183,6 +183,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-hub/billing/add-seats/",
+"title":"Add seats to your plan",
+"description":"Add seats to your plan",
+"keywords":"Docker, Docker Hub, subscription, update, add, seats"
+}
+,
+{
 "url":"/engine/swarm/admin_guide/",
 "title":"Administer and maintain a swarm of Docker Engines",
 "description":"Manager administration guide",
@@ -1737,6 +1744,20 @@ var pages = [
 }
 ,
 {
+"url":"/docker-hub/billing/downgrade/",
+"title":"Downgrade your plan",
+"description":"Downgrade your Docker Hub Plan",
+"keywords":"Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,"
+}
+,
+{
+"url":"/docker-hub/download-rate-limit/",
+"title":"Download rate limit",
+"description":"Download rate limit",
+"keywords":"Docker, pull requests, download, limit,"
+}
+,
+{
 "url":"/engine/swarm/swarm-tutorial/drain-node/",
 "title":"Drain a node on the swarm",
 "description":"Drain nodes on the swarm",
@@ -1923,6 +1944,13 @@ var pages = [
 "title":"ファイル間、プロジェクト間での Compose 設定の共有",
 "description":"How to use Docker Compose's extends keyword to share configuration between files and projects",
 "keywords":"fig, composition, compose, docker, orchestration, documentation, docs"
+}
+,
+{
+"url":"/docker-hub/billing/faq/",
+"title":"Docker Billing FAQ",
+"description":"Docker Billing FAQ",
+"keywords":"Docker Hub, pricing, billing, Pro, Team, subscription, plans,"
 }
 ,
 {
@@ -2336,6 +2364,13 @@ var pages = [
 "title":"自動ビルドの設定",
 "description":"自動ビルドを設定します。",
 "keywords":"automated, build, images, Docker Hub"
+}
+,
+{
+"url":"/docker-hub/billing/",
+"title":"Docker Billing overview",
+"description":"Docker Billing overview",
+"keywords":"Docker, pricing, billing, Pro, Team, subscription, plans,"
 }
 ,
 {
@@ -4474,6 +4509,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-hub/billing/remove-seats/",
+"title":"Remove seats from your plan",
+"description":"Remove seats from your plan",
+"keywords":"Docker, Docker Hub, subscription, update, remove, seats"
+}
+,
+{
 "url":"/reference/dtr/2.7/cli/remove/",
 "title":"docker/dtr remove",
 "description":"Remove a DTR replica from a cluster",
@@ -5706,6 +5748,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-hub/billing/upgrade/",
+"title":"Upgrade your plan",
+"description":"Upgrading your Docker Hub Plan",
+"keywords":"Docker Hub, upgrade, subscription, Pro, Team, pricing plan,"
+}
+,
+{
 "url":"/docker-hub/upgrade/",
 "title":"プランのアップグレード",
 "description":"Docker Hub プランのアップグレード方法。",
@@ -6095,13 +6144,6 @@ var pages = [
 "title":"Docker Context",
 "description":"Learn about Docker Context",
 "keywords":"engine, context, cli, kubernetes"
-}
-,
-{
-"url":"/docker-for-windows/wsl-tech-preview/",
-"title":"Docker Desktop WSL 2 backend",
-"description":"Docker Desktop WSL 2 backend",
-"keywords":"WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker"
 }
 ,
 {
