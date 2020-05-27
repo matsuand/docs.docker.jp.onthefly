@@ -400,17 +400,17 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/architecture/",
-"title":"DTR アーキテクチャー",
-"description":"Learn about the architecture of Docker Trusted Registry.",
-"keywords":"registry, dtr, architecture"
-}
-,
-{
 "url":"/ee/ucp/interlock/architecture/",
 "title":"Interlock architecture",
 "description":"Learn more about the architecture of the layer 7 routing solution for Docker swarm services.",
 "keywords":"routing, UCP, interlock, load balancing"
+}
+,
+{
+"url":"/ee/dtr/architecture/",
+"title":"DTR アーキテクチャー",
+"description":"Learn about the architecture of Docker Trusted Registry.",
+"keywords":"registry, dtr, architecture"
 }
 ,
 {
@@ -540,17 +540,17 @@ var pages = [
 }
 ,
 {
-"url":"/reference/dtr/2.7/cli/backup/",
-"title":"docker/dtr backup",
-"description":"Create a backup of DTR",
-"keywords":"dtr, cli, backup"
-}
-,
-{
 "url":"/reference/ucp/3.2/cli/backup/",
 "title":"docker/ucp backup",
 "description":"Create a backup of a UCP manager node",
 "keywords":"ucp, cli, backup"
+}
+,
+{
+"url":"/reference/dtr/2.7/cli/backup/",
+"title":"docker/dtr backup",
+"description":"Create a backup of DTR",
+"keywords":"dtr, cli, backup"
 }
 ,
 {
@@ -603,17 +603,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/build/",
-"title":"docker build",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/build/",
 "title":"docker-compose build",
 "description":"サービスのビルドまたは再ビルド。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, build"
+}
+,
+{
+"url":"/engine/reference/commandline/build/",
+"title":"docker build",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -750,17 +750,17 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/kubernetes/cluster-ingress/canary/",
-"title":"Deploy a Sample Application with a Canary release (Experimental)",
-"description":"Stage a canary release using weight-based load balancing between multiple back-end applications.",
-"keywords":"ucp, cluster, ingress, kubernetes"
-}
-,
-{
 "url":"/ee/ucp/interlock/usage/canary/",
 "title":"Publish Canary application instances",
 "description":"Learn how to do canary deployments for your Docker swarm services",
 "keywords":"routing, proxy"
+}
+,
+{
+"url":"/ee/ucp/kubernetes/cluster-ingress/canary/",
+"title":"Deploy a Sample Application with a Canary release (Experimental)",
+"description":"Stage a canary release using weight-based load balancing between multiple back-end applications.",
+"keywords":"ucp, cluster, ingress, kubernetes"
 }
 ,
 {
@@ -1002,17 +1002,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/config/",
-"title":"docker config",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/config/",
 "title":"docker-compose config",
 "description":"Compose ファイルを検証して表示します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, config"
+}
+,
+{
+"url":"/engine/reference/commandline/config/",
+"title":"docker config",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1429,17 +1429,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/create/",
-"title":"docker create",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/create/",
 "title":"docker-compose create",
 "description":"create コマンドはサービスのコンテナーを生成します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, create"
+}
+,
+{
+"url":"/engine/reference/commandline/create/",
+"title":"docker create",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1457,14 +1457,14 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-windows/dashboard/",
+"url":"/docker-for-mac/dashboard/",
 "title":"Docker Desktop ダッシュボード",
 "description":"Docker Desktop ダッシュボード",
 "keywords":"Docker Desktop Dashboard, container view"
 }
 ,
 {
-"url":"/docker-for-mac/dashboard/",
+"url":"/docker-for-windows/dashboard/",
 "title":"Docker Desktop ダッシュボード",
 "description":"Docker Desktop ダッシュボード",
 "keywords":"Docker Desktop Dashboard, container view"
@@ -1674,17 +1674,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-windows/docker-toolbox/",
-"title":"Migrate Docker Toolbox",
-"description":"Docker Desktop for Windows and Docker Toolbox",
-"keywords":"windows, alpha, beta, toolbox, docker-machine, tutorial"
-}
-,
-{
 "url":"/docker-for-mac/docker-toolbox/",
 "title":"Docker Desktop on Mac vs. Docker Toolbox",
 "description":"Docker Desktop on Mac and Docker Toolbox",
 "keywords":"mac, windows, alpha, beta, toolbox, docker-machine, tutorial"
+}
+,
+{
+"url":"/docker-for-windows/docker-toolbox/",
+"title":"Migrate Docker Toolbox",
+"description":"Docker Desktop for Windows and Docker Toolbox",
+"keywords":"windows, alpha, beta, toolbox, docker-machine, tutorial"
 }
 ,
 {
@@ -1779,17 +1779,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-windows/edge-release-notes/",
-"title":"Docker Desktop for Windows Edge Release notes",
-"description":"Change log / release notes per edge release",
-"keywords":"Docker Desktop for Windows, edge, release notes"
-}
-,
-{
 "url":"/docker-for-mac/edge-release-notes/",
 "title":"Docker Desktop for Mac Edge release notes",
 "description":"Change log / release notes per Edge release",
 "keywords":"Docker Desktop for Mac, edge, release notes"
+}
+,
+{
+"url":"/docker-for-windows/edge-release-notes/",
+"title":"Docker Desktop for Windows Edge Release notes",
+"description":"Change log / release notes per edge release",
+"keywords":"Docker Desktop for Windows, edge, release notes"
 }
 ,
 {
@@ -1891,17 +1891,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/events/",
-"title":"docker events",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/events/",
 "title":"docker-compose events",
 "description":"Receive real time events from containers.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, events"
+}
+,
+{
+"url":"/engine/reference/commandline/events/",
+"title":"docker events",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1919,17 +1919,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/exec/",
-"title":"docker exec",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/exec/",
 "title":"docker-compose exec",
 "description":"docker-compose exec",
 "keywords":"fig, composition, compose, docker, orchestration, cli, exec"
+}
+,
+{
+"url":"/engine/reference/commandline/exec/",
+"title":"docker exec",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -1947,17 +1947,10 @@ var pages = [
 }
 ,
 {
-"url":"/docker-hub/billing/faq/",
-"title":"Docker Billing FAQ",
-"description":"Docker Billing FAQ",
-"keywords":"Docker Hub, pricing, billing, Pro, Team, subscription, plans,"
-}
-,
-{
-"url":"/engine/faq/",
-"title":"Docker frequently asked questions (FAQ)",
-"description":"Most frequently asked questions.",
-"keywords":"faq, questions, documentation,  docker"
+"url":"/kitematic/faq/",
+"title":"Kitematic: Frequently asked questions (FAQ)",
+"description":"Documentation covering common questions users have about Kitematic",
+"keywords":"docker, documentation, about, technology, kitematic, gui"
 }
 ,
 {
@@ -1968,17 +1961,17 @@ var pages = [
 }
 ,
 {
-"url":"/kitematic/faq/",
-"title":"Kitematic: Frequently asked questions (FAQ)",
-"description":"Documentation covering common questions users have about Kitematic",
-"keywords":"docker, documentation, about, technology, kitematic, gui"
+"url":"/engine/faq/",
+"title":"Docker frequently asked questions (FAQ)",
+"description":"Most frequently asked questions.",
+"keywords":"faq, questions, documentation,  docker"
 }
 ,
 {
-"url":"/docker-for-windows/faqs/",
-"title":"Frequently asked questions (FAQ)",
-"description":"Frequently asked questions",
-"keywords":"windows faqs"
+"url":"/docker-hub/billing/faq/",
+"title":"Docker Billing FAQ",
+"description":"Docker Billing FAQ",
+"keywords":"Docker Hub, pricing, billing, Pro, Team, subscription, plans,"
 }
 ,
 {
@@ -1986,6 +1979,13 @@ var pages = [
 "title":"Frequently asked questions (FAQ)",
 "description":"Frequently asked questions",
 "keywords":"mac faqs"
+}
+,
+{
+"url":"/docker-for-windows/faqs/",
+"title":"Frequently asked questions (FAQ)",
+"description":"Frequently asked questions",
+"keywords":"windows faqs"
 }
 ,
 {
@@ -2122,17 +2122,17 @@ var pages = [
 }
 ,
 {
-"url":"/registry/help/",
-"title":"Get help",
-"description":"Getting help with the Registry",
-"keywords":"registry, on-prem, images, tags, repository, distribution, help, 101, TL;DR"
-}
-,
-{
 "url":"/compose/reference/help/",
 "title":"docker-compose help",
 "description":"docker-compose のヘルプ",
 "keywords":"fig, composition, compose, docker, orchestration, cli, help"
+}
+,
+{
+"url":"/registry/help/",
+"title":"Get help",
+"description":"Getting help with the Registry",
+"keywords":"registry, on-prem, images, tags, repository, distribution, help, 101, TL;DR"
 }
 ,
 {
@@ -2283,13 +2283,6 @@ var pages = [
 }
 ,
 {
-"url":"/reference/dtr/2.7/cli/images/",
-"title":"docker/dtr images",
-"description":"List all the images necessary to install DTR",
-"keywords":"dtr, cli, images"
-}
-,
-{
 "url":"/reference/ucp/3.2/cli/images/",
 "title":"docker/ucp images",
 "description":"Verify the UCP images on this node",
@@ -2297,10 +2290,10 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/images/",
-"title":"docker images",
-"description":null,
-"keywords":null
+"url":"/reference/dtr/2.7/cli/images/",
+"title":"docker/dtr images",
+"description":"List all the images necessary to install DTR",
+"keywords":"dtr, cli, images"
 }
 ,
 {
@@ -2311,6 +2304,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/reference/commandline/images/",
+"title":"docker images",
+"description":null,
+"keywords":null
+}
+,
+{
 "url":"/engine/reference/commandline/import/",
 "title":"docker import",
 "description":null,
@@ -2318,10 +2318,10 @@ var pages = [
 }
 ,
 {
-"url":"/reference/dtr/2.7/cli/",
-"title":"docker/dtr 概要",
-"description":"docker/dtr イメージにおいて利用可能なコマンドについて学ぶ。",
-"keywords":"dtr, install, uninstall, configure"
+"url":"/manuals/",
+"title":"Product Manuals",
+"description":"Learn about Docker Engine - Community",
+"keywords":"Docker Engine - Community, Docker Community"
 }
 ,
 {
@@ -2332,59 +2332,66 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-windows/",
-"title":"Get started with Docker for Windows",
-"description":"Getting Started",
-"keywords":"windows, edge, tutorial, run, docker, local, machine"
+"url":"/reference/dtr/2.7/cli/",
+"title":"docker/dtr 概要",
+"description":"docker/dtr イメージにおいて利用可能なコマンドについて学ぶ。",
+"keywords":"dtr, install, uninstall, configure"
 }
 ,
 {
-"url":"/compliance/reference/800-53/",
-"title":"NIST SP 800-53 control reference",
+"url":"/get-started/",
+"title":"概要とセットアップ",
+"description":"Get oriented on some basics of Docker and install Docker Desktop.",
+"keywords":"get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop"
+}
+,
+{
+"url":"/samples/",
+"title":"Samples",
 "description":null,
 "keywords":null
 }
 ,
 {
-"url":"/compliance/",
-"title":"Docker standards and compliance",
-"description":"Compliance guidance for Docker Enterprise Edition",
-"keywords":"standards, compliance, security"
+"url":"/docker-for-mac/",
+"title":"Docker Desktop for Mac をはじめよう",
+"description":"はじめよう。",
+"keywords":"mac, tutorial, run, docker, local, machine"
 }
 ,
 {
-"url":"/docker-hub/publish/",
-"title":"Publisher & Certified Content Overview",
-"description":"Docker Hub programs and policies for publishers",
-"keywords":"Docker, docker, store, publishers, publish images"
+"url":"/docker-id/",
+"title":"Docker ID アカウント",
+"description":"Docker ID のサインアップとログイン。",
+"keywords":"accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access"
 }
 ,
 {
-"url":"/docker-hub/builds/",
-"title":"自動ビルドの設定",
-"description":"自動ビルドを設定します。",
-"keywords":"automated, build, images, Docker Hub"
+"url":"/kitematic/",
+"title":"Kitematic",
+"description":"Documentation that provides an overview of Kitematic and installation instructions",
+"keywords":"docker, documentation, about, technology, kitematic, gui"
 }
 ,
 {
-"url":"/docker-hub/billing/",
-"title":"Docker Billing overview",
-"description":"Docker Billing overview",
-"keywords":"Docker, pricing, billing, Pro, Team, subscription, plans,"
+"url":"/hackathon/",
+"title":"Docker Docs Hackathon: Results for Austin, April 17-21, 2017",
+"description":null,
+"keywords":"hack, hackathon, dockercon, austin, 2017"
 }
 ,
 {
-"url":"/docker-hub/2fa/",
-"title":"Enable two-factor authentication for Docker Hub",
-"description":"Enabling two-factor authentication on Docker Hub",
-"keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
+"url":"/network/",
+"title":"ネットワーク概要",
+"description":"Docker ネットワークとその概念",
+"keywords":"networking, bridge, routing, routing mesh, overlay, ports"
 }
 ,
 {
-"url":"/docker-hub/",
-"title":"Docker Hub クイックスタート",
-"description":"Docker Hub クイックスタート",
-"keywords":"Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams"
+"url":"/docker-for-windows/",
+"title":"Get started with Docker for Windows",
+"description":"Getting Started",
+"keywords":"windows, edge, tutorial, run, docker, local, machine"
 }
 ,
 {
@@ -2399,118 +2406,6 @@ var pages = [
 "title":"Docker Toolbox",
 "description":"Documentation that provides an overview of Docker Toolbox and installation instructions",
 "keywords":"docker, documentation, about, technology, docker toolbox, gui"
-}
-,
-{
-"url":"/registry/recipes/",
-"title":"Recipes overview",
-"description":"Fun stuff to do with your registry",
-"keywords":"registry, on-prem, images, tags, repository, distribution, recipes, advanced"
-}
-,
-{
-"url":"/registry/spec/auth/",
-"title":"Docker Registry Token Authentication",
-"description":"Docker Registry v2 authentication schema",
-"keywords":"registry, on-prem, images, tags, repository, distribution, authentication, advanced"
-}
-,
-{
-"url":"/registry/spec/",
-"title":"Reference Overview",
-"description":"Explains registry JSON objects",
-"keywords":"registry, service, images, repository,  json"
-}
-,
-{
-"url":"/registry/storage-drivers/",
-"title":"Docker Registry storage driver",
-"description":"Explains how to use storage drivers",
-"keywords":"registry, on-prem, images, tags, repository, distribution, storage drivers, advanced"
-}
-,
-{
-"url":"/registry/",
-"title":"Docker Registry",
-"description":"High-level overview of the Registry",
-"keywords":"registry, on-prem, images, tags, repository, distribution"
-}
-,
-{
-"url":"/engine/swarm/swarm-tutorial/",
-"title":"Getting started with swarm mode",
-"description":"Getting Started tutorial for Docker Engine swarm mode",
-"keywords":"tutorial, cluster management, swarm mode"
-}
-,
-{
-"url":"/engine/swarm/",
-"title":"スウォームモード概要",
-"description":"Docker Engine スウォームモードの概要",
-"keywords":"docker, container, cluster, swarm"
-}
-,
-{
-"url":"/engine/tutorials/",
-"title":"Engine チュートリアル",
-"description":"コンテナーとどのように動作するかの説明。",
-"keywords":"docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro"
-}
-,
-{
-"url":"/engine/api/sdk/",
-"title":"Develop with Docker Engine SDKs",
-"description":"Using Docker SDKs to automate Docker tasks in your language of choice",
-"keywords":"developing, sdk"
-}
-,
-{
-"url":"/engine/api/",
-"title":"Develop with Docker Engine API",
-"description":"Using Docker APIs to automate Docker tasks in your language of choice",
-"keywords":"developing, api"
-}
-,
-{
-"url":"/engine/security/trust/",
-"title":"Use trusted images",
-"description":"Use trusted images",
-"keywords":"trust, security, docker,  index"
-}
-,
-{
-"url":"/engine/security/",
-"title":"Secure Engine",
-"description":"Sec",
-"keywords":"seccomp, security, docker, documentation"
-}
-,
-{
-"url":"/engine/examples/",
-"title":"Dockerize an application",
-"description":"Provides examples for using Docker",
-"keywords":"dockerize, dockerizing apps, dockerizing applications, container,  containers"
-}
-,
-{
-"url":"/engine/release-notes/",
-"title":"Docker Engine release notes",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine",
-"keywords":"docker, docker engine, ce, whats new, release notes"
-}
-,
-{
-"url":"/engine/install/",
-"title":"Docker Engine のインストール",
-"description":"Lists the installation methods",
-"keywords":"docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge"
-}
-,
-{
-"url":"/engine/",
-"title":"Docker Engine overview",
-"description":"Engine",
-"keywords":"Engine"
 }
 ,
 {
@@ -2535,31 +2430,143 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/",
-"title":"Docker Desktop for Mac をはじめよう",
-"description":"はじめよう。",
-"keywords":"mac, tutorial, run, docker, local, machine"
+"url":"/release-notes/",
+"title":"Docker release notes",
+"description":"Release notes for Docker",
+"keywords":"docker, documentation, about, technology, understanding,  release"
 }
 ,
 {
-"url":"/config/containers/logging/",
-"title":"View logs for a container or service",
-"description":"How to write to and view a container's logs",
-"keywords":"docker, logging"
+"url":"/compliance/reference/800-53/",
+"title":"NIST SP 800-53 control reference",
+"description":null,
+"keywords":null
 }
 ,
 {
-"url":"/config/daemon/",
-"title":"Docker デーモンの設定とトラブルシュート",
-"description":"Docker デーモンの設定とトラブルシュート",
-"keywords":"docker, daemon, configuration, troubleshooting"
+"url":"/compliance/",
+"title":"Docker standards and compliance",
+"description":"Compliance guidance for Docker Enterprise Edition",
+"keywords":"standards, compliance, security"
 }
 ,
 {
-"url":"/manuals/",
-"title":"Product Manuals",
-"description":"Learn about Docker Engine - Community",
-"keywords":"Docker Engine - Community, Docker Community"
+"url":"/opensource/",
+"title":"ドキュメントへの貢献",
+"description":"貢献方法の概要",
+"keywords":"open, source, contributing, overview"
+}
+,
+{
+"url":"/engine/install/",
+"title":"Docker Engine のインストール",
+"description":"Lists the installation methods",
+"keywords":"docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge"
+}
+,
+{
+"url":"/engine/security/trust/",
+"title":"Use trusted images",
+"description":"Use trusted images",
+"keywords":"trust, security, docker,  index"
+}
+,
+{
+"url":"/engine/security/",
+"title":"Secure Engine",
+"description":"Sec",
+"keywords":"seccomp, security, docker, documentation"
+}
+,
+{
+"url":"/engine/swarm/swarm-tutorial/",
+"title":"Getting started with swarm mode",
+"description":"Getting Started tutorial for Docker Engine swarm mode",
+"keywords":"tutorial, cluster management, swarm mode"
+}
+,
+{
+"url":"/engine/swarm/",
+"title":"スウォームモード概要",
+"description":"Docker Engine スウォームモードの概要",
+"keywords":"docker, container, cluster, swarm"
+}
+,
+{
+"url":"/engine/api/sdk/",
+"title":"Develop with Docker Engine SDKs",
+"description":"Using Docker SDKs to automate Docker tasks in your language of choice",
+"keywords":"developing, sdk"
+}
+,
+{
+"url":"/engine/api/",
+"title":"Develop with Docker Engine API",
+"description":"Using Docker APIs to automate Docker tasks in your language of choice",
+"keywords":"developing, api"
+}
+,
+{
+"url":"/engine/release-notes/",
+"title":"Docker Engine release notes",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine",
+"keywords":"docker, docker engine, ce, whats new, release notes"
+}
+,
+{
+"url":"/engine/tutorials/",
+"title":"Engine チュートリアル",
+"description":"コンテナーとどのように動作するかの説明。",
+"keywords":"docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro"
+}
+,
+{
+"url":"/engine/examples/",
+"title":"Dockerize an application",
+"description":"Provides examples for using Docker",
+"keywords":"dockerize, dockerizing apps, dockerizing applications, container,  containers"
+}
+,
+{
+"url":"/engine/",
+"title":"Docker Engine overview",
+"description":"Engine",
+"keywords":"Engine"
+}
+,
+{
+"url":"/docker-hub/builds/",
+"title":"自動ビルドの設定",
+"description":"自動ビルドを設定します。",
+"keywords":"automated, build, images, Docker Hub"
+}
+,
+{
+"url":"/docker-hub/2fa/",
+"title":"Enable two-factor authentication for Docker Hub",
+"description":"Enabling two-factor authentication on Docker Hub",
+"keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
+}
+,
+{
+"url":"/docker-hub/publish/",
+"title":"Publisher & Certified Content Overview",
+"description":"Docker Hub programs and policies for publishers",
+"keywords":"Docker, docker, store, publishers, publish images"
+}
+,
+{
+"url":"/docker-hub/billing/",
+"title":"Docker Billing overview",
+"description":"Docker Billing overview",
+"keywords":"Docker, pricing, billing, Pro, Team, subscription, plans,"
+}
+,
+{
+"url":"/docker-hub/",
+"title":"Docker Hub クイックスタート",
+"description":"Docker Hub クイックスタート",
+"keywords":"Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams"
 }
 ,
 {
@@ -2577,10 +2584,10 @@ var pages = [
 }
 ,
 {
-"url":"/samples/",
-"title":"Samples",
-"description":null,
-"keywords":null
+"url":"/develop/",
+"title":"Docker を用いた開発",
+"description":"開発リソースの概要。",
+"keywords":"developer, developing, apps, api, sdk"
 }
 ,
 {
@@ -2598,10 +2605,38 @@ var pages = [
 }
 ,
 {
-"url":"/hackathon/",
-"title":"Docker Docs Hackathon: Results for Austin, April 17-21, 2017",
-"description":null,
-"keywords":"hack, hackathon, dockercon, austin, 2017"
+"url":"/registry/spec/auth/",
+"title":"Docker Registry Token Authentication",
+"description":"Docker Registry v2 authentication schema",
+"keywords":"registry, on-prem, images, tags, repository, distribution, authentication, advanced"
+}
+,
+{
+"url":"/registry/spec/",
+"title":"Reference Overview",
+"description":"Explains registry JSON objects",
+"keywords":"registry, service, images, repository,  json"
+}
+,
+{
+"url":"/registry/storage-drivers/",
+"title":"Docker Registry storage driver",
+"description":"Explains how to use storage drivers",
+"keywords":"registry, on-prem, images, tags, repository, distribution, storage drivers, advanced"
+}
+,
+{
+"url":"/registry/recipes/",
+"title":"Recipes overview",
+"description":"Fun stuff to do with your registry",
+"keywords":"registry, on-prem, images, tags, repository, distribution, recipes, advanced"
+}
+,
+{
+"url":"/registry/",
+"title":"Docker Registry",
+"description":"High-level overview of the Registry",
+"keywords":"registry, on-prem, images, tags, repository, distribution"
 }
 ,
 {
@@ -2619,206 +2654,17 @@ var pages = [
 }
 ,
 {
-"url":"/kitematic/",
-"title":"Kitematic",
-"description":"Documentation that provides an overview of Kitematic and installation instructions",
-"keywords":"docker, documentation, about, technology, kitematic, gui"
+"url":"/config/containers/logging/",
+"title":"View logs for a container or service",
+"description":"How to write to and view a container's logs",
+"keywords":"docker, logging"
 }
 ,
 {
-"url":"/opensource/",
-"title":"ドキュメントへの貢献",
-"description":"貢献方法の概要",
-"keywords":"open, source, contributing, overview"
-}
-,
-{
-"url":"/network/",
-"title":"概要",
-"description":"Docker ネットワークとその概念",
-"keywords":"networking, bridge, routing, routing mesh, overlay, ports"
-}
-,
-{
-"url":"/develop/",
-"title":"Docker を用いた開発",
-"description":"開発リソースの概要。",
-"keywords":"developer, developing, apps, api, sdk"
-}
-,
-{
-"url":"/get-started/",
-"title":"概要とセットアップ",
-"description":"Get oriented on some basics of Docker and install Docker Desktop.",
-"keywords":"get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop"
-}
-,
-{
-"url":"/ee/cluster/",
-"title":"Docker Cluster 概要",
-"description":"Docker Cluster の概要と導入。",
-"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
-}
-,
-{
-"url":"/ee/admin/restore/",
-"title":"Restore Docker Enterprise",
-"description":"Learn how to restore Docker Enterprise platform from a backup.",
-"keywords":"enterprise, restore, recovery"
-}
-,
-{
-"url":"/ee/admin/backup/",
-"title":"Back up Docker Enterprise",
-"description":"Learn how to create a backup of your Docker Enterprise.",
-"keywords":"enterprise, backup"
-}
-,
-{
-"url":"/ee/desktop/",
-"title":"Docker Desktop Enterprise overview",
-"description":"Learn about Docker Desktop Enterprise",
-"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-users/",
-"title":"Authentication and authorization in DTR",
-"description":"Learn about the permission levels available on Docker Trusted Registry.",
-"keywords":"registry, security, permissions, users"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/external-storage/",
-"title":"Configure DTR image storage",
-"description":"Storage configuration for Docker Trusted Registry",
-"keywords":"dtr, storage drivers, NFS, Azure, S3"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/deploy-caches/",
-"title":"DTR cache overview",
-"description":"Deploy DTR caches in different geographical locations for users to pull images faster.",
-"keywords":"DTR, cache"
-}
-,
-{
-"url":"/ee/dtr/admin/monitor-and-troubleshoot/",
-"title":"Monitor Docker Trusted Registry",
-"description":"Learn how to monitor your DTR installation.",
-"keywords":"registry, monitor, troubleshoot"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-webhooks/",
-"title":"Manage webhooks",
-"description":"Learn how to create, configure, and test webhooks in Docker Trusted Registry.",
-"keywords":"registry, webhooks"
-}
-,
-{
-"url":"/ee/dtr/admin/disaster-recovery/",
-"title":"DTR disaster recovery overview",
-"description":"Learn the multiple disaster recovery strategies you can use with Docker Trusted Registry.",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/dtr/admin/install/",
-"title":"Install Docker Trusted Registry",
-"description":"Learn how to install Docker Trusted Registry for production.",
-"keywords":"dtr, registry, install"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/sign-images/",
-"title":"Sign an image",
-"description":"Learn how to sign the images you push to Docker Trusted Registry.",
-"keywords":"registry, sign, trust"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/",
-"title":"Create a repository",
-"description":"Learn how to create new repositories in Docker Trusted Registry.",
-"keywords":"registry, repository"
-}
-,
-{
-"url":"/ee/dtr/user/access-dtr/",
-"title":"Configure your Docker Engine",
-"description":"Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.",
-"keywords":"registry, TLS, certificates"
-}
-,
-{
-"url":"/ee/dtr/user/promotion-policies/",
-"title":"Promotion policies overview",
-"description":"Learn how to create a promotion policies that can automatically promote an image or mirror it to a different registry.",
-"keywords":"registry, promotion, mirror"
-}
-,
-{
-"url":"/ee/dtr/",
-"title":"Docker Trusted Registry 概要",
-"description":"Docker Trusted Registry のインストール、設定、利用について学びます。",
-"keywords":"registry, repository, images"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/cluster-ingress/",
-"title":"Kubernetes Cluster Ingress (Experimental)",
-"description":"Learn about Ingress host and path routing for Kubernetes applications.",
-"keywords":"ucp, cluster, ingress, kubernetes"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/",
-"title":"Deploy a workload to a Kubernetes cluster",
-"description":"Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.",
-"keywords":"UCP, Docker EE, orchestration, Kubernetes, cluster"
-}
-,
-{
-"url":"/ee/ucp/swarm/",
-"title":"Deploy a single service",
-"description":"Learn how to deploy services to a cluster managed by Universal Control Plane.",
-"keywords":"ucp, deploy, service"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/join-nodes/",
-"title":"Set up high availability",
-"description":"Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures.",
-"keywords":"ucp, high availability, replica"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/external-auth/",
-"title":"Integrate with an LDAP directory",
-"description":"Learn how to integrate UCP with an LDAP service, so that you can manage users from a single place.",
-"keywords":"LDAP, UCP, authentication, user management"
-}
-,
-{
-"url":"/ee/ucp/admin/monitor-and-troubleshoot/",
-"title":"Monitor the cluster status",
-"description":"Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.",
-"keywords":"UCP, troubleshoot, health, cluster"
-}
-,
-{
-"url":"/ee/ucp/admin/install/",
-"title":"本番環境向け UCP インストール",
-"description":"本番環境に Docker Universal Control Plane をインストールします。",
-"keywords":"Universal Control Plane, UCP, install, Docker Enterprise"
-}
-,
-{
-"url":"/ee/ucp/interlock/config/",
-"title":"Configure layer 7 routing service",
-"description":"Learn how to configure the layer 7 routing solution for UCP.",
-"keywords":"routing, proxy, interlock, load balancing"
+"url":"/config/daemon/",
+"title":"Docker デーモンの設定とトラブルシュート",
+"description":"Docker デーモンの設定とトラブルシュート",
+"keywords":"docker, daemon, configuration, troubleshooting"
 }
 ,
 {
@@ -2833,6 +2679,13 @@ var pages = [
 "title":"Route traffic to a swarm service",
 "description":"Learn how to deploy your Docker swarm services and applications",
 "keywords":"routing, proxy"
+}
+,
+{
+"url":"/ee/ucp/interlock/config/",
+"title":"Configure layer 7 routing service",
+"description":"Learn how to configure the layer 7 routing solution for UCP.",
+"keywords":"routing, proxy, interlock, load balancing"
 }
 ,
 {
@@ -2857,6 +2710,55 @@ var pages = [
 }
 ,
 {
+"url":"/ee/ucp/swarm/",
+"title":"Deploy a single service",
+"description":"Learn how to deploy services to a cluster managed by Universal Control Plane.",
+"keywords":"ucp, deploy, service"
+}
+,
+{
+"url":"/ee/ucp/kubernetes/cluster-ingress/",
+"title":"Kubernetes Cluster Ingress (Experimental)",
+"description":"Learn about Ingress host and path routing for Kubernetes applications.",
+"keywords":"ucp, cluster, ingress, kubernetes"
+}
+,
+{
+"url":"/ee/ucp/kubernetes/",
+"title":"Deploy a workload to a Kubernetes cluster",
+"description":"Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.",
+"keywords":"UCP, Docker EE, orchestration, Kubernetes, cluster"
+}
+,
+{
+"url":"/ee/ucp/admin/configure/external-auth/",
+"title":"Integrate with an LDAP directory",
+"description":"Learn how to integrate UCP with an LDAP service, so that you can manage users from a single place.",
+"keywords":"LDAP, UCP, authentication, user management"
+}
+,
+{
+"url":"/ee/ucp/admin/configure/join-nodes/",
+"title":"Set up high availability",
+"description":"Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures.",
+"keywords":"ucp, high availability, replica"
+}
+,
+{
+"url":"/ee/ucp/admin/install/",
+"title":"本番環境向け UCP インストール",
+"description":"本番環境に Docker Universal Control Plane をインストールします。",
+"keywords":"Universal Control Plane, UCP, install, Docker Enterprise"
+}
+,
+{
+"url":"/ee/ucp/admin/monitor-and-troubleshoot/",
+"title":"Monitor the cluster status",
+"description":"Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.",
+"keywords":"UCP, troubleshoot, health, cluster"
+}
+,
+{
 "url":"/ee/ucp/",
 "title":"Universal Control Plane 概要",
 "description":"Docker Universal Control Plane、つまり Docker が提供するエンタープライズレベルのクラスター管理ソリューションについて学びます。\n",
@@ -2864,24 +2766,122 @@ var pages = [
 }
 ,
 {
+"url":"/ee/cluster/",
+"title":"Docker Cluster 概要",
+"description":"Docker Cluster の概要と導入。",
+"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
+}
+,
+{
+"url":"/ee/desktop/",
+"title":"Docker Desktop Enterprise overview",
+"description":"Learn about Docker Desktop Enterprise",
+"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
+}
+,
+{
+"url":"/ee/dtr/user/access-dtr/",
+"title":"Configure your Docker Engine",
+"description":"Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.",
+"keywords":"registry, TLS, certificates"
+}
+,
+{
+"url":"/ee/dtr/user/manage-images/sign-images/",
+"title":"Sign an image",
+"description":"Learn how to sign the images you push to Docker Trusted Registry.",
+"keywords":"registry, sign, trust"
+}
+,
+{
+"url":"/ee/dtr/user/manage-images/",
+"title":"Create a repository",
+"description":"Learn how to create new repositories in Docker Trusted Registry.",
+"keywords":"registry, repository"
+}
+,
+{
+"url":"/ee/dtr/user/promotion-policies/",
+"title":"Promotion policies overview",
+"description":"Learn how to create a promotion policies that can automatically promote an image or mirror it to a different registry.",
+"keywords":"registry, promotion, mirror"
+}
+,
+{
+"url":"/ee/dtr/admin/configure/deploy-caches/",
+"title":"DTR cache overview",
+"description":"Deploy DTR caches in different geographical locations for users to pull images faster.",
+"keywords":"DTR, cache"
+}
+,
+{
+"url":"/ee/dtr/admin/configure/external-storage/",
+"title":"Configure DTR image storage",
+"description":"Storage configuration for Docker Trusted Registry",
+"keywords":"dtr, storage drivers, NFS, Azure, S3"
+}
+,
+{
+"url":"/ee/dtr/admin/disaster-recovery/",
+"title":"DTR disaster recovery overview",
+"description":"Learn the multiple disaster recovery strategies you can use with Docker Trusted Registry.",
+"keywords":"dtr, disaster recovery"
+}
+,
+{
+"url":"/ee/dtr/admin/install/",
+"title":"Install Docker Trusted Registry",
+"description":"Learn how to install Docker Trusted Registry for production.",
+"keywords":"dtr, registry, install"
+}
+,
+{
+"url":"/ee/dtr/admin/manage-webhooks/",
+"title":"Manage webhooks",
+"description":"Learn how to create, configure, and test webhooks in Docker Trusted Registry.",
+"keywords":"registry, webhooks"
+}
+,
+{
+"url":"/ee/dtr/admin/monitor-and-troubleshoot/",
+"title":"Monitor Docker Trusted Registry",
+"description":"Learn how to monitor your DTR installation.",
+"keywords":"registry, monitor, troubleshoot"
+}
+,
+{
+"url":"/ee/dtr/admin/manage-users/",
+"title":"Authentication and authorization in DTR",
+"description":"Learn about the permission levels available on Docker Trusted Registry.",
+"keywords":"registry, security, permissions, users"
+}
+,
+{
+"url":"/ee/dtr/",
+"title":"Docker Trusted Registry 概要",
+"description":"Docker Trusted Registry のインストール、設定、利用について学びます。",
+"keywords":"registry, repository, images"
+}
+,
+{
+"url":"/ee/admin/restore/",
+"title":"Restore Docker Enterprise",
+"description":"Learn how to restore Docker Enterprise platform from a backup.",
+"keywords":"enterprise, restore, recovery"
+}
+,
+{
+"url":"/ee/admin/backup/",
+"title":"Back up Docker Enterprise",
+"description":"Learn how to create a backup of your Docker Enterprise.",
+"keywords":"enterprise, backup"
+}
+,
+{
 "url":"/ee/",
 "title":"Docker Enterprise",
 "description":"Home page for Docker Enterprise documentation",
 "keywords":"Docker Enterprise, documentation, manual, guide, reference, api, CLI"
-}
-,
-{
-"url":"/release-notes/",
-"title":"Docker release notes",
-"description":"Release notes for Docker",
-"keywords":"docker, documentation, about, technology, understanding,  release"
-}
-,
-{
-"url":"/docker-id/",
-"title":"Docker ID アカウント",
-"description":"Docker ID のサインアップとログイン。",
-"keywords":"accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access"
 }
 ,
 {
@@ -2948,17 +2948,17 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/install/install-offline/",
-"title":"Install Docker Trusted Registry offline",
-"description":"Learn how to install Docker Trusted Registry on a machine with no internet access.",
-"keywords":"registry, install, offline"
-}
-,
-{
 "url":"/ee/ucp/admin/install/install-offline/",
 "title":"オフラインでの UCP インストール",
 "description":"Learn how to install Docker Universal Control Plane. on a machine with no internet access.",
 "keywords":"UCP, install, offline, Docker EE"
+}
+,
+{
+"url":"/ee/dtr/admin/install/install-offline/",
+"title":"Install Docker Trusted Registry offline",
+"description":"Learn how to install Docker Trusted Registry on a machine with no internet access.",
+"keywords":"registry, install, offline"
 }
 ,
 {
@@ -2990,6 +2990,13 @@ var pages = [
 }
 ,
 {
+"url":"/reference/ucp/3.2/cli/install/",
+"title":"docker/ucp install",
+"description":"Install UCP on a node",
+"keywords":"ucp, cli, install"
+}
+,
+{
 "url":"/reference/dtr/2.7/cli/install/",
 "title":"docker/dtr install",
 "description":"Install Docker Trusted Registry",
@@ -2997,10 +3004,10 @@ var pages = [
 }
 ,
 {
-"url":"/reference/ucp/3.2/cli/install/",
-"title":"docker/ucp install",
-"description":"Install UCP on a node",
-"keywords":"ucp, cli, install"
+"url":"/docker-for-mac/install/",
+"title":"Docker Desktop on Mac のインストール",
+"description":"Docker Desktop on Mac のインストール方法。",
+"keywords":"mac, install, download, run, docker, local"
 }
 ,
 {
@@ -3015,13 +3022,6 @@ var pages = [
 "title":"Docker Compose のインストール",
 "description":"Docker Compose のインストール方法。",
 "keywords":"compose, orchestration, install, installation, docker, documentation"
-}
-,
-{
-"url":"/docker-for-mac/install/",
-"title":"Docker Desktop on Mac のインストール",
-"description":"Docker Desktop on Mac のインストール方法。",
-"keywords":"mac, install, download, run, docker, local"
 }
 ,
 {
@@ -3172,17 +3172,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/kill/",
-"title":"docker kill",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/kill/",
 "title":"docker-compose kill",
 "description":"Forces running containers to stop.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  kill"
+}
+,
+{
+"url":"/engine/reference/commandline/kill/",
+"title":"docker kill",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3228,17 +3228,17 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-windows/kubernetes/",
-"title":"Deploy on Kubernetes",
-"description":"Deploying to Kubernetes on Docker Desktop for Windows",
-"keywords":"windows, edge, kubernetes, kubectl, orchestration"
-}
-,
-{
 "url":"/docker-for-mac/kubernetes/",
 "title":"Deploy on Kubernetes",
 "description":"Deploying to Kubernetes on Docker Desktop for Mac",
 "keywords":"mac, edge, kubernetes, kubectl, orchestration"
+}
+,
+{
+"url":"/docker-for-windows/kubernetes/",
+"title":"Deploy on Kubernetes",
+"description":"Deploying to Kubernetes on Docker Desktop for Windows",
+"keywords":"windows, edge, kubernetes, kubectl, orchestration"
 }
 ,
 {
@@ -3256,17 +3256,17 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/configure/license-your-installation/",
-"title":"License your installation",
-"description":"Learn how to license your Docker Trusted Registry installation.",
-"keywords":"dtr, install, license"
-}
-,
-{
 "url":"/ee/ucp/admin/configure/license-your-installation/",
 "title":"License your installation",
 "description":"Learn how to license your Docker Universal Control Plane installation.",
 "keywords":"Universal Control Plane, UCP, install, license"
+}
+,
+{
+"url":"/ee/dtr/admin/configure/license-your-installation/",
+"title":"License your installation",
+"description":"Learn how to license your Docker Trusted Registry installation.",
+"keywords":"dtr, install, license"
 }
 ,
 {
@@ -3354,17 +3354,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/logs/",
-"title":"docker logs",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/logs/",
 "title":"docker-compose logs",
 "description":"Displays log output from services.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  logs"
+}
+,
+{
+"url":"/engine/reference/commandline/logs/",
+"title":"docker logs",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -3662,17 +3662,17 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-mac/networking/",
+"title":"Networking features in Docker Desktop for Mac",
+"description":"Networking",
+"keywords":"mac, networking"
+}
+,
+{
 "url":"/docker-for-windows/networking/",
 "title":"Networking features in Docker Desktop for Windows",
 "description":"Networking",
 "keywords":"windows, networking"
-}
-,
-{
-"url":"/engine/swarm/networking/",
-"title":"Manage swarm service networks",
-"description":"Use swarm mode overlay networking features",
-"keywords":"swarm, networking, ingress, overlay, service discovery"
 }
 ,
 {
@@ -3683,10 +3683,10 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/networking/",
-"title":"Networking features in Docker Desktop for Mac",
-"description":"Networking",
-"keywords":"mac, networking"
+"url":"/engine/swarm/networking/",
+"title":"Manage swarm service networks",
+"description":"Use swarm mode overlay networking features",
+"keywords":"swarm, networking, ingress, overlay, service discovery"
 }
 ,
 {
@@ -3851,15 +3851,15 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-windows/opensource/",
-"title":"Open source components and licensing",
+"url":"/docker-for-mac/opensource/",
+"title":"オープンソースコンポーネントとライセンス",
 "description":"Docker's use of Open Source",
 "keywords":"docker, opensource"
 }
 ,
 {
-"url":"/docker-for-mac/opensource/",
-"title":"オープンソースコンポーネントとライセンス",
+"url":"/docker-for-windows/opensource/",
+"title":"Open source components and licensing",
 "description":"Docker's use of Open Source",
 "keywords":"docker, opensource"
 }
@@ -3949,6 +3949,13 @@ var pages = [
 }
 ,
 {
+"url":"/get-started/overview/",
+"title":"Docker 概要",
+"description":"Docker explained in depth",
+"keywords":"docker, introduction, documentation, about, technology, understanding"
+}
+,
+{
 "url":"/toolbox/overview/",
 "title":"Docker Toolbox 概要",
 "description":"Toolbox の概要を説明",
@@ -3960,13 +3967,6 @@ var pages = [
 "title":"docker-compose コマンド概要",
 "description":"Overview of docker-compose CLI",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  docker-compose"
-}
-,
-{
-"url":"/get-started/overview/",
-"title":"Docker 概要",
-"description":"Docker explained in depth",
-"keywords":"docker, introduction, documentation, about, technology, understanding"
 }
 ,
 {
@@ -3991,17 +3991,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/pause/",
-"title":"docker pause",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/pause/",
 "title":"docker-compose pause",
 "description":"Pauses running containers for a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, pause"
+}
+,
+{
+"url":"/engine/reference/commandline/pause/",
+"title":"docker pause",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -4152,17 +4152,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/port/",
-"title":"docker port",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/port/",
 "title":"docker-compose port",
 "description":"Prints the public port for a port bindings.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  port"
+}
+,
+{
+"url":"/engine/reference/commandline/port/",
+"title":"docker port",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -4222,6 +4222,13 @@ var pages = [
 }
 ,
 {
+"url":"/compose/reference/ps/",
+"title":"docker-compose ps",
+"description":"Lists containers.",
+"keywords":"fig, composition, compose, docker, orchestration, cli,  ps"
+}
+,
+{
 "url":"/compliance/reference/800-53/ps/",
 "title":"Personnel security",
 "description":"Personnel security reference",
@@ -4233,13 +4240,6 @@ var pages = [
 "title":"docker ps",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/compose/reference/ps/",
-"title":"docker-compose ps",
-"description":"Lists containers.",
-"keywords":"fig, composition, compose, docker, orchestration, cli,  ps"
 }
 ,
 {
@@ -4278,17 +4278,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/pull/",
-"title":"docker pull",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/pull/",
 "title":"docker-compose pull",
 "description":"Pulls service images.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  pull"
+}
+,
+{
+"url":"/engine/reference/commandline/pull/",
+"title":"docker pull",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -4299,17 +4299,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/push/",
-"title":"docker push",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/push/",
 "title":"docker-compose push",
 "description":"サービスのイメージをプッシュします。",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  push"
+}
+,
+{
+"url":"/engine/reference/commandline/push/",
+"title":"docker push",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -4425,17 +4425,17 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-mac/release-notes/",
+"title":"Docker for Mac Stable release notes",
+"description":"Change log / release notes per Stable release",
+"keywords":"Docker Desktop for Mac, stable, release notes"
+}
+,
+{
 "url":"/docker-for-windows/release-notes/",
 "title":"Docker Desktop for Windows Stable Release notes",
 "description":"Change log / release notes per stable release",
 "keywords":"Docker Desktop for Windows, stable, release notes"
-}
-,
-{
-"url":"/docker-hub/release-notes/",
-"title":"Docker Hub release notes",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Hub",
-"keywords":"docker hub, whats new, release notes"
 }
 ,
 {
@@ -4453,10 +4453,10 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/release-notes/",
-"title":"Docker for Mac Stable release notes",
-"description":"Change log / release notes per Stable release",
-"keywords":"Docker Desktop for Mac, stable, release notes"
+"url":"/docker-hub/release-notes/",
+"title":"Docker Hub release notes",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Hub",
+"keywords":"docker hub, whats new, release notes"
 }
 ,
 {
@@ -4467,17 +4467,24 @@ var pages = [
 }
 ,
 {
-"url":"/ee/cluster/release-notes/",
-"title":"Docker Cluster リリースノート",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Cluster.",
-"keywords":"cluster, whats new, release notes"
-}
-,
-{
 "url":"/ee/docker-ee/release-notes/",
 "title":"Docker Engine - Enterprise release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Enterprise",
 "keywords":"docker, docker engine, ee, ce, whats new, release notes"
+}
+,
+{
+"url":"/ee/ucp/release-notes/",
+"title":"UCP release notes",
+"description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
+"keywords":"UCP, release notes"
+}
+,
+{
+"url":"/ee/cluster/release-notes/",
+"title":"Docker Cluster リリースノート",
+"description":"Learn about the new features, bug fixes, and breaking changes for Docker Cluster.",
+"keywords":"cluster, whats new, release notes"
 }
 ,
 {
@@ -4492,13 +4499,6 @@ var pages = [
 "title":"DTR release notes",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry",
 "keywords":"docker trusted registry, whats new, release notes"
-}
-,
-{
-"url":"/ee/ucp/release-notes/",
-"title":"UCP release notes",
-"description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
-"keywords":"UCP, release notes"
 }
 ,
 {
@@ -4579,17 +4579,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/restart/",
-"title":"docker restart",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/restart/",
 "title":"docker-compose restart",
 "description":"Restarts Docker Compose services.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  restart"
+}
+,
+{
+"url":"/engine/reference/commandline/restart/",
+"title":"docker restart",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -4621,17 +4621,17 @@ var pages = [
 }
 ,
 {
-"url":"/reference/dtr/2.7/cli/restore/",
-"title":"docker/dtr restore",
-"description":"Install and restore DTR from an existing backup",
-"keywords":"dtr, cli, restore"
-}
-,
-{
 "url":"/reference/ucp/3.2/cli/restore/",
 "title":"docker/ucp restore",
 "description":"Restore a UCP cluster from a backup",
 "keywords":"ucp, cli, restore"
+}
+,
+{
+"url":"/reference/dtr/2.7/cli/restore/",
+"title":"docker/dtr restore",
+"description":"Install and restore DTR from an existing backup",
+"keywords":"dtr, cli, restore"
 }
 ,
 {
@@ -4663,17 +4663,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/rm/",
-"title":"docker rm",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/rm/",
 "title":"docker-compose rm",
 "description":"Removes stopped service containers.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  rm"
+}
+,
+{
+"url":"/engine/reference/commandline/rm/",
+"title":"docker rm",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -4705,17 +4705,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/run/",
-"title":"docker run",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/run/",
 "title":"docker-compose run",
 "description":"Runs a one-off command on a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli, run"
+}
+,
+{
+"url":"/engine/reference/commandline/run/",
+"title":"docker run",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -5146,17 +5146,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/start/",
-"title":"docker start",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/start/",
 "title":"docker-compose start",
 "description":"既存のサービスコンテナーを起動します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  start"
+}
+,
+{
+"url":"/engine/reference/commandline/start/",
+"title":"docker start",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -5181,17 +5181,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/stop/",
-"title":"docker stop",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/stop/",
 "title":"docker-compose stop",
 "description":"Stops running containers without removing them. ",
 "keywords":"fig, composition, compose, docker, orchestration, cli, stop"
+}
+,
+{
+"url":"/engine/reference/commandline/stop/",
+"title":"docker stop",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -5335,17 +5335,17 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/install/system-requirements/",
-"title":"Docker Trusted Registry system requirements",
-"description":"Learn about the system requirements for installing Docker Trusted Registry.",
-"keywords":"DTR, architecture, requirements"
-}
-,
-{
 "url":"/ee/ucp/admin/install/system-requirements/",
 "title":"UCP System requirements",
 "description":"Learn about the system requirements for installing Docker Universal Control Plane.",
 "keywords":"UCP, architecture, requirements, Docker Engine - Enterprise"
+}
+,
+{
+"url":"/ee/dtr/admin/install/system-requirements/",
+"title":"Docker Trusted Registry system requirements",
+"description":"Learn about the system requirements for installing Docker Trusted Registry.",
+"keywords":"DTR, architecture, requirements"
 }
 ,
 {
@@ -5454,17 +5454,17 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/top/",
-"title":"docker top",
-"description":null,
-"keywords":null
-}
-,
-{
 "url":"/compose/reference/top/",
 "title":"docker-compose top",
 "description":"実行中のプロセスを表示します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, top"
+}
+,
+{
+"url":"/engine/reference/commandline/top/",
+"title":"docker top",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -5503,6 +5503,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-mac/troubleshoot/",
+"title":"Logs and troubleshooting",
+"description":"Troubleshooting, logs, and known issues",
+"keywords":"mac, troubleshooting, logs, issues"
+}
+,
+{
 "url":"/docker-for-windows/troubleshoot/",
 "title":"Logs and troubleshooting",
 "description":"Troubleshooting, logs, and known issues",
@@ -5514,13 +5521,6 @@ var pages = [
 "title":"Troubleshooting",
 "description":"Troubleshooting connectivity and certificate issues",
 "keywords":"beginner, getting started, FAQs, troubleshooting, Docker"
-}
-,
-{
-"url":"/docker-for-mac/troubleshoot/",
-"title":"Logs and troubleshooting",
-"description":"Troubleshooting, logs, and known issues",
-"keywords":"mac, troubleshooting, logs, issues"
 }
 ,
 {
@@ -5685,13 +5685,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/install/uninstall/",
-"title":"Uninstall Docker Trusted Registry",
-"description":"Learn how to uninstall your Docker Trusted Registry installation.",
-"keywords":"dtr, install, uninstall"
-}
-,
-{
 "url":"/ee/ucp/admin/install/uninstall/",
 "title":"Uninstall UCP",
 "description":"Learn how to uninstall a Docker Universal Control Plane.",
@@ -5699,10 +5692,10 @@ var pages = [
 }
 ,
 {
-"url":"/engine/reference/commandline/unpause/",
-"title":"docker unpause",
-"description":null,
-"keywords":null
+"url":"/ee/dtr/admin/install/uninstall/",
+"title":"Uninstall Docker Trusted Registry",
+"description":"Learn how to uninstall your Docker Trusted Registry installation.",
+"keywords":"dtr, install, uninstall"
 }
 ,
 {
@@ -5710,6 +5703,13 @@ var pages = [
 "title":"docker-compose unpause",
 "description":"停止中のサービスコンテナーを再開します。",
 "keywords":"fig, composition, compose, docker, orchestration, cli, unpause"
+}
+,
+{
+"url":"/engine/reference/commandline/unpause/",
+"title":"docker unpause",
+"description":null,
+"keywords":null
 }
 ,
 {
@@ -5741,17 +5741,17 @@ var pages = [
 }
 ,
 {
-"url":"/reference/dtr/2.7/cli/upgrade/",
-"title":"docker/dtr upgrade",
-"description":"Upgrade DTR 2.5.x cluster to this version",
-"keywords":"dtr, cli, upgrade"
-}
-,
-{
 "url":"/reference/ucp/3.2/cli/upgrade/",
 "title":"docker/ucp upgrade",
 "description":"Upgrade the UCP components on this node",
 "keywords":"ucp, cli, upgrade"
+}
+,
+{
+"url":"/reference/dtr/2.7/cli/upgrade/",
+"title":"docker/dtr upgrade",
+"description":"Upgrade DTR 2.5.x cluster to this version",
+"keywords":"dtr, cli, upgrade"
 }
 ,
 {
@@ -5769,10 +5769,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/upgrade/",
-"title":"Upgrade DTR",
-"description":"Learn how to upgrade your Docker Trusted Registry",
-"keywords":"dtr, upgrade, install"
+"url":"/ee/ucp/interlock/deploy/upgrade/",
+"title":"Layer 7 routing upgrade",
+"description":"Learn how to upgrade your existing layer 7 routing solution",
+"keywords":"routing, proxy, hrm"
 }
 ,
 {
@@ -5783,10 +5783,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/deploy/upgrade/",
-"title":"Layer 7 routing upgrade",
-"description":"Learn how to upgrade your existing layer 7 routing solution",
-"keywords":"routing, proxy, hrm"
+"url":"/ee/dtr/admin/upgrade/",
+"title":"Upgrade DTR",
+"description":"Learn how to upgrade your Docker Trusted Registry",
+"keywords":"dtr, upgrade, install"
 }
 ,
 {
@@ -5804,17 +5804,17 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/configure/use-a-load-balancer/",
-"title":"Use a load balancer",
-"description":"Learn how to configure a load balancer to balance user requests across multiple Docker Trusted Registry replicas.",
-"keywords":"dtr, load balancer"
-}
-,
-{
 "url":"/ee/ucp/admin/configure/join-nodes/use-a-load-balancer/",
 "title":"Use a load balancer",
 "description":"Learn how to set up a load balancer to access the UCP web UI using an hostname.",
 "keywords":"UCP, high-availability, load balancer"
+}
+,
+{
+"url":"/ee/dtr/admin/configure/use-a-load-balancer/",
+"title":"Use a load balancer",
+"description":"Learn how to configure a load balancer to balance user requests across multiple Docker Trusted Registry replicas.",
+"keywords":"dtr, load balancer"
 }
 ,
 {
@@ -5888,17 +5888,17 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/configure/use-your-own-tls-certificates/",
-"title":"Use your own TLS certificates",
-"description":"Learn how to configure Docker Trusted Registry with your own TLS certificates.",
-"keywords":"dtr, tls, certificates, security"
-}
-,
-{
 "url":"/ee/ucp/admin/configure/use-your-own-tls-certificates/",
 "title":"Use your own TLS certificates",
 "description":"Learn how to configure Docker Universal Control Plane to use your own certificates.",
 "keywords":"Universal Control Plane, UCP, certificate, authentication, tls"
+}
+,
+{
+"url":"/ee/dtr/admin/configure/use-your-own-tls-certificates/",
+"title":"Use your own TLS certificates",
+"description":"Learn how to configure Docker Trusted Registry with your own TLS certificates.",
+"keywords":"dtr, tls, certificates, security"
 }
 ,
 {
