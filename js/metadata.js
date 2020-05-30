@@ -3012,7 +3012,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/install/",
-"title":"Install Docker Desktop on Windows",
+"title":"Docker Desktop on Windows のインストール",
 "description":"How to install Docker Desktop for Windows",
 "keywords":"windows, install, download, run, docker, local"
 }
@@ -4433,8 +4433,8 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/release-notes/",
-"title":"Docker Desktop for Windows Stable Release notes",
-"description":"Change log / release notes per stable release",
+"title":"Docker Desktop for Windows 安定版リリースノート",
+"description":"安定版リリースの変更履歴、リリースノート。",
 "keywords":"Docker Desktop for Windows, stable, release notes"
 }
 ,
