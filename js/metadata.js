@@ -155,31 +155,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/user/access-tokens/",
-"title":"Manage access tokens",
-"description":"Learn how to create and manage your personal DTR access tokens to securely integrate DTR with other products.",
-"keywords":"dtr, security, access tokens"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/add-labels-to-cluster-nodes/",
-"title":"Add labels to cluster nodes",
-"description":"Learn how to add metadata to cluster nodes that can be used to specify constraints when deploying services.",
-"keywords":"cluster, node, label, swarm, metadata"
-}
-,
-{
 "url":"/engine/swarm/swarm-tutorial/add-nodes/",
 "title":"Add nodes to the swarm",
 "description":"Add nodes to the swarm",
 "keywords":"tutorial, cluster management, swarm"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/add-sans-to-cluster/",
-"title":"Add SANs to cluster certificates",
-"description":"Learn how to add new SANs to cluster nodes, allowing you to connect to UCP with a different hostname",
-"keywords":"cluster, node, label, certificate, SAN"
 }
 ,
 {
@@ -197,13 +176,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/admin/configure/admission-controllers/",
-"title":"Admission controllers",
-"description":"Learn about how admission controllers are used in Docker.",
-"keywords":"cluster, psp, security"
-}
-,
-{
 "url":"/docker-hub/builds/advanced/",
 "title":"Advanced options for Autobuild and Autotest",
 "description":"Automated builds",
@@ -215,13 +187,6 @@ var pages = [
 "title":"Use the Notary client for advanced users",
 "description":"Becoming a power user of the notary client.",
 "keywords":"docker, notary, notary-client, docker content trust, content trust, power user, advanced"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/allow-creation-on-push/",
-"title":"Allow users to create repositories when pushing",
-"description":"By default Docker Trusted Registry only allows pushing images to existing repositories. Learn how to change that.",
-"keywords":"dtr, repository"
 }
 ,
 {
@@ -247,13 +212,6 @@ var pages = [
 ,
 {
 "url":"/desktop/enterprise/app-designer/",
-"title":"Application Designer",
-"description":"Docker Desktop Enterprise Application Designer",
-"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer"
-}
-,
-{
-"url":"/ee/desktop/app-designer/",
 "title":"Application Designer",
 "description":"Docker Desktop Enterprise Application Designer",
 "keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer"
@@ -393,27 +351,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/admin/install/architecture-specific-images/",
-"title":"Architecture-specific images",
-"description":"Learn how to deploy Docker Universal Control Plane using images that are specific to particular hardware architectures.",
-"keywords":"UCP, Docker EE, image, Windows"
-}
-,
-{
-"url":"/ee/ucp/interlock/architecture/",
-"title":"Interlock architecture",
-"description":"Learn more about the architecture of the layer 7 routing solution for Docker swarm services.",
-"keywords":"routing, UCP, interlock, load balancing"
-}
-,
-{
-"url":"/ee/dtr/architecture/",
-"title":"DTR アーキテクチャー",
-"description":"Learn about the architecture of Docker Trusted Registry.",
-"keywords":"registry, dtr, architecture"
-}
-,
-{
 "url":"/compose/aspnet-mssql-compose/",
 "title":"Quickstart: Compose and ASP.NET Core with SQL Server",
 "description":"Create a Docker Compose application using ASP.NET Core and SQL Server on Linux in Docker.",
@@ -442,27 +379,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/manage-jobs/audit-jobs-via-api/",
-"title":"Audit Jobs via the API",
-"description":"Learn how Docker Trusted Registry runs batch jobs for job-related troubleshooting.",
-"keywords":"dtr, troubleshoot, audit, job logs, jobs, api"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-jobs/audit-jobs-via-ui/",
-"title":"Audit Jobs via the Web Interface",
-"description":"View a list of jobs happening within DTR and review the detailed logs for each job.",
-"keywords":"dtr, troubleshoot, audit, job logs, jobs, ui"
-}
-,
-{
-"url":"/ee/dtr/user/audit-repository-events/",
-"title":"Audit Repository Events",
-"description":"View and audit your repository events.",
-"keywords":"dtr, events, log, activity stream"
-}
-,
-{
 "url":"/storage/storagedriver/aufs-driver/",
 "title":"AUFS ストレージドライバーの利用",
 "description":"AUFS ドライバーの最適な利用について学びます。",
@@ -470,31 +386,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/manage-jobs/auto-delete-job-logs/",
-"title":"Enable Auto-Deletion of Job Logs",
-"description":"Enable auto-deletion of old or unnecessary job logs for maintenance.",
-"keywords":"dtr, jobs, log, job logs, system"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/auto-delete-repo-events/",
-"title":"Enable Auto-Deletion of Repository Events",
-"description":"Enable auto-deletion of image events within a repository for maintenance.",
-"keywords":"registry, events, log, activity stream"
-}
-,
-{
 "url":"/docker-hub/builds/automated-testing/",
 "title":"Automated repository tests",
 "description":"Automated tests",
 "keywords":"Automated, testing, repository"
-}
-,
-{
-"url":"/ee/cluster/aws/",
-"title":"AWS 上にて Docker Cluster をはじめよう",
-"description":"AWS 上にて Docker Cluster をはじめよう。",
-"keywords":"documentation, docs, docker, cluster, infrastructure, automation, AWS"
 }
 ,
 {
@@ -509,55 +404,6 @@ var pages = [
 "title":"Microsoft Azure storage driver",
 "description":"Explains how to use the Azure storage drivers",
 "keywords":"registry, service, driver, images, storage,  azure"
-}
-,
-{
-"url":"/ee/cluster/azure/",
-"title":"Azure 上にて Docker Cluster をはじめよう",
-"description":"Azure 上にて Docker Cluster をはじめよう。",
-"keywords":"documentation, docs, docker, cluster, infrastructure, automation, Azure"
-}
-,
-{
-"url":"/ee/admin/backup/back-up-dtr/",
-"title":"Back up DTR",
-"description":"Learn how to create a DTR backup",
-"keywords":"enterprise, backup, dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/admin/backup/back-up-swarm/",
-"title":"Back up Docker Swarm",
-"description":"Learn how to create a backup of Docker Swarm",
-"keywords":"enterprise, backup, swarm"
-}
-,
-{
-"url":"/ee/admin/backup/back-up-ucp/",
-"title":"Back up UCP",
-"description":"Learn how to create a backup of UCP",
-"keywords":"enterprise, backup, ucp"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/backup/",
-"title":"docker/ucp backup",
-"description":"Create a backup of a UCP manager node",
-"keywords":"ucp, cli, backup"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/backup/",
-"title":"docker/dtr backup",
-"description":"Create a backup of DTR",
-"keywords":"dtr, cli, backup"
-}
-,
-{
-"url":"/ee/ucp/admin/backups-and-disaster-recovery/",
-"title":"Backups and disaster recovery",
-"description":"Learn how to backup your Docker Universal Control Plane swarm, and to recover your swarm from an existing backup.",
-"keywords":"ucp, backup, restore, recovery"
 }
 ,
 {
@@ -750,37 +596,9 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/usage/canary/",
-"title":"Publish Canary application instances",
-"description":"Learn how to do canary deployments for your Docker swarm services",
-"keywords":"routing, proxy"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/cluster-ingress/canary/",
-"title":"Deploy a Sample Application with a Canary release (Experimental)",
-"description":"Stage a canary release using weight-based load balancing between multiple back-end applications.",
-"keywords":"ucp, cluster, ingress, kubernetes"
-}
-,
-{
-"url":"/docker-hub/cancel-downgrade/",
-"title":"Cancel or downgrade your plan",
-"description":"You can cancel or downgrade a private repository subscription through Docker Hub",
-"keywords":"cancel, downgrade, private repo, private repository, Docker Hub, Hub"
-}
-,
-{
 "url":"/engine/install/centos/",
 "title":"Docker Engine インストール（CentOS 向け）",
 "description":"CentOS 上に Docker Engine をインストールする手順を説明。",
-"keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
-}
-,
-{
-"url":"/ee/docker-ee/centos/",
-"title":"Docker Engine - Enterprise の入手（CentOS 向け）",
-"description":"CentOS 上に Docker Engine - Enterprise をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update"
 }
 ,
@@ -848,24 +666,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/user-access/cli/",
-"title":"CLI-based access",
-"description":"Learn how to access Docker Universal Control Plane from the CLI.",
-"keywords":"ucp, cli, administration"
-}
-,
-{
 "url":"/notary/reference/client-config/",
 "title":"Notary client configuration file",
 "description":"Configuring the Notary client, server and signer.",
 "keywords":"docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer"
-}
-,
-{
-"url":"/ee/cluster/cluster-file/",
-"title":"Cluster file version 1 reference",
-"description":"Cluster file reference and guidelines",
-"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
 }
 ,
 {
@@ -936,13 +740,6 @@ var pages = [
 "title":"Configuration management",
 "description":"Configuration management reference",
 "keywords":"standards, compliance, security, 800-53, Configuration management"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/collect-cluster-metrics/",
-"title":"Collect UCP cluster metrics with Prometheus",
-"description":"Collecting UCP cluster metrics with Prometheus",
-"keywords":"prometheus, metrics, ucp"
 }
 ,
 {
@@ -1048,27 +845,6 @@ var pages = [
 "title":"Docker configs を利用した設定データの保存",
 "description":"How to store configuration data separate from the runtime",
 "keywords":"swarm, configuration, configs"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/deploy-caches/configuration-reference/",
-"title":"DTR cache configuration reference",
-"description":"Learn about the different configuration options for DTR caches.",
-"keywords":"DTR, cache"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/storage/configure-aws-storage/",
-"title":"Configure AWS EBS Storage for Kubernetes",
-"description":"Learn how configure AWS EBS storage for Kubernetes clusters.",
-"keywords":"UCP, Docker Enterprise, Kubernetes, storage, AWS, ELB"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/configure-rbac-kube/",
-"title":"Configure native Kubernetes role-based access control",
-"description":"Learn how to configure native role-based access control for Kubernetes",
-"keywords":"Kubernetes, ucp, RBAC"
 }
 ,
 {
@@ -1282,13 +1058,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/usage/context/",
-"title":"Use context and path-based routing",
-"description":"Learn how to route traffic to your Docker swarm services based on a url path.",
-"keywords":"routing, proxy"
-}
-,
-{
 "url":"/engine/reference/commandline/context_create/",
 "title":"docker context create",
 "description":null,
@@ -1373,59 +1142,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/disaster-recovery/create-a-backup/",
-"title":"Create a backup",
-"description":"Learn how to create a backup of Docker Trusted Registry, for disaster recovery.",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-users/create-and-manage-orgs/",
-"title":"Create and manage organizations",
-"description":"Learn how to set up organizations to enforce security in Docker Trusted Registry.",
-"keywords":"registry, security, permissions, organizations"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-users/create-and-manage-teams/",
-"title":"Create and manage teams in DTR",
-"description":"Learn how to manage teams to enforce fine-grain access control in Docker Trusted Registry.",
-"keywords":"registry, security, permissions, teams"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-users/create-and-manage-users/",
-"title":"Create and manage users in DTR",
-"description":"Learn how to manage user permissions in Docker Trusted Registry.",
-"keywords":"registry, security, permissions, users"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/create-service-account/",
-"title":"Create a service account for a Kubernetes app",
-"description":"Learn how to use a service account to give a Kubernetes workload access to cluster resources.",
-"keywords":"UCP, Docker EE, Kubernetes, authorization, access control, grant"
-}
-,
-{
 "url":"/engine/swarm/swarm-tutorial/create-swarm/",
 "title":"Create a swarm",
 "description":"Initialize the swarm",
 "keywords":"tutorial, cluster management, swarm mode"
-}
-,
-{
-"url":"/ee/ucp/authorization/create-teams-with-ldap/",
-"title":"Create teams with LDAP",
-"description":"Learn how to enable LDAP and sync users and teams in Docker Universal Control Plane.",
-"keywords":"authorize, authentication, users, teams, UCP, LDAP"
-}
-,
-{
-"url":"/ee/ucp/authorization/create-users-and-teams-manually/",
-"title":"Create users and teams manually",
-"description":"Learn how to add users and define teams in Docker Universal Control Plane.",
-"keywords":"rbac, authorize, authentication, users, teams, UCP"
 }
 ,
 {
@@ -1457,20 +1177,6 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/dashboard/",
-"title":"Docker Desktop ダッシュボード",
-"description":"Docker Desktop ダッシュボード",
-"keywords":"Docker Desktop Dashboard, container view"
-}
-,
-{
-"url":"/docker-for-windows/dashboard/",
-"title":"Docker Desktop ダッシュボード",
-"description":"Docker Desktop ダッシュボード",
-"keywords":"Docker Desktop Dashboard, container view"
-}
-,
-{
 "url":"/desktop/dashboard/",
 "title":"Docker Desktop ダッシュボード",
 "description":"Docker Desktop ダッシュボード",
@@ -1492,20 +1198,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/authorization/define-roles/",
-"title":"Define roles with authorized API operations",
-"description":"Learn how to create roles and set permissions in Docker Universal Control Plane.",
-"keywords":"rbac, authorization, authentication, users, teams, UCP, swarm"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/delete-images/",
-"title":"Delete images",
-"description":"Learn how to delete images from Docker Trusted Registry.",
-"keywords":"registry, delete"
-}
-,
-{
 "url":"/engine/swarm/swarm-tutorial/delete-service/",
 "title":"Delete the service running on the swarm",
 "description":"Remove the service from the swarm",
@@ -1513,66 +1205,10 @@ var pages = [
 }
 ,
 {
-"url":"/swarm/swarm_at_scale/deploy-app/",
-"title":"Deploy the application",
-"description":"Try swarm at scale",
-"keywords":"docker, swarm, scale, voting, application, certificates"
-}
-,
-{
-"url":"/ee/ucp/deploy-application-package/",
-"title":"Deploy an application package",
-"description":"Learn how to deploy an application package in UCP",
-"keywords":"ucp, swarm, kubernetes, application, app package"
-}
-,
-{
-"url":"/ee/ucp/swarm/deploy-multi-service-app/",
-"title":"Deploy a multi-service app",
-"description":"Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.",
-"keywords":"ucp, deploy, application, stack, service, compose"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/deploy-route-reflectors/",
-"title":"Improve network performance with route reflectors",
-"description":"Learn how to deploy Calico route reflectors to improve the performance of Kubernetes networking.",
-"keywords":"cluster, node, label, certificate, SAN"
-}
-,
-{
 "url":"/engine/swarm/swarm-tutorial/deploy-service/",
 "title":"Deploy a service to the swarm",
 "description":"Deploy a service to the swarm",
 "keywords":"tutorial, cluster management, swarm mode"
-}
-,
-{
-"url":"/ee/ucp/authorization/deploy-stateless-app/",
-"title":"Deploy a simple stateless app with RBAC",
-"description":"Learn how to deploy a simple application and customize access to resources.",
-"keywords":"rbac, authorize, authentication, user, team, UCP, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/swarm/deploy-to-collection/",
-"title":"Deploy application resources to a collection",
-"description":"Learn how to manage user access to application resources by using collections.",
-"keywords":"UCP, authentication, user management, stack, collection, role, application, resources"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/deploy-with-compose/",
-"title":"Deploy a Compose-based app to a Kubernetes cluster",
-"description":"Use Docker Enterprise Edition to deploy a Kubernetes workload from a Docker compose.",
-"keywords":"UCP, Docker EE, Kubernetes, Compose"
-}
-,
-{
-"url":"/engine/reference/commandline/deploy/",
-"title":"docker deploy",
-"description":null,
-"keywords":null
 }
 ,
 {
@@ -1604,20 +1240,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/deprecation-notice/",
-"title":"Deprecation Notice",
-"description":"Page for deprecation announcements.",
-"keywords":"dtr, manifest list, api, repository, digest"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/destroy/",
-"title":"docker/dtr destroy",
-"description":"Destroy a DTR replica's data",
-"keywords":"dtr, cli, destroy"
-}
-,
-{
 "url":"/develop/dev-best-practices/",
 "title":"Docker 開発のベストプラクティス",
 "description":"Docker アプリケーションの開発をより簡単に進めるための経験則を示します。",
@@ -1646,31 +1268,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/admin/disaster-recovery/",
-"title":"Disaster recovery",
-"description":"Learn disaster recovery procedures for Docker Enterprise",
-"keywords":"enterprise, recovery, disaster recovery, dtr, ucp, swarm"
-}
-,
-{
 "url":"/compose/django/",
 "title":"クィックスタート: Compose と Django",
 "description":"Django を使って Docker Compose をはじめる。",
 "keywords":"documentation, docs,  docker, compose, orchestration, containers"
-}
-,
-{
-"url":"/ee/docker-ee-architecture/",
-"title":"Docker Enterprise アーキテクチャー",
-"description":"Learn about the architecture of Docker Enterprise  and how it delivers high availability for your workloads.",
-"keywords":"Docker Enterprise, UCP, DTR,  architecture, orchestration, Kubernetes, Swarm, cluster, high availability"
-}
-,
-{
-"url":"/ee/docker-ee/windows/docker-ee/",
-"title":"Install Docker Engine - Enterprise on Windows Servers",
-"description":"How to install Docker Engine - Enterprise for Windows Server",
-"keywords":"Windows, Windows Server, install, download, ucp, Docker Engine - Enterprise"
 }
 ,
 {
@@ -1772,13 +1373,6 @@ var pages = [
 }
 ,
 {
-"url":"/reference/ucp/3.2/cli/dump-certs/",
-"title":"docker/ucp dump-certs",
-"description":"Print the public certificates used by this UCP web server",
-"keywords":"ucp, cli, dump-certs"
-}
-,
-{
 "url":"/docker-for-mac/edge-release-notes/",
 "title":"Docker Desktop for Mac Edge release notes",
 "description":"Change log / release notes per Edge release",
@@ -1790,69 +1384,6 @@ var pages = [
 "title":"Docker Desktop for Windows Edge Release notes",
 "description":"Change log / release notes per edge release",
 "keywords":"Docker Desktop for Windows, edge, release notes"
-}
-,
-{
-"url":"/ee/ucp/authorization/ee-advanced/",
-"title":"Access control design using additional security requirements",
-"description":"Learn how to architect multi-tenancy with Docker Enterprise.",
-"keywords":"authorize, authentication, users, teams, groups, sync, UCP, role, access control"
-}
-,
-{
-"url":"/ee/ucp/authorization/ee-standard/",
-"title":"Access control design",
-"description":"Learn how to architect multi-tenancy by using Docker Enterprise.",
-"keywords":"authorize, authentication, users, teams, groups, sync, UCP, role, access control"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/emergency-repair/",
-"title":"docker/dtr emergency-repair",
-"description":"Recover DTR from loss of quorum",
-"keywords":"dtr, cli, emergency-repair"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/enable-audit-logging/",
-"title":"Audit logging on UCP",
-"description":"Learn how to enable audit logging of all activity in UCP.",
-"keywords":"logs, ucp, swarm, kubernetes, audits"
-}
-,
-{
-"url":"/ee/enable-client-certificate-authentication/",
-"title":"Enable authentication using TLS client certificates",
-"description":"Learn how to enable user authentication via client certificates from your own public key infrastructure (PKI).",
-"keywords":"PKI, Client Certificates, Passwordless Authentication, Docker Enterprise, UCP, DTR, UCP PKI, DTR PKI"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/enable-helm-tiller/",
-"title":"Enable Helm and Tiller with UCP",
-"description":"Learn how to modify service accounts to enable Helm and Tiller to operate with UCP.",
-"keywords":"Helm, ucp, Tiller, Kubernetes, service accounts, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/enable-saml-authentication/",
-"title":"Enable SAML authentication",
-"description":"Learn how to configure user authentication with SAML 2.0",
-"keywords":"SAML, ucp, authentication, SSO, Okta, ADFS"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/enable-single-sign-on/",
-"title":"Enable single sign-on",
-"description":"Learn how to set up single sign-on between UCP and DTR, so that your users only have to authenticate once",
-"keywords":"dtr, login, sso"
-}
-,
-{
-"url":"/ee/end-to-end-install/",
-"title":"Install individual Docker Enterprise components on Linux servers",
-"description":"Learn how to get a trial license and install Docker Enterprise.",
-"keywords":"ucp, dtr, install, orchestration"
 }
 ,
 {
@@ -1877,13 +1408,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/cluster/reference/envvars/",
-"title":"Cluster CLI environment variables",
-"description":"Cluster CLI environment variables",
-"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
-}
-,
-{
 "url":"/config/containers/logging/etwlogs/",
 "title":"ETW logging driver",
 "description":"Describes how to use the etwlogs logging driver.",
@@ -1902,13 +1426,6 @@ var pages = [
 "title":"docker events",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/example-config/",
-"title":"docker/ucp example-config",
-"description":"Display an example configuration file for UCP",
-"keywords":"ucp, cli, config, configuration"
 }
 ,
 {
@@ -2045,13 +1562,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/configure/garbage-collection/",
-"title":"Garbage collection",
-"description":"Save disk space by configuring the garbage collection settings in Docker Trusted Registry",
-"keywords":"registry, online garbage collection, gc, space, disk space"
-}
-,
-{
 "url":"/config/containers/logging/gcplogs/",
 "title":"Google Cloud Logging driver",
 "description":"Describes how to use the Google Cloud Logging driver.",
@@ -2080,13 +1590,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/get-support/",
-"title":"Get support",
-"description":"Your Docker Enterprise subscription gives you access to prioritized support. You can file tickets via email or the support portal.",
-"keywords":"support, help"
-}
-,
-{
 "url":"/notary/getting_started/",
 "title":"Get started with Notary",
 "description":"Performing basic operation to use Notary in tandem with Docker Content Trust.",
@@ -2108,20 +1611,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/authorization/grant-permissions/",
-"title":"Grant role-access to cluster resources",
-"description":"Learn how to grant users and teams access to cluster resources with role-based access control.",
-"keywords":"rbac, ucp, grant, role, permission, authentication, authorization, namespace, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/authorization/group-resources/",
-"title":"Group and isolate cluster resources",
-"description":"Learn how to group resources into collections or namespaces to control user access.",
-"keywords":"rbac, ucp, grant, role, permission, authentication, resource set, collection, namespace, Kubernetes"
-}
-,
-{
 "url":"/compose/reference/help/",
 "title":"docker-compose help",
 "description":"docker-compose のヘルプ",
@@ -2136,24 +1625,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/configure/deploy-caches/high-availability/",
-"title":"Configure caches for high availability",
-"description":"Learn how to deploy a DTR cache with fault tolerance and high availability.",
-"keywords":"DTR, cache"
-}
-,
-{
 "url":"/engine/reference/commandline/history/",
 "title":"docker history",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/ee/ucp/interlock/config/host-mode-networking/",
-"title":"Configure host mode networking",
-"description":"Learn how to configure the UCP layer 7 routing solution with host mode networking.",
-"keywords":"routing, proxy, interlock, load balancing"
 }
 ,
 {
@@ -2175,13 +1650,6 @@ var pages = [
 "title":"Identification and authentication",
 "description":"Identification and authentication reference",
 "keywords":"standards, compliance, security, 800-53, Identification and authentication"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/id/",
-"title":"docker/ucp id",
-"description":"Print the ID of UCP running on this node",
-"keywords":"ucp, cli, id"
 }
 ,
 {
@@ -2283,20 +1751,6 @@ var pages = [
 }
 ,
 {
-"url":"/reference/ucp/3.2/cli/images/",
-"title":"docker/ucp images",
-"description":"Verify the UCP images on this node",
-"keywords":"ucp, cli, images"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/images/",
-"title":"docker/dtr images",
-"description":"List all the images necessary to install DTR",
-"keywords":"dtr, cli, images"
-}
-,
-{
 "url":"/compose/reference/images/",
 "title":"docker-compose images",
 "description":"プロジェクトにおいて用いられているイメージの一覧を表示します。",
@@ -2315,27 +1769,6 @@ var pages = [
 "title":"docker import",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/manuals/",
-"title":"Product Manuals",
-"description":"Learn about Docker Engine - Community",
-"keywords":"Docker Engine - Community, Docker Community"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/",
-"title":"docker/ucp overview",
-"description":"Learn about the commands available in the docker/ucp image.",
-"keywords":"ucp, cli, ucp"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/",
-"title":"docker/dtr 概要",
-"description":"docker/dtr イメージにおいて利用可能なコマンドについて学ぶ。",
-"keywords":"dtr, install, uninstall, configure"
 }
 ,
 {
@@ -2374,13 +1807,6 @@ var pages = [
 }
 ,
 {
-"url":"/hackathon/",
-"title":"Docker Docs Hackathon: Results for Austin, April 17-21, 2017",
-"description":null,
-"keywords":"hack, hackathon, dockercon, austin, 2017"
-}
-,
-{
 "url":"/network/",
 "title":"ネットワーク概要",
 "description":"Docker ネットワークとその概念",
@@ -2392,20 +1818,6 @@ var pages = [
 "title":"Get started with Docker for Windows",
 "description":"Getting Started",
 "keywords":"windows, edge, tutorial, run, docker, local, machine"
-}
-,
-{
-"url":"/toolbox/faqs/",
-"title":"FAQ とトラブルシューティング",
-"description":"FAQs, troubleshooting, and tips index for Toolbox installs",
-"keywords":"docker, documentation, about, technology, kitematic, gui, toolbox"
-}
-,
-{
-"url":"/toolbox/",
-"title":"Docker Toolbox",
-"description":"Documentation that provides an overview of Docker Toolbox and installation instructions",
-"keywords":"docker, documentation, about, technology, docker toolbox, gui"
 }
 ,
 {
@@ -2529,7 +1941,7 @@ var pages = [
 ,
 {
 "url":"/engine/",
-"title":"Docker Engine overview",
+"title":"Docker Engine 概要",
 "description":"Engine",
 "keywords":"Engine"
 }
@@ -2668,223 +2080,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/deploy/",
-"title":"Deploy a layer 7 routing solution",
-"description":"Learn the deployment steps for the UCP layer 7 routing solution",
-"keywords":"routing, proxy, interlock"
-}
-,
-{
-"url":"/ee/ucp/interlock/usage/",
-"title":"Route traffic to a swarm service",
-"description":"Learn how to deploy your Docker swarm services and applications",
-"keywords":"routing, proxy"
-}
-,
-{
-"url":"/ee/ucp/interlock/config/",
-"title":"Configure layer 7 routing service",
-"description":"Learn how to configure the layer 7 routing solution for UCP.",
-"keywords":"routing, proxy, interlock, load balancing"
-}
-,
-{
-"url":"/ee/ucp/interlock/",
-"title":"Layer 7 routing overview",
-"description":"Learn how to route Layer 7 traffic to your Swarm services",
-"keywords":"routing, UCP, interlock, load balancing"
-}
-,
-{
-"url":"/ee/ucp/authorization/",
-"title":"Access control model",
-"description":"Manage access to resources with role-based access control.",
-"keywords":"ucp, grant, role, permission, authentication, authorization, resource, namespace, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/user-access/",
-"title":"ウェブベースのアクセス",
-"description":"ウェブブラウザーから Docker Universal Control Plane にアクセスする方法について学びます。",
-"keywords":"ucp, web, administration"
-}
-,
-{
-"url":"/ee/ucp/swarm/",
-"title":"Deploy a single service",
-"description":"Learn how to deploy services to a cluster managed by Universal Control Plane.",
-"keywords":"ucp, deploy, service"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/cluster-ingress/",
-"title":"Kubernetes Cluster Ingress (Experimental)",
-"description":"Learn about Ingress host and path routing for Kubernetes applications.",
-"keywords":"ucp, cluster, ingress, kubernetes"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/",
-"title":"Deploy a workload to a Kubernetes cluster",
-"description":"Use Docker Enterprise Edition to deploy Kubernetes workloads from yaml files.",
-"keywords":"UCP, Docker EE, orchestration, Kubernetes, cluster"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/external-auth/",
-"title":"Integrate with an LDAP directory",
-"description":"Learn how to integrate UCP with an LDAP service, so that you can manage users from a single place.",
-"keywords":"LDAP, UCP, authentication, user management"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/join-nodes/",
-"title":"Set up high availability",
-"description":"Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures.",
-"keywords":"ucp, high availability, replica"
-}
-,
-{
-"url":"/ee/ucp/admin/install/",
-"title":"本番環境向け UCP インストール",
-"description":"本番環境に Docker Universal Control Plane をインストールします。",
-"keywords":"Universal Control Plane, UCP, install, Docker Enterprise"
-}
-,
-{
-"url":"/ee/ucp/admin/monitor-and-troubleshoot/",
-"title":"Monitor the cluster status",
-"description":"Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.",
-"keywords":"UCP, troubleshoot, health, cluster"
-}
-,
-{
-"url":"/ee/ucp/",
-"title":"Universal Control Plane 概要",
-"description":"Docker Universal Control Plane、つまり Docker が提供するエンタープライズレベルのクラスター管理ソリューションについて学びます。\n",
-"keywords":"ucp, overview, orchestration, cluster"
-}
-,
-{
-"url":"/ee/cluster/",
-"title":"Docker Cluster 概要",
-"description":"Docker Cluster の概要と導入。",
-"keywords":"documentation, docs, docker, cluster, infrastructure, automation"
-}
-,
-{
-"url":"/ee/desktop/",
-"title":"Docker Desktop Enterprise overview",
-"description":"Learn about Docker Desktop Enterprise",
-"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
-}
-,
-{
-"url":"/ee/dtr/user/access-dtr/",
-"title":"Configure your Docker Engine",
-"description":"Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.",
-"keywords":"registry, TLS, certificates"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/sign-images/",
-"title":"Sign an image",
-"description":"Learn how to sign the images you push to Docker Trusted Registry.",
-"keywords":"registry, sign, trust"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/",
-"title":"Create a repository",
-"description":"Learn how to create new repositories in Docker Trusted Registry.",
-"keywords":"registry, repository"
-}
-,
-{
-"url":"/ee/dtr/user/promotion-policies/",
-"title":"Promotion policies overview",
-"description":"Learn how to create a promotion policies that can automatically promote an image or mirror it to a different registry.",
-"keywords":"registry, promotion, mirror"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/deploy-caches/",
-"title":"DTR cache overview",
-"description":"Deploy DTR caches in different geographical locations for users to pull images faster.",
-"keywords":"DTR, cache"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/external-storage/",
-"title":"Configure DTR image storage",
-"description":"Storage configuration for Docker Trusted Registry",
-"keywords":"dtr, storage drivers, NFS, Azure, S3"
-}
-,
-{
-"url":"/ee/dtr/admin/disaster-recovery/",
-"title":"DTR disaster recovery overview",
-"description":"Learn the multiple disaster recovery strategies you can use with Docker Trusted Registry.",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/dtr/admin/install/",
-"title":"Install Docker Trusted Registry",
-"description":"Learn how to install Docker Trusted Registry for production.",
-"keywords":"dtr, registry, install"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-webhooks/",
-"title":"Manage webhooks",
-"description":"Learn how to create, configure, and test webhooks in Docker Trusted Registry.",
-"keywords":"registry, webhooks"
-}
-,
-{
-"url":"/ee/dtr/admin/monitor-and-troubleshoot/",
-"title":"Monitor Docker Trusted Registry",
-"description":"Learn how to monitor your DTR installation.",
-"keywords":"registry, monitor, troubleshoot"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-users/",
-"title":"Authentication and authorization in DTR",
-"description":"Learn about the permission levels available on Docker Trusted Registry.",
-"keywords":"registry, security, permissions, users"
-}
-,
-{
-"url":"/ee/dtr/",
-"title":"Docker Trusted Registry 概要",
-"description":"Docker Trusted Registry のインストール、設定、利用について学びます。",
-"keywords":"registry, repository, images"
-}
-,
-{
-"url":"/ee/admin/restore/",
-"title":"Restore Docker Enterprise",
-"description":"Learn how to restore Docker Enterprise platform from a backup.",
-"keywords":"enterprise, restore, recovery"
-}
-,
-{
-"url":"/ee/admin/backup/",
-"title":"Back up Docker Enterprise",
-"description":"Learn how to create a backup of your Docker Enterprise.",
-"keywords":"enterprise, backup"
-}
-,
-{
-"url":"/ee/",
-"title":"Docker Enterprise",
-"description":"Home page for Docker Enterprise documentation",
-"keywords":"Docker Enterprise, documentation, manual, guide, reference, api, CLI"
-}
-,
-{
 "url":"/",
 "title":"Docker ドキュメント",
 "description":"Docker ドキュメントホームページ",
@@ -2903,13 +2098,6 @@ var pages = [
 "title":"Use swarm mode routing mesh",
 "description":"Use the routing mesh to publish services externally to a swarm",
 "keywords":"guide, swarm mode, swarm, network, ingress, routing mesh"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/cluster-ingress/ingress/",
-"title":"Deploy a Sample Application with Ingress (Experimental)",
-"description":"Learn how to deploy Ingress rules for Kubernetes applications.",
-"keywords":"ucp, cluster, ingress, kubernetes"
 }
 ,
 {
@@ -2941,66 +2129,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/kubernetes/install-cni-plugin/",
-"title":"Install an unmanaged CNI plugin",
-"description":"Learn how to install a Container Networking Interface (CNI) plugin on Docker Universal Control Plane.",
-"keywords":"ucp, kubernetes, cni, container networking interface, flannel, weave, calico"
-}
-,
-{
-"url":"/ee/ucp/admin/install/install-offline/",
-"title":"オフラインでの UCP インストール",
-"description":"Learn how to install Docker Universal Control Plane. on a machine with no internet access.",
-"keywords":"UCP, install, offline, Docker EE"
-}
-,
-{
-"url":"/ee/dtr/admin/install/install-offline/",
-"title":"Install Docker Trusted Registry offline",
-"description":"Learn how to install Docker Trusted Registry on a machine with no internet access.",
-"keywords":"registry, install, offline"
-}
-,
-{
-"url":"/ee/ucp/admin/install/cloudproviders/install-on-aws/",
-"title":"Install UCP on AWS",
-"description":"Learn how to install Docker Universal Control Plane in an Amazon Web Services (AWS) environment.",
-"keywords":"Universal Control Plane, UCP, install, Docker EE, AWS, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/admin/install/cloudproviders/install-on-azure-custom/",
-"title":"Custom Azure Roles",
-"description":"Learn how to create custom RBAC roles to run Docker Enterprise on Azure.",
-"keywords":"Universal Control Plane, UCP, install, Docker Enterprise, Azure, Swarm"
-}
-,
-{
-"url":"/ee/ucp/admin/install/cloudproviders/install-on-azure/",
-"title":"Install UCP on Azure",
-"description":"Learn how to install Docker Universal Control Plane in a Microsoft Azure environment.",
-"keywords":"Universal Control Plane, UCP, install, Docker EE, Azure, Kubernetes"
-}
-,
-{
 "url":"/docker-for-windows/install-windows-home/",
 "title":"Install Docker Desktop on Windows Home",
 "description":"How to install Docker Desktop on Windows 10 Home",
 "keywords":"Windows 10 Home, Home, Windows, install, download, run, Docker, local"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/install/",
-"title":"docker/ucp install",
-"description":"Install UCP on a node",
-"keywords":"ucp, cli, install"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/install/",
-"title":"docker/dtr install",
-"description":"Install Docker Trusted Registry",
-"keywords":"dtr, cli, install"
 }
 ,
 {
@@ -3022,34 +2154,6 @@ var pages = [
 "title":"Docker Compose のインストール",
 "description":"Docker Compose のインストール方法。",
 "keywords":"compose, orchestration, install, installation, docker, documentation"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/cluster-ingress/install/",
-"title":"Install Cluster Ingress (Experimental)",
-"description":"Learn how to deploy ingress rules using Kubernetes manifests.",
-"keywords":"ucp, cluster, ingress, kubernetes"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/integrate-saml/",
-"title":"SAML integration",
-"description":"Learn how to use SAML to link a UCP team with an Identity Provider (IdP) Group",
-"keywords":"cluster, node, join"
-}
-,
-{
-"url":"/ee/ucp/interlock/usage/interlock-vip-mode/",
-"title":"Specify a routing mode",
-"description":"Learn about task and VIP backend routing modes for Layer 7 routing",
-"keywords":"routing, proxy, interlock"
-}
-,
-{
-"url":"/ee/dtr/user/promotion-policies/internal-promotion/",
-"title":"Promote an image using policies",
-"description":"Learn how to create a promotion policies that can automatically promote an image to production if it passes all tests and doesn't have vulnerabilities.",
-"keywords":"registry, promotion, pipeline"
 }
 ,
 {
@@ -3081,20 +2185,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/authorization/isolate-nodes/",
-"title":"Isolate cluster nodes",
-"description":"Create grants that limit access to nodes to specific teams.",
-"keywords":"ucp, grant, role, permission, authentication, node, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/authorization/isolate-volumes/",
-"title":"Isolate volumes to a specific team",
-"description":"Create grants that limit access to volumes to specific teams.",
-"keywords":"ucp, grant, role, permission, authentication"
-}
-,
-{
 "url":"/compliance/nist/itl_october2017/",
 "title":"NIST ITL October 2017 guidance on application container security",
 "description":"NIST ITL October 2017 NIST Guidance on Application Container Security",
@@ -3102,38 +2192,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/manage-jobs/job-queue/",
-"title":"Job Queue",
-"description":"Learn how Docker Trusted Registry runs batch jobs for troubleshooting job-related issues.",
-"keywords":"dtr, job queue, job management"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/",
-"title":"Join Linux nodes to your cluster",
-"description":"Learn how to scale a Docker Enterprise Edition cluster by adding manager and worker nodes.",
-"keywords":"Docker Enterprise, UCP, cluster, scale, worker, manager"
-}
-,
-{
 "url":"/engine/swarm/join-nodes/",
 "title":"Join nodes to a swarm",
 "description":"Add worker and manager nodes to a swarm",
 "keywords":"guide, swarm mode, node"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/join-nodes/join-windows-nodes-to-cluster/",
-"title":"Join Windows worker nodes to your cluster",
-"description":"Join worker nodes that are running on Windows Server to a Docker Enterprise cluster.",
-"keywords":"Docker Enterprise, UCP, cluster, scale, worker, Windows"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/join/",
-"title":"docker/dtr join",
-"description":"Add a new replica to an existing DTR cluster",
-"keywords":"dtr, cli, join"
 }
 ,
 {
@@ -3186,13 +2248,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/admin/configure/kms-plugin/",
-"title":"KMS plugin support for UCP",
-"description":"Learn about the KMS plugin for UCP.",
-"keywords":"ucp, kms, kubernetes, plugin, configuration"
-}
-,
-{
 "url":"/kitematic/known-issues/",
 "title":"Kitematic: Known issues",
 "description":"Information about known issues in Kitematic",
@@ -3204,27 +2259,6 @@ var pages = [
 "title":"Deploy to Kubernetes",
 "description":"Learn how to describe and deploy a simple application on Kubernetes.",
 "keywords":"kubernetes, pods, deployments, kubernetes services"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/kube-resources/",
-"title":"Find Kubernetes Resources",
-"description":"Learn where to access various Kubernetes resources in the UCP web interface.",
-"keywords":"ucp, resources, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/user-access/kubectl/",
-"title":"Install the Kubernetes CLI",
-"description":"Learn how to install kubectl, the Kubernetes command-line tool, on Docker Universal Control Plane.",
-"keywords":"ucp, cli, administration, kubectl, Kubernetes"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/kubernetes-network-encryption/",
-"title":"Kubernetes Network Encryption",
-"description":"Learn how to configure network encryption in Kubernetes",
-"keywords":"ucp, cli, administration, kubectl, Kubernetes, security, network, ipsec, ipip, esp, calico"
 }
 ,
 {
@@ -3246,34 +2280,6 @@ var pages = [
 "title":"Docker オブジェクトラベル",
 "description":"ラベルの説明。これは Docker オブジェクトにおいてメタデータを管理するために用いられます。",
 "keywords":"Usage, user guide, labels, metadata, docker, documentation, examples, annotating"
-}
-,
-{
-"url":"/ee/ucp/interlock/usage/labels-reference/",
-"title":"Use layer 7 routing labels",
-"description":"Learn about the labels you can use in your swarm services to route layer 7 traffic.",
-"keywords":"routing, proxy, interlock, load balancing"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/license-your-installation/",
-"title":"License your installation",
-"description":"Learn how to license your Docker Universal Control Plane installation.",
-"keywords":"Universal Control Plane, UCP, install, license"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/license-your-installation/",
-"title":"License your installation",
-"description":"Learn how to license your Docker Trusted Registry installation.",
-"keywords":"dtr, install, license"
-}
-,
-{
-"url":"/ee/licensing/",
-"title":"Docker Enterprise ライセンス",
-"description":"Docker Enterprise ライセンスについて学ぶ。",
-"keywords":"license, enterprise, engine enterprise, ucp, dtr, desktop enterprise"
 }
 ,
 {
@@ -3382,21 +2388,7 @@ var pages = [
 }
 ,
 {
-"url":"/ee/desktop/admin/configure/mac-admin/",
-"title":"Configure Docker Desktop Enterprise on Mac",
-"description":"Learn about Docker Desktop Enterprise",
-"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
-}
-,
-{
 "url":"/desktop/enterprise/troubleshoot/mac-issues/",
-"title":"Troubleshoot Docker Desktop Enterprise issues on Mac",
-"description":"Troubleshoot Mac issues",
-"keywords":"Troubleshoot, diagnose, Mac, issues, Docker Enterprise, Docker Desktop, Enterprise"
-}
-,
-{
-"url":"/ee/desktop/troubleshoot/mac-issues/",
 "title":"Troubleshoot Docker Desktop Enterprise issues on Mac",
 "description":"Troubleshoot Mac issues",
 "keywords":"Troubleshoot, diagnose, Mac, issues, Docker Enterprise, Docker Desktop, Enterprise"
@@ -3410,21 +2402,7 @@ var pages = [
 }
 ,
 {
-"url":"/ee/desktop/user/mac-user/",
-"title":"Use Docker Desktop Enterprise on Mac",
-"description":null,
-"keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise"
-}
-,
-{
 "url":"/desktop/enterprise/admin/install/mac/",
-"title":"Install Docker Desktop Enterprise on Mac",
-"description":"Learn about Docker Desktop Enterprise",
-"keywords":"Docker EE, Mac, Docker Desktop, Enterprise"
-}
-,
-{
-"url":"/ee/desktop/admin/install/mac/",
 "title":"Install Docker Desktop Enterprise on Mac",
 "description":"Learn about Docker Desktop Enterprise",
 "keywords":"Docker EE, Mac, Docker Desktop, Enterprise"
@@ -3435,13 +2413,6 @@ var pages = [
 "title":"Use macvlan networks",
 "description":"All about using macvlan to make your containers appear like physical machines on the network",
 "keywords":"network, macvlan, standalone"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/manage-and-deploy-private-images/",
-"title":"Manage and deploy private images",
-"description":"Learn how to push an image to Docker Trusted Registry and deploy it to a Kubernetes cluster managed by Docker Enterprise Edition.",
-"keywords":"Docker EE, DTR, UCP, image, Kubernetes, orchestration, cluster"
 }
 ,
 {
@@ -3508,13 +2479,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/admin/configure/metrics-descriptions/",
-"title":"Using UCP cluster metrics with Prometheus",
-"description":"Using UCP cluster metrics with Prometheus",
-"keywords":"prometheus, metrics, ucp"
-}
-,
-{
 "url":"/engine/migration/",
 "title":"Migrate to Engine 1.10",
 "description":"Migrate to Engine 1.10",
@@ -3547,13 +2511,6 @@ var pages = [
 "title":"Leverage multi-CPU architecture support",
 "description":"Multi-CPU Architecture Support",
 "keywords":"mac, Multi-CPU architecture support"
-}
-,
-{
-"url":"/swarm/multi-host-networking/",
-"title":"Multi-host networking with standalone swarms",
-"description":"Use overlay for multi-host networking",
-"keywords":"Examples, Usage, network, docker, documentation, user guide, multihost, cluster"
 }
 ,
 {
@@ -3704,20 +2661,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/configure/external-storage/nfs/",
-"title":"Use NFS",
-"description":"Learn how to integrate Docker Trusted Registry with NFS",
-"keywords":"registry, dtr, storage, nfs"
-}
-,
-{
-"url":"/ee/ucp/interlock/config/nginx-config/",
-"title":"Configure Nginx",
-"description":"Learn how to configure an nginx extension",
-"keywords":"routing, proxy, interlock, load balancing"
-}
-,
-{
 "url":"/kitematic/nginx-web-server/",
 "title":"Kitematic tutorial: Serve a static website with NGINX",
 "description":"Tutorial demonstrating the setup of an Nginx web server using Docker and Kitematic",
@@ -3816,13 +2759,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/monitor-and-troubleshoot/notary-audit-logs/",
-"title":"Check Notary audit logs",
-"description":"When you push signed images, Docker Trusted Registry keeps audit logs for the changes made to the image metadata. Learn how to view these logs.",
-"keywords":"registry, monitor, troubleshoot"
-}
-,
-{
 "url":"/registry/notifications/",
 "title":"Work with notifications",
 "description":"Explains how to work with registry notifications",
@@ -3844,38 +2780,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/deploy/offline-install/",
-"title":"Offline installation considerations",
-"description":"Learn how to to install Interlock on a Docker cluster without internet access.",
-"keywords":"routing, proxy, interlock"
-}
-,
-{
-"url":"/docker-for-mac/opensource/",
-"title":"オープンソースコンポーネントとライセンス",
-"description":"Docker's use of Open Source",
-"keywords":"docker, opensource"
-}
-,
-{
-"url":"/docker-for-windows/opensource/",
-"title":"Open source components and licensing",
-"description":"Docker's use of Open Source",
-"keywords":"docker, opensource"
-}
-,
-{
 "url":"/desktop/opensource/",
 "title":"オープンソースコンポーネントとライセンス",
 "description":"Docker's use of Open Source",
 "keywords":"docker, opensource"
-}
-,
-{
-"url":"/ee/docker-ee/oracle/",
-"title":"Get Docker Engine - Enterprise for Oracle Linux",
-"description":"Instructions for installing Docker Engine - Enterprise on Oracle Linux",
-"keywords":"requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
@@ -3942,13 +2850,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/user/manage-images/override-a-vulnerability/",
-"title":"Override a vulnerability",
-"description":"Learn how to dismiss a vulnerability reported by the security scanner, when you know it has been addressed",
-"keywords":"registry, security scanner"
-}
-,
-{
 "url":"/get-started/overview/",
 "title":"Docker 概要",
 "description":"Docker explained in depth",
@@ -3956,24 +2857,10 @@ var pages = [
 }
 ,
 {
-"url":"/toolbox/overview/",
-"title":"Docker Toolbox 概要",
-"description":"Toolbox の概要を説明",
-"keywords":"docker, documentation, about, technology, kitematic, gui, toolbox"
-}
-,
-{
 "url":"/compose/reference/overview/",
 "title":"docker-compose コマンド概要",
 "description":"Overview of docker-compose CLI",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  docker-compose"
-}
-,
-{
-"url":"/ee/overview/",
-"title":"Docker Enterprise",
-"description":"Learn about Docker Enterprise, the industry-leading container platform to securely build, share, and run any application, on any infrastructure.",
-"keywords":"Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes"
 }
 ,
 {
@@ -4012,13 +2899,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/manage-users/permission-levels/",
-"title":"Permission levels in DTR",
-"description":"Learn about the permission levels available in Docker Trusted Registry.",
-"keywords":"registry, security, permissions"
-}
-,
-{
 "url":"/engine/swarm/how-swarm-mode-works/pki/",
 "title":"Manage swarm security with public key infrastructure (PKI)",
 "description":"How PKI works in swarm mode",
@@ -4030,13 +2910,6 @@ var pages = [
 "title":"Planning",
 "description":"Planning reference",
 "keywords":"standards, compliance, security, 800-53, Planning"
-}
-,
-{
-"url":"/ee/ucp/admin/install/plan-installation/",
-"title":"Plan your installation",
-"description":"Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.",
-"keywords":"UCP, install, Docker EE"
 }
 ,
 {
@@ -4138,20 +3011,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/kubernetes/pod-security-policies/",
-"title":"Use Pod Security Policies in UCP",
-"description":"Learn how to use Pod Security Policies to lock down Kubernetes as part of Universal Control Plane.",
-"keywords":"UCP, Kubernetes, psps, pod security policies"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/port-check-server/",
-"title":"docker/ucp port-check-server",
-"description":"Check the firewall ports for UCP",
-"keywords":"ucp, cli, images"
-}
-,
-{
 "url":"/compose/reference/port/",
 "title":"docker-compose port",
 "description":"Prints the public port for a port bindings.",
@@ -4173,13 +3032,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/user/manage-images/prevent-tags-from-being-overwritten/",
-"title":"Prevent tags from being overwritten",
-"description":"Learn how to make your tags immutable and prevent users from overwriting a tag if it already exists",
-"keywords":"registry, immutable"
-}
-,
-{
 "url":"/engine/release-notes/prior-releases/",
 "title":"Docker Engine リリースノート",
 "description":"Release notes for Docker CE",
@@ -4191,13 +3043,6 @@ var pages = [
 "title":"本番環境での Compose の利用",
 "description":"本番環境で Compose を利用するためのガイド。",
 "keywords":"compose, orchestration, containers, production"
-}
-,
-{
-"url":"/ee/ucp/interlock/deploy/production/",
-"title":"Configure layer 7 routing for production",
-"description":"Learn how to configure the layer 7 routing solution for a production environment.",
-"keywords":"routing, proxy, interlock"
 }
 ,
 {
@@ -4257,27 +3102,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/user/manage-images/pull-and-push-images/",
-"title":"Pull and push images",
-"description":"Learn how to pull and push images to Docker Trusted Registry.",
-"keywords":"registry, push, pull"
-}
-,
-{
-"url":"/ee/ucp/authorization/pull-images/",
-"title":"Allow users to pull images",
-"description":"Learn how to grant permissions for users to pull images into a cluster managed with Docker Enterprise Edition.",
-"keywords":"ucp, grant, images"
-}
-,
-{
-"url":"/ee/dtr/user/promotion-policies/pull-mirror/",
-"title":"Mirror images from another registry",
-"description":"Learn how to set up a repository to poll for changes in another registry and automatically pull new images from it.",
-"keywords":"registry, promotion, mirror"
-}
-,
-{
 "url":"/compose/reference/pull/",
 "title":"docker-compose pull",
 "description":"Pulls service images.",
@@ -4289,13 +3113,6 @@ var pages = [
 "title":"docker pull",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/ee/dtr/user/promotion-policies/push-mirror/",
-"title":"Mirror images to another registry",
-"description":"Learn how to create a promotion policy that promotes images to an external registry, creating a DTR mirror.",
-"keywords":"registry, promotion, mirror"
 }
 ,
 {
@@ -4334,24 +3151,10 @@ var pages = [
 }
 ,
 {
-"url":"/reference/dtr/2.7/cli/reconfigure/",
-"title":"docker/dtr reconfigure",
-"description":"Change DTR configurations",
-"keywords":"dtr, cli, reconfigure"
-}
-,
-{
 "url":"/docker-hub/2fa/recover-hub-account/",
 "title":"Recover your Docker Hub account",
 "description":"Recover your Docker Hub account",
 "keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
-}
-,
-{
-"url":"/ee/ucp/interlock/usage/redirects/",
-"title":"Implement application redirects",
-"description":"Learn how to implement redirects using swarm services and the Layer 7 routing solution for UCP.",
-"keywords":"routing, proxy, redirects, interlock"
 }
 ,
 {
@@ -4439,13 +3242,6 @@ var pages = [
 }
 ,
 {
-"url":"/swarm/release-notes/",
-"title":"Docker Swarm (standalone) release notes",
-"description":"Release notes for Docker Swarm (standalone)",
-"keywords":"release notes, swarm"
-}
-,
-{
 "url":"/compose/release-notes/",
 "title":"Docker Compose release notes",
 "description":"Release notes for Docker Compose",
@@ -4467,48 +3263,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/docker-ee/release-notes/",
-"title":"Docker Engine - Enterprise release notes",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine - Enterprise",
-"keywords":"docker, docker engine, ee, ce, whats new, release notes"
-}
-,
-{
-"url":"/ee/ucp/release-notes/",
-"title":"UCP release notes",
-"description":"Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions.",
-"keywords":"UCP, release notes"
-}
-,
-{
-"url":"/ee/cluster/release-notes/",
-"title":"Docker Cluster リリースノート",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Cluster.",
-"keywords":"cluster, whats new, release notes"
-}
-,
-{
-"url":"/ee/desktop/release-notes/",
-"title":"Docker Desktop Enterprise release notes",
-"description":"Release notes for Docker Desktop Enterprise",
-"keywords":"Docker Desktop Enterprise, Windows, Mac, Docker Desktop, Enterprise,"
-}
-,
-{
-"url":"/ee/dtr/release-notes/",
-"title":"DTR release notes",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry",
-"keywords":"docker trusted registry, whats new, release notes"
-}
-,
-{
-"url":"/ee/release-notes/",
-"title":"Install or upgrade Docker Enterprise components",
-"description":"Learn about the new features, bug fixes, and breaking changes for Docker Enterprise.",
-"keywords":"engine enterprise, ucp, dtr, desktop enterprise, whats new, release notes"
-}
-,
-{
 "url":"/machine/release-notes/",
 "title":"Docker Machine release notes",
 "description":"Release notes for Docker Machine",
@@ -4523,13 +3277,6 @@ var pages = [
 }
 ,
 {
-"url":"/reference/dtr/2.7/cli/remove/",
-"title":"docker/dtr remove",
-"description":"Remove a DTR replica from a cluster",
-"keywords":"dtr, cli, remove"
-}
-,
-{
 "url":"/engine/reference/commandline/rename/",
 "title":"docker rename",
 "description":null,
@@ -4537,31 +3284,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/disaster-recovery/repair-a-cluster/",
-"title":"Repair a cluster",
-"description":"Learn how to repair DTR when the majority of replicas are unhealthy.",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/dtr/admin/disaster-recovery/repair-a-single-replica/",
-"title":"Repair a single replica",
-"description":"Learn how to repair a single DTR replica when it is unhealthy.",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
 "url":"/docker-hub/repos/",
 "title":"リポジトリ",
 "description":"Docker Hub 上のリポジトリを利用する。",
 "keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
-}
-,
-{
-"url":"/ee/ucp/authorization/reset-user-password/",
-"title":"Reset a user password",
-"description":"Learn how to recover your Docker Enterprise Edition credentials.",
-"keywords":"ucp, authentication, password"
 }
 ,
 {
@@ -4593,73 +3319,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/admin/restore/restore-dtr/",
-"title":"Restore from a backup",
-"description":"Learn how to restore a DTR cluster from an existing backup",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/dtr/admin/disaster-recovery/restore-from-backup/",
-"title":"Restore from a backup",
-"description":"Learn how to restore a DTR cluster from an existing backup",
-"keywords":"dtr, disaster recovery"
-}
-,
-{
-"url":"/ee/admin/restore/restore-swarm/",
-"title":"Restore Docker Swarm",
-"description":"Learn how to restore Docker Swarm from an existing backup",
-"keywords":"enterprise, restore, swarm"
-}
-,
-{
-"url":"/ee/admin/restore/restore-ucp/",
-"title":"Restore UCP",
-"description":"Learn how to restore UCP from a backup",
-"keywords":"enterprise, restore, swarm"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/restore/",
-"title":"docker/ucp restore",
-"description":"Restore a UCP cluster from a backup",
-"keywords":"ucp, cli, restore"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/restore/",
-"title":"docker/dtr restore",
-"description":"Install and restore DTR from an existing backup",
-"keywords":"dtr, cli, restore"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/restrict-services-to-worker-nodes/",
-"title":"Restrict services to worker nodes",
-"description":"Learn how to configure Docker Universal Control Plane to only allow running services in worker nodes.",
-"keywords":"ucp, configuration, worker"
-}
-,
-{
 "url":"/kitematic/rethinkdb-dev-database/",
 "title":"Kitematic tutorial: Create a local RethinkDB database for development",
 "description":"Tutorial demonstrating the setup of an RethinkDB database for development",
 "keywords":"docker, documentation, about, technology, kitematic, gui, rethink, tutorial"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/review-repository-info/",
-"title":"Review Repository Info",
-"description":"View your repository permissions.",
-"keywords":"dtr, repository, permissions"
-}
-,
-{
-"url":"/ee/docker-ee/rhel/",
-"title":"Get Docker Engine - Enterprise for Red Hat Enterprise Linux",
-"description":"Instructions for installing Docker Engine - Enterprise on RHEL",
-"keywords":"requirements, installation, rhel, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
@@ -4695,13 +3358,6 @@ var pages = [
 "title":"Run the Docker daemon as a non-root user (Rootless mode)",
 "description":"Run the Docker daemon as a non-root user (Rootless mode)",
 "keywords":"security, namespaces, rootless"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/run-only-the-images-you-trust/",
-"title":"Run only the images you trust",
-"description":"Configure a Docker UCP cluster to only allow running applications that use images you trust.",
-"keywords":"ucp, dtr, security, trust"
 }
 ,
 {
@@ -4754,13 +3410,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/admin/configure/external-storage/s3/",
-"title":"Store images on Amazon S3",
-"description":"Learn how to configure Docker Trusted Registry to store Docker images on Amazon S3",
-"keywords":"dtr, storage driver, s3"
-}
-,
-{
 "url":"/compliance/reference/800-53/sa/",
 "title":"System and services acquisition",
 "description":"System and services acquisition reference",
@@ -4796,24 +3445,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/admin/configure/scale-your-cluster/",
-"title":"Scale your cluster",
-"description":"Learn how to scale Docker Universal Control Plane cluster, by adding and removing nodes.",
-"keywords":"UCP, cluster, scale"
-}
-,
-{
 "url":"/compose/reference/scale/",
 "title":"docker-compose scale",
 "description":"Sets the number of containers to run for a service.",
 "keywords":"fig, composition, compose, docker, orchestration, cli,  scale"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/scan-images-for-vulnerabilities/",
-"title":"Scan images for vulnerabilities",
-"description":"Learn how to scan your Docker images for vulnerabilities.",
-"keywords":"registry, scan, vulnerability"
 }
 ,
 {
@@ -4908,13 +3543,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/usage/service-clusters/",
-"title":"Implement service clusters",
-"description":"Learn how to route traffic to different proxies using a service cluster.",
-"keywords":"ucp, interlock, load balancing, routing"
-}
-,
-{
 "url":"/engine/reference/commandline/service/",
 "title":"docker service",
 "description":null,
@@ -5006,41 +3634,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/usage/sessions/",
-"title":"Implement persistent (sticky) sessions",
-"description":"Learn how to configure your swarm services with persistent sessions using UCP.",
-"keywords":"routing, proxy, cookies, IP hash"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/set-orchestrator-type/",
-"title":"Set the orchestrator type for a node",
-"description":"Learn how to specify the orchestrator for nodes in a Docker Enterprise Edition cluster.",
-"keywords":"Docker Enterprise, UCP, cluster, orchestrator"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/set-session-timeout/",
-"title":"Set the user's session timeout",
-"description":"Learn how to set the session timeout for users and other session properties.",
-"keywords":"UCP, authorization, authentication, security, session, timeout"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/set-up-high-availability/",
-"title":"Set up high availability",
-"description":"Lean how to scale Docker Trusted Registry by adding and removing replicas.",
-"keywords":"dtr, install, deploy"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/set-up-vulnerability-scans/",
-"title":"Set up Security Scanning in DTR",
-"description":"Enable and configure Docker Security Scanning for Docker Trusted Registry.",
-"keywords":"registry, scanning, security scan, vulnerability, CVE"
-}
-,
-{
 "url":"/compliance/reference/800-53/si/",
 "title":"System and information integrity",
 "description":"System and information integrity reference",
@@ -5052,20 +3645,6 @@ var pages = [
 "title":"Notary signer configuration file",
 "description":"Configuring the notary client, server and signer.",
 "keywords":"docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/deploy-caches/simple-kube/",
-"title":"Deploy a DTR cache with Kubernetes",
-"description":"Deploy a DTR cache to allow users in remote geographical locations to pull images faster.",
-"keywords":"DTR, cache, kubernetes"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/deploy-caches/simple/",
-"title":"Deploy a DTR cache with Swarm",
-"description":"Deploy a DTR cache to make users in remove geographical locations pull images faster.",
-"keywords":"DTR, cache"
 }
 ,
 {
@@ -5174,13 +3753,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/kubernetes/cluster-ingress/sticky/",
-"title":"Deploy a Sample Application with Sticky Sessions (Experimental)",
-"description":"Learn how to use cookies with Ingress host and path routing.",
-"keywords":"ucp, cluster, ingress, kubernetes"
-}
-,
-{
 "url":"/compose/reference/stop/",
 "title":"docker-compose stop",
 "description":"Stops running containers without removing them. ",
@@ -5192,41 +3764,6 @@ var pages = [
 "title":"docker stop",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/ee/dtr/admin/configure/external-storage/storage-backend-migration/",
-"title":"Switch storage backends",
-"description":"Storage backend migration for Docker Trusted Registry",
-"keywords":"dtr, storage drivers, local volume, NFS, Azure, S3,"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/deploy-caches/strategy/",
-"title":"Cache deployment strategy",
-"description":"Learn how to deploy DTR caches across multiple datacenters to make image pulls faster.",
-"keywords":"DTR, cache"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/support/",
-"title":"docker/ucp support",
-"description":"Create a support dump for UCP nodes",
-"keywords":"ucp, cli, support, support dump, troubleshooting"
-}
-,
-{
-"url":"/ee/supported-platforms/",
-"title":"概要",
-"description":"Docker Enterprise の製品情報",
-"keywords":"Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported"
-}
-,
-{
-"url":"/ee/docker-ee/suse/",
-"title":"Get Docker Engine - Enterprise for SLES",
-"description":"Instructions for installing Docker Engine - Enterprise on SLES",
-"keywords":"requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update"
 }
 ,
 {
@@ -5335,20 +3872,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/admin/install/system-requirements/",
-"title":"UCP System requirements",
-"description":"Learn about the system requirements for installing Docker Universal Control Plane.",
-"keywords":"UCP, architecture, requirements, Docker Engine - Enterprise"
-}
-,
-{
-"url":"/ee/dtr/admin/install/system-requirements/",
-"title":"Docker Trusted Registry system requirements",
-"description":"Learn about the system requirements for installing Docker Trusted Registry.",
-"keywords":"DTR, architecture, requirements"
-}
-,
-{
 "url":"/engine/reference/commandline/system/",
 "title":"docker system",
 "description":null,
@@ -5391,38 +3914,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/dtr/user/tag-pruning/",
-"title":"Tag Pruning",
-"description":"Skip the management headache of deciding which tags to delete or preserve by configuring a tag pruning policy or enforcing a tag limit per repository in the Docker Trusted Registry",
-"keywords":"registry, tag pruning, tag limit, repo management"
-}
-,
-{
 "url":"/engine/reference/commandline/tag/",
 "title":"docker tag",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/ee/telemetry/",
-"title":"Manage usage data collection",
-"description":"Understand and manage usage data collected by Docker Engine - Enterprise and sent to Docker.",
-"keywords":"enterprise, telemetry, data collection"
-}
-,
-{
-"url":"/ee/dtr/user/promotion-policies/templates/",
-"title":"Promotion policies templates",
-"description":"Learn how to use templates when setting your promotion policies to rename your images",
-"keywords":"registry, promotion, mirror"
-}
-,
-{
-"url":"/ee/ucp/interlock/usage/tls/",
-"title":"Secure services with TLS",
-"description":"Learn how to configure your swarm services with TLS.",
-"keywords":"routing, proxy, tls"
 }
 ,
 {
@@ -5440,20 +3935,6 @@ var pages = [
 }
 ,
 {
-"url":"/toolbox/toolbox_install_mac/",
-"title":"Install Docker Toolbox on macOS",
-"description":"How to install Toolbox on Mac",
-"keywords":"docker, documentation, install, toolbox, mac"
-}
-,
-{
-"url":"/toolbox/toolbox_install_windows/",
-"title":"Install Docker Toolbox on Windows",
-"description":"How to install Toolbox on Mac",
-"keywords":"docker, documentation, install, toolbox, win"
-}
-,
-{
 "url":"/compose/reference/top/",
 "title":"docker-compose top",
 "description":"実行中のプロセスを表示します。",
@@ -5465,41 +3946,6 @@ var pages = [
 "title":"docker top",
 "description":null,
 "keywords":null
-}
-,
-{
-"url":"/ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/",
-"title":"Troubleshoot batch jobs",
-"description":"Learn how Docker Trusted Registry run batch jobs, so that you can troubleshoot when something goes wrong",
-"keywords":"dtr, troubleshoot"
-}
-,
-{
-"url":"/ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/",
-"title":"Troubleshoot cluster configurations",
-"description":"Learn how to troubleshoot your Docker Universal Control Plane cluster.",
-"keywords":"troubleshoot, etcd, rethinkdb, key, value, store, database, ucp, health, cluster"
-}
-,
-{
-"url":"/ee/dtr/admin/monitor-and-troubleshoot/troubleshoot-dtr/",
-"title":"Troubleshoot Docker Trusted Registry",
-"description":"Learn how to troubleshoot your DTR installation.",
-"keywords":"registry, monitor, troubleshoot"
-}
-,
-{
-"url":"/ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-node-messages/",
-"title":"Troubleshoot UCP node states",
-"description":"Learn how to troubleshoot individual UCP nodes.",
-"keywords":"UCP, troubleshoot, health, swarm"
-}
-,
-{
-"url":"/ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-with-logs/",
-"title":"Troubleshoot your cluster",
-"description":"Learn how to troubleshoot your Docker Universal Control Plane cluster.",
-"keywords":"ucp, troubleshoot, health, cluster"
 }
 ,
 {
@@ -5517,24 +3963,10 @@ var pages = [
 }
 ,
 {
-"url":"/toolbox/faqs/troubleshoot/",
-"title":"Troubleshooting",
-"description":"Troubleshooting connectivity and certificate issues",
-"keywords":"beginner, getting started, FAQs, troubleshooting, Docker"
-}
-,
-{
 "url":"/storage/troubleshooting_volume_errors/",
 "title":"Troubleshoot volume errors",
 "description":"Troubleshooting volume errors",
 "keywords":"cadvisor, troubleshooting, volumes, bind-mounts"
-}
-,
-{
-"url":"/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/",
-"title":"Using Docker Content Trust with a Remote UCP Cluster",
-"description":"Learn how to use a single DTR's trust data with remote UCPs.",
-"keywords":"registry, sign, trust, notary"
 }
 ,
 {
@@ -5643,59 +4075,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/config/tuning/",
-"title":"Tune the proxy service",
-"description":"Learn how to tune the proxy service for environment optimization",
-"keywords":"routing, proxy, interlock"
-}
-,
-{
 "url":"/engine/install/ubuntu/",
 "title":"Docker Engine インストール（Ubuntu 向け）",
 "description":"Ubuntu 上に Docker Engine をインストールする手順を説明。",
 "keywords":"requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
-}
-,
-{
-"url":"/ee/docker-ee/ubuntu/",
-"title":"Get Docker Engine - Enterprise for Ubuntu",
-"description":"Instructions for installing Docker Engine - Enterprise on Ubuntu",
-"keywords":"requirements, apt, installation, ubuntu, install, uninstall, upgrade, update"
-}
-,
-{
-"url":"/ee/ucp/ucp-architecture/",
-"title":"UCP アーキテクチャー",
-"description":"Docker Universal Control Plane について学ぶ。",
-"keywords":"ucp, architecture"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/ucp-configuration-file/",
-"title":"UCP configuration file",
-"description":"Set up UCP deployments by using a configuration file.",
-"keywords":"Docker EE, UCP, configuration, config"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/uninstall-ucp/",
-"title":"docker/ucp uninstall-ucp",
-"description":"Uninstall UCP from this swarm",
-"keywords":"ucp, cli, uninstall-ucp"
-}
-,
-{
-"url":"/ee/ucp/admin/install/uninstall/",
-"title":"Uninstall UCP",
-"description":"Learn how to uninstall a Docker Universal Control Plane.",
-"keywords":"UCP, uninstall, install, Docker EE"
-}
-,
-{
-"url":"/ee/dtr/admin/install/uninstall/",
-"title":"Uninstall Docker Trusted Registry",
-"description":"Learn how to uninstall your Docker Trusted Registry installation.",
-"keywords":"dtr, install, uninstall"
 }
 ,
 {
@@ -5727,178 +4110,10 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/config/updates/",
-"title":"Update Interlock services",
-"description":"Learn how to update the UCP layer 7 routing solution services",
-"keywords":"routing, proxy, interlock"
-}
-,
-{
-"url":"/ee/ucp/admin/install/upgrade-offline/",
-"title":"Upgrade UCP offline",
-"description":"Learn how to upgrade Docker Universal Control Plane on a machine with no internet access.",
-"keywords":"ucp, upgrade, offline"
-}
-,
-{
-"url":"/reference/ucp/3.2/cli/upgrade/",
-"title":"docker/ucp upgrade",
-"description":"Upgrade the UCP components on this node",
-"keywords":"ucp, cli, upgrade"
-}
-,
-{
-"url":"/reference/dtr/2.7/cli/upgrade/",
-"title":"docker/dtr upgrade",
-"description":"Upgrade DTR 2.5.x cluster to this version",
-"keywords":"dtr, cli, upgrade"
-}
-,
-{
 "url":"/docker-hub/billing/upgrade/",
 "title":"Upgrade your plan",
 "description":"Upgrading your Docker Hub Plan",
 "keywords":"Docker Hub, upgrade, subscription, Pro, Team, pricing plan,"
-}
-,
-{
-"url":"/docker-hub/upgrade/",
-"title":"プランのアップグレード",
-"description":"Docker Hub プランのアップグレード方法。",
-"keywords":"Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation"
-}
-,
-{
-"url":"/ee/ucp/interlock/deploy/upgrade/",
-"title":"Layer 7 routing upgrade",
-"description":"Learn how to upgrade your existing layer 7 routing solution",
-"keywords":"routing, proxy, hrm"
-}
-,
-{
-"url":"/ee/ucp/admin/install/upgrade/",
-"title":"Upgrade to UCP 3.2",
-"description":"Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.",
-"keywords":"UCP, upgrade, update"
-}
-,
-{
-"url":"/ee/dtr/admin/upgrade/",
-"title":"Upgrade DTR",
-"description":"Learn how to upgrade your Docker Trusted Registry",
-"keywords":"dtr, upgrade, install"
-}
-,
-{
-"url":"/ee/upgrade/",
-"title":"Upgrade Docker Enterprise",
-"description":"Learn how to upgrade your Docker Enterprise to start using the latest features and security patches.",
-"keywords":"enterprise, upgrade"
-}
-,
-{
-"url":"/ee/dtr/user/access-dtr/use-a-cache/",
-"title":"Use a cache",
-"description":"Learn how to configure your Docker Trusted Registry account to pull images from a cache for faster download times.",
-"keywords":"registry, cache"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/join-nodes/use-a-load-balancer/",
-"title":"Use a load balancer",
-"description":"Learn how to set up a load balancer to access the UCP web UI using an hostname.",
-"keywords":"UCP, high-availability, load balancer"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/use-a-load-balancer/",
-"title":"Use a load balancer",
-"description":"Learn how to configure a load balancer to balance user requests across multiple Docker Trusted Registry replicas.",
-"keywords":"dtr, load balancer"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/use-a-web-proxy/",
-"title":"Use a web proxy",
-"description":"Learn how to configure Docker Content Trust to use a web proxy to reach external services.",
-"keywords":"dtr, configure, http, proxy"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/storage/use-azure-disk/",
-"title":"Configuring Azure Disk Storage for Kubernetes",
-"description":"Learn how to add persistent storage to your Docker Enterprise clusters running on Azure with Azure Disk.",
-"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/storage/use-azure-files/",
-"title":"Configuring Azure Files Storage for Kubernetes",
-"description":"Learn how to add persistent storage to your Docker Enterprise clusters running on Azure with Azure Files.",
-"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/storage/use-csi/",
-"title":"Using CSI drivers",
-"description":"Learn how to deploy a CSI driver with UCP.",
-"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/storage/use-nfs-volumes/",
-"title":"Configuring NFS Storage for Kubernetes",
-"description":"Learn how to add support for NFS persistent storage by adding a default storage class.",
-"keywords":"Universal Control Plane, UCP, Docker EE, Kubernetes, storage, volume"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/use-node-local-network-in-swarm/",
-"title":"Use a local node network in a cluster",
-"description":"Learn how to use a local node network, like MAC VLAN, in a UCP cluster.",
-"keywords":"ucp, network, macvlan"
-}
-,
-{
-"url":"/ee/ucp/swarm/use-secrets/",
-"title":"Manage secrets",
-"description":"Learn how to manage your passwords, certificates, and other secrets in a secure way with Docker EE",
-"keywords":"UCP, secret, password, certificate, private key"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-webhooks/use-the-api/",
-"title":"Manage webhooks via the API",
-"description":"Learn how to create, configure, and test webhooks for DTR using the API.",
-"keywords":"dtr, webhooks, api, registry"
-}
-,
-{
-"url":"/ee/dtr/admin/manage-webhooks/use-the-web-ui/",
-"title":"Manage repository webhooks via the web interface",
-"description":"Learn how to create, configure, and test repository webhooks for DTR using the web interface.",
-"keywords":"dtr, webhooks, ui, web interface, registry"
-}
-,
-{
-"url":"/ee/ucp/kubernetes/storage/use-vsphere-volumes/",
-"title":"Configuring vSphere Volumes for Kubernetes",
-"description":"Learn how to add persistent storage to your Docker Enterprise clusters using vSphere Volumes.",
-"keywords":"Universal Control Plane, UCP, Docker Enterprise, Kubernetes, storage, volume"
-}
-,
-{
-"url":"/ee/ucp/admin/configure/use-your-own-tls-certificates/",
-"title":"Use your own TLS certificates",
-"description":"Learn how to configure Docker Universal Control Plane to use your own certificates.",
-"keywords":"Universal Control Plane, UCP, certificate, authentication, tls"
-}
-,
-{
-"url":"/ee/dtr/admin/configure/use-your-own-tls-certificates/",
-"title":"Use your own TLS certificates",
-"description":"Learn how to configure Docker Trusted Registry with your own TLS certificates.",
-"keywords":"dtr, tls, certificates, security"
 }
 ,
 {
@@ -5986,13 +4201,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/admin/configure/view-namespace-resources/",
-"title":"View Kubernetes objects in a namespace",
-"description":"Learn how to set the Kubernetes namespace context in a Docker Enterprise Edition cluster.",
-"keywords":"Docker EE, UCP, Kubernetes, namespace"
-}
-,
-{
 "url":"/engine/reference/commandline/volume/",
 "title":"docker volume",
 "description":null,
@@ -6063,21 +4271,7 @@ var pages = [
 }
 ,
 {
-"url":"/ee/ucp/interlock/usage/websockets/",
-"title":"Use websockets",
-"description":"Learn how to use websockets in your swarm services.",
-"keywords":"routing, proxy, websockets"
-}
-,
-{
 "url":"/desktop/enterprise/admin/configure/windows-admin/",
-"title":"Configure Docker Desktop Enterprise on Windows",
-"description":"Learn about Docker Desktop Enterprise configuration",
-"keywords":"Docker Admin, Windows, Docker Desktop, Enterprise"
-}
-,
-{
-"url":"/ee/desktop/admin/configure/windows-admin/",
 "title":"Configure Docker Desktop Enterprise on Windows",
 "description":"Learn about Docker Desktop Enterprise configuration",
 "keywords":"Docker Admin, Windows, Docker Desktop, Enterprise"
@@ -6091,13 +4285,6 @@ var pages = [
 }
 ,
 {
-"url":"/ee/desktop/troubleshoot/windows-issues/",
-"title":"Troubleshoot Docker Desktop Enterprise issues on Windows",
-"description":"Learn about Docker Desktop Enterprise",
-"keywords":"Docker EE, Windows, Docker Desktop, Enterprise, troubleshoot"
-}
-,
-{
 "url":"/desktop/enterprise/user/windows-user/",
 "title":"Use Docker Desktop Enterprise on Windows",
 "description":"Exploring the Windows user interface",
@@ -6105,21 +4292,7 @@ var pages = [
 }
 ,
 {
-"url":"/ee/desktop/user/windows-user/",
-"title":"Use Docker Desktop Enterprise on Windows",
-"description":"Exploring the Windows user interface",
-"keywords":"Desktop Enterprise, Docker for Windows, Docker Desktop, Enterprise, User guide, user"
-}
-,
-{
 "url":"/desktop/enterprise/admin/install/windows/",
-"title":"Install Docker Desktop Enterprise on Windows",
-"description":"Learn about Docker Desktop Enterprise",
-"keywords":"Docker EE, Windows, Docker Desktop, Enterprise"
-}
-,
-{
-"url":"/ee/desktop/admin/install/windows/",
 "title":"Install Docker Desktop Enterprise on Windows",
 "description":"Learn about Docker Desktop Enterprise",
 "keywords":"Docker EE, Windows, Docker Desktop, Enterprise"
