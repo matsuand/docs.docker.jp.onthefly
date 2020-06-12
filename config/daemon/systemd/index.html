@@ -1,4 +1,4 @@
-<!-- Page generated 2020-06-04 15:54:47 +0900 -->
+<!-- Page generated 2020-06-12 14:18:16 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-04T15:54:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-12T14:18:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="Linux ディストリビューションでは、Docker デーモンの起動に systemd を用いるものが多くあります。 このドキュメントでは Docker の設定例をいくつか示します。 Docker デーモンの起動 手動で起動する場合 Docker をインストールしたら Docker デーモンを起動する必要があります。 たいていの Linux ディストリビューションでは systemctl を使ってサービスを起動します。 systemctl がない場合は service コマンドを使ってください。 systemctl の場合 $ sudo systemctl start..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker Documentation"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-06-04T15:54:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-06-12T14:18:16+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, daemon, systemd, configuration">
@@ -90,7 +90,6 @@
   <script>
   // Default to assuming this is an archive and hiding some stuff
   // See js/archive.js and js/docs.js for logic relating to this
-  var isArchive = true;
   var dockerVersion = 'v19.03';
   </script>
 </head>
@@ -112,7 +111,7 @@
         <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs">
     </a>
 </div>
-<div class="search-form" id="search-div" style="visibility: hidden">
+<div class="search-form" id="search-div">
     <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="https://matsuand.github.io/docs.docker.jp.onthefly/search/">
         <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
         <div id="autocompleteContainer">
@@ -137,7 +136,7 @@
     </div>
     <div class="ctrl-right">
         <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
-        <div class="btn-group" style="visibility: hidden">
+        <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Docker v19.03 (最新)     <span class="caret"></span>
   </button>
@@ -167,7 +166,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    5 分
   
 </span>
 
@@ -235,86 +234,188 @@
 
 <p>企業内で設定されるような HTTP あるいは HTTPS プロキシーサーバーを利用している場合は、Docker systemd サービスファイルに、これらの設定を加える必要があります。</p>
 
-<ol>
-  <li>
-    <p>Docker サービスに対応した systemd のドロップインディレクトリを生成します。</p>
+<blockquote>
+  <p><strong>rootless モードに関するメモ</strong></p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mkdir <span class="nt">-p</span> /etc/systemd/system/docker.service.d
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code> というファイルを生成して、そこに環境変数 <code class="highlighter-rouge">HTTP_PROXY</code> の設定を書きます。</p>
+</blockquote>
 
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
-<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80/"</span>
-</code></pre></div>    </div>
+<blockquote>
+  <p>The location of systemd configuration files are different when running Docker
+in <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless mode</a>. When running in rootless
+mode, Docker is started as a user-mode systemd service, and uses files stored
+in each users’ home directory in <code class="highlighter-rouge">~/.config/systemd/user/docker.service.d/</code>.
+In addition, <code class="highlighter-rouge">systemctl</code> must be executed without <code class="highlighter-rouge">sudo</code> and with the <code class="highlighter-rouge">--user</code>
+flag. Select the <em>“rootless mode”</em> tab below if you are running Docker in rootless mode.</p>
+</blockquote>
 
-    <p>また HTTPS プロキシーサーバーを利用している場合には <code class="highlighter-rouge">/etc/systemd/system/docker.service.d/https-proxy.conf</code> というファイルを生成して、そこに環境変数 <code class="highlighter-rouge">HTTPS_PROXY</code> の設定を書きます。</p>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#rootful">通常のインストール</a></li>
+  <li><a data-toggle="tab" data-target="#rootless">rootless モード</a></li>
+</ul>
+<div class="tab-content">
+  <div id="rootful" class="tab-pane fade in active">
 
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
-<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443/"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数 <code class="highlighter-rouge">NO_PROXY</code> を通じて設定することができます。</p>
+    <ol>
+      <li>
+        <p>Docker サービスに対応した systemd のドロップインディレクトリを生成します。</p>
 
-    <p>The <code class="highlighter-rouge">NO_PROXY</code> variable specifies a string that contains comma-separated
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>mkdir <span class="nt">-p</span> /etc/systemd/system/docker.service.d
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code> というファイルを生成して、そこに環境変数 <code class="highlighter-rouge">HTTP_PROXY</code> の設定を書きます。</p>
+
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80"</span>
+</code></pre></div>        </div>
+
+        <p>HTTPS プロキシーサーバーを利用している場合には、環境変数 <code class="highlighter-rouge">HTTPS_PROXY</code> の設定を書きます。</p>
+
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443"</span>
+</code></pre></div>        </div>
+
+        <p>環境変数を同時に複数設定することもできます。
+以下は HTTP および HTTPs プロキシーを設定します。</p>
+
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80"</span>
+<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443"</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数 <code class="highlighter-rouge">NO_PROXY</code> を通じて設定することができます。</p>
+
+        <p>The <code class="highlighter-rouge">NO_PROXY</code> variable specifies a string that contains comma-separated
 values for hosts that should be excluded from proxying. These are the
 options you can specify to exclude hosts:</p>
-    <ul>
-      <li>IP address prefix (<code class="highlighter-rouge">1.2.3.4</code>)</li>
-      <li>Domain name, or a special DNS label (<code class="highlighter-rouge">*</code>)</li>
-      <li>A domain name matches that name and all subdomains. A domain name with
+        <ul>
+          <li>IP address prefix (<code class="highlighter-rouge">1.2.3.4</code>)</li>
+          <li>Domain name, or a special DNS label (<code class="highlighter-rouge">*</code>)</li>
+          <li>A domain name matches that name and all subdomains. A domain name with
 a leading “.” matches subdomains only. For example, given the domains
 <code class="highlighter-rouge">foo.example.com</code> and <code class="highlighter-rouge">example.com</code>:
-        <ul>
-          <li><code class="highlighter-rouge">example.com</code> matches <code class="highlighter-rouge">example.com</code> and <code class="highlighter-rouge">foo.example.com</code>, and</li>
-          <li><code class="highlighter-rouge">.example.com</code> matches only <code class="highlighter-rouge">foo.example.com</code></li>
-        </ul>
-      </li>
-      <li>A single asterisk (<code class="highlighter-rouge">*</code>) indicates that no proxying should be done</li>
-      <li>Literal port numbers are accepted by IP address prefixes (<code class="highlighter-rouge">1.2.3.4:80</code>)
+            <ul>
+              <li><code class="highlighter-rouge">example.com</code> matches <code class="highlighter-rouge">example.com</code> and <code class="highlighter-rouge">foo.example.com</code>, and</li>
+              <li><code class="highlighter-rouge">.example.com</code> matches only <code class="highlighter-rouge">foo.example.com</code></li>
+            </ul>
+          </li>
+          <li>A single asterisk (<code class="highlighter-rouge">*</code>) indicates that no proxying should be done</li>
+          <li>Literal port numbers are accepted by IP address prefixes (<code class="highlighter-rouge">1.2.3.4:80</code>)
 and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li>
-    </ul>
+        </ul>
 
-    <p>設定例は以下です。</p>
+        <p>設定例は以下です。</p>
 
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
-<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80/"</span> <span class="s2">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span>
-</code></pre></div>    </div>
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80"</span>
+<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443"</span>
+<span class="n">Environment</span>=<span class="s2">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>設定を反映して Docker を再起動します。</p>
 
-    <p>また HTTPS プロキシーサーバーであれば以下のようになります。</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo </span>systemctl restart docker
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>設定が適切にロードされていること、そして変更した内容が反映されていることを確認します。
+たとえば以下のようにします。</p>
 
-    <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
-<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443/"</span> <span class="s2">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span>
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>設定を反映します。</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl show <span class="nt">--property</span><span class="o">=</span>Environment docker
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl daemon-reload
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Docker を再起動します。</p>
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">HTTP_PROXY</span><span class="o">=</span>http://proxy.example.com:80 <span class="nv">HTTPS_PROXY</span><span class="o">=</span>https://proxy.example.com:443 <span class="nv">NO_PROXY</span><span class="o">=</span>localhost,127.0.0.1,docker-registry.example.com,.corp
+</code></pre></div>        </div>
+      </li>
+    </ol>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart docker
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>設定がロードされていることを確認します。</p>
+  </div>
+  <div id="rootless" class="tab-pane fade in">
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl show <span class="nt">--property</span><span class="o">=</span>Environment docker
-<span class="nv">Environment</span><span class="o">=</span><span class="nv">HTTP_PROXY</span><span class="o">=</span>http://proxy.example.com:80/
-</code></pre></div>    </div>
+    <ol>
+      <li>
+        <p>Create a systemd drop-in directory for the docker service:</p>
 
-    <p>HTTPS プロキシーサーバーの場合は以下のとおりです。</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> ~/.config/systemd/user/docker.service.d
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Create a file named <code class="highlighter-rouge">~/.config/systemd/user/docker.service.d/http-proxy.conf</code>
+that adds the <code class="highlighter-rouge">HTTP_PROXY</code> environment variable:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl show <span class="nt">--property</span><span class="o">=</span>Environment docker
-<span class="nv">Environment</span><span class="o">=</span><span class="nv">HTTPS_PROXY</span><span class="o">=</span>https://proxy.example.com:443/
-</code></pre></div>    </div>
-  </li>
-</ol>
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80"</span>
+</code></pre></div>        </div>
+
+        <p>If you are behind an HTTPS proxy server, set the <code class="highlighter-rouge">HTTPS_PROXY</code> environment
+variable:</p>
+
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443"</span>
+</code></pre></div>        </div>
+
+        <p>Multiple environment variables can be set; to set both a non-HTTPS and
+a HTTPs proxy;</p>
+
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80"</span>
+<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443"</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>If you have internal Docker registries that you need to contact without
+proxying, you can specify them via the <code class="highlighter-rouge">NO_PROXY</code> environment variable.</p>
+
+        <p>The <code class="highlighter-rouge">NO_PROXY</code> variable specifies a string that contains comma-separated
+values for hosts that should be excluded from proxying. These are the
+options you can specify to exclude hosts:</p>
+        <ul>
+          <li>IP address prefix (<code class="highlighter-rouge">1.2.3.4</code>)</li>
+          <li>Domain name, or a special DNS label (<code class="highlighter-rouge">*</code>)</li>
+          <li>A domain name matches that name and all subdomains. A domain name with
+a leading “.” matches subdomains only. For example, given the domains
+<code class="highlighter-rouge">foo.example.com</code> and <code class="highlighter-rouge">example.com</code>:
+            <ul>
+              <li><code class="highlighter-rouge">example.com</code> matches <code class="highlighter-rouge">example.com</code> and <code class="highlighter-rouge">foo.example.com</code>, and</li>
+              <li><code class="highlighter-rouge">.example.com</code> matches only <code class="highlighter-rouge">foo.example.com</code></li>
+            </ul>
+          </li>
+          <li>A single asterisk (<code class="highlighter-rouge">*</code>) indicates that no proxying should be done</li>
+          <li>Literal port numbers are accepted by IP address prefixes (<code class="highlighter-rouge">1.2.3.4:80</code>)
+and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li>
+        </ul>
+
+        <p>Config example:</p>
+
+        <div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[<span class="n">Service</span>]
+<span class="n">Environment</span>=<span class="s2">"HTTP_PROXY=http://proxy.example.com:80"</span>
+<span class="n">Environment</span>=<span class="s2">"HTTPS_PROXY=https://proxy.example.com:443"</span>
+<span class="n">Environment</span>=<span class="s2">"NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Flush changes and restart Docker</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nt">--user</span> daemon-reload
+systemctl <span class="nt">--user</span> restart docker
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Verify that the configuration has been loaded and matches the changes you
+made, for example:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nt">--user</span> show <span class="nt">--property</span><span class="o">=</span>Environment docker
+
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">HTTP_PROXY</span><span class="o">=</span>http://proxy.example.com:80 <span class="nv">HTTPS_PROXY</span><span class="o">=</span>https://proxy.example.com:443 <span class="nv">NO_PROXY</span><span class="o">=</span>localhost,127.0.0.1,docker-registry.example.com,.corp
+</code></pre></div>        </div>
+      </li>
+    </ol>
+
+  </div>
+</div>
+<p><!-- tab-content --></p>
 
 <h2 id="configure-where-the-docker-daemon-listens-for-connections">Configure where the Docker daemon listens for connections</h2>
 
@@ -337,7 +438,7 @@ and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li
                             
                             
                             <div id="ratings-div"
-                                style="color:#b9c2cc; text-align: center; margin-top: 150px; visibility: hidden">
+                                style="color:#b9c2cc; text-align: center; margin-top: 150px;">
                                 <div id="pd_rating_holder_8453675"></div>
                                 <script type="text/javascript">
                                     PDRTJS_settings_8453675 = {
@@ -379,7 +480,7 @@ and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li
                                 <div class="feedback-links">
                                     <ul>
                                         
-                                        <li style="visibility: hidden"><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/config/daemon/systemd.md"><i
+                                        <li><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/config/daemon/systemd.md"><i
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
                                         <li><a href="https://github.com/matsuand/docs.docker.jp/issues/new?body=ファイル: [config/daemon/systemd.md](https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/systemd/)"
                                                 class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
@@ -443,8 +544,8 @@ and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><b><a href="https://www.docker.com/why-docker">Why Docker</a></b></li>
-                        <li><a href="https://www.docker.com/what-container">What is a Container</a></li>
+                        <li><b><a href="https://www.docker.com/why-docker">Why Docker?</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">What is a Container?</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
@@ -522,7 +623,6 @@ and domain names (<code class="highlighter-rouge">foo.example.com:80</code>)</li
     <script>
         // Default to assuming this is an archive and hiding some stuff
         // See js/archive.js and js/docs.js for logic relating to this
-        var isArchive = true;
         var dockerVersion = 'v19.03';
         // In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
         var jekyllEnv = 'development';
