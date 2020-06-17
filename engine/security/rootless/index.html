@@ -1,4 +1,4 @@
-<!-- Page generated 2020-06-13 12:59:08 +0900 -->
+<!-- Page generated 2020-06-17 13:51:19 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-13T12:59:08+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-17T13:51:19+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -63,8 +63,8 @@
   <meta name="twitter:title" itemprop="title name" content="Run the Docker daemon as a non-root user (Rootless mode)"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="Rootless mode allows running the Docker daemon and containers as a non-root user, for the sake of mitigating potential vulnerabilities in the daemon and the container runtime. Rootless mode does..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
-  <meta name="twitter:image:alt" content="Docker Documentation"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-06-13T12:59:08+09:00"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-06-17T13:51:19+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="security, namespaces, rootless">
@@ -76,7 +76,7 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Run the Docker daemon as a non-root user (Rootless mode) | Docker Documentation</title>
+  <title>Run the Docker daemon as a non-root user (Rootless mode) | Docker ドキュメント</title>
   <meta property="og:title" content="Run the Docker daemon as a non-root user (Rootless mode)" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Run the Docker daemon as a non-root user (Rootless mode)" />
@@ -166,7 +166,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    7 分
+    14 分
   
 </span>
 
@@ -235,7 +235,7 @@ UIDs/GIDs for the user. In the following example, the user <code class="highligh
 (<a href="https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144">Ubuntu-specific kernel patch</a>).</p>
   </li>
   <li>
-    <p>Known to work on Ubuntu 16.04 and 18.04.</p>
+    <p>Known to work on Ubuntu 16.04, 18.04, and 20.04.</p>
   </li>
 </ul>
 
@@ -280,16 +280,12 @@ This might be required on other distros as well depending on the configuration.<
   <li>Fedora 31 uses cgroup v2 by default, which is not yet supported by the containerd runtime.
 Run <code class="highlighter-rouge">sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"</code>
 to use cgroup v1.</li>
-</ul>
-
-<h4 id="fedora-30">Fedora 30</h4>
-<ul>
-  <li>No preparation is needed</li>
+  <li><code class="highlighter-rouge">sudo dnf install -y iptables</code> might be needed.</li>
 </ul>
 
 <h4 id="centos-8">CentOS 8</h4>
 <ul>
-  <li>No preparation is needed</li>
+  <li><code class="highlighter-rouge">sudo dnf install -y iptables</code> might be needed.</li>
 </ul>
 
 <h4 id="centos-7">CentOS 7</h4>
@@ -319,10 +315,8 @@ steps.</p>
 <h2 id="known-limitations">Known limitations</h2>
 
 <ul>
-  <li>
-    <p>Only <code class="highlighter-rouge">vfs</code> graphdriver is supported. However, on Ubuntu and Debian 10,
-<code class="highlighter-rouge">overlay2</code> and <code class="highlighter-rouge">overlay</code> are also supported.</p>
-  </li>
+  <li>Only <code class="highlighter-rouge">vfs</code> graphdriver is supported. However, on Ubuntu and Debian 10,
+<code class="highlighter-rouge">overlay2</code> and <code class="highlighter-rouge">overlay</code> are also supported.</li>
   <li>Following features are not supported:
     <ul>
       <li>Cgroups (including <code class="highlighter-rouge">docker top</code>, which depends on the cgroups)</li>
@@ -332,10 +326,11 @@ steps.</p>
       <li>Exposing SCTP ports</li>
     </ul>
   </li>
-  <li>
-    <p>To use <code class="highlighter-rouge">ping</code> command, see <a href="#routing-ping-packets">Routing ping packets</a></p>
-  </li>
+  <li>To use <code class="highlighter-rouge">ping</code> command, see <a href="#routing-ping-packets">Routing ping packets</a></li>
   <li>To expose privileged TCP/UDP ports (&lt; 1024), see <a href="#exposing-privileged-ports">Exposing privileged ports</a></li>
+  <li><code class="highlighter-rouge">IPAddress</code> shown in <code class="highlighter-rouge">docker inspect</code> and is namespaced inside RootlessKit’s network namespace.
+This means the IP address is not reachable from the host without <code class="highlighter-rouge">nsenter</code>-ing into the network namespace.</li>
+  <li>Host network (<code class="highlighter-rouge">docker run --net=host</code>) is namespaced inside RootlessKit as well.</li>
 </ul>
 
 <h2 id="install">Install</h2>
@@ -345,7 +340,8 @@ steps.</p>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">-fsSL</span> https://get.docker.com/rootless | sh
 </code></pre></div></div>
 
-<p>Make sure to run the script as a non-root user.</p>
+<p>Make sure to run the script as a non-root user.
+To install Rootless Docker as the root user, see <a href="#manual-installation">Manual installation</a> steps.</p>
 
 <p>The script will show the environment variables that are needed to be set:</p>
 
@@ -365,9 +361,26 @@ steps.</p>
 <span class="gp">#</span>
 </code></pre></div></div>
 
+<h3 id="manual-installation">Manual installation</h3>
 <p>To install the binaries manually without using the installer, extract
 <code class="highlighter-rouge">docker-rootless-extras-&lt;version&gt;.tar.gz</code> along with <code class="highlighter-rouge">docker-&lt;version&gt;.tar.gz</code>:
 from [https://download.docker.com/linux/static/stable/x86<em>64/](https://download.docker.com/linux/static/stable/x86_64/){: target=”_blank” class=”</em>” }</p>
+
+<p>If you already have Docker daemon running as the root, you only need to extract <code class="highlighter-rouge">docker-rootless-extras-&lt;version&gt;.tar.gz</code>.
+The archive can be extracted under an arbitrary directory listed in the <code class="highlighter-rouge">$PATH</code>. e.g. <code class="highlighter-rouge">/usr/local/bin</code>, or <code class="highlighter-rouge">$HOME/bin</code>.</p>
+
+<h3 id="nightly-channel">Nightly channel</h3>
+
+<p>To install a nightly version of Rootless Docker, execute the installation script with <code class="highlighter-rouge">CHANNEL="nightly"</code>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> curl <span class="nt">-fsSL</span> https://get.docker.com/rootless | <span class="nv">CHANNEL</span><span class="o">=</span><span class="s2">"nightly"</span> sh
+</code></pre></div></div>
+
+<p>The raw binary archives are available at:</p>
+<ul>
+  <li>https://master.dockerproject.org/linux/x86_64/docker-rootless-extras.tgz</li>
+  <li>https://master.dockerproject.org/linux/x86_64/docker.tgz</li>
+</ul>
 
 <h2 id="usage">Usage</h2>
 
@@ -417,10 +430,21 @@ and network namespaces. You can enter the namespaces by running
 
 <h3 id="client">Client</h3>
 
-<p>You need to set the socket path explicitly.</p>
+<p>You need to specify the socket path explicitly.</p>
 
+<p>To specify the socket path via <code class="highlighter-rouge">$DOCKER_HOST</code>:</p>
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>unix://<span class="nv">$XDG_RUNTIME_DIR</span>/docker.sock
-<span class="gp">$</span> docker run <span class="nt">-d</span> nginx
+<span class="gp">$</span> docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:80 nginx
+</code></pre></div></div>
+
+<p>To specify the socket path via <code class="highlighter-rouge">docker context</code>:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker context create rootless <span class="nt">--description</span> <span class="s2">"for rootless mode"</span> <span class="nt">--docker</span> <span class="s2">"host=unix://</span><span class="nv">$XDG_RUNTIME_DIR</span><span class="s2">/docker.sock"</span>
+<span class="go">rootless
+Successfully created context "rootless"
+</span><span class="gp">$</span> docker context use rootless
+<span class="go">rootless
+Current context is now "rootless"
+</span><span class="gp">$</span> docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:80 nginx
 </code></pre></div></div>
 
 <h2 id="tips">Tips</h2>
@@ -448,9 +472,19 @@ with <code class="highlighter-rouge">DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.
   <span class="nt">--tlsverify</span> <span class="nt">--tlscacert</span><span class="o">=</span>ca.pem <span class="nt">--tlscert</span><span class="o">=</span>cert.pem <span class="nt">--tlskey</span><span class="o">=</span>key.pem
 </code></pre></div></div>
 
+<h3 id="expose-docker-api-socket-via-ssh">Expose Docker API socket via SSH</h3>
+
+<p>To expose the Docker API socket via SSH, you need to make sure <code class="highlighter-rouge">$DOCKER_HOST</code>
+is set on the remote host.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> ssh <span class="nt">-l</span> &lt;REMOTEUSER&gt; &lt;REMOTEHOST&gt; <span class="s1">'echo $DOCKER_HOST'</span>
+<span class="go">unix:///run/user/1001/docker.sock
+</span><span class="gp">$</span> docker <span class="nt">-H</span> ssh://&lt;REMOTEUSER&gt;@&lt;REMOTEHOST&gt; run ...
+</code></pre></div></div>
+
 <h3 id="routing-ping-packets">Routing ping packets</h3>
 
-<p><code class="highlighter-rouge">ping</code> command does not work by default.</p>
+<p>On some distributions, <code class="highlighter-rouge">ping</code> does not work by default.</p>
 
 <p>Add <code class="highlighter-rouge">net.ipv4.ping_group_range = 0   2147483647</code> to <code class="highlighter-rouge">/etc/sysctl.conf</code> (or
 <code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code> to allow using <code class="highlighter-rouge">ping</code>.</p>
@@ -467,11 +501,31 @@ with <code class="highlighter-rouge">DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.
 
 <h3 id="limiting-resources">Limiting resources</h3>
 
-<p>Currently, rootless mode ignores cgroup-related <code class="highlighter-rouge">docker run</code> flags such as
-<code class="highlighter-rouge">--cpus</code> and <code class="highlighter-rouge">memory</code>.</p>
+<p>In Docker 19.03, rootless mode ignores cgroup-related <code class="highlighter-rouge">docker run</code> flags such as
+<code class="highlighter-rouge">--cpus</code>, <code class="highlighter-rouge">--memory</code>, --pids-limit`.</p>
 
 <p>However, traditional <code class="highlighter-rouge">ulimit</code> and <a href="https://github.com/opsengine/cpulimit"><code class="highlighter-rouge">cpulimit</code></a>
-can be still used, though they work in process-granularity rather than in container-granularity.</p>
+can be still used, though they work in process-granularity rather than in container-granularity,
+and can be arbitrary disabled by the container process.</p>
+
+<p>e.g.</p>
+<ul>
+  <li>
+    <p>To limit CPU usage to 0.5 cores (akin to <code class="highlighter-rouge">docker run --cpus 0.5):
+</code>docker run       <IMAGE> cpulimit --limit=50 --include-children <command />`</IMAGE>
+</p>
+  </li>
+  <li>
+    <p>To limit max VSZ to 64MiB (akin to <code class="highlighter-rouge">docker run --memory 64m</code>):
+<code class="highlighter-rouge">docker run &lt;IMAGE&gt; sh -c "ulimit -v 65536; &lt;COMMAND&gt;"</code></p>
+  </li>
+  <li>
+    <p>To limit max number of processes to 100 per namespaced UID 2000
+(akin to <code class="highlighter-rouge">docker run --pids-limit=100):
+</code>docker run --user 2000 --ulimit nproc=100       <IMAGE> <command />`</IMAGE>
+</p>
+  </li>
+</ul>
 
 <h3 id="changing-network-stack">Changing network stack</h3>
 
@@ -480,11 +534,143 @@ can be still used, though they work in process-granularity rather than in contai
 by default.</p>
 
 <p>These network stacks run in userspace and might have performance overhead.
-See <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.7.0#network-drivers">RootlessKit documentation</a> for further information.</p>
+See <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#network-drivers">RootlessKit documentation</a> for further information.</p>
 
 <p>Optionally, you can use <code class="highlighter-rouge">lxc-user-nic</code> instead for the best performance.
-To use <code class="highlighter-rouge">lxc-user-nic</code>, you need to edit <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.7.0#--netlxc-user-nic-experimental"><code class="highlighter-rouge">/etc/lxc/lxc-usernet</code></a>
+To use <code class="highlighter-rouge">lxc-user-nic</code>, you need to edit <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#--netlxc-user-nic-experimental"><code class="highlighter-rouge">/etc/lxc/lxc-usernet</code></a>
 and set <code class="highlighter-rouge">$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic</code>.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="troubles-during-starting-the-daemon">Troubles during starting the daemon</h3>
+<h4 id="rootlesskitparent-error-failed-to-start-the-child-forkexec-procselfexe-operation-not-permitted"><code class="highlighter-rouge">[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted</code></h4>
+
+<p>This error happens mostly when the value of <code class="highlighter-rouge">/proc/sys/kernel/unprivileged_userns_clone </code> is set to 0:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">cat</span> /proc/sys/kernel/unprivileged_userns_clone
+<span class="go">0
+</span></code></pre></div></div>
+
+<p>To fix the issue, add  <code class="highlighter-rouge">kernel.unprivileged_userns_clone=1</code> to
+<code class="highlighter-rouge">/etc/sysctl.conf</code> (or <code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code>.</p>
+
+<h4 id="rootlesskitparent-error-failed-to-start-the-child-forkexec-procselfexe-no-space-left-on-device"><code class="highlighter-rouge">[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: no space left on device</code></h4>
+
+<p>This error happens mostly when the value of <code class="highlighter-rouge">/proc/sys/user/max_user_namespaces</code> is too small:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">cat</span> /proc/sys/user/max_user_namespaces
+<span class="go">0
+</span></code></pre></div></div>
+
+<p>To fix the issue, add  <code class="highlighter-rouge">user.max_user_namespaces=28633</code> to
+<code class="highlighter-rouge">/etc/sysctl.conf</code> (or <code class="highlighter-rouge">/etc/sysctl.d</code>) and run <code class="highlighter-rouge">sudo sysctl --system</code>.</p>
+
+<h4 id="rootlesskitparent-error-failed-to-setup-uidgid-map-failed-to-compute-uidgid-map-no-subuid-ranges-found-for-user-1001-testuser"><code class="highlighter-rouge">[rootlesskit:parent] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1001 ("testuser")</code></h4>
+
+<p>This error happens when <code class="highlighter-rouge">/etc/subuid</code> and <code class="highlighter-rouge">/etc/subgid</code> are not configured.</p>
+
+<p>See <a href="#prerequisites">Prerequisites</a>.</p>
+
+<h4 id="could-not-get-xdg_runtime_dir"><code class="highlighter-rouge">could not get XDG_RUNTIME_DIR</code></h4>
+<p>This error happens when <code class="highlighter-rouge">$XDG_RUNTIME_DIR</code> is not set.</p>
+
+<p>On a non-systemd host, you need to create a directory and set the path by yourself:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">export </span><span class="nv">XDG_RUNTIME_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/.docker/xrd
+<span class="gp">$</span> rm <span class="nt">-rf</span> <span class="nv">$XDG_RUNTIME_DIR</span>
+<span class="gp">$</span> mkdir <span class="nt">-p</span> <span class="nv">$XDG_RUNTIME_DIR</span>
+<span class="gp">$</span> dockerd-rootless.sh <span class="nt">--experimental</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong>:
+You have to remove the directory on every logout.</p>
+</blockquote>
+
+<p>On a systemd host, login to the host via <code class="highlighter-rouge">pam_systemd</code> (see below).
+The value is automatically set to <code class="highlighter-rouge">/run/user/$UID</code> and cleaned up on every logout.</p>
+
+<h4 id="systemctl---user-fails-with-failed-to-connect-to-bus-no-such-file-or-directory"><code class="highlighter-rouge">systemctl --user</code> fails with <code class="highlighter-rouge">Failed to connect to bus: No such file or directory</code></h4>
+
+<p>This error happens mostly when you switched from the root user to an non-root user with <code class="highlighter-rouge">sudo</code>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> <span class="nb">sudo</span> <span class="nt">-iu</span> testuser
+<span class="gp">$</span> systemctl <span class="nt">--user</span> start docker
+<span class="go">Failed to connect to bus: No such file or directory
+</span></code></pre></div></div>
+
+<p>Instead of <code class="highlighter-rouge">sudo -iu &lt;USERNAME&gt;</code>, you need to login via <code class="highlighter-rouge">pam_systemd</code>, e.g.</p>
+<ul>
+  <li>Login via the graphic console</li>
+  <li><code class="highlighter-rouge">ssh &lt;USERNAME&gt;@localhost</code></li>
+  <li><code class="highlighter-rouge">machinectl shell &lt;USERNAME&gt;@</code></li>
+</ul>
+
+<h4 id="the-daemon-does-not-start-up-automatically">The daemon does not start up automatically</h4>
+
+<p>You need <code class="highlighter-rouge">sudo loginctl enable-linger $(whoami)</code> to enable the daemon to start
+up automatically. See <a href="#usage">Usage</a>.</p>
+
+<h4 id="rootless-mode-is-supported-only-when-running-in-experimental-mode"><code class="highlighter-rouge">rootless mode is supported only when running in experimental mode</code></h4>
+
+<p>This error happens when the daemon was launched without <code class="highlighter-rouge">--experimental</code>.
+See <a href="#usage">Usage</a>.</p>
+
+<h3 id="troubles-during-docker-pull">Troubles during <code class="highlighter-rouge">docker pull</code></h3>
+<h4 id="docker-failed-to-register-layer-error-processing-tar-fileexit-status-1-lchown-file-invalid-argument"><code class="highlighter-rouge">docker: failed to register layer: Error processing tar file(exit status 1): lchown &lt;FILE&gt;: invalid argument</code></h4>
+
+<p>This error happens when the number of available entries in <code class="highlighter-rouge">/etc/subuid</code> or <code class="highlighter-rouge">/etc/subgid</code> is not sufficient.
+The number of required entries vary across images, but having 65,536 entries is enough for most images.</p>
+
+<p>See <a href="#prerequisites">Prerequisites</a>.</p>
+
+<h3 id="errors-during-docker-run">Errors during <code class="highlighter-rouge">docker run</code></h3>
+
+<h4 id="--cpus---memory-and---pids-limit-are-ignored"><code class="highlighter-rouge">--cpus</code>, <code class="highlighter-rouge">--memory</code>, and <code class="highlighter-rouge">--pids-limit</code> are ignored</h4>
+
+<p>Expected behavior in Docker 19.03.
+See <a href="#limiting-resources">Limiting resources</a>.</p>
+
+<h4 id="error-response-from-daemon-cgroups-cgroup-mountpoint-does-not-exist-unknown"><code class="highlighter-rouge">Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.</code></h4>
+
+<p>This error happens mostly when the host is running with cgroup v2.
+See <a href="#fedora-31-or-later">Fedora 31 or later</a> to switch the host to use cgroup v1.</p>
+
+<h3 id="networking">Networking</h3>
+
+<h4 id="docker-run--p-fails-with-cannot-expose-privileged-port-"><code class="highlighter-rouge">docker run -p</code> fails with <code class="highlighter-rouge">cannot expose privileged port ...</code></h4>
+
+<p><code class="highlighter-rouge">docker run -p</code> fails with this error when an privileged port (&lt; 1024) is specified as the host port.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-p</span> 80:80 nginx:alpine
+<span class="gp">docker: Error response from daemon: driver failed programming external connectivity on endpoint focused_swanson (9e2e139a9d8fc92b37c36edfa6214a6e986fa2028c0cc359812f685173fa6df7): Error starting userland proxy: error while calling PortManager.AddPort(): cannot expose privileged port 80, you might need to add "net.ipv4.ip_unprivileged_port_start=0" (currently 1024) to /etc/sysctl.conf, or set CAP_NET_BIND_SERVICE on rootlesskit binary, or choose a larger port number (&gt;</span><span class="o">=</span> 1024<span class="o">)</span>: listen tcp 0.0.0.0:80: <span class="nb">bind</span>: permission denied.
+</code></pre></div></div>
+
+<p>When this error happened, consider using an unprivileged port instead, e.g. 8080 instead of 80.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker run <span class="nt">-p</span> 8080:80 nginx:alpine
+</code></pre></div></div>
+
+<p>To allow exposing privileged ports, see <a href="#exposing-privileged-ports">Exposing privileged ports</a>.</p>
+
+<h4 id="ping-doesnt-work">ping doesn’t work</h4>
+
+<p>Ping does not work when <code class="highlighter-rouge">/proc/sys/net/ipv4/ping_group_range</code> is set to <code class="highlighter-rouge">1 0</code>:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">cat</span> /proc/sys/net/ipv4/ping_group_range
+<span class="go">1       0
+</span></code></pre></div></div>
+
+<p>See <a href="#routing-ping-packets">Routing ping packets</a>.</p>
+
+<h4 id="ipaddress-shown-in-docker-inspect-is-unreachable"><code class="highlighter-rouge">IPAddress</code> shown in <code class="highlighter-rouge">docker inspect</code> is unreachable</h4>
+
+<p>Expected behavior, as the daemon is namespaced inside RootlessKit’s network namespace.
+Use <code class="highlighter-rouge">docker run -p</code> instead.</p>
+
+<h4 id="--nethost-doesnt-listen-ports-on-the-host-network-namespace"><code class="highlighter-rouge">--net=host</code> doesn’t listen ports on the host network namespace</h4>
+
+<p>Expected behavior, as the daemon is namespaced inside RootlessKit’s network namespace.
+Use <code class="highlighter-rouge">docker run -p</code> instead.</p>
 
                             <!-- tags -->
                             
@@ -575,7 +761,12 @@ and set <code class="highlighter-rouge">$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-us
     </ul>
   </li>
   <li><a href="#known-limitations" class="nomunge">Known limitations</a></li>
-  <li><a href="#install" class="nomunge">Install</a></li>
+  <li><a href="#install" class="nomunge">Install</a>
+    <ul>
+      <li><a href="#manual-installation" class="nomunge">Manual installation</a></li>
+      <li><a href="#nightly-channel" class="nomunge">Nightly channel</a></li>
+    </ul>
+  </li>
   <li><a href="#usage" class="nomunge">Usage</a>
     <ul>
       <li><a href="#daemon" class="nomunge">Daemon</a></li>
@@ -586,10 +777,19 @@ and set <code class="highlighter-rouge">$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-us
     <ul>
       <li><a href="#rootless-docker-in-docker" class="nomunge">Rootless Docker in Docker</a></li>
       <li><a href="#expose-docker-api-socket-via-tcp" class="nomunge">Expose Docker API socket via TCP</a></li>
+      <li><a href="#expose-docker-api-socket-via-ssh" class="nomunge">Expose Docker API socket via SSH</a></li>
       <li><a href="#routing-ping-packets" class="nomunge">Routing ping packets</a></li>
       <li><a href="#exposing-privileged-ports" class="nomunge">Exposing privileged ports</a></li>
       <li><a href="#limiting-resources" class="nomunge">Limiting resources</a></li>
       <li><a href="#changing-network-stack" class="nomunge">Changing network stack</a></li>
+    </ul>
+  </li>
+  <li><a href="#troubleshooting" class="nomunge">Troubleshooting</a>
+    <ul>
+      <li><a href="#troubles-during-starting-the-daemon" class="nomunge">Troubles during starting the daemon</a></li>
+      <li><a href="#troubles-during-docker-pull" class="nomunge">Troubles during docker pull</a></li>
+      <li><a href="#errors-during-docker-run" class="nomunge">Errors during docker run</a></li>
+      <li><a href="#networking" class="nomunge">Networking</a></li>
     </ul>
   </li>
 </ul>

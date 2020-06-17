@@ -1,4 +1,4 @@
-<!-- Page generated 2020-06-13 12:59:08 +0900 -->
+<!-- Page generated 2020-06-17 13:51:19 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-13T12:59:08+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-17T13:51:19+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Keep containers alive during daemon downtime"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="By default, when the Docker daemon terminates, it shuts down running containers. Starting with Docker Engine 1.12, you can configure the daemon so that containers remain running if the daemon..." />
+  <meta name="twitter:title" itemprop="title name" content="デーモン停止時のコンテナー継続起動"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker デーモンが停止すると、デフォルトでは起動中のコンテナーも停止します。 Docker Engine 1.12 から導入された機能として、デーモンが利用できなくなってもコンテナーが起動し続けるように設定できるようになりました。 この機能のことを ライブリストア（live restore）と呼びます。 ライブリストアのオプションを使えば、デーモンの障害時、計画停電時、システム更新時などに伴うコンテナーのダウンタイムを軽減できます。 メモ ライブリストアは Windows コンテナーに対応していません。 ただし Docker Desktop for Windows 上にて動作する Linux コンテナーには対応しています。 ライブリストア有効化 ライブリストアを有効にする方法は２つあります。 デーモンが利用不能になっても、これによりコンテナーを起動し続けることができます。 ただしこれを行うのは ２つのうちのいずれか１つ としてください。 デーモン設定ファイルに設定を加えます。 Linux..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
-  <meta name="twitter:image:alt" content="Docker Documentation"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-06-13T12:59:08+09:00"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-06-17T13:51:19+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, upgrade, daemon, dockerd, live-restore, daemonless container">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Keep containers alive during daemon downtime | Docker Documentation</title>
-  <meta property="og:title" content="Keep containers alive during daemon downtime" />
+  <title>デーモン停止時のコンテナー継続起動 | Docker ドキュメント</title>
+  <meta property="og:title" content="デーモン停止時のコンテナー継続起動" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="How to keep containers running when the daemon isn't available." />
-  <meta property="og:description" content="How to keep containers running when the daemon isn't available." />
+  <meta name="description" content="デーモンが利用できないときでも、コンテナーを起動し続ける方法を示します。" />
+  <meta property="og:description" content="デーモンが利用できないときでも、コンテナーを起動し続ける方法を示します。" />
   <link rel="canonical" href="/config/containers/live-restore/" />
   <meta property="og:url" content="https://docs.docker.com/config/containers/live-restore/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Keep containers alive during daemon downtime","description":"How to keep containers running when the daemon isn't available.","url":"https://docs.docker.com/config/containers/live-restore/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"デーモン停止時のコンテナー継続起動","description":"デーモンが利用できないときでも、コンテナーを起動し続ける方法を示します。","url":"https://docs.docker.com/config/containers/live-restore/"}</script>
   <!-- END SEO STUFF -->
   
   <script>
@@ -161,44 +161,45 @@
                         <section class="section">
                             
                             
-                            <h1>Keep containers alive during daemon downtime</h1> 
+                            <h1>デーモン停止時のコンテナー継続起動</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    1 分
   
 </span>
 
                             
-                            <p>By default, when the Docker daemon terminates, it shuts down running containers.
-Starting with Docker Engine 1.12, you can configure the daemon so that
-containers remain running if the daemon becomes unavailable. This functionality
-is called <em>live restore</em>. The live restore option helps reduce container
-downtime due to daemon crashes, planned outages, or upgrades.</p>
+                            
+<p>Docker デーモンが停止すると、デフォルトでは起動中のコンテナーも停止します。
+Docker Engine 1.12 から導入された機能として、デーモンが利用できなくなってもコンテナーが起動し続けるように設定できるようになりました。
+この機能のことを <strong>ライブリストア</strong>（live restore）と呼びます。
+ライブリストアのオプションを使えば、デーモンの障害時、計画停電時、システム更新時などに伴うコンテナーのダウンタイムを軽減できます。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>Live restore is not supported on Windows containers, but it does work for
-Linux containers running on Docker Desktop for Windows.</p>
+  <p>ライブリストアは Windows コンテナーに対応していません。
+ただし Docker Desktop for Windows 上にて動作する Linux コンテナーには対応しています。</p>
 </blockquote>
 
-<h2 id="enable-live-restore">Enable live restore</h2>
+<h2 id="enable-live-restore">ライブリストア有効化</h2>
 
-<p>There are two ways to enable the live restore setting to keep containers alive
-when the daemon becomes unavailable. <strong>Only do one of the following</strong>.</p>
+<p>ライブリストアを有効にする方法は２つあります。
+デーモンが利用不能になっても、これによりコンテナーを起動し続けることができます。
+ただしこれを行うのは <strong>２つのうちのいずれか１つ</strong> としてください。</p>
 
 <ul>
   <li>
-    <p>Add the configuration to the daemon configuration file. On Linux, this
-defaults to <code class="highlighter-rouge">/etc/docker/daemon.json</code>. On Docker Desktop for Mac or Docker
-Desktop for Windows, select the Docker icon from the task bar, then click
-<strong>Preferences</strong> -&gt; <strong>Daemon</strong> -&gt; <strong>Advanced</strong>.</p>
+    <p>デーモン設定ファイルに設定を加えます。
+Linux の場合、設定ファイルのデフォルトは <code class="highlighter-rouge">/etc/docker/daemon.json</code> です。
+また Docker Desktop for Mac あるいは Docker Desktop for Windows の場合は、タスクバー上の Docker アイコンを選び、
+<strong>Preferences</strong> -&gt; <strong>Daemon</strong> -&gt; <strong>Advanced</strong> をクリックします。</p>
 
     <ul>
       <li>
-        <p>Use the following JSON to enable <code class="highlighter-rouge">live-restore</code>.</p>
+        <p>以下の JSON 記述を加えて <code class="highlighter-rouge">live-restore</code> を有効にします。</p>
 
         <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"live-restore"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -206,41 +207,39 @@ Desktop for Windows, select the Docker icon from the task bar, then click
 </span></code></pre></div>        </div>
       </li>
       <li>
-        <p>Restart the Docker daemon. On Linux, you can avoid a restart (and avoid any
-downtime for your containers) by reloading the Docker daemon. If you use
-<code class="highlighter-rouge">systemd</code>, then use the command <code class="highlighter-rouge">systemctl reload docker</code>. Otherwise, send a
-<code class="highlighter-rouge">SIGHUP</code> signal to the <code class="highlighter-rouge">dockerd</code> process.</p>
+        <p>Docker デーモンを再起動します。
+Linux の場合、再起動はせず（いずれのコンテナー停止も避けるために）Docker デーモンのリロードを行うこともできます。
+<code class="highlighter-rouge">systemd</code> 利用時は <code class="highlighter-rouge">systemctl reload docker</code> コマンドを実行します。
+それ以外の場合は <code class="highlighter-rouge">dockerd</code> プロセスに対して <code class="highlighter-rouge">SIGHUP</code> シグナルを送信します。</p>
       </li>
     </ul>
   </li>
   <li>
-    <p>If you prefer, you can start the <code class="highlighter-rouge">dockerd</code> process manually with the
-<code class="highlighter-rouge">--live-restore</code> flag. This approach is not recommended because it does not
-set up the environment that <code class="highlighter-rouge">systemd</code> or another process manager would use
-when starting the Docker process. This can cause unexpected behavior.</p>
+    <p>上とは別に、<code class="highlighter-rouge">dockerd</code> プロセスを手動で起動する際に <code class="highlighter-rouge">--live-restore</code> フラグを与える方法もあります。
+ただしこの方法は推奨されません。
+この方法によると Docker プロセス起動時に、<code class="highlighter-rouge">systemd</code> や他のプロセスが利用可能な環境を作り出していないからです。
+このことが予期しない動作となることがあります。</p>
   </li>
 </ul>
 
-<h2 id="live-restore-during-upgrades">Live restore during upgrades</h2>
+<h2 id="live-restore-during-upgrades">デーモン更新時のライブリストア</h2>
 
-<p>Live restore allows you to keep containers running across Docker daemon updates,
-but is only supported when installing patch releases (<code class="highlighter-rouge">YY.MM.x</code>), not for
-major (<code class="highlighter-rouge">YY.MM</code>) daemon upgrades.</p>
+<p>ライブリストアの機能により、Docker デーモンの更新中でもコンテナーを起動し続けることができます。
+ただしパッチリリース (<code class="highlighter-rouge">YY.MM.x</code>) のインストール時のみが対象であって、メジャーアップデート (<code class="highlighter-rouge">YY.MM</code>) の場合はサポートされません。</p>
 
-<p>If you skip releases during an upgrade, the daemon may not restore its
-connection to the containers. If the daemon can’t restore the connection, it
-cannot manage the running containers and you must stop them manually.</p>
+<p>各アップデートのリリースを１度でも取りやめていた場合、デーモンによるコンテナーへの接続が復元できなくなる場合があります。
+コンテナーへの接続が復元できなかった場合、起動中のコンテナーを制御できなくなっているので、手動でコンテナーを停止させる必要があります。</p>
 
-<h2 id="live-restore-upon-restart">Live restore upon restart</h2>
+<h2 id="live-restore-upon-restart">再起動時のライブリストア</h2>
 
-<p>The live restore option only works to restore containers if the daemon options,
-such as bridge IP addresses and graph driver, did not change. If any of these
-daemon-level configuration options have changed, the live restore may not work
-and you may need to manually stop the containers.</p>
+<p>ライブリストアのオプションによってコンテナーが復元されるのは、デーモンのオプション、たとえばブリッジ IP アドレスやグラフドライバーなどに変更がない場合に限ります。
+そのようなデーモンレベルの設定オプションのいずれかが変更されていた場合、ライブリストアは機能しない場合があります。
+そのときは手動でコンテナーを停止させる必要があります。</p>
 
-<h2 id="impact-of-live-restore-on-running-containers">Impact of live restore on running containers</h2>
+<h2 id="impact-of-live-restore-on-running-containers">実行コンテナーに対するライブリストアの影響</h2>
 
-<p>If the daemon is down for a long time, running containers may fill up the FIFO
+<p>デーモンが長い期間停止している場合、
+If the daemon is down for a long time, running containers may fill up the FIFO
 log the daemon normally reads. A full log blocks containers from logging more
 data. The default buffer size is 64K. If the buffers fill, you must restart
 the Docker daemon to flush them.</p>
@@ -275,7 +274,7 @@ managed until enough swarm managers are available to maintain a quorum.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "config/containers/live-restore.md",
-                                        "title": "Keep containers alive during daemon downtime",
+                                        "title": "デーモン停止時のコンテナー継続起動",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/config/containers/live-restore.md"
                                     };
                                     (function (d, c, j) {
@@ -341,10 +340,10 @@ managed until enough swarm managers are available to maintain a quorum.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#enable-live-restore" class="nomunge">Enable live restore</a></li>
-  <li><a href="#live-restore-during-upgrades" class="nomunge">Live restore during upgrades</a></li>
-  <li><a href="#live-restore-upon-restart" class="nomunge">Live restore upon restart</a></li>
-  <li><a href="#impact-of-live-restore-on-running-containers" class="nomunge">Impact of live restore on running containers</a></li>
+  <li><a href="#enable-live-restore" class="nomunge">ライブリストア有効化</a></li>
+  <li><a href="#live-restore-during-upgrades" class="nomunge">デーモン更新時のライブリストア</a></li>
+  <li><a href="#live-restore-upon-restart" class="nomunge">再起動時のライブリストア</a></li>
+  <li><a href="#impact-of-live-restore-on-running-containers" class="nomunge">実行コンテナーに対するライブリストアの影響</a></li>
   <li><a href="#live-restore-and-swarm-mode" class="nomunge">Live restore and swarm mode</a></li>
 </ul>
 

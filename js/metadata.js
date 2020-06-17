@@ -1549,7 +1549,7 @@ var pages = [
 ,
 {
 "url":"/config/formatting/",
-"title":"Format command and log output",
+"title":"コマンド出力やログ出力のフォーマット変更",
 "description":"CLI and log output formatting reference",
 "keywords":"format, formatting, output, templates, log"
 }
@@ -2256,8 +2256,8 @@ var pages = [
 ,
 {
 "url":"/get-started/kube-deploy/",
-"title":"Deploy to Kubernetes",
-"description":"Learn how to describe and deploy a simple application on Kubernetes.",
+"title":"Kubernetes へのデプロイ",
+"description":"Kubernetes 上での簡単なアプリケーションを構築してデプロイする方法を学びます。",
 "keywords":"kubernetes, pods, deployments, kubernetes services"
 }
 ,
@@ -2312,8 +2312,8 @@ var pages = [
 ,
 {
 "url":"/config/containers/live-restore/",
-"title":"Keep containers alive during daemon downtime",
-"description":"How to keep containers running when the daemon isn't available.",
+"title":"デーモン停止時のコンテナー継続起動",
+"description":"デーモンが利用できないときでも、コンテナーを起動し続ける方法を示します。",
 "keywords":"docker, upgrade, daemon, dockerd, live-restore, daemonless container"
 }
 ,
@@ -3026,7 +3026,7 @@ var pages = [
 ,
 {
 "url":"/engine/examples/postgresql_service/",
-"title":"Dockerize PostgreSQL",
+"title":"PostgreSQL を Docker 化する",
 "description":"Running and installing a PostgreSQL service",
 "keywords":"docker, example, package installation, postgresql"
 }
@@ -3768,7 +3768,7 @@ var pages = [
 ,
 {
 "url":"/get-started/swarm-deploy/",
-"title":"Deploy to Swarm",
+"title":"Swarm へのデプロイ",
 "description":"Learn how to describe and deploy a simple application on Docker Swarm.",
 "keywords":"swarm, swarm services, stacks"
 }
