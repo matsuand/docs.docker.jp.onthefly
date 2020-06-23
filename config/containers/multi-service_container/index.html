@@ -1,4 +1,4 @@
-<!-- Page generated 2020-06-17 13:51:19 +0900 -->
+<!-- Page generated 2020-06-23 20:53:04 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-17T13:51:19+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-23T20:53:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Run multiple services in a container"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="A container’s main running process is the ENTRYPOINT and/or CMD at the end of the Dockerfile. It is generally recommended that you separate areas of concern by using one service..." />
+  <meta name="twitter:title" itemprop="title name" content="コンテナー内での複数サービス起動"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="コンテナーの主となる実行プロセスは、Dockerfile の最終部分に指定される ENTRYPOINT や CMD です。 1 つのコンテナーには 1 つのサービスを割り当てるということにすれば、気にかける箇所が絞られるので、一般的にはこれが推奨されます。 ただそのサービスからは、複数のプロセスがフォークされることもあります（たとえば Apache ウェブサーバーでは複数のワーカープロセスが起動されます）。 マルチプロセスとなることは、まったく問題ありません。 一方で、アプリケーションが持ついくつもの役割を 1 つのコンテナーに持たせることは、Docker の優れた機能を利用する観点からは避けるべきです。 コンテナーを複数にするのであれば、ユーザー定義のネットワークや共有ボリュームを利用して接続します。 コンテナーのメインプロセスは、コンテナーそのものが起動させるプロセスすべてを管理するためにあります。 メインプロセスが十分に機能していないことが原因で、コンテナー終了時に子プロセスを適切に停止できないことがあります。 起動プロセスがこの手の事態に陥った場合は、コンテナー起動時に --init オプションを指定してみてください。 この --init フラグは、コンテナーのメインプロセスとして、非常に小さな初期化プロセスを埋め込みます。 この小さなプロセスが、コンテナー終了時の子プロセス停止を受け持つことになります。 子プロセスの扱いをこのようにするのは、本格的な初期化プロセス、たとえば sysvinit、upstart、systemd..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-06-17T13:51:19+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-06-23T20:53:04+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, supervisor, process management">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Run multiple services in a container | Docker ドキュメント</title>
-  <meta property="og:title" content="Run multiple services in a container" />
+  <title>コンテナー内での複数サービス起動 | Docker ドキュメント</title>
+  <meta property="og:title" content="コンテナー内での複数サービス起動" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="How to run more than one process in a container" />
   <meta property="og:description" content="How to run more than one process in a container" />
   <link rel="canonical" href="/config/containers/multi-service_container/" />
   <meta property="og:url" content="https://docs.docker.com/config/containers/multi-service_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Run multiple services in a container","description":"How to run more than one process in a container","url":"https://docs.docker.com/config/containers/multi-service_container/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナー内での複数サービス起動","description":"How to run more than one process in a container","url":"https://docs.docker.com/config/containers/multi-service_container/"}</script>
   <!-- END SEO STUFF -->
   
   <script>
@@ -161,47 +161,44 @@
                         <section class="section">
                             
                             
-                            <h1>Run multiple services in a container</h1> 
+                            <h1>コンテナー内での複数サービス起動</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    2 分
   
 </span>
 
                             
-                            <p>A container’s main running process is the <code class="highlighter-rouge">ENTRYPOINT</code> and/or <code class="highlighter-rouge">CMD</code> at the
-end of the <code class="highlighter-rouge">Dockerfile</code>. It is generally recommended that you separate areas of
-concern by using one service per container. That service may fork into multiple
-processes (for example, Apache web server starts multiple worker processes).
-It’s ok to have multiple processes, but to get the most benefit out of Docker,
-avoid one container being responsible for multiple aspects of your overall
-application. You can connect multiple containers using user-defined networks and
-shared volumes.</p>
+                            
+<p>コンテナーの主となる実行プロセスは、<code class="highlighter-rouge">Dockerfile</code> の最終部分に指定される <code class="highlighter-rouge">ENTRYPOINT</code> や <code class="highlighter-rouge">CMD</code> です。
+1 つのコンテナーには 1 つのサービスを割り当てるということにすれば、気にかける箇所が絞られるので、一般的にはこれが推奨されます。
+ただそのサービスからは、複数のプロセスがフォークされることもあります（たとえば Apache ウェブサーバーでは複数のワーカープロセスが起動されます）。
+マルチプロセスとなることは、まったく問題ありません。
+一方で、アプリケーションが持ついくつもの役割を 1 つのコンテナーに持たせることは、Docker の優れた機能を利用する観点からは避けるべきです。
+コンテナーを複数にするのであれば、ユーザー定義のネットワークや共有ボリュームを利用して接続します。</p>
 
-<p>The container’s main process is responsible for managing all processes that it
-starts. In some cases, the main process isn’t well-designed, and doesn’t handle
-“reaping” (stopping) child processes gracefully when the container exits. If
-your process falls into this category, you can use the <code class="highlighter-rouge">--init</code> option when you
-run the container. The <code class="highlighter-rouge">--init</code> flag inserts a tiny init-process into the
-container as the main process, and handles reaping of all processes when the
-container exits. Handling such processes this way is superior to using a
-full-fledged init process such as <code class="highlighter-rouge">sysvinit</code>, <code class="highlighter-rouge">upstart</code>, or <code class="highlighter-rouge">systemd</code> to handle
-process lifecycle within your container.</p>
+<p>コンテナーのメインプロセスは、コンテナーそのものが起動させるプロセスすべてを管理するためにあります。
+メインプロセスが十分に機能していないことが原因で、コンテナー終了時に子プロセスを適切に停止できないことがあります。
+起動プロセスがこの手の事態に陥った場合は、コンテナー起動時に <code class="highlighter-rouge">--init</code> オプションを指定してみてください。
+この <code class="highlighter-rouge">--init</code> フラグは、コンテナーのメインプロセスとして、非常に小さな初期化プロセスを埋め込みます。
+この小さなプロセスが、コンテナー終了時の子プロセス停止を受け持つことになります。
+子プロセスの扱いをこのようにするのは、本格的な初期化プロセス、たとえば <code class="highlighter-rouge">sysvinit</code>、<code class="highlighter-rouge">upstart</code>、<code class="highlighter-rouge">systemd</code> に比べて、コンテナー内部のプロセスのライフサイクルを適切に扱うことができるからです。</p>
 
-<p>If you need to run more than one service within a container, you can accomplish
-this in a few different ways.</p>
+<p>1 つのコンテナー内に複数のサービスを起動させる必要があるなら、方法はいくつかあります。</p>
 
 <ul>
   <li>
-    <p>Put all of your commands in a wrapper script, complete with testing and
-debugging information. Run the wrapper script as your <code class="highlighter-rouge">CMD</code>. This is a very
-naive example. First, the wrapper script:</p>
+    <p>実行するコマンドをすべてラッパースクリプトに含めます。
+あらかじめテストやデバッグは行っておきます。
+そしてこのラッパースクリプトを <code class="highlighter-rouge">CMD</code> として実行します。
+以下は簡単な例です。
+まずはラッパースクリプトを生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-<span class="c"># Start the first process</span>
+<span class="c"># 1つめのプロセスを起動</span>
 ./my_first_process <span class="nt">-D</span>
 <span class="nv">status</span><span class="o">=</span><span class="nv">$?</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$status</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
@@ -209,7 +206,7 @@ naive example. First, the wrapper script:</p>
   <span class="nb">exit</span> <span class="nv">$status</span>
 <span class="k">fi</span>
 
-<span class="c"># Start the second process</span>
+<span class="c"># 2つめのプロセスを起動</span>
 ./my_second_process <span class="nt">-D</span>
 <span class="nv">status</span><span class="o">=</span><span class="nv">$?</span>
 <span class="k">if</span> <span class="o">[</span> <span class="nv">$status</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
@@ -217,19 +214,19 @@ naive example. First, the wrapper script:</p>
   <span class="nb">exit</span> <span class="nv">$status</span>
 <span class="k">fi</span>
 
-<span class="c"># Naive check runs checks once a minute to see if either of the processes exited.</span>
-<span class="c"># This illustrates part of the heavy lifting you need to do if you want to run</span>
-<span class="c"># more than one service in a container. The container exits with an error</span>
-<span class="c"># if it detects that either of the processes has exited.</span>
-<span class="c"># Otherwise it loops forever, waking up every 60 seconds</span>
+<span class="c"># 単純なチェックとして 1分間隔で2つのプロセスの終了コードを確認します。</span>
+<span class="c"># 1つのコンテナーに複数サービスを起動させたい場合に、このような部分が</span>
+<span class="c"># 大変なところです。どちらかのプロセスの終了が検出されたら、コンテナー</span>
+<span class="c"># はエラー終了するようにします。そうでなければ、60秒ごとに確認しながら</span>
+<span class="c"># ループし続けます。</span>
 
 <span class="k">while </span>sleep 60<span class="p">;</span> <span class="k">do
   </span>ps aux |grep my_first_process |grep <span class="nt">-q</span> <span class="nt">-v</span> <span class="nb">grep
   </span><span class="nv">PROCESS_1_STATUS</span><span class="o">=</span><span class="nv">$?</span>
   ps aux |grep my_second_process |grep <span class="nt">-q</span> <span class="nt">-v</span> <span class="nb">grep
   </span><span class="nv">PROCESS_2_STATUS</span><span class="o">=</span><span class="nv">$?</span>
-  <span class="c"># If the greps above find anything, they exit with 0 status</span>
-  <span class="c"># If they are not both 0, then something is wrong</span>
+  <span class="c"># 上の2つのgrepが検索マッチすれば、どちらの終了ステータスともゼロ。</span>
+  <span class="c"># 2つともゼロでないなら何かがおかしい。</span>
   <span class="k">if</span> <span class="o">[</span> <span class="nv">$PROCESS_1_STATUS</span> <span class="nt">-ne</span> 0 <span class="nt">-o</span> <span class="nv">$PROCESS_2_STATUS</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
     </span><span class="nb">echo</span> <span class="s2">"One of the processes has already exited."</span>
     <span class="nb">exit </span>1
@@ -237,7 +234,7 @@ naive example. First, the wrapper script:</p>
 done</span>
 </code></pre></div>    </div>
 
-    <p>Next, the Dockerfile:</p>
+    <p>Dockerfile は以下のような記述とします。</p>
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
 <span class="k">COPY</span><span class="s"> my_first_process my_first_process</span>
@@ -247,28 +244,27 @@ done</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>If you have one main process that needs to start first and stay running but
-you temporarily need to run some other processes (perhaps to interact with
-the main process) then you can use bash’s job control to facilitate that.
-First, the wrapper script:</p>
+    <p>1 つのメインプロセスを起動させたら、そのまま起動し続ける場合です。
+一時的に別のプロセスをいくつか起動する（そしておそらくはメインプロセスと通信を行う）とします。
+この場合は bash のジョブ制御の機能を利用します。
+まずはラッパースクリプトを生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-<span class="c"># turn on bash's job control</span>
+<span class="c"># ジョブ制御を有効にします。</span>
 <span class="nb">set</span> <span class="nt">-m</span>
 
-<span class="c"># Start the primary process and put it in the background</span>
+<span class="c"># 1つめのプロセスをバックグラウンドで実行します。</span>
 ./my_main_process &amp;
 
-<span class="c"># Start the helper process</span>
+<span class="c"># ヘルパープロセスを実行します。</span>
 ./my_helper_process
 
-<span class="c"># the my_helper_process might need to know how to wait on the</span>
-<span class="c"># primary process to start before it does its work and returns</span>
+<span class="c"># この my_helper_process は自分の処理を開始して終了するためには、</span>
+<span class="c"># 1つめのプロセスの動きを知っておく必要があるかもしれません。</span>
 
 
-<span class="c"># now we bring the primary process back into the foreground</span>
-<span class="c"># and leave it there</span>
+<span class="c"># ここで1つめのプロセスをフォアグラウンド実行に戻してそのままとします。</span>
 <span class="nb">fg</span> %1
 </code></pre></div>    </div>
 
@@ -280,14 +276,14 @@ First, the wrapper script:</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Use a process manager like <code class="highlighter-rouge">supervisord</code>. This is a moderately heavy-weight
-approach that requires you to package <code class="highlighter-rouge">supervisord</code> and its configuration in
-your image (or base your image on one that includes <code class="highlighter-rouge">supervisord</code>), along with
-the different applications it manages. Then you start <code class="highlighter-rouge">supervisord</code>, which
-manages your processes for you. Here is an example Dockerfile using this
-approach, that assumes the pre-written <code class="highlighter-rouge">supervisord.conf</code>, <code class="highlighter-rouge">my_first_process</code>,
-and <code class="highlighter-rouge">my_second_process</code> files all exist in the same directory as your
-Dockerfile.</p>
+    <p><code class="highlighter-rouge">supervisord</code> のようなプロセスマネージャーを利用する場合です。
+これは少々面倒な方法です。
+これを行うためには、イメージ内に <code class="highlighter-rouge">supervisord</code> パッケージとその設定を含める必要があります。
+（あるいは <code class="highlighter-rouge">supervisord</code> が含まれているイメージをベースとします。）
+さらにそのパッケージが管理する別のアプリケーションが必要になってきます。
+その上で <code class="highlighter-rouge">supervisord</code> を起動させてプロセス管理を行います。
+以下はこの手法を利用する Dockerfile です。
+<code class="highlighter-rouge">supervisord.conf</code>、<code class="highlighter-rouge">my_first_process</code>、<code class="highlighter-rouge">my_second_process</code> の各ファイルは準備ができていて、Dockerfile と同一ディレクトリに存在しているとします。</p>
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
 <span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> supervisor
@@ -316,7 +312,7 @@ Dockerfile.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "config/containers/multi-service_container.md",
-                                        "title": "Run multiple services in a container",
+                                        "title": "コンテナー内での複数サービス起動",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/config/containers/multi-service_container.md"
                                     };
                                     (function (d, c, j) {

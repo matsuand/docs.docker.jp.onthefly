@@ -1,4 +1,4 @@
-<!-- Page generated 2020-06-17 13:51:19 +0900 -->
+<!-- Page generated 2020-06-23 20:53:04 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-17T13:51:19+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-23T20:53:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Docker security"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="There are four major areas to consider when reviewing Docker security: the intrinsic security of the kernel and its support for namespaces and cgroups; the attack surface of the Docker..." />
+  <meta name="twitter:title" itemprop="title name" content="Docker のセキュリティ"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker のセキュリティを考えてみる上では、主要な観点が 4 つあります。 カーネルに元からあるセキュリティと名前空間や cgroup のサポート。 Docker デーモンそのものの攻撃領域。 コンテナー設定プロファイルにおける抜け穴。デフォルトの場合だけでなくユーザーによるカスタマイズ時も含む。 セキュリティ強化されたカーネル機能とそれがコンテナーとやり取りする方法。 カーネルの名前空間 Docker コンテナーは LXC コンテナーによく似ています。 どちらも同じようなセキュリティ機能を持っています。 docker run によってコンテナーを起動させると Docker の内部処理では、コンテナーが利用する名前空間やコントロールグループが生成されます。 名前空間とは、初めて提供された最もストレートな形の分離技術のことです。 コンテナー内部にて起動されるプロセスからは、他のコンテナー内部やホストシステム内のプロセスを参照することはできず、また影響もほぼ及ぼしません。 各コンテナーでは独自のネットワークスタックを用います。 これはつまり、別のコンテナーのソケットやインターフェースへアクセスする際に、特権的なアクセス権限を有していないということです。 もちろんホストシステムが適切に設定されていれば、コンテナー間はそれぞれのネットワークインターフェースを介して通信を行うことができます。 外部にあるホストとの間で通信しているようなものです。 コンテナーに対して公開ポートを指定するか、あるいは link..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-06-17T13:51:19+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-06-23T20:53:04+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="Docker, Docker documentation, security">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Docker security | Docker ドキュメント</title>
-  <meta property="og:title" content="Docker security" />
+  <title>Docker のセキュリティ | Docker ドキュメント</title>
+  <meta property="og:title" content="Docker のセキュリティ" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Review of the Docker Daemon attack surface" />
   <meta property="og:description" content="Review of the Docker Daemon attack surface" />
   <link rel="canonical" href="/engine/security/security/" />
   <meta property="og:url" content="https://docs.docker.com/engine/security/security/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker security","description":"Review of the Docker Daemon attack surface","url":"https://docs.docker.com/engine/security/security/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker のセキュリティ","description":"Review of the Docker Daemon attack surface","url":"https://docs.docker.com/engine/security/security/"}</script>
   <!-- END SEO STUFF -->
   
   <script>
@@ -161,295 +161,251 @@
                         <section class="section">
                             
                             
-                            <h1>Docker security</h1> 
+                            <h1>Docker のセキュリティ</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    11 分
+    2 分
   
 </span>
 
                             
-                            <p>There are four major areas to consider when reviewing Docker security:</p>
+                            
+<p>Docker のセキュリティを考えてみる上では、主要な観点が 4 つあります。</p>
 
 <ul>
-  <li>the intrinsic security of the kernel and its support for
-namespaces and cgroups;</li>
-  <li>the attack surface of the Docker daemon itself;</li>
-  <li>loopholes in the container configuration profile, either by default,
-or when customized by users.</li>
-  <li>the “hardening” security features of the kernel and how they
-interact with containers.</li>
+  <li>カーネルに元からあるセキュリティと名前空間や cgroup のサポート。</li>
+  <li>Docker デーモンそのものの攻撃領域。</li>
+  <li>コンテナー設定プロファイルにおける抜け穴。デフォルトの場合だけでなくユーザーによるカスタマイズ時も含む。</li>
+  <li>セキュリティ強化されたカーネル機能とそれがコンテナーとやり取りする方法。</li>
 </ul>
 
-<h2 id="kernel-namespaces">Kernel namespaces</h2>
+<h2 id="kernel-namespaces">カーネルの名前空間</h2>
 
-<p>Docker containers are very similar to LXC containers, and they have
-similar security features. When you start a container with
-<code class="highlighter-rouge">docker run</code>, behind the scenes Docker creates a set of namespaces and control
-groups for the container.</p>
+<p>Docker コンテナーは LXC コンテナーによく似ています。
+どちらも同じようなセキュリティ機能を持っています。
+<code class="highlighter-rouge">docker run</code> によってコンテナーを起動させると Docker の内部処理では、コンテナーが利用する名前空間やコントロールグループが生成されます。</p>
 
-<p><strong>Namespaces provide the first and most straightforward form of
-isolation</strong>: processes running within a container cannot see, and even
-less affect, processes running in another container, or in the host
-system.</p>
+<p><strong>名前空間とは、初めて提供された最もストレートな形の分離技術のことです</strong>。
+コンテナー内部にて起動されるプロセスからは、他のコンテナー内部やホストシステム内のプロセスを参照することはできず、また影響もほぼ及ぼしません。</p>
 
-<p><strong>Each container also gets its own network stack</strong>, meaning that a
-container doesn’t get privileged access to the sockets or interfaces
-of another container. Of course, if the host system is setup
-accordingly, containers can interact with each other through their
-respective network interfaces — just like they can interact with
-external hosts. When you specify public ports for your containers or use
-<a href="/docs.docker.jp.onthefly/network/links/"><em>links</em></a>
-then IP traffic is allowed between containers. They can ping each other,
-send/receive UDP packets, and establish TCP connections, but that can be
-restricted if necessary. From a network architecture point of view, all
-containers on a given Docker host are sitting on bridge interfaces. This
-means that they are just like physical machines connected through a
-common Ethernet switch; no more, no less.</p>
+<p><strong>各コンテナーでは独自のネットワークスタックを用います</strong>。
+これはつまり、別のコンテナーのソケットやインターフェースへアクセスする際に、特権的なアクセス権限を有していないということです。
+もちろんホストシステムが適切に設定されていれば、コンテナー間はそれぞれのネットワークインターフェースを介して通信を行うことができます。
+外部にあるホストとの間で通信しているようなものです。
+コンテナーに対して公開ポートを指定するか、あるいは <a href="/docs.docker.jp.onthefly/network/links/"><em>link</em></a> を利用すれば、コンテナー間での IP トラフィックが許可されます。
+その場合コンテナー間にて互いに ping を行い、UDP パケットの送受信することで TCP コネクションが確立されます。
+ただし状況に応じて制限がかけられることもあります。
+ネットワークアーキテクチャーの点でいうと、特定の Docker ホスト上にあるコンテナーはすべて、ブリッジインターフェース上に置かれます。
+これは各コンテナーがあたかも実際に存在する物理的なマシンのようであり、共有するイーサネットスイッチにより通信を行っているようなものです。
+これ以上でもなく、これ以下でもありません。</p>
 
-<p>How mature is the code providing kernel namespaces and private
-networking? Kernel namespaces were introduced <a href="http://man7.org/linux/man-pages/man7/namespaces.7.html">between kernel version
-2.6.15 and
-2.6.26</a>.
-This means that since July 2008 (date of the 2.6.26 release
-), namespace code has been exercised and scrutinized on a large
-number of production systems. And there is more: the design and
-inspiration for the namespaces code are even older. Namespaces are
-actually an effort to reimplement the features of <a href="http://en.wikipedia.org/wiki/OpenVZ">OpenVZ</a> in such a way that they could be
-merged within the mainstream kernel. And OpenVZ was initially released
-in 2005, so both the design and the implementation are pretty mature.</p>
+<p>ではカーネルの名前空間やプライベートネットワーク機能のソースコードは、成熟したものになっているでしょうか。
+カーネルの名前空間が導入されたのは <a href="http://man7.org/linux/man-pages/man7/namespaces.7.html">カーネルバージョン 2.6.15 から 2.6.26</a> の間です。
+つまり 2008 年 6 月（2.6.26 のリリース日）以降、名前空間のソースコードは、数多くの本番環境システムを通じて検証が続いている状態です。
+それだけではありません。
+名前空間のソースコードの設計と発想は、もはや古いものになっています。
+そもそも名前空間は <a href="http://en.wikipedia.org/wiki/OpenVZ">OpenVZ</a> の機能を再実装するという努力から生まれたものであり、カーネルのメインストリームにマージされることを目指したものです。
+ちなみに OpenVZ が初めてリリースされたのは 2005 年であり、その設計と実装はともに十分成熟しています。</p>
 
-<h2 id="control-groups">Control groups</h2>
+<h2 id="control-groups">コントロールグループ</h2>
 
-<p>Control Groups are another key component of Linux Containers. They
-implement resource accounting and limiting. They provide many
-useful metrics, but they also help ensure that each container gets
-its fair share of memory, CPU, disk I/O; and, more importantly, that a
-single container cannot bring the system down by exhausting one of those
-resources.</p>
+<p>コントロールグループ（control group）は、Linux コンテナー技術のもう一つの重要コンポーネントです。
+これはリソース管理と利用制限を実装します。
+これにより有用なメトリックスが数多く提供されます。
+そしてこの機能はメモリ、CPU、ディスク I/O を各コンテナーが共有して利用できるようにします。
+さらに重要なのは、たった 1 つのコンテナーがリソースを大量消費し、それがシステムダウンにつながるようなことはありません。</p>
 
-<p>So while they do not play a role in preventing one container from
-accessing or affecting the data and processes of another container, they
-are essential to fend off some denial-of-service attacks. They are
-particularly important on multi-tenant platforms, like public and
-private PaaS, to guarantee a consistent uptime (and performance) even
-when some applications start to misbehave.</p>
+<p>この機能の役割は、あるコンテナーから別コンテナーのデータやプロセスに対して、アクセスや変更を防ぐというものではありません。
+これはサービス妨害攻撃を防ぐという重要な役割を持っています。
+特に重要となるのが、公開あるいはプライベート PaaS のようなマルチテナント型プラットフォームにおいてです。
+いずれかのアプリケーションが誤動作をし始めたとしても、安定した稼動（とパフォーマンス）を保証するものです。</p>
 
-<p>Control Groups have been around for a while as well: the code was
-started in 2006, and initially merged in kernel 2.6.24.</p>
+<p>コントロールグループも同じく、登場してからさほど経過していません。
+その開発は 2006 年に始まり、カーネルに初めてマージされたのは 2.6.24 のときです。</p>
 
-<h2 id="docker-daemon-attack-surface">Docker daemon attack surface</h2>
+<h2 id="docker-daemon-attack-surface">Docker デーモンの攻撃領域</h2>
 
-<p>Running containers (and applications) with Docker implies running the
-Docker daemon. This daemon requires <code class="highlighter-rouge">root</code> privileges unless you opt-in
-to <a href="/docs.docker.jp.onthefly/engine/security/rootless/">Rootless mode</a> (experimental), and you should therefore
-be aware of some important details.</p>
+<p>コンテナー（およびアプリケーション）を Docker とともに動作させるということは、暗に Docker デーモンを動作させるということです。
+デーモンの起動には <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モード</a> (試験的機能) を用いるのでない限りは <code class="highlighter-rouge">root</code> 権限を必要とします。
+したがって重要な点をいくつか意識しておく必要があります。</p>
 
-<p>First of all, <strong>only trusted users should be allowed to control your
-Docker daemon</strong>. This is a direct consequence of some powerful Docker
-features. Specifically, Docker allows you to share a directory between
-the Docker host and a guest container; and it allows you to do so
-without limiting the access rights of the container. This means that you
-can start a container where the <code class="highlighter-rouge">/host</code> directory is the <code class="highlighter-rouge">/</code> directory
-on your host; and the container can alter your host filesystem
-without any restriction. This is similar to how virtualization systems
-allow filesystem resource sharing. Nothing prevents you from sharing your
-root filesystem (or even your root block device) with a virtual machine.</p>
+<p>まず第一に、<strong>Docker デーモンを制御できるのは信頼できるユーザーのみとすべき</strong> ということです。
+Docker の強力な機能の中には、この問題が直接関係するものがあります。
+特に Docker においては Docker ホストとゲストコンテナーの間でのディレクトリ共有が可能であり、つまりコンテナーのアクセス権拡大を許しているわけです。
+ということは、コンテナーの <code class="highlighter-rouge">/host</code> ディレクトリをホスト上の <code class="highlighter-rouge">/</code> ディレクトリに割り当ててコンテナーを起動できることを意味し、それはコンテナーが何ら制限なくホストのファイルシステムを変更できてしまうことになります。
+ちょうど仮想化システムがファイルシステムというリソースをどのように共有するかという問題と同じです。
+仮想マシンを使ってルートファイルシステムを（あるいはルートブロックデバイスでさえ）共有化できてしまうことは、防ぎようがありません。</p>
 
-<p>This has a strong security implication: for example, if you instrument Docker
-from a web server to provision containers through an API, you should be
-even more careful than usual with parameter checking, to make sure that
-a malicious user cannot pass crafted parameters causing Docker to create
-arbitrary containers.</p>
+<p>これはセキュリティに重大な影響を及ぼします。
+たとえば Docker の API を通じて、ウェブサーバーをコンテナーにプロビジョニングするとします。
+このときには、通常以上に十分なパラメーターチェックを行う必要があります。
+そして悪意のあるユーザーがパラメーターに細工をしたとしても、Docker から任意のコンテナーが生成されないようにすることが重要です。</p>
 
-<p>For this reason, the REST API endpoint (used by the Docker CLI to
-communicate with the Docker daemon) changed in Docker 0.5.2, and now
-uses a UNIX socket instead of a TCP socket bound on 127.0.0.1 (the
-latter being prone to cross-site request forgery attacks if you happen to run
-Docker directly on your local machine, outside of a VM). You can then
-use traditional UNIX permission checks to limit access to the control
-socket.</p>
+<p>このことから REST API のエンドポイント（Docker デーモンとやり取りするために Docker CLI により用いられるもの）が Docker 0.5.2 において変更され、127.0.0.1 にバインドされる TCP ソケットではなく UNIX ソケットを用いるようになりました。
+（TCP ソケットは、VM の外にあるローカルマシン上に直接 Docker を起動したときに、CSRF (cross-site request forgery) 攻撃を受けやすくなります。）
+そこで従来からある Unix パーミッションチェックを利用して、制御ソケットへのアクセスを制限する必要があります。</p>
 
-<p>You can also expose the REST API over HTTP if you explicitly decide to do so.
-However, if you do that, be aware of the above mentioned security
-implications.
-Note that even if you have a firewall to limit accesses to the REST API
-endpoint from other hosts in the network, the endpoint can be still accessible
-from containers, and it can easily result in the privilege escalation.
-Therefore it is <em>mandatory</em> to secure API endpoints with
-<a href="/docs.docker.jp.onthefly/engine/security/https/">HTTPS and certificates</a>.
-It is also recommended to ensure that it is reachable only from a trusted
-network or VPN.</p>
+<p>また明確に意図するのであれば、REST API を HTTP を介して送ることもできます。
+ただしこれを行った場合には、前述したセキュリティの脅威に関して注意しておくことが必要です。
+ファイルウォールを利用していて、ネットワーク内の他ホストから REST API エンドポイントへのアクセスを制限しているとします。
+それでもそのエンドポイントはコンテナーからアクセスが可能であるため、アクセス権限を容易に昇格させることができてしまいます。
+したがって <a href="/docs.docker.jp.onthefly/engine/security/https/">HTTPS と 証明書</a> を用いたセキュアな API エンドポイントの利用が必須となります。
+また信頼できるネットワークや VPN からのみ到達可能とするような対処も求められます。</p>
 
-<p>You can also use <code class="highlighter-rouge">DOCKER_HOST=ssh://USER@HOST</code> or <code class="highlighter-rouge">ssh -L /path/to/docker.sock:/var/run/docker.sock</code>
-instead if you prefer SSH over TLS.</p>
+<p>SSH over TLS を実現したいのであれば、<code class="highlighter-rouge">DOCKER_HOST=ssh://USER@HOST</code> や <code class="highlighter-rouge">ssh -L /path/to/docker.sock:/var/run/docker.sock</code> を用いることもできます。</p>
 
-<p>The daemon is also potentially vulnerable to other inputs, such as image
-loading from either disk with <code class="highlighter-rouge">docker load</code>, or from the network with
-<code class="highlighter-rouge">docker pull</code>. As of Docker 1.3.2, images are now extracted in a chrooted
-subprocess on Linux/Unix platforms, being the first-step in a wider effort
-toward privilege separation. As of Docker 1.10.0, all images are stored and
-accessed by the cryptographic checksums of their contents, limiting the
-possibility of an attacker causing a collision with an existing image.</p>
+<p>デーモンへの入力として、たとえば <code class="highlighter-rouge">docker load</code> 実行時はディスクから、また <code class="highlighter-rouge">docker pull</code> 実行時はネットワークから、それぞれイメージロードが行われますが、こういった入力には潜在的にぜい弱性があります。
+Docker 1.3.2 において、イメージの抽出は Linux/Unix プラットフォーム上の chroot によるサブプロセス内にて行われるようになりました。
+これは権限を分離することを賢明に目指した第一歩でした。
+Docker 1.10.0 になるとイメージはすべて、イメージデータの暗号化チェックサムによって保存されアクセスされるようになりました。
+既存イメージに対して攻撃を仕掛けられる可能性を軽減するものです。</p>
 
-<p>Finally, if you run Docker on a server, it is recommended to run
-exclusively Docker on the server, and move all other services within
-containers controlled by Docker. Of course, it is fine to keep your
-favorite admin tools (probably at least an SSH server), as well as
-existing monitoring/supervision processes, such as NRPE and collectd.</p>
+<p>サーバー上に Docker を稼動させる際には、Docker だけを動かすようにすることをお勧めします。
+さらに他のサービスは Docker によって管理されたコンテナー内に移動するようにしてください。
+もちろんお気に入りの管理ツール（おそらく SSH サーバーには最低必要なものでしょう）があれば、引き続き利用してください。
+同様に NRPE や collectd のような既存の監視プロセスを利用してもかまいません。</p>
 
-<h2 id="linux-kernel-capabilities">Linux kernel capabilities</h2>
+<h2 id="linux-kernel-capabilities">Linux カーネルのケーパビリティー</h2>
 
-<p>By default, Docker starts containers with a restricted set of
-capabilities. What does that mean?</p>
+<p>デフォルトにおいて Docker は、ケーパビリティーを限定的に利用してコンテナーを起動します。
+これはどういう意味でしょう。</p>
 
-<p>Capabilities turn the binary “root/non-root” dichotomy into a
-fine-grained access control system. Processes (like web servers) that
-just need to bind on a port below 1024 do not need to run as root: they
-can just be granted the <code class="highlighter-rouge">net_bind_service</code> capability instead. And there
-are many other capabilities, for almost all the specific areas where root
-privileges are usually needed.</p>
+<p>ケーパビリティーとは「ルートか非ルートか」という 2 値による区分けを、アクセス制御システム上に対してきめ細かく実現するものです。
+1024 番ポート以下に割り当てさえすればよいプロセス（たとえばウェブサーバー）なら、root として実行する必要はありません。
+代わりに <code class="highlighter-rouge">net_bind_service</code> ケーパビリティーを与えるだけで十分です。
+この他にも数多くのケーパビリティーがあるので、root 権限が通常必要とされる場面のほとんどすべてに利用することができます。</p>
 
-<p>This means a lot for container security; let’s see why!</p>
+<p>コンテナーセキュリティにおいてこれは実に多くのことを意味します。
+どういうことなのか見ていきます。</p>
 
-<p>Typical servers run several processes as <code class="highlighter-rouge">root</code>, including the SSH daemon,
-<code class="highlighter-rouge">cron</code> daemon, logging daemons, kernel modules, network configuration tools,
-and more. A container is different, because almost all of those tasks are
-handled by the infrastructure around the container:</p>
+<p>典型的なサーバーであれば、プロセスの多くは <code class="highlighter-rouge">root</code> によって起動されています。
+たとえば SSH デーモン、<code class="highlighter-rouge">cron</code> デーモン、ログデーモン、カーネルモジュール、ネットワーク設定ツールなどです。
+ただコンテナーでは話が違います。
+そもそもこういったタスクのほぼすべては、コンテナー外部にあるインフラストラクチャーによって取り扱われるものだからです。</p>
 
 <ul>
-  <li>SSH access are typically managed by a single server running on
-the Docker host;</li>
-  <li><code class="highlighter-rouge">cron</code>, when necessary, should run as a user
-process, dedicated and tailored for the app that needs its
-scheduling service, rather than as a platform-wide facility;</li>
-  <li>log management is also typically handed to Docker, or to
-third-party services like Loggly or Splunk;</li>
-  <li>hardware management is irrelevant, meaning that you never need to
-run <code class="highlighter-rouge">udevd</code> or equivalent daemons within
-containers;</li>
-  <li>network management happens outside of the containers, enforcing
-separation of concerns as much as possible, meaning that a container
-should never need to perform <code class="highlighter-rouge">ifconfig</code>,
-<code class="highlighter-rouge">route</code>, or ip commands (except when a container
-is specifically engineered to behave like a router or firewall, of
-course).</li>
+  <li>
+    <p>SSH アクセスを管理するのは、通常は Docker ホスト上に稼動するサーバープロセスです。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">cron</code> は必要な場合は、ユーザープロセスとして起動させます。
+スケジュールサービスを必要とするアプリ向けに特化させるものであり、プラットフォーム全体の機能として用いるものではありません。</p>
+  </li>
+  <li>
+    <p>ログ管理も通常は Docker が取り扱います。
+あるいは Loggly や Splunk といったサードパーティ製のサービスを利用することもあります。</p>
+  </li>
+  <li>
+    <p>ハードウェアを管理することは的はずれです。
+コンテナー内部において <code class="highlighter-rouge">udevd</code> やそれに類するデーモンを起動させる必要はまったくありません。</p>
+  </li>
+  <li>
+    <p>ネットワーク管理はコンテナー外部で行われるものです。
+可能な限り考えなくても済むものです。
+つまり <code class="highlighter-rouge">ifconfig</code>、<code class="highlighter-rouge">route</code>、ip コマンドは実行する必要がありません。
+（ただしコンテナーがルーターやファイアウォールとして動作するように構築しているのであれば別です。）</p>
+  </li>
 </ul>
 
-<p>This means that in most cases, containers do not need “real” root
-privileges <em>at all</em>. And therefore, containers can run with a reduced
-capability set; meaning that “root” within a container has much less
-privileges than the real “root”. For instance, it is possible to:</p>
+<p>上からわかるように、たいていの場合、コンテナーが「本当の」root 権限を必要とすることは <strong>まったくない</strong> ということです。
+つまりコンテナーは、ケーパビリティーを最小限にして実行可能であって、コンテナー内の「root」は、本当の「root」よりも少ない権限で済むことを意味します。
+したがって以下のようなことが可能になります。</p>
 
 <ul>
-  <li>deny all “mount” operations;</li>
-  <li>deny access to raw sockets (to prevent packet spoofing);</li>
-  <li>deny access to some filesystem operations, like creating new device
-nodes, changing the owner of files, or altering attributes (including
-the immutable flag);</li>
-  <li>deny module loading;</li>
-  <li>and many others.</li>
+  <li>「mount」操作はすべて許可しない。</li>
+  <li>生の（raw）ソケットへのアクセスを許可しない。（パケットスプーフィング防止のため）</li>
+  <li>ファイルシステムへの所定操作を許可しない。
+デバイスノードの新規生成、ファイルの所有者変更、属性変更（変更不能フラグを含む）など。</li>
+  <li>モジュールロードを許可しない。</li>
+  <li>その他もろもろ。</li>
 </ul>
 
-<p>This means that even if an intruder manages to escalate to root within a
-container, it is much harder to do serious damage, or to escalate
-to the host.</p>
+<p>上記のようなことをすれば、たとえ侵入者がコンテナー内の root 権限を得ようとしても、重大なダメージを及ぼすことはまず困難であり、またホストの権限まで奪うようなことにはなりません。</p>
 
-<p>This doesn’t affect regular web apps, but reduces the vectors of attack by
-malicious users considerably. By default Docker
-drops all capabilities except <a href="https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30">those
-needed</a>,
-a whitelist instead of a blacklist approach. You can see a full list of
-available capabilities in <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">Linux
-manpages</a>.</p>
+<p>普通のウェブアプリに対しての影響はありません。
+しかも悪意あるユーザーからの攻撃はかなり抑えられることになります。
+デフォルトで Dockerは全ケーパビリティーを拒否した上で、<a href="https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30">必要となるケーパビリティー</a> を用います。
+つまりブラックリスト方式ではなくホワイトリスト方式をとるものです。
+利用可能なケーパビリティーの一覧は <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">Linux man ページ</a> を参照してください。</p>
 
-<p>One primary risk with running Docker containers is that the default set
-of capabilities and mounts given to a container may provide incomplete
-isolation, either independently, or when used in combination with
-kernel vulnerabilities.</p>
+<p>Docker コンテナー実行時の主なリスクと言えば、コンテナーに与えられるデフォルトのケーパビリティーやマウント状況だけでは、完全なコンテナー分離にはならないことです。
+独立となっていない場合や、カーネルのぜい弱性との組み合わせによることも考えられます。</p>
 
-<p>Docker supports the addition and removal of capabilities, allowing use
-of a non-default profile. This may make Docker more secure through
-capability removal, or less secure through the addition of capabilities.
-The best practice for users would be to remove all capabilities except
-those explicitly required for their processes.</p>
+<p>Docker のデフォルトにはないプロファイルを使えば、ケーパビリティーの追加および削除が可能になります。
+これを使ってケーパビリティーを削除すれば、Docker は一層安全な状態になり、ケーパビリティーを加えれば、それだけ安全性は低下することになります。
+ユーザーにとってのベストプラクティスは、全ケーパビリティーは削除した上で、実行するプロセスに必要となるもののみを明示的に利用する方法をとることでしょう。</p>
 
-<h2 id="docker-content-trust-signature-verification">Docker Content Trust Signature Verification</h2>
+<h2 id="docker-content-trust-signature-verification">Docker Content Trust の署名認証</h2>
 
-<p>The Docker Engine can be configured to only run signed images. The Docker Content
-Trust signature verification feature is built directly into the <code class="highlighter-rouge">dockerd</code> binary.
-This is configured in the Dockerd configuration file.</p>
+<p>Docker Engine では、署名されているイメージだけを実行するように設定することができます。
+Docker Content Trust における署名認証は <code class="highlighter-rouge">dockerd</code> 実行モジュール内に直接ビルドされています。
+この機能は dockerd の設定ファイルを通じて設定することができます。</p>
 
-<p>To enable this feature, trustpinning can be configured in <code class="highlighter-rouge">daemon.json</code>, whereby
-only repositories signed with a user-specified root key can be pulled and run.</p>
+<p>この機能を有効にするには <code class="highlighter-rouge">daemon.json</code> において <code class="highlighter-rouge">trust-pinning</code> により設定します。
+これにより、ユーザーが指定したルート鍵によって署名されたリポジトリに対してのみ、イメージをプルして実行できるようになります。</p>
 
-<p>This feature provides more insight to administrators than previously available with
-the CLI for enforcing and performing image signature verification.</p>
+<p>以前は CLI においてイメージに対する署名認証を実現していましたが、この機能によって管理者の理解がより深く浸透しました。</p>
 
-<p>For more information on configuring Docker Content Trust Signature Verificiation, go to
-<a href="/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Content trust in Docker</a>.</p>
+<p>Docker Content Trust の署名認証方法の詳細は <a href="/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Docker における Content trust</a> に進んでください。</p>
 
-<h2 id="other-kernel-security-features">Other kernel security features</h2>
+<h2 id="other-kernel-security-features">その他のカーネルセキュリティ機能</h2>
 
-<p>Capabilities are just one of the many security features provided by
-modern Linux kernels. It is also possible to leverage existing,
-well-known systems like TOMOYO, AppArmor, SELinux, GRSEC, etc. with
-Docker.</p>
+<p>ケーパビリティーは、最近の Linux カーネルが提供する多くのセキュリティ機能の一つです。
+もちろんよく知られた既存のシステムとして、TOMOYO、AppArmor、SELinux、GRSEC を利用するのでもかまいません。</p>
 
-<p>While Docker currently only enables capabilities, it doesn’t interfere
-with the other systems. This means that there are many different ways to
-harden a Docker host. Here are a few examples.</p>
+<p>現時点において Docker はケーパビリティーを有効にするだけであって、他のシステムを妨害するものではありません。
+そこで Docker ホストのセキュリティ向上には、いくらでも方法が残されています。
+以下に数例を示します。</p>
 
 <ul>
-  <li>You can run a kernel with GRSEC and PAX. This adds many safety
-checks, both at compile-time and run-time; it also defeats many
-exploits, thanks to techniques like address randomization. It doesn’t
-require Docker-specific configuration, since those security features
-apply system-wide, independent of containers.</li>
-  <li>If your distribution comes with security model templates for
-Docker containers, you can use them out of the box. For instance, we
-ship a template that works with AppArmor and Red Hat comes with SELinux
-policies for Docker. These templates provide an extra safety net (even
-though it overlaps greatly with capabilities).</li>
-  <li>You can define your own policies using your favorite access control
-mechanism.</li>
+  <li>
+    <p>GRSEC や PAX を利用してカーネルを起動することができます。
+これにより、コンパイル時や実行時に多くの安全性チェックを行うことができます。
+またアドレスのランダム化のような技術のおかげで、悪用の機会を大きく減らすことができます。
+これに対して Docker 固有の設定は不要です。
+なぜならこのセキュリティ機能はシステム全体に適用されるものであって、コンテナーからは切り離されているものだからです。</p>
+  </li>
+  <li>
+    <p>利用しているディストリビューションに Docker コンテナー用のセキュリティモデルテンプレートが用意されているなら、それをそのまま利用することができます。
+たとえば AppArmor にて動作するテンプレートを我々は提供しています。
+また Red Hat は Docker 向けの SELinux ポリシーを提供しています。
+こういったテンプレートは追加の安全策となるものです。
+（もっともケーパビリティーとかなりの部分で重複するところがあります。）</p>
+  </li>
+  <li>
+    <p>好みのアクセス管理メカニズムを使って、独自にセキュリティポリシーを定義することができます。</p>
+  </li>
 </ul>
 
-<p>Just as you can use third-party tools to augment Docker containers, including
-special network topologies or shared filesystems, tools exist to harden Docker
-containers without the need to modify Docker itself.</p>
+<p>同じように Docker 機能を増強させるサードバーティー製ツールを利用することもできます。
+特別なネットワークトポロジーや共有ファイルシステムの構築が可能です。
+このようなツールは Docker 自体を修正することなく Docker 機能を強力にするためのものです。</p>
 
-<p>As of Docker 1.10 User Namespaces are supported directly by the docker
-daemon. This feature allows for the root user in a container to be mapped
-to a non uid-0 user outside the container, which can help to mitigate the
-risks of container breakout. This facility is available but not enabled
-by default.</p>
+<p>Docker 1.10 から Docker デーモンが直接、ユーザー名前空間をサポートするようになりました。
+この機能を使えば、コンテナー内の root ユーザーを、コンテナー外部の uid がゼロではないユーザーに対して割り当てできるようになります。
+コンテナーからのブレイクアウトのリスクを軽減することにつながります。
+利用可能な機能ではあるのですが、デフォルトでは有効化されていません。</p>
 
-<p>Refer to the <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-user-namespace-options">daemon command</a>
-in the command line reference for more information on this feature.
-Additional information on the implementation of User Namespaces in Docker
-can be found in
-<a href="https://integratedcode.us/2015/10/13/user-namespaces-have-arrived-in-docker/">this blog post</a>.</p>
+<p>この機能に関しての詳細は、コマンドラインリファレンス内の <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-user-namespace-options">daemon コマンド</a> を参照してください。
+Docker 内のユーザー名前空間に対する実装については <a href="https://integratedcode.us/2015/10/13/user-namespaces-have-arrived-in-docker/">こちらのブログ投稿</a> に詳細が示されています。</p>
 
-<h2 id="conclusions">Conclusions</h2>
+<h2 id="conclusions">まとめ</h2>
 
-<p>Docker containers are, by default, quite secure; especially if you
-run your processes as non-privileged users inside the container.</p>
+<p>Docker コンテナーはデフォルトにおいて十分に安全なものです。
+コンテナー内部にて非特権ユーザーによりプロセスを稼動させていれば、より安全です。</p>
 
-<p>You can add an extra layer of safety by enabling AppArmor, SELinux,
-GRSEC, or another appropriate hardening system.</p>
+<p>AppArmor、SELinux、GRSEC、あるいはセキュリティを堅牢にする適切なシステムを用いれば、安全性をさらに高めることができます。</p>
 
-<p>If you think of ways to make docker more secure, we welcome feature requests,
-pull requests, or comments on the Docker community forums.</p>
+<p>Docker をより安全にする方法を検討している方は、Docker コミュニティフォーラムにおいて、機能リクエスト、プルリクエスト、コメントをお寄せください。</p>
 
-<h2 id="related-information">Related information</h2>
+<h2 id="related-information">関連情報</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/">Use trusted images</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/seccomp/">Seccomp security profiles for Docker</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/apparmor/">AppArmor security profiles for Docker</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/">信頼のあるイメージを使う</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/seccomp/">Docker 向け Seccomp セキュリティプロファイル</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/apparmor/">Docker 向け AppArmor セキュリティプロファイル</a></li>
   <li><a href="https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e">On the Security of Containers (2014)</a></li>
   <li><a href="/docs.docker.jp.onthefly/network/overlay/">Docker swarm mode overlay network security model</a></li>
 </ul>
@@ -470,7 +426,7 @@ pull requests, or comments on the Docker community forums.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/security/security.md",
-                                        "title": "Docker security",
+                                        "title": "Docker のセキュリティ",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/security/security.md"
                                     };
                                     (function (d, c, j) {
@@ -536,14 +492,14 @@ pull requests, or comments on the Docker community forums.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#kernel-namespaces" class="nomunge">Kernel namespaces</a></li>
-  <li><a href="#control-groups" class="nomunge">Control groups</a></li>
-  <li><a href="#docker-daemon-attack-surface" class="nomunge">Docker daemon attack surface</a></li>
-  <li><a href="#linux-kernel-capabilities" class="nomunge">Linux kernel capabilities</a></li>
-  <li><a href="#docker-content-trust-signature-verification" class="nomunge">Docker Content Trust Signature Verification</a></li>
-  <li><a href="#other-kernel-security-features" class="nomunge">Other kernel security features</a></li>
-  <li><a href="#conclusions" class="nomunge">Conclusions</a></li>
-  <li><a href="#related-information" class="nomunge">Related information</a></li>
+  <li><a href="#kernel-namespaces" class="nomunge">カーネルの名前空間</a></li>
+  <li><a href="#control-groups" class="nomunge">コントロールグループ</a></li>
+  <li><a href="#docker-daemon-attack-surface" class="nomunge">Docker デーモンの攻撃領域</a></li>
+  <li><a href="#linux-kernel-capabilities" class="nomunge">Linux カーネルのケーパビリティー</a></li>
+  <li><a href="#docker-content-trust-signature-verification" class="nomunge">Docker Content Trust の署名認証</a></li>
+  <li><a href="#other-kernel-security-features" class="nomunge">その他のカーネルセキュリティ機能</a></li>
+  <li><a href="#conclusions" class="nomunge">まとめ</a></li>
+  <li><a href="#related-information" class="nomunge">関連情報</a></li>
 </ul>
 
 

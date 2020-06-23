@@ -1780,7 +1780,7 @@ var pages = [
 ,
 {
 "url":"/samples/",
-"title":"Samples",
+"title":"サンプル集",
 "description":null,
 "keywords":null
 }
@@ -3523,7 +3523,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/security/",
-"title":"Docker security",
+"title":"Docker のセキュリティ",
 "description":"Review of the Docker Daemon attack surface",
 "keywords":"Docker, Docker documentation, security"
 }

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-06-17 13:51:19 +0900 -->
+<!-- Page generated 2020-06-23 20:53:04 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-17T13:51:19+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-06-23T20:53:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="Docker デーモンが停止すると、デフォルトでは起動中のコンテナーも停止します。 Docker Engine 1.12 から導入された機能として、デーモンが利用できなくなってもコンテナーが起動し続けるように設定できるようになりました。 この機能のことを ライブリストア（live restore）と呼びます。 ライブリストアのオプションを使えば、デーモンの障害時、計画停電時、システム更新時などに伴うコンテナーのダウンタイムを軽減できます。 メモ ライブリストアは Windows コンテナーに対応していません。 ただし Docker Desktop for Windows 上にて動作する Linux コンテナーには対応しています。 ライブリストア有効化 ライブリストアを有効にする方法は２つあります。 デーモンが利用不能になっても、これによりコンテナーを起動し続けることができます。 ただしこれを行うのは ２つのうちのいずれか１つ としてください。 デーモン設定ファイルに設定を加えます。 Linux..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-06-17T13:51:19+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-06-23T20:53:04+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, upgrade, daemon, dockerd, live-restore, daemonless container">
@@ -238,22 +238,20 @@ Linux の場合、再起動はせず（いずれのコンテナー停止も避�
 
 <h2 id="impact-of-live-restore-on-running-containers">実行コンテナーに対するライブリストアの影響</h2>
 
-<p>デーモンが長い期間停止している場合、
-If the daemon is down for a long time, running containers may fill up the FIFO
-log the daemon normally reads. A full log blocks containers from logging more
-data. The default buffer size is 64K. If the buffers fill, you must restart
-the Docker daemon to flush them.</p>
+<p>デーモンが長い期間停止している場合、実行中のコンテナーが普段デーモンが読み込んでいる FIFO ログを、出力し続けているかもしれません。
+ログがあふれてしまうと、コンテナーのログ出力はそれ以上できなくなります。
+デフォルトのバッファーサイズは 64K です。
+このバッファーがいっぱいになった場合は、これをフラッシュするために Docker デーモンを再起動する必要があります。</p>
 
-<p>On Linux, you can modify the kernel’s buffer size by changing
-<code class="highlighter-rouge">/proc/sys/fs/pipe-max-size</code>. You cannot modify the buffer size on Docker Desktop for
-Mac or Docker Desktop for Windows.</p>
+<p>Linux の場合、<code class="highlighter-rouge">/proc/sys/fs/pipe-max-size</code> の値を編集することで、カーネルバッファーサイズを変更することができます。
+Docker Desktop for Mac や Docker Desktop for Windows では、このバッファサイズを変更することはできません。</p>
 
-<h2 id="live-restore-and-swarm-mode">Live restore and swarm mode</h2>
+<h2 id="live-restore-and-swarm-mode">ライブリストアと Swarm モード</h2>
 
-<p>The live restore option only pertains to standalone containers, and not to swarm
-services. Swarm services are managed by swarm managers. If swarm managers are
-not available, swarm services continue to run on worker nodes but cannot be
-managed until enough swarm managers are available to maintain a quorum.</p>
+<p>ライブリストアオプションはスタンドアロンコンテナーに対するものであって、Swarm サービスには適用されません。
+Swarm サービスは Swarm マネージャーによって管理されます。
+Swarm マネージャーが利用できないときに、Swarm サービスはワーカーノード上において起動を続けます。
+ただし Swarm マネージャーが管理できる状態になるまで、Swarm サービスを管理することはできません。</p>
 
                             <!-- tags -->
                             
@@ -344,7 +342,7 @@ managed until enough swarm managers are available to maintain a quorum.</p>
   <li><a href="#live-restore-during-upgrades" class="nomunge">デーモン更新時のライブリストア</a></li>
   <li><a href="#live-restore-upon-restart" class="nomunge">再起動時のライブリストア</a></li>
   <li><a href="#impact-of-live-restore-on-running-containers" class="nomunge">実行コンテナーに対するライブリストアの影響</a></li>
-  <li><a href="#live-restore-and-swarm-mode" class="nomunge">Live restore and swarm mode</a></li>
+  <li><a href="#live-restore-and-swarm-mode" class="nomunge">ライブリストアと Swarm モード</a></li>
 </ul>
 
 
