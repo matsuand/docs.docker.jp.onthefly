@@ -155,6 +155,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/context/aci-integration/",
+"title":"Deploying Docker containers on Azure",
+"description":"Deploying Docker containers on Azure",
+"keywords":"Docker, Azure, Integration, ACI, context, Compose, cli, deploy, containers, cloud"
+}
+,
+{
 "url":"/engine/swarm/swarm-tutorial/add-nodes/",
 "title":"Add nodes to the swarm",
 "description":"Add nodes to the swarm",
@@ -1899,8 +1906,8 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/",
-"title":"スウォームモード概要",
-"description":"Docker Engine スウォームモードの概要",
+"title":"Swarm モード概要",
+"description":"Docker Engine Swarm モードの概要",
 "keywords":"docker, container, cluster, swarm"
 }
 ,
@@ -2515,7 +2522,7 @@ var pages = [
 ,
 {
 "url":"/config/containers/multi-service_container/",
-"title":"Run multiple services in a container",
+"title":"コンテナー内での複数サービス起動",
 "description":"How to run more than one process in a container",
 "keywords":"docker, supervisor, process management"
 }
