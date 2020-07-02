@@ -163,7 +163,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/add-nodes/",
-"title":"Add nodes to the swarm",
+"title":"Swarm へのノード追加",
 "description":"Add nodes to the swarm",
 "keywords":"tutorial, cluster management, swarm"
 }
@@ -443,7 +443,7 @@ var pages = [
 ,
 {
 "url":"/network/bridge/",
-"title":"Use bridge networks",
+"title":"ブリッジネットワークの利用",
 "description":"All about using user-defined bridge networks and the default bridge",
 "keywords":"network, bridge, user-defined, standalone"
 }
@@ -611,7 +611,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/certificates/",
-"title":"Verify repository client with certificates",
+"title":"証明書を使ったリポジトリクライアントの確認",
 "description":"How to set up and use certificates with a registry to verify access",
 "keywords":"Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials"
 }
@@ -1052,7 +1052,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/trust/content_trust/",
-"title":"Content trust in Docker",
+"title":"Docker のコンテントトラスト",
 "description":"Enabling content trust in Docker",
 "keywords":"content, trust, security, docker, documentation"
 }
@@ -1150,7 +1150,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/create-swarm/",
-"title":"Create a swarm",
+"title":"Swarm の生成",
 "description":"Initialize the swarm",
 "keywords":"tutorial, cluster management, swarm mode"
 }
@@ -1213,7 +1213,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/deploy-service/",
-"title":"Deploy a service to the swarm",
+"title":"Swarm へのサービスデプロイ",
 "description":"Deploy a service to the swarm",
 "keywords":"tutorial, cluster management, swarm mode"
 }
@@ -1885,7 +1885,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/trust/",
-"title":"Use trusted images",
+"title":"信頼できるイメージの利用",
 "description":"Use trusted images",
 "keywords":"trust, security, docker,  index"
 }
@@ -1899,7 +1899,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/",
-"title":"Getting started with swarm mode",
+"title":"Swarm モードをはじめよう",
 "description":"Getting Started tutorial for Docker Engine swarm mode",
 "keywords":"tutorial, cluster management, swarm mode"
 }
@@ -1935,7 +1935,7 @@ var pages = [
 {
 "url":"/engine/tutorials/",
 "title":"Engine チュートリアル",
-"description":"コンテナーとどのように動作するかの説明。",
+"description":"コンテナーがどのように動作するかを説明します。",
 "keywords":"docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro"
 }
 ,
@@ -2235,7 +2235,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/key-concepts/",
-"title":"Swarm mode key concepts",
+"title":"Swarm モードの重要な考え方",
 "description":"Introducing key concepts for Docker Engine swarm mode",
 "keywords":"docker, container, cluster, swarm mode"
 }
@@ -2340,7 +2340,7 @@ var pages = [
 ,
 {
 "url":"/config/containers/logging/log_tags/",
-"title":"Customize log driver output",
+"title":"ログドライバー出力のカスタマイズ",
 "description":"Describes how to format tags for.",
 "keywords":"docker, logging, driver, syslog, Fluentd, gelf, journald"
 }
@@ -3250,7 +3250,7 @@ var pages = [
 ,
 {
 "url":"/compose/release-notes/",
-"title":"Docker Compose release notes",
+"title":"Docker Compose リリースノート",
 "description":"Release notes for Docker Compose",
 "keywords":"release notes, compose"
 }
