@@ -66,11 +66,6 @@ var glossary = [
 },
 
 {
-"term": "<a class=\"glossary\" name=\"docker_enterprise\">Docker Enterprise</a>",
-"def": "<p>Docker Enterprise is a platform to build, ship, and run containerized applications, that\nyou can deploy in the cloud or on-premise. It includes a tested and certified version of Docker,\nweb UIs for managing your app resources, and support.</p>\n"
-},
-
-{
 "term": "<a class=\"glossary\" name=\"docker_desktop_for_mac\">Docker Desktop for Mac</a>",
 "def": "<p><a href=\"/docker-for-mac/\">Docker Desktop for Mac</a> is an easy-to-install, lightweight\nDocker development environment designed specifically for the Mac. A native\nMac application, Docker Desktop for Mac uses the macOS Hypervisor\nframework, networking, and filesystem. It’s the best solution if you want\nto build, debug, test, package, and ship Dockerized applications on a\nMac. Docker Desktop for Mac supersedes <a href=\"/glossary/?term=toolbox\">Docker Toolbox</a> as\nstate-of-the-art Docker on macOS.</p>\n"
 },

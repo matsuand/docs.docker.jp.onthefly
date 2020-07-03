@@ -1648,7 +1648,7 @@ var pages = [
 {
 "url":"/engine/security/https/",
 "title":"Protect the Docker daemon socket",
-"description":"How to setup and run Docker with HTTPS",
+"description":"HTTPS により Docker を起動します。",
 "keywords":"docker, docs, article, example, https, daemon, tls, ca,  certificate"
 }
 ,
@@ -2074,7 +2074,7 @@ var pages = [
 ,
 {
 "url":"/config/containers/logging/",
-"title":"View logs for a container or service",
+"title":"コンテナーまたはサービスのログ確認",
 "description":"How to write to and view a container's logs",
 "keywords":"docker, logging"
 }

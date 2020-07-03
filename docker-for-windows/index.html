@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-02 14:46:18 +0900 -->
+<!-- Page generated 2020-07-03 20:48:28 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-02T14:46:18+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-03T20:48:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="Welcome to Docker Desktop! The Docker Desktop for Windows section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the Edge..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-02T14:46:18+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-03T20:48:28+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="windows, edge, tutorial, run, docker, local, machine">
@@ -156,7 +156,7 @@
                             
                             <p>Welcome to Docker Desktop!</p>
 
-<p>The <em>Docker Desktop for Windows</em> section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the <a href="edge-release-notes/">Edge release notes</a>. For information about Docker Desktop Enterprise (DDE) releases, see <a href="/desktop/enterprise/">Docker Desktop Enterprise</a>.</p>
+<p>The <em>Docker Desktop for Windows</em> section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the <a href="/docs.docker.jp.onthefly/docker-for-windows/edge-release-notes/">Edge release notes</a>. For information about Docker Desktop Enterprise (DDE) releases, see <a href="/desktop/enterprise/">Docker Desktop Enterprise</a>.</p>
 
 <p>Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker <em>on Windows</em>.</p>
 
@@ -410,19 +410,30 @@ allocated from the total available memory on your machine. To increase the RAM, 
 and Windows container mode all files are automatically shared by Windows.</p>
 </blockquote>
 
-<p>Use File sharing to allow local drives on Windows to be shared with Linux containers.
+<p>Use File sharing to allow local directories on Windows to be shared with Linux containers.
 This is especially useful for
 editing source code in an IDE on the host while running and testing the code in a container.
- If a drive is not shared with a Linux container you may get <code class="highlighter-rouge">file not found</code> or <code class="highlighter-rouge">cannot start service</code> errors at runtime. See <a href="/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#volume-mounting-requires-shared-drives-for-linux-containers">Volume mounting requires shared drives for Linux containers</a>.</p>
+Note that configuring file sharing is not necessary for Windows containers, only <a href="#switch-between-windows-and-linux-containers">Linux containers</a>.
+ If a directory is not shared with a Linux container you may get <code class="highlighter-rouge">file not found</code> or <code class="highlighter-rouge">cannot start service</code> errors at runtime. See <a href="/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#volume-mounting-requires-shared-folders-for-linux-containers">Volume mounting requires shared folders for Linux containers</a>.</p>
 
-<p><strong>Apply &amp; Restart</strong> makes the drives available to containers using Docker’s bind mount (<code class="highlighter-rouge">-v</code>) feature.</p>
+<p>File share settings are:</p>
+
+<ul>
+  <li>
+    <p><strong>Add a Directory</strong>: Click <code class="highlighter-rouge">+</code> and navigate to the directory you want to add.</p>
+  </li>
+  <li>
+    <p><strong>Apply &amp; Restart</strong> makes the directory available to containers using Docker’s
+bind mount (<code class="highlighter-rouge">-v</code>) feature.</p>
+  </li>
+</ul>
 
 <blockquote>
-  <p>Tips on shared drives, permissions, and volume mounts</p>
+  <p>Tips on shared folders, permissions, and volume mounts</p>
 
   <ul>
     <li>
-      <p>Shared drives are designed to allow application code to be edited on the host while being executed in containers. For non-code items
+      <p>Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much better if they are stored in
  the Linux VM, using a <a href="/docs.docker.jp.onthefly/storage/volumes/">data volume</a>
  (named volume) or <a href="/docs.docker.jp.onthefly/storage/volumes/">data container</a>.</p>
@@ -437,18 +448,18 @@ This is not configurable. See <a href="/docs.docker.jp.onthefly/docker-for-windo
   </ul>
 </blockquote>
 
-<h4 id="shared-drives-on-demand">Shared drives on demand</h4>
+<h4 id="shared-folders-on-demand">Shared folders on demand</h4>
 
-<p>You can share a drive “on demand” the first time a particular mount is requested.</p>
+<p>You can share a folder “on demand” the first time a particular folder is used by a container.</p>
 
 <p>If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
-popup asking if you want to share the specified drive.</p>
+popup asking if you want to share the specified folder.</p>
 
-<p>You can select to <strong>Share it</strong>, in which case it is added your Docker Desktop <a href="/docs.docker.jp.onthefly/docker-for-windows/#shared-drives">Shared Drives list</a> and available to
+<p>You can select to <strong>Share it</strong>, in which case it is added your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting <strong>Cancel</strong>.</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-for-windows/images/shared-drive-on-demand.png" alt="Shared drive on demand" width="600px" /></p>
+<p><img src="/docs.docker.jp.onthefly/docker-for-windows/images/shared-folder-on-demand.png" alt="Shared folder on demand" width="600px" /></p>
 
 <h4 id="proxies">Proxies</h4>
 
@@ -756,7 +767,7 @@ Certification Authorities or Intermediate Certification Authorities.</p>
 the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.</p>
 
 <p>To learn more about how to install a CA root certificate for the registry, see
-<a href="/engine/security/certificates">Verify repository client with certificates</a>
+<a href="/docs.docker.jp.onthefly/engine/security/certificates/">Verify repository client with certificates</a>
 in the Docker Engine topics.</p>
 
 <h3 id="how-do-i-add-client-certificates">How do I add client certificates?</h3>
