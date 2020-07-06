@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-03 20:48:28 +0900 -->
+<!-- Page generated 2020-07-06 22:35:21 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-03T20:48:28+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-06T22:35:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="docker logs は実行中のコンテナーが出力するログ情報を確認するコマンドです。 docker service logs コマンドは、1 つのサービスに参加しているコンテナーすべてのログ情報を確認します。 出力されるログ情報およびその出力書式は、ほぼコンテナーのエンドポイントコマンドにより定まります。 デフォルトにおいて docker logs や docker service logs は、端末画面にて対話的にコマンドを入力した際、そのコマンドが出力するものと同じような情報を得ることができます。 UNIX や Linux コマンドは普通、3 つの I/O ストリームを実行時に開きます。 それは STDIN、STDOUT、STDERR です。 STDIN はコマンドの入力ストリームです。 これはキーボードから入力されるか、あるいは他のコマンドからの入力の場合もあります。..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-03T20:48:28+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-06T22:35:21+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, logging">
@@ -178,26 +178,21 @@ I/O と Linux に関しての詳細は <a href="http://www.tldp.org/LDP/abs/html
 show useful information.</p>
   </li>
   <li>
-    <p>If your image runs a non-interactive process such as a web server or a
-database, that application may send its output to log files instead of <code class="highlighter-rouge">STDOUT</code>
-and <code class="highlighter-rouge">STDERR</code>.</p>
+    <p>実行するイメージが、ウェブサーバーやデータベースのような非対話的なプロセスである場合、ログは <code class="highlighter-rouge">STDOUT</code>
+や <code class="highlighter-rouge">STDERR</code> にではなく、ログファイルに対して出力されるかもしれません。</p>
   </li>
 </ul>
 
-<p>In the first case, your logs are processed in other ways and you may choose not
-to use <code class="highlighter-rouge">docker logs</code>. In the second case, the official <code class="highlighter-rouge">nginx</code> image shows one
-workaround, and the official Apache <code class="highlighter-rouge">httpd</code> image shows another.</p>
+<p>上の 1 点めに該当する場合、ログ出力が他の方法で処理されているため、<code class="highlighter-rouge">docker logs</code> は利用しないようにすることが考えられます。
+2 点めの場合、<code class="highlighter-rouge">nginx</code> の公式イメージではその解決がなされていて、公式の Apache イメージ <code class="highlighter-rouge">httpd</code> では、また別の解決方法をとっています。</p>
 
-<p>The official <code class="highlighter-rouge">nginx</code> image creates a symbolic link from <code class="highlighter-rouge">/var/log/nginx/access.log</code>
-to <code class="highlighter-rouge">/dev/stdout</code>, and creates another symbolic link
-from <code class="highlighter-rouge">/var/log/nginx/error.log</code> to <code class="highlighter-rouge">/dev/stderr</code>, overwriting the log files and
-causing logs to be sent to the relevant special device instead. See the
-<a href="https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23">Dockerfile</a>.</p>
+<p><code class="highlighter-rouge">nginx</code> の公式イメージでは、<code class="highlighter-rouge">/var/log/nginx/access.log</code> から <code class="highlighter-rouge">/dev/stdout</code> へのシンボリックリンクを生成しています。
+同じく <code class="highlighter-rouge">/var/log/nginx/error.log</code> は <code class="highlighter-rouge">/dev/stderr</code> へのリンクとしています。
+ログファイルをこのように設定し、ログ内容に合わせた特別デバイスへの出力を行っています。
+詳しくは <a href="https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23">Dockerfile</a> を参照してください。</p>
 
-<p>The official <code class="highlighter-rouge">httpd</code> driver changes the <code class="highlighter-rouge">httpd</code> application’s configuration to
-write its normal output directly to <code class="highlighter-rouge">/proc/self/fd/1</code> (which is <code class="highlighter-rouge">STDOUT</code>) and
-its errors to <code class="highlighter-rouge">/proc/self/fd/2</code> (which is <code class="highlighter-rouge">STDERR</code>). See the
-<a href="https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75">Dockerfile</a>.</p>
+<p>公式イメージ <code class="highlighter-rouge">httpd</code> では、<code class="highlighter-rouge">httpd</code> アプリケーション設定を変更して、標準出力を直接 <code class="highlighter-rouge">/proc/self/fd/1</code> (すなわち <code class="highlighter-rouge">STDOUT</code>) に、またエラーを <code class="highlighter-rouge">/proc/self/fd/2</code> (すなわち <code class="highlighter-rouge">STDERR</code>) にそれぞれ出力するようにしています。
+詳しくは <a href="https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75">Dockerfile</a> を参照してください。</p>
 
 <h2 id="next-steps">次のステップ</h2>
 

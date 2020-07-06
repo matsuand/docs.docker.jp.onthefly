@@ -26,13 +26,13 @@ info:
   x-logo:
     url: "/images/logo-docker-main.png"
   description: |
-    The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.
+    Engine API は Docker Engine により提供される HTTP API です。これは Docker クライアントが Engine との通信において利用している API です。したがって Docker クライアントが行っていることは、すべて API を使って行うことができます。
 
-    Most of the client's commands map directly to API endpoints (e.g. `docker ps` is `GET /containers/json`). The notable exception is running containers, which consists of several API calls.
+    クライアントコマンドは、ほとんどが API エンドポイントに直接対応づけられています（`docker ps` は `GET /containers/json` に）。 明らかに例外となるのが実行中のコンテナーであり、これはいくつもの API 呼び出しによって構成されています。
 
-    # Errors
+    # エラー
 
-    The API uses standard HTTP status codes to indicate the success or failure of the API call. The body of the response will be JSON in the following format:
+    API は標準的な HTTP ステータスコードを用いて、API 呼び出しの成功や失敗を示します。レスポンスの本体は以下のような JSON フォーマットです。
 
     ```
     {
@@ -40,32 +40,34 @@ info:
     }
     ```
 
-    # Versioning
+    # バージョン指定
 
-    The API is usually changed in each release, so API calls are versioned to
-    ensure that clients don't break. To lock to a specific version of the API,
-    you prefix the URL with its version, for example, call `/v1.30/info` to use
-    the v1.30 version of the `/info` endpoint. If the API version specified in
-    the URL is not supported by the daemon, a HTTP `400 Bad Request` error message
-    is returned.
+    API は各リリースごとに更新されるのが通常です。
+    そこで API 呼び出しはバージョンづけされており、クライアントが停止しないようにしています。
+    API の特定バージョンを指定するには URL 指定の前にバージョン番号をつけます。
+    たとえばエンドポイント `/info` をバージョン v1.30 で呼び出すには `/v1.30/info` とします。
+    URL のなかに指定された API バージョンがデーモンにおいてサポートされていない場合、HTTP のエラーメッセージ `400 Bad Request` が返されます。
 
-    If you omit the version-prefix, the current version of the API (v1.39) is used.
-    For example, calling `/info` is the same as calling `/v1.39/info`. Using the
-    API without a version-prefix is deprecated and will be removed in a future release.
+    バージョン指定をつけなかった場合は、現行最新の API（v1.39）が用いられます。
+    たとえば `/info` という呼び出しは `/v1.39/info` と同じです。
+    バージョン指定のない API 呼び出しは廃止予定になっており、将来のリリースにおいて削除されます。
 
-    Engine releases in the near future should support this version of the API,
-    so your client will continue to work even if it is talking to a newer Engine.
+    今後の Engine リリースにおいても、しばらくは本バージョンの API がサポートされます。
+    したがって Engine がより最新のものに更新されても、クライアントは動作するはずです
 
-    The API uses an open schema model, which means server may add extra properties
-    to responses. Likewise, the server will ignore any extra query parameters and
-    request body properties. When you write clients, you need to ignore additional
-    properties in responses to ensure they do not break when talking to newer
-    daemons.
+    API ではオープンスキーマモデルが採用されています。
+    つまりサーバーのレスポンスには、プロパティを追加することができるということです。
+    さらにサーバーは、追加されたクエリーパラメーターやリクエスト内のプロパティを無視することもできます。
+    クライアントプログラムを構築する際に、より最新バージョンのデーモンとの間での通信を正常に行うために、時には追加のプロパティを無視することが必要になるかもしれません。
 
 
-    # Authentication
+    # 認証
 
-    Authentication for registries is handled client side. The client has to send authentication details to various endpoints that need to communicate with registries, such as `POST /images/(name)/push`. These are sent as `X-Registry-Auth` header as a Base64 encoded (JSON) string with the following structure:
+    レジストリに対する認証処理はクライアントサイドで行われます。
+    クライアントは認証に関するさまざまな情報をエンドポイントに送信する必要があります。
+    たとえば `POST /images/(name)/push` などのようにして、レジストリとの通信を行うエンドポイントを扱います。
+    このような情報は Base64 によりエンコードされた (JSON) 文字列による `X-Registry-Auth` ヘッダーとして送信されます。
+    その構造は以下のようになります。
 
     ```
     {
@@ -76,9 +78,10 @@ info:
     }
     ```
 
-    The `serveraddress` is a domain/IP without a protocol. Throughout this structure, double quotes are required.
+    `serveraddress` はプロトコル指定を含まないドメイン名または IP です。
+    上記の書式は、各項目をダブルクォートでくくる必要があります。
 
-    If you have already got an identity token from the [`/auth` endpoint](#operation/SystemAuth), you can just pass this instead of credentials:
+    アイデンティティトークンを [`/auth` エンドポイント](#operation/SystemAuth) から取得している場合、認証情報の代わりにこれを受け渡すことができます。
 
     ```
     {
@@ -96,17 +99,17 @@ info:
 tags:
   # Primary objects
   - name: "Container"
-    x-displayName: "Containers"
+    x-displayName: "コンテナー"
     description: |
-      Create and manage containers.
+      コンテナーの生成と管理
   - name: "Image"
-    x-displayName: "Images"
+    x-displayName: "イメージ"
   - name: "Network"
-    x-displayName: "Networks"
+    x-displayName: "ネットワーク"
     description: |
       Networks are user-defined networks that containers can be attached to. See the [networking documentation](https://docs.docker.com/engine/userguide/networking/) for more information.
   - name: "Volume"
-    x-displayName: "Volumes"
+    x-displayName: "ボリューム"
     description: |
       Create and manage persistent storage that can be attached to containers.
   - name: "Exec"
@@ -121,11 +124,11 @@ tags:
     description: |
       Engines can be clustered together in a swarm. See [the swarm mode documentation](https://docs.docker.com/engine/swarm/) for more information.
   - name: "Node"
-    x-displayName: "Nodes"
+    x-displayName: "ノード"
     description: |
       Nodes are instances of the Engine participating in a swarm. Swarm mode must be enabled for these endpoints to work.
   - name: "Service"
-    x-displayName: "Services"
+    x-displayName: "サービス"
     description: |
       Services are the definitions of tasks to run on a swarm. Swarm mode must be enabled for these endpoints to work.
   - name: "Task"

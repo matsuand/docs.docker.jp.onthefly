@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-03 20:48:28 +0900 -->
+<!-- Page generated 2020-07-06 22:35:21 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-03T20:48:28+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-06T22:35:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:title" itemprop="title name" content="証明書を使ったリポジトリクライアントの確認"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="HTTPS による Docker 起動 において学んだことは、デフォルトにおいて Docker はインターネット通信ではない Unix ソケットを通じて動作しているということでした。 そして Docker クライアントとデーモンとの間で HTTPS を介して安全なやり取りとするためには TLS を有効にしなければならないということでした。 TLS はレジストリエンドポイントが信頼できるものであることを確実にし、レジストリとの間のトラフィックは暗号化してくれます。 本文では This article demonstrates how to ensure the traffic between the Docker..." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="HTTPS による Docker 起動 において学んだことは、デフォルトにおいて Docker はインターネット通信ではない Unix ソケットを通じて動作しているということでした。 また Docker クライアントとデーモンとの間で HTTPS を介して安全なやり取りとするためには TLS を有効にしなければならないということでした。 TLS はレジストリエンドポイントが信頼できるものであることを確実にし、レジストリとの間のトラフィックは暗号化してくれます。 本文においては、Docker レジストリサーバーと Docker デーモン（レジストリサーバーに対するクライアント）の間において、通信トラフィックが暗号化され、証明書ベースのクライアントサーバー認証 を用いて適切に認証されることを示します。 ここではレジストリにおいて、認証局（Certificate Authority; CA）のルート証明書のインストール方法と、クライアント TLS 証明書の設定方法を示します。 設定内容の理解 カスタム証明書は..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-03T20:48:28+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-06T22:35:21+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials">
@@ -79,12 +79,12 @@
   <title>証明書を使ったリポジトリクライアントの確認 | Docker ドキュメント</title>
   <meta property="og:title" content="証明書を使ったリポジトリクライアントの確認" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="How to set up and use certificates with a registry to verify access" />
-  <meta property="og:description" content="How to set up and use certificates with a registry to verify access" />
+  <meta name="description" content="レジストリへのアクセス認証に証明書を使うための設定方法を示します。" />
+  <meta property="og:description" content="レジストリへのアクセス認証に証明書を使うための設定方法を示します。" />
   <link rel="canonical" href="/engine/security/certificates/" />
   <meta property="og:url" content="https://docs.docker.com/engine/security/certificates/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"証明書を使ったリポジトリクライアントの確認","description":"How to set up and use certificates with a registry to verify access","url":"https://docs.docker.com/engine/security/certificates/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"証明書を使ったリポジトリクライアントの確認","description":"レジストリへのアクセス認証に証明書を使うための設定方法を示します。","url":"https://docs.docker.com/engine/security/certificates/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -149,23 +149,19 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    1 分
   
 </span>
 
                             
                             
 <p><a href="/docs.docker.jp.onthefly/engine/security/https/">HTTPS による Docker 起動</a> において学んだことは、デフォルトにおいて Docker はインターネット通信ではない Unix ソケットを通じて動作しているということでした。
-そして Docker クライアントとデーモンとの間で HTTPS を介して安全なやり取りとするためには TLS を有効にしなければならないということでした。
+また Docker クライアントとデーモンとの間で HTTPS を介して安全なやり取りとするためには TLS を有効にしなければならないということでした。
 TLS はレジストリエンドポイントが信頼できるものであることを確実にし、レジストリとの間のトラフィックは暗号化してくれます。</p>
 
-<p>本文では
-This article demonstrates how to ensure the traffic between the Docker registry
-server and the Docker daemon (a client of the registry server) is encrypted and
-properly authenticated using <em>certificate-based client-server authentication</em>.</p>
+<p>本文においては、Docker レジストリサーバーと Docker デーモン（レジストリサーバーに対するクライアント）の間において、通信トラフィックが暗号化され、<strong>証明書ベースのクライアントサーバー認証</strong> を用いて適切に認証されることを示します。</p>
 
-<p>We show you how to install a Certificate Authority (CA) root certificate
-for the registry and how to set the client TLS certificate for verification.</p>
+<p>ここではレジストリにおいて、認証局（Certificate Authority; CA）のルート証明書のインストール方法と、クライアント TLS 証明書の設定方法を示します。</p>
 
 <h2 id="understand-the-configuration">設定内容の理解</h2>
 
@@ -175,11 +171,9 @@ for the registry and how to set the client TLS certificate for verification.</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
-As of Docker 1.13, on Linux any root certificates authorities are merged
-with the system defaults, including as the host’s root CA set. On prior
-versions of Docker, and on Docker Enterprise Edition for Windows Server,
-the system default certificates are only used when no custom root certificates
-are configured.</p>
+Docker 1.13 の時点において、Linux 上のルート認証局は、システムが持つデフォルトのものにマージされます。
+したがってそこにはホストのルート認証局のセットも含まれます。
+これ以前の Docker や Windows Server 向けの Docker Enterprise Edition においては、カスタムルート証明書が設定されていない場合に限って、システムのデフォルト証明書が利用されます。</p>
 </blockquote>
 
 <p>1 つでも <code class="highlighter-rouge">&lt;filename&gt;.key/cert</code> のペアがあるということは、そのリポジトリに対するアクセスにはカスタム証明書が必要であることを Docker に伝えるものです。</p>
@@ -196,13 +190,11 @@ are configured.</p>
     └── localhost:5000          &lt;-- ホスト名：ポート
        ├── client.cert          &lt;-- クライアント証明書
        ├── client.key           &lt;-- クライアント鍵
-       └── ca.crt               &lt;-- Certificate authority that signed
-                                    the registry certificate
+       └── ca.crt               &lt;-- レジストリ証明書に署名した認証局
 </code></pre></div></div>
 
-<p>The preceding example is operating-system specific and is for illustrative
-purposes only. You should consult your operating system documentation for
-creating an os-provided bundled certificate chain.</p>
+<p>上記は、オペレーティングシステムに特有のものであって、単に一例を示しただけにすぎません。
+OS が提供する証明書チェーンを生成するためには、各オペレーティングシステムのドキュメントを参照してください。</p>
 
 <h2 id="create-the-client-certificates">クライアント証明書の生成</h2>
 
@@ -219,20 +211,20 @@ $ openssl req -new -x509 -text -key client.key -out client.cert
 macOS における OpenSSL バージョンは、Docker が必要とする種類の証明書のタイプとは互換性がありません。</p>
 </blockquote>
 
-<h2 id="troubleshooting-tips">Troubleshooting tips</h2>
+<h2 id="troubleshooting-tips">トラブルシューティングのためのヒント</h2>
 
-<p>The Docker daemon interprets <code class="highlighter-rouge">.crt</code> files as CA certificates and <code class="highlighter-rouge">.cert</code> files
-as client certificates. If a CA certificate is accidentally given the extension
-<code class="highlighter-rouge">.cert</code> instead of the correct <code class="highlighter-rouge">.crt</code> extension, the Docker daemon logs the
-following error message:</p>
+<p>Docker デーモンは <code class="highlighter-rouge">.crt</code> ファイルを CA 証明書として、<code class="highlighter-rouge">.cert</code> ファイルをクライアント証明書として、それぞれ解釈します。
+仮に CA 証明書の拡張子が、本来の正しい <code class="highlighter-rouge">.crt</code> でなく間違って <code class="highlighter-rouge">.cert</code> になってしまっていたら、Docker デーモンは以下のようなエラーメッセージをログ出力します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Missing key KEY_NAME for client certificate CERT_NAME. CA certificates should use the extension .crt.
 </code></pre></div></div>
 
-<p>If the Docker registry is accessed without a port number, do not add the port to the directory name.  The following shows the configuration for a registry on default port 443 which is accessed with <code class="highlighter-rouge">docker login my-https.registry.example.com</code>:</p>
+<p>Docker レジストリをポート番号なしにアクセスするなら、ディレクトリ名にポート番号をつけないでください。
+以下に示す設定は、デフォルトのポート 443 を使ってレジストリにアクセスできるようにするものです。
+実際のアクセスは <code class="highlighter-rouge">docker login my-https.registry.example.com</code> のように行います。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /etc/docker/certs.d/
-    └── my-https.registry.example.com          &lt;-- Hostname without port
+    └── my-https.registry.example.com          &lt;-- ポートなしのホスト名
        ├── client.cert
        ├── client.key
        └── ca.crt
@@ -241,8 +233,8 @@ following error message:</p>
 <h2 id="related-information">関連情報</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/">Use trusted images</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/https/">Protect the Docker daemon socket</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/">信頼できるイメージの利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/https/">Docker デーモンソケットの保護</a></li>
 </ul>
 
                             <!-- tags -->
@@ -340,7 +332,7 @@ following error message:</p>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#understand-the-configuration" class="nomunge">設定内容の理解</a></li>
   <li><a href="#create-the-client-certificates" class="nomunge">クライアント証明書の生成</a></li>
-  <li><a href="#troubleshooting-tips" class="nomunge">Troubleshooting tips</a></li>
+  <li><a href="#troubleshooting-tips" class="nomunge">トラブルシューティングのためのヒント</a></li>
   <li><a href="#related-information" class="nomunge">関連情報</a></li>
 </ul>
 

@@ -2,14 +2,14 @@ var pages = [
 
 {
 "url":"/engine/release-notes/17.03/",
-"title":"Docker Engine 17.03 release notes",
+"title":"Docker Engine 17.03 リリースノート",
 "description":null,
 "keywords":null
 }
 ,
 {
 "url":"/engine/release-notes/17.04/",
-"title":"Docker Engine 17.04 release notes",
+"title":"Docker Engine 17.04 リリースノート",
 "description":null,
 "keywords":null
 }
@@ -612,7 +612,7 @@ var pages = [
 {
 "url":"/engine/security/certificates/",
 "title":"証明書を使ったリポジトリクライアントの確認",
-"description":"How to set up and use certificates with a registry to verify access",
+"description":"レジストリへのアクセス認証に証明書を使うための設定方法を示します。",
 "keywords":"Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials"
 }
 ,
@@ -855,9 +855,16 @@ var pages = [
 }
 ,
 {
+"url":"/registry/configuration/",
+"title":"Configuring a registry",
+"description":"Explains how to configure a registry",
+"keywords":"registry, on-prem, images, tags, repository, distribution, configuration"
+}
+,
+{
 "url":"/config/containers/logging/configure/",
-"title":"Configure logging drivers",
-"description":"Configure logging driver.",
+"title":"ログドライバーの設定",
+"description":"ログドライバーを設定します。",
 "keywords":"docker, logging, driver"
 }
 ,
@@ -1647,7 +1654,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/https/",
-"title":"Protect the Docker daemon socket",
+"title":"Docker デーモンソケットの保護",
 "description":"HTTPS により Docker を起動します。",
 "keywords":"docker, docs, article, example, https, daemon, tls, ca,  certificate"
 }
@@ -1927,7 +1934,7 @@ var pages = [
 ,
 {
 "url":"/engine/release-notes/",
-"title":"Docker Engine release notes",
+"title":"Docker Engine リリースノート",
 "description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine",
 "keywords":"docker, docker engine, ce, whats new, release notes"
 }
@@ -2207,7 +2214,7 @@ var pages = [
 ,
 {
 "url":"/config/containers/logging/journald/",
-"title":"Journald logging driver",
+"title":"journald ログドライバー",
 "description":"Describes how to use the Journald logging driver.",
 "keywords":"Journald, docker, logging, driver"
 }
@@ -2536,7 +2543,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/mutagen-caching/",
-"title":"Mutagen-based caching",
+"title":"Mutagen-based file synchronization",
 "description":"High-performance two-way file sync for volume mounts",
 "keywords":"mac, mutagen, volumes, file sync,"
 }
@@ -3383,7 +3390,7 @@ var pages = [
 ,
 {
 "url":"/config/containers/runmetrics/",
-"title":"Runtime metrics",
+"title":"ランタイムメトリックス",
 "description":"Measure the behavior of running containers",
 "keywords":"docker, metrics, CPU, memory, disk, IO, run, runtime, stats"
 }

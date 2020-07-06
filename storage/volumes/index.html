@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-03 20:48:28 +0900 -->
+<!-- Page generated 2020-07-06 22:35:21 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-03T20:48:28+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-06T22:35:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="ボリュームとは、Docker コンテナーにおいて生成され利用されるデータを、永続的に保持する目的で利用される仕組みです。 バインドマウント はホストマシンのディレクトリ構造に依存しますが、ボリュームは完全に Docker によって管理されます。 ボリュームにはバインドマウントに比べて、以下のように優れた点があります。 ボリュームはバインドマウントよりも、バックアップや移行が容易です。 ボリュームは Docker CLI コマンドや Docker API を利用して管理することができます。 ボリュームは Linux と Windows 上のコンテナーにおいて動作します。 ボリュームは複数コンテナー間にて安全に共有できます。 ボリュームドライバーを用いると、リモートホスト上、あるいはクラウドプロバイダー上のボリュームに保存できるようになります。保存の際にはボリューム内データを暗号化することができ、その他にも種々の機能を利用することができます。 ボリュームを新たに生成すると、その内容はコンテナーがあらかじめ用意していた内容になります。 さらに永続的にデータを保持するならば、コンテナーの書き込みレイヤーを用いるのではなく、ボリュームを用いることの方が適切となる場合が多々あります。 というのもボリュームであれば、これを利用するコンテナーのサイズを増加させることはありません。 ボリューム内のデータは、コンテナーのライフサイクルから離れたところに存在しているからです。 コンテナーが一時的な状態を保持するデータを生成しているなら、tmpfs マウント を使うことで、そのデータが永続的に保存されないようにすることを考えてください。 あるいは..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-03T20:48:28+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-06T22:35:21+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="storage, persistence, data persistence, volumes">
@@ -149,7 +149,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    15 分
+    13 分
   
 </span>
 
@@ -184,11 +184,9 @@ configurable for volumes.</p>
 
 <p>もともと <code class="highlighter-rouge">-v</code> フラグや <code class="highlighter-rouge">--volume</code> フラグはスタンドアロンコンテナーに対して、また <code class="highlighter-rouge">--mount</code> フラグはスウォームサービスに対して用いられてきたものです。
 しかし Docker 17.06 からは <code class="highlighter-rouge">--mount</code> をスタンドアロンコンテナーに対しても利用できるようになりました。
-全般に <code class="highlighter-rouge">--mount</code> の方が明示的であり、
-In general,
-<code class="highlighter-rouge">--mount</code> is more explicit and verbose. The biggest difference is that the <code class="highlighter-rouge">-v</code>
-syntax combines all the options together in one field, while the <code class="highlighter-rouge">--mount</code>
-syntax separates them. Here is a comparison of the syntax for each flag.</p>
+全般に <code class="highlighter-rouge">--mount</code> の方がわかりやすいものですが、記述は増えます。
+両者の最大の違いは、<code class="highlighter-rouge">-v</code> の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、<code class="highlighter-rouge">--mount</code> の文法はそれを 1 つずつ個別に分けている点です。
+以下に両フラグにおける文法を比較します。</p>
 
 <blockquote>
   <p>はじめて利用する方は、<code class="highlighter-rouge">--volume</code> よりも <code class="highlighter-rouge">--mount</code> の方が文法は簡単なので、<code class="highlighter-rouge">--mount</code> を利用してください。</p>
@@ -197,37 +195,35 @@ syntax separates them. Here is a comparison of the syntax for each flag.</p>
 <p>ボリュームドライバーのオプションを指定する必要がある場合は、<code class="highlighter-rouge">--mount</code> を用いなければなりません。</p>
 
 <ul>
-  <li><strong><code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code></strong>: Consists of three fields, separated by colon characters
-(<code class="highlighter-rouge">:</code>). The fields must be in the correct order, and the meaning of each field
-is not immediately obvious.
+  <li><strong><code class="highlighter-rouge">-v</code> または <code class="highlighter-rouge">--volume</code></strong>: 3 つの項目から構成され、それぞれをコロン（<code class="highlighter-rouge">:</code>）で区切ります。
+各項目は正しい順に記述する必要があります。
+各項目の意味は、そのときどきによって変わります。
     <ul>
-      <li>In the case of named volumes, the first field is the name of the volume, and is
-unique on a given host machine. For anonymous volumes, the first field is
-omitted.</li>
-      <li>The second field is the path where the file or directory are mounted in
-the container.</li>
-      <li>The third field is optional, and is a comma-separated list of options, such
-as <code class="highlighter-rouge">ro</code>. These options are discussed below.</li>
+      <li>名前つきボリュームの場合、1 つめの項目は、そのボリューム名です。
+指定されるホストマシン上において固有の名称であるものです。
+匿名ボリュームの場合、1 つめの項目は省略されます。</li>
+      <li>2 つめは、コンテナー内にマウントされるファイルまたディレクトリのパスです。</li>
+      <li>3 つめは任意の指定項目であり、オプション指定をカンマ区切りで指定します。
+指定内容には <code class="highlighter-rouge">ro</code> などがあります。
+このオプションに関しては後に説明しています。</li>
     </ul>
   </li>
-  <li><strong><code class="highlighter-rouge">--mount</code></strong>: Consists of multiple key-value pairs, separated by commas and each
-consisting of a <code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code> tuple. The <code class="highlighter-rouge">--mount</code> syntax is more verbose
-than <code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code>, but the order of the keys is not significant, and
-the value of the flag is easier to understand.
+  <li><strong><code class="highlighter-rouge">--mount</code></strong>: 複数のキーバリューペアを指定し、各ペアはカンマにより区切ります。
+そしてそれぞれのペアは <code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code> という記述を行います。
+<code class="highlighter-rouge">--mount</code> における記述は <code class="highlighter-rouge">-v</code> や <code class="highlighter-rouge">--volume</code> におけるものよりも長くなります。
+しかしキーの並び順に意味はなく、このフラグに与えられたキーバリューの内容は容易に理解することができます。
     <ul>
-      <li>The <code class="highlighter-rouge">type</code> of the mount, which can be <a href="/docs.docker.jp.onthefly/storage/bind-mounts/"><code class="highlighter-rouge">bind</code></a>, <code class="highlighter-rouge">volume</code>, or
-<a href="/docs.docker.jp.onthefly/storage/tmpfs/"><code class="highlighter-rouge">tmpfs</code></a>. This topic discusses volumes, so the type is always
-<code class="highlighter-rouge">volume</code>.</li>
-      <li>The <code class="highlighter-rouge">source</code> of the mount. For named volumes, this is the name of the volume.
-For anonymous volumes, this field is omitted. May be specified as <code class="highlighter-rouge">source</code>
-or <code class="highlighter-rouge">src</code>.</li>
-      <li>The <code class="highlighter-rouge">destination</code> takes as its value the path where the file or directory
-is mounted in the container. May be specified as <code class="highlighter-rouge">destination</code>, <code class="highlighter-rouge">dst</code>,
-or <code class="highlighter-rouge">target</code>.</li>
-      <li>The <code class="highlighter-rouge">readonly</code> option, if present, causes the bind mount to be <a href="#use-a-read-only-volume">mounted into
-the container as read-only</a>.</li>
-      <li>The <code class="highlighter-rouge">volume-opt</code> option, which can be specified more than once, takes a
-key-value pair consisting of the option name and its value.</li>
+      <li><code class="highlighter-rouge">type</code> はマウントのタイプであり、<a href="/docs.docker.jp.onthefly/storage/bind-mounts/"><code class="highlighter-rouge">bind</code></a>, <code class="highlighter-rouge">volume</code>, <a href="/docs.docker.jp.onthefly/storage/tmpfs/"><code class="highlighter-rouge">tmpfs</code></a> といった値を指定します。
+ここで説明しているのはボリュームであるため、常に <code class="highlighter-rouge">volume</code> であるものとします。</li>
+      <li><code class="highlighter-rouge">source</code> はマウント元です。
+名前つきボリュームの場合は、そのボリューム名です。
+匿名ボリュームの場合、この項目は省略します。
+<code class="highlighter-rouge">source</code> あるいは <code class="highlighter-rouge">src</code> といった指定がよく用いられます。</li>
+      <li><code class="highlighter-rouge">destination</code> には、コンテナー上にてマウントするファイルまたはディレクトリのパスを指定します。
+<code class="highlighter-rouge">destination</code>, <code class="highlighter-rouge">dst</code>, <code class="highlighter-rouge">target</code> といった指定がよく用いられます。</li>
+      <li>オプション <code class="highlighter-rouge">readonly</code> が指定されると、そのボリュームが <a href="#use-a-read-only-volume">コンテナーにおける読み込み専用マウント</a> としてマウントされます。</li>
+      <li><code class="highlighter-rouge">volume-opt</code> オプションは複数の指定が可能です。
+オプション名とその値からなるキーバリューペアを指定します。</li>
     </ul>
   </li>
 </ul>
@@ -250,34 +246,32 @@ list in the <code class="highlighter-rouge">o</code> parameter. This example sho
 </code></pre></div>  </div>
 </blockquote>
 
-<p>The examples below show both the <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> syntax where possible, and
-    <code class="highlighter-rouge">--mount</code> is presented first.</p>
+<p>これ以降においては、可能なら <code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> の両方の例を示していきます。
+また先に示すのは <code class="highlighter-rouge">--mount</code> とします。</p>
 
-<h3 id="differences-between--v-and---mount-behavior">Differences between <code class="highlighter-rouge">-v</code> and <code class="highlighter-rouge">--mount</code> behavior</h3>
+<h3 id="differences-between--v-and---mount-behavior"><code class="highlighter-rouge">-v</code> と <code class="highlighter-rouge">--mount</code> の動作の違い</h3>
 
-<p>As opposed to bind mounts, all options for volumes are available for both
-<code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> flags.</p>
+<p>バインドマウントの場合とは違い、ボリュームのオプションは、<code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> フラグの両方においてすべて利用できます。</p>
 
-<p>When using volumes with services, only <code class="highlighter-rouge">--mount</code> is supported.</p>
+<p>サービスにおいてボリュームを利用する場合は <code class="highlighter-rouge">--mount</code> のみがサポートされます。</p>
 
 <h2 id="create-and-manage-volumes">ボリュームの生成と管理</h2>
 
-<p>Unlike a bind mount, you can create and manage volumes outside the scope of any
-container.</p>
+<p>バインドマウントとは異なり、ボリュームの生成と管理はコンテナーの外部から行います。</p>
 
-<p><strong>Create a volume</strong>:</p>
+<p><strong>ボリュームの生成</strong>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create my-vol
 </code></pre></div></div>
 
-<p><strong>List volumes</strong>:</p>
+<p><strong>ボリュームの一覧表示</strong>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume <span class="nb">ls
 
 local               </span>my-vol
 </code></pre></div></div>
 
-<p><strong>Inspect a volume</strong>:</p>
+<p><strong>ボリュームの確認</strong>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume inspect my-vol
 <span class="o">[</span>
@@ -292,20 +286,19 @@ local               </span>my-vol
 <span class="o">]</span>
 </code></pre></div></div>
 
-<p><strong>Remove a volume</strong>:</p>
+<p><strong>ボリュームの削除</strong>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume rm my-vol
 </code></pre></div></div>
 
-<h2 id="start-a-container-with-a-volume">Start a container with a volume</h2>
+<h2 id="start-a-container-with-a-volume">ボリュームを使ったコンテナーの起動</h2>
 
-<p>If you start a container with a volume that does not yet exist, Docker creates
-the volume for you. The following example mounts the volume <code class="highlighter-rouge">myvol2</code> into
-<code class="highlighter-rouge">/app/</code> in the container.</p>
+<p>ボリュームがまだ存在していない状態で、そのボリュームを使ったコンテナーを起動すると、Docker はその際にボリュームを生成します。
+以下の例はボリューム <code class="highlighter-rouge">myvol2</code> をコンテナー内の <code class="highlighter-rouge">/app/</code> にマウントするものです。</p>
 
-<p>The <code class="highlighter-rouge">-v</code> and <code class="highlighter-rouge">--mount</code> examples below produce the same result. You can’t run
-them both unless you remove the <code class="highlighter-rouge">devtest</code> container and the <code class="highlighter-rouge">myvol2</code> volume
-after running the first one.</p>
+<p><code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> によるそれぞれの例は、同一の結果になります。
+ただし 2 つの例を同時に実行することはできません。
+実行するためには、実行前に <code class="highlighter-rouge">devtest</code> コンテナーと <code class="highlighter-rouge">myvol2</code> ボリュームを削除しておくことが必要になります。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
@@ -335,8 +328,8 @@ after running the first one.</p>
 </div>
 <!--tab-content-->
 
-<p>Use <code class="highlighter-rouge">docker inspect devtest</code> to verify that the volume was created and mounted
-correctly. Look for the <code class="highlighter-rouge">Mounts</code> section:</p>
+<p>ボリュームが正しく生成されたかどうかを <code class="highlighter-rouge">docker inspect devtest</code> により確認します。
+出力の中で <code class="highlighter-rouge">Mounts</code> の項目を見てみます。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"Mounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -352,11 +345,11 @@ correctly. Look for the <code class="highlighter-rouge">Mounts</code> section:</
 </span><span class="p">],</span><span class="w">
 </span></code></pre></div></div>
 
-<p>This shows that the mount is a volume, it shows the correct source and
-destination, and that the mount is read-write.</p>
+<p>この情報から、マウントはボリュームであることがわかります。
+そしてマウント元、マウント先が正しいものであること、マウントが読み書き可能であることがわかります。</p>
 
-<p>Stop the container and remove the volume. Note volume removal is a separate
-step.</p>
+<p>コンテナーを停止し、ボリュームを削除します。
+ボリュームの削除は別操作になります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop devtest
 
@@ -365,7 +358,7 @@ step.</p>
 <span class="nv">$ </span>docker volume rm myvol2
 </code></pre></div></div>
 
-<h3 id="start-a-service-with-volumes">Start a service with volumes</h3>
+<h3 id="start-a-service-with-volumes">ボリュームを使ったサービスの起動</h3>
 
 <p>When you start a service and define a volume, each service container uses its own
 local volume. None of the containers can share this data if you use the <code class="highlighter-rouge">local</code>
@@ -770,13 +763,13 @@ the Docker Engine removes the <code class="highlighter-rouge">/foo</code> volume
 <ul id="my_toc" class="inline_toc">
   <li><a href="#choose-the--v-or---mount-flag" class="nomunge">-v または --mount フラグの選択</a>
     <ul>
-      <li><a href="#differences-between--v-and---mount-behavior" class="nomunge">Differences between -v and --mount behavior</a></li>
+      <li><a href="#differences-between--v-and---mount-behavior" class="nomunge">-v と --mount の動作の違い</a></li>
     </ul>
   </li>
   <li><a href="#create-and-manage-volumes" class="nomunge">ボリュームの生成と管理</a></li>
-  <li><a href="#start-a-container-with-a-volume" class="nomunge">Start a container with a volume</a>
+  <li><a href="#start-a-container-with-a-volume" class="nomunge">ボリュームを使ったコンテナーの起動</a>
     <ul>
-      <li><a href="#start-a-service-with-volumes" class="nomunge">Start a service with volumes</a></li>
+      <li><a href="#start-a-service-with-volumes" class="nomunge">ボリュームを使ったサービスの起動</a></li>
       <li><a href="#populate-a-volume-using-a-container" class="nomunge">Populate a volume using a container</a></li>
     </ul>
   </li>
