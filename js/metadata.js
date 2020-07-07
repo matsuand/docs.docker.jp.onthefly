@@ -2025,8 +2025,8 @@ var pages = [
 ,
 {
 "url":"/desktop/",
-"title":"Docker Desktop overview",
-"description":"Docker Desktop overview",
+"title":"Docker Desktop 概要",
+"description":"Docker Desktop の概要。",
 "keywords":"Desktop, Docker, GUI, run, docker, local, machine"
 }
 ,
@@ -2549,6 +2549,13 @@ var pages = [
 }
 ,
 {
+"url":"/docker-for-mac/mutagen/",
+"title":"Mutagen-based file synchronization",
+"description":"High-performance two-way file sync for volume mounts",
+"keywords":"mac, mutagen, volumes, file sync,"
+}
+,
+{
 "url":"/network/network-tutorial-host/",
 "title":"Networking using the host network",
 "description":"Tutorials for networking using the host network, disabling network isolation",
@@ -2634,8 +2641,8 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/networking/",
-"title":"Networking features in Docker Desktop for Mac",
-"description":"Networking",
+"title":"Docker Desktop for Mac のネットワーク機能",
+"description":"ネットワーク機能。",
 "keywords":"mac, networking"
 }
 ,
@@ -3258,7 +3265,7 @@ var pages = [
 {
 "url":"/compose/release-notes/",
 "title":"Docker Compose リリースノート",
-"description":"Release notes for Docker Compose",
+"description":"Docker Compose のリリースノート。",
 "keywords":"release notes, compose"
 }
 ,
