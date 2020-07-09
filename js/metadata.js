@@ -2340,8 +2340,8 @@ var pages = [
 ,
 {
 "url":"/config/containers/logging/local/",
-"title":"Local File logging driver",
-"description":"Describes how to use the local logging driver.",
+"title":"Local File ログドライバー",
+"description":"local ログドライバーの利用方法について説明します。",
 "keywords":"local, docker, logging, driver"
 }
 ,
@@ -2354,8 +2354,8 @@ var pages = [
 ,
 {
 "url":"/config/containers/logging/logentries/",
-"title":"Logentries logging driver",
-"description":"Describes how to use the logentries logging driver.",
+"title":"logentries ログドライバー",
+"description":"logentries ログドライバーの利用方法について説明します。",
 "keywords":"logentries, docker, logging, driver"
 }
 ,
@@ -3012,8 +3012,8 @@ var pages = [
 ,
 {
 "url":"/config/containers/logging/plugins/",
-"title":"Use a logging driver plugin",
-"description":"How to use logging driver plugins",
+"title":"ログドライバープラグインの利用",
+"description":"ログドライバープラグインの利用方法を示します。",
 "keywords":"logging, driver, plugins, monitoring"
 }
 ,
@@ -3376,8 +3376,8 @@ var pages = [
 ,
 {
 "url":"/engine/security/rootless/",
-"title":"Run the Docker daemon as a non-root user (Rootless mode)",
-"description":"Run the Docker daemon as a non-root user (Rootless mode)",
+"title":"root ユーザー以外による Docker デーモン起動（rootless モード）",
+"description":"root ユーザー以外によって Docker デーモンを起動します（rootless モード）。",
 "keywords":"security, namespaces, rootless"
 }
 ,
