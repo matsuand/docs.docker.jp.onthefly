@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-10 10:05:57 +0900 -->
+<!-- Page generated 2020-07-10 22:40:09 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-10T10:05:57+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-10T22:40:09+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="docker stats docker stats コマンドを使って、コンテナーの実行メトリックスからの出力を得ることができます。 このコマンドは、CPU、メモリ使用量、メモリ上限、ネットワーク I/O に対するメトリックスをサポートしています。 以下は docker stats コマンドの出力例です。 $ docker stats redis1 redis2 CONTAINER CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-10T10:05:57+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-10T22:40:09+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, metrics, CPU, memory, disk, IO, run, runtime, stats">
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    12 分
+    9 分
   
 </span>
 
@@ -301,19 +301,19 @@ total_unevictable 32768
     </tr>
     <tr>
       <td><strong>active_anon</strong>、<strong>inactive_anon</strong></td>
-      <td>The amount of <em>anonymous</em> memory that has been identified has respectively <em>active</em> and <em>inactive</em> by the kernel. “Anonymous” memory is the memory that is <em>not</em> linked to disk pages. In other words, that’s the equivalent of the rss counter described above. In fact, the very definition of the rss counter is <strong>active_anon</strong> + <strong>inactive_anon</strong> - <strong>tmpfs</strong> (where tmpfs is the amount of memory used up by <code class="highlighter-rouge">tmpfs</code> filesystems mounted by this control group). Now, what’s the difference between “active” and “inactive”? Pages are initially “active”; and at regular intervals, the kernel sweeps over the memory, and tags some pages as “inactive”. Whenever they are accessed again, they are immediately retagged “active”. When the kernel is almost out of memory, and time comes to swap out to disk, the kernel swaps “inactive” pages.</td>
+      <td>カーネルによって <strong>アクティブ</strong> か <strong>非アクティブ</strong> のいずれかに特定される <strong>匿名</strong> メモリの使用量。”匿名” メモリとは、ディスクページにひもづいて <strong>いない</strong> メモリのことです。別の表現でいえば、上で示した rss カウンターと同等のものです。正確な rss カウンターの定義式は、<strong>active_anon</strong> ＋ <strong>inactive_anon</strong> － <strong>tmpfs</strong> です。（コントロールグループが <code class="highlighter-rouge">tmpfs</code> ファイルシステムをマウントしている場合に、ここでいう tmpfs は、そのファイルシステムが利用するメモリ使用量のことです。）では “アクティブ” と “非アクティブ” の違いは？  ページは初めは “アクティブ” です。一定間隔でカーネルがメモリを走査し、一部に “非アクティブ” というタグをつけます。再度アクセスが行われると、すぐに “アクティブ” というタグにつけかえられます。カーネルがほぼメモリ不足に陥って、ディスクへのスワップが必要になると、カーネルは “非アクティブ” ページをスワップします。</td>
     </tr>
     <tr>
       <td><strong>active_file</strong>, <strong>inactive_file</strong></td>
-      <td>Cache memory, with <em>active</em> and <em>inactive</em> similar to the <em>anon</em> memory above. The exact formula is <strong>cache</strong> = <strong>active_file</strong> + <strong>inactive_file</strong> + <strong>tmpfs</strong>. The exact rules used by the kernel to move memory pages between active and inactive sets are different from the ones used for anonymous memory, but the general principle is the same. When the kernel needs to reclaim memory, it is cheaper to reclaim a clean (=non modified) page from this pool, since it can be reclaimed immediately (while anonymous pages and dirty/modified pages need to be written to disk first).</td>
+      <td>上で示した <strong>anon</strong> メモリと同様、<strong>アクティブ</strong>、<strong>非アクティブ</strong> の状態があるキャッシュメモリのこと。正確な式で表現すると、<strong>cache</strong> ＝ <strong>active_file</strong> ＋ <strong>inactive_file</strong> ＋ <strong>tmpfs</strong> です。カーネルが採用する規則として、アクティブ、非アクティブなメモリページを移動させる方法は、匿名メモリのときとは異なります。ただしその一般的な原理は同じです。カーネルがメモリを要求するとき、クリーンな（修正がかかっていない）ページを取り出すことの方が、簡単に済みます。取り出すことがすぐにできるからです。（一方、匿名ページや、汚れた修正のかかったページでは、その前にディスクに書き出すことが必要になるからです。）</td>
     </tr>
     <tr>
       <td><strong>unevictable</strong></td>
-      <td>The amount of memory that cannot be reclaimed; generally, it accounts for memory that has been “locked” with <code class="highlighter-rouge">mlock</code>. It is often used by crypto frameworks to make sure that secret keys and other sensitive material never gets swapped out to disk.</td>
+      <td>取り出し要求ができないメモリ量のこと。一般には <code class="highlighter-rouge">mlock</code> によって “ロックされた” メモリとされます。暗号フレームワークにおいて利用されることがあり、その場合、秘密鍵や機密情報がディスクにスワップされないようにするものです。</td>
     </tr>
     <tr>
       <td><strong>memory_limit</strong>, <strong>memsw_limit</strong></td>
-      <td>These are not really metrics, but a reminder of the limits applied to this cgroup. The first one indicates the maximum amount of physical memory that can be used by the processes of this control group; the second one indicates the maximum amount of RAM+swap.</td>
+      <td>これは実際のメトリックスではありません。この cgroup に適用される上限を確認するためのものです。<strong>memory_limit</strong> は、このコントロールグループのプロセスが利用可能な物理メモリの最大容量を示します。<strong>memsw_limit</strong> は RAM ＋ スワップの最大容量を示します。</td>
     </tr>
   </tbody>
 </table>
@@ -328,34 +328,31 @@ total_unevictable 32768
 
 <h3 id="cpu-metrics-cpuacctstat">CPU メトリックス: <code class="highlighter-rouge">cpuacct.stat</code></h3>
 
-<p>メモリメトリックスについて説明してきました。
+<p>これまでメモリメトリックスについて説明してきました。
 これ以外のものは比較的簡単です。
 CPU メトリックスは <code class="highlighter-rouge">cpuacct</code> コントローラー内にあります。</p>
 
-<p>For each container, a pseudo-file <code class="highlighter-rouge">cpuacct.stat</code> contains the CPU usage
-accumulated by the processes of the container, broken down into <code class="highlighter-rouge">user</code> and
-<code class="highlighter-rouge">system</code> time. The distinction is:</p>
+<p>各コンテナーに対応して擬似ファイル <code class="highlighter-rouge">cpuacct.stat</code> があり、コンテナープロセスの CPU 使用時間が積算されています。
+そしてこれが <code class="highlighter-rouge">user</code> 時間と <code class="highlighter-rouge">system</code> 時間に割り振られています。
+両者の違いは以下のとおりです。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">user</code> 時間は、プロセスが CPU を直接制御する時間のことで、
+  <li><code class="highlighter-rouge">user</code> 時間は、プロセスが CPU を直接制御して、プロセスコードを実行している時間のことです。
 executing process code.</li>
   <li><code class="highlighter-rouge">system</code> 時間は、カーネルがプロセスのためにシステムコールを実行している時間のことです。</li>
 </ul>
 
-<p>Those times are expressed in ticks of 1/100th of a second, also called “user
-jiffies”. There are <code class="highlighter-rouge">USER_HZ</code> <em>“jiffies”</em> per second, and on x86 systems,
-<code class="highlighter-rouge">USER_HZ</code> is 100. Historically, this mapped exactly to the number of scheduler
-“ticks” per second, but higher frequency scheduling and
-<a href="http://lwn.net/Articles/549580/">tickless kernels</a> have made the number of
-ticks irrelevant.</p>
+<p>この時間は 1/100 秒の tick という周期で表わされます。
+別名「user jiffies」ともいいます。
+1 秒には <code class="highlighter-rouge">USER_HZ</code> 分の “<strong>jiffies</strong>” があり、x86 システムでは <code class="highlighter-rouge">USER_HZ</code> は 100 です。
+これまでの経緯として、これは 1 秒に割り当てられるスケジューラー “ticks” の数です。
+ただしそれ以上に頻繁にスケジューリングされることや、<a href="http://lwn.net/Articles/549580/">tickless kernels</a> があり、これらは ticks 数は関係がなくなります。</p>
 
 <h4 id="block-io-metrics">ブロック I/O メトリックス</h4>
 
-<p>Block I/O is accounted in the <code class="highlighter-rouge">blkio</code> controller.
-Different metrics are scattered across different files. While you can
-find in-depth details in the <a href="https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt">blkio-controller</a>
-file in the kernel documentation, here is a short list of the most
-relevant ones:</p>
+<p>ブロック I/O は <code class="highlighter-rouge">blkio</code> コントローラー内において計算されます。
+さまざまなメトリックスが、さまざまなファイルにわたって保持されています。
+より詳細は、カーネルドキュメント内にある <a href="https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt">blkio-controller</a> ファイルに記述されていますが、以下では最も関連のある内容を手短に示します。</p>
 
 <table>
   <thead>
@@ -367,56 +364,51 @@ relevant ones:</p>
   <tbody>
     <tr>
       <td><strong>blkio.sectors</strong></td>
-      <td>Contains the number of 512-bytes sectors read and written by the processes member of the cgroup, device by device. Reads and writes are merged in a single counter.</td>
+      <td>512 バイトのセクター数。cgroup のプロセスメンバーによって、デバイスごとに読み書きされます。読み書きは 1 つのカウンターに合計されます。</td>
     </tr>
     <tr>
       <td><strong>blkio.io_service_bytes</strong></td>
-      <td>Indicates the number of bytes read and written by the cgroup. It has 4 counters per device, because for each device, it differentiates between synchronous vs. asynchronous I/O, and reads vs. writes.</td>
+      <td>cgroup によって読み書きされるバイト数を表わします。デバイスごとに 4 つのカウンターがあり、1 つのデバイスつき、同期、非同期 I/O の別、読み込み、書き込みの別が示されています。</td>
     </tr>
     <tr>
       <td><strong>blkio.io_serviced</strong></td>
-      <td>The number of I/O operations performed, regardless of their size. It also has 4 counters per device.</td>
+      <td>処理された I/O 操作の数。そのサイズとは無関係です。デバイスごとに、やはり 4 つのカウンターがあります。</td>
     </tr>
     <tr>
       <td><strong>blkio.io_queued</strong></td>
-      <td>Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn’t doing any I/O, this is zero. The opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which can therefore handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.</td>
+      <td>この cgroup において、その時点でキューに入っている I/O 操作の数を表わします。言い換えると  cgroup に I/O が発生していなければ、この値はゼロになります。一方、この逆は正しくなりません。I/O がキューに入っていなかったとしても、それは cgroup が（I/O 的に）アイドルであるとは言えません。普段は静止しているデバイスが、純粋に同期読み込み処理を行っているかもしれないからです。その場合には、I/O 操作をすぐに処理できるわけであり、キューに入れることなく扱うことができます。またこのメトリックスは I/O サブシステム上のどの cgroup に負荷がかかっているかがわかります。ただし示される値は相対的な量にすぎません。プロセスグループがこれ以上に I/O を処理しない場合であっても、他のデバイスの影響によりデバイス負荷が増加するため、キューサイズも増加することになります。</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="network-metrics">ネットワークメトリックス</h3>
 
-<p>Network metrics are not exposed directly by control groups. There is a
-good explanation for that: network interfaces exist within the context
-of <em>network namespaces</em>. The kernel could probably accumulate metrics
-about packets and bytes sent and received by a group of processes, but
-those metrics wouldn’t be very useful. You want per-interface metrics
-(because traffic happening on the local <code class="highlighter-rouge">lo</code>
-interface doesn’t really count). But since processes in a single cgroup
-can belong to multiple network namespaces, those metrics would be harder
-to interpret: multiple network namespaces means multiple <code class="highlighter-rouge">lo</code>
-interfaces, potentially multiple <code class="highlighter-rouge">eth0</code>
-interfaces, etc.; so this is why there is no easy way to gather network
-metrics with control groups.</p>
+<p>ネットワークメトリックスは、コントロールグループによって直接表わされるものではありません。
+わかりやすく説明します。
+ネットワークインターフェースは、<strong>ネットワーク名前空間</strong> コンテキストの中に存在します。
+カーネルは、プロセスグループとの間で送受信されるパケットやバイトに関して、メトリックスを収集します。
+ただこのメトリックスはあまり役に立つものではありません。
+欲しいのはインターフェースごとのメトリックスであるはずです。
+（なぜならメトリックスでは <code class="highlighter-rouge">lo</code> インターフェースに発生するトラフィックはカウントされません。）
+もっとも 1 つの cgroup は、複数のネットワーク名前空間に属することができるため、そのメトリックスを計算することは、より難しくなります。
+複数のネットワーク名前空間になるということは、<code class="highlighter-rouge">lo</code> インターフェースが複数あるということであり、場合によっては複数の <code class="highlighter-rouge">eth0</code> インターフェースを持つこともあります。
+コントロールグループを用いてネットワークメトリックスを簡単に集めることができないのは、こういった理由によります。</p>
 
-<p>Instead we can gather network metrics from other sources:</p>
+<p>そのかわり、ネットワークメトリックスは別の情報から収集することができます。</p>
 
 <h4 id="iptables">IPtables</h4>
 
-<p>IPtables (or rather, the netfilter framework for which iptables is just
-an interface) can do some serious accounting.</p>
+<p>iptables （むしろ iptables がインターフェースとなる netfilter フレームワーク）から重要な情報が得られます。</p>
 
-<p>For instance, you can setup a rule to account for the outbound HTTP
-traffic on a web server:</p>
+<p>たとえばウェブサーバー上におけるアウトバウンド HTTP トラフィックを計算するルールを設定することができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> OUTPUT <span class="nt">-p</span> tcp <span class="nt">--sport</span> 80
 </code></pre></div></div>
 
-<p>There is no <code class="highlighter-rouge">-j</code> or <code class="highlighter-rouge">-g</code> flag,
-so the rule just counts matched packets and goes to the following
-rule.</p>
+<p>ここでは <code class="highlighter-rouge">-j</code> フラグや <code class="highlighter-rouge">-g</code> フラグは用いません。
+このルールがパケットをカウントし、後続のルールの処理を行います。</p>
 
-<p>Later, you can check the values of the counters, with:</p>
+<p>このカウンター値は以下のようにして確認できます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-nxvL</span> OUTPUT
 </code></pre></div></div>
