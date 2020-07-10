@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-09 22:04:21 +0900 -->
+<!-- Page generated 2020-07-10 10:05:57 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-10T10:05:57+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="ボリュームとは、Docker コンテナーにおいて生成され利用されるデータを、永続的に保持する目的で利用される仕組みです。 バインドマウント はホストマシンのディレクトリ構造に依存しますが、ボリュームは完全に Docker によって管理されます。 ボリュームにはバインドマウントに比べて、以下のように優れた点があります。 ボリュームはバインドマウントよりも、バックアップや移行が容易です。 ボリュームは Docker CLI コマンドや Docker API を利用して管理することができます。 ボリュームは Linux と Windows 上のコンテナーにおいて動作します。 ボリュームは複数コンテナー間にて安全に共有できます。 ボリュームドライバーを用いると、リモートホスト上、あるいはクラウドプロバイダー上のボリュームに保存できるようになります。保存の際にはボリューム内データを暗号化することができ、その他にも種々の機能を利用することができます。 ボリュームを新たに生成すると、その内容はコンテナーがあらかじめ用意していた内容になります。 さらに永続的にデータを保持するならば、コンテナーの書き込みレイヤーを用いるのではなく、ボリュームを用いることの方が適切となる場合が多々あります。 というのもボリュームであれば、これを利用するコンテナーのサイズを増加させることはありません。 ボリューム内のデータは、コンテナーのライフサイクルから離れたところに存在しているからです。 コンテナーが一時的な状態を保持するデータを生成しているなら、tmpfs マウント を使うことで、そのデータが永続的に保存されないようにすることを考えてください。 あるいは..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-10T10:05:57+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="storage, persistence, data persistence, volumes">
@@ -79,12 +79,12 @@
   <title>ボリュームの利用 | Docker ドキュメント</title>
   <meta property="og:title" content="ボリュームの利用" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="ボリュームの利用" />
-  <meta property="og:description" content="ボリュームの利用" />
+  <meta name="description" content="ボリュームを利用します。" />
+  <meta property="og:description" content="ボリュームを利用します。" />
   <link rel="canonical" href="/storage/volumes/" />
   <meta property="og:url" content="https://docs.docker.com/storage/volumes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ボリュームの利用","description":"ボリュームの利用","url":"https://docs.docker.com/storage/volumes/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ボリュームの利用","description":"ボリュームを利用します。","url":"https://docs.docker.com/storage/volumes/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    13 分
+    11 分
   
 </span>
 
@@ -180,8 +180,8 @@
 <p>コンテナーが一時的な状態を保持するデータを生成しているなら、<a href="/docs.docker.jp.onthefly/storage/tmpfs/">tmpfs マウント</a> を使うことで、そのデータが永続的に保存されないようにすることを考えてください。
 あるいは <a href="/docs.docker.jp.onthefly/storage/tmpfs/">tmpfs マウント</a> を使うことで、コンテナーの書き込みレイヤーに出力されることも防ぐことができるので、コンテナーの性能を向上させることもできます。</p>
 
-<p>Volumes use <code class="highlighter-rouge">rprivate</code> bind propagation, and bind propagation is not
-configurable for volumes.</p>
+<p>ボリュームはバインドプロパゲーションの 1 つである <code class="highlighter-rouge">rprivate</code> を利用します。
+ただしボリュームにおいてバインドプロパゲーションを設定することはできません。</p>
 
 <h2 id="choose-the--v-or---mount-flag">-v または --mount フラグの選択</h2>
 
@@ -232,15 +232,13 @@ configurable for volumes.</p>
 </ul>
 
 <blockquote>
-  <p>Escape values from outer CSV parser</p>
+  <p>上位レベルの CSV 解析をエスケープする</p>
 
-  <p>If your volume driver accepts a comma-separated list as an option,
-you must escape the value from the outer CSV parser. To escape a <code class="highlighter-rouge">volume-opt</code>,
-surround it with double quotes (<code class="highlighter-rouge">"</code>) and surround the entire mount parameter
-with single quotes (<code class="highlighter-rouge">'</code>).</p>
+  <p>利用するボリュームドライバーが、オプションとしてカンマ区切りリストを受け取る場合、そのリストが上位レベルの CSV として解析されないようにエスケープすることが必要になります。
+<code class="highlighter-rouge">volume-opt</code> をエスケープするには、そのオプションをダブルクォート（<code class="highlighter-rouge">"</code>）で囲み、かつマウントパラメーター全体の文字列をシングルクォート（<code class="highlighter-rouge">'</code>）で囲みます。</p>
 
-  <p>For example, the <code class="highlighter-rouge">local</code> driver accepts mount options as a comma-separated
-list in the <code class="highlighter-rouge">o</code> parameter. This example shows the correct way to escape the list.</p>
+  <p>たとえば <code class="highlighter-rouge">local</code> ドライバーは <code class="highlighter-rouge">o</code> パラメーターにおいて、マウントオプションにカンマ区切りリストを受けつけます。
+ここに示す例は、そのリストを正しくエスケープする方法を示しています。</p>
 
   <div class="warning highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker service create \
      --mount 'type=volume,src=&lt;VOLUME-NAME&gt;,dst=&lt;CONTAINER-PATH&gt;,volume-driver=local,volume-opt=type=nfs,volume-opt=device=&lt;nfs-server&gt;:&lt;nfs-path&gt;,"volume-opt=o=addr=&lt;nfs-address&gt;,vers=4,soft,timeo=180,bg,tcp,rw"'
@@ -262,19 +260,19 @@ list in the <code class="highlighter-rouge">o</code> parameter. This example sho
 
 <p>バインドマウントとは異なり、ボリュームの生成と管理はコンテナーの外部から行います。</p>
 
-<p><strong>ボリュームの生成</strong>:</p>
+<p><strong>ボリュームの生成</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create my-vol
 </code></pre></div></div>
 
-<p><strong>ボリュームの一覧表示</strong>:</p>
+<p><strong>ボリュームの一覧表示</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume <span class="nb">ls
 
 local               </span>my-vol
 </code></pre></div></div>
 
-<p><strong>ボリュームの確認</strong>:</p>
+<p><strong>ボリュームの確認</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume inspect my-vol
 <span class="o">[</span>
@@ -289,7 +287,7 @@ local               </span>my-vol
 <span class="o">]</span>
 </code></pre></div></div>
 
-<p><strong>ボリュームの削除</strong>:</p>
+<p><strong>ボリュームの削除</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume rm my-vol
 </code></pre></div></div>
@@ -363,13 +361,12 @@ local               </span>my-vol
 
 <h3 id="start-a-service-with-volumes">ボリュームを使ったサービスの起動</h3>
 
-<p>When you start a service and define a volume, each service container uses its own
-local volume. None of the containers can share this data if you use the <code class="highlighter-rouge">local</code>
-volume driver, but some volume drivers do support shared storage. Docker for AWS and
-Docker for Azure both support persistent storage using the Cloudstor plugin.</p>
+<p>サービスを起動してボリュームを定義すると、各サービスそれぞれは固有のローカルボリュームを利用します。
+<code class="highlighter-rouge">local</code> ボリュームドライバーを利用する場合は、コンテナー間でデータが共有されることはありません。
+一方、ボリュームドライバーの中には、ストレージの共有をサポートするものがあります。
+Docker for AWS と Docker for Azure では、Cloudstor プラグインを利用して恒常的なストレージをサポートしています。</p>
 
-<p>The following example starts a <code class="highlighter-rouge">nginx</code> service with four replicas, each of which
-uses a local volume called <code class="highlighter-rouge">myvol2</code>.</p>
+<p>以下の例は <code class="highlighter-rouge">nginx</code> サービスを 4 つのレプリカを使って起動し、そのレプリカの個々が <code class="highlighter-rouge">myvol2</code> というローカルボリュームを利用します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">--replicas</span><span class="o">=</span>4 <span class="se">\</span>
@@ -378,7 +375,7 @@ uses a local volume called <code class="highlighter-rouge">myvol2</code>.</p>
   nginx:latest
 </code></pre></div></div>
 
-<p>Use <code class="highlighter-rouge">docker service ps devtest-service</code> to verify that the service is running:</p>
+<p><code class="highlighter-rouge">docker service ps devtest-service</code> を実行して、サービスが起動していることを確認します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps devtest-service
 
@@ -386,34 +383,31 @@ ID                  NAME                IMAGE               NODE                
 4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago
 </code></pre></div></div>
 
-<p>Remove the service, which stops all its tasks:</p>
+<p>サービスを削除します。
+これによりすべてのタスクが止まります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service rm devtest-service
 </code></pre></div></div>
 
-<p>Removing the service does not remove any volumes created by the service.
-Volume removal is a separate step.</p>
+<p>サービスを削除しても、そのサービスによって生成されたボリュームは削除されません。
+ボリュームの削除は別操作になります。</p>
 
-<h4 id="syntax-differences-for-services">Syntax differences for services</h4>
+<h4 id="syntax-differences-for-services">サービスにおける文法の違い</h4>
 
-<p>The <code class="highlighter-rouge">docker service create</code> command does not support the <code class="highlighter-rouge">-v</code> or <code class="highlighter-rouge">--volume</code> flag.
-When mounting a volume into a service’s containers, you must use the <code class="highlighter-rouge">--mount</code>
-flag.</p>
+<p><code class="highlighter-rouge">docker service create</code> コマンドは <code class="highlighter-rouge">-v</code> フラグや <code class="highlighter-rouge">--volume</code> フラグをサポートしていません。
+サービスコンテナー内にボリュームをマウントするには、<code class="highlighter-rouge">--mount</code> フラグを使う必要があります。</p>
 
 <h3 id="populate-a-volume-using-a-container">Populate a volume using a container</h3>
 
-<p>If you start a container which creates a new volume, as above, and the container
-has files or directories in the directory to be mounted (such as <code class="highlighter-rouge">/app/</code> above),
-the directory’s contents are copied into the volume. The container then
-mounts and uses the volume, and other containers which use the volume also
-have access to the pre-populated content.</p>
+<p>起動するコンテナーが上で示したように、新たなボリュームを生成するとします。
+そして（上でいうと <code class="highlighter-rouge">/app</code> のように）マウントされるディレクトリ内に、すでにファイルやサブディレクトリが存在していた場合、このディレクトリの内容はボリュームにコピーされます。
+そうしてからコンテナーは、ボリュームをマウントして利用していきます。
+このボリュームを利用する別のコンテナーは、コピーを済ませた内容にアクセスすることになります。</p>
 
-<p>To illustrate this, this example starts an <code class="highlighter-rouge">nginx</code> container and populates the
-new volume <code class="highlighter-rouge">nginx-vol</code> with the contents of the container’s
-<code class="highlighter-rouge">/usr/share/nginx/html</code> directory, which is where Nginx stores its default HTML
-content.</p>
+<p>この状況を示すために、以下では <code class="highlighter-rouge">nginx</code> コンテナーを起動して、コンテナー内の <code class="highlighter-rouge">/usr/share/nginx/html</code> の内容を、新たなボリューム <code class="highlighter-rouge">nginx-vol</code> にコピーする例を示します。
+<code class="highlighter-rouge">/usr/share/nginx/html</code> 内には、Nginx によるデフォルトの HTML ファイルが保存されています。</p>
 
-<p>The <code class="highlighter-rouge">--mount</code> and <code class="highlighter-rouge">-v</code> examples have the same end result.</p>
+<p><code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> の例は、いずれも同一の結果となります。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-empty-run"><code>--mount</code></a></li>
@@ -443,8 +437,8 @@ content.</p>
 </div>
 <!--tab-content-->
 
-<p>After running either of these examples, run the following commands to clean up
-the containers and volumes.  Note volume removal is a separate step.</p>
+<p>どちらかの例を実行した後は、以下のコマンドを実行して、コンテナーとボリュームを削除します。
+ボリュームの削除は別操作になります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop nginxtest
 
@@ -455,8 +449,9 @@ the containers and volumes.  Note volume removal is a separate step.</p>
 
 <h2 id="use-a-read-only-volume">読み込み専用ボリュームの利用</h2>
 
-<p>For some development applications, the container needs to write into the bind
-mount so that changes are propagated back to the Docker host. At other times,
+<p>開発アプリケーションによっては、コンテナーからバインドマウントへの書き込みを行って、変更内容を Docker ホストにコピーし直すことが必要になる場合があります。</p>
+
+<p>At other times,
 the container only needs read access to the data. Remember that multiple
 containers can mount the same volume, and it can be mounted read-write for some
 of them and read-only for others, at the same time.</p>
