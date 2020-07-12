@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-10 22:40:09 +0900 -->
+<!-- Page generated 2020-07-12 22:11:28 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-10T22:40:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-12T22:11:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:title" itemprop="title name" content="ランタイムメトリックス"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="docker stats docker stats コマンドを使って、コンテナーの実行メトリックスからの出力を得ることができます。 このコマンドは、CPU、メモリ使用量、メモリ上限、ネットワーク I/O に対するメトリックスをサポートしています。 以下は docker stats コマンドの出力例です。 $ docker stats redis1 redis2 CONTAINER CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O..." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="docker stats docker stats コマンドを使うと、コンテナーの実行メトリックスからの出力を順次得ることができます。 このコマンドは、CPU、メモリ使用量、メモリ上限、ネットワーク I/O に対するメトリックスをサポートしています。 以下は docker stats コマンドの出力例です。 $ docker stats redis1 redis2 CONTAINER CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-10T22:40:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-12T22:11:28+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, metrics, CPU, memory, disk, IO, run, runtime, stats">
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    9 分
+    5 分
   
 </span>
 
@@ -160,7 +160,7 @@
                             
 <h2 id="docker-stats">docker stats</h2>
 
-<p><code class="highlighter-rouge">docker stats</code> コマンドを使って、コンテナーの実行メトリックスからの出力を得ることができます。
+<p><code class="highlighter-rouge">docker stats</code> コマンドを使うと、コンテナーの実行メトリックスからの出力を順次得ることができます。
 このコマンドは、CPU、メモリ使用量、メモリ上限、ネットワーク I/O に対するメトリックスをサポートしています。</p>
 
 <p>以下は <code class="highlighter-rouge">docker stats</code> コマンドの出力例です。</p>
@@ -177,17 +177,17 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 <h2 id="control-groups">コントロールグループ</h2>
 
 <p>Linux のコンテナーは <a href="https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt">コントロールグループ</a> に依存しています。
-これは単に複数のプロセスを追跡するだけでなく、CPU、メモリ、ブロック I/O 使用量に関するメトリックスを提供します。
-このメトリックスがアクセス可能であり、同様にネットワーク使用量メトリックスも得ることができます。
-これは「純粋な」LXC コンテナーに関連があり、Docker のコンテナーにも関係します。</p>
+コントロールグループは、単に複数のプロセスを追跡するだけでなく、CPU、メモリ、ブロック I/O 使用量に関するメトリックスを提供します。
+そういったメトリックスがアクセス可能であり、同様にネットワーク使用量のメトリックスも得ることができます。
+これは「純粋な」LXC コンテナーに関連しており、Docker のコンテナーにも関連します。</p>
 
 <p>コントロールグループは擬似ファイルシステムを通じて提供されます。
 最近のディストリビューションでは、このファイルシステムは <code class="highlighter-rouge">/sys/fs/cgroup</code> にあります。
 このディレクトリの下には devices、freezer、blkio などのサブディレクトリが複数あります。
-各サブディレクトリは、実にさまざまな cgroup 階層に対応しています。</p>
+これらのサブディレクトリが、独特の cgroup 階層を構成しています。</p>
 
 <p>かつてのシステムでは、コントロールグループが <code class="highlighter-rouge">/cgroup</code> にマウントされていて、わかりやすい階層構造にはなっていませんでした。
-その場合サブディレクトリを確認していくのではなく、そのディレクトリ内の数多くのファイルを見てまわって、どこかにあるディレクトリが既存のコンテナーに対応するものであろう、と確認していくしかありませんでした。</p>
+その場合、サブディレクトリそのものを確認していくのではなく、サブディレクトリ内にある数多くのファイルを見渡して、そのディレクトリが既存のコンテナーに対応するものであろう、と確認していくしかありません。</p>
 
 <p>コントロールグループがどこにマウントされているかを確認するには、以下を実行します。</p>
 
@@ -196,9 +196,9 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 
 <h3 id="enumerate-cgroups">cgroups の確認</h3>
 
-<p><code class="highlighter-rouge">/proc/cgroups</code> を覗いてみるとわかりますが、システムが利用するコントロールグループのサブシステムには実にさまざまなものがあり、それが階層化されていて、数多くのグループが属しているのがわかります。</p>
+<p><code class="highlighter-rouge">/proc/cgroups</code> を覗いてみるとわかりますが、システムが利用するコントロールグループのサブシステムには実にさまざまなものがあり、それが階層化されていて、数多くのグループが含まれているのがわかります。</p>
 
-<p>また <code class="highlighter-rouge">/proc/&lt;pid&gt;/cgroup</code> を確認してみると、1 つのプロセスがどのコントロールグループに属しているかがわかります。
+<p>また <code class="highlighter-rouge">/proc/&lt;pid&gt;/cgroup</code> を確認してみれば、1 つのプロセスがどのコントロールグループに属しているかがわかります。
 そのときのコントロールグループは、階層構造のルートとなるマウントポイントからの相対パスで表わされます。
 <code class="highlighter-rouge">/</code> が表示されていれば、そのプロセスにはグループが割り当てられていません。
 一方 <code class="highlighter-rouge">/lxc/pumpkin</code> といった表示になっていれば、そのプロセスは <code class="highlighter-rouge">pumpkin</code> という名のコンテナーのメンバーであることがわかります。</p>
@@ -207,13 +207,13 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 
 <p>各コンテナーでは、各階層内に 1 つの cgroup が生成されます。
 かつてのシステムにおいて、ユーザーランドツール LXC の古い版を利用している場合、cgroup 名はそのままコンテナー名になっています。
-より新しい LXC ツールでの cgroup は <code class="highlighter-rouge">lxc/&lt;コンテナー名&gt;</code> となります。</p>
+より新しい LXC ツールでの cgroup 名は <code class="highlighter-rouge">lxc/&lt;コンテナー名&gt;</code> となります。</p>
 
 <p>cgroup を利用する Docker コンテナーにおいて、コンテナー名は、コンテナーの完全 ID か、あるいは長めの ID となります。
 <code class="highlighter-rouge">docker ps</code> によってコンテナーが ae836c95b4c3 のように示されていたら、長めの ID はたとえば <code class="highlighter-rouge">ae836c95b4c3c9e9179e0e91015512da89fdec91612f63cebae57df9a5444c79</code> のようなものになります。
 これは <code class="highlighter-rouge">docker inspect</code> を用いるか、あるいは <code class="highlighter-rouge">docker ps --no-trunc</code> とすれば確認することができます。</p>
 
-<p>Docker コンテナーに対するメモリーメトリックスを取りまとめて確認するには、<code class="highlighter-rouge">/sys/fs/cgroup/memory/docker/&lt;longid&gt;/</code> を見ます。</p>
+<p>Docker コンテナーに対するメモリメトリックスを取りまとめて確認するには、<code class="highlighter-rouge">/sys/fs/cgroup/memory/docker/&lt;longid&gt;/</code> を見ます。</p>
 
 <h3 id="metrics-from-cgroups-memory-cpu-block-io">cgroups の各メトリックス、メモリ、CPU、ブロック I/O</h3>
 
@@ -221,7 +221,7 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 
 <h4 id="memory-metrics-memorystat">メモリメトリックス: <code class="highlighter-rouge">memory.stat</code></h4>
 
-<p>メモリメトリックスは cgroup の “memory” にあります。
+<p>メモリメトリックスは cgroup の「memory」にあります。
 メモリコントロールグループには多少のオーバーヘッドがあります。
 ホスト上のメモリ利用量をきめ細かく算出しているためです。
 したがって各種ディストリビューションの多くでは、デフォルトでこれを無効にしています。
@@ -263,10 +263,10 @@ total_unevictable 32768
 <p>前半部分（<code class="highlighter-rouge">total_</code> が先頭につくものを除く）は cgroup 内のプロセスに対応する統計情報であり、サブ crgoup は除くものです。
 後半部分（<code class="highlighter-rouge">total_</code> が先頭につくもの）は同様ですが、ただしサブ cgroup を含むものです。</p>
 
-<p>メトリックスの中には「メーター」、つまり増減を繰り返す値表記になっているものがあります。
+<p>メトリックスの中には「メーター」つまり増減を繰り返す値表記になっているものがあります。
 たとえば <code class="highlighter-rouge">swap</code> は、cgroup のメンバーによって利用されるスワップ容量の合計です。
 この他に「カウンター」となっているもの、つまり数値がカウントアップされていくものがあります。
-これは特定のイベントがどれだけ発生したかを表わしています。
+これは特定のイベントがどれだけ発生したかを表わします。
 たとえば <code class="highlighter-rouge">pgfault</code> は cgroup の生成以降に、どれだけページフォールトが発生したかを表わします。</p>
 
 <style>table tr > td:first-child { white-space: nowrap;}</style>
@@ -281,15 +281,15 @@ total_unevictable 32768
   <tbody>
     <tr>
       <td><strong>cache</strong></td>
-      <td>このコントロールグループのプロセスが利用するメモリ使用量。ブロックデバイス上の各ブロックに細かく関連づけられるものです。ディスク上のファイルと読み書きを行うと、この値が増加します。ふだん利用する I/O（システムコールの <code class="highlighter-rouge">open</code>、<code class="highlighter-rouge">read</code>、<code class="highlighter-rouge">write</code>）利用時に発生し、（<code class="highlighter-rouge">mmap</code> を用いた）マップファイルの場合も同様です。<code class="highlighter-rouge">tmpfs</code> が利用するメモリをこれにより説明されますが、理由は明らかではありません。</td>
+      <td>このコントロールグループのプロセスによるメモリ使用量です。ブロックデバイス上の各ブロックに細かく関連づけられるものです。ディスク上のファイルと読み書きを行うと、この値が増加します。ふだん利用する I/O（システムコールの <code class="highlighter-rouge">open</code>、<code class="highlighter-rouge">read</code>、<code class="highlighter-rouge">write</code>）利用時に発生し、（<code class="highlighter-rouge">mmap</code> を用いた）マップファイルの場合も同様です。<code class="highlighter-rouge">tmpfs</code> によるメモリ使用もここに含まれますが、理由は明らかではありません。</td>
     </tr>
     <tr>
       <td><strong>rss</strong></td>
-      <td>ディスク上の操作に対応づかないメモリ使用量。たとえばスタック、ヒープ、匿名メモリマップなどです。</td>
+      <td>ディスク上の操作に対応づかないメモリ使用量です。たとえばスタック、ヒープ、匿名メモリマップなどです。</td>
     </tr>
     <tr>
       <td><strong>mapped_file</strong></td>
-      <td>このコントロールグループのプロセスによってマッピングされるメモリの使用量。メモリを <strong>どれだけ</strong> 利用しているかの情報は得られません。ここからわかるのは <strong>どのように</strong> 利用されているかです。</td>
+      <td>このコントロールグループのプロセスによって割り当てられるメモリの使用量です。メモリを <strong>どれだけ</strong> 利用しているかの情報は得られません。ここからわかるのは <strong>どのように</strong> 利用されているかです。</td>
     </tr>
     <tr>
       <td><strong>pgfault</strong>, <strong>pgmajfault</strong></td>
@@ -413,81 +413,64 @@ executing process code.</li>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-nxvL</span> OUTPUT
 </code></pre></div></div>
 
-<p>Technically, <code class="highlighter-rouge">-n</code> is not required, but it
-prevents iptables from doing DNS reverse lookups, which are probably
-useless in this scenario.</p>
+<p>技術的なことだけで言えば <code class="highlighter-rouge">-n</code> は必要ありません。
+DNS の逆引きを避けるためのものですが、ここでの作業ではおそらく不要です。</p>
 
-<p>Counters include packets and bytes. If you want to setup metrics for
-container traffic like this, you could execute a <code class="highlighter-rouge">for</code>
-loop to add two <code class="highlighter-rouge">iptables</code> rules per
-container IP address (one in each direction), in the <code class="highlighter-rouge">FORWARD</code>
-chain. This only meters traffic going through the NAT
-layer; you also need to add traffic going through the userland
-proxy.</p>
+<p>カウンターにはパケット数とバイト数があります。
+このトラフィックのようなメトリックスを設定したい場合は、<code class="highlighter-rouge">for</code> ループを実行して、コンテナー IP アドレスに対して 2 つの <code class="highlighter-rouge">iptables</code> ルールを <code class="highlighter-rouge">FORWARD</code> チェーンに追加します（1 方向に対して 1 つ）。
+これにより NAT 層を通過するトラフィックのみ計測されます。
+ユーザーランドプロキシーを通過するトラフィックを計測する場合も、ルールを追加する必要があります。</p>
 
-<p>Then, you need to check those counters on a regular basis. If you
-happen to use <code class="highlighter-rouge">collectd</code>, there is a <a href="https://collectd.org/wiki/index.php/Table_of_Plugins">nice plugin</a>
-to automate iptables counters collection.</p>
+<p>これを行ったら、カウンターを定期的に確認することになります。
+<code class="highlighter-rouge">collectd</code> を使ってみるのであれば、iptables のカウンター情報を自動的に収集してくれる <a href="https://collectd.org/wiki/index.php/Table_of_Plugins">便利なプラグイン</a> があります。</p>
 
-<h4 id="interface-level-counters">Interface-level counters</h4>
+<h4 id="interface-level-counters">インターフェースレベルのカウンター</h4>
 
-<p>Since each container has a virtual Ethernet interface, you might want to check
-directly the TX and RX counters of this interface. Each container is associated
-to a virtual Ethernet interface in your host, with a name like <code class="highlighter-rouge">vethKk8Zqi</code>.
-Figuring out which interface corresponds to which container is, unfortunately,
-difficult.</p>
+<p>各コンテナーには仮想イーサネットインターフェースがあるので、このインターフェースの TX および RX カウンターを直接確認したいかもしれません。
+各コンテナーは、ホスト上の仮想イーサネットインターフェースに関連づけられていて、その名称は <code class="highlighter-rouge">vethKk8Zqi</code> などとなっています。
+もっともどのコンテナーに対して、どのインターフェースが対応しているかを判別するのは、残念ながら困難です。</p>
 
-<p>But for now, the best way is to check the metrics <em>from within the
-containers</em>. To accomplish this, you can run an executable from the host
-environment within the network namespace of a container using <strong>ip-netns
-magic</strong>.</p>
+<p>今のところ、メトリックスを確認する一番の方法は、<strong>そのコンテナーの内部から</strong> 確認することです。
+これを実現する方法は、<strong>ip netns を巧みに</strong> 利用します。
+これを使えば、コンテナーのネットワーク名前空間内に、ホスト環境上のモジュールを実行させることができます。</p>
 
-<p>The <code class="highlighter-rouge">ip-netns exec</code> command allows you to execute any
-program (present in the host system) within any network namespace
-visible to the current process. This means that your host can
- enter the network namespace of your containers, but your containers
-can’t access the host or other peer containers.
-Containers can interact with their sub-containers, though.</p>
+<p><code class="highlighter-rouge">ip-netns exec</code> コマンドは、どのようなネットワーク名前空間内に対しても、現在のプロセスから状況を確認できる形で（ホスト内に存在する）プログラムを何でも実行することができます。
+つまりコンテナーのネットワーク名前空間内に、ホストから入ることができるということです。
+ただしコンテナーからは、ホストや別のコンテナーにはアクセスできません。
+サブコンテナーであれば、互いに通信することができます。</p>
 
-<p>The exact format of the command is:</p>
+<p>このコマンドの正確な書式は以下のとおりです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ip netns <span class="nb">exec</span> &lt;nsname&gt; &lt;command...&gt;
 </code></pre></div></div>
 
-<p>For example:</p>
+<p>たとえば以下のように実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ip netns <span class="nb">exec </span>mycontainer netstat <span class="nt">-i</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ip netns</code> finds the “mycontainer” container by
-using namespaces pseudo-files. Each process belongs to one network
-namespace, one PID namespace, one <code class="highlighter-rouge">mnt</code> namespace,
-etc., and those namespaces are materialized under
-<code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/</code>. For example, the network
-namespace of PID 42 is materialized by the pseudo-file
-<code class="highlighter-rouge">/proc/42/ns/net</code>.</p>
+<p><code class="highlighter-rouge">ip netns</code> コマンドは、名前空間の擬似ファイルからコンテナー “mycontainer” を探します。
+各プロセスは 1 つのネットワーク名前空間、1 つの PID 名前空間、1 つの <code class="highlighter-rouge">mnt</code> 名前空間、といったものに属します。
+これらの名前空間は <code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/</code> の下に実現されます。
+たとえば PID が 42 であるネットワーク名前空間は、擬似ファイル <code class="highlighter-rouge">/proc/42/ns/net</code> として実現されます。</p>
 
-<p>When you run <code class="highlighter-rouge">ip netns exec mycontainer ...</code>, it
-expects <code class="highlighter-rouge">/var/run/netns/mycontainer</code> to be one of
-those pseudo-files. (Symlinks are accepted.)</p>
+<p><code class="highlighter-rouge">ip netns exec mycontainer ...</code> が実行されるとき、<code class="highlighter-rouge">/var/run/netns/mycontainer</code> が擬似ファイルの 1 つであるとみなされます。
+（シンボリックリンクが張られています。）</p>
 
-<p>In other words, to execute a command within the network namespace of a
-container, we need to:</p>
+<p>別の点から表現すると、コンテナーのネットワーク名前空間内にてコマンドを実行するためには、以下のことが必要になるということです。</p>
 
 <ul>
-  <li>Find out the PID of any process within the container that we want to investigate;</li>
-  <li>Create a symlink from <code class="highlighter-rouge">/var/run/netns/&lt;somename&gt;</code> to <code class="highlighter-rouge">/proc/&lt;thepid&gt;/ns/net</code></li>
-  <li>Execute <code class="highlighter-rouge">ip netns exec &lt;somename&gt; ....</code></li>
+  <li>調査したいコンテナー内部で動作させるプロセスの PID を調べます。</li>
+  <li><code class="highlighter-rouge">/var/run/netns/&lt;somename&gt;</code> から <code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/net</code> へのシンボリックリンクを生成します。</li>
+  <li><code class="highlighter-rouge">ip netns exec &lt;somename&gt; ....</code> を実行します。</li>
 </ul>
 
-<p>Review <a href="#enumerate-cgroups">Enumerate Cgroups</a> for how to find
-the cgroup of an in-container process whose network usage you want to measure.
-From there, you can examine the pseudo-file named
-<code class="highlighter-rouge">tasks</code>, which contains all the PIDs in the
-cgroup (and thus, in the container). Pick any one of the PIDs.</p>
+<p>ネットワーク使用量の計測を行おうとしているコンテナー内部のプロセスに対し、その cgroup がどれであるかを探し出すには <a href="#enumerate-cgroups">cgroups の確認</a> を参照してください。
+その方法に従って、<code class="highlighter-rouge">tasks</code> という名前の擬似ファイルを調べます。
+その擬似ファイル内には cgroup 内の（つまりコンテナー内の） PID がすべて示されています。
+そのうちの 1 つを取り出して扱います。</p>
 
-<p>Putting everything together, if the “short ID” of a container is held in
-the environment variable <code class="highlighter-rouge">$CID</code>, then you can do this:</p>
+<p>環境変数 <code class="highlighter-rouge">$CID</code> にコンテナーの「短めの ID」が設定されているとし、これまで説明してきたことをすべてまとめて、以下のコマンドとして実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ TASKS</span><span class="o">=</span>/sys/fs/cgroup/devices/docker/<span class="nv">$CID</span><span class="k">*</span>/tasks
 <span class="nv">$ PID</span><span class="o">=</span><span class="k">$(</span>head <span class="nt">-n</span> 1 <span class="nv">$TASKS</span><span class="k">)</span>
@@ -496,64 +479,54 @@ the environment variable <code class="highlighter-rouge">$CID</code>, then you c
 <span class="nv">$ </span>ip netns <span class="nb">exec</span> <span class="nv">$CID</span> netstat <span class="nt">-i</span>
 </code></pre></div></div>
 
-<h2 id="tips-for-high-performance-metric-collection">Tips for high-performance metric collection</h2>
+<h2 id="tips-for-high-performance-metric-collection">詳細なメトリックスを収集するためのヒント</h2>
 
-<p>Running a new process each time you want to update metrics is
-(relatively) expensive. If you want to collect metrics at high
-resolutions, and/or over a large number of containers (think 1000
-containers on a single host), you do not want to fork a new process each
-time.</p>
+<p>新しいプロセスを起動するたびに、メトリックスを最新のものにすることは（比較的）面倒なことです。
+詳細なメトリックスが必要な場合、しかもそれが非常に多くのコンテナー（1 ホスト上に 1000 個くらいのコンテナー）を扱わなければならないとしたら、毎回の新規プロセス起動は行う気になれません。</p>
 
-<p>Here is how to collect metrics from a single process. You need to
-write your metric collector in C (or any language that lets you do
-low-level system calls). You need to use a special system call,
-<code class="highlighter-rouge">setns()</code>, which lets the current process enter any
-arbitrary namespace. It requires, however, an open file descriptor to
-the namespace pseudo-file (remember: that’s the pseudo-file in
-<code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/net</code>).</p>
+<p>1 つのプロセスを作り出してメトリックスを収集する方法をここに示します。
+メトリックスを収集するプログラムを C 言語（あるいは低レベルシステムコールを実行できる言語）で記述する必要があります。
+利用するのは特別なシステムコール <code class="highlighter-rouge">setns()</code> です。
+これはその時点でのプロセスを、任意の名前空間に参加させることができます。
+そこでは、その名前空間に応じた擬似ファイルへのファイルディスクリプターをオープンしておくことが必要とされます。
+（擬似ファイルは <code class="highlighter-rouge">/proc/&lt;pid&gt;/ns/net</code> にあることを思い出してください。）</p>
 
-<p>However, there is a catch: you must not keep this file descriptor open.
-If you do, when the last process of the control group exits, the
-namespace is not destroyed, and its network resources (like the
-virtual interface of the container) stays around forever (or until
-you close that file descriptor).</p>
+<p>ただしこれは本当のことではありません。
+実はファイルディスクリプターをオープンにしておく必要はないのです。
+オープンにしたままであると、コントロールグループの最後の 1 つとなるプロセスがある場合に、名前空間は削除されず、そのネットワークリソース（コンテナーの仮想インターフェースなど）がずっと残り続けてしまいます。
+（あるいはそれは、ファイルディスクリプターを閉じるまで続きます。）</p>
 
-<p>The right approach would be to keep track of the first PID of each
-container, and re-open the namespace pseudo-file each time.</p>
+<p>適切なやり方は、各コンテナーの初めの PID を追跡し、ことあるごとに名前空間の擬似ファイルを、その都度開いて確認していくしかありません。</p>
 
-<h2 id="collect-metrics-when-a-container-exits">Collect metrics when a container exits</h2>
+<h2 id="collect-metrics-when-a-container-exits">コンテナー起動時のメトリックス収集</h2>
 
-<p>Sometimes, you do not care about real time metric collection, but when a
-container exits, you want to know how much CPU, memory, etc. it has
-used.</p>
+<p>リアルタイムにメトリックスを収集する、ということに気づかない方もいます。
+しかしコンテナーがそこにあれば、CPU、メモリなどをどれだけ利用しているかを知りたくなります。</p>
 
-<p>Docker makes this difficult because it relies on <code class="highlighter-rouge">lxc-start</code>, which carefully
-cleans up after itself. It is usually easier to collect metrics at regular
-intervals, and this is the way the <code class="highlighter-rouge">collectd</code> LXC plugin works.</p>
+<p>Docker は <code class="highlighter-rouge">lxc-start</code> によって処理を行うため、リアルタイムなメトリックス収集は困難です。
+<code class="highlighter-rouge">lxc-start</code> が自身の処理の後に、まわりをきれいにしてしまうためです。
+メトリックスの収集は、一定間隔をおいて取得するのが、より簡単な方法と言えます。
+<code class="highlighter-rouge">collectd</code> にある LXC プラグインは、この方法により動作しています。</p>
 
-<p>But, if you’d still like to gather the stats when a container stops,
-here is how:</p>
+<p>コンテナーを停止してから情報収集する方がよいのであれば、以下の方法をとります。</p>
 
-<p>For each container, start a collection process, and move it to the
-control groups that you want to monitor by writing its PID to the tasks
-file of the cgroup. The collection process should periodically re-read
-the tasks file to check if it’s the last process of the control group.
-(If you also want to collect network statistics as explained in the
-previous section, you should also move the process to the appropriate
-network namespace.)</p>
+<p>各コンテナーにおいて、情報収集用のプロセスを実行し、コントロールグループに移動させます。
+そのコントロールグループとは監視対象としたいもので、cgroup のタスクファイル内に PID を記述しておきます。
+情報収集のプロセスは、定期的にそのタスクファイルを読み込み、そのプロセス自体が、コントロールグループ内で残っている最後のプロセスであるかどうかを確認します。
+（前節に示したように、ネットワーク統計情報も収集したい場合は、そのプロセスを適切なネットワーク名前空間において実行することも必要になります。）</p>
 
-<p>When the container exits, <code class="highlighter-rouge">lxc-start</code> attempts to
-delete the control groups. It fails, since the control group is
-still in use; but that’s fine. Your process should now detect that it is
-the only one remaining in the group. Now is the right time to collect
-all the metrics you need!</p>
+<p>コンテナーが終了するときに、<code class="highlighter-rouge">lxc-start</code> はコントロールグループを削除しようとします。
+削除に失敗するのは、コントロールグループがまだ利用されているということです。
+でも問題ありません。
+情報収集用のプロセスはこのとき、コントロールグループ内にはただ 1 つのプロセスしか残っていないことが検出できるはずです。
+このときこそ、メトリックスをすべて収集するタイミングとなります。</p>
 
-<p>Finally, your process should move itself back to the root control group,
-and remove the container control group. To remove a control group, just
-<code class="highlighter-rouge">rmdir</code> its directory. It’s counter-intuitive to
-<code class="highlighter-rouge">rmdir</code> a directory as it still contains files; but
-remember that this is a pseudo-filesystem, so usual rules don’t apply.
-After the cleanup is done, the collection process can exit safely.</p>
+<p>最後にそのプロセスを root コントロールグループに戻して、コンテナーのコントロールグループを削除します。
+コントロールグループの削除は、単にそのディレクトリを <code class="highlighter-rouge">rmdir</code> で削除するだけです。
+ディレクトリ内にファイルが残っているのに、ディレクトリを削除するというのは、やってはいけないことのように思えます。
+しかしこれは擬似ファイルシステムです。
+普通の取り扱いをする必要のないものです。
+すべてをきれいにした後であれば、情報収集用のプロセスを安全に終了させることができます。</p>
 
                             <!-- tags -->
                             
@@ -653,8 +626,8 @@ After the cleanup is done, the collection process can exit safely.</p>
       <li><a href="#network-metrics" class="nomunge">ネットワークメトリックス</a></li>
     </ul>
   </li>
-  <li><a href="#tips-for-high-performance-metric-collection" class="nomunge">Tips for high-performance metric collection</a></li>
-  <li><a href="#collect-metrics-when-a-container-exits" class="nomunge">Collect metrics when a container exits</a></li>
+  <li><a href="#tips-for-high-performance-metric-collection" class="nomunge">詳細なメトリックスを収集するためのヒント</a></li>
+  <li><a href="#collect-metrics-when-a-container-exits" class="nomunge">コンテナー起動時のメトリックス収集</a></li>
 </ul>
 
 
