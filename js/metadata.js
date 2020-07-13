@@ -3320,8 +3320,8 @@ var pages = [
 ,
 {
 "url":"/config/containers/resource_constraints/",
-"title":"Runtime options with Memory, CPUs, and GPUs",
-"description":"Specify the runtime options for a container",
+"title":"メモリ、CPU、GPU に対する実行時オプション",
+"description":"コンテナーに対して実行時オプションを指定します。",
 "keywords":"docker, daemon, configuration, runtime"
 }
 ,
@@ -3992,7 +3992,7 @@ var pages = [
 ,
 {
 "url":"/storage/troubleshooting_volume_errors/",
-"title":"Troubleshoot volume errors",
+"title":"ボリュームエラーに関するトラブルシューティング",
 "description":"Troubleshooting volume errors",
 "keywords":"cadvisor, troubleshooting, volumes, bind-mounts"
 }
@@ -4153,7 +4153,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/userns-remap/",
-"title":"Isolate containers with a user namespace",
+"title":"ユーザー名前空間を使ったコンテナーの分離",
 "description":"Isolate containers within a user namespace",
 "keywords":"security, namespaces"
 }
