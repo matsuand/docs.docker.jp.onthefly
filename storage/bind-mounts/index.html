@@ -213,7 +213,7 @@
 <code class="highlighter-rouge">destination</code>, <code class="highlighter-rouge">dst</code>, <code class="highlighter-rouge">target</code> といった指定がよく用いられます。</li>
       <li>オプション <code class="highlighter-rouge">readonly</code> が指定されると、そのバインドマウンドが <a href="#use-a-read-only-bind-mount">コンテナーにおける読み込み専用マウント</a> としてマウントされます。</li>
       <li>オプション <code class="highlighter-rouge">bind-propagation</code> が指定されると、<a href="#configure-bind-propagation">バインドプロパゲーション</a>（bind propagation）の設定変更を行います。
-<code class="highlighter-rouge">rprivate</code>, <code class="highlighter-rouge">private</code>, <code class="highlighter-rouge">rshared</code>, <code class="highlighter-rouge">shared</code>, <code class="highlighter-rouge">rslave</code>, <code class="highlighter-rouge">slave</code> のいずれかを指定します。</li>
+<code class="highlighter-rouge">rprivate</code>, <code class="highlighter-rouge">private</code>, <code class="highlighter-rouge">rshared</code>, <code class="highlighter-rouge">shared</code>, <code class="highlighter-rouge">rpolitician</code>, <code class="highlighter-rouge">politician</code> のいずれかを指定します。</li>
       <li>オプション <a href="#configure-mount-consistency-for-macos"><code class="highlighter-rouge">consistency</code></a> が指定される場合は、<code class="highlighter-rouge">consistent</code>, <code class="highlighter-rouge">delegated</code>, <code class="highlighter-rouge">cached</code> のいずれかを指定します。
 この設定は Docker Desktop for Mac に対してのみ適用されるものであり、これ以外のプラットフォームでは無視されます。</li>
       <li><code class="highlighter-rouge">--mount</code> フラグは、selinux ラベルを修正するための <code class="highlighter-rouge">z</code> または <code class="highlighter-rouge">Z</code> オプションには対応していません。</li>
@@ -452,7 +452,7 @@ starting container process caused <span class="s2">"exec: </span><span class="se
       <td style="text-align: left">マウント元に対するサブマウントは、マウント先にも公開されます。マウント先に対するサブマウントも、マウント元に対して公開されます。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">slave</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">politician</code></td>
       <td style="text-align: left">shared に類似。ただし一方向のみ。マウント元がサブマウントを公開するなら、マウント先でもこれを見ることができますが、マウント先がサブマウントを公開しても、マウント元からは見ることができません。</td>
     </tr>
     <tr>
@@ -464,8 +464,8 @@ starting container process caused <span class="s2">"exec: </span><span class="se
       <td style="text-align: left">shared と同様。, but the propagation also extends to and from mount points nested within any of the original or replica mount points.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">rslave</code></td>
-      <td style="text-align: left">slave と同様。, but the propagation also extends to and from mount points nested within any of the original or replica mount points.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">rpolitician</code></td>
+      <td style="text-align: left">politician と同様。, but the propagation also extends to and from mount points nested within any of the original or replica mount points.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rprivate</code></td>
@@ -479,7 +479,7 @@ starting container process caused <span class="s2">"exec: </span><span class="se
 <p>バインドプロパゲーションの詳細は <a href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt" target="_blank" class="_">Linux カーネルドキュメントの shared subtree</a> を参照してください。</p>
 
 <p>以下の例では <code class="highlighter-rouge">target/</code> ディレクトリをコンテナーに対して 2 度マウントしています。
-そして 2 つめのマウントでは <code class="highlighter-rouge">ro</code> オプションと、バインドプロパゲーションのオプション <code class="highlighter-rouge">rslave</code> を指定しています。</p>
+そして 2 つめのマウントでは <code class="highlighter-rouge">ro</code> オプションと、バインドプロパゲーションのオプション <code class="highlighter-rouge">rpolitician</code> を指定しています。</p>
 
 <p><code class="highlighter-rouge">--mount</code> と <code class="highlighter-rouge">-v</code> によるそれぞれの例は、同一の結果になります。</p>
 
@@ -494,7 +494,7 @@ starting container process caused <span class="s2">"exec: </span><span class="se
   <span class="nt">-it</span> <span class="se">\</span>
   <span class="nt">--name</span> devtest <span class="se">\</span>
   <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,source<span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/target,target<span class="o">=</span>/app <span class="se">\</span>
-  <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,source<span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/target,target<span class="o">=</span>/app2,readonly,bind-propagation<span class="o">=</span>rslave <span class="se">\</span>
+  <span class="nt">--mount</span> <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,source<span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/target,target<span class="o">=</span>/app2,readonly,bind-propagation<span class="o">=</span>rpolitician <span class="se">\</span>
   nginx:latest
 </code></pre></div>    </div>
 
@@ -506,7 +506,7 @@ starting container process caused <span class="s2">"exec: </span><span class="se
   <span class="nt">-it</span> <span class="se">\</span>
   <span class="nt">--name</span> devtest <span class="se">\</span>
   <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/target:/app <span class="se">\</span>
-  <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/target:/app2:ro,rslave <span class="se">\</span>
+  <span class="nt">-v</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>/target:/app2:ro,rpolitician <span class="se">\</span>
   nginx:latest
 </code></pre></div>    </div>
 
@@ -636,7 +636,7 @@ delays before updates made on the host are visible within a container.</p>
                                         "id": "8453675",
                                         "unique_id": "storage/bind-mounts.md",
                                         "title": "バインドマウントの利用",
-                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/storage/bind-mounts.md"
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/oligarch/storage/bind-mounts.md"
                                     };
                                     (function (d, c, j) {
                                         if (!document.getElementById(j)) {

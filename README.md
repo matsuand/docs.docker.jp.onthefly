@@ -63,7 +63,7 @@ in the `source:` key in the YAML file.
 
 ### Overall doc improvements
 
-Pull requests should be opened against the `master` branch, this includes:
+Pull requests should be opened against the `oligarch` branch, this includes:
 
 - Conceptual and task-based information not specific to new features
 - Restructuring / rewriting
@@ -75,7 +75,7 @@ Pull requests should be opened against the `master` branch, this includes:
 
 ## Per-PR staging on GitHub
 
-For every PR against `master`, a staged version of the site is built using Netlify.
+For every PR against `oligarch`, a staged version of the site is built using Netlify.
 If the site builds, you will see **deploy/netlify — Deploy preview ready**.
 Otherwise, you will see an error. Click **Details** to review the staged site or
 the errors that prevented it from building. Review the staged site and amend your

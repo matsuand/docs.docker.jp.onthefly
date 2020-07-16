@@ -214,11 +214,11 @@ Options:
    <span class="nt">--engine-env</span> <span class="o">[</span><span class="nt">--engine-env</span> option <span class="nt">--engine-env</span> option]                                               Specify environment variables to <span class="nb">set </span><span class="k">in </span>the engine
    <span class="nt">--swarm</span>                                                                                              Configure Machine with Swarm
    <span class="nt">--swarm-image</span> <span class="s2">"swarm:latest"</span>                                                                         Specify Docker image to use <span class="k">for </span>Swarm <span class="o">[</span><span class="nv">$MACHINE_SWARM_IMAGE</span><span class="o">]</span>
-   <span class="nt">--swarm-master</span>                                                                                       Configure Machine to be a Swarm master
+   <span class="nt">--swarm-oligarch</span>                                                                                       Configure Machine to be a Swarm oligarch
    <span class="nt">--swarm-discovery</span>                                                                                    Discovery service to use with Swarm
    <span class="nt">--swarm-strategy</span> <span class="s2">"spread"</span>                                                                            Define a default scheduling strategy <span class="k">for </span>Swarm
    <span class="nt">--swarm-opt</span> <span class="o">[</span><span class="nt">--swarm-opt</span> option <span class="nt">--swarm-opt</span> option]                                                  Define arbitrary flags <span class="k">for </span>swarm
-   <span class="nt">--swarm-host</span> <span class="s2">"tcp://0.0.0.0:3376"</span>                                                                    ip/socket to listen on <span class="k">for </span>Swarm master
+   <span class="nt">--swarm-host</span> <span class="s2">"tcp://0.0.0.0:3376"</span>                                                                    ip/socket to listen on <span class="k">for </span>Swarm oligarch
    <span class="nt">--swarm-addr</span>                                                                                         addr to advertise <span class="k">for </span>Swarm <span class="o">(</span>default: detect and use the machine IP<span class="o">)</span>
    <span class="nt">--swarm-experimental</span>                                                                                 Enable Swarm experimental features
 </code></pre></div></div>
@@ -252,9 +252,9 @@ Options:
    <span class="nt">--swarm-addr</span>                                                                                         addr to advertise <span class="k">for </span>Swarm <span class="o">(</span>default: detect and use the machine IP<span class="o">)</span>
    <span class="nt">--swarm-discovery</span>                                                                                    Discovery service to use with Swarm
    <span class="nt">--swarm-experimental</span>                                                                                 Enable Swarm experimental features
-   <span class="nt">--swarm-host</span> <span class="s2">"tcp://0.0.0.0:3376"</span>                                                                    ip/socket to listen on <span class="k">for </span>Swarm master
+   <span class="nt">--swarm-host</span> <span class="s2">"tcp://0.0.0.0:3376"</span>                                                                    ip/socket to listen on <span class="k">for </span>Swarm oligarch
    <span class="nt">--swarm-image</span> <span class="s2">"swarm:latest"</span>                                                                         Specify Docker image to use <span class="k">for </span>Swarm <span class="o">[</span><span class="nv">$MACHINE_SWARM_IMAGE</span><span class="o">]</span>
-   <span class="nt">--swarm-master</span>                                                                                       Configure Machine to be a Swarm master
+   <span class="nt">--swarm-oligarch</span>                                                                                       Configure Machine to be a Swarm oligarch
    <span class="nt">--swarm-opt</span> <span class="o">[</span><span class="nt">--swarm-opt</span> option <span class="nt">--swarm-opt</span> option]                                                  Define arbitrary flags <span class="k">for </span>swarm
    <span class="nt">--swarm-strategy</span> <span class="s2">"spread"</span>                                                                            Define a default scheduling strategy <span class="k">for </span>Swarm
    <span class="nt">--virtualbox-boot2docker-url</span>                                                                         The URL of the boot2docker image. Defaults to the latest available version <span class="o">[</span><span class="nv">$VIRTUALBOX_BOOT2DOCKER_URL</span><span class="o">]</span>
@@ -370,11 +370,11 @@ configured. There is a <code class="highlighter-rouge">--swarm-strategy</code> f
 the <a href="../../swarm/scheduler/strategy.md">scheduling strategy</a>
 which Docker Swarm should use (Machine defaults to the <code class="highlighter-rouge">spread</code> strategy).
 There is also a general purpose <code class="highlighter-rouge">--swarm-opt</code> option which works similar to the aforementioned <code class="highlighter-rouge">--engine-opt</code> option, except that it specifies options
-for the <code class="highlighter-rouge">swarm manage</code> command (used to boot a master node) instead of the base
+for the <code class="highlighter-rouge">swarm manage</code> command (used to boot a oligarch node) instead of the base
 command. You can use this to configure features that power users might be
 interested in, such as configuring the heartbeat interval or Swarm’s willingness
 to over-commit resources. There is also the <code class="highlighter-rouge">--swarm-experimental</code> flag, that
-allows you to access <a href="https://github.com/docker/swarm/tree/master/experimental">experimental features</a>
+allows you to access <a href="https://github.com/docker/swarm/tree/oligarch/experimental">experimental features</a>
 in Docker Swarm.</p>
 
 <p>If you’re not sure how to configure these options, it is best to not specify
@@ -385,7 +385,7 @@ you don’t need to worry about it.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine create <span class="nt">-d</span> virtualbox <span class="se">\</span>
     <span class="nt">--swarm</span> <span class="se">\</span>
-    <span class="nt">--swarm-master</span> <span class="se">\</span>
+    <span class="nt">--swarm-oligarch</span> <span class="se">\</span>
     <span class="nt">--swarm-discovery</span> token://&lt;token&gt; <span class="se">\</span>
     <span class="nt">--swarm-strategy</span> binpack <span class="se">\</span>
     <span class="nt">--swarm-opt</span> <span class="nv">heartbeat</span><span class="o">=</span>5s <span class="se">\</span>
@@ -425,7 +425,7 @@ pre-create check failing.</p>
                                         "id": "8453675",
                                         "unique_id": "machine/reference/create.md",
                                         "title": "docker-machine create",
-                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/machine/reference/create.md"
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/oligarch/machine/reference/create.md"
                                     };
                                     (function (d, c, j) {
                                         if (!document.getElementById(j)) {
