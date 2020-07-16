@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-09 22:04:21 +0900 -->
+<!-- Page generated 2020-07-16 21:49:37 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-16T21:49:37+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="説明 新たなコンテナー内でのコマンド実行 利用方法 docker run [OPTIONS] IMAGE [COMMAND] [ARG...] 追加説明 docker run コマンドは、指定されたイメージの上に書き込み可能コンテナーレイヤーを create（生成）します。 そして指定されたコマンドを使ってコンテナーを start（起動）します。 docker run は API で言うと、/containers/create の実行後に /containers/(id)/start を起動することと同じです。 停止しているコンテナーの場合は、以前からの変更をすべて考慮して docker start によって起動されます。 コンテナーの全一覧は docker..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-16T21:49:37+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -2140,29 +2140,30 @@ for the bridge device).</p>
 
 <h3 id="set-ulimits-in-container---ulimit">Set ulimits in container (--ulimit)</h3>
 
-<p>Since setting <code class="highlighter-rouge">ulimit</code> settings in a container requires extra privileges not
-available in the default container, you can set these using the <code class="highlighter-rouge">--ulimit</code> flag.
-<code class="highlighter-rouge">--ulimit</code> is specified with a soft and hard limit as such:
-<code class="highlighter-rouge">&lt;type&gt;=&lt;soft limit&gt;[:&lt;hard limit&gt;]</code>, for example:</p>
+<p>コンテナーにおいて <code class="highlighter-rouge">ulimit</code> 設定を行うには、デフォルトコンテナーでは利用できない追加の権限が必要となります。
+そこでこれを行うために <code class="highlighter-rouge">--ulimit</code> フラグを利用します。
+<code class="highlighter-rouge">--ulimit</code> では以下のように、ソフトリミット（soft limit）とハードリミット（hard limit）を <code class="highlighter-rouge">&lt;type&gt;=&lt;soft limit&gt;[:&lt;hard limit&gt;]</code> のようにして指定します。
+たとえば以下のとおりです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--ulimit</span> <span class="nv">nofile</span><span class="o">=</span>1024:1024 <span class="nt">--rm</span> debian sh <span class="nt">-c</span> <span class="s2">"ulimit -n"</span>
 1024
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>If you do not provide a <code class="highlighter-rouge">hard limit</code>, the <code class="highlighter-rouge">soft limit</code> is used
-for both values. If no <code class="highlighter-rouge">ulimits</code> are set, they are inherited from
-the default <code class="highlighter-rouge">ulimits</code> set on the daemon. The <code class="highlighter-rouge">as</code> option is disabled now.
-In other words, the following script is not supported:</p>
+  <p><code class="highlighter-rouge">hard limit</code> を指定しなかった場合、<code class="highlighter-rouge">soft limit</code> が両方の値として採用されます。
+<code class="highlighter-rouge">ulimits</code> の指定がなければ、デーモンにおいて設定されているデフォルトの <code class="highlighter-rouge">ulimits</code> が継承されます。
+<code class="highlighter-rouge">as</code> オプションは利用できなくなっています。
+つまり以下のようなスクリプトはサポートされません。</p>
 
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--ulimit</span> <span class="nv">as</span><span class="o">=</span>1024 fedora /bin/bash<span class="sb">`</span>
 </code></pre></div>  </div>
 </blockquote>
 
-<p>The values are sent to the appropriate <code class="highlighter-rouge">syscall</code> as they are set.
-Docker doesn’t perform any byte conversion. Take this into account when setting the values.</p>
+<p>値を設定すると、その値が適切な <code class="highlighter-rouge">syscall</code> に送信されます。
+Docker はバイト列に関して何か変換を行うようなことはしません。
+このことを考慮して値を設定してください。</p>
 
 <h4 id="for-nproc-usage">For <code class="highlighter-rouge">nproc</code> usage</h4>
 
