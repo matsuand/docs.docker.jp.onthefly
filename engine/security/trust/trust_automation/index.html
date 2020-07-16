@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-09 22:04:21 +0900 -->
+<!-- Page generated 2020-07-16 21:49:37 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-16T21:49:37+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Automation with content trust"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="It is very common for Docker Content Trust to be built into existing automation systems. To allow tools to wrap Docker and push trusted content, there are environment variables that..." />
+  <meta name="twitter:title" itemprop="title name" content="コンテントトラストの自動化"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="既存の自動化システムに Docker コンテントトラストを組み入れて構築することは、ごく普通に行われています。 そのシステムから Docker を通じ、信頼できるコンテントをプッシュできるようにするために、環境変数が用意されています。 これがクライアントに受け渡されます。 本節では DCT によるイメージへのサイン に示した手順を行っているものとします。 したがってその内容はよく読んで、前提条件を理解しておいてください。 Notary クライアントを直接操作する場合は、独自の環境変数のセット を利用します。 委任鍵ペアの秘密鍵の追加 ローカルの Docker トラストの保存場所に向けて、委任鍵ペアの秘密鍵のインポートを自動化するには、新たな鍵に対するパスフレーズを与える必要があります。 このパスフレーズは、委任鍵ペアによってタグにサインを行う際に、毎回必要となるものです。 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123" $ docker trust key load delegation.key --name..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-16T21:49:37+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="trust, security, docker, documentation, automation">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Automation with content trust | Docker ドキュメント</title>
-  <meta property="og:title" content="Automation with content trust" />
+  <title>コンテントトラストの自動化 | Docker ドキュメント</title>
+  <meta property="og:title" content="コンテントトラストの自動化" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="Automating content push pulls with trust" />
-  <meta property="og:description" content="Automating content push pulls with trust" />
+  <meta name="description" content="コンテントトラストにおいてプッシュやプルを自動化します。" />
+  <meta property="og:description" content="コンテントトラストにおいてプッシュやプルを自動化します。" />
   <link rel="canonical" href="/engine/security/trust/trust_automation/" />
   <meta property="og:url" content="https://docs.docker.com/engine/security/trust/trust_automation/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Automation with content trust","description":"Automating content push pulls with trust","url":"https://docs.docker.com/engine/security/trust/trust_automation/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテントトラストの自動化","description":"コンテントトラストにおいてプッシュやプルを自動化します。","url":"https://docs.docker.com/engine/security/trust/trust_automation/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,31 +147,30 @@
                         <section class="section">
                             
                             
-                            <h1>Automation with content trust</h1> 
+                            <h1>コンテントトラストの自動化</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    1 分
   
 </span>
 
                             
-                            <p>It is very common for Docker Content Trust to be built into existing automation
-systems. To allow tools to wrap Docker and push trusted content, there are
-environment variables that can be passed through to the client.</p>
+                            
+<p>既存の自動化システムに Docker コンテントトラストを組み入れて構築することは、ごく普通に行われています。
+そのシステムから Docker を通じ、信頼できるコンテントをプッシュできるようにするために、環境変数が用意されています。
+これがクライアントに受け渡されます。</p>
 
-<p>This guide follows the steps as described
-<a href="content_trust/#signing-images-with-docker-content-trust">here</a> so please read
-that and understand its prerequisites.</p>
+<p>本節では <a href="content_trust/#signing-images-with-docker-content-trust">DCT によるイメージへのサイン</a> に示した手順を行っているものとします。
+したがってその内容はよく読んで、前提条件を理解しておいてください。</p>
 
-<p>When working directly with the Notary client, it uses its <a href="/docs.docker.jp.onthefly/notary/reference/client-config/#environment-variables-optional">own set of environment variables</a>.</p>
+<p>Notary クライアントを直接操作する場合は、<a href="/docs.docker.jp.onthefly/notary/reference/client-config/#environment-variables-optional">独自の環境変数のセット</a> を利用します。</p>
 
-<h2 id="add-a-delegation-private-key">Add a delegation private key</h2>
+<h2 id="add-a-delegation-private-key">委任鍵ペアの秘密鍵の追加</h2>
 
-<p>To automate importing a delegation private key to the local Docker trust store, we
-need to pass a passphrase for the new key. This passphrase will be required
-everytime that delegation signs a tag.</p>
+<p>ローカルの Docker トラストの保存場所に向けて、委任鍵ペアの秘密鍵のインポートを自動化するには、新たな鍵に対するパスフレーズを与える必要があります。
+このパスフレーズは、委任鍵ペアによってタグにサインを行う際に、毎回必要となるものです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
@@ -180,12 +179,11 @@ Loading key from "delegation.key"...
 Successfully imported key from delegation.key
 </code></pre></div></div>
 
-<h2 id="add-a-delegation-public-key">Add a delegation public key</h2>
+<h2 id="add-a-delegation-public-key">委任鍵ペアの公開鍵の追加</h2>
 
-<p>If you initialising a repository at the same time as adding a Delegation
-public key, then you will need to use the local Notary Canonical Root Key’s
-passphrase to create the repositories trust data. If the repository has already
-been initiated then you only need the repositories passphrase.</p>
+<p>リポジトリを初期化する際には、同時に委任鍵ペアの公開鍵の登録を行います。
+その後にリポジトリ内にトラストデータを生成するわけですが、その際にはローカルの Notary 標準ルート鍵のパスフレーズが必要になります。
+リポジトリをすでに初期化済みであれば、リポジトリのパスフレーズだけが必要になります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Export the Local Root Key Passphrase if required.
 $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
@@ -201,11 +199,10 @@ Successfully initialized "registry.example.com/admin/demo"
 Successfully added signer: registry.example.com/admin/demo
 </code></pre></div></div>
 
-<h2 id="sign-an-image">Sign an image</h2>
+<h2 id="sign-an-image">イメージへのサイン</h2>
 
-<p>Finally when signing an image, we will need to export the passphrase of the
-signing key. This was created when the key was loaded into the local Docker
-trust store with <code class="highlighter-rouge">$ docker trust key load</code>.</p>
+<p>最後に、イメージへのサインを行うには、サインする鍵のパスフレーズを環境変数に設定することが必要です。
+<code class="highlighter-rouge">docker trust key load</code> を実行していますから、ローカルの Docker トラストの保存場所に、すでに鍵はロードされ生成されています。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
@@ -218,19 +215,19 @@ Signing and pushing trust metadata
 Successfully signed registry.example.com/admin/demo:1
 </code></pre></div></div>
 
-<h2 id="build-with-content-trust">Build with content trust</h2>
+<h2 id="build-with-content-trust">コンテントトラストを使ったイメージビルド</h2>
 
-<p>You can also build with content trust. Before running the <code class="highlighter-rouge">docker build</code> command,
-you should set the environment variable <code class="highlighter-rouge">DOCKER_CONTENT_TRUST</code> either manually or
-in a scripted fashion. Consider the simple Dockerfile below.</p>
+<p>イメージをビルドする際に、コンテントトラストを利用することもできます。
+<code class="highlighter-rouge">docker build</code> コマンドを実行する前に、環境変数 <code class="highlighter-rouge">DOCKER_CONTENT_TRUST</code> を手動で設定しておくか、あるいはスクリプトを用意して設定します。
+以下のような単純な Dockerfile を例にして説明します。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> docker/trusttest:latest</span>
 <span class="k">RUN </span><span class="nb">echo</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">FROM</code> tag is pulling a signed image. You cannot build an image that has a
-<code class="highlighter-rouge">FROM</code> that is not either present locally or signed. Given that content trust
-data exists for the tag <code class="highlighter-rouge">latest</code>, the following build should succeed:</p>
+<p><code class="highlighter-rouge">FROM</code> タグによって、サイン済みのイメージをプルします。
+<code class="highlighter-rouge">FROM</code> に指定されたイメージがローカルに存在しない場合、あるいはサインされていない場合、そのイメージをビルドすることはできません。
+<code class="highlighter-rouge">latest</code> タグに対するコンテントトラストデータがある場合、以下のビルドは成功します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span> docker build <span class="nt">-t</span> docker/trusttest:testing <span class="nb">.</span>
 Using default tag: latest
@@ -241,20 +238,19 @@ b3dbab3810fc: Pull <span class="nb">complete
 </span>Digest: sha256:d149ab53f871
 </code></pre></div></div>
 
-<p>If content trust is enabled, building from a Dockerfile that relies on tag
-without trust data, causes the build command to fail:</p>
+<p>コンテントトラストが有効である場合、トラストデータを用いていない Dockerfile によってビルドを行うと、ビルドコマンドは失敗します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span> docker build <span class="nt">-t</span> docker/trusttest:testing <span class="nb">.</span>
 unable to process Dockerfile: No trust data <span class="k">for </span>notrust
 </code></pre></div></div>
 
-<h2 id="related-information">Related information</h2>
+<h2 id="related-information">関連情報</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/">Delegations for content trust</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Content trust in Docker</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">Manage keys for content trust</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/">Play in a content trust sandbox</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/">コンテントトラストの委任鍵ペア</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Docker のコンテントトラスト</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">コンテントトラストにおける鍵の管理</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/">コンテントトラストのサンドボックスで遊ぶ</a></li>
 </ul>
 
                             <!-- tags -->
@@ -275,7 +271,7 @@ unable to process Dockerfile: No trust data <span class="k">for </span>notrust
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/security/trust/trust_automation.md",
-                                        "title": "Automation with content trust",
+                                        "title": "コンテントトラストの自動化",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/security/trust/trust_automation.md"
                                     };
                                     (function (d, c, j) {
@@ -341,11 +337,11 @@ unable to process Dockerfile: No trust data <span class="k">for </span>notrust
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#add-a-delegation-private-key" class="nomunge">Add a delegation private key</a></li>
-  <li><a href="#add-a-delegation-public-key" class="nomunge">Add a delegation public key</a></li>
-  <li><a href="#sign-an-image" class="nomunge">Sign an image</a></li>
-  <li><a href="#build-with-content-trust" class="nomunge">Build with content trust</a></li>
-  <li><a href="#related-information" class="nomunge">Related information</a></li>
+  <li><a href="#add-a-delegation-private-key" class="nomunge">委任鍵ペアの秘密鍵の追加</a></li>
+  <li><a href="#add-a-delegation-public-key" class="nomunge">委任鍵ペアの公開鍵の追加</a></li>
+  <li><a href="#sign-an-image" class="nomunge">イメージへのサイン</a></li>
+  <li><a href="#build-with-content-trust" class="nomunge">コンテントトラストを使ったイメージビルド</a></li>
+  <li><a href="#related-information" class="nomunge">関連情報</a></li>
 </ul>
 
 

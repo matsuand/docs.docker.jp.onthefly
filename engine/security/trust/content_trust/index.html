@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-09 22:04:21 +0900 -->
+<!-- Page generated 2020-07-16 21:49:37 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-16T21:49:37+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:title" itemprop="title name" content="Docker のコンテントトラスト"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="ネットワークシステム内でデータ転送を行う際には、信頼（trust）できるものであるかどうかが一番大切なことです。 特にインターネットのような信頼に欠けるシステム上で通信を行う場合、システムが扱うデータの整合性とその発信者情報を確実にすることが極めて重要です。 Docker Engine では、公開リポジトリあるいはプライベートリポジトリに対して、イメージ（データ）をプッシュしプルすることができます。 コンテントトラスト（content trust）は Content trust gives you the ability to verify both the integrity and the publisher of all the data received from a registry over..." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="ネットワークシステム内でデータ転送を行う際には、信頼（trust）できるものであるかどうかが一番大切なことです。 特にインターネットのような信頼に欠けるシステム上で通信を行う場合、システムが扱うデータの整合性とその発信者情報を確実にすることが極めて重要です。 Docker Engine では、公開リポジトリあるいはプライベートリポジトリに対して、イメージ（データ）をプッシュしプルすることができます。 コンテントトラスト（content trust）はあらゆるチャネルを通じて、レジストリから取得するデータの整合性と公開者情報を、ともに検証できる仕組みを提供します。 Docker コンテントトラストについて Docker コンテントトラスト (Docker Content Trust; DCT) は、リモート Docker レジストリとの間で送受信されるデータに対して、デジタル証明書を利用する機能を提供します。 この証明書があることによって、所定のイメージタグに対して、クライアントサイドつまり実行時での整合性および公開者情報の検証を可能としています。 DCT を通じてイメージ公開者は、そのイメージを証明することができます。 そしてイメージ利用者は、プルを行うイメージが証明されていることがわかります。 公開者は個人の場合もあり組織の場合もあります。 リリース工程の一部としてこの証明作業を、手動で行っていたり、自動化されたソフトウェアサプライチェーンによって行っているかもしれません。 イメージタグと DCT 1 つのイメージには、以下の識別子が記録されています。 [REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG] イメージ..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-16T21:49:37+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="content, trust, security, docker, documentation">
@@ -79,12 +79,12 @@
   <title>Docker のコンテントトラスト | Docker ドキュメント</title>
   <meta property="og:title" content="Docker のコンテントトラスト" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="Enabling content trust in Docker" />
-  <meta property="og:description" content="Enabling content trust in Docker" />
+  <meta name="description" content="Docker においてコンテントトラストを有効にします。" />
+  <meta property="og:description" content="Docker においてコンテントトラストを有効にします。" />
   <link rel="canonical" href="/engine/security/trust/content_trust/" />
   <meta property="og:url" content="https://docs.docker.com/engine/security/trust/content_trust/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker のコンテントトラスト","description":"Enabling content trust in Docker","url":"https://docs.docker.com/engine/security/trust/content_trust/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker のコンテントトラスト","description":"Docker においてコンテントトラストを有効にします。","url":"https://docs.docker.com/engine/security/trust/content_trust/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    8 分
+    3 分
   
 </span>
 
@@ -161,123 +161,108 @@
 <p>ネットワークシステム内でデータ転送を行う際には、<strong>信頼</strong>（trust）できるものであるかどうかが一番大切なことです。
 特にインターネットのような信頼に欠けるシステム上で通信を行う場合、システムが扱うデータの整合性とその発信者情報を確実にすることが極めて重要です。
 Docker Engine では、公開リポジトリあるいはプライベートリポジトリに対して、イメージ（データ）をプッシュしプルすることができます。
-コンテントトラスト（content trust）は
-Content trust gives you the ability to verify both
-the integrity and the publisher of all the data received from a registry over
-any channel.</p>
+コンテントトラスト（content trust）はあらゆるチャネルを通じて、レジストリから取得するデータの整合性と公開者情報を、ともに検証できる仕組みを提供します。</p>
 
-<h2 id="about-docker-content-trust-dct">Docker コンテントトラスト（DCT）について</h2>
+<h2 id="about-docker-content-trust-dct">Docker コンテントトラストについて</h2>
 
-<p>Docker コンテントトラスト (Docker Content Trust; DCT) は、リモート Docker レジストリとの間で送受信されるデータに対して、デジタル証明書を利用する機能を提供します
-These signatures allow
-client-side or runtime verification of the integrity and publisher of specific
-image tags.</p>
+<p>Docker コンテントトラスト (Docker Content Trust; DCT) は、リモート Docker レジストリとの間で送受信されるデータに対して、デジタル証明書を利用する機能を提供します。
+この証明書があることによって、所定のイメージタグに対して、クライアントサイドつまり実行時での整合性および公開者情報の検証を可能としています。</p>
 
-<p>Through DCT, image publishers can sign their images and image consumers can
-ensure that the images they pull are signed. Publishers could be individuals
-or organizations manually signing their content or automated software supply
-chains signing content as part of their release process.</p>
+<p>DCT を通じてイメージ公開者は、そのイメージを証明することができます。
+そしてイメージ利用者は、プルを行うイメージが証明されていることがわかります。
+公開者は個人の場合もあり組織の場合もあります。
+リリース工程の一部としてこの証明作業を、手動で行っていたり、自動化されたソフトウェアサプライチェーンによって行っているかもしれません。</p>
 
-<h3 id="image-tags-and-dct">Image tags and DCT</h3>
+<h3 id="image-tags-and-dct">イメージタグと DCT</h3>
 
-<p>An individual image record has the following identifier:</p>
+<p>1 つのイメージには、以下の識別子が記録されています。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG]
 </code></pre></div></div>
 
-<p>A particular image <code class="highlighter-rouge">REPOSITORY</code> can have multiple tags. For example, <code class="highlighter-rouge">latest</code> and
- <code class="highlighter-rouge">3.1.2</code> are both tags on the <code class="highlighter-rouge">mongo</code> image. An image publisher can build an image
- and tag combination many times changing the image with each build.</p>
+<p>イメージ <code class="highlighter-rouge">REPOSITORY</code> は複数のタグを持つことができます。
+たとえば <code class="highlighter-rouge">mongo</code> イメージにある <code class="highlighter-rouge">latest</code> と <code class="highlighter-rouge">3.1.2</code> というのは、どちらもタグです。
+イメージ公開者は、イメージをビルドするたびに、何度もイメージとタグの組み合わせを作り出します。</p>
 
-<p>DCT is associated with the <code class="highlighter-rouge">TAG</code> portion of an image. Each image repository has
-a set of keys that image publishers use to sign an image tag. Image publishers
-have discretion on which tags they sign.</p>
+<p>DCT はイメージの <code class="highlighter-rouge">TAG</code> 部分に関連づけられます。
+各イメージリポジトリには、公開者がイメージタグにサインするための鍵が複数あります。
+どのタグに対してサインを行うかを、イメージ公開者は自由に取り決めています。</p>
 
-<p>An image repository can contain an image with one tag that is signed and another
-tag that is not. For example, consider <a href="https://hub.docker.com/r/library/mongo/tags/">the Mongo image
-repository</a>. The <code class="highlighter-rouge">latest</code>
-tag could be unsigned while the <code class="highlighter-rouge">3.1.6</code> tag could be signed. It is the
-responsibility of the image publisher to decide if an image tag is signed or
-not. In this representation, some image tags are signed, others are not:</p>
+<p>イメージリポジトリには 1 つのイメージに対して、サインされたタグを持つものが 1 つだけあり、それ以外のタグはサインされていません。
+<a href="https://hub.docker.com/r/library/mongo/tags/">Mongo イメージリポジトリ</a> を例にして説明します。
+<code class="highlighter-rouge">3.1.6</code> がサインされているタグであったとすると、<code class="highlighter-rouge">latest</code> はサインされていません。
+どのイメージタグにサインし、サインしないかは、イメージ公開者が取り決める責任があります。
+以下の図においては、サインされているイメージがあり、それ以外はサインされていません。</p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/security/trust/images/tag_signing.png" alt="Signed tags" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/security/trust/images/tag_signing.png" alt="サインされたタグ" /></p>
 
-<p>Publishers can choose to sign a specific tag or not. As a result, the content of
-an unsigned tag and that of a signed tag with the same name may not match. For
-example, a publisher can push a tagged image <code class="highlighter-rouge">someimage:latest</code> and sign it.
-Later, the same publisher can push an unsigned <code class="highlighter-rouge">someimage:latest</code> image. This second
-push replaces the last unsigned tag <code class="highlighter-rouge">latest</code> but does not affect the signed <code class="highlighter-rouge">latest</code> version.
-The ability to choose which tags they can sign, allows publishers to iterate over
-the unsigned version of an image before officially signing it.</p>
+<p>公開者としては、どのタグにサインするかを取り決めることができます。
+サインされているものとサインされていないものが、結果的に同じ名称になったとしても、同一の内容としては扱われません。
+たとえば公開者がタグづけしたイメージ <code class="highlighter-rouge">someimage:latest</code> をプッシュして、これにサインしたとします。
+後にその公開者は、サインをしていない <code class="highlighter-rouge">someimage:latest</code> というイメージをプッシュすることができます。
+2 度めに行ったプッシュによって、サインをしていなかった直前の <code class="highlighter-rouge">latest</code> がプッシュしたものに置き換えられますが、サインしている <code class="highlighter-rouge">latest</code> には何ら影響しません。
+公開者がサインするタグを選べるということは、イメージをサインせずに何回も繰り返しプッシュした上で、最後に公式イメージにサインするというやり方が可能になります。</p>
 
-<p>Image consumers can enable DCT to ensure that images they use were signed. If a
-consumer enables DCT, they can only pull, run, or build with trusted images.
-Enabling DCT is a bit like applying a “filter” to your registry. Consumers “see”
-only signed image tags and the less desirable, unsigned image tags are
-“invisible” to them.</p>
+<p>イメージ利用者は DCT を通じて、利用するイメージがサインされているかどうかがわかります。
+利用者が DCT を有効にしている場合、イメージをプルしビルドし実行するのは、信頼できる（trusted）イメージのみとなります。
+DCT を有効にすることは、レジストリに「フィルター」をかけるようなものです。
+利用者にとって、サインされたイメージタグだけが「見える」ものになります。
+あまり利用することがない、未サインのイメージタグは「見えない」わけです。</p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/security/trust/images/trust_view.png" alt="Trust view" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/security/trust/images/trust_view.png" alt="信頼ビュー" /></p>
 
-<p>To the consumer who has not enabled DCT, nothing about how they work with Docker
-images changes. Every image is visible regardless of whether it is signed or
-not.</p>
+<p>利用者が DCT を有効にしていなければ、Docker イメージの操作方法は何も変わりません。
+イメージがサインされていてもいなくても、すべてのイメージを見ることができます。</p>
 
-<h3 id="docker-content-trust-keys">Docker Content Trust Keys</h3>
+<h3 id="docker-content-trust-keys">Docker コンテントトラストの鍵</h3>
 
-<p>Trust for an image tag is managed through the use of signing keys. A key set is
-created when an operation using DCT is first invoked. A key set consists
-of the following classes of keys:</p>
+<p>イメージタグへのトラストつまり信頼ができるかどうかは、証明書鍵を利用して管理されます。
+DCT を利用する操作を行った初回において、鍵一式が生成されます。
+鍵一式には、以下のような種類の鍵があります。</p>
 
 <ul>
-  <li>an offline key that is the root of DCT for an image tag</li>
-  <li>repository or tagging keys that sign tags</li>
-  <li>server-managed keys such as the timestamp key, which provides freshness
-  security guarantees for your repository</li>
+  <li>オフライン鍵（offline key）。イメージタグ用の DCT ルート鍵です。</li>
+  <li>タグにサインをするリポジトリ鍵（repository key）あるいはタグ用鍵（tagging key）。</li>
+  <li>サーバーによって管理される、たとえばタイムスタンプ鍵（timestamp key）。
+リポジトリに対して、最新のセキュリティ保証を行います。</li>
 </ul>
 
-<p>The following image depicts the various signing keys and their relationships:</p>
+<p>以下の図では、いろいろな種類の鍵とその関係を表わしています。</p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/security/trust/images/trust_components.png" alt="Content Trust components" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/security/trust/images/trust_components.png" alt="コンテントトラストの構成" /></p>
 
 <blockquote class="warning">
-  <p><strong>WARNING</strong>:
-Loss of the root key is <strong>very difficult</strong> to recover from.
-Correcting this loss requires intervention from <a href="https://support.docker.com">Docker
-Support</a> to reset the repository state. This loss
-also requires <strong>manual intervention</strong> from every consumer that used a signed
-tag from this repository prior to the loss.</p>
+  <p><strong>警告</strong>:
+ルート鍵を失ってしまうと復旧が <strong>極めて困難</strong> になります。
+これを復旧するためには <a href="https://support.docker.com">Docker サポート</a> が調整を行う必要があり、リポジトリ状態をリセットしなければなりません。
+またこのリポジトリを通じてサイン済タグを利用していたすべてのユーザーに対して、ルート鍵を失なう以前のイメージは <strong>手動で復旧操作を行う</strong> 必要があります。</p>
 </blockquote>
 
-<p>You should back up the root key somewhere safe. Given that it is only required
-to create new repositories, it is a good idea to store it offline in hardware.
-For details on securing, and backing up your keys, make sure you
-read how to <a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">manage keys for DCT</a>.</p>
+<p>ルート鍵はどこか安全なところにバックアップをとっておいてください。
+このルート鍵は新たなリポジトリを生成する重要なものなので、オフラインのデータとして保存しておくことをお勧めします。
+セキュアなリポジトリの維持、鍵のバックアップに関しては <a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">DCT における鍵の管理</a> を参照してください。</p>
 
-<h2 id="signing-images-with-docker-content-trust">Signing Images with Docker Content Trust</h2>
+<h2 id="signing-images-with-docker-content-trust">DCT によるイメージへのサイン</h2>
 
 <blockquote>
-  <p><strong>Note:</strong>
-This applies to Docker Community Engine 17.12 and newer.</p>
+  <p><strong>メモ</strong>
+これは Docker Community Engine 17.12 またはそれ以降に適用されます。</p>
 </blockquote>
 
-<p>Within the Docker CLI we can sign and push a container image with the
-<code class="highlighter-rouge">$ docker trust</code> command syntax. This is built on top of the Notary feature
-set, more information on Notary can be found <a href="/notary/getting_started/">here</a>.</p>
+<p>Docker CLI においては <code class="highlighter-rouge">docker trust</code> コマンドを使って、コンテナーイメージにサインしてプッシュすることができます。
+これは Notary 機能の上に実現されています。
+Notary の詳細は <a href="/notary/getting_started/">こちら</a> を参照してください。</p>
 
-<p>A prerequisite for signing an image is a Docker Registry with a Notary server
-attached (Such as the Docker Hub ). Instructions for
-standing up a self-hosted environment can be found <a href="/engine/security/trust/deploying_notary/">here</a>.</p>
+<p>イメージへのサインを行うためには、（Docker Hub のような）Notary サーバーが連携した Docker Registry が必要です。
+独自のサーバー環境を構築するのであれば、その手順が <a href="/engine/security/trust/deploying_notary/">こちら</a> にあります。</p>
 
-<p>To sign a Docker Image you will need a delegation key pair. These keys
-can be generated locally using <code class="highlighter-rouge">$ docker trust key generate</code> or generated
-by a certificate authority.</p>
+<p>Docker イメージにサインするには、委任鍵ペア（delegation key pair）が必要です。
+この鍵はローカルで <code class="highlighter-rouge">docker trust key generate</code> の実行によって生成するか、認証局によって生成されます。</p>
 
-<p>First we will add the delegation private key to the local Docker trust
-repository. (By default this is stored in <code class="highlighter-rouge">~/.docker/trust/</code>). If you are
-generating delegation keys with <code class="highlighter-rouge">$ docker trust key generate</code>, the private key
-is automatically added to the local trust store. If you are importing a separate
-key, you will need to use the
-<code class="highlighter-rouge">$ docker trust key load</code> command.</p>
+<p>はじめにローカルの Docker トラストレジストリに、委任鍵ペアを追加します。
+（デフォルトでこの鍵は <code class="highlighter-rouge">~/.docker/trust/</code> に保存します。)
+<code class="highlighter-rouge">docker trust key generate</code> によって委任鍵ペアを生成している場合、秘密鍵（private key）も自動的にローカルの保存場所に生成されています。
+個別に鍵をインポートしている場合は、<code class="highlighter-rouge">docker trust key load</code> コマンドを実行することが必要です。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust key generate jeff
 Generating key for jeff...
@@ -286,7 +271,7 @@ Repeat passphrase for new jeff key with ID 9deed25:
 Successfully generated and loaded private key. Corresponding public key available: /home/ubuntu/Documents/mytrustdir/jeff.pub
 </code></pre></div></div>
 
-<p>Or if you have an existing key:</p>
+<p>すでに鍵がある場合は以下のようにします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust key load key.pem --name jeff
 Loading key from "key.pem"...
@@ -295,21 +280,17 @@ Repeat passphrase for new jeff key with ID 8ae710e:
 Successfully imported key from key.pem
 </code></pre></div></div>
 
-<p>Next we will need to add the delegation public key to the Notary server;
-this is specific to a particular image repository in Notary known as a Global
-Unique Name (GUN). If this is the first time you are adding a delegation to that
-repository, this command will also initiate the repository, using a local Notary
-canonical root key. To understand more about initiating a repository, and the
-role of delegations, head to
-<a href="trust_delegation/#managing-delegations-in-a-notary-server">delegations for content trust</a>.</p>
+<p>次に委任鍵ペアの公開鍵を Notary サーバーへ追加します。
+これは Notary の Global Unique Name (GUN) と呼ばれるイメージリポジトリとして特化したものです。
+委任鍵ペアをリポジトリに追加する初回は、このコマンド実行において、ローカル Notary サーバーの正規のルート鍵を使って、リポジトリが初期化されます。
+リポジトリの初期化と委任鍵の役割に関しては、<a href="trust_delegation/#managing-delegations-in-a-notary-server">コンテントトラストの委任鍵</a> を参照してください。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94:
 </code></pre></div></div>
 
-<p>Finally, we will use the delegation private key to sign a particular tag and
-push it up to the registry.</p>
+<p>最後に委任鍵ペアの秘密鍵を使って、指定するタグに対してサインを行い、これをレジストリにプッシュします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust sign registry.example.com/admin/demo:1
 Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
@@ -321,8 +302,7 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully signed registry.example.com/admin/demo:1
 </code></pre></div></div>
 
-<p>Alternatively, once the keys have been imported an image can be pushed with the
-<code class="highlighter-rouge">$ docker push</code> command, by exporting the DCT environmental variable.</p>
+<p>あるいは鍵ペアがインポート済であれば、DCT 環境変数を設定しておくことで、<code class="highlighter-rouge">docker push</code> コマンドによりイメージをプッシュすることもできます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST=1
 
@@ -335,23 +315,19 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully signed registry.example.com/admin/demo:1
 </code></pre></div></div>
 
-<p>Remote trust data for a tag or a repository can be viewed by the
-<code class="highlighter-rouge">$ docker trust inspect</code> command:</p>
+<p>リモートにあるトラストデータやリポジトリを参照するには <code class="highlighter-rouge">docker trust inspect</code> コマンドを実行します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust inspect --pretty registry.example.com/admin/demo:1
-
 
 Signatures for registry.example.com/admin/demo:1
 
 SIGNED TAG          DIGEST                                                             SIGNERS
 1                   3d2e482b82608d153a374df3357c0291589a61cc194ec4a9ca2381073a17f58e   jeff
 
-
 List of signers and their keys for registry.example.com/admin/demo:1
 
 SIGNER              KEYS
 jeff                8ae710e3ba82
-
 
 Administrative keys for registry.example.com/admin/demo:1
 
@@ -359,22 +335,21 @@ Administrative keys for registry.example.com/admin/demo:1
   Root Key:	84ca6e4416416d78c4597e754f38517bea95ab427e5f95871f90d460573071fc
 </code></pre></div></div>
 
-<p>Remote Trust data for a tag can be removed by the <code class="highlighter-rouge">$ docker trust revoke</code> command:</p>
+<p>リモートにあるトラストデータは <code class="highlighter-rouge">docker trust revoke</code> コマンドにより削除することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust revoke registry.example.com/admin/demo:1
 Enter passphrase for signer key with ID 8ae710e:
 Successfully deleted signature for registry.example.com/admin/demo:1
 </code></pre></div></div>
 
-<h2 id="client-enforcement-with-docker-content-trust">Client Enforcement with Docker Content Trust</h2>
+<h2 id="client-enforcement-with-docker-content-trust">Docker コンテントトラストのクライントでの利用</h2>
 
-<p>Content trust is disabled by default in the Docker Client. To enable
-it, set the <code class="highlighter-rouge">DOCKER_CONTENT_TRUST</code> environment variable to <code class="highlighter-rouge">1</code>. This prevents
-users from working with tagged images unless they contain a signature.</p>
+<p>Docker クライアントにおいて、コンテントトラストはデフォルトで無効になっています。
+これを有効にするには、環境変数 <code class="highlighter-rouge">DOCKER_CONTENT_TRUST</code> を <code class="highlighter-rouge">1</code> に設定します。
+これを行っておけば、サインされていないタグつきイメージは、操作対象になりません。</p>
 
-<p>When DCT is enabled in the Docker client, <code class="highlighter-rouge">docker</code> CLI commands that operate on
-tagged images must either have content signatures or explicit content hashes.
-The commands that operate with DCT are:</p>
+<p>Docker クライアントにおいて DCT が有効である場合、タグつきのイメージを操作する <code class="highlighter-rouge">docker</code> コマンドには、コンテント署名あるいは明示的なコンテントハッシュがなければなりません。
+DCT の操作が可能なコマンドは以下です。</p>
 
 <ul>
   <li><code class="highlighter-rouge">push</code></li>
@@ -384,9 +359,8 @@ The commands that operate with DCT are:</p>
   <li><code class="highlighter-rouge">run</code></li>
 </ul>
 
-<p>For example, with DCT enabled a <code class="highlighter-rouge">docker pull someimage:latest</code> only
-succeeds if <code class="highlighter-rouge">someimage:latest</code> is signed. However, an operation with an explicit
-content hash always succeeds as long as the hash exists:</p>
+<p>たとえば DCT を有効にしている場合、<code class="highlighter-rouge">docker pull someimage:latest</code> というコマンドは <code class="highlighter-rouge">someimage:latest</code> がサインされている場合のみ処理が成功します。
+ただしコンテントハッシュが明示的に指定されている場合は、このコマンドの処理は常に成功します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker pull registry.example.com/user/image:1
 Error: remote trust data does not exist for registry.example.com/user/image: registry.example.com does not have trust data for registry.example.com/user/image
@@ -399,13 +373,13 @@ Digest: sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
 Status: Downloaded newer image for registry.example.com/user/image@sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
 </code></pre></div></div>
 
-<h2 id="related-information">Related information</h2>
+<h2 id="related-information">関連情報</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/">Delegations for content trust</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_automation/">Automation with content trust</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">Manage keys for content trust</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/">Play in a content trust sandbox</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/">コンテントトラストの委任鍵ペア</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_automation/">コンテントトラストの自動化</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">コンテントトラストにおける鍵の管理</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/">コンテントトラストのサンドボックスで遊ぶ</a></li>
 </ul>
 
                             <!-- tags -->
@@ -492,15 +466,15 @@ Status: Downloaded newer image for registry.example.com/user/image@sha256:ee7491
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#about-docker-content-trust-dct" class="nomunge">Docker コンテントトラスト（DCT）について</a>
+  <li><a href="#about-docker-content-trust-dct" class="nomunge">Docker コンテントトラストについて</a>
     <ul>
-      <li><a href="#image-tags-and-dct" class="nomunge">Image tags and DCT</a></li>
-      <li><a href="#docker-content-trust-keys" class="nomunge">Docker Content Trust Keys</a></li>
+      <li><a href="#image-tags-and-dct" class="nomunge">イメージタグと DCT</a></li>
+      <li><a href="#docker-content-trust-keys" class="nomunge">Docker コンテントトラストの鍵</a></li>
     </ul>
   </li>
-  <li><a href="#signing-images-with-docker-content-trust" class="nomunge">Signing Images with Docker Content Trust</a></li>
-  <li><a href="#client-enforcement-with-docker-content-trust" class="nomunge">Client Enforcement with Docker Content Trust</a></li>
-  <li><a href="#related-information" class="nomunge">Related information</a></li>
+  <li><a href="#signing-images-with-docker-content-trust" class="nomunge">DCT によるイメージへのサイン</a></li>
+  <li><a href="#client-enforcement-with-docker-content-trust" class="nomunge">Docker コンテントトラストのクライントでの利用</a></li>
+  <li><a href="#related-information" class="nomunge">関連情報</a></li>
 </ul>
 
 

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-09 22:04:21 +0900 -->
+<!-- Page generated 2020-07-16 21:49:37 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-16T21:49:37+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Delegations for content trust"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="Delegations in Docker Content Trust (DCT) allow you to control who can and cannot sign an image tag. A delegation will have a pair of private and public delegation keys...." />
+  <meta name="twitter:title" itemprop="title name" content="コンテントトラストの委任鍵ペア"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker コンテントトラスト (Docker content trust; DCT) における委任鍵ペア（delegations）は、イメージタグへのサインを、誰ができて誰ができないのかを制御するものです。 委任鍵は、委任を行う秘密鍵と公開鍵のペアによって構成されます。 委任鍵には、鍵とその提供者の組み合わせを複数含めることができます。 これにより a) 委任鍵のユーザーを複数にすることができ、b) 鍵のローテーションを可能にします。 Docker コンテントトラストにおける委任にあたり、最も重要なものは targets/releases です。 これは信頼された（trusted）イメージタグの標準的なソースとして見ることができます。 この委任情報のもとに提供者の鍵が存在していないと、提供者はタグにサインすることができません。 $ docker trust コマンドを使えば、リポジトリの初期化、リポジトリ鍵の管理を簡単に行うことができます。 また docker trust signer add によって targets/releases..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-09T22:04:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-16T21:49:37+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="trust, security, delegations, keys, repository">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Delegations for content trust | Docker ドキュメント</title>
-  <meta property="og:title" content="Delegations for content trust" />
+  <title>コンテントトラストの委任鍵ペア | Docker ドキュメント</title>
+  <meta property="og:title" content="コンテントトラストの委任鍵ペア" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="Delegations for content trust" />
-  <meta property="og:description" content="Delegations for content trust" />
+  <meta name="description" content="コンテントトラストの委任鍵ペア。" />
+  <meta property="og:description" content="コンテントトラストの委任鍵ペア。" />
   <link rel="canonical" href="/engine/security/trust/trust_delegation/" />
   <meta property="og:url" content="https://docs.docker.com/engine/security/trust/trust_delegation/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Delegations for content trust","description":"Delegations for content trust","url":"https://docs.docker.com/engine/security/trust/trust_delegation/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテントトラストの委任鍵ペア","description":"コンテントトラストの委任鍵ペア。","url":"https://docs.docker.com/engine/security/trust/trust_delegation/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,43 +147,40 @@
                         <section class="section">
                             
                             
-                            <h1>Delegations for content trust</h1> 
+                            <h1>コンテントトラストの委任鍵ペア</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    14 分
+    11 分
   
 </span>
 
                             
-                            <p>Delegations in Docker Content Trust (DCT) allow you to control who can and cannot sign
-an image tag. A delegation will have a pair of private and public delegation keys. A delegation
-could contain multiple pairs of keys and contributors in order to a) allow multiple users
-to be part of a delegation, and b) to support key rotation.</p>
+                            
+<p>Docker コンテントトラスト (Docker content trust; DCT) における委任鍵ペア（delegations）は、イメージタグへのサインを、誰ができて誰ができないのかを制御するものです。
+委任鍵は、委任を行う秘密鍵と公開鍵のペアによって構成されます。
+委任鍵には、鍵とその提供者の組み合わせを複数含めることができます。
+これにより a) 委任鍵のユーザーを複数にすることができ、b) 鍵のローテーションを可能にします。</p>
 
-<p>The most important delegation within Docker Content Trust is <code class="highlighter-rouge">targets/releases</code>.
-This is seen as the canonical source of a trusted image tag, and without a
-contributor’s key being under this delegation, they will be unable to sign a tag.</p>
+<p>Docker コンテントトラストにおける委任にあたり、最も重要なものは <code class="highlighter-rouge">targets/releases</code> です。
+これは信頼された（trusted）イメージタグの標準的なソースとして見ることができます。
+この委任情報のもとに提供者の鍵が存在していないと、提供者はタグにサインすることができません。</p>
 
-<p>Fortunately when using the <code class="highlighter-rouge">$ docker trust</code> commands, we will automatically
-initialize a repository, manage the repository keys, and add a collaborator’s key to the
-<code class="highlighter-rouge">targets/releases</code> delegation via <code class="highlighter-rouge">docker trust signer add</code>.</p>
+<p><code class="highlighter-rouge">$ docker trust</code> コマンドを使えば、リポジトリの初期化、リポジトリ鍵の管理を簡単に行うことができます。
+また <code class="highlighter-rouge">docker trust signer add</code> によって <code class="highlighter-rouge">targets/releases</code> 内の委任情報に共同作業者の鍵を含めることができます。</p>
 
-<h2 id="configuring-the-docker-client">Configuring the Docker Client</h2>
+<h2 id="configuring-the-docker-client">Docker クライアントの設定</h2>
 
-<p>By default, the <code class="highlighter-rouge">$ docker trust</code> commands expect the notary server URL to be the
-same as the registry URL specified in the image tag (following a similar logic to
-<code class="highlighter-rouge">$ docker push</code>). When using Docker Hub or DTR, the notary
-server URL is the same as the registry URL. However, for self-hosted
-environments or 3rd party registries, you will need to specify an alternative
-URL for the notary server. This is done with:</p>
+<p>デフォルトで <code class="highlighter-rouge">$ docker trust</code> コマンドは、イメージタグ内にて指定されているレジストリ URL と Notary サーバーの URL が同一であるものとして扱います（これは <code class="highlighter-rouge">$ docker push</code> に対するロジックに対応するものです）。
+Docker Hub や DTR を利用する際には、Notary サーバーの URL はレジストリ URL と同じです。
+しかし独自に立ち上げたサーバー環境やサードパーティー製のレジストリの場合、Notary サーバーには別の URL を指定する必要があります。
+これは以下のようにして行います。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export DOCKER_CONTENT_TRUST_SERVER=https://&lt;URL&gt;:&lt;PORT&gt;
 </code></pre></div></div>
 
-<p>If you do not export this variable in self-hosted environments, you may see
-errors such as:</p>
+<p>独自に立ち上げているサーバー環境において、この変数を設定していないと、以下のようなエラーが発生します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
@@ -195,8 +192,7 @@ WARN[0000] Error while downloading remote metadata, using cached timestamp - thi
 [...]
 </code></pre></div></div>
 
-<p>If you have enabled authentication for your notary server, or are using DTR, you will need to log in
-before you can push data to the notary server.</p>
+<p>Notary サーバーに対して認証機能を設定済みである場合、あるいは DTR を利用する場合は、Notary サーバーへのデータプッシュの前にログインする必要があります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker login registry.example.com/user/repo
 Username: admin
@@ -211,7 +207,7 @@ Successfully initialized "registry.example.com/user/repo"
 Successfully added signer: jeff to registry.example.com/user/repo
 </code></pre></div></div>
 
-<p>If you do not log in, you will see:</p>
+<p>ログインしていなければ、以下のようなメッセージになります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/user/repo
 Adding signer <span class="s2">"jeff"</span> to registry.example.com/user/repo...
@@ -221,15 +217,14 @@ you are not authorized to perform this operation: server returned 401.
 Failed to add signer to: registry.example.com/user/repo
 </code></pre></div></div>
 
-<h2 id="configuring-the-notary-client">Configuring the Notary Client</h2>
+<h2 id="configuring-the-notary-client">Notary クライアントの設定</h2>
 
-<p>Some of the more advanced features of DCT require the Notary CLI. To install and
-configure the Notary CLI:</p>
+<p>DCT にはさらに高度な機能があって、これを利用するためには Notary CLI が必要になります。
+Notary CLI のインストールと設定は以下のようにします。</p>
 
-<p>1) Download the <a href="https://github.com/theupdateframework/notary/releases">client</a>
-and ensure that it is available on your path.</p>
+<p>1) <a href="https://github.com/theupdateframework/notary/releases">クライアント</a> をダウンロードし、パス上に配置して利用できるようにします。</p>
 
-<p>2) Create a configuration file at <code class="highlighter-rouge">~/.notary/config.json</code> with the following content:</p>
+<p>2) <code class="highlighter-rouge">~/.notary/config.json</code> に設定ファイルを生成し、その内容を以下のようにします。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"trust_dir"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"~/.docker/trust"</span><span class="p">,</span><span class="w">
@@ -240,23 +235,19 @@ and ensure that it is available on your path.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>The newly created configuration file contains information about the location of your local Docker trust data and the notary server URL.</p>
+<p>上で新たに生成した設定ファイルでは、ローカルの Docker トラストデータの場所と Notary サーバーの URL が定義しています。</p>
 
-<p>For more detailed information about how to use notary outside of the
-Docker Content Trust use cases, refer to the Notary CLI documentation
-<a href="https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md">here</a></p>
+<p>Docker コンテントトラストの利用とは別に、Notary を利用する方法に関しては <a href="https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md">ここ</a> にある Notary CLI ドキュメントを参照してください。</p>
 
-<h2 id="creating-delegation-keys">Creating Delegation Keys</h2>
+<h2 id="creating-delegation-keys">委任鍵ペアの生成</h2>
 
-<p>A prerequisite to adding your first contributor is a pair of delegation keys.
-These keys can either be generated locally using <code class="highlighter-rouge">$ docker trust</code>, generated by
-a certificate authority.</p>
+<p>提供者の情報を追加するにあたって必要となるのは、委任鍵 (delegation keys) のペアです。
+この鍵は <code class="highlighter-rouge">$ docker trust</code> を使ってローカル環境で生成することができ、あるいは認証局により生成することもできます。</p>
 
-<h3 id="using-docker-trust-to-generate-keys">Using Docker Trust to Generate Keys</h3>
+<h3 id="using-docker-trust-to-generate-keys">Docker トラストを用いた鍵生成</h3>
 
-<p>Docker trust has a built-in generator for a delegation key pair,
-<code class="highlighter-rouge">$ docker trust generate &lt;name&gt;</code>. Running this command will automatically load
-the delegation private key in to the local Docker trust store.</p>
+<p>Docker トラストには、委任鍵ペアを生成するビルトインのコマンド <code class="highlighter-rouge">$ docker trust generate &lt;name&gt;</code> があります。
+このコマンドを実行すると、Docker トラストのローカルな保存場所に、委任鍵ペアの秘密鍵を自動的にロードします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key generate jeff
 
@@ -266,14 +257,11 @@ Repeat passphrase <span class="k">for </span>new jeff key with ID 9deed25:
 Successfully generated and loaded private key. Corresponding public key available: /home/ubuntu/Documents/mytrustdir/jeff.pub
 </code></pre></div></div>
 
-<h3 id="manually-generating-keys">Manually Generating Keys</h3>
+<h3 id="manually-generating-keys">手動での鍵生成</h3>
 
-<p>If you need to manually generate a private key (either RSA or ECDSA) and a x509
-certificate containing the public key, you can use local tools like openssl or
-cfssl along with a local or company-wide Certificate Authority.</p>
+<p>手動によって秘密鍵（RSA か ECDSA）と x509 証明書（公開鍵を含む）を生成する必要がある場合は、ローカルの、あるいは企業保有の認証局を使って openssl や cfssl などのツールを利用します。</p>
 
-<p>Here is an example of how to generate a 2048-bit RSA portion key (all RSA keys
-must be at least 2048 bits):</p>
+<p>以下は、2048 ビットの RSA 鍵を生成する例です（RSA 鍵は最低でも 2048 ビットが必要）。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl genrsa <span class="nt">-out</span> delegation.key 2048
 
@@ -283,11 +271,12 @@ Generating RSA private key, 2048 bit long modulus
 e is 65537 <span class="o">(</span>0x10001<span class="o">)</span>
 </code></pre></div></div>
 
-<p>They should keep <code class="highlighter-rouge">delegation.key</code> private because it is used to sign tags.</p>
+<p><code class="highlighter-rouge">delegation.key</code> は秘密鍵として保持しておきます。
+これを使って、タグへのサインを行います。</p>
 
-<p>Then they need to generate an x509 certificate containing the public key, which is
-what you need from them. Here is the command to generate a CSR (certificate
-signing request):</p>
+<p>次に公開鍵を含む x509 証明書を生成する必要があります。
+ここから必要となるものが公開鍵です。
+以下は CSR (certificate signing request) を生成する例です。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl req <span class="nt">-new</span> <span class="nt">-sha256</span> <span class="nt">-key</span> delegation.key <span class="nt">-out</span> delegation.csr
 </code></pre></div></div>
@@ -302,7 +291,7 @@ valid for 1 year):</p>
 <p>Then they need to give you <code class="highlighter-rouge">delegation.crt</code>, whether it is self-signed or signed
 by a CA.</p>
 
-<p>Finally you will need to add the private key into your local Docker trust store.</p>
+<p>最後に Docker トラストのローカルの保存場所に秘密鍵を追加します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust key load delegation.key <span class="nt">--name</span> jeff
 
@@ -312,10 +301,9 @@ Repeat passphrase <span class="k">for </span>new jeff key with ID 8ae710e:
 Successfully imported key from delegation.key
 </code></pre></div></div>
 
-<h3 id="viewing-local-delegation-keys">Viewing local Delegation keys</h3>
+<h3 id="viewing-local-delegation-keys">ローカルの委任鍵ペアの確認</h3>
 
-<p>To list the keys that have been imported in to the local Docker trust store we
-can use the Notary CLI.</p>
+<p>Docker トラストのローカルの保存場所にインポートされている鍵は、Notary CLI を利用して一覧表示することができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>notary key list
 
@@ -325,23 +313,20 @@ root                                    f6c6a4b00fefd8751f86194c7d87a3bede444540
 jeff                                    9deed251daa1aa6f9d5f9b752847647cf8d705da0763aa5467650d0987ed5306    /home/ubuntu/.docker/trust/private
 </code></pre></div></div>
 
-<h2 id="managing-delegations-in-a-notary-server">Managing Delegations in a Notary Server</h2>
+<h2 id="managing-delegations-in-a-notary-server">Notary サーバー上の委任鍵の管理</h2>
 
-<p>When the first Delegation is added to the Notary Server using <code class="highlighter-rouge">$ docker trust</code>,
-we automatically initiate trust data for the repository. This includes creating
-the notary target and snapshots keys, and rotating the snapshot key to be
-managed by the notary server. More information on these keys can be found
-<a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">here</a></p>
+<p><code class="highlighter-rouge">$ docker trust</code> コマンドを使って Notary サーバーに委任鍵を追加すると、リポジトリにおけるトラストデータは、自動的に初期化されます。
+この際にはターゲット鍵とスナップショット鍵も生成され、Notary サーバーが管理できるようにスナップショット鍵をローテートします。
+これらの鍵に関する詳細は <a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">こちら</a> を参照してください。</p>
 
-<p>When initiating a repository, you will need the key and the passphrase of a local
-Notary Canonical Root Key. If you have not initiated a repository before, and
-therefore don’t have a Notary root key, <code class="highlighter-rouge">$ docker trust</code> will create one for you.</p>
+<p>リポジトリの初期化にあたっては、ローカルの Notary 標準ルート鍵とそのパスフレーズが必要になります。
+まだリポジトリを初期化していない場合は、つまり Notary ルート鍵がないので、<code class="highlighter-rouge">$ docker trust</code> コマンドの実行がこれを生成します。</p>
 
 <blockquote>
-  <p>Be sure to protect and back up your <a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">Notary Canonical Root Key</a></p>
+  <p><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">Notary 標準ルート鍵</a> は、しっかりと保護しバックアップをとっておいてください。</p>
 </blockquote>
 
-<h3 id="initiating-the-repository">Initiating the Repository</h3>
+<h3 id="initiating-the-repository">リポジトリの初期化</h3>
 
 <p>To upload the first key to a delegation, at the same time initiating a
 repository, you can use the <code class="highlighter-rouge">$ docker trust signer add</code> command. This will add
@@ -353,6 +338,7 @@ second <code class="highlighter-rouge">targets/&lt;name&gt;</code> delegation.</
 advanced use cases of Notary additional delegations are used for hierarchy.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> cert.pem jeff registry.example.com/admin/demo
+
 
 Adding signer <span class="s2">"jeff"</span> to registry.example.com/admin/demo...
 Initializing signed repository <span class="k">for </span>registry.example.com/admin/demo...
@@ -407,6 +393,7 @@ configured when you first initiated the repository.</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker trust signer add <span class="nt">--key</span> ben.pub ben registry.example.com/admin/demo
+
 
 Adding signer <span class="s2">"ben"</span> to registry.example.com/admin/demo...
 Enter passphrase <span class="k">for </span>repository key with ID b0014f8:
@@ -613,10 +600,10 @@ No signatures or cannot access registry.example.com/admin/demo
 <h2 id="related-information">Related information</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Content trust in Docker</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">Manage keys for content trust</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_automation/">Automation with content trust</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/">Play in a content trust sandbox</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/content_trust/">Docker のコンテントトラスト</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_key_mng/">コンテントトラストにおける鍵の管理</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_automation/">コンテントトラストの自動化</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/trust/trust_sandbox/">コンテントトラストのサンドボックスで遊ぶ</a></li>
 </ul>
 
                             <!-- tags -->
@@ -637,7 +624,7 @@ No signatures or cannot access registry.example.com/admin/demo
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/security/trust/trust_delegation.md",
-                                        "title": "Delegations for content trust",
+                                        "title": "コンテントトラストの委任鍵ペア",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/security/trust/trust_delegation.md"
                                     };
                                     (function (d, c, j) {
@@ -703,18 +690,18 @@ No signatures or cannot access registry.example.com/admin/demo
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#configuring-the-docker-client" class="nomunge">Configuring the Docker Client</a></li>
-  <li><a href="#configuring-the-notary-client" class="nomunge">Configuring the Notary Client</a></li>
-  <li><a href="#creating-delegation-keys" class="nomunge">Creating Delegation Keys</a>
+  <li><a href="#configuring-the-docker-client" class="nomunge">Docker クライアントの設定</a></li>
+  <li><a href="#configuring-the-notary-client" class="nomunge">Notary クライアントの設定</a></li>
+  <li><a href="#creating-delegation-keys" class="nomunge">委任鍵ペアの生成</a>
     <ul>
-      <li><a href="#using-docker-trust-to-generate-keys" class="nomunge">Using Docker Trust to Generate Keys</a></li>
-      <li><a href="#manually-generating-keys" class="nomunge">Manually Generating Keys</a></li>
-      <li><a href="#viewing-local-delegation-keys" class="nomunge">Viewing local Delegation keys</a></li>
+      <li><a href="#using-docker-trust-to-generate-keys" class="nomunge">Docker トラストを用いた鍵生成</a></li>
+      <li><a href="#manually-generating-keys" class="nomunge">手動での鍵生成</a></li>
+      <li><a href="#viewing-local-delegation-keys" class="nomunge">ローカルの委任鍵ペアの確認</a></li>
     </ul>
   </li>
-  <li><a href="#managing-delegations-in-a-notary-server" class="nomunge">Managing Delegations in a Notary Server</a>
+  <li><a href="#managing-delegations-in-a-notary-server" class="nomunge">Notary サーバー上の委任鍵の管理</a>
     <ul>
-      <li><a href="#initiating-the-repository" class="nomunge">Initiating the Repository</a></li>
+      <li><a href="#initiating-the-repository" class="nomunge">リポジトリの初期化</a></li>
       <li><a href="#adding-additional-signers" class="nomunge">Adding Additional Signers</a></li>
       <li><a href="#adding-keys-to-an-existing-delegation" class="nomunge">Adding Keys to an Existing Delegation</a></li>
       <li><a href="#removing-a-delegation" class="nomunge">Removing a Delegation</a></li>
