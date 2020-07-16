@@ -1060,7 +1060,7 @@ var pages = [
 {
 "url":"/engine/security/trust/content_trust/",
 "title":"Docker のコンテントトラスト",
-"description":"Enabling content trust in Docker",
+"description":"Docker においてコンテントトラストを有効にします。",
 "keywords":"content, trust, security, docker, documentation"
 }
 ,
@@ -1234,7 +1234,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/trust/deploying_notary/",
-"title":"Deploy Notary Server with Compose",
+"title":"Compose を使った Notary サーバーのデプロイ",
 "description":"Deploying Notary",
 "keywords":"trust, security, notary, deployment"
 }
@@ -1612,7 +1612,7 @@ var pages = [
 ,
 {
 "url":"/notary/getting_started/",
-"title":"Get started with Notary",
+"title":"Notary をはじめよう",
 "description":"Performing basic operation to use Notary in tandem with Docker Content Trust.",
 "keywords":"docker, Notary, notary-client, docker content trust, content trust"
 }
@@ -4006,15 +4006,15 @@ var pages = [
 ,
 {
 "url":"/engine/security/trust/trust_automation/",
-"title":"Automation with content trust",
-"description":"Automating content push pulls with trust",
+"title":"コンテントトラストの自動化",
+"description":"コンテントトラストにおいてプッシュやプルを自動化します。",
 "keywords":"trust, security, docker, documentation, automation"
 }
 ,
 {
 "url":"/engine/security/trust/trust_delegation/",
-"title":"Delegations for content trust",
-"description":"Delegations for content trust",
+"title":"コンテントトラストの委任鍵ペア",
+"description":"コンテントトラストの委任鍵ペア。",
 "keywords":"trust, security, delegations, keys, repository"
 }
 ,
@@ -4048,8 +4048,8 @@ var pages = [
 ,
 {
 "url":"/engine/security/trust/trust_key_mng/",
-"title":"Manage keys for content trust",
-"description":"Manage keys for content trust",
+"title":"コンテントトラストにおける鍵の管理",
+"description":"コンテントトラストにおいて鍵を管理します。",
 "keywords":"trust, security, root,  keys, repository"
 }
 ,
