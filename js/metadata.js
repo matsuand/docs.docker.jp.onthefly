@@ -2549,13 +2549,6 @@ var pages = [
 }
 ,
 {
-"url":"/docker-for-mac/mutagen-caching/",
-"title":"Mutagen-based file synchronization",
-"description":"High-performance two-way file sync for volume mounts",
-"keywords":"mac, mutagen, volumes, file sync,"
-}
-,
-{
 "url":"/docker-for-mac/mutagen/",
 "title":"Mutagen-based file synchronization",
 "description":"High-performance two-way file sync for volume mounts",
