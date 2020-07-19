@@ -3670,7 +3670,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/slack_integration/",
-"title":"Set up Docker Hub notifications in Slack",
+"title":"Slack における Docker Hub 通知の設定",
 "description":"Integrate Docker Hub with Slack",
 "keywords":"Slack, integrate, notifications"
 }
