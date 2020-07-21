@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-17 22:01:37 +0900 -->
+<!-- Page generated 2020-07-21 18:46:09 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-17T22:01:37+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Seccomp security profiles for Docker"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="Secure computing mode (seccomp) is a Linux kernel feature. You can use it to restrict the actions available within the container. The seccomp() system call operates on the seccomp state..." />
+  <meta name="twitter:title" itemprop="title name" content="Docker 向け Seccomp セキュリティプロファイル"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="セキュリティコンピューティングモード（secure computing mode; seccomp）は Linux カーネルの機能です。 これを使うと、コンテナー内で利用できる処理を限定することができます。 システムコール seccomp() は呼び出し側プロセスの seccomp 状態を操作します。 この機能は、アプリケーションのアクセス処理を制限するものとして利用することができます。 この機能を利用するためには、Docker が seccomp を使ってビルドされていること、そしてカーネルが CONFIG_SECCOMP を有効にしていることが必要です。 カーネルが seccomp をサポートしているかどうかは、以下のようにして確認します。 $ grep CONFIG_SECCOMP= /boot/config-$(uname -r) CONFIG_SECCOMP=y メモ: seccomp..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-17T22:01:37+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="seccomp, security, docker, documentation">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Seccomp security profiles for Docker | Docker ドキュメント</title>
-  <meta property="og:title" content="Seccomp security profiles for Docker" />
+  <title>Docker 向け Seccomp セキュリティプロファイル | Docker ドキュメント</title>
+  <meta property="og:title" content="Docker 向け Seccomp セキュリティプロファイル" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Enabling seccomp in Docker" />
   <meta property="og:description" content="Enabling seccomp in Docker" />
   <link rel="canonical" href="/engine/security/seccomp/" />
   <meta property="og:url" content="https://docs.docker.com/engine/security/seccomp/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Seccomp security profiles for Docker","description":"Enabling seccomp in Docker","url":"https://docs.docker.com/engine/security/seccomp/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker 向け Seccomp セキュリティプロファイル","description":"Enabling seccomp in Docker","url":"https://docs.docker.com/engine/security/seccomp/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,59 +147,56 @@
                         <section class="section">
                             
                             
-                            <h1>Seccomp security profiles for Docker</h1> 
+                            <h1>Docker 向け Seccomp セキュリティプロファイル</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    7 分
+    5 分
   
 </span>
 
                             
-                            <p>Secure computing mode (<code class="highlighter-rouge">seccomp</code>) is a Linux kernel feature. You can use it to
-restrict the actions available within the container. The <code class="highlighter-rouge">seccomp()</code> system
-call operates on the seccomp state of the calling process. You can use this
-feature to restrict your application’s access.</p>
+                            
+<p>セキュリティコンピューティングモード（secure computing mode; <code class="highlighter-rouge">seccomp</code>）は Linux カーネルの機能です。
+これを使うと、コンテナー内で利用できる処理を限定することができます。
+システムコール <code class="highlighter-rouge">seccomp()</code> は呼び出し側プロセスの seccomp 状態を操作します。
+この機能は、アプリケーションのアクセス処理を制限するものとして利用することができます。</p>
 
-<p>This feature is available only if Docker has been built with <code class="highlighter-rouge">seccomp</code> and the
-kernel is configured with <code class="highlighter-rouge">CONFIG_SECCOMP</code> enabled. To check if your kernel
-supports <code class="highlighter-rouge">seccomp</code>:</p>
+<p>この機能を利用するためには、Docker が <code class="highlighter-rouge">seccomp</code> を使ってビルドされていること、そしてカーネルが <code class="highlighter-rouge">CONFIG_SECCOMP</code> を有効にしていることが必要です。
+カーネルが <code class="highlighter-rouge">seccomp</code> をサポートしているかどうかは、以下のようにして確認します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep </span><span class="nv">CONFIG_SECCOMP</span><span class="o">=</span> /boot/config-<span class="k">$(</span>uname <span class="nt">-r</span><span class="k">)</span>
 <span class="nv">CONFIG_SECCOMP</span><span class="o">=</span>y
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: <code class="highlighter-rouge">seccomp</code> profiles require seccomp 2.2.1 which is not available on
-Ubuntu 14.04, Debian Wheezy, or Debian Jessie. To use <code class="highlighter-rouge">seccomp</code> on these
-distributions, you must download the <a href="/docs.docker.jp.onthefly/engine/install/binaries/">latest static Linux binaries</a>
-(rather than packages).</p>
+  <p><strong>メモ</strong>: <code class="highlighter-rouge">seccomp</code> プロファイルは seccomp 2.2.1 を必要としますが、これは Ubuntu 14.04、Debian Wheezy、Debian Jessie では利用できません。
+そのディストリビューションにおいて <code class="highlighter-rouge">seccomp</code> を利用する場合は、（パッケージをインストールするのではなく）<a href="/docs.docker.jp.onthefly/engine/install/binaries/">最新の Linux 実行モジュール</a> をダウンロードして利用する必要があります。</p>
 </blockquote>
 
-<h2 id="pass-a-profile-for-a-container">Pass a profile for a container</h2>
+<h2 id="passva-profile-for-a-container">コンテナーへのプロファイルの受け渡し</h2>
 
-<p>The default <code class="highlighter-rouge">seccomp</code> profile provides a sane default for running containers with
-seccomp and disables around 44 system calls out of 300+. It is moderately
-protective while providing wide application compatibility. The default Docker
-profile can be found
-<a href="https://github.com/moby/moby/blob/master/profiles/seccomp/default.json">here</a>.</p>
+<p>デフォルトの <code class="highlighter-rouge">seccomp</code> プロファイルは、seccomp を使ってコンテナーを実行するための、十分に考慮されたデフォルトを提供します。
+そして 300 以上あるシステムコールのうち 44 個を無効とします。
+これは幅広くアプリケーションとの互換性を提供しつつ、適度なセキュリティ保護を実現します。
+デフォルトの Docker プロファイルは <a href="https://github.com/moby/moby/blob/master/profiles/seccomp/default.json">こちら</a> にあります。</p>
 
-<p>In effect, the profile is a whitelist which denies access to system calls by
-default, then whitelists specific system calls. The profile works by defining a
-<code class="highlighter-rouge">defaultAction</code> of <code class="highlighter-rouge">SCMP_ACT_ERRNO</code> and overriding that action only for specific
-system calls. The effect of <code class="highlighter-rouge">SCMP_ACT_ERRNO</code> is to cause a <code class="highlighter-rouge">Permission Denied</code>
-error. Next, the profile defines a specific list of system calls which are fully
-allowed, because their <code class="highlighter-rouge">action</code> is overridden to be <code class="highlighter-rouge">SCMP_ACT_ALLOW</code>. Finally,
-some specific rules are for individual system calls such as <code class="highlighter-rouge">personality</code>, and others,
-to allow variants of those system calls with specific arguments.</p>
+<p>実際にプロファイルはホワイトリスト方式をとるものであり、デフォルトではシステムコールのアクセスを拒否します。
+そして特定のシステムコールを許可します。
+プロファイルは <code class="highlighter-rouge">SCMP_ACT_ERRNO</code> の <code class="highlighter-rouge">defaultAction</code> を定義することで動作し、指定したシステムコールのみ、その動作をオーバーライドします。
+<code class="highlighter-rouge">SCMP_ACT_ERRNO</code> の効果は <code class="highlighter-rouge">Permission Denied</code> エラーを発生させることです。
+次にプロファイルにおいては、システムコールのうち、完全に動作を許容するものを列記します。
+これによって各 <code class="highlighter-rouge">action</code> を <code class="highlighter-rouge">SCMP_ACT_ALLOW</code> としてオーバーライドするためです。
+そして最後に、<code class="highlighter-rouge">personality</code> のような個別のシステムコールに対して、特定のルールを定めます。
+そのシステムコールに特定の引数を加えるといったことを行うことができます。</p>
 
-<p><code class="highlighter-rouge">seccomp</code> is instrumental for running Docker containers with least privilege. It
-is not recommended to change the default <code class="highlighter-rouge">seccomp</code> profile.</p>
+<p><code class="highlighter-rouge">seccomp</code> は Docker コンテナーを最小限の権限により実行します。
+デフォルトの <code class="highlighter-rouge">seccomp</code> プロファイルを修正することは推奨されていません。</p>
 
-<p>When you run a container, it uses the default profile unless you override it
-with the <code class="highlighter-rouge">--security-opt</code> option. For example, the following explicitly
-specifies a policy:</p>
+<p>コンテナーの起動時にはデフォルトのプロファイルが利用されます。
+ただし <code class="highlighter-rouge">--security-opt</code> オプションを指定した場合は、それをオーバーライドすることができます。
+たとえば以下の例は、ポリシーを明示的に指定するものです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="se">\</span>
              <span class="nt">-it</span> <span class="se">\</span>
@@ -207,18 +204,18 @@ specifies a policy:</p>
              hello-world
 </code></pre></div></div>
 
-<h3 id="significant-syscalls-blocked-by-the-default-profile">Significant syscalls blocked by the default profile</h3>
+<h3 id="significant-syscalls-blocked-by-the-default-profile">デフォルトプロファイルによりブロックされる重要なシステムコール</h3>
 
-<p>Docker’s default seccomp profile is a whitelist which specifies the calls that
-are allowed. The table below lists the significant (but not all) syscalls that
-are effectively blocked because they are not on the whitelist. The table includes
-the reason each syscall is blocked rather than white-listed.</p>
+<p>Docker 向けの seccomp プロファイルはホワイトリスト方式をとります。
+したがって許可したいシステムコールを指定する必要があります。
+以下の表では、重要な（ただしすべてではない）システムコールの中で、ホワイトリストに指定されなかったことから拒否されてしまうものの一覧です。
+表の中では、ホワイトリスト化されずにブロックされてしまう理由についても触れています。</p>
 
 <table>
   <thead>
     <tr>
-      <th>Syscall</th>
-      <th>Description</th>
+      <th>システムコール</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
@@ -420,18 +417,18 @@ the reason each syscall is blocked rather than white-listed.</p>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">vm86</code></td>
-      <td>In kernel x86 real mode virtual machine. Also gated by <code class="highlighter-rouge">CAP_SYS_ADMIN</code>.</td>
+      <td>カーネルにおける x86 リアルモード仮想マシン。 <code class="highlighter-rouge">CAP_SYS_ADMIN</code> からも呼び出される。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">vm86old</code></td>
-      <td>In kernel x86 real mode virtual machine. Also gated by <code class="highlighter-rouge">CAP_SYS_ADMIN</code>.</td>
+      <td>カーネルにおける x86 リアルモード仮想マシン。 <code class="highlighter-rouge">CAP_SYS_ADMIN</code> からも呼び出される。</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="run-without-the-default-seccomp-profile">Run without the default seccomp profile</h2>
+<h2 id="run-without-the-default-seccomp-profile">デフォルトの seccomp プロファイルがない状態での実行</h2>
 
-<p>You can pass <code class="highlighter-rouge">unconfined</code> to run a container without the default seccomp
+<p>コンテナーを実行する際に <code class="highlighter-rouge">unconfined</code> を指定すれば、デフォルトの seccomp プロファイルをなしにして実行することができます。
 profile.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -it --security-opt seccomp=unconfined debian:jessie \
@@ -455,7 +452,7 @@ profile.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/security/seccomp.md",
-                                        "title": "Seccomp security profiles for Docker",
+                                        "title": "Docker 向け Seccomp セキュリティプロファイル",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/security/seccomp.md"
                                     };
                                     (function (d, c, j) {
@@ -521,12 +518,12 @@ profile.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#pass-a-profile-for-a-container" class="nomunge">Pass a profile for a container</a>
+  <li><a href="#passva-profile-for-a-container" class="nomunge">コンテナーへのプロファイルの受け渡し</a>
     <ul>
-      <li><a href="#significant-syscalls-blocked-by-the-default-profile" class="nomunge">Significant syscalls blocked by the default profile</a></li>
+      <li><a href="#significant-syscalls-blocked-by-the-default-profile" class="nomunge">デフォルトプロファイルによりブロックされる重要なシステムコール</a></li>
     </ul>
   </li>
-  <li><a href="#run-without-the-default-seccomp-profile" class="nomunge">Run without the default seccomp profile</a></li>
+  <li><a href="#run-without-the-default-seccomp-profile" class="nomunge">デフォルトの seccomp プロファイルがない状態での実行</a></li>
 </ul>
 
 
@@ -547,51 +544,51 @@ profile.</p>
             <div class="row">
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><b><a href="https://www.docker.com/why-docker">Why Docker?</a></b></li>
-                        <li><a href="https://www.docker.com/what-container">What is a Container?</a></li>
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><b><a href="https://www.docker.com/products/overview">Products</a></b></li>
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
                         <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
                         <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
-                        <li><b><a href="https://www.docker.com/products/docker-desktop">Features</a></b></li>
-                        <li><a href="https://www.docker.com/products/container-runtime">Container Runtime</a></li>
-                        <li><a href="https://www.docker.com/products/developer-tools">Developer Tools</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
                         <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><b><a href="https://www.docker.com/products/docker-desktop">Developers</a></b></li>
-                        <li><a href="https://www.docker.com/use-cases">Use Cases</a></li>
-                        <li><a href="https://www.docker.com/play-with-docker">Play with Docker</a></li>
-                        <li><a href="https://www.docker.com/docker-community">Community</a></li>
-                        <li><a href="https://www.docker.com/open-source">Open Source</a></li>
-                        <li><a href="https://www.docker.com/community/docker-captains">Docker Captains</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><b><a href="https://www.docker.com/company" target="_blank">Company</a></b></li>
-                        <li><a href="https://www.docker.com/company">About Us</a></li>
-                        <li><a href="https://www.docker.com/blog/" target="_blank">Blog</a></li>
-                        <li><a href="https://www.docker.com/customers">Customers</a></li>
-                        <li><a href="https://www.docker.com/partners">Partners</a></li>
-                        <li><a href="https://www.docker.com/company/newsroom">Newsroom</a></li>
-                        <li><a href="https://www.docker.com/careers">Careers</a></li>
-                        <li><a href="https://www.docker.com/company/contact">Contact Us</a></li>
+                        <li><b><a href="https://www.docker.com/company" target="_blank">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-nav">
                 <nav class="footer_sub_nav">
                     <ul class="menu">
-                        <li><a href="http://status.docker.com/">Status</a></li>
-                        <li><a href="https://www.docker.com/docker-security">Security</a></li>
-                        <li><a href="https://www.docker.com/legal">Legal</a></li>
-                        <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
                     </ul>
                 </nav>
             </div>

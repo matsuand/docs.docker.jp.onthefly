@@ -345,7 +345,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/apparmor/",
-"title":"AppArmor security profiles for Docker",
+"title":"Docker 向け AppArmor セキュリティプロファイル",
 "description":"Enabling AppArmor in Docker",
 "keywords":"AppArmor, security, docker, documentation"
 }
@@ -1654,7 +1654,7 @@ var pages = [
 ,
 {
 "url":"/network/host/",
-"title":"Use host networking",
+"title":"ホストネットワークの利用",
 "description":"All about exposing containers on the Docker host's network",
 "keywords":"network, host, standalone"
 }
@@ -3495,7 +3495,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/seccomp/",
-"title":"Seccomp security profiles for Docker",
+"title":"Docker 向け Seccomp セキュリティプロファイル",
 "description":"Enabling seccomp in Docker",
 "keywords":"seccomp, security, docker, documentation"
 }
@@ -4055,7 +4055,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/trust/trust_sandbox/",
-"title":"Play in a content trust sandbox",
+"title":"コンテントトラストのサンドボックスで遊ぶ",
 "description":"Play in a trust sandbox",
 "keywords":"trust, security, root,  keys, repository, sandbox"
 }
