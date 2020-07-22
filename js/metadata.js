@@ -1381,7 +1381,7 @@ var pages = [
 ,
 {
 "url":"/config/containers/logging/dual-logging/",
-"title":"Use docker logs to read container logs for remote logging drivers",
+"title":"リモートログドライバーに対する docker logs の利用",
 "description":"Learn how to read container logs locally when using a third party logging solution.",
 "keywords":"docker, logging, driver"
 }
@@ -2137,8 +2137,8 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/inspect-service/",
-"title":"Inspect a service on the swarm",
-"description":"Inspect the application",
+"title":"Swarm 上のサービスの確認",
+"description":"アプリケーションを確認します。",
 "keywords":"tutorial, cluster management, swarm mode"
 }
 ,

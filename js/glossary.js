@@ -207,7 +207,7 @@ var glossary = [
 
 {
 "term": "<a class=\"glossary\" name=\"task\">task</a>",
-"def": "<p>A <a href=\"/engine/swarm/how-swarm-mode-works/services/#/tasks-and-scheduling\">task</a> is the\natomic unit of scheduling within a swarm. A task carries a Docker container and\nthe commands to run inside the container. Manager nodes assign tasks to worker\nnodes according to the number of replicas set in the service scale.</p>\n\n<p>The diagram below illustrates the relationship of services to tasks and\ncontainers.</p>\n\n<p><img src=\"/engine/swarm/images/services-diagram.png\" alt=\"services diagram\" /></p>\n"
+"def": "<p><a href=\"/engine/swarm/how-swarm-mode-works/services/#/tasks-and-scheduling\">タスク</a>（task）は Swarm 内でのスケジューリングの最小単位を表わします。\nタスクは、Docker コンテナー、およびその内部での実行コマンドを運ぶものです。\nマネージャーノードが、サービスのスケール値として設定されたレプリカ数に応じて、ワーカーノードに対してタスクを割り当てます。</p>\n\n<p>以下の図は、サービスとタスク、コンテナーの関係を示すものです。</p>\n\n<p><img src=\"/engine/swarm/images/services-diagram.png\" alt=\"services diagram\" /></p>\n"
 },
 
 {
