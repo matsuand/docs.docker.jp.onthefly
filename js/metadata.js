@@ -2158,8 +2158,8 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/install/",
-"title":"Docker Desktop on Mac のインストール",
-"description":"Docker Desktop on Mac のインストール方法。",
+"title":"Docker Desktop の Mac へのインストール",
+"description":"Docker Desktop の Mac へのインストール方法を説明します。",
 "keywords":"mac, install, download, run, docker, local"
 }
 ,
@@ -2284,14 +2284,14 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/kubernetes/",
-"title":"Deploy on Kubernetes",
+"title":"Kubernetes へのデプロイ",
 "description":"Deploying to Kubernetes on Docker Desktop for Mac",
 "keywords":"mac, edge, kubernetes, kubectl, orchestration"
 }
 ,
 {
 "url":"/docker-for-windows/kubernetes/",
-"title":"Deploy on Kubernetes",
+"title":"Kubernetes へのデプロイ",
 "description":"Deploying to Kubernetes on Docker Desktop for Windows",
 "keywords":"windows, edge, kubernetes, kubectl, orchestration"
 }
