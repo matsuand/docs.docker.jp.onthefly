@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-07-28 10:25:21 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-28T10:25:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Mutagen-based file synchronization"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Desktop for Mac on Edge has a new file sharing feature which performs a continuous two-way sync of files between the host and containers using Mutagen. This feature is..." />
+  <meta name="twitter:title" itemprop="title name" content="Mutagen ベースのファイル同期"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Desktop for Mac の最新版（Edge）には、新しいファイル共有機能があります。 これは Mutagen を利用して、ホスト、コンテナー間の双方向のファイル同期を持続的に実現します。 この機能は以下のようなアプリケーション開発に適しています。 ソースコードツリーが極めて膨大な場合。 ソースコードを Mac 上において編集する場合。 ソースコードのコンパイルと実行を Linux コンテナー内において対話的に行う場合。 このページでは、ホスト、コンテナー間において Mutagen 機能がどのようにしてファイル共有を行うのか、その例を示します。 またパフォーマンスを最大にするベストプラクティスも示します。 重要 同期処理を行った後に、同期ディレクトリを利用する予定のコンテナーは、いったん削除してから再生成する必要があります。 単純な React アプリ 以下に示す例は npx を利用して単純な React アプリを起動し、Docker..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-28T10:25:21+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="mac, mutagen, volumes, file sync,">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Mutagen-based file synchronization | Docker ドキュメント</title>
-  <meta property="og:title" content="Mutagen-based file synchronization" />
+  <title>Mutagen ベースのファイル同期 | Docker ドキュメント</title>
+  <meta property="og:title" content="Mutagen ベースのファイル同期" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="High-performance two-way file sync for volume mounts" />
   <meta property="og:description" content="High-performance two-way file sync for volume mounts" />
   <link rel="canonical" href="/docker-for-mac/mutagen/" />
   <meta property="og:url" content="https://docs.docker.com/docker-for-mac/mutagen/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Mutagen-based file synchronization","description":"High-performance two-way file sync for volume mounts","url":"https://docs.docker.com/docker-for-mac/mutagen/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Mutagen ベースのファイル同期","description":"High-performance two-way file sync for volume mounts","url":"https://docs.docker.com/docker-for-mac/mutagen/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,69 +147,68 @@
                         <section class="section">
                             
                             
-                            <h1>Mutagen-based file synchronization</h1> 
+                            <h1>Mutagen ベースのファイル同期</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    2 分
   
 </span>
 
                             
-                            <p>Docker Desktop for Mac on Edge has a new file sharing feature which performs
-a continuous two-way sync of files between the host and containers using
-<a href="https://mutagen.io/">Mutagen</a>. This feature is ideal for app development where:</p>
+                            
+<p>Docker Desktop for Mac の最新版（Edge）には、新しいファイル共有機能があります。
+これは <a href="https://mutagen.io/">Mutagen</a> を利用して、ホスト、コンテナー間の双方向のファイル同期を持続的に実現します。
+この機能は以下のようなアプリケーション開発に適しています。</p>
 
 <ul>
-  <li>the source code tree is quite large</li>
-  <li>the source is edited on Mac</li>
-  <li>the source is compiled and run interactively inside Linux containers.</li>
+  <li>ソースコードツリーが極めて膨大な場合。</li>
+  <li>ソースコードを Mac 上において編集する場合。</li>
+  <li>ソースコードのコンパイルと実行を Linux コンテナー内において対話的に行う場合。</li>
 </ul>
 
-<p>This page contains an example to show how the Mutagen feature should be used to sync files between the host and containers. It also gives some best practices to maximize performance.</p>
+<p>このページでは、ホスト、コンテナー間において Mutagen 機能がどのようにしてファイル共有を行うのか、その例を示します。
+またパフォーマンスを最大にするベストプラクティスも示します。</p>
 
 <blockquote>
-  <p><strong>Important</strong></p>
+  <p><strong>重要</strong></p>
 
-  <p>After completing the synchronizing process, you must delete and re-create any
-containers which will make use of the synchronized directories.</p>
+  <p>同期処理を行った後に、同期ディレクトリを利用する予定のコンテナーは、いったん削除してから再生成する必要があります。</p>
 </blockquote>
 
-<h2 id="a-simple-react-app">A simple React app</h2>
+<h2 id="a-simple-react-app">単純な React アプリ</h2>
 
-<p>The following example bootstraps a simple React app with <code class="highlighter-rouge">npx</code> and configures
-Docker Desktop to sync the source code between the host and a
-development container.</p>
+<p>以下に示す例は <code class="highlighter-rouge">npx</code> を利用して単純な React アプリを起動し、Docker Desktop の設定として、ホストと開発コンテナー間においてソースコードを同期します。</p>
 
-<p>First, create a directory which will contain the app:</p>
+<p>まずアプリを収めるディレクトリを生成します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir ~/workspace/my-app
 </code></pre></div></div>
 
-<p>Next, enable the two-way file sync feature in Docker Desktop:</p>
+<p>次に Docker Desktop において、双方向のファイル同期機能を有効にします。</p>
 
 <ol>
   <li>
-    <p>From the Docker Desktop menu, click <strong>Preferences</strong> &gt; <strong>Resources</strong> &gt; <strong>File sharing</strong>.</p>
+    <p>Docker Desktop メニューから <strong>Preferences</strong> &gt; <strong>Resources</strong> &gt; <strong>File sharing</strong> をクリックします。</p>
   </li>
   <li>
-    <p>Type the new directory name in the bottom of the list and press the enter key.</p>
+    <p>一覧の下の欄に、上で生成したディレクトリを入力し、ENTER キーを押します。</p>
   </li>
   <li>
-    <p>Click on the toggle next to the directory name.</p>
+    <p>ディレクトリ名の横にあるトグルボタンをクリックします。</p>
   </li>
   <li>
-    <p>Click <strong>Apply &amp; Restart</strong> for the changes to take effect.</p>
+    <p>編集結果を有効にするために <strong>Apply &amp; Restart</strong> をクリックします。</p>
   </li>
 </ol>
 
-<p>When Docker Desktop has restarted, the <strong>File sharing</strong> page looks like
-this:</p>
+<p>Docker Desktop が再起動したら <strong>File sharing</strong> ページは以下のようになります。</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-for-mac/images/mac-mutagen-ready.png" alt="Caching with mutagen is &quot;Ready&quot;" /></p>
+<p><img src="/docs.docker.jp.onthefly/docker-for-mac/images/mac-mutagen-ready.png" alt="Mutagen のキャッシュが「有効」" /></p>
 
-<p>Run the following command to start a container and bootstrap the app with <code class="highlighter-rouge">npx</code>:</p>
+<p>以下のコマンドを実行してコンテナーを起動します。
+そして <code class="highlighter-rouge">npx</code> を使ったアプリを起動します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">-v</span> ~/workspace/my-app:/my-app <span class="nt">-w</span> /my-app <span class="nt">-p</span> 3000:3000 node:lts bash
 root@95441305251a:/my-app# npx create-react-app app
@@ -217,89 +216,84 @@ root@95441305251a:/my-app# <span class="nb">cd </span>app
 root@95441305251a:/my-app# npm start
 </code></pre></div></div>
 
-<p>Once the development webserver has started, open <a href="https://localhost:3000/">https://localhost:3000/</a> in
-your browser and observe the app is running.</p>
+<p>開発用のウェブサーバーが起動したら、ブラウザーから <a href="https://localhost:3000/">https://localhost:3000/</a> を開いて、アプリが起動していることを確認します。</p>
 
-<p>Return to the <strong>File sharing</strong> page in the UI and observe the status of the
-synchronize toggle located next to the directory name. The status will be
-updated as file changes are detected and then synchronized between the host
-and the containers.</p>
+<p><strong>File sharing</strong> ページに戻って、ディレクトリ名の横にある、ファイル同期に関するトグルボタンの状態を見てください。
+ファイルの変更が検出されて、ホスト、コンテナー間のファイル同期が行われると、ボタンの状態が更新されます。</p>
 
-<p>Wait until the text says <strong>Ready</strong> and then open the source code in your IDE on
-the host. Edit the file <code class="highlighter-rouge">src/App.js</code>, save the changes and observe the change
-on the webserver.</p>
+<p>表示されるテキストが <strong>Ready</strong> になるまで待ちます。
+この表示になったら、ホスト上の IDE 環境からソースコードを開いてみます。
+<code class="highlighter-rouge">src/App.js</code> というファイルを編集して、変更内容を保存します。
+ウェブサーバー上から変更が反映されていることを確認します。</p>
 
-<p>As you edit code on the host, the changes are detected and transferred to the
-container for testing. Changes inside the container (for example, the creation of build artifacts) are detected and transferred back to the host.</p>
+<p>ホスト上のコードを編集したので、この変更が検出されて、確認を行っているコンテナーに向けてファイルが転送されます。
+同じくコンテナー内部でのファイル変更（たとえばビルド成果物の生成）を行うと、これが検出されて、ホスト側に逆に転送されます。</p>
 
-<h2 id="adding-synchronized-directories-through-the-cli">Adding synchronized directories through the CLI</h2>
+<h2 id="adding-synchronized-directories-through-the-cli">CLI を用いた同期ディレクトリの追加</h2>
 
-<p>As of Docker Desktop Edge 2.3.2.0 the <code class="highlighter-rouge">:delegated</code> flag on a shared volume will
-automatically enable synchronization. This is particularly useful if you want to share
-the synchronization setting with other developers in your team, through your source code.</p>
+<p>Docker Desktop の最新版（Edge）2.3.2.0 においては、共有ボリュームに対して <code class="highlighter-rouge">:delegated</code> フラグというものがあり、これを使うとファイル同期が自動的に有効となります。
+開発チーム内において他の開発者とソースコードを共有して、ファイル同期を行いたいような場合に活用できます。</p>
 
-<h2 id="scripting">Scripting</h2>
+<h2 id="scripting">スクリプト処理</h2>
 
-<p>Many projects have scripts which modify files in a container and then read them back on
-the host, or the other way around. To support these, Docker Desktop automatically flushes
-file changes around <code class="highlighter-rouge">docker run</code> calls. Therefore, the following will work as expected:</p>
+<p>開発プロジェクトにおいては、コンテナー内のファイルを修正し、これをホスト側に戻すような処理を、スクリプト化している場合を多く見かけます。
+あるいはこういったことを、いろいろな方法で実現する場合があります。
+こういったことをサポートするために、Docker Desktop には <code class="highlighter-rouge">docker run</code> 実行の際に、自動的にファイル変更を反映させる機能があります。
+以下のコマンドは、これを実現するものです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-v</span> ~/foo:/foo:delegated touch /foo/new-file-in-container
 stat ~/foo/new-file-in-container
 </code></pre></div></div>
 
-<p>and</p>
+<p>さらに以下を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch ~/foo/new-file-on-host
 docker run <span class="nt">-v</span> ~/foo:/foo:delegated stat /foo/new-file-on-host
 </code></pre></div></div>
 
-<p>Note that changes are not flushed around <code class="highlighter-rouge">docker exec</code> calls, so this will not work as
-expected:</p>
+<p><code class="highlighter-rouge">docker exec</code> の実行の際には、こういった変更は反映されません。
+したがって以下を行ったとしても、思ったようには動作しません。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec </span>existing-container touch /foo/new-file-from-existing-container
-stat ~/foo/new-file-from-existing-container <span class="c"># file will not be found</span>
+stat ~/foo/new-file-from-existing-container <span class="c"># ファイルは見つかりません</span>
 </code></pre></div></div>
 
-<h2 id="bypassing-a-two-way-sync-for-a-volume">Bypassing a two-way sync for a volume</h2>
+<h2 id="ボリュームにおける双方向同期の停止">ボリュームにおける双方向同期の停止</h2>
 
-<p>By default, if a directory has two-way sync enabled, then shared volumes will use the
-sync. However, if you want to <em>avoid</em> using a two-way file synchronization, use
-<code class="highlighter-rouge">:consistent</code>: this will bypass both file caching and the two-way sync. This is
-backwards compatible with previous Docker versions.</p>
+<p>ディレクトリが双方向の同期を有効にしている場合、デフォルトでは共有ボリュームはその同期機能を利用します。
+もし双方向のファイル同期を <strong>行いたくない</strong> 場合は、<code class="highlighter-rouge">:consistent</code> を利用します。
+これによってファイルのキャッシングと双方向の同期が行われなくなります。
+これは従前の Docker バージョンとの下位互換性のためのものです。</p>
 
-<h2 id="avoiding-synchronizing-a-subdirectory-from-a-container-to-the-host">Avoiding synchronizing a subdirectory from a container to the host</h2>
+<h2 id="avoiding-synchronizing-a-subdirectory-from-a-container-to-the-host">コンテナーからホストに向けてのサブディレクトリ同期の防止</h2>
 
-<p>Although two-way file sync is suitable for many types of files, sometimes containers can
-generate lots of data which doesn’t require copying to the host, for example, debug logs.</p>
+<p>双方向のファイル同期は、ほとんどの種類のファイルにおいて有用な機能です。
+しかしホストにコピーする必要のない大量のデータを、コンテナーが作り出してしまうこともあります。
+たとえばデバッグログです。</p>
 
-<p>If your project has a subdirectory that doesn’t need to be continuously copied back to
-the host, then use a named docker volume to bypass the sync.</p>
+<p>開発プロジェクト内にサブディレクトリがあって、そのディレクトリ内のデータは、ホストに対してコピーする必要がないものである場合、名前つきボリュームを利用して同期を停止することができます。</p>
 
-<p>First create a volume using:</p>
+<p>まずボリュームを生成するため、以下のコマンドを実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create donotsyncme
 donotsyncme
 </code></pre></div></div>
 
-<p>Use the volume for the subdirectory you want to avoid syncing:</p>
+<p>このボリュームを、同期したくないサブディレクトリ用として定めます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">-v</span> ~/workspace/my-app:/my-app <span class="nt">-v</span> donotsyncme:/my-app/dontsyncme <span class="nt">-w</span> /my-app <span class="nt">-p</span> 3000:3000 node:lts bash
 </code></pre></div></div>
 
-<p>Docker Desktop will sync all changes written by the app to <code class="highlighter-rouge">/my-app</code> to
-the host, except changes written to <code class="highlighter-rouge">/my-app/dontsyncme</code> which will be written
-to the named volume instead.</p>
+<p>Docker Desktop は <code class="highlighter-rouge">/my-app</code> にて行われるアプリへの変更を、ホストに対して同期します。
+ただし <code class="highlighter-rouge">/my-app/dontsyncme</code> へ行われた変更は、名前つきボリュームに対して行われるため、同期対象から除外されます。</p>
 
-<h2 id="avoiding-synchronizing-a-subdirectory-in-both-directions">Avoiding synchronizing a subdirectory in both directions</h2>
+<h2 id="avoiding-synchronizing-a-subdirectory-in-both-directions">サブディレクトリの双方向同期の防止</h2>
 
-<p>Although the example in the previous section successfully prevents changes written in
-the container from being copied back to the host, changes written on the host will
-still be written to the container (although hidden by the <code class="highlighter-rouge">docker volume</code>).</p>
+<p>前節の例では、コンテナーに加えられた変更を、ホストにコピーしないようにする方法を示しました。
+しかしホスト側にて加えられた変更は、コンテナーに同期されます（<code class="highlighter-rouge">docker volume</code> によって隠蔽されていても行われます）。</p>
 
-<p>To completely avoid synchronization in both directions, create a
-<a href="https://mutagen.io/documentation/introduction/configuration#configuration-files">global mutagen config file</a>.
-For example, create a file <code class="highlighter-rouge">~/.mutagen.yml</code> containing:</p>
+<p>双方向のファイル同期を完全に停止させるには、<a href="https://mutagen.io/documentation/introduction/configuration#configuration-files">グローバルな Mutagen 設定ファイルe</a> を生成します。
+たとえば <code class="highlighter-rouge">~/.mutagen.yml</code> を生成し、内容を以下のようにします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sync:
   defaults:
@@ -311,39 +305,36 @@ For example, create a file <code class="highlighter-rouge">~/.mutagen.yml</code>
         - /pathN/to/ignore
 </code></pre></div></div>
 
-<h2 id="best-practices">Best practices</h2>
+<h2 id="best-practices">ベストプラクティス</h2>
 
-<p>To achieve maximum performance when you enable two-way file sync:</p>
+<p>双方向のファイル同期を有効にした場合に、パフォーマンスを最大とするために、以下を行います。</p>
 
 <ul>
   <li>
-    <p>Avoid wasting disk space and CPU by minimising the size of the synchronized
-directories. For example, synchronize a project directory like <code class="highlighter-rouge">~/my-app</code>, but
-never sync a large directory like <code class="highlighter-rouge">/Users</code> or <code class="highlighter-rouge">/Volumes</code>.</p>
+    <p>同期を行うディレクトリ容量は最小として、不要なディスク消費や CPU 利用を避けます。
+たとえば同期を行う開発プロジェクトが <code class="highlighter-rouge">~/my-app</code> にあるとすると、<code class="highlighter-rouge">/Users</code> や <code class="highlighter-rouge">/Volumes</code> といった膨大なディレクトリは同期対象としないようにします。</p>
 
-    <p>Remember that the files will be copied inside the container and therefore must fit within the
-<code class="highlighter-rouge">Docker.qcow2</code> or <code class="highlighter-rouge">Docker.raw</code> file.</p>
+    <p>同期されるファイルはコンテナー内にコピーされます。
+したがって <code class="highlighter-rouge">Docker.qcow2</code> や <code class="highlighter-rouge">Docker.raw</code> ファイルが許容するファイルサイズでなければなりません。</p>
   </li>
   <li>
-    <p>For every volume you want to sync in <code class="highlighter-rouge">docker run -v</code> or in
-<code class="highlighter-rouge">docker-compose.yml</code>, ensure either the directory itself or a
-parent/grandparent/... directory is listed in <strong>Preferences</strong> &gt; <strong>Resources</strong> &gt; <strong>File sharing</strong>.</p>
+    <p><code class="highlighter-rouge">docker run -v</code> や <code class="highlighter-rouge">docker-compose.yml</code> において同期を行うボリュームに対しては、同期ディレクトリそのもの、あるいは親ディレクトリなど上位ディレクトリが、<strong>Preferences</strong> &gt; <strong>Resources</strong> &gt; <strong>File sharing</strong> の一覧に含まれていることを確認してください。</p>
 
-    <p>Note in particular that if only a <em>child</em> directory is listed
-on the <strong>File sharing</strong> page, then the whole <code class="highlighter-rouge">docker run -v</code> may bypass the two-way sync and be slower.</p>
+    <p>特に <strong>File sharing</strong> ページにおいて、<strong>子ディレクトリ</strong> しか一覧に設定されていなかった場合、<code class="highlighter-rouge">docker run -v</code> による双方向同期の指定はすべて停止され、処理を遅くする点に注意してください。</p>
   </li>
   <li>
-    <p>Avoid changing the same files from both the host and containers. If changes
-are detected on both sides, the host takes precedence and the changes in the containers will be discarded.</p>
+    <p>同一のファイルを、ホスト、コンテナーの双方において変更することは避けます。
+両方において変更が検出された場合、ホスト側の変更が優先され、コンテナー側の変更は破棄されます。</p>
   </li>
   <li>
-    <p>After completing the caching process, you must delete and re-create any containers which will make use of the synchronized directories.</p>
+    <p>キャッシュ処理を行った後に、同期ディレクトリを利用する予定のコンテナーは、いったん削除してから再生成する必要があります。</p>
   </li>
 </ul>
 
-<h2 id="feedback">Feedback</h2>
+<h2 id="feedback">フィードバック</h2>
 
-<p>Your feedback is very important to us. Let us know your feedback by creating an issue in the <a href="https://github.com/docker/for-mac/issues">Docker Desktop for Mac GitHub</a> repository with the <strong>Mutagen</strong> label.</p>
+<p>フィードバックをいただくことは、大変ありがたいことです。
+フィードバックは <a href="https://github.com/docker/for-mac/issues">Docker Desktop for Mac の GitHub リポジトリ</a> に対して、<strong>Mutagen</strong> ラベルを使って issue としてお知らせください。</p>
 
                             <!-- tags -->
                             
@@ -362,7 +353,7 @@ are detected on both sides, the host takes precedence and the changes in the con
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "docker-for-mac/mutagen.md",
-                                        "title": "Mutagen-based file synchronization",
+                                        "title": "Mutagen ベースのファイル同期",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/docker-for-mac/mutagen.md"
                                     };
                                     (function (d, c, j) {
@@ -428,14 +419,14 @@ are detected on both sides, the host takes precedence and the changes in the con
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#a-simple-react-app" class="nomunge">A simple React app</a></li>
-  <li><a href="#adding-synchronized-directories-through-the-cli" class="nomunge">Adding synchronized directories through the CLI</a></li>
-  <li><a href="#scripting" class="nomunge">Scripting</a></li>
-  <li><a href="#bypassing-a-two-way-sync-for-a-volume" class="nomunge">Bypassing a two-way sync for a volume</a></li>
-  <li><a href="#avoiding-synchronizing-a-subdirectory-from-a-container-to-the-host" class="nomunge">Avoiding synchronizing a subdirectory from a container to the host</a></li>
-  <li><a href="#avoiding-synchronizing-a-subdirectory-in-both-directions" class="nomunge">Avoiding synchronizing a subdirectory in both directions</a></li>
-  <li><a href="#best-practices" class="nomunge">Best practices</a></li>
-  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+  <li><a href="#a-simple-react-app" class="nomunge">単純な React アプリ</a></li>
+  <li><a href="#adding-synchronized-directories-through-the-cli" class="nomunge">CLI を用いた同期ディレクトリの追加</a></li>
+  <li><a href="#scripting" class="nomunge">スクリプト処理</a></li>
+  <li><a href="#ボリュームにおける双方向同期の停止" class="nomunge">ボリュームにおける双方向同期の停止</a></li>
+  <li><a href="#avoiding-synchronizing-a-subdirectory-from-a-container-to-the-host" class="nomunge">コンテナーからホストに向けてのサブディレクトリ同期の防止</a></li>
+  <li><a href="#avoiding-synchronizing-a-subdirectory-in-both-directions" class="nomunge">サブディレクトリの双方向同期の防止</a></li>
+  <li><a href="#best-practices" class="nomunge">ベストプラクティス</a></li>
+  <li><a href="#feedback" class="nomunge">フィードバック</a></li>
 </ul>
 
 
