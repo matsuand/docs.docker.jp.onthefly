@@ -1290,7 +1290,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/docker-toolbox/",
-"title":"Docker Desktop on Mac vs. Docker Toolbox",
+"title":"Docker Desktop on Mac と Docker Toolbox",
 "description":"Docker Desktop on Mac and Docker Toolbox",
 "keywords":"mac, windows, alpha, beta, toolbox, docker-machine, tutorial"
 }
@@ -2529,7 +2529,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/multi-arch/",
-"title":"Leverage multi-CPU architecture support",
+"title":"マルチ CPU アーキテクチャー対応の活用",
 "description":"Multi-CPU Architecture Support",
 "keywords":"mac, Multi-CPU architecture support"
 }
@@ -2550,7 +2550,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/mutagen/",
-"title":"Mutagen-based file synchronization",
+"title":"Mutagen ベースのファイル同期",
 "description":"High-performance two-way file sync for volume mounts",
 "keywords":"mac, mutagen, volumes, file sync,"
 }
@@ -2844,21 +2844,21 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/osxfs-caching/",
-"title":"Performance tuning for volume mounts (shared filesystems)",
+"title":"ボリュームマウント（共有ファイルシステム）におけるパフォーマンスチューニング",
 "description":"Osxfs caching",
 "keywords":"mac, osxfs, volumes"
 }
 ,
 {
 "url":"/docker-for-mac/osxfs/",
-"title":"File system sharing (osxfs)",
+"title":"ファイルシステム共有（osxfs）",
 "description":"Osxfs",
 "keywords":"mac, osxfs"
 }
 ,
 {
 "url":"/network/overlay/",
-"title":"Use overlay networks",
+"title":"オーバーレイネットワークの利用",
 "description":"All about using overlay networks",
 "keywords":"network, overlay, user-defined, swarm, service"
 }
