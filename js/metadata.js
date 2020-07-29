@@ -1213,7 +1213,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/delete-service/",
-"title":"Delete the service running on the swarm",
+"title":"Swarm 上で稼動するサービスの削除",
 "description":"Remove the service from the swarm",
 "keywords":"tutorial, cluster management, swarm, service"
 }
@@ -1395,7 +1395,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/edge-release-notes/",
-"title":"Docker Desktop for Mac Edge release notes",
+"title":"Docker Desktop for Mac 最新版リリースノート",
 "description":"Change log / release notes per Edge release",
 "keywords":"Docker Desktop for Mac, edge, release notes"
 }
@@ -2767,7 +2767,7 @@ var pages = [
 ,
 {
 "url":"/engine/security/non-events/",
-"title":"Docker security non-events",
+"title":"Docker セキュリティ（重要性低い）",
 "description":"Review of security vulnerabilities Docker mitigated",
 "keywords":"Docker, Docker documentation,  security, security non-events"
 }
@@ -3369,7 +3369,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/rolling-update/",
-"title":"Apply rolling updates to a service",
+"title":"サービスへのローリングアップデートの適用",
 "description":"Apply rolling updates to a service on the swarm",
 "keywords":"tutorial, cluster management, swarm, service, rolling-update"
 }
@@ -3460,7 +3460,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/scale-service/",
-"title":"Scale the service in the swarm",
+"title":"Swarm 内サービスのスケール変更",
 "description":"Scale the service running in the swarm",
 "keywords":"tutorial, cluster management, swarm mode, scale"
 }
