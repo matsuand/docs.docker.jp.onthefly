@@ -1374,7 +1374,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-tutorial/drain-node/",
-"title":"Drain a node on the swarm",
+"title":"Swarm ノードの解放",
 "description":"Drain nodes on the swarm",
 "keywords":"tutorial, cluster management, swarm, service, drain"
 }
@@ -2116,7 +2116,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/ingress/",
-"title":"Use swarm mode routing mesh",
+"title":"Swarm モードのルーティングメッシュの利用",
 "description":"Use the routing mesh to publish services externally to a swarm",
 "keywords":"guide, swarm mode, swarm, network, ingress, routing mesh"
 }
@@ -4343,7 +4343,7 @@ var pages = [
 {
 "url":"/engine/context/working-with-contexts/",
 "title":"Docker Context",
-"description":"Learn about Docker Context",
+"description":"Docker コンテキストについて学びます。",
 "keywords":"engine, context, cli, kubernetes"
 }
 ,

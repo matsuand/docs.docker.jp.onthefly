@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-07-30 21:48:04 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-30T21:48:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Drain a node on the swarm"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="In earlier steps of the tutorial, all the nodes have been running with ACTIVE availability. The swarm manager can assign tasks to any ACTIVE node, so up to now all..." />
+  <meta name="twitter:title" itemprop="title name" content="Swarm ノードの解放"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="このチュートリアルの初めの方では、実行されているノードの利用状態（availability）は ACTIVE になっていました。 Swarm マネージャーは ACTIVE なノードであるからこそ、タスクを割り振ることができます。 ここまでのところは、ノードがすべて利用可能であったから、タスクを受け取ることができたわけです。 たとえば定期メンテナンスの時などでは、ノードの利用状態を DRAIN、つまり解放状態にしておくことが必要な場合があります。 DRAIN という状態にあるノードは Swarm マネージャーから、新たなタスクを受け取ることができません。 またそのノード上に実行されていたタスクは、マネージャーによって停止され、ACTIVE 状態にある別のノードに複製タスクが割り振られます。 重要: スタンドアロンコンテナーは docker run、docker-compose up、あるいは Docker Engine API を使って生成されますが、ノードの状態を DRAIN にするということは、そのノードからスタンドアロンコンテナーを削除するという意味ではありません。 DRAIN も含めてノードの状態というものは、Swarm サービスによる処理スケジューリングにあたり、ノードの利用能力の有無を決めるものでしかありません。..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-30T21:48:04+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="tutorial, cluster management, swarm, service, drain">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Drain a node on the swarm | Docker ドキュメント</title>
-  <meta property="og:title" content="Drain a node on the swarm" />
+  <title>Swarm ノードの解放 | Docker ドキュメント</title>
+  <meta property="og:title" content="Swarm ノードの解放" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Drain nodes on the swarm" />
   <meta property="og:description" content="Drain nodes on the swarm" />
   <link rel="canonical" href="/engine/swarm/swarm-tutorial/drain-node/" />
   <meta property="og:url" content="https://docs.docker.com/engine/swarm/swarm-tutorial/drain-node/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Drain a node on the swarm","description":"Drain nodes on the swarm","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/drain-node/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm ノードの解放","description":"Drain nodes on the swarm","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/drain-node/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,40 +147,38 @@
                         <section class="section">
                             
                             
-                            <h1>Drain a node on the swarm</h1> 
+                            <h1>Swarm ノードの解放</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    2 分
   
 </span>
 
                             
-                            <p>In earlier steps of the tutorial, all the nodes have been running with <code class="highlighter-rouge">ACTIVE</code>
-availability. The swarm manager can assign tasks to any <code class="highlighter-rouge">ACTIVE</code> node, so up to
-now all nodes have been available to receive tasks.</p>
+                            
+<p>このチュートリアルの初めの方では、実行されているノードの利用状態（availability）は <code class="highlighter-rouge">ACTIVE</code> になっていました。
+Swarm マネージャーは <code class="highlighter-rouge">ACTIVE</code> なノードであるからこそ、タスクを割り振ることができます。
+ここまでのところは、ノードがすべて利用可能であったから、タスクを受け取ることができたわけです。</p>
 
-<p>Sometimes, such as planned maintenance times, you need to set a node to <code class="highlighter-rouge">DRAIN</code>
-availability. <code class="highlighter-rouge">DRAIN</code> availability  prevents a node from receiving new tasks
-from the swarm manager. It also means the manager stops tasks running on the
-node and launches replica tasks on a node with <code class="highlighter-rouge">ACTIVE</code> availability.</p>
+<p>たとえば定期メンテナンスの時などでは、ノードの利用状態を <code class="highlighter-rouge">DRAIN</code>、つまり解放状態にしておくことが必要な場合があります。
+<code class="highlighter-rouge">DRAIN</code> という状態にあるノードは Swarm マネージャーから、新たなタスクを受け取ることができません。
+またそのノード上に実行されていたタスクは、マネージャーによって停止され、<code class="highlighter-rouge">ACTIVE</code> 状態にある別のノードに複製タスクが割り振られます。</p>
 
 <blockquote class="important">
-  <p><strong>Important</strong>: Setting a node to <code class="highlighter-rouge">DRAIN</code> does not remove standalone containers from that node,
-such as those created with <code class="highlighter-rouge">docker run</code>, <code class="highlighter-rouge">docker-compose up</code>, or the Docker Engine
-API. A node’s status, including <code class="highlighter-rouge">DRAIN</code>, only affects the node’s ability to schedule
-swarm service workloads.</p>
+  <p><strong>重要</strong>: スタンドアロンコンテナーは <code class="highlighter-rouge">docker run</code>、<code class="highlighter-rouge">docker-compose up</code>、あるいは Docker Engine API を使って生成されますが、ノードの状態を <code class="highlighter-rouge">DRAIN</code> にするということは、そのノードからスタンドアロンコンテナーを削除するという意味ではありません。
+<code class="highlighter-rouge">DRAIN</code> も含めてノードの状態というものは、Swarm サービスによる処理スケジューリングにあたり、ノードの利用能力の有無を決めるものでしかありません。</p>
 </blockquote>
 
 <ol>
   <li>
-    <p>If you haven’t already, open a terminal and ssh into the machine where you
-run your manager node. For example, the tutorial uses a machine named
-<code class="highlighter-rouge">manager1</code>.</p>
+    <p>マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
+接続先はマネージャーノードを起動したマシンです。
+たとえばこのチュートリアルでは <code class="highlighter-rouge">manager1</code> というマシンを利用します。</p>
   </li>
   <li>
-    <p>Verify that all your nodes are actively available.</p>
+    <p>ノードがすべてアクティブであって利用可能であることを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node <span class="nb">ls
 
@@ -191,8 +189,7 @@ e216jshn25ckzbvmwlnh5jr3g <span class="k">*</span>  manager1  Ready   Active    
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>If you aren’t still running the <code class="highlighter-rouge">redis</code> service from the
-<a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/rolling-update/">rolling update</a> tutorial, start it now:</p>
+    <p>チュートリアルの <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/rolling-update/">ローリングアップデート</a> における <code class="highlighter-rouge">redis</code> を停止してしまっている場合は、ここで起動します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--replicas</span> 3 <span class="nt">--name</span> redis <span class="nt">--update-delay</span> 10s redis:3.0.6
 
@@ -200,8 +197,7 @@ c5uo6kdmzpon37mgj9mwglcfw
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Run <code class="highlighter-rouge">docker service ps redis</code> to see how the swarm manager assigned the
-tasks to different nodes:</p>
+    <p><code class="highlighter-rouge">docker service ps redis</code> を実行して、Swarm マネージャーがさまざまなノードに対して、タスクを割り当てている様子を確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps redis
 
@@ -211,12 +207,11 @@ redis.2.7h2l8h3q3wqy5f66hlv9ddmi6  redis:3.0.6  worker1  Running        Running 
 redis.3.9bg7cezvedmkgg6c8yzvbhwsd  redis:3.0.6  worker2  Running        Running 26 seconds
 </code></pre></div>    </div>
 
-    <p>In this case the swarm manager distributed one task to each node. You may
-see the tasks distributed differently among the nodes in your environment.</p>
+    <p>この例では、Swarm マネージャーが 1 つのタスクを各ノードに分散しています。
+実行環境によっては、複数ノード間でのタスク分散の仕方が異なっているかもしれません。</p>
   </li>
   <li>
-    <p>Run <code class="highlighter-rouge">docker node update --availability drain &lt;NODE-ID&gt;</code> to drain a node that
-had a task assigned to it:</p>
+    <p><code class="highlighter-rouge">docker node update --availability drain &lt;ノードID&gt;</code> を実行して、1 つのタスクが割り当てられているノードを解放（drain）します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node update <span class="nt">--availability</span> drain worker1
 
@@ -224,7 +219,7 @@ worker1
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Inspect the node to check its availability:</p>
+    <p>ノードが利用可能であるか（availability）を確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node inspect <span class="nt">--pretty</span> worker1
 
@@ -236,11 +231,10 @@ Status:
 ...snip...
 </code></pre></div>    </div>
 
-    <p>The drained node shows <code class="highlighter-rouge">Drain</code> for <code class="highlighter-rouge">AVAILABILITY</code>.</p>
+    <p>解放したノードの <code class="highlighter-rouge">AVAILABILITY</code> は <code class="highlighter-rouge">Drain</code> と示されています。</p>
   </li>
   <li>
-    <p>Run <code class="highlighter-rouge">docker service ps redis</code> to see how the swarm manager updated the
-task assignments for the <code class="highlighter-rouge">redis</code> service:</p>
+    <p><code class="highlighter-rouge">docker service ps redis</code> を実行して、Swarm マネージャーが <code class="highlighter-rouge">redis</code> サービスに対して、どのようにタスク割り当てを更新しているかを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps redis
 
@@ -251,13 +245,10 @@ redis.2.b4hovzed7id8irg1to42egue8       redis:3.0.6  worker2   Running        Ru
 redis.3.9bg7cezvedmkgg6c8yzvbhwsd       redis:3.0.6  worker2   Running        Running 4 minutes
 </code></pre></div>    </div>
 
-    <p>The swarm manager maintains the desired state by ending the task on a node
-with <code class="highlighter-rouge">Drain</code> availability and creating a new task on a node with <code class="highlighter-rouge">Active</code>
-availability.</p>
+    <p>Swarm マネージャーは求められる状態を維持するために、<code class="highlighter-rouge">Drain</code> 状態にあるノード上のタスクを終了させ、<code class="highlighter-rouge">Active</code> 状態にあるノード上に新たなタスクを生成します。</p>
   </li>
   <li>
-    <p>Run  <code class="highlighter-rouge">docker node update --availability active &lt;NODE-ID&gt;</code> to return the
-drained node to an active state:</p>
+    <p><code class="highlighter-rouge">docker node update --availability active &lt;ノードID&gt;</code> を実行すれば、解放状態にあったノードをアクティブ状態に戻すことができます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node update <span class="nt">--availability</span> active worker1
 
@@ -265,7 +256,7 @@ worker1
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Inspect the node to see the updated state:</p>
+    <p>ノードの状態が更新されていることを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node inspect <span class="nt">--pretty</span> worker1
 
@@ -277,20 +268,20 @@ Status:
 ...snip...
 </code></pre></div>    </div>
 
-    <p>When you set the node back to <code class="highlighter-rouge">Active</code> availability, it can receive new tasks:</p>
+    <p>ノードの状態を <code class="highlighter-rouge">Active</code> に戻した場合、新たなタスクを受け取るようになるのは、以下のときです。</p>
 
     <ul>
-      <li>during a service update to scale up</li>
-      <li>during a rolling update</li>
-      <li>when you set another node to <code class="highlighter-rouge">Drain</code> availability</li>
-      <li>when a task fails on another active node</li>
+      <li>サービスがスケールアップするために更新されたとき。</li>
+      <li>ローリングアップデートのとき。</li>
+      <li>別のノードの状態を <code class="highlighter-rouge">Drain</code> にしたとき。</li>
+      <li>別のアクティブなノードにおいてタスクが失敗したとき。</li>
     </ul>
   </li>
 </ol>
 
-<h2 id="whats-next">What’s next?</h2>
+<h2 id="whats-next">次にすることは</h2>
 
-<p>Learn how to <a href="/docs.docker.jp.onthefly/engine/swarm/ingress/">use a swarm mode routing mesh</a>.</p>
+<p><a href="/docs.docker.jp.onthefly/engine/swarm/ingress/">Swarm モードでのルーティングメッシュの利用</a> について学びます。</p>
 
                             <!-- tags -->
                             
@@ -310,7 +301,7 @@ Status:
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/swarm/swarm-tutorial/drain-node.md",
-                                        "title": "Drain a node on the swarm",
+                                        "title": "Swarm ノードの解放",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/swarm-tutorial/drain-node.md"
                                     };
                                     (function (d, c, j) {

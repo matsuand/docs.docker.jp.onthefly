@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-07-30 21:48:04 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-30T21:48:04+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Apply rolling updates to a service"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="In a previous step of the tutorial, you scaled the number of instances of a service. In this part of the tutorial, you deploy a service based on the Redis..." />
+  <meta name="twitter:title" itemprop="title name" content="サービスへのローリングアップデートの適用"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="チュートリアルの前の手順では、サービスのインスタンス数を スケール変更 しました。 ここでは Redis 3.0.6 というタグをつけたコンテナーを使って、サービスのデプロイを行います。 そしてこのサービスが Redis 3.0.7 というコンテナーイメージを用いるように、ローリングアップデートを使ってサービスをアップグレードします。 マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。 接続先はマネージャーノードを起動したマシンです。 たとえばこのチュートリアルでは manager1 というマシンを利用します。 Regis タグを Swarm にデプロイします。 そして Swarm に対して、アップデートの待機時間（update delay）を 10 秒に設定します。 なお以下の例は、古い方の Redis..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-30T21:48:04+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="tutorial, cluster management, swarm, service, rolling-update">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Apply rolling updates to a service | Docker ドキュメント</title>
-  <meta property="og:title" content="Apply rolling updates to a service" />
+  <title>サービスへのローリングアップデートの適用 | Docker ドキュメント</title>
+  <meta property="og:title" content="サービスへのローリングアップデートの適用" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Apply rolling updates to a service on the swarm" />
   <meta property="og:description" content="Apply rolling updates to a service on the swarm" />
   <link rel="canonical" href="/engine/swarm/swarm-tutorial/rolling-update/" />
   <meta property="og:url" content="https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Apply rolling updates to a service","description":"Apply rolling updates to a service on the swarm","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"サービスへのローリングアップデートの適用","description":"Apply rolling updates to a service on the swarm","url":"https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,30 +147,31 @@
                         <section class="section">
                             
                             
-                            <h1>Apply rolling updates to a service</h1> 
+                            <h1>サービスへのローリングアップデートの適用</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    2 分
   
 </span>
 
                             
-                            <p>In a previous step of the tutorial, you <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/scale-service/">scaled</a> the number of
-instances of a service. In this part of the tutorial, you deploy a service based
-on the Redis 3.0.6 container tag. Then you upgrade the service to use the
-Redis 3.0.7 container image using rolling updates.</p>
+                            
+<p>チュートリアルの前の手順では、サービスのインスタンス数を <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/scale-service/">スケール変更</a> しました。
+ここでは Redis 3.0.6 というタグをつけたコンテナーを使って、サービスのデプロイを行います。
+そしてこのサービスが Redis 3.0.7 というコンテナーイメージを用いるように、ローリングアップデートを使ってサービスをアップグレードします。</p>
 
 <ol>
   <li>
-    <p>If you haven’t already, open a terminal and ssh into the machine where you
-run your manager node. For example, the tutorial uses a machine named
-<code class="highlighter-rouge">manager1</code>.</p>
+    <p>マシンへの接続ができていなければ、端末画面を開いて SSH により接続します。
+接続先はマネージャーノードを起動したマシンです。
+たとえばこのチュートリアルでは <code class="highlighter-rouge">manager1</code> というマシンを利用します。</p>
   </li>
   <li>
-    <p>Deploy your Redis tag to the swarm and configure the swarm with a 10 second
-update delay. Note that the following example shows an older Redis tag:</p>
+    <p>Regis タグを Swarm にデプロイします。
+そして Swarm に対して、アップデートの待機時間（update delay）を 10 秒に設定します。
+なお以下の例は、古い方の Redis タグを使っています。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
   <span class="nt">--replicas</span> 3 <span class="se">\</span>
@@ -181,26 +182,22 @@ update delay. Note that the following example shows an older Redis tag:</p>
 0u6a4s31ybk7yw2wyvtikmu50
 </code></pre></div>    </div>
 
-    <p>You configure the rolling update policy at service deployment time.</p>
+    <p>上のコマンドにより、サービスデプロイ時のローリングアップデートポリシーを設定したことになります。</p>
 
-    <p>The <code class="highlighter-rouge">--update-delay</code> flag configures the time delay between updates to a
-service task or sets of tasks. You can describe the time <code class="highlighter-rouge">T</code> as a
-combination of the number of seconds <code class="highlighter-rouge">Ts</code>, minutes <code class="highlighter-rouge">Tm</code>, or hours <code class="highlighter-rouge">Th</code>. So
-<code class="highlighter-rouge">10m30s</code> indicates a 10 minute 30 second delay.</p>
+    <p><code class="highlighter-rouge">--update-delay</code> フラグは、サービスの 1 つあるいは複数のタスクに対して、アップデートの待機時間を設定するものです。
+数値を <code class="highlighter-rouge">T</code> として、<code class="highlighter-rouge">Ts</code> は秒、<code class="highlighter-rouge">Tm</code> は分、<code class="highlighter-rouge">Th</code> は時間を表現します。
+そこでたとえば <code class="highlighter-rouge">10m30s</code> は 10 分 30 秒の遅延を表現します。</p>
 
-    <p>By default the scheduler updates 1 task at a time. You can pass the
-<code class="highlighter-rouge">--update-parallelism</code> flag to configure the maximum number of service tasks
-that the scheduler updates simultaneously.</p>
+    <p>デフォルトにおいてスケジューラーは、一度に 1 つのタスクをアップデートします。
+<code class="highlighter-rouge">--update-parallelism</code> フラグを指定すれば、スケジューラーが同時にアップデート可能なサービスタスクの最大数を設定することができます。</p>
 
-    <p>By default, when an update to an individual task returns a state of
-<code class="highlighter-rouge">RUNNING</code>, the scheduler schedules another task to update until all tasks
-are updated. If, at any time during an update a task returns <code class="highlighter-rouge">FAILED</code>, the
-scheduler pauses the update. You can control the behavior using the
-<code class="highlighter-rouge">--update-failure-action</code> flag for <code class="highlighter-rouge">docker service create</code> or
-<code class="highlighter-rouge">docker service update</code>.</p>
+    <p>ある 1 つのタスクに対するアップデート処理の結果として <code class="highlighter-rouge">RUNNING</code> という状態が返ってきたとします。
+デフォルトでスケジューラーは、その場合、別のタスクを処理するようにし、最終的にタスクすべてのアップデートが完了するようにスケジュールされます。
+アップデートのどういうタイミングであっても、タスクが <code class="highlighter-rouge">FAILED</code> を返してきたら、スケジューラーはアップデート処理を中断します。
+この動きに対しては、<code class="highlighter-rouge">docker service create</code> や <code class="highlighter-rouge">docker service update</code> における <code class="highlighter-rouge">--update-failure-action</code> フラグを使って制御することができます。</p>
   </li>
   <li>
-    <p>Inspect the <code class="highlighter-rouge">redis</code> service:</p>
+    <p><code class="highlighter-rouge">redis</code> サービスを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service inspect <span class="nt">--pretty</span> redis
 
@@ -220,28 +217,25 @@ Endpoint Mode:  vip
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Now you can update the container image for <code class="highlighter-rouge">redis</code>. The swarm  manager
-applies the update to nodes according to the <code class="highlighter-rouge">UpdateConfig</code> policy:</p>
+    <p><code class="highlighter-rouge">redis</code> に対するコンテナーイメージのアップデータを行います。
+Swarm マネージャーは <code class="highlighter-rouge">UpdateConfig</code> ポリシーに従って、ノードへのアップデートを適用します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service update <span class="nt">--image</span> redis:3.0.7 redis
 redis
 </code></pre></div>    </div>
 
-    <p>The scheduler applies rolling updates as follows by default:</p>
+    <p>スケジューラーは、デフォルトで以下のようにしてローリングアップデートを適用します。</p>
 
     <ul>
-      <li>Stop the first task.</li>
-      <li>Schedule update for the stopped task.</li>
-      <li>Start the container for the updated task.</li>
-      <li>If the update to a task returns <code class="highlighter-rouge">RUNNING</code>, wait for the
-specified delay period then start the next task.</li>
-      <li>If, at any time during the update, a task returns <code class="highlighter-rouge">FAILED</code>, pause the
-update.</li>
+      <li>最初のタスクを停止します。</li>
+      <li>停止したタスクに対してアップデートをスケジュールします。</li>
+      <li>アップデート対象のタスクに対してコンテナーを起動します。</li>
+      <li>1 つのタスクに対するアップデートにおいて <code class="highlighter-rouge">RUNNING</code> が返ってきたら、指定された待機時間だけ待って、次のタスクの処理を開始します。</li>
+      <li>アップデート中にタスクが <code class="highlighter-rouge">FAILED</code> を返したら、アップデートを中断します。</li>
     </ul>
   </li>
   <li>
-    <p>Run <code class="highlighter-rouge">docker service inspect --pretty redis</code> to see the new image in the
-desired state:</p>
+    <p><code class="highlighter-rouge">docker service inspect --pretty redis</code> を実行して、新たなイメージが思ったとおりの状態になっていることを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service inspect <span class="nt">--pretty</span> redis
 
@@ -260,7 +254,7 @@ Resources:
 Endpoint Mode:  vip
 </code></pre></div>    </div>
 
-    <p>The output of <code class="highlighter-rouge">service inspect</code> shows if your update paused due to failure:</p>
+    <p>処理失敗によりアップデートが中断していたら <code class="highlighter-rouge">service inspect</code> の結果は以下のようになります。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service inspect <span class="nt">--pretty</span> redis
 
@@ -274,16 +268,16 @@ Update status:
 ...snip...
 </code></pre></div>    </div>
 
-    <p>To restart a paused update run <code class="highlighter-rouge">docker service update &lt;SERVICE-ID&gt;</code>. For example:</p>
+    <p>中断しているアップデートを再び開始するには、<code class="highlighter-rouge">docker service update &lt;サービスID&gt;</code> を実行します。
+たとえば以下のとおりです。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker service update redis
 </code></pre></div>    </div>
 
-    <p>To avoid repeating certain update failures, you may need to reconfigure the
-service by passing flags to <code class="highlighter-rouge">docker service update</code>.</p>
+    <p>特定のアップデータ失敗が続くようであれば、これを解消するために、<code class="highlighter-rouge">docker service update</code> に何らかのフラグを指定して、サービスを再設定する必要があるかもしれません。</p>
   </li>
   <li>
-    <p>Run <code class="highlighter-rouge">docker service ps &lt;SERVICE-ID&gt;</code> to watch the rolling update:</p>
+    <p><code class="highlighter-rouge">docker service ps &lt;サービスID&gt;</code> を実行して、ローリングアップデートの状況を確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps redis
 
@@ -296,15 +290,14 @@ redis.3.egiuiqpzrdbxks3wxgn8qib1g      redis:3.0.7  worker1    Running        Ru
  <span class="se">\_</span> redis.3.ctzktfddb2tepkr45qcmqln04  redis:3.0.6  mmanager1  Shutdown       Shutdown 2 minutes ago
 </code></pre></div>    </div>
 
-    <p>Before Swarm updates all of the tasks, you can see that some are running
-<code class="highlighter-rouge">redis:3.0.6</code> while others are running <code class="highlighter-rouge">redis:3.0.7</code>. The output above shows
-the state once the rolling updates are done.</p>
+    <p>Swarm が全タスクに対するアップデートを終えていない状態であれば、<code class="highlighter-rouge">redis:3.0.6</code> を実行しているものがあり、また <code class="highlighter-rouge">redis:3.0.7</code> を実行しているものもありました。
+上の結果からは、ローリングアップデート処理を終えた状態であることがわかります。</p>
   </li>
 </ol>
 
-<h2 id="whats-next">What’s next?</h2>
+<h2 id="whats-next">次にすることは</h2>
 
-<p>Next, learn about how to <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/drain-node/">drain a node</a> in the swarm.</p>
+<p>次は Swarm 内からの <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/drain-node/">ノードの解放</a> について学びます。</p>
 
                             <!-- tags -->
                             
@@ -324,7 +317,7 @@ the state once the rolling updates are done.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/swarm/swarm-tutorial/rolling-update.md",
-                                        "title": "Apply rolling updates to a service",
+                                        "title": "サービスへのローリングアップデートの適用",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/swarm-tutorial/rolling-update.md"
                                     };
                                     (function (d, c, j) {
