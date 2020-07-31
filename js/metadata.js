@@ -156,8 +156,8 @@ var pages = [
 ,
 {
 "url":"/engine/context/aci-integration/",
-"title":"Deploying Docker containers on Azure",
-"description":"Deploying Docker containers on Azure",
+"title":"Azure での Docker コンテナーのデプロイ",
+"description":"Azure において Docker コンテナーをデプロイします。",
 "keywords":"Docker, Azure, Integration, ACI, context, Compose, cli, deploy, containers, cloud"
 }
 ,
@@ -1367,7 +1367,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/download-rate-limit/",
-"title":"Download rate limit",
+"title":"ダウンロードレート制限",
 "description":"Download rate limit",
 "keywords":"Docker, pull requests, download, limit,"
 }
@@ -1388,8 +1388,8 @@ var pages = [
 ,
 {
 "url":"/engine/context/ecs-integration/",
-"title":"Deploying Docker containers on ECS",
-"description":"Deploying Docker containers on ECS",
+"title":"ECS での Docker コンテナーのデプロイ",
+"description":"ECS において Docker コンテナーをデプロイします。",
 "keywords":"Docker, AWS, ECS, Integration, context, Compose, cli, deploy, containers, cloud"
 }
 ,
