@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-28 10:25:21 +0900 -->
+<!-- Page generated 2020-08-01 10:49:35 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-28T10:25:21+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-01T10:49:35+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Desktop for Mac では、より簡単に利用できるネットワーク機能をいくつも提供しています。 機能 VPN パススルー Docker Desktop for Mac のネットワークは VPN に接続して利用することができます。 このとき Docker Desktop for Mac は、コンテナーからのトラフィックを捕捉し Mac へ受け渡します。 まるで Docker アプリケーションから発信されたかのように扱います。 ポートマッピング コンテナーの起動時に、たとえば以下のように -p 引数をつけたとします。..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-28T10:25:21+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-01T10:49:35+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="mac, networking">
@@ -214,11 +214,32 @@
 <h4 id="i-want-to-connect-from-a-container-to-a-service-on-the-host">コンテナーからホスト上のサービスに接続したい</h4>
 
 <p>ホストには可変の IP アドレスがあります（もっともネットワークを利用しなければ何もありません）。
-18.03 以降にて推奨されるのは、特別な DNS 名 <code class="highlighter-rouge">host.docker.internal</code> に接続することです。
-この DNS はホストが利用する内部 IP アドレスを名前解決します。
+推奨されるのは、特別な DNS 名 <code class="highlighter-rouge">host.docker.internal</code> に接続することです。
+この DNS は、ホストが利用する内部 IP アドレスを名前解決します。
 これは開発環境において用いられるものであり、Docker Desktop for Mac の範囲外にある本番環境では動作しません。</p>
 
-<p>ゲートウェイも <code class="highlighter-rouge">gateway.docker.internal</code> としてアクセス可能です。</p>
+<p>ゲートウェイも <code class="highlighter-rouge">gateway.docker.internal</code> を利用してアクセス可能です。</p>
+
+<p>マシン上に Python をインストールしている場合は、例として以下の手順に従い、コンテナーからホスト上のサービスに接続します。</p>
+
+<ol>
+  <li>
+    <p>以下のコマンドを実行して、単純の HTTP サーバーをポート 8000 で起動します。</p>
+
+    <p><code class="highlighter-rouge">python -m http.server 8000</code></p>
+
+    <p>Python 2.x をインストールしている場合は、<code class="highlighter-rouge">python -m SimpleHTTPServer 8000</code> を実行します。</p>
+  </li>
+  <li>
+    <p>そしてコンテナーの実行と <code class="highlighter-rouge">curl</code> のインストールを行って、以下のコマンドのようにホストへの接続を試してみます。</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span> docker run <span class="nt">--rm</span> <span class="nt">-it</span> alpine sh
+<span class="gp"> #</span> apk add curl
+<span class="gp"> #</span> curl http://host.docker.internal:8000
+<span class="gp"> #</span> <span class="nb">exit</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <h4 id="i-want-to-connect-to-a-container-from-the-mac">Mac からコンテナーに接続したい</h4>
 
