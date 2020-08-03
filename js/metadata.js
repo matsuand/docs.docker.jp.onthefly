@@ -1247,6 +1247,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/deprecated/",
+"title":"廃止となった Engine 機能",
+"description":"Deprecated Features.",
+"keywords":"docker, documentation, about, technology, deprecate"
+}
+,
+{
 "url":"/registry/deprecated/",
 "title":"Docker Registry deprecation",
 "description":"describes deprecated functionality",
@@ -2648,8 +2655,8 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/networking/",
-"title":"Networking features in Docker Desktop for Windows",
-"description":"Networking",
+"title":"Docker Desktop for Windows のネットワーク機能",
+"description":"ネットワーク機能。",
 "keywords":"windows, networking"
 }
 ,
