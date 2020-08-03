@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-07-22 17:31:51 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-22T17:31:51+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:title" itemprop="title name" content="ログドライバーの設定"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker にはログ出力のメカニズムが複数あるため、コンテナーまたはサービスのログ確認 を行うことができます。 このメカニズムのことをログドライバー（logging driver）と呼びます。 Docker デーモンにはデフォルトのログドライバーが設定されています。 別のログドライバーを利用するような設定を行わないかぎり、各コンテナーはこのデフォルトログドライバーを利用します。 Docker が提供するログドライバーの利用だけでなく、ログドライバープラグイン を導入して利用することもできます。 デフォルトのログドライバー設定 特定のログドライバーを Docker デーモンのデフォルトとして設定するには、daemon.json ファイルにおいて log-driver にそのログドライバー名を指定します。 daemon.json ファイルは Linux ホストの場合は /etc/docker/、Windows サーバーホストの場合は C:\ProgramData\docker\config\ にあります。 この daemon.json ファイルが存在していない場合は、生成する必要があります。 デフォルトのログドライバーは..." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker にはログ出力のメカニズムが複数あるので、コンテナーまたはサービスのログ確認 を行うことができます。 このメカニズムのことをログドライバー（logging driver）と呼びます。 Docker デーモンにはデフォルトのログドライバーが設定されています。 別のログドライバーを利用するような設定を行わないかぎり、各コンテナーはこのデフォルトログドライバーを利用します。 Docker が提供するログドライバーの利用だけでなく、ログドライバープラグイン を導入して利用することもできます。 デフォルトのログドライバー設定 特定のログドライバーを Docker デーモンのデフォルトとして設定するには、daemon.json ファイルにおいて log-driver にそのログドライバー名を指定します。 daemon.json ファイルは Linux ホストの場合は /etc/docker/、Windows サーバーホストの場合は C:\ProgramData\docker\config\ にあります。 この daemon.json ファイルが存在していない場合は、生成する必要があります。 デフォルトのログドライバーは..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-07-22T17:31:51+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, logging, driver">
@@ -152,13 +152,13 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    3 分
   
 </span>
 
                             
                             
-<p>Docker にはログ出力のメカニズムが複数あるため、<a href="/docs.docker.jp.onthefly/config/containers/logging/">コンテナーまたはサービスのログ確認</a> を行うことができます。
+<p>Docker にはログ出力のメカニズムが複数あるので、<a href="/docs.docker.jp.onthefly/config/containers/logging/">コンテナーまたはサービスのログ確認</a> を行うことができます。
 このメカニズムのことをログドライバー（logging driver）と呼びます。</p>
 
 <p>Docker デーモンにはデフォルトのログドライバーが設定されています。
@@ -211,7 +211,7 @@
 json-file
 </code></pre></div></div>
 
-<h2 id="configure-the-logging-driver-for-a-container">コンテナーのログドライバー設定</h2>
+<h2 id="configure-the-logging-driver-for-a-container">コンテナーに対するログドライバー設定</h2>
 
 <p>コンテナーの起動時には、Docker デーモンのデフォルトとは異なる、別のログドライバーを設定することができます。
 これは <code class="highlighter-rouge">--log-driver</code> フラグを使います。
@@ -231,63 +231,53 @@ json-file
 json-file
 </code></pre></div></div>
 
-<h2 id="Configure-the-delivery-mode-of-log-messages-from-container-to-log-driver">Configure the delivery mode of log messages from container to log driver</h2>
+<h2 id="Configure-the-delivery-mode-of-log-messages-from-container-to-log-driver">コンテナーからログドライバーへのメッセージ転送モードの設定</h2>
 
-<p>Docker provides two modes for delivering messages from the container to the log
-driver:</p>
+<p>Docker には、コンテナーからログドライバーに向けてのログメッセージ転送に関して、2 つのモードがあります。</p>
 
 <ul>
-  <li>(default) direct, blocking delivery from container to driver</li>
-  <li>non-blocking delivery that stores log messages in an intermediate per-container
-ring buffer for consumption by driver</li>
+  <li>（デフォルト） コンテナーからドライバーへの直接のログメッセージ転送はブロックするモード。</li>
+  <li>ブロックしない（<code class="highlighter-rouge">non-blocking</code>）モード。
+ドライバーが利用するものとして用意されている、各コンテナーごとの中間リングバッファーに、ログメッセージが保存されます。</li>
 </ul>
 
-<p>The <code class="highlighter-rouge">non-blocking</code> message delivery mode prevents applications from blocking due
-to logging back pressure. Applications are likely to fail in unexpected ways when
-STDERR or STDOUT streams block.</p>
+<p><code class="highlighter-rouge">non-blocking</code> メッセージ転送モードの場合、ログ出力のためにアプリケーションに負荷がかかっても、ログメッセージを転送しません。
+STDERR や STDOUT ストリームがブロックされると、アプリケーションが予期せずに失敗することがあります。</p>
 
 <blockquote class="warning">
-  <p><strong>WARNING</strong>
-When the buffer is full and a new message is enqueued, the oldest message in
-memory is dropped.  Dropping messages is often preferred to blocking the
-log-writing process of an application.</p>
+  <p><strong>警告</strong>
+バッファーがいっぱいになって、新たなメッセージがキューに待機するようになると、メモリ上にあるメッセージの中で最も古いものが破棄されます。アプリケーションのログ出力処理がブロックされることよりも、メッセージが破棄されることの方が良い場合もあります。</p>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">mode</code> log option controls whether to use the <code class="highlighter-rouge">blocking</code> (default) or
-<code class="highlighter-rouge">non-blocking</code> message delivery.</p>
+<p>ログオプションの <code class="highlighter-rouge">mode</code> は、メッセージ転送をブロックする <code class="highlighter-rouge">blocking</code>（デフォルト）か、ブロックしない <code class="highlighter-rouge">non-blocking</code> かを制御します。</p>
 
-<p>The <code class="highlighter-rouge">max-buffer-size</code> log option controls the size of the ring buffer used for
-intermediate message storage when <code class="highlighter-rouge">mode</code> is set to <code class="highlighter-rouge">non-blocking</code>. <code class="highlighter-rouge">max-buffer-size</code>
-defaults to 1 megabyte.</p>
+<p>ログオプション <code class="highlighter-rouge">max-buffer-size</code> は <code class="highlighter-rouge">mode</code> が <code class="highlighter-rouge">non-blocking</code> に設定されている場合に、中間的なメッセージ保存場所として利用されるリングバッファーのサイズを設定します。
+<code class="highlighter-rouge">max-buffer-size</code> のデフォルトは 1 メガバイトです。</p>
 
-<p>The following example starts an Alpine container with log output in non-blocking
-mode and a 4 megabyte buffer:</p>
+<p>以下に示す例は Alpine コンテナーの起動にあたって、ログ出力を non-blocking モードとし、バッファーを 4 メガバイトとします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--log-opt</span> <span class="nv">mode</span><span class="o">=</span>non-blocking <span class="nt">--log-opt</span> max-buffer-size<span class="o">=</span>4m alpine ping 127.0.0.1
 </code></pre></div></div>
 
-<h3 id="use-environment-variables-or-labels-with-logging-drivers">Use environment variables or labels with logging drivers</h3>
+<h3 id="use-environment-variables-or-labels-with-logging-drivers">ログドライバーに対する環境変数やラベルの利用</h3>
 
-<p>Some logging drivers add the value of a container’s <code class="highlighter-rouge">--env|-e</code> or <code class="highlighter-rouge">--label</code>
-flags to the container’s logs. This example starts a container using the Docker
-daemon’s default logging driver (let’s assume <code class="highlighter-rouge">json-file</code>) but sets the
-environment variable <code class="highlighter-rouge">os=ubuntu</code>.</p>
+<p>ログドライバーの中には、コンテナーに対して指定された <code class="highlighter-rouge">--env|-e</code> フラグや <code class="highlighter-rouge">--label</code> フラグの値を、コンテナーログに加えられるようになっているものがあります。
+以下の例では、Docker デーモンがデフォルトのログドライバー（<code class="highlighter-rouge">json-file</code> とします）を利用している状態でコンテナーを起動し、さらに環境変数 <code class="highlighter-rouge">os=ubuntu</code> を設定します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--label</span> <span class="nv">production_status</span><span class="o">=</span>testing <span class="nt">-e</span> <span class="nv">os</span><span class="o">=</span>ubuntu alpine sh
 </code></pre></div></div>
 
-<p>If the logging driver supports it, this adds additional fields to the logging
-output. The following output is generated by the <code class="highlighter-rouge">json-file</code> logging driver:</p>
+<p>ログドライバー側が対応していれば、ログ内に追加項目が出力されることになります。
+以下の出力は、ログドライバー <code class="highlighter-rouge">json-file</code> によって生成されるものです。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"attrs"</span><span class="p">:{</span><span class="s2">"production_status"</span><span class="p">:</span><span class="s2">"testing"</span><span class="p">,</span><span class="s2">"os"</span><span class="p">:</span><span class="s2">"ubuntu"</span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<h2 id="supported-logging-drivers">Supported logging drivers</h2>
+<h2 id="supported-logging-drivers">サポートされるログドライバー</h2>
 
-<p>The following logging drivers are supported. See the link to each driver’s
-documentation for its configurable options, if applicable. If you are using
-<a href="/docs.docker.jp.onthefly/config/containers/logging/plugins/">logging driver plugins</a>, you may
-see more options.</p>
+<p>ログドライバーは以下に示すものがサポートされています。
+ドライバーに対する設定可能オプションについては、リンク先にある各ドライバーのドキュメントを参照してください。
+<a href="/docs.docker.jp.onthefly/config/containers/logging/plugins/">ログドライバープラグイン</a> を利用している場合は、さらにオプションがあります。</p>
 
 <table>
   <thead>
@@ -299,63 +289,62 @@ see more options.</p>
   <tbody>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">none</code></td>
-      <td style="text-align: left">No logs are available for the container and <code class="highlighter-rouge">docker logs</code> does not return any output.</td>
+      <td style="text-align: left">コンテナーのログは出力されません。したがって <code class="highlighter-rouge">docker logs</code> からは何も出力されません。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/local/"><code class="highlighter-rouge">local</code></a></td>
-      <td style="text-align: left">Logs are stored in a custom format designed for minimal overhead.</td>
+      <td style="text-align: left">独自フォーマットによりログが保存されます。これは最小限のオーバーヘッドとなるように設計されています。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/json-file/"><code class="highlighter-rouge">json-file</code></a></td>
-      <td style="text-align: left">The logs are formatted as JSON. The default logging driver for Docker.</td>
+      <td style="text-align: left">ログは JSON 形式で出力されます。Docker におけるデフォルトのログドライバーです。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/syslog/"><code class="highlighter-rouge">syslog</code></a></td>
-      <td style="text-align: left">Writes logging messages to the <code class="highlighter-rouge">syslog</code> facility. The <code class="highlighter-rouge">syslog</code> daemon must be running on the host machine.</td>
+      <td style="text-align: left">ログメッセージを <code class="highlighter-rouge">syslog</code> に出力します。ホストマシン上に <code class="highlighter-rouge">syslog</code> デーモンを実行しておく必要があります。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/journald/"><code class="highlighter-rouge">journald</code></a></td>
-      <td style="text-align: left">Writes log messages to <code class="highlighter-rouge">journald</code>. The <code class="highlighter-rouge">journald</code> daemon must be running on the host machine.</td>
+      <td style="text-align: left">ログメッセージを <code class="highlighter-rouge">journald</code> に出力します。ホストマシン上に <code class="highlighter-rouge">journald</code>  デーモンを実行しておく必要があります。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/gelf/"><code class="highlighter-rouge">gelf</code></a></td>
-      <td style="text-align: left">Writes log messages to a Graylog Extended Log Format (GELF) endpoint such as Graylog or Logstash.</td>
+      <td style="text-align: left">ログメッセージを Graylog や Logstash のような Graylog Extended Log Format (GELF) エンドポイントに出力します。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/fluentd/"><code class="highlighter-rouge">fluentd</code></a></td>
-      <td style="text-align: left">Writes log messages to <code class="highlighter-rouge">fluentd</code> (forward input). The <code class="highlighter-rouge">fluentd</code> daemon must be running on the host machine.</td>
+      <td style="text-align: left">ログメッセージを <code class="highlighter-rouge">fluentd</code> (forward input) に出力します。ホストマシン上に <code class="highlighter-rouge">fluentd</code> デーモンを実行しておく必要があります。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/awslogs/"><code class="highlighter-rouge">awslogs</code></a></td>
-      <td style="text-align: left">Writes log messages to Amazon CloudWatch Logs.</td>
+      <td style="text-align: left">ログメッセージを Amazon CloudWatch Logs へ出力します。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/splunk/"><code class="highlighter-rouge">splunk</code></a></td>
-      <td style="text-align: left">Writes log messages to <code class="highlighter-rouge">splunk</code> using the HTTP Event Collector.</td>
+      <td style="text-align: left">ログメッセージを、HTTP Event Collector を使って <code class="highlighter-rouge">splunk</code> に出力します。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/etwlogs/"><code class="highlighter-rouge">etwlogs</code></a></td>
-      <td style="text-align: left">Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.</td>
+      <td style="text-align: left">ログメッセージを Event Tracing for Windows (ETW) イベントとして出力します。Windows プラットフォームにおいてのみ利用可能です。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/gcplogs/"><code class="highlighter-rouge">gcplogs</code></a></td>
-      <td style="text-align: left">Writes log messages to Google Cloud Platform (GCP) Logging.</td>
+      <td style="text-align: left">ログメッセージを Google Cloud Platform (GCP) Logging に出力します。</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/docs.docker.jp.onthefly/config/containers/logging/logentries/"><code class="highlighter-rouge">logentries</code></a></td>
-      <td style="text-align: left">Writes log messages to Rapid7 Logentries.</td>
+      <td style="text-align: left">ログメッセージを Rapid7 Logentries に出力します。</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="limitations-of-logging-drivers">ログドライバーの制約</h2>
+<h2 id="limitations-of-logging-drivers">ログドライバーの制限事項</h2>
 
 <ul>
-  <li>Users of Docker Enterprise can make use of “dual logging”, which enables you
-to use the <code class="highlighter-rouge">docker logs</code> command for any logging driver. Refer to
-<a href="/docs.docker.jp.onthefly/config/containers/logging/dual-logging/">reading logs when using remote logging drivers</a> for
-information about using <code class="highlighter-rouge">docker logs</code> to read container logs locally for many
-third party logging solutions, including:
+  <li>Docker Enterprise のユーザーは「デュアルログ」（dual logging）を利用できます。
+これは <code class="highlighter-rouge">docker logs</code> コマンドを通じて、どのログドライバーでも利用できるようにします。
+<a href="/docs.docker.jp.onthefly/config/containers/logging/dual-logging/">リモートログドライバーを使ったログ確認</a> においては、さまざまなサードパーティー製ログソリューションを、<code class="highlighter-rouge">docker logs</code> によるローカルのコンテナーログ参照によって利用する情報を示しています。
+サードパーティー製のログソリューションとしては、以下のものがあります。
     <ul>
       <li><code class="highlighter-rouge">syslog</code></li>
       <li><code class="highlighter-rouge">gelf</code></li>
@@ -367,8 +356,7 @@ third party logging solutions, including:
       <li><code class="highlighter-rouge">Logentries</code></li>
     </ul>
   </li>
-  <li>When using Docker Community Engine, the <code class="highlighter-rouge">docker logs</code> command is only available
-on the following drivers:
+  <li>Docker Community Engine を利用している場合、<code class="highlighter-rouge">docker logs</code> コマンドが利用できるログドライバーは以下のものに限られます。
     <ul>
       <li><code class="highlighter-rouge">local</code></li>
       <li><code class="highlighter-rouge">json-file</code></li>
@@ -376,12 +364,11 @@ on the following drivers:
     </ul>
   </li>
   <li>
-    <p>Reading log information requires decompressing rotated log files, which causes
-a temporary increase in disk usage (until the log entries from the rotated
-files are read) and an increased CPU usage while decompressing.</p>
+    <p>ログ情報を読むには、ローテートされるログファイルを伸張（解凍）することが必要になります。
+その際には一時的にディスクを消費します（ローテートされたファイルからログを読み込むまで）。
+また伸張（解凍）の際には CPU 使用が増加します。</p>
   </li>
-  <li>The capacity of the host storage where the Docker data directory resides
-determines the maximum size of the log file information.</li>
+  <li>Docker のデータディレクトリを収容するホストのストレージ容量によって、ログファイルの最大容量が定まります。</li>
 </ul>
 
                             <!-- tags -->
@@ -467,14 +454,14 @@ determines the maximum size of the log file information.</li>
                                 
 <ul id="my_toc" class="inline_toc">
   <li><a href="#configure-the-default-logging-driver" class="nomunge">デフォルトのログドライバー設定</a></li>
-  <li><a href="#configure-the-logging-driver-for-a-container" class="nomunge">コンテナーのログドライバー設定</a></li>
-  <li><a href="#Configure-the-delivery-mode-of-log-messages-from-container-to-log-driver" class="nomunge">Configure the delivery mode of log messages from container to log driver</a>
+  <li><a href="#configure-the-logging-driver-for-a-container" class="nomunge">コンテナーに対するログドライバー設定</a></li>
+  <li><a href="#Configure-the-delivery-mode-of-log-messages-from-container-to-log-driver" class="nomunge">コンテナーからログドライバーへのメッセージ転送モードの設定</a>
     <ul>
-      <li><a href="#use-environment-variables-or-labels-with-logging-drivers" class="nomunge">Use environment variables or labels with logging drivers</a></li>
+      <li><a href="#use-environment-variables-or-labels-with-logging-drivers" class="nomunge">ログドライバーに対する環境変数やラベルの利用</a></li>
     </ul>
   </li>
-  <li><a href="#supported-logging-drivers" class="nomunge">Supported logging drivers</a></li>
-  <li><a href="#limitations-of-logging-drivers" class="nomunge">ログドライバーの制約</a></li>
+  <li><a href="#supported-logging-drivers" class="nomunge">サポートされるログドライバー</a></li>
+  <li><a href="#limitations-of-logging-drivers" class="nomunge">ログドライバーの制限事項</a></li>
 </ul>
 
 
