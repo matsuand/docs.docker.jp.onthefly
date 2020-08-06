@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-08-06 19:29:41 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-06T19:29:41+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Networking using the host network"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="This series of tutorials deals with networking standalone containers which bind directly to the Docker host’s network, with no network isolation. For other networking topics, see the overview. Goal The..." />
+  <meta name="twitter:title" itemprop="title name" content="ホストネットワークのチュートリアル"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="このチュートリアルでは、スタンドアロンコンテナーのネットワークを取り扱います。 Docker ホストのネットワークに直接割り当てられ、ネットワークの分離は行われません。 これ以外のネットワークに関することは ネットワーク概要 を参照してください。 目指すこと 本チュートリアルの目標は、nginx コンテナーを起動させ、Docker ホスト上のポート 80 に直接割り当てることです。 ネットワークの観点からは nginx のプロセスが、コンテナー内でなく Docker ホスト上で直接稼動している場合と同じレベルの分離が実現されていると言えます。 ただしこれ以外の点、つまりストレージ、プロセス名前空間、ユーザー名前空間などから見ると、nginx のプロセスはホストから分離されています。 前提条件 以下の手順においては、Docker ホスト上のポート 80 が利用できることが必要です。 Nginx が別のポートを利用できるようにするには nginx イメージのドキュメント を参照してください。 host..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-06T19:29:41+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="networking, host, standalone">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Networking using the host network | Docker ドキュメント</title>
-  <meta property="og:title" content="Networking using the host network" />
+  <title>ホストネットワークのチュートリアル | Docker ドキュメント</title>
+  <meta property="og:title" content="ホストネットワークのチュートリアル" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Tutorials for networking using the host network, disabling network isolation" />
   <meta property="og:description" content="Tutorials for networking using the host network, disabling network isolation" />
   <link rel="canonical" href="/network/network-tutorial-host/" />
   <meta property="og:url" content="https://docs.docker.com/network/network-tutorial-host/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Networking using the host network","description":"Tutorials for networking using the host network, disabling network isolation","url":"https://docs.docker.com/network/network-tutorial-host/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ホストネットワークのチュートリアル","description":"Tutorials for networking using the host network, disabling network isolation","url":"https://docs.docker.com/network/network-tutorial-host/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,70 +147,69 @@
                         <section class="section">
                             
                             
-                            <h1>Networking using the host network</h1> 
+                            <h1>ホストネットワークのチュートリアル</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    1 分
   
 </span>
 
                             
-                            <p>This series of tutorials deals with networking standalone containers which bind
-directly to the Docker host’s network, with no network isolation. For other
-networking topics, see the <a href="/docs.docker.jp.onthefly/network/">overview</a>.</p>
+                            
+<p>このチュートリアルでは、スタンドアロンコンテナーのネットワークを取り扱います。
+Docker ホストのネットワークに直接割り当てられ、ネットワークの分離は行われません。
+これ以外のネットワークに関することは <a href="/docs.docker.jp.onthefly/network/">ネットワーク概要</a> を参照してください。</p>
 
-<h2 id="goal">Goal</h2>
+<h2 id="goal">目指すこと</h2>
 
-<p>The goal of this tutorial is to start a <code class="highlighter-rouge">nginx</code> container which binds directly
-to port 80 on the Docker host. From a networking point of view, this is the
-same level of isolation as if the <code class="highlighter-rouge">nginx</code> process were running directly on the
-Docker host and not in a container. However, in all other ways, such as storage,
-process namespace, and user namespace, the <code class="highlighter-rouge">nginx</code> process is isolated from the
-host.</p>
+<p>本チュートリアルの目標は、<code class="highlighter-rouge">nginx</code> コンテナーを起動させ、Docker ホスト上のポート 80 に直接割り当てることです。
+ネットワークの観点からは <code class="highlighter-rouge">nginx</code> のプロセスが、コンテナー内でなく Docker ホスト上で直接稼動している場合と同じレベルの分離が実現されていると言えます。
+ただしこれ以外の点、つまりストレージ、プロセス名前空間、ユーザー名前空間などから見ると、<code class="highlighter-rouge">nginx</code> のプロセスはホストから分離されています。</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">前提条件</h2>
 
 <ul>
   <li>
-    <p>This procedure requires port 80 to be available on the Docker host. To make
-Nginx listen on a different port, see the
-<a href="https://hub.docker.com/_/nginx/">documentation for the <code class="highlighter-rouge">nginx</code> image</a></p>
+    <p>以下の手順においては、Docker ホスト上のポート 80 が利用できることが必要です。
+Nginx が別のポートを利用できるようにするには <a href="https://hub.docker.com/_/nginx/"><code class="highlighter-rouge">nginx</code> イメージのドキュメント</a> を参照してください。</p>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">host</code> networking driver only works on Linux hosts, and is not supported
-on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.</p>
+    <p><code class="highlighter-rouge">host</code> ネットワークドライバーは Linux ホスト上においてのみ動作します。
+一方、Docker Desktop for Mac、Docker Desktop for Windows、Docker EE for Windows Server ではサポートされていません。</p>
   </li>
 </ul>
 
-<h2 id="procedure">Procedure</h2>
+<h2 id="procedure">手順</h2>
 
 <ol>
   <li>
-    <p>Create and start the container as a detached process. The <code class="highlighter-rouge">--rm</code> option means to remove the container once it exits/stops. The <code class="highlighter-rouge">-d</code> flag means to start the container detached (in the background).</p>
+    <p>コンテナーを生成し、デタッチモードで起動します。
+<code class="highlighter-rouge">--rm</code> オプションは、コンテナーが終了または停止したときにコンテナーを削除するものです。
+<code class="highlighter-rouge">-d</code> フラグは、コンテナーをデタッチモード（バックグラウンド）で起動します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">--network</span> host <span class="nt">--name</span> my_nginx nginx
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Access Nginx by browsing to
-<a href="http://localhost:80/">http://localhost:80/</a>.</p>
+    <p>ブラウザーから <a href="http://localhost:80/">http://localhost:80/</a> を入力して Nginx にアクセスします。</p>
   </li>
   <li>
-    <p>Examine your network stack using the following commands:</p>
+    <p>以下のコマンドを実行して、ネットワークの状況を確認します。</p>
 
     <ul>
       <li>
-        <p>Examine all network interfaces and verify that a new one was not created.</p>
+        <p>ネットワークインターフェースをすべて確認します。
+そして新しいインターフェースは生成されていないことを確認します。</p>
 
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip addr show
 </code></pre></div>        </div>
       </li>
       <li>
-        <p>Verify which process is bound to port 80, using the <code class="highlighter-rouge">netstat</code> command. You
-need to use <code class="highlighter-rouge">sudo</code> because the process is owned by the Docker daemon user
-and you otherwise won’t be able to see its name or PID.</p>
+        <p><code class="highlighter-rouge">netstat</code> コマンドを使って、どのプロセスがポート 80 に割り当てられているかを確認します。
+実行にあたっては <code class="highlighter-rouge">sudo</code> が必要です。
+プロセスが Docker デーモンユーザーの所有になっているからであり、これを用いないとプロセス名やプロセス ID を確認することができません。</p>
 
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>netstat <span class="nt">-tulpn</span> | <span class="nb">grep</span> :80
 </code></pre></div>        </div>
@@ -218,22 +217,22 @@ and you otherwise won’t be able to see its name or PID.</p>
     </ul>
   </li>
   <li>
-    <p>Stop the container. It will be removed automatically as it was started using the <code class="highlighter-rouge">--rm</code> option.</p>
+    <p>コンテナーを停止します。
+<code class="highlighter-rouge">--rm</code> オプションを指定して起動しているので、コンテナーは自動的に削除されます。</p>
 
     <pre><code class="language-basn">docker container stop my_nginx
 </code></pre>
   </li>
 </ol>
 
-<h2 id="other-networking-tutorials">Other networking tutorials</h2>
+<h2 id="other-networking-tutorials">その他のネットワークチュートリアル</h2>
 
-<p>Now that you have completed the networking tutorials for standalone containers,
-you might want to run through these other networking tutorials:</p>
+<p>ホストネットワークのチュートリアルを終えたので、以下に示すような別のネットワークチュートリアルも見てください。</p>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-standalone/">Standalone networking tutorial</a></li>
-  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-overlay/">Overlay networking tutorial</a></li>
-  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-macvlan/">Macvlan networking tutorial</a></li>
+  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-standalone/">スタンドアロンネットワークのチュートリアル</a></li>
+  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-overlay/">オーバーレイネットワークのチュートリアル</a></li>
+  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-macvlan/">Macvlan ネットワークのチュートリアル</a></li>
 </ul>
 
 
@@ -253,7 +252,7 @@ you might want to run through these other networking tutorials:</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "network/network-tutorial-host.md",
-                                        "title": "Networking using the host network",
+                                        "title": "ホストネットワークのチュートリアル",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/network/network-tutorial-host.md"
                                     };
                                     (function (d, c, j) {
@@ -319,10 +318,10 @@ you might want to run through these other networking tutorials:</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#goal" class="nomunge">Goal</a></li>
-  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
-  <li><a href="#procedure" class="nomunge">Procedure</a></li>
-  <li><a href="#other-networking-tutorials" class="nomunge">Other networking tutorials</a></li>
+  <li><a href="#goal" class="nomunge">目指すこと</a></li>
+  <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
+  <li><a href="#procedure" class="nomunge">手順</a></li>
+  <li><a href="#other-networking-tutorials" class="nomunge">その他のネットワークチュートリアル</a></li>
 </ul>
 
 

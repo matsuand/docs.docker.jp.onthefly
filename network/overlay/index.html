@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-08-04 15:11:45 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-04T15:11:45+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Use overlay networks"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="The overlay network driver creates a distributed network among multiple Docker daemon hosts. This network sits on top of (overlays) the host-specific networks, allowing containers connected to it (including swarm..." />
+  <meta name="twitter:title" itemprop="title name" content="オーバーレイネットワークの利用"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="overlay ネットワークドライバーは、複数の Docker デーモンホスト間での分散ネットワークを生成します。 このネットワークは、ホストに固有のものとして構築されたネットワークの最上位に位置（overlay）するものです。 このネットワークに対しては、コンテナー（Swarm サービスコンテナーを含む）が接続可能です。 暗号化が有効になっていれば、安全な通信を行うことができます。 Docker は、各パケットの送受信経路を透過的に取り扱い、その送受信先となる Docker ホストデーモンやコンテナーを適切に認識します。 Swarm の初期化を行うとき、あるいは Docker ホストを既存の Swarm に参加させるときには、そのホスト上に 2 つのネットワークが生成されます。 1 つは ingress と呼ばれるオーバーレイネットワークです。 これは Swarm サービスに関する制御とデータトラフィックを取り扱います。 Swarm サービスを生成する際に、ユーザー定義のオーバーレイネットワークへの接続を指定しない限り、デフォルトでは ingress..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-04T15:11:45+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="network, overlay, user-defined, swarm, service">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Use overlay networks | Docker ドキュメント</title>
-  <meta property="og:title" content="Use overlay networks" />
+  <title>オーバーレイネットワークの利用 | Docker ドキュメント</title>
+  <meta property="og:title" content="オーバーレイネットワークの利用" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="All about using overlay networks" />
   <meta property="og:description" content="All about using overlay networks" />
   <link rel="canonical" href="/network/overlay/" />
   <meta property="og:url" content="https://docs.docker.com/network/overlay/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use overlay networks","description":"All about using overlay networks","url":"https://docs.docker.com/network/overlay/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"オーバーレイネットワークの利用","description":"All about using overlay networks","url":"https://docs.docker.com/network/overlay/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,152 +147,136 @@
                         <section class="section">
                             
                             
-                            <h1>Use overlay networks</h1> 
+                            <h1>オーバーレイネットワークの利用</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    11 分
+    4 分
   
 </span>
 
                             
-                            <p>The <code class="highlighter-rouge">overlay</code> network driver creates a distributed network among multiple
-Docker daemon hosts. This network sits on top of (overlays) the host-specific
-networks, allowing containers connected to it (including swarm service
-containers) to communicate securely when encryption is enabled. Docker
-transparently handles routing of each packet to and from the correct Docker
-daemon host and the correct destination container.</p>
+                            
+<p><code class="highlighter-rouge">overlay</code> ネットワークドライバーは、複数の Docker デーモンホスト間での分散ネットワークを生成します。
+このネットワークは、ホストに固有のものとして構築されたネットワークの最上位に位置（overlay）するものです。
+このネットワークに対しては、コンテナー（Swarm サービスコンテナーを含む）が接続可能です。
+暗号化が有効になっていれば、安全な通信を行うことができます。
+Docker は、各パケットの送受信経路を透過的に取り扱い、その送受信先となる Docker ホストデーモンやコンテナーを適切に認識します。</p>
 
-<p>When you initialize a swarm or join a Docker host to an existing swarm, two
-new networks are created on that Docker host:</p>
+<p>Swarm の初期化を行うとき、あるいは Docker ホストを既存の Swarm に参加させるときには、そのホスト上に 2 つのネットワークが生成されます。</p>
 
 <ul>
-  <li>an overlay network called <code class="highlighter-rouge">ingress</code>, which handles control and data traffic
-related to swarm services. When you create a swarm service and do not
-connect it to a user-defined overlay network, it connects to the <code class="highlighter-rouge">ingress</code>
-network by default.</li>
-  <li>a bridge network called <code class="highlighter-rouge">docker_gwbridge</code>, which connects the individual
-Docker daemon to the other daemons participating in the swarm.</li>
+  <li>1 つは <code class="highlighter-rouge">ingress</code> と呼ばれるオーバーレイネットワークです。
+これは Swarm サービスに関する制御とデータトラフィックを取り扱います。
+Swarm サービスを生成する際に、ユーザー定義のオーバーレイネットワークへの接続を指定しない限り、デフォルトでは <code class="highlighter-rouge">ingress</code> ネットワークに接続されます。</li>
+  <li>もう 1 つは <code class="highlighter-rouge">docker_gwbridge</code> と呼ばれるブリッジネットワークです。
+これは、個々の Docker デーモンを、Swarm 内に参加している別のデーモンに接続するものです。</li>
 </ul>
 
-<p>You can create user-defined <code class="highlighter-rouge">overlay</code> networks using <code class="highlighter-rouge">docker network create</code>,
-in the same way that you can create user-defined <code class="highlighter-rouge">bridge</code> networks. Services
-or containers can be connected to more than one network at a time. Services or
-containers can only communicate across networks they are each connected to.</p>
+<p>ユーザー定義の <code class="highlighter-rouge">overlay</code> ネットワークは <code class="highlighter-rouge">docker network create</code> を使って生成することができます。
+ユーザー定義の <code class="highlighter-rouge">bridge</code> ネットワークを生成する方法と同じです。
+サービスやコンテナーは、一度に複数のネットワークに接続できます。
+サービスやコンテナーがネットワーク通信を行うことができるのは、互いに接続されている場合だけです。</p>
 
-<p>Although you can connect both swarm services and standalone containers to an
-overlay network, the default behaviors and configuration concerns are different.
-For that reason, the rest of this topic is divided into operations that apply to
-all overlay networks, those that apply to swarm service networks, and those that
-apply to overlay networks used by standalone containers.</p>
+<p>Swarm サービスとスタンドアロンコンテナーは、どちらもオーバーレイネットワークに接続することができます。
+ただしデフォルトの動作や設定が目指しているものは、まったく異なります。
+そこで、これ以降のトピックでは操作説明を以下のように分けます。
+オーバーレイネットワークに対する全般的な操作、Swarm サービスネットワークに対する操作、スタンドアロンコンテナーにおいて利用されるオーバーレイネットワークに対する操作です。</p>
 
-<h2 id="operations-for-all-overlay-networks">Operations for all overlay networks</h2>
+<h2 id="operations-for-all-overlay-networks">オーバーレイネットワークに対する全般的な操作</h2>
 
-<h3 id="create-an-overlay-network">Create an overlay network</h3>
+<h3 id="create-an-overlay-network">オーバーレイネットワークの生成</h3>
 
 <blockquote>
-  <p><strong>Prerequisites</strong>:</p>
+  <p><strong>前提条件</strong>:</p>
 
   <ul>
     <li>
-      <p>Firewall rules for Docker daemons using overlay networks</p>
+      <p>オーバーレイネットワークを使った Docker デーモン用のファイアーウォールルール</p>
 
-      <p>You need the following ports open to traffic to and from each Docker host
-participating on an overlay network:</p>
+      <p>オーバーレイネットワーク上に参加する Docker ホスト間でのトラフィックのやりとりのため、以下のポートを公開する必要があります。</p>
 
       <ul>
-        <li>TCP port 2377 for cluster management communications</li>
-        <li>TCP and UDP port 7946 for communication among nodes</li>
-        <li>UDP port 4789 for overlay network traffic</li>
+        <li>TCP ポート 2377、クラスター管理に関する通信用。</li>
+        <li>TCP と UDP のポート 7946、ノード間の通信用。</li>
+        <li>UDP ポート 4789、オーバーレイネットワークトラフィック用。</li>
       </ul>
     </li>
     <li>
-      <p>Before you can create an overlay network, you need to either initialize your
-Docker daemon as a swarm manager using <code class="highlighter-rouge">docker swarm init</code> or join it to an
-existing swarm using <code class="highlighter-rouge">docker swarm join</code>. Either of these creates the default
-<code class="highlighter-rouge">ingress</code> overlay network which is used by swarm services by default. You need
-to do this even if you never plan to use swarm services. Afterward, you can
-create additional user-defined overlay networks.</p>
+      <p>オーバーレイネットワークを生成する前には、<code class="highlighter-rouge">docker swarm init</code> を使って Docker デーモンを Swarm マネージャーとして初期化するか、あるいは <code class="highlighter-rouge">docker swarm join</code> を使って既存の Swarm にホストを追加しておく必要があります。
+どちらの場合でも、デフォルトの <code class="highlighter-rouge">ingress</code> オーバーレイネットワークが生成されます。
+このネットワークは、デフォルトで Swarm サービスが利用するものです。
+Swarm サービスを利用するつもりがなくても、これを行っておくことが必要です。
+この後には、ユーザー定義のオーバーレイネットワークを追加生成することができます。</p>
     </li>
   </ul>
 </blockquote>
 
-<p>To create an overlay network for use with swarm services, use a command like
-the following:</p>
+<p>Swarm サービスに対して利用するオーバーレイネットワークを生成するには、以下のようなコマンドを実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay my-overlay
 </code></pre></div></div>
 
-<p>To create an overlay network which can be used by swarm services <strong>or</strong>
-standalone containers to communicate with other standalone containers running on
-other Docker daemons, add the <code class="highlighter-rouge">--attachable</code> flag:</p>
+<p>オーバーレイネットワークを生成する目的が、Swarm サービスにおいて利用するだけでなく、スタンドアロンコンテナー <strong>においても</strong> 利用することが必要な場合で、他の Docker デーモン上で動作する他のスタンドアロンコンテナーとも通信を行う必要がある場合は、<code class="highlighter-rouge">--attachable</code> フラグを加えます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> overlay <span class="nt">--attachable</span> my-attachable-overlay
 </code></pre></div></div>
 
-<p>You can specify the IP address range, subnet, gateway, and other options. See
-<code class="highlighter-rouge">docker network create --help</code> for details.</p>
+<p>IP アドレス範囲、サブネット、ゲートウェイ、その他のオプションを指定することができます。
+詳しくは <code class="highlighter-rouge">docker network create --help</code> を確認してください。</p>
 
-<h3 id="encrypt-traffic-on-an-overlay-network">Encrypt traffic on an overlay network</h3>
+<h3 id="encrypt-traffic-on-an-overlay-network">オーバーレイネットワーク上のトラフィック暗号化</h3>
 
-<p>All swarm service management traffic is encrypted by default, using the
-<a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES algorithm</a> in
-GCM mode. Manager nodes in the swarm rotate the key used to encrypt gossip data
-every 12 hours.</p>
+<p>Swarm サービスの管理トラフィックは、デフォルトにおいて、GCM モードの <a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES アルゴリズム</a> を使ってすべて暗号化されます。
+Swarm 内のマネージャーノードは、ゴシップデータ（gossip data）の暗号化に利用する鍵を 12 時間ごとにローテートして利用します。</p>
 
-<p>To encrypt application data as well, add <code class="highlighter-rouge">--opt encrypted</code> when creating the
-overlay network. This enables IPSEC encryption at the level of the vxlan. This
-encryption imposes a non-negligible performance penalty, so you should test this
-option before using it in production.</p>
+<p>アプリケーションデータを暗号化するには、オーバーレイネットワークの生成時に <code class="highlighter-rouge">--opt encrypted</code> を指定します。
+これにより vxlan レベルの IPSEC 暗号化が実現します。
+この暗号化を利用すると、性能劣化が無視できない程度に発生します。
+したがって本番環境での利用を行うには、あらかじめ十分にテストを行っておく必要があります。</p>
 
-<p>When you enable overlay encryption, Docker creates IPSEC tunnels between all the
-nodes where tasks are scheduled for services attached to the overlay network.
-These tunnels also use the AES algorithm in GCM mode and manager nodes
-automatically rotate the keys every 12 hours.</p>
+<p>オーバーレイにおいて暗号化を有効にすると、Docker はノード間のすべてに IPSEC トンネルを生成して、
+オーバーレイネットワークにアタッチされたサービスに応じて、タスクをスケジューリングします。
+このトンネルは GCM モードでの AES アルゴリズムを利用するので、マネージャーノードは 12 時間ごとに鍵のローテートを自動的に行います。</p>
 
 <blockquote class="warning">
-  <p><strong>Do not attach Windows nodes to encrypted overlay networks.</strong></p>
+  <p><strong>Windows ノードは暗号化されたオーバーレイネットワークにアタッチしないでください。</strong></p>
 
-  <p>Overlay network encryption is not supported on Windows. If a Windows node
-attempts to connect to an encrypted overlay network, no error is detected but
-the node cannot communicate.</p>
+  <p>オーバーレイネットワークの暗号化は Windows 上においてはサポートされていません。
+暗号化されたオーバーレイネットワークに Windows ノードを接続しようとすると、エラーは発生しませんが、ただしそのノードは通信することができません。</p>
 </blockquote>
 
-<h4 id="swarm-mode-overlay-networks-and-standalone-containers">Swarm mode overlay networks and standalone containers</h4>
+<h4 id="swarm-mode-overlay-networks-and-standalone-containers">Swarm モードのオーバーレイネットワークとスタンドアロンコンテナー</h4>
 
-<p>You can use the overlay network feature with both <code class="highlighter-rouge">--opt encrypted --attachable</code>
- and attach unmanaged containers to that network:</p>
+<p>オーバーレイネットワーク機能を利用する際に <code class="highlighter-rouge">--opt encrypted --attachable</code> を同時に指定すれば、このネットワークに対して、管理外にあったコンテナーをアタッチさせることができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--opt</span> encrypted <span class="nt">--driver</span> overlay <span class="nt">--attachable</span> my-attachable-multi-host-network
 </code></pre></div></div>
 
-<h3 id="customize-the-default-ingress-network">Customize the default ingress network</h3>
+<h3 id="customize-the-default-ingress-network">デフォルトの ingress ネットワークのカスタマイズ</h3>
 
-<p>Most users never need to configure the <code class="highlighter-rouge">ingress</code> network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
-conflicts with one that already exists on your network, or you need to customize
-other low-level network settings such as the MTU.</p>
+<p>ほとんどのユーザーにとって <code class="highlighter-rouge">ingress</code> ネットワークをカスタマイズする必要はありません。
+ただし Docker 17.05 またはそれ以降においては、設定変更が可能です。
+たとえば自動的に設定されるサブネットが、ネットワーク上にすでにあるものとコンフリクトした場合には、設定が必要になります。
+また MTU のような低レベルのネットワーク設定を行う場合にも必要です。</p>
 
-<p>Customizing the <code class="highlighter-rouge">ingress</code> network involves removing and recreating it. This is
-usually done before you create any services in the swarm. If you have existing
-services which publish ports, those services need to be removed before you can
-remove the <code class="highlighter-rouge">ingress</code> network.</p>
+<p><code class="highlighter-rouge">ingress</code> ネットワークをカスタマイズするには、いったん削除して再生成することが必要です。
+通常は Swarm 上にサービスを生成する前に、これを行います。
+ポートを公開しているサービスがある場合は、<code class="highlighter-rouge">ingress</code> ネットワークを削除する前に、そのサービスを削除しておく必要があります。</p>
 
-<p>During the time that no <code class="highlighter-rouge">ingress</code> network exists, existing services which do not
-publish ports continue to function but are not load-balanced. This affects
-services which publish ports, such as a WordPress service which publishes port
-80.</p>
+<p><code class="highlighter-rouge">ingress</code> ネットワークが存在していない間、ポートを公開していないサービスであれば機能しますが、ただし負荷分散は行われません。
+この状況は、WordPress サービスのようにポート 80 を公開しているサービスに影響を及ぼします。</p>
 
 <ol>
   <li>
-    <p>Inspect the <code class="highlighter-rouge">ingress</code> network using <code class="highlighter-rouge">docker network inspect ingress</code>, and
-remove any services whose containers are connected to it. These are services
-that publish ports, such as a WordPress service which publishes port 80. If
-all such services are not stopped, the next step fails.</p>
+    <p><code class="highlighter-rouge">docker network inspect ingress</code> を実行して <code class="highlighter-rouge">ingress</code> ネットワークを調べます。
+そして、これに接続しているコンテナーのサービスをすべて削除します。
+このサービスとは WordPress サービスにように、ポートを公開しているものです。
+こういったサービスを停止し忘れていると、次の作業が失敗します。</p>
   </li>
   <li>
-    <p>Remove the existing <code class="highlighter-rouge">ingress</code> network:</p>
+    <p>既存の <code class="highlighter-rouge">ingress</code> ネットワークを削除します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network rm ingress
 
@@ -304,9 +288,9 @@ Are you sure you want to <span class="k">continue</span>? <span class="o">[</spa
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a new overlay network using the <code class="highlighter-rouge">--ingress</code> flag, along  with the
-custom options you want to set. This example sets the MTU to 1200, sets
-the subnet to <code class="highlighter-rouge">10.11.0.0/16</code>, and sets the gateway to <code class="highlighter-rouge">10.11.0.2</code>.</p>
+    <p><code class="highlighter-rouge">--ingress</code> フラグを使って、新たなオーバーレイネットワークを生成します。
+カスタマイズしたいオプションがあれば設定しておきます。
+以下の例では MTU を 1200、サブネットを <code class="highlighter-rouge">10.11.0.0/16</code>、ゲートウェイを <code class="highlighter-rouge">10.11.0.2</code> にそれぞれ指定しています。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="se">\</span>
   <span class="nt">--driver</span> overlay <span class="se">\</span>
@@ -318,32 +302,29 @@ the subnet to <code class="highlighter-rouge">10.11.0.0/16</code>, and sets the 
 </code></pre></div>    </div>
 
     <blockquote>
-      <p><strong>Note</strong>: You can name your <code class="highlighter-rouge">ingress</code> network something other than
-<code class="highlighter-rouge">ingress</code>, but you can only have one. An attempt to create a second one
-fails.</p>
+      <p><strong>メモ</strong>: 生成する <code class="highlighter-rouge">ingress</code> ネットワークの名前は <code class="highlighter-rouge">ingress</code> 以外にすることも可能です。
+ただし生成できるのは 1 つだけであり、2 つめを生成しようとしても失敗します。</p>
     </blockquote>
   </li>
   <li>
-    <p>Restart the services that you stopped in the first step.</p>
+    <p>1 つめの手順で停止させていたサービスを再起動します。</p>
   </li>
 </ol>
 
-<h3 id="customize-the-docker_gwbridge-interface">Customize the docker_gwbridge interface</h3>
+<h3 id="customize-the-docker_gwbridge-interface">docker_gwbridge インターフェースのカスタマイズ</h3>
 
-<p>The <code class="highlighter-rouge">docker_gwbridge</code> is a virtual bridge that connects the overlay networks
-(including the <code class="highlighter-rouge">ingress</code> network) to an individual Docker daemon’s physical
-network. Docker creates it automatically when you initialize a swarm or join a
-Docker host to a swarm, but it is not a Docker device. It exists in the kernel
-of the Docker host. If you need to customize its settings, you must do so before
-joining the Docker host to the swarm, or after temporarily removing the host
-from the swarm.</p>
+<p><code class="highlighter-rouge">docker_gwbridge</code> は仮想ブリッジであり、（<code class="highlighter-rouge">ingress</code> ネットワークを含む）オーバーレイネットワークを、個々の Docker デーモンにおいて稼動する物理ネットワークに接続します。
+Docker では、Swarm を初期化するとき、あるいは Docker ホストを Swarm に参加させるときに、この仮想ブリッジを自動生成します。
+ただしこれは Docker のデバイスではありません。
+Docker ホストのカーネル内に存在するものです。
+これに対する設定が必要な場合は、Docker ホストを Swarm に参加させる前、あるいはホストを一時的に Swarm から削除してから設定を行う必要があります。</p>
 
 <ol>
   <li>
-    <p>Stop Docker.</p>
+    <p>Docker を停止します。</p>
   </li>
   <li>
-    <p>Delete the existing <code class="highlighter-rouge">docker_gwbridge</code> interface.</p>
+    <p>既存の <code class="highlighter-rouge">docker_gwbridge</code> インターフェースを削除します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>ip link <span class="nb">set </span>docker_gwbridge down
 
@@ -351,13 +332,14 @@ from the swarm.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Start Docker. Do not join or initialize the swarm.</p>
+    <p>Docker を起動します。
+Swarm への参加、あるいは初期化は行いません。</p>
   </li>
   <li>
-    <p>Create or re-create the <code class="highlighter-rouge">docker_gwbridge</code> bridge manually with your custom
-settings, using the <code class="highlighter-rouge">docker network create</code> command.
-This example uses the subnet <code class="highlighter-rouge">10.11.0.0/16</code>. For a full list of customizable
-options, see <a href="/docs.docker.jp.onthefly/engine/reference/commandline/network_create/#bridge-driver-options">Bridge driver options</a>.</p>
+    <p><code class="highlighter-rouge">docker_gwbridge</code> ブリッジへのカスタマイズを行った上で、これを手動で再生成します。
+これは <code class="highlighter-rouge">docker network create</code> コマンドを使って行います。
+以下の例では、サブネットを <code class="highlighter-rouge">10.11.0.0/16</code> に指定しています。
+カスタマイズ可能なオプションについては、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/network_create/#bridge-driver-options">ブリッジドライバーのオプション</a> を参照してください。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="se">\</span>
 <span class="nt">--subnet</span> 10.11.0.0/16 <span class="se">\</span>
@@ -368,121 +350,116 @@ docker_gwbridge
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Initialize or join the swarm. Since the bridge already exists, Docker does
-not create it with automatic settings.</p>
+    <p>Swarm の初期化、あるいは Swarm への参加を行います。
+ブリッジが存在するので、Docker は自動設定にもとづくブリッジの生成は行いません。</p>
   </li>
 </ol>
 
-<h2 id="operations-for-swarm-services">Operations for swarm services</h2>
+<h2 id="operations-for-swarm-services">Swarm サービスに対する操作</h2>
 
-<h3 id="publish-ports-on-an-overlay-network">Publish ports on an overlay network</h3>
+<h3 id="publish-ports-on-an-overlay-network">オーバーレイネットワーク上でのポート公開</h3>
 
-<p>Swarm services connected to the same overlay network effectively expose all
-ports to each other. For a port to be accessible outside of the service, that
-port must be <em>published</em> using the <code class="highlighter-rouge">-p</code> or <code class="highlighter-rouge">--publish</code> flag on <code class="highlighter-rouge">docker service
-create</code> or <code class="highlighter-rouge">docker service update</code>. Both the legacy colon-separated syntax and
-the newer comma-separated value syntax are supported. The longer syntax is
-preferred because it is somewhat self-documenting.</p>
+<p>同一のオーバーレイネットワークに接続された Swarm サービスは、全ポートを互いに公開します。
+外部のサービスからアクセス可能な 1 つのポートがあるなら、そのポートは <code class="highlighter-rouge">docker service create</code> や <code class="highlighter-rouge">docker service update</code> を実行するときの <code class="highlighter-rouge">-p</code> または <code class="highlighter-rouge">--publish</code> フラグを使って、<strong>公開に</strong> しておかなければなりません。
+指定の際には、かつてのコロン区切りの文法と、最新のカンマ区切りによる文法がともにサポートされます。
+わかりやすくするために、長い文法を用いることが好まれています。</p>
 
 <table>
 <thead>
 <tr>
-<th>Flag value</th>
-<th>Description</th>
+<th>フラグ値</th>
+<th>内容説明</th>
 </tr>
 </thead>
 <tr>
-<td><tt>-p 8080:80</tt> or<br /><tt>-p published=8080,target=80</tt></td>
-<td>Map TCP port 80 on the service to port 8080 on the routing mesh.</td>
+<td><tt>-p 8080:80</tt> または<br /><tt>-p published=8080,target=80</tt></td>
+<td>サービス上の TCP ポート 80 をルーティングメッシュ上のポート 8080 にマッピングします。</td>
 </tr>
 <tr>
-<td><tt>-p 8080:80/udp</tt> or<br /><tt>-p published=8080,target=80,protocol=udp</tt></td>
-<td>Map UDP port 80 on the service to port 8080 on the routing mesh.</td>
+<td><tt>-p 8080:80/udp</tt> または<br /><tt>-p published=8080,target=80,protocol=udp</tt></td>
+<td>サービス上の UDP ポート 80 をルーティングメッシュ上のポート 8080 にマッピングします。</td>
 </tr>
 <tr>
-<td><tt>-p 8080:80/tcp -p 8080:80/udp</tt> or <br /><tt>-p published=8080,target=80,protocol=tcp -p published=8080,target=80,protocol=udp</tt></td>
-<td>Map TCP port 80 on the service to TCP port 8080 on the routing mesh, and map UDP port 80 on the service to UDP port 8080 on the routing mesh.</td>
+<td><tt>-p 8080:80/tcp -p 8080:80/udp</tt> または<br /><tt>-p published=8080,target=80,protocol=tcp -p published=8080,target=80,protocol=udp</tt></td>
+<td>サービス上の TCP ポート 80 をルーティングメッシュ上のポート 8080 にマッピングします。
+またサービス上の UDP ポート 80 をルーティングメッシュ上のポート 8080 にマッピングします。</td>
 </tr>
 </table>
 
-<h3 id="bypass-the-routing-mesh-for-a-swarm-service">Bypass the routing mesh for a swarm service</h3>
+<h3 id="bypass-the-routing-mesh-for-a-swarm-service">Swarm サービスにおけるルーティングメッシュの停止</h3>
 
-<p>By default, swarm services which publish ports do so using the routing mesh.
-When you connect to a published port on any swarm node (whether it is running a
-given service or not), you are redirected to a worker which is running that
-service, transparently. Effectively, Docker acts as a load balancer for your
-swarm services. Services using the routing mesh are running in <em>virtual IP (VIP)
-mode</em>. Even a service running on each node (by means of the <code class="highlighter-rouge">--mode global</code>
-flag) uses the routing mesh. When using the routing mesh, there is no guarantee
-about which Docker node services client requests.</p>
+<p>ポートを公開している Swarm サービスは、デフォルトでルーティングメッシュ（routing mesh）を利用します。
+Swarm ノードのいずれかの公開ポートに接続すると（指定のサービスが動作しているかどうかには関係なく）、そのサービスが動作しているワーカーノードにリダイレクトされます。
+Swarm サービスに対して、Docker が効率よくロードバランサーのように動作します。
+ルーティングメッシュを利用するサービスは、<strong>仮想 IP モード</strong>（virtual IP mode）として稼動します。
+各ノード上に稼動する別サービスであっても（<code class="highlighter-rouge">--mode global</code> フラグにより）ルーティングメッシュを利用します。
+ルーティングメッシュを利用した場合、クライアントが要求するノードサービスがどれになるかは保証されません。</p>
 
-<p>To bypass the routing mesh, you can start a service using <em>DNS Round Robin
-(DNSRR) mode</em>, by setting the <code class="highlighter-rouge">--endpoint-mode</code> flag to <code class="highlighter-rouge">dnsrr</code>. You must run
-your own load balancer in front of the service. A DNS query for the service name
-on the Docker host returns a list of IP addresses for the nodes running the
-service. Configure your load balancer to consume this list and balance the
-traffic across the nodes.</p>
+<p>ルーティングメッシュを停止するには、サービスを <strong>DNS ラウンドロビン</strong>（DNS Round Robin; DNSRR）モードで起動します。
+これは <code class="highlighter-rouge">--endpoint-mode</code> に <code class="highlighter-rouge">dnsrr</code> を設定することで実現します。
+サービスに対しては独自にロードバランサーを稼動させる必要があります。
+Docker ホスト上のサービス名に対する DNS 問い合わせは、サービスを実行しているノードの IP アドレス一覧を返します。
+ロードバランサーがこの一覧を解釈し、ノード間のトラフィックを調整するように設定を行ってください。</p>
 
-<h3 id="separate-control-and-data-traffic">Separate control and data traffic</h3>
+<h3 id="separate-control-and-data-traffic">制御情報とデータのトラフィック分離</h3>
 
-<p>By default, control traffic relating to swarm management and traffic to and from
-your applications runs over the same network, though the swarm control traffic
-is encrypted. You can configure Docker to use separate network interfaces for
-handling the two different types of traffic. When you initialize or join the
-swarm, specify <code class="highlighter-rouge">--advertise-addr</code> and <code class="highlighter-rouge">--datapath-addr</code> separately. You must do
-this for each node joining the swarm.</p>
+<p>Swarm の管理に関連する制御情報のトラフィックと、アプリケーションの動作において発生するトラフィックは、同じネットワーク上でやりとりされます。
+なお Swarm の制御情報トラフィックは暗号化されています。
+Docker では、この異なる種類のトラフィックを、別々のネットワークインターフェースに分けて取り扱う設定が可能です。
+Swarm の初期化時あるいは Swarm への参加時に <code class="highlighter-rouge">--advertise-addr</code>、<code class="highlighter-rouge">--datapath-addr</code> をそれぞれ指定します。
+Swarm に参加させるノードに対しては、必ずこれを行わなければなりません。</p>
 
-<h2 id="operations-for-standalone-containers-on-overlay-networks">Operations for standalone containers on overlay networks</h2>
+<h2 id="operations-for-standalone-containers-on-overlay-networks">オーバーレイネットワーク上のスタンドアロンコンテナーに対する操作</h2>
 
-<h3 id="attach-a-standalone-container-to-an-overlay-network">Attach a standalone container to an overlay network</h3>
+<h3 id="attach-a-standalone-container-to-an-overlay-network">オーバーレイネットワークへのスタンドアロンコンテナーのアタッチ</h3>
 
-<p>The <code class="highlighter-rouge">ingress</code> network is created without the <code class="highlighter-rouge">--attachable</code> flag, which means
-that only swarm services can use it, and not standalone containers. You can
-connect standalone containers to user-defined overlay networks which are created
-with the <code class="highlighter-rouge">--attachable</code> flag. This gives standalone containers running on
-different Docker daemons the ability to communicate without the need to set up
-routing on the individual Docker daemon hosts.</p>
+<p><code class="highlighter-rouge">ingress</code> ネットワークを <code class="highlighter-rouge">--attachable</code> フラグの指定をせずに生成すると、Swarm サービスだけがこれを利用できるようになり、スタンドアロンコンテナーは利用できません。
+スタンドアロンコンテナーの場合は、ユーザー定義のオーバーレイネットワークを <code class="highlighter-rouge">--attachable</code> フラグにより生成すれば、接続ができます。
+このようにすれば、スタンドアロンコンテナーを、さまざまな Docker デーモン上に起動させることが可能であり、
+個別のデーモンホスト上にルーティングを設定することなく、通信が行えるようになります。</p>
 
-<h3 id="publish-ports">Publish ports</h3>
+<h3 id="publish-ports">公開ポート</h3>
 
 <table>
   <thead>
     <tr>
-      <th>Flag value</th>
-      <th>Description</th>
+      <th>フラグ値</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">-p 8080:80</code></td>
-      <td>Map TCP port 80 in the container to port 8080 on the overlay network.</td>
+      <td>コンテナー上の TCP ポート 80 をオーバーレイネットワーク上のポート 8080 にマッピングします。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">-p 8080:80/udp</code></td>
-      <td>Map UDP port 80 in the container to port 8080 on the overlay network.</td>
+      <td>コンテナー上の UDP ポート 80 をオーバーレイネットワーク上のポート 8080 にマッピングします。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">-p 8080:80/sctp</code></td>
-      <td>Map SCTP port 80 in the container to port 8080 on the overlay network.</td>
+      <td>コンテナー上の SCTP ポート 80 をオーバーレイネットワーク上のポート 8080 にマッピングします。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">-p 8080:80/tcp -p 8080:80/udp</code></td>
-      <td>Map TCP port 80 in the container to TCP port 8080 on the overlay network, and map UDP port 80 in the container to UDP port 8080 on the overlay network.</td>
+      <td>コンテナー上の TCP ポート 80 をオーバーレイネットワーク上のポート 8080 にマッピングします。またコンテナー上の UDP ポート 80 をオーバーレイネットワーク上のポート 8080 にマッピングします。</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="container-discovery">Container discovery</h3>
+<h3 id="container-discovery">コンテナーの検出</h3>
 
-<p>For most situations, you should connect to the service name, which is load-balanced and handled by all containers (“tasks”) backing the service. To get a list of all tasks backing the service, do a DNS lookup for <code class="highlighter-rouge">tasks.&lt;service-name&gt;.</code></p>
+<p>接続先を指定するには、たいていの場合サービス名を用います。
+サービスが負荷分散されていたり、サービスのもとにあるコンテナー（「タスク」）のすべてによって取り扱われていたりするからです。
+サービスのもとにあるタスク全一覧を取得するには、<code class="highlighter-rouge">tasks.&lt;サービス名&gt;</code> に対して DNS 問い合わせを行ってください。</p>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
 <ul>
-  <li>Go through the <a href="/docs.docker.jp.onthefly/network/network-tutorial-overlay/">overlay networking tutorial</a></li>
-  <li>Learn about <a href="/docs.docker.jp.onthefly/config/containers/container-networking/">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="/docs.docker.jp.onthefly/network/bridge/">standalone bridge networks</a></li>
-  <li>Learn about <a href="/docs.docker.jp.onthefly/network/macvlan/">Macvlan networks</a></li>
+  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-overlay/">オーバーレイネットワークのチュートリアル</a> をひととおり読んでください。</li>
+  <li><a href="/docs.docker.jp.onthefly/config/containers/container-networking/">コンテナーから見たネットワーク</a> について。</li>
+  <li><a href="/docs.docker.jp.onthefly/network/bridge/">スタンドアロンブリッジネットワーク</a> について。</li>
+  <li><a href="/docs.docker.jp.onthefly/network/macvlan/">Macvlan ネットワーク</a> について。</li>
 </ul>
 
                             <!-- tags -->
@@ -503,7 +480,7 @@ routing on the individual Docker daemon hosts.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "network/overlay.md",
-                                        "title": "Use overlay networks",
+                                        "title": "オーバーレイネットワークの利用",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/network/overlay.md"
                                     };
                                     (function (d, c, j) {
@@ -569,29 +546,29 @@ routing on the individual Docker daemon hosts.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#operations-for-all-overlay-networks" class="nomunge">Operations for all overlay networks</a>
+  <li><a href="#operations-for-all-overlay-networks" class="nomunge">オーバーレイネットワークに対する全般的な操作</a>
     <ul>
-      <li><a href="#create-an-overlay-network" class="nomunge">Create an overlay network</a></li>
-      <li><a href="#encrypt-traffic-on-an-overlay-network" class="nomunge">Encrypt traffic on an overlay network</a></li>
-      <li><a href="#customize-the-default-ingress-network" class="nomunge">Customize the default ingress network</a></li>
-      <li><a href="#customize-the-docker_gwbridge-interface" class="nomunge">Customize the docker_gwbridge interface</a></li>
+      <li><a href="#create-an-overlay-network" class="nomunge">オーバーレイネットワークの生成</a></li>
+      <li><a href="#encrypt-traffic-on-an-overlay-network" class="nomunge">オーバーレイネットワーク上のトラフィック暗号化</a></li>
+      <li><a href="#customize-the-default-ingress-network" class="nomunge">デフォルトの ingress ネットワークのカスタマイズ</a></li>
+      <li><a href="#customize-the-docker_gwbridge-interface" class="nomunge">docker_gwbridge インターフェースのカスタマイズ</a></li>
     </ul>
   </li>
-  <li><a href="#operations-for-swarm-services" class="nomunge">Operations for swarm services</a>
+  <li><a href="#operations-for-swarm-services" class="nomunge">Swarm サービスに対する操作</a>
     <ul>
-      <li><a href="#publish-ports-on-an-overlay-network" class="nomunge">Publish ports on an overlay network</a></li>
-      <li><a href="#bypass-the-routing-mesh-for-a-swarm-service" class="nomunge">Bypass the routing mesh for a swarm service</a></li>
-      <li><a href="#separate-control-and-data-traffic" class="nomunge">Separate control and data traffic</a></li>
+      <li><a href="#publish-ports-on-an-overlay-network" class="nomunge">オーバーレイネットワーク上でのポート公開</a></li>
+      <li><a href="#bypass-the-routing-mesh-for-a-swarm-service" class="nomunge">Swarm サービスにおけるルーティングメッシュの停止</a></li>
+      <li><a href="#separate-control-and-data-traffic" class="nomunge">制御情報とデータのトラフィック分離</a></li>
     </ul>
   </li>
-  <li><a href="#operations-for-standalone-containers-on-overlay-networks" class="nomunge">Operations for standalone containers on overlay networks</a>
+  <li><a href="#operations-for-standalone-containers-on-overlay-networks" class="nomunge">オーバーレイネットワーク上のスタンドアロンコンテナーに対する操作</a>
     <ul>
-      <li><a href="#attach-a-standalone-container-to-an-overlay-network" class="nomunge">Attach a standalone container to an overlay network</a></li>
-      <li><a href="#publish-ports" class="nomunge">Publish ports</a></li>
-      <li><a href="#container-discovery" class="nomunge">Container discovery</a></li>
+      <li><a href="#attach-a-standalone-container-to-an-overlay-network" class="nomunge">オーバーレイネットワークへのスタンドアロンコンテナーのアタッチ</a></li>
+      <li><a href="#publish-ports" class="nomunge">公開ポート</a></li>
+      <li><a href="#container-discovery" class="nomunge">コンテナーの検出</a></li>
     </ul>
   </li>
-  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
 </ul>
 
 

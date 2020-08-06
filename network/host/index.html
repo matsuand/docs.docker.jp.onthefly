@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 20:29:45 +0900 -->
+<!-- Page generated 2020-08-04 15:11:45 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T20:29:45+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-04T15:11:45+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:title" itemprop="title name" content="ホストネットワークの利用"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="コンテナーに対して host ネットワークモードを利用すると、そのコンテナーのネットワーク構成は、Docker ホストからは分離されません。 （そのコンテナーはホストのネットワーク名前空間を共有します。） そしてそのコンテナーは、独自に割り当てられる IP アドレスを用いません。 たとえばポート 80 を割り当てているコンテナーを実行するにあたり、host ネットワークとしている場合、コンテナー上に動作するアプリケーションは、ホストの IP アドレスにおけるポート 80 が利用可能となります。 メモ: Given that the container does not have its own IP-address when using host..." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="コンテナーに対して host ネットワークモードを利用すると、コンテナーのネットワーク構成は Docker ホストからは分離されません。 （そのコンテナーはホストのネットワーク名前空間を共有します。） そしてそのコンテナーは、独自に割り当てられる IP アドレスを用いません。 たとえばポート 80 を割り当てているコンテナーを実行するにあたり、host ネットワークとしている場合、コンテナー上に動作するアプリケーションは、ホストの IP アドレスにおけるポート 80 が利用可能となります。 メモ: host モードのネットワークを利用する場合、コンテナーは独自の IP アドレスを持たないため、ポートマッピング は機能しません。 したがって -p、--publish、-P、--publish-all の各オプションは無視され、警告メッセージが表示されます。 WARNING: Published ports are..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T20:29:45+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-04T15:11:45+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="network, host, standalone">
@@ -158,44 +158,41 @@
 
                             
                             
-<p>コンテナーに対して <code class="highlighter-rouge">host</code> ネットワークモードを利用すると、そのコンテナーのネットワーク構成は、Docker ホストからは分離されません。
+<p>コンテナーに対して <code class="highlighter-rouge">host</code> ネットワークモードを利用すると、コンテナーのネットワーク構成は Docker ホストからは分離されません。
 （そのコンテナーはホストのネットワーク名前空間を共有します。）
 そしてそのコンテナーは、独自に割り当てられる IP アドレスを用いません。
 たとえばポート 80 を割り当てているコンテナーを実行するにあたり、<code class="highlighter-rouge">host</code> ネットワークとしている場合、コンテナー上に動作するアプリケーションは、ホストの IP アドレスにおけるポート 80 が利用可能となります。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: Given that the container does not have its own IP-address when using
-<code class="highlighter-rouge">host</code> mode networking, <a href="/docs.docker.jp.onthefly/network/overlay/#publish-ports">port-mapping</a> does not
-take effect, and the <code class="highlighter-rouge">-p</code>, <code class="highlighter-rouge">--publish</code>, <code class="highlighter-rouge">-P</code>, and <code class="highlighter-rouge">--publish-all</code> option are
-ignored, producing a warning instead:</p>
+  <p><strong>メモ</strong>: <code class="highlighter-rouge">host</code> モードのネットワークを利用する場合、コンテナーは独自の IP アドレスを持たないため、<a href="/docs.docker.jp.onthefly/network/overlay/#publish-ports">ポートマッピング</a> は機能しません。
+したがって <code class="highlighter-rouge">-p</code>、<code class="highlighter-rouge">--publish</code>、<code class="highlighter-rouge">-P</code>、<code class="highlighter-rouge">--publish-all</code> の各オプションは無視され、警告メッセージが表示されます。</p>
 
   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WARNING: Published ports are discarded when using host network mode
 </code></pre></div>  </div>
 </blockquote>
 
-<p>Host mode networking can be useful to optimize performance, and in situations where
-a container needs to handle a large range of ports, as it does not require network
-address translation (NAT), and no “userland-proxy” is created for each port.</p>
+<p>ネットワークをホストモードにすると、性能を最適化できます。
+またコンテナーが広範囲にわたるポートを取り扱う必要がある場合に役立ちます。
+これは、ネットワークアドレス変換（NAT）が不要であり、各ポートに「ユーザーランドプロキシー」が生成されないからです。</p>
 
-<p>The host networking driver only works on Linux hosts, and is not supported on
-Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.</p>
+<p>ホストネットワークにおけるドライバーは Linux ホスト上においてのみ動作します。
+Docker Desktop for Mac、Docker Desktop for Windows、Docker EE for Windows Server ではサポートされていません。</p>
 
-<p>You can also use a <code class="highlighter-rouge">host</code> network for a swarm service, by passing <code class="highlighter-rouge">--network host</code>
-to the <code class="highlighter-rouge">docker service create</code> command. In this case, control traffic (traffic
-related to managing the swarm and the service) is still sent across an overlay
-network, but the individual swarm service containers send data using the Docker
-daemon’s host network and ports. This creates some extra limitations. For instance,
-if a service container binds to port 80, only one service container can run on a
-given swarm node.</p>
+<p><code class="highlighter-rouge">host</code> ネットワークは Swarm サービスに対しても利用できます。
+利用するには <code class="highlighter-rouge">docker service create</code> コマンドに <code class="highlighter-rouge">--network host</code> を指定します。
+この場合、制御情報のトラフィック（Swarm やサービスの管理に関連するトラフィック）は、変わらずオーバーレイネットワークを介して送信されます。
+一方、個々の Swarm サービスコンテナーは、Docker デーモンホスト上のネットワークとポートを利用して、データ送信を行います。
+このときには、新たな制約が発生します。
+たとえば 1 つのサービスコンテナーがポート 80 に割り当てられると、指定された Swarm ノード上では 1 つのサービスコンテナーしか稼動できません。</p>
 
 <h2 id="next-steps">次のステップ</h2>
 
 <ul>
-  <li>Go through the <a href="/docs.docker.jp.onthefly/network/network-tutorial-host/">host networking tutorial</a></li>
-  <li>Learn about <a href="/docs.docker.jp.onthefly/config/containers/container-networking/">networking from the container’s point of view</a></li>
-  <li>Learn about <a href="/docs.docker.jp.onthefly/network/bridge/">bridge networks</a></li>
-  <li>Learn about <a href="/docs.docker.jp.onthefly/network/overlay/">overlay networks</a></li>
-  <li>Learn about <a href="/docs.docker.jp.onthefly/network/macvlan/">Macvlan networks</a></li>
+  <li><a href="/docs.docker.jp.onthefly/network/network-tutorial-host/">ホストネットワークのチュートリアル</a> をひととおり読んでください。</li>
+  <li><a href="/docs.docker.jp.onthefly/config/containers/container-networking/">コンテナーから見たネットワーク</a> について。</li>
+  <li><a href="/docs.docker.jp.onthefly/network/bridge/">ブリッジネットワーク</a> について。</li>
+  <li><a href="/docs.docker.jp.onthefly/network/overlay/">オーバーレイネットワーク</a> について。</li>
+  <li><a href="/docs.docker.jp.onthefly/network/macvlan/">Macvlan ネットワーク</a> について。</li>
 </ul>
 
                             <!-- tags -->
