@@ -1458,7 +1458,7 @@ var pages = [
 ,
 {
 "url":"/engine/api/sdk/examples/",
-"title":"Examples using the Docker Engine SDKs and Docker API",
+"title":"Docker Engine SDK および Docker API の利用例",
 "description":null,
 "keywords":"developing, api, sdk, developers, rest, curl, python, go"
 }
@@ -2123,7 +2123,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/ingress/",
-"title":"Swarm モードのルーティングメッシュの利用",
+"title":"Swarm モードにおけるルーティングメッシュの利用",
 "description":"Use the routing mesh to publish services externally to a swarm",
 "keywords":"guide, swarm mode, swarm, network, ingress, routing mesh"
 }
@@ -2564,28 +2564,28 @@ var pages = [
 ,
 {
 "url":"/network/network-tutorial-host/",
-"title":"Networking using the host network",
+"title":"ホストネットワークのチュートリアル",
 "description":"Tutorials for networking using the host network, disabling network isolation",
 "keywords":"networking, host, standalone"
 }
 ,
 {
 "url":"/network/network-tutorial-macvlan/",
-"title":"Networking using a macvlan network",
+"title":"Macvlan ネットワークのチュートリアル",
 "description":"Tutorials for networking using a macvlan bridge network and 802.1q trunk bridge network",
 "keywords":"networking, macvlan, 802.1q, standalone"
 }
 ,
 {
 "url":"/network/network-tutorial-overlay/",
-"title":"Networking with overlay networks",
+"title":"オーバーレイネットワークのチュートリアル",
 "description":"Tutorials for networking with swarm services and standalone containers on multiple Docker daemons",
 "keywords":"networking, bridge, routing, ports, swarm, overlay"
 }
 ,
 {
 "url":"/network/network-tutorial-standalone/",
-"title":"スタンドアロンなコンテナーのネットワーク",
+"title":"スタンドアロンコンテナーのネットワークチュートリアル",
 "description":"Tutorials for networking with standalone containers",
 "keywords":"networking, bridge, routing, ports, overlay"
 }
