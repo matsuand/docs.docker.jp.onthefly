@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-08-11 19:10:01 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-11T19:10:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="これは試験的な（experimental）機能です。 試験的な機能は、将来の製品に搭載される機能をいち早く試すことができるものです。 ただし現段階でのこの機能は、テストとフィードバックのためだけを意図しています。 したがってリリース時には予告なく変更される場合があり、将来のリリースでは完全に削除されることもあります。 試験的な機能は本番環境では利用しないでください。 Docker ではこの試験的機能に対するサポートは行っていません。 Docker CLI において試験的機能を有効にするには、config.json ファイルを編集して experimental を有効に設定してください。 Docker Desktop メニューから試験的機能を有効にするには、Settings (macOS の場合は Preferences) &gt; Command Line をクリックし、Enable experimental features チェックを有効にします。 そして Apply &amp; Restart..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-11T19:10:01+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="Docker App, applications, compose, orchestration">
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    13 分
+    6 分
   
 </span>
 
@@ -178,8 +178,9 @@ Docker ではこの試験的機能に対するサポートは行っていませ�
 
 <h2 id="overview">概要</h2>
 
-<p>Docker App is a CLI plug-in that introduces a top-level <code class="highlighter-rouge">docker app</code> command to bring
-the <em>container experience</em> to applications. The following table compares Docker containers with Docker applications.</p>
+<p>Docker App は CLI プラグインの 1 つです。
+トップレベルの <code class="highlighter-rouge">docker app</code> コマンドを導入し、アプリケーションに対して <strong>コンテナー感覚の</strong> 機能を提供します。
+以下の表は、Docker コンテナーと Docker アプリケーションを比較したものです。</p>
 
 <table>
   <thead>
@@ -209,66 +210,68 @@ the <em>container experience</em> to applications. The following table compares 
   </tbody>
 </table>
 
-<p>With Docker App, entire applications can now be managed as easily as images and containers. For example,
-Docker App lets you  <em>build</em>, <em>validate</em> and <em>deploy</em> applications with the <code class="highlighter-rouge">docker app</code> command. You can
-even leverage secure supply-chain features such as signed <code class="highlighter-rouge">push</code> and <code class="highlighter-rouge">pull</code> operations.</p>
+<p>Docker App を利用すると、イメージやコンテナーと同じ感覚で、簡単にアプリケーション全体を管理できるようになります。
+たとえば Docker App では <code class="highlighter-rouge">docker app</code> コマンドによって、アプリケーションの <strong>ビルド</strong>、<strong>検証</strong>、<strong>デプロイ</strong> が可能になります。
+さらに認証機能を含めた <code class="highlighter-rouge">push</code> や <code class="highlighter-rouge">pull</code> 操作のような、セキュアなサプライチェーンを活用することができます。</p>
 
 <blockquote>
-  <p><strong>NOTE</strong>: <code class="highlighter-rouge">docker app</code> works with <code class="highlighter-rouge">Docker 19.03</code> or higher.</p>
+  <p><strong>メモ</strong>: <code class="highlighter-rouge">docker app</code> は <code class="highlighter-rouge">Docker 19.03</code> またはそれ以降において動作します。</p>
 </blockquote>
 
-<p>This guide walks you through two scenarios:</p>
+<p>以下のガイドでは 2 つのシナリオを進めていきます。</p>
 
 <ol>
-  <li>Initialize and deploy a new Docker App project from scratch.</li>
-  <li>Convert an existing Compose app into a Docker App project (added later in the beta process).</li>
+  <li>Docker アプリケーションプロジェクトを初期化から始めてデプロイを行います。</li>
+  <li>既存の Compose アプリを Docker アプリケーションプロジェクトに変換します。
+（added later in the beta process）</li>
 </ol>
 
-<p>The first scenario describes basic components of a Docker App with tools and workflow.</p>
+<p>1 つめのシナリオは、ツールや作業の流れを通じて Docker App の基本的なコンポーネントを説明します。</p>
 
-<h2 id="initialize-and-deploy-a-new-docker-app-project-from-scratch">Initialize and deploy a new Docker App project from scratch</h2>
+<h2 id="initialize-and-deploy-a-new-docker-app-project-from-scratch">Docker アプリプロジェクトの初期化からデプロイまで</h2>
 
-<p>This section describes the steps for creating a new Docker App project to familiarize you with the workflow and most important commands.</p>
+<p>この節では、新たに Docker アプリケーションプロジェクトを生成する手順を示し、作業の流れをつかむと同時に、最も重要なコマンドを示すものです。</p>
 
 <ol>
-  <li>Prerequisites</li>
-  <li>Initialize an empty new project</li>
-  <li>Populate the project</li>
-  <li>Validate the app</li>
-  <li>Deploy the app</li>
-  <li>Push the app to Docker Hub</li>
-  <li>Install the app directly from Docker Hub</li>
+  <li>前提条件</li>
+  <li>新しい空のプロジェクトの初期化</li>
+  <li>プロジェクトの構築</li>
+  <li>アプリの検証</li>
+  <li>アプリのデプロイ</li>
+  <li>Docker Hub へのアプリのプル</li>
+  <li>Docker Hub からのアプリの直接インストール</li>
 </ol>
 
-<h3 id="prerequisites">Prerequisites</h3>
+<h3 id="prerequisites">前提条件</h3>
 
-<p>You need at least one Docker node operating in Swarm mode. You also need the latest build of the Docker CLI
-with the App CLI plugin included.</p>
+<p>まずは Swarm モードで稼動する Docker ノードが、最低でも 1 つ必要です。
+また Docker CLI の最新版と、そこに Docker App の CLI プラグインが含まれている必要があります。</p>
 
-<p>Depending on your Linux distribution and your security context, you might need to prepend commands with <code class="highlighter-rouge">sudo</code>.</p>
+<p>利用する Linux ディストリビューションやセキュリティ方針の違いによっては、コマンドに <code class="highlighter-rouge">sudo</code> をつける必要があります。</p>
 
-<h3 id="initialize-a-new-empty-project">Initialize a new empty project</h3>
+<h3 id="initialize-a-new-empty-project">新たな空のプロジェクト生成</h3>
 
-<p>The <code class="highlighter-rouge">docker app init</code> command is used to initialize a new Docker application project. If you run it on
-its own, it initializes a new empty project. If you point it to an existing <code class="highlighter-rouge">docker-compose.yml</code> file,
-it initializes a new project based on the Compose file.</p>
+<p><code class="highlighter-rouge">docker app init</code> コマンドは、新たに Docker アプリケーションプロジェクトを初期化する際に用います。
+このコマンドを単純に実行した場合は、新たな空のプロジェクトを初期化します。
+コマンド実行の際に既存の <code class="highlighter-rouge">docker-compose.yml</code> ファイルを指定した場合は、この Compose ファイルに基づくプロジェクトが新たに初期化されます。</p>
 
-<p>Use the following command to initialize a new empty project called “hello-world”.</p>
+<p>そこで以下のコマンドを実行して、「hello-world」という名前で空のプロジェクトを初期化します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app init --single-file hello-world
 Created "hello-world.dockerapp"
 </code></pre></div></div>
 
-<p>The command produces a single file in your current directory called <code class="highlighter-rouge">hello-world.dockerapp</code>.
-The format of the file name is   <project-name> appended with `.dockerapp`.</project-name>
+<p>このコマンド実行によって、カレントディレクトリには <code class="highlighter-rouge">hello-world.dockerapp</code> という名前のファイルが 1 つ生成されます。
+ファイル名の書式は   <プロジェクト名> に `.dockerapp` がつきます。</プロジェクト名>
 </p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls
 hello-world.dockerapp
 </code></pre></div></div>
 
-<p>If you run <code class="highlighter-rouge">docker app init</code> without the <code class="highlighter-rouge">--single-file</code> flag, you get a new directory containing three YAML files.
-The name of the directory is the name of the project with <code class="highlighter-rouge">.dockerapp</code> appended, and the three YAML files are:</p>
+<p><code class="highlighter-rouge">docker app init</code> の実行の際に <code class="highlighter-rouge">--single-file</code> フラグをつけなかった場合は、新たなディレクトリが生成されて、そこに YAML ファイルが 3 つ作り出されます。
+ディレクトリ名は、プロジェクト名に <code class="highlighter-rouge">.dockerapp</code> がつけられたものです。
+そして 3 つの YAML ファイルは以下のものです。</p>
 
 <ul>
   <li><code class="highlighter-rouge">docker-compose.yml</code></li>
@@ -276,12 +279,11 @@ The name of the directory is the name of the project with <code class="highlight
   <li><code class="highlighter-rouge">parameters.yml</code></li>
 </ul>
 
-<p>However, the <code class="highlighter-rouge">--single-file</code> option merges the three YAML files into a single YAML file with three sections.
-Each of these sections relates to one of the three YAML files mentioned previously: <code class="highlighter-rouge">docker-compose.yml</code>,
-<code class="highlighter-rouge">metadata.yml</code>, and <code class="highlighter-rouge">parameters.yml</code>. Using the <code class="highlighter-rouge">--single-file</code> option enables you to share your application
-using a single configuration file.</p>
+<p>もっとも <code class="highlighter-rouge">--single-file</code> オプションは、上の 3 つの YAML ファイルを、3 つのセクションからなる 1 つの YAML ファイルとしてマージします。
+各セクションは 3 つの YAML ファイル、つまり <code class="highlighter-rouge">docker-compose.yml</code>、<code class="highlighter-rouge">metadata.yml</code>、<code class="highlighter-rouge">parameters.yml</code> のそれぞれに対応します。
+<code class="highlighter-rouge">--single-file</code> オプションを指定すれば、1 つの設定ファイルだけでアプリケーションの設定を行うことができます。</p>
 
-<p>Inspect the YAML with the following command.</p>
+<p>YAML ファイルの内容を以下のようにして確認します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat hello-world.dockerapp
 # Application metadata - equivalent to metadata.yml.
@@ -296,23 +298,28 @@ services: {}
 # Default application parameters - equivalent to parameters.yml.
 </code></pre></div></div>
 
-<p>Your file might be more verbose.</p>
+<p>生成された実際のファイルは、もっとたくさんの情報が含まれているかもしれません。</p>
 
-<p>Notice that each of the three sections is separated by a set of three dashes (“---“). Let’s quickly describe each section.</p>
+<p>3 つのセクションはそれぞれ、ダッシュ記号 3 文字分（「---」）によって区切られます。
+以下に各セクションの内容を見ていきます。</p>
 
-<p>The first section of the file specifies identification metadata such as name, version,
-description and maintainers. It accepts key-value pairs. This part of the file can be a separate file called <code class="highlighter-rouge">metadata.yml</code></p>
+<p>1 つめのセクションは、プロジェクトを識別するメタデータ、たとえば名前、バージョン、内容説明、保守担当者といったものを指定しています。
+その指定にはキーバリューペアが用いられます。
+この部分は、<code class="highlighter-rouge">metadata.yml</code> というファイルに切り分けることができます。</p>
 
-<p>The second section of the file describes the application. It can be a separate file called <code class="highlighter-rouge">docker-compose.yml</code>.</p>
+<p>2 つめのセクションはアプリケーションに関することが示されます。
+この部分は、<code class="highlighter-rouge">docker-compose.yml</code> というファイルに切り分けることができます。</p>
 
-<p>The final section specifies default values for application parameters. It can be a separate file called <code class="highlighter-rouge">parameters.yml</code></p>
+<p>3 つめのセクションは、アプリケーションにおけるパラメーターのデフォルト値を定めます。
+この部分は、<code class="highlighter-rouge">parameters.yml</code> というファイルに切り分けることができます。</p>
 
-<h3 id="populate-the-project">Populate the project</h3>
+<h3 id="populate-the-project">プロジェクトの構築</h3>
 
-<p>This section describes editing the project YAML file so that it runs a simple web app.</p>
+<p>この節では、プロジェクトを定義する YAML ファイルの編集を行います。
+これによって単純なウェブアプリを実行します。</p>
 
-<p>Use your preferred editor to edit the <code class="highlighter-rouge">hello-world.dockerapp</code> YAML file and update the application section with
-the following information:</p>
+<p>好みのエディターを使って、YAML ファイル <code class="highlighter-rouge">hello-world.dockerapp</code> を編集します。
+アプリケーションセクションを、以下に示す情報に書き換えます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3.6"
 services:
@@ -323,27 +330,30 @@ services:
       - ${hello.port}:5678
 </code></pre></div></div>
 
-<p>Update the <code class="highlighter-rouge">Parameters</code> section to the following:</p>
+<p><code class="highlighter-rouge">Parameters</code> セクションは以下のようにします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello:
   port: 8080
   text: Hello world!
 </code></pre></div></div>
 
-<p>The sections of the YAML file are currently order-based. This means it’s important they remain in the order we’ve explained, with the <em>metadata</em> section being first, the <em>app</em> section being second, and the <em>parameters</em> section being last. This may change to name-based sections in future releases.</p>
+<p>YAML ファイルの各セクションは、順序ベース、つまり順序が定められた書き方をします。
+したがって上で説明した順番どおりに、各セクションを記述することが重要です。
+1 つめが <strong>メタデータ</strong> セクション、2 つめが <strong>アプリ</strong> セクション、最後が <strong>パラメーター</strong> セクションです。
+将来のリリースでは名前ベースでのセクション記述に変更するかもしれません。</p>
 
-<p>Save the changes.</p>
+<p>変更を保存します。</p>
 
-<p>The application is updated to run a single-container application based on the <code class="highlighter-rouge">hashicorp/http-echo</code> web server image.
-This image has it execute a single command that displays some text and exposes itself on a network port.</p>
+<p>アプリケーションが更新されて、<code class="highlighter-rouge">hashicorp/http-echo</code> というウェブサーバーイメージに基づいた、単一コンテナーのアプリケーションが動くものになりました。
+このイメージでは、文字列を表示するコマンドが一つあり、ネットワークポート上にイメージを公開しています。</p>
 
-<p>Following best practices, the configuration of the application is decoupled from the application itself using variables.
-In this case, the text displayed by the app and the port on which it will be published are controlled by two variables defined in the <code class="highlighter-rouge">Parameters</code> section of the file.</p>
+<p>ベストプラクティスに従って、アプリケーションの設定は、変数を用いてアプリケーション本体からは切り離します。
+この例では、アプリが出力する文字列、アプリが公開されるポートは、いずれも設定ファイル内の <code class="highlighter-rouge">Parameters</code> セクションにおいて 2 つの変数として定義され、これにより制御されます。</p>
 
-<p>Docker App provides the <code class="highlighter-rouge">inspect</code> subcommand to provide a prettified summary of the application configuration.
-It is a quick way to check how to configure the application before deployment, without having to read
-the <code class="highlighter-rouge">Compose file</code>. It’s important to note that the application is not running at this point, and that
-the <code class="highlighter-rouge">inspect</code> operation inspects the configuration file(s).</p>
+<p>Docker App にはサブコマンド <code class="highlighter-rouge">inspect</code> があり、アプリケーション設定についてわかりやすく概要を示してくれます。
+デプロイを行う前に、アプリケーション設定の様子を確認する手軽な方法です。
+わざわざ Compose ファイルを見る必要はありません。
+この時点でアプリケーションは実行されていないわけですから、<code class="highlighter-rouge">inspect</code> コマンドは設定ファイルを見にいくものであるのがわかります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app inspect hello-world.dockerapp
 hello-world 0.1.0
@@ -358,44 +368,44 @@ hello.port     8080
 hello.text     Hello world!
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker app inspect</code> operations fail if the <code class="highlighter-rouge">Parameters</code> section doesn’t specify a default value for
-every parameter expressed in the app section.</p>
+<p>アプリケーションの設定において用いられているパラメーターが、<code class="highlighter-rouge">Parameters</code> セクションにおいてデフォルト設定がされていない場合、<code class="highlighter-rouge">docker app inspect</code> コマンドは失敗します。</p>
 
-<p>The application is ready to be validated and rendered.</p>
+<p>アプリケーションの検証と公開が可能な状態になりました。</p>
 
-<h3 id="validate-the-app">Validate the app</h3>
+<h3 id="validate-the-app">アプリの検証</h3>
 
-<p>Docker App provides the <code class="highlighter-rouge">validate</code> subcommand to check syntax and other aspects of the configuration.
-If the app passes validation, the command returns no arguments.</p>
+<p>Docker App では、サブコマンド <code class="highlighter-rouge">validate</code> を提供しています。
+これは設定ファイルに対して、文法や他の観点のチェックを行うものです。
+アプリの検証に成功した場合は、コマンドは正常終了します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app validate hello-world.dockerapp
 Validated "hello-world.dockerapp"
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker app validate</code> operations fail if the <code class="highlighter-rouge">Parameters</code> section doesn’t specify a default value for
-every parameter expressed in the app section.</p>
+<p><code class="highlighter-rouge">docker app validate</code> コマンドは、アプリケーションセクションに記述されたパラメーターすべてに対して、<code class="highlighter-rouge">Parameters</code> セクションにおいてそのデフォルト値が定められていない場合に、エラー終了します。</p>
 
-<p>As the <code class="highlighter-rouge">validate</code> operation has returned no problems, the app is ready to be deployed.</p>
+<p><code class="highlighter-rouge">validate</code> 操作に問題がなかったので、アプリケーションをデプロイする準備が整いました。</p>
 
-<h3 id="deploy-the-app">Deploy the app</h3>
+<h3 id="deploy-the-app">アプリのデプロイ</h3>
 
-<p>There are several options for deploying a Docker App project.</p>
+<p>Docker アプリケーションプロジェクトをデプロイするには、いくつかの方法があります。</p>
 
 <ul>
-  <li>Deploy as a native Docker App application</li>
-  <li>Deploy as a Compose app application</li>
-  <li>Deploy as a Docker Stack application</li>
+  <li>ネイティブな Docker App アプリケーションとしてデプロイする。</li>
+  <li>Compose App アプリケーションとしてデプロイする。</li>
+  <li>Docker Stack アプリケーションとしてデプロイする。</li>
 </ul>
 
-<p>All three options are discussed, starting with deploying as a native Docker App application.</p>
+<p>上の 3 つの方法について、以下に述べていきます。
+まずはネイティブな Docker App アプリケーションとしてデプロイする方法からです。</p>
 
-<h4 id="deploy-as-a-native-docker-app">Deploy as a native Docker App</h4>
+<h4 id="deploy-as-a-native-docker-app">ネイティブ Docker App アプリとしてのデプロイ</h4>
 
-<p>The process for deploying as a native Docker app is as follows:</p>
+<p>ネイティブな Docker アプリとしてデプロイするには、以下の手順を進めます。</p>
 
-<p>Use <code class="highlighter-rouge">docker app install</code> to deploy the application.</p>
+<p><code class="highlighter-rouge">docker app install</code> を実行してアプリケーションをデプロイします。</p>
 
-<p>Use the following command to deploy (install) the application.</p>
+<p>以下のコマンドはアプリケーションをデプロイ（インストール）するものです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app install hello-world.dockerapp --name my-app
 Creating network my-app_default
@@ -403,10 +413,10 @@ Creating service my-app_hello
 Application "my-app" installed on context "default"
 </code></pre></div></div>
 
-<p>By default, <code class="highlighter-rouge">docker app</code> uses the <a href="/docs.docker.jp.onthefly/engine/context/working-with-contexts">current context</a> to run the
-installation container and as a target context to deploy the application. You can override the second context
-using the flag <code class="highlighter-rouge">--target-context</code> or by using the environment variable <code class="highlighter-rouge">DOCKER_TARGET_CONTEXT</code>. This flag is also
-available for the commands <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">upgrade</code>, and <code class="highlighter-rouge">uninstall</code>.</p>
+<p><code class="highlighter-rouge">docker app</code> はデフォルトでは、インストールするコンテナーに対しての <a href="/docs.docker.jp.onthefly/engine/context/working-with-contexts">カレントなコンテキスト</a> を利用します。
+これはアプリケーションをデプロイする際の対象コンテキストでもあります。
+デプロイ対象とするコンテキストは、<code class="highlighter-rouge">--target-context</code> フラグを利用するか、あるいは環境変数 <code class="highlighter-rouge">DOCKER_TARGET_CONTEXT</code> を利用することでオーバーライドできます。
+そのフラグは <code class="highlighter-rouge">status</code>、<code class="highlighter-rouge">upgrade</code>、<code class="highlighter-rouge">uninstall</code> においても利用できます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app install hello-world.dockerapp --name my-app --target-context=my-big-production-cluster
 Creating network my-app_default
@@ -415,11 +425,11 @@ Application "my-app" installed on context "my-big-production-cluster"
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: Two applications deployed on the same target context cannot share the same name, but this is
-valid if they are deployed on different target contexts.</p>
+  <p><strong>メモ</strong>: 2 つのアプリケーションをデプロイする際に、同一のデプロイ対象コンテキストを用いた場合、アプリケーション名を同一にすることはできません。
+ただし、別の対象コンテキストを使ってデプロイするのであれば、同一名であってもかまいません。</p>
 </blockquote>
 
-<p>You can check the status of the app with the <code class="highlighter-rouge">docker app status &lt;app-name&gt;</code> command.</p>
+<p>アプリの状態を確認するには <code class="highlighter-rouge">docker app status &lt;アプリ名&gt;</code> コマンドを実行します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app status my-app
 INSTALLATION
@@ -449,44 +459,46 @@ ID              NAME            MODE          REPLICAS    IMAGE             PORT
 miqdk1v7j3zk    my-app_hello    replicated    1/1         hashicorp/http-echo:latest   *:8080-&gt;5678/tcp
 </code></pre></div></div>
 
-<p>The app is deployed using the stack orchestrator. This means you can also inspect it using the regular <code class="highlighter-rouge">docker stack</code> commands.</p>
+<p>アプリケーションはスタックオーケストレーターを使ってデプロイされます。
+つまり通常の <code class="highlighter-rouge">docker stack</code> コマンドを使って確認ができるということです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker stack ls
 NAME                SERVICES            ORCHESTRATOR
 my-app              1                   Swarm
 </code></pre></div></div>
 
-<p>Now that the app is running, you can point a web browser at the DNS name or public IP of the Docker node on
-port 8080 and see the app. You must ensure traffic to port 8080 is allowed on
-the connection from your browser to your Docker host.</p>
+<p>アプリケーションが実行されたので、ウェブブラウザー上から DNS 名を指定するか、Docker ノードの公開 IP アドレスを用いるかして、ポート 8080 にアクセスしてアプリを確認します。
+ブラウザーから Docker ホストに向けての接続にあたっては、ポート 8080 を通じてのトラフィックしか許可されない点に注意してください。</p>
 
-<p>Now change the port of the application using <code class="highlighter-rouge">docker app upgrade &lt;app-name&gt;</code> command.</p>
+<p>そこでアプリケーションのポートを変更してみます。
+これには <code class="highlighter-rouge">docker app upgrade &lt;アプリ名&gt;</code> コマンドを使います。</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app upgrade my-app --set hello.port=8181
 Upgrading service my-app_hello
 Application "my-app" upgraded on context "default"
 </code></pre></div></div>
 
-<p>You can uninstall the app with <code class="highlighter-rouge">docker app uninstall my-app</code>.</p>
+<p><code class="highlighter-rouge">docker app uninstall my-app</code> コマンドを実行すれば、アプリをアンインストールできます。</p>
 
-<h4 id="deploy-as-a-docker-compose-app">Deploy as a Docker Compose app</h4>
+<h4 id="deploy-as-a-docker-compose-app">Compose App アプリとしてのデプロイ</h4>
 
-<p>The process for deploying as a Compose app comprises two major steps:</p>
+<p>Compose アプリとしてデプロイするには、大きな以下の 2 つの手順を進めます。</p>
 
 <ol>
-  <li>Render the Docker app project as a <code class="highlighter-rouge">docker-compose.yml</code> file.</li>
-  <li>Deploy the app using <code class="highlighter-rouge">docker-compose up</code>.</li>
+  <li>Docker アプリケーションプロジェクトから <code class="highlighter-rouge">docker-compose.yml</code> ファイルへの書き換え（render）を行います。</li>
+  <li><code class="highlighter-rouge">docker-compose up</code> を実行してアプリをデプロイします。</li>
 </ol>
 
-<p>You need a recent version of Docker Compose to complete these steps.</p>
+<p>この手順を進めるには、最新の Docker Compose が必要です。</p>
 
-<p>Rendering is the process of reading the entire application configuration and outputting it as a single <code class="highlighter-rouge">docker-compose.yml</code> file. This creates a Compose file with hard-coded values wherever a parameter was specified as a variable.</p>
+<p>Compose ファイルへの書き換え（render）とは、アプリケーションの全設定を読み取って、単一の <code class="highlighter-rouge">docker-compose.yml</code> ファイルとして書き出す処理のことです。
+これを行うと、それまでパラメーターが変数の形で設定されていたものが、Compose ファイル内にハードコーディングされることになります。</p>
 
-<p>Use the following command to render the app to a Compose file called <code class="highlighter-rouge">docker-compose.yml</code> in the current directory.</p>
+<p>以下のコマンドを使って、アプリを書き換えた結果として、カレントディレクトリ内に <code class="highlighter-rouge">docker-compose.yml</code> という Compose ファイルを生成します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app render --output docker-compose.yml hello-world.dockerapp
 </code></pre></div></div>
 
-<p>Check the contents of the resulting <code class="highlighter-rouge">docker-compose.yml</code> file.</p>
+<p>できあがった <code class="highlighter-rouge">docker-compose.yml</code> ファイルの中身を確認してみます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat docker-compose.yml
 version: "3.6"
@@ -503,14 +515,16 @@ services:
       protocol: tcp
 </code></pre></div></div>
 
-<p>Notice that the file contains hard-coded values that were expanded based on the contents of the <code class="highlighter-rouge">Parameters</code>
-section of the project’s YAML file. For example, <code class="highlighter-rouge">${hello.text}</code> has been expanded to “Hello world!”.</p>
+<p>やはりこのファイルにはハードコーディングされた値が含まれることになりました。
+これまでプロジェクト YAML ファイルの <code class="highlighter-rouge">Parameters</code> セクションに記述された内容が展開された結果です。
+たとえば <code class="highlighter-rouge">${hello.text}</code> は「Hello world!」という文字列に展開されています。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Almost all the <code class="highlighter-rouge">docker app</code> commands propose the <code class="highlighter-rouge">--set key=value</code> flag to override a default parameter.</p>
+  <p><strong>メモ</strong>:
+たいていの <code class="highlighter-rouge">docker app</code> コマンドは <code class="highlighter-rouge">--set key=value</code> フラグを使って、デフォルトパラメーターをオーバーライドするようにしています。</p>
 </blockquote>
 
-<p>Try to render the application with a different text:</p>
+<p>アプリケーションの書き換えにあたって、別の文字列を与えてみます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app render hello-world.dockerapp --set hello.text="Hello whales!"
 version: "3.6"
@@ -527,67 +541,65 @@ services:
       protocol: tcp
 </code></pre></div></div>
 
-<p>Use <code class="highlighter-rouge">docker-compose up</code> to deploy the app.</p>
+<p>アプリのデプロイには <code class="highlighter-rouge">docker-compose up</code> を実行します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-compose up --detach
 WARNING: The Docker Engine you're using is running in swarm mode.
-&lt;Snip&gt;
+&lt;省略&gt;
 </code></pre></div></div>
 
-<p>The application is now running as a Docker Compose app and should be reachable on port <code class="highlighter-rouge">8080</code> on your Docker host.
-You must ensure traffic to port <code class="highlighter-rouge">8080</code> is allowed on the connection form your browser to your Docker host.</p>
+<p>アプリケーションが Docker Compose アプリとして起動しました。
+Docker ホストからはポート <code class="highlighter-rouge">8080</code> からアクセスできます。
+ブラウザーから Docker ホストに向けての接続にあたっては、ポート <code class="highlighter-rouge">8080</code> を通じてのトラフィックしか許可されない点に注意してください。</p>
 
-<p>You can use <code class="highlighter-rouge">docker-compose down</code> to stop and remove the application.</p>
+<p><code class="highlighter-rouge">docker-compose down</code> コマンドを実行すれば、アプリを停止して削除することができます。</p>
 
-<h4 id="deploy-as-a-docker-stack">Deploy as a Docker Stack</h4>
+<h4 id="deploy-as-a-docker-stack">Docker Stack としてのデプロイ</h4>
 
-<p>Deploying the app as a Docker stack is a two-step process very similar to deploying it as a Docker Compose app.</p>
+<p>Docker Stack としてアプリをデプロイするには、Docker Compose アプリの場合に非常によく似た、二段階の手順を行います。</p>
 
 <ol>
-  <li>Render the Docker app project as a <code class="highlighter-rouge">docker-compose.yml</code> file.</li>
-  <li>Deploy the app using <code class="highlighter-rouge">docker stack deploy</code>.</li>
+  <li>Docker アプリケーションプロジェクトから <code class="highlighter-rouge">docker-compose.yml</code> ファイルへの書き換え（render）を行います。</li>
+  <li><code class="highlighter-rouge">docker stack deploy</code> を実行してアプリをデプロイします。</li>
 </ol>
 
-<p>Complete the steps in the previous section to render the Docker app project as a Compose file and make sure
-you’re ready to deploy it as a Docker Stack. Your Docker host must be in Swarm mode.</p>
+<p>前節において示した手順、つまり Docker アプリケーションプロジェクトを Compose ファイルとして書き換える（renderする）手順を行ってください。
+そこまで行って、Docker Stack としてのデプロイを行う準備ができます。
+なお Docker ホストは Swarm モードでなければなりません。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker stack deploy hello-world-app -c docker-compose.yml
 Creating network hello-world-app_default
 Creating service hello-world-app_hello
 </code></pre></div></div>
 
-<p>The app is now deployed as a Docker stack and can be reached on port <code class="highlighter-rouge">8080</code> on your Docker host.</p>
+<p>アプリが Docker Stack としてデプロイできました。
+Docker ホストからは、ポート <code class="highlighter-rouge">8080</code> によりアクセス可能です。</p>
 
-<p>Use the <code class="highlighter-rouge">docker stack rm hello-world-app</code> command to stop and remove the stack. You must ensure traffic to
-port <code class="highlighter-rouge">8080</code> is allowed on the connection form your browser to your Docker host.</p>
+<p><code class="highlighter-rouge">docker stack rm hello-world-app</code> コマンドを実行すれば、スタックを停止し削除することができます。
+ブラウザーから Docker ホストに向けての接続にあたっては、ポート <code class="highlighter-rouge">8080</code> を通じてのトラフィックしか許可されない点に注意してください。</p>
 
-<h3 id="push-the-app-to-docker-hub">Push the app to Docker Hub</h3>
+<h3 id="push-the-app-to-docker-hub">Docker Hub へのアプリのプッシュ</h3>
 
-<p>As mentioned in the introduction, <code class="highlighter-rouge">docker app</code> lets you manage entire
-applications the same way that you currently manage container images. For
-example, you can push and pull entire applications from registries like Docker
-Hub with <code class="highlighter-rouge">docker app push</code> and <code class="highlighter-rouge">docker app pull</code>. Other <code class="highlighter-rouge">docker app</code> commands,
-such as <code class="highlighter-rouge">install</code>, <code class="highlighter-rouge">upgrade</code>, <code class="highlighter-rouge">inspect</code>, and <code class="highlighter-rouge">render</code> can be performed directly
-on applications while they are stored in a registry.</p>
+<p>概要のところですでに述べたように、<code class="highlighter-rouge">docker app</code> を使うと、コンテナーイメージをこれまで管理してきたやり方と同じようにして、アプリケーション全体を管理することができます。
+たとえば Docker Hub のようなレジストリに対して、<code class="highlighter-rouge">docker app push</code> や <code class="highlighter-rouge">docker app pull</code> を使って、アプリケーション全体をプッシュおよびプルすることができます。
+その他の <code class="highlighter-rouge">docker app</code> コマンドとして、<code class="highlighter-rouge">install</code>、<code class="highlighter-rouge">upgrade</code>、<code class="highlighter-rouge">inspect</code>、<code class="highlighter-rouge">render</code> などは、アプリケーションがレジストリに保存されている状態で、直接コマンドを実行することができます。</p>
 
-<p>Push the application to Docker Hub. To complete this step, you need a valid
-Docker ID and you must be logged in to the registry to which you are pushing
-the app.</p>
+<p>Docker Hub にアプリケーションをプッシュします。
+この手順を実施するには、正規の Docker ID が必要であり、アプリをプッシュしようとしているレジストリにログインしている必要があります。</p>
 
-<p>By default, all platform architectures are pushed to the registry. If you are
-pushing an official Docker image as part of your app, you may find your app
-bundle becomes large with all image architectures embedded. To just push the
-architecture required, you can add the <code class="highlighter-rouge">--platform</code> flag.</p>
+<p>デフォルトでは、どのようなプラットフォームアーキテクチャーであっても、レジストリにプッシュすることができます。
+アプリの一部として公式の Docker イメージをプッシュした場合、アプリにバンドルされるものが、埋め込まれているすべてのアーキテクチャーイメージによって、膨大なものになってしまうのがわかります。
+必要となるアーキテクチャーのみをプッシュするには <code class="highlighter-rouge">--platform</code> フラグを用います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker login
 
 <span class="nv">$ </span>docker app push my-app <span class="nt">--platform</span><span class="o">=</span><span class="s2">"linux/amd64"</span> <span class="nt">--tag</span> &lt;hub-id&gt;/&lt;repo&gt;:0.1.0
 </code></pre></div></div>
 
-<h3 id="install-the-app-directly-from-docker-hub">Install the app directly from Docker Hub</h3>
+<h3 id="install-the-app-directly-from-docker-hub">Docker Hub からのアプリの直接インストール</h3>
 
-<p>Now that the app is pushed to the registry, try an <code class="highlighter-rouge">inspect</code> and <code class="highlighter-rouge">install</code> command against it.
-The location of your app is different from the one provided in the examples.</p>
+<p>アプリをレジストリにプッシュした状態に対して、<code class="highlighter-rouge">inspect</code> と <code class="highlighter-rouge">install</code> のコマンドを試してみます。
+各自のアプリが保存されている場所は、本例のものとは異なるはずです。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app inspect myuser/hello-world:0.1.0
 hello-world 0.1.0
@@ -602,9 +614,10 @@ hello.port     8080
 hello.text     Hello world!
 </code></pre></div></div>
 
-<p>This action was performed directly against the app in the registry.</p>
+<p>上の処理は、レジストリ内にアプリに対して直接行われました。</p>
 
-<p>Now install it as a native Docker App by referencing the app in the registry, with a different port.</p>
+<p>そこで今度は、レジストリにあるアプリをもとにして、ネイティブな Docker App としてインストールしてみます。
+利用するポートは別のものにします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app install myuser/hello-world:0.1.0 --set hello.port=8181
 Creating network hello-world_default
@@ -612,16 +625,16 @@ Creating service hello-world_hello
 Application "hello-world" installed on context "default"
 </code></pre></div></div>
 
-<p>Test that the app is working.</p>
+<p>アプリが動作しているかどうかを確認してください。</p>
 
-<p>The app used in these examples is a simple web server that displays the text “Hello world!” on port 8181,
-your app might be different.</p>
+<p>これまでの例に用いてきたアプリは単純なウェブサーバーであり、「Hello world!」という文字列を表示し、ポート 8181 を利用します。
+各自のアプリは本例とは異なるかもしれません。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl http://localhost:8181
 Hello world!
 </code></pre></div></div>
 
-<p>Uninstall the app.</p>
+<p>最後はアプリをアンインストールします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker app uninstall hello-world
 Removing service hello-world_hello
@@ -629,7 +642,7 @@ Removing network hello-world_default
 Application "hello-world" uninstalled on context "default"
 </code></pre></div></div>
 
-<p>You can see the name of your Docker App with the <code class="highlighter-rouge">docker stack ls</code> command.</p>
+<p>Docker App アプリ名は <code class="highlighter-rouge">docker stack ls</code> コマンドにより確認することができます。</p>
 
                             <!-- tags -->
                             
@@ -715,15 +728,15 @@ Application "hello-world" uninstalled on context "default"
                                 
 <ul id="my_toc" class="inline_toc">
   <li><a href="#overview" class="nomunge">概要</a></li>
-  <li><a href="#initialize-and-deploy-a-new-docker-app-project-from-scratch" class="nomunge">Initialize and deploy a new Docker App project from scratch</a>
+  <li><a href="#initialize-and-deploy-a-new-docker-app-project-from-scratch" class="nomunge">Docker アプリプロジェクトの初期化からデプロイまで</a>
     <ul>
-      <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
-      <li><a href="#initialize-a-new-empty-project" class="nomunge">Initialize a new empty project</a></li>
-      <li><a href="#populate-the-project" class="nomunge">Populate the project</a></li>
-      <li><a href="#validate-the-app" class="nomunge">Validate the app</a></li>
-      <li><a href="#deploy-the-app" class="nomunge">Deploy the app</a></li>
-      <li><a href="#push-the-app-to-docker-hub" class="nomunge">Push the app to Docker Hub</a></li>
-      <li><a href="#install-the-app-directly-from-docker-hub" class="nomunge">Install the app directly from Docker Hub</a></li>
+      <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
+      <li><a href="#initialize-a-new-empty-project" class="nomunge">新たな空のプロジェクト生成</a></li>
+      <li><a href="#populate-the-project" class="nomunge">プロジェクトの構築</a></li>
+      <li><a href="#validate-the-app" class="nomunge">アプリの検証</a></li>
+      <li><a href="#deploy-the-app" class="nomunge">アプリのデプロイ</a></li>
+      <li><a href="#push-the-app-to-docker-hub" class="nomunge">Docker Hub へのアプリのプッシュ</a></li>
+      <li><a href="#install-the-app-directly-from-docker-hub" class="nomunge">Docker Hub からのアプリの直接インストール</a></li>
     </ul>
   </li>
 </ul>

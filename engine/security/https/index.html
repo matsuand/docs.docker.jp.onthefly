@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-08-11 19:10:01 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-11T19:10:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:title" itemprop="title name" content="Docker デーモンソケットの保護"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。 HTTPS ソケットを用いた通信を行うこともできます。 ネットワーク接続を安全に行う必要がある場合、tlsverify フラグを指定して TLS を有効にし、 you can enable TLS by specifying the tlsverify flag and pointing Docker’s tlscacert flag to a trusted CA certificate...." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。 HTTPS ソケットを用いた通信を行うこともできます。 Docker がネットワークから接続される際に安全性を確保するには、tlsverify フラグを指定して TLS を有効にし、tlscacert フラグを使って信頼された CA 証明書を指定します。 デーモンモードにおいては、CA によって署名された証明書を用いて認証されたクライアントからのみ、接続を許可します。 クライアントモードでは、その CA によって署名された証明書を利用するサーバーに対してのみ、接続を可能にします。 高度なトピック TLS 利用と CA 管理は高度なトピックです。 これを本番環境に利用する場合は、OpenSSL、x509、TLS についてよく理解してから行ってください。 OpenSSL を用いた CA、サーバー鍵、クライアント鍵の生成..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-11T19:10:01+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, docs, article, example, https, daemon, tls, ca,  certificate">
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    7 分
+    4 分
   
 </span>
 
@@ -161,20 +161,16 @@
 <p>デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。
 HTTPS ソケットを用いた通信を行うこともできます。</p>
 
-<p>ネットワーク接続を安全に行う必要がある場合、<code class="highlighter-rouge">tlsverify</code> フラグを指定して TLS を有効にし、
-you can
-enable TLS by specifying the <code class="highlighter-rouge">tlsverify</code> flag and pointing Docker’s
-<code class="highlighter-rouge">tlscacert</code> flag to a trusted CA certificate.</p>
+<p>Docker がネットワークから接続される際に安全性を確保するには、<code class="highlighter-rouge">tlsverify</code> フラグを指定して TLS を有効にし、<code class="highlighter-rouge">tlscacert</code> フラグを使って信頼された CA 証明書を指定します。</p>
 
-<p>In the daemon mode, it only allows connections from clients
-authenticated by a certificate signed by that CA. In the client mode,
-it only connects to servers with a certificate signed by that CA.</p>
+<p>デーモンモードにおいては、CA によって署名された証明書を用いて認証されたクライアントからのみ、接続を許可します。
+クライアントモードでは、その CA によって署名された証明書を利用するサーバーに対してのみ、接続を可能にします。</p>
 
 <blockquote class="important">
-  <p>応用的なトピック</p>
+  <p>高度なトピック</p>
 
-  <p>Using TLS and managing a CA is an advanced topic. Please familiarize yourself
-with OpenSSL, x509, and TLS before using it in production.</p>
+  <p>TLS 利用と CA 管理は高度なトピックです。
+これを本番環境に利用する場合は、OpenSSL、x509、TLS についてよく理解してから行ってください。</p>
 </blockquote>
 
 <h2 id="create-a-ca-server-and-client-keys-with-openssl">OpenSSL を用いた CA、サーバー鍵、クライアント鍵の生成</h2>
@@ -184,8 +180,7 @@ with OpenSSL, x509, and TLS before using it in production.</p>
 以下に示す例において <code class="highlighter-rouge">$HOST</code> と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
-<p>まず <strong>Docker デーモンが起動するホストマシン</strong> において、
-First, on the <strong>Docker daemon’s host machine</strong>, generate CA private and public keys:</p>
+<p>まず <strong>Docker デーモンが起動するホストマシン</strong> において、CA 秘密鍵と公開鍵を生成します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -aes256 -out ca-key.pem 4096
 Generating RSA private key, 4096 bit long modulus
@@ -213,13 +208,12 @@ Common Name (e.g. server FQDN or YOUR name) []:$HOST
 Email Address []:Sven@home.org.au
 </code></pre></div></div>
 
-<p>Now that you have a CA, you can create a server key and certificate
-signing request (CSR). Make sure that “Common Name” matches the hostname you use
-to connect to Docker:</p>
+<p>CA を生成したので、次にサーバー鍵と証明書署名要求（certificate signing request; CSR）を生成します。
+「Common Name」欄には、Docker に接続するホストの名前となっていることを確認してください。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: Replace all instances of <code class="highlighter-rouge">$HOST</code> in the following example with the
-DNS name of your Docker daemon’s host.</p>
+  <p><strong>メモ</strong>:
+以下に示す例において <code class="highlighter-rouge">$HOST</code> と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -out server-key.pem 4096
@@ -231,22 +225,20 @@ e is 65537 (0x10001)
 $ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
 </code></pre></div></div>
 
-<p>Next, we’re going to sign the public key with our CA:</p>
+<p>次に公開鍵を CA を使って署名します。</p>
 
-<p>Since TLS connections can be made through IP address as well as DNS name, the IP addresses
-need to be specified when creating the certificate. For example, to allow connections
-using <code class="highlighter-rouge">10.10.10.20</code> and <code class="highlighter-rouge">127.0.0.1</code>:</p>
+<p>TLS 接続は DNS 名だけでなく IP アドレスを使っても行われるため、証明書の生成時には IP アドレスが必要になります。
+たとえば <code class="highlighter-rouge">10.10.10.20</code> と <code class="highlighter-rouge">127.0.0.1</code> を使って接続を許可するには、以下のようにします。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 &gt;&gt; extfile.cnf
 </code></pre></div></div>
 
-<p>Set the Docker daemon key’s extended usage attributes to be used only for
-server authentication:</p>
+<p>Docker デーモンの拡張属性は、サーバー認証に対してのみ利用するものとして設定します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo extendedKeyUsage = serverAuth &gt;&gt; extfile.cnf
 </code></pre></div></div>
 
-<p>Now, generate the signed certificate:</p>
+<p>そこで署名された証明書を生成します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
   -CAcreateserial -out server-cert.pem -extfile extfile.cnf
@@ -256,18 +248,13 @@ Getting CA Private Key
 Enter pass phrase for ca-key.pem:
 </code></pre></div></div>
 
-<p><a href="/engine/extend/plugins_authorization/">Authorization plugins</a> offer more
-fine-grained control to supplement authentication from mutual TLS. In addition
-to other information described in the above document, authorization plugins
-running on a Docker daemon receive the certificate information for connecting
-Docker clients.</p>
+<p><a href="/engine/extend/plugins_authorization/">認証プラグイン</a> は、相互 TLS からの認証を補完する、きめ細かな制御を可能にします。
+上記のドキュメント内の説明内容に加えて、Docker デーモン上で動作する認証プラグインは、Docker クライアントに接続するための認証情報を受け取ります。</p>
 
-<p>For client authentication, create a client key and certificate signing
-request:</p>
+<p>クライアント認証に対しては、クライアント鍵と証明書署名要求を生成します。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: For simplicity of the next couple of steps, you may perform this
-step on the Docker daemon’s host machine as well.</p>
+  <p><strong>メモ</strong>: ここから続く手順を簡単にするために、以下の手順は Docker デーモンが稼動するホストマシン上で行ってもかまいません。</p>
 </blockquote>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -out key.pem 4096
@@ -279,13 +266,12 @@ e is 65537 (0x10001)
 $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 </code></pre></div></div>
 
-<p>To make the key suitable for client authentication, create a new extensions
-config file:</p>
+<p>生成した鍵をクライアント認証用とするために、新たな拡張設定ファイルを生成します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo extendedKeyUsage = clientAuth &gt; extfile-client.cnf
 </code></pre></div></div>
 
-<p>Now, generate the signed certificate:</p>
+<p>そこで署名された証明書を生成します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
   -CAcreateserial -out cert.pem -extfile extfile-client.cnf
@@ -295,48 +281,44 @@ Getting CA Private Key
 Enter pass phrase for ca-key.pem:
 </code></pre></div></div>
 
-<p>After generating <code class="highlighter-rouge">cert.pem</code> and <code class="highlighter-rouge">server-cert.pem</code> you can safely remove the
-two certificate signing requests and extensions config files:</p>
+<p><code class="highlighter-rouge">cert.pem</code> と <code class="highlighter-rouge">server-cert.pem</code> を生成したら、証明書署名要求と拡張設定ファイルの 2 つは、安全に削除することができます。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
 </code></pre></div></div>
 
-<p>With a default <code class="highlighter-rouge">umask</code> of 022, your secret keys are <em>world-readable</em> and
-writable for you and your group.</p>
+<p><code class="highlighter-rouge">umask</code> をデフォルトの 022 のまま使ってしまうと、秘密鍵は <strong>誰もが読み込み可能</strong> となり、また所有者とグループが書き込み可能となってしまいます。</p>
 
-<p>To protect your keys from accidental damage, remove their
-write permissions. To make them only readable by you, change file modes as follows:</p>
+<p>秘密鍵を保護し、予期しない被害を受けないために、書き込み権限は削除してください。
+読み込み権限は所有者のみとするように、以下のようにしてファイルモードの変更を行います。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod -v 0400 ca-key.pem key.pem server-key.pem
 </code></pre></div></div>
 
-<p>Certificates can be world-readable, but you might want to remove write access to
-prevent accidental damage:</p>
+<p>証明書は誰でも読み込めるようにするのでもかまいません。
+ただし書き込み権限は、被害を避ける意味で削除するようにしてください。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod -v 0444 ca.pem server-cert.pem cert.pem
 </code></pre></div></div>
 
-<p>Now you can make the Docker daemon only accept connections from clients
-providing a certificate trusted by your CA:</p>
+<p>このようにして Docker デーモンが接続を受け入れるクライアントは、CA に信頼された証明書を利用するクライアントのみとすることができました。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ dockerd --tlsverify --tlscacert=ca.pem --tlscert=server-cert.pem --tlskey=server-key.pem \
   -H=0.0.0.0:2376
 </code></pre></div></div>
 
-<p>To connect to Docker and validate its certificate, provide your client keys,
-certificates and trusted CA:</p>
+<p>Docker に接続して証明書を確認します。
+クライアント鍵、証明書、信頼された CA を指定してください。</p>
 
 <blockquote>
-  <p>Run it on the client machine</p>
+  <p>クライアントマシン上での実行</p>
 
-  <p>This step should be run on your Docker client machine. As such, you
-need to copy your CA certificate, your server certificate, and your client
-certificate to that machine.</p>
+  <p>ここでの手順は Docker クライアントマシン上で行います。
+したがって CA 証明書、サーバー証明書、クライアント証明書は、そのマシン上にコピーしておく必要があります。</p>
 </blockquote>
 
 <blockquote>
-  <p><strong>メモ</strong>: Replace all instances of <code class="highlighter-rouge">$HOST</code> in the following example with the
-DNS name of your Docker daemon’s host.</p>
+  <p><strong>メモ</strong>:
+以下に示す例において <code class="highlighter-rouge">$HOST</code> と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem \
@@ -345,24 +327,21 @@ DNS name of your Docker daemon’s host.</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
-Docker over TLS should run on TCP port 2376.</p>
+Docker over TLS は TCP ポート 2376 上を使って動作させる必要があります。</p>
 </blockquote>
 
 <blockquote class="warning">
-  <p><strong>Warning</strong>:
-As shown in the example above, you don’t need to run the <code class="highlighter-rouge">docker</code> client
-with <code class="highlighter-rouge">sudo</code> or the <code class="highlighter-rouge">docker</code> group when you use certificate authentication.
-That means anyone with the keys can give any instructions to your Docker
-daemon, giving them root access to the machine hosting the daemon. Guard
-these keys as you would a root password!</p>
+  <p><strong>警告</strong>
+上の例に示したように、証明書認証操作を行う際の <code class="highlighter-rouge">docker</code> クライアント実行において <code class="highlighter-rouge">sudo</code> を使ったり <code class="highlighter-rouge">docker</code> グループに属していたりする必要はありません。
+つまり鍵を使うのであれば、Docker デーモンに対して指示を出すのは、デーモンホストのマシンに root 権限を持っていれば誰でもよいということです。
+したがってこの鍵データは root パスワードと同じように、しっかりと管理してください。</p>
 </blockquote>
 
-<h2 id="secure-by-default">Secure by default</h2>
+<h2 id="secure-by-default">セキュアな接続のデフォルト設定</h2>
 
-<p>If you want to secure your Docker client connections by default, you can move
-the files to the <code class="highlighter-rouge">.docker</code> directory in your home directory --- and set the
-<code class="highlighter-rouge">DOCKER_HOST</code> and <code class="highlighter-rouge">DOCKER_TLS_VERIFY</code> variables as well (instead of passing
-<code class="highlighter-rouge">-H=tcp://$HOST:2376</code> and <code class="highlighter-rouge">--tlsverify</code> on every call).</p>
+<p>Docker クライアント接続を、デフォルトで安全なものとしたい場合は、ホームディレクトリ内の <code class="highlighter-rouge">.docker</code> ディレクトリに、各ファイルを移動させます。
+これに合わせて <code class="highlighter-rouge">DOCKER_HOST</code> と <code class="highlighter-rouge">DOCKER_TLS_VERIFY</code> の変数も設定します
+（これはコマンド実行時に <code class="highlighter-rouge">-H=tcp://$HOST:2376</code> と <code class="highlighter-rouge">--tlsverify</code> を指定しない代わりとして行うものです）。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir -pv ~/.docker
 $ cp -v {ca,cert,key}.pem ~/.docker
@@ -370,47 +349,42 @@ $ cp -v {ca,cert,key}.pem ~/.docker
 $ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
 </code></pre></div></div>
 
-<p>Docker now connects securely by default:</p>
+<p>Docker はデフォルトで安全な接続を行うようになります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps
 </code></pre></div></div>
 
 <h2 id="other-modes">その他のモード</h2>
 
-<p>If you don’t want to have complete two-way authentication, you can run
-Docker in various other modes by mixing the flags.</p>
+<p>完全な双方向認証は行う必要がない場合は、他にもあるさまざまなモードや各種フラグを組み合わせて Docker を実行することができます。</p>
 
 <h3 id="daemon-modes">デーモンモード</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">tlsverify</code>, <code class="highlighter-rouge">tlscacert</code>, <code class="highlighter-rouge">tlscert</code>, <code class="highlighter-rouge">tlskey</code> set: Authenticate clients</li>
-  <li><code class="highlighter-rouge">tls</code>, <code class="highlighter-rouge">tlscert</code>, <code class="highlighter-rouge">tlskey</code>: Do not authenticate clients</li>
+  <li><code class="highlighter-rouge">tlsverify</code>、<code class="highlighter-rouge">tlscacert</code>、<code class="highlighter-rouge">tlscert</code>、<code class="highlighter-rouge">tlskey</code> の各設定は、クライアント認証を行います。</li>
+  <li><code class="highlighter-rouge">tls</code>、<code class="highlighter-rouge">tlscert</code>、<code class="highlighter-rouge">tlskey</code>はクライアント認証を行いません。</li>
 </ul>
 
 <h3 id="client-modes">クライアントモード</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">tls</code>: Authenticate server based on public/default CA pool</li>
-  <li><code class="highlighter-rouge">tlsverify</code>, <code class="highlighter-rouge">tlscacert</code>: Authenticate server based on given CA</li>
-  <li><code class="highlighter-rouge">tls</code>, <code class="highlighter-rouge">tlscert</code>, <code class="highlighter-rouge">tlskey</code>: Authenticate with client certificate, do not
-authenticate server based on given CA</li>
-  <li><code class="highlighter-rouge">tlsverify</code>, <code class="highlighter-rouge">tlscacert</code>, <code class="highlighter-rouge">tlscert</code>, <code class="highlighter-rouge">tlskey</code>: Authenticate with client
-certificate and authenticate server based on given CA</li>
+  <li><code class="highlighter-rouge">tls</code> は、公開またはデフォルトの CA プールに基づくサーバーを認証します。</li>
+  <li><code class="highlighter-rouge">tlsverify</code>、<code class="highlighter-rouge">tlscacert</code> は、指定された CA に基づくサーバーを認証します。</li>
+  <li><code class="highlighter-rouge">tls</code>、<code class="highlighter-rouge">tlscert</code><code class="highlighter-rouge">、</code>tlskey` は、クライアント証明書を使って認証します。指定の CA に基づたサーバー認証は行いません。</li>
+  <li><code class="highlighter-rouge">tlsverify</code>、<code class="highlighter-rouge">tlscacert</code>、<code class="highlighter-rouge">tlscert</code>、<code class="highlighter-rouge">tlskey</code> は、クライアント証明書を使って認証します。
+そして指定の CA に基づいたサーバー認証を行います。</li>
 </ul>
 
-<p>If found, the client sends its client certificate, so you just need
-to drop your keys into <code class="highlighter-rouge">~/.docker/{ca,cert,key}.pem</code>. Alternatively,
-if you want to store your keys in another location, you can specify that
-location using the environment variable <code class="highlighter-rouge">DOCKER_CERT_PATH</code>.</p>
+<p>クライアントに証明書があればクライアントはそれを送信するので、鍵データは <code class="highlighter-rouge">~/.docker/{ca,cert,key}.pem</code> に配置しておくことが必要です。
+あるいは鍵データを別のディレクトリに保持しておきたい場合は、環境変数 <code class="highlighter-rouge">DOCKER_CERT_PATH</code> にそのディレクトリを指定します。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CERT_PATH=~/.docker/zone1/
 $ docker --tlsverify ps
 </code></pre></div></div>
 
-<h3 id="connecting-to-the-secure-docker-port-using-curl">Connecting to the secure Docker port using <code class="highlighter-rouge">curl</code></h3>
+<h3 id="connecting-to-the-secure-docker-port-using-curl"><code class="highlighter-rouge">curl</code> を用いたセキュアな Docker ポートへの接続</h3>
 
-<p>To use <code class="highlighter-rouge">curl</code> to make test API requests, you need to use three extra command line
-flags:</p>
+<p><code class="highlighter-rouge">curl</code> を使って API リクエストを行ってみるなら、指定を 3 つ追加したコマンドライン実行を行います。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl https://$HOST:2376/images/json \
   --cert ~/.docker/cert.pem \
@@ -421,7 +395,7 @@ flags:</p>
 <h2 id="related-information">関連情報</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/security/certificates/">Using certificates for repository client verification</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/security/certificates/">証明書を使ったリポジトリクライアントの確認</a></li>
   <li><a href="/docs.docker.jp.onthefly/engine/security/trust/">信頼できるイメージの利用</a></li>
 </ul>
 
@@ -514,12 +488,12 @@ flags:</p>
                                 
 <ul id="my_toc" class="inline_toc">
   <li><a href="#create-a-ca-server-and-client-keys-with-openssl" class="nomunge">OpenSSL を用いた CA、サーバー鍵、クライアント鍵の生成</a></li>
-  <li><a href="#secure-by-default" class="nomunge">Secure by default</a></li>
+  <li><a href="#secure-by-default" class="nomunge">セキュアな接続のデフォルト設定</a></li>
   <li><a href="#other-modes" class="nomunge">その他のモード</a>
     <ul>
       <li><a href="#daemon-modes" class="nomunge">デーモンモード</a></li>
       <li><a href="#client-modes" class="nomunge">クライアントモード</a></li>
-      <li><a href="#connecting-to-the-secure-docker-port-using-curl" class="nomunge">Connecting to the secure Docker port using curl</a></li>
+      <li><a href="#connecting-to-the-secure-docker-port-using-curl" class="nomunge">curl を用いたセキュアな Docker ポートへの接続</a></li>
     </ul>
   </li>
   <li><a href="#related-information" class="nomunge">関連情報</a></li>
