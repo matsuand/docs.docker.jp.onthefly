@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-08-13 14:11:01 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-13T14:11:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Container networking"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="The type of network a container uses, whether it is a bridge, an overlay, a macvlan network, or a custom network plugin, is transparent from within the container. From the..." />
+  <meta name="twitter:title" itemprop="title name" content="コンテナーのネットワーク"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="コンテナーが利用するネットワークの種類は、ブリッジ、オーバーレイ、Macvlan ネットワーク、カスタムネットワークプラグインとさまざまですが、コンテナーの内部から見ればどれも同じです。 コンテナーからすれば、ネットワークインターフェースに IP アドレスがあり、ゲートウェイ、ルーティングテーブル、DNS サービス、その他のネットワークリソースがあるだけのことです。 （もちろんコンテナーが none ネットワークドライバーを用いる場合は除きます。） ここでは、コンテナーから見たネットワーク関連のもろもろについて示します。 公開ポート コンテナーを生成した際には、デフォルトではどのポートも外部に向け公開はされません。 Docker 外部にあるサービスに向けて、あるいはコンテナーネットワークに接続していない別のコンテナーに向けてポートを利用可能とするには、--publish または -p フラグを用います。 これを行うと、コンテナーから Docker ホストに向けたポート割り当てを実現するファイアウォールルールが生成されます。 以下がその例です。 フラグ値 内容説明 -p 8080:80 コンテナーの TCP ポート 80 を..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-13T14:11:01+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="networking, container, standalone">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Container networking | Docker ドキュメント</title>
-  <meta property="og:title" content="Container networking" />
+  <title>コンテナーのネットワーク | Docker ドキュメント</title>
+  <meta property="og:title" content="コンテナーのネットワーク" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="How networking works from the container's point of view" />
-  <meta property="og:description" content="How networking works from the container's point of view" />
+  <meta name="description" content="コンテナーから見て、ネットワークがどのように動作するのかを説明します。" />
+  <meta property="og:description" content="コンテナーから見て、ネットワークがどのように動作するのかを説明します。" />
   <link rel="canonical" href="/config/containers/container-networking/" />
   <meta property="og:url" content="https://docs.docker.com/config/containers/container-networking/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Container networking","description":"How networking works from the container's point of view","url":"https://docs.docker.com/config/containers/container-networking/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーのネットワーク","description":"コンテナーから見て、ネットワークがどのように動作するのかを説明します。","url":"https://docs.docker.com/config/containers/container-networking/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,127 +147,115 @@
                         <section class="section">
                             
                             
-                            <h1>Container networking</h1> 
+                            <h1>コンテナーのネットワーク</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    1 分
   
 </span>
 
                             
-                            <p>The type of network a container uses, whether it is a <a href="/docs.docker.jp.onthefly/network/bridge/">bridge</a>, an
-<a href="/docs.docker.jp.onthefly/network/overlay/">overlay</a>, a <a href="/docs.docker.jp.onthefly/network/macvlan/">macvlan network</a>, or a custom network
-plugin, is transparent from within the container. From the container’s point of
-view, it has a network interface with an IP address, a gateway, a routing table,
-DNS services, and other networking details (assuming the container is not using
-the <code class="highlighter-rouge">none</code> network driver). This topic is about networking concerns from the
-point of view of the container.</p>
+                            
+<p>コンテナーが利用するネットワークの種類は、<a href="/docs.docker.jp.onthefly/network/bridge/">ブリッジ</a>、<a href="/docs.docker.jp.onthefly/network/overlay/">オーバーレイ</a>、<a href="/docs.docker.jp.onthefly/network/macvlan/">Macvlan ネットワーク</a>、カスタムネットワークプラグインとさまざまですが、コンテナーの内部から見ればどれも同じです。
+コンテナーからすれば、ネットワークインターフェースに IP アドレスがあり、ゲートウェイ、ルーティングテーブル、DNS サービス、その他のネットワークリソースがあるだけのことです。
+（もちろんコンテナーが <code class="highlighter-rouge">none</code> ネットワークドライバーを用いる場合は除きます。）
+ここでは、コンテナーから見たネットワーク関連のもろもろについて示します。</p>
 
-<h2 id="published-ports">Published ports</h2>
+<h2 id="published-ports">公開ポート</h2>
 
-<p>By default, when you create a container, it does not publish any of its ports
-to the outside world. To make a port available to services outside of Docker, or
-to Docker containers which are not connected to the container’s network, use the
-<code class="highlighter-rouge">--publish</code> or <code class="highlighter-rouge">-p</code> flag. This creates a firewall rule which maps a container
-port to a port on the Docker host. Here are some examples.</p>
+<p>コンテナーを生成した際には、デフォルトではどのポートも外部に向け公開はされません。
+Docker 外部にあるサービスに向けて、あるいはコンテナーネットワークに接続していない別のコンテナーに向けてポートを利用可能とするには、<code class="highlighter-rouge">--publish</code> または <code class="highlighter-rouge">-p</code> フラグを用います。
+これを行うと、コンテナーから Docker ホストに向けたポート割り当てを実現するファイアウォールルールが生成されます。
+以下がその例です。</p>
 
 <table>
   <thead>
     <tr>
-      <th>Flag value</th>
-      <th>Description</th>
+      <th>フラグ値</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">-p 8080:80</code></td>
-      <td>Map TCP port 80 in the container to port 8080 on the Docker host.</td>
+      <td>コンテナーの TCP ポート 80 を Docker ホスト上のポート 8080 に割り当てます。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">-p 192.168.1.100:8080:80</code></td>
-      <td>Map TCP port 80 in the container to port 8080 on the Docker host for connections to host IP 192.168.1.100.</td>
+      <td>コンテナーの TCP ポート 80 を Docker ホストの IP 192.168.1.100 への接続時のポート 8080 に割り当てます。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">-p 8080:80/udp</code></td>
-      <td>Map UDP port 80 in the container to port 8080 on the Docker host.</td>
+      <td>コンテナーの UDP ポート 80 を Docker ホスト上のポート 8080 に割り当てます。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">-p 8080:80/tcp -p 8080:80/udp</code></td>
-      <td>Map TCP port 80 in the container to TCP port 8080 on the Docker host, and map UDP port 80 in the container to UDP port 8080 on the Docker host.</td>
+      <td>コンテナーの TCP ポート 80 を Docker ホスト上のポート 8080 に割り当てます。またコンテナーの UDP ポート 80 を Docker ホスト上のポート 8080 に割り当てます。</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="ip-address-and-hostname">IP address and hostname</h2>
+<h2 id="ip-address-and-hostname">IP アドレスとホスト名</h2>
 
-<p>By default, the container is assigned an IP address for every Docker network it
-connects to. The IP address is assigned from the pool assigned to
-the network, so the Docker daemon effectively acts as a DHCP server for each
-container. Each network also has a default subnet mask and gateway.</p>
+<p>コンテナーが接続する Docker ネットワークのすべてに対して、デフォルトで個々に IP アドレスが割り振られます。
+そしてその IP アドレスは、そのネットワークにある IP プールから割り振られます。
+したがって Docker デーモンは各コンテナーに対して、実質的に DHCP サーバーとして振る舞うことになります。
+各ネットワークには、デフォルトのサブネットマスクとゲートウェイがそれぞれに存在します。</p>
 
-<p>When the container starts, it can only be connected to a single network, using
-<code class="highlighter-rouge">--network</code>. However, you can connect a running container to multiple
-networks using <code class="highlighter-rouge">docker network connect</code>. When you start a container using the
-<code class="highlighter-rouge">--network</code> flag, you can specify the IP address assigned to the container on
-that network using the <code class="highlighter-rouge">--ip</code> or <code class="highlighter-rouge">--ip6</code> flags.</p>
+<p>コンテナーを起動する際に、ただ 1 つのネットワークに接続させるには <code class="highlighter-rouge">--network</code> フラグを使います。
+実行中のコンテナーを複数ネットワークに接続するなら <code class="highlighter-rouge">docker network connect</code> を使います。
+<code class="highlighter-rouge">--network</code> フラグを用いてコンテナーを起動すると、そのネットワーク上においてコンテナーに対する IP アドレスを指定することができます。
+その場合には <code class="highlighter-rouge">--ip</code> または <code class="highlighter-rouge">--ip6</code> フラグを使います。</p>
 
-<p>When you connect an existing container to a different network using
-<code class="highlighter-rouge">docker network connect</code>, you can use the <code class="highlighter-rouge">--ip</code> or <code class="highlighter-rouge">--ip6</code> flags on that
-command to specify the container’s IP address on the additional network.</p>
+<p>既存のコンテナーをそれまでとは違うネットワークに接続するには <code class="highlighter-rouge">docker network connect</code> を用いますが、
+コマンド実行の際に <code class="highlighter-rouge">--ip</code> または <code class="highlighter-rouge">--ip6</code> フラグを用いれば、そのネットワーク上での IP アドレスを指定することができます。</p>
 
-<p>In the same way, a container’s hostname defaults to be the container’s ID in
-Docker. You can override the hostname using <code class="highlighter-rouge">--hostname</code>. When connecting to an
-existing network using <code class="highlighter-rouge">docker network connect</code>, you can use the <code class="highlighter-rouge">--alias</code>
-flag to specify an additional network alias for the container on that network.</p>
+<p>同じような話として、コンテナーのホスト名にはコンテナー ID がデフォルトで割り当てられますが、<code class="highlighter-rouge">--hostname</code> を使えばホスト名をオーバーライドすることができます。
+既存のネットワークに <code class="highlighter-rouge">docker network connect</code> を使って接続する際に <code class="highlighter-rouge">--alias</code> フラグを使うと、そのネットワーク上においてコンテナーの別名を指定することができます。</p>
 
-<h2 id="dns-services">DNS services</h2>
+<h2 id="dns-services">DNS サービス</h2>
 
-<p>By default, a container inherits the DNS settings of the host, as defined in the
-<code class="highlighter-rouge">/etc/resolv.conf</code> configuration file. Containers that use the default <code class="highlighter-rouge">bridge</code>
-network get a copy of this file, whereas containers that use a
-<a href="/docs.docker.jp.onthefly/network/network-tutorial-standalone/#use-user-defined-bridge-networks">custom network</a>
-use Docker’s embedded DNS server, which forwards external DNS lookups to the DNS
-servers configured on the host.</p>
+<p>コンテナーなデフォルトで、ホスト上の設定ファイル <code class="highlighter-rouge">/etc/resolv.conf</code> によって定義された DNS 設定を受け継ぎます。
+コンテナーがデフォルトの <code class="highlighter-rouge">bridge</code> ネットワークを利用する場合は、その設定ファイルがコピーされます。
+この一方で <a href="/docs.docker.jp.onthefly/network/network-tutorial-standalone/#use-user-defined-bridge-networks">カスタムネットワーク</a> を利用するコンテナーの場合は、Docker の埋め込み DNS サーバーを利用します。
+これはホスト上において設定された DNS サーバーに対して、外部 DNS ルックアップをフォワードします。</p>
 
-<p>Custom hosts defined in <code class="highlighter-rouge">/etc/hosts</code> are not inherited. To pass additional hosts
-into your container, refer to <a href="/docs.docker.jp.onthefly/engine/reference/commandline/run/#add-entries-to-container-hosts-file---add-host">add entries to container hosts file</a>
-in the <code class="highlighter-rouge">docker run</code> reference documentation. You can override these settings on
-a per-container basis.
-settings on a per-container basis.</p>
+<p><code class="highlighter-rouge">/etc/hosts</code> においてカスタムホストが定義されていても、これは受け継がれません。
+追加的なホスト定義をコンテナーに受け渡すには、<code class="highlighter-rouge">docker run</code> のリファレンスドキュメント内にある、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/run/#add-entries-to-container-hosts-file---add-host">コンテナーのホストファイルへのエントリー追加</a> を参照してください。
+このような設定は、コンテナーごとにオーバーライドすることができます。</p>
 
 <table>
   <thead>
     <tr>
-      <th>Flag</th>
-      <th>Description</th>
+      <th>フラグ</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">--dns</code></td>
-      <td>The IP address of a DNS server. To specify multiple DNS servers, use multiple <code class="highlighter-rouge">--dns</code> flags. If the container cannot reach any of the IP addresses you specify, Google’s public DNS server <code class="highlighter-rouge">8.8.8.8</code> is added, so that your container can resolve internet domains.</td>
+      <td>DNS サーバーの IP アドレス。複数の DNS サーバーを指定する場合は <code class="highlighter-rouge">--dns</code> フラグを複数回指定します。指定した IP アドレスにコンテナーから接続できない場合、Google の公開 DNS サーバー <code class="highlighter-rouge">8.8.8.8</code> を追加すれば、コンテナーがインターネットドメインを解決できるようになります。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">--dns-search</code></td>
-      <td>A DNS search domain to search non-fully-qualified hostnames. To specify multiple DNS search prefixes, use multiple <code class="highlighter-rouge">--dns-search</code> flags.</td>
+      <td>完全修飾ドメイン名でないホスト名を検索するための DNS 検索ドメイン。複数の DNS サーチプレフィックスを指定するする場合は、<code class="highlighter-rouge">--dns-search</code> フラグを複数回指定します。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">--dns-opt</code></td>
-      <td>A key-value pair representing a DNS option and its value. See your operating system’s documentation for <code class="highlighter-rouge">resolv.conf</code> for valid options.</td>
+      <td>DNS オプションとその値を表わすキーバリューペア。適用するオプションについては、オペレーティングシステムにおける <code class="highlighter-rouge">resolv.conf</code> のドキュメントを参照してください。</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">--hostname</code></td>
-      <td>The hostname a container uses for itself. Defaults to the container’s ID if not specified.</td>
+      <td>コンテナーそのものが利用するホスト名。特に指定がない場合は、デフォルトでコンテナーID がホスト名になります。</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="proxy-server">Proxy server</h2>
+<h2 id="proxy-server">プロキシーサーバー</h2>
 
-<p>If your container needs to use a proxy server, see
-<a href="/docs.docker.jp.onthefly/network/proxy/">Use a proxy server</a>.</p>
+<p>コンテナーにおいてプロキシーサーバーを利用する必要がある場合は、<a href="/docs.docker.jp.onthefly/network/proxy/">プロキシーサーバーの利用</a> を参照してください。</p>
 
                             <!-- tags -->
                             
@@ -285,7 +273,7 @@ settings on a per-container basis.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "config/containers/container-networking.md",
-                                        "title": "Container networking",
+                                        "title": "コンテナーのネットワーク",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/config/containers/container-networking.md"
                                     };
                                     (function (d, c, j) {
@@ -351,10 +339,10 @@ settings on a per-container basis.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#published-ports" class="nomunge">Published ports</a></li>
-  <li><a href="#ip-address-and-hostname" class="nomunge">IP address and hostname</a></li>
-  <li><a href="#dns-services" class="nomunge">DNS services</a></li>
-  <li><a href="#proxy-server" class="nomunge">Proxy server</a></li>
+  <li><a href="#published-ports" class="nomunge">公開ポート</a></li>
+  <li><a href="#ip-address-and-hostname" class="nomunge">IP アドレスとホスト名</a></li>
+  <li><a href="#dns-services" class="nomunge">DNS サービス</a></li>
+  <li><a href="#proxy-server" class="nomunge">プロキシーサーバー</a></li>
 </ul>
 
 

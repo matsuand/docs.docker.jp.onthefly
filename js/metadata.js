@@ -870,8 +870,8 @@ var pages = [
 ,
 {
 "url":"/config/containers/container-networking/",
-"title":"Container networking",
-"description":"How networking works from the container's point of view",
+"title":"コンテナーのネットワーク",
+"description":"コンテナーから見て、ネットワークがどのように動作するのかを説明します。",
 "keywords":"networking, container, standalone"
 }
 ,
@@ -2193,15 +2193,15 @@ var pages = [
 ,
 {
 "url":"/network/iptables/",
-"title":"Docker and iptables",
-"description":"The basics of how Docker works with iptables",
+"title":"Docker と iptables",
+"description":"Docker と iptables がどのように動作するか、その基本を説明します。",
 "keywords":"network, iptables"
 }
 ,
 {
 "url":"/config/daemon/ipv6/",
-"title":"Enable IPv6 support",
-"description":"How to enable IPv6 support in the Docker daemon",
+"title":"IPv6 サポートの有効化",
+"description":"Docker デーモンにおいて IPv6 サポートを有効にする方法を示します。",
 "keywords":"daemon, network, networking, ipv6"
 }
 ,
@@ -3082,7 +3082,7 @@ var pages = [
 ,
 {
 "url":"/network/proxy/",
-"title":"Configure Docker to use a proxy server",
+"title":"プロキシーサーバー利用の設定",
 "description":"How to configure the Docker client to use a proxy server",
 "keywords":"network, networking, proxy, client"
 }

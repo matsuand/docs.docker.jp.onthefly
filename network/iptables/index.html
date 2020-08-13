@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-08-13 14:11:01 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-13T14:11:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Docker and iptables"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="On Linux, Docker manipulates iptables rules to provide network isolation. While this is an implementation detail and you should not modify the rules Docker inserts into your iptables policies, it..." />
+  <meta name="twitter:title" itemprop="title name" content="Docker と iptables"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Linux 上において Docker は iptables ルールを利用して、ネットワークを分離します。 このことは実装に関わることであって、Docker が iptables ポリシーに挿入するルールを修正するべきではありません。 Docker が管理するポリシーとは別に、独自のポリシーを追加しようとする場合は、そこには重要な観点がいくつかあります。 Docker を起動するホストがインターネットに接続しているとします。 その場合は、ホスト上で稼動するコンテナーや他のサービスに対しての不正アクセスを防止するような iptables ポリシーを設定したいはずです。 ここではそれをどのように実現するか、そしてどこに気をつけるべきかを説明します。 Docker ルール前への iptables ポリシー追加 Docker は DOCKER-USER、DOCKER という独自の iptables チェーンをインストールします。 これによって受信パケットは、常にこの 2..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-08-13T14:11:01+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="network, iptables">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Docker and iptables | Docker ドキュメント</title>
-  <meta property="og:title" content="Docker and iptables" />
+  <title>Docker と iptables | Docker ドキュメント</title>
+  <meta property="og:title" content="Docker と iptables" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="The basics of how Docker works with iptables" />
-  <meta property="og:description" content="The basics of how Docker works with iptables" />
+  <meta name="description" content="Docker と iptables がどのように動作するか、その基本を説明します。" />
+  <meta property="og:description" content="Docker と iptables がどのように動作するか、その基本を説明します。" />
   <link rel="canonical" href="/network/iptables/" />
   <meta property="og:url" content="https://docs.docker.com/network/iptables/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker and iptables","description":"The basics of how Docker works with iptables","url":"https://docs.docker.com/network/iptables/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker と iptables","description":"Docker と iptables がどのように動作するか、その基本を説明します。","url":"https://docs.docker.com/network/iptables/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,101 +147,90 @@
                         <section class="section">
                             
                             
-                            <h1>Docker and iptables</h1> 
+                            <h1>Docker と iptables</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    1 分
   
 </span>
 
                             
-                            <p>On Linux, Docker manipulates <code class="highlighter-rouge">iptables</code> rules to provide network isolation.
-While this is an implementation detail and you should not modify the rules
-Docker inserts into your <code class="highlighter-rouge">iptables</code> policies, it does have some implications
-on what you need to do if you want to have your own policies in addition to
-those managed by Docker.</p>
+                            
+<p>Linux 上において Docker は <code class="highlighter-rouge">iptables</code> ルールを利用して、ネットワークを分離します。
+このことは実装に関わることであって、Docker が <code class="highlighter-rouge">iptables</code> ポリシーに挿入するルールを修正するべきではありません。
+Docker が管理するポリシーとは別に、独自のポリシーを追加しようとする場合は、そこには重要な観点がいくつかあります。</p>
 
-<p>If you’re running Docker on a host that is exposed to the Internet, you will
-probably want to have iptables policies in place that prevent unauthorized
-access to containers or other services running on your host. This page
-describes how to achieve that, and what caveats you need to be aware of.</p>
+<p>Docker を起動するホストがインターネットに接続しているとします。
+その場合は、ホスト上で稼動するコンテナーや他のサービスに対しての不正アクセスを防止するような iptables ポリシーを設定したいはずです。
+ここではそれをどのように実現するか、そしてどこに気をつけるべきかを説明します。</p>
 
-<h2 id="add-iptables-policies-before-dockers-rules">Add iptables policies before Docker’s rules</h2>
+<h2 id="add-iptables-policies-before-dockers-rules">Docker ルール前への iptables ポリシー追加</h2>
 
-<p>Docker installs two custom iptables chains named <code class="highlighter-rouge">DOCKER-USER</code> and <code class="highlighter-rouge">DOCKER</code>,
-and it ensures that incoming packets are always checked by these two chains
-first.</p>
+<p>Docker は <code class="highlighter-rouge">DOCKER-USER</code>、<code class="highlighter-rouge">DOCKER</code> という独自の iptables チェーンをインストールします。
+これによって受信パケットは、常にこの 2 つのチェーンによって最初にチェックが行われます。</p>
 
-<p>All of Docker’s <code class="highlighter-rouge">iptables</code> rules are added to the <code class="highlighter-rouge">DOCKER</code> chain. Do not
-manipulate this chain manually. If you need to add rules which load before
-Docker’s rules, add them to the <code class="highlighter-rouge">DOCKER-USER</code> chain. These rules are applied
-before any rules Docker creates automatically.</p>
+<p>Docker の <code class="highlighter-rouge">iptables</code> ルールはすべて、この <code class="highlighter-rouge">DOCKER</code> チェーンに追加されます。
+このチェーンを手動で操作してはなりません。
+Docker のルールよりも前にロードしたいルールがある場合は、<code class="highlighter-rouge">DOCKER-USER</code> チェーンにそのルールを追加します。
+こういったルールは、Docker が自動生成するどのルールよりも先に適用されます。</p>
 
-<p>Rules added to the <code class="highlighter-rouge">FORWARD</code> chain -- either manually, or by another
-iptables-based firewall -- are evaluated <em>after</em> these chains. This means that
-if you expose a port through Docker, this port gets exposed no matter what
-rules your firewall has configured. If you want those rules to apply even
-when a port gets exposed through Docker, you <em>must</em> add these rules to the
-<code class="highlighter-rouge">DOCKER-USER</code> chain.</p>
+<p><code class="highlighter-rouge">FORWARD</code> チェーンに追加されたルールは、手動によるもの、あるいは iptables ベースのファイアウォールによるものであっても、Docker のチェーンの後で評価されます。
+これが何を意味するかといえば、Docker によってポートを公開したら、ファイアウォールでどのような設定を行っていても、そのポートは必ず公開されるということです。
+Docker によってポートを公開している状態で、ファイアウォールによるルールを適用したい場合は、そのルールを <code class="highlighter-rouge">DOCKER-USER</code> チェーンに追加しなければ <strong>なりません</strong>。</p>
 
-<h3 id="restrict-connections-to-the-docker-host">Restrict connections to the Docker host</h3>
+<h3 id="restrict-connections-to-the-docker-host">Docker ホストへの接続制限</h3>
 
-<p>By default, all external source IPs are allowed to connect to the Docker host.
-To allow only a specific IP or network to access the containers, insert a
-negated rule at the top of the <code class="highlighter-rouge">DOCKER-USER</code> filter chain. For example, the
-following rule restricts external access from all IP addresses except <code class="highlighter-rouge">192.168.1.1</code>:</p>
+<p>外部のソース IP は、Docker ホストに対する接続がデフォルトですべて許可されます。
+コンテナーへの接続を特定の IP やネットワークのみとする場合は、<code class="highlighter-rouge">DOCKER-USER</code> フィルターチェーンの上位に、除外ルールを設定します。
+たとえば以下のルールは、<code class="highlighter-rouge">192.168.1.1</code> は除く残りの IP アドレスからの外部アクセスを制限します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.1 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
-<p>Please note that you will need to change <code class="highlighter-rouge">ext_if</code> to correspond with your
-host’s actual external interface. You could instead allow connections from a
-source subnet. The following rule only allows access from the subnet <code class="highlighter-rouge">192.168.1.0/24</code>:</p>
+<p><code class="highlighter-rouge">ext_if</code> の部分は、利用するホストの実際の外部インターフェースに合わせて変更することを忘れないでください。
+このかわりに、ソースサブネットからの接続を許可する方法もあります。
+以下のルールは、サブネット <code class="highlighter-rouge">192.168.1.0/24</code> からのアクセスのみ許可します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">-s</span> 192.168.1.0/24 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
-<p>Finally, you can specify a range of IP addresses to accept using <code class="highlighter-rouge">--src-range</code>
-(Remember to also add <code class="highlighter-rouge">-m iprange</code> when using <code class="highlighter-rouge">--src-range</code> or <code class="highlighter-rouge">--dst-range</code>):</p>
+<p>また <code class="highlighter-rouge">--src-range</code> を使えば、アクセスを許可する IP アドレスを範囲指定することができます。
+（<code class="highlighter-rouge">--src-range</code> や <code class="highlighter-rouge">--dst-range</code> を用いる際には、<code class="highlighter-rouge">-m iprange</code> を合わせて指定する必要があります。）</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-m</span> iprange <span class="nt">-i</span> ext_if <span class="o">!</span> <span class="nt">--src-range</span> 192.168.1.1-192.168.1.3 <span class="nt">-j</span> DROP
 </code></pre></div></div>
 
-<p>You can combine <code class="highlighter-rouge">-s</code> or <code class="highlighter-rouge">--src-range</code> with <code class="highlighter-rouge">-d</code> or <code class="highlighter-rouge">--dst-range</code> to control both
-the source and destination. For instance, if the Docker daemon listens on both
-<code class="highlighter-rouge">192.168.1.99</code> and <code class="highlighter-rouge">10.1.2.3</code>, you can make rules specific to <code class="highlighter-rouge">10.1.2.3</code> and leave
-<code class="highlighter-rouge">192.168.1.99</code> open.</p>
+<p><code class="highlighter-rouge">-s</code> あるいは <code class="highlighter-rouge">--src-range</code> と <code class="highlighter-rouge">-d</code> あるいは <code class="highlighter-rouge">--dst-range</code> を組み合わせて、ソース、デスティネーションの双方を制御することができます。
+たとえば Docker デーモンが <code class="highlighter-rouge">192.168.1.99</code> と <code class="highlighter-rouge">10.1.2.3</code> を待ち受けている場合、<code class="highlighter-rouge">10.1.2.3</code> を指定するルールを生成し、<code class="highlighter-rouge">192.168.1.99</code> をそのまま残すようにします。</p>
 
-<p><code class="highlighter-rouge">iptables</code> is complicated and more complicated rules are out of scope for this
-topic. See the <a href="https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html">Netfilter.org HOWTO</a>
-for a lot more information.</p>
+<p><code class="highlighter-rouge">iptables</code> は複雑なものであり、<code class="highlighter-rouge">iptables</code> ルールはさらに複雑であることから、ここでの説明範囲を超えます。
+より詳しくは <a href="https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html">Netfilter.org HOWTO</a> を参照してください。</p>
 
-<h2 id="docker-on-a-router">Docker on a router</h2>
+<h2 id="docker-on-a-router">ルーター上の Docker</h2>
 
-<p>Docker also sets the policy for the <code class="highlighter-rouge">FORWARD</code> chain to <code class="highlighter-rouge">DROP</code>. If your Docker
-host also acts as a router, this will result in that router not forwarding
-any traffic anymore. If you want your system to continue functioning as a
-router, you can add explicit <code class="highlighter-rouge">ACCEPT</code> rules to the <code class="highlighter-rouge">DOCKER-USER</code> chain to
-allow it:</p>
+<p>Docker では <code class="highlighter-rouge">FORWARD</code> チェーンに対して <code class="highlighter-rouge">DROP</code> も設定します。
+Docker ホストがルーターとしても動作している場合、ルーターはもはや、どのトラフィックもフォワードしないということになります。
+システム内においてルーターとしての機能を維持したい場合は、<code class="highlighter-rouge">DOCKER-USER</code> チェーンに明示的に <code class="highlighter-rouge">ACCEPT</code> ルールを追加して、これを許可するようにします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-I</span> DOCKER-USER <span class="nt">-i</span> src_if <span class="nt">-o</span> dst_if <span class="nt">-j</span> ACCEPT
 </code></pre></div></div>
 
-<h2 id="prevent-docker-from-manipulating-iptables">Prevent Docker from manipulating iptables</h2>
+<h2 id="prevent-docker-from-manipulating-iptables">Docker による iptables 操作の防止</h2>
 
-<p>It is possible to set the <code class="highlighter-rouge">iptables</code> key to <code class="highlighter-rouge">false</code> in the Docker engine’s configuration file at <code class="highlighter-rouge">/etc/docker/daemon.json</code>, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating <code class="highlighter-rouge">iptables</code> rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions. Setting <code class="highlighter-rouge">iptables</code> to <code class="highlighter-rouge">false</code> will more than likely break container networking for the Docker engine.</p>
+<p>Docker Engine の設定ファイル <code class="highlighter-rouge">/etc/docker/daemon.json</code> において、<code class="highlighter-rouge">iptables</code> キーを <code class="highlighter-rouge">false</code> に設定することができますが、たいていのユーザーにとって、これを行うのは適切ではありません。
+Docker が <code class="highlighter-rouge">iptables</code> ルールを作らないようにすることは、完全にはできません。
+生成されるルールは非常に複雑なものであり、ここでの説明の範囲を超えています。
+<code class="highlighter-rouge">iptables</code> に <code class="highlighter-rouge">false</code> を設定すると、Docker Engine におけるコンテナーネットワーク機能が壊れる可能性が高くなります。</p>
 
-<p>For system integrators who wish to build the Docker runtime into other applications, explore the <a href="https://mobyproject.org/"><code class="highlighter-rouge">moby</code> project</a>.</p>
+<p>システムインテグレーターの方が、別のアプリケーション内に Docker ランタイムを含めてビルドしたい場合は、<a href="https://mobyproject.org/"><code class="highlighter-rouge">moby</code> プロジェクト</a> を調べてみてください。</p>
 
-<h2 id="setting-the-default-bind-address-for-containers">Setting the default bind address for containers</h2>
+<h2 id="setting-the-default-bind-address-for-containers">コンテナーへのデフォルトバインドアドレス設定</h2>
 
-<p>By default, the Docker daemon will expose ports on the <code class="highlighter-rouge">0.0.0.0</code> address, i.e.
-any address on the host. If you want to change that behavior to only
-expose ports on an internal IP address, you can use the <code class="highlighter-rouge">--ip</code> option to
-specify a different IP address. However, setting <code class="highlighter-rouge">--ip</code> only changes the
-<em>default</em>, it does not <em>restrict</em> services to that IP.</p>
+<p>デフォルトで Docker デーモンは、ホスト上でのあらゆるアドレスを意味する <code class="highlighter-rouge">0.0.0.0</code> において、ポートを公開します。
+この状態を変更して、公開するポートは内部 IP アドレスに対してのみとする場合は、<code class="highlighter-rouge">--ip</code> オプションを使って、別の IP アドレスを指定します。
+ただし <code class="highlighter-rouge">--ip</code> による設定は <strong>デフォルトを</strong> 変更するだけであり、その IP に対してサービスを <strong>限定</strong> するものではありません。</p>
 
                             <!-- tags -->
                             
@@ -258,7 +247,7 @@ specify a different IP address. However, setting <code class="highlighter-rouge"
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "network/iptables.md",
-                                        "title": "Docker and iptables",
+                                        "title": "Docker と iptables",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/network/iptables.md"
                                     };
                                     (function (d, c, j) {
@@ -324,14 +313,14 @@ specify a different IP address. However, setting <code class="highlighter-rouge"
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#add-iptables-policies-before-dockers-rules" class="nomunge">Add iptables policies before Docker’s rules</a>
+  <li><a href="#add-iptables-policies-before-dockers-rules" class="nomunge">Docker ルール前への iptables ポリシー追加</a>
     <ul>
-      <li><a href="#restrict-connections-to-the-docker-host" class="nomunge">Restrict connections to the Docker host</a></li>
+      <li><a href="#restrict-connections-to-the-docker-host" class="nomunge">Docker ホストへの接続制限</a></li>
     </ul>
   </li>
-  <li><a href="#docker-on-a-router" class="nomunge">Docker on a router</a></li>
-  <li><a href="#prevent-docker-from-manipulating-iptables" class="nomunge">Prevent Docker from manipulating iptables</a></li>
-  <li><a href="#setting-the-default-bind-address-for-containers" class="nomunge">Setting the default bind address for containers</a></li>
+  <li><a href="#docker-on-a-router" class="nomunge">ルーター上の Docker</a></li>
+  <li><a href="#prevent-docker-from-manipulating-iptables" class="nomunge">Docker による iptables 操作の防止</a></li>
+  <li><a href="#setting-the-default-bind-address-for-containers" class="nomunge">コンテナーへのデフォルトバインドアドレス設定</a></li>
 </ul>
 
 
