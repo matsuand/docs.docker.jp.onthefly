@@ -856,7 +856,7 @@ var pages = [
 ,
 {
 "url":"/registry/configuration/",
-"title":"Configuring a registry",
+"title":"Registry の設定",
 "description":"Explains how to configure a registry",
 "keywords":"registry, on-prem, images, tags, repository, distribution, configuration"
 }
@@ -1129,8 +1129,8 @@ var pages = [
 ,
 {
 "url":"/docker-hub/convert-account/",
-"title":"Convert an account into an organization",
-"description":"Convert your Docker Hub user account into an organization",
+"title":"アカウントから組織への移行",
+"description":"Docker Hub のユーザーアカウントを組織へ移行します。",
 "keywords":"docker hub, hub, organization"
 }
 ,
@@ -1199,7 +1199,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/deactivate-account/",
-"title":"Deactivating an account or an organization",
+"title":"アカウントや組織の無効化",
 "description":"Learn how to deactivate a Docker Hub account or an organization",
 "keywords":"Docker Hub, delete, deactivate, account, organization"
 }
@@ -1227,7 +1227,7 @@ var pages = [
 ,
 {
 "url":"/registry/deploying/",
-"title":"Deploy a registry server",
+"title":"Registry サーバーのデプロイ",
 "description":"Explains how to deploy a registry",
 "keywords":"registry, on-prem, images, tags, repository, distribution, deployment"
 }
@@ -1815,7 +1815,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/",
-"title":"Docker Desktop for Mac をはじめよう",
+"title":"Docker Desktop for Mac ユーザーマニュアル",
 "description":"はじめよう。",
 "keywords":"mac, tutorial, run, docker, local, machine"
 }
@@ -1843,7 +1843,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/",
-"title":"Get started with Docker for Windows",
+"title":"Docker Desktop for Windows user manual",
 "description":"Getting Started",
 "keywords":"windows, edge, tutorial, run, docker, local, machine"
 }
@@ -2186,7 +2186,7 @@ var pages = [
 ,
 {
 "url":"/registry/introduction/",
-"title":"About Registry",
+"title":"Registry について",
 "description":"Explains what the Registry is, basic use cases and requirements",
 "keywords":"registry, on-prem, images, tags, repository, distribution, use cases, requirements"
 }
@@ -3978,7 +3978,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/troubleshoot/",
-"title":"Logs and troubleshooting",
+"title":"ログ機能とトラブルシューティング",
 "description":"Troubleshooting, logs, and known issues",
 "keywords":"mac, troubleshooting, logs, issues"
 }
