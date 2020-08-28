@@ -219,7 +219,7 @@ var pages = [
 ,
 {
 "url":"/desktop/enterprise/app-designer/",
-"title":"Application Designer",
+"title":"アプリケーションデザイナー",
 "description":"Docker Desktop Enterprise Application Designer",
 "keywords":"Docker EE, Windows, Mac, Docker Desktop, Enterprise, templates, designer"
 }
@@ -779,8 +779,8 @@ var pages = [
 ,
 {
 "url":"/machine/completion/",
-"title":"Command-line completion",
-"description":"Install Machine command-line completion",
+"title":"コマンドライン補完",
+"description":"Docker Machine にコマンドライン補完をインストールします。",
 "keywords":"machine, docker, orchestration, cli, reference"
 }
 ,
@@ -1409,7 +1409,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/edge-release-notes/",
-"title":"Docker Desktop for Windows Edge Release notes",
+"title":"Docker Desktop for Windows 最新版リリースノート",
 "description":"Change log / release notes per edge release",
 "keywords":"Docker Desktop for Windows, edge, release notes"
 }
@@ -1843,7 +1843,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/",
-"title":"Docker Desktop for Windows user manual",
+"title":"Docker Desktop for Windows ユーザーマニュアル",
 "description":"Getting Started",
 "keywords":"windows, edge, tutorial, run, docker, local, machine"
 }
@@ -1983,7 +1983,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/2fa/",
-"title":"Enable two-factor authentication for Docker Hub",
+"title":"Docker Hub における 2 要素認証の有効化",
 "description":"Enabling two-factor authentication on Docker Hub",
 "keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
 }
