@@ -667,7 +667,7 @@ var pages = [
 ,
 {
 "url":"/engine/reference/commandline/cli/",
-"title":"Use the Docker command line",
+"title":"Docker コマンドラインの利用",
 "description":"Docker's CLI command description and usage",
 "keywords":"Docker, Docker documentation, CLI, command line"
 }
@@ -1304,8 +1304,8 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/docker-toolbox/",
-"title":"Migrate Docker Toolbox",
-"description":"Docker Desktop for Windows and Docker Toolbox",
+"title":"Docker Toolbox の移行",
+"description":"Docker Desktop for Windows と Docker Toolbox",
 "keywords":"windows, alpha, beta, toolbox, docker-machine, tutorial"
 }
 ,
@@ -1954,6 +1954,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/scan/",
+"title":"Docker ローカルイメージに対するぜい弱性スキャン",
+"description":"Dockerローカルイメージに対するぜい弱性スキャン。",
+"keywords":"Docker, scan, Snyk, images, local, CVE, vulnerability, security"
+}
+,
+{
 "url":"/engine/tutorials/",
 "title":"Engine チュートリアル",
 "description":"コンテナーがどのように動作するかを説明します。",
@@ -2172,7 +2179,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/install/",
-"title":"Docker Desktop on Windows のインストール",
+"title":"Windows への Docker Desktop のインストール",
 "description":"How to install Docker Desktop for Windows",
 "keywords":"windows, install, download, run, docker, local"
 }
