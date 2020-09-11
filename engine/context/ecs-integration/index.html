@@ -1,4 +1,4 @@
-<!-- Page generated 2020-09-02 19:29:38 +0900 -->
+<!-- Page generated 2020-09-11 11:03:25 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-02T19:29:38+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-11T11:03:25+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="概要 Docker ECS 統合は、Amazon EC2 コンテナーサービス（Amazon EC2 Container Service; ECS）の中で、ネイティブな Docker コマンドの利用を可能にします。 これを使って、クラウドに適したアプリケーションを構築し実行します。 Docker と Amazon ECS の統合により、開発者が Docker CLI を用いる際には、以下のことが可能になります。 1 つの Docker コマンドに対して AWS コンテキストを設定することができます。 これによってローカルコンテキストとクラウドコンテキストを切り替えられるようになり、アプリケーションの実行をすばやく簡単に行うことができます。 Compose を使って、Amazon..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-09-02T19:29:38+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-11T11:03:25+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="Docker, AWS, ECS, Integration, context, Compose, cli, deploy, containers, cloud">
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    6 分
   
 </span>
 
@@ -440,6 +440,25 @@ AWS アカウントに、そのようなリソースを生成する <a href="htt
   </li>
 </ul>
 
+<h2 id="local-simulation">ローカルシミュレーション</h2>
+
+<p>ECS 上にアプリケーションをデプロイする際に、追加の AWS サービスを用いたい場合があります。
+そのような場合には、コード内に AWS SDK を埋め込んで、実行時に API 資格情報を取り出すことが必要になります。
+AWS では資格情報を取得するメカニズムが用意されていて、SDK を使って完全実装されています。
+そして固定 IP アドレス上のメタデータサービスにアクセスすることで、これを実現しています。</p>
+
+<p>ただこの手法を採用してしまうと、ローカル環境においてテストやデバッグ目的でアプリケーションを実行することが困難になります。
+そこでコンテキストを生成する際のオプションを導入しています。
+そのオプションでは <code class="highlighter-rouge">ecs-local</code> コンテキストを設定して、ローカルマシンと AWS クラウドプロバイダー間でのアプリケーションの可搬性を確保しています。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker context create ecs <span class="nt">--local-simulation</span> ecsLocal
+<span class="go">Successfully created ecs-local context "ecsLocal"
+</span></code></pre></div></div>
+
+<p>ローカルシミュレーションコンテキストを選んだ場合、<code class="highlighter-rouge">docker compose up</code> コマンドを実行しても、アプリケーションは ECS 上にデプロイされません。
+したがってアプリケーションはローカルでの実行となり、Compose アプリケーションは <a href="https://github.com/awslabs/amazon-ecs-local-container-endpoints/">ECS local endpoints</a> を用いるように、自動的に調整されます。
+このことから、アプリケーションコード内にて利用する AWS SDK は、「AWS メタデータ API」としてローカルの一時的なコンテナーにアクセスし、ローカルの設定ファイル <code class="highlighter-rouge">.aws/credentials</code> から資格情報を取得することになります。</p>
+
 <h2 id="install-the-docker-ecs-integration-cli-on-linux">Linux における Docker ECS 統合 CLI のインストール</h2>
 
 <p>Docker ECS 統合の CLI は、ECS 上のコンテナー実行と管理をサポートします。</p>
@@ -573,6 +592,7 @@ AWS アカウントに、そのようなリソースを生成する <a href="htt
       <li><a href="#private-docker-images" class="nomunge">プライベートな Docker イメージ</a></li>
       <li><a href="#service-discovery" class="nomunge">サービスの検出</a></li>
       <li><a href="#tuning-the-cloudformation-template" class="nomunge">CloudFormation テンプレートの調整</a></li>
+      <li><a href="#local-simulation" class="nomunge">ローカルシミュレーション</a></li>
       <li><a href="#install-the-docker-ecs-integration-cli-on-linux" class="nomunge">Linux における Docker ECS 統合 CLI のインストール</a></li>
       <li><a href="#faq" class="nomunge">FAQ</a></li>
       <li><a href="#feedback" class="nomunge">フィードバック</a></li>
