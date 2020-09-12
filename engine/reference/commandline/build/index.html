@@ -1,4 +1,4 @@
-<!-- Page generated 2020-08-28 14:43:51 +0900 -->
+<!-- Page generated 2020-09-11 11:03:25 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-08-28T14:43:51+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-11T11:03:25+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:title" itemprop="title name" content="docker build"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="説明 Dockerfile からイメージをビルドします。 利用方法 docker build [OPTIONS] PATH | URL | - 追加説明 The docker build command builds Docker images from a Dockerfile and a “context”. A build’s context is..." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="説明 Dockerfile からイメージをビルドします。 利用方法 docker build [オプション] PATH | URL | - 追加説明 docker build コマンドは Dockerfile と「ビルドコンテキスト」から Docker イメージをビルドします。 ビルドコンテキストとは、指定された PATH や URL に存在している一連のファイルのことです。 ビルド処理においては、コンテキスト内のどのファイルでも参照できます。 たとえばビルドにおいて COPY 命令を使っている場合に、コンテキスト内のファイルを参照することができます。 URL..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-08-28T14:43:51+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-11T11:03:25+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -165,58 +165,55 @@ https://github.com/docker/cli
 
 <h2 id="usage">利用方法</h2>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker build [OPTIONS] PATH | URL | -
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker build [オプション] PATH | URL | -
 </span></code></pre></div></div>
 
 <h2 id="extended-description">追加説明</h2>
 
-<p>The <code class="highlighter-rouge">docker build</code> command builds Docker images from a Dockerfile and a
-“context”. A build’s context is the set of files located in the specified
-<code class="highlighter-rouge">PATH</code> or <code class="highlighter-rouge">URL</code>. The build process can refer to any of the files in the
-context. For example, your build can use a <a href="/engine/reference/builder/#copy"><em>COPY</em></a>
-instruction to reference a file in the context.</p>
+<p><code class="highlighter-rouge">docker build</code> コマンドは Dockerfile と「ビルドコンテキスト」から Docker イメージをビルドします。
+ビルドコンテキストとは、指定された <code class="highlighter-rouge">PATH</code> や <code class="highlighter-rouge">URL</code> に存在している一連のファイルのことです。
+ビルド処理においては、コンテキスト内のどのファイルでも参照できます。
+たとえばビルドにおいて <a href="/engine/reference/builder/#copy"><strong>COPY</strong></a> 命令を使っている場合に、コンテキスト内のファイルを参照することができます。</p>
 
-<p>The <code class="highlighter-rouge">URL</code> parameter can refer to three kinds of resources: Git repositories,
-pre-packaged tarball contexts and plain text files.</p>
+<p><code class="highlighter-rouge">URL</code> パラメーターは 3 種類のリソースを参照します。
+Git リポジトリ、パッケージングされた tarball コンテキスト、プレーンなテキストファイル、の 3 つです。</p>
 
-<h3 id="git-リポジトリ">Git リポジトリ</h3>
+<h3 id="git-repositories">Git リポジトリ</h3>
 
-<p>When the <code class="highlighter-rouge">URL</code> parameter points to the location of a Git repository, the
-repository acts as the build context. The system recursively fetches the
-repository and its submodules. The commit history is not preserved. A
-repository is first pulled into a temporary directory on your local host. After
-that succeeds, the directory is sent to the Docker daemon as the context.
-Local copy gives you the ability to access private repositories using local
-user credentials, VPN’s, and so forth.</p>
+<p><code class="highlighter-rouge">URL</code> パラメーターが Git リポジトリの場所を示している場合、そのリポジトリがビルドコンテキストとして扱われます。
+システムはリポジトリとサブモジュールを再帰的にフェッチします。
+コミット履歴は保持されません。
+リポジトリは初めに、ローカルホスト内の一時的なディレクトリにプルされます。
+これが正常処理されると、ディレクトリ内容がコンテキストとして Docker デーモンに送信されます。
+ローカルにコピーが存在しているなら、プライベートリポジトリにもアクセス可能になります。
+その際にはローカルにあるユーザー認証情報、VPN 情報などが用いられます。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>If the <code class="highlighter-rouge">URL</code> parameter contains a fragment the system will recursively clone
-the repository and its submodules using a <code class="highlighter-rouge">git clone --recursive</code> command.</p>
+  <p><code class="highlighter-rouge">URL</code> パラメーターが部分的なものであった場合、システムは <code class="highlighter-rouge">git clone --recursive</code> コマンドを実行して、そのリポジトリやサブモジュールを再帰的にクローンします。</p>
 </blockquote>
 
-<p>Git URLs accept context configuration in their fragment section, separated by a
-colon (<code class="highlighter-rouge">:</code>).  The first part represents the reference that Git will check out,
-and can be either a branch, a tag, or a remote reference. The second part
-represents a subdirectory inside the repository that will be used as a build
-context.</p>
+<p>Git URL では、コンテキスト設定にあたって URL の部分指定が可能です。
+部分指定にはコロン（<code class="highlighter-rouge">:</code>）を使って区切ります。
+コロンより前の 1 つめの項目として Git がチェックアウトを行う URL を指定します。
+これはブランチ、タグ、リモートリファレンスのいずれでも可能です。
+2 つめの項目には、そのリポジトリ内のサブディレクトリを指定します。
+このサブディレクトリがビルドコンテキストとして用いられることになります。</p>
 
-<p>For example, run this command to use a directory called <code class="highlighter-rouge">docker</code> in the branch
-<code class="highlighter-rouge">container</code>:</p>
+<p>たとえば <code class="highlighter-rouge">container</code> ブランチ内の <code class="highlighter-rouge">docker</code> というディレクトリを利用するには、以下のように実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build https://github.com/docker/rootfs.git#container:docker
 </code></pre></div></div>
 
-<p>The following table represents all the valid suffixes with their build
-contexts:</p>
+<p>以下に示す表は、ビルドコンテキストとして有効なサフィックス指定の例です。</p>
 
 <table>
   <thead>
     <tr>
-      <th>Build Syntax Suffix</th>
-      <th>Commit Used</th>
-      <th>Build Context Used</th>
+      <th>ビルド時のサフィックス指定例</th>
+      <th>利用されるコミット</th>
+      <th>利用されるビルドコンテキスト</th>
     </tr>
   </thead>
   <tbody>
@@ -263,54 +260,52 @@ contexts:</p>
   </tbody>
 </table>
 
-<h3 id="tarball-contexts">Tarball contexts</h3>
+<h3 id="tarball-contexts">Tarball コンテキスト</h3>
 
-<p>If you pass an URL to a remote tarball, the URL itself is sent to the daemon:</p>
+<p>URL にリモートの tarball を指定した場合、URL がそのままデーモンに送信されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build http://server/context.tar.gz
 </code></pre></div></div>
 
-<p>The download operation will be performed on the host the Docker daemon is
-running on, which is not necessarily the same host from which the build command
-is being issued. The Docker daemon will fetch <code class="highlighter-rouge">context.tar.gz</code> and use it as the
-build context. Tarball contexts must be tar archives conforming to the standard
-<code class="highlighter-rouge">tar</code> UNIX format and can be compressed with any one of the ‘xz’, ‘bzip2’,
-‘gzip’ or ‘identity’ (no compression) formats.</p>
+<p>ダウンロード処理は、Docker デーモンが稼動しているホスト上で実行されます。
+このホストは、build コマンドが実行されたホストと同じである必要はありません。
+Docker デーモンは <code class="highlighter-rouge">context.tar.gz</code> を取得して、これをビルドコンテキストとして利用します。
+tarball コンテキストは UNIX <code class="highlighter-rouge">tar</code> フォーマット標準に適合した tar アーカイブである必要があります。
+これを ‘xz’、’bzip2’、’gzip’ により圧縮したフォーマットも受け付けます。
+‘identity’（圧縮なし）のフォーマットも利用できます。</p>
 
-<h3 id="text-files">Text files</h3>
+<h3 id="text-files">テキストファイル</h3>
 
-<p>Instead of specifying a context, you can pass a single <code class="highlighter-rouge">Dockerfile</code> in the
-<code class="highlighter-rouge">URL</code> or pipe the file in via <code class="highlighter-rouge">STDIN</code>. To pipe a <code class="highlighter-rouge">Dockerfile</code> from <code class="highlighter-rouge">STDIN</code>:</p>
+<p>コンテキストを指定するのではなく、1 つの Dockerfile を指定することができます。
+つまりそのファイル内容を、<code class="highlighter-rouge">STDIN</code> を介してパイプ入力します。
+<code class="highlighter-rouge">Dockerfile</code> を <code class="highlighter-rouge">STDIN</code> からパイプ入力するには、以下のようにします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build - &lt; Dockerfile
 </code></pre></div></div>
 
-<p>With Powershell on Windows, you can run:</p>
+<p>Windows における Powershell 上では以下のようにします。</p>
 
 <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Get-Content </span>Dockerfile | docker build -
 </code></pre></div></div>
 
-<p>If you use <code class="highlighter-rouge">STDIN</code> or specify a <code class="highlighter-rouge">URL</code> pointing to a plain text file, the system
-places the contents into a file called <code class="highlighter-rouge">Dockerfile</code>, and any <code class="highlighter-rouge">-f</code>, <code class="highlighter-rouge">--file</code>
-option is ignored. In this scenario, there is no context.</p>
+<p><code class="highlighter-rouge">STDIN</code> を利用するか、<code class="highlighter-rouge">URL</code> によりプレーンテキストファイルを指定した場合、<code class="highlighter-rouge">Dockerfile</code> というファイルにその内容を書き入れます。
+この場合 <code class="highlighter-rouge">-f</code> や <code class="highlighter-rouge">--file</code> オプションは無視されます。
+この状況では、コンテキストは存在しないものとなります。</p>
 
-<p>By default the <code class="highlighter-rouge">docker build</code> command will look for a <code class="highlighter-rouge">Dockerfile</code> at the root
-of the build context. The <code class="highlighter-rouge">-f</code>, <code class="highlighter-rouge">--file</code>, option lets you specify the path to
-an alternative file to use instead. This is useful in cases where the same set
-of files are used for multiple builds. The path must be to a file within the
-build context. If a relative path is specified then it is interpreted as
-relative to the root of the context.</p>
+<p><code class="highlighter-rouge">docker build</code> コマンドが <code class="highlighter-rouge">Dockerfile</code> を探しにいく場所は、デフォルトではビルドコンテキストのルートディレクトリです。
+<code class="highlighter-rouge">-f</code> や <code class="highlighter-rouge">--file</code> オプションを使うと、別のファイルを利用するように指定できます。
+これは同一のファイル群を使って、ビルドを何度か行う場合に便利です。
+パスはビルドコンテキスト内のファイルを表わしていなければなりません。
+相対パスが指定された場合は、コンテキストのルートからの相対パスと解釈されます。</p>
 
-<p>In most cases, it’s best to put each Dockerfile in an empty directory. Then,
-add to that directory only the files needed for building the Dockerfile. To
-increase the build’s performance, you can exclude files and directories by
-adding a <code class="highlighter-rouge">.dockerignore</code> file to that directory as well. For information on
-creating one, see the <a href="/engine/reference/builder/#dockerignore-file">.dockerignore file</a>.</p>
+<p>ほとんどの場合、Dockerfile は空のディレクトリに置くのがベストです。
+Dockerfile のビルドに必要となるファイルのみを、後からそのディレクトリに追加します。
+ビルド性能を向上させるため、不要なファイルやディレクトリを指定する <code class="highlighter-rouge">.dockerignore</code> を、そのディレクトリに加えることもあります。
+そのファイルの生成に関しては <a href="/engine/reference/builder/#dockerignore-file">.dockerignore ファイル</a> を参照してください。</p>
 
-<p>If the Docker client loses connection to the daemon, the build is canceled.
-This happens if you interrupt the Docker client with <code class="highlighter-rouge">CTRL-c</code> or if the Docker
-client is killed for any reason. If the build initiated a pull which is still
-running at the time the build is cancelled, the pull is cancelled as well.</p>
+<p>Docker クライアントがデーモンとの接続を失った場合、ビルドはキャンセルされます。
+これはたとえば Docker クライアント上において <code class="highlighter-rouge">CTRL-c</code> により処理中断した場合や、Docker クライアントが何か別の理由により異常終了した場合に発生します。
+ビルドがキャンセルされる直前の動作中に、プル処理を初期化していた場合、そのプル処理も同じくキャンセルされます。</p>
 
 <p>本コマンドの利用例については、以下に示す <a href="#examples">利用例の節</a> を参照してください。</p>
 
@@ -337,7 +332,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--add-host</code></td>
     <td></td>
-    <td>Add a custom host-to-IP mapping (host:ip)</td>
+    <td>ホスト－IP マッピングのカスタム設定を追加します。(ホスト名:ip)</td>
   </tr>
 
   
@@ -351,7 +346,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--build-arg</code></td>
     <td></td>
-    <td>Set build-time variables</td>
+    <td>ビルド時の変数を設定します。</td>
   </tr>
 
   
@@ -365,7 +360,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--cache-from</code></td>
     <td></td>
-    <td>Images to consider as cache sources</td>
+    <td>キャッシュから取得すべきイメージ。</td>
   </tr>
 
   
@@ -379,7 +374,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--cgroup-parent</code></td>
     <td></td>
-    <td>Optional parent cgroup for the container</td>
+    <td>任意に指定するコンテナーの親 cgroup。</td>
   </tr>
 
   
@@ -393,7 +388,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--compress</code></td>
     <td></td>
-    <td>Compress the build context using gzip</td>
+    <td>ビルドコンテキストを gzip を使って圧縮します。</td>
   </tr>
 
   
@@ -407,7 +402,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--cpu-period</code></td>
     <td></td>
-    <td>Limit the CPU CFS (Completely Fair Scheduler) period</td>
+    <td>CPU の CFS（Completely Fair Scheduler）間隔を制限します。</td>
   </tr>
 
   
@@ -421,7 +416,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--cpu-quota</code></td>
     <td></td>
-    <td>Limit the CPU CFS (Completely Fair Scheduler) quota</td>
+    <td>CPU の CFS（Completely Fair Scheduler）クォータを制限します。</td>
   </tr>
 
   
@@ -435,7 +430,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--cpu-shares , -c</code></td>
     <td></td>
-    <td>CPU shares (relative weight)</td>
+    <td>CPU 配分。（相対的な重みづけ）</td>
   </tr>
 
   
@@ -449,7 +444,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--cpuset-cpus</code></td>
     <td></td>
-    <td>CPUs in which to allow execution (0-3, 0,1)</td>
+    <td>利用を許容する CPU 数。（0-3、0,1）</td>
   </tr>
 
   
@@ -463,7 +458,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--cpuset-mems</code></td>
     <td></td>
-    <td>MEMs in which to allow execution (0-3, 0,1)</td>
+    <td>利用を許容するメモリ数。（0-3、0,1）</td>
   </tr>
 
   
@@ -477,7 +472,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--disable-content-trust</code></td>
     <td><code class="highlighter-rouge">true</code></td>
-    <td>Skip image verification</td>
+    <td>イメージの検証を省略します。</td>
   </tr>
 
   
@@ -491,7 +486,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--file , -f</code></td>
     <td></td>
-    <td>Name of the Dockerfile (Default is ‘PATH/Dockerfile’)</td>
+    <td>Dockerfile 名。（デフォルトは ‘PATH/Dockerfile’）</td>
   </tr>
 
   
@@ -505,7 +500,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--force-rm</code></td>
     <td></td>
-    <td>Always remove intermediate containers</td>
+    <td>中間コンテナーを常に削除します。</td>
   </tr>
 
   
@@ -519,7 +514,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--iidfile</code></td>
     <td></td>
-    <td>Write the image ID to the file</td>
+    <td>イメージ ID をファイルに出力します。</td>
   </tr>
 
   
@@ -533,7 +528,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--isolation</code></td>
     <td></td>
-    <td>Container isolation technology</td>
+    <td>コンテナーの分離技術（isolation technology）方式。</td>
   </tr>
 
   
@@ -547,7 +542,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--label</code></td>
     <td></td>
-    <td>Set metadata for an image</td>
+    <td>イメージに対してメタデータを設定します。</td>
   </tr>
 
   
@@ -561,7 +556,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--memory , -m</code></td>
     <td></td>
-    <td>Memory limit</td>
+    <td>メモリ上限。</td>
   </tr>
 
   
@@ -575,7 +570,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--memory-swap</code></td>
     <td></td>
-    <td>Swap limit equal to memory plus swap: ‘-1’ to enable unlimited swap</td>
+    <td>メモリとスワップの総量を制限します。’-1’ 設定時はスワップ無制限。</td>
   </tr>
 
   
@@ -589,7 +584,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--network</code></td>
     <td></td>
-    <td><a href="/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.25 以上</span></a><br />Set the networking mode for the RUN instructions during build</td>
+    <td><a href="/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.25 以上</span></a><br />ビルド時の RUN 命令に対してネットワークモードを設定します。</td>
   </tr>
 
   
@@ -603,7 +598,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--no-cache</code></td>
     <td></td>
-    <td>Do not use cache when building the image</td>
+    <td>イメージビルド時にキャッシュを利用しません。</td>
   </tr>
 
   
@@ -617,7 +612,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--output , -o</code></td>
     <td></td>
-    <td><a href="/engine/api/v1.40/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.40 以上</span></a><br />Output destination (format: type=local,dest=path)</td>
+    <td><a href="/engine/api/v1.40/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.40 以上</span></a><br />出力先。（フォーマット: type=local,dest=path）</td>
   </tr>
 
   
@@ -631,7 +626,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--platform</code></td>
     <td></td>
-    <td><a href="/engine/api/v1.38/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.38 以上</span></a><br />Set platform if server is multi-platform capable</td>
+    <td><a href="/engine/api/v1.38/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.38 以上</span></a><br />サーバーがマルチプラットフォームに対応している場合に、プラットフォームを指定します。</td>
   </tr>
 
   
@@ -645,7 +640,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--progress</code></td>
     <td><code class="highlighter-rouge">auto</code></td>
-    <td>Set type of progress output (auto, plain, tty). Use plain to show container output</td>
+    <td>処理経過の出力タイプを設定します（auto、plain、tty）。コンテナー出力には plain が用いられます。</td>
   </tr>
 
   
@@ -659,7 +654,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--pull</code></td>
     <td></td>
-    <td>Always attempt to pull a newer version of the image</td>
+    <td>常に最新イメージのプルを試みます。</td>
   </tr>
 
   
@@ -673,7 +668,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--quiet , -q</code></td>
     <td></td>
-    <td>Suppress the build output and print image ID on success</td>
+    <td>ビルド出力を省略し、処理成功時にはイメージ ID を表示します。</td>
   </tr>
 
   
@@ -687,7 +682,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--rm</code></td>
     <td><code class="highlighter-rouge">true</code></td>
-    <td>Remove intermediate containers after a successful build</td>
+    <td>ビルド成功後に中間コンテナーを削除します。</td>
   </tr>
 
   
@@ -701,7 +696,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--secret</code></td>
     <td></td>
-    <td><a href="/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.39 以上</span></a><br />Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret</td>
+    <td><a href="/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.39 以上</span></a><br />ビルド時に公開する Secret ファイル（BuildKit 有効時のみ)。 id=mysecret,src=/local/secret</td>
   </tr>
 
   
@@ -715,7 +710,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--security-opt</code></td>
     <td></td>
-    <td>Security options</td>
+    <td>セキュリティオプション。</td>
   </tr>
 
   
@@ -729,7 +724,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--shm-size</code></td>
     <td></td>
-    <td>Size of /dev/shm</td>
+    <td>/dev/shm のサイズ。</td>
   </tr>
 
   
@@ -743,7 +738,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--squash</code></td>
     <td></td>
-    <td><a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (デーモン)</span></a><a href="/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.25 以上</span></a><br />Squash newly built layers into a single new layer</td>
+    <td><a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (デーモン)</span></a><a href="/engine/api/v1.25/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.25 以上</span></a><br />ビルドしたレイヤーを単一の新レイヤーに押し込みます（squash します）。</td>
   </tr>
 
   
@@ -757,7 +752,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--ssh</code></td>
     <td></td>
-    <td><a href="/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.39 以上</span></a><br />SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format: default|<id>[=<socket>|<key>[,<key>]])</key></key></socket></id></td>
+    <td><a href="/engine/api/v1.39/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.39 以上</span></a><br />ビルド時に公開する SSH エージェントソケットまたは SSH 鍵（BuildKit 有効時のみ）。（フォーマット: default|&lt;id&gt;[=&lt;socket&gt;|&lt;key&gt;[,&lt;key&gt;]]）</td>
   </tr>
 
   
@@ -771,7 +766,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--stream</code></td>
     <td></td>
-    <td><a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (デーモン)</span></a><a href="/engine/api/v1.31/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.31 以上</span></a><br />Stream attaches to server to negotiate build context</td>
+    <td><a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (デーモン)</span></a><a href="/engine/api/v1.31/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the  API リファレンス (新規ウィンドウを開きます)">API 1.31 以上</span></a><br />ビルドコンテキストをやり取りするためにサーバーにアタッチするストリーム。</td>
   </tr>
 
   
@@ -785,7 +780,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--tag , -t</code></td>
     <td></td>
-    <td>Name and optionally a tag in the ‘name:tag’ format</td>
+    <td>書式 ‘name:tag’ により名前および任意のタグを指定します。</td>
   </tr>
 
   
@@ -799,7 +794,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--target</code></td>
     <td></td>
-    <td>Set the target build stage to build.</td>
+    <td>ビルド対象とするビルドステージを指定します。</td>
   </tr>
 
   
@@ -813,7 +808,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
   <tr>
     <td><code class="highlighter-rouge">--ulimit</code></td>
     <td></td>
-    <td>Ulimit options</td>
+    <td>ulimit オプション。</td>
   </tr>
  <!-- end for option -->
 </tbody>
@@ -822,7 +817,7 @@ running at the time the build is cancelled, the pull is cancelled as well.</p>
 
 <h2 id="examples">利用例</h2>
 
-<h3 id="build-with-path">Build with PATH</h3>
+<h3 id="build-with-path">PATH を使ったビルド</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nb">.</span>
 
@@ -852,28 +847,27 @@ Removing intermediate container 9c9e81692ae9
 Removing intermediate container 02071fceb21b
 </code></pre></div></div>
 
-<p>This example specifies that the <code class="highlighter-rouge">PATH</code> is <code class="highlighter-rouge">.</code>, and so all the files in the
-local directory get <code class="highlighter-rouge">tar</code>d and sent to the Docker daemon. The <code class="highlighter-rouge">PATH</code> specifies
-where to find the files for the “context” of the build on the Docker daemon.
-Remember that the daemon could be running on a remote machine and that no
-parsing of the Dockerfile happens at the client side (where you’re running
-<code class="highlighter-rouge">docker build</code>). That means that <em>all</em> the files at <code class="highlighter-rouge">PATH</code> get sent, not just
-the ones listed to <a href="/engine/reference/builder/#add"><em>ADD</em></a> in the Dockerfile.</p>
+<p>上の例では <code class="highlighter-rouge">PATH</code> に <code class="highlighter-rouge">.</code> を指定しています。
+そこでローカルディレクトリ内のファイルが <code class="highlighter-rouge">tar</code> によってまとめられて Docker デーモンに送られます。
+<code class="highlighter-rouge">PAHT</code> は、Docker デーモン上でビルドが行われる際の「コンテキスト」として、対象とするファイルを探し出す場所を意味します。
+デーモンというものは、リモートマシン上でも起動可能であることを思い出してください。
+クライアント側（<code class="highlighter-rouge">docker build</code> を実行するマシン）において Dockerfile に何かが起こったとしても、それを検知することはできません。
+つまり <code class="highlighter-rouge">PATH</code> 上のファイルは <strong>すべて</strong> 送信されます。
+ただし Dockerfile 内の <a href="/engine/reference/builder/#add"><strong>ADD</strong></a> が扱うファイルは別です。</p>
 
-<p>The transfer of context from the local machine to the Docker daemon is what the
-<code class="highlighter-rouge">docker</code> client means when you see the “Sending build context” message.</p>
+<p>コンテキストがローカルマシンから Docker デーモンに送信される様子は、<code class="highlighter-rouge">docker</code> クライアントにおいて「Sending build context」（ビルドコンテキストを送信中）というメッセージからわかります。</p>
 
-<p>If you wish to keep the intermediate containers after the build is complete,
-you must use <code class="highlighter-rouge">--rm=false</code>. This does not affect the build cache.</p>
+<p>ビルド処理を終えたときに中間コンテナーを残しておきたい場合は <code class="highlighter-rouge">--rm=false</code> を用います。
+これを用いてもビルドキャッシュには影響しません。</p>
 
-<h3 id="build-with-url">Build with URL</h3>
+<h3 id="build-with-url">URL を使ったビルド</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build github.com/creack/docker-firefox
 </code></pre></div></div>
 
-<p>This will clone the GitHub repository and use the cloned repository as context.
-The Dockerfile at the root of the repository is used as Dockerfile. You can
-specify an arbitrary Git repository by using the <code class="highlighter-rouge">git://</code> or <code class="highlighter-rouge">git@</code> scheme.</p>
+<p>上では GitHub リポジトリをクローンして、クラウドリポジトリをコンテキストとします。
+リポジトリのルートにある Dockerfile が、処理における Dockerfile として用いられます。
+スキーム指定 <code class="highlighter-rouge">git://</code> や <code class="highlighter-rouge">git@</code> を使って、どのような Git リポジトリでも指定することができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-f</span> ctx/Dockerfile http://server/ctx.tar.gz
 
@@ -890,31 +884,29 @@ Removing intermediate container fbc63d321d73
 Successfully built 377c409b35e4
 </code></pre></div></div>
 
-<p>This sends the URL <code class="highlighter-rouge">http://server/ctx.tar.gz</code> to the Docker daemon, which
-downloads and extracts the referenced tarball. The <code class="highlighter-rouge">-f ctx/Dockerfile</code>
-parameter specifies a path inside <code class="highlighter-rouge">ctx.tar.gz</code> to the <code class="highlighter-rouge">Dockerfile</code> that is used
-to build the image. Any <code class="highlighter-rouge">ADD</code> commands in that <code class="highlighter-rouge">Dockerfile</code> that refers to local
-paths must be relative to the root of the contents inside <code class="highlighter-rouge">ctx.tar.gz</code>. In the
-example above, the tarball contains a directory <code class="highlighter-rouge">ctx/</code>, so the <code class="highlighter-rouge">ADD
-ctx/container.cfg /</code> operation works as expected.</p>
+<p>上では URL <code class="highlighter-rouge">http://server/ctx.tar.gz</code> を Docker デーモンに送っています。
+こうすると、指定された tarball をダウンロードし、伸張（解凍）が行われます。
+パラメーター <code class="highlighter-rouge">-f ctx/Dockerfile</code> は、イメージをビルドする際に利用する <code class="highlighter-rouge">Dockerfile</code> を <code class="highlighter-rouge">ctx.tar.gz</code> 内部のパスとして指定しています。
+その <code class="highlighter-rouge">Dockerfile</code> 内に <code class="highlighter-rouge">ADD</code> コマンドがあって、それがローカルパスを参照しているものであれば、それはすべて <code class="highlighter-rouge">ctx.tar.gz</code> 内ファイルのルートからの相対パスでなければなりません。
+上の例において tarball は <code class="highlighter-rouge">ctx/</code> というディレクトリを含むものとしています。
+したがって <code class="highlighter-rouge">ADD ctx/container.cfg /</code> という命令であれば、期待どおりに動作します。</p>
 
-<h3 id="build-with--">Build with -</h3>
+<h3 id="build-with--">- を使ったビルド</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build - &lt; Dockerfile
 </code></pre></div></div>
 
-<p>This will read a Dockerfile from <code class="highlighter-rouge">STDIN</code> without context. Due to the lack of a
-context, no contents of any local directory will be sent to the Docker daemon.
-Since there is no context, a Dockerfile <code class="highlighter-rouge">ADD</code> only works if it refers to a
-remote URL.</p>
+<p>上の例ではコンテキストを利用せず、Dockerfile を <code class="highlighter-rouge">STDIN</code> から読み込みます。
+コンテキストがないわけですから、ローカルディレクトリ内から Docker デーモンに送信されるものは何もないということです。
+コンテキストがないため、Dockerfile 内の <code class="highlighter-rouge">ADD</code> は、リモート URL を参照しているものだけが正しく動作します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build - &lt; context.tar.gz
 </code></pre></div></div>
 
-<p>This will build an image for a compressed context read from <code class="highlighter-rouge">STDIN</code>.  Supported
-formats are: bzip2, gzip and xz.</p>
+<p>上の例は、圧縮されたコンテキストを <code class="highlighter-rouge">STDIN</code> から読み込んでイメージをビルドします。
+サポートされるフォーマットは bzip2、gzip、xz です。</p>
 
-<h3 id="use-a-dockerignore-file">Use a .dockerignore file</h3>
+<h3 id="use-a-dockerignore-file">.dockerignore ファイルの利用</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nb">.</span>
 
@@ -1019,7 +1011,7 @@ repeatable builds on remote Docker hosts. This is also the reason why
 used in the build will be run with the <a href="../run.md#specify-custom-cgroups">corresponding <code class="highlighter-rouge">docker run</code>
 flag</a>.</p>
 
-<h3 id="set-ulimits-in-container---ulimit">Set ulimits in container (--ulimit)</h3>
+<h3 id="set-ulimits-in-container---ulimit">コンテナーの ulimit 設定 (--ulimit)</h3>
 
 <p>Using the <code class="highlighter-rouge">--ulimit</code> option with <code class="highlighter-rouge">docker build</code> will cause each build step’s
 container to be started using those <a href="run.md#set-ulimits-in-container---ulimit"><code class="highlighter-rouge">--ulimit</code>
@@ -1255,9 +1247,9 @@ plugin. The previous builder has limited support for reusing cache from
 pre-pulled images.</p>
 </blockquote>
 
-<h3 id="squash-an-images-layers---squash-experimental">Squash an image’s layers (--squash) (experimental)</h3>
+<h3 id="squash-an-images-layers---squash-experimental">Squash an image’s layers (--squash) （試験的機能）</h3>
 
-<h4 id="overview">Overview</h4>
+<h4 id="overview">概要</h4>
 
 <p>Once the image is built, squash the new layers into a new image with a single
 new layer. Squashing does not destroy any existing image, rather it creates a new
@@ -1265,8 +1257,7 @@ image with the content of the squashed layers. This effectively makes it look
 like all <code class="highlighter-rouge">Dockerfile</code> commands were created with a single layer. The build
 cache is preserved with this method.</p>
 
-<p>The <code class="highlighter-rouge">--squash</code> option is an experimental feature, and should not be considered
-stable.</p>
+<p><code class="highlighter-rouge">--squash</code> オプションは試験的機能であるため、安定したものとしては捉えないでください。</p>
 
 <p>Squashing layers can be beneficial if your Dockerfile produces multiple layers
 modifying the same files, for example, files that are created in one step, and
@@ -1280,9 +1271,9 @@ fine-grained control over your build, and can take advantage of future
 optimizations in the builder. Refer to the <a href="https://docs.docker.com/develop/develop-images/multistage-build/">use multi-stage builds</a>
 section in the userguide for more information.</p>
 
-<h4 id="known-limitations">Known limitations</h4>
+<h4 id="known-limitations">既知の制約</h4>
 
-<p>The <code class="highlighter-rouge">--squash</code> option has a number of known limitations:</p>
+<p><code class="highlighter-rouge">--squash</code> オプションでは多くの制約があります。</p>
 
 <ul>
   <li>When squashing layers, the resulting image cannot take advantage of layer
@@ -1299,7 +1290,7 @@ filesystem (for example, the Dockerfile only contains <code class="highlighter-r
 the squash step will fail (see <a href="https://github.com/moby/moby/issues/33823">issue #33823</a>).</li>
 </ul>
 
-<h4 id="prerequisites">Prerequisites</h4>
+<h4 id="prerequisites">前提条件</h4>
 
 <p>The example on this page is using experimental mode in Docker 1.13.</p>
 
@@ -1473,22 +1464,22 @@ the squash step will fail (see <a href="https://github.com/moby/moby/issues/3382
   <li><a href="#usage" class="nomunge">利用方法</a></li>
   <li><a href="#extended-description" class="nomunge">追加説明</a>
     <ul>
-      <li><a href="#git-リポジトリ" class="nomunge">Git リポジトリ</a></li>
-      <li><a href="#tarball-contexts" class="nomunge">Tarball contexts</a></li>
-      <li><a href="#text-files" class="nomunge">Text files</a></li>
+      <li><a href="#git-repositories" class="nomunge">Git リポジトリ</a></li>
+      <li><a href="#tarball-contexts" class="nomunge">Tarball コンテキスト</a></li>
+      <li><a href="#text-files" class="nomunge">テキストファイル</a></li>
     </ul>
   </li>
   <li><a href="#options" class="nomunge">オプション</a></li>
   <li><a href="#examples" class="nomunge">利用例</a>
     <ul>
-      <li><a href="#build-with-path" class="nomunge">Build with PATH</a></li>
-      <li><a href="#build-with-url" class="nomunge">Build with URL</a></li>
-      <li><a href="#build-with--" class="nomunge">Build with -</a></li>
-      <li><a href="#use-a-dockerignore-file" class="nomunge">Use a .dockerignore file</a></li>
+      <li><a href="#build-with-path" class="nomunge">PATH を使ったビルド</a></li>
+      <li><a href="#build-with-url" class="nomunge">URL を使ったビルド</a></li>
+      <li><a href="#build-with--" class="nomunge">- を使ったビルド</a></li>
+      <li><a href="#use-a-dockerignore-file" class="nomunge">.dockerignore ファイルの利用</a></li>
       <li><a href="#tag-an-image--t" class="nomunge">Tag an image (-t)</a></li>
       <li><a href="#specify-a-dockerfile--f" class="nomunge">Specify a Dockerfile (-f)</a></li>
       <li><a href="#use-a-custom-parent-cgroup---cgroup-parent" class="nomunge">Use a custom parent cgroup (--cgroup-parent)</a></li>
-      <li><a href="#set-ulimits-in-container---ulimit" class="nomunge">Set ulimits in container (--ulimit)</a></li>
+      <li><a href="#set-ulimits-in-container---ulimit" class="nomunge">コンテナーの ulimit 設定 (--ulimit)</a></li>
       <li><a href="#set-build-time-variables---build-arg" class="nomunge">Set build-time variables (--build-arg)</a></li>
       <li><a href="#optional-security-options---security-opt" class="nomunge">Optional security options (--security-opt)</a></li>
       <li><a href="#specify-isolation-technology-for-container---isolation" class="nomunge">Specify isolation technology for container (--isolation)</a></li>
@@ -1496,7 +1487,7 @@ the squash step will fail (see <a href="https://github.com/moby/moby/issues/3382
       <li><a href="#specifying-target-build-stage---target" class="nomunge">Specifying target build stage (--target)</a></li>
       <li><a href="#custom-build-outputs" class="nomunge">Custom build outputs</a></li>
       <li><a href="#specifying-external-cache-sources" class="nomunge">Specifying external cache sources</a></li>
-      <li><a href="#squash-an-images-layers---squash-experimental" class="nomunge">Squash an image’s layers (--squash) (experimental)</a></li>
+      <li><a href="#squash-an-images-layers---squash-experimental" class="nomunge">Squash an image’s layers (--squash) （試験的機能）</a></li>
     </ul>
   </li>
   <li><a href="#parent-command" class="nomunge">上位コマンド</a></li>
