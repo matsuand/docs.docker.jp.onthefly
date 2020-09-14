@@ -2774,7 +2774,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/how-swarm-mode-works/nodes/",
-"title":"How nodes work",
+"title":"ノードの動作",
 "description":"How swarm nodes work",
 "keywords":"docker, container, cluster, swarm mode, node"
 }
@@ -2935,7 +2935,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/how-swarm-mode-works/pki/",
-"title":"Manage swarm security with public key infrastructure (PKI)",
+"title":"公開鍵基盤を利用した Swarm セキュリティ管理",
 "description":"How PKI works in swarm mode",
 "keywords":"swarm, security, tls, pki,"
 }
@@ -3656,7 +3656,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/how-swarm-mode-works/services/",
-"title":"How services work",
+"title":"サービスの動作",
 "description":"How swarm mode services work",
 "keywords":"docker, container, cluster, swarm mode, node"
 }
@@ -3817,7 +3817,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/how-swarm-mode-works/swarm-task-states/",
-"title":"Swarm task states",
+"title":"Swarm タスクの状態",
 "description":"Learn about tasks that are scheduled on your swarm.",
 "keywords":"swarm, task, service"
 }

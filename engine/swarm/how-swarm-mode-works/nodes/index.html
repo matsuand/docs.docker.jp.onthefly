@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-09-14 10:44:36 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-14T10:44:36+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="How nodes work"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Engine 1.12 introduces swarm mode that enables you to create a cluster of one or more Docker Engines called a swarm. A swarm consists of one or more nodes:..." />
+  <meta name="twitter:title" itemprop="title name" content="ノードの動作"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Engine 1.12 において導入された Swarm モードでは、1 つあるいは複数の Docker Engine からなるクラスター、つまり Swarm と呼ぶものが生成できるようになりました。 1 つの Swarm はいくつかのノードから構成されていて、物理マシン仮想マシンを問わず、Docker Engine 1.12 またはそれ以降が Swarm モードにおいて稼動します。 ノードには マネージャー と ワーカー という 2 つの種類があります。 Swarm モード概要..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-14T10:44:36+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, container, cluster, swarm mode, node">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>How nodes work | Docker ドキュメント</title>
-  <meta property="og:title" content="How nodes work" />
+  <title>ノードの動作 | Docker ドキュメント</title>
+  <meta property="og:title" content="ノードの動作" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="How swarm nodes work" />
   <meta property="og:description" content="How swarm nodes work" />
   <link rel="canonical" href="/engine/swarm/how-swarm-mode-works/nodes/" />
   <meta property="og:url" content="https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"How nodes work","description":"How swarm nodes work","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ノードの動作","description":"How swarm nodes work","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,101 +147,87 @@
                         <section class="section">
                             
                             
-                            <h1>How nodes work</h1> 
+                            <h1>ノードの動作</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    2 分
+    1 分
   
 </span>
 
                             
-                            <p>Docker Engine 1.12 introduces swarm mode that enables you to create a
-cluster of one or more Docker Engines called a swarm. A swarm consists
-of one or more nodes: physical or virtual machines running Docker
-Engine 1.12 or later in swarm mode.</p>
+                            
+<p>Docker Engine 1.12 において導入された Swarm モードでは、1 つあるいは複数の Docker Engine からなるクラスター、つまり Swarm と呼ぶものが生成できるようになりました。
+1 つの Swarm はいくつかのノードから構成されていて、物理マシン仮想マシンを問わず、Docker Engine 1.12 またはそれ以降が Swarm モードにおいて稼動します。</p>
 
-<p>There are two types of nodes: <a href="#manager-nodes"><strong>managers</strong></a> and
-<a href="#worker-nodes"><strong>workers</strong></a>.</p>
+<p>ノードには <a href="#manager-nodes"><strong>マネージャー</strong></a> と <a href="#worker-nodes"><strong>ワーカー</strong></a> という 2 つの種類があります。</p>
 
-<p><img src="/engine/swarm/images/swarm-diagram.png" alt="Swarm mode cluster" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/swarm-diagram.png" alt="Swarm モードクラスター" /></p>
 
-<p>If you haven’t already, read through the
-<a href="/docs.docker.jp.onthefly/engine/swarm/">swarm mode overview</a> and
-<a href="/docs.docker.jp.onthefly/engine/swarm/key-concepts/">key concepts</a>.</p>
+<p><a href="/docs.docker.jp.onthefly/engine/swarm/">Swarm モード概要</a> や <a href="/docs.docker.jp.onthefly/engine/swarm/key-concepts/">重要な考え方</a> をまだ読んでいない方は、ざっと目を通してください。</p>
 
-<h2 id="manager-nodes">Manager nodes</h2>
+<h2 id="manager-nodes">マネージャーノード</h2>
 
-<p>Manager nodes handle cluster management tasks:</p>
+<p>マネージャーノードはクラスター管理タスクを取り扱います。</p>
 
 <ul>
-  <li>maintaining cluster state</li>
-  <li>scheduling services</li>
-  <li>serving swarm mode <a href="/docs.docker.jp.onthefly/engine/api/">HTTP API endpoints</a></li>
+  <li>クラスター状態の管理。</li>
+  <li>サービスのスケジュール管理。</li>
+  <li>Swarm モードの <a href="/docs.docker.jp.onthefly/engine/api/">HTTP API endpoints</a> の提供。</li>
 </ul>
 
-<p>Using a <a href="https://raft.github.io/raft.pdf">Raft</a> implementation, the managers
-maintain a consistent internal state of the entire swarm and all the services
-running on it. For testing purposes it is OK to run a swarm with a single
-manager. If the manager in a single-manager swarm fails, your services
-continue to run, but you need to create a new cluster to recover.</p>
+<p>マネージャーにおいては <a href="https://raft.github.io/raft.pdf">Raft</a> を利用することによって、Swarm 全体を一貫した状態に保ちながら、そこに稼動するサービスをすべて管理します。
+テスト目的であれば、1 つのマネージャーからなる 1 つの Swarm を実行することも可能です。
+もっともただ 1 つのマネージャーしか持たない Swarm においてマネージャーが処理に失敗すると、サービスは稼動し続けますが、復旧のためにはもう 1 つ新たなクラスターを生成しなければなりません。</p>
 
-<p>To take advantage of swarm mode’s fault-tolerance features, Docker recommends
-you implement an odd number of nodes according to your organization’s
-high-availability requirements. When you have multiple managers you can recover
-from the failure of a manager node without downtime.</p>
+<p>Swarm モードが持つ耐障害性（fault-tolerance）機能を活用するために、Docker では高可用性に関する開発方針に従って、奇数のノードを用意することを推奨しています。
+複数のマネージャーを用意しておけば、マネージャーノードの 1 つに障害が発生しても、システムダウンをさせずに復旧することが可能になります。</p>
 
 <ul>
-  <li>A three-manager swarm tolerates a maximum loss of one manager.</li>
-  <li>A five-manager swarm tolerates a maximum simultaneous loss of two
-manager nodes.</li>
-  <li>An <code class="highlighter-rouge">N</code> manager cluster tolerates the loss of at most
-<code class="highlighter-rouge">(N-1)/2</code> managers.</li>
+  <li>Swarm 内に 3 つのマネージャーがあれば、最大で 1 つのマネージャーの障害に耐えられます。</li>
+  <li>Swarm 内に 5 つのマネージャーがあれば、最大かつ同時に 2 つのマネージャーの障害に耐えられます。</li>
+  <li>Swarm 内に <code class="highlighter-rouge">N</code> 個のマネージャーがあれば、最大で <code class="highlighter-rouge">(N-1)/2</code> 個のマネージャーの障害に耐えられます。</li>
   <li>
-    <p>Docker recommends a maximum of seven manager nodes for a swarm.</p>
+    <p>Docker では、1 つの Swarm に対して最大 7 つのマネージャーを持つことを推奨します。</p>
 
     <blockquote>
-      <p><strong>Important Note</strong>: Adding more managers does NOT mean increased
-  scalability or higher performance. In general, the opposite is true.</p>
+      <p><strong>重要事項</strong> より多くのマネージャーを加えたからといって、スケーラビリティーや性能が向上するわけでは <strong>ありません</strong>。
+一般的には、増やさないのが正しいことです。</p>
     </blockquote>
   </li>
 </ul>
 
-<h2 id="worker-nodes">Worker nodes</h2>
+<h2 id="worker-nodes">ワーカーノード</h2>
 
-<p>Worker nodes are also instances of Docker Engine whose sole purpose is to
-execute containers. Worker nodes don’t participate in the Raft distributed
-state, make scheduling decisions, or serve the swarm mode HTTP API.</p>
+<p>ワーカーノードも Docker Engine のインスタンスです。
+その唯一の目的はコンテナーを稼動させることです。
+ワーカーノードは、Raft の分散状態の中には含まれず、スケジュール決定や Swarm モード HTTP API の提供も行いません。</p>
 
-<p>You can create a swarm of one manager node, but you cannot have a worker node
-without at least one manager node. By default, all managers are also workers.
-In a single manager node cluster, you can run commands like <code class="highlighter-rouge">docker service
-create</code> and the scheduler places all tasks on the local Engine.</p>
+<p>1 つの Swarm においてマネージャーノードを 1 つだけとすることは可能ですが、1 つのマネージャーノードも存在しないところに 1 つだけワーカーノードを生成することはできません。
+デフォルトで、マネージャーは同時にワーカーとしても動作します。
+1 つのマネージャーノードしか持たないクラスターにおいては、<code class="highlighter-rouge">docker service create</code> といったコマンドを実行すると、スケジューラーはタスクのすべてをローカルの Engine に配置することになります。</p>
 
-<p>To prevent the scheduler from placing tasks on a manager node in a multi-node
-swarm, set the availability for the manager node to <code class="highlighter-rouge">Drain</code>. The scheduler
-gracefully stops tasks on nodes in <code class="highlighter-rouge">Drain</code> mode and schedules the tasks on an
-<code class="highlighter-rouge">Active</code> node. The scheduler does not assign new tasks to nodes with <code class="highlighter-rouge">Drain</code>
-availability.</p>
+<p>複数ノードから構成される Swarm において、マネージャーに対してスケジューラーがタスクの割り当てを行わないようにするには、マネージャーノードの利用状態（availability）を <code class="highlighter-rouge">Drain</code> に設定します。
+スケジューラーは <code class="highlighter-rouge">Drain</code> モードに設定されたノード上ではタスクを停止し、<code class="highlighter-rouge">Active</code> モードのタスクにはタスクをスケジューリングします。
+スケジューラーは、利用状態が <code class="highlighter-rouge">Drain</code> であるようなノードに対しては、一切タスクを割り振ることはありません。</p>
 
-<p>Refer to the <a href="/docs.docker.jp.onthefly/engine/reference/commandline/node_update/"><code class="highlighter-rouge">docker node update</code></a>
-command line reference to see how to change node availability.</p>
+<p>コマンドラインリファレンスの <a href="/docs.docker.jp.onthefly/engine/reference/commandline/node_update/"><code class="highlighter-rouge">docker node update</code></a> を参照して、ノードの利用状態の変更方法について確認してください。</p>
 
-<h2 id="change-roles">Change roles</h2>
+<h2 id="change-roles">ロールの変更</h2>
 
-<p>You can promote a worker node to be a manager by running <code class="highlighter-rouge">docker node promote</code>.
-For example, you may want to promote a worker node when you
-take a manager node offline for maintenance. See <a href="/docs.docker.jp.onthefly/engine/reference/commandline/node_promote/">node promote</a>.</p>
+<p><code class="highlighter-rouge">docker node promote</code> を実行すれば、ワーカーノードをマネージャーノードに昇格させることができます。
+たとえば、1 つのマネージャーノードを保守目的でオフラインとした場合には、別のワーカーノードを昇格させることが必要になる場合があります。
+<a href="/docs.docker.jp.onthefly/engine/reference/commandline/node_promote/">node promote</a> を参照してください。</p>
 
-<p>You can also demote a manager node to a worker node. See
-<a href="/docs.docker.jp.onthefly/engine/reference/commandline/node_demote/">node demote</a>.</p>
+<p>マネージャーノードをワーカーノードに降格させることもできます。
+<a href="/docs.docker.jp.onthefly/engine/reference/commandline/node_demote/">node demote</a> を参照してください。</p>
 
-<h2 id="learn-more">Learn more</h2>
+<h2 id="learn-more">さらに詳しく</h2>
 
 <ul>
-  <li>Read about how swarm mode <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/services/">services</a> work.</li>
-  <li>Learn how <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/pki/">PKI</a> works in swarm mode.</li>
+  <li>Swarm モードの <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/services/">サービス</a> の動作について。</li>
+  <li>Swarm モードにおける <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/pki/">PKI</a> 動作について。</li>
 </ul>
 
                             <!-- tags -->
@@ -262,7 +248,7 @@ take a manager node offline for maintenance. See <a href="/docs.docker.jp.onthef
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/swarm/how-swarm-mode-works/nodes.md",
-                                        "title": "How nodes work",
+                                        "title": "ノードの動作",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/how-swarm-mode-works/nodes.md"
                                     };
                                     (function (d, c, j) {
@@ -328,10 +314,10 @@ take a manager node offline for maintenance. See <a href="/docs.docker.jp.onthef
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#manager-nodes" class="nomunge">Manager nodes</a></li>
-  <li><a href="#worker-nodes" class="nomunge">Worker nodes</a></li>
-  <li><a href="#change-roles" class="nomunge">Change roles</a></li>
-  <li><a href="#learn-more" class="nomunge">Learn more</a></li>
+  <li><a href="#manager-nodes" class="nomunge">マネージャーノード</a></li>
+  <li><a href="#worker-nodes" class="nomunge">ワーカーノード</a></li>
+  <li><a href="#change-roles" class="nomunge">ロールの変更</a></li>
+  <li><a href="#learn-more" class="nomunge">さらに詳しく</a></li>
 </ul>
 
 

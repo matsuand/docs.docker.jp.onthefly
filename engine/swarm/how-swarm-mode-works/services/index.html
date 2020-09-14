@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-09-14 10:44:36 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-14T10:44:36+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="How services work"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="To deploy an application image when Docker Engine is in swarm mode, you create a service. Frequently a service is the image for a microservice within the context of some..." />
+  <meta name="twitter:title" itemprop="title name" content="サービスの動作"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Engine が Swarm モードで稼動している場合、アプリケーションイメージのデプロイは、サービスを生成して行います。 サービスとしてよくあるのは、マイクロサービスを実現するイメージとして、一定規模のアプリケーションの内部に含まれます。 サービスの例としては、HTTP サーバーやデータベースがあります。 あるいは分散環境内において実行したいさまざまな実行プログラムがあります。 サービスを生成する際には、どのコンテナーイメージがこれを利用するのか、また実行コンテナー内ではどのようなコマンドを実行するのかを指定します。 そしてサービスに対しては、以下に示すようなオプションを定義します。 Swarm の外部からサービスを利用するためのポート。 Swarm 内において他サービスとのやりとりを行うための overlay ネットワーク。 CPU やメモリに関する上限や確保。 ローリングアップデートポリシー。 Swarm 内において実行させるイメージのレプリカ数。 サービス、タスク、コンテナー Swarm に対してサービスをデプロイすると、Swarm マネージャーはサービス定義を受け取ります。 そしてこれがサービスにとって望ましい状態が記されていることを解釈します。 マネージャーはこのサービスを Swarm 内ノードに向けて、複数のレプリカタスクとしてスケジューリングします。..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-14T10:44:36+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, container, cluster, swarm mode, node">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>How services work | Docker ドキュメント</title>
-  <meta property="og:title" content="How services work" />
+  <title>サービスの動作 | Docker ドキュメント</title>
+  <meta property="og:title" content="サービスの動作" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="How swarm mode services work" />
   <meta property="og:description" content="How swarm mode services work" />
   <link rel="canonical" href="/engine/swarm/how-swarm-mode-works/services/" />
   <meta property="og:url" content="https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"How services work","description":"How swarm mode services work","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"サービスの動作","description":"How swarm mode services work","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,145 +147,128 @@
                         <section class="section">
                             
                             
-                            <h1>How services work</h1> 
+                            <h1>サービスの動作</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    1 分
   
 </span>
 
                             
-                            <p>To deploy an application image when Docker Engine is in swarm mode, you create a
-service. Frequently a service is the image for a microservice within the
-context of some larger application. Examples of services might include an HTTP
-server, a database, or any other type of executable program that you wish to run
-in a distributed environment.</p>
+                            
+<p>Docker Engine が Swarm モードで稼動している場合、アプリケーションイメージのデプロイは、サービスを生成して行います。
+サービスとしてよくあるのは、マイクロサービスを実現するイメージとして、一定規模のアプリケーションの内部に含まれます。
+サービスの例としては、HTTP サーバーやデータベースがあります。
+あるいは分散環境内において実行したいさまざまな実行プログラムがあります。</p>
 
-<p>When you create a service, you specify which container image to use and which
-commands to execute inside running containers. You also define options for the
-service including:</p>
+<p>サービスを生成する際には、どのコンテナーイメージがこれを利用するのか、また実行コンテナー内ではどのようなコマンドを実行するのかを指定します。
+そしてサービスに対しては、以下に示すようなオプションを定義します。</p>
 
 <ul>
-  <li>the port where the swarm makes the service available outside the swarm</li>
-  <li>an overlay network for the service to connect to other services in the swarm</li>
-  <li>CPU and memory limits and reservations</li>
-  <li>a rolling update policy</li>
-  <li>the number of replicas of the image to run in the swarm</li>
+  <li>Swarm の外部からサービスを利用するためのポート。</li>
+  <li>Swarm 内において他サービスとのやりとりを行うための overlay ネットワーク。</li>
+  <li>CPU やメモリに関する上限や確保。</li>
+  <li>ローリングアップデートポリシー。</li>
+  <li>Swarm 内において実行させるイメージのレプリカ数。</li>
 </ul>
 
-<h2 id="services-tasks-and-containers">Services, tasks, and containers</h2>
+<h2 id="services-tasks-and-containers">サービス、タスク、コンテナー</h2>
 
-<p>When you deploy the service to the swarm, the swarm manager accepts your service
-definition as the desired state for the service. Then it schedules the service
-on nodes in the swarm as one or more replica tasks. The tasks run independently
-of each other on nodes in the swarm.</p>
+<p>Swarm に対してサービスをデプロイすると、Swarm マネージャーはサービス定義を受け取ります。
+そしてこれがサービスにとって望ましい状態が記されていることを解釈します。
+マネージャーはこのサービスを Swarm 内ノードに向けて、複数のレプリカタスクとしてスケジューリングします。
+タスクは Swarm内ノードの個々において独立して稼動します。</p>
 
-<p>For example, imagine you want to load balance between three instances of an HTTP
-listener. The diagram below shows an HTTP listener service with three replicas.
-Each of the three instances of the listener is a task in the swarm.</p>
+<p>たとえば HTTP リスナーのインスタンスが 3 つあって、これらの間で負荷分散を行うとします。
+以下の図では 1 つの HTTP サービスにおいて 3 つのレプリカがあることを示しています。
+リスナーインスタンスの 3 つは、それぞれが Swarm におけるタスクの 1 つです。</p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/services-diagram.png" alt="services diagram" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/services-diagram.png" alt="サービス図" /></p>
 
-<p>A container is an isolated process. In the swarm mode model, each task invokes
-exactly one container. A task is analogous to a “slot” where the scheduler
-places a container. Once the container is live, the scheduler recognizes that
-the task is in a running state. If the container fails health checks or
-terminates, the task terminates.</p>
+<p>コンテナーは分離されたプロセスです。
+Swarm モードモデルにおいては、各タスクから 1 つのコンテナーが呼び出されます。
+タスクとは言ってみれば、スケジューラーがコンテナーを配置する「場所」のことです。
+コンテナーが稼動していれば、スケジューラーはそこにあるタスクを起動状態にあるものとして認識します。
+コンテナーがヘルスチェックに失敗したり終了したりすると、タスクは終了します。</p>
 
-<h2 id="tasks-and-scheduling">Tasks and scheduling</h2>
+<h2 id="tasks-and-scheduling">タスクとスケジューリング</h2>
 
-<p>A task is the atomic unit of scheduling within a swarm. When you declare a
-desired service state by creating or updating a service, the orchestrator
-realizes the desired state by scheduling tasks. For instance, you define a
-service that instructs the orchestrator to keep three instances of an HTTP
-listener running at all times. The orchestrator responds by creating three
-tasks. Each task is a slot that the scheduler fills by spawning a container. The
-container is the instantiation of the task. If an HTTP listener task subsequently
-fails its health check or crashes, the orchestrator creates a new replica task
-that spawns a new container.</p>
+<p>タスクとは Swarm 内においてスケジューリング対象となる最小単位のものです。
+サービスの生成または更新を行って、そのサービスに期待する状態を宣言すると、オーケストレーターがスケジューリングされたタスクを通じて、期待される状態を実現します。
+たとえばサービス定義として、オーケストレーターに対して HTTP リスナーを常時 3 インスタンス稼動し続けるようにしたとします。
+オーケストレーターは、これに応じて 3 つのタスクを生成します。
+各タスクは、コンテナーを起動させるものとしてスケジューラーが確保した「場所」です。
+そしてコンテナーはタスクの実体です。
+HTTP リスナーのタスクが連続してヘルスチェックに失敗するか、あるいはクラッシュしたとします。
+そうなるとオーケストレーターは、新たなコンテナーを起動する新たなレプリカタスクを生成します。</p>
 
-<p>A task is a one-directional mechanism. It progresses monotonically through a
-series of states: assigned, prepared, running, etc. If the task fails the
-orchestrator removes the task and its container and then creates a new task to
-replace it according to the desired state specified by the service.</p>
+<p>タスクは一方向の動作を行う仕組みになっています。
+その状態は、割り当て済（assigned）、準備済（prepared）、実行中（running）といったように、単調に進んでいきます。
+タスクが処理に失敗すると、オーケストレーターはそのタスクとコンテナーを削除します。
+そしてサービスに対して期待された状態とされる定義に従って、新たなタスクを生成し置き換えます。</p>
 
-<p>The underlying logic of Docker swarm mode is a general purpose scheduler and
-orchestrator. The service and task abstractions themselves are unaware of the
-containers they implement. Hypothetically, you could implement other types of
-tasks such as virtual machine tasks or non-containerized process tasks. The
-scheduler and orchestrator are agnostic about the type of task. However, the
-current version of Docker only supports container tasks.</p>
+<p>Docker Swarm モードのベースにある考えとして、汎用目的のスケジューラーとオーケストレーターがあります。
+抽象的なサービスやタスクというものがコンテナーを実現するわけですが、これらがコンテナーを認識しているわけではありません。
+たとえばタスクは別の形で実装することも可能であって、それは仮想マシンのタスクやコンテナー化されていないプロセスタスクでも構わないのです。
+スケジューラーやオーケストレーターとしては、タスクの種類は何であってもよいのですが、現行の Docker が対応するのは、コンテナータスクだけです。</p>
 
-<p>The diagram below shows how swarm mode accepts service create requests and
-schedules tasks to worker nodes.</p>
+<p>以下の図は、Swarm モードがどのようにしてサービス生成要求を受け入れて、ワーカーノードに向けてタスクをスケジューリングするかを示しています。</p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/service-lifecycle.png" alt="services flow" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/service-lifecycle.png" alt="サービスの流れ" /></p>
 
-<h3 id="pending-services">Pending services</h3>
+<h3 id="pending-services">サービスの保留</h3>
 
-<p>A service may be configured in such a way that no node currently in the
-swarm can run its tasks. In this case, the service remains in state <code class="highlighter-rouge">pending</code>.
-Here are a few examples of when a service might remain in state <code class="highlighter-rouge">pending</code>.</p>
+<p>サービス設定の仕方によっては、Swarm 内に現在あるノードすべてがタスクを起動しないようにすることができます。
+そうした場合のサービスは保留（<code class="highlighter-rouge">pending</code>）という状態になります。
+以下は、サービスが保留という状態を維持する例です。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: If your only intention is to prevent a service from
-being deployed, scale the service to 0 instead of trying to configure it in
-such a way that it remains in <code class="highlighter-rouge">pending</code>.</p>
+  <p><strong>メモ</strong>: 実現したいことが、サービスをデプロイしないようにするだけということであるなら、上のようにサービスを <code class="highlighter-rouge">pending</code> のままとする設定を行うのではなく、スケール値を 0 に設定してください。</p>
 </blockquote>
 
 <ul>
   <li>
-    <p>If all nodes are paused or drained, and you create a service, it is
-pending until a node becomes available. In reality, the first node to become
-available gets all of the tasks, so this is not a good thing to do in a
-production environment.</p>
+    <p>ノードがすべて paused か drained である状態でサービスを生成すると、ノードが利用可能な状態になるまでは保留のままです。
+実際には、利用可能になった最初のノードがすべてのタスクを受け入れることになるため、本番環境においてこうなることは望ましいことではありません。</p>
   </li>
   <li>
-    <p>You can reserve a specific amount of memory for a service. If no node in the
-swarm has the required amount of memory, the service remains in a pending
-state until a node is available which can run its tasks. If you specify a very
-large value, such as 500 GB, the task stays pending forever, unless you
-really have a node which can satisfy it.</p>
+    <p>サービスに対しては特定容量のメモリを予約することができます。
+Swarm 内ノードにおいて、必要なメモリ容量を有するものが 1 つもない場合、サービスは保留状態のままであり、ノードがタスク実行可能な状態になるまで続きます。
+この値に 500 GB のような非常に大きな値を設定していると、タスクはずっと保留のままとなり、その容量を持ったノードが実際に現れるまで続きます。</p>
   </li>
   <li>
-    <p>You can impose placement constraints on the service, and the constraints may
-not be able to be honored at a given time.</p>
+    <p>サービスに対しては配置に関する制約を課すことができます。
+この制約は一定時間内に実現できない場合があります。</p>
   </li>
 </ul>
 
-<p>This behavior illustrates that the requirements and configuration of your tasks
-are not tightly tied to the current state of the swarm. As the administrator of
-a swarm, you declare the desired state of your swarm, and the manager works with
-the nodes in the swarm to create that state. You do not need to micro-manage the
-tasks on the swarm.</p>
+<p>上のような動作からわかることは、タスクに対する条件や設定は、Swarm のその時点での状態と完全に一致するものではないということです。
+Swarm の管理者として行うのは、Swarm において期待される状態を宣言するだけであり、これによって Swarm 内においてマネージャーが各ノードとともに状態を作り上げていくことになります。
+そこでは Swarm 上のタスクに対して細かく制御をしていく必要はありません。</p>
 
-<h2 id="replicated-and-global-services">Replicated and global services</h2>
+<h2 id="replicated-and-global-services">複製サービスとグローバルサービス</h2>
 
-<p>There are two types of service deployments, replicated and global.</p>
+<p>サービスのデプロイ形式には、複製（replicated）とグローバル（global）という 2 種類があります。</p>
 
-<p>For a replicated service, you specify the number of identical tasks you want to
-run. For example, you decide to deploy an HTTP service with three replicas, each
-serving the same content.</p>
+<p>複製サービスの場合は、実行させたい複製タスク数を指定します。
+たとえば HTTP サービスを 3 つのレプリカによりデプロイする場合、各レプリカは同一内容を提供します。</p>
 
-<p>A global service is a service that runs one task on every node. There is no
-pre-specified number of tasks. Each time you add a node to the swarm, the
-orchestrator creates a task and the scheduler assigns the task to the new node.
-Good candidates for global services are monitoring agents, an anti-virus
-scanners or other types of containers that you want to run on every node in the
-swarm.</p>
+<p>グローバルサービスは、各ノードごとに 1 つのタスクを実行するサービスです。
+ここでは、あらかじめ指定されるタスク数というものはありません。
+Swarm に対して新たなノードを追加すると、そのたびにオーケストレーターはタスクを生成して、スケジューラーはそのノードに対してタスクを割り当てます。
+グローバルサービスが適しているのは、監視エージェント、アンチウィルススキャナーなど、Swarm 内の各ノードごとに実行させたいコンテナーの場合です。</p>
 
-<p>The diagram below shows a three-service replica in yellow and a global service
-in gray.</p>
+<p>以下の図では 3 つの複製サービスを黄色、1 つのグローバルサービスを灰色により表現しています。</p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/replicated-vs-global.png" alt="global vs replicated services" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/replicated-vs-global.png" alt="グローバルサービス vs 複製サービス" /></p>
 
-<h2 id="learn-more">Learn more</h2>
+<h2 id="learn-more">さらに詳しく</h2>
 
 <ul>
-  <li>Read about how swarm mode <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/nodes/">nodes</a> work.</li>
-  <li>Learn how <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/pki/">PKI</a> works in swarm mode.</li>
+  <li>Swarm モードの <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/nodes/">ノード</a> の動作について。</li>
+  <li>Swarm モードにおける <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/pki/">PKI</a> 動作について。</li>
 </ul>
 
                             <!-- tags -->
@@ -306,7 +289,7 @@ in gray.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/swarm/how-swarm-mode-works/services.md",
-                                        "title": "How services work",
+                                        "title": "サービスの動作",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/how-swarm-mode-works/services.md"
                                     };
                                     (function (d, c, j) {
@@ -372,14 +355,14 @@ in gray.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#services-tasks-and-containers" class="nomunge">Services, tasks, and containers</a></li>
-  <li><a href="#tasks-and-scheduling" class="nomunge">Tasks and scheduling</a>
+  <li><a href="#services-tasks-and-containers" class="nomunge">サービス、タスク、コンテナー</a></li>
+  <li><a href="#tasks-and-scheduling" class="nomunge">タスクとスケジューリング</a>
     <ul>
-      <li><a href="#pending-services" class="nomunge">Pending services</a></li>
+      <li><a href="#pending-services" class="nomunge">サービスの保留</a></li>
     </ul>
   </li>
-  <li><a href="#replicated-and-global-services" class="nomunge">Replicated and global services</a></li>
-  <li><a href="#learn-more" class="nomunge">Learn more</a></li>
+  <li><a href="#replicated-and-global-services" class="nomunge">複製サービスとグローバルサービス</a></li>
+  <li><a href="#learn-more" class="nomunge">さらに詳しく</a></li>
 </ul>
 
 

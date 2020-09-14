@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-09-14 18:01:00 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-14T18:01:00+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Manage swarm security with public key infrastructure (PKI)"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="The swarm mode public key infrastructure (PKI) system built into Docker makes it simple to securely deploy a container orchestration system. The nodes in a swarm use mutual Transport Layer..." />
+  <meta name="twitter:title" itemprop="title name" content="公開鍵基盤を利用した Swarm セキュリティ管理"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker に組み込まれている Swarm モードの公開鍵基盤（public key infrastructure; PKI）は、コンテナーによるオーケストレーションシステムを、簡単かつ安全にデプロイできるものです。 Swarm 内のノードは、他のノードとの認証、承認、通信暗号化のために相互 TLS を利用します。 docker swarm init を実行して Swarm を生成すると、Docker 自体がマネージャーノードとなります。 マネージャーノードは、デフォルトで新たなルート認証局（CA）と鍵ペアを生成します。 これらは Swarm に参加するノードとの間でセキュアな通信を実現するために利用されます。 必要であれば docker swarm init コマンドの --external-ca フラグを用いて、外部に生成した独自のルート CA..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-14T18:01:00+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="swarm, security, tls, pki,">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Manage swarm security with public key infrastructure (PKI) | Docker ドキュメント</title>
-  <meta property="og:title" content="Manage swarm security with public key infrastructure (PKI)" />
+  <title>公開鍵基盤を利用した Swarm セキュリティ管理 | Docker ドキュメント</title>
+  <meta property="og:title" content="公開鍵基盤を利用した Swarm セキュリティ管理" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="How PKI works in swarm mode" />
   <meta property="og:description" content="How PKI works in swarm mode" />
   <link rel="canonical" href="/engine/swarm/how-swarm-mode-works/pki/" />
   <meta property="og:url" content="https://docs.docker.com/engine/swarm/how-swarm-mode-works/pki/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Manage swarm security with public key infrastructure (PKI)","description":"How PKI works in swarm mode","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/pki/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"公開鍵基盤を利用した Swarm セキュリティ管理","description":"How PKI works in swarm mode","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/pki/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,47 +147,41 @@
                         <section class="section">
                             
                             
-                            <h1>Manage swarm security with public key infrastructure (PKI)</h1> 
+                            <h1>公開鍵基盤を利用した Swarm セキュリティ管理</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    1 分
   
 </span>
 
                             
-                            <p>The swarm mode public key infrastructure (PKI) system built into Docker
-makes it simple to securely deploy a container orchestration system. The nodes
-in a swarm use mutual Transport Layer Security (TLS) to authenticate, authorize,
-and encrypt the communications with other nodes in the swarm.</p>
+                            
+<p>Docker に組み込まれている Swarm モードの公開鍵基盤（public key infrastructure; PKI）は、コンテナーによるオーケストレーションシステムを、簡単かつ安全にデプロイできるものです。
+Swarm 内のノードは、他のノードとの認証、承認、通信暗号化のために相互 TLS を利用します。</p>
 
-<p>When you create a swarm by running <code class="highlighter-rouge">docker swarm init</code>, Docker designates itself
-as a manager node. By default, the manager node generates a new root Certificate
-Authority (CA) along with a key pair, which are used to secure communications
-with other nodes that join the swarm. If you prefer, you can specify your own
-externally-generated root CA, using the <code class="highlighter-rouge">--external-ca</code> flag of the
-<a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_init/">docker swarm init</a> command.</p>
+<p><code class="highlighter-rouge">docker swarm init</code> を実行して Swarm を生成すると、Docker 自体がマネージャーノードとなります。
+マネージャーノードは、デフォルトで新たなルート認証局（CA）と鍵ペアを生成します。
+これらは Swarm に参加するノードとの間でセキュアな通信を実現するために利用されます。
+必要であれば <a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_init/">docker swarm init</a> コマンドの <code class="highlighter-rouge">--external-ca</code> フラグを用いて、外部に生成した独自のルート CA を指定することができます。</p>
 
-<p>The manager node also generates two tokens to use when you join additional nodes
-to the swarm: one <strong>worker token</strong> and one <strong>manager token</strong>. Each token
-includes the digest of the root CA’s certificate and a randomly generated
-secret. When a node joins the swarm, the joining node uses the digest to
-validate the root CA certificate from the remote manager. The remote manager
-uses the secret to ensure the joining node is an approved node.</p>
+<p>マネージャーノードは、Swarm へのノード追加時に利用される 2 つのトークンも生成します。
+その 1 つが <strong>ワーカートークン</strong> であり、もう 1 つが <strong>マネージャートークン</strong> です。
+それぞれのトークンには、ルート CA 証明書のダイジェスト値と、ランダムに生成された Secret 情報が含まれます。
+Swarm へノードが参加する際には、参加するノードがそのダイジェスト値を用いて、リモートマネージャーからのルート CA 証明書を検証します。
+リモートマネージャーは Secret 情報を使って、参加ノードが承認されているノードであることを確認します。</p>
 
-<p>Each time a new node joins the swarm, the manager issues a certificate to the
-node. The certificate contains a randomly generated node ID to identify the node
-under the certificate common name (CN) and the role under the organizational
-unit (OU). The node ID serves as the cryptographically secure node identity for
-the lifetime of the node in the current swarm.</p>
+<p>新たなノードが Swarm に参加するたびに、マネージャーはノードに対して証明書を発行します。
+その証明書には、ランダムに生成されたノード ID が含まれます。
+このノード ID によって、証明書のコモンネーム（common name; CN）のもとでのノードと、組織名（organizational unit; OU）のもとでの役割が識別されます。
+ノード ID は、現 Swarm 内においてこのノードが存在する間、暗号的に安全なノードとして機能します。</p>
 
-<p>The diagram below illustrates how manager nodes and worker nodes encrypt
-communications using a minimum of TLS 1.2.</p>
+<p>以下の図は、マネージャーノードとワーカーノードが、最低限必要となる TLS 1.2 を用いて、通信を暗号化している様子を示しています。</p>
 
-<p><img src="/engine/swarm/images/tls.png" alt="tls diagram" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/swarm/images/tls.png" alt="TLS 図" /></p>
 
-<p>The example below shows the information from a certificate from a worker node:</p>
+<p>以下の例では、ワーカーノード上の証明書の情報を示しています。</p>
 
 <pre><code class="language-none">Certificate:
     Data:
@@ -200,75 +194,63 @@ communications using a minimum of TLS 1.2.</p>
             Not Before: Aug 30 02:39:00 2016 GMT
             Not After : Nov 28 03:39:00 2016 GMT
         Subject: O=ec2adilxf4ngv7ev8fwsi61i7, OU=swarm-worker, CN=dw02poa4vqvzxi5c10gm4pq2g
-...snip...
+...省略...
 </code></pre>
 
-<p>By default, each node in the swarm renews its certificate every three months.
-You can configure this interval by running the <code class="highlighter-rouge">docker swarm update
---cert-expiry &lt;TIME PERIOD&gt;</code> command. The minimum rotation value is 1 hour.
-Refer to the
-<a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_update/">docker swarm update</a> CLI
-reference for details.</p>
+<p>デフォルトにおいて Swarm 内の各ノードの証明書は、3 ヶ月ごとに更新されます。
+この期間は <code class="highlighter-rouge">docker swarm update --cert-expiry &lt;期間&gt;</code> コマンドを使って設定することができます。
+ローテーションの最小値は 1 時間です。
+詳しくは CLI リファレンスの <a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_update/">docker swarm update</a> を参照してください。</p>
 
-<h2 id="rotating-the-ca-certificate">Rotating the CA certificate</h2>
+<h2 id="rotating-the-ca-certificate">CA 証明書のローテート</h2>
 
-<p>In the event that a cluster CA key or a manager node is compromised, you can
-rotate the swarm root CA so that none of the nodes trust certificates
-signed by the old root CA anymore.</p>
+<p>クラスターの CA 鍵やマネージャーノード自体においてセキュリティ侵害が発生した場合、Swarm のルート CA をローテートすることができます。
+これによって古いルート CA により署名された証明書は、どのノードも信頼しないようにすることができます。</p>
 
-<p>Run <code class="highlighter-rouge">docker swarm ca --rotate</code> to generate a new CA certificate and key. If you
-prefer, you can pass the <code class="highlighter-rouge">--ca-cert</code> and <code class="highlighter-rouge">--external-ca</code> flags to specify the
-root certificate and to use a root CA external to the swarm. Alternately,
-you can pass the <code class="highlighter-rouge">--ca-cert</code> and <code class="highlighter-rouge">--ca-key</code> flags to specify the exact
-certificate and key you would like the swarm to use.</p>
+<p><code class="highlighter-rouge">docker swarm ca --rotate</code> を実行すれば、新たな CA 証明書と鍵を生成することができます。
+必要なら <code class="highlighter-rouge">--ca-cert</code> や <code class="highlighter-rouge">--external-ca</code> フラグを指定して、Swarm の外部にあるルート証明書やルート CA を設定することもできます。
+これとは別に <code class="highlighter-rouge">--ca-cert</code> と <code class="highlighter-rouge">--ca-key</code> フラグを用いれば、Swarm で利用したい証明書と鍵を具体的に指定することもできます。</p>
 
-<p>When you issue the <code class="highlighter-rouge">docker swarm ca --rotate</code> command, the following things
-happen in sequence:</p>
+<p><code class="highlighter-rouge">docker swarm ca --rotate</code> コマンドが実行されると、以下に示す内容が順に発生します。</p>
 
 <ol>
   <li>
-    <p>Docker generates a cross-signed certificate. This means that a version of
-the new root CA certificate is signed with the old root CA certificate.
-This cross-signed certificate is used as an intermediate certificate for all
-new node certificates. This ensures that nodes that still trust the old root
-CA can still validate a certificate signed by the new CA.</p>
+    <p>Docker はクロス署名された証明書を生成します。
+これはつまり新たなルート CA 証明書が、古いルート CA 証明書によって署名されるということです。
+このクロス署名証明書は、新たなノードの証明書に対する中間証明書として利用されます。
+こうすることで、古いルート証明書を信頼するノードが、新たな CA によって署名された証明書も有効にできます。</p>
   </li>
   <li>
-    <p>In Docker 17.06 and higher, Docker also tells all nodes to immediately
-renew their TLS certificates. This process may take several minutes,
-depending on the number of nodes in the swarm.</p>
+    <p>Docker 17.06 またはそれ以降において、Docker は全ノードに対して、TLS 証明書をすぐに更新するように指示することになりました。
+この処理は Swarm 内のノード数に応じて数分程度かかります。</p>
 
     <blockquote>
-      <p><strong>Note</strong>: If your swarm has nodes with different Docker versions, the
-following two things are true:</p>
+      <p><strong>メモ</strong>: Swarm 内のノードの Docker バージョンが異なる場合、以下に示す 2 つのことが言えます。</p>
       <ul>
-        <li>Only a manager that is running as the leader <strong>and</strong> running Docker 17.06
-or higher tells nodes to renew their TLS certificates.</li>
-        <li>Only nodes running Docker 17.06 or higher obey this directive.</li>
+        <li>マネージャーがリーダーとして稼動していて <strong>かつ</strong> Docker 17.06 以上であるもののみが、ノードに対して TLS 証明書の更新を指示します。</li>
+        <li>Docker 17.06 以上のノードのみがこの指示に従います。</li>
       </ul>
 
-      <p>For the most predictable behavior, ensure that all swarm nodes are running
-Docker 17.06 or higher.</p>
+      <p>動作をわかりやすくするために、Swarm ノードはすべて Docker 17.6 またはそれ以降を用いるようにしてください。</p>
     </blockquote>
   </li>
   <li>
-    <p>After every node in the swarm has a new TLS certificate signed by the new CA,
-Docker forgets about the old CA certificate and key material, and tells
-all the nodes to trust the new CA certificate only.</p>
+    <p>Swarm 内のノードがすべて、新たな CA によって署名された新たな TLS 証明書を受け取った後は、Docker は古い CA 証明書や鍵に関することは一切忘れます。
+そしてノードに対しては、新たな CA 証明書だけを信頼するように指示を出します。</p>
 
-    <p>This also causes a change in the swarm’s join tokens. The previous
-join tokens are no longer valid.</p>
+    <p>その際には Swarm への参加時のトークンも変更されます。
+それまでの参加時のトークンはこれ以降は無効になります。</p>
   </li>
 </ol>
 
-<p>From this point on, all new node certificates issued are signed with the new
-root CA, and do not contain any intermediates.</p>
+<p>これ以降、新たなノードに発行される証明書は、新たなルート CA によって署名されます。
+中間証明書が含まれることはありません。</p>
 
-<h2 id="learn-more">Learn More</h2>
+<h2 id="learn-more">さらに詳しく</h2>
 
 <ul>
-  <li>Read about how <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/nodes/">nodes</a> work.</li>
-  <li>Learn how swarm mode <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/services/">services</a> work.</li>
+  <li><a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/nodes/">ノード</a> の動作について。</li>
+  <li>Swarm モードの <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/services/">サービス</a> の動作について。</li>
 </ul>
 
                             <!-- tags -->
@@ -288,7 +270,7 @@ root CA, and do not contain any intermediates.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/swarm/how-swarm-mode-works/pki.md",
-                                        "title": "Manage swarm security with public key infrastructure (PKI)",
+                                        "title": "公開鍵基盤を利用した Swarm セキュリティ管理",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/how-swarm-mode-works/pki.md"
                                     };
                                     (function (d, c, j) {
@@ -354,8 +336,8 @@ root CA, and do not contain any intermediates.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#rotating-the-ca-certificate" class="nomunge">Rotating the CA certificate</a></li>
-  <li><a href="#learn-more" class="nomunge">Learn More</a></li>
+  <li><a href="#rotating-the-ca-certificate" class="nomunge">CA 証明書のローテート</a></li>
+  <li><a href="#learn-more" class="nomunge">さらに詳しく</a></li>
 </ul>
 
 
