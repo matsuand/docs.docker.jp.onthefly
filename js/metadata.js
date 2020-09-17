@@ -3810,7 +3810,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm-mode/",
-"title":"Run Docker Engine in swarm mode",
+"title":"Docker Engine の Swarm モード実行",
 "description":"Run Docker Engine in swarm mode",
 "keywords":"guide, swarm mode, node"
 }
@@ -4363,7 +4363,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/wsl/",
-"title":"Docker Desktop WSL 2 backend",
+"title":"Docker Desktop WSL 2 バックエンド",
 "description":"Docker Desktop WSL 2 backend",
 "keywords":"WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker"
 }
