@@ -1,4 +1,4 @@
-<!-- Page generated 2020-09-18 10:55:34 +0900 -->
+<!-- Page generated 2020-09-19 17:59:28 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-18T10:55:34+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-19T17:59:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="Windows Subsystem for Linux (WSL) 2 は、Microsoft がビルドした完全な Linux カーネルを導入する、画期的な構造変化をもたらします。 これにより Linux コンテナーはエミュレーションとしてではなく、ネイティブな実行が可能になります。 WSL 2 上において Docker Desktop を実行すれば、Linux ワークスペースの活用が可能となり、Linux と Windows の双方に対するビルドスクリプトを準備する必要はなくなります。 また WSL 2 では、ファイルシステム共有や起動時間に関する改善がなされていて、Docker Desktop ユーザーにとって、優れた機能を利用できるものになりました。 Docker..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-09-18T10:55:34+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-19T17:59:28+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker">
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    2 分
   
 </span>
 
@@ -239,49 +239,55 @@ WSL が実行されるモードには v1 モードと v2 モードがありま�
 
 <h2 id="docker-と-wsl-2-を用いた開発">Docker と WSL 2 を用いた開発</h2>
 
-<p>The following section describes how to start developing your applications using Docker and WSL 2. We recommend that you have your code in your default Linux distribution for the best development experience using Docker and WSL 2. After you have enabled WSL 2 on Docker Desktop, you can start working with your code inside the Linux distro and ideally with your IDE still in Windows. This workflow can be pretty straightforward if you are using <a href="https://code.visualstudio.com/download">VSCode</a>.</p>
+<p>以下の節では、Docker と WSL 2 を利用したアプリケーション開発方法について説明します。
+Docker と WSL 2 を利用して開発作業を進めていく際には、開発コードをデフォルトの Linux ディストリビューション内に配置して進めていくことが最適です。
+Docker Desktop において WSL 2 を有効にしていれば、その Linux ディストリビューション内のソースコードでありながら、理想的に Windows 上の IDE の中で作業し続けることができます。
+このような作業を進めるには <a href="https://code.visualstudio.com/download">VSCode</a> を用いるのが最も自然な方法です。</p>
 
 <ol>
-  <li>Open VSCode and install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote - WSL</a> extension. This extension allows you to work with a remote server in the Linux distro and your IDE client still on Windows.</li>
+  <li>VSCode を開いて <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">リモート WSL 拡張機能</a> をインストールします。
+この拡張機能は、Linux ディストリビューション内のリモートサーバーで作業をしつつ IDE クライアントは Windows のままとするものです。</li>
   <li>
-    <p>Now, you can start working in VSCode remotely. To do this, open your terminal and type:</p>
+    <p>そこで VSCode 内においてリモートに対する作業を開始します。
+これを行うにはターミナル画面を開いて以下を入力します。</p>
 
     <p><code class="highlighter-rouge">wsl</code></p>
 
     <p><code class="highlighter-rouge">code .</code></p>
 
-    <p>This opens a new VSCode connected remotely to your default Linux distro which you can check in the bottom corner of the screen.</p>
+    <p>この操作によって、デフォルト Linux ディストリビューションに対してリモート接続された新たな VSCode が開きます。
+ 画面下段からこのことが確認できます。</p>
 
-    <p>Alternatively, you can type the name of your default Linux distro in your Start menu, open it, and then run <code class="highlighter-rouge">code</code> .</p>
+    <p>別の方法として、スタートメニューからデフォルト Linux ディストリビューション名を入力してこれを開き、その後に<code class="highlighter-rouge">code</code>を実行する方法もあります。</p>
   </li>
-  <li>When you are in VSCode, you can use the terminal in VSCode to pull your code and start working natively from your Windows machine.</li>
+  <li>VSCode 内では VSCode のターミナル画面を使うことができます。
+これによってソースコードをプルし、Windows マシン内からネイティブ環境のように作業を進めていくことができます。</li>
 </ol>
 
 <h2 id="best-practices">ベストプラクティス</h2>
 
 <ul>
-  <li>To get the best out of the file system performance when bind-mounting files:
+  <li>バインドマウント利用時のファイルシステム性能を最大化するには、以下を行います。
     <ul>
-      <li>Store source code and other data that is bind-mounted into Linux containers
+      <li>ソースコードやデータが Linux コンテナーにバインドマウントされている場合（たとえば<code class="highlighter-rouge">docker run -v &lt;host-path&gt;:&lt;container-path&gt;</code>を実行している場合）は、Linux ファイルシステムに保存し、Windows ファイルシステムには保存しないようにします。
 (i.e., with <code class="highlighter-rouge">docker run -v &lt;host-path&gt;:&lt;container-path&gt;</code>) in the Linux
 filesystem, rather than the Windows filesystem.</li>
-      <li>Linux containers only receive file change events (“inotify events”) if the
-original files are stored in the Linux filesystem.</li>
-      <li>Performance is much higher when files are bind-mounted from the Linux
-filesystem, rather than remoted from the Windows host. Therefore avoid
-<code class="highlighter-rouge">docker run -v /mnt/c/users:/users</code> (where <code class="highlighter-rouge">/mnt/c</code> is mounted from Windows).</li>
-      <li>Instead, from a Linux shell use a command like <code class="highlighter-rouge">docker run -v ~/my-project:/sources &lt;my-image&gt;</code>
-where <code class="highlighter-rouge">~</code> is expanded by the Linux shell to <code class="highlighter-rouge">$HOME</code>.</li>
+      <li>元のファイルを Linux ファイルシステムに保存しているのであれば、Linux コンテナーはファイル変更のイベント（「inotify」イベント）のみを受けつけるようにしてください。</li>
+      <li>Windows ホストからリモート接続する場合に比べて、Linux ファイルシステムからバインドマウントされたファイルにアクセスする方が、性能ははるかに向上します。
+したがって<code class="highlighter-rouge">docker run -v /mnt/c/users:/users</code>（ここで<code class="highlighter-rouge">/mnt/c</code>は Windows からのマウント）とすることは避けてください。</li>
+      <li>上のかわりに Linux シェルから<code class="highlighter-rouge">docker run -v ~/my-project:/sources &lt;my-image&gt;</code>のようなコマンドを実行してください。
+ここで<code class="highlighter-rouge">~</code>は Linux シェルが<code class="highlighter-rouge">$HOME</code>に展開することを表わします。</li>
     </ul>
   </li>
-  <li>If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size">WSL tooling built into Windows</a>.</li>
-  <li>If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the <a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945">WSL 2 utility VM</a>.</li>
-  <li>To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community">uninstall any previous versions of Docker Engine</a> and CLI installed directly through Linux distributions before installing Docker Desktop.</li>
+  <li>Docker Desktop のデータ VHDX の容量が気になったり、変更を必要とする場合は、<a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size">WSL tooling built into Windows</a> を確認してください。</li>
+  <li>CPU や メモリの使用量について気にかける必要がある場合は <a href="https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945">WSL 2 ユーティリティー VM</a> に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。</li>
+  <li>Docker Desktop 上での WSL 2 利用において、衝突のリスクを避けるには、<a href="../../engine/install/ubuntu/#uninstall-docker-engine">Docker Engine の古いバージョンのアンインストール</a> を行い、Docker Desktop のインストール前に Linux ディストリビューションに対して CLI を直接インストールするようにしてください。</li>
 </ul>
 
 <h2 id="feedback">フィードバック</h2>
 
-<p>Your feedback is very important to us. Please let us know your feedback by creating an issue in the <a href="https://github.com/docker/for-win/issues">Docker Desktop for Windows GitHub</a> repository and adding the <strong>WSL 2</strong> label.</p>
+<p>みなさんからのフィードバックは大変重要です。
+フィードバックをいただくには、Github レポジトリ <a href="https://github.com/docker/for-win/issues">Docker Desktop for Windows</a> に issue をあげて、<strong>WSL 2</strong> というラベルをつけてください。</p>
 
                             <!-- tags -->
                             
