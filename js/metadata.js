@@ -149,7 +149,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/access-tokens/",
-"title":"Managing access tokens",
+"title":"アクセストークンの管理",
 "description":"Learn how to create and manage your personal Docker Hub access tokens to securely push and pull images programmatically.",
 "keywords":"docker hub, hub, security, PAT, personal access token"
 }
@@ -170,7 +170,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/billing/add-seats/",
-"title":"Add seats to your plan",
+"title":"プランへのシート追加",
 "description":"Add seats to your plan",
 "keywords":"Docker, Docker Hub, subscription, update, add, seats"
 }
@@ -1283,7 +1283,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/2fa/disable-2fa/",
-"title":"Disable two-factor authentication on Docker Hub",
+"title":"Docker Hub における２要素認証の無効化",
 "description":"Disable two-factor authentication on Docker Hub",
 "keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
 }
@@ -1367,7 +1367,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/billing/downgrade/",
-"title":"Downgrade your plan",
+"title":"料金プランのダウングレード",
 "description":"Downgrade your Docker Hub Plan",
 "keywords":"Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,"
 }
@@ -1990,7 +1990,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/2fa/",
-"title":"Docker Hub における 2 要素認証の有効化",
+"title":"Docker Hub における２要素認証の有効化",
 "description":"Enabling two-factor authentication on Docker Hub",
 "keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
 }
@@ -2004,7 +2004,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/billing/",
-"title":"Docker Billing overview",
+"title":"Docker の有料プラン概要",
 "description":"Docker Billing overview",
 "keywords":"Docker, pricing, billing, Pro, Team, subscription, plans,"
 }
@@ -2165,7 +2165,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/install-windows-home/",
-"title":"Install Docker Desktop on Windows Home",
+"title":"Windows Home への Docker Desktop インストール",
 "description":"How to install Docker Desktop on Windows 10 Home",
 "keywords":"Windows 10 Home, Home, Windows, install, download, run, Docker, local"
 }
@@ -2690,7 +2690,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/2fa/new-recovery-code/",
-"title":"Generate a new recovery code",
+"title":"新たなリカバリーコードの生成",
 "description":"Generate a new 2fa recovery code",
 "keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
 }
@@ -3187,7 +3187,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/2fa/recover-hub-account/",
-"title":"Recover your Docker Hub account",
+"title":"Docker Hub アカウントの復旧",
 "description":"Recover your Docker Hub account",
 "keywords":"Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication"
 }
@@ -3306,7 +3306,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/billing/remove-seats/",
-"title":"Remove seats from your plan",
+"title":"プランからのシート削除",
 "description":"Remove seats from your plan",
 "keywords":"Docker, Docker Hub, subscription, update, remove, seats"
 }
@@ -3992,7 +3992,7 @@ var pages = [
 ,
 {
 "url":"/docker-for-windows/troubleshoot/",
-"title":"Logs and troubleshooting",
+"title":"ログとトラブルシューティング",
 "description":"Troubleshooting, logs, and known issues",
 "keywords":"windows, troubleshooting, logs, issues"
 }
@@ -4146,7 +4146,7 @@ var pages = [
 ,
 {
 "url":"/docker-hub/billing/upgrade/",
-"title":"Upgrade your plan",
+"title":"料金プランのアップグレード",
 "description":"Upgrading your Docker Hub Plan",
 "keywords":"Docker Hub, upgrade, subscription, Pro, Team, pricing plan,"
 }
