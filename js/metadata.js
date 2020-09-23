@@ -3299,7 +3299,7 @@ var pages = [
 ,
 {
 "url":"/machine/release-notes/",
-"title":"Docker Machine release notes",
+"title":"Docker Machine リリースノート",
 "description":"Release notes for Docker Machine",
 "keywords":"release notes, machine"
 }

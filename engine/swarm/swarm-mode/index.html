@@ -1,4 +1,4 @@
-<!-- Page generated 2020-07-21 18:46:09 +0900 -->
+<!-- Page generated 2020-09-16 14:05:07 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-16T14:05:07+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Run Docker Engine in swarm mode"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="When you first install and start working with Docker Engine, swarm mode is disabled by default. When you enable swarm mode, you work with the concept of services managed through..." />
+  <meta name="twitter:title" itemprop="title name" content="Docker Engine の Swarm モード実行"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Engine を初めてインストールして起動した状態では、Swarm モードはデフォルトで無効になっています。 Swarm モードを有効にすると、docker service コマンドを通じて管理される、サービスという考え方に従って操作していきます。 Engine を Swarm モードで実行するには 2 つの方法があります。 新たな Swarm を生成します。本文で取り扱います。 既存 Swarm への参加 を行います。 ローカルマシン上において Engine を Swarm モードで実行すれば、自分で生成したイメージや他から入手したイメージに基づいて、サービスの生成と確認を行うことができます。 本番環境においては Swarm モードにより、クラスター管理機能を有するフォールトトレラントなプラットフォームを提供し、そこにサービスを実行して利用することができます。 ここに示す手順においては..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-07-21T18:46:09+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-16T14:05:07+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="guide, swarm mode, node">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Run Docker Engine in swarm mode | Docker ドキュメント</title>
-  <meta property="og:title" content="Run Docker Engine in swarm mode" />
+  <title>Docker Engine の Swarm モード実行 | Docker ドキュメント</title>
+  <meta property="og:title" content="Docker Engine の Swarm モード実行" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Run Docker Engine in swarm mode" />
   <meta property="og:description" content="Run Docker Engine in swarm mode" />
   <link rel="canonical" href="/engine/swarm/swarm-mode/" />
   <meta property="og:url" content="https://docs.docker.com/engine/swarm/swarm-mode/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Run Docker Engine in swarm mode","description":"Run Docker Engine in swarm mode","url":"https://docs.docker.com/engine/swarm/swarm-mode/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine の Swarm モード実行","description":"Run Docker Engine in swarm mode","url":"https://docs.docker.com/engine/swarm/swarm-mode/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,66 +147,56 @@
                         <section class="section">
                             
                             
-                            <h1>Run Docker Engine in swarm mode</h1> 
+                            <h1>Docker Engine の Swarm モード実行</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    8 分
+    7 分
   
 </span>
 
                             
-                            <p>When you first install and start working with Docker Engine, swarm mode is
-disabled by default. When you enable swarm mode, you work with the concept of
-services managed through the <code class="highlighter-rouge">docker service</code> command.</p>
+                            
+<p>Docker Engine を初めてインストールして起動した状態では、Swarm モードはデフォルトで無効になっています。
+Swarm モードを有効にすると、<code class="highlighter-rouge">docker service</code> コマンドを通じて管理される、サービスという考え方に従って操作していきます。</p>
 
-<p>There are two ways to run the Engine in swarm mode:</p>
-
-<ul>
-  <li>Create a new swarm, covered in this article.</li>
-  <li><a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Join an existing swarm</a>.</li>
-</ul>
-
-<p>When you run the Engine in swarm mode on your local machine, you can create and
-test services based upon images you’ve created or other available images. In
-your production environment, swarm mode provides a fault-tolerant platform with
-cluster management features to keep your services running and available.</p>
-
-<p>These instructions assume you have installed the Docker Engine 1.12 or later on
-a machine to serve as a manager node in your swarm.</p>
-
-<p>If you haven’t already, read through the <a href="/docs.docker.jp.onthefly/engine/swarm/key-concepts/">swarm mode key concepts</a>
-and try the <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/">swarm mode tutorial</a>.</p>
-
-<h2 id="create-a-swarm">Create a swarm</h2>
-
-<p>When you run the command to create a swarm, the Docker Engine starts running in swarm mode.</p>
-
-<p>Run <a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_init/"><code class="highlighter-rouge">docker swarm init</code></a>
-to create a single-node swarm on the current node. The Engine sets up the swarm
-as follows:</p>
+<p>Engine を Swarm モードで実行するには 2 つの方法があります。</p>
 
 <ul>
-  <li>switches the current node into swarm mode.</li>
-  <li>creates a swarm named <code class="highlighter-rouge">default</code>.</li>
-  <li>designates the current node as a leader manager node for the swarm.</li>
-  <li>names the node with the machine hostname.</li>
-  <li>configures the manager to listen on an active network interface on port 2377.</li>
-  <li>sets the current node to <code class="highlighter-rouge">Active</code> availability, meaning it can receive tasks
-from the scheduler.</li>
-  <li>starts an internal distributed data store for Engines participating in the
-swarm to maintain a consistent view of the swarm and all services running on it.</li>
-  <li>by default, generates a self-signed root CA for the swarm.</li>
-  <li>by default, generates tokens for worker and manager nodes to join the
-swarm.</li>
-  <li>creates an overlay network named <code class="highlighter-rouge">ingress</code> for publishing service ports
-external to the swarm.</li>
-  <li>creates an overlay default IP addresses and subnet mask for your networks</li>
+  <li>新たな Swarm を生成します。本文で取り扱います。</li>
+  <li><a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">既存 Swarm への参加</a> を行います。</li>
 </ul>
 
-<p>The output for <code class="highlighter-rouge">docker swarm init</code> provides the connection command to use when
-you join new worker nodes to the swarm:</p>
+<p>ローカルマシン上において Engine を Swarm モードで実行すれば、自分で生成したイメージや他から入手したイメージに基づいて、サービスの生成と確認を行うことができます。
+本番環境においては Swarm モードにより、クラスター管理機能を有するフォールトトレラントなプラットフォームを提供し、そこにサービスを実行して利用することができます。</p>
+
+<p>ここに示す手順においては Docker Engine 1.12 またはそれ以降がマシンにインストール済であって、Swarm のマネージャーノードとすることができるものとします。</p>
+
+<p>準備ができていない場合は <a href="/docs.docker.jp.onthefly/engine/swarm/key-concepts/">Swarm モードの重要な考え方</a> を一読して、<a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/">Swarm モードをはじめる</a> を試してみてください。</p>
+
+<h2 id="create-a-swarm">Swarm の生成</h2>
+
+<p>Swarm を生成するコマンドを実行すると、Docker Engine が Swarm モードとして起動します。</p>
+
+<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_init/"><code class="highlighter-rouge">docker swarm init</code></a> コマンドを実行すると、現在のノード上に、単一ノードからなる Swarm が生成されます。
+Engine は以下のようにして Swarm を作り出します。</p>
+
+<ul>
+  <li>現在のノードを Swarm モードに切り替えます。</li>
+  <li><code class="highlighter-rouge">default</code> という名前の Swarm を生成します。</li>
+  <li>現在のノードを、Swarm におけるマネージャーノードのリーダーとします。</li>
+  <li>ノードの名前をマシンホスト名にします。</li>
+  <li>マネージャーがアクティブなネットワークインターフェースのポート 2377 を待ち受けるように設定します。</li>
+  <li>現在のノードの利用状態（availability）を<code class="highlighter-rouge">Active</code>に設定します。これはスケジューラーからのタスク受け入れを可能にすることを意味します。</li>
+  <li>内部分散データストアの利用を開始します。これは Swarm 内に Engine を参加させ、Swarm の一貫した参照を実現するとともに、すべてのサービスをここで実行します。</li>
+  <li>デフォルトで、自己署名のルート CA を Swarm 用に生成します。</li>
+  <li>Swarm への参加のために、デフォルトでワーカーノードとマネージャーノードのトークンを生成します。</li>
+  <li><code class="highlighter-rouge">ingress</code> という名前の overlay ネットワークを生成し、Swarm 外部に向けてサービスポートを公開します。</li>
+  <li>overlay のデフォルト IP アドレスとサブネットマスクを生成します。</li>
+</ul>
+
+<p><code class="highlighter-rouge">docker swarm init</code> コマンドの出力結果には、Swarm にワーカーノードを参加させるための接続コマンドが表示されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm init
 Swarm initialized: current node <span class="o">(</span>dxn1zf6l61qsb1josjja83ngz<span class="o">)</span> is now a manager.
@@ -219,7 +209,8 @@ To add a worker to this swarm, run the following <span class="nb">command</span>
 
 To add a manager to this swarm, run <span class="s1">'docker swarm join-token manager'</span> and follow the instructions.
 </code></pre></div></div>
-<h3 id="configuring-default-address-pools">Configuring default address pools</h3>
+
+<h3 id="configuring-default-address-pools">デフォルトのアドレスプールの設定</h3>
 
 <p>By default Docker Swarm uses a default address pool <code class="highlighter-rouge">10.0.0.0/8</code> for global scope (overlay) networks. Every
 network that does not have a subnet specified will have a subnet sequentially allocated from this pool. In
@@ -362,7 +353,7 @@ To add a worker to this swarm, run the following <span class="nb">command</span>
     192.168.99.100:2377
 </code></pre></div></div>
 
-<h2 id="learn-more">Learn more</h2>
+<h2 id="learn-more">さらに詳しく</h2>
 
 <ul>
   <li><a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Join nodes to a swarm</a></li>
@@ -386,7 +377,7 @@ To add a worker to this swarm, run the following <span class="nb">command</span>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/swarm/swarm-mode.md",
-                                        "title": "Run Docker Engine in swarm mode",
+                                        "title": "Docker Engine の Swarm モード実行",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/swarm-mode.md"
                                     };
                                     (function (d, c, j) {
@@ -452,14 +443,14 @@ To add a worker to this swarm, run the following <span class="nb">command</span>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#create-a-swarm" class="nomunge">Create a swarm</a>
+  <li><a href="#create-a-swarm" class="nomunge">Swarm の生成</a>
     <ul>
-      <li><a href="#configuring-default-address-pools" class="nomunge">Configuring default address pools</a></li>
+      <li><a href="#configuring-default-address-pools" class="nomunge">デフォルトのアドレスプールの設定</a></li>
       <li><a href="#configure-the-advertise-address" class="nomunge">Configure the advertise address</a></li>
       <li><a href="#view-the-join-command-or-update-a-swarm-join-token" class="nomunge">View the join command or update a swarm join token</a></li>
     </ul>
   </li>
-  <li><a href="#learn-more" class="nomunge">Learn more</a></li>
+  <li><a href="#learn-more" class="nomunge">さらに詳しく</a></li>
 </ul>
 
 
