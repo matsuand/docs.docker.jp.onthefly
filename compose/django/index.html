@@ -1,4 +1,4 @@
-<!-- Page generated 2020-09-09 11:56:34 +0900 -->
+<!-- Page generated 2020-09-24 15:15:33 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-09T11:56:34+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-24T15:15:33+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="このクィックスタートガイドでは Docker Compose を使って、簡単な Django/PostgreSQL アプリを設定し実行する手順を示します。 はじめるには Compose のインストール が必要です。 プロジェクトのコンポーネントを定義 このプロジェクトでは Dockerfile、Python の依存関係を示すファイル、docker-compose.ymlファイルをそれぞれ生成します。（docker-compose.ymlの拡張子は.ymlと.yamlのどちらでも構いません。） 空のプロジェクトディレクトリを生成します。 ディレクトリ名は覚えやすいものにします。 このディレクトリはアプリケーションイメージのコンテキストディレクトリとなります。 このディレクトリには、イメージをビルドするために必要となるものだけを含めるようにします。 プロジェクトディレクトリ内に Dockerfile というファイルを新規生成します。 Dockerfile はアプリケーションイメージの内容を定義するものであり、イメージを設定しビルドするコマンドがいくつか記述されます。 ビルドが成功すると、コンテナー内にてイメージが起動します。 Dockerfile の詳細は Docker ユーザーガイドや Dockerfile リファレンス..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-09-09T11:56:34+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-24T15:15:33+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="documentation, docs,  docker, compose, orchestration, containers">
@@ -183,18 +183,18 @@
   <li>
     <p><code class="highlighter-rouge">Dockerfile</code> に以下の内容を記述します。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM python:3
-ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
-WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
-COPY . /code/
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> python:3</span>
+<span class="k">ENV</span><span class="s"> PYTHONUNBUFFERED=1</span>
+<span class="k">RUN </span>mkdir /code
+<span class="k">WORKDIR</span><span class="s"> /code</span>
+<span class="k">COPY</span><span class="s"> requirements.txt /code/</span>
+<span class="k">RUN </span>pip install <span class="nt">-r</span> requirements.txt
+<span class="k">COPY</span><span class="s"> . /code/</span>
 </code></pre></div>    </div>
 
     <p>この<code class="highlighter-rouge">Dockerfile</code>はまず <a href="https://hub.docker.com/r/library/python/tags/3/">Python 3 の親イメージ</a>から始まっています。
- この親イメージには新規のディレクトリ<code class="highlighter-rouge">code</code>が加えられます。
- さらに<code class="highlighter-rouge">requirements.txt</code>ファイルに定義された Python 依存パッケージをインストールする変更が加えられています。</p>
+この親イメージには新規のディレクトリ<code class="highlighter-rouge">code</code>が加えられます。
+さらに<code class="highlighter-rouge">requirements.txt</code>ファイルに定義された Python 依存パッケージをインストールする変更が加えられています。</p>
   </li>
   <li>
     <p><code class="highlighter-rouge">Dockerfile</code> を保存して閉じます。</p>
@@ -227,25 +227,25 @@ psycopg2-binary&gt;=2.8
   <li>
     <p>以下の設定内容をファイルに記述します。</p>
 
-    <pre><code class="language-none">  version: '3'
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.8"</span>
 
-  services:
-    db:
-      image: postgres
-      environment:
-        - POSTGRES_DB=postgres
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
-    web:
-      build: .
-      command: python manage.py runserver 0.0.0.0:8000
-      volumes:
-        - .:/code
-      ports:
-        - "8000:8000"
-      depends_on:
-        - db
-</code></pre>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_DB=postgres</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_USER=postgres</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=postgres</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">python manage.py runserver 0.0.0.0:8000</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">.:/code</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8000:8000"</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+</code></pre></div>    </div>
 
     <p>このファイルには<code class="highlighter-rouge">db</code>サービスと<code class="highlighter-rouge">web</code>サービスという 2 つのサービスが定義されています。</p>
 
@@ -273,7 +273,7 @@ psycopg2-binary&gt;=2.8
   <li>
     <p>Django プロジェクトを生成するために <a href="/docs.docker.jp.onthefly/compose/reference/run/">docker-compose run</a> コマンドを以下のように実行します。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo docker-compose run web django-admin startproject composeexample .
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>docker-compose run web django-admin startproject composeexample <span class="nb">.</span>
 </code></pre></div>    </div>
 
     <p>このコマンドは Compose に対し、コンテナー内において <code class="highlighter-rouge">django-admin startproject composeexample</code> を実行するものです。
@@ -286,32 +286,34 @@ psycopg2-binary&gt;=2.8
   <li>
     <p><code class="highlighter-rouge">docker-compose</code>コマンドの処理が完了したら、プロジェクト内の一覧を表示してみます。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -l
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">ls</span> <span class="nt">-l</span>
+<span class="go">
 drwxr-xr-x 2 root   root   composeexample
 -rw-rw-r-- 1 user   user   docker-compose.yml
 -rw-rw-r-- 1 user   user   Dockerfile
 -rwxr-xr-x 1 root   root   manage.py
 -rw-rw-r-- 1 user   user   requirements.txt
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
 
     <p>Linux 上で Docker を利用している場合、<code class="highlighter-rouge">django-admin</code>が生成したファイルの所有者が root になっています。
- これはコンテナーが root ユーザーで実行されるからです。
- 生成されたファイルの所有者を以下のようにして変更します。</p>
+これはコンテナーが root ユーザーで実行されるからです。
+生成されたファイルの所有者を以下のようにして変更します。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo chown -R $USER:$USER .
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>chown <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> <span class="nb">.</span>
 </code></pre></div>    </div>
 
     <p>Docker on Mac あるいは Docker on Windows を利用している場合は、生成されたファイルの所有権は、<code class="highlighter-rouge">django-admin</code>が作り出したファイルも含めて、すべて持っています。
- 確認のため一覧を表示してみます。</p>
+確認のため一覧を表示してみます。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ ls -l
- total 32
- -rw-r--r--  1 user  staff  145 Feb 13 23:00 Dockerfile
- drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
- -rw-r--r--  1 user  staff  159 Feb 13 23:02 docker-compose.yml
- -rwxr-xr-x  1 user  staff  257 Feb 13 23:07 manage.py
- -rw-r--r--  1 user  staff   16 Feb 13 23:01 requirements.txt
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">ls</span> <span class="nt">-l</span>
+<span class="go">
+total 32
+-rw-r--r--  1 user  staff  145 Feb 13 23:00 Dockerfile
+drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
+-rw-r--r--  1 user  staff  159 Feb 13 23:02 docker-compose.yml
+-rwxr-xr-x  1 user  staff  257 Feb 13 23:07 manage.py
+-rw-r--r--  1 user  staff   16 Feb 13 23:01 requirements.txt
+</span></code></pre></div>    </div>
   </li>
 </ol>
 
@@ -326,18 +328,18 @@ drwxr-xr-x 2 root   root   composeexample
   <li>
     <p><code class="highlighter-rouge">DATABASES = ...</code>の部分を以下のように書き換えます。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># settings.py
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># settings.py</span>
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
-    }
-}
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'default'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'ENGINE'</span><span class="p">:</span> <span class="s">'django.db.backends.postgresql'</span><span class="p">,</span>
+        <span class="s">'NAME'</span><span class="p">:</span> <span class="s">'postgres'</span><span class="p">,</span>
+        <span class="s">'USER'</span><span class="p">:</span> <span class="s">'postgres'</span><span class="p">,</span>
+        <span class="s">'PASSWORD'</span><span class="p">:</span> <span class="s">'postgres'</span><span class="p">,</span>
+        <span class="s">'HOST'</span><span class="p">:</span> <span class="s">'db'</span><span class="p">,</span>
+        <span class="s">'PORT'</span><span class="p">:</span> <span class="mi">5432</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>    </div>
 
     <p>上の設定は<code class="highlighter-rouge">docker-compose.yml</code>に指定した Docker イメージ <a href="https://hub.docker.com/_/postgres">postgres</a> が定めている内容です。</p>
@@ -348,7 +350,8 @@ DATABASES = {
   <li>
     <p>プロジェクトのトップディレクトリにおいてコマンド <a href="/docs.docker.jp.onthefly/compose/reference/up/">docker-compose up</a> を実行します。</p>
 
-    <pre><code class="language-none">$ docker-compose up
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up
+<span class="go">
 djangosample_db_1 is up-to-date
 Creating djangosample_web_1 ...
 Creating djangosample_web_1 ... done
@@ -366,36 +369,38 @@ web_1  | July 30, 2020 - 18:35:38
 web_1  | Django version 3.0.8, using settings 'composeexample.settings'
 web_1  | Starting development server at http://0.0.0.0:8000/
 web_1  | Quit the server with CONTROL-C.
-</code></pre>
+</span></code></pre></div>    </div>
 
     <p>この段階で Django アプリは Docker ホスト上のポート<code class="highlighter-rouge">8000</code>で稼動しています。
-Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから <code class="highlighter-rouge">http://localhost:8000</code> にアクセスすることで、Django の Welcome ページを確認できます。
-<a href="/docs.docker.jp.onthefly/machine/overview/">Docker Machine</a> を利用している場合は、<code class="highlighter-rouge">docker-machine ip MACHINE_VM</code> を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（<code class="highlighter-rouge">&lt;DockerホストID&gt;:8000</code>）。</p>
+Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから<code class="highlighter-rouge">http://localhost:8000</code>にアクセスすることで、Django の Welcome ページを確認できます。
+<a href="/docs.docker.jp.onthefly/machine/overview/">Docker Machine</a> を利用している場合は、<code class="highlighter-rouge">docker-machine ip MACHINE_VM</code>を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（<code class="highlighter-rouge">&lt;DockerホストID&gt;:8000</code>）。</p>
 
     <p><img src="/docs.docker.jp.onthefly/compose/images/django-it-worked.png" alt="Django の例" /></p>
 
     <blockquote>
       <p>メモ:</p>
 
-      <p>特定プラットフォーム（Windows 10）では、<code class="highlighter-rouge">settings.py</code>ファイル内の<code class="highlighter-rouge">ALLOWED_HOSTS</code>に、ホスト名あるいはホストの IP アドレスを追加することが必要かもしれません。ここはデモが目的なので、以下のように設定することにします。</p>
+      <p>特定プラットフォーム（Windows 10）では、<code class="highlighter-rouge">settings.py</code>ファイル内の<code class="highlighter-rouge">ALLOWED_HOSTS</code>に、ホスト名あるいはホストの IP アドレスを追加することが必要かもしれません。
+ここはデモが目的なので、以下のように設定することにします。</p>
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALLOWED_HOSTS = ['*']
 </code></pre></div>      </div>
 
-      <p>この設定は本番環境では<strong>安全ではありません</strong>。詳しくは <a href="https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts">Django ドキュメント</a>を参照してください。</p>
+      <p>この設定は本番環境では<strong>安全ではありません</strong>。
+詳しくは <a href="https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts">Django ドキュメント</a> を参照してください。</p>
     </blockquote>
   </li>
   <li>
     <p>起動しているコンテナーの一覧を確認します。</p>
 
-    <p>別の端末画面を開いて <code class="highlighter-rouge">docker container ls</code>コマンドを実行し、起動している Docker プロセスの一覧を表示します。</p>
+    <p>別の端末画面を開いて<code class="highlighter-rouge">docker container ls</code>コマンドを実行し、起動している Docker プロセスの一覧を表示します。</p>
 
-    <pre><code class="language-none">$ docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago      Up 9 minutes        0.0.0.0:8000-&gt;8000/tcp   django_web_1
-678ce61c79cc        postgres            "docker-entrypoint..."   20 minutes ago      Up 9 minutes        5432/tcp                 django_db_1
-
-</code></pre>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker ps
+<span class="go">
+CONTAINER ID  IMAGE       COMMAND                  CREATED         STATUS        PORTS                    NAMES
+</span><span class="gp">def85eff5f51  django_web  "python3 manage.py..."   10 minutes ago  Up 9 minutes  0.0.0.0:8000-&gt;</span>8000/tcp   django_web_1
+<span class="go">678ce61c79cc  postgres    "docker-entrypoint..."   20 minutes ago  Up 9 minutes  5432/tcp                 django_db_1
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>サービスを停止しクリアするために、以下のいずれかの方法をとります。</p>
@@ -404,23 +409,24 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
       <li>
         <p>アプリケーションを実行したシェル上で <code class="highlighter-rouge">Ctrl-C</code> を入力してアプリケーションを止めます。</p>
 
-        <pre><code class="language-none">Gracefully stopping... (press Ctrl+C again to force)
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Gracefully stopping... (press Ctrl+C again to force)
 Killing test_web_1 ... done
 Killing test_db_1 ... done
-</code></pre>
+</span></code></pre></div>        </div>
       </li>
       <li>
         <p>もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて <a href="/docs.docker.jp.onthefly/compose/reference/down/">docker-compose down</a> を実行します。</p>
 
-        <pre><code class="language-none">vmb at mymachine in ~/sandbox/django
-$ docker-compose down
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">vmb at mymachine in ~/sandbox/django
+</span><span class="gp">$</span> docker-compose down
+<span class="go">
 Stopping django_web_1 ... done
 Stopping django_db_1 ... done
 Removing django_web_1 ... done
 Removing django_web_run_1 ... done
 Removing django_db_1 ... done
 Removing network django_default
-</code></pre>
+</span></code></pre></div>        </div>
       </li>
     </ul>
   </li>
