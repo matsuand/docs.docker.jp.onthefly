@@ -800,7 +800,7 @@ var pages = [
 ,
 {
 "url":"/machine/concepts/",
-"title":"Machine concepts and getting help",
+"title":"Machine の考え方とヘルプ",
 "description":"Understand concepts for Docker Machine, including drivers, base OS, IP addresses, environment variables",
 "keywords":"docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"
 }
