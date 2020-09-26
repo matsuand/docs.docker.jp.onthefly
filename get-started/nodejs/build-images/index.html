@@ -1,0 +1,654 @@
+<!-- Page generated 2020-09-26 16:45:28 +0900 -->
+<!-- Logic for 'edit this button'
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+      @charset "UTF-8";
+      [ng\:cloak],
+      [ng-cloak],
+      [data-ng-cloak],
+      [x-ng-cloak],
+      .ng-cloak,
+      .x-ng-cloak,
+      .ng-hide:not(.ng-hide-animate) {
+          display: none !important;
+      }
+
+      ng\:form {
+          display: block;
+      }
+  </style>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WL2QLG5');</script>
+
+  
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <!-- metadata -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-26T16:45:28+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="docs.docker.com"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:title" itemprop="title name" content="Node イメージのビルド"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="イメージのビルド イメージのコンテナーとしての実行 開発向けのコンテナー利用 前提条件 クイックスタート 1 部 の概要と設定をひととおり行っていること。 概要 ここまでにコンテナーと Docker プラットフォームについて概要をよく見てきましたので、イメージをはじめてビルドする方法を見ていきます。 イメージというものには、アプリケーションの実行に必要なものすべてが詰まっています。 それはコード、実行バイナリ、ランタイム、依存パッケージ、これ以外にも必要となるファイルシステムオブジェクトとさまざまです。 このチュートリアルを終わりまで進めるには、以下が必要です。 Node.js バージョン 12.18 またはそれ以降。 Node.js をダウンロード してください。 ローカルに Docker が実行していること。 Docker のダウンロードとインストール の手順に従ってください。 ファイル編集のための IDE..." />
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-09-26T16:45:28+09:00"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="containers, images, node.js, node, dockerfiles, node, coding, build, push, run">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link id="pygments" rel="stylesheet" href="/docs.docker.jp.onthefly/css/pygments/perldoc.css">
+  <link id="pagestyle" rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css">
+
+  <!-- Go get "Open Sans" font from Google -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- SEO stuff -->
+  <title>Node イメージのビルド | Docker ドキュメント</title>
+  <meta property="og:title" content="Node イメージのビルド" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="description" content="Learn how to build your first Docker image by writing a Dockerfile" />
+  <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
+  <link rel="canonical" href="/get-started/nodejs/build-images/" />
+  <meta property="og:url" content="https://docs.docker.com/get-started/nodejs/build-images/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/get-started/nodejs/build-images/"}</script>
+  <!-- END SEO STUFF -->
+  
+</head>
+
+
+    <body ng-app="Docker" ng-controller="DockerController" class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <!-- <div class="fan"></div> -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs">
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs">
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/docs.docker.jp.onthefly/search/">
+        <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteContainer">
+            <div id="autocompleteResults"></div>
+        </div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal">
+
+        </ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section">
+                            
+                            
+                            <h1>Node イメージのビルド</h1> 
+                            <span class="reading-time" title="Estimated reading time">
+  <span class="reading-time-label">読む時間の目安: </span>
+  
+  
+    4 分
+  
+</span>
+
+                            
+                            <ul class="pagination">
+  <li class="active"><a href="/docs.docker.jp.onthefly/get-started/nodejs/build-images">イメージのビルド</a></li>
+  <li><a href="/docs.docker.jp.onthefly/get-started/nodejs/run-containers">イメージのコンテナーとしての実行</a></li>
+  <li><a href="/docs.docker.jp.onthefly/get-started/nodejs/develop">開発向けのコンテナー利用</a></li>
+</ul>
+
+<h2 id="prerequisites">前提条件</h2>
+
+<p>クイックスタート <a href="/docs.docker.jp.onthefly/get-started/">1 部</a> の概要と設定をひととおり行っていること。</p>
+
+<h2 id="overview">概要</h2>
+
+<p>ここまでにコンテナーと Docker プラットフォームについて概要をよく見てきましたので、イメージをはじめてビルドする方法を見ていきます。
+イメージというものには、アプリケーションの実行に必要なものすべてが詰まっています。
+それはコード、実行バイナリ、ランタイム、依存パッケージ、これ以外にも必要となるファイルシステムオブジェクトとさまざまです。</p>
+
+<p>このチュートリアルを終わりまで進めるには、以下が必要です。</p>
+
+<ul>
+  <li>Node.js バージョン 12.18 またはそれ以降。
+<a href="https://nodejs.org/en/" target="_blank" class="_">Node.js をダウンロード</a> してください。</li>
+  <li>ローカルに Docker が実行していること。
+<a href="https://docs.docker.com/desktop/">Docker のダウンロードとインストール</a> の手順に従ってください。</li>
+  <li>ファイル編集のための IDE またはテキストエディター。
+ここでは Visual Studio Code の利用をお勧めします。</li>
+</ul>
+
+<h2 id="sample-application">サンプルアプリケーション</h2>
+
+<p>利用例として用いる、簡単な Node.js アプリケーションを生成することにします。
+ローカルマシン上に<code class="highlighter-rouge">node-docker</code>というディレクトリを生成し以下の手順を進めることで、単純な REST API を作ります。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="o">[</span>node-docker ディレクトリのパス]
+<span class="nv">$ </span>npm init <span class="nt">-y</span>
+<span class="nv">$ </span>npm install ronin-server ronin-mocks
+<span class="nv">$ </span>touch server.js
+</code></pre></div></div>
+
+<p>REST 要求を扱うコードを書いていきます。
+サーバーは簡易なもので済ませて、アプリケーションの Docker 化に集中することにします。</p>
+
+<p>IDE 上において上のワーキングディレクトリを開き、<code class="highlighter-rouge">server.js</code>ファイルに以下のコードを加えます。</p>
+
+<pre><code class="language-node">const ronin     = require( 'ronin-server' )
+const mocks     = require( 'ronin-mocks' )
+
+const server = ronin.server()
+
+server.use( '/', mocks.server( server.Router(), false, true ) )
+server.start()
+</code></pre>
+
+<p>この簡易サーバーを<code class="highlighter-rouge">Ronin.js</code>と呼ぶことにします。
+これはデフォルトでポート 8000 を待ち受けます。
+ルート（/）エンドポイントへの POST リクエストを送信するものとし、サーバーへ送信する JSON データはメモリ上に保存されるものとします。
+ルートエンドポイントに GET リクエストも送信して、それ以前に POST した結果を JSON オブジェクト配列として受信します。</p>
+
+<h2 id="test-application">テストアプリケーション</h2>
+
+<p>アプリケーションを実行して正しく動作することを確認します。
+ターミナルを開いて、上で生成したワーキングディレクトリに移動します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>node server.js
+</code></pre></div></div>
+
+<p>アプリケーションの正常動作を確認するために、まずは API に対して JSON データを POST してみます。
+そして GET リクエストを行って、データが保存されていることを確認します。
+新たにターミナル画面を開いて、以下の curl コマンドを実行します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'{
+	"msg": "testing"
+}'</span>
+<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-08-28T21:53:07.157Z"</span><span class="o">}]}</span>
+
+<span class="nv">$ </span>curl http://localhost:8000/test
+<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"meta"</span>:<span class="o">{</span><span class="s2">"total"</span>:1,<span class="s2">"count"</span>:1<span class="o">}</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-08-28T21:53:07.157Z"</span><span class="o">}]}</span>
+</code></pre></div></div>
+
+<p>サーバーが実行されているターミナルに戻ります。
+サーバーログとして以下のリクエストが表示されるはずです。</p>
+
+<pre><code class="language-node">2020-XX-31T16:35:08:4260  INFO: POST /test
+2020-XX-31T16:35:21:3560  INFO: GET /test
+</code></pre>
+
+<h2 id="create-a-dockerfile-for-nodejs">Node.js 用の Dockerfile 生成</h2>
+
+<p>Dockerfile はテキストファイルであり、この中にはコマンドライン上で実行するようなコマンドがさまざまに記述され、それがイメージ生成に結びつきます。
+Docker に対してイメージ生成の指示を行うために<code class="highlighter-rouge">docker run</code>コマンドを実行すると、Docker は Dockerfile 内の命令を読み取って、1 つずつ実行していき、結果として Docker イメージを作り出します。</p>
+
+<p>アプリケーションに対しての Dockerfile を作成する手順を見ていきます。
+ワーキングディレクトリのルートにおいて、<code class="highlighter-rouge">Dockerfile</code>という名前のファイルを生成して、テキストエディター内でこれを開きます。</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>Dockerfile という名前は重要ではありません。
+ただしデフォルトのファイル名を<code class="highlighter-rouge">Dockerfile</code>とするコマンドが数多くあります。
+したがってここでの説明では、このファイル名を用いていくことにします。</p>
+</blockquote>
+
+<p>まずはじめに行うのは、Docker に対してアプリケーションのベースイメージとして何を使うのか、これを Docker に対して指示する行を Dockerfile に記述します。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12.18.1</span>
+</code></pre></div></div>
+
+<p>Docker イメージは、別のイメージを継承して生成することができます。
+したがってここでは独自のベースイメージを作るのでなく、公式の Node.js イメージを用いることにします。
+このイメージの中には Node.js アプリケーションの実行に必要となるツールやパッケージがすべて含まれて居ます。
+この様子は、オブジェクト指向プログラミングにおけるクラス継承と同じように考えることができます。
+もし仮に Docker イメージが JavaScript でプログラミングできるとしたら、以下のような書き方を行うことになります。</p>
+
+<p><code class="highlighter-rouge">class MyImage extends NodeBaseImage {}</code></p>
+
+<p>ここでは<code class="highlighter-rouge">MyImage</code>というクラスが生成されて、基底クラス<code class="highlighter-rouge">NodeBaseImage</code>の機能を継承することになりますｓ。</p>
+
+<p>同じような話として、上に示した<code class="highlighter-rouge">FROM</code>コマンドの利用の際には、<code class="highlighter-rouge">node:12.18.1</code>イメージからすべての機能性を受け継ぐように Docker に指示を出していることになります。</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>独自のベースイメージを生成する方法に関しては、<a href="/docs.docker.jp.onthefly/develop/develop-images/baseimages/">ベースイメージの生成</a> を参照してください。</p>
+</blockquote>
+
+<p>環境変数<code class="highlighter-rouge">NODE_ENV</code>は、アプリケーションを実行する環境（通常は開発環境(development)か本番環境(production)）を指定します。
+性能の改善を図りたいなら、最も単純な話としてこの<code class="highlighter-rouge">NODE_ENV</code>を<code class="highlighter-rouge">production</code>に設定すればよいことになります。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ENV</span><span class="s"> NODE_ENV=production</span>
+</code></pre></div></div>
+
+<p>これ以降のコマンド実行にあたって、作業をしやすくするため、ワーキングディレクトリを生成することにします。
+つまりこの後に続くコマンドのデフォルトディレクトリを、特定のパスとすることを Docker に指示します。
+こうすればフルパスを記述する必要がなくなり、すべてはワーキングディレクトリからの相対パスとすることができます。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WORKDIR</span><span class="s"> /app</span>
+</code></pre></div></div>
+
+<p>通常は、Node.js で開発されているプロジェクトをダウンロードした際には、直後に npm パッケージをインストールすることが必要です。
+これを行えば、アプリケーションの依存パッケージはすべて<code class="highlighter-rouge">node_modules</code>ディレクトリにインストールされることになり、Node ランタイムがこれを見つけ出せることになります。</p>
+
+<p><code class="highlighter-rouge">npm install</code>を実行する前に、イメージ内に<code class="highlighter-rouge">package.json</code>ファイルと<code class="highlighter-rouge">package-lock.json</code>ファイルを生成しておくことが必要です。
+<code class="highlighter-rouge">COPY</code>を使ってこれを行います。
+<code class="highlighter-rouge">COPY</code>コマンドは 2 つのパラメーターをとります。
+1 つめは、イメージ内にコピーしたいファイルを指定します。
+2 つめは、コピー先としたいファイルを指定します。
+ここでは<code class="highlighter-rouge">package.json</code>と<code class="highlighter-rouge">package-lock.json</code>をワーキングディレクトリ<code class="highlighter-rouge">/app</code>にコピーします。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> ["package.json", "package-lock.json*", "./"]</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">package.json</code>ファイルをイメージ内に置いたら、<code class="highlighter-rouge">RUN</code>コマンドを使って npm install を実行します。
+これはローカルマシン上において npm install を実行することと全く同じです。
+ただし今の場合、Node モジュールはイメージ内部にある<code class="highlighter-rouge">node_modules</code>ディレクトリにインストールされます。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>npm install <span class="nt">--production</span>
+</code></pre></div></div>
+
+<p>利用しているイメージは node バージョン 12.18.1 に基づくものであり、この時点において対応する依存パッケージをインストールしました。
+次に行うのは、ソースコードをイメージ内に置くことです。
+COPY コマンドを使って、上の<code class="highlighter-rouge">package.json</code>ファイルのコピーと同様の処理を行います。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> . .</span>
+</code></pre></div></div>
+
+<p>ここでの COPY コマンドは、カレントディレクトリにあるファイルをすべて、イメージ内にコピーします。
+そこで最後になすべきことは、コンテナー内部においてイメージが実行されたときに、どのようなコマンドを実行するかを Docker に指示することです。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
+</code></pre></div></div>
+
+<p>こうしてできあがった Dockerfile が以下です。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12.18.1</span>
+<span class="k">ENV</span><span class="s"> NODE_ENV=production</span>
+
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+
+<span class="k">COPY</span><span class="s"> ["package.json", "package-lock.json*", "./"]</span>
+
+<span class="k">RUN </span>npm install
+
+<span class="k">COPY</span><span class="s"> . .</span>
+
+<span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
+</code></pre></div></div>
+
+<h2 id="build-image">イメージのビルド</h2>
+
+<p>Dockerfile が生成できたので、イメージをビルドします。
+イメージビルドには<code class="highlighter-rouge">docker build</code>コマンドを使います。
+<code class="highlighter-rouge">docker build</code>コマンドは Dockerfile から Docker イメージをビルドし、さらに「コンテキスト」をビルドします。
+ビルドコンテキストとは、指定されるパスや URL 内にある一連のファイルのことです。
+Docker のビルド処理においてコンテキスト内にあるファイルは、すべてアクセスすることができます。</p>
+
+<p>ビルドコマンドでは<code class="highlighter-rouge">--tag</code>フラグを指定することがあります。
+このタグは、イメージ名に対して任意につけるタグというものを、<code class="highlighter-rouge">‘name:tag’</code>という書式により指定します。
+今のところは話を単純にするために、この任意の「タグ」は用いないことにします。
+タグを指定しない場合、Docker はデフォルトのタグとして「latest」というものを用います。
+このことはビルド処理の出力結果における最終行に示されます。</p>
+
+<p>でははじめての Docker イメージビルドを行います。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sending build context to Docker daemon  82.94kB
+Step 1/7 : FROM node:12.18.1
+<span class="nt">---</span><span class="o">&gt;</span> f5be1883c8e0
+Step 2/7 : WORKDIR /code
+...
+Successfully built e03018e56163
+Successfully tagged node-docker:latest
+Viewing Local Images
+To see a list of images we have on our <span class="nb">local </span>machine, we have two options. One is to use the CLI and the other is to use Docker Desktop. Since we are currently working <span class="k">in </span>the terminal <span class="nb">let</span>’s take a look at listing images with the CLI.
+</code></pre></div></div>
+
+<p>イメージの一覧を確認するには、単純に<code class="highlighter-rouge">images</code>コマンドを実行します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+node-docker         latest              3809733582bc        About a minute ago   945MB
+node                12.18.1             f5be1883c8e0        2 months ago         918MB
+</code></pre></div></div>
+
+<p>一覧には少なくとも 2 つのイメージがあるはずです。
+1 つはベースイメージ<code class="highlighter-rouge">node:12.18.1</code>に対するものであり、もう 1 つはまさにビルドした<code class="highlighter-rouge">node-docker:latest</code>イメージに対するものです。</p>
+
+<h2 id="tag-images">イメージのタグづけ</h2>
+
+<p>イメージ名は、スラッシュで区切られた要素により構成されます。
+要素に含めることができるのは、英小文字、数字と、区切り文字です。
+区切り文字とは、ピリオド、アンダースコア 1 つまたは 2 つ、1つまたは複数のダッシュです。
+各要素の先頭をセパレーターで始めることはできません。</p>
+
+<p>イメージは、マニフェストとレイヤーのリストによって構成されます。
+単純に表現すると「タグ」というのは、これらの成果物を組み合わせたものです。
+イメージに対しては複数のタグを定めることができます。
+そこでイメージに対して 2 つめのタグを作り出して、そのときのレイヤーを見てみることにします。</p>
+
+<p>これまでにビルドしたイメージに対して新たなタグを生成するには、以下のコマンドを実行します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker tag node-docker:latest node-docker:v1.0.0
+</code></pre></div></div>
+
+<p>Docker のタグコマンドは、イメージに対して新たなタグを生成します。
+これは新たなイメージを生成するものではありません。
+タグは同一のイメージを参照するものであり、イメージを別の方法によって参照するものです。</p>
+
+<p>ここで<code class="highlighter-rouge">docker images</code>コマンドを実行して、ローカルイメージの一覧を確認します。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+node-docker         latest              3809733582bc        24 minutes ago      945MB
+node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
+node                12.18.1             f5be1883c8e0        2 months ago        918MB
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">node-docker</code>で始まるイメージが 2 つあります。
+これらは同一イメージであることがすぐにわかります。
+IMAGE ID カラムを見てみれば、この 2 つのイメージに対する値は同一になっています。</p>
+
+<p>生成したばかりのタグを削除してみます。
+これを行うには rmi コマンドを使います。
+rmi は「remove image」（イメージの削除）を意味しています。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker rmi node-docker:v1.0.0
+Untagged: node-docker:v1.0.0
+</code></pre></div></div>
+
+<p>コマンド実行結果からわかることですが、イメージは削除されたわけではなく「untagged」（タグづけが解除）になったということです。
+このことを images コマンドを実行して確認します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+node-docker         latest              3809733582bc        32 minutes ago      945MB
+node                12.18.1             f5be1883c8e0        2 months ago        918MB
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">:v1.0.0</code>としてタグづけしたイメージは一覧からなくなりました。
+しかし<code class="highlighter-rouge">node-docker:latest</code>タグはまだ残っていて、マシンから利用可能な状態になっています。</p>
+
+<h2 id="conclusion">まとめ</h2>
+
+<p>ここで Node アプリケーションの例を設定する方法を見てきました。
+これはこの後に続くチュートリアルでも利用していきます。
+Docker イメージをビルドするために Dockerfile を生成し、イメージへのタグづけとその解除を行ってみました。</p>
+
+<p>次のチュートリアルでは <a href="/docs.docker.jp.onthefly/get-started/nodejs/run-containers/">コンテナーの実行</a> について見ていきます。</p>
+
+                            <!-- tags -->
+                            
+                            <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span
+                                style="vertical-align: 2px"><a
+                                    href="https://docs.docker.com/search/?q=containers">containers</a>, <a
+                                    href="https://docs.docker.com/search/?q=images">images</a>, <a
+                                    href="https://docs.docker.com/search/?q=node.js">node.js</a>, <a
+                                    href="https://docs.docker.com/search/?q=node">node</a>, <a
+                                    href="https://docs.docker.com/search/?q=dockerfiles">dockerfiles</a>, <a
+                                    href="https://docs.docker.com/search/?q=node">node</a>, <a
+                                    href="https://docs.docker.com/search/?q=coding">coding</a>, <a
+                                    href="https://docs.docker.com/search/?q=build">build</a>, <a
+                                    href="https://docs.docker.com/search/?q=push">push</a>, <a
+                                    href="https://docs.docker.com/search/?q=run">run</a></span>
+                            
+                            
+                            <div id="ratings-div"
+                                style="color:#b9c2cc; text-align: center; margin-top: 150px;">
+                                <div id="pd_rating_holder_8453675"></div>
+                                <script type="text/javascript">
+                                    PDRTJS_settings_8453675 = {
+                                        "id": "8453675",
+                                        "unique_id": "get-started/nodejs/build-images.md",
+                                        "title": "Node イメージのビルド",
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/get-started/nodejs/build-images.md"
+                                    };
+                                    (function (d, c, j) {
+                                        if (!document.getElementById(j)) {
+                                            var pd = d.createElement(c),
+                                                s;
+                                            pd.id = j;
+                                            pd.src = ('https:' == document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
+                                            s = document.getElementsByTagName(c)[0];
+                                            s.parentNode.insertBefore(pd, s);
+                                        }
+                                    }(document, 'script', 'pd-rating-js'));
+                                </script>
+                            </div>
+                            
+                        </section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+    <ul class="nav jsTOCHorizontal hidden-md hidden-lg">
+    </ul>
+    <div class="divider hidden-md hidden-lg"></div>
+    <ul class="nav" id="jsTOCLeftNav">
+    </ul>
+</div>
+
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul>
+                                        
+                                        <li><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/get-started/nodejs/build-images.md"><i
+                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
+                                        <li><a href="https://github.com/matsuand/docs.docker.jp/issues/new?body=ファイル: [get-started/nodejs/build-images.md](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/nodejs/build-images/)"
+                                                class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
+                                        <!-- toggle mode -->
+                                        <li>
+                                            <div class="toggle-mode">
+                                                <div class="icon">
+                                                    <i class="fa fa-sun-o" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="toggle-switch">
+                                                    <label class="switch">
+                                                        <input type="checkbox" id="switch-style">
+                                                        <div class="slider round"></div>
+                                                    </label>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-moon-o" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                
+                                
+                                
+                                <div id="side-toc-title">本ページ内:</div>
+                                
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
+  <li><a href="#overview" class="nomunge">概要</a></li>
+  <li><a href="#sample-application" class="nomunge">サンプルアプリケーション</a></li>
+  <li><a href="#test-application" class="nomunge">テストアプリケーション</a></li>
+  <li><a href="#create-a-dockerfile-for-nodejs" class="nomunge">Node.js 用の Dockerfile 生成</a></li>
+  <li><a href="#build-image" class="nomunge">イメージのビルド</a></li>
+  <li><a href="#tag-images" class="nomunge">イメージのタグづけ</a></li>
+  <li><a href="#conclusion" class="nomunge">まとめ</a></li>
+</ul>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/github.css">
+    
+    <script>var pageURL = "/get-started/nodejs/build-images/";</script>
+    <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/menu.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/metadata.js"></script>
+    <script src="/docs.docker.jp.onthefly/js/glossary.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script>
+    <script defer src="/docs.docker.jp.onthefly/js/toc.js"></script>
+    <script defer src="/js/search.js"></script>
+</body>
+
+
+</html>

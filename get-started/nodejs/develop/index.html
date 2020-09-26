@@ -60,14 +60,14 @@
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="概要とセットアップ"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="概要と準備 イメージの構築と実行 Docker Hub におけるイメージ共有 ようこそ！ みなさんが Docker の使い方を学ぼうとしているのはすばらしいことです。 このページでは順を追って手順を進めていくことで Docker を学んでいきます。 Dockercon 2020 のビデオウォークスルーもお勧めします。 Docker クイックスタートトレーニングでは、以下のことを学んでいきます。 Docker 環境のセットアップ（このページ） イメージの構築と実行 Docker Hub におけるイメージ共有 Docker の考え方 Docker は開発者やシステム管理者が、コンテナーを使ってアプリケーションをビルド、実行、共有するためのプラットフォームです。 コンテナーを利用してアプリケーションをデプロイすることを「コンテナー化」（containerization）と呼びます。 コンテナーは新たな技術というものではありませんが、これを使えばアプリケーションを簡単にデプロイできます。 コンテナー化は、よりポピュラーなものになっています。..." />
+  <meta name="twitter:title" itemprop="title name" content="開発向けのコンテナー利用"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="イメージのビルド イメージのコンテナーとしての実行 開発向けのコンテナー利用 前提条件 イメージのコンテナーとしての実行 を通じて、コンテナー化したアプリケーションであるイメージのビルドと実行を行っていること。 はじめに このチュートリアルでは、その前で作ったアプリケーションの開発環境をローカルに構築する手順を進めていきます。 Docker を使ってイメージをビルドするとともに Docker Compose を使って、あらゆるものを簡単に取り扱っていきます。 Compose を使ったローカル開発 notes-service プロジェクトは、データストアとして MongoDB を利用します。 本チュートリアルの 1 部からわかるように、Mongo コンテナーは手動で起動して、notes-service が起動している同一のネットワークに接続しなければなりません。 またボリュームをいくつか生成してデータ保存を行います。 こうすることでアプリケーションや MongoDB の再起動を行っても、データが失われないようにします。 本節では Compose..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
   <meta property="article:published_time" itemprop="datePublished" content="2020-09-26T16:45:28+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
+  <meta name="keywords" content="get started, NodeJS, local, development">
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
   <link id="pygments" rel="stylesheet" href="/docs.docker.jp.onthefly/css/pygments/perldoc.css">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>概要とセットアップ | Docker ドキュメント</title>
-  <meta property="og:title" content="概要とセットアップ" />
+  <title>開発向けのコンテナー利用 | Docker ドキュメント</title>
+  <meta property="og:title" content="開発向けのコンテナー利用" />
   <meta property="og:locale" content="ja_JP" />
-  <meta name="description" content="Get oriented on some basics of Docker and install Docker Desktop." />
-  <meta property="og:description" content="Get oriented on some basics of Docker and install Docker Desktop." />
-  <link rel="canonical" href="/get-started/" />
-  <meta property="og:url" content="https://docs.docker.com/get-started/" />
+  <meta name="description" content="Learn how to develop your application locally." />
+  <meta property="og:description" content="Learn how to develop your application locally." />
+  <link rel="canonical" href="/get-started/nodejs/develop/" />
+  <meta property="og:url" content="https://docs.docker.com/get-started/nodejs/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"概要とセットアップ","description":"Get oriented on some basics of Docker and install Docker Desktop.","url":"https://docs.docker.com/get-started/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"開発向けのコンテナー利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/get-started/nodejs/develop/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,7 +147,7 @@
                         <section class="section">
                             
                             
-                            <h1>概要とセットアップ</h1> 
+                            <h1>開発向けのコンテナー利用</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
@@ -158,169 +158,146 @@
 
                             
                             <ul class="pagination">
-  <li class="active"><a href="/docs.docker.jp.onthefly/get-started/part1">概要と準備</a></li>
-  <li><a href="/docs.docker.jp.onthefly/get-started/part2">イメージの構築と実行</a></li>
-  <li><a href="/docs.docker.jp.onthefly/get-started/part3">Docker Hub におけるイメージ共有</a></li>
+  <li><a href="/docs.docker.jp.onthefly/get-started/nodejs/build-images">イメージのビルド</a></li>
+  <li><a href="/docs.docker.jp.onthefly/get-started/nodejs/run-containers">イメージのコンテナーとしての実行</a></li>
+  <li class="active"><a href="/docs.docker.jp.onthefly/get-started/nodejs/develop">開発向けのコンテナー利用</a></li>
 </ul>
 
-<p>ようこそ！
-みなさんが Docker の使い方を学ぼうとしているのはすばらしいことです。</p>
+<h2 id="prerequisites">前提条件</h2>
 
-<p>このページでは順を追って手順を進めていくことで Docker を学んでいきます。
-Dockercon 2020 のビデオウォークスルーもお勧めします。</p>
+<p><a href="/docs.docker.jp.onthefly/get-started/nodejs/run-containers/">イメージのコンテナーとしての実行</a> を通じて、コンテナー化したアプリケーションであるイメージのビルドと実行を行っていること。</p>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<h2 id="introduction">はじめに</h2>
 
-<p>Docker クイックスタートトレーニングでは、以下のことを学んでいきます。</p>
+<p>このチュートリアルでは、その前で作ったアプリケーションの開発環境をローカルに構築する手順を進めていきます。
+Docker を使ってイメージをビルドするとともに Docker Compose を使って、あらゆるものを簡単に取り扱っていきます。</p>
 
-<ol>
-  <li>
-    <p>Docker 環境のセットアップ（このページ）</p>
-  </li>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/get-started/part2/">イメージの構築と実行</a></p>
-  </li>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/get-started/part3/">Docker Hub におけるイメージ共有</a></p>
-  </li>
-</ol>
+<h2 id="use-compose-to-develop-locally">Compose を使ったローカル開発</h2>
 
-<h2 id="docker-concepts">Docker の考え方</h2>
+<p>notes-service プロジェクトは、データストアとして MongoDB を利用します。
+本チュートリアルの 1 部からわかるように、Mongo コンテナーは手動で起動して、notes-service が起動している同一のネットワークに接続しなければなりません。
+またボリュームをいくつか生成してデータ保存を行います。
+こうすることでアプリケーションや MongoDB の再起動を行っても、データが失われないようにします。</p>
 
-<p>Docker は開発者やシステム管理者が、コンテナーを使ってアプリケーションを<strong>ビルド、実行、共有</strong>するためのプラットフォームです。
-コンテナーを利用してアプリケーションをデプロイすることを「コンテナー化」（<em>containerization</em>）と呼びます。
-コンテナーは新たな技術というものではありませんが、これを使えばアプリケーションを簡単にデプロイできます。</p>
+<p>本節では Compose ファイルを生成して node-docker と MongoDB を 1 つのコマンドで起動していきます。
+さらに Compose ファイルにおいては node-docker をデバッグモードで起動するように設定して、実行中のノードプロセスにデバッガーから接続します。</p>
 
-<p>コンテナー化は、よりポピュラーなものになっています。
-その理由は以下です。</p>
+<p>IDE またはテキストエディターにより notes-service を開いて、<code class="highlighter-rouge">docker-compose.dev.yml</code>という新規ファイルを生成します。
+そしてそのファイルに以下のコードをコピーペーストしてください。</p>
 
-<ul>
-  <li><strong>柔軟性</strong>: より複雑なアプリケーションであるほど、コンテナー化ができます。</li>
-  <li><strong>軽量</strong>: コンテナーはホストシステムのカーネルを活用し共有します。
-システムリソースを活用する観点からは、仮想環境よりもさらに効率性が増します。</li>
-  <li><strong>可搬性</strong>: ローカルでビルド、クラウドにデプロイ、どこでも動きます。</li>
-  <li><strong>疎結合</strong>: コンテナーは自己完結度が高くカプセル化されています。
-したがってコンテナーの入れ替えや更新は、他のものに影響を与えることなく行うことができます。</li>
-  <li><strong>スケーラブル</strong>: データセンター内において、コンテナーのレプリカを増やしたり自動的に提供することができます。</li>
-  <li><strong>セキュア</strong>: コンテナーはプロセスに対して強力な制約と分離を実現するため、ユーザー自身による制御を必要としません。</li>
-</ul>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
 
-<h3 id="images-and-containers">イメージとコンテナー</h3>
+<span class="na">services</span><span class="pi">:</span>
+ <span class="na">notes</span><span class="pi">:</span>
+   <span class="na">build</span><span class="pi">:</span>
+     <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+   <span class="na">ports</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">8080:8080</span>
+     <span class="pi">-</span> <span class="s">9229:9229</span>
+   <span class="na">environment</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">SERVER_PORT=8080</span>
+     <span class="pi">-</span> <span class="s">DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes</span>
+   <span class="na">volumes</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">./:/code</span>
+   <span class="na">command</span><span class="pi">:</span> <span class="s">npm run debug</span>
 
-<p>基本的にコンテナーとは、単にプロセスが起動しているものにすぎません。
-ただしホストや別のコンテナーと切り離すために、カプセル化された機能が加えられています。
-コンテナーを独立させる際に重要となる点として、各コンテナーが独自のプライベートなファイルシステムにアクセスすることがあげられます。
-このファイルシステムは Docker <strong>イメージ</strong> によって提供されるものです。
-イメージには、アプリケーションの実行に必要となるすべて、つまりコード、バイナリモジュール、ランタイム、依存パッケージなど、必要となるファイルシステムオブジェクトが含まれます。</p>
-
-<h3 id="containers-and-virtual-machines">コンテナーと仮想マシン</h3>
-
-<p>コンテナーは Linux 上においてネイティブに実行され、他のコンテナーも含めてホストマシン上のカーネルを共有します。
-そのプロセスは分離されていて、通常の実行モジュールよりも少ないメモリで動作します。
-つまり軽量化されています。</p>
-
-<p>これとは対照的に<strong>仮想マシン（virtual machine; VM）</strong>は、本格的な「ゲスト」オペレーティングシステムを稼動させ、仮想的なアクセスはハイパーバイザーを通じてホストリソースを操作します。
-VM ではより多くのオーバーヘッドが発生します。
-それはアプリケーションロジックにより生成される以上のものとなりまう。
-一般に仮想マシンが提供する環境は、通常のアプリケーションに比べて多くのリソースを必要とします。</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td><img src="/docs.docker.jp.onthefly/images/Container%402x.png" alt="コンテナースタックの例" width="300px" /></td>
-      <td><img src="/docs.docker.jp.onthefly/images/VM%402x.png" alt="仮想マシンスタックの例" width="300px" /></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="set-up-your-docker-environment">Docker 環境の構築</h2>
-
-<h3 id="download-and-install-docker-desktop">Docker Desktop のダウンロードとインストール</h3>
-
-<p>Docker Desktop は Mac や Windows 環境に簡単にインストールできるアプリケーションです。
-これを使えば、すぐにコーディングとコンテナー化を行うことができます。
-Docker Desktop には、コンテナー化するアプリケーションを自マシン上からビルド、実行するためのツールがすべて含まれています。</p>
-
-<p>利用しているオペレーティングシステムに対応する以下の手順に従って、Docker Desktop のダウンロードとインストールを行ってください。</p>
-
-<p><a href="/docs.docker.jp.onthefly/docker-for-mac/install/" target="_blank" class="_ button outline-btn">Docker Desktop for Mac</a> <a href="/docs.docker.jp.onthefly/docker-for-windows/install/" target="_blank" class="_ button outline-btn">Docker Desktop for Windows</a></p>
-
-<h3 id="test-docker-version">Docker バージョンの確認</h3>
-
-<p>Docker Desktop のインストールを正常に終えたら、端末画面を開いて <code class="highlighter-rouge">docker --version</code> を実行してください。
-自マシンにインストールされている Docker のバージョンを確認することができます。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nt">--version</span>
-Docker version 19.03.13, build 4484c46d9d
+ <span class="na">mongo</span><span class="pi">:</span>
+   <span class="na">image</span><span class="pi">:</span> <span class="s">mongo:4.2.8</span>
+   <span class="na">ports</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">27017:27017</span>
+   <span class="na">volumes</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">mongodb:/data/db</span>
+     <span class="pi">-</span> <span class="s">mongodb_config:/data/configdb</span>
+ <span class="na">volumes</span><span class="pi">:</span>
+   <span class="na">mongodb</span><span class="pi">:</span>
+   <span class="na">mongodb_config</span><span class="pi">:</span>
 </code></pre></div></div>
 
-<h3 id="test-docker-installation">Docker のインストール状況の確認</h3>
+<p>この Compose ファイルはとても優れていて、<code class="highlighter-rouge">docker run</code>コマンドにパラメーターを入力する面倒をなくしてくれます。
+Compose ファイル内では、すべてを宣言的に記述していきます。</p>
 
-<ol>
-  <li>
-    <p>インストールが正常に行われているかを確認するために Docker イメージである <a href="https://hub.docker.com/_/hello-world/" target="_blank" class="_">hello-world</a> を実行します。</p>
+<p>デバッガーをアタッチできるように、ポート 9229 を公開します。
+さらにローカルにあるソースコードを実行中のコンテナーにマッピングして、テキストエディター上でのソース変更を可能とし、さらにその変更をコンテナーが察知できるようにします。</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$ </span>docker run hello-world
+<p>Compose ファイルを利用する際の優れた機能として、サービスの名前を使っただけでサービス指定ができる点が挙げられます。
+そこで指定文字として「mongo」を利用します。
+mongo という文字を使うのは、Compose ファイルにおいて mongo サービスに対して、そのように命名したからです。</p>
 
-    Unable to find image <span class="s1">'hello-world:latest'</span> locally
-    latest: Pulling from library/hello-world
-    ca4f61b1923c: Pull <span class="nb">complete
-    </span>Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-    Status: Downloaded newer image <span class="k">for </span>hello-world:latest
+<p>アプリケーションを起動して、正常に動作することを確認します。</p>
 
-    Hello from Docker!
-    This message shows that your installation appears to be working correctly.
-    ...
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">docker image ls</code> を実行します。
-これにより自マシンにダウンロードされた <code class="highlighter-rouge">hello-world</code> イメージを確認します。</p>
-  </li>
-  <li>
-    <p>（イメージから実行される）<code class="highlighter-rouge">hello-world</code> コンテナーを一覧表示します。
-メッセージが表示された後は終了します。
-実行中であれば <code class="highlighter-rouge">--all</code> オプションをつける必要はありません。</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
+</code></pre></div></div>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nv">$ </span>docker ps <span class="nt">--all</span>
+<p>ここで<code class="highlighter-rouge">--build</code>フラグを与えています。
+これは Docker がイメージをコンパイルした上で起動するようにします。</p>
 
-    CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
-    54f4984ed6a8     hello-world     <span class="s2">"/hello"</span>     20 seconds ago     Exited <span class="o">(</span>0<span class="o">)</span> 19 seconds ago
-</code></pre></div>    </div>
-  </li>
-</ol>
+<p>うまく動作すれば、以下と同様に表示されます。</p>
+
+<p><img src="/docs.docker.jp.onthefly/get-started/nodejs/images/node-compile.png" alt="node-compile" /></p>
+
+<p>API エンドポイントをテストしてみます。
+以下の curl コマンドを実行してください。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/services/m/notes
+</code></pre></div></div>
+
+<p>以下のようなレスポンスが返ってくるはずです。</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="s2">"meta"</span><span class="p">:{</span><span class="s2">"total"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">"count"</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="s2">"payload"</span><span class="p">:[]}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="connect-a-debugger">デバッガーへの接続</h2>
+
+<p>ここで Chrome ブラウザーに付属しているデバッガーを利用することにします。
+マシン上において Chrome ブラウザーを開き、アドレスバーに以下を入力します。</p>
+
+<p><code class="highlighter-rouge">about:inspect</code></p>
+
+<p>以下の画面が開きます。</p>
+
+<p><img src="/docs.docker.jp.onthefly/get-started/nodejs/images/chrome-inspect.png" alt="Chrome-inspect" /></p>
+
+<p><strong>Open dedicated DevTools for Node</strong>（Node 専用の DevTools を開く）リンクをクリックします。
+これにより DevTools が開きます。
+このツールは、コンテナー内部で稼動している Node.js プロセスに接続されています。</p>
+
+<p>ソースコードを変更し、ブレークポイントを設定してみます。</p>
+
+<p>server.js ファイルの 19 行めに以下のコードを追加して、ファイルを保存します。</p>
+
+<pre><code class="language-node"> server.use( '/foo', (req, res) =&gt; {
+   return res.json({ "foo": "bar" })
+ })
+</code></pre>
+
+<p>Compose アプリケーションを実行しているターミナルを確認してみると、nodemon が変更を検出して、アプリケーションをリロードしているのがわかります。</p>
+
+<p><img src="/docs.docker.jp.onthefly/get-started/nodejs/images/nodemon.png" alt="nodemon" /></p>
+
+<p>Chrome のDevTools 画面に戻って、20 行目にブレークポイントを設定します。
+そして以下の curl コマンドを実行してブレークポイントまで進めます。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/foo
+</code></pre></div></div>
+
+<p>コードの 20 行目でブレークされたはずです。
+ここから普段使っている方法でデバッガーを操作できるようになります。
+変数を詳細に確認しウォッチすることや条件つきブレークポイントの設定、スタックトレースの確認などを行うことができます。</p>
 
 <h2 id="conclusion">まとめ</h2>
 
-<p>ここまでは開発マシン上に Docker Desktop をインストールし、簡単なテストを通じて、単純なコンテナー化アプリケーションを初めて構築し実行することを確認しました。</p>
-
-<p><a href="/docs.docker.jp.onthefly/get-started/part2/" class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%">2 部へ &gt;&gt;</a></p>
-
-<p>Node.js を使ったはじめてのコンテナー化アプリケーションをビルドして実行する方法は、<a href="/docs.docker.jp.onthefly/get-started/nodejs/build-images/">Node.js イメージのビルド</a> を参照してください。</p>
-
-<h2 id="cli-references">CLI リファレンス</h2>
-
-<p>本節において用いた CLI コマンドの詳細は、以下から確認することができます。</p>
-
-<ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/version/">docker version</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/run/">docker run</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/image/">docker image</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/reference/commandline/container/">docker container</a></li>
-</ul>
+<p>本稿を通じて、汎用的な開発イメージの生成方法を見てきました。
+それは普通のコマンドラインから実行することと全く同じことです。
+Compose ファイルを生成して、ソースコードを実行コンテナー内にマッピングし、デバッグ用のポート公開も行いました。</p>
 
                             <!-- tags -->
                             
                             <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span
                                 style="vertical-align: 2px"><a
                                     href="https://docs.docker.com/search/?q=get started">get started</a>, <a
-                                    href="https://docs.docker.com/search/?q=setup">setup</a>, <a
-                                    href="https://docs.docker.com/search/?q=orientation">orientation</a>, <a
-                                    href="https://docs.docker.com/search/?q=quickstart">quickstart</a>, <a
-                                    href="https://docs.docker.com/search/?q=intro">intro</a>, <a
-                                    href="https://docs.docker.com/search/?q=concepts">concepts</a>, <a
-                                    href="https://docs.docker.com/search/?q=containers">containers</a>, <a
-                                    href="https://docs.docker.com/search/?q=docker desktop">docker desktop</a></span>
+                                    href="https://docs.docker.com/search/?q=NodeJS">NodeJS</a>, <a
+                                    href="https://docs.docker.com/search/?q=local">local</a>, <a
+                                    href="https://docs.docker.com/search/?q=development">development</a></span>
                             
                             
                             <div id="ratings-div"
@@ -329,9 +306,9 @@ Docker version 19.03.13, build 4484c46d9d
                                 <script type="text/javascript">
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
-                                        "unique_id": "get-started/index.md",
-                                        "title": "概要とセットアップ",
-                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/get-started/index.md"
+                                        "unique_id": "get-started/nodejs/develop.md",
+                                        "title": "開発向けのコンテナー利用",
+                                        "permalink": "https://github.com/docker/docker.github.io/blob/master/get-started/nodejs/develop.md"
                                     };
                                     (function (d, c, j) {
                                         if (!document.getElementById(j)) {
@@ -366,9 +343,9 @@ Docker version 19.03.13, build 4484c46d9d
                                 <div class="feedback-links">
                                     <ul>
                                         
-                                        <li><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/get-started/index.md"><i
+                                        <li><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/get-started/nodejs/develop.md"><i
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-                                        <li><a href="https://github.com/matsuand/docs.docker.jp/issues/new?body=ファイル: [get-started/index.md](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/)"
+                                        <li><a href="https://github.com/matsuand/docs.docker.jp/issues/new?body=ファイル: [get-started/nodejs/develop.md](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/nodejs/develop/)"
                                                 class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
                                         <!-- toggle mode -->
                                         <li>
@@ -396,21 +373,11 @@ Docker version 19.03.13, build 4484c46d9d
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#docker-concepts" class="nomunge">Docker の考え方</a>
-    <ul>
-      <li><a href="#images-and-containers" class="nomunge">イメージとコンテナー</a></li>
-      <li><a href="#containers-and-virtual-machines" class="nomunge">コンテナーと仮想マシン</a></li>
-    </ul>
-  </li>
-  <li><a href="#set-up-your-docker-environment" class="nomunge">Docker 環境の構築</a>
-    <ul>
-      <li><a href="#download-and-install-docker-desktop" class="nomunge">Docker Desktop のダウンロードとインストール</a></li>
-      <li><a href="#test-docker-version" class="nomunge">Docker バージョンの確認</a></li>
-      <li><a href="#test-docker-installation" class="nomunge">Docker のインストール状況の確認</a></li>
-    </ul>
-  </li>
+  <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
+  <li><a href="#introduction" class="nomunge">はじめに</a></li>
+  <li><a href="#use-compose-to-develop-locally" class="nomunge">Compose を使ったローカル開発</a></li>
+  <li><a href="#connect-a-debugger" class="nomunge">デバッガーへの接続</a></li>
   <li><a href="#conclusion" class="nomunge">まとめ</a></li>
-  <li><a href="#cli-references" class="nomunge">CLI リファレンス</a></li>
 </ul>
 
 
@@ -502,7 +469,7 @@ Docker version 19.03.13, build 4484c46d9d
     </footer>
     <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/github.css">
     
-    <script>var pageURL = "/get-started/";</script>
+    <script>var pageURL = "/get-started/nodejs/develop/";</script>
     <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
     <script defer src="/docs.docker.jp.onthefly/js/menu.js"></script>
     <script src="/docs.docker.jp.onthefly/js/jquery.js"></script>

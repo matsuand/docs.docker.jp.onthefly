@@ -456,6 +456,13 @@ var pages = [
 }
 ,
 {
+"url":"/get-started/nodejs/build-images/",
+"title":"Node イメージのビルド",
+"description":"Learn how to build your first Docker image by writing a Dockerfile",
+"keywords":"containers, images, node.js, node, dockerfiles, node, coding, build, push, run"
+}
+,
+{
 "url":"/compose/reference/build/",
 "title":"docker-compose build",
 "description":"サービスのビルドまたは再ビルド。",
@@ -1265,6 +1272,13 @@ var pages = [
 "title":"Docker 開発のベストプラクティス",
 "description":"Docker アプリケーションの開発をより簡単に進めるための経験則を示します。",
 "keywords":"application, development"
+}
+,
+{
+"url":"/get-started/nodejs/develop/",
+"title":"開発向けのコンテナー利用",
+"description":"Learn how to develop your application locally.",
+"keywords":"get started, NodeJS, local, development"
 }
 ,
 {
@@ -3393,6 +3407,13 @@ var pages = [
 "title":"root ユーザー以外による Docker デーモン起動（rootless モード）",
 "description":"root ユーザー以外によって Docker デーモンを起動します（rootless モード）。",
 "keywords":"security, namespaces, rootless"
+}
+,
+{
+"url":"/get-started/nodejs/run-containers/",
+"title":"イメージのコンテナーとしての実行",
+"description":"Learn how to run the image as a container.",
+"keywords":"get started, Node JS, run, container,"
 }
 ,
 {
