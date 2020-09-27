@@ -83,7 +83,7 @@ function bindSearch()
         if (autoCompleteShowingID==autoCompleteResultLimit || autoCompleteShowingID == -1 || autoCompleteShowing == false)
         {
           // "see all" is selected or they don't have an autocomplete result selected
-          loadPage("/search/?q=" + $("#st-search-input").val());
+          loadPage({{ site.baseurl }} + "/search/?q=" + $("#st-search-input").val());
         } else {
           // an autocomplete result is selected
           loadPage(pages[displayingAutcompleteResults[autoCompleteShowingID]].url);

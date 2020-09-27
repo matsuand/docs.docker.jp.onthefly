@@ -850,24 +850,24 @@ definitions:
     type: "object"
     properties:
       Hostname:
-        description: "The hostname to use for the container, as a valid RFC 1123 hostname."
+        description: "コンテナーにおいて利用するホスト名。RFC 1123 に基づく適切なホスト名にします。"
         type: "string"
       Domainname:
-        description: "The domain name to use for the container."
+        description: "コンテナーにおいて利用するドメイン名。"
         type: "string"
       User:
-        description: "The user that commands are run as inside the container."
+        description: "コンテナー内部でコマンドを実行するユーザー。"
         type: "string"
       AttachStdin:
-        description: "Whether to attach to `stdin`."
+        description: "`stdin`にアタッチするかどうか。"
         type: "boolean"
         default: false
       AttachStdout:
-        description: "Whether to attach to `stdout`."
+        description: "`stdout`にアタッチするかどうか。"
         type: "boolean"
         default: true
       AttachStderr:
-        description: "Whether to attach to `stderr`."
+        description: "`stderr`にアタッチするかどうか。"
         type: "boolean"
         default: true
       ExposedPorts:
@@ -4415,7 +4415,7 @@ paths:
     get:
       summary: "コンテナーの一覧出力"
       description: |
-        Returns a list of containers. For details on the format, see [the inspect endpoint](#operation/ContainerInspect).
+        コンテナーの一覧を返します。出力書式の詳細は [inspect endpoint](#operation/ContainerInspect) を参照してください。
 
         Note that it uses a different, smaller representation of a container than inspecting a single container. For example,
         the list of linked containers is not propagated .
@@ -4425,38 +4425,38 @@ paths:
       parameters:
         - name: "all"
           in: "query"
-          description: "Return all containers. By default, only running containers are shown"
+          description: "全コンテナーを返します。デフォルトでは実行中コンテナーのみ返します。"
           type: "boolean"
           default: false
         - name: "limit"
           in: "query"
-          description: "Return this number of most recently created containers, including non-running ones."
+          description: "この数値分の最近に生成されたコンテナーを返します。停止中コンテナーを含みます。"
           type: "integer"
         - name: "size"
           in: "query"
-          description: "Return the size of container as fields `SizeRw` and `SizeRootFs`."
+          description: "コンテナーのサイズをフィールド`SizeRw`と`SizeRootFs`により返します。"
           type: "boolean"
           default: false
         - name: "filters"
           in: "query"
           description: |
-            Filters to process on the container list, encoded as JSON (a `map[string][]string`). For example, `{"status": ["paused"]}` will only return paused containers. Available filters:
+            コンテナー一覧をフィルター検索します。JSON 形式でエンコードします(`map[string][]string`)。 たとえば`{"status": ["paused"]}`とすると停止中のコンテナーを検索します。利用可能なフィルターは以下のとおりです。
 
-            - `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, or `<image@digest>`)
-            - `before`=(`<container id>` or `<container name>`)
+            - `ancestor`=(`<image-name>[:<tag>]`, `<image id>`, `<image@digest>`)
+            - `before`=(`<container id>`または`<container name>`)
             - `expose`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-            - `exited=<int>` containers with exit code of `<int>`
+            - `exited=<int>` 終了コード`<int>`のコンテナー
             - `health`=(`starting`|`healthy`|`unhealthy`|`none`)
-            - `id=<ID>` a container's ID
-            - `isolation=`(`default`|`process`|`hyperv`) (Windows daemon only)
+            - `id=<ID>` コンテナー ID
+            - `isolation=`(`default`|`process`|`hyperv`) (Windows デーモンのみ)
             - `is-task=`(`true`|`false`)
-            - `label=key` or `label="key=value"` of a container label
-            - `name=<name>` a container's name
-            - `network`=(`<network id>` or `<network name>`)
+            - `label=key`または`label="key=value"`というコンテナーラベル
+            - `name=<name>` コンテナー名
+            - `network`=(`<network id>`または`<network name>`)
             - `publish`=(`<port>[/<proto>]`|`<startport-endport>/[<proto>]`)
-            - `since`=(`<container id>` or `<container name>`)
+            - `since`=(`<container id>`または`<container name>`)
             - `status=`(`created`|`restarting`|`running`|`removing`|`paused`|`exited`|`dead`)
-            - `volume`=(`<volume name>` or `<mount point destination>`)
+            - `volume`=(`<volume name>`または`<mount point destination>`)
           type: "string"
       responses:
         200:
@@ -4601,7 +4601,7 @@ paths:
       tags: ["Container"]
   /containers/create:
     post:
-      summary: "コンテナーの生成"
+      summary: "コンテナーを生成します。"
       operationId: "ContainerCreate"
       consumes:
         - "application/json"
@@ -4611,7 +4611,7 @@ paths:
       parameters:
         - name: "name"
           in: "query"
-          description: "Assign the specified name to the container. Must match `/?[a-zA-Z0-9][a-zA-Z0-9_.-]+`."
+          description: "指定する名前をコンテナーに割り当てます。`/?[a-zA-Z0-9][a-zA-Z0-9_.-]+`に合致している必要があります。"
           type: "string"
           pattern: "^/?[a-zA-Z0-9][a-zA-Z0-9_.-]+$"
         - name: "body"
