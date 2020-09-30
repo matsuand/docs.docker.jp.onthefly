@@ -1927,9 +1927,9 @@ var pages = [
 ,
 {
 "url":"/engine/security/",
-"title":"Secure Engine",
-"description":"Sec",
-"keywords":"seccomp, security, docker, documentation"
+"title":"Docker のセキュリティ",
+"description":"Review of the Docker Daemon attack surface",
+"keywords":"Docker, Docker documentation, security"
 }
 ,
 {
@@ -3523,7 +3523,7 @@ var pages = [
 ,
 {
 "url":"/search/",
-"title":"Docs search",
+"title":"Docs 検索",
 "description":"Docker documentation search results",
 "keywords":"Search, Docker, documentation, manual, guide, reference, api"
 }
