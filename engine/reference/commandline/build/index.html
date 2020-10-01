@@ -1,4 +1,4 @@
-<!-- Page generated 2020-09-28 21:49:45 +0900 -->
+<!-- Page generated 2020-10-01 20:47:28 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-28T21:49:45+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-01T20:47:28+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="説明 Dockerfile からイメージをビルドします。 利用方法 docker build [オプション] PATH | URL | - 追加説明 docker build コマンドは Dockerfile と「ビルドコンテキスト」から Docker イメージをビルドします。 ビルドコンテキストとは、指定された PATH や URL に存在している一連のファイルのことです。 ビルド処理においては、コンテキスト内のどのファイルでも参照できます。 たとえばビルドにおいて COPY 命令を使っている場合に、コンテキスト内のファイルを参照することができます。 URL..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-09-28T21:49:45+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-01T20:47:28+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
@@ -259,6 +259,13 @@ Git リポジトリ、パッケージングされた tarball コンテキスト�
     </tr>
   </tbody>
 </table>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>ビルダーとして BuildKit を利用している（<code class="highlighter-rouge">DOCKER_BUILDKIT=1</code>）場合は、ビルドコンテキスト（上の例では<code class="highlighter-rouge">myfolder</code>）を指定することはできません。
+この機能へのサポートは <a href="https://github.com/moby/buildkit/issues/1684">buildkit#1684</a> において行われています。</p>
+</blockquote>
 
 <h3 id="tarball-contexts">Tarball コンテキスト</h3>
 
@@ -987,8 +994,9 @@ Dockerfile リファレンスにおいて、<a href="/engine/reference/builder/#
 ですから<code class="highlighter-rouge">debug</code>というファイルは、コマンドライン上でどのように参照していようが、結局はビルドコンテキストのディレクトリ構造内のものとなります。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>
-ビルドコンテキストがアップロードされたときに、ファイルやディレクトリが存在していないと、<code class="highlighter-rouge">docker build</code>コマンドは<code class="highlighter-rouge">no such file or directory</code>のエラーを出力します。
+  <p><strong>メモ</strong></p>
+
+  <p>ビルドコンテキストがアップロードされたときに、ファイルやディレクトリが存在していないと、<code class="highlighter-rouge">docker build</code>コマンドは<code class="highlighter-rouge">no such file or directory</code>のエラーを出力します。
 よくあるのがコンテキストが存在していない場合や、ホストシステムのまったく別の場所に置かれているファイルを指定したような場合です。
 セキュリティ上の理由から、コンテキストはカレントディレクトリ（およびそのサブディレクトリ）に限定されます。
 またリモートの Docker ホスト上において何度でも確実にビルドできるものでなければなりません。
@@ -1264,25 +1272,34 @@ BuildKit には、プルしたイメージをキャッシュとして再利用�
 
 <h4 id="prerequisites">前提条件</h4>
 
-<p>本ページに示す利用例においては、Docker 1.13 の試験的（experimental）モードを利用しています。</p>
+<p>本ページに示す利用例においては、Docker 19.03 の試験的（experimental）モードを利用しています。</p>
 
 <p>試験的モードは、Docker デーモンの起動時に<code class="highlighter-rouge">--experimental</code>フラグをつけることで有効になります。
 あるいは設定ファイル<code class="highlighter-rouge">daemon.json</code>において<code class="highlighter-rouge">experimental: true</code>を設定します。</p>
 
 <p>デフォルトで試験的モードは無効になっています。
-現在の設定を確認するには<code class="highlighter-rouge">docker version</code>コマンドを実行します。</p>
+Docker デーモンの現在の設定を確認するには<code class="highlighter-rouge">docker version</code>コマンドを実行して<code class="highlighter-rouge">Engine</code>セクションの<code class="highlighter-rouge">Experimental</code>の行に示されています。</p>
 
-<pre><code class="language-none">Server:
- Version:      1.13.1
- API version:  1.26 (minimum version 1.12)
- Go version:   go1.7.5
- Git commit:   092cba3
- Built:        Wed Feb  8 06:35:24 2017
- OS/Arch:      linux/amd64
- Experimental: false
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Client: Docker Engine - Community
+ Version:           19.03.8
+ API version:       1.40
+ Go version:        go1.12.17
+ Git commit:        afacb8b
+ Built:             Wed Mar 11 01:21:11 2020
+ OS/Arch:           darwin/amd64
+ Experimental:      false
 
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.8
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.17
+  Git commit:       afacb8b
+  Built:            Wed Mar 11 01:29:16 2020
+  OS/Arch:          linux/amd64
+  Experimental:     true
  [...]
-</code></pre>
+</span></code></pre></div></div>
 
 <p>試験的モードを有効にするには、experimental フラグを有効にした上で Docker デーモンを再起動する必要があります。</p>
 
@@ -1290,7 +1307,7 @@ BuildKit には、プルしたイメージをキャッシュとして再利用�
 
 <p>試験的機能は、標準的な Docker バイナリのバージョン 1.13.0 以降に含まれるようになりました。
 試験的機能を有効にするには、Docker デーモンに<code class="highlighter-rouge">--experimental</code>フラグをつけて実行することが必要です。
-あるいは /etc/docker/daemon.json において、以下のようにしてデーモンフラグを有効にすることもできます。</p>
+あるいは<code class="highlighter-rouge">/etc/docker/daemon.json</code>において、以下のようにしてデーモンフラグを有効にすることもできます。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"experimental"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -1311,7 +1328,7 @@ BuildKit には、プルしたイメージをキャッシュとして再利用�
 <span class="k">RUN </span><span class="nb">echo </span>hello <span class="o">&gt;</span> /hello
 <span class="k">RUN </span><span class="nb">echo </span>world <span class="o">&gt;&gt;</span> /hello
 <span class="k">RUN </span>touch remove_me /remove_me
-<span class="k">ENV</span><span class="s"> HELLO world</span>
+<span class="k">ENV</span><span class="s"> HELLO=world</span>
 <span class="k">RUN </span>rm /remove_me
 </code></pre></div></div>
 
@@ -1337,11 +1354,11 @@ BuildKit には、プルしたイメージをキャッシュとして再利用�
 &lt;missing&gt;           7 weeks ago         /bin/sh <span class="nt">-c</span> <span class="c">#(nop) ADD file:47ca6e777c36a4cfff   1.113 MB</span>
 </code></pre></div></div>
 
-<p>確認すればわかるように、レイヤーの名前はすべて<code class="highlighter-rouge">&lt;missing&gt;</code>となっています。
+<p>見てみればわかるように、レイヤーの名前が<code class="highlighter-rouge">&lt;missing&gt;</code>となっています。
 そして新しいレイヤーがあって、そのコメントに<code class="highlighter-rouge">merge</code>と書かれています。</p>
 
 <p>イメージを確認してください。
-<code class="highlighter-rouge">/remove_me</code>は削除されていて、<code class="highlighter-rouge">/hello</code>の中身は<code class="highlighter-rouge">hello\nworld</code>、変数<code class="highlighter-rouge">HELLO</code>の値は<code class="highlighter-rouge">world</code>となっていることをそれぞれ確認してください。</p>
+<code class="highlighter-rouge">/remove_me</code>は削除されていて、<code class="highlighter-rouge">/hello</code>の中身は<code class="highlighter-rouge">hello\nworld</code>、環境変数<code class="highlighter-rouge">HELLO</code>の値は<code class="highlighter-rouge">world</code>となっていることをそれぞれ確認してください。</p>
 
 <h2 id="parent-command">上位コマンド</h2>
 

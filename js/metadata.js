@@ -533,6 +533,13 @@ var pages = [
 }
 ,
 {
+"url":"/engine/reference/commandline/buildx_du/",
+"title":"docker buildx du",
+"description":null,
+"keywords":null
+}
+,
+{
 "url":"/engine/reference/commandline/buildx_imagetools/",
 "title":"docker buildx imagetools",
 "description":null,
@@ -563,6 +570,13 @@ var pages = [
 {
 "url":"/engine/reference/commandline/buildx_ls/",
 "title":"docker buildx ls",
+"description":null,
+"keywords":null
+}
+,
+{
+"url":"/engine/reference/commandline/buildx_prune/",
+"title":"docker buildx prune",
 "description":null,
 "keywords":null
 }
@@ -1199,9 +1213,9 @@ var pages = [
 ,
 {
 "url":"/desktop/dashboard/",
-"title":"Docker Desktop ダッシュボード",
-"description":"Docker Desktop ダッシュボード",
-"keywords":"Docker Desktop Dashboard, container view"
+"title":"Docker ダッシュボード",
+"description":"Docker ダッシュボード",
+"keywords":"Docker Dashboard, manage, containers, images"
 }
 ,
 {
@@ -3278,8 +3292,8 @@ var pages = [
 ,
 {
 "url":"/docker-for-mac/release-notes/",
-"title":"Docker for Mac Stable release notes",
-"description":"Change log / release notes per Stable release",
+"title":"Docker for Mac 安定版リリースノート",
+"description":"安定版リリースの変更履歴、リリースノート。",
 "keywords":"Docker Desktop for Mac, stable, release notes"
 }
 ,
