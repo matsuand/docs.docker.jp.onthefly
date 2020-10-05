@@ -1,4 +1,4 @@
-<!-- Page generated 2020-09-27 13:40:57 +0900 -->
+<!-- Page generated 2020-10-05 20:43:07 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,17 +54,17 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-09-27T13:40:57+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-05T20:43:07+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:title" itemprop="title name" content="Administer and maintain a swarm of Docker Engines"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="When you run a swarm of Docker Engines, manager nodes are the key components for managing the swarm and storing the swarm state. It is important to understand some key..." />
+  <meta name="twitter:title" itemprop="title name" content="Docker Engine の Swarm 管理と保守"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="Docker Engine において Swarm を起動している場合、マネージャーノード が主要な要素であり、Swarm を管理し、Swarm の状態を保持します。 ですからマネージャーノードの主な機能を理解しておくことが重要です。 これを知ることによって、適切なデプロイと Swarm の保守が可能になります。 ノードの動作 を参照して、Docker Swarm モードの概要や、マネージャーノード、ワーカーノードの違いについて理解しておいてください。 Swarm におけるマネージャーノードの操作 Swarm マネージャーノードは Raft 合意アルゴリズム（Raft Consensus Algorithm）を利用して、Swarm の状態を管理しています。 Swarm を管理する上では、Raft の一般的な考え方をいくつか理解しておくだけで十分です。 マネージャーノードの数には制限がありません。 マネージャーノードをいくつに設定するかは、性能とフォールトトレランスとのトレードオフです。..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-09-27T13:40:57+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-05T20:43:07+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="docker, container, swarm, manager, raft">
@@ -76,15 +76,15 @@
   <!-- Go get "Open Sans" font from Google -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <!-- SEO stuff -->
-  <title>Administer and maintain a swarm of Docker Engines | Docker ドキュメント</title>
-  <meta property="og:title" content="Administer and maintain a swarm of Docker Engines" />
+  <title>Docker Engine の Swarm 管理と保守 | Docker ドキュメント</title>
+  <meta property="og:title" content="Docker Engine の Swarm 管理と保守" />
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="Manager administration guide" />
   <meta property="og:description" content="Manager administration guide" />
   <link rel="canonical" href="/docs.docker.jp.onthefly/engine/swarm/admin_guide/" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/admin_guide/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Administer and maintain a swarm of Docker Engines","description":"Manager administration guide","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/admin_guide/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine の Swarm 管理と保守","description":"Manager administration guide","url":"https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/admin_guide/"}</script>
   <!-- END SEO STUFF -->
   
 </head>
@@ -147,89 +147,78 @@
                         <section class="section">
                             
                             
-                            <h1>Administer and maintain a swarm of Docker Engines</h1> 
+                            <h1>Docker Engine の Swarm 管理と保守</h1> 
                             <span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    16 分
+    5 分
   
 </span>
 
                             
-                            <p>When you run a swarm of Docker Engines, <strong>manager nodes</strong> are the key components
-for managing the swarm and storing the swarm state. It is important to
-understand some key features of manager nodes to properly deploy and
-maintain the swarm.</p>
+                            
+<p>Docker Engine において Swarm を起動している場合、<strong>マネージャーノード</strong> が主要な要素であり、Swarm を管理し、Swarm の状態を保持します。
+ですからマネージャーノードの主な機能を理解しておくことが重要です。
+これを知ることによって、適切なデプロイと Swarm の保守が可能になります。</p>
 
-<p>Refer to <a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/nodes/">How nodes work</a>
-for a brief overview of Docker Swarm mode and the difference between manager and
-worker nodes.</p>
+<p><a href="/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/nodes/">ノードの動作</a> を参照して、Docker Swarm モードの概要や、マネージャーノード、ワーカーノードの違いについて理解しておいてください。</p>
 
-<h2 id="operate-manager-nodes-in-a-swarm">Operate manager nodes in a swarm</h2>
+<h2 id="operate-manager-nodes-in-a-swarm">Swarm におけるマネージャーノードの操作</h2>
 
-<p>Swarm manager nodes use the <a href="/docs.docker.jp.onthefly/engine/swarm/raft/">Raft Consensus Algorithm</a> to manage the
-swarm state. You only need to understand some general concepts of Raft in
-order to manage a swarm.</p>
+<p>Swarm マネージャーノードは <a href="/docs.docker.jp.onthefly/engine/swarm/raft/">Raft 合意アルゴリズム</a>（Raft Consensus Algorithm）を利用して、Swarm の状態を管理しています。
+Swarm を管理する上では、Raft の一般的な考え方をいくつか理解しておくだけで十分です。</p>
 
-<p>There is no limit on the number of manager nodes. The decision about how many
-manager nodes to implement is a trade-off between performance and
-fault-tolerance. Adding manager nodes to a swarm makes the swarm more
-fault-tolerant. However, additional manager nodes reduce write performance
-because more nodes must acknowledge proposals to update the swarm state.
-This means more network round-trip traffic.</p>
+<p>マネージャーノードの数には制限がありません。
+マネージャーノードをいくつに設定するかは、性能とフォールトトレランスとのトレードオフです。
+マネージャーノードを Swarm に追加すれば、障害には強くなります。
+しかしマネージャーノードが増えれば書き込み性能は低下します。
+Swarm 状態の更新処理を、より多くのノードにおいて受けつけなければならないからです。
+これはつまりネットワークのラウンドトリップトラフィックを意味します。</p>
 
-<p>Raft requires a majority of managers, also called the quorum, to agree on
-proposed updates to the swarm, such as node additions or removals. Membership
-operations are subject to the same constraints as state replication.</p>
+<p>Raft では Swarm において提案される更新処理、たとえばノード追加や削除といった処理に対して、多数のマネージャーが承認する必要があります。
+多数というのは quorum とも呼ばれます。
+メンバーに関わる処理に関しては、状態レプリケーションと同様の制約が適用されます。</p>
 
-<h3 id="maintain-the-quorum-of-managers">Maintain the quorum of managers</h3>
+<h3 id="maintain-the-quorum-of-managers">マネージャーの quorum 管理</h3>
 
-<p>If the swarm loses the quorum of managers, the swarm cannot perform management
-tasks. If your swarm has multiple managers, always have more than two.
-To maintain quorum, a majority of managers must be available. An odd number of
-managers is recommended, because the next even number does not make the quorum
-easier to keep. For instance, whether you have 3 or 4 managers, you can still
-only lose 1 manager and maintain the quorum. If you have 5 or 6 managers, you
-can still only lose two.</p>
+<p>Swarm がマネージャーの quorum（多数票）を得られなかった場合、この Swarm は管理タスクを実行できません。
+Swarm のマネージャーを複数にする場合は、必ず 3 つ以上にしてください。
+quorum を維持するためには、マネージャーが多数いるという状態がなければなりません。
+マネージャー数は奇数にすることが推奨されています。
+仮にもう 1 つ加えて偶数にしてしまうと quorum を簡単には取り扱えなくなります。
+たとえばマネージャー数が 3 つあるいは 4 つである場合、1 つのマネージャーを失っても quorum を維持することができます。これが 5 つあるいは 6 つであれば 2 つまでなら失っても維持が可能です。</p>
 
-<p>Even if a swarm loses the quorum of managers, swarm tasks on existing worker
-nodes continue to run. However, swarm nodes cannot be added, updated, or
-removed, and new or existing tasks cannot be started, stopped, moved, or
-updated.</p>
+<p>仮に Swarm がマネージャーの quorum を維持できなくなったとしても、既存のワーカーノード上での Swarm タスクは処理続行されます。
+ただし Swarm ノードの追加、更新、削除はできなくなります。
+さらに新規や既存のタスクに対する起動、停止、移動、更新ができなくなります。</p>
 
-<p>See <a href="#recover-from-losing-the-quorum">Recovering from losing the quorum</a> for
-troubleshooting steps if you do lose the quorum of managers.</p>
+<p>マネージャーが quorum を失った場合の対処方法については <a href="#recover-from-losing-the-quorum">quorum を失ってからの回復</a> を参照してください。</p>
 
-<h2 id="configure-the-manager-to-advertise-on-a-static-ip-address">Configure the manager to advertise on a static IP address</h2>
+<h2 id="configure-the-manager-to-advertise-on-a-static-ip-address">マネージャーの通知アドレスへのスタティック IP アドレス設定</h2>
 
-<p>When initiating a swarm, you must specify the <code class="highlighter-rouge">--advertise-addr</code> flag to
-advertise your address to other manager nodes in the swarm. For more
-information, see <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-mode/#configure-the-advertise-address">Run Docker Engine in swarm mode</a>. Because manager nodes are
-meant to be a stable component of the infrastructure, you should use a <em>fixed
-IP address</em> for the advertise address to prevent the swarm from becoming
-unstable on machine reboot.</p>
+<p>Swarm を初期化する際には<code class="highlighter-rouge">--advertise-addr</code>フラグの指定により、Swarm ないの別のマネージャーノードに対して自身のアドレスを通知（advertise）する必要があります。
+詳しくは<a href="/docs.docker.jp.onthefly/engine/swarm/swarm-mode/#configure-the-advertise-address">Swarm モードによる Docker Engine の実行</a> を参照してください。
+マネージャーノードはそのインフラストラクチャーの中でも安定した構成要素であることが求められます。
+したがって通知アドレスには <strong>固定 IP アドレス</strong> を指定すべきであり、これによってマシンの再起動を行っても Swarm が不安定にならないようにする必要があります。</p>
 
-<p>If the whole swarm restarts and every manager node subsequently gets a new IP
-address, there is no way for any node to contact an existing manager. Therefore
-the swarm is hung while nodes try to contact one another at their old IP addresses.</p>
+<p>Swarm 全体が再起動してマネージャーノードが次々に新たな IP アドレスを取得したら、どのノードもマネージャーに接続できなくなります。
+そして各ノードは、お互いに古い IP アドレスを使ってアクセスしようと試みるために Swarm がハングしてしまいます。</p>
 
-<p>Dynamic IP addresses are OK for worker nodes.</p>
+<p>動的 IP アドレスはワーカーノードに対してなら用いてもかまいません。</p>
 
-<h2 id="add-manager-nodes-for-fault-tolerance">Add manager nodes for fault tolerance</h2>
+<h2 id="add-manager-nodes-for-fault-tolerance">耐障害性のためのマネージャーノード追加</h2>
 
-<p>You should maintain an odd number of managers in the swarm to support manager
-node failures. Having an odd number of managers ensures that during a network
-partition, there is a higher chance that the quorum remains available to process
-requests if the network is partitioned into two sets. Keeping the quorum is not
-guaranteed if you encounter more than two network partitions.</p>
+<p>Swarm においてノード障害に対処するには、マネージャーノード数を奇数に保つことが必要です。
+マネージャーを奇数にしておくと、ネットワークパーティション分割の処理が発生した際に、そのパーティンションがちょうど 2 つに分かれたのであれば、quorum がリクエストを処理し続けられる可能性が確実に高まります。
+なおネットワークパーティションが 3 つ以上に分かれた場合には quorum の機能維持は保証されません。</p>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: center">Swarm Size</th>
-      <th style="text-align: center">Majority</th>
-      <th style="text-align: center">Fault Tolerance</th>
+      <th style="text-align: center">Swarm サイズ</th>
+      <th style="text-align: center">多数票</th>
+      <th style="text-align: center">耐障害性</th>
     </tr>
   </thead>
   <tbody>
@@ -281,37 +270,31 @@ guaranteed if you encounter more than two network partitions.</p>
   </tbody>
 </table>
 
-<p>For example, in a swarm with <em>5 nodes</em>, if you lose <em>3 nodes</em>, you don’t have a
-quorum. Therefore you can’t add or remove nodes until you recover one of the
-unavailable manager nodes or recover the swarm with disaster recovery
-commands. See <a href="#recover-from-disaster">Recover from disaster</a>.</p>
+<p>たとえば <strong>5 つのノード</strong> からなる Swarm において <strong>3 つのノード</strong> を失ったら、quorum は 1 つもありません。
+こうなるとノードの追加や削除はできなくなります。
+利用不能になったマネージャーノードを復旧するか、障害回復のためのコマンドを使って Swarm を回復させなければなりません。
+<a href="#recover-from-disaster">障害からの復旧</a> を参照してください。</p>
 
-<p>While it is possible to scale a swarm down to a single manager node, it is
-impossible to demote the last manager node. This ensures you maintain access to
-the swarm and that the swarm can still process requests. Scaling down to a
-single manager is an unsafe operation and is not recommended. If
-the last node leaves the swarm unexpectedly during the demote operation, the
-swarm becomes unavailable until you reboot the node or restart with
-<code class="highlighter-rouge">--force-new-cluster</code>.</p>
+<p>Swarm をスケールダウンして単一のマネージャーノードにすることは可能ですが、最後に残るマネージャーノードを降格させることはできません。
+最低 1 つのマネージャーを残しておかないと、Swarm にアクセスできなくなり、リクエストを処理することができなくなります。
+ただし単一のマネージャーノードにスケールダウンすることは、安全な操作とは言えないため推奨されません。
+その最後のノードが降格処理の際に、図らずも Swarm から離れてしまった場合、Swarm を操作することはできなくなります。
+これを復旧するには、ノードを再起動するか、あるいは<code class="highlighter-rouge">--force-new-cluster</code>を使って再起動することが必要になります。</p>
 
-<p>You manage swarm membership with the <code class="highlighter-rouge">docker swarm</code> and <code class="highlighter-rouge">docker node</code>
-subsystems. Refer to <a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Add nodes to a swarm</a> for more information
-on how to add worker nodes and promote a worker node to be a manager.</p>
+<p>Swarm へのメンバー管理には、サブシステム<code class="highlighter-rouge">docker swarm</code>および<code class="highlighter-rouge">docker node</code>を利用します。
+ワーカーノードの追加方法や、マネージャーノードへの昇格方法についての詳細は、<a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Swarm へのノード追加</a> を参照してください。</p>
 
-<h3 id="distribute-manager-nodes">Distribute manager nodes</h3>
+<h3 id="distribute-manager-nodes">分散マネージャーノード</h3>
 
-<p>In addition to maintaining an odd number of manager nodes, pay attention to
-datacenter topology when placing managers. For optimal fault-tolerance, distribute
-manager nodes across a minimum of 3 availability-zones to support failures of an
-entire set of machines or common maintenance scenarios. If you suffer a failure
-in any of those zones, the swarm should maintain the quorum of manager nodes
-available to process requests and rebalance workloads.</p>
+<p>マネージャーノードを奇数に維持することに加えて、マネージャーの配置に関してはデータセンターのトポロジーに配慮することも必要です。
+最適なフォールトトレランスを実現するには、最低でも 3 つのアベイラビリティーゾーン（availability-zones）にマネージャーノードを分散して、マシン全体の障害へ対処したり、一般的なメンテナンス計画を立てたりすることが求められます。
+いずれかのゾーンにおいて障害が発生したとしても、Swarm はマネージャーノードの quorum を維持することが可能であり、リクエストを処理し負荷を分散することが可能になります。</p>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: center">Swarm manager nodes</th>
-      <th style="text-align: center">Repartition (on 3 Availability zones)</th>
+      <th style="text-align: center">Swarm マネージャーノード</th>
+      <th style="text-align: center">再パーティション化 (3 つのアベイラビリティーゾーン)</th>
     </tr>
   </thead>
   <tbody>
@@ -334,72 +317,64 @@ available to process requests and rebalance workloads.</p>
   </tbody>
 </table>
 
-<h3 id="run-manager-only-nodes">Run manager-only nodes</h3>
+<h3 id="run-manager-only-nodes">マネージャーノードのみの実行</h3>
 
-<p>By default manager nodes also act as a worker nodes. This means the scheduler
-can assign tasks to a manager node. For small and non-critical swarms
-assigning tasks to managers is relatively low-risk as long as you schedule
-services using <strong>resource constraints</strong> for <em>cpu</em> and <em>memory</em>.</p>
+<p>マネージャーノードは、デフォルトでワーカーノードとしても動作します。
+つまりスケジューラーはマネージャーノードに対してもタスクを割り振るということです。
+小さくて重大性の高くない Swarm の場合、マネージャーノードへのタスクの割り当ては比較的低リスクです。
+サービスのスケジュールにあたって <strong>CPU</strong> や <strong>メモリ</strong> に対する <strong>リソース制約</strong> を適切に行っておけば十分です。</p>
 
-<p>However, because manager nodes use the Raft consensus algorithm to replicate data
-in a consistent way, they are sensitive to resource starvation. You should
-isolate managers in your swarm from processes that might block swarm
-operations like swarm heartbeat or leader elections.</p>
+<p>しかしマネージャーノードでは Raft 合意アルゴリズム（Raft consensus algorithm）を利用して、一貫した方法によりデータ複製を行っています。
+そのためリソースが枯渇することは大いに問題となります。
+したがって Swarm のハートビートやリーダー選択のような Swarm 操作に支障をきたすような処理は、マネージャーに行わせないことが必要です。</p>
 
-<p>To avoid interference with manager node operation, you can drain manager nodes
-to make them unavailable as worker nodes:</p>
+<p>マネージャーノード処理への影響を避けるためには、マネージャーノードを排出（drain）させて、ワーカーノードとしては利用できなくします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node update <span class="nt">--availability</span> drain &lt;NODE&gt;
 </code></pre></div></div>
 
-<p>When you drain a node, the scheduler reassigns any tasks running on the node to
-other available worker nodes in the swarm. It also prevents the scheduler from
-assigning tasks to the node.</p>
+<p>ノードを排出したらそのノード上の実行タスクは、スケジューラーが Swarm 内の別のワーカーノードに再割り当てします。
+そしてスケジューラーは、そのノードへのタスク割り当てを行わなくなります。</p>
 
-<h2 id="add-worker-nodes-for-load-balancing">Add worker nodes for load balancing</h2>
+<h2 id="add-worker-nodes-for-load-balancing">負荷分散のためのワーカーノード追加</h2>
 
-<p><a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Add nodes to the swarm</a> to balance your swarm’s
-load. Replicated service tasks are distributed across the swarm as evenly as
-possible over time, as long as the worker nodes are matched to the requirements
-of the services. When limiting a service to run on only specific types of nodes,
-such as nodes with a specific number of CPUs or amount of memory, remember that
-worker nodes that do not meet these requirements cannot run these tasks.</p>
+<p><a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Swarm へのノード参加</a> を行うことで、Swarm 内の負荷を分散することができます。
+複製されたサービスタスクは Swarm 全体にわたって分散されますが、それはどれくらいの時間であっても、ワーカーノードがサービス条件を満たしている限り行われます。
+特定タイプのノード上でしかサービスを実行できない制限があるとします。
+たとえば所定の CPU 数やメモリ容量が要求されるような場合です。
+そういった条件を満たさないワーカーノード上では、タスクが実行できない点を覚えておいてください。</p>
 
-<h2 id="monitor-swarm-health">Monitor swarm health</h2>
+<h2 id="swarm-の健康状態の監視">Swarm の健康状態の監視</h2>
 
-<p>You can monitor the health of manager nodes by querying the docker <code class="highlighter-rouge">nodes</code> API
-in JSON format through the <code class="highlighter-rouge">/nodes</code> HTTP endpoint. Refer to the
-<a href="/engine/api/v1.25/#tag/Node">nodes API documentation</a>
-for more information.</p>
+<p>マネージャーノードの健康状態（health）を監視するには、Docker の<code class="highlighter-rouge">nodes</code> API を使い、HTTP のエンドポイント<code class="highlighter-rouge">/nodes</code>から JSON 書式により確認することができます。
+詳しくは <a href="/engine/api/v1.25/#tag/Node">nodes API のドキュメント</a> を参照してください。</p>
 
-<p>From the command line, run <code class="highlighter-rouge">docker node inspect &lt;id-node&gt;</code> to query the nodes.
-For instance, to query the reachability of the node as a manager:</p>
+<p>コマンドラインからは<code class="highlighter-rouge">docker node inspect &lt;id-node&gt;</code>を実行して、ノードを調べることができます。
+たとえばノードに、マネージャーとしての到達性能（reachability）があるかどうかを調べるには、以下を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node inspect manager1 <span class="nt">--format</span> <span class="s2">"{{ .ManagerStatus.Reachability }}"</span>
 reachable
 </code></pre></div></div>
 
-<p>To query the status of the node as a worker that accept tasks:</p>
+<p>ワーカーノードとしてタスクの受け入れが可能であるかを確認するには、以下を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node inspect manager1 <span class="nt">--format</span> <span class="s2">"{{ .Status.State }}"</span>
 ready
 </code></pre></div></div>
 
-<p>From those commands, we can see that <code class="highlighter-rouge">manager1</code> is both at the status
-<code class="highlighter-rouge">reachable</code> as a manager and <code class="highlighter-rouge">ready</code> as a worker.</p>
+<p>上のコマンドから<code class="highlighter-rouge">manager1</code>は、マネージャーとしては<code class="highlighter-rouge">reachable</code>（到達可能）であり、ワーカーとしては<code class="highlighter-rouge">ready</code>（受け入れ可能）であることがわかります。</p>
 
-<p>An <code class="highlighter-rouge">unreachable</code> health status means that this particular manager node is unreachable
-from other manager nodes. In this case you need to take action to restore the unreachable
-manager:</p>
+<p>健康状態が<code class="highlighter-rouge">unreachable</code>（到達不能）であるのは、このマネージャーノードが他のマネージャーノードから到達できないことを意味します。
+この場合、到達不能なマネージャーノードは復旧させる措置が必要になります。</p>
 
 <ul>
-  <li>Restart the daemon and see if the manager comes back as reachable.</li>
-  <li>Reboot the machine.</li>
-  <li>If neither restarting or rebooting work, you should add another manager node or promote a worker to be a manager node. You also need to cleanly remove the failed node entry from the manager set with <code class="highlighter-rouge">docker node demote &lt;NODE&gt;</code> and <code class="highlighter-rouge">docker node rm &lt;id-node&gt;</code>.</li>
+  <li>デーモンを再起動し、マネージャーが到達可能に戻るかどうかを確認します。</li>
+  <li>マシンを再起動します。</li>
+  <li>上の 2 つの再起動を行っても動作しない場合は、新たなマネージャーノードを追加するか、ワーカーノードをマネージャーに昇格させます。
+そしてマネージャーから障害ノードのエントリを削除する必要があるので、<code class="highlighter-rouge">docker node demote &lt;NODE&gt;</code>と<code class="highlighter-rouge">docker node rm &lt;id-node&gt;</code>を実行します。</li>
 </ul>
 
-<p>Alternatively you can also get an overview of the swarm health from a manager
-node with <code class="highlighter-rouge">docker node ls</code>:</p>
+<p>上とは別に、Swarm の健康状態の概要を確認するには、マネージャーノードから以下のように<code class="highlighter-rouge">docker node ls</code>を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 docker node <span class="nb">ls
@@ -412,27 +387,28 @@ bb1nrq2cswhtbg4mrsqnlx1ck    node03    Accepted    Ready   Active        Reachab
 di9wxgz8dtuh9d2hn089ecqkf    node06    Accepted    Ready   Active
 </code></pre></div></div>
 
-<h2 id="troubleshoot-a-manager-node">Troubleshoot a manager node</h2>
+<h2 id="troubleshoot-a-manager-node">マネージャーノードのトラブルシューティング</h2>
 
-<p>You should never restart a manager node by copying the <code class="highlighter-rouge">raft</code> directory from another node. The data directory is unique to a node ID. A node can only use a node ID once to join the swarm. The node ID space should be globally unique.</p>
+<p>マネージャーノードの<code class="highlighter-rouge">raft</code>ディレクトリを、別ノードのものからコピーして再起動するようなことはやめてください。
+そのデータディレクトリはノード ID に固有のものです。
+そしてノード ID が利用されるのは Swarm に参加するときだけです。
+ノード ID 空間は全体にわたってユニークでなければなりません。</p>
 
-<p>To cleanly re-join a manager node to a cluster:</p>
+<p>クラスターに対してマネージャーノードを再参加させるには、以下を行います。</p>
 
 <ol>
-  <li>To demote the node to a worker, run <code class="highlighter-rouge">docker node demote &lt;NODE&gt;</code>.</li>
-  <li>To remove the node from the swarm, run <code class="highlighter-rouge">docker node rm &lt;NODE&gt;</code>.</li>
-  <li>Re-join the node to the swarm with a fresh state using <code class="highlighter-rouge">docker swarm join</code>.</li>
+  <li><code class="highlighter-rouge">docker node demote &lt;NODE&gt;</code>を実行して、そのノードをワーカーに降格させます。</li>
+  <li><code class="highlighter-rouge">docker node rm &lt;NODE&gt;</code>を実行して、そのノードを Swarm から削除します。</li>
+  <li><code class="highlighter-rouge">docker swarm join</code>を実行して、そのノードを Swarm に再度、新たな状態により参加させます。</li>
 </ol>
 
-<p>For more information on joining a manager node to a swarm, refer to
-<a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Join nodes to a swarm</a>.</p>
+<p>Swarm へのマネージャーノードの参加に関する詳細は <a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Swarm へのノード参加</a> を参照してください。</p>
 
-<h2 id="forcibly-remove-a-node">Forcibly remove a node</h2>
+<h2 id="forcibly-remove-a-node">ノードの強制削除</h2>
 
-<p>In most cases, you should shut down a node before removing it from a swarm with
-the <code class="highlighter-rouge">docker node rm</code> command. If a node becomes unreachable, unresponsive, or
-compromised you can forcefully remove the node without shutting it down by
-passing the <code class="highlighter-rouge">--force</code> flag. For instance, if <code class="highlighter-rouge">node9</code> becomes compromised:</p>
+<p>たいていの場合、<code class="highlighter-rouge">docker node rm</code>コマンドを使って Swarm からノードを削除するには、あらかじめそのノードを停止させておくべきです。
+ノードが到達不能、無反応、障害発生といった状態になったら、ノードを停止させなくても、<code class="highlighter-rouge">--force</code>フラグを使って強制的にノードを削除することができます。
+たとえば<code class="highlighter-rouge">node9</code>に障害が発生したら以下を実行します。</p>
 
 <pre><code class="language-none">$ docker node rm node9
 
@@ -443,192 +419,166 @@ $ docker node rm --force node9
 Node node9 removed from swarm
 </code></pre>
 
-<p>Before you forcefully remove a manager node, you must first demote it to the
-worker role. Make sure that you always have an odd number of manager nodes if
-you demote or remove a manager.</p>
+<p>マネージャーノードを強制的に削除する場合は、その前にワーカーノードへ降格させておかなければなりません。
+マネージャーノードを降格あるいは削除した場合、マネージャーノードは常に奇数にしておくべきことを忘れないでください。</p>
 
-<h2 id="back-up-the-swarm">Back up the swarm</h2>
+<h2 id="back-up-the-swarm">Swarm のバックアップ</h2>
 
-<p>Docker manager nodes store the swarm state and manager logs in the
-<code class="highlighter-rouge">/var/lib/docker/swarm/</code> directory. In 1.13 and higher, this data includes the
-keys used to encrypt the Raft logs. Without these keys, you cannot restore the
-swarm.</p>
+<p>マネージャーノードは、Swarm の状態とマネージャーログを<code class="highlighter-rouge">/var/lib/docker/swarm/</code>ディレクトリに保存しています。
+バージョン 1.13 またはそれ以降においては、そのディレクトリに Raft ログの暗号化に用いる鍵も含まれています。
+この鍵がない状態では、Swarm を復元することはできません。</p>
 
-<p>You can back up the swarm using any manager. Use the following procedure.</p>
+<p>Swarm のバックアップはどのマネージャーからでも行うことができます。
+バックアップは以下の手順で行います。</p>
 
 <ol>
   <li>
-    <p>If the swarm has auto-lock enabled, you need the unlock key
-to restore the swarm from backup. Retrieve the unlock key if necessary and
-store it in a safe location. If you are unsure, read
-<a href="/docs.docker.jp.onthefly/engine/swarm/swarm_manager_locking/">Lock your swarm to protect its encryption key</a>.</p>
+    <p>Swarm のオートロック機能が有効である場合、バックアップから Swarm を復元するためには解除鍵（unlock key）が必要です。
+解除鍵を得たら、安全な場所に保存しておいてください。
+内容がよくわからない場合は、<a href="/docs.docker.jp.onthefly/engine/swarm/swarm_manager_locking/">Swarm のロックと暗号鍵の保護</a> を参照してください。</p>
   </li>
   <li>
-    <p>Stop Docker on the manager before backing up the data, so that no data is
-being changed during the backup. It is possible to take a backup while the
-manager is running (a “hot” backup), but this is not recommended and your
-results are less predictable when restoring. While the manager is down,
-other nodes continue generating swarm data that is not part of this backup.</p>
+    <p>データのバックアップを取る前に、マネージャーノード上から Docker を停止します。
+これによってバックアップ中にデータが変更されることがなくなります。
+マネージャーが稼動中にバックアップを取る（「ホット」バックアップを取る）ことも可能ですが、これはお勧めしません。
+バックアップを復元する際に、予期しない事態となる場合があります。
+マネージャーが停止していても、他のノードが Swarm データを生成していると、そのデータはバックアップには含まれません。</p>
 
     <blockquote>
-      <p>Note</p>
+      <p>メモ</p>
 
-      <p>Be sure to maintain the quorum of swarm managers. During the
-time that a manager is shut down, your swarm is more vulnerable to
-losing the quorum if further nodes are lost. The number of managers you
-run is a trade-off. If you regularly take down managers to do backups,
-consider running a five manager swarm, so that you can lose an additional
-manager while the backup is running, without disrupting your services.</p>
+      <p>Swarm マネージャーの quorum は維持することを忘れないでください。
+マネージャーを停止している最中には、さらに別のノードが失われると Swarm の quorum を失う危険性が増します。
+実行するマネージャー数にはトレードオフがあります。
+バックアップを取る際には常にマネージャーを停止させるのであれば、Swarm のマネージャー数を 5 つとすることを考えてみてください。
+そうしておくと、バックアップ中に別のマネージャーが失われても、サービスを支障なく実行することができます。</p>
     </blockquote>
   </li>
   <li>
-    <p>Back up the entire <code class="highlighter-rouge">/var/lib/docker/swarm</code> directory.</p>
+    <p><code class="highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ全体のバックアップを取ります。</p>
   </li>
   <li>
-    <p>Restart the manager.</p>
+    <p>マネージャーを再起動します。</p>
   </li>
 </ol>
 
-<p>To restore, see <a href="#restore-from-a-backup">Restore from a backup</a>.</p>
+<p>復元方法については <a href="#restore-from-a-backup">バックアップからの復元</a> を参照してください。</p>
 
-<h2 id="recover-from-disaster">Recover from disaster</h2>
+<h2 id="recover-from-disaster">障害からの復旧</h2>
 
-<h3 id="restore-from-a-backup">Restore from a backup</h3>
+<h3 id="restore-from-a-backup">バックアップからの復元</h3>
 
-<p>After backing up the swarm as described in
-<a href="#back-up-the-swarm">Back up the swarm</a>, use the following procedure to
-restore the data to a new swarm.</p>
+<p><a href="#back-up-the-swarm">Swarm のバックアップ</a> において説明したように Swarm のバックアップを取った後は、以下の手順に従って、新たな Swarm に対してデータ復元を行います。</p>
 
 <ol>
   <li>
-    <p>Shut down Docker on the target host machine for the restored swarm.</p>
+    <p>復元対象とする Swarm の対象ホストマシンを使って、Docker を停止させます。</p>
   </li>
   <li>
-    <p>Remove the contents of the <code class="highlighter-rouge">/var/lib/docker/swarm</code> directory on the new
-swarm.</p>
+    <p>新たな Swarm の<code class="highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ内容を削除します。</p>
   </li>
   <li>
-    <p>Restore the <code class="highlighter-rouge">/var/lib/docker/swarm</code> directory with the contents of the
-backup.</p>
+    <p><code class="highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ内を、バックアップ内容に置き換えます。</p>
 
     <blockquote>
-      <p>Note</p>
+      <p>メモ</p>
 
-      <p>The new node uses the same encryption key for on-disk
-storage as the old one. It is not possible to change the on-disk storage
-encryption keys at this time.</p>
+      <p>新しいノードはディスク上のストレージに対して、古いときと同じ暗号鍵を用います。
+この時点でディスク上のストレージに対する暗号鍵を変更することはできません。</p>
 
-      <p>In the case of a swarm with auto-lock enabled, the unlock key is also the
-same as on the old swarm, and the unlock key is needed to restore the
-swarm.</p>
+      <p>Swarm のオートロック機能が有効である場合、解除鍵についても古い Swarm のときと同じ鍵です。
+この解除鍵は Swarm を復元するために必要となります。</p>
     </blockquote>
   </li>
   <li>
-    <p>Start Docker on the new node. Unlock the swarm if necessary. Re-initialize
-the swarm using the following command, so that this node does not attempt
-to connect to nodes that were part of the old swarm, and presumably no
-longer exist.</p>
+    <p>新たなノード上から Docker を起動させます。
+必要に応じて Swarm のロック解除を行います。
+以下のコマンドを使って Swarm を再初期化します。
+これを行うのは、このノードが古い Swarm に属していたノードに接続しに行かないようにするためです。
+もっとも古いノードは、すでに存在していないはずです。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker swarm init <span class="nt">--force-new-cluster</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the state of the swarm is as expected. This may include
-application-specific tests or simply checking the output of
-<code class="highlighter-rouge">docker service ls</code> to be sure that all expected services are present.</p>
+    <p>Swarm の状態が思っているとおりかどうかを確認します。
+確認としてはアプリケーションに固有のテストを行うこともでき、あるいは単に<code class="highlighter-rouge">docker service ls</code>の出力を確認するのでもかまいません。
+これによってサービスが思い通りに存在しているかどうかを確認します。</p>
   </li>
   <li>
-    <p>If you use auto-lock,
-<a href="/docs.docker.jp.onthefly/engine/swarm/swarm_manager_locking/#rotate-the-unlock-key">rotate the unlock key</a>.</p>
+    <p>オートロック機能を利用している場合は <a href="/docs.docker.jp.onthefly/engine/swarm/swarm_manager_locking/#rotate-the-unlock-key">解除鍵のローテート</a> を行います。</p>
   </li>
   <li>
-    <p>Add manager and worker nodes to bring your new swarm up to operating
-capacity.</p>
+    <p>新たな Swarm の収容性能を実現するために、マネージャーノードやワーカーノードを追加します。</p>
   </li>
   <li>
-    <p>Reinstate your previous backup regimen on the new swarm.</p>
+    <p>新たな Swarm に対して、以前からのバックアップ計画を復活させます。</p>
   </li>
 </ol>
 
-<h3 id="recover-from-losing-the-quorum">Recover from losing the quorum</h3>
+<h3 id="recover-from-losing-the-quorum">quorum を失ってからの回復</h3>
 
-<p>Swarm is resilient to failures and the swarm can recover from any number
-of temporary node failures (machine reboots or crash with restart) or other
-transient errors. However, a swarm cannot automatically recover if it loses a
-quorum. Tasks on existing worker nodes continue to run, but administrative
-tasks are not possible, including scaling or updating services and joining or
-removing nodes from the swarm. The best way to recover is to bring the missing
-manager nodes back online. If that is not possible, continue reading for some
-options for recovering your swarm.</p>
+<p>Swarm というものには障害に対しての耐久性があります。
+いくつものノードが一時的な障害（マシン再起動やその際のクラッシュなど）や一時的エラーを起こしても、Swarm は回復できます。
+ただし quorum を失っている場合、Swarm は自動的に復旧できません。
+既存のワーカーノード上のタスクは動作をし続けますが、管理タスクは実行不能になります。
+たとえばサービスのスケーリング、更新、ノードの追加や削除などです。
+復旧する最良の策は、失われたマネージャーノードをオンライン復旧させることです。
+これが無理である場合、Swarm 復旧のための手段がいくつかあるので、読み進めてください。</p>
 
-<p>In a swarm of <code class="highlighter-rouge">N</code> managers, a quorum (a majority) of manager nodes must always
-be available. For example, in a swarm with five managers, a minimum of three must be
-operational and in communication with each other. In other words, the swarm can
-tolerate up to <code class="highlighter-rouge">(N-1)/2</code> permanent failures beyond which requests involving
-swarm management cannot be processed. These types of failures include data
-corruption or hardware failures.</p>
+<p>Swarm に<code class="highlighter-rouge">N</code>個のマネージャーがある場合に、マネージャーノードの quorum は常に利用可能でなければなりません。
+たとえば 5 つのマネージャーからなる Swarm の場合、最低でも 3 つのノードは動作状態であって、互いに通信できなければなりません。
+言い換えると、Swarm は<code class="highlighter-rouge">(N-1)/2</code>個のノードまでなら、それが完全に処理不能になっても耐えることができますが、これを越えると Swarm 管理を行うような要求は処理できなくなります。
+ここで言う処理不能というのは、データ損傷やハードウェア障害などを表わします。</p>
 
-<p>If you lose the quorum of managers, you cannot administer the swarm. If you have
-lost the quorum and you attempt to perform any management operation on the swarm,
-an error occurs:</p>
+<p>マネージャーが quorum を失った場合、Swarm を管理することはできません。
+quorum を失った状態で、Swarm 上で管理操作を行おうとすると、以下のようなエラーが発生します。</p>
 
 <pre><code class="language-none">Error response from daemon: rpc error: code = 4 desc = context deadline exceeded
 </code></pre>
 
-<p>The best way to recover from losing the quorum is to bring the failed nodes back
-online. If you can’t do that, the only way to recover from this state is to use
-the <code class="highlighter-rouge">--force-new-cluster</code> action from a manager node. This removes all managers
-except the manager the command was run from. The quorum is achieved because
-there is now only one manager. Promote nodes to be managers until you have the
-desired number of managers.</p>
+<p>quorum を失った状態から復旧するための最良の策は、障害が発生したノードをオンライン復旧させることです。
+それが実現できない場合、この状態を回復する最後の手段は、マネージャーノード上において<code class="highlighter-rouge">--force-new-cluster</code>を実行することです。
+これを行うと、コマンド実行したマネージャーノードを除いた、他のマネージャーノードがすべて削除されます。
+マネージャーがたった 1 つになるのですから quorum は維持されます。
+この後には、マネージャーノードが必要な数に達するまで、ノードをマネージャーに昇格させていきます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># From the node to recover</span>
 docker swarm init <span class="nt">--force-new-cluster</span> <span class="nt">--advertise-addr</span> node01:2377
 </code></pre></div></div>
 
-<p>When you run the <code class="highlighter-rouge">docker swarm init</code> command with the <code class="highlighter-rouge">--force-new-cluster</code>
-flag, the Docker Engine where you run the command becomes the manager node of a
-single-node swarm which is capable of managing and running services. The manager
-has all the previous information about services and tasks, worker nodes are
-still part of the swarm, and services are still running. You need to add or
-re-add  manager nodes to achieve your previous task distribution and ensure that
-you have enough managers to maintain high availability and prevent losing the
-quorum.</p>
+<p><code class="highlighter-rouge">docker swarm init</code>コマンドにおいて<code class="highlighter-rouge">--force-new-cluster</code>フラグをつけて実行すると、コマンド実行した Docker Engine は、単一ノードからなる Swarm のマネージャーノードとなり、サービスの管理と実行が可能となります。
+このマネージャーには、それまでのサービスやタスクに関する情報がそのまま保持され、ワーカーノードは Swarm に参加したままです。
+そしてサービスは実行を継続します。
+タスク分散を実現するためには、マネージャーノードの追加あるいは再度の追加が必要になります。
+そして高可用性と quorum を維持していくのに十分なマネージャーとなっていることを確認します。</p>
 
-<h2 id="force-the-swarm-to-rebalance">Force the swarm to rebalance</h2>
+<h2 id="force-the-swarm-to-rebalance">Swarm の強制的な再配分</h2>
 
-<p>Generally, you do not need to force the swarm to rebalance its tasks. When you
-add a new node to a swarm, or a node reconnects to the swarm after a
-period of unavailability, the swarm does not automatically give a workload to
-the idle node. This is a design decision. If the swarm periodically shifted tasks
-to different nodes for the sake of balance, the clients using those tasks would
-be disrupted. The goal is to avoid disrupting running services for the sake of
-balance across the swarm. When new tasks start, or when a node with running
-tasks becomes unavailable, those tasks are given to less busy nodes. The goal
-is eventual balance, with minimal disruption to the end user.</p>
+<p>一般には、Swarm におけるタスクを強制的に再配分させるような必要はありません。
+Swarm に新たなノードを参加させたり、あるいは利用不能だったノードを Swarm に再接続させたりした場合に、Swarm ではアイドル状態にあるノードに対して、自動的な処理負荷の再配分は行いません。
+これは設計方針によるものです。
+仮に Swarm が配分を考えて、別のノードに定期的にタスクを振り替えるとすると、そのタスクを使用するクライアントは処理中断します。
+目指すことは Swarm 内における配分を適切に行って、実行するサービスを中断させないことです。
+新たなタスクが実行されたとき、あるいは実行中のタスクを持ったノードが利用不能になったとき、タスクは負荷の少ないノードに割り振られます。
+最終的にはバランスよく配分されることです。
+エンドユーザーに対して中断をできる限り少なくすることです。</p>
 
-<p>In Docker 1.13 and higher, you can use the <code class="highlighter-rouge">--force</code> or <code class="highlighter-rouge">-f</code> flag with the
-<code class="highlighter-rouge">docker service update</code> command to force the service to redistribute its tasks
-across the available worker nodes. This causes the service tasks to restart.
-Client applications may be disrupted. If you have configured it, your service
-uses a <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/rolling-update/">rolling update</a>.</p>
+<p>Docker 1.13 およびそれ以降においては、<code class="highlighter-rouge">docker service update</code>コマンドに<code class="highlighter-rouge">--force</code>あるいは<code class="highlighter-rouge">-f</code>フラグをつけて実行することで、利用可能なワーカーノードに対して強制的にタスクを再分散します。
+これを行うとサービスタスクは再起動します。
+このときにはクライアントアプリケーションが中断するかもしれません。
+設定によってサービスが <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/rolling-update/">ローリングアップデート</a> を利用するようにできます。</p>
 
-<p>If you use an earlier version and you want to achieve an even balance of load
-across workers and don’t mind disrupting running tasks, you can force your swarm
-to re-balance by temporarily scaling the service upward. Use
-<code class="highlighter-rouge">docker service inspect --pretty &lt;servicename&gt;</code> to see the configured scale
-of a service. When you use <code class="highlighter-rouge">docker service scale</code>, the nodes with the lowest
-number of tasks are targeted to receive the new workloads. There may be multiple
-under-loaded nodes in your swarm. You may need to scale the service up by modest
-increments a few times to achieve the balance you want across all the nodes.</p>
+<p>Docker の古いバージョンを利用していて、ワーカーノードに均等に負荷を配分したい場合、そしてタスクの中断が気にならない場合は、サービスのスケールを一時的に増やして、強制的に再配分を行うことができます。
+設定されているサービスのスケール数は<code class="highlighter-rouge">docker service inspect --pretty &lt;servicename&gt;</code>を実行して確認します。
+<code class="highlighter-rouge">docker service scale</code>を確認すれば、タスクの実行数が最も低いノードに、新たに配分が行われることがわかります。
+Swarm 内にはもっと配分を負うことができるノードが複数見つかるかもしれません。
+すべてのノードにわたってバランスよく配分を実現するためには、適度にサービススケールを増やすことを何度か行うことが必要かもしれません。</p>
 
-<p>When the load is balanced to your satisfaction, you can scale the service back
-down to the original scale. You can use <code class="highlighter-rouge">docker service ps</code> to assess the current
-balance of your service across nodes.</p>
+<p>望んだとおりに負荷が配分されたら、サービスのスケールを元の値に戻します。
+<code class="highlighter-rouge">docker service ps</code>を実行して、全ノード内でのサービスの配分状況を確認してください。</p>
 
-<p>See also
-<a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_scale/"><code class="highlighter-rouge">docker service scale</code></a> and
-<a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_ps/"><code class="highlighter-rouge">docker service ps</code></a>.</p>
+<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_scale/"><code class="highlighter-rouge">docker service scale</code></a> と <a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_ps/"><code class="highlighter-rouge">docker service ps</code></a> を参照してください。</p>
 
                             <!-- tags -->
                             
@@ -648,7 +598,7 @@ balance of your service across nodes.</p>
                                     PDRTJS_settings_8453675 = {
                                         "id": "8453675",
                                         "unique_id": "engine/swarm/admin_guide.md",
-                                        "title": "Administer and maintain a swarm of Docker Engines",
+                                        "title": "Docker Engine の Swarm 管理と保守",
                                         "permalink": "https://github.com/docker/docker.github.io/blob/master/engine/swarm/admin_guide.md"
                                     };
                                     (function (d, c, j) {
@@ -714,30 +664,30 @@ balance of your service across nodes.</p>
                                 <div id="side-toc-title">本ページ内:</div>
                                 
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#operate-manager-nodes-in-a-swarm" class="nomunge">Operate manager nodes in a swarm</a>
+  <li><a href="#operate-manager-nodes-in-a-swarm" class="nomunge">Swarm におけるマネージャーノードの操作</a>
     <ul>
-      <li><a href="#maintain-the-quorum-of-managers" class="nomunge">Maintain the quorum of managers</a></li>
+      <li><a href="#maintain-the-quorum-of-managers" class="nomunge">マネージャーの quorum 管理</a></li>
     </ul>
   </li>
-  <li><a href="#configure-the-manager-to-advertise-on-a-static-ip-address" class="nomunge">Configure the manager to advertise on a static IP address</a></li>
-  <li><a href="#add-manager-nodes-for-fault-tolerance" class="nomunge">Add manager nodes for fault tolerance</a>
+  <li><a href="#configure-the-manager-to-advertise-on-a-static-ip-address" class="nomunge">マネージャーの通知アドレスへのスタティック IP アドレス設定</a></li>
+  <li><a href="#add-manager-nodes-for-fault-tolerance" class="nomunge">耐障害性のためのマネージャーノード追加</a>
     <ul>
-      <li><a href="#distribute-manager-nodes" class="nomunge">Distribute manager nodes</a></li>
-      <li><a href="#run-manager-only-nodes" class="nomunge">Run manager-only nodes</a></li>
+      <li><a href="#distribute-manager-nodes" class="nomunge">分散マネージャーノード</a></li>
+      <li><a href="#run-manager-only-nodes" class="nomunge">マネージャーノードのみの実行</a></li>
     </ul>
   </li>
-  <li><a href="#add-worker-nodes-for-load-balancing" class="nomunge">Add worker nodes for load balancing</a></li>
-  <li><a href="#monitor-swarm-health" class="nomunge">Monitor swarm health</a></li>
-  <li><a href="#troubleshoot-a-manager-node" class="nomunge">Troubleshoot a manager node</a></li>
-  <li><a href="#forcibly-remove-a-node" class="nomunge">Forcibly remove a node</a></li>
-  <li><a href="#back-up-the-swarm" class="nomunge">Back up the swarm</a></li>
-  <li><a href="#recover-from-disaster" class="nomunge">Recover from disaster</a>
+  <li><a href="#add-worker-nodes-for-load-balancing" class="nomunge">負荷分散のためのワーカーノード追加</a></li>
+  <li><a href="#swarm-の健康状態の監視" class="nomunge">Swarm の健康状態の監視</a></li>
+  <li><a href="#troubleshoot-a-manager-node" class="nomunge">マネージャーノードのトラブルシューティング</a></li>
+  <li><a href="#forcibly-remove-a-node" class="nomunge">ノードの強制削除</a></li>
+  <li><a href="#back-up-the-swarm" class="nomunge">Swarm のバックアップ</a></li>
+  <li><a href="#recover-from-disaster" class="nomunge">障害からの復旧</a>
     <ul>
-      <li><a href="#restore-from-a-backup" class="nomunge">Restore from a backup</a></li>
-      <li><a href="#recover-from-losing-the-quorum" class="nomunge">Recover from losing the quorum</a></li>
+      <li><a href="#restore-from-a-backup" class="nomunge">バックアップからの復元</a></li>
+      <li><a href="#recover-from-losing-the-quorum" class="nomunge">quorum を失ってからの回復</a></li>
     </ul>
   </li>
-  <li><a href="#force-the-swarm-to-rebalance" class="nomunge">Force the swarm to rebalance</a></li>
+  <li><a href="#force-the-swarm-to-rebalance" class="nomunge">Swarm の強制的な再配分</a></li>
 </ul>
 
 

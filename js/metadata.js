@@ -177,7 +177,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/admin_guide/",
-"title":"Administer and maintain a swarm of Docker Engines",
+"title":"Docker Engine の Swarm 管理と保守",
 "description":"Manager administration guide",
 "keywords":"docker, container, swarm, manager, raft"
 }
@@ -2256,7 +2256,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/join-nodes/",
-"title":"Join nodes to a swarm",
+"title":"Swarm へのノード参加",
 "description":"Add worker and manager nodes to a swarm",
 "keywords":"guide, swarm mode, node"
 }
@@ -3901,7 +3901,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/swarm_manager_locking/",
-"title":"Lock your swarm to protect its encryption key",
+"title":"Swarm のロックと暗号鍵の保護",
 "description":"Automatically lock Swarm managers to protect encryption keys",
 "keywords":"swarm, manager, lock, unlock, autolock, encryption"
 }
