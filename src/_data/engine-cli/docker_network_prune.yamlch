@@ -1,0 +1,242 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker network prune
+short: Remove all unused networks
+@y
+command: docker network prune
+short: 未使用のネットワークをすべて削除します。
+@z
+
+@x
+long: |-
+  Remove all unused networks. Unused networks are those which are not referenced
+  by any containers.
+usage: docker network prune [OPTIONS]
+pname: docker network
+plink: docker_network.yaml
+options:
+@y
+long: |-
+  未使用のネットワークをすべて削除します。
+  未使用のネットワークとは、どのコンテナーからも参照されていないネットワークのことです。
+usage: docker network prune [オプション]
+pname: docker network
+plink: docker_network.yaml
+options:
+@z
+
+@x
+- option: filter
+  value_type: filter
+  description: Provide filter values (e.g. 'until=<timestamp>')
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: filter
+  value_type: filter
+  description: フィルター値を定めます。（たとえば 'until=\<timestamp\>'）
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Do not prompt for confirmation
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: 確認のためのプロンプトを表示しません。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ```bash
+  $ docker network prune
+@y
+examples: |-
+  ```bash
+  $ docker network prune
+@z
+
+@x
+  WARNING! This will remove all custom networks not used by at least one container.
+  Are you sure you want to continue? [y/N] y
+  Deleted Networks:
+  n1
+  n2
+  ```
+@y
+  WARNING! This will remove all custom networks not used by at least one container.
+  Are you sure you want to continue? [y/N] y
+  Deleted Networks:
+  n1
+  n2
+  ```
+@z
+
+@x
+  ### Filtering
+@y
+  {: #filtering }
+  ### フィルター検索
+@z
+
+@x
+  The filtering flag (`--filter`) format is of "key=value". If there is more
+  than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+@y
+  フィルターフラグ（`--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+@z
+
+@x
+  The currently supported filters are:
+@y
+  現在サポートされているフィルターは以下のとおりです。
+@z
+
+@x
+  * until (`<timestamp>`) - only remove networks created before given timestamp
+@y
+  * until (`<timestamp>`) - 指定された時刻より以前に生成されたネットワークのみ削除します。
+@z
+
+@x
+  * label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) - only remove networks with (or without, in case `label!=...` is used) the specified labels.
+@y
+  * label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, `label!=<key>=<value>`) - 指定されたラベル（`label!=...` が用いられている場合は、そのラベル以外）が用いられているネットワークのみ削除します。
+@z
+
+@x
+  The `until` filter can be Unix timestamps, date formatted
+  timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed
+  relative to the daemon machine’s time. Supported formats for date
+  formatted time stamps include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,
+  `2006-01-02T15:04:05.999999999`, `2006-01-02Z07:00`, and `2006-01-02`. The local
+  timezone on the daemon will be used if you do not provide either a `Z` or a
+  `+-00:00` timezone offset at the end of the timestamp.  When providing Unix
+  timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
+  that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
+  seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
+  fraction of a second no more than nine digits long.
+@y
+  `until` フィルターは Unix 時間から生成されるタイムスタンプや日付、Go 言語の時間文字列 （たとえば `10m`, `1h30m`）を、デーモンマシンの時刻との相対的な差異によって計算されます。
+  タイムスタンプから生成される日付の書式として、RFC3339Nano、RFC3339、`2006-01-02T15:04:05`、`2006-01-02T15:04:05.999999999`、`2006-01-02Z07:00`、`2006-01-02` などがサポートされます。
+  タイムスタンプの最後に `Z` やタイムゾーンオフセット `+-00:00` が指示されていなかった場合は、デーモンが利用しているタイムゾーンが用いられます。
+  Unix 時間を指定する場合は seconds[.nanoseconds]（[秒.ナノ秒]）の書式とします。
+  ここで秒には 1970 年 1 月 1 日（UTC/GMT の真夜中）からの経過秒数値を指定し、うるう秒を含めません（Unix エポックまたは Unix タイムとも言われる）。
+  そしてナノ秒には、8桁以下の秒の少数値を指定します。
+@z
+
+@x
+  The `label` filter accepts two formats. One is the `label=...` (`label=<key>` or `label=<key>=<value>`),
+  which removes networks with the specified labels. The other
+  format is the `label!=...` (`label!=<key>` or `label!=<key>=<value>`), which removes
+  networks without the specified labels.
+@y
+  `label` フィルターは 2 つの書式をとります。
+  1 つは `label=...`（`label=<key>` または `label=<key>=<value>`）であり、ここに指定されたラベルを持ったネットワークが削除されます。
+  もう 1 つは `label!=...`（`label!=<key>` または `label!=<key>=<value>`）であり、ここに指定されたラベル以外を持ったネットワークが削除されます。
+@z
+
+@x
+  The following removes networks created more than 5 minutes ago. Note that
+  system networks such as `bridge`, `host`, and `none` will never be pruned:
+@y
+  以下の例では生成から 5 分以上経過したネットワークを削除します。
+  ただしシステムネットワークである `bridge`、`host`、`none` は取り除かれる（prune される）ことはありません。
+@z
+
+@x
+  ```bash
+  $ docker network ls
+
+  NETWORK ID          NAME                DRIVER              SCOPE
+  7430df902d7a        bridge              bridge              local
+  ea92373fd499        foo-1-day-ago       bridge              local
+  ab53663ed3c7        foo-1-min-ago       bridge              local
+  97b91972bc3b        host                host                local
+  f949d337b1f5        none                null                local
+@y
+  ```bash
+  $ docker network ls
+
+  NETWORK ID          NAME                DRIVER              SCOPE
+  7430df902d7a        bridge              bridge              local
+  ea92373fd499        foo-1-day-ago       bridge              local
+  ab53663ed3c7        foo-1-min-ago       bridge              local
+  97b91972bc3b        host                host                local
+  f949d337b1f5        none                null                local
+@z
+
+@x
+  $ docker network prune --force --filter until=5m
+
+  Deleted Networks:
+  foo-1-day-ago
+@y
+  $ docker network prune --force --filter until=5m
+
+  Deleted Networks:
+  foo-1-day-ago
+@z
+
+@x
+  $ docker network ls
+
+  NETWORK ID          NAME                DRIVER              SCOPE
+  7430df902d7a        bridge              bridge              local
+  ab53663ed3c7        foo-1-min-ago       bridge              local
+  97b91972bc3b        host                host                local
+  f949d337b1f5        none                null                local
+  ```
+@y
+  $ docker network ls
+
+  NETWORK ID          NAME                DRIVER              SCOPE
+  7430df902d7a        bridge              bridge              local
+  ab53663ed3c7        foo-1-min-ago       bridge              local
+  97b91972bc3b        host                host                local
+  f949d337b1f5        none                null                local
+  ```
+@z
+
+@x
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

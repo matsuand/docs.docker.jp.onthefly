@@ -1,0 +1,304 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker inspect
+@y
+command: docker inspect
+@z
+
+@x
+short: Return low-level information on Docker objects
+@y
+short: Return low-level information on Docker objects
+@z
+
+@x
+long: |-
+  Docker inspect provides detailed information on constructs controlled by Docker.
+@y
+long: |-
+  Docker inspect provides detailed information on constructs controlled by Docker.
+@z
+
+@x
+  By default, `docker inspect` will render results in a JSON array.
+usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+pname: docker
+plink: docker.yaml
+options:
+@y
+  By default, `docker inspect` will render results in a JSON array.
+usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+pname: docker
+plink: docker.yaml
+options:
+@z
+
+@x
+- option: format
+  shorthand: f
+  value_type: string
+  description: Format the output using the given Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: format
+  shorthand: f
+  value_type: string
+  description: Go 言語テンプレートを使って出力をフォーマットします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: size
+  shorthand: s
+  value_type: bool
+  default_value: "false"
+  description: Display total file sizes if the type is container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: size
+  shorthand: s
+  value_type: bool
+  default_value: "false"
+  description: Display total file sizes if the type is container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: type
+  value_type: string
+  description: Return JSON for specified type
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: type
+  value_type: string
+  description: Return JSON for specified type
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Get an instance's IP address
+@y
+examples: |-
+  ### Get an instance's IP address
+@z
+
+@x
+  For the most part, you can pick out any field from the JSON in a fairly
+  straightforward manner.
+@y
+  For the most part, you can pick out any field from the JSON in a fairly
+  straightforward manner.
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $INSTANCE_ID
+  ```
+@y
+  $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $INSTANCE_ID
+  ```
+@z
+
+@x
+  ### Get an instance's MAC address
+@y
+  ### Get an instance's MAC address
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID
+  ```
+@y
+  $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID
+  ```
+@z
+
+@x
+  ### Get an instance's log path
+@y
+  ### Get an instance's log path
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker inspect --format='{{.LogPath}}' $INSTANCE_ID
+  ```
+@y
+  $ docker inspect --format='{{.LogPath}}' $INSTANCE_ID
+  ```
+@z
+
+@x
+  ### Get an instance's image name
+@y
+  ### Get an instance's image name
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker inspect --format='{{.Config.Image}}' $INSTANCE_ID
+  ```
+@y
+  $ docker inspect --format='{{.Config.Image}}' $INSTANCE_ID
+  ```
+@z
+
+@x
+  ### List all port bindings
+@y
+  ### List all port bindings
+@z
+
+@x
+  You can loop over arrays and maps in the results to produce simple text
+  output:
+@y
+  You can loop over arrays and maps in the results to produce simple text
+  output:
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' $INSTANCE_ID
+  ```
+@y
+  $ docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' $INSTANCE_ID
+  ```
+@z
+
+@x
+  ### Find a specific port mapping
+@y
+  ### Find a specific port mapping
+@z
+
+@x
+  The `.Field` syntax doesn't work when the field name begins with a
+  number, but the template language's `index` function does. The
+  `.NetworkSettings.Ports` section contains a map of the internal port
+  mappings to a list of external address/port objects. To grab just the
+  numeric public port, you use `index` to find the specific port map, and
+  then `index` 0 contains the first object inside of that. Then we ask for
+  the `HostPort` field to get the public address.
+@y
+  The `.Field` syntax doesn't work when the field name begins with a
+  number, but the template language's `index` function does. The
+  `.NetworkSettings.Ports` section contains a map of the internal port
+  mappings to a list of external address/port objects. To grab just the
+  numeric public port, you use `index` to find the specific port map, and
+  then `index` 0 contains the first object inside of that. Then we ask for
+  the `HostPort` field to get the public address.
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker inspect --format='{{(index (index .NetworkSettings.Ports "8787/tcp") 0).HostPort}}' $INSTANCE_ID
+  ```
+@y
+  $ docker inspect --format='{{(index (index .NetworkSettings.Ports "8787/tcp") 0).HostPort}}' $INSTANCE_ID
+  ```
+@z
+
+@x
+  ### Get a subsection in JSON format
+@y
+  ### Get a subsection in JSON format
+@z
+
+@x
+  If you request a field which is itself a structure containing other
+@y
+  If you request a field which is itself a structure containing other
+@z
+
+@x
+  fields, by default you get a Go-style dump of the inner values.
+  Docker adds a template function, `json`, which can be applied to get
+  results in JSON format.
+@y
+  fields, by default you get a Go-style dump of the inner values.
+  Docker adds a template function, `json`, which can be applied to get
+  results in JSON format.
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
+  ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+  $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
+  ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

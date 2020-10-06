@@ -1,0 +1,338 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker volume create
+short: Create a volume
+@y
+command: docker volume create
+short: ボリュームを生成します。
+@z
+
+@x
+long: |-
+  Creates a new volume that containers can consume and store data in. If a name is
+  not specified, Docker generates a random name.
+@y
+long: |-
+  コンテナーが利用しデータ保存を行うボリュームを新規に生成します。
+  名前が指定されなかった場合、Docker がランダムな名前を生成します。
+@z
+
+@x
+usage: docker volume create [OPTIONS] [VOLUME]
+pname: docker volume
+plink: docker_volume.yaml
+options:
+@y
+usage: docker volume create [オプション] [VOLUME]
+pname: docker volume
+plink: docker_volume.yaml
+options:
+@z
+
+@x
+- option: driver
+  shorthand: d
+  value_type: string
+  default_value: local
+  description: Specify volume driver name
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: driver
+  shorthand: d
+  value_type: string
+  default_value: local
+  description: ボリュームドライバー名を指定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: label
+  value_type: list
+  description: Set metadata for a volume
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: label
+  value_type: list
+  description: ボリュームに対してメタデータを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: name
+  value_type: string
+  description: Specify volume name
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: name
+  value_type: string
+  description: ボリューム名を指定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: opt
+  shorthand: o
+  value_type: map
+  default_value: map[]
+  description: Set driver specific options
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: opt
+  shorthand: o
+  value_type: map
+  default_value: map[]
+  description: ドライバー固有のオプションを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  Create a volume and then configure the container to use it:
+@y
+examples: |-
+  ボリュームを生成して、コンテナーがこれを利用できるように設定します。
+@z
+
+@x
+  ```bash
+  $ docker volume create hello
+
+  hello
+
+  $ docker run -d -v hello:/world busybox ls /world
+  ```
+@y
+  ```bash
+  $ docker volume create hello
+
+  hello
+
+  $ docker run -d -v hello:/world busybox ls /world
+  ```
+@z
+
+@x
+  The mount is created inside the container's `/world` directory. Docker does not
+  support relative paths for mount points inside the container.
+@y
+  コンテナーの `/world` ディレクトリ配下にマウントが生成されます。
+  コンテナーのマウントポイントに対して、相対パスの指定はサポートされていません。
+@z
+
+@x
+  Multiple containers can use the same volume in the same time period. This is
+  useful if two containers need access to shared data. For example, if one
+  container writes and the other reads the data.
+@y
+  1 つのボリュームを複数のコンテナーから同時に利用することができます。
+  2 つのコンテナーが共有データにアクセスする必要がある場合に便利です。
+  たとえば一方のコンテナーからデータを書き出し、他方がそのデータを読み取ることができます。
+@z
+
+@x
+  Volume names must be unique among drivers. This means you cannot use the same
+  volume name with two different drivers. If you attempt this `docker` returns an
+  error:
+@y
+  すべてのドライバーにわたって、ボリューム名はユニークであることが必要です。
+  つまり 2 つの異なるドライバーにおいて、同一のボリューム名を利用することはできません。
+  これを行った場合、`docker` は以下のようなエラーを返します。
+@z
+
+@x
+  ```console
+  A volume named  "hello"  already exists with the "some-other" driver. Choose a different volume name.
+  ```
+@y
+  ```console
+  A volume named  "hello"  already exists with the "some-other" driver. Choose a different volume name.
+  ("hello" というボリュームは "some-other" ドライバーにおいてすでに存在しています。別のボリューム名を用いてください。)
+  ```
+@z
+
+@x
+  If you specify a volume name already in use on the current driver, Docker
+  assumes you want to re-use the existing volume and does not return an error.
+@y
+  現在利用しているドライバーにおいて、すでに用いられているボリューム名を指定した場合、Docker はすでに存在しているものを再利用するものと解釈されるため、エラーとはなりません。
+@z
+
+@x
+  ### Driver-specific options
+@y
+  {: #driver-specific-options }
+  ### ドライバー固有のオプション
+@z
+
+@x
+  Some volume drivers may take options to customize the volume creation. Use the
+  `-o` or `--opt` flags to pass driver options:
+@y
+  ボリュームドライバーによっては、ボリューム生成に関してカスタマイズ可能なオプションを持つものがあります。
+  ドライバーへオプションを受け渡すには `-o` あるいは `--opt` フラグを利用します。
+@z
+
+@x
+  ```bash
+  $ docker volume create --driver fake \
+      --opt tardis=blue \
+      --opt timey=wimey \
+      foo
+  ```
+@y
+  ```bash
+  $ docker volume create --driver fake \
+      --opt tardis=blue \
+      --opt timey=wimey \
+      foo
+  ```
+@z
+
+@x
+  These options are passed directly to the volume driver. Options for
+  different volume drivers may do different things (or nothing at all).
+@y
+  このようなオプション指定は、ボリュームドライバーに直接受け渡されます。
+  ボリュームドライバーが異なると、このオプションは全く違った（あるいは何の意味もなさない）ものになる場合があります。
+@z
+
+@x
+  The built-in `local` driver on Windows does not support any options.
+@y
+  Windows におけるビルトインドライバー `local` は、オプションを一切受けつけません。
+@z
+
+@x
+  The built-in `local` driver on Linux accepts options similar to the linux
+  `mount` command. You can provide multiple options by passing the `--opt` flag
+  multiple times. Some `mount` options (such as the `o` option) can take a
+  comma-separated list of options. Complete list of available mount options can be
+  found [here](http://man7.org/linux/man-pages/man8/mount.8.html).
+@y
+  Linux でのビルトイン `local` ドライバーは、Linux の `mount` コマンドに似たオプションをとります。
+  複数のオプションを指定するには、`--opt` フラグを複数用いて指定します。
+  `mount` オプションの中には（`o` オプションなどのように）、カンマ区切りリストを指定するものがあります。
+  mount オプションの全一覧については、[こちら](http://man7.org/linux/man-pages/man8/mount.8.html) を参照してください。
+@z
+
+@x
+  For example, the following creates a `tmpfs` volume called `foo` with a size of
+  100 megabyte and `uid` of 1000.
+@y
+  たとえば以下のコマンドは `foo` という名前の `tmpfs` ボリュームを生成し、そのサイズを 100 MB、`uid` を 1000 とするものです。 
+@z
+
+@x
+  ```bash
+  $ docker volume create --driver local \
+      --opt type=tmpfs \
+      --opt device=tmpfs \
+      --opt o=size=100m,uid=1000 \
+      foo
+  ```
+@y
+  ```bash
+  $ docker volume create --driver local \
+      --opt type=tmpfs \
+      --opt device=tmpfs \
+      --opt o=size=100m,uid=1000 \
+      foo
+  ```
+@z
+
+@x
+  Another example that uses `btrfs`:
+@y
+  以下は `btrfs` を利用する別の例です。
+@z
+
+@x
+  ```bash
+  $ docker volume create --driver local \
+      --opt type=btrfs \
+      --opt device=/dev/sda2 \
+      foo
+  ```
+@y
+  ```bash
+  $ docker volume create --driver local \
+      --opt type=btrfs \
+      --opt device=/dev/sda2 \
+      foo
+  ```
+@z
+
+@x
+  Another example that uses `nfs` to mount the `/path/to/dir` in `rw` mode from
+  `192.168.1.1`:
+@y
+  さらに別の例として `nfs` を利用し、`192.168.1.1` から `rw` モードにより `/path/to/dir` をマウントします。
+@z
+
+@x
+  ```bash
+  $ docker volume create --driver local \
+      --opt type=nfs \
+      --opt o=addr=192.168.1.1,rw \
+      --opt device=:/path/to/dir \
+      foo
+  ```
+@y
+  ```bash
+  $ docker volume create --driver local \
+      --opt type=nfs \
+      --opt o=addr=192.168.1.1,rw \
+      --opt device=:/path/to/dir \
+      foo
+  ```
+@z
+
+@x
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

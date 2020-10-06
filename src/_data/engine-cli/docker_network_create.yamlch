@@ -1,0 +1,854 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker network create
+short: Create a network
+@y
+command: docker network create
+short: ネットワークを生成します。
+@z
+
+@x
+long: |-
+  Creates a new network. The `DRIVER` accepts `bridge` or `overlay` which are the
+  built-in network drivers. If you have installed a third party or your own custom
+  network driver you can specify that `DRIVER` here also. If you don't specify the
+  `--driver` option, the command automatically creates a `bridge` network for you.
+  When you install Docker Engine it creates a `bridge` network automatically. This
+  network corresponds to the `docker0` bridge that Engine has traditionally relied
+  on. When you launch a new container with  `docker run` it automatically connects to
+  this bridge network. You cannot remove this default bridge network, but you can
+  create new ones using the `network create` command.
+@y
+long: |-
+  新たなネットワークを生成します。
+  `DRIVER` には、ビルトインネットワークドライバーである `bridge` か `overlay` を指定することができます。
+  サードパーティ製のドライバーをインストールしているか、独自のカスタムネットワークドライバーを利用する場合は、この `DRIVER` に設定します。
+  `--driver` オプションを指定しなかった場合、このコマンドが `bridge` ネットワークを自動的に生成します。
+  Docker Engine をインストールすれば、`bridge` ネットワークは自動生成されています。
+  このネットワークは `docker0` ブリッジに対応するものであり、Engine が従来より利用しているものです。
+  `docker run` によって新たなコンテナーを起動すると、自動的にこのブリッジネットワークに接続されます。
+  このデフォルトのブリッジネットワークは、削除することはできません。
+  新たなネットワークは `network create` コマンドを使って生成することができます。
+@z
+
+@x
+  ```bash
+  $ docker network create -d bridge my-bridge-network
+  ```
+@y
+  ```bash
+  $ docker network create -d bridge my-bridge-network
+  ```
+@z
+
+@x
+  Bridge networks are isolated networks on a single Engine installation. If you
+  want to create a network that spans multiple Docker hosts each running an
+  Engine, you must create an `overlay` network. Unlike `bridge` networks, overlay
+  networks require some pre-existing conditions before you can create one. These
+  conditions are:
+@y
+  ブリッジネットワークは、インストールされている 1 つの Engine 上において、分離されているネットワークです。
+  複数の Engine 上において稼動している複数の Docker ホストにわたるようなネットワークを生成するのであれば、`overlay` ネットワークを生成する必要があります。
+  `bridge` ネットワークの場合とは違って overlay ネットワークの場合、生成に必要となる前提条件があります。
+  以下がその条件です。
+@z
+
+@x
+  * Access to a key-value store. Engine supports Consul, Etcd, and ZooKeeper (Distributed store) key-value stores.
+@y
+  * キーバリューストアにアクセスできること。
+    Engine では Consul、Etcd、ZooKeeper（分散ストア）といったキーバリューストアをサポートしています。
+@z
+
+@x
+  * A cluster of hosts with connectivity to the key-value store.
+@y
+  * クラスターがキーバリューストアとやりとりできること。
+@z
+
+@x
+  * A properly configured Engine `daemon` on each host in the cluster.
+@y
+  * クラスター内の各ホストにおいて Engine `daemon` が適切に設定されていること。
+@z
+
+@x
+  The `dockerd` options that support the `overlay` network are:
+@y
+  `overlay` ネットワークをサポートする `dockerd` のオプションは以下のものです。
+@z
+
+@x
+  * `--cluster-store`
+  * `--cluster-store-opt`
+  * `--cluster-advertise`
+@y
+  * `--cluster-store`
+  * `--cluster-store-opt`
+  * `--cluster-advertise`
+@z
+
+@x
+  To read more about these options and how to configure them, see ["*Get started
+  with multi-host network*"](https://docs.docker.com/engine/userguide/networking/get-started-overlay).
+@y
+  このオプションの設定方法については ["**複数ホストによるネットワークをはじめよう**"](__HOSTURL__/engine/userguide/networking/get-started-overlay) を参照してください。
+@z
+
+@x
+  While not required, it is a good idea to install Docker Swarm to
+  manage the cluster that makes up your network. Swarm provides sophisticated
+  discovery and server management tools that can assist your implementation.
+@y
+  必須の作業ではありませんが、クラスターによるネットワーク管理を実現する Docker Swarm をインストールしてみるのも良いでしょう。
+  Swarm は高度なサービスディスカバリー機能やサーバー管理ツールを提供するため、開発を手助けしてくれます。
+@z
+
+@x
+  Once you have prepared the `overlay` network prerequisites you simply choose a
+  Docker host in the cluster and issue the following to create the network:
+@y
+  `overlay` ネットワークの前提条件を整えられたら、クラスター内の Docker ホスト上から、以下のコマンドを実行してネットワークを生成します。
+@z
+
+@x
+  ```bash
+  $ docker network create -d overlay my-multihost-network
+  ```
+@y
+  ```bash
+  $ docker network create -d overlay my-multihost-network
+  ```
+@z
+
+@x
+  Network names must be unique. The Docker daemon attempts to identify naming
+  conflicts but this is not guaranteed. It is the user's responsibility to avoid
+  name conflicts.
+@y
+  ネットワーク名はユニークでなければなりません。
+  Docker デーモンは名前の衝突がないかどうかの検出を試みますが、この処理は保証されていません。
+  ネットワーク名に衝突がないようにするのは、ユーザーの責任です。
+@z
+
+@x
+  ### Overlay network limitations
+@y
+  {: #overlay-network-limitations }
+  ### overlay ネットワークの制約
+@z
+
+@x
+  You should create overlay networks with `/24` blocks (the default), which limits
+  you to 256 IP addresses, when you create networks using the default VIP-based
+  endpoint-mode. This recommendation addresses
+  [limitations with swarm mode](https://github.com/moby/moby/issues/30820). If you
+  need more than 256 IP addresses, do not increase the IP block size. You can
+  either use `dnsrr` endpoint mode with an external load balancer, or use multiple
+  smaller overlay networks. See
+  [Configure service discovery](https://docs.docker.com/engine/swarm/networking/#configure-service-discovery)
+  for more information about different endpoint modes.
+@y
+  overlay ネットワークは `/24` ブロック（これがデフォルト）のネットワークとして生成する必要があります。
+  デフォルトの VIP ベースのエンドポイントモードにおいてネットワークを生成する限り、利用可能な IP アドレスは 256 個までという制限が発生します。
+  この推奨事項に関しては [limitations with swarm mode（Swarm モードにおける制約）](https://github.com/moby/moby/issues/30820) に述べられています。
+  IP アドレスを 256 個より多く必要とする場合、ブロックサイズを増やすことはやめてください。
+  その場合は、外部ロードバランサーにより `dnsrr` エンドポイントモードを利用するか、あるいは、より小さな overlay ネットワークを複数利用するようにします。
+  さまざまなエンドポイントモードに関する詳細は [サービスディスカバリーの設定](__HOSTURL__/engine/swarm/networking/#configure-service-discovery) を参照してください。
+@z
+
+@x
+usage: docker network create [OPTIONS] NETWORK
+pname: docker network
+plink: docker_network.yaml
+options:
+@y
+usage: docker network create [オプション] NETWORK
+pname: docker network
+plink: docker_network.yaml
+options:
+@z
+
+@x
+- option: attachable
+  value_type: bool
+  default_value: "false"
+  description: Enable manual container attachment
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: attachable
+  value_type: bool
+  default_value: "false"
+  description: 手動によるコンテナーのアタッチを有効にします。
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: aux-address
+  value_type: map
+  default_value: map[]
+  description: Auxiliary IPv4 or IPv6 addresses used by Network driver
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: aux-address
+  value_type: map
+  default_value: map[]
+  description: ネットワークドライバーが利用する IPv4 または IPv6 による補助アドレス。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: config-from
+  value_type: string
+  description: The network from which copying the configuration
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: config-from
+  value_type: string
+  description: 設定のコピー元とするネットワーク。
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: config-only
+  value_type: bool
+  default_value: "false"
+  description: Create a configuration only network
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: config-only
+  value_type: bool
+  default_value: "false"
+  description: ネットワークについてのみ設定を生成します。
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: driver
+  shorthand: d
+  value_type: string
+  default_value: bridge
+  description: Driver to manage the Network
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: driver
+  shorthand: d
+  value_type: string
+  default_value: bridge
+  description: ネットワークを管理するドライバー。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: gateway
+  value_type: stringSlice
+  default_value: '[]'
+  description: IPv4 or IPv6 Gateway for the master subnet
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: gateway
+  value_type: stringSlice
+  default_value: '[]'
+  description: マスターサブネット用の IPv4 または IPv6 ゲートウェイ。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: ingress
+  value_type: bool
+  default_value: "false"
+@y
+- option: ingress
+  value_type: bool
+  default_value: "false"
+@z
+
+@x
+  description: Create swarm routing-mesh network
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: Swarm のルーティングメッシュネットワークを生成します。
+  deprecated: false
+  min_api_version: "1.29"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: internal
+  value_type: bool
+  default_value: "false"
+  description: Restrict external access to the network
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: internal
+  value_type: bool
+  default_value: "false"
+  description: ネットワークへの外部アクセスを制限します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: ip-range
+  value_type: stringSlice
+  default_value: '[]'
+@y
+- option: ip-range
+  value_type: stringSlice
+  default_value: '[]'
+@z
+
+@x
+  description: Allocate container ip from a sub-range
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: IP の部分的な範囲からコンテナー IP を割り当てます。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: ipam-driver
+  value_type: string
+  default_value: default
+  description: IP Address Management Driver
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: ipam-driver
+  value_type: string
+  default_value: default
+  description: IP アドレス管理ドライバー。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: ipam-opt
+  value_type: map
+  default_value: map[]
+  description: Set IPAM driver specific options
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: ipam-opt
+  value_type: map
+  default_value: map[]
+  description: IPAM ドライバーの特定オプションを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: ipv6
+  value_type: bool
+  default_value: "false"
+  description: Enable IPv6 networking
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: ipv6
+  value_type: bool
+  default_value: "false"
+  description: IPv6 ネットワークを有効にします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: label
+  value_type: list
+  description: Set metadata on a network
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: label
+  value_type: list
+  description: ネットワークに対してメタデータを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: opt
+  shorthand: o
+  value_type: map
+  default_value: map[]
+  description: Set driver specific options
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: opt
+  shorthand: o
+  value_type: map
+  default_value: map[]
+  description: ドライバー固有のオプションを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: scope
+  value_type: string
+  description: Control the network's scope
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: scope
+  value_type: string
+  description: ネットワークのスコープを制御します。
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: subnet
+  value_type: stringSlice
+  default_value: '[]'
+  description: Subnet in CIDR format that represents a network segment
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: subnet
+  value_type: stringSlice
+  default_value: '[]'
+  description: ネットワークセグメントを表わす CIDR 形式によるサブネット。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Connect containers
+@y
+examples: |-
+  {: #connect-containers }
+  ### コンテナーの接続
+@z
+
+@x
+  When you start a container, use the `--network` flag to connect it to a network.
+  This example adds the `busybox` container to the `mynet` network:
+@y
+  コンテナーを起動する際には `--network` フラグを使ってネットワークに接続します。
+  以下の例は `busybox` コンテナーを `mynet` ネットワークに接続します。
+@z
+
+@x
+  ```bash
+  $ docker run -itd --network=mynet busybox
+  ```
+@y
+  ```bash
+  $ docker run -itd --network=mynet busybox
+  ```
+@z
+
+@x
+  If you want to add a container to a network after the container is already
+  running, use the `docker network connect` subcommand.
+@y
+  コンテナー起動後に、そのコンテナーをネットワークに加える場合は、サブコマンド `docker network connect` を使います。
+@z
+
+@x
+  You can connect multiple containers to the same network. Once connected, the
+  containers can communicate using only another container's IP address or name.
+  For `overlay` networks or custom plugins that support multi-host connectivity,
+  containers connected to the same multi-host network but launched from different
+  Engines can also communicate in this way.
+@y
+  ネットワークに接続されると、コンテナー間のやりとりは、コンテナーの IP アドレスまたはコンテナー名を使って行われます。
+  `overlay` ネットワークやカスタムプラグインを使ったマルチホスト接続に対応している場合、コンテナーがマルチホスト対応ネットワークに接続し、かつ異なる Engine から起動されたものであっても、そのようなやりとりを通じてコンテナー間の通信が可能です。
+@z
+
+@x
+  You can disconnect a container from a network using the `docker network
+  disconnect` command.
+@y
+  ネットワークからコンテナーを切断するには `docker network disconnect` コマンドを使います。
+@z
+
+@x
+  ### Specify advanced options
+@y
+  {: #specify-advanced-options }
+  ### 高度なオプションの設定
+@z
+
+@x
+  When you create a network, Engine creates a non-overlapping subnetwork for the
+  network by default. This subnetwork is not a subdivision of an existing
+  network. It is purely for ip-addressing purposes. You can override this default
+  and specify subnetwork values directly using the `--subnet` option. On a
+  `bridge` network you can only create a single subnet:
+@y
+  ネットワーク生成時に Engine は、デフォルトではサブネットワークが重複しないようにします。
+  このサブネットワークは、既存のネットワークを分割したものではありません。
+  純粋に IP アドレスの利用のためにあります。
+  このデフォルト設定はオーバーライドすることが可能であり、サブネットワークの値を直接 `--subnet` オプションに指定します。
+  `bridge` ネットワークにおいては、単一のサブネットしか生成することはできません。
+@z
+
+@x
+  ```bash
+  $ docker network create --driver=bridge --subnet=192.168.0.0/16 br0
+  ```
+@y
+  ```bash
+  $ docker network create --driver=bridge --subnet=192.168.0.0/16 br0
+  ```
+@z
+
+@x
+  Additionally, you also specify the `--gateway` `--ip-range` and `--aux-address`
+  options.
+@y
+  また `--gateway`、`--ip-range`、`--aux-address` といったオプションを指定することもできます。
+@z
+
+@x
+  ```bash
+  $ docker network create \
+    --driver=bridge \
+    --subnet=172.28.0.0/16 \
+    --ip-range=172.28.5.0/24 \
+    --gateway=172.28.5.254 \
+    br0
+  ```
+@y
+  ```bash
+  $ docker network create \
+    --driver=bridge \
+    --subnet=172.28.0.0/16 \
+    --ip-range=172.28.5.0/24 \
+    --gateway=172.28.5.254 \
+    br0
+  ```
+@z
+
+@x
+  If you omit the `--gateway` flag the Engine selects one for you from inside a
+  preferred pool. For `overlay` networks and for network driver plugins that
+  support it you can create multiple subnetworks. This example uses two `/25`
+  subnet mask to adhere to the current guidance of not having more than 256 IPs in
+  a single overlay network. Each of the subnetworks has 126 usable addresses.
+@y
+  `--gateway` フラグを省略すると、Engine は適切なアドレスプールからアドレスを選び出します。
+  `overlay` ネットワークやネットワークドライバープラグインでは、複数のサブネットワークを生成することができます。
+  以下の例では 2 つの `/25` サブネットマスクを利用して、単一の overlay ネットワーク内において IP アドレスが 256 個以上にならないように、現在のガイダンスに従っているものです。
+  各サブネットワークでは 126 個のアドレスが利用可能です。
+@z
+
+@x
+  ```bash
+  $ docker network create -d overlay \
+    --subnet=192.168.10.0/25 \
+    --subnet=192.168.20.0/25 \
+    --gateway=192.168.10.100 \
+    --gateway=192.168.20.100 \
+    --aux-address="my-router=192.168.10.5" --aux-address="my-switch=192.168.10.6" \
+    --aux-address="my-printer=192.168.20.5" --aux-address="my-nas=192.168.20.6" \
+    my-multihost-network
+  ```
+@y
+  ```bash
+  $ docker network create -d overlay \
+    --subnet=192.168.10.0/25 \
+    --subnet=192.168.20.0/25 \
+    --gateway=192.168.10.100 \
+    --gateway=192.168.20.100 \
+    --aux-address="my-router=192.168.10.5" --aux-address="my-switch=192.168.10.6" \
+    --aux-address="my-printer=192.168.20.5" --aux-address="my-nas=192.168.20.6" \
+    my-multihost-network
+  ```
+@z
+
+@x
+  Be sure that your subnetworks do not overlap. If they do, the network create
+  fails and Engine returns an error.
+@y
+  サブネットワークは重複しないように注意してください。
+  重複してしまうとネットワーク生成に失敗し、Engine がエラーを返します。
+@z
+
+@x
+  ### Bridge driver options
+@y
+  {: #bridge-driver-options }
+  ### ブリッジドライバーオプション
+@z
+
+@x
+  When creating a custom network, the default network driver (i.e. `bridge`) has
+  additional options that can be passed. The following are those options and the
+  equivalent docker daemon flags used for docker0 bridge:
+@y
+  カスタムネットワークを生成すると、デフォルトのネットワークドライバー（つまり `bridge`）には、指定可能なオプションが追加されます。
+  以下に示すのがその追加オプションであり、docker0 ブリッジに対して用いられる同等の Docker デーモンフラグを合わせて示します。
+@z
+
+@x
+  | Option                                           | Equivalent  | Description                                           |
+  |--------------------------------------------------|-------------|-------------------------------------------------------|
+  | `com.docker.network.bridge.name`                 | -           | Bridge name to be used when creating the Linux bridge |
+  | `com.docker.network.bridge.enable_ip_masquerade` | `--ip-masq` | Enable IP masquerading                                |
+  | `com.docker.network.bridge.enable_icc`           | `--icc`     | Enable or Disable Inter Container Connectivity        |
+  | `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      | Default IP when binding container ports               |
+  | `com.docker.network.driver.mtu`                  | `--mtu`     | Set the containers network MTU                        |
+  | `com.docker.network.container_interface_prefix`  | -           | Set a custom prefix for container interfaces          |
+@y
+  | オプション                                       | 同等の指定  | 内容説明                                              |
+  |--------------------------------------------------|-------------|-------------------------------------------------------|
+  | `com.docker.network.bridge.name`                 | -           | Linux ブリッジの生成時に利用されるブリッジ名。|
+  | `com.docker.network.bridge.enable_ip_masquerade` | `--ip-masq` | IP マスカレードを有効にします。|
+  | `com.docker.network.bridge.enable_icc`           | `--icc`     | コンテナー間の接続（Inter Container Connectivity）を有効あるいは無効にします。|
+  | `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      | コンテナーポートのバインディング時におけるデフォルトの IP。|
+  | `com.docker.network.driver.mtu`                  | `--mtu`     | コンテナーにネットワーク MTU を設定します。|
+  | `com.docker.network.container_interface_prefix`  | -           | コンテナーのインターフェースにカスタムプリフィックスを設定します。|
+@z
+
+@x
+  The following arguments can be passed to `docker network create` for any
+  network driver, again with their approximate equivalents to `docker daemon`.
+@y
+  以下に示すのは `docker network create` に指定できる引数であり、どのネットワークドライバーに対しても用いることができます。
+  ここでは上と同じように `docker daemon` に対する同等の指定を示します。
+@z
+
+@x
+  | Argument     | Equivalent     | Description                                |
+  |--------------|----------------|--------------------------------------------|
+  | `--gateway`  | -              | IPv4 or IPv6 Gateway for the master subnet |
+  | `--ip-range` | `--fixed-cidr` | Allocate IPs from a range                  |
+  | `--internal` | -              | Restrict external access to the network   |
+  | `--ipv6`     | `--ipv6`       | Enable IPv6 networking                     |
+  | `--subnet`   | `--bip`        | Subnet for network                         |
+@y
+  | 引数         | 同等の指定     | 内容説明                                   |
+  |--------------|----------------|--------------------------------------------|
+  | `--gateway`  | -              | マスターサブネットに対する IPv4 または IPv6 のゲートウェイ。|
+  | `--ip-range` | `--fixed-cidr` | 指定範囲から IP を割り当てます。           |
+  | `--internal` | -              | ネットワークへの外部アクセスを制限します。 |
+  | `--ipv6`     | `--ipv6`       | IPv6 ネットワークを有効にします。          |
+  | `--subnet`   | `--bip`        | ネットワークのサブネット。                 |
+@z
+
+@x
+  For example, let's use `-o` or `--opt` options to specify an IP address binding
+  when publishing ports:
+@y
+  たとえばポート公開のために割り当てる IP アドレスを指定するには `-o` または `--opt` オプションを使ってください。
+@z
+
+@x
+  ```bash
+  $ docker network create \
+      -o "com.docker.network.bridge.host_binding_ipv4"="172.19.0.1" \
+      simple-network
+  ```
+@y
+  ```bash
+  $ docker network create \
+      -o "com.docker.network.bridge.host_binding_ipv4"="172.19.0.1" \
+      simple-network
+  ```
+@z
+
+@x
+  ### Network internal mode
+@y
+  {: #network-internal-mode }
+  ### ネットワーク内部モード
+@z
+
+@x
+  By default, when you connect a container to an `overlay` network, Docker also
+  connects a bridge network to it to provide external connectivity. If you want
+  to create an externally isolated `overlay` network, you can specify the
+  `--internal` option.
+@y
+  コンテナーを `overlay` ネットワークに接続する際に、デフォルトで Docker は外部接続を可能にするために bridge ネットワークにも接続します。
+  外部とは切り離された `overlay` ネットワークを生成したい場合は、`--internal` オプションを指定します。
+@z
+
+@x
+  ### Network ingress mode
+@y
+  {: #network-ingress-mode }
+  ### ingress モード
+@z
+
+@x
+  You can create the network which will be used to provide the routing-mesh in the
+  swarm cluster. You do so by specifying `--ingress` when creating the network. Only
+  one ingress network can be created at the time. The network can be removed only
+  if no services depend on it. Any option available when creating an overlay network
+  is also available when creating the ingress network, besides the `--attachable` option.
+@y
+  Swarm クラスター内においてルーティングメッシュを提供するためのネットワークを生成することができます。
+  これを行うにはネットワーク生成時に `--ingress` を指定します。
+  一度に生成できる ingress ネットワークはただ一つです。
+  ネットワークは、どのサービスもそのネットワークに依存していない場合に限って削除することができます。
+  overlay ネットワークの生成時に利用可能なオプションは、同じく ingress ネットワーク生成時にも利用可能です。
+  ただし `--attachable` オプションは ingress ネットワークでは利用できません。
+@z
+
+@x
+  ```bash
+  $ docker network create -d overlay \
+    --subnet=10.11.0.0/16 \
+    --ingress \
+    --opt com.docker.network.driver.mtu=9216 \
+    --opt encrypted=true \
+    my-ingress-network
+  ```
+@y
+  ```bash
+  $ docker network create -d overlay \
+    --subnet=10.11.0.0/16 \
+    --ingress \
+    --opt com.docker.network.driver.mtu=9216 \
+    --opt encrypted=true \
+    my-ingress-network
+  ```
+@z
+
+@x
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

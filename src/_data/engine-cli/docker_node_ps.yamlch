@@ -1,0 +1,436 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker node ps
+short: List tasks running on one or more nodes, defaults to current node
+@y
+command: docker node ps
+short: 1 つまたは複数ノードにおいて実行中のタスク一覧を表示します。デフォルトはカレントノードのみです。
+@z
+
+@x
+long: |-
+  Lists all the tasks on a Node that Docker knows about. You can filter using the
+  `-f` or `--filter` flag. Refer to the [filtering](#filtering) section for more
+  information about available filter options.
+@y
+long: |-
+  Docker が管理しているノード上でのタスクを一覧表示します。
+  `-f` または `--filter` フラグを使ってフィルター検索を行うことができます。
+  フィルター検索時のオプションの詳細は [フィルター検索](#filtering) の節を参照してください。
+@z
+
+@x
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
+@y
+  > **メモ**
+  >
+  > これはクラスター管理コマンドであるため、Swarm のマネージャーノード上で実行する必要があります。
+  > マネージャーノードとワーカーノードについては、本ドキュメントの [Swarm モード](__HOSTURL__/engine/swarm/) を参照してください。
+@z
+
+@x
+usage: docker node ps [OPTIONS] [NODE...]
+pname: docker node
+plink: docker_node.yaml
+options:
+@y
+usage: docker node ps [オプション] [NODE...]
+pname: docker node
+plink: docker_node.yaml
+options:
+@z
+
+@x
+- option: filter
+  shorthand: f
+  value_type: filter
+  description: Filter output based on conditions provided
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: filter
+  shorthand: f
+  value_type: filter
+  description: 指定された条件に基づいてフィルター検索を行います。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: format
+  value_type: string
+  description: Pretty-print tasks using a Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: format
+  value_type: string
+  description: Go 言語テンプレートを使って出力をフォーマットします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: no-resolve
+  value_type: bool
+  default_value: "false"
+  description: Do not map IDs to Names
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: no-resolve
+  value_type: bool
+  default_value: "false"
+  description: ノード ID からノード名にマップしません。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: no-trunc
+  value_type: bool
+  default_value: "false"
+  description: Do not truncate output
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: no-trunc
+  value_type: bool
+  default_value: "false"
+  description: 詳細出力を行います。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Only display task IDs
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: タスク ID のみを表示します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ```bash
+  $ docker node ps swarm-manager1
+  NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.1.7q92v0nr1hcgts2amcjyqg3pq   redis:3.0.6  swarm-manager1  Running        Running 5 hours
+  redis.6.b465edgho06e318egmgjbqo4o   redis:3.0.6  swarm-manager1  Running        Running 29 seconds
+  redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.9.dkkual96p4bb3s6b10r7coxxt   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.10.0tgctg8h8cech4w0k0gwrmr23  redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  ```
+@y
+examples: |-
+  ```bash
+  $ docker node ps swarm-manager1
+  NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.1.7q92v0nr1hcgts2amcjyqg3pq   redis:3.0.6  swarm-manager1  Running        Running 5 hours
+  redis.6.b465edgho06e318egmgjbqo4o   redis:3.0.6  swarm-manager1  Running        Running 29 seconds
+  redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.9.dkkual96p4bb3s6b10r7coxxt   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.10.0tgctg8h8cech4w0k0gwrmr23  redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  ```
+@z
+
+@x
+  ### Filtering
+@y
+  {: #filtering }
+  ### フィルター検索
+@z
+
+@x
+  The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
+  than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+@y
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+@z
+
+@x
+  The currently supported filters are:
+@y
+  現在サポートされているフィルターは以下のとおりです。
+@z
+
+@x
+  * [name](#name)
+  * [id](#id)
+  * [label](#label)
+@y
+  * [name](#name)
+  * [id](#id)
+  * [label](#label)
+@z
+
+@x
+  * [desired-state](#desired-state)
+@y
+  * [desired-state](#desired-state)
+@z
+
+@x
+  #### name
+@y
+  {: #name }
+  #### name フィルター
+@z
+
+@x
+  The `name` filter matches on all or part of a task's name.
+@y
+  `name` フィルターは、タスク名の全部または一部を検索します。
+@z
+
+@x
+  The following filter matches all tasks with a name containing the `redis` string.
+@y
+  以下のフィルター指定では、`redis` という文字列を名前に含んだタスクすべてが検索されます。
+@z
+
+@x
+  ```bash
+  $ docker node ps -f name=redis swarm-manager1
+
+  NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.1.7q92v0nr1hcgts2amcjyqg3pq   redis:3.0.6  swarm-manager1  Running        Running 5 hours
+  redis.6.b465edgho06e318egmgjbqo4o   redis:3.0.6  swarm-manager1  Running        Running 29 seconds
+  redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.9.dkkual96p4bb3s6b10r7coxxt   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.10.0tgctg8h8cech4w0k0gwrmr23  redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  ```
+@y
+  ```bash
+  $ docker node ps -f name=redis swarm-manager1
+
+  NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.1.7q92v0nr1hcgts2amcjyqg3pq   redis:3.0.6  swarm-manager1  Running        Running 5 hours
+  redis.6.b465edgho06e318egmgjbqo4o   redis:3.0.6  swarm-manager1  Running        Running 29 seconds
+  redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.9.dkkual96p4bb3s6b10r7coxxt   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  redis.10.0tgctg8h8cech4w0k0gwrmr23  redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  ```
+@z
+
+@x
+  #### id
+@y
+  {: #id }
+  #### id フィルター
+@z
+
+@x
+  The `id` filter matches a task's id.
+@y
+  `id` フィルターはタスク ID を検索します。
+@z
+
+@x
+  ```bash
+  $ docker node ps -f id=bg8c07zzg87di2mufeq51a2qp swarm-manager1
+
+  NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  ```
+@y
+  ```bash
+  $ docker node ps -f id=bg8c07zzg87di2mufeq51a2qp swarm-manager1
+
+  NAME                                IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.7.bg8c07zzg87di2mufeq51a2qp   redis:3.0.6  swarm-manager1  Running        Running 5 seconds
+  ```
+@z
+
+@x
+  #### label
+@y
+  {: #label }
+  #### label フィルター
+@z
+
+@x
+  The `label` filter matches tasks based on the presence of a `label` alone or a `label` and a
+  value.
+@y
+  `label` フィルターは、`label` だけが存在する、あるいは `label` とその値が存在するタスクを検索します。
+@z
+
+@x
+  The following filter matches tasks with the `usage` label regardless of its value.
+@y
+  以下の例では `usage` ラベルを持ったタスクを抽出します。
+  この場合、その値の内容は問いません。
+@z
+
+@x
+  ```bash
+  $ docker node ps -f "label=usage"
+
+  NAME                               IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.6.b465edgho06e318egmgjbqo4o  redis:3.0.6  swarm-manager1  Running        Running 10 minutes
+  redis.7.bg8c07zzg87di2mufeq51a2qp  redis:3.0.6  swarm-manager1  Running        Running 9 minutes
+  ```
+@y
+  ```bash
+  $ docker node ps -f "label=usage"
+
+  NAME                               IMAGE        NODE            DESIRED STATE  CURRENT STATE
+  redis.6.b465edgho06e318egmgjbqo4o  redis:3.0.6  swarm-manager1  Running        Running 10 minutes
+  redis.7.bg8c07zzg87di2mufeq51a2qp  redis:3.0.6  swarm-manager1  Running        Running 9 minutes
+  ```
+@z
+
+@x
+  #### desired-state
+@y
+  {: #desired-state }
+  #### desired-state フィルター
+@z
+
+@x
+  The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
+@y
+  `desired-state` フィルターには `running`、`shutdown`、`accepted` を指定することができます。
+@z
+
+@x
+  ### Formatting
+@y
+  {: #formatting }
+  ### フォーマット設定
+@z
+
+@x
+  The formatting options (`--format`) pretty-prints tasks output
+  using a Go template.
+@y
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、タスクをわかりやすく出力することができます。
+@z
+
+@x
+  Valid placeholders for the Go template are listed below:
+@y
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
+@z
+
+@x
+  Placeholder     | Description
+  ----------------|------------------------------------------------------------------------------------------
+  `.ID`           | Task ID
+  `.Name`         | Task name
+  `.Image`        | Task image
+  `.Node`         | Node ID
+  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
+  `.CurrentState` | Current state of the task
+  `.Error`        | Error
+  `.Ports`        | Task published ports
+@y
+  プレースホルダー | 内容説明
+  ----------------|------------------------------------------------------------------------------------------
+  `.ID`           | タスク ID。
+  `.Name`         | タスク名。
+  `.Image`        | タスクイメージ。
+  `.Node`         | ノード ID。
+  `.DesiredState` | タスクの期待する状態。（`running`、`shutdown`、`accepted`）
+  `.CurrentState` | タスクの現在の状態。
+  `.Error`        | エラー。
+  `.Ports`        | タスクの公開ポート。
+@z
+
+@x
+  When using the `--format` option, the `node ps` command will either
+  output the data exactly as the template declares or, when using the
+  `table` directive, includes column headers as well.
+@y
+  `--format` オプションを利用すると `node ps` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
+@z
+
+@x
+  The following example uses a template without headers and outputs the
+  `Name` and `Image` entries separated by a colon (`:`) for all tasks:
+@y
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける `Name`、`Image` の各項目がコロン（`:`）で区切って表示されます。
+@z
+
+@x
+  ```bash
+  $ docker node ps --format "{{.Name}}: {{.Image}}"
+  top.1: busybox
+  top.2: busybox
+  top.3: busybox
+  ```
+@y
+  ```bash
+  $ docker node ps --format "{{.Name}}: {{.Image}}"
+  top.1: busybox
+  top.2: busybox
+  top.3: busybox
+  ```
+@z
+
+@x
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+@y
+deprecated: false
+min_api_version: "1.24"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: true
+@z

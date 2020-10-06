@@ -1,0 +1,517 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker stack deploy
+aliases: up
+short: Deploy a new stack or update an existing stack
+@y
+command: docker stack deploy
+aliases: up
+short: 新規 Stack のデプロイ、または既存 Stack の更新を行います。
+@z
+
+@x
+long: |-
+  Create and update a stack from a `compose` file on the swarm.
+@y
+long: |-
+  `compose` ファイルに基づいて Swarm 上の Stack を生成または更新します。
+@z
+
+@x
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
+@y
+  > **メモ**
+  >
+  > これはクラスター管理コマンドです。
+  > したがって Swarm 上のマネージャーノードにおいて実行する必要があります。
+  > マネージャーノードやワーカーノードについては、[Swarm モード](https://docs.docker.com/engine/swarm/) を参照してください。
+@z
+
+@x
+usage: docker stack deploy [OPTIONS] STACK
+pname: docker stack
+plink: docker_stack.yaml
+options:
+@y
+usage: docker stack deploy [OPTIONS] STACK
+pname: docker stack
+plink: docker_stack.yaml
+options:
+@z
+
+@x
+- option: bundle-file
+  value_type: string
+  description: Path to a Distributed Application Bundle file
+  deprecated: false
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+@y
+- option: bundle-file
+  value_type: string
+  description: DAB（Distributed Application Bundle）ファイルへのパスを指定します。
+  deprecated: false
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+@z
+
+@x
+- option: compose-file
+  shorthand: c
+  value_type: stringSlice
+  default_value: '[]'
+@y
+- option: compose-file
+  shorthand: c
+  value_type: stringSlice
+  default_value: '[]'
+@z
+
+@x
+  description: Path to a Compose file, or "-" to read from stdin
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: Compose ファイルへのパス、または「-」により標準入力を指定します。
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: namespace
+  value_type: string
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@y
+- option: namespace
+  value_type: string
+  description: Kubernetes 名前空間を指定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@z
+
+@x
+- option: prune
+  value_type: bool
+  default_value: "false"
+  description: Prune services that are no longer referenced
+  deprecated: false
+  min_api_version: "1.27"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+@y
+- option: prune
+  value_type: bool
+  default_value: "false"
+  description: 参照されなくなったサービスを取り除きます。
+  deprecated: false
+  min_api_version: "1.27"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+@z
+
+@x
+- option: resolve-image
+  value_type: string
+  default_value: always
+@y
+- option: resolve-image
+  value_type: string
+  default_value: always
+@z
+
+@x
+  description: |
+    Query the registry to resolve image digest and supported platforms ("always"|"changed"|"never")
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+@y
+  description: |
+    レジストリを検索して、イメージのダイジェスト値と対応プラットフォームを解決します。("always"|"changed"|"never")
+  deprecated: false
+  min_api_version: "1.30"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+@z
+
+@x
+- option: with-registry-auth
+  value_type: bool
+  default_value: "false"
+  description: Send registry authentication details to Swarm agents
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+inherited_options:
+@y
+- option: with-registry-auth
+  value_type: bool
+  default_value: "false"
+  description: Swarm エージェントに対して、レジストリ認証情報を送信します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
+inherited_options:
+@z
+
+@x
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@y
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes 設定ファイルを指定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@z
+
+@x
+- option: orchestrator
+  value_type: string
+  description: Orchestrator to use (swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: orchestrator
+  value_type: string
+  description: オーケストレーターを指定します。（swarm|kubernetes|all）
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Compose file
+@y
+examples: |-
+  ### Compose ファイル
+@z
+
+@x
+  The `deploy` command supports compose file version `3.0` and above.
+@y
+  `deploy` コマンドは Compose ファイルバージョン`3.0` またはそれ以降に対応しています。
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker stack deploy --compose-file docker-compose.yml vossibility
+@y
+  $ docker stack deploy --compose-file docker-compose.yml vossibility
+@z
+
+@x
+  Ignoring unsupported options: links
+@y
+  Ignoring unsupported options: links
+@z
+
+@x
+  Creating network vossibility_vossibility
+  Creating network vossibility_default
+  Creating service vossibility_nsqd
+  Creating service vossibility_logstash
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_ghollector
+  Creating service vossibility_lookupd
+  ```
+@y
+  Creating network vossibility_vossibility
+  Creating network vossibility_default
+  Creating service vossibility_nsqd
+  Creating service vossibility_logstash
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_ghollector
+  Creating service vossibility_lookupd
+  ```
+@z
+
+@x
+  The Compose file can also be provided as standard input with `--compose-file -`:
+@y
+  Compose ファイルは `--compose-file -` とすることで、標準入力から指定することもできます。
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ cat docker-compose.yml | docker stack deploy --compose-file - vossibility
+@y
+  $ cat docker-compose.yml | docker stack deploy --compose-file - vossibility
+@z
+
+@x
+  Ignoring unsupported options: links
+@y
+  Ignoring unsupported options: links
+@z
+
+@x
+  Creating network vossibility_vossibility
+  Creating network vossibility_default
+  Creating service vossibility_nsqd
+  Creating service vossibility_logstash
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_ghollector
+  Creating service vossibility_lookupd
+  ```
+@y
+  Creating network vossibility_vossibility
+  Creating network vossibility_default
+  Creating service vossibility_nsqd
+  Creating service vossibility_logstash
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_ghollector
+  Creating service vossibility_lookupd
+  ```
+@z
+
+@x
+  If your configuration is split between multiple Compose files, e.g. a base
+  configuration and environment-specific overrides, you can provide multiple
+  `--compose-file` flags.
+@y
+  複数の Compose ファイルにわたって設定を行う場合、たとえば基本となる設定と、それをオーバーライドする環境固有の設定がある場合には、`--compose-file` を複数指定することができます。
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker stack deploy --compose-file docker-compose.yml -c docker-compose.prod.yml vossibility
+@y
+  $ docker stack deploy --compose-file docker-compose.yml -c docker-compose.prod.yml vossibility
+@z
+
+@x
+  Ignoring unsupported options: links
+@y
+  Ignoring unsupported options: links
+@z
+
+@x
+  Creating network vossibility_vossibility
+  Creating network vossibility_default
+  Creating service vossibility_nsqd
+  Creating service vossibility_logstash
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_ghollector
+  Creating service vossibility_lookupd
+  ```
+@y
+  Creating network vossibility_vossibility
+  Creating network vossibility_default
+  Creating service vossibility_nsqd
+  Creating service vossibility_logstash
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_ghollector
+  Creating service vossibility_lookupd
+  ```
+@z
+
+@x
+  You can verify that the services were correctly created:
+@y
+  サービスが正しく生成できたかどうかは、以下のようにして確認します。
+@z
+
+@x
+  ```bash
+  $ docker service ls
+@y
+  ```bash
+  $ docker service ls
+@z
+
+@x
+  ID            NAME                               MODE        REPLICAS  IMAGE
+  29bv0vnlm903  vossibility_lookupd                replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4awt47624qwh  vossibility_nsqd                   replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4tjx9biia6fs  vossibility_elasticsearch          replicated  1/1       elasticsearch@sha256:12ac7c6af55d001f71800b83ba91a04f716e58d82e748fa6e5a7359eed2301aa
+  7563uuzr9eys  vossibility_kibana                 replicated  1/1       kibana@sha256:6995a2d25709a62694a937b8a529ff36da92ebee74bafd7bf00e6caf6db2eb03
+  9gc5m4met4he  vossibility_logstash               replicated  1/1       logstash@sha256:2dc8bddd1bb4a5a34e8ebaf73749f6413c101b2edef6617f2f7713926d2141fe
+@y
+  ID            NAME                               MODE        REPLICAS  IMAGE
+  29bv0vnlm903  vossibility_lookupd                replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4awt47624qwh  vossibility_nsqd                   replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4tjx9biia6fs  vossibility_elasticsearch          replicated  1/1       elasticsearch@sha256:12ac7c6af55d001f71800b83ba91a04f716e58d82e748fa6e5a7359eed2301aa
+  7563uuzr9eys  vossibility_kibana                 replicated  1/1       kibana@sha256:6995a2d25709a62694a937b8a529ff36da92ebee74bafd7bf00e6caf6db2eb03
+  9gc5m4met4he  vossibility_logstash               replicated  1/1       logstash@sha256:2dc8bddd1bb4a5a34e8ebaf73749f6413c101b2edef6617f2f7713926d2141fe
+@z
+
+@x
+  axqh55ipl40h  vossibility_vossibility-collector  replicated  1/1       icecrime/vossibility-collector@sha256:f03f2977203ba6253988c18d04061c5ec7aab46bca9dfd89a9a1fa4500989fba
+  ```
+@y
+  axqh55ipl40h  vossibility_vossibility-collector  replicated  1/1       icecrime/vossibility-collector@sha256:f03f2977203ba6253988c18d04061c5ec7aab46bca9dfd89a9a1fa4500989fba
+  ```
+@z
+
+@x
+  ### DAB file
+@y
+  ### DAB ファイル
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker stack deploy --bundle-file vossibility-stack.dab vossibility
+@y
+  $ docker stack deploy --bundle-file vossibility-stack.dab vossibility
+@z
+
+@x
+  Loading bundle from vossibility-stack.dab
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_logstash
+  Creating service vossibility_lookupd
+  Creating service vossibility_nsqd
+@y
+  Loading bundle from vossibility-stack.dab
+  Creating service vossibility_elasticsearch
+  Creating service vossibility_kibana
+  Creating service vossibility_logstash
+  Creating service vossibility_lookupd
+  Creating service vossibility_nsqd
+@z
+
+@x
+  Creating service vossibility_vossibility-collector
+  ```
+@y
+  Creating service vossibility_vossibility-collector
+  ```
+@z
+
+@x
+  You can verify that the services were correctly created:
+@y
+  サービスが正しく生成できたかどうかは、以下のようにして確認します。
+@z
+
+@x
+  ```bash
+  $ docker service ls
+@y
+  ```bash
+  $ docker service ls
+@z
+
+@x
+  ID            NAME                               MODE        REPLICAS  IMAGE
+  29bv0vnlm903  vossibility_lookupd                replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4awt47624qwh  vossibility_nsqd                   replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4tjx9biia6fs  vossibility_elasticsearch          replicated  1/1       elasticsearch@sha256:12ac7c6af55d001f71800b83ba91a04f716e58d82e748fa6e5a7359eed2301aa
+  7563uuzr9eys  vossibility_kibana                 replicated  1/1       kibana@sha256:6995a2d25709a62694a937b8a529ff36da92ebee74bafd7bf00e6caf6db2eb03
+  9gc5m4met4he  vossibility_logstash               replicated  1/1       logstash@sha256:2dc8bddd1bb4a5a34e8ebaf73749f6413c101b2edef6617f2f7713926d2141fe
+@y
+  ID            NAME                               MODE        REPLICAS  IMAGE
+  29bv0vnlm903  vossibility_lookupd                replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4awt47624qwh  vossibility_nsqd                   replicated  1/1       nsqio/nsq@sha256:eeba05599f31eba418e96e71e0984c3dc96963ceb66924dd37a47bf7ce18a662
+  4tjx9biia6fs  vossibility_elasticsearch          replicated  1/1       elasticsearch@sha256:12ac7c6af55d001f71800b83ba91a04f716e58d82e748fa6e5a7359eed2301aa
+  7563uuzr9eys  vossibility_kibana                 replicated  1/1       kibana@sha256:6995a2d25709a62694a937b8a529ff36da92ebee74bafd7bf00e6caf6db2eb03
+  9gc5m4met4he  vossibility_logstash               replicated  1/1       logstash@sha256:2dc8bddd1bb4a5a34e8ebaf73749f6413c101b2edef6617f2f7713926d2141fe
+@z
+
+@x
+  axqh55ipl40h  vossibility_vossibility-collector  replicated  1/1       icecrime/vossibility-collector@sha256:f03f2977203ba6253988c18d04061c5ec7aab46bca9dfd89a9a1fa4500989fba
+  ```
+@y
+  axqh55ipl40h  vossibility_vossibility-collector  replicated  1/1       icecrime/vossibility-collector@sha256:f03f2977203ba6253988c18d04061c5ec7aab46bca9dfd89a9a1fa4500989fba
+  ```
+@z
+
+@x
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

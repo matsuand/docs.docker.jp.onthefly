@@ -1,0 +1,304 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker context create
+short: Create a context
+@y
+command: docker context create
+short: コンテキストを生成します。
+@z
+
+@x
+long: |-
+  Creates a new `context`. This allows you to quickly switch the cli
+  configuration to connect to different clusters or single nodes.
+@y
+long: |-
+  新たな `context` を生成ます。
+  これによって、別のクラスターや単一ノードへの接続を行う CLI 設定を、すばやく切り替えられるようになります。
+@z
+
+@x
+usage: docker context create [OPTIONS] CONTEXT
+pname: docker context
+plink: docker_context.yaml
+options:
+@y
+usage: docker context create [オプション] CONTEXT
+pname: docker context
+plink: docker_context.yaml
+options:
+@z
+
+@x
+- option: default-stack-orchestrator
+  value_type: string
+@y
+- option: default-stack-orchestrator
+  value_type: string
+@z
+
+@x
+  description: |
+    Default orchestrator for stack operations to use with this context (swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: |
+    指定されたコンテキストに対して利用するデフォルトのスタックオーケストレーターを設定します。(swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: description
+  value_type: string
+  description: Description of the context
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: description
+  value_type: string
+  description: コンテキストの内容説明を設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: docker
+  value_type: stringToString
+  default_value: '[]'
+  description: set the docker endpoint
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: docker
+  value_type: stringToString
+  default_value: '[]'
+  description: Docker のエンドポイントを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: from
+  value_type: string
+  description: create context from a named context
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: from
+  value_type: string
+  description: 既存のコンテキストから新たなコンテキストを生成します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: kubernetes
+  value_type: stringToString
+  default_value: '[]'
+  description: set the kubernetes endpoint
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: kubernetes
+  value_type: stringToString
+  default_value: '[]'
+  description: Kubernetes のエンドポイントを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Create a context with a docker and kubernetes endpoint
+@y
+examples: |-
+  {: #create-a-context-with-a-docker-and-kubernetes-endpoint }
+  ### Docker と Kubernetes エンドポイントを使ったコンテキストの生成
+@z
+
+@x
+  To create a context from scratch provide the docker and, if required,
+  kubernetes options. The example below creates the context `my-context`
+  with a docker endpoint of `/var/run/docker.sock` and a kubernetes configuration
+  sourced from the file `/home/me/my-kube-config`:
+@y
+  コンテキストを一から生成するには Docker オプションと、必要に応じて Kubernetes オプションを用います。
+  以下の例では、コンテキスト`my-context`を生成し、Docker のエンドポイントとして`/var/run/docker.sock`、Kubernetes の設定ファイルとして`/home/me/my-kube-config`を指定します。
+@z
+
+@x
+  ```bash
+  $ docker context create \
+      --docker host=unix:///var/run/docker.sock \
+      --kubernetes config-file=/home/me/my-kube-config \
+      my-context
+  ```
+@y
+  ```bash
+  $ docker context create \
+      --docker host=unix:///var/run/docker.sock \
+      --kubernetes config-file=/home/me/my-kube-config \
+      my-context
+  ```
+@z
+
+@x
+  Use the `--from=<context-name>` option to create a new context from
+  an existing context. The example below creates a new context named `my-context`
+  from the existing context `existing-context`:
+@y
+  既存のコンテキストを使って新たなコンテキストを生成するには、オプション `--from=<コンテキスト名>` を使います。
+  以下の例では、既存の `existing-context` というコンテキストから、新たに `my-context` というコンテキストを生成します。
+@z
+
+@x
+  ```bash
+  $ docker context create --from existing-context my-context
+  ```
+@y
+  ```bash
+  $ docker context create --from existing-context my-context
+  ```
+@z
+
+@x
+  If the `--from` option is not set, the `context` is created from the current context:
+@y
+  `--from` オプションの指定がない場合、現在のコンテキストから新たなコンテキストが生成されます。
+@z
+
+@x
+  ```bash
+  $ docker context create my-context
+  ```
+@y
+  ```bash
+  $ docker context create my-context
+  ```
+@z
+
+@x
+  This can be used to create a context out of an existing `DOCKER_HOST` based script:
+@y
+  既存の `DOCKER_HOST` 環境変数を利用したスクリプトを使って、コンテキストを生成することもできます。
+@z
+
+@x
+  ```bash
+  $ source my-setup-script.sh
+  $ docker context create my-context
+  ```
+@y
+  ```bash
+  $ source my-setup-script.sh
+  $ docker context create my-context
+  ```
+@z
+
+@x
+  To source only the `docker` endpoint configuration from an existing context
+  use the `--docker from=<context-name>` option. The example below creates a
+  new context named `my-context` using the docker endpoint configuration from
+  the existing context `existing-context` and a kubernetes configuration sourced
+  from the file `/home/me/my-kube-config`:
+@y
+  既存のコンテキストから `docker` エンドポイントのみを参照して生成する場合は、`--docker from=<コンテキスト名>` オプションを使います。
+  以下の例では、`my-context` という新しいコンテキストを生成するにあたって、既存のコンテキスト `existing-context` から Docker エンドポイントを利用し、Kubernetes 設定は設定ファイル `/home/me/my-kube-config` から利用します。
+@z
+
+@x
+  ```bash
+  $ docker context create \
+      --docker from=existing-context \
+      --kubernetes config-file=/home/me/my-kube-config \
+      my-context
+  ```
+@y
+  ```bash
+  $ docker context create \
+      --docker from=existing-context \
+      --kubernetes config-file=/home/me/my-kube-config \
+      my-context
+  ```
+@z
+
+@x
+  To source only the `kubernetes` configuration from an existing context use the
+  `--kubernetes from=<context-name>` option. The example below creates a new
+  context named `my-context` using the kuberentes configuration from the existing
+  context `existing-context` and a docker endpoint of `/var/run/docker.sock`:
+@y
+  既存のコンテキストから `kubernetes` 設定のみを参照して生成する場合は、`--kubernetes from=<コンテキスト名>` オプションを使います。
+  以下の例は、`my-context` という新しいコンテキストを生成するにあたって、既存のコンテキスト `existing-context` から Kuberentes 設定を利用し、Docker エンドポイントは `/var/run/docker.sock` を利用します。
+@z
+
+@x
+  ```bash
+  $ docker context create \
+      --docker host=unix:///var/run/docker.sock \
+      --kubernetes from=existing-context \
+      my-context
+  ```
+@y
+  ```bash
+  $ docker context create \
+      --docker host=unix:///var/run/docker.sock \
+      --kubernetes from=existing-context \
+      my-context
+  ```
+@z
+
+@x
+  Docker and Kubernetes endpoints configurations, as well as default stack
+  orchestrator and description can be modified with `docker context update`.
+@y
+  Docker エンドポイントや Kubernetes 設定、またデフォルトのオーケストレーターや内容説明は、`docker context update`を使って編集することができます。
+@z
+
+@x
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

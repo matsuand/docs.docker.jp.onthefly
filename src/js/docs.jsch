@@ -1,0 +1,760 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+// Right nav highlighting
+var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0];
+@y
+// Right nav highlighting
+var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0];
+@z
+
+@x
+// ensure that the left nav visibly displays the current topic
+var current = document.getElementsByClassName("active currentPage");
+var body = document.getElementsByClassName("col-content content");
+if (current[0]) {
+    if (sidebarObj) {
+        current[0].scrollIntoView(true);
+        body[0].scrollIntoView(true);
+    }
+    // library hack
+    if (document.location.pathname.indexOf("/samples/") > -1) {
+        $(".currentPage").closest("ul").addClass("in");
+    }
+}
+@y
+// ensure that the left nav visibly displays the current topic
+var current = document.getElementsByClassName("active currentPage");
+var body = document.getElementsByClassName("col-content content");
+if (current[0]) {
+    if (sidebarObj) {
+        current[0].scrollIntoView(true);
+        body[0].scrollIntoView(true);
+    }
+    // library hack
+    if (document.location.pathname.indexOf("/samples/") > -1) {
+        $(".currentPage").closest("ul").addClass("in");
+    }
+}
+@z
+
+@x
+function navClicked(sourceLink) {
+    var classString = document.getElementById("#item" + sourceLink).className;
+    if (classString.indexOf(" in") > -1) {
+        //collapse
+        document.getElementById("#item" + sourceLink).className = classString.replace(" in", "");
+    } else {
+        //expand
+        document.getElementById("#item" + sourceLink).className = classString.concat(" in");
+    }
+}
+@y
+function navClicked(sourceLink) {
+    var classString = document.getElementById("#item" + sourceLink).className;
+    if (classString.indexOf(" in") > -1) {
+        //collapse
+        document.getElementById("#item" + sourceLink).className = classString.replace(" in", "");
+    } else {
+        //expand
+        document.getElementById("#item" + sourceLink).className = classString.concat(" in");
+    }
+}
+@z
+
+@x
+var outputHorzTabs = [];
+var outputLetNav = [];
+var totalTopics = 0;
+var currentSection;
+var sectionToHighlight;
+@y
+var outputHorzTabs = [];
+var outputLetNav = [];
+var totalTopics = 0;
+var currentSection;
+var sectionToHighlight;
+@z
+
+@x
+function findMyTopic(tree) {
+    function processBranch(branch) {
+        for (var k = 0; k < branch.length; k++) {
+            if (branch[k].section) {
+                processBranch(branch[k].section);
+            } else {
+                if (branch[k].path === pageURL && !branch[k].nosync) {
+                    thisIsIt = true;
+                    break;
+                }
+            }
+        }
+    }
+@y
+function findMyTopic(tree) {
+    function processBranch(branch) {
+        for (var k = 0; k < branch.length; k++) {
+            if (branch[k].section) {
+                processBranch(branch[k].section);
+            } else {
+                if (branch[k].path === pageURL && !branch[k].nosync) {
+                    thisIsIt = true;
+                    break;
+                }
+            }
+        }
+    }
+@z
+
+@x
+    var thisIsIt = false;
+    processBranch(tree);
+    return thisIsIt;
+}
+@y
+    var thisIsIt = false;
+    processBranch(tree);
+    return thisIsIt;
+}
+@z
+
+@x
+function walkTree(tree) {
+    for (var j = 0; j < tree.length; j++) {
+        totalTopics++;
+        if (tree[j].section) {
+            var sectionHasPath = findMyTopic(tree[j].section);
+            outputLetNav.push('<li><a onclick="navClicked(' + totalTopics + ')" data-target="#item' + totalTopics + '" data-toggle="collapse" data-parent="#stacked-menu"')
+            if (sectionHasPath) {
+                outputLetNav.push('aria-expanded="true"')
+            } else {
+                outputLetNav.push('class="collapsed" aria-expanded="false"')
+            }
+            outputLetNav.push(">" + tree[j].sectiontitle + '<span class="caret arrow"></span></a>');
+            outputLetNav.push('<ul class="nav collapse');
+            if (sectionHasPath) outputLetNav.push(" in");
+            outputLetNav.push('" id="#item' + totalTopics + '" aria-expanded="');
+            if (sectionHasPath) {
+                outputLetNav.push("true");
+            } else {
+                outputLetNav.push("false");
+            }
+            outputLetNav.push('">');
+            var subTree = tree[j].section;
+            walkTree(subTree);
+            outputLetNav.push("</ul></li>");
+        } else {
+            // just a regular old topic; this is a leaf, not a branch; render a link!
+            outputLetNav.push('<li><a href="' + tree[j].path + '"')
+            if (tree[j].path === pageURL && !tree[j].nosync) {
+                sectionToHighlight = currentSection;
+                outputLetNav.push('class="active currentPage"')
+            }
+            outputLetNav.push(">" + tree[j].title + "</a></li>")
+        }
+    }
+}
+@y
+function walkTree(tree) {
+    for (var j = 0; j < tree.length; j++) {
+        totalTopics++;
+        if (tree[j].section) {
+            var sectionHasPath = findMyTopic(tree[j].section);
+            outputLetNav.push('<li><a onclick="navClicked(' + totalTopics + ')" data-target="#item' + totalTopics + '" data-toggle="collapse" data-parent="#stacked-menu"')
+            if (sectionHasPath) {
+                outputLetNav.push('aria-expanded="true"')
+            } else {
+                outputLetNav.push('class="collapsed" aria-expanded="false"')
+            }
+            outputLetNav.push(">" + tree[j].sectiontitle + '<span class="caret arrow"></span></a>');
+            outputLetNav.push('<ul class="nav collapse');
+            if (sectionHasPath) outputLetNav.push(" in");
+            outputLetNav.push('" id="#item' + totalTopics + '" aria-expanded="');
+            if (sectionHasPath) {
+                outputLetNav.push("true");
+            } else {
+                outputLetNav.push("false");
+            }
+            outputLetNav.push('">');
+            var subTree = tree[j].section;
+            walkTree(subTree);
+            outputLetNav.push("</ul></li>");
+        } else {
+            // just a regular old topic; this is a leaf, not a branch; render a link!
+            outputLetNav.push('<li><a href="__URL__SUBBASEURL' + tree[j].path + '"')
+            if (tree[j].path === pageURL && !tree[j].nosync) {
+                sectionToHighlight = currentSection;
+                outputLetNav.push('class="active currentPage"')
+            }
+            outputLetNav.push(">" + tree[j].title + "</a></li>")
+        }
+    }
+}
+@z
+
+@x
+function renderNav(docstoc) {
+    for (var i = 0; i < docstoc.horizontalnav.length; i++) {
+        if (docstoc.horizontalnav[i].node !== "glossary") {
+            currentSection = docstoc.horizontalnav[i].node;
+            // build vertical nav
+            var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
+            if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
+                walkTree(docstoc[docstoc.horizontalnav[i].node]);
+            }
+        }
+        // build horizontal nav
+        outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
+        if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
+            outputHorzTabs.push(' class="active"');
+        }
+        outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
+    }
+    document.querySelectorAll('.jsTOCHorizontal').forEach(function(element) {
+        element.innerHTML = outputHorzTabs.join("");
+    });
+    document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
+}
+@y
+function renderNav(docstoc) {
+    for (var i = 0; i < docstoc.horizontalnav.length; i++) {
+        if (docstoc.horizontalnav[i].node !== "glossary") {
+            currentSection = docstoc.horizontalnav[i].node;
+            // build vertical nav
+            var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
+            if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
+                walkTree(docstoc[docstoc.horizontalnav[i].node]);
+            }
+        }
+        // build horizontal nav
+        outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
+        if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
+            outputHorzTabs.push(' class="active"');
+        }
+        outputHorzTabs.push('><a href="__URL__SUBBASEURL' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
+    }
+    document.querySelectorAll('.jsTOCHorizontal').forEach(function(element) {
+        element.innerHTML = outputHorzTabs.join("");
+    });
+    document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
+}
+@z
+
+@x
+function highlightRightNav(heading) {
+    if (document.location.pathname.indexOf("/glossary/") < 0) {
+        $("#my_toc a.active").removeClass("active");
+@y
+function highlightRightNav(heading) {
+    if (document.location.pathname.indexOf("/glossary/") < 0) {
+        $("#my_toc a.active").removeClass("active");
+@z
+
+@x
+        if (heading !== "title") {
+            $("#my_toc a[href='#" + heading + "']").addClass("active");
+        }
+    }
+}
+@y
+        if (heading !== "title") {
+            $("#my_toc a[href='#" + heading + "']").addClass("active");
+        }
+    }
+}
+@z
+
+@x
+var currentHeading = "";
+$(window).scroll(function () {
+    var headingPositions = [];
+    $("h1, h2, h3, h4, h5, h6").each(function () {
+        if (this.id === "") this.id = "title";
+        headingPositions[this.id] = this.getBoundingClientRect().top;
+    });
+    headingPositions.sort();
+    // the headings have all been grabbed and sorted in order of their scroll
+    // position (from the top of the page). First one is toppermost.
+    for (var key in headingPositions) {
+        if (!headingPositions.hasOwnProperty(key)) {
+            continue;
+        }
+        if (headingPositions[key] > 0 && headingPositions[key] < 200) {
+            if (currentHeading !== key) {
+                // a new heading has scrolled to within 200px of the top of the page.
+                // highlight the right-nav entry and de-highlight the others.
+                highlightRightNav(key);
+                currentHeading = key;
+            }
+            break;
+        }
+    }
+});
+@y
+var currentHeading = "";
+$(window).scroll(function () {
+    var headingPositions = [];
+    $("h1, h2, h3, h4, h5, h6").each(function () {
+        if (this.id === "") this.id = "title";
+        headingPositions[this.id] = this.getBoundingClientRect().top;
+    });
+    headingPositions.sort();
+    // the headings have all been grabbed and sorted in order of their scroll
+    // position (from the top of the page). First one is toppermost.
+    for (var key in headingPositions) {
+        if (!headingPositions.hasOwnProperty(key)) {
+            continue;
+        }
+        if (headingPositions[key] > 0 && headingPositions[key] < 200) {
+            if (currentHeading !== key) {
+                // a new heading has scrolled to within 200px of the top of the page.
+                // highlight the right-nav entry and de-highlight the others.
+                highlightRightNav(key);
+                currentHeading = key;
+            }
+            break;
+        }
+    }
+});
+@z
+
+@x
+// Cookie functions
+function createCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+@y
+// Cookie functions
+function createCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+@z
+
+@x
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+@y
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+@z
+
+@x
+var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+var selectedNightTheme = readCookie("night");
+@y
+var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+var selectedNightTheme = readCookie("night");
+@z
+
+@x
+if (selectedNightTheme === "true" || (selectedNightTheme === null && prefersDark)) {
+    applyNight();
+    $("#switch-style").prop("checked", true);
+} else {
+    applyDay();
+    $("#switch-style").prop("checked", false);
+}
+@y
+if (selectedNightTheme === "true" || (selectedNightTheme === null && prefersDark)) {
+    applyNight();
+    $("#switch-style").prop("checked", true);
+} else {
+    applyDay();
+    $("#switch-style").prop("checked", false);
+}
+@z
+
+@x
+/*
+ *
+ * toggle menu *********************************************************************
+ *
+ */
+@y
+/*
+ *
+ * toggle menu *********************************************************************
+ *
+ */
+@z
+
+@x
+$("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $(".wrapper").toggleClass("right-open");
+    $(".col-toc").toggleClass("col-toc-hidden");
+});
+@y
+$("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $(".wrapper").toggleClass("right-open");
+    $(".col-toc").toggleClass("col-toc-hidden");
+});
+@z
+
+@x
+$("#menu-toggle-left").click(function (e) {
+    e.preventDefault();
+    $(".col-nav").toggleClass("col-toc-hidden");
+});
+@y
+$("#menu-toggle-left").click(function (e) {
+    e.preventDefault();
+    $(".col-nav").toggleClass("col-toc-hidden");
+});
+@z
+
+@x
+$(".navbar-toggle").click(function () {
+    $("#sidebar-nav").each(function () {
+        $(this).toggleClass("hidden-sm");
+        $(this).toggleClass("hidden-xs");
+    });
+});
+@y
+$(".navbar-toggle").click(function () {
+    $("#sidebar-nav").each(function () {
+        $(this).toggleClass("hidden-sm");
+        $(this).toggleClass("hidden-xs");
+    });
+});
+@z
+
+@x
+var navHeight = $(".navbar").outerHeight(true) + 80;
+@y
+var navHeight = $(".navbar").outerHeight(true) + 80;
+@z
+
+@x
+$(document.body).scrollspy({
+    target: "#leftCol",
+    offset: navHeight
+});
+@y
+$(document.body).scrollspy({
+    target: "#leftCol",
+    offset: navHeight
+});
+@z
+
+@x
+function loadHash(hashObj) {
+    // Using jQuery's animate() method to add smooth page scroll
+    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+    $("html, body").animate({scrollTop: $(hashObj).offset().top - 80}, 800);
+}
+@y
+function loadHash(hashObj) {
+    // Using jQuery's animate() method to add smooth page scroll
+    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+    $("html, body").animate({scrollTop: $(hashObj).offset().top - 80}, 800);
+}
+@z
+
+@x
+$(document).ready(function () {
+    // Add smooth scrolling to all links
+    $(".toc-nav a").on("click", function (event) {
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+@y
+$(document).ready(function () {
+    // Add smooth scrolling to all links
+    $(".toc-nav a").on("click", function (event) {
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+@z
+
+@x
+            // Store hash
+            var hash = this.hash;
+            loadHash(hash);
+@y
+            // Store hash
+            var hash = this.hash;
+            loadHash(hash);
+@z
+
+@x
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+        }
+    });
+    if (window.location.hash) loadHash(window.location.hash);
+});
+@y
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+        }
+    });
+    if (window.location.hash) loadHash(window.location.hash);
+});
+@z
+
+@x
+$(document).ready(function () {
+    $(".sidebar").Stickyfill();
+@y
+$(document).ready(function () {
+    $(".sidebar").Stickyfill();
+@z
+
+@x
+    // Add smooth scrolling to all links
+    $(".nav-sidebar ul li a").on("click", function (event) {
+@y
+    // Add smooth scrolling to all links
+    $(".nav-sidebar ul li a").on("click", function (event) {
+@z
+
+@x
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+@y
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+            // Prevent default anchor click behavior
+            event.preventDefault();
+@z
+
+@x
+            // Store hash
+            var hash = this.hash;
+@y
+            // Store hash
+            var hash = this.hash;
+@z
+
+@x
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+            $("html, body").animate({
+                scrollTop: $(hash).offset().top - 80
+            }, 800, function () {
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+@y
+            // Using jQuery's animate() method to add smooth page scroll
+            // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+            $("html, body").animate({
+                scrollTop: $(hash).offset().top - 80
+            }, 800, function () {
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+@z
+
+@x
+/*
+ *
+ * make dropdown show on hover *********************************************************************
+ *
+ */
+@y
+/*
+ *
+ * make dropdown show on hover *********************************************************************
+ *
+ */
+@z
+
+@x
+$("ul.nav li.dropdown").hover(function () {
+    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeIn(500);
+}, function () {
+    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeOut(500);
+});
+@y
+$("ul.nav li.dropdown").hover(function () {
+    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeIn(500);
+}, function () {
+    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeOut(500);
+});
+@z
+
+@x
+/*
+ *
+ * swapStyleSheet*********************************************************************
+ *
+ */
+@y
+/*
+ *
+ * swapStyleSheet*********************************************************************
+ *
+ */
+@z
+
+@x
+function applyNight() {
+    $("body").addClass("night");
+}
+@y
+function applyNight() {
+    $("body").addClass("night");
+}
+@z
+
+@x
+function applyDay() {
+    $("body").removeClass("night");
+}
+@y
+function applyDay() {
+    $("body").removeClass("night");
+}
+@z
+
+@x
+$("#switch-style").change(function () {
+    if ($(this).is(":checked")) {
+        applyNight();
+        createCookie("night", true, 999)
+    } else {
+        applyDay();
+        createCookie("night", false, 999);
+    }
+});
+@y
+$("#switch-style").change(function () {
+    if ($(this).is(":checked")) {
+        applyNight();
+        createCookie("night", true, 999)
+    } else {
+        applyDay();
+        createCookie("night", false, 999);
+    }
+});
+@z
+
+@x
+/*
+ *
+ * TEMP HACK For side menu*********************************************************************
+ *
+ */
+@y
+/*
+ *
+ * TEMP HACK For side menu*********************************************************************
+ *
+ */
+@z
+
+@x
+$(".nav-sidebar ul li a").click(function () {
+    $(this).addClass("collapse").siblings().toggleClass("in");
+});
+@y
+$(".nav-sidebar ul li a").click(function () {
+    $(this).addClass("collapse").siblings().toggleClass("in");
+});
+@z
+
+@x
+if ($(".nav-sidebar ul a.active").length !== 0) {
+    $(".nav-sidebar ul").click(function () {
+        $(this).addClass("collapse in").siblings;
+    });
+}
+@y
+if ($(".nav-sidebar ul a.active").length !== 0) {
+    $(".nav-sidebar ul").click(function () {
+        $(this).addClass("collapse in").siblings;
+    });
+}
+@z
+
+@x
+/*
+ *
+ * Components *********************************************************************
+ *
+ */
+@y
+/*
+ *
+ * Components *********************************************************************
+ *
+ */
+@z
+
+@x
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+@y
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+@z
+
+@x
+// Enable glossary link popovers
+$(".glossLink").popover();
+@y
+// Enable glossary link popovers
+$(".glossLink").popover();
+@z
+
+@x
+// sync tabs with the same data-group
+window.onload = function () {
+    $(".nav-tabs > li > a").click(function (e) {
+        var group = $(this).attr("data-group");
+        $('.nav-tabs > li > a[data-group="' + group + '"]').tab("show");
+    });
+};
+@y
+// sync tabs with the same data-group
+window.onload = function () {
+    $(".nav-tabs > li > a").click(function (e) {
+        var group = $(this).attr("data-group");
+        $('.nav-tabs > li > a[data-group="' + group + '"]').tab("show");
+    });
+};
+@z

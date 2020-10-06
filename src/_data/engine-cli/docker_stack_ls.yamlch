@@ -1,0 +1,270 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker stack ls
+aliases: list
+short: List stacks
+@y
+command: docker stack ls
+aliases: list
+short: Stack の一覧を表示します。
+@z
+
+@x
+long: |-
+  Lists the stacks.
+@y
+long: |-
+  stack の一覧を表示します。
+@z
+
+@x
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
+@y
+  > **メモ**
+  >
+  > これはクラスター管理コマンドです。
+  > したがって Swarm 上のマネージャーノードにおいて実行する必要があります。
+  > マネージャーノードやワーカーノードについては、[Swarm モード](https://docs.docker.com/engine/swarm/) を参照してください。
+@z
+
+@x
+usage: docker stack ls [OPTIONS]
+pname: docker stack
+plink: docker_stack.yaml
+options:
+@y
+usage: docker stack ls [OPTIONS]
+pname: docker stack
+plink: docker_stack.yaml
+options:
+@z
+
+@x
+- option: all-namespaces
+  value_type: bool
+  default_value: "false"
+  description: List stacks from all Kubernetes namespaces
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@y
+- option: all-namespaces
+  value_type: bool
+  default_value: "false"
+  description: Kubernetes 名前空間のすべてから Stack を一覧表示します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@z
+
+@x
+- option: format
+  value_type: string
+@y
+- option: format
+  value_type: string
+@z
+
+@x
+  description: Pretty-print stacks using a Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: Go 言語テンプレートを使って出力をフォーマットします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: namespace
+  value_type: stringSlice
+  default_value: '[]'
+  description: Kubernetes namespaces to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+inherited_options:
+@y
+- option: namespace
+  value_type: stringSlice
+  default_value: '[]'
+  description: 対象とする Kubernetes 名前空間を指定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+inherited_options:
+@z
+
+@x
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes config file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@y
+- option: kubeconfig
+  value_type: string
+  description: Kubernetes 設定ファイルを指定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
+  swarm: false
+@z
+
+@x
+- option: orchestrator
+  value_type: string
+  description: Orchestrator to use (swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: orchestrator
+  value_type: string
+  description: 利用するオーケストレーターを指定します。(swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  The following command shows all stacks and some additional information:
+@y
+examples: |-
+  以下のコマンドは、すべての Stack と追加情報を表示します。
+@z
+
+@x
+  ```bash
+  $ docker stack ls
+@y
+  ```bash
+  $ docker stack ls
+@z
+
+@x
+  ID                 SERVICES            ORCHESTRATOR
+  myapp              2                   Kubernetes
+@y
+  ID                 SERVICES            ORCHESTRATOR
+  myapp              2                   Kubernetes
+@z
+
+@x
+  vossibility-stack  6                   Swarm
+  ```
+@y
+  vossibility-stack  6                   Swarm
+  ```
+@z
+
+@x
+  ### Formatting
+@y
+  {: #formatting }
+  ### フォーマット設定
+@z
+
+@x
+  The formatting option (`--format`) pretty-prints stacks using a Go template.
+@y
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、Stack をわかりやすく出力することができます。
+@z
+
+@x
+  Valid placeholders for the Go template are listed below:
+@y
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
+@z
+
+@x
+  | Placeholder     | Description        |
+  | --------------- | ------------------ |
+  | `.Name`         | Stack name         |
+  | `.Services`     | Number of services |
+  | `.Orchestrator` | Orchestrator name  |
+  | `.Namespace`    | Namespace          |
+@y
+  | プレースホルダー | 内容説明            |
+  | --------------- | -------------------- |
+  | `.Name`         | Stack 名             |
+  | `.Services`     | サービス数           |
+  | `.Orchestrator` | オーケストレーター名 |
+  | `.Namespace`    | 名前空間             |
+@z
+
+@x
+  When using the `--format` option, the `stack ls` command either outputs
+  the data exactly as the template declares or, when using the
+  `table` directive, includes column headers as well.
+@y
+  `--format` オプションを利用すると `stack ls` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
+@z
+
+@x
+  The following example uses a template without headers and outputs the
+  `Name` and `Services` entries separated by a colon (`:`) for all stacks:
+@y
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべての Stack における `Name`、`Services` の各項目がコロン（`:`）で区切って表示されます。
+@z
+
+@x
+  ```bash
+  $ docker stack ls --format "{{.Name}}: {{.Services}}"
+  web-server: 1
+  web-cache: 4
+  ```
+@y
+  ```bash
+  $ docker stack ls --format "{{.Name}}: {{.Services}}"
+  web-server: 1
+  web-cache: 4
+  ```
+@z
+
+@x
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+min_api_version: "1.25"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

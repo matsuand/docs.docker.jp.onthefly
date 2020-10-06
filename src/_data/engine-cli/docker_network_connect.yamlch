@@ -1,0 +1,371 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker network connect
+short: Connect a container to a network
+@y
+command: docker network connect
+short: コンテナーをネットワークに接続します。
+@z
+
+@x
+long: |-
+  Connects a container to a network. You can connect a container by name
+  or by ID. Once connected, the container can communicate with other containers in
+  the same network.
+@y
+long: |-
+  コンテナーをネットワークに接続します。
+  コンテナーの接続は、コンテナー名またはコンテナー ID を使って行います。
+  接続を行うと、同一ネットワーク内の他のコンテナーとの通信が可能になります。
+@z
+
+@x
+usage: docker network connect [OPTIONS] NETWORK CONTAINER
+pname: docker network
+plink: docker_network.yaml
+options:
+@y
+usage: docker network connect [オプション] NETWORK CONTAINER
+pname: docker network
+plink: docker_network.yaml
+options:
+@z
+
+@x
+- option: alias
+  value_type: stringSlice
+  default_value: '[]'
+@y
+- option: alias
+  value_type: stringSlice
+  default_value: '[]'
+@z
+
+@x
+  description: Add network-scoped alias for the container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: コンテナーに対してネットワーク限定のエイリアスを追加します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: driver-opt
+  value_type: stringSlice
+  default_value: '[]'
+  description: driver options for the network
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: driver-opt
+  value_type: stringSlice
+  default_value: '[]'
+  description: ネットワークドライバーのオプション。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: ip
+  value_type: string
+  description: IPv4 address (e.g., 172.30.100.104)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: ip
+  value_type: string
+  description: IPv4 アドレスを指定します。（たとえば 172.30.100.104 など）
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: ip6
+  value_type: string
+  description: IPv6 address (e.g., 2001:db8::33)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: ip6
+  value_type: string
+  description: IPv6 アドレスを指定します。（たとえば 2001:db8::33 など）
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: link
+  value_type: list
+  description: Add link to another container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: link
+  value_type: list
+  description: 別コンテナーへのリンクを追加します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: link-local-ip
+  value_type: stringSlice
+  default_value: '[]'
+@y
+- option: link-local-ip
+  value_type: stringSlice
+  default_value: '[]'
+@z
+
+@x
+  description: Add a link-local address for the container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: コンテナーに対してリンクローカルアドレスを追加します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Connect a running container to a network
+@y
+examples: |-
+  {: #connect-a-running-container-to-a-network }
+  ### 実行中コンテナーのネットワークへの接続
+@z
+
+@x
+  ```bash
+  $ docker network connect multi-host-network container1
+  ```
+@y
+  ```bash
+  $ docker network connect multi-host-network container1
+  ```
+@z
+
+@x
+  ### Connect a container to a network when it starts
+@y
+  {: #connect-a-container-to-a-network-when-it-starts }
+  ### コンテナー起動時のネットワークへの接続
+@z
+
+@x
+  You can also use the `docker run --network=<network-name>` option to start a container and immediately connect it to a network.
+@y
+  `docker run --network=<network-name>` のようにオプションをつけてコンテナーを起動すれば、起動直後にネットワークに接続することができます。
+@z
+
+@x
+  ```bash
+  $ docker run -itd --network=multi-host-network busybox
+  ```
+@y
+  ```bash
+  $ docker run -itd --network=multi-host-network busybox
+  ```
+@z
+
+@x
+  ### Specify the IP address a container will use on a given network
+@y
+  {: #specify-the-ip-address-a-container-will-use-on-a-given-network }
+  ### ネットワーク内で利用する IP アドレスの指定
+@z
+
+@x
+  You can specify the IP address you want to be assigned to the container's interface.
+@y
+  コンテナーのインターフェースに割り振りたい IP アドレスを指定することができます。
+@z
+
+@x
+  ```bash
+  $ docker network connect --ip 10.10.36.122 multi-host-network container2
+  ```
+@y
+  ```bash
+  $ docker network connect --ip 10.10.36.122 multi-host-network container2
+  ```
+@z
+
+@x
+  ### Use the legacy `--link` option
+@y
+  {: #use-the-legacy---link-option }
+  ### かつての `--link` オプションの利用
+@z
+
+@x
+  You can use `--link` option to link another container with a preferred alias
+@y
+  `--link` オプションを使って、エイリアスを指定して別のコンテナーをリンクすることができます。
+@z
+
+@x
+  ```bash
+  $ docker network connect --link container1:c1 multi-host-network container2
+  ```
+@y
+  ```bash
+  $ docker network connect --link container1:c1 multi-host-network container2
+  ```
+@z
+
+@x
+  ### Create a network alias for a container
+@y
+  {: #create-a-network-alias-for-a-container }
+  ### コンテナーに対するネットワークエイリアスの生成
+@z
+
+@x
+  `--alias` option can be used to resolve the container by another name in the network
+  being connected to.
+@y
+  `--alias` オプションは、コンテナーがネットワークに接続する際に、別名による接続を可能とするものです。
+@z
+
+@x
+  ```bash
+  $ docker network connect --alias db --alias mysql multi-host-network container2
+  ```
+@y
+  ```bash
+  $ docker network connect --alias db --alias mysql multi-host-network container2
+  ```
+@z
+
+@x
+  ### Network implications of stopping, pausing, or restarting containers
+@y
+  {: #network-implications-of-stopping-pausing-or-restarting-containers }
+  ### コンテナーの停止、一時停止、再起動に伴うネットワークへの影響
+@z
+
+@x
+  You can pause, restart, and stop containers that are connected to a network.
+  A container connects to its configured networks when it runs.
+@y
+  ネットワークに接続しているコンテナーの一時停止、再起動、停止を行うことができます。
+  コンテナーの起動時には、設定されているネットワークへの接続を行います。
+@z
+
+@x
+  If specified, the container's IP address(es) is reapplied when a stopped
+  container is restarted. If the IP address is no longer available, the container
+  fails to start. One way to guarantee that the IP address is available is
+  to specify an `--ip-range` when creating the network, and choose the static IP
+  address(es) from outside that range. This ensures that the IP address is not
+  given to another container while this container is not on the network.
+@y
+  コンテナーに IP アドレスが指定されている場合、停止コンテナーが再起動する際には、IP アドレスが再割り当てされます。
+  その IP アドレスが利用できない場合、コンテナーは起動に失敗します。
+  IP アドレスの取得を確実にするために、ネットワーク生成時に `--ip-range` を指定する方法があります。
+  そしてコンテナーの IP アドレスには、そこで指定した IP アドレスの範囲外にある固定 IP アドレスを選ぶようにします。
+  こうすれば、コンテナーがネットワークに接続していない間に、その IP アドレスが他のコンテナーによって利用されることがなくなります。
+@z
+
+@x
+  ```bash
+  $ docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/20 multi-host-network
+  ```
+@y
+  ```bash
+  $ docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/20 multi-host-network
+  ```
+@z
+
+@x
+  ```bash
+  $ docker network connect --ip 172.20.128.2 multi-host-network container2
+  ```
+@y
+  ```bash
+  $ docker network connect --ip 172.20.128.2 multi-host-network container2
+  ```
+@z
+
+@x
+  To verify the container is connected, use the `docker network inspect` command. Use `docker network disconnect` to remove a container from the network.
+@y
+  コンテナーに接続できることを確認するには `docker network inspect` コマンドを使います。
+  `docker network disconnect` を実行すれば、ネットワークからコンテナーを削除できます。
+@z
+
+@x
+  Once connected in network, containers can communicate using only another
+  container's IP address or name. For `overlay` networks or custom plugins that
+  support multi-host connectivity, containers connected to the same multi-host
+  network but launched from different Engines can also communicate in this way.
+@y
+  ネットワークに接続されると、コンテナー間のやりとりは、コンテナーの IP アドレスまたはコンテナー名を使って行われます。
+  `overlay` ネットワークやカスタムプラグインを使ったマルチホスト接続に対応している場合、コンテナーがマルチホスト対応ネットワークに接続し、かつ異なる Engine から起動されたものであっても、そのようなやりとりを通じてコンテナー間の通信が可能です。
+@z
+
+@x
+  You can connect a container to one or more networks. The networks need not be the same type. For example, you can connect a single container bridge and overlay networks.
+@y
+  1 つのコンテナーは複数のネットワークに接続することができます。
+  その場合のネットワークは同一タイプである必要はありません。
+  たとえば 1 つのコンテナーを、bridge と overlay のネットワークに接続することができます。
+@z
+
+@x
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

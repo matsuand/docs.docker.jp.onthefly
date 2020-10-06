@@ -1,0 +1,276 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker cp
+short: Copy files/folders between a container and the local filesystem
+@y
+command: docker cp
+short: ファイルやフォルダーを、コンテナー間あるいはローカルファイルシステムとの間でコピーします。
+@z
+
+@x
+long: |-
+  The `docker cp` utility copies the contents of `SRC_PATH` to the `DEST_PATH`.
+  You can copy from the container's file system to the local machine or the
+  reverse, from the local filesystem to the container. If `-` is specified for
+  either the `SRC_PATH` or `DEST_PATH`, you can also stream a tar archive from
+  `STDIN` or to `STDOUT`. The `CONTAINER` can be a running or stopped container.
+  The `SRC_PATH` or `DEST_PATH` can be a file or directory.
+@y
+long: |-
+  `docker cp`は`SRC_PATH`の内容を`DEST_PATH`にコピーします。
+  コンテナーのファイルシステムからローカルマシンに、あるいはその逆にローカルシステムからコンテナーにコピーを行います。
+  `SRC_PATH`と`DEST_PATH`のどちらかに`-`を指定すると、tar アーカイブを`STDIN`から、あるいは`STDOUT`へストリーム入出力することができます。
+  `CONTAINER`は、実行中、停止中のどちらでもかまいません。
+  `SRC_PATH`と`DEST_PATH`はファイルまたはディレクトリを指定します。
+@z
+
+@x
+  The `docker cp` command assumes container paths are relative to the container's
+  `/` (root) directory. This means supplying the initial forward slash is optional;
+  The command sees `compassionate_darwin:/tmp/foo/myfile.txt` and
+  `compassionate_darwin:tmp/foo/myfile.txt` as identical. Local machine paths can
+  be an absolute or relative value. The command interprets a local machine's
+  relative paths as relative to the current working directory where `docker cp` is
+  run.
+@y
+  `docker cp`コマンドにおいてコンテナーのパスは、コンテナーの`/`（ルート）ディレクトリからの相対パスであるものとします。
+  つまり先頭にスラッシュをつけるかどうかは任意ということです。
+  例として`compassionate_darwin:/tmp/foo/myfile.txt`と`compassionate_darwin:tmp/foo/myfile.txt`は同一とみなされます。
+  ローカルマシンのパスは、絶対パス、相対パスのいずれでも利用できます。
+  ローカルマシンの相対パスが指定された場合、`docker cp`コマンドが実行されたカレントなワーキングディレクトリからの相対パスとして解釈されます。
+@z
+
+@x
+  The `cp` command behaves like the Unix `cp -a` command in that directories are
+  copied recursively with permissions preserved if possible. Ownership is set to
+  the user and primary group at the destination. For example, files copied to a
+  container are created with `UID:GID` of the root user. Files copied to the local
+  machine are created with the `UID:GID` of the user which invoked the `docker cp`
+  command. However, if you specify the `-a` option, `docker cp` sets the ownership
+  to the user and primary group at the source.
+@y
+  `cp`コマンドは Unix の`cp -a`コマンドのような動作をします。
+  ディレクトリに対しては再帰的なコピーを行い、可能ならパーミッションをそのまま保持します。
+  コピー先の所有者は、ユーザーとそのプライマリグループになります。
+  たとえばファイルコピー先がコンテナーである場合、そのファイルは root ユーザーの`UID:GID`になります。
+  ファイルコピー先がローカルマシンである場合、そのファイルは`docker cp`コマンドを実行したユーザーの`UID:GID`になります。
+  ただし`-a`オプションが指定された場合、`docker cp`はファイルの所有者を、コピー元のユーザーとそのプライマリグループとします。
+@z
+
+@x
+  If you specify the `-L` option, `docker cp` follows any symbolic link
+  in the `SRC_PATH`.  `docker cp` does *not* create parent directories for
+  `DEST_PATH` if they do not exist.
+@y
+  `-L`オプションが指定された場合、`docker cp`は`SRC_PATH`内のシンボリックリンクをすべてたどります。
+  `docker cp`は`DEST_PATH`の親ディレクトリが存在しない場合、そのディレクトリを生成 **しません**。
+@z
+
+@x
+  Assuming a path separator of `/`, a first argument of `SRC_PATH` and second
+  argument of `DEST_PATH`, the behavior is as follows:
+@y
+  パスセパレーター文字を`/`、第 1 引数を`SRC_PATH`、第 2 引数を`DEST_PATH`としたときに、コピー処理は以下のようになります。
+@z
+
+@x
+  - `SRC_PATH` specifies a file
+      - `DEST_PATH` does not exist
+          - the file is saved to a file created at `DEST_PATH`
+      - `DEST_PATH` does not exist and ends with `/`
+          - Error condition: the destination directory must exist.
+      - `DEST_PATH` exists and is a file
+          - the destination is overwritten with the source file's contents
+      - `DEST_PATH` exists and is a directory
+          - the file is copied into this directory using the basename from
+            `SRC_PATH`
+@y
+  - `SRC_PATH`がファイルのとき
+      - `DEST_PATH`が存在しない
+          - ファイルが`DEST_PATH`というファイルとして保存されます。
+      - `DEST_PATH`が存在せず、最後に`/`が指定されている
+          - エラー発生: コピー先は存在している必要があります。
+      - `DEST_PATH`が存在し、それがファイルである
+          - コピー先は、コピー元のファイル内容によって上書きされます。
+      - `DEST_PATH`が存在し、それがディレクトリである
+          - ファイルがコピー先ディレクトリにコピーされ、ファイル名には`SRC_PATH`のベース名が用いられます。
+@z
+
+@x
+  - `SRC_PATH` specifies a directory
+      - `DEST_PATH` does not exist
+          - `DEST_PATH` is created as a directory and the *contents* of the source
+             directory are copied into this directory
+      - `DEST_PATH` exists and is a file
+          - Error condition: cannot copy a directory to a file
+      - `DEST_PATH` exists and is a directory
+          - `SRC_PATH` does not end with `/.` (that is: _slash_ followed by _dot_)
+              - the source directory is copied into this directory
+          - `SRC_PATH` does end with `/.` (that is: _slash_ followed by _dot_)
+              - the *content* of the source directory is copied into this
+                directory
+@y
+  - `SRC_PATH`がディレクトリのとき
+      - `DEST_PATH`が存在しない
+          - `DEST_PATH` がディレクトリとして生成されます。
+            そしてコピー元ディレクトリの **内容** がそのディレクトリにコピーされます。
+      - `DEST_PATH`が存在し、それがファイルである
+          - エラー発生: ディレクトリをファイルにコピーすることはできません。
+      - `DEST_PATH`が存在し、それがディレクトリである
+          - `SRC_PATH` が`/.`（**スラッシュ** と **ドット**）で終わっていない場合
+              - コピー元ディレクトリがそのディレクトリにコピーされます。
+          - `SRC_PATH` が`/.`（**スラッシュ** と **ドット**）で終わっている場合
+              - コピー元ディレクトリの **内容** がそのディレクトリにコピーされます。
+@z
+
+@x
+  The command requires `SRC_PATH` and `DEST_PATH` to exist according to the above
+  rules. If `SRC_PATH` is local and is a symbolic link, the symbolic link, not
+  the target, is copied by default. To copy the link target and not the link, specify
+  the `-L` option.
+@y
+  このコマンドにおいては`SRC_PATH`と`DEST_PATH`が、上記ルールに従って存在している必要があります。
+  `SRC_PATH`がローカルにあるシンボリックリンクである場合、コピーされるのはデフォルトではシンボリックリンクそのものであって、そのリンク先ではありません。
+  シンボリックリンクそのものではなくリンク先をコピーしたい場合は`-L`オプションを指定します。
+@z
+
+@x
+  A colon (`:`) is used as a delimiter between `CONTAINER` and its path. You can
+  also use `:` when specifying paths to a `SRC_PATH` or `DEST_PATH` on a local
+  machine, for example  `file:name.txt`. If you use a `:` in a local machine path,
+  you must be explicit with a relative or absolute path, for example:
+@y
+  `CONTAINER`とそのパスとの区切り文字にはコロン（`:`）が使われます。
+  またローカルマシン上の`SRC_PATH`や`DEST_PATH`に対してのパスを指定する際に`:`を用いることもできます。
+  たとえば`file:name.txt`です。
+  ローカルマシン内のパス指定に`:`を用いる場合は、以下のようにして絶対パスか相対パスかを明示する必要があります。
+@z
+
+@x
+      `/path/to/file:name.txt` or `./file:name.txt`
+@y
+      `/path/to/file:name.txt` または `./file:name.txt`
+@z
+
+@x
+  It is not possible to copy certain system files such as resources under
+  `/proc`, `/sys`, `/dev`, [tmpfs](run.md#mount-tmpfs---tmpfs), and mounts created by
+  the user in the container. However, you can still copy such files by manually
+  running `tar` in `docker exec`. Both of the following examples do the same thing
+  in different ways (consider `SRC_PATH` and `DEST_PATH` are directories):
+@y
+  システムファイルとして`/proc`、`/sys`、`/dev`、[tmpfs](run.md#mount-tmpfs---tmpfs) 配下にあるリソース類、あるいはユーザーが生成したマウントは、コピーすることはできません。
+  もっとも`docker exec`において`tar`を手動で実行して、そういったファイルをコピーすることはできます。
+  以下に示す 2 つの例は方法が異なりますが、やっていることは同じです。
+  （`SRC_PATH`と`DEST_PATH`はディレクトリであるとします。）
+@z
+
+@x
+  ```bash
+  $ docker exec CONTAINER tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
+  ```
+@y
+  ```bash
+  $ docker exec CONTAINER tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | tar Cxf DEST_PATH -
+  ```
+@z
+
+@x
+  ```bash
+  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i CONTAINER tar Cxf DEST_PATH -
+  ```
+@y
+  ```bash
+  $ tar Ccf $(dirname SRC_PATH) - $(basename SRC_PATH) | docker exec -i CONTAINER tar Cxf DEST_PATH -
+  ```
+@z
+
+@x
+  Using `-` as the `SRC_PATH` streams the contents of `STDIN` as a tar archive.
+  The command extracts the content of the tar to the `DEST_PATH` in container's
+  filesystem. In this case, `DEST_PATH` must specify a directory. Using `-` as
+  the `DEST_PATH` streams the contents of the resource as a tar archive to `STDOUT`.
+@y
+  `SRC_PATH`として`-`を指定すると、`STDIN`からの内容を tar アーカイブとして入力します。
+  このコマンドが tar の内容を、コンテナー内のファイルシステムにある`DEST_PATH`へ抽出します。
+  この場合、`DEST_PATH`はディレクトリを指定していなければなりません。
+  `DEST_PATH`に`-`を指定すると、コピー元の内容を tar アーカイブとして扱い、`STDOUT`に出力します。
+@z
+
+@x
+usage: "docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp [OPTIONS]
+  SRC_PATH|- CONTAINER:DEST_PATH"
+pname: docker
+plink: docker.yaml
+options:
+@y
+usage: "docker cp [オプション] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp [オプション]
+  SRC_PATH|- CONTAINER:DEST_PATH"
+pname: docker
+plink: docker.yaml
+options:
+@z
+
+@x
+- option: archive
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Archive mode (copy all uid/gid information)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: archive
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: アーカイブモード。（uid/gid 情報をすべてコピーします。）
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: follow-link
+  shorthand: L
+  value_type: bool
+  default_value: "false"
+  description: Always follow symbol link in SRC_PATH
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: follow-link
+  shorthand: L
+  value_type: bool
+  default_value: "false"
+  description: SRC_PATH 内のシンボリックリンクは常にたどります。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

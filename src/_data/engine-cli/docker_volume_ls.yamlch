@@ -1,0 +1,529 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker volume ls
+aliases: list
+short: List volumes
+@y
+command: docker volume ls
+aliases: list
+short: ボリュームを一覧表示します。
+@z
+
+@x
+long: |-
+  List all the volumes known to Docker. You can filter using the `-f` or
+  `--filter` flag. Refer to the [filtering](#filtering) section for more
+  information about available filter options.
+@y
+long: |-
+  Docker が管理するボリュームを一覧表示します。
+  `-f` または `--filter` フラグを使ってフィルター検索を行うことができます。
+  フィルター検索時のオプションの詳細は [フィルター検索](#filtering) の節を参照してください。
+@z
+
+@x
+usage: docker volume ls [OPTIONS]
+pname: docker volume
+plink: docker_volume.yaml
+options:
+@y
+usage: docker volume ls [オプション]
+pname: docker volume
+plink: docker_volume.yaml
+options:
+@z
+
+@x
+- option: filter
+  shorthand: f
+  value_type: filter
+  description: Provide filter values (e.g. 'dangling=true')
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: filter
+  shorthand: f
+  value_type: filter
+  description: Provide filter values (e.g. 'dangling=true')
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: format
+  value_type: string
+@y
+- option: format
+  value_type: string
+@z
+
+@x
+  description: Pretty-print volumes using a Go template
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+  description: Go 言語テンプレートを使って出力をフォーマットします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Only display volume names
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: ボリューム名のみを表示します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Create a volume
+  ```bash
+  $ docker volume create rosemary
+@y
+examples: |-
+  {: #create-a-volume }
+  ### ボリュームの生成
+  ```bash
+  $ docker volume create rosemary
+@z
+
+@x
+  rosemary
+@y
+  rosemary
+@z
+
+@x
+  $ docker volume create tyler
+@y
+  $ docker volume create tyler
+@z
+
+@x
+  tyler
+@y
+  tyler
+@z
+
+@x
+  $ docker volume ls
+@y
+  $ docker volume ls
+@z
+
+@x
+  DRIVER              VOLUME NAME
+  local               rosemary
+  local               tyler
+  ```
+@y
+  DRIVER              VOLUME NAME
+  local               rosemary
+  local               tyler
+  ```
+@z
+
+@x
+  ### Filtering
+@y
+  {: #filtering }
+  ### フィルター検索
+@z
+
+@x
+  The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
+  than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+@y
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+@z
+
+@x
+  The currently supported filters are:
+@y
+  現在サポートされているフィルターは以下のとおりです。
+@z
+
+@x
+  - dangling (boolean - true or false, 0 or 1)
+@y
+  - dangling (ブール値 - true または false、0 または 1)
+@z
+
+@x
+  - driver (a volume driver's name)
+@y
+  - driver (ボリュームドライバー名)
+@z
+
+@x
+  - label (`label=<key>` or `label=<key>=<value>`)
+@y
+  - label (`label=<キー>` または `label=<キー>=<値>`)
+@z
+
+@x
+  - name (a volume's name)
+@y
+  - name (ボリューム名)
+@z
+
+@x
+  #### dangling
+@y
+  {: #dangling }
+  #### dangling フィルター
+@z
+
+@x
+  The `dangling` filter matches on all volumes not referenced by any containers
+@y
+  `dangling` フィルターは、どのコンテナーからも参照されていないボリュームを検索します。
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker run -d  -v tyler:/tmpwork  busybox
+
+  f86a7dd02898067079c99ceacd810149060a70528eff3754d0b0f1a93bd0af18
+  $ docker volume ls -f dangling=true
+  DRIVER              VOLUME NAME
+  local               rosemary
+  ```
+@y
+  $ docker run -d  -v tyler:/tmpwork  busybox
+
+  f86a7dd02898067079c99ceacd810149060a70528eff3754d0b0f1a93bd0af18
+  $ docker volume ls -f dangling=true
+  DRIVER              VOLUME NAME
+  local               rosemary
+  ```
+@z
+
+@x
+  #### driver
+@y
+  {: #driver }
+  #### driver フィルター
+@z
+
+@x
+  The `driver` filter matches volumes based on their driver.
+@y
+  `driver` フィルターは、そのドライバーに基づいたボリュームを抽出します。
+@z
+
+@x
+  The following example matches volumes that are created with the `local` driver:
+@y
+  以下の例では、`local` ドライバーを使って生成されたボリュームが抽出されます。
+@z
+
+@x
+  ```bash
+  $ docker volume ls -f driver=local
+
+  DRIVER              VOLUME NAME
+  local               rosemary
+  local               tyler
+  ```
+@y
+  ```bash
+  $ docker volume ls -f driver=local
+
+  DRIVER              VOLUME NAME
+  local               rosemary
+  local               tyler
+  ```
+@z
+
+@x
+  #### label
+@y
+  {: #label }
+  #### label フィルター
+@z
+
+@x
+  The `label` filter matches volumes based on the presence of a `label` alone or
+  a `label` and a value.
+@y
+  `label` フィルターは、`label` だけが存在する、あるいは `label` とその値が存在するボリュームを検索します。
+@z
+
+@x
+  First, let's create some volumes to illustrate this;
+@y
+  このことを示すために、まずボリュームを生成します。
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker volume create the-doctor --label is-timelord=yes
+@y
+  $ docker volume create the-doctor --label is-timelord=yes
+@z
+
+@x
+  the-doctor
+@y
+  the-doctor
+@z
+
+@x
+  $ docker volume create daleks --label is-timelord=no
+@y
+  $ docker volume create daleks --label is-timelord=no
+@z
+
+@x
+  daleks
+  ```
+@y
+  daleks
+  ```
+@z
+
+@x
+  The following example filter matches volumes with the `is-timelord` label
+  regardless of its value.
+@y
+  以下の例では `is-timelord` ラベルを持ったボリュームを抽出します。
+  この場合、その値の内容は問いません。
+@z
+
+@x
+  ```bash
+  $ docker volume ls --filter label=is-timelord
+
+  DRIVER              VOLUME NAME
+  local               daleks
+  local               the-doctor
+  ```
+@y
+  ```bash
+  $ docker volume ls --filter label=is-timelord
+
+  DRIVER              VOLUME NAME
+  local               daleks
+  local               the-doctor
+  ```
+@z
+
+@x
+  As the above example demonstrates, both volumes with `is-timelord=yes`, and
+  `is-timelord=no` are returned.
+@y
+  上の結果からわかるように、`is-timelord=yes` と `is-timelord=no` というラベルを持ったボリュームが表示されます。
+@z
+
+@x
+  Filtering on both `key` *and* `value` of the label, produces the expected result:
+@y
+  ラベルの `key` と `value` の **双方を** フィルターに指定すれば、そのとおりの結果が返ります。
+@z
+
+@x
+  ```bash
+  $ docker volume ls --filter label=is-timelord=yes
+
+  DRIVER              VOLUME NAME
+  local               the-doctor
+  ```
+@y
+  ```bash
+  $ docker volume ls --filter label=is-timelord=yes
+
+  DRIVER              VOLUME NAME
+  local               the-doctor
+  ```
+@z
+
+@x
+  Specifying multiple label filter produces an "and" search; all conditions
+  should be met;
+@y
+  ラベルのフィルターフラグを複数指定すると「AND」検索になります。
+  つまりすべての条件が満たされた検索になります。
+@z
+
+@x
+  ```bash
+  $ docker volume ls --filter label=is-timelord=yes --filter label=is-timelord=no
+
+  DRIVER              VOLUME NAME
+  ```
+@y
+  ```bash
+  $ docker volume ls --filter label=is-timelord=yes --filter label=is-timelord=no
+
+  DRIVER              VOLUME NAME
+  ```
+@z
+
+@x
+  #### name
+@y
+  {: #name }
+  #### name フィルター
+@z
+
+@x
+  The `name` filter matches on all or part of a volume's name.
+@y
+  `name` フィルターは、ボリューム名の全部または一部を検索します。
+@z
+
+@x
+  The following filter matches all volumes with a name containing the `rose` string.
+@y
+  以下のフィルター指定では、`rose` という文字列を名前に含んだボリュームすべてが検索されます。
+@z
+
+@x
+  ```bash
+  $ docker volume ls -f name=rose
+
+  DRIVER              VOLUME NAME
+  local               rosemary
+  ```
+@y
+  ```bash
+  $ docker volume ls -f name=rose
+
+  DRIVER              VOLUME NAME
+  local               rosemary
+  ```
+@z
+
+@x
+  ### Formatting
+@y
+  {: #formatting }
+  ### フォーマット設定
+@z
+
+@x
+  The formatting options (`--format`) pretty-prints volumes output
+  using a Go template.
+@y
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、ボリュームをわかりやすく出力することができます。
+@z
+
+@x
+  Valid placeholders for the Go template are listed below:
+@y
+  Go 言語テンプレートによるプレースホルダー（placeholder）は、以下のとおりです。
+@z
+
+@x
+  Placeholder   | Description
+  --------------|------------------------------------------------------------------------------------------
+  `.Name`       | Volume name
+  `.Driver`     | Volume driver
+  `.Scope`      | Volume scope (local, global)
+  `.Mountpoint` | The mount point of the volume on the host
+  `.Labels`     | All labels assigned to the volume
+  `.Label`      | Value of a specific label for this volume. For example `{{.Label "project.version"}}`
+@y
+  プレースホルダー | 内容説明
+  --------------|------------------------------------------------------------------------------------------
+  `.Name`       | ボリューム名。
+  `.Driver`     | ボリュームドライバー。
+  `.Scope`      | ボリュームの範囲（local, global）
+  `.Mountpoint` | ホスト上のボリュームのマウントポイント
+  `.Labels`     | ボリュームに割り当てられている全ラベル。
+  `.Label`      | そのボリュームに設定されている特定ラベルの値。たとえば `{{.Label "project.version"}}`
+@z
+
+@x
+  When using the `--format` option, the `volume ls` command will either
+  output the data exactly as the template declares or, when using the
+  `table` directive, includes column headers as well.
+@y
+  `--format` オプションを利用すると `volume ls` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
+@z
+
+@x
+  The following example uses a template without headers and outputs the
+  `Name` and `Driver` entries separated by a colon (`:`) for all volumes:
+@y
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける `Name`、`Driver` の各項目がコロン（`:`）で区切って表示されます。
+@z
+
+@x
+  ```bash
+  $ docker volume ls --format "{{.Name}}: {{.Driver}}"
+
+  vol1: local
+  vol2: local
+  vol3: local
+  ```
+@y
+  ```bash
+  $ docker volume ls --format "{{.Name}}: {{.Driver}}"
+
+  vol1: local
+  vol2: local
+  vol3: local
+  ```
+@z
+
+@x
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+min_api_version: "1.21"
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

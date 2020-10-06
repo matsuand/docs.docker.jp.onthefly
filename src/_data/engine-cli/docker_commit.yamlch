@@ -1,0 +1,334 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker commit
+short: Create a new image from a container's changes
+@y
+command: docker commit
+short: コンテナーの変更に基づいて新たなイメージを生成します。
+@z
+
+@x
+long: |-
+  It can be useful to commit a container's file changes or settings into a new
+  image. This allows you to debug a container by running an interactive shell, or to
+  export a working dataset to another server. Generally, it is better to use
+  Dockerfiles to manage your images in a documented and maintainable way.
+  [Read more about valid image names and tags](tag.md).
+@y
+long: |-
+  コンテナー内のファイル変更や設定を、新たなイメージにコミットできると、役に立つことがあります。
+  これがあれば、コンテナーを対話型シェルにおいて起動しながらデバッグできたり、あるいは操作中のデータセットを別サーバーにエクスポートしたりできます。
+  一般的には Dockerfile にすべてを記述して、保守しやすい方法でイメージを管理していくことの方が望ましいことです。
+  [適切なイメージ名とタグ](tag.md) をさらに参照してください。
+@z
+
+@x
+  The commit operation will not include any data contained in
+  volumes mounted inside the container.
+@y
+  コミット操作を行っても、コンテナー内のマウントボリュームのデータは含まれません。
+@z
+
+@x
+  By default, the container being committed and its processes will be paused
+  while the image is committed. This reduces the likelihood of encountering data
+  corruption during the process of creating the commit.  If this behavior is
+  undesired, set the `--pause` option to false.
+@y
+  イメージがコミットされる間、コミット対象のコンテナーとそのプロセスはデフォルトで停止します。
+  こうするのは、コミット処理の最中にデータ損傷の可能性を軽減するためです。
+  この動作が必要ない場合は`--pause`オプションに false を設定してください。
+@z
+
+@x
+  The `--change` option will apply `Dockerfile` instructions to the image that is
+  created.  Supported `Dockerfile` instructions:
+  `CMD`|`ENTRYPOINT`|`ENV`|`EXPOSE`|`LABEL`|`ONBUILD`|`USER`|`VOLUME`|`WORKDIR`
+@y
+  `--change`オプションを指定すると、イメージの生成時に`Dockerfile`命令をイメージに適用できます。
+  サポートされている`Dockerfile`命令は以下のとおりです。
+  `CMD`|`ENTRYPOINT`|`ENV`|`EXPOSE`|`LABEL`|`ONBUILD`|`USER`|`VOLUME`|`WORKDIR`
+@z
+
+@x
+usage: docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+pname: docker
+plink: docker.yaml
+options:
+@y
+usage: docker commit [オプション] CONTAINER [REPOSITORY[:TAG]]
+pname: docker
+plink: docker.yaml
+options:
+@z
+
+@x
+- option: author
+  shorthand: a
+  value_type: string
+  description: Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: author
+  shorthand: a
+  value_type: string
+  description: 作者名（たとえば "John Hannibal Smith \<hannibal@a-team.com\>"）。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: change
+  shorthand: c
+  value_type: list
+  description: Apply Dockerfile instruction to the created image
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: change
+  shorthand: c
+  value_type: list
+  description: 生成されたイメージに Dockerfile 命令を適用します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: message
+  shorthand: m
+  value_type: string
+  description: Commit message
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: message
+  shorthand: m
+  value_type: string
+  description: コミットメッセージ。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: pause
+  shorthand: p
+  value_type: bool
+  default_value: "true"
+  description: Pause container during commit
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: pause
+  shorthand: p
+  value_type: bool
+  default_value: "true"
+  description: コミット中はコンテナーを停止します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Commit a container
+@y
+examples: |-
+  {: #commit-a-container }
+  ### コンテナーのコミット
+@z
+
+@x
+  ```bash
+  $ docker ps
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
+  c3f279d17e0a        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            focused_hamilton
+@y
+  ```bash
+  $ docker ps
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
+  c3f279d17e0a        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            focused_hamilton
+@z
+
+@x
+  $ docker commit c3f279d17e0a  svendowideit/testimage:version3
+
+  f5283438590d
+@y
+  $ docker commit c3f279d17e0a  svendowideit/testimage:version3
+
+  f5283438590d
+@z
+
+@x
+  $ docker images
+
+  REPOSITORY                        TAG                 ID                  CREATED             SIZE
+  svendowideit/testimage            version3            f5283438590d        16 seconds ago      335.7 MB
+  ```
+@y
+  $ docker images
+
+  REPOSITORY                        TAG                 ID                  CREATED             SIZE
+  svendowideit/testimage            version3            f5283438590d        16 seconds ago      335.7 MB
+  ```
+@z
+
+@x
+  ### Commit a container with new configurations
+@y
+  {: #commit-a-container-with-new-configurations }
+  ### 新たな設定を利用したコンテナーのコミット
+@z
+
+@x
+  ```bash
+  $ docker ps
+
+  CONTAINER ID       IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
+  c3f279d17e0a        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            focused_hamilton
+@y
+  ```bash
+  $ docker ps
+
+  CONTAINER ID       IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
+  c3f279d17e0a        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            focused_hamilton
+@z
+
+@x
+  $ docker inspect -f "{{ .Config.Env }}" c3f279d17e0a
+
+  [HOME=/ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin]
+@y
+  $ docker inspect -f "{{ .Config.Env }}" c3f279d17e0a
+
+  [HOME=/ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin]
+@z
+
+@x
+  $ docker commit --change "ENV DEBUG=true" c3f279d17e0a  svendowideit/testimage:version3
+
+  f5283438590d
+@y
+  $ docker commit --change "ENV DEBUG=true" c3f279d17e0a  svendowideit/testimage:version3
+
+  f5283438590d
+@z
+
+@x
+  $ docker inspect -f "{{ .Config.Env }}" f5283438590d
+
+  [HOME=/ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin DEBUG=true]
+  ```
+@y
+  $ docker inspect -f "{{ .Config.Env }}" f5283438590d
+
+  [HOME=/ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin DEBUG=true]
+  ```
+@z
+
+@x
+  ### Commit a container with new `CMD` and `EXPOSE` instructions
+@y
+  {: #commit-a-container-with-new-cmd-and-expose-instructions }
+  ### 新たな`CMD`、`EXPOSE`命令によるコンテナーのコミット
+@z
+
+@x
+  ```bash
+  $ docker ps
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
+  c3f279d17e0a        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            focused_hamilton
+@y
+  ```bash
+  $ docker ps
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
+  c3f279d17e0a        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash           7 days ago          Up 25 hours                            focused_hamilton
+@z
+
+@x
+  $ docker commit --change='CMD ["apachectl", "-DFOREGROUND"]' -c "EXPOSE 80" c3f279d17e0a  svendowideit/testimage:version4
+
+  f5283438590d
+@y
+  $ docker commit --change='CMD ["apachectl", "-DFOREGROUND"]' -c "EXPOSE 80" c3f279d17e0a  svendowideit/testimage:version4
+
+  f5283438590d
+@z
+
+@x
+  $ docker run -d svendowideit/testimage:version4
+
+  89373736e2e7f00bc149bd783073ac43d0507da250e999f3f1036e0db60817c0
+@y
+  $ docker run -d svendowideit/testimage:version4
+
+  89373736e2e7f00bc149bd783073ac43d0507da250e999f3f1036e0db60817c0
+@z
+
+@x
+  $ docker ps
+
+  CONTAINER ID        IMAGE               COMMAND                 CREATED             STATUS              PORTS              NAMES
+  89373736e2e7        testimage:version4  "apachectl -DFOREGROU"  3 seconds ago       Up 2 seconds        80/tcp             distracted_fermat
+  c3f279d17e0a        ubuntu:12.04        /bin/bash               7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash               7 days ago          Up 25 hours                            focused_hamilton
+  ```
+@y
+  $ docker ps
+
+  CONTAINER ID        IMAGE               COMMAND                 CREATED             STATUS              PORTS              NAMES
+  89373736e2e7        testimage:version4  "apachectl -DFOREGROU"  3 seconds ago       Up 2 seconds        80/tcp             distracted_fermat
+  c3f279d17e0a        ubuntu:12.04        /bin/bash               7 days ago          Up 25 hours                            desperate_dubinsky
+  197387f1b436        ubuntu:12.04        /bin/bash               7 days ago          Up 25 hours                            focused_hamilton
+  ```
+@z
+
+@x
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z

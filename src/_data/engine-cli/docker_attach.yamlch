@@ -1,0 +1,426 @@
+%This is the change file for the original Docker's Documentation file.
+%This is part of Japanese translation version for Docker's Documantation.
+
+@x
+command: docker attach
+short: Attach local standard input, output, and error streams to a running container
+@y
+command: docker attach
+short: ローカルの標準入出力やエラー出力を実行中コンテナーにアタッチします。
+@z
+
+@x
+long: |-
+  Use `docker attach` to attach your terminal's standard input, output, and error
+  (or any combination of the three) to a running container using the container's
+  ID or name. This allows you to view its ongoing output or to control it
+  interactively, as though the commands were running directly in your terminal.
+@y
+long: |-
+  `docker attach` を使えば、ターミナルの標準入力、標準出力、標準エラー出力（あるいはその組み合わせ）を実行中のコンテナーにアタッチすることができます。
+  アタッチの際にはコンテナーの ID または名前を指定します。
+  これを利用すれば処理中の内容を確認したり、対話的な制御を可能にすることができます。
+  あたかもそのコマンドが、ターミナル画面上に直接起動しているようになります。
+@z
+
+@x
+  > **Note:**
+  > The `attach` command will display the output of the `ENTRYPOINT/CMD` process.  This
+  > can appear as if the attach command is hung when in fact the process may simply
+  > not be interacting with the terminal at that time.
+@y
+  > **メモ:**
+  > `attach` コマンドは `ENTRYPOINT/CMD` による処理結果を表示します。
+  > ただしそのときには attach コマンドがハングしたように見えます。
+  > コマンドが処理される時点において、その処理はターミナル画面との間で単にやり取りができないものだからです。
+@z
+
+@x
+  You can attach to the same contained process multiple times simultaneously,
+  from different sessions on the Docker host.
+@y
+  一つのコンテナープロセスに対して、Docker ホスト上の別々のセッションから、同時にいくつでもアタッチすることができます。
+@z
+
+@x
+  To stop a container, use `CTRL-c`. This key sequence sends `SIGKILL` to the
+  container. If `--sig-proxy` is true (the default),`CTRL-c` sends a `SIGINT` to
+  the container. If the container was run with `-i` and `-t`, you can detach from
+  a container and leave it running using the `CTRL-p CTRL-q` key sequence.
+@y
+  コンテナーの停止には `CTRL-c` を用います。
+  このキーシーケンスは、コンテナーに対して `SIGKILL` を送信するものです。
+  `--sig-proxy` が true（デフォルト）である場合、`CTRL-c` はコンテナーに `SIGINT` を送信します。
+  コンテナーが `-i` と `-t` を使って起動されていた場合、コンテナーからデタッチしてコンテナーを起動したままとするには、キーシーケンス `CTRL-p CTRL-q` を入力します。
+@z
+
+@x
+  > **Note:**
+  > A process running as PID 1 inside a container is treated specially by
+  > Linux: it ignores any signal with the default action. So, the process
+  > will not terminate on `SIGINT` or `SIGTERM` unless it is coded to do
+  > so.
+@y
+  > **メモ:**
+  > コンテナー内にて PID 1 として実行しているプロセスは、Linux において特別に取り扱われるものです。
+  > このプロセスのデフォルト動作は、あらゆるシグナルを無視します。
+  > したがってこのプロセスが特別にコーディングされていない限り、`SIGINT` や `SIGTERM` では停止しません。
+@z
+
+@x
+  It is forbidden to redirect the standard input of a `docker attach` command
+  while attaching to a tty-enabled container (i.e.: launched with `-t`).
+@y
+  TTY を有効にしたコンテナーにおいて、`docker attach` コマンドによってアタッチしている標準入力をリダイレクトすることは禁止されています。
+@z
+
+@x
+  While a client is connected to container's stdio using `docker attach`, Docker
+  uses a ~1MB memory buffer to maximize the throughput of the application. If
+  this buffer is filled, the speed of the API connection will start to have an
+  effect on the process output writing speed. This is similar to other
+  applications like SSH. Because of this, it is not recommended to run
+  performance critical applications that generate a lot of output in the
+  foreground over a slow client connection. Instead, users should use the
+  `docker logs` command to get access to the logs.
+@y
+  `docker attach` コマンドを使って、クライアントがコンテナーの標準入出力に接続されている場合、Docker は最大 1 MB までのバッファを利用して、アプリケーションのスループットを最大化します。
+  このバッファがいっぱいになると、API 接続速度が、プロセス出力の書き込み速度に影響が出るようになります。
+  これは SSH のような他のアプリケーションにおいても発生することです。
+  このようなことがあるため、性能を重視するアプリケーションがフォアグラウンド出力を大量に行うものであって、低速なクライアント接続を必要とするものであれば、こういったアプリケーションの実行はお勧めできません。
+  その代わりに `docker logs` コマンドを使って、ログにアクセスするようにしてください。
+@z
+
+@x
+  ### Override the detach sequence
+@y
+  {: #override-the-detach-sequence }
+  ### デタッチシーケンスのオーバーライド
+@z
+
+@x
+  If you want, you can configure an override the Docker key sequence for detach.
+  This is useful if the Docker default sequence conflicts with key sequence you
+  use for other applications. There are two ways to define your own detach key
+  sequence, as a per-container override or as a configuration property on  your
+  entire configuration.
+@y
+  必要ならば、デタッチ時のキーシーケンスはオーバーライドすることができます。
+  これが必要になるのは、たとえばアプリケーションが利用するキーシーケンスが、Docker のデフォルトシーケンスと衝突してしまう場合です。
+  デタッチ時のキーシーケンスを独自に定義するには 2 つの方法があります。
+  コンテナーごとにオーバーライドする方法と、全体設定の中でプロパティ設定する方法です。
+@z
+
+@x
+  To override the sequence for an individual container, use the
+  `--detach-keys="<sequence>"` flag with the `docker attach` command. The format of
+  the `<sequence>` is either a letter [a-Z], or the `ctrl-` combined with any of
+  the following:
+@y
+  個々のコンテナーに対してシーケンスをオーバーライドするには、`docker attach` コマンドにおける `--detach-keys="<シーケンス>"` フラグを使います。
+  `<シーケンス>` の記述書式は、英文字 [a-Z] か、あるいは `ctrl-` に以下を組み合わせたもののいずれかです。
+@z
+
+@x
+  * `a-z` (a single lowercase alpha character )
+  * `@` (at sign)
+  * `[` (left bracket)
+  * `\\` (two backward slashes)
+  *  `_` (underscore)
+  * `^` (caret)
+@y
+  * `a-z` （単一の英小文字）
+  * `@` （アットマーク）
+  * `[` (左ブラケット)
+  * `\\` (2 つのバックスラッシュ)
+  *  `_` (アンダースコア)
+  * `^` (キャレット)
+@z
+
+@x
+  These `a`, `ctrl-a`, `X`, or `ctrl-\\` values are all examples of valid key
+  sequences. To configure a different configuration default key sequence for all
+  containers, see [**Configuration file** section](cli.md#configuration-files).
+@y
+  キーシーケンスとして `a`、`ctrl-a`、`X`、`ctrl-\\` はいずれも正しい例です。
+  コンテナー全体にわたって、デフォルトキーシーケンスを定義したい場合は [**設定ファイル** の節](cli.md#configuration-files) を参照してください。
+@z
+
+@x
+usage: docker attach [OPTIONS] CONTAINER
+pname: docker
+plink: docker.yaml
+options:
+@y
+usage: docker attach [オプション] CONTAINER
+pname: docker
+plink: docker.yaml
+options:
+@z
+
+@x
+- option: detach-keys
+  value_type: string
+  description: Override the key sequence for detaching a container
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: detach-keys
+  value_type: string
+  description: コンテナーデタッチ時のキーシーケンスをオーバーライドします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: no-stdin
+  value_type: bool
+  default_value: "false"
+  description: Do not attach STDIN
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: no-stdin
+  value_type: bool
+  default_value: "false"
+  description: STDIN をアタッチしません。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: sig-proxy
+  value_type: bool
+  default_value: "true"
+  description: Proxy all received signals to the process
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: sig-proxy
+  value_type: bool
+  default_value: "true"
+  description: 受信シグナルをすべてプロセスにプロキシーします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+examples: |-
+  ### Attach to and detach from a running container
+@y
+examples: |-
+  {: #attach-to-and-detach-from-a-running-container }
+  ### 実行中コンテナーのアタッチ、デタッチ
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+  $ docker run -d --name topdemo ubuntu /usr/bin/top -b
+@y
+  $ docker run -d --name topdemo ubuntu /usr/bin/top -b
+@z
+
+@x
+  $ docker attach topdemo
+@y
+  $ docker attach topdemo
+@z
+
+@x
+  top - 02:05:52 up  3:05,  0 users,  load average: 0.01, 0.02, 0.05
+  Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+  Cpu(s):  0.1%us,  0.2%sy,  0.0%ni, 99.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+  Mem:    373572k total,   355560k used,    18012k free,    27872k buffers
+  Swap:   786428k total,        0k used,   786428k free,   221740k cached
+@y
+  top - 02:05:52 up  3:05,  0 users,  load average: 0.01, 0.02, 0.05
+  Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+  Cpu(s):  0.1%us,  0.2%sy,  0.0%ni, 99.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+  Mem:    373572k total,   355560k used,    18012k free,    27872k buffers
+  Swap:   786428k total,        0k used,   786428k free,   221740k cached
+@z
+
+@x
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+   1 root      20   0 17200 1116  912 R    0  0.3   0:00.03 top
+@y
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+   1 root      20   0 17200 1116  912 R    0  0.3   0:00.03 top
+@z
+
+@x
+   top - 02:05:55 up  3:05,  0 users,  load average: 0.01, 0.02, 0.05
+   Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+   Cpu(s):  0.0%us,  0.2%sy,  0.0%ni, 99.8%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+   Mem:    373572k total,   355244k used,    18328k free,    27872k buffers
+   Swap:   786428k total,        0k used,   786428k free,   221776k cached
+@y
+   top - 02:05:55 up  3:05,  0 users,  load average: 0.01, 0.02, 0.05
+   Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+   Cpu(s):  0.0%us,  0.2%sy,  0.0%ni, 99.8%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+   Mem:    373572k total,   355244k used,    18328k free,    27872k buffers
+   Swap:   786428k total,        0k used,   786428k free,   221776k cached
+@z
+
+@x
+     PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+         1 root      20   0 17208 1144  932 R    0  0.3   0:00.03 top
+@y
+     PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+         1 root      20   0 17208 1144  932 R    0  0.3   0:00.03 top
+@z
+
+@x
+   top - 02:05:58 up  3:06,  0 users,  load average: 0.01, 0.02, 0.05
+   Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+   Cpu(s):  0.2%us,  0.3%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+   Mem:    373572k total,   355780k used,    17792k free,    27880k buffers
+   Swap:   786428k total,        0k used,   786428k free,   221776k cached
+@y
+   top - 02:05:58 up  3:06,  0 users,  load average: 0.01, 0.02, 0.05
+   Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+   Cpu(s):  0.2%us,  0.3%sy,  0.0%ni, 99.5%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+   Mem:    373572k total,   355780k used,    17792k free,    27880k buffers
+   Swap:   786428k total,        0k used,   786428k free,   221776k cached
+@z
+
+@x
+   PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+        1 root      20   0 17208 1144  932 R    0  0.3   0:00.03 top
+  ^C$
+@y
+   PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+        1 root      20   0 17208 1144  932 R    0  0.3   0:00.03 top
+  ^C$
+@z
+
+@x
+  $ echo $?
+  0
+@y
+  $ echo $?
+  0
+@z
+
+@x
+  $ docker ps -a | grep topdemo
+@y
+  $ docker ps -a | grep topdemo
+@z
+
+@x
+  7998ac8581f9        ubuntu:14.04        "/usr/bin/top -b"   38 seconds ago      Exited (0) 21 seconds ago                          topdemo
+  ```
+@y
+  7998ac8581f9        ubuntu:14.04        "/usr/bin/top -b"   38 seconds ago      Exited (0) 21 seconds ago                          topdemo
+  ```
+@z
+
+@x
+  ### Get the exit code of the container's command
+@y
+  {: #get-the-exit-code-of-the-containers-command }
+  ### コンテナーコマンドの終了コードの取得
+@z
+
+@x
+  And in this second example, you can see the exit code returned by the `bash`
+  process is returned by the `docker attach` command to its caller too:
+@y
+  以下の 2 つめの例では、`bash` によって返される終了コードが、`docker attach` によって呼び出し元にも返されていることがわかります。
+@z
+
+@x
+  ```bash
+@y
+  ```bash
+@z
+
+@x
+      $ docker run --name test -d -it debian
+@y
+      $ docker run --name test -d -it debian
+@z
+
+@x
+      275c44472aebd77c926d4527885bb09f2f6db21d878c75f0a1c212c03d3bcfab
+@y
+      275c44472aebd77c926d4527885bb09f2f6db21d878c75f0a1c212c03d3bcfab
+@z
+
+@x
+      $ docker attach test
+@y
+      $ docker attach test
+@z
+
+@x
+      root@f38c87f2a42d:/# exit 13
+@y
+      root@f38c87f2a42d:/# exit 13
+@z
+
+@x
+      exit
+@y
+      exit
+@z
+
+@x
+      $ echo $?
+@y
+      $ echo $?
+@z
+
+@x
+      13
+@y
+      13
+@z
+
+@x
+      $ docker ps -a | grep test
+@y
+      $ docker ps -a | grep test
+@z
+
+@x
+      275c44472aeb        debian:7            "/bin/bash"         26 seconds ago      Exited (13) 17 seconds ago                         test
+  ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@y
+      275c44472aeb        debian:7            "/bin/bash"         26 seconds ago      Exited (13) 17 seconds ago                         test
+  ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+@z
