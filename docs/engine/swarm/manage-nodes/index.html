@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-06 10:14:13 +0900 -->
+<!-- Page generated 2020-10-06 17:20:38 +0900 -->
 <!-- Logic for 'edit this button'
 
 
@@ -54,7 +54,7 @@
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
   <!-- metadata -->
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-06T10:14:13+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-06T17:20:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -64,7 +64,7 @@
   <meta name="twitter:description" property="og:description" itemprop="description" content="Swarm 管理のライフサイクルの中では、以下のようなノード参照やノード更新が必要になります。 ノードの一覧表示 ノードの詳細表示 ノードの更新 leave the swarm ノードの一覧表示 Swarm 内のノード一覧を表示するには、マネージャーノードからdocker node lsを実行します。 $ docker node ls ID HOSTNAME STATUS AVAILABILITY MANAGER STATUS 46aqrk4e473hjbt745z53cr3t node-5 Ready Active Reachable 61pi3d91s0w3b90ijw3deeb2q node-4..." />
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-06T10:14:13+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-06T17:20:38+09:00"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="guide, swarm mode, node">
@@ -152,7 +152,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    6 分
+    5 分
   
 </span>
 
@@ -248,56 +248,51 @@ Plugins:
 
 <h3 id="change-node-availability">ノードの利用状況の変更</h3>
 
-<p>Changing node availability lets you:</p>
+<p>ノードの利用状況（availability）を変更すると、以下の状況になります。</p>
 
 <ul>
-  <li>drain a manager node so that only performs swarm management tasks and is
-unavailable for task assignment.</li>
-  <li>drain a node so you can take it down for maintenance.</li>
-  <li>pause a node so it can’t receive new tasks.</li>
-  <li>restore unavailable or paused nodes available status.</li>
+  <li>マネージャーノードを排出（drain）します。
+このマネージャーノードは、Swarm の管理タスクのみを実行し、タスクを受け入れることはできません。</li>
+  <li>ノードを排出することで、このノードの保守を行うことができます。</li>
+  <li>ノードを一時停止すると、新たなタスクを受け入れることはできません。</li>
+  <li>利用不能や一時停止したノードを、利用可能な状態に戻すことができます。</li>
 </ul>
 
-<p>For example, to change a manager node to <code class="highlighter-rouge">Drain</code> availability:</p>
+<p>たとえばマネージャーノードの利用状況を<code class="highlighter-rouge">Drain</code>にするには以下を行います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node update <span class="nt">--availability</span> drain node-1
 
 node-1
 </code></pre></div></div>
 
-<p>See <a href="#list-nodes">list nodes</a> for descriptions of the different availability
-options.</p>
+<p>別の利用状況オプションの説明については、<a href="#list-nodes">ノードの一覧出力</a> を参照してください。</p>
 
-<h3 id="add-or-remove-label-metadata">Add or remove label metadata</h3>
+<h3 id="add-or-remove-label-metadata">ラベルメタデータの追加や削除</h3>
 
-<p>Node labels provide a flexible method of node organization. You can also use
-node labels in service constraints. Apply constraints when you create a service
-to limit the nodes where the scheduler assigns tasks for the service.</p>
+<p>ノードにラベルをつけておくと、ノードを構成する上で柔軟な運用が可能になります。
+ノードラベルはサービスの制約を示すものとして利用することもできます。
+サービスを作成するときに、サービスをタスクに割り当てる際の制限がノードにおいてある場合には、制約を適用してください。</p>
 
-<p>Run <code class="highlighter-rouge">docker node update --label-add</code> on a manager node to add label metadata to
-a node. The <code class="highlighter-rouge">--label-add</code> flag supports either a <code class="highlighter-rouge">&lt;key&gt;</code> or a <code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code>
-pair.</p>
+<p>マネージャーノード上から<code class="highlighter-rouge">docker node update --label-add</code>を実行して、ノードにラベルメタデータを追加します。
+<code class="highlighter-rouge">--label-add</code>フラグは、単独の<code class="highlighter-rouge">&lt;key&gt;</code>、または<code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code>のペア表記のいずれも可です。</p>
 
-<p>Pass the <code class="highlighter-rouge">--label-add</code> flag once for each node label you want to add:</p>
+<p>ラベルを追加したいノードに対して、一度だけ<code class="highlighter-rouge">--label-add</code>フラグをつけて以下を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node update <span class="nt">--label-add</span> foo <span class="nt">--label-add</span> <span class="nv">bar</span><span class="o">=</span>baz node-1
 
 node-1
 </code></pre></div></div>
 
-<p>The labels you set for nodes using docker node update apply only to the node
-entity within the swarm. Do not confuse them with the docker daemon labels for
-<a href="/docs.docker.jp.onthefly/config/labels-custom-metadata/#daemon-labels">dockerd</a>.</p>
+<p>docker node update を使ってノード用に設定するラベルは、Swarm 内のノードにしか適用されません。
+Docker デーモン <a href="/docs.docker.jp.onthefly/config/labels-custom-metadata/#daemon-labels">dockerd</a> におけるラベルと混同しないように注意してください。</p>
 
-<p>Therefore, node labels can be used to limit critical tasks to nodes that meet
-certain requirements. For example, schedule only on machines where special
-workloads should be run, such as machines that meet <a href="https://www.pcisecuritystandards.org/">PCI-SS
-compliance</a>.</p>
+<p>そこでノードラベルを、特定の条件を満たすノードに割り当てる重要タスクに対して活用することができます。
+たとえば、特別な処理を実行させるマシン、たとえば <a href="https://www.pcisecuritystandards.org/">PCI-SS コンプライアンス</a> を満たすマシンだけをスケジュールするような場合です。</p>
 
-<p>A compromised worker could not compromise these special workloads because it
-cannot change node labels.</p>
+<p>ワーカーが侵害されても、そもそもノードラベルの変更はできないので、その特別な処理が侵害されることはありえません。</p>
 
-<p>Engine labels, however, are still useful because some features that do not
+<p>ただ Engine ラベルは
+Engine labels, however, are still useful because some features that do not
 affect secure orchestration of containers might be better off set in a
 decentralized manner. For instance, an engine could have a label to indicate
 that it has a certain type of disk device, which may not be relevant to security
@@ -523,9 +518,9 @@ manager node to remove the node from the node list.</p>
                                 <div class="feedback-links">
                                     <ul>
                                         
-                                        <li><a href="https://github.com/matsuand/docs.docker.jp/edit/v19.03.local/engine/swarm/manage-nodes.md"><i
+                                        <li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/engine/swarm/manage-nodes.ch"><i
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i> このページの編集</a></li>
-                                        <li><a href="https://github.com/matsuand/docs.docker.jp/issues/new?body=ファイル: [engine/swarm/manage-nodes.md](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/manage-nodes/)"
+                                        <li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=ファイル: [engine/swarm/manage-nodes.ch](https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/manage-nodes/)"
                                                 class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 文書変更のリクエスト</a></li>
                                         <!-- toggle mode -->
                                         <li>
@@ -558,7 +553,7 @@ manager node to remove the node from the node list.</p>
   <li><a href="#update-a-node" class="nomunge">ノードの更新</a>
     <ul>
       <li><a href="#change-node-availability" class="nomunge">ノードの利用状況の変更</a></li>
-      <li><a href="#add-or-remove-label-metadata" class="nomunge">Add or remove label metadata</a></li>
+      <li><a href="#add-or-remove-label-metadata" class="nomunge">ラベルメタデータの追加や削除</a></li>
       <li><a href="#promote-or-demote-a-node" class="nomunge">ノードの昇格と降格</a></li>
     </ul>
   </li>

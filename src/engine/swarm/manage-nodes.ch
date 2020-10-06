@@ -298,7 +298,7 @@ Changing node availability lets you:
 {% comment %}
 Changing node availability lets you:
 {% endcomment %}
-Changing node availability lets you:
+ノードの利用状況（availability）を変更すると、以下の状況になります。
 @z
 
 @x
@@ -315,11 +315,11 @@ Changing node availability lets you:
 * pause a node so it can't receive new tasks.
 * restore unavailable or paused nodes available status.
 {% endcomment %}
-* drain a manager node so that only performs swarm management tasks and is
-  unavailable for task assignment.
-* drain a node so you can take it down for maintenance.
-* pause a node so it can't receive new tasks.
-* restore unavailable or paused nodes available status.
+* マネージャーノードを排出（drain）します。
+  このマネージャーノードは、Swarm の管理タスクのみを実行し、タスクを受け入れることはできません。
+* ノードを排出することで、このノードの保守を行うことができます。
+* ノードを一時停止すると、新たなタスクを受け入れることはできません。
+* 利用不能や一時停止したノードを、利用可能な状態に戻すことができます。
 @z
 
 @x
@@ -328,7 +328,7 @@ For example, to change a manager node to `Drain` availability:
 {% comment %}
 For example, to change a manager node to `Drain` availability:
 {% endcomment %}
-For example, to change a manager node to `Drain` availability:
+たとえばマネージャーノードの利用状況を`Drain`にするには以下を行います。
 @z
 
 @x
@@ -353,8 +353,7 @@ options.
 See [list nodes](#list-nodes) for descriptions of the different availability
 options.
 {% endcomment %}
-See [list nodes](#list-nodes) for descriptions of the different availability
-options.
+別の利用状況オプションの説明については、[ノードの一覧出力](#list-nodes) を参照してください。
 @z
 
 @x
@@ -363,7 +362,8 @@ options.
 {% comment %}
 ### Add or remove label metadata
 {% endcomment %}
-### Add or remove label metadata
+{: #add-or-remove-label-metadata }
+### ラベルメタデータの追加や削除
 @z
 
 @x
@@ -376,9 +376,9 @@ Node labels provide a flexible method of node organization. You can also use
 node labels in service constraints. Apply constraints when you create a service
 to limit the nodes where the scheduler assigns tasks for the service.
 {% endcomment %}
-Node labels provide a flexible method of node organization. You can also use
-node labels in service constraints. Apply constraints when you create a service
-to limit the nodes where the scheduler assigns tasks for the service.
+ノードにラベルをつけておくと、ノードを構成する上で柔軟な運用が可能になります。
+ノードラベルはサービスの制約を示すものとして利用することもできます。
+サービスを作成するときに、サービスをタスクに割り当てる際の制限がノードにおいてある場合には、制約を適用してください。
 @z
 
 @x
@@ -391,9 +391,8 @@ Run `docker node update --label-add` on a manager node to add label metadata to
 a node. The `--label-add` flag supports either a `<key>` or a `<key>=<value>`
 pair.
 {% endcomment %}
-Run `docker node update --label-add` on a manager node to add label metadata to
-a node. The `--label-add` flag supports either a `<key>` or a `<key>=<value>`
-pair.
+マネージャーノード上から`docker node update --label-add`を実行して、ノードにラベルメタデータを追加します。
+`--label-add`フラグは、単独の`<key>`、または`<key>=<value>`のペア表記のいずれも可です。
 @z
 
 @x
@@ -402,7 +401,7 @@ Pass the `--label-add` flag once for each node label you want to add:
 {% comment %}
 Pass the `--label-add` flag once for each node label you want to add:
 {% endcomment %}
-Pass the `--label-add` flag once for each node label you want to add:
+ラベルを追加したいノードに対して、一度だけ`--label-add`フラグをつけて以下を実行します。
 @z
 
 @x
@@ -429,9 +428,8 @@ The labels you set for nodes using docker node update apply only to the node
 entity within the swarm. Do not confuse them with the docker daemon labels for
 [dockerd](../../config/labels-custom-metadata.md#daemon-labels).
 {% endcomment %}
-The labels you set for nodes using docker node update apply only to the node
-entity within the swarm. Do not confuse them with the docker daemon labels for
-[dockerd](../../config/labels-custom-metadata.md#daemon-labels).
+docker node update を使ってノード用に設定するラベルは、Swarm 内のノードにしか適用されません。
+Docker デーモン [dockerd](../../config/labels-custom-metadata.md#daemon-labels) におけるラベルと混同しないように注意してください。
 @z
 
 @x
@@ -446,10 +444,9 @@ certain requirements. For example, schedule only on machines where special
 workloads should be run, such as machines that meet [PCI-SS
 compliance](https://www.pcisecuritystandards.org/).
 {% endcomment %}
-Therefore, node labels can be used to limit critical tasks to nodes that meet
-certain requirements. For example, schedule only on machines where special
-workloads should be run, such as machines that meet [PCI-SS
-compliance](https://www.pcisecuritystandards.org/).
+そこでノードラベルを、特定の条件を満たすノードに割り当てる重要タスクに対して活用することができます。
+たとえば、特別な処理を実行させるマシン、たとえば [PCI-SS コンプライアンス](https://www.pcisecuritystandards.org/) を満たすマシンだけをスケジュールするような場合です。
+
 @z
 
 @x
@@ -460,8 +457,7 @@ cannot change node labels.
 A compromised worker could not compromise these special workloads because it
 cannot change node labels.
 {% endcomment %}
-A compromised worker could not compromise these special workloads because it
-cannot change node labels.
+ワーカーが侵害されても、そもそもノードラベルの変更はできないので、その特別な処理が侵害されることはありえません。
 @z
 
 @x
@@ -478,6 +474,7 @@ decentralized manner. For instance, an engine could have a label to indicate
 that it has a certain type of disk device, which may not be relevant to security
 directly. These labels are more easily "trusted" by the swarm orchestrator.
 {% endcomment %}
+ただ Engine ラベルは
 Engine labels, however, are still useful because some features that do not
 affect secure orchestration of containers might be better off set in a
 decentralized manner. For instance, an engine could have a label to indicate
