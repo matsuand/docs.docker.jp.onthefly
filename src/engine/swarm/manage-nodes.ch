@@ -156,7 +156,7 @@ The `MANAGER STATUS` column shows node participation in the Raft consensus:
 * `Leader`（リーダー） は、主となるマネージャーノードであることを表わします。
   Swarm において、すべての Swarm 管理操作やオーケストレーション決定を行います。
 * `Reachable`（到達可能）は、Raft 合意（Raft consensus）の多数票（quorum）に参加しているマネージャーノードを表わします。
-  リーダーノードが利用不能になった場合、新たなリーダーとして選任される資格を持つノードです。
+  リーダーノードが利用不能になったときに、新たなリーダーとして選任される資格を持つノードです。
 * `Unavailable`（利用不能）は、他のマネージャーとの通信ができなくなっているマネージャーを表わします。
   マネージャーノードが利用不能になった場合、新たなマネージャーノードを Swarm に参加させるか、ワーカーノードをマネージャーに昇格させる必要があります。
 @z
@@ -192,7 +192,7 @@ pass the `--pretty` flag to print the results in human-readable format. For exam
 {% endcomment %}
 マネージャーノード上において`docker node inspect <NODE-ID>`を実行して、個々のノードについての詳細を確認することができます。
 出力はデフォルトで JSON 形式です。
-`--pretty`フラグを指定すれば、読みやすい書式により出力することができます。
+`--pretty`フラグを指定すれば、読みやすい書式で出力することができます。
 たとえば以下のとおりです。
 @z
 
@@ -298,7 +298,7 @@ Changing node availability lets you:
 {% comment %}
 Changing node availability lets you:
 {% endcomment %}
-ノードの利用状況（availability）を変更すると、以下の状況になります。
+ノードの利用状況（availability）は、以下のような変更を行うことができます。
 @z
 
 @x
@@ -315,8 +315,8 @@ Changing node availability lets you:
 * pause a node so it can't receive new tasks.
 * restore unavailable or paused nodes available status.
 {% endcomment %}
-* マネージャーノードを排出（drain）します。
-  このマネージャーノードは、Swarm の管理タスクのみを実行し、タスクを受け入れることはできません。
+* マネージャーノードを排出（drain）することができます。
+  このマネージャーノードは、Swarm の管理タスクのみを実行しますが、タスク割り当ては行いません。
 * ノードを排出することで、このノードの保守を行うことができます。
 * ノードを一時停止すると、新たなタスクを受け入れることはできません。
 * 利用不能や一時停止したノードを、利用可能な状態に戻すことができます。
@@ -378,7 +378,7 @@ to limit the nodes where the scheduler assigns tasks for the service.
 {% endcomment %}
 ノードにラベルをつけておくと、ノードを構成する上で柔軟な運用が可能になります。
 ノードラベルはサービスの制約を示すものとして利用することもできます。
-サービスを作成するときに、サービスをタスクに割り当てる際の制限がノードにおいてある場合には、制約を適用してください。
+サービスを作成するときに、スケジューラーのノードに対するタスク割り当てに制限がある場合には、制約を適用してください。
 @z
 
 @x
@@ -401,7 +401,7 @@ Pass the `--label-add` flag once for each node label you want to add:
 {% comment %}
 Pass the `--label-add` flag once for each node label you want to add:
 {% endcomment %}
-ラベルを追加したいノードに対して、一度だけ`--label-add`フラグをつけて以下を実行します。
+ラベルを追加するノードに対して、一度だけ`--label-add`フラグをつけて以下を実行します。
 @z
 
 @x
@@ -444,8 +444,8 @@ certain requirements. For example, schedule only on machines where special
 workloads should be run, such as machines that meet [PCI-SS
 compliance](https://www.pcisecuritystandards.org/).
 {% endcomment %}
-そこでノードラベルを、特定の条件を満たすノードに割り当てる重要タスクに対して活用することができます。
-たとえば、特別な処理を実行させるマシン、たとえば [PCI-SS コンプライアンス](https://www.pcisecuritystandards.org/) を満たすマシンだけをスケジュールするような場合です。
+そこで特定要件を満たすノードには、重要タスクのみを限定して割り当てるように、ノードラベルを活用することができます。
+特別な処理を実行させるマシン、たとえば [PCI-SS コンプライアンス](https://www.pcisecuritystandards.org/) を満たすマシンだけをスケジュールするような場合です。
 
 @z
 
@@ -474,12 +474,11 @@ decentralized manner. For instance, an engine could have a label to indicate
 that it has a certain type of disk device, which may not be relevant to security
 directly. These labels are more easily "trusted" by the swarm orchestrator.
 {% endcomment %}
-ただ Engine ラベルは
-Engine labels, however, are still useful because some features that do not
-affect secure orchestration of containers might be better off set in a
-decentralized manner. For instance, an engine could have a label to indicate
-that it has a certain type of disk device, which may not be relevant to security
-directly. These labels are more easily "trusted" by the swarm orchestrator.
+Engine ラベルは今でも活用できます。
+コンテナーの機能の中には、オーケストレーションの安全性に影響を及ぼさない機能もあるので、そういった機能は分散化されることの方がよい場合があるので、Engine ラベルを利用できます。
+たとえばノードに特定のディスクデバイスがあることを示すために、ラベルを設定します。
+これを行ったからといって、おそらくセキュリティに直接関係しないはずです。
+こういったラベルなら Swarm オーケストレーターは、より「安心して」利用することができます。
 @z
 
 @x
@@ -490,8 +489,7 @@ for more information about service constraints.
 Refer to the `docker service create` [CLI reference](../reference/commandline/service_create.md)
 for more information about service constraints.
 {% endcomment %}
-Refer to the `docker service create` [CLI reference](../reference/commandline/service_create.md)
-for more information about service constraints.
+サービスの制約に関する詳細は [CLI リファレンスの`docker service create`](../reference/commandline/service_create.md) を参照してください。
 @z
 
 @x
@@ -514,9 +512,9 @@ You can promote a worker node to the manager role. This is useful when a
 manager node becomes unavailable or if you want to take a manager offline for
 maintenance. Similarly, you can demote a manager node to the worker role.
 {% endcomment %}
-You can promote a worker node to the manager role. This is useful when a
-manager node becomes unavailable or if you want to take a manager offline for
-maintenance. Similarly, you can demote a manager node to the worker role.
+ワーカーノードはマネージャーに昇格させることができます。
+マネージャーノードの 1 つが利用不能になるとか、マネージャーをオフラインにしてメンテナンスを行いたいといったときに、昇格操作を活用します。
+同様にマネージャーノードをワーカーへと降格させることもできます。
 @z
 
 @x
@@ -529,9 +527,8 @@ maintenance. Similarly, you can demote a manager node to the worker role.
 > a node, you must always maintain a quorum of manager nodes in the
 > swarm. For more information refer to the [Swarm administration guide](admin_guide.md).
 {% endcomment %}
-> **Note**: Regardless of your reason to promote or demote
-> a node, you must always maintain a quorum of manager nodes in the
-> swarm. For more information refer to the [Swarm administration guide](admin_guide.md).
+> **メモ**: ノードの昇格や降格の理由がどのようなものであっても、Swarm 内のマネージャーノードの quorum は常に維持しておかなければなりません。
+> 詳しくは [Swarm 管理ガイド](admin_guide.md) を参照してください。
 @z
 
 @x
@@ -542,8 +539,7 @@ node:
 To promote a node or set of nodes, run `docker node promote` from a manager
 node:
 {% endcomment %}
-To promote a node or set of nodes, run `docker node promote` from a manager
-node:
+1 つあるいは複数のノードを昇格させるには、マネージャーノードから`docker node promote`を実行します。
 @z
 
 @x
@@ -590,7 +586,7 @@ To demote a node or set of nodes, run `docker node demote` from a manager node:
 {% comment %}
 To demote a node or set of nodes, run `docker node demote` from a manager node:
 {% endcomment %}
-To demote a node or set of nodes, run `docker node demote` from a manager node:
+1 つあるいは複数のノードを降格させるには、マネージャーノードから`docker node demote`を実行します。
 @z
 
 @x
@@ -641,9 +637,7 @@ respectively.
 `docker node update --role manager` and `docker node update --role worker`
 respectively.
 {% endcomment %}
-`docker node promote` and `docker node demote` are convenience commands for
-`docker node update --role manager` and `docker node update --role worker`
-respectively.
+`docker node promote`と`docker node demote`は、それぞれ`docker node update --role manager`と`docker node update --role worker`の省略形です。
 @z
 
 @x
@@ -653,7 +647,7 @@ respectively.
 ## Install plugins on swarm nodes
 {% endcomment %}
 {: #install-plugins-on-swarm-nodes }
-## Install plugins on swarm nodes
+## Swarm ノードへのプラグインのインストール
 @z
 
 @x
@@ -672,12 +666,10 @@ install the plugin on each node or script the installation. In Docker 17.07 and
 higher, you can also deploy the plugin in a similar way as a global service
 using the Docker API, by specifying a `PluginSpec` instead of a `ContainerSpec`.
 {% endcomment %}
-If your swarm service relies on one or more
-[plugins](/engine/extend/plugin_api/), these plugins need to be available on
-every node where the service could potentially be deployed. You can manually
-install the plugin on each node or script the installation. In Docker 17.07 and
-higher, you can also deploy the plugin in a similar way as a global service
-using the Docker API, by specifying a `PluginSpec` instead of a `ContainerSpec`.
+Swarm サービスが [プラグイン]({{ site.baseurl }}/engine/extend/plugin_api/) をいくつか必要としている場合は、サービスがデプロイされる可能性のあるすべてのノード上において、そのプラグインが利用できることが必要です。
+プラグインのインストールは、各ノード上において手動で行うか、スクリプトを用意して行うことになります。
+Docker 17.07 およびそれ以降においては、Docker API を利用するグローバルサービスと同様の方法により、プラグインをデプロイすることができます。
+その際には`ContainerSpec`ではなく`PluginSpec`を利用します。
 @z
 
 @x
@@ -690,9 +682,8 @@ using the Docker API, by specifying a `PluginSpec` instead of a `ContainerSpec`.
 > Docker CLI or Docker Compose. In addition, it is not possible to install
 > plugins from a private repository.
 {% endcomment %}
-> **Note**: There is currently no way to deploy a plugin to a swarm using the
-> Docker CLI or Docker Compose. In addition, it is not possible to install
-> plugins from a private repository.
+> **メモ**: 今のところ、Docker CLI や Docker Compose を使って、プラグインを Swarm にデプロイする手段はありません。
+> さらにプライベートリポジトリからプラグインをインストールすることもできません。
 @z
 
 @x
@@ -707,10 +698,8 @@ is defined by the plugin developer. To add the plugin to all Docker nodes, use
 the [`service/create`](/engine/api/v1.31/#operation/ServiceCreate) API, passing
 the `PluginSpec` JSON defined in the `TaskTemplate`.
 {% endcomment %}
-The [`PluginSpec`](/engine/extend/plugin_api/#json-specification)
-is defined by the plugin developer. To add the plugin to all Docker nodes, use
-the [`service/create`](/engine/api/v1.31/#operation/ServiceCreate) API, passing
-the `PluginSpec` JSON defined in the `TaskTemplate`.
+プラグイン開発者が [`PluginSpec`]({{ site.baseurl }}/engine/extend/plugin_api/#json-specification) というものを定義しています。
+Docker ノードすべてにプラグインをインストールするには、`TaskTemplate`内に`PluginSpec`JSON を定義して [`service/create`](/engine/api/v1.31/#operation/ServiceCreate) API を利用します。
 @z
 
 @x
@@ -720,7 +709,7 @@ the `PluginSpec` JSON defined in the `TaskTemplate`.
 ## Leave the swarm
 {% endcomment %}
 {: #leave-the-swarm }
-## Leave the swarm
+## Swarm からのノード除外
 @z
 
 @x
@@ -729,7 +718,7 @@ Run the `docker swarm leave` command on a node to remove it from the swarm.
 {% comment %}
 Run the `docker swarm leave` command on a node to remove it from the swarm.
 {% endcomment %}
-Run the `docker swarm leave` command on a node to remove it from the swarm.
+ノード上において`docker swarm leave`コマンドを実行すると、Swarm からそのノードが除外されます。
 @z
 
 @x
@@ -738,7 +727,7 @@ For example to leave the swarm on a worker node:
 {% comment %}
 For example to leave the swarm on a worker node:
 {% endcomment %}
-For example to leave the swarm on a worker node:
+たとえばワーカーノードを Swarm から除外します。
 @z
 
 @x
@@ -768,7 +757,7 @@ Node left the swarm.
 ```bash
 $ docker swarm leave
 
-Node left the swarm.
+ノードが Swarm から除外されました。
 ```
 {% endcapture %}
 {{ japanese-content | markdownify }}
@@ -784,8 +773,8 @@ mode. The orchestrator no longer schedules tasks to the node.
 When a node leaves the swarm, the Docker Engine stops running in swarm
 mode. The orchestrator no longer schedules tasks to the node.
 {% endcomment %}
-When a node leaves the swarm, the Docker Engine stops running in swarm
-mode. The orchestrator no longer schedules tasks to the node.
+ノードが Swarm から除外されると、Docker Engine は Swarm モードを停止させます。
+オーケストレーターは、そのノードに対してタスクをスケジュールすることはなくなります。
 @z
 
 @x
@@ -800,10 +789,10 @@ quorum. To override the warning, pass the `--force` flag. If the last manager
 node leaves the swarm, the swarm becomes unavailable requiring you to take
 disaster recovery measures.
 {% endcomment %}
-If the node is a manager node, you receive a warning about maintaining the
-quorum. To override the warning, pass the `--force` flag. If the last manager
-node leaves the swarm, the swarm becomes unavailable requiring you to take
-disaster recovery measures.
+除外するノードがマネージャーノードの場合、quorum を維持することを警告するメッセージが表示されます。
+警告表示をなくすには`--force`フラグをつけます。
+最後に残ったマネージャーノードが除外されてしまうと、Swarm は利用不能になります。
+これに対しては障害復旧の手段を講じるしかありません。
 @z
 
 @x
@@ -814,8 +803,7 @@ For information about maintaining a quorum and disaster recovery, refer to the
 For information about maintaining a quorum and disaster recovery, refer to the
 [Swarm administration guide](admin_guide.md).
 {% endcomment %}
-For information about maintaining a quorum and disaster recovery, refer to the
-[Swarm administration guide](admin_guide.md).
+quorum の維持や障害復旧に関する詳細は [Swarm 管理ガイド](admin_guide.md) を参照してください。
 @z
 
 @x
@@ -826,8 +814,7 @@ manager node to remove the node from the node list.
 After a node leaves the swarm, you can run the `docker node rm` command on a
 manager node to remove the node from the node list.
 {% endcomment %}
-After a node leaves the swarm, you can run the `docker node rm` command on a
-manager node to remove the node from the node list.
+ノードを Swarm から除外した後に、マネージャーノード上において`docker node rm`コマンドを実行すれば、ノード一覧からそのノードを削除することができます。
 @z
 
 @x
@@ -836,7 +823,7 @@ For instance:
 {% comment %}
 For instance:
 {% endcomment %}
-For instance:
+たとえば以下のとおりです。
 @z
 
 @x
