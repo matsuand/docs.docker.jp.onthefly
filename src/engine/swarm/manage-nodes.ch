@@ -39,7 +39,7 @@ Swarm 管理のライフサイクルの中では、以下のようなノード�
 * [ノードの一覧表示](#list-nodes)
 * [ノードの詳細表示](#inspect-an-individual-node)
 * [ノードの更新](#update-a-node)
-* [leave the swarm](#leave-the-swarm)
+* [ノードの除外](#leave-the-swarm)
 @z
 
 @x
