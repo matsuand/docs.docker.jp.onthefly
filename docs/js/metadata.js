@@ -4328,8 +4328,8 @@ var pages = [
 ,
 {
 "url":"/docker-hub/vulnerability-scanning/",
-"title":"Hub Vulnerability Scanning",
-"description":"Hub Vulnerability Scanning",
+"title":"Docker Hub のぜい弱性スキャン",
+"description":"Docker Hub のぜい弱性スキャン。",
 "keywords":"scanning, vulnerabilities, Hub, Snyk"
 }
 ,

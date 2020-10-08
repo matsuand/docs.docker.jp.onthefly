@@ -51,7 +51,7 @@ various APIs, CLIs, and file formats.
 | ファイルフォーマット                                                | 内容説明                                                        |
 |:--------------------------------------------------------------------|:----------------------------------------------------------------|
 | [Dockerfile]({{ site.baseurl }}/engine/reference/builder/)          | 1 つのコンテナーの内容と起動時の動作を定義します。              |
-| [Compose file]({{ site.baseurl }}/compose/compose-file/)            | 複数コンテナーによるアプリケーションを定義します。              |
+| [Compose ファイル]({{ site.baseurl }}/compose/compose-file/)        | 複数コンテナーによるアプリケーションを定義します。              |
 @z
 
 @x

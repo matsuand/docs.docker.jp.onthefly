@@ -1382,7 +1382,7 @@ Links は [depends_on](compose-file-v2.md#depends_on) と同様にサービス�
 #### link environment variables
 {% endcomment %}
 {: #link-environment-variables }
-#### link environment variables
+#### 環境変数 link
 @z
 
 @x
@@ -1393,8 +1393,8 @@ Links は [depends_on](compose-file-v2.md#depends_on) と同様にサービス�
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and
 > up, custom networks are used, and no environment variables are created.
 {% endcomment %}
-> [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and
-> up, custom networks are used, and no environment variables are created.
+> [ファイルフォーマットバージョン 1](compose-versioning.md#version-1) のみ。
+> バージョン 2 およびそれ以降ではカスタムネットワークが利用されるので、環境変数は生成されません。
 @z
 
 @x
@@ -1423,13 +1423,12 @@ Links は [depends_on](compose-file-v2.md#depends_on) と同様にサービス�
 {% endcomment %}
 > **メモ**
 >
-> Environment variables are no longer the recommended method for connecting to
-> linked services. Instead, you should use the link name (by default, the name
-> of the linked service) as the hostname to connect to. Refer to the
-> [docker-compose.yml documentation](compose-file/index.md#links) for details.
+> リンクされたサービスに接続する方法として、環境変数を用いることは推奨されなくなりました。
+> その代わりに、接続するホスト名としてリンク名を利用してください。
+> （デフォルトではリンクされたサービスの名前です）
+> 詳しくは [docker-compose.yml のドキュメント](compose-file/index.md#links) を参照してください。
 >
-> Environment variables are only populated if you use the
-> [legacy version 1 Compose file format](compose-file/compose-versioning.md#versioning).
+> 環境変数は [かつての Compose ファイルフォーマットバージョン 1](compose-file/compose-versioning.md#versioning) を採用した場合にのみ利用されます。
 {: .warning }
 @z
 
@@ -1443,9 +1442,9 @@ Compose uses [Docker links](../../network/links.md)
 to expose services' containers to one another. Each linked container injects a set of
 environment variables, each of which begins with the uppercase name of the container.
 {% endcomment %}
-Compose uses [Docker links](../../network/links.md)
-to expose services' containers to one another. Each linked container injects a set of
-environment variables, each of which begins with the uppercase name of the container.
+Compose では [Docker links](../../network/links.md) を利用して、サービスコンテナーを他のコンテナーに対して公開します。
+リンクされているそれぞれのコンテナーは、環境変数をとりまとめて伝えます。
+各環境変数の先頭には、コンテナー名が英大文字でつきます。
 @z
 
 @x
@@ -1454,7 +1453,7 @@ To see what environment variables are available to a service, run `docker-compos
 {% comment %}
 To see what environment variables are available to a service, run `docker-compose run SERVICE env`.
 {% endcomment %}
-To see what environment variables are available to a service, run `docker-compose run SERVICE env`.
+サービスに対してどのような環境変数があるのかを確認するには、`docker-compose run SERVICE env`を実行します。
 @z
 
 @x
@@ -1466,7 +1465,7 @@ Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
 Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
 {% endcomment %}
 <b><i>name</i>\_PORT</b><br>
-Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
+完全な URL。たとえば`DB_PORT=tcp://172.17.0.5:5432`
 @z
 
 @x
@@ -1478,7 +1477,7 @@ Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
 Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
 {% endcomment %}
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i></b><br>
-Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
+完全な URL。たとえば`DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
 @z
 
 @x
@@ -1490,7 +1489,7 @@ Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
 Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
 {% endcomment %}
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_ADDR</b><br>
-Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
+コンテナーの IP アドレス。たとえば`DB_PORT_5432_TCP_ADDR=172.17.0.5`
 @z
 
 @x
@@ -1502,7 +1501,7 @@ Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
 Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
 {% endcomment %}
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PORT</b><br>
-Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
+公開ポート番号。たとえば`DB_PORT_5432_TCP_PORT=5432`
 @z
 
 @x
@@ -1514,7 +1513,7 @@ Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
 Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
 {% endcomment %}
 <b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PROTO</b><br>
-Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
+プロトコル（tcp か udp）。たとえば`DB_PORT_5432_TCP_PROTO=tcp`
 @z
 
 @x
@@ -1526,7 +1525,7 @@ Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 {% endcomment %}
 <b><i>name</i>\_NAME</b><br>
-Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
+完全修飾コンテナー名。たとえば`DB_1_NAME=/myapp_web_1/myapp_db_1`
 @z
 
 @x
@@ -1543,7 +1542,7 @@ Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
 > [logging](index.md#logging).
 {% endcomment %}
-> [ファイルフォーアットバージョン 1](compose-versioning.md#version-1) のみ。
+> [ファイルフォーマットバージョン 1](compose-versioning.md#version-1) のみ。
 > バージョン 2 またはそれ以降においては、[logging](index.md#logging) を用いてください。
 @z
 

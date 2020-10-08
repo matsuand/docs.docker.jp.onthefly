@@ -1,3 +1,4 @@
+<!-- Page generated 2020-10-08 17:32:24 +0900 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -31,7 +32,6 @@
   <link rel="canonical" href="/compose/compose-file/compose-file-v1/" />
 
   <!-- favicon -->
-  <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
   <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
   <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
@@ -57,12 +57,12 @@
   <meta property="og:title" content="Compose ファイル バージョン 1 リファレンス" />
   <meta property="og:description" content="Compose ファイルリファレンス" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-08T10:02:54+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-08T17:32:24+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-08T10:02:54+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-08T17:32:24+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose ファイル バージョン 1 リファレンス","description":"Compose ファイルリファレンス","url":"https://docs.docker.com/compose/compose-file/compose-file-v1/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -615,53 +615,52 @@ Docker Client の <code class="highlighter-rouge">--add-host</code> パラメー
   <p>links と <a href="/docs.docker.jp.onthefly/compose/compose-file/#networks">networks</a> をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。</p>
 </blockquote>
 
-<h4 id="link-environment-variables">link environment variables</h4>
+<h4 id="link-environment-variables">環境変数 link</h4>
 
 <blockquote>
-  <p><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">Version 1 file format</a> only. In version 2 and
-up, custom networks are used, and no environment variables are created.</p>
+  <p><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">ファイルフォーマットバージョン 1</a> のみ。
+バージョン 2 およびそれ以降ではカスタムネットワークが利用されるので、環境変数は生成されません。</p>
 </blockquote>
 
 <blockquote class="warning">
   <p><strong>メモ</strong></p>
 
-  <p>Environment variables are no longer the recommended method for connecting to
-linked services. Instead, you should use the link name (by default, the name
-of the linked service) as the hostname to connect to. Refer to the
-<a href="compose-file/index.md#links">docker-compose.yml documentation</a> for details.</p>
+  <p>リンクされたサービスに接続する方法として、環境変数を用いることは推奨されなくなりました。
+その代わりに、接続するホスト名としてリンク名を利用してください。
+（デフォルトではリンクされたサービスの名前です）
+詳しくは <a href="compose-file/index.md#links">docker-compose.yml のドキュメント</a> を参照してください。</p>
 
-  <p>Environment variables are only populated if you use the
-<a href="compose-file/compose-versioning.md#versioning">legacy version 1 Compose file format</a>.</p>
+  <p>環境変数は <a href="compose-file/compose-versioning.md#versioning">かつての Compose ファイルフォーマットバージョン 1</a> を採用した場合にのみ利用されます。</p>
 </blockquote>
 
-<p>Compose uses <a href="/docs.docker.jp.onthefly/network/links/">Docker links</a>
-to expose services’ containers to one another. Each linked container injects a set of
-environment variables, each of which begins with the uppercase name of the container.</p>
+<p>Compose では <a href="/docs.docker.jp.onthefly/network/links/">Docker links</a> を利用して、サービスコンテナーを他のコンテナーに対して公開します。
+リンクされているそれぞれのコンテナーは、環境変数をとりまとめて伝えます。
+各環境変数の先頭には、コンテナー名が英大文字でつきます。</p>
 
-<p>To see what environment variables are available to a service, run <code class="highlighter-rouge">docker-compose run SERVICE env</code>.</p>
+<p>サービスに対してどのような環境変数があるのかを確認するには、<code class="highlighter-rouge">docker-compose run SERVICE env</code>を実行します。</p>
 
 <p><strong><em>name</em>_PORT</strong><br />
-Full URL, such as <code class="highlighter-rouge">DB_PORT=tcp://172.17.0.5:5432</code></p>
+完全な URL。たとえば<code class="highlighter-rouge">DB_PORT=tcp://172.17.0.5:5432</code></p>
 
 <p><strong><em>name</em>_PORT_<em>num</em>_<em>protocol</em></strong><br />
-Full URL, such as <code class="highlighter-rouge">DB_PORT_5432_TCP=tcp://172.17.0.5:5432</code></p>
+完全な URL。たとえば<code class="highlighter-rouge">DB_PORT_5432_TCP=tcp://172.17.0.5:5432</code></p>
 
 <p><strong><em>name</em>_PORT_<em>num</em>_<em>protocol</em>_ADDR</strong><br />
-Container’s IP address, such as <code class="highlighter-rouge">DB_PORT_5432_TCP_ADDR=172.17.0.5</code></p>
+コンテナーの IP アドレス。たとえば<code class="highlighter-rouge">DB_PORT_5432_TCP_ADDR=172.17.0.5</code></p>
 
 <p><strong><em>name</em>_PORT_<em>num</em>_<em>protocol</em>_PORT</strong><br />
-Exposed port number, such as <code class="highlighter-rouge">DB_PORT_5432_TCP_PORT=5432</code></p>
+公開ポート番号。たとえば<code class="highlighter-rouge">DB_PORT_5432_TCP_PORT=5432</code></p>
 
 <p><strong><em>name</em>_PORT_<em>num</em>_<em>protocol</em>_PROTO</strong><br />
-Protocol (tcp or udp), such as <code class="highlighter-rouge">DB_PORT_5432_TCP_PROTO=tcp</code></p>
+プロトコル（tcp か udp）。たとえば<code class="highlighter-rouge">DB_PORT_5432_TCP_PROTO=tcp</code></p>
 
 <p><strong><em>name</em>_NAME</strong><br />
-Fully qualified container name, such as <code class="highlighter-rouge">DB_1_NAME=/myapp_web_1/myapp_db_1</code></p>
+完全修飾コンテナー名。たとえば<code class="highlighter-rouge">DB_1_NAME=/myapp_web_1/myapp_db_1</code></p>
 
 <h3 id="log_driver">log_driver</h3>
 
 <blockquote>
-  <p><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">ファイルフォーアットバージョン 1</a> のみ。
+  <p><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-1">ファイルフォーマットバージョン 1</a> のみ。
 バージョン 2 またはそれ以降においては、<a href="/docs.docker.jp.onthefly/compose/compose-file/#logging">logging</a> を用いてください。</p>
 </blockquote>
 
@@ -978,7 +977,7 @@ Docker クライアントの <code class="highlighter-rouge">--net</code> パラ
           <li><a href="#labels" class="nomunge">labels</a></li>
           <li><a href="#links" class="nomunge">links</a>
             <ul>
-              <li><a href="#link-environment-variables" class="nomunge">link environment variables</a></li>
+              <li><a href="#link-environment-variables" class="nomunge">環境変数 link</a></li>
             </ul>
           </li>
           <li><a href="#log_driver" class="nomunge">log_driver</a></li>
