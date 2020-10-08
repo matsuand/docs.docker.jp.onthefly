@@ -5,8 +5,6 @@
 ---
 description: Compose file reference
 keywords: fig, composition, compose version 1, docker
-redirect_from:
-- /compose/yml
 title: Compose file version 1 reference
 toc_max: 4
 toc_min: 1
@@ -16,8 +14,6 @@ hide_from_sitemap: true
 ---
 description: Compose ファイルリファレンス
 keywords: fig, composition, compose version 1, docker
-redirect_from:
-- /compose/yml
 title: Compose ファイル バージョン 1 リファレンス
 toc_max: 4
 toc_min: 1
@@ -1377,6 +1373,160 @@ Links は [depends_on](compose-file-v2.md#depends_on) と同様にサービス�
 > **メモ**：
 >
 > links と [networks](index.md#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+@z
+
+@x
+#### link environment variables
+@y
+{% comment %}
+#### link environment variables
+{% endcomment %}
+{: #link-environment-variables }
+#### link environment variables
+@z
+
+@x
+> [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and
+> up, custom networks are used, and no environment variables are created.
+@y
+{% comment %}
+> [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and
+> up, custom networks are used, and no environment variables are created.
+{% endcomment %}
+> [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and
+> up, custom networks are used, and no environment variables are created.
+@z
+
+@x
+> **Note**
+>
+> Environment variables are no longer the recommended method for connecting to
+> linked services. Instead, you should use the link name (by default, the name
+> of the linked service) as the hostname to connect to. Refer to the
+> [docker-compose.yml documentation](compose-file/index.md#links) for details.
+>
+> Environment variables are only populated if you use the
+> [legacy version 1 Compose file format](compose-file/compose-versioning.md#versioning).
+{: .warning }
+@y
+{% comment %}
+> **Note**
+>
+> Environment variables are no longer the recommended method for connecting to
+> linked services. Instead, you should use the link name (by default, the name
+> of the linked service) as the hostname to connect to. Refer to the
+> [docker-compose.yml documentation](compose-file/index.md#links) for details.
+>
+> Environment variables are only populated if you use the
+> [legacy version 1 Compose file format](compose-file/compose-versioning.md#versioning).
+{: .warning }
+{% endcomment %}
+> **メモ**
+>
+> Environment variables are no longer the recommended method for connecting to
+> linked services. Instead, you should use the link name (by default, the name
+> of the linked service) as the hostname to connect to. Refer to the
+> [docker-compose.yml documentation](compose-file/index.md#links) for details.
+>
+> Environment variables are only populated if you use the
+> [legacy version 1 Compose file format](compose-file/compose-versioning.md#versioning).
+{: .warning }
+@z
+
+@x
+Compose uses [Docker links](../../network/links.md)
+to expose services' containers to one another. Each linked container injects a set of
+environment variables, each of which begins with the uppercase name of the container.
+@y
+{% comment %}
+Compose uses [Docker links](../../network/links.md)
+to expose services' containers to one another. Each linked container injects a set of
+environment variables, each of which begins with the uppercase name of the container.
+{% endcomment %}
+Compose uses [Docker links](../../network/links.md)
+to expose services' containers to one another. Each linked container injects a set of
+environment variables, each of which begins with the uppercase name of the container.
+@z
+
+@x
+To see what environment variables are available to a service, run `docker-compose run SERVICE env`.
+@y
+{% comment %}
+To see what environment variables are available to a service, run `docker-compose run SERVICE env`.
+{% endcomment %}
+To see what environment variables are available to a service, run `docker-compose run SERVICE env`.
+@z
+
+@x
+<b><i>name</i>\_PORT</b><br>
+Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
+@y
+{% comment %}
+<b><i>name</i>\_PORT</b><br>
+Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
+{% endcomment %}
+<b><i>name</i>\_PORT</b><br>
+Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
+@z
+
+@x
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i></b><br>
+Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
+@y
+{% comment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i></b><br>
+Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
+{% endcomment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i></b><br>
+Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
+@z
+
+@x
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_ADDR</b><br>
+Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
+@y
+{% comment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_ADDR</b><br>
+Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
+{% endcomment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_ADDR</b><br>
+Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
+@z
+
+@x
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PORT</b><br>
+Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
+@y
+{% comment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PORT</b><br>
+Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
+{% endcomment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PORT</b><br>
+Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
+@z
+
+@x
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PROTO</b><br>
+Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
+@y
+{% comment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PROTO</b><br>
+Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
+{% endcomment %}
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PROTO</b><br>
+Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
+@z
+
+@x
+<b><i>name</i>\_NAME</b><br>
+Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
+@y
+{% comment %}
+<b><i>name</i>\_NAME</b><br>
+Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
+{% endcomment %}
+<b><i>name</i>\_NAME</b><br>
+Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 @z
 
 @x

@@ -116,7 +116,7 @@ The network named `bridge` is a special network. Unless you tell it otherwise, D
 @z
 
 @x
-<p style="text-align:center;"><img src="bridge1.png" alt="bridge1"></p>
+![bridge1](bridge1.png)
 @y
 ![bridge1](bridge1.png)
 @z

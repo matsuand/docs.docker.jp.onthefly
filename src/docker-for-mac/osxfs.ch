@@ -830,7 +830,7 @@ At present there is support for read caching, with which the container's view
 of the file system can temporarily drift apart from the authoritative view on
 the host.  Further caching developments, including support for write caching,
 are planned.
-A [detailed description of the behavior in various caching configurations](osxfs-caching)
+A [detailed description of the behavior in various caching configurations](osxfs-caching.md)
 is available.
 @y
 {% comment %}
@@ -838,13 +838,13 @@ At present there is support for read caching, with which the container's view
 of the file system can temporarily drift apart from the authoritative view on
 the host.  Further caching developments, including support for write caching,
 are planned.
-A [detailed description of the behavior in various caching configurations](osxfs-caching)
+A [detailed description of the behavior in various caching configurations](osxfs-caching.md)
 is available.
 {% endcomment %}
 今のところサポートされているのは、読み込みに関するキャッシングです。
 これを用いることで、コンテナーから見たファイルシステムは、ホスト上の信頼できるデータとは一時的に切り離されることになります。
 キャッシングに関する開発として、特に書き込みキャッシングに対するサポートが計画されています。
-[さまざまなキャッシュ設定に対する諸動作についての詳細](osxfs-caching) も参照してください。
+[さまざまなキャッシュ設定に対する諸動作についての詳細](osxfs-caching.md) も参照してください。
 @z
 
 @x

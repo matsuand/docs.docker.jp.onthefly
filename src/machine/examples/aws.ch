@@ -714,16 +714,13 @@ machine, then use `docker-machine rm`.
 -   [Understand Machine concepts](../concepts.md)
 -   [Docker Machine driver reference](../drivers/index.md)
 -   [Docker Machine subcommand reference](../reference/index.md)
--   [Provision a Docker Swarm cluster with Docker Machine](../../swarm/provision-with-machine.md)
 @y
 {% comment %}
 -   [Understand Machine concepts](../concepts.md)
 -   [Docker Machine driver reference](../drivers/index.md)
 -   [Docker Machine subcommand reference](../reference/index.md)
--   [Provision a Docker Swarm cluster with Docker Machine](../../swarm/provision-with-machine.md)
 {% endcomment %}
 -   [Machine の考え方](../concepts.md)
 -   [Docker Machine ドライバーリファレンス](../drivers/index.md)
 -   [Docker Machine サブコマンドリファレンス](../reference/index.md)
--   [Docker Machine を使った Docker Swarm クラスターのプロビジョニング](../../swarm/provision-with-machine.md)
 @z

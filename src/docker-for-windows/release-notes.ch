@@ -62,6 +62,16 @@ Docker Desktop のシステム要件については [インストール前に確
 @z
 
 @x
+Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+@y
+{% comment %}
+Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+{% endcomment %}
+Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます。
+ローカルに Kubernetes クラスターがある場合は、このバージョンをインストールした後にリセットされます。
+@z
+
+@x
 ### New
 @y
 {% comment %}
@@ -1120,10 +1130,10 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 
 @x
 - **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from the UI. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
-For detailed information about the new Dashboard UI, see [Docker Desktop Dashboard](dashboard.md).
+For detailed information about the new Dashboard UI, see [Docker Desktop Dashboard](../desktop/dashboard.md).
 @y
 - **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from the UI. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
-For detailed information about the new Dashboard UI, see [Docker Desktop Dashboard](dashboard.md).
+For detailed information about the new Dashboard UI, see [Docker Desktop Dashboard](../desktop/dashboard.md).
 @z
 
 @x

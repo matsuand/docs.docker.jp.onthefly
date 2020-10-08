@@ -748,13 +748,13 @@ the CLI for enforcing and performing image signature verification.
 
 @x
 For more information on configuring Docker Content Trust Signature Verificiation, go to 
-[Content trust in Docker](trust/content_trust.md).
+[Content trust in Docker](trust/index.md).
 @y
 {% comment %}
 For more information on configuring Docker Content Trust Signature Verificiation, go to 
-[Content trust in Docker](trust/content_trust.md).
+[Content trust in Docker](trust/index.md).
 {% endcomment %}
-Docker Content Trust の署名認証方法の詳細は [Docker における Content trust](trust/content_trust.md) に進んでください。
+Docker Content Trust の署名認証方法の詳細は [Docker における Content trust](trust/index.md) に進んでください。
 @z
 
 @x

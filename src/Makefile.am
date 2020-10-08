@@ -3,7 +3,7 @@ SUBDIRS = _data _includes _layouts _samples _scss app buildx \
 	datacenter desktop develop docker-for-mac \
 	docker-for-windows docker-hub docker-id ee engine get-started \
 	images js kitematic machine network notary \
-	opensource registry release-notes samples storage
+	opensource reference registry release-notes samples storage
 	toolbox
 
 origdir     = @abs_origdir@
@@ -43,7 +43,6 @@ bases = \
 	get-docker   \
 	glossary     \
 	index        \
-	reference    \
 	search       \
 	test
 

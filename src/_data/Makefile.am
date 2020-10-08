@@ -18,7 +18,6 @@ ctie:
 bases = \
 	advisories \
 	glossary \
-	not_edited_here \
 	toc
 
 ch_yamls = $(bases:=.yamlch) # ch means change files

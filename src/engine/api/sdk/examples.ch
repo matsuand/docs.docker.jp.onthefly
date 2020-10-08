@@ -4,6 +4,7 @@
 @x
 ---
 title: Examples using the Docker Engine SDKs and Docker API
+description: Examples on how to perform a given Docker operation using the Go and Python SDKs and the HTTP API using curl.
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
 - /engine/api/getting-started/
@@ -15,6 +16,7 @@ redirect_from:
 @y
 ---
 title: Docker Engine SDK および Docker API の利用例
+description: Examples on how to perform a given Docker operation using the Go and Python SDKs and the HTTP API using curl.
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
 - /engine/api/getting-started/

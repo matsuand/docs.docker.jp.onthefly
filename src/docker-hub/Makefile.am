@@ -15,16 +15,17 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	access-tokens       \
-	convert-account     \
-	deactivate-account  \
-	download-rate-limit \
-	index               \
-	official_images     \
-	orgs                \
-	release-notes       \
-	repos               \
-	slack_integration   \
+	access-tokens          \
+	convert-account        \
+	deactivate-account     \
+	download-rate-limit    \
+	index                  \
+	official_images        \
+	orgs                   \
+	release-notes          \
+	repos                  \
+	slack_integration      \
+	vulnerability-scanning \
 	webhooks
 
 ch_mds = $(bases:=.ch) # ch means change files

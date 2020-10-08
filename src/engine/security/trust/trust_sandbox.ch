@@ -36,13 +36,13 @@ impacting your production images.
 
 @x
 Before working through this sandbox, you should have read through the
-[trust overview](content_trust.md).
+[trust overview](index.md).
 @y
 {% comment %}
 Before working through this sandbox, you should have read through the
-[trust overview](content_trust.md).
+[trust overview](index.md).
 {% endcomment %}
-サンドボックスの作業を進める前に、[コンテントトラストの概要](content_trust.md) をよく読んでおいてください。
+サンドボックスの作業を進める前に、[コンテントトラストの概要](index.md) をよく読んでおいてください。
 @z
 
 @x

@@ -6,12 +6,18 @@
 title: Environment variables in Compose
 description: How to set, use and manage environment variables in Compose
 keywords: compose, orchestration, environment, env file
+redirect_from:
+- /compose/env
+- /compose/link-env-deprecated
 ---
 @y
 ---
 title: Compose における環境変数
 description: Compose において環境変数を設定、利用、管理する方法について説明。
 keywords: compose, orchestration, environment, env file
+redirect_from:
+- /compose/env
+- /compose/link-env-deprecated
 ---
 @z
 
@@ -591,26 +597,17 @@ Docker Compose のコマンドラインからの処理設定を行うことが�
 
 @x
 When using the ['links' option](compose-file/index.md#links) in a
-[v1 Compose file](compose-file/index.md#version-1), environment variables are created
-for each link. They are documented in
-the [Link environment variables reference](link-env-deprecated.md).
+[v1 Compose file](compose-file/compose-file-v1.md#link-environment-variables),
+environment variables are created for each link. These variables are deprecated.
+Use the link alias as a hostname instead.
 @y
 {% comment %}
 When using the ['links' option](compose-file/index.md#links) in a
-[v1 Compose file](compose-file/index.md#version-1), environment variables are created
-for each link. They are documented in
-the [Link environment variables reference](link-env-deprecated.md).
+[v1 Compose file](compose-file/compose-file-v1.md#link-environment-variables),
+environment variables are created for each link. These variables are deprecated.
+Use the link alias as a hostname instead.
 {% endcomment %}
-[Compose ファイルバージョン 1](/compose/compose-file/index.md#version-1) における[`links`オプション](/compose/compose-file/index.md#links) を用いると、各リンクに対する環境変数が生成されます。
-このことは [リンク環境変数リファレンス](link-env-deprecated.md) において説明しています。
-@z
-
-@x
-However, these variables are deprecated. Use the link alias as a hostname instead.
-@y
-{% comment %}
-However, these variables are deprecated. Use the link alias as a hostname instead.
-{% endcomment %}
+[Compose ファイルバージョン 1](/compose/compose-file/compose-file-v1.md#link-environment-variables) における [`links`オプション](/compose/compose-file/index.md#links) を用いると、各リンクに対する環境変数が生成されます。
 ただしこの変数は廃止予定となっています。
 リンクはホスト名として利用するようにしてください。
 @z

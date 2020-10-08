@@ -353,8 +353,7 @@ Docker 化されたこのホストが、管理された「**Machine**」と認�
 - [Install Docker Machine](install-machine.md)
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Provision a Docker Swarm cluster with Docker Machine](../swarm/provision-with-machine.md) (Legacy Swarm)
-- [Getting started with swarm mode](../engine/swarm/swarm-tutorial/) (Docker Engine 1.12 and above)
+- [Getting started with swarm mode](../engine/swarm/swarm-tutorial/index.md)
 - [Understand Machine concepts](concepts.md)
 - [Docker Machine driver reference](drivers/index.md)
 - [Docker Machine subcommand reference](reference/index.md)
@@ -364,8 +363,7 @@ Docker 化されたこのホストが、管理された「**Machine**」と認�
 - [Install Docker Machine](install-machine.md)
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Provision a Docker Swarm cluster with Docker Machine](../swarm/provision-with-machine.md) (Legacy Swarm)
-- [Getting started with swarm mode](../engine/swarm/swarm-tutorial/) (Docker Engine 1.12 and above)
+- [Getting started with swarm mode](../engine/swarm/swarm-tutorial/index.md)
 - [Understand Machine concepts](concepts.md)
 - [Docker Machine driver reference](drivers/index.md)
 - [Docker Machine subcommand reference](reference/index.md)
@@ -375,7 +373,7 @@ Docker 化されたこのホストが、管理された「**Machine**」と認�
 - [VirtualBox 利用によるローカルシステム](get-started.md) に Docker ホストを生成して実行します。
 - [クラウドプロバイダー](get-started-cloud.md) 上に複数の Docker ホストをプロビジョニングします。
 - [Docker Machine を使った Docker Swarm クラスターのプロビジョニング](../swarm/provision-with-machine.md) （かつての Swarm）
-- [Swarm モードをはじめよう](../engine/swarm/swarm-tutorial/) （Docker Engine 1.12 またはそれ以降）
+- [Swarm モードをはじめよう](../engine/swarm/swarm-tutorial/index.md)
 - [Machine の考え方](concepts.md)
 - [Docker Machine ドライバーリファレンス](drivers/index.md)
 - [Docker Machine サブコマンドリファレンス](reference/index.md)

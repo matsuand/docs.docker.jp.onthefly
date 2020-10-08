@@ -497,18 +497,15 @@ Docker Machine を使ってホストを生成しておいて、その削除を�
 -   [Docker Machine driver reference](../drivers/index.md)
 -   [Docker Machine subcommand reference](../reference/index.md)
 -   [Create containers for your Docker Machine](../../get-started/part2.md)
--   [Provision a Docker Swarm cluster with Docker Machine](../../swarm/provision-with-machine.md)
 @y
 {% comment %}
 -   [Understand Machine concepts](../concepts.md)
 -   [Docker Machine driver reference](../drivers/index.md)
 -   [Docker Machine subcommand reference](../reference/index.md)
 -   [Create containers for your Docker Machine](../../get-started/part2.md)
--   [Provision a Docker Swarm cluster with Docker Machine](../../swarm/provision-with-machine.md)
 {% endcomment %}
 -   [Machine の考え方](../concepts.md)
 -   [Docker Machine ドライバーライセンス](../drivers/index.md)
 -   [Docker Machine サブコマンドリファレンス](../reference/index.md)
 -   [Docker Machine におけるコンテナー生成](../../get-started/part2.md)
--   [Docker Machine を使った Docker Swarm クラスターのプロビジョニング](../../swarm/provision-with-machine.md)
 @z

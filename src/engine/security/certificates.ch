@@ -319,11 +319,11 @@ Docker レジストリをポート番号なしにアクセスするなら、デ�
 @z
 
 @x
-* [Use trusted images](index.md)
+* [Use trusted images](trust/index.md)
 * [Protect the Docker daemon socket](https.md)
 @y
 {% comment %}
-* [Use trusted images](index.md)
+* [Use trusted images](trust/index.md)
 * [Protect the Docker daemon socket](https.md)
 {% endcomment %}
 * [信頼できるイメージの利用](trust/index.md)

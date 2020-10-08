@@ -122,9 +122,9 @@ image certification and publishing process as outlined below:
 @z
 
 @x
-2. Docker verifies the signatures to guarantee authenticity, integrity, and freshness of the image. All of the individual layers of your image, and the combination thereof, are encompassed as part of this verification check. [Read more detail about Content Trust in Docker's documentation](/engine/security/trust/content_trust/#understand-trust-in-docker).
+2. Docker verifies the signatures to guarantee authenticity, integrity, and freshness of the image. All of the individual layers of your image, and the combination thereof, are encompassed as part of this verification check. [Read more detail about Content Trust in Docker's documentation](../../engine/security/trust/index.md).
 @y
-2. Docker verifies the signatures to guarantee authenticity, integrity, and freshness of the image. All of the individual layers of your image, and the combination thereof, are encompassed as part of this verification check. [Read more detail about Content Trust in Docker's documentation](/engine/security/trust/content_trust/#understand-trust-in-docker).
+2. Docker verifies the signatures to guarantee authenticity, integrity, and freshness of the image. All of the individual layers of your image, and the combination thereof, are encompassed as part of this verification check. [Read more detail about Content Trust in Docker's documentation](../../engine/security/trust/index.md).
 @z
 
 @x

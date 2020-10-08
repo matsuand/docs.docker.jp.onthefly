@@ -8,6 +8,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
 redirect_from:
  - /compose/overview/
+ - /compose/swarm/
 ---
 @y
 ---
@@ -16,6 +17,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers
 title: Docker Compose の概要
 redirect_from:
  - /compose/overview/
+ - /compose/swarm/
 ---
 @z
 

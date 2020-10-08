@@ -154,9 +154,9 @@ Upgrading your legacy plan to a Pro plan offers you unlimited public repositorie
 @z
 
 @x
-For information on how to upgrade to a Pro plan from a legacy (per-repository plan) plan, see [Upgrade to a Pro plan](/upgrade.md#upgrade-to-a-pro-plan).
+For information on how to upgrade to a Pro plan from a legacy (per-repository plan) plan, see [Upgrade to a Pro plan](upgrade.md#upgrade-to-a-pro-plan).
 @y
-For information on how to upgrade to a Pro plan from a legacy (per-repository plan) plan, see [Upgrade to a Pro plan](/upgrade.md#upgrade-to-a-pro-plan).
+For information on how to upgrade to a Pro plan from a legacy (per-repository plan) plan, see [Upgrade to a Pro plan](upgrade.md#upgrade-to-a-pro-plan).
 @z
 
 @x
@@ -172,9 +172,9 @@ Upgrading your legacy plan to a Team plan offers you unlimited public and privat
 @z
 
 @x
-For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](/upgrade.md#upgrade-to-a-team-plan).
+For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](upgrade.md#upgrade-to-a-team-plan).
 @y
-For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](/upgrade.md#upgrade-to-a-team-plan).
+For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](upgrade.md#upgrade-to-a-team-plan).
 @z
 
 @x

@@ -153,7 +153,7 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `--tmpfs`:
-  - The `type` of the mount, which can be [`bind`](bind-mounts-md), `volume`, or
+  - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
     [`tmpfs`](tmpfs.md). This topic discusses `tmpfs`, so the type is always
     `tmpfs`.
   - The `destination` takes as its value the path where the `tmpfs` mount
@@ -166,7 +166,7 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `--tmpfs`:
-  - The `type` of the mount, which can be [`bind`](bind-mounts-md), `volume`, or
+  - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
     [`tmpfs`](tmpfs.md). This topic discusses `tmpfs`, so the type is always
     `tmpfs`.
   - The `destination` takes as its value the path where the `tmpfs` mount
@@ -177,7 +177,7 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 {% endcomment %}
 - **`--mount`**: 複数のキーバリューペアを指定し、個々は `<key>=<value>` の記述としてそれぞれをカンマで区切ります。
   `--mount` の書式は `--tmpfs` に比べて多くの記述を必要とします。
-  - `type` によりマウントのタイプ、つまり [`bind`](bind-mounts-md), `volume`, [`tmpfs`](tmpfs.md) のいずれかを指定します。
+  - `type` によりマウントのタイプ、つまり [`bind`](bind-mounts.md), `volume`, [`tmpfs`](tmpfs.md) のいずれかを指定します。
     `tmpfs` の説明を行っていますから、ここでは `tmpfs` とします。
   - `destination` はバリューにパスを指定します。
     これはコンテナー内にて `tmpfs` マウントを行うパスを表わします。

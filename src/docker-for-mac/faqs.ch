@@ -100,9 +100,9 @@ Yes, you can switch between Stable and Edge versions. You can try out the Edge r
 @z
 
 @x
-You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install/#system-requirements).
+You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install.md#system-requirements).
 @y
-You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install/#system-requirements).
+You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install.md#system-requirements).
 @z
 
 @x
@@ -211,10 +211,10 @@ We recommend that you publish a port, or connect from another container. You can
 
 @x
 For more information and examples, see
-[I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) in the [Networking](/docker-for-mac/networking/) topic.
+[I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) in the [Networking](networking.md) topic.
 @y
 For more information and examples, see
-[I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) in the [Networking](/docker-for-mac/networking/) topic.
+[I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) in the [Networking](networking.md) topic.
 @z
 
 @x
@@ -278,9 +278,19 @@ serial port) to a container as it requires support at the hypervisor level.
 @z
 
 @x
-Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, **Docker Desktop is not supported in nested virtualization scenarios**. It might work in some cases, and not in others. For more information, see [Running Docker Desktop in nested virtualization scenarios](/docker-for-windows/troubleshoot/#running-docker-desktop-in-nested-virtualization-scenarios).
+Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or
+VMware Fusion on a Mac provided that the VM is properly configured. However,
+problems and intermittent failures may still occur due to the way these apps
+virtualize the hardware. For these reasons, **Docker Desktop is not supported in
+nested virtualization scenarios**. It might work in some cases, and not in others.
+For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 @y
-Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, **Docker Desktop is not supported in nested virtualization scenarios**. It might work in some cases, and not in others. For more information, see [Running Docker Desktop in nested virtualization scenarios](/docker-for-windows/troubleshoot/#running-docker-desktop-in-nested-virtualization-scenarios).
+Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or
+VMware Fusion on a Mac provided that the VM is properly configured. However,
+problems and intermittent failures may still occur due to the way these apps
+virtualize the hardware. For these reasons, **Docker Desktop is not supported in
+nested virtualization scenarios**. It might work in some cases, and not in others.
+For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 @z
 
 @x
@@ -405,10 +415,10 @@ response.
 
 @x
 If you do not want to send of usage data, use the Stable channel. For more
-information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-channels).
+information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-releases).
 @y
 If you do not want to send of usage data, use the Stable channel. For more
-information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-channels).
+information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-releases).
 @z
 
 @x

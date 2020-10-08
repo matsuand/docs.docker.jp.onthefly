@@ -7,7 +7,7 @@ description: High-performance two-way file sync for volume mounts
 keywords: mac, mutagen, volumes, file sync,
 title: Mutagen-based file synchronization
 redirect_from:
-- /docker-for-mac//mutagen-caching/
+- /docker-for-mac/mutagen-caching/
 ---
 @y
 ---
@@ -15,7 +15,7 @@ description: High-performance two-way file sync for volume mounts
 keywords: mac, mutagen, volumes, file sync,
 title: Mutagen ベースのファイル同期
 redirect_from:
-- /docker-for-mac//mutagen-caching/
+- /docker-for-mac/mutagen-caching/
 ---
 @z
 

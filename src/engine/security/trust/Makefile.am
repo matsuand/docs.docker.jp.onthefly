@@ -15,7 +15,6 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	content_trust \
 	deploying_notary \
 	index \
 	trust_automation \

@@ -1487,7 +1487,7 @@ var pages = [
 {
 "url":"/engine/api/sdk/examples/",
 "title":"Docker Engine SDK および Docker API の利用例",
-"description":null,
+"description":"Examples on how to perform a given Docker operation using the Go and Python SDKs and the HTTP API using curl.",
 "keywords":"developing, api, sdk, developers, rest, curl, python, go"
 }
 ,
@@ -1828,6 +1828,13 @@ var pages = [
 }
 ,
 {
+"url":"/reference/",
+"title":"リファレンス",
+"description":"本節では Docker プラットフォームにおける各種の API、CLI、ファイルフォーマットのリファレンスを示します。",
+"keywords":null
+}
+,
+{
 "url":"/get-started/",
 "title":"概要とセットアップ",
 "description":"Get oriented on some basics of Docker and install Docker Desktop.",
@@ -1837,7 +1844,7 @@ var pages = [
 {
 "url":"/samples/",
 "title":"サンプル集",
-"description":null,
+"description":"Learn how to develop and ship containerized applications, by walking through samples that exhibits canonical practices.",
 "keywords":null
 }
 ,
@@ -1934,9 +1941,9 @@ var pages = [
 ,
 {
 "url":"/engine/security/trust/",
-"title":"信頼できるイメージの利用",
-"description":"Use trusted images",
-"keywords":"trust, security, docker,  index"
+"title":"Docker のコンテントトラスト",
+"description":"Docker においてコンテントトラストを有効にします。",
+"keywords":"content, trust, security, docker, documentation"
 }
 ,
 {
@@ -2480,7 +2487,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/manage-nodes/",
-"title":"Manage nodes in a swarm",
+"title":"Swarm でのノード管理",
 "description":"Manage existing nodes in a swarm",
 "keywords":"guide, swarm mode, node"
 }
@@ -3698,7 +3705,7 @@ var pages = [
 ,
 {
 "url":"/engine/swarm/services/",
-"title":"Deploy services to a swarm",
+"title":"Swarm へのサービスデプロイ",
 "description":"Deploy services to a swarm",
 "keywords":"guide, swarm mode, swarm, service"
 }
@@ -4317,6 +4324,13 @@ var pages = [
 "title":"ボリュームの利用",
 "description":"ボリュームを利用します。",
 "keywords":"storage, persistence, data persistence, volumes"
+}
+,
+{
+"url":"/docker-hub/vulnerability-scanning/",
+"title":"Hub Vulnerability Scanning",
+"description":"Hub Vulnerability Scanning",
+"keywords":"scanning, vulnerabilities, Hub, Snyk"
 }
 ,
 {

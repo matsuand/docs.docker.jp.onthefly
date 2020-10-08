@@ -314,18 +314,18 @@ the new key.
 @z
 
 @x
-* [Content trust in Docker](content_trust.md)
+* [Content trust in Docker](index.md)
 * [Automation with content trust](trust_automation.md)
 * [Delegations for content trust](trust_delegation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
 @y
 {% comment %}
-* [Content trust in Docker](content_trust.md)
+* [Content trust in Docker](index.md)
 * [Automation with content trust](trust_automation.md)
 * [Delegations for content trust](trust_delegation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
 {% endcomment %}
-* [Docker のコンテントトラスト](content_trust.md)
+* [Docker のコンテントトラスト](index.md)
 * [コンテントトラストの自動化](trust_automation.md)
 * [コンテントトラストの委任鍵ペア](trust_delegation.md)
 * [コンテントトラストのサンドボックスで遊ぶ](trust_sandbox.md)

@@ -51,12 +51,12 @@ Docker Desktop のシステム要件については [インストールの前に
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
 @y
 {% comment %}
-> [Download](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
 {% endcomment %}
-> [ダウンロード](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
 @z
 
 @x
@@ -830,9 +830,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @z
 
 @x
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen-caching.md).
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
 @y
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen-caching.md).
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
 @z
 
 @x
@@ -2899,10 +2899,10 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 @x
 * Bug fixes and minor changes
-  - Fix login into private repository with certificate issue. [https://github.com/docker/for-mac/issues/2201](docker/for-mac#2201)
+  - Fix login into private repository with certificate issue. [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)
 @y
 * Bug fixes and minor changes
-  - Fix login into private repository with certificate issue. [https://github.com/docker/for-mac/issues/2201](docker/for-mac#2201)
+  - Fix login into private repository with certificate issue. [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)
 @z
 
 @x
@@ -3075,11 +3075,11 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 @x
 * Bug fixes and minor changes
-  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING [docker/for-mac#1608](https://github.com/docker/for-mac/issues/1608)
   - Rotate logs in the virtual machine more often
 @y
 * Bug fixes and minor changes
-  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING [docker/for-mac#1608](https://github.com/docker/for-mac/issues/1608)
   - Rotate logs in the virtual machine more often
 @z
 
@@ -5212,9 +5212,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures) (docker/for-mac)
+* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures)
 @y
-* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures) (docker/for-mac)
+* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures)
 @z
 
 @x

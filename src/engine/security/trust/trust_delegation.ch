@@ -1452,14 +1452,18 @@ No signatures or cannot access registry.example.com/admin/demo
 @z
 
 @x
-* [Content trust in Docker](content_trust.md)
+* [Content trust in Docker](index.md)
 * [Manage keys for content trust](trust_key_mng.md)
 * [Automation with content trust](trust_automation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
 @y
 {% comment %}
+* [Content trust in Docker](index.md)
+* [Manage keys for content trust](trust_key_mng.md)
+* [Automation with content trust](trust_automation.md)
+* [Play in a content trust sandbox](trust_sandbox.md)
 {% endcomment %}
-* [Docker のコンテントトラスト](content_trust.md)
+* [Docker のコンテントトラスト](index.md)
 * [コンテントトラストにおける鍵の管理](trust_key_mng.md)
 * [コンテントトラストの自動化](trust_automation.md)
 * [コンテントトラストのサンドボックスで遊ぶ](trust_sandbox.md)

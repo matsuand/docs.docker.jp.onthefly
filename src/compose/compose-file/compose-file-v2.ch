@@ -5,8 +5,6 @@
 ---
 description: Compose file reference
 keywords: fig, composition, compose version 3, docker
-redirect_from:
-- /compose/yml
 title: Compose file version 2 reference
 toc_max: 4
 toc_min: 1
@@ -15,8 +13,6 @@ toc_min: 1
 ---
 description: Compose ファイルリファレンス
 keywords: fig, composition, compose version 3, docker
-redirect_from:
-- /compose/yml
 title: Compose ファイル バージョン 2 リファレンス
 toc_max: 4
 toc_min: 1

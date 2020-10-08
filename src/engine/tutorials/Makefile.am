@@ -19,9 +19,7 @@ bases = \
 images = \
 	bridge1.png \
 	bridge2.png \
-	bridge3.png \
-	search.png  \
-	webapp1.png
+	bridge3.png
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files

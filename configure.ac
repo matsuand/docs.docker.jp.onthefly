@@ -187,7 +187,7 @@ AC_CONFIG_FILES([Makefile
 		 src/notary/reference/Makefile
 		 src/opensource/Makefile
 		 src/opensource/images/Makefile
-		 src/release-notes/Makefile
+		 src/reference/Makefile
 		 src/registry/Makefile
 		 src/registry/images/Makefile
 		 src/registry/recipes/Makefile
@@ -196,6 +196,7 @@ AC_CONFIG_FILES([Makefile
 		 src/registry/spec/auth/Makefile
 		 src/registry/spec/images/Makefile
 		 src/registry/storage-drivers/Makefile
+		 src/release-notes/Makefile
 		 src/samples/Makefile
 		 src/storage/Makefile
 		 src/storage/images/Makefile

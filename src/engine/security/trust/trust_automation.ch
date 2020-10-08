@@ -32,15 +32,15 @@ environment variables that can be passed through to the client.
 
 @x
 This guide follows the steps as described 
-[here](content_trust/#signing-images-with-docker-content-trust) so please read 
+[here](index.md#signing-images-with-docker-content-trust) so please read 
 that and understand its prerequisites. 
 @y
 {% comment %}
 This guide follows the steps as described 
-[here](content_trust/#signing-images-with-docker-content-trust) so please read 
+[here](index.md#signing-images-with-docker-content-trust) so please read 
 that and understand its prerequisites. 
 {% endcomment %}
-本節では [DCT によるイメージへのサイン](content_trust/#signing-images-with-docker-content-trust) に示した手順を行っているものとします。
+本節では [DCT によるイメージへのサイン](index.md#signing-images-with-docker-content-trust) に示した手順を行っているものとします。
 したがってその内容はよく読んで、前提条件を理解しておいてください。
 @z
 
@@ -323,18 +323,18 @@ unable to process Dockerfile: No trust data for notrust
 
 @x
 * [Delegations for content trust](trust_delegation.md)
-* [Content trust in Docker](content_trust.md)
+* [Content trust in Docker](index.md)
 * [Manage keys for content trust](trust_key_mng.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
 @y
 {% comment %}
 * [Delegations for content trust](trust_delegation.md)
-* [Content trust in Docker](content_trust.md)
+* [Content trust in Docker](index.md)
 * [Manage keys for content trust](trust_key_mng.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
 {% endcomment %}
 * [コンテントトラストの委任鍵ペア](trust_delegation.md)
-* [Docker のコンテントトラスト](content_trust.md)
+* [Docker のコンテントトラスト](index.md)
 * [コンテントトラストにおける鍵の管理](trust_key_mng.md)
 * [コンテントトラストのサンドボックスで遊ぶ](trust_sandbox.md)
 @z
