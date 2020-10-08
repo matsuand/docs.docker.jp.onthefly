@@ -246,7 +246,7 @@ For more details about image tag resolution, see
 ### gMSA for Swarm
 {% endcomment %}
 {: #gmsa-for-swarm }
-### gMSA for Swarm
+### Swarm での gMSA 利用
 @z
 
 @x
@@ -255,7 +255,9 @@ Swarm now allows using a Docker Config as a gMSA credential spec - a requirement
 {% comment %}
 Swarm now allows using a Docker Config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
 {% endcomment %}
-Swarm now allows using a Docker Config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
+Swarm においては Docker Config を gMSA 資格情報仕様（gMSA credential spec）として利用できるようになりました。
+これは Active Directory に認証されたアプリケーションに必要となるものです。
+これを使えば、この資格情報仕様を利用するノードに配布する手間が軽減されます。
 @z
 
 @x
@@ -264,7 +266,8 @@ The following example assumes a gMSA and its credential spec (called credspec.js
 {% comment %}
 The following example assumes a gMSA and its credential spec (called credspec.json) already exists, and that the nodes being deployed to are correctly configured for the gMSA.
 {% endcomment %}
-The following example assumes a gMSA and its credential spec (called credspec.json) already exists, and that the nodes being deployed to are correctly configured for the gMSA.
+以下の例では gMSA とその資格情報仕様（credspec.json と呼ばれる）がすでに存在しているとします。
+そしてデプロイされているノードにおいて、gMSA が正しく設定できているものとします。
 @z
 
 @x
@@ -273,7 +276,7 @@ To use a Config as a credential spec, first create the Docker Config containing 
 {% comment %}
 To use a Config as a credential spec, first create the Docker Config containing the credential spec:
 {% endcomment %}
-To use a Config as a credential spec, first create the Docker Config containing the credential spec:
+資格情報仕様として Config を利用するには、まず資格情報仕様を含んだ Docker Config を生成します。
 @z
 
 @x

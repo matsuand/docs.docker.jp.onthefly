@@ -38,33 +38,41 @@ To get a specific entry while writing a page in the docs, enter Liquid text
 like so:
 {{ site.data.glossary["aufs"] }}
 -->
-<span id="glossaryMatch" />
-<span id="topicMatch" />
 @y
 To get a specific entry while writing a page in the docs, enter Liquid text
 like so:
 {{ site.data.glossary["aufs"] }}
 -->
-<span id="glossaryMatch" />
-<span id="topicMatch" />
 @z
 
 @x
-<table border="1">
-  {% for entry in site.data.glossary %}
+<table>
+  <thead>
+    <tr><th>Term</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+  {%- for entry in site.data.glossary -%}
+    {%- assign id = entry[0] | slugify -%}
     <tr>
-      <td>{{ entry[0] }}</td>
+      <td><a class="glossary" id="{{ id }}" href="#{{ id }}">{{ entry[0] }}</a></td>
       <td>{{ entry[1] | markdownify }}</td>
     </tr>
-  {% endfor %}
+  {%- endfor -%}
+  </tbody>
 </table>
 @y
-<table border="1">
-  {% for entry in site.data.glossary %}
+<table>
+  <thead>
+    <tr><th>用語</th><th>定義説明</th></tr>
+  </thead>
+  <tbody>
+  {%- for entry in site.data.glossary -%}
+    {%- assign id = entry[0] | slugify -%}
     <tr>
-      <td>{{ entry[0] }}</td>
+      <td><a class="glossary" id="{{ id }}" href="#{{ id }}">{{ entry[0] }}</a></td>
       <td>{{ entry[1] | markdownify }}</td>
     </tr>
-  {% endfor %}
+  {%- endfor -%}
+  </tbody>
 </table>
 @z

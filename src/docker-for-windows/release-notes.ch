@@ -82,25 +82,25 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
-  - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select 'Dashboard' > 'Images'.
-  - Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to `Preferences` > `Docker Engine` and then disable the BuildKit feature.
-  - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
+- Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
 @y
-  {% comment %}
-  - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
-  - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select 'Dashboard' > 'Images'.
-  - Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to `Preferences` > `Docker Engine` and then disable the BuildKit feature.
-  - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
-  {% endcomment %}
-  - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), ECS と ACI を通じて Compose とクラウドのボリューム利用が可能になりました。
-  - Docker ダッシュボードに、新たに Images 画面が導入されました。
-    Images 画面では Docker Hub イメージの参照、そのプル、ディスク上のローカルイメージ管理が可能になります。
-    また不要で未使用のイメージの削除もできます。
-    この新たな Images 画面にアクセスするには Docker メニューから 'Dashboard' > 'Images' を実行します。
-  - Docker Desktop ではデフォルトにリセットした後に、BuildKit をデフォルト有効にしました。
-    それまでの古い`docker build`に切り替えるには、`Preferences` > `Docker Engine`にアクセスして BuildKit 機能を無効化します。
-  - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+{% comment %}
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
+- Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+{% endcomment %}
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), ECS と ACI を通じて Compose とクラウドのボリューム利用が可能になりました。
+- Docker ダッシュボードに、新たに Images 画面が導入されました。
+  Images 画面では Docker Hub イメージの参照、そのプル、ディスク上のローカルイメージ管理が可能になります。
+  また不要で未使用のイメージの削除もできます。
+  この新たな Images 画面にアクセスするには Docker メニューから **Dashboard** > **Images** を実行します。
+- Docker Desktop ではデフォルトにリセットした後に、BuildKit をデフォルト有効にしました。
+  それまでの古い`docker build`に切り替えるには、**Preferences** > **Docker Engine** にアクセスして BuildKit 機能を無効化します。
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
 @z
 
 @x
@@ -114,19 +114,19 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
-  - [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
-  - [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
-  - [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
-  - [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
-  - [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
+- [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
+- [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
+- [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
+- [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
+- [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
+- [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
 @y
-  - [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
-  - [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
-  - [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
-  - [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
-  - [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
-  - [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
+- [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
+- [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
+- [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
+- [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
+- [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
+- [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
 @z
 
 @x
@@ -140,96 +140,96 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
-  - Removed the option to start with Windows containers from the installer
-  - Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
-  - Left-clicking on the whale in the system tray now launches the dashboard container view.
-  - Docker Desktop now uses a different systray icon for dark and light mode. Fixes [docker/for-win#4113](https://github.com/docker/for-win/issues/4113).
-  - Added support for emulating Risc-V via Qemu 4.2.0.
-  - Added a low-level debug shell accessible via `putty -serial \\.\pipe\dockerDebugShell`.
-  - Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
-  - Fix application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
-  - Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425).
-  - Switched from `chronyd` to `sntpcd` to work around host time synchronisation problems. Fixes [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
-  - Avoid blocking startup if "Expose daemon on tcp://localhost:2375 without TLS" is set and `localhost:2375` is in use by another program. See [docker/for-win#6929](https://github.com/docker/for-win/issues/6929) [docker/for-win#6961](https://github.com/docker/for-win/issues/6961).
-  - Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](https://github.com/docker/for-win/issues/6797).
-  - Avoid failing with "Function not implemented" during file I/O on shared volumes. Fixes [docker/for-win#5955](https://github.com/docker/for-win/issues/5955)
-  - Ensure that `docker run -v /var/run/docker.sock` rewrites Windows paths properly, see [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
-  - Fixed a crash which occurred when Docker Desktop loads a corrupted Docker CLI configuration file. Fixes [docker/for-win#6657](https://github.com/docker/for-win/issues/6657).
-  - Ensure `localhost` and `127.0.0.1` can both be used in the proxy settings to redirect to a proxy on the host. Fixes [docker/for-win#5715](https://github.com/docker/for-win/issues/5715) and [docker/for-win#6260](https://github.com/docker/for-win/issues/6260).
-  - Fixed a crash when failing to login with no Internet connection.
-  - Fixed bug in handling shared volume paths with ".." characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
-  - Report check for updates errors in toast notification. Fixes [docker/for-win#6364](https://github.com/docker/for-win/issues/6364).
-  - Fixed an upgrade bug where users on versions still using the PowerShell based VM management can experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
-  - Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
-  - Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
+- Removed the option to start with Windows containers from the installer
+- Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
+- Left-clicking on the whale in the system tray now launches the dashboard container view.
+- Docker Desktop now uses a different systray icon for dark and light mode. Fixes [docker/for-win#4113](https://github.com/docker/for-win/issues/4113).
+- Added support for emulating Risc-V via Qemu 4.2.0.
+- Added a low-level debug shell accessible via `putty -serial \\.\pipe\dockerDebugShell`.
+- Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
+- Fix application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
+- Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425).
+- Switched from `chronyd` to `sntpcd` to work around host time synchronisation problems. Fixes [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
+- Avoid blocking startup if "Expose daemon on tcp://localhost:2375 without TLS" is set and `localhost:2375` is in use by another program. See [docker/for-win#6929](https://github.com/docker/for-win/issues/6929) [docker/for-win#6961](https://github.com/docker/for-win/issues/6961).
+- Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](https://github.com/docker/for-win/issues/6797).
+- Avoid failing with "Function not implemented" during file I/O on shared volumes. Fixes [docker/for-win#5955](https://github.com/docker/for-win/issues/5955)
+- Ensure that `docker run -v /var/run/docker.sock` rewrites Windows paths properly, see [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
+- Fixed a crash which occurred when Docker Desktop loads a corrupted Docker CLI configuration file. Fixes [docker/for-win#6657](https://github.com/docker/for-win/issues/6657).
+- Ensure `localhost` and `127.0.0.1` can both be used in the proxy settings to redirect to a proxy on the host. Fixes [docker/for-win#5715](https://github.com/docker/for-win/issues/5715) and [docker/for-win#6260](https://github.com/docker/for-win/issues/6260).
+- Fixed a crash when failing to login with no Internet connection.
+- Fixed bug in handling shared volume paths with ".." characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
+- Report check for updates errors in toast notification. Fixes [docker/for-win#6364](https://github.com/docker/for-win/issues/6364).
+- Fixed an upgrade bug where users on versions still using the PowerShell based VM management can experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
+- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
+- Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 @y
 {% comment %}
-  - Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
-  - Removed the option to start with Windows containers from the installer
-  - Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
-  - Left-clicking on the whale in the system tray now launches the dashboard container view.
-  - Docker Desktop now uses a different systray icon for dark and light mode. Fixes [docker/for-win#4113](https://github.com/docker/for-win/issues/4113).
-  - Added support for emulating Risc-V via Qemu 4.2.0.
-  - Added a low-level debug shell accessible via `putty -serial \\.\pipe\dockerDebugShell`.
-  - Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
-  - Fix application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
-  - Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425).
-  - Switched from `chronyd` to `sntpcd` to work around host time synchronisation problems. Fixes [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
-  - Avoid blocking startup if "Expose daemon on tcp://localhost:2375 without TLS" is set and `localhost:2375` is in use by another program. See [docker/for-win#6929](https://github.com/docker/for-win/issues/6929) [docker/for-win#6961](https://github.com/docker/for-win/issues/6961).
-  - Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](https://github.com/docker/for-win/issues/6797).
-  - Avoid failing with "Function not implemented" during file I/O on shared volumes. Fixes [docker/for-win#5955](https://github.com/docker/for-win/issues/5955)
-  - Ensure that `docker run -v /var/run/docker.sock` rewrites Windows paths properly, see [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
-  - Fixed a crash which occurred when Docker Desktop loads a corrupted Docker CLI configuration file. Fixes [docker/for-win#6657](https://github.com/docker/for-win/issues/6657).
-  - Ensure `localhost` and `127.0.0.1` can both be used in the proxy settings to redirect to a proxy on the host. Fixes [docker/for-win#5715](https://github.com/docker/for-win/issues/5715) and [docker/for-win#6260](https://github.com/docker/for-win/issues/6260).
-  - Fixed a crash when failing to login with no Internet connection.
-  - Fixed bug in handling shared volume paths with ".." characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
-  - Report check for updates errors in toast notification. Fixes [docker/for-win#6364](https://github.com/docker/for-win/issues/6364).
-  - Fixed an upgrade bug where users on versions still using the PowerShell based VM management can experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
-  - Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
-  - Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
+- Removed the option to start with Windows containers from the installer
+- Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
+- Left-clicking on the whale in the system tray now launches the dashboard container view.
+- Docker Desktop now uses a different systray icon for dark and light mode. Fixes [docker/for-win#4113](https://github.com/docker/for-win/issues/4113).
+- Added support for emulating Risc-V via Qemu 4.2.0.
+- Added a low-level debug shell accessible via `putty -serial \\.\pipe\dockerDebugShell`.
+- Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
+- Fix application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
+- Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425).
+- Switched from `chronyd` to `sntpcd` to work around host time synchronisation problems. Fixes [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
+- Avoid blocking startup if "Expose daemon on tcp://localhost:2375 without TLS" is set and `localhost:2375` is in use by another program. See [docker/for-win#6929](https://github.com/docker/for-win/issues/6929) [docker/for-win#6961](https://github.com/docker/for-win/issues/6961).
+- Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](https://github.com/docker/for-win/issues/6797).
+- Avoid failing with "Function not implemented" during file I/O on shared volumes. Fixes [docker/for-win#5955](https://github.com/docker/for-win/issues/5955)
+- Ensure that `docker run -v /var/run/docker.sock` rewrites Windows paths properly, see [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
+- Fixed a crash which occurred when Docker Desktop loads a corrupted Docker CLI configuration file. Fixes [docker/for-win#6657](https://github.com/docker/for-win/issues/6657).
+- Ensure `localhost` and `127.0.0.1` can both be used in the proxy settings to redirect to a proxy on the host. Fixes [docker/for-win#5715](https://github.com/docker/for-win/issues/5715) and [docker/for-win#6260](https://github.com/docker/for-win/issues/6260).
+- Fixed a crash when failing to login with no Internet connection.
+- Fixed bug in handling shared volume paths with ".." characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
+- Report check for updates errors in toast notification. Fixes [docker/for-win#6364](https://github.com/docker/for-win/issues/6364).
+- Fixed an upgrade bug where users on versions still using the PowerShell based VM management can experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
+- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
+- Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 {% endcomment %}
-  - かつての Kubernetes コンテキスト`docker-for-desktop`は削除しました。
-    代わりにコンテキスト`docker-desktop`を利用してください。
-    [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) と [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089) を Fix にしました。
-  - Windows コンテナーを使って起動するオプションは、インストーラーから削除しました。
-  - Docker を実行している状態でアプリケーションをタスクバーに固定してクリックすると、コンテナー画面が起動されます。
-  - システムトレイ上のクジラアイコン上で左クリックすると、Dashboard コンテナー画面を起動するようにしました。
-  - Docker Desktop ではダークモード、ライトモード用に異なるシステムトレイアイコンを利用することにしました。
-    [docker/for-win#4113](https://github.com/docker/for-win/issues/4113) を Fix にしました。
-  - Qemu 4.2.0 を通じて Risc-V エミュレーションのサポートを追加しました。
-  - `putty -serial \\.\pipe\dockerDebugShell`の実行を通じて低レベルデバッグシェルへのアクセスを追加しました。
-  - コンテナーログをクリップボードにコピーする際に ansi color を除きました。
-    [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786) を Fix にしました。
-  - `hosts`が Docker の`daemon.json`内部にて指定されている場合のアプリケーション起動を修正しました。
-    [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117) を参照してください。
-  - 短い名前に対する DNS 解決を修正しました。
-    [docker/for-win#4425](https://github.com/docker/for-win/issues/4425) を Fix にしました。
-  - ホスト時刻の同期問題を解決するため、`chronyd`を`sntpcd`に変更しました。
-    [docker/for-win#4526](https://github.com/docker/for-win/issues/4526) を Fix にしました。
-  - "Expose daemon on tcp://localhost:2375 without TLS" が設定されていて`localhost:2375`が他プログラムにて利用中の場合に、起動がブロックされるのを回避しました。
-    [docker/for-win#6929](https://github.com/docker/for-win/issues/6929)、[docker/for-win#6961](https://github.com/docker/for-win/issues/6961) を参照してください。
-  - Settings 上において存在しないドライブにフォルダーを追加した際の問題を修正しました。
-    これを行うと空の項目が生成されていました。
-    [docker/for-win#6797](https://github.com/docker/for-win/issues/6797) を参照してください。
-  - 共有ボリューム上のファイル I/O の最中に「Function not implemented」により失敗することを回避しました。
-    [docker/for-win#5955](https://github.com/docker/for-win/issues/5955) を Fix にしました。
-  - `docker run -v /var/run/docker.sock`が Windows パスを適切に再書き込みするようにしました。
-    [docker/for-win#6628](https://github.com/docker/for-win/issues/6628) を参照してください。
-  - Docker Desktop が誤った Docker CLI 設定ファイルを読み込んだときに発生するクラッシュを修正しました。
-    [docker/for-win#6657](https://github.com/docker/for-win/issues/6657) を Fix にしました。
-  - プロキシー設定において`localhost`と`127.0.0.1`を用いた場合に、ホスト上のプロキシーに正しくリダイレクトされるようにしました。
-    [docker/for-win#5715](https://github.com/docker/for-win/issues/5715) と [docker/for-win#6260](https://github.com/docker/for-win/issues/6260) を Fix にしました。
-  - インターネット接続がない状態でログインに失敗する際のクラッシュを修正しました。
-  - 共有ボリュームのパスでの文字列「..」の取り扱いに関するバグを修正しました。
-    [docker/for-win#5375](https://github.com/docker/for-win/issues/5375) を Fix にしました。
-  - トースト通知（toast notification）における更新エラーのチェックを報告するようにしました。
-    [docker/for-win#6364](https://github.com/docker/for-win/issues/6364) を Fix にしました。
-  - Docker Desktop のアップグレード時に、PowerShell ベースの VM 管理を行っていたユーザーが、何も表示されずにインストールに失敗して、アップグレードされることなくアンインストールされてしまうバグを修正しました。
-  - ユーザー名にスペース文字を含む場合に、インストーラーログファイルのデフォルトディレクトリへのパスを修正しました。
-    [docker/for-win#7941](https://github.com/docker/for-win/issues/7941) を Fix にしました。
-  - Docker Desktop では、コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。
-    [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
+- かつての Kubernetes コンテキスト`docker-for-desktop`は削除しました。
+  代わりにコンテキスト`docker-desktop`を利用してください。
+  [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) と [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089) を Fix にしました。
+- Windows コンテナーを使って起動するオプションは、インストーラーから削除しました。
+- Docker を実行している状態でアプリケーションをタスクバーに固定してクリックすると、コンテナー画面が起動されます。
+- システムトレイ上のクジラアイコン上で左クリックすると、Dashboard コンテナー画面を起動するようにしました。
+- Docker Desktop ではダークモード、ライトモード用に異なるシステムトレイアイコンを利用することにしました。
+  [docker/for-win#4113](https://github.com/docker/for-win/issues/4113) を Fix にしました。
+- Qemu 4.2.0 を通じて Risc-V エミュレーションのサポートを追加しました。
+- `putty -serial \\.\pipe\dockerDebugShell`の実行を通じて低レベルデバッグシェルへのアクセスを追加しました。
+- コンテナーログをクリップボードにコピーする際に ansi color を除きました。
+  [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786) を Fix にしました。
+- `hosts`が Docker の`daemon.json`内部にて指定されている場合のアプリケーション起動を修正しました。
+  [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117) を参照してください。
+- 短い名前に対する DNS 解決を修正しました。
+  [docker/for-win#4425](https://github.com/docker/for-win/issues/4425) を Fix にしました。
+- ホスト時刻の同期問題を解決するため、`chronyd`を`sntpcd`に変更しました。
+  [docker/for-win#4526](https://github.com/docker/for-win/issues/4526) を Fix にしました。
+- "Expose daemon on tcp://localhost:2375 without TLS" が設定されていて`localhost:2375`が他プログラムにて利用中の場合に、起動がブロックされるのを回避しました。
+  [docker/for-win#6929](https://github.com/docker/for-win/issues/6929)、[docker/for-win#6961](https://github.com/docker/for-win/issues/6961) を参照してください。
+- Settings 上において存在しないドライブにフォルダーを追加した際の問題を修正しました。
+  これを行うと空の項目が生成されていました。
+  [docker/for-win#6797](https://github.com/docker/for-win/issues/6797) を参照してください。
+- 共有ボリューム上のファイル I/O の最中に「Function not implemented」により失敗することを回避しました。
+  [docker/for-win#5955](https://github.com/docker/for-win/issues/5955) を Fix にしました。
+- `docker run -v /var/run/docker.sock`が Windows パスを適切に再書き込みするようにしました。
+  [docker/for-win#6628](https://github.com/docker/for-win/issues/6628) を参照してください。
+- Docker Desktop が誤った Docker CLI 設定ファイルを読み込んだときに発生するクラッシュを修正しました。
+  [docker/for-win#6657](https://github.com/docker/for-win/issues/6657) を Fix にしました。
+- プロキシー設定において`localhost`と`127.0.0.1`を用いた場合に、ホスト上のプロキシーに正しくリダイレクトされるようにしました。
+  [docker/for-win#5715](https://github.com/docker/for-win/issues/5715) と [docker/for-win#6260](https://github.com/docker/for-win/issues/6260) を Fix にしました。
+- インターネット接続がない状態でログインに失敗する際のクラッシュを修正しました。
+- 共有ボリュームのパスでの文字列「..」の取り扱いに関するバグを修正しました。
+  [docker/for-win#5375](https://github.com/docker/for-win/issues/5375) を Fix にしました。
+- トースト通知（toast notification）における更新エラーのチェックを報告するようにしました。
+  [docker/for-win#6364](https://github.com/docker/for-win/issues/6364) を Fix にしました。
+- Docker Desktop のアップグレード時に、PowerShell ベースの VM 管理を行っていたユーザーが、何も表示されずにインストールに失敗して、アップグレードされることなくアンインストールされてしまうバグを修正しました。
+- ユーザー名にスペース文字を含む場合に、インストーラーログファイルのデフォルトディレクトリへのパスを修正しました。
+  [docker/for-win#7941](https://github.com/docker/for-win/issues/7941) を Fix にしました。
+- Docker Desktop では、コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。
+  [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
 @z
 
 @x
@@ -243,48 +243,48 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - Docker contexts are now synced between Windows and WSL distros.
-  - Fixed an issue that intermittently causes the backend to fail to start.
-  - Fixed a proxy crash that happened when glibc was not compatible. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
-  - Fixed an issue when removing a container mounting `/mnt/wsl` would break WSL integration. See [docker/for-win#7836](https://github.com/docker/for-win/issues/7836).
-  - Added support for mounting files from a distro using the Windows CLI (e.g. `docker run -v \\wsl$\Ubuntu\home\simon\web:/web ...`)
-  - Fixed the error message when attempting to use a shared volume with a relative path. Fixes [docker/for-win#6894](https://github.com/docker/for-win/issues/6894).
-  - Fixed an issue when updating Windows to a WSL 2 capable version, where a configuration file is locked by the old Hyper-V VM.
-  - Fixed a discrepancy in the version of Docker Compose inside and outside of WSL 2. Fixes [docker/for-win#6461](https://github.com/docker/for-win/issues/6461).
-  - Detect when the `docker-desktop` wsl distro is stopped and display a clearer error message.
-  - Fix a race condition when exposing ports.
-  - Enable dialog no longer blocks other windows.
+- Docker contexts are now synced between Windows and WSL distros.
+- Fixed an issue that intermittently causes the backend to fail to start.
+- Fixed a proxy crash that happened when glibc was not compatible. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
+- Fixed an issue when removing a container mounting `/mnt/wsl` would break WSL integration. See [docker/for-win#7836](https://github.com/docker/for-win/issues/7836).
+- Added support for mounting files from a distro using the Windows CLI (e.g. `docker run -v \\wsl$\Ubuntu\home\simon\web:/web ...`)
+- Fixed the error message when attempting to use a shared volume with a relative path. Fixes [docker/for-win#6894](https://github.com/docker/for-win/issues/6894).
+- Fixed an issue when updating Windows to a WSL 2 capable version, where a configuration file is locked by the old Hyper-V VM.
+- Fixed a discrepancy in the version of Docker Compose inside and outside of WSL 2. Fixes [docker/for-win#6461](https://github.com/docker/for-win/issues/6461).
+- Detect when the `docker-desktop` wsl distro is stopped and display a clearer error message.
+- Fix a race condition when exposing ports.
+- Enable dialog no longer blocks other windows.
 @y
 {% comment %}
-  - Docker contexts are now synced between Windows and WSL distros.
-  - Fixed an issue that intermittently causes the backend to fail to start.
-  - Fixed a proxy crash that happened when glibc was not compatible. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
-  - Fixed an issue when removing a container mounting `/mnt/wsl` would break WSL integration. See [docker/for-win#7836](https://github.com/docker/for-win/issues/7836).
-  - Added support for mounting files from a distro using the Windows CLI (e.g. `docker run -v \\wsl$\Ubuntu\home\simon\web:/web ...`)
-  - Fixed the error message when attempting to use a shared volume with a relative path. Fixes [docker/for-win#6894](https://github.com/docker/for-win/issues/6894).
-  - Fixed an issue when updating Windows to a WSL 2 capable version, where a configuration file is locked by the old Hyper-V VM.
-  - Fixed a discrepancy in the version of Docker Compose inside and outside of WSL 2. Fixes [docker/for-win#6461](https://github.com/docker/for-win/issues/6461).
-  - Detect when the `docker-desktop` wsl distro is stopped and display a clearer error message.
-  - Fix a race condition when exposing ports.
-  - Enable dialog no longer blocks other windows.
+- Docker contexts are now synced between Windows and WSL distros.
+- Fixed an issue that intermittently causes the backend to fail to start.
+- Fixed a proxy crash that happened when glibc was not compatible. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
+- Fixed an issue when removing a container mounting `/mnt/wsl` would break WSL integration. See [docker/for-win#7836](https://github.com/docker/for-win/issues/7836).
+- Added support for mounting files from a distro using the Windows CLI (e.g. `docker run -v \\wsl$\Ubuntu\home\simon\web:/web ...`)
+- Fixed the error message when attempting to use a shared volume with a relative path. Fixes [docker/for-win#6894](https://github.com/docker/for-win/issues/6894).
+- Fixed an issue when updating Windows to a WSL 2 capable version, where a configuration file is locked by the old Hyper-V VM.
+- Fixed a discrepancy in the version of Docker Compose inside and outside of WSL 2. Fixes [docker/for-win#6461](https://github.com/docker/for-win/issues/6461).
+- Detect when the `docker-desktop` wsl distro is stopped and display a clearer error message.
+- Fix a race condition when exposing ports.
+- Enable dialog no longer blocks other windows.
 {% endcomment %}
-  - Docker コンテキストを Windows と WSL ディストリビューション間で同期するようにしました。
-  - バックエンドが断続的に起動に失敗する問題を修正しました。
-  - glibc が互換性のないものである場合に発生するプロキシーのクラッシュを修正しました。
-    [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) を参照してください。
-  - `/mnt/wsl`をマウントしているコンテナーを削除すると WSL 統合環境が壊れてしまう問題を修正しました。
-    [docker/for-win#7836](https://github.com/docker/for-win/issues/7836) を参照してください。
-  - Windows CLI を使って、ディストリビューションからのファイルマウントのサポートを追加しました。
-    （たとえば`docker run -v \\wsl$\Ubuntu\home\simon\web:/web ...`）
-  - 相対パスを使った共有ボリュームを利用とした場合のエラーメッセージを修正しました。
-    [docker/for-win#6894](https://github.com/docker/for-win/issues/6894) を Fix にしました。
-  - Windows を WSL 2 利用バージョンにアップデートした際の問題を修正しました。
-    その際には設定ファイルが古い Hyper-V VM によってロックされていました。
-  - WSL 2 の内外における Docker Compose バージョンの不一致を修正しました。
-    [docker/for-win#6461](https://github.com/docker/for-win/issues/6461) を Fix にしました。
-  - `docker-desktop` の WSL ディストリビューションが停止したことを検出するようにし、よりわかりやすいエラーメッセージを表示するようにしました。
-  - 公開ポートの競合状態を修正しました。
-  - ダイアログが他の画面をブロックしないようにしました。
+- Docker コンテキストを Windows と WSL ディストリビューション間で同期するようにしました。
+- バックエンドが断続的に起動に失敗する問題を修正しました。
+- glibc が互換性のないものである場合に発生するプロキシーのクラッシュを修正しました。
+  [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) を参照してください。
+- `/mnt/wsl`をマウントしているコンテナーを削除すると WSL 統合環境が壊れてしまう問題を修正しました。
+  [docker/for-win#7836](https://github.com/docker/for-win/issues/7836) を参照してください。
+- Windows CLI を使って、ディストリビューションからのファイルマウントのサポートを追加しました。
+  （たとえば`docker run -v \\wsl$\Ubuntu\home\simon\web:/web ...`）
+- 相対パスを使った共有ボリュームを利用とした場合のエラーメッセージを修正しました。
+  [docker/for-win#6894](https://github.com/docker/for-win/issues/6894) を Fix にしました。
+- Windows を WSL 2 利用バージョンにアップデートした際の問題を修正しました。
+  その際には設定ファイルが古い Hyper-V VM によってロックされていました。
+- WSL 2 の内外における Docker Compose バージョンの不一致を修正しました。
+  [docker/for-win#6461](https://github.com/docker/for-win/issues/6461) を Fix にしました。
+- `docker-desktop` の WSL ディストリビューションが停止したことを検出するようにし、よりわかりやすいエラーメッセージを表示するようにしました。
+- 公開ポートの競合状態を修正しました。
+- ダイアログが他の画面をブロックしないようにしました。
 @z
 
 @x
@@ -298,22 +298,22 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  -  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`.
- - There is a known issue when enabling Kubernetes where the settings UI sometimes fails to update the Kubernetes state. To work around this issue, close and re-open the Window.
-  - There is a rare known issue when switching users, where the images UI sometimes continues to show the repositories of the previous user. To work around this issue, close and re-open the Window.
+-  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`.
+- There is a known issue when enabling Kubernetes where the settings UI sometimes fails to update the Kubernetes state. To work around this issue, close and re-open the Window.
+- There is a rare known issue when switching users, where the images UI sometimes continues to show the repositories of the previous user. To work around this issue, close and re-open the Window.
 @y
 {% comment %}
-  -  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`.
- - There is a known issue when enabling Kubernetes where the settings UI sometimes fails to update the Kubernetes state. To work around this issue, close and re-open the Window.
-  - There is a rare known issue when switching users, where the images UI sometimes continues to show the repositories of the previous user. To work around this issue, close and re-open the Window.
+-  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`.
+- There is a known issue when enabling Kubernetes where the settings UI sometimes fails to update the Kubernetes state. To work around this issue, close and re-open the Window.
+- There is a rare known issue when switching users, where the images UI sometimes continues to show the repositories of the previous user. To work around this issue, close and re-open the Window.
 {% endcomment %}
-  -  名前つきボリュームと gRPC FUSE を利用して`docker-compose`を実行した際に問題が発生します。
-     2 度め以降の`docker-compose up`の呼び出しが失敗します。
-     ボリュームパスのプリフィックスに`/host_mnt`があるためです。
-  -  Kubernetes を有効にしていると、Setting UI において Kubernetes のステータス更新に失敗する場合があるという問題があります。
-     この問題を回避するには、画面をいったん閉じてから再度開いてください。
-  -  ごくまれに発生する問題として、ユーザー切り替えを行うと、イメージ画面において以前のユーザーのリポジトリが表示される場合があります。
-     この問題を回避するには、画面をいったん閉じてから再度開いてください。
+-  名前つきボリュームと gRPC FUSE を利用して`docker-compose`を実行した際に問題が発生します。
+   2 度め以降の`docker-compose up`の呼び出しが失敗します。
+   ボリュームパスのプリフィックスに`/host_mnt`があるためです。
+-  Kubernetes を有効にしていると、Setting UI において Kubernetes のステータス更新に失敗する場合があるという問題があります。
+   この問題を回避するには、画面をいったん閉じてから再度開いてください。
+-  ごくまれに発生する問題として、ユーザー切り替えを行うと、イメージ画面において以前のユーザーのリポジトリが表示される場合があります。
+   この問題を回避するには、画面をいったん閉じてから再度開いてください。
 @z
 
 @x
@@ -344,13 +344,13 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
+- The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
 @y
-  {% comment %}
-  - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
-  {% endcomment %}
-  - Docker CLI の新しいクラウド統合環境によって、Amazon ECS や Microsoft ACI を用いたコンテナー実行が簡単になりました。
-    詳しくは [ECS での Docker コンテナーのデプロイ](../../engine/context/ecs-integration/) や [Azure での Docker コンテナーのデプロイ](../../engine/context/aci-integration/) を参照してください。
+{% comment %}
+- The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
+{% endcomment %}
+- Docker CLI の新しいクラウド統合環境によって、Amazon ECS や Microsoft ACI を用いたコンテナー実行が簡単になりました。
+  詳しくは [ECS での Docker コンテナーのデプロイ](../../engine/context/ecs-integration/) や [Azure での Docker コンテナーのデプロイ](../../engine/context/aci-integration/) を参照してください。
 @z
 
 @x
@@ -364,11 +364,11 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
-  - [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+- [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
+- [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
 @y
-  - [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
-  - [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+- [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
+- [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
 @z
 
 @x
@@ -382,13 +382,13 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
+- WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
 @y
-  {% comment %}
-  - WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
-  {% endcomment %}
-  - WSL2: 非互換の glibc を利用している際のクラッシュを修正しました。
-    [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) を参照してください。
+{% comment %}
+- WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
+{% endcomment %}
+- WSL2: 非互換の glibc を利用している際のクラッシュを修正しました。
+  [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) を参照してください。
 @z
 
 @x
@@ -402,13 +402,13 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS` 
-in i386 images. To work around this issue, disable `seccomp` by using 
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
+in i386 images. To work around this issue, disable `seccomp` by using
 the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
 @y
 {% comment %}
-- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS` 
-in i386 images. To work around this issue, disable `seccomp` by using 
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
+in i386 images. To work around this issue, disable `seccomp` by using
 the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
 {% endcomment %}
 - システムコール`clock_gettime64`は、i386 イメージにおいて`ENOSYS`ではなく`EPERM`を返します。

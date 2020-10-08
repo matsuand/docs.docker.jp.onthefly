@@ -82,28 +82,34 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
-  - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select 'Dashboard' > 'Images'.
-  - Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to `Preferences` > `Docker Engine` and then disable the BuildKit feature.
-  - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
-  - Docker Desktop now uses much less CPU when there are lots of file events on the host and when running Kubernetes, see [docker/roadmap#12](https://github.com/docker/roadmap/issues/12).
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
+- Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+- Docker Desktop now uses much less CPU when there are lots of file events on the host and when running Kubernetes, see [docker/roadmap#12](https://github.com/docker/roadmap/issues/12).
+- Docker Desktop now uses gRPC-FUSE for file sharing by default. This uses much less CPU than osxfs, especially when there are lots of file events on the host. To switch back to `osxfs`, go to **Preferences** > **General** and disable gRPC-FUSE.
 @y
-  {% comment %}
-  - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
-  - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select 'Dashboard' > 'Images'.
-  - Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to `Preferences` > `Docker Engine` and then disable the BuildKit feature.
-  - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
-  - Docker Desktop now uses much less CPU when there are lots of file events on the host and when running Kubernetes, see [docker/roadmap#12](https://github.com/docker/roadmap/issues/12).
-  {% endcomment %}
-  - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), ECS と ACI を通じて Compose とクラウドのボリューム利用が可能になりました。
-  - Docker ダッシュボードに、新たに Images 画面が導入されました。
-    Images 画面では Docker Hub イメージの参照、そのプル、ディスク上のローカルイメージ管理が可能になります。
-    また不要で未使用のイメージの削除もできます。
-    この新たな Images 画面にアクセスするには Docker メニューから 'Dashboard' > 'Images' を実行します。
-  - Docker Desktop ではデフォルトにリセットした後に、BuildKit をデフォルト有効にしました。
-    それまでの古い`docker build`に切り替えるには、`Preferences` > `Docker Engine`にアクセスして BuildKit 機能を無効化します。
-  - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
-  - Docker Desktop では、ホスト上のファイルイベントが大量にある場合、および Kubernetes 実行の場合に、CPU 利用を軽減しました。[docker/roadmap#12](https://github.com/docker/roadmap/issues/12) を参照してください。
+{% comment %}
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
+- Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+- Docker Desktop now uses much less CPU when there are lots of file events on the host and when running Kubernetes, see [docker/roadmap#12](https://github.com/docker/roadmap/issues/12).
+- Docker Desktop now uses gRPC-FUSE for file sharing by default. This uses much less CPU than osxfs, especially when there are lots of file events on the host. To switch back to `osxfs`, go to **Preferences** > **General** and disable gRPC-FUSE.
+{% endcomment %}
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), ECS と ACI を通じて Compose とクラウドのボリューム利用が可能になりました。
+- Docker ダッシュボードに、新たに Images 画面が導入されました。
+  Images 画面では Docker Hub イメージの参照、そのプル、ディスク上のローカルイメージ管理が可能になります。
+  また不要で未使用のイメージの削除もできます。
+  この新たな Images 画面にアクセスするには Docker メニューから **Dashboard** > **Images** を実行します。
+- Docker Desktop ではデフォルトにリセットした後に、BuildKit をデフォルト有効にしました。
+  それまでの古い`docker build`に切り替えるには、**Preferences** > **Docker Engine** にアクセスして BuildKit 機能を無効化します。
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+- Docker Desktop では、ホスト上のファイルイベントが大量にある場合、および Kubernetes 実行の場合に、CPU 利用を軽減しました。[docker/roadmap#12](https://github.com/docker/roadmap/issues/12) を参照してください。
+- Docker Desktop では、デフォルトではファイル共有に gRPC-FUSE を利用するようになりました。
+  これにより osxfs よりも CPU の利用が少なくなります。
+  特にホスト上でのファイルイベントが大量にある場合に有効です。
+  `osxfs`を利用するように戻すには、**Preferences** > **General** を実行して gRPC-FUSE を無効にします。
 @z
 
 @x
@@ -117,19 +123,19 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
-  - [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
-  - [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
-  - [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
-  - [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
-  - [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
+- [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
+- [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
+- [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
+- [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
+- [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
+- [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
 @y
-  - [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
-  - [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
-  - [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
-  - [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
-  - [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
-  - [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
+- [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
+- [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
+- [Go 1.14.7](https://github.com/golang/go/releases/tag/go1.14.7)
+- [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
+- [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
+- [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
 @z
 
 @x
@@ -143,55 +149,55 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - Docker Desktop on macOS 10.13 is now deprecated.
-  - Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089).
-  - Adding the application to the dock and clicking on it will launch the container view if Docker is already running.
-  - Added support for emulating Risc-V via Qemu 4.2.0.
-  - Removed file descriptor limit (`setrlimit`) of `10240`. We now rely on the kernel to impose limits via `kern.maxfiles` and `kern.maxfilesperproc`.
-  - Fixed a Mac CPU usage bug by removing the serial console from `hyperkit`, see [docker/roadmap#12]( https://github.com/docker/roadmap/issues/12#issuecomment-663163280). To open a shell in the VM use either `nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock`.
-  - Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
-  - Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
-  - Fixed bug where the application won't start if the username is too long.
-  - Fixed a bug where adding directories like `/usr` to the filesharing list prevents Desktop from starting. Fixes [docker/for-mac#4488](https://github.com/docker/for-mac/issues/4488)
-  - Fixed application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
-  - Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Docker Desktop on macOS 10.13 is now deprecated.
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089).
+- Adding the application to the dock and clicking on it will launch the container view if Docker is already running.
+- Added support for emulating Risc-V via Qemu 4.2.0.
+- Removed file descriptor limit (`setrlimit`) of `10240`. We now rely on the kernel to impose limits via `kern.maxfiles` and `kern.maxfilesperproc`.
+- Fixed a Mac CPU usage bug by removing the serial console from `hyperkit`, see [docker/roadmap#12]( https://github.com/docker/roadmap/issues/12#issuecomment-663163280). To open a shell in the VM use either `nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock`.
+- Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
+- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+- Fixed bug where the application won't start if the username is too long.
+- Fixed a bug where adding directories like `/usr` to the filesharing list prevents Desktop from starting. Fixes [docker/for-mac#4488](https://github.com/docker/for-mac/issues/4488)
+- Fixed application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
+- Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 @y
-  {% comment %}
-  - Docker Desktop on macOS 10.13 is now deprecated.
-  - Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089).
-  - Adding the application to the dock and clicking on it will launch the container view if Docker is already running.
-  - Added support for emulating Risc-V via Qemu 4.2.0.
-  - Removed file descriptor limit (`setrlimit`) of `10240`. We now rely on the kernel to impose limits via `kern.maxfiles` and `kern.maxfilesperproc`.
-  - Fixed a Mac CPU usage bug by removing the serial console from `hyperkit`, see [docker/roadmap#12]( https://github.com/docker/roadmap/issues/12#issuecomment-663163280). To open a shell in the VM use either `nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock`.
-  - Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
-  - Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
-  - Fixed bug where the application won't start if the username is too long.
-  - Fixed a bug where adding directories like `/usr` to the filesharing list prevents Desktop from starting. Fixes [docker/for-mac#4488](https://github.com/docker/for-mac/issues/4488)
-  - Fixed application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
-  - Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
-  {% endcomment %}
-  - Docker Desktop on macOS 10.13 は非推奨となりました。
-  - かつての Kubernetes コンテキスト`docker-for-desktop`は削除しました。
-    代わりにコンテキスト`docker-desktop`を利用してください。
-    [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) と [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089) を Fix にしました。
-  - Docker 起動中にはアプリケーションを dock に追加し、クリックによってコンテナー画面を開くようにしました。
-  - Qemu 4.2.0 を通じて Risc-V エミュレーションのサポートを追加しました。
-  - ファイルディスクリプターの制限（`setrlimit`）である`10240`を削除しました。
-    今後はカーネルの`kern.maxfiles`と`kern.maxfilesperproc`を通じて制限を課すことにしました。
-  - Mac における CPU 利用のバグを、`hyperkit`からシリアルコンソールを削除することで修正しました。
-    [docker/roadmap#12]( https://github.com/docker/roadmap/issues/12#issuecomment-663163280) を参照してください。
-    VM 上においてシェルを開くには`nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock`を利用してください。
-  - コンテナーログをクリップボードにコピーする際に ansi color を除きました。
-    [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786) を Fix にしました。
-  - ログイン時に自動起動を修正しました。
-    [docker/for-mac#4877] と [docker/for-mac#4890] を参照してください。
-  - ユーザー名が極端に長い場合にアプリケーションが起動しないバグを修正しました。
-  - `/usr`のようなディレクトリをファイル共有リストに追加すると、Desktop が起動しなくなるバグを修正しました。
-    [docker/for-mac#4488](https://github.com/docker/for-mac/issues/4488) を Fix にしました。
-  - `hosts`が Docker の`daemon.json`内部にて指定されている場合のアプリケーション起動を修正しました。
-    [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117) を参照してください。
-  - Docker Desktop では、コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。
-    [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
+{% comment %}
+- Docker Desktop on macOS 10.13 is now deprecated.
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089).
+- Adding the application to the dock and clicking on it will launch the container view if Docker is already running.
+- Added support for emulating Risc-V via Qemu 4.2.0.
+- Removed file descriptor limit (`setrlimit`) of `10240`. We now rely on the kernel to impose limits via `kern.maxfiles` and `kern.maxfilesperproc`.
+- Fixed a Mac CPU usage bug by removing the serial console from `hyperkit`, see [docker/roadmap#12]( https://github.com/docker/roadmap/issues/12#issuecomment-663163280). To open a shell in the VM use either `nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock`.
+- Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
+- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+- Fixed bug where the application won't start if the username is too long.
+- Fixed a bug where adding directories like `/usr` to the filesharing list prevents Desktop from starting. Fixes [docker/for-mac#4488](https://github.com/docker/for-mac/issues/4488)
+- Fixed application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
+- Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+{% endcomment %}
+- Docker Desktop on macOS 10.13 は非推奨となりました。
+- かつての Kubernetes コンテキスト`docker-for-desktop`は削除しました。
+  代わりにコンテキスト`docker-desktop`を利用してください。
+  [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) と [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089) を Fix にしました。
+- Docker 起動中にはアプリケーションを dock に追加し、クリックによってコンテナー画面を開くようにしました。
+- Qemu 4.2.0 を通じて Risc-V エミュレーションのサポートを追加しました。
+- ファイルディスクリプターの制限（`setrlimit`）である`10240`を削除しました。
+  今後はカーネルの`kern.maxfiles`と`kern.maxfilesperproc`を通じて制限を課すことにしました。
+- Mac における CPU 利用のバグを、`hyperkit`からシリアルコンソールを削除することで修正しました。
+  [docker/roadmap#12]( https://github.com/docker/roadmap/issues/12#issuecomment-663163280) を参照してください。
+  VM 上においてシェルを開くには`nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock`を利用してください。
+- コンテナーログをクリップボードにコピーする際に ansi color を除きました。
+  [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786) を Fix にしました。
+- ログイン時に自動起動を修正しました。
+  [docker/for-mac#4877] と [docker/for-mac#4890] を参照してください。
+- ユーザー名が極端に長い場合にアプリケーションが起動しないバグを修正しました。
+- `/usr`のようなディレクトリをファイル共有リストに追加すると、Desktop が起動しなくなるバグを修正しました。
+  [docker/for-mac#4488](https://github.com/docker/for-mac/issues/4488) を Fix にしました。
+- `hosts`が Docker の`daemon.json`内部にて指定されている場合のアプリケーション起動を修正しました。
+  [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117) を参照してください。
+- Docker Desktop では、コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。
+  [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
 @z
 
 @x
@@ -205,24 +211,24 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  -  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`. To work around this issue, switch back to `osxfs` in Settings. See [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
-  - There is a known issue when enabling Kubernetes where the settings UI fails to update the Kubernetes state. To work around this issue, close and re-open the window.
-  - There is a rare known issue when switching users where the images view continues to show the repositories of the previous user. To work around this issue, close and re-open the window.
+-  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`. To work around this issue, switch back to `osxfs` in Settings. See [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
+- There is a known issue when enabling Kubernetes where the settings UI fails to update the Kubernetes state. To work around this issue, close and re-open the window.
+- There is a rare known issue when switching users where the images view continues to show the repositories of the previous user. To work around this issue, close and re-open the window.
 @y
-  {% comment %}
-  -  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`. To work around this issue, switch back to `osxfs` in Settings. See [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
-  - There is a known issue when enabling Kubernetes where the settings UI fails to update the Kubernetes state. To work around this issue, close and re-open the window.
-  - There is a rare known issue when switching users where the images view continues to show the repositories of the previous user. To work around this issue, close and re-open the window.
-  {% endcomment %}
-  -  名前つきボリュームと gRPC FUSE を利用して`docker-compose`を実行した際に問題が発生します。
-     2 度め以降の`docker-compose up`の呼び出しが失敗します。
-     ボリュームパスのプリフィックスに`/host_mnt`があるためです。
-     この問題を回避するには Settings において`osxfs`に戻します。
-     [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859) を参照してください。
-  -  Kubernetes を有効にしていると、Setting UI において Kubernetes のステータス更新に失敗するという問題があります。
-     この問題を回避するには、画面をいったん閉じてから再度開いてください。
-  -  ごくまれに発生する問題として、ユーザー切り替えを行うと、イメージ画面において以前のユーザーのリポジトリが表示される場合があります。
-     この問題を回避するには、画面をいったん閉じてから再度開いてください。
+{% comment %}
+-  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`. To work around this issue, switch back to `osxfs` in Settings. See [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
+- There is a known issue when enabling Kubernetes where the settings UI fails to update the Kubernetes state. To work around this issue, close and re-open the window.
+- There is a rare known issue when switching users where the images view continues to show the repositories of the previous user. To work around this issue, close and re-open the window.
+{% endcomment %}
+-  名前つきボリュームと gRPC FUSE を利用して`docker-compose`を実行した際に問題が発生します。
+   2 度め以降の`docker-compose up`の呼び出しが失敗します。
+   ボリュームパスのプリフィックスに`/host_mnt`があるためです。
+   この問題を回避するには Settings において`osxfs`に戻します。
+   [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859) を参照してください。
+-  Kubernetes を有効にしていると、Setting UI において Kubernetes のステータス更新に失敗するという問題があります。
+   この問題を回避するには、画面をいったん閉じてから再度開いてください。
+-  ごくまれに発生する問題として、ユーザー切り替えを行うと、イメージ画面において以前のユーザーのリポジトリが表示される場合があります。
+   この問題を回避するには、画面をいったん閉じてから再度開いてください。
 @z
 
 @x
@@ -253,13 +259,13 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
+- The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
 @y
-  {% comment %}
-  - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
-  {% endcomment %}
-  - Docker CLI の新しいクラウド統合環境によって、Amazon ECS や Microsoft ACI を用いたコンテナー実行が簡単になりました。
-    詳しくは [ECS での Docker コンテナーのデプロイ](../../engine/context/ecs-integration/) や [Azure での Docker コンテナーのデプロイ](../../engine/context/aci-integration/) を参照してください。
+{% comment %}
+- The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
+{% endcomment %}
+- Docker CLI の新しいクラウド統合環境によって、Amazon ECS や Microsoft ACI を用いたコンテナー実行が簡単になりました。
+  詳しくは [ECS での Docker コンテナーのデプロイ](../../engine/context/ecs-integration/) や [Azure での Docker コンテナーのデプロイ](../../engine/context/aci-integration/) を参照してください。
 @z
 
 @x
@@ -273,11 +279,11 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
-  - [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+- [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
+- [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
 @y
-  - [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
-  - [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+- [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
+- [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
 @z
 
 @x
@@ -291,13 +297,13 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @z
 
 @x
-  - Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890)
+- Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890)
 @y
-  {% comment %}
-  - Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890)
-  {% endcomment %}
-  - ログイン時の自動起動を修正しました。
-    [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) と [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890) を参照してください。
+{% comment %}
+- Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890)
+{% endcomment %}
+- ログイン時の自動起動を修正しました。
+  [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) と [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890) を参照してください。
 @z
 
 @x

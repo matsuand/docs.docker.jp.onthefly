@@ -35,6 +35,8 @@ tgtdir:
 -include ./Makefile.sub
 Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
+	@sed -i -e "/glossary.yamlch >\/dev\/null$$/a\\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/glossary.yaml" $@
+	@sed -i -e "/glossary.yamlch >\/dev\/null$$/a\\\tcp -p $$\@ $$\(srcdir\)\/glossary\.yaml" $@
 
 @MAINT@.PHONY: chbuild
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_yamls))
@@ -43,31 +45,3 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 
 csvcopy:
 	@if test ! -f redirects.csv; then cp -p $(origdir)/redirects.csv .; fi
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(publishdir)/,$(srcs))
-#	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-#	@if test ! -f $(publishdir)/redirects.csv; then cp -p $(origdir)/redirects.csv .; fi
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(publishdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-#	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-#	@if test ! -f $(publishdir)/redirects.csv; then cp -p $(origdir)/redirects.csv .; fi
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-.PHONY: rewriteurls
-rewriteurls:
-
-.PHONY: publishclean
-publishclean:
-	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-	@for f in $(srcs); do rm -f ${publishdir}/$$f; done
-	@for d in $(SUBDIRS); do rm -fr ${publishdir}/$$d; done
-	@rm -f $(publishdir)/redirects.csv
