@@ -27,7 +27,6 @@ bases = \
 htmlbases = \
 	body             \
 	body-landing     \
-	enterprise_moved \
 	footer           \
 	head             \
 	header           \

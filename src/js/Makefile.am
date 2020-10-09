@@ -23,7 +23,6 @@ jsbases = \
 jsnonbases = \
 	anchorlinks \
 	bootstrap.min \
-	highlight.pack \
 	jquery \
 	landing-page \
 	modernizr.min \

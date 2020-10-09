@@ -42,6 +42,16 @@ Docker のローカルイメージに対するぜい弱性スキャンは、Snyk
 @z
 
 @x
+This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+@y
+{% comment %}
+This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+{% endcomment %}
+本ページでは CLI コマンド`docker scan`の情報を示します。
+Docker Hub を通じて Docker イメージを自動スキャンする情報に関しては [Docker Hub のぜい弱性スキャン]({{ site.baseurl }}/docker-hub/vulnerability-scanning/) を参照してください。
+@z
+
+@x
 >**Note**
 >
 > Docker vulnerability scanning for local images  is currently a beta release. The commands and flags are subject to change in subsequent releases.

@@ -21,24 +21,77 @@ skip_read_time: true
 
 @x
 There might be a mistake in the URL or you might've clicked a link to content
-that no longer exists.
+that no longer exists. If you think it's the latter, please file an issue in
+our [issue tracker on GitHub](https://github.com/docker/docker.github.io/issues/new)
+and let us know what happened. Please also include a link to where the error
+occurred, if applicable.
 @y
 There might be a mistake in the URL or you might've clicked a link to content
-that no longer exists.
-@z
-
-@x
-If you think it's the latter, please file an issue at [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io/issues/new)
-and let us know what happened. Please also include a link to where the error
-occurred, if applicable.
-@y
-If you think it's the latter, please file an issue at [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io/issues/new)
+that no longer exists. If you think it's the latter, please file an issue in
+our [issue tracker on GitHub](https://github.com/docker/docker.github.io/issues/new)
 and let us know what happened. Please also include a link to where the error
 occurred, if applicable.
 @z
 
 @x
-![https://docs.docker.com/](/images/404-docs.png)
+[**Click here to create a new ticket**](https://github.com/docker/docker.github.io/issues/new){:.newissue.button.primary-btn}
 @y
-![{{site.url}}{{ site.baseurl }}/](/images/404-docs.png)
+{% comment %}
+[**Click here to create a new ticket**](https://github.com/docker/docker.github.io/issues/new){:.newissue.button.primary-btn}
+{% endcomment %}
+[**新たなチケットはこちらをクリック**](https://github.com/matsuand/docs.docker.jp.onthefly/issues/new){:.newissue.button.primary-btn}
+@z
+
+@x
+[![404 page not found](/images/404-docs.png)](https://docs.docker.com/ "Go to the homepage")
+@y
+{% comment %}
+[![404 page not found](/images/404-docs.png)](https://docs.docker.com/ "Go to the homepage")
+{% endcomment %}
+[![404 page not found]({{ site.baseurl }}/images/404-docs.png)]({{site.url}}{{ site.baseurl }}/ "ホームページへ")
+@z
+
+@x
+<script>
+let el = document.querySelector("a.newissue");
+if (el) {
+    let url = new URL("https://github.com/docker/docker.github.io/issues/new");
+    url.searchParams.set("title", "404 at " + window.location.pathname);
+    let body = "I found a broken link : " + window.location.href;
+    if (document.referrer !== "") {
+        body += "\nI arrived on this page through: " + document.referrer
+    }
+    url.searchParams.set("body", body);
+    el.setAttribute("href", url.toString());
+}
+</script>
+@y
+{% comment %}
+<script>
+let el = document.querySelector("a.newissue");
+if (el) {
+    let url = new URL("https://github.com/docker/docker.github.io/issues/new");
+    url.searchParams.set("title", "404 at " + window.location.pathname);
+    let body = "I found a broken link : " + window.location.href;
+    if (document.referrer !== "") {
+        body += "\nI arrived on this page through: " + document.referrer
+    }
+    url.searchParams.set("body", body);
+    el.setAttribute("href", url.toString());
+}
+</script>
+{% endcomment %}
+<script>
+let el = document.querySelector("a.newissue");
+if (el) {
+    let url = new URL("https://github.com/matsuand/docs.docker.jp.onthefly/issues/new");
+    url.searchParams.set("title", "404 at " + window.location.pathname);
+    let body = "I found a broken link : " + window.location.href;
+    if (document.referrer !== "") {
+        body += "\nI arrived on this page through: " + document.referrer
+    }
+    url.searchParams.set("body", body);
+    el.setAttribute("href", url.toString());
+}
+</script>
 @z

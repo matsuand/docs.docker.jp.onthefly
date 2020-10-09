@@ -43,7 +43,7 @@ commands have a `--format` flag, and many of the CLI command references
 include examples of customizing the output format.
 {% endcomment %}
 Docker では、テンプレート項目を操作する基本機能を提供します。
-以下では、すべて `docker inspect` コマンドを使った例を示します。
+以下では、すべて`docker inspect`コマンドを使った例を示します。
 ただしこれ以外の CLI コマンドにも `--format` フラグは用意されています。
 また多くの CLI コマンドリファレンスにて、出力フォーマットをカスタマイズする例を示しています。
 @z
@@ -51,7 +51,7 @@ Docker では、テンプレート項目を操作する基本機能を提供し�
 @x
 >**Note**
 >
-> Whe using the `--format` flag, you need observe your shell environment. 
+> When using the `--format` flag, you need observe your shell environment. 
 > In a Posix shell, you can run the following with a single quote:
 >
 > {% raw %}
@@ -74,7 +74,7 @@ Docker では、テンプレート項目を操作する基本機能を提供し�
 {% comment %}
 >**Note**
 >
-> Whe using the `--format` flag, you need observe your shell environment. 
+> When using the `--format` flag, you need observe your shell environment. 
 > In a Posix shell, you can run the following with a single quote:
 >
 > {% raw %}
@@ -96,7 +96,7 @@ Docker では、テンプレート項目を操作する基本機能を提供し�
 {% endcomment %}
 >**メモ**
 >
-> `--format` フラグを用いる際には、利用しているシェル環境を考慮する必要があります。
+> `--format`フラグを用いる際には、利用しているシェル環境を考慮する必要があります。
 > Posix シェルの場合、以下のようなコマンド実行では、シングルクォートで囲むことが必要です。
 >
 > {% raw %}
@@ -131,7 +131,7 @@ It puts a separator between each element in the list.
 `join` concatenates a list of strings to create a single string.
 It puts a separator between each element in the list.
 {% endcomment %}
-`join` は文字列のリストを連結して、１つの文字列を生成します。
+`join`は文字列のリストを連結して、１つの文字列を生成します。
 リスト内では、各項目はセパレーターで区切ります。
 @z
 
@@ -161,7 +161,7 @@ docker inspect --format '{{join .Args " , "}}' container
 {% comment %}
 `table` specifies which fields you want to see its output.
 {% endcomment %}
-`table` は出力したい項目を指定します。
+`table`は出力したい項目を指定します。
 @z
 
 @x
@@ -190,7 +190,7 @@ docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
 {% comment %}
 `json` encodes an element as a json string.
 {% endcomment %}
-`json` は項目を json 文字列としてエンコードします。
+`json`は項目を json 文字列としてエンコードします。
 @z
 
 @x
@@ -219,7 +219,7 @@ docker inspect --format '{{json .Mounts}}' container
 {% comment %}
 `lower` transforms a string into its lowercase representation.
 {% endcomment %}
-`lower` は文字列を小文字化します。
+`lower`は文字列を小文字化します。
 @z
 
 @x
@@ -248,7 +248,7 @@ docker inspect --format "{{lower .Name}}" container
 {% comment %}
 `split` slices a string into a list of strings separated by a separator.
 {% endcomment %}
-`split` は、文字列を分割して、セパレーターによって区切られた文字列リストにします。
+`split`は、文字列を分割して、セパレーターによって区切られた文字列リストにします。
 @z
 
 @x
@@ -277,7 +277,7 @@ docker inspect --format '{{split .Image ":"}}'
 {% comment %}
 `title` capitalizes the first character of a string.
 {% endcomment %}
-`title` は文字列の先頭文字を大文字にします。
+`title`は文字列の先頭文字を大文字にします。
 @z
 
 @x
@@ -306,7 +306,7 @@ docker inspect --format "{{title .Name}}" container
 {% comment %}
 `upper` transforms a string into its uppercase representation.
 {% endcomment %}
-`upper` は文字列を大文字化します。
+`upper`は文字列を大文字化します。
 @z
 
 @x
@@ -335,7 +335,7 @@ docker inspect --format "{{upper .Name}}" container
 {% comment %}
 `println` prints each value on a new line.
 {% endcomment %}
-`println` は各項目を一行ずつ出力します。
+`println`は各項目を一行ずつ出力します。
 @z
 
 @x
