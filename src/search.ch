@@ -58,12 +58,6 @@ skip_read_time: true
 @z
 
 @x
-<div id="glossaryMatch"></div>
-@y
-<div id="glossaryMatch"></div>
-@z
-
-@x
 <div id="my-cse1">
 <script>
   (function() {

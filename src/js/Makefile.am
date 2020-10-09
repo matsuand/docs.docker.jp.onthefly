@@ -15,7 +15,6 @@ ctie:
 
 jsbases = \
 	docs     \
-	glossary \
 	menu     \
 	metadata \
 	search   \

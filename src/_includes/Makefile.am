@@ -31,7 +31,6 @@ htmlbases = \
 	footer           \
 	head             \
 	header           \
-	header-landing   \
 	navigation       \
 	read_time        \
 	side-menu        \
