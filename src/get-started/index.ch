@@ -372,9 +372,12 @@ Follow the instructions appropriate for your operating system to download and in
 @z
 
 @x {{ site.baseurl }}
- [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}{: .button .outline-btn} [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}{: .button .outline-btn}
+ [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn} [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn}
 @y
- [Docker Desktop for Mac]({{ site.baseurl }}/docker-for-mac/install/){: target="_blank" class="_"}{: .button .outline-btn} [Docker Desktop for Windows]({{ site.baseurl }}/docker-for-windows/install/){: target="_blank" class="_"}{: .button .outline-btn}
+ {% comment %}
+ [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn} [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn}
+ {% endcomment %}
+ [Docker Desktop for Mac]({{ site.baseurl }}/docker-for-mac/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn} [Docker Desktop for Windows]({{ site.baseurl }}/docker-for-windows/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn}
 @z
 
 @x
@@ -420,12 +423,12 @@ Docker version 19.03.13, build 4484c46d9d
 @z
 
 @x
-1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
+1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" rel="noopener" class="_"} Docker image:
 @y
 {% comment %}
-1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
+1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" rel="noopener" class="_"} Docker image:
 {% endcomment %}
-1.  インストールが正常に行われているかを確認するために Docker イメージである [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} を実行します。
+1.  インストールが正常に行われているかを確認するために Docker イメージである [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" rel="noopener" class="_"} を実行します。
 @z
 
 @x

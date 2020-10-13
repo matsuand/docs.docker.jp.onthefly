@@ -99,24 +99,20 @@ Docker イメージに対してぜい弱性スキャンを実行するには、�
 @z
 
 @x
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 @y
-    {% comment %}
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
-    {% endcomment %}
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 @z
 
 @x
-2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-2. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} にサインインしていること。
+2. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} にサインインしていること。
 @z
 
 @x
@@ -130,12 +126,12 @@ Docker イメージに対してぜい弱性スキャンを実行するには、�
 @z
 
 @x
-4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
+4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
 @y
 {% comment %}
-4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
+4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
 {% endcomment %}
-4. （任意作業）スキャンを行うために [Snyk アカウント](https://dockr.ly/3ePqVcp){: target="_blank" class="_"} を生成していること。
+4. （任意作業）スキャンを行うために [Snyk アカウント](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} を生成していること。
    または Docker Hub アカウントとともに利用できるものとして Snyk 社が提供する、月単位の追加無償スキャンを利用していること。
 @z
 
@@ -736,6 +732,12 @@ For more free scans that keep your images secure, sign up to Snyk at https://doc
 @z
 
 @x
+For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
+@y
+For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
 ## Provider authentication
 @y
 {% comment %}
@@ -746,12 +748,12 @@ For more free scans that keep your images secure, sign up to Snyk at https://doc
 @z
 
 @x
-If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" class="_"}:
+If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" rel="noopener" class="_"}:
 @y
 {% comment %}
-If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" class="_"}:
+If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" rel="noopener" class="_"}:
 {% endcomment %}
-すでに Snyk アカウントを持っている場合は、Snyk の [API トークン](https://app.snyk.io/account){: target="_blank" class="_"} を直接利用することができます。
+すでに Snyk アカウントを持っている場合は、Snyk の [API トークン](https://app.snyk.io/account){: target="_blank" rel="noopener" class="_"} を直接利用することができます。
 @z
 
 @x
@@ -819,12 +821,12 @@ If you use the `--login` flag without any token, you will be redirected to the S
 @z
 
 @x
-Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
 {% comment %}
-Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
 {% endcomment %}
 Docker ローカルイメージに対するぜい弱性スキャン機能のベータ版をご利用いただき、ありがとうございます。
 みなさんからのフィードバックを頂くことが重要です。
-フィードバックは GitHub リポジトリ内の [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" class="_"} において issue を生成してお知らせください。
+フィードバックは GitHub リポジトリ内の [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} において issue を生成してお知らせください。
 @z

@@ -323,14 +323,14 @@ formats, and gives us a way to test and demo them.
 @z
 
 @x
-Go to the [Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" class="_"}
+Go to the [Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" rel="noopener" class="_"}
 for resources and information on the community.
 @y
 {% comment %}
-Go to the [Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" class="_"}
+Go to the [Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" rel="noopener" class="_"}
 for resources and information on the community.
 {% endcomment %}
-Go to the [Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" class="_"}
+Go to the [Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" rel="noopener" class="_"}
 for resources and information on the community.
 @z
 

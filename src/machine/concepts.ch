@@ -363,17 +363,17 @@ For more information and resources, visit
 @x
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Docker Machine driver reference](drivers/index.md){: target="_blank" class="_"}
-- [Docker Machine subcommand reference](reference/help.md){: target="_blank" class="_"}
+- [Docker Machine driver reference](drivers/index.md){: target="_blank" rel="noopener" class="_"}
+- [Docker Machine subcommand reference](reference/help.md){: target="_blank" rel="noopener" class="_"}
 @y
 {% comment %}
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Docker Machine driver reference](drivers/index.md){: target="_blank" class="_"}
-- [Docker Machine subcommand reference](reference/help.md){: target="_blank" class="_"}
+- [Docker Machine driver reference](drivers/index.md){: target="_blank" rel="noopener" class="_"}
+- [Docker Machine subcommand reference](reference/help.md){: target="_blank" rel="noopener" class="_"}
 {% endcomment %}
 - [VirtualBox 利用によるローカルシステム](get-started.md) に Docker ホストを生成して実行します。
 - [クラウドプロバイダー](get-started-cloud.md) 上に複数の Docker ホストをプロビジョニングします。
-- [Docker Machine ドライバーリファレンス](drivers/index.md){: target="_blank" class="_"}
-- [Docker Machine サブコマンドリファレンス](reference/help.md){: target="_blank" class="_"}
+- [Docker Machine ドライバーリファレンス](drivers/index.md){: target="_blank" rel="noopener" class="_"}
+- [Docker Machine サブコマンドリファレンス](reference/help.md){: target="_blank" rel="noopener" class="_"}
 @z

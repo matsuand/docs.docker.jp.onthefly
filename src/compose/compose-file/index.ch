@@ -1472,7 +1472,7 @@ the service's task containers.
   because they are mounted in a temporary filesystem, so if you set the writable
   bit, it is ignored. The executable bit can be set. If you aren't familiar with
   UNIX file permission modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 @y
 {% comment %}
@@ -1488,7 +1488,7 @@ the service's task containers.
   because they are mounted in a temporary filesystem, so if you set the writable
   bit, it is ignored. The executable bit can be set. If you aren't familiar with
   UNIX file permission modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 {% endcomment %}
 - `source`: Docker 内に設定する config 名。
@@ -1504,7 +1504,7 @@ the service's task containers.
   Configs は、テンポラリなファイルシステム上にマウントされるため、書き込み可能にはできません。
   したがって書き込みビットを設定しても無視されます。
   実行ビットは設定できます。
-  UNIX のファイルパーミッションモードに詳しくない方は、[パーミッション計算機](http://permissions-calculator.org/){: target="_blank" class="_" }を参照してください。
+  UNIX のファイルパーミッションモードに詳しくない方は、[パーミッション計算機](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" } を参照してください。
 @z
 
 @x
@@ -2579,7 +2579,7 @@ services or containers in a swarm.
 on non swarm deployments, use
 [Compose file format version 2 CPU, memory, and other resource options](compose-file-v2.md#cpu-and-other-resources).
 If you have further questions, refer to the discussion on the GitHub
-issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
+issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" rel="noopener" class="_"}.
 {: .important}
 @y
 {% comment %}
@@ -2590,14 +2590,14 @@ issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: tar
 on non swarm deployments, use
 [Compose file format version 2 CPU, memory, and other resource options](compose-file-v2.md#cpu-and-other-resources).
 If you have further questions, refer to the discussion on the GitHub
-issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
+issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" rel="noopener" class="_"}.
 {: .important}
 {% endcomment %}
 > スウォームモードではないコンテナーでのリソース設定を探していますか？
 >
 > ここに説明している設定は、スウォームモードで利用する `deploy` キーにおけるオプションです。
 > スウォームモードではないデプロイメントにおけるリソース制約を設定したい場合は、[Compose ファイルバージョン 2 における CPU、メモリなどに関するリソースオプション](compose-file-v2.md#cpu-and-other-resources) を参照してください。
-> それでもよくわからない場合は、GitHub 上にあげられている議論 [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"} を参照してください。
+> それでもよくわからない場合は、GitHub 上にあげられている議論 [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" rel="noopener" class="_"} を参照してください。
 {: .important}
 @z
 
@@ -5178,7 +5178,7 @@ the service's task containers.
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 @y
 {% comment %}
@@ -5195,7 +5195,7 @@ the service's task containers.
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 {% endcomment %}
 - `source`: Docker 内に存在している secret 名。
@@ -5211,7 +5211,7 @@ the service's task containers.
   secrets はテンポラリなファイルシステム上にマウントされるため、書き込み可能にはできません。
   したがって書き込みビットを設定しても無視されます。
   実行ビットは設定できます。
-  UNIX のファイルパーミッションモードに詳しくない方は、[パーミッション計算機](http://permissions-calculator.org/){: target="_blank" class="_" }を参照してください。
+  UNIX のファイルパーミッションモードに詳しくない方は、[パーミッション計算機](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" } を参照してください。
 @z
 
 @x

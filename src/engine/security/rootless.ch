@@ -492,12 +492,12 @@ testuser:231072:65536
 @z
 
 @x
-The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" class="_" }.
+The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
 @y
 {% comment %}
-The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" class="_" }.
+The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
 {% endcomment %}
-[https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" class="_" } から、インストールスクリプトを入手することができます。
+[https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" } から、インストールスクリプトを入手することができます。
 @z
 
 @x
@@ -583,13 +583,13 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 @x
 To install the binaries manually without using the installer, extract
 `docker-rootless-extras-<version>.tgz` along with `docker-<version>.tgz`
-from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" class="_" }
+from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" rel="noopener" class="_" }
 @y
 {% comment %}
 {% endcomment %}
 To install the binaries manually without using the installer, extract
 `docker-rootless-extras-<version>.tar.gz` along with `docker-<version>.tar.gz`
-from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" class="_" }
+from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" rel="noopener" class="_" }
 @z
 
 @x

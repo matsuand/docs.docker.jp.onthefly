@@ -18,23 +18,23 @@ title: ダウンロードレート制限
 @x
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 Docker では Docker Hub 上でのプルリクエストに対して、ダウンロードレート制限を有効化してきました。
 この制限はアカウントの種類により決定されます。
-詳しくは [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"} を参照してください。
+詳しくは [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
 A user's limit will be equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
 advantage of this, you must log into 
-[Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} 
+[Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
 Unauthenticated (anonymous) users will have the limits enforced via IP.
@@ -43,13 +43,13 @@ Unauthenticated (anonymous) users will have the limits enforced via IP.
 A user's limit will be equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
 advantage of this, you must log into 
-[Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} 
+[Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
 Unauthenticated (anonymous) users will have the limits enforced via IP.
 {% endcomment %}
 ユーザーへの制限というのは、個人アカウントやこれが所属する組織に対しての、最大限の資格を意味します。
-これを利用するためには [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} に対して、認証されたユーザーとしてログインしなければなりません。
+これを利用するためには [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} に対して、認証されたユーザーとしてログインしなければなりません。
 [プルリクエストの認証方法](#how-do-i-authenticate-pull-requests) を参照してください。
 認証されていない（匿名）ユーザーは、IP を通じて制限が課せられます。
 @z
@@ -182,12 +182,12 @@ Docker Compose ファイルを使ってアプリケーションをデプロイ�
 @z
 
 @x
-If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
+If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" rel="noopener" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
 @y
 {% comment %}
-If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
+If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" rel="noopener" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
 {% endcomment %}
-GitHub の Action を利用して、Docker Hub における Docker イメージのビルドとプッシュを行っている場合は、[login action](https://github.com/docker/login-action#dockerhub){: target="_blank" class="_"} を参照してください。
+GitHub の Action を利用して、Docker Hub における Docker イメージのビルドとプッシュを行っている場合は、[login action](https://github.com/docker/login-action#dockerhub){: target="_blank" rel="noopener" class="_"} を参照してください。
 これとは別の Action を利用している場合、認証と同じようにユーザー名とアクセストークンを追加する必要があります。
 @z
 
@@ -198,12 +198,12 @@ GitHub の Action を利用して、Docker Hub における Docker イメージ�
 @z
 
 @x
-If you are running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" class="_"} for information on authentication.
+If you are running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" rel="noopener" class="_"} for information on authentication.
 @y
 {% comment %}
-If you are running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" class="_"} for information on authentication.
+If you are running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" rel="noopener" class="_"} for information on authentication.
 {% endcomment %}
-Kubernetes を実行している場合、認証に関する情報は [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" class="_"} に示されている手順に従ってください。
+Kubernetes を実行している場合、認証に関する情報は [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" rel="noopener" class="_"} に示されている手順に従ってください。
 @z
 
 @x
@@ -226,17 +226,17 @@ If you are using any third-party platforms, follow your provider’s instruction
 @z
 
 @x
-- [CircleCI](https://circleci.com/docs/2.0/private-images/){: target="_blank" class="_"}
-- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" class="_"}
-- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/){: target="_blank" class="_"}
-- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html){: target="_blank" class="_"}
-- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" class="_"}
+- [CircleCI](https://circleci.com/docs/2.0/private-images/){: target="_blank" rel="noopener" class="_"}
+- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" rel="noopener" class="_"}
+- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/){: target="_blank" rel="noopener" class="_"}
+- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html){: target="_blank" rel="noopener" class="_"}
+- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" rel="noopener" class="_"}
 @y
 {% comment %}
 {% endcomment %}
-- [CircleCI](https://circleci.com/docs/2.0/private-images/){: target="_blank" class="_"}
-- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" class="_"}
-- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/){: target="_blank" class="_"}
-- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html){: target="_blank" class="_"}
-- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" class="_"}
+- [CircleCI](https://circleci.com/docs/2.0/private-images/){: target="_blank" rel="noopener" class="_"}
+- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" rel="noopener" class="_"}
+- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/){: target="_blank" rel="noopener" class="_"}
+- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html){: target="_blank" rel="noopener" class="_"}
+- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" rel="noopener" class="_"}
 @z

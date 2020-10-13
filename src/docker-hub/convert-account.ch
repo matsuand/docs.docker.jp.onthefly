@@ -208,20 +208,20 @@ Before you convert a user account to an organization, ensure that you have compl
 >
 > When you convert a Pro or a legacy individual repository plan to an organization, the account
 will be migrated to a Team plan and will be charged $35 per month for 5 seats. For more information,
-see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 >**Note:**
 >
 > When you convert a Pro or a legacy individual repository plan to an organization, the account
 will be migrated to a Team plan and will be charged $35 per month for 5 seats. For more information,
-see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 >**メモ**
 >
 > プロアカウントやかつての個別リポジトリプランから組織への移行を行う場合、このアカウントはチームプランとして移行されます。
 > したがって 5 シート分に対して月額 35 ドルが課金されます。
-> 詳しくは [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"} を参照してください。
+> 詳しくは [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x

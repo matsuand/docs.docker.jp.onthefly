@@ -187,10 +187,10 @@ Slack チャネルとの統合を活用してください。
 @z
 
 @x
-* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.
+* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank" rel="noopener">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.
 @y
 {% comment %}
-* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.
+* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank" rel="noopener">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.
 {% endcomment %}
-* 上とは別に、<a href="https://slack.com/apps/manage" target="_blank">Slack App Management ページ</a> にアクセスし、「Docker Hub」を検索してみてください。検索結果をクリックして、Slack チームに設定されている Docker Hub の通知チャネルを確認してください。
+* 上とは別に、<a href="https://slack.com/apps/manage" target="_blank" rel="noopener">Slack App Management ページ</a> にアクセスし、「Docker Hub」を検索してみてください。検索結果をクリックして、Slack チームに設定されている Docker Hub の通知チャネルを確認してください。
 @z

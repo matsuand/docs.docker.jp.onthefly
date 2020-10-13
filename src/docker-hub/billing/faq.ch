@@ -64,9 +64,9 @@ Immediately available for **Individuals** and **Teams**:
 @z
 
 @x
-You can see pricing and a full list of features for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+You can see pricing and a full list of features for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
-You can see pricing and a full list of features for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+You can see pricing and a full list of features for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -136,9 +136,9 @@ Pro includes unlimited collaborators for both private and public repositories. F
 @z
 
 @x
-You can create a new account at [Docker Hub pricing](https://hub.docker.com/pricing){: target="_blank" class="_"} where you can choose a plan for **Individuals** or a plan for **Teams**.
+You can create a new account at [Docker Hub pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} where you can choose a plan for **Individuals** or a plan for **Teams**.
 @y
-You can create a new account at [Docker Hub pricing](https://hub.docker.com/pricing){: target="_blank" class="_"} where you can choose a plan for **Individuals** or a plan for **Teams**.
+You can create a new account at [Docker Hub pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} where you can choose a plan for **Individuals** or a plan for **Teams**.
 @z
 
 @x
@@ -196,9 +196,9 @@ When you downgrade your existing plan, changes are applied at the end of your bi
 @z
 
 @x
-Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
-Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -214,9 +214,9 @@ For information on how to downgrade from a Team plan to a Free plan, see [Downgr
 @z
 
 @x
-Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
-Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -280,9 +280,9 @@ Yes, both the Pro and Team plans are available through annual subscriptions and 
 @z
 
 @x
-You can view the annual subscription pricing for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+You can view the annual subscription pricing for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
-You can view the annual subscription pricing for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+You can view the annual subscription pricing for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -405,10 +405,10 @@ that billing period.
 
 @x
 We do not offer refunds. If you believe that you've been billed in error,
-contact our [Billing Support team](mailto:billing@docker.com){: target="_blank" class="_"}.
+contact our [Billing Support team](mailto:billing@docker.com){: target="_blank" rel="noopener" class="_"}.
 @y
 We do not offer refunds. If you believe that you've been billed in error,
-contact our [Billing Support team](mailto:billing@docker.com){: target="_blank" class="_"}.
+contact our [Billing Support team](mailto:billing@docker.com){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -440,7 +440,7 @@ select the organization from the **Accounts** drop-down menu.
 @z
 
 @x
-If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out to [pricingquestions@docker.com](mailto:pricingquestions@docker.com){: target="_blank" class="_"} and a member of the Docker team will get back to you.
+If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out to [pricingquestions@docker.com](mailto:pricingquestions@docker.com){: target="_blank" rel="noopener" class="_"} and a member of the Docker team will get back to you.
 @y
-If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out to [pricingquestions@docker.com](mailto:pricingquestions@docker.com){: target="_blank" class="_"} and a member of the Docker team will get back to you.
+If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out to [pricingquestions@docker.com](mailto:pricingquestions@docker.com){: target="_blank" rel="noopener" class="_"} and a member of the Docker team will get back to you.
 @z

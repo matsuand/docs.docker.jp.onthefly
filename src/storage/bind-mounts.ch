@@ -930,11 +930,13 @@ to already support bind propagation.
 
 @x
 For more information about bind propagation, see the
-[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" class="_"}.
+[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
+For more information about bind propagation, see the
+[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-バインドプロパゲーションの詳細は [Linux カーネルドキュメントの shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" class="_"} を参照してください。
+バインドプロパゲーションの詳細は [Linux カーネルドキュメントの shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x

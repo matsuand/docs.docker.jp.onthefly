@@ -714,7 +714,7 @@ In the subsequent screen, verify that Hyper-V is enabled:
 
 @x
 The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
-[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" class="_"},
+[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"},
 and the [Microsoft Hyper-V driver](../machine/drivers/hyper-v.md) to create local
 virtual machines. _This is tangential to using Docker Desktop_, but if you want to use Docker Machine
 to create multiple local Virtual Machines (VMs), or to provision remote machines, see the
@@ -723,7 +723,7 @@ as described in the [Docker Machine driver example](../machine/drivers/hyper-v.m
 @y
 {% comment %}
 The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
-[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" class="_"},
+[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"},
 and the [Microsoft Hyper-V driver](../machine/drivers/hyper-v.md) to create local
 virtual machines. _This is tangential to using Docker Desktop_, but if you want to use Docker Machine
 to create multiple local Virtual Machines (VMs), or to provision remote machines, see the
@@ -731,7 +731,7 @@ to create multiple local Virtual Machines (VMs), or to provision remote machines
 as described in the [Docker Machine driver example](../machine/drivers/hyper-v.md#example).
 {% endcomment %}
 Docker Desktop をインストールすると、かつてのツール Docker Machine もインストールされます。
-これはローカルに仮想マシンを生成するにあたって、古い [`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" class="_"} と [Microsoft Hyper-V ドライバー](../machine/drivers/hyper-v.md) を利用します。
+これはローカルに仮想マシンを生成するにあたって、古い [`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"} と [Microsoft Hyper-V ドライバー](../machine/drivers/hyper-v.md) を利用します。
 **Docker Desktop を使う上で、これは関係のないものです**。
 ただしローカルに複数の仮想マシンを生成するために Docker Machine を利用したい場合、あるいはリモートマシンにプロビジョニングしたい場合は [Docker Machine](../machine/index.md) に示されるトピックを参照してください。
 そのトピックは Docker Machine on Windows の情報が必要な方のみに向けたものです。

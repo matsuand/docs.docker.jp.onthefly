@@ -139,13 +139,13 @@ be copied across manually.
 @x
 Whether or not you migrate your Docker Toolbox images, you may decide to
 uninstall it. For details on how to perform a clean uninstall of Toolbox,
-see [How to uninstall Toolbox](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" class="_"}.
+see [How to uninstall Toolbox](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 Whether or not you migrate your Docker Toolbox images, you may decide to
 uninstall it. For details on how to perform a clean uninstall of Toolbox,
-see [How to uninstall Toolbox](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" class="_"}.
+see [How to uninstall Toolbox](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 Docker Toolbox イメージを移行するしないには関係なく、Docker Toolbox のアンインストールを行うことがあるでしょう。
-Toolbox の適切なアンインストール方法については [Toolbox のアンインストール方法](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" class="_"} を参照してください。
+Toolbox の適切なアンインストール方法については [Toolbox のアンインストール方法](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z

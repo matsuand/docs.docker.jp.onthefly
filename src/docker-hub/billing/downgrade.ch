@@ -63,20 +63,20 @@ The following sections contain instructions on how to downgrade from Pro and Tea
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+> - Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 @y
 {% comment %}
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+> - Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 {% endcomment %}
 >**メモ**
 >
 > - 年額プランを支払い済みで有効なときにダウングレードをしても、残日数分の返金は行われません。ダウングレードをした後に、期間内であれば元の年額プランに戻すことができます。
-> - 無料プランへのダウングレードを行う際には、アカウントに対して、無料プランでの利用可能な機能が反映される点を十分に確認しておいてください。たとえばプライベートリポジトリを利用していたら、パブリックリポジトリへの変更が必要になります。無料プランにはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" class="_"} を参照してください。
+> - 無料プランへのダウングレードを行う際には、アカウントに対して、無料プランでの利用可能な機能が反映される点を十分に確認しておいてください。たとえばプライベートリポジトリを利用していたら、パブリックリポジトリへの変更が必要になります。無料プランにはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 {: .important }
 @z
 
@@ -90,12 +90,12 @@ To downgrade from a Pro plan to a Free plan:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 @y
 {% comment %}
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} アカウントでログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントでログインします。
 @z
 
 @x
@@ -189,20 +189,20 @@ To downgrade from a Pro plan to a Free plan:
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+> - Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 @y
 {% comment %}
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+> - Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 {% endcomment %}
 >**Note:**
 >
 > - 年額プランを支払い済みで有効なときにダウングレードをしても、残日数分の返金は行われません。ダウングレードをした後に、期間内であれば元の年額プランに戻すことができます。
-> - 無料チームプランへのダウングレードを行う際には、プライベートリポジトリはすべてパブリックリポジトリへ変更することが必要です。また組織の詳細設定を、無料プランにおいて利用可能となるように反映することが必要です。たとえばチームメンバー数を減らすことが必要になるかもしれません。無料プランにはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" class="_"} を参照してください。
+> - 無料チームプランへのダウングレードを行う際には、プライベートリポジトリはすべてパブリックリポジトリへ変更することが必要です。また組織の詳細設定を、無料プランにおいて利用可能となるように反映することが必要です。たとえばチームメンバー数を減らすことが必要になるかもしれません。無料プランにはどのような機能があるのか、詳しくは [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 {: .important }
 @z
 
@@ -216,12 +216,12 @@ To downgrade to a Free Team plan from a Team plan:
 @z
 
 @x
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} において、組織の所有アカウントによりログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} において、組織の所有アカウントによりログインします。
 @z
 
 @x

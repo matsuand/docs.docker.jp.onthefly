@@ -34,9 +34,9 @@ You can download the Stable or the Edge version of Docker Desktop from [Docker H
 @z
 
 @x
-For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" class="_"}.
+For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" rel="noopener" class="_"}.
 @y
-For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" class="_"}.
+For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -144,9 +144,9 @@ given values (for the named pipe or TCP socket, whichever you use).
 @z
 
 @x
-See also [Docker Engine API](../engine/api/index.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
+See also [Docker Engine API](../engine/api/index.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" rel="noopener" class="_"}.
 @y
-See also [Docker Engine API](../engine/api/index.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
+See also [Docker Engine API](../engine/api/index.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -211,14 +211,14 @@ For more information and examples, see
 No, at this point, Docker Desktop does not enable you to control (`chmod`)
 the Unix-style permissions on [shared volumes](index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
-[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" class="_"}
+[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for 
 `group`) which is not configurable.
 @y
 No, at this point, Docker Desktop does not enable you to control (`chmod`)
 the Unix-style permissions on [shared volumes](index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
-[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" class="_"}
+[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for 
 `group`) which is not configurable.
 @z
@@ -254,21 +254,13 @@ Docker Desktop supports 2 kinds of symlink:
 @x
 ## Certificates
 @y
-{% comment %}
 ## Certificates
-{% endcomment %}
-{: #certificates }
-## 証明書
 @z
 
 @x
 ### How do I add custom CA certificates?
 @y
-{% comment %}
 ### How do I add custom CA certificates?
-{% endcomment %}
-{: #how-do-i-add-custom-ca-certificates }
-### どうやって独自の CA 証明書を追加するか
 @z
 
 @x
@@ -276,8 +268,9 @@ Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
 intermediate). Docker recognizes certs stored under Trust Root
 Certification Authorities or Intermediate Certification Authorities.
 @y
-Docker Desktop では、信頼された認証局（Certificate Authorities; CA）をすべてサポートしています（ルート認証局および中間認証局）。
-Docker は、信頼されたルート証明機関や中間証明機関のもとに保存された証明書を識別します。
+Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
+intermediate). Docker recognizes certs stored under Trust Root
+Certification Authorities or Intermediate Certification Authorities.
 @z
 
 @x
@@ -289,11 +282,7 @@ Docker は、信頼されたルート証明機関や中間証明機関のもと�
 @x
 ### How do I add client certificates?
 @y
-{% comment %}
 ### How do I add client certificates?
-{% endcomment %}
-{: #how-do-i-add-client-certificates }
-### どうやってクライアント証明書を追加するか
 @z
 
 @x
@@ -335,9 +324,9 @@ Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or 
 @z
 
 @x
-Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" class="_"} feature on your machine.
+Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 @y
-Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" class="_"} feature on your machine.
+Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 @z
 
 @x
@@ -367,11 +356,11 @@ No, running Docker Desktop on Windows Server is not supported.
 @x
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
+[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" rel="noopener" class="_"}.
 @y
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
+[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -458,23 +447,23 @@ You can find information about diagnosing and troubleshooting common issues in t
 
 @x
 If you do not find a solution in Troubleshooting, browse issues on
-[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" class="_"}
+[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
 or create a new one. You can also create new issues based on diagnostics. To learn more, see
 [Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
 @y
 If you do not find a solution in Troubleshooting, browse issues on
-[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" class="_"}
+[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
 or create a new one. You can also create new issues based on diagnostics. To learn more, see
 [Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
 @z
 
 @x
-The [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" class="_"}
+The [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" rel="noopener" class="_"}
 contains discussion threads. You can also create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.
 @y
-The [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" class="_"}
+The [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" rel="noopener" class="_"}
 contains discussion threads. You can also create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.

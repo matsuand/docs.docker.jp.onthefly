@@ -114,11 +114,11 @@ Docker コンテナーを Azure にデプロイするには、以下の条件を
 @z
 
 @x
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 @y
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 @z
 
 @x
@@ -131,13 +131,13 @@ Docker コンテナーを Azure にデプロイするには、以下の条件を
 @z
 
 @x
-2. Ensure you have an Azure subscription. You can get started with an [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" class="_"}.
+2. Ensure you have an Azure subscription. You can get started with an [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-2. Ensure you have an Azure subscription. You can get started with an [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" class="_"}.
+2. Ensure you have an Azure subscription. You can get started with an [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 2. Azure サブスクリプションを持っていることが必要です。
-   [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" class="_"} にアクセスして取得操作を進めることができます。
+   [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" rel="noopener" class="_"} にアクセスして取得操作を進めることができます。
 @z
 
 @x
@@ -1014,13 +1014,13 @@ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/instal
 
 @x
 You can download the Docker ACI Integration CLI from the 
-[latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" class="_"} page.
+[latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} page.
 @y
 {% comment %}
 You can download the Docker ACI Integration CLI from the 
-[latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" class="_"} page.
+[latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} page.
 {% endcomment %}
-Docker ACI 統合の CLI は、[最新版](https://github.com/docker/compose-cli/releases/latest){: target="_blank" class="_"} ページからダウンロードすることができます。
+Docker ACI 統合の CLI は、[最新版](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} ページからダウンロードすることができます。
 @z
 
 @x
@@ -1276,12 +1276,12 @@ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 @z
 
 @x
-Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
 {% comment %}
-Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 {% endcomment %}
 Docker Azure 統合ベータ版を利用していただき、ありがとうございます。
 みなさんからのフィードバックが大変重要です。
-フィードバックをいただくには、Github レポジトリ [compose-cli](https://github.com/docker/compose-cli){: target="_blank" class="_"} に issue をあげてください。
+フィードバックをいただくには、Github レポジトリ [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} に issue をあげてください。
 @z

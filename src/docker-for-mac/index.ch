@@ -414,16 +414,16 @@ For more information, see:
 @z
 
 @x
-- [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on
+- [Namespaces](osxfs.md#namespaces){: target="_blank" rel="noopener" class="_"} in the topic on
   [osxfs file system sharing](osxfs.md).
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 @y
 {% comment %}
-- [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on
+- [Namespaces](osxfs.md#namespaces){: target="_blank" rel="noopener" class="_"} in the topic on
   [osxfs file system sharing](osxfs.md).
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 {% endcomment %}
-- [osxfs ファイルシステム共有](osxfs.md) のトピックである [名前空間](osxfs.md#namespaces){: target="_blank" class="_"}
+- [osxfs ファイルシステム共有](osxfs.md) のトピックである [名前空間](osxfs.md#namespaces){: target="_blank" rel="noopener" class="_"}
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
 @z
 
@@ -541,16 +541,15 @@ Docker Engine のページでは、Docker デーモンに対して、コンテ�
 
 @x
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
-class="_"}.
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
 class="_"}.
 {% endcomment %}
 テキスト入力欄に JSON 設定ファイルを入力して、デーモンを設定します。
-オプションの全一覧についてはDocker Engine の [dockerd コマンドラインリファレンス](/engine/reference/commandline/dockerd/){:target="_blank" class="_"} を参照してください。
+オプションの全一覧についてはDocker Engine の [dockerd コマンドラインリファレンス](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -847,13 +846,13 @@ Homebrew あるいは別の方法により `kubectl` をインストールして
 
 @x
   For more about using the Kubernetes integration with Docker Desktop, see
-  [Deploy on Kubernetes](kubernetes.md){:target="_blank" class="_"}.
+  [Deploy on Kubernetes](kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 @y
   {% comment %}
   For more about using the Kubernetes integration with Docker Desktop, see
-  [Deploy on Kubernetes](kubernetes.md){:target="_blank" class="_"}.
+  [Deploy on Kubernetes](kubernetes.md){:target="_blank" rel="noopener" class="_"}.
   {% endcomment %}
-  Docker Desktop における Kubernetes 利用の詳細については [Kubernetes へのデプロイ](kubernetes.md){:target="_blank" class="_"} を参照してください。
+  Docker Desktop における Kubernetes 利用の詳細については [Kubernetes へのデプロイ](kubernetes.md){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -1462,30 +1461,30 @@ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-comp
 @x
 To get help from the community, review current user topics, join or start a
 discussion, log on to our [Docker Desktop for Mac
-forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
+forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 To get help from the community, review current user topics, join or start a
 discussion, log on to our [Docker Desktop for Mac
-forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
+forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 コミュニティのヘルプを必要とする場合は、最新のユーザートピックを確認し、ディスカッションへの参加、開始をしてみてください。
-[Docker Desktop for Mac フォーラム](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"} にログインして行います。
+[Docker Desktop for Mac フォーラム](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"} にログインして行います。
 @z
 
 @x
 To report bugs or problems, log on to Docker Desktop [for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"},
+GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"},
 where you can review community reported issues, and file new ones.  See
 [Logs and Troubleshooting](troubleshoot.md) for more details.
 @y
 {% comment %}
 To report bugs or problems, log on to Docker Desktop [for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"},
+GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"},
 where you can review community reported issues, and file new ones.  See
 [Logs and Troubleshooting](troubleshoot.md) for more details.
 {% endcomment %}
-バグや問題を報告するには、[Docker Desktop for Mac 向けの GitHub issue](https://github.com/docker/for-mac/issues){:target="_blank" class="_"} にログインして、コミュニティによって報告済みの issue を確認してください。
+バグや問題を報告するには、[Docker Desktop for Mac 向けの GitHub issue](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"} にログインして、コミュニティによって報告済みの issue を確認してください。
 そして新たな issue をあげてください。
 詳しくは [ログ機能とトラブルシューティング](troubleshoot.md) を参照してください。
 @z
@@ -1506,12 +1505,12 @@ For information about providing feedback on the documentation or update it yours
 @z
 
 @x
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 @y
 {% comment %}
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 {% endcomment %}
-Docker Desktop メニューから **Sign in /Create Docker ID** を選択すれば [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } アカウントを使ってアクセスすることができます。
+Docker Desktop メニューから **Sign in /Create Docker ID** を選択すれば [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } アカウントを使ってアクセスすることができます。
 ログインした後は、Docker Desktop メニューから、Docker Hub リポジトリや組織に直接アクセスすることができます。
 @z
 
@@ -1527,15 +1526,15 @@ class="_"}:
 @z
 
 @x
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" class="_"}
-* [Builds](../docker-hub/builds/index.md){:target="_blank" class="_"}
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
+* [Builds](../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
 @y
 {% comment %}
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" class="_"}
-* [Builds](../docker-hub/builds/index.md){:target="_blank" class="_"}
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
+* [Builds](../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
 {% endcomment %}
-* [Docker Hub における組織とチーム](../docker-hub/orgs.md){:target="_blank" class="_"}
-* [ビルド](../docker-hub/builds/index.md){:target="_blank" class="_"}
+* [Docker Hub における組織とチーム](../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
+* [ビルド](../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
 @z
 
 @x
@@ -1657,26 +1656,26 @@ After you have successfully authenticated, you can access your organizations and
 
 @x
 * For a summary of Docker command line interface (CLI) commands, see
-  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" class="_"}.
+  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 * For a summary of Docker command line interface (CLI) commands, see
-  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" class="_"}.
+  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-* コマンドラインインターフェース（CLI）コマンドのまとめについては [Docker CLI リファレンスガイド](../engine/api/index.md){: target="_blank" class="_"} を参照してください。
+* コマンドラインインターフェース（CLI）コマンドのまとめについては [Docker CLI リファレンスガイド](../engine/api/index.md){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
   (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" class="_"}.
+  target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
   (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" class="_"}.
+  target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 * ブログ投稿 [What’s New in Docker 17.06 Community Edition
   (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" class="_"} を確認してみてください。
+  target="_blank" rel="noopener" class="_"} を確認してみてください。
 @z

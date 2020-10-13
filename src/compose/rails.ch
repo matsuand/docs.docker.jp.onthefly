@@ -289,22 +289,25 @@ using [docker-compose run](reference/run.md):
 @z
 
 @x
-    docker-compose run web rails new . --force --no-deps --database=postgresql
+    docker-compose run --no-deps web rails new . --force --database=postgresql
 @y
-    docker-compose run web rails new . --force --no-deps --database=postgresql
+    docker-compose run --no-deps web rails new . --force --database=postgresql
 @z
 
 @x
-First, Compose builds the image for the `web` service using the
-`Dockerfile`. Then it runs `rails new` inside a new container, using that
-image. Once it's done, you should have generated a fresh app.
+First, Compose builds the image for the `web` service using the `Dockerfile`.
+The `--no-deps` tells Compose not to start linked services. Then it runs
+`rails new` inside a new container, using that image. Once it's done, you
+should have generated a fresh app.
 @y
 {% comment %}
-First, Compose builds the image for the `web` service using the
-`Dockerfile`. Then it runs `rails new` inside a new container, using that
-image. Once it's done, you should have generated a fresh app.
+First, Compose builds the image for the `web` service using the `Dockerfile`.
+The `--no-deps` tells Compose not to start linked services. Then it runs
+`rails new` inside a new container, using that image. Once it's done, you
+should have generated a fresh app.
 {% endcomment %}
 最初に Compose は `Dockerfile` を用いて `web` サービスに対するイメージをビルドします。
+`--no-deps`フラグは Compose に対してリンクサービスは起動しないように指示します。
 そしてこのイメージを利用して、新たに生成されたコンテナー内にて `rails new` を実行します。
 処理が完了すれば、できたてのアプリが生成されているはずです。
 @z

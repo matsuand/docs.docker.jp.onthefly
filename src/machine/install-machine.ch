@@ -20,17 +20,17 @@ hide_from_sitemap: true
 @x
 Install Docker Machine binaries by following the instructions in the following section. You can find the latest
 versions of the binaries on the [docker/machine release
-page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
+page](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" }
 on GitHub.
 @y
 {% comment %}
 Install Docker Machine binaries by following the instructions in the following section. You can find the latest
 versions of the binaries on the [docker/machine release
-page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
+page](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" }
 on GitHub.
 {% endcomment %}
 Docker Machine のバイナリをインストールしたい場合は、次の節で示す手順に従います。
-GitHub 上の [docker/machine リリースページ](https://github.com/docker/machine/releases/){: target="_blank" class="_" }に、最新のバイナリバージョンがあります。
+GitHub 上の [docker/machine リリースページ](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" }に、最新のバイナリバージョンがあります。
 @z
 
 @x
@@ -44,12 +44,12 @@ GitHub 上の [docker/machine リリースページ](https://github.com/docker/m
 @z
 
 @x
-1.  Install [Docker](../engine/install/index.md){: target="_blank" class="_" }.
+1.  Install [Docker](../engine/install/index.md){: target="_blank" rel="noopener" class="_" }.
 @y
 {% comment %}
-1.  Install [Docker](../engine/install/index.md){: target="_blank" class="_" }.
+1.  Install [Docker](../engine/install/index.md){: target="_blank" rel="noopener" class="_" }.
 {% endcomment %}
-1.  [Docker](../engine/installation/index.md){: target="_blank" class="_" } をインストールします。
+1.  [Docker](../engine/installation/index.md){: target="_blank" rel="noopener" class="_" } をインストールします。
 @z
 
 @x
@@ -110,12 +110,12 @@ GitHub 上の [docker/machine リリースページ](https://github.com/docker/m
 @z
 
 @x
-    If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
+    If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"}:
 @y
     {% comment %}
-    If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
+    If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"}:
     {% endcomment %}
-    **Windows** 上において [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"} を利用している場合:
+    **Windows** 上において [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"} を利用している場合:
 @z
 
 @x
@@ -136,27 +136,27 @@ GitHub 上の [docker/machine リリースページ](https://github.com/docker/m
 
 @x
     > The above command works on Windows only if you use a
-    terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}, which supports Linux commands like `chmod`.
+    terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"}, which supports Linux commands like `chmod`.
     {: .important}
 @y
     {% comment %}
     > The above command works on Windows only if you use a
-    terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}, which supports Linux commands like `chmod`.
+    terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"}, which supports Linux commands like `chmod`.
     {: .important}
     {% endcomment %}
-    > 上のコマンドは Windows 上において実行していますが、これができるのは [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"} などを利用して、`chmod` といった Linux コマンドをサポートしている端末エミュレーターを使っているからです。
+    > 上のコマンドは Windows 上において実行していますが、これができるのは [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"} などを利用して、`chmod` といった Linux コマンドをサポートしている端末エミュレーターを使っているからです。
     {: .important}
 @z
 
 @x
     Otherwise, download one of the releases from the [docker/machine release
-    page](https://github.com/docker/machine/releases/){: target="_blank" class="_" } directly.
+    page](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" } directly.
 @y
     {% comment %}
     Otherwise, download one of the releases from the [docker/machine release
-    page](https://github.com/docker/machine/releases/){: target="_blank" class="_" } directly.
+    page](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" } directly.
     {% endcomment %}
-    上記以外は、[docker/machine リリースページ](https://github.com/docker/machine/releases/){: target="_blank" class="_" } からバイナリリリースを直接ダウンロードしてください。
+    上記以外は、[docker/machine リリースページ](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" } からバイナリリリースを直接ダウンロードしてください。
 @z
 
 @x
@@ -285,16 +285,16 @@ PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 You can find additional documentation in the comments at the [top of
 each
 script](https://github.com/docker/machine/tree/master/contrib/completion/bash){:
-target="_blank" class="_"}.
+target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 You can find additional documentation in the comments at the [top of
 each
 script](https://github.com/docker/machine/tree/master/contrib/completion/bash){:
-target="_blank" class="_"}.
+target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 詳細な情報は[各スクリプトの上段](https://github.com/docker/machine/tree/master/contrib/completion/bash){:
-target="_blank" class="_"}にコメントとして記述されています。
+target="_blank" rel="noopener" class="_"}にコメントとして記述されています。
 @z
 
 @x

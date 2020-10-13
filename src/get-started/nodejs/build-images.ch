@@ -71,17 +71,17 @@ To complete this tutorial, you need the following:
 @z
 
 @x
-- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" class="_"}
+- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
 - Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 @y
 {% comment %}
-- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" class="_"}
+- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
 - Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 {% endcomment %}
 - Node.js バージョン 12.18 またはそれ以降。
-  [Node.js をダウンロード](https://nodejs.org/en/){: target="_blank" class="_"} してください。
+  [Node.js をダウンロード](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"} してください。
 - ローカルに Docker が実行していること。
   [Docker のダウンロードとインストール](https://docs.docker.com/desktop/) の手順に従ってください。
 - ファイル編集のための IDE またはテキストエディター。

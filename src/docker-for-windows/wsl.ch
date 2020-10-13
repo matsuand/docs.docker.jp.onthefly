@@ -76,20 +76,74 @@ Docker Desktop WSL 2 バックエンドをインストールするにあたっ�
 @z
 
 @x
-1. Install Windows 10, version 2004 or higher. The Docker Desktop Edge release also supports Windows 10, version 1903 or higher.
+1. Install Windows 10, version 1903 or higher.
 2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 @y
 {% comment %}
-1. Install Windows 10, version 2004 or higher. The Docker Desktop Edge release also supports Windows 10, version 1903 or higher.
+1. Install Windows 10, version 1903 or higher.
 2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 {% endcomment %}
 1. Windows 10、バージョン 2004 またはそれ以上をインストールします。
-   Docker Desktop 最新版では Windows 10、バージョン 1903 以降に対応しています。
 2. Windows 上において WSL 2 機能を有効にします。
    詳しい手順については [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10) を参照してください。
 3. [Linux カーネル更新プログラムパッケージ](https://docs.microsoft.com/windows/wsl/wsl2-kernel) をダウンロードしてインストールします。
+@z
+
+@x
+## Best practices
+@y
+{% comment %}
+## Best practices
+{% endcomment %}
+{: #best-practices }
+## ベストプラクティス
+@z
+
+@x
+- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux filesystem, rather than the Windows filesystem.
+@y
+{% comment %}
+- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux filesystem, rather than the Windows filesystem.
+{% endcomment %}
+- バインドマウント利用時のファイルシステム性能を最大化するには、以下を行います。
+  なおバインドマウントされたソースコードや関連データは、Windows ファイルシステムではない Linux ファイルシステムを有する Linux コンテナーに（たとえば`docker run -v <host-path>:<container-path>`を使って）保存することをお勧めします。
+@z
+
+@x
+  - Linux containers only receive file change events ("inotify events") if the
+      original files are stored in the Linux filesystem. For example, some web development workflows rely on inotify events for automatic reloading when files have changed.
+  - Performance is much higher when files are bind-mounted from the Linux
+      filesystem, rather than remoted from the Windows host. Therefore avoid
+      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
+  - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
+      where `~` is expanded by the Linux shell to `$HOME`.
+- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
+- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+- To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community) and CLI installed directly through Linux distributions before installing Docker Desktop.
+@y
+{% comment %}
+  - Linux containers only receive file change events ("inotify events") if the
+      original files are stored in the Linux filesystem. For example, some web development workflows rely on inotify events for automatic reloading when files have changed.
+  - Performance is much higher when files are bind-mounted from the Linux
+      filesystem, rather than remoted from the Windows host. Therefore avoid
+      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
+  - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
+      where `~` is expanded by the Linux shell to `$HOME`.
+- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
+- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+- To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community) and CLI installed directly through Linux distributions before installing Docker Desktop.
+{% endcomment %}
+  - 元のファイルを Linux ファイルシステムに保存しているのであれば、Linux コンテナーはファイル変更のイベント（「inotify」イベント）のみを受けつけるようにしてください。
+    たとえばウェブ開発のワークフローにおいては、ファイル変更が発生した際に自動リロードを行う inotify イベントを用いる場合があります。
+  - Windows ホストからリモート接続する場合に比べて、Linux ファイルシステムからバインドマウントされたファイルにアクセスする方が、性能ははるかに向上します。
+    したがって`docker run -v /mnt/c/users:/users`（ここで`/mnt/c`は Windows からのマウント）とすることは避けてください。
+  - 上のかわりに Linux シェルから`docker run -v ~/my-project:/sources <my-image>`のようなコマンドを実行してください。
+    ここで`~`は Linux シェルが`$HOME`に展開することを表わします。
+- Docker Desktop のデータ VHDX の容量が気になったり、変更を必要とする場合は、[WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size) を確認してください。
+- CPU や メモリの使用量について気にかける必要がある場合は [WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
+- Docker Desktop 上での WSL 2 利用において、衝突のリスクを避けるには、[Docker Engine の古いバージョンのアンインストール](../../engine/install/ubuntu/#uninstall-docker-engine) を行い、Docker Desktop のインストール前に Linux ディストリビューションに対して CLI を直接インストールするようにしてください。
 @z
 
 @x
@@ -364,62 +418,6 @@ Docker Desktop において WSL 2 を有効にしていれば、その Linux デ
 {% endcomment %}
 3. VSCode 内では VSCode のターミナル画面を使うことができます。
    これによってソースコードをプルし、Windows マシン内からネイティブ環境のように作業を進めていくことができます。
-@z
-
-@x
-## Best practices
-@y
-{% comment %}
-## Best practices
-{% endcomment %}
-{: #best-practices }
-## ベストプラクティス
-@z
-
-@x
-- To get the best out of the file system performance when bind-mounting files:
-    - Store source code and other data that is bind-mounted into Linux containers
-      (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux
-      filesystem, rather than the Windows filesystem.
-    - Linux containers only receive file change events ("inotify events") if the
-      original files are stored in the Linux filesystem.
-    - Performance is much higher when files are bind-mounted from the Linux
-      filesystem, rather than remoted from the Windows host. Therefore avoid
-      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
-    - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
-      where `~` is expanded by the Linux shell to `$HOME`.
-- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
-- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
-- To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community) and CLI installed directly through Linux distributions before installing Docker Desktop.
-@y
-{% comment %}
-- To get the best out of the file system performance when bind-mounting files:
-    - Store source code and other data that is bind-mounted into Linux containers
-      (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux
-      filesystem, rather than the Windows filesystem.
-    - Linux containers only receive file change events ("inotify events") if the
-      original files are stored in the Linux filesystem.
-    - Performance is much higher when files are bind-mounted from the Linux
-      filesystem, rather than remoted from the Windows host. Therefore avoid
-      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
-    - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
-      where `~` is expanded by the Linux shell to `$HOME`.
-- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
-- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
-- To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community) and CLI installed directly through Linux distributions before installing Docker Desktop.
-{% endcomment %}
-- バインドマウント利用時のファイルシステム性能を最大化するには、以下を行います。
-    - ソースコードやデータが Linux コンテナーにバインドマウントされている場合（たとえば`docker run -v <host-path>:<container-path>`を実行している場合）は、Linux ファイルシステムに保存し、Windows ファイルシステムには保存しないようにします。
-      (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux
-      filesystem, rather than the Windows filesystem.
-    - 元のファイルを Linux ファイルシステムに保存しているのであれば、Linux コンテナーはファイル変更のイベント（「inotify」イベント）のみを受けつけるようにしてください。
-    - Windows ホストからリモート接続する場合に比べて、Linux ファイルシステムからバインドマウントされたファイルにアクセスする方が、性能ははるかに向上します。
-      したがって`docker run -v /mnt/c/users:/users`（ここで`/mnt/c`は Windows からのマウント）とすることは避けてください。
-    - 上のかわりに Linux シェルから`docker run -v ~/my-project:/sources <my-image>`のようなコマンドを実行してください。
-      ここで`~`は Linux シェルが`$HOME`に展開することを表わします。
-- Docker Desktop のデータ VHDX の容量が気になったり、変更を必要とする場合は、[WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size) を確認してください。
-- CPU や メモリの使用量について気にかける必要がある場合は [WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
-- Docker Desktop 上での WSL 2 利用において、衝突のリスクを避けるには、[Docker Engine の古いバージョンのアンインストール](../../engine/install/ubuntu/#uninstall-docker-engine) を行い、Docker Desktop のインストール前に Linux ディストリビューションに対して CLI を直接インストールするようにしてください。
 @z
 
 @x

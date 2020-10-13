@@ -295,20 +295,20 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    >
    > This uses the build in development server to run your application
    > on port 8000. Do not use this in a production environment. For more
-   > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”}.
+   > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" rel="noopener" class="_”}.
 @y
    {% comment %}
    > Note:
    >
    > This uses the build in development server to run your application
    > on port 8000. Do not use this in a production environment. For more
-   > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”}.
+   > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" rel="noopener" class="_”}.
    {% endcomment %}
    > メモ
    >
    > これは開発環境においてビルドを行い、アプリケーションをポート 8000 で動作させるものです。
    > これを本番環境で利用しないでください。
-   > 詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”} を参照してください。
+   > 詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" rel="noopener" class="_”} を参照してください。
 @z
 
 @x

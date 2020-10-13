@@ -158,13 +158,13 @@ Docker デーモンに対して、手動で `--oom-score-adj` に極端な負数
 
 @x
 For more information about the Linux kernel's OOM management, see
-[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" class="_" }.
+[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" rel="noopener" class="_" }.
 @y
 {% comment %}
 For more information about the Linux kernel's OOM management, see
-[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" class="_" }.
+[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" rel="noopener" class="_" }.
 {% endcomment %}
-Linux カーネルの OOM 管理については [Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" class="_" } を参照してください。
+Linux カーネルの OOM 管理については [Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" rel="noopener" class="_" } を参照してください。
 @z
 
 @x

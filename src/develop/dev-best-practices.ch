@@ -19,16 +19,16 @@ keywords: application, development
 The following development patterns have proven to be helpful for people
 building applications with Docker. If you have discovered something we should
 add,
-[let us know](https://github.com/docker/docker.github.io/issues/new){: target="_blank" class="_"}.
+[let us know](https://github.com/docker/docker.github.io/issues/new){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 The following development patterns have proven to be helpful for people
 building applications with Docker. If you have discovered something we should
 add,
-[let us know](https://github.com/docker/docker.github.io/issues/new){: target="_blank" class="_"}.
+[let us know](https://github.com/docker/docker.github.io/issues/new){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 Docker を使ってアプリケーション開発を行う方々にとって、以下に示す開発パターンが有効であることが明らかになっています。
-何かを見つけている場合は [お知らせください](https://github.com/docker/docker.github.io/issues/new){: target="_blank" class="_"}。
+何かを見つけている場合は [お知らせください](https://github.com/docker/docker.github.io/issues/new){: target="_blank" rel="noopener" class="_"}。
 @z
 
 @x

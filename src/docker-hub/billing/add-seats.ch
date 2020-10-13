@@ -60,12 +60,12 @@ To add seats to a monthly plan:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 @y
 {% comment %}
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} アカウントによりログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントによりログインします。
 @z
 
 @x
@@ -153,12 +153,12 @@ To add monthly seats to an annual plan:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 @y
 {% comment %}
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} アカウントによりログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントによりログインします。
 @z
 
 @x

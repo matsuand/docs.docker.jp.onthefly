@@ -20,14 +20,14 @@ redirect_from:
 @z
 
 @x
-You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 無料プランやそれまでの古いプランは、プロプランやチームプランにアップグレードすることができます。
 プロプランやチームプランへのアップグレードを行うと、そのプランによって提供される機能や資格は即座に利用可能となります。
-各プランにおいて利用可能な機能の詳細は [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" class="_"} を参照してください。
+各プランにおいて利用可能な機能の詳細は [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -82,12 +82,12 @@ To upgrade to a Pro plan:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 @y
 {% comment %}
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} アカウントでログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントでログインします。
 @z
 
 @x
@@ -175,12 +175,12 @@ To upgrade to a Team plan:
 @z
 
 @x
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} において、組織の所有アカウントによりログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} において、組織の所有アカウントによりログインします。
 @z
 
 @x
@@ -286,18 +286,18 @@ To upgrade from a monthly Team plan to an annual Team plan:
 @z
 
 @x
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. Navigate to **Organizations** from the menu at the top of the page, choose your organization, and select the **Billing** tab.
 3. Click **switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
 @y
 {% comment %}
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. Navigate to **Organizations** from the menu at the top of the page, choose your organization, and select the **Billing** tab.
 3. Click **switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} において、組織の所有アカウントによりログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} において、組織の所有アカウントによりログインします。
 2. ページ上段にあるメニューから **Organizations**（組織）にアクセスします。そして自身の組織を選びます。
 3. **switch to annual billing**（年額プランへの切り替え）をクリックします。
 4. **Change to an Annual Plan**（年額プランへの変更）ページにおいて表示される情報を確認し、**Accept Terms and Purchase**（承認と購入）をクリックします。
@@ -332,18 +332,18 @@ To upgrade from a monthly Pro plan to an annual Pro plan:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
 3. Click **switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
 @y
 {% comment %}
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
 3. Click **switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} アカウントでログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントでログインします。
 2. 画面右上のユーザー名の隣りにあるドロップダウンメニューを開いて、**Billing** を選びます。Billing ページには、現ユーザーアカウントに関する料金情報が示されています。
 3. **switch to annual billing**（年額プランへの切り替え）をクリックします。
 4. **Change to an Annual Plan**（年額プランへの変更）ページにおいて表示される情報を確認し、**Accept Terms and Purchase**（承認と購入）をクリックします。

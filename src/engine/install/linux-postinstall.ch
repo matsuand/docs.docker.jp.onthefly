@@ -1423,13 +1423,13 @@ RHEL、CentOS、Fedora において `dnsmasq` を無効にするには以下の�
 
 @x
 2.  Configure the DNS servers manually using the
-    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" class="_"}.
+    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 2.  Configure the DNS servers manually using the
-    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" class="_"}.
+    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-2.  [Red Hat ドキュメント](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" class="_"}を参考にして、DNS サーバーを手動で設定します。
+2.  [Red Hat ドキュメント](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" rel="noopener" class="_"}を参考にして、DNS サーバーを手動で設定します。
 @z
 
 @x

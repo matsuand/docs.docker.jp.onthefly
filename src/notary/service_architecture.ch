@@ -29,11 +29,11 @@ On this page, you get an overview of the Notary service architecture.
 
 @x
 This document assumes familiarity with
-[The Update Framework](https://www.theupdateframework.com/){:target="_blank" class="_"},
+[The Update Framework](https://www.theupdateframework.com/){:target="_blank" rel="noopener" class="_"},
 but here is a brief recap of the TUF roles and corresponding key hierarchy:
 @y
 This document assumes familiarity with
-[The Update Framework](https://www.theupdateframework.com/){:target="_blank" class="_"},
+[The Update Framework](https://www.theupdateframework.com/){:target="_blank" rel="noopener" class="_"},
 but here is a brief recap of the TUF roles and corresponding key hierarchy:
 @z
 
@@ -45,14 +45,14 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
 @x
 - The root key is the root of all trust. It signs the
-  [root metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" class="_"},
+  [root metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" rel="noopener" class="_"},
   which lists the IDs of the root, targets, snapshot, and timestamp public keys.
   Clients use these public keys to verify the signatures on all the metadata files
   in the repository. This key is held by a collection owner, and should be kept offline
   and safe, more so than any other key.
 @y
 - The root key is the root of all trust. It signs the
-  [root metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" class="_"},
+  [root metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" rel="noopener" class="_"},
   which lists the IDs of the root, targets, snapshot, and timestamp public keys.
   Clients use these public keys to verify the signatures on all the metadata files
   in the repository. This key is held by a collection owner, and should be kept offline
@@ -61,7 +61,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
 @x
 - The snapshot key signs the
-  [snapshot metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604){:target="_blank" class="_"},
+  [snapshot metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604){:target="_blank" rel="noopener" class="_"},
   which enumerates the filenames, sizes, and hashes of the root,
   targets, and delegation metadata files for the collection. This file is used to
   verify the integrity of the other metadata files. The snapshot key is held by
@@ -69,7 +69,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   [signing by multiple collaborators via delegation roles](advanced_usage.md#working-with-delegation-roles).
 @y
 - The snapshot key signs the
-  [snapshot metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604){:target="_blank" class="_"},
+  [snapshot metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604){:target="_blank" rel="noopener" class="_"},
   which enumerates the filenames, sizes, and hashes of the root,
   targets, and delegation metadata files for the collection. This file is used to
   verify the integrity of the other metadata files. The snapshot key is held by
@@ -79,7 +79,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
 @x
 - The timestamp key signs the
-  [timestamp metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827){:target="_blank" class="_"},
+  [timestamp metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827){:target="_blank" rel="noopener" class="_"},
   which provides freshness guarantees for the collection by having the shortest expiry time of any particular
   piece of metadata and by specifying the filename, size, and hash of the most recent
   snapshot for the collection. It is used to verify the integrity of the snapshot
@@ -88,7 +88,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   require that a collection owner come online before each timestamp expiry.
 @y
 - The timestamp key signs the
-  [timestamp metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827){:target="_blank" class="_"},
+  [timestamp metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827){:target="_blank" rel="noopener" class="_"},
   which provides freshness guarantees for the collection by having the shortest expiry time of any particular
   piece of metadata and by specifying the filename, size, and hash of the most recent
   snapshot for the collection. It is used to verify the integrity of the snapshot
@@ -99,18 +99,18 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
 @x
 - The targets key signs the
-  [targets metadata file](ttps://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" class="_"},
+  [targets metadata file](ttps://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" rel="noopener" class="_"},
   which lists filenames in the collection, and their sizes and respective
-  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" class="_"}.
+  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   This file is used to verify the integrity of some or all of the actual contents of the repository.
   It is also used to
   [delegate trust to other collaborators via delegation roles](advanced_usage.md#working-with-delegation-roles).
   The targets key is held by the collection owner or administrator.
 @y
 - The targets key signs the
-  [targets metadata file](ttps://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" class="_"},
+  [targets metadata file](ttps://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" rel="noopener" class="_"},
   which lists filenames in the collection, and their sizes and respective
-  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" class="_"}.
+  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   This file is used to verify the integrity of some or all of the actual contents of the repository.
   It is also used to
   [delegate trust to other collaborators via delegation roles](advanced_usage.md#working-with-delegation-roles).
@@ -119,9 +119,9 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
 
 @x
 - Delegation keys sign
-  [delegation metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" class="_"},
+  [delegation metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" rel="noopener" class="_"},
   which lists filenames in the collection, and their sizes and respective
-  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" class="_"}.
+  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   These files are used to verify the integrity of some or all of the actual contents of the repository.
   They are also used to
   [delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
@@ -129,9 +129,9 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   collection collaborators.
 @y
 - Delegation keys sign
-  [delegation metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" class="_"},
+  [delegation metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" rel="noopener" class="_"},
   which lists filenames in the collection, and their sizes and respective
-  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" class="_"}.
+  [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   These files are used to verify the integrity of some or all of the actual contents of the repository.
   They are also used to
   [delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
@@ -156,14 +156,14 @@ Notary clients push metadata to one or more Notary services.
 @x
 A Notary service consists of a Notary server, which stores and updates the
 signed
-[TUF metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L348){:target="_blank" class="_"}
+[TUF metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L348){:target="_blank" rel="noopener" class="_"}
 for multiple trusted collections in an associated database, and a Notary signer, which
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:
 @y
 A Notary service consists of a Notary server, which stores and updates the
 signed
-[TUF metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L348){:target="_blank" class="_"}
+[TUF metadata files](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L348){:target="_blank" rel="noopener" class="_"}
 for multiple trusted collections in an associated database, and a Notary signer, which
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:
@@ -203,18 +203,18 @@ The Notary signer is responsible for:
 
 @x
 - storing the private signing keys
-  [wrapped](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4){:target="_blank" class="_"}
+  [wrapped](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4){:target="_blank" rel="noopener" class="_"}
   and
-  [encrypted](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8){:target="_blank" class="_"}
-  using [Javascript Object Signing and Encryption](https://github.com/dvsekhvalnov/jose2go){:target="_blank" class="_"}
+  [encrypted](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8){:target="_blank" rel="noopener" class="_"}
+  using [Javascript Object Signing and Encryption](https://github.com/dvsekhvalnov/jose2go){:target="_blank" rel="noopener" class="_"}
   in a database separate from the Notary server database
 - performing signing operations with these keys whenever the Notary server requests
 @y
 - storing the private signing keys
-  [wrapped](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4){:target="_blank" class="_"}
+  [wrapped](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4){:target="_blank" rel="noopener" class="_"}
   and
-  [encrypted](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8){:target="_blank" class="_"}
-  using [Javascript Object Signing and Encryption](https://github.com/dvsekhvalnov/jose2go){:target="_blank" class="_"}
+  [encrypted](https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8){:target="_blank" rel="noopener" class="_"}
+  using [Javascript Object Signing and Encryption](https://github.com/dvsekhvalnov/jose2go){:target="_blank" rel="noopener" class="_"}
   in a database separate from the Notary server database
 - performing signing operations with these keys whenever the Notary server requests
 @z
@@ -241,12 +241,12 @@ server, and signer:
 
 @x
 1.  Notary server optionally supports authentication from clients using
-    [JWT](http://jwt.io/){:target="_blank" class="_"} tokens. This requires an
+    [JWT](http://jwt.io/){:target="_blank" rel="noopener" class="_"} tokens. This requires an
     authorization server that manages access controls, and a cert bundle from this
     authorization server containing the public key it uses to sign tokens.
 @y
 1.  Notary server optionally supports authentication from clients using
-    [JWT](http://jwt.io/){:target="_blank" class="_"} tokens. This requires an
+    [JWT](http://jwt.io/){:target="_blank" rel="noopener" class="_"} tokens. This requires an
     authorization server that manages access controls, and a cert bundle from this
     authorization server containing the public key it uses to sign tokens.
 @z

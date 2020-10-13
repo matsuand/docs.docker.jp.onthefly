@@ -830,13 +830,13 @@ level.
 @z
 
 @x
-- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" }
-- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" }
+- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" rel="noopener" class="_" }
+- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" rel="noopener" class="_" }
 @y
 {% comment %}
-- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" }
-- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" }
+- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" rel="noopener" class="_" }
+- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" rel="noopener" class="_" }
 {% endcomment %}
-- [Prometheus のドキュメント](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" } を読む。
-- [警告](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" } を設定してみる。
+- [Prometheus のドキュメント](https://prometheus.io/docs/introduction/overview/){: target="_blank" rel="noopener" class="_" } を読む。
+- [警告](https://prometheus.io/docs/alerting/overview/){: target="_blank" rel="noopener" class="_" } を設定してみる。
 @z

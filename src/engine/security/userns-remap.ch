@@ -19,17 +19,17 @@ title: ユーザー名前空間を使ったコンテナーの分離
 Linux namespaces provide isolation for running processes, limiting their access
 to system resources without the running process being aware of the limitations.
 For more information on Linux namespaces, see
-[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" }.
+[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" rel="noopener" class="_" }.
 @y
 {% comment %}
 Linux namespaces provide isolation for running processes, limiting their access
 to system resources without the running process being aware of the limitations.
 For more information on Linux namespaces, see
-[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" }.
+[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" rel="noopener" class="_" }.
 {% endcomment %}
 Linux の名前空間は、プロセスによるシステムリソースへのアクセスを制限しながら、プロセスを分離して実行します。
 実行されたプロセスにとっては、アクセスが制限されていることはわかりません。
-Linux の名前空間に関する詳細は [Linux 名前空間](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" } を参照してください。
+Linux の名前空間に関する詳細は [Linux 名前空間](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" rel="noopener" class="_" } を参照してください。
 @z
 
 @x

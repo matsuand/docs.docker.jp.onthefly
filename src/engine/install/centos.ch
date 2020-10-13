@@ -77,15 +77,15 @@ Docker Engine をインストールするには保守対象の CentOS 7 が必�
 @x
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
-[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
+[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" rel="noopener" class="_" }.
 @y
 {% comment %}
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
-[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
+[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" rel="noopener" class="_" }.
 {% endcomment %}
 `centos-extras` リポジトリを有効にすることが必要です。
-このリポジトリはデフォルトでは有効になっていますが、もし無効にしている場合は、[もう一度有効に](https://wiki.centos.org/AdditionalResources/Repositories)する必要があります。
+このリポジトリはデフォルトでは有効になっていますが、もし無効にしている場合は、[もう一度有効に](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" rel="noopener" class="_" } する必要があります。
 @z
 
 @x
@@ -665,16 +665,16 @@ Docker リポジトリを利用した Docker インストールができない�
 @z
 
 @x
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" }
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 @y
 {% comment %}
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" }
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 {% endcomment %}
-1.  [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" } にアクセスして、インストールしている CentOS のバージョンを選択します。
+1.  [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" } にアクセスして、インストールしている CentOS のバージョンを選択します。
     そして `x86_64/stable/Packages/` を表示し、インストールしたい `.rpm` ファイルをダウンロードします。
 @z
 

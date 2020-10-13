@@ -186,20 +186,20 @@ Many base images have a strong record of being secure, including:
 @z
 
 @x
-* [Debian](https://hub.docker.com/r/library/debian/tags/jessie/){: target="_blank" class="_"}
+* [Debian](https://hub.docker.com/r/library/debian/tags/jessie/){: target="_blank" rel="noopener" class="_"}
   Linux: both small and tightly-controlled, Debian-linux is a good alternative
   if you're currently using Ubuntu.
 @y
-* [Debian](https://hub.docker.com/r/library/debian/tags/jessie/){: target="_blank" class="_"}
+* [Debian](https://hub.docker.com/r/library/debian/tags/jessie/){: target="_blank" rel="noopener" class="_"}
   Linux: both small and tightly-controlled, Debian-linux is a good alternative
   if you're currently using Ubuntu.
 @z
 
 @x
-* [Alpine](https://hub.docker.com/_/alpine/){: target="_blank" class="_"} Linux:
+* [Alpine](https://hub.docker.com/_/alpine/){: target="_blank" rel="noopener" class="_"} Linux:
   Alpine is a minimal linux distribution with an excellent security record.
 @y
-* [Alpine](https://hub.docker.com/_/alpine/){: target="_blank" class="_"} Linux:
+* [Alpine](https://hub.docker.com/_/alpine/){: target="_blank" rel="noopener" class="_"} Linux:
   Alpine is a minimal linux distribution with an excellent security record.
 @z
 
@@ -526,17 +526,17 @@ To interpret the results of a scanned image:
 @z
 
 @x
-1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 @y
-1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
 2.  Navigate to the repository details page (for example,
-    [nodejs](https://hub.docker.com/_/nodejs){: target="_blank" class="_"}).
+    [nodejs](https://hub.docker.com/_/nodejs){: target="_blank" rel="noopener" class="_"}).
 @y
 2.  Navigate to the repository details page (for example,
-    [nodejs](https://hub.docker.com/_/nodejs){: target="_blank" class="_"}).
+    [nodejs](https://hub.docker.com/_/nodejs){: target="_blank" rel="noopener" class="_"}).
 @z
 
 @x
@@ -769,12 +769,12 @@ additional suite of API compliance testing.
 Docker Certified Container images and plugins are meant to differentiate high
 quality content on Docker Hub. Customers can consume Certified Containers with
 confidence knowing that both Docker and the publisher stands behind the
-solution. Further details and an application can be [found here.](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}.
+solution. Further details and an application can be [found here.](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" rel="noopener" class="_"}.
 @y
 Docker Certified Container images and plugins are meant to differentiate high
 quality content on Docker Hub. Customers can consume Certified Containers with
 confidence knowing that both Docker and the publisher stands behind the
-solution. Further details and an application can be [found here.](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}.
+solution. Further details and an application can be [found here.](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -825,10 +825,10 @@ for exchange of support tickets between the publisher and Docker.
 
 @x
 Start by applying to be a [Docker Technology
-Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}
+Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" rel="noopener" class="_"}
 @y
 Start by applying to be a [Docker Technology
-Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}
+Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" rel="noopener" class="_"}
 @z
 
 @x

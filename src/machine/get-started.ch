@@ -226,16 +226,16 @@ HyperKit と Oracle VirtualBox は 1 つのシステム上に稼動させるこ�
 @z
 
 @x
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
+* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
   correctly installed on your system (either as part of an earlier Toolbox install,
   or manual install).
 @y
 {% comment %}
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
+* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
   correctly installed on your system (either as part of an earlier Toolbox install,
   or manual install).
 {% endcomment %}
-* [最新版の VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"} が正しくインストールされていることを確認してください。
+* [最新版の VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"} が正しくインストールされていることを確認してください。
   （すでに示した ToolBox の一部としてインストールしているか、直接インストールしているかのどちらでもかまいません。）
 @z
 
@@ -266,16 +266,16 @@ Docker Desktop for Mac と Docker Desktop for Windows では、それぞれの�
 @x
 * If you are using Docker Toolbox on either Mac or an older version Windows
   system (without Hyper-V), use the `virtualbox` driver to create a local machine
-  based on Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" class="_"}.
+  based on Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" rel="noopener" class="_"}.
   (See the [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).)
 @y
 {% comment %}
 * If you are using Docker Toolbox on either Mac or an older version Windows
   system (without Hyper-V), use the `virtualbox` driver to create a local machine
-  based on Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" class="_"}.
+  based on Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" rel="noopener" class="_"}.
   (See the [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).)
 {% endcomment %}
-* Docker Toolbox を Mac 上において、あるいは（Hyper-V がない）古い Windows 上において利用している場合は、Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" class="_"} に基づいたローカルマシンを生成する際に`virtualbox`ドライバーが用いられます。
+* Docker Toolbox を Mac 上において、あるいは（Hyper-V がない）古い Windows 上において利用している場合は、Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" rel="noopener" class="_"} に基づいたローカルマシンを生成する際に`virtualbox`ドライバーが用いられます。
   （[Docker Machine の Oracle VirtualBox 向けドライバー](drivers/virtualbox.md) を参照してください。）
 @z
 
@@ -296,23 +296,23 @@ Docker Desktop for Mac と Docker Desktop for Windows では、それぞれの�
 @z
 
 @x
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
+* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
   correctly installed on your system. If you used
-  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" class="_"}
-  or [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" class="_"}
+  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" rel="noopener" class="_"}
+  or [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" rel="noopener" class="_"}
   to install Docker Machine, VirtualBox is
   automatically installed.
 @y
 {% comment %}
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
+* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
   correctly installed on your system. If you used
-  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" class="_"}
-  or [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" class="_"}
+  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" rel="noopener" class="_"}
+  or [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" rel="noopener" class="_"}
   to install Docker Machine, VirtualBox is
   automatically installed.
 {% endcomment %}
-* [最新版の VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"} が正しくインストールされていることを確認してください。
-  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" class="_"} または [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" class="_"} を利用して Docker Machine がインストールできている場合、VirtualBox は自動的にインストールされています。
+* [最新版の VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"} が正しくインストールされていることを確認してください。
+  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" rel="noopener" class="_"} または [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" rel="noopener" class="_"} を利用して Docker Machine がインストールできている場合、VirtualBox は自動的にインストールされています。
 @z
 
 @x
@@ -534,12 +534,12 @@ choose another name for this new machine.
 @z
 
 @x
-      This command downloads a lightweight Linux distribution ([boot2docker](https://github.com/boot2docker/boot2docker){: target="_blank" class="_"}) with the Docker daemon installed, and creates and starts a VirtualBox VM with Docker running.
+      This command downloads a lightweight Linux distribution ([boot2docker](https://github.com/boot2docker/boot2docker){: target="_blank" rel="noopener" class="_"}) with the Docker daemon installed, and creates and starts a VirtualBox VM with Docker running.
 @y
       {% comment %}
-      This command downloads a lightweight Linux distribution ([boot2docker](https://github.com/boot2docker/boot2docker){: target="_blank" class="_"}) with the Docker daemon installed, and creates and starts a VirtualBox VM with Docker running.
+      This command downloads a lightweight Linux distribution ([boot2docker](https://github.com/boot2docker/boot2docker){: target="_blank" rel="noopener" class="_"}) with the Docker daemon installed, and creates and starts a VirtualBox VM with Docker running.
       {% endcomment %}
-      このコマンドは、インストールされている Docker デーモンを利用して、軽量 Linux ディストリビューション ([boot2docker](https://github.com/boot2docker/boot2docker){: target="_blank" class="_"}) をダウンロードします。
+      このコマンドは、インストールされている Docker デーモンを利用して、軽量 Linux ディストリビューション ([boot2docker](https://github.com/boot2docker/boot2docker){: target="_blank" rel="noopener" class="_"}) をダウンロードします。
       そして稼動中の Docker を利用して VirtualBox 仮想マシンを生成し起動します。
 @z
 
@@ -617,17 +617,17 @@ choose another name for this new machine.
 @x
       **Note**: If you are using `fish`, or a Windows shell such as
       Powershell/`cmd.exe`, the above method does not work as described.
-      Instead, see [the `env` command's documentation](reference/env.md){: target="_blank" class="_"}
+      Instead, see [the `env` command's documentation](reference/env.md){: target="_blank" rel="noopener" class="_"}
       to learn how to set the environment variables for your shell.
 @y
       {% comment %}
       **Note**: If you are using `fish`, or a Windows shell such as
       Powershell/`cmd.exe`, the above method does not work as described.
-      Instead, see [the `env` command's documentation](reference/env.md){: target="_blank" class="_"}
+      Instead, see [the `env` command's documentation](reference/env.md){: target="_blank" rel="noopener" class="_"}
       to learn how to set the environment variables for your shell.
       {% endcomment %}
       **メモ**: `fish`や Powershell、`cmd.exe`のような Windows シェルでは、先ほどのコマンドは実行できません。
-      利用するシェルにおいて環境変数を有効にする方法は、[the `env` command's documentation](reference/env.md){: target="_blank" class="_"} を参照してください。
+      利用するシェルにおいて環境変数を有効にする方法は、[the `env` command's documentation](reference/env.md){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -732,12 +732,12 @@ Run a container with `docker run` to verify your set up.
 @z
 
 @x
-3. Run a [Nginx](https://www.nginx.com/){: target="_blank" class="_"} webserver in a container with the following command:
+3. Run a [Nginx](https://www.nginx.com/){: target="_blank" rel="noopener" class="_"} webserver in a container with the following command:
 @y
 {% comment %}
-3. Run a [Nginx](https://www.nginx.com/){: target="_blank" class="_"} webserver in a container with the following command:
+3. Run a [Nginx](https://www.nginx.com/){: target="_blank" rel="noopener" class="_"} webserver in a container with the following command:
 {% endcomment %}
-3. コンテナー内においてウェブサーバー [Nginx](https://www.nginx.com/){: target="_blank" class="_"} を起動するために、以下のコマンドを実行します。
+3. コンテナー内においてウェブサーバー [Nginx](https://www.nginx.com/){: target="_blank" rel="noopener" class="_"} を起動するために、以下のコマンドを実行します。
 @z
 
 @x

@@ -20,12 +20,12 @@ redirect_from:
 @z
 
 @x
-On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
+On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
 @y
 {% comment %}
-On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
+On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
 {% endcomment %}
-2020年5月14日に Docker は [製品戦略](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" class="_"} に連携して、新たにユーザーごとの料金体系を発表しました。
+2020年5月14日に Docker は [製品戦略](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} に連携して、新たにユーザーごとの料金体系を発表しました。
 これはクラウドネイティブな開発に向けた開発ワークフローを推進するためです。
 それまでのプライベートリポジトリと自動ビルドベースのプランは、**プロ**プランと**チーム**プランとして変更され、無制限のプライベートリポジトリを含むようになりました。
 @z
@@ -138,21 +138,21 @@ The **Free Team** plan includes unlimited public repositories at no cost per mon
 @z
 
 @x
-For detailed information about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+For detailed information about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-For detailed information about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+For detailed information about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-各プランにおいて利用可能な機能の詳細は [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" class="_"} を参照してください。
+各プランにおいて利用可能な機能の詳細は [Docker の料金体系](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
-For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" class="_"}.
+For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" class="_"}.
+For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-料金に関してよくたずねられる質問が [Docker の料金に関する FAQ](https://www.docker.com/pricing/faq){: target="_blank" class="_"} にあります。
+料金に関してよくたずねられる質問が [Docker の料金に関する FAQ](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"} にあります。
 @z
 
 @x
@@ -185,12 +185,12 @@ To purchase a Pro plan:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 @y
 {% comment %}
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} アカウントでログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントでログインします。
 @z
 
 @x
@@ -287,12 +287,12 @@ To purchase a Team plan:
 @z
 
 @x
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 @y
 {% comment %}
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 {% endcomment %}
-1. [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} アカウントにログインします。
+1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} アカウントにログインします。
 @z
 
 @x

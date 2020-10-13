@@ -153,7 +153,7 @@ be re-used for all your future projects. And so on.
 
 @x
  - *Sharing.* Docker has access to a public registry [on Docker
-Hub](https://hub.docker.com/){: target="_blank" class="_"} where thousands of
+Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} where thousands of
 people have uploaded useful images: anything from Redis, CouchDB, PostgreSQL to
 IRC bouncers to Rails app servers to Hadoop to base images for various Linux
 distros. The [*registry*](../registry/index.md) also includes an official "standard
@@ -162,7 +162,7 @@ is open-source, so anyone can deploy their own registry to store and transfer
 private containers, for internal server deployments for example.
 @y
  - *Sharing.* Docker has access to a public registry [on Docker
-Hub](https://hub.docker.com/){: target="_blank" class="_"} where thousands of
+Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} where thousands of
 people have uploaded useful images: anything from Redis, CouchDB, PostgreSQL to
 IRC bouncers to Rails app servers to Hadoop to base images for various Linux
 distros. The [*registry*](../registry/index.md) also includes an official "standard
@@ -199,10 +199,10 @@ private containers, for internal server deployments for example.
 
 @x
 There's a great StackOverflow answer [showing the differences](
-http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" class="_"}.
+http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
 @y
 There's a great StackOverflow answer [showing the differences](
-http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" class="_"}.
+http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -295,10 +295,10 @@ You can learn about the project's security policy
 
 @x
 Read [our blog post](
-http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" class="_"} on the introduction of the DCO.
+http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
 @y
 Read [our blog post](
-http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" class="_"} on the introduction of the DCO.
+http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
 @z
 
 @x
@@ -309,10 +309,10 @@ http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certi
 
 @x
 *This is a summary of a discussion on the [docker-dev mailing list](
-https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" class="_"}.*
+https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" rel="noopener" class="_"}.*
 @y
 *This is a summary of a discussion on the [docker-dev mailing list](
-https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" class="_"}.*
+https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" rel="noopener" class="_"}.*
 @z
 
 @x
@@ -465,11 +465,11 @@ mainly a 'cosmetic' change, we *discourage* changing it.
 
 @x
 If you *really* need to change its setting, make sure to change it back to its
-[default value](https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args){: target="_blank" class="_"}
+[default value](https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args){: target="_blank" rel="noopener" class="_"}
 afterwards.
 @y
 If you *really* need to change its setting, make sure to change it back to its
-[default value](https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args){: target="_blank" class="_"}
+[default value](https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args){: target="_blank" rel="noopener" class="_"}
 afterwards.
 @z
 
@@ -566,13 +566,13 @@ You can find more answers on:
 @x
 - [Docker community Slack channel](http://dockr.ly/slack)
 - [Docker Support Forums](https://forums.docker.com)
-- [GitHub](https://github.com/moby/moby){: target="_blank" class="_"}
-- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" class="_"}
-- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" class="_"}
+- [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
+- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
+- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" rel="noopener" class="_"}
 @y
 - [Docker community Slack channel](http://dockr.ly/slack)
 - [Docker Support Forums](https://forums.docker.com)
-- [GitHub](https://github.com/moby/moby){: target="_blank" class="_"}
-- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" class="_"}
-- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" class="_"}
+- [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
+- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
+- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" rel="noopener" class="_"}
 @z

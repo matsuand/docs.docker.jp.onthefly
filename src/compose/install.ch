@@ -62,19 +62,19 @@ included as part of those desktop installs.
 
 @x
 - On Linux systems, first install the
-[Docker Engine](../engine/install/index.md#server){: target="_blank" class="_"}
+[Docker Engine](../engine/install/index.md#server){: target="_blank" rel="noopener" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 @y
 {% comment %}
 - On Linux systems, first install the
-[Docker Engine](../engine/install/index.md#server){: target="_blank" class="_"}
+[Docker Engine](../engine/install/index.md#server){: target="_blank" rel="noopener" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 {% endcomment %}
-- Linux システムではまず、 Docker 入手のページに説明されている各 OS 向けの [Docker](../engine/install/index.md#server){: target="_blank" class="_"} をインストールします。
+- Linux システムではまず、 Docker 入手のページに説明されている各 OS 向けの [Docker Engine](../engine/install/index.md#server){: target="_blank" rel="noopener" class="_"} をインストールします。
 そしてこのページに戻り、Linux システム上での Compose のインストール手順に従います。
 @z
 
@@ -118,7 +118,7 @@ Python package manager or installing Compose as a container.
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
 > Compose, replace the given release number with the one that you want. Compose
 > releases are also listed and available for direct download on the
-> [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+> [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
 > section.
 @y
@@ -129,7 +129,7 @@ Python package manager or installing Compose as a container.
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
 > Compose, replace the given release number with the one that you want. Compose
 > releases are also listed and available for direct download on the
-> [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+> [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
 > section.
 {% endcomment %}
@@ -137,7 +137,7 @@ Python package manager or installing Compose as a container.
 > 
 > 以降に示す手順は Compose の現時点での最新安定版（**v{{site.compose_version}}**）に基づいたものです。
 > これ以外のバージョンをインストールする場合は、記述されているリリース番号を、目的とするものに置き換えてください。
-> Compose のリリースは [GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){:target="_blank" class="_"} においても一覧が示され利用可能です。
+> Compose のリリースは [GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} においても一覧が示され利用可能です。
 > Compose の**プレリリース版**をインストールする場合は、[プレリリース版のインストール](#install-pre-release-builds)の説明を参照してください。
 @z
 
@@ -406,19 +406,19 @@ Docker デーモンや Docker クライアントを Microsoft Windows Server 上
 
 @x
 On Linux, you can download the Docker Compose binary from the
-[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 Follow the instructions from the link, which involve running the `curl` command
 in your terminal to download the binaries. These step-by-step instructions are
 also included below.
 @y
 {% comment %}
 On Linux, you can download the Docker Compose binary from the
-[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 Follow the instructions from the link, which involve running the `curl` command
 in your terminal to download the binaries. These step-by-step instructions are
 also included below.
 {% endcomment %}
-Linux の場合は、[GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){:target="_blank" class="_"} から Docker Compose の実行バイナリをダウンロードします。
+Linux の場合は、[GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} から Docker Compose の実行バイナリをダウンロードします。
 リンク先の手順では、端末画面上から `curl` コマンドを使ってダウンロードを行います。
 その手順は以下にも示します。
 @z
@@ -732,30 +732,30 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 @x
 If you're interested in trying out a pre-release build, you can download release
-candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
+candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" rel="noopener" class="_"}.
 Follow the instructions from the link, which involves running the `curl` command
 in your terminal to download the binaries.
 @y
 {% comment %}
 If you're interested in trying out a pre-release build, you can download release
-candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
+candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" rel="noopener" class="_"}.
 Follow the instructions from the link, which involves running the `curl` command
 in your terminal to download the binaries.
 {% endcomment %}
-プレリリース版を試してみたい方は [GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){: target="_blank" class="_"} からリリース候補（release candidate）をダウンロードしてください。
+プレリリース版を試してみたい方は [GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){: target="_blank" rel="noopener" class="_"} からリリース候補（release candidate）をダウンロードしてください。
 リンク先の手順では、端末画面上から `curl` コマンドを使って実行バイナリをダウンロードします。
 @z
 
 @x
 Pre-releases built from the "master" branch are also available for download at
-[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" class="_"}.
+[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 Pre-releases built from the "master" branch are also available for download at
-[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" class="_"}.
+[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 マスターブランチからビルドされたプレリリース版もあります。
-[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" class="_"} からダウンロードしてください。
+[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" rel="noopener" class="_"} からダウンロードしてください。
 @z
 
 @x

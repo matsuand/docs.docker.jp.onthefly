@@ -675,16 +675,16 @@ Docker リポジトリを利用した Docker インストールができない�
 @z
 
 @x
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" }
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 @y
 {% comment %}
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" }
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 {% endcomment %}
-1.  [{{ download-url-base }}/]({{ download-url-base }}/) にアクセスして、インストールしている Fedora のバージョンを選択します。
+1.  [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" } にアクセスして、インストールしている Fedora のバージョンを選択します。
     そして `x86_64/stable/Packages/` を表示し、インストールしたい `.rpm` ファイルをダウンロードします。
 @z
 

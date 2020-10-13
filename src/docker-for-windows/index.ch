@@ -1362,34 +1362,34 @@ Docker Desktop ダッシュボードは、コンテナーやアプリケーシ�
 @z
 
 @x
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
 @y
 {% comment %}
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
 {% endcomment %}
-Docker Desktop メニューから **Sign in /Create Docker ID** を実行すると、[Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } アカウントにアクセスすることができます。
+Docker Desktop メニューから **Sign in /Create Docker ID** を実行すると、[Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } アカウントにアクセスすることができます。
 ログインを行っておけば、Docker Desktop メニューから Docker Hub リポジトリに直接アクセスできます。
 @z
 
 @x
-For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" class="_" }:
+For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" rel="noopener" class="_" }:
 @y
 {% comment %}
-For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" class="_" }:
+For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" rel="noopener" class="_" }:
 {% endcomment %}
-詳しくは、以下に示す [Docker Hub トピック](../docker-hub/index.md){: target="_blank" class="_" } を参照してください。
+詳しくは、以下に示す [Docker Hub トピック](../docker-hub/index.md){: target="_blank" rel="noopener" class="_" } を参照してください。
 @z
 
 @x
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" class="_" }
-* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" class="_" }
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
+* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
 @y
 {% comment %}
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" class="_" }
-* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" class="_" }
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
+* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
 {% endcomment %}
-* [Docker Hub における組織とチーム](../docker-hub/orgs.md){: target="_blank" class="_" }
-* [ビルドとイメージ](../docker-hub/builds/index.md){: target="_blank" class="_" }
+* [Docker Hub における組織とチーム](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
+* [ビルドとイメージ](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
 @z
 
 @x
@@ -1645,12 +1645,12 @@ in the Docker Engine topics.
 @z
 
 @x
-* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" class="_"}.
+* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" class="_"}.
+* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-* [はじめよう](../get-started/index.md){: target="_blank" class="_"} に示されているウォークスルーを試してみてください。
+* [はじめよう](../get-started/index.md){: target="_blank" rel="noopener" class="_"} に示されているウォークスルーを試してみてください。
 @z
 
 @x
@@ -1663,10 +1663,10 @@ in the Docker Engine topics.
 @z
 
 @x
-* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" class="_"}.
+* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" class="_"}.
+* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 * [Docker CLI リファレンスガイド](/engine/reference/commandline/cli/){: target="_blank" class="_"} を参照してください。
 @z

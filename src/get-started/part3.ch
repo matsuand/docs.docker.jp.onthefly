@@ -64,12 +64,12 @@ At this point, you've built a containerized application described in [Part 2](pa
 @z
 
 @x
-The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" class="_”}, so they can be easily downloaded and run on any destination machine.
+The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_”}, so they can be easily downloaded and run on any destination machine.
 @y
 {% comment %}
-The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" class="_”}, so they can be easily downloaded and run on any destination machine.
+The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_”}, so they can be easily downloaded and run on any destination machine.
 {% endcomment %}
-最後の作業として、開発しているコンテナー化アプリケーションを、[Docker Hub](https://hub.docker.com/){: target="_blank" class="_”} のようなレジストリ上にてイメージを共有していきます。
+最後の作業として、開発しているコンテナー化アプリケーションを、[Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_”} のようなレジストリ上にてイメージを共有していきます。
 こうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。
 @z
 
@@ -94,12 +94,12 @@ Docker ID を持っていない場合は、以下の手順により取得しま�
 @z
 
 @x
-1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" class="_”} page.
+1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_”} page.
 @y
 {% comment %}
-1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" class="_”} page.
+1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_”} page.
 {% endcomment %}
-1.  [Docker Hub のサインアップページ](https://hub.docker.com/signup){: target="_blank" class="_”} にアクセスします。
+1.  [Docker Hub のサインアップページ](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_”} にアクセスします。
 @z
 
 @x
@@ -259,12 +259,12 @@ Now let's create your first repository, and push your bulletin board image to Do
 @z
 
 @x
-    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
+    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" rel="noopener" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
 @y
     {% comment %}
-    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
+    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" rel="noopener" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
     {% endcomment %}
-    [Docker Hub](https://hub.docker.com/repositories){: target="_blank" class="_”} においてこのリポジトリにアクセスしてみると、新たなイメージがそこに表示されています。
+    [Docker Hub](https://hub.docker.com/repositories){: target="_blank" rel="noopener" class="_”} においてこのリポジトリにアクセスしてみると、新たなイメージがそこに表示されています。
     Docker Hub リポジトリは、デフォルトで公開されている（public となっている）ことに注意してください。
 @z
 

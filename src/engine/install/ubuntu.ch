@@ -737,18 +737,18 @@ Docker リポジトリを利用した Docker Engine のインストールがで�
 @z
 
 @x
-1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
+1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
     `armhf`, or `arm64`, and download the `.deb` file for the
     Docker Engine version you want to install.
 @y
 {% comment %}
-1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
+1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
     `armhf`, or `arm64`, and download the `.deb` file for the
     Docker Engine version you want to install.
 {% endcomment %}
-1.  [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/){: target="_blank" class="_" }
+1.  [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" }
     にアクセスして、インストールしたい Ubuntu バージョンを選びます。
     そして `pool/stable/` にアクセスし、`amd64`、`armhf`、`arm64` のいずれかを選び、インストールしたいバージョンの Docker Engine に対応する `.deb` ファイルをダウンロードします。
 @z

@@ -109,11 +109,11 @@ Docker コンテナーを ECS にデプロイするには、以下の条件を�
 @z
 
 @x
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 @y
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 @z
 
 @x
@@ -166,18 +166,18 @@ Run the `docker context create ecs myecscontext` command to create an Amazon ECS
 context named `myecscontext`. If you have already installed and configured the AWS CLI,
 the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
-[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"}.
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 Run the `docker context create ecs myecscontext` command to create an Amazon ECS Docker
 context named `myecscontext`. If you have already installed and configured the AWS CLI,
 the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
-[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"}.
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 `docker context create ecs myecscontext` コマンドを実行して AWS コンテキストを生成します。
 すでに AWS CLI をインストールし設定を行っているのであれば、このセットアップコマンドにより、既存の AWS プロファイルを選んで Amazon への接続を行います。
-これがまだできていない場合は、[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"} を通じて、新たなプロファイルを生成します。
+これがまだできていない場合は、[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"} を通じて、新たなプロファイルを生成します。
 @z
 
 @x
@@ -307,14 +307,14 @@ using the `docker compose logs` command.
 @z
 
 @x
-The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" class="_"}.
+The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" class="_"}.
+The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 Docker Compose CLI では自動的に認証が設定されます。
 したがって Amazon ECR レジストリにあるプライベートイメージは、同じ AWS アカウントを使ってプルすることができます。
-一方 Docker Hub も含め、別のレジストリからプライベートイメージをプルするには、[AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" class="_"} 上にユーザー名とパスワード（あるいはユーザー名とトークン）を生成する必要があります。
+一方 Docker Hub も含め、別のレジストリからプライベートイメージをプルするには、[AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" rel="noopener" class="_"} 上にユーザー名とパスワード（あるいはユーザー名とトークン）を生成する必要があります。
 @z
 
 @x
@@ -393,14 +393,14 @@ services:
 @z
 
 @x
-Service-to-service communication is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together. This allows individual services to run with distinct constraints (memory, cpu) and replication rules. However, it comes with a constraint that Docker images have to handle service discovery and wait for dependent services to be available.
+Service-to-service communication is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together. This allows individual services to run with distinct constraints (memory, cpu) and replication rules. However, it comes with a constraint that Docker images have to handle service discovery and wait for dependent services to be available.
 @y
 {% include jatrans.md jatrans_pattern="1" %}
 
 {% comment %}
-Service-to-service communication is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together. This allows individual services to run with distinct constraints (memory, cpu) and replication rules. However, it comes with a constraint that Docker images have to handle service discovery and wait for dependent services to be available.
+Service-to-service communication is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together. This allows individual services to run with distinct constraints (memory, cpu) and replication rules. However, it comes with a constraint that Docker images have to handle service discovery and wait for dependent services to be available.
 {% endcomment %}
-サービス間の通信は [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" class="_"} ルールによって実現されています。
+サービス間の通信は [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} ルールによって実現されています。
 サービス間では共通の Compose ファイル「network」が共有され、互いに通信を行います。
 そこでは特定のサービスに対して、異なる（メモリ、CPU の）制約やレプリカに関するルールにもとづいて実行することが可能です。
 ただしこれを行うための条件として、Docker イメージがサービスを検出できて、従属サービスの利用可能状態を待つことができなければなりません。
@@ -417,12 +417,12 @@ Service-to-service communication is implemented by the [Security Groups](https:/
 @z
 
 @x
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
 @y
 {% comment %}
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
 {% endcomment %}
-Docker Compose CLI においてアプリケーションデプロイを行うサービスは、[AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" class="_"} 上に登録されます。
+Docker Compose CLI においてアプリケーションデプロイを行うサービスは、[AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} 上に登録されます。
 これは `<サービス>.<composeプロジェクト名>.local` という形の完全修飾ドメイン名として表わされています。
 サービスが、依存するサービスを引き出す際には、この完全修飾ドメイン名を利用するか、あるいは短いサービス名（docker-compose において用いられるもの）が利用されます。
 完全修飾ドメイン名は Docker Compose CLI が自動的に、環境変数`LOCALDOMAIN`に設定します。
@@ -646,12 +646,12 @@ AWS Cloud Map は DNS サービスに対して初期の待機時間を導入し�
 @z
 
 @x
-Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
 @y
 {% comment %}
-Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
 {% endcomment %}
-あるいは Compose ファイルにおける [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" class="_"} の機能を利用することもできます。
+あるいは Compose ファイルにおける [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} の機能を利用することもできます。
 これを利用すると、依存サービスがまず初めに生成され、これが起動されるのを待って、アプリケーションのデプロイが行われるようになります。
 @z
 
@@ -837,12 +837,12 @@ services:
 @z
 
 @x
-The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
+The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 @y
 {% comment %}
-The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
+The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 {% endcomment %}
-Docker Compose CLI では [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} を活用して、アプリケーションのデプロイ管理を行っています。
+Docker Compose CLI では [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} を活用して、アプリケーションのデプロイ管理を行っています。
 生成済みのリソースをより的確に制御するには、`docker compose convert` を使い、Compose ファイルから CloudFormation スタックファイルを生成します。
 スタックファイルを生成すると、そこに定義されたリソースの確認や、必要に応じたテンプレートのカスタマイズ、AWS CLI や AWS ウェブコンソールからのテンプレートの適用を行うことができます。
 @z
@@ -858,17 +858,17 @@ Docker Compose CLI では [Amazon CloudFormation](https://docs.aws.amazon.com/cl
 @z
 
 @x
-By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
+By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 @y
 {% comment %}
-By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
+By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 {% endcomment %}
 Docker Compose CLI では、Compose アプリケーションに対して、デフォルトで以下のものを生成します。
 1 つは Compose アプリケーション用の ECS クラスターです。
 もう 1 つはネットワークごとの SecurityGroup です。
 これは AWS でのデフォルト VPC 上において、Compose ファイルによって定義されるネットワークごとのものです。
 そしてサービスのトラフィックをルーティングする LoadBlancer です。
-AWS アカウントに、そのようなリソースを生成する [パーミッション](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} が与えられていない場合、あるいは独自にこれらを管理したい場合は、以下のカスタム Compose 拡張機能を利用することができます。
+AWS アカウントに、そのようなリソースを生成する [パーミッション](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} が与えられていない場合、あるいは独自にこれらを管理したい場合は、以下のカスタム Compose 拡張機能を利用することができます。
 @z
 
 @x
@@ -1297,13 +1297,13 @@ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/instal
 @z
 
 @x
-This error message means that your account requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"}.
+This error message means that your account requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-This error message means that your account requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"}.
+This error message means that your account requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 このエラーメッセージは、利用アカウントに対しては ECS 向けの新たな ARN リソース ID フォーマットが必要であることを示しています。
-詳しくは [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"} を参照してください。
+詳しくは [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -1317,12 +1317,12 @@ This error message means that your account requires the new ARN resource ID form
 @z
 
 @x
-Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
 {% comment %}
-Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 {% endcomment %}
 Docker Compose CLI を利用していただき、ありがとうございます。
 みなさんからのフィードバックが大変重要です。
-フィードバックをいただくには、Github レポジトリ [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" class="_"} に issue をあげてください。
+フィードバックをいただくには、Github レポジトリ [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} に issue をあげてください。
 @z

@@ -130,21 +130,20 @@ Docker Desktop をインストールする Windows 10 Home マシンは、以下
 @z
 
 @x
-  - Install Windows 10, version 2004 or higher. The Docker Desktop Edge release also supports Windows 10, version 1903 or higher.
+  - Install Windows 10, version 1903 or higher.
   - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
   - The following hardware prerequisites are required to successfully run
 WSL 2 on Windows 10 Home:
 @y
 {% comment %}
-  - Install Windows 10, version 2004 or higher. The Docker Desktop Edge release also supports Windows 10, version 1903 or higher.
+  - Install Windows 10, version 1903 or higher.
   - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
   - The following hardware prerequisites are required to successfully run
 WSL 2 on Windows 10 Home:
 {% endcomment %}
   - Windows 10、バージョン 2004 またはそれ以降をインストールしていること。
-    Docker Desktop 最新版では Windows 10、バージョン 1903 以降に対応しています。
   - Windows において WSL 2 機能を有効にしていること。
     詳しい手順については [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10) を参照のこと。
   - Windows 10 Home 上において WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。

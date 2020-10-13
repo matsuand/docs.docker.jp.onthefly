@@ -227,21 +227,21 @@ and CPUs, rather than the default behavior of creating smaller servers.
 @x
 For a full list of the flags/settings available and their defaults, see the
 output of `docker-machine create -h` at the command line, the
-[create](reference/create.md){: target="_blank" class="_" } command in
+[create](reference/create.md){: target="_blank" rel="noopener" class="_" } command in
 the Machine [command line reference](reference/index.md){:
-target="_blank" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" class="_" }
+target="_blank" rel="noopener" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" rel="noopener" class="_" }
 in the Machine driver reference.
 @y
 {% comment %}
 For a full list of the flags/settings available and their defaults, see the
 output of `docker-machine create -h` at the command line, the
-[create](reference/create.md){: target="_blank" class="_" } command in
+[create](reference/create.md){: target="_blank" rel="noopener" class="_" } command in
 the Machine [command line reference](reference/index.md){:
-target="_blank" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" class="_" }
+target="_blank" rel="noopener" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" rel="noopener" class="_" }
 in the Machine driver reference.
 {% endcomment %}
 利用可能なフラグや設定およびそのデフォルトについては、コマンドラインから`docker-machine create -h`を実行して得られる出力結果に一覧表示されます。
-また Machine の [コマンドラインリファレンス](reference/index.md){:target="_blank" class="_" } における [create](reference/create.md){: target="_blank" class="_" } コマンドや、Machine ドライバーリファレンス内の [ドライバーオプションと OS デフォルト](drivers/os-base.md){: target="_blank" class="_" } からも確認することができます。
+また Machine の [コマンドラインリファレンス](reference/index.md){:target="_blank" rel="noopener" class="_" } における [create](reference/create.md){: target="_blank" rel="noopener" class="_" } コマンドや、Machine ドライバーリファレンス内の [ドライバーオプションと OS デフォルト](drivers/os-base.md){: target="_blank" rel="noopener" class="_" } からも確認することができます。
 @z
 
 @x
@@ -268,16 +268,16 @@ Docker Machine をインストールすると、数々のクラウドプロバ�
 @z
 
 @x
-See [Docker Machine driver reference](drivers/index.md){:target="_blank" class="_"}
+See [Docker Machine driver reference](drivers/index.md){:target="_blank" rel="noopener" class="_"}
 for details on the drivers, including required flags and configuration options
 (which vary by provider).
 @y
 {% comment %}
-See [Docker Machine driver reference](drivers/index.md){:target="_blank" class="_"}
+See [Docker Machine driver reference](drivers/index.md){:target="_blank" rel="noopener" class="_"}
 for details on the drivers, including required flags and configuration options
 (which vary by provider).
 {% endcomment %}
-各ドライバーの詳細は [Docker Machine ドライバーリファレンス](drivers/index.md){:target="_blank" class="_"} を参照してください。
+各ドライバーの詳細は [Docker Machine ドライバーリファレンス](drivers/index.md){:target="_blank" rel="noopener" class="_"} を参照してください。
 そこには必要となるフラグや設定オプションについて説明されています。
 （これはプロバイダーによって異なります。）
 @z
@@ -307,12 +307,12 @@ not maintained by or formally associated with Docker.
 @z
 
 @x
-See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" class="_"}.
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
-See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" class="_"}.
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
-[利用可能なドライバープラグイン](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" class="_"} を参照してください。
+[利用可能なドライバープラグイン](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x

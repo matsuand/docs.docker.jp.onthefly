@@ -34,24 +34,24 @@
 @z
 
 @x
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
 The client and daemon API must both be at least
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" class="_">{{ controller_data.min_api_version }}</a>
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_">{{ controller_data.min_api_version }}</a>
 to use this command. Use the `docker version` command on the client to check
 your client and daemon API versions.
 @y
 {% comment %}
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
 The client and daemon API must both be at least
-<a href="/engine/api/v{{ site.data[include.datafolder][include.datafile].min_api_version }}/" target="_blank" class="_">{{ site.data[include.datafolder][include.datafile].min_api_version }}</a>
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_">{{ controller_data.min_api_version }}</a>
 to use this command. Use the `docker version` command on the client to check
 your client and daemon API versions.
 {% endcomment %}
-<a href="/engine/api/v{{ site.data[include.datafolder][include.datafile].min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ site.data[include.datafolder][include.datafile].min_api_version }} API reference (in a new window)">API {{ site.data[include.datafolder][include.datafile].min_api_version }} 以上</span></a>&nbsp;
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="{{ controller_data.min_api_version }} API リファレンスを開く (別ウィンドウ)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" class="_">{{ controller_data.min_api_version }}</a>
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_">{{ controller_data.min_api_version }}</a>
 である必要があります。
-クライアント上において `docker version` コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。
+クライアント上において`docker version`コマンドを実行して、クライアントとデーモンの API バージョンを確認してください。
 @z
 
 @x
@@ -67,12 +67,12 @@ your client and daemon API versions.
 @z
 
 @x
-> This command is [deprecated](/engine/deprecated/){: target="_blank" class="_"}.
+> This command is [deprecated](/engine/deprecated/){: target="_blank" rel="noopener" class="_"}.
 >
 > It may be removed in a future Docker version.
 {: .warning }
 @y
-> This command is [deprecated](/engine/deprecated/){: target="_blank" class="_"}.
+> This command is [deprecated](/engine/deprecated/){: target="_blank" rel="noopener" class="_"}.
 >
 > It may be removed in a future Docker version.
 {: .warning }
@@ -93,18 +93,18 @@ your client and daemon API versions.
 @x
 > This command is only available on Docker Enterprise Edition.
 >
-> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" class="_"}.
+> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 @y
 {% comment %}
 > This command is only available on Docker Enterprise Edition.
 >
-> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" class="_"}.
+> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 {% endcomment %}
 > このコマンドは Docker Enterprise Edition においてのみ利用可能です。
 >
-> 詳しくは [Docker Enterprise 製品](/ee/supported-platforms/){: target="_blank" class="_"} を参照してください。
+> 詳しくは [Docker Enterprise 製品](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"} を参照してください。
 {: .important }
 @z
 
@@ -335,16 +335,16 @@ For example uses of this command, refer to the [examples section](#examples) bel
 @z
 
 @x Read about... 日本語化
-  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
-  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
+  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" rel="noopener" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" rel="noopener" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" rel="noopener" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
+  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
 @y
-  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (デーモン)</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="CLI の試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (CLI)</span></a>{% endif %}{% endcapture %}
-  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API リファレンス (新規ウィンドウを開きます)">API {{ option.min_api_version }} 以上</span></a>{% endif %}{%endcapture%}
+  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" rel="noopener" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" rel="noopener" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認します。(別ウィンドウ)">試験的 (デーモン)</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" rel="noopener" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="CLI の試験的オプションを確認します。(別ウィンドウ)">試験的 (CLI)</span></a>{% endif %}{% endcapture %}
+  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="{{ controller_data.min_api_version }} API リファレンスを開きます。(別ウィンドウ)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="このオプションは Kubernetes オーケストレーターにおいて動作します。">Kubernetes</span>{% endif %}{% endcapture %}
 @z
 

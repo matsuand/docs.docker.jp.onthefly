@@ -25,8 +25,7 @@ jsnonbases = \
 	bootstrap.min \
 	jquery \
 	landing-page \
-	modernizr.min \
-	stickyfill.min
+	modernizr.min
 
 others = \
 	redoc.min.map
