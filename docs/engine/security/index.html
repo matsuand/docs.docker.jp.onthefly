@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-13 10:29:01 +0900 -->
+<!-- Page generated 2020-10-13 21:43:35 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Google Tag Manager -->
@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
   <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
   <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
-  <!-- metadata -->
+  <meta name="theme-color" content="#2496ed" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker のセキュリティ" />
   <meta property="og:description" content="Review of the Docker Daemon attack surface" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-13T10:29:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-13T21:43:35+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-13T10:29:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-13T21:43:35+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker のセキュリティ","description":"Review of the Docker Daemon attack surface","url":"https://docs.docker.com/engine/security/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -54,17 +54,18 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="/docs.docker.jp.onthefly/">
-                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
             </a>
         </div>
         <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
             <div class="logo-mobile">
     <a href="/docs.docker.jp.onthefly/">
-        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
     </a>
 </div>
 <div class="search-form" id="search-div">
     <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/">
+        <label for="st-search-input" class="sr-only">検索</label>
         <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
         <div id="autocompleteContainer">
             <div id="autocompleteResults"></div>
@@ -137,11 +138,11 @@
 これ以上でもなく、これ以下でもありません。</p>
 
 <p>ではカーネルの名前空間やプライベートネットワーク機能のソースコードは、成熟したものになっているでしょうか。
-カーネルの名前空間が導入されたのは <a href="http://man7.org/linux/man-pages/man7/namespaces.7.html">カーネルバージョン 2.6.15 から 2.6.26</a> の間です。
+カーネルの名前空間が導入されたのは <a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">カーネルバージョン 2.6.15 から 2.6.26</a> の間です。
 つまり 2008 年 6 月（2.6.26 のリリース日）以降、名前空間のソースコードは、数多くの本番環境システムを通じて検証が続いている状態です。
 それだけではありません。
 名前空間のソースコードの設計と発想は、もはや古いものになっています。
-そもそも名前空間は <a href="http://en.wikipedia.org/wiki/OpenVZ">OpenVZ</a> の機能を再実装するという努力から生まれたものであり、カーネルのメインストリームにマージされることを目指したものです。
+そもそも名前空間は <a href="https://en.wikipedia.org/wiki/OpenVZ">OpenVZ</a> の機能を再実装するという努力から生まれたものであり、カーネルのメインストリームにマージされることを目指したものです。
 ちなみに OpenVZ が初めてリリースされたのは 2005 年であり、その設計と実装はともに十分成熟しています。</p>
 
 <h2 id="control-groups">コントロールグループ</h2>
@@ -263,7 +264,7 @@ Docker 1.10.0 になるとイメージはすべて、イメージデータの暗
 しかも悪意あるユーザーからの攻撃はかなり抑えられることになります。
 デフォルトで Dockerは全ケーパビリティーを拒否した上で、<a href="https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19">必要となるケーパビリティー</a> を用います。
 つまり拒否リスト方式ではなく許可リスト方式をとるものです。
-利用可能なケーパビリティーの一覧は <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">Linux man ページ</a> を参照してください。</p>
+利用可能なケーパビリティーの一覧は <a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">Linux man ページ</a> を参照してください。</p>
 
 <p>Docker コンテナー実行時の主なリスクと言えば、コンテナーに与えられるデフォルトのケーパビリティーやマウント状況だけでは、完全なコンテナー分離にはならないことです。
 独立となっていない場合や、カーネルのぜい弱性との組み合わせによることも考えられます。</p>
