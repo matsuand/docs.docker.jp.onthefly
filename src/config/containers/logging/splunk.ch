@@ -23,11 +23,11 @@ title: Splunk logging driver
 
 @x
 The `splunk` logging driver sends container logs to
-[HTTP Event Collector](http://dev.splunk.com/view/event-collector/SP-CAAAE6M)
+[HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/)
 in Splunk Enterprise and Splunk Cloud.
 @y
 The `splunk` logging driver sends container logs to
-[HTTP Event Collector](http://dev.splunk.com/view/event-collector/SP-CAAAE6M)
+[HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/)
 in Splunk Enterprise and Splunk Cloud.
 @z
 

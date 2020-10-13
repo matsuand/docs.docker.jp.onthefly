@@ -150,7 +150,7 @@ WSL 2 on Windows 10 Home:
 @z
 
 @x
-     - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
      - 4GB system RAM
     - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
@@ -158,14 +158,14 @@ WSL 2 on Windows 10 Home:
   - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 @y
 {% comment %}
-     - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
      - 4GB system RAM
     - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
   - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 {% endcomment %}
-     - [第 2 レベルのアドレス変換（Second Level Address Translation; SLAT）](http://en.wikipedia.org/wiki/Second_Level_Address_Translation) に対応した 64 ビットプロセッサー。
+     - [第 2 レベルのアドレス変換（Second Level Address Translation; SLAT）](https://en.wikipedia.org/wiki/Second_Level_Address_Translation) に対応した 64 ビットプロセッサー。
      - 4 GB のシステム RAM
      - BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
        [仮想化](troubleshoot.md#virtualization-must-be-enabled) を参照してください。

@@ -131,7 +131,7 @@ Docker のバイナリをインストールする場合には、ホストマシ�
 - `iptables` version 1.4 or higher
 - `git` version 1.7 or higher
 - A `ps` executable, usually provided by `procps` or a similar package.
-- [XZ Utils](http://tukaani.org/xz/) 4.9 or higher
+- [XZ Utils](https://tukaani.org/xz/) 4.9 or higher
 - A [properly mounted](
   https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)
   `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount
@@ -147,7 +147,7 @@ Docker のバイナリをインストールする場合には、ホストマシ�
 - `iptables` version 1.4 or higher
 - `git` version 1.7 or higher
 - A `ps` executable, usually provided by `procps` or a similar package.
-- [XZ Utils](http://tukaani.org/xz/) 4.9 or higher
+- [XZ Utils](https://tukaani.org/xz/) 4.9 or higher
 - A [properly mounted](
   https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)
   `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount
@@ -162,7 +162,7 @@ Docker のバイナリをインストールする場合には、ホストマシ�
 - `iptables` のバージョンは 1.4 またはそれ以上。
 - `git` のバージョンは 1.7 またはそれ以上。
 - `ps` 実行モジュールがあること。通常 `procps` あるいは類似パッケージが提供している。
-- [XZ Utils](http://tukaani.org/xz/) のバージョンは 4.9 またはそれ以上。
+- [XZ Utils](https://tukaani.org/xz/) のバージョンは 4.9 またはそれ以上。
 - [`cgroupfs` 階層が適切にマウントされていること](
   https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)。
   単純にすべてを取りまとめた `cgroup` マウントポイントでは不十分です。

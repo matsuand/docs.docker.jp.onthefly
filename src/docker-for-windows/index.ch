@@ -592,10 +592,10 @@ environment variables for them, just like you would do on Linux, for example:
 
 @x
 ```ps
-> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
 @y
 ```ps
-> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
 @z
 
 @x

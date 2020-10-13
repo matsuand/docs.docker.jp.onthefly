@@ -147,13 +147,13 @@ common Ethernet switch; no more, no less.
 How mature is the code providing kernel namespaces and private
 networking? Kernel namespaces were introduced [between kernel version
 2.6.15 and
-2.6.26](http://man7.org/linux/man-pages/man7/namespaces.7.html).
+2.6.26](https://man7.org/linux/man-pages/man7/namespaces.7.html).
 This means that since July 2008 (date of the 2.6.26 release
 ), namespace code has been exercised and scrutinized on a large
 number of production systems. And there is more: the design and
 inspiration for the namespaces code are even older. Namespaces are
 actually an effort to reimplement the features of [OpenVZ](
-http://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
+https://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
 merged within the mainstream kernel. And OpenVZ was initially released
 in 2005, so both the design and the implementation are pretty mature.
 @y
@@ -161,22 +161,22 @@ in 2005, so both the design and the implementation are pretty mature.
 How mature is the code providing kernel namespaces and private
 networking? Kernel namespaces were introduced [between kernel version
 2.6.15 and
-2.6.26](http://man7.org/linux/man-pages/man7/namespaces.7.html).
+2.6.26](https://man7.org/linux/man-pages/man7/namespaces.7.html).
 This means that since July 2008 (date of the 2.6.26 release
 ), namespace code has been exercised and scrutinized on a large
 number of production systems. And there is more: the design and
 inspiration for the namespaces code are even older. Namespaces are
 actually an effort to reimplement the features of [OpenVZ](
-http://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
+https://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
 merged within the mainstream kernel. And OpenVZ was initially released
 in 2005, so both the design and the implementation are pretty mature.
 {% endcomment %}
 ではカーネルの名前空間やプライベートネットワーク機能のソースコードは、成熟したものになっているでしょうか。
-カーネルの名前空間が導入されたのは [カーネルバージョン 2.6.15 から 2.6.26](http://man7.org/linux/man-pages/man7/namespaces.7.html) の間です。
+カーネルの名前空間が導入されたのは [カーネルバージョン 2.6.15 から 2.6.26](https://man7.org/linux/man-pages/man7/namespaces.7.html) の間です。
 つまり 2008 年 6 月（2.6.26 のリリース日）以降、名前空間のソースコードは、数多くの本番環境システムを通じて検証が続いている状態です。
 それだけではありません。
 名前空間のソースコードの設計と発想は、もはや古いものになっています。
-そもそも名前空間は [OpenVZ](http://en.wikipedia.org/wiki/OpenVZ) の機能を再実装するという努力から生まれたものであり、カーネルのメインストリームにマージされることを目指したものです。
+そもそも名前空間は [OpenVZ](https://en.wikipedia.org/wiki/OpenVZ) の機能を再実装するという努力から生まれたものであり、カーネルのメインストリームにマージされることを目指したものです。
 ちなみに OpenVZ が初めてリリースされたのは 2005 年であり、その設計と実装はともに十分成熟しています。
 @z
 
@@ -645,7 +645,7 @@ drops all capabilities except [those
 needed](https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19),
 an allowlist instead of a denylist approach. You can see a full list of
 available capabilities in [Linux
-manpages](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+manpages](https://man7.org/linux/man-pages/man7/capabilities.7.html).
 @y
 {% comment %}
 This doesn't affect regular web apps, but reduces the vectors of attack by
@@ -654,13 +654,13 @@ drops all capabilities except [those
 needed](https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19),
 an allowlist instead of a denylist approach. You can see a full list of
 available capabilities in [Linux
-manpages](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+manpages](https://man7.org/linux/man-pages/man7/capabilities.7.html).
 {% endcomment %}
 普通のウェブアプリに対しての影響はありません。
 しかも悪意あるユーザーからの攻撃はかなり抑えられることになります。
 デフォルトで Dockerは全ケーパビリティーを拒否した上で、[必要となるケーパビリティー](https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19) を用います。
 つまり拒否リスト方式ではなく許可リスト方式をとるものです。
-利用可能なケーパビリティーの一覧は [Linux man ページ](http://man7.org/linux/man-pages/man7/capabilities.7.html) を参照してください。
+利用可能なケーパビリティーの一覧は [Linux man ページ](https://man7.org/linux/man-pages/man7/capabilities.7.html) を参照してください。
 @z
 
 @x

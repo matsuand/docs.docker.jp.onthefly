@@ -111,10 +111,10 @@ macOS system to test drive your new containerized database.
 
 @x
 First, if you don't have it yet, [download and install
-Node.js](http://nodejs.org/).
+Node.js](https://nodejs.org/en/).
 @y
 First, if you don't have it yet, [download and install
-Node.js](http://nodejs.org/).
+Node.js](https://nodejs.org/en/).
 @z
 
 @x

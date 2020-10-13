@@ -264,10 +264,10 @@ contribute mentoring if you have good knowledge of:
 @z
 
 @x
-Also, choose mentoring if you like to be happy. Studies show that [helping others](http://www.huffingtonpost.com/2013/09/03/five-minute-favor-adam-rifkin_n_3805090.html){: target="_blank" rel="noopener" class="_"} is a great way to
+Also, choose mentoring if you like to be happy. Studies show that [helping others](https://www.huffpost.com/entry/five-minute-favor-adam-rifkin_n_3805090){: target="_blank" rel="noopener" class="_"} is a great way to
 boost your own well being.
 @y
-Also, choose mentoring if you like to be happy. Studies show that [helping others](http://www.huffingtonpost.com/2013/09/03/five-minute-favor-adam-rifkin_n_3805090.html){: target="_blank" rel="noopener" class="_"} is a great way to
+Also, choose mentoring if you like to be happy. Studies show that [helping others](https://www.huffpost.com/entry/five-minute-favor-adam-rifkin_n_3805090){: target="_blank" rel="noopener" class="_"} is a great way to
 boost your own well being.
 @z
 
@@ -284,13 +284,13 @@ Docker users are people using Docker in their daily work. To help Docker users, 
 @z
 
 @x
+* the [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
 * the [Docker Community Forum](https://forums.docker.com/){: target="_blank" rel="noopener" class="_"}
-* the `#docker` channel on Freenode IRC
-* [StackOverflow](http://stackoverflow.com/search?tab=newest&q=docker){: target="_blank" rel="noopener" class="_"}
+* [StackOverflow](https://stackoverflow.com/questions/tagged/docker){: target="_blank" rel="noopener" class="_"}
 @y
+* the [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
 * the [Docker Community Forum](https://forums.docker.com/){: target="_blank" rel="noopener" class="_"}
-* the `#docker` channel on Freenode IRC
-* [StackOverflow](http://stackoverflow.com/search?tab=newest&q=docker){: target="_blank" rel="noopener" class="_"}
+* [StackOverflow](https://stackoverflow.com/questions/tagged/docker){: target="_blank" rel="noopener" class="_"}
 @z
 
 @x
@@ -309,22 +309,12 @@ You can also check the lists of [open issues on the Docker docs](https://github.
 Docker contributors are people like you, interested in the open source projects
 and product documentation. Contributors may need help with IRC, Go programming,
 Markdown, or with other aspects of contributing. To help Docker contributors,
-visit:
+join the [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}.
 @y
 Docker contributors are people like you, interested in the open source projects
 and product documentation. Contributors may need help with IRC, Go programming,
 Markdown, or with other aspects of contributing. To help Docker contributors,
-visit:
-@z
-
-@x
-* the [Docker Gitter IM](https://gitter.im/docker/docker){: target="_blank" rel="noopener" class="_"} room
-* the [Google group](https://groups.google.com/forum/#!forum/docker-dev){: target="_blank" rel="noopener" class="_"}
-* the `#docker-dev` channel on Freenode IRC
-@y
-* the [Docker Gitter IM](https://gitter.im/docker/docker){: target="_blank" rel="noopener" class="_"} room
-* the [Google group](https://groups.google.com/forum/#!forum/docker-dev){: target="_blank" rel="noopener" class="_"}
-* the `#docker-dev` channel on Freenode IRC
+join the [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x

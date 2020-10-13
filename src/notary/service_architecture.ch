@@ -241,12 +241,12 @@ server, and signer:
 
 @x
 1.  Notary server optionally supports authentication from clients using
-    [JWT](http://jwt.io/){:target="_blank" rel="noopener" class="_"} tokens. This requires an
+    [JWT](https://jwt.io){:target="_blank" rel="noopener" class="_"} tokens. This requires an
     authorization server that manages access controls, and a cert bundle from this
     authorization server containing the public key it uses to sign tokens.
 @y
 1.  Notary server optionally supports authentication from clients using
-    [JWT](http://jwt.io/){:target="_blank" rel="noopener" class="_"} tokens. This requires an
+    [JWT](https://jwt.io){:target="_blank" rel="noopener" class="_"} tokens. This requires an
     authorization server that manages access controls, and a cert bundle from this
     authorization server containing the public key it uses to sign tokens.
 @z

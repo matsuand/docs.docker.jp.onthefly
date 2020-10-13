@@ -16,14 +16,14 @@ title: コマンドライン補完
 @z
 
 @x
-Docker Machine comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
+Docker Machine comes with [command completion](https://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 @y
 {% comment %}
-Docker Machine comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
+Docker Machine comes with [command completion](https://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 {% endcomment %}
-Docker Machine には bash と zsh 向けの [コマンド補完](http://en.wikipedia.org/wiki/Command-line_completion) が用意されています。
+Docker Machine には bash と zsh 向けの [コマンド補完](https://en.wikipedia.org/wiki/Command-line_completion) が用意されています。
 @z
 
 @x

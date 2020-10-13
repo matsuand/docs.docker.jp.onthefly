@@ -23,17 +23,17 @@ title: journald ログドライバー
 
 @x
 The `journald` logging driver sends container logs to the
-[`systemd` journal](http://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
+[`systemd` journal](https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
 Log entries can be retrieved using the `journalctl` command, through use of the
 `journal` API, or using the `docker logs` command.
 @y
 {% comment %}
 The `journald` logging driver sends container logs to the
-[`systemd` journal](http://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
+[`systemd` journal](https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
 Log entries can be retrieved using the `journalctl` command, through use of the
 `journal` API, or using the `docker logs` command.
 {% endcomment %}
-ログドライバー `journald` は、コンテナーのログを [`systemd` ジャーナル](http://www.freedesktop.org/software/systemd/man/systemd-journald.service.html) へ送信します。
+ログドライバー `journald` は、コンテナーのログを [`systemd` ジャーナル](https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html) へ送信します。
 ログ出力された各項目は、`journal` API の利用を通じて `journalctl` コマンドを使って確認することができます。
 または `docker logs` コマンドを使って確認することもできます。
 @z

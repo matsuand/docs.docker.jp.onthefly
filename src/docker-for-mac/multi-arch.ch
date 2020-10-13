@@ -79,18 +79,18 @@ such as `arm`, `mips`, `ppc64le`, and even `s390x`.
 
 @x
 This does not require any special configuration in the container itself as it uses
-<a href="http://wiki.qemu.org/" target="_blank" rel="noopener">qemu-static</a> from the **Docker for
+<a href="https://wiki.qemu.org/Main_Page" target="_blank" rel="noopener">qemu-static</a> from the **Docker for
 Mac VM**. Because of this, you can run an ARM container, like the `arm32v7` or `ppc64le`
 variants of the busybox image.
 @y
 {% comment %}
 This does not require any special configuration in the container itself as it uses
-<a href="http://wiki.qemu.org/" target="_blank" rel="noopener">qemu-static</a> from the **Docker for
+<a href="https://wiki.qemu.org/Main_Page" target="_blank" rel="noopener">qemu-static</a> from the **Docker for
 Mac VM**. Because of this, you can run an ARM container, like the `arm32v7` or `ppc64le`
 variants of the busybox image.
 {% endcomment %}
 これを実現するのに、コンテナーそのものへの特別な設定は不要です。
-**Docker for Mac VM** が提供する <a href="http://wiki.qemu.org/" target="_blank" rel="noopener">qemu-static</a> を利用しているためです。
+**Docker for Mac VM** が提供する <a href="https://wiki.qemu.org/Main_Page" target="_blank" rel="noopener">qemu-static</a> を利用しているためです。
 これがあるから、ARM コンテナー `arm32v7` や `ppc64le` などのバリアントが busybox イメージにおいて実行できます。
 @z
 

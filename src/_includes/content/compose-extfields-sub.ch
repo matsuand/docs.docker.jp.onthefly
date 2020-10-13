@@ -61,18 +61,18 @@ x-custom:
 
 @x
 The contents of those fields are ignored by Compose, but they can be
-inserted in your resource definitions using [YAML anchors](http://www.yaml.org/spec/1.2/spec.html#id2765878).
+inserted in your resource definitions using [YAML anchors](https://yaml.org/spec/1.2/spec.html#id2765878).
 For example, if you want several of your services to use the same logging
 configuration:
 @y
 {% comment %}
 The contents of those fields are ignored by Compose, but they can be
-inserted in your resource definitions using [YAML anchors](http://www.yaml.org/spec/1.2/spec.html#id2765878).
+inserted in your resource definitions using [YAML anchors](https://yaml.org/spec/1.2/spec.html#id2765878).
 For example, if you want several of your services to use the same logging
 configuration:
 {% endcomment %}
 この項目に記述された内容は Compose からは無視されます。
-そして [YAML アンカー](http://www.yaml.org/spec/1.2/spec.html#id2765878) を利用して、この項目をリソース定義内に挿入します。
+そして [YAML アンカー](https://yaml.org/spec/1.2/spec.html#id2765878) を利用して、この項目をリソース定義内に挿入します。
 たとえば複数のサービスに対して、同様のロギング設定を行いたいとします。
 @z
 
@@ -145,13 +145,13 @@ services:
 
 @x
 It is also possible to partially override values in extension fields using
-the [YAML merge type](http://yaml.org/type/merge.html). For example:
+the [YAML merge type](https://yaml.org/type/merge.html). For example:
 @y
 {% comment %}
 It is also possible to partially override values in extension fields using
-the [YAML merge type](http://yaml.org/type/merge.html). For example:
+the [YAML merge type](https://yaml.org/type/merge.html). For example:
 {% endcomment %}
-また [YAML マージタイプ](http://yaml.org/type/merge.html) を利用すれば、拡張項目内にて部分的に値を上書きすることもできます。
+また [YAML マージタイプ](https://yaml.org/type/merge.html) を利用すれば、拡張項目内にて部分的に値を上書きすることもできます。
 たとえば以下のとおりです。
 @z
 

@@ -25,15 +25,15 @@ title: Fluentd logging driver
 
 @x
 The `fluentd` logging driver sends container logs to the
-[Fluentd](http://www.fluentd.org/) collector as structured log data. Then, users
+[Fluentd](https://www.fluentd.org) collector as structured log data. Then, users
 can use any of the [various output plugins of
-Fluentd](http://www.fluentd.org/plugins) to write these logs to various
+Fluentd](https://www.fluentd.org/plugins) to write these logs to various
 destinations.
 @y
 The `fluentd` logging driver sends container logs to the
-[Fluentd](http://www.fluentd.org/) collector as structured log data. Then, users
+[Fluentd](https://www.fluentd.org) collector as structured log data. Then, users
 can use any of the [various output plugins of
-Fluentd](http://www.fluentd.org/plugins) to write these logs to various
+Fluentd](https://www.fluentd.org/plugins) to write these logs to various
 destinations.
 @z
 
@@ -348,11 +348,11 @@ Generates event logs in nanosecond resolution. Defaults to `false`.
 @z
 
 @x
-About `Fluentd` itself, see [the project webpage](http://www.fluentd.org)
-and [its documents](http://docs.fluentd.org/).
+About `Fluentd` itself, see [the project webpage](https://www.fluentd.org)
+and [its documents](https://docs.fluentd.org).
 @y
-About `Fluentd` itself, see [the project webpage](http://www.fluentd.org)
-and [its documents](http://docs.fluentd.org/).
+About `Fluentd` itself, see [the project webpage](https://www.fluentd.org)
+and [its documents](https://docs.fluentd.org).
 @z
 
 @x

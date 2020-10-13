@@ -16,14 +16,14 @@ title: コマンドライン補完
 @z
 
 @x
-Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
+Compose comes with [command completion](https://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 @y
 {% comment %}
-Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
+Compose comes with [command completion](https://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 {% endcomment %}
-Compose には bash 用あるいは zsh 用の[コマンド補完](http://en.wikipedia.org/wiki/Command-line_completion)（command completion）が用意されています。
+Compose には bash 用あるいは zsh 用の [コマンド補完](https://en.wikipedia.org/wiki/Command-line_completion)（command completion）が用意されています。
 @z
 
 @x

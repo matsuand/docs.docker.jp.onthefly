@@ -199,10 +199,10 @@ private containers, for internal server deployments for example.
 
 @x
 There's a great StackOverflow answer [showing the differences](
-http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
+https://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
 @y
 There's a great StackOverflow answer [showing the differences](
-http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
+https://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
@@ -295,10 +295,10 @@ You can learn about the project's security policy
 
 @x
 Read [our blog post](
-http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
+https://www.docker.com/blog/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
 @y
 Read [our blog post](
-http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
+https://www.docker.com/blog/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
 @z
 
 @x
@@ -348,17 +348,17 @@ The key point about system libraries is not about saving disk or memory space.
 It is about security. All major distributions handle security seriously, by
 having dedicated security teams, following up closely with published
 vulnerabilities, and disclosing advisories themselves. (Look at the [Debian
-Security Information](https://www.debian.org/security/){: target="_blank"
-class="_"} for an example of those procedures.) Upstream developers, however, do
-not always implement similar practices.
+Security Information](https://www.debian.org/security/){: target="_blank" rel="noopener" class="_"}
+for an example of those procedures.) Upstream developers, however, do not always
+implement similar practices.
 @y
 The key point about system libraries is not about saving disk or memory space.
 It is about security. All major distributions handle security seriously, by
 having dedicated security teams, following up closely with published
 vulnerabilities, and disclosing advisories themselves. (Look at the [Debian
-Security Information](https://www.debian.org/security/){: target="_blank"
-class="_"} for an example of those procedures.) Upstream developers, however, do
-not always implement similar practices.
+Security Information](https://www.debian.org/security/){: target="_blank" rel="noopener" class="_"}
+for an example of those procedures.) Upstream developers, however, do not always
+implement similar practices.
 @z
 
 @x
@@ -380,15 +380,13 @@ Likewise, before using packages built by others, you should check if the
 channels providing those packages implement similar security best practices.
 Downloading and installing an "all-in-one" .deb or .rpm sounds great at first,
 except if you have no way to figure out that it contains a copy of the OpenSSL
-library vulnerable to the [Heartbleed](http://heartbleed.com/){: target="_blank"
-class="_"} bug.
+library vulnerable to the [Heartbleed](https://heartbleed.com){: target="_blank" rel="noopener" class="_"} bug.
 @y
 Likewise, before using packages built by others, you should check if the
 channels providing those packages implement similar security best practices.
 Downloading and installing an "all-in-one" .deb or .rpm sounds great at first,
 except if you have no way to figure out that it contains a copy of the OpenSSL
-library vulnerable to the [Heartbleed](http://heartbleed.com/){: target="_blank"
-class="_"} bug.
+library vulnerable to the [Heartbleed](https://heartbleed.com){: target="_blank" rel="noopener" class="_"} bug.
 @z
 
 @x
@@ -564,15 +562,15 @@ You can find more answers on:
 @z
 
 @x
-- [Docker community Slack channel](http://dockr.ly/slack)
-- [Docker Support Forums](https://forums.docker.com)
+- [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
+- [Docker Support Forums](https://forums.docker.com){: target="_blank" rel="noopener" class="_"}
 - [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
-- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
-- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" rel="noopener" class="_"}
+- [Ask questions on Stackoverflow](https://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
+- [Join the conversation on Twitter](https://twitter.com/docker){: target="_blank" rel="noopener" class="_"}
 @y
-- [Docker community Slack channel](http://dockr.ly/slack)
-- [Docker Support Forums](https://forums.docker.com)
+- [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
+- [Docker Support Forums](https://forums.docker.com){: target="_blank" rel="noopener" class="_"}
 - [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
-- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
-- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" rel="noopener" class="_"}
+- [Ask questions on Stackoverflow](https://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
+- [Join the conversation on Twitter](https://twitter.com/docker){: target="_blank" rel="noopener" class="_"}
 @z

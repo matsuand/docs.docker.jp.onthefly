@@ -352,7 +352,7 @@ Docker には、`Dockerfile` を `stdin` からパイプ入力してイメージ
 @z
 
 @x
-> The examples in this section use [here documents](http://tldp.org/LDP/abs/html/here-docs.html)
+> The examples in this section use [here documents](https://tldp.org/LDP/abs/html/here-docs.html)
 > for convenience, but any method to provide the `Dockerfile` on `stdin` can be
 > used.
 >
@@ -373,7 +373,7 @@ Docker には、`Dockerfile` を `stdin` からパイプ入力してイメージ
 > that best fits your use-case.
 @y
 {% comment %}
-> The examples in this section use [here documents](http://tldp.org/LDP/abs/html/here-docs.html)
+> The examples in this section use [here documents](https://tldp.org/LDP/abs/html/here-docs.html)
 > for convenience, but any method to provide the `Dockerfile` on `stdin` can be
 > used.
 >
@@ -393,7 +393,7 @@ Docker には、`Dockerfile` を `stdin` からパイプ入力してイメージ
 > You can substitute the examples with your preferred approach, or the approach
 > that best fits your use-case.
 {% endcomment %}
-> この節における利用例では、扱いやすい [ヒアドキュメント](http://tldp.org/LDP/abs/html/here-docs.html) を使っていますが、`stdin` から `Dockerfile` を与える方法には、他にもいろいろとあります。
+> この節における利用例では、扱いやすい [ヒアドキュメント](https://tldp.org/LDP/abs/html/here-docs.html) を使っていますが、`stdin` から `Dockerfile` を与える方法には、他にもいろいろとあります。
 >
 > たとえば以下の 2 つのコマンドは同じ処理を行います。
 > 
@@ -615,16 +615,16 @@ docker build [OPTIONS] -f- PATH
 @x
 The example below uses the current directory (`.`) as the build context, and builds
 an image using a `Dockerfile` that is passed through `stdin` using a [here
-document](http://tldp.org/LDP/abs/html/here-docs.html).
+document](https://tldp.org/LDP/abs/html/here-docs.html).
 @y
 {% comment %}
 The example below uses the current directory (`.`) as the build context, and builds
 an image using a `Dockerfile` that is passed through `stdin` using a [here
-document](http://tldp.org/LDP/abs/html/here-docs.html).
+document](https://tldp.org/LDP/abs/html/here-docs.html).
 {% endcomment %}
 以下の例ではビルドコンテキストとしてカレントディレクトリ（`.`）を利用します。
-そして `stdin` から受け渡される `Dockerfile` を使ってイメージをビルドします。
-この際には [ヒアドキュメント](http://tldp.org/LDP/abs/html/here-docs.html) を使っています。
+そして`stdin`から受け渡される`Dockerfile`を使ってイメージをビルドします。
+この際には [ヒアドキュメント](https://tldp.org/LDP/abs/html/here-docs.html) を使っています。
 @z
 
 @x
@@ -1037,7 +1037,7 @@ Limiting each container to one process is a good rule of thumb, but it is not a
 hard and fast rule. For example, not only can containers be
 [spawned with an init process](../../engine/reference/run.md#specify-an-init-process),
 some programs might spawn additional processes of their own accord. For
-instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
+instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 @y
@@ -1046,14 +1046,14 @@ Limiting each container to one process is a good rule of thumb, but it is not a
 hard and fast rule. For example, not only can containers be
 [spawned with an init process](../../engine/reference/run.md#specify-an-init-process),
 some programs might spawn additional processes of their own accord. For
-instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
+instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 {% endcomment %}
 個々のコンテナーを 1 つのプロセスのみに限定して割り当てることは、優れた経験則となることがあります。
 しかし決して厳密な規則というわけでもありません。
 たとえばコンテナーは [初期プロセスにおいて起動](../../engine/reference/run.md#specify-an-init-process) することが可能であり、プログラムの中には必要に応じて追加のプロセスを起動するようなものもあります。
-例をあげると、[Celery](http://www.celeryproject.org/) はワーカープロセスを複数起動し、[Apache](https://httpd.apache.org/) はリクエストごとにプロセスを生成します。
+例をあげると、[Celery](https://www.celeryproject.org/) はワーカープロセスを複数起動し、[Apache](https://httpd.apache.org/) はリクエストごとにプロセスを生成します。
 @z
 
 @x
@@ -2132,14 +2132,14 @@ version bumps are easier to maintain, as seen in the following example:
 ```dockerfile
 ENV PG_MAJOR=9.3
 ENV PG_VERSION=9.3.4
-RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
 ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 @y
 ```dockerfile
 ENV PG_MAJOR=9.3
 ENV PG_VERSION=9.3.4
-RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
 ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 @z
@@ -2386,13 +2386,13 @@ things like:
 
 @x
 ```dockerfile
-ADD http://example.com/big.tar.xz /usr/src/things/
+ADD https://example.com/big.tar.xz /usr/src/things/
 RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
 ```
 @y
 ```dockerfile
-ADD http://example.com/big.tar.xz /usr/src/things/
+ADD https://example.com/big.tar.xz /usr/src/things/
 RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
 ```
@@ -2410,14 +2410,14 @@ And instead, do something like:
 @x
 ```dockerfile
 RUN mkdir -p /usr/src/things \
-    && curl -SL http://example.com/big.tar.xz \
+    && curl -SL https://example.com/big.tar.xz \
     | tar -xJC /usr/src/things \
     && make -C /usr/src/things all
 ```
 @y
 ```dockerfile
 RUN mkdir -p /usr/src/things \
-    && curl -SL http://example.com/big.tar.xz \
+    && curl -SL https://example.com/big.tar.xz \
     | tar -xJC /usr/src/things \
     && make -C /usr/src/things all
 ```
@@ -2606,7 +2606,7 @@ exec "$@"
 @x
 > Configure app as PID 1
 >
-> This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
+> This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec)
 > so that the final running application becomes the container's PID 1. This
 > allows the application to receive any Unix signals sent to the container.
 > For more, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
@@ -2614,17 +2614,17 @@ exec "$@"
 {% comment %}
 > Configure app as PID 1
 >
-> This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
+> This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec)
 > so that the final running application becomes the container's PID 1. This
 > allows the application to receive any Unix signals sent to the container.
 > For more, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
 {% endcomment %}
 > アプリを PID 1 として実行
 >
-> このスクリプトでは [Bash の `exec` コマンド](http://wiki.bash-hackers.org/commands/builtin/exec) を利用しています。
+> このスクリプトでは [Bash の`exec`コマンド](https://wiki.bash-hackers.org/commands/builtin/exec) を利用しています。
 > このため最後に実行されるアプリケーションが、コンテナーの PID 1 になります。
 > したがってコンテナーに送信される Unix シグナルは、そのアプリケーションが受け取ることになります。
-> 詳しくは [`ENTRYPOINT` リファレンス](../../engine/reference/builder.md#entrypoint) を参照してください。
+> 詳しくは [`ENTRYPOINT`リファレンス](../../engine/reference/builder.md#entrypoint) を参照してください。
 @z
 
 @x

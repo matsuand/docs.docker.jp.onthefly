@@ -37,19 +37,19 @@ optimize Dockerfiles while keeping them easy to read and maintain.
 > **Acknowledgment**:
 > Special thanks to [Alex Ellis](https://twitter.com/alexellisuk) for granting
 > permission to use his blog post
-> [Builder pattern vs. Multi-stage builds in Docker](http://blog.alexellis.io/mutli-stage-docker-builds/)
+> [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/)
 > as the basis of the examples below.
 @y
 {% comment %}
 > **Acknowledgment**:
 > Special thanks to [Alex Ellis](https://twitter.com/alexellisuk) for granting
 > permission to use his blog post
-> [Builder pattern vs. Multi-stage builds in Docker](http://blog.alexellis.io/mutli-stage-docker-builds/)
+> [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/)
 > as the basis of the examples below.
 {% endcomment %}
 > **感謝**:
 > [Alex Ellis](https://twitter.com/alexellisuk) 氏に感謝します。
-> 氏のブログ投稿 [Builder pattern vs. Multi-stage builds in Docker](http://blog.alexellis.io/mutli-stage-docker-builds/) に基づいて、以下の利用例を掲載する許可を頂きました。
+> 氏のブログ投稿 [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/) に基づいて、以下の利用例を掲載する許可を頂きました。
 @z
 
 @x

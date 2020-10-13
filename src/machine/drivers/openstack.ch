@@ -18,9 +18,9 @@ hide_from_sitemap: true
 @z
 
 @x
-Create machines on [OpenStack](http://www.openstack.org/software/)
+Create machines on [OpenStack](https://www.openstack.org/software/)
 @y
-Create machines on [OpenStack](http://www.openstack.org/software/)
+Create machines on [OpenStack](https://www.openstack.org/software/)
 @z
 
 @x

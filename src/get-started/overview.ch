@@ -779,17 +779,17 @@ Docker Engine がスウォームモードをサポートするのは Docker バ�
 
 @x
 ## The underlying technology
-Docker is written in [Go](https://golang.org/) and takes advantage of several
-features of the Linux kernel to deliver its functionality.
+Docker is written in the [Go programming language](https://golang.org/) and takes
+advantage of several features of the Linux kernel to deliver its functionality.
 @y
 {% comment %}
 ## The underlying technology
-Docker is written in [Go](https://golang.org/) and takes advantage of several
-features of the Linux kernel to deliver its functionality.
+Docker is written in the [Go programming language](https://golang.org/) and takes
+advantage of several features of the Linux kernel to deliver its functionality.
 {% endcomment %}
-## 基盤とする技術
 {: #the-underlying-technology }
-Docker は [Go 言語](https://golang.org/) で書かれており、Linux カーネルの機能をうまく活用して、さまざまな機能性を実現しています。
+## 基盤とする技術
+Docker は [Go プログラミング言語](https://golang.org/) で書かれており、Linux カーネルの機能をうまく活用して、さまざまな機能性を実現しています。
 @z
 
 @x
@@ -804,8 +804,8 @@ Docker uses a technology called `namespaces` to provide the isolated workspace
 called the *container*. When you run a container, Docker creates a set of
 *namespaces* for that container.
 {% endcomment %}
-### 名前空間
 {: #namespaces }
+### 名前空間
 Docker は名前空間という技術を利用して **コンテナー** と呼ぶ作業空間を分離して提供します。
 コンテナーが実行されたとき、Docker はそのコンテナーに対して複数の *名前空間* を生成します。
 @z

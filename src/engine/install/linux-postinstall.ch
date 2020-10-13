@@ -1463,7 +1463,7 @@ TLS 暗号化転送が有効な場合は、デフォルトの`2376`、そうで�
 @x
 Two common firewall daemons are
 [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) (often
-used for Ubuntu systems) and [firewalld](http://www.firewalld.org/) (often used
+used for Ubuntu systems) and [firewalld](https://firewalld.org) (often used
 for RPM-based systems). Consult the documentation for your OS and firewall, but
 the following information might help you get started. These options are fairly
 permissive and you may want to use a different configuration that locks your
@@ -1472,13 +1472,13 @@ system down more.
 {% comment %}
 Two common firewall daemons are
 [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) (often
-used for Ubuntu systems) and [firewalld](http://www.firewalld.org/) (often used
+used for Ubuntu systems) and [firewalld](https://firewalld.org) (often used
 for RPM-based systems). Consult the documentation for your OS and firewall, but
 the following information might help you get started. These options are fairly
 permissive and you may want to use a different configuration that locks your
 system down more.
 {% endcomment %}
-代表的なファイアーウォールデーモンといえば、[UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW)（Ubuntu において利用されることが多い）と [firewalld](http://www.firewalld.org/)（RPMベースのシステムで利用されることが多い）の 2 つがあります。
+代表的なファイアーウォールデーモンといえば、[UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW)（Ubuntu において利用されることが多い）と [firewalld](https://firewalld.org)（RPMベースのシステムで利用されることが多い）の 2 つがあります。
 OS やファイアーウォールに関するドキュメントをよく確認することになりますが、以下の情報も手始めとして参考になるかもしれません。
 ただしこの方法ではやや寛容すぎるというので、システムの設定を違った方法で強固にしたいと思うかもしれません。
 @z

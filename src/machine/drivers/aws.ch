@@ -18,15 +18,15 @@ hide_from_sitemap: true
 @z
 
 @x
-Create machines on [Amazon Web Services](http://aws.amazon.com).
+Create machines on [Amazon Web Services](https://aws.amazon.com).
 @y
-Create machines on [Amazon Web Services](http://aws.amazon.com).
+Create machines on [Amazon Web Services](https://aws.amazon.com).
 @z
 
 @x
-To create machines on [Amazon Web Services](http://aws.amazon.com), you must supply two parameters: the AWS Access Key ID and the AWS Secret Access Key.
+To create machines on [Amazon Web Services](https://aws.amazon.com), you must supply two parameters: the AWS Access Key ID and the AWS Secret Access Key.
 @y
-To create machines on [Amazon Web Services](http://aws.amazon.com), you must supply two parameters: the AWS Access Key ID and the AWS Secret Access Key.
+To create machines on [Amazon Web Services](https://aws.amazon.com), you must supply two parameters: the AWS Access Key ID and the AWS Secret Access Key.
 @z
 
 @x
@@ -64,9 +64,9 @@ One way to configure credentials is to use the standard credential file for Amaz
 @z
 
 @x
-On Mac OS or various flavors of Linux you can install the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration) (`aws cli`) in the terminal and use the `aws configure` command which guides you through the creation of the credentials file.
+On Mac OS or various flavors of Linux you can install the [AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration) (`aws cli`) in the terminal and use the `aws configure` command which guides you through the creation of the credentials file.
 @y
-On Mac OS or various flavors of Linux you can install the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration) (`aws cli`) in the terminal and use the `aws configure` command which guides you through the creation of the credentials file.
+On Mac OS or various flavors of Linux you can install the [AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration) (`aws cli`) in the terminal and use the `aws configure` command which guides you through the creation of the credentials file.
 @z
 
 @x

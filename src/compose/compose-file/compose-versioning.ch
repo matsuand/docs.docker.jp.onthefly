@@ -16,14 +16,14 @@ title: Compose ファイルのバージョンとアップグレード
 @z
 
 @x
-The Compose file is a [YAML](http://yaml.org/) file defining services,
+The Compose file is a [YAML](https://yaml.org) file defining services,
 networks, and volumes for a Docker application.
 @y
 {% comment %}
-The Compose file is a [YAML](http://yaml.org/) file defining services,
+The Compose file is a [YAML](https://yaml.org) file defining services,
 networks, and volumes for a Docker application.
 {% endcomment %}
-Compose ファイルは [YAML](http://yaml.org/) 形式のファイルであり、Docker アプリケーションに対してサービス、ネットワーク、ボリュームを定義します。
+Compose ファイルは [YAML](https://yaml.org) 形式のファイルであり、Docker アプリケーションに対してサービス、ネットワーク、ボリュームを定義します。
 @z
 
 @x

@@ -38,10 +38,10 @@ You need an Azure Subscription to use this Docker Machine driver.
 @z
 
 @x
-[azure]: http://azure.microsoft.com/
+[azure]: https://azure.microsoft.com/
 [trial]: https://azure.microsoft.com/free/
 @y
-[azure]: http://azure.microsoft.com/
+[azure]: https://azure.microsoft.com/
 [trial]: https://azure.microsoft.com/free/
 @z
 

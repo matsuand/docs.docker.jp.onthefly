@@ -18,9 +18,9 @@ hide_from_sitemap: true
 @z
 
 @x
-Creates machines locally on [VMware Fusion](http://www.vmware.com/products/fusion). Requires VMware Fusion to be installed.
+Creates machines locally on [VMware Fusion](https://www.vmware.com/products/fusion.html). Requires VMware Fusion to be installed.
 @y
-Creates machines locally on [VMware Fusion](http://www.vmware.com/products/fusion). Requires VMware Fusion to be installed.
+Creates machines locally on [VMware Fusion](https://www.vmware.com/products/fusion.html). Requires VMware Fusion to be installed.
 @z
 
 @x

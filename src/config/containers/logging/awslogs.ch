@@ -26,13 +26,13 @@ The `awslogs` logging driver sends container logs to
 [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
 Log entries can be retrieved through the [AWS Management
 Console](https://console.aws.amazon.com/cloudwatch/home#logs:) or the [AWS SDKs
-and Command Line Tools](http://docs.aws.amazon.com/cli/latest/reference/logs/index.html).
+and Command Line Tools](https://docs.aws.amazon.com/cli/latest/reference/logs/index.html).
 @y
 The `awslogs` logging driver sends container logs to
 [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
 Log entries can be retrieved through the [AWS Management
 Console](https://console.aws.amazon.com/cloudwatch/home#logs:) or the [AWS SDKs
-and Command Line Tools](http://docs.aws.amazon.com/cli/latest/reference/logs/index.html).
+and Command Line Tools](https://docs.aws.amazon.com/cli/latest/reference/logs/index.html).
 @z
 
 @x
@@ -213,12 +213,12 @@ with the provided endpoint.
 
 @x
 You must specify a
-[log group](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
+[log group](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 for the `awslogs` logging driver. You can specify the log group with the
 `awslogs-group` log option:
 @y
 You must specify a
-[log group](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
+[log group](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 for the `awslogs` logging driver. You can specify the log group with the
 `awslogs-group` log option:
 @z
@@ -241,12 +241,12 @@ $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt a
 
 @x
 To configure which
-[log stream](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
+[log stream](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 should be used, you can specify the `awslogs-stream` log option. If not
 specified, the container ID is used as the log stream.
 @y
 To configure which
-[log stream](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
+[log stream](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 should be used, you can specify the `awslogs-stream` log option. If not
 specified, the container ID is used as the log stream.
 @z
@@ -321,12 +321,12 @@ $ docker run \
 
 @x
 The `awslogs-datetime-format` option defines a multiline start pattern in [Python
-`strftime` format](http://strftime.org). A log message consists of a line that
+`strftime` format](https://strftime.org). A log message consists of a line that
 matches the pattern and any following lines that don't match the pattern. Thus
 the matched line is the delimiter between log messages.
 @y
 The `awslogs-datetime-format` option defines a multiline start pattern in [Python
-`strftime` format](http://strftime.org). A log message consists of a line that
+`strftime` format](https://strftime.org). A log message consists of a line that
 matches the pattern and any following lines that don't match the pattern. Thus
 the matched line is the delimiter between log messages.
 @z

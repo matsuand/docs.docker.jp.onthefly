@@ -18,9 +18,9 @@ hide_from_sitemap: true
 @z
 
 @x
-Create machines on [Rackspace cloud](http://www.rackspace.com/cloud)
+Create machines on [Rackspace cloud](https://www.rackspace.com/cloud)
 @y
-Create machines on [Rackspace cloud](http://www.rackspace.com/cloud)
+Create machines on [Rackspace cloud](https://www.rackspace.com/cloud)
 @z
 
 @x

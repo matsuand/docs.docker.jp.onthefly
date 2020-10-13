@@ -18,11 +18,11 @@ hide_from_sitemap: true
 @z
 
 @x
-Creates machines on [vCloud Air](http://vcloud.vmware.com) subscription service.
+Creates machines on [vCloud Air](https://cloudsolutions.vmware.com) subscription service.
 You need an account within an existing subscription of vCloud Air VPC or
 Dedicated Cloud.
 @y
-Creates machines on [vCloud Air](http://vcloud.vmware.com) subscription service.
+Creates machines on [vCloud Air](https://cloudsolutions.vmware.com) subscription service.
 You need an account within an existing subscription of vCloud Air VPC or
 Dedicated Cloud.
 @z

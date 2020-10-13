@@ -366,21 +366,21 @@ Compose file.
 @z
 
 @x
-The Compose file is a [YAML](http://yaml.org/) file defining
+The Compose file is a [YAML](https://yaml.org) file defining
 [services](#service-configuration-reference),
 [networks](#network-configuration-reference) and
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 @y
 {% comment %}
-The Compose file is a [YAML](http://yaml.org/) file defining
+The Compose file is a [YAML](https://yaml.org) file defining
 [services](#service-configuration-reference),
 [networks](#network-configuration-reference) and
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 {% endcomment %}
-Compose ファイルは [YAML](http://yaml.org/) 形式のファイルであり、[サービス（services）](#service-configuration-reference)、[ネットワーク（networks）](#network-configuration-reference)、[ボリューム（volumes）](#volume-configuration-reference)を定義します。
-Compose ファイルのデフォルトパスは `./docker-compose.yml` です。
+Compose ファイルは [YAML](https://yaml.org) 形式のファイルであり、[サービス（services）](#service-configuration-reference)、[ネットワーク（networks）](#network-configuration-reference)、[ボリューム（volumes）](#volume-configuration-reference)を定義します。
+Compose ファイルのデフォルトパスは`./docker-compose.yml`です。
 @z
 
 @x

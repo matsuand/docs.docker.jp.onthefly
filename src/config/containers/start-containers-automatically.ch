@@ -244,18 +244,18 @@ Keep the following in mind when using restart policies:
 If restart policies don't suit your needs, such as when processes outside
 Docker depend on Docker containers, you can use a process manager such as
 [upstart](http://upstart.ubuntu.com/),
-[systemd](http://freedesktop.org/wiki/Software/systemd/), or
+[systemd](https://freedesktop.org/wiki/Software/systemd/), or
 [supervisor](http://supervisord.org/) instead.
 @y
 {% comment %}
 If restart policies don't suit your needs, such as when processes outside
 Docker depend on Docker containers, you can use a process manager such as
 [upstart](http://upstart.ubuntu.com/),
-[systemd](http://freedesktop.org/wiki/Software/systemd/), or
+[systemd](https://freedesktop.org/wiki/Software/systemd/), or
 [supervisor](http://supervisord.org/) instead.
 {% endcomment %}
 Docker 外部にあるプロセスが Docker コンテナーに依存するような場合、再起動ポリシーの利用は適当ではありません。
-この場合は [upstart](http://upstart.ubuntu.com/)、[systemd](http://freedesktop.org/wiki/Software/systemd/)、[supervisor](http://supervisord.org/) といったプロセスマネージャーを利用します。
+この場合は [upstart](http://upstart.ubuntu.com/)、[systemd](https://freedesktop.org/wiki/Software/systemd/)、[supervisor](http://supervisord.org/) といったプロセスマネージャーを利用します。
 @z
 
 @x

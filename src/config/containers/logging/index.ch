@@ -47,7 +47,7 @@ may include input from the keyboard or input from another command. `STDOUT` is
 usually a command's normal output, and `STDERR` is typically used to output
 error messages. By default, `docker logs` shows the command's `STDOUT` and
 `STDERR`. To read more about I/O and Linux, see the
-[Linux Documentation Project article on I/O redirection](http://www.tldp.org/LDP/abs/html/io-redirection.html).
+[Linux Documentation Project article on I/O redirection](https://tldp.org/LDP/abs/html/io-redirection.html).
 @y
 {% comment %}
 By default, `docker logs` or `docker service logs` shows the command's output
@@ -58,7 +58,7 @@ may include input from the keyboard or input from another command. `STDOUT` is
 usually a command's normal output, and `STDERR` is typically used to output
 error messages. By default, `docker logs` shows the command's `STDOUT` and
 `STDERR`. To read more about I/O and Linux, see the
-[Linux Documentation Project article on I/O redirection](http://www.tldp.org/LDP/abs/html/io-redirection.html).
+[Linux Documentation Project article on I/O redirection](https://tldp.org/LDP/abs/html/io-redirection.html).
 {% endcomment %}
 デフォルトにおいて `docker logs` や `docker service logs` は、端末画面にて対話的にコマンドを入力した際、そのコマンドが出力するものと同じような情報を得ることができます。
 UNIX や Linux コマンドは普通、3 つの I/O ストリームを実行時に開きます。
@@ -68,7 +68,7 @@ UNIX や Linux コマンドは普通、3 つの I/O ストリームを実行時�
 `STDOUT` はコマンドの標準出力です。
 そして `STDERR` は通常、エラーメッセージを出力するために用いられます。
 デフォルトで `docker logs` は、コマンドの `STDOUT` と `STDERR` を表示します。
-I/O と Linux に関しての詳細は [Linux Documentation Project における I/O リダイレクション](http://www.tldp.org/LDP/abs/html/io-redirection.html) を参照してください。
+I/O と Linux に関しての詳細は [Linux Documentation Project における I/O リダイレクション](https://tldp.org/LDP/abs/html/io-redirection.html) を参照してください。
 @z
 
 @x

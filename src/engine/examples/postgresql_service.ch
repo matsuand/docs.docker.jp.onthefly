@@ -27,13 +27,13 @@ title: PostgreSQL を Docker 化する
 
 @x
 Assuming there is no Docker image that suits your needs on the [Docker
-Hub](http://hub.docker.com), you can create one yourself.
+Hub](https://hub.docker.com), you can create one yourself.
 @y
 {% comment %}
 Assuming there is no Docker image that suits your needs on the [Docker
-Hub](http://hub.docker.com), you can create one yourself.
+Hub](https://hub.docker.com), you can create one yourself.
 {% endcomment %}
-条件に合う Docker イメージが [Docker Hub](http://hub.docker.com) にはなかったと仮定して、自分で作ることにします。
+条件に合う Docker イメージが [Docker Hub](https://hub.docker.com) にはなかったと仮定して、自分で作ることにします。
 @z
 
 @x

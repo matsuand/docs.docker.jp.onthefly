@@ -619,7 +619,7 @@ using `pip`, we recommend that you use a
 [virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating
 systems have python system packages that conflict with docker-compose
 dependencies. See the [virtualenv
-tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/) to get
+tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 @y
 {% comment %}
@@ -629,13 +629,13 @@ using `pip`, we recommend that you use a
 [virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating
 systems have python system packages that conflict with docker-compose
 dependencies. See the [virtualenv
-tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/) to get
+tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 {% endcomment %}
 Compose は `pip` を使って [pypi](https://pypi.python.org/pypi/docker-compose) からインストールすることができます。
 `pip` を使ったインストールでは [virtualenv](https://virtualenv.pypa.io/en/latest/) を用いることをお勧めします。
 これは多くのオペレーティングシステムにおいて、python パッケージが docker-compose の依存パッケージと不整合を起こすことがあるからです。
-[virtualenv チュートリアル](http://docs.python-guide.org/en/latest/dev/virtualenvs/) から始めてみてください。
+[virtualenv チュートリアル](https://docs.python-guide.org/dev/virtualenvs/) から始めてみてください。
 @z
 
 @x

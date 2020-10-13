@@ -85,12 +85,12 @@ Compose ファイルフォーマットには 1、2、2.x、3.x という複数�
 @z
 
 @x
-The Version 1 Compose file is a [YAML](http://yaml.org/) file that defines [services](#service-configuration-reference).
+The Version 1 Compose file is a [YAML](https://yaml.org) file that defines [services](#service-configuration-reference).
 @y
 {% comment %}
-The Version 1 Compose file is a [YAML](http://yaml.org/) file that defines [services](#service-configuration-reference).
+The Version 1 Compose file is a [YAML](https://yaml.org) file that defines [services](#service-configuration-reference).
 {% endcomment %}
-Compose ファイルバージョン 1 は [YAML](http://yaml.org/) 形式のファイルであり、[サービス（services）](#service-configuration-reference) を定義します。
+Compose ファイルバージョン 1 は [YAML](https://yaml.org) 形式のファイルであり、[サービス（services）](#service-configuration-reference) を定義します。
 @z
 
 @x

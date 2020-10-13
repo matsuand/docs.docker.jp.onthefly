@@ -565,7 +565,7 @@ Those times are expressed in ticks of 1/100th of a second, also called "user
 jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 `USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
 "ticks" per second, but higher frequency scheduling and
-[tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
+[tickless kernels](https://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
 @y
 {% comment %}
@@ -573,14 +573,14 @@ Those times are expressed in ticks of 1/100th of a second, also called "user
 jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 `USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
 "ticks" per second, but higher frequency scheduling and
-[tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
+[tickless kernels](https://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
 {% endcomment %}
 この時間は 1/100 秒の tick という周期で表わされます。
 別名「user jiffies」ともいいます。
 1 秒には `USER_HZ` 分の「**jiffies**」があり、x86 システムでは `USER_HZ` は 100 です。
 これまでの経緯として、これは 1 秒に割り当てられるスケジューラー「ticks」の数です。
-ただしそれ以上に頻繁にスケジューリングされることや、[tickless kernels]( http://lwn.net/Articles/549580/) があり、これらは ticks 数は関係がなくなります。
+ただしそれ以上に頻繁にスケジューリングされることや、[tickless kernels](https://lwn.net/Articles/549580/) があり、これらは ticks 数は関係がなくなります。
 @z
 
 @x

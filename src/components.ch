@@ -16,22 +16,22 @@ hide_from_sitemap: true
 @z
 
 @x
-For components and controls we are using [Bootstrap](http://getbootstrap.com/)
+For components and controls we are using [Bootstrap](https://getbootstrap.com)
 @y
-For components and controls we are using [Bootstrap](http://getbootstrap.com/)
+For components and controls we are using [Bootstrap](https://getbootstrap.com)
 @z
 
 @x
 <!-- ### Dropdowns
 <div class="dropdown">
-  <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+  <a id="dLabel" data-target="#" href="https://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
     Dropdown trigger
     <span class="caret"></span>
   </a>
 @y
 <!-- ### Dropdowns
 <div class="dropdown">
-  <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+  <a id="dLabel" data-target="#" href="https://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
     Dropdown trigger
     <span class="caret"></span>
   </a>
@@ -135,7 +135,7 @@ For components and controls we are using [Bootstrap](http://getbootstrap.com/)
 
 @x
 ### Accordion
-[Bootstrap docs](http://getbootstrap.com/javascript/#collapse)
+[Bootstrap docs](https://getbootstrap.com/docs/3.4/javascript/)
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
@@ -182,7 +182,7 @@ For components and controls we are using [Bootstrap](http://getbootstrap.com/)
 </div>
 @y
 ### Accordion
-[Bootstrap docs](http://getbootstrap.com/javascript/#collapse)
+[Bootstrap docs](https://getbootstrap.com/docs/3.4/javascript/)
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">

@@ -38,15 +38,15 @@ title: Docker Registry
 @x
 The Registry is a stateless, highly scalable server side application that stores
 and lets you distribute Docker images. The Registry is open-source, under the
-permissive [Apache license](http://en.wikipedia.org/wiki/Apache_License).
+permissive [Apache license](https://en.wikipedia.org/wiki/Apache_License).
 @y
 {% comment %}
 The Registry is a stateless, highly scalable server side application that stores
 and lets you distribute Docker images. The Registry is open-source, under the
-permissive [Apache license](http://en.wikipedia.org/wiki/Apache_License).
+permissive [Apache license](https://en.wikipedia.org/wiki/Apache_License).
 {% endcomment %}
 Registory とは、ステートレスで拡張性の高いサーバーサイドのアプリケーションであり、Docker イメージを保存し提供するものです。
-Registry はオープンソースであり [Apache ライセンス](http://en.wikipedia.org/wiki/Apache_License) のもとに提供されています。
+Registry はオープンソースであり [Apache ライセンス](https://en.wikipedia.org/wiki/Apache_License) のもとに提供されています。
 @z
 
 @x

@@ -21,8 +21,8 @@ keywords: swarm, configuration, configs
 {% comment %}
 ## About configs
 {% endcomment %}
-## configs について
 {: #about-configs }
+## configs について
 @z
 
 @x
@@ -1642,14 +1642,14 @@ generate the site key and certificate, name the files `site.key` and
 
 @x
     <p>For online documentation and support, refer to
-    <a href="http://nginx.org/">nginx.org</a>.<br/>
+    <a href="https://nginx.org">nginx.org</a>.<br/>
     Commercial support is available at
-    <a href="http://nginx.com/">nginx.com</a>.</p>
+    <a href="https://www.nginx.com">www.nginx.com</a>.</p>
 @y
     <p>For online documentation and support, refer to
-    <a href="http://nginx.org/">nginx.org</a>.<br/>
+    <a href="https://nginx.org">nginx.org</a>.<br/>
     Commercial support is available at
-    <a href="http://nginx.com/">nginx.com</a>.</p>
+    <a href="https://www.nginx.com">www.nginx.com</a>.</p>
 @z
 
 @x
