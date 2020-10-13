@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-10 15:45:19 +0900 -->
+<!-- Page generated 2020-10-13 10:29:01 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Google Tag Manager -->
@@ -11,7 +11,7 @@
   <title>Understand the Notary service architecture | Docker ドキュメント</title>
   <meta name="description" content="How the three requisite notary components interact" />
   <meta name="keywords" content="docker, notary, notary-client, docker content trust, content trust, notary-server, notary server, notary-signer, notary signer, notary architecture">
-  <link rel="canonical" href="/notary/service_architecture/" />
+  <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/notary/service_architecture/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Understand the Notary service architecture" />
   <meta property="og:description" content="How the three requisite notary components interact" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-10T15:45:19+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-13T10:29:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/notary/service_architecture/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-10T15:45:19+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-13T10:29:01+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Understand the Notary service architecture","description":"How the three requisite notary components interact","url":"https://docs.docker.com/notary/service_architecture/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -85,7 +85,7 @@
         <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
     </div>
     <div class="ctrl-right">
-        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
     </div>
 </div>
 
@@ -111,7 +111,7 @@
 <h2 id="brief-overview-of-tuf-keys-and-roles">Brief overview of TUF keys and roles</h2>
 
 <p>This document assumes familiarity with
-<a href="https://www.theupdateframework.com/" target="_blank" class="_">The Update Framework</a>,
+<a href="https://www.theupdateframework.com/" target="_blank" rel="noopener" class="_">The Update Framework</a>,
 but here is a brief recap of the TUF roles and corresponding key hierarchy:</p>
 
 <p><img src="https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg" alt="TUF Key Hierarchy" width="400px" /></p>
@@ -119,7 +119,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:</p>
 <ul>
   <li>
     <p>The root key is the root of all trust. It signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank" class="_">root metadata file</a>,
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank" rel="noopener" class="_">root metadata file</a>,
 which lists the IDs of the root, targets, snapshot, and timestamp public keys.
 Clients use these public keys to verify the signatures on all the metadata files
 in the repository. This key is held by a collection owner, and should be kept offline
@@ -127,7 +127,7 @@ and safe, more so than any other key.</p>
   </li>
   <li>
     <p>The snapshot key signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank" class="_">snapshot metadata file</a>,
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank" rel="noopener" class="_">snapshot metadata file</a>,
 which enumerates the filenames, sizes, and hashes of the root,
 targets, and delegation metadata files for the collection. This file is used to
 verify the integrity of the other metadata files. The snapshot key is held by
@@ -136,7 +136,7 @@ either a collection owner/administrator, or held by the Notary service to facili
   </li>
   <li>
     <p>The timestamp key signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827" target="_blank" class="_">timestamp metadata file</a>,
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L827" target="_blank" rel="noopener" class="_">timestamp metadata file</a>,
 which provides freshness guarantees for the collection by having the shortest expiry time of any particular
 piece of metadata and by specifying the filename, size, and hash of the most recent
 snapshot for the collection. It is used to verify the integrity of the snapshot
@@ -146,9 +146,9 @@ require that a collection owner come online before each timestamp expiry.</p>
   </li>
   <li>
     <p>The targets key signs the
-<a href="ttps://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank" class="_">targets metadata file</a>,
+<a href="ttps://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank" rel="noopener" class="_">targets metadata file</a>,
 which lists filenames in the collection, and their sizes and respective
-<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" class="_">hashes</a>.
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" rel="noopener" class="_">hashes</a>.
 This file is used to verify the integrity of some or all of the actual contents of the repository.
 It is also used to
 <a href="/docs.docker.jp.onthefly/notary/advanced_usage/#working-with-delegation-roles">delegate trust to other collaborators via delegation roles</a>.
@@ -156,9 +156,9 @@ The targets key is held by the collection owner or administrator.</p>
   </li>
   <li>
     <p>Delegation keys sign
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank" class="_">delegation metadata files</a>,
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678" target="_blank" rel="noopener" class="_">delegation metadata files</a>,
 which lists filenames in the collection, and their sizes and respective
-<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" class="_">hashes</a>.
+<a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" rel="noopener" class="_">hashes</a>.
 These files are used to verify the integrity of some or all of the actual contents of the repository.
 They are also used to
 [delegate trust to other collaborators via lower level <a href="/docs.docker.jp.onthefly/notary/advanced_usage/#work-with-delegation-roles">delegation roles</a>.
@@ -174,7 +174,7 @@ Notary clients push metadata to one or more Notary services.</p>
 
 <p>A Notary service consists of a Notary server, which stores and updates the
 signed
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L348" target="_blank" class="_">TUF metadata files</a>
+<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L348" target="_blank" rel="noopener" class="_">TUF metadata files</a>
 for multiple trusted collections in an associated database, and a Notary signer, which
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:</p>
@@ -195,10 +195,10 @@ responsible for:</p>
 
 <ul>
   <li>storing the private signing keys
-<a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4" target="_blank" class="_">wrapped</a>
+<a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.4" target="_blank" rel="noopener" class="_">wrapped</a>
 and
-<a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8" target="_blank" class="_">encrypted</a>
-using <a href="https://github.com/dvsekhvalnov/jose2go" target="_blank" class="_">Javascript Object Signing and Encryption</a>
+<a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-31#section-4.8" target="_blank" rel="noopener" class="_">encrypted</a>
+using <a href="https://github.com/dvsekhvalnov/jose2go" target="_blank" rel="noopener" class="_">Javascript Object Signing and Encryption</a>
 in a database separate from the Notary server database</li>
   <li>performing signing operations with these keys whenever the Notary server requests</li>
 </ul>
@@ -213,7 +213,7 @@ server, and signer:</p>
 <ol>
   <li>
     <p>Notary server optionally supports authentication from clients using
-<a href="http://jwt.io/" target="_blank" class="_">JWT</a> tokens. This requires an
+<a href="http://jwt.io/" target="_blank" rel="noopener" class="_">JWT</a> tokens. This requires an
 authorization server that manages access controls, and a cert bundle from this
 authorization server containing the public key it uses to sign tokens.</p>
 
@@ -750,9 +750,9 @@ changed immediately.</p>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <ul class="footer_links">
-                        <li><b><a href="https://www.docker.com/company" target="_blank">会社</a></b></li>
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
                         <li><a href="https://www.docker.com/company">概要</a></li>
-                        <li><a href="https://www.docker.com/blog/" target="_blank">ブログ</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
                         <li><a href="https://www.docker.com/customers">顧客</a></li>
                         <li><a href="https://www.docker.com/partners">パートナー</a></li>
                         <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
@@ -797,7 +797,6 @@ changed immediately.</p>
     <script defer src="/docs.docker.jp.onthefly/js/menu.js"></script>
     <script src="/docs.docker.jp.onthefly/js/jquery.js"></script>
     <script src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
-    <script src="/docs.docker.jp.onthefly/js/stickyfill.min.js"></script>
     <script defer src="/docs.docker.jp.onthefly/js/metadata.js"></script>
     <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script>
     <script defer src="/docs.docker.jp.onthefly/js/toc.js"></script>
