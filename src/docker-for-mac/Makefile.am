@@ -24,8 +24,6 @@ bases = \
 	multi-arch         \
 	mutagen            \
 	networking         \
-	osxfs-caching      \
-	osxfs              \
 	release-notes      \
 	space              \
 	troubleshoot
