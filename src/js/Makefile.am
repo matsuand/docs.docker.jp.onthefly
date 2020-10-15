@@ -15,17 +15,15 @@ ctie:
 
 jsbases = \
 	docs     \
-	menu     \
 	metadata \
 	search   \
 	toc
 
 jsnonbases = \
-	anchorlinks \
-	bootstrap.min \
-	jquery \
-	landing-page \
-	modernizr.min
+	anchorlinks    \
+	bootstrap.min  \
+	jquery         \
+	theme-switcher
 
 others = \
 	redoc.min.map

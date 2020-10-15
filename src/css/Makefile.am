@@ -1,5 +1,3 @@
-SUBDIRS = pygments
-
 thisdir   = css
 origdir   = @abs_origdir@/$(thisdir)
 srcdir    = @srcdir@
@@ -12,10 +10,10 @@ uploaddir  = @UPLOADDIR@/$(thisdir)
 all: tgtdir $(srcs_with_prefix)
 
 csss = \
-	api-reference.css \
-	bootstrap.min.css \
+	api-reference.css     \
+	bootstrap.min.css     \
 	bootstrap.min.css.map \
-	font-awesome.min.css \
+	font-awesome.min.css  \
 	jquery-ui-insightera-custom-1.8.css \
 	style.scss
 

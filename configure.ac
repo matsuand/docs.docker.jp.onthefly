@@ -62,7 +62,6 @@ AC_CONFIG_FILES([Makefile
 		 src/config/daemon/Makefile
 		 src/config/daemon/images/Makefile
 		 src/css/Makefile
-		 src/css/pygments/Makefile
 		 src/datacenter/Makefile
 		 src/datacenter/dtr/Makefile
 		 src/datacenter/dtr/2.0/Makefile

@@ -23,6 +23,7 @@ scsss = \
 	_night-mode.scss    \
 	_notes.scss         \
 	_overrides.scss     \
+	_perldoc.scss       \
 	_variables.scss
 scss_mods = \
 	_landing    \
