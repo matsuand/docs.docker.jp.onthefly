@@ -28,6 +28,24 @@ known issues for each Docker Hub release.
 @z
 
 @x
+# 2020-10-07
+@y
+# 2020-10-07
+@z
+
+@x
+### New features
+@y
+### New features
+@z
+
+@x
+* Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
+@y
+* Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
+@z
+
+@x
 # 2020-05-14
 @y
 # 2020-05-14

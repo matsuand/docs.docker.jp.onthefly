@@ -110,12 +110,12 @@ For information about Stable releases, see the [Stable release notes](release-no
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/edge/48572/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe)
 @y
 {% comment %}
-> [Download](https://desktop.docker.com/win/edge/48572/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe)
 {% endcomment %}
-> [ダウンロード](https://desktop.docker.com/win/edge/48572/Docker%20Desktop%20Installer.exe))
+> [ダウンロード](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe))
 @z
 
 @x

@@ -22,34 +22,6 @@ For components and controls we are using [Bootstrap](https://getbootstrap.com)
 @z
 
 @x
-<!-- ### Dropdowns
-<div class="dropdown">
-  <a id="dLabel" data-target="#" href="https://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-    Dropdown trigger
-    <span class="caret"></span>
-  </a>
-@y
-<!-- ### Dropdowns
-<div class="dropdown">
-  <a id="dLabel" data-target="#" href="https://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-    Dropdown trigger
-    <span class="caret"></span>
-  </a>
-@z
-
-@x
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-    ...
-  </ul>
-</div> -->
-@y
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-    ...
-  </ul>
-</div> -->
-@z
-
-@x
 ### Tooltips
 @y
 ### Tooltips

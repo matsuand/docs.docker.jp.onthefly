@@ -16,7 +16,6 @@ scsss = \
 	_buttons.scss       \
 	_content.scss       \
 	_github.scss        \
-	_global-header.scss \
 	_layout.scss        \
 	_mobile.scss        \
 	_navigation.scss    \
