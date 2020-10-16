@@ -1,33 +1,12 @@
-// Right nav highlighting
-var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0];
-
-// ensure that the left nav visibly displays the current topic
-var current = document.getElementsByClassName("active currentPage");
-var body = document.getElementsByClassName("col-content content");
-if (current[0]) {
-    if (sidebarObj) {
-        current[0].scrollIntoView(true);
-        body[0].scrollIntoView(true);
-    }
-    // library hack
-    if (document.location.pathname.indexOf("/samples/") > -1) {
-        $(".currentPage").closest("ul").addClass("in");
-    }
-}
 
 function navClicked(sourceLink) {
-    var classString = document.getElementById("#item" + sourceLink).className;
-    if (classString.indexOf(" in") > -1) {
-        //collapse
-        document.getElementById("#item" + sourceLink).className = classString.replace(" in", "");
-    } else {
-        //expand
-        document.getElementById("#item" + sourceLink).className = classString.concat(" in");
+    let el = document.getElementById("#item"+sourceLink)
+    if (el) {
+        el.classList.toggle("in")
     }
 }
 
-var outputLetNav = [];
-var totalTopics = 0;
+let outputLetNav = [], totalTopics = 0;
 
 function pageIsInSection(tree) {
     function processBranch(branch) {
@@ -82,19 +61,21 @@ function walkTree(tree) {
     }
 }
 
-function renderNav(docstoc) {
-    for (let i = 0; i < docstoc.horizontalnav.length; i++) {
-        if (docstoc.horizontalnav[i].path === pageURL || pageIsInSection(docstoc[docstoc.horizontalnav[i].node])) {
-            // This is the current section. Set the corresponding header-nav link
-            // to active, and build the left-hand (vertical) navigation
-            document.getElementById(docstoc.horizontalnav[i].node).closest("li").classList.add("active")
-            walkTree(docstoc[docstoc.horizontalnav[i].node]);
-            document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
+function renderNav() {
+    getJSON( "/js/toc.json", function( data ) {
+        for (const item of data.horizontalnav) {
+            if (item.path === pageURL || pageIsInSection(data[item.node])) {
+                // This is the current section. Set the corresponding header-nav link
+                // to active, and build the left-hand (vertical) navigation
+                _('#'+item.node).closest("li").classList.add("active")
+                walkTree(data[item.node]);
+                _("#jsTOCLeftNav").innerHTML = outputLetNav.join("");
+            }
         }
-    }
-    // Scroll the current menu item into view. We actually pick the item *above*
-    // the current item to give some headroom above
-    scrollMenuItem("#jsTOCLeftNav a.currentPage")
+        // Scroll the current menu item into view. We actually pick the item *above*
+        // the current item to give some headroom above
+        scrollMenuItem("#jsTOCLeftNav a.currentPage")
+    });
 }
 
 // Scroll the given menu item into view. We actually pick the item *above*
@@ -150,28 +131,6 @@ $(window).scroll(function () {
             break;
         }
     }
-});
-
-/*
- * toggle menu *****************************************************************
- */
-
-$("#menu-toggle").click(function (e) {
-    e.preventDefault();
-    $(".wrapper").toggleClass("right-open");
-    $(".col-toc").toggleClass("col-toc-hidden");
-});
-
-$("#menu-toggle-left").click(function (e) {
-    e.preventDefault();
-    $(".col-nav").toggleClass("col-toc-hidden");
-});
-
-$(".navbar-toggle").click(function () {
-    $("#sidebar-nav").each(function () {
-        $(this).toggleClass("hidden-sm");
-        $(this).toggleClass("hidden-xs");
-    });
 });
 
 var navHeight = $(".navbar").outerHeight(true) + 80;
@@ -231,28 +190,29 @@ $(document).ready(function () {
     });
 });
 
-/*
- * make dropdown show on hover *************************************************
- */
-
-$("ul.nav li.dropdown").hover(function () {
-    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeIn(500);
-}, function () {
-    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeOut(500);
-});
-
-/*
- * Components ******************************************************************
- */
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
-
-// sync tabs with the same data-group
-window.onload = function () {
-    $(".nav-tabs > li > a").click(function (e) {
-        var group = $(this).attr("data-group");
-        $('.nav-tabs > li > a[data-group="' + group + '"]').tab("show");
+function initNavToggle() {
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $(".wrapper").toggleClass("right-open");
+        $(".col-toc").toggleClass("col-toc-hidden");
     });
-};
+
+    $(".navbar-toggle").click(function () {
+        $("#sidebar-nav").each(function () {
+            $(this).toggleClass("hidden-sm");
+            $(this).toggleClass("hidden-xs");
+        });
+    });
+}
+
+ready(() => {
+    renderNav()
+    initNavToggle()
+    $('[data-toggle="tooltip"]').tooltip()
+
+    // sync tabs with the same data-group
+    $(".nav-tabs > li > a").click(function () {
+        const group = $(this).attr("data-group");
+        $(`.nav-tabs > li > a[data-group='${ group }']`).tab("show");
+    });
+});
