@@ -43,6 +43,112 @@ Docker Desktop のシステム要件については [インストールの前に
 @z
 
 @x
+## Docker Desktop Community 2.4.2.0
+2020-10-19
+@y
+## Docker Desktop Community 2.4.2.0
+2020-10-19
+@z
+
+@x
+> [Download](https://desktop.docker.com/mac/edge/48975/Docker.dmg)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/mac/edge/48975/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/edge/48975/Docker.dmg)
+@z
+
+@x
+### New
+@y
+{% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+@z
+
+@x
+- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+@y
+{% comment %}
+- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+{% endcomment %}
+- Docker Hub において [ぜい弱性スキャン]({{ site.baseurl }}/docker-hub/vulnerability-scanning/) を有効にしている場合、スキャン結果が Docker Desktop 上に表示されるようになりました。
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine 20.10.0 beta1](https://github.com/docker/docker-ce/blob/0fc7084265b3786a5867ec311d3f916af7bf7a23/CHANGELOG.md)
+- [Docker Compose CLI - 0.1.22](https://github.com/docker/compose-cli/releases/tag/v0.1.22)
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore).
+- [Kubernetes 1.19.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.2)
+- [Go 1.15.2](https://github.com/golang/go/issues?q=milestone:Go1.15.2+label:CherryPickApproved)
+@y
+- [Docker Engine 20.10.0 beta1](https://github.com/docker/docker-ce/blob/0fc7084265b3786a5867ec311d3f916af7bf7a23/CHANGELOG.md)
+- [Docker Compose CLI - 0.1.22](https://github.com/docker/compose-cli/releases/tag/v0.1.22)
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore).
+- [Kubernetes 1.19.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.2)
+- [Go 1.15.2](https://github.com/golang/go/issues?q=milestone:Go1.15.2+label:CherryPickApproved)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- When sharing Linux directories (`/var`, `/bin`, etc) with containers, Docker Desktop avoids watching paths in the host file system.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+- gRPC FUSE: fix `chown` when the file is read-only. Fixes `rabbitmq`, see [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- gRPC FUSE: generate `ATTRIB` inotify events as well as `MODIFY`. Fixes [docker/for-mac#4962](https://github.com/docker/for-mac/issues/4962).
+- gRPC FUSE: return `EOPNOTSUPP` from `fallocate` for unsupported modes. Fixes `minio`. See [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+@y
+{% comment %}
+- When sharing Linux directories (`/var`, `/bin`, etc) with containers, Docker Desktop avoids watching paths in the host file system.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+- gRPC FUSE: fix `chown` when the file is read-only. Fixes `rabbitmq`, see [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- gRPC FUSE: generate `ATTRIB` inotify events as well as `MODIFY`. Fixes [docker/for-mac#4962](https://github.com/docker/for-mac/issues/4962).
+- gRPC FUSE: return `EOPNOTSUPP` from `fallocate` for unsupported modes. Fixes `minio`. See [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+{% endcomment %}
+- コンテナーにおいて Linux ディレクトリ（`/var`、`/bin`など）を共有している場合、Docker Desktop がホストファイルシステムのパスを監視しないようにしました。
+- コンテナー内にファイル共有（たとえば`docker run -v ~/.gitconfig`）を行っている場合に、Docker Desktop が親ディレクトリを監視しないようにしました。[docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981) を Fix に。
+- gRPC FUSE: ファイルが読み込み専用のときの`chown`を修正しました。`rabbitmq`を修正しました。[docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964) を参照のこと。
+- gRPC FUSE: `MODIFY`と同様、`ATTRIB` inotify イベントを生成するようにしました。[docker/for-mac#4962](https://github.com/docker/for-mac/issues/4962) を Fix に。
+- gRPC FUSE: 未サポートモード時に`fallocate`から`EOPNOTSUPP`を返すようにしました。`minio`を修正しました。[docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964) を参照してください。
+- NFS マウントに関する問題を修正しました。[docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958) を参照してください。
+- コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。[docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
+- 共有ボリュームの外部を指し示すシンボリックリンクを可能にしました。[docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862) を Fix に。
+- 診断処理: Kubernetes が破損状態にあるときの処理停止を回避しました。
+- ログイン時の自動起動を修正しました。[docker/for-mac#4877] と [docker/for-mac#4890] を参照してください。
+@z
+
+@x
 ## Docker Desktop Community 2.4.1.0
 2020-10-01
 @y
@@ -65,7 +171,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 @z
 
@@ -87,7 +193,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -131,7 +237,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### New
 {% endcomment %}
-{: #new }
+{: #new-1 }
 ### 新機能
 @z
 
@@ -150,7 +256,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 @z
 
@@ -168,7 +274,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes-2 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -191,7 +297,7 @@ Docker Desktop のシステム要件については [インストールの前に
 - Fixed container logs lagging under heavy load. See [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
 {% endcomment %}
 - ログイン時の自動起動を修正しました。
-  [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890) を参照してください。
+  [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) と [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890) を参照してください。
 - Docker Desktop において共有ボリューム外へのシンボリックリンクを可能にしました。
   [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862) を Fix に。
 - 設定されていたファイルディスクリプターの制限（`setrlimit`）値、すなわち`10240`を削除しました。
@@ -248,7 +354,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 @z
 
@@ -264,7 +370,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes-3 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -301,7 +407,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-1 }
+{: #new-2 }
 ### 新機能
 @z
 
@@ -355,7 +461,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 @z
 
@@ -377,7 +483,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes-4 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -415,7 +521,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-2 }
+{: #new-3 }
 ### 新機能
 @z
 
@@ -459,7 +565,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades-5 }
 ### アップグレード
 @z
 
@@ -499,7 +605,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
+{: #bug-fixes-and-minor-changes-5 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -541,7 +647,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-3 }
+{: #new-4 }
 ### 新機能
 @z
 
@@ -569,7 +675,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades-6 }
 ### アップグレード
 @z
 
@@ -587,7 +693,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
+{: #bug-fixes-and-minor-changes-6 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -626,7 +732,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades-7 }
 ### アップグレード
 @z
 
@@ -644,7 +750,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes-7 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -683,7 +789,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades-8 }
 ### アップグレード
 @z
 
@@ -708,7 +814,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes-8 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -753,110 +859,26 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
-### アップグレード
-@z
-
-@x
-- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
-- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
-- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
-- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
-@y
-{% comment %}
-- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
-- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
-- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
-- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
-{% endcomment %}
-- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
-- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
-- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
-- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
-@z
-
-@x
-### Bug fixes and minor changes
-@y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
-{: #bug-fixes-and-minor-changes-8 }
-### バグフィックスとマイナーチェンジ
-@z
-
-@x
-- Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594).
-- Fixed `hyperkit` on newer Macs / newer versions of `Hypervisor.framework`.
-- Added support for the global Mutagen config file `~/.mutagen.yml`.
-- Automatically set up a two-way file sync using `:delegated` option with `docker run -v` command.
-- Re-added device-mapper to the embedded Linux kernel. See [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
-- Improved diagnostics when using two-way synchronization with the Mutagen cache.
-- Switched to Mutagen `posix-raw` symlink mode which fixes cases where the symlinks point outside the synchronized directory. See [docker/for-mac#4595](https://github.com/docker/for-mac/issues/4595).
-- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. See [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
-@y
-- Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594).
-- Fixed `hyperkit` on newer Macs / newer versions of `Hypervisor.framework`.
-- Added support for the global Mutagen config file `~/.mutagen.yml`.
-- Automatically set up a two-way file sync using `:delegated` option with `docker run -v` command.
-- Re-added device-mapper to the embedded Linux kernel. See [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
-- Improved diagnostics when using two-way synchronization with the Mutagen cache.
-- Switched to Mutagen `posix-raw` symlink mode which fixes cases where the symlinks point outside the synchronized directory. See [docker/for-mac#4595](https://github.com/docker/for-mac/issues/4595).
-- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. See [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
-@z
-
-@x
-## Docker Desktop Community 2.3.1.0
-2020-05-20
-@y
-## Docker Desktop Community 2.3.1.0
-2020-05-20
-@z
-
-@x
-> [Download](https://desktop.docker.com/mac/edge/45408/Docker.dmg)
-@y
-> [Download](https://desktop.docker.com/mac/edge/45408/Docker.dmg)
-@z
-
-@x
-### New
-@y
-{% comment %}
-### New
-{% endcomment %}
-{: #new-4 }
-### 新機能
-@z
-
-@x
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
-@y
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
-@z
-
-@x
-We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} repository with the `Mutagen` label.
-@y
-We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} repository with the `Mutagen` label.
-@z
-
-@x
-### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades-9 }
 ### アップグレード
 @z
 
 @x
-- [Docker Compose 1.26.0-rc4](https://github.com/docker/compose/releases/tag/1.26.0-rc4)
-- Upgrade to Qemu 4.2.0, add Risc-V support
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
+- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
+- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
 @y
-- [Docker Compose 1.26.0-rc4](https://github.com/docker/compose/releases/tag/1.26.0-rc4)
-- Upgrade to Qemu 4.2.0, add Risc-V support
+{% comment %}
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
+- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
+- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
+{% endcomment %}
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
+- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
+- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
 @z
 
 @x
@@ -870,55 +892,59 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 @z
 
 @x
-- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423](https://github.com/docker/for-mac/issues/4423).
-- Fixed containers logs in Docker Desktop **Dashboard** which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954).
+- Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594).
+- Fixed `hyperkit` on newer Macs / newer versions of `Hypervisor.framework`.
+- Added support for the global Mutagen config file `~/.mutagen.yml`.
+- Automatically set up a two-way file sync using `:delegated` option with `docker run -v` command.
+- Re-added device-mapper to the embedded Linux kernel. See [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
+- Improved diagnostics when using two-way synchronization with the Mutagen cache.
+- Switched to Mutagen `posix-raw` symlink mode which fixes cases where the symlinks point outside the synchronized directory. See [docker/for-mac#4595](https://github.com/docker/for-mac/issues/4595).
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. See [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
 @y
-- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423](https://github.com/docker/for-mac/issues/4423).
-- Fixed containers logs in Docker Desktop **Dashboard** which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954).
+- Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594).
+- Fixed `hyperkit` on newer Macs / newer versions of `Hypervisor.framework`.
+- Added support for the global Mutagen config file `~/.mutagen.yml`.
+- Automatically set up a two-way file sync using `:delegated` option with `docker run -v` command.
+- Re-added device-mapper to the embedded Linux kernel. See [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
+- Improved diagnostics when using two-way synchronization with the Mutagen cache.
+- Switched to Mutagen `posix-raw` symlink mode which fixes cases where the symlinks point outside the synchronized directory. See [docker/for-mac#4595](https://github.com/docker/for-mac/issues/4595).
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. See [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
 @z
 
 @x
-## Docker Desktop Community 2.3.0.1
-2020-04-28
+## Docker Desktop Community 2.3.1.0
+2020-05-20
 @y
-## Docker Desktop Community 2.3.0.1
-2020-04-28
+## Docker Desktop Community 2.3.1.0
+2020-05-20
 @z
 
 @x
-> [Download](https://download.docker.com/mac/edge/44875/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/45408/Docker.dmg)
 @y
-> [Download](https://download.docker.com/mac/edge/44875/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/45408/Docker.dmg)
 @z
 
 @x
-### Bug fixes and minor changes
+### New
 @y
 {% comment %}
-### Bug fixes and minor changes
+### New
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-10 }
-### バグフィックスとマイナーチェンジ
+{: #new-5 }
+### 新機能
 @z
 
 @x
-- Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
 @y
-- Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
 @z
 
 @x
-## Docker Desktop Community 2.3.0.0
-2020-04-20
+We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} repository with the `Mutagen` label.
 @y
-## Docker Desktop Community 2.3.0.0
-2020-04-20
-@z
-
-@x
-> [Download](https://download.docker.com/mac/edge/44472/Docker.dmg)
-@y
-> [Download](https://download.docker.com/mac/edge/44472/Docker.dmg)
+We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} repository with the `Mutagen` label.
 @z
 
 @x
@@ -932,6 +958,86 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 @z
 
 @x
+- [Docker Compose 1.26.0-rc4](https://github.com/docker/compose/releases/tag/1.26.0-rc4)
+- Upgrade to Qemu 4.2.0, add Risc-V support
+@y
+- [Docker Compose 1.26.0-rc4](https://github.com/docker/compose/releases/tag/1.26.0-rc4)
+- Upgrade to Qemu 4.2.0, add Risc-V support
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-10 }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423](https://github.com/docker/for-mac/issues/4423).
+- Fixed containers logs in Docker Desktop **Dashboard** which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954).
+@y
+- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423](https://github.com/docker/for-mac/issues/4423).
+- Fixed containers logs in Docker Desktop **Dashboard** which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954).
+@z
+
+@x
+## Docker Desktop Community 2.3.0.1
+2020-04-28
+@y
+## Docker Desktop Community 2.3.0.1
+2020-04-28
+@z
+
+@x
+> [Download](https://download.docker.com/mac/edge/44875/Docker.dmg)
+@y
+> [Download](https://download.docker.com/mac/edge/44875/Docker.dmg)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-11 }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
+@y
+- Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
+@z
+
+@x
+## Docker Desktop Community 2.3.0.0
+2020-04-20
+@y
+## Docker Desktop Community 2.3.0.0
+2020-04-20
+@z
+
+@x
+> [Download](https://download.docker.com/mac/edge/44472/Docker.dmg)
+@y
+> [Download](https://download.docker.com/mac/edge/44472/Docker.dmg)
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-11 }
+### アップグレード
+@z
+
+@x
 - [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
 - [Go 1.13.10](https://github.com/golang/go/issues?q=milestone%3AGo1.13.10+label%3ACherryPickApproved)
 - [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-ce15f646db9b062dc947cfc0c1deab019fa63f96-amd64/images/sha256-6c252199aee548e4bdc8457e0a068e7d8e81c2649d4c1e26e4150daa253a85d8?context=repo)
@@ -949,7 +1055,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-11 }
+{: #bug-fixes-and-minor-changes-12 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -995,7 +1101,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
+{: #upgrades-12 }
 ### アップグレード
 @z
 
@@ -1015,7 +1121,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-5 }
+{: #new-6 }
 ### 新機能
 @z
 
@@ -1031,7 +1137,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-12 }
+{: #bug-fixes-and-minor-changes-13 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1103,102 +1209,16 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
-### アップグレード
-@z
-
-@x
-- [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
-- [Go 1.13.8](https://golang.org/doc/devel/release.html#go1.13)
-@y
-- [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
-- [Go 1.13.8](https://golang.org/doc/devel/release.html#go1.13)
-@z
-
-@x
-### Bug fixes and minor changes
-@y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
-{: #bug-fixes-and-minor-changes-13 }
-### バグフィックスとマイナーチェンジ
-@z
-
-@x
-- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
-- Ceph support has been removed from Docker Desktop to save disk space.
-@y
-- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
-- Ceph support has been removed from Docker Desktop to save disk space.
-@z
-
-@x
-## Docker Desktop Community 2.2.1.0
-2020-02-12
-@y
-## Docker Desktop Community 2.2.1.0
-2020-02-12
-@z
-
-@x
-[Download](https://download.docker.com/mac/edge/42746/Docker.dmg)
-@y
-[Download](https://download.docker.com/mac/edge/42746/Docker.dmg)
-@z
-
-@x
-### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades-13 }
 ### アップグレード
 @z
 
 @x
-- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
-- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
+- [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
+- [Go 1.13.8](https://golang.org/doc/devel/release.html#go1.13)
 @y
-- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
-- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
-@z
-
-@x
-## Docker Desktop Community 2.1.7.0
-2019-12-11
-@y
-## Docker Desktop Community 2.1.7.0
-2019-12-11
-@z
-
-@x
-[Download](https://download.docker.com/mac/edge/41561/Docker.dmg)
-@y
-[Download](https://download.docker.com/mac/edge/41561/Docker.dmg)
-@z
-
-@x
-> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
-@y
-> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
-@z
-
-@x
-### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
-{: #upgrades-14 }
-### アップグレード
-@z
-
-@x
-- [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
-@y
-- [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
+- [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
+- [Go 1.13.8](https://golang.org/doc/devel/release.html#go1.13)
 @z
 
 @x
@@ -1212,6 +1232,92 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 @z
 
 @x
+- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
+- Ceph support has been removed from Docker Desktop to save disk space.
+@y
+- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
+- Ceph support has been removed from Docker Desktop to save disk space.
+@z
+
+@x
+## Docker Desktop Community 2.2.1.0
+2020-02-12
+@y
+## Docker Desktop Community 2.2.1.0
+2020-02-12
+@z
+
+@x
+[Download](https://download.docker.com/mac/edge/42746/Docker.dmg)
+@y
+[Download](https://download.docker.com/mac/edge/42746/Docker.dmg)
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-14 }
+### アップグレード
+@z
+
+@x
+- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
+- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
+@y
+- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
+- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
+@z
+
+@x
+## Docker Desktop Community 2.1.7.0
+2019-12-11
+@y
+## Docker Desktop Community 2.1.7.0
+2019-12-11
+@z
+
+@x
+[Download](https://download.docker.com/mac/edge/41561/Docker.dmg)
+@y
+[Download](https://download.docker.com/mac/edge/41561/Docker.dmg)
+@z
+
+@x
+> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+@y
+> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-15 }
+### アップグレード
+@z
+
+@x
+- [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
+@y
+- [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-15 }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
 - The Docker Desktop Dashboard now displays port information inline with the container status.
 - Fixed an issue that caused the 'back' button on the Dashboard UI to behave inconsistently when repeatedly switching between the container details and the Settings window.
 - Various minor improvements to the Dashboard UI.
@@ -1251,7 +1357,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-15 }
+{: #upgrades-16 }
 ### アップグレード
 @z
 
@@ -1269,7 +1375,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-6 }
+{: #new-7 }
 ### 新機能
 @z
 
@@ -1285,7 +1391,7 @@ Added the ability to start and stop Compose-based applications and view combined
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-15 }
+{: #bug-fixes-and-minor-changes-16 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1323,7 +1429,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-16 }
+{: #upgrades-17 }
 ### アップグレード
 @z
 
@@ -1343,7 +1449,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-7 }
+{: #new-8 }
 ### 新機能
 @z
 
@@ -1365,7 +1471,7 @@ To access the new Dashboard UI, select the Docker menu from the Mac menu bar and
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-16 }
+{: #bug-fixes-and-minor-changes-17 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1417,7 +1523,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-17 }
+{: #upgrades-18 }
 ### アップグレード
 @z
 
@@ -1431,42 +1537,6 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 - [Kubernetes 1.15.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4)
 - [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved) for [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276)
 - [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
-@z
-
-@x
-### Bug fixes and minor changes
-@y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
-{: #bug-fixes-and-minor-changes-17 }
-### バグフィックスとマイナーチェンジ
-@z
-
-@x
-- Improved the navigation in **Settings** and **Troubleshoot** UI.
-- Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
-- Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
-- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
-@y
-- Improved the navigation in **Settings** and **Troubleshoot** UI.
-- Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
-- Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
-- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
-@z
-
-@x
-## Docker Desktop Community 2.1.3.0
-2019-09-16
-@y
-## Docker Desktop Community 2.1.3.0
-2019-09-16
-@z
-
-@x
-[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
-@y
-[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
 @z
 
 @x
@@ -1480,59 +1550,33 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
-- All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
-- Fixed an issue which caused higher CPU utilization when closing Docker Desktop windows.
-- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
-- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
+- Improved the navigation in **Settings** and **Troubleshoot** UI.
+- Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
+- Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
+- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
 @y
-- All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
-- Fixed an issue which caused higher CPU utilization when closing Docker Desktop windows.
-- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
-- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
+- Improved the navigation in **Settings** and **Troubleshoot** UI.
+- Fixed a bug in the UEFI boot menu that sometimes caused Docker Desktop to hang during restart. Fixes [docker/for-mac#2655](https://github.com/docker/for-mac/issues/2655) and [docker/for-mac#3921](https://github.com/docker/for-mac/issues/3921).
+- Docker Desktop now allows users to access the host’s SSH agent inside containers. Fixes [docker/for-mac#410](https://github.com/docker/for-mac/issues/410)
+- Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [Docker Machine releases](https://github.com/docker/machine/releases) page.
 @z
 
 @x
-## Docker Desktop Community 2.1.2.0
-2019-09-09
+## Docker Desktop Community 2.1.3.0
+2019-09-16
 @y
-## Docker Desktop Community 2.1.2.0
-2019-09-09
+## Docker Desktop Community 2.1.3.0
+2019-09-16
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
+[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
 @y
-[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
+[Download](https://download.docker.com/mac/edge/38275/Docker.dmg)
 @z
 
 @x
-#### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
-{: #upgrades-18 }
-### アップグレード
-@z
-
-@x
-- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
-- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
-- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
-- [Qemu 4.0.1](https://github.com/docker/binfmt)
-- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
-- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
-@y
-- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
-- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
-- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
-- [Qemu 4.0.1](https://github.com/docker/binfmt)
-- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
-- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
-@z
-
-@x
-#### Bug fixes and minor changes
+### Bug fixes and minor changes
 @y
 {% comment %}
 ### Bug fixes and minor changes
@@ -1542,25 +1586,29 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
-- Reduced the Virtual Machine (VM) startup time.
-- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
+- All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+- Fixed an issue which caused higher CPU utilization when closing Docker Desktop windows.
+- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
+- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
 @y
-- Reduced the Virtual Machine (VM) startup time.
-- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
+- All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
+- Fixed an issue which caused higher CPU utilization when closing Docker Desktop windows.
+- Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
+- Deactivated the **Reset Kubernetes** button when Kubernetes is not activated.
 @z
 
 @x
-## Docker Desktop Community 2.1.1.0
-2019-08-12
+## Docker Desktop Community 2.1.2.0
+2019-09-09
 @y
-## Docker Desktop Community 2.1.1.0
-2019-08-12
+## Docker Desktop Community 2.1.2.0
+2019-09-09
 @z
 
 @x
-[Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
+[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
 @y
-[Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
+[Download](https://download.docker.com/mac/edge/38030/Docker.dmg)
 @z
 
 @x
@@ -1574,6 +1622,64 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 @z
 
 @x
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Qemu 4.0.1](https://github.com/docker/binfmt)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+@y
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Qemu 4.0.1](https://github.com/docker/binfmt)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+@z
+
+@x
+#### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-20 }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Reduced the Virtual Machine (VM) startup time.
+- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
+@y
+- Reduced the Virtual Machine (VM) startup time.
+- Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
+@z
+
+@x
+## Docker Desktop Community 2.1.1.0
+2019-08-12
+@y
+## Docker Desktop Community 2.1.1.0
+2019-08-12
+@z
+
+@x
+[Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
+@y
+[Download](https://download.docker.com/mac/edge/37260/Docker.dmg)
+@z
+
+@x
+#### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-20 }
+### アップグレード
+@z
+
+@x
 - Linux Kernel 4.14.131
 - [Hyperkit v0.20190802](https://github.com/moby/hyperkit/releases/tag/v0.20190802)
 @y
@@ -1587,7 +1693,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-20 }
+{: #bug-fixes-and-minor-changes-21 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1629,7 +1735,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-20 }
+{: #upgrades-21 }
 ### アップグレード
 @z
 
@@ -1653,7 +1759,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-8 }
+{: #new-9 }
 ### 新機能
 @z
 
@@ -1671,7 +1777,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-21 }
+{: #bug-fixes-and-minor-changes-22 }
 ### バグフィックスとマイナーチェンジ
 @z
 

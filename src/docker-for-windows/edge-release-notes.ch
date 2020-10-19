@@ -43,6 +43,118 @@ For information about Stable releases, see the [Stable release notes](release-no
 @z
 
 @x
+## Docker Desktop Community 2.4.2.0
+2020-10-19
+@y
+## Docker Desktop Community 2.4.2.0
+2020-10-19
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### New
+@y
+{% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+@z
+
+@x
+- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+@y
+{% comment %}
+- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+{% endcomment %}
+- Docker Hub において [ぜい弱性スキャン]({{ site.baseurl }}/docker-hub/vulnerability-scanning/) を有効にしている場合、スキャン結果が Docker Desktop 上に表示されるようになりました。
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine 20.10.0 beta1](https://github.com/docker/docker-ce/blob/0fc7084265b3786a5867ec311d3f916af7bf7a23/CHANGELOG.md)
+- [Docker Compose CLI - 0.1.22](https://github.com/docker/compose-cli/releases/tag/v0.1.22)
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
+- [Kubernetes 1.19.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.2)
+- [Go 1.15.2](https://github.com/golang/go/issues?q=milestone:Go1.15.2+label:CherryPickApproved)
+@y
+- [Docker Engine 20.10.0 beta1](https://github.com/docker/docker-ce/blob/0fc7084265b3786a5867ec311d3f916af7bf7a23/CHANGELOG.md)
+- [Docker Compose CLI - 0.1.22](https://github.com/docker/compose-cli/releases/tag/v0.1.22)
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
+- [Kubernetes 1.19.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.2)
+- [Go 1.15.2](https://github.com/golang/go/issues?q=milestone:Go1.15.2+label:CherryPickApproved)
+@z
+
+@x
+* Deprecation
+  - Docker Desktop cannot be installed on Windows 1703 (build 15063) anymore.
+@y
+{% comment %}
+* Deprecation
+  - Docker Desktop cannot be installed on Windows 1703 (build 15063) anymore.
+{% endcomment %}
+* 廃止決定機能
+  - Docker Desktop は Windows 1703 (build 15063) にはインストールできないようになりました。
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue that can intermittently cause the WSL 2 backend to fail to start.
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Fixed an issue with http proxy exclude lists containing entries such as `localhost` or `127.0.0.1`. Fixes [docker/for-win#8750](https://github.com/docker/for-win/issues/8750).
+- When WSL integration process unexpectedly stops, the user is now notified and can decide to restart it or not, instead of always try to restart it in a loop. fixes [docker/for-win#8968](https://github.com/docker/for-win/issues/8968).
+- Fixed an issue related to container logs that lag under heavy load. Fixes [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+- Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+@y
+{% comment %}
+- Fixed an issue that can intermittently cause the WSL 2 backend to fail to start.
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Fixed an issue with http proxy exclude lists containing entries such as `localhost` or `127.0.0.1`. Fixes [docker/for-win#8750](https://github.com/docker/for-win/issues/8750).
+- When WSL integration process unexpectedly stops, the user is now notified and can decide to restart it or not, instead of always try to restart it in a loop. fixes [docker/for-win#8968](https://github.com/docker/for-win/issues/8968).
+- Fixed an issue related to container logs that lag under heavy load. Fixes [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+- Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+{% endcomment %}
+- 断続的に WSL 2 バックエンドが起動に失敗する問題を修正しました。
+- NFS マウントに関する問題を修正しました。[docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958) を参照してください。
+- HTTP プロキシーの除外リストに`localhost`や`127.0.0.1`が含まれる場合の問題を修正しました。[docker/for-win#8750](https://github.com/docker/for-win/issues/8750) を参照してください。
+- WSL 統合環境での処理が突然停止した際には、ユーザーへの通知が行われて、再起動するかどうかを指定できるようにしました。それまでは再起動ループを繰り返していました。[docker/for-win#8968](https://github.com/docker/for-win/issues/8968) を Fix に。
+- 高負荷時にコンテナーログが遅延する問題を修正しました。[docker/for-win#8216](https://github.com/docker/for-win/issues/8216) を Fix に。
+- 診断処理: Kubernetes が破損状態にあるときの処理停止を回避しました。
+- コンテナー内にファイル共有（たとえば`docker run -v ~/.gitconfig`）を行っている場合に、Docker Desktop が親ディレクトリを監視しないようにしました。[docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981) を Fix に。
+- コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。[docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
+@z
+
+@x
 ## Docker Desktop Community 2.4.1.0
 2020-10-01
 @y
@@ -65,7 +177,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 @z
 
@@ -87,7 +199,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -124,7 +236,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### New
 {% endcomment %}
-{: #new }
+{: #new-1 }
 ### 新機能
 @z
 
@@ -140,7 +252,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 @z
 
@@ -158,7 +270,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes-2 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -266,7 +378,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 @z
 
@@ -282,7 +394,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes-3 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -319,7 +431,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-1 }
+{: #new-2 }
 ### 新機能
 @z
 
@@ -350,7 +462,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 @z
 
@@ -368,7 +480,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes-4 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -409,7 +521,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
+{: #bug-fixes-and-minor-changes-5 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -445,7 +557,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-2 }
+{: #new-3 }
 ### 新機能
 @z
 
@@ -487,7 +599,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades-5 }
 ### アップグレード
 @z
 
@@ -509,7 +621,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
+{: #bug-fixes-and-minor-changes-6 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -555,7 +667,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-3 }
+{: #new-4 }
 ### 新機能
 @z
 
@@ -583,7 +695,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades-6 }
 ### アップグレード
 @z
 
@@ -601,7 +713,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes-7 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -640,7 +752,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades-7 }
 ### アップグレード
 @z
 
@@ -675,7 +787,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes-8 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -711,7 +823,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades-8 }
 ### アップグレード
 @z
 
@@ -733,7 +845,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-8 }
+{: #bug-fixes-and-minor-changes-9 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -790,7 +902,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
+{: #upgrades-9 }
 ### アップグレード
 @z
 
@@ -814,7 +926,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-9 }
+{: #bug-fixes-and-minor-changes-10 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -873,7 +985,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-9 }
+{: #upgrades-10 }
 ### アップグレード
 @z
 
@@ -893,7 +1005,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-10 }
+{: #bug-fixes-and-minor-changes-11 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1020,7 +1132,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-11 }
+{: #bug-fixes-and-minor-changes-12 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1065,7 +1177,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-10 }
+{: #upgrades-11 }
 ### アップグレード
 @z
 
@@ -1087,7 +1199,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-12 }
+{: #bug-fixes-and-minor-changes-13 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1200,7 +1312,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
+{: #upgrades-12 }
 ### アップグレード
 @z
 
@@ -1220,7 +1332,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-4 }
+{: #new-5 }
 ### 新機能
 @z
 
@@ -1238,7 +1350,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-13 }
+{: #bug-fixes-and-minor-changes-14 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1397,7 +1509,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
+{: #upgrades-13 }
 ### アップグレード
 @z
 
@@ -1415,7 +1527,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-5 }
+{: #new-6 }
 ### 新機能
 @z
 
@@ -1435,7 +1547,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-14 }
+{: #bug-fixes-and-minor-changes-15 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1476,7 +1588,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-13 }
+{: #upgrades-14 }
 ### アップグレード
 @z
 
@@ -1494,7 +1606,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-15 }
+{: #bug-fixes-and-minor-changes-16 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1599,7 +1711,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-14 }
+{: #upgrades-15 }
 ### アップグレード
 @z
 
@@ -1615,7 +1727,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-6 }
+{: #new-7 }
 ### 新機能
 @z
 
@@ -1633,7 +1745,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-16 }
+{: #bug-fixes-and-minor-changes-17 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1698,7 +1810,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-17 }
+{: #bug-fixes-and-minor-changes-18 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1745,7 +1857,7 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-15 }
+{: #upgrades-16 }
 ### アップグレード
 @z
 
@@ -1763,7 +1875,7 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-7 }
+{: #new-8 }
 ### 新機能
 @z
 
@@ -1779,7 +1891,7 @@ Added the ability to start and stop Compose-based applications and view combined
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-18 }
+{: #bug-fixes-and-minor-changes-19 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1850,7 +1962,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-16 }
+{: #upgrades-17 }
 ### アップグレード
 @z
 
@@ -1870,7 +1982,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-8 }
+{: #new-9 }
 ### 新機能
 @z
 
@@ -1961,7 +2073,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-17 }
+{: #upgrades-18 }
 ### アップグレード
 @z
 
@@ -1983,7 +2095,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-19 }
+{: #bug-fixes-and-minor-changes-20 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -2020,7 +2132,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-20 }
+{: #bug-fixes-and-minor-changes-21 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -2055,7 +2167,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-18 }
+{: #upgrades-19 }
 ### アップグレード
 @z
 
@@ -2081,7 +2193,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-21 }
+{: #bug-fixes-and-minor-changes-22 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -2116,7 +2228,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-19 }
+{: #upgrades-20 }
 ### アップグレード
 @z
 
@@ -2132,7 +2244,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-9 }
+{: #new-10 }
 ### 新機能
 @z
 
@@ -2148,7 +2260,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-22 }
+{: #bug-fixes-and-minor-changes-23 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -2197,7 +2309,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-20 }
+{: #upgrades-21 }
 ### アップグレード
 @z
 
@@ -2221,7 +2333,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-10 }
+{: #new-11 }
 ### 新機能
 @z
 
@@ -2239,7 +2351,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-23 }
+{: #bug-fixes-and-minor-changes-24 }
 ### バグフィックスとマイナーチェンジ
 @z
 
