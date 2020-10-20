@@ -14,7 +14,6 @@ csss = \
 	bootstrap.min.css     \
 	bootstrap.min.css.map \
 	font-awesome.min.css  \
-	jquery-ui-insightera-custom-1.8.css \
 	style.scss
 
 srcs = $(csss)
