@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-20 17:51:16 +0900 -->
+<!-- Page generated 2020-10-21 18:44:38 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Google Tag Manager -->
@@ -46,12 +46,12 @@
   <meta property="og:title" content="Compose ファイル バージョン 3 リファレンス" />
   <meta property="og:description" content="Compose ファイルリファレンス" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-21T18:44:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-21T18:44:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose ファイル バージョン 3 リファレンス","description":"Compose ファイルリファレンス","url":"https://docs.docker.com/compose/compose-file/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,7 +109,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    46 分
+    45 分
   
 </span>
 
@@ -2151,7 +2151,6 @@ tmpfs マウントはできません。</li>
       <li><code class="highlighter-rouge">size</code>: tmpfs マウントのサイズをバイト数で指定します。</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">consistency</code>: マウントに求める一貫性を指定します。以下のいずれか： <code class="highlighter-rouge">consistent</code> （ホストとコンテナーは同一ビューを持ちます）、 <code class="highlighter-rouge">cached</code> （読み込みキャッシュ、ホストビューに権限あり）、<code class="highlighter-rouge">delegated</code> (読み書きキャッシュ、コンテナービューに権限あり）</li>
 </ul>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.8"</span>
@@ -2219,44 +2218,6 @@ tmpfs マウントはできません。</li>
       <span class="na">placement</span><span class="pi">:</span>
         <span class="na">constraints</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">node.role == manager</span><span class="pi">]</span>
 </code></pre></div></div>
-
-<h4 id="caching-options-for-volume-mounts-docker-desktop-for-mac">ボリュームマウントに対するキャッシュオプション（Docker for Mac）</h4>
-
-<p>Compose ファイル内にてバインドマウントするディレクトリは、コンテナーホスト間の一貫性を設定することができます。
-これによってボリュームの読み書き性能を向上させることができます。
-これを実現するオプションは <code class="highlighter-rouge">osxfs</code> ファイル共有に対する問題に対処しているため、Docker Desktop for Mac においてのみ利用可能です。</p>
-
-<p>フラグとして以下があります。</p>
-
-<ul>
-  <li>
-    <p><code class="highlighter-rouge">consistent</code>: 完全な一貫性を持ちます。
-起動しているコンテナーとホストは、常にマウント上を同一に見ることができます。
-これがデフォルトです。</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">cached</code>: ホスト側マウントが優先されます。
-ホスト上の更新が、コンテナー内で確認できるまでには遅延が起こりえます。</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">delegated</code>: コンテナー実行時のコンテナー側マウントが優先されます。
-コンテナー内での更新が、ホスト上で確認できるまでには遅延が起こりえます。</p>
-  </li>
-</ul>
-
-<p>以下はボリュームに <code class="highlighter-rouge">cached</code> を設定した例です。</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.8"</span>
-<span class="na">services</span><span class="pi">:</span>
-  <span class="na">php</span><span class="pi">:</span>
-    <span class="na">image</span><span class="pi">:</span> <span class="s">php:7.1-fpm</span>
-    <span class="na">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s2">"</span><span class="s">9000"</span>
-    <span class="na">volumes</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">.:/var/www/project:cached</span>
-</code></pre></div></div>
-
-<p>このフラグの詳細、これにより解決される諸問題、<code class="highlighter-rouge">docker run</code> での対応オプションについては Docker Desktop for Mac のトピック、<a href="/docs.docker.jp.onthefly/docker-for-mac/osxfs-caching/">ボリュームマウント（共有ファイルシステム）でのパフォーマンスチューニング</a> を参照してください。</p>
 
 <h3 id="domainname-hostname-ipc-mac_address-privileged-read_only-shm_size-stdin_open-tty-user-working_dir">domainname, hostname, ipc, mac_address, privileged, read_only, shm_size, stdin_open, tty, user, working_dir</h3>
 
@@ -3092,7 +3053,6 @@ Compose はこのファイルを自動的に探しにいきます。
               <li><a href="#short-syntax-3" class="nomunge">短い文法</a></li>
               <li><a href="#volumes-long-syntax" class="nomunge">長い文法</a></li>
               <li><a href="#volumes-for-services-swarms-and-stack-files" class="nomunge">サービス、スウォーム、スタックファイルに対するボリューム設定</a></li>
-              <li><a href="#caching-options-for-volume-mounts-docker-desktop-for-mac" class="nomunge">ボリュームマウントに対するキャッシュオプション（Docker for Mac）</a></li>
             </ul>
           </li>
           <li><a href="#domainname-hostname-ipc-mac_address-privileged-read_only-shm_size-stdin_open-tty-user-working_dir" class="nomunge">domainname, hostname, ipc, mac_address, privileged, read_only, shm_size, stdin_open, tty, user, working_dir</a></li>

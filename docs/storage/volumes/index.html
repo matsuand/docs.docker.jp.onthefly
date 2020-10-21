@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-20 17:51:16 +0900 -->
+<!-- Page generated 2020-10-21 18:44:38 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Google Tag Manager -->
@@ -46,12 +46,12 @@
   <meta property="og:title" content="ボリュームの利用" />
   <meta property="og:description" content="ボリュームを利用します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-21T18:44:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/volumes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-21T18:44:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ボリュームの利用","description":"ボリュームを利用します。","url":"https://docs.docker.com/storage/volumes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,12 +109,12 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    8 分
+    9 分
   
 </span>
 
 <p>ボリュームとは、Docker コンテナーにおいて生成され利用されるデータを、永続的に保持する目的で利用される仕組みです。
-<a href="/docs.docker.jp.onthefly/storage/bind-mounts/">バインドマウント</a> はホストマシンのディレクトリ構造に依存しますが、ボリュームは完全に Docker によって管理されます。
+<a href="/docs.docker.jp.onthefly/storage/bind-mounts/">バインドマウント</a> はホストマシン OS のディレクトリ構造に依存しますが、ボリュームは完全に Docker によって管理されます。
 ボリュームにはバインドマウントに比べて、以下のように優れた点があります。</p>
 
 <ul>
@@ -124,6 +124,7 @@
   <li>ボリュームは複数コンテナー間にて安全に共有できます。</li>
   <li>ボリュームドライバーを用いると、リモートホスト上、あるいはクラウドプロバイダー上のボリュームに保存できるようになります。保存の際にはボリューム内データを暗号化することができ、その他にも種々の機能を利用することができます。</li>
   <li>ボリュームを新たに生成すると、その内容はコンテナーがあらかじめ用意していた内容になります。</li>
+  <li>Docker Desktop 上のボリュームは、Mac や Windows ホストからのバインドマウントに比べて、より高い性能を実現します。</li>
 </ul>
 
 <p>さらに永続的にデータを保持するならば、コンテナーの書き込みレイヤーを用いるのではなく、ボリュームを用いることの方が適切となる場合が多々あります。
@@ -313,6 +314,40 @@ local               </span>my-vol
 
 <span class="nv">$ </span>docker volume rm myvol2
 </code></pre></div></div>
+
+<h2 id="use-a-volume-with-docker-compose">Use a volume with docker-compose</h2>
+
+<p>A single docker compose service with a volume looks like this:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.7"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">node:lts</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">myapp:/home/node/app</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">myapp</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>On the first invocation of <code class="highlighter-rouge">docker-compose up</code> the volume will be created. The same
+volume will be reused on following invocations.</p>
+
+<p>A volume may be created directly outside of compose with <code class="highlighter-rouge">docker volume create</code> and
+then referenced inside <code class="highlighter-rouge">docker-compose.yml</code> as follows:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.7"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">frontend</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">node:lts</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">myapp:/home/node/app</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">myapp</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>For more information about using volumes with compose see
+<a href="../compose/compose-file-v2.md#volume-configuration-reference">the compose reference</a>.</p>
 
 <h3 id="start-a-service-with-volumes">ボリュームを使ったサービスの起動</h3>
 
@@ -666,7 +701,8 @@ ID                  NAME                IMAGE               NODE                
     </ul>
   </li>
   <li><a href="#create-and-manage-volumes" class="nomunge">ボリュームの生成と管理</a></li>
-  <li><a href="#start-a-container-with-a-volume" class="nomunge">ボリュームを使ったコンテナーの起動</a>
+  <li><a href="#start-a-container-with-a-volume" class="nomunge">ボリュームを使ったコンテナーの起動</a></li>
+  <li><a href="#use-a-volume-with-docker-compose" class="nomunge">Use a volume with docker-compose</a>
     <ul>
       <li><a href="#start-a-service-with-volumes" class="nomunge">ボリュームを使ったサービスの起動</a></li>
       <li><a href="#populate-a-volume-using-a-container" class="nomunge">コンテナーからボリュームへのデータコピー</a></li>

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-20 17:51:16 +0900 -->
+<!-- Page generated 2020-10-21 18:44:38 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Google Tag Manager -->
@@ -46,12 +46,12 @@
   <meta property="og:title" content="Docker におけるデータ管理" />
   <meta property="og:description" content="コンテナー内にデータを保持するための概要" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-21T18:44:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-21T18:44:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker におけるデータ管理","description":"コンテナー内にデータを保持するための概要","url":"https://docs.docker.com/storage/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -252,6 +252,18 @@ Docker アプリケーションを新規開発する際には、これではな�
     <p>1 つの Docker ホストのデータをバックアップして、他のホストに復元、移行する必要がある場合です。
 こういった場合にボリュームを選びます。
 ボリュームを利用しているコンテナーを停止させてから、ボリュームがあるディレクトリのバックアップをとります（ディレクトリは <code class="highlighter-rouge">/var/lib/docker/volumes/&lt;ボリューム名&gt;</code> などです）。</p>
+  </li>
+  <li>
+    <p>When your application requires high-performance I/O on Docker Desktop. Volumes
+are stored in the Linux VM rather than the host, which means that the reads and writes
+have much lower latency and higher throughput.</p>
+  </li>
+  <li>
+    <p>When your application requires fully native file system behavior on Docker
+Desktop. For example, a database engine requires precise control over disk
+flushing to guarantee transaction durability. Volumes are stored in the Linux
+VM and can make these guarantees, whereas bind mounts are remoted to macOS or
+Windows, where the file systems behave slightly differently.</p>
   </li>
 </ul>
 

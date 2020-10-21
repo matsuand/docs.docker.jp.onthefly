@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-20 17:51:16 +0900 -->
+<!-- Page generated 2020-10-21 18:44:38 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Google Tag Manager -->
@@ -8,8 +8,9 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-WL2QLG5');</script>
 
-  <title>Docker Toolbox の移行 | Docker ドキュメント</title>
-  <meta name="description" content="Docker Desktop for Windows と Docker Toolbox" />
+  <meta name="robots" content="noindex"/>
+  <title>Docker Toolbox | Docker ドキュメント</title>
+  <meta name="description" content="Docker Desktop for Windows and Docker Toolbox" />
   <meta name="keywords" content="windows, alpha, beta, toolbox, docker-machine, tutorial">
   <link rel="canonical" href="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/docker-toolbox/" />
 
@@ -35,7 +36,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Docker Toolbox の移行"/>
+  <meta name="twitter:title" itemprop="title name" content="Docker Toolbox"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -43,16 +44,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Docker Toolbox の移行" />
-  <meta property="og:description" content="Docker Desktop for Windows と Docker Toolbox" />
+  <meta property="og:title" content="Docker Toolbox" />
+  <meta property="og:description" content="Docker Desktop for Windows and Docker Toolbox" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-21T18:44:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/docker-toolbox/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-20T17:51:16+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Toolbox の移行","description":"Docker Desktop for Windows と Docker Toolbox","url":"https://docs.docker.com/docker-for-windows/docker-toolbox/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-21T18:44:38+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Toolbox","description":"Docker Desktop for Windows and Docker Toolbox","url":"https://docs.docker.com/docker-for-windows/docker-toolbox/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -105,46 +106,193 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Toolbox の移行</h1><span class="reading-time" title="Estimated reading time">
+                        <section class="section"><h1>Docker Toolbox</h1><span class="reading-time" title="Estimated reading time">
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    1 分
+    4 分
   
 </span>
+<blockquote class="warning">
+  <p><strong>Deprecated</strong></p>
 
-<p>このページでは Docker Toolbox ディスクイメージの Docker Desktop for Windows への移行方法について説明します。</p>
+  <p>Docker Toolbox has been deprecated and is no longer in active development. Please use Docker Desktop instead. See <a href="/docs.docker.jp.onthefly/docker-for-mac/">Docker Desktop for Mac</a> and <a href="/docs.docker.jp.onthefly/docker-for-windows/">Docker Desktop for Windows</a>.</p>
+</blockquote>
 
-<h2 id="how-to-migrate-docker-toolbox-disk-images-to-docker-desktop">Docker Toolbox ディスクイメージの Docker Desktop への移行方法</h2>
+<p>This page explains how to migrate your Docker Toolbox disk images to Docker Desktop. It also contains instructions on how to uninstall Docker Toolbox from Mac and Windows machines.</p>
 
-<p>Docker Desktop ではバージョン 18.01.0 以降、インストール処理において Toolbox イメージの移行操作を行わないようになりました。
-既存の Docker Toolbox イメージは、以下に示すスクリプトを使って移行できます。</p>
+<h2 id="migrate-from-docker-toolbox-to-docker-desktop-on-mac">Migrate from Docker Toolbox to Docker Desktop on Mac</h2>
 
-<p>Toolbox の実行中、ターミナル画面において <code class="highlighter-rouge">docker commit</code> を実行して、コンテナーからイメージスナップショットを生成します。
-これは保存しておきたいコンテナーすべてに対して行います。</p>
+<p>You can migrate existing Docker Toolbox images with the steps described below.</p>
+
+<p>In a terminal, while running Toolbox, use <code class="highlighter-rouge">docker commit</code> to create an image snapshot
+from a container, for each container you wish to preserve:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker commit nginx
+sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
+</code></pre></div></div>
+
+<p>Next, export each of these images (and any other images you wish to keep):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
+</code></pre></div></div>
+
+<p>Next, when running Docker Desktop on Mac, reload all these images:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker load -i nginx.tar
+Loaded image ID: sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
+</code></pre></div></div>
+
+<p>Note these steps will not migrate any <code class="highlighter-rouge">docker volume</code> contents: these must
+be copied across manually.</p>
+
+<p>Finally (optional), if you are done with Docker Toolbox, you can fully
+<a href="#uninstall-docker-toolbox-on-windows">uninstall</a> Docker Toolbox using the instructions described in the following section.</p>
+
+<h2 id="migrate-from-docker-toolbox-to-docker-desktop-on-windows">Migrate from Docker Toolbox to Docker Desktop on Windows</h2>
+
+<p>You can migrate existing Docker Toolbox images with the steps described below.</p>
+
+<p>In a terminal, while running Toolbox, use <code class="highlighter-rouge">docker commit</code> to create an image snapshot
+from a container, for each container you wish to preserve:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; docker commit nginx
 sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 </code></pre></div></div>
 
-<p>上のイメージを（そして他にも保存しておきたいイメージがあればそれも含めて）エクスポートします。</p>
+<p>Next, export each of these images (and any other images you wish to keep):</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 </code></pre></div></div>
 
-<p>Docker Desktop on Windows が実行中に、上のイメージをすべてリロードします。</p>
+<p>Next, when running Docker Desktop on Windows, reload all these images:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; docker load -i nginx.tar
 Loaded image ID: sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 </code></pre></div></div>
 
-<p>なお上の手順では <code class="highlighter-rouge">docker volume</code> によるデータは移行されません。
-そういったデータは手動でコピーを行う必要があります。</p>
+<p>Note these steps will not migrate any <code class="highlighter-rouge">docker volume</code> contents: these must
+be copied across manually.</p>
 
-<h2 id="how-to-uninstall-docker-toolbox">Docker Toolbox のアンインストール方法</h2>
+<h2 id="uninstall-docker-toolbox">Uninstall Docker Toolbox</h2>
 
-<p>Docker Toolbox イメージを移行するしないには関係なく、Docker Toolbox のアンインストールを行うことがあるでしょう。
-Toolbox の適切なアンインストール方法については <a href="../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox" target="_blank" rel="noopener" class="_">Toolbox のアンインストール方法</a> を参照してください。</p>
+<p>Removing Toolbox involves removing all the Docker components it includes.</p>
+
+<p>A full uninstall also includes removing the local and remote machines
+you created with Docker Machine. In some cases, you might want to keep
+machines created with Docker Machine. For example, if you plan to re-install Docker Machine as a part of Docker Desktop, you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn’t want to remove
+them. So, the step to remove machines is described here as optional.</p>
+
+<h3 id="uninstall-docker-toolbox-on-mac">Uninstall Docker Toolbox on Mac</h3>
+
+<p>To uninstall Docker Toolbox on Mac:</p>
+
+<ol>
+  <li>
+    <p>List your machines.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine ls
+NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
+dev                 *        virtualbox   Running   tcp://192.168.99.100:2376
+my-docker-machine            virtualbox   Stopped
+default                      virtualbox   Stopped
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Optionally, remove each machine. For example:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine rm my-docker-machine
+Successfully removed my-docker-machine
+</code></pre></div>    </div>
+
+    <p>This step is optional because if you plan
+to re-install Docker Machine as a part
+of <a href="/docs.docker.jp.onthefly/docker-for-mac/">Docker Desktop for Mac</a>, you can import and
+continue to manage those machines through Docker.</p>
+  </li>
+  <li>
+    <p>In your “Applications” folder, remove the “Docker” directory,
+which contains “Docker Quickstart Terminal” and “Kitematic”.</p>
+  </li>
+  <li>
+    <p>Run the following in a command shell to fully remove Kitematic:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rm -fr ~/Library/Application\ Support/Kitematic
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Remove the <code class="highlighter-rouge">docker</code>, <code class="highlighter-rouge">docker-compose</code>, and <code class="highlighter-rouge">docker-machine</code> commands from
+the <code class="highlighter-rouge">/usr/local/bin</code> folder.  Docker Desktop for Mac and Brew may also have
+installed them; in case of doubt leave them, or reinstall them via Brew, or
+rerun Docker Desktop for Mac (no need to reinstall it).</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rm -f /usr/local/bin/docker
+$ rm -f /usr/local/bin/docker-compose
+$ rm -f /usr/local/bin/docker-machine
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Optionally, remove the <code class="highlighter-rouge">~/.docker/machine</code> directory.</p>
+
+    <p>This directory stores some configuration and/or state, such as information
+about created machines and certificates.</p>
+  </li>
+  <li>
+    <p>Uninstall Oracle VirtualBox, which is installed as a part of the
+Toolbox install.</p>
+  </li>
+</ol>
+
+<h3 id="uninstall-docker-toolbox-on-windows">Uninstall Docker Toolbox on Windows</h3>
+
+<p>To uninstall Toolbox on Windows:</p>
+
+<ol>
+  <li>
+    <p>List your machines.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine ls
+NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
+dev                 *        virtualbox   Running   tcp://192.168.99.100:2376
+my-docker-machine            virtualbox   Stopped
+default                      virtualbox   Stopped
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Optionally, remove each machine. For example:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-machine rm my-docker-machine
+Successfully removed my-docker-machine
+</code></pre></div>    </div>
+
+    <p>This step is optional because if you plan to re-install Docker Machine as a
+part of <a href="/docs.docker.jp.onthefly/docker-for-windows/">Docker Desktop for Windows</a>, you can
+import and continue to manage those machines through Docker.</p>
+  </li>
+  <li>
+    <p>Uninstall Docker Toolbox using Window’s standard process for uninstalling programs through the control panel (programs and features).</p>
+
+    <blockquote>
+      <p><strong>Note</strong>: This process does not remove the <code class="highlighter-rouge">docker-install.exe</code> file. You must delete that file yourself.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Optionally, remove the <code class="highlighter-rouge">C:\Users\&lt;your-user&gt;\.docker</code> directory.</p>
+
+    <p>If you want to remove Docker entirely, you
+ can verify that the uninstall removed
+ the <code class="highlighter-rouge">.docker</code> directory under your user path.
+ If it is still there, remove it manually.
+ This directory stores some Docker
+ program configuration and state, such as
+ information about created machines and
+ certificates. You usually don’t need to remove this directory.</p>
+  </li>
+  <li>
+    <p>Uninstall Oracle VirtualBox, which is
+  installed as a part of the Toolbox install.</p>
+  </li>
+</ol>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=windows">windows</a>, <a href="/docs.docker.jp.onthefly/search/?q=alpha">alpha</a>, <a href="/docs.docker.jp.onthefly/search/?q=beta">beta</a>, <a href="/docs.docker.jp.onthefly/search/?q=toolbox">toolbox</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker-machine">docker-machine</a>, <a href="/docs.docker.jp.onthefly/search/?q=tutorial">tutorial</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -179,8 +327,12 @@ Toolbox の適切なアンインストール方法については <a href="../to
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#how-to-migrate-docker-toolbox-disk-images-to-docker-desktop" class="nomunge">Docker Toolbox ディスクイメージの Docker Desktop への移行方法</a></li>
-  <li><a href="#how-to-uninstall-docker-toolbox" class="nomunge">Docker Toolbox のアンインストール方法</a></li>
+  <li><a href="#migrate-from-docker-toolbox-to-docker-desktop-on-mac" class="nomunge">Migrate from Docker Toolbox to Docker Desktop on Mac</a>
+    <ul>
+      <li><a href="#migrate-from-docker-toolbox-to-docker-desktop-on-windows" class="nomunge">Migrate from Docker Toolbox to Docker Desktop on Windows</a></li>
+      <li><a href="#uninstall-docker-toolbox" class="nomunge">Uninstall Docker Toolbox</a></li>
+    </ul>
+  </li>
 </ul>
 
 </div>
@@ -270,7 +422,7 @@ Toolbox の適切なアンインストール方法については <a href="../to
     let PDRTJS_settings_8453675 = {
         "id": "8453675",
         "unique_id": "docker-for-windows/docker-toolbox.md",
-        "title": "Docker Toolbox の移行",
+        "title": "Docker Toolbox",
         "font_family": "Open Sans, sans serif",
         "font_color": "b9c2cc",
         "font_align": "center",

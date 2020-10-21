@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-20 17:51:16 +0900 -->
+<!-- Page generated 2020-10-21 18:44:38 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- Google Tag Manager -->
@@ -46,12 +46,12 @@
   <meta property="og:title" content="ログ機能とトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting, logs, and known issues" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-21T18:44:38+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/troubleshoot/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-20T17:51:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-21T18:44:38+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ログ機能とトラブルシューティング","description":"Troubleshooting, logs, and known issues","url":"https://docs.docker.com/docker-for-mac/troubleshoot/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -339,18 +339,7 @@ the previously installed version.</p>
     <p>If <code class="highlighter-rouge">docker</code> commands aren’t working properly or as expected, you may need to
 unset some environment variables, to make sure you are not using the legacy
 Docker Machine environment in your shell or command window. Unset the
-<code class="highlighter-rouge">DOCKER_HOST</code> environment variable and related variables.</p>
-
-    <ul>
-      <li>
-        <p>If you use bash, use the following command: <code class="highlighter-rouge">unset ${!DOCKER_*}</code></p>
-      </li>
-      <li>
-        <p>For other shells, unset each environment variable individually as described
-in <a href="/docs.docker.jp.onthefly/docker-for-mac/docker-toolbox/#setting-up-to-run-docker-desktop-on-mac">Setting up to run Docker Desktop on Mac</a>
-in <a href="/docs.docker.jp.onthefly/docker-for-mac/docker-toolbox/">Docker Desktop on Mac vs. Docker Toolbox</a>.</p>
-      </li>
-    </ul>
+<code class="highlighter-rouge">DOCKER_HOST</code> environment variable and related variables. If you use bash, use the following command: <code class="highlighter-rouge">unset ${!DOCKER_*}</code></p>
   </li>
   <li>
     <p>Network connections fail if the macOS Firewall is set to “Block all incoming
@@ -360,9 +349,9 @@ incoming connections so that the VM can get an IP address.</p>
   <li>
     <p>For the <code class="highlighter-rouge">hello-world-nginx</code> example, Docker Desktop must be running to get to
 the web server on <code class="highlighter-rouge">http://localhost/</code>. Make sure that the Docker icon is
-displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine (not Engine from Toolbox).
+displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
 Otherwise, you might start the webserver container but get a “web page not
-available” error when you go to <code class="highlighter-rouge">localhost</code>. For more information on distinguishing between the two environments, see <a href="/docs.docker.jp.onthefly/docker-for-mac/docker-toolbox/">Docker Desktop on Mac vs. Docker Toolbox</a>.</p>
+available” error when you go to <code class="highlighter-rouge">localhost</code>.</p>
   </li>
   <li>
     <p>If you see errors like <code class="highlighter-rouge">Bind for 0.0.0.0:8080 failed: port is already
@@ -445,7 +434,7 @@ localhost:1234 using:</p>
 <ul>
   <li>
     <p>There are a number of issues with the performance of directories bind-mounted
-with <code class="highlighter-rouge">osxfs</code>. In particular, writes of small blocks, and traversals of large
+into containers. In particular, writes of small blocks, and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
 trees, may suffer from poor performance. Applications that behave in this way
@@ -463,11 +452,10 @@ dependencies in a <code class="highlighter-rouge">vendor</code> folder<br /><br 
 
     <p>As a work-around for this behavior, you can put vendor or third-party library
 directories in Docker volumes, perform temporary file system operations
-outside of <code class="highlighter-rouge">osxfs</code> mounts, and use third-party tools like Unison or <code class="highlighter-rouge">rsync</code> to
+outside of bind mounts, and use third-party tools like Unison or <code class="highlighter-rouge">rsync</code> to
 synchronize between container directories and bind-mounted directories. We are
-actively working on <code class="highlighter-rouge">osxfs</code> performance using a number of different
-techniques.  To learn more, see the topic on
-<a href="/docs.docker.jp.onthefly/docker-for-mac/osxfs/#performance-issues-solutions-and-roadmap">Performance issues, solutions, and roadmap</a>.</p>
+actively working on performance improvements using a number of different
+techniques.  To learn more, see the <a href="https://github.com/docker/roadmap/issues/7" target="_blank" rel="noopener" class="_">topic on our roadmap</a>.</p>
   </li>
   <li>
     <p>If your system does not have access to an NTP server, then after a hibernate
