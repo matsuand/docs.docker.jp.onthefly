@@ -54,6 +54,7 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 
 ${publishdir}/glossary.js: $(publishbas)/_data/glossary.yaml
 ${publishdir}/metadata.js: $(publishbas)/_data/toc.yaml
+${publishdir}/toc.json: $(publishbas)/_data/toc.yaml
 
 -include jsnons.sub
 ./jsnons.sub: $(top_srcdir)/bin/copymake.sh $(top_builddir)/config.log

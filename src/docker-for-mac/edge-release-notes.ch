@@ -5998,9 +5998,9 @@ events or unexpected unmounts.
 @z
 
 @x
-* FUSE 7.23 for [osxfs](osxfs.md)
+* FUSE 7.23 for osxfs
 @y
-* FUSE 7.23 for [osxfs](osxfs.md)
+* FUSE 7.23 for osxfs
 @z
 
 @x
@@ -6023,10 +6023,10 @@ events or unexpected unmounts.
 
 @x
 * UI improvements
-* Fixed a problem in [osxfs](osxfs.md) where`mkdir` returned EBUSY but directory was created.
+* Fixed a problem in osxfs where`mkdir` returned EBUSY but directory was created.
 @y
 * UI improvements
-* Fixed a problem in [osxfs](osxfs.md) where`mkdir` returned EBUSY but directory was created.
+* Fixed a problem in osxfs where`mkdir` returned EBUSY but directory was created.
 @z
 
 @x
@@ -6042,9 +6042,9 @@ events or unexpected unmounts.
 @z
 
 @x
-The `osxfs` file system now persists ownership changes in an extended attribute. (See the topic on [ownership](osxfs.md#ownership) in [Sharing the macOS file system with Docker containers](osxfs.md).)
+The `osxfs` file system now persists ownership changes in an extended attribute.
 @y
-The `osxfs` file system now persists ownership changes in an extended attribute. (See the topic on [ownership](osxfs.md#ownership) in [Sharing the macOS file system with Docker containers](osxfs.md).)
+The `osxfs` file system now persists ownership changes in an extended attribute.
 @z
 
 @x

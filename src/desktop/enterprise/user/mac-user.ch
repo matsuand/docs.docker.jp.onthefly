@@ -324,15 +324,9 @@ For more information, see:
 @z
 
 @x
-- [Namespaces](https://docs.docker.com/docker-for-mac/osxfs/#namespaces) in [osxfs file system sharing](https://docs.docker.com/docker-for-mac/osxfs/).
+- [Volume mounting requires file sharing for any project directories outside of `/Users`](../../../docker-for-mac/troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
 @y
-- [Namespaces](https://docs.docker.com/docker-for-mac/osxfs/#namespaces) in [osxfs file system sharing](https://docs.docker.com/docker-for-mac/osxfs/).
-@z
-
-@x
-- [Volume mounting requires file sharing for any project directories outside of `/Users`](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
-@y
-- [Volume mounting requires file sharing for any project directories outside of `/Users`](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
+- [Volume mounting requires file sharing for any project directories outside of `/Users`](../../../docker-for-mac/troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
 @z
 
 @x
@@ -482,13 +476,13 @@ You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
 `no_proxy` environment variables are set. When your proxy configuration changes,
 Docker restarts automatically to pick up the new settings. If you have
 containers that you wish to keep running across restarts, you should consider
-using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
+using [restart policies](/engine/reference/run/#restart-policies---restart).
 @y
 You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
 `no_proxy` environment variables are set. When your proxy configuration changes,
 Docker restarts automatically to pick up the new settings. If you have
 containers that you wish to keep running across restarts, you should consider
-using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
+using [restart policies](/engine/reference/run/#restart-policies---restart).
 @z
 
 @x
@@ -568,13 +562,15 @@ true
 @z
 
 @x
-You can set up a custom and insecure [registry](https://docs.docker.com/registry/introduction) to store your public or private images (instead of
-using [Docker Hub](https://hub.docker.com/). Add URLs for
-your insecure registries and registry mirrors on which to host your images.
+You can set up a custom and insecure [registry](../../../registry/introduction.md)
+to store your public or private images (instead of using [Docker Hub](https://hub.docker.com/).
+Add URLs for your insecure registries and registry mirrors on which to host your
+images.
 @y
-You can set up a custom and insecure [registry](https://docs.docker.com/registry/introduction) to store your public or private images (instead of
-using [Docker Hub](https://hub.docker.com/). Add URLs for
-your insecure registries and registry mirrors on which to host your images.
+You can set up a custom and insecure [registry](../../../registry/introduction.md)
+to store your public or private images (instead of using [Docker Hub](https://hub.docker.com/).
+Add URLs for your insecure registries and registry mirrors on which to host your
+images.
 @z
 
 @x
@@ -584,15 +580,15 @@ For more information, see:
 @z
 
 @x
-- [How do I add custom CA certificates?](https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-custom-ca-certificates)
+- [How do I add custom CA certificates?](../../../docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates)
 @y
-- [How do I add custom CA certificates?](https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-custom-ca-certificates)
+- [How do I add custom CA certificates?](../../../docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates)
 @z
 
 @x
-- [How do I add client certificates?](https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-client-certificates)
+- [How do I add client certificates?](../../../docker-for-mac/faqs.md#how-do-i-add-client-certificates)
 @y
-- [How do I add client certificates?](https://docs.docker.com/docker-for-mac/faqs/#how-do-i-add-client-certificates)
+- [How do I add client certificates?](../../../docker-for-mac/faqs.md#how-do-i-add-client-certificates)
 @z
 
 @x
@@ -603,10 +599,10 @@ For more information, see:
 
 @x
 Click the **Advanced** tab to configure the daemon from the JSON file. For a
-full list of options, see the Docker Engine [dockerd command line reference](https://docs.docker.com/engine/reference/commandline/dockerd).
+full list of options, see the Docker Engine [dockerd command line reference](/engine/reference/commandline/dockerd/).
 @y
 Click the **Advanced** tab to configure the daemon from the JSON file. For a
-full list of options, see the Docker Engine [dockerd command line reference](https://docs.docker.com/engine/reference/commandline/dockerd).
+full list of options, see the Docker Engine [dockerd command line reference](/engine/reference/commandline/dockerd/).
 @z
 
 @x
@@ -672,9 +668,9 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 @z
 
 @x
-To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator) and click the **Apply** button.
+To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](../../../docker-for-mac/kubernetes.md#override-the-default-orchestrator) and click the **Apply** button.
 @y
-To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](https://docs.docker.com/docker-for-mac/kubernetes/#override-the-default-orchestrator) and click the **Apply** button.
+To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**, choose the [default orchestrator](../../../docker-for-mac/kubernetes.md#override-the-default-orchestrator) and click the **Apply** button.
 @z
 
 @x
@@ -732,9 +728,9 @@ Kubernetes containers are stopped and removed, and the
 @z
 
 @x
-For more information about using the Kubernetes integration with Docker Desktop Enterprise, see [Deploy on Kubernetes](https://docs.docker.com/docker-for-mac/kubernetes).
+For more information about using the Kubernetes integration with Docker Desktop Enterprise, see [Deploy on Kubernetes](../../../docker-for-mac/kubernetes.md).
 @y
-For more information about using the Kubernetes integration with Docker Desktop Enterprise, see [Deploy on Kubernetes](https://docs.docker.com/docker-for-mac/kubernetes).
+For more information about using the Kubernetes integration with Docker Desktop Enterprise, see [Deploy on Kubernetes](../../../docker-for-mac/kubernetes.md).
 @z
 
 @x
@@ -762,9 +758,9 @@ Click on the Docker icon from the menu bar and then **Preferences**. Click **Res
 @z
 
 @x
-The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Mac](/desktop/enterprise/troubleshoot/mac-issues).
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Mac](../troubleshoot/mac-issues.md).
 @y
-The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Mac](/desktop/enterprise/troubleshoot/mac-issues).
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Mac](../troubleshoot/mac-issues.md).
 @z
 
 @x
@@ -774,9 +770,9 @@ The **Diagnose and Feedback** option allows you troubleshoot any issues you may 
 @z
 
 @x
-Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/desktop/enterprise/app-designer).
+Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](../app-designer.md).
 @y
-Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](/desktop/enterprise/app-designer).
+Select this option to open the Application Designer user interface. Application Designer provides a library of application and service templates to help Docker developers quickly create new Docker applications. For more information, see [Application Designer](../app-designer.md).
 @z
 
 @x
@@ -792,21 +788,21 @@ Select **Sign in /Create Docker ID** from the Docker Desktop Enterprise menu to 
 @z
 
 @x
-See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to learn more:
+See the following [Docker Hub topics](../../../docker-hub/index.md) to learn more:
 @y
-See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to learn more:
+See the following [Docker Hub topics](../../../docker-hub/index.md) to learn more:
 @z
 
 @x
-- [Organizations and Teams in Docker Hub](https://docs.docker.com/docker-hub/orgs/)
+- [Organizations and Teams in Docker Hub](../../../docker-hub/orgs.md)
 @y
-- [Organizations and Teams in Docker Hub](https://docs.docker.com/docker-hub/orgs/)
+- [Organizations and Teams in Docker Hub](../../../docker-hub/orgs.md)
 @z
 
 @x
-- [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
+- [Builds and Images](../../../docker-hub/official_images.md)
 @y
-- [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
+- [Builds and Images](../../../docker-hub/official_images.md)
 @z
 
 @x
@@ -1039,11 +1035,11 @@ also in your keychain.
 
 @x
 To learn more about how to install a CA root certificate for the registry and
-how to set the client TLS certificate for verification, see [Verify repository client with certificates](https://docs.docker.com/engine/security/certificates) in the Docker Engine
+how to set the client TLS certificate for verification, see [Verify repository client with certificates](../../../engine/security/certificates.md) in the Docker Engine
 topics.
 @y
 To learn more about how to install a CA root certificate for the registry and
-how to set the client TLS certificate for verification, see [Verify repository client with certificates](https://docs.docker.com/engine/security/certificates) in the Docker Engine
+how to set the client TLS certificate for verification, see [Verify repository client with certificates](../../../engine/security/certificates.md) in the Docker Engine
 topics.
 @z
 

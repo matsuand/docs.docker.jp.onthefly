@@ -22,7 +22,6 @@ bases = \
 	install            \
 	kubernetes         \
 	multi-arch         \
-	mutagen            \
 	networking         \
 	release-notes      \
 	space              \

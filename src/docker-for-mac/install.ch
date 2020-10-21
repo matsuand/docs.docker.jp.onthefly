@@ -56,43 +56,20 @@ Docker Desktop のダウンロードによって、[Docker Software End User Lic
 @z
 
 @x
-> README FIRST for Docker Toolbox and Docker Machine users
->
->If you are already running Docker on your machine, first read
-[Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the
-impact of this installation on your existing setup, how to set your environment
-for Docker Desktop on Mac, and how the two products can coexist.
-@y
-{% comment %}
-> README FIRST for Docker Toolbox and Docker Machine users
->
->If you are already running Docker on your machine, first read
-[Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the
-impact of this installation on your existing setup, how to set your environment
-for Docker Desktop on Mac, and how the two products can coexist.
-{% endcomment %}
-> Docker Toolbox と Docker Machine のユーザーはまずはじめに読んでください。
->
->すでにマシン上で Docker を利用している方は、まずはじめに [Docker Desktop for Mac と Docker Toolbox](docker-toolbox.md) をよく読んでください。
->そしてすでに Docker があるマシンに新たにインストールするとどうなるのか、Docker Desktop on Mac の環境設定をどうするのか、2 つの製品を並行して利用するにはどうするのか、こういったことを十分に理解してください。
-@z
-
-@x
 **Relationship to Docker Machine**: Installing Docker Desktop on Mac does not affect machines you created with Docker Machine. You have the option to copy containers and images from your local `default` machine (if one exists) to the Docker Desktop [HyperKit](https://github.com/docker/HyperKit/) VM. When
 you are running Docker Desktop, you do not need Docker Machine nodes running locally (or anywhere else). With Docker Desktop, you have a new, native
 virtualization system running (HyperKit) which takes the place of the
-VirtualBox system. To learn more, see [Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md).
+VirtualBox system.
 @y
 {% comment %}
 **Relationship to Docker Machine**: Installing Docker Desktop on Mac does not affect machines you created with Docker Machine. You have the option to copy containers and images from your local `default` machine (if one exists) to the Docker Desktop [HyperKit](https://github.com/docker/HyperKit/) VM. When
 you are running Docker Desktop, you do not need Docker Machine nodes running locally (or anywhere else). With Docker Desktop, you have a new, native
 virtualization system running (HyperKit) which takes the place of the
-VirtualBox system. To learn more, see [Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md).
+VirtualBox system.
 {% endcomment %}
 **Docker Machine との関係**: Mac 上に Docker Desktop  をインストールしても、Docker Machine を使って生成していたマシンへの影響はありません。ローカルの `default` マシンがあるとして、ここから Docker Desktop [HyperKit](https://github.com/docker/HyperKit/) VM に向けて、コンテナーやイメージをコピーすることができます。
 Docker Desktop の実行中に、Docker Machine のノードをローカルで（あるいはどこであっても）起動しておく必要はありません。
 Docker Desktop を利用すると、VirtualBox システムにかわって、新たにネイティブな仮想システム（HyperKit）を起動することになります。
-詳細は [Docker Desktop for Mac と Docker Toolbox](docker-toolbox.md) を参照してください。
 @z
 
 @x

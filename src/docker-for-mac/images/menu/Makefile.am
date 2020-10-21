@@ -10,16 +10,9 @@ uploaddir  = @UPLOADDIR@/$(thisdir)
 all: tgtdir $(srcs_with_prefix)
 
 images = \
-	command-line.png \
-	engine.png \
-	kube-context.png \
 	prefs-advanced.png \
-	prefs-fileshare.png \
 	prefs-general.png \
-	prefs-network.png \
-	prefs-proxies.png \
 	prefs.png \
-	sign-in.png \
 	troubleshoot.png
 
 srcs = $(images)

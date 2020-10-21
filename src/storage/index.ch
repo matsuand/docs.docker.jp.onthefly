@@ -482,6 +482,30 @@ Docker コンテナーやサービスにおいてデータを保持するため�
 @z
 
 @x
+- When your application requires high-performance I/O on Docker Desktop. Volumes
+  are stored in the Linux VM rather than the host, which means that the reads and writes
+  have much lower latency and higher throughput.
+@y
+- When your application requires high-performance I/O on Docker Desktop. Volumes
+  are stored in the Linux VM rather than the host, which means that the reads and writes
+  have much lower latency and higher throughput.
+@z
+
+@x
+- When your application requires fully native file system behavior on Docker
+  Desktop. For example, a database engine requires precise control over disk
+  flushing to guarantee transaction durability. Volumes are stored in the Linux
+  VM and can make these guarantees, whereas bind mounts are remoted to macOS or
+  Windows, where the file systems behave slightly differently.
+@y
+- When your application requires fully native file system behavior on Docker
+  Desktop. For example, a database engine requires precise control over disk
+  flushing to guarantee transaction durability. Volumes are stored in the Linux
+  VM and can make these guarantees, whereas bind mounts are remoted to macOS or
+  Windows, where the file systems behave slightly differently.
+@z
+
+@x
 ## Good use cases for bind mounts
 @y
 {% comment %}

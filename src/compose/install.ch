@@ -174,29 +174,18 @@ Python package manager or installing Compose as a container.
 @z
 
 @x
-**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-Docker install instructions for these are here:
+For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
 @y
 {% comment %}
-**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-Docker install instructions for these are here:
+For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
 {% endcomment %}
-**Docker Desktop for Mac** と **Docker Toolbox** には、他の Docker アプリとともに Compose が含まれています。したがって Mac ユーザーは Compose を個別にインストールする必要はありません。
-上記ソフトウェアのインストール手順は以下にあります。
-@z
-
-@x
-  * [Get Docker Desktop for Mac](../docker-for-mac/install.md)
-  * [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
-@y
-{% comment %}
-  * [Get Docker Desktop for Mac](../docker-for-mac/install.md)
-  * [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
-{% endcomment %}
-  * [Docker Desktop for Mac の入手](../docker-for-mac/install.md)。
-  * [Docker Toolbox の入手](../toolbox/overview.md)（古いシステムの場合）。
+**Docker Desktop for Mac** には他の Docker アプリとともに Compose が含まれています。
+したがって Mac ユーザーは Compose を個別にインストールする必要はありません。
+インストール手順については [Docker Desktop on Mac のインストール](../docker-for-mac/install.md) を参照してください。
 @z
 
 @x
@@ -218,29 +207,18 @@ Docker install instructions for these are here:
 @z
 
 @x
-**Docker Desktop for Windows** and **Docker Toolbox** already include Compose
+**Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. Docker install instructions for these are here:
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 @y
 {% comment %}
-**Docker Desktop for Windows** and **Docker Toolbox** already include Compose
+**Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. Docker install instructions for these are here:
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 {% endcomment %}
-**Docker Desktop for Windows** と **Docker Toolbox** には、他の Docker アプリとともに Compose が含まれています。したがって Windows ユーザーは Compose を個別にインストールする必要はありません。
-上記ソフトウェアのインストール手順は以下にあります。
-@z
-
-@x
-* [Get Docker Desktop for Windows](../docker-for-windows/install.md)
-* [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
-@y
-{% comment %}
-* [Get Docker Desktop for Windows](../docker-for-windows/install.md)
-* [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
-{% endcomment %}
-* [Docker Desktop for Windows の入手](../docker-for-windows/install.md)。
-* [Docker Toolbox の入手](../toolbox/overview.md)（古いシステムの場合）。
+**Docker Desktop for Windows** には他の Docker アプリとともに Compose が含まれています。
+したがって Windows ユーザーは Compose を個別にインストールする必要はありません。
+インストール手順については [Install Docker Desktop on Windows](../docker-for-windows/install.md) を参照してください。
 @z
 
 @x

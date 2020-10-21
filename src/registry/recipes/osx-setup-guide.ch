@@ -46,12 +46,6 @@ You can start a VM on macOS, and deploy your registry normally as a container us
 @z
 
 @x
-The simplest road to get there is traditionally to use the [docker Toolbox](https://www.docker.com/toolbox), or [docker-machine](../../machine/index.md), which usually relies on the [boot2docker](http://boot2docker.io/) ISO inside a VirtualBox VM.
-@y
-The simplest road to get there is traditionally to use the [docker Toolbox](https://www.docker.com/toolbox), or [docker-machine](../../machine/index.md), which usually relies on the [boot2docker](http://boot2docker.io/) ISO inside a VirtualBox VM.
-@z
-
-@x
 ### Solution
 @y
 ### Solution

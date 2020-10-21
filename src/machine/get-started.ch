@@ -40,25 +40,18 @@ Docker host inside of a local virtual machine.
 
 @x
 With the advent of [Docker Desktop for Mac](../docker-for-mac/index.md) and
-[Docker Desktop for Windows](../docker-for-windows/index.md) as replacements for
-[Docker Toolbox](../toolbox/overview.md), we recommend that you use these for your
+[Docker Desktop for Windows](../docker-for-windows/index.md), we recommend that you use these for your
 primary Docker workflows. You can use these applications to run Docker natively
-on your local system without using Docker Machine at all. (See
-[Docker Desktop for Mac vs. Docker Toolbox](../docker-for-mac/docker-toolbox.md)
-for an explanation on the Mac side.)
+on your local system without using Docker Machine at all.
 @y
 {% comment %}
 With the advent of [Docker Desktop for Mac](../docker-for-mac/index.md) and
-[Docker Desktop for Windows](../docker-for-windows/index.md) as replacements for
-[Docker Toolbox](../toolbox/overview.md), we recommend that you use these for your
+[Docker Desktop for Windows](../docker-for-windows/index.md), we recommend that you use these for your
 primary Docker workflows. You can use these applications to run Docker natively
-on your local system without using Docker Machine at all. (See
-[Docker Desktop for Mac vs. Docker Toolbox](../docker-for-mac/docker-toolbox.md)
-for an explanation on the Mac side.)
+on your local system without using Docker Machine at all.
 {% endcomment %}
-[Docker Toolbox](../toolbox/overview.md) に代わるものとして [Docker Desktop for Mac](../docker-for-mac/index.md) や [Docker Desktop for Windows](../docker-for-windows/index.md) が開発されているので、Docker を使った作業には、これらの新しいアプリケーションを利用することをお勧めします。
+[Docker Desktop for Mac](../docker-for-mac/index.md) や [Docker Desktop for Windows](../docker-for-windows/index.md) が開発されているので、Docker を使った作業には、これらの新しいアプリケーションを利用することをお勧めします。
 このアプリケーションを利用すれば Docker Machine を用いることなく、ローカルシステム上において Docker をネイティブに実行することができます。
-（Mac 上における説明については [Docker Desktop for Mac と Docker Toolbox](../docker-for-mac/docker-toolbox.md) を参照してください。）
 @z
 
 @x
@@ -208,128 +201,29 @@ Docker Desktop for Mac では [HyperKit](https://github.com/docker/HyperKit/) �
 Currently, there is no `docker-machine create` driver for HyperKit, so
 use the `virtualbox` driver to create local machines. (See the
 [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).) You can
-run both HyperKit and Oracle VirtualBox on the same system. To learn more, see
-[Docker Desktop for Mac vs. Docker Toolbox](../docker-for-mac/docker-toolbox.md).
+run both HyperKit and Oracle VirtualBox on the same system.
 @y
 {% comment %}
 Currently, there is no `docker-machine create` driver for HyperKit, so
 use the `virtualbox` driver to create local machines. (See the
 [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).) You can
-run both HyperKit and Oracle VirtualBox on the same system. To learn more, see
-[Docker Desktop for Mac vs. Docker Toolbox](../docker-for-mac/docker-toolbox.md).
+run both HyperKit and Oracle VirtualBox on the same system.
 {% endcomment %}
 現時点で`docker-machine create`が利用する HyperKit 用のドライバーはありません。
 したがってローカルマシンの生成には`virtualbox`ドライバーが用いられます。
 （[Docker Machine の Oracle VirtualBox 向けドライバー](drivers/virtualbox.md) を参照してください。）
 HyperKit と Oracle VirtualBox は 1 つのシステム上に稼動させることができます。
-詳しくは [Docker Desktop for Mac と Docker Toolbox](../docker-for-mac/docker-toolbox.md) を参照してください。
 @z
 
 @x
 * Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
-  correctly installed on your system (either as part of an earlier Toolbox install,
-  or manual install).
+  correctly installed on your system.
 @y
 {% comment %}
 * Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
-  correctly installed on your system (either as part of an earlier Toolbox install,
-  or manual install).
+  correctly installed on your system.
 {% endcomment %}
 * [最新版の VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"} が正しくインストールされていることを確認してください。
-  （すでに示した ToolBox の一部としてインストールしているか、直接インストールしているかのどちらでもかまいません。）
-@z
-
-@x
-#### If you are using Docker Toolbox
-@y
-{% comment %}
-#### If you are using Docker Toolbox
-{% endcomment %}
-{: #if-you-are-using-docker-toolbox }
-#### Docker Toolbox を使う場合
-@z
-
-@x
-Docker Desktop for Mac and Docker Desktop for Windows both require newer versions of their
-respective operating systems, so users with older OS versions must use Docker
-Toolbox.
-@y
-{% comment %}
-Docker Desktop for Mac and Docker Desktop for Windows both require newer versions of their
-respective operating systems, so users with older OS versions must use Docker
-Toolbox.
-{% endcomment %}
-Docker Desktop for Mac と Docker Desktop for Windows では、それぞれのオペレーティングシステムの最新版を必要とします。
-したがってシステムバージョンが古いユーザーは Docker Toolbox を利用しなければなりません。
-@z
-
-@x
-* If you are using Docker Toolbox on either Mac or an older version Windows
-  system (without Hyper-V), use the `virtualbox` driver to create a local machine
-  based on Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" rel="noopener" class="_"}.
-  (See the [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).)
-@y
-{% comment %}
-* If you are using Docker Toolbox on either Mac or an older version Windows
-  system (without Hyper-V), use the `virtualbox` driver to create a local machine
-  based on Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" rel="noopener" class="_"}.
-  (See the [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).)
-{% endcomment %}
-* Docker Toolbox を Mac 上において、あるいは（Hyper-V がない）古い Windows 上において利用している場合は、Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" rel="noopener" class="_"} に基づいたローカルマシンを生成する際に`virtualbox`ドライバーが用いられます。
-  （[Docker Machine の Oracle VirtualBox 向けドライバー](drivers/virtualbox.md) を参照してください。）
-@z
-
-@x
-* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot
-  run Docker Desktop for Windows (for example Windows 8 Pro), you must use the
-  `hyperv` driver to create local machines. (See th
-   [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md).)
-@y
-{% comment %}
-* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot
-  run Docker Desktop for Windows (for example Windows 8 Pro), you must use the
-  `hyperv` driver to create local machines. (See th
-   [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md).)
-{% endcomment %}
-* Docker Toolbox を Windows 上で利用している場合で、Hyper-V 機能はあるものの Docker Desktop for Windows は稼動させていない場合（たとえば Windows 8 pro の場合）には、ローカルマシンの生成に`hyperv`ドライバーが必要になります。
-  （[Docker Machine の Microsoft Hyper-V 向けドライバー](drivers/hyper-v.md) を参照してください。）
-@z
-
-@x
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
-  correctly installed on your system. If you used
-  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" rel="noopener" class="_"}
-  or [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" rel="noopener" class="_"}
-  to install Docker Machine, VirtualBox is
-  automatically installed.
-@y
-{% comment %}
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
-  correctly installed on your system. If you used
-  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" rel="noopener" class="_"}
-  or [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" rel="noopener" class="_"}
-  to install Docker Machine, VirtualBox is
-  automatically installed.
-{% endcomment %}
-* [最新版の VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"} が正しくインストールされていることを確認してください。
-  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" rel="noopener" class="_"} または [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" rel="noopener" class="_"} を利用して Docker Machine がインストールできている場合、VirtualBox は自動的にインストールされています。
-@z
-
-@x
-* If you used the Quickstart Terminal to launch your first machine and set your
-  terminal environment to point to it, a default machine was automatically
-  created. If so, you can still follow along with these steps, but
-  create another machine and name it something other than `default`.
-@y
-{% comment %}
-* If you used the Quickstart Terminal to launch your first machine and set your
-  terminal environment to point to it, a default machine was automatically
-  created. If so, you can still follow along with these steps, but
-  create another machine and name it something other than `default`.
-{% endcomment %}
-* Quickstart Terminal を利用してマシン起動を行っていて、ターミナル画面の環境を設定済みである場合、デフォルトのマシンは自動的に生成されています。
-  その場合でも、ここに示す手順に従って進めることはできます。
-  ただしマシンは別のものを生成して、その名前は`default`以外のものにしてください。
 @z
 
 @x
@@ -468,27 +362,16 @@ choose another name for this new machine.
 @z
 
 @x
-    * If you are using Toolbox on Mac, Toolbox on older Windows systems without Hyper-V, or Docker Desktop for Mac, use `virtualbox` as the driver, as shown in this example. (The Docker Machine VirtualBox driver reference is [here](drivers/virtualbox.md).) (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
+    On Docker Desktop for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
 @y
     {% comment %}
-    * If you are using Toolbox on Mac, Toolbox on older Windows systems without Hyper-V, or Docker Desktop for Mac, use `virtualbox` as the driver, as shown in this example. (The Docker Machine VirtualBox driver reference is [here](drivers/virtualbox.md).) (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
+    On Docker Desktop for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
     {% endcomment %}
-    * 利用しているシステムが以下の場合、つまり Toolbox on Mac であるか、Hyper-V のない古い Windows 上でのToolbox か、Docker Desktop for Mac である場合、ドライバーとしては、例に示しているように`virtualbox`を指定します。
-      （Docker Machine の VirtualBox 向けドライバーのリファレンスは [こちら](drivers/virtualbox.md) にあります。）
-      （[prerequisites](get-started.md#prerequisite-information) を再度確認してください。）
-@z
-
-@x
-    * On Docker Desktop for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
-@y
-    {% comment %}
-    * On Docker Desktop for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
-    {% endcomment %}
-    * Hyper-V をサポートしている Windows 上において Docker Desktop for Windows を利用いている場合は`hyperv`ドライバーを指定します。
-      このドライバーについては [Docker Machine の Microsoft Hyper-V 向けドライバーリファレンス](drivers/hyper-v.md) に示されています。
-      そこにある [利用例](drivers/hyper-v.md#example) に従ってください。
-      そこでは外部ネットワークスイッチの利用方法を示すとともに、各コマンドのフラグについて説明しています。
-      （詳しくは上の [前提条件](get-started.md#prerequisite-information) を参照してください。）
+    Hyper-V をサポートしている Windows 上において Docker Desktop for Windows を利用いている場合は`hyperv`ドライバーを指定します。
+    このドライバーについては [Docker Machine の Microsoft Hyper-V 向けドライバーリファレンス](drivers/hyper-v.md) に示されています。
+    そこにある [利用例](drivers/hyper-v.md#example) に従ってください。
+    そこでは外部ネットワークスイッチの利用方法を示すとともに、各コマンドのフラグについて説明しています。
+    （詳しくは上の [前提条件](get-started.md#prerequisite-information) を参照してください。）
 @z
 
 @x
@@ -984,22 +867,15 @@ For machines other than `default`, and commands other than those listed above, y
 
 @x
 You might want to use the current shell to connect to a different Docker Engine.
-This would be the case if, for example, you are
-[running Docker Desktop for Mac concurrent with Docker Toolbox](../docker-for-mac/docker-toolbox.md)
-and want to talk to two different Docker Engines.
-In both scenarios, you have the option to switch the environment for the current
+In such scenarios, you have the option to switch the environment for the current
 shell to talk to different Docker engines.
 @y
 {% comment %}
 You might want to use the current shell to connect to a different Docker Engine.
-This would be the case if, for example, you are
-[running Docker Desktop for Mac concurrent with Docker Toolbox](../docker-for-mac/docker-toolbox.md)
-and want to talk to two different Docker Engines.
-In both scenarios, you have the option to switch the environment for the current
+In such scenarios, you have the option to switch the environment for the current
 shell to talk to different Docker engines.
 {% endcomment %}
 カレントなシェルから、今までとは違う Docker Engine に接続したい場合があります。
-たとえば [Docker Desktop for Mac と Docker Toolbox を同時実行](../docker-for-mac/docker-toolbox.md) している場合であって、2 つの Docker Engine に接続する必要がある場合です。
 こういった場合、カレントなシェルが別の Docker Engine に接続するように、環境を切り替えることができます。
 @z
 
@@ -1142,20 +1018,6 @@ shell to talk to different Docker engines.
     to the Docker Engine installed with that app.
     {% endcomment %}
     Docker Desktop for Mac を利用している場合、同時にインストールされる Docker Engine とのやりとりを Docker コマンドにより行います。
-@z
-
-@x
-    Since [Docker Desktop for Windows is incompatible with Toolbox](../docker-for-windows/install.md#what-to-know-before-you-install),
-    this scenario isn't applicable because Docker Desktop for Windows uses the Docker
-    Engine and Docker Machine that come with it.
-@y
-    {% comment %}
-    Since [Docker Desktop for Windows is incompatible with Toolbox](../docker-for-windows/install.md#what-to-know-before-you-install),
-    this scenario isn't applicable because Docker Desktop for Windows uses the Docker
-    Engine and Docker Machine that come with it.
-    {% endcomment %}
-    [Docker Desktop for Windows は Toolbox と非互換](../docker-for-windows/install.md#what-to-know-before-you-install) であることから、ここに示した方法は、その場合には利用できません。
-    Docker Desktop for Windows が利用するのは、同時にインストールされる Docker Engine と Docker Machine だからです。
 @z
 
 @x

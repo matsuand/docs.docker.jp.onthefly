@@ -216,7 +216,7 @@ ways, and create reports.
 @z
 
 @x
-You can also find additional information about various troubleshooting topics in the [Docker Desktop for Mac community](https://docs.docker.com/docker-for-mac/troubleshoot/) documentation.
+You can also find additional information about various troubleshooting topics in the [Docker Desktop for Mac community](../../../docker-for-mac/troubleshoot.md) documentation.
 @y
-You can also find additional information about various troubleshooting topics in the [Docker Desktop for Mac community](https://docs.docker.com/docker-for-mac/troubleshoot/) documentation.
+You can also find additional information about various troubleshooting topics in the [Docker Desktop for Mac community](../../../docker-for-mac/troubleshoot.md) documentation.
 @z

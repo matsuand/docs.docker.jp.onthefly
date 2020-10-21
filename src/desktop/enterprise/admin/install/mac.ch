@@ -104,9 +104,9 @@ Mac administrators can use the command line option `\$ sudo installer -pkg Docke
 @z
 
 @x
-Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](/desktop/enterprise/admin/configure/mac-admin).
+Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](../configure/mac-admin.md).
 @y
-Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](/desktop/enterprise/admin/configure/mac-admin).
+Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](../configure/mac-admin.md).
 @z
 
 @x

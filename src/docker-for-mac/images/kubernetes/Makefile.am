@@ -11,7 +11,6 @@ all: tgtdir $(srcs_with_prefix)
 
 images = \
 	kube-context.png \
-	kube-running.png \
 	kube.png
 
 srcs = $(images)

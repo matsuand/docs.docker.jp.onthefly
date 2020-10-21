@@ -5987,9 +5987,6 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
-- `consistency`: the consistency requirements of the mount, one of `consistent`
-  (host and container have identical view), `cached` (read cache, host view is
-  authoritative) or `delegated` (read-write cache, container's view is authoritative)
 @y
 {% comment %}
 - `type`: the mount type `volume`, `bind`, `tmpfs` or `npipe`
@@ -6005,9 +6002,6 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
-- `consistency`: the consistency requirements of the mount, one of `consistent`
-  (host and container have identical view), `cached` (read cache, host view is
-  authoritative) or `delegated` (read-write cache, container's view is authoritative)
 {% endcomment %}
 - `type`: マウントタイプを表わす `volume`, `bind`, `tmpfs`, `npipe` のいずれかを指定します。
 - `source`: マウント元。バインドマウントにおいてはホスト上のパスを指定します。
@@ -6021,7 +6015,6 @@ expressed in the short form.
   - `nocopy`: ボリュームの生成時にはコンテナーからのデータコピーを無効にします。
 - `tmpfs`: 追加の tmpfs オプションを設定します。
   - `size`: tmpfs マウントのサイズをバイト数で指定します。
-- `consistency`: マウントに求める一貫性を指定します。以下のいずれか： `consistent` （ホストとコンテナーは同一ビューを持ちます）、 `cached` （読み込みキャッシュ、ホストビューに権限あり）、`delegated` (読み書きキャッシュ、コンテナービューに権限あり）
 @z
 
 @x
@@ -6213,126 +6206,6 @@ services:
       placement:
         constraints: [node.role == manager]
 ```
-@z
-
-@x
-#### Caching options for volume mounts (Docker Desktop for Mac)
-@y
-{% comment %}
-#### Caching options for volume mounts (Docker Desktop for Mac)
-{% endcomment %}
-{: id="caching-options-for-volume-mounts-docker-desktop-for-mac" }
-#### ボリュームマウントに対するキャッシュオプション（Docker for Mac）
-@z
-
-@x
-You can configure container-and-host consistency requirements for bind-mounted
-directories in Compose files to allow for better performance on read/write of
-volume mounts. These options address issues specific to `osxfs` file sharing,
-and therefore are only applicable on Docker Desktop for Mac.
-@y
-{% comment %}
-On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
-configure container-and-host consistency requirements for bind-mounted
-directories in Compose files to allow for better performance on read/write of
-volume mounts. These options address issues specific to `osxfs` file sharing,
-and therefore are only applicable on Docker Desktop for Mac.
-{% endcomment %}
-Compose ファイル内にてバインドマウントするディレクトリは、コンテナーホスト間の一貫性を設定することができます。
-これによってボリュームの読み書き性能を向上させることができます。
-これを実現するオプションは `osxfs` ファイル共有に対する問題に対処しているため、Docker Desktop for Mac においてのみ利用可能です。
-@z
-
-@x
-The flags are:
-@y
-{% comment %}
-The flags are:
-{% endcomment %}
-フラグとして以下があります。
-@z
-
-@x
-* `consistent`: Full consistency. The container runtime and the host maintain an
-  identical view of the mount at all times.  This is the default.
-@y
-{% comment %}
-* `consistent`: Full consistency. The container runtime and the host maintain an
-  identical view of the mount at all times.  This is the default.
-{% endcomment %}
-* `consistent`: 完全な一貫性を持ちます。
-  起動しているコンテナーとホストは、常にマウント上を同一に見ることができます。
-  これがデフォルトです。
-@z
-
-@x
-* `cached`: The host's view of the mount is authoritative. There may be delays
-  before updates made on the host are visible within a container.
-@y
-{% comment %}
-* `cached`: The host's view of the mount is authoritative. There may be delays
-  before updates made on the host are visible within a container.
-{% endcomment %}
-* `cached`: ホスト側マウントが優先されます。
-  ホスト上の更新が、コンテナー内で確認できるまでには遅延が起こりえます。
-@z
-
-@x
-* `delegated`: The container runtime's view of the mount is authoritative. There
-  may be delays before updates made in a container are visible on the host.
-@y
-{% comment %}
-* `delegated`: The container runtime's view of the mount is authoritative. There
-  may be delays before updates made in a container are visible on the host.
-{% endcomment %}
-* `delegated`: コンテナー実行時のコンテナー側マウントが優先されます。
-  コンテナー内での更新が、ホスト上で確認できるまでには遅延が起こりえます。
-@z
-
-@x
-Here is an example of configuring a volume as `cached`:
-@y
-{% comment %}
-Here is an example of configuring a volume as `cached`:
-{% endcomment %}
-以下はボリュームに `cached` を設定した例です。
-@z
-
-@x
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  php:
-    image: php:7.1-fpm
-    ports:
-      - "9000"
-    volumes:
-      - .:/var/www/project:cached
-```
-@y
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  php:
-    image: php:7.1-fpm
-    ports:
-      - "9000"
-    volumes:
-      - .:/var/www/project:cached
-```
-@z
-
-@x
-Full detail on these flags, the problems they solve, and their
-`docker run` counterparts is in the Docker Desktop for Mac topic
-[Performance tuning for volume mounts (shared filesystems)](../../docker-for-mac/osxfs-caching.md).
-@y
-{% comment %}
-Full detail on these flags, the problems they solve, and their
-`docker run` counterparts is in the Docker Desktop for Mac topic
-[Performance tuning for volume mounts (shared filesystems)](../../docker-for-mac/osxfs-caching.md).
-{% endcomment %}
-このフラグの詳細、これにより解決される諸問題、`docker run` での対応オプションについては Docker Desktop for Mac のトピック、[ボリュームマウント（共有ファイルシステム）でのパフォーマンスチューニング](../../docker-for-mac/osxfs-caching.md) を参照してください。
 @z
 
 @x

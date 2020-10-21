@@ -23,13 +23,8 @@ images = \
 	docker-for-mac-install.png \
 	docker-tutorial-mac.png \
 	desktop-mac-2fa.png \
-	docker-store.png \
 	hello-world-nginx.png \
-	issues-template.png \
 	localhost-arm.png \
-	logs.png \
-	mac-install-success.png \
-	mac-mutagen-ready.png \
 	proxy-settings.png \
 	toolbox-install.png \
 	whale-in-menu-bar.png \

@@ -44,12 +44,12 @@ Designer, select the **Design new application** menu entry.
 @z
 
 @x
-![The Application Designer lets you choose an existing template or create a custom application.](./images/app-design-start.png "Application Designer")
+![The Application Designer lets you choose an existing template or create a custom application.](/desktop/enterprise/images/app-design-start.png "Application Designer")
 @y
 {% comment %}
-![The Application Designer lets you choose an existing template or create a custom application.](./images/app-design-start.png "Application Designer")
+![The Application Designer lets you choose an existing template or create a custom application.](/desktop/enterprise/images/app-design-start.png "Application Designer")
 {% endcomment %}
-![アプリケーションデザイナーを使って、既存テンプレートを選んだり、カスタムアプリケーションを生成したりできます。](../images/app-design-start.png "アプリケーションデザイナー")
+![アプリケーションデザイナーを使って、既存テンプレートを選んだり、カスタムアプリケーションを生成したりできます。]({{ site.baseurl }}/desktop/enterprise/images/app-design-start.png "アプリケーションデザイナー")
 @z
 
 @x
@@ -62,12 +62,12 @@ The list of available templates is provided:
 @z
 
 @x
-![You can tab through the available application templates. A description of each template is provided.](./images/app-design-choose.png "Available templates for application creation")
+![You can tab through the available application templates. A description of each template is provided.](/desktop/enterprise/images/app-design-choose.png "Available templates for application creation")
 @y
 {% comment %}
-![You can tab through the available application templates. A description of each template is provided.](./images/app-design-choose.png "Available templates for application creation")
+![You can tab through the available application templates. A description of each template is provided.](/desktop/enterprise/images/app-design-choose.png "Available templates for application creation")
 {% endcomment %}
-![タブ切り替えすると利用可能なテンプレート一覧が得られます。各テンプレートの説明が記述されています。](../images/app-design-choose.png "アプリケーション生成時の利用可能テンプレート一覧")
+![タブ切り替えすると利用可能なテンプレート一覧が得られます。各テンプレートの説明が記述されています。]({{ site.baseurl }}/desktop/enterprise/images/app-design-choose.png "アプリケーション生成時の利用可能テンプレート一覧")
 @z
 
 @x
@@ -101,12 +101,12 @@ example, if you select **Flask / NGINX / MySQL**, you can then
 @z
 
 @x
-![You can customize your application, which includes specifying database, proxy, and other details.](./images/app-design-custom.png "Customizing your application")
+![You can customize your application, which includes specifying database, proxy, and other details.](/desktop/enterprise/images/app-design-custom.png "Customizing your application")
 @y
 {% comment %}
-![You can customize your application, which includes specifying database, proxy, and other details.](./images/app-design-custom.png "Customizing your application")
+![You can customize your application, which includes specifying database, proxy, and other details.](/desktop/enterprise/images/app-design-custom.png "Customizing your application")
 {% endcomment %}
-![アプリケーションをカスタマイズできます。たとえばデータベースやプロキシーの指定などさまざまな詳細設定を行います。](../images/app-design-custom.png "アプリケーションのカスタマイズ")
+![アプリケーションをカスタマイズできます。たとえばデータベースやプロキシーの指定などさまざまな詳細設定を行います。]({{ site.baseurl }}/desktop/enterprise/images/app-design-custom.png "アプリケーションのカスタマイズ")
 @z
 
 @x
@@ -119,12 +119,12 @@ You can then name your application and customize the disk location:
 @z
 
 @x
-![You can also customize the name and location of your application.](./images/app-design-custom2.png "Naming and specifying a location for your application")
+![You can also customize the name and location of your application.](/desktop/enterprise/images/app-design-custom2.png "Naming and specifying a location for your application")
 @y
 {% comment %}
-![You can also customize the name and location of your application.](./images/app-design-custom2.png "Naming and specifying a location for your application")
+![You can also customize the name and location of your application.](/desktop/enterprise/images/app-design-custom2.png "Naming and specifying a location for your application")
 {% endcomment %}
-![アプリケーションの名前と保存場所を設定します。](../images/app-design-custom2.png "アプリケーション名と保存場所の設定")
+![アプリケーションの名前と保存場所を設定します。]({{ site.baseurl }}/desktop/enterprise/images/app-design-custom2.png "アプリケーション名と保存場所の設定")
 @z
 
 @x
@@ -137,12 +137,12 @@ When you select **Assemble**, your application is created.
 @z
 
 @x
-![When you assemble your application, a status screen is displayed.](./images/app-design-test.png "Assembling your application")
+![When you assemble your application, a status screen is displayed.](/desktop/enterprise/images/app-design-test.png "Assembling your application")
 @y
 {% comment %}
-![When you assemble your application, a status screen is displayed.](./images/app-design-test.png "Assembling your application")
+![When you assemble your application, a status screen is displayed.](/desktop/enterprise/images/app-design-test.png "Assembling your application")
 {% endcomment %}
-![Assemble のクリックによりステータス画面が表示されます。](../images/app-design-test.png "アプリケーションを生成します。")
+![Assemble のクリックによりステータス画面が表示されます。]({{ site.baseurl }}/desktop/enterprise/images/app-design-test.png "アプリケーションを生成します。")
 @z
 
 @x
@@ -156,12 +156,12 @@ Once assembled, the following screen allows you to run the application. Select *
 @z
 
 @x
-![When you run your application, the terminal displays output from the application.](./images/app-design-run.png "Running your application")
+![When you run your application, the terminal displays output from the application.](/desktop/enterprise/images/app-design-run.png "Running your application")
 @y
 {% comment %}
-![When you run your application, the terminal displays output from the application.](./images/app-design-run.png "Running your application")
+![When you run your application, the terminal displays output from the application.](/desktop/enterprise/images/app-design-run.png "Running your application")
 {% endcomment %}
-![アプリケーションを実行すると、ターミナル画面にアプリケーションによる出力が表示されます。](../images/app-design-run.png "アプリケーションの実行")
+![アプリケーションを実行すると、ターミナル画面にアプリケーションによる出力が表示されます。]({{ site.baseurl }}/desktop/enterprise/images/app-design-run.png "アプリケーションの実行")
 @z
 
 @x

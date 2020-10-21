@@ -218,18 +218,6 @@ For more information and examples, see
 @z
 
 @x
-### Can I use an SSH agent inside a container?
-@y
-### Can I use an SSH agent inside a container?
-@z
-
-@x
-Yes, you can use the host’s SSH agent inside a container. For more information, see [SSH agent forwarding](osxfs.md#ssh-agent-forwarding).
-@y
-Yes, you can use the host’s SSH agent inside a container. For more information, see [SSH agent forwarding](osxfs.md#ssh-agent-forwarding).
-@z
-
-@x
 ### How do I add custom CA certificates?
 @y
 ### How do I add custom CA certificates?

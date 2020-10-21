@@ -26,15 +26,15 @@ Welcome to Docker Desktop Enterprise. This page contains information about the D
 @z
 
 @x
-- [Docker Desktop for Mac (Community)](/docker-for-mac/){: target="_blank" rel="noopener" class="_"}
+- [Docker Desktop for Mac (Community)](../../docker-for-mac/index.md)
 @y
-- [Docker Desktop for Mac (Community)](/docker-for-mac/){: target="_blank" rel="noopener" class="_"}
+- [Docker Desktop for Mac (Community)](../../docker-for-mac/index.md)
 @z
 
 @x
-- [Docker Desktop for Windows (Community)](/docker-for-windows/){: target="_blank" rel="noopener" class="_"}
+- [Docker Desktop for Windows (Community)](../../docker-for-windows/index.md)
 @y
-- [Docker Desktop for Windows (Community)](/docker-for-windows/){: target="_blank" rel="noopener" class="_"}
+- [Docker Desktop for Windows (Community)](../../docker-for-windows/index.md)
 @z
 
 @x

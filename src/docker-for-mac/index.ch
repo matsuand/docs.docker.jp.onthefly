@@ -8,6 +8,7 @@ keywords: mac, tutorial, run, docker, local, machine
 redirect_from:
 - /docker-for-mac/index/
 - /docker-for-mac/mutagen/
+- /docker-for-mac/mutagen-caching/
 - /docker-for-mac/osx/
 - /docker-for-mac/started/
 - /engine/installation/mac/
@@ -18,6 +19,7 @@ redirect_from:
 - /mackit/getting-started/
 - /docker-for-mac/osxfs/
 - /docker-for-mac/osxfs-caching/
+- /docker-for-mac/docker-toolbox/
 title: Docker Desktop for Mac user manual
 toc_min: 1
 toc_max: 2
@@ -29,6 +31,7 @@ keywords: mac, tutorial, run, docker, local, machine
 redirect_from:
 - /docker-for-mac/index/
 - /docker-for-mac/mutagen/
+- /docker-for-mac/mutagen-caching/
 - /docker-for-mac/osx/
 - /docker-for-mac/started/
 - /engine/installation/mac/
@@ -39,6 +42,7 @@ redirect_from:
 - /mackit/getting-started/
 - /docker-for-mac/osxfs/
 - /docker-for-mac/osxfs-caching/
+- /docker-for-mac/docker-toolbox/
 title: Docker Desktop for Mac ユーザーマニュアル
 toc_min: 1
 toc_max: 2
@@ -391,44 +395,66 @@ File share の設定には以下のものがあります。
 @z
 
 @x
-  There are some limitations on the directories that can be shared:
-@y
-  {% comment %}
-  There are some limitations on the directories that can be shared:
-  {% endcomment %}
-  共有できるディレクトリには制約があります。
-@z
-
-@x
-  - The directory must not exist inside of Docker.
-@y
-  {% comment %}
-  - The directory must not exist inside of Docker.
-  {% endcomment %}
-  - ディレクトリは Docker 内に存在していないことが必要です。
-@z
-
-@x
-For more information, see:
-@y
-{% comment %}
-For more information, see:
-{% endcomment %}
-より詳しくは以下を参照してください。
-@z
-
-@x
-- [Namespaces](osxfs.md#namespaces){: target="_blank" rel="noopener" class="_"} in the topic on
-  [osxfs file system sharing](osxfs.md).
-- [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+> Tips on shared folders, permissions, and volume mounts
+>
+ * Shared folders are designed to allow application code to be edited 
+ on the host while being executed in containers. For non-code items
+ such as cache directories or databases, the performance will be much 
+ better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
+ (named volume) or [data container](../storage/volumes.md).
+>
+ * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
+ On Linux, it is possible to create 2 separate files: `test` and `Test`, 
+ while on Mac these filenames would actually refer to the same underlying file. 
+ This can lead to problems where an app works correctly on a Mac 
+ (where the file contents are shared) but fails when run in Linux in 
+ production (where the file contents are distinct). To avoid this, Docker Desktop 
+ insists that all shared files are accessed as their original case. Therefore, if a file 
+ is created called `test`, it must be opened as `test`. Attempts to open `Test` will 
+ fail with the error `No such file or directory`. Similarly, once a file called `test` 
+ is created, attempts to create a second file called `Test` will fail. For more information, 
+ see [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 @y
 {% comment %}
-- [Namespaces](osxfs.md#namespaces){: target="_blank" rel="noopener" class="_"} in the topic on
-  [osxfs file system sharing](osxfs.md).
-- [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+> Tips on shared folders, permissions, and volume mounts
+>
+ * Shared folders are designed to allow application code to be edited 
+ on the host while being executed in containers. For non-code items
+ such as cache directories or databases, the performance will be much 
+ better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
+ (named volume) or [data container](../storage/volumes.md).
+>
+ * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
+ On Linux, it is possible to create 2 separate files: `test` and `Test`, 
+ while on Mac these filenames would actually refer to the same underlying file. 
+ This can lead to problems where an app works correctly on a Mac 
+ (where the file contents are shared) but fails when run in Linux in 
+ production (where the file contents are distinct). To avoid this, Docker Desktop 
+ insists that all shared files are accessed as their original case. Therefore, if a file 
+ is created called `test`, it must be opened as `test`. Attempts to open `Test` will 
+ fail with the error `No such file or directory`. Similarly, once a file called `test` 
+ is created, attempts to create a second file called `Test` will fail. For more information, 
+ see [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 {% endcomment %}
-- [osxfs ファイルシステム共有](osxfs.md) のトピックである [名前空間](osxfs.md#namespaces){: target="_blank" rel="noopener" class="_"}
-- [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
+> Tips on shared folders, permissions, and volume mounts
+>
+ * Shared folders are designed to allow application code to be edited 
+ on the host while being executed in containers. For non-code items
+ such as cache directories or databases, the performance will be much 
+ better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
+ (named volume) or [data container](../storage/volumes.md).
+>
+ * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
+ On Linux, it is possible to create 2 separate files: `test` and `Test`, 
+ while on Mac these filenames would actually refer to the same underlying file. 
+ This can lead to problems where an app works correctly on a Mac 
+ (where the file contents are shared) but fails when run in Linux in 
+ production (where the file contents are distinct). To avoid this, Docker Desktop 
+ insists that all shared files are accessed as their original case. Therefore, if a file 
+ is created called `test`, it must be opened as `test`. Attempts to open `Test` will 
+ fail with the error `No such file or directory`. Similarly, once a file called `test` 
+ is created, attempts to create a second file called `Test` will fail. For more information, 
+ see [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 @z
 
 @x

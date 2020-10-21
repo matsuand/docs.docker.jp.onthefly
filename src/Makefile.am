@@ -4,7 +4,6 @@ SUBDIRS = _data _includes _layouts _samples _scss app buildx \
 	docker-for-windows docker-hub docker-id ee engine get-started \
 	images js kitematic machine network notary \
 	opensource reference registry release-notes samples storage
-	toolbox
 
 origdir     = @abs_origdir@
 srcdir      = @srcdir@

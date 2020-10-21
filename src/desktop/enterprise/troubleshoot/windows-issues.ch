@@ -116,7 +116,7 @@ The name of the diagnostics file is displayed next to “Diagnostics Bundle”  
 @z
 
 @x
-You can also find additional information about various troubleshooting topics in the [Docker Desktop for Windows community](https://docs.docker.com/docker-for-windows/troubleshoot/) documentation.
+You can also find additional information about various troubleshooting topics in the [Docker Desktop for Windows community](../../../docker-for-windows/troubleshoot.md) documentation.
 @y
-You can also find additional information about various troubleshooting topics in the [Docker Desktop for Windows community](https://docs.docker.com/docker-for-windows/troubleshoot/) documentation.
+You can also find additional information about various troubleshooting topics in the [Docker Desktop for Windows community](../../../docker-for-windows/troubleshoot.md) documentation.
 @z

@@ -585,28 +585,12 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 * If `docker` commands aren't working properly or as expected, you may need to
   unset some environment variables, to make sure you are not using the legacy
   Docker Machine environment in your shell or command window. Unset the
-  `DOCKER_HOST` environment variable and related variables.
+  `DOCKER_HOST` environment variable and related variables. If you use bash, use the following command: `unset ${!DOCKER_*}`
 @y
 * If `docker` commands aren't working properly or as expected, you may need to
   unset some environment variables, to make sure you are not using the legacy
   Docker Machine environment in your shell or command window. Unset the
-  `DOCKER_HOST` environment variable and related variables.
-@z
-
-@x
-  * If you use bash, use the following command: `unset ${!DOCKER_*}`
-@y
-  * If you use bash, use the following command: `unset ${!DOCKER_*}`
-@z
-
-@x
-  * For other shells, unset each environment variable individually as described
-    in [Setting up to run Docker Desktop on Mac](docker-toolbox.md#setting-up-to-run-docker-desktop-on-mac)
-    in [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
-@y
-  * For other shells, unset each environment variable individually as described
-    in [Setting up to run Docker Desktop on Mac](docker-toolbox.md#setting-up-to-run-docker-desktop-on-mac)
-    in [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
+  `DOCKER_HOST` environment variable and related variables. If you use bash, use the following command: `unset ${!DOCKER_*}`
 @z
 
 @x
@@ -622,15 +606,15 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @x
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
   the web server on `http://localhost/`. Make sure that the Docker icon is
-  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine (not Engine from Toolbox).
+  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
   Otherwise, you might start the webserver container but get a "web page not
-  available" error when you go to `localhost`. For more information on distinguishing between the two environments, see [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
+  available" error when you go to `localhost`.
 @y
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
   the web server on `http://localhost/`. Make sure that the Docker icon is
-  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine (not Engine from Toolbox).
+  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
   Otherwise, you might start the webserver container but get a "web page not
-  available" error when you go to `localhost`. For more information on distinguishing between the two environments, see [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
+  available" error when you go to `localhost`.
 @z
 
 @x
@@ -789,14 +773,14 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 
 @x
 * There are a number of issues with the performance of directories bind-mounted
-  with `osxfs`. In particular, writes of small blocks, and traversals of large
+  into containers. In particular, writes of small blocks, and traversals of large
   directories are currently slow. Additionally, containers that perform large
   numbers of directory operations, such as repeated scans of large directory
   trees, may suffer from poor performance. Applications that behave in this way
   include:
 @y
 * There are a number of issues with the performance of directories bind-mounted
-  with `osxfs`. In particular, writes of small blocks, and traversals of large
+  into containers. In particular, writes of small blocks, and traversals of large
   directories are currently slow. Additionally, containers that perform large
   numbers of directory operations, such as repeated scans of large directory
   trees, may suffer from poor performance. Applications that behave in this way
@@ -824,19 +808,17 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @x
   As a work-around for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
-  outside of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
+  outside of bind mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
-  actively working on `osxfs` performance using a number of different
-  techniques.  To learn more, see the topic on
-  [Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
+  actively working on performance improvements using a number of different
+  techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
 @y
   As a work-around for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
-  outside of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
+  outside of bind mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
-  actively working on `osxfs` performance using a number of different
-  techniques.  To learn more, see the topic on
-  [Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
+  actively working on performance improvements using a number of different
+  techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
 @z
 
 @x
