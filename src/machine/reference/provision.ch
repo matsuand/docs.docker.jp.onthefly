@@ -6,14 +6,12 @@
 description: Re-run provisioning on a created machine.
 keywords: machine, provision, subcommand
 title: docker-machine provision
-hide_from_sitemap: true
 ---
 @y
 ---
 description: 生成済みマシン上でプロビジョンを再実行します。
 keywords: machine, provision, subcommand
 title: docker-machine provision
-hide_from_sitemap: true
 ---
 @z
 

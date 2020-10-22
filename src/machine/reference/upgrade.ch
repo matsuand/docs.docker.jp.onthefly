@@ -6,14 +6,12 @@
 description: Upgrade Docker on a machine
 keywords: machine, upgrade, subcommand
 title: docker-machine upgrade
-hide_from_sitemap: true
 ---
 @y
 ---
 description: マシン上の Docker をアップグレードします。
 keywords: machine, upgrade, subcommand
 title: docker-machine upgrade
-hide_from_sitemap: true
 ---
 @z
 

@@ -5,7 +5,7 @@
 ---
 description: Docker Desktop for Windows and Docker Toolbox
 keywords: windows, alpha, beta, toolbox, docker-machine, tutorial
-hide_from_sitemap: true
+sitemap: false
 title: Docker Toolbox
 redirect_from:
 - /toolbox/
@@ -22,7 +22,7 @@ toc_max: 2
 ---
 description: Docker Desktop for Windows and Docker Toolbox
 keywords: windows, alpha, beta, toolbox, docker-machine, tutorial
-hide_from_sitemap: true
+sitemap: false
 title: Docker Toolbox
 redirect_from:
 - /toolbox/

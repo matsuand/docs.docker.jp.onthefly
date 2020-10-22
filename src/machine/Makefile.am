@@ -25,7 +25,6 @@ bases = \
 	index \
 	install-machine \
 	migrate-to-machine \
-	overview \
 	release-notes
 
 ch_mds = $(bases:=.ch) # ch means change files

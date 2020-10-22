@@ -6,14 +6,12 @@
 description: Show client configuration
 keywords: machine, ip, subcommand
 title: docker-machine ip
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Show client configuration
 keywords: machine, ip, subcommand
 title: docker-machine ip
-hide_from_sitemap: true
 ---
 @z
 

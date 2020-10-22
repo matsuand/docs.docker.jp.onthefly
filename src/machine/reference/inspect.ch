@@ -6,14 +6,12 @@
 description: Inspect information about a machine
 keywords: machine, inspect, subcommand
 title: docker-machine inspect
-hide_from_sitemap: true
 ---
 @y
 ---
 description: マシンに関する情報を表示します。
 keywords: machine, inspect, subcommand
 title: docker-machine inspect
-hide_from_sitemap: true
 ---
 @z
 

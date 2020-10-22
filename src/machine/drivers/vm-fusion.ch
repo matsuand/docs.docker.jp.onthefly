@@ -6,14 +6,12 @@
 description: VMware Fusion driver for machine
 keywords: machine, VMware Fusion, driver
 title: VMware Fusion
-hide_from_sitemap: true
 ---
 @y
 ---
 description: VMware Fusion driver for machine
 keywords: machine, VMware Fusion, driver
 title: VMware Fusion
-hide_from_sitemap: true
 ---
 @z
 

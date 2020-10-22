@@ -6,14 +6,12 @@
 description: Regenerate and update TLS certificates
 keywords: machine, regenerate-certs, subcommand
 title: docker-machine regenerate-certs
-hide_from_sitemap: true
 ---
 @y
 ---
 description: TLS 証明書の再生成して更新します。
 keywords: machine, regenerate-certs, subcommand
 title: docker-machine regenerate-certs
-hide_from_sitemap: true
 ---
 @z
 

@@ -3,40 +3,14 @@
 
 @x
 ---
-title: r-base
-keywords: library, sample, r-base
-repo: r-base
-layout: docs
-permalink: /samples/library/r-base/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/r-base/
 redirect_from:
 - /samples/r-base/
-description: |
-  R is a system for statistical computation and graphics.
 ---
 @y
 ---
-title: r-base
-keywords: library, sample, r-base
-repo: r-base
-layout: docs
-permalink: /samples/library/r-base/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/r-base/
 redirect_from:
 - /samples/r-base/
-description: |
-  R is a system for statistical computation and graphics.
 ---
-@z
-
-@x
-R is a system for statistical computation and graphics.
-@y
-R is a system for statistical computation and graphics.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

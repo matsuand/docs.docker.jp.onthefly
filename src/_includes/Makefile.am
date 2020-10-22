@@ -22,7 +22,6 @@ bases = \
 	github-pr            \
 	install-script       \
 	kubernetes-mac-win   \
-	library-samples      \
 	registry
 htmlbases = \
 	body             \

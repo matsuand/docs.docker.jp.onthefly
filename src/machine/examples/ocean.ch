@@ -6,14 +6,12 @@
 description: Using Docker Machine to provision hosts on DigitalOcean
 keywords: docker, machine, cloud, digitalocean
 title: DigitalOcean example
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Using Docker Machine to provision hosts on DigitalOcean
 keywords: docker, machine, cloud, digitalocean
 title: DigitalOcean 利用例
-hide_from_sitemap: true
 ---
 @z
 

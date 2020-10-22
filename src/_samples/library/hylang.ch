@@ -3,40 +3,14 @@
 
 @x
 ---
-title: hylang
-keywords: library, sample, hylang
-repo: hylang
-layout: docs
-permalink: /samples/library/hylang/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/hylang/
 redirect_from:
 - /samples/hylang/
-description: |
-  Hy is a Lisp dialect that translates expressions into Python's abstract syntax tree.
 ---
 @y
 ---
-title: hylang
-keywords: library, sample, hylang
-repo: hylang
-layout: docs
-permalink: /samples/library/hylang/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/hylang/
 redirect_from:
 - /samples/hylang/
-description: |
-  Hy is a Lisp dialect that translates expressions into Python's abstract syntax tree.
 ---
-@z
-
-@x
-Hy is a Lisp dialect that translates expressions into Python's abstract syntax tree.
-@y
-Hy is a Lisp dialect that translates expressions into Python's abstract syntax tree.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

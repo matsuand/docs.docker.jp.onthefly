@@ -6,14 +6,12 @@
 description: Rackspace driver for machine
 keywords: machine, Rackspace, driver
 title: Rackspace
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Rackspace driver for machine
 keywords: machine, Rackspace, driver
 title: Rackspace
-hide_from_sitemap: true
 ---
 @z
 

@@ -3,40 +3,14 @@
 
 @x
 ---
-title: fluentd
-keywords: library, sample, fluentd
-repo: fluentd
-layout: docs
-permalink: /samples/library/fluentd/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/fluentd/
 redirect_from:
 - /samples/fluentd/
-description: |
-  Fluentd is an open source data collector for unified logging layer
 ---
 @y
 ---
-title: fluentd
-keywords: library, sample, fluentd
-repo: fluentd
-layout: docs
-permalink: /samples/library/fluentd/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/fluentd/
 redirect_from:
 - /samples/fluentd/
-description: |
-  Fluentd is an open source data collector for unified logging layer
 ---
-@z
-
-@x
-Fluentd is an open source data collector for unified logging layer
-@y
-Fluentd is an open source data collector for unified logging layer
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

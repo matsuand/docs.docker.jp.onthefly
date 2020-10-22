@@ -3,40 +3,14 @@
 
 @x
 ---
-title: jetty
-keywords: library, sample, jetty
-repo: jetty
-layout: docs
-permalink: /samples/library/jetty/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/jetty/
 redirect_from:
 - /samples/jetty/
-description: |
-  Jetty provides a Web server and javax.servlet container.
----
+Jetty provides a Web server and javax.servlet container.
 @y
 ---
-title: jetty
-keywords: library, sample, jetty
-repo: jetty
-layout: docs
-permalink: /samples/library/jetty/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/jetty/
 redirect_from:
 - /samples/jetty/
-description: |
-  Jetty provides a Web server and javax.servlet container.
----
-@z
-
-@x
 Jetty provides a Web server and javax.servlet container.
-@y
-Jetty provides a Web server and javax.servlet container.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

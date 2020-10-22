@@ -3,40 +3,14 @@
 
 @x
 ---
-title: kaazing-gateway
-keywords: library, sample, kaazing-gateway
-repo: kaazing-gateway
-layout: docs
-permalink: /samples/library/kaazing-gateway/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/kaazing-gateway/
 redirect_from:
 - /samples/kaazing-gateway/
-description: |
-  Official build of Kaazing Gateway.
 ---
 @y
 ---
-title: kaazing-gateway
-keywords: library, sample, kaazing-gateway
-repo: kaazing-gateway
-layout: docs
-permalink: /samples/library/kaazing-gateway/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/kaazing-gateway/
 redirect_from:
 - /samples/kaazing-gateway/
-description: |
-  Official build of Kaazing Gateway.
 ---
-@z
-
-@x
-Official build of Kaazing Gateway.
-@y
-Official build of Kaazing Gateway.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

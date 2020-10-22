@@ -3,40 +3,14 @@
 
 @x
 ---
-title: swipl
-keywords: library, sample, swipl
-repo: swipl
-layout: docs
-permalink: /samples/library/swipl/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/swipl/
 redirect_from:
 - /samples/swipl/
-description: |
-  SWI-Prolog offers a comprehensive free Prolog environment.
 ---
 @y
 ---
-title: swipl
-keywords: library, sample, swipl
-repo: swipl
-layout: docs
-permalink: /samples/library/swipl/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/swipl/
 redirect_from:
 - /samples/swipl/
-description: |
-  SWI-Prolog offers a comprehensive free Prolog environment.
 ---
-@z
-
-@x
-SWI-Prolog offers a comprehensive free Prolog environment.
-@y
-SWI-Prolog offers a comprehensive free Prolog environment.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

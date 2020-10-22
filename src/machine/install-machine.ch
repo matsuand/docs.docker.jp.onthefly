@@ -6,14 +6,12 @@
 description: How to install Docker Machine
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Install Docker Machine
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Docker Machine のインストール方法
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Docker Machine のインストール
-hide_from_sitemap: true
 ---
 @z
 
@@ -408,20 +406,20 @@ VM に対しては、それがローカルでもリモートでも影響しま�
 @z
 
 @x
--  [Docker Machine overview](overview.md)
+-  [Docker Machine overview](index.md)
 -  Create and run a Docker host on your [local system using virtualization](get-started.md)
 -  Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
 -  [Docker Machine driver reference](drivers/index.md)
 -  [Docker Machine subcommand reference](reference/index.md)
 @y
 {% comment %}
--  [Docker Machine overview](overview.md)
+-  [Docker Machine overview](index.md)
 -  Create and run a Docker host on your [local system using virtualization](get-started.md)
 -  Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
 -  [Docker Machine driver reference](drivers/index.md)
 -  [Docker Machine subcommand reference](reference/index.md)
 {% endcomment %}
--  [Docker Machine 概要](overview.md)
+-  [Docker Machine 概要](index.md)
 -  [仮想環境を用いてローカルシステム上](get-started.md) に Docker ホストを生成して実行
 -  [クラウドプロバイダー](get-started-cloud.md) 上に複数の Docker ホストを実現
 -  [Docker Machine ドライバーリファレンス](drivers/index.md)

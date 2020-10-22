@@ -6,14 +6,12 @@
 description: Kill (abruptly force stop) a machine.
 keywords: machine, kill, subcommand
 title: docker-machine kill
-hide_from_sitemap: true
 ---
 @y
 ---
 description: マシンを kill（強制終了）します。
 keywords: machine, kill, subcommand
 title: docker-machine kill
-hide_from_sitemap: true
 ---
 @z
 

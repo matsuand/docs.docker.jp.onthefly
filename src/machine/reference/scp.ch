@@ -6,14 +6,12 @@
 description: Copy files among machines
 keywords: machine, scp, subcommand
 title: docker-machine scp
-hide_from_sitemap: true
 ---
 @y
 ---
 description: マシン間でファイルをコピーします。
 keywords: machine, scp, subcommand
 title: docker-machine scp
-hide_from_sitemap: true
 ---
 @z
 

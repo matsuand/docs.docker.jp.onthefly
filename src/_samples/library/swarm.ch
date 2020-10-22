@@ -3,40 +3,14 @@
 
 @x
 ---
-title: swarm
-keywords: library, sample, swarm
-repo: swarm
-layout: docs
-permalink: /samples/library/swarm/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/swarm/
 redirect_from:
 - /samples/swarm/
-description: |
-  Swarm: a Docker-native clustering system.
 ---
 @y
 ---
-title: swarm
-keywords: library, sample, swarm
-repo: swarm
-layout: docs
-permalink: /samples/library/swarm/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/swarm/
 redirect_from:
 - /samples/swarm/
-description: |
-  Swarm: a Docker-native clustering system.
 ---
-@z
-
-@x
-Swarm: a Docker-native clustering system.
-@y
-Swarm: a Docker-native clustering system.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

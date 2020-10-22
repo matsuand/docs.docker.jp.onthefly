@@ -3,40 +3,14 @@
 
 @x
 ---
-title: python
-keywords: library, sample, python
-repo: python
-layout: docs
-permalink: /samples/library/python/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/python/
 redirect_from:
 - /samples/python/
-description: |
-  Python is an interpreted, interactive, object-oriented, open-source programming language.
 ---
 @y
 ---
-title: python
-keywords: library, sample, python
-repo: python
-layout: docs
-permalink: /samples/library/python/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/python/
 redirect_from:
 - /samples/python/
-description: |
-  Python is an interpreted, interactive, object-oriented, open-source programming language.
 ---
-@z
-
-@x
-Python is an interpreted, interactive, object-oriented, open-source programming language.
-@y
-Python is an interpreted, interactive, object-oriented, open-source programming language.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

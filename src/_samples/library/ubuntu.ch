@@ -3,40 +3,14 @@
 
 @x
 ---
-title: ubuntu
-keywords: library, sample, ubuntu
-repo: ubuntu
-layout: docs
-permalink: /samples/library/ubuntu/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/ubuntu/
 redirect_from:
 - /samples/ubuntu/
-description: |
-  Ubuntu is a Debian-based Linux operating system based on free software.
 ---
 @y
 ---
-title: ubuntu
-keywords: library, sample, ubuntu
-repo: ubuntu
-layout: docs
-permalink: /samples/library/ubuntu/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/ubuntu/
 redirect_from:
 - /samples/ubuntu/
-description: |
-  Ubuntu is a Debian-based Linux operating system based on free software.
 ---
-@z
-
-@x
-Ubuntu is a Debian-based Linux operating system based on free software.
-@y
-Ubuntu is a Debian-based Linux operating system based on free software.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

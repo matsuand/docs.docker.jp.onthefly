@@ -6,14 +6,12 @@
 description: Amazon Web Services driver for machine
 keywords: machine, Amazon Web Services, driver
 title: Amazon Web Services
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Amazon Web Services driver for machine
 keywords: machine, Amazon Web Services, driver
 title: Amazon Web Services
-hide_from_sitemap: true
 ---
 @z
 

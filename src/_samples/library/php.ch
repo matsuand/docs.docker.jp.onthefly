@@ -3,40 +3,14 @@
 
 @x
 ---
-title: php
-keywords: library, sample, php
-repo: php
-layout: docs
-permalink: /samples/library/php/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/php/
 redirect_from:
 - /samples/php/
-description: |
-  While designed for web development, the PHP scripting language also provides general-purpose use.
 ---
 @y
 ---
-title: php
-keywords: library, sample, php
-repo: php
-layout: docs
-permalink: /samples/library/php/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/php/
 redirect_from:
 - /samples/php/
-description: |
-  While designed for web development, the PHP scripting language also provides general-purpose use.
 ---
-@z
-
-@x
-While designed for web development, the PHP scripting language also provides general-purpose use.
-@y
-While designed for web development, the PHP scripting language also provides general-purpose use.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

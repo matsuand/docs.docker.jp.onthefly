@@ -3,40 +3,14 @@
 
 @x
 ---
-title: crux
-keywords: library, sample, crux
-repo: crux
-layout: docs
-permalink: /samples/library/crux/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/crux/
 redirect_from:
 - /samples/crux/
-description: |
-  CRUX is a lightweight Linux distribution targeted at experienced Linux users
 ---
 @y
 ---
-title: crux
-keywords: library, sample, crux
-repo: crux
-layout: docs
-permalink: /samples/library/crux/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/crux/
 redirect_from:
 - /samples/crux/
-description: |
-  CRUX is a lightweight Linux distribution targeted at experienced Linux users
 ---
-@z
-
-@x
-CRUX is a lightweight Linux distribution targeted at experienced Linux users
-@y
-CRUX is a lightweight Linux distribution targeted at experienced Linux users
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

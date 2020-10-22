@@ -6,14 +6,12 @@
 description: Docker Machine Commands Overview
 keywords: machine, commands
 title: Docker Machine command-line reference
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Docker Machine コマンドの概要。
 keywords: machine, commands
 title: Docker Machine コマンドラインリファレンス
-hide_from_sitemap: true
 ---
 @z
 

@@ -3,40 +3,14 @@
 
 @x
 ---
-title: euleros
-keywords: library, sample, euleros
-repo: euleros
-layout: docs
-permalink: /samples/library/euleros/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/euleros/
 redirect_from:
 - /samples/euleros/
-description: |
-  The official release of EulerOS.
 ---
 @y
 ---
-title: euleros
-keywords: library, sample, euleros
-repo: euleros
-layout: docs
-permalink: /samples/library/euleros/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/euleros/
 redirect_from:
 - /samples/euleros/
-description: |
-  The official release of EulerOS.
 ---
-@z
-
-@x
-The official release of EulerOS.
-@y
-The official release of EulerOS.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

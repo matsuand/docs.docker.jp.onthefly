@@ -7,6 +7,7 @@ title: "Sorry, we can't find that page"
 permalink: /404.html
 noratings: true
 notoc: true
+sitemap: false
 skip_read_time: true
 ---
 @y
@@ -15,6 +16,7 @@ title: "申し訳ありません。ページが見つかりません。"
 permalink: /404.html
 noratings: true
 notoc: true
+sitemap: false
 skip_read_time: true
 ---
 @z

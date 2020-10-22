@@ -3,40 +3,14 @@
 
 @x
 ---
-title: centos
-keywords: library, sample, centos
-repo: centos
-layout: docs
-permalink: /samples/library/centos/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/centos/
 redirect_from:
 - /samples/centos/
-description: |
-  The official build of CentOS.
 ---
 @y
 ---
-title: centos
-keywords: library, sample, centos
-repo: centos
-layout: docs
-permalink: /samples/library/centos/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/centos/
 redirect_from:
 - /samples/centos/
-description: |
-  CentOS の公式ビルドイメージ。
 ---
-@z
-
-@x
-The official build of CentOS.
-@y
-CentOS の公式ビルドイメージ。
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

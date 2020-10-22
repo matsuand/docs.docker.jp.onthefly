@@ -3,40 +3,14 @@
 
 @x
 ---
-title: groovy
-keywords: library, sample, groovy
-repo: groovy
-layout: docs
-permalink: /samples/library/groovy/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/groovy/
 redirect_from:
 - /samples/groovy/
-description: |
-  Apache Groovy is a multi-faceted language for the Java platform.
 ---
 @y
 ---
-title: groovy
-keywords: library, sample, groovy
-repo: groovy
-layout: docs
-permalink: /samples/library/groovy/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/groovy/
 redirect_from:
 - /samples/groovy/
-description: |
-  Apache Groovy is a multi-faceted language for the Java platform.
 ---
-@z
-
-@x
-Apache Groovy is a multi-faceted language for the Java platform.
-@y
-Apache Groovy is a multi-faceted language for the Java platform.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

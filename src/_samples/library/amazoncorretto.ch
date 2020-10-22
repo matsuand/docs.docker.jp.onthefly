@@ -3,40 +3,14 @@
 
 @x
 ---
-title: amazoncorretto
-keywords: library, sample, amazoncorretto
-repo: amazoncorretto
-layout: docs
-permalink: /samples/library/amazoncorretto/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/amazoncorretto/
 redirect_from:
 - /samples/amazoncorretto/
-description: |
-  Corretto is a no-cost, production-ready distribution of the Open Java Development Kit (OpenJDK).
 ---
 @y
 ---
-title: amazoncorretto
-keywords: library, sample, amazoncorretto
-repo: amazoncorretto
-layout: docs
-permalink: /samples/library/amazoncorretto/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/amazoncorretto/
 redirect_from:
 - /samples/amazoncorretto/
-description: |
-  Corretto is a no-cost, production-ready distribution of the Open Java Development Kit (OpenJDK).
 ---
-@z
-
-@x
-Corretto is a no-cost, production-ready distribution of the Open Java Development Kit (OpenJDK).
-@y
-Corretto is a no-cost, production-ready distribution of the Open Java Development Kit (OpenJDK).
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

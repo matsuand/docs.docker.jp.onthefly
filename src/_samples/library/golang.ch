@@ -3,40 +3,14 @@
 
 @x
 ---
-title: golang
-keywords: library, sample, golang
-repo: golang
-layout: docs
-permalink: /samples/library/golang/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/golang/
 redirect_from:
 - /samples/golang/
-description: |
-  Go (golang) is a general purpose, higher-level, imperative programming language.
 ---
 @y
 ---
-title: golang
-keywords: library, sample, golang
-repo: golang
-layout: docs
-permalink: /samples/library/golang/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/golang/
 redirect_from:
 - /samples/golang/
-description: |
-  Go (golang) is a general purpose, higher-level, imperative programming language.
 ---
-@z
-
-@x
-Go (golang) is a general purpose, higher-level, imperative programming language.
-@y
-Go (golang) is a general purpose, higher-level, imperative programming language.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

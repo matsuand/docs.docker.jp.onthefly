@@ -5,13 +5,13 @@
 ---
 description: Components page
 title: Components
-hide_from_sitemap: true
+sitemap: false
 ---
 @y
 ---
 description: Components page
 title: Components
-hide_from_sitemap: true
+sitemap: false
 ---
 @z
 

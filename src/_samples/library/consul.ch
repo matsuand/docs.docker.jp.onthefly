@@ -3,40 +3,14 @@
 
 @x
 ---
-title: consul
-keywords: library, sample, consul
-repo: consul
-layout: docs
-permalink: /samples/library/consul/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/consul/
 redirect_from:
 - /samples/consul/
-description: |
-  Consul is a datacenter runtime that provides service discovery, configuration, and orchestration.
 ---
 @y
 ---
-title: consul
-keywords: library, sample, consul
-repo: consul
-layout: docs
-permalink: /samples/library/consul/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/consul/
 redirect_from:
 - /samples/consul/
-description: |
-  Consul is a datacenter runtime that provides service discovery, configuration, and orchestration.
 ---
-@z
-
-@x
-Consul is a datacenter runtime that provides service discovery, configuration, and orchestration.
-@y
-Consul is a datacenter runtime that provides service discovery, configuration, and orchestration.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

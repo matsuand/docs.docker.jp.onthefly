@@ -3,40 +3,14 @@
 
 @x
 ---
-title: nginx
-keywords: library, sample, nginx
-repo: nginx
-layout: docs
-permalink: /samples/library/nginx/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/nginx/
 redirect_from:
 - /samples/nginx/
-description: |
-  Official build of Nginx.
 ---
 @y
 ---
-title: nginx
-keywords: library, sample, nginx
-repo: nginx
-layout: docs
-permalink: /samples/library/nginx/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/nginx/
 redirect_from:
 - /samples/nginx/
-description: |
-  Official build of Nginx.
 ---
-@z
-
-@x
-Official build of Nginx.
-@y
-Official build of Nginx.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

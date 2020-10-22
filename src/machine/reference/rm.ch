@@ -6,14 +6,12 @@
 description: Remove a machine.
 keywords: machine, rm, subcommand
 title: docker-machine rm
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Remove a machine.
 keywords: machine, rm, subcommand
 title: docker-machine rm
-hide_from_sitemap: true
 ---
 @z
 

@@ -3,40 +3,14 @@
 
 @x
 ---
-title: fsharp
-keywords: library, sample, fsharp
-repo: fsharp
-layout: docs
-permalink: /samples/library/fsharp/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/fsharp/
 redirect_from:
 - /samples/fsharp/
-description: |
-  F# is a multi-paradigm language encompassing functional, imperative, and object-oriented styles
 ---
 @y
 ---
-title: fsharp
-keywords: library, sample, fsharp
-repo: fsharp
-layout: docs
-permalink: /samples/library/fsharp/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/fsharp/
 redirect_from:
 - /samples/fsharp/
-description: |
-  F# is a multi-paradigm language encompassing functional, imperative, and object-oriented styles
 ---
-@z
-
-@x
-F# is a multi-paradigm language encompassing functional, imperative, and object-oriented styles
-@y
-F# is a multi-paradigm language encompassing functional, imperative, and object-oriented styles
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

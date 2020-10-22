@@ -6,14 +6,12 @@
 description: Migrate from Boot2Docker to Docker Machine
 keywords: machine, commands, boot2docker, migrate, docker
 title: Migrate from Boot2Docker to Machine
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Migrate from Boot2Docker to Docker Machine
 keywords: machine, commands, boot2docker, migrate, docker
 title: Boot2Docker から Machine への移行
-hide_from_sitemap: true
 ---
 @z
 

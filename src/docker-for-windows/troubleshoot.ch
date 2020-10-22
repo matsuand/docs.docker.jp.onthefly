@@ -915,20 +915,20 @@ Here are some steps to take if you experience similar problems:
 
 @x
 4.  Set up an external network switch. If you plan at any point to use
-    [Docker Machine](../machine/overview.md) to set up multiple local VMs, you
+    [Docker Machine](../machine/index.md) to set up multiple local VMs, you
     need this anyway, as described in the topic on the
     [Hyper-V driver for Docker Machine](../machine/drivers/hyper-v.md#example).
     You can replace `DockerNAT` with this switch.
 @y
 {% comment %}
 4.  Set up an external network switch. If you plan at any point to use
-    [Docker Machine](../machine/overview.md) to set up multiple local VMs, you
+    [Docker Machine](../machine/index.md) to set up multiple local VMs, you
     need this anyway, as described in the topic on the
     [Hyper-V driver for Docker Machine](../machine/drivers/hyper-v.md#example).
     You can replace `DockerNAT` with this switch.
 {% endcomment %}
 4.  外部ネットワークスイッチを設定します。
-    いずれ [Docker Machine](../machine/overview.md) を利用してローカルに複数の VM を利用するつもりなら、これが必要になります。
+    いずれ [Docker Machine](../machine/index.md) を利用してローカルに複数の VM を利用するつもりなら、これが必要になります。
     このことは [Docker Machine 用の Hyper-V ドライバー](../machine/drivers/hyper-v.md#example) 内のトピックにおいて説明しています。
     `DockerNAT`をこのスイッチに置き換えることができます。
 @z

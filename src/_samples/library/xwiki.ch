@@ -3,40 +3,14 @@
 
 @x
 ---
-title: xwiki
-keywords: library, sample, xwiki
-repo: xwiki
-layout: docs
-permalink: /samples/library/xwiki/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/xwiki/
 redirect_from:
 - /samples/xwiki/
-description: |
-  XWiki: The Advanced Open Source Enterprise Wiki.
 ---
 @y
 ---
-title: xwiki
-keywords: library, sample, xwiki
-repo: xwiki
-layout: docs
-permalink: /samples/library/xwiki/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/xwiki/
 redirect_from:
 - /samples/xwiki/
-description: |
-  XWiki: The Advanced Open Source Enterprise Wiki.
 ---
-@z
-
-@x
-XWiki: The Advanced Open Source Enterprise Wiki.
-@y
-XWiki: The Advanced Open Source Enterprise Wiki.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

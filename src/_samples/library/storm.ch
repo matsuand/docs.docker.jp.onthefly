@@ -3,40 +3,14 @@
 
 @x
 ---
-title: storm
-keywords: library, sample, storm
-repo: storm
-layout: docs
-permalink: /samples/library/storm/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/storm/
 redirect_from:
 - /samples/storm/
-description: |
-  Apache Storm is a free and open source distributed realtime computation system.
 ---
 @y
 ---
-title: storm
-keywords: library, sample, storm
-repo: storm
-layout: docs
-permalink: /samples/library/storm/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/storm/
 redirect_from:
 - /samples/storm/
-description: |
-  Apache Storm is a free and open source distributed realtime computation system.
 ---
-@z
-
-@x
-Apache Storm is a free and open source distributed realtime computation system.
-@y
-Apache Storm is a free and open source distributed realtime computation system.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

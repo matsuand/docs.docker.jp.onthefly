@@ -6,14 +6,12 @@
 description: Exoscale driver for machine
 keywords: machine, exoscale, driver
 title: Exoscale
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Exoscale driver for machine
 keywords: machine, exoscale, driver
 title: Exoscale
-hide_from_sitemap: true
 ---
 @z
 

@@ -6,14 +6,12 @@
 description: List machines
 keywords: machine, ls, subcommand
 title: docker-machine ls
-hide_from_sitemap: true
 ---
 @y
 ---
 description: マシンを一覧表示します。
 keywords: machine, ls, subcommand
 title: docker-machine ls
-hide_from_sitemap: true
 ---
 @z
 

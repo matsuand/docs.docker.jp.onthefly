@@ -6,14 +6,12 @@
 description: DigitalOcean driver for machine
 keywords: machine, digitalocean, driver
 title: DigitalOcean
-hide_from_sitemap: true
 ---
 @y
 ---
 description: DigitalOcean driver for machine
 keywords: machine, digitalocean, driver
 title: DigitalOcean
-hide_from_sitemap: true
 ---
 @z
 

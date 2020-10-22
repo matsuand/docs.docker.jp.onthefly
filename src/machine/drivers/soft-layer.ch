@@ -6,14 +6,12 @@
 description: IBM Softlayer driver for machine
 keywords: machine, IBM Softlayer, driver
 title: IBM Softlayer
-hide_from_sitemap: true
 ---
 @y
 ---
 description: IBM Softlayer driver for machine
 keywords: machine, IBM Softlayer, driver
 title: IBM Softlayer
-hide_from_sitemap: true
 ---
 @z
 

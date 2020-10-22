@@ -3,40 +3,14 @@
 
 @x
 ---
-title: arangodb
-keywords: library, sample, arangodb
-repo: arangodb
-layout: docs
-permalink: /samples/library/arangodb/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/arangodb/
 redirect_from:
 - /samples/arangodb/
-description: |
-  ArangoDB - a distributed database with a flexible data model for documents, graphs, and key-values.
 ---
 @y
 ---
-title: arangodb
-keywords: library, sample, arangodb
-repo: arangodb
-layout: docs
-permalink: /samples/library/arangodb/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/arangodb/
 redirect_from:
 - /samples/arangodb/
-description: |
-  ArangoDB - a distributed database with a flexible data model for documents, graphs, and key-values.
 ---
-@z
-
-@x
-ArangoDB - a distributed database with a flexible data model for documents, graphs, and key-values.
-@y
-ArangoDB - a distributed database with a flexible data model for documents, graphs, and key-values.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

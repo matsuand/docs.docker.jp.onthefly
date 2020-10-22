@@ -3,40 +3,14 @@
 
 @x
 ---
-title: hello-world
-keywords: library, sample, hello-world
-repo: hello-world
-layout: docs
-permalink: /samples/library/hello-world/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/hello-world/
 redirect_from:
 - /samples/hello-world/
-description: |
-  Hello World! (an example of minimal Dockerization)
 ---
 @y
 ---
-title: hello-world
-keywords: library, sample, hello-world
-repo: hello-world
-layout: docs
-permalink: /samples/library/hello-world/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/hello-world/
 redirect_from:
 - /samples/hello-world/
-description: |
-  Hello World! (最小限の Docker 化の例)
 ---
-@z
-
-@x
-Hello World! (an example of minimal Dockerization)
-@y
-Hello World! (最小限の Docker 化の例)
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

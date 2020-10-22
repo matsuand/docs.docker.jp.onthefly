@@ -6,14 +6,12 @@
 description: Get started with Docker Machine and a local VM
 keywords: machine, virtualbox
 title: Get started with Docker Machine and a local VM
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Get started with Docker Machine and a local VM
 keywords: machine, virtualbox
 title: Docker Machine とローカル VM を使ってはじめよう
-hide_from_sitemap: true
 ---
 @z
 

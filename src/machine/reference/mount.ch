@@ -6,14 +6,12 @@
 description: Mount directory from machine
 keywords: machine, mount, subcommand
 title: docker-machine mount
-hide_from_sitemap: true
 ---
 @y
 ---
 description: マシンからディレクトリをマウントします。
 keywords: machine, mount, subcommand
 title: docker-machine mount
-hide_from_sitemap: true
 ---
 @z
 

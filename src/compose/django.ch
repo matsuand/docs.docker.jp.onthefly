@@ -646,21 +646,16 @@ In this section, you set up the database connection for Django.
    At this point, your Django app should be running at port `8000` on
    your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
    to `http://localhost:8000` on a web browser to see the Django
-   welcome page. If you are using [Docker Machine](../machine/overview.md),
-   then `docker-machine ip MACHINE_VM` returns the Docker host IP
-   address, to which you can append the port (`<Docker-Host-IP>:8000`).
+   welcome page.
 @y
    {% comment %}
    At this point, your Django app should be running at port `8000` on
    your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
    to `http://localhost:8000` on a web browser to see the Django
-   welcome page. If you are using [Docker Machine](../machine/overview.md),
-   then `docker-machine ip MACHINE_VM` returns the Docker host IP
-   address, to which you can append the port (`<Docker-Host-IP>:8000`).
+   welcome page.
    {% endcomment %}
    この段階で Django アプリは Docker ホスト上のポート`8000`で稼動しています。
    Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから`http://localhost:8000`にアクセスすることで、Django の Welcome ページを確認できます。
-   [Docker Machine](../machine/overview.md) を利用している場合は、`docker-machine ip MACHINE_VM`を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（`<DockerホストID>:8000`）。
 @z
 
 @x

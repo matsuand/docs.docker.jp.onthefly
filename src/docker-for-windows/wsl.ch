@@ -102,13 +102,14 @@ Docker Desktop WSL 2 バックエンドをインストールするにあたっ�
 @z
 
 @x
-- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux filesystem, rather than the Windows filesystem.
+- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux file system, rather than the Windows file system. You can also refer to the [recommendation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions){:target="_blank" rel="noopener" class="_"} from Microsoft.
 @y
 {% comment %}
-- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux filesystem, rather than the Windows filesystem.
+- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux file system, rather than the Windows file system. You can also refer to the [recommendation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions){:target="_blank" rel="noopener" class="_"} from Microsoft.
 {% endcomment %}
 - バインドマウント利用時のファイルシステム性能を最大化するには、以下を行います。
   なおバインドマウントされたソースコードや関連データは、Windows ファイルシステムではない Linux ファイルシステムを有する Linux コンテナーに（たとえば`docker run -v <host-path>:<container-path>`を使って）保存することをお勧めします。
+  また Microsoft 社の [recommendation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions){:target="_blank" rel="noopener" class="_"} も参照してください。
 @z
 
 @x

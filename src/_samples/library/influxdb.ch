@@ -3,40 +3,14 @@
 
 @x
 ---
-title: influxdb
-keywords: library, sample, influxdb
-repo: influxdb
-layout: docs
-permalink: /samples/library/influxdb/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/influxdb/
 redirect_from:
 - /samples/influxdb/
-description: |
-  InfluxDB is an open source time series database for recording metrics, events, and analytics.
 ---
 @y
 ---
-title: influxdb
-keywords: library, sample, influxdb
-repo: influxdb
-layout: docs
-permalink: /samples/library/influxdb/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/influxdb/
 redirect_from:
 - /samples/influxdb/
-description: |
-  InfluxDB is an open source time series database for recording metrics, events, and analytics.
 ---
-@z
-
-@x
-InfluxDB is an open source time series database for recording metrics, events, and analytics.
-@y
-InfluxDB is an open source time series database for recording metrics, events, and analytics.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

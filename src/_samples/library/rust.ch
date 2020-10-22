@@ -3,40 +3,14 @@
 
 @x
 ---
-title: rust
-keywords: library, sample, rust
-repo: rust
-layout: docs
-permalink: /samples/library/rust/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/rust/
 redirect_from:
 - /samples/rust/
-description: |
-  Rust is a systems programming language focused on safety, speed, and concurrency.
 ---
 @y
 ---
-title: rust
-keywords: library, sample, rust
-repo: rust
-layout: docs
-permalink: /samples/library/rust/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/rust/
 redirect_from:
 - /samples/rust/
-description: |
-  Rust is a systems programming language focused on safety, speed, and concurrency.
 ---
-@z
-
-@x
-Rust is a systems programming language focused on safety, speed, and concurrency.
-@y
-Rust is a systems programming language focused on safety, speed, and concurrency.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

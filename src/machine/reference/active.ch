@@ -6,14 +6,12 @@
 description: Identify active machines
 keywords: machine, active, subcommand
 title: docker-machine active
-hide_from_sitemap: true
 ---
 @y
 ---
 description: アクティブなマシンを識別します。
 keywords: machine, active, subcommand
 title: docker-machine active
-hide_from_sitemap: true
 ---
 @z
 

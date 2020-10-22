@@ -3,40 +3,14 @@
 
 @x
 ---
-title: alt
-keywords: library, sample, alt
-repo: alt
-layout: docs
-permalink: /samples/library/alt/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/alt/
 redirect_from:
 - /samples/alt/
-description: |
-  The official build of ALT Linux.
 ---
 @y
 ---
-title: alt
-keywords: library, sample, alt
-repo: alt
-layout: docs
-permalink: /samples/library/alt/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/alt/
 redirect_from:
 - /samples/alt/
-description: |
-  The official build of ALT Linux.
 ---
-@z
-
-@x
-The official build of ALT Linux.
-@y
-The official build of ALT Linux.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

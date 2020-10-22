@@ -3,40 +3,14 @@
 
 @x
 ---
-title: maven
-keywords: library, sample, maven
-repo: maven
-layout: docs
-permalink: /samples/library/maven/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/maven/
 redirect_from:
 - /samples/maven/
-description: |
-  Apache Maven is a software project management and comprehension tool.
 ---
 @y
 ---
-title: maven
-keywords: library, sample, maven
-repo: maven
-layout: docs
-permalink: /samples/library/maven/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/maven/
 redirect_from:
 - /samples/maven/
-description: |
-  Apache Maven is a software project management and comprehension tool.
 ---
-@z
-
-@x
-Apache Maven is a software project management and comprehension tool.
-@y
-Apache Maven is a software project management and comprehension tool.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

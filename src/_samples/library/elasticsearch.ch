@@ -3,40 +3,14 @@
 
 @x
 ---
-title: elasticsearch
-keywords: library, sample, elasticsearch
-repo: elasticsearch
-layout: docs
-permalink: /samples/library/elasticsearch/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/elasticsearch/
 redirect_from:
 - /samples/elasticsearch/
-description: |
-  Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.
 ---
 @y
 ---
-title: elasticsearch
-keywords: library, sample, elasticsearch
-repo: elasticsearch
-layout: docs
-permalink: /samples/library/elasticsearch/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/elasticsearch/
 redirect_from:
 - /samples/elasticsearch/
-description: |
-  Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.
 ---
-@z
-
-@x
-Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.
-@y
-Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

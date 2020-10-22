@@ -7,7 +7,6 @@ description: Microsoft Hyper-V driver for machine
 keywords: machine, Microsoft Hyper-V, driver
 title: Microsoft Hyper-V
 toc_max: 4
-hide_from_sitemap: true
 ---
 @y
 ---
@@ -15,7 +14,6 @@ description: Microsoft Hyper-V driver for machine
 keywords: machine, Microsoft Hyper-V, driver
 title: Microsoft Hyper-V
 toc_max: 4
-hide_from_sitemap: true
 ---
 @z
 

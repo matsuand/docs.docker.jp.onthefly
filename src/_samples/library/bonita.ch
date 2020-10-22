@@ -3,40 +3,14 @@
 
 @x
 ---
-title: bonita
-keywords: library, sample, bonita
-repo: bonita
-layout: docs
-permalink: /samples/library/bonita/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/bonita/
 redirect_from:
 - /samples/bonita/
-description: |
-  Bonita is an open-source business process management and workflow suite
 ---
 @y
 ---
-title: bonita
-keywords: library, sample, bonita
-repo: bonita
-layout: docs
-permalink: /samples/library/bonita/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/bonita/
 redirect_from:
 - /samples/bonita/
-description: |
-  Bonita is an open-source business process management and workflow suite
 ---
-@z
-
-@x
-Bonita is an open-source business process management and workflow suite
-@y
-Bonita is an open-source business process management and workflow suite
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

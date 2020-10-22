@@ -3,40 +3,14 @@
 
 @x
 ---
-title: swift
-keywords: library, sample, swift
-repo: swift
-layout: docs
-permalink: /samples/library/swift/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/swift/
 redirect_from:
 - /samples/swift/
-description: |
-  Swift is a high-performance system programming language, to learn more about Swift visit swift.org.
 ---
 @y
 ---
-title: swift
-keywords: library, sample, swift
-repo: swift
-layout: docs
-permalink: /samples/library/swift/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/swift/
 redirect_from:
 - /samples/swift/
-description: |
-  Swift is a high-performance system programming language, to learn more about Swift visit swift.org.
 ---
-@z
-
-@x
-Swift is a high-performance system programming language, to learn more about Swift visit swift.org.
-@y
-Swift is a high-performance system programming language, to learn more about Swift visit swift.org.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

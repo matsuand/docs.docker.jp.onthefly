@@ -3,40 +3,14 @@
 
 @x
 ---
-title: traefik
-keywords: library, sample, traefik
-repo: traefik
-layout: docs
-permalink: /samples/library/traefik/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/traefik/
 redirect_from:
 - /samples/traefik/
-description: |
-  Traefik, The Cloud Native Edge Router
 ---
 @y
 ---
-title: traefik
-keywords: library, sample, traefik
-repo: traefik
-layout: docs
-permalink: /samples/library/traefik/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/traefik/
 redirect_from:
 - /samples/traefik/
-description: |
-  Traefik, The Cloud Native Edge Router
 ---
-@z
-
-@x
-Traefik, The Cloud Native Edge Router
-@y
-Traefik, The Cloud Native Edge Router
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

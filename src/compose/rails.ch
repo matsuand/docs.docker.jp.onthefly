@@ -633,21 +633,6 @@ Docker Desktop for Mac や Docker Desktop for Windows の場合は、ウェブ�
 @z
 
 @x
-If you are using [Docker Machine](../machine/overview.md), then `docker-machine ip
-MACHINE_VM` returns the Docker host IP address, to which you can append the port
-(`<Docker-Host-IP>:3000`).
-@y
-{% comment %}
-If you are using [Docker Machine](../machine/overview.md), then `docker-machine ip
-MACHINE_VM` returns the Docker host IP address, to which you can append the port
-(`<Docker-Host-IP>:3000`).
-{% endcomment %}
-[Docker Machine](../machine/overview.md) を利用している場合は、`docker-machine ip MACHINE_VM` を実行すると Docker ホストの IP アドレスを得ることができます。
-これにポート番号をつけて利用します。
-（`<Docker-Host-IP>:3000`）
-@z
-
-@x
 ![Rails example](images/rails-welcome.png)
 @y
 {% comment %}

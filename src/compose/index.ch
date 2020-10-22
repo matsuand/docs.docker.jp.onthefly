@@ -563,20 +563,14 @@ $ docker-compose down
 
 @x
 Compose has traditionally been focused on development and testing workflows,
-but with each release we're making progress on more production-oriented features. You can use Compose to deploy to a remote Docker Engine. The Docker Engine may be a single instance provisioned with
-[Docker Machine](../machine/overview.md) or an entire
-[Docker Swarm](../engine/swarm/index.md) cluster.
+but with each release we're making progress on more production-oriented features.
 @y
 {% comment %}
 Compose has traditionally been focused on development and testing workflows,
-but with each release we're making progress on more production-oriented features. You can use Compose to deploy to a remote Docker Engine. The Docker Engine may be a single instance provisioned with
-[Docker Machine](../machine/overview.md) or an entire
-[Docker Swarm](../engine/swarm/index.md) cluster.
+but with each release we're making progress on more production-oriented features.
 {% endcomment %}
 Compose はこれまで、開発環境やテスト環境でのワークフローに注目してきました。
 しかしリリースを重ねるにつれて、本番環境を意識した機能を充実させるように進化しています。
-Compose はリモートにある Docker Engine に対してもデプロイすることができます。
-Docker Engine とは、[Docker Machine](../machine/overview.md) で提供される単一インスタンスであったり、[Docker Swarm](../engine/swarm/index.md) クラスター一式である場合もあります。
 @z
 
 @x

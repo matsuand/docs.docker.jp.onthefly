@@ -3,40 +3,14 @@
 
 @x
 ---
-title: fedora
-keywords: library, sample, fedora
-repo: fedora
-layout: docs
-permalink: /samples/library/fedora/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/fedora/
 redirect_from:
 - /samples/fedora/
-description: |
-  Official Docker builds of Fedora
 ---
 @y
 ---
-title: fedora
-keywords: library, sample, fedora
-repo: fedora
-layout: docs
-permalink: /samples/library/fedora/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/fedora/
 redirect_from:
 - /samples/fedora/
-description: |
-  Official Docker builds of Fedora
 ---
-@z
-
-@x
-Official Docker builds of Fedora
-@y
-Official Docker builds of Fedora
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

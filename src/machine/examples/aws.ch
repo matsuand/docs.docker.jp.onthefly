@@ -6,14 +6,12 @@
 description: Using Docker Machine to provision hosts on AWS
 keywords: docker, machine, cloud, aws
 title: Amazon Web Services (AWS) EC2 example
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Using Docker Machine to provision hosts on AWS
 keywords: docker, machine, cloud, aws
 title: Amazon ウェブサービス (AWS) EC2 の利用例
-hide_from_sitemap: true
 ---
 @z
 

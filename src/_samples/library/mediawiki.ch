@@ -3,40 +3,14 @@
 
 @x
 ---
-title: mediawiki
-keywords: library, sample, mediawiki
-repo: mediawiki
-layout: docs
-permalink: /samples/library/mediawiki/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/mediawiki/
 redirect_from:
 - /samples/mediawiki/
-description: |
-  MediaWiki is a free software open source wiki package written in PHP.
 ---
 @y
 ---
-title: mediawiki
-keywords: library, sample, mediawiki
-repo: mediawiki
-layout: docs
-permalink: /samples/library/mediawiki/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/mediawiki/
 redirect_from:
 - /samples/mediawiki/
-description: |
-  MediaWiki is a free software open source wiki package written in PHP.
 ---
-@z
-
-@x
-MediaWiki is a free software open source wiki package written in PHP.
-@y
-MediaWiki is a free software open source wiki package written in PHP.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

@@ -6,14 +6,12 @@
 description: OpenStack driver for machine
 keywords: machine, OpenStack, driver
 title: OpenStack
-hide_from_sitemap: true
 ---
 @y
 ---
 description: OpenStack driver for machine
 keywords: machine, OpenStack, driver
 title: OpenStack
-hide_from_sitemap: true
 ---
 @z
 

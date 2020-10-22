@@ -3,40 +3,14 @@
 
 @x
 ---
-title: busybox
-keywords: library, sample, busybox
-repo: busybox
-layout: docs
-permalink: /samples/library/busybox/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/busybox/
 redirect_from:
 - /samples/busybox/
-description: |
-  Busybox base image.
 ---
 @y
 ---
-title: busybox
-keywords: library, sample, busybox
-repo: busybox
-layout: docs
-permalink: /samples/library/busybox/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/busybox/
 redirect_from:
 - /samples/busybox/
-description: |
-  Busybox base image.
 ---
-@z
-
-@x
-Busybox base image.
-@y
-Busybox base image.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

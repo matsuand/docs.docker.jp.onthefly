@@ -3,40 +3,14 @@
 
 @x
 ---
-title: drupal
-keywords: library, sample, drupal
-repo: drupal
-layout: docs
-permalink: /samples/library/drupal/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/drupal/
 redirect_from:
 - /samples/drupal/
-description: |
-  Drupal is an open source content management platform powering millions of websites and applications.
 ---
 @y
 ---
-title: drupal
-keywords: library, sample, drupal
-repo: drupal
-layout: docs
-permalink: /samples/library/drupal/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/drupal/
 redirect_from:
 - /samples/drupal/
-description: |
-  Drupal is an open source content management platform powering millions of websites and applications.
 ---
-@z
-
-@x
-Drupal is an open source content management platform powering millions of websites and applications.
-@y
-Drupal is an open source content management platform powering millions of websites and applications.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

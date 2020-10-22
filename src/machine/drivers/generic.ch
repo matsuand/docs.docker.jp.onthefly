@@ -6,14 +6,12 @@
 description: Generic driver for machine
 keywords: machine, Generic, driver
 title: Generic
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Generic driver for machine
 keywords: machine, Generic, driver
 title: Generic
-hide_from_sitemap: true
 ---
 @z
 

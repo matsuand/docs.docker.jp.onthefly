@@ -3,40 +3,14 @@
 
 @x
 ---
-title: odoo
-keywords: library, sample, odoo
-repo: odoo
-layout: docs
-permalink: /samples/library/odoo/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/odoo/
 redirect_from:
 - /samples/odoo/
-description: |
-  Odoo (formerly known as OpenERP) is a suite of open-source business apps.
 ---
 @y
 ---
-title: odoo
-keywords: library, sample, odoo
-repo: odoo
-layout: docs
-permalink: /samples/library/odoo/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/odoo/
 redirect_from:
 - /samples/odoo/
-description: |
-  Odoo (formerly known as OpenERP) is a suite of open-source business apps.
 ---
-@z
-
-@x
-Odoo (formerly known as OpenERP) is a suite of open-source business apps.
-@y
-Odoo (formerly known as OpenERP) is a suite of open-source business apps.
-@z
-
-@x
-{% include library-samples.md %}
-@y
-{% include library-samples.md %}
 @z

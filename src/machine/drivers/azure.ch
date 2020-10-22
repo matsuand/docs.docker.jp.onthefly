@@ -6,14 +6,12 @@
 description: Microsoft Azure driver for machine
 keywords: machine, Microsoft Azure, driver
 title: Microsoft Azure
-hide_from_sitemap: true
 ---
 @y
 ---
 description: Microsoft Azure driver for machine
 keywords: machine, Microsoft Azure, driver
 title: Microsoft Azure
-hide_from_sitemap: true
 ---
 @z
 

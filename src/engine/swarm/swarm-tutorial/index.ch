@@ -296,32 +296,14 @@ Hyperkit (Mac) 上、または Hyper-V (Windows) 上の Docker "Moby" が単一 
 
 @x
 * Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows alone to test a
-_multi-node_ swarm. However, you can use the included version of
-[Docker Machine](../../../machine/overview.md) to create the swarm nodes (see
-[Get started with Docker Machine and a local VM](../../../machine/get-started.md)), then
-follow the tutorial for all multi-node features. For this scenario, you run
-commands from a Docker Desktop for Mac or Docker Desktop for Windows host, but that Docker host itself is
-_not_ participating in the swarm. After you create the nodes, you can run all
-swarm commands as shown from the Mac terminal or Windows PowerShell with
-Docker Desktop for Mac or Docker Desktop for Windows running.
+_multi-node_ swarm, but many examples are applicable to a single-node Swarm setup.
 @y
 {% comment %}
 * Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows alone to test a
-_multi-node_ swarm. However, you can use the included version of
-[Docker Machine](../../../machine/overview.md) to create the swarm nodes (see
-[Get started with Docker Machine and a local VM](../../../machine/get-started.md)), then
-follow the tutorial for all multi-node features. For this scenario, you run
-commands from a Docker Desktop for Mac or Docker Desktop for Windows host, but that Docker host itself is
-_not_ participating in the swarm. After you create the nodes, you can run all
-swarm commands as shown from the Mac terminal or Windows PowerShell with
-Docker Desktop for Mac or Docker Desktop for Windows running.
+_multi-node_ swarm, but many examples are applicable to a single-node Swarm setup.
 {% endcomment %}
 * 現時点において Docker Desktop for Mac または Docker Desktop for Windows を単独で利用するだけでは、**複数ノード** Swarm を扱うことはできません。
-しかし [Docker Machine](../../../machine/overview.md) が含まれているバージョンを利用すれば、Swarm ノードを生成することができます（[Docker Machine とローカル VM をはじめよう](../../../machine/get-started.md) を参照してください）。
-そしてこのチュートリアルにに示す、複数ノードの操作を行うことができます。
-このシナリオの場合、コマンドの実行は Docker Desktop for Mac または Docker Desktop for Windows のホストから行います。
-ただし Docker ホストそのものは Swarm に参加しているわけでは **ありません**。
-全ノードを生成した後は、Docker Desktop for Mac における Mac ターミナル、Docker Desktop for Windows における Windows PowerShell から、説明している Swarm コマンドはすべて実行することができます。
+ただし単独ノードの Swarm 設定に対して、数多くの利用例を参考にすることはできます。
 @z
 
 @x

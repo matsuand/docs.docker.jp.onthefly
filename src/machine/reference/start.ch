@@ -6,14 +6,12 @@
 description: Start a machine
 keywords: machine, start, subcommand
 title: docker-machine start
-hide_from_sitemap: true
 ---
 @y
 ---
 description: マシンを起動します。
 keywords: machine, start, subcommand
 title: docker-machine start
-hide_from_sitemap: true
 ---
 @z
 
