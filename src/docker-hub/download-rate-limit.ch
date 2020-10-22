@@ -248,7 +248,11 @@ If you are using any third-party platforms, follow your provider’s instruction
 @x
 ## Other limits
 @y
+{% comment %}
 ## Other limits
+{% endcomment %}
+{: #other-limits }
+## その他の制限
 @z
 
 @x
@@ -260,6 +264,7 @@ and other factors, it is in the order of thousands of requests per
 minute. The overall rate limit applies to all users equally
 regardless of account level.
 @y
+{% comment %}
 Docker Hub also has an overall rate limit to protect the application 
 and infrastructure. This limit applies to all requests to Hub 
 properties including web pages, APIs, image pulls, etc. The limit is 
@@ -267,6 +272,11 @@ applied per-IP, and while the limit changes over time depending on load
 and other factors, it is in the order of thousands of requests per 
 minute. The overall rate limit applies to all users equally
 regardless of account level.
+{% endcomment %}
+Docker Hub ではアプリケーションやインフラストラクチャーを保護するために、ダウンロードレートの総量制限があります。
+この制限は Hub に対するリクエストすべてに適用されるものであり、ウェブページ、API、イメージプルなどを含みます。
+制限は IP アドレスごとに行われ、負荷状況などにより時間とともに変化しますが、1 分あたり数千個のリクエスト相当のものです。
+レートの総量制限は、アカウントのレベルに関係なく、全ユーザーに等しく適用されます。
 @z
 
 @x
@@ -275,8 +285,13 @@ code. The "overall limit" will return a simple `429 Too Many Requests`
 response. The image download limit returns a longer error message that 
 includes a link to this page.
 @y
+{% comment %}
 You can differentiate between these limits by looking at the error 
 code. The "overall limit" will return a simple `429 Too Many Requests` 
 response. The image download limit returns a longer error message that 
 includes a link to this page.
+{% endcomment %}
+この制限が適用されたかどうかは、エラーコードを見ればわかります。
+総量制限が適用された場合、単純に`429 Too Many Requests`レスポンスが返されます。
+イメージのダウンロードの際に発生する制限の場合は、もっと長いエラーメッセージが示され、その中には本ページへのリンクが示されます。
 @z
