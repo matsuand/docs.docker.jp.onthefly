@@ -656,21 +656,17 @@ step.
 @x
 ```bash
 $ docker container stop devtest
+
+$ docker container rm devtest
+
+$ docker volume rm myvol2
+```
 @y
 ```bash
 $ docker container stop devtest
-@z
 
-@x
 $ docker container rm devtest
-@y
-$ docker container rm devtest
-@z
 
-@x
-$ docker volume rm myvol2
-```
-@y
 $ docker volume rm myvol2
 ```
 @z
@@ -678,13 +674,20 @@ $ docker volume rm myvol2
 @x
 ## Use a volume with docker-compose
 @y
+{% comment %}
 ## Use a volume with docker-compose
+{% endcomment %}
+{: #use-a-volume-with-docker-compose }
+## docker-compose でのボリューム利用
 @z
 
 @x
 A single docker compose service with a volume looks like this:
 @y
+{% comment %}
 A single docker compose service with a volume looks like this:
+{% endcomment %}
+ボリュームを利用する単一の Compose サービスは、たとえば以下のようなものです。
 @z
 
 @x
@@ -715,16 +718,24 @@ volumes:
 On the first invocation of `docker-compose up` the volume will be created. The same
 volume will be reused on following invocations.
 @y
+{% comment %}
 On the first invocation of `docker-compose up` the volume will be created. The same
 volume will be reused on following invocations.
+{% endcomment %}
+`docker-compose up`の初回実行時に、そのボリュームが生成されます。
+このボリュームが、それ以降の実行時においても再利用されます。
 @z
 
 @x
 A volume may be created directly outside of compose with `docker volume create` and
 then referenced inside `docker-compose.yml` as follows:
 @y
+{% comment %}
 A volume may be created directly outside of compose with `docker volume create` and
 then referenced inside `docker-compose.yml` as follows:
+{% endcomment %}
+ボリュームは`docker volume create`の実行によって、Compose の外部に直接生成されているかもしれません。
+その後は`docker-compose.yml`内から、以下のようにして参照されます。
 @z
 
 @x
@@ -757,8 +768,11 @@ volumes:
 For more information about using volumes with compose see
 [the compose reference](../compose/compose-file-v2.md#volume-configuration-reference).
 @y
+{% comment %}
 For more information about using volumes with compose see
 [the compose reference](../compose/compose-file-v2.md#volume-configuration-reference).
+{% endcomment %}
+Compose においてボリュームを利用する方法に関しては [Compose リファレンス](../compose/compose-file-v2.md#volume-configuration-reference) を参照してください。
 @z
 
 @x

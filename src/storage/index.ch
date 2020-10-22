@@ -486,9 +486,14 @@ Docker コンテナーやサービスにおいてデータを保持するため�
   are stored in the Linux VM rather than the host, which means that the reads and writes
   have much lower latency and higher throughput.
 @y
+{% comment %}
 - When your application requires high-performance I/O on Docker Desktop. Volumes
   are stored in the Linux VM rather than the host, which means that the reads and writes
   have much lower latency and higher throughput.
+{% endcomment %}
+- Docker Desktop においてアプリケーションが高性能な I/O を必要とする場合です。
+  ボリュームはホスト上ではなく Linux VM 上に保存されます。
+  このことはつまり、読み書きにおける待ち時間がより少なくなり、スループットが向上します。
 @z
 
 @x
@@ -498,11 +503,17 @@ Docker コンテナーやサービスにおいてデータを保持するため�
   VM and can make these guarantees, whereas bind mounts are remoted to macOS or
   Windows, where the file systems behave slightly differently.
 @y
+{% comment %}
 - When your application requires fully native file system behavior on Docker
   Desktop. For example, a database engine requires precise control over disk
   flushing to guarantee transaction durability. Volumes are stored in the Linux
   VM and can make these guarantees, whereas bind mounts are remoted to macOS or
   Windows, where the file systems behave slightly differently.
+{% endcomment %}
+- Docker Desktop 上でのアプリケーションが、完全にネイティブなファイルシステムの動作を必要とする場合です。
+  たとえばデータベースエンジンでは、トランザクションの耐久性を保証するために、ディスクへの書き込みを細かく制御できることが必要になります。
+  ボリュームは Linux VM 上に保存され、これらを保証することができます。
+  一方バインドマウントは macOS や Windows にリモート接続されるものなので、ファイルシステムの動作は若干異なるものになります。
 @z
 
 @x

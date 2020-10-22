@@ -436,25 +436,20 @@ File share の設定には以下のものがあります。
  is created, attempts to create a second file called `Test` will fail. For more information, 
  see [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 {% endcomment %}
-> Tips on shared folders, permissions, and volume mounts
+> 共有フォルダー、パーミッション、ボリュームマウントに関するヒント
 >
- * Shared folders are designed to allow application code to be edited 
- on the host while being executed in containers. For non-code items
- such as cache directories or databases, the performance will be much 
- better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
- (named volume) or [data container](../storage/volumes.md).
+ * 共有フォルダーは、アプリケーションコードの編集をホスト上で行い、その実行はコンテナー内にて行うということを実現するために用いられます。
+   ソースコード以外のキャッシュディレクトリやデータベースなどの場合は、[データボリューム](../storage/volumes.md)（名前つきボリューム）や [データコンテナー](../storage/volumes.md) を利用し、Linux VM 内に配置すれば、性能向上を図ることができます。
 >
- * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
- On Linux, it is possible to create 2 separate files: `test` and `Test`, 
- while on Mac these filenames would actually refer to the same underlying file. 
- This can lead to problems where an app works correctly on a Mac 
- (where the file contents are shared) but fails when run in Linux in 
- production (where the file contents are distinct). To avoid this, Docker Desktop 
- insists that all shared files are accessed as their original case. Therefore, if a file 
- is created called `test`, it must be opened as `test`. Attempts to open `Test` will 
- fail with the error `No such file or directory`. Similarly, once a file called `test` 
- is created, attempts to create a second file called `Test` will fail. For more information, 
- see [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+ * Linux のファイルシステムでは英字の大文字小文字が区別されますが、Mac はデフォルトではその区別は行われません。
+   Linux 上では`test`と`Test`というファイルは 2 つの別ファイルとして生成可能です。
+   一方 Mac の場合、この 2 つのファイル名は、同一のファイルを参照することになります。
+   この状況から考えられるのは、Mac 上においてアプリが正しく動作する（それらのファイル内容を同一として扱う）ものであっても、Linux 上の本番環境に移行させて実行すると、失敗する（ファイル内容を別物として扱う）ということになります。
+   この状況を回避するために Docker Desktop では、共有ファイルはその元々のファイル名によりアクセスすることを求めています。
+   つまり`test`というファイルが生成されていて、これを開くには`test`として開かなければならないということです。
+   `Test`として開こうとしたら`No such file or directory`というエラーとします。
+   同様に`test`というファイルを生成しているなら、次に`Test`を生成しようとしたらエラーにするということです。
+   詳しくは [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users) を参照してください。
 @z
 
 @x
