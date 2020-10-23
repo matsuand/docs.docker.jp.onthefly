@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker-compose run | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker-compose run" />
   <meta property="og:description" content="Runs a one-off command on a service." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/run/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker-compose run","description":"Runs a one-off command on a service.","url":"https://docs.docker.com/compose/reference/run/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -130,40 +130,40 @@ Options:
     -w, --workdir=""      Working directory inside the container
 </code></pre>
 
-<p>Runs a one-time command against a service. For example, the following command starts the <code class="highlighter-rouge">web</code> service and runs <code class="highlighter-rouge">bash</code> as its command.</p>
+<p>Runs a one-time command against a service. For example, the following command starts the <code class="language-plaintext highlighter-rouge">web</code> service and runs <code class="language-plaintext highlighter-rouge">bash</code> as its command.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web bash
 </code></pre></div></div>
 
-<p>Commands you use with <code class="highlighter-rouge">run</code> start in new containers with configuration defined by that of the service, including volumes, links, and other details. However, there are two important differences.</p>
+<p>Commands you use with <code class="language-plaintext highlighter-rouge">run</code> start in new containers with configuration defined by that of the service, including volumes, links, and other details. However, there are two important differences.</p>
 
-<p>First, the command passed by <code class="highlighter-rouge">run</code> overrides the command defined in the service configuration. For example, if the  <code class="highlighter-rouge">web</code> service configuration is started with <code class="highlighter-rouge">bash</code>, then <code class="highlighter-rouge">docker-compose run web python app.py</code> overrides it with <code class="highlighter-rouge">python app.py</code>.</p>
+<p>First, the command passed by <code class="language-plaintext highlighter-rouge">run</code> overrides the command defined in the service configuration. For example, if the  <code class="language-plaintext highlighter-rouge">web</code> service configuration is started with <code class="language-plaintext highlighter-rouge">bash</code>, then <code class="language-plaintext highlighter-rouge">docker-compose run web python app.py</code> overrides it with <code class="language-plaintext highlighter-rouge">python app.py</code>.</p>
 
-<p>The second difference is that the <code class="highlighter-rouge">docker-compose run</code> command does not create any of the ports specified in the service configuration. This prevents port collisions with already-open ports. If you <em>do want</em> the service’s ports to be created and mapped to the host, specify the <code class="highlighter-rouge">--service-ports</code> flag:</p>
+<p>The second difference is that the <code class="language-plaintext highlighter-rouge">docker-compose run</code> command does not create any of the ports specified in the service configuration. This prevents port collisions with already-open ports. If you <em>do want</em> the service’s ports to be created and mapped to the host, specify the <code class="language-plaintext highlighter-rouge">--service-ports</code> flag:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --service-ports web python manage.py shell
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --service-ports web python manage.py shell
 </code></pre></div></div>
 
-<p>Alternatively, manual port mapping can be specified with the <code class="highlighter-rouge">--publish</code> or <code class="highlighter-rouge">-p</code> options, just as when using <code class="highlighter-rouge">docker run</code>:</p>
+<p>Alternatively, manual port mapping can be specified with the <code class="language-plaintext highlighter-rouge">--publish</code> or <code class="language-plaintext highlighter-rouge">-p</code> options, just as when using <code class="language-plaintext highlighter-rouge">docker run</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --publish 8080:80 -p 2022:22 -p 127.0.0.1:2021:21 web python manage.py shell
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --publish 8080:80 -p 2022:22 -p 127.0.0.1:2021:21 web python manage.py shell
 </code></pre></div></div>
 
-<p>If you start a service configured with links, the <code class="highlighter-rouge">run</code> command first checks to see if the linked service is running and starts the service if it is stopped.  Once all the linked services are running, the <code class="highlighter-rouge">run</code> executes the command you passed it. For example, you could run:</p>
+<p>If you start a service configured with links, the <code class="language-plaintext highlighter-rouge">run</code> command first checks to see if the linked service is running and starts the service if it is stopped.  Once all the linked services are running, the <code class="language-plaintext highlighter-rouge">run</code> executes the command you passed it. For example, you could run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run db psql -h db -U docker
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run db psql -h db -U docker
 </code></pre></div></div>
 
-<p>This opens an interactive PostgreSQL shell for the linked <code class="highlighter-rouge">db</code> container.</p>
+<p>This opens an interactive PostgreSQL shell for the linked <code class="language-plaintext highlighter-rouge">db</code> container.</p>
 
-<p>If you do not want the <code class="highlighter-rouge">run</code> command to start linked containers, use the <code class="highlighter-rouge">--no-deps</code> flag:</p>
+<p>If you do not want the <code class="language-plaintext highlighter-rouge">run</code> command to start linked containers, use the <code class="language-plaintext highlighter-rouge">--no-deps</code> flag:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --no-deps web python manage.py shell
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --no-deps web python manage.py shell
 </code></pre></div></div>
 
-<p>If you want to remove the container after running while overriding the container’s restart policy, use the <code class="highlighter-rouge">--rm</code> flag:</p>
+<p>If you want to remove the container after running while overriding the container’s restart policy, use the <code class="language-plaintext highlighter-rouge">--rm</code> flag:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --rm web python manage.py db upgrade
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --rm web python manage.py db upgrade
 </code></pre></div></div>
 
 <p>This runs a database upgrade script, and removes the container when finished running, even if a restart policy is specified in the service configuration.</p>

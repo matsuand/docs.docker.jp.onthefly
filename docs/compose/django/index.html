@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>クィックスタート: Compose と Django | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="クィックスタート: Compose と Django" />
   <meta property="og:description" content="Django を使って Docker Compose をはじめる。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/django/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"クィックスタート: Compose と Django","description":"Django を使って Docker Compose をはじめる。","url":"https://docs.docker.com/compose/django/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
 
@@ -111,7 +111,7 @@
 
 <h3 id="define-the-project-components">プロジェクトのコンポーネントを定義</h3>
 
-<p>このプロジェクトでは Dockerfile、Python の依存関係を示すファイル、<code class="highlighter-rouge">docker-compose.yml</code>ファイルをそれぞれ生成します。（<code class="highlighter-rouge">docker-compose.yml</code>の拡張子は<code class="highlighter-rouge">.yml</code>と<code class="highlighter-rouge">.yaml</code>のどちらでも構いません。）</p>
+<p>このプロジェクトでは Dockerfile、Python の依存関係を示すファイル、<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルをそれぞれ生成します。（<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>の拡張子は<code class="language-plaintext highlighter-rouge">.yml</code>と<code class="language-plaintext highlighter-rouge">.yaml</code>のどちらでも構いません。）</p>
 
 <ol>
   <li>
@@ -122,55 +122,55 @@
  このディレクトリには、イメージをビルドするために必要となるものだけを含めるようにします。</p>
   </li>
   <li>
-    <p>プロジェクトディレクトリ内に <code class="highlighter-rouge">Dockerfile</code> というファイルを新規生成します。</p>
+    <p>プロジェクトディレクトリ内に <code class="language-plaintext highlighter-rouge">Dockerfile</code> というファイルを新規生成します。</p>
 
     <p>Dockerfile はアプリケーションイメージの内容を定義するものであり、イメージを設定しビルドするコマンドがいくつか記述されます。
  ビルドが成功すると、コンテナー内にてイメージが起動します。
- <code class="highlighter-rouge">Dockerfile</code> の詳細は <a href="/docs.docker.jp.onthefly/get-started/">Docker ユーザーガイド</a>や <a href="/engine/reference/builder/">Dockerfile リファレンス</a> を参照してください。</p>
+ <code class="language-plaintext highlighter-rouge">Dockerfile</code> の詳細は <a href="/docs.docker.jp.onthefly/get-started/">Docker ユーザーガイド</a>や <a href="/engine/reference/builder/">Dockerfile リファレンス</a> を参照してください。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">Dockerfile</code> に以下の内容を記述します。</p>
+    <p><code class="language-plaintext highlighter-rouge">Dockerfile</code> に以下の内容を記述します。</p>
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> python:3</span>
 <span class="k">ENV</span><span class="s"> PYTHONUNBUFFERED=1</span>
-<span class="k">RUN </span>mkdir /code
+<span class="k">RUN </span><span class="nb">mkdir</span> /code
 <span class="k">WORKDIR</span><span class="s"> /code</span>
 <span class="k">COPY</span><span class="s"> requirements.txt /code/</span>
-<span class="k">RUN </span>pip install <span class="nt">-r</span> requirements.txt
+<span class="k">RUN </span>pip <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
 <span class="k">COPY</span><span class="s"> . /code/</span>
 </code></pre></div>    </div>
 
-    <p>この<code class="highlighter-rouge">Dockerfile</code>はまず <a href="https://hub.docker.com/r/library/python/tags/3/">Python 3 の親イメージ</a>から始まっています。
-この親イメージには新規のディレクトリ<code class="highlighter-rouge">code</code>が加えられます。
-さらに<code class="highlighter-rouge">requirements.txt</code>ファイルに定義された Python 依存パッケージをインストールする変更が加えられています。</p>
+    <p>この<code class="language-plaintext highlighter-rouge">Dockerfile</code>はまず <a href="https://hub.docker.com/r/library/python/tags/3/">Python 3 の親イメージ</a>から始まっています。
+この親イメージには新規のディレクトリ<code class="language-plaintext highlighter-rouge">code</code>が加えられます。
+さらに<code class="language-plaintext highlighter-rouge">requirements.txt</code>ファイルに定義された Python 依存パッケージをインストールする変更が加えられています。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">Dockerfile</code> を保存して閉じます。</p>
+    <p><code class="language-plaintext highlighter-rouge">Dockerfile</code> を保存して閉じます。</p>
   </li>
   <li>
-    <p>プロジェクトディレクトリに<code class="highlighter-rouge">requirements.txt</code>というファイルを生成します。</p>
+    <p>プロジェクトディレクトリに<code class="language-plaintext highlighter-rouge">requirements.txt</code>というファイルを生成します。</p>
 
-    <p>このファイルは<code class="highlighter-rouge">Dockerfile</code>内の<code class="highlighter-rouge">RUN pip install -r requirements.txt</code>というコマンドにおいて利用されます。</p>
+    <p>このファイルは<code class="language-plaintext highlighter-rouge">Dockerfile</code>内の<code class="language-plaintext highlighter-rouge">RUN pip install -r requirements.txt</code>というコマンドにおいて利用されます。</p>
   </li>
   <li>
     <p>上のファイルに必要となるソフトウェアを記述します。</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Django&gt;=3.0,&lt;4.0
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Django&gt;=3.0,&lt;4.0
 psycopg2-binary&gt;=2.8
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="highlighter-rouge">requirements.txt</code>ファイルを保存して閉じます。</p>
+    <p><code class="language-plaintext highlighter-rouge">requirements.txt</code>ファイルを保存して閉じます。</p>
   </li>
   <li>
-    <p>プロジェクトディレクトリ内に<code class="highlighter-rouge">docker-compose.yml</code>というファイルを生成します。</p>
+    <p>プロジェクトディレクトリ内に<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>というファイルを生成します。</p>
 
-    <p><code class="highlighter-rouge">docker-compose.yml</code>ファイルは、アプリケーションを作り出すサービスを記述するものです。
+    <p><code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルは、アプリケーションを作り出すサービスを記述するものです。
  この例においてそのサービスとは、ウェブサーバーとデータベースです。
  Compose ファイルはまた、各サービスが利用する Docker イメージを記述します。
  そしてどのように互いにリンクし合い、コンテナー内部にマウントすべきボリュームはどのようなものかを定義します。
- そして<code class="highlighter-rouge">docker-compose.yml</code>ファイルには、各サービスが公開するポート番号が何かも記述します。
- このファイルがどのようにして動作するかの詳細は <a href="/docs.docker.jp.onthefly/compose/compose-file/"><code class="highlighter-rouge">docker-compose.yml</code> リファレンス</a>を参照してください。</p>
+ そして<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルには、各サービスが公開するポート番号が何かも記述します。
+ このファイルがどのようにして動作するかの詳細は <a href="/docs.docker.jp.onthefly/compose/compose-file/"><code class="language-plaintext highlighter-rouge">docker-compose.yml</code> リファレンス</a>を参照してください。</p>
   </li>
   <li>
     <p>以下の設定内容をファイルに記述します。</p>
@@ -195,7 +195,7 @@ psycopg2-binary&gt;=2.8
       <span class="pi">-</span> <span class="s">db</span>
 </code></pre></div>    </div>
 
-    <p>このファイルには<code class="highlighter-rouge">db</code>サービスと<code class="highlighter-rouge">web</code>サービスという 2 つのサービスが定義されています。</p>
+    <p>このファイルには<code class="language-plaintext highlighter-rouge">db</code>サービスと<code class="language-plaintext highlighter-rouge">web</code>サービスという 2 つのサービスが定義されています。</p>
 
     <blockquote>
       <p>メモ</p>
@@ -206,7 +206,7 @@ psycopg2-binary&gt;=2.8
     </blockquote>
   </li>
   <li>
-    <p><code class="highlighter-rouge">docker-compose.yml</code>ファイルを保存して閉じます。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルを保存して閉じます。</p>
   </li>
 </ol>
 
@@ -221,20 +221,20 @@ psycopg2-binary&gt;=2.8
   <li>
     <p>Django プロジェクトを生成するために <a href="/docs.docker.jp.onthefly/compose/reference/run/">docker-compose run</a> コマンドを以下のように実行します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>docker-compose run web django-admin startproject composeexample <span class="nb">.</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>docker-compose run web django-admin startproject composeexample <span class="nb">.</span>
 </code></pre></div>    </div>
 
-    <p>このコマンドは Compose に対し、コンテナー内において <code class="highlighter-rouge">django-admin startproject composeexample</code> を実行するものです。
- その際には<code class="highlighter-rouge">web</code>サービスイメージとその設定を利用します。
- ただし<code class="highlighter-rouge">web</code>イメージはこの時点ではまだ存在していないため、Compose はカレントディレクトリからそのイメージをビルドします。このことは<code class="highlighter-rouge">docker-compose.yml</code>の<code class="highlighter-rouge">build: .</code>という記述行において指示されています。</p>
+    <p>このコマンドは Compose に対し、コンテナー内において <code class="language-plaintext highlighter-rouge">django-admin startproject composeexample</code> を実行するものです。
+ その際には<code class="language-plaintext highlighter-rouge">web</code>サービスイメージとその設定を利用します。
+ ただし<code class="language-plaintext highlighter-rouge">web</code>イメージはこの時点ではまだ存在していないため、Compose はカレントディレクトリからそのイメージをビルドします。このことは<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>の<code class="language-plaintext highlighter-rouge">build: .</code>という記述行において指示されています。</p>
 
-    <p><code class="highlighter-rouge">web</code>サービスイメージがビルドされると Compose はこのイメージを起動し、コンテナー内でコマンド<code class="highlighter-rouge">django-admin startproject</code>を実行します。
+    <p><code class="language-plaintext highlighter-rouge">web</code>サービスイメージがビルドされると Compose はこのイメージを起動し、コンテナー内でコマンド<code class="language-plaintext highlighter-rouge">django-admin startproject</code>を実行します。
  このコマンドは Django に対して、Django プロジェクトを組み立てるファイルやディレクトリを生成することを指示するものです。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">docker-compose</code>コマンドの処理が完了したら、プロジェクト内の一覧を表示してみます。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker-compose</code>コマンドの処理が完了したら、プロジェクト内の一覧を表示してみます。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">ls</span> <span class="nt">-l</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span>
 <span class="go">
 drwxr-xr-x 2 root   root   composeexample
 -rw-rw-r-- 1 user   user   docker-compose.yml
@@ -243,17 +243,17 @@ drwxr-xr-x 2 root   root   composeexample
 -rw-rw-r-- 1 user   user   requirements.txt
 </span></code></pre></div>    </div>
 
-    <p>Linux 上で Docker を利用している場合、<code class="highlighter-rouge">django-admin</code>が生成したファイルの所有者が root になっています。
+    <p>Linux 上で Docker を利用している場合、<code class="language-plaintext highlighter-rouge">django-admin</code>が生成したファイルの所有者が root になっています。
 これはコンテナーが root ユーザーで実行されるからです。
 生成されたファイルの所有者を以下のようにして変更します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>chown <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> <span class="nb">.</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo chown</span> <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> <span class="nb">.</span>
 </code></pre></div>    </div>
 
-    <p>Docker on Mac あるいは Docker on Windows を利用している場合は、生成されたファイルの所有権は、<code class="highlighter-rouge">django-admin</code>が作り出したファイルも含めて、すべて持っています。
+    <p>Docker on Mac あるいは Docker on Windows を利用している場合は、生成されたファイルの所有権は、<code class="language-plaintext highlighter-rouge">django-admin</code>が作り出したファイルも含めて、すべて持っています。
 確認のため一覧を表示してみます。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">ls</span> <span class="nt">-l</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span>
 <span class="go">
 total 32
 -rw-r--r--  1 user  staff  145 Feb 13 23:00 Dockerfile
@@ -271,13 +271,13 @@ drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
 
 <ol>
   <li>
-    <p>プロジェクトディレクトリにおいて<code class="highlighter-rouge">composeexample/settings.py</code>ファイルを編集します。</p>
+    <p>プロジェクトディレクトリにおいて<code class="language-plaintext highlighter-rouge">composeexample/settings.py</code>ファイルを編集します。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">DATABASES = ...</code>の部分を以下のように書き換えます。</p>
+    <p><code class="language-plaintext highlighter-rouge">DATABASES = ...</code>の部分を以下のように書き換えます。</p>
 
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># settings.py</span>
-
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># settings.py
+</span>
 <span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'default'</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">'ENGINE'</span><span class="p">:</span> <span class="s">'django.db.backends.postgresql'</span><span class="p">,</span>
@@ -290,7 +290,7 @@ drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
 <span class="p">}</span>
 </code></pre></div>    </div>
 
-    <p>上の設定は<code class="highlighter-rouge">docker-compose.yml</code>に指定した Docker イメージ <a href="https://hub.docker.com/_/postgres">postgres</a> が定めている内容です。</p>
+    <p>上の設定は<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>に指定した Docker イメージ <a href="https://hub.docker.com/_/postgres">postgres</a> が定めている内容です。</p>
   </li>
   <li>
     <p>ファイルを保存して閉じます。</p>
@@ -298,7 +298,7 @@ drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
   <li>
     <p>プロジェクトのトップディレクトリにおいてコマンド <a href="/docs.docker.jp.onthefly/compose/reference/up/">docker-compose up</a> を実行します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker-compose up
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
 <span class="go">
 djangosample_db_1 is up-to-date
 Creating djangosample_web_1 ...
@@ -319,18 +319,18 @@ web_1  | Starting development server at http://0.0.0.0:8000/
 web_1  | Quit the server with CONTROL-C.
 </span></code></pre></div>    </div>
 
-    <p>この段階で Django アプリは Docker ホスト上のポート<code class="highlighter-rouge">8000</code>で稼動しています。
-Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから<code class="highlighter-rouge">http://localhost:8000</code>にアクセスすることで、Django の Welcome ページを確認できます。</p>
+    <p>この段階で Django アプリは Docker ホスト上のポート<code class="language-plaintext highlighter-rouge">8000</code>で稼動しています。
+Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから<code class="language-plaintext highlighter-rouge">http://localhost:8000</code>にアクセスすることで、Django の Welcome ページを確認できます。</p>
 
     <p><img src="/docs.docker.jp.onthefly/compose/images/django-it-worked.png" alt="Django の例" /></p>
 
     <blockquote>
       <p>メモ:</p>
 
-      <p>特定プラットフォーム（Windows 10）では、<code class="highlighter-rouge">settings.py</code>ファイル内の<code class="highlighter-rouge">ALLOWED_HOSTS</code>に、ホスト名あるいはホストの IP アドレスを追加することが必要かもしれません。
+      <p>特定プラットフォーム（Windows 10）では、<code class="language-plaintext highlighter-rouge">settings.py</code>ファイル内の<code class="language-plaintext highlighter-rouge">ALLOWED_HOSTS</code>に、ホスト名あるいはホストの IP アドレスを追加することが必要かもしれません。
 ここはデモが目的なので、以下のように設定することにします。</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALLOWED_HOSTS = ['*']
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALLOWED_HOSTS = ['*']
 </code></pre></div>      </div>
 
       <p>この設定は本番環境では<strong>安全ではありません</strong>。
@@ -340,9 +340,9 @@ Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブ�
   <li>
     <p>起動しているコンテナーの一覧を確認します。</p>
 
-    <p>別の端末画面を開いて<code class="highlighter-rouge">docker container ls</code>コマンドを実行し、起動している Docker プロセスの一覧を表示します。</p>
+    <p>別の端末画面を開いて<code class="language-plaintext highlighter-rouge">docker container ls</code>コマンドを実行し、起動している Docker プロセスの一覧を表示します。</p>
 
-    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker ps
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker ps
 <span class="go">
 CONTAINER ID  IMAGE       COMMAND                  CREATED         STATUS        PORTS                    NAMES
 </span><span class="gp">def85eff5f51  django_web  "python3 manage.py..."   10 minutes ago  Up 9 minutes  0.0.0.0:8000-&gt;</span>8000/tcp   django_web_1
@@ -354,7 +354,7 @@ CONTAINER ID  IMAGE       COMMAND                  CREATED         STATUS       
 
     <ul>
       <li>
-        <p>アプリケーションを実行したシェル上で <code class="highlighter-rouge">Ctrl-C</code> を入力してアプリケーションを止めます。</p>
+        <p>アプリケーションを実行したシェル上で <code class="language-plaintext highlighter-rouge">Ctrl-C</code> を入力してアプリケーションを止めます。</p>
 
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Gracefully stopping... (press Ctrl+C again to force)
 Killing test_web_1 ... done
@@ -365,7 +365,7 @@ Killing test_db_1 ... done
         <p>もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて <a href="/docs.docker.jp.onthefly/compose/reference/down/">docker-compose down</a> を実行します。</p>
 
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">vmb at mymachine in ~/sandbox/django
-</span><span class="gp">$</span> docker-compose down
+</span><span class="gp">$</span><span class="w"> </span>docker-compose down
 <span class="go">
 Stopping django_web_1 ... done
 Stopping django_db_1 ... done
@@ -380,7 +380,7 @@ Removing network django_default
 </ol>
 
 <p>アプリを停止したら Django プロジェクトディレクトリは何も問題なく削除することができます。
-  （たとえば <code class="highlighter-rouge">rm -rf django</code>）</p>
+  （たとえば <code class="language-plaintext highlighter-rouge">rm -rf django</code>）</p>
 
 <h2 id="more-compose-documentation">その他の Compose ドキュメント</h2>
 

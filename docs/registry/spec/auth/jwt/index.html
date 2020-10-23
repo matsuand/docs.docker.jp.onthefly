@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Token Authentication Implementation | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Token Authentication Implementation" />
   <meta property="og:description" content="Describe the reference implementation of the Docker Registry v2 authentication schema" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/spec/auth/jwt/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Token Authentication Implementation","description":"Describe the reference implementation of the Docker Registry v2 authentication schema","url":"https://docs.docker.com/registry/spec/auth/jwt/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,9 +107,9 @@
 </span>
 <h1 id="docker-registry-v2-bearer-token-specification">Docker Registry v2 Bearer token specification</h1>
 
-<p>This specification covers the <code class="highlighter-rouge">docker/distribution</code> implementation of the
+<p>This specification covers the <code class="language-plaintext highlighter-rouge">docker/distribution</code> implementation of the
 v2 Registry’s authentication schema.  Specifically, it describes the JSON
-Web Token schema that <code class="highlighter-rouge">docker/distribution</code> has adopted to implement the
+Web Token schema that <code class="language-plaintext highlighter-rouge">docker/distribution</code> has adopted to implement the
 client-opaque Bearer token issued by an authentication service and
 understood by the registry.</p>
 
@@ -119,14 +119,14 @@ understood by the registry.</p>
 
 <p>For this example, the client makes an HTTP GET request to the following URL:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:samalba/my-app:pull,push
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:samalba/my-app:pull,push
 </code></pre></div></div>
 
 <p>The token server should first attempt to authenticate the client using any
 authentication credentials provided with the request. As of Docker 1.8, the
 registry client in the Docker Engine only supports Basic Authentication to
 these token servers. If an attempt to authenticate to the token server fails,
-the token server should return a <code class="highlighter-rouge">401 Unauthorized</code> response indicating that
+the token server should return a <code class="language-plaintext highlighter-rouge">401 Unauthorized</code> response indicating that
 the provided credentials are invalid.</p>
 
 <p>Whether the token server requires authentication is up to the policy of that
@@ -137,12 +137,12 @@ access (such as pushing or pulling a private repository) while others may not
 <p>After authenticating the client (which may simply be an anonymous client if
 no attempt was made to authenticate), the token server must next query its
 access control list to determine whether the client has the requested scope. In
-this example request, if I have authenticated as user <code class="highlighter-rouge">jlhawn</code>, the token
-server will determine what access I have to the repository <code class="highlighter-rouge">samalba/my-app</code>
-hosted by the entity <code class="highlighter-rouge">registry.docker.io</code>.</p>
+this example request, if I have authenticated as user <code class="language-plaintext highlighter-rouge">jlhawn</code>, the token
+server will determine what access I have to the repository <code class="language-plaintext highlighter-rouge">samalba/my-app</code>
+hosted by the entity <code class="language-plaintext highlighter-rouge">registry.docker.io</code>.</p>
 
 <p>Once the token server has determined what access the client has to the
-resources requested in the <code class="highlighter-rouge">scope</code> parameter, it will take the intersection of
+resources requested in the <code class="language-plaintext highlighter-rouge">scope</code> parameter, it will take the intersection of
 the set of requested actions on each resource and the set of actions that the
 client has in fact been granted. If the client only has a subset of the
 requested access <strong>it must not be considered an error</strong> as it is not the
@@ -150,11 +150,11 @@ responsibility of the token server to indicate authorization errors as part of
 this workflow.</p>
 
 <p>Continuing with the example request, the token server will find that the
-client’s set of granted access to the repository is <code class="highlighter-rouge">[pull, push]</code> which when
-intersected with the requested access <code class="highlighter-rouge">[pull, push]</code> yields an equal set. If
-the granted access set was found only to be <code class="highlighter-rouge">[pull]</code> then the intersected set
-would only be <code class="highlighter-rouge">[pull]</code>. If the client has no access to the repository then the
-intersected set would be empty, <code class="highlighter-rouge">[]</code>.</p>
+client’s set of granted access to the repository is <code class="language-plaintext highlighter-rouge">[pull, push]</code> which when
+intersected with the requested access <code class="language-plaintext highlighter-rouge">[pull, push]</code> yields an equal set. If
+the granted access set was found only to be <code class="language-plaintext highlighter-rouge">[pull]</code> then the intersected set
+would only be <code class="language-plaintext highlighter-rouge">[pull]</code>. If the client has no access to the repository then the
+intersected set would be empty, <code class="language-plaintext highlighter-rouge">[]</code>.</p>
 
 <p>It is this intersected set of access which is placed in the returned token.</p>
 
@@ -181,14 +181,14 @@ Such a format can be generated by following steps:</p>
         <p>Create a SHA256 hash out of it and truncate to 240bits.</p>
       </li>
       <li>
-        <p>Split the result into 12 base32 encoded groups with <code class="highlighter-rouge">:</code> as delimiter.</p>
+        <p>Split the result into 12 base32 encoded groups with <code class="language-plaintext highlighter-rouge">:</code> as delimiter.</p>
       </li>
     </ol>
 
     <p>Here is an example JOSE Header for a JSON Web Token (formatted with
 whitespace for readability):</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "typ": "JWT",
     "alg": "ES256",
     "kid": "PYYO:TEWU:V7JH:26JV:AQTZ:LJC3:SXVJ:XGHA:34F2:2LAQ:ZRMK:Z7Q6"
@@ -206,19 +206,19 @@ using a SHA256 hash.</p>
 name fields:</p>
 
     <dl>
-      <dt><code class="highlighter-rouge">iss</code> (Issuer)</dt>
+      <dt><code class="language-plaintext highlighter-rouge">iss</code> (Issuer)</dt>
       <dd>The issuer of the token, typically the fqdn of the authorization server.</dd>
-      <dt><code class="highlighter-rouge">sub</code> (Subject)</dt>
+      <dt><code class="language-plaintext highlighter-rouge">sub</code> (Subject)</dt>
       <dd>The subject of the token; the name or id of the client which requested it. This should be empty (`""`) if the client did not authenticate.</dd>
-      <dt><code class="highlighter-rouge">aud</code> (Audience)</dt>
+      <dt><code class="language-plaintext highlighter-rouge">aud</code> (Audience)</dt>
       <dd>The intended audience of the token; the name or id of the service which will verify the token to authorize the client/subject.</dd>
-      <dt><code class="highlighter-rouge">exp</code> (Expiration)</dt>
+      <dt><code class="language-plaintext highlighter-rouge">exp</code> (Expiration)</dt>
       <dd>The token should only be considered valid up to this specified date and time.</dd>
-      <dt><code class="highlighter-rouge">nbf</code> (Not Before)</dt>
+      <dt><code class="language-plaintext highlighter-rouge">nbf</code> (Not Before)</dt>
       <dd>The token should not be considered valid before this specified date and time.</dd>
-      <dt><code class="highlighter-rouge">iat</code> (Issued At)</dt>
+      <dt><code class="language-plaintext highlighter-rouge">iat</code> (Issued At)</dt>
       <dd>Specifies the date and time which the Authorization server generated this token.</dd>
-      <dt><code class="highlighter-rouge">jti</code> (JWT ID)</dt>
+      <dt><code class="language-plaintext highlighter-rouge">jti</code> (JWT ID)</dt>
       <dd>A unique identifier for this token. Can be used by the intended audience to prevent replays of the token.</dd>
     </dl>
 
@@ -226,13 +226,13 @@ name fields:</p>
 authorization server specification:</p>
 
     <dl>
-      <dt><code class="highlighter-rouge">access</code></dt>
+      <dt><code class="language-plaintext highlighter-rouge">access</code></dt>
       <dd>An array of access entry objects with the following fields:         <dl>
-          <dt><code class="highlighter-rouge">type</code></dt>
+          <dt><code class="language-plaintext highlighter-rouge">type</code></dt>
           <dd>The type of resource hosted by the service.</dd>
-          <dt><code class="highlighter-rouge">name</code></dt>
+          <dt><code class="language-plaintext highlighter-rouge">name</code></dt>
           <dd>The name of the resource of the given type hosted by the service.</dd>
-          <dt><code class="highlighter-rouge">actions</code></dt>
+          <dt><code class="language-plaintext highlighter-rouge">actions</code></dt>
           <dd>An array of strings which give the actions authorized on this resource.</dd>
         </dl>
       </dd>
@@ -241,7 +241,7 @@ authorization server specification:</p>
     <p>Here is an example of such a JWT Claim Set (formatted with whitespace for
 readability):</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "iss": "auth.docker.com",
     "sub": "jlhawn",
     "aud": "registry.docker.com",
@@ -268,38 +268,38 @@ readability):</p>
     <p>The authorization server will produce a JOSE header and Claim Set with no
 extraneous whitespace, i.e., the JOSE Header from above would be</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"typ":"JWT","alg":"ES256","kid":"PYYO:TEWU:V7JH:26JV:AQTZ:LJC3:SXVJ:XGHA:34F2:2LAQ:ZRMK:Z7Q6"}
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"typ":"JWT","alg":"ES256","kid":"PYYO:TEWU:V7JH:26JV:AQTZ:LJC3:SXVJ:XGHA:34F2:2LAQ:ZRMK:Z7Q6"}
 </code></pre></div>    </div>
 
     <p>and the Claim Set from above would be</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"iss":"auth.docker.com","sub":"jlhawn","aud":"registry.docker.com","exp":1415387315,"nbf":1415387015,"iat":1415387015,"jti":"tYJCO1c6cnyy7kAn0c7rKPgbV1H1bFws","access":[{"type":"repository","name":"samalba/my-app","actions":["push","pull"]}]}
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"iss":"auth.docker.com","sub":"jlhawn","aud":"registry.docker.com","exp":1415387315,"nbf":1415387015,"iat":1415387015,"jti":"tYJCO1c6cnyy7kAn0c7rKPgbV1H1bFws","access":[{"type":"repository","name":"samalba/my-app","actions":["push","pull"]}]}
 </code></pre></div>    </div>
 
     <p>The utf-8 representation of this JOSE header and Claim Set are then
 url-safe base64 encoded (sans trailing ‘=’ buffer), producing:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0
 </code></pre></div>    </div>
 
     <p>for the JOSE Header and</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0
 </code></pre></div>    </div>
 
     <p>for the Claim Set. These two are concatenated using a ‘.’ character,
 yielding the string:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0
 </code></pre></div>    </div>
 
-    <p>This is then used as the payload to a the <code class="highlighter-rouge">ES256</code> signature algorithm
+    <p>This is then used as the payload to a the <code class="language-plaintext highlighter-rouge">ES256</code> signature algorithm
 specified in the JOSE header and specified fully in <a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-38#section-3.4">Section 3.4 of the JSON Web Algorithms (JWA)
 draft specification</a></p>
 
     <p>This example signature will use the following ECDSA key for the server:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "kty": "EC",
     "crv": "P-256",
     "kid": "PYYO:TEWU:V7JH:26JV:AQTZ:LJC3:SXVJ:XGHA:34F2:2LAQ:ZRMK:Z7Q6",
@@ -311,13 +311,13 @@ draft specification</a></p>
 
     <p>A resulting signature of the above payload using this key is:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w
 </code></pre></div>    </div>
 
-    <p>Concatenating all of these together with a <code class="highlighter-rouge">.</code> character gives the
+    <p>Concatenating all of these together with a <code class="language-plaintext highlighter-rouge">.</code> character gives the
 resulting JWT:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -325,7 +325,7 @@ resulting JWT:</p>
 <p>This can now be placed in an HTTP response and returned to the client to use to
 authenticate to the audience service:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 200 OK
 Content-Type: application/json
 
 {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w"}
@@ -334,9 +334,9 @@ Content-Type: application/json
 <h2 id="using-the-signed-token">Using the signed token</h2>
 
 <p>Once the client has a token, it will try the registry request again with the
-token placed in the HTTP <code class="highlighter-rouge">Authorization</code> header like so:</p>
+token placed in the HTTP <code class="language-plaintext highlighter-rouge">Authorization</code> header like so:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IkJWM0Q6MkFWWjpVQjVaOktJQVA6SU5QTDo1RU42Ok40SjQ6Nk1XTzpEUktFOkJWUUs6M0ZKTDpQT1RMIn0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJCQ0NZOk9VNlo6UUVKNTpXTjJDOjJBVkM6WTdZRDpBM0xZOjQ1VVc6NE9HRDpLQUxMOkNOSjU6NUlVTCIsImF1ZCI6InJlZ2lzdHJ5LmRvY2tlci5jb20iLCJleHAiOjE0MTUzODczMTUsIm5iZiI6MTQxNTM4NzAxNSwiaWF0IjoxNDE1Mzg3MDE1LCJqdGkiOiJ0WUpDTzFjNmNueXk3a0FuMGM3cktQZ2JWMUgxYkZ3cyIsInNjb3BlIjoiamxoYXduOnJlcG9zaXRvcnk6c2FtYWxiYS9teS1hcHA6cHVzaCxwdWxsIGpsaGF3bjpuYW1lc3BhY2U6c2FtYWxiYTpwdWxsIn0.Y3zZSwaZPqy4y9oRBVRImZyv3m_S9XDHF1tWwN7mL52C_IiA73SJkWVNsvNqpJIn5h7A2F8biv_S2ppQ1lgkbw
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IkJWM0Q6MkFWWjpVQjVaOktJQVA6SU5QTDo1RU42Ok40SjQ6Nk1XTzpEUktFOkJWUUs6M0ZKTDpQT1RMIn0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJCQ0NZOk9VNlo6UUVKNTpXTjJDOjJBVkM6WTdZRDpBM0xZOjQ1VVc6NE9HRDpLQUxMOkNOSjU6NUlVTCIsImF1ZCI6InJlZ2lzdHJ5LmRvY2tlci5jb20iLCJleHAiOjE0MTUzODczMTUsIm5iZiI6MTQxNTM4NzAxNSwiaWF0IjoxNDE1Mzg3MDE1LCJqdGkiOiJ0WUpDTzFjNmNueXk3a0FuMGM3cktQZ2JWMUgxYkZ3cyIsInNjb3BlIjoiamxoYXduOnJlcG9zaXRvcnk6c2FtYWxiYS9teS1hcHA6cHVzaCxwdWxsIGpsaGF3bjpuYW1lc3BhY2U6c2FtYWxiYTpwdWxsIn0.Y3zZSwaZPqy4y9oRBVRImZyv3m_S9XDHF1tWwN7mL52C_IiA73SJkWVNsvNqpJIn5h7A2F8biv_S2ppQ1lgkbw
 </code></pre></div></div>
 
 <p>This is also described in <a href="https://tools.ietf.org/html/rfc6750#section-2.1">Section 2.1 of RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></p>
@@ -347,24 +347,24 @@ token placed in the HTTP <code class="highlighter-rouge">Authorization</code> he
 claim set within. The registry will:</p>
 
 <ul>
-  <li>Ensure that the issuer (<code class="highlighter-rouge">iss</code> claim) is an authority it trusts.</li>
-  <li>Ensure that the registry identifies as the audience (<code class="highlighter-rouge">aud</code> claim).</li>
-  <li>Check that the current time is between the <code class="highlighter-rouge">nbf</code> and <code class="highlighter-rouge">exp</code> claim times.</li>
-  <li>If enforcing single-use tokens, check that the JWT ID (<code class="highlighter-rouge">jti</code> claim) value has
+  <li>Ensure that the issuer (<code class="language-plaintext highlighter-rouge">iss</code> claim) is an authority it trusts.</li>
+  <li>Ensure that the registry identifies as the audience (<code class="language-plaintext highlighter-rouge">aud</code> claim).</li>
+  <li>Check that the current time is between the <code class="language-plaintext highlighter-rouge">nbf</code> and <code class="language-plaintext highlighter-rouge">exp</code> claim times.</li>
+  <li>If enforcing single-use tokens, check that the JWT ID (<code class="language-plaintext highlighter-rouge">jti</code> claim) value has
 not been seen before.
     <ul>
-      <li>To enforce this, the registry may keep a record of <code class="highlighter-rouge">jti</code>s it has seen for
-up to the <code class="highlighter-rouge">exp</code> time of the token to prevent token replays.</li>
+      <li>To enforce this, the registry may keep a record of <code class="language-plaintext highlighter-rouge">jti</code>s it has seen for
+up to the <code class="language-plaintext highlighter-rouge">exp</code> time of the token to prevent token replays.</li>
     </ul>
   </li>
-  <li>Check the <code class="highlighter-rouge">access</code> claim value and use the identified resources and the list
+  <li>Check the <code class="language-plaintext highlighter-rouge">access</code> claim value and use the identified resources and the list
 of actions authorized to determine whether the token grants the required
 level of access for the operation the client is attempting to perform.</li>
   <li>Verify that the signature of the token is valid.</li>
 </ul>
 
 <p>If any of these requirements are not met, the registry will return a
-<code class="highlighter-rouge">403 Forbidden</code> response to indicate that the token is invalid.</p>
+<code class="language-plaintext highlighter-rouge">403 Forbidden</code> response to indicate that the token is invalid.</p>
 
 <p><strong>Note</strong>: it is only at this point in the workflow that an authorization error
 may occur. The token server should <em>not</em> return errors when the user does not

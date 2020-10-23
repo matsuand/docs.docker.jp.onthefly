@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Certify Docker images | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Certify Docker images" />
   <meta property="og:description" content="Run certification tests against your images" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/publish/certify-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Certify Docker images","description":"Run certification tests against your images","url":"https://docs.docker.com/docker-hub/publish/certify-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,7 +109,7 @@
 
 <p>Content that qualifies as <strong>Docker Certified</strong> must conform to best practices and pass certain baseline tests.</p>
 
-<p>Docker Hub lets you publish certified images as well as plugins for logging, volumes, and networks. You must certify your own <em>images and logging plugins</em> with the <code class="highlighter-rouge">inspect</code> tools as explained in these docs. Currently, Docker Hub certifies your volume and networking plugins for you upon submission.</p>
+<p>Docker Hub lets you publish certified images as well as plugins for logging, volumes, and networks. You must certify your own <em>images and logging plugins</em> with the <code class="language-plaintext highlighter-rouge">inspect</code> tools as explained in these docs. Currently, Docker Hub certifies your volume and networking plugins for you upon submission.</p>
 
 <p>This page explains how publishers can successfully test their <strong>Docker images</strong>. Also available: <a href="/docs.docker.jp.onthefly/docker-hub/publish/certify-plugins-logging/">Certify your Docker logging plugins</a>.</p>
 
@@ -123,9 +123,9 @@
 
 <h2 id="certify-your-docker-images">Certify your Docker images</h2>
 
-<p>You must use the tool, <code class="highlighter-rouge">inspectDockerImage</code>, to certify your content for publication on Docker Hub by ensuring that your images conform to best practices. Download the tool <a href="#syntax">here</a>.</p>
+<p>You must use the tool, <code class="language-plaintext highlighter-rouge">inspectDockerImage</code>, to certify your content for publication on Docker Hub by ensuring that your images conform to best practices. Download the tool <a href="#syntax">here</a>.</p>
 
-<p>The <code class="highlighter-rouge">inspectDockerImage</code> tool does the following:</p>
+<p>The <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> tool does the following:</p>
 
 <ul>
   <li>
@@ -135,10 +135,10 @@
     <p>Inspects the Docker image for a Health Check. Although a Health Check is not required, it is recommended.</p>
   </li>
   <li>
-    <p>Checks if a Linux Docker image is running <code class="highlighter-rouge">supervisord</code> to launch multiple services.</p>
+    <p>Checks if a Linux Docker image is running <code class="language-plaintext highlighter-rouge">supervisord</code> to launch multiple services.</p>
 
     <blockquote>
-      <p>Running <code class="highlighter-rouge">supervisord</code> in a container is not a best practice for images destined for Docker Hub. The recommended best practice is to split the multiple services into separate Docker images and run them in separate containers.</p>
+      <p>Running <code class="language-plaintext highlighter-rouge">supervisord</code> in a container is not a best practice for images destined for Docker Hub. The recommended best practice is to split the multiple services into separate Docker images and run them in separate containers.</p>
     </blockquote>
   </li>
   <li>
@@ -148,23 +148,23 @@
     <p>Displays the running processes in the container.</p>
   </li>
   <li>
-    <p>Checks the running processes to see if any are running <code class="highlighter-rouge">supervisord</code>.</p>
+    <p>Checks the running processes to see if any are running <code class="language-plaintext highlighter-rouge">supervisord</code>.</p>
   </li>
   <li>
-    <p>Verifies that the container is sending logs to <code class="highlighter-rouge">stdout/stderr</code>.</p>
+    <p>Verifies that the container is sending logs to <code class="language-plaintext highlighter-rouge">stdout/stderr</code>.</p>
   </li>
   <li>
     <p>Attempts to stop the container to ensure that it can be stopped gracefully.</p>
   </li>
 </ul>
 
-<p>The <code class="highlighter-rouge">inspectDockerImage</code> tool will detect issues and output them as <strong>warnings</strong> or <strong>errors</strong>. <strong>Errors</strong> must be fixed in order to certify. Resolving <strong>warnings</strong> is not required to certify, but you should try to resolve them.</p>
+<p>The <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> tool will detect issues and output them as <strong>warnings</strong> or <strong>errors</strong>. <strong>Errors</strong> must be fixed in order to certify. Resolving <strong>warnings</strong> is not required to certify, but you should try to resolve them.</p>
 
-<p>If you are publishing and certifying multiple versions for a Docker image, you will need to run the <code class="highlighter-rouge">inspectDockerImage</code> tool on each Docker image and send each result to Docker Hub.</p>
+<p>If you are publishing and certifying multiple versions for a Docker image, you will need to run the <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> tool on each Docker image and send each result to Docker Hub.</p>
 
-<p>If you are publishing and certifying a multi-architecture Docker image (for example, Linux, Power, s390x, Windows) you will need to run the <code class="highlighter-rouge">inspectDockerImage</code> tool on the Docker Engine - Enterprise server running on each architecture and send the results to Docker Hub.</p>
+<p>If you are publishing and certifying a multi-architecture Docker image (for example, Linux, Power, s390x, Windows) you will need to run the <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> tool on the Docker Engine - Enterprise server running on each architecture and send the results to Docker Hub.</p>
 
-<p>Details on how to run the <code class="highlighter-rouge">inspectDockerImage</code> tool and send the results to Docker Hub are in the sections that follow.</p>
+<p>Details on how to run the <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> tool and send the results to Docker Hub are in the sections that follow.</p>
 
 <h3 id="prerequisites">Prerequisites</h3>
 
@@ -181,9 +181,9 @@
 
 <ol>
   <li>
-    <p>Configure your Docker Registry credentials by either <em>defining environment variables</em> <strong>or</strong> <em>passing them as arguments</em> to <code class="highlighter-rouge">inspectDockerImage</code>.</p>
+    <p>Configure your Docker Registry credentials by either <em>defining environment variables</em> <strong>or</strong> <em>passing them as arguments</em> to <code class="language-plaintext highlighter-rouge">inspectDockerImage</code>.</p>
 
-    <p>a.  Define environment variables for registry credentials, <code class="highlighter-rouge">DOCKER_USER</code> and <code class="highlighter-rouge">DOCKER_PASSWORD</code>:</p>
+    <p>a.  Define environment variables for registry credentials, <code class="language-plaintext highlighter-rouge">DOCKER_USER</code> and <code class="language-plaintext highlighter-rouge">DOCKER_PASSWORD</code>:</p>
 
     <p><strong>Linux</strong></p>
 
@@ -203,16 +203,16 @@
 <span class="nv">$env</span>:DOCKER_PASSWORD<span class="o">=</span><span class="s2">"my_docker_registry_user_account_password"</span>
 </code></pre></div>    </div>
 
-    <p>b.  Pass arguments to <code class="highlighter-rouge">inspectDockerImage</code> (or be prompted for them):</p>
+    <p>b.  Pass arguments to <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> (or be prompted for them):</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--docker-user
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--docker-user
 --docker-password
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Configure endpoints (and override default values) by either <em>defining environment variables</em> <strong>or</strong> <em>passing them as arguments</em> to <code class="highlighter-rouge">inspectDockerImage</code>.</p>
+    <p>Configure endpoints (and override default values) by either <em>defining environment variables</em> <strong>or</strong> <em>passing them as arguments</em> to <code class="language-plaintext highlighter-rouge">inspectDockerImage</code>.</p>
 
-    <p>By default, <code class="highlighter-rouge">inspectDockerImage</code> uses these two endpoints to communicate with the Docker Hub Registry:</p>
+    <p>By default, <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> uses these two endpoints to communicate with the Docker Hub Registry:</p>
 
     <ul>
       <li>Registry Authentication Endpoint: <strong>https://auth.docker.io</strong></li>
@@ -221,7 +221,7 @@
 
     <p>You may want to use your private registry for initial testing and override the defaults.</p>
 
-    <p>a.  Define environment variables, <code class="highlighter-rouge">DOCKER_REGISTRY_AUTH_ENDPOINT</code> and  <code class="highlighter-rouge">DOCKER_REGISTRY_API_ENDPOINT</code>:</p>
+    <p>a.  Define environment variables, <code class="language-plaintext highlighter-rouge">DOCKER_REGISTRY_AUTH_ENDPOINT</code> and  <code class="language-plaintext highlighter-rouge">DOCKER_REGISTRY_API_ENDPOINT</code>:</p>
 
     <p><strong>Linux or MacOS</strong></p>
 
@@ -241,9 +241,9 @@
 <span class="nv">$env</span>:DOCKER_REGISTRY_API_ENDPOINT<span class="o">=</span><span class="s2">"https://my_docker_registry_api_enpoint"</span>
 </code></pre></div>    </div>
 
-    <p>b.  Pass your endpoints as arguments to <code class="highlighter-rouge">inspectDockerImage</code>:</p>
+    <p>b.  Pass your endpoints as arguments to <code class="language-plaintext highlighter-rouge">inspectDockerImage</code>:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--docker-registry-auth-endpoint
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--docker-registry-auth-endpoint
 --docker-registry-api-endpoint
 </code></pre></div>    </div>
   </li>
@@ -253,7 +253,7 @@
 
 <ol>
   <li>
-    <p>Download <code class="highlighter-rouge">inspectDockerImage</code> command.</p>
+    <p>Download <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> command.</p>
 
     <table>
       <thead>
@@ -283,9 +283,9 @@
     </table>
   </li>
   <li>
-    <p>Set permissions on <code class="highlighter-rouge">inspectDockerImage</code> so that it is executable:</p>
+    <p>Set permissions on <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> so that it is executable:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod u+x inspectDockerImage
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod u+x inspectDockerImage
 </code></pre></div>    </div>
   </li>
   <li>
@@ -331,25 +331,25 @@ dockerimage
 
 <h2 id="inspection-output">Inspection Output</h2>
 
-<p>By default, <code class="highlighter-rouge">inspectDockerImage</code> displays output locally to <code class="highlighter-rouge">stdout</code> (the default), JSON, and HTML. You can also upload output to Docker Hub, which is recommended for administrator verification.</p>
+<p>By default, <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> displays output locally to <code class="language-plaintext highlighter-rouge">stdout</code> (the default), JSON, and HTML. You can also upload output to Docker Hub, which is recommended for administrator verification.</p>
 
 <ul>
   <li>
-    <p><strong>Upload to Docker Hub</strong> (by entering <code class="highlighter-rouge">product-id</code> at the commandline).</p>
+    <p><strong>Upload to Docker Hub</strong> (by entering <code class="language-plaintext highlighter-rouge">product-id</code> at the commandline).</p>
   </li>
   <li>
-    <p><strong>Send message to <code class="highlighter-rouge">stdout</code></strong>. This is the default.</p>
+    <p><strong>Send message to <code class="language-plaintext highlighter-rouge">stdout</code></strong>. This is the default.</p>
   </li>
   <li>
-    <p><strong>JSON sent to <code class="highlighter-rouge">stdout</code></strong>. Use the <code class="highlighter-rouge">--json</code> option to override and replace the messages sent to <code class="highlighter-rouge">stdout</code>.</p>
+    <p><strong>JSON sent to <code class="language-plaintext highlighter-rouge">stdout</code></strong>. Use the <code class="language-plaintext highlighter-rouge">--json</code> option to override and replace the messages sent to <code class="language-plaintext highlighter-rouge">stdout</code>.</p>
   </li>
   <li>
-    <p><strong>HTML local file</strong>. Use the <code class="highlighter-rouge">--html</code> option to generate an HTML report. Both <code class="highlighter-rouge">--json</code> and <code class="highlighter-rouge">--html</code> can be specified at the same time.</p>
+    <p><strong>HTML local file</strong>. Use the <code class="language-plaintext highlighter-rouge">--html</code> option to generate an HTML report. Both <code class="language-plaintext highlighter-rouge">--json</code> and <code class="language-plaintext highlighter-rouge">--html</code> can be specified at the same time.</p>
   </li>
 </ul>
 
 <blockquote>
-  <p>Volumes created by Docker image containers are destroyed after <code class="highlighter-rouge">inspectDockerImage</code> terminates.</p>
+  <p>Volumes created by Docker image containers are destroyed after <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> terminates.</p>
 </blockquote>
 
 <h2 id="inspection-examples">Inspection Examples</h2>
@@ -367,9 +367,9 @@ dockerimage
 
 <h3 id="inspect-a-linux-docker-image-with-a-custom-startup-script">Inspect a Linux Docker image with a custom startup script</h3>
 
-<p>The <code class="highlighter-rouge">inspectDockerImage</code> command expects a custom script to return the container ID (or container name) from the docker image being tested as the last or only line of output to <code class="highlighter-rouge">stdout</code>. Without the container ID or container name as the last line of output, the inspection fails.</p>
+<p>The <code class="language-plaintext highlighter-rouge">inspectDockerImage</code> command expects a custom script to return the container ID (or container name) from the docker image being tested as the last or only line of output to <code class="language-plaintext highlighter-rouge">stdout</code>. Without the container ID or container name as the last line of output, the inspection fails.</p>
 
-<p>A simple custom script that executes a <code class="highlighter-rouge">docker container run</code> command, easily outputs the container ID. But a complex script might need testing to ensure it also returns the container ID or container name as the last line of output -- for example, a script that launches multiple containers, or one that runs <code class="highlighter-rouge">docker-compose</code>.</p>
+<p>A simple custom script that executes a <code class="language-plaintext highlighter-rouge">docker container run</code> command, easily outputs the container ID. But a complex script might need testing to ensure it also returns the container ID or container name as the last line of output -- for example, a script that launches multiple containers, or one that runs <code class="language-plaintext highlighter-rouge">docker-compose</code>.</p>
 
 <p>Some “testing/helper” scripts are available for testing Linux and Windows Docker images on virtual machines running in Amazon. Refer to <a href="aws_scripts/README.md">Test and Helper Scripts</a></p>
 
@@ -378,21 +378,21 @@ dockerimage
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ./run_my_application.sh
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
-docker container run <span class="nt">-d</span> <span class="se">\</span>
-<span class="nt">-p</span> 80:8080 <span class="nt">--name</span> tomcat-wildbook <span class="se">\</span>
-<span class="nt">--link</span> mysql-wildbook <span class="se">\</span>
-<span class="nv">$1</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env bash
+docker container run -d \
+-p 80:8080 --name tomcat-wildbook \
+--link mysql-wildbook \
+$1
 </code></pre></div></div>
 
-<h4 id="to-inspect-the-docker-image-gforghettitomcat-wildbooklatest-with-a-custom-startup-script-and-upload-the-result-to-docker-hub-leave-out-the--product-id-parameter-if-you-are-just-testing">To inspect the Docker image, <code class="highlighter-rouge">gforghetti/tomcat-wildbook:latest</code>, with a custom startup script and upload the result to Docker Hub (leave out the <code class="highlighter-rouge">-product-id</code> parameter if you are just testing):</h4>
+<h4 id="to-inspect-the-docker-image-gforghettitomcat-wildbooklatest-with-a-custom-startup-script-and-upload-the-result-to-docker-hub-leave-out-the--product-id-parameter-if-you-are-just-testing">To inspect the Docker image, <code class="language-plaintext highlighter-rouge">gforghetti/tomcat-wildbook:latest</code>, with a custom startup script and upload the result to Docker Hub (leave out the <code class="language-plaintext highlighter-rouge">-product-id</code> parameter if you are just testing):</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root:[~/] # ./inspectDockerImage --start-script ./run_my_application.sh -product-id=&lt;store-product-id&gt; gforghetti/tomcat-wildbook:latest
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root:[~/] # ./inspectDockerImage --start-script ./run_my_application.sh -product-id=&lt;store-product-id&gt; gforghetti/tomcat-wildbook:latest
 </code></pre></div></div>
 
 <h4 id="output">Output:</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*******************************************************************************************************************************************************************************************************
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*******************************************************************************************************************************************************************************************************
 * Docker image: gforghetti/tomcat-wildbook:latest
 *******************************************************************************************************************************************************************************************************
 
@@ -608,123 +608,123 @@ root:[~/] #
 
 <h3 id="inspect-a-linux-docker-image-with-json-output">Inspect a Linux Docker image with JSON output</h3>
 
-<h4 id="to-inspect-the-docker-image-gforghettiapachelatest-with-json-output">To inspect the Docker image, <code class="highlighter-rouge">gforghetti/apache:latest</code>, with JSON output:</h4>
+<h4 id="to-inspect-the-docker-image-gforghettiapachelatest-with-json-output">To inspect the Docker image, <code class="language-plaintext highlighter-rouge">gforghetti/apache:latest</code>, with JSON output:</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: The output was piped to the <code class="highlighter-rouge">jq</code> command to display it “nicely”.</p>
+  <p><strong>Note</strong>: The output was piped to the <code class="language-plaintext highlighter-rouge">jq</code> command to display it “nicely”.</p>
 </blockquote>
 
 <h4 id="output-1">Output:</h4>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"Date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mon May 21 13:23:37 2018"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"SystemOperatingSystem"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operating System: Ubuntu 16.04.4 LTS"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"SystemArchitecture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd64"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"SystemDockerClientVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.06.2-ee-11"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"SystemDockerServerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.06.2-ee-11"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"DockerImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gforghetti/apache:latest"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"178MB"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Layers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:65db5d0a8b88ee3d5e5a579a70943433d36d3e6d6a974598a5eebeef9e02a346"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"BaseLayerDigest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:85b1f47fba49da65256f07c8790542a3880e9216f9c491965040f35ce2c6ca7a"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OfficialBaseImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debian:8@sha256:3a5aa6bf675aa71e60df347b29f0a1b1634306cd8db47e1af0a16ad420d1b127"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"CreatedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-19T17:51:53"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"DockerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.09.0-ce"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Maintainer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gary Forghetti, Docker Inc."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OperatingSystem"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"OperatingSystemVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debian GNU/Linux 8 (jessie)"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Architecture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd64"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"WorkingDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/apache2"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"EntryPoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Cmd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"httpd-foreground"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Shell"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Env"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PATH=/usr/local/apache2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><span class="se">\n</span><span class="s2">HTTPD_PREFIX=/usr/local/apache2</span><span class="se">\n</span><span class="s2">NGHTTP2_VERSION=1.18.1-1</span><span class="se">\n</span><span class="s2">OPENSSL_VERSION=1.0.2l-1~bpo8+1</span><span class="se">\n</span><span class="s2">HTTPD_VERSION=2.4.28</span><span class="se">\n</span><span class="s2">HTTPD_SHA256=c1197a3a62a4ab5c584ab89b249af38cf28b4adee9c0106b62999fd29f920666</span><span class="se">\n</span><span class="s2">HTTPD_PATCHES=</span><span class="se">\n</span><span class="s2">APACHE_DIST_URLS=https://www.apache.org/dyn/closer.cgi?action=download&amp;filename= </span><span class="se">\t</span><span class="s2">https://www-us.apache.org/dist/ </span><span class="se">\t</span><span class="s2">https://www.apache.org/dist/ </span><span class="se">\t</span><span class="s2">https://archive.apache.org/dist/"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ExposedPorts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80/tcp "</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"HealthCheck"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Volumes"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="nl">"Date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mon May 21 13:23:37 2018"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"SystemOperatingSystem"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operating System: Ubuntu 16.04.4 LTS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"SystemArchitecture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd64"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"SystemDockerClientVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.06.2-ee-11"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"SystemDockerServerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.06.2-ee-11"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"DockerImage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gforghetti/apache:latest"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"178MB"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Layers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:65db5d0a8b88ee3d5e5a579a70943433d36d3e6d6a974598a5eebeef9e02a346"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"BaseLayerDigest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:85b1f47fba49da65256f07c8790542a3880e9216f9c491965040f35ce2c6ca7a"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"OfficialBaseImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"debian:8@sha256:3a5aa6bf675aa71e60df347b29f0a1b1634306cd8db47e1af0a16ad420d1b127"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"CreatedOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-19T17:51:53"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"DockerVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.09.0-ce"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Maintainer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gary Forghetti, Docker Inc."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"OperatingSystem"</span><span class="p">:</span><span class="w"> </span><span class="s2">"linux"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"OperatingSystemVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debian GNU/Linux 8 (jessie)"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Architecture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amd64"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"User"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"WorkingDir"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/apache2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"EntryPoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Cmd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"httpd-foreground"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Shell"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Env"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PATH=/usr/local/apache2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><span class="se">\n</span><span class="s2">HTTPD_PREFIX=/usr/local/apache2</span><span class="se">\n</span><span class="s2">NGHTTP2_VERSION=1.18.1-1</span><span class="se">\n</span><span class="s2">OPENSSL_VERSION=1.0.2l-1~bpo8+1</span><span class="se">\n</span><span class="s2">HTTPD_VERSION=2.4.28</span><span class="se">\n</span><span class="s2">HTTPD_SHA256=c1197a3a62a4ab5c584ab89b249af38cf28b4adee9c0106b62999fd29f920666</span><span class="se">\n</span><span class="s2">HTTPD_PATCHES=</span><span class="se">\n</span><span class="s2">APACHE_DIST_URLS=https://www.apache.org/dyn/closer.cgi?action=download&amp;filename= </span><span class="se">\t</span><span class="s2">https://www-us.apache.org/dist/ </span><span class="se">\t</span><span class="s2">https://www.apache.org/dist/ </span><span class="se">\t</span><span class="s2">https://archive.apache.org/dist/"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ExposedPorts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80/tcp "</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"HealthCheck"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Volumes"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Warnings"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"HTMLReportFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"VulnerabilitiesScanURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Warnings"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"HTMLReportFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"VulnerabilitiesScanURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image </span><span class="se">\"</span><span class="s2">gforghetti/apache:latest</span><span class="se">\"</span><span class="s2"> has been inspected."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image </span><span class="se">\"</span><span class="s2">gforghetti/apache:latest</span><span class="se">\"</span><span class="s2"> has been inspected."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image was built from the official Docker base image </span><span class="se">\"</span><span class="s2">debian:8</span><span class="se">\"</span><span class="s2">."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image was built from the official Docker base image </span><span class="se">\"</span><span class="s2">debian:8</span><span class="se">\"</span><span class="s2">."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image was not built using Docker Enterprise Edition!"</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image was not built using Docker Enterprise Edition!"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image metadata contains a Maintainer."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image metadata contains a Maintainer."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image does not contain a Healthcheck! Although a Healthcheck is not required, it is recommended."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Warning"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image does not contain a Healthcheck! Although a Healthcheck is not required, it is recommended."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image Cmd attribute is not running supervisord."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image Cmd attribute is not running supervisord."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image Entrypoint attribute is not running supervisord."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image Entrypoint attribute is not running supervisord."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 was started."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 was started."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 is running."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 is running."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container has 4 running processes."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container has 4 running processes."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container is not running supervisord."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container is not running supervisord."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container resource usage statistics were retrieved."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container resource usage statistics were retrieved."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container logs were retrieved."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container logs were retrieved."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 was stopped successfully."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container 424de05adfa2c84890513a51d3d5bc210e4d4b41c746c9252648f38d95b8be49 was stopped successfully."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container exited with an exit code of 0."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container exited with an exit code of 0."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container and any associated volumes removed."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker container and any associated volumes removed."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image </span><span class="se">\"</span><span class="s2">gforghetti/apache:latest</span><span class="se">\"</span><span class="s2"> was removed."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker image </span><span class="se">\"</span><span class="s2">gforghetti/apache:latest</span><span class="se">\"</span><span class="s2"> was removed."</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This test was performed on Docker Enterprise Edition."</span><span class="w">
+      </span><span class="nl">"Status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Passed"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This test was performed on Docker Enterprise Edition."</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -734,16 +734,16 @@ root:[~/] #
 
 <h3 id="inspect-a-linux-docker-image-with-html-output">Inspect a Linux Docker image with HTML output</h3>
 
-<h4 id="to-inspect-the-docker-image-gforghettiapachelatest-with-html-output">To inspect the Docker image, <code class="highlighter-rouge">gforghetti/apache:latest</code>, with HTML output:</h4>
+<h4 id="to-inspect-the-docker-image-gforghettiapachelatest-with-html-output">To inspect the Docker image, <code class="language-plaintext highlighter-rouge">gforghetti/apache:latest</code>, with HTML output:</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root:[~/] # ./inspectDockerImage --html gforghetti/apache:latest
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root:[~/] # ./inspectDockerImage --html gforghetti/apache:latest
 </code></pre></div></div>
 
 <p>Note: The majority of the stdout message output has been intentionally omitted below.</p>
 
 <h4 id="output-2">Output:</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 The inspection of the Docker image gforghetti/apache:latest has completed.
 An HTML report has been generated in the file html/gforghetti-apache-latest_inspection_report_2017-10-27_01-03-43.html
 root:[~/] #
@@ -765,14 +765,14 @@ root:[~/] #
 
 <h3 id="inspect-a-microsoft-windows-docker-image">Inspect a Microsoft Windows Docker image</h3>
 
-<h4 id="to-inspect-the-docker-image-microsoftnanoserverlatest">To inspect the Docker image, <code class="highlighter-rouge">microsoft/nanoserver:latest</code>:</h4>
+<h4 id="to-inspect-the-docker-image-microsoftnanoserverlatest">To inspect the Docker image, <code class="language-plaintext highlighter-rouge">microsoft/nanoserver:latest</code>:</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS D:\InspectDockerimage&gt; .\inspectDockerImage microsoft/nanoserver:latest
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS D:\InspectDockerimage&gt; .\inspectDockerImage microsoft/nanoserver:latest
 </code></pre></div></div>
 
 <h4 id="output-3">Output:</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*******************************************************************************************************************************************************************************************************
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*******************************************************************************************************************************************************************************************************
 * Docker image: microsoft/nanoserver:latest
 *******************************************************************************************************************************************************************************************************
 

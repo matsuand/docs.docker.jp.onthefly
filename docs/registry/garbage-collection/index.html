@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Garbage collection | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Garbage collection" />
   <meta property="og:description" content="High level discussion of garbage collection" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/garbage-collection/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Garbage collection","description":"High level discussion of garbage collection","url":"https://docs.docker.com/registry/garbage-collection/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 <!-- This text will be included in the Docker Registry docs -->
@@ -138,7 +138,7 @@ See <a href="/docs.docker.jp.onthefly/registry/compatibility/#content-addressabl
 to the layer. As long as a layer is referenced by one manifest, it cannot be garbage
 collected.</p>
 
-<p>Manifests and layers can be <code class="highlighter-rouge">deleted</code> with the registry API (refer to the API
+<p>Manifests and layers can be <code class="language-plaintext highlighter-rouge">deleted</code> with the registry API (refer to the API
 documentation <a href="/docs.docker.jp.onthefly/registry/spec/api/#deleting-a-layer">here</a> and
 <a href="/docs.docker.jp.onthefly/registry/spec/api/#deleting-an-image">here</a> for details). This API removes references
 to the target and makes them eligible for garbage collection. It also makes them
@@ -150,29 +150,29 @@ the filesystem if no other manifests refers to them.</p>
 
 <h3 id="example">Example</h3>
 
-<p>In this example manifest A references two layers: <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code>. Manifest <code class="highlighter-rouge">B</code> references
-layers <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">c</code>. In this state, nothing is eligible for garbage collection:</p>
+<p>In this example manifest A references two layers: <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>. Manifest <code class="language-plaintext highlighter-rouge">B</code> references
+layers <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">c</code>. In this state, nothing is eligible for garbage collection:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A -----&gt; a &lt;----- B
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A -----&gt; a &lt;----- B
     \--&gt; b     |
          c &lt;--/
 </code></pre></div></div>
 
 <p>Manifest B is deleted via the API:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A -----&gt; a     B
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A -----&gt; a     B
     \--&gt; b
          c
 </code></pre></div></div>
 
-<p>In this state layer <code class="highlighter-rouge">c</code> no longer has a reference and is eligible for garbage
-collection. Layer <code class="highlighter-rouge">a</code> had one reference removed but not garbage
-collected as it is still referenced by manifest <code class="highlighter-rouge">A</code>. The blob representing
-manifest <code class="highlighter-rouge">B</code> is eligible for garbage collection.</p>
+<p>In this state layer <code class="language-plaintext highlighter-rouge">c</code> no longer has a reference and is eligible for garbage
+collection. Layer <code class="language-plaintext highlighter-rouge">a</code> had one reference removed but not garbage
+collected as it is still referenced by manifest <code class="language-plaintext highlighter-rouge">A</code>. The blob representing
+manifest <code class="language-plaintext highlighter-rouge">B</code> is eligible for garbage collection.</p>
 
-<p>After garbage collection has been run, manifest <code class="highlighter-rouge">A</code> and its blobs remain.</p>
+<p>After garbage collection has been run, manifest <code class="language-plaintext highlighter-rouge">A</code> and its blobs remain.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A -----&gt; a
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A -----&gt; a
     \--&gt; b
 </code></pre></div></div>
 
@@ -197,23 +197,23 @@ risk that the image’s layers are mistakenly deleted leading to a corrupted ima
 
 <p>Garbage collection can be run as follows</p>
 
-<p><code class="highlighter-rouge">bin/registry garbage-collect [--dry-run] /path/to/config.yml</code></p>
+<p><code class="language-plaintext highlighter-rouge">bin/registry garbage-collect [--dry-run] /path/to/config.yml</code></p>
 
-<p>The garbage-collect command accepts a <code class="highlighter-rouge">--dry-run</code> parameter, which prints the progress
-of the mark and sweep phases without removing any data. Running with a log level of <code class="highlighter-rouge">info</code>
+<p>The garbage-collect command accepts a <code class="language-plaintext highlighter-rouge">--dry-run</code> parameter, which prints the progress
+of the mark and sweep phases without removing any data. Running with a log level of <code class="language-plaintext highlighter-rouge">info</code>
 gives a clear indication of items eligible for deletion.</p>
 
 <p>The config.yml file should be in the following format:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: 0.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: 0.1
 storage:
   filesystem:
     rootdirectory: /registry/data
 </code></pre></div></div>
 
-<p><em>Sample output from a dry run garbage collection with registry log level set to <code class="highlighter-rouge">info</code></em></p>
+<p><em>Sample output from a dry run garbage collection with registry log level set to <code class="language-plaintext highlighter-rouge">info</code></em></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello-world
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello-world
 hello-world: marking manifest sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf
 hello-world: marking blob sha256:03f4658f8b782e12230c1783426bd3bacce651ce582a4ffb6fbbfa2079428ecb
 hello-world: marking blob sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4

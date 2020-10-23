@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerfile リファレンス | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerfile リファレンス" />
   <meta property="og:description" content="Dockerfile では単純な DSL を使って、通常なら手動で行うイメージ生成手順を自動化します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/builder/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerfile リファレンス","description":"Dockerfile では単純な DSL を使って、通常なら手動で行うイメージ生成手順を自動化します。","url":"https://docs.docker.com/engine/reference/builder/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    35 分
+    39 分
   
 </span>
 <!-- This file is maintained within the docker/cli GitHub
@@ -116,25 +116,25 @@
 
 <h1 id="dockerfile-reference">Dockerfile リファレンス</h1>
 
-<p>Docker は <code class="highlighter-rouge">Dockerfile</code> から命令を読み込んで、自動的にイメージをビルドします。
-<code class="highlighter-rouge">Dockerfile</code> はテキストファイルであり、イメージを作り上げるために実行するコマンドラインコマンドを、すべてこのファイルに含めることができます。
-<code class="highlighter-rouge">docker build</code> を実行すると、順次コマンドライン命令を自動化した処理が行われて、ビルド結果となるイメージが得られます。</p>
+<p>Docker は <code class="language-plaintext highlighter-rouge">Dockerfile</code> から命令を読み込んで、自動的にイメージをビルドします。
+<code class="language-plaintext highlighter-rouge">Dockerfile</code> はテキストファイルであり、イメージを作り上げるために実行するコマンドラインコマンドを、すべてこのファイルに含めることができます。
+<code class="language-plaintext highlighter-rouge">docker build</code> を実行すると、順次コマンドライン命令を自動化した処理が行われて、ビルド結果となるイメージが得られます。</p>
 
-<p>ここでは <code class="highlighter-rouge">Dockerfile</code> において利用可能なコマンドを説明します。
-このページを読み終えたら、さまざまなガイドとなる <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code> ベストプラクティス</a>を参照してください。</p>
+<p>ここでは <code class="language-plaintext highlighter-rouge">Dockerfile</code> において利用可能なコマンドを説明します。
+このページを読み終えたら、さまざまなガイドとなる <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="language-plaintext highlighter-rouge">Dockerfile</code> ベストプラクティス</a>を参照してください。</p>
 
 <h2 id="usage">利用方法</h2>
 
-<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/">docker build</a>コマンドは、<code class="highlighter-rouge">Dockerfile</code> と<strong>コンテキスト</strong>（context）からイメージをビルドします。
-ビルドにおけるコンテキストとは、指定された<code class="highlighter-rouge">PATH</code>または<code class="highlighter-rouge">URL</code>にある一連のファイルのことです。
-<code class="highlighter-rouge">PATH</code>はローカルファイルシステム内のディレクトリを表わします。
-<code class="highlighter-rouge">URL</code>は Git のリポジトリ URL のことです。</p>
+<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/">docker build</a>コマンドは、<code class="language-plaintext highlighter-rouge">Dockerfile</code> と<strong>コンテキスト</strong>（context）からイメージをビルドします。
+ビルドにおけるコンテキストとは、指定された<code class="language-plaintext highlighter-rouge">PATH</code>または<code class="language-plaintext highlighter-rouge">URL</code>にある一連のファイルのことです。
+<code class="language-plaintext highlighter-rouge">PATH</code>はローカルファイルシステム内のディレクトリを表わします。
+<code class="language-plaintext highlighter-rouge">URL</code>は Git のリポジトリ URL のことです。</p>
 
 <p>コンテキストは再帰的に処理されます。
-つまり <code class="highlighter-rouge">PATH</code> の場合はサブディレクトリがすべて含まれ、<code class="highlighter-rouge">URL</code> の場合はリポジトリとそのサブモジュールが含まれます。
+つまり <code class="language-plaintext highlighter-rouge">PATH</code> の場合はサブディレクトリがすべて含まれ、<code class="language-plaintext highlighter-rouge">URL</code> の場合はリポジトリとそのサブモジュールが含まれます。
 以下の例におけるビルドコマンドは、コンテキストとしてカレントディレクトリを用いるものです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build .
 Sending build context to Docker daemon  6.51 MB
 ...
 </code></pre></div></div>
@@ -145,53 +145,53 @@ Sending build context to Docker daemon  6.51 MB
 そのディレクトリへは、Dockerfile の構築に必要となるファイルのみを置くようにします。</p>
 
 <blockquote>
-  <p><strong>警告</strong>: <code class="highlighter-rouge">PATH</code> に対して root ディレクトリ <code class="highlighter-rouge">/</code> を指定することはやめてください。
+  <p><strong>警告</strong>: <code class="language-plaintext highlighter-rouge">PATH</code> に対して root ディレクトリ <code class="language-plaintext highlighter-rouge">/</code> を指定することはやめてください。
 これを行うとビルド時に Docker デーモンに対して、ハードディスクの内容すべてを送り込むことになってしまいます。</p>
 </blockquote>
 
-<p>ビルドコンテキスト内のファイルを利用する場合、<code class="highlighter-rouge">Dockerfile</code> では命令を記述する際にファイル参照を指定します。
-たとえば <code class="highlighter-rouge">COPY</code> 命令の対象として参照します。
-ビルド時の処理性能を上げるために、コンテキストディレクトリ内に <code class="highlighter-rouge">.dockerignore</code> ファイルを追加し、不要なファイルやディレクトリは除外するようにします。
-詳しくはこのページ内の <a href="#dockerignore-file"><code class="highlighter-rouge">.dockerignore</code> ファイルの生成方法</a>を参照してください。</p>
+<p>ビルドコンテキスト内のファイルを利用する場合、<code class="language-plaintext highlighter-rouge">Dockerfile</code> では命令を記述する際にファイル参照を指定します。
+たとえば <code class="language-plaintext highlighter-rouge">COPY</code> 命令の対象として参照します。
+ビルド時の処理性能を上げるために、コンテキストディレクトリ内に <code class="language-plaintext highlighter-rouge">.dockerignore</code> ファイルを追加し、不要なファイルやディレクトリは除外するようにします。
+詳しくはこのページ内の <a href="#dockerignore-file"><code class="language-plaintext highlighter-rouge">.dockerignore</code> ファイルの生成方法</a>を参照してください。</p>
 
-<p>慣例として <code class="highlighter-rouge">Dockerfile</code> は <code class="highlighter-rouge">Dockerfile</code> と命名されています。
+<p>慣例として <code class="language-plaintext highlighter-rouge">Dockerfile</code> は <code class="language-plaintext highlighter-rouge">Dockerfile</code> と命名されています。
 またこのファイルはコンテキストディレクトリのトップに置かれます。
-<code class="highlighter-rouge">docker build</code> の <code class="highlighter-rouge">-f</code> フラグを用いれば、Dockerfile がファイルシステム内のどこにあっても指定することができます。</p>
+<code class="language-plaintext highlighter-rouge">docker build</code> の <code class="language-plaintext highlighter-rouge">-f</code> フラグを用いれば、Dockerfile がファイルシステム内のどこにあっても指定することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -f /path/to/a/Dockerfile .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -f /path/to/a/Dockerfile .
 </code></pre></div></div>
 
 <p>イメージのビルドが成功した後の保存先として、リポジトリとタグを指定することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t shykes/myapp .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t shykes/myapp .
 </code></pre></div></div>
 
-<p>ビルドの際に複数のリポジトリに対してイメージをタグづけするには、<code class="highlighter-rouge">build</code> コマンドの実行時に <code class="highlighter-rouge">-t</code> パラメーターを複数指定します。</p>
+<p>ビルドの際に複数のリポジトリに対してイメージをタグづけするには、<code class="language-plaintext highlighter-rouge">build</code> コマンドの実行時に <code class="language-plaintext highlighter-rouge">-t</code> パラメーターを複数指定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">Dockerfile</code> 内に記述されている命令を Docker デーモンが実行する際には、事前に <code class="highlighter-rouge">Dockerfile</code> が検証され、文法の誤りがある場合にはエラーが返されます。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> 内に記述されている命令を Docker デーモンが実行する際には、事前に <code class="language-plaintext highlighter-rouge">Dockerfile</code> が検証され、文法の誤りがある場合にはエラーが返されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t test/myapp .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t test/myapp .
 Sending build context to Docker daemon 2.048 kB
 Error response from daemon: Unknown instruction: RUNCMD
 </code></pre></div></div>
 
-<p>Docker デーモンは <code class="highlighter-rouge">Dockerfile</code> 内の命令を 1 つずつ実行し、必要な場合にはビルドイメージ内にその処理結果を確定します。
+<p>Docker デーモンは <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の命令を 1 つずつ実行し、必要な場合にはビルドイメージ内にその処理結果を確定します。
 最後にビルドイメージの ID を出力します。
 Docker デーモンは、送信されたコンテキスト内容を自動的にクリアします。</p>
 
 <p>各命令は個別に実行されます。
 それによって新たなイメージがビルドされます。
-したがって、たとえば <code class="highlighter-rouge">RUN cd /tmp</code> を実行したとしても、次の命令には何の効果も与えません。</p>
+したがって、たとえば <code class="language-plaintext highlighter-rouge">RUN cd /tmp</code> を実行したとしても、次の命令には何の効果も与えません。</p>
 
 <p>Docker は可能な限り中間イメージ（キャッシュ）を再利用しようとします。
-これは <code class="highlighter-rouge">docker build</code> 処理を速くするためです。
-その場合は、端末画面に <code class="highlighter-rouge">Using cache</code> というメッセージが出力されます。
-（詳細については <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code> ベストプラクティスガイド</a>を参照してください。）</p>
+これは <code class="language-plaintext highlighter-rouge">docker build</code> 処理を速くするためです。
+その場合は、端末画面に <code class="language-plaintext highlighter-rouge">Using cache</code> というメッセージが出力されます。
+（詳細については <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="language-plaintext highlighter-rouge">Dockerfile</code> ベストプラクティスガイド</a>を参照してください。）</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t svendowideit/ambassador .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t svendowideit/ambassador .
 Sending build context to Docker daemon 15.36 kB
 Step 1/4 : FROM alpine:3.2
  ---&gt; 31f630c65071
@@ -208,9 +208,9 @@ Successfully built 7ea8aef582cc
 </code></pre></div></div>
 
 <p>ビルドキャッシュは、ローカルにて親イメージへのつながりを持ったイメージからのみ利用されます。
-利用されるイメージとはつまり、前回のビルドによって生成されたイメージか、あるいは <code class="highlighter-rouge">docker load</code> によってロードされたイメージのいずれかです。
-ビルドキャッシュを特定のイメージから利用したい場合は <code class="highlighter-rouge">--cache-from</code> オプションを指定します。
-<code class="highlighter-rouge">--cache-from</code> オプションが用いられた場合に、そのイメージは親イメージへのつながりを持っている必要はなく、他のレジストリから取得するイメージであっても構いません。</p>
+利用されるイメージとはつまり、前回のビルドによって生成されたイメージか、あるいは <code class="language-plaintext highlighter-rouge">docker load</code> によってロードされたイメージのいずれかです。
+ビルドキャッシュを特定のイメージから利用したい場合は <code class="language-plaintext highlighter-rouge">--cache-from</code> オプションを指定します。
+<code class="language-plaintext highlighter-rouge">--cache-from</code> オプションが用いられた場合に、そのイメージは親イメージへのつながりを持っている必要はなく、他のレジストリから取得するイメージであっても構いません。</p>
 
 <p>ビルドに関する操作を終えたら、次は <a href="https://docs.docker.com/engine/tutorials/dockerrepos/#/contributing-to-docker-hub"><em>リポジトリをレジストリへプッシュ</em></a>を読んでみてください。</p>
 
@@ -231,14 +231,14 @@ BuildKit バックエンドは、それまでの実装に比べて数々の利�
   <li>ビルドキャッシュの自動的な削除（prune）に対して優先順位をつけます。</li>
 </ul>
 
-<p>BuildKit バックエンドを利用するには、環境変数の設定として <code class="highlighter-rouge">DOCKER_BUILDKIT=1</code> とすることが必要です。
-これは CLI において <code class="highlighter-rouge">docker build</code> を実行する前に行っておきます。</p>
+<p>BuildKit バックエンドを利用するには、環境変数の設定として <code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code> とすることが必要です。
+これは CLI において <code class="language-plaintext highlighter-rouge">docker build</code> を実行する前に行っておきます。</p>
 
 <p>BuildKit ベースでビルドされたイメージにて利用可能な、実験的な Dockerfile 文法については、<a href="https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/experimental.md">BuildKit リポジトリのドキュメント</a>を参照してください。</p>
 
 <h2 id="format">記述書式</h2>
 
-<p>ここに <code class="highlighter-rouge">Dockerfile</code> の記述書式を示します。</p>
+<p>ここに <code class="language-plaintext highlighter-rouge">Dockerfile</code> の記述書式を示します。</p>
 
 <pre><code class="language-Dockerfile"># Comment
 INSTRUCTION arguments
@@ -248,16 +248,16 @@ INSTRUCTION arguments
 ただし慣習として大文字とします。
 そうすることで引数（arguments）との区別をつけやすくします。</p>
 
-<p>Docker は <code class="highlighter-rouge">Dockerfile</code> 内の命令を記述順に実行します。
-<code class="highlighter-rouge">Dockerfile</code> は必ず<strong><code class="highlighter-rouge">FROM</code>命令</strong>で始めなければなりません。
+<p>Docker は <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の命令を記述順に実行します。
+<code class="language-plaintext highlighter-rouge">Dockerfile</code> は必ず<strong><code class="language-plaintext highlighter-rouge">FROM</code>命令</strong>で始めなければなりません。
 この命令より前に記述できるのは、<a href="#parser-directives">パーサーディレクティブ</a>、<a href="#format">コメント</a>、グローバル定義された <a href="#arg">ARG</a> です。
-<code class="highlighter-rouge">FROM</code> 命令は、ビルドするイメージに対しての <a href="glossary.md#parent-image"><em>親イメージ</em></a> を指定するものです。
-<code class="highlighter-rouge">FROM</code> よりも先に記述できる命令として <code class="highlighter-rouge">ARG</code> があります。
-これは <code class="highlighter-rouge">FROM</code> において用いられる引数を宣言するものです。</p>
+<code class="language-plaintext highlighter-rouge">FROM</code> 命令は、ビルドするイメージに対しての <a href="glossary.md#parent-image"><em>親イメージ</em></a> を指定するものです。
+<code class="language-plaintext highlighter-rouge">FROM</code> よりも先に記述できる命令として <code class="language-plaintext highlighter-rouge">ARG</code> があります。
+これは <code class="language-plaintext highlighter-rouge">FROM</code> において用いられる引数を宣言するものです。</p>
 
-<p>行頭が <code class="highlighter-rouge">#</code> で始まる行はコメントとして扱われます。
+<p>行頭が <code class="language-plaintext highlighter-rouge">#</code> で始まる行はコメントとして扱われます。
 ただし例外として<a href="#parser-directives">パーサーディレクティブ</a>があります。
-行途中の <code class="highlighter-rouge">#</code> は単なる引数として扱われます。
+行途中の <code class="language-plaintext highlighter-rouge">#</code> は単なる引数として扱われます。
 以下のような行記述が可能です。</p>
 
 <pre><code class="language-Dockerfile"># Comment
@@ -269,16 +269,16 @@ RUN echo 'we are running some # of cool things'
 <h2 id="parser-directives">パーサーディレクティブ</h2>
 
 <p>パーサーディレクティブ（parser directive）を利用することは任意です。
-これは <code class="highlighter-rouge">Dockerfile</code> 内のその後に続く記述行を取り扱う方法を指示するものです。
+これは <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内のその後に続く記述行を取り扱う方法を指示するものです。
 パーサーディレクティブはビルドされるイメージにレイヤーを追加しません。
 したがってビルドステップとして表示されることはありません。
-パーサーディレクティブは、特別なコメントの記述方法をとるもので、<code class="highlighter-rouge"># ディレクティブ＝値</code> という書式です。
+パーサーディレクティブは、特別なコメントの記述方法をとるもので、<code class="language-plaintext highlighter-rouge"># ディレクティブ＝値</code> という書式です。
 同一のディレクティブは一度しか記述できません。</p>
 
 <p>コメント、空行、ビルド命令が一つでも読み込まれたら、それ以降 Docker はパーサーディレクティブの処理を行いません。
 その場合、パーサーディレクティブの書式で記述されていても、それはコメントとして扱われます。
 そしてパーサーディレクティブとして適切な書式であるかどうかも確認しません。
-したがってパーサーディレクティブは <code class="highlighter-rouge">Dockerfile</code> の冒頭に記述しなければなりません。</p>
+したがってパーサーディレクティブは <code class="language-plaintext highlighter-rouge">Dockerfile</code> の冒頭に記述しなければなりません。</p>
 
 <p>パーサーディレクティブは大文字小文字を区別しません。
 ただし慣習として小文字とします。
@@ -334,18 +334,18 @@ FROM ImageName
 <p>パーサーディレクティブは以下のものがサポートされます。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">syntax</code></li>
-  <li><code class="highlighter-rouge">escape</code></li>
+  <li><code class="language-plaintext highlighter-rouge">syntax</code></li>
+  <li><code class="language-plaintext highlighter-rouge">escape</code></li>
 </ul>
 
 <h2 id="syntax">syntax</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax=[リモートイメージ参照]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax=[リモートイメージ参照]
 </code></pre></div></div>
 
 <p>たとえば以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax=docker/dockerfile
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># syntax=docker/dockerfile
 # syntax=docker/dockerfile:1.0
 # syntax=docker.io/docker/dockerfile:1
 # syntax=docker/dockerfile:1.0.0-experimental
@@ -368,7 +368,7 @@ BuildKit バックエンドでは、外部実装されたビルダーをシー�
 
 <h3 id="official-releases">公式リリース</h3>
 
-<p>Docker では Docker Hub の <code class="highlighter-rouge">docker/dockerfile</code> リポジトリを通じて、Dockerfile をビルドするために利用できる公式イメージを提供しています。
+<p>Docker では Docker Hub の <code class="language-plaintext highlighter-rouge">docker/dockerfile</code> リポジトリを通じて、Dockerfile をビルドするために利用できる公式イメージを提供しています。
 新たなイメージがリリースされるのは、安定版（stable）チャネルと実験版（experimental）チャネルです。</p>
 
 <p>安定版（stable）チャネルではバージョン番号に意味をもたせています。
@@ -390,7 +390,7 @@ BuildKit バックエンドでは、外部実装されたビルダーをシー�
 </ul>
 
 <p>作業の必要に応じて適切なチャネルを選んでください。
-バグフィックスだけを望むのであれば <code class="highlighter-rouge">docker/dockerfile:1.0</code> を利用します。
+バグフィックスだけを望むのであれば <code class="language-plaintext highlighter-rouge">docker/dockerfile:1.0</code> を利用します。
 実験的な機能を利用したいなら、実験版チャネルを利用します。
 実験版チャネルを利用している場合、リリースが進むほど互換性が失われるかもしれません。
 したがって不変バージョンを利用することをお勧めします。</p>
@@ -399,30 +399,30 @@ BuildKit バックエンドでは、外部実装されたビルダーをシー�
 
 <h2 id="escape">escape</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=\ （バックスラッシュ）
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=\ （バックスラッシュ）
 </code></pre></div></div>
 
 <p>または</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=` （バッククォート）
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=` （バッククォート）
 </code></pre></div></div>
 
-<p>ディレクティブ <code class="highlighter-rouge">escape</code> は、<code class="highlighter-rouge">Dockerfile</code> 内でエスケープ文字として用いる文字を設定します。
-設定していない場合は、デフォルトとして <code class="highlighter-rouge">\</code> が用いられます。</p>
+<p>ディレクティブ <code class="language-plaintext highlighter-rouge">escape</code> は、<code class="language-plaintext highlighter-rouge">Dockerfile</code> 内でエスケープ文字として用いる文字を設定します。
+設定していない場合は、デフォルトとして <code class="language-plaintext highlighter-rouge">\</code> が用いられます。</p>
 
 <p>エスケープ文字は行途中での文字をエスケープするものと、行継続をエスケープするものがあります。
-行継続のエスケープを使うと <code class="highlighter-rouge">Dockerfile</code> 内の命令を複数行に分けることができます。
-<code class="highlighter-rouge">Dockerfile</code> に <code class="highlighter-rouge">escape</code> パーサーディレクティブを記述していたとしても、<code class="highlighter-rouge">RUN</code> コマンドの途中でのエスケープは無効であり、行末の行継続エスケープのみ利用することができます。</p>
+行継続のエスケープを使うと <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の命令を複数行に分けることができます。
+<code class="language-plaintext highlighter-rouge">Dockerfile</code> に <code class="language-plaintext highlighter-rouge">escape</code> パーサーディレクティブを記述していたとしても、<code class="language-plaintext highlighter-rouge">RUN</code> コマンドの途中でのエスケープは無効であり、行末の行継続エスケープのみ利用することができます。</p>
 
-<p><code class="highlighter-rouge">Windows</code> においてはエスケープ文字を <code class="highlighter-rouge">`</code> とします。
-<code class="highlighter-rouge">\</code> はディレクトリセパレーターとなっているためです。
-<code class="highlighter-rouge">`</code> は <a href="https://technet.microsoft.com/en-us/library/hh847755.aspx">Windows PowerShell</a> 上でも利用できます。</p>
+<p><code class="language-plaintext highlighter-rouge">Windows</code> においてはエスケープ文字を <code class="language-plaintext highlighter-rouge">`</code> とします。
+<code class="language-plaintext highlighter-rouge">\</code> はディレクトリセパレーターとなっているためです。
+<code class="language-plaintext highlighter-rouge">`</code> は <a href="https://technet.microsoft.com/en-us/library/hh847755.aspx">Windows PowerShell</a> 上でも利用できます。</p>
 
-<p>以下のような <code class="highlighter-rouge">Windows</code> 上の例を見てみます。
+<p>以下のような <code class="language-plaintext highlighter-rouge">Windows</code> 上の例を見てみます。
 これはよく分からずに失敗してしまう例です。
-2 行めの行末にある 2 つめの <code class="highlighter-rouge">\</code> は、次の行への継続を表わすエスケープと解釈されます。
-つまり 1 つめの <code class="highlighter-rouge">\</code> をエスケープするものとはなりません。
-同様に 3 行めの行末にある <code class="highlighter-rouge">\</code> も、この行が正しく命令として解釈されるものであっても、行継続として扱われることになります。
+2 行めの行末にある 2 つめの <code class="language-plaintext highlighter-rouge">\</code> は、次の行への継続を表わすエスケープと解釈されます。
+つまり 1 つめの <code class="language-plaintext highlighter-rouge">\</code> をエスケープするものとはなりません。
+同様に 3 行めの行末にある <code class="language-plaintext highlighter-rouge">\</code> も、この行が正しく命令として解釈されるものであっても、行継続として扱われることになります。
 結果としてこの Dockerfile の 2 行めと 3 行めは、一続きの記述行とみなされます。</p>
 
 <pre><code class="language-Dockerfile">FROM microsoft/nanoserver
@@ -432,7 +432,7 @@ RUN dir c:\
 
 <p>この Dockerfile を用いると以下の結果になります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\John&gt; docker build -t cmd .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\John&gt; docker build -t cmd .
 Sending build context to Docker daemon 3.072 kB
 Step 1/2 : FROM microsoft/nanoserver
  ---&gt; 22738ff49c6d
@@ -441,12 +441,12 @@ GetFileAttributesEx c:RUN: The system cannot find the file specified.
 PS C:\John&gt;
 </code></pre></div></div>
 
-<p>上を解決するには <code class="highlighter-rouge">COPY</code> 命令と <code class="highlighter-rouge">dir</code> の対象において <code class="highlighter-rouge">/</code> を用います。
-ただし <code class="highlighter-rouge">Windows</code> 上における普通のパス記述とは違う文法であるため混乱しやすく、さらに <code class="highlighter-rouge">Windows</code> のあらゆるコマンドがパスセパレーターとして  <code class="highlighter-rouge">/</code> をサポートしているわけではないので、エラーになることもあります。</p>
+<p>上を解決するには <code class="language-plaintext highlighter-rouge">COPY</code> 命令と <code class="language-plaintext highlighter-rouge">dir</code> の対象において <code class="language-plaintext highlighter-rouge">/</code> を用います。
+ただし <code class="language-plaintext highlighter-rouge">Windows</code> 上における普通のパス記述とは違う文法であるため混乱しやすく、さらに <code class="language-plaintext highlighter-rouge">Windows</code> のあらゆるコマンドがパスセパレーターとして  <code class="language-plaintext highlighter-rouge">/</code> をサポートしているわけではないので、エラーになることもあります。</p>
 
-<p>パーサーディレクティブ <code class="highlighter-rouge">escape</code> を利用すれば、<code class="highlighter-rouge">Windows</code> 上のファイルパスの文法をそのままに、期待どおりに <code class="highlighter-rouge">Dockerfile</code> が動作してくれます。</p>
+<p>パーサーディレクティブ <code class="language-plaintext highlighter-rouge">escape</code> を利用すれば、<code class="language-plaintext highlighter-rouge">Windows</code> 上のファイルパスの文法をそのままに、期待どおりに <code class="language-plaintext highlighter-rouge">Dockerfile</code> が動作してくれます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=`
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=`
 
 FROM microsoft/nanoserver
 COPY testfile.txt c:\
@@ -455,7 +455,7 @@ RUN dir c:\
 
 <p>上を処理に用いると以下のようになります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\John&gt; docker build -t succeeds --no-cache=true .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\John&gt; docker build -t succeeds --no-cache=true .
 Sending build context to Docker daemon 3.072 kB
 Step 1/3 : FROM microsoft/nanoserver
  ---&gt; 22738ff49c6d
@@ -485,93 +485,93 @@ PS C:\John&gt;
 
 <h2 id="environment-replacement">環境変数の置換</h2>
 
-<p><code class="highlighter-rouge">Dockerfile</code> の<a href="#env"><code class="highlighter-rouge">ENV</code> 構文</a>により宣言される環境変数は、特定の命令において変数として解釈されます。
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> の<a href="#env"><code class="language-plaintext highlighter-rouge">ENV</code> 構文</a>により宣言される環境変数は、特定の命令において変数として解釈されます。
 エスケープについても構文内にリテラルを含めることから、変数と同様の扱いと考えられます。</p>
 
-<p><code class="highlighter-rouge">Dockerfile</code> における環境変数の記述書式は、<code class="highlighter-rouge">$variable_name</code> あるいは <code class="highlighter-rouge">${variable_name}</code> のいずれかが可能です。
-両者は同等のものですが、ブレースを用いた記述は <code class="highlighter-rouge">${foo}_bar</code> といった記述のように、変数名にホワイトスペースを含めないようにするために利用されます。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> における環境変数の記述書式は、<code class="language-plaintext highlighter-rouge">$variable_name</code> あるいは <code class="language-plaintext highlighter-rouge">${variable_name}</code> のいずれかが可能です。
+両者は同等のものですが、ブレースを用いた記述は <code class="language-plaintext highlighter-rouge">${foo}_bar</code> といった記述のように、変数名にホワイトスペースを含めないようにするために利用されます。</p>
 
-<p><code class="highlighter-rouge">${variable_name}</code> という書式は、標準的な <code class="highlighter-rouge">bash</code> の修飾書式をいくつかサポートしています。
+<p><code class="language-plaintext highlighter-rouge">${variable_name}</code> という書式は、標準的な <code class="language-plaintext highlighter-rouge">bash</code> の修飾書式をいくつかサポートしています。
 たとえば以下のものです。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">${variable:-word}</code> は、<code class="highlighter-rouge">variable</code> が設定されているとき、この結果はその値となります。
-<code class="highlighter-rouge">variable</code> が設定されていないとき、<code class="highlighter-rouge">word</code> が結果となります。</li>
-  <li><code class="highlighter-rouge">${variable:+word}</code> は、<code class="highlighter-rouge">variable</code> が設定されているとき、この結果は <code class="highlighter-rouge">word</code> となります。
-<code class="highlighter-rouge">variable</code> が設定されていないとき、結果は空文字となります。</li>
+  <li><code class="language-plaintext highlighter-rouge">${variable:-word}</code> は、<code class="language-plaintext highlighter-rouge">variable</code> が設定されているとき、この結果はその値となります。
+<code class="language-plaintext highlighter-rouge">variable</code> が設定されていないとき、<code class="language-plaintext highlighter-rouge">word</code> が結果となります。</li>
+  <li><code class="language-plaintext highlighter-rouge">${variable:+word}</code> は、<code class="language-plaintext highlighter-rouge">variable</code> が設定されているとき、この結果は <code class="language-plaintext highlighter-rouge">word</code> となります。
+<code class="language-plaintext highlighter-rouge">variable</code> が設定されていないとき、結果は空文字となります。</li>
 </ul>
 
-<p>どの例においても、<code class="highlighter-rouge">word</code> は文字列であれば何でもよく、さらに別の環境変数を含んでいても構いません。</p>
+<p>どの例においても、<code class="language-plaintext highlighter-rouge">word</code> は文字列であれば何でもよく、さらに別の環境変数を含んでいても構いません。</p>
 
-<p>変数名をエスケープすることも可能で、変数名の前に <code class="highlighter-rouge">\$foo</code> や <code class="highlighter-rouge">\${foo}</code> のように <code class="highlighter-rouge">\</code> をつけます。
-こうすると、この例はそれぞれ <code class="highlighter-rouge">$foo</code>、<code class="highlighter-rouge">${foo}</code> という文字列そのものとして解釈されます。</p>
+<p>変数名をエスケープすることも可能で、変数名の前に <code class="language-plaintext highlighter-rouge">\$foo</code> や <code class="language-plaintext highlighter-rouge">\${foo}</code> のように <code class="language-plaintext highlighter-rouge">\</code> をつけます。
+こうすると、この例はそれぞれ <code class="language-plaintext highlighter-rouge">$foo</code>、<code class="language-plaintext highlighter-rouge">${foo}</code> という文字列そのものとして解釈されます。</p>
 
-<p>記述例 （<code class="highlighter-rouge">#</code> の後に変数解釈した結果を表示）</p>
+<p>記述例 （<code class="language-plaintext highlighter-rouge">#</code> の後に変数解釈した結果を表示）</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
 ENV foo /bar
 WORKDIR ${foo}   # WORKDIR /bar
 ADD . $foo       # ADD . /bar
 COPY \$foo /quux # COPY $foo /quux
 </code></pre></div></div>
 
-<p>環境変数は、以下に示す <code class="highlighter-rouge">Dockerfile</code> 内の命令においてサポートされます。</p>
+<p>環境変数は、以下に示す <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の命令においてサポートされます。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">ADD</code></li>
-  <li><code class="highlighter-rouge">COPY</code></li>
-  <li><code class="highlighter-rouge">ENV</code></li>
-  <li><code class="highlighter-rouge">EXPOSE</code></li>
-  <li><code class="highlighter-rouge">FROM</code></li>
-  <li><code class="highlighter-rouge">LABEL</code></li>
-  <li><code class="highlighter-rouge">STOPSIGNAL</code></li>
-  <li><code class="highlighter-rouge">USER</code></li>
-  <li><code class="highlighter-rouge">VOLUME</code></li>
-  <li><code class="highlighter-rouge">WORKDIR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ADD</code></li>
+  <li><code class="language-plaintext highlighter-rouge">COPY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ENV</code></li>
+  <li><code class="language-plaintext highlighter-rouge">EXPOSE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">FROM</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LABEL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">STOPSIGNAL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">USER</code></li>
+  <li><code class="language-plaintext highlighter-rouge">VOLUME</code></li>
+  <li><code class="language-plaintext highlighter-rouge">WORKDIR</code></li>
 </ul>
 
 <p>さらに以下もサポートされます。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">ONBUILD</code> （上記のサポート対象の命令と組み合わせて用いる場合）</li>
+  <li><code class="language-plaintext highlighter-rouge">ONBUILD</code> （上記のサポート対象の命令と組み合わせて用いる場合）</li>
 </ul>
 
 <blockquote>
   <p><strong>メモ</strong>:
-Docker バージョン 1.4 より以前では <code class="highlighter-rouge">ONBUILD</code> 命令は環境変数をサポートしていません。
+Docker バージョン 1.4 より以前では <code class="language-plaintext highlighter-rouge">ONBUILD</code> 命令は環境変数をサポートしていません。
 一覧にあげた命令との組み合わせで用いる場合も同様です。</p>
 </blockquote>
 
 <p>環境変数の置換は、命令全体の中で個々の変数ごとに同一の値が用いられます。
 これを説明するために以下の例を見ます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV abc=hello
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV abc=hello
 ENV abc=bye def=$abc
 ENV ghi=$abc
 </code></pre></div></div>
 
-<p>この結果、<code class="highlighter-rouge">def</code> は <code class="highlighter-rouge">hello</code> になります。
-<code class="highlighter-rouge">bye</code> ではありません。
-しかし <code class="highlighter-rouge">ghi</code> は <code class="highlighter-rouge">bye</code> になります。
-<code class="highlighter-rouge">ghi</code> を設定している行は、<code class="highlighter-rouge">abc</code> に <code class="highlighter-rouge">bye</code> を設定している命令と同一箇所ではないからです。</p>
+<p>この結果、<code class="language-plaintext highlighter-rouge">def</code> は <code class="language-plaintext highlighter-rouge">hello</code> になります。
+<code class="language-plaintext highlighter-rouge">bye</code> ではありません。
+しかし <code class="language-plaintext highlighter-rouge">ghi</code> は <code class="language-plaintext highlighter-rouge">bye</code> になります。
+<code class="language-plaintext highlighter-rouge">ghi</code> を設定している行は、<code class="language-plaintext highlighter-rouge">abc</code> に <code class="language-plaintext highlighter-rouge">bye</code> を設定している命令と同一箇所ではないからです。</p>
 
 <h2 id="dockerignore-file">.dockerignore ファイル</h2>
 
-<p>Docker の CLI によってコンテキストが Docker デーモンに送信される前には、コンテキストのルートディレクトリの <code class="highlighter-rouge">.dockerignore</code> というファイルが参照されます。
+<p>Docker の CLI によってコンテキストが Docker デーモンに送信される前には、コンテキストのルートディレクトリの <code class="language-plaintext highlighter-rouge">.dockerignore</code> というファイルが参照されます。
 このファイルが存在したら、CLI はそこに記述されたパターンにマッチするようなファイルやディレクトリを除外した上で、コンテキストを扱います。
-必要もないのに、巨大なファイルや取り扱い注意のファイルを不用意に送信してしまうことが避けられ、<code class="highlighter-rouge">ADD</code> や <code class="highlighter-rouge">COPY</code> を使ってイメージに間違って送信してしまうことを防ぐことができます。</p>
+必要もないのに、巨大なファイルや取り扱い注意のファイルを不用意に送信してしまうことが避けられ、<code class="language-plaintext highlighter-rouge">ADD</code> や <code class="language-plaintext highlighter-rouge">COPY</code> を使ってイメージに間違って送信してしまうことを防ぐことができます。</p>
 
-<p>CLI は <code class="highlighter-rouge">.dockerignore</code> ファイルを各行ごとに区切られた設定一覧として捉えます。
+<p>CLI は <code class="language-plaintext highlighter-rouge">.dockerignore</code> ファイルを各行ごとに区切られた設定一覧として捉えます。
 ちょうど Unix シェルにおけるファイルグロブ（glob）と同様です。
 マッチング処理の都合上、コンテキストのルートは、ワーキングディレクトリとルートディレクトリの双方であるものとしてみなされます。
-たとえばパターンとして <code class="highlighter-rouge">/foo/bar</code> と <code class="highlighter-rouge">foo/bar</code> があったとすると、<code class="highlighter-rouge">PATH</code> 上であればサブディレクトリ <code class="highlighter-rouge">foo</code> 内、<code class="highlighter-rouge">URL</code> であればその git レポジトリ内の、いずれも <code class="highlighter-rouge">bar</code> というファイルまたはディレクトリを除外します。
+たとえばパターンとして <code class="language-plaintext highlighter-rouge">/foo/bar</code> と <code class="language-plaintext highlighter-rouge">foo/bar</code> があったとすると、<code class="language-plaintext highlighter-rouge">PATH</code> 上であればサブディレクトリ <code class="language-plaintext highlighter-rouge">foo</code> 内、<code class="language-plaintext highlighter-rouge">URL</code> であればその git レポジトリ内の、いずれも <code class="language-plaintext highlighter-rouge">bar</code> というファイルまたはディレクトリを除外します。
 その他のものについては除外対象としません。</p>
 
-<p><code class="highlighter-rouge">.dockerignore</code> ファイルの各行頭の第 1 カラムめに <code class="highlighter-rouge">#</code> があれば、その行はコメントとみなされて、CLI による解釈が行われず無視されます。</p>
+<p><code class="language-plaintext highlighter-rouge">.dockerignore</code> ファイルの各行頭の第 1 カラムめに <code class="language-plaintext highlighter-rouge">#</code> があれば、その行はコメントとみなされて、CLI による解釈が行われず無視されます。</p>
 
-<p><code class="highlighter-rouge">.dockerignore</code> ファイルの例を示します。</p>
+<p><code class="language-plaintext highlighter-rouge">.dockerignore</code> ファイルの例を示します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># comment
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># comment
 */temp*
 */*/temp*
 temp?
@@ -588,131 +588,131 @@ temp?
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge"># comment</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge"># comment</code></td>
       <td style="text-align: left">無視されます。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">*/temp*</code></td>
-      <td style="text-align: left">ルートディレクトリの直下にあるサブディレクトリ内にて、<code class="highlighter-rouge">temp</code> で始まる名称のファイルまたはディレクトリすべてを除外します。たとえば通常のファイル <code class="highlighter-rouge">/somedir/temporary.txt</code> は除外されます。ディレクトリ <code class="highlighter-rouge">/somedir/temp</code> も同様です。</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">*/temp*</code></td>
+      <td style="text-align: left">ルートディレクトリの直下にあるサブディレクトリ内にて、<code class="language-plaintext highlighter-rouge">temp</code> で始まる名称のファイルまたはディレクトリすべてを除外します。たとえば通常のファイル <code class="language-plaintext highlighter-rouge">/somedir/temporary.txt</code> は除外されます。ディレクトリ <code class="language-plaintext highlighter-rouge">/somedir/temp</code> も同様です。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">*/*/temp*</code></td>
-      <td style="text-align: left">ルートから 2 階層下までのサブディレクトリ内にて、<code class="highlighter-rouge">temp</code> で始まる名称のファイルまたはディレクトリすべてを除外します。たとえば <code class="highlighter-rouge">/somedir/subdir/temporary.txt</code> は除外されます。</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">*/*/temp*</code></td>
+      <td style="text-align: left">ルートから 2 階層下までのサブディレクトリ内にて、<code class="language-plaintext highlighter-rouge">temp</code> で始まる名称のファイルまたはディレクトリすべてを除外します。たとえば <code class="language-plaintext highlighter-rouge">/somedir/subdir/temporary.txt</code> は除外されます。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">temp?</code></td>
-      <td style="text-align: left">ルートディレクトリにあるファイルやディレクトリであって、<code class="highlighter-rouge">temp</code> にもう 1 文字ついた名前のものを除外します。たとえば <code class="highlighter-rouge">/tempa</code> や <code class="highlighter-rouge">/tempb</code> が除外されます。</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">temp?</code></td>
+      <td style="text-align: left">ルートディレクトリにあるファイルやディレクトリであって、<code class="language-plaintext highlighter-rouge">temp</code> にもう 1 文字ついた名前のものを除外します。たとえば <code class="language-plaintext highlighter-rouge">/tempa</code> や <code class="language-plaintext highlighter-rouge">/tempb</code> が除外されます。</td>
     </tr>
   </tbody>
 </table>
 
 <p>パターンマッチングには Go 言語の <a href="http://golang.org/pkg/path/filepath#Match">filepath.Match</a> ルールが用いられています。
-マッチングの前処理として、文字列前後のホワイトスペースは取り除かれ、Go 言語の <a href="http://golang.org/pkg/path/filepath/#Clean">filepath.Clean</a> によって <code class="highlighter-rouge">.</code> と <code class="highlighter-rouge">..</code> が除外されます。
+マッチングの前処理として、文字列前後のホワイトスペースは取り除かれ、Go 言語の <a href="http://golang.org/pkg/path/filepath/#Clean">filepath.Clean</a> によって <code class="language-plaintext highlighter-rouge">.</code> と <code class="language-plaintext highlighter-rouge">..</code> が除外されます。
 前処理を行った後の空行は無視されます。</p>
 
-<p>Docker では Go 言語の filepath.Match ルールを拡張して、特別なワイルドカード文字列 <code class="highlighter-rouge">**</code> をサポートしています。
+<p>Docker では Go 言語の filepath.Match ルールを拡張して、特別なワイルドカード文字列 <code class="language-plaintext highlighter-rouge">**</code> をサポートしています。
 これは複数のディレクトリ（ゼロ個を含む）にマッチします。
-たとえば <code class="highlighter-rouge">**/*.go</code> は、ファイル名が <code class="highlighter-rouge">.go</code> で終わるものであって、どのサブディレクトリにあるものであってもマッチします。
+たとえば <code class="language-plaintext highlighter-rouge">**/*.go</code> は、ファイル名が <code class="language-plaintext highlighter-rouge">.go</code> で終わるものであって、どのサブディレクトリにあるものであってもマッチします。
 ビルドコンテキストのルートも含まれます。</p>
 
-<p>行頭を感嘆符 <code class="highlighter-rouge">!</code> で書き始めると、それは除外に対しての例外を指定するものとなります。
-以下の <code class="highlighter-rouge">.dockerignore</code> の例はこれを用いるものです。</p>
+<p>行頭を感嘆符 <code class="language-plaintext highlighter-rouge">!</code> で書き始めると、それは除外に対しての例外を指定するものとなります。
+以下の <code class="language-plaintext highlighter-rouge">.dockerignore</code> の例はこれを用いるものです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    *.md
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    *.md
     !README.md
 </code></pre></div></div>
 
-<p>マークダウンファイルがすべてコンテキストから除外されますが、<code class="highlighter-rouge">README.md</code> だけは<strong>除外しません</strong>。</p>
+<p>マークダウンファイルがすべてコンテキストから除外されますが、<code class="language-plaintext highlighter-rouge">README.md</code> だけは<strong>除外しません</strong>。</p>
 
-<p><code class="highlighter-rouge">!</code> による例外ルールは、それを記述した位置によって処理に影響します。
-特定のファイルが含まれるのか除外されるのかは、そのファイルがマッチする <code class="highlighter-rouge">.dockerignore</code> 内の最終の行によって決まります。
+<p><code class="language-plaintext highlighter-rouge">!</code> による例外ルールは、それを記述した位置によって処理に影響します。
+特定のファイルが含まれるのか除外されるのかは、そのファイルがマッチする <code class="language-plaintext highlighter-rouge">.dockerignore</code> 内の最終の行によって決まります。
 以下の例を考えてみます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    *.md
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    *.md
     !README*.md
     README-secret.md
 </code></pre></div></div>
 
 <p>コンテキストにあるマークダウンファイルはすべて除外されます。
-例外として README ファイルは含まれることになりますが、ただし <code class="highlighter-rouge">README-secret.md</code> は除外されます。</p>
+例外として README ファイルは含まれることになりますが、ただし <code class="language-plaintext highlighter-rouge">README-secret.md</code> は除外されます。</p>
 
 <p>次の例も見てみます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    *.md
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    *.md
     README-secret.md
     !README*.md
 </code></pre></div></div>
 
 <p>README ファイルはすべて含まれます。
 2 行めは意味をなしていません。
-なぜなら <code class="highlighter-rouge">!README*.md</code> には <code class="highlighter-rouge">README-secret.md</code> がマッチすることになり、しかも <code class="highlighter-rouge">!README*.md</code> が最後に記述されているからです。</p>
+なぜなら <code class="language-plaintext highlighter-rouge">!README*.md</code> には <code class="language-plaintext highlighter-rouge">README-secret.md</code> がマッチすることになり、しかも <code class="language-plaintext highlighter-rouge">!README*.md</code> が最後に記述されているからです。</p>
 
-<p><code class="highlighter-rouge">.dockerignore</code> ファイルを使って <code class="highlighter-rouge">Dockerfile</code> や <code class="highlighter-rouge">.dockerignore</code> ファイルを除外することもできます。
+<p><code class="language-plaintext highlighter-rouge">.dockerignore</code> ファイルを使って <code class="language-plaintext highlighter-rouge">Dockerfile</code> や <code class="language-plaintext highlighter-rouge">.dockerignore</code> ファイルを除外することもできます。
 除外したとしてもこの 2 つのファイルはデーモンに送信されます。
 この 2 つのファイルはデーモンの処理に必要なものであるからです。
-ただし <code class="highlighter-rouge">ADD</code> 命令や <code class="highlighter-rouge">COPY</code> 命令では、この 2 つのファイルはイメージにコピーされません。</p>
+ただし <code class="language-plaintext highlighter-rouge">ADD</code> 命令や <code class="language-plaintext highlighter-rouge">COPY</code> 命令では、この 2 つのファイルはイメージにコピーされません。</p>
 
 <p>除外したいファイルを指定するのではなく、含めたいファイルを指定したい場合があります。
-これを実現するには、冒頭のマッチングパターンとして <code class="highlighter-rouge">*</code> を指定します。
-そしてこれに続けて、例外となるパターンを <code class="highlighter-rouge">!</code> を使って指定します。</p>
+これを実現するには、冒頭のマッチングパターンとして <code class="language-plaintext highlighter-rouge">*</code> を指定します。
+そしてこれに続けて、例外となるパターンを <code class="language-plaintext highlighter-rouge">!</code> を使って指定します。</p>
 
-<p><strong>メモ</strong>: これまでの開発経緯によりパターン <code class="highlighter-rouge">.</code> は無視されます。</p>
+<p><strong>メモ</strong>: これまでの開発経緯によりパターン <code class="language-plaintext highlighter-rouge">.</code> は無視されます。</p>
 
 <h2 id="from">FROM</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt; [AS &lt;name&gt;]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt; [AS &lt;name&gt;]
 </code></pre></div></div>
 
 <p>または</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[:&lt;tag&gt;] [AS &lt;name&gt;]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[:&lt;tag&gt;] [AS &lt;name&gt;]
 </code></pre></div></div>
 
 <p>または</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[@&lt;digest&gt;] [AS &lt;name&gt;]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[@&lt;digest&gt;] [AS &lt;name&gt;]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">FROM</code> 命令は、イメージビルドのための処理ステージを初期化し、<a href="../../glossary/#base-image"><em>ベースイメージ</em></a>を設定します。後続の命令がこれに続きます。
-このため、正しい <code class="highlighter-rouge">Dockerfile</code> は <code class="highlighter-rouge">FROM</code> 命令から始めなければなりません。
+<p><code class="language-plaintext highlighter-rouge">FROM</code> 命令は、イメージビルドのための処理ステージを初期化し、<a href="../../glossary/#base-image"><em>ベースイメージ</em></a>を設定します。後続の命令がこれに続きます。
+このため、正しい <code class="language-plaintext highlighter-rouge">Dockerfile</code> は <code class="language-plaintext highlighter-rouge">FROM</code> 命令から始めなければなりません。
 ベースイメージは正しいものであれば何でも構いません。
 簡単に取り掛かりたいときは、<a href="https://docs.docker.com/engine/tutorials/dockerrepos/"><em>公開リポジトリ</em></a>から<strong>イメージを取得</strong>します。</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">Dockerfile</code> 内にて <code class="highlighter-rouge">ARG</code> は、<code class="highlighter-rouge">FROM</code> よりも前に記述できる唯一の命令です。
+    <p><code class="language-plaintext highlighter-rouge">Dockerfile</code> 内にて <code class="language-plaintext highlighter-rouge">ARG</code> は、<code class="language-plaintext highlighter-rouge">FROM</code> よりも前に記述できる唯一の命令です。
 <a href="#understand-how-arg-and-from-interact">ARG と FROM の関連について</a>を参照してください。</p>
   </li>
   <li>
-    <p>1 つの <code class="highlighter-rouge">Dockerfile</code> 内に <code class="highlighter-rouge">FROM</code> を複数記述することが可能です。
+    <p>1 つの <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内に <code class="language-plaintext highlighter-rouge">FROM</code> を複数記述することが可能です。
 これは複数のイメージを生成するため、あるいは 1 つのビルドステージを使って依存イメージをビルドするために行います。
-各 <code class="highlighter-rouge">FROM</code> 命令までのコミットによって出力される最終のイメージ ID は書き留めておいてください。
-個々の <code class="highlighter-rouge">FROM</code> 命令は、それ以前の命令により作り出された状態を何も変更しません。</p>
+各 <code class="language-plaintext highlighter-rouge">FROM</code> 命令までのコミットによって出力される最終のイメージ ID は書き留めておいてください。
+個々の <code class="language-plaintext highlighter-rouge">FROM</code> 命令は、それ以前の命令により作り出された状態を何も変更しません。</p>
   </li>
   <li>
     <p>オプションとして、新たなビルドステージに対しては名前をつけることができます。
-これは <code class="highlighter-rouge">FROM</code> 命令の <code class="highlighter-rouge">AS name</code> により行います。
-この名前は後続の <code class="highlighter-rouge">FROM</code> や <code class="highlighter-rouge">COPY --from=&lt;name|index&gt;</code> 命令において利用することができ、このビルドステージにおいてビルドされたイメージを参照します。</p>
+これは <code class="language-plaintext highlighter-rouge">FROM</code> 命令の <code class="language-plaintext highlighter-rouge">AS name</code> により行います。
+この名前は後続の <code class="language-plaintext highlighter-rouge">FROM</code> や <code class="language-plaintext highlighter-rouge">COPY --from=&lt;name|index&gt;</code> 命令において利用することができ、このビルドステージにおいてビルドされたイメージを参照します。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">tag</code> と <code class="highlighter-rouge">digest</code> の設定はオプションです。
-これを省略した場合、デフォルトである <code class="highlighter-rouge">latest</code> タグが指定されたものとして扱われます。
-<code class="highlighter-rouge">tag</code> の値に合致するものがなければ、エラーが返されます。</p>
+    <p><code class="language-plaintext highlighter-rouge">tag</code> と <code class="language-plaintext highlighter-rouge">digest</code> の設定はオプションです。
+これを省略した場合、デフォルトである <code class="language-plaintext highlighter-rouge">latest</code> タグが指定されたものとして扱われます。
+<code class="language-plaintext highlighter-rouge">tag</code> の値に合致するものがなければ、エラーが返されます。</p>
   </li>
 </ul>
 
-<p>The optional <code class="highlighter-rouge">--platform</code> flag can be used to specify the platform of the image
-in case <code class="highlighter-rouge">FROM</code> references a multi-platform image. For example, <code class="highlighter-rouge">linux/amd64</code>,
-<code class="highlighter-rouge">linux/arm64</code>, or <code class="highlighter-rouge">windows/amd64</code>. By default, the target platform of the build
+<p>The optional <code class="language-plaintext highlighter-rouge">--platform</code> flag can be used to specify the platform of the image
+in case <code class="language-plaintext highlighter-rouge">FROM</code> references a multi-platform image. For example, <code class="language-plaintext highlighter-rouge">linux/amd64</code>,
+<code class="language-plaintext highlighter-rouge">linux/arm64</code>, or <code class="language-plaintext highlighter-rouge">windows/amd64</code>. By default, the target platform of the build
 request is used. Global build arguments can be used in the value of this flag,
 for example <a href="#automatic-platform-args-in-the-global-scope">automatic platform ARGs</a>
-allow you to force a stage to native build platform (<code class="highlighter-rouge">--platform=$BUILDPLATFORM</code>),
+allow you to force a stage to native build platform (<code class="language-plaintext highlighter-rouge">--platform=$BUILDPLATFORM</code>),
 and use it to cross-compile to the target platform inside the stage.</p>
 
 <h3 id="understand-how-arg-and-from-interact">ARG と FROM の関連について</h3>
 
-<p><code class="highlighter-rouge">FROM</code> 命令では、<code class="highlighter-rouge">ARG</code> 命令によって宣言された変数すべてを参照できます。
-この <code class="highlighter-rouge">ARG</code> 命令は、初出の <code class="highlighter-rouge">FROM</code> 命令よりも前に記述します。</p>
+<p><code class="language-plaintext highlighter-rouge">FROM</code> 命令では、<code class="language-plaintext highlighter-rouge">ARG</code> 命令によって宣言された変数すべてを参照できます。
+この <code class="language-plaintext highlighter-rouge">ARG</code> 命令は、初出の <code class="language-plaintext highlighter-rouge">FROM</code> 命令よりも前に記述します。</p>
 
 <pre><code class="language-Dockerfile">ARG  CODE_VERSION=latest
 FROM base:${CODE_VERSION}
@@ -722,9 +722,9 @@ FROM extras:${CODE_VERSION}
 CMD  /code/run-extras
 </code></pre>
 
-<p><code class="highlighter-rouge">FROM</code> よりも前に宣言されている <code class="highlighter-rouge">ARG</code> は、ビルドステージ内に含まれるものではありません。
-したがって <code class="highlighter-rouge">FROM</code> 以降の命令において利用することはできません。
-初出の <code class="highlighter-rouge">FROM</code> よりも前に宣言された <code class="highlighter-rouge">ARG</code> の値を利用するには、ビルドステージ内において <code class="highlighter-rouge">ARG</code> 命令を、値を設定することなく利用します。</p>
+<p><code class="language-plaintext highlighter-rouge">FROM</code> よりも前に宣言されている <code class="language-plaintext highlighter-rouge">ARG</code> は、ビルドステージ内に含まれるものではありません。
+したがって <code class="language-plaintext highlighter-rouge">FROM</code> 以降の命令において利用することはできません。
+初出の <code class="language-plaintext highlighter-rouge">FROM</code> よりも前に宣言された <code class="language-plaintext highlighter-rouge">ARG</code> の値を利用するには、ビルドステージ内において <code class="language-plaintext highlighter-rouge">ARG</code> 命令を、値を設定することなく利用します。</p>
 
 <pre><code class="language-Dockerfile">ARG VERSION=latest
 FROM busybox:$VERSION
@@ -737,39 +737,39 @@ RUN echo $VERSION &gt; image_version
 <p>RUN には 2 つの書式があります。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">RUN &lt;command&gt;</code> （シェル形式、コマンドはシェル内で実行される、シェルとはデフォルトで Linux なら <code class="highlighter-rouge">/bin/sh -c</code>、Windows なら <code class="highlighter-rouge">cmd /S /C</code>）</li>
-  <li><code class="highlighter-rouge">RUN ["executable", "param1", "param2"]</code> （exec 形式）</li>
+  <li><code class="language-plaintext highlighter-rouge">RUN &lt;command&gt;</code> （シェル形式、コマンドはシェル内で実行される、シェルとはデフォルトで Linux なら <code class="language-plaintext highlighter-rouge">/bin/sh -c</code>、Windows なら <code class="language-plaintext highlighter-rouge">cmd /S /C</code>）</li>
+  <li><code class="language-plaintext highlighter-rouge">RUN ["executable", "param1", "param2"]</code> （exec 形式）</li>
 </ul>
 
-<p><code class="highlighter-rouge">RUN</code> 命令は、現在のイメージの最上位の最新レイヤーにおいて、あらゆるコマンドを実行します。
+<p><code class="language-plaintext highlighter-rouge">RUN</code> 命令は、現在のイメージの最上位の最新レイヤーにおいて、あらゆるコマンドを実行します。
 そして処理結果を確定します。
-結果が確定したイメージは、<code class="highlighter-rouge">Dockerfile</code> の次のステップにおいて利用されていきます。</p>
+結果が確定したイメージは、<code class="language-plaintext highlighter-rouge">Dockerfile</code> の次のステップにおいて利用されていきます。</p>
 
-<p><code class="highlighter-rouge">RUN</code> 命令をレイヤー上にて扱い、処理確定を行うこの方法は、Docker の根本的な考え方に基づいています。
+<p><code class="language-plaintext highlighter-rouge">RUN</code> 命令をレイヤー上にて扱い、処理確定を行うこの方法は、Docker の根本的な考え方に基づいています。
 この際の処理確定は容易なものであって、イメージの処理履歴上のどの時点からでもコンテナーを復元できます。
 この様子はソース管理システムに似ています。</p>
 
 <p>exec 形式は、シェル文字列が置換されないようにします。
-そして <code class="highlighter-rouge">RUN</code> の実行にあたっては、特定のシェル変数を含まないベースイメージを用います。</p>
+そして <code class="language-plaintext highlighter-rouge">RUN</code> の実行にあたっては、特定のシェル変数を含まないベースイメージを用います。</p>
 
-<p>シェル形式にて用いるデフォルトのシェルを変更するには <code class="highlighter-rouge">SHELL</code> コマンドを使います。</p>
+<p>シェル形式にて用いるデフォルトのシェルを変更するには <code class="language-plaintext highlighter-rouge">SHELL</code> コマンドを使います。</p>
 
-<p>シェル形式においては <code class="highlighter-rouge">\</code>（バックスラッシュ）を用いて、1 つの RUN 命令を次行にわたって記述することができます。
+<p>シェル形式においては <code class="language-plaintext highlighter-rouge">\</code>（バックスラッシュ）を用いて、1 つの RUN 命令を次行にわたって記述することができます。
 たとえば以下のような 2 行があるとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN /bin/bash -c 'source $HOME/.bashrc; \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN /bin/bash -c 'source $HOME/.bashrc; \
 echo $HOME'
 </code></pre></div></div>
 
 <p>上は 2 行を合わせて、以下の 1 行としたものと同じです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
 </code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong>:
 ‘/bin/sh’ 以外の別のシェルを利用する場合は、exec 形式を用いて、目的とするシェルを引数に与えます。
-たとえば <code class="highlighter-rouge">RUN ["/bin/bash", "-c", "echo hello"]</code> とします。</p>
+たとえば <code class="language-plaintext highlighter-rouge">RUN ["/bin/bash", "-c", "echo hello"]</code> とします。</p>
 </blockquote>
 
 <blockquote>
@@ -782,9 +782,9 @@ exec 形式は JSON 配列として解釈されます。
   <p><strong>メモ</strong>:
 シェル形式とは違って exec 形式はコマンドシェルを起動しません。
 これはつまり、ごく普通のシェル処理とはならないということです。
-たとえば <code class="highlighter-rouge">RUN [ "echo", "$HOME" ]</code> を実行したとすると、<code class="highlighter-rouge">$HOME</code> の変数置換は行われません。
+たとえば <code class="language-plaintext highlighter-rouge">RUN [ "echo", "$HOME" ]</code> を実行したとすると、<code class="language-plaintext highlighter-rouge">$HOME</code> の変数置換は行われません。
 シェル処理が行われるようにしたければ、シェル形式を利用するか、あるいはシェルを直接実行するようにします。
-たとえば <code class="highlighter-rouge">RUN [ "sh", "-c", "echo $HOME" ]</code> とします。
+たとえば <code class="language-plaintext highlighter-rouge">RUN [ "sh", "-c", "echo $HOME" ]</code> とします。
 exec 形式によってシェルを直接起動した場合、シェル形式の場合でも同じですが、変数置換を行うのはシェルであって、docker ではありません。</p>
 </blockquote>
 
@@ -792,18 +792,18 @@ exec 形式によってシェルを直接起動した場合、シェル形式の
   <p><strong>メモ</strong>:
 JSON 記述において、バックスラッシュはエスケープする必要があります。
 特に関係してくるのは Windows であり、Windows ではパスセパレーターにバックスラッシュを用います。
-<code class="highlighter-rouge">RUN ["c:\windows\system32\tasklist.exe"]</code> という記述例は、適正な JSON 記述ではないことになるため、シェル形式として扱われ、思いどおりの動作はせずエラーとなります。
-正しくは <code class="highlighter-rouge">RUN ["c:\\windows\\system32\\tasklist.exe"]</code> と記述します。</p>
+<code class="language-plaintext highlighter-rouge">RUN ["c:\windows\system32\tasklist.exe"]</code> という記述例は、適正な JSON 記述ではないことになるため、シェル形式として扱われ、思いどおりの動作はせずエラーとなります。
+正しくは <code class="language-plaintext highlighter-rouge">RUN ["c:\\windows\\system32\\tasklist.exe"]</code> と記述します。</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">RUN</code> 命令に対するキャッシュは、次のビルドの際、その無効化は自動的に行われません。
-<code class="highlighter-rouge">RUN apt-get dist-upgrade -y</code> のような命令に対するキャッシュは、次のビルドの際にも再利用されます。
-<code class="highlighter-rouge">RUN</code> 命令に対するキャッシュを無効にするためには <code class="highlighter-rouge">--no-cache</code> フラグを利用します。
-たとえば <code class="highlighter-rouge">docker build --no-cache</code> とします。</p>
+<p><code class="language-plaintext highlighter-rouge">RUN</code> 命令に対するキャッシュは、次のビルドの際、その無効化は自動的に行われません。
+<code class="language-plaintext highlighter-rouge">RUN apt-get dist-upgrade -y</code> のような命令に対するキャッシュは、次のビルドの際にも再利用されます。
+<code class="language-plaintext highlighter-rouge">RUN</code> 命令に対するキャッシュを無効にするためには <code class="language-plaintext highlighter-rouge">--no-cache</code> フラグを利用します。
+たとえば <code class="language-plaintext highlighter-rouge">docker build --no-cache</code> とします。</p>
 
-<p>詳しくは <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code> ベストプラクティスガイド</a>を参照してください。</p>
+<p>詳しくは <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="language-plaintext highlighter-rouge">Dockerfile</code> ベストプラクティスガイド</a>を参照してください。</p>
 
-<p><code class="highlighter-rouge">RUN</code> 命令に対するキャッシュは <code class="highlighter-rouge">ADD</code> 命令を使うと無効になります。
+<p><code class="language-plaintext highlighter-rouge">RUN</code> 命令に対するキャッシュは <code class="language-plaintext highlighter-rouge">ADD</code> 命令を使うと無効になります。
 詳しくは<a href="#add">以下</a>を参照してください。</p>
 
 <h3 id="known-issues-run">（RUN に関する）既知の問題</h3>
@@ -811,35 +811,35 @@ JSON 記述において、バックスラッシュはエスケープする必要
 <ul>
   <li>
     <p><a href="https://github.com/docker/docker/issues/783">Issue 783</a> はファイルパーミッションに関する問題を取り上げていて、ファイルシステムに AUFS を用いている場合に発生します。
-たとえば <code class="highlighter-rouge">rm</code> によってファイルを削除しようとしたときに、これが発生する場合があります。</p>
+たとえば <code class="language-plaintext highlighter-rouge">rm</code> によってファイルを削除しようとしたときに、これが発生する場合があります。</p>
 
-    <p>aufs の最新バージョンを利用するシステム（つまりマウントオプション <code class="highlighter-rouge">dirperm1</code> を設定可能なシステム）の場合、docker はレイヤーに対して <code class="highlighter-rouge">dirperm1</code> オプションをつけてマウントすることで、この問題を自動的に解消するように試みます。
-<code class="highlighter-rouge">dirperm1</code> オプションに関する詳細は <a href="https://github.com/sfjro/aufs3-linux/tree/aufs3.18/Documentation/filesystems/aufs"><code class="highlighter-rouge">aufs</code> の man ページ</a> を参照してください。</p>
+    <p>aufs の最新バージョンを利用するシステム（つまりマウントオプション <code class="language-plaintext highlighter-rouge">dirperm1</code> を設定可能なシステム）の場合、docker はレイヤーに対して <code class="language-plaintext highlighter-rouge">dirperm1</code> オプションをつけてマウントすることで、この問題を自動的に解消するように試みます。
+<code class="language-plaintext highlighter-rouge">dirperm1</code> オプションに関する詳細は <a href="https://github.com/sfjro/aufs3-linux/tree/aufs3.18/Documentation/filesystems/aufs"><code class="language-plaintext highlighter-rouge">aufs</code> の man ページ</a> を参照してください。</p>
 
-    <p><code class="highlighter-rouge">dirperm1</code> をサポートしていないシステムの場合は、issue に示される回避方法を参照してください。</p>
+    <p><code class="language-plaintext highlighter-rouge">dirperm1</code> をサポートしていないシステムの場合は、issue に示される回避方法を参照してください。</p>
   </li>
 </ul>
 
 <h2 id="cmd">CMD</h2>
 
-<p><code class="highlighter-rouge">CMD</code> には 3 つの書式があります。</p>
+<p><code class="language-plaintext highlighter-rouge">CMD</code> には 3 つの書式があります。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">CMD ["executable","param1","param2"]</code> （exec 形式、この形式が推奨される）</li>
-  <li><code class="highlighter-rouge">CMD ["param1","param2"]</code> （<code class="highlighter-rouge">ENTRYPOINT</code>のデフォルトパラメーターとして）</li>
-  <li><code class="highlighter-rouge">CMD command param1 param2</code> （シェル形式）</li>
+  <li><code class="language-plaintext highlighter-rouge">CMD ["executable","param1","param2"]</code> （exec 形式、この形式が推奨される）</li>
+  <li><code class="language-plaintext highlighter-rouge">CMD ["param1","param2"]</code> （<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>のデフォルトパラメーターとして）</li>
+  <li><code class="language-plaintext highlighter-rouge">CMD command param1 param2</code> （シェル形式）</li>
 </ul>
 
-<p><code class="highlighter-rouge">Dockerfile</code> では <code class="highlighter-rouge">CMD</code> 命令を 1 つしか記述できません。
-仮に複数の <code class="highlighter-rouge">CMD</code> を記述しても、最後の <code class="highlighter-rouge">CMD</code> 命令しか処理されません。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> では <code class="language-plaintext highlighter-rouge">CMD</code> 命令を 1 つしか記述できません。
+仮に複数の <code class="language-plaintext highlighter-rouge">CMD</code> を記述しても、最後の <code class="language-plaintext highlighter-rouge">CMD</code> 命令しか処理されません。</p>
 
-<p><strong><code class="highlighter-rouge">CMD</code> 命令の主目的は、コンテナーの実行時のデフォルト処理を設定することです。</strong>
+<p><strong><code class="language-plaintext highlighter-rouge">CMD</code> 命令の主目的は、コンテナーの実行時のデフォルト処理を設定することです。</strong>
 この処理設定においては、実行モジュールを含める場合と、実行モジュールを省略する場合があります。
-省略する場合は <code class="highlighter-rouge">ENTRYPOINT</code> 命令を合わせて指定する必要があります。</p>
+省略する場合は <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> 命令を合わせて指定する必要があります。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">ENTRYPOINT</code> 命令に対するデフォルト引数を設定する目的で <code class="highlighter-rouge">CMD</code> 命令を用いる場合、<code class="highlighter-rouge">CMD</code> と <code class="highlighter-rouge">ENTRYPOINT</code> の両命令とも、JSON 配列形式で指定しなければなりません。</p>
+<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> 命令に対するデフォルト引数を設定する目的で <code class="language-plaintext highlighter-rouge">CMD</code> 命令を用いる場合、<code class="language-plaintext highlighter-rouge">CMD</code> と <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の両命令とも、JSON 配列形式で指定しなければなりません。</p>
 </blockquote>
 
 <blockquote>
@@ -852,53 +852,53 @@ exec 形式は JSON 配列として解釈されます。
   <p><strong>メモ</strong>:
 シェル形式とは違って exec 形式はコマンドシェルを起動しません。
 これはつまり、ごく普通のシェル処理とはならないということです。
-たとえば <code class="highlighter-rouge">RUN [ "echo", "$HOME" ]</code> を実行したとすると、<code class="highlighter-rouge">$HOME</code> の変数置換は行われません。
+たとえば <code class="language-plaintext highlighter-rouge">RUN [ "echo", "$HOME" ]</code> を実行したとすると、<code class="language-plaintext highlighter-rouge">$HOME</code> の変数置換は行われません。
 シェル処理が行われるようにしたければ、シェル形式を利用するか、あるいはシェルを直接実行するようにします。
-たとえば <code class="highlighter-rouge">RUN [ "sh", "-c", "echo $HOME" ]</code> とします。
+たとえば <code class="language-plaintext highlighter-rouge">RUN [ "sh", "-c", "echo $HOME" ]</code> とします。
 exec 形式によってシェルを直接起動した場合、シェル形式の場合でも同じですが、変数置換を行うのはシェルであって、docker ではありません。</p>
 </blockquote>
 
-<p>シェル形式または exec 形式を用いる場合、<code class="highlighter-rouge">CMD</code> 命令は、イメージが起動されたときに実行するコマンドを指定します。</p>
+<p>シェル形式または exec 形式を用いる場合、<code class="language-plaintext highlighter-rouge">CMD</code> 命令は、イメージが起動されたときに実行するコマンドを指定します。</p>
 
-<p>シェル形式を用いる場合、<code class="highlighter-rouge">&lt;command&gt;</code> は <code class="highlighter-rouge">/bin/sh -c</code> の中で実行されます。</p>
+<p>シェル形式を用いる場合、<code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> は <code class="language-plaintext highlighter-rouge">/bin/sh -c</code> の中で実行されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
 CMD echo "This is a test." | wc -
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">&lt;command&gt;</code><strong>をシェル実行することなく実行</strong>したい場合は、そのコマンドを JSON 配列として表現し、またそのコマンドの実行モジュールへのフルパスを指定しなければなりません。
-<strong>この配列書式は <code class="highlighter-rouge">CMD</code> において推奨される記述です。</strong>
+<p><code class="language-plaintext highlighter-rouge">&lt;command&gt;</code><strong>をシェル実行することなく実行</strong>したい場合は、そのコマンドを JSON 配列として表現し、またそのコマンドの実行モジュールへのフルパスを指定しなければなりません。
+<strong>この配列書式は <code class="language-plaintext highlighter-rouge">CMD</code> において推奨される記述です。</strong>
 パラメーターを追加する必要がある場合は、配列内にて文字列として記述します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
 CMD ["/usr/bin/wc","--help"]
 </code></pre></div></div>
 
-<p>コンテナーにおいて毎回同じ実行モジュールを起動させたい場合は、<code class="highlighter-rouge">CMD</code> 命令と <code class="highlighter-rouge">ENTRYPOINT</code> 命令を合わせて利用することを考えてみてください。
+<p>コンテナーにおいて毎回同じ実行モジュールを起動させたい場合は、<code class="language-plaintext highlighter-rouge">CMD</code> 命令と <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> 命令を合わせて利用することを考えてみてください。
 <a href="#entrypoint"><em>ENTRYPOINT</em></a> を参照のこと。</p>
 
-<p><code class="highlighter-rouge">docker run</code> において引数を指定することで、<code class="highlighter-rouge">CMD</code> 命令に指定されたデフォルトを上書きすることができます。</p>
+<p><code class="language-plaintext highlighter-rouge">docker run</code> において引数を指定することで、<code class="language-plaintext highlighter-rouge">CMD</code> 命令に指定されたデフォルトを上書きすることができます。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">RUN</code> と <code class="highlighter-rouge">CMD</code> を混同しないようにしてください。
-<code class="highlighter-rouge">RUN</code> は実際にコマンドが実行されて、結果を確定させます。
-一方 <code class="highlighter-rouge">CMD</code> はイメージビルド時には何も実行しません。
+<code class="language-plaintext highlighter-rouge">RUN</code> と <code class="language-plaintext highlighter-rouge">CMD</code> を混同しないようにしてください。
+<code class="language-plaintext highlighter-rouge">RUN</code> は実際にコマンドが実行されて、結果を確定させます。
+一方 <code class="language-plaintext highlighter-rouge">CMD</code> はイメージビルド時には何も実行しません。
 イメージに対して実行する予定のコマンドを指示するものです。</p>
 </blockquote>
 
 <h2 id="label">LABEL</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LABEL &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; ...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LABEL &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; ...
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">LABEL</code> 命令はイメージに対してメタデータを追加します。
-<code class="highlighter-rouge">LABEL</code> ではキーバリューペアによる記述を行います。
+<p><code class="language-plaintext highlighter-rouge">LABEL</code> 命令はイメージに対してメタデータを追加します。
+<code class="language-plaintext highlighter-rouge">LABEL</code> ではキーバリューペアによる記述を行います。
 値に空白などを含める場合は、クォートとバックスラッシュを用います。
 これはコマンドライン処理において行うことと同じです。
 以下に簡単な例を示します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LABEL "com.example.vendor"="ACME Incorporated"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LABEL "com.example.vendor"="ACME Incorporated"
 LABEL com.example.label-with-value="foo"
 LABEL version="1.0"
 LABEL description="This text illustrates \
@@ -919,12 +919,12 @@ Docker 1.10 以前では 1 行で記述することにより、ビルドされ�
       other="value3"
 </code></pre>
 
-<p>ベースイメージまたは親イメージ（<code class="highlighter-rouge">FROM</code> 命令で指定されたイメージ）に含まれるラベルは、ビルドしようとしているイメージに継承されます。
+<p>ベースイメージまたは親イメージ（<code class="language-plaintext highlighter-rouge">FROM</code> 命令で指定されたイメージ）に含まれるラベルは、ビルドしようとしているイメージに継承されます。
 同一のラベル設定が存在していて、異なる値が設定されていた場合は、最終的に設定される値によって古い値は上書きされます。</p>
 
-<p>イメージのラベルを参照するには <code class="highlighter-rouge">docker inspect</code> コマンドを用います。</p>
+<p>イメージのラベルを参照するには <code class="language-plaintext highlighter-rouge">docker inspect</code> コマンドを用います。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Labels": {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Labels": {
     "com.example.vendor": "ACME Incorporated"
     "com.example.label-with-value": "foo",
     "version": "1.0",
@@ -937,36 +937,36 @@ Docker 1.10 以前では 1 行で記述することにより、ビルドされ�
 
 <h2 id="maintainer-deprecated">MAINTAINER （廃止予定）</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MAINTAINER &lt;name&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MAINTAINER &lt;name&gt;
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">MAINTAINER</code> 命令は、ビルドされるイメージの <em>Author</em> フィールドを設定します。
-<code class="highlighter-rouge">LABEL</code> 命令を使った方がこれよりも柔軟に対応できるため、<code class="highlighter-rouge">LABEL</code> を使うようにします。
-そうすれば必要なメタデータとしてどのようにでも設定ができて、<code class="highlighter-rouge">docker inspect</code> を用いて簡単に参照することができます。
-<code class="highlighter-rouge">MAINTAINER</code> フィールドに相当するラベルを作るには、以下のようにします。</p>
+<p><code class="language-plaintext highlighter-rouge">MAINTAINER</code> 命令は、ビルドされるイメージの <em>Author</em> フィールドを設定します。
+<code class="language-plaintext highlighter-rouge">LABEL</code> 命令を使った方がこれよりも柔軟に対応できるため、<code class="language-plaintext highlighter-rouge">LABEL</code> を使うようにします。
+そうすれば必要なメタデータとしてどのようにでも設定ができて、<code class="language-plaintext highlighter-rouge">docker inspect</code> を用いて簡単に参照することができます。
+<code class="language-plaintext highlighter-rouge">MAINTAINER</code> フィールドに相当するラベルを作るには、以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LABEL maintainer="SvenDowideit@home.org.au"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LABEL maintainer="SvenDowideit@home.org.au"
 </code></pre></div></div>
 
-<p>こうすれば <code class="highlighter-rouge">docker inspect</code> によってラベルをすべて確認することができます。</p>
+<p>こうすれば <code class="language-plaintext highlighter-rouge">docker inspect</code> によってラベルをすべて確認することができます。</p>
 
 <h2 id="expose">EXPOSE</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EXPOSE &lt;port&gt; [&lt;port&gt;/&lt;protocol&gt;...]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EXPOSE &lt;port&gt; [&lt;port&gt;/&lt;protocol&gt;...]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">EXPOSE</code> 命令はコンテナーの実行時に、所定ネットワーク上のどのポートをリッスンするかを指定します。
+<p><code class="language-plaintext highlighter-rouge">EXPOSE</code> 命令はコンテナーの実行時に、所定ネットワーク上のどのポートをリッスンするかを指定します。
 リッスンするポートは TCP、UDP のいずれでも指定可能です。
 プロトコルが指定されていない場合は、デフォルトとして TCP が採用されます。</p>
 
-<p><code class="highlighter-rouge">EXPOSE</code> 命令は実際にはポートを公開するものではありません。
+<p><code class="language-plaintext highlighter-rouge">EXPOSE</code> 命令は実際にはポートを公開するものではありません。
 これはイメージの作成者とコンテナーの実行者との間で取り交わす、言ってみればメモです。
 どのポートを公開するつもりでいるのかを表わしています。
-コンテナーが実行されるときに実際にポートを公開するには、<code class="highlighter-rouge">docker run</code> の <code class="highlighter-rouge">-p</code> フラグを利用します。
+コンテナーが実行されるときに実際にポートを公開するには、<code class="language-plaintext highlighter-rouge">docker run</code> の <code class="language-plaintext highlighter-rouge">-p</code> フラグを利用します。
 これによって複数のポートへの割り当てが行われます。
-あるいは <code class="highlighter-rouge">-P</code> フラグを用いると、すべてのポートを公開し、ホストの高位のポートに割り当てます。</p>
+あるいは <code class="language-plaintext highlighter-rouge">-P</code> フラグを用いると、すべてのポートを公開し、ホストの高位のポートに割り当てます。</p>
 
-<p>デフォルトで <code class="highlighter-rouge">EXPOSE</code> は TCP を想定していますが、UDP を指定することもできます。</p>
+<p>デフォルトで <code class="language-plaintext highlighter-rouge">EXPOSE</code> は TCP を想定していますが、UDP を指定することもできます。</p>
 
 <pre><code class="language-Dockerfile">EXPOSE 80/udp
 </code></pre>
@@ -977,68 +977,68 @@ Docker 1.10 以前では 1 行で記述することにより、ビルドされ�
 EXPOSE 80/udp
 </code></pre>
 
-<p>これに対して <code class="highlighter-rouge">docker run</code> に <code class="highlighter-rouge">-P</code> をつけて実行すると、一度は TCP のポートが開き、また別のときに UDP のポートが開きます。
-<code class="highlighter-rouge">-P</code> を用いると、ホスト上の高位のポートが順次（ephemeralに）割り当てられます。
+<p>これに対して <code class="language-plaintext highlighter-rouge">docker run</code> に <code class="language-plaintext highlighter-rouge">-P</code> をつけて実行すると、一度は TCP のポートが開き、また別のときに UDP のポートが開きます。
+<code class="language-plaintext highlighter-rouge">-P</code> を用いると、ホスト上の高位のポートが順次（ephemeralに）割り当てられます。
 したがって TCP と UDP のポートは同一とはなりません。</p>
 
-<p><code class="highlighter-rouge">EXPOSE</code> による設定を行っていても、実行時に <code class="highlighter-rouge">-p</code> フラグを使って上書き指定することができます。
+<p><code class="language-plaintext highlighter-rouge">EXPOSE</code> による設定を行っていても、実行時に <code class="language-plaintext highlighter-rouge">-p</code> フラグを使って上書き指定することができます。
 たとえば以下のとおりです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-p</span> 80:80/tcp <span class="nt">-p</span> 80:80/udp ...
 </code></pre></div></div>
 
 <p>ホストシステム上においてポート転送を行う場合は、<a href="/docs.docker.jp.onthefly/engine/reference/run/#expose-incoming-ports">-P フラグの利用</a>を参照してください。
-<code class="highlighter-rouge">docker network</code> コマンドでは、コンテナー間の通信を行うネットワークの生成をサポートします。
+<code class="language-plaintext highlighter-rouge">docker network</code> コマンドでは、コンテナー間の通信を行うネットワークの生成をサポートします。
 このネットワークでは公開するポートの指定を必要としません。
 なぜならネットワークに接続されるコンテナーは、ポートとは関係なく互いに通信ができるようになっています。
 詳しくは<a href="https://docs.docker.com/engine/userguide/networking/">ネットワーク機能の概要</a>を参照してください。</p>
 
 <h2 id="env">ENV</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV &lt;key&gt; &lt;value&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV &lt;key&gt; &lt;value&gt;
 ENV &lt;key&gt;=&lt;value&gt; ...
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ENV</code> 命令は、環境変数 <code class="highlighter-rouge">&lt;key&gt;</code> に <code class="highlighter-rouge">&lt;value&gt;</code> という値を設定します。
+<p><code class="language-plaintext highlighter-rouge">ENV</code> 命令は、環境変数 <code class="language-plaintext highlighter-rouge">&lt;key&gt;</code> に <code class="language-plaintext highlighter-rouge">&lt;value&gt;</code> という値を設定します。
 ビルドステージ内の後続命令の環境において、環境変数の値は維持されます。
 また、いろいろと<a href="#environment-replacement">インラインにて変更</a>することもできます。</p>
 
-<p><code class="highlighter-rouge">ENV</code> 命令には 2 つの書式があります。
-1 つめの書式は <code class="highlighter-rouge">ENV &lt;key&gt; &lt;value&gt;</code> です。
+<p><code class="language-plaintext highlighter-rouge">ENV</code> 命令には 2 つの書式があります。
+1 つめの書式は <code class="language-plaintext highlighter-rouge">ENV &lt;key&gt; &lt;value&gt;</code> です。
 1 つの変数に対して 1 つの値を設定します。
-全体の文字列のうち、最初の空白文字以降がすべて <code class="highlighter-rouge">&lt;value&gt;</code> として扱われます。
+全体の文字列のうち、最初の空白文字以降がすべて <code class="language-plaintext highlighter-rouge">&lt;value&gt;</code> として扱われます。
 そこにはホワイトスペース文字を含んでいて構いません。
 この値は他の環境変数において用いられることも考えられます。
 したがってクォート文字は、エスケープされていなければ無視されます。</p>
 
-<p>2 つめの書式は <code class="highlighter-rouge">ENV &lt;key&gt;=&lt;value&gt; ...</code> です。
+<p>2 つめの書式は <code class="language-plaintext highlighter-rouge">ENV &lt;key&gt;=&lt;value&gt; ...</code> です。
 これは一度に複数の値を設定できる形です。
 この書式では等号（=）を用いており、1 つめの書式とは異なります。
 コマンドライン上の解析で行われることと同じように、クォートやバックスラッシュを使えば、値の中に空白などを含めることができます。</p>
 
 <p>たとえば以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV myName="John Doe" myDog=Rex\ The\ Dog \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV myName="John Doe" myDog=Rex\ The\ Dog \
     myCat=fluffy
 </code></pre></div></div>
 
 <p>そして以下です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV myName John Doe
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV myName John Doe
 ENV myDog Rex The Dog
 ENV myCat fluffy
 </code></pre></div></div>
 
 <p>上の 2 つは最終的に同じ結果をイメージに書き入れます。</p>
 
-<p><code class="highlighter-rouge">ENV</code> を用いて設定された環境変数は、そのイメージから実行されたコンテナーであれば維持されます。
-環境変数の参照は <code class="highlighter-rouge">docker inspect</code> を用い、値の変更は <code class="highlighter-rouge">docker run --env &lt;key&gt;=&lt;value&gt;</code> により行うことができます。</p>
+<p><code class="language-plaintext highlighter-rouge">ENV</code> を用いて設定された環境変数は、そのイメージから実行されたコンテナーであれば維持されます。
+環境変数の参照は <code class="language-plaintext highlighter-rouge">docker inspect</code> を用い、値の変更は <code class="language-plaintext highlighter-rouge">docker run --env &lt;key&gt;=&lt;value&gt;</code> により行うことができます。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
 環境変数が維持されると、思わぬ副作用を引き起こすことがあります。
-たとえば <code class="highlighter-rouge">ENV DEBIAN_FRONTEND noninteractive</code> という設定を行なっていると、Debian ベースのイメージにおいて apt-get を使う際には混乱を起こすかもしれません。
-1 つのコマンドには 1 つの値のみを設定するには <code class="highlighter-rouge">RUN &lt;key&gt;=&lt;value&gt; &lt;command&gt;</code> を実行します。</p>
+たとえば <code class="language-plaintext highlighter-rouge">ENV DEBIAN_FRONTEND noninteractive</code> という設定を行なっていると、Debian ベースのイメージにおいて apt-get を使う際には混乱を起こすかもしれません。
+1 つのコマンドには 1 つの値のみを設定するには <code class="language-plaintext highlighter-rouge">RUN &lt;key&gt;=&lt;value&gt; &lt;command&gt;</code> を実行します。</p>
 </blockquote>
 
 <h2 id="add">ADD</h2>
@@ -1046,101 +1046,101 @@ ENV myCat fluffy
 <p>ADD には 2 つの書式があります。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">ADD [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</code></li>
-  <li><code class="highlighter-rouge">ADD [--chown=&lt;user&gt;:&lt;group&gt;] ["&lt;src&gt;",... "&lt;dest&gt;"]</code> （この書式はホワイトスペースを含むパスを用いる場合に必要）</li>
+  <li><code class="language-plaintext highlighter-rouge">ADD [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ADD [--chown=&lt;user&gt;:&lt;group&gt;] ["&lt;src&gt;",... "&lt;dest&gt;"]</code> （この書式はホワイトスペースを含むパスを用いる場合に必要）</li>
 </ul>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">--chown</code> による機能は Linux コンテナーをビルドする Dockerfile においてのみサポートされるものであり、Windows コンテナーに対しては動作しません。
+<code class="language-plaintext highlighter-rouge">--chown</code> による機能は Linux コンテナーをビルドする Dockerfile においてのみサポートされるものであり、Windows コンテナーに対しては動作しません。
 Linux と Windows の間で、ユーザーやグループの所有権という考え方が共有されないためです。
-この機能では <code class="highlighter-rouge">/etc/passwd</code> や <code class="highlighter-rouge">/etc/group</code> を使って、ユーザーやグループの名前を ID に変換するため、この機能が実現できるのは Linux OS をベースとするコンテナーに限定されます。</p>
+この機能では <code class="language-plaintext highlighter-rouge">/etc/passwd</code> や <code class="language-plaintext highlighter-rouge">/etc/group</code> を使って、ユーザーやグループの名前を ID に変換するため、この機能が実現できるのは Linux OS をベースとするコンテナーに限定されます。</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">ADD</code> 命令は <code class="highlighter-rouge">&lt;src&gt;</code> に示されるファイル、ディレクトリ、リモートファイル URL をコピーして、イメージ内のファイルシステム上のパス <code class="highlighter-rouge">&lt;dest&gt;</code> にこれらを加えます。</p>
+<p><code class="language-plaintext highlighter-rouge">ADD</code> 命令は <code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> に示されるファイル、ディレクトリ、リモートファイル URL をコピーして、イメージ内のファイルシステム上のパス <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> にこれらを加えます。</p>
 
-<p><code class="highlighter-rouge">&lt;src&gt;</code> には複数のソースを指定することが可能です。
+<p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> には複数のソースを指定することが可能です。
 ソースとしてファイルあるいはディレクトリが指定されている場合、そのパスはビルドコンテキストからの相対パスとして解釈されます。</p>
 
-<p><code class="highlighter-rouge">&lt;src&gt;</code> にはワイルドカードを含めることができます。
+<p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> にはワイルドカードを含めることができます。
 その場合、マッチング処理は Go 言語の <a href="http://golang.org/pkg/path/filepath#Match">filepath.Match</a> ルールに従って行われます。
 記述例は以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD hom* /mydir/        # "hom" で始まるファイルすべてを追加します。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD hom* /mydir/        # "hom" で始まるファイルすべてを追加します。
 ADD hom?.txt /mydir/    # ? は 1 文字にマッチします。たとえば "home.txt" にマッチします。
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">&lt;dest&gt;</code> は絶対パスか、あるいは <code class="highlighter-rouge">WORKDIR</code> からの相対パスにより指定します。
+<p><code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> は絶対パスか、あるいは <code class="language-plaintext highlighter-rouge">WORKDIR</code> からの相対パスにより指定します。
 対象としているコンテナー内において、そのパスに対してソースがコピーされます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD test relativeDir/          # "test" を `WORKDIR`/relativeDir/ へ追加します。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD test relativeDir/          # "test" を `WORKDIR`/relativeDir/ へ追加します。
 ADD test /absoluteDir/         # "test" を /absoluteDir/ へ追加します。
 </code></pre></div></div>
 
-<p>ファイルやディレクトリを追加する際に、その名前の中に（<code class="highlighter-rouge">[</code> や <code class="highlighter-rouge">]</code> のような）特殊な文字が含まれている場合は、Go 言語のルールに従ってパス名をエスケープする必要があります。
+<p>ファイルやディレクトリを追加する際に、その名前の中に（<code class="language-plaintext highlighter-rouge">[</code> や <code class="language-plaintext highlighter-rouge">]</code> のような）特殊な文字が含まれている場合は、Go 言語のルールに従ってパス名をエスケープする必要があります。
 これはパターンマッチングとして扱われないようにするものです。
-たとえば <code class="highlighter-rouge">arr[0].txt</code> というファイルを追加する場合は、以下のようにします。</p>
+たとえば <code class="language-plaintext highlighter-rouge">arr[0].txt</code> というファイルを追加する場合は、以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD arr[[]0].txt /mydir/    # "arr[0].txt" というファイルを /mydir/ へコピーします。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD arr[[]0].txt /mydir/    # "arr[0].txt" というファイルを /mydir/ へコピーします。
 </code></pre></div></div>
 
 <p>ADD されるファイルやディレクトリの UID と GID は、すべて 0 として生成されます。
-ただしオプションとして <code class="highlighter-rouge">--chown</code> フラグを用いると、引数に与えたユーザー空間、グループ名、あるいは UID と GID の組み合わせによる指定が可能になり、特定の所有権を満たした ADD を行うことができます。
-<code class="highlighter-rouge">--chown</code> フラグの書式には、ユーザー名とグループ名を文字列で指定するか、あるいは直接 UID、GID の数値をそれぞれに指定することができます。
+ただしオプションとして <code class="language-plaintext highlighter-rouge">--chown</code> フラグを用いると、引数に与えたユーザー空間、グループ名、あるいは UID と GID の組み合わせによる指定が可能になり、特定の所有権を満たした ADD を行うことができます。
+<code class="language-plaintext highlighter-rouge">--chown</code> フラグの書式には、ユーザー名とグループ名を文字列で指定するか、あるいは直接 UID、GID の数値をそれぞれに指定することができます。
 グループ名を指定せずにユーザー名を指定した場合、あるいは GID を指定せずに UID を指定した場合は、GID と同じ値が UID に対して用いられます。
-ユーザー名やグループ名が指定された場合、コンテナー内の root ファイルシステム配下にある <code class="highlighter-rouge">/etc/passwd</code> ファイルや <code class="highlighter-rouge">/etc/group</code> ファイルが参照されて、名前から UID、GID への変換が行われます。
-以下の例は <code class="highlighter-rouge">--chown</code> フラグの正しい利用の仕方を示しています。</p>
+ユーザー名やグループ名が指定された場合、コンテナー内の root ファイルシステム配下にある <code class="language-plaintext highlighter-rouge">/etc/passwd</code> ファイルや <code class="language-plaintext highlighter-rouge">/etc/group</code> ファイルが参照されて、名前から UID、GID への変換が行われます。
+以下の例は <code class="language-plaintext highlighter-rouge">--chown</code> フラグの正しい利用の仕方を示しています。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD --chown=55:mygroup files* /somedir/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD --chown=55:mygroup files* /somedir/
 ADD --chown=bin files* /somedir/
 ADD --chown=1 files* /somedir/
 ADD --chown=10:11 files* /somedir/
 </code></pre></div></div>
 
-<p>コンテナー内の root ファイルシステムに <code class="highlighter-rouge">/etc/passwd</code>や <code class="highlighter-rouge">/etc/group</code> が存在せず、その状態で <code class="highlighter-rouge">--chown</code> フラグが用いられた場合、<code class="highlighter-rouge">ADD</code> 命令の処理のところでビルドが失敗します。
+<p>コンテナー内の root ファイルシステムに <code class="language-plaintext highlighter-rouge">/etc/passwd</code>や <code class="language-plaintext highlighter-rouge">/etc/group</code> が存在せず、その状態で <code class="language-plaintext highlighter-rouge">--chown</code> フラグが用いられた場合、<code class="language-plaintext highlighter-rouge">ADD</code> 命令の処理のところでビルドが失敗します。
 数値により ID を指定した場合は、上のファイルを探すことが不要となるため、コンテナーの root ファイルシステム内に上のファイルがあってもなくても、関係がなくなります。</p>
 
-<p><code class="highlighter-rouge">&lt;src&gt;</code> にリモートファイル URL が指定された場合、コピー先のパーミッションは 600 となります。
-リモートファイルの取得時に HTTP の <code class="highlighter-rouge">Last-Modified</code> ヘッダーが含まれている場合は、ヘッダーに書かれたタイムスタンプを利用して、コピー先ファイルの <code class="highlighter-rouge">mtime</code> を設定します。
-ただし <code class="highlighter-rouge">ADD</code> によって処理されるファイルが何であっても、ファイルが変更されたかどうか、そしてキャッシュを更新するべきかどうかは <code class="highlighter-rouge">mtime</code> によって判断されるわけではありません。</p>
+<p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> にリモートファイル URL が指定された場合、コピー先のパーミッションは 600 となります。
+リモートファイルの取得時に HTTP の <code class="language-plaintext highlighter-rouge">Last-Modified</code> ヘッダーが含まれている場合は、ヘッダーに書かれたタイムスタンプを利用して、コピー先ファイルの <code class="language-plaintext highlighter-rouge">mtime</code> を設定します。
+ただし <code class="language-plaintext highlighter-rouge">ADD</code> によって処理されるファイルが何であっても、ファイルが変更されたかどうか、そしてキャッシュを更新するべきかどうかは <code class="language-plaintext highlighter-rouge">mtime</code> によって判断されるわけではありません。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">Dockerfile</code> を標準入力から生成する場合（<code class="highlighter-rouge">docker build - &lt; somefile</code>）は、ビルドコンテキストが存在していないことになるので、<code class="highlighter-rouge">ADD</code> 命令には URL の指定しか利用できません。
-また標準入力から圧縮アーカイブを入力する場合（<code class="highlighter-rouge">docker build - &lt; archive.tar.gz</code>）は、そのアーカイブのルートとその配下のファイルが、ビルド時のコンテキストとなります。</p>
+<code class="language-plaintext highlighter-rouge">Dockerfile</code> を標準入力から生成する場合（<code class="language-plaintext highlighter-rouge">docker build - &lt; somefile</code>）は、ビルドコンテキストが存在していないことになるので、<code class="language-plaintext highlighter-rouge">ADD</code> 命令には URL の指定しか利用できません。
+また標準入力から圧縮アーカイブを入力する場合（<code class="language-plaintext highlighter-rouge">docker build - &lt; archive.tar.gz</code>）は、そのアーカイブのルートとその配下のファイルが、ビルド時のコンテキストとなります。</p>
 </blockquote>
 
 <blockquote>
   <p><strong>メモ</strong>:
-URL ファイルが認証によって保護されている場合は、<code class="highlighter-rouge">RUN wget</code> や <code class="highlighter-rouge">RUN curl</code> あるいは同様のツールをコンテナー内から利用する必要があります。<code class="highlighter-rouge">ADD</code> 命令は認証処理をサポートしていません。</p>
+URL ファイルが認証によって保護されている場合は、<code class="language-plaintext highlighter-rouge">RUN wget</code> や <code class="language-plaintext highlighter-rouge">RUN curl</code> あるいは同様のツールをコンテナー内から利用する必要があります。<code class="language-plaintext highlighter-rouge">ADD</code> 命令は認証処理をサポートしていません。</p>
 </blockquote>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">ADD</code> 命令の <code class="highlighter-rouge">&lt;src&gt;</code> の内容が変更されていた場合、その <code class="highlighter-rouge">ADD</code> 命令以降に続く命令のキャッシュはすべて無効化されます。
-そこには <code class="highlighter-rouge">RUN</code> 命令に対するキャッシュの無効化も含まれます。
-詳しくは <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code> ベストプラクティスガイド</a>を参照してください。</p>
+<code class="language-plaintext highlighter-rouge">ADD</code> 命令の <code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> の内容が変更されていた場合、その <code class="language-plaintext highlighter-rouge">ADD</code> 命令以降に続く命令のキャッシュはすべて無効化されます。
+そこには <code class="language-plaintext highlighter-rouge">RUN</code> 命令に対するキャッシュの無効化も含まれます。
+詳しくは <a href="https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/"><code class="language-plaintext highlighter-rouge">Dockerfile</code> ベストプラクティスガイド</a>を参照してください。</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">ADD</code> 命令は以下のルールに従います。</p>
+<p><code class="language-plaintext highlighter-rouge">ADD</code> 命令は以下のルールに従います。</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> のパス指定は、ビルド<strong>コンテキスト</strong>内でなければならないため、たとえば <code class="highlighter-rouge">ADD ../something /something</code> といったことはできません。
-<code class="highlighter-rouge">docker build</code> の最初の処理ステップでは、コンテキストディレクトリ（およびそのサブディレクトリ）を Docker デーモンに送信するところから始まるためです。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> のパス指定は、ビルド<strong>コンテキスト</strong>内でなければならないため、たとえば <code class="language-plaintext highlighter-rouge">ADD ../something /something</code> といったことはできません。
+<code class="language-plaintext highlighter-rouge">docker build</code> の最初の処理ステップでは、コンテキストディレクトリ（およびそのサブディレクトリ）を Docker デーモンに送信するところから始まるためです。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> が URL 指定であって <code class="highlighter-rouge">&lt;dest&gt;</code> の最後にスラッシュが指定されていない場合、そのファイルを URL よりダウンロードして <code class="highlighter-rouge">&lt;dest&gt;</code> にコピーします。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> が URL 指定であって <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> の最後にスラッシュが指定されていない場合、そのファイルを URL よりダウンロードして <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> にコピーします。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> が URL 指定であって <code class="highlighter-rouge">&lt;dest&gt;</code> の最後にスラッシュが指定された場合、ファイルが指定されたものとして扱われ、URL からダウンロードして <code class="highlighter-rouge">&lt;dest&gt;/&lt;filename&gt;</code> にコピーします。
-たとえば <code class="highlighter-rouge">ADD http://example.com/foobar /</code> という記述は <code class="highlighter-rouge">/foobar</code> というファイルを作ることになります。
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> が URL 指定であって <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> の最後にスラッシュが指定された場合、ファイルが指定されたものとして扱われ、URL からダウンロードして <code class="language-plaintext highlighter-rouge">&lt;dest&gt;/&lt;filename&gt;</code> にコピーします。
+たとえば <code class="language-plaintext highlighter-rouge">ADD http://example.com/foobar /</code> という記述は <code class="language-plaintext highlighter-rouge">/foobar</code> というファイルを作ることになります。
 URL には正確なパス指定が必要です。
 上の記述であれば、適切なファイルが見つけ出されます。
-（<code class="highlighter-rouge">http://example.com</code> では正しく動作しません。）</p>
+（<code class="language-plaintext highlighter-rouge">http://example.com</code> では正しく動作しません。）</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> がディレクトリである場合、そのディレクトリの内容がすべてコピーされます。
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> がディレクトリである場合、そのディレクトリの内容がすべてコピーされます。
 ファイルシステムのメタデータも含まれます。</p>
   </li>
 </ul>
@@ -1153,9 +1153,9 @@ URL には正確なパス指定が必要です。
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> がローカルにある tar アーカイブであって、認識できるフォーマット（gzip、bzip2、xz）である場合、1 つのディレクトリ配下に展開されます。
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> がローカルにある tar アーカイブであって、認識できるフォーマット（gzip、bzip2、xz）である場合、1 つのディレクトリ配下に展開されます。
 <strong>リモート</strong>URL の場合は展開<strong>されません</strong>。
-ディレクトリのコピーあるいは展開の仕方は、<code class="highlighter-rouge">tar -x</code> と同等です。
+ディレクトリのコピーあるいは展開の仕方は、<code class="language-plaintext highlighter-rouge">tar -x</code> と同等です。
 つまりその結果は以下の 2 つのいずれかに従います。</p>
 
     <ol>
@@ -1167,21 +1167,21 @@ URL には正確なパス指定が必要です。
       <p><strong>メモ</strong>:
 圧縮されたファイルが認識可能なフォーマットであるかどうかは、そのファイル内容に基づいて確認されます。
 名前によって判断されるわけではありません。
-たとえば、空のファイルの名前の末尾がたまたま <code class="highlighter-rouge">.tar.gz</code> となっていた場合、圧縮ファイルとして認識されないため、解凍に失敗したといったエラーメッセージは一切<strong>出ることはなく</strong>、このファイルはコピー先に向けて単純にコピーされるだけです。</p>
+たとえば、空のファイルの名前の末尾がたまたま <code class="language-plaintext highlighter-rouge">.tar.gz</code> となっていた場合、圧縮ファイルとして認識されないため、解凍に失敗したといったエラーメッセージは一切<strong>出ることはなく</strong>、このファイルはコピー先に向けて単純にコピーされるだけです。</p>
     </blockquote>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> が上に示す以外のファイルであった場合、メタデータも含めて個々にコピーされます。
-このとき <code class="highlighter-rouge">&lt;dest&gt;</code> が <code class="highlighter-rouge">/</code> で終わっていたらディレクトリとみなされるので、<code class="highlighter-rouge">&lt;src&gt;</code> の内容は <code class="highlighter-rouge">&lt;dest&gt;/base(&lt;src&gt;)</code> に書き込まれることになります。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> が上に示す以外のファイルであった場合、メタデータも含めて個々にコピーされます。
+このとき <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> が <code class="language-plaintext highlighter-rouge">/</code> で終わっていたらディレクトリとみなされるので、<code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> の内容は <code class="language-plaintext highlighter-rouge">&lt;dest&gt;/base(&lt;src&gt;)</code> に書き込まれることになります。</p>
   </li>
   <li>
-    <p>複数の <code class="highlighter-rouge">&lt;src&gt;</code> が直接指定された場合、あるいはワイルドカードを用いて指定された場合、<code class="highlighter-rouge">&lt;dest&gt;</code> はディレクトリとする必要があり、末尾には <code class="highlighter-rouge">/</code> をつけなければなりません。</p>
+    <p>複数の <code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> が直接指定された場合、あるいはワイルドカードを用いて指定された場合、<code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> はディレクトリとする必要があり、末尾には <code class="language-plaintext highlighter-rouge">/</code> をつけなければなりません。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;dest&gt;</code> の末尾にスラッシュがなかった場合、通常のファイルとみなされるため、<code class="highlighter-rouge">&lt;src&gt;</code> の内容が <code class="highlighter-rouge">&lt;dest&gt;</code> に書き込まれます。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> の末尾にスラッシュがなかった場合、通常のファイルとみなされるため、<code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> の内容が <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> に書き込まれます。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;dest&gt;</code> のパス内のディレクトリが存在しなかった場合、すべて生成されます。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> のパス内のディレクトリが存在しなかった場合、すべて生成されます。</p>
   </li>
 </ul>
 
@@ -1190,81 +1190,81 @@ URL には正確なパス指定が必要です。
 <p>COPY には 2 つの書式があります。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">COPY [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</code></li>
-  <li><code class="highlighter-rouge">COPY [--chown=&lt;user&gt;:&lt;group&gt;] ["&lt;src&gt;",... "&lt;dest&gt;"]</code> （パスにホワイトスペースを含む場合にこの書式が必要）</li>
+  <li><code class="language-plaintext highlighter-rouge">COPY [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</code></li>
+  <li><code class="language-plaintext highlighter-rouge">COPY [--chown=&lt;user&gt;:&lt;group&gt;] ["&lt;src&gt;",... "&lt;dest&gt;"]</code> （パスにホワイトスペースを含む場合にこの書式が必要）</li>
 </ul>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">--chown</code> による機能は Linux コンテナーをビルドする Dockerfile においてのみサポートされるものであり、Windows コンテナーに対しては動作しません。
+<code class="language-plaintext highlighter-rouge">--chown</code> による機能は Linux コンテナーをビルドする Dockerfile においてのみサポートされるものであり、Windows コンテナーに対しては動作しません。
 Linux と Windows の間で、ユーザーやグループの所有権という考え方が共有されないためです。
-この機能では <code class="highlighter-rouge">/etc/passwd</code> や <code class="highlighter-rouge">/etc/group</code> を使って、ユーザーやグループの名前を ID に変換するため、この機能が実現できるのは Linux OS をベースとするコンテナーに限定されます。</p>
+この機能では <code class="language-plaintext highlighter-rouge">/etc/passwd</code> や <code class="language-plaintext highlighter-rouge">/etc/group</code> を使って、ユーザーやグループの名前を ID に変換するため、この機能が実現できるのは Linux OS をベースとするコンテナーに限定されます。</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">COPY</code> 命令は <code class="highlighter-rouge">&lt;src&gt;</code> からファイルやディレクトリを新たにコピーして、コンテナー内のファイルシステムのパス <code class="highlighter-rouge">&lt;dest&gt;</code> に追加します。</p>
+<p><code class="language-plaintext highlighter-rouge">COPY</code> 命令は <code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> からファイルやディレクトリを新たにコピーして、コンテナー内のファイルシステムのパス <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> に追加します。</p>
 
-<p><code class="highlighter-rouge">&lt;src&gt;</code> には複数のソースを指定することが可能です。
+<p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> には複数のソースを指定することが可能です。
 ソースとしてファイルあるいはディレクトリが指定されている場合、そのパスはビルドコンテキストからの相対パスとして解釈されます。</p>
 
-<p><code class="highlighter-rouge">&lt;src&gt;</code> にはワイルドカードを含めることができます。
+<p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> にはワイルドカードを含めることができます。
 その場合、マッチング処理は Go 言語の <a href="http://golang.org/pkg/path/filepath#Match">filepath.Match</a> ルールに従って行われます。
 記述例は以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY hom* /mydir/        # "hom" で始まるファイルすべてを追加します。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY hom* /mydir/        # "hom" で始まるファイルすべてを追加します。
 COPY hom?.txt /mydir/    # ? は 1 文字にマッチします。たとえば "home.txt" にマッチします。
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">&lt;dest&gt;</code> は絶対パスか、あるいは <code class="highlighter-rouge">WORKDIR</code> からの相対パスにより指定します。
+<p><code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> は絶対パスか、あるいは <code class="language-plaintext highlighter-rouge">WORKDIR</code> からの相対パスにより指定します。
 対象としているコンテナー内において、そのパスに対してソースがコピーされます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY test relativeDir/   # "test" を `WORKDIR`/relativeDir/ へ追加します。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY test relativeDir/   # "test" を `WORKDIR`/relativeDir/ へ追加します。
 COPY test /absoluteDir/  # "test" を /absoluteDir/ へ追加します。
 </code></pre></div></div>
 
-<p>ファイルやディレクトリをコピーする際に、その名前の中に（<code class="highlighter-rouge">[</code> や <code class="highlighter-rouge">]</code> のような）特殊な文字が含まれている場合は、Go 言語のルールに従ってパス名をエスケープする必要があります。
+<p>ファイルやディレクトリをコピーする際に、その名前の中に（<code class="language-plaintext highlighter-rouge">[</code> や <code class="language-plaintext highlighter-rouge">]</code> のような）特殊な文字が含まれている場合は、Go 言語のルールに従ってパス名をエスケープする必要があります。
 これはパターンマッチングとして扱われないようにするものです。
-たとえば <code class="highlighter-rouge">arr[0].txt</code> というファイルをコピーする場合は、以下のようにします。</p>
+たとえば <code class="language-plaintext highlighter-rouge">arr[0].txt</code> というファイルをコピーする場合は、以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY arr[[]0].txt /mydir/    # "arr[0].txt" というファイルを /mydir/ へコピーします。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY arr[[]0].txt /mydir/    # "arr[0].txt" というファイルを /mydir/ へコピーします。
 </code></pre></div></div>
 
 <p>コピーされるファイルやディレクトリの UID と GID は、すべて 0 として生成されます。
-ただしオプションとして <code class="highlighter-rouge">--chown</code> フラグを用いると、引数に与えたユーザー空間、グループ名、あるいは UID と GID の組み合わせによる指定が可能になり、特定の所有権を満たしたコピーを行うことができます。
-<code class="highlighter-rouge">--chown</code> フラグの書式には、ユーザー名とグループ名を文字列で指定するか、あるいは直接 UID、GID の数値をそれぞれに指定することができます。
+ただしオプションとして <code class="language-plaintext highlighter-rouge">--chown</code> フラグを用いると、引数に与えたユーザー空間、グループ名、あるいは UID と GID の組み合わせによる指定が可能になり、特定の所有権を満たしたコピーを行うことができます。
+<code class="language-plaintext highlighter-rouge">--chown</code> フラグの書式には、ユーザー名とグループ名を文字列で指定するか、あるいは直接 UID、GID の数値をそれぞれに指定することができます。
 グループ名を指定せずにユーザー名を指定した場合、あるいは GID を指定せずに UID を指定した場合は、GID と同じ値が UID に対して用いられます。
-ユーザー名やグループ名が指定された場合、コンテナー内の root ファイルシステム配下にある <code class="highlighter-rouge">/etc/passwd</code> ファイルや <code class="highlighter-rouge">/etc/group</code> ファイルが参照されて、名前から UID、GID への変換が行われます。
-以下の例は <code class="highlighter-rouge">--chown</code> フラグの正しい利用の仕方を示しています。</p>
+ユーザー名やグループ名が指定された場合、コンテナー内の root ファイルシステム配下にある <code class="language-plaintext highlighter-rouge">/etc/passwd</code> ファイルや <code class="language-plaintext highlighter-rouge">/etc/group</code> ファイルが参照されて、名前から UID、GID への変換が行われます。
+以下の例は <code class="language-plaintext highlighter-rouge">--chown</code> フラグの正しい利用の仕方を示しています。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY --chown=55:mygroup files* /somedir/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COPY --chown=55:mygroup files* /somedir/
 COPY --chown=bin files* /somedir/
 COPY --chown=1 files* /somedir/
 COPY --chown=10:11 files* /somedir/
 </code></pre></div></div>
 
-<p>コンテナー内の root ファイルシステムに <code class="highlighter-rouge">/etc/passwd</code>や <code class="highlighter-rouge">/etc/group</code> が存在せず、その状態で <code class="highlighter-rouge">--chown</code> フラグが用いられた場合、<code class="highlighter-rouge">COPY</code> 命令の処理のところでビルドが失敗します。
+<p>コンテナー内の root ファイルシステムに <code class="language-plaintext highlighter-rouge">/etc/passwd</code>や <code class="language-plaintext highlighter-rouge">/etc/group</code> が存在せず、その状態で <code class="language-plaintext highlighter-rouge">--chown</code> フラグが用いられた場合、<code class="language-plaintext highlighter-rouge">COPY</code> 命令の処理のところでビルドが失敗します。
 数値により ID を指定した場合は、上のファイルを探すことが不要となるため、コンテナーの root ファイルシステム内に上のファイルがあってもなくても、関係がなくなります。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">Dockerfile</code> を標準入力から生成する場合（<code class="highlighter-rouge">docker build - &lt; somefile</code>）は、ビルドコンテキストが存在していないことになるので、<code class="highlighter-rouge">COPY</code> 命令は利用することができません。</p>
+<code class="language-plaintext highlighter-rouge">Dockerfile</code> を標準入力から生成する場合（<code class="language-plaintext highlighter-rouge">docker build - &lt; somefile</code>）は、ビルドコンテキストが存在していないことになるので、<code class="language-plaintext highlighter-rouge">COPY</code> 命令は利用することができません。</p>
 </blockquote>
 
-<p>オプションとして <code class="highlighter-rouge">COPY</code> にはフラグ <code class="highlighter-rouge">--from=&lt;name|index&gt;</code> があります。
-これは実行済のビルドステージ（<code class="highlighter-rouge">FROM .. AS &lt;name&gt;</code>により生成）におけるソースディレクトリを設定するものです。
+<p>オプションとして <code class="language-plaintext highlighter-rouge">COPY</code> にはフラグ <code class="language-plaintext highlighter-rouge">--from=&lt;name|index&gt;</code> があります。
+これは実行済のビルドステージ（<code class="language-plaintext highlighter-rouge">FROM .. AS &lt;name&gt;</code>により生成）におけるソースディレクトリを設定するものです。
 これがあると、ユーザーが指定したビルドコンテキストのかわりに、設定されたディレクトリが用いられます。
 このフラグは数値インデックスを指定することも可能です。
-この数値インデックスは、<code class="highlighter-rouge">FROM</code> 命令から始まる実行済のビルドステージすべてに割り当てられている値です。
+この数値インデックスは、<code class="language-plaintext highlighter-rouge">FROM</code> 命令から始まる実行済のビルドステージすべてに割り当てられている値です。
 指定されたビルドステージがその名前では見つけられなかった場合、指定された数値によって見つけ出します。</p>
 
-<p><code class="highlighter-rouge">COPY</code> 命令は以下のルールに従います。</p>
+<p><code class="language-plaintext highlighter-rouge">COPY</code> 命令は以下のルールに従います。</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> のパス指定は、ビルド<strong>コンテキスト</strong>内でなければならないため、たとえば <code class="highlighter-rouge">COPY ../something /something</code> といったことはできません。
-<code class="highlighter-rouge">docker build</code> の最初の処理ステップでは、コンテキストディレクトリ（およびそのサブディレクトリ）を Docker デーモンに送信するところから始まるためです。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> のパス指定は、ビルド<strong>コンテキスト</strong>内でなければならないため、たとえば <code class="language-plaintext highlighter-rouge">COPY ../something /something</code> といったことはできません。
+<code class="language-plaintext highlighter-rouge">docker build</code> の最初の処理ステップでは、コンテキストディレクトリ（およびそのサブディレクトリ）を Docker デーモンに送信するところから始まるためです。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> がディレクトリである場合、そのディレクトリ内の内容がすべてコピーされます。
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> がディレクトリである場合、そのディレクトリ内の内容がすべてコピーされます。
 ファイルシステムのメタデータも含まれます。</p>
   </li>
 </ul>
@@ -1277,17 +1277,17 @@ COPY --chown=10:11 files* /somedir/
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">&lt;src&gt;</code> が上に示す以外のファイルであった場合、メタデータも含めて個々にコピーされます。
-このとき <code class="highlighter-rouge">&lt;dest&gt;</code> が <code class="highlighter-rouge">/</code> で終わっていたらディレクトリとみなされるので、<code class="highlighter-rouge">&lt;src&gt;</code> の内容は <code class="highlighter-rouge">&lt;dest&gt;/base(&lt;src&gt;)</code> に書き込まれることになります。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> が上に示す以外のファイルであった場合、メタデータも含めて個々にコピーされます。
+このとき <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> が <code class="language-plaintext highlighter-rouge">/</code> で終わっていたらディレクトリとみなされるので、<code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> の内容は <code class="language-plaintext highlighter-rouge">&lt;dest&gt;/base(&lt;src&gt;)</code> に書き込まれることになります。</p>
   </li>
   <li>
-    <p>複数の <code class="highlighter-rouge">&lt;src&gt;</code> が直接指定された場合、あるいはワイルドカードを用いて指定された場合、<code class="highlighter-rouge">&lt;dest&gt;</code> はディレクトリとする必要があり、末尾には <code class="highlighter-rouge">/</code> をつけなければなりません。</p>
+    <p>複数の <code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> が直接指定された場合、あるいはワイルドカードを用いて指定された場合、<code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> はディレクトリとする必要があり、末尾には <code class="language-plaintext highlighter-rouge">/</code> をつけなければなりません。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;dest&gt;</code> の末尾にスラッシュがなかった場合、通常のファイルとみなされるため、<code class="highlighter-rouge">&lt;src&gt;</code> の内容が <code class="highlighter-rouge">&lt;dest&gt;</code> に書き込まれます。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> の末尾にスラッシュがなかった場合、通常のファイルとみなされるため、<code class="language-plaintext highlighter-rouge">&lt;src&gt;</code> の内容が <code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> に書き込まれます。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">&lt;dest&gt;</code> のパス内のディレクトリが存在しなかった場合、すべて生成されます。</p>
+    <p><code class="language-plaintext highlighter-rouge">&lt;dest&gt;</code> のパス内のディレクトリが存在しなかった場合、すべて生成されます。</p>
   </li>
 </ul>
 
@@ -1296,46 +1296,46 @@ COPY --chown=10:11 files* /somedir/
 <p>ENTRYPOINT には 2 つの書式があります。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">ENTRYPOINT ["executable", "param1", "param2"]</code>
+  <li><code class="language-plaintext highlighter-rouge">ENTRYPOINT ["executable", "param1", "param2"]</code>
 （exec 形式、この形式を推奨）</li>
-  <li><code class="highlighter-rouge">ENTRYPOINT command param1 param2</code>
+  <li><code class="language-plaintext highlighter-rouge">ENTRYPOINT command param1 param2</code>
 （シェル形式）</li>
 </ul>
 
-<p><code class="highlighter-rouge">ENTRYPOINT</code> は、コンテナーを実行モジュールのようにして実行する設定を行うものです。</p>
+<p><code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> は、コンテナーを実行モジュールのようにして実行する設定を行うものです。</p>
 
 <p>たとえば以下の例では、nginx をデフォルト設定で起動します。
 ポートは 80 番を利用します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -i -t --rm -p 80:80 nginx
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -i -t --rm -p 80:80 nginx
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker run &lt;image&gt;</code> に対するコマンドライン引数は、exec 形式の <code class="highlighter-rouge">ENTRYPOINT</code> の指定要素の後に付け加えられます。
-そして <code class="highlighter-rouge">CMD</code> において指定された引数は上書きされます。
+<p><code class="language-plaintext highlighter-rouge">docker run &lt;image&gt;</code> に対するコマンドライン引数は、exec 形式の <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の指定要素の後に付け加えられます。
+そして <code class="language-plaintext highlighter-rouge">CMD</code> において指定された引数は上書きされます。
 これはつまり、引数をエントリーポイントに受け渡すことができるということです。
-たとえば <code class="highlighter-rouge">docker run &lt;image&gt; -d</code> としたときの <code class="highlighter-rouge">-d</code> は、引数としてエントリーポイントに渡されます。
-<code class="highlighter-rouge">docker run --entrypoint</code> を利用すれば <code class="highlighter-rouge">ENTRYPOINT</code> の内容を上書きすることができます。</p>
+たとえば <code class="language-plaintext highlighter-rouge">docker run &lt;image&gt; -d</code> としたときの <code class="language-plaintext highlighter-rouge">-d</code> は、引数としてエントリーポイントに渡されます。
+<code class="language-plaintext highlighter-rouge">docker run --entrypoint</code> を利用すれば <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の内容を上書きすることができます。</p>
 
-<p>シェル形式では <code class="highlighter-rouge">CMD</code> や <code class="highlighter-rouge">run</code> によるコマンドライン引数は受け付けずに処理を行います。
-ただし <code class="highlighter-rouge">ENTRYPOINT</code> が <code class="highlighter-rouge">/bin/sh -c</code> のサブコマンドとして起動されるので、シグナルを送信しません。
-これはつまり、実行モジュールがコンテナーの <code class="highlighter-rouge">PID 1</code> にはならず、Unix のシグナルを受信しないということです。
-したがって <code class="highlighter-rouge">docker stop &lt;container&gt;</code> が実行されても、その実行モジュールは <code class="highlighter-rouge">SIGTERM</code> を受信しないことになります。</p>
+<p>シェル形式では <code class="language-plaintext highlighter-rouge">CMD</code> や <code class="language-plaintext highlighter-rouge">run</code> によるコマンドライン引数は受け付けずに処理を行います。
+ただし <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> が <code class="language-plaintext highlighter-rouge">/bin/sh -c</code> のサブコマンドとして起動されるので、シグナルを送信しません。
+これはつまり、実行モジュールがコンテナーの <code class="language-plaintext highlighter-rouge">PID 1</code> にはならず、Unix のシグナルを受信しないということです。
+したがって <code class="language-plaintext highlighter-rouge">docker stop &lt;container&gt;</code> が実行されても、その実行モジュールは <code class="language-plaintext highlighter-rouge">SIGTERM</code> を受信しないことになります。</p>
 
-<p><code class="highlighter-rouge">ENTRYPOINT</code> 命令は複数記述されていても、最後の命令しか処理されません。</p>
+<p><code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> 命令は複数記述されていても、最後の命令しか処理されません。</p>
 
 <h3 id="exec-form-entrypoint-example">exec 形式の ENTRYPOINT の例</h3>
 
-<p><code class="highlighter-rouge">ENTRYPOINT</code> の exec 形式は、デフォルト実行するコマンドと引数として、ほぼ変わることがないものを設定します。
-そして <code class="highlighter-rouge">CMD</code> 命令の 2 つある書式のいずれでもよいので、変更が必要になりそうな内容を追加で設定します。</p>
+<p><code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の exec 形式は、デフォルト実行するコマンドと引数として、ほぼ変わることがないものを設定します。
+そして <code class="language-plaintext highlighter-rouge">CMD</code> 命令の 2 つある書式のいずれでもよいので、変更が必要になりそうな内容を追加で設定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
 ENTRYPOINT ["top", "-b"]
 CMD ["-c"]
 </code></pre></div></div>
 
-<p>コンテナーを実行すると、ただ 1 つのプロセスとして <code class="highlighter-rouge">top</code> があるのがわかります。</p>
+<p>コンテナーを実行すると、ただ 1 つのプロセスとして <code class="language-plaintext highlighter-rouge">top</code> があるのがわかります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm --name test  top -H
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm --name test  top -H
 top - 08:25:00 up  7:27,  0 users,  load average: 0.00, 0.01, 0.05
 Threads:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
 %Cpu(s):  0.1 us,  0.1 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
@@ -1346,34 +1346,34 @@ KiB Swap:  1441840 total,        0 used,  1441840 free.  1324440 cached Mem
     1 root      20   0   19744   2336   2080 R  0.0  0.1   0:00.04 top
 </code></pre></div></div>
 
-<p>さらに詳しく見るには <code class="highlighter-rouge">docker exec</code> を実行します。</p>
+<p>さらに詳しく見るには <code class="language-plaintext highlighter-rouge">docker exec</code> を実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker exec -it test ps aux
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker exec -it test ps aux
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root         1  2.6  0.1  19752  2352 ?        Ss+  08:24   0:00 top -b -H
 root         7  0.0  0.1  15572  2164 ?        R+   08:25   0:00 ps aux
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">top</code> を適切に終了させるには <code class="highlighter-rouge">docker stop test</code> を実行します。</p>
+<p><code class="language-plaintext highlighter-rouge">top</code> を適切に終了させるには <code class="language-plaintext highlighter-rouge">docker stop test</code> を実行します。</p>
 
-<p>次の <code class="highlighter-rouge">Dockerfile</code> は、Apache をフォアグラウンドで（つまり <code class="highlighter-rouge">PID 1</code> として）実行するような <code class="highlighter-rouge">ENTRYPOINT</code> の例を示しています。</p>
+<p>次の <code class="language-plaintext highlighter-rouge">Dockerfile</code> は、Apache をフォアグラウンドで（つまり <code class="language-plaintext highlighter-rouge">PID 1</code> として）実行するような <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の例を示しています。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM debian:stable
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM debian:stable
 RUN apt-get update &amp;&amp; apt-get install -y --force-yes apache2
 EXPOSE 80 443
 VOLUME ["/var/www", "/var/log/apache2", "/etc/apache2"]
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 </code></pre></div></div>
 
-<p>1 つの実行モジュールを起動するスクリプトを書く場合、最終実行される実行モジュールが Unix シグナルを受信できるようにするには <code class="highlighter-rouge">exec</code> あるいは <code class="highlighter-rouge">gosu</code> を用います。</p>
+<p>1 つの実行モジュールを起動するスクリプトを書く場合、最終実行される実行モジュールが Unix シグナルを受信できるようにするには <code class="language-plaintext highlighter-rouge">exec</code> あるいは <code class="language-plaintext highlighter-rouge">gosu</code> を用います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
 <span class="nb">set</span> <span class="nt">-e</span>
 
 <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">=</span> <span class="s1">'postgres'</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-    </span>chown <span class="nt">-R</span> postgres <span class="s2">"</span><span class="nv">$PGDATA</span><span class="s2">"</span>
+    </span><span class="nb">chown</span> <span class="nt">-R</span> postgres <span class="s2">"</span><span class="nv">$PGDATA</span><span class="s2">"</span>
 
-    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">ls</span> <span class="nt">-A</span> <span class="s2">"</span><span class="nv">$PGDATA</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">ls</span> <span class="nt">-A</span> <span class="s2">"</span><span class="nv">$PGDATA</span><span class="s2">"</span><span class="si">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
         </span>gosu postgres initdb
     <span class="k">fi
 
@@ -1383,30 +1383,30 @@ ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 </span><span class="nb">exec</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 </code></pre></div></div>
 
-<p>シャットダウンの際に追加でクリーンアップするようなコマンドを実行したい（他のコンテナーとの通信を行ないたい）場合、あるいは複数の実行モジュールを連動して動かしている場合は、<code class="highlighter-rouge">ENTRYPOINT</code> のスクリプトが確実に Unix シグナルを受信し、これを受けて動作するようにすることが必要になるかもしれません。</p>
+<p>シャットダウンの際に追加でクリーンアップするようなコマンドを実行したい（他のコンテナーとの通信を行ないたい）場合、あるいは複数の実行モジュールを連動して動かしている場合は、<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> のスクリプトが確実に Unix シグナルを受信し、これを受けて動作するようにすることが必要になるかもしれません。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
-<span class="c"># メモ: ここで sh を用いました。したがって busybox コンテナーでも動作します。</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
+# メモ: ここで sh を用いました。したがって busybox コンテナーでも動作します。
 
-<span class="c"># ここで trap を用います。サービスが停止した後に手動でクリーンアップする</span>
-<span class="c"># コマンドを実行するにはこれも必要となります。</span>
-<span class="c"># こうしておかないと、1 つのコンテナーで複数サービスを起動しなければなりません。</span>
-<span class="nb">trap</span> <span class="s2">"echo TRAPed signal"</span> HUP INT QUIT TERM
+# ここで trap を用います。サービスが停止した後に手動でクリーンアップする
+# コマンドを実行するにはこれも必要となります。
+# こうしておかないと、1 つのコンテナーで複数サービスを起動しなければなりません。
+trap "echo TRAPed signal" HUP INT QUIT TERM
 
-<span class="c"># ここからバックグラウンドでサービスを起動します。</span>
+# ここからバックグラウンドでサービスを起動します。
 /usr/sbin/apachectl start
 
-<span class="nb">echo</span> <span class="s2">"[hit enter key to exit] or run 'docker stop &lt;container&gt;'"</span>
-<span class="nb">read</span>
+echo "[hit enter key to exit] or run 'docker stop &lt;container&gt;'"
+read
 
-<span class="c"># ここでサービスを停止しクリーンアップします。</span>
-<span class="nb">echo</span> <span class="s2">"stopping apache"</span>
+# ここでサービスを停止しクリーンアップします。
+echo "stopping apache"
 /usr/sbin/apachectl stop
 
-<span class="nb">echo</span> <span class="s2">"exited </span><span class="nv">$0</span><span class="s2">"</span>
+echo "exited $0"
 </code></pre></div></div>
 
-<p>このイメージを <code class="highlighter-rouge">docker run -it --rm -p 80:80 --name test apache</code> により実行したら、このコンテナーのプロセスは <code class="highlighter-rouge">docker exec</code> や <code class="highlighter-rouge">docker top</code> を使って確認することができます。
+<p>このイメージを <code class="language-plaintext highlighter-rouge">docker run -it --rm -p 80:80 --name test apache</code> により実行したら、このコンテナーのプロセスは <code class="language-plaintext highlighter-rouge">docker exec</code> や <code class="language-plaintext highlighter-rouge">docker top</code> を使って確認することができます。
 そしてこのスクリプトから Apache を停止させます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> <span class="nb">test </span>ps aux
@@ -1430,9 +1430,9 @@ sys	0m 0.03s
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ:</strong> <code class="highlighter-rouge">--entrypoint</code> を使うと <code class="highlighter-rouge">ENTRYPOINT</code> の設定を上書きすることができます。
+  <p><strong>メモ:</strong> <code class="language-plaintext highlighter-rouge">--entrypoint</code> を使うと <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の設定を上書きすることができます。
 ただしこの場合は、実行モジュールを exec 形式にできるだけです。
-（<code class="highlighter-rouge">sh -c</code> は利用されません。）</p>
+（<code class="language-plaintext highlighter-rouge">sh -c</code> は利用されません。）</p>
 </blockquote>
 
 <blockquote>
@@ -1445,26 +1445,26 @@ exec 形式は JSON 配列として解釈されます。
   <p><strong>メモ</strong>:
 シェル形式とは違って exec 形式はコマンドシェルを起動しません。
 これはつまり、ごく普通のシェル処理とはならないということです。
-たとえば <code class="highlighter-rouge">RUN [ "echo", "$HOME" ]</code> を実行したとすると、<code class="highlighter-rouge">$HOME</code> の変数置換は行われません。
+たとえば <code class="language-plaintext highlighter-rouge">RUN [ "echo", "$HOME" ]</code> を実行したとすると、<code class="language-plaintext highlighter-rouge">$HOME</code> の変数置換は行われません。
 シェル処理が行われるようにしたければ、シェル形式を利用するか、あるいはシェルを直接実行するようにします。
-たとえば <code class="highlighter-rouge">RUN [ "sh", "-c", "echo $HOME" ]</code> とします。
+たとえば <code class="language-plaintext highlighter-rouge">RUN [ "sh", "-c", "echo $HOME" ]</code> とします。
 exec 形式によってシェルを直接起動した場合、シェル形式の場合でも同じですが、変数置換を行うのはシェルであって、docker ではありません。</p>
 </blockquote>
 
 <h3 id="shell-form-entrypoint-example">シェル形式の ENTRYPOINT の例</h3>
 
-<p><code class="highlighter-rouge">ENTRYPOINT</code> に指定した文字列は、そのまま <code class="highlighter-rouge">/bin/sh -c</code> の中で実行されます。
+<p><code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> に指定した文字列は、そのまま <code class="language-plaintext highlighter-rouge">/bin/sh -c</code> の中で実行されます。
 この形式は、シェル環境変数を置換しながらシェル処理を実行します。
-そして <code class="highlighter-rouge">CMD</code> や <code class="highlighter-rouge">docker run</code> におけるコマンドライン引数は無視します。
-<code class="highlighter-rouge">ENTRYPOINT</code> による実行モジュールがどれだけ実行し続けていても、確実に <code class="highlighter-rouge">docker stop</code> によりシグナル送信ができるようにするためには、忘れずに <code class="highlighter-rouge">exec</code> をつけて実行する必要があります。</p>
+そして <code class="language-plaintext highlighter-rouge">CMD</code> や <code class="language-plaintext highlighter-rouge">docker run</code> におけるコマンドライン引数は無視します。
+<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> による実行モジュールがどれだけ実行し続けていても、確実に <code class="language-plaintext highlighter-rouge">docker stop</code> によりシグナル送信ができるようにするためには、忘れずに <code class="language-plaintext highlighter-rouge">exec</code> をつけて実行する必要があります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
 ENTRYPOINT exec top -b
 </code></pre></div></div>
 
-<p>上のイメージを実行すると、<code class="highlighter-rouge">PID 1</code> のプロセスがただ 1 つだけあるのがわかります。</p>
+<p>上のイメージを実行すると、<code class="language-plaintext highlighter-rouge">PID 1</code> のプロセスがただ 1 つだけあるのがわかります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm --name test top
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm --name test top
 Mem: 1704520K used, 352148K free, 0K shrd, 0K buff, 140368121167873K cached
 CPU:   5% usr   0% sys   0% nic  94% idle   0% io   0% irq   0% sirq
 Load average: 0.08 0.03 0.05 2/98 6
@@ -1472,18 +1472,18 @@ Load average: 0.08 0.03 0.05 2/98 6
     1     0 root     R     3164   0%   0% top -b
 </code></pre></div></div>
 
-<p>きれいに終了させるには <code class="highlighter-rouge">docker stop</code> を実行します。</p>
+<p>きれいに終了させるには <code class="language-plaintext highlighter-rouge">docker stop</code> を実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/bin/time docker stop test
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/bin/time docker stop test
 test
 real	0m 0.20s
 user	0m 0.02s
 sys	0m 0.04s
 </code></pre></div></div>
 
-<p>仮に <code class="highlighter-rouge">ENTRYPOINT</code> の先頭に <code class="highlighter-rouge">exec</code> を記述し忘れたとします。</p>
+<p>仮に <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の先頭に <code class="language-plaintext highlighter-rouge">exec</code> を記述し忘れたとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
 ENTRYPOINT top -b
 CMD --ignored-param1
 </code></pre></div></div>
@@ -1491,7 +1491,7 @@ CMD --ignored-param1
 <p>そして以下のように実行したとします。
 （名前をつけておいて次のステップで使います。）</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --name test top --ignored-param2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --name test top --ignored-param2
 Mem: 1704184K used, 352484K free, 0K shrd, 0K buff, 140621524238337K cached
 CPU:   9% usr   2% sys   0% nic  88% idle   0% io   0% irq   0% sirq
 Load average: 0.01 0.02 0.05 2/101 7
@@ -1500,12 +1500,12 @@ Load average: 0.01 0.02 0.05 2/101 7
     7     1 root     R     3164   0%   0% top -b
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ENTRYPOINT</code> によって指定された <code class="highlighter-rouge">top</code> の出力は <code class="highlighter-rouge">PID 1</code> ではないことが示されます。</p>
+<p><code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> によって指定された <code class="language-plaintext highlighter-rouge">top</code> の出力は <code class="language-plaintext highlighter-rouge">PID 1</code> ではないことが示されます。</p>
 
-<p>この後に <code class="highlighter-rouge">docker stop test</code> を実行しても、コンテナーはきれいに終了しません。
-<code class="highlighter-rouge">stop</code> コマンドは、タイムアウトの後に強制的に <code class="highlighter-rouge">SIGKILL</code> を送信することになるからです。</p>
+<p>この後に <code class="language-plaintext highlighter-rouge">docker stop test</code> を実行しても、コンテナーはきれいに終了しません。
+<code class="language-plaintext highlighter-rouge">stop</code> コマンドは、タイムアウトの後に強制的に <code class="language-plaintext highlighter-rouge">SIGKILL</code> を送信することになるからです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker exec -it test ps aux
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker exec -it test ps aux
 PID   USER     COMMAND
     1 root     /bin/sh -c top -b cmd cmd2
     7 root     top -b
@@ -1519,25 +1519,25 @@ sys	0m 0.03s
 
 <h3 id="understand-how-cmd-and-entrypoint-interact">CMD と ENTRYPOINT の関連について</h3>
 
-<p><code class="highlighter-rouge">CMD</code> 命令も <code class="highlighter-rouge">ENTRYPOINT</code> 命令も、ともにコンテナー起動時に実行するコマンドを定義するものです。
+<p><code class="language-plaintext highlighter-rouge">CMD</code> 命令も <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> 命令も、ともにコンテナー起動時に実行するコマンドを定義するものです。
 両方が動作する際に必要となるルールがいくらかあります。</p>
 
 <ol>
   <li>
-    <p>Dockerfile には、<code class="highlighter-rouge">CMD</code> または <code class="highlighter-rouge">ENTRYPOINT</code> のいずれかが、少なくとも 1 つ必要です。</p>
+    <p>Dockerfile には、<code class="language-plaintext highlighter-rouge">CMD</code> または <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> のいずれかが、少なくとも 1 つ必要です。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">ENTRYPOINT</code> は、コンテナーを実行モジュールとして実行する際に利用します。</p>
+    <p><code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> は、コンテナーを実行モジュールとして実行する際に利用します。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">CMD</code> は、<code class="highlighter-rouge">ENTRYPOINT</code> のデフォルト引数を定義するため、あるいはその時点でのみコマンド実行を行うために利用します。</p>
+    <p><code class="language-plaintext highlighter-rouge">CMD</code> は、<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> のデフォルト引数を定義するため、あるいはその時点でのみコマンド実行を行うために利用します。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">CMD</code> はコンテナー実行時に、別の引数によって上書きされることがあります。</p>
+    <p><code class="language-plaintext highlighter-rouge">CMD</code> はコンテナー実行時に、別の引数によって上書きされることがあります。</p>
   </li>
 </ol>
 
-<p>以下の表は、<code class="highlighter-rouge">ENTRYPOINT</code> と <code class="highlighter-rouge">CMD</code> の組み合わせに従って実行されるコマンドを示しています。</p>
+<p>以下の表は、<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> と <code class="language-plaintext highlighter-rouge">CMD</code> の組み合わせに従って実行されるコマンドを示しています。</p>
 
 <table>
   <thead>
@@ -1577,36 +1577,36 @@ sys	0m 0.03s
 </table>
 
 <blockquote>
-  <p><strong>メモ</strong>: <code class="highlighter-rouge">CMD</code> がベースイメージにて定義されていた場合、<code class="highlighter-rouge">ENTRYPOINT</code> を設定すると <code class="highlighter-rouge">CMD</code> を空の値にリセットします。
-そのような場合、<code class="highlighter-rouge">CMD</code> へは現イメージにおいて定義を行い、値を持たせておくことが必要です。</p>
+  <p><strong>メモ</strong>: <code class="language-plaintext highlighter-rouge">CMD</code> がベースイメージにて定義されていた場合、<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> を設定すると <code class="language-plaintext highlighter-rouge">CMD</code> を空の値にリセットします。
+そのような場合、<code class="language-plaintext highlighter-rouge">CMD</code> へは現イメージにおいて定義を行い、値を持たせておくことが必要です。</p>
 </blockquote>
 
 <h2 id="volume">VOLUME</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VOLUME ["/data"]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VOLUME ["/data"]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">VOLUME</code> 命令は指定された名前を使ってマウントポイントを生成します。
+<p><code class="language-plaintext highlighter-rouge">VOLUME</code> 命令は指定された名前を使ってマウントポイントを生成します。
 そして自ホストまたは他のコンテナーからマウントされたボリュームとして、そのマウントポイントを扱います。
-指定する値は JSON 配列として <code class="highlighter-rouge">VOLUME ["/var/log/"]</code> のようにするか、あるいは単純な文字列を複数与えます。
-たとえば <code class="highlighter-rouge">VOLUME /var/log</code> や <code class="highlighter-rouge">VOLUME /var/log /var/db</code> などです。
+指定する値は JSON 配列として <code class="language-plaintext highlighter-rouge">VOLUME ["/var/log/"]</code> のようにするか、あるいは単純な文字列を複数与えます。
+たとえば <code class="language-plaintext highlighter-rouge">VOLUME /var/log</code> や <code class="language-plaintext highlighter-rouge">VOLUME /var/log /var/db</code> などです。
 Docker クライアントを通じたマウントに関する情報、利用例などに関しては <a href="https://docs.docker.com/engine/tutorials/dockervolumes/"><em>ボリュームを通じたディレクトリの共有</em></a>を参照してください。</p>
 
-<p><code class="highlighter-rouge">docker run</code> コマンドは、新たに生成するボリュームを初期化します。
+<p><code class="language-plaintext highlighter-rouge">docker run</code> コマンドは、新たに生成するボリュームを初期化します。
 ベースイメージ内の指定したディレクトリに、データが存在していても構いません。
 たとえば以下のような Dockerfile の記述部分があったとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
 RUN mkdir /myvol
 RUN echo "hello world" &gt; /myvol/greeting
 VOLUME /myvol
 </code></pre></div></div>
 
-<p>この Dockerfile はイメージに対する処理として、<code class="highlighter-rouge">docker run</code> により <code class="highlighter-rouge">/myvol</code> というマウントポイントを新たに生成し、そのボリュームの中に <code class="highlighter-rouge">greeting</code> ファイルをコピーします。</p>
+<p>この Dockerfile はイメージに対する処理として、<code class="language-plaintext highlighter-rouge">docker run</code> により <code class="language-plaintext highlighter-rouge">/myvol</code> というマウントポイントを新たに生成し、そのボリュームの中に <code class="language-plaintext highlighter-rouge">greeting</code> ファイルをコピーします。</p>
 
 <h3 id="notes-about-specifying-volumes">ボリュームの指定に関して</h3>
 
-<p><code class="highlighter-rouge">Dockerfile</code> におけるボリューム設定に関しては、以下のことを覚えておいてください。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> におけるボリューム設定に関しては、以下のことを覚えておいてください。</p>
 
 <ul>
   <li>
@@ -1614,7 +1614,7 @@ VOLUME /myvol
 
     <ul>
       <li>存在していないディレクトリ、または空のディレクトリ</li>
-      <li><code class="highlighter-rouge">C:</code> 以下のドライブ</li>
+      <li><code class="language-plaintext highlighter-rouge">C:</code> 以下のドライブ</li>
     </ul>
   </li>
   <li>
@@ -1622,34 +1622,34 @@ VOLUME /myvol
   </li>
   <li>
     <p><strong>JSON 形式</strong>: 引数リストは JSON 配列として扱われます。
-したがって文字列をくくるのはダブルクォート（<code class="highlighter-rouge">"</code>）であり、シングルクォート（<code class="highlighter-rouge">'</code>）は用いてはなりません。</p>
+したがって文字列をくくるのはダブルクォート（<code class="language-plaintext highlighter-rouge">"</code>）であり、シングルクォート（<code class="language-plaintext highlighter-rouge">'</code>）は用いてはなりません。</p>
   </li>
   <li>
     <p><strong>コンテナー実行時に宣言されるホストディレクトリ</strong>: ホストディレクトリ（マウントポイント）は、その性質からして、ホストに依存するものです。
 これはイメージの可搬性を確保するためなので、設定されたホストディレクトリが、あらゆるホスト上にて利用可能になるかどうかの保証はありません。
 このため、Dockerfile の内部からホストディレクトリをマウントすることはできません。
-つまり <code class="highlighter-rouge">VOLUME</code> 命令は <code class="highlighter-rouge">host-dir</code>（ホストのディレクトリを指定する）パラメーターをサポートしていません。
+つまり <code class="language-plaintext highlighter-rouge">VOLUME</code> 命令は <code class="language-plaintext highlighter-rouge">host-dir</code>（ホストのディレクトリを指定する）パラメーターをサポートしていません。
 マウントポイントの指定は、コンテナーを生成、実行するときに行う必要があります。</p>
   </li>
 </ul>
 
 <h2 id="user">USER</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>USER &lt;user&gt;[:&lt;group&gt;] または
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>USER &lt;user&gt;[:&lt;group&gt;] または
 USER &lt;UID&gt;[:&lt;GID&gt;]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">USER</code> 命令は、ユーザー名（または UID）と、オプションとしてユーザーグループ（または GID）を指定します。
-そしてイメージが実行されるとき、<code class="highlighter-rouge">Dockerfile</code> 内の後続の <code class="highlighter-rouge">RUN</code>、<code class="highlighter-rouge">CMD</code>、<code class="highlighter-rouge">ENTRYPOINT</code> の各命令においてこの情報を利用します。</p>
+<p><code class="language-plaintext highlighter-rouge">USER</code> 命令は、ユーザー名（または UID）と、オプションとしてユーザーグループ（または GID）を指定します。
+そしてイメージが実行されるとき、<code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の後続の <code class="language-plaintext highlighter-rouge">RUN</code>、<code class="language-plaintext highlighter-rouge">CMD</code>、<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の各命令においてこの情報を利用します。</p>
 
 <blockquote>
   <p><strong>警告</strong>:
-ユーザーにプライマリーグループがない場合、イメージ（あるいは次の命令）は <code class="highlighter-rouge">root</code> グループとして実行されます。</p>
+ユーザーにプライマリーグループがない場合、イメージ（あるいは次の命令）は <code class="language-plaintext highlighter-rouge">root</code> グループとして実行されます。</p>
 </blockquote>
 
 <blockquote>
   <p>Windows において、ビルトインアカウント以外のユーザーを利用する場合は、あらかじめユーザーを生成しておく必要があります。
-Dockerfile 内において <code class="highlighter-rouge">net user</code> コマンドを用いれば、これを行うことができます。</p>
+Dockerfile 内において <code class="language-plaintext highlighter-rouge">net user</code> コマンドを用いれば、これを行うことができます。</p>
 </blockquote>
 
 <pre><code class="language-Dockerfile">    FROM microsoft/windowsservercore
@@ -1661,53 +1661,53 @@ Dockerfile 内において <code class="highlighter-rouge">net user</code> コ�
 
 <h2 id="workdir">WORKDIR</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WORKDIR /path/to/workdir
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WORKDIR /path/to/workdir
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">WORKDIR</code> 命令はワークディレクトリを設定します。
-<code class="highlighter-rouge">Dockerfile</code> 内にてその後に続く <code class="highlighter-rouge">RUN</code>、<code class="highlighter-rouge">CMD</code>、<code class="highlighter-rouge">ENTRYPOINT</code>、<code class="highlighter-rouge">COPY</code>、<code class="highlighter-rouge">ADD</code> の各命令において利用することができます。
-<code class="highlighter-rouge">WORKDIR</code> が存在しないときは生成されます。
+<p><code class="language-plaintext highlighter-rouge">WORKDIR</code> 命令はワークディレクトリを設定します。
+<code class="language-plaintext highlighter-rouge">Dockerfile</code> 内にてその後に続く <code class="language-plaintext highlighter-rouge">RUN</code>、<code class="language-plaintext highlighter-rouge">CMD</code>、<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>、<code class="language-plaintext highlighter-rouge">COPY</code>、<code class="language-plaintext highlighter-rouge">ADD</code> の各命令において利用することができます。
+<code class="language-plaintext highlighter-rouge">WORKDIR</code> が存在しないときは生成されます。
 これはたとえ、この後にワークディレクトリが利用されていなくても生成されます。</p>
 
-<p><code class="highlighter-rouge">WORKDIR</code> 命令は <code class="highlighter-rouge">Dockerfile</code> 内にて複数利用することができます。
-ディレクトリ指定に相対パスが用いられた場合、そのパスは、直前の <code class="highlighter-rouge">WORKDIR</code> 命令からの相対パスとなります。
+<p><code class="language-plaintext highlighter-rouge">WORKDIR</code> 命令は <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内にて複数利用することができます。
+ディレクトリ指定に相対パスが用いられた場合、そのパスは、直前の <code class="language-plaintext highlighter-rouge">WORKDIR</code> 命令からの相対パスとなります。
 たとえば以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WORKDIR /a
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WORKDIR /a
 WORKDIR b
 WORKDIR c
 RUN pwd
 </code></pre></div></div>
 
-<p>上の <code class="highlighter-rouge">Dockerfile</code> の最後の <code class="highlighter-rouge">pwd</code> コマンドは <code class="highlighter-rouge">/a/b/c</code> という出力結果を返します。</p>
+<p>上の <code class="language-plaintext highlighter-rouge">Dockerfile</code> の最後の <code class="language-plaintext highlighter-rouge">pwd</code> コマンドは <code class="language-plaintext highlighter-rouge">/a/b/c</code> という出力結果を返します。</p>
 
-<p><code class="highlighter-rouge">WORKDIR</code> 命令では、その前に <code class="highlighter-rouge">ENV</code> によって設定された環境変数を解釈します。
-環境変数は <code class="highlighter-rouge">Dockerfile</code> の中で明示的に設定したものだけが利用可能です。
+<p><code class="language-plaintext highlighter-rouge">WORKDIR</code> 命令では、その前に <code class="language-plaintext highlighter-rouge">ENV</code> によって設定された環境変数を解釈します。
+環境変数は <code class="language-plaintext highlighter-rouge">Dockerfile</code> の中で明示的に設定したものだけが利用可能です。
 たとえば以下のようになります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV DIRPATH /path
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ENV DIRPATH /path
 WORKDIR $DIRPATH/$DIRNAME
 RUN pwd
 </code></pre></div></div>
 
-<p>上の <code class="highlighter-rouge">Dockerfile</code> の最後の <code class="highlighter-rouge">pwd</code> コマンドは <code class="highlighter-rouge">/path/$DIRNAME</code> という出力結果を返します。</p>
+<p>上の <code class="language-plaintext highlighter-rouge">Dockerfile</code> の最後の <code class="language-plaintext highlighter-rouge">pwd</code> コマンドは <code class="language-plaintext highlighter-rouge">/path/$DIRNAME</code> という出力結果を返します。</p>
 
 <h2 id="arg">ARG</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ARG &lt;name&gt;[=&lt;default value&gt;]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ARG &lt;name&gt;[=&lt;default value&gt;]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ARG</code> 命令は変数を定義して、ビルド時にその値を受け渡します。
-これは <code class="highlighter-rouge">docker build</code> コマンドにおいて <code class="highlighter-rouge">--build-arg &lt;varname&gt;=&lt;value&gt;</code> フラグを利用して行います。
+<p><code class="language-plaintext highlighter-rouge">ARG</code> 命令は変数を定義して、ビルド時にその値を受け渡します。
+これは <code class="language-plaintext highlighter-rouge">docker build</code> コマンドにおいて <code class="language-plaintext highlighter-rouge">--build-arg &lt;varname&gt;=&lt;value&gt;</code> フラグを利用して行います。
 指定したビルド引数（build argument）が Dockerfile 内において定義されていない場合は、ビルド処理時に警告メッセージが出力されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Warning] One or more build-args [foo] were not consumed.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Warning] One or more build-args [foo] were not consumed.
 </code></pre></div></div>
 
-<p>Dockerfile には複数の <code class="highlighter-rouge">ARG</code> 命令を含めることもできます。
+<p>Dockerfile には複数の <code class="language-plaintext highlighter-rouge">ARG</code> 命令を含めることもできます。
 たとえば以下の Dockerfile は有効な例です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
 ARG user1
 ARG buildno
 ...
@@ -1715,28 +1715,28 @@ ARG buildno
 
 <blockquote>
   <p><strong>警告:</strong> ビルド時の変数として、github キーや認証情報などの秘密の情報を設定することは、お勧めできません。
- ビルド変数の値は、イメージを利用する他人が <code class="highlighter-rouge">docker history</code> コマンドを実行すれば容易に見ることができてしまうからです。</p>
+ ビルド変数の値は、イメージを利用する他人が <code class="language-plaintext highlighter-rouge">docker history</code> コマンドを実行すれば容易に見ることができてしまうからです。</p>
 </blockquote>
 
 <h3 id="default-values">デフォルト値</h3>
 
-<p><code class="highlighter-rouge">ARG</code> 命令にはオプションとしてデフォルト値を設定することができます。</p>
+<p><code class="language-plaintext highlighter-rouge">ARG</code> 命令にはオプションとしてデフォルト値を設定することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
 ARG user1=someuser
 ARG buildno=1
 ...
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ARG</code> 命令にデフォルト値が設定されていて、ビルド時に値設定が行われなければ、デフォルト値が用いられます。</p>
+<p><code class="language-plaintext highlighter-rouge">ARG</code> 命令にデフォルト値が設定されていて、ビルド時に値設定が行われなければ、デフォルト値が用いられます。</p>
 
 <h3 id="scope">スコープ</h3>
 
-<p><code class="highlighter-rouge">ARG</code> による値定義が有効になるのは、<code class="highlighter-rouge">Dockerfile</code> 内の記述行以降です。
+<p><code class="language-plaintext highlighter-rouge">ARG</code> による値定義が有効になるのは、<code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の記述行以降です。
 コマンドラインなどにおいて用いられるときではありません。
 たとえば以下のような Dockerfile を見てみます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM busybox
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM busybox
 2 USER ${user:-some_user}
 3 ARG user
 4 USER $user
@@ -1744,19 +1744,19 @@ ARG buildno=1
 </code></pre></div></div>
 <p>このファイルをビルドするには以下を実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build --build-arg user=what_user .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build --build-arg user=what_user .
 </code></pre></div></div>
 
-<p>2 行めの <code class="highlighter-rouge">USER</code> が <code class="highlighter-rouge">some-user</code> として評価されます。
-これは <code class="highlighter-rouge">user</code> 変数が、直後の 3 行めにおいて定義されているからです。
-そして 4 行めの <code class="highlighter-rouge">USER</code> は <code class="highlighter-rouge">what_user</code> として評価されます。
-<code class="highlighter-rouge">user</code> が定義済であって、コマンドラインから <code class="highlighter-rouge">what_user</code> という値が受け渡されたからです。
-<code class="highlighter-rouge">ARG</code> 命令による定義を行うまで、その変数を利用しても空の文字列として扱われます。</p>
+<p>2 行めの <code class="language-plaintext highlighter-rouge">USER</code> が <code class="language-plaintext highlighter-rouge">some-user</code> として評価されます。
+これは <code class="language-plaintext highlighter-rouge">user</code> 変数が、直後の 3 行めにおいて定義されているからです。
+そして 4 行めの <code class="language-plaintext highlighter-rouge">USER</code> は <code class="language-plaintext highlighter-rouge">what_user</code> として評価されます。
+<code class="language-plaintext highlighter-rouge">user</code> が定義済であって、コマンドラインから <code class="language-plaintext highlighter-rouge">what_user</code> という値が受け渡されたからです。
+<code class="language-plaintext highlighter-rouge">ARG</code> 命令による定義を行うまで、その変数を利用しても空の文字列として扱われます。</p>
 
-<p><code class="highlighter-rouge">ARG</code> 命令の変数スコープは、それが定義されたビルドステージが終了するときまでです。
-複数のビルドステージにおいて <code class="highlighter-rouge">ARG</code> を利用する場合は、個々に <code class="highlighter-rouge">ARG</code> 命令を指定する必要があります。</p>
+<p><code class="language-plaintext highlighter-rouge">ARG</code> 命令の変数スコープは、それが定義されたビルドステージが終了するときまでです。
+複数のビルドステージにおいて <code class="language-plaintext highlighter-rouge">ARG</code> を利用する場合は、個々に <code class="language-plaintext highlighter-rouge">ARG</code> 命令を指定する必要があります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM busybox
 ARG SETTINGS
 RUN ./run/setup $SETTINGS
 
@@ -1767,110 +1767,110 @@ RUN ./run/other $SETTINGS
 
 <h3 id="using-arg-variables">ARG 変数の利用</h3>
 
-<p><code class="highlighter-rouge">ARG</code> 命令や <code class="highlighter-rouge">ENV</code> 命令において変数を指定し、それを <code class="highlighter-rouge">RUN</code> 命令にて用いることができます。
-<code class="highlighter-rouge">ENV</code> 命令を使って定義された環境変数は、<code class="highlighter-rouge">ARG</code> 命令において同名の変数が指定されていたとしても優先されます。
-以下のように <code class="highlighter-rouge">ENV</code> 命令と <code class="highlighter-rouge">ARG</code> 命令を含む Dockerfile があるとします。</p>
+<p><code class="language-plaintext highlighter-rouge">ARG</code> 命令や <code class="language-plaintext highlighter-rouge">ENV</code> 命令において変数を指定し、それを <code class="language-plaintext highlighter-rouge">RUN</code> 命令にて用いることができます。
+<code class="language-plaintext highlighter-rouge">ENV</code> 命令を使って定義された環境変数は、<code class="language-plaintext highlighter-rouge">ARG</code> 命令において同名の変数が指定されていたとしても優先されます。
+以下のように <code class="language-plaintext highlighter-rouge">ENV</code> 命令と <code class="language-plaintext highlighter-rouge">ARG</code> 命令を含む Dockerfile があるとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
 2 ARG CONT_IMG_VER
 3 ENV CONT_IMG_VER v1.0.0
 4 RUN echo $CONT_IMG_VER
 </code></pre></div></div>
 <p>そしてこのイメージを以下のコマンドによりビルドしたとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build --build-arg CONT_IMG_VER=v2.0.1 .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build --build-arg CONT_IMG_VER=v2.0.1 .
 </code></pre></div></div>
 
-<p>この例において <code class="highlighter-rouge">RUN</code> 命令は <code class="highlighter-rouge">v1.0.0</code> という値を採用します。
-コマンドラインから <code class="highlighter-rouge">v2.0.1</code> が受け渡され <code class="highlighter-rouge">ARG</code> の値に設定されますが、それが用いられるわけではありません。
+<p>この例において <code class="language-plaintext highlighter-rouge">RUN</code> 命令は <code class="language-plaintext highlighter-rouge">v1.0.0</code> という値を採用します。
+コマンドラインから <code class="language-plaintext highlighter-rouge">v2.0.1</code> が受け渡され <code class="language-plaintext highlighter-rouge">ARG</code> の値に設定されますが、それが用いられるわけではありません。
 これはちょうどシェルスクリプトにおいて行われる動きに似ています。
 ローカルなスコープを持つ変数は、指定された引数や環境から受け継いだ変数よりも優先されます。</p>
 
-<p>上の例を利用しつつ <code class="highlighter-rouge">ENV</code> のもう 1 つ別の仕様を用いると、さらに <code class="highlighter-rouge">ARG</code> と <code class="highlighter-rouge">ENV</code> の組み合わせによる以下のような利用もできます。</p>
+<p>上の例を利用しつつ <code class="language-plaintext highlighter-rouge">ENV</code> のもう 1 つ別の仕様を用いると、さらに <code class="language-plaintext highlighter-rouge">ARG</code> と <code class="language-plaintext highlighter-rouge">ENV</code> の組み合わせによる以下のような利用もできます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
 2 ARG CONT_IMG_VER
 3 ENV CONT_IMG_VER ${CONT_IMG_VER:-v1.0.0}
 4 RUN echo $CONT_IMG_VER
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ARG</code> 命令とは違って <code class="highlighter-rouge">ENV</code> による値はビルドイメージ内に常に保持されます。
-以下のような <code class="highlighter-rouge">--build-arg</code> フラグのない <code class="highlighter-rouge">docker build</code> を見てみます。</p>
+<p><code class="language-plaintext highlighter-rouge">ARG</code> 命令とは違って <code class="language-plaintext highlighter-rouge">ENV</code> による値はビルドイメージ内に常に保持されます。
+以下のような <code class="language-plaintext highlighter-rouge">--build-arg</code> フラグのない <code class="language-plaintext highlighter-rouge">docker build</code> を見てみます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build .
 </code></pre></div></div>
 
-<p>上の Dockerfile の例を用いると、<code class="highlighter-rouge">CONT_IMG_VER</code> の値はイメージ内に保持されますが、その値は <code class="highlighter-rouge">v1.0.0</code> になります。
-これは 3 行めの <code class="highlighter-rouge">ENV</code> 命令で設定されているデフォルト値です。</p>
+<p>上の Dockerfile の例を用いると、<code class="language-plaintext highlighter-rouge">CONT_IMG_VER</code> の値はイメージ内に保持されますが、その値は <code class="language-plaintext highlighter-rouge">v1.0.0</code> になります。
+これは 3 行めの <code class="language-plaintext highlighter-rouge">ENV</code> 命令で設定されているデフォルト値です。</p>
 
-<p>この例で見たように変数展開の手法では、コマンドラインから引数を受け渡すことが可能であり、<code class="highlighter-rouge">ENV</code> 命令を用いればその値を最終イメージに残すことができます。
+<p>この例で見たように変数展開の手法では、コマンドラインから引数を受け渡すことが可能であり、<code class="language-plaintext highlighter-rouge">ENV</code> 命令を用いればその値を最終イメージに残すことができます。
 変数展開は、<a href="#environment-replacement">特定の Dockerfile 命令</a>においてのみサポートされます。</p>
 
 <h3 id="predefined-args">定義済 ARG 変数</h3>
 
-<p>Docker にはあらかじめ定義された <code class="highlighter-rouge">ARG</code> 変数があります。
-これは Dockerfile において <code class="highlighter-rouge">ARG</code> 命令を指定しなくても利用することができます。</p>
+<p>Docker にはあらかじめ定義された <code class="language-plaintext highlighter-rouge">ARG</code> 変数があります。
+これは Dockerfile において <code class="language-plaintext highlighter-rouge">ARG</code> 命令を指定しなくても利用することができます。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">HTTP_PROXY</code></li>
-  <li><code class="highlighter-rouge">http_proxy</code></li>
-  <li><code class="highlighter-rouge">HTTPS_PROXY</code></li>
-  <li><code class="highlighter-rouge">https_proxy</code></li>
-  <li><code class="highlighter-rouge">FTP_PROXY</code></li>
-  <li><code class="highlighter-rouge">ftp_proxy</code></li>
-  <li><code class="highlighter-rouge">NO_PROXY</code></li>
-  <li><code class="highlighter-rouge">no_proxy</code></li>
+  <li><code class="language-plaintext highlighter-rouge">HTTP_PROXY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">http_proxy</code></li>
+  <li><code class="language-plaintext highlighter-rouge">HTTPS_PROXY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">https_proxy</code></li>
+  <li><code class="language-plaintext highlighter-rouge">FTP_PROXY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ftp_proxy</code></li>
+  <li><code class="language-plaintext highlighter-rouge">NO_PROXY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">no_proxy</code></li>
 </ul>
 
 <p>これを利用する場合は、コマンドラインから以下のフラグを与えるだけです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--build-arg &lt;varname&gt;=&lt;value&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--build-arg &lt;varname&gt;=&lt;value&gt;
 </code></pre></div></div>
 
-<p>デフォルトにおいて、これらの定義済変数は <code class="highlighter-rouge">docker history</code> による出力からは除外されます。
-除外する理由は、<code class="highlighter-rouge">HTTP_PROXY</code> などの各変数内にある重要な認証情報が漏洩するリスクを軽減するためです。</p>
+<p>デフォルトにおいて、これらの定義済変数は <code class="language-plaintext highlighter-rouge">docker history</code> による出力からは除外されます。
+除外する理由は、<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code> などの各変数内にある重要な認証情報が漏洩するリスクを軽減するためです。</p>
 
-<p>たとえば <code class="highlighter-rouge">--build-arg HTTP_PROXY=http://user:pass@proxy.lon.example.com</code> という引数を用いて、以下の Dockerfile をビルドするとします。</p>
+<p>たとえば <code class="language-plaintext highlighter-rouge">--build-arg HTTP_PROXY=http://user:pass@proxy.lon.example.com</code> という引数を用いて、以下の Dockerfile をビルドするとします。</p>
 
 <pre><code class="language-Dockerfile">FROM ubuntu
 RUN echo "Hello World"
 </code></pre>
 
-<p>この場合、<code class="highlighter-rouge">HTTP_PROXY</code> 変数の値は <code class="highlighter-rouge">docker history</code> から取得することはできず、キャッシュにも含まれていません。
-したがって URL が変更され、プロキシーサーバーも <code class="highlighter-rouge">http://user:pass@proxy.sfo.example.com</code> に変更したとしても、この後に続くビルド処理において、キャッシュミスは発生しません。</p>
+<p>この場合、<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code> 変数の値は <code class="language-plaintext highlighter-rouge">docker history</code> から取得することはできず、キャッシュにも含まれていません。
+したがって URL が変更され、プロキシーサーバーも <code class="language-plaintext highlighter-rouge">http://user:pass@proxy.sfo.example.com</code> に変更したとしても、この後に続くビルド処理において、キャッシュミスは発生しません。</p>
 
-<p>この動作を取り消す必要がある場合は、以下のように Dockerfile 内に <code class="highlighter-rouge">ARG</code> 命令を加えれば実現できます。</p>
+<p>この動作を取り消す必要がある場合は、以下のように Dockerfile 内に <code class="language-plaintext highlighter-rouge">ARG</code> 命令を加えれば実現できます。</p>
 
 <pre><code class="language-Dockerfile">FROM ubuntu
 ARG HTTP_PROXY
 RUN echo "Hello World"
 </code></pre>
 
-<p>この Dockerfile がビルドされるとき、<code class="highlighter-rouge">HTTP_PROXY</code> は <code class="highlighter-rouge">docker history</code> に保存されます。
+<p>この Dockerfile がビルドされるとき、<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code> は <code class="language-plaintext highlighter-rouge">docker history</code> に保存されます。
 そしてその値を変更すると、ビルドキャッシュは無効化されます。</p>
 
 <h3 id="automatic-platform-args-in-the-global-scope">プラットフォームに応じて自動設定されるグローバル ARG 変数</h3>
 
 <p>この機能は <a href="#buildkit">BuildKit</a> バックエンドを用いている場合にのみ利用可能です。</p>
 
-<p>Docker にはあらかじめ定義された <code class="highlighter-rouge">ARG</code> 変数として、ビルド処理を行ったプラットフォーム（ビルドプラットフォーム）の、あるいはイメージを作り出したプラットフォーム（ターゲットプラットフォーム）の、各ノード情報を提供するものがあります。
-ターゲットプラットフォームは <code class="highlighter-rouge">docker build</code> の <code class="highlighter-rouge">--platform</code> フラグを使って指定することもできます。</p>
+<p>Docker にはあらかじめ定義された <code class="language-plaintext highlighter-rouge">ARG</code> 変数として、ビルド処理を行ったプラットフォーム（ビルドプラットフォーム）の、あるいはイメージを作り出したプラットフォーム（ターゲットプラットフォーム）の、各ノード情報を提供するものがあります。
+ターゲットプラットフォームは <code class="language-plaintext highlighter-rouge">docker build</code> の <code class="language-plaintext highlighter-rouge">--platform</code> フラグを使って指定することもできます。</p>
 
-<p>以下の <code class="highlighter-rouge">ARG</code> 変数が自動的に定義されています。</p>
+<p>以下の <code class="language-plaintext highlighter-rouge">ARG</code> 変数が自動的に定義されています。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">TARGETPLATFORM</code> - ビルド結果のプラットフォーム。 <code class="highlighter-rouge">linux/amd64</code>、 <code class="highlighter-rouge">linux/arm/v7</code>、 <code class="highlighter-rouge">windows/amd64</code> など。</li>
-  <li><code class="highlighter-rouge">TARGETOS</code> - TARGETPLATFORM の OS 部分。</li>
-  <li><code class="highlighter-rouge">TARGETARCH</code> - TARGETPLATFORM のアーキテクチャー部分。</li>
-  <li><code class="highlighter-rouge">TARGETVARIANT</code> - TARGETPLATFORM のバリアント（variant）部分。</li>
-  <li><code class="highlighter-rouge">BUILDPLATFORM</code> - ビルド処理を行ったプラットフォーム。</li>
-  <li><code class="highlighter-rouge">BUILDOS</code> - BUILDPLATFORM の OS 部分。</li>
-  <li><code class="highlighter-rouge">BUILDARCH</code> - BUILDPLATFORM のアーキテクチャー部分。</li>
-  <li><code class="highlighter-rouge">BUILDVARIANT</code> - BUILDPLATFORM のバリアント（variant）部分。</li>
+  <li><code class="language-plaintext highlighter-rouge">TARGETPLATFORM</code> - ビルド結果のプラットフォーム。 <code class="language-plaintext highlighter-rouge">linux/amd64</code>、 <code class="language-plaintext highlighter-rouge">linux/arm/v7</code>、 <code class="language-plaintext highlighter-rouge">windows/amd64</code> など。</li>
+  <li><code class="language-plaintext highlighter-rouge">TARGETOS</code> - TARGETPLATFORM の OS 部分。</li>
+  <li><code class="language-plaintext highlighter-rouge">TARGETARCH</code> - TARGETPLATFORM のアーキテクチャー部分。</li>
+  <li><code class="language-plaintext highlighter-rouge">TARGETVARIANT</code> - TARGETPLATFORM のバリアント（variant）部分。</li>
+  <li><code class="language-plaintext highlighter-rouge">BUILDPLATFORM</code> - ビルド処理を行ったプラットフォーム。</li>
+  <li><code class="language-plaintext highlighter-rouge">BUILDOS</code> - BUILDPLATFORM の OS 部分。</li>
+  <li><code class="language-plaintext highlighter-rouge">BUILDARCH</code> - BUILDPLATFORM のアーキテクチャー部分。</li>
+  <li><code class="language-plaintext highlighter-rouge">BUILDVARIANT</code> - BUILDPLATFORM のバリアント（variant）部分。</li>
 </ul>
 
 <p>この変数はグローバルスコープにより定義されます。
-したがってビルドステージの内部にて、あるいは <code class="highlighter-rouge">RUN</code> コマンドにおいて、自動的に利用できるものではありません。
+したがってビルドステージの内部にて、あるいは <code class="language-plaintext highlighter-rouge">RUN</code> コマンドにおいて、自動的に利用できるものではありません。
 ビルドステージにおいてこの変数を明示的に利用するためには、値をつけずにその変数を再定義します。</p>
 
 <p>たとえば以下のとおりです。</p>
@@ -1882,61 +1882,61 @@ RUN echo "I'm building for $TARGETPLATFORM"
 
 <h3 id="impact-on-build-caching">ビルドキャッシュへの影響</h3>
 
-<p><code class="highlighter-rouge">ARG</code> 変数は <code class="highlighter-rouge">ENV</code> 変数とは違って、ビルドイメージの中に保持されません。
-しかし <code class="highlighter-rouge">ARG</code> 変数はビルドキャッシュへ同じような影響を及ぼします。
-Dockerfile に <code class="highlighter-rouge">ARG</code> 変数が定義されていて、その値が前回のビルドとは異なった値が設定されたとします。
+<p><code class="language-plaintext highlighter-rouge">ARG</code> 変数は <code class="language-plaintext highlighter-rouge">ENV</code> 変数とは違って、ビルドイメージの中に保持されません。
+しかし <code class="language-plaintext highlighter-rouge">ARG</code> 変数はビルドキャッシュへ同じような影響を及ぼします。
+Dockerfile に <code class="language-plaintext highlighter-rouge">ARG</code> 変数が定義されていて、その値が前回のビルドとは異なった値が設定されたとします。
 このとき「キャッシュミス」（cache miss）が発生しますが、それは初めて利用されたときであり、定義された段階ではありません。
-特に <code class="highlighter-rouge">ARG</code> 命令に続く <code class="highlighter-rouge">RUN</code> 命令は、<code class="highlighter-rouge">ARG</code> 変数の値を（環境変数として）暗に利用しますが、そこでキャッシュミスが起こります。
-定義済の <code class="highlighter-rouge">ARG</code> 変数は、<code class="highlighter-rouge">Dockerfile</code> 内に <code class="highlighter-rouge">ARG</code> 行がない限りは、キャッシュは行われません。</p>
+特に <code class="language-plaintext highlighter-rouge">ARG</code> 命令に続く <code class="language-plaintext highlighter-rouge">RUN</code> 命令は、<code class="language-plaintext highlighter-rouge">ARG</code> 変数の値を（環境変数として）暗に利用しますが、そこでキャッシュミスが起こります。
+定義済の <code class="language-plaintext highlighter-rouge">ARG</code> 変数は、<code class="language-plaintext highlighter-rouge">Dockerfile</code> 内に <code class="language-plaintext highlighter-rouge">ARG</code> 行がない限りは、キャッシュは行われません。</p>
 
 <p>たとえば以下の 2 つの Dockerfile を考えます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
 2 ARG CONT_IMG_VER
 3 RUN echo $CONT_IMG_VER
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
 2 ARG CONT_IMG_VER
 3 RUN echo hello
 </code></pre></div></div>
 
-<p>コマンドラインから <code class="highlighter-rouge">--build-arg CONT_IMG_VER=&lt;value&gt;</code> を指定すると 2 つの例ともに、2 行めの記述ではキャッシュミスが起きず、3 行めで発生します。
-<code class="highlighter-rouge">ARG CONT_IMG_VER</code> は、<code class="highlighter-rouge">RUN</code> 行において <code class="highlighter-rouge">CONT_IMG_VER=&lt;value&gt;</code> echo hello と同等のことが実行されるので、<code class="highlighter-rouge">&lt;value&gt;</code> が変更されると、キャッシュミスが起こるということです。</p>
+<p>コマンドラインから <code class="language-plaintext highlighter-rouge">--build-arg CONT_IMG_VER=&lt;value&gt;</code> を指定すると 2 つの例ともに、2 行めの記述ではキャッシュミスが起きず、3 行めで発生します。
+<code class="language-plaintext highlighter-rouge">ARG CONT_IMG_VER</code> は、<code class="language-plaintext highlighter-rouge">RUN</code> 行において <code class="language-plaintext highlighter-rouge">CONT_IMG_VER=&lt;value&gt;</code> echo hello と同等のことが実行されるので、<code class="language-plaintext highlighter-rouge">&lt;value&gt;</code> が変更されると、キャッシュミスが起こるということです。</p>
 
 <p>もう 1 つの例を、同じコマンドライン実行を行って利用するとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
 2 ARG CONT_IMG_VER
 3 ENV CONT_IMG_VER $CONT_IMG_VER
 4 RUN echo $CONT_IMG_VER
 </code></pre></div></div>
 
 <p>この例においてキャッシュミスは 3 行めで発生します。
-これは <code class="highlighter-rouge">ENV</code> における変数値が <code class="highlighter-rouge">ARG</code> 変数を参照しており、その変数値がコマンドラインから変更されるために起きます。
-この例では <code class="highlighter-rouge">ENV</code> コマンドがイメージに対して変数値を書き込むものとなります。</p>
+これは <code class="language-plaintext highlighter-rouge">ENV</code> における変数値が <code class="language-plaintext highlighter-rouge">ARG</code> 変数を参照しており、その変数値がコマンドラインから変更されるために起きます。
+この例では <code class="language-plaintext highlighter-rouge">ENV</code> コマンドがイメージに対して変数値を書き込むものとなります。</p>
 
-<p><code class="highlighter-rouge">ENV</code> 命令が <code class="highlighter-rouge">ARG</code> 命令の同一変数名を上書きする例を見てみます。</p>
+<p><code class="language-plaintext highlighter-rouge">ENV</code> 命令が <code class="language-plaintext highlighter-rouge">ARG</code> 命令の同一変数名を上書きする例を見てみます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 FROM ubuntu
 2 ARG CONT_IMG_VER
 3 ENV CONT_IMG_VER hello
 4 RUN echo $CONT_IMG_VER
 </code></pre></div></div>
 
 <p>3 行めにおいてキャッシュミスは発生しません。
-これは <code class="highlighter-rouge">CONT_IMG_VER</code> が定数（<code class="highlighter-rouge">hello</code>）であるからです。
-その結果、4 行めの <code class="highlighter-rouge">RUN</code> 命令において用いられる環境変数およびその値は、ビルドの際に変更されません。</p>
+これは <code class="language-plaintext highlighter-rouge">CONT_IMG_VER</code> が定数（<code class="language-plaintext highlighter-rouge">hello</code>）であるからです。
+その結果、4 行めの <code class="language-plaintext highlighter-rouge">RUN</code> 命令において用いられる環境変数およびその値は、ビルドの際に変更されません。</p>
 
 <h2 id="onbuild">ONBUILD</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ONBUILD [INSTRUCTION]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ONBUILD [INSTRUCTION]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ONBUILD</code> 命令は、イメージに対して<strong>トリガー</strong>命令（trigger instruction）を追加します。
+<p><code class="language-plaintext highlighter-rouge">ONBUILD</code> 命令は、イメージに対して<strong>トリガー</strong>命令（trigger instruction）を追加します。
 トリガー命令は後々実行されるものであり、そのイメージが他のビルドにおけるベースイメージとして用いられたときに実行されます。
 このトリガー命令は、後続のビルドコンテキスト内で実行されます。
-後続の <code class="highlighter-rouge">Dockerfile</code> 内での <code class="highlighter-rouge">FROM</code> 命令の直後に、その命令が挿入されたかのようにして動作します。</p>
+後続の <code class="language-plaintext highlighter-rouge">Dockerfile</code> 内での <code class="language-plaintext highlighter-rouge">FROM</code> 命令の直後に、その命令が挿入されたかのようにして動作します。</p>
 
 <p>どのようなビルド命令でも、トリガー命令として登録することができます。</p>
 
@@ -1945,53 +1945,53 @@ Dockerfile に <code class="highlighter-rouge">ARG</code> 変数が定義され�
 
 <p>たとえば、繰り返し利用できる Python アプリケーション環境イメージがあるとします。
 そしてこのイメージにおいては、アプリケーションソースコードを所定のディレクトリに配置することが必要であって、さらにソースを配置した後にソースビルドを行うスクリプトを加えたいとします。
-このままでは <code class="highlighter-rouge">ADD</code> と <code class="highlighter-rouge">RUN</code> を単に呼び出すだけでは実現できません。
+このままでは <code class="language-plaintext highlighter-rouge">ADD</code> と <code class="language-plaintext highlighter-rouge">RUN</code> を単に呼び出すだけでは実現できません。
 それはアプリケーションソースコードがまだわかっていないからであり、ソースコードはアプリケーション環境ごとに異なるからです。
-アプリケーション開発者に向けて、ひながたとなる <code class="highlighter-rouge">Dockerfile</code> を提供して、コピーペーストした上でアプリケーションに組み入れるようにすることも考えられます。
+アプリケーション開発者に向けて、ひながたとなる <code class="language-plaintext highlighter-rouge">Dockerfile</code> を提供して、コピーペーストした上でアプリケーションに組み入れるようにすることも考えられます。
 しかしこれでは不十分であり、エラーも起こしやすくなります。
 そしてアプリケーションに特有のコードが含まれることになるので、更新作業も大変になります。</p>
 
-<p>これを解決するには <code class="highlighter-rouge">ONBUILD</code> を利用します。
+<p>これを解決するには <code class="language-plaintext highlighter-rouge">ONBUILD</code> を利用します。
 後々実行する追加の命令を登録しておき、次のビルドステージにおいて実行させるものです。</p>
 
 <p>これは以下のようにして動作します。</p>
 
 <ol>
-  <li><code class="highlighter-rouge">ONBUILD</code> 命令があると、現在ビルドしているイメージのメタデータに対してトリガーが追加されます。
+  <li><code class="language-plaintext highlighter-rouge">ONBUILD</code> 命令があると、現在ビルドしているイメージのメタデータに対してトリガーが追加されます。
 この命令は現在のビルドには影響を与えません。</li>
-  <li>ビルドの最後に、トリガーの一覧がイメージマニフェスト内の <code class="highlighter-rouge">OnBuild</code> というキーのもとに保存されます。
-この情報は <code class="highlighter-rouge">docker inspect</code> コマンドを使って確認することができます。</li>
+  <li>ビルドの最後に、トリガーの一覧がイメージマニフェスト内の <code class="language-plaintext highlighter-rouge">OnBuild</code> というキーのもとに保存されます。
+この情報は <code class="language-plaintext highlighter-rouge">docker inspect</code> コマンドを使って確認することができます。</li>
   <li>次のビルドにおけるベースイメージとして、このイメージを利用します。
-その指定には <code class="highlighter-rouge">FROM</code> 命令を用います。
-<code class="highlighter-rouge">FROM</code> 命令の処理の中で、後続ビルド処理が <code class="highlighter-rouge">ONBUILD</code> トリガーを見つけると、それが登録された順に実行していきます。
-トリガーが 1 つでも失敗したら、<code class="highlighter-rouge">FROM</code> 命令は中断され、ビルドが失敗することになります。
-すべてのトリガーが成功したら <code class="highlighter-rouge">FROM</code> 命令の処理が終わり、ビルド処理がその後に続きます。</li>
+その指定には <code class="language-plaintext highlighter-rouge">FROM</code> 命令を用います。
+<code class="language-plaintext highlighter-rouge">FROM</code> 命令の処理の中で、後続ビルド処理が <code class="language-plaintext highlighter-rouge">ONBUILD</code> トリガーを見つけると、それが登録された順に実行していきます。
+トリガーが 1 つでも失敗したら、<code class="language-plaintext highlighter-rouge">FROM</code> 命令は中断され、ビルドが失敗することになります。
+すべてのトリガーが成功したら <code class="language-plaintext highlighter-rouge">FROM</code> 命令の処理が終わり、ビルド処理がその後に続きます。</li>
   <li>トリガーは、イメージが実行された後は、イメージ内から削除されます。
 別の言い方をすれば、「孫」のビルドにまでは受け継がれないということです。</li>
 </ol>
 
 <p>例として以下のようなことを追加する場合が考えられます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[...]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[...]
 ONBUILD ADD . /app/src
 ONBUILD RUN /usr/local/bin/python-build --dir /app/src
 [...]
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>警告</strong>: <code class="highlighter-rouge">ONBUILD</code> 命令をつなぎ合わせた命令、<code class="highlighter-rouge">ONBUILD ONBUILD</code> は実現することはできません。</p>
+  <p><strong>警告</strong>: <code class="language-plaintext highlighter-rouge">ONBUILD</code> 命令をつなぎ合わせた命令、<code class="language-plaintext highlighter-rouge">ONBUILD ONBUILD</code> は実現することはできません。</p>
 </blockquote>
 
 <blockquote>
-  <p><strong>警告</strong>: <code class="highlighter-rouge">ONBUILD</code> 命令は <code class="highlighter-rouge">FROM</code> 命令や <code class="highlighter-rouge">MAINTAINER</code> 命令をトリガーとすることはできません。</p>
+  <p><strong>警告</strong>: <code class="language-plaintext highlighter-rouge">ONBUILD</code> 命令は <code class="language-plaintext highlighter-rouge">FROM</code> 命令や <code class="language-plaintext highlighter-rouge">MAINTAINER</code> 命令をトリガーとすることはできません。</p>
 </blockquote>
 
 <h2 id="stopsignal">STOPSIGNAL</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>STOPSIGNAL signal
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>STOPSIGNAL signal
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">STOPSIGNAL</code> 命令はシステムコールシグナルを設定するものであり、コンテナーが終了するときに送信されます。
+<p><code class="language-plaintext highlighter-rouge">STOPSIGNAL</code> 命令はシステムコールシグナルを設定するものであり、コンテナーが終了するときに送信されます。
 シグナルは負ではない整数値であり、カーネルのシステムコールテーブル内に合致するものを指定します。
 たとえば 9 などです。
 あるいは SIGNAME という形式のシグナル名を指定します。
@@ -1999,28 +1999,28 @@ ONBUILD RUN /usr/local/bin/python-build --dir /app/src
 
 <h2 id="healthcheck">HEALTHCHECK</h2>
 
-<p><code class="highlighter-rouge">HEALTHCHECK</code> 命令には 2 つの書式があります。</p>
+<p><code class="language-plaintext highlighter-rouge">HEALTHCHECK</code> 命令には 2 つの書式があります。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">HEALTHCHECK [OPTIONS] CMD command</code> （コンテナー内部でコマンドを実行し、コンテナーをヘルスチェック）</li>
-  <li><code class="highlighter-rouge">HEALTHCHECK NONE</code> （ベースイメージが行うヘルスチェックを無効化）</li>
+  <li><code class="language-plaintext highlighter-rouge">HEALTHCHECK [OPTIONS] CMD command</code> （コンテナー内部でコマンドを実行し、コンテナーをヘルスチェック）</li>
+  <li><code class="language-plaintext highlighter-rouge">HEALTHCHECK NONE</code> （ベースイメージが行うヘルスチェックを無効化）</li>
 </ul>
 
-<p><code class="highlighter-rouge">HEALTHCHECK</code> 命令は、コンテナーが動作していることをチェックする方法を指定するものです。
+<p><code class="language-plaintext highlighter-rouge">HEALTHCHECK</code> 命令は、コンテナーが動作していることをチェックする方法を指定するものです。
 この機能はたとえば、ウェブサーバーのプロセスが稼動はしているものの、無限ループに陥っていて新たな接続を受け入れられない状態を検知する場合などに利用できます。</p>
 
 <p>コンテナーにヘルスチェックが設定されていると、通常のステータスに加えて<strong>ヘルスステータス</strong>を持つことになります。
-このステータスの初期値は <code class="highlighter-rouge">starting</code> です。
-ヘルスチェックが行われると、このステータスは（それまでにどんなステータスであっても）<code class="highlighter-rouge">healthy</code> となります。
-ある一定数、連続してチェックに失敗すると、そのステータスは <code class="highlighter-rouge">unhealty</code> となります。</p>
+このステータスの初期値は <code class="language-plaintext highlighter-rouge">starting</code> です。
+ヘルスチェックが行われると、このステータスは（それまでにどんなステータスであっても）<code class="language-plaintext highlighter-rouge">healthy</code> となります。
+ある一定数、連続してチェックに失敗すると、そのステータスは <code class="language-plaintext highlighter-rouge">unhealty</code> となります。</p>
 
-<p><code class="highlighter-rouge">CMD</code> より前に記述できるオプションは以下のものです。</p>
+<p><code class="language-plaintext highlighter-rouge">CMD</code> より前に記述できるオプションは以下のものです。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">--interval=DURATION</code> (デフォルト: <code class="highlighter-rouge">30s</code>)</li>
-  <li><code class="highlighter-rouge">--timeout=DURATION</code> (デフォルト: <code class="highlighter-rouge">30s</code>)</li>
-  <li><code class="highlighter-rouge">--start-period=DURATION</code> (デフォルト: <code class="highlighter-rouge">0s</code>)</li>
-  <li><code class="highlighter-rouge">--retries=N</code> (デフォルト: <code class="highlighter-rouge">3</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">--interval=DURATION</code> (デフォルト: <code class="language-plaintext highlighter-rouge">30s</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">--timeout=DURATION</code> (デフォルト: <code class="language-plaintext highlighter-rouge">30s</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">--start-period=DURATION</code> (デフォルト: <code class="language-plaintext highlighter-rouge">0s</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">--retries=N</code> (デフォルト: <code class="language-plaintext highlighter-rouge">3</code>)</li>
 </ul>
 
 <p>ヘルスチェックは、コンテナーが起動した <strong>interval</strong> 秒後に最初に起動されます。
@@ -2028,17 +2028,17 @@ ONBUILD RUN /usr/local/bin/python-build --dir /app/src
 
 <p>1 回のヘルスチェックが <strong>timeout</strong> 秒以上かかったとき、そのチェックは失敗したものとして扱われます。</p>
 
-<p>コンテナーに対するヘルスチェックが <strong>retries</strong> 回分、連続して失敗した場合は <code class="highlighter-rouge">unhealthy</code> とみなされます。</p>
+<p>コンテナーに対するヘルスチェックが <strong>retries</strong> 回分、連続して失敗した場合は <code class="language-plaintext highlighter-rouge">unhealthy</code> とみなされます。</p>
 
 <p><strong>開始時間</strong> （start period）は、コンテナーが起動するまでに必要となる初期化時間を設定します。
 この時間内にヘルスチェックの失敗が発生したとしても、 <strong>retries</strong> 数の最大を越えたかどうかの判断は行われません。
 ただしこの開始時間内にヘルスチェックが 1 つでも成功したら、コンテナーは起動済であるとみなされます。
 そこで、それ以降にヘルスチェックが失敗したら、<strong>retries</strong> 数の最大を越えたかどうかがカウントされます。</p>
 
-<p>1 つの Dockerfile に記述できる <code class="highlighter-rouge">HEALTHCHECK</code> 命令はただ 1 つです。
-複数の <code class="highlighter-rouge">HEALTHCHECK</code> を記述しても、最後の命令しか効果はありません。</p>
+<p>1 つの Dockerfile に記述できる <code class="language-plaintext highlighter-rouge">HEALTHCHECK</code> 命令はただ 1 つです。
+複数の <code class="language-plaintext highlighter-rouge">HEALTHCHECK</code> を記述しても、最後の命令しか効果はありません。</p>
 
-<p><code class="highlighter-rouge">CMD</code> キーワードの後ろにあるコマンドは、シェルコマンド（たとえば <code class="highlighter-rouge">HEALTHCHECK CMD /bin/check-running</code>）か、あるいは exec 形式の配列（他の Dockerfile コマンド、たとえば <code class="highlighter-rouge">ENTRYPOINT</code> にあるもの）のいずれかを指定します。</p>
+<p><code class="language-plaintext highlighter-rouge">CMD</code> キーワードの後ろにあるコマンドは、シェルコマンド（たとえば <code class="language-plaintext highlighter-rouge">HEALTHCHECK CMD /bin/check-running</code>）か、あるいは exec 形式の配列（他の Dockerfile コマンド、たとえば <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> にあるもの）のいずれかを指定します。</p>
 
 <p>そのコマンドの終了ステータスが、コンテナーのヘルスステータスを表わします。
 返される値は以下となります。</p>
@@ -2051,36 +2051,36 @@ ONBUILD RUN /usr/local/bin/python-build --dir /app/src
 
 <p>たとえば 5 分間に 1 回のチェックとして、ウェブサーバーが 3 秒以内にサイトのメインページを提供できているかを確認するには、以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HEALTHCHECK --interval=5m --timeout=3s \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl -f http://localhost/ || exit 1
 </code></pre></div></div>
 
 <p>ヘルスチェックにが失敗しても、それをデバッグしやすくするために、そのコマンドが標準出力あるいは標準エラー出力へ書き込んだ文字列（UTF-8 エンコーディング）は、すべてヘルスステータス内に保存されます。
-<code class="highlighter-rouge">docker inspect</code> を使えば、すべて確認することができます。
+<code class="language-plaintext highlighter-rouge">docker inspect</code> を使えば、すべて確認することができます。
 ただしその出力は切り詰められます（現時点においては最初の 4096 バイト分のみを出力します）。</p>
 
-<p>コンテナーのヘルスステータスが変更されると、<code class="highlighter-rouge">health_status</code> イベントが生成されて、新たなヘルスステータスになります。</p>
+<p>コンテナーのヘルスステータスが変更されると、<code class="language-plaintext highlighter-rouge">health_status</code> イベントが生成されて、新たなヘルスステータスになります。</p>
 
-<p><code class="highlighter-rouge">HEALTHCHECK</code> による機能は Docker 1.12 において追加されました。</p>
+<p><code class="language-plaintext highlighter-rouge">HEALTHCHECK</code> による機能は Docker 1.12 において追加されました。</p>
 
 <h2 id="shell">SHELL</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHELL ["executable", "parameters"]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHELL ["executable", "parameters"]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">SHELL</code> 命令は、各種コマンドのシェル形式において用いられるデフォルトのシェルを、上書き設定するために利用します。
-デフォルトのシェルは Linux 上では <code class="highlighter-rouge">["/bin/sh", "-c"]</code>、Windows 上では <code class="highlighter-rouge">["cmd", "/S", "/C"]</code> です。
-<code class="highlighter-rouge">SHELL</code> 命令は Dockerfile 内において JSON 形式で記述しなければなりません。</p>
+<p><code class="language-plaintext highlighter-rouge">SHELL</code> 命令は、各種コマンドのシェル形式において用いられるデフォルトのシェルを、上書き設定するために利用します。
+デフォルトのシェルは Linux 上では <code class="language-plaintext highlighter-rouge">["/bin/sh", "-c"]</code>、Windows 上では <code class="language-plaintext highlighter-rouge">["cmd", "/S", "/C"]</code> です。
+<code class="language-plaintext highlighter-rouge">SHELL</code> 命令は Dockerfile 内において JSON 形式で記述しなければなりません。</p>
 
-<p><code class="highlighter-rouge">SHELL</code> 命令は特に Windows 上において利用されます。
-Windows には主に 2 つのネイティブなシェル、つまり <code class="highlighter-rouge">cmd</code> と <code class="highlighter-rouge">powershell</code> があり、両者はかなり異なります。
-しかも <code class="highlighter-rouge">sh</code> のような、さらに別のシェルも利用することができます。</p>
+<p><code class="language-plaintext highlighter-rouge">SHELL</code> 命令は特に Windows 上において利用されます。
+Windows には主に 2 つのネイティブなシェル、つまり <code class="language-plaintext highlighter-rouge">cmd</code> と <code class="language-plaintext highlighter-rouge">powershell</code> があり、両者はかなり異なります。
+しかも <code class="language-plaintext highlighter-rouge">sh</code> のような、さらに別のシェルも利用することができます。</p>
 
-<p><code class="highlighter-rouge">SHELL</code> 命令は、何度でも記述できます。
-個々の <code class="highlighter-rouge">SHELL</code> 命令は、それより前の <code class="highlighter-rouge">SHELL</code> 命令の値を上書きし、それ以降の命令に効果を及ぼします。
+<p><code class="language-plaintext highlighter-rouge">SHELL</code> 命令は、何度でも記述できます。
+個々の <code class="language-plaintext highlighter-rouge">SHELL</code> 命令は、それより前の <code class="language-plaintext highlighter-rouge">SHELL</code> 命令の値を上書きし、それ以降の命令に効果を及ぼします。
 たとえば以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM microsoft/windowsservercore
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM microsoft/windowsservercore
 
 # 以下のように実行： cmd /S /C echo default
 RUN echo default
@@ -2097,38 +2097,38 @@ SHELL ["cmd", "/S", "/C"]
 RUN echo hello
 </code></pre></div></div>
 
-<p>Dockerfile において <code class="highlighter-rouge">RUN</code>、<code class="highlighter-rouge">CMD</code>、<code class="highlighter-rouge">ENTRYPOINT</code> の各コマンドをシェル形式で記述した際には、<code class="highlighter-rouge">SHELL</code> 命令の設定による影響が及びます。</p>
+<p>Dockerfile において <code class="language-plaintext highlighter-rouge">RUN</code>、<code class="language-plaintext highlighter-rouge">CMD</code>、<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> の各コマンドをシェル形式で記述した際には、<code class="language-plaintext highlighter-rouge">SHELL</code> 命令の設定による影響が及びます。</p>
 
-<p>以下に示す例は、Windows 上において見られる普通の実行パターンですが、<code class="highlighter-rouge">SHELL</code> 命令を使って簡単に実現することができます。</p>
+<p>以下に示す例は、Windows 上において見られる普通の実行パターンですが、<code class="language-plaintext highlighter-rouge">SHELL</code> 命令を使って簡単に実現することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 RUN powershell -command Execute-MyCmdlet -param1 "c:\foo.txt"
 ...
 </code></pre></div></div>
 
 <p>Docker によって実行されるコマンドは以下となります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmd /S /C powershell -command Execute-MyCmdlet -param1 "c:\foo.txt"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmd /S /C powershell -command Execute-MyCmdlet -param1 "c:\foo.txt"
 </code></pre></div></div>
 
 <p>これは効率的ではなく、そこには 2 つの理由があります。
 1 つめは、コマンドプロセッサー cmd.exe（つまりはシェル）が不要に呼び出されているからです。
-2 つめは、シェル形式の <code class="highlighter-rouge">RUN</code> 命令において、常に <code class="highlighter-rouge">powershell -command</code> を各コマンドの頭につけて実行しなければならないからです。</p>
+2 つめは、シェル形式の <code class="language-plaintext highlighter-rouge">RUN</code> 命令において、常に <code class="language-plaintext highlighter-rouge">powershell -command</code> を各コマンドの頭につけて実行しなければならないからです。</p>
 
 <p>これを効率化するには、2 つあるメカニズムの 1 つを取り入れることです。
 1 つは、RUN コマンドの JSON 形式を使って、以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 RUN ["powershell", "-command", "Execute-MyCmdlet", "-param1 \"c:\\foo.txt\""]
 ...
 </code></pre></div></div>
 
 <p>JSON 形式を使えば、あいまいさはなくなり、不要な cmd.exe を使うこともなくなります。
 しかしダブルクォートやエスケープを行うことも必要となり、より多くを記述することにもなります。
-もう 1 つの方法は <code class="highlighter-rouge">SHELL</code> 命令とシェル形式を使って、Windows ユーザーにとって、より自然な文法で実現するやり方です。
-特にパーサーディレクティブ <code class="highlighter-rouge">escape</code> を組み合わせて実現します。</p>
+もう 1 つの方法は <code class="language-plaintext highlighter-rouge">SHELL</code> 命令とシェル形式を使って、Windows ユーザーにとって、より自然な文法で実現するやり方です。
+特にパーサーディレクティブ <code class="language-plaintext highlighter-rouge">escape</code> を組み合わせて実現します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=`
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># escape=`
 
 FROM microsoft/nanoserver
 SHELL ["powershell","-command"]
@@ -2139,7 +2139,7 @@ RUN c:\example\Execute-MyCmdlet -sample 'hello world'
 
 <p>これは以下のようになります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS E:\docker\build\shell&gt; docker build -t shell .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS E:\docker\build\shell&gt; docker build -t shell .
 Sending build context to Docker daemon 4.096 kB
 Step 1/5 : FROM microsoft/nanoserver
  ---&gt; 22738ff49c6d
@@ -2173,12 +2173,12 @@ Successfully built 8e559e9bf424
 PS E:\docker\build\shell&gt;
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">SHELL</code> 命令はまた、シェルの動作を変更する際にも利用することができます。
-たとえば Windows 上において <code class="highlighter-rouge">SHELL cmd /S /C /V:ON|OFF</code> を実行すると、遅延環境変数の展開方法を変更することができます。</p>
+<p><code class="language-plaintext highlighter-rouge">SHELL</code> 命令はまた、シェルの動作を変更する際にも利用することができます。
+たとえば Windows 上において <code class="language-plaintext highlighter-rouge">SHELL cmd /S /C /V:ON|OFF</code> を実行すると、遅延環境変数の展開方法を変更することができます。</p>
 
-<p><code class="highlighter-rouge">SHELL</code> 命令は Linux において、<code class="highlighter-rouge">zsh</code>、<code class="highlighter-rouge">csh</code>、<code class="highlighter-rouge">tcsh</code> などのシェルが必要となる場合にも利用することができます。</p>
+<p><code class="language-plaintext highlighter-rouge">SHELL</code> 命令は Linux において、<code class="language-plaintext highlighter-rouge">zsh</code>、<code class="language-plaintext highlighter-rouge">csh</code>、<code class="language-plaintext highlighter-rouge">tcsh</code> などのシェルが必要となる場合にも利用することができます。</p>
 
-<p><code class="highlighter-rouge">SHELL</code> による機能は Docker 1.12 において追加されました。</p>
+<p><code class="language-plaintext highlighter-rouge">SHELL</code> による機能は Docker 1.12 において追加されました。</p>
 
 <h2 id="external-implementation-features">外部実装機能</h2>
 
@@ -2191,7 +2191,7 @@ PS E:\docker\build\shell&gt;
 
 <p>以下では Dockerfile の文法例をいくつか示します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Nginx
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Nginx
 #
 # VERSION               0.0.1
 
@@ -2200,7 +2200,7 @@ LABEL Description="This image is used to start the foobar executable" Vendor="AC
 RUN apt-get update &amp;&amp; apt-get install -y inotify-tools nginx apache2 openssh-server
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Firefox over VNC
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Firefox over VNC
 #
 # VERSION               0.3
 
@@ -2218,7 +2218,7 @@ EXPOSE 5900
 CMD    ["x11vnc", "-forever", "-usepw", "-create"]
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Multiple images example
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Multiple images example
 #
 # VERSION               0.1
 

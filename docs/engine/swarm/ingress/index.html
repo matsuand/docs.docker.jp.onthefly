@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm モードにおけるルーティングメッシュの利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm モードにおけるルーティングメッシュの利用" />
   <meta property="og:description" content="Use the routing mesh to publish services externally to a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/ingress/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm モードにおけるルーティングメッシュの利用","description":"Use the routing mesh to publish services externally to a swarm","url":"https://docs.docker.com/engine/swarm/ingress/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -115,8 +115,8 @@
 <p>Swarm において ingress ネットワークを利用するには、Swarm モードを有効にする前に、Swarm ノード間において以下のポートを開放しておく必要があります。</p>
 
 <ul>
-  <li>ポート <code class="highlighter-rouge">7946</code> TCP/UDP、コンテナーのネットワーク検出のため。</li>
-  <li>ポート <code class="highlighter-rouge">4789</code> UDP、コンテナーの ingress ネットワークのため。</li>
+  <li>ポート <code class="language-plaintext highlighter-rouge">7946</code> TCP/UDP、コンテナーのネットワーク検出のため。</li>
+  <li>ポート <code class="language-plaintext highlighter-rouge">4789</code> UDP、コンテナーの ingress ネットワークのため。</li>
 </ul>
 
 <p>これに加えて、たとえば外部のロードバランサーなどの外部リソースが、特定ポートへのアクセスを必要とする場合には、Swarm ノード間においてその公開ポートを開放しておくことも必要です。</p>
@@ -125,9 +125,9 @@
 
 <h2 id="publish-a-port-for-a-service">サービスにおけるポート公開</h2>
 
-<p>サービス生成時にポートを公開するには <code class="highlighter-rouge">--publish</code> フラグを利用します。
-その際にはコンテナー内部のポート指定に <code class="highlighter-rouge">target</code> を用い、ルーティングメッシュ上に割り当てるポートの指定に <code class="highlighter-rouge">published</code> を用います。
-<code class="highlighter-rouge">published</code> の指定がなかった場合は、各サービスタスクにおいてランダムに高位のポート番号が割り振られます。
+<p>サービス生成時にポートを公開するには <code class="language-plaintext highlighter-rouge">--publish</code> フラグを利用します。
+その際にはコンテナー内部のポート指定に <code class="language-plaintext highlighter-rouge">target</code> を用い、ルーティングメッシュ上に割り当てるポートの指定に <code class="language-plaintext highlighter-rouge">published</code> を用います。
+<code class="language-plaintext highlighter-rouge">published</code> の指定がなかった場合は、各サービスタスクにおいてランダムに高位のポート番号が割り振られます。
 ポート番号がどの番号に割り振られたかを知るには、タスクの確認が必要です。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="se">\</span>
@@ -138,14 +138,14 @@
 
 <blockquote>
   <p><strong>メモ</strong>: 上のコマンドの古い書式として、コロン区切りの文字列を用いるものがあります。
-その場合、1 つめが公開ポート、2 つめがターゲットとなるポートとなり、たとえば <code class="highlighter-rouge">-p 8080:80</code> と指定します。
+その場合、1 つめが公開ポート、2 つめがターゲットとなるポートとなり、たとえば <code class="language-plaintext highlighter-rouge">-p 8080:80</code> と指定します。
 好ましいのは新たな書式です。
 その方が読みやすく、より柔軟性があるからです。</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">&lt;公開ポート&gt;</code> は、Swarm がサービスを利用可能とするポートです。
+<p><code class="language-plaintext highlighter-rouge">&lt;公開ポート&gt;</code> は、Swarm がサービスを利用可能とするポートです。
 これを省略すると、高位のポート番号が割り振られます。
-<code class="highlighter-rouge">&lt;コンテナーポート&gt;</code> は、コンテナーが待ち受けるポートです。
+<code class="language-plaintext highlighter-rouge">&lt;コンテナーポート&gt;</code> は、コンテナーが待ち受けるポートです。
 このパラメーターは必須です。</p>
 
 <p>たとえば以下のコマンドは nginx コンテナー上のポート 80 を、Swarm 内の全ノード上のポート 8080 に向けて公開します。</p>
@@ -174,7 +174,7 @@ Swarm 内のノードそのものには、実際にはポート 8080 が割り�
   &lt;サービス&gt;
 </code></pre></div></div>
 
-<p>サービスの公開ポートの確認には <code class="highlighter-rouge">docker service inspect</code> を使います。
+<p>サービスの公開ポートの確認には <code class="language-plaintext highlighter-rouge">docker service inspect</code> を使います。
 たとえば以下のとおりです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service inspect <span class="nt">--format</span><span class="o">=</span><span class="s2">"{{json .Endpoint.Spec.Ports}}"</span> my-web
@@ -182,7 +182,7 @@ Swarm 内のノードそのものには、実際にはポート 8080 が割り�
 <span class="o">[{</span><span class="s2">"Protocol"</span>:<span class="s2">"tcp"</span>,<span class="s2">"TargetPort"</span>:80,<span class="s2">"PublishedPort"</span>:8080<span class="o">}]</span>
 </code></pre></div></div>
 
-<p>上の出力結果では、コンテナー側に <code class="highlighter-rouge">&lt;コンテナーポート&gt;</code>（ラベル <code class="highlighter-rouge">TargetPort</code> の部分）、サービスへのリクエストを待ち受けるノード側に <code class="highlighter-rouge">&lt;公開ポート&gt;</code>（ラベル <code class="highlighter-rouge">PublishedPort</code> の部分）があるのがわかります。</p>
+<p>上の出力結果では、コンテナー側に <code class="language-plaintext highlighter-rouge">&lt;コンテナーポート&gt;</code>（ラベル <code class="language-plaintext highlighter-rouge">TargetPort</code> の部分）、サービスへのリクエストを待ち受けるノード側に <code class="language-plaintext highlighter-rouge">&lt;公開ポート&gt;</code>（ラベル <code class="language-plaintext highlighter-rouge">PublishedPort</code> の部分）があるのがわかります。</p>
 
 <h3 id="publish-a-port-for-tcp-only-or-udp-only">TCP のみ、UDP のみのポート公開</h3>
 
@@ -190,7 +190,7 @@ Swarm 内のノードそのものには、実際にはポート 8080 が割り�
 このかわりに、明示的に UDP ポートを指定するか、TCP ポートに UDP ポートを加えた指定とすることができます。
 TCP と UDP の両方を公開するとします。
 プロトコルの指定を省略してしまうと、TCP ポートとしてしか公開されません。
-長い文法（Docker 1.13 またはそれ以降において推奨される）を使って、<code class="highlighter-rouge">protocol</code> キーに <code class="highlighter-rouge">tcp</code> または <code class="highlighter-rouge">udp</code> を設定します。</p>
+長い文法（Docker 1.13 またはそれ以降において推奨される）を使って、<code class="language-plaintext highlighter-rouge">protocol</code> キーに <code class="language-plaintext highlighter-rouge">tcp</code> または <code class="language-plaintext highlighter-rouge">udp</code> を設定します。</p>
 
 <h4 id="tcp-only">TCP のみの指定</h4>
 
@@ -246,7 +246,7 @@ TCP と UDP の両方を公開するとします。
 
 <p>ルーティングメッシュは無効化することができます。
 無効化した場合、特定のノード上に割り当てられているポートにアクセスすると、常にそのノード上に稼動しているサービスインスタンスにアクセスすることになります。
-これは <code class="highlighter-rouge">host</code> モードと呼ばれます。
+これは <code class="language-plaintext highlighter-rouge">host</code> モードと呼ばれます。
 この場合には注意しておくべき点がいくつかあります。</p>
 
 <ul>
@@ -256,14 +256,14 @@ TCP と UDP の両方を公開するとします。
   </li>
   <li>
     <p>各ノードにおいて複数のサービスタスクを実行したい場合（たとえば 5 つのノードに対して 10 個のレプリカを実行させたい場合）、対象ポートを固定することはできません。
-この場合には、ランダムな高位のポート番号を割り当てるようにする（<code class="highlighter-rouge">published</code> を指定しない）か、または対象ノード上では単一のサービスインスタンスのみが稼動しているようにするかのいずれかを行います。
+この場合には、ランダムな高位のポート番号を割り当てるようにする（<code class="language-plaintext highlighter-rouge">published</code> を指定しない）か、または対象ノード上では単一のサービスインスタンスのみが稼動しているようにするかのいずれかを行います。
 つまり、サービスのレプリカは行わずにグローバルとするか、あるいはノード配置に関する制約（placement constraint）を利用します。</p>
   </li>
 </ul>
 
-<p>ルーティングメッシュを無効化するには、サービス生成時に長い文法による <code class="highlighter-rouge">--publish</code> を使って、<code class="highlighter-rouge">mode</code> を <code class="highlighter-rouge">host</code> に設定する必要があります。
-<code class="highlighter-rouge">mode</code> キーを省略するか、<code class="highlighter-rouge">ingress</code> に設定した場合、ルーティングメッシュが有効になります。
-以下のコマンドでは、<code class="highlighter-rouge">host</code> モードを使ってグローバルなサービスを生成し、ルーティングメッシュは無効化します。</p>
+<p>ルーティングメッシュを無効化するには、サービス生成時に長い文法による <code class="language-plaintext highlighter-rouge">--publish</code> を使って、<code class="language-plaintext highlighter-rouge">mode</code> を <code class="language-plaintext highlighter-rouge">host</code> に設定する必要があります。
+<code class="language-plaintext highlighter-rouge">mode</code> キーを省略するか、<code class="language-plaintext highlighter-rouge">ingress</code> に設定した場合、ルーティングメッシュが有効になります。
+以下のコマンドでは、<code class="language-plaintext highlighter-rouge">host</code> モードを使ってグローバルなサービスを生成し、ルーティングメッシュは無効化します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service create <span class="nt">--name</span> dns-cache <span class="se">\</span>
   <span class="nt">--publish</span> <span class="nv">published</span><span class="o">=</span>53,target<span class="o">=</span>53,protocol<span class="o">=</span>udp,mode<span class="o">=</span>host <span class="se">\</span>
@@ -288,7 +288,7 @@ Swarm ノードは、プロキシーサーバーにアクセスできるので�
 ただし外部からアクセスすることはできません。</p>
 
 <p>ロードバランサーによって Swarm ノード間にリクエストを分散する際には、タスクがスケジューリングされていないノードであってもかまいません。
-たとえば以下のように <code class="highlighter-rouge">/etc/haproxy/haproxy.cfg</code> に HAProxy 設定を行うことができます。</p>
+たとえば以下のように <code class="language-plaintext highlighter-rouge">/etc/haproxy/haproxy.cfg</code> に HAProxy 設定を行うことができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>global
         log /dev/log    local0
@@ -318,7 +318,7 @@ HAProxy に関する詳細は <a href="https://cbonte.github.io/haproxy-dconv/">
 
 <h3 id="without-the-routing-mesh">ルーティングメッシュを利用しない方法</h3>
 
-<p>ルーティングメッシュは利用せずに外部のロードバランサーを用いるには、<code class="highlighter-rouge">--endpoint-mode</code> に設定する値を、デフォルトの <code class="highlighter-rouge">vip</code> ではなく <code class="highlighter-rouge">dnsrr</code> にします。
+<p>ルーティングメッシュは利用せずに外部のロードバランサーを用いるには、<code class="language-plaintext highlighter-rouge">--endpoint-mode</code> に設定する値を、デフォルトの <code class="language-plaintext highlighter-rouge">vip</code> ではなく <code class="language-plaintext highlighter-rouge">dnsrr</code> にします。
 この場合、単一の仮想 IP はありません。
 その代わりに Docker は、サービスの DNS エントリーを作り出します。
 そしてサービス名に対する DNS クエリーが IP アドレス一覧を返すので、クライアントはその中の 1 つに直接接続するようになります。

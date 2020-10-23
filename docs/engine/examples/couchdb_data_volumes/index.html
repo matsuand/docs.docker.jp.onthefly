@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize a CouchDB service | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerize a CouchDB service" />
   <meta property="og:description" content="Sharing data between 2 couchdb databases" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/examples/couchdb_data_volumes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize a CouchDB service","description":"Sharing data between 2 couchdb databases","url":"https://docs.docker.com/engine/examples/couchdb_data_volumes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -118,31 +118,31 @@ different versions of CouchDB on the same data, etc.</p>
 
 <h2 id="create-first-database">Create first database</h2>
 
-<p>We’re marking <code class="highlighter-rouge">/var/lib/couchdb</code> as a data volume.</p>
+<p>We’re marking <code class="language-plaintext highlighter-rouge">/var/lib/couchdb</code> as a data volume.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
 </code></pre></div></div>
 
 <h2 id="add-data-to-the-first-database">Add data to the first database</h2>
 
-<p>We’re assuming your Docker host is reachable at <code class="highlighter-rouge">localhost</code>. If not,
-replace <code class="highlighter-rouge">localhost</code> with the public IP of your Docker host.</p>
+<p>We’re assuming your Docker host is reachable at <code class="language-plaintext highlighter-rouge">localhost</code>. If not,
+replace <code class="language-plaintext highlighter-rouge">localhost</code> with the public IP of your Docker host.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ HOST=localhost
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ HOST=localhost
 $ URL="http://$HOST:$(docker port $COUCH1 5984 | grep -o '[1-9][0-9]*$')/_utils/"
 $ echo "Navigate to $URL in your browser, and use the couch interface to add data"
 </code></pre></div></div>
 
 <h2 id="create-second-database">Create second database</h2>
 
-<p>This time, we’re requesting shared access to <code class="highlighter-rouge">$COUCH1</code>’s volumes.</p>
+<p>This time, we’re requesting shared access to <code class="language-plaintext highlighter-rouge">$COUCH1</code>’s volumes.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
 </code></pre></div></div>
 
 <h2 id="browse-data-on-the-second-database">Browse data on the second database</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ HOST=localhost
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ HOST=localhost
 $ URL="http://$HOST:$(docker port $COUCH2 5984 | grep -o '[1-9][0-9]*$')/_utils/"
 $ echo "Navigate to $URL in your browser. You should see the same data as in the first database"'!'
 </code></pre></div></div>

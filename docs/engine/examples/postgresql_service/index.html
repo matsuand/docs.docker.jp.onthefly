@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>PostgreSQL を Docker 化する | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="PostgreSQL を Docker 化する" />
   <meta property="og:description" content="Running and installing a PostgreSQL service" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/examples/postgresql_service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"PostgreSQL を Docker 化する","description":"Running and installing a PostgreSQL service","url":"https://docs.docker.com/engine/examples/postgresql_service/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,7 +110,7 @@
 
 <p>条件に合う Docker イメージが <a href="https://hub.docker.com">Docker Hub</a> にはなかったと仮定して、自分で作ることにします。</p>
 
-<p>新たに <code class="highlighter-rouge">Dockerfile</code> を作るところから始めます。</p>
+<p>新たに <code class="language-plaintext highlighter-rouge">Dockerfile</code> を作るところから始めます。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
@@ -138,7 +138,7 @@ suitably secure.</p>
 <span class="c"># Install ``python-software-properties``, ``software-properties-common`` and PostgreSQL 9.3</span>
 <span class="c">#  There are some warnings (in red) that show up during the build. You can hide</span>
 <span class="c">#  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive</span>
-<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
 
 <span class="c"># Note: The official Debian and Ubuntu images automatically ``apt-get clean``</span>
 <span class="c"># after each ``apt-get``</span>
@@ -185,14 +185,14 @@ suitably secure.</p>
 <a href="/docs.docker.jp.onthefly/network/links/"><strong>リンクコンテナー</strong></a> を使うか、ホスト（あるいはネットワーク）からアクセスします。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: <code class="highlighter-rouge">--rm</code> は、コンテナーが正常終了したときに、コンテナーとそのイメージを削除するものです。</p>
+  <p><strong>メモ</strong>: <code class="language-plaintext highlighter-rouge">--rm</code> は、コンテナーが正常終了したときに、コンテナーとそのイメージを削除するものです。</p>
 </blockquote>
 
 <h3 id="use-container-linking">コンテナーリンクの利用</h3>
 
 <p>Containers can be linked to another container’s ports directly using
-<code class="highlighter-rouge">--link remote_name:local_alias</code> in the client’s
-<code class="highlighter-rouge">docker run</code>. This sets a number of environment
+<code class="language-plaintext highlighter-rouge">--link remote_name:local_alias</code> in the client’s
+<code class="language-plaintext highlighter-rouge">docker run</code>. This sets a number of environment
 variables that can then be used to connect:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-t</span> <span class="nt">-i</span> <span class="nt">--link</span> pg_test:pg eg_postgresql bash
@@ -203,7 +203,7 @@ postgres@7ef98b1b7243:/<span class="nv">$ </span>psql <span class="nt">-h</span>
 <h3 id="connect-from-your-host-system">ホストシステムからの接続</h3>
 
 <p>Assuming you have the postgresql-client installed, you can use the
-host-mapped port to test as well. You need to use <code class="highlighter-rouge">docker ps</code>
+host-mapped port to test as well. You need to use <code class="language-plaintext highlighter-rouge">docker ps</code>
 to find out what local host port the container is mapped to
 first:</p>
 
@@ -217,14 +217,14 @@ CONTAINER ID        IMAGE                  COMMAND                CREATED       
 
 <h3 id="test-the-database">データベースの動作確認</h3>
 
-<p>Once you have authenticated and have a <code class="highlighter-rouge">docker =#</code>
+<p>Once you have authenticated and have a <code class="language-plaintext highlighter-rouge">docker =#</code>
 prompt, you can create a table and populate it.</p>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">psql</span> <span class="p">(</span><span class="mi">9</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">Type</span> <span class="nv">"help"</span> <span class="k">for</span> <span class="n">help</span><span class="p">.</span>
 
 <span class="err">$</span> <span class="n">docker</span><span class="o">=#</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">cities</span> <span class="p">(</span>
-<span class="n">docker</span><span class="p">(</span><span class="o">#</span>     <span class="n">name</span>            <span class="n">varchar</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span>
+<span class="n">docker</span><span class="p">(</span><span class="o">#</span>     <span class="n">name</span>            <span class="nb">varchar</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span>
 <span class="n">docker</span><span class="p">(</span><span class="o">#</span>     <span class="k">location</span>        <span class="n">point</span>
 <span class="n">docker</span><span class="p">(</span><span class="o">#</span> <span class="p">);</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span>

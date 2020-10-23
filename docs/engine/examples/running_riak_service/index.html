@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize a Riak service | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerize a Riak service" />
   <meta property="og:description" content="Build a Docker image with Riak pre-installed" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/examples/running_riak_service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize a Riak service","description":"Build a Docker image with Riak pre-installed","url":"https://docs.docker.com/engine/examples/running_riak_service/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,16 +110,16 @@ Riak pre-installed.</p>
 
 <h2 id="create-a-dockerfile">Create a Dockerfile</h2>
 
-<p>Create an empty file called <code class="highlighter-rouge">Dockerfile</code>:</p>
+<p>Create an empty file called <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch Dockerfile
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ touch Dockerfile
 </code></pre></div></div>
 
 <p>Next, define the parent image you want to use to build your image on top
 of. We use <a href="https://hub.docker.com/_/ubuntu/">Ubuntu</a> (tag:
-<code class="highlighter-rouge">trusty</code>), which is available on <a href="https://hub.docker.com">Docker Hub</a>:</p>
+<code class="language-plaintext highlighter-rouge">trusty</code>), which is available on <a href="https://hub.docker.com">Docker Hub</a>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Riak
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Riak
 #
 # VERSION       0.1.1
 
@@ -130,7 +130,7 @@ FROM ubuntu:trusty
 <p>After that, we install the curl which is used to download the repository setup
 script and we download the setup script and run it.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Install Riak repository before we do apt-get update, so that update happens
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Install Riak repository before we do apt-get update, so that update happens
 # in a single step
 RUN apt-get install -q -y curl &amp;&amp; \
     curl -fsSL https://packagecloud.io/install/repositories/basho/riak/script.deb | sudo bash
@@ -139,13 +139,13 @@ RUN apt-get install -q -y curl &amp;&amp; \
 <p>Then we install and setup a few dependencies:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">supervisor</code> is used manage the Riak processes</li>
-  <li><code class="highlighter-rouge">riak=2.0.5-1</code> is the Riak package coded to version 2.0.5</li>
+  <li><code class="language-plaintext highlighter-rouge">supervisor</code> is used manage the Riak processes</li>
+  <li><code class="language-plaintext highlighter-rouge">riak=2.0.5-1</code> is the Riak package coded to version 2.0.5</li>
 </ul>
 
 <!-- -->
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Install and setup project dependencies
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Install and setup project dependencies
 RUN apt-get update &amp;&amp; \
     apt-get install -y supervisor riak=2.0.5-1
 
@@ -158,33 +158,33 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 <p>After that, we modify Riak’s configuration:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Configure Riak to accept connections from any host
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Configure Riak to accept connections from any host
 RUN sed -i "s|listener.http.internal = 127.0.0.1:8098|listener.http.internal = 0.0.0.0:8098|" /etc/riak/riak.conf
 RUN sed -i "s|listener.protobuf.internal = 127.0.0.1:8087|listener.protobuf.internal = 0.0.0.0:8087|" /etc/riak/riak.conf
 </code></pre></div></div>
 
 <p>Then, we expose the Riak Protocol Buffers and HTTP interfaces:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Expose Riak Protocol Buffers and HTTP interfaces
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Expose Riak Protocol Buffers and HTTP interfaces
 EXPOSE 8087 8098
 </code></pre></div></div>
 
-<p>Finally, run <code class="highlighter-rouge">supervisord</code> so that Riak is started:</p>
+<p>Finally, run <code class="language-plaintext highlighter-rouge">supervisord</code> so that Riak is started:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CMD ["/usr/bin/supervisord"]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CMD ["/usr/bin/supervisord"]
 </code></pre></div></div>
 
 <h2 id="create-a-supervisord-configuration-file">Create a supervisord configuration file</h2>
 
-<p>Create an empty file called <code class="highlighter-rouge">supervisord.conf</code>. Make
-sure it’s at the same directory level as your <code class="highlighter-rouge">Dockerfile</code>:</p>
+<p>Create an empty file called <code class="language-plaintext highlighter-rouge">supervisord.conf</code>. Make
+sure it’s at the same directory level as your <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch supervisord.conf
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch supervisord.conf
 </code></pre></div></div>
 
 <p>Populate it with the following program definitions:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[supervisord]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[supervisord]
 nodaemon=true
 
 [program:riak]
@@ -202,7 +202,7 @@ stderr_logfile=/var/log/supervisor/%(program_name)s.log
 
 <p>Now you can build a Docker image for Riak:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t "&lt;yourname&gt;/riak" .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t "&lt;yourname&gt;/riak" .
 </code></pre></div></div>
 
 <h2 id="next-steps">Next steps</h2>

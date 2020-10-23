@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテントトラストの自動化 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテントトラストの自動化" />
   <meta property="og:description" content="コンテントトラストにおいてプッシュやプルを自動化します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/trust_automation/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテントトラストの自動化","description":"コンテントトラストにおいてプッシュやプルを自動化します。","url":"https://docs.docker.com/engine/security/trust/trust_automation/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -120,7 +120,7 @@
 <p>ローカルの Docker トラストの保存場所に向けて、委任鍵ペアの秘密鍵のインポートを自動化するには、新たな鍵に対するパスフレーズを与える必要があります。
 このパスフレーズは、委任鍵ペアによってタグにサインを行う際に、毎回必要となるものです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust key load delegation.key --name jeff
 Loading key from "delegation.key"...
@@ -133,7 +133,7 @@ Successfully imported key from delegation.key
 その後にリポジトリ内にトラストデータを生成するわけですが、その際にはローカルの Notary 標準ルート鍵のパスフレーズが必要になります。
 リポジトリをすでに初期化済みであれば、リポジトリのパスフレーズだけが必要になります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Export the Local Root Key Passphrase if required.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Export the Local Root Key Passphrase if required.
 $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 
 # Export the Repository Passphrase
@@ -150,9 +150,9 @@ Successfully added signer: registry.example.com/admin/demo
 <h2 id="sign-an-image">イメージへのサイン</h2>
 
 <p>最後に、イメージへのサインを行うには、サインする鍵のパスフレーズを環境変数に設定することが必要です。
-<code class="highlighter-rouge">docker trust key load</code> を実行していますから、ローカルの Docker トラストの保存場所に、すでに鍵はロードされ生成されています。</p>
+<code class="language-plaintext highlighter-rouge">docker trust key load</code> を実行していますから、ローカルの Docker トラストの保存場所に、すでに鍵はロードされ生成されています。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust sign registry.example.com/admin/demo:1
 Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
@@ -166,16 +166,16 @@ Successfully signed registry.example.com/admin/demo:1
 <h2 id="build-with-content-trust">コンテントトラストを使ったイメージビルド</h2>
 
 <p>イメージをビルドする際に、コンテントトラストを利用することもできます。
-<code class="highlighter-rouge">docker build</code> コマンドを実行する前に、環境変数 <code class="highlighter-rouge">DOCKER_CONTENT_TRUST</code> を手動で設定しておくか、あるいはスクリプトを用意して設定します。
+<code class="language-plaintext highlighter-rouge">docker build</code> コマンドを実行する前に、環境変数 <code class="language-plaintext highlighter-rouge">DOCKER_CONTENT_TRUST</code> を手動で設定しておくか、あるいはスクリプトを用意して設定します。
 以下のような単純な Dockerfile を例にして説明します。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> docker/trusttest:latest</span>
 <span class="k">RUN </span><span class="nb">echo</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">FROM</code> タグによって、サイン済みのイメージをプルします。
-<code class="highlighter-rouge">FROM</code> に指定されたイメージがローカルに存在しない場合、あるいはサインされていない場合、そのイメージをビルドすることはできません。
-<code class="highlighter-rouge">latest</code> タグに対するコンテントトラストデータがある場合、以下のビルドは成功します。</p>
+<p><code class="language-plaintext highlighter-rouge">FROM</code> タグによって、サイン済みのイメージをプルします。
+<code class="language-plaintext highlighter-rouge">FROM</code> に指定されたイメージがローカルに存在しない場合、あるいはサインされていない場合、そのイメージをビルドすることはできません。
+<code class="language-plaintext highlighter-rouge">latest</code> タグに対するコンテントトラストデータがある場合、以下のビルドは成功します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span> docker build <span class="nt">-t</span> docker/trusttest:testing <span class="nb">.</span>
 Using default tag: latest

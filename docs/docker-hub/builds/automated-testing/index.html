@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Automated repository tests | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Automated repository tests" />
   <meta property="og:description" content="Automated tests" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Automated repository tests","description":"Automated tests","url":"https://docs.docker.com/docker-hub/builds/automated-testing/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -106,18 +106,18 @@
   
 </span>
 <p>Docker Hub can automatically test changes to your source code repositories
-using containers. You can enable <code class="highlighter-rouge">Autotest</code> on <a href="/docker-hub/repos">any Docker Hub repository</a> to run tests on each pull request to the source code
+using containers. You can enable <code class="language-plaintext highlighter-rouge">Autotest</code> on <a href="/docker-hub/repos">any Docker Hub repository</a> to run tests on each pull request to the source code
 repository to create a continuous integration testing service.</p>
 
-<p>Enabling <code class="highlighter-rouge">Autotest</code> builds an image for testing purposes, but does <strong>not</strong>
+<p>Enabling <code class="language-plaintext highlighter-rouge">Autotest</code> builds an image for testing purposes, but does <strong>not</strong>
 automatically push the built image to the Docker repository. If you want to push
 built images to your Docker Hub repository, enable <a href="/docs.docker.jp.onthefly/docker-hub/builds/">Automated Builds</a>.</p>
 
 <h2 id="set-up-automated-test-files">Set up automated test files</h2>
 
-<p>To set up your automated tests, create a <code class="highlighter-rouge">docker-compose.test.yml</code> file which
-defines a <code class="highlighter-rouge">sut</code> service that lists the tests to be run.
-The <code class="highlighter-rouge">docker-compose.test.yml</code> file should be located in the same directory that
+<p>To set up your automated tests, create a <code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code> file which
+defines a <code class="language-plaintext highlighter-rouge">sut</code> service that lists the tests to be run.
+The <code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code> file should be located in the same directory that
 contains the Dockerfile used to build the image.</p>
 
 <p>For example:</p>
@@ -127,36 +127,36 @@ contains the Dockerfile used to build the image.</p>
   command: run_tests.sh
 </code></pre>
 
-<p>The example above builds the repository, and runs the <code class="highlighter-rouge">run_tests.sh</code> file inside
+<p>The example above builds the repository, and runs the <code class="language-plaintext highlighter-rouge">run_tests.sh</code> file inside
 a container using the built image.</p>
 
 <p>You can define any number of linked services in this file. The only requirement
-is that <code class="highlighter-rouge">sut</code> is defined. Its return code determines if tests passed or not.
-Tests <strong>pass</strong> if the <code class="highlighter-rouge">sut</code> service returns <code class="highlighter-rouge">0</code>, and <strong>fail</strong> otherwise.</p>
+is that <code class="language-plaintext highlighter-rouge">sut</code> is defined. Its return code determines if tests passed or not.
+Tests <strong>pass</strong> if the <code class="language-plaintext highlighter-rouge">sut</code> service returns <code class="language-plaintext highlighter-rouge">0</code>, and <strong>fail</strong> otherwise.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Only the <code class="highlighter-rouge">sut</code> service and all other services listed in <code class="highlighter-rouge">depends_on</code>
+  <p><strong>Note</strong>: Only the <code class="language-plaintext highlighter-rouge">sut</code> service and all other services listed in <code class="language-plaintext highlighter-rouge">depends_on</code>
 are started. For instance, if you have services that poll for changes in other
-services, be sure to include the polling services in the <code class="highlighter-rouge">depends_on</code> list to
+services, be sure to include the polling services in the <code class="language-plaintext highlighter-rouge">depends_on</code> list to
 make sure all of your services start.</p>
 </blockquote>
 
-<p>You can define more than one <code class="highlighter-rouge">docker-compose.test.yml</code> file if needed. Any file
-that ends in <code class="highlighter-rouge">.test.yml</code> is used for testing, and the tests run sequentially.
+<p>You can define more than one <code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code> file if needed. Any file
+that ends in <code class="language-plaintext highlighter-rouge">.test.yml</code> is used for testing, and the tests run sequentially.
 You can also use <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/#override-build-test-or-push-commands">custom build hooks</a>
 to further customize your test behavior.</p>
 
 <blockquote>
   <p><strong>Note</strong>: If you enable Automated builds, they also run any tests defined
-in the <code class="highlighter-rouge">test.yml</code> files.</p>
+in the <code class="language-plaintext highlighter-rouge">test.yml</code> files.</p>
 </blockquote>
 
 <h2 id="enable-automated-tests-on-a-repository">Enable automated tests on a repository</h2>
 
 <p>To enable testing on a source code repository, you must first create an
-associated build-repository in Docker Hub.  Your <code class="highlighter-rouge">Autotest</code> settings are
+associated build-repository in Docker Hub.  Your <code class="language-plaintext highlighter-rouge">Autotest</code> settings are
 configured on the same page as <a href="/docs.docker.jp.onthefly/docker-hub/builds/">automated builds</a>, however
-you do not need to enable Autobuilds to use <code class="highlighter-rouge">Autotest</code>. Autobuild is enabled per
+you do not need to enable Autobuilds to use <code class="language-plaintext highlighter-rouge">Autotest</code>. Autobuild is enabled per
 branch or tag, and you do not need to enable it at all.</p>
 
 <p>Only branches that are configured to use <strong>Autobuild</strong> push images to the
@@ -167,7 +167,7 @@ Docker repository, regardless of the Autotest settings.</p>
     <p>Log in to Docker Hub and select <strong>Repositories</strong> in the top navigation.</p>
   </li>
   <li>
-    <p>Select the repository you want to enable <code class="highlighter-rouge">Autotest</code> on.</p>
+    <p>Select the repository you want to enable <code class="language-plaintext highlighter-rouge">Autotest</code> on.</p>
   </li>
   <li>
     <p>From the repository view, click the <strong>Builds</strong> tab.</p>
@@ -193,16 +193,16 @@ Docker repository, regardless of the Autotest settings.</p>
 
     <ul>
       <li>
-        <p><code class="highlighter-rouge">Off</code>: No additional test builds. Tests only run if they’re configured
+        <p><code class="language-plaintext highlighter-rouge">Off</code>: No additional test builds. Tests only run if they’re configured
  as part of an automated build.</p>
       </li>
       <li>
-        <p><code class="highlighter-rouge">Internal pull requests</code>: Run a test build for any pull requests
+        <p><code class="language-plaintext highlighter-rouge">Internal pull requests</code>: Run a test build for any pull requests
  to branches that match a build rule, but only when the pull request comes
  from the same source repository.</p>
       </li>
       <li>
-        <p><code class="highlighter-rouge">Internal and external pull requests</code>: Run a test build for any
+        <p><code class="language-plaintext highlighter-rouge">Internal and external pull requests</code>: Run a test build for any
  pull requests to branches that match a build rule, including when the
  pull request originated in an external source repository.</p>
       </li>

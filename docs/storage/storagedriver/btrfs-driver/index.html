@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the BTRFS storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the BTRFS storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of Btrfs driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the BTRFS storage driver","description":"Learn how to optimize your use of Btrfs driver.","url":"https://docs.docker.com/storage/storagedriver/btrfs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,42 +109,42 @@
 storage technologies that make it a good fit for Docker. Btrfs is included in
 the mainline Linux kernel.</p>
 
-<p>Docker’s <code class="highlighter-rouge">btrfs</code> storage driver leverages many Btrfs features for image and
+<p>Docker’s <code class="language-plaintext highlighter-rouge">btrfs</code> storage driver leverages many Btrfs features for image and
 container management. Among these features are block-level operations, thin
 provisioning, copy-on-write snapshots, and ease of administration. You can
 easily combine multiple physical block devices into a single Btrfs filesystem.</p>
 
-<p>This article refers to Docker’s Btrfs storage driver as <code class="highlighter-rouge">btrfs</code> and the overall
+<p>This article refers to Docker’s Btrfs storage driver as <code class="language-plaintext highlighter-rouge">btrfs</code> and the overall
 Btrfs Filesystem as Btrfs.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: The <code class="highlighter-rouge">btrfs</code> storage driver is only supported on Docker Engine - Community on Ubuntu or Debian.</p>
+  <p><strong>Note</strong>: The <code class="language-plaintext highlighter-rouge">btrfs</code> storage driver is only supported on Docker Engine - Community on Ubuntu or Debian.</p>
 </blockquote>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
-<p><code class="highlighter-rouge">btrfs</code> is supported if you meet the following prerequisites:</p>
+<p><code class="language-plaintext highlighter-rouge">btrfs</code> is supported if you meet the following prerequisites:</p>
 
 <ul>
   <li>
-    <p><strong>Docker Engine - Community</strong>: For Docker Engine - Community, <code class="highlighter-rouge">btrfs</code> is only recommended on Ubuntu or Debian.</p>
+    <p><strong>Docker Engine - Community</strong>: For Docker Engine - Community, <code class="language-plaintext highlighter-rouge">btrfs</code> is only recommended on Ubuntu or Debian.</p>
   </li>
   <li>
     <p>Changing the storage driver makes any containers you have already
-created inaccessible on the local system. Use <code class="highlighter-rouge">docker save</code> to save containers,
+created inaccessible on the local system. Use <code class="language-plaintext highlighter-rouge">docker save</code> to save containers,
 and push existing images to Docker Hub or a private repository, so that you
 not need to re-create them later.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">btrfs</code> requires a dedicated block storage device such as a physical disk. This
-block device must be formatted for Btrfs and mounted into <code class="highlighter-rouge">/var/lib/docker/</code>.
+    <p><code class="language-plaintext highlighter-rouge">btrfs</code> requires a dedicated block storage device such as a physical disk. This
+block device must be formatted for Btrfs and mounted into <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>.
 The configuration instructions below walk you through this procedure. By
-default, the SLES <code class="highlighter-rouge">/</code> filesystem is formatted with BTRFS, so for SLES, you do
+default, the SLES <code class="language-plaintext highlighter-rouge">/</code> filesystem is formatted with BTRFS, so for SLES, you do
 not need to use a separate block device, but you can choose to do so for
 performance reasons.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">btrfs</code> support must exist in your kernel. To check this, run the following
+    <p><code class="language-plaintext highlighter-rouge">btrfs</code> support must exist in your kernel. To check this, run the following
 command:</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep </span>btrfs /proc/filesystems
@@ -154,8 +154,8 @@ btrfs
   </li>
   <li>
     <p>To manage BTRFS filesystems at the level of the operating system, you need the
-<code class="highlighter-rouge">btrfs</code> command. If you do not have this command, install the <code class="highlighter-rouge">btrfsprogs</code>
-package (SLES) or <code class="highlighter-rouge">btrfs-tools</code> package (Ubuntu).</p>
+<code class="language-plaintext highlighter-rouge">btrfs</code> command. If you do not have this command, install the <code class="language-plaintext highlighter-rouge">btrfsprogs</code>
+package (SLES) or <code class="language-plaintext highlighter-rouge">btrfs-tools</code> package (Ubuntu).</p>
   </li>
 </ul>
 
@@ -168,17 +168,17 @@ package (SLES) or <code class="highlighter-rouge">btrfs-tools</code> package (Ub
     <p>Stop Docker.</p>
   </li>
   <li>
-    <p>Copy the contents of <code class="highlighter-rouge">/var/lib/docker/</code> to a backup location, then empty
-the contents of <code class="highlighter-rouge">/var/lib/docker/</code>:</p>
+    <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> to a backup location, then empty
+the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>:</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>cp <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
-<span class="nv">$ </span><span class="nb">sudo </span>rm <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
+<span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Format your dedicated block device or devices as a Btrfs filesystem. This
-example assumes that you are using two block devices called <code class="highlighter-rouge">/dev/xvdf</code> and
-<code class="highlighter-rouge">/dev/xvdg</code>. Double-check the block device names because this is a
+example assumes that you are using two block devices called <code class="language-plaintext highlighter-rouge">/dev/xvdf</code> and
+<code class="language-plaintext highlighter-rouge">/dev/xvdg</code>. Double-check the block device names because this is a
 destructive operation.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mkfs.btrfs <span class="nt">-f</span> /dev/xvdf /dev/xvdg
@@ -188,31 +188,31 @@ destructive operation.</p>
 <a href="https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices">Btrfs documentation</a>.</p>
   </li>
   <li>
-    <p>Mount the new Btrfs filesystem on the <code class="highlighter-rouge">/var/lib/docker/</code> mount point. You
+    <p>Mount the new Btrfs filesystem on the <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> mount point. You
 can specify any of the block devices used to create the Btrfs filesystem.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-t</span> btrfs /dev/xvdf /var/lib/docker
 </code></pre></div>    </div>
 
     <p>Don’t forget to make the change permanent across reboots by adding an
-entry to <code class="highlighter-rouge">/etc/fstab</code>.</p>
+entry to <code class="language-plaintext highlighter-rouge">/etc/fstab</code>.</p>
   </li>
   <li>
-    <p>Copy the contents of <code class="highlighter-rouge">/var/lib/docker.bk</code> to <code class="highlighter-rouge">/var/lib/docker/</code>.</p>
+    <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code> to <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>cp <span class="nt">-au</span> /var/lib/docker.bk/<span class="k">*</span> /var/lib/docker/
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker.bk/<span class="k">*</span> /var/lib/docker/
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Configure Docker to use the <code class="highlighter-rouge">btrfs</code> storage driver. This is required even
-though <code class="highlighter-rouge">/var/lib/docker/</code> is now using a Btrfs filesystem.
-Edit or create the file <code class="highlighter-rouge">/etc/docker/daemon.json</code>. If it is a new file, add
+    <p>Configure Docker to use the <code class="language-plaintext highlighter-rouge">btrfs</code> storage driver. This is required even
+though <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> is now using a Btrfs filesystem.
+Edit or create the file <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>. If it is a new file, add
 the following contents. If it is an existing file, add the key and value
 only, being careful to end the line with a comma if it is not the final
-line before an ending curly bracket (<code class="highlighter-rouge">}</code>).</p>
+line before an ending curly bracket (<code class="language-plaintext highlighter-rouge">}</code>).</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btrfs"</span><span class="w">
+  </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btrfs"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
 
@@ -220,7 +220,7 @@ line before an ending curly bracket (<code class="highlighter-rouge">}</code>).<
 <a href="/engine/reference/commandline/dockerd/#storage-driver-options">daemon reference documentation</a></p>
   </li>
   <li>
-    <p>Start Docker. After it is running, verify that <code class="highlighter-rouge">btrfs</code> is being used as the
+    <p>Start Docker. After it is running, verify that <code class="language-plaintext highlighter-rouge">btrfs</code> is being used as the
 storage driver.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
@@ -238,7 +238,7 @@ Storage Driver: btrfs
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>When you are ready, remove the <code class="highlighter-rouge">/var/lib/docker.bk</code> directory.</p>
+    <p>When you are ready, remove the <code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code> directory.</p>
   </li>
 </ol>
 
@@ -250,8 +250,8 @@ the need to unmount the filesystem or restart Docker.</p>
 <p>When space gets low, Btrfs automatically expands the volume in <em>chunks</em> of
 roughly 1 GB.</p>
 
-<p>To add a block device to a Btrfs volume, use the <code class="highlighter-rouge">btrfs device add</code> and
-<code class="highlighter-rouge">btrfs filesystem balance</code> commands.</p>
+<p>To add a block device to a Btrfs volume, use the <code class="language-plaintext highlighter-rouge">btrfs device add</code> and
+<code class="language-plaintext highlighter-rouge">btrfs filesystem balance</code> commands.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>btrfs device add /dev/svdh /var/lib/docker
 
@@ -264,16 +264,16 @@ suffers. It might be best to plan an outage window to balance the Btrfs
 filesystem.</p>
 </blockquote>
 
-<h2 id="how-the-btrfs-storage-driver-works">How the <code class="highlighter-rouge">btrfs</code> storage driver works</h2>
+<h2 id="how-the-btrfs-storage-driver-works">How the <code class="language-plaintext highlighter-rouge">btrfs</code> storage driver works</h2>
 
-<p>The <code class="highlighter-rouge">btrfs</code> storage driver works differently from <code class="highlighter-rouge">devicemapper</code> or other
-storage drivers in that your entire <code class="highlighter-rouge">/var/lib/docker/</code> directory is stored on a
+<p>The <code class="language-plaintext highlighter-rouge">btrfs</code> storage driver works differently from <code class="language-plaintext highlighter-rouge">devicemapper</code> or other
+storage drivers in that your entire <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> directory is stored on a
 Btrfs volume.</p>
 
 <h3 id="image-and-container-layers-on-disk">Image and container layers on-disk</h3>
 
 <p>Information about image layers and writable container layers is stored in
-<code class="highlighter-rouge">/var/lib/docker/btrfs/subvolumes/</code>. This subdirectory contains one directory
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/btrfs/subvolumes/</code>. This subdirectory contains one directory
 per image or container layer, with the unified filesystem built from a layer
 plus all its parent layers. Subvolumes are natively copy-on-write and have space
 allocated to them on-demand from an underlying storage pool. They can also be
@@ -301,7 +301,7 @@ snapshot sharing data.</p>
 <p>For maximum efficiency, when a container needs more space, it is allocated in
 <em>chunks</em> of roughly 1 GB in size.</p>
 
-<p>Docker’s <code class="highlighter-rouge">btrfs</code> storage driver stores every image layer and container in its
+<p>Docker’s <code class="language-plaintext highlighter-rouge">btrfs</code> storage driver stores every image layer and container in its
 own Btrfs subvolume or snapshot. The base layer of an image is stored as a
 subvolume whereas child image layers and containers are stored as snapshots.
 This is shown in the diagram below.</p>
@@ -309,12 +309,12 @@ This is shown in the diagram below.</p>
 <p><img src="/docs.docker.jp.onthefly/storage/storagedriver/images/btfs_container_layer.jpg" alt="Btrfs container layers" /></p>
 
 <p>The high level process for creating images and containers on Docker hosts
-running the <code class="highlighter-rouge">btrfs</code> driver is as follows:</p>
+running the <code class="language-plaintext highlighter-rouge">btrfs</code> driver is as follows:</p>
 
 <ol>
   <li>
     <p>The image’s base layer is stored in a Btrfs <em>subvolume</em> under
-<code class="highlighter-rouge">/var/lib/docker/btrfs/subvolumes</code>.</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/btrfs/subvolumes</code>.</p>
   </li>
   <li>
     <p>Subsequent image layers are stored as a Btrfs <em>snapshot</em> of the parent
@@ -328,7 +328,7 @@ are stored at the block level.</p>
   </li>
 </ol>
 
-<h2 id="how-container-reads-and-writes-work-with-btrfs">How container reads and writes work with <code class="highlighter-rouge">btrfs</code></h2>
+<h2 id="how-container-reads-and-writes-work-with-btrfs">How container reads and writes work with <code class="language-plaintext highlighter-rouge">btrfs</code></h2>
 
 <h3 id="reading-files">Reading files</h3>
 
@@ -370,14 +370,14 @@ performance.</p>
 
 <h2 id="btrfs-and-docker-performance">Btrfs and Docker performance</h2>
 
-<p>There are several factors that influence Docker’s performance under the <code class="highlighter-rouge">btrfs</code>
+<p>There are several factors that influence Docker’s performance under the <code class="language-plaintext highlighter-rouge">btrfs</code>
 storage driver.</p>
 
 <blockquote>
   <p><strong>Note</strong>: Many of these factors are mitigated by using Docker volumes for
 write-heavy workloads, rather than relying on storing data in the container’s
 writable layer. However, in the case of Btrfs, Docker volumes still suffer
-from these draw-backs unless <code class="highlighter-rouge">/var/lib/docker/volumes/</code> is <strong>not</strong> backed by
+from these draw-backs unless <code class="language-plaintext highlighter-rouge">/var/lib/docker/volumes/</code> is <strong>not</strong> backed by
 Btrfs.</p>
 </blockquote>
 
@@ -385,7 +385,7 @@ Btrfs.</p>
   <li>
     <p><strong>Page caching</strong>. Btrfs does not support page cache sharing. This means that
 each process accessing the same file copies the file into the Docker hosts’s
-memory. As a result, the <code class="highlighter-rouge">btrfs</code> driver may not be the best choice
+memory. As a result, the <code class="language-plaintext highlighter-rouge">btrfs</code> driver may not be the best choice
 high-density use cases such as PaaS.</p>
   </li>
   <li>
@@ -393,7 +393,7 @@ high-density use cases such as PaaS.</p>
 pattern matches what happens when you start and stop many containers in a short
 period of time, as well) can lead to poor use of Btrfs chunks. This can
 prematurely fill the Btrfs filesystem and lead to out-of-space conditions on
-your Docker host. Use <code class="highlighter-rouge">btrfs filesys show</code> to closely monitor the amount of
+your Docker host. Use <code class="language-plaintext highlighter-rouge">btrfs filesys show</code> to closely monitor the amount of
 free space on your Btrfs device.</p>
   </li>
   <li>
@@ -407,21 +407,21 @@ filesystems like Btrfs. Many small random writes can compound this issue.
 Fragmentation can manifest as CPU spikes when using SSDs or head thrashing
 when using spinning disks. Either of these issues can harm performance.</p>
 
-    <p>If your Linux kernel version is 3.9 or higher, you can enable the <code class="highlighter-rouge">autodefrag</code>
+    <p>If your Linux kernel version is 3.9 or higher, you can enable the <code class="language-plaintext highlighter-rouge">autodefrag</code>
 feature when mounting a Btrfs volume. Test this feature on your own workloads
 before deploying it into production, as some tests have shown a negative
 impact on performance.</p>
   </li>
   <li>
     <p><strong>SSD performance</strong>: Btrfs includes native optimizations for SSD media.
-To enable these features, mount the Btrfs filesystem with the <code class="highlighter-rouge">-o ssd</code> mount
+To enable these features, mount the Btrfs filesystem with the <code class="language-plaintext highlighter-rouge">-o ssd</code> mount
 option. These optimizations include enhanced SSD write performance by avoiding
 optimization such as <em>seek optimizations</em> which do not apply to solid-state
 media.</p>
   </li>
   <li>
     <p><strong>Balance Btrfs filesystems often</strong>: Use operating system utilities such as a
-<code class="highlighter-rouge">cron</code> job to balance the Btrfs filesystem regularly, during non-peak hours.
+<code class="language-plaintext highlighter-rouge">cron</code> job to balance the Btrfs filesystem regularly, during non-peak hours.
 This reclaims unallocated blocks and helps to prevent the filesystem from
 filling up unnecessarily. You cannot rebalance a totally full Btrfs
 filesystem unless you add additional physical block devices to the filesystem.

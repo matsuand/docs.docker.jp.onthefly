@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Fluentd logging driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Fluentd logging driver" />
   <meta property="og:description" content="Describes how to use the fluentd logging driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/fluentd/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Fluentd logging driver","description":"Describes how to use the fluentd logging driver.","url":"https://docs.docker.com/config/containers/logging/fluentd/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,16 +102,16 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
-<p>The <code class="highlighter-rouge">fluentd</code> logging driver sends container logs to the
+<p>The <code class="language-plaintext highlighter-rouge">fluentd</code> logging driver sends container logs to the
 <a href="https://www.fluentd.org">Fluentd</a> collector as structured log data. Then, users
 can use any of the <a href="https://www.fluentd.org/plugins">various output plugins of
 Fluentd</a> to write these logs to various
 destinations.</p>
 
-<p>In addition to the log message itself, the <code class="highlighter-rouge">fluentd</code> log
+<p>In addition to the log message itself, the <code class="language-plaintext highlighter-rouge">fluentd</code> log
 driver sends the following metadata in the structured log message:</p>
 
 <table>
@@ -123,49 +123,49 @@ driver sends the following metadata in the structured log message:</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">container_id</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">container_id</code></td>
       <td style="text-align: left">The full 64-character container ID.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">container_name</code></td>
-      <td style="text-align: left">The container name at the time it was started. If you use <code class="highlighter-rouge">docker rename</code> to rename a container, the new name is not reflected in the journal entries.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">container_name</code></td>
+      <td style="text-align: left">The container name at the time it was started. If you use <code class="language-plaintext highlighter-rouge">docker rename</code> to rename a container, the new name is not reflected in the journal entries.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">source</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">stdout</code> or <code class="highlighter-rouge">stderr</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">source</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">stdout</code> or <code class="language-plaintext highlighter-rouge">stderr</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">log</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">log</code></td>
       <td style="text-align: left">The container log</td>
     </tr>
   </tbody>
 </table>
 
-<p>The <code class="highlighter-rouge">docker logs</code> command is not available for this logging driver.</p>
+<p>The <code class="language-plaintext highlighter-rouge">docker logs</code> command is not available for this logging driver.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p>Some options are supported by specifying <code class="highlighter-rouge">--log-opt</code> as many times as needed:</p>
+<p>Some options are supported by specifying <code class="language-plaintext highlighter-rouge">--log-opt</code> as many times as needed:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">fluentd-address</code>: specify a socket address to connect to the Fluentd daemon, ex <code class="highlighter-rouge">fluentdhost:24224</code> or <code class="highlighter-rouge">unix:///path/to/fluentd.sock</code></li>
-  <li><code class="highlighter-rouge">tag</code>: specify a tag for fluentd message, which interprets some markup, ex <code class="highlighter-rouge">{{.ID}}</code>, <code class="highlighter-rouge">{{.FullID}}</code> or <code class="highlighter-rouge">{{.Name}}</code> <code class="highlighter-rouge">docker.{{.ID}}</code></li>
+  <li><code class="language-plaintext highlighter-rouge">fluentd-address</code>: specify a socket address to connect to the Fluentd daemon, ex <code class="language-plaintext highlighter-rouge">fluentdhost:24224</code> or <code class="language-plaintext highlighter-rouge">unix:///path/to/fluentd.sock</code></li>
+  <li><code class="language-plaintext highlighter-rouge">tag</code>: specify a tag for fluentd message, which interprets some markup, ex <code class="language-plaintext highlighter-rouge">{{.ID}}</code>, <code class="language-plaintext highlighter-rouge">{{.FullID}}</code> or <code class="language-plaintext highlighter-rouge">{{.Name}}</code> <code class="language-plaintext highlighter-rouge">docker.{{.ID}}</code></li>
 </ul>
 
-<p>To use the <code class="highlighter-rouge">fluentd</code> driver as the default logging driver, set the <code class="highlighter-rouge">log-driver</code>
- and <code class="highlighter-rouge">log-opt</code> keys to appropriate values in the <code class="highlighter-rouge">daemon.json</code> file, which is
- located in <code class="highlighter-rouge">/etc/docker/</code> on Linux hosts or
- <code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code> on Windows Server. For more about
- +configuring Docker using <code class="highlighter-rouge">daemon.json</code>, see
+<p>To use the <code class="language-plaintext highlighter-rouge">fluentd</code> driver as the default logging driver, set the <code class="language-plaintext highlighter-rouge">log-driver</code>
+ and <code class="language-plaintext highlighter-rouge">log-opt</code> keys to appropriate values in the <code class="language-plaintext highlighter-rouge">daemon.json</code> file, which is
+ located in <code class="language-plaintext highlighter-rouge">/etc/docker/</code> on Linux hosts or
+ <code class="language-plaintext highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code> on Windows Server. For more about
+ +configuring Docker using <code class="language-plaintext highlighter-rouge">daemon.json</code>, see
  +<a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a>.</p>
 
-<p>The following example sets the log driver to <code class="highlighter-rouge">fluentd</code> and sets the
-<code class="highlighter-rouge">fluentd-address</code> option.</p>
+<p>The following example sets the log driver to <code class="language-plaintext highlighter-rouge">fluentd</code> and sets the
+<code class="language-plaintext highlighter-rouge">fluentd-address</code> option.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="p">{</span><span class="w">
-   </span><span class="s2">"log-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fluentd"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"log-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"fluentd-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fluentdhost:24224"</span><span class="w">
+   </span><span class="nl">"log-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fluentd"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"log-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"fluentd-address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fluentdhost:24224"</span><span class="w">
    </span><span class="p">}</span><span class="w">
  </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
@@ -175,43 +175,43 @@ driver sends the following metadata in the structured log message:</p>
 <blockquote>
   <p><strong>Note</strong></p>
 
-  <p><code class="highlighter-rouge">log-opts</code> configuration options in the <code class="highlighter-rouge">daemon.json</code> configuration file must
+  <p><code class="language-plaintext highlighter-rouge">log-opts</code> configuration options in the <code class="language-plaintext highlighter-rouge">daemon.json</code> configuration file must
 be provided as strings. Boolean and numeric values (such as the value for
-<code class="highlighter-rouge">fluentd-async-connect</code> or <code class="highlighter-rouge">fluentd-max-retries</code>) must therefore be enclosed
-in quotes (<code class="highlighter-rouge">"</code>).</p>
+<code class="language-plaintext highlighter-rouge">fluentd-async-connect</code> or <code class="language-plaintext highlighter-rouge">fluentd-max-retries</code>) must therefore be enclosed
+in quotes (<code class="language-plaintext highlighter-rouge">"</code>).</p>
 </blockquote>
 
 <p>To set the logging driver for a specific container, pass the
-<code class="highlighter-rouge">--log-driver</code> option to <code class="highlighter-rouge">docker run</code>:</p>
+<code class="language-plaintext highlighter-rouge">--log-driver</code> option to <code class="language-plaintext highlighter-rouge">docker run</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=fluentd ...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=fluentd ...
 </code></pre></div></div>
 
 <p>Before using this logging driver, launch a Fluentd daemon. The logging driver
-connects to this daemon through <code class="highlighter-rouge">localhost:24224</code> by default. Use the
-<code class="highlighter-rouge">fluentd-address</code> option to connect to a different address.</p>
+connects to this daemon through <code class="language-plaintext highlighter-rouge">localhost:24224</code> by default. Use the
+<code class="language-plaintext highlighter-rouge">fluentd-address</code> option to connect to a different address.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 </code></pre></div></div>
 
 <p>If container cannot connect to the Fluentd daemon, the container stops
-immediately unless the <code class="highlighter-rouge">fluentd-async-connect</code> option is used.</p>
+immediately unless the <code class="language-plaintext highlighter-rouge">fluentd-async-connect</code> option is used.</p>
 
 <h2 id="options">Options</h2>
 
-<p>Users can use the <code class="highlighter-rouge">--log-opt NAME=VALUE</code> flag to specify additional Fluentd logging driver options.</p>
+<p>Users can use the <code class="language-plaintext highlighter-rouge">--log-opt NAME=VALUE</code> flag to specify additional Fluentd logging driver options.</p>
 
 <h3 id="fluentd-address">fluentd-address</h3>
 
-<p>By default, the logging driver connects to <code class="highlighter-rouge">localhost:24224</code>. Supply the
-<code class="highlighter-rouge">fluentd-address</code> option to connect to a different address. <code class="highlighter-rouge">tcp</code>(default) and <code class="highlighter-rouge">unix</code> sockets are supported.</p>
+<p>By default, the logging driver connects to <code class="language-plaintext highlighter-rouge">localhost:24224</code>. Supply the
+<code class="language-plaintext highlighter-rouge">fluentd-address</code> option to connect to a different address. <code class="language-plaintext highlighter-rouge">tcp</code>(default) and <code class="language-plaintext highlighter-rouge">unix</code> sockets are supported.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
 docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
 </code></pre></div></div>
 
-<p>Two of the above specify the same address, because <code class="highlighter-rouge">tcp</code> is default.</p>
+<p>Two of the above specify the same address, because <code class="language-plaintext highlighter-rouge">tcp</code> is default.</p>
 
 <h3 id="tag">tag</h3>
 
@@ -221,19 +221,19 @@ the log tag format.</p>
 
 <h3 id="labels-env-and-env-regex">labels, env, and env-regex</h3>
 
-<p>The <code class="highlighter-rouge">labels</code> and <code class="highlighter-rouge">env</code> options each take a comma-separated list of keys. If
-there is collision between <code class="highlighter-rouge">label</code> and <code class="highlighter-rouge">env</code> keys, the value of the <code class="highlighter-rouge">env</code> takes
+<p>The <code class="language-plaintext highlighter-rouge">labels</code> and <code class="language-plaintext highlighter-rouge">env</code> options each take a comma-separated list of keys. If
+there is collision between <code class="language-plaintext highlighter-rouge">label</code> and <code class="language-plaintext highlighter-rouge">env</code> keys, the value of the <code class="language-plaintext highlighter-rouge">env</code> takes
 precedence. Both options add additional fields to the extra attributes of a
 logging message.</p>
 
-<p>The <code class="highlighter-rouge">env-regex</code> option is similar to and compatible with <code class="highlighter-rouge">env</code>. Its value is a
+<p>The <code class="language-plaintext highlighter-rouge">env-regex</code> option is similar to and compatible with <code class="language-plaintext highlighter-rouge">env</code>. Its value is a
 regular expression to match logging-related environment variables. It is used
 for advanced <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag options</a>.</p>
 
 <h3 id="fluentd-async-connect">fluentd-async-connect</h3>
 
 <p>Docker connects to Fluentd in the background. Messages are buffered until the
-connection is established. Defaults to <code class="highlighter-rouge">false</code>.</p>
+connection is established. Defaults to <code class="language-plaintext highlighter-rouge">false</code>.</p>
 
 <h3 id="fluentd-buffer-limit">fluentd-buffer-limit</h3>
 
@@ -246,18 +246,18 @@ available to the container.</p>
 
 <h3 id="fluentd-max-retries">fluentd-max-retries</h3>
 
-<p>The maximum number of retries. Defaults to <code class="highlighter-rouge">4294967295</code> (2**32 - 1).</p>
+<p>The maximum number of retries. Defaults to <code class="language-plaintext highlighter-rouge">4294967295</code> (2**32 - 1).</p>
 
 <h3 id="fluentd-sub-second-precision">fluentd-sub-second-precision</h3>
 
-<p>Generates event logs in nanosecond resolution. Defaults to <code class="highlighter-rouge">false</code>.</p>
+<p>Generates event logs in nanosecond resolution. Defaults to <code class="language-plaintext highlighter-rouge">false</code>.</p>
 
 <h2 id="fluentd-daemon-management-with-docker">Fluentd daemon management with Docker</h2>
 
-<p>About <code class="highlighter-rouge">Fluentd</code> itself, see <a href="https://www.fluentd.org">the project webpage</a>
+<p>About <code class="language-plaintext highlighter-rouge">Fluentd</code> itself, see <a href="https://www.fluentd.org">the project webpage</a>
 and <a href="https://docs.fluentd.org">its documents</a>.</p>
 
-<p>To use this logging driver, start the <code class="highlighter-rouge">fluentd</code> daemon on a host. We recommend
+<p>To use this logging driver, start the <code class="language-plaintext highlighter-rouge">fluentd</code> daemon on a host. We recommend
 that you use <a href="https://hub.docker.com/r/fluent/fluentd/">the Fluentd docker
 image</a>. This image is
 especially useful if you want to aggregate multiple container logs on each
@@ -268,9 +268,9 @@ aggregate store.</p>
 
 <ol>
   <li>
-    <p>Write a configuration file (<code class="highlighter-rouge">test.conf</code>) to dump input logs:</p>
+    <p>Write a configuration file (<code class="language-plaintext highlighter-rouge">test.conf</code>) to dump input logs:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;source&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;source&gt;
    @type forward
  &lt;/source&gt;
 
@@ -282,13 +282,13 @@ aggregate store.</p>
   <li>
     <p>Launch Fluentd container with this configuration file:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Start one or more containers with the <code class="highlighter-rouge">fluentd</code> logging driver:</p>
+    <p>Start one or more containers with the <code class="language-plaintext highlighter-rouge">fluentd</code> logging driver:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker run --log-driver=fluentd your/application
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker run --log-driver=fluentd your/application
 </code></pre></div>    </div>
   </li>
 </ol>

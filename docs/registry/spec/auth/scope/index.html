@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Token Scope Documentation | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Token Scope Documentation" />
   <meta property="og:description" content="Describes the scope and access fields used for registry authorization tokens" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/spec/auth/scope/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Token Scope Documentation","description":"Describes the scope and access fields used for registry authorization tokens","url":"https://docs.docker.com/registry/spec/auth/scope/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -120,7 +120,7 @@ resource providers.</p>
 
 <p>The subject represents the user for which a token is valid. Any actions
 performed using an access token should be considered on behalf of the subject.
-This is included in the <code class="highlighter-rouge">sub</code> field of access token JWT. A refresh token should
+This is included in the <code class="language-plaintext highlighter-rouge">sub</code> field of access token JWT. A refresh token should
 be limited to a single subject and only be able to give out access tokens for
 that subject.</p>
 
@@ -129,7 +129,7 @@ that subject.</p>
 <p>The audience represents a resource provider which is intended to be able to
 perform the actions specified in the access token. Any resource provider which
 does not match the audience should not use that access token. The audience is
-included in the <code class="highlighter-rouge">aud</code> field of the access token JWT. A refresh token should be
+included in the <code class="language-plaintext highlighter-rouge">aud</code> field of the access token JWT. A refresh token should be
 limited to a single audience and only be able to give out access tokens for that
 audience.</p>
 
@@ -149,14 +149,14 @@ is specific to the resource type.</p>
 <h4 id="example-resource-types">Example Resource Types</h4>
 
 <ul>
-  <li><code class="highlighter-rouge">repository</code> - represents a single repository within a registry. A
+  <li><code class="language-plaintext highlighter-rouge">repository</code> - represents a single repository within a registry. A
 repository may represent many manifest or content blobs, but the resource type
 is considered the collections of those items. Actions which may be performed on
-a <code class="highlighter-rouge">repository</code> are <code class="highlighter-rouge">pull</code> for accessing the collection and <code class="highlighter-rouge">push</code> for adding to
-it. By default the <code class="highlighter-rouge">repository</code> type has the class of <code class="highlighter-rouge">image</code>.</li>
-  <li><code class="highlighter-rouge">repository(plugin)</code> - represents a single repository of plugins within a
+a <code class="language-plaintext highlighter-rouge">repository</code> are <code class="language-plaintext highlighter-rouge">pull</code> for accessing the collection and <code class="language-plaintext highlighter-rouge">push</code> for adding to
+it. By default the <code class="language-plaintext highlighter-rouge">repository</code> type has the class of <code class="language-plaintext highlighter-rouge">image</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">repository(plugin)</code> - represents a single repository of plugins within a
 registry. A plugin repository has the same content and actions as a repository.</li>
-  <li><code class="highlighter-rouge">registry</code> - represents the entire registry. Used for administrative actions
+  <li><code class="language-plaintext highlighter-rouge">registry</code> - represents the entire registry. Used for administrative actions
 or lookup operations that span an entire registry.</li>
 </ul>
 
@@ -172,7 +172,7 @@ as “samalba/myapp” or “hostname/samalba/myapp”.</p>
 <p>The resource actions define the actions which the access token allows to be
 performed on the identified resource. These actions are type specific but will
 normally have actions identifying read and write access on the resource. Example
-for the <code class="highlighter-rouge">repository</code> type are <code class="highlighter-rouge">pull</code> for read access and <code class="highlighter-rouge">push</code> for write
+for the <code class="language-plaintext highlighter-rouge">repository</code> type are <code class="language-plaintext highlighter-rouge">pull</code> for read access and <code class="language-plaintext highlighter-rouge">push</code> for write
 access.</p>
 
 <h2 id="authorization-server-use">Authorization Server Use</h2>
@@ -181,14 +181,14 @@ access.</p>
 always derived from the passed in credentials or refresh token. When using
 a refresh token the passed in audience must match the audience defined for
 the refresh token. The audience (resource provider) is provided using the
-<code class="highlighter-rouge">service</code> field. Multiple resource scopes may be provided using multiple <code class="highlighter-rouge">scope</code>
-fields on the <code class="highlighter-rouge">GET</code> request. The <code class="highlighter-rouge">POST</code> request only takes in a single
-<code class="highlighter-rouge">scope</code> field but may use a space to separate a list of multiple resource
+<code class="language-plaintext highlighter-rouge">service</code> field. Multiple resource scopes may be provided using multiple <code class="language-plaintext highlighter-rouge">scope</code>
+fields on the <code class="language-plaintext highlighter-rouge">GET</code> request. The <code class="language-plaintext highlighter-rouge">POST</code> request only takes in a single
+<code class="language-plaintext highlighter-rouge">scope</code> field but may use a space to separate a list of multiple resource
 scopes.</p>
 
 <h3 id="resource-scope-grammar">Resource Scope Grammar</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scope                   := resourcescope [ ' ' resourcescope ]*
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scope                   := resourcescope [ ' ' resourcescope ]*
 resourcescope           := resourcetype  ":" resourcename  ":" action [ ',' action ]*
 resourcetype            := resourcetypevalue [ '(' resourcetypevalue ')' ]
 resourcetypevalue       := /[a-z0-9]+/
@@ -206,10 +206,10 @@ separator               := /[_.]|__|[-]*/
 the scope name grammar is a subset of the reference grammar.</p>
 
 <blockquote>
-  <p><strong>NOTE:</strong> that the <code class="highlighter-rouge">resourcename</code> may contain one <code class="highlighter-rouge">:</code> due to a possible port
-number in the hostname component of the <code class="highlighter-rouge">resourcename</code>, so a naive
-implementation that interprets the first three <code class="highlighter-rouge">:</code>-delimited tokens of a
-<code class="highlighter-rouge">scope</code> to be the <code class="highlighter-rouge">resourcetype</code>, <code class="highlighter-rouge">resourcename</code>, and a list of <code class="highlighter-rouge">action</code>
+  <p><strong>NOTE:</strong> that the <code class="language-plaintext highlighter-rouge">resourcename</code> may contain one <code class="language-plaintext highlighter-rouge">:</code> due to a possible port
+number in the hostname component of the <code class="language-plaintext highlighter-rouge">resourcename</code>, so a naive
+implementation that interprets the first three <code class="language-plaintext highlighter-rouge">:</code>-delimited tokens of a
+<code class="language-plaintext highlighter-rouge">scope</code> to be the <code class="language-plaintext highlighter-rouge">resourcetype</code>, <code class="language-plaintext highlighter-rouge">resourcename</code>, and a list of <code class="language-plaintext highlighter-rouge">action</code>
 would be insufficient.</p>
 </blockquote>
 
@@ -229,16 +229,16 @@ and resource name must match the accessed resource and an appropriate action
 scope must be included.</p>
 
 <p>When appropriate authorization is not provided either due to lack of scope
-or missing token, the resource provider to return a <code class="highlighter-rouge">WWW-AUTHENTICATE</code> HTTP
-header with the <code class="highlighter-rouge">realm</code> as the authorization server, the <code class="highlighter-rouge">service</code> as the
-expected audience identifying string, and a <code class="highlighter-rouge">scope</code> field for each required
+or missing token, the resource provider to return a <code class="language-plaintext highlighter-rouge">WWW-AUTHENTICATE</code> HTTP
+header with the <code class="language-plaintext highlighter-rouge">realm</code> as the authorization server, the <code class="language-plaintext highlighter-rouge">service</code> as the
+expected audience identifying string, and a <code class="language-plaintext highlighter-rouge">scope</code> field for each required
 resource scope to complete the request.</p>
 
 <h2 id="jwt-access-tokens">JWT Access Tokens</h2>
 
 <p>Each JWT access token may only have a single subject and audience but multiple
 resource scopes. The subject and audience are put into standard JWT fields
-<code class="highlighter-rouge">sub</code> and <code class="highlighter-rouge">aud</code>. The resource scope is put into the <code class="highlighter-rouge">access</code> field. The
+<code class="language-plaintext highlighter-rouge">sub</code> and <code class="language-plaintext highlighter-rouge">aud</code>. The resource scope is put into the <code class="language-plaintext highlighter-rouge">access</code> field. The
 structure of the access field can be seen in the
 <a href="/docs.docker.jp.onthefly/registry/spec/auth/jwt/">jwt documentation</a>.</p>
 

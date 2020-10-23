@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker-machine mount | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker-machine mount" />
   <meta property="og:description" content="マシンからディレクトリをマウントします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/machine/reference/mount/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker-machine mount","description":"マシンからディレクトリをマウントします。","url":"https://docs.docker.com/machine/reference/mount/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,9 +107,9 @@
 </span>
 
 <p>マシンからローカルホストに向けてディレクトリをマウントします。
-マウントには <code class="highlighter-rouge">sshfs</code> が用いられます。</p>
+マウントには <code class="language-plaintext highlighter-rouge">sshfs</code> が用いられます。</p>
 
-<p>引数の書式は <code class="highlighter-rouge">machinename:/path/to/dir</code> です。
+<p>引数の書式は <code class="language-plaintext highlighter-rouge">machinename:/path/to/dir</code> です。
 マウントポイントに別名を指定することもできます。
 （デフォルトは同名のパスです。）</p>
 
@@ -117,10 +117,10 @@
 
 <p>以下の例を取り上げます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir foo
-<span class="nv">$ </span>docker-machine ssh dev mkdir foo
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>foo
+<span class="nv">$ </span>docker-machine ssh dev <span class="nb">mkdir </span>foo
 <span class="nv">$ </span>docker-machine mount dev:/home/docker/foo foo
-<span class="nv">$ </span>touch foo/bar
+<span class="nv">$ </span><span class="nb">touch </span>foo/bar
 <span class="nv">$ </span>docker-machine ssh dev <span class="nb">ls </span>foo
 bar
 </code></pre></div></div>
@@ -128,23 +128,23 @@ bar
 <p>マシン上のディレクトリは、コンテナー内にマウントしたディレクトリとして利用できます。
 つまりローカルディレクトリ内で変更を行うと、それがマシン上にも反映されます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="k">$(</span>docker-machine env dev<span class="k">)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="si">$(</span>docker-machine <span class="nb">env </span>dev<span class="si">)</span>
 <span class="nv">$ </span>docker run <span class="nt">-v</span> /home/docker/foo:/tmp/foo busybox <span class="nb">ls</span> /tmp/foo
 bar
-<span class="nv">$ </span>touch foo/baz
+<span class="nv">$ </span><span class="nb">touch </span>foo/baz
 <span class="nv">$ </span>docker run <span class="nt">-v</span> /home/docker/foo:/tmp/foo busybox <span class="nb">ls</span> /tmp/foo
 bar
 baz
 </code></pre></div></div>
 
-<p>対象のファイルは、実際には <code class="highlighter-rouge">sftp</code>（ssh 接続を介した）を利用して転送されます。
+<p>対象のファイルは、実際には <code class="language-plaintext highlighter-rouge">sftp</code>（ssh 接続を介した）を利用して転送されます。
 したがってこのプログラム（sftp）がマシン上になければなりませんが、普通は存在しているものです。</p>
 
-<p>ディレクトリをアンマウントするには、同じオプションに加えて <code class="highlighter-rouge">-u</code> フラグを使います。
-コマンド <code class="highlighter-rouge">fuserunmount</code>（または <code class="highlighter-rouge">fusermount -u</code>）を直接実行してもかまいません。</p>
+<p>ディレクトリをアンマウントするには、同じオプションに加えて <code class="language-plaintext highlighter-rouge">-u</code> フラグを使います。
+コマンド <code class="language-plaintext highlighter-rouge">fuserunmount</code>（または <code class="language-plaintext highlighter-rouge">fusermount -u</code>）を直接実行してもかまいません。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine mount <span class="nt">-u</span> dev:/home/docker/foo foo
-<span class="nv">$ </span>rmdir foo
+<span class="nv">$ </span><span class="nb">rmdir </span>foo
 </code></pre></div></div>
 
 <p><strong>ファイルが保存されるのはマシン上であって、ホスト上ではありません。</strong>

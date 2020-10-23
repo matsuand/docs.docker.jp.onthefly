@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize an apt-cacher-ng service | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerize an apt-cacher-ng service" />
   <meta property="og:description" content="Installing and running an apt-cacher-ng service" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/examples/apt-cacher-ng/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize an apt-cacher-ng service","description":"Installing and running an apt-cacher-ng service","url":"https://docs.docker.com/engine/examples/apt-cacher-ng/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -121,7 +121,7 @@ the second download of any package almost instant.</p>
 
 <p>Use the following Dockerfile:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#
 # Build: docker build -t apt-cacher .
 # Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
 #
@@ -141,40 +141,40 @@ CMD     chmod 777 /var/cache/apt-cacher-ng &amp;&amp; /etc/init.d/apt-cacher-ng 
 
 <p>To build the image using:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t eg_apt_cacher_ng .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t eg_apt_cacher_ng .
 </code></pre></div></div>
 
 <p>Then run it, mapping the exposed port to one on the host</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
 </code></pre></div></div>
 
-<p>To see the logfiles that are <code class="highlighter-rouge">tailed</code> in the default command, you can
+<p>To see the logfiles that are <code class="language-plaintext highlighter-rouge">tailed</code> in the default command, you can
 use:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker logs -f test_apt_cacher_ng
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker logs -f test_apt_cacher_ng
 </code></pre></div></div>
 
 <p>To get your Debian-based containers to use the proxy, you have
-following options. Replace <code class="highlighter-rouge">dockerhost</code> with the
-IP address or FQDN of the host running the <code class="highlighter-rouge">test_apt_cacher_ng</code>
+following options. Replace <code class="language-plaintext highlighter-rouge">dockerhost</code> with the
+IP address or FQDN of the host running the <code class="language-plaintext highlighter-rouge">test_apt_cacher_ng</code>
 container.</p>
 
 <ol>
   <li>Add an apt Proxy setting
-<code class="highlighter-rouge">echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' &gt;&gt; /etc/apt/conf.d/01proxy</code></li>
+<code class="language-plaintext highlighter-rouge">echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' &gt;&gt; /etc/apt/conf.d/01proxy</code></li>
   <li>Set an environment variable:
-<code class="highlighter-rouge">http_proxy=http://dockerhost:3142/</code></li>
-  <li>Change your <code class="highlighter-rouge">sources.list</code> entries to start with
-<code class="highlighter-rouge">http://dockerhost:3142/</code></li>
-  <li>Link Debian-based containers to the APT proxy container using <code class="highlighter-rouge">--link</code></li>
+<code class="language-plaintext highlighter-rouge">http_proxy=http://dockerhost:3142/</code></li>
+  <li>Change your <code class="language-plaintext highlighter-rouge">sources.list</code> entries to start with
+<code class="language-plaintext highlighter-rouge">http://dockerhost:3142/</code></li>
+  <li>Link Debian-based containers to the APT proxy container using <code class="language-plaintext highlighter-rouge">--link</code></li>
   <li>Create a custom network of an APT proxy container with Debian-based containers.</li>
 </ol>
 
 <p><strong>Option 1</strong> injects the settings safely into your apt configuration in
 a local version of a common base:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
 RUN  echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' &gt;&gt; /etc/apt/apt.conf.d/01proxy
 RUN apt-get update &amp;&amp; apt-get install -y vim git
 
@@ -182,31 +182,31 @@ RUN apt-get update &amp;&amp; apt-get install -y vim git
 </code></pre></div></div>
 
 <p><strong>Option 2</strong> is good for testing, but breaks other HTTP clients
-which obey <code class="highlighter-rouge">http_proxy</code>, such as <code class="highlighter-rouge">curl</code>, <code class="highlighter-rouge">wget</code> and others:</p>
+which obey <code class="language-plaintext highlighter-rouge">http_proxy</code>, such as <code class="language-plaintext highlighter-rouge">curl</code>, <code class="language-plaintext highlighter-rouge">wget</code> and others:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
 </code></pre></div></div>
 
 <p><strong>Option 3</strong> is the least portable, but you might need to do it and you can do it
-from your <code class="highlighter-rouge">Dockerfile</code> too.</p>
+from your <code class="language-plaintext highlighter-rouge">Dockerfile</code> too.</p>
 
 <p><strong>Option 4</strong> links Debian-containers to the proxy server using following command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
 </code></pre></div></div>
 
 <p><strong>Option 5</strong> creates a custom network of APT proxy server and Debian-based containers:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create mynetwork
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create mynetwork
 $ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
 $ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
 </code></pre></div></div>
 
 <p>Apt-cacher-ng has some tools that allow you to manage the repository,
-and they can be used by leveraging the <code class="highlighter-rouge">VOLUME</code>
+and they can be used by leveraging the <code class="language-plaintext highlighter-rouge">VOLUME</code>
 instruction, and the image we built to run the service:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
 
 root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
 Scanning /var/cache/apt-cacher-ng, please wait...
@@ -231,7 +231,7 @@ WARNING: The removal action may wipe out whole directories containing
 <p>Finally, clean up after your test by stopping and removing the
 container, and then removing the image.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container stop test_apt_cacher_ng
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container stop test_apt_cacher_ng
 $ docker container rm test_apt_cacher_ng
 $ docker image rm eg_apt_cacher_ng
 </code></pre></div></div>

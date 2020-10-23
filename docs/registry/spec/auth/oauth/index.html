@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Oauth2 Token Authentication | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Oauth2 Token Authentication" />
   <meta property="og:description" content="Specifies the Docker Registry v2 authentication" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/spec/auth/oauth/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Oauth2 Token Authentication","description":"Specifies the Docker Registry v2 authentication","url":"https://docs.docker.com/registry/spec/auth/oauth/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -112,8 +112,8 @@ server. <a href="https://tools.ietf.org/html/rfc6749">RFC6749</a> should be used
 reference for the protocol and HTTP endpoints described here.</p>
 
 <p><strong>Note</strong>: Not all token servers implement oauth2. If the request to the endpoint
-returns <code class="highlighter-rouge">404</code> using the HTTP <code class="highlighter-rouge">POST</code> method, refer to
-<a href="/docs.docker.jp.onthefly/registry/spec/auth/token/">Token Documentation</a> for using the HTTP <code class="highlighter-rouge">GET</code> method supported by all
+returns <code class="language-plaintext highlighter-rouge">404</code> using the HTTP <code class="language-plaintext highlighter-rouge">POST</code> method, refer to
+<a href="/docs.docker.jp.onthefly/registry/spec/auth/token/">Token Documentation</a> for using the HTTP <code class="language-plaintext highlighter-rouge">GET</code> method supported by all
 token servers.</p>
 
 <h2 id="refresh-token-format">Refresh token format</h2>
@@ -134,42 +134,42 @@ inside the token will not be extracted and presented by clients.</p>
 <h4 id="post-parameters">Post parameters</h4>
 
 <dl>
-  <dt><code class="highlighter-rouge">grant_type</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">grant_type</code></dt>
   <dd>(REQUIRED) Type of grant used to get token. When getting a refresh token using credentials this type should be set to "password" and have the accompanying username and password parameters. Type "authorization_code" is reserved for future use for authenticating to an authorization server without having to send credentials directly from the client. When requesting an access token with a refresh token this should be set to "refresh_token".</dd>
-  <dt><code class="highlighter-rouge">service</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">service</code></dt>
   <dd>(REQUIRED) The name of the service which hosts the resource to get access for. Refresh tokens will only be good for getting tokens for this service.</dd>
-  <dt><code class="highlighter-rouge">client_id</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">client_id</code></dt>
   <dd>(REQUIRED) String identifying the client. This client_id does not need to be registered with the authorization server but should be set to a meaningful value in order to allow auditing keys created by unregistered clients. Accepted syntax is defined in [RFC6749 Appendix A.1](https://tools.ietf.org/html/rfc6749#appendix-A.1)</dd>
-  <dt><code class="highlighter-rouge">access_type</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">access_type</code></dt>
   <dd>(OPTIONAL) Access which is being requested. If "offline" is provided then a refresh token will be returned. The default is "online" only returning short lived access token. If the grant type is "refresh_token" this will only return the same refresh token and not a new one.</dd>
-  <dt><code class="highlighter-rouge">scope</code></dt>
-  <dd>(OPTIONAL) The resource in question, formatted as one of the space-delimited entries from the <code class="highlighter-rouge">scope</code> parameters from the <code class="highlighter-rouge">WWW-Authenticate</code> header shown above. This query parameter should only be specified once but may contain multiple scopes using the scope list format defined in the scope grammar. If multiple <code class="highlighter-rouge">scope</code> is provided from <code class="highlighter-rouge">WWW-Authenticate</code> header the scopes should first be converted to a scope list before requesting the token. The above example would be specified as: <code class="highlighter-rouge">scope=repository:samalba/my-app:push</code>. When requesting a refresh token the scopes may be empty since the refresh token will not be limited by this scope, only the provided short lived access token will have the scope limitation.</dd>
-  <dt><code class="highlighter-rouge">refresh_token</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">scope</code></dt>
+  <dd>(OPTIONAL) The resource in question, formatted as one of the space-delimited entries from the <code class="language-plaintext highlighter-rouge">scope</code> parameters from the <code class="language-plaintext highlighter-rouge">WWW-Authenticate</code> header shown above. This query parameter should only be specified once but may contain multiple scopes using the scope list format defined in the scope grammar. If multiple <code class="language-plaintext highlighter-rouge">scope</code> is provided from <code class="language-plaintext highlighter-rouge">WWW-Authenticate</code> header the scopes should first be converted to a scope list before requesting the token. The above example would be specified as: <code class="language-plaintext highlighter-rouge">scope=repository:samalba/my-app:push</code>. When requesting a refresh token the scopes may be empty since the refresh token will not be limited by this scope, only the provided short lived access token will have the scope limitation.</dd>
+  <dt><code class="language-plaintext highlighter-rouge">refresh_token</code></dt>
   <dd>(OPTIONAL) The refresh token to use for authentication when grant type "refresh_token" is used.</dd>
-  <dt><code class="highlighter-rouge">username</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">username</code></dt>
   <dd>(OPTIONAL) The username to use for authentication when grant type "password" is used.</dd>
-  <dt><code class="highlighter-rouge">password</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">password</code></dt>
   <dd>(OPTIONAL) The password to use for authentication when grant type "password" is used.</dd>
 </dl>
 
 <h4 id="response-fields">Response fields</h4>
 
 <dl>
-  <dt><code class="highlighter-rouge">access_token</code></dt>
-  <dd>(REQUIRED) An opaque <code class="highlighter-rouge">Bearer</code> token that clients should supply to subsequent requests in the <code class="highlighter-rouge">Authorization</code> header. This token should not be attempted to be parsed or understood by the client but treated as opaque string.</dd>
-  <dt><code class="highlighter-rouge">scope</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">access_token</code></dt>
+  <dd>(REQUIRED) An opaque <code class="language-plaintext highlighter-rouge">Bearer</code> token that clients should supply to subsequent requests in the <code class="language-plaintext highlighter-rouge">Authorization</code> header. This token should not be attempted to be parsed or understood by the client but treated as opaque string.</dd>
+  <dt><code class="language-plaintext highlighter-rouge">scope</code></dt>
   <dd>(REQUIRED) The scope granted inside the access token. This may be the same scope as requested or a subset. This requirement is stronger than specified in [RFC6749 Section 4.2.2](https://tools.ietf.org/html/rfc6749#section-4.2.2) by strictly requiring the scope in the return value.</dd>
-  <dt><code class="highlighter-rouge">expires_in</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">expires_in</code></dt>
   <dd>(REQUIRED) The duration in seconds since the token was issued that it will remain valid. When omitted, this defaults to 60 seconds. For compatibility with older clients, a token should never be returned with less than 60 seconds to live.</dd>
-  <dt><code class="highlighter-rouge">issued_at</code></dt>
-  <dd>(Optional) The <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a>-serialized UTC standard time at which a given token was issued. If <code class="highlighter-rouge">issued_at</code> is omitted, the expiration is from when the token exchange completed.</dd>
-  <dt><code class="highlighter-rouge">refresh_token</code></dt>
+  <dt><code class="language-plaintext highlighter-rouge">issued_at</code></dt>
+  <dd>(Optional) The <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a>-serialized UTC standard time at which a given token was issued. If <code class="language-plaintext highlighter-rouge">issued_at</code> is omitted, the expiration is from when the token exchange completed.</dd>
+  <dt><code class="language-plaintext highlighter-rouge">refresh_token</code></dt>
   <dd>(Optional) Token which can be used to get additional access tokens for the same subject with different scopes. This token should be kept secure by the client and only sent to the authorization server which issues bearer tokens. This field will only be set when `access_type=offline` is provided in the request.</dd>
 </dl>
 
 <h4 id="example-getting-refresh-token">Example getting refresh token</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /token HTTP/1.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /token HTTP/1.1
 Host: auth.docker.io
 Content-Type: application/x-www-form-urlencoded
 
@@ -183,7 +183,7 @@ Content-Type: application/json
 
 <h4 id="example-refreshing-an-access-token">Example refreshing an Access Token</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /token HTTP/1.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /token HTTP/1.1
 Host: auth.docker.io
 Content-Type: application/x-www-form-urlencoded
 

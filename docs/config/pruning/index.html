@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>未使用 Docker オブジェクトの取り除き | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="未使用 Docker オブジェクトの取り除き" />
   <meta property="og:description" content="未使用オブジェクトを取り除く。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/pruning/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"未使用 Docker オブジェクトの取り除き","description":"未使用オブジェクトを取り除く。","url":"https://docs.docker.com/config/pruning/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,14 +110,14 @@
 オブジェクトは、イメージ、コンテナー、ボリューム、ネットワークなどです。
 こういったオブジェクトは、Docker に対して明示的に削除の指示を出さない限り、普通は削除されません。
 こういった場合、Docker が余計なディスク容量を消費することにもつながります。
-そこで Docker では、オブジェクトごとに <code class="highlighter-rouge">prune</code> コマンドが提供されています。
-さらに <code class="highlighter-rouge">docker system prune</code> を使えば、複数タイプのオブジェクトを一度に取り除くことができます。
-ここでは、そういった <code class="highlighter-rouge">prune</code> コマンドの利用方法について示します。</p>
+そこで Docker では、オブジェクトごとに <code class="language-plaintext highlighter-rouge">prune</code> コマンドが提供されています。
+さらに <code class="language-plaintext highlighter-rouge">docker system prune</code> を使えば、複数タイプのオブジェクトを一度に取り除くことができます。
+ここでは、そういった <code class="language-plaintext highlighter-rouge">prune</code> コマンドの利用方法について示します。</p>
 
 <h2 id="prune-images">イメージの取り除き</h2>
 
-<p><code class="highlighter-rouge">docker image prune</code> コマンドは未使用イメージを取り除くものです。
-デフォルトで <code class="highlighter-rouge">docker image prune</code> は <strong>「浮いている」</strong>（dangling）イメージのみを対象とします。
+<p><code class="language-plaintext highlighter-rouge">docker image prune</code> コマンドは未使用イメージを取り除くものです。
+デフォルトで <code class="language-plaintext highlighter-rouge">docker image prune</code> は <strong>「浮いている」</strong>（dangling）イメージのみを対象とします。
 ここで「浮いている」イメージとは、タグづけがされておらず、どのコンテナーからも参照されていないものを指します。
 「浮いている」イメージを削除するには以下を行います。</p>
 
@@ -127,7 +127,7 @@ WARNING! This will remove all dangling images.
 Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N] y
 </code></pre></div></div>
 
-<p>既存コンテナーから利用されていないイメージをすべて削除するには <code class="highlighter-rouge">-a</code> フラグを使います。</p>
+<p>既存コンテナーから利用されていないイメージをすべて削除するには <code class="language-plaintext highlighter-rouge">-a</code> フラグを使います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image prune <span class="nt">-a</span>
 
@@ -136,24 +136,24 @@ Are you sure you want to <span class="k">continue</span>? <span class="o">[</spa
 </code></pre></div></div>
 
 <p>デフォルトでは、続行して良いかどうかが表示されます。
-このプロンプトを省略したい場合は <code class="highlighter-rouge">-f</code> または <code class="highlighter-rouge">--force</code> フラグを用います。</p>
+このプロンプトを省略したい場合は <code class="language-plaintext highlighter-rouge">-f</code> または <code class="language-plaintext highlighter-rouge">--force</code> フラグを用います。</p>
 
-<p>取り除かれるイメージを限定したい場合は、<code class="highlighter-rouge">--filter</code> フラグによるフィルター表現を指定することができます。
+<p>取り除かれるイメージを限定したい場合は、<code class="language-plaintext highlighter-rouge">--filter</code> フラグによるフィルター表現を指定することができます。
 たとえば、生成されてから 24 時間以上経過したイメージを対象とする場合は、以下のようにします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image prune <span class="nt">-a</span> <span class="nt">--filter</span> <span class="s2">"until=24h"</span>
 </code></pre></div></div>
 
 <p>フィルター表現は他にもあります。
-さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/image_prune/"><code class="highlighter-rouge">docker image prune</code> リファレンス</a> を参照してください。</p>
+さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/image_prune/"><code class="language-plaintext highlighter-rouge">docker image prune</code> リファレンス</a> を参照してください。</p>
 
 <h2 id="prune-containers">コンテナーの取り除き</h2>
 
-<p>コンテナーを停止しても、<code class="highlighter-rouge">--rm</code> フラグを指定した起動を行っていなければ、コンテナーは自動的には削除されません。
-Docker ホスト上において、停止しているコンテナーも含めてコンテナーすべてを見るには <code class="highlighter-rouge">docker ps -a</code> を実行します。
+<p>コンテナーを停止しても、<code class="language-plaintext highlighter-rouge">--rm</code> フラグを指定した起動を行っていなければ、コンテナーは自動的には削除されません。
+Docker ホスト上において、停止しているコンテナーも含めてコンテナーすべてを見るには <code class="language-plaintext highlighter-rouge">docker ps -a</code> を実行します。
 ひょっとすると特に開発マシンでは、たくさんのコンテナーが存在していたことに驚くかもしれません。
 停止しているコンテナーの書き込みレイヤーは、まだディスク領域を占有しています。
-これを取り除くには <code class="highlighter-rouge">docker container prune</code> コマンドを実行します。</p>
+これを取り除くには <code class="language-plaintext highlighter-rouge">docker container prune</code> コマンドを実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container prune
 
@@ -162,17 +162,17 @@ Are you sure you want to <span class="k">continue</span>? <span class="o">[</spa
 </code></pre></div></div>
 
 <p>デフォルトでは、続行して良いかどうかが表示されます。
-このプロンプトを省略したい場合は <code class="highlighter-rouge">-f</code> または <code class="highlighter-rouge">--force</code> フラグを用います。</p>
+このプロンプトを省略したい場合は <code class="language-plaintext highlighter-rouge">-f</code> または <code class="language-plaintext highlighter-rouge">--force</code> フラグを用います。</p>
 
 <p>デフォルトで、停止しているコンテナーはすべて削除されます。
-<code class="highlighter-rouge">--filter</code> フラグを使うと、削除の範囲を限定することができます。
+<code class="language-plaintext highlighter-rouge">--filter</code> フラグを使うと、削除の範囲を限定することができます。
 たとえば以下のコマンドの場合、停止してから 24 時間以上経過したコンテナーを削除します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container prune <span class="nt">--filter</span> <span class="s2">"until=24h"</span>
 </code></pre></div></div>
 
 <p>フィルター表現は他にもあります。
-さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/container_prune/"><code class="highlighter-rouge">docker container prune</code> リファレンス</a> を参照してください。</p>
+さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/container_prune/"><code class="language-plaintext highlighter-rouge">docker container prune</code> リファレンス</a> を参照してください。</p>
 
 <h2 id="prune-volumes">ボリュームの取り除き</h2>
 
@@ -188,23 +188,23 @@ Are you sure you want to <span class="k">continue</span>? <span class="o">[</spa
 </code></pre></div></div>
 
 <p>デフォルトでは、続行して良いかどうかが表示されます。
-このプロンプトを省略したい場合は <code class="highlighter-rouge">-f</code> または <code class="highlighter-rouge">--force</code> フラグを用います。</p>
+このプロンプトを省略したい場合は <code class="language-plaintext highlighter-rouge">-f</code> または <code class="language-plaintext highlighter-rouge">--force</code> フラグを用います。</p>
 
 <p>デフォルトで、未使用のボリュームはすべて削除されます。
-<code class="highlighter-rouge">--filter</code> フラグを使うと、削除の範囲を限定することができます。
-たとえば以下のコマンドの場合、<code class="highlighter-rouge">keep</code> ラベルがついていないボリュームだけが削除されます。</p>
+<code class="language-plaintext highlighter-rouge">--filter</code> フラグを使うと、削除の範囲を限定することができます。
+たとえば以下のコマンドの場合、<code class="language-plaintext highlighter-rouge">keep</code> ラベルがついていないボリュームだけが削除されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume prune <span class="nt">--filter</span> <span class="s2">"label!=keep"</span>
 </code></pre></div></div>
 
 <p>フィルター表現は他にもあります。
-さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/volume_prune/"><code class="highlighter-rouge">docker volume prune</code> リファレンス</a> を参照してください。</p>
+さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/volume_prune/"><code class="language-plaintext highlighter-rouge">docker volume prune</code> リファレンス</a> を参照してください。</p>
 
 <h2 id="prune-networks">ネットワークの取り除き</h2>
 
 <p>Docker ネットワークはそれほど容量をとるものではありません。
-ただしネットワークからは、<code class="highlighter-rouge">iptables</code> ルール、ブリッジネットワークデバイス、ルーティングテーブル項目が生成されます。
-これらを削除するために <code class="highlighter-rouge">docker network prune</code> コマンドを用います。
+ただしネットワークからは、<code class="language-plaintext highlighter-rouge">iptables</code> ルール、ブリッジネットワークデバイス、ルーティングテーブル項目が生成されます。
+これらを削除するために <code class="language-plaintext highlighter-rouge">docker network prune</code> コマンドを用います。
 これによって、どのコンテナーからも利用されていないネットワークが削除されます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network prune
@@ -214,23 +214,23 @@ Are you sure you want to <span class="k">continue</span>? <span class="o">[</spa
 </code></pre></div></div>
 
 <p>デフォルトでは、続行して良いかどうかが表示されます。
-このプロンプトを省略したい場合は <code class="highlighter-rouge">-f</code> または <code class="highlighter-rouge">--force</code> フラグを用います。</p>
+このプロンプトを省略したい場合は <code class="language-plaintext highlighter-rouge">-f</code> または <code class="language-plaintext highlighter-rouge">--force</code> フラグを用います。</p>
 
 <p>デフォルトで、未使用のネットワークはすべて削除されます。
-<code class="highlighter-rouge">--filter</code> フラグを使うと、削除の範囲を限定することができます。
+<code class="language-plaintext highlighter-rouge">--filter</code> フラグを使うと、削除の範囲を限定することができます。
 たとえば以下のコマンドの場合、24 時間以上古いネットワークを削除します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network prune <span class="nt">--filter</span> <span class="s2">"until=24h"</span>
 </code></pre></div></div>
 
 <p>フィルター表現は他にもあります。
-さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/network_prune/"><code class="highlighter-rouge">docker network prune</code> リファレンス</a> を参照してください。</p>
+さまざまな例については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/network_prune/"><code class="language-plaintext highlighter-rouge">docker network prune</code> リファレンス</a> を参照してください。</p>
 
 <h2 id="prune-everything">すべての取り除き</h2>
 
-<p><code class="highlighter-rouge">docker system prune</code> コマンドは、イメージ、コンテナー、ネットワークを取り除くコマンドを合わせたものです。
+<p><code class="language-plaintext highlighter-rouge">docker system prune</code> コマンドは、イメージ、コンテナー、ネットワークを取り除くコマンドを合わせたものです。
 Docker 17.06.0 およびそれ以前においては、ボリュームも取り除かれていました。
-Docker 17.06.1 およびそれ以降において <code class="highlighter-rouge">docker system prune</code> 実行時にボリュームも取り除くには <code class="highlighter-rouge">--volumes</code> フラグをつける必要があります。</p>
+Docker 17.06.1 およびそれ以降において <code class="language-plaintext highlighter-rouge">docker system prune</code> 実行時にボリュームも取り除くには <code class="language-plaintext highlighter-rouge">--volumes</code> フラグをつける必要があります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker system prune
 
@@ -242,7 +242,7 @@ WARNING! This will remove:
 Are you sure you want to <span class="k">continue</span>? <span class="o">[</span>y/N] y
 </code></pre></div></div>
 
-<p>Docker 17.06.1 およびそれ以降においてボリュームも取り除きたい場合は <code class="highlighter-rouge">--volumes</code> フラグをつけます。</p>
+<p>Docker 17.06.1 およびそれ以降においてボリュームも取り除きたい場合は <code class="language-plaintext highlighter-rouge">--volumes</code> フラグをつけます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker system prune <span class="nt">--volumes</span>
 
@@ -256,7 +256,7 @@ Are you sure you want to <span class="k">continue</span>? <span class="o">[</spa
 </code></pre></div></div>
 
 <p>デフォルトでは、続行して良いかどうかが表示されます。
-このプロンプトを省略したい場合は <code class="highlighter-rouge">-f</code> または <code class="highlighter-rouge">--force</code> フラグを用います。</p>
+このプロンプトを省略したい場合は <code class="language-plaintext highlighter-rouge">-f</code> または <code class="language-plaintext highlighter-rouge">--force</code> フラグを用います。</p>
 
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=pruning">pruning</a>, <a href="/docs.docker.jp.onthefly/search/?q=prune">prune</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=volumes">volumes</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=networks">networks</a>, <a href="/docs.docker.jp.onthefly/search/?q=disk">disk</a>, <a href="/docs.docker.jp.onthefly/search/?q=administration">administration</a>, <a href="/docs.docker.jp.onthefly/search/?q=garbage collection">garbage collection</a></span></section>
                     </main>

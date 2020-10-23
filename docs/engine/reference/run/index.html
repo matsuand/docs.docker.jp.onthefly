@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker run リファレンス | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker run リファレンス" />
   <meta property="og:description" content="Configure containers at runtime" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/run/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker run リファレンス","description":"Configure containers at runtime","url":"https://docs.docker.com/engine/reference/run/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    57 分
+    60 分
   
 </span>
 <!-- This file is maintained within the docker/cli GitHub
@@ -119,19 +119,19 @@
 <p>Docker は隔離されたコンテナー内でプロセスを実行します。
 コンテナーとは、ホスト上で実行される 1 つのプロセスです。
 ここでいうホストは、ローカルとリモートのどちらもあります。
-<code class="highlighter-rouge">docker run</code> を実行すると、分離された状態でコンテナープロセスが起動します。
+<code class="language-plaintext highlighter-rouge">docker run</code> を実行すると、分離された状態でコンテナープロセスが起動します。
 そこではホストから切り離されたところで、独自のファイルシステム、独自のネットワーク、分離されたプロセスツリーを持ちます。</p>
 
-<p>このページでは、コンテナーのリソースを実行時に定義して <code class="highlighter-rouge">docker run</code> コマンドを利用する方法を示します。</p>
+<p>このページでは、コンテナーのリソースを実行時に定義して <code class="language-plaintext highlighter-rouge">docker run</code> コマンドを利用する方法を示します。</p>
 
 <h2 id="general-form">一般的な書式</h2>
 
-<p>基本的な <code class="highlighter-rouge">docker run</code> コマンドは以下の書式で表わされます。</p>
+<p>基本的な <code class="language-plaintext highlighter-rouge">docker run</code> コマンドは以下の書式で表わされます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run [オプション] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run [オプション] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker run</code> コマンドには <a href="glossary.md#image"><strong>イメージ</strong></a> を指定することが必要です。
+<p><code class="language-plaintext highlighter-rouge">docker run</code> コマンドには <a href="glossary.md#image"><strong>イメージ</strong></a> を指定することが必要です。
 コンテナーはこのイメージから作り出されます。
 イメージの開発者は、以下に関するデフォルトをイメージに定義することができます。</p>
 
@@ -142,21 +142,21 @@
   <li>CPU やメモリに対する実行時の制約</li>
 </ul>
 
-<p><code class="highlighter-rouge">docker run [オプション]</code> を使うと、開発者が設定したイメージデフォルトを追加またはオーバーライドすることができます。
+<p><code class="language-plaintext highlighter-rouge">docker run [オプション]</code> を使うと、開発者が設定したイメージデフォルトを追加またはオーバーライドすることができます。
 またオペレーターは、Docker ランタイムに設定されているデフォルト値を、ほぼすべてオーバーライドすることができます。
-このようにオペレーターに対して、イメージや Docker ランタイムに対するデフォルト値のオーバーライドを可能としているため、<code class="highlighter-rouge">docker</code> コマンドの中でも <a href="/docs.docker.jp.onthefly/engine/reference/commandline/run/"><em>run</em></a> コマンドには、多くのオプションが存在しています。</p>
+このようにオペレーターに対して、イメージや Docker ランタイムに対するデフォルト値のオーバーライドを可能としているため、<code class="language-plaintext highlighter-rouge">docker</code> コマンドの中でも <a href="/docs.docker.jp.onthefly/engine/reference/commandline/run/"><em>run</em></a> コマンドには、多くのオプションが存在しています。</p>
 
-<p><code class="highlighter-rouge">[オプション]</code> の種類を理解するには <a href="/docs.docker.jp.onthefly/engine/reference/commandline/cli/#option-types"><strong>オプションの種類</strong></a> を参照してください。</p>
+<p><code class="language-plaintext highlighter-rouge">[オプション]</code> の種類を理解するには <a href="/docs.docker.jp.onthefly/engine/reference/commandline/cli/#option-types"><strong>オプションの種類</strong></a> を参照してください。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: Docker に対するシステム設定の仕方によっては、<code class="highlighter-rouge">docker run</code> コマンドの実行時に <code class="highlighter-rouge">sudo</code> をつけることが必要かもしれません。
-<code class="highlighter-rouge">sudo</code> をつけずに <code class="highlighter-rouge">docker</code> コマンドを実行できるようにするには、システム管理者が <code class="highlighter-rouge">docker</code> という名のグループを生成して、そこにユーザーを追加するようにします。
+  <p><strong>メモ</strong>: Docker に対するシステム設定の仕方によっては、<code class="language-plaintext highlighter-rouge">docker run</code> コマンドの実行時に <code class="language-plaintext highlighter-rouge">sudo</code> をつけることが必要かもしれません。
+<code class="language-plaintext highlighter-rouge">sudo</code> をつけずに <code class="language-plaintext highlighter-rouge">docker</code> コマンドを実行できるようにするには、システム管理者が <code class="language-plaintext highlighter-rouge">docker</code> という名のグループを生成して、そこにユーザーを追加するようにします。
 この設定に関する詳細は、各オペレーティングシステムにおける Docker インストールのドキュメントを参照してください。</p>
 </blockquote>
 
 <h2 id="operator-exclusive-options">オペレーター専用のオプション</h2>
 
-<p>オペレーター（<code class="highlighter-rouge">docker run</code> を実行するユーザー）だけが利用できるのが、以下のオプションです。</p>
+<p>オペレーター（<code class="language-plaintext highlighter-rouge">docker run</code> を実行するユーザー）だけが利用できるのが、以下のオプションです。</p>
 
 <ul>
   <li><a href="#detached-vs-foreground">デタッチ実行かフォアグラウンド実行か</a>
@@ -183,68 +183,68 @@
 
 <p>Docker コンテナーの起動時には、コンテナーを「デタッチ」（detached）モードによりバックグラウンドで実行するか、デフォルトのフォアグラウンドモードで実行するかを取り決めておく必要があります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-d=false: Detached mode: Run container in the background, print new container id
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-d=false: Detached mode: Run container in the background, print new container id
 </code></pre></div></div>
 
 <h3 id="detached--d">デタッチ起動 (-d)</h3>
 
-<p>デタッチモードでコンテナーを起動するには、<code class="highlighter-rouge">-d=true</code> または単に <code class="highlighter-rouge">-d</code> オプションを利用します。
+<p>デタッチモードでコンテナーを起動するには、<code class="language-plaintext highlighter-rouge">-d=true</code> または単に <code class="language-plaintext highlighter-rouge">-d</code> オプションを利用します。
 設計方針として、デタッチモードで起動したコンテナーが終了するのは、コンテナーの起動に用いられたルートプロセスが終了したときとなっています。
-ただし <code class="highlighter-rouge">--rm</code> オプションも合わせて指定した場合は異なります。
-<code class="highlighter-rouge">-d</code> と同時に <code class="highlighter-rouge">--rm</code> を指定した場合は、コンテナーが終了するか、<strong>あるいは</strong> デーモンが終了するか、どちらかが先に起きたときに、コンテナーは削除されます。</p>
+ただし <code class="language-plaintext highlighter-rouge">--rm</code> オプションも合わせて指定した場合は異なります。
+<code class="language-plaintext highlighter-rouge">-d</code> と同時に <code class="language-plaintext highlighter-rouge">--rm</code> を指定した場合は、コンテナーが終了するか、<strong>あるいは</strong> デーモンが終了するか、どちらかが先に起きたときに、コンテナーは削除されます。</p>
 
-<p><code class="highlighter-rouge">service</code> かつ <code class="highlighter-rouge">start</code> コマンドをデタッチコンテナーに対して用いてはなりません。
-例として、以下のコマンドは <code class="highlighter-rouge">nginx</code> サービスを起動するものです。</p>
+<p><code class="language-plaintext highlighter-rouge">service</code> かつ <code class="language-plaintext highlighter-rouge">start</code> コマンドをデタッチコンテナーに対して用いてはなりません。
+例として、以下のコマンドは <code class="language-plaintext highlighter-rouge">nginx</code> サービスを起動するものです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 80:80 my_image service nginx start
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 80:80 my_image service nginx start
 </code></pre></div></div>
 
-<p>このコマンドは、コンテナー内に <code class="highlighter-rouge">nginx</code> サービスを起動させることには成功します。
+<p>このコマンドは、コンテナー内に <code class="language-plaintext highlighter-rouge">nginx</code> サービスを起動させることには成功します。
 しかしデタッチ実行という処理には失敗します。
-そしてルートプロセス（<code class="highlighter-rouge">service nginx start</code>）が終了してデタッチコンテナーが停止しますが、これは設計どおりの動きです。
-結果として <code class="highlighter-rouge">nginx</code> サービスは起動するものの、利用はできません。
-<code class="highlighter-rouge">nginx</code> ウェブサーバーのようなプロセスを起動するなら、代わりに以下のようなコマンド実行とします。</p>
+そしてルートプロセス（<code class="language-plaintext highlighter-rouge">service nginx start</code>）が終了してデタッチコンテナーが停止しますが、これは設計どおりの動きです。
+結果として <code class="language-plaintext highlighter-rouge">nginx</code> サービスは起動するものの、利用はできません。
+<code class="language-plaintext highlighter-rouge">nginx</code> ウェブサーバーのようなプロセスを起動するなら、代わりに以下のようなコマンド実行とします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 80:80 my_image nginx -g 'daemon off;'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 80:80 my_image nginx -g 'daemon off;'
 </code></pre></div></div>
 
 <p>デタッチコンテナーを使って入出力を行うには、ネットワーク接続や共有ボリュームを利用します。
-これが必要になる理由は、<code class="highlighter-rouge">docker run</code> を実行したコマンドラインから、コンテナーはもはやコマンドを受け付ける状態にはないからです。</p>
+これが必要になる理由は、<code class="language-plaintext highlighter-rouge">docker run</code> を実行したコマンドラインから、コンテナーはもはやコマンドを受け付ける状態にはないからです。</p>
 
-<p>デタッチモードのコンテナーに再度アタッチするには <code class="highlighter-rouge">docker</code> <a href="/docs.docker.jp.onthefly/engine/reference/commandline/attach/"><em>attach</em></a> コマンドを利用します。</p>
+<p>デタッチモードのコンテナーに再度アタッチするには <code class="language-plaintext highlighter-rouge">docker</code> <a href="/docs.docker.jp.onthefly/engine/reference/commandline/attach/"><em>attach</em></a> コマンドを利用します。</p>
 
 <h3 id="foreground">フォアグラウンド起動</h3>
 
-<p>フォアグラウンドモード（<code class="highlighter-rouge">-d</code> を指定しなかった場合のデフォルト）の場合、<code class="highlighter-rouge">docker run</code> はコンテナー内にプロセスを起動させます。
+<p>フォアグラウンドモード（<code class="language-plaintext highlighter-rouge">-d</code> を指定しなかった場合のデフォルト）の場合、<code class="language-plaintext highlighter-rouge">docker run</code> はコンテナー内にプロセスを起動させます。
 そしてコンソールをプロセスの標準入出力および標準エラー出力にアタッチします。
 こうすれば TTY であるかのように扱うことができ（そしてたいていのコマンドラインモジュールが期待していることであり）、シグナルの送受信も行うことができます。
 いずれも設定により変更可能です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-a=[]           : `STDIN`, `STDOUT`, `STDERR` にアタッチします。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-a=[]           : `STDIN`, `STDOUT`, `STDERR` にアタッチします。
 -t              : 擬似TTYに割り当てます。
 --sig-proxy=true: 受信シグナルをすべてプロセスにプロキシーします。(非TTYモードのみ)
 -i              : アタッチされていなくても STDIN だけは受け付けます。
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">-a</code> を指定しなかった場合、Docker は <a href="https://github.com/docker/docker/blob/4118e0c9eebda2412a09ae66e90c34b85fae3275/runconfig/opts/parse.go#L267">標準出力と標準エラー出力の双方にアタッチ</a> します。
-上とは別に、標準ストリーム 3 つ（<code class="highlighter-rouge">STDIN</code>, <code class="highlighter-rouge">STDOUT</code>, <code class="highlighter-rouge">STDERR</code>）のうちから、接続したいものを選んで指定することもできます。
+<p><code class="language-plaintext highlighter-rouge">-a</code> を指定しなかった場合、Docker は <a href="https://github.com/docker/docker/blob/4118e0c9eebda2412a09ae66e90c34b85fae3275/runconfig/opts/parse.go#L267">標準出力と標準エラー出力の双方にアタッチ</a> します。
+上とは別に、標準ストリーム 3 つ（<code class="language-plaintext highlighter-rouge">STDIN</code>, <code class="language-plaintext highlighter-rouge">STDOUT</code>, <code class="language-plaintext highlighter-rouge">STDERR</code>）のうちから、接続したいものを選んで指定することもできます。
 たとえば以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -a stdin -a stdout -i -t ubuntu /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -a stdin -a stdout -i -t ubuntu /bin/bash
 </code></pre></div></div>
 
-<p>シェルのような対話的処理を行うには、<code class="highlighter-rouge">-i -t</code> をともに指定し、コンテナープロセスに対して TTY を割り当てることが必要です。
-<code class="highlighter-rouge">-i -t</code> は後の利用例からもわかるように、<code class="highlighter-rouge">-it</code> と記述する場合もあります。
-クライアントが標準入力をパイプから受け付けている場合は、<code class="highlighter-rouge">-t</code> の指定は禁止されています。
+<p>シェルのような対話的処理を行うには、<code class="language-plaintext highlighter-rouge">-i -t</code> をともに指定し、コンテナープロセスに対して TTY を割り当てることが必要です。
+<code class="language-plaintext highlighter-rouge">-i -t</code> は後の利用例からもわかるように、<code class="language-plaintext highlighter-rouge">-it</code> と記述する場合もあります。
+クライアントが標準入力をパイプから受け付けている場合は、<code class="language-plaintext highlighter-rouge">-t</code> の指定は禁止されています。
 たとえば以下です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo test | docker run -i busybox cat
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo test | docker run -i busybox cat
 </code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong>: コンテナー内にて PID 1 として実行しているプロセスは、Linux において特別に取り扱われるものです。
 このプロセスのデフォルト動作は、あらゆるシグナルを無視します。
-したがってこのプロセスが特別にコーディングされていない限り、<code class="highlighter-rouge">SIGINT</code> や <code class="highlighter-rouge">SIGTERM</code> では停止しません。</p>
+したがってこのプロセスが特別にコーディングされていない限り、<code class="language-plaintext highlighter-rouge">SIGINT</code> や <code class="language-plaintext highlighter-rouge">SIGTERM</code> では停止しません。</p>
 </blockquote>
 
 <h2 id="container-identification">コンテナーの指定</h2>
@@ -277,9 +277,9 @@
 </table>
 
 <p>UUID 識別子は Docker デーモンから割り当てられるものです。
-<code class="highlighter-rouge">--name</code> オプションによりコンテナー名を指定しなかった場合、デーモンはランダムな文字列を生成して割り当てます。
-<code class="highlighter-rouge">name</code> を定義すれば、コンテナーに意味のある名称を与えることができます。
-<code class="highlighter-rouge">name</code> を指定しておくと、Docker ネットワーク内のコンテナーを参照する際に、その名前を使うことができます。
+<code class="language-plaintext highlighter-rouge">--name</code> オプションによりコンテナー名を指定しなかった場合、デーモンはランダムな文字列を生成して割り当てます。
+<code class="language-plaintext highlighter-rouge">name</code> を定義すれば、コンテナーに意味のある名称を与えることができます。
+<code class="language-plaintext highlighter-rouge">name</code> を指定しておくと、Docker ネットワーク内のコンテナーを参照する際に、その名前を使うことができます。
 この方法は Docker コンテナーの実行が、バックグラウンドかフォアグラウンドかに関係なく利用できます。</p>
 
 <blockquote>
@@ -292,14 +292,14 @@
 これはある種のプログラムにおいて、プロセス ID をファイルに書き出している手法と同様です。
 （PID ファイルとして見たことがあるものです。）</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--cidfile="": コンテナーIDをファイルに書き出します。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--cidfile="": コンテナーIDをファイルに書き出します。
 </code></pre></div></div>
 
 <h3 id="imagetag">イメージ[:タグ]</h3>
 
 <p>コンテナーを厳密に指定する方法ではありませんが、実行したいコンテナーのイメージバージョンを指定することが可能です。
-これを行うには、コマンド実行時に <code class="highlighter-rouge">イメージ[:タグ]</code> を加えます。
-たとえば <code class="highlighter-rouge">docker run ubuntu:14.04</code> のようにします。</p>
+これを行うには、コマンド実行時に <code class="language-plaintext highlighter-rouge">イメージ[:タグ]</code> を加えます。
+たとえば <code class="language-plaintext highlighter-rouge">docker run ubuntu:14.04</code> のようにします。</p>
 
 <h3 id="imagedigest">イメージ[@ダイジェスト値]</h3>
 
@@ -307,15 +307,15 @@
 called a digest. As long as the input used to generate the image is unchanged,
 the digest value is predictable and referenceable.</p>
 
-<p>The following example runs a container from the <code class="highlighter-rouge">alpine</code> image with the
-<code class="highlighter-rouge">sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0</code> digest:</p>
+<p>The following example runs a container from the <code class="language-plaintext highlighter-rouge">alpine</code> image with the
+<code class="language-plaintext highlighter-rouge">sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0</code> digest:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run alpine@sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0 date
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run alpine@sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0 date
 </code></pre></div></div>
 
 <h2 id="pid-settings---pid">PID 設定 (--pid)</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--pid=""  : Set the PID (Process) Namespace mode for the container,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--pid=""  : Set the PID (Process) Namespace mode for the container,
              'container:&lt;name|id&gt;': joins another container's PID namespace
              'host': use the host's PID namespace inside the container
 </code></pre></div></div>
@@ -327,25 +327,25 @@ PID 名前空間があることによって、システムプロセスの参照�
 
 <p>コンテナーがホストプロセスの名前空間を共有したい場合を考えます。
 この場合、基本的にはコンテナー内部のプロセスが、システム上の全プロセスを参照できるようにします。
-たとえば <code class="highlighter-rouge">strace</code> や <code class="highlighter-rouge">gdb</code> といったデバッグツールを用いてコンテナーをビルドしたとして、このツールをコンテナー内部のプロセスをデバッグする際にも利用したい場合です。</p>
+たとえば <code class="language-plaintext highlighter-rouge">strace</code> や <code class="language-plaintext highlighter-rouge">gdb</code> といったデバッグツールを用いてコンテナーをビルドしたとして、このツールをコンテナー内部のプロセスをデバッグする際にも利用したい場合です。</p>
 
 <h3 id="example-run-htop-inside-a-container">利用例: コンテナー内での htop の実行</h3>
 
 <p>以下の Dockerfile を生成します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM alpine:latest
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM alpine:latest
 RUN apk add --update htop &amp;&amp; rm -rf /var/cache/apk/*
 CMD ["htop"]
 </code></pre></div></div>
 
-<p>Dockerfile をビルドして、イメージに対して <code class="highlighter-rouge">myhtop</code> というタグをつけます。</p>
+<p>Dockerfile をビルドして、イメージに対して <code class="language-plaintext highlighter-rouge">myhtop</code> というタグをつけます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> myhtop <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>以下のコマンドを実行して、コンテナー内にて <code class="highlighter-rouge">htop</code> を実行します。</p>
+<p>以下のコマンドを実行して、コンテナー内にて <code class="language-plaintext highlighter-rouge">htop</code> を実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm --pid=host myhtop
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm --pid=host myhtop
 </code></pre></div></div>
 
 <p>別コンテナーが PID 名前空間に参加すれば、コンテナーをデバッグする目的で利用することができます。</p>
@@ -365,15 +365,15 @@ CMD ["htop"]
 
 <h2 id="uts-settings---uts">UTS 設定 (--uts)</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--uts=""  : Set the UTS namespace mode for the container,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--uts=""  : Set the UTS namespace mode for the container,
        'host': use the host's UTS namespace inside the container
 </code></pre></div></div>
 
 <p>The UTS namespace is for setting the hostname and the domain that is visible
 to running processes in that namespace.  By default, all containers, including
-those with <code class="highlighter-rouge">--network=host</code>, have their own UTS namespace.  The <code class="highlighter-rouge">host</code> setting will
+those with <code class="language-plaintext highlighter-rouge">--network=host</code>, have their own UTS namespace.  The <code class="language-plaintext highlighter-rouge">host</code> setting will
 result in the container using the same UTS namespace as the host.  Note that
-<code class="highlighter-rouge">--hostname</code> and <code class="highlighter-rouge">--domainname</code> are invalid in <code class="highlighter-rouge">host</code> UTS mode.</p>
+<code class="language-plaintext highlighter-rouge">--hostname</code> and <code class="language-plaintext highlighter-rouge">--domainname</code> are invalid in <code class="language-plaintext highlighter-rouge">host</code> UTS mode.</p>
 
 <p>You may wish to share the UTS namespace with the host if you would like the
 hostname of the container to change as the hostname of the host changes.  A
@@ -381,7 +381,7 @@ more advanced use case would be changing the host’s hostname from a container.
 
 <h2 id="ipc-settings---ipc">IPC settings (--ipc)</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--ipc="MODE"  : Set the IPC mode for the container
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--ipc="MODE"  : Set the IPC mode for the container
 </code></pre></div></div>
 
 <p>The following values are accepted:</p>
@@ -422,8 +422,8 @@ more advanced use case would be changing the host’s hostname from a container.
   </tbody>
 </table>
 
-<p>If not specified, daemon default is used, which can either be <code class="highlighter-rouge">"private"</code>
-or <code class="highlighter-rouge">"shareable"</code>, depending on the daemon version and configuration.</p>
+<p>If not specified, daemon default is used, which can either be <code class="language-plaintext highlighter-rouge">"private"</code>
+or <code class="language-plaintext highlighter-rouge">"shareable"</code>, depending on the daemon version and configuration.</p>
 
 <p>IPC (POSIX/SysV IPC) namespace provides separation of named shared memory
 segments, semaphores and message queues.</p>
@@ -434,12 +434,12 @@ memory is commonly used by databases and custom-built (typically C/OpenMPI,
 C++/using boost libraries) high performance applications for scientific
 computing and financial services industries. If these types of applications
 are broken into multiple containers, you might need to share the IPC mechanisms
-of the containers, using <code class="highlighter-rouge">"shareable"</code> mode for the main (i.e. “donor”)
-container, and <code class="highlighter-rouge">"container:&lt;donor-name-or-ID&gt;"</code> for other containers.</p>
+of the containers, using <code class="language-plaintext highlighter-rouge">"shareable"</code> mode for the main (i.e. “donor”)
+container, and <code class="language-plaintext highlighter-rouge">"container:&lt;donor-name-or-ID&gt;"</code> for other containers.</p>
 
 <h2 id="network-settings">ネットワーク設定</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--dns=[]           : Set custom dns servers for the container
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--dns=[]           : Set custom dns servers for the container
 --network="bridge" : Connect a container to a network
                       'bridge': create a network stack on the default Docker bridge
                       'none': no networking
@@ -456,18 +456,18 @@ container, and <code class="highlighter-rouge">"container:&lt;donor-name-or-ID&g
 
 <p>By default, all containers have networking enabled and they can make any
 outgoing connections. The operator can completely disable networking
-with <code class="highlighter-rouge">docker run --network none</code> which disables all incoming and outgoing
+with <code class="language-plaintext highlighter-rouge">docker run --network none</code> which disables all incoming and outgoing
 networking. In cases like this, you would perform I/O through files or
-<code class="highlighter-rouge">STDIN</code> and <code class="highlighter-rouge">STDOUT</code> only.</p>
+<code class="language-plaintext highlighter-rouge">STDIN</code> and <code class="language-plaintext highlighter-rouge">STDOUT</code> only.</p>
 
 <p>Publishing ports and linking to other containers only works with the default (bridge). The linking feature is a legacy feature. You should always prefer using Docker network drivers over linking.</p>
 
 <p>Your container will use the same DNS servers as the host by default, but
-you can override this with <code class="highlighter-rouge">--dns</code>.</p>
+you can override this with <code class="language-plaintext highlighter-rouge">--dns</code>.</p>
 
 <p>By default, the MAC address is generated using the IP address allocated to the
 container. You can set the container’s MAC address explicitly by providing a
-MAC address via the <code class="highlighter-rouge">--mac-address</code> parameter (format:<code class="highlighter-rouge">12:34:56:78:9a:bc</code>).Be
+MAC address via the <code class="language-plaintext highlighter-rouge">--mac-address</code> parameter (format:<code class="language-plaintext highlighter-rouge">12:34:56:78:9a:bc</code>).Be
 aware that Docker does not check if manually specified MAC addresses are unique.</p>
 
 <p>Supported networks :</p>
@@ -498,25 +498,25 @@ aware that Docker does not check if manually specified MAC addresses are unique.
     </tr>
     <tr>
       <td class="no-wrap"><strong>NETWORK</strong></td>
-      <td>Connects the container to a user created network (using <code class="highlighter-rouge">docker network create</code> command)</td>
+      <td>Connects the container to a user created network (using <code class="language-plaintext highlighter-rouge">docker network create</code> command)</td>
     </tr>
   </tbody>
 </table>
 
 <h4 id="network-none">ネットワーク設定: none</h4>
 
-<p>With the network is <code class="highlighter-rouge">none</code> a container will not have
+<p>With the network is <code class="language-plaintext highlighter-rouge">none</code> a container will not have
 access to any external routes.  The container will still have a
-<code class="highlighter-rouge">loopback</code> interface enabled in the container but it does not have any
+<code class="language-plaintext highlighter-rouge">loopback</code> interface enabled in the container but it does not have any
 routes to external traffic.</p>
 
 <h4 id="network-bridge">ネットワーク設定: bridge</h4>
 
-<p>コンテナーに対して <code class="highlighter-rouge">bridge</code> を設定した場合、そのネットワークは Docker のデフォルトネットワーク設定を利用します。
-ブリッジはホスト上において、通常は <code class="highlighter-rouge">docker0</code> という名前で設定されます。
-そしてコンテナーに対しては <code class="highlighter-rouge">veth</code> というインターフェースがペアで生成されます。
-この <code class="highlighter-rouge">veth</code> ペアの一方は、ブリッジにアタッチされたホスト上にあり、もう一方はコンテナーの名前空間内に置かれます。
-その名前空間内には <code class="highlighter-rouge">loopback</code> インターフェースもあります。
+<p>コンテナーに対して <code class="language-plaintext highlighter-rouge">bridge</code> を設定した場合、そのネットワークは Docker のデフォルトネットワーク設定を利用します。
+ブリッジはホスト上において、通常は <code class="language-plaintext highlighter-rouge">docker0</code> という名前で設定されます。
+そしてコンテナーに対しては <code class="language-plaintext highlighter-rouge">veth</code> というインターフェースがペアで生成されます。
+この <code class="language-plaintext highlighter-rouge">veth</code> ペアの一方は、ブリッジにアタッチされたホスト上にあり、もう一方はコンテナーの名前空間内に置かれます。
+その名前空間内には <code class="language-plaintext highlighter-rouge">loopback</code> インターフェースもあります。
 ブリッジネットワーク上のコンテナーに対して IP アドレスが割り振られるので、トラフィックはこのブリッジを介してコンテナーに届けられます。</p>
 
 <p>コンテナー同士は、デフォルトではその IP アドレスを使って互いに通信を行います。
@@ -524,19 +524,19 @@ routes to external traffic.</p>
 
 <h4 id="network-host">ネットワーク設定: host</h4>
 
-<p>With the network set to <code class="highlighter-rouge">host</code> a container will share the host’s
+<p>With the network set to <code class="language-plaintext highlighter-rouge">host</code> a container will share the host’s
 network stack and all interfaces from the host will be available to the
 container.  The container’s hostname will match the hostname on the host
-system. Note that <code class="highlighter-rouge">--mac-address</code> is invalid in <code class="highlighter-rouge">host</code> netmode. Even in <code class="highlighter-rouge">host</code>
+system. Note that <code class="language-plaintext highlighter-rouge">--mac-address</code> is invalid in <code class="language-plaintext highlighter-rouge">host</code> netmode. Even in <code class="language-plaintext highlighter-rouge">host</code>
 network mode a container has its own UTS namespace by default. As such
-<code class="highlighter-rouge">--hostname</code> and <code class="highlighter-rouge">--domainname</code> are allowed in <code class="highlighter-rouge">host</code> network mode and will
+<code class="language-plaintext highlighter-rouge">--hostname</code> and <code class="language-plaintext highlighter-rouge">--domainname</code> are allowed in <code class="language-plaintext highlighter-rouge">host</code> network mode and will
 only change the hostname and domain name inside the container.
-Similar to <code class="highlighter-rouge">--hostname</code>, the <code class="highlighter-rouge">--add-host</code>, <code class="highlighter-rouge">--dns</code>, <code class="highlighter-rouge">--dns-search</code>, and
-<code class="highlighter-rouge">--dns-option</code> options can be used in <code class="highlighter-rouge">host</code> network mode. These options update
-<code class="highlighter-rouge">/etc/hosts</code> or <code class="highlighter-rouge">/etc/resolv.conf</code> inside the container. No change are made to
-<code class="highlighter-rouge">/etc/hosts</code> and <code class="highlighter-rouge">/etc/resolv.conf</code> on the host.</p>
+Similar to <code class="language-plaintext highlighter-rouge">--hostname</code>, the <code class="language-plaintext highlighter-rouge">--add-host</code>, <code class="language-plaintext highlighter-rouge">--dns</code>, <code class="language-plaintext highlighter-rouge">--dns-search</code>, and
+<code class="language-plaintext highlighter-rouge">--dns-option</code> options can be used in <code class="language-plaintext highlighter-rouge">host</code> network mode. These options update
+<code class="language-plaintext highlighter-rouge">/etc/hosts</code> or <code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code> inside the container. No change are made to
+<code class="language-plaintext highlighter-rouge">/etc/hosts</code> and <code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code> on the host.</p>
 
-<p>Compared to the default <code class="highlighter-rouge">bridge</code> mode, the <code class="highlighter-rouge">host</code> mode gives <em>significantly</em>
+<p>Compared to the default <code class="language-plaintext highlighter-rouge">bridge</code> mode, the <code class="language-plaintext highlighter-rouge">host</code> mode gives <em>significantly</em>
 better networking performance since it uses the host’s native networking stack
 whereas the bridge has to go through one level of virtualization through the
 docker daemon. It is recommended to run containers in this mode when their
@@ -544,24 +544,24 @@ networking performance is critical, for example, a production Load Balancer
 or a High Performance Web Server.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: <code class="highlighter-rouge">--network="host"</code> gives the container full access to local system
+  <p><strong>Note</strong>: <code class="language-plaintext highlighter-rouge">--network="host"</code> gives the container full access to local system
 services such as D-bus and is therefore considered insecure.</p>
 </blockquote>
 
 <h4 id="network-container">Network: container</h4>
 
-<p>With the network set to <code class="highlighter-rouge">container</code> a container will share the
+<p>With the network set to <code class="language-plaintext highlighter-rouge">container</code> a container will share the
 network stack of another container.  The other container’s name must be
-provided in the format of <code class="highlighter-rouge">--network container:&lt;name|id&gt;</code>. Note that <code class="highlighter-rouge">--add-host</code>
-<code class="highlighter-rouge">--hostname</code> <code class="highlighter-rouge">--dns</code> <code class="highlighter-rouge">--dns-search</code> <code class="highlighter-rouge">--dns-option</code> and <code class="highlighter-rouge">--mac-address</code> are
-invalid in <code class="highlighter-rouge">container</code> netmode, and <code class="highlighter-rouge">--publish</code> <code class="highlighter-rouge">--publish-all</code> <code class="highlighter-rouge">--expose</code> are
-also invalid in <code class="highlighter-rouge">container</code> netmode.</p>
+provided in the format of <code class="language-plaintext highlighter-rouge">--network container:&lt;name|id&gt;</code>. Note that <code class="language-plaintext highlighter-rouge">--add-host</code>
+<code class="language-plaintext highlighter-rouge">--hostname</code> <code class="language-plaintext highlighter-rouge">--dns</code> <code class="language-plaintext highlighter-rouge">--dns-search</code> <code class="language-plaintext highlighter-rouge">--dns-option</code> and <code class="language-plaintext highlighter-rouge">--mac-address</code> are
+invalid in <code class="language-plaintext highlighter-rouge">container</code> netmode, and <code class="language-plaintext highlighter-rouge">--publish</code> <code class="language-plaintext highlighter-rouge">--publish-all</code> <code class="language-plaintext highlighter-rouge">--expose</code> are
+also invalid in <code class="language-plaintext highlighter-rouge">container</code> netmode.</p>
 
-<p>Example running a Redis container with Redis binding to <code class="highlighter-rouge">localhost</code> then
-running the <code class="highlighter-rouge">redis-cli</code> command and connecting to the Redis server over the
-<code class="highlighter-rouge">localhost</code> interface.</p>
+<p>Example running a Redis container with Redis binding to <code class="language-plaintext highlighter-rouge">localhost</code> then
+running the <code class="language-plaintext highlighter-rouge">redis-cli</code> command and connecting to the Redis server over the
+<code class="language-plaintext highlighter-rouge">localhost</code> interface.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --name redis example/redis --bind 127.0.0.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --name redis example/redis --bind 127.0.0.1
 $ # use the redis container's network stack to access localhost
 $ docker run --rm -it --network container:redis example/redis-cli -h 127.0.0.1
 </code></pre></div></div>
@@ -573,24 +573,24 @@ driver plugin. You can connect multiple containers to the same network. Once
 connected to a user-defined network, the containers can communicate easily using
 only another container’s IP address or name.</p>
 
-<p>For <code class="highlighter-rouge">overlay</code> networks or custom plugins that support multi-host connectivity,
+<p>For <code class="language-plaintext highlighter-rouge">overlay</code> networks or custom plugins that support multi-host connectivity,
 containers connected to the same multi-host network but launched from different
 Engines can also communicate in this way.</p>
 
-<p>The following example creates a network using the built-in <code class="highlighter-rouge">bridge</code> network
+<p>The following example creates a network using the built-in <code class="language-plaintext highlighter-rouge">bridge</code> network
 driver and running a container in the created network</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create -d bridge my-net
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker network create -d bridge my-net
 $ docker run --network=my-net -itd --name=container3 busybox
 </code></pre></div></div>
 
 <h3 id="managing-etchosts">Managing /etc/hosts</h3>
 
-<p>Your container will have lines in <code class="highlighter-rouge">/etc/hosts</code> which define the hostname of the
-container itself as well as <code class="highlighter-rouge">localhost</code> and a few other common things. The
-<code class="highlighter-rouge">--add-host</code> flag can be used to add additional lines to <code class="highlighter-rouge">/etc/hosts</code>.</p>
+<p>Your container will have lines in <code class="language-plaintext highlighter-rouge">/etc/hosts</code> which define the hostname of the
+container itself as well as <code class="language-plaintext highlighter-rouge">localhost</code> and a few other common things. The
+<code class="language-plaintext highlighter-rouge">--add-host</code> flag can be used to add additional lines to <code class="language-plaintext highlighter-rouge">/etc/hosts</code>.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --add-host db-static:86.75.30.9 ubuntu cat /etc/hosts
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --add-host db-static:86.75.30.9 ubuntu cat /etc/hosts
 172.17.0.22     09d03f76bf2c
 fe00::0         ip6-localnet
 ff00::0         ip6-mcastprefix
@@ -601,25 +601,25 @@ ff02::2         ip6-allrouters
 86.75.30.9      db-static
 </code></pre></div></div>
 
-<p>If a container is connected to the default bridge network and <code class="highlighter-rouge">linked</code>
-with other containers, then the container’s <code class="highlighter-rouge">/etc/hosts</code> file is updated
+<p>If a container is connected to the default bridge network and <code class="language-plaintext highlighter-rouge">linked</code>
+with other containers, then the container’s <code class="language-plaintext highlighter-rouge">/etc/hosts</code> file is updated
 with the linked container’s name.</p>
 
 <blockquote>
-  <p><strong>Note</strong> Since Docker may live update the container’s <code class="highlighter-rouge">/etc/hosts</code> file, there
+  <p><strong>Note</strong> Since Docker may live update the container’s <code class="language-plaintext highlighter-rouge">/etc/hosts</code> file, there
 may be situations when processes inside the container can end up reading an
-empty or incomplete <code class="highlighter-rouge">/etc/hosts</code> file. In most cases, retrying the read again
+empty or incomplete <code class="language-plaintext highlighter-rouge">/etc/hosts</code> file. In most cases, retrying the read again
 should fix the problem.</p>
 </blockquote>
 
 <h2 id="restart-policies---restart">Restart policies (--restart)</h2>
 
-<p>Using the <code class="highlighter-rouge">--restart</code> flag on Docker run you can specify a restart policy for
+<p>Using the <code class="language-plaintext highlighter-rouge">--restart</code> flag on Docker run you can specify a restart policy for
 how a container should or should not be restarted on exit.</p>
 
-<p>When a restart policy is active on a container, it will be shown as either <code class="highlighter-rouge">Up</code>
-or <code class="highlighter-rouge">Restarting</code> in <a href="/docs.docker.jp.onthefly/engine/reference/commandline/ps/"><code class="highlighter-rouge">docker ps</code></a>. It can also be
-useful to use <a href="/docs.docker.jp.onthefly/engine/reference/commandline/events/"><code class="highlighter-rouge">docker events</code></a> to see the
+<p>When a restart policy is active on a container, it will be shown as either <code class="language-plaintext highlighter-rouge">Up</code>
+or <code class="language-plaintext highlighter-rouge">Restarting</code> in <a href="/docs.docker.jp.onthefly/engine/reference/commandline/ps/"><code class="language-plaintext highlighter-rouge">docker ps</code></a>. It can also be
+useful to use <a href="/docs.docker.jp.onthefly/engine/reference/commandline/events/"><code class="language-plaintext highlighter-rouge">docker events</code></a> to see the
 restart policy in effect.</p>
 
 <p>Docker supports the following restart policies:</p>
@@ -654,8 +654,8 @@ restart policy in effect.</p>
 <p>An ever increasing delay (double the previous delay, starting at 100
 milliseconds) is added before each restart to prevent flooding the server.
 This means the daemon will wait for 100 ms, then 200 ms, 400, 800, 1600,
-and so on until either the <code class="highlighter-rouge">on-failure</code> limit is hit, or when you <code class="highlighter-rouge">docker stop</code>
-or <code class="highlighter-rouge">docker rm -f</code> the container.</p>
+and so on until either the <code class="language-plaintext highlighter-rouge">on-failure</code> limit is hit, or when you <code class="language-plaintext highlighter-rouge">docker stop</code>
+or <code class="language-plaintext highlighter-rouge">docker rm -f</code> the container.</p>
 
 <p>If a container is successfully restarted (the container is started and runs
 for at least 10 seconds), the delay is reset to its default value of 100 ms.</p>
@@ -663,49 +663,49 @@ for at least 10 seconds), the delay is reset to its default value of 100 ms.</p>
 <p>You can specify the maximum amount of times Docker will try to restart the
 container when using the <strong>on-failure</strong> policy.  The default is that Docker
 will try forever to restart the container. The number of (attempted) restarts
-for a container can be obtained via <a href="/docs.docker.jp.onthefly/engine/reference/commandline/inspect/"><code class="highlighter-rouge">docker inspect</code></a>. For example, to get the number of restarts
+for a container can be obtained via <a href="/docs.docker.jp.onthefly/engine/reference/commandline/inspect/"><code class="language-plaintext highlighter-rouge">docker inspect</code></a>. For example, to get the number of restarts
 for container “my-container”;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect -f "{{ .RestartCount }}" my-container
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect -f "{{ .RestartCount }}" my-container
 # 2
 </code></pre></div></div>
 
 <p>Or, to get the last time the container was (re)started;</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect -f "{{ .State.StartedAt }}" my-container
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect -f "{{ .State.StartedAt }}" my-container
 # 2015-03-04T23:47:07.691840179Z
 </code></pre></div></div>
 
-<p>Combining <code class="highlighter-rouge">--restart</code> (restart policy) with the <code class="highlighter-rouge">--rm</code> (clean up) flag results
+<p>Combining <code class="language-plaintext highlighter-rouge">--restart</code> (restart policy) with the <code class="language-plaintext highlighter-rouge">--rm</code> (clean up) flag results
 in an error. On container restart, attached clients are disconnected. See the
-examples on using the <a href="#clean-up-rm"><code class="highlighter-rouge">--rm</code> (clean up)</a> flag later in this page.</p>
+examples on using the <a href="#clean-up-rm"><code class="language-plaintext highlighter-rouge">--rm</code> (clean up)</a> flag later in this page.</p>
 
 <h3 id="examples">利用例</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --restart=always redis
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --restart=always redis
 </code></pre></div></div>
 
-<p>This will run the <code class="highlighter-rouge">redis</code> container with a restart policy of <strong>always</strong>
+<p>This will run the <code class="language-plaintext highlighter-rouge">redis</code> container with a restart policy of <strong>always</strong>
 so that if the container exits, Docker will restart it.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --restart=on-failure:10 redis
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --restart=on-failure:10 redis
 </code></pre></div></div>
 
-<p>This will run the <code class="highlighter-rouge">redis</code> container with a restart policy of <strong>on-failure</strong>
-and a maximum restart count of 10.  If the <code class="highlighter-rouge">redis</code> container exits with a
+<p>This will run the <code class="language-plaintext highlighter-rouge">redis</code> container with a restart policy of <strong>on-failure</strong>
+and a maximum restart count of 10.  If the <code class="language-plaintext highlighter-rouge">redis</code> container exits with a
 non-zero exit status more than 10 times in a row Docker will abort trying to
 restart the container. Providing a maximum restart limit is only valid for the
 <strong>on-failure</strong> policy.</p>
 
 <h2 id="exit-status">Exit Status</h2>
 
-<p>The exit code from <code class="highlighter-rouge">docker run</code> gives information about why the container
-failed to run or why it exited.  When <code class="highlighter-rouge">docker run</code> exits with a non-zero code,
-the exit codes follow the <code class="highlighter-rouge">chroot</code> standard, see below:</p>
+<p>The exit code from <code class="language-plaintext highlighter-rouge">docker run</code> gives information about why the container
+failed to run or why it exited.  When <code class="language-plaintext highlighter-rouge">docker run</code> exits with a non-zero code,
+the exit codes follow the <code class="language-plaintext highlighter-rouge">chroot</code> standard, see below:</p>
 
 <p><strong><em>125</em></strong> if the error is with Docker daemon <strong><em>itself</em></strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --foo busybox; echo $?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --foo busybox; echo $?
 # flag provided but not defined: --foo
   See 'docker run --help'.
   125
@@ -713,21 +713,21 @@ the exit codes follow the <code class="highlighter-rouge">chroot</code> standard
 
 <p><strong><em>126</em></strong> if the <strong><em>contained command</em></strong> cannot be invoked</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run busybox /etc; echo $?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run busybox /etc; echo $?
 # docker: Error response from daemon: Container command '/etc' could not be invoked.
   126
 </code></pre></div></div>
 
 <p><strong><em>127</em></strong> if the <strong><em>contained command</em></strong> cannot be found</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run busybox foo; echo $?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run busybox foo; echo $?
 # docker: Error response from daemon: Container command 'foo' not found or does not exist.
   127
 </code></pre></div></div>
 
 <p><strong><em>Exit code</em></strong> of <strong><em>contained command</em></strong> otherwise</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run busybox /bin/sh -c 'exit 3'; echo $?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run busybox /bin/sh -c 'exit 3'; echo $?
 # 3
 </code></pre></div></div>
 
@@ -739,23 +739,23 @@ final state) and you retain all your data by default. But if you are
 running short-term <strong>foreground</strong> processes, these container file
 systems can really pile up. If instead you’d like Docker to
 <strong>automatically clean up the container and remove the file system when
-the container exits</strong>, you can add the <code class="highlighter-rouge">--rm</code> flag:</p>
+the container exits</strong>, you can add the <code class="language-plaintext highlighter-rouge">--rm</code> flag:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--rm=false: Automatically remove the container when it exits
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--rm=false: Automatically remove the container when it exits
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: When you set the <code class="highlighter-rouge">--rm</code> flag, Docker also removes the anonymous volumes
+  <p><strong>Note</strong>: When you set the <code class="language-plaintext highlighter-rouge">--rm</code> flag, Docker also removes the anonymous volumes
 associated with the container when the container is removed. This is similar
-to running <code class="highlighter-rouge">docker rm -v my-container</code>. Only volumes that are specified without a
+to running <code class="language-plaintext highlighter-rouge">docker rm -v my-container</code>. Only volumes that are specified without a
 name are removed. For example, with
-<code class="highlighter-rouge">docker run --rm -v /foo -v awesome:/bar busybox top</code>, the volume for <code class="highlighter-rouge">/foo</code> will be removed,
-but the volume for <code class="highlighter-rouge">/bar</code> will not. Volumes inherited via <code class="highlighter-rouge">--volumes-from</code> will be removed
+<code class="language-plaintext highlighter-rouge">docker run --rm -v /foo -v awesome:/bar busybox top</code>, the volume for <code class="language-plaintext highlighter-rouge">/foo</code> will be removed,
+but the volume for <code class="language-plaintext highlighter-rouge">/bar</code> will not. Volumes inherited via <code class="language-plaintext highlighter-rouge">--volumes-from</code> will be removed
 with the same logic -- if the original volume was specified with a name it will <strong>not</strong> be removed.</p>
 </blockquote>
 
 <h2 id="security-configuration">Security configuration</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--security-opt="label=user:USER"     : Set the label user for the container
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--security-opt="label=user:USER"     : Set the label user for the container
 --security-opt="label=role:ROLE"     : Set the label role for the container
 --security-opt="label=type:TYPE"     : Set the label type for the container
 --security-opt="label=level:LEVEL"   : Set the label level for the container
@@ -767,10 +767,10 @@ with the same logic -- if the original volume was specified with a name it will 
 </code></pre></div></div>
 
 <p>You can override the default labeling scheme for each container by specifying
-the <code class="highlighter-rouge">--security-opt</code> flag. Specifying the level in the following command
+the <code class="language-plaintext highlighter-rouge">--security-opt</code> flag. Specifying the level in the following command
 allows you to share the same content between containers.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt label=level:s0:c100,c200 -it fedora bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt label=level:s0:c100,c200 -it fedora bash
 </code></pre></div></div>
 
 <blockquote>
@@ -778,9 +778,9 @@ allows you to share the same content between containers.</p>
 </blockquote>
 
 <p>To disable the security labeling for this container versus running with the
-<code class="highlighter-rouge">--privileged</code> flag, use the following command:</p>
+<code class="language-plaintext highlighter-rouge">--privileged</code> flag, use the following command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt label=disable -it fedora bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt label=disable -it fedora bash
 </code></pre></div></div>
 
 <p>If you want a tighter security policy on the processes within a container,
@@ -788,38 +788,38 @@ you can specify an alternate type for the container. You could run a container
 that is only allowed to listen on Apache ports by executing the following
 command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt label=type:svirt_apache_t -it centos bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt label=type:svirt_apache_t -it centos bash
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: You would have to write policy defining a <code class="highlighter-rouge">svirt_apache_t</code> type.</p>
+  <p><strong>Note</strong>: You would have to write policy defining a <code class="language-plaintext highlighter-rouge">svirt_apache_t</code> type.</p>
 </blockquote>
 
 <p>If you want to prevent your container processes from gaining additional
 privileges, you can execute the following command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt no-new-privileges -it centos bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --security-opt no-new-privileges -it centos bash
 </code></pre></div></div>
 
-<p>This means that commands that raise privileges such as <code class="highlighter-rouge">su</code> or <code class="highlighter-rouge">sudo</code> will no longer work.
+<p>This means that commands that raise privileges such as <code class="language-plaintext highlighter-rouge">su</code> or <code class="language-plaintext highlighter-rouge">sudo</code> will no longer work.
 It also causes any seccomp filters to be applied later, after privileges have been dropped
 which may mean you can have a more restrictive set of filters.
 For more details, see the <a href="https://www.kernel.org/doc/Documentation/prctl/no_new_privs.txt">kernel documentation</a>.</p>
 
 <h2 id="specify-an-init-process">Specify an init process</h2>
 
-<p>You can use the <code class="highlighter-rouge">--init</code> flag to indicate that an init process should be used as
+<p>You can use the <code class="language-plaintext highlighter-rouge">--init</code> flag to indicate that an init process should be used as
 the PID 1 in the container. Specifying an init process ensures the usual
 responsibilities of an init system, such as reaping zombie processes, are
 performed inside the created container.</p>
 
-<p>The default init process used is the first <code class="highlighter-rouge">docker-init</code> executable found in the
-system path of the Docker daemon process. This <code class="highlighter-rouge">docker-init</code> binary, included in
+<p>The default init process used is the first <code class="language-plaintext highlighter-rouge">docker-init</code> executable found in the
+system path of the Docker daemon process. This <code class="language-plaintext highlighter-rouge">docker-init</code> binary, included in
 the default installation, is backed by <a href="https://github.com/krallin/tini">tini</a>.</p>
 
 <h2 id="specify-custom-cgroups">Specify custom cgroups</h2>
 
-<p>Using the <code class="highlighter-rouge">--cgroup-parent</code> flag, you can pass a specific cgroup to run a
+<p>Using the <code class="language-plaintext highlighter-rouge">--cgroup-parent</code> flag, you can pass a specific cgroup to run a
 container in. This allows you to create and manage cgroups on their own. You can
 define custom resources for those cgroups and put containers under a common
 parent group.</p>
@@ -838,92 +838,92 @@ container:</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">-m</code>, <code class="highlighter-rouge">--memory=""</code></td>
-      <td style="text-align: left">Memory limit (format: <code class="highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="highlighter-rouge">b</code>, <code class="highlighter-rouge">k</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">g</code>. Minimum is 4M.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-m</code>, <code class="language-plaintext highlighter-rouge">--memory=""</code></td>
+      <td style="text-align: left">Memory limit (format: <code class="language-plaintext highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">k</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">g</code>. Minimum is 4M.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--memory-swap=""</code></td>
-      <td style="text-align: left">Total memory limit (memory + swap, format: <code class="highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="highlighter-rouge">b</code>, <code class="highlighter-rouge">k</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">g</code>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--memory-swap=""</code></td>
+      <td style="text-align: left">Total memory limit (memory + swap, format: <code class="language-plaintext highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">k</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">g</code>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--memory-reservation=""</code></td>
-      <td style="text-align: left">Memory soft limit (format: <code class="highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="highlighter-rouge">b</code>, <code class="highlighter-rouge">k</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">g</code>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--memory-reservation=""</code></td>
+      <td style="text-align: left">Memory soft limit (format: <code class="language-plaintext highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">k</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">g</code>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--kernel-memory=""</code></td>
-      <td style="text-align: left">Kernel memory limit (format: <code class="highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="highlighter-rouge">b</code>, <code class="highlighter-rouge">k</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">g</code>. Minimum is 4M.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--kernel-memory=""</code></td>
+      <td style="text-align: left">Kernel memory limit (format: <code class="language-plaintext highlighter-rouge">&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">k</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">g</code>. Minimum is 4M.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">-c</code>, <code class="highlighter-rouge">--cpu-shares=0</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-c</code>, <code class="language-plaintext highlighter-rouge">--cpu-shares=0</code></td>
       <td style="text-align: left">CPU shares (relative weight)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--cpus=0.000</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpus=0.000</code></td>
       <td style="text-align: left">Number of CPUs. Number is a fractional number. 0.000 means no limit.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--cpu-period=0</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-period=0</code></td>
       <td style="text-align: left">Limit the CPU CFS (Completely Fair Scheduler) period</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--cpuset-cpus=""</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpuset-cpus=""</code></td>
       <td style="text-align: left">CPUs in which to allow execution (0-3, 0,1)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--cpuset-mems=""</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpuset-mems=""</code></td>
       <td style="text-align: left">Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--cpu-quota=0</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-quota=0</code></td>
       <td style="text-align: left">Limit the CPU CFS (Completely Fair Scheduler) quota</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--cpu-rt-period=0</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-rt-period=0</code></td>
       <td style="text-align: left">Limit the CPU real-time period. In microseconds. Requires parent cgroups be set and cannot be higher than parent. Also check rtprio ulimits.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--cpu-rt-runtime=0</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--cpu-rt-runtime=0</code></td>
       <td style="text-align: left">Limit the CPU real-time runtime. In microseconds. Requires parent cgroups be set and cannot be higher than parent. Also check rtprio ulimits.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--blkio-weight=0</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--blkio-weight=0</code></td>
       <td style="text-align: left">Block IO weight (relative weight) accepts a weight value between 10 and 1000.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--blkio-weight-device=""</code></td>
-      <td style="text-align: left">Block IO weight (relative device weight, format: <code class="highlighter-rouge">DEVICE_NAME:WEIGHT</code>)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--blkio-weight-device=""</code></td>
+      <td style="text-align: left">Block IO weight (relative device weight, format: <code class="language-plaintext highlighter-rouge">DEVICE_NAME:WEIGHT</code>)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--device-read-bps=""</code></td>
-      <td style="text-align: left">Limit read rate from a device (format: <code class="highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="highlighter-rouge">kb</code>, <code class="highlighter-rouge">mb</code>, or <code class="highlighter-rouge">gb</code>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--device-read-bps=""</code></td>
+      <td style="text-align: left">Limit read rate from a device (format: <code class="language-plaintext highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="language-plaintext highlighter-rouge">kb</code>, <code class="language-plaintext highlighter-rouge">mb</code>, or <code class="language-plaintext highlighter-rouge">gb</code>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--device-write-bps=""</code></td>
-      <td style="text-align: left">Limit write rate to a device (format: <code class="highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="highlighter-rouge">kb</code>, <code class="highlighter-rouge">mb</code>, or <code class="highlighter-rouge">gb</code>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--device-write-bps=""</code></td>
+      <td style="text-align: left">Limit write rate to a device (format: <code class="language-plaintext highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;[&lt;unit&gt;]</code>). Number is a positive integer. Unit can be one of <code class="language-plaintext highlighter-rouge">kb</code>, <code class="language-plaintext highlighter-rouge">mb</code>, or <code class="language-plaintext highlighter-rouge">gb</code>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--device-read-iops="" </code></td>
-      <td style="text-align: left">Limit read rate (IO per second) from a device (format: <code class="highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;</code>). Number is a positive integer.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--device-read-iops="" </code></td>
+      <td style="text-align: left">Limit read rate (IO per second) from a device (format: <code class="language-plaintext highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;</code>). Number is a positive integer.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--device-write-iops="" </code></td>
-      <td style="text-align: left">Limit write rate (IO per second) to a device (format: <code class="highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;</code>). Number is a positive integer.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--device-write-iops="" </code></td>
+      <td style="text-align: left">Limit write rate (IO per second) to a device (format: <code class="language-plaintext highlighter-rouge">&lt;device-path&gt;:&lt;number&gt;</code>). Number is a positive integer.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--oom-kill-disable=false</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--oom-kill-disable=false</code></td>
       <td style="text-align: left">Whether to disable OOM Killer for the container or not.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--oom-score-adj=0</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--oom-score-adj=0</code></td>
       <td style="text-align: left">Tune container’s OOM preferences (-1000 to 1000)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--memory-swappiness=""</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--memory-swappiness=""</code></td>
       <td style="text-align: left">Tune a container’s memory swappiness behavior. Accepts an integer between 0 and 100.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">--shm-size=""</code></td>
-      <td style="text-align: left">Size of <code class="highlighter-rouge">/dev/shm</code>. The format is <code class="highlighter-rouge">&lt;number&gt;&lt;unit&gt;</code>. <code class="highlighter-rouge">number</code> must be greater than <code class="highlighter-rouge">0</code>. Unit is optional and can be <code class="highlighter-rouge">b</code> (bytes), <code class="highlighter-rouge">k</code> (kilobytes), <code class="highlighter-rouge">m</code> (megabytes), or <code class="highlighter-rouge">g</code> (gigabytes). If you omit the unit, the system uses bytes. If you omit the size entirely, the system uses <code class="highlighter-rouge">64m</code>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--shm-size=""</code></td>
+      <td style="text-align: left">Size of <code class="language-plaintext highlighter-rouge">/dev/shm</code>. The format is <code class="language-plaintext highlighter-rouge">&lt;number&gt;&lt;unit&gt;</code>. <code class="language-plaintext highlighter-rouge">number</code> must be greater than <code class="language-plaintext highlighter-rouge">0</code>. Unit is optional and can be <code class="language-plaintext highlighter-rouge">b</code> (bytes), <code class="language-plaintext highlighter-rouge">k</code> (kilobytes), <code class="language-plaintext highlighter-rouge">m</code> (megabytes), or <code class="language-plaintext highlighter-rouge">g</code> (gigabytes). If you omit the unit, the system uses bytes. If you omit the size entirely, the system uses <code class="language-plaintext highlighter-rouge">64m</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -946,7 +946,7 @@ container:</p>
     </tr>
     <tr>
       <td class="no-wrap"><strong>memory=L&lt;inf, memory-swap=inf</strong></td>
-      <td>(specify memory and set memory-swap as <code class="highlighter-rouge">-1</code>) The container is not allowed to use more than L bytes of memory, but can use as much swap as is needed (if the host supports swap memory).</td>
+      <td>(specify memory and set memory-swap as <code class="language-plaintext highlighter-rouge">-1</code>) The container is not allowed to use more than L bytes of memory, but can use as much swap as is needed (if the host supports swap memory).</td>
     </tr>
     <tr>
       <td class="no-wrap"><strong>memory=L&lt;inf, memory-swap=2*L</strong></td>
@@ -961,20 +961,20 @@ container:</p>
 
 <p>Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>We set nothing about memory, this means the processes in the container can use
 as much memory and swap memory as they need.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 300M --memory-swap -1 ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 300M --memory-swap -1 ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>We set memory limit and disabled swap memory limit, this means the processes in
 the container can use 300M memory and as much swap memory as they need (if the
 host supports swap memory).</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 300M ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 300M ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>We set memory limit only, this means the processes in the container can use
@@ -982,7 +982,7 @@ host supports swap memory).</p>
 (--memory-swap) will be set as double of memory, in this case, memory + swap
 would be 2*300M, so processes can use 300M swap memory as well.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 300M --memory-swap 1G ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 300M --memory-swap 1G ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>We set both memory and swap memory, so the processes in the container can use
@@ -991,7 +991,7 @@ would be 2*300M, so processes can use 300M swap memory as well.</p>
 <p>Memory reservation is a kind of memory soft limit that allows for greater
 sharing of memory. Under normal circumstances, containers can use as much of
 the memory as needed and are constrained only by the hard limits set with the
-<code class="highlighter-rouge">-m</code>/<code class="highlighter-rouge">--memory</code> option. When memory reservation is set, Docker detects memory
+<code class="language-plaintext highlighter-rouge">-m</code>/<code class="language-plaintext highlighter-rouge">--memory</code> option. When memory reservation is set, Docker detects memory
 contention or low memory and forces containers to restrict their consumption to
 a reservation limit.</p>
 
@@ -1004,7 +1004,7 @@ same as the hard memory limit.</p>
 won’t be exceeded. Instead, the feature attempts to ensure that, when memory is
 heavily contended for, memory is allocated based on the reservation hints/setup.</p>
 
-<p>The following example limits the memory (<code class="highlighter-rouge">-m</code>) to 500M and sets the memory
+<p>The following example limits the memory (<code class="language-plaintext highlighter-rouge">-m</code>) to 500M and sets the memory
 reservation to 200M.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">-m</span> 500M <span class="nt">--memory-reservation</span> 200M ubuntu:14.04 /bin/bash
@@ -1024,26 +1024,26 @@ ensures the container doesn’t consume too much memory for long time, because
 every memory reclaim shrinks the container’s consumption to the reservation.</p>
 
 <p>By default, kernel kills processes in a container if an out-of-memory (OOM)
-error occurs. To change this behaviour, use the <code class="highlighter-rouge">--oom-kill-disable</code> option.
+error occurs. To change this behaviour, use the <code class="language-plaintext highlighter-rouge">--oom-kill-disable</code> option.
 Only disable the OOM killer on containers where you have also set the
-<code class="highlighter-rouge">-m/--memory</code> option. If the <code class="highlighter-rouge">-m</code> flag is not set, this can result in the host
+<code class="language-plaintext highlighter-rouge">-m/--memory</code> option. If the <code class="language-plaintext highlighter-rouge">-m</code> flag is not set, this can result in the host
 running out of memory and require killing the host’s system processes to free
 memory.</p>
 
 <p>The following example limits the memory to 100M and disables the OOM killer for
 this container:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 100M --oom-kill-disable ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 100M --oom-kill-disable ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>The following example, illustrates a dangerous way to use the flag:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --oom-kill-disable ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --oom-kill-disable ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>コンテナーのメモリは無制限です。
 したがってホスト上のメモリ不足が発生してしまうので、システムプロセスを kill してメモリ開放を行う必要が出てきます。
-<code class="highlighter-rouge">--oom-score-adj</code> パラメーターを変更することにより、システム上のメモリ不足時に、どのコンテナーを kill するかの優先度を設定することができます。
+<code class="language-plaintext highlighter-rouge">--oom-score-adj</code> パラメーターを変更することにより、システム上のメモリ不足時に、どのコンテナーを kill するかの優先度を設定することができます。
 設定値を負にすればそれだけ kill されにくくなり、正にすればそれだけ kill されやすくなります。</p>
 
 <h3 id="kernel-memory-constraints">カーネルメモリの制約</h3>
@@ -1092,13 +1092,13 @@ limit and “K” the kernel limit. There are three possible ways to set limits:
 
 <p>Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 500M --kernel-memory 50M ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it -m 500M --kernel-memory 50M ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>We set memory and kernel memory, so the processes in the container can use
 500M memory in total, in this 500M memory, it can be 50M kernel memory tops.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --kernel-memory 50M ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --kernel-memory 50M ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>We set kernel memory without <strong>-m</strong>, so the processes in the container can
@@ -1107,17 +1107,17 @@ use as much memory as they want, but they can only use 50M kernel memory.</p>
 <h3 id="swappiness-constraint">Swappiness constraint</h3>
 
 <p>By default, a container’s kernel can swap out a percentage of anonymous pages.
-To set this percentage for a container, specify a <code class="highlighter-rouge">--memory-swappiness</code> value
+To set this percentage for a container, specify a <code class="language-plaintext highlighter-rouge">--memory-swappiness</code> value
 between 0 and 100. A value of 0 turns off anonymous page swapping. A value of
 100 sets all anonymous pages as swappable. By default, if you are not using
-<code class="highlighter-rouge">--memory-swappiness</code>, memory swappiness value will be inherited from the parent.</p>
+<code class="language-plaintext highlighter-rouge">--memory-swappiness</code>, memory swappiness value will be inherited from the parent.</p>
 
 <p>For example, you can set:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --memory-swappiness=0 ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --memory-swappiness=0 ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
-<p>Setting the <code class="highlighter-rouge">--memory-swappiness</code> option is helpful when you want to retain the
+<p>Setting the <code class="language-plaintext highlighter-rouge">--memory-swappiness</code> option is helpful when you want to retain the
 container’s working set and to avoid swapping performance penalties.</p>
 
 <h3 id="cpu-share-constraint">CPU share constraint</h3>
@@ -1126,7 +1126,7 @@ container’s working set and to avoid swapping performance penalties.</p>
 can be modified by changing the container’s CPU share weighting relative
 to the weighting of all other running containers.</p>
 
-<p>To modify the proportion from the default of 1024, use the <code class="highlighter-rouge">-c</code> or <code class="highlighter-rouge">--cpu-shares</code>
+<p>To modify the proportion from the default of 1024, use the <code class="language-plaintext highlighter-rouge">-c</code> or <code class="language-plaintext highlighter-rouge">--cpu-shares</code>
 flag to set the weighting to 2 or higher. If 0 is set, the system will ignore the
 value and use the default of 1024.</p>
 
@@ -1147,11 +1147,11 @@ cores. Even if a container is limited to less than 100% of CPU time, it can
 use 100% of each individual CPU core.</p>
 
 <p>For example, consider a system with more than three cores. If you start one
-container <code class="highlighter-rouge">{C0}</code> with <code class="highlighter-rouge">-c=512</code> running one process, and another container
-<code class="highlighter-rouge">{C1}</code> with <code class="highlighter-rouge">-c=1024</code> running two processes, this can result in the following
+container <code class="language-plaintext highlighter-rouge">{C0}</code> with <code class="language-plaintext highlighter-rouge">-c=512</code> running one process, and another container
+<code class="language-plaintext highlighter-rouge">{C1}</code> with <code class="language-plaintext highlighter-rouge">-c=1024</code> running two processes, this can result in the following
 division of CPU shares:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PID    container	CPU	CPU share
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PID    container	CPU	CPU share
 100    {C0}		0	100% of CPU0
 101    {C1}		1	100% of CPU1
 102    {C1}		2	100% of CPU2
@@ -1160,22 +1160,22 @@ division of CPU shares:</p>
 <h3 id="cpu-period-constraint">CPU period constraint</h3>
 
 <p>The default CPU CFS (Completely Fair Scheduler) period is 100ms. We can use
-<code class="highlighter-rouge">--cpu-period</code> to set the period of CPUs to limit the container’s CPU usage.
-And usually <code class="highlighter-rouge">--cpu-period</code> should work with <code class="highlighter-rouge">--cpu-quota</code>.</p>
+<code class="language-plaintext highlighter-rouge">--cpu-period</code> to set the period of CPUs to limit the container’s CPU usage.
+And usually <code class="language-plaintext highlighter-rouge">--cpu-period</code> should work with <code class="language-plaintext highlighter-rouge">--cpu-quota</code>.</p>
 
 <p>Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpu-period=50000 --cpu-quota=25000 ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpu-period=50000 --cpu-quota=25000 ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>If there is 1 CPU, this means the container can get 50% CPU worth of run-time every 50ms.</p>
 
-<p>In addition to use <code class="highlighter-rouge">--cpu-period</code> and <code class="highlighter-rouge">--cpu-quota</code> for setting CPU period constraints,
-it is possible to specify <code class="highlighter-rouge">--cpus</code> with a float number to achieve the same purpose.
-For example, if there is 1 CPU, then <code class="highlighter-rouge">--cpus=0.5</code> will achieve the same result as
-setting <code class="highlighter-rouge">--cpu-period=50000</code> and <code class="highlighter-rouge">--cpu-quota=25000</code> (50% CPU).</p>
+<p>In addition to use <code class="language-plaintext highlighter-rouge">--cpu-period</code> and <code class="language-plaintext highlighter-rouge">--cpu-quota</code> for setting CPU period constraints,
+it is possible to specify <code class="language-plaintext highlighter-rouge">--cpus</code> with a float number to achieve the same purpose.
+For example, if there is 1 CPU, then <code class="language-plaintext highlighter-rouge">--cpus=0.5</code> will achieve the same result as
+setting <code class="language-plaintext highlighter-rouge">--cpu-period=50000</code> and <code class="language-plaintext highlighter-rouge">--cpu-quota=25000</code> (50% CPU).</p>
 
-<p>The default value for <code class="highlighter-rouge">--cpus</code> is <code class="highlighter-rouge">0.000</code>, which means there is no limit.</p>
+<p>The default value for <code class="language-plaintext highlighter-rouge">--cpus</code> is <code class="language-plaintext highlighter-rouge">0.000</code>, which means there is no limit.</p>
 
 <p>For more information, see the <a href="https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt">CFS documentation on bandwidth limiting</a>.</p>
 
@@ -1185,12 +1185,12 @@ setting <code class="highlighter-rouge">--cpu-period=50000</code> and <code clas
 
 <p>Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-cpus="1,3" ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-cpus="1,3" ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>This means processes in container can be executed on cpu 1 and cpu 3.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-cpus="0-2" ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-cpus="0-2" ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>This means processes in container can be executed on cpu 0, cpu 1 and cpu 2.</p>
@@ -1200,13 +1200,13 @@ on NUMA systems.</p>
 
 <p>Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-mems="1,3" ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-mems="1,3" ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>This example restricts the processes in the container to only use memory from
 memory nodes 1 and 3.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-mems="0-2" ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --cpuset-mems="0-2" ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>This example restricts the processes in the container to only use memory from
@@ -1214,11 +1214,11 @@ memory nodes 0, 1 and 2.</p>
 
 <h3 id="cpu-quota-constraint">CPU quota constraint</h3>
 
-<p>The <code class="highlighter-rouge">--cpu-quota</code> flag limits the container’s CPU usage. The default 0 value
+<p>The <code class="language-plaintext highlighter-rouge">--cpu-quota</code> flag limits the container’s CPU usage. The default 0 value
 allows the container to take 100% of a CPU resource (1 CPU). The CFS (Completely Fair
 Scheduler) handles resource allocation for executing processes and is default
 Linux Scheduler used by the kernel. Set this value to 50000 to limit the container
-to 50% of a CPU resource. For multiple CPUs, adjust the <code class="highlighter-rouge">--cpu-quota</code> as necessary.
+to 50% of a CPU resource. For multiple CPUs, adjust the <code class="language-plaintext highlighter-rouge">--cpu-quota</code> as necessary.
 For more information, see the <a href="https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt">CFS documentation on bandwidth limiting</a>.</p>
 
 <h3 id="block-io-bandwidth-blkio-constraint">Block IO bandwidth (Blkio) constraint</h3>
@@ -1226,100 +1226,100 @@ For more information, see the <a href="https://www.kernel.org/doc/Documentation/
 <p>By default, all containers get the same proportion of block IO bandwidth
 (blkio). This proportion is 500. To modify this proportion, change the
 container’s blkio weight relative to the weighting of all other running
-containers using the <code class="highlighter-rouge">--blkio-weight</code> flag.</p>
+containers using the <code class="language-plaintext highlighter-rouge">--blkio-weight</code> flag.</p>
 
 <blockquote>
   <p><strong>Note:</strong> The blkio weight setting is only available for direct IO. Buffered IO
 is not currently supported.</p>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">--blkio-weight</code> flag can set the weighting to a value between 10 to 1000.
+<p>The <code class="language-plaintext highlighter-rouge">--blkio-weight</code> flag can set the weighting to a value between 10 to 1000.
 For example, the commands below create two containers with different blkio
 weight:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --name c1 --blkio-weight 300 ubuntu:14.04 /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --name c1 --blkio-weight 300 ubuntu:14.04 /bin/bash
 $ docker run -it --name c2 --blkio-weight 600 ubuntu:14.04 /bin/bash
 </code></pre></div></div>
 
 <p>If you do block IO in the two containers at the same time, by, for example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ time dd if=/mnt/zerofile of=test.out bs=1M count=1024 oflag=direct
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ time dd if=/mnt/zerofile of=test.out bs=1M count=1024 oflag=direct
 </code></pre></div></div>
 
 <p>You’ll find that the proportion of time is the same as the proportion of blkio
 weights of the two containers.</p>
 
-<p>The <code class="highlighter-rouge">--blkio-weight-device="DEVICE_NAME:WEIGHT"</code> flag sets a specific device weight.
-The <code class="highlighter-rouge">DEVICE_NAME:WEIGHT</code> is a string containing a colon-separated device name and weight.
-For example, to set <code class="highlighter-rouge">/dev/sda</code> device weight to <code class="highlighter-rouge">200</code>:</p>
+<p>The <code class="language-plaintext highlighter-rouge">--blkio-weight-device="DEVICE_NAME:WEIGHT"</code> flag sets a specific device weight.
+The <code class="language-plaintext highlighter-rouge">DEVICE_NAME:WEIGHT</code> is a string containing a colon-separated device name and weight.
+For example, to set <code class="language-plaintext highlighter-rouge">/dev/sda</code> device weight to <code class="language-plaintext highlighter-rouge">200</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it \
     --blkio-weight-device "/dev/sda:200" \
     ubuntu
 </code></pre></div></div>
 
-<p>If you specify both the <code class="highlighter-rouge">--blkio-weight</code> and <code class="highlighter-rouge">--blkio-weight-device</code>, Docker
-uses the <code class="highlighter-rouge">--blkio-weight</code> as the default weight and uses <code class="highlighter-rouge">--blkio-weight-device</code>
+<p>If you specify both the <code class="language-plaintext highlighter-rouge">--blkio-weight</code> and <code class="language-plaintext highlighter-rouge">--blkio-weight-device</code>, Docker
+uses the <code class="language-plaintext highlighter-rouge">--blkio-weight</code> as the default weight and uses <code class="language-plaintext highlighter-rouge">--blkio-weight-device</code>
 to override this default with a new value on a specific device.
-The following example uses a default weight of <code class="highlighter-rouge">300</code> and overrides this default
-on <code class="highlighter-rouge">/dev/sda</code> setting that weight to <code class="highlighter-rouge">200</code>:</p>
+The following example uses a default weight of <code class="language-plaintext highlighter-rouge">300</code> and overrides this default
+on <code class="language-plaintext highlighter-rouge">/dev/sda</code> setting that weight to <code class="language-plaintext highlighter-rouge">200</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it \
     --blkio-weight 300 \
     --blkio-weight-device "/dev/sda:200" \
     ubuntu
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">--device-read-bps</code> flag limits the read rate (bytes per second) from a device.
-For example, this command creates a container and limits the read rate to <code class="highlighter-rouge">1mb</code>
-per second from <code class="highlighter-rouge">/dev/sda</code>:</p>
+<p>The <code class="language-plaintext highlighter-rouge">--device-read-bps</code> flag limits the read rate (bytes per second) from a device.
+For example, this command creates a container and limits the read rate to <code class="language-plaintext highlighter-rouge">1mb</code>
+per second from <code class="language-plaintext highlighter-rouge">/dev/sda</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --device-read-bps /dev/sda:1mb ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --device-read-bps /dev/sda:1mb ubuntu
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">--device-write-bps</code> flag limits the write rate (bytes per second) to a device.
-For example, this command creates a container and limits the write rate to <code class="highlighter-rouge">1mb</code>
-per second for <code class="highlighter-rouge">/dev/sda</code>:</p>
+<p>The <code class="language-plaintext highlighter-rouge">--device-write-bps</code> flag limits the write rate (bytes per second) to a device.
+For example, this command creates a container and limits the write rate to <code class="language-plaintext highlighter-rouge">1mb</code>
+per second for <code class="language-plaintext highlighter-rouge">/dev/sda</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --device-write-bps /dev/sda:1mb ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --device-write-bps /dev/sda:1mb ubuntu
 </code></pre></div></div>
 
-<p>Both flags take limits in the <code class="highlighter-rouge">&lt;device-path&gt;:&lt;limit&gt;[unit]</code> format. Both read
-and write rates must be a positive integer. You can specify the rate in <code class="highlighter-rouge">kb</code>
-(kilobytes), <code class="highlighter-rouge">mb</code> (megabytes), or <code class="highlighter-rouge">gb</code> (gigabytes).</p>
+<p>Both flags take limits in the <code class="language-plaintext highlighter-rouge">&lt;device-path&gt;:&lt;limit&gt;[unit]</code> format. Both read
+and write rates must be a positive integer. You can specify the rate in <code class="language-plaintext highlighter-rouge">kb</code>
+(kilobytes), <code class="language-plaintext highlighter-rouge">mb</code> (megabytes), or <code class="language-plaintext highlighter-rouge">gb</code> (gigabytes).</p>
 
-<p>The <code class="highlighter-rouge">--device-read-iops</code> flag limits read rate (IO per second) from a device.
+<p>The <code class="language-plaintext highlighter-rouge">--device-read-iops</code> flag limits read rate (IO per second) from a device.
 For example, this command creates a container and limits the read rate to
-<code class="highlighter-rouge">1000</code> IO per second from <code class="highlighter-rouge">/dev/sda</code>:</p>
+<code class="language-plaintext highlighter-rouge">1000</code> IO per second from <code class="language-plaintext highlighter-rouge">/dev/sda</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -ti --device-read-iops /dev/sda:1000 ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -ti --device-read-iops /dev/sda:1000 ubuntu
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">--device-write-iops</code> flag limits write rate (IO per second) to a device.
+<p>The <code class="language-plaintext highlighter-rouge">--device-write-iops</code> flag limits write rate (IO per second) to a device.
 For example, this command creates a container and limits the write rate to
-<code class="highlighter-rouge">1000</code> IO per second to <code class="highlighter-rouge">/dev/sda</code>:</p>
+<code class="language-plaintext highlighter-rouge">1000</code> IO per second to <code class="language-plaintext highlighter-rouge">/dev/sda</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -ti --device-write-iops /dev/sda:1000 ubuntu
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -ti --device-write-iops /dev/sda:1000 ubuntu
 </code></pre></div></div>
 
-<p>Both flags take limits in the <code class="highlighter-rouge">&lt;device-path&gt;:&lt;limit&gt;</code> format. Both read and
+<p>Both flags take limits in the <code class="language-plaintext highlighter-rouge">&lt;device-path&gt;:&lt;limit&gt;</code> format. Both read and
 write rates must be a positive integer.</p>
 
 <h2 id="additional-groups">Additional groups</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--group-add: Add additional groups to run as
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--group-add: Add additional groups to run as
 </code></pre></div></div>
 
 <p>By default, the docker container process runs with the supplementary groups looked
 up for the specified user. If one wants to add more to that list of groups, then
 one can use this flag:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm --group-add audio --group-add nogroup --group-add 777 busybox id
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm --group-add audio --group-add nogroup --group-add 777 busybox id
 uid=0(root) gid=0(root) groups=10(wheel),29(audio),99(nogroup),777
 </code></pre></div></div>
 
 <h2 id="runtime-privilege-and-linux-capabilities">Runtime privilege and Linux capabilities</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--cap-add: Add Linux capabilities
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--cap-add: Add Linux capabilities
 --cap-drop: Drop Linux capabilities
 --privileged=false: Give extended privileges to this container
 --device=[]: Allows you to run devices inside the container without the --privileged flag.
@@ -1331,24 +1331,24 @@ by default a container is not allowed to access any devices, but a
 “privileged” container is given access to all devices (see
 the documentation on <a href="https://www.kernel.org/doc/Documentation/cgroup-v1/devices.txt">cgroups devices</a>).</p>
 
-<p>When the operator executes <code class="highlighter-rouge">docker run --privileged</code>, Docker will enable
+<p>When the operator executes <code class="language-plaintext highlighter-rouge">docker run --privileged</code>, Docker will enable
 access to all devices on the host as well as set some configuration
 in AppArmor or SELinux to allow the container nearly all the same access to the
 host as processes running outside containers on the host. Additional
-information about running with <code class="highlighter-rouge">--privileged</code> is available on the
+information about running with <code class="language-plaintext highlighter-rouge">--privileged</code> is available on the
 <a href="http://blog.docker.com/2013/09/docker-can-now-run-within-docker/">Docker Blog</a>.</p>
 
 <p>If you want to limit access to a specific device or devices you can use
-the <code class="highlighter-rouge">--device</code> flag. It allows you to specify one or more devices that
+the <code class="language-plaintext highlighter-rouge">--device</code> flag. It allows you to specify one or more devices that
 will be accessible within the container.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --device=/dev/snd:/dev/snd ...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --device=/dev/snd:/dev/snd ...
 </code></pre></div></div>
 
-<p>By default, the container will be able to <code class="highlighter-rouge">read</code>, <code class="highlighter-rouge">write</code>, and <code class="highlighter-rouge">mknod</code> these devices.
-This can be overridden using a third <code class="highlighter-rouge">:rwm</code> set of options to each <code class="highlighter-rouge">--device</code> flag:</p>
+<p>By default, the container will be able to <code class="language-plaintext highlighter-rouge">read</code>, <code class="language-plaintext highlighter-rouge">write</code>, and <code class="language-plaintext highlighter-rouge">mknod</code> these devices.
+This can be overridden using a third <code class="language-plaintext highlighter-rouge">:rwm</code> set of options to each <code class="language-plaintext highlighter-rouge">--device</code> flag:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --device=/dev/sda:/dev/xvdc --rm -it ubuntu fdisk  /dev/xvdc
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --device=/dev/sda:/dev/xvdc --rm -it ubuntu fdisk  /dev/xvdc
 
 Command (m for help): q
 $ docker run --device=/dev/sda:/dev/xvdc:r --rm -it ubuntu fdisk  /dev/xvdc
@@ -1363,8 +1363,8 @@ $ docker run --device=/dev/sda:/dev/xvdc:m --rm -it ubuntu fdisk  /dev/xvdc
 fdisk: unable to open /dev/xvdc: Operation not permitted
 </code></pre></div></div>
 
-<p>In addition to <code class="highlighter-rouge">--privileged</code>, the operator can have fine grain control over the
-capabilities using <code class="highlighter-rouge">--cap-add</code> and <code class="highlighter-rouge">--cap-drop</code>. By default, Docker has a default
+<p>In addition to <code class="language-plaintext highlighter-rouge">--privileged</code>, the operator can have fine grain control over the
+capabilities using <code class="language-plaintext highlighter-rouge">--cap-add</code> and <code class="language-plaintext highlighter-rouge">--cap-drop</code>. By default, Docker has a default
 list of capabilities that are kept. The following table lists the Linux capability
 options which are allowed by default and can be dropped.</p>
 
@@ -1542,24 +1542,24 @@ options which are allowed by default and can be dropped.</p>
 
 <p>Further reference information is available on the <a href="http://man7.org/linux/man-pages/man7/capabilities.7.html">capabilities(7) - Linux man page</a></p>
 
-<p>Both flags support the value <code class="highlighter-rouge">ALL</code>, so if the
-operator wants to have all capabilities but <code class="highlighter-rouge">MKNOD</code> they could use:</p>
+<p>Both flags support the value <code class="language-plaintext highlighter-rouge">ALL</code>, so if the
+operator wants to have all capabilities but <code class="language-plaintext highlighter-rouge">MKNOD</code> they could use:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --cap-add=ALL --cap-drop=MKNOD ...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --cap-add=ALL --cap-drop=MKNOD ...
 </code></pre></div></div>
 
-<p>For interacting with the network stack, instead of using <code class="highlighter-rouge">--privileged</code> they
-should use <code class="highlighter-rouge">--cap-add=NET_ADMIN</code> to modify the network interfaces.</p>
+<p>For interacting with the network stack, instead of using <code class="language-plaintext highlighter-rouge">--privileged</code> they
+should use <code class="language-plaintext highlighter-rouge">--cap-add=NET_ADMIN</code> to modify the network interfaces.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm  ubuntu:14.04 ip link add dummy0 type dummy
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --rm  ubuntu:14.04 ip link add dummy0 type dummy
 RTNETLINK answers: Operation not permitted
 $ docker run -it --rm --cap-add=NET_ADMIN ubuntu:14.04 ip link add dummy0 type dummy
 </code></pre></div></div>
 
-<p>To mount a FUSE based filesystem, you need to combine both <code class="highlighter-rouge">--cap-add</code> and
-<code class="highlighter-rouge">--device</code>:</p>
+<p>To mount a FUSE based filesystem, you need to combine both <code class="language-plaintext highlighter-rouge">--cap-add</code> and
+<code class="language-plaintext highlighter-rouge">--device</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -it --cap-add SYS_ADMIN sshfs sshfs sven@10.10.10.20:/home/sven /mnt
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -it --cap-add SYS_ADMIN sshfs sshfs sven@10.10.10.20:/home/sven /mnt
 fuse: failed to open /dev/fuse: Operation not permitted
 $ docker run --rm -it --device /dev/fuse sshfs sshfs sven@10.10.10.20:/home/sven /mnt
 fusermount: mount failed: Operation not permitted
@@ -1583,13 +1583,13 @@ drwxrwxr-x 1 1000 1000   4096 Dec  4 06:11 .git
 <p>The default seccomp profile will adjust to the selected capabilities, in order to allow
 use of facilities allowed by the capabilities, so you should not have to adjust this,
 since Docker 1.12. In Docker 1.10 and 1.11 this did not happen and it may be necessary
-to use a custom seccomp profile or use <code class="highlighter-rouge">--security-opt seccomp=unconfined</code> when adding
+to use a custom seccomp profile or use <code class="language-plaintext highlighter-rouge">--security-opt seccomp=unconfined</code> when adding
 capabilities.</p>
 
 <h2 id="logging-drivers---log-driver">Logging drivers (--log-driver)</h2>
 
 <p>The container can have a different logging driver than the Docker daemon. Use
-the <code class="highlighter-rouge">--log-driver=VALUE</code> with the <code class="highlighter-rouge">docker run</code> command to configure the
+the <code class="language-plaintext highlighter-rouge">--log-driver=VALUE</code> with the <code class="language-plaintext highlighter-rouge">docker run</code> command to configure the
 container’s logging driver. The following options are supported:</p>
 
 <table>
@@ -1601,41 +1601,41 @@ container’s logging driver. The following options are supported:</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">none</code></td>
-      <td style="text-align: left">Disables any logging for the container. <code class="highlighter-rouge">docker logs</code> won’t be available with this driver.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">none</code></td>
+      <td style="text-align: left">Disables any logging for the container. <code class="language-plaintext highlighter-rouge">docker logs</code> won’t be available with this driver.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">json-file</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">json-file</code></td>
       <td style="text-align: left">Default logging driver for Docker. Writes JSON messages to file.  No logging options are supported for this driver.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">syslog</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">syslog</code></td>
       <td style="text-align: left">Syslog logging driver for Docker. Writes log messages to syslog.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">journald</code></td>
-      <td style="text-align: left">Journald logging driver for Docker. Writes log messages to <code class="highlighter-rouge">journald</code>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">journald</code></td>
+      <td style="text-align: left">Journald logging driver for Docker. Writes log messages to <code class="language-plaintext highlighter-rouge">journald</code>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">gelf</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">gelf</code></td>
       <td style="text-align: left">Graylog Extended Log Format (GELF) logging driver for Docker. Writes log messages to a GELF endpoint likeGraylog or Logstash.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">fluentd</code></td>
-      <td style="text-align: left">Fluentd logging driver for Docker. Writes log messages to <code class="highlighter-rouge">fluentd</code> (forward input).</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">fluentd</code></td>
+      <td style="text-align: left">Fluentd logging driver for Docker. Writes log messages to <code class="language-plaintext highlighter-rouge">fluentd</code> (forward input).</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">awslogs</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">awslogs</code></td>
       <td style="text-align: left">Amazon CloudWatch Logs logging driver for Docker. Writes log messages to Amazon CloudWatch Logs</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">splunk</code></td>
-      <td style="text-align: left">Splunk logging driver for Docker. Writes log messages to <code class="highlighter-rouge">splunk</code> using Event Http Collector.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">splunk</code></td>
+      <td style="text-align: left">Splunk logging driver for Docker. Writes log messages to <code class="language-plaintext highlighter-rouge">splunk</code> using Event Http Collector.</td>
     </tr>
   </tbody>
 </table>
 
-<p>The <code class="highlighter-rouge">docker logs</code> command is available only for the <code class="highlighter-rouge">json-file</code> and <code class="highlighter-rouge">journald</code>
+<p>The <code class="language-plaintext highlighter-rouge">docker logs</code> command is available only for the <code class="language-plaintext highlighter-rouge">json-file</code> and <code class="language-plaintext highlighter-rouge">journald</code>
 logging drivers.  For detailed information on working with logging drivers, see
 <a href="https://docs.docker.com/config/containers/logging/configure/">Configure logging drivers</a>.</p>
 
@@ -1645,9 +1645,9 @@ logging drivers.  For detailed information on working with logging drivers, see
 or when she commits it, the developer can set a number of default parameters
 that take effect when the image starts up as a container.</p>
 
-<p>Four of the Dockerfile commands cannot be overridden at runtime: <code class="highlighter-rouge">FROM</code>,
-<code class="highlighter-rouge">MAINTAINER</code>, <code class="highlighter-rouge">RUN</code>, and <code class="highlighter-rouge">ADD</code>. Everything else has a corresponding override
-in <code class="highlighter-rouge">docker run</code>. We’ll go through what the developer might have set in each
+<p>Four of the Dockerfile commands cannot be overridden at runtime: <code class="language-plaintext highlighter-rouge">FROM</code>,
+<code class="language-plaintext highlighter-rouge">MAINTAINER</code>, <code class="language-plaintext highlighter-rouge">RUN</code>, and <code class="language-plaintext highlighter-rouge">ADD</code>. Everything else has a corresponding override
+in <code class="language-plaintext highlighter-rouge">docker run</code>. We’ll go through what the developer might have set in each
 Dockerfile instruction and how the operator can override that setting.</p>
 
 <ul>
@@ -1663,62 +1663,62 @@ Dockerfile instruction and how the operator can override that setting.</p>
 
 <h3 id="cmd-default-command-or-options">CMD (default command or options)</h3>
 
-<p>Recall the optional <code class="highlighter-rouge">COMMAND</code> in the Docker
+<p>Recall the optional <code class="language-plaintext highlighter-rouge">COMMAND</code> in the Docker
 commandline:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 </code></pre></div></div>
 
-<p>This command is optional because the person who created the <code class="highlighter-rouge">IMAGE</code> may
-have already provided a default <code class="highlighter-rouge">COMMAND</code> using the Dockerfile <code class="highlighter-rouge">CMD</code>
+<p>This command is optional because the person who created the <code class="language-plaintext highlighter-rouge">IMAGE</code> may
+have already provided a default <code class="language-plaintext highlighter-rouge">COMMAND</code> using the Dockerfile <code class="language-plaintext highlighter-rouge">CMD</code>
 instruction. As the operator (the person running a container from the
-image), you can override that <code class="highlighter-rouge">CMD</code> instruction just by specifying a new
-<code class="highlighter-rouge">COMMAND</code>.</p>
+image), you can override that <code class="language-plaintext highlighter-rouge">CMD</code> instruction just by specifying a new
+<code class="language-plaintext highlighter-rouge">COMMAND</code>.</p>
 
-<p>If the image also specifies an <code class="highlighter-rouge">ENTRYPOINT</code> then the <code class="highlighter-rouge">CMD</code> or <code class="highlighter-rouge">COMMAND</code>
-get appended as arguments to the <code class="highlighter-rouge">ENTRYPOINT</code>.</p>
+<p>If the image also specifies an <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> then the <code class="language-plaintext highlighter-rouge">CMD</code> or <code class="language-plaintext highlighter-rouge">COMMAND</code>
+get appended as arguments to the <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>.</p>
 
 <h3 id="entrypoint-default-command-to-execute-at-runtime">ENTRYPOINT (default command to execute at runtime)</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--entrypoint="": Overwrite the default entrypoint set by the image
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--entrypoint="": Overwrite the default entrypoint set by the image
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">ENTRYPOINT</code> of an image is similar to a <code class="highlighter-rouge">COMMAND</code> because it
+<p>The <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> of an image is similar to a <code class="language-plaintext highlighter-rouge">COMMAND</code> because it
 specifies what executable to run when the container starts, but it is
-(purposely) more difficult to override. The <code class="highlighter-rouge">ENTRYPOINT</code> gives a
+(purposely) more difficult to override. The <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> gives a
 container its default nature or behavior, so that when you set an
-<code class="highlighter-rouge">ENTRYPOINT</code> you can run the container <em>as if it were that binary</em>,
+<code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> you can run the container <em>as if it were that binary</em>,
 complete with default options, and you can pass in more options via the
-<code class="highlighter-rouge">COMMAND</code>. But, sometimes an operator may want to run something else
-inside the container, so you can override the default <code class="highlighter-rouge">ENTRYPOINT</code> at
-runtime by using a string to specify the new <code class="highlighter-rouge">ENTRYPOINT</code>. Here is an
+<code class="language-plaintext highlighter-rouge">COMMAND</code>. But, sometimes an operator may want to run something else
+inside the container, so you can override the default <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> at
+runtime by using a string to specify the new <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>. Here is an
 example of how to run a shell in a container that has been set up to
-automatically run something else (like <code class="highlighter-rouge">/usr/bin/redis-server</code>):</p>
+automatically run something else (like <code class="language-plaintext highlighter-rouge">/usr/bin/redis-server</code>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --entrypoint /bin/bash example/redis
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --entrypoint /bin/bash example/redis
 </code></pre></div></div>
 
 <p>or two examples of how to pass more parameters to that ENTRYPOINT:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --entrypoint /bin/bash example/redis -c ls -l
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --entrypoint /bin/bash example/redis -c ls -l
 $ docker run -it --entrypoint /usr/bin/redis-cli example/redis --help
 </code></pre></div></div>
 
 <p>You can reset a containers entrypoint by passing an empty string, for example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --entrypoint="" mysql bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -it --entrypoint="" mysql bash
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note</strong>: Passing <code class="highlighter-rouge">--entrypoint</code> will clear out any default command set on the
-image (i.e. any <code class="highlighter-rouge">CMD</code> instruction in the Dockerfile used to build it).</p>
+  <p><strong>Note</strong>: Passing <code class="language-plaintext highlighter-rouge">--entrypoint</code> will clear out any default command set on the
+image (i.e. any <code class="language-plaintext highlighter-rouge">CMD</code> instruction in the Dockerfile used to build it).</p>
 </blockquote>
 
 <h3 id="expose-incoming-ports">EXPOSE (incoming ports)</h3>
 
-<p>The following <code class="highlighter-rouge">run</code> command options work with container networking:</p>
+<p>The following <code class="language-plaintext highlighter-rouge">run</code> command options work with container networking:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--expose=[]: Expose a port or a range of ports inside the container.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--expose=[]: Expose a port or a range of ports inside the container.
              These are additional to those exposed by the `EXPOSE` instruction
 -P         : Publish all exposed ports to the host interfaces
 -p=[]      : Publish a container's port or a range of ports to the host
@@ -1739,35 +1739,35 @@ image (i.e. any <code class="highlighter-rouge">CMD</code> instruction in the Do
 --link=""  : Add link to another container (&lt;name or id&gt;:alias or &lt;name or id&gt;)
 </code></pre></div></div>
 
-<p>With the exception of the <code class="highlighter-rouge">EXPOSE</code> directive, an image developer hasn’t
-got much control over networking. The <code class="highlighter-rouge">EXPOSE</code> instruction defines the
+<p>With the exception of the <code class="language-plaintext highlighter-rouge">EXPOSE</code> directive, an image developer hasn’t
+got much control over networking. The <code class="language-plaintext highlighter-rouge">EXPOSE</code> instruction defines the
 initial incoming ports that provide services. These ports are available
-to processes inside the container. An operator can use the <code class="highlighter-rouge">--expose</code>
+to processes inside the container. An operator can use the <code class="language-plaintext highlighter-rouge">--expose</code>
 option to add to the exposed ports.</p>
 
 <p>To expose a container’s internal port, an operator can start the
-container with the <code class="highlighter-rouge">-P</code> or <code class="highlighter-rouge">-p</code> flag. The exposed port is accessible on
+container with the <code class="language-plaintext highlighter-rouge">-P</code> or <code class="language-plaintext highlighter-rouge">-p</code> flag. The exposed port is accessible on
 the host and the ports are available to any client that can reach the
 host.</p>
 
-<p>The <code class="highlighter-rouge">-P</code> option publishes all the ports to the host interfaces. Docker
+<p>The <code class="language-plaintext highlighter-rouge">-P</code> option publishes all the ports to the host interfaces. Docker
 binds each exposed port to a random port on the host. The range of
 ports are within an <em>ephemeral port range</em> defined by
-<code class="highlighter-rouge">/proc/sys/net/ipv4/ip_local_port_range</code>. Use the <code class="highlighter-rouge">-p</code> flag to
+<code class="language-plaintext highlighter-rouge">/proc/sys/net/ipv4/ip_local_port_range</code>. Use the <code class="language-plaintext highlighter-rouge">-p</code> flag to
 explicitly map a single port or range of ports.</p>
 
 <p>The port number inside the container (where the service listens) does
 not need to match the port number exposed on the outside of the
 container (where clients connect). For example, inside the container an
 HTTP service is listening on port 80 (and so the image developer
-specifies <code class="highlighter-rouge">EXPOSE 80</code> in the Dockerfile). At runtime, the port might be
+specifies <code class="language-plaintext highlighter-rouge">EXPOSE 80</code> in the Dockerfile). At runtime, the port might be
 bound to 42800 on the host. To find the mapping between the host ports
-and the exposed ports, use <code class="highlighter-rouge">docker port</code>.</p>
+and the exposed ports, use <code class="language-plaintext highlighter-rouge">docker port</code>.</p>
 
-<p>If the operator uses <code class="highlighter-rouge">--link</code> when starting a new client container in the
+<p>If the operator uses <code class="language-plaintext highlighter-rouge">--link</code> when starting a new client container in the
 default bridge network, then the client container can access the exposed
 port via a private networking interface.
-If <code class="highlighter-rouge">--link</code> is used when starting a container in a user-defined network as
+If <code class="language-plaintext highlighter-rouge">--link</code> is used when starting a container in a user-defined network as
 described in <a href="https://docs.docker.com/network/"><em>Networking overview</em></a>,
 it will provide a named alias for the container being linked to.</p>
 
@@ -1788,78 +1788,78 @@ container.</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">HOME</code></td>
-      <td style="text-align: left">Set based on the value of <code class="highlighter-rouge">USER</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">HOME</code></td>
+      <td style="text-align: left">Set based on the value of <code class="language-plaintext highlighter-rouge">USER</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">HOSTNAME</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">HOSTNAME</code></td>
       <td style="text-align: left">The hostname associated with the container</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">PATH</code></td>
-      <td style="text-align: left">Includes popular directories, such as <code class="highlighter-rouge">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">PATH</code></td>
+      <td style="text-align: left">Includes popular directories, such as <code class="language-plaintext highlighter-rouge">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">TERM</code></td>
-      <td style="text-align: left"><code class="highlighter-rouge">xterm</code> if the container is allocated a pseudo-TTY</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">TERM</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">xterm</code> if the container is allocated a pseudo-TTY</td>
     </tr>
   </tbody>
 </table>
 
 <p>Additionally, the operator can <strong>set any environment variable</strong> in the
-container by using one or more <code class="highlighter-rouge">-e</code> flags, even overriding those mentioned
-above, or already defined by the developer with a Dockerfile <code class="highlighter-rouge">ENV</code>. If the
+container by using one or more <code class="language-plaintext highlighter-rouge">-e</code> flags, even overriding those mentioned
+above, or already defined by the developer with a Dockerfile <code class="language-plaintext highlighter-rouge">ENV</code>. If the
 operator names an environment variable without specifying a value, then the
 current value of the named variable is propagated into the container’s environment:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">today</span><span class="o">=</span>Wednesday
-<span class="nv">$ </span>docker run <span class="nt">-e</span> <span class="s2">"deep=purple"</span> <span class="nt">-e</span> today <span class="nt">--rm</span> alpine env
-<span class="nv">PATH</span><span class="o">=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+<span class="nv">$ </span>docker run <span class="nt">-e</span> <span class="s2">"deep=purple"</span> <span class="nt">-e</span> today <span class="nt">--rm</span> alpine <span class="nb">env
+</span><span class="nv">PATH</span><span class="o">=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 <span class="nv">HOSTNAME</span><span class="o">=</span>d2219b854598
 <span class="nv">deep</span><span class="o">=</span>purple
 <span class="nv">today</span><span class="o">=</span>Wednesday
 <span class="nv">HOME</span><span class="o">=</span>/root
 </code></pre></div></div>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">PS </span>C:\&gt; docker run --rm -e <span class="s2">"foo=bar"</span> microsoft/nanoserver cmd /s /c <span class="nb">set
-</span><span class="nv">ALLUSERSPROFILE</span><span class="o">=</span>C:\ProgramData
-<span class="nv">APPDATA</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Roaming
-<span class="nv">CommonProgramFiles</span><span class="o">=</span>C:\Program Files\Common Files
-CommonProgramFiles<span class="o">(</span>x86<span class="o">)=</span>C:\Program Files <span class="o">(</span>x86<span class="o">)</span>\Common Files
-<span class="nv">CommonProgramW6432</span><span class="o">=</span>C:\Program Files\Common Files
-<span class="nv">COMPUTERNAME</span><span class="o">=</span>C2FAEFCC8253
-<span class="nv">ComSpec</span><span class="o">=</span>C:\Windows\system32\cmd.exe
-<span class="nv">foo</span><span class="o">=</span>bar
-<span class="nv">LOCALAPPDATA</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Local
-<span class="nv">NUMBER_OF_PROCESSORS</span><span class="o">=</span>8
-<span class="nv">OS</span><span class="o">=</span>Windows_NT
-<span class="nv">Path</span><span class="o">=</span>C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\ContainerAdministrator\AppData\Local\Microsoft\WindowsApps
-<span class="nv">PATHEXT</span><span class="o">=</span>.COM;.EXE;.BAT;.CMD
-<span class="nv">PROCESSOR_ARCHITECTURE</span><span class="o">=</span>AMD64
-<span class="nv">PROCESSOR_IDENTIFIER</span><span class="o">=</span>Intel64 Family 6 Model 62 Stepping 4, GenuineIntel
-<span class="nv">PROCESSOR_LEVEL</span><span class="o">=</span>6
-<span class="nv">PROCESSOR_REVISION</span><span class="o">=</span>3e04
-<span class="nv">ProgramData</span><span class="o">=</span>C:\ProgramData
-<span class="nv">ProgramFiles</span><span class="o">=</span>C:\Program Files
-ProgramFiles<span class="o">(</span>x86<span class="o">)=</span>C:\Program Files <span class="o">(</span>x86<span class="o">)</span>
-<span class="nv">ProgramW6432</span><span class="o">=</span>C:\Program Files
-<span class="nv">PROMPT</span><span class="o">=</span><span class="nv">$P$G</span>
-<span class="nv">PUBLIC</span><span class="o">=</span>C:\Users\Public
-<span class="nv">SystemDrive</span><span class="o">=</span>C:
-<span class="nv">SystemRoot</span><span class="o">=</span>C:\Windows
-<span class="nv">TEMP</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Local\Temp
-<span class="nv">TMP</span><span class="o">=</span>C:\Users\ContainerAdministrator\AppData\Local\Temp
-<span class="nv">USERDOMAIN</span><span class="o">=</span>User Manager
-<span class="nv">USERNAME</span><span class="o">=</span>ContainerAdministrator
-<span class="nv">USERPROFILE</span><span class="o">=</span>C:\Users\ContainerAdministrator
-<span class="nv">windir</span><span class="o">=</span>C:\Windows
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">PS</span><span class="w"> </span><span class="nx">C:\</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">--rm</span><span class="w"> </span><span class="nt">-e</span><span class="w"> </span><span class="s2">"foo=bar"</span><span class="w"> </span><span class="nx">microsoft/nanoserver</span><span class="w"> </span><span class="nx">cmd</span><span class="w"> </span><span class="nx">/s</span><span class="w"> </span><span class="nx">/c</span><span class="w"> </span><span class="nx">set</span><span class="w">
+</span><span class="nf">ALLUSERSPROFILE</span><span class="o">=</span><span class="nf">C:\ProgramData</span><span class="w">
+</span><span class="nx">APPDATA</span><span class="o">=</span><span class="nf">C:\Users\ContainerAdministrator\AppData\Roaming</span><span class="w">
+</span><span class="nx">CommonProgramFiles</span><span class="o">=</span><span class="nf">C:\Program</span><span class="w"> </span><span class="nx">Files\Common</span><span class="w"> </span><span class="nx">Files</span><span class="w">
+</span><span class="nf">CommonProgramFiles</span><span class="p">(</span><span class="nf">x86</span><span class="p">)</span><span class="o">=</span><span class="nf">C:\Program</span><span class="w"> </span><span class="nx">Files</span><span class="w"> </span><span class="p">(</span><span class="nf">x86</span><span class="p">)</span><span class="nf">\Common</span><span class="w"> </span><span class="nx">Files</span><span class="w">
+</span><span class="nf">CommonProgramW6432</span><span class="o">=</span><span class="nf">C:\Program</span><span class="w"> </span><span class="nx">Files\Common</span><span class="w"> </span><span class="nx">Files</span><span class="w">
+</span><span class="nf">COMPUTERNAME</span><span class="o">=</span><span class="nf">C2FAEFCC8253</span><span class="w">
+</span><span class="nx">ComSpec</span><span class="o">=</span><span class="nf">C:\Windows\system32\cmd.exe</span><span class="w">
+</span><span class="nx">foo</span><span class="o">=</span><span class="nf">bar</span><span class="w">
+</span><span class="nx">LOCALAPPDATA</span><span class="o">=</span><span class="nf">C:\Users\ContainerAdministrator\AppData\Local</span><span class="w">
+</span><span class="nx">NUMBER_OF_PROCESSORS</span><span class="o">=</span><span class="mi">8</span><span class="w">
+</span><span class="nf">OS</span><span class="o">=</span><span class="nf">Windows_NT</span><span class="w">
+</span><span class="nx">Path</span><span class="o">=</span><span class="nf">C:\Windows\system32</span><span class="p">;</span><span class="nf">C:\Windows</span><span class="p">;</span><span class="nf">C:\Windows\System32\Wbem</span><span class="p">;</span><span class="nf">C:\Windows\System32\WindowsPowerShell\v1.0\</span><span class="p">;</span><span class="nf">C:\Users\ContainerAdministrator\AppData\Local\Microsoft\WindowsApps</span><span class="w">
+</span><span class="nx">PATHEXT</span><span class="o">=.</span><span class="nf">COM</span><span class="p">;</span><span class="o">.</span><span class="nf">EXE</span><span class="p">;</span><span class="o">.</span><span class="nf">BAT</span><span class="p">;</span><span class="o">.</span><span class="nf">CMD</span><span class="w">
+</span><span class="nf">PROCESSOR_ARCHITECTURE</span><span class="o">=</span><span class="nf">AMD64</span><span class="w">
+</span><span class="nx">PROCESSOR_IDENTIFIER</span><span class="o">=</span><span class="nf">Intel64</span><span class="w"> </span><span class="nx">Family</span><span class="w"> </span><span class="nx">6</span><span class="w"> </span><span class="nx">Model</span><span class="w"> </span><span class="nx">62</span><span class="w"> </span><span class="nx">Stepping</span><span class="w"> </span><span class="nx">4</span><span class="p">,</span><span class="w"> </span><span class="nx">GenuineIntel</span><span class="w">
+</span><span class="nf">PROCESSOR_LEVEL</span><span class="o">=</span><span class="mi">6</span><span class="w">
+</span><span class="nf">PROCESSOR_REVISION</span><span class="o">=</span><span class="mi">3</span><span class="nf">e04</span><span class="w">
+</span><span class="nx">ProgramData</span><span class="o">=</span><span class="nf">C:\ProgramData</span><span class="w">
+</span><span class="nx">ProgramFiles</span><span class="o">=</span><span class="nf">C:\Program</span><span class="w"> </span><span class="nx">Files</span><span class="w">
+</span><span class="nf">ProgramFiles</span><span class="p">(</span><span class="nf">x86</span><span class="p">)</span><span class="o">=</span><span class="nf">C:\Program</span><span class="w"> </span><span class="nx">Files</span><span class="w"> </span><span class="p">(</span><span class="nf">x86</span><span class="p">)</span><span class="w">
+</span><span class="nf">ProgramW6432</span><span class="o">=</span><span class="nf">C:\Program</span><span class="w"> </span><span class="nx">Files</span><span class="w">
+</span><span class="nf">PROMPT</span><span class="o">=</span><span class="nv">$P$G</span><span class="w">
+</span><span class="kr">PUBLIC</span><span class="o">=</span><span class="nf">C:\Users\Public</span><span class="w">
+</span><span class="nx">SystemDrive</span><span class="o">=</span><span class="nf">C:</span><span class="w">
+</span><span class="nx">SystemRoot</span><span class="o">=</span><span class="nf">C:\Windows</span><span class="w">
+</span><span class="nx">TEMP</span><span class="o">=</span><span class="nf">C:\Users\ContainerAdministrator\AppData\Local\Temp</span><span class="w">
+</span><span class="nx">TMP</span><span class="o">=</span><span class="nf">C:\Users\ContainerAdministrator\AppData\Local\Temp</span><span class="w">
+</span><span class="nx">USERDOMAIN</span><span class="o">=</span><span class="nf">User</span><span class="w"> </span><span class="nx">Manager</span><span class="w">
+</span><span class="nf">USERNAME</span><span class="o">=</span><span class="nf">ContainerAdministrator</span><span class="w">
+</span><span class="nx">USERPROFILE</span><span class="o">=</span><span class="nf">C:\Users\ContainerAdministrator</span><span class="w">
+</span><span class="nx">windir</span><span class="o">=</span><span class="nf">C:\Windows</span><span class="w">
+</span></code></pre></div></div>
 
-<p>Similarly the operator can set the <strong>HOSTNAME</strong> (Linux) or <strong>COMPUTERNAME</strong> (Windows) with <code class="highlighter-rouge">-h</code>.</p>
+<p>Similarly the operator can set the <strong>HOSTNAME</strong> (Linux) or <strong>COMPUTERNAME</strong> (Windows) with <code class="language-plaintext highlighter-rouge">-h</code>.</p>
 
 <h3 id="healthcheck">HEALTHCHECK</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --health-cmd            ヘルスチェックを実行するコマンド。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --health-cmd            ヘルスチェックを実行するコマンド。
   --health-interval       ヘルスチェックの実行間隔。
   --health-retries        不健康（unhealthy）であると報告するのに必要な連続失敗回数。
   --health-timeout        1 つのチェック処理実行に許容する最大時間。
@@ -1869,7 +1869,7 @@ ProgramFiles<span class="o">(</span>x86<span class="o">)=</span>C:\Program Files
 
 <p>Example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --name=test -d \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --name=test -d \
     --health-cmd='stat /etc/passwd || exit 1' \
     --health-interval=2s \
     busybox sleep 1d
@@ -1915,7 +1915,7 @@ $ sleep 2; docker inspect --format='{{json .State.Health}}' test
 }
 </code></pre></div></div>
 
-<p>The health status is also displayed in the <code class="highlighter-rouge">docker ps</code> output.</p>
+<p>The health status is also displayed in the <code class="language-plaintext highlighter-rouge">docker ps</code> output.</p>
 
 <h3 id="tmpfs-mount-tmpfs-filesystems">TMPFS (mount tmpfs filesystems)</h3>
 
@@ -1924,15 +1924,15 @@ $ sleep 2; docker inspect --format='{{json .State.Health}}' test
             <span class="s1">'mount -t tmpfs -o'</span> command.
 </code></pre></div></div>
 
-<p>The example below mounts an empty tmpfs into the container with the <code class="highlighter-rouge">rw</code>,
-<code class="highlighter-rouge">noexec</code>, <code class="highlighter-rouge">nosuid</code>, and <code class="highlighter-rouge">size=65536k</code> options.</p>
+<p>The example below mounts an empty tmpfs into the container with the <code class="language-plaintext highlighter-rouge">rw</code>,
+<code class="language-plaintext highlighter-rouge">noexec</code>, <code class="language-plaintext highlighter-rouge">nosuid</code>, and <code class="language-plaintext highlighter-rouge">size=65536k</code> options.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --tmpfs /run:rw,noexec,nosuid,size=65536k my_image
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --tmpfs /run:rw,noexec,nosuid,size=65536k my_image
 </code></pre></div></div>
 
 <h3 id="volume-shared-filesystems">VOLUME (shared filesystems)</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-v, --volume=[host-src:]container-dest[:&lt;options&gt;]: Bind mount a volume.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-v, --volume=[host-src:]container-dest[:&lt;options&gt;]: Bind mount a volume.
 The comma-delimited `options` are [rw|ro], [z|Z],
 [[r]shared|[r]slave|[r]private], and [nocopy].
 The 'host-src' is an absolute path or a name value.
@@ -1952,42 +1952,42 @@ for bind-mounted volumes.
   <p><strong>Note</strong>:
 When using systemd to manage the Docker daemon’s start and stop, in the systemd
 unit file there is an option to control mount propagation for the Docker daemon
-itself, called <code class="highlighter-rouge">MountFlags</code>. The value of this setting may cause Docker to not
+itself, called <code class="language-plaintext highlighter-rouge">MountFlags</code>. The value of this setting may cause Docker to not
 see mount propagation changes made on the mount point. For example, if this value
-is <code class="highlighter-rouge">slave</code>, you may not be able to use the <code class="highlighter-rouge">shared</code> or <code class="highlighter-rouge">rshared</code> propagation on
+is <code class="language-plaintext highlighter-rouge">slave</code>, you may not be able to use the <code class="language-plaintext highlighter-rouge">shared</code> or <code class="language-plaintext highlighter-rouge">rshared</code> propagation on
 a volume.</p>
 </blockquote>
 
 <p>The volumes commands are complex enough to have their own documentation
 in section <a href="https://docs.docker.com/storage/volumes/"><em>Use volumes</em></a>. A developer can define
-one or more <code class="highlighter-rouge">VOLUME</code>’s associated with an image, but only the operator
+one or more <code class="language-plaintext highlighter-rouge">VOLUME</code>’s associated with an image, but only the operator
 can give access from one container to another (or from a container to a
 volume mounted on the host).</p>
 
-<p>The <code class="highlighter-rouge">container-dest</code> must always be an absolute path such as <code class="highlighter-rouge">/src/docs</code>.
-The <code class="highlighter-rouge">host-src</code> can either be an absolute path or a <code class="highlighter-rouge">name</code> value. If you
-supply an absolute path for the <code class="highlighter-rouge">host-dir</code>, Docker bind-mounts to the path
-you specify. If you supply a <code class="highlighter-rouge">name</code>, Docker creates a named volume by that <code class="highlighter-rouge">name</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">container-dest</code> must always be an absolute path such as <code class="language-plaintext highlighter-rouge">/src/docs</code>.
+The <code class="language-plaintext highlighter-rouge">host-src</code> can either be an absolute path or a <code class="language-plaintext highlighter-rouge">name</code> value. If you
+supply an absolute path for the <code class="language-plaintext highlighter-rouge">host-dir</code>, Docker bind-mounts to the path
+you specify. If you supply a <code class="language-plaintext highlighter-rouge">name</code>, Docker creates a named volume by that <code class="language-plaintext highlighter-rouge">name</code>.</p>
 
-<p>A <code class="highlighter-rouge">name</code> value must start with an alphanumeric character,
-followed by <code class="highlighter-rouge">a-z0-9</code>, <code class="highlighter-rouge">_</code> (underscore), <code class="highlighter-rouge">.</code> (period) or <code class="highlighter-rouge">-</code> (hyphen).
-An absolute path starts with a <code class="highlighter-rouge">/</code> (forward slash).</p>
+<p>A <code class="language-plaintext highlighter-rouge">name</code> value must start with an alphanumeric character,
+followed by <code class="language-plaintext highlighter-rouge">a-z0-9</code>, <code class="language-plaintext highlighter-rouge">_</code> (underscore), <code class="language-plaintext highlighter-rouge">.</code> (period) or <code class="language-plaintext highlighter-rouge">-</code> (hyphen).
+An absolute path starts with a <code class="language-plaintext highlighter-rouge">/</code> (forward slash).</p>
 
-<p>For example, you can specify either <code class="highlighter-rouge">/foo</code> or <code class="highlighter-rouge">foo</code> for a <code class="highlighter-rouge">host-src</code> value.
-If you supply the <code class="highlighter-rouge">/foo</code> value, Docker creates a bind mount. If you supply
-the <code class="highlighter-rouge">foo</code> specification, Docker creates a named volume.</p>
+<p>For example, you can specify either <code class="language-plaintext highlighter-rouge">/foo</code> or <code class="language-plaintext highlighter-rouge">foo</code> for a <code class="language-plaintext highlighter-rouge">host-src</code> value.
+If you supply the <code class="language-plaintext highlighter-rouge">/foo</code> value, Docker creates a bind mount. If you supply
+the <code class="language-plaintext highlighter-rouge">foo</code> specification, Docker creates a named volume.</p>
 
 <h3 id="user">USER</h3>
 
-<p><code class="highlighter-rouge">root</code> (id = 0) is the default user within a container. The image developer can
+<p><code class="language-plaintext highlighter-rouge">root</code> (id = 0) is the default user within a container. The image developer can
 create additional users. Those users are accessible by name.  When passing a numeric
 ID, the user does not have to exist in the container.</p>
 
 <p>The developer can set a default user to run the first process with the
-Dockerfile <code class="highlighter-rouge">USER</code> instruction. When starting a container, the operator can override
-the <code class="highlighter-rouge">USER</code> instruction by passing the <code class="highlighter-rouge">-u</code> option.</p>
+Dockerfile <code class="language-plaintext highlighter-rouge">USER</code> instruction. When starting a container, the operator can override
+the <code class="language-plaintext highlighter-rouge">USER</code> instruction by passing the <code class="language-plaintext highlighter-rouge">-u</code> option.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-u="", --user="": Sets the username or UID used and optionally the groupname or GID for the specified command.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-u="", --user="": Sets the username or UID used and optionally the groupname or GID for the specified command.
 
 The followings examples are all valid:
 --user=[ user | user:group | uid | uid:gid | user:gid | uid:group ]
@@ -2000,10 +2000,10 @@ The followings examples are all valid:
 <h3 id="workdir">WORKDIR</h3>
 
 <p>The default working directory for running binaries within a container is the
-root directory (<code class="highlighter-rouge">/</code>), but the developer can set a different default with the
-Dockerfile <code class="highlighter-rouge">WORKDIR</code> command. The operator can override this with:</p>
+root directory (<code class="language-plaintext highlighter-rouge">/</code>), but the developer can set a different default with the
+Dockerfile <code class="language-plaintext highlighter-rouge">WORKDIR</code> command. The operator can override this with:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-w="": Working directory inside the container
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-w="": Working directory inside the container
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=run">run</a>, <a href="/docs.docker.jp.onthefly/search/?q=configure">configure</a>, <a href="/docs.docker.jp.onthefly/search/?q=runtime">runtime</a></span></section>
                     </main>

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine managed plugin system | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine managed plugin system" />
   <meta property="og:description" content="Develop and use a plugin with the managed plugin system" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine managed plugin system","description":"Develop and use a plugin with the managed plugin system","url":"https://docs.docker.com/engine/extend/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -138,17 +138,17 @@ on Windows daemons.</p>
 <p>Plugins are distributed as Docker images and can be hosted on Docker Hub or on
 a private registry.</p>
 
-<p>To install a plugin, use the <code class="highlighter-rouge">docker plugin install</code> command, which pulls the
+<p>To install a plugin, use the <code class="language-plaintext highlighter-rouge">docker plugin install</code> command, which pulls the
 plugin from Docker Hub or your private registry, prompts you to grant
 permissions or capabilities if necessary, and enables the plugin.</p>
 
-<p>To check the status of installed plugins, use the <code class="highlighter-rouge">docker plugin ls</code> command.
+<p>To check the status of installed plugins, use the <code class="language-plaintext highlighter-rouge">docker plugin ls</code> command.
 Plugins that start successfully are listed as enabled in the output.</p>
 
 <p>After a plugin is installed, you can use it as an option for another Docker
 operation, such as creating a volume.</p>
 
-<p>In the following example, you install the <code class="highlighter-rouge">sshfs</code> plugin, verify that it is
+<p>In the following example, you install the <code class="language-plaintext highlighter-rouge">sshfs</code> plugin, verify that it is
 enabled, and use it to create a volume.</p>
 
 <blockquote>
@@ -157,9 +157,9 @@ enabled, and use it to create a volume.</p>
 
 <ol>
   <li>
-    <p>Install the <code class="highlighter-rouge">sshfs</code> plugin.</p>
+    <p>Install the <code class="language-plaintext highlighter-rouge">sshfs</code> plugin.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin install vieux/sshfs
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">install </span>vieux/sshfs
 
 Plugin <span class="s2">"vieux/sshfs"</span> is requesting the following privileges:
 - network: <span class="o">[</span>host]
@@ -172,13 +172,13 @@ vieux/sshfs
     <p>The plugin requests 2 privileges:</p>
 
     <ul>
-      <li>It needs access to the <code class="highlighter-rouge">host</code> network.</li>
-      <li>It needs the <code class="highlighter-rouge">CAP_SYS_ADMIN</code> capability, which allows the plugin to run
-the <code class="highlighter-rouge">mount</code> command.</li>
+      <li>It needs access to the <code class="language-plaintext highlighter-rouge">host</code> network.</li>
+      <li>It needs the <code class="language-plaintext highlighter-rouge">CAP_SYS_ADMIN</code> capability, which allows the plugin to run
+the <code class="language-plaintext highlighter-rouge">mount</code> command.</li>
     </ul>
   </li>
   <li>
-    <p>Check that the plugin is enabled in the output of <code class="highlighter-rouge">docker plugin ls</code>.</p>
+    <p>Check that the plugin is enabled in the output of <code class="language-plaintext highlighter-rouge">docker plugin ls</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">ls
 
@@ -188,8 +188,8 @@ the <code class="highlighter-rouge">mount</code> command.</li>
   </li>
   <li>
     <p>Create a volume using the plugin.
-This example mounts the <code class="highlighter-rouge">/remote</code> directory on host <code class="highlighter-rouge">1.2.3.4</code> into a
-volume named <code class="highlighter-rouge">sshvolume</code>.</p>
+This example mounts the <code class="language-plaintext highlighter-rouge">/remote</code> directory on host <code class="language-plaintext highlighter-rouge">1.2.3.4</code> into a
+volume named <code class="language-plaintext highlighter-rouge">sshvolume</code>.</p>
 
     <p>This volume can now be mounted into containers.</p>
 
@@ -197,7 +197,7 @@ volume named <code class="highlighter-rouge">sshvolume</code>.</p>
   <span class="nt">-d</span> vieux/sshfs <span class="se">\</span>
   <span class="nt">--name</span> sshvolume <span class="se">\</span>
   <span class="nt">-o</span> <span class="nv">sshcmd</span><span class="o">=</span>user@1.2.3.4:/remote <span class="se">\</span>
-  <span class="nt">-o</span> <span class="nv">password</span><span class="o">=</span><span class="k">$(</span><span class="nb">cat </span>file_containing_password_for_remote_host<span class="k">)</span>
+  <span class="nt">-o</span> <span class="nv">password</span><span class="o">=</span><span class="si">$(</span><span class="nb">cat </span>file_containing_password_for_remote_host<span class="si">)</span>
 
 sshvolume
 </code></pre></div>    </div>
@@ -212,7 +212,7 @@ vieux/sshfs         sshvolume
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Start a container that uses the volume <code class="highlighter-rouge">sshvolume</code>.</p>
+    <p>Start a container that uses the volume <code class="language-plaintext highlighter-rouge">sshvolume</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-v</span> sshvolume:/data busybox <span class="nb">ls</span> /data
 
@@ -220,13 +220,13 @@ vieux/sshfs         sshvolume
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Remove the volume <code class="highlighter-rouge">sshvolume</code></p>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker volume rm sshvolume
+    <p>Remove the volume <code class="language-plaintext highlighter-rouge">sshvolume</code></p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker volume <span class="nb">rm </span>sshvolume
 
 sshvolume
 </code></pre></div>    </div>
-    <p>To disable a plugin, use the <code class="highlighter-rouge">docker plugin disable</code> command. To completely
-remove it, use the <code class="highlighter-rouge">docker plugin remove</code> command. For other available
+    <p>To disable a plugin, use the <code class="language-plaintext highlighter-rouge">docker plugin disable</code> command. To completely
+remove it, use the <code class="language-plaintext highlighter-rouge">docker plugin remove</code> command. For other available
 commands and options, see the
 <a href="../reference/commandline/index.md">command line reference</a>.</p>
   </li>
@@ -235,71 +235,71 @@ commands and options, see the
 <h2 id="developing-a-plugin">Developing a plugin</h2>
 
 <h4 id="the-rootfs-directory">The rootfs directory</h4>
-<p>The <code class="highlighter-rouge">rootfs</code> directory represents the root filesystem of the plugin. In this
+<p>The <code class="language-plaintext highlighter-rouge">rootfs</code> directory represents the root filesystem of the plugin. In this
 example, it was created from a Dockerfile:</p>
 
 <blockquote>
-  <p><strong>Note:</strong> The <code class="highlighter-rouge">/run/docker/plugins</code> directory is mandatory inside of the
+  <p><strong>Note:</strong> The <code class="language-plaintext highlighter-rouge">/run/docker/plugins</code> directory is mandatory inside of the
 plugin’s filesystem for docker to communicate with the plugin.</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/vieux/docker-volume-sshfs
 <span class="nv">$ </span><span class="nb">cd </span>docker-volume-sshfs
 <span class="nv">$ </span>docker build <span class="nt">-t</span> rootfsimage <span class="nb">.</span>
-<span class="nv">$ id</span><span class="o">=</span><span class="k">$(</span>docker create rootfsimage <span class="nb">true</span><span class="k">)</span> <span class="c"># id was cd851ce43a403 when the image was created</span>
-<span class="nv">$ </span><span class="nb">sudo </span>mkdir <span class="nt">-p</span> myplugin/rootfs
+<span class="nv">$ </span><span class="nb">id</span><span class="o">=</span><span class="si">$(</span>docker create rootfsimage <span class="nb">true</span><span class="si">)</span> <span class="c"># id was cd851ce43a403 when the image was created</span>
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> <span class="nt">-p</span> myplugin/rootfs
 <span class="nv">$ </span><span class="nb">sudo </span>docker <span class="nb">export</span> <span class="s2">"</span><span class="nv">$id</span><span class="s2">"</span> | <span class="nb">sudo tar</span> <span class="nt">-x</span> <span class="nt">-C</span> myplugin/rootfs
-<span class="nv">$ </span>docker rm <span class="nt">-vf</span> <span class="s2">"</span><span class="nv">$id</span><span class="s2">"</span>
+<span class="nv">$ </span>docker <span class="nb">rm</span> <span class="nt">-vf</span> <span class="s2">"</span><span class="nv">$id</span><span class="s2">"</span>
 <span class="nv">$ </span>docker rmi rootfsimage
 </code></pre></div></div>
 
 <h4 id="the-configjson-file">The config.json file</h4>
 
-<p>The <code class="highlighter-rouge">config.json</code> file describes the plugin. See the <a href="/docs.docker.jp.onthefly/engine/extend/config/">plugins config reference</a>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">config.json</code> file describes the plugin. See the <a href="/docs.docker.jp.onthefly/engine/extend/config/">plugins config reference</a>.</p>
 
-<p>Consider the following <code class="highlighter-rouge">config.json</code> file.</p>
+<p>Consider the following <code class="language-plaintext highlighter-rouge">config.json</code> file.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sshFS plugin for Docker"</span><span class="p">,</span><span class="w">
-	</span><span class="s2">"documentation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://docs.docker.com/engine/extend/plugins/"</span><span class="p">,</span><span class="w">
-	</span><span class="s2">"entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"/docker-volume-sshfs"</span><span class="p">],</span><span class="w">
-	</span><span class="s2">"network"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-		   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"host"</span><span class="w">
+	</span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sshFS plugin for Docker"</span><span class="p">,</span><span class="w">
+	</span><span class="nl">"documentation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://docs.docker.com/engine/extend/plugins/"</span><span class="p">,</span><span class="w">
+	</span><span class="nl">"entrypoint"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"/docker-volume-sshfs"</span><span class="p">],</span><span class="w">
+	</span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+		   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"host"</span><span class="w">
 		   </span><span class="p">},</span><span class="w">
-	</span><span class="s2">"interface"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-		   </span><span class="s2">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"docker.volumedriver/1.0"</span><span class="p">],</span><span class="w">
-		   </span><span class="s2">"socket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sshfs.sock"</span><span class="w">
+	</span><span class="nl">"interface"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+		   </span><span class="nl">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"docker.volumedriver/1.0"</span><span class="p">],</span><span class="w">
+		   </span><span class="nl">"socket"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sshfs.sock"</span><span class="w">
 	</span><span class="p">},</span><span class="w">
-	</span><span class="s2">"linux"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-		</span><span class="s2">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"CAP_SYS_ADMIN"</span><span class="p">]</span><span class="w">
+	</span><span class="nl">"linux"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+		</span><span class="nl">"capabilities"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"CAP_SYS_ADMIN"</span><span class="p">]</span><span class="w">
 	</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>This plugin is a volume driver. It requires a <code class="highlighter-rouge">host</code> network and the
-<code class="highlighter-rouge">CAP_SYS_ADMIN</code> capability. It depends upon the <code class="highlighter-rouge">/docker-volume-sshfs</code>
-entrypoint and uses the <code class="highlighter-rouge">/run/docker/plugins/sshfs.sock</code> socket to communicate
+<p>This plugin is a volume driver. It requires a <code class="language-plaintext highlighter-rouge">host</code> network and the
+<code class="language-plaintext highlighter-rouge">CAP_SYS_ADMIN</code> capability. It depends upon the <code class="language-plaintext highlighter-rouge">/docker-volume-sshfs</code>
+entrypoint and uses the <code class="language-plaintext highlighter-rouge">/run/docker/plugins/sshfs.sock</code> socket to communicate
 with Docker Engine. This plugin has no runtime parameters.</p>
 
 <h4 id="creating-the-plugin">Creating the plugin</h4>
 
 <p>A new plugin can be created by running
-<code class="highlighter-rouge">docker plugin create &lt;plugin-name&gt; ./path/to/plugin/data</code> where the plugin
-data contains a plugin configuration file <code class="highlighter-rouge">config.json</code> and a root filesystem
-in subdirectory <code class="highlighter-rouge">rootfs</code>.</p>
+<code class="language-plaintext highlighter-rouge">docker plugin create &lt;plugin-name&gt; ./path/to/plugin/data</code> where the plugin
+data contains a plugin configuration file <code class="language-plaintext highlighter-rouge">config.json</code> and a root filesystem
+in subdirectory <code class="language-plaintext highlighter-rouge">rootfs</code>.</p>
 
-<p>After that the plugin <code class="highlighter-rouge">&lt;plugin-name&gt;</code> will show up in <code class="highlighter-rouge">docker plugin ls</code>.
+<p>After that the plugin <code class="language-plaintext highlighter-rouge">&lt;plugin-name&gt;</code> will show up in <code class="language-plaintext highlighter-rouge">docker plugin ls</code>.
 Plugins can be pushed to remote registries with
-<code class="highlighter-rouge">docker plugin push &lt;plugin-name&gt;</code>.</p>
+<code class="language-plaintext highlighter-rouge">docker plugin push &lt;plugin-name&gt;</code>.</p>
 
 <h2 id="debugging-plugins">Debugging plugins</h2>
 
 <p>Stdout of a plugin is redirected to dockerd logs. Such entries have a
-<code class="highlighter-rouge">plugin=&lt;ID&gt;</code> suffix. Here are a few examples of commands for pluginID
-<code class="highlighter-rouge">f52a3df433b9aceee436eaada0752f5797aab1de47e5485f1690a073b860ff62</code> and their
+<code class="language-plaintext highlighter-rouge">plugin=&lt;ID&gt;</code> suffix. Here are a few examples of commands for pluginID
+<code class="language-plaintext highlighter-rouge">f52a3df433b9aceee436eaada0752f5797aab1de47e5485f1690a073b860ff62</code> and their
 corresponding log entries in the docker daemon logs.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin install tiborvass/sample-volume-plugin
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">install </span>tiborvass/sample-volume-plugin
 
 INFO[0036] Starting...       Found 0 volumes on startup  <span class="nv">plugin</span><span class="o">=</span>f52a3df433b9aceee436eaada0752f5797aab1de47e5485f1690a073b860ff62
 </code></pre></div></div>
@@ -322,7 +322,7 @@ INFO[0421] Unmount Called... Unmounted samplevol            <span class="nv">plu
 
 <h4 id="using-docker-runc-to-obtain-logfiles-and-shell-into-the-plugin">Using docker-runc to obtain logfiles and shell into the plugin.</h4>
 
-<p><code class="highlighter-rouge">docker-runc</code>, the default docker container runtime can be used for debugging
+<p><code class="language-plaintext highlighter-rouge">docker-runc</code>, the default docker container runtime can be used for debugging
 plugins. This is specifically useful to collect plugin logs if they are
 redirected to a file.</p>
 
@@ -348,7 +348,7 @@ follows:</p>
 is responsive, use curl. In this example, we will make API calls from the
 docker host to volume and network plugins using curl 7.47.0 to ensure that
 the plugin is listening on the said socket. For a well functioning plugin,
-these basic requests should work. Note that plugin sockets are available on the host under <code class="highlighter-rouge">/var/run/docker/plugins/&lt;pluginID&gt;</code></p>
+these basic requests should work. Note that plugin sockets are available on the host under <code class="language-plaintext highlighter-rouge">/var/run/docker/plugins/&lt;pluginID&gt;</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-XPOST</span> <span class="nt">-d</span> <span class="s1">'{}'</span> <span class="nt">--unix-socket</span> /var/run/docker/plugins/e8a37ba56fc879c991f7d7921901723c64df6b42b87e6a0b055771ecf8477a6d/plugin.sock http:/VolumeDriver.List
 
@@ -360,10 +360,10 @@ these basic requests should work. Note that plugin sockets are available on the 
 <span class="o">{</span><span class="s2">"Scope"</span>:<span class="s2">"local"</span><span class="o">}</span>
 </code></pre></div></div>
 <p>When using curl 7.5 and above, the URL should be of the form
-<code class="highlighter-rouge">http://hostname/APICall</code>, where <code class="highlighter-rouge">hostname</code> is the valid hostname where the
-plugin is installed and <code class="highlighter-rouge">APICall</code> is the call to the plugin API.</p>
+<code class="language-plaintext highlighter-rouge">http://hostname/APICall</code>, where <code class="language-plaintext highlighter-rouge">hostname</code> is the valid hostname where the
+plugin is installed and <code class="language-plaintext highlighter-rouge">APICall</code> is the call to the plugin API.</p>
 
-<p>For example, <code class="highlighter-rouge">http://localhost/VolumeDriver.List</code></p>
+<p>For example, <code class="language-plaintext highlighter-rouge">http://localhost/VolumeDriver.List</code></p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=API">API</a>, <a href="/docs.docker.jp.onthefly/search/?q=Usage">Usage</a>, <a href="/docs.docker.jp.onthefly/search/?q=plugins">plugins</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=developer">developer</a></span></section>
                     </main>
                     <nav class="col-nav">

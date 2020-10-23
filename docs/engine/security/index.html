@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker のセキュリティ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker のセキュリティ" />
   <meta property="og:description" content="Review of the Docker Daemon attack surface" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker のセキュリティ","description":"Review of the Docker Daemon attack surface","url":"https://docs.docker.com/engine/security/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -119,7 +119,7 @@
 
 <p>Docker コンテナーは LXC コンテナーによく似ています。
 どちらも同じようなセキュリティ機能を持っています。
-<code class="highlighter-rouge">docker run</code> によってコンテナーを起動させると Docker の内部処理では、コンテナーが利用する名前空間やコントロールグループが生成されます。</p>
+<code class="language-plaintext highlighter-rouge">docker run</code> によってコンテナーを起動させると Docker の内部処理では、コンテナーが利用する名前空間やコントロールグループが生成されます。</p>
 
 <p><strong>名前空間とは、初めて提供された最もストレートな形の分離技術のことです</strong>。
 コンテナー内部にて起動されるプロセスからは、他のコンテナー内部やホストシステム内のプロセスを参照することはできず、また影響もほぼ及ぼしません。</p>
@@ -162,13 +162,13 @@
 <h2 id="docker-daemon-attack-surface">Docker デーモンの攻撃領域</h2>
 
 <p>コンテナー（およびアプリケーション）を Docker とともに動作させるということは、暗に Docker デーモンを動作させるということです。
-デーモンの起動には <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モード</a> (試験的機能) を用いるのでない限りは <code class="highlighter-rouge">root</code> 権限を必要とします。
+デーモンの起動には <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モード</a> (試験的機能) を用いるのでない限りは <code class="language-plaintext highlighter-rouge">root</code> 権限を必要とします。
 したがって重要な点をいくつか意識しておく必要があります。</p>
 
 <p>まず第一に、<strong>Docker デーモンを制御できるのは信頼できるユーザーのみとすべき</strong> ということです。
 Docker の強力な機能の中には、この問題が直接関係するものがあります。
 特に Docker においては Docker ホストとゲストコンテナーの間でのディレクトリ共有が可能であり、つまりコンテナーのアクセス権拡大を許しているわけです。
-ということは、コンテナーの <code class="highlighter-rouge">/host</code> ディレクトリをホスト上の <code class="highlighter-rouge">/</code> ディレクトリに割り当ててコンテナーを起動できることを意味し、それはコンテナーが何ら制限なくホストのファイルシステムを変更できてしまうことになります。
+ということは、コンテナーの <code class="language-plaintext highlighter-rouge">/host</code> ディレクトリをホスト上の <code class="language-plaintext highlighter-rouge">/</code> ディレクトリに割り当ててコンテナーを起動できることを意味し、それはコンテナーが何ら制限なくホストのファイルシステムを変更できてしまうことになります。
 ちょうど仮想化システムがファイルシステムというリソースをどのように共有するかという問題と同じです。
 仮想マシンを使ってルートファイルシステムを（あるいはルートブロックデバイスでさえ）共有化できてしまうことは、防ぎようがありません。</p>
 
@@ -188,9 +188,9 @@ Docker の強力な機能の中には、この問題が直接関係するもの�
 したがって <a href="/docs.docker.jp.onthefly/engine/security/https/">HTTPS と 証明書</a> を用いたセキュアな API エンドポイントの利用が必須となります。
 また信頼できるネットワークや VPN からのみ到達可能とするような対処も求められます。</p>
 
-<p>SSH over TLS を実現したいのであれば、<code class="highlighter-rouge">DOCKER_HOST=ssh://USER@HOST</code> や <code class="highlighter-rouge">ssh -L /path/to/docker.sock:/var/run/docker.sock</code> を用いることもできます。</p>
+<p>SSH over TLS を実現したいのであれば、<code class="language-plaintext highlighter-rouge">DOCKER_HOST=ssh://USER@HOST</code> や <code class="language-plaintext highlighter-rouge">ssh -L /path/to/docker.sock:/var/run/docker.sock</code> を用いることもできます。</p>
 
-<p>デーモンへの入力として、たとえば <code class="highlighter-rouge">docker load</code> 実行時はディスクから、また <code class="highlighter-rouge">docker pull</code> 実行時はネットワークから、それぞれイメージロードが行われますが、こういった入力には潜在的にぜい弱性があります。
+<p>デーモンへの入力として、たとえば <code class="language-plaintext highlighter-rouge">docker load</code> 実行時はディスクから、また <code class="language-plaintext highlighter-rouge">docker pull</code> 実行時はネットワークから、それぞれイメージロードが行われますが、こういった入力には潜在的にぜい弱性があります。
 Docker 1.3.2 において、イメージの抽出は Linux/Unix プラットフォーム上の chroot によるサブプロセス内にて行われるようになりました。
 これは権限を分離することを賢明に目指した第一歩でした。
 Docker 1.10.0 になるとイメージはすべて、イメージデータの暗号化チェックサムによって保存されアクセスされるようになりました。
@@ -208,14 +208,14 @@ Docker 1.10.0 になるとイメージはすべて、イメージデータの暗
 
 <p>ケーパビリティーとは「ルートか非ルートか」という 2 値による区分けを、アクセス制御システム上に対してきめ細かく実現するものです。
 1024 番ポート以下に割り当てさえすればよいプロセス（たとえばウェブサーバー）なら、root として実行する必要はありません。
-代わりに <code class="highlighter-rouge">net_bind_service</code> ケーパビリティーを与えるだけで十分です。
+代わりに <code class="language-plaintext highlighter-rouge">net_bind_service</code> ケーパビリティーを与えるだけで十分です。
 この他にも数多くのケーパビリティーがあるので、root 権限が通常必要とされる場面のほとんどすべてに利用することができます。</p>
 
 <p>コンテナーセキュリティにおいてこれは実に多くのことを意味します。
 どういうことなのか見ていきます。</p>
 
-<p>典型的なサーバーであれば、プロセスの多くは <code class="highlighter-rouge">root</code> によって起動されています。
-たとえば SSH デーモン、<code class="highlighter-rouge">cron</code> デーモン、ログデーモン、カーネルモジュール、ネットワーク設定ツールなどです。
+<p>典型的なサーバーであれば、プロセスの多くは <code class="language-plaintext highlighter-rouge">root</code> によって起動されています。
+たとえば SSH デーモン、<code class="language-plaintext highlighter-rouge">cron</code> デーモン、ログデーモン、カーネルモジュール、ネットワーク設定ツールなどです。
 ただコンテナーでは話が違います。
 そもそもこういったタスクのほぼすべては、コンテナー外部にあるインフラストラクチャーによって取り扱われるものだからです。</p>
 
@@ -224,7 +224,7 @@ Docker 1.10.0 になるとイメージはすべて、イメージデータの暗
     <p>SSH アクセスを管理するのは、通常は Docker ホスト上に稼動するサーバープロセスです。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">cron</code> は必要な場合は、ユーザープロセスとして起動させます。
+    <p><code class="language-plaintext highlighter-rouge">cron</code> は必要な場合は、ユーザープロセスとして起動させます。
 スケジュールサービスを必要とするアプリ向けに特化させるものであり、プラットフォーム全体の機能として用いるものではありません。</p>
   </li>
   <li>
@@ -233,12 +233,12 @@ Docker 1.10.0 になるとイメージはすべて、イメージデータの暗
   </li>
   <li>
     <p>ハードウェアを管理することは的はずれです。
-コンテナー内部において <code class="highlighter-rouge">udevd</code> やそれに類するデーモンを起動させる必要はまったくありません。</p>
+コンテナー内部において <code class="language-plaintext highlighter-rouge">udevd</code> やそれに類するデーモンを起動させる必要はまったくありません。</p>
   </li>
   <li>
     <p>ネットワーク管理はコンテナー外部で行われるものです。
 可能な限り考えなくても済むものです。
-つまり <code class="highlighter-rouge">ifconfig</code>、<code class="highlighter-rouge">route</code>、ip コマンドは実行する必要がありません。
+つまり <code class="language-plaintext highlighter-rouge">ifconfig</code>、<code class="language-plaintext highlighter-rouge">route</code>、ip コマンドは実行する必要がありません。
 （ただしコンテナーがルーターやファイアウォールとして動作するように構築しているのであれば別です。）</p>
   </li>
 </ul>
@@ -274,10 +274,10 @@ Docker 1.10.0 になるとイメージはすべて、イメージデータの暗
 <h2 id="docker-content-trust-signature-verification">Docker Content Trust の署名認証</h2>
 
 <p>Docker Engine では、署名されているイメージだけを実行するように設定することができます。
-Docker Content Trust における署名認証は <code class="highlighter-rouge">dockerd</code> 実行モジュール内に直接ビルドされています。
+Docker Content Trust における署名認証は <code class="language-plaintext highlighter-rouge">dockerd</code> 実行モジュール内に直接ビルドされています。
 この機能は dockerd の設定ファイルを通じて設定することができます。</p>
 
-<p>この機能を有効にするには <code class="highlighter-rouge">daemon.json</code> において <code class="highlighter-rouge">trust-pinning</code> により設定します。
+<p>この機能を有効にするには <code class="language-plaintext highlighter-rouge">daemon.json</code> において <code class="language-plaintext highlighter-rouge">trust-pinning</code> により設定します。
 これにより、ユーザーが指定したルート鍵によって署名されたリポジトリに対してのみ、イメージをプルして実行できるようになります。</p>
 
 <p>以前は CLI においてイメージに対する署名認証を実現していましたが、この機能によって管理者の理解がより深く浸透しました。</p>

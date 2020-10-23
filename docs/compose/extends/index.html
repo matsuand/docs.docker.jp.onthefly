@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ファイル間、プロジェクト間での Compose 設定の共有 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ファイル間、プロジェクト間での Compose 設定の共有" />
   <meta property="og:description" content="How to use Docker Compose&#39;s extends keyword to share configuration between files and projects" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/extends/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ファイル間、プロジェクト間での Compose 設定の共有","description":"How to use Docker Compose's extends keyword to share configuration between files and projects","url":"https://docs.docker.com/compose/extends/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 
@@ -110,7 +110,7 @@
 
 <ol>
   <li>Compose ファイル全体を <a href="/docs.docker.jp.onthefly/compose/extends/#multiple-compose-files">複数の Compose ファイルの利用</a> により拡張します。</li>
-  <li>個々のサービスを <a href="/docs.docker.jp.onthefly/compose/extends/#extending-services"><code class="highlighter-rouge">extends</code> フィールド</a> を使って拡張します（Compose ファイルバージョン 2.1 まで）。</li>
+  <li>個々のサービスを <a href="/docs.docker.jp.onthefly/compose/extends/#extending-services"><code class="language-plaintext highlighter-rouge">extends</code> フィールド</a> を使って拡張します（Compose ファイルバージョン 2.1 まで）。</li>
 </ol>
 
 <h2 id="multiple-compose-files">複数の Compose ファイルの利用</h2>
@@ -120,17 +120,17 @@
 <h3 id="understanding-multiple-compose-files">Compose ファイルが複数ある意味</h3>
 
 <p>デフォルトにおいて Compose は 2 つのファイルを読み込みます。
-<code class="highlighter-rouge">docker-compose.yml</code> と、必要に応じて編集する <code class="highlighter-rouge">docker-compose.override.yml</code> です。
-慣習として <code class="highlighter-rouge">docker-compose.yml</code> には基本的な設定を含めます。
-<code class="highlighter-rouge">docker-compose.override.yml</code> ファイルは、オーバーライドという表現が含まれていることから分かるように、既存のサービスあるいは新たに起動する全サービスに対しての上書き設定を行うものです。</p>
+<code class="language-plaintext highlighter-rouge">docker-compose.yml</code> と、必要に応じて編集する <code class="language-plaintext highlighter-rouge">docker-compose.override.yml</code> です。
+慣習として <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> には基本的な設定を含めます。
+<code class="language-plaintext highlighter-rouge">docker-compose.override.yml</code> ファイルは、オーバーライドという表現が含まれていることから分かるように、既存のサービスあるいは新たに起動する全サービスに対しての上書き設定を行うものです。</p>
 
 <p>サービスの定義が両方のファイルに存在した場合、Compose は <a href="/docs.docker.jp.onthefly/compose/extends/#adding-and-overriding-configuration">設定の追加と上書き</a> に示すルールに従って定義設定をマージします。</p>
 
-<p>複数の上書きファイルがある場合、あるいは上書きファイルが 1 つであってもその名前を別にしている場合、<code class="highlighter-rouge">-f</code> オプションを使って、ファイル名を列記して指定することができます。
+<p>複数の上書きファイルがある場合、あるいは上書きファイルが 1 つであってもその名前を別にしている場合、<code class="language-plaintext highlighter-rouge">-f</code> オプションを使って、ファイル名を列記して指定することができます。
 Compose はコマンドライン上に指定された順に、設定ファイルをマージします。
-詳細は <a href="/docs.docker.jp.onthefly/compose/reference/overview/"><code class="highlighter-rouge">docker-compose</code> コマンドリファレンス</a> の <code class="highlighter-rouge">-f</code> オプションに関する情報を参照してください。</p>
+詳細は <a href="/docs.docker.jp.onthefly/compose/reference/overview/"><code class="language-plaintext highlighter-rouge">docker-compose</code> コマンドリファレンス</a> の <code class="language-plaintext highlighter-rouge">-f</code> オプションに関する情報を参照してください。</p>
 
-<p>複数の設定ファイルを利用する場合、各ファイルに記述されるパスは、基準となる Compose ファイル（1 つめの <code class="highlighter-rouge">-f</code> により指定された Compose ファイル）からの相対パスである必要があります。
+<p>複数の設定ファイルを利用する場合、各ファイルに記述されるパスは、基準となる Compose ファイル（1 つめの <code class="language-plaintext highlighter-rouge">-f</code> により指定された Compose ファイル）からの相対パスである必要があります。
 これは上書きするファイルが Compose ファイルとして有効である必要がないからです。
 上書きファイル内は、設定項目が部分的に含まれているだけで構いません。
 サービスに対する定義部分がどのパスからの相対パスとして定義されているのかといったことを追っていくのは、なかなか難しく理解しづらくなります。
@@ -151,7 +151,7 @@ Compose はコマンドライン上に指定された順に、設定ファイル
 
 <p><strong>docker-compose.yml</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   image: example/my_web_app:latest
   depends_on:
     - db
@@ -168,7 +168,7 @@ cache:
 
 <p><strong>docker-compose.override.yml</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   build: .
   volumes:
     - '.:/code'
@@ -187,14 +187,14 @@ cache:
     - 6379:6379
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker-compose up</code> を実行すると、上書き用の設定ファイルが自動的に読み込まれます。</p>
+<p><code class="language-plaintext highlighter-rouge">docker-compose up</code> を実行すると、上書き用の設定ファイルが自動的に読み込まれます。</p>
 
 <p>この Compose アプリは、このままでも十分に本番環境向けとすることができます。
 ただここでは、別の上書きファイルを生成します（このファイルは別の git リポジトリに含まれているとか、別の開発チームが管理するものであるかもしれません）。</p>
 
 <p><strong>docker-compose.prod.yml</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   ports:
     - 80:80
   environment:
@@ -207,10 +207,10 @@ cache:
 
 <p>この本番環境向け Compose ファイルをデプロイするために、以下を実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 </code></pre></div></div>
 
-<p>これによって 3 つのサービスすべてがデプロイされますが、利用される設定は <code class="highlighter-rouge">docker-compose.yml</code> と <code class="highlighter-rouge">docker-compose.prod.yml</code> から読み込まれたものです（<code class="highlighter-rouge">docker-compose.override.yml</code> 内の開発環境向け設定は利用されません。）。</p>
+<p>これによって 3 つのサービスすべてがデプロイされますが、利用される設定は <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> と <code class="language-plaintext highlighter-rouge">docker-compose.prod.yml</code> から読み込まれたものです（<code class="language-plaintext highlighter-rouge">docker-compose.override.yml</code> 内の開発環境向け設定は利用されません。）。</p>
 
 <p>本番環境での Compose 利用に関する情報は、<a href="/docs.docker.jp.onthefly/compose/production/">本番環境での Compose の利用</a> を参照してください。</p>
 
@@ -221,7 +221,7 @@ cache:
 
 <p><strong>docker-compose.yml</strong> から始めます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   image: example/my_web_app:latest
   depends_on:
     - db
@@ -232,16 +232,16 @@ db:
 
 <p><strong>docker-compose.admin.yml</strong> において、新しいサービスを追加して、データベースのエクスポートまたはバックアップを行うようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dbadmin:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dbadmin:
   build: database_admin/
   depends_on:
     - db
 </code></pre></div></div>
 
-<p>通常の環境を起動するときは <code class="highlighter-rouge">docker-compose up -d</code> を実行します。
-またデータベースバックアップを実行するときは、<code class="highlighter-rouge">docker-compose.admin.yml</code> も含めるようにして実行します。</p>
+<p>通常の環境を起動するときは <code class="language-plaintext highlighter-rouge">docker-compose up -d</code> を実行します。
+またデータベースバックアップを実行するときは、<code class="language-plaintext highlighter-rouge">docker-compose.admin.yml</code> も含めるようにして実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
     run dbadmin db-backup
 </code></pre></div></div>
 
@@ -250,39 +250,39 @@ db:
 <blockquote>
   <p><strong>メモ</strong>:</p>
 
-  <p>キーワード <code class="highlighter-rouge">extends</code> は、かつての Compose ファイルフォーマットバージョン 2.1 までにおいてサポートされます。
+  <p>キーワード <code class="language-plaintext highlighter-rouge">extends</code> は、かつての Compose ファイルフォーマットバージョン 2.1 までにおいてサポートされます。
 （<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/#extends">バージョン 1 における extends</a> と <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#extends">バージョン 2 における extends</a> を参照のこと。）
 これは Compose バージョン 3.x ではサポートされていません。
 キーワードの追加、削除に関しては <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#version-3">バージョン 3 のまとめ</a> や <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-versioning/#upgrading">アップグレード方法</a> を参照してください。
-また <a href="https://github.com/moby/moby/issues/31101">moby/moby#31101</a> では、将来のバージョンにおいて何らかの形式で <code class="highlighter-rouge">extends</code> をサポートする可能性について議論するスレッドがありますので、確認してみてください。</p>
+また <a href="https://github.com/moby/moby/issues/31101">moby/moby#31101</a> では、将来のバージョンにおいて何らかの形式で <code class="language-plaintext highlighter-rouge">extends</code> をサポートする可能性について議論するスレッドがありますので、確認してみてください。</p>
 </blockquote>
 
-<p>Docker Compose の <code class="highlighter-rouge">extends</code> キーワードを使うと、さまざまな設定ファイルに共通する内容を共有することができます。
+<p>Docker Compose の <code class="language-plaintext highlighter-rouge">extends</code> キーワードを使うと、さまざまな設定ファイルに共通する内容を共有することができます。
 それはまったく別のプロジェクト間でも可能です。
 ごく標準的な設定オプションを再利用しているサービスがいくつもある場合に、このサービス拡張機能を活用することができます。
-<code class="highlighter-rouge">extends</code> を使って標準的なサービスオプションを 1 箇所に定義しておけば、それをどこからでも参照することができます。</p>
+<code class="language-plaintext highlighter-rouge">extends</code> を使って標準的なサービスオプションを 1 箇所に定義しておけば、それをどこからでも参照することができます。</p>
 
-<p><code class="highlighter-rouge">volumes_from</code>、<code class="highlighter-rouge">depends_on</code> は、<code class="highlighter-rouge">extends</code> を利用したサービス間での共有はされません。
+<p><code class="language-plaintext highlighter-rouge">volumes_from</code>、<code class="language-plaintext highlighter-rouge">depends_on</code> は、<code class="language-plaintext highlighter-rouge">extends</code> を利用したサービス間での共有はされません。
 これらが例外となっているのは、気づかないうちに依存関係が発生してしまうことを避けるためです。
-<code class="highlighter-rouge">volumes_from</code> はいつもローカルな定義に利用するものです。
+<code class="language-plaintext highlighter-rouge">volumes_from</code> はいつもローカルな定義に利用するものです。
 こうしているからこそ、そのときの設定ファイルを読めば、サービス間の依存関係がはっきりわかることになります。
 ローカルに定義しておくのは、参照されている側のファイルに変更が加わっても、影響がなく済むことにもつながります。</p>
 
 <h3 id="understand-the-extends-configuration">extends によるサービス拡張設定の理解</h3>
 
-<p><code class="highlighter-rouge">docker-compose.yml</code> 内にサービスを定義するときには、どのようなサービスであっても、別のサービスを拡張するように宣言できます。
+<p><code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 内にサービスを定義するときには、どのようなサービスであっても、別のサービスを拡張するように宣言できます。
 たとえば以下のとおりです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   extends:
     file: common-services.yml
     service: webapp
 </code></pre></div></div>
 
-<p>上の設定は Compose に対して、<code class="highlighter-rouge">common-services.yml</code> ファイル内に定義されている <code class="highlighter-rouge">webapp</code> サービスの設定を再利用することを指示しています。
-<code class="highlighter-rouge">common-services.yml</code> は以下のようになっているとします。</p>
+<p>上の設定は Compose に対して、<code class="language-plaintext highlighter-rouge">common-services.yml</code> ファイル内に定義されている <code class="language-plaintext highlighter-rouge">webapp</code> サービスの設定を再利用することを指示しています。
+<code class="language-plaintext highlighter-rouge">common-services.yml</code> は以下のようになっているとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webapp:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webapp:
   build: .
   ports:
     - "8000:8000"
@@ -290,11 +290,11 @@ db:
     - "/data"
 </code></pre></div></div>
 
-<p>この例では、<code class="highlighter-rouge">docker-compose.yml</code> ファイル内の <code class="highlighter-rouge">web</code> の直下に、<code class="highlighter-rouge">build</code>、<code class="highlighter-rouge">ports</code>、<code class="highlighter-rouge">volumes</code> の設定を行った場合と同じ結果を得ることができます。</p>
+<p>この例では、<code class="language-plaintext highlighter-rouge">docker-compose.yml</code> ファイル内の <code class="language-plaintext highlighter-rouge">web</code> の直下に、<code class="language-plaintext highlighter-rouge">build</code>、<code class="language-plaintext highlighter-rouge">ports</code>、<code class="language-plaintext highlighter-rouge">volumes</code> の設定を行った場合と同じ結果を得ることができます。</p>
 
-<p>さらに <code class="highlighter-rouge">docker-compose.yml</code> 内には、ローカルでの設定内容を定義あるいは再定義することができます。</p>
+<p>さらに <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> 内には、ローカルでの設定内容を定義あるいは再定義することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   extends:
     file: common-services.yml
     service: webapp
@@ -307,9 +307,9 @@ important_web:
   cpu_shares: 10
 </code></pre></div></div>
 
-<p>また他のサービスを記述して、<code class="highlighter-rouge">web</code> サービスからそのサービスへリンクすることも可能です。</p>
+<p>また他のサービスを記述して、<code class="language-plaintext highlighter-rouge">web</code> サービスからそのサービスへリンクすることも可能です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   extends:
     file: common-services.yml
     service: webapp
@@ -331,7 +331,7 @@ db:
 
 <p><strong>common.yml</strong> では共通する設定を定義します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app:
   build: .
   environment:
     CONFIG_FILE_PATH: /code/config
@@ -341,7 +341,7 @@ db:
 
 <p><strong>docker-compose.yml</strong> では、上の共通設定を利用する具体的なサービスを定義します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webapp:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webapp:
   extends:
     file: common.yml
     service: app
@@ -366,9 +366,9 @@ queue_worker:
 <p>Compose では、元からあったサービスの定義を、ローカルのサービス定義に向けてコピーします。
 設定オプションが元々のサービスとローカルのサービスの両方にて定義されていた場合は、元のサービスの値はローカルの値によって <strong>置き換えられる</strong>か、あるいは<strong>拡張されます</strong>。</p>
 
-<p>1 つの値しか持たないオプション、たとえば <code class="highlighter-rouge">image</code>、<code class="highlighter-rouge">command</code>、<code class="highlighter-rouge">mem_limit</code> のようなものは、古い値が新しい値に置き換えられます。</p>
+<p>1 つの値しか持たないオプション、たとえば <code class="language-plaintext highlighter-rouge">image</code>、<code class="language-plaintext highlighter-rouge">command</code>、<code class="language-plaintext highlighter-rouge">mem_limit</code> のようなものは、古い値が新しい値に置き換えられます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 command: python app.py
 
 # ローカル定義のサービス
@@ -379,19 +379,19 @@ command: python otherapp.py
 </code></pre></div></div>
 
 <blockquote>
-  <p>Compose ファイルバージョン 1 における <code class="highlighter-rouge">build</code> と <code class="highlighter-rouge">image</code></p>
+  <p>Compose ファイルバージョン 1 における <code class="language-plaintext highlighter-rouge">build</code> と <code class="language-plaintext highlighter-rouge">image</code></p>
 
-  <p><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/">Compose ファイルフォーマットバージョン 1</a> における <code class="highlighter-rouge">build</code> と <code class="highlighter-rouge">image</code> の 2 つについて、ローカル定義に一方を用いた場合に、他方が元々のサービスに定義されていたとすると、その他方のオプションは無視されます。</p>
+  <p><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v1/">Compose ファイルフォーマットバージョン 1</a> における <code class="language-plaintext highlighter-rouge">build</code> と <code class="language-plaintext highlighter-rouge">image</code> の 2 つについて、ローカル定義に一方を用いた場合に、他方が元々のサービスに定義されていたとすると、その他方のオプションは無視されます。</p>
 
-  <p>たとえば元のサービスに <code class="highlighter-rouge">image: webapp</code> が定義されていて、ローカルサービスでは <code class="highlighter-rouge">build: .</code> が定義されているとします。
-このときの結果は <code class="highlighter-rouge">build: .</code> となり、<code class="highlighter-rouge">image</code> オプションはなくなります。</p>
+  <p>たとえば元のサービスに <code class="language-plaintext highlighter-rouge">image: webapp</code> が定義されていて、ローカルサービスでは <code class="language-plaintext highlighter-rouge">build: .</code> が定義されているとします。
+このときの結果は <code class="language-plaintext highlighter-rouge">build: .</code> となり、<code class="language-plaintext highlighter-rouge">image</code> オプションはなくなります。</p>
 
-  <p>これはファイルフォーマットバージョン 1 においては、<code class="highlighter-rouge">build</code> と <code class="highlighter-rouge">image</code> を同時に用いることができないためです。</p>
+  <p>これはファイルフォーマットバージョン 1 においては、<code class="language-plaintext highlighter-rouge">build</code> と <code class="language-plaintext highlighter-rouge">image</code> を同時に用いることができないためです。</p>
 </blockquote>
 
-<p><strong>複数の値を持つオプション</strong>、<code class="highlighter-rouge">ports</code>、<code class="highlighter-rouge">expose</code>、<code class="highlighter-rouge">external_links</code>、<code class="highlighter-rouge">dns</code>、<code class="highlighter-rouge">dns_search</code>、<code class="highlighter-rouge">tmpfs</code> では、両者の設定をつなぎ合わせます。</p>
+<p><strong>複数の値を持つオプション</strong>、<code class="language-plaintext highlighter-rouge">ports</code>、<code class="language-plaintext highlighter-rouge">expose</code>、<code class="language-plaintext highlighter-rouge">external_links</code>、<code class="language-plaintext highlighter-rouge">dns</code>、<code class="language-plaintext highlighter-rouge">dns_search</code>、<code class="language-plaintext highlighter-rouge">tmpfs</code> では、両者の設定をつなぎ合わせます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 expose:
   - "3000"
 
@@ -407,9 +407,9 @@ expose:
   - "5000"
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">environment</code>、<code class="highlighter-rouge">labels</code>、<code class="highlighter-rouge">volumes</code>、<code class="highlighter-rouge">devices</code> の場合、Compose は設定内容を”マージ”して、ローカル定義の値が優先するようにします。</p>
+<p><code class="language-plaintext highlighter-rouge">environment</code>、<code class="language-plaintext highlighter-rouge">labels</code>、<code class="language-plaintext highlighter-rouge">volumes</code>、<code class="language-plaintext highlighter-rouge">devices</code> の場合、Compose は設定内容を”マージ”して、ローカル定義の値が優先するようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 environment:
   - FOO=original
   - BAR=original
@@ -426,9 +426,9 @@ environment:
   - BAZ=local
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">volumes</code> や <code class="highlighter-rouge">devices</code> の設定内容は、コンテナーのマウントパスを使ってマージされます。</p>
+<p><code class="language-plaintext highlighter-rouge">volumes</code> や <code class="language-plaintext highlighter-rouge">devices</code> の設定内容は、コンテナーのマウントパスを使ってマージされます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 元からのサービス
 volumes:
   - ./original:/foo
   - ./original:/bar

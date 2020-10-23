@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Advanced options for Autobuild and Autotest | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Advanced options for Autobuild and Autotest" />
   <meta property="og:description" content="Automated builds" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/advanced/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Advanced options for Autobuild and Autotest","description":"Automated builds","url":"https://docs.docker.com/docker-hub/builds/advanced/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -119,17 +119,17 @@ processes and do not affect your service’s run environment.</p>
 </blockquote>
 
 <ul>
-  <li><code class="highlighter-rouge">SOURCE_BRANCH</code>: the name of the branch or the tag that is currently being tested.</li>
-  <li><code class="highlighter-rouge">SOURCE_COMMIT</code>: the SHA1 hash of the commit being tested.</li>
-  <li><code class="highlighter-rouge">COMMIT_MSG</code>: the message from the commit being tested and built.</li>
-  <li><code class="highlighter-rouge">DOCKER_REPO</code>: the name of the Docker repository being built.</li>
-  <li><code class="highlighter-rouge">DOCKERFILE_PATH</code>: the dockerfile currently being built.</li>
-  <li><code class="highlighter-rouge">DOCKER_TAG</code>: the Docker repository tag being built.</li>
-  <li><code class="highlighter-rouge">IMAGE_NAME</code>: the name and tag of the Docker repository being built. (This variable is a combination of <code class="highlighter-rouge">DOCKER_REPO</code>:<code class="highlighter-rouge">DOCKER_TAG</code>.)</li>
+  <li><code class="language-plaintext highlighter-rouge">SOURCE_BRANCH</code>: the name of the branch or the tag that is currently being tested.</li>
+  <li><code class="language-plaintext highlighter-rouge">SOURCE_COMMIT</code>: the SHA1 hash of the commit being tested.</li>
+  <li><code class="language-plaintext highlighter-rouge">COMMIT_MSG</code>: the message from the commit being tested and built.</li>
+  <li><code class="language-plaintext highlighter-rouge">DOCKER_REPO</code>: the name of the Docker repository being built.</li>
+  <li><code class="language-plaintext highlighter-rouge">DOCKERFILE_PATH</code>: the dockerfile currently being built.</li>
+  <li><code class="language-plaintext highlighter-rouge">DOCKER_TAG</code>: the Docker repository tag being built.</li>
+  <li><code class="language-plaintext highlighter-rouge">IMAGE_NAME</code>: the name and tag of the Docker repository being built. (This variable is a combination of <code class="language-plaintext highlighter-rouge">DOCKER_REPO</code>:<code class="language-plaintext highlighter-rouge">DOCKER_TAG</code>.)</li>
 </ul>
 
 <p>If you are using these build environment variables in a
-<code class="highlighter-rouge">docker-compose.test.yml</code> file for automated testing, declare them in your <code class="highlighter-rouge">sut</code>
+<code class="language-plaintext highlighter-rouge">docker-compose.test.yml</code> file for automated testing, declare them in your <code class="language-plaintext highlighter-rouge">sut</code>
 service’s environment as shown below.</p>
 
 <pre><code class="language-none">sut:
@@ -141,19 +141,19 @@ service’s environment as shown below.</p>
 
 <h2 id="override-build-test-or-push-commands">Override build, test or push commands</h2>
 
-<p>Docker Hub allows you to override and customize the <code class="highlighter-rouge">build</code>, <code class="highlighter-rouge">test</code> and <code class="highlighter-rouge">push</code>
+<p>Docker Hub allows you to override and customize the <code class="language-plaintext highlighter-rouge">build</code>, <code class="language-plaintext highlighter-rouge">test</code> and <code class="language-plaintext highlighter-rouge">push</code>
 commands during automated build and test processes using hooks. For example, you
 might use a build hook to set build arguments used only during the build
 process. (You can also set up <a href="#custom-build-phase-hooks">custom build phase hooks</a> to perform actions in between these commands.)</p>
 
 <p><strong>Use these hooks with caution.</strong> The contents of these hook files replace the
-basic <code class="highlighter-rouge">docker</code> commands, so you must include a similar build, test or push
+basic <code class="language-plaintext highlighter-rouge">docker</code> commands, so you must include a similar build, test or push
 command in the hook or your automated process does not complete.</p>
 
-<p>To override these phases, create a folder called <code class="highlighter-rouge">hooks</code> in your source code
+<p>To override these phases, create a folder called <code class="language-plaintext highlighter-rouge">hooks</code> in your source code
 repository at the same directory level as your Dockerfile. Create a file called
-<code class="highlighter-rouge">hooks/build</code>, <code class="highlighter-rouge">hooks/test</code>, or <code class="highlighter-rouge">hooks/push</code> and include commands that the
-builder process can execute, such as <code class="highlighter-rouge">docker</code> and <code class="highlighter-rouge">bash</code> commands (prefixed appropriately with <code class="highlighter-rouge"><span class="c">#!/bin/bash</span></code>).</p>
+<code class="language-plaintext highlighter-rouge">hooks/build</code>, <code class="language-plaintext highlighter-rouge">hooks/test</code>, or <code class="language-plaintext highlighter-rouge">hooks/push</code> and include commands that the
+builder process can execute, such as <code class="language-plaintext highlighter-rouge">docker</code> and <code class="language-plaintext highlighter-rouge">bash</code> commands (prefixed appropriately with <code class="language-plaintext highlighter-rouge">#!/bin/bash</code>).</p>
 
 <h2 id="custom-build-phase-hooks">Custom build phase hooks</h2>
 
@@ -161,20 +161,20 @@ builder process can execute, such as <code class="highlighter-rouge">docker</cod
 hooks. Hooks allow you to provide extra instructions to the autobuild and
 autotest processes.</p>
 
-<p>Create a folder called <code class="highlighter-rouge">hooks</code> in your source code repository at the same
+<p>Create a folder called <code class="language-plaintext highlighter-rouge">hooks</code> in your source code repository at the same
 directory level as your Dockerfile. Place files that define the hooks in that
-folder. Hook files can include both <code class="highlighter-rouge">docker</code> commands, and <code class="highlighter-rouge">bash</code> commands as long as they are prefixed appropriately with <code class="highlighter-rouge"><span class="c">#!/bin/bash</span></code>. The builder executes the commands in the files before and after each step.</p>
+folder. Hook files can include both <code class="language-plaintext highlighter-rouge">docker</code> commands, and <code class="language-plaintext highlighter-rouge">bash</code> commands as long as they are prefixed appropriately with <code class="language-plaintext highlighter-rouge">#!/bin/bash</code>. The builder executes the commands in the files before and after each step.</p>
 
 <p>The following hooks are available:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">hooks/post_checkout</code></li>
-  <li><code class="highlighter-rouge">hooks/pre_build</code></li>
-  <li><code class="highlighter-rouge">hooks/post_build</code></li>
-  <li><code class="highlighter-rouge">hooks/pre_test</code></li>
-  <li><code class="highlighter-rouge">hooks/post_test</code></li>
-  <li><code class="highlighter-rouge">hooks/pre_push</code> (only used when executing a build rule or <a href="/docs.docker.jp.onthefly/docker-hub/builds/">automated build</a> )</li>
-  <li><code class="highlighter-rouge">hooks/post_push</code> (only used when executing a build rule or <a href="/docs.docker.jp.onthefly/docker-hub/builds/">automated build</a> )</li>
+  <li><code class="language-plaintext highlighter-rouge">hooks/post_checkout</code></li>
+  <li><code class="language-plaintext highlighter-rouge">hooks/pre_build</code></li>
+  <li><code class="language-plaintext highlighter-rouge">hooks/post_build</code></li>
+  <li><code class="language-plaintext highlighter-rouge">hooks/pre_test</code></li>
+  <li><code class="language-plaintext highlighter-rouge">hooks/post_test</code></li>
+  <li><code class="language-plaintext highlighter-rouge">hooks/pre_push</code> (only used when executing a build rule or <a href="/docs.docker.jp.onthefly/docker-hub/builds/">automated build</a> )</li>
+  <li><code class="language-plaintext highlighter-rouge">hooks/post_push</code> (only used when executing a build rule or <a href="/docs.docker.jp.onthefly/docker-hub/builds/">automated build</a> )</li>
 </ul>
 
 <h3 id="build-hook-examples">Build hook examples</h3>
@@ -183,13 +183,13 @@ folder. Hook files can include both <code class="highlighter-rouge">docker</code
 
 <p>Docker Hub allows you to define build environment variables either in the hook files, or from the automated build interface (which you can then reference in hooks).</p>
 
-<p>In the following example, we define a build hook that uses <code class="highlighter-rouge">docker build</code> arguments to set the variable <code class="highlighter-rouge">CUSTOM</code> based on the value of variable we defined using the Docker Hub build settings. <code class="highlighter-rouge">$DOCKERFILE_PATH</code> is a variable that we provide with the name of the Dockerfile we wish to build, and <code class="highlighter-rouge">$IMAGE_NAME</code> is the name of the image being built.</p>
+<p>In the following example, we define a build hook that uses <code class="language-plaintext highlighter-rouge">docker build</code> arguments to set the variable <code class="language-plaintext highlighter-rouge">CUSTOM</code> based on the value of variable we defined using the Docker Hub build settings. <code class="language-plaintext highlighter-rouge">$DOCKERFILE_PATH</code> is a variable that we provide with the name of the Dockerfile we wish to build, and <code class="language-plaintext highlighter-rouge">$IMAGE_NAME</code> is the name of the image being built.</p>
 
 <pre><code class="language-none">docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 </code></pre>
 
 <blockquote>
-  <p><strong>Caution</strong>: A <code class="highlighter-rouge">hooks/build</code> file overrides the basic <a href="/engine/reference/commandline/build/">docker build</a> command
+  <p><strong>Caution</strong>: A <code class="language-plaintext highlighter-rouge">hooks/build</code> file overrides the basic <a href="/engine/reference/commandline/build/">docker build</a> command
 used by the builder, so you must include a similar build command in the hook or
 the automated build fails.</p>
 </blockquote>
@@ -198,19 +198,19 @@ the automated build fails.</p>
 
 <h4 id="two-phase-build">Two-phase build</h4>
 
-<p>If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the <code class="highlighter-rouge">hooks/pre_build</code> file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary that is required before the build.</p>
+<p>If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the <code class="language-plaintext highlighter-rouge">hooks/pre_build</code> file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary that is required before the build.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nb">echo</span> <span class="s2">"=&gt; Building the binary"</span>
 docker run <span class="nt">--privileged</span> <span class="se">\</span>
-  <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/src <span class="se">\</span>
+  <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/src <span class="se">\</span>
   <span class="nt">-v</span> /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
   centurylink/golang-builder
 </code></pre></div></div>
 
 <h4 id="push-to-multiple-repos">Push to multiple repos</h4>
 
-<p>By default the build process pushes the image only to the repository where the build settings are configured. If you need to push the same image to multiple repositories, you can set up a <code class="highlighter-rouge">post_push</code> hook to add additional tags and push to more repositories.</p>
+<p>By default the build process pushes the image only to the repository where the build settings are configured. If you need to push the same image to multiple repositories, you can set up a <code class="language-plaintext highlighter-rouge">post_push</code> hook to add additional tags and push to more repositories.</p>
 
 <pre><code class="language-none">docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
 docker push $DOCKER_REPO:$SOURCE_COMMIT
@@ -224,21 +224,21 @@ of minimizing the amount of data transfer necessary from the repository and
 speeding up the build because it pulls only the minimal code necessary.</p>
 
 <p>Because of this, if you need to perform a custom action that relies on a different
-branch (such as a <code class="highlighter-rouge">post_push</code> hook), you can’t checkout that branch, unless
+branch (such as a <code class="language-plaintext highlighter-rouge">post_push</code> hook), you can’t checkout that branch, unless
 you do one of the following:</p>
 
 <ul>
   <li>
     <p>You can get a shallow checkout of the target branch by doing the following:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git fetch origin branch:mytargetbranch --depth 1
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git fetch origin branch:mytargetbranch --depth 1
 </code></pre></div>    </div>
   </li>
   <li>
     <p>You can also “unshallow” the clone, which fetches the whole Git history (and potentially
-takes a long time / moves a lot of data) by using the <code class="highlighter-rouge">--unshallow</code> flag on the fetch:</p>
+takes a long time / moves a lot of data) by using the <code class="language-plaintext highlighter-rouge">--unshallow</code> flag on the fetch:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git fetch --unshallow origin
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git fetch --unshallow origin
 </code></pre></div>    </div>
   </li>
 </ul>

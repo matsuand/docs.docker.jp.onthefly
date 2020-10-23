@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm でのノード管理 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm でのノード管理" />
   <meta property="og:description" content="Manage existing nodes in a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/manage-nodes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm でのノード管理","description":"Manage existing nodes in a swarm","url":"https://docs.docker.com/engine/swarm/manage-nodes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    3 分
+    4 分
   
 </span>
 
@@ -117,7 +117,7 @@
 
 <h2 id="list-nodes">ノードの一覧表示</h2>
 
-<p>Swarm 内のノード一覧を表示するには、マネージャーノードから<code class="highlighter-rouge">docker node ls</code>を実行します。</p>
+<p>Swarm 内のノード一覧を表示するには、マネージャーノードから<code class="language-plaintext highlighter-rouge">docker node ls</code>を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node <span class="nb">ls
 
@@ -129,25 +129,25 @@ e7p8btxeu3ioshyuj6lxiv6g0    node-2    Ready   Active
 ehkv3bcimagdese79dn78otj5 <span class="k">*</span>  node-1    Ready   Active        Leader
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">AVAILABILITY</code>欄は、そのノードに対してスケジューラーがタスクを割り当てることができるかどうかを表わします。</p>
+<p><code class="language-plaintext highlighter-rouge">AVAILABILITY</code>欄は、そのノードに対してスケジューラーがタスクを割り当てることができるかどうかを表わします。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">Active</code> は、スケジューラーがノードにタスクを割り当てられることを表わします。</li>
-  <li><code class="highlighter-rouge">Pause</code> は、スケジューラーがノードに新たなタスクを割り当てられないことを表わします。
+  <li><code class="language-plaintext highlighter-rouge">Active</code> は、スケジューラーがノードにタスクを割り当てられることを表わします。</li>
+  <li><code class="language-plaintext highlighter-rouge">Pause</code> は、スケジューラーがノードに新たなタスクを割り当てられないことを表わします。
 ただし既存のタスクは実行し続けることができます。</li>
-  <li><code class="highlighter-rouge">Drain</code> は、スケジューラーがノードに新たなタスクを割り当てられないことを表わします。
+  <li><code class="language-plaintext highlighter-rouge">Drain</code> は、スケジューラーがノードに新たなタスクを割り当てられないことを表わします。
  スケジューラーは既存のタスクを停止させて、利用可能な別のノードにタスクをスケジューリングします。</li>
 </ul>
 
-<p><code class="highlighter-rouge">MANAGER STATUS</code>欄は、Raft 合意（Raft consensus）に従ったノードの参加状況を表わします。</p>
+<p><code class="language-plaintext highlighter-rouge">MANAGER STATUS</code>欄は、Raft 合意（Raft consensus）に従ったノードの参加状況を表わします。</p>
 
 <ul>
   <li>表示がないものはワーカーノードであり、Swarm 管理に参加していないことを表わします。</li>
-  <li><code class="highlighter-rouge">Leader</code>（リーダー） は、主となるマネージャーノードであることを表わします。
+  <li><code class="language-plaintext highlighter-rouge">Leader</code>（リーダー） は、主となるマネージャーノードであることを表わします。
 Swarm において、すべての Swarm 管理操作やオーケストレーション決定を行います。</li>
-  <li><code class="highlighter-rouge">Reachable</code>（到達可能）は、Raft 合意（Raft consensus）の多数票（quorum）に参加しているマネージャーノードを表わします。
+  <li><code class="language-plaintext highlighter-rouge">Reachable</code>（到達可能）は、Raft 合意（Raft consensus）の多数票（quorum）に参加しているマネージャーノードを表わします。
 リーダーノードが利用不能になったときに、新たなリーダーとして選任される資格を持つノードです。</li>
-  <li><code class="highlighter-rouge">Unavailable</code>（利用不能）は、他のマネージャーとの通信ができなくなっているマネージャーを表わします。
+  <li><code class="language-plaintext highlighter-rouge">Unavailable</code>（利用不能）は、他のマネージャーとの通信ができなくなっているマネージャーを表わします。
 マネージャーノードが利用不能になった場合、新たなマネージャーノードを Swarm に参加させるか、ワーカーノードをマネージャーに昇格させる必要があります。</li>
 </ul>
 
@@ -155,9 +155,9 @@ Swarm において、すべての Swarm 管理操作やオーケストレーシ�
 
 <h2 id="inspect-an-individual-node">ノードの詳細表示</h2>
 
-<p>マネージャーノード上において<code class="highlighter-rouge">docker node inspect &lt;NODE-ID&gt;</code>を実行して、個々のノードについての詳細を確認することができます。
+<p>マネージャーノード上において<code class="language-plaintext highlighter-rouge">docker node inspect &lt;NODE-ID&gt;</code>を実行して、個々のノードについての詳細を確認することができます。
 出力はデフォルトで JSON 形式です。
-<code class="highlighter-rouge">--pretty</code>フラグを指定すれば、読みやすい書式で出力することができます。
+<code class="language-plaintext highlighter-rouge">--pretty</code>フラグを指定すれば、読みやすい書式で出力することができます。
 たとえば以下のとおりです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node inspect self <span class="nt">--pretty</span>
@@ -206,7 +206,7 @@ Plugins:
   <li>利用不能や一時停止したノードを、利用可能な状態に戻すことができます。</li>
 </ul>
 
-<p>たとえばマネージャーノードの利用状況を<code class="highlighter-rouge">Drain</code>にするには以下を行います。</p>
+<p>たとえばマネージャーノードの利用状況を<code class="language-plaintext highlighter-rouge">Drain</code>にするには以下を行います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node update <span class="nt">--availability</span> drain node-1
 
@@ -221,10 +221,10 @@ node-1
 ノードラベルはサービスの制約を示すものとして利用することもできます。
 サービスを作成するときに、スケジューラーのノードに対するタスク割り当てに制限がある場合には、制約を適用してください。</p>
 
-<p>マネージャーノード上から<code class="highlighter-rouge">docker node update --label-add</code>を実行して、ノードにラベルメタデータを追加します。
-<code class="highlighter-rouge">--label-add</code>フラグは、単独の<code class="highlighter-rouge">&lt;key&gt;</code>、または<code class="highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code>のペア表記のいずれも可です。</p>
+<p>マネージャーノード上から<code class="language-plaintext highlighter-rouge">docker node update --label-add</code>を実行して、ノードにラベルメタデータを追加します。
+<code class="language-plaintext highlighter-rouge">--label-add</code>フラグは、単独の<code class="language-plaintext highlighter-rouge">&lt;key&gt;</code>、または<code class="language-plaintext highlighter-rouge">&lt;key&gt;=&lt;value&gt;</code>のペア表記のいずれも可です。</p>
 
-<p>ラベルを追加するノードに対して、一度だけ<code class="highlighter-rouge">--label-add</code>フラグをつけて以下を実行します。</p>
+<p>ラベルを追加するノードに対して、一度だけ<code class="language-plaintext highlighter-rouge">--label-add</code>フラグをつけて以下を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node update <span class="nt">--label-add</span> foo <span class="nt">--label-add</span> <span class="nv">bar</span><span class="o">=</span>baz node-1
 
@@ -245,7 +245,7 @@ Docker デーモン <a href="/docs.docker.jp.onthefly/config/labels-custom-metad
 これを行ったからといって、おそらくセキュリティに直接関係しないはずです。
 こういったラベルなら Swarm オーケストレーターは、より「安心して」利用することができます。</p>
 
-<p>サービスの制約に関する詳細は <a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_create/">CLI リファレンスの<code class="highlighter-rouge">docker service create</code></a> を参照してください。</p>
+<p>サービスの制約に関する詳細は <a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_create/">CLI リファレンスの<code class="language-plaintext highlighter-rouge">docker service create</code></a> を参照してください。</p>
 
 <h3 id="promote-or-demote-a-node">ノードの昇格と降格</h3>
 
@@ -258,7 +258,7 @@ Docker デーモン <a href="/docs.docker.jp.onthefly/config/labels-custom-metad
 詳しくは <a href="/docs.docker.jp.onthefly/engine/swarm/admin_guide/">Swarm 管理ガイド</a> を参照してください。</p>
 </blockquote>
 
-<p>1 つあるいは複数のノードを昇格させるには、マネージャーノードから<code class="highlighter-rouge">docker node promote</code>を実行します。</p>
+<p>1 つあるいは複数のノードを昇格させるには、マネージャーノードから<code class="language-plaintext highlighter-rouge">docker node promote</code>を実行します。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#origin1">コマンド表記</a></li>
@@ -268,7 +268,7 @@ Docker デーモン <a href="/docs.docker.jp.onthefly/config/labels-custom-metad
   <div id="origin1" class="tab-pane fade in active">
     <div class="language-bash highlighter-rouge">
       <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node promote node-3 node-2
+        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node promote node-3 node-2
 
 Node node-3 promoted to a manager in the swarm.
 Node node-2 promoted to a manager in the swarm.
@@ -280,7 +280,7 @@ Node node-2 promoted to a manager in the swarm.
 
     <div class="language-bash highlighter-rouge">
       <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node promote node-3 node-2
+        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node promote node-3 node-2
 
 ノード node-3 がこの Swarm においてマネージャーに昇格しました。
 ノード node-2 がこの Swarm においてマネージャーに昇格しました。
@@ -291,7 +291,7 @@ Node node-2 promoted to a manager in the swarm.
   </div>
 </div>
 
-<p>1 つあるいは複数のノードを降格させるには、マネージャーノードから<code class="highlighter-rouge">docker node demote</code>を実行します。</p>
+<p>1 つあるいは複数のノードを降格させるには、マネージャーノードから<code class="language-plaintext highlighter-rouge">docker node demote</code>を実行します。</p>
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#origin2">コマンド表記</a></li>
@@ -301,7 +301,7 @@ Node node-2 promoted to a manager in the swarm.
   <div id="origin2" class="tab-pane fade in active">
     <div class="language-bash highlighter-rouge">
       <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node demote node-3 node-2
+        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node demote node-3 node-2
 
 Manager node-3 demoted in the swarm.
 Manager node-2 demoted in the swarm.
@@ -313,7 +313,7 @@ Manager node-2 demoted in the swarm.
 
     <div class="language-bash highlighter-rouge">
       <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node demote node-3 node-2
+        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker node demote node-3 node-2
 
 ノード node-3 がこの Swarm において降格しました。
 ノード node-2 がこの Swarm において降格しました。
@@ -324,26 +324,26 @@ Manager node-2 demoted in the swarm.
   </div>
 </div>
 
-<p><code class="highlighter-rouge">docker node promote</code>と<code class="highlighter-rouge">docker node demote</code>は、それぞれ<code class="highlighter-rouge">docker node update --role manager</code>と<code class="highlighter-rouge">docker node update --role worker</code>の省略形です。</p>
+<p><code class="language-plaintext highlighter-rouge">docker node promote</code>と<code class="language-plaintext highlighter-rouge">docker node demote</code>は、それぞれ<code class="language-plaintext highlighter-rouge">docker node update --role manager</code>と<code class="language-plaintext highlighter-rouge">docker node update --role worker</code>の省略形です。</p>
 
 <h2 id="install-plugins-on-swarm-nodes">Swarm ノードへのプラグインのインストール</h2>
 
 <p>Swarm サービスが <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/">プラグイン</a> をいくつか必要としている場合は、サービスがデプロイされる可能性のあるすべてのノード上において、そのプラグインが利用できることが必要です。
 プラグインのインストールは、各ノード上において手動で行うか、スクリプトを用意して行うことになります。
 Docker 17.07 およびそれ以降においては、Docker API を利用するグローバルサービスと同様の方法により、プラグインをデプロイすることができます。
-その際には<code class="highlighter-rouge">ContainerSpec</code>ではなく<code class="highlighter-rouge">PluginSpec</code>を利用します。</p>
+その際には<code class="language-plaintext highlighter-rouge">ContainerSpec</code>ではなく<code class="language-plaintext highlighter-rouge">PluginSpec</code>を利用します。</p>
 
 <blockquote>
   <p><strong>メモ</strong>: 今のところ、Docker CLI や Docker Compose を使って、プラグインを Swarm にデプロイする手段はありません。
 さらにプライベートリポジトリからプラグインをインストールすることもできません。</p>
 </blockquote>
 
-<p>プラグイン開発者が <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/#json-specification"><code class="highlighter-rouge">PluginSpec</code></a> というものを定義しています。
-Docker ノードすべてにプラグインをインストールするには、<code class="highlighter-rouge">TaskTemplate</code>内に<code class="highlighter-rouge">PluginSpec</code>JSON を定義して <a href="/engine/api/v1.31/#operation/ServiceCreate"><code class="highlighter-rouge">service/create</code></a> API を利用します。</p>
+<p>プラグイン開発者が <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/#json-specification"><code class="language-plaintext highlighter-rouge">PluginSpec</code></a> というものを定義しています。
+Docker ノードすべてにプラグインをインストールするには、<code class="language-plaintext highlighter-rouge">TaskTemplate</code>内に<code class="language-plaintext highlighter-rouge">PluginSpec</code>JSON を定義して <a href="/engine/api/v1.31/#operation/ServiceCreate"><code class="language-plaintext highlighter-rouge">service/create</code></a> API を利用します。</p>
 
 <h2 id="leave-the-swarm">Swarm からのノード除外</h2>
 
-<p>ノード上において<code class="highlighter-rouge">docker swarm leave</code>コマンドを実行すると、Swarm からそのノードが除外されます。</p>
+<p>ノード上において<code class="language-plaintext highlighter-rouge">docker swarm leave</code>コマンドを実行すると、Swarm からそのノードが除外されます。</p>
 
 <p>たとえばワーカーノードを Swarm から除外します。</p>
 
@@ -355,7 +355,7 @@ Docker ノードすべてにプラグインをインストールするには、<
   <div id="origin3" class="tab-pane fade in active">
     <div class="language-bash highlighter-rouge">
       <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm leave
+        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm leave
 
 Node left the swarm.
 </code></pre></div>        </div>
@@ -366,7 +366,7 @@ Node left the swarm.
 
     <div class="language-bash highlighter-rouge">
       <div class="highlight">
-        <div class="highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm leave
+        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker swarm leave
 
 ノードが Swarm から除外されました。
 </code></pre></div>        </div>
@@ -380,17 +380,17 @@ Node left the swarm.
 オーケストレーターは、そのノードに対してタスクをスケジュールすることはなくなります。</p>
 
 <p>除外するノードがマネージャーノードの場合、quorum を維持することを警告するメッセージが表示されます。
-警告表示をなくすには<code class="highlighter-rouge">--force</code>フラグをつけます。
+警告表示をなくすには<code class="language-plaintext highlighter-rouge">--force</code>フラグをつけます。
 最後に残ったマネージャーノードが除外されてしまうと、Swarm は利用不能になります。
 これに対しては障害復旧の手段を講じるしかありません。</p>
 
 <p>quorum の維持や障害復旧に関する詳細は <a href="/docs.docker.jp.onthefly/engine/swarm/admin_guide/">Swarm 管理ガイド</a> を参照してください。</p>
 
-<p>ノードを Swarm から除外した後に、マネージャーノード上において<code class="highlighter-rouge">docker node rm</code>コマンドを実行すれば、ノード一覧からそのノードを削除することができます。</p>
+<p>ノードを Swarm から除外した後に、マネージャーノード上において<code class="language-plaintext highlighter-rouge">docker node rm</code>コマンドを実行すれば、ノード一覧からそのノードを削除することができます。</p>
 
 <p>たとえば以下のとおりです。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node rm node-2
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker node <span class="nb">rm </span>node-2
 </code></pre></div></div>
 
 <h2 id="learn-more">さらに詳しく</h2>

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the Device Mapper storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the Device Mapper storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of device mapper driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the Device Mapper storage driver","description":"Learn how to optimize your use of device mapper driver.","url":"https://docs.docker.com/storage/storagedriver/device-mapper-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,20 +102,20 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    28 分
+    29 分
   
 </span>
 <p>Device Mapper is a kernel-based framework that underpins many advanced
-volume management technologies on Linux. Docker’s <code class="highlighter-rouge">devicemapper</code> storage driver
+volume management technologies on Linux. Docker’s <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver
 leverages the thin provisioning and snapshotting capabilities of this framework
 for image and container management. This article refers to the Device Mapper
-storage driver as <code class="highlighter-rouge">devicemapper</code>, and the kernel framework as <em>Device Mapper</em>.</p>
+storage driver as <code class="language-plaintext highlighter-rouge">devicemapper</code>, and the kernel framework as <em>Device Mapper</em>.</p>
 
-<p>For the systems where it is supported, <code class="highlighter-rouge">devicemapper</code> support is included in
+<p>For the systems where it is supported, <code class="language-plaintext highlighter-rouge">devicemapper</code> support is included in
 the Linux kernel. However, specific configuration is required to use it with
 Docker.</p>
 
-<p>The <code class="highlighter-rouge">devicemapper</code> driver uses block devices dedicated to Docker and operates at
+<p>The <code class="language-plaintext highlighter-rouge">devicemapper</code> driver uses block devices dedicated to Docker and operates at
 the block level, rather than the file level. These devices can be extended by
 adding physical storage to your Docker host, and they perform better than using
 a filesystem at the operating system (OS) level.</p>
@@ -123,35 +123,35 @@ a filesystem at the operating system (OS) level.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">devicemapper</code> is supported on Docker Engine - Community running on CentOS, Fedora,
+  <li><code class="language-plaintext highlighter-rouge">devicemapper</code> is supported on Docker Engine - Community running on CentOS, Fedora,
 Ubuntu, or Debian.</li>
-  <li><code class="highlighter-rouge">devicemapper</code> requires the <code class="highlighter-rouge">lvm2</code> and <code class="highlighter-rouge">device-mapper-persistent-data</code> packages
+  <li><code class="language-plaintext highlighter-rouge">devicemapper</code> requires the <code class="language-plaintext highlighter-rouge">lvm2</code> and <code class="language-plaintext highlighter-rouge">device-mapper-persistent-data</code> packages
 to be installed.</li>
   <li>Changing the storage driver makes any containers you have already
-created inaccessible on the local system. Use <code class="highlighter-rouge">docker save</code> to save containers,
+created inaccessible on the local system. Use <code class="language-plaintext highlighter-rouge">docker save</code> to save containers,
 and push existing images to Docker Hub or a private repository, so you do
 not need to recreate them later.</li>
 </ul>
 
-<h2 id="configure-docker-with-the-devicemapper-storage-driver">Configure Docker with the <code class="highlighter-rouge">devicemapper</code> storage driver</h2>
+<h2 id="configure-docker-with-the-devicemapper-storage-driver">Configure Docker with the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver</h2>
 
 <p>Before following these procedures, you must first meet all the
 <a href="#prerequisites">prerequisites</a>.</p>
 
-<h3 id="configure-loop-lvm-mode-for-testing">Configure <code class="highlighter-rouge">loop-lvm</code> mode for testing</h3>
+<h3 id="configure-loop-lvm-mode-for-testing">Configure <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode for testing</h3>
 
-<p>This configuration is only appropriate for testing. The <code class="highlighter-rouge">loop-lvm</code> mode makes
+<p>This configuration is only appropriate for testing. The <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode makes
 use of a ‘loopback’ mechanism that allows files on the local disk to be
 read from and written to as if they were an actual physical disk or block
 device.
 However, the addition of the loopback mechanism, and interaction with the OS
 filesystem layer, means that IO operations can be slow and resource-intensive.
 Use of loopback devices can also introduce race conditions.
-However, setting up <code class="highlighter-rouge">loop-lvm</code> mode can help identify basic issues (such as
+However, setting up <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode can help identify basic issues (such as
 missing user space packages, kernel drivers, etc.) ahead of attempting the more
-complex set up required to enable <code class="highlighter-rouge">direct-lvm</code> mode. <code class="highlighter-rouge">loop-lvm</code> mode should
+complex set up required to enable <code class="language-plaintext highlighter-rouge">direct-lvm</code> mode. <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode should
 therefore only be used to perform rudimentary testing prior to configuring
-<code class="highlighter-rouge">direct-lvm</code>.</p>
+<code class="language-plaintext highlighter-rouge">direct-lvm</code>.</p>
 
 <p>For production systems, see
 <a href="#configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</a>.</p>
@@ -164,18 +164,18 @@ therefore only be used to perform rudimentary testing prior to configuring
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Edit <code class="highlighter-rouge">/etc/docker/daemon.json</code>. If it does not yet exist, create it. Assuming
+    <p>Edit <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>. If it does not yet exist, create it. Assuming
 that the file was empty, add the following contents.</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"devicemapper"</span><span class="w">
+  </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"devicemapper"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
 
     <p>See all storage options for each storage driver in the
 <a href="/engine/reference/commandline/dockerd/#storage-driver-options">daemon reference documentation</a></p>
 
-    <p>Docker does not start if the <code class="highlighter-rouge">daemon.json</code> file contains badly-formed JSON.</p>
+    <p>Docker does not start if the <code class="language-plaintext highlighter-rouge">daemon.json</code> file contains badly-formed JSON.</p>
   </li>
   <li>
     <p>Start Docker.</p>
@@ -184,8 +184,8 @@ that the file was empty, add the following contents.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the daemon is using the <code class="highlighter-rouge">devicemapper</code> storage driver. Use the
-<code class="highlighter-rouge">docker info</code> command and look for <code class="highlighter-rouge">Storage Driver</code>.</p>
+    <p>Verify that the daemon is using the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver. Use the
+<code class="language-plaintext highlighter-rouge">docker info</code> command and look for <code class="language-plaintext highlighter-rouge">Storage Driver</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
 
@@ -221,36 +221,36 @@ that the file was empty, add the following contents.</p>
   </li>
 </ol>
 
-<p>This host is running in <code class="highlighter-rouge">loop-lvm</code> mode, which is <strong>not</strong> supported on
-  production systems. This is indicated by the fact that the <code class="highlighter-rouge">Data loop file</code>
-  and a <code class="highlighter-rouge">Metadata loop file</code> are on files under
-  <code class="highlighter-rouge">/var/lib/docker/devicemapper</code>. These are loopback-mounted
+<p>This host is running in <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode, which is <strong>not</strong> supported on
+  production systems. This is indicated by the fact that the <code class="language-plaintext highlighter-rouge">Data loop file</code>
+  and a <code class="language-plaintext highlighter-rouge">Metadata loop file</code> are on files under
+  <code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper</code>. These are loopback-mounted
   sparse files. For production systems, see
   <a href="#configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</a>.</p>
 
 <h3 id="configure-direct-lvm-mode-for-production">Configure direct-lvm mode for production</h3>
 
-<p>Production hosts using the <code class="highlighter-rouge">devicemapper</code> storage driver must use <code class="highlighter-rouge">direct-lvm</code>
+<p>Production hosts using the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver must use <code class="language-plaintext highlighter-rouge">direct-lvm</code>
 mode. This mode uses block devices to create the thin pool. This is faster than
 using loopback devices, uses system resources more efficiently, and block
-devices can grow as needed. However, more setup is required than in <code class="highlighter-rouge">loop-lvm</code>
+devices can grow as needed. However, more setup is required than in <code class="language-plaintext highlighter-rouge">loop-lvm</code>
 mode.</p>
 
 <p>After you have satisfied the <a href="#prerequisites">prerequisites</a>, follow the steps
-below to configure Docker to use the <code class="highlighter-rouge">devicemapper</code> storage driver in
-<code class="highlighter-rouge">direct-lvm</code> mode.</p>
+below to configure Docker to use the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver in
+<code class="language-plaintext highlighter-rouge">direct-lvm</code> mode.</p>
 
 <blockquote>
   <p><strong>Warning</strong>: Changing the storage driver makes any containers you have already
-  created inaccessible on the local system. Use <code class="highlighter-rouge">docker save</code> to save containers,
+  created inaccessible on the local system. Use <code class="language-plaintext highlighter-rouge">docker save</code> to save containers,
   and push existing images to Docker Hub or a private repository, so you do not
   need to recreate them later.</p>
 </blockquote>
 
 <h4 id="allow-docker-to-configure-direct-lvm-mode">Allow Docker to configure direct-lvm mode</h4>
 
-<p>With Docker <code class="highlighter-rouge">17.06</code> and higher, Docker can manage the block device for you,
-simplifying configuration of <code class="highlighter-rouge">direct-lvm</code> mode. <strong>This is appropriate for fresh
+<p>With Docker <code class="language-plaintext highlighter-rouge">17.06</code> and higher, Docker can manage the block device for you,
+simplifying configuration of <code class="language-plaintext highlighter-rouge">direct-lvm</code> mode. <strong>This is appropriate for fresh
 Docker setups only.</strong> You can only use a single block device. If you need to
 use multiple block devices, <a href="#configure-direct-lvm-mode-manually">configure direct-lvm mode
 manually</a> instead. The following new
@@ -268,57 +268,57 @@ configuration options have been added:</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.directlvm_device</code></td>
-      <td style="text-align: left">The path to the block device to configure for <code class="highlighter-rouge">direct-lvm</code>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.directlvm_device</code></td>
+      <td style="text-align: left">The path to the block device to configure for <code class="language-plaintext highlighter-rouge">direct-lvm</code>.</td>
       <td style="text-align: left">Yes</td>
       <td style="text-align: left"> </td>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.directlvm_device="/dev/xvdf"</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.directlvm_device="/dev/xvdf"</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_percent</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_percent</code></td>
       <td style="text-align: left">The percentage of space to use for storage from the passed in block device.</td>
       <td style="text-align: left">No</td>
       <td style="text-align: left">95</td>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_percent=95</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_percent=95</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_metapercent</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_metapercent</code></td>
       <td style="text-align: left">The percentage of space to use for metadata storage from the passed-in block device.</td>
       <td style="text-align: left">No</td>
       <td style="text-align: left">1</td>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_metapercent=1</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_metapercent=1</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_autoextend_threshold</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_autoextend_threshold</code></td>
       <td style="text-align: left">The threshold for when lvm should automatically extend the thin pool as a percentage of the total storage space.</td>
       <td style="text-align: left">No</td>
       <td style="text-align: left">80</td>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_autoextend_threshold=80</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_autoextend_threshold=80</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_autoextend_percent</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_autoextend_percent</code></td>
       <td style="text-align: left">The percentage to increase the thin pool by when an autoextend is triggered.</td>
       <td style="text-align: left">No</td>
       <td style="text-align: left">20</td>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.thinp_autoextend_percent=20</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.thinp_autoextend_percent=20</code></td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.directlvm_device_force</code></td>
-      <td style="text-align: left">Whether to format the block device even if a filesystem already exists on it. If set to <code class="highlighter-rouge">false</code> and a filesystem is present, an error is logged and the filesystem is left intact.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.directlvm_device_force</code></td>
+      <td style="text-align: left">Whether to format the block device even if a filesystem already exists on it. If set to <code class="language-plaintext highlighter-rouge">false</code> and a filesystem is present, an error is logged and the filesystem is left intact.</td>
       <td style="text-align: left">No</td>
       <td style="text-align: left">false</td>
-      <td style="text-align: left"><code class="highlighter-rouge">dm.directlvm_device_force=true</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">dm.directlvm_device_force=true</code></td>
     </tr>
   </tbody>
 </table>
 
-<p>Edit the <code class="highlighter-rouge">daemon.json</code> file and set the appropriate options, then restart Docker
-for the changes to take effect. The following <code class="highlighter-rouge">daemon.json</code> configuration sets all of the
+<p>Edit the <code class="language-plaintext highlighter-rouge">daemon.json</code> file and set the appropriate options, then restart Docker
+for the changes to take effect. The following <code class="language-plaintext highlighter-rouge">daemon.json</code> configuration sets all of the
 options in the table above.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"devicemapper"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"storage-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"devicemapper"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"storage-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"dm.directlvm_device=/dev/xdf"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"dm.thinp_percent=95"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"dm.thinp_metapercent=1"</span><span class="p">,</span><span class="w">
@@ -346,15 +346,15 @@ for you is not supported and causes an error.</p>
 
 <p>The procedure below creates a logical volume configured as a thin pool to
 use as backing for the storage pool. It assumes that you have a spare block
-device at <code class="highlighter-rouge">/dev/xvdf</code> with enough free space to complete the task. The device
+device at <code class="language-plaintext highlighter-rouge">/dev/xvdf</code> with enough free space to complete the task. The device
 identifier and volume sizes may be different in your environment and you
 should substitute your own values throughout the procedure. The procedure also
-assumes that the Docker daemon is in the <code class="highlighter-rouge">stopped</code> state.</p>
+assumes that the Docker daemon is in the <code class="language-plaintext highlighter-rouge">stopped</code> state.</p>
 
 <ol>
   <li>
     <p>Identify the block device you want to use. The device is located under
-<code class="highlighter-rouge">/dev/</code> (such as <code class="highlighter-rouge">/dev/xvdf</code>) and needs enough free space to store the
+<code class="language-plaintext highlighter-rouge">/dev/</code> (such as <code class="language-plaintext highlighter-rouge">/dev/xvdf</code>) and needs enough free space to store the
 images and container layers for the workloads that host runs.
 A solid state drive is ideal.</p>
   </li>
@@ -369,18 +369,18 @@ A solid state drive is ideal.</p>
 
     <ul>
       <li>
-        <p><strong>RHEL / CentOS</strong>: <code class="highlighter-rouge">device-mapper-persistent-data</code>, <code class="highlighter-rouge">lvm2</code>, and all
+        <p><strong>RHEL / CentOS</strong>: <code class="language-plaintext highlighter-rouge">device-mapper-persistent-data</code>, <code class="language-plaintext highlighter-rouge">lvm2</code>, and all
 dependencies</p>
       </li>
       <li>
-        <p><strong>Ubuntu / Debian</strong>: <code class="highlighter-rouge">thin-provisioning-tools</code>, <code class="highlighter-rouge">lvm2</code>, and all
+        <p><strong>Ubuntu / Debian</strong>: <code class="language-plaintext highlighter-rouge">thin-provisioning-tools</code>, <code class="language-plaintext highlighter-rouge">lvm2</code>, and all
 dependencies</p>
       </li>
     </ul>
   </li>
   <li>
     <p>Create a physical volume on your block device from step 1, using the
-<code class="highlighter-rouge">pvcreate</code> command. Substitute your device name for <code class="highlighter-rouge">/dev/xvdf</code>.</p>
+<code class="language-plaintext highlighter-rouge">pvcreate</code> command. Substitute your device name for <code class="language-plaintext highlighter-rouge">/dev/xvdf</code>.</p>
 
     <blockquote>
       <p><strong>Warning</strong>: The next few steps are destructive, so be sure that you have
@@ -393,7 +393,7 @@ Physical volume <span class="s2">"/dev/xvdf"</span> successfully created.
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a <code class="highlighter-rouge">docker</code> volume group on the same device, using the <code class="highlighter-rouge">vgcreate</code>
+    <p>Create a <code class="language-plaintext highlighter-rouge">docker</code> volume group on the same device, using the <code class="language-plaintext highlighter-rouge">vgcreate</code>
 command.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vgcreate docker /dev/xvdf
@@ -402,8 +402,8 @@ Volume group <span class="s2">"docker"</span> successfully created
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create two logical volumes named <code class="highlighter-rouge">thinpool</code> and <code class="highlighter-rouge">thinpoolmeta</code> using the
-<code class="highlighter-rouge">lvcreate</code> command. The last parameter specifies the amount of free space
+    <p>Create two logical volumes named <code class="language-plaintext highlighter-rouge">thinpool</code> and <code class="language-plaintext highlighter-rouge">thinpoolmeta</code> using the
+<code class="language-plaintext highlighter-rouge">lvcreate</code> command. The last parameter specifies the amount of free space
 to allow for automatic expanding of the data or metadata if space runs low,
 as a temporary stop-gap. These are the recommended values.</p>
 
@@ -418,7 +418,7 @@ Logical volume <span class="s2">"thinpoolmeta"</span> created.
   </li>
   <li>
     <p>Convert the volumes to a thin pool and a storage location for metadata for
-the thin pool, using the <code class="highlighter-rouge">lvconvert</code> command.</p>
+the thin pool, using the <code class="language-plaintext highlighter-rouge">lvconvert</code> command.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>lvconvert <span class="nt">-y</span> <span class="se">\</span>
 <span class="nt">--zero</span> n <span class="se">\</span>
@@ -433,19 +433,19 @@ Converted docker/thinpool to thin pool.
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>Configure autoextension of thin pools via an <code class="highlighter-rouge">lvm</code> profile.</p>
+    <p>Configure autoextension of thin pools via an <code class="language-plaintext highlighter-rouge">lvm</code> profile.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/lvm/profile/docker-thinpool.profile
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Specify <code class="highlighter-rouge">thin_pool_autoextend_threshold</code> and <code class="highlighter-rouge">thin_pool_autoextend_percent</code>
+    <p>Specify <code class="language-plaintext highlighter-rouge">thin_pool_autoextend_threshold</code> and <code class="language-plaintext highlighter-rouge">thin_pool_autoextend_percent</code>
 values.</p>
 
-    <p><code class="highlighter-rouge">thin_pool_autoextend_threshold</code> is the percentage of space used before <code class="highlighter-rouge">lvm</code>
+    <p><code class="language-plaintext highlighter-rouge">thin_pool_autoextend_threshold</code> is the percentage of space used before <code class="language-plaintext highlighter-rouge">lvm</code>
 attempts to autoextend the available space (100 = disabled, not recommended).</p>
 
-    <p><code class="highlighter-rouge">thin_pool_autoextend_percent</code> is the amount of space to add to the device
+    <p><code class="language-plaintext highlighter-rouge">thin_pool_autoextend_percent</code> is the amount of space to add to the device
 when automatically extending (0 = disabled).</p>
 
     <p>The example below adds 20% more capacity when the disk usage reaches
@@ -460,7 +460,7 @@ when automatically extending (0 = disabled).</p>
     <p>Save the file.</p>
   </li>
   <li>
-    <p>Apply the LVM profile, using the <code class="highlighter-rouge">lvchange</code> command.</p>
+    <p>Apply the LVM profile, using the <code class="language-plaintext highlighter-rouge">lvchange</code> command.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>lvchange <span class="nt">--metadataprofile</span> docker-thinpool docker/thinpool
 
@@ -476,8 +476,8 @@ LV       VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Co
 thinpool docker twi-a-t--- 95.00g             0.00   0.01                             not monitored
 </code></pre></div>    </div>
 
-    <p>If the output in the <code class="highlighter-rouge">Monitor</code> column reports, as above, that the volume is
-<code class="highlighter-rouge">not monitored</code>, then monitoring needs to be explicitly enabled. Without
+    <p>If the output in the <code class="language-plaintext highlighter-rouge">Monitor</code> column reports, as above, that the volume is
+<code class="language-plaintext highlighter-rouge">not monitored</code>, then monitoring needs to be explicitly enabled. Without
 this step, automatic extension of the logical volume will not occur,
 regardless of any settings in the applied profile.</p>
 
@@ -485,11 +485,11 @@ regardless of any settings in the applied profile.</p>
 </code></pre></div>    </div>
 
     <p>Double check that monitoring is now enabled by running the
-<code class="highlighter-rouge">sudo lvs -o+seg_monitor</code> command a second time. The <code class="highlighter-rouge">Monitor</code> column
-should now report the logical volume is being <code class="highlighter-rouge">monitored</code>.</p>
+<code class="language-plaintext highlighter-rouge">sudo lvs -o+seg_monitor</code> command a second time. The <code class="language-plaintext highlighter-rouge">Monitor</code> column
+should now report the logical volume is being <code class="language-plaintext highlighter-rouge">monitored</code>.</p>
   </li>
   <li>
-    <p>If you have ever run Docker on this host before, or if <code class="highlighter-rouge">/var/lib/docker/</code>
+    <p>If you have ever run Docker on this host before, or if <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>
 exists, move it out of the way so that Docker can use the new LVM pool to
 store the contents of image and containers.</p>
 
@@ -500,16 +500,16 @@ store the contents of image and containers.</p>
 </code></pre></div>    </div>
 
     <p>If any of the following steps fail and you need to restore, you can remove
-<code class="highlighter-rouge">/var/lib/docker</code> and replace it with <code class="highlighter-rouge">/var/lib/docker.bk</code>.</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/docker</code> and replace it with <code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code>.</p>
   </li>
   <li>
-    <p>Edit <code class="highlighter-rouge">/etc/docker/daemon.json</code> and configure the options needed for the
-<code class="highlighter-rouge">devicemapper</code> storage driver. If the file was previously empty, it should
+    <p>Edit <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> and configure the options needed for the
+<code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver. If the file was previously empty, it should
 now contain the following contents:</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"devicemapper"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"storage-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"devicemapper"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"storage-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"dm.thinpooldev=/dev/mapper/docker-thinpool"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"dm.use_deferred_removal=true"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"dm.use_deferred_deletion=true"</span><span class="w">
@@ -531,7 +531,7 @@ now contain the following contents:</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that Docker is using the new configuration using <code class="highlighter-rouge">docker info</code>.</p>
+    <p>Verify that Docker is using the new configuration using <code class="language-plaintext highlighter-rouge">docker info</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
 
@@ -563,14 +563,14 @@ Storage Driver: devicemapper
 &lt;output truncated&gt;
 </code></pre></div>    </div>
 
-    <p>If Docker is configured correctly, the <code class="highlighter-rouge">Data file</code> and <code class="highlighter-rouge">Metadata file</code> is
-blank, and the pool name is <code class="highlighter-rouge">docker-thinpool</code>.</p>
+    <p>If Docker is configured correctly, the <code class="language-plaintext highlighter-rouge">Data file</code> and <code class="language-plaintext highlighter-rouge">Metadata file</code> is
+blank, and the pool name is <code class="language-plaintext highlighter-rouge">docker-thinpool</code>.</p>
   </li>
   <li>
     <p>After you have verified that the configuration is correct, you can remove the
-<code class="highlighter-rouge">/var/lib/docker.bk</code> directory which contains the previous configuration.</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code> directory which contains the previous configuration.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>rm <span class="nt">-rf</span> /var/lib/docker.bk
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker.bk
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -581,17 +581,17 @@ blank, and the pool name is <code class="highlighter-rouge">docker-thinpool</cod
 
 <p>Do not rely on LVM auto-extension alone. The volume group
 automatically extends, but the volume can still fill up. You can monitor
-free space on the volume using <code class="highlighter-rouge">lvs</code> or <code class="highlighter-rouge">lvs -a</code>. Consider using a monitoring
+free space on the volume using <code class="language-plaintext highlighter-rouge">lvs</code> or <code class="language-plaintext highlighter-rouge">lvs -a</code>. Consider using a monitoring
 tool at the OS level, such as Nagios.</p>
 
-<p>To view the LVM logs, you can use <code class="highlighter-rouge">journalctl</code>:</p>
+<p>To view the LVM logs, you can use <code class="language-plaintext highlighter-rouge">journalctl</code>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nt">-fu</span> dm-event.service
 </code></pre></div></div>
 
 <p>If you run into repeated problems with thin pool, you can set the storage option
-<code class="highlighter-rouge">dm.min_free_space</code> to a value (representing a percentage) in
-<code class="highlighter-rouge">/etc/docker/daemon.json</code>. For instance, setting it to <code class="highlighter-rouge">10</code> ensures
+<code class="language-plaintext highlighter-rouge">dm.min_free_space</code> to a value (representing a percentage) in
+<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>. For instance, setting it to <code class="language-plaintext highlighter-rouge">10</code> ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
 <a href="/engine/reference/commandline/dockerd/#storage-driver-options" target="_blank" rel="noopener" class="_">storage driver options in the Engine daemon reference</a>.</p>
@@ -606,25 +606,25 @@ capacity. The specific procedure depends on whether you are using a
 
 <h4 id="resize-a-loop-lvm-thin-pool">Resize a loop-lvm thin pool</h4>
 
-<p>The easiest way to resize a <code class="highlighter-rouge">loop-lvm</code> thin pool is to
+<p>The easiest way to resize a <code class="language-plaintext highlighter-rouge">loop-lvm</code> thin pool is to
 <a href="#use-the-device_tool-utility">use the device_tool utility</a>,
 but you can <a href="#use-operating-system-utilities">use operating system utilities</a>
 instead.</p>
 
 <h5 id="use-the-device_tool-utility">Use the device_tool utility</h5>
 
-<p>A community-contributed script called <code class="highlighter-rouge">device_tool.go</code> is available in the
+<p>A community-contributed script called <code class="language-plaintext highlighter-rouge">device_tool.go</code> is available in the
 <a href="https://github.com/moby/moby/tree/master/contrib/docker-device-tool">moby/moby</a>
-Github repository. You can use this tool to resize a <code class="highlighter-rouge">loop-lvm</code> thin pool,
+Github repository. You can use this tool to resize a <code class="language-plaintext highlighter-rouge">loop-lvm</code> thin pool,
 avoiding the long process above. This tool is not guaranteed to work, but you
-should only be using <code class="highlighter-rouge">loop-lvm</code> on non-production systems.</p>
+should only be using <code class="language-plaintext highlighter-rouge">loop-lvm</code> on non-production systems.</p>
 
-<p>If you do not want to use <code class="highlighter-rouge">device_tool</code>, you can <a href="#use-operating-system-utilities">resize the thin pool manually</a> instead.</p>
+<p>If you do not want to use <code class="language-plaintext highlighter-rouge">device_tool</code>, you can <a href="#use-operating-system-utilities">resize the thin pool manually</a> instead.</p>
 
 <ol>
   <li>
     <p>To use the tool, clone the Github repository, change to the
-<code class="highlighter-rouge">contrib/docker-device-tool</code>, and follow the instructions in the <code class="highlighter-rouge">README.md</code>
+<code class="language-plaintext highlighter-rouge">contrib/docker-device-tool</code>, and follow the instructions in the <code class="language-plaintext highlighter-rouge">README.md</code>
 to compile the tool.</p>
   </li>
   <li>
@@ -638,14 +638,14 @@ to compile the tool.</p>
 <h5 id="use-operating-system-utilities">Use operating system utilities</h5>
 
 <p>If you do not want to <a href="#use-the-device_tool-utility">use the device-tool utility</a>,
-you can resize a <code class="highlighter-rouge">loop-lvm</code> thin pool manually using the following procedure.</p>
+you can resize a <code class="language-plaintext highlighter-rouge">loop-lvm</code> thin pool manually using the following procedure.</p>
 
-<p>In <code class="highlighter-rouge">loop-lvm</code> mode, a loopback device is used to store the data, and another
-to store the metadata. <code class="highlighter-rouge">loop-lvm</code> mode is only supported for testing, because
+<p>In <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode, a loopback device is used to store the data, and another
+to store the metadata. <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode is only supported for testing, because
 it has significant performance and stability drawbacks.</p>
 
-<p>If you are using <code class="highlighter-rouge">loop-lvm</code> mode, the output of <code class="highlighter-rouge">docker info</code> shows file
-paths for <code class="highlighter-rouge">Data loop file</code> and <code class="highlighter-rouge">Metadata loop file</code>:</p>
+<p>If you are using <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode, the output of <code class="language-plaintext highlighter-rouge">docker info</code> shows file
+paths for <code class="language-plaintext highlighter-rouge">Data loop file</code> and <code class="language-plaintext highlighter-rouge">Metadata loop file</code>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info |grep <span class="s1">'loop file'</span>
 
@@ -668,11 +668,11 @@ total 1175492
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Increase the size of the <code class="highlighter-rouge">data</code> file to 200 G using the <code class="highlighter-rouge">truncate</code> command,
+    <p>Increase the size of the <code class="language-plaintext highlighter-rouge">data</code> file to 200 G using the <code class="language-plaintext highlighter-rouge">truncate</code> command,
 which is used to increase <strong>or</strong> decrease the size of a file. Note that
 decreasing the size is a destructive operation.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>truncate <span class="nt">-s</span> 200G /var/lib/docker/devicemapper/data
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo truncate</span> <span class="nt">-s</span> 200G /var/lib/docker/devicemapper/data
 </code></pre></div>    </div>
   </li>
   <li>
@@ -690,13 +690,13 @@ total 1.2G
 the loopback device in memory, in GB. Reload it, then list the size again.
 After the reload, the size is 200 GB.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$[</span> <span class="k">$(</span><span class="nb">sudo </span>blockdev <span class="nt">--getsize64</span> /dev/loop0<span class="k">)</span> / 1024 / 1024 / 1024 <span class="o">]</span>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$[</span> <span class="si">$(</span><span class="nb">sudo </span>blockdev <span class="nt">--getsize64</span> /dev/loop0<span class="si">)</span> / 1024 / 1024 / 1024 <span class="o">]</span>
 
 100
 
 <span class="nv">$ </span><span class="nb">sudo </span>losetup <span class="nt">-c</span> /dev/loop0
 
-<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$[</span> <span class="k">$(</span><span class="nb">sudo </span>blockdev <span class="nt">--getsize64</span> /dev/loop0<span class="k">)</span> / 1024 / 1024 / 1024 <span class="o">]</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nv">$[</span> <span class="si">$(</span><span class="nb">sudo </span>blockdev <span class="nt">--getsize64</span> /dev/loop0<span class="si">)</span> / 1024 / 1024 / 1024 <span class="o">]</span>
 
 200
 </code></pre></div>    </div>
@@ -707,14 +707,14 @@ After the reload, the size is 200 GB.</p>
     <p>a.  Get the pool name first. The pool name is the first field, delimited by
     ` :`. This command extracts it.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
 
     docker-8:1-123141-pool
 </code></pre></div>    </div>
 
     <p>b.  Dump the device mapper table for the thin pool.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo dmsetup table docker-8:1-123141-pool
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo dmsetup table docker-8:1-123141-pool
 
     0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
 </code></pre></div>    </div>
@@ -725,9 +725,9 @@ After the reload, the size is 200 GB.</p>
     419430400 512-k sectors.</p>
 
     <p>d.  Reload the thin pool with the new sector number, using the following
-    three <code class="highlighter-rouge">dmsetup</code>  commands.</p>
+    three <code class="language-plaintext highlighter-rouge">dmsetup</code>  commands.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo dmsetup suspend docker-8:1-123141-pool
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ sudo dmsetup suspend docker-8:1-123141-pool
 
     $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
 
@@ -738,18 +738,18 @@ After the reload, the size is 200 GB.</p>
 
 <h4 id="resize-a-direct-lvm-thin-pool">Resize a direct-lvm thin pool</h4>
 
-<p>To extend a <code class="highlighter-rouge">direct-lvm</code> thin pool, you need to first attach a new block device
+<p>To extend a <code class="language-plaintext highlighter-rouge">direct-lvm</code> thin pool, you need to first attach a new block device
 to the Docker host, and make note of the name assigned to it by the kernel. In
-this example, the new block device is <code class="highlighter-rouge">/dev/xvdg</code>.</p>
+this example, the new block device is <code class="language-plaintext highlighter-rouge">/dev/xvdg</code>.</p>
 
-<p>Follow this procedure to extend a <code class="highlighter-rouge">direct-lvm</code> thin pool, substituting your
+<p>Follow this procedure to extend a <code class="language-plaintext highlighter-rouge">direct-lvm</code> thin pool, substituting your
 block device and other parameters to suit your situation.</p>
 
 <ol>
   <li>
     <p>Gather information about your volume group.</p>
 
-    <p>Use the <code class="highlighter-rouge">pvdisplay</code> command to find the physical block devices currently in
+    <p>Use the <code class="language-plaintext highlighter-rouge">pvdisplay</code> command to find the physical block devices currently in
 use by your thin pool, and the volume group’s name.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>pvdisplay |grep <span class="s1">'VG Name'</span>
@@ -762,7 +762,7 @@ VG Name               docker
 appropriate.</p>
   </li>
   <li>
-    <p>Extend the volume group, using the <code class="highlighter-rouge">vgextend</code> command with the <code class="highlighter-rouge">VG Name</code>
+    <p>Extend the volume group, using the <code class="language-plaintext highlighter-rouge">vgextend</code> command with the <code class="language-plaintext highlighter-rouge">VG Name</code>
 from the previous step, and the name of your <strong>new</strong> block device.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vgextend docker /dev/xvdg
@@ -772,9 +772,9 @@ Volume group <span class="s2">"docker"</span> successfully extended
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Extend the <code class="highlighter-rouge">docker/thinpool</code> logical volume. This command uses 100% of the
+    <p>Extend the <code class="language-plaintext highlighter-rouge">docker/thinpool</code> logical volume. This command uses 100% of the
 volume right away, without auto-extend. To extend the metadata thinpool
-instead, use <code class="highlighter-rouge">docker/thinpool_tmeta</code>.</p>
+instead, use <code class="language-plaintext highlighter-rouge">docker/thinpool_tmeta</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>lvextend <span class="nt">-l</span>+100%FREE <span class="nt">-n</span> docker/thinpool
 
@@ -783,9 +783,9 @@ Logical volume docker/thinpool_tdata successfully resized.
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify the new thin pool size using the <code class="highlighter-rouge">Data Space Available</code> field in the
-output of <code class="highlighter-rouge">docker info</code>. If you extended the <code class="highlighter-rouge">docker/thinpool_tmeta</code> logical
-volume instead, look for <code class="highlighter-rouge">Metadata Space Available</code>.</p>
+    <p>Verify the new thin pool size using the <code class="language-plaintext highlighter-rouge">Data Space Available</code> field in the
+output of <code class="language-plaintext highlighter-rouge">docker info</code>. If you extended the <code class="language-plaintext highlighter-rouge">docker/thinpool_tmeta</code> logical
+volume instead, look for <code class="language-plaintext highlighter-rouge">Metadata Space Available</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Storage Driver: devicemapper
  Pool Name: docker-thinpool
@@ -805,23 +805,23 @@ volume instead, look for <code class="highlighter-rouge">Metadata Space Availabl
   </li>
 </ol>
 
-<h3 id="activate-the-devicemapper-after-reboot">Activate the <code class="highlighter-rouge">devicemapper</code> after reboot</h3>
+<h3 id="activate-the-devicemapper-after-reboot">Activate the <code class="language-plaintext highlighter-rouge">devicemapper</code> after reboot</h3>
 
-<p>If you reboot the host and find that the <code class="highlighter-rouge">docker</code> service failed to start,
+<p>If you reboot the host and find that the <code class="language-plaintext highlighter-rouge">docker</code> service failed to start,
 look for the error, “Non existing device”. You need to re-activate the
 logical volumes with this command:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>lvchange <span class="nt">-ay</span> docker/thinpool
 </code></pre></div></div>
 
-<h2 id="how-the-devicemapper-storage-driver-works">How the <code class="highlighter-rouge">devicemapper</code> storage driver works</h2>
+<h2 id="how-the-devicemapper-storage-driver-works">How the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver works</h2>
 
 <blockquote>
   <p><strong>Warning</strong>: Do not directly manipulate any files or directories within
-<code class="highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
 </blockquote>
 
-<p>Use the <code class="highlighter-rouge">lsblk</code> command to see the devices and their pools, from the operating
+<p>Use the <code class="language-plaintext highlighter-rouge">lsblk</code> command to see the devices and their pools, from the operating
 system’s point of view:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>lsblk
@@ -836,37 +836,37 @@ xvdf                    202:80   0  100G  0 disk
   └─docker-thinpool     253:2    0   95G  0 lvm
 </code></pre></div></div>
 
-<p>Use the <code class="highlighter-rouge">mount</code> command to see the mount-point Docker is using:</p>
+<p>Use the <code class="language-plaintext highlighter-rouge">mount</code> command to see the mount-point Docker is using:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mount |grep devicemapper
 /dev/xvda1 on /var/lib/docker/devicemapper <span class="nb">type </span>xfs <span class="o">(</span>rw,relatime,seclabel,attr2,inode64,noquota<span class="o">)</span>
 </code></pre></div></div>
 
-<p>When you use <code class="highlighter-rouge">devicemapper</code>, Docker stores image and layer contents in the
+<p>When you use <code class="language-plaintext highlighter-rouge">devicemapper</code>, Docker stores image and layer contents in the
 thinpool, and exposes them to containers by mounting them under
-subdirectories of <code class="highlighter-rouge">/var/lib/docker/devicemapper/</code>.</p>
+subdirectories of <code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper/</code>.</p>
 
 <h3 id="image-and-container-layers-on-disk">Image and container layers on-disk</h3>
 
-<p>The <code class="highlighter-rouge">/var/lib/docker/devicemapper/metadata/</code> directory contains metadata about
+<p>The <code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper/metadata/</code> directory contains metadata about
 the Devicemapper configuration itself and about each image and container layer
-that exist. The <code class="highlighter-rouge">devicemapper</code> storage driver uses snapshots, and this metadata
+that exist. The <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver uses snapshots, and this metadata
 include information about those snapshots. These files are in JSON format.</p>
 
-<p>The <code class="highlighter-rouge">/var/lib/docker/devicemapper/mnt/</code> directory contains a mount point for each image
+<p>The <code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper/mnt/</code> directory contains a mount point for each image
 and container layer that exists. Image layer mount points are empty, but a
 container’s mount point shows the container’s filesystem as it appears from
 within the container.</p>
 
 <h3 id="image-layering-and-sharing">Image layering and sharing</h3>
 
-<p>The <code class="highlighter-rouge">devicemapper</code> storage driver uses dedicated block devices rather than
+<p>The <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver uses dedicated block devices rather than
 formatted filesystems, and operates on files at the block level for maximum
 performance during copy-on-write (CoW) operations.</p>
 
 <h4 id="snapshots">Snapshots</h4>
 
-<p>Another feature of <code class="highlighter-rouge">devicemapper</code> is its use of snapshots (also sometimes called
+<p>Another feature of <code class="language-plaintext highlighter-rouge">devicemapper</code> is its use of snapshots (also sometimes called
 <em>thin devices</em> or <em>virtual devices</em>), which store the differences introduced in
 each layer as very small, lightweight thin pools. Snapshots provide many
 benefits:</p>
@@ -875,7 +875,7 @@ benefits:</p>
   <li>
     <p>Layers which are shared in common between containers are only stored on disk
 once, unless they are writable. For instance, if you have 10 different
-images which are all based on <code class="highlighter-rouge">alpine</code>, the <code class="highlighter-rouge">alpine</code> image and all its
+images which are all based on <code class="language-plaintext highlighter-rouge">alpine</code>, the <code class="language-plaintext highlighter-rouge">alpine</code> image and all its
 parent images are only stored once each on disk.</p>
   </li>
   <li>
@@ -884,38 +884,38 @@ that a given file or directory is only copied to the container’s writable
 layer when it is modified or deleted by that container.</p>
   </li>
   <li>
-    <p>Because <code class="highlighter-rouge">devicemapper</code> operates at the block level, multiple blocks in a
+    <p>Because <code class="language-plaintext highlighter-rouge">devicemapper</code> operates at the block level, multiple blocks in a
 writable layer can be modified simultaneously.</p>
   </li>
   <li>
     <p>Snapshots can be backed up using standard OS-level backup utilities. Just
-make a copy of <code class="highlighter-rouge">/var/lib/docker/devicemapper/</code>.</p>
+make a copy of <code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper/</code>.</p>
   </li>
 </ul>
 
 <h4 id="devicemapper-workflow">Devicemapper workflow</h4>
 
-<p>When you start Docker with the <code class="highlighter-rouge">devicemapper</code> storage driver, all objects
+<p>When you start Docker with the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver, all objects
 related to image and container layers are stored in
-<code class="highlighter-rouge">/var/lib/docker/devicemapper/</code>, which is backed by one or more block-level
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper/</code>, which is backed by one or more block-level
 devices, either loopback devices (testing only) or physical disks.</p>
 
 <ul>
   <li>
     <p>The <em>base device</em> is the lowest-level object. This is the thin pool itself.
-You can examine it using <code class="highlighter-rouge">docker info</code>. It contains a filesystem. This base
+You can examine it using <code class="language-plaintext highlighter-rouge">docker info</code>. It contains a filesystem. This base
 device is the starting point for every image and container layer. The base
 device is a Device Mapper implementation detail, rather than a Docker layer.</p>
   </li>
   <li>
     <p>Metadata about the base device and each image or container layer is stored in
-<code class="highlighter-rouge">/var/lib/docker/devicemapper/metadata/</code> in JSON format. These layers are
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper/metadata/</code> in JSON format. These layers are
 copy-on-write snapshots, which means that they are empty until they diverge
 from their parent layers.</p>
   </li>
   <li>
     <p>Each container’s writable layer is mounted on a mountpoint in
-<code class="highlighter-rouge">/var/lib/docker/devicemapper/mnt/</code>. An empty directory exists for each
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/devicemapper/mnt/</code>. An empty directory exists for each
 read-only image layer and each stopped container.</p>
   </li>
 </ul>
@@ -923,29 +923,29 @@ read-only image layer and each stopped container.</p>
 <p>Each image layer is a snapshot of the layer below it. The lowest layer of each
 image is a snapshot of the base device that exists in the pool. When you run a
 container, it is a snapshot of the image the container is based on. The following
-example shows a Docker host with two running containers. The first is a <code class="highlighter-rouge">ubuntu</code>
-container and the second is a <code class="highlighter-rouge">busybox</code> container.</p>
+example shows a Docker host with two running containers. The first is a <code class="language-plaintext highlighter-rouge">ubuntu</code>
+container and the second is a <code class="language-plaintext highlighter-rouge">busybox</code> container.</p>
 
 <p><img src="/docs.docker.jp.onthefly/storage/storagedriver/images/two_dm_container.jpg" alt="ubuntu and busybox image layers" /></p>
 
-<h2 id="how-container-reads-and-writes-work-with-devicemapper">How container reads and writes work with <code class="highlighter-rouge">devicemapper</code></h2>
+<h2 id="how-container-reads-and-writes-work-with-devicemapper">How container reads and writes work with <code class="language-plaintext highlighter-rouge">devicemapper</code></h2>
 
 <h3 id="reading-files">Reading files</h3>
 
-<p>With <code class="highlighter-rouge">devicemapper</code>, reads happen at the block level. The diagram below shows
-the high level process for reading a single block (<code class="highlighter-rouge">0x44f</code>) in an example
+<p>With <code class="language-plaintext highlighter-rouge">devicemapper</code>, reads happen at the block level. The diagram below shows
+the high level process for reading a single block (<code class="language-plaintext highlighter-rouge">0x44f</code>) in an example
 container.</p>
 
 <p><img src="/docs.docker.jp.onthefly/storage/storagedriver/images/dm_container.jpg" alt="reading a block with devicemapper" /></p>
 
-<p>An application makes a read request for block <code class="highlighter-rouge">0x44f</code> in the container. Because
+<p>An application makes a read request for block <code class="language-plaintext highlighter-rouge">0x44f</code> in the container. Because
 the container is a thin snapshot of an image, it doesn’t have the block, but it
 has a pointer to the block on the nearest parent image where it does exist, and
 it reads the block from there. The block now exists in the container’s memory.</p>
 
 <h3 id="writing-files">Writing files</h3>
 
-<p><strong>Writing a new file</strong>: With the <code class="highlighter-rouge">devicemapper</code> driver, writing new data to a
+<p><strong>Writing a new file</strong>: With the <code class="language-plaintext highlighter-rouge">devicemapper</code> driver, writing new data to a
 container is accomplished by an <em>allocate-on-demand</em> operation. Each block of
 the new file is allocated in the container’s writable layer and the block is
 written there.</p>
@@ -956,23 +956,23 @@ modified blocks are written to the container’s writable layer.</p>
 
 <p><strong>Deleting a file or directory</strong>: When you delete a file or directory in a
 container’s writable layer, or when an image layer deletes a file that exists
-in its parent layer, the <code class="highlighter-rouge">devicemapper</code> storage driver intercepts further read
+in its parent layer, the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver intercepts further read
 attempts on that file or directory and responds that the file or directory does
 not exist.</p>
 
 <p><strong>Writing and then deleting a file</strong>: If a container writes to a file and later
 deletes the file, all of those operations happen in the container’s writable
-layer. In that case, if you are using <code class="highlighter-rouge">direct-lvm</code>, the blocks are freed. If you
-use <code class="highlighter-rouge">loop-lvm</code>, the blocks may not be freed. This is another reason not to use
-<code class="highlighter-rouge">loop-lvm</code> in production.</p>
+layer. In that case, if you are using <code class="language-plaintext highlighter-rouge">direct-lvm</code>, the blocks are freed. If you
+use <code class="language-plaintext highlighter-rouge">loop-lvm</code>, the blocks may not be freed. This is another reason not to use
+<code class="language-plaintext highlighter-rouge">loop-lvm</code> in production.</p>
 
 <h2 id="device-mapper-and-docker-performance">Device Mapper and Docker performance</h2>
 
 <ul>
   <li>
-    <p><strong><code class="highlighter-rouge">allocate-on demand</code> performance impact</strong>:</p>
+    <p><strong><code class="language-plaintext highlighter-rouge">allocate-on demand</code> performance impact</strong>:</p>
 
-    <p>The <code class="highlighter-rouge">devicemapper</code> storage driver uses an <code class="highlighter-rouge">allocate-on-demand</code> operation to
+    <p>The <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver uses an <code class="language-plaintext highlighter-rouge">allocate-on-demand</code> operation to
 allocate new blocks from the thin pool into a container’s writable layer.
 Each block is 64KB, so this is the minimum amount of space that is used
 for a write.</p>
@@ -982,7 +982,7 @@ for a write.</p>
 specific block, that block is written to the container’s writable layer.
 Because these writes happen at the level of the block rather than the file,
 performance impact is minimized. However, writing a large number of blocks can
-still negatively impact performance, and the <code class="highlighter-rouge">devicemapper</code> storage driver may
+still negatively impact performance, and the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver may
 actually perform worse than other storage drivers in this scenario. For
 write-heavy workloads, you should use data volumes, which bypass the storage
 driver completely.</p>
@@ -991,12 +991,12 @@ driver completely.</p>
 
 <h3 id="performance-best-practices">Performance best practices</h3>
 
-<p>Keep these things in mind to maximize performance when using the <code class="highlighter-rouge">devicemapper</code>
+<p>Keep these things in mind to maximize performance when using the <code class="language-plaintext highlighter-rouge">devicemapper</code>
 storage driver.</p>
 
 <ul>
   <li>
-    <p><strong>Use <code class="highlighter-rouge">direct-lvm</code></strong>: The <code class="highlighter-rouge">loop-lvm</code> mode is not performant and should never
+    <p><strong>Use <code class="language-plaintext highlighter-rouge">direct-lvm</code></strong>: The <code class="language-plaintext highlighter-rouge">loop-lvm</code> mode is not performant and should never
 be used in production.</p>
   </li>
   <li>
@@ -1004,10 +1004,10 @@ be used in production.</p>
 writes than spinning disks.</p>
   </li>
   <li>
-    <p><strong>Memory usage</strong>: the <code class="highlighter-rouge">devicemapper</code> uses more memory than some other storage
+    <p><strong>Memory usage</strong>: the <code class="language-plaintext highlighter-rouge">devicemapper</code> uses more memory than some other storage
 drivers. Each launched container loads one or more copies of its files into
 memory, depending on how many blocks of the same file are being modified at
-the same time. Due to the memory pressure, the <code class="highlighter-rouge">devicemapper</code> storage driver
+the same time. Due to the memory pressure, the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver
 may not be the right choice for certain workloads in high-density use cases.</p>
   </li>
   <li>
@@ -1019,9 +1019,9 @@ allowing you to share data among containers and persisting even when no
 running container is using them.</p>
   </li>
   <li>
-    <p><strong>Note</strong>: when using <code class="highlighter-rouge">devicemapper</code> and the <code class="highlighter-rouge">json-file</code> log driver, the log
+    <p><strong>Note</strong>: when using <code class="language-plaintext highlighter-rouge">devicemapper</code> and the <code class="language-plaintext highlighter-rouge">json-file</code> log driver, the log
 files generated by a container are still stored in Docker’s dataroot directory,
-by default <code class="highlighter-rouge">/var/lib/docker</code>.  If your containers generate lots of log messages,
+by default <code class="language-plaintext highlighter-rouge">/var/lib/docker</code>.  If your containers generate lots of log messages,
 this may lead to increased disk usage or the inability to manage your system due
 to a full disk.  You can configure a
 <a href="/docs.docker.jp.onthefly/config/containers/logging/configure/">log driver</a> to store your container

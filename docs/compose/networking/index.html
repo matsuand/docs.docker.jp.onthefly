@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose におけるネットワーク機能 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Compose におけるネットワーク機能" />
   <meta property="og:description" content="Compose はコンテナー間のネットワークをどのように構築するか。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/networking/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose におけるネットワーク機能","description":"Compose はコンテナー間のネットワークをどのように構築するか。","url":"https://docs.docker.com/compose/networking/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -118,12 +118,12 @@
 <blockquote>
   <p><strong>メモ</strong>: アプリのネットワークには「プロジェクト名」に基づいた名前がつけられます。
 そしてプロジェクト名はこれが稼動しているディレクトリ名に基づいて定まります。
-プロジェクト名は <a href="/docs.docker.jp.onthefly/compose/reference/overview/"><code class="highlighter-rouge">--project-name</code> フラグ</a> あるいは <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_project_name"><code class="highlighter-rouge">COMPOSE_PROJECT_NAME</code> 環境変数</a> を使って上書きすることができます。</p>
+プロジェクト名は <a href="/docs.docker.jp.onthefly/compose/reference/overview/"><code class="language-plaintext highlighter-rouge">--project-name</code> フラグ</a> あるいは <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_project_name"><code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code> 環境変数</a> を使って上書きすることができます。</p>
 </blockquote>
 
-<p>たとえばアプリが <code class="highlighter-rouge">myapp</code> というディレクトリにあって、<code class="highlighter-rouge">docker-compose.yml</code> が以下のような内容であるとします。</p>
+<p>たとえばアプリが <code class="language-plaintext highlighter-rouge">myapp</code> というディレクトリにあって、<code class="language-plaintext highlighter-rouge">docker-compose.yml</code> が以下のような内容であるとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
 services:
   web:
     build: .
@@ -135,38 +135,38 @@ services:
       - "8001:5432"
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker-compose up</code> を実行すると以下の結果になります。</p>
+<p><code class="language-plaintext highlighter-rouge">docker-compose up</code> を実行すると以下の結果になります。</p>
 
 <ol>
-  <li><code class="highlighter-rouge">myapp_default</code> というネットワークが生成されます。</li>
-  <li><code class="highlighter-rouge">web</code> に関する設定に従って 1 つのコンテナーが生成されます。
-そしてそのコンテナーは <code class="highlighter-rouge">web</code> という名前でネットワーク <code class="highlighter-rouge">myapp_default</code> に参加します。</li>
-  <li><code class="highlighter-rouge">db</code> に関する設定に従って 1 つのコンテナーが生成されます。
-そしてそのコンテナーは <code class="highlighter-rouge">db</code> という名前でネットワーク <code class="highlighter-rouge">myapp_default</code> に参加します。</li>
+  <li><code class="language-plaintext highlighter-rouge">myapp_default</code> というネットワークが生成されます。</li>
+  <li><code class="language-plaintext highlighter-rouge">web</code> に関する設定に従って 1 つのコンテナーが生成されます。
+そしてそのコンテナーは <code class="language-plaintext highlighter-rouge">web</code> という名前でネットワーク <code class="language-plaintext highlighter-rouge">myapp_default</code> に参加します。</li>
+  <li><code class="language-plaintext highlighter-rouge">db</code> に関する設定に従って 1 つのコンテナーが生成されます。
+そしてそのコンテナーは <code class="language-plaintext highlighter-rouge">db</code> という名前でネットワーク <code class="language-plaintext highlighter-rouge">myapp_default</code> に参加します。</li>
 </ol>
 
 <blockquote>
-  <p><strong>v2.1 以降、overlay ネットワークは常に <code class="highlighter-rouge">attachable</code> に</strong></p>
+  <p><strong>v2.1 以降、overlay ネットワークは常に <code class="language-plaintext highlighter-rouge">attachable</code> に</strong></p>
 
-  <p>Compose ファイルフォーマット 2.1 から、overlay ネットワークは常に <code class="highlighter-rouge">attachable</code> として生成されるようになりましたが、これを変更することはできません。
-<code class="highlighter-rouge">attachable</code> として生成されるため、スタンドアロンのコンテナーでも overlay ネットワークに接続することができます。
-Compose ファイルフォーマット 3.x においては、必要に応じて <code class="highlighter-rouge">attachable</code> プロパティに <code class="highlighter-rouge">false</code> を設定できます。</p>
+  <p>Compose ファイルフォーマット 2.1 から、overlay ネットワークは常に <code class="language-plaintext highlighter-rouge">attachable</code> として生成されるようになりましたが、これを変更することはできません。
+<code class="language-plaintext highlighter-rouge">attachable</code> として生成されるため、スタンドアロンのコンテナーでも overlay ネットワークに接続することができます。
+Compose ファイルフォーマット 3.x においては、必要に応じて <code class="language-plaintext highlighter-rouge">attachable</code> プロパティに <code class="language-plaintext highlighter-rouge">false</code> を設定できます。</p>
 </blockquote>
 
-<p>各コンテナーはこれ以降、ホスト名 <code class="highlighter-rouge">web</code> と <code class="highlighter-rouge">db</code> を認識できるようになり、コンテナーの IP アドレスも適切に取得できるようになります。
-たとえば <code class="highlighter-rouge">web</code> のアプリケーションコードでは、URL <code class="highlighter-rouge">postgres://db:5432</code> を使ってのアクセスが可能となり、Postgres データベースの利用ができるようになります。</p>
+<p>各コンテナーはこれ以降、ホスト名 <code class="language-plaintext highlighter-rouge">web</code> と <code class="language-plaintext highlighter-rouge">db</code> を認識できるようになり、コンテナーの IP アドレスも適切に取得できるようになります。
+たとえば <code class="language-plaintext highlighter-rouge">web</code> のアプリケーションコードでは、URL <code class="language-plaintext highlighter-rouge">postgres://db:5432</code> を使ってのアクセスが可能となり、Postgres データベースの利用ができるようになります。</p>
 
-<p><code class="highlighter-rouge">HOST_PORT</code> と <code class="highlighter-rouge">CONTAINER_PORT</code> の違いについては理解しておくことが重要です。
-上の例の <code class="highlighter-rouge">db</code> では、<code class="highlighter-rouge">HOST_PORT</code> が <code class="highlighter-rouge">8001</code>、コンテナーポートが <code class="highlighter-rouge">5432</code>（postgres のデフォルト） になっています。
-ネットワークにより接続されているサービス間の通信は <code class="highlighter-rouge">CONTAINER_PORT</code> を利用します。
-<code class="highlighter-rouge">HOST_PORT</code> を定義すると、このサービスはスウォームの外からもアクセスが可能になります。</p>
+<p><code class="language-plaintext highlighter-rouge">HOST_PORT</code> と <code class="language-plaintext highlighter-rouge">CONTAINER_PORT</code> の違いについては理解しておくことが重要です。
+上の例の <code class="language-plaintext highlighter-rouge">db</code> では、<code class="language-plaintext highlighter-rouge">HOST_PORT</code> が <code class="language-plaintext highlighter-rouge">8001</code>、コンテナーポートが <code class="language-plaintext highlighter-rouge">5432</code>（postgres のデフォルト） になっています。
+ネットワークにより接続されているサービス間の通信は <code class="language-plaintext highlighter-rouge">CONTAINER_PORT</code> を利用します。
+<code class="language-plaintext highlighter-rouge">HOST_PORT</code> を定義すると、このサービスはスウォームの外からもアクセスが可能になります。</p>
 
-<p><code class="highlighter-rouge">web</code> コンテナー内では、<code class="highlighter-rouge">db</code> への接続文字列は <code class="highlighter-rouge">postgres://db:5432</code> といったものになります。
-そしてホストマシン上からは、その接続文字列は <code class="highlighter-rouge">postgres://{DOCKER_IP}:8001</code> となります。</p>
+<p><code class="language-plaintext highlighter-rouge">web</code> コンテナー内では、<code class="language-plaintext highlighter-rouge">db</code> への接続文字列は <code class="language-plaintext highlighter-rouge">postgres://db:5432</code> といったものになります。
+そしてホストマシン上からは、その接続文字列は <code class="language-plaintext highlighter-rouge">postgres://{DOCKER_IP}:8001</code> となります。</p>
 
 <h2 id="update-containers">コンテナーの更新</h2>
 
-<p>サービスに対する設定を変更して <code class="highlighter-rouge">docker-compose up</code> により更新を行うと、それまでのコンテナーは削除されて新しいコンテナーがネットワークに接続されます。
+<p>サービスに対する設定を変更して <code class="language-plaintext highlighter-rouge">docker-compose up</code> により更新を行うと、それまでのコンテナーは削除されて新しいコンテナーがネットワークに接続されます。
 このとき IP アドレスは異なることになりますが、ホスト名は変わりません。
 コンテナーの実行によってホスト名による名前解決を行い、新たな IP アドレスへ接続します。
 それまでの古い IP アドレスは利用できなくなります。</p>
@@ -179,9 +179,9 @@ Compose ファイルフォーマット 3.x においては、必要に応じて 
 <p>links は自サービスが他のサービスからアクセスできるように、追加でエイリアスを定義するものです。
 これはサービス間の通信を行うために必要となるわけではありません。
 デフォルトにおいてサービスは、サービス名を使って他サービスにアクセスできます。
-以下の例においては、<code class="highlighter-rouge">db</code> は <code class="highlighter-rouge">web</code> からアクセス可能であり、ホスト名 <code class="highlighter-rouge">db</code> あるいは <code class="highlighter-rouge">database</code> を使ってアクセスできます。</p>
+以下の例においては、<code class="language-plaintext highlighter-rouge">db</code> は <code class="language-plaintext highlighter-rouge">web</code> からアクセス可能であり、ホスト名 <code class="language-plaintext highlighter-rouge">db</code> あるいは <code class="language-plaintext highlighter-rouge">database</code> を使ってアクセスできます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
 services:
 
   web:
@@ -202,30 +202,30 @@ services:
 Compose によるプロジェクトを、最新の統合されたスウォームモードにデプロイするには、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/stack_deploy/">Docker Stacks</a> に示すドキュメントを参照してください。</p>
 </blockquote>
 
-<p><a href="/docs.docker.jp.onthefly/compose/swarm/">Compose アプリケーションをスウォームクラスターにデプロイする</a> 際には、ビルトインの <code class="highlighter-rouge">overlay</code> ドライバーを利用して、コンテナー間で複数ホストによる通信を行うことが可能です。
+<p><a href="/docs.docker.jp.onthefly/compose/swarm/">Compose アプリケーションをスウォームクラスターにデプロイする</a> 際には、ビルトインの <code class="language-plaintext highlighter-rouge">overlay</code> ドライバーを利用して、コンテナー間で複数ホストによる通信を行うことが可能です。
 Compose ファイルやアプリケーションコードへの変更は必要ありません。</p>
 
 <p><a href="/docs.docker.jp.onthefly/network/network-tutorial-overlay/">複数ホストによるネットワークをはじめよう</a> を参考に、スウォームクラスターの構築方法を確認してください。
-デフォルトでクラスターは <code class="highlighter-rouge">overlay</code> ドライバーを用います。
+デフォルトでクラスターは <code class="language-plaintext highlighter-rouge">overlay</code> ドライバーを用います。
 ただし明示的にこれを指定することもできます。
 詳しくは後述します。</p>
 
 <h2 id="specify-custom-networks">独自のネットワーク設定</h2>
 
 <p>デフォルトのアプリ用ネットワークを利用するのではなく、独自のネットワークを指定することができます。
-これは最上位の <code class="highlighter-rouge">networks</code> キーを使って行います。
+これは最上位の <code class="language-plaintext highlighter-rouge">networks</code> キーを使って行います。
 これを使えば、より複雑なネットワークトポロジーを生成したり、<a href="/engine/extend/plugins_network/">独自のネットワークドライバー</a> とそのオプションを設定したりすることができます。
 さらには、Compose が管理していない、外部に生成されたネットワークに対してサービスを接続することもできます。</p>
 
-<p>サービスレベルの定義となる <code class="highlighter-rouge">networks</code> キーを利用すれば、サービスごとにどのネットワークに接続するかを指定できます。
-指定する値はサービス名のリストであり、最上位の <code class="highlighter-rouge">networks</code> キーに指定されている値を参照するものです。</p>
+<p>サービスレベルの定義となる <code class="language-plaintext highlighter-rouge">networks</code> キーを利用すれば、サービスごとにどのネットワークに接続するかを指定できます。
+指定する値はサービス名のリストであり、最上位の <code class="language-plaintext highlighter-rouge">networks</code> キーに指定されている値を参照するものです。</p>
 
 <p>以下において Compose ファイルは、独自のネットワークを 2 つ定義しています。
-<code class="highlighter-rouge">proxy</code> サービスは <code class="highlighter-rouge">db</code> サービスから切り離されています。
+<code class="language-plaintext highlighter-rouge">proxy</code> サービスは <code class="language-plaintext highlighter-rouge">db</code> サービスから切り離されています。
 というのも両者はネットワークを共有しないためです。
-そして <code class="highlighter-rouge">app</code> だけがその両者と通信を行います。</p>
+そして <code class="language-plaintext highlighter-rouge">app</code> だけがその両者と通信を行います。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
 services:
 
   proxy:
@@ -259,7 +259,7 @@ networks:
 <p>ネットワークには <a href="/docs.docker.jp.onthefly/compose/compose-file/#network-configuration-reference">独自の名前</a> も設定することができます。
 （バージョン 3.5 から）</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3.5"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3.5"
 networks:
   frontend:
     name: custom_frontend
@@ -269,16 +269,16 @@ networks:
 <p>ネットワーク設定に関して利用可能なオプションについては、以下のリファレンスを参照してください。</p>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference">最上位の <code class="highlighter-rouge">networks</code> キー</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#networks">service レベルの <code class="highlighter-rouge">networks</code> キー</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference">最上位の <code class="language-plaintext highlighter-rouge">networks</code> キー</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#networks">service レベルの <code class="language-plaintext highlighter-rouge">networks</code> キー</a></li>
 </ul>
 
 <h2 id="configure-the-default-network">デフォルトネットワークの設定</h2>
 
 <p>独自のネットワーク設定は行わずに、あるいはそれを行った上でさらに、アプリに対するデフォルトネットワークの設定を変更することができます。
-これは <code class="highlighter-rouge">networks</code> のもとに <code class="highlighter-rouge">default</code> という項目を定義して行います。</p>
+これは <code class="language-plaintext highlighter-rouge">networks</code> のもとに <code class="language-plaintext highlighter-rouge">default</code> という項目を定義して行います。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: "3"
 services:
 
   web:
@@ -296,15 +296,15 @@ networks:
 
 <h2 id="use-a-pre-existing-network">既存ネットワークの利用</h2>
 
-<p>コンテナーを既存のネットワークに接続したい場合は <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference"><code class="highlighter-rouge">external</code> オプション</a> を利用します。</p>
+<p>コンテナーを既存のネットワークに接続したい場合は <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v2/#network-configuration-reference"><code class="language-plaintext highlighter-rouge">external</code> オプション</a> を利用します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>networks:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>networks:
   default:
     external:
       name: my-pre-existing-network
 </code></pre></div></div>
 
-<p>Compose は <code class="highlighter-rouge">[projectname]_default</code> という名前のネットワークを生成しようとはせず、<code class="highlighter-rouge">my-pre-existing-network</code> というネットワークを探し出して、アプリのコンテナーをそこに接続します。</p>
+<p>Compose は <code class="language-plaintext highlighter-rouge">[projectname]_default</code> という名前のネットワークを生成しようとはせず、<code class="language-plaintext highlighter-rouge">my-pre-existing-network</code> というネットワークを探し出して、アプリのコンテナーをそこに接続します。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=orchestration">orchestration</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=networking">networking</a></span></section>
                     </main>
                     <nav class="col-nav">

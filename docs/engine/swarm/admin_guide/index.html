@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine の Swarm 管理と保守 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine の Swarm 管理と保守" />
   <meta property="og:description" content="Manager administration guide" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/admin_guide/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine の Swarm 管理と保守","description":"Manager administration guide","url":"https://docs.docker.com/engine/swarm/admin_guide/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -145,7 +145,7 @@ quorum を維持するためには、マネージャーが多数いるという�
 
 <h2 id="configure-the-manager-to-advertise-on-a-static-ip-address">マネージャーの通知アドレスへのスタティック IP アドレス設定</h2>
 
-<p>Swarm を初期化する際には<code class="highlighter-rouge">--advertise-addr</code>フラグの指定により、Swarm ないの別のマネージャーノードに対して自身のアドレスを通知（advertise）する必要があります。
+<p>Swarm を初期化する際には<code class="language-plaintext highlighter-rouge">--advertise-addr</code>フラグの指定により、Swarm ないの別のマネージャーノードに対して自身のアドレスを通知（advertise）する必要があります。
 詳しくは<a href="/docs.docker.jp.onthefly/engine/swarm/swarm-mode/#configure-the-advertise-address">Swarm モードによる Docker Engine の実行</a> を参照してください。
 マネージャーノードはそのインフラストラクチャーの中でも安定した構成要素であることが求められます。
 したがって通知アドレスには <strong>固定 IP アドレス</strong> を指定すべきであり、これによってマシンの再起動を行っても Swarm が不安定にならないようにする必要があります。</p>
@@ -227,9 +227,9 @@ quorum を維持するためには、マネージャーが多数いるという�
 最低 1 つのマネージャーを残しておかないと、Swarm にアクセスできなくなり、リクエストを処理することができなくなります。
 ただし単一のマネージャーノードにスケールダウンすることは、安全な操作とは言えないため推奨されません。
 その最後のノードが降格処理の際に、図らずも Swarm から離れてしまった場合、Swarm を操作することはできなくなります。
-これを復旧するには、ノードを再起動するか、あるいは<code class="highlighter-rouge">--force-new-cluster</code>を使って再起動することが必要になります。</p>
+これを復旧するには、ノードを再起動するか、あるいは<code class="language-plaintext highlighter-rouge">--force-new-cluster</code>を使って再起動することが必要になります。</p>
 
-<p>Swarm へのメンバー管理には、サブシステム<code class="highlighter-rouge">docker swarm</code>および<code class="highlighter-rouge">docker node</code>を利用します。
+<p>Swarm へのメンバー管理には、サブシステム<code class="language-plaintext highlighter-rouge">docker swarm</code>および<code class="language-plaintext highlighter-rouge">docker node</code>を利用します。
 ワーカーノードの追加方法や、マネージャーノードへの昇格方法についての詳細は、<a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Swarm へのノード追加</a> を参照してください。</p>
 
 <h3 id="distribute-manager-nodes">分散マネージャーノード</h3>
@@ -294,10 +294,10 @@ quorum を維持するためには、マネージャーが多数いるという�
 
 <h2 id="swarm-の健康状態の監視">Swarm の健康状態の監視</h2>
 
-<p>マネージャーノードの健康状態（health）を監視するには、Docker の<code class="highlighter-rouge">nodes</code> API を使い、HTTP のエンドポイント<code class="highlighter-rouge">/nodes</code>から JSON 書式により確認することができます。
+<p>マネージャーノードの健康状態（health）を監視するには、Docker の<code class="language-plaintext highlighter-rouge">nodes</code> API を使い、HTTP のエンドポイント<code class="language-plaintext highlighter-rouge">/nodes</code>から JSON 書式により確認することができます。
 詳しくは <a href="/engine/api/v1.25/#tag/Node">nodes API のドキュメント</a> を参照してください。</p>
 
-<p>コマンドラインからは<code class="highlighter-rouge">docker node inspect &lt;id-node&gt;</code>を実行して、ノードを調べることができます。
+<p>コマンドラインからは<code class="language-plaintext highlighter-rouge">docker node inspect &lt;id-node&gt;</code>を実行して、ノードを調べることができます。
 たとえばノードに、マネージャーとしての到達性能（reachability）があるかどうかを調べるには、以下を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker node inspect manager1 <span class="nt">--format</span> <span class="s2">"{{ .ManagerStatus.Reachability }}"</span>
@@ -310,19 +310,19 @@ reachable
 ready
 </code></pre></div></div>
 
-<p>上のコマンドから<code class="highlighter-rouge">manager1</code>は、マネージャーとしては<code class="highlighter-rouge">reachable</code>（到達可能）であり、ワーカーとしては<code class="highlighter-rouge">ready</code>（受け入れ可能）であることがわかります。</p>
+<p>上のコマンドから<code class="language-plaintext highlighter-rouge">manager1</code>は、マネージャーとしては<code class="language-plaintext highlighter-rouge">reachable</code>（到達可能）であり、ワーカーとしては<code class="language-plaintext highlighter-rouge">ready</code>（受け入れ可能）であることがわかります。</p>
 
-<p>健康状態が<code class="highlighter-rouge">unreachable</code>（到達不能）であるのは、このマネージャーノードが他のマネージャーノードから到達できないことを意味します。
+<p>健康状態が<code class="language-plaintext highlighter-rouge">unreachable</code>（到達不能）であるのは、このマネージャーノードが他のマネージャーノードから到達できないことを意味します。
 この場合、到達不能なマネージャーノードは復旧させる措置が必要になります。</p>
 
 <ul>
   <li>デーモンを再起動し、マネージャーが到達可能に戻るかどうかを確認します。</li>
   <li>マシンを再起動します。</li>
   <li>上の 2 つの再起動を行っても動作しない場合は、新たなマネージャーノードを追加するか、ワーカーノードをマネージャーに昇格させます。
-そしてマネージャーから障害ノードのエントリを削除する必要があるので、<code class="highlighter-rouge">docker node demote &lt;NODE&gt;</code>と<code class="highlighter-rouge">docker node rm &lt;id-node&gt;</code>を実行します。</li>
+そしてマネージャーから障害ノードのエントリを削除する必要があるので、<code class="language-plaintext highlighter-rouge">docker node demote &lt;NODE&gt;</code>と<code class="language-plaintext highlighter-rouge">docker node rm &lt;id-node&gt;</code>を実行します。</li>
 </ul>
 
-<p>上とは別に、Swarm の健康状態の概要を確認するには、マネージャーノードから以下のように<code class="highlighter-rouge">docker node ls</code>を実行します。</p>
+<p>上とは別に、Swarm の健康状態の概要を確認するには、マネージャーノードから以下のように<code class="language-plaintext highlighter-rouge">docker node ls</code>を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 docker node <span class="nb">ls
@@ -337,7 +337,7 @@ di9wxgz8dtuh9d2hn089ecqkf    node06    Accepted    Ready   Active
 
 <h2 id="troubleshoot-a-manager-node">マネージャーノードのトラブルシューティング</h2>
 
-<p>マネージャーノードの<code class="highlighter-rouge">raft</code>ディレクトリを、別ノードのものからコピーして再起動するようなことはやめてください。
+<p>マネージャーノードの<code class="language-plaintext highlighter-rouge">raft</code>ディレクトリを、別ノードのものからコピーして再起動するようなことはやめてください。
 そのデータディレクトリはノード ID に固有のものです。
 そしてノード ID が利用されるのは Swarm に参加するときだけです。
 ノード ID 空間は全体にわたってユニークでなければなりません。</p>
@@ -345,18 +345,18 @@ di9wxgz8dtuh9d2hn089ecqkf    node06    Accepted    Ready   Active
 <p>クラスターに対してマネージャーノードを再参加させるには、以下を行います。</p>
 
 <ol>
-  <li><code class="highlighter-rouge">docker node demote &lt;NODE&gt;</code>を実行して、そのノードをワーカーに降格させます。</li>
-  <li><code class="highlighter-rouge">docker node rm &lt;NODE&gt;</code>を実行して、そのノードを Swarm から削除します。</li>
-  <li><code class="highlighter-rouge">docker swarm join</code>を実行して、そのノードを Swarm に再度、新たな状態により参加させます。</li>
+  <li><code class="language-plaintext highlighter-rouge">docker node demote &lt;NODE&gt;</code>を実行して、そのノードをワーカーに降格させます。</li>
+  <li><code class="language-plaintext highlighter-rouge">docker node rm &lt;NODE&gt;</code>を実行して、そのノードを Swarm から削除します。</li>
+  <li><code class="language-plaintext highlighter-rouge">docker swarm join</code>を実行して、そのノードを Swarm に再度、新たな状態により参加させます。</li>
 </ol>
 
 <p>Swarm へのマネージャーノードの参加に関する詳細は <a href="/docs.docker.jp.onthefly/engine/swarm/join-nodes/">Swarm へのノード参加</a> を参照してください。</p>
 
 <h2 id="forcibly-remove-a-node">ノードの強制削除</h2>
 
-<p>たいていの場合、<code class="highlighter-rouge">docker node rm</code>コマンドを使って Swarm からノードを削除するには、あらかじめそのノードを停止させておくべきです。
-ノードが到達不能、無反応、障害発生といった状態になったら、ノードを停止させなくても、<code class="highlighter-rouge">--force</code>フラグを使って強制的にノードを削除することができます。
-たとえば<code class="highlighter-rouge">node9</code>に障害が発生したら以下を実行します。</p>
+<p>たいていの場合、<code class="language-plaintext highlighter-rouge">docker node rm</code>コマンドを使って Swarm からノードを削除するには、あらかじめそのノードを停止させておくべきです。
+ノードが到達不能、無反応、障害発生といった状態になったら、ノードを停止させなくても、<code class="language-plaintext highlighter-rouge">--force</code>フラグを使って強制的にノードを削除することができます。
+たとえば<code class="language-plaintext highlighter-rouge">node9</code>に障害が発生したら以下を実行します。</p>
 
 <pre><code class="language-none">$ docker node rm node9
 
@@ -372,7 +372,7 @@ Node node9 removed from swarm
 
 <h2 id="back-up-the-swarm">Swarm のバックアップ</h2>
 
-<p>マネージャーノードは、Swarm の状態とマネージャーログを<code class="highlighter-rouge">/var/lib/docker/swarm/</code>ディレクトリに保存しています。
+<p>マネージャーノードは、Swarm の状態とマネージャーログを<code class="language-plaintext highlighter-rouge">/var/lib/docker/swarm/</code>ディレクトリに保存しています。
 バージョン 1.13 またはそれ以降においては、そのディレクトリに Raft ログの暗号化に用いる鍵も含まれています。
 この鍵がない状態では、Swarm を復元することはできません。</p>
 
@@ -403,7 +403,7 @@ Node node9 removed from swarm
     </blockquote>
   </li>
   <li>
-    <p><code class="highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ全体のバックアップを取ります。</p>
+    <p><code class="language-plaintext highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ全体のバックアップを取ります。</p>
   </li>
   <li>
     <p>マネージャーを再起動します。</p>
@@ -423,10 +423,10 @@ Node node9 removed from swarm
     <p>復元対象とする Swarm の対象ホストマシンを使って、Docker を停止させます。</p>
   </li>
   <li>
-    <p>新たな Swarm の<code class="highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ内容を削除します。</p>
+    <p>新たな Swarm の<code class="language-plaintext highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ内容を削除します。</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ内を、バックアップ内容に置き換えます。</p>
+    <p><code class="language-plaintext highlighter-rouge">/var/lib/docker/swarm</code>ディレクトリ内を、バックアップ内容に置き換えます。</p>
 
     <blockquote>
       <p>メモ</p>
@@ -450,7 +450,7 @@ Node node9 removed from swarm
   </li>
   <li>
     <p>Swarm の状態が思っているとおりかどうかを確認します。
-確認としてはアプリケーションに固有のテストを行うこともでき、あるいは単に<code class="highlighter-rouge">docker service ls</code>の出力を確認するのでもかまいません。
+確認としてはアプリケーションに固有のテストを行うこともでき、あるいは単に<code class="language-plaintext highlighter-rouge">docker service ls</code>の出力を確認するのでもかまいません。
 これによってサービスが思い通りに存在しているかどうかを確認します。</p>
   </li>
   <li>
@@ -474,9 +474,9 @@ Node node9 removed from swarm
 復旧する最良の策は、失われたマネージャーノードをオンライン復旧させることです。
 これが無理である場合、Swarm 復旧のための手段がいくつかあるので、読み進めてください。</p>
 
-<p>Swarm に<code class="highlighter-rouge">N</code>個のマネージャーがある場合に、マネージャーノードの quorum は常に利用可能でなければなりません。
+<p>Swarm に<code class="language-plaintext highlighter-rouge">N</code>個のマネージャーがある場合に、マネージャーノードの quorum は常に利用可能でなければなりません。
 たとえば 5 つのマネージャーからなる Swarm の場合、最低でも 3 つのノードは動作状態であって、互いに通信できなければなりません。
-言い換えると、Swarm は<code class="highlighter-rouge">(N-1)/2</code>個のノードまでなら、それが完全に処理不能になっても耐えることができますが、これを越えると Swarm 管理を行うような要求は処理できなくなります。
+言い換えると、Swarm は<code class="language-plaintext highlighter-rouge">(N-1)/2</code>個のノードまでなら、それが完全に処理不能になっても耐えることができますが、これを越えると Swarm 管理を行うような要求は処理できなくなります。
 ここで言う処理不能というのは、データ損傷やハードウェア障害などを表わします。</p>
 
 <p>マネージャーが quorum を失った場合、Swarm を管理することはできません。
@@ -486,7 +486,7 @@ quorum を失った状態で、Swarm 上で管理操作を行おうとすると�
 </code></pre>
 
 <p>quorum を失った状態から復旧するための最良の策は、障害が発生したノードをオンライン復旧させることです。
-それが実現できない場合、この状態を回復する最後の手段は、マネージャーノード上において<code class="highlighter-rouge">--force-new-cluster</code>を実行することです。
+それが実現できない場合、この状態を回復する最後の手段は、マネージャーノード上において<code class="language-plaintext highlighter-rouge">--force-new-cluster</code>を実行することです。
 これを行うと、コマンド実行したマネージャーノードを除いた、他のマネージャーノードがすべて削除されます。
 マネージャーがたった 1 つになるのですから quorum は維持されます。
 この後には、マネージャーノードが必要な数に達するまで、ノードをマネージャーに昇格させていきます。</p>
@@ -495,7 +495,7 @@ quorum を失った状態で、Swarm 上で管理操作を行おうとすると�
 docker swarm init <span class="nt">--force-new-cluster</span> <span class="nt">--advertise-addr</span> node01:2377
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker swarm init</code>コマンドにおいて<code class="highlighter-rouge">--force-new-cluster</code>フラグをつけて実行すると、コマンド実行した Docker Engine は、単一ノードからなる Swarm のマネージャーノードとなり、サービスの管理と実行が可能となります。
+<p><code class="language-plaintext highlighter-rouge">docker swarm init</code>コマンドにおいて<code class="language-plaintext highlighter-rouge">--force-new-cluster</code>フラグをつけて実行すると、コマンド実行した Docker Engine は、単一ノードからなる Swarm のマネージャーノードとなり、サービスの管理と実行が可能となります。
 このマネージャーには、それまでのサービスやタスクに関する情報がそのまま保持され、ワーカーノードは Swarm に参加したままです。
 そしてサービスは実行を継続します。
 タスク分散を実現するためには、マネージャーノードの追加あるいは再度の追加が必要になります。
@@ -512,21 +512,21 @@ Swarm に新たなノードを参加させたり、あるいは利用不能だ�
 最終的にはバランスよく配分されることです。
 エンドユーザーに対して中断をできる限り少なくすることです。</p>
 
-<p>Docker 1.13 およびそれ以降においては、<code class="highlighter-rouge">docker service update</code>コマンドに<code class="highlighter-rouge">--force</code>あるいは<code class="highlighter-rouge">-f</code>フラグをつけて実行することで、利用可能なワーカーノードに対して強制的にタスクを再分散します。
+<p>Docker 1.13 およびそれ以降においては、<code class="language-plaintext highlighter-rouge">docker service update</code>コマンドに<code class="language-plaintext highlighter-rouge">--force</code>あるいは<code class="language-plaintext highlighter-rouge">-f</code>フラグをつけて実行することで、利用可能なワーカーノードに対して強制的にタスクを再分散します。
 これを行うとサービスタスクは再起動します。
 このときにはクライアントアプリケーションが中断するかもしれません。
 設定によってサービスが <a href="/docs.docker.jp.onthefly/engine/swarm/swarm-tutorial/rolling-update/">ローリングアップデート</a> を利用するようにできます。</p>
 
 <p>Docker の古いバージョンを利用していて、ワーカーノードに均等に負荷を配分したい場合、そしてタスクの中断が気にならない場合は、サービスのスケールを一時的に増やして、強制的に再配分を行うことができます。
-設定されているサービスのスケール数は<code class="highlighter-rouge">docker service inspect --pretty &lt;servicename&gt;</code>を実行して確認します。
-<code class="highlighter-rouge">docker service scale</code>を確認すれば、タスクの実行数が最も低いノードに、新たに配分が行われることがわかります。
+設定されているサービスのスケール数は<code class="language-plaintext highlighter-rouge">docker service inspect --pretty &lt;servicename&gt;</code>を実行して確認します。
+<code class="language-plaintext highlighter-rouge">docker service scale</code>を確認すれば、タスクの実行数が最も低いノードに、新たに配分が行われることがわかります。
 Swarm 内にはもっと配分を負うことができるノードが複数見つかるかもしれません。
 すべてのノードにわたってバランスよく配分を実現するためには、適度にサービススケールを増やすことを何度か行うことが必要かもしれません。</p>
 
 <p>望んだとおりに負荷が配分されたら、サービスのスケールを元の値に戻します。
-<code class="highlighter-rouge">docker service ps</code>を実行して、全ノード内でのサービスの配分状況を確認してください。</p>
+<code class="language-plaintext highlighter-rouge">docker service ps</code>を実行して、全ノード内でのサービスの配分状況を確認してください。</p>
 
-<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_scale/"><code class="highlighter-rouge">docker service scale</code></a> と <a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_ps/"><code class="highlighter-rouge">docker service ps</code></a> を参照してください。</p>
+<p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_scale/"><code class="language-plaintext highlighter-rouge">docker service scale</code></a> と <a href="/docs.docker.jp.onthefly/engine/reference/commandline/service_ps/"><code class="language-plaintext highlighter-rouge">docker service ps</code></a> を参照してください。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=container">container</a>, <a href="/docs.docker.jp.onthefly/search/?q=swarm">swarm</a>, <a href="/docs.docker.jp.onthefly/search/?q=manager">manager</a>, <a href="/docs.docker.jp.onthefly/search/?q=raft">raft</a></span></section>
                     </main>
                     <nav class="col-nav">

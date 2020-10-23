@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Registry の設定 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Registry の設定" />
   <meta property="og:description" content="Explains how to configure a registry" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/configuration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Registry の設定","description":"Explains how to configure a registry","url":"https://docs.docker.com/registry/configuration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    35 分
+    37 分
   
 </span>
 
@@ -113,14 +113,14 @@ before moving your systems to production.</p>
 <h2 id="override-specific-configuration-options">Override specific configuration options</h2>
 
 <p>In a typical setup where you run your Registry from the official image, you can
-specify a configuration variable from the environment by passing <code class="highlighter-rouge">-e</code> arguments
-to your <code class="highlighter-rouge">docker run</code> stanza or from within a Dockerfile using the <code class="highlighter-rouge">ENV</code>
+specify a configuration variable from the environment by passing <code class="language-plaintext highlighter-rouge">-e</code> arguments
+to your <code class="language-plaintext highlighter-rouge">docker run</code> stanza or from within a Dockerfile using the <code class="language-plaintext highlighter-rouge">ENV</code>
 instruction.</p>
 
 <p>To override a configuration option, create an environment variable named
-<code class="highlighter-rouge">REGISTRY_variable</code> where <code class="highlighter-rouge">variable</code> is the name of the configuration option
-and the <code class="highlighter-rouge">_</code> (underscore) represents indention levels. For example, you can
-configure the <code class="highlighter-rouge">rootdirectory</code> of the <code class="highlighter-rouge">filesystem</code> storage backend:</p>
+<code class="language-plaintext highlighter-rouge">REGISTRY_variable</code> where <code class="language-plaintext highlighter-rouge">variable</code> is the name of the configuration option
+and the <code class="language-plaintext highlighter-rouge">_</code> (underscore) represents indention levels. For example, you can
+configure the <code class="language-plaintext highlighter-rouge">rootdirectory</code> of the <code class="language-plaintext highlighter-rouge">filesystem</code> storage backend:</p>
 
 <pre><code class="language-none">storage:
   filesystem:
@@ -132,7 +132,7 @@ configure the <code class="highlighter-rouge">rootdirectory</code> of the <code 
 <pre><code class="language-none">REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/somewhere
 </code></pre>
 
-<p>This variable overrides the <code class="highlighter-rouge">/var/lib/registry</code> value to the <code class="highlighter-rouge">/somewhere</code>
+<p>This variable overrides the <code class="language-plaintext highlighter-rouge">/var/lib/registry</code> value to the <code class="language-plaintext highlighter-rouge">/somewhere</code>
 directory.</p>
 
 <blockquote>
@@ -147,8 +147,8 @@ with environment variables is not recommended.</p>
 having issues overriding keys from the environment, you can specify an alternate
 YAML configuration file by mounting it as a volume in the container.</p>
 
-<p>Typically, create a new configuration file from scratch,named <code class="highlighter-rouge">config.yml</code>, then
-specify it in the <code class="highlighter-rouge">docker run</code> command:</p>
+<p>Typically, create a new configuration file from scratch,named <code class="language-plaintext highlighter-rouge">config.yml</code>, then
+specify it in the <code class="language-plaintext highlighter-rouge">docker run</code> command:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5000:5000 <span class="nt">--restart</span><span class="o">=</span>always <span class="nt">--name</span> registry <span class="se">\</span>
              <span class="nt">-v</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/config.yml:/etc/docker/registry/config.yml <span class="se">\</span>
@@ -410,18 +410,18 @@ options marked as <strong>required</strong>. In these cases, you can omit the pa
 all its children. However, if the parent is included, you must also include all
 the children marked <strong>required</strong>.</p>
 
-<h2 id="version"><code class="highlighter-rouge">version</code></h2>
+<h2 id="version"><code class="language-plaintext highlighter-rouge">version</code></h2>
 
 <pre><code class="language-none">version: 0.1
 </code></pre>
 
-<p>The <code class="highlighter-rouge">version</code> option is <strong>required</strong>. It specifies the configuration’s version.
+<p>The <code class="language-plaintext highlighter-rouge">version</code> option is <strong>required</strong>. It specifies the configuration’s version.
 It is expected to remain a top-level field, to allow for a consistent version
 check before parsing the remainder of the configuration file.</p>
 
-<h2 id="log"><code class="highlighter-rouge">log</code></h2>
+<h2 id="log"><code class="language-plaintext highlighter-rouge">log</code></h2>
 
-<p>The <code class="highlighter-rouge">log</code> subsection configures the behavior of the logging system. The logging
+<p>The <code class="language-plaintext highlighter-rouge">log</code> subsection configures the behavior of the logging system. The logging
 system outputs everything to stdout. You can adjust the granularity and format
 with this configuration section.</p>
 
@@ -445,35 +445,35 @@ with this configuration section.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">level</code></td>
+      <td><code class="language-plaintext highlighter-rouge">level</code></td>
       <td>no</td>
-      <td>Sets the sensitivity of logging output. Permitted values are <code class="highlighter-rouge">error</code>, <code class="highlighter-rouge">warn</code>, <code class="highlighter-rouge">info</code>, and <code class="highlighter-rouge">debug</code>. The default is <code class="highlighter-rouge">info</code>.</td>
+      <td>Sets the sensitivity of logging output. Permitted values are <code class="language-plaintext highlighter-rouge">error</code>, <code class="language-plaintext highlighter-rouge">warn</code>, <code class="language-plaintext highlighter-rouge">info</code>, and <code class="language-plaintext highlighter-rouge">debug</code>. The default is <code class="language-plaintext highlighter-rouge">info</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">formatter</code></td>
+      <td><code class="language-plaintext highlighter-rouge">formatter</code></td>
       <td>no</td>
-      <td>This selects the format of logging output. The format primarily affects how keyed attributes for a log line are encoded. Options are <code class="highlighter-rouge">text</code>, <code class="highlighter-rouge">json</code>, and <code class="highlighter-rouge">logstash</code>. The default is <code class="highlighter-rouge">text</code>.</td>
+      <td>This selects the format of logging output. The format primarily affects how keyed attributes for a log line are encoded. Options are <code class="language-plaintext highlighter-rouge">text</code>, <code class="language-plaintext highlighter-rouge">json</code>, and <code class="language-plaintext highlighter-rouge">logstash</code>. The default is <code class="language-plaintext highlighter-rouge">text</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">fields</code></td>
+      <td><code class="language-plaintext highlighter-rouge">fields</code></td>
       <td>no</td>
       <td>A map of field names to values. These are added to every log line for the context. This is useful for identifying log messages source after being mixed in other systems.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="accesslog"><code class="highlighter-rouge">accesslog</code></h3>
+<h3 id="accesslog"><code class="language-plaintext highlighter-rouge">accesslog</code></h3>
 
 <pre><code class="language-none">accesslog:
   disabled: true
 </code></pre>
 
-<p>Within <code class="highlighter-rouge">log</code>, <code class="highlighter-rouge">accesslog</code> configures the behavior of the access logging
+<p>Within <code class="language-plaintext highlighter-rouge">log</code>, <code class="language-plaintext highlighter-rouge">accesslog</code> configures the behavior of the access logging
 system. By default, the access logging system outputs to stdout in
 <a href="https://httpd.apache.org/docs/2.4/logs.html#combined">Combined Log Format</a>.
-Access logging can be disabled by setting the boolean flag <code class="highlighter-rouge">disabled</code> to <code class="highlighter-rouge">true</code>.</p>
+Access logging can be disabled by setting the boolean flag <code class="language-plaintext highlighter-rouge">disabled</code> to <code class="language-plaintext highlighter-rouge">true</code>.</p>
 
-<h2 id="hooks"><code class="highlighter-rouge">hooks</code></h2>
+<h2 id="hooks"><code class="language-plaintext highlighter-rouge">hooks</code></h2>
 
 <pre><code class="language-none">hooks:
   - type: mail
@@ -490,11 +490,11 @@ Access logging can be disabled by setting the boolean flag <code class="highligh
         - name@receivehost.com
 </code></pre>
 
-<p>The <code class="highlighter-rouge">hooks</code> subsection configures the logging hooks’ behavior. This subsection
+<p>The <code class="language-plaintext highlighter-rouge">hooks</code> subsection configures the logging hooks’ behavior. This subsection
 includes a sequence handler which you can use for sending mail, for example.
-Refer to <code class="highlighter-rouge">loglevel</code> to configure the level of messages printed.</p>
+Refer to <code class="language-plaintext highlighter-rouge">loglevel</code> to configure the level of messages printed.</p>
 
-<h2 id="loglevel"><code class="highlighter-rouge">loglevel</code></h2>
+<h2 id="loglevel"><code class="language-plaintext highlighter-rouge">loglevel</code></h2>
 
 <blockquote>
   <p><strong>DEPRECATED:</strong> Please use <a href="#log">log</a> instead.</p>
@@ -503,10 +503,10 @@ Refer to <code class="highlighter-rouge">loglevel</code> to configure the level 
 <pre><code class="language-none">loglevel: debug
 </code></pre>
 
-<p>Permitted values are <code class="highlighter-rouge">error</code>, <code class="highlighter-rouge">warn</code>, <code class="highlighter-rouge">info</code> and <code class="highlighter-rouge">debug</code>. The default is
-<code class="highlighter-rouge">info</code>.</p>
+<p>Permitted values are <code class="language-plaintext highlighter-rouge">error</code>, <code class="language-plaintext highlighter-rouge">warn</code>, <code class="language-plaintext highlighter-rouge">info</code> and <code class="language-plaintext highlighter-rouge">debug</code>. The default is
+<code class="language-plaintext highlighter-rouge">info</code>.</p>
 
-<h2 id="storage"><code class="highlighter-rouge">storage</code></h2>
+<h2 id="storage"><code class="language-plaintext highlighter-rouge">storage</code></h2>
 
 <pre><code class="language-none">storage:
   filesystem:
@@ -585,7 +585,7 @@ Refer to <code class="highlighter-rouge">loglevel</code> to configure the level 
     disable: false
 </code></pre>
 
-<p>The <code class="highlighter-rouge">storage</code> option is <strong>required</strong> and defines which storage backend is in
+<p>The <code class="language-plaintext highlighter-rouge">storage</code> option is <strong>required</strong> and defines which storage backend is in
 use. You must configure exactly one backend. If you configure more, the registry
 returns an error. You can choose any of these backend storage drivers:</p>
 
@@ -598,53 +598,53 @@ returns an error. You can choose any of these backend storage drivers:</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">filesystem</code></td>
+      <td><code class="language-plaintext highlighter-rouge">filesystem</code></td>
       <td>Uses the local disk to store registry files. It is ideal for development and may be appropriate for some small-scale production applications. See the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/filesystem.md">driver’s reference documentation</a>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">azure</code></td>
+      <td><code class="language-plaintext highlighter-rouge">azure</code></td>
       <td>Uses Microsoft Azure Blob Storage. See the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/azure.md">driver’s reference documentation</a>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">gcs</code></td>
+      <td><code class="language-plaintext highlighter-rouge">gcs</code></td>
       <td>Uses Google Cloud Storage. See the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/gcs.md">driver’s reference documentation</a>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">s3</code></td>
+      <td><code class="language-plaintext highlighter-rouge">s3</code></td>
       <td>Uses Amazon Simple Storage Service (S3) and compatible Storage Services. See the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/s3.md">driver’s reference documentation</a>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">swift</code></td>
+      <td><code class="language-plaintext highlighter-rouge">swift</code></td>
       <td>Uses Openstack Swift object storage. See the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/swift.md">driver’s reference documentation</a>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">oss</code></td>
+      <td><code class="language-plaintext highlighter-rouge">oss</code></td>
       <td>Uses Aliyun OSS for object storage. See the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/oss.md">driver’s reference documentation</a>.</td>
     </tr>
   </tbody>
 </table>
 
-<p>For testing only, you can use the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/inmemory.md"><code class="highlighter-rouge">inmemory</code> storage
+<p>For testing only, you can use the <a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/inmemory.md"><code class="language-plaintext highlighter-rouge">inmemory</code> storage
 driver</a>.
 If you would like to run a registry from volatile memory, use the
-<a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/filesystem.md"><code class="highlighter-rouge">filesystem</code> driver</a>
+<a href="https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/filesystem.md"><code class="language-plaintext highlighter-rouge">filesystem</code> driver</a>
 on a ramdisk.</p>
 
 <p>If you are deploying a registry on Windows, a Windows volume mounted from the
 host is not recommended. Instead, you can use a S3 or Azure backing
-data-store. If you do use a Windows volume, the length of the <code class="highlighter-rouge">PATH</code> to
-the mount point must be within the <code class="highlighter-rouge">MAX_PATH</code> limits (typically 255 characters),
+data-store. If you do use a Windows volume, the length of the <code class="language-plaintext highlighter-rouge">PATH</code> to
+the mount point must be within the <code class="language-plaintext highlighter-rouge">MAX_PATH</code> limits (typically 255 characters),
 or this error will occur:</p>
 
 <pre><code class="language-none">mkdir /XXX protocol error and your registry will not function properly.
 </code></pre>
 
-<h3 id="maintenance"><code class="highlighter-rouge">maintenance</code></h3>
+<h3 id="maintenance"><code class="language-plaintext highlighter-rouge">maintenance</code></h3>
 
-<p>Currently, upload purging and read-only mode are the only <code class="highlighter-rouge">maintenance</code>
+<p>Currently, upload purging and read-only mode are the only <code class="language-plaintext highlighter-rouge">maintenance</code>
 functions available.</p>
 
-<h3 id="uploadpurging"><code class="highlighter-rouge">uploadpurging</code></h3>
+<h3 id="uploadpurging"><code class="language-plaintext highlighter-rouge">uploadpurging</code></h3>
 
 <p>Upload purging is a background process that periodically removes orphaned files
 from the upload directories of the registry. Upload purging is enabled by
@@ -661,46 +661,46 @@ be set.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
       <td>yes</td>
-      <td>Set to <code class="highlighter-rouge">true</code> to enable upload purging. Defaults to <code class="highlighter-rouge">true</code>.</td>
+      <td>Set to <code class="language-plaintext highlighter-rouge">true</code> to enable upload purging. Defaults to <code class="language-plaintext highlighter-rouge">true</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">age</code></td>
+      <td><code class="language-plaintext highlighter-rouge">age</code></td>
       <td>yes</td>
-      <td>Upload directories which are older than this age will be deleted.Defaults to <code class="highlighter-rouge">168h</code> (1 week).</td>
+      <td>Upload directories which are older than this age will be deleted.Defaults to <code class="language-plaintext highlighter-rouge">168h</code> (1 week).</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">interval</code></td>
+      <td><code class="language-plaintext highlighter-rouge">interval</code></td>
       <td>yes</td>
-      <td>The interval between upload directory purging. Defaults to <code class="highlighter-rouge">24h</code>.</td>
+      <td>The interval between upload directory purging. Defaults to <code class="language-plaintext highlighter-rouge">24h</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">dryrun</code></td>
+      <td><code class="language-plaintext highlighter-rouge">dryrun</code></td>
       <td>yes</td>
-      <td>Set <code class="highlighter-rouge">dryrun</code> to <code class="highlighter-rouge">true</code> to obtain a summary of what directories will be deleted. Defaults to <code class="highlighter-rouge">false</code>.</td>
+      <td>Set <code class="language-plaintext highlighter-rouge">dryrun</code> to <code class="language-plaintext highlighter-rouge">true</code> to obtain a summary of what directories will be deleted. Defaults to <code class="language-plaintext highlighter-rouge">false</code>.</td>
     </tr>
   </tbody>
 </table>
 
 <blockquote>
-  <p><strong>Note</strong>: <code class="highlighter-rouge">age</code> and <code class="highlighter-rouge">interval</code> are strings containing a number with optional
-fraction and a unit suffix. Some examples: <code class="highlighter-rouge">45m</code>, <code class="highlighter-rouge">2h10m</code>, <code class="highlighter-rouge">168h</code>.</p>
+  <p><strong>Note</strong>: <code class="language-plaintext highlighter-rouge">age</code> and <code class="language-plaintext highlighter-rouge">interval</code> are strings containing a number with optional
+fraction and a unit suffix. Some examples: <code class="language-plaintext highlighter-rouge">45m</code>, <code class="language-plaintext highlighter-rouge">2h10m</code>, <code class="language-plaintext highlighter-rouge">168h</code>.</p>
 </blockquote>
 
-<h3 id="readonly"><code class="highlighter-rouge">readonly</code></h3>
+<h3 id="readonly"><code class="language-plaintext highlighter-rouge">readonly</code></h3>
 
-<p>If the <code class="highlighter-rouge">readonly</code> section under <code class="highlighter-rouge">maintenance</code> has <code class="highlighter-rouge">enabled</code> set to <code class="highlighter-rouge">true</code>,
+<p>If the <code class="language-plaintext highlighter-rouge">readonly</code> section under <code class="language-plaintext highlighter-rouge">maintenance</code> has <code class="language-plaintext highlighter-rouge">enabled</code> set to <code class="language-plaintext highlighter-rouge">true</code>,
 clients will not be allowed to write to the registry. This mode is useful to
 temporarily prevent writes to the backend storage so a garbage collection pass
 can be run.  Before running garbage collection, the registry should be
-restarted with readonly’s <code class="highlighter-rouge">enabled</code> set to true. After the garbage collection
-pass finishes, the registry may be restarted again, this time with <code class="highlighter-rouge">readonly</code>
+restarted with readonly’s <code class="language-plaintext highlighter-rouge">enabled</code> set to true. After the garbage collection
+pass finishes, the registry may be restarted again, this time with <code class="language-plaintext highlighter-rouge">readonly</code>
 removed from the configuration (or set to false).</p>
 
-<h3 id="delete"><code class="highlighter-rouge">delete</code></h3>
+<h3 id="delete"><code class="language-plaintext highlighter-rouge">delete</code></h3>
 
-<p>Use the <code class="highlighter-rouge">delete</code> structure to enable the deletion of image blobs and manifests
+<p>Use the <code class="language-plaintext highlighter-rouge">delete</code> structure to enable the deletion of image blobs and manifests
 by digest. It defaults to false, but it can be enabled by writing the following
 on the configuration file:</p>
 
@@ -708,38 +708,38 @@ on the configuration file:</p>
   enabled: true
 </code></pre>
 
-<h3 id="cache"><code class="highlighter-rouge">cache</code></h3>
+<h3 id="cache"><code class="language-plaintext highlighter-rouge">cache</code></h3>
 
-<p>Use the <code class="highlighter-rouge">cache</code> structure to enable caching of data accessed in the storage
+<p>Use the <code class="language-plaintext highlighter-rouge">cache</code> structure to enable caching of data accessed in the storage
 backend. Currently, the only available cache provides fast access to layer
-metadata, which uses the <code class="highlighter-rouge">blobdescriptor</code> field if configured.</p>
+metadata, which uses the <code class="language-plaintext highlighter-rouge">blobdescriptor</code> field if configured.</p>
 
-<p>You can set <code class="highlighter-rouge">blobdescriptor</code> field to <code class="highlighter-rouge">redis</code> or <code class="highlighter-rouge">inmemory</code>. If set to <code class="highlighter-rouge">redis</code>,a
-Redis pool caches layer metadata. If set to <code class="highlighter-rouge">inmemory</code>, an in-memory map caches
+<p>You can set <code class="language-plaintext highlighter-rouge">blobdescriptor</code> field to <code class="language-plaintext highlighter-rouge">redis</code> or <code class="language-plaintext highlighter-rouge">inmemory</code>. If set to <code class="language-plaintext highlighter-rouge">redis</code>,a
+Redis pool caches layer metadata. If set to <code class="language-plaintext highlighter-rouge">inmemory</code>, an in-memory map caches
 layer metadata.</p>
 
 <blockquote>
-  <p><strong>NOTE</strong>: Formerly, <code class="highlighter-rouge">blobdescriptor</code> was known as <code class="highlighter-rouge">layerinfo</code>. While these
-are equivalent, <code class="highlighter-rouge">layerinfo</code> has been deprecated.</p>
+  <p><strong>NOTE</strong>: Formerly, <code class="language-plaintext highlighter-rouge">blobdescriptor</code> was known as <code class="language-plaintext highlighter-rouge">layerinfo</code>. While these
+are equivalent, <code class="language-plaintext highlighter-rouge">layerinfo</code> has been deprecated.</p>
 </blockquote>
 
-<h3 id="redirect"><code class="highlighter-rouge">redirect</code></h3>
+<h3 id="redirect"><code class="language-plaintext highlighter-rouge">redirect</code></h3>
 
-<p>The <code class="highlighter-rouge">redirect</code> subsection provides configuration for managing redirects from
+<p>The <code class="language-plaintext highlighter-rouge">redirect</code> subsection provides configuration for managing redirects from
 content backends. For backends that support it, redirecting is enabled by
 default. In certain deployment scenarios, you may decide to route all data
 through the Registry, rather than redirecting to the backend. This may be more
 efficient when using a backend that is not co-located or when a registry
 instance is aggressively caching.</p>
 
-<p>To disable redirects, add a single flag <code class="highlighter-rouge">disable</code>, set to <code class="highlighter-rouge">true</code>
-under the <code class="highlighter-rouge">redirect</code> section:</p>
+<p>To disable redirects, add a single flag <code class="language-plaintext highlighter-rouge">disable</code>, set to <code class="language-plaintext highlighter-rouge">true</code>
+under the <code class="language-plaintext highlighter-rouge">redirect</code> section:</p>
 
 <pre><code class="language-none">redirect:
   disable: true
 </code></pre>
 
-<h2 id="auth"><code class="highlighter-rouge">auth</code></h2>
+<h2 id="auth"><code class="language-plaintext highlighter-rouge">auth</code></h2>
 
 <pre><code class="language-none">auth:
   silly:
@@ -755,22 +755,22 @@ under the <code class="highlighter-rouge">redirect</code> section:</p>
     path: /path/to/htpasswd
 </code></pre>
 
-<p>The <code class="highlighter-rouge">auth</code> option is <strong>optional</strong>. Possible auth providers include:</p>
+<p>The <code class="language-plaintext highlighter-rouge">auth</code> option is <strong>optional</strong>. Possible auth providers include:</p>
 
 <ul>
-  <li><a href="#silly"><code class="highlighter-rouge">silly</code></a></li>
-  <li><a href="#token"><code class="highlighter-rouge">token</code></a></li>
-  <li><a href="#htpasswd"><code class="highlighter-rouge">htpasswd</code></a></li>
-  <li>[<code class="highlighter-rouge">none</code>]</li>
+  <li><a href="#silly"><code class="language-plaintext highlighter-rouge">silly</code></a></li>
+  <li><a href="#token"><code class="language-plaintext highlighter-rouge">token</code></a></li>
+  <li><a href="#htpasswd"><code class="language-plaintext highlighter-rouge">htpasswd</code></a></li>
+  <li>[<code class="language-plaintext highlighter-rouge">none</code>]</li>
 </ul>
 
 <p>You can configure only one authentication provider.</p>
 
-<h3 id="silly"><code class="highlighter-rouge">silly</code></h3>
+<h3 id="silly"><code class="language-plaintext highlighter-rouge">silly</code></h3>
 
-<p>The <code class="highlighter-rouge">silly</code> authentication provider is only appropriate for development. It simply checks
-for the existence of the <code class="highlighter-rouge">Authorization</code> header in the HTTP request. It does not
-check the header’s value. If the header does not exist, the <code class="highlighter-rouge">silly</code> auth
+<p>The <code class="language-plaintext highlighter-rouge">silly</code> authentication provider is only appropriate for development. It simply checks
+for the existence of the <code class="language-plaintext highlighter-rouge">Authorization</code> header in the HTTP request. It does not
+check the header’s value. If the header does not exist, the <code class="language-plaintext highlighter-rouge">silly</code> auth
 responds with a challenge response, echoing back the realm, service, and scope
 for which access was denied.</p>
 
@@ -786,19 +786,19 @@ for which access was denied.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">realm</code></td>
+      <td><code class="language-plaintext highlighter-rouge">realm</code></td>
       <td>yes</td>
       <td>The realm in which the registry server authenticates.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">service</code></td>
+      <td><code class="language-plaintext highlighter-rouge">service</code></td>
       <td>yes</td>
       <td>The service being authenticated.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="token"><code class="highlighter-rouge">token</code></h3>
+<h3 id="token"><code class="language-plaintext highlighter-rouge">token</code></h3>
 
 <p>Token-based authentication allows you to decouple the authentication system from
 the registry. It is an established authentication paradigm with a high degree of
@@ -814,29 +814,29 @@ security.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">realm</code></td>
+      <td><code class="language-plaintext highlighter-rouge">realm</code></td>
       <td>yes</td>
       <td>The realm in which the registry server authenticates.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">service</code></td>
+      <td><code class="language-plaintext highlighter-rouge">service</code></td>
       <td>yes</td>
       <td>The service being authenticated.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">issuer</code></td>
+      <td><code class="language-plaintext highlighter-rouge">issuer</code></td>
       <td>yes</td>
       <td>The name of the token issuer. The issuer inserts this into the token so it must match the value configured for the issuer.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">rootcertbundle</code></td>
+      <td><code class="language-plaintext highlighter-rouge">rootcertbundle</code></td>
       <td>yes</td>
       <td>The absolute path to the root certificate bundle. This bundle contains the public part of the certificates used to sign authentication tokens.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">autoredirect</code></td>
+      <td><code class="language-plaintext highlighter-rouge">autoredirect</code></td>
       <td>no</td>
-      <td>When set to <code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">realm</code> will automatically be set using the Host header of the request as the domain and a path of <code class="highlighter-rouge">/auth/token/</code></td>
+      <td>When set to <code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">realm</code> will automatically be set using the Host header of the request as the domain and a path of <code class="language-plaintext highlighter-rouge">/auth/token/</code></td>
     </tr>
   </tbody>
 </table>
@@ -844,23 +844,23 @@ security.</p>
 <p>For more information about Token based authentication configuration, see the
 <a href="/docs.docker.jp.onthefly/registry/spec/auth/token/">specification</a>.</p>
 
-<h3 id="htpasswd"><code class="highlighter-rouge">htpasswd</code></h3>
+<h3 id="htpasswd"><code class="language-plaintext highlighter-rouge">htpasswd</code></h3>
 
 <p>The <em>htpasswd</em> authentication backed allows you to configure basic
 authentication using an
 <a href="https://httpd.apache.org/docs/2.4/programs/htpasswd.html">Apache htpasswd file</a>.
 The only supported password format is
-<a href="http://en.wikipedia.org/wiki/Bcrypt"><code class="highlighter-rouge">bcrypt</code></a>. Entries with other hash types
-are ignored. The <code class="highlighter-rouge">htpasswd</code> file is loaded once, at startup. If the file is
+<a href="http://en.wikipedia.org/wiki/Bcrypt"><code class="language-plaintext highlighter-rouge">bcrypt</code></a>. Entries with other hash types
+are ignored. The <code class="language-plaintext highlighter-rouge">htpasswd</code> file is loaded once, at startup. If the file is
 invalid, the registry will display an error and will not start.</p>
 
 <blockquote>
-  <p><strong>Warning</strong>: If the <code class="highlighter-rouge">htpasswd</code> file is missing, the file will be created and provisioned with a default user and automatically generated password.
+  <p><strong>Warning</strong>: If the <code class="language-plaintext highlighter-rouge">htpasswd</code> file is missing, the file will be created and provisioned with a default user and automatically generated password.
 The password will be printed to stdout.</p>
 </blockquote>
 
 <blockquote>
-  <p><strong>Warning</strong>: Only use the <code class="highlighter-rouge">htpasswd</code> authentication scheme with TLS
+  <p><strong>Warning</strong>: Only use the <code class="language-plaintext highlighter-rouge">htpasswd</code> authentication scheme with TLS
 configured, since basic authentication sends passwords as part of the HTTP
 header.</p>
 </blockquote>
@@ -875,28 +875,28 @@ header.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">realm</code></td>
+      <td><code class="language-plaintext highlighter-rouge">realm</code></td>
       <td>yes</td>
       <td>The realm in which the registry server authenticates.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">path</code></td>
+      <td><code class="language-plaintext highlighter-rouge">path</code></td>
       <td>yes</td>
-      <td>The path to the <code class="highlighter-rouge">htpasswd</code> file to load at startup.</td>
+      <td>The path to the <code class="language-plaintext highlighter-rouge">htpasswd</code> file to load at startup.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="middleware"><code class="highlighter-rouge">middleware</code></h2>
+<h2 id="middleware"><code class="language-plaintext highlighter-rouge">middleware</code></h2>
 
-<p>The <code class="highlighter-rouge">middleware</code> structure is <strong>optional</strong>. Use this option to inject middleware at
+<p>The <code class="language-plaintext highlighter-rouge">middleware</code> structure is <strong>optional</strong>. Use this option to inject middleware at
 named hook points. Each middleware must implement the same interface as the
 object it is wrapping. For instance, a registry middleware must implement the
-<code class="highlighter-rouge">distribution.Namespace</code> interface, while a repository middleware must implement
-<code class="highlighter-rouge">distribution.Repository</code>, and a storage middleware must implement
-<code class="highlighter-rouge">driver.StorageDriver</code>.</p>
+<code class="language-plaintext highlighter-rouge">distribution.Namespace</code> interface, while a repository middleware must implement
+<code class="language-plaintext highlighter-rouge">distribution.Repository</code>, and a storage middleware must implement
+<code class="language-plaintext highlighter-rouge">driver.StorageDriver</code>.</p>
 
-<p>This is an example configuration of the <code class="highlighter-rouge">cloudfront</code>  middleware, a storage
+<p>This is an example configuration of the <code class="language-plaintext highlighter-rouge">cloudfront</code>  middleware, a storage
 middleware:</p>
 
 <pre><code class="language-none">middleware:
@@ -921,15 +921,15 @@ middleware:</p>
         iprangesurl: https://ip-ranges.amazonaws.com/ip-ranges.json
 </code></pre>
 
-<p>Each middleware entry has <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">options</code> entries. The <code class="highlighter-rouge">name</code> must
+<p>Each middleware entry has <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">options</code> entries. The <code class="language-plaintext highlighter-rouge">name</code> must
 correspond to the name under which the middleware registers itself. The
-<code class="highlighter-rouge">options</code> field is a map that details custom configuration required to
-initialize the middleware. It is treated as a <code class="highlighter-rouge">map[string]interface{}</code>. As such,
+<code class="language-plaintext highlighter-rouge">options</code> field is a map that details custom configuration required to
+initialize the middleware. It is treated as a <code class="language-plaintext highlighter-rouge">map[string]interface{}</code>. As such,
 it supports any interesting structures desired, leaving it up to the middleware
 initialization function to best determine how to handle the specific
 interpretation of the options.</p>
 
-<h3 id="cloudfront"><code class="highlighter-rouge">cloudfront</code></h3>
+<h3 id="cloudfront"><code class="language-plaintext highlighter-rouge">cloudfront</code></h3>
 
 <table>
   <thead>
@@ -941,49 +941,49 @@ interpretation of the options.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">baseurl</code></td>
+      <td><code class="language-plaintext highlighter-rouge">baseurl</code></td>
       <td>yes</td>
-      <td>The <code class="highlighter-rouge">SCHEME://HOST[/PATH]</code> at which Cloudfront is served.</td>
+      <td>The <code class="language-plaintext highlighter-rouge">SCHEME://HOST[/PATH]</code> at which Cloudfront is served.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">privatekey</code></td>
+      <td><code class="language-plaintext highlighter-rouge">privatekey</code></td>
       <td>yes</td>
       <td>The private key for Cloudfront, provided by AWS.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">keypairid</code></td>
+      <td><code class="language-plaintext highlighter-rouge">keypairid</code></td>
       <td>yes</td>
       <td>The key pair ID provided by AWS.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">duration</code></td>
+      <td><code class="language-plaintext highlighter-rouge">duration</code></td>
       <td>no</td>
-      <td>An integer and unit for the duration of the Cloudfront session. Valid time units are <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code> (or <code class="highlighter-rouge">µs</code>), <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. For example, <code class="highlighter-rouge">3000s</code> is valid, but <code class="highlighter-rouge">3000 s</code> is not. If you do not specify a <code class="highlighter-rouge">duration</code> or you specify an integer without a time unit, the duration defaults to <code class="highlighter-rouge">20m</code> (20 minutes).</td>
+      <td>An integer and unit for the duration of the Cloudfront session. Valid time units are <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code> (or <code class="language-plaintext highlighter-rouge">µs</code>), <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. For example, <code class="language-plaintext highlighter-rouge">3000s</code> is valid, but <code class="language-plaintext highlighter-rouge">3000 s</code> is not. If you do not specify a <code class="language-plaintext highlighter-rouge">duration</code> or you specify an integer without a time unit, the duration defaults to <code class="language-plaintext highlighter-rouge">20m</code> (20 minutes).</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">ipfilteredby</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ipfilteredby</code></td>
       <td>no</td>
-      <td>A string with the following value <code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">aws</code> or <code class="highlighter-rouge">awsregion</code>.</td>
+      <td>A string with the following value <code class="language-plaintext highlighter-rouge">none</code>, <code class="language-plaintext highlighter-rouge">aws</code> or <code class="language-plaintext highlighter-rouge">awsregion</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">awsregion</code></td>
+      <td><code class="language-plaintext highlighter-rouge">awsregion</code></td>
       <td>no</td>
-      <td>A comma separated string of AWS regions, only available when <code class="highlighter-rouge">ipfilteredby</code> is <code class="highlighter-rouge">awsregion</code>. For example, <code class="highlighter-rouge">us-east-1, us-west-2</code></td>
+      <td>A comma separated string of AWS regions, only available when <code class="language-plaintext highlighter-rouge">ipfilteredby</code> is <code class="language-plaintext highlighter-rouge">awsregion</code>. For example, <code class="language-plaintext highlighter-rouge">us-east-1, us-west-2</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">updatefrenquency</code></td>
+      <td><code class="language-plaintext highlighter-rouge">updatefrenquency</code></td>
       <td>no</td>
-      <td>The frequency to update AWS IP regions, default: <code class="highlighter-rouge">12h</code></td>
+      <td>The frequency to update AWS IP regions, default: <code class="language-plaintext highlighter-rouge">12h</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">iprangesurl</code></td>
+      <td><code class="language-plaintext highlighter-rouge">iprangesurl</code></td>
       <td>no</td>
-      <td>The URL contains the AWS IP ranges information, default: <code class="highlighter-rouge">https://ip-ranges.amazonaws.com/ip-ranges.json</code></td>
+      <td>The URL contains the AWS IP ranges information, default: <code class="language-plaintext highlighter-rouge">https://ip-ranges.amazonaws.com/ip-ranges.json</code></td>
     </tr>
   </tbody>
 </table>
 
-<p>Value of <code class="highlighter-rouge">ipfilteredby</code> can be:</p>
+<p>Value of <code class="language-plaintext highlighter-rouge">ipfilteredby</code> can be:</p>
 
 <table>
   <thead>
@@ -994,23 +994,23 @@ interpretation of the options.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">none</code></td>
+      <td><code class="language-plaintext highlighter-rouge">none</code></td>
       <td>default, do not filter by IP</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">aws</code></td>
+      <td><code class="language-plaintext highlighter-rouge">aws</code></td>
       <td>IP from AWS goes to S3 directly</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">awsregion</code></td>
-      <td>IP from certain AWS regions goes to S3 directly, use together with <code class="highlighter-rouge">awsregion</code>.</td>
+      <td><code class="language-plaintext highlighter-rouge">awsregion</code></td>
+      <td>IP from certain AWS regions goes to S3 directly, use together with <code class="language-plaintext highlighter-rouge">awsregion</code>.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="redirect-1"><code class="highlighter-rouge">redirect</code></h3>
+<h3 id="redirect-1"><code class="language-plaintext highlighter-rouge">redirect</code></h3>
 
-<p>You can use the <code class="highlighter-rouge">redirect</code> storage middleware to specify a custom URL to a
+<p>You can use the <code class="language-plaintext highlighter-rouge">redirect</code> storage middleware to specify a custom URL to a
 location of a proxy for the layer stored by the S3 storage driver.</p>
 
 <table>
@@ -1023,16 +1023,16 @@ location of a proxy for the layer stored by the S3 storage driver.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">baseurl</code></td>
+      <td><code class="language-plaintext highlighter-rouge">baseurl</code></td>
       <td>yes</td>
-      <td><code class="highlighter-rouge">SCHEME://HOST</code> at which layers are served. Can also contain port. For example, <code class="highlighter-rouge">https://example.com:5443</code>.</td>
+      <td><code class="language-plaintext highlighter-rouge">SCHEME://HOST</code> at which layers are served. Can also contain port. For example, <code class="language-plaintext highlighter-rouge">https://example.com:5443</code>.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="reporting"><code class="highlighter-rouge">reporting</code></h2>
+<h2 id="reporting"><code class="language-plaintext highlighter-rouge">reporting</code></h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reporting:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>reporting:
   bugsnag:
     apikey: bugsnagapikey
     releasestage: bugsnagreleasestage
@@ -1043,7 +1043,7 @@ location of a proxy for the layer stored by the S3 storage driver.</p>
     verbose: true
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">reporting</code> option is <strong>optional</strong> and configures error and metrics
+<p>The <code class="language-plaintext highlighter-rouge">reporting</code> option is <strong>optional</strong> and configures error and metrics
 reporting tools. At the moment only two services are supported:</p>
 
 <ul>
@@ -1053,7 +1053,7 @@ reporting tools. At the moment only two services are supported:</p>
 
 <p>A valid configuration may contain both.</p>
 
-<h3 id="bugsnag"><code class="highlighter-rouge">bugsnag</code></h3>
+<h3 id="bugsnag"><code class="language-plaintext highlighter-rouge">bugsnag</code></h3>
 
 <table>
   <thead>
@@ -1065,24 +1065,24 @@ reporting tools. At the moment only two services are supported:</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">apikey</code></td>
+      <td><code class="language-plaintext highlighter-rouge">apikey</code></td>
       <td>yes</td>
       <td>The API Key provided by Bugsnag.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">releasestage</code></td>
+      <td><code class="language-plaintext highlighter-rouge">releasestage</code></td>
       <td>no</td>
-      <td>Tracks where the registry is deployed, using a string like <code class="highlighter-rouge">production</code>, <code class="highlighter-rouge">staging</code>, or <code class="highlighter-rouge">development</code>.</td>
+      <td>Tracks where the registry is deployed, using a string like <code class="language-plaintext highlighter-rouge">production</code>, <code class="language-plaintext highlighter-rouge">staging</code>, or <code class="language-plaintext highlighter-rouge">development</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">endpoint</code></td>
+      <td><code class="language-plaintext highlighter-rouge">endpoint</code></td>
       <td>no</td>
       <td>The enterprise Bugsnag endpoint.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="newrelic"><code class="highlighter-rouge">newrelic</code></h3>
+<h3 id="newrelic"><code class="language-plaintext highlighter-rouge">newrelic</code></h3>
 
 <table>
   <thead>
@@ -1094,24 +1094,24 @@ reporting tools. At the moment only two services are supported:</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">licensekey</code></td>
+      <td><code class="language-plaintext highlighter-rouge">licensekey</code></td>
       <td>yes</td>
       <td>License key provided by New Relic.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">name</code></td>
       <td>no</td>
       <td>New Relic application name.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">verbose</code></td>
+      <td><code class="language-plaintext highlighter-rouge">verbose</code></td>
       <td>no</td>
-      <td>Set to <code class="highlighter-rouge">true</code> to enable New Relic debugging output on <code class="highlighter-rouge">stdout</code>.</td>
+      <td>Set to <code class="language-plaintext highlighter-rouge">true</code> to enable New Relic debugging output on <code class="language-plaintext highlighter-rouge">stdout</code>.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="http"><code class="highlighter-rouge">http</code></h2>
+<h2 id="http"><code class="language-plaintext highlighter-rouge">http</code></h2>
 
 <pre><code class="language-none">http:
   addr: localhost:5000
@@ -1139,7 +1139,7 @@ reporting tools. At the moment only two services are supported:</p>
     disabled: false
 </code></pre>
 
-<p>The <code class="highlighter-rouge">http</code> option details the configuration for the HTTP server that hosts the
+<p>The <code class="language-plaintext highlighter-rouge">http</code> option details the configuration for the HTTP server that hosts the
 registry.</p>
 
 <table>
@@ -1152,46 +1152,46 @@ registry.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">addr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">addr</code></td>
       <td>yes</td>
-      <td>The address for which the server should accept connections. The form depends on a network type (see the <code class="highlighter-rouge">net</code> option). Use <code class="highlighter-rouge">HOST:PORT</code> for TCP and <code class="highlighter-rouge">FILE</code> for a UNIX socket.</td>
+      <td>The address for which the server should accept connections. The form depends on a network type (see the <code class="language-plaintext highlighter-rouge">net</code> option). Use <code class="language-plaintext highlighter-rouge">HOST:PORT</code> for TCP and <code class="language-plaintext highlighter-rouge">FILE</code> for a UNIX socket.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">net</code></td>
+      <td><code class="language-plaintext highlighter-rouge">net</code></td>
       <td>no</td>
-      <td>The network used to create a listening socket. Known networks are <code class="highlighter-rouge">unix</code> and <code class="highlighter-rouge">tcp</code>.</td>
+      <td>The network used to create a listening socket. Known networks are <code class="language-plaintext highlighter-rouge">unix</code> and <code class="language-plaintext highlighter-rouge">tcp</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">prefix</code></td>
+      <td><code class="language-plaintext highlighter-rouge">prefix</code></td>
       <td>no</td>
-      <td>If the server does not run at the root path, set this to the value of the prefix. The root path is the section before <code class="highlighter-rouge">v2</code>. It requires both preceding and trailing slashes, such as in the example <code class="highlighter-rouge">/path/</code>.</td>
+      <td>If the server does not run at the root path, set this to the value of the prefix. The root path is the section before <code class="language-plaintext highlighter-rouge">v2</code>. It requires both preceding and trailing slashes, such as in the example <code class="language-plaintext highlighter-rouge">/path/</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">host</code></td>
+      <td><code class="language-plaintext highlighter-rouge">host</code></td>
       <td>no</td>
       <td>A fully-qualified URL for an externally-reachable address for the registry. If present, it is used when creating generated URLs. Otherwise, these URLs are derived from client requests.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">secret</code></td>
+      <td><code class="language-plaintext highlighter-rouge">secret</code></td>
       <td>no</td>
       <td>A random piece of data used to sign state that may be stored with the client to protect against tampering. For production environments you should generate a random piece of data using a cryptographically secure random generator. If you omit the secret, the registry will automatically generate a secret when it starts. <strong>If you are building a cluster of registries behind a load balancer, you MUST ensure the secret is the same for all registries.</strong></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">relativeurls</code></td>
+      <td><code class="language-plaintext highlighter-rouge">relativeurls</code></td>
       <td>no</td>
-      <td>If <code class="highlighter-rouge">true</code>,  the registry returns relative URLs in Location headers. The client is responsible for resolving the correct URL. <strong>This option is not compatible with Docker 1.7 and earlier.</strong></td>
+      <td>If <code class="language-plaintext highlighter-rouge">true</code>,  the registry returns relative URLs in Location headers. The client is responsible for resolving the correct URL. <strong>This option is not compatible with Docker 1.7 and earlier.</strong></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">draintimeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">draintimeout</code></td>
       <td>no</td>
       <td>Amount of time to wait for HTTP connections to drain before shutting down after registry receives SIGTERM signal</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="tls"><code class="highlighter-rouge">tls</code></h3>
+<h3 id="tls"><code class="language-plaintext highlighter-rouge">tls</code></h3>
 
-<p>The <code class="highlighter-rouge">tls</code> structure within <code class="highlighter-rouge">http</code> is <strong>optional</strong>. Use this to configure TLS
+<p>The <code class="language-plaintext highlighter-rouge">tls</code> structure within <code class="language-plaintext highlighter-rouge">http</code> is <strong>optional</strong>. Use this to configure TLS
 for the server. If you already have a web server running on
 the same host as the registry, you may prefer to configure TLS on that web server
 and proxy connections to the registry server.</p>
@@ -1206,35 +1206,35 @@ and proxy connections to the registry server.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">certificate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">certificate</code></td>
       <td>yes</td>
       <td>Absolute path to the x509 certificate file.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">key</code></td>
+      <td><code class="language-plaintext highlighter-rouge">key</code></td>
       <td>yes</td>
       <td>Absolute path to the x509 private key file.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">clientcas</code></td>
+      <td><code class="language-plaintext highlighter-rouge">clientcas</code></td>
       <td>no</td>
       <td>An array of absolute paths to x509 CA files.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="letsencrypt"><code class="highlighter-rouge">letsencrypt</code></h3>
+<h3 id="letsencrypt"><code class="language-plaintext highlighter-rouge">letsencrypt</code></h3>
 
-<p>The <code class="highlighter-rouge">letsencrypt</code> structure within <code class="highlighter-rouge">tls</code> is <strong>optional</strong>. Use this to configure
+<p>The <code class="language-plaintext highlighter-rouge">letsencrypt</code> structure within <code class="language-plaintext highlighter-rouge">tls</code> is <strong>optional</strong>. Use this to configure
 TLS certificates provided by
 <a href="https://letsencrypt.org/how-it-works/">Let’s Encrypt</a>.</p>
 
 <blockquote>
   <p><strong>NOTE</strong>: When using Let’s Encrypt, ensure that the outward-facing address is
-accessible on port <code class="highlighter-rouge">443</code>. The registry defaults to listening on port <code class="highlighter-rouge">5000</code>.
-If you run the registry as a container, consider adding the flag <code class="highlighter-rouge">-p 443:5000</code>
-to the <code class="highlighter-rouge">docker run</code> command or using a similar setting in a cloud
-configuration. You should also set the <code class="highlighter-rouge">hosts</code> option to the list of hostnames
+accessible on port <code class="language-plaintext highlighter-rouge">443</code>. The registry defaults to listening on port <code class="language-plaintext highlighter-rouge">5000</code>.
+If you run the registry as a container, consider adding the flag <code class="language-plaintext highlighter-rouge">-p 443:5000</code>
+to the <code class="language-plaintext highlighter-rouge">docker run</code> command or using a similar setting in a cloud
+configuration. You should also set the <code class="language-plaintext highlighter-rouge">hosts</code> option to the list of hostnames
 that are valid for this registry to avoid trying to get certificates for random
 hostnames due to malicious clients connecting with bogus SNI hostnames.</p>
 </blockquote>
@@ -1249,37 +1249,37 @@ hostnames due to malicious clients connecting with bogus SNI hostnames.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">cachefile</code></td>
+      <td><code class="language-plaintext highlighter-rouge">cachefile</code></td>
       <td>yes</td>
       <td>Absolute path to a file where the Let’s Encrypt agent can cache data.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">email</code></td>
+      <td><code class="language-plaintext highlighter-rouge">email</code></td>
       <td>yes</td>
       <td>The email address used to register with Let’s Encrypt.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">hosts</code></td>
+      <td><code class="language-plaintext highlighter-rouge">hosts</code></td>
       <td>no</td>
       <td>The hostnames allowed for Let’s Encrypt certificates.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="debug"><code class="highlighter-rouge">debug</code></h3>
+<h3 id="debug"><code class="language-plaintext highlighter-rouge">debug</code></h3>
 
-<p>The <code class="highlighter-rouge">debug</code> option is <strong>optional</strong> . Use it to configure a debug server that
+<p>The <code class="language-plaintext highlighter-rouge">debug</code> option is <strong>optional</strong> . Use it to configure a debug server that
 can be helpful in diagnosing problems. The debug endpoint can be used for
 monitoring registry metrics and health, as well as profiling. Sensitive
 information may be available via the debug endpoint. Please be certain that
 access to the debug endpoint is locked down in a production environment.</p>
 
-<p>The <code class="highlighter-rouge">debug</code> section takes a single required <code class="highlighter-rouge">addr</code> parameter, which specifies
-the <code class="highlighter-rouge">HOST:PORT</code> on which the debug server should accept connections.</p>
+<p>The <code class="language-plaintext highlighter-rouge">debug</code> section takes a single required <code class="language-plaintext highlighter-rouge">addr</code> parameter, which specifies
+the <code class="language-plaintext highlighter-rouge">HOST:PORT</code> on which the debug server should accept connections.</p>
 
-<h2 id="prometheus"><code class="highlighter-rouge">prometheus</code></h2>
+<h2 id="prometheus"><code class="language-plaintext highlighter-rouge">prometheus</code></h2>
 
-<p>The <code class="highlighter-rouge">prometheus</code> option defines whether the prometheus metrics is enable, as well
+<p>The <code class="language-plaintext highlighter-rouge">prometheus</code> option defines whether the prometheus metrics is enable, as well
 as the path to access the metrics.</p>
 
 <table>
@@ -1292,38 +1292,38 @@ as the path to access the metrics.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
       <td>no</td>
-      <td>Set <code class="highlighter-rouge">true</code> to enable the prometheus server</td>
+      <td>Set <code class="language-plaintext highlighter-rouge">true</code> to enable the prometheus server</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">path</code></td>
+      <td><code class="language-plaintext highlighter-rouge">path</code></td>
       <td>no</td>
-      <td>The path to access the metrics, <code class="highlighter-rouge">/metrics</code> by default</td>
+      <td>The path to access the metrics, <code class="language-plaintext highlighter-rouge">/metrics</code> by default</td>
     </tr>
   </tbody>
 </table>
 
-<p>The url to access the metrics is <code class="highlighter-rouge">HOST:PORT/path</code>, where <code class="highlighter-rouge">HOST:PORT</code> is defined
-in <code class="highlighter-rouge">addr</code> under <code class="highlighter-rouge">debug</code>.</p>
+<p>The url to access the metrics is <code class="language-plaintext highlighter-rouge">HOST:PORT/path</code>, where <code class="language-plaintext highlighter-rouge">HOST:PORT</code> is defined
+in <code class="language-plaintext highlighter-rouge">addr</code> under <code class="language-plaintext highlighter-rouge">debug</code>.</p>
 
-<h3 id="headers"><code class="highlighter-rouge">headers</code></h3>
+<h3 id="headers"><code class="language-plaintext highlighter-rouge">headers</code></h3>
 
-<p>The <code class="highlighter-rouge">headers</code> option is <strong>optional</strong> . Use it to specify headers that the HTTP
+<p>The <code class="language-plaintext highlighter-rouge">headers</code> option is <strong>optional</strong> . Use it to specify headers that the HTTP
 server should include in responses. This can be used for security headers such
-as <code class="highlighter-rouge">Strict-Transport-Security</code>.</p>
+as <code class="language-plaintext highlighter-rouge">Strict-Transport-Security</code>.</p>
 
-<p>The <code class="highlighter-rouge">headers</code> option should contain an option for each header to include, where
+<p>The <code class="language-plaintext highlighter-rouge">headers</code> option should contain an option for each header to include, where
 the parameter name is the header’s name, and the parameter value a list of the
 header’s payload values.</p>
 
-<p>Including <code class="highlighter-rouge">X-Content-Type-Options: [nosniff]</code> is recommended, so that browsers
+<p>Including <code class="language-plaintext highlighter-rouge">X-Content-Type-Options: [nosniff]</code> is recommended, so that browsers
 will not interpret content as HTML if they are directed to load a page from the
 registry. This header is included in the example configuration file.</p>
 
-<h3 id="http2"><code class="highlighter-rouge">http2</code></h3>
+<h3 id="http2"><code class="language-plaintext highlighter-rouge">http2</code></h3>
 
-<p>The <code class="highlighter-rouge">http2</code> structure within <code class="highlighter-rouge">http</code> is <strong>optional</strong>. Use this to control http2
+<p>The <code class="language-plaintext highlighter-rouge">http2</code> structure within <code class="language-plaintext highlighter-rouge">http</code> is <strong>optional</strong>. Use this to control http2
 settings for the registry.</p>
 
 <table>
@@ -1336,14 +1336,14 @@ settings for the registry.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">disabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">disabled</code></td>
       <td>no</td>
-      <td>If <code class="highlighter-rouge">true</code>, then <code class="highlighter-rouge">http2</code> support is disabled.</td>
+      <td>If <code class="language-plaintext highlighter-rouge">true</code>, then <code class="language-plaintext highlighter-rouge">http2</code> support is disabled.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="notifications"><code class="highlighter-rouge">notifications</code></h2>
+<h2 id="notifications"><code class="language-plaintext highlighter-rouge">notifications</code></h2>
 
 <pre><code class="language-none">notifications:
   events:
@@ -1366,11 +1366,11 @@ settings for the registry.</p>
 </code></pre>
 
 <p>The notifications option is <strong>optional</strong> and currently may contain a single
-option, <code class="highlighter-rouge">endpoints</code>.</p>
+option, <code class="language-plaintext highlighter-rouge">endpoints</code>.</p>
 
-<h3 id="endpoints"><code class="highlighter-rouge">endpoints</code></h3>
+<h3 id="endpoints"><code class="language-plaintext highlighter-rouge">endpoints</code></h3>
 
-<p>The <code class="highlighter-rouge">endpoints</code> structure contains a list of named services (URLs) that can
+<p>The <code class="language-plaintext highlighter-rouge">endpoints</code> structure contains a list of named services (URLs) that can
 accept event notifications.</p>
 
 <table>
@@ -1383,54 +1383,54 @@ accept event notifications.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">name</code></td>
       <td>yes</td>
       <td>A human-readable name for the service.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">disabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">disabled</code></td>
       <td>no</td>
-      <td>If <code class="highlighter-rouge">true</code>, notifications are disabled for the service.</td>
+      <td>If <code class="language-plaintext highlighter-rouge">true</code>, notifications are disabled for the service.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">url</code></td>
+      <td><code class="language-plaintext highlighter-rouge">url</code></td>
       <td>yes</td>
       <td>The URL to which events should be published.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">headers</code></td>
+      <td><code class="language-plaintext highlighter-rouge">headers</code></td>
       <td>yes</td>
-      <td>A list of static headers to add to each request. Each header’s name is a key beneath <code class="highlighter-rouge">headers</code>, and each value is a list of payloads for that header name. Values must always be lists.</td>
+      <td>A list of static headers to add to each request. Each header’s name is a key beneath <code class="language-plaintext highlighter-rouge">headers</code>, and each value is a list of payloads for that header name. Values must always be lists.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">timeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">timeout</code></td>
       <td>yes</td>
-      <td>A value for the HTTP timeout. A positive integer and an optional suffix indicating the unit of time, which may be <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. If you omit the unit of time, <code class="highlighter-rouge">ns</code> is used.</td>
+      <td>A value for the HTTP timeout. A positive integer and an optional suffix indicating the unit of time, which may be <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. If you omit the unit of time, <code class="language-plaintext highlighter-rouge">ns</code> is used.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">threshold</code></td>
+      <td><code class="language-plaintext highlighter-rouge">threshold</code></td>
       <td>yes</td>
       <td>An integer specifying how long to wait before backing off a failure.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">backoff</code></td>
+      <td><code class="language-plaintext highlighter-rouge">backoff</code></td>
       <td>yes</td>
-      <td>How long the system backs off before retrying after a failure. A positive integer and an optional suffix indicating the unit of time, which may be <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. If you omit the unit of time, <code class="highlighter-rouge">ns</code> is used.</td>
+      <td>How long the system backs off before retrying after a failure. A positive integer and an optional suffix indicating the unit of time, which may be <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. If you omit the unit of time, <code class="language-plaintext highlighter-rouge">ns</code> is used.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">ignoredmediatypes</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ignoredmediatypes</code></td>
       <td>no</td>
       <td>A list of target media types to ignore. Events with these target media types are not published to the endpoint.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">ignore</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ignore</code></td>
       <td>no</td>
       <td>Events with these mediatypes or actions are not published to the endpoint.</td>
     </tr>
   </tbody>
 </table>
 
-<h4 id="ignore"><code class="highlighter-rouge">ignore</code></h4>
+<h4 id="ignore"><code class="language-plaintext highlighter-rouge">ignore</code></h4>
 
 <table>
   <thead>
@@ -1442,21 +1442,21 @@ accept event notifications.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">mediatypes</code></td>
+      <td><code class="language-plaintext highlighter-rouge">mediatypes</code></td>
       <td>no</td>
       <td>A list of target media types to ignore. Events with these target media types are not published to the endpoint.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">actions</code></td>
+      <td><code class="language-plaintext highlighter-rouge">actions</code></td>
       <td>no</td>
       <td>A list of actions to ignore. Events with these actions are not published to the endpoint.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="events"><code class="highlighter-rouge">events</code></h3>
+<h3 id="events"><code class="language-plaintext highlighter-rouge">events</code></h3>
 
-<p>The <code class="highlighter-rouge">events</code> structure configures the information provided in event notifications.</p>
+<p>The <code class="language-plaintext highlighter-rouge">events</code> structure configures the information provided in event notifications.</p>
 
 <table>
   <thead>
@@ -1468,14 +1468,14 @@ accept event notifications.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">includereferences</code></td>
+      <td><code class="language-plaintext highlighter-rouge">includereferences</code></td>
       <td>no</td>
-      <td>If <code class="highlighter-rouge">true</code>, include reference information in manifest events.</td>
+      <td>If <code class="language-plaintext highlighter-rouge">true</code>, include reference information in manifest events.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="redis"><code class="highlighter-rouge">redis</code></h2>
+<h2 id="redis"><code class="language-plaintext highlighter-rouge">redis</code></h2>
 
 <pre><code class="language-none">redis:
   addr: localhost:6379
@@ -1490,10 +1490,10 @@ accept event notifications.</p>
     idletimeout: 300s
 </code></pre>
 
-<p>Declare parameters for constructing the <code class="highlighter-rouge">redis</code> connections. Registry instances
+<p>Declare parameters for constructing the <code class="language-plaintext highlighter-rouge">redis</code> connections. Registry instances
 may use the Redis instance for several applications. Currently, it caches
-information about immutable blobs. Most of the <code class="highlighter-rouge">redis</code> options control
-how the registry connects to the <code class="highlighter-rouge">redis</code> instance. You can control the pool’s
+information about immutable blobs. Most of the <code class="language-plaintext highlighter-rouge">redis</code> options control
+how the registry connects to the <code class="language-plaintext highlighter-rouge">redis</code> instance. You can control the pool’s
 behavior with the <a href="#pool">pool</a> subsection.</p>
 
 <p>You should configure Redis with the <strong>allkeys-lru</strong> eviction policy, because the
@@ -1509,39 +1509,39 @@ registry does not set an expiration value on keys.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">addr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">addr</code></td>
       <td>yes</td>
       <td>The address (host and port) of the Redis instance.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">password</code></td>
+      <td><code class="language-plaintext highlighter-rouge">password</code></td>
       <td>no</td>
       <td>A password used to authenticate to the Redis instance.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">db</code></td>
+      <td><code class="language-plaintext highlighter-rouge">db</code></td>
       <td>no</td>
       <td>The name of the database to use for each connection.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">dialtimeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">dialtimeout</code></td>
       <td>no</td>
       <td>The timeout for connecting to the Redis instance.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">readtimeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">readtimeout</code></td>
       <td>no</td>
       <td>The timeout for reading from the Redis instance.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">writetimeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">writetimeout</code></td>
       <td>no</td>
       <td>The timeout for writing to the Redis instance.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="pool"><code class="highlighter-rouge">pool</code></h3>
+<h3 id="pool"><code class="language-plaintext highlighter-rouge">pool</code></h3>
 
 <pre><code class="language-none">pool:
   maxidle: 16
@@ -1561,24 +1561,24 @@ registry does not set an expiration value on keys.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">maxidle</code></td>
+      <td><code class="language-plaintext highlighter-rouge">maxidle</code></td>
       <td>no</td>
       <td>The maximum number of idle connections in the pool.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">maxactive</code></td>
+      <td><code class="language-plaintext highlighter-rouge">maxactive</code></td>
       <td>no</td>
       <td>The maximum number of connections which can be open before blocking a connection request.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">idletimeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">idletimeout</code></td>
       <td>no</td>
       <td>How long to wait before closing inactive connections.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="health"><code class="highlighter-rouge">health</code></h2>
+<h2 id="health"><code class="language-plaintext highlighter-rouge">health</code></h2>
 
 <pre><code class="language-none">health:
   storagedriver:
@@ -1606,14 +1606,14 @@ registry does not set an expiration value on keys.</p>
 <p>The health option is <strong>optional</strong>, and contains preferences for a periodic
 health check on the storage driver’s backend storage, as well as optional
 periodic checks on local files, HTTP URIs, and/or TCP servers. The results of
-the health checks are available at the <code class="highlighter-rouge">/debug/health</code> endpoint on the debug
+the health checks are available at the <code class="language-plaintext highlighter-rouge">/debug/health</code> endpoint on the debug
 HTTP server if the debug HTTP server is enabled (see http section).</p>
 
-<h3 id="storagedriver"><code class="highlighter-rouge">storagedriver</code></h3>
+<h3 id="storagedriver"><code class="language-plaintext highlighter-rouge">storagedriver</code></h3>
 
-<p>The <code class="highlighter-rouge">storagedriver</code> structure contains options for a health check on the
+<p>The <code class="language-plaintext highlighter-rouge">storagedriver</code> structure contains options for a health check on the
 configured storage driver’s backend storage. The health check is only active
-when <code class="highlighter-rouge">enabled</code> is set to <code class="highlighter-rouge">true</code>.</p>
+when <code class="language-plaintext highlighter-rouge">enabled</code> is set to <code class="language-plaintext highlighter-rouge">true</code>.</p>
 
 <table>
   <thead>
@@ -1625,26 +1625,26 @@ when <code class="highlighter-rouge">enabled</code> is set to <code class="highl
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
       <td>yes</td>
-      <td>Set to <code class="highlighter-rouge">true</code> to enable storage driver health checks or <code class="highlighter-rouge">false</code> to disable them.</td>
+      <td>Set to <code class="language-plaintext highlighter-rouge">true</code> to enable storage driver health checks or <code class="language-plaintext highlighter-rouge">false</code> to disable them.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">interval</code></td>
+      <td><code class="language-plaintext highlighter-rouge">interval</code></td>
       <td>no</td>
-      <td>How long to wait between repetitions of the storage driver health check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. Defaults to <code class="highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
+      <td>How long to wait between repetitions of the storage driver health check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. Defaults to <code class="language-plaintext highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">threshold</code></td>
+      <td><code class="language-plaintext highlighter-rouge">threshold</code></td>
       <td>no</td>
       <td>A positive integer which represents the number of times the check must fail before the state is marked as unhealthy. If not specified, a single failure marks the state as unhealthy.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="file"><code class="highlighter-rouge">file</code></h3>
+<h3 id="file"><code class="language-plaintext highlighter-rouge">file</code></h3>
 
-<p>The <code class="highlighter-rouge">file</code> structure includes a list of paths to be periodically checked for the\
+<p>The <code class="language-plaintext highlighter-rouge">file</code> structure includes a list of paths to be periodically checked for the<br />
 existence of a file. If a file exists at the given path, the health check will
 fail. You can use this mechanism to bring a registry out of rotation by creating
 a file.</p>
@@ -1659,22 +1659,22 @@ a file.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">file</code></td>
+      <td><code class="language-plaintext highlighter-rouge">file</code></td>
       <td>yes</td>
       <td>The path to check for existence of a file.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">interval</code></td>
+      <td><code class="language-plaintext highlighter-rouge">interval</code></td>
       <td>no</td>
-      <td>How long to wait before repeating the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. Defaults to <code class="highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
+      <td>How long to wait before repeating the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. Defaults to <code class="language-plaintext highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="http-1"><code class="highlighter-rouge">http</code></h3>
+<h3 id="http-1"><code class="language-plaintext highlighter-rouge">http</code></h3>
 
-<p>The <code class="highlighter-rouge">http</code> structure includes a list of HTTP URIs to periodically check with
-<code class="highlighter-rouge">HEAD</code> requests. If a <code class="highlighter-rouge">HEAD</code> request does not complete or returns an unexpected
+<p>The <code class="language-plaintext highlighter-rouge">http</code> structure includes a list of HTTP URIs to periodically check with
+<code class="language-plaintext highlighter-rouge">HEAD</code> requests. If a <code class="language-plaintext highlighter-rouge">HEAD</code> request does not complete or returns an unexpected
 status code, the health check will fail.</p>
 
 <table>
@@ -1687,41 +1687,41 @@ status code, the health check will fail.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">uri</code></td>
+      <td><code class="language-plaintext highlighter-rouge">uri</code></td>
       <td>yes</td>
       <td>The URI to check.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">headers</code></td>
+      <td><code class="language-plaintext highlighter-rouge">headers</code></td>
       <td>no</td>
-      <td>Static headers to add to each request. Each header’s name is a key beneath <code class="highlighter-rouge">headers</code>, and each value is a list of payloads for that header name. Values must always be lists.</td>
+      <td>Static headers to add to each request. Each header’s name is a key beneath <code class="language-plaintext highlighter-rouge">headers</code>, and each value is a list of payloads for that header name. Values must always be lists.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">statuscode</code></td>
+      <td><code class="language-plaintext highlighter-rouge">statuscode</code></td>
       <td>no</td>
-      <td>The expected status code from the HTTP URI. Defaults to <code class="highlighter-rouge">200</code>.</td>
+      <td>The expected status code from the HTTP URI. Defaults to <code class="language-plaintext highlighter-rouge">200</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">timeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">timeout</code></td>
       <td>no</td>
-      <td>How long to wait before timing out the HTTP request. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
+      <td>How long to wait before timing out the HTTP request. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">interval</code></td>
+      <td><code class="language-plaintext highlighter-rouge">interval</code></td>
       <td>no</td>
-      <td>How long to wait before repeating the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. Defaults to <code class="highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
+      <td>How long to wait before repeating the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. Defaults to <code class="language-plaintext highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">threshold</code></td>
+      <td><code class="language-plaintext highlighter-rouge">threshold</code></td>
       <td>no</td>
       <td>The number of times the check must fail before the state is marked as unhealthy. If this field is not specified, a single failure marks the state as unhealthy.</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="tcp"><code class="highlighter-rouge">tcp</code></h3>
+<h3 id="tcp"><code class="language-plaintext highlighter-rouge">tcp</code></h3>
 
-<p>The <code class="highlighter-rouge">tcp</code> structure includes a list of TCP addresses to periodically check using
+<p>The <code class="language-plaintext highlighter-rouge">tcp</code> structure includes a list of TCP addresses to periodically check using
 TCP connection attempts. Addresses must include port numbers. If a connection
 attempt fails, the health check will fail.</p>
 
@@ -1735,37 +1735,37 @@ attempt fails, the health check will fail.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">addr</code></td>
+      <td><code class="language-plaintext highlighter-rouge">addr</code></td>
       <td>yes</td>
       <td>The TCP address and port to connect to.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">timeout</code></td>
+      <td><code class="language-plaintext highlighter-rouge">timeout</code></td>
       <td>no</td>
-      <td>How long to wait before timing out the TCP connection. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
+      <td>How long to wait before timing out the TCP connection. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">interval</code></td>
+      <td><code class="language-plaintext highlighter-rouge">interval</code></td>
       <td>no</td>
-      <td>How long to wait between repetitions of the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="highlighter-rouge">ns</code>, <code class="highlighter-rouge">us</code>, <code class="highlighter-rouge">ms</code>, <code class="highlighter-rouge">s</code>, <code class="highlighter-rouge">m</code>, or <code class="highlighter-rouge">h</code>. Defaults to <code class="highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
+      <td>How long to wait between repetitions of the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of <code class="language-plaintext highlighter-rouge">ns</code>, <code class="language-plaintext highlighter-rouge">us</code>, <code class="language-plaintext highlighter-rouge">ms</code>, <code class="language-plaintext highlighter-rouge">s</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">h</code>. Defaults to <code class="language-plaintext highlighter-rouge">10s</code> if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">threshold</code></td>
+      <td><code class="language-plaintext highlighter-rouge">threshold</code></td>
       <td>no</td>
       <td>The number of times the check must fail before the state is marked as unhealthy. If this field is not specified, a single failure marks the state as unhealthy.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="proxy"><code class="highlighter-rouge">proxy</code></h2>
+<h2 id="proxy"><code class="language-plaintext highlighter-rouge">proxy</code></h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proxy:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proxy:
   remoteurl: https://registry-1.docker.io
   username: [username]
   password: [password]
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">proxy</code> structure allows a registry to be configured as a pull-through cache
+<p>The <code class="language-plaintext highlighter-rouge">proxy</code> structure allows a registry to be configured as a pull-through cache
 to Docker Hub.  See
 <a href="https://github.com/docker/docker.github.io/tree/master/registry/recipes/mirror.md">mirror</a>
 for more information. Pushing to a registry configured as a pull-through cache
@@ -1781,32 +1781,32 @@ is unsupported.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">remoteurl</code></td>
+      <td><code class="language-plaintext highlighter-rouge">remoteurl</code></td>
       <td>yes</td>
       <td>The URL for the repository on Docker Hub.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">username</code></td>
+      <td><code class="language-plaintext highlighter-rouge">username</code></td>
       <td>no</td>
       <td>The username registered with Docker Hub which has access to the repository.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">password</code></td>
+      <td><code class="language-plaintext highlighter-rouge">password</code></td>
       <td>no</td>
-      <td>The password used to authenticate to Docker Hub using the username specified in <code class="highlighter-rouge">username</code>.</td>
+      <td>The password used to authenticate to Docker Hub using the username specified in <code class="language-plaintext highlighter-rouge">username</code>.</td>
     </tr>
   </tbody>
 </table>
 
-<p>To enable pulling private repositories (e.g. <code class="highlighter-rouge">batman/robin</code>) specify the
-username (such as <code class="highlighter-rouge">batman</code>) and the password for that username.</p>
+<p>To enable pulling private repositories (e.g. <code class="language-plaintext highlighter-rouge">batman/robin</code>) specify the
+username (such as <code class="language-plaintext highlighter-rouge">batman</code>) and the password for that username.</p>
 
 <blockquote>
   <p><strong>Note</strong>: These private repositories are stored in the proxy cache’s storage.
 Take appropriate measures to protect access to the proxy cache.</p>
 </blockquote>
 
-<h2 id="compatibility"><code class="highlighter-rouge">compatibility</code></h2>
+<h2 id="compatibility"><code class="language-plaintext highlighter-rouge">compatibility</code></h2>
 
 <pre><code class="language-none">compatibility:
   schema1:
@@ -1814,10 +1814,10 @@ Take appropriate measures to protect access to the proxy cache.</p>
     enabled: true
 </code></pre>
 
-<p>Use the <code class="highlighter-rouge">compatibility</code> structure to configure handling of older and deprecated
+<p>Use the <code class="language-plaintext highlighter-rouge">compatibility</code> structure to configure handling of older and deprecated
 features. Each subsection defines such a feature with configurable behavior.</p>
 
-<h3 id="schema1"><code class="highlighter-rouge">schema1</code></h3>
+<h3 id="schema1"><code class="language-plaintext highlighter-rouge">schema1</code></h3>
 
 <table>
   <thead>
@@ -1829,19 +1829,19 @@ features. Each subsection defines such a feature with configurable behavior.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">signingkeyfile</code></td>
+      <td><code class="language-plaintext highlighter-rouge">signingkeyfile</code></td>
       <td>no</td>
-      <td>The signing private key used to add signatures to <code class="highlighter-rouge">schema1</code> manifests. If no signing key is provided, a new ECDSA key is generated when the registry starts.</td>
+      <td>The signing private key used to add signatures to <code class="language-plaintext highlighter-rouge">schema1</code> manifests. If no signing key is provided, a new ECDSA key is generated when the registry starts.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">enabled</code></td>
+      <td><code class="language-plaintext highlighter-rouge">enabled</code></td>
       <td>no</td>
-      <td>If this is not set to true, <code class="highlighter-rouge">schema1</code> manifests cannot be pushed.</td>
+      <td>If this is not set to true, <code class="language-plaintext highlighter-rouge">schema1</code> manifests cannot be pushed.</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="validation"><code class="highlighter-rouge">validation</code></h2>
+<h2 id="validation"><code class="language-plaintext highlighter-rouge">validation</code></h2>
 
 <pre><code class="language-none">validation:
   manifests:
@@ -1852,30 +1852,30 @@ features. Each subsection defines such a feature with configurable behavior.</p>
         - ^https?://www\.example\.com/
 </code></pre>
 
-<h3 id="disabled"><code class="highlighter-rouge">disabled</code></h3>
+<h3 id="disabled"><code class="language-plaintext highlighter-rouge">disabled</code></h3>
 
-<p>The <code class="highlighter-rouge">disabled</code> flag disables the other options in the <code class="highlighter-rouge">validation</code>
-section. They are enabled by default. This option deprecates the <code class="highlighter-rouge">enabled</code> flag.</p>
+<p>The <code class="language-plaintext highlighter-rouge">disabled</code> flag disables the other options in the <code class="language-plaintext highlighter-rouge">validation</code>
+section. They are enabled by default. This option deprecates the <code class="language-plaintext highlighter-rouge">enabled</code> flag.</p>
 
-<h3 id="manifests"><code class="highlighter-rouge">manifests</code></h3>
+<h3 id="manifests"><code class="language-plaintext highlighter-rouge">manifests</code></h3>
 
-<p>Use the <code class="highlighter-rouge">manifests</code> subsection to configure validation of manifests. If
-<code class="highlighter-rouge">disabled</code> is <code class="highlighter-rouge">false</code>, the validation allows nothing.</p>
+<p>Use the <code class="language-plaintext highlighter-rouge">manifests</code> subsection to configure validation of manifests. If
+<code class="language-plaintext highlighter-rouge">disabled</code> is <code class="language-plaintext highlighter-rouge">false</code>, the validation allows nothing.</p>
 
-<h4 id="urls"><code class="highlighter-rouge">urls</code></h4>
+<h4 id="urls"><code class="language-plaintext highlighter-rouge">urls</code></h4>
 
-<p>The <code class="highlighter-rouge">allow</code> and <code class="highlighter-rouge">deny</code> options are each a list of
+<p>The <code class="language-plaintext highlighter-rouge">allow</code> and <code class="language-plaintext highlighter-rouge">deny</code> options are each a list of
 <a href="https://godoc.org/regexp/syntax">regular expressions</a> that restrict the URLs in
 pushed manifests.</p>
 
-<p>If <code class="highlighter-rouge">allow</code> is unset, pushing a manifest containing URLs fails.</p>
+<p>If <code class="language-plaintext highlighter-rouge">allow</code> is unset, pushing a manifest containing URLs fails.</p>
 
-<p>If <code class="highlighter-rouge">allow</code> is set, pushing a manifest succeeds only if all URLs match
-one of the <code class="highlighter-rouge">allow</code> regular expressions <strong>and</strong> one of the following holds:</p>
+<p>If <code class="language-plaintext highlighter-rouge">allow</code> is set, pushing a manifest succeeds only if all URLs match
+one of the <code class="language-plaintext highlighter-rouge">allow</code> regular expressions <strong>and</strong> one of the following holds:</p>
 
 <ol>
-  <li><code class="highlighter-rouge">deny</code> is unset.</li>
-  <li><code class="highlighter-rouge">deny</code> is set but no URLs within the manifest match any of the <code class="highlighter-rouge">deny</code> regular
+  <li><code class="language-plaintext highlighter-rouge">deny</code> is unset.</li>
+  <li><code class="language-plaintext highlighter-rouge">deny</code> is set but no URLs within the manifest match any of the <code class="language-plaintext highlighter-rouge">deny</code> regular
 expressions.</li>
 </ol>
 
@@ -1896,9 +1896,9 @@ http:
         addr: localhost:5001
 </code></pre>
 
-<p>This example configures the registry instance to run on port <code class="highlighter-rouge">5000</code>, binding to
-<code class="highlighter-rouge">localhost</code>, with the <code class="highlighter-rouge">debug</code> server enabled. Registry data is stored in the
-<code class="highlighter-rouge">/var/lib/registry</code> directory. Logging is set to <code class="highlighter-rouge">debug</code> mode, which is the most
+<p>This example configures the registry instance to run on port <code class="language-plaintext highlighter-rouge">5000</code>, binding to
+<code class="language-plaintext highlighter-rouge">localhost</code>, with the <code class="language-plaintext highlighter-rouge">debug</code> server enabled. Registry data is stored in the
+<code class="language-plaintext highlighter-rouge">/var/lib/registry</code> directory. Logging is set to <code class="language-plaintext highlighter-rouge">debug</code> mode, which is the most
 verbose.</p>
 
 <p>See

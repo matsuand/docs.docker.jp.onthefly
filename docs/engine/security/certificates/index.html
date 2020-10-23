@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>証明書を使ったリポジトリクライアントの確認 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="証明書を使ったリポジトリクライアントの確認" />
   <meta property="og:description" content="レジストリへのアクセス認証に証明書を使うための設定方法を示します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/certificates/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"証明書を使ったリポジトリクライアントの確認","description":"レジストリへのアクセス認証に証明書を使うための設定方法を示します。","url":"https://docs.docker.com/engine/security/certificates/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -116,9 +116,9 @@ TLS はレジストリエンドポイントが信頼できるものであるこ�
 
 <h2 id="understand-the-configuration">設定内容の理解</h2>
 
-<p>カスタム証明書は <code class="highlighter-rouge">/etc/docker/certs.d</code> ディレクトリ配下に新たなディレクトリを生成して、そこに設定ファイルを置きます。
-ディレクトリ名はレジストリのホスト名と同一に、たとえば <code class="highlighter-rouge">localhost</code> のようにします。
-<code class="highlighter-rouge">*.crt</code> ファイルはすべて、CA ルートとしてこのディレクトリに追加していきます。</p>
+<p>カスタム証明書は <code class="language-plaintext highlighter-rouge">/etc/docker/certs.d</code> ディレクトリ配下に新たなディレクトリを生成して、そこに設定ファイルを置きます。
+ディレクトリ名はレジストリのホスト名と同一に、たとえば <code class="language-plaintext highlighter-rouge">localhost</code> のようにします。
+<code class="language-plaintext highlighter-rouge">*.crt</code> ファイルはすべて、CA ルートとしてこのディレクトリに追加していきます。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
@@ -127,7 +127,7 @@ Docker 1.13 の時点において、Linux 上のルート認証局は、シス�
 これ以前の Docker や Windows Server 向けの Docker Enterprise Edition においては、カスタムルート証明書が設定されていない場合に限って、システムのデフォルト証明書が利用されます。</p>
 </blockquote>
 
-<p>1 つでも <code class="highlighter-rouge">&lt;filename&gt;.key/cert</code> のペアがあるということは、そのリポジトリに対するアクセスにはカスタム証明書が必要であることを Docker に伝えるものです。</p>
+<p>1 つでも <code class="language-plaintext highlighter-rouge">&lt;filename&gt;.key/cert</code> のペアがあるということは、そのリポジトリに対するアクセスにはカスタム証明書が必要であることを Docker に伝えるものです。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
@@ -137,7 +137,7 @@ Docker 1.13 の時点において、Linux 上のルート認証局は、シス�
 
 <p>以下は、複数のカスタム証明書がある場合の設定例です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /etc/docker/certs.d/        &lt;-- 証明書のディレクトリ
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /etc/docker/certs.d/        &lt;-- 証明書のディレクトリ
     └── localhost:5000          &lt;-- ホスト名：ポート
        ├── client.cert          &lt;-- クライアント証明書
        ├── client.key           &lt;-- クライアント鍵
@@ -149,10 +149,10 @@ OS が提供する証明書チェーンを生成するためには、各オペ�
 
 <h2 id="create-the-client-certificates">クライアント証明書の生成</h2>
 
-<p>OpenSSL の <code class="highlighter-rouge">genrsa</code> コマンドと <code class="highlighter-rouge">req</code> コマンドを使って、まずは RSA 鍵を生成します。
+<p>OpenSSL の <code class="language-plaintext highlighter-rouge">genrsa</code> コマンドと <code class="language-plaintext highlighter-rouge">req</code> コマンドを使って、まずは RSA 鍵を生成します。
 そしてこの鍵を使って証明書を生成します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -out client.key 4096
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -out client.key 4096
 $ openssl req -new -x509 -text -key client.key -out client.cert
 </code></pre></div></div>
 
@@ -164,17 +164,17 @@ macOS における OpenSSL バージョンは、Docker が必要とする種類�
 
 <h2 id="troubleshooting-tips">トラブルシューティングのためのヒント</h2>
 
-<p>Docker デーモンは <code class="highlighter-rouge">.crt</code> ファイルを CA 証明書として、<code class="highlighter-rouge">.cert</code> ファイルをクライアント証明書として、それぞれ解釈します。
-仮に CA 証明書の拡張子が、本来の正しい <code class="highlighter-rouge">.crt</code> でなく間違って <code class="highlighter-rouge">.cert</code> になってしまっていたら、Docker デーモンは以下のようなエラーメッセージをログ出力します。</p>
+<p>Docker デーモンは <code class="language-plaintext highlighter-rouge">.crt</code> ファイルを CA 証明書として、<code class="language-plaintext highlighter-rouge">.cert</code> ファイルをクライアント証明書として、それぞれ解釈します。
+仮に CA 証明書の拡張子が、本来の正しい <code class="language-plaintext highlighter-rouge">.crt</code> でなく間違って <code class="language-plaintext highlighter-rouge">.cert</code> になってしまっていたら、Docker デーモンは以下のようなエラーメッセージをログ出力します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Missing key KEY_NAME for client certificate CERT_NAME. CA certificates should use the extension .crt.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Missing key KEY_NAME for client certificate CERT_NAME. CA certificates should use the extension .crt.
 </code></pre></div></div>
 
 <p>Docker レジストリをポート番号なしにアクセスするなら、ディレクトリ名にポート番号をつけないでください。
 以下に示す設定は、デフォルトのポート 443 を使ってレジストリにアクセスできるようにするものです。
-実際のアクセスは <code class="highlighter-rouge">docker login my-https.registry.example.com</code> のように行います。</p>
+実際のアクセスは <code class="language-plaintext highlighter-rouge">docker login my-https.registry.example.com</code> のように行います。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /etc/docker/certs.d/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /etc/docker/certs.d/
     └── my-https.registry.example.com          &lt;-- ポートなしのホスト名
        ├── client.cert
        ├── client.key

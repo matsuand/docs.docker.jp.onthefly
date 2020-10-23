@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ログとトラブルシューティング | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ログとトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting, logs, and known issues" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ログとトラブルシューティング","description":"Troubleshooting, logs, and known issues","url":"https://docs.docker.com/docker-for-windows/troubleshoot/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -170,13 +170,13 @@ Desktop</a>（Docker Desktop での個人情報の取り扱い） を参照し�
 <p>診断処理は、自分で実行した方がよい場合があります。
 たとえば Docker Desktop for Windows が起動できないときなどです。</p>
 
-<p>まず<code class="highlighter-rouge">com.docker.diagnose</code>を探し出します。
-おそらく<code class="highlighter-rouge">C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe</code>にあるはずです。</p>
+<p>まず<code class="language-plaintext highlighter-rouge">com.docker.diagnose</code>を探し出します。
+おそらく<code class="language-plaintext highlighter-rouge">C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe</code>にあるはずです。</p>
 
 <p>PowerShell において、以下のように診断情報の生成と <strong>アップロード</strong> を行います。</p>
 
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">PS </span>C:\&gt; &amp; <span class="s2">"C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe"</span> gather -upload
-</code></pre></div></div>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nf">PS</span><span class="w"> </span><span class="nx">C:\</span><span class="err">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">"C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe"</span><span class="w"> </span><span class="nx">gather</span><span class="w"> </span><span class="nt">-upload</span><span class="w">
+</span></code></pre></div></div>
 
 <p>診断処理が終了すると、以下のような出力が得られます。
 そこに診断 ID（Diagnostics ID）が示されます。</p>
@@ -191,14 +191,14 @@ Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 <span cl
 
 <p>Docker Desktop では安全でないレジストリの証明書は無視します。
 そういったレジストリに対しては、クライアント証明書を送信しません。
-そのような場合、<code class="highlighter-rouge">docker run</code>のようなコマンドを使ってレジストリからプルを行おうとしても、コマンドライン上には以下のようなエラーメッセージが表示されます。</p>
+そのような場合、<code class="language-plaintext highlighter-rouge">docker run</code>のようなコマンドを使ってレジストリからプルを行おうとしても、コマンドライン上には以下のようなエラーメッセージが表示されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
 </code></pre></div></div>
 
 <p>レジストリ側においても同じようにエラーになっています。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 </code></pre></div></div>
 
@@ -208,7 +208,7 @@ Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 <span cl
 
 <h4 id="permissions-errors-on-data-directories-for-shared-volumes">共有ボリューム上のデータディレクトリに対するパーミッションエラー</h4>
 
-<p>Docker Desktop は <a href="/docs.docker.jp.onthefly/docker-for-windows/#file-sharing">共有ボリューム</a> に対して、デフォルトとして <a href="http://permissions-calculator.org/decode/0777/">0777</a>（<code class="highlighter-rouge">user</code>と<code class="highlighter-rouge">group</code>に対して<code class="highlighter-rouge">read</code>、<code class="highlighter-rouge">write</code>、<code class="highlighter-rouge">execute</code>）のパーミッションを設定します。</p>
+<p>Docker Desktop は <a href="/docs.docker.jp.onthefly/docker-for-windows/#file-sharing">共有ボリューム</a> に対して、デフォルトとして <a href="http://permissions-calculator.org/decode/0777/">0777</a>（<code class="language-plaintext highlighter-rouge">user</code>と<code class="language-plaintext highlighter-rouge">group</code>に対して<code class="language-plaintext highlighter-rouge">read</code>、<code class="language-plaintext highlighter-rouge">write</code>、<code class="language-plaintext highlighter-rouge">execute</code>）のパーミッションを設定します。</p>
 
 <p>共有ボリュームにおけるこのデフォルトのパーミッションは、設定変更することができません。
 共有ボリュームのデフォルト設定とは異なるパーミッションを必要とするアプリケーションを稼動させている場合は、ホストにマウントされていないボリュームを利用するか、デフォルトのパーミッションでも動作するようにアプリケーションの変更を行うしかありません。</p>
@@ -232,17 +232,17 @@ Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 <span cl
 
 <h4 id="avoid-unexpected-syntax-errors-use-unix-style-line-endings-for-files-in-containers">予期しない文法エラー回避のためコンテナー向けファイルの改行文字を Unix 風に</h4>
 
-<p>コンテナー内での動作に利用するファイルは、改行文字を Unix スタイルの <code class="highlighter-rouge">\n</code> にする必要があります。
+<p>コンテナー内での動作に利用するファイルは、改行文字を Unix スタイルの <code class="language-plaintext highlighter-rouge">\n</code> にする必要があります。
 これを行うべきファイルとして、ビルド時にコマンドラインから参照されるファイルや、Dockerfile 内の RUN コマンドにおいて参照されるファイルなどがあります。</p>
 
-<p>Docker コンテナーや<code class="highlighter-rouge">docker build</code>コマンドは Unix 環境において動作しています。
-したがってコンテナー内のファイルは Unix 風に行末を<code class="highlighter-rouge">\n</code>にする必要があります。
-Windows スタイルの<code class="highlighter-rouge">\r\n</code>としてはなりません。
+<p>Docker コンテナーや<code class="language-plaintext highlighter-rouge">docker build</code>コマンドは Unix 環境において動作しています。
+したがってコンテナー内のファイルは Unix 風に行末を<code class="language-plaintext highlighter-rouge">\n</code>にする必要があります。
+Windows スタイルの<code class="language-plaintext highlighter-rouge">\r\n</code>としてはなりません。
 ファイルを生成する際には十分に注意しておくことが必要です。
 シェルスクリプトなどを生成するにあたって Windows ツールを使っていると、デフォルトで行末が Windows スタイルになってしまうことがあります。
 そのようにして記述されたコマンドは、Unix ベースのコンテナー内において、最終的には Unix コマンドに受け渡されます。
-（たとえばシェルスクリプトが<code class="highlighter-rouge">/bin/sh</code>に受け渡されます。）
-その際に Windows スタイルの改行文字を利用していると、<code class="highlighter-rouge">docker run</code>では文法エラーが発生します。</p>
+（たとえばシェルスクリプトが<code class="language-plaintext highlighter-rouge">/bin/sh</code>に受け渡されます。）
+その際に Windows スタイルの改行文字を利用していると、<code class="language-plaintext highlighter-rouge">docker run</code>では文法エラーが発生します。</p>
 
 <p>この問題の利用例とその解決については、GitHub issue にある <a href="https://github.com/moby/moby/issues/24388">Docker RUN fails to execute shell script</a> を参照してください。</p>
 
@@ -273,8 +273,8 @@ Docker Desktop のインストーラーの操作時に、これらが有効に�
 後者は RVI（Rapid Virtualization Indexing）とも呼ばれます。
 システムによっては、仮想化機能は BIOS から設定しなければならないものがあります。
 その設定手順はベンダー固有のものになります。
-ただし通常、BIOS の設定オプションは<code class="highlighter-rouge">仮想化技術</code>（Virtualization Technology; VTx）やこれに似た用語で示されています。
-<code class="highlighter-rouge">systeminfo</code>コマンドを実行して、必要となる Hyper-V 機能を確認してください。
+ただし通常、BIOS の設定オプションは<code class="language-plaintext highlighter-rouge">仮想化技術</code>（Virtualization Technology; VTx）やこれに似た用語で示されています。
+<code class="language-plaintext highlighter-rouge">systeminfo</code>コマンドを実行して、必要となる Hyper-V 機能を確認してください。
 詳しくは <a href="https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements">Pre-requisites for Hyper-V on Windows 10</a>（Windows 10 における Hyper-V の前提条件）を参照してください。</p>
 
 <p>Hyper-V を手動でインストールする場合は <a href="https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install">Install Hyper-V on Windows 10</a>（Windows 10 における Hyper-V のインストール）を参照してください。
@@ -289,11 +289,11 @@ Hyper-V のインストール後に再起動を行わないままでいると、
 <h4 id="docker-machine-用の-hyper-v-ドライバー">Docker Machine 用の Hyper-V ドライバー</h4>
 
 <p>Docker Desktop をインストールすると、かつてのツール Docker Machine もインストールされます。
-これはローカルに仮想マシンを生成するにあたって、古い <a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="noopener" class="_"><code class="highlighter-rouge">boot2docker.iso</code></a> と <a href="/docs.docker.jp.onthefly/machine/drivers/hyper-v/">Microsoft Hyper-V ドライバー</a> を利用します。
+これはローカルに仮想マシンを生成するにあたって、古い <a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="noopener" class="_"><code class="language-plaintext highlighter-rouge">boot2docker.iso</code></a> と <a href="/docs.docker.jp.onthefly/machine/drivers/hyper-v/">Microsoft Hyper-V ドライバー</a> を利用します。
 <strong>Docker Desktop を使う上で、これは関係のないものです</strong>。
 ただしローカルに複数の仮想マシンを生成するために Docker Machine を利用したい場合、あるいはリモートマシンにプロビジョニングしたい場合は <a href="/docs.docker.jp.onthefly/machine/">Docker Machine</a> に示されるトピックを参照してください。
 そのトピックは Docker Machine on Windows の情報が必要な方のみに向けたものです。
-そこでは Hyper-V の有効化と外部ネットワークスイッチがアクティブであることが必要であり、<code class="highlighter-rouge">docker-machine create</code>コマンドのフラグで参照します。
+そこでは Hyper-V の有効化と外部ネットワークスイッチがアクティブであることが必要であり、<code class="language-plaintext highlighter-rouge">docker-machine create</code>コマンドのフラグで参照します。
 これに関しては <a href="/docs.docker.jp.onthefly/machine/drivers/hyper-v/#example">Docker Machine ドライバー利用例</a> において説明されています。</p>
 
 <h4 id="virtualization-must-be-enabled">仮想化技術の有効化</h4>
@@ -314,7 +314,7 @@ Hyper-V のインストール後に再起動を行わないままでいると、
 
 <ol>
   <li>管理コンソールプロンプトを開きます。</li>
-  <li><code class="highlighter-rouge">bcdedit /set hypervisorlaunchtype auto</code>を実行します。</li>
+  <li><code class="language-plaintext highlighter-rouge">bcdedit /set hypervisorlaunchtype auto</code>を実行します。</li>
   <li>Windows を再起動します。</li>
 </ol>
 
@@ -345,7 +345,7 @@ GitHub の issue <a href="https://github.com/docker/for-win/issues/139">Enabling
     <p>外部ネットワークスイッチを設定します。
 いずれ <a href="/docs.docker.jp.onthefly/machine/">Docker Machine</a> を利用してローカルに複数の VM を利用するつもりなら、これが必要になります。
 このことは <a href="/docs.docker.jp.onthefly/machine/drivers/hyper-v/#example">Docker Machine 用の Hyper-V ドライバー</a> 内のトピックにおいて説明しています。
-<code class="highlighter-rouge">DockerNAT</code>をこのスイッチに置き換えることができます。</p>
+<code class="language-plaintext highlighter-rouge">DockerNAT</code>をこのスイッチに置き換えることができます。</p>
   </li>
   <li>
     <p>これまでの手順では問題解決できない場合は、<a href="https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md">Cleanup README</a> の手順に従ってください。</p>
@@ -354,9 +354,9 @@ GitHub の issue <a href="https://github.com/docker/for-win/issues/139">Enabling
       <p>上記説明を十分読んでから Windows クリーンアップスクリプトを実行してください。</p>
 
       <p>クリーンアップ（cleanup）コマンドには、2 つのフラグがあります。
-<code class="highlighter-rouge">-Cleanup</code>と<code class="highlighter-rouge">-ForceDeleteAllSwitches</code>です。
+<code class="language-plaintext highlighter-rouge">-Cleanup</code>と<code class="language-plaintext highlighter-rouge">-ForceDeleteAllSwitches</code>です。
 どのスクリプトを実行する場合も、説明ページ全体をよく読んでから実施してください。
-特に<code class="highlighter-rouge">-ForceDeleteAllSwitches</code>の警告メッセージについてはよく確認してください。{: .warning}</p>
+特に<code class="language-plaintext highlighter-rouge">-ForceDeleteAllSwitches</code>の警告メッセージについてはよく確認してください。{: .warning}</p>
     </blockquote>
   </li>
 </ol>
@@ -378,7 +378,7 @@ Windows にネイティブな Docker デーモン上において Linux コンテ
  See 'C:\Program Files\Docker\docker.exe run --help'.
 </code></pre>
 
-<h3 id="limitations-of-windows-containers-for-localhost-and-published-ports"><code class="highlighter-rouge">localhost</code> や公開ポートに対する Windows コンテナーの制約</h3>
+<h3 id="limitations-of-windows-containers-for-localhost-and-published-ports"><code class="language-plaintext highlighter-rouge">localhost</code> や公開ポートに対する Windows コンテナーの制約</h3>
 
 <p>Docker Desktop for Windows には、Windows コンテナーと Linux コンテナーを切り替えるオプションがあります。
 Windows コンテナーを利用している場合、現時点での Windows NAT（WinNAT）の実装上の理由により、ネットワーク機能に一部制限があることに留意してください。
@@ -388,8 +388,8 @@ Windows コンテナーを利用している場合、現時点での Windows NAT
 これは Docker Desktop for Windows を利用した Windows 10 1809 から可能になりました。
 Docker EE を利用する Windows Server 2019 / 1809 についても同様です。</p>
 
-<p><code class="highlighter-rouge">Windows 10 18.09</code> より前のバージョンを利用している場合、Windows コンテナーの公開ポートに関しては、ローカルホストのループバックに問題があります。
-ホストからコンテナーのエンドポイントにアクセスするには、コンテナーの IP とポートが必要でしたが、<code class="highlighter-rouge">Windows 10 18.09</code> からは、ローカルホストの公開ポートを使ってアクセスできるようになりました。</p>
+<p><code class="language-plaintext highlighter-rouge">Windows 10 18.09</code> より前のバージョンを利用している場合、Windows コンテナーの公開ポートに関しては、ローカルホストのループバックに問題があります。
+ホストからコンテナーのエンドポイントにアクセスするには、コンテナーの IP とポートが必要でしたが、<code class="language-plaintext highlighter-rouge">Windows 10 18.09</code> からは、ローカルホストの公開ポートを使ってアクセスできるようになりました。</p>
 
 <p>Docker を使ってイメージをプルしてウェブサーバーを起動するとします。
 まずは以下のようなコマンドを実行します。</p>
@@ -397,14 +397,14 @@ Docker EE を利用する Windows Server 2019 / 1809 についても同様です
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> docker run <span class="nt">-d</span> <span class="nt">-p</span> 80:80 <span class="nt">--name</span> webserver nginx
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">curl http://localhost</code>を実行したり、ウェブサーバー上から<code class="highlighter-rouge">http://localhost</code>にアクセスしても、<code class="highlighter-rouge">nginx</code>のウェブページは表示されません。
+<p><code class="language-plaintext highlighter-rouge">curl http://localhost</code>を実行したり、ウェブサーバー上から<code class="language-plaintext highlighter-rouge">http://localhost</code>にアクセスしても、<code class="language-plaintext highlighter-rouge">nginx</code>のウェブページは表示されません。
 （Linux コンテナーであれば表示されています。）</p>
 
 <p>ローカルホストから Windows コンテナーにアクセスするには、サービスが実行されているコンテナーの IP アドレスとポートを指定する必要があります。</p>
 
-<p>コンテナーの IP アドレスは、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/inspect/"><code class="highlighter-rouge">docker inspect</code></a>コマンドにコンテナーの ID か名前を指定し、適当に<code class="highlighter-rouge">--format</code>オプションをつけて確認することができます。
+<p>コンテナーの IP アドレスは、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/inspect/"><code class="language-plaintext highlighter-rouge">docker inspect</code></a>コマンドにコンテナーの ID か名前を指定し、適当に<code class="language-plaintext highlighter-rouge">--format</code>オプションをつけて確認することができます。
 上の例に対応するコマンドは、たとえば以下のようになります。
-ここではコンテナー ID ではなく、コンテナー名（<code class="highlighter-rouge">webserver</code>）を指定しています。</p>
+ここではコンテナー ID ではなく、コンテナー名（<code class="language-plaintext highlighter-rouge">webserver</code>）を指定しています。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker inspect <span class="se">\</span>
   <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'</span> <span class="se">\</span>
@@ -420,8 +420,8 @@ Docker EE を利用する Windows Server 2019 / 1809 についても同様です
 172.17.0.2
 </code></pre></div></div>
 
-<p>そこでウェブサーバーには<code class="highlighter-rouge">http://172.17.0.2:80</code>を使ってアクセスできるようになります。
-（あるいは HTTP のデフォルトポートは<code class="highlighter-rouge">80</code>なので、単に<code class="highlighter-rouge">http://172.17.0.2</code>としてもアクセスできます。）</p>
+<p>そこでウェブサーバーには<code class="language-plaintext highlighter-rouge">http://172.17.0.2:80</code>を使ってアクセスできるようになります。
+（あるいは HTTP のデフォルトポートは<code class="language-plaintext highlighter-rouge">80</code>なので、単に<code class="language-plaintext highlighter-rouge">http://172.17.0.2</code>としてもアクセスできます。）</p>
 
 <p>さらに詳しくは、以下を参照してください。</p>
 
@@ -482,8 +482,8 @@ workloads.</p>
 <ul>
   <li>
     <p>Slow boot time of the Linux VM. If you look in the logs and find some entries
-prefixed with <code class="highlighter-rouge">Moby</code>. On real hardware, it takes 5-10 seconds to boot the
-Linux VM; roughly the time between the <code class="highlighter-rouge">Connected</code> log entry and the <code class="highlighter-rouge">*
+prefixed with <code class="language-plaintext highlighter-rouge">Moby</code>. On real hardware, it takes 5-10 seconds to boot the
+Linux VM; roughly the time between the <code class="language-plaintext highlighter-rouge">Connected</code> log entry and the <code class="language-plaintext highlighter-rouge">*
 Starting Docker ... [ ok ]</code> log entry. If you boot the Linux VM inside a
 Windows VM, this may take considerably longer. We have a timeout of 60s or so.
 If the VM hasn’t started by that time, we retry. If the retry fails we print
@@ -526,7 +526,7 @@ See <span class="s1">'C:\Program Files\Docker\Docker\Resources\bin\docker.exe ru
 </code></pre></div></div>
 
 <p>As an immediate workaround to this problem, reset the DNS server to use the
-Google DNS fixed address: <code class="highlighter-rouge">8.8.8.8</code>. You can configure this through the <strong>Settings</strong></p>
+Google DNS fixed address: <code class="language-plaintext highlighter-rouge">8.8.8.8</code>. You can configure this through the <strong>Settings</strong></p>
 <blockquote>
   <p><strong>Network</strong> dialog, as described in the topic <a href="/docs.docker.jp.onthefly/docker-for-windows/#network">Network</a>.
 Docker automatically restarts when you apply this setting, which could take some
@@ -536,7 +536,7 @@ time.</p>
 <h3 id="natip-configuration">NAT/IP configuration</h3>
 
 <p>By default, Docker Desktop uses an internal network prefix of
-<code class="highlighter-rouge">10.0.75.0/24</code>. Should this clash with your normal network setup, you can change
+<code class="language-plaintext highlighter-rouge">10.0.75.0/24</code>. Should this clash with your normal network setup, you can change
 the prefix from the <strong>Settings</strong> menu. See the <a href="/docs.docker.jp.onthefly/docker-for-windows/#network">Network</a> topic
 under <a href="/docs.docker.jp.onthefly/docker-for-windows/#docker-settings">Settings</a>.</p>
 
@@ -547,29 +547,29 @@ under <a href="/docs.docker.jp.onthefly/docker-for-windows/#docker-settings">Set
 <p>Restart your PC to stop / discard any vestige of the daemon running from the
 previously installed version.</p>
 
-<h3 id="変数docker_hostの設定解除">変数<code class="highlighter-rouge">DOCKER_HOST</code>の設定解除</h3>
+<h3 id="変数docker_hostの設定解除">変数<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code>の設定解除</h3>
 
-<p>The <code class="highlighter-rouge">DOCKER_HOST</code> environmental variable does not need to be set.  If you use
-bash, use the command <code class="highlighter-rouge">unset ${!DOCKER_*}</code> to unset it.  For other shells,
+<p>The <code class="language-plaintext highlighter-rouge">DOCKER_HOST</code> environmental variable does not need to be set.  If you use
+bash, use the command <code class="language-plaintext highlighter-rouge">unset ${!DOCKER_*}</code> to unset it.  For other shells,
 consult the shell’s documentation.</p>
 
 <h3 id="make-sure-docker-is-running-for-webserver-examples">Make sure Docker is running for webserver examples</h3>
 
-<p>For the <code class="highlighter-rouge">hello-world-nginx</code> example and others, Docker Desktop must be
-running to get to the webserver on <code class="highlighter-rouge">http://localhost/</code>. Make sure that the
+<p>For the <code class="language-plaintext highlighter-rouge">hello-world-nginx</code> example and others, Docker Desktop must be
+running to get to the webserver on <code class="language-plaintext highlighter-rouge">http://localhost/</code>. Make sure that the
 Docker whale is showing in the menu bar, and that you run the Docker commands in
 a shell that is connected to the Docker Desktop Engine. Otherwise, you might start the webserver container but get a “web page
-not available” error when you go to <code class="highlighter-rouge">docker</code>.</p>
+not available” error when you go to <code class="language-plaintext highlighter-rouge">docker</code>.</p>
 
-<h3 id="how-to-solve-port-already-allocated-errors">How to solve <code class="highlighter-rouge">port already allocated</code> errors</h3>
+<h3 id="how-to-solve-port-already-allocated-errors">How to solve <code class="language-plaintext highlighter-rouge">port already allocated</code> errors</h3>
 
-<p>If you see errors like <code class="highlighter-rouge">Bind for 0.0.0.0:8080 failed: port is already allocated</code>
-or <code class="highlighter-rouge">listen tcp:0.0.0.0:8080: bind: address is already in use</code> ...</p>
+<p>If you see errors like <code class="language-plaintext highlighter-rouge">Bind for 0.0.0.0:8080 failed: port is already allocated</code>
+or <code class="language-plaintext highlighter-rouge">listen tcp:0.0.0.0:8080: bind: address is already in use</code> ...</p>
 
 <p>These errors are often caused by some other software on Windows using those
-ports. To discover the identity of this software, either use the <code class="highlighter-rouge">resmon.exe</code>
+ports. To discover the identity of this software, either use the <code class="language-plaintext highlighter-rouge">resmon.exe</code>
 GUI and click “Network” and then “Listening Ports” or in a Powershell use
-<code class="highlighter-rouge">netstat -aon | find /i "listening "</code> to discover the PID of the process
+<code class="language-plaintext highlighter-rouge">netstat -aon | find /i "listening "</code> to discover the PID of the process
 currently using the port (the PID is the number in the rightmost column). Decide
 whether to shut the other process down, or to use a different port in your
 docker app.</p>

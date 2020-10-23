@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>macOS setup guide | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="macOS setup guide" />
   <meta property="og:description" content="Explains how to run a registry on macOS" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/recipes/osx-setup-guide/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"macOS setup guide","description":"Explains how to run a registry on macOS","url":"https://docs.docker.com/registry/recipes/osx-setup-guide/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -137,7 +137,7 @@ Docker Hub はホスト提供込みの Registry であり、さまざまな機�
 
 <p>If you don’t, the TLDR is:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash &lt; &lt;(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash &lt; &lt;(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 source ~/.gvm/scripts/gvm
 gvm install go1.4.2
 gvm use go1.4.2
@@ -147,14 +147,14 @@ gvm use go1.4.2
 
 <h2 id="checkout-the-docker-distribution-source-tree">Checkout the Docker Distribution source tree</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p $GOPATH/src/github.com/docker
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p $GOPATH/src/github.com/docker
 git clone https://github.com/docker/distribution.git $GOPATH/src/github.com/docker/distribution
 cd $GOPATH/src/github.com/docker/distribution
 </code></pre></div></div>
 
 <h2 id="build-the-binary">Build the binary</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GOPATH=$(PWD)/Godeps/_workspace:$GOPATH make binaries
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GOPATH=$(PWD)/Godeps/_workspace:$GOPATH make binaries
 sudo mkdir -p /usr/local/libexec
 sudo cp bin/registry /usr/local/libexec/registry
 </code></pre></div></div>
@@ -163,7 +163,7 @@ sudo cp bin/registry /usr/local/libexec/registry
 
 <p>Copy the registry configuration file in place:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /Users/Shared/Registry
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /Users/Shared/Registry
 cp docs/osx/config.yml /Users/Shared/Registry/config.yml
 </code></pre></div></div>
 
@@ -171,25 +171,25 @@ cp docs/osx/config.yml /Users/Shared/Registry/config.yml
 
 <p>Copy the Docker registry plist into place:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plutil -lint registry/recipes/osx/com.docker.registry.plist
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plutil -lint registry/recipes/osx/com.docker.registry.plist
 cp registry/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
 chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
 </code></pre></div></div>
 
 <p>Start the Docker registry:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>launchctl load ~/Library/LaunchAgents/com.docker.registry.plist
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>launchctl load ~/Library/LaunchAgents/com.docker.registry.plist
 </code></pre></div></div>
 
 <h3 id="restart-the-docker-registry-service">Restart the docker registry service</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>launchctl stop com.docker.registry
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>launchctl stop com.docker.registry
 launchctl start com.docker.registry
 </code></pre></div></div>
 
 <h3 id="unload-the-docker-registry-service">Unload the docker registry service</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>launchctl unload ~/Library/LaunchAgents/com.docker.registry.plist
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>launchctl unload ~/Library/LaunchAgents/com.docker.registry.plist
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=registry">registry</a>, <a href="/docs.docker.jp.onthefly/search/?q=on-prem">on-prem</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=tags">tags</a>, <a href="/docs.docker.jp.onthefly/search/?q=repository">repository</a>, <a href="/docs.docker.jp.onthefly/search/?q=distribution">distribution</a>, <a href="/docs.docker.jp.onthefly/search/?q=macOS">macOS</a>, <a href="/docs.docker.jp.onthefly/search/?q=recipe">recipe</a>, <a href="/docs.docker.jp.onthefly/search/?q=advanced">advanced</a></span></section>
                     </main>

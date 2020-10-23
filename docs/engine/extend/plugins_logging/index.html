@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker log driver plugins | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker log driver plugins" />
   <meta property="og:description" content="Log driver plugins." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_logging/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker log driver plugins","description":"Log driver plugins.","url":"https://docs.docker.com/engine/extend/plugins_logging/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -131,16 +131,16 @@ libraries for these services in the main Docker codebase. See the
 by other plugin types. See the
 <a href="https://github.com/cpuguy83/docker-log-driver-test">example</a> plugin for a
 reference implementation of a logging plugin. The example wraps the built-in
-<code class="highlighter-rouge">jsonfilelog</code> log driver.</p>
+<code class="language-plaintext highlighter-rouge">jsonfilelog</code> log driver.</p>
 
 <h2 id="logdriver-protocol">LogDriver protocol</h2>
 
-<p>Logging plugins must register as a <code class="highlighter-rouge">LogDriver</code> during plugin activation. Once
+<p>Logging plugins must register as a <code class="language-plaintext highlighter-rouge">LogDriver</code> during plugin activation. Once
 activated users can specify the plugin as a log driver.</p>
 
 <p>There are two HTTP endpoints that logging plugins must implement:</p>
 
-<h3 id="logdriverstartlogging"><code class="highlighter-rouge">/LogDriver.StartLogging</code></h3>
+<h3 id="logdriverstartlogging"><code class="language-plaintext highlighter-rouge">/LogDriver.StartLogging</code></h3>
 
 <p>Signals to the plugin that a container is starting that the plugin should start
 receiving logs for.</p>
@@ -150,49 +150,49 @@ is a FIFO. Logging plugins are not currently supported on Windows.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-		</span><span class="s2">"File"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/file/stream"</span><span class="p">,</span><span class="w">
-		</span><span class="s2">"Info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-			</span><span class="s2">"ContainerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="w">
+		</span><span class="nl">"File"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/file/stream"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"Info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+			</span><span class="nl">"ContainerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="w">
 		</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><code class="highlighter-rouge">File</code> is the path to the log stream that needs to be consumed. Each call to
-<code class="highlighter-rouge">StartLogging</code> should provide a different file path, even if it’s a container
+<p><code class="language-plaintext highlighter-rouge">File</code> is the path to the log stream that needs to be consumed. Each call to
+<code class="language-plaintext highlighter-rouge">StartLogging</code> should provide a different file path, even if it’s a container
 that the plugin has already received logs for prior. The file is created by
 docker with a randomly generated name.</p>
 
-<p><code class="highlighter-rouge">Info</code> is details about the container that’s being logged. This is fairly
+<p><code class="language-plaintext highlighter-rouge">Info</code> is details about the container that’s being logged. This is fairly
 free-form, but is defined by the following struct definition:</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Info</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-	</span><span class="n">Config</span><span class="x">              </span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerID</span><span class="x">         </span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerName</span><span class="x">       </span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerEntrypoint</span><span class="x"> </span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerArgs</span><span class="x">       </span><span class="p">[]</span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerImageID</span><span class="x">    </span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerImageName</span><span class="x">  </span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerCreated</span><span class="x">    </span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="x">
-	</span><span class="n">ContainerEnv</span><span class="x">        </span><span class="p">[]</span><span class="kt">string</span><span class="x">
-	</span><span class="n">ContainerLabels</span><span class="x">     </span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="x">
-	</span><span class="n">LogPath</span><span class="x">             </span><span class="kt">string</span><span class="x">
-	</span><span class="n">DaemonName</span><span class="x">          </span><span class="kt">string</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">Info</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Config</span>              <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
+	<span class="n">ContainerID</span>         <span class="kt">string</span>
+	<span class="n">ContainerName</span>       <span class="kt">string</span>
+	<span class="n">ContainerEntrypoint</span> <span class="kt">string</span>
+	<span class="n">ContainerArgs</span>       <span class="p">[]</span><span class="kt">string</span>
+	<span class="n">ContainerImageID</span>    <span class="kt">string</span>
+	<span class="n">ContainerImageName</span>  <span class="kt">string</span>
+	<span class="n">ContainerCreated</span>    <span class="n">time</span><span class="o">.</span><span class="n">Time</span>
+	<span class="n">ContainerEnv</span>        <span class="p">[]</span><span class="kt">string</span>
+	<span class="n">ContainerLabels</span>     <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
+	<span class="n">LogPath</span>             <span class="kt">string</span>
+	<span class="n">DaemonName</span>          <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-<p><code class="highlighter-rouge">ContainerID</code> will always be supplied with this struct, but other fields may be
+<p><code class="language-plaintext highlighter-rouge">ContainerID</code> will always be supplied with this struct, but other fields may be
 empty or missing.</p>
 
 <p><strong>Response</strong></p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+	</span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>If an error occurred during this request, add an error message to the <code class="highlighter-rouge">Err</code> field
-in the response. If no error then you can either send an empty response (<code class="highlighter-rouge">{}</code>)
-or an empty value for the <code class="highlighter-rouge">Err</code> field.</p>
+<p>If an error occurred during this request, add an error message to the <code class="language-plaintext highlighter-rouge">Err</code> field
+in the response. If no error then you can either send an empty response (<code class="language-plaintext highlighter-rouge">{}</code>)
+or an empty value for the <code class="language-plaintext highlighter-rouge">Err</code> field.</p>
 
 <p>The driver should at this point be consuming log messages from the passed in file.
 If messages are unconsumed, it may cause the container to block while trying to
@@ -205,16 +205,16 @@ in the
 <p>Since protocol buffers are not self-delimited you must decode them from the stream
 using the following stream format:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[size][message]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[size][message]
 </code></pre></div></div>
 
-<p>Where <code class="highlighter-rouge">size</code> is a 4-byte big endian binary encoded uint32. <code class="highlighter-rouge">size</code> in this case
-defines the size of the next message. <code class="highlighter-rouge">message</code> is the actual log entry.</p>
+<p>Where <code class="language-plaintext highlighter-rouge">size</code> is a 4-byte big endian binary encoded uint32. <code class="language-plaintext highlighter-rouge">size</code> in this case
+defines the size of the next message. <code class="language-plaintext highlighter-rouge">message</code> is the actual log entry.</p>
 
 <p>A reference golang implementation of a stream encoder/decoder can be found
 <a href="https://github.com/docker/docker/blob/master/api/types/plugins/logdriver/io.go">here</a></p>
 
-<h3 id="logdriverstoplogging"><code class="highlighter-rouge">/LogDriver.StopLogging</code></h3>
+<h3 id="logdriverstoplogging"><code class="language-plaintext highlighter-rouge">/LogDriver.StopLogging</code></h3>
 
 <p>Signals to the plugin to stop collecting logs from the defined file.
 Once a response is received, the file will be removed by Docker. You must make
@@ -226,25 +226,25 @@ only that it has stopped.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-		</span><span class="s2">"File"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/file/stream"</span><span class="w">
+		</span><span class="nl">"File"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/file/stream"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="s2">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+	</span><span class="nl">"Err"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>If an error occurred during this request, add an error message to the <code class="highlighter-rouge">Err</code> field
-in the response. If no error then you can either send an empty response (<code class="highlighter-rouge">{}</code>)
-or an empty value for the <code class="highlighter-rouge">Err</code> field.</p>
+<p>If an error occurred during this request, add an error message to the <code class="language-plaintext highlighter-rouge">Err</code> field
+in the response. If no error then you can either send an empty response (<code class="language-plaintext highlighter-rouge">{}</code>)
+or an empty value for the <code class="language-plaintext highlighter-rouge">Err</code> field.</p>
 
 <h2 id="optional-endpoints">Optional endpoints</h2>
 
 <p>Logging plugins can implement two extra logging endpoints:</p>
 
-<h3 id="logdrivercapabilities"><code class="highlighter-rouge">/LogDriver.Capabilities</code></h3>
+<h3 id="logdrivercapabilities"><code class="language-plaintext highlighter-rouge">/LogDriver.Capabilities</code></h3>
 
 <p>Defines the capabilities of the log driver. You must implement this endpoint for
 Docker to be able to take advantage of any of the defined capabilities.</p>
@@ -255,57 +255,57 @@ Docker to be able to take advantage of any of the defined capabilities.</p>
 
 <p><strong>Response</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="s2">"ReadLogs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+	</span><span class="nl">"ReadLogs"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>Supported capabilities:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">ReadLogs</code> - this tells Docker that the plugin is capable of reading back logs
-to clients. Plugins that report that they support <code class="highlighter-rouge">ReadLogs</code> must implement the
-<code class="highlighter-rouge">/LogDriver.ReadLogs</code> endpoint</li>
+  <li><code class="language-plaintext highlighter-rouge">ReadLogs</code> - this tells Docker that the plugin is capable of reading back logs
+to clients. Plugins that report that they support <code class="language-plaintext highlighter-rouge">ReadLogs</code> must implement the
+<code class="language-plaintext highlighter-rouge">/LogDriver.ReadLogs</code> endpoint</li>
 </ul>
 
-<h3 id="logdriverreadlogs"><code class="highlighter-rouge">/LogDriver.ReadLogs</code></h3>
+<h3 id="logdriverreadlogs"><code class="language-plaintext highlighter-rouge">/LogDriver.ReadLogs</code></h3>
 
-<p>Reads back logs to the client. This is used when <code class="highlighter-rouge">docker logs &lt;container&gt;</code> is
+<p>Reads back logs to the client. This is used when <code class="language-plaintext highlighter-rouge">docker logs &lt;container&gt;</code> is
 called.</p>
 
 <p>In order for Docker to use this endpoint, the plugin must specify as much when
-<code class="highlighter-rouge">/LogDriver.Capabilities</code> is called.</p>
+<code class="language-plaintext highlighter-rouge">/LogDriver.Capabilities</code> is called.</p>
 
 <p><strong>Request</strong>:</p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="s2">"ReadConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-	</span><span class="s2">"Info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-		</span><span class="s2">"ContainerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="w">
+	</span><span class="nl">"ReadConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+	</span><span class="nl">"Info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+		</span><span class="nl">"ContainerID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="w">
 	</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><code class="highlighter-rouge">ReadConfig</code> is the list of options for reading, it is defined with the following
+<p><code class="language-plaintext highlighter-rouge">ReadConfig</code> is the list of options for reading, it is defined with the following
 golang struct:</p>
 
-<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">ReadConfig</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
-	</span><span class="n">Since</span><span class="x">  </span><span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="x">
-	</span><span class="n">Tail</span><span class="x">   </span><span class="kt">int</span><span class="x">
-	</span><span class="n">Follow</span><span class="x"> </span><span class="kt">bool</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div></div>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">ReadConfig</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Since</span>  <span class="n">time</span><span class="o">.</span><span class="n">Time</span>
+	<span class="n">Tail</span>   <span class="kt">int</span>
+	<span class="n">Follow</span> <span class="kt">bool</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <ul>
-  <li><code class="highlighter-rouge">Since</code> defines the oldest log that should be sent.</li>
-  <li><code class="highlighter-rouge">Tail</code> defines the number of lines to read (e.g. like the command <code class="highlighter-rouge">tail -n 10</code>)</li>
-  <li><code class="highlighter-rouge">Follow</code> signals that the client wants to stay attached to receive new log messages
+  <li><code class="language-plaintext highlighter-rouge">Since</code> defines the oldest log that should be sent.</li>
+  <li><code class="language-plaintext highlighter-rouge">Tail</code> defines the number of lines to read (e.g. like the command <code class="language-plaintext highlighter-rouge">tail -n 10</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">Follow</code> signals that the client wants to stay attached to receive new log messages
 as they come in once the existing logs have been read.</li>
 </ul>
 
-<p><code class="highlighter-rouge">Info</code> is the same type defined in <code class="highlighter-rouge">/LogDriver.StartLogging</code>. It should be used
+<p><code class="language-plaintext highlighter-rouge">Info</code> is the same type defined in <code class="language-plaintext highlighter-rouge">/LogDriver.StartLogging</code>. It should be used
 to determine what set of logs to read.</p>
 
 <p><strong>Response</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{{ log stream }}
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{{ log stream }}
 </code></pre></div></div>
 
 <p>The response should be the encoded log message using the same format as the

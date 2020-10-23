@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>公開鍵基盤を利用した Swarm セキュリティ管理 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="公開鍵基盤を利用した Swarm セキュリティ管理" />
   <meta property="og:description" content="How PKI works in swarm mode" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/pki/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"公開鍵基盤を利用した Swarm セキュリティ管理","description":"How PKI works in swarm mode","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/pki/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,10 +109,10 @@
 <p>Docker に組み込まれている Swarm モードの公開鍵基盤（public key infrastructure; PKI）は、コンテナーによるオーケストレーションシステムを、簡単かつ安全にデプロイできるものです。
 Swarm 内のノードは、他のノードとの認証、承認、通信暗号化のために相互 TLS を利用します。</p>
 
-<p><code class="highlighter-rouge">docker swarm init</code> を実行して Swarm を生成すると、Docker 自体がマネージャーノードとなります。
+<p><code class="language-plaintext highlighter-rouge">docker swarm init</code> を実行して Swarm を生成すると、Docker 自体がマネージャーノードとなります。
 マネージャーノードは、デフォルトで新たなルート認証局（CA）と鍵ペアを生成します。
 これらは Swarm に参加するノードとの間でセキュアな通信を実現するために利用されます。
-必要であれば <a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_init/">docker swarm init</a> コマンドの <code class="highlighter-rouge">--external-ca</code> フラグを用いて、外部に生成した独自のルート CA を指定することができます。</p>
+必要であれば <a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_init/">docker swarm init</a> コマンドの <code class="language-plaintext highlighter-rouge">--external-ca</code> フラグを用いて、外部に生成した独自のルート CA を指定することができます。</p>
 
 <p>マネージャーノードは、Swarm へのノード追加時に利用される 2 つのトークンも生成します。
 その 1 つが <strong>ワーカートークン</strong> であり、もう 1 つが <strong>マネージャートークン</strong> です。
@@ -146,7 +146,7 @@ Swarm へノードが参加する際には、参加するノードがそのダ�
 </code></pre>
 
 <p>デフォルトにおいて Swarm 内の各ノードの証明書は、3 ヶ月ごとに更新されます。
-この期間は <code class="highlighter-rouge">docker swarm update --cert-expiry &lt;期間&gt;</code> コマンドを使って設定することができます。
+この期間は <code class="language-plaintext highlighter-rouge">docker swarm update --cert-expiry &lt;期間&gt;</code> コマンドを使って設定することができます。
 ローテーションの最小値は 1 時間です。
 詳しくは CLI リファレンスの <a href="/docs.docker.jp.onthefly/engine/reference/commandline/swarm_update/">docker swarm update</a> を参照してください。</p>
 
@@ -155,11 +155,11 @@ Swarm へノードが参加する際には、参加するノードがそのダ�
 <p>クラスターの CA 鍵やマネージャーノード自体においてセキュリティ侵害が発生した場合、Swarm のルート CA をローテートすることができます。
 これによって古いルート CA により署名された証明書は、どのノードも信頼しないようにすることができます。</p>
 
-<p><code class="highlighter-rouge">docker swarm ca --rotate</code> を実行すれば、新たな CA 証明書と鍵を生成することができます。
-必要なら <code class="highlighter-rouge">--ca-cert</code> や <code class="highlighter-rouge">--external-ca</code> フラグを指定して、Swarm の外部にあるルート証明書やルート CA を設定することもできます。
-これとは別に <code class="highlighter-rouge">--ca-cert</code> と <code class="highlighter-rouge">--ca-key</code> フラグを用いれば、Swarm で利用したい証明書と鍵を具体的に指定することもできます。</p>
+<p><code class="language-plaintext highlighter-rouge">docker swarm ca --rotate</code> を実行すれば、新たな CA 証明書と鍵を生成することができます。
+必要なら <code class="language-plaintext highlighter-rouge">--ca-cert</code> や <code class="language-plaintext highlighter-rouge">--external-ca</code> フラグを指定して、Swarm の外部にあるルート証明書やルート CA を設定することもできます。
+これとは別に <code class="language-plaintext highlighter-rouge">--ca-cert</code> と <code class="language-plaintext highlighter-rouge">--ca-key</code> フラグを用いれば、Swarm で利用したい証明書と鍵を具体的に指定することもできます。</p>
 
-<p><code class="highlighter-rouge">docker swarm ca --rotate</code> コマンドが実行されると、以下に示す内容が順に発生します。</p>
+<p><code class="language-plaintext highlighter-rouge">docker swarm ca --rotate</code> コマンドが実行されると、以下に示す内容が順に発生します。</p>
 
 <ol>
   <li>

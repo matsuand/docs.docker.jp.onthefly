@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ベースイメージの生成 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ベースイメージの生成" />
   <meta property="og:description" content="ベースイメージを生成する方法。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/baseimages/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ベースイメージの生成","description":"ベースイメージを生成する方法。","url":"https://docs.docker.com/develop/develop-images/baseimages/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -113,13 +113,13 @@
 <ul>
   <li>
     <p><a href="/docs.docker.jp.onthefly/glossary/#parent_image">親イメージ</a> は基準とするイメージのことです。
-Dockerfile 内の <code class="highlighter-rouge">FROM</code> ディレクティブによって指定されます。
+Dockerfile 内の <code class="language-plaintext highlighter-rouge">FROM</code> ディレクティブによって指定されます。
 Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。
 Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
 ただしこの用語は混同されて用いられることもあります。</p>
   </li>
   <li>
-    <p><a href="/docs.docker.jp.onthefly/glossary/#base_image">ベースイメージ</a> は Dockerfile において <code class="highlighter-rouge">FROM scratch</code> に記述されるものです。</p>
+    <p><a href="/docs.docker.jp.onthefly/glossary/#base_image">ベースイメージ</a> は Dockerfile において <code class="language-plaintext highlighter-rouge">FROM scratch</code> に記述されるものです。</p>
   </li>
 </ul>
 
@@ -135,7 +135,7 @@ Dockerfile は普通は親イメージから作り始め、ベースイメージ
 
 <p>Ubuntu の親イメージを作るのは、以下のように簡単にできます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo debootstrap xenial xenial &gt; /dev/null
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo debootstrap xenial xenial &gt; /dev/null
 $ sudo tar -C xenial -c . | docker import - xenial
 
 a29c15f1bf7a
@@ -158,12 +158,12 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 
 <h2 id="create-a-simple-parent-image-using-scratch">単純な親イメージを一から生成</h2>
 
-<p>Docker が規定する最小イメージ <code class="highlighter-rouge">scratch</code> は、コンテナーを構築するベースイメージとして利用できます。
-<code class="highlighter-rouge">scratch</code> を利用すると「イメージ」は、<code class="highlighter-rouge">Dockerfile</code>内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。</p>
+<p>Docker が規定する最小イメージ <code class="language-plaintext highlighter-rouge">scratch</code> は、コンテナーを構築するベースイメージとして利用できます。
+<code class="language-plaintext highlighter-rouge">scratch</code> を利用すると「イメージ」は、<code class="language-plaintext highlighter-rouge">Dockerfile</code>内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。</p>
 
-<p>Docker Hub 上の Docker リポジトリとして <code class="highlighter-rouge">scratch</code> が登場したことにより、<code class="highlighter-rouge">scratch</code> という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
-そのかわり<code class="highlighter-rouge">Dockerfile</code> 内での参照のみが可能です。
-たとえば <code class="highlighter-rouge">scratch</code> を利用した最小コンテナーの生成は以下のようになります。</p>
+<p>Docker Hub 上の Docker リポジトリとして <code class="language-plaintext highlighter-rouge">scratch</code> が登場したことにより、<code class="language-plaintext highlighter-rouge">scratch</code> という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
+そのかわり<code class="language-plaintext highlighter-rouge">Dockerfile</code> 内での参照のみが可能です。
+たとえば <code class="language-plaintext highlighter-rouge">scratch</code> を利用した最小コンテナーの生成は以下のようになります。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> scratch</span>
 <span class="k">ADD</span><span class="s"> hello /</span>
@@ -171,13 +171,13 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 </code></pre></div></div>
 
 <p><a href="https://github.com/docker-library/hello-world/">https://github.com/docker-library/hello-world/</a>に示されている手順に従って、”hello” 実行モジュールの例を構築するとします。
-実行モジュールは <code class="highlighter-rouge">-static</code> フラグをつけてコンパイルします。
-Docker イメージは <code class="highlighter-rouge">docker build</code> コマンドによってビルドすることができます。</p>
+実行モジュールは <code class="language-plaintext highlighter-rouge">-static</code> フラグをつけてコンパイルします。
+Docker イメージは <code class="language-plaintext highlighter-rouge">docker build</code> コマンドによってビルドすることができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> hello <span class="nb">.</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">.</code> の文字を最後につけるのを忘れないでください。
+<p><code class="language-plaintext highlighter-rouge">.</code> の文字を最後につけるのを忘れないでください。
 これはビルドコンテキストをカレントディレクトリに設定するものです。</p>
 
 <blockquote>
@@ -186,13 +186,13 @@ Docker コンテナーを使って以下のようにビルドします。</p>
 
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">-v</span> <span class="nv">$PWD</span>:/build ubuntu:16.04
 
-container# apt-get update <span class="o">&amp;&amp;</span> apt-get install build-essential
+container# apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install </span>build-essential
 container# <span class="nb">cd</span> /build
 container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> <span class="nt">-nostartfiles</span> hello.c
 </code></pre></div>  </div>
 </blockquote>
 
-<p>新イメージは <code class="highlighter-rouge">docker run</code> コマンドを使って実行します。</p>
+<p>新イメージは <code class="language-plaintext highlighter-rouge">docker run</code> コマンドを使って実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> hello
 </code></pre></div></div>
@@ -202,11 +202,11 @@ container# gcc <span class="nt">-o</span> hello <span class="nt">-static</span> 
 
 <h2 id="more-resources">その他の情報</h2>
 
-<p><code class="highlighter-rouge">Dockerfile</code>の書き方については、他にも多く触れています。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>の書き方については、他にも多く触れています。</p>
 
 <ul>
-  <li>リファレンスには <code class="highlighter-rouge">Dockerfile</code> にて利用可能な <a href="/docs.docker.jp.onthefly/engine/reference/builder/">全コマンドのガイド</a> があります。</li>
-  <li><code class="highlighter-rouge">Dockerfile</code>をわかりやすく読みやすく、保守がしやすくするように、<a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/"><code class="highlighter-rouge">Dockerfile</code>ベストプラクティス</a> も記述しています。</li>
+  <li>リファレンスには <code class="language-plaintext highlighter-rouge">Dockerfile</code> にて利用可能な <a href="/docs.docker.jp.onthefly/engine/reference/builder/">全コマンドのガイド</a> があります。</li>
+  <li><code class="language-plaintext highlighter-rouge">Dockerfile</code>をわかりやすく読みやすく、保守がしやすくするように、<a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/"><code class="language-plaintext highlighter-rouge">Dockerfile</code>ベストプラクティス</a> も記述しています。</li>
   <li>公式イメージを作ることが目的であれば Docker の<a href="../../docker-hub/official_images/">公式イメージ</a> を確認してください。</li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=base image">base image</a>, <a href="/docs.docker.jp.onthefly/search/?q=examples">examples</a></span></section>

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>journald ログドライバー | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="journald ログドライバー" />
   <meta property="og:description" content="Describes how to use the Journald logging driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/journald/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"journald ログドライバー","description":"Describes how to use the Journald logging driver.","url":"https://docs.docker.com/config/containers/logging/journald/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -106,11 +106,11 @@
   
 </span>
 
-<p>ログドライバー <code class="highlighter-rouge">journald</code> は、コンテナーのログを <a href="https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html"><code class="highlighter-rouge">systemd</code> ジャーナル</a> へ送信します。
-ログ出力された各項目は、<code class="highlighter-rouge">journal</code> API の利用を通じて <code class="highlighter-rouge">journalctl</code> コマンドを使って確認することができます。
-または <code class="highlighter-rouge">docker logs</code> コマンドを使って確認することもできます。</p>
+<p>ログドライバー <code class="language-plaintext highlighter-rouge">journald</code> は、コンテナーのログを <a href="https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html"><code class="language-plaintext highlighter-rouge">systemd</code> ジャーナル</a> へ送信します。
+ログ出力された各項目は、<code class="language-plaintext highlighter-rouge">journal</code> API の利用を通じて <code class="language-plaintext highlighter-rouge">journalctl</code> コマンドを使って確認することができます。
+または <code class="language-plaintext highlighter-rouge">docker logs</code> コマンドを使って確認することもできます。</p>
 
-<p><code class="highlighter-rouge">journald</code> ログドライバーはジャーナル内において、元のログメッセージに加えて、以下のメタデータを保存します。</p>
+<p><code class="language-plaintext highlighter-rouge">journald</code> ログドライバーはジャーナル内において、元のログメッセージに加えて、以下のメタデータを保存します。</p>
 
 <table>
   <thead>
@@ -121,23 +121,23 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">CONTAINER_ID</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CONTAINER_ID</code></td>
       <td style="text-align: left">The container ID truncated to 12 characters.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">CONTAINER_ID_FULL</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CONTAINER_ID_FULL</code></td>
       <td style="text-align: left">64 文字からなる完全なコンテナー ID。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">CONTAINER_NAME</code></td>
-      <td style="text-align: left">ログ出力開始時点でのコンテナー名。<code class="highlighter-rouge">docker rename</code> によりコンテナー名を変更しても、ジャーナルエントリには新たな名称は反映されません。</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CONTAINER_NAME</code></td>
+      <td style="text-align: left">ログ出力開始時点でのコンテナー名。<code class="language-plaintext highlighter-rouge">docker rename</code> によりコンテナー名を変更しても、ジャーナルエントリには新たな名称は反映されません。</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">CONTAINER_TAG</code>, <code class="highlighter-rouge">SYSLOG_IDENTIFIER</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CONTAINER_TAG</code>, <code class="language-plaintext highlighter-rouge">SYSLOG_IDENTIFIER</code></td>
       <td style="text-align: left">The container tag (<a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag option documentation</a>).</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">CONTAINER_PARTIAL_MESSAGE</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CONTAINER_PARTIAL_MESSAGE</code></td>
       <td style="text-align: left">A field that flags log integrity. Improve logging of long log lines.</td>
     </tr>
   </tbody>
@@ -145,27 +145,27 @@
 
 <h2 id="usage">利用方法</h2>
 
-<p>デフォルトのログドライバーとして <code class="highlighter-rouge">journald</code> を設定するには、<code class="highlighter-rouge">daemon.json</code> ファイル内において、<code class="highlighter-rouge">log-driver</code> と <code class="highlighter-rouge">log-opt</code> キーを適切に設定します。
-<code class="highlighter-rouge">daemon.json</code> は Linux ホストの場合は <code class="highlighter-rouge">/etc/docker/</code> に、また Windows Server の場合は <code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code> にあります。
-<code class="highlighter-rouge">daemon.json</code> を用いた Docker の設定方法については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> を参照してください。</p>
+<p>デフォルトのログドライバーとして <code class="language-plaintext highlighter-rouge">journald</code> を設定するには、<code class="language-plaintext highlighter-rouge">daemon.json</code> ファイル内において、<code class="language-plaintext highlighter-rouge">log-driver</code> と <code class="language-plaintext highlighter-rouge">log-opt</code> キーを適切に設定します。
+<code class="language-plaintext highlighter-rouge">daemon.json</code> は Linux ホストの場合は <code class="language-plaintext highlighter-rouge">/etc/docker/</code> に、また Windows Server の場合は <code class="language-plaintext highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code> にあります。
+<code class="language-plaintext highlighter-rouge">daemon.json</code> を用いた Docker の設定方法については <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a> を参照してください。</p>
 
-<p>以下の例により、ログドライバーを <code class="highlighter-rouge">journald</code> に設定します。</p>
+<p>以下の例により、ログドライバーを <code class="language-plaintext highlighter-rouge">journald</code> に設定します。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"log-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"journald"</span><span class="w">
+  </span><span class="nl">"log-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"journald"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>変更内容を有効にするために Docker デーモンを再起動します。</p>
 
-<p>このログドライバーを特定のコンテナーに対して設定するには、<code class="highlighter-rouge">docker run</code> コマンドにおいて <code class="highlighter-rouge">--log-driver</code> フラグを指定します。</p>
+<p>このログドライバーを特定のコンテナーに対して設定するには、<code class="language-plaintext highlighter-rouge">docker run</code> コマンドにおいて <code class="language-plaintext highlighter-rouge">--log-driver</code> フラグを指定します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--log-driver</span><span class="o">=</span>journald ...
 </code></pre></div></div>
 
 <h2 id="options">オプション</h2>
 
-<p>ログドライバー <code class="highlighter-rouge">journald</code> のオプションを指定するには <code class="highlighter-rouge">--log-opt NAME=VALUE</code> フラグを利用します。</p>
+<p>ログドライバー <code class="language-plaintext highlighter-rouge">journald</code> のオプションを指定するには <code class="language-plaintext highlighter-rouge">--log-opt NAME=VALUE</code> フラグを利用します。</p>
 
 <table>
   <thead>
@@ -177,22 +177,22 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">tag</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">tag</code></td>
       <td style="text-align: left">optional</td>
-      <td style="text-align: left">Specify template to set <code class="highlighter-rouge">CONTAINER_TAG</code> and <code class="highlighter-rouge">SYSLOG_IDENTIFIER</code> value in journald logs. Refer to <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag option documentation</a> to customize the log tag format.</td>
+      <td style="text-align: left">Specify template to set <code class="language-plaintext highlighter-rouge">CONTAINER_TAG</code> and <code class="language-plaintext highlighter-rouge">SYSLOG_IDENTIFIER</code> value in journald logs. Refer to <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag option documentation</a> to customize the log tag format.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">labels</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">labels</code></td>
       <td style="text-align: left">optional</td>
       <td style="text-align: left">Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">env</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">env</code></td>
       <td style="text-align: left">optional</td>
       <td style="text-align: left">Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for the container.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">env-regex</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">env-regex</code></td>
       <td style="text-align: left">optional</td>
       <td style="text-align: left">Similar to and compatible with env. A regular expression to match logging-related environment variables. Used for advanced <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag options</a>.</td>
     </tr>
@@ -208,40 +208,40 @@ message.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
     <span class="nt">--log-driver</span><span class="o">=</span>journald <span class="se">\</span>
     <span class="nt">--log-opt</span> <span class="nv">labels</span><span class="o">=</span>location <span class="se">\</span>
-    <span class="nt">--log-opt</span> <span class="nv">env</span><span class="o">=</span>TEST <span class="se">\</span>
+    <span class="nt">--log-opt</span> <span class="nb">env</span><span class="o">=</span>TEST <span class="se">\</span>
     <span class="nt">--env</span> <span class="s2">"TEST=false"</span> <span class="se">\</span>
     <span class="nt">--label</span> <span class="nv">location</span><span class="o">=</span>west <span class="se">\</span>
     your/application
 </code></pre></div></div>
 
 <p>This configuration also directs the driver to include in the payload the label
-location, and the environment variable TEST.  If the <code class="highlighter-rouge">--env "TEST=false"</code>
-or <code class="highlighter-rouge">--label location=west</code> arguments were omitted, the corresponding key would
+location, and the environment variable TEST.  If the <code class="language-plaintext highlighter-rouge">--env "TEST=false"</code>
+or <code class="language-plaintext highlighter-rouge">--label location=west</code> arguments were omitted, the corresponding key would
 not be set in the journald log.</p>
 
 <h2 id="note-regarding-container-names">コンテナー名に関するメモ</h2>
 
-<p>The value logged in the <code class="highlighter-rouge">CONTAINER_NAME</code> field is the name of the container that
-was set at startup. If you use <code class="highlighter-rouge">docker rename</code> to rename a container, the new
+<p>The value logged in the <code class="language-plaintext highlighter-rouge">CONTAINER_NAME</code> field is the name of the container that
+was set at startup. If you use <code class="language-plaintext highlighter-rouge">docker rename</code> to rename a container, the new
 name <strong>is not reflected</strong> in the journal entries. Journal entries continue
 to use the original name.</p>
 
-<h2 id="retrieve-log-messages-with-journalctl"><code class="highlighter-rouge">journalctl</code> を使ったログメッセージの確認</h2>
+<h2 id="retrieve-log-messages-with-journalctl"><code class="language-plaintext highlighter-rouge">journalctl</code> を使ったログメッセージの確認</h2>
 
-<p>Use the <code class="highlighter-rouge">journalctl</code> command to retrieve log messages. You can apply filter
+<p>Use the <code class="language-plaintext highlighter-rouge">journalctl</code> command to retrieve log messages. You can apply filter
 expressions to limit the retrieved messages to those associated with a specific
 container:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
 </code></pre></div></div>
 
-<p>You can use additional filters to further limit the messages retrieved. The <code class="highlighter-rouge">-b</code>
+<p>You can use additional filters to further limit the messages retrieved. The <code class="language-plaintext highlighter-rouge">-b</code>
 flag only retrieves messages generated since the last system boot:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nt">-b</span> <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">-o</code> flag specifies the format for the retried log messages. Use <code class="highlighter-rouge">-o json</code>
+<p>The <code class="language-plaintext highlighter-rouge">-o</code> flag specifies the format for the retried log messages. Use <code class="language-plaintext highlighter-rouge">-o json</code>
 to return the log messages in JSON format.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nt">-o</span> json <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver
@@ -249,26 +249,26 @@ to return the log messages in JSON format.</p>
 
 <h3 id="view-logs-for-a-container-with-a-tty-enabled">View logs for a container with a TTY enabled</h3>
 
-<p>If TTY is enabled on a container you may see <code class="highlighter-rouge">[10B blob data]</code> in the output
+<p>If TTY is enabled on a container you may see <code class="language-plaintext highlighter-rouge">[10B blob data]</code> in the output
 when retrieving log messages.
-The reason for that is that <code class="highlighter-rouge">\r</code> is appended to the end of the line and
-<code class="highlighter-rouge">journalctl</code> doesn’t strip it automatically unless <code class="highlighter-rouge">--all</code> is set:</p>
+The reason for that is that <code class="language-plaintext highlighter-rouge">\r</code> is appended to the end of the line and
+<code class="language-plaintext highlighter-rouge">journalctl</code> doesn’t strip it automatically unless <code class="language-plaintext highlighter-rouge">--all</code> is set:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>journalctl <span class="nt">-b</span> <span class="nv">CONTAINER_NAME</span><span class="o">=</span>webserver <span class="nt">--all</span>
 </code></pre></div></div>
 
-<h2 id="retrieve-log-messages-with-the-journal-api">Retrieve log messages with the <code class="highlighter-rouge">journal</code> API</h2>
+<h2 id="retrieve-log-messages-with-the-journal-api">Retrieve log messages with the <code class="language-plaintext highlighter-rouge">journal</code> API</h2>
 
-<p>This example uses the <code class="highlighter-rouge">systemd</code> Python module to retrieve container
+<p>This example uses the <code class="language-plaintext highlighter-rouge">systemd</code> Python module to retrieve container
 logs:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">systemd.journal</span>
 
-<span class="n">reader</span> <span class="o">=</span> <span class="n">systemd</span><span class="o">.</span><span class="n">journal</span><span class="o">.</span><span class="n">Reader</span><span class="p">()</span>
-<span class="n">reader</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="s">'CONTAINER_NAME=web'</span><span class="p">)</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">systemd</span><span class="p">.</span><span class="n">journal</span><span class="p">.</span><span class="n">Reader</span><span class="p">()</span>
+<span class="n">reader</span><span class="p">.</span><span class="n">add_match</span><span class="p">(</span><span class="s">'CONTAINER_NAME=web'</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">'{CONTAINER_ID_FULL}: {MESSAGE}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">'{CONTAINER_ID_FULL}: {MESSAGE}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="o">**</span><span class="n">msg</span><span class="p">)</span>
 </code></pre></div></div>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Journald">Journald</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=logging">logging</a>, <a href="/docs.docker.jp.onthefly/search/?q=driver">driver</a></span></section>
                     </main>

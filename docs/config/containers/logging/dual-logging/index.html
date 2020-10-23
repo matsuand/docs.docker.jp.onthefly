@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>リモートログドライバーに対する docker logs の利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="リモートログドライバーに対する docker logs の利用" />
   <meta property="og:description" content="Learn how to read container logs locally when using a third party logging solution." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/dual-logging/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"リモートログドライバーに対する docker logs の利用","description":"Learn how to read container logs locally when using a third party logging solution.","url":"https://docs.docker.com/config/containers/logging/dual-logging/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -108,26 +108,26 @@
 
 <h2 id="overview">概要</h2>
 
-<p>Docker Engine Enterprise 18.03 より前は、<code class="highlighter-rouge">docker logs</code> を実行してコンテナーログを参照する際には、ログドライバーとして <code class="highlighter-rouge">jsonfile</code> と <code class="highlighter-rouge">journald</code> がサポートされていました。
-他にもサードパーティー製のログドライバーはあったのですが、<code class="highlighter-rouge">docker logs</code> を使ってローカルでログを参照することはサポートされていませんでした。サポートされていなかったログドライバーは以下のとおりです。</p>
+<p>Docker Engine Enterprise 18.03 より前は、<code class="language-plaintext highlighter-rouge">docker logs</code> を実行してコンテナーログを参照する際には、ログドライバーとして <code class="language-plaintext highlighter-rouge">jsonfile</code> と <code class="language-plaintext highlighter-rouge">journald</code> がサポートされていました。
+他にもサードパーティー製のログドライバーはあったのですが、<code class="language-plaintext highlighter-rouge">docker logs</code> を使ってローカルでログを参照することはサポートされていませんでした。サポートされていなかったログドライバーは以下のとおりです。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">syslog</code></li>
-  <li><code class="highlighter-rouge">gelf</code></li>
-  <li><code class="highlighter-rouge">fluentd</code></li>
-  <li><code class="highlighter-rouge">awslogs</code></li>
-  <li><code class="highlighter-rouge">splunk</code></li>
-  <li><code class="highlighter-rouge">etwlogs</code></li>
-  <li><code class="highlighter-rouge">gcplogs</code></li>
-  <li><code class="highlighter-rouge">logentries</code></li>
+  <li><code class="language-plaintext highlighter-rouge">syslog</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gelf</code></li>
+  <li><code class="language-plaintext highlighter-rouge">fluentd</code></li>
+  <li><code class="language-plaintext highlighter-rouge">awslogs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">splunk</code></li>
+  <li><code class="language-plaintext highlighter-rouge">etwlogs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gcplogs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">logentries</code></li>
 </ul>
 
 <p>そういった状態でログデータを収集するのは、自動化されていようが普通に行うのであろうが、大いに問題を引き起こしていました。
 サードパーティー製のログソリューションを利用した場合、ログ情報はそのサードパーティーが提供するツールが指定する書式でしか、アクセスできず参照もできませんでした。</p>
 
-<p>Docker Engine Enterprise 18.03.1-ee-1 からは、ログドライバーやプラグインを設定するしないに関わらず、コンテナーのログを参照するには <code class="highlighter-rouge">docker logs</code> を使えばよいことになりました。
+<p>Docker Engine Enterprise 18.03.1-ee-1 からは、ログドライバーやプラグインを設定するしないに関わらず、コンテナーのログを参照するには <code class="language-plaintext highlighter-rouge">docker logs</code> を使えばよいことになりました。
 この機能はデュアルログ（dual logging）と呼ばれることがあります。
-この機能を利用すると、リモートログドライバーが利用されていたとしても、<code class="highlighter-rouge">docker logs</code> を実行してローカルなコンテナーログを参照するだけでよく、一定の書式でログが得られることになります。
+この機能を利用すると、リモートログドライバーが利用されていたとしても、<code class="language-plaintext highlighter-rouge">docker logs</code> を実行してローカルなコンテナーログを参照するだけでよく、一定の書式でログが得られることになります。
 というのも、Engine が「ローカルな」ログドライバーに合わせて、ログ情報を設定してくれるからです。
 詳細な情報については <a href="/config/containers/logging/configure">デフォルトのログドライバーの設定</a> を参照してください。</p>
 
@@ -140,11 +140,11 @@
 <p>デュアルログはデフォルトで有効になっています。
 リモートログドライバーを用いる際には、Docker デーモンまたはコンテナーのいずれかの設定が必要になります。</p>
 
-<p>以下の例は、デュアルログ機能がある場合とない場合において、<code class="highlighter-rouge">docker logs</code> コマンドを実行した結果を示すものです。</p>
+<p>以下の例は、デュアルログ機能がある場合とない場合において、<code class="language-plaintext highlighter-rouge">docker logs</code> コマンドを実行した結果を示すものです。</p>
 
 <h3 id="without-dual-logging-capability">デュアルログ機能がない場合</h3>
 
-<p>コンテナーあるいは <code class="highlighter-rouge">dockerd</code> に対して、<code class="highlighter-rouge">splunk</code> のようなリモートログドライバーを設定していた場合、ローカルのコンテナーログを参照しようとすると、エラーが表示されます。</p>
+<p>コンテナーあるいは <code class="language-plaintext highlighter-rouge">dockerd</code> に対して、<code class="language-plaintext highlighter-rouge">splunk</code> のようなリモートログドライバーを設定していた場合、ローカルのコンテナーログを参照しようとすると、エラーが表示されます。</p>
 
 <ul>
   <li>
@@ -224,7 +224,7 @@
 <ul>
   <li>複数のログドライバーを指定することはできません。</li>
   <li>コンテナーにおいて利用するログドライバーやプラグインが、リモートに向けてログ送信を行うものである場合、突然「ネットワーク的な」問題や、ローカルキャッシュへの書き込み不能となる事態が発生する場合があります。</li>
-  <li><code class="highlighter-rouge">logdriver</code> への書き込みが何らかの理由（ファイルシステムがいっぱい、書き込み権限消失）により失敗した場合、キャッシュの書き込みが失敗し、このことはデーモンのログに記録されます。
+  <li><code class="language-plaintext highlighter-rouge">logdriver</code> への書き込みが何らかの理由（ファイルシステムがいっぱい、書き込み権限消失）により失敗した場合、キャッシュの書き込みが失敗し、このことはデーモンのログに記録されます。
 キャッシュへのログエントリーは、リトライされることはありません。ed.</li>
   <li>デフォルトの設定のままでは、ログがキャッシュから失われる場合があります。
 低速なファイル書き込みなどの際に、コンテナーの標準入出力からの情報をブロックしないように、リングバッファーが利用されるからです。

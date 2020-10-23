@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Develop with Docker Engine SDKs | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Develop with Docker Engine SDKs" />
   <meta property="og:description" content="Using Docker SDKs to automate Docker tasks in your language of choice" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/sdk/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Develop with Docker Engine SDKs","description":"Using Docker SDKs to automate Docker tasks in your language of choice","url":"https://docs.docker.com/engine/api/sdk/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -112,7 +112,7 @@ Go 言語や Python における SDK のようなものです。
 SDK を使えば、Docker アプリや Docker ソリューションのビルドやスケール変更を、すばやく簡単に行うことができます。
 Go 言語や Python ではうまく動作しない場合には、Docker Engine API を直接処理してみてください。</p>
 
-<p>Docker Engine API は、<code class="highlighter-rouge">wget</code> や <code class="highlighter-rouge">curl</code> といった HTTP クライアントからアクセスできる RESTful API です。
+<p>Docker Engine API は、<code class="language-plaintext highlighter-rouge">wget</code> や <code class="language-plaintext highlighter-rouge">curl</code> といった HTTP クライアントからアクセスできる RESTful API です。
 あるいは、今日あるほとんどのプログラミング言語に組み入れられる HTTP ライブラリです。</p>
 
 <h2 id="install-the-sdks">SDK のインストール</h2>
@@ -125,7 +125,7 @@ installed and coexist together.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go get github.com/docker/docker/client
 </code></pre></div></div>
 
-<p>The client requires a recent version of Go. Run <code class="highlighter-rouge">go version</code> and ensure that you
+<p>The client requires a recent version of Go. Run <code class="language-plaintext highlighter-rouge">go version</code> and ensure that you
 are running a currently supported version of Go</p>
 
 <p><a href="https://godoc.org/github.com/docker/docker/client">Read the full Docker Engine Go SDK reference</a>.</p>
@@ -134,15 +134,15 @@ are running a currently supported version of Go</p>
 
 <ul>
   <li>
-    <p><strong>推奨</strong>: <code class="highlighter-rouge">pip install docker</code> を実行します。</p>
+    <p><strong>推奨</strong>: <code class="language-plaintext highlighter-rouge">pip install docker</code> を実行します。</p>
   </li>
   <li>
-    <p><strong><code class="highlighter-rouge">pip</code> を利用できない場合は以下を行います。</strong></p>
+    <p><strong><code class="language-plaintext highlighter-rouge">pip</code> を利用できない場合は以下を行います。</strong></p>
 
     <ol>
       <li><a href="https://pypi.python.org/pypi/docker/">パッケージを直接ダウンロード</a> します。</li>
       <li>パッケージを伸張（解凍）して、生成されたディレクトリに移動します。</li>
-      <li><code class="highlighter-rouge">python setup.py install</code> を実行します。</li>
+      <li><code class="language-plaintext highlighter-rouge">python setup.py install</code> を実行します。</li>
     </ol>
   </li>
 </ul>
@@ -175,7 +175,7 @@ that supports the feature, and prefer the latest version you can use.</li>
   <li>Otherwise, continue to use the version that your code is already using.</li>
 </ul>
 
-<p>As an example, the <code class="highlighter-rouge">docker run</code> command can be easily implemented using the
+<p>As an example, the <code class="language-plaintext highlighter-rouge">docker run</code> command can be easily implemented using the
 Docker API directly, or using the Python or Go SDK.</p>
 
 <ul class="nav nav-tabs">
@@ -186,68 +186,68 @@ Docker API directly, or using the Python or Go SDK.</p>
 <div class="tab-content">
   <div id="go" class="tab-pane fade in active">
 
-    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">main</span><span class="x">
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
 
-</span><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
-	</span><span class="s">"context"</span><span class="x">
-	</span><span class="s">"io"</span><span class="x">
-	</span><span class="s">"os"</span><span class="x">
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"context"</span>
+	<span class="s">"io"</span>
+	<span class="s">"os"</span>
 
-	</span><span class="s">"github.com/docker/docker/api/types"</span><span class="x">
-	</span><span class="s">"github.com/docker/docker/api/types/container"</span><span class="x">
-	</span><span class="s">"github.com/docker/docker/client"</span><span class="x">
-	</span><span class="s">"github.com/docker/docker/pkg/stdcopy"</span><span class="x">
-</span><span class="p">)</span><span class="x">
+	<span class="s">"github.com/docker/docker/api/types"</span>
+	<span class="s">"github.com/docker/docker/api/types/container"</span>
+	<span class="s">"github.com/docker/docker/client"</span>
+	<span class="s">"github.com/docker/docker/pkg/stdcopy"</span>
+<span class="p">)</span>
 
-</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="n">ctx</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span><span class="x">
-    </span><span class="n">cli</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span><span class="x"> </span><span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ctx</span> <span class="o">:=</span> <span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">()</span>
+    <span class="n">cli</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">client</span><span class="o">.</span><span class="n">NewClientWithOpts</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">FromEnv</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">WithAPIVersionNegotiation</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    </span><span class="n">reader</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">cli</span><span class="o">.</span><span class="n">ImagePull</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="s">"docker.io/library/alpine"</span><span class="p">,</span><span class="x"> </span><span class="n">types</span><span class="o">.</span><span class="n">ImagePullOptions</span><span class="p">{})</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
-    </span><span class="n">io</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span><span class="x"> </span><span class="n">reader</span><span class="p">)</span><span class="x">
+    <span class="n">reader</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">cli</span><span class="o">.</span><span class="n">ImagePull</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="s">"docker.io/library/alpine"</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ImagePullOptions</span><span class="p">{})</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">io</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span> <span class="n">reader</span><span class="p">)</span>
 
-    </span><span class="n">resp</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">cli</span><span class="o">.</span><span class="n">ContainerCreate</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="o">&amp;</span><span class="n">container</span><span class="o">.</span><span class="n">Config</span><span class="p">{</span><span class="x">
-        </span><span class="n">Image</span><span class="o">:</span><span class="x"> </span><span class="s">"alpine"</span><span class="p">,</span><span class="x">
-        </span><span class="n">Cmd</span><span class="o">:</span><span class="x">   </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"echo"</span><span class="p">,</span><span class="x"> </span><span class="s">"hello world"</span><span class="p">},</span><span class="x">
-    </span><span class="p">},</span><span class="x"> </span><span class="no">nil</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="p">,</span><span class="x"> </span><span class="s">""</span><span class="p">)</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
+    <span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">cli</span><span class="o">.</span><span class="n">ContainerCreate</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">container</span><span class="o">.</span><span class="n">Config</span><span class="p">{</span>
+        <span class="n">Image</span><span class="o">:</span> <span class="s">"alpine"</span><span class="p">,</span>
+        <span class="n">Cmd</span><span class="o">:</span>   <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"hello world"</span><span class="p">},</span>
+    <span class="p">},</span> <span class="no">nil</span><span class="p">,</span> <span class="no">nil</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">cli</span><span class="o">.</span><span class="n">ContainerStart</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="n">resp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span><span class="x"> </span><span class="n">types</span><span class="o">.</span><span class="n">ContainerStartOptions</span><span class="p">{});</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
+    <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">cli</span><span class="o">.</span><span class="n">ContainerStart</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ContainerStartOptions</span><span class="p">{});</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    </span><span class="n">statusCh</span><span class="p">,</span><span class="x"> </span><span class="n">errCh</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">cli</span><span class="o">.</span><span class="n">ContainerWait</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="n">resp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span><span class="x"> </span><span class="n">container</span><span class="o">.</span><span class="n">WaitConditionNotRunning</span><span class="p">)</span><span class="x">
-    </span><span class="k">select</span><span class="x"> </span><span class="p">{</span><span class="x">
-    </span><span class="k">case</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">errCh</span><span class="o">:</span><span class="x">
-        </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-            </span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-        </span><span class="p">}</span><span class="x">
-    </span><span class="k">case</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">statusCh</span><span class="o">:</span><span class="x">
-    </span><span class="p">}</span><span class="x">
+    <span class="n">statusCh</span><span class="p">,</span> <span class="n">errCh</span> <span class="o">:=</span> <span class="n">cli</span><span class="o">.</span><span class="n">ContainerWait</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">container</span><span class="o">.</span><span class="n">WaitConditionNotRunning</span><span class="p">)</span>
+    <span class="k">select</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">err</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="n">errCh</span><span class="o">:</span>
+        <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+            <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="k">case</span> <span class="o">&lt;-</span><span class="n">statusCh</span><span class="o">:</span>
+    <span class="p">}</span>
 
-    </span><span class="n">out</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">cli</span><span class="o">.</span><span class="n">ContainerLogs</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="x"> </span><span class="n">resp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span><span class="x"> </span><span class="n">types</span><span class="o">.</span><span class="n">ContainerLogsOptions</span><span class="p">{</span><span class="n">ShowStdout</span><span class="o">:</span><span class="x"> </span><span class="no">true</span><span class="p">})</span><span class="x">
-    </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
-    </span><span class="p">}</span><span class="x">
+    <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">cli</span><span class="o">.</span><span class="n">ContainerLogs</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ContainerLogsOptions</span><span class="p">{</span><span class="n">ShowStdout</span><span class="o">:</span> <span class="no">true</span><span class="p">})</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
 
-    </span><span class="n">stdcopy</span><span class="o">.</span><span class="n">StdCopy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span><span class="x"> </span><span class="n">os</span><span class="o">.</span><span class="n">Stderr</span><span class="p">,</span><span class="x"> </span><span class="n">out</span><span class="p">)</span><span class="x">
-</span><span class="p">}</span><span class="x">
-</span></code></pre></div>    </div>
+    <span class="n">stdcopy</span><span class="o">.</span><span class="n">StdCopy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">Stderr</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
 
   </div>
   <div id="python" class="tab-pane fade">
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="o">.</span><span class="n">from_env</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">client</span><span class="o">.</span><span class="n">containers</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">"alpine"</span><span class="p">,</span> <span class="p">[</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">])</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">client</span><span class="p">.</span><span class="n">containers</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="s">"alpine"</span><span class="p">,</span> <span class="p">[</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">])</span>
 </code></pre></div>    </div>
 
   </div>

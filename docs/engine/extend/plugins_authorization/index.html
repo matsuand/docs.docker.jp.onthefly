@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Access authorization plugin | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Access authorization plugin" />
   <meta property="og:description" content="How to create authorization plugins to manage access control to your Docker daemon." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_authorization/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Access authorization plugin","description":"How to create authorization plugins to manage access control to your Docker daemon.","url":"https://docs.docker.com/engine/extend/plugins_authorization/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -153,13 +153,13 @@ The command context contains all the relevant request data.</p>
 Each plugin must reside within directories described under the
 <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/#plugin-discovery">Plugin discovery</a> section.</p>
 
-<p><strong>Note</strong>: the abbreviations <code class="highlighter-rouge">AuthZ</code> and <code class="highlighter-rouge">AuthN</code> mean authorization and authentication
+<p><strong>Note</strong>: the abbreviations <code class="language-plaintext highlighter-rouge">AuthZ</code> and <code class="language-plaintext highlighter-rouge">AuthN</code> mean authorization and authentication
 respectively.</p>
 
 <h2 id="default-user-authorization-mechanism">Default user authorization mechanism</h2>
 
 <p>If TLS is enabled in the <a href="https://docs.docker.com/engine/security/https/">Docker daemon</a>, the default user authorization flow extracts the user details from the certificate subject name.
-That is, the <code class="highlighter-rouge">User</code> field is set to the client certificate subject common name, and the <code class="highlighter-rouge">AuthenticationMethod</code> field is set to <code class="highlighter-rouge">TLS</code>.</p>
+That is, the <code class="language-plaintext highlighter-rouge">User</code> field is set to the client certificate subject common name, and the <code class="language-plaintext highlighter-rouge">AuthenticationMethod</code> field is set to <code class="language-plaintext highlighter-rouge">TLS</code>.</p>
 
 <h2 id="basic-architecture">Basic architecture</h2>
 
@@ -185,14 +185,14 @@ headers, and the request/response body. Only the user name and the
 authentication method used are passed to the plugin. Most importantly, no user
 credentials or tokens are passed. Finally, not all request/response bodies
 are sent to the authorization plugin. Only those request/response bodies where
-the <code class="highlighter-rouge">Content-Type</code> is either <code class="highlighter-rouge">text/*</code> or <code class="highlighter-rouge">application/json</code> are sent.</p>
+the <code class="language-plaintext highlighter-rouge">Content-Type</code> is either <code class="language-plaintext highlighter-rouge">text/*</code> or <code class="language-plaintext highlighter-rouge">application/json</code> are sent.</p>
 
-<p>For commands that can potentially hijack the HTTP connection (<code class="highlighter-rouge">HTTP
-Upgrade</code>), such as <code class="highlighter-rouge">exec</code>, the authorization plugin is only called for the
+<p>For commands that can potentially hijack the HTTP connection (<code class="language-plaintext highlighter-rouge">HTTP
+Upgrade</code>), such as <code class="language-plaintext highlighter-rouge">exec</code>, the authorization plugin is only called for the
 initial HTTP requests. Once the plugin approves the command, authorization is
 not applied to the rest of the flow. Specifically, the streaming data is not
 passed to the authorization plugins. For commands that return chunked HTTP
-response, such as <code class="highlighter-rouge">logs</code> and <code class="highlighter-rouge">events</code>, only the HTTP request is sent to the
+response, such as <code class="language-plaintext highlighter-rouge">logs</code> and <code class="language-plaintext highlighter-rouge">events</code>, only the HTTP request is sent to the
 authorization plugins.</p>
 
 <p>During request/response processing, some authorization flows might
@@ -209,15 +209,15 @@ support the Docker client interactions detailed in this section.</p>
 <h3 id="setting-up-docker-daemon">Setting up Docker daemon</h3>
 
 <p>Enable the authorization plugin with a dedicated command line flag in the
-<code class="highlighter-rouge">--authorization-plugin=PLUGIN_ID</code> format. The flag supplies a <code class="highlighter-rouge">PLUGIN_ID</code>
+<code class="language-plaintext highlighter-rouge">--authorization-plugin=PLUGIN_ID</code> format. The flag supplies a <code class="language-plaintext highlighter-rouge">PLUGIN_ID</code>
 value. This value can be the plugin’s socket or a path to a specification file.
 Authorization plugins can be loaded without restarting the daemon. Refer
-to the <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#configuration-reloading"><code class="highlighter-rouge">dockerd</code> documentation</a> for more information.</p>
+to the <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#configuration-reloading"><code class="language-plaintext highlighter-rouge">dockerd</code> documentation</a> for more information.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>dockerd <span class="nt">--authorization-plugin</span><span class="o">=</span>plugin1 <span class="nt">--authorization-plugin</span><span class="o">=</span>plugin2,...
 </code></pre></div></div>
 
-<p>Docker’s authorization subsystem supports multiple <code class="highlighter-rouge">--authorization-plugin</code> parameters.</p>
+<p>Docker’s authorization subsystem supports multiple <code class="language-plaintext highlighter-rouge">--authorization-plugin</code> parameters.</p>
 
 <h3 id="calling-authorized-command-allow">Calling authorized command (allow)</h3>
 
@@ -248,10 +248,10 @@ should implement the following two methods:</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">/AuthZPlugin.AuthZReq</code> This authorize request method is called before the Docker daemon processes the client request.</p>
+    <p><code class="language-plaintext highlighter-rouge">/AuthZPlugin.AuthZReq</code> This authorize request method is called before the Docker daemon processes the client request.</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">/AuthZPlugin.AuthZRes</code> This authorize response method is called before the response is returned from Docker daemon to the client.</p>
+    <p><code class="language-plaintext highlighter-rouge">/AuthZPlugin.AuthZRes</code> This authorize response method is called before the response is returned from Docker daemon to the client.</p>
   </li>
 </ul>
 
@@ -260,21 +260,21 @@ should implement the following two methods:</p>
 <p><strong>Request</strong>:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"User"</span><span class="p">:</span><span class="w">              </span><span class="s2">"The user identification"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"UserAuthNMethod"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The authentication method used"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestMethod"</span><span class="p">:</span><span class="w">     </span><span class="s2">"The HTTP method"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestURI"</span><span class="p">:</span><span class="w">        </span><span class="s2">"The HTTP request URI"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestBody"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Byte array containing the raw HTTP request body"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestHeader"</span><span class="p">:</span><span class="w">     </span><span class="s2">"Byte array containing the raw HTTP request header as a map[string][]string "</span><span class="w">
+    </span><span class="nl">"User"</span><span class="p">:</span><span class="w">              </span><span class="s2">"The user identification"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"UserAuthNMethod"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The authentication method used"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestMethod"</span><span class="p">:</span><span class="w">     </span><span class="s2">"The HTTP method"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestURI"</span><span class="p">:</span><span class="w">        </span><span class="s2">"The HTTP request URI"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestBody"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Byte array containing the raw HTTP request body"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestHeader"</span><span class="p">:</span><span class="w">     </span><span class="s2">"Byte array containing the raw HTTP request header as a map[string][]string "</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p><strong>Response</strong>:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"Allow"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Determined whether the user is allowed or not"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Msg"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The authorization message"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Err"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The error message if things go wrong"</span><span class="w">
+    </span><span class="nl">"Allow"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Determined whether the user is allowed or not"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Msg"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The authorization message"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Err"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The error message if things go wrong"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 <h4 id="authzpluginauthzres">/AuthZPlugin.AuthZRes</h4>
@@ -282,24 +282,24 @@ should implement the following two methods:</p>
 <p><strong>Request</strong>:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"User"</span><span class="p">:</span><span class="w">              </span><span class="s2">"The user identification"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"UserAuthNMethod"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The authentication method used"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestMethod"</span><span class="p">:</span><span class="w">     </span><span class="s2">"The HTTP method"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestURI"</span><span class="p">:</span><span class="w">        </span><span class="s2">"The HTTP request URI"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestBody"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Byte array containing the raw HTTP request body"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"RequestHeader"</span><span class="p">:</span><span class="w">     </span><span class="s2">"Byte array containing the raw HTTP request header as a map[string][]string"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ResponseBody"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Byte array containing the raw HTTP response body"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ResponseHeader"</span><span class="p">:</span><span class="w">    </span><span class="s2">"Byte array containing the raw HTTP response header as a map[string][]string"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ResponseStatusCode"</span><span class="p">:</span><span class="s2">"Response status code"</span><span class="w">
+    </span><span class="nl">"User"</span><span class="p">:</span><span class="w">              </span><span class="s2">"The user identification"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"UserAuthNMethod"</span><span class="p">:</span><span class="w">   </span><span class="s2">"The authentication method used"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestMethod"</span><span class="p">:</span><span class="w">     </span><span class="s2">"The HTTP method"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestURI"</span><span class="p">:</span><span class="w">        </span><span class="s2">"The HTTP request URI"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestBody"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Byte array containing the raw HTTP request body"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"RequestHeader"</span><span class="p">:</span><span class="w">     </span><span class="s2">"Byte array containing the raw HTTP request header as a map[string][]string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ResponseBody"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Byte array containing the raw HTTP response body"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ResponseHeader"</span><span class="p">:</span><span class="w">    </span><span class="s2">"Byte array containing the raw HTTP response header as a map[string][]string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"ResponseStatusCode"</span><span class="p">:</span><span class="s2">"Response status code"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p><strong>Response</strong>:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="s2">"Allow"</span><span class="p">:</span><span class="w">              </span><span class="s2">"Determined whether the user is allowed or not"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"Msg"</span><span class="p">:</span><span class="w">                </span><span class="s2">"The authorization message"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"Err"</span><span class="p">:</span><span class="w">                </span><span class="s2">"The error message if things go wrong"</span><span class="w">
+   </span><span class="nl">"Allow"</span><span class="p">:</span><span class="w">              </span><span class="s2">"Determined whether the user is allowed or not"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"Msg"</span><span class="p">:</span><span class="w">                </span><span class="s2">"The authorization message"</span><span class="p">,</span><span class="w">
+   </span><span class="nl">"Err"</span><span class="p">:</span><span class="w">                </span><span class="s2">"The error message if things go wrong"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 

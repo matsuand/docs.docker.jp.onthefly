@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the OverlayFS storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the OverlayFS storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of OverlayFS driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the OverlayFS storage driver","description":"Learn how to optimize your use of OverlayFS driver.","url":"https://docs.docker.com/storage/storagedriver/overlayfs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,23 +102,23 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    18 分
+    19 分
   
 </span>
 <p>OverlayFS is a modern <em>union filesystem</em> that is similar to AUFS, but faster
 and with a simpler implementation. Docker provides two storage drivers for
-OverlayFS: the original <code class="highlighter-rouge">overlay</code>, and the newer and more stable <code class="highlighter-rouge">overlay2</code>.</p>
+OverlayFS: the original <code class="language-plaintext highlighter-rouge">overlay</code>, and the newer and more stable <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
 
-<p>This topic refers to the Linux kernel driver as <code class="highlighter-rouge">OverlayFS</code> and to the Docker
-storage driver as <code class="highlighter-rouge">overlay</code> or <code class="highlighter-rouge">overlay2</code>.</p>
+<p>This topic refers to the Linux kernel driver as <code class="language-plaintext highlighter-rouge">OverlayFS</code> and to the Docker
+storage driver as <code class="language-plaintext highlighter-rouge">overlay</code> or <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: If you use OverlayFS, use the <code class="highlighter-rouge">overlay2</code> driver rather than the
-<code class="highlighter-rouge">overlay</code> driver, because it is more efficient in terms of inode utilization.
+  <p><strong>Note</strong>: If you use OverlayFS, use the <code class="language-plaintext highlighter-rouge">overlay2</code> driver rather than the
+<code class="language-plaintext highlighter-rouge">overlay</code> driver, because it is more efficient in terms of inode utilization.
 To use the new driver, you need version 4.0 or higher of the Linux kernel,
 or RHEL or CentOS using version 3.10.0-514 and above.</p>
 
-  <p>For more information about differences between <code class="highlighter-rouge">overlay</code> vs <code class="highlighter-rouge">overlay2</code>, check
+  <p>For more information about differences between <code class="language-plaintext highlighter-rouge">overlay</code> vs <code class="language-plaintext highlighter-rouge">overlay2</code>, check
 <a href="/docs.docker.jp.onthefly/storage/storagedriver/select-storage-driver/">Docker storage drivers</a>.</p>
 </blockquote>
 
@@ -127,48 +127,48 @@ or RHEL or CentOS using version 3.10.0-514 and above.</p>
 <p>OverlayFS is supported if you meet the following prerequisites:</p>
 
 <ul>
-  <li>The <code class="highlighter-rouge">overlay2</code> driver is supported on Docker Engine - Community, and Docker EE 17.06.02-ee5 and
+  <li>The <code class="language-plaintext highlighter-rouge">overlay2</code> driver is supported on Docker Engine - Community, and Docker EE 17.06.02-ee5 and
 up, and is the recommended storage driver.</li>
   <li>Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
 version 3.10.0-514 of the kernel or higher. If you use an older kernel, you need
-to use the <code class="highlighter-rouge">overlay</code> driver, which is not recommended.</li>
+to use the <code class="language-plaintext highlighter-rouge">overlay</code> driver, which is not recommended.</li>
   <li>
-    <p>The <code class="highlighter-rouge">overlay</code> and <code class="highlighter-rouge">overlay2</code> drivers are supported on <code class="highlighter-rouge">xfs</code> backing filesystems,
-but only with <code class="highlighter-rouge">d_type=true</code> enabled.</p>
+    <p>The <code class="language-plaintext highlighter-rouge">overlay</code> and <code class="language-plaintext highlighter-rouge">overlay2</code> drivers are supported on <code class="language-plaintext highlighter-rouge">xfs</code> backing filesystems,
+but only with <code class="language-plaintext highlighter-rouge">d_type=true</code> enabled.</p>
 
-    <p>Use <code class="highlighter-rouge">xfs_info</code> to verify that the <code class="highlighter-rouge">ftype</code> option is set to <code class="highlighter-rouge">1</code>. To format an
-  <code class="highlighter-rouge">xfs</code> filesystem correctly, use the flag <code class="highlighter-rouge">-n ftype=1</code>.</p>
+    <p>Use <code class="language-plaintext highlighter-rouge">xfs_info</code> to verify that the <code class="language-plaintext highlighter-rouge">ftype</code> option is set to <code class="language-plaintext highlighter-rouge">1</code>. To format an
+  <code class="language-plaintext highlighter-rouge">xfs</code> filesystem correctly, use the flag <code class="language-plaintext highlighter-rouge">-n ftype=1</code>.</p>
 
     <blockquote class="warning">
       <p><strong>Warning</strong>: Running on XFS without d_type support now causes Docker to
-skip the attempt to use the <code class="highlighter-rouge">overlay</code> or <code class="highlighter-rouge">overlay2</code> driver. Existing
+skip the attempt to use the <code class="language-plaintext highlighter-rouge">overlay</code> or <code class="language-plaintext highlighter-rouge">overlay2</code> driver. Existing
 installs will continue to run, but produce an error. This is to allow
 users to migrate their data. In a future version, this will be a fatal
 error, which will prevent Docker from starting.</p>
     </blockquote>
   </li>
   <li>Changing the storage driver makes existing containers and images inaccessible
-on the local system. Use <code class="highlighter-rouge">docker save</code> to save any images you have built or
+on the local system. Use <code class="language-plaintext highlighter-rouge">docker save</code> to save any images you have built or
 push them to Docker Hub or a private registry before changing the storage driver,
 so that you do not need to re-create them later.</li>
 </ul>
 
-<h2 id="configure-docker-with-the-overlay-or-overlay2-storage-driver">Configure Docker with the <code class="highlighter-rouge">overlay</code> or <code class="highlighter-rouge">overlay2</code> storage driver</h2>
+<h2 id="configure-docker-with-the-overlay-or-overlay2-storage-driver">Configure Docker with the <code class="language-plaintext highlighter-rouge">overlay</code> or <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver</h2>
 
-<p>It is highly recommended that you use the <code class="highlighter-rouge">overlay2</code> driver if possible, rather
-than the <code class="highlighter-rouge">overlay</code> driver. The <code class="highlighter-rouge">overlay</code> driver is <strong>not</strong> supported for
+<p>It is highly recommended that you use the <code class="language-plaintext highlighter-rouge">overlay2</code> driver if possible, rather
+than the <code class="language-plaintext highlighter-rouge">overlay</code> driver. The <code class="language-plaintext highlighter-rouge">overlay</code> driver is <strong>not</strong> supported for
 Docker EE.</p>
 
-<p>To configure Docker to use the <code class="highlighter-rouge">overlay</code> storage driver your Docker host must be
+<p>To configure Docker to use the <code class="language-plaintext highlighter-rouge">overlay</code> storage driver your Docker host must be
 running version 3.18 of the Linux kernel (preferably newer) with the overlay
-kernel module loaded. For the <code class="highlighter-rouge">overlay2</code> driver, the version of your kernel must
+kernel module loaded. For the <code class="language-plaintext highlighter-rouge">overlay2</code> driver, the version of your kernel must
 be 4.0 or newer.</p>
 
 <p>Before following this procedure, you must first meet all the
 <a href="#prerequisites">prerequisites</a>.</p>
 
-<p>The steps below outline how to configure the <code class="highlighter-rouge">overlay2</code> storage driver. If you
-need to use the legacy <code class="highlighter-rouge">overlay</code> driver, specify it instead.</p>
+<p>The steps below outline how to configure the <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver. If you
+need to use the legacy <code class="language-plaintext highlighter-rouge">overlay</code> driver, specify it instead.</p>
 
 <ol>
   <li>
@@ -178,26 +178,26 @@ need to use the legacy <code class="highlighter-rouge">overlay</code> driver, sp
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Copy the contents of <code class="highlighter-rouge">/var/lib/docker</code> to a temporary location.</p>
+    <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker</code> to a temporary location.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>cp <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
 </code></pre></div>    </div>
   </li>
   <li>
     <p>If you want to use a separate backing filesystem from the one used by
-<code class="highlighter-rouge">/var/lib/</code>, format the filesystem and mount it into <code class="highlighter-rouge">/var/lib/docker</code>.
-Make sure add this mount to <code class="highlighter-rouge">/etc/fstab</code> to make it permanent.</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/</code>, format the filesystem and mount it into <code class="language-plaintext highlighter-rouge">/var/lib/docker</code>.
+Make sure add this mount to <code class="language-plaintext highlighter-rouge">/etc/fstab</code> to make it permanent.</p>
   </li>
   <li>
-    <p>Edit <code class="highlighter-rouge">/etc/docker/daemon.json</code>. If it does not yet exist, create it. Assuming
+    <p>Edit <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>. If it does not yet exist, create it. Assuming
 that the file was empty, add the following contents.</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overlay2"</span><span class="w">
+  </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"overlay2"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
 
-    <p>Docker does not start if the <code class="highlighter-rouge">daemon.json</code> file contains badly-formed JSON.</p>
+    <p>Docker does not start if the <code class="language-plaintext highlighter-rouge">daemon.json</code> file contains badly-formed JSON.</p>
   </li>
   <li>
     <p>Start Docker.</p>
@@ -206,9 +206,9 @@ that the file was empty, add the following contents.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the daemon is using the <code class="highlighter-rouge">overlay2</code> storage driver.
-Use the <code class="highlighter-rouge">docker info</code> command and look for <code class="highlighter-rouge">Storage Driver</code> and
-<code class="highlighter-rouge">Backing filesystem</code>.</p>
+    <p>Verify that the daemon is using the <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver.
+Use the <code class="language-plaintext highlighter-rouge">docker info</code> command and look for <code class="language-plaintext highlighter-rouge">Storage Driver</code> and
+<code class="language-plaintext highlighter-rouge">Backing filesystem</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info
 
@@ -223,38 +223,38 @@ Storage Driver: overlay2
   </li>
 </ol>
 
-<p>Docker is now using the <code class="highlighter-rouge">overlay2</code> storage driver and has automatically
-created the overlay mount with the required <code class="highlighter-rouge">lowerdir</code>, <code class="highlighter-rouge">upperdir</code>, <code class="highlighter-rouge">merged</code>,
-and <code class="highlighter-rouge">workdir</code> constructs.</p>
+<p>Docker is now using the <code class="language-plaintext highlighter-rouge">overlay2</code> storage driver and has automatically
+created the overlay mount with the required <code class="language-plaintext highlighter-rouge">lowerdir</code>, <code class="language-plaintext highlighter-rouge">upperdir</code>, <code class="language-plaintext highlighter-rouge">merged</code>,
+and <code class="language-plaintext highlighter-rouge">workdir</code> constructs.</p>
 
 <p>Continue reading for details about how OverlayFS works within your Docker
 containers, as well as performance advice and information about limitations of
 its compatibility with different backing filesystems.</p>
 
-<h2 id="how-the-overlay2-driver-works">How the <code class="highlighter-rouge">overlay2</code> driver works</h2>
+<h2 id="how-the-overlay2-driver-works">How the <code class="language-plaintext highlighter-rouge">overlay2</code> driver works</h2>
 
-<p>If you are still using the <code class="highlighter-rouge">overlay</code> driver rather than <code class="highlighter-rouge">overlay2</code>, see
+<p>If you are still using the <code class="language-plaintext highlighter-rouge">overlay</code> driver rather than <code class="language-plaintext highlighter-rouge">overlay2</code>, see
 <a href="#how-the-overlay-driver-works">How the overlay driver works</a> instead.</p>
 
 <p>OverlayFS layers two directories on a single Linux host and presents them as
 a single directory. These directories are called <em>layers</em> and the unification
 process is referred to as a <em>union mount</em>. OverlayFS refers to the lower directory
-as <code class="highlighter-rouge">lowerdir</code> and the upper directory a <code class="highlighter-rouge">upperdir</code>. The unified view is exposed
-through its own directory called <code class="highlighter-rouge">merged</code>.</p>
+as <code class="language-plaintext highlighter-rouge">lowerdir</code> and the upper directory a <code class="language-plaintext highlighter-rouge">upperdir</code>. The unified view is exposed
+through its own directory called <code class="language-plaintext highlighter-rouge">merged</code>.</p>
 
-<p>The <code class="highlighter-rouge">overlay2</code> driver natively supports up to 128 lower OverlayFS layers. This
+<p>The <code class="language-plaintext highlighter-rouge">overlay2</code> driver natively supports up to 128 lower OverlayFS layers. This
 capability provides better performance for layer-related Docker commands such
-as <code class="highlighter-rouge">docker build</code> and <code class="highlighter-rouge">docker commit</code>, and consumes fewer inodes on the backing
+as <code class="language-plaintext highlighter-rouge">docker build</code> and <code class="language-plaintext highlighter-rouge">docker commit</code>, and consumes fewer inodes on the backing
 filesystem.</p>
 
 <h3 id="image-and-container-layers-on-disk">Image and container layers on-disk</h3>
 
-<p>After downloading a five-layer image using <code class="highlighter-rouge">docker pull ubuntu</code>, you can see
-six directories under <code class="highlighter-rouge">/var/lib/docker/overlay2</code>.</p>
+<p>After downloading a five-layer image using <code class="language-plaintext highlighter-rouge">docker pull ubuntu</code>, you can see
+six directories under <code class="language-plaintext highlighter-rouge">/var/lib/docker/overlay2</code>.</p>
 
 <blockquote>
   <p><strong>Warning</strong>: Do not directly manipulate any files or directories within
-<code class="highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay2
@@ -268,9 +268,9 @@ drwx------ 5 root root 4096 Jun 20 07:36 eca1e4e1694283e001f200a667bb3cb40853cf2
 drwx------ 2 root root 4096 Jun 20 07:36 l
 </code></pre></div></div>
 
-<p>The new <code class="highlighter-rouge">l</code> (lowercase <code class="highlighter-rouge">L</code>) directory contains shortened layer identifiers as
+<p>The new <code class="language-plaintext highlighter-rouge">l</code> (lowercase <code class="language-plaintext highlighter-rouge">L</code>) directory contains shortened layer identifiers as
 symbolic links. These identifiers are used to avoid hitting the page size
-limitation on arguments to the <code class="highlighter-rouge">mount</code> command.</p>
+limitation on arguments to the <code class="language-plaintext highlighter-rouge">mount</code> command.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay2/l
 
@@ -282,13 +282,13 @@ lrwxrwxrwx 1 root root 72 Jun 20 07:36 NFYKDW6APBCCUCTOUSYDH4DXAT -&gt; ../223c2
 lrwxrwxrwx 1 root root 72 Jun 20 07:36 UL2MW33MSE3Q5VYIKBRN4ZAGQP -&gt; ../e8876a226237217ec61c4baf238a32992291d059fdac95ed6303bdff3f59cff5/diff
 </code></pre></div></div>
 
-<p>The lowest layer contains a file called <code class="highlighter-rouge">link</code>, which contains the name of the
-shortened identifier, and a directory called <code class="highlighter-rouge">diff</code> which contains the
+<p>The lowest layer contains a file called <code class="language-plaintext highlighter-rouge">link</code>, which contains the name of the
+shortened identifier, and a directory called <code class="language-plaintext highlighter-rouge">diff</code> which contains the
 layer’s contents.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/
 
-diff  link
+diff  <span class="nb">link</span>
 
 <span class="nv">$ </span><span class="nb">cat</span> /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/link
 
@@ -299,15 +299,15 @@ diff  link
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 </code></pre></div></div>
 
-<p>The second-lowest layer, and each higher layer, contain a file called <code class="highlighter-rouge">lower</code>,
-which denotes its parent, and a directory called <code class="highlighter-rouge">diff</code> which contains its
-contents. It also contains a <code class="highlighter-rouge">merged</code> directory, which contains the unified
-contents of its parent layer and itself, and a <code class="highlighter-rouge">work</code> directory which is used
+<p>The second-lowest layer, and each higher layer, contain a file called <code class="language-plaintext highlighter-rouge">lower</code>,
+which denotes its parent, and a directory called <code class="language-plaintext highlighter-rouge">diff</code> which contains its
+contents. It also contains a <code class="language-plaintext highlighter-rouge">merged</code> directory, which contains the unified
+contents of its parent layer and itself, and a <code class="language-plaintext highlighter-rouge">work</code> directory which is used
 internally by OverlayFS.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7
 
-diff  link  lower  merged  work
+diff  <span class="nb">link  </span>lower  merged  work
 
 <span class="nv">$ </span><span class="nb">cat</span> /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7/lower
 
@@ -318,8 +318,8 @@ l/6Y5IM2XC7TSNIJZZFLJCS6I4I4
 etc  sbin  usr  var
 </code></pre></div></div>
 
-<p>To view the mounts which exist when you use the <code class="highlighter-rouge">overlay</code> storage driver with
-Docker, use the <code class="highlighter-rouge">mount</code> command. The output below is truncated for readability.</p>
+<p>To view the mounts which exist when you use the <code class="language-plaintext highlighter-rouge">overlay</code> storage driver with
+Docker, use the <code class="language-plaintext highlighter-rouge">mount</code> command. The output below is truncated for readability.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mount | <span class="nb">grep </span>overlay
 
@@ -330,24 +330,24 @@ overlay on /var/lib/docker/overlay2/9186877cdf386d0a3b016149cf30c208f326dca30752
 <span class="nv">workdir</span><span class="o">=</span>9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/work<span class="o">)</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">rw</code> on the second line shows that the <code class="highlighter-rouge">overlay</code> mount is read-write.</p>
+<p>The <code class="language-plaintext highlighter-rouge">rw</code> on the second line shows that the <code class="language-plaintext highlighter-rouge">overlay</code> mount is read-write.</p>
 
-<h2 id="how-the-overlay-driver-works">How the <code class="highlighter-rouge">overlay</code> driver works</h2>
+<h2 id="how-the-overlay-driver-works">How the <code class="language-plaintext highlighter-rouge">overlay</code> driver works</h2>
 
-<p>This content applies to the <code class="highlighter-rouge">overlay</code> driver only. Docker recommends using the
-<code class="highlighter-rouge">overlay2</code> driver, which works differently. See
+<p>This content applies to the <code class="language-plaintext highlighter-rouge">overlay</code> driver only. Docker recommends using the
+<code class="language-plaintext highlighter-rouge">overlay2</code> driver, which works differently. See
 <a href="#how-the-overlay2-driver-works">How the overlay2 driver works</a>
-for <code class="highlighter-rouge">overlay2</code>.</p>
+for <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
 
 <p>OverlayFS layers two directories on a single Linux host and presents them as
 a single directory. These directories are called <em>layers</em> and the unification
 process is referred to as a <em>union mount</em>. OverlayFS refers to the lower directory
-as <code class="highlighter-rouge">lowerdir</code> and the upper directory a <code class="highlighter-rouge">upperdir</code>. The unified view is exposed
-through its own directory called <code class="highlighter-rouge">merged</code>.</p>
+as <code class="language-plaintext highlighter-rouge">lowerdir</code> and the upper directory a <code class="language-plaintext highlighter-rouge">upperdir</code>. The unified view is exposed
+through its own directory called <code class="language-plaintext highlighter-rouge">merged</code>.</p>
 
 <p>The diagram below shows how a Docker image and a Docker container are layered.
-The image layer is the <code class="highlighter-rouge">lowerdir</code> and the container layer is the <code class="highlighter-rouge">upperdir</code>.
-The unified view is exposed through a directory called <code class="highlighter-rouge">merged</code> which is
+The image layer is the <code class="language-plaintext highlighter-rouge">lowerdir</code> and the container layer is the <code class="language-plaintext highlighter-rouge">upperdir</code>.
+The unified view is exposed through a directory called <code class="language-plaintext highlighter-rouge">merged</code> which is
 effectively the containers mount point. The diagram shows how Docker constructs
 map to OverlayFS constructs.</p>
 
@@ -357,23 +357,23 @@ map to OverlayFS constructs.</p>
 container layer “wins” and obscures the existence of the same files in the image
 layer.</p>
 
-<p>The <code class="highlighter-rouge">overlay</code> driver only works with two layers. This means that multi-layered
+<p>The <code class="language-plaintext highlighter-rouge">overlay</code> driver only works with two layers. This means that multi-layered
 images cannot be implemented as multiple OverlayFS layers. Instead, each image
-layer is implemented as its own directory under <code class="highlighter-rouge">/var/lib/docker/overlay</code>.  Hard
+layer is implemented as its own directory under <code class="language-plaintext highlighter-rouge">/var/lib/docker/overlay</code>.  Hard
 links are then used as a space-efficient way to reference data shared with lower
 layers. The use of hardlinks causes an excessive use of inodes, which is a known
-limitation of the legacy <code class="highlighter-rouge">overlay</code> storage driver, and may require additional
+limitation of the legacy <code class="language-plaintext highlighter-rouge">overlay</code> storage driver, and may require additional
 configuration of the backing filesystem. Refer to the <a href="#overlayfs-and-docker-performance">overlayFS and Docker
 performance</a> for details.</p>
 
-<p>To create a container, the <code class="highlighter-rouge">overlay</code> driver combines the directory representing
+<p>To create a container, the <code class="language-plaintext highlighter-rouge">overlay</code> driver combines the directory representing
 the image’s top layer plus a new directory for the container. The image’s top
-layer is the <code class="highlighter-rouge">lowerdir</code> in the overlay and is read-only. The new directory for
-the container is the <code class="highlighter-rouge">upperdir</code> and is writable.</p>
+layer is the <code class="language-plaintext highlighter-rouge">lowerdir</code> in the overlay and is read-only. The new directory for
+the container is the <code class="language-plaintext highlighter-rouge">upperdir</code> and is writable.</p>
 
 <h3 id="image-and-container-layers-on-disk-1">Image and container layers on-disk</h3>
 
-<p>The following <code class="highlighter-rouge">docker pull</code> command shows a Docker host downloading a Docker
+<p>The following <code class="language-plaintext highlighter-rouge">docker pull</code> command shows a Docker host downloading a Docker
 image comprising five layers.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu
@@ -392,13 +392,13 @@ Status: Downloaded newer image <span class="k">for </span>ubuntu:latest
 
 <h4 id="the-image-layers">The image layers</h4>
 
-<p>Each image layer has its own directory within <code class="highlighter-rouge">/var/lib/docker/overlay/</code>, which
+<p>Each image layer has its own directory within <code class="language-plaintext highlighter-rouge">/var/lib/docker/overlay/</code>, which
 contains its contents, as shown below. The image layer IDs do not correspond to
 the directory IDs.</p>
 
 <blockquote>
   <p><strong>Warning</strong>: Do not directly manipulate any files or directories within
-<code class="highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. These files and directories are managed by Docker.</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay/
@@ -427,8 +427,8 @@ efficient use of disk space.</p>
 <h4 id="the-container-layer">The container layer</h4>
 
 <p>Containers also exist on-disk in the Docker host’s filesystem under
-<code class="highlighter-rouge">/var/lib/docker/overlay/</code>. If you list a running container’s subdirectory
-using the <code class="highlighter-rouge">ls -l</code> command, three directories and one file exist:</p>
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/overlay/</code>. If you list a running container’s subdirectory
+using the <code class="language-plaintext highlighter-rouge">ls -l</code> command, three directories and one file exist:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> /var/lib/docker/overlay/&lt;directory-of-running-container&gt;
 
@@ -439,24 +439,24 @@ drwxr-xr-x 4 root root 4096 Jun 20 16:39 upper
 drwx------ 3 root root 4096 Jun 20 16:39 work
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">lower-id</code> file contains the ID of the top layer of the image the container
-is based on, which is the OverlayFS <code class="highlighter-rouge">lowerdir</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">lower-id</code> file contains the ID of the top layer of the image the container
+is based on, which is the OverlayFS <code class="language-plaintext highlighter-rouge">lowerdir</code>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
 
 55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">upper</code> directory contains the contents of the container’s read-write layer,
-which corresponds to the OverlayFS <code class="highlighter-rouge">upperdir</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">upper</code> directory contains the contents of the container’s read-write layer,
+which corresponds to the OverlayFS <code class="language-plaintext highlighter-rouge">upperdir</code>.</p>
 
-<p>The <code class="highlighter-rouge">merged</code> directory is the union mount of the <code class="highlighter-rouge">lowerdir</code> and <code class="highlighter-rouge">upperdir</code>, which
+<p>The <code class="language-plaintext highlighter-rouge">merged</code> directory is the union mount of the <code class="language-plaintext highlighter-rouge">lowerdir</code> and <code class="language-plaintext highlighter-rouge">upperdir</code>, which
 comprises the view of the filesystem from within the running container.</p>
 
-<p>The <code class="highlighter-rouge">work</code> directory is internal to OverlayFS.</p>
+<p>The <code class="language-plaintext highlighter-rouge">work</code> directory is internal to OverlayFS.</p>
 
-<p>To view the mounts which exist when you use the <code class="highlighter-rouge">overlay</code> storage driver with
-Docker, use the <code class="highlighter-rouge">mount</code> command. The output below is truncated for readability.</p>
+<p>To view the mounts which exist when you use the <code class="language-plaintext highlighter-rouge">overlay</code> storage driver with
+Docker, use the <code class="language-plaintext highlighter-rouge">mount</code> command. The output below is truncated for readability.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mount | <span class="nb">grep </span>overlay
 
@@ -466,9 +466,9 @@ overlay on /var/lib/docker/overlay/ec444863a55a.../merged
 <span class="nv">workdir</span><span class="o">=</span>/var/lib/docker/overlay/ec444863a55a.../work<span class="o">)</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">rw</code> on the second line shows that the <code class="highlighter-rouge">overlay</code> mount is read-write.</p>
+<p>The <code class="language-plaintext highlighter-rouge">rw</code> on the second line shows that the <code class="language-plaintext highlighter-rouge">overlay</code> mount is read-write.</p>
 
-<h2 id="how-container-reads-and-writes-work-with-overlay-or-overlay2">How container reads and writes work with <code class="highlighter-rouge">overlay</code> or <code class="highlighter-rouge">overlay2</code></h2>
+<h2 id="how-container-reads-and-writes-work-with-overlay-or-overlay2">How container reads and writes work with <code class="language-plaintext highlighter-rouge">overlay</code> or <code class="language-plaintext highlighter-rouge">overlay2</code></h2>
 
 <h3 id="reading-files">Reading files</h3>
 
@@ -479,20 +479,20 @@ overlay.</p>
   <li>
     <p><strong>The file does not exist in the container layer</strong>: If a container opens a
 file for read access and the file does not already exist in the container
-(<code class="highlighter-rouge">upperdir</code>) it is read from the image (<code class="highlighter-rouge">lowerdir)</code>. This incurs very little
+(<code class="language-plaintext highlighter-rouge">upperdir</code>) it is read from the image (<code class="language-plaintext highlighter-rouge">lowerdir)</code>. This incurs very little
 performance overhead.</p>
   </li>
   <li>
     <p><strong>The file only exists in the container layer</strong>: If a container opens a file
-for read access and the file exists in the container (<code class="highlighter-rouge">upperdir</code>) and not in
-the image (<code class="highlighter-rouge">lowerdir</code>), it is read directly from the container.</p>
+for read access and the file exists in the container (<code class="language-plaintext highlighter-rouge">upperdir</code>) and not in
+the image (<code class="language-plaintext highlighter-rouge">lowerdir</code>), it is read directly from the container.</p>
   </li>
   <li>
     <p><strong>The file exists in both the container layer and the image layer</strong>: If a
 container opens a file for read access and the file exists in the image layer
 and the container layer, the file’s version in the container layer is read.
-Files in the container layer (<code class="highlighter-rouge">upperdir</code>) obscure files with the same name in
-the image layer (<code class="highlighter-rouge">lowerdir</code>).</p>
+Files in the container layer (<code class="language-plaintext highlighter-rouge">upperdir</code>) obscure files with the same name in
+the image layer (<code class="language-plaintext highlighter-rouge">lowerdir</code>).</p>
   </li>
 </ul>
 
@@ -503,9 +503,9 @@ the image layer (<code class="highlighter-rouge">lowerdir</code>).</p>
 <ul>
   <li>
     <p><strong>Writing to a file for the first time</strong>: The first time a container writes
-to an existing file, that file does not exist in the container (<code class="highlighter-rouge">upperdir</code>).
-The <code class="highlighter-rouge">overlay</code>/<code class="highlighter-rouge">overlay2</code> driver performs a <em>copy_up</em> operation to copy the file
-from the image (<code class="highlighter-rouge">lowerdir</code>) to the container (<code class="highlighter-rouge">upperdir</code>). The container then
+to an existing file, that file does not exist in the container (<code class="language-plaintext highlighter-rouge">upperdir</code>).
+The <code class="language-plaintext highlighter-rouge">overlay</code>/<code class="language-plaintext highlighter-rouge">overlay2</code> driver performs a <em>copy_up</em> operation to copy the file
+from the image (<code class="language-plaintext highlighter-rouge">lowerdir</code>) to the container (<code class="language-plaintext highlighter-rouge">upperdir</code>). The container then
 writes the changes to the new copy of the file in the container layer.</p>
 
     <p>However, OverlayFS works at the file level rather than the block level. This
@@ -524,8 +524,8 @@ already copied up to the container.</p>
         <p>OverlayFS only works with two layers. This means that performance should
 be better than AUFS, which can suffer noticeable latencies when searching
 for files in images with many layers. This advantage applies to both
-<code class="highlighter-rouge">overlay</code> and <code class="highlighter-rouge">overlay2</code> drivers. <code class="highlighter-rouge">overlayfs2</code> is slightly
-less performant than <code class="highlighter-rouge">overlayfs</code> on initial read, because it must look
+<code class="language-plaintext highlighter-rouge">overlay</code> and <code class="language-plaintext highlighter-rouge">overlay2</code> drivers. <code class="language-plaintext highlighter-rouge">overlayfs2</code> is slightly
+less performant than <code class="language-plaintext highlighter-rouge">overlayfs</code> on initial read, because it must look
 through more layers, but it caches the results so this is only a small
 penalty.</p>
       </li>
@@ -537,38 +537,38 @@ penalty.</p>
     <ul>
       <li>
         <p>When a <em>file</em> is deleted within a container, a <em>whiteout</em> file is created in
-the container (<code class="highlighter-rouge">upperdir</code>). The version of the file in the image layer
-(<code class="highlighter-rouge">lowerdir</code>) is not deleted (because the <code class="highlighter-rouge">lowerdir</code> is read-only). However,
+the container (<code class="language-plaintext highlighter-rouge">upperdir</code>). The version of the file in the image layer
+(<code class="language-plaintext highlighter-rouge">lowerdir</code>) is not deleted (because the <code class="language-plaintext highlighter-rouge">lowerdir</code> is read-only). However,
 the whiteout file prevents it from being available to the container.</p>
       </li>
       <li>
         <p>When a <em>directory</em> is deleted within a container, an <em>opaque directory</em> is
-created within the container (<code class="highlighter-rouge">upperdir</code>). This works in the same way as a
+created within the container (<code class="language-plaintext highlighter-rouge">upperdir</code>). This works in the same way as a
 whiteout file and effectively prevents the directory from being accessed,
-even though it still exists in the image (<code class="highlighter-rouge">lowerdir</code>).</p>
+even though it still exists in the image (<code class="language-plaintext highlighter-rouge">lowerdir</code>).</p>
       </li>
     </ul>
   </li>
   <li>
-    <p><strong>Renaming directories</strong>: Calling <code class="highlighter-rouge">rename(2)</code> for a directory is allowed only
+    <p><strong>Renaming directories</strong>: Calling <code class="language-plaintext highlighter-rouge">rename(2)</code> for a directory is allowed only
 when both the source and the destination path are on the top layer.
-Otherwise, it returns <code class="highlighter-rouge">EXDEV</code> error (“cross-device link not permitted”).
-Your application needs to be designed to handle <code class="highlighter-rouge">EXDEV</code> and fall back to a
+Otherwise, it returns <code class="language-plaintext highlighter-rouge">EXDEV</code> error (“cross-device link not permitted”).
+Your application needs to be designed to handle <code class="language-plaintext highlighter-rouge">EXDEV</code> and fall back to a
 “copy and unlink” strategy.</p>
   </li>
 </ul>
 
 <h2 id="overlayfs-and-docker-performance">OverlayFS and Docker Performance</h2>
 
-<p>Both <code class="highlighter-rouge">overlay2</code> and <code class="highlighter-rouge">overlay</code> drivers are more performant than <code class="highlighter-rouge">aufs</code> and
-<code class="highlighter-rouge">devicemapper</code>. In certain circumstances, <code class="highlighter-rouge">overlay2</code> may perform better than
-<code class="highlighter-rouge">btrfs</code> as well. However, be aware of the following details.</p>
+<p>Both <code class="language-plaintext highlighter-rouge">overlay2</code> and <code class="language-plaintext highlighter-rouge">overlay</code> drivers are more performant than <code class="language-plaintext highlighter-rouge">aufs</code> and
+<code class="language-plaintext highlighter-rouge">devicemapper</code>. In certain circumstances, <code class="language-plaintext highlighter-rouge">overlay2</code> may perform better than
+<code class="language-plaintext highlighter-rouge">btrfs</code> as well. However, be aware of the following details.</p>
 
 <ul>
   <li>
     <p><strong>Page Caching</strong>. OverlayFS supports page cache sharing. Multiple containers
 accessing the same file share a single page cache entry for that file. This
-makes the <code class="highlighter-rouge">overlay</code> and <code class="highlighter-rouge">overlay2</code> drivers efficient with memory and a good
+makes the <code class="language-plaintext highlighter-rouge">overlay</code> and <code class="language-plaintext highlighter-rouge">overlay2</code> drivers efficient with memory and a good
 option for high-density use cases such as PaaS.</p>
   </li>
   <li>
@@ -578,17 +578,17 @@ into the write operation, especially for large files. However, once the file
 has been copied up, all subsequent writes to that file occur in the upper
 layer, without the need for further copy-up operations.</p>
 
-    <p>The OverlayFS <code class="highlighter-rouge">copy_up</code> operation is faster than the same operation with AUFS,
+    <p>The OverlayFS <code class="language-plaintext highlighter-rouge">copy_up</code> operation is faster than the same operation with AUFS,
 because AUFS supports more layers than OverlayFS and it is possible to incur
-far larger latencies if searching through many AUFS layers. <code class="highlighter-rouge">overlay2</code> supports
+far larger latencies if searching through many AUFS layers. <code class="language-plaintext highlighter-rouge">overlay2</code> supports
 multiple layers as well, but mitigates any performance hit with caching.</p>
   </li>
   <li>
-    <p><strong>Inode limits</strong>. Use of the legacy <code class="highlighter-rouge">overlay</code> storage driver can cause excessive
+    <p><strong>Inode limits</strong>. Use of the legacy <code class="language-plaintext highlighter-rouge">overlay</code> storage driver can cause excessive
 inode consumption. This is especially true in the presence of a large number
 of images and containers on the Docker host. The only way to increase the
 number of inodes available to a filesystem is to reformat it. To avoid running
-into this issue, it is highly recommended that you use <code class="highlighter-rouge">overlay2</code> if at all
+into this issue, it is highly recommended that you use <code class="language-plaintext highlighter-rouge">overlay2</code> if at all
 possible.</p>
   </li>
 </ul>
@@ -621,24 +621,24 @@ filesystems:</p>
     <p><strong>open(2)</strong>: OverlayFS only implements a subset of the POSIX standards.
 This can result in certain OverlayFS operations breaking POSIX standards. One
 such operation is the <em>copy-up</em> operation. Suppose that  your application calls
-<code class="highlighter-rouge">fd1=open("foo", O_RDONLY)</code> and then <code class="highlighter-rouge">fd2=open("foo", O_RDWR)</code>. In this case,
-your application expects <code class="highlighter-rouge">fd1</code> and <code class="highlighter-rouge">fd2</code> to refer to the same file. However, due
-to a copy-up operation that occurs after the second calling to <code class="highlighter-rouge">open(2)</code>, the
-descriptors refer to different files. The <code class="highlighter-rouge">fd1</code> continues to reference the file
-in the image (<code class="highlighter-rouge">lowerdir</code>) and the <code class="highlighter-rouge">fd2</code> references the file in the container
-(<code class="highlighter-rouge">upperdir</code>). A workaround for this is to <code class="highlighter-rouge">touch</code> the files which causes the
-copy-up operation to happen. All subsequent <code class="highlighter-rouge">open(2)</code> operations regardless of
+<code class="language-plaintext highlighter-rouge">fd1=open("foo", O_RDONLY)</code> and then <code class="language-plaintext highlighter-rouge">fd2=open("foo", O_RDWR)</code>. In this case,
+your application expects <code class="language-plaintext highlighter-rouge">fd1</code> and <code class="language-plaintext highlighter-rouge">fd2</code> to refer to the same file. However, due
+to a copy-up operation that occurs after the second calling to <code class="language-plaintext highlighter-rouge">open(2)</code>, the
+descriptors refer to different files. The <code class="language-plaintext highlighter-rouge">fd1</code> continues to reference the file
+in the image (<code class="language-plaintext highlighter-rouge">lowerdir</code>) and the <code class="language-plaintext highlighter-rouge">fd2</code> references the file in the container
+(<code class="language-plaintext highlighter-rouge">upperdir</code>). A workaround for this is to <code class="language-plaintext highlighter-rouge">touch</code> the files which causes the
+copy-up operation to happen. All subsequent <code class="language-plaintext highlighter-rouge">open(2)</code> operations regardless of
 read-only or read-write access mode reference the file in the
-container (<code class="highlighter-rouge">upperdir</code>).</p>
+container (<code class="language-plaintext highlighter-rouge">upperdir</code>).</p>
 
-    <p><code class="highlighter-rouge">yum</code> is known to be affected unless the <code class="highlighter-rouge">yum-plugin-ovl</code> package is installed.
-If the <code class="highlighter-rouge">yum-plugin-ovl</code> package is not available in your distribution such as
-RHEL/CentOS prior to 6.8 or 7.2, you may need to run <code class="highlighter-rouge">touch /var/lib/rpm/*</code>
-before running <code class="highlighter-rouge">yum install</code>. This package implements the <code class="highlighter-rouge">touch</code> workaround
-referenced above for <code class="highlighter-rouge">yum</code>.</p>
+    <p><code class="language-plaintext highlighter-rouge">yum</code> is known to be affected unless the <code class="language-plaintext highlighter-rouge">yum-plugin-ovl</code> package is installed.
+If the <code class="language-plaintext highlighter-rouge">yum-plugin-ovl</code> package is not available in your distribution such as
+RHEL/CentOS prior to 6.8 or 7.2, you may need to run <code class="language-plaintext highlighter-rouge">touch /var/lib/rpm/*</code>
+before running <code class="language-plaintext highlighter-rouge">yum install</code>. This package implements the <code class="language-plaintext highlighter-rouge">touch</code> workaround
+referenced above for <code class="language-plaintext highlighter-rouge">yum</code>.</p>
   </li>
   <li>
-    <p><strong>rename(2)</strong>: OverlayFS does not fully support the <code class="highlighter-rouge">rename(2)</code> system call.
+    <p><strong>rename(2)</strong>: OverlayFS does not fully support the <code class="language-plaintext highlighter-rouge">rename(2)</code> system call.
 Your application needs to detect its failure and fall back to a “copy and
 unlink” strategy.</p>
   </li>

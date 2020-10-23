@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>BuildKit によるイメージ構築 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="BuildKit によるイメージ構築" />
   <meta property="og:description" content="BuildKit により Docker ビルドについて学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"BuildKit によるイメージ構築","description":"BuildKit により Docker ビルドについて学びます。","url":"https://docs.docker.com/develop/develop-images/build_enhancements/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -115,7 +115,7 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 <ul>
   <li>BuildKit を用いて生成された Docker イメージは、従来の Docker イメージと同じように Docker Hub にプッシュすることができます。</li>
   <li>従来のビルドに対して動作している Dockerfile の記述は、BuildKit を用いてビルドを行っても同様に動作します。</li>
-  <li>新しくコマンドラインオプション <code class="highlighter-rouge">--secret</code> が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。</li>
+  <li>新しくコマンドラインオプション <code class="language-plaintext highlighter-rouge">--secret</code> が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。</li>
 </ul>
 
 <p>ビルド時のオプションに関しては <a href="/engine/reference/commandline/build/">コマンドライン build オプション</a> を参照してください。</p>
@@ -135,50 +135,50 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 
 <h2 id="to-enable-buildkit-builds">BuildKit によるビルドの有効化</h2>
 
-<p>一番簡単な方法としては docker を起動し始める際に環境変数 <code class="highlighter-rouge">DOCKER_BUILDKIT=1</code> を設定した上で <code class="highlighter-rouge">docker build</code> コマンドを起動します。</p>
+<p>一番簡単な方法としては docker を起動し始める際に環境変数 <code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code> を設定した上で <code class="language-plaintext highlighter-rouge">docker build</code> コマンドを起動します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ DOCKER_BUILDKIT</span><span class="o">=</span>1 docker build <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>docker BuildKit をデフォルトで有効にするには、<code class="highlighter-rouge">/etc/docker/daemon.json</code> にあるデーモン設定の features を true にしデーモンを再起動します。</p>
+<p>docker BuildKit をデフォルトで有効にするには、<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> にあるデーモン設定の features を true にしデーモンを再起動します。</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"buildkit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"buildkit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <h2 id="new-docker-build-command-line-build-output">新たな Docker ビルドのコマンドライン出力</h2>
 
 <p>新たな Docker BuildKit の TTY 出力は（デフォルトで）以下のとおりです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nb">.</span>
 <span class="go">
 [+] Building 70.9s (34/59)
-</span><span class="gp"> =&gt;</span> <span class="o">[</span>runc 1/4] COPY hack/dockerfile/install/install.sh ./install.sh       14.0s
-<span class="gp"> =&gt;</span> <span class="o">[</span>frozen-images 3/4] RUN /download-frozen-image-v2.sh /build  buildpa  24.9s
-<span class="gp"> =&gt;</span> <span class="o">[</span>containerd 4/5] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh containerd           37.1s
-<span class="gp"> =&gt;</span> <span class="o">[</span>tini 2/5] COPY hack/dockerfile/install/install.sh ./install.sh        4.9s
-<span class="gp"> =&gt;</span> <span class="o">[</span>vndr 2/4] COPY hack/dockerfile/install/vndr.installer ./              1.6s
-<span class="gp"> =&gt;</span> <span class="o">[</span>dockercli 2/4] COPY hack/dockerfile/install/dockercli.installer ./    5.9s
-<span class="gp"> =&gt;</span> <span class="o">[</span>proxy 2/4] COPY hack/dockerfile/install/proxy.installer ./           15.7s
-<span class="gp"> =&gt;</span> <span class="o">[</span>tomlv 2/4] COPY hack/dockerfile/install/tomlv.installer ./           12.4s
-<span class="gp"> =&gt;</span> <span class="o">[</span>gometalinter 2/4] COPY hack/dockerfile/install/gometalinter.install  25.5s
-<span class="gp"> =&gt;</span> <span class="o">[</span>vndr 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh vndr                       33.2s
-<span class="gp"> =&gt;</span> <span class="o">[</span>tini 3/5] COPY hack/dockerfile/install/tini.installer ./              6.1s
-<span class="gp"> =&gt;</span> <span class="o">[</span>dockercli 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh dockercli             18.0s
-<span class="gp"> =&gt;</span> <span class="o">[</span>runc 2/4] COPY hack/dockerfile/install/runc.installer ./              2.4s
-<span class="gp"> =&gt;</span> <span class="o">[</span>tini 4/5] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh tini                       11.6s
-<span class="gp"> =&gt;</span> <span class="o">[</span>runc 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh runc                       23.4s
-<span class="gp"> =&gt;</span> <span class="o">[</span>tomlv 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh tomlv                      9.7s
-<span class="gp"> =&gt;</span> <span class="o">[</span>proxy 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh proxy                     14.6s
-<span class="gp"> =&gt;</span> <span class="o">[</span>dev 2/23] RUN useradd <span class="nt">--create-home</span> <span class="nt">--gid</span> docker unprivilegeduser     5.1s
-<span class="gp"> =&gt;</span> <span class="o">[</span>gometalinter 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh gometalinter        9.4s
-<span class="gp"> =&gt;</span> <span class="o">[</span>dev 3/23] RUN ln <span class="nt">-sfv</span> /go/src/github.com/docker/docker/.bashrc ~/.ba  4.3s
-<span class="gp"> =&gt;</span> <span class="o">[</span>dev 4/23] RUN <span class="nb">echo source</span> /usr/share/bash-completion/bash_completion  2.5s
-<span class="gp"> =&gt;</span> <span class="o">[</span>dev 5/23] RUN ln <span class="nt">-s</span> /usr/local/completion/bash/docker /etc/bash_comp  2.1s
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>runc 1/4] COPY hack/dockerfile/install/install.sh ./install.sh       14.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>frozen-images 3/4] RUN /download-frozen-image-v2.sh /build  buildpa  24.9s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>containerd 4/5] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh containerd           37.1s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>tini 2/5] COPY hack/dockerfile/install/install.sh ./install.sh        4.9s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>vndr 2/4] COPY hack/dockerfile/install/vndr.installer ./              1.6s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>dockercli 2/4] COPY hack/dockerfile/install/dockercli.installer ./    5.9s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>proxy 2/4] COPY hack/dockerfile/install/proxy.installer ./           15.7s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>tomlv 2/4] COPY hack/dockerfile/install/tomlv.installer ./           12.4s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>gometalinter 2/4] COPY hack/dockerfile/install/gometalinter.install  25.5s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>vndr 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh vndr                       33.2s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>tini 3/5] COPY hack/dockerfile/install/tini.installer ./              6.1s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>dockercli 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh dockercli             18.0s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>runc 2/4] COPY hack/dockerfile/install/runc.installer ./              2.4s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>tini 4/5] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh tini                       11.6s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>runc 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh runc                       23.4s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>tomlv 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh tomlv                      9.7s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>proxy 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh proxy                     14.6s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>dev 2/23] RUN useradd <span class="nt">--create-home</span> <span class="nt">--gid</span> docker unprivilegeduser     5.1s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>gometalinter 3/4] RUN <span class="nv">PREFIX</span><span class="o">=</span>/build/ ./install.sh gometalinter        9.4s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>dev 3/23] RUN <span class="nb">ln</span> <span class="nt">-sfv</span> /go/src/github.com/docker/docker/.bashrc ~/.ba  4.3s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>dev 4/23] RUN <span class="nb">echo source</span> /usr/share/bash-completion/bash_completion  2.5s
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>dev 5/23] RUN <span class="nb">ln</span> <span class="nt">-s</span> /usr/local/completion/bash/docker /etc/bash_comp  2.1s
 </code></pre></div></div>
 
 <p>新たな BuildKit の plain な出力は以下のとおりです。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--progress</span><span class="o">=</span>plain <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--progress</span><span class="o">=</span>plain <span class="nb">.</span>
 <span class="go">
 </span><span class="gp">#</span>1 <span class="o">[</span>internal] load .dockerignore
 <span class="gp">#</span>1       digest: sha256:d0b5f1b2d994bfdacee98198b07119b61cf2442e548a41cf4cd6d0471a627414
@@ -206,30 +206,30 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 
 <h2 id="overriding-default-frontends">デフォルトフロントエンドの上書き設定</h2>
 
-<p><code class="highlighter-rouge">Dockerfile</code> における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
-これを行うには <code class="highlighter-rouge">Dockerfile</code> の先頭行に、コメントとして特定のフロントエンドイメージを指定します。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
+これを行うには <code class="language-plaintext highlighter-rouge">Dockerfile</code> の先頭行に、コメントとして特定のフロントエンドイメージを指定します。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax = &lt;frontend image&gt;, e.g. # syntax = docker/dockerfile:1.0-experimental</span>
 </code></pre></div></div>
 
 <h2 id="new-docker-build-secret-information">新たな Docker ビルドにおける機密情報の扱い</h2>
 
-<p>Docker ビルドにおいては新たに <code class="highlighter-rouge">--secret</code> フラグが導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
+<p>Docker ビルドにおいては新たに <code class="language-plaintext highlighter-rouge">--secret</code> フラグが導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
 機密情報は、最終的にイメージ内に保存されることはないので、安全に取り扱うことができます。</p>
 
-<p><code class="highlighter-rouge">id</code> は <code class="highlighter-rouge">docker build --secret</code> において受け渡される識別子です。
-これは Dockerfile 内において用いられる <code class="highlighter-rouge">RUN --mount</code> 識別子に関連づいています。
+<p><code class="language-plaintext highlighter-rouge">id</code> は <code class="language-plaintext highlighter-rouge">docker build --secret</code> において受け渡される識別子です。
+これは Dockerfile 内において用いられる <code class="language-plaintext highlighter-rouge">RUN --mount</code> 識別子に関連づいています。
 Docker では Dockerfile の外に保持されている機密情報のファイル名は用いません。
 これが重要な情報となることもあるからです。</p>
 
-<p><code class="highlighter-rouge">dst</code> は Dockerfile 内にて用いられる <code class="highlighter-rouge">RUN</code> コマンドにおいての機密情報ファイルを、所定ファイル名に名称変更します。</p>
+<p><code class="language-plaintext highlighter-rouge">dst</code> は Dockerfile 内にて用いられる <code class="language-plaintext highlighter-rouge">RUN</code> コマンドにおいての機密情報ファイルを、所定ファイル名に名称変更します。</p>
 
 <p>たとえば以下のようなテキストファイル内に、一部の機密情報が含まれているとします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">echo</span> <span class="s1">'WARMACHINEROX'</span> <span class="o">&gt;</span> mysecret.txt
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s1">'WARMACHINEROX'</span> <span class="o">&gt;</span> mysecret.txt
 </code></pre></div></div>
 
-<p>そして BuildKit フロントエンド <code class="highlighter-rouge">docker/dockerfile:1.0-experimental</code> を指定した Dockerfile を使えば、機密情報にアクセスすることができます。</p>
+<p>そして BuildKit フロントエンド <code class="language-plaintext highlighter-rouge">docker/dockerfile:1.0-experimental</code> を指定した Dockerfile を使えば、機密情報にアクセスすることができます。</p>
 
 <p>たとえば以下のとおりです。</p>
 
@@ -247,7 +247,7 @@ Docker では Dockerfile の外に保持されている機密情報のファイ�
 機密情報はビルド時の出力に表示されます。
 最終的にビルドされるイメージに、この機密情報ファイルは含まれません。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> docker build <span class="nt">--no-cache</span> <span class="nt">--progress</span><span class="o">=</span>plain <span class="nt">--secret</span> <span class="nv">id</span><span class="o">=</span>mysecret,src<span class="o">=</span>mysecret.txt <span class="nb">.</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--no-cache</span> <span class="nt">--progress</span><span class="o">=</span>plain <span class="nt">--secret</span> <span class="nb">id</span><span class="o">=</span>mysecret,src<span class="o">=</span>mysecret.txt <span class="nb">.</span>
 <span class="c">...
 </span><span class="gp">#</span>8 <span class="o">[</span>2/3] RUN <span class="nt">--mount</span><span class="o">=</span><span class="nb">type</span><span class="o">=</span>secret,id<span class="o">=</span>mysecret <span class="nb">cat</span> /run/secrets/mysecret
 <span class="gp">#</span>8       digest: sha256:5d8cbaeb66183993700828632bfbde246cae8feded11aad40e524f54ce7438d6
@@ -276,16 +276,16 @@ Docker では Dockerfile の外に保持されている機密情報のファイ�
   <p>詳しい情報と利用例については <a href="https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066">Build secrets and SSH forwarding in Docker 18.09</a> （Docker 18.09 における機密情報生成と SSH フォワーディング）を参照してください。</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">docker build</code> には <code class="highlighter-rouge">--ssh</code> オプションがあります。
+<p><code class="language-plaintext highlighter-rouge">docker build</code> には <code class="language-plaintext highlighter-rouge">--ssh</code> オプションがあります。
 これは Docker Engine に対して SSH エージェントのフォワードによる接続を許可するものです。
 SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent">OpenSSH man ページ</a> を参照してください。</p>
 
-<p><code class="highlighter-rouge">Dockerfile</code> 内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを <code class="highlighter-rouge">type=ssh</code> とするだけです。
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> 内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを <code class="language-plaintext highlighter-rouge">type=ssh</code> とするだけです。
 これが SSH エージェントによる接続を行うものとなります。
 これ以外のコマンド記述からは、SSH エージェントを利用しているかどうかを知ることはできません。</p>
 
-<p><code class="highlighter-rouge">Dockerfile</code> 内の <code class="highlighter-rouge">RUN</code> コマンドにおいて SSH アクセスを指定するには、マウントタイプを <code class="highlighter-rouge">ssh</code> として定義します。
-これにより環境変数 <code class="highlighter-rouge">SSH_AUTH_SOCK</code> が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の <code class="language-plaintext highlighter-rouge">RUN</code> コマンドにおいて SSH アクセスを指定するには、マウントタイプを <code class="language-plaintext highlighter-rouge">ssh</code> として定義します。
+これにより環境変数 <code class="language-plaintext highlighter-rouge">SSH_AUTH_SOCK</code> が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。</p>
 
 <p>Docker ファイル内にてコンテナーが SSH を利用する例が以下です。</p>
 
@@ -296,13 +296,13 @@ SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent
 <span class="k">RUN </span>apk add <span class="nt">--no-cache</span> openssh-client git
 
 <span class="c"># github.com に対する公開鍵をダウンロード</span>
-<span class="k">RUN </span>mkdir <span class="nt">-p</span> <span class="nt">-m</span> 0600 ~/.ssh <span class="o">&amp;&amp;</span> ssh-keyscan github.com <span class="o">&gt;&gt;</span> ~/.ssh/known_hosts
+<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nt">-m</span> 0600 ~/.ssh <span class="o">&amp;&amp;</span> ssh-keyscan github.com <span class="o">&gt;&gt;</span> ~/.ssh/known_hosts
 
 <span class="c"># プライベートリポジトリのクローン</span>
 <span class="k">RUN </span><span class="nt">--mount</span><span class="o">=</span><span class="nb">type</span><span class="o">=</span>ssh git clone git@github.com:myorg/myproject.git myproject
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">Dockerfile</code> の用意ができたら、SSH エージェント接続を行う <code class="highlighter-rouge">--ssh</code> オプションを使います。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> の用意ができたら、SSH エージェント接続を行う <code class="language-plaintext highlighter-rouge">--ssh</code> オプションを使います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--ssh</span> default <span class="nb">.</span>
 </code></pre></div></div>
@@ -314,13 +314,13 @@ SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent
 <p>Docker イメージを（自己署名証明書を使って）セキュアではないレジストリから取得しようとする場合、あるいはそのようなレジストリをミラーとして利用する場合、Docker 18.09 では既知の問題が発生します。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[+] Building 0.4s (3/3) FINISHED
-</span><span class="gp"> =&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile
-<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 169B
-<span class="gp"> =&gt;</span> <span class="o">[</span>internal] load .dockerignore
-<span class="gp"> =&gt;</span> <span class="o">=&gt;</span> transferring context: 2B
-<span class="gp"> =&gt;</span> ERROR resolve image config <span class="k">for </span>docker.io/docker/dockerfile:experimental
+</span><span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load build definition from Dockerfile
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring dockerfile: 169B
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">[</span>internal] load .dockerignore
+<span class="gp"> =&gt;</span><span class="w"> </span><span class="o">=&gt;</span> transferring context: 2B
+<span class="gp"> =&gt;</span><span class="w"> </span>ERROR resolve image config <span class="k">for </span>docker.io/docker/dockerfile:experimental
 <span class="go">------
-</span><span class="gp"> &gt;</span> resolve image config <span class="k">for </span>docker.io/docker/dockerfile:experimental:
+</span><span class="gp"> &gt;</span><span class="w"> </span>resolve image config <span class="k">for </span>docker.io/docker/dockerfile:experimental:
 <span class="go">------
 failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manifests/experimental: x509: certificate signed by unknown authority
 </span></code></pre></div></div>
@@ -334,10 +334,10 @@ failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manif
 <p>Sonatype Nexus バージョン 3.15 未満を利用してプライベートリポジトリを起動させている場合、以下のようなエラーとなる場合があります。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">------
-</span><span class="gp"> &gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/maven:3.5.3-alpine:
+</span><span class="gp"> &gt;</span><span class="w"> </span><span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/maven:3.5.3-alpine:
 <span class="go">------
 ------
-</span><span class="gp"> &gt;</span> <span class="o">[</span>1/4] FROM docker.io/library/maven:3.5.3-alpine:
+</span><span class="gp"> &gt;</span><span class="w"> </span><span class="o">[</span>1/4] FROM docker.io/library/maven:3.5.3-alpine:
 <span class="go">------
 rpc error: code = Unknown desc = docker.io/library/maven:3.5.3-alpine not found
 </span></code></pre></div></div>

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ETW logging driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ETW logging driver" />
   <meta property="og:description" content="Describes how to use the etwlogs logging driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/etwlogs/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ETW logging driver","description":"Describes how to use the etwlogs logging driver.","url":"https://docs.docker.com/config/containers/logging/etwlogs/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -112,7 +112,7 @@ with both the log and its context information. A client can then create
 an ETW listener to listen to these events.</p>
 
 <p>The ETW provider that this logging driver registers with Windows, has the
-GUID identifier of: <code class="highlighter-rouge">{a3693192-9ed6-46d2-a981-f8226c8363bd}</code>. A client creates an
+GUID identifier of: <code class="language-plaintext highlighter-rouge">{a3693192-9ed6-46d2-a981-f8226c8363bd}</code>. A client creates an
 ETW listener and registers to listen to events from the logging driver’s provider.
 It does not matter the order in which the provider and listener are created.
 A client can create their ETW listener and start listening for events from the provider,
@@ -124,17 +124,17 @@ before the provider has been registered with the system.</p>
 included in most installations of Windows:</p>
 
 <ol>
-  <li><code class="highlighter-rouge">logman start -ets DockerContainerLogs -p {a3693192-9ed6-46d2-a981-f8226c8363bd} 0 0 -o trace.etl</code></li>
+  <li><code class="language-plaintext highlighter-rouge">logman start -ets DockerContainerLogs -p {a3693192-9ed6-46d2-a981-f8226c8363bd} 0 0 -o trace.etl</code></li>
   <li>Run your container(s) with the etwlogs driver, by adding
-<code class="highlighter-rouge">--log-driver=etwlogs</code> to the Docker run command, and generate log messages.</li>
-  <li><code class="highlighter-rouge">logman stop -ets DockerContainerLogs</code></li>
+<code class="language-plaintext highlighter-rouge">--log-driver=etwlogs</code> to the Docker run command, and generate log messages.</li>
+  <li><code class="language-plaintext highlighter-rouge">logman stop -ets DockerContainerLogs</code></li>
   <li>This generates an etl file that contains the events. One way to convert this
-file into human-readable form is to run: <code class="highlighter-rouge">tracerpt -y trace.etl</code>.</li>
+file into human-readable form is to run: <code class="language-plaintext highlighter-rouge">tracerpt -y trace.etl</code>.</li>
 </ol>
 
 <p>Each ETW event contains a structured message string in this format:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>container_name: %s, image_name: %s, container_id: %s, image_id: %s, source: [stdout | stderr], log: %s
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>container_name: %s, image_name: %s, container_id: %s, image_id: %s, source: [stdout | stderr], log: %s
 </code></pre></div></div>
 
 <p>Details on each item in the message can be found below:</p>
@@ -148,27 +148,27 @@ file into human-readable form is to run: <code class="highlighter-rouge">tracerp
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">container_name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">container_name</code></td>
       <td>The container name at the time it was started.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">image_name</code></td>
+      <td><code class="language-plaintext highlighter-rouge">image_name</code></td>
       <td>The name of the container’s image.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">container_id</code></td>
+      <td><code class="language-plaintext highlighter-rouge">container_id</code></td>
       <td>The full 64-character container ID.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">image_id</code></td>
+      <td><code class="language-plaintext highlighter-rouge">image_id</code></td>
       <td>The full ID of the container’s image.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">source</code></td>
-      <td><code class="highlighter-rouge">stdout</code> or <code class="highlighter-rouge">stderr</code>.</td>
+      <td><code class="language-plaintext highlighter-rouge">source</code></td>
+      <td><code class="language-plaintext highlighter-rouge">stdout</code> or <code class="language-plaintext highlighter-rouge">stderr</code>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">log</code></td>
+      <td><code class="language-plaintext highlighter-rouge">log</code></td>
       <td>The container log message.</td>
     </tr>
   </tbody>

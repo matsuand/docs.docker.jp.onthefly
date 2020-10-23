@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use macvlan networks | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use macvlan networks" />
   <meta property="og:description" content="All about using macvlan to make your containers appear like physical machines on the network" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/macvlan/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use macvlan networks","description":"All about using macvlan to make your containers appear like physical machines on the network","url":"https://docs.docker.com/network/macvlan/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,12 +107,12 @@
 </span>
 <p>Some applications, especially legacy applications or applications which monitor
 network traffic, expect to be directly connected to the physical network. In
-this type of situation, you can use the <code class="highlighter-rouge">macvlan</code> network driver to assign a MAC
+this type of situation, you can use the <code class="language-plaintext highlighter-rouge">macvlan</code> network driver to assign a MAC
 address to each container’s virtual network interface, making it appear to be
 a physical network interface directly connected to the physical network. In this
 case, you need to designate a physical interface on your Docker host to use for
-the <code class="highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="highlighter-rouge">macvlan</code>. You can even
-isolate your <code class="highlighter-rouge">macvlan</code> networks using different physical network interfaces.
+the <code class="language-plaintext highlighter-rouge">macvlan</code>, as well as the subnet and gateway of the <code class="language-plaintext highlighter-rouge">macvlan</code>. You can even
+isolate your <code class="language-plaintext highlighter-rouge">macvlan</code> networks using different physical network interfaces.
 Keep the following things in mind:</p>
 
 <ul>
@@ -134,12 +134,12 @@ better in the long term.</p>
 
 <h2 id="create-a-macvlan-network">Create a macvlan network</h2>
 
-<p>When you create a <code class="highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
+<p>When you create a <code class="language-plaintext highlighter-rouge">macvlan</code> network, it can either be in bridge mode or 802.1q
 trunk bridge mode.</p>
 
 <ul>
   <li>
-    <p>In bridge mode, <code class="highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
+    <p>In bridge mode, <code class="language-plaintext highlighter-rouge">macvlan</code> traffic goes through a physical device on the host.</p>
   </li>
   <li>
     <p>In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
@@ -150,9 +150,9 @@ filtering at a more granular level.</p>
 
 <h3 id="bridge-mode">Bridge mode</h3>
 
-<p>To create a <code class="highlighter-rouge">macvlan</code> network which bridges with a given physical network
-interface, use <code class="highlighter-rouge">--driver macvlan</code> with the <code class="highlighter-rouge">docker network create</code> command. You
-also need to specify the <code class="highlighter-rouge">parent</code>, which is the interface the traffic will
+<p>To create a <code class="language-plaintext highlighter-rouge">macvlan</code> network which bridges with a given physical network
+interface, use <code class="language-plaintext highlighter-rouge">--driver macvlan</code> with the <code class="language-plaintext highlighter-rouge">docker network create</code> command. You
+also need to specify the <code class="language-plaintext highlighter-rouge">parent</code>, which is the interface the traffic will
 physically go through on the Docker host.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
@@ -161,8 +161,8 @@ physically go through on the Docker host.</p>
   <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>eth0 pub_net
 </code></pre></div></div>
 
-<p>If you need to exclude IP addresses from being used in the <code class="highlighter-rouge">macvlan</code> network, such
-as when a given IP address is already in use, use <code class="highlighter-rouge">--aux-addresses</code>:</p>
+<p>If you need to exclude IP addresses from being used in the <code class="language-plaintext highlighter-rouge">macvlan</code> network, such
+as when a given IP address is already in use, use <code class="language-plaintext highlighter-rouge">--aux-addresses</code>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
   <span class="nt">--subnet</span><span class="o">=</span>192.168.32.0/24 <span class="se">\</span>
@@ -174,8 +174,8 @@ as when a given IP address is already in use, use <code class="highlighter-rouge
 
 <h3 id="8021q-trunk-bridge-mode">802.1q trunk bridge mode</h3>
 
-<p>If you specify a <code class="highlighter-rouge">parent</code> interface name with a dot included, such as <code class="highlighter-rouge">eth0.50</code>,
-Docker interprets that as a sub-interface of <code class="highlighter-rouge">eth0</code> and creates the sub-interface
+<p>If you specify a <code class="language-plaintext highlighter-rouge">parent</code> interface name with a dot included, such as <code class="language-plaintext highlighter-rouge">eth0.50</code>,
+Docker interprets that as a sub-interface of <code class="language-plaintext highlighter-rouge">eth0</code> and creates the sub-interface
 automatically.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
@@ -186,8 +186,8 @@ automatically.</p>
 
 <h3 id="use-an-ipvlan-instead-of-macvlan">Use an ipvlan instead of macvlan</h3>
 
-<p>In the above example, you are still using a L3 bridge. You can use <code class="highlighter-rouge">ipvlan</code>
-instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
+<p>In the above example, you are still using a L3 bridge. You can use <code class="language-plaintext highlighter-rouge">ipvlan</code>
+instead, and get an L2 bridge. Specify <code class="language-plaintext highlighter-rouge">-o ipvlan_mode=l2</code>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> ipvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.210.0/24 <span class="se">\</span>
@@ -200,7 +200,7 @@ instead, and get an L2 bridge. Specify <code class="highlighter-rouge">-o ipvlan
 <h2 id="use-ipv6">Use IPv6</h2>
 
 <p>If you have <a href="/docs.docker.jp.onthefly/config/daemon/ipv6/">configured the Docker daemon to allow IPv6</a>,
-you can use dual-stack IPv4/IPv6 <code class="highlighter-rouge">macvlan</code> networks.</p>
+you can use dual-stack IPv4/IPv6 <code class="language-plaintext highlighter-rouge">macvlan</code> networks.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
     <span class="nt">--subnet</span><span class="o">=</span>192.168.216.0/24 <span class="nt">--subnet</span><span class="o">=</span>192.168.218.0/24 <span class="se">\</span>

@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーリンク（古い機能） | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテナーリンク（古い機能）" />
   <meta property="og:description" content="Learn how to connect Docker containers together." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/links/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーリンク（古い機能）","description":"Learn how to connect Docker containers together.","url":"https://docs.docker.com/network/links/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,35 +102,35 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    6 分
   
 </span>
 
 <blockquote class="warning">
   <p><strong>警告</strong>:
-Docker の <code class="highlighter-rouge">--link</code> フラグは過去の機能です。
+Docker の <code class="language-plaintext highlighter-rouge">--link</code> フラグは過去の機能です。
 そのうちに削除されるかもしれません。
-この機能を確実に必要としているのでなければ <code class="highlighter-rouge">--link</code> を使わず、2 つのコンテナー間の通信を実現するユーザー定義ネットワークの利用をお勧めします。
-<code class="highlighter-rouge">--link</code> に存在していて、ユーザー定義ネットワークにない機能は、コンテナー間での環境変数の共有機能です。
+この機能を確実に必要としているのでなければ <code class="language-plaintext highlighter-rouge">--link</code> を使わず、2 つのコンテナー間の通信を実現するユーザー定義ネットワークの利用をお勧めします。
+<code class="language-plaintext highlighter-rouge">--link</code> に存在していて、ユーザー定義ネットワークにない機能は、コンテナー間での環境変数の共有機能です。
 ただしボリュームのような別の機能を使えば、コンテナー間での環境変数の共有は、より制御しやすく利用できます。</p>
 
-  <p><a href="/docs.docker.jp.onthefly/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge">ユーザー定義のブリッジとデフォルトブリッジの違い</a> を参照して、<code class="highlighter-rouge">--link</code> とは違う方法について確認してください。</p>
+  <p><a href="/docs.docker.jp.onthefly/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge">ユーザー定義のブリッジとデフォルトブリッジの違い</a> を参照して、<code class="language-plaintext highlighter-rouge">--link</code> とは違う方法について確認してください。</p>
 </blockquote>
 
 <p>ここでは古い機能であるコンテナーリンクについて説明します。
-これは Docker のデフォルトである <code class="highlighter-rouge">bridge</code> ネットワーク内にあるもので、この <code class="highlighter-rouge">bridge</code> ネットワークは Docker をインストールした際に自動的に生成されます。</p>
+これは Docker のデフォルトである <code class="language-plaintext highlighter-rouge">bridge</code> ネットワーク内にあるもので、この <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークは Docker をインストールした際に自動的に生成されます。</p>
 
 <p><a href="/docs.docker.jp.onthefly/network/">Docker のネットワーク機能</a> が提供される以前は、Docker のリンク機能によって複数のコンテナーが互いを検出し、一方から他方への情報送信を安全に行うようにしていました。
 Docker のネットワーク機能が導入されてからも、リンクを生成することはできます。
-ただしデフォルトの <code class="highlighter-rouge">bridge</code> ネットワークであるか、<a href="/docs.docker.jp.onthefly/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge">ユーザー定義のネットワーク</a> であるかによって、その動作は異なることになります。</p>
+ただしデフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワークであるか、<a href="/docs.docker.jp.onthefly/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge">ユーザー定義のネットワーク</a> であるかによって、その動作は異なることになります。</p>
 
-<p>この節においてはネットワークポートを通じてネットワークに接続する方法を簡単に説明した上で、デフォルトの <code class="highlighter-rouge">bridge</code> ネットワーク内でのコンテナーリンクを行う方法へ進んでいきます。</p>
+<p>この節においてはネットワークポートを通じてネットワークに接続する方法を簡単に説明した上で、デフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワーク内でのコンテナーリンクを行う方法へ進んでいきます。</p>
 
 <h2 id="connect-using-network-port-mapping">ネットワークポートマッピングを利用した接続</h2>
 
 <p>以下のコマンドによって Python Flask アプリケーションを起動しているとします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P training/webapp python app.py
 </code></pre></div></div>
 
 <blockquote>
@@ -140,19 +140,19 @@ Docker のネットワーク機能が導入されてからも、リンクを生�
 Docker のネットワーク機能の詳細は <a href="/docs.docker.jp.onthefly/network/">こちら</a> を参照してください。</p>
 </blockquote>
 
-<p>このコンテナーの生成時には <code class="highlighter-rouge">-P</code> フラグが指定されているので、コンテナー内部のネットワークポートはすべて、Docker ホスト上の「エフェメラルポート」範囲内にあるランダムな高位ポートに自動的に割り当てられます。
-その後に <code class="highlighter-rouge">docker ps</code> を実行すれば、コンテナー内の 5000 番ポートが、ホスト上の 49155 番ポートに割り当てられているのがわかります。</p>
+<p>このコンテナーの生成時には <code class="language-plaintext highlighter-rouge">-P</code> フラグが指定されているので、コンテナー内部のネットワークポートはすべて、Docker ホスト上の「エフェメラルポート」範囲内にあるランダムな高位ポートに自動的に割り当てられます。
+その後に <code class="language-plaintext highlighter-rouge">docker ps</code> を実行すれば、コンテナー内の 5000 番ポートが、ホスト上の 49155 番ポートに割り当てられているのがわかります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps nostalgic_morse
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps nostalgic_morse
 
 CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
 bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds  0.0.0.0:49155-&gt;5000/tcp  nostalgic_morse
 </code></pre></div></div>
 
-<p>またコンテナーのポートを特定のポートに割り当てるには <code class="highlighter-rouge">-p</code> フラグを使えばよいことも、すでに見てきました。
+<p>またコンテナーのポートを特定のポートに割り当てるには <code class="language-plaintext highlighter-rouge">-p</code> フラグを使えばよいことも、すでに見てきました。
 以下はホストの 80 番ポートを、コンテナーの 5000 番ポートに割り当てます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 80:5000 training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 80:5000 training/webapp python app.py
 </code></pre></div></div>
 
 <p>ただしこれはあまり良い方法でないのは、すでにお分かりでしょう。
@@ -161,54 +161,54 @@ bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds 
 <p>上とは違って、コンテナーポートに対して、ホストのポート範囲を指定することができます。
 この範囲は「エフェメラルポート」の範囲とは異なるものです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 8000-9000:5000 training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 8000-9000:5000 training/webapp python app.py
 </code></pre></div></div>
 
 <p>これによるとコンテナーの 5000 番ポートは、ホスト上の 8000 から 9000 の中で利用可能なポートがランダムに選び出されます。</p>
 
-<p><code class="highlighter-rouge">-p</code> フラグの設定方法には他にもいくつかあります。
-デフォルトにおいて <code class="highlighter-rouge">-p</code> フラグは、ホストマシン上のすべてのインターフェースに対して、指定されたポートを割り当てます。
+<p><code class="language-plaintext highlighter-rouge">-p</code> フラグの設定方法には他にもいくつかあります。
+デフォルトにおいて <code class="language-plaintext highlighter-rouge">-p</code> フラグは、ホストマシン上のすべてのインターフェースに対して、指定されたポートを割り当てます。
 しかし特定のインターフェースに対しての割り当てを行うこともできます。
-たとえば以下は <code class="highlighter-rouge">loalhost</code> にのみ割り当てる例です。</p>
+たとえば以下は <code class="language-plaintext highlighter-rouge">loalhost</code> にのみ割り当てる例です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 127.0.0.1:80:5000 training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 127.0.0.1:80:5000 training/webapp python app.py
 </code></pre></div></div>
 
-<p>上はコンテナー内の 5000 番ポートを、ホストマシン上の 80 番ポートに割り当てますが、これが行われるのは <code class="highlighter-rouge">localhost</code> つまり <code class="highlighter-rouge">127.0.0.1</code> インターフェースに対してのみです。</p>
+<p>上はコンテナー内の 5000 番ポートを、ホストマシン上の 80 番ポートに割り当てますが、これが行われるのは <code class="language-plaintext highlighter-rouge">localhost</code> つまり <code class="language-plaintext highlighter-rouge">127.0.0.1</code> インターフェースに対してのみです。</p>
 
-<p>コンテナー内の 5000 番ポートを <code class="highlighter-rouge">localhost</code> 上の動的ポートに割り当てるなら、以下のようにします。</p>
+<p>コンテナー内の 5000 番ポートを <code class="language-plaintext highlighter-rouge">localhost</code> 上の動的ポートに割り当てるなら、以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 127.0.0.1::5000 training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 127.0.0.1::5000 training/webapp python app.py
 </code></pre></div></div>
 
 <p>UDP や SCTP を割り当てることもできます。
 （SCTP は一般に SIGTRAN、Diameter、S1AP/X2AP といった通信プロトコルにおいて利用されています。）
-UDP や SCTP は、以下の例のように <code class="highlighter-rouge">/udp</code> や <code class="highlighter-rouge">/sctp</code> をつけて指定します。</p>
+UDP や SCTP は、以下の例のように <code class="language-plaintext highlighter-rouge">/udp</code> や <code class="language-plaintext highlighter-rouge">/sctp</code> をつけて指定します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 127.0.0.1:80:5000/udp training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -p 127.0.0.1:80:5000/udp training/webapp python app.py
 </code></pre></div></div>
 
-<p>便利なコマンド <code class="highlighter-rouge">docker port</code> についてはこれまでにも使ってきました。
+<p>便利なコマンド <code class="language-plaintext highlighter-rouge">docker port</code> についてはこれまでにも使ってきました。
 これによって現時点でのポート割り当ての状況がすぐにわかります。
 また特定のポートがどのように設定されているかがわかります。
-たとえばコンテナーの特定のポートを、ホストマシンの <code class="highlighter-rouge">localhost</code> に割り当てていたとします。
-<code class="highlighter-rouge">docker port</code> コマンドの出力には、そのことが示されます。</p>
+たとえばコンテナーの特定のポートを、ホストマシンの <code class="language-plaintext highlighter-rouge">localhost</code> に割り当てていたとします。
+<code class="language-plaintext highlighter-rouge">docker port</code> コマンドの出力には、そのことが示されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker port nostalgic_morse 5000
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker port nostalgic_morse 5000
 
 127.0.0.1:49155
 </code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong>:
-<code class="highlighter-rouge">-p</code> フラグは複数個の指定が可能であり、これにより複数ポートの指定を行うことができます。</p>
+<code class="language-plaintext highlighter-rouge">-p</code> フラグは複数個の指定が可能であり、これにより複数ポートの指定を行うことができます。</p>
 </blockquote>
 
 <h2 id="connect-with-the-linking-system">リンクシステムを用いた接続</h2>
 
 <blockquote>
   <p><strong>メモ</strong>:
-この節ではデフォルトの <code class="highlighter-rouge">bridge</code> ネットワーク内の古い機能であるリンク機能について説明します。
+この節ではデフォルトの <code class="language-plaintext highlighter-rouge">bridge</code> ネットワーク内の古い機能であるリンク機能について説明します。
 ユーザー定義ネットワーク上のリンクに関しては <a href="/docs.docker.jp.onthefly/network/bridge/#differences-between-user-defined-bridges-and-the-default-bridge">ユーザー定義ネットワークでのコンテナーのリンク</a> を参照してください。</p>
 </blockquote>
 
@@ -222,44 +222,44 @@ Docker にはリンクシステム（linking system）があります。
 
 <p>Docker がリンクを確立するためには、コンテナーの名前が重要になります。
 これまでコンテナーを生成した際には、各コンテナーに自動的に名前がつけられることを見てきました。
-実際にここまでの説明においては、おなじみの <code class="highlighter-rouge">nostalgic_morse</code> という名前を用いています。
+実際にここまでの説明においては、おなじみの <code class="language-plaintext highlighter-rouge">nostalgic_morse</code> という名前を用いています。
 コンテナーの名前は自由につけることができます。
 名前をつけることによって、以下の 2 点が得られます。</p>
 
 <ol>
   <li>
     <p>コンテナーが実現する特定の機能に合わせて、それを表わす名称にしておくと覚えやすく便利です。
-たとえばウェブアプリケーションを含んだコンテナーには <code class="highlighter-rouge">web</code> という名前をつけます。</p>
+たとえばウェブアプリケーションを含んだコンテナーには <code class="language-plaintext highlighter-rouge">web</code> という名前をつけます。</p>
   </li>
   <li>
     <p>名前は、他のコンテナーから参照させるための参照名となります。
-たとえば <code class="highlighter-rouge">web</code> コンテナーからのリンクとして、<code class="highlighter-rouge">db</code> という名前の別のコンテナーを指定することができます。</p>
+たとえば <code class="language-plaintext highlighter-rouge">web</code> コンテナーからのリンクとして、<code class="language-plaintext highlighter-rouge">db</code> という名前の別のコンテナーを指定することができます。</p>
   </li>
 </ol>
 
-<p>たとえば以下のようにして <code class="highlighter-rouge">--name</code> フラグを使ってコンテナーに名前をつけることができます。</p>
+<p>たとえば以下のようにして <code class="language-plaintext highlighter-rouge">--name</code> フラグを使ってコンテナーに名前をつけることができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P --name web training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P --name web training/webapp python app.py
 </code></pre></div></div>
 
-<p>上のコマンドは、新規にコンテナーを起動させ、<code class="highlighter-rouge">--name</code> フラグの情報からコンテナーに <code class="highlighter-rouge">web</code> という名前をつけます。
-<code class="highlighter-rouge">docker ps</code> コマンドによってコンテナー名を確認することができます。</p>
+<p>上のコマンドは、新規にコンテナーを起動させ、<code class="language-plaintext highlighter-rouge">--name</code> フラグの情報からコンテナーに <code class="language-plaintext highlighter-rouge">web</code> という名前をつけます。
+<code class="language-plaintext highlighter-rouge">docker ps</code> コマンドによってコンテナー名を確認することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps -l
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker ps -l
 
 CONTAINER ID  IMAGE                  COMMAND        CREATED       STATUS       PORTS                    NAMES
 aed84ee21bde  training/webapp:latest python app.py  12 hours ago  Up 2 seconds 0.0.0.0:49154-&gt;5000/tcp  web
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">docker inspect</code> の結果からも、コンテナー名を得ることができます。</p>
+<p><code class="language-plaintext highlighter-rouge">docker inspect</code> の結果からも、コンテナー名を得ることができます。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
 コンテナー名は一意である必要があります。
-つまり <code class="highlighter-rouge">web</code> と呼ぶことができるコンテナーは 1 つだけということです。
-コンテナー名を再利用したい場合は、それまでの古いコンテナーを（<code class="highlighter-rouge">docker container rm</code> を使って）削除する必要があります。
+つまり <code class="language-plaintext highlighter-rouge">web</code> と呼ぶことができるコンテナーは 1 つだけということです。
+コンテナー名を再利用したい場合は、それまでの古いコンテナーを（<code class="language-plaintext highlighter-rouge">docker container rm</code> を使って）削除する必要があります。
 その後であれば、同一名のコンテナーを生成して利用することができます。
-これとは別に <code class="highlighter-rouge">docker run</code> の <code class="highlighter-rouge">--rm</code> フラグを利用する方法もあります。
+これとは別に <code class="language-plaintext highlighter-rouge">docker run</code> の <code class="language-plaintext highlighter-rouge">--rm</code> フラグを利用する方法もあります。
 この方法ではそれまでのコンテナーが停止され、すぐに削除されます。</p>
 </blockquote>
 
@@ -268,61 +268,61 @@ aed84ee21bde  training/webapp:latest python app.py  12 hours ago  Up 2 seconds 0
 <p>リンク機能によって複数のコンテナーが互いを検出し、一方から他方への情報送信を安全に行うことができます。
 リンク機能を設定すると、情報発信元のコンテナーと受信先のコンテナーの間に経路が生成されます。
 そして受信先コンテナーは、発信元コンテナーに関する情報を選び出してアクセスできるようになります。
-リンクの生成には <code class="highlighter-rouge">--link</code> フラグを使います。
+リンクの生成には <code class="language-plaintext highlighter-rouge">--link</code> フラグを使います。
 そこで以下では、まず新たなコンテナーを生成します。
 今回はデータベースを含むコンテナーです。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --name db training/postgres
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d --name db training/postgres
 </code></pre></div></div>
 
-<p>上のコマンドは、PostgreSQL データベースを含む <code class="highlighter-rouge">training/postgres</code> イメージから <code class="highlighter-rouge">db</code> という新規のコンテナーを生成します。</p>
+<p>上のコマンドは、PostgreSQL データベースを含む <code class="language-plaintext highlighter-rouge">training/postgres</code> イメージから <code class="language-plaintext highlighter-rouge">db</code> という新規のコンテナーを生成します。</p>
 
-<p>先ほど生成した <code class="highlighter-rouge">web</code> コンテナーは、リンクされた状態のコンテナーとするために、いったんここで削除する必要があります。</p>
+<p>先ほど生成した <code class="language-plaintext highlighter-rouge">web</code> コンテナーは、リンクされた状態のコンテナーとするために、いったんここで削除する必要があります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container rm -f web
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker container rm -f web
 </code></pre></div></div>
 
-<p>新たな <code class="highlighter-rouge">web</code> コンテナーを生成して、<code class="highlighter-rouge">db</code> コンテナーにリンクします。</p>
+<p>新たな <code class="language-plaintext highlighter-rouge">web</code> コンテナーを生成して、<code class="language-plaintext highlighter-rouge">db</code> コンテナーにリンクします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P --name web --link db:db training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P --name web --link db:db training/webapp python app.py
 </code></pre></div></div>
 
-<p>これにより、新しい <code class="highlighter-rouge">web</code> コンテナーが、直前に生成した <code class="highlighter-rouge">db</code> コンテナーにリンクされます。
-<code class="highlighter-rouge">--link</code> フラグは以下のような書式です。</p>
+<p>これにより、新しい <code class="language-plaintext highlighter-rouge">web</code> コンテナーが、直前に生成した <code class="language-plaintext highlighter-rouge">db</code> コンテナーにリンクされます。
+<code class="language-plaintext highlighter-rouge">--link</code> フラグは以下のような書式です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--link &lt;name または id&gt;:alias
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--link &lt;name または id&gt;:alias
 </code></pre></div></div>
 
-<p>ここで <code class="highlighter-rouge">name</code> はリンクするコンテナーの名前を指定します。
-また <code class="highlighter-rouge">alias</code> はリンク名に対するエイリアス名の定義です。
+<p>ここで <code class="language-plaintext highlighter-rouge">name</code> はリンクするコンテナーの名前を指定します。
+また <code class="language-plaintext highlighter-rouge">alias</code> はリンク名に対するエイリアス名の定義です。
 このエイリアス名は簡単に利用することができます。
-<code class="highlighter-rouge">--link</code> フラグは以下の書式でも構いません。</p>
+<code class="language-plaintext highlighter-rouge">--link</code> フラグは以下の書式でも構いません。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--link &lt;name or id&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--link &lt;name or id&gt;
 </code></pre></div></div>
 
 <p>この場合、エイリアスはリンク名そのものになります。
 先ほどの実行例は、以下のようにすることもできます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P --name web --link db training/webapp python app.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -d -P --name web --link db training/webapp python app.py
 </code></pre></div></div>
 
-<p>次にリンクしたコンテナーを <code class="highlighter-rouge">docker inspect</code> によって確認してみます。</p>
+<p>次にリンクしたコンテナーを <code class="language-plaintext highlighter-rouge">docker inspect</code> によって確認してみます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect -f "{{ .HostConfig.Links }}" web
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker inspect -f "{{ .HostConfig.Links }}" web
 
 [/db:/web/db]
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">web</code> コンテナーが <code class="highlighter-rouge">db</code> コンテナーにリンクされ <code class="highlighter-rouge">web/db</code> となっているのがわかります。
-これにより <code class="highlighter-rouge">db</code> コンテナーに関する情報にアクセスできるようになりました。</p>
+<p><code class="language-plaintext highlighter-rouge">web</code> コンテナーが <code class="language-plaintext highlighter-rouge">db</code> コンテナーにリンクされ <code class="language-plaintext highlighter-rouge">web/db</code> となっているのがわかります。
+これにより <code class="language-plaintext highlighter-rouge">db</code> コンテナーに関する情報にアクセスできるようになりました。</p>
 
 <p>コンテナーのリンク機能は実際には何をしているでしょう？
 リンクを使うと、情報発信元となるコンテナーそのものの情報を、受信先コンテナーに提供できるということを、すでに学びました。
-上の例においては情報を受け取るコンテナーが <code class="highlighter-rouge">web</code> であり、情報元となる <code class="highlighter-rouge">db</code> の情報にアクセスできるというものです。
+上の例においては情報を受け取るコンテナーが <code class="language-plaintext highlighter-rouge">web</code> であり、情報元となる <code class="language-plaintext highlighter-rouge">db</code> の情報にアクセスできるというものです。
 Docker はこのとき、コンテナー間にセキュアなトンネルを作り出します。
 そこではコンテナーから外部に向けてポートを公開する必要がないようにしています。
-そもそも <code class="highlighter-rouge">db</code> コンテナーを起動する際には、<code class="highlighter-rouge">-P</code> フラグも <code class="highlighter-rouge">-p</code> フラグも使っていませんでした。
+そもそも <code class="language-plaintext highlighter-rouge">db</code> コンテナーを起動する際には、<code class="language-plaintext highlighter-rouge">-P</code> フラグも <code class="language-plaintext highlighter-rouge">-p</code> フラグも使っていませんでした。
 これこそがリンクシステムの優れたところです。
 情報元となるコンテナー、つまり上の例では PostgreSQL データベースを、ネットワーク上に公開していなくても構わないということです。</p>
 
@@ -330,19 +330,19 @@ Docker はこのとき、コンテナー間にセキュアなトンネルを作�
 
 <ul>
   <li>環境変数</li>
-  <li><code class="highlighter-rouge">/etc/hosts</code> ファイルの更新</li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/hosts</code> ファイルの更新</li>
 </ul>
 
 <h3 id="environment-variables">環境変数</h3>
 
 <p>コンテナーをリンクすると、環境変数が数種類作り出されます。
-Docker は <code class="highlighter-rouge">--link</code> パラメーターに基づいて、対象とするコンテナー上に自動的に環境変数を作り出すものです。
+Docker は <code class="language-plaintext highlighter-rouge">--link</code> パラメーターに基づいて、対象とするコンテナー上に自動的に環境変数を作り出すものです。
 また発信元コンテナーからは、Docker がもともと提供している環境変数もすべて公開されています。
 そういった環境変数は以下に基づくものです。</p>
 
 <ul>
-  <li>情報元のコンテナーにおける Dockerfile に記述された <code class="highlighter-rouge">ENV</code> コマンド</li>
-  <li>情報元のコンテナーを <code class="highlighter-rouge">docker run</code> によって起動する際の、<code class="highlighter-rouge">-e</code>, <code class="highlighter-rouge">--env</code>, <code class="highlighter-rouge">--env-file</code> オプション</li>
+  <li>情報元のコンテナーにおける Dockerfile に記述された <code class="language-plaintext highlighter-rouge">ENV</code> コマンド</li>
+  <li>情報元のコンテナーを <code class="language-plaintext highlighter-rouge">docker run</code> によって起動する際の、<code class="language-plaintext highlighter-rouge">-e</code>, <code class="language-plaintext highlighter-rouge">--env</code>, <code class="language-plaintext highlighter-rouge">--env-file</code> オプション</li>
 </ul>
 
 <p>このような環境変数があることによって、発信元コンテナーに関する情報を、目的としているコンテナー内部においてプログラムレベルで検出できるようになります。</p>
@@ -353,51 +353,51 @@ Docker は <code class="highlighter-rouge">--link</code> パラメーターに�
 その環境変数の中に重要な機密情報が含まれていたら、重大なセキュリティ問題にもなります。</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">--link</code> パラメーターに指定されたコンテナーに対しては、<code class="highlighter-rouge">&lt;alias&gt;_NAME</code> という名前の環境変数が定義されます。
-たとえば <code class="highlighter-rouge">web</code> という名前の新たなコンテナーが、<code class="highlighter-rouge">--link db:webdb</code> という指定を通じてデータベースコンテナー <code class="highlighter-rouge">db</code> にリンクしているとします。
-このとき <code class="highlighter-rouge">web</code> コンテナー内には <code class="highlighter-rouge">WEBDB_NAME=/web/webdb</code> という環境変数が生成されます。</p>
+<p><code class="language-plaintext highlighter-rouge">--link</code> パラメーターに指定されたコンテナーに対しては、<code class="language-plaintext highlighter-rouge">&lt;alias&gt;_NAME</code> という名前の環境変数が定義されます。
+たとえば <code class="language-plaintext highlighter-rouge">web</code> という名前の新たなコンテナーが、<code class="language-plaintext highlighter-rouge">--link db:webdb</code> という指定を通じてデータベースコンテナー <code class="language-plaintext highlighter-rouge">db</code> にリンクしているとします。
+このとき <code class="language-plaintext highlighter-rouge">web</code> コンテナー内には <code class="language-plaintext highlighter-rouge">WEBDB_NAME=/web/webdb</code> という環境変数が生成されます。</p>
 
 <p>さらに情報発信元となるコンテナーが公開しているポートに対しても、環境変数が定義されます。
 各変数には一意なプリフィックスがつけられます。</p>
 
-<p><code class="highlighter-rouge">&lt;name&gt;_PORT_&lt;port&gt;_&lt;protocol&gt;</code></p>
+<p><code class="language-plaintext highlighter-rouge">&lt;name&gt;_PORT_&lt;port&gt;_&lt;protocol&gt;</code></p>
 
 <p>プリフィックスは以下のものから構成されます。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">&lt;name&gt;</code>： <code class="highlighter-rouge">--link</code> パラメーターによって指定されたエイリアス名。
-(たとえば <code class="highlighter-rouge">webdb</code>)</li>
-  <li><code class="highlighter-rouge">&lt;port&gt;</code>： 公開されているポート番号。</li>
-  <li><code class="highlighter-rouge">&lt;protocol&gt;</code>： TCP、 UDP いずれかのプロトコル。</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;name&gt;</code>： <code class="language-plaintext highlighter-rouge">--link</code> パラメーターによって指定されたエイリアス名。
+(たとえば <code class="language-plaintext highlighter-rouge">webdb</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;port&gt;</code>： 公開されているポート番号。</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;protocol&gt;</code>： TCP、 UDP いずれかのプロトコル。</li>
 </ul>
 
 <p>このプリフィックスの書式から、以下の 3 つの環境変数が定義されます。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">prefix_ADDR</code> 変数： URL に対する IP アドレス。
-たとえば <code class="highlighter-rouge">WEBDB_PORT_5432_TCP_ADDR=172.17.0.82</code> など。</li>
-  <li><code class="highlighter-rouge">prefix_PORT</code> 変数： URL に対するポート番号。
-たとえば <code class="highlighter-rouge">WEBDB_PORT_5432_TCP_PORT=5432</code> など。</li>
-  <li><code class="highlighter-rouge">prefix_PROTO</code> 変数： URL に対するプロトコル。
-たとえば <code class="highlighter-rouge">WEBDB_PORT_5432_TCP_PROTO=tcp</code> など。</li>
+  <li><code class="language-plaintext highlighter-rouge">prefix_ADDR</code> 変数： URL に対する IP アドレス。
+たとえば <code class="language-plaintext highlighter-rouge">WEBDB_PORT_5432_TCP_ADDR=172.17.0.82</code> など。</li>
+  <li><code class="language-plaintext highlighter-rouge">prefix_PORT</code> 変数： URL に対するポート番号。
+たとえば <code class="language-plaintext highlighter-rouge">WEBDB_PORT_5432_TCP_PORT=5432</code> など。</li>
+  <li><code class="language-plaintext highlighter-rouge">prefix_PROTO</code> 変数： URL に対するプロトコル。
+たとえば <code class="language-plaintext highlighter-rouge">WEBDB_PORT_5432_TCP_PROTO=tcp</code> など。</li>
 </ul>
 
 <p>コンテナーが複数ポートを公開している場合は、個々のポートに対して環境変数が定義されます。
 これはたとえば、コンテナーが 4 つのポートを公開していたとすると、1 つのポートに対して 3 つの環境変数、つまり全部で 12 個の環境変数が定義されることになります。</p>
 
-<p>さらに <code class="highlighter-rouge">&lt;alias&gt;_PORT</code> という環境変数も生成されます。
+<p>さらに <code class="language-plaintext highlighter-rouge">&lt;alias&gt;_PORT</code> という環境変数も生成されます。
 この変数には、発信元コンテナーの一番初めの公開ポートを用いた URL が定義されます。
 この「一番初めの」というのは、公開ポート番号の中で最も小さなものを指します。
-たとえば <code class="highlighter-rouge">WEBDB_PORT=tcp://172.17.0.82:5432</code> という変数があったとして、このポートが tcp、udp の双方で利用されている場合、tcp が設定されます。</p>
+たとえば <code class="language-plaintext highlighter-rouge">WEBDB_PORT=tcp://172.17.0.82:5432</code> という変数があったとして、このポートが tcp、udp の双方で利用されている場合、tcp が設定されます。</p>
 
 <p>最後に、発信元コンテナーにおいて Docker が元から定義している環境変数が、対象とするコンテナー上の環境変数として公開されます。
-各変数に対しては、対象コンテナー上に <code class="highlighter-rouge">&lt;alias&gt;_ENV_&lt;name&gt;</code> という変数が生成されます。
+各変数に対しては、対象コンテナー上に <code class="language-plaintext highlighter-rouge">&lt;alias&gt;_ENV_&lt;name&gt;</code> という変数が生成されます。
 この変数の値は、発信元コンテナーが起動する際に、Docker が利用した値が設定されます。</p>
 
 <p>データベースの例に戻ります。
-<code class="highlighter-rouge">env</code> コマンドを実行して、指定するコンテナー上の環境変数を一覧表示してみます。</p>
+<code class="language-plaintext highlighter-rouge">env</code> コマンドを実行して、指定するコンテナー上の環境変数を一覧表示してみます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ docker run --rm --name web2 --link db:db training/webapp env
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    $ docker run --rm --name web2 --link db:db training/webapp env
 
     . . .
     DB_NAME=/web2/db
@@ -409,26 +409,26 @@ Docker は <code class="highlighter-rouge">--link</code> パラメーターに�
     . . .
 </code></pre></div></div>
 
-<p>この出力から、情報元である <code class="highlighter-rouge">db</code> コンテナーに関して必要となる情報が、環境変数としていくつも生成されているのがわかります。
-各環境変数には <code class="highlighter-rouge">DB_</code> というプリフィックスがつけられていて、これは上で指定した <code class="highlighter-rouge">alias</code> から命名されたものです。
-<code class="highlighter-rouge">alias</code> を <code class="highlighter-rouge">db1</code> としていたら、環境変数のプリフィックスは <code class="highlighter-rouge">DB1_</code> になっていたはずです。
-この環境変数を使えば、<code class="highlighter-rouge">db</code> コンテナー上にあるデータベースに、アプリケーションから接続する設定を行うことができます。
+<p>この出力から、情報元である <code class="language-plaintext highlighter-rouge">db</code> コンテナーに関して必要となる情報が、環境変数としていくつも生成されているのがわかります。
+各環境変数には <code class="language-plaintext highlighter-rouge">DB_</code> というプリフィックスがつけられていて、これは上で指定した <code class="language-plaintext highlighter-rouge">alias</code> から命名されたものです。
+<code class="language-plaintext highlighter-rouge">alias</code> を <code class="language-plaintext highlighter-rouge">db1</code> としていたら、環境変数のプリフィックスは <code class="language-plaintext highlighter-rouge">DB1_</code> になっていたはずです。
+この環境変数を使えば、<code class="language-plaintext highlighter-rouge">db</code> コンテナー上にあるデータベースに、アプリケーションから接続する設定を行うことができます。
 その際の接続はセキュアでありプライベートなものです。
-そしてリンクしている <code class="highlighter-rouge">web</code> コンテナーだけが、<code class="highlighter-rouge">db</code> コンテナーとの通信を行うことができます。</p>
+そしてリンクしている <code class="language-plaintext highlighter-rouge">web</code> コンテナーだけが、<code class="language-plaintext highlighter-rouge">db</code> コンテナーとの通信を行うことができます。</p>
 
 <h3 id="important-notes-on-docker-environment-variables">Docker 環境変数に関する重要事項</h3>
 
-<p><a href="#updating-the-etchosts-file"><code class="highlighter-rouge">/etc/hosts</code> ファイル</a> におけるホストの設定とは違って、環境変数内に保存された IP アドレスは、発信元のコンテナーが再起動されたときに自動的に更新されません。
-リンクされたコンテナーの IP アドレスを取得するためには、<code class="highlighter-rouge">/etc/hosts</code> に設定することをお勧めします。</p>
+<p><a href="#updating-the-etchosts-file"><code class="language-plaintext highlighter-rouge">/etc/hosts</code> ファイル</a> におけるホストの設定とは違って、環境変数内に保存された IP アドレスは、発信元のコンテナーが再起動されたときに自動的に更新されません。
+リンクされたコンテナーの IP アドレスを取得するためには、<code class="language-plaintext highlighter-rouge">/etc/hosts</code> に設定することをお勧めします。</p>
 
 <p>こういった環境変数の設定は、そのコンテナーの初期処理段階でのみ行われます。
-デーモンの中には <code class="highlighter-rouge">sshd</code> などのように、接続を実現するために起動するシェルにおいて、そのような変数を破棄するものもあります。</p>
+デーモンの中には <code class="language-plaintext highlighter-rouge">sshd</code> などのように、接続を実現するために起動するシェルにおいて、そのような変数を破棄するものもあります。</p>
 
-<h3 id="updating-the-etchosts-file"><code class="highlighter-rouge">/etc/hosts</code> ファイルの更新</h3>
+<h3 id="updating-the-etchosts-file"><code class="language-plaintext highlighter-rouge">/etc/hosts</code> ファイルの更新</h3>
 
-<p>環境変数とは別に Docker は、発信元コンテナーを示すホスト設定を <code class="highlighter-rouge">/etc/hosts</code> ファイルに加えます。以下は <code class="highlighter-rouge">web</code> コンテナーに対するホスト設定の例です。</p>
+<p>環境変数とは別に Docker は、発信元コンテナーを示すホスト設定を <code class="language-plaintext highlighter-rouge">/etc/hosts</code> ファイルに加えます。以下は <code class="language-plaintext highlighter-rouge">web</code> コンテナーに対するホスト設定の例です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -t -i --rm --link db:webdb training/webapp /bin/bash
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run -t -i --rm --link db:webdb training/webapp /bin/bash
 
 root@aed84ee21bde:/opt/webapp# cat /etc/hosts
 
@@ -438,13 +438,13 @@ root@aed84ee21bde:/opt/webapp# cat /etc/hosts
 </code></pre></div></div>
 
 <p>上においては、関連する 2 つの設定を見ることができます。
-1 つめは <code class="highlighter-rouge">web</code> コンテナーに対する設定であり、ホスト名としてコンテナー ID が用いられています。
-2 つめの設定では、<code class="highlighter-rouge">db</code> コンテナーの IP アドレスを参照する、リンク機能のエイリアスを用いています。
+1 つめは <code class="language-plaintext highlighter-rouge">web</code> コンテナーに対する設定であり、ホスト名としてコンテナー ID が用いられています。
+2 つめの設定では、<code class="language-plaintext highlighter-rouge">db</code> コンテナーの IP アドレスを参照する、リンク機能のエイリアスを用いています。
 エイリアス名の他に、リンクされたコンテナー名も追加されています。
-そして <code class="highlighter-rouge">--link</code> パラメーターによって指定されたエイリアスとホスト名が異なっていれば、このホスト名も、<code class="highlighter-rouge">/etc/hosts</code> 内のリンクされたコンテナーの IP アドレスに対して追加されます。
+そして <code class="language-plaintext highlighter-rouge">--link</code> パラメーターによって指定されたエイリアスとホスト名が異なっていれば、このホスト名も、<code class="language-plaintext highlighter-rouge">/etc/hosts</code> 内のリンクされたコンテナーの IP アドレスに対して追加されます。
 設定項目の要素のどれを使っても ping を実行することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@aed84ee21bde:/opt/webapp# apt-get install -yqq inetutils-ping
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@aed84ee21bde:/opt/webapp# apt-get install -yqq inetutils-ping
 
 root@aed84ee21bde:/opt/webapp# ping webdb
 
@@ -456,24 +456,24 @@ PING webdb (172.17.0.5): 48 data bytes
 
 <blockquote>
   <p><strong>メモ</strong>:
-ここに示す例においては <code class="highlighter-rouge">ping</code> をインストールしています。
+ここに示す例においては <code class="language-plaintext highlighter-rouge">ping</code> をインストールしています。
 このコンテナーの初期状態ではインストールされていないためです。</p>
 </blockquote>
 
-<p>上では <code class="highlighter-rouge">db</code> コンテナーに対しての <code class="highlighter-rouge">ping</code> コマンド実行において、<code class="highlighter-rouge">/etc/hosts</code> の設定項目を利用しました。
-そしてそれは <code class="highlighter-rouge">172.17.0.5</code> であることがわかりました。
-このように <code class="highlighter-rouge">/etc/hosts</code> の設定項目を用いてアプリケーションを設定すれば、<code class="highlighter-rouge">db</code> コンテナーを利用することができます。</p>
+<p>上では <code class="language-plaintext highlighter-rouge">db</code> コンテナーに対しての <code class="language-plaintext highlighter-rouge">ping</code> コマンド実行において、<code class="language-plaintext highlighter-rouge">/etc/hosts</code> の設定項目を利用しました。
+そしてそれは <code class="language-plaintext highlighter-rouge">172.17.0.5</code> であることがわかりました。
+このように <code class="language-plaintext highlighter-rouge">/etc/hosts</code> の設定項目を用いてアプリケーションを設定すれば、<code class="language-plaintext highlighter-rouge">db</code> コンテナーを利用することができます。</p>
 
 <blockquote>
   <p><strong>メモ</strong>:
 情報発信元となる 1 つのコンテナーに対して、受信先となるコンテナーを複数リンクすることができます。
-たとえば複数の（名前の異なる）ウェブコンテナーを <code class="highlighter-rouge">db</code> コンテナーにリンクすることもできます。</p>
+たとえば複数の（名前の異なる）ウェブコンテナーを <code class="language-plaintext highlighter-rouge">db</code> コンテナーにリンクすることもできます。</p>
 </blockquote>
 
-<p>情報発信元となるコンテナーを再起動すると、リンクされたコンテナー内の <code class="highlighter-rouge">/etc/hosts</code> ファイルは自動的に更新されて、発信元コンテナーの新たな IP アドレスが設定されます。
+<p>情報発信元となるコンテナーを再起動すると、リンクされたコンテナー内の <code class="language-plaintext highlighter-rouge">/etc/hosts</code> ファイルは自動的に更新されて、発信元コンテナーの新たな IP アドレスが設定されます。
 こうしてリンクされた通信状態が維持されます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker restart db
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker restart db
 
 db
 

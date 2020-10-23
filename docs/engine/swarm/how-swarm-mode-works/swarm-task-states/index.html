@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm タスクの状態 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm タスクの状態" />
   <meta property="og:description" content="Learn about tasks that are scheduled on your swarm." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/how-swarm-mode-works/swarm-task-states/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm タスクの状態","description":"Learn about tasks that are scheduled on your swarm.","url":"https://docs.docker.com/engine/swarm/how-swarm-mode-works/swarm-task-states/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -111,11 +111,11 @@
 Swarm ノードにおいては以下の順に動作がスケジュールされます。</p>
 
 <ol>
-  <li><code class="highlighter-rouge">docker service create</code> を使ってサービスを生成します。</li>
+  <li><code class="language-plaintext highlighter-rouge">docker service create</code> を使ってサービスを生成します。</li>
   <li>上の要求が Docker マネージャーノードに届きます。</li>
   <li>Docker マネージャーノードは、特定ノード上にて実行するサービスをスケジューリングします。</li>
   <li>各サービスは複数のタスクを起動します。</li>
-  <li>各タスクにはライフサイクルがあり、<code class="highlighter-rouge">NEW</code>、<code class="highlighter-rouge">PENDING</code>、<code class="highlighter-rouge">COMPLETE</code> といった状態があります。</li>
+  <li>各タスクにはライフサイクルがあり、<code class="language-plaintext highlighter-rouge">NEW</code>、<code class="language-plaintext highlighter-rouge">PENDING</code>、<code class="language-plaintext highlighter-rouge">COMPLETE</code> といった状態があります。</li>
 </ol>
 
 <p>タスクとは、一度実行されてから完了するまでの実行単位のことです。
@@ -123,9 +123,9 @@ Swarm ノードにおいては以下の順に動作がスケジュールされ�
 別の新たなタスクにとって代わるかもしれません。</p>
 
 <p>タスクは完了か失敗という結果に至るまでに、数種類の状態を経ていきます。
-タスクは <code class="highlighter-rouge">NEW</code> という初期化状態から始まります。
+タスクは <code class="language-plaintext highlighter-rouge">NEW</code> という初期化状態から始まります。
 タスクが数種類の状態を経るのは、常に次の状態へ向けて前進していくものであって、状態が戻るようなことはありません。
-たとえばタスクが <code class="highlighter-rouge">COMPLETE</code> から <code class="highlighter-rouge">RUNNING</code> になることはありません。</p>
+たとえばタスクが <code class="language-plaintext highlighter-rouge">COMPLETE</code> から <code class="language-plaintext highlighter-rouge">RUNNING</code> になることはありません。</p>
 
 <p>タスクは以下に示す順に、状態を変化させていきます。</p>
 
@@ -139,67 +139,67 @@ Swarm ノードにおいては以下の順に動作がスケジュールされ�
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">NEW</code></td>
+      <td><code class="language-plaintext highlighter-rouge">NEW</code></td>
       <td>初期化</td>
       <td>タスクが初期化されました。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">PENDING</code></td>
+      <td><code class="language-plaintext highlighter-rouge">PENDING</code></td>
       <td>保留</td>
       <td>タスクに対するリソースが割り当てられました。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">ASSIGNED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ASSIGNED</code></td>
       <td>割当済</td>
       <td>Docker がタスクをノードに割り当てました。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">ACCEPTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCEPTED</code></td>
       <td>受付済</td>
-      <td>タスクがワーカーノードによって受けつけられました。<br />ワーカーノードがタスクを拒否すると、状態は <code class="highlighter-rouge">REJECTED</code> に変わります。</td>
+      <td>タスクがワーカーノードによって受けつけられました。<br />ワーカーノードがタスクを拒否すると、状態は <code class="language-plaintext highlighter-rouge">REJECTED</code> に変わります。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">PREPARING</code></td>
+      <td><code class="language-plaintext highlighter-rouge">PREPARING</code></td>
       <td>準備中</td>
       <td>Docker がタスクを準備しています。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">STARTING</code></td>
+      <td><code class="language-plaintext highlighter-rouge">STARTING</code></td>
       <td>起動中</td>
       <td>Docker がタスクを起動しています。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">RUNNING</code></td>
+      <td><code class="language-plaintext highlighter-rouge">RUNNING</code></td>
       <td>実行中</td>
       <td>タスクが実行中です。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">COMPLETE</code></td>
+      <td><code class="language-plaintext highlighter-rouge">COMPLETE</code></td>
       <td>完了</td>
       <td>タスクがエラーコードなしに終了しました。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">FAILED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">FAILED</code></td>
       <td>失敗</td>
       <td>タスクがエラーコードをともなって終了しました。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">SHUTDOWN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">SHUTDOWN</code></td>
       <td>停止</td>
       <td>Docker がタスクに対してシャットダウンを要求しました。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">REJECTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">REJECTED</code></td>
       <td>拒否</td>
       <td>ワーカーノードがタスクを拒否しました。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">ORPHANED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ORPHANED</code></td>
       <td>孤立</td>
       <td>ノードが長期間停止しています。</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">REMOVE</code></td>
+      <td><code class="language-plaintext highlighter-rouge">REMOVE</code></td>
       <td>削除</td>
       <td>タスクは終了していないが、関連サービスは削除またはスケールダウンしている。</td>
     </tr>
@@ -208,8 +208,8 @@ Swarm ノードにおいては以下の順に動作がスケジュールされ�
 
 <h2 id="view-task-state">タスク状態の確認</h2>
 
-<p><code class="highlighter-rouge">docker service ps &lt;サービス名&gt;</code> を実行して、タスク状態を確認することができます。
-<code class="highlighter-rouge">CURRENT STATE</code>（現在の状態）カラムは、そのタスクの状態およびどれだけ存在しているかを示しています。</p>
+<p><code class="language-plaintext highlighter-rouge">docker service ps &lt;サービス名&gt;</code> を実行して、タスク状態を確認することができます。
+<code class="language-plaintext highlighter-rouge">CURRENT STATE</code>（現在の状態）カラムは、そのタスクの状態およびどれだけ存在しているかを示しています。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service ps webserver
 ID             NAME              IMAGE    NODE        DESIRED STATE  CURRENT STATE            ERROR                              PORTS

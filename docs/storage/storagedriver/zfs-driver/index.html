@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use the ZFS storage driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Use the ZFS storage driver" />
   <meta property="og:description" content="Learn how to optimize your use of ZFS driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use the ZFS storage driver","description":"Learn how to optimize your use of ZFS driver.","url":"https://docs.docker.com/storage/storagedriver/zfs-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -116,7 +116,7 @@ ZFS On Linux (ZoL) project provides an out-of-tree kernel module and userspace
 tools which can be installed separately.</p>
 
 <p>The ZFS on Linux (ZoL) port is healthy and maturing. However, at this point in
-time it is not recommended to use the <code class="highlighter-rouge">zfs</code> Docker storage driver for production
+time it is not recommended to use the <code class="language-plaintext highlighter-rouge">zfs</code> Docker storage driver for production
 use unless you have substantial experience with ZFS on Linux.</p>
 
 <blockquote>
@@ -131,57 +131,57 @@ to the native ZoL port.</p>
 <ul>
   <li>ZFS requires one or more dedicated block devices, preferably solid-state
 drives (SSDs).</li>
-  <li>ZFS is only supported on Docker Engine - Community with Ubuntu 14.04 or higher, with the <code class="highlighter-rouge">zfs</code>
-package (16.04 and higher) or <code class="highlighter-rouge">zfs-native</code> and <code class="highlighter-rouge">ubuntu-zfs</code> packages (14.04)
+  <li>ZFS is only supported on Docker Engine - Community with Ubuntu 14.04 or higher, with the <code class="language-plaintext highlighter-rouge">zfs</code>
+package (16.04 and higher) or <code class="language-plaintext highlighter-rouge">zfs-native</code> and <code class="language-plaintext highlighter-rouge">ubuntu-zfs</code> packages (14.04)
 installed.
     <ul>
       <li>For Ubuntu 14.04, you need to enable a supplemental package repository
-<code class="highlighter-rouge">ppa:zfs-native/stable</code> before you can install the package. See
+<code class="language-plaintext highlighter-rouge">ppa:zfs-native/stable</code> before you can install the package. See
 <a href="https://launchpad.net/~zfs-native/+archive/ubuntu/stable" target="_blank" rel="noopener" class="_">https://launchpad.net/~zfs-native/+archive/ubuntu/stable</a>
 for instructions.</li>
     </ul>
   </li>
   <li>ZFS is not supported on Docker EE or CS-Engine, or any other Linux platforms.</li>
-  <li>The <code class="highlighter-rouge">/var/lib/docker/</code> directory must be mounted on a ZFS-formatted
+  <li>The <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> directory must be mounted on a ZFS-formatted
 filesystem.</li>
   <li>Changing the storage driver makes any containers you have already
-created inaccessible on the local system. Use <code class="highlighter-rouge">docker save</code> to save containers,
+created inaccessible on the local system. Use <code class="language-plaintext highlighter-rouge">docker save</code> to save containers,
 and push existing images to Docker Hub or a private repository, so that you
 do not need to re-create them later.</li>
 </ul>
 
 <blockquote>
-  <p><strong>Note</strong>: There is no need to use <code class="highlighter-rouge">MountFlags=slave</code> with Docker Engine 18.09 or
-later because <code class="highlighter-rouge">dockerd</code> and <code class="highlighter-rouge">containerd</code> are in different mount namespaces.</p>
+  <p><strong>Note</strong>: There is no need to use <code class="language-plaintext highlighter-rouge">MountFlags=slave</code> with Docker Engine 18.09 or
+later because <code class="language-plaintext highlighter-rouge">dockerd</code> and <code class="language-plaintext highlighter-rouge">containerd</code> are in different mount namespaces.</p>
 </blockquote>
 
-<h2 id="configure-docker-with-the-zfs-storage-driver">Configure Docker with the <code class="highlighter-rouge">zfs</code> storage driver</h2>
+<h2 id="configure-docker-with-the-zfs-storage-driver">Configure Docker with the <code class="language-plaintext highlighter-rouge">zfs</code> storage driver</h2>
 
 <ol>
   <li>
     <p>Stop Docker.</p>
   </li>
   <li>
-    <p>Copy the contents of <code class="highlighter-rouge">/var/lib/docker/</code> to <code class="highlighter-rouge">/var/lib/docker.bk</code> and remove
-the contents of <code class="highlighter-rouge">/var/lib/docker/</code>.</p>
+    <p>Copy the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> to <code class="language-plaintext highlighter-rouge">/var/lib/docker.bk</code> and remove
+the contents of <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>.</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>cp <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-au</span> /var/lib/docker /var/lib/docker.bk
 
-<span class="nv">$ </span><span class="nb">sudo </span>rm <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
+<span class="nv">$ </span><span class="nb">sudo rm</span> <span class="nt">-rf</span> /var/lib/docker/<span class="k">*</span>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a new <code class="highlighter-rouge">zpool</code> on your dedicated block device or devices, and mount it
-into <code class="highlighter-rouge">/var/lib/docker/</code>. Be sure you
+    <p>Create a new <code class="language-plaintext highlighter-rouge">zpool</code> on your dedicated block device or devices, and mount it
+into <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>. Be sure you
 have specified the correct devices, because this is a destructive operation.
 This example adds two devices to the pool.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>zpool create <span class="nt">-f</span> zpool-docker <span class="nt">-m</span> /var/lib/docker /dev/xvdf /dev/xvdg
 </code></pre></div>    </div>
 
-    <p>The command creates the <code class="highlighter-rouge">zpool</code> and names it <code class="highlighter-rouge">zpool-docker</code>. The name is for
+    <p>The command creates the <code class="language-plaintext highlighter-rouge">zpool</code> and names it <code class="language-plaintext highlighter-rouge">zpool-docker</code>. The name is for
 display purposes only, and you can use a different name. Check that the pool
-was created and mounted correctly using <code class="highlighter-rouge">zfs list</code>.</p>
+was created and mounted correctly using <code class="language-plaintext highlighter-rouge">zfs list</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>zfs list
 
@@ -190,19 +190,19 @@ zpool-docker    55K  96.4G    19K  /var/lib/docker
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Configure Docker to use <code class="highlighter-rouge">zfs</code>. Edit <code class="highlighter-rouge">/etc/docker/daemon.json</code> and set the
-<code class="highlighter-rouge">storage-driver</code> to <code class="highlighter-rouge">zfs</code>. If the file was empty before, it should now look
+    <p>Configure Docker to use <code class="language-plaintext highlighter-rouge">zfs</code>. Edit <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> and set the
+<code class="language-plaintext highlighter-rouge">storage-driver</code> to <code class="language-plaintext highlighter-rouge">zfs</code>. If the file was empty before, it should now look
 like this:</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zfs"</span><span class="w">
+  </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zfs"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
 
     <p>Save and close the file.</p>
   </li>
   <li>
-    <p>Start Docker. Use <code class="highlighter-rouge">docker info</code> to verify that the storage driver is <code class="highlighter-rouge">zfs</code>.</p>
+    <p>Start Docker. Use <code class="language-plaintext highlighter-rouge">docker info</code> to verify that the storage driver is <code class="language-plaintext highlighter-rouge">zfs</code>.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>docker info
   Containers: 0
@@ -224,12 +224,12 @@ like this:</p>
   </li>
 </ol>
 
-<h2 id="manage-zfs">Manage <code class="highlighter-rouge">zfs</code></h2>
+<h2 id="manage-zfs">Manage <code class="language-plaintext highlighter-rouge">zfs</code></h2>
 
 <h3 id="increase-capacity-on-a-running-device">Increase capacity on a running device</h3>
 
-<p>To increase the size of the <code class="highlighter-rouge">zpool</code>, you need to add a dedicated block device to
-the Docker host, and then add it to the <code class="highlighter-rouge">zpool</code> using the <code class="highlighter-rouge">zpool add</code> command:</p>
+<p>To increase the size of the <code class="language-plaintext highlighter-rouge">zpool</code>, you need to add a dedicated block device to
+the Docker host, and then add it to the <code class="language-plaintext highlighter-rouge">zpool</code> using the <code class="language-plaintext highlighter-rouge">zpool add</code> command:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>zpool add zpool-docker /dev/xvdh
 </code></pre></div></div>
@@ -237,14 +237,14 @@ the Docker host, and then add it to the <code class="highlighter-rouge">zpool</c
 <h3 id="limit-a-containers-writable-storage-quota">Limit a container’s writable storage quota</h3>
 
 <p>If you want to implement a quota on a per-image/dataset basis, you can set the
-<code class="highlighter-rouge">size</code> storage option to limit the amount of space a single container can use
+<code class="language-plaintext highlighter-rouge">size</code> storage option to limit the amount of space a single container can use
 for its writable layer.</p>
 
-<p>Edit <code class="highlighter-rouge">/etc/docker/daemon.json</code> and add the following:</p>
+<p>Edit <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> and add the following:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zfs"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"storage-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"size=256M"</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"storage-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zfs"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"storage-opts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"size=256M"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -253,12 +253,12 @@ for its writable layer.</p>
 
 <p>Save and close the file, and restart Docker.</p>
 
-<h2 id="how-the-zfs-storage-driver-works">How the <code class="highlighter-rouge">zfs</code> storage driver works</h2>
+<h2 id="how-the-zfs-storage-driver-works">How the <code class="language-plaintext highlighter-rouge">zfs</code> storage driver works</h2>
 
 <p>ZFS uses the following objects:</p>
 
 <ul>
-  <li><strong>filesystems</strong>: thinly provisioned, with space allocated from the <code class="highlighter-rouge">zpool</code> on
+  <li><strong>filesystems</strong>: thinly provisioned, with space allocated from the <code class="language-plaintext highlighter-rouge">zpool</code> on
 demand.</li>
   <li><strong>snapshots</strong>: read-only space-efficient point-in-time copies of filesystems.</li>
   <li><strong>clones</strong>: Read-write copies of snapshots. Used for storing the differences
@@ -276,12 +276,12 @@ from the parent layer.</li>
 </ol>
 
 <p>Filesystems, snapshots, and clones all allocate space from the underlying
-<code class="highlighter-rouge">zpool</code>.</p>
+<code class="language-plaintext highlighter-rouge">zpool</code>.</p>
 
 <h3 id="image-and-container-layers-on-disk">Image and container layers on-disk</h3>
 
 <p>Each running container’s unified filesystem is mounted on a mount point in
-<code class="highlighter-rouge">/var/lib/docker/zfs/graph/</code>. Continue reading for an explanation of how the
+<code class="language-plaintext highlighter-rouge">/var/lib/docker/zfs/graph/</code>. Continue reading for an explanation of how the
 unified filesystem is composed.</p>
 
 <h3 id="image-layering-and-sharing">Image layering and sharing</h3>
@@ -324,7 +324,7 @@ allocated for the blocks that are changed. By default, these blocks are
   </li>
 </ol>
 
-<h2 id="how-container-reads-and-writes-work-with-zfs">How container reads and writes work with <code class="highlighter-rouge">zfs</code></h2>
+<h2 id="how-container-reads-and-writes-work-with-zfs">How container reads and writes work with <code class="language-plaintext highlighter-rouge">zfs</code></h2>
 
 <h3 id="reading-files">Reading files</h3>
 
@@ -337,7 +337,7 @@ This diagram illustrates how block sharing works:</p>
 
 <h3 id="writing-files">Writing files</h3>
 
-<p><strong>Writing a new file</strong>: space is allocated on demand from the underlying <code class="highlighter-rouge">zpool</code>
+<p><strong>Writing a new file</strong>: space is allocated on demand from the underlying <code class="language-plaintext highlighter-rouge">zpool</code>
 and the blocks are written directly into the container’s writable layer.</p>
 
 <p><strong>Modifying an existing file</strong>: space is allocated only for the changed blocks,
@@ -352,13 +352,13 @@ driver masks the existence of the file or directory in the container’s
 writable layer, even though the file or directory still exists in the lower
 read-only layers.</li>
   <li>If you create and then delete a file or directory within the container’s
-writable layer, the blocks are reclaimed by the <code class="highlighter-rouge">zpool</code>.</li>
+writable layer, the blocks are reclaimed by the <code class="language-plaintext highlighter-rouge">zpool</code>.</li>
 </ul>
 
 <h2 id="zfs-and-docker-performance">ZFS and Docker performance</h2>
 
 <p>There are several factors that influence the performance of Docker using the
-<code class="highlighter-rouge">zfs</code> storage driver.</p>
+<code class="language-plaintext highlighter-rouge">zfs</code> storage driver.</p>
 
 <ul>
   <li>
@@ -368,7 +368,7 @@ designed for large enterprise-grade servers with a large amount of memory.</p>
   <li>
     <p><strong>ZFS Features</strong>: ZFS includes a de-duplication feature. Using this feature
 may save disk space, but uses a large amount of memory. It is recommended that
-you disable this feature for the <code class="highlighter-rouge">zpool</code> you are using with Docker, unless you
+you disable this feature for the <code class="language-plaintext highlighter-rouge">zpool</code> you are using with Docker, unless you
 are using SAN, NAS, or other hardware RAID technologies.</p>
   </li>
   <li>
@@ -384,7 +384,7 @@ high-density use cases.</p>
 filesystems like ZFS. ZFS mitigates this by using a small block size of 128k.
 The ZFS intent log (ZIL) and the coalescing of writes (delayed writes) also
 help to reduce fragmentation. You can monitor fragmentation using
-<code class="highlighter-rouge">zpool status</code>. However, there is no way to defragment ZFS without reformatting
+<code class="language-plaintext highlighter-rouge">zpool status</code>. However, there is no way to defragment ZFS without reformatting
 and restoring the filesystem.</p>
   </li>
   <li>

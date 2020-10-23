@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Prometheus を用いた Docker メトリックスの収集 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Prometheus を用いた Docker メトリックスの収集" />
   <meta property="og:description" content="Prometheus を用いた Docker メトリックスの収集。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/daemon/prometheus/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Prometheus を用いた Docker メトリックスの収集","description":"Prometheus を用いた Docker メトリックスの収集。","url":"https://docs.docker.com/config/daemon/prometheus/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    5 分
+    6 分
   
 </span>
 
@@ -119,14 +119,14 @@ Docker ターゲットとしてアプリケーションを監視することは�
 
 <h2 id="configure-docker">Docker の設定</h2>
 
-<p>Docker デーモンを Prometheus のターゲットとして設定するには、<code class="highlighter-rouge">metrics-address</code> を指定する必要があります。
-これを行う一番良い方法は <code class="highlighter-rouge">daemon.json</code> に記述することです。
-デフォルトにおいて <code class="highlighter-rouge">daemon.json</code> は以下に示すいずれかのディレクトリにあります。
+<p>Docker デーモンを Prometheus のターゲットとして設定するには、<code class="language-plaintext highlighter-rouge">metrics-address</code> を指定する必要があります。
+これを行う一番良い方法は <code class="language-plaintext highlighter-rouge">daemon.json</code> に記述することです。
+デフォルトにおいて <code class="language-plaintext highlighter-rouge">daemon.json</code> は以下に示すいずれかのディレクトリにあります。
 もしこのファイルが存在していない場合は、新規に生成します。</p>
 
 <ul>
-  <li><strong>Linux</strong>: <code class="highlighter-rouge">/etc/docker/daemon.json</code></li>
-  <li><strong>Windows Server</strong>: <code class="highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code></li>
+  <li><strong>Linux</strong>: <code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code></li>
+  <li><strong>Windows Server</strong>: <code class="language-plaintext highlighter-rouge">C:\ProgramData\docker\config\daemon.json</code></li>
   <li><strong>Docker Desktop for Mac / Docker Desktop for Windows</strong>:
 ツールバーの Docker アイコンをクリック、<strong>Preferences</strong>、<strong>Daemon</strong> を選択。<strong>Advanced</strong> をクリック。</li>
 </ul>
@@ -134,14 +134,14 @@ Docker ターゲットとしてアプリケーションを監視することは�
 <p>このファイルが空であった場合は、以下の内容を貼り付けます。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"metrics-addr"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1:9323"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"experimental"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nl">"metrics-addr"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1:9323"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"experimental"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <p>このファイルが空でなかった場合は、上の 2 つのキーを追加します。
 書き加えた結果は正しい JSON フォーマットでなければなりません。
-最終行を除き、各行の終わりはカンマ（<code class="highlighter-rouge">,</code>）が必要です。</p>
+最終行を除き、各行の終わりはカンマ（<code class="language-plaintext highlighter-rouge">,</code>）が必要です。</p>
 
 <p>ファイルを保存します。
 また Docker Desktop for Mac や Docker Desktop for Windows を利用している場合は、設定を保存します。
@@ -159,7 +159,7 @@ Docker ターゲットとしてアプリケーションを監視することは�
   <ol>
     <li>
       <p>1 つまたは複数の Docker Engine が参加して 1 つの Docker Swarm が形成されていること。
-つまり 1 つのマネージャー上から <code class="highlighter-rouge">docker swarm init</code> を実行しているか、あるいは他のマネージャーやワーカーノードから <code class="highlighter-rouge">docker swarm join</code> を実行していること。</p>
+つまり 1 つのマネージャー上から <code class="language-plaintext highlighter-rouge">docker swarm init</code> を実行しているか、あるいは他のマネージャーやワーカーノードから <code class="language-plaintext highlighter-rouge">docker swarm join</code> を実行していること。</p>
     </li>
     <li>
       <p>Prometheus イメージをプルできるように、インターネット接続ができていること。</p>
@@ -167,7 +167,7 @@ Docker ターゲットとしてアプリケーションを監視することは�
   </ol>
 </blockquote>
 
-<p>以下の設定ファイルの内容をいずれかコピーして、（Linux や Mac の場合）<code class="highlighter-rouge">/tmp/prometheus.yml</code>、（Windows の場合）<code class="highlighter-rouge">C:\tmp\prometheus.yml</code> に保存してください。
+<p>以下の設定ファイルの内容をいずれかコピーして、（Linux や Mac の場合）<code class="language-plaintext highlighter-rouge">/tmp/prometheus.yml</code>、（Windows の場合）<code class="language-plaintext highlighter-rouge">C:\tmp\prometheus.yml</code> に保存してください。
 これは Prometheus のごく普通の設定ファイルです。
 ただしファイルの最後段には Docker の処理定義を加えています。
 Docker Desktop for Mac や Docker Desktop for Windows では、多少異なる設定が必要となります。</p>
@@ -333,11 +333,11 @@ Docker Desktop for Mac や Docker Desktop for Windows では、多少異なる�
   <!-- mac -->
   <div id="win-run" class="tab-pane fade">
 
-    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">PS </span>C:\&gt; docker service create --replicas 1 --name my-prometheus
-    --mount <span class="nb">type</span><span class="o">=</span><span class="nb">bind</span>,source<span class="o">=</span>C:/tmp/prometheus.yml,destination<span class="o">=</span>/etc/prometheus/prometheus.yml
-    --publish <span class="nv">published</span><span class="o">=</span>9090,target<span class="o">=</span>9090,protocol<span class="o">=</span>tcp
-    prom/prometheus
-</code></pre></div>    </div>
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">PS</span><span class="w"> </span><span class="nx">C:\</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nt">--replicas</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="nt">--name</span><span class="w"> </span><span class="nx">my-prometheus</span><span class="w">
+    </span><span class="nt">--mount</span><span class="w"> </span><span class="kr">type</span><span class="o">=</span><span class="nf">bind</span><span class="p">,</span><span class="nx">source</span><span class="o">=</span><span class="nf">C:/tmp/prometheus.yml</span><span class="p">,</span><span class="nx">destination</span><span class="o">=</span><span class="nf">/etc/prometheus/prometheus.yml</span><span class="w">
+    </span><span class="nt">--publish</span><span class="w"> </span><span class="nx">published</span><span class="o">=</span><span class="mi">9090</span><span class="p">,</span><span class="nf">target</span><span class="o">=</span><span class="mi">9090</span><span class="p">,</span><span class="nf">protocol</span><span class="o">=</span><span class="nf">tcp</span><span class="w">
+    </span><span class="nx">prom/prometheus</span><span class="w">
+</span></code></pre></div>    </div>
 
   </div>
   <!-- windows -->
@@ -355,7 +355,7 @@ Docker Desktop for Mac や Docker Desktop for Windows では、多少異なる�
 <p>グラフを生成します。
 Prometheus UI 画面の <strong>Graphs</strong> リンクをクリックします。
 そして <strong>Execute</strong> ボタンの右にあるコンボボックスからメトリックを選び <strong>Execute</strong> をクリックします。
-以下に示すスクリーンショットは <code class="highlighter-rouge">engine_daemon_network_actions_seconds_count</code> に対するグラフを示しています。</p>
+以下に示すスクリーンショットは <code class="language-plaintext highlighter-rouge">engine_daemon_network_actions_seconds_count</code> に対するグラフを示しています。</p>
 
 <p><img src="/docs.docker.jp.onthefly/config/daemon/images/prometheus-graph_idle.png" alt="Prometheus engine_daemon_network_actions_seconds_count report" /></p>
 
@@ -376,7 +376,7 @@ Prometheus UI 画面の <strong>Graphs</strong> リンクをクリックしま�
 
 <p><img src="/docs.docker.jp.onthefly/config/daemon/images/prometheus-graph_load.png" alt="Prometheus の engine_daemon_network_actions_seconds_count レポート" /></p>
 
-<p>確認ができたら、サービス <code class="highlighter-rouge">ping_service</code> を停止して削除します。
+<p>確認ができたら、サービス <code class="language-plaintext highlighter-rouge">ping_service</code> を停止して削除します。
 こうして、余計な ping によってホストが溢れないようにします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker service remove ping_service

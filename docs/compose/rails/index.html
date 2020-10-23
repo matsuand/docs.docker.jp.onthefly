@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>クィックスタート: Compose と Rails | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="クィックスタート: Compose と Rails" />
   <meta property="og:description" content="Rails を使って Docker Compose をはじめる。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/rails/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"クィックスタート: Compose と Rails","description":"Rails を使って Docker Compose をはじめる。","url":"https://docs.docker.com/compose/rails/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -102,7 +102,7 @@
   <span class="reading-time-label">読む時間の目安: </span>
   
   
-    4 分
+    5 分
   
 </span>
 
@@ -113,10 +113,10 @@
 
 <p>アプリのビルドに必要となるファイルを作るところから始めます。
 アプリの依存パッケージも含め、アプリは Docker コンテナー内で実行するものとします。
-依存パッケージは <code class="highlighter-rouge">Dockerfile</code> というファイル内に定義します。
+依存パッケージは <code class="language-plaintext highlighter-rouge">Dockerfile</code> というファイル内に定義します。
 まずは Dockerfile を以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby:2.5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ruby:2.5
 RUN apt-get update -qq &amp;&amp; apt-get install -y nodejs postgresql-client
 RUN mkdir /myapp
 WORKDIR /myapp
@@ -139,40 +139,40 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 このイメージは Ruby、Bundler などの依存パッケージすべてをコンテナー内部に含めてビルドされます。
 Dockerfile の記述方法の詳細は <a href="/docs.docker.jp.onthefly/get-started/">Docker ユーザーガイド</a> や <a href="/engine/reference/builder/">Dockerfile リファレンス</a> を参照してください。</p>
 
-<p>次にブートストラップを行うファイル <code class="highlighter-rouge">Gemfile</code> を生成して、Rails をロードできるようにします。
-このファイルは <code class="highlighter-rouge">rails new</code> を行ったタイミングで書き換わります。</p>
+<p>次にブートストラップを行うファイル <code class="language-plaintext highlighter-rouge">Gemfile</code> を生成して、Rails をロードできるようにします。
+このファイルは <code class="language-plaintext highlighter-rouge">rails new</code> を行ったタイミングで書き換わります。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source 'https://rubygems.org'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source 'https://rubygems.org'
 gem 'rails', '~&gt;5'
 </code></pre></div></div>
 
-<p>空のファイル <code class="highlighter-rouge">Gemfile.lock</code> を生成して <code class="highlighter-rouge">Dockerfile</code> のビルドができるようにします。</p>
+<p>空のファイル <code class="language-plaintext highlighter-rouge">Gemfile.lock</code> を生成して <code class="language-plaintext highlighter-rouge">Dockerfile</code> のビルドができるようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch Gemfile.lock
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch Gemfile.lock
 </code></pre></div></div>
 
 <p>次にエントリーポイントの実行スクリプトを生成して、Rails 特有の問題へ対処します。
-これはサーバー内に <code class="highlighter-rouge">server.pid</code> というファイルが先に存在していたときに、サーバーが再起動できなくなる問題を回避するものです。
+これはサーバー内に <code class="language-plaintext highlighter-rouge">server.pid</code> というファイルが先に存在していたときに、サーバーが再起動できなくなる問題を回避するものです。
 このスクリプトは、コンテナーが起動されるたびに実行されることになります。
-<code class="highlighter-rouge">entrypoint.sh</code> というこのスクリプトを、以下のように生成します。</p>
+<code class="language-plaintext highlighter-rouge">entrypoint.sh</code> というこのスクリプトを、以下のように生成します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nb">set</span> <span class="nt">-e</span>
 
 <span class="c"># Rails に対応したファイル server.pid が存在しているかもしれないので削除する。</span>
-rm <span class="nt">-f</span> /myapp/tmp/pids/server.pid
+<span class="nb">rm</span> <span class="nt">-f</span> /myapp/tmp/pids/server.pid
 
 <span class="c"># コンテナーのプロセスを実行する。（Dockerfile 内の CMD に設定されているもの。）</span>
 <span class="nb">exec</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 </code></pre></div></div>
 
-<p>最後に <code class="highlighter-rouge">docker-compose.yml</code> が取りまとめてくれます。
+<p>最後に <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> が取りまとめてくれます。
 このファイルには、データベースとウェブという 2 つのアプリを含んだサービスが定義されています。
 そしてそれぞれの Docker イメージをどう作るかが示されています。
 （データベースは既存の PostgreSQL イメージにより動作します。ウェブアプリはカレントディレクトリ内に生成されます。）
 また、リンクによってそれを結び合わせることが設定されていて、ウェブアプリのポートは外部に公開されています。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '3'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '3'
 services:
   db:
     image: postgres
@@ -192,19 +192,19 @@ services:
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>ヒント</strong>: このファイルの拡張子は<code class="highlighter-rouge">.yml</code>と<code class="highlighter-rouge">.yaml</code>のどちらでも構いません。</p>
+  <p><strong>ヒント</strong>: このファイルの拡張子は<code class="language-plaintext highlighter-rouge">.yml</code>と<code class="language-plaintext highlighter-rouge">.yaml</code>のどちらでも構いません。</p>
 </blockquote>
 
 <h3 id="build-the-project">プロジェクトのビルド</h3>
 
 <p>ここまでのファイルを使って <a href="/docs.docker.jp.onthefly/compose/reference/run/">docker-compose run</a> を実行し、Rails アプリのひながたを生成します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --no-deps web rails new . --force --database=postgresql
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --no-deps web rails new . --force --database=postgresql
 </code></pre></div></div>
 
-<p>最初に Compose は <code class="highlighter-rouge">Dockerfile</code> を用いて <code class="highlighter-rouge">web</code> サービスに対するイメージをビルドします。
-<code class="highlighter-rouge">--no-deps</code>フラグは Compose に対してリンクサービスは起動しないように指示します。
-そしてこのイメージを利用して、新たに生成されたコンテナー内にて <code class="highlighter-rouge">rails new</code> を実行します。
+<p>最初に Compose は <code class="language-plaintext highlighter-rouge">Dockerfile</code> を用いて <code class="language-plaintext highlighter-rouge">web</code> サービスに対するイメージをビルドします。
+<code class="language-plaintext highlighter-rouge">--no-deps</code>フラグは Compose に対してリンクサービスは起動しないように指示します。
+そしてこのイメージを利用して、新たに生成されたコンテナー内にて <code class="language-plaintext highlighter-rouge">rails new</code> を実行します。
 処理が完了すれば、できたてのアプリが生成されているはずです。</p>
 
 <p>ファイル一覧を見てみます。</p>
@@ -232,29 +232,29 @@ drwxr-xr-x   9 vmb  staff   306 Jun  7 12:09 <span class="nb">test
 drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 vendor
 </code></pre></div></div>
 
-<p>Linux 上で Docker を利用している場合、<code class="highlighter-rouge">rails new</code> により生成されたファイルの所有者は root になります。
+<p>Linux 上で Docker を利用している場合、<code class="language-plaintext highlighter-rouge">rails new</code> により生成されたファイルの所有者は root になります。
 これはコンテナーが root ユーザーにより実行されているためです。
 この場合は、生成されたファイルの所有者を以下のように変更してください。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>chown <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> <span class="nb">.</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chown</span> <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>Docker on Mac あるいは Docker on Windows を利用している場合、<code class="highlighter-rouge">rails new</code> により生成されたファイルも含め、すべてのファイルに対しての所有権は、正しく設定されているはずです。</p>
+<p>Docker on Mac あるいは Docker on Windows を利用している場合、<code class="language-plaintext highlighter-rouge">rails new</code> により生成されたファイルも含め、すべてのファイルに対しての所有権は、正しく設定されているはずです。</p>
 
 <p>ここに新たな Gemfile が作成されたので、イメージを再ビルドすることが必要です。
-（再ビルドが必要になるのは、今の時点、あるいは <code class="highlighter-rouge">Gemfile</code> や Dockerfile を修正したときだけです。）</p>
+（再ビルドが必要になるのは、今の時点、あるいは <code class="language-plaintext highlighter-rouge">Gemfile</code> や Dockerfile を修正したときだけです。）</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build
 </code></pre></div></div>
 
 <h3 id="connect-the-database">データベースの接続設定</h3>
 
 <p>アプリは実行可能ですが、実行するのはまだです。
-デフォルトで Rails は <code class="highlighter-rouge">localhost</code> において実行されているデータベースを用います。
-したがってここでは <code class="highlighter-rouge">db</code> コンテナーを用いるように書き換える必要があります。
-また <code class="highlighter-rouge">postgres</code> イメージにおいて設定されているデフォルトのデータベース名、ユーザー名を変更することも必要です。</p>
+デフォルトで Rails は <code class="language-plaintext highlighter-rouge">localhost</code> において実行されているデータベースを用います。
+したがってここでは <code class="language-plaintext highlighter-rouge">db</code> コンテナーを用いるように書き換える必要があります。
+また <code class="language-plaintext highlighter-rouge">postgres</code> イメージにおいて設定されているデフォルトのデータベース名、ユーザー名を変更することも必要です。</p>
 
-<p><code class="highlighter-rouge">config/database.yml</code> の記述内容を以下のように書き換えます。</p>
+<p><code class="language-plaintext highlighter-rouge">config/database.yml</code> の記述内容を以下のように書き換えます。</p>
 
 <pre><code class="language-none">default: &amp;default
   adapter: postgresql
@@ -276,7 +276,7 @@ test:
 
 <p><a href="/docs.docker.jp.onthefly/compose/reference/up/">docker-compose up</a> によりアプリを起動します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up
 </code></pre></div></div>
 
 <p>正常に動作すれば、PostgreSQL による出力が確認できるはずです。</p>
@@ -296,7 +296,7 @@ db_1   | 2018-03-21 20:18:37.772 UTC <span class="o">[</span>1] LOG:  database s
 <p>最後にデータベースを生成することが必要です。
 別の端末から以下を実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rake db:create
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web rake db:create
 </code></pre></div></div>
 
 <p>コマンドから出力される結果は、たとえば以下のようになります。</p>
@@ -313,7 +313,7 @@ Created database 'myapp_test'
 <p>以上です。
 Docker デーモンを通じて、アプリがポート 3000 番を使って実行されています。</p>
 
-<p>Docker Desktop for Mac や Docker Desktop for Windows の場合は、ウェブブラウザーから <code class="highlighter-rouge">http://localhost:3000</code> にアクセスすれば Rails のようこそページを確認できます。</p>
+<p>Docker Desktop for Mac や Docker Desktop for Windows の場合は、ウェブブラウザーから <code class="language-plaintext highlighter-rouge">http://localhost:3000</code> にアクセスすれば Rails のようこそページを確認できます。</p>
 
 <p><img src="/docs.docker.jp.onthefly/compose/images/rails-welcome.png" alt="Rails の例" /></p>
 
@@ -336,26 +336,26 @@ Removing network rails_default
 
 <h3 id="restart-the-application">アプリケーションの再起動</h3>
 
-<p>アプリケーションを再起動する場合は、プロジェクトディレクトリにて <code class="highlighter-rouge">docker-compose up</code> を実行します。</p>
+<p>アプリケーションを再起動する場合は、プロジェクトディレクトリにて <code class="language-plaintext highlighter-rouge">docker-compose up</code> を実行します。</p>
 
 <h3 id="rebuild-the-application">アプリケーションの再ビルド</h3>
 
 <p>Gemfile や Compose ファイルを編集して、いろいろと別の設定とした場合には、再ビルドが必要になります。
-変更内容によっては <code class="highlighter-rouge">docker-compose up --build</code> だけで済む場合もあります。
-しかし完全に再ビルドを行うには、<code class="highlighter-rouge">docker-compose run web bundle install</code> を再度実行して、ホストにおける <code class="highlighter-rouge">Gemfile.lock</code> の変更と同期を取ることが必要になります。
-その後に <code class="highlighter-rouge">docker-compose up --build</code> を実行します。</p>
+変更内容によっては <code class="language-plaintext highlighter-rouge">docker-compose up --build</code> だけで済む場合もあります。
+しかし完全に再ビルドを行うには、<code class="language-plaintext highlighter-rouge">docker-compose run web bundle install</code> を再度実行して、ホストにおける <code class="language-plaintext highlighter-rouge">Gemfile.lock</code> の変更と同期を取ることが必要になります。
+その後に <code class="language-plaintext highlighter-rouge">docker-compose up --build</code> を実行します。</p>
 
 <p>以下に示すのは前者、つまり完全な再ビルドは必要としない例です。
-ローカルホスト側の公開ポートを <code class="highlighter-rouge">3000</code> から <code class="highlighter-rouge">3001</code> に変更する場合を取り上げます。
-Compose ファイルにおいて、コンテナー側にて <code class="highlighter-rouge">3000</code> としているポートを新たなポート <code class="highlighter-rouge">3001</code> に変更します。
+ローカルホスト側の公開ポートを <code class="language-plaintext highlighter-rouge">3000</code> から <code class="language-plaintext highlighter-rouge">3001</code> に変更する場合を取り上げます。
+Compose ファイルにおいて、コンテナー側にて <code class="language-plaintext highlighter-rouge">3000</code> としているポートを新たなポート <code class="language-plaintext highlighter-rouge">3001</code> に変更します。
 そしてこの変更を保存します。</p>
 
 <pre><code class="language-none">ports: - "3001:3000"
 </code></pre>
 
-<p>再ビルドとアプリの再起動は  <code class="highlighter-rouge">docker-compose up --build</code> により行います。</p>
+<p>再ビルドとアプリの再起動は  <code class="language-plaintext highlighter-rouge">docker-compose up --build</code> により行います。</p>
 
-<p>コンテナー内部において、アプリはそれまでと変わらないポート <code class="highlighter-rouge">3000</code> で稼動していますが、ローカルホスト上から Rails ようこそページにアクセスするのは <code class="highlighter-rouge">http://localhost:3001</code> となります。</p>
+<p>コンテナー内部において、アプリはそれまでと変わらないポート <code class="language-plaintext highlighter-rouge">3000</code> で稼動していますが、ローカルホスト上から Rails ようこそページにアクセスするのは <code class="language-plaintext highlighter-rouge">http://localhost:3001</code> となります。</p>
 
 <h2 id="more-compose-documentation">Compose ドキュメント</h2>
 

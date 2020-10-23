@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker のコンテントトラスト | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker のコンテントトラスト" />
   <meta property="og:description" content="Docker においてコンテントトラストを有効にします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/trust/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker のコンテントトラスト","description":"Docker においてコンテントトラストを有効にします。","url":"https://docs.docker.com/engine/security/trust/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -125,20 +125,20 @@ Docker Engine では、公開リポジトリあるいはプライベートリポ
 
 <p>1 つのイメージには、以下の識別子が記録されています。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG]
 </code></pre></div></div>
 
-<p>イメージ <code class="highlighter-rouge">REPOSITORY</code> は複数のタグを持つことができます。
-たとえば <code class="highlighter-rouge">mongo</code> イメージにある <code class="highlighter-rouge">latest</code> と <code class="highlighter-rouge">3.1.2</code> というのは、どちらもタグです。
+<p>イメージ <code class="language-plaintext highlighter-rouge">REPOSITORY</code> は複数のタグを持つことができます。
+たとえば <code class="language-plaintext highlighter-rouge">mongo</code> イメージにある <code class="language-plaintext highlighter-rouge">latest</code> と <code class="language-plaintext highlighter-rouge">3.1.2</code> というのは、どちらもタグです。
 イメージ公開者は、イメージをビルドするたびに、何度もイメージとタグの組み合わせを作り出します。</p>
 
-<p>DCT はイメージの <code class="highlighter-rouge">TAG</code> 部分に関連づけられます。
+<p>DCT はイメージの <code class="language-plaintext highlighter-rouge">TAG</code> 部分に関連づけられます。
 各イメージリポジトリには、公開者がイメージタグにサインするための鍵が複数あります。
 どのタグに対してサインを行うかを、イメージ公開者は自由に取り決めています。</p>
 
 <p>イメージリポジトリには 1 つのイメージに対して、サインされたタグを持つものが 1 つだけあり、それ以外のタグはサインされていません。
 <a href="https://hub.docker.com/r/library/mongo/tags/">Mongo イメージリポジトリ</a> を例にして説明します。
-<code class="highlighter-rouge">3.1.6</code> がサインされているタグであったとすると、<code class="highlighter-rouge">latest</code> はサインされていません。
+<code class="language-plaintext highlighter-rouge">3.1.6</code> がサインされているタグであったとすると、<code class="language-plaintext highlighter-rouge">latest</code> はサインされていません。
 どのイメージタグにサインし、サインしないかは、イメージ公開者が取り決める責任があります。
 以下の図においては、サインされているイメージがあり、それ以外はサインされていません。</p>
 
@@ -146,9 +146,9 @@ Docker Engine では、公開リポジトリあるいはプライベートリポ
 
 <p>公開者としては、どのタグにサインするかを取り決めることができます。
 サインされているものとサインされていないものが、結果的に同じ名称になったとしても、同一の内容としては扱われません。
-たとえば公開者がタグづけしたイメージ <code class="highlighter-rouge">someimage:latest</code> をプッシュして、これにサインしたとします。
-後にその公開者は、サインをしていない <code class="highlighter-rouge">someimage:latest</code> というイメージをプッシュすることができます。
-2 度めに行ったプッシュによって、サインをしていなかった直前の <code class="highlighter-rouge">latest</code> がプッシュしたものに置き換えられますが、サインしている <code class="highlighter-rouge">latest</code> には何ら影響しません。
+たとえば公開者がタグづけしたイメージ <code class="language-plaintext highlighter-rouge">someimage:latest</code> をプッシュして、これにサインしたとします。
+後にその公開者は、サインをしていない <code class="language-plaintext highlighter-rouge">someimage:latest</code> というイメージをプッシュすることができます。
+2 度めに行ったプッシュによって、サインをしていなかった直前の <code class="language-plaintext highlighter-rouge">latest</code> がプッシュしたものに置き換えられますが、サインしている <code class="language-plaintext highlighter-rouge">latest</code> には何ら影響しません。
 公開者がサインするタグを選べるということは、イメージをサインせずに何回も繰り返しプッシュした上で、最後に公式イメージにサインするというやり方が可能になります。</p>
 
 <p>イメージ利用者は DCT を通じて、利用するイメージがサインされているかどうかがわかります。
@@ -197,7 +197,7 @@ DCT を利用する操作を行った初回において、鍵一式が生成さ�
 これは Docker Community Engine 17.12 またはそれ以降に適用されます。</p>
 </blockquote>
 
-<p>Docker CLI においては <code class="highlighter-rouge">docker trust</code> コマンドを使って、コンテナーイメージにサインしてプッシュすることができます。
+<p>Docker CLI においては <code class="language-plaintext highlighter-rouge">docker trust</code> コマンドを使って、コンテナーイメージにサインしてプッシュすることができます。
 これは Notary 機能の上に実現されています。
 Notary の詳細は <a href="/notary/getting_started/">こちら</a> を参照してください。</p>
 
@@ -205,14 +205,14 @@ Notary の詳細は <a href="/notary/getting_started/">こちら</a> を参照�
 独自のサーバー環境を構築するのであれば、その手順が <a href="/engine/security/trust/deploying_notary/">こちら</a> にあります。</p>
 
 <p>Docker イメージにサインするには、委任鍵ペア（delegation key pair）が必要です。
-この鍵はローカルで <code class="highlighter-rouge">docker trust key generate</code> の実行によって生成するか、認証局によって生成されます。</p>
+この鍵はローカルで <code class="language-plaintext highlighter-rouge">docker trust key generate</code> の実行によって生成するか、認証局によって生成されます。</p>
 
 <p>はじめにローカルの Docker トラストレジストリに、委任鍵ペアを追加します。
-（デフォルトでこの鍵は <code class="highlighter-rouge">~/.docker/trust/</code> に保存します。)
-<code class="highlighter-rouge">docker trust key generate</code> によって委任鍵ペアを生成している場合、秘密鍵（private key）も自動的にローカルの保存場所に生成されています。
-個別に鍵をインポートしている場合は、<code class="highlighter-rouge">docker trust key load</code> コマンドを実行することが必要です。</p>
+（デフォルトでこの鍵は <code class="language-plaintext highlighter-rouge">~/.docker/trust/</code> に保存します。)
+<code class="language-plaintext highlighter-rouge">docker trust key generate</code> によって委任鍵ペアを生成している場合、秘密鍵（private key）も自動的にローカルの保存場所に生成されています。
+個別に鍵をインポートしている場合は、<code class="language-plaintext highlighter-rouge">docker trust key load</code> コマンドを実行することが必要です。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust key generate jeff
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust key generate jeff
 Generating key for jeff...
 Enter passphrase for new jeff key with ID 9deed25:
 Repeat passphrase for new jeff key with ID 9deed25:
@@ -221,7 +221,7 @@ Successfully generated and loaded private key. Corresponding public key availabl
 
 <p>すでに鍵がある場合は以下のようにします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust key load key.pem --name jeff
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust key load key.pem --name jeff
 Loading key from "key.pem"...
 Enter passphrase for new jeff key with ID 8ae710e:
 Repeat passphrase for new jeff key with ID 8ae710e:
@@ -233,14 +233,14 @@ Successfully imported key from key.pem
 委任鍵ペアをリポジトリに追加する初回は、このコマンド実行において、ローカル Notary サーバーの正規のルート鍵を使って、リポジトリが初期化されます。
 リポジトリの初期化と委任鍵の役割に関しては、<a href="/docs.docker.jp.onthefly/engine/security/trust/trust_delegation/">コンテントトラストの委任鍵</a> を参照してください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94:
 </code></pre></div></div>
 
 <p>最後に委任鍵ペアの秘密鍵を使って、指定するタグに対してサインを行い、これをレジストリにプッシュします。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust sign registry.example.com/admin/demo:1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust sign registry.example.com/admin/demo:1
 Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
 The push refers to repository [registry.example.com/admin/demo]
 7bff100f35cb: Pushed
@@ -250,9 +250,9 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully signed registry.example.com/admin/demo:1
 </code></pre></div></div>
 
-<p>あるいは鍵ペアがインポート済であれば、DCT 環境変数を設定しておくことで、<code class="highlighter-rouge">docker push</code> コマンドによりイメージをプッシュすることもできます。</p>
+<p>あるいは鍵ペアがインポート済であれば、DCT 環境変数を設定しておくことで、<code class="language-plaintext highlighter-rouge">docker push</code> コマンドによりイメージをプッシュすることもできます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST=1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTENT_TRUST=1
 
 $ docker push registry.example.com/admin/demo:1
 The push refers to repository [registry.example.com/admin/demo:1]
@@ -263,9 +263,9 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully signed registry.example.com/admin/demo:1
 </code></pre></div></div>
 
-<p>リモートにあるトラストデータやリポジトリを参照するには <code class="highlighter-rouge">docker trust inspect</code> コマンドを実行します。</p>
+<p>リモートにあるトラストデータやリポジトリを参照するには <code class="language-plaintext highlighter-rouge">docker trust inspect</code> コマンドを実行します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust inspect --pretty registry.example.com/admin/demo:1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust inspect --pretty registry.example.com/admin/demo:1
 
 Signatures for registry.example.com/admin/demo:1
 
@@ -283,9 +283,9 @@ Administrative keys for registry.example.com/admin/demo:1
   Root Key:	84ca6e4416416d78c4597e754f38517bea95ab427e5f95871f90d460573071fc
 </code></pre></div></div>
 
-<p>リモートにあるトラストデータは <code class="highlighter-rouge">docker trust revoke</code> コマンドにより削除することができます。</p>
+<p>リモートにあるトラストデータは <code class="language-plaintext highlighter-rouge">docker trust revoke</code> コマンドにより削除することができます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust revoke registry.example.com/admin/demo:1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker trust revoke registry.example.com/admin/demo:1
 Enter passphrase for signer key with ID 8ae710e:
 Successfully deleted signature for registry.example.com/admin/demo:1
 </code></pre></div></div>
@@ -293,24 +293,24 @@ Successfully deleted signature for registry.example.com/admin/demo:1
 <h2 id="client-enforcement-with-docker-content-trust">Docker コンテントトラストのクライントでの利用</h2>
 
 <p>Docker クライアントにおいて、コンテントトラストはデフォルトで無効になっています。
-これを有効にするには、環境変数 <code class="highlighter-rouge">DOCKER_CONTENT_TRUST</code> を <code class="highlighter-rouge">1</code> に設定します。
+これを有効にするには、環境変数 <code class="language-plaintext highlighter-rouge">DOCKER_CONTENT_TRUST</code> を <code class="language-plaintext highlighter-rouge">1</code> に設定します。
 これを行っておけば、サインされていないタグつきイメージは、操作対象になりません。</p>
 
-<p>Docker クライアントにおいて DCT が有効である場合、タグつきのイメージを操作する <code class="highlighter-rouge">docker</code> コマンドには、コンテント署名あるいは明示的なコンテントハッシュがなければなりません。
+<p>Docker クライアントにおいて DCT が有効である場合、タグつきのイメージを操作する <code class="language-plaintext highlighter-rouge">docker</code> コマンドには、コンテント署名あるいは明示的なコンテントハッシュがなければなりません。
 DCT の操作が可能なコマンドは以下です。</p>
 
 <ul>
-  <li><code class="highlighter-rouge">push</code></li>
-  <li><code class="highlighter-rouge">build</code></li>
-  <li><code class="highlighter-rouge">create</code></li>
-  <li><code class="highlighter-rouge">pull</code></li>
-  <li><code class="highlighter-rouge">run</code></li>
+  <li><code class="language-plaintext highlighter-rouge">push</code></li>
+  <li><code class="language-plaintext highlighter-rouge">build</code></li>
+  <li><code class="language-plaintext highlighter-rouge">create</code></li>
+  <li><code class="language-plaintext highlighter-rouge">pull</code></li>
+  <li><code class="language-plaintext highlighter-rouge">run</code></li>
 </ul>
 
-<p>たとえば DCT を有効にしている場合、<code class="highlighter-rouge">docker pull someimage:latest</code> というコマンドは <code class="highlighter-rouge">someimage:latest</code> がサインされている場合のみ処理が成功します。
+<p>たとえば DCT を有効にしている場合、<code class="language-plaintext highlighter-rouge">docker pull someimage:latest</code> というコマンドは <code class="language-plaintext highlighter-rouge">someimage:latest</code> がサインされている場合のみ処理が成功します。
 ただしコンテントハッシュが明示的に指定されている場合は、このコマンドの処理は常に成功します。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker pull registry.example.com/user/image:1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker pull registry.example.com/user/image:1
 Error: remote trust data does not exist for registry.example.com/user/image: registry.example.com does not have trust data for registry.example.com/user/image
 
 $ docker pull registry.example.com/user/image@sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a

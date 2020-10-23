@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 11:23:39 +0900 -->
+<!-- Page generated 2020-10-23 14:08:14 +0900 -->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker プラグイン API | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker プラグイン API" />
   <meta property="og:description" content="Docker プラグインをどのように構築するかを説明します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugin_api/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T11:23:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker プラグイン API","description":"Docker プラグインをどのように構築するかを説明します。","url":"https://docs.docker.com/engine/extend/plugin_api/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -133,7 +133,7 @@ which registers itself by placing a file on the same docker host in one of the p
 directories described in <a href="#plugin-discovery">Plugin discovery</a>.</p>
 
 <p>Plugins have human-readable names, which are short, lowercase strings. For
-example, <code class="highlighter-rouge">flocker</code> or <code class="highlighter-rouge">weave</code>.</p>
+example, <code class="language-plaintext highlighter-rouge">flocker</code> or <code class="language-plaintext highlighter-rouge">weave</code>.</p>
 
 <p>Plugins can run inside or outside containers. Currently running them outside
 containers is recommended.</p>
@@ -146,28 +146,28 @@ user or container tries to use one by name.</p>
 <p>There are three types of files which can be put in the plugin directory.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">.sock</code> files are UNIX domain sockets.</li>
-  <li><code class="highlighter-rouge">.spec</code> files are text files containing a URL, such as <code class="highlighter-rouge">unix:///other.sock</code> or <code class="highlighter-rouge">tcp://localhost:8080</code>.</li>
-  <li><code class="highlighter-rouge">.json</code> files are text files containing a full json specification for the plugin.</li>
+  <li><code class="language-plaintext highlighter-rouge">.sock</code> files are UNIX domain sockets.</li>
+  <li><code class="language-plaintext highlighter-rouge">.spec</code> files are text files containing a URL, such as <code class="language-plaintext highlighter-rouge">unix:///other.sock</code> or <code class="language-plaintext highlighter-rouge">tcp://localhost:8080</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">.json</code> files are text files containing a full json specification for the plugin.</li>
 </ul>
 
 <p>Plugins with UNIX domain socket files must run on the same docker host, whereas
 plugins with spec or json files can run on a different host if a remote URL is specified.</p>
 
-<p>UNIX domain socket files must be located under <code class="highlighter-rouge">/run/docker/plugins</code>, whereas
-spec files can be located either under <code class="highlighter-rouge">/etc/docker/plugins</code> or <code class="highlighter-rouge">/usr/lib/docker/plugins</code>.</p>
+<p>UNIX domain socket files must be located under <code class="language-plaintext highlighter-rouge">/run/docker/plugins</code>, whereas
+spec files can be located either under <code class="language-plaintext highlighter-rouge">/etc/docker/plugins</code> or <code class="language-plaintext highlighter-rouge">/usr/lib/docker/plugins</code>.</p>
 
 <p>The name of the file (excluding the extension) determines the plugin name.</p>
 
-<p>For example, the <code class="highlighter-rouge">flocker</code> plugin might create a UNIX socket at
-<code class="highlighter-rouge">/run/docker/plugins/flocker.sock</code>.</p>
+<p>For example, the <code class="language-plaintext highlighter-rouge">flocker</code> plugin might create a UNIX socket at
+<code class="language-plaintext highlighter-rouge">/run/docker/plugins/flocker.sock</code>.</p>
 
 <p>You can define each plugin into a separated subdirectory if you want to isolate definitions from each other.
-For example, you can create the <code class="highlighter-rouge">flocker</code> socket under <code class="highlighter-rouge">/run/docker/plugins/flocker/flocker.sock</code> and only
-mount <code class="highlighter-rouge">/run/docker/plugins/flocker</code> inside the <code class="highlighter-rouge">flocker</code> container.</p>
+For example, you can create the <code class="language-plaintext highlighter-rouge">flocker</code> socket under <code class="language-plaintext highlighter-rouge">/run/docker/plugins/flocker/flocker.sock</code> and only
+mount <code class="language-plaintext highlighter-rouge">/run/docker/plugins/flocker</code> inside the <code class="language-plaintext highlighter-rouge">flocker</code> container.</p>
 
-<p>Docker always searches for unix sockets in <code class="highlighter-rouge">/run/docker/plugins</code> first. It checks for spec or json files under
-<code class="highlighter-rouge">/etc/docker/plugins</code> and <code class="highlighter-rouge">/usr/lib/docker/plugins</code> if the socket doesn’t exist. The directory scan stops as
+<p>Docker always searches for unix sockets in <code class="language-plaintext highlighter-rouge">/run/docker/plugins</code> first. It checks for spec or json files under
+<code class="language-plaintext highlighter-rouge">/etc/docker/plugins</code> and <code class="language-plaintext highlighter-rouge">/usr/lib/docker/plugins</code> if the socket doesn’t exist. The directory scan stops as
 soon as it finds the first plugin definition with the given name.</p>
 
 <h3 id="json-specification">JSON specification</h3>
@@ -175,24 +175,24 @@ soon as it finds the first plugin definition with the given name.</p>
 <p>This is the JSON format for a plugin:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plugin-example"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/docker/plugin"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"TLSConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"InsecureSkipVerify"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"CAFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/shared/docker/certs/example-ca.pem"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"CertFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/shared/docker/certs/example-cert.pem"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"KeyFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/shared/docker/certs/example-key.pem"</span><span class="w">
+  </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plugin-example"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/docker/plugin"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"TLSConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"InsecureSkipVerify"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"CAFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/shared/docker/certs/example-ca.pem"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"CertFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/shared/docker/certs/example-cert.pem"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"KeyFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/shared/docker/certs/example-key.pem"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">TLSConfig</code> field is optional and TLS will only be verified if this configuration is present.</p>
+<p>The <code class="language-plaintext highlighter-rouge">TLSConfig</code> field is optional and TLS will only be verified if this configuration is present.</p>
 
 <h2 id="plugin-lifecycle">Plugin lifecycle</h2>
 
 <p>Plugins should be started before Docker, and stopped after Docker.  For
-example, when packaging a plugin for a platform which supports <code class="highlighter-rouge">systemd</code>, you
-might use <a href="http://www.freedesktop.org/software/systemd/man/systemd.unit.html#Before="><code class="highlighter-rouge">systemd</code> dependencies</a> to
+example, when packaging a plugin for a platform which supports <code class="language-plaintext highlighter-rouge">systemd</code>, you
+might use <a href="http://www.freedesktop.org/software/systemd/man/systemd.unit.html#Before="><code class="language-plaintext highlighter-rouge">systemd</code> dependencies</a> to
 manage startup and shutdown order.</p>
 
 <p>When upgrading a plugin, you should first stop the Docker daemon, upgrade the
@@ -201,7 +201,7 @@ plugin, then start Docker again.</p>
 <h2 id="plugin-activation">Plugin activation</h2>
 
 <p>When a plugin is first referred to -- either by a user referring to it by name
-(e.g.  <code class="highlighter-rouge">docker run --volume-driver=foo</code>) or a container already configured to
+(e.g.  <code class="language-plaintext highlighter-rouge">docker run --volume-driver=foo</code>) or a container already configured to
 use a plugin being started -- Docker looks for the named plugin in the plugin
 directory and activates it with a handshake. See Handshake API below.</p>
 
@@ -210,13 +210,13 @@ they are activated only lazily, or on-demand, when they are needed.</p>
 
 <h2 id="systemd-socket-activation">Systemd socket activation</h2>
 
-<p>Plugins may also be socket activated by <code class="highlighter-rouge">systemd</code>. The official <a href="https://github.com/docker/go-plugins-helpers">Plugins helpers</a>
+<p>Plugins may also be socket activated by <code class="language-plaintext highlighter-rouge">systemd</code>. The official <a href="https://github.com/docker/go-plugins-helpers">Plugins helpers</a>
 natively supports socket activation. In order for a plugin to be socket activated it needs
-a <code class="highlighter-rouge">service</code> file and a <code class="highlighter-rouge">socket</code> file.</p>
+a <code class="language-plaintext highlighter-rouge">service</code> file and a <code class="language-plaintext highlighter-rouge">socket</code> file.</p>
 
-<p>The <code class="highlighter-rouge">service</code> file (for example <code class="highlighter-rouge">/lib/systemd/system/your-plugin.service</code>):</p>
+<p>The <code class="language-plaintext highlighter-rouge">service</code> file (for example <code class="language-plaintext highlighter-rouge">/lib/systemd/system/your-plugin.service</code>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
 Description=Your plugin
 Before=docker.service
 After=network.target your-plugin.socket
@@ -228,9 +228,9 @@ ExecStart=/usr/lib/docker/your-plugin
 [Install]
 WantedBy=multi-user.target
 </code></pre></div></div>
-<p>The <code class="highlighter-rouge">socket</code> file (for example <code class="highlighter-rouge">/lib/systemd/system/your-plugin.socket</code>):</p>
+<p>The <code class="language-plaintext highlighter-rouge">socket</code> file (for example <code class="language-plaintext highlighter-rouge">/lib/systemd/system/your-plugin.socket</code>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
 Description=Your plugin
 
 [Socket]
@@ -252,10 +252,10 @@ or if one of the plugin goes down accidentally).</p>
 implement an HTTP server and bind this to the UNIX socket mentioned in the
 “plugin discovery” section.</p>
 
-<p>All requests are HTTP <code class="highlighter-rouge">POST</code> requests.</p>
+<p>All requests are HTTP <code class="language-plaintext highlighter-rouge">POST</code> requests.</p>
 
 <p>The API is versioned via an Accept header, which currently is always set to
-<code class="highlighter-rouge">application/vnd.docker.plugins.v1+json</code>.</p>
+<code class="language-plaintext highlighter-rouge">application/vnd.docker.plugins.v1+json</code>.</p>
 
 <h2 id="handshake-api">Handshake API</h2>
 
@@ -266,7 +266,7 @@ implement an HTTP server and bind this to the UNIX socket mentioned in the
 <p><strong>Request:</strong> empty body</p>
 
 <p><strong>Response:</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "Implements": ["VolumeDriver"]
 }
 </code></pre></div></div>
@@ -277,9 +277,9 @@ After activation, the plugin will then be sent events from this subsystem.</p>
 <p>Possible values are:</p>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/extend/plugins_authorization/"><code class="highlighter-rouge">authz</code></a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/extend/plugins_network/"><code class="highlighter-rouge">NetworkDriver</code></a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/extend/plugins_volume/"><code class="highlighter-rouge">VolumeDriver</code></a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/extend/plugins_authorization/"><code class="language-plaintext highlighter-rouge">authz</code></a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/extend/plugins_network/"><code class="language-plaintext highlighter-rouge">NetworkDriver</code></a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/extend/plugins_volume/"><code class="language-plaintext highlighter-rouge">VolumeDriver</code></a></li>
 </ul>
 
 <h2 id="plugin-retries">Plugin retries</h2>
@@ -291,7 +291,7 @@ containers which depend on them.</p>
 
 <h2 id="plugins-helpers">Plugins helpers</h2>
 
-<p>To ease plugins development, we’re providing an <code class="highlighter-rouge">sdk</code> for each kind of plugins
+<p>To ease plugins development, we’re providing an <code class="language-plaintext highlighter-rouge">sdk</code> for each kind of plugins
 currently supported by Docker at <a href="https://github.com/docker/go-plugins-helpers">docker/go-plugins-helpers</a>.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=API">API</a>, <a href="/docs.docker.jp.onthefly/search/?q=Usage">Usage</a>, <a href="/docs.docker.jp.onthefly/search/?q=plugins">plugins</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=developer">developer</a></span></section>
                     </main>
