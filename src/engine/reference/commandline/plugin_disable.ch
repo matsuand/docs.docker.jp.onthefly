@@ -8,7 +8,6 @@ datafile: docker_plugin_disable
 title: docker plugin disable
 redirect_from:
   - /edge/engine/reference/commandline/plugin_disable/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_plugin_disable
 title: docker plugin disable
 redirect_from:
   - /edge/engine/reference/commandline/plugin_disable/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

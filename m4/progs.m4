@@ -153,3 +153,18 @@ AC_SUBST(SITEDIR_DEFINED)
 AC_SUBST(SITEDESTDIR)
 abs_sitedestdir=`(cd $SITEDESTDIR && pwd)`
 AC_SUBST(abs_sitedestdir)
+
+AC_ARG_ENABLE(production,
+[AC_HELP_STRING([--enable-production],[Specify production build])],
+enable_production=$enableval, enable_production=no)
+AC_SUBST(enable_production)
+
+if test x"${enable_production}" = x"yes"; then
+  JEKYLL_ENV="production"
+  CONFIG_YML="_config.yml,_config_production.yml"
+else
+  JEKYLL_ENV="development"
+  CONFIG_YML="_config.yml"
+fi
+AC_SUBST(JEKYLL_ENV)
+AC_SUBST(CONFIG_YML)

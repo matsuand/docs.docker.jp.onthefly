@@ -8,7 +8,6 @@ datafile: docker_image_save
 title: docker image save
 redirect_from:
   - /edge/engine/reference/commandline/image_save/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_image_save
 title: docker image save
 redirect_from:
   - /edge/engine/reference/commandline/image_save/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

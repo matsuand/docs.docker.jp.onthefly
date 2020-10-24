@@ -6,7 +6,6 @@
 datafolder: docker-app
 datafile: docker_app_push
 title: docker app push
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -17,7 +16,6 @@ in the source repository on GitHub:
 datafolder: docker-app
 datafile: docker_app_push
 title: docker app push
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

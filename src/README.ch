@@ -3,12 +3,12 @@
 
 @x
 # Docs @ Docker
-Welcome to the repo for our documentation. This is the source for	
-[https://docs.docker.com/](https://docs.docker.com/).	
+Welcome to the repo for our documentation. This is the source for
+[https://docs.docker.com/](https://docs.docker.com/).
 @y
 # Docs @ Docker
-Welcome to the repo for our documentation. This is the source for	
-[https://docs.docker.com/](https://docs.docker.com/).	
+Welcome to the repo for our documentation. This is the source for
+[https://docs.docker.com/](https://docs.docker.com/).
 @z
 
 @x
@@ -27,8 +27,8 @@ open source and we deeply appreciate contributions from our community!
   - [Files not edited here](#files-not-edited-here)
   - [Overall doc improvements](#overall-doc-improvements)
 - [Per-PR staging on GitHub](#per-pr-staging-on-github)
-- [Build the docs locally](#build-the-docs-locally)
-- [Read these docs offline](#read-these-docs-offline)
+- [Build and preview the docs locally](#build-and-preview-the-docs-locally)
+  - [Build the docs with deployment features enabled](#build-the-docs-with-deployment-features-enabled)
 - [Important files](#important-files)
 - [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
   - [Testing changes and practical guidance](#testing-changes-and-practical-guidance)
@@ -43,8 +43,8 @@ open source and we deeply appreciate contributions from our community!
   - [Files not edited here](#files-not-edited-here)
   - [Overall doc improvements](#overall-doc-improvements)
 - [Per-PR staging on GitHub](#per-pr-staging-on-github)
-- [Build the docs locally](#build-the-docs-locally)
-- [Read these docs offline](#read-these-docs-offline)
+- [Build and preview the docs locally](#build-and-preview-the-docs-locally)
+  - [Build the docs with deployment features enabled](#build-the-docs-with-deployment-features-enabled)
 - [Important files](#important-files)
 - [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
   - [Testing changes and practical guidance](#testing-changes-and-practical-guidance)
@@ -206,217 +206,191 @@ PR, to protect the integrity of [https://docs.docker.com/](https://docs.docker.c
 @z
 
 @x
-## Build the docs locally
+## Build and preview the docs locally
 @y
-## Build the docs locally
+## Build and preview the docs locally
 @z
 
 @x
-You have three options:
+On your local machine, clone this repo:
 @y
-You have three options:
+On your local machine, clone this repo:
 @z
 
 @x
-1.  On your local machine, clone this repo and run our staging container:
+```bash
+git clone --recursive https://github.com/docker/docker.github.io.git
+cd docker.github.io
+```
 @y
-1.  On your local machine, clone this repo and run our staging container:
+```bash
+git clone --recursive https://github.com/docker/docker.github.io.git
+cd docker.github.io
+```
 @z
 
 @x
-    ```bash
-    git clone --recursive https://github.com/docker/docker.github.io.git
-    cd docker.github.io
-    docker-compose up --build
-    ```
+Then build and run the documentation with [Docker Compose](https://docs.docker.com/compose/)
 @y
-    ```bash
-    git clone --recursive https://github.com/docker/docker.github.io.git
-    cd docker.github.io
-    docker-compose up --build
-    ```
+Then build and run the documentation with [Docker Compose](https://docs.docker.com/compose/)
 @z
 
 @x
-    If you haven't got Docker Compose installed,
-    [follow these installation instructions](https://docs.docker.com/compose/install/).
+```bash
+docker-compose up -d --build
+```
 @y
-    If you haven't got Docker Compose installed,
-    [follow these installation instructions](https://docs.docker.com/compose/install/).
+```bash
+docker-compose up -d --build
+```
 @z
 
 @x
-    The container runs in the background and incrementally rebuilds the site each
-    time a file changes. You can keep your browser open to http://localhost:4000/
-    and refresh to see your changes. The container runs in the foreground, but
-    you can use `CTRL+C` to get the command prompt back. To stop the container,
-    issue the following command:
+> Docker Compose is included with [Docker Desktop](https://docs.docker.com/desktop/).
+> If you don't have Docker Compose installed, [follow these installation instructions](https://docs.docker.com/compose/install/).
 @y
-    The container runs in the background and incrementally rebuilds the site each
-    time a file changes. You can keep your browser open to http://localhost:4000/
-    and refresh to see your changes. The container runs in the foreground, but
-    you can use `CTRL+C` to get the command prompt back. To stop the container,
-    issue the following command:
+> Docker Compose is included with [Docker Desktop](https://docs.docker.com/desktop/).
+> If you don't have Docker Compose installed, [follow these installation instructions](https://docs.docker.com/compose/install/).
 @z
 
 @x
-    ```bash
-    docker-compose down
-    ```
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 @y
-    ```bash
-    docker-compose down
-    ```
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 @z
 
 @x
-2. Build and run a Docker image for your working branch.
+To rebuild the docs after you made changes, run the `docker-compose up` command
+again. This rebuilds the documentation, and updates the container with your changes:
 @y
-2. Build and run a Docker image for your working branch.
+To rebuild the docs after you made changes, run the `docker-compose up` command
+again. This rebuilds the documentation, and updates the container with your changes:
 @z
 
 @x
-   ```bash
-   DOCKER_BUILDKIT=1 docker build -t docker build -t docker-docs
-   docker run --rm -it -p 4000:4000 docker-docs
-   ```
+```bash
+docker-compose up -d --build
+```
 @y
-   ```bash
-   DOCKER_BUILDKIT=1 docker build -t docker build -t docker-docs
-   docker run --rm -it -p 4000:4000 docker-docs
-   ```
+```bash
+docker-compose up -d --build
+```
 @z
 
 @x
-   After the `docker run` command, copy the URL provided in the container build output in a browser,
-   http://0.0.0.0:4000, and verify your changes.
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 @y
-   After the `docker run` command, copy the URL provided in the container build output in a browser,
-   http://0.0.0.0:4000, and verify your changes.
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 @z
 
 @x
-3.  Install Jekyll and GitHub Pages on your local machine.
+To stop the staging container, use the `docker-compose down` command:
 @y
-3.  Install Jekyll and GitHub Pages on your local machine.
+To stop the staging container, use the `docker-compose down` command:
 @z
 
 @x
-    a. Clone this repo by running:
+```bash
+docker-compose down
+```
 @y
-    a. Clone this repo by running:
+```bash
+docker-compose down
+```
 @z
 
 @x
-       ```bash
-       git clone --recursive https://github.com/docker/docker.github.io.git
-       ```
+### Build the docs with deployment features enabled
 @y
-       ```bash
-       git clone --recursive https://github.com/docker/docker.github.io.git
-       ```
+### Build the docs with deployment features enabled
 @z
 
 @x
-    b. Install Ruby 2.3 or later as described in [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).
+The default configuration for local builds of the documentation disables some
+features to allow for a shorter build-time. The following options differ between
+local builds, and builds that are deployed to docs.docker.com:
 @y
-    b. Install Ruby 2.3 or later as described in [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).
+The default configuration for local builds of the documentation disables some
+features to allow for a shorter build-time. The following options differ between
+local builds, and builds that are deployed to docs.docker.com:
 @z
 
 @x
-    c. Install Bundler:
+- search auto-completion, and generation of `js/metadata.json`
+- google analytics
+- page ratings
+- `sitemap.xml` generation
+- minification of stylesheets (css/style.css)
+- adjusting "edit this page" links for content in other repositories
 @y
-    c. Install Bundler:
+- search auto-completion, and generation of `js/metadata.json`
+- google analytics
+- page ratings
+- `sitemap.xml` generation
+- minification of stylesheets (css/style.css)
+- adjusting "edit this page" links for content in other repositories
 @z
 
 @x
-       ```bash
-       gem install bundler
-       ```
+If you want to contribute in these areas, you can perform a "production" build
+locally.
 @y
-       ```bash
-       gem install bundler
-       ```
+If you want to contribute in these areas, you can perform a "production" build
+locally.
 @z
 
 @x
-    d. If you use Ubuntu, install packages required for the Nokogiri HTML
-       parser:
+To preview the documentation with deployment features enabled, you need to set the
+`JEKYLL_ENV` environment variable when building the documentation;
 @y
-    d. If you use Ubuntu, install packages required for the Nokogiri HTML
-       parser:
+To preview the documentation with deployment features enabled, you need to set the
+`JEKYLL_ENV` environment variable when building the documentation;
 @z
 
 @x
-       ```bash
-       sudo apt-get install ruby-dev zlib1g-dev liblzma-dev
-       ```
+```bash
+JEKYLL_ENV=production docker-compose up --build
+```
 @y
-       ```bash
-       sudo apt-get install ruby-dev zlib1g-dev liblzma-dev
-       ```
+```bash
+JEKYLL_ENV=production docker-compose up --build
+```
 @z
 
 @x
-    e. Install Jekyll and other required dependencies:
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 @y
-    e. Install Jekyll and other required dependencies:
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 @z
 
 @x
-       ```bash
-       bundle install
-       ```
+To rebuild the docs after you make changes, repeat the steps above.
 @y
-       ```bash
-       bundle install
-       ```
+To rebuild the docs after you make changes, repeat the steps above.
 @z
 
 @x
-       >**Note**: You may need to install some packages manually.
-@y
-       >**Note**: You may need to install some packages manually.
-@z
-
-@x
-    f. Change the directory to `docker.github.io`.
-@y
-    f. Change the directory to `docker.github.io`.
-@z
-
-@x
-    g. Use the `jekyll serve` command to continuously build the HTML output.
-@y
-    g. Use the `jekyll serve` command to continuously build the HTML output.
-@z
-
-@x
-    The `jekyll serve` process runs in the foreground, and starts a web server
-    running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
-    You can continue working in a second terminal and Jekyll will rebuild the
-    website incrementally. Refresh the browser to preview your changes.
-@y
-    The `jekyll serve` process runs in the foreground, and starts a web server
-    running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
-    You can continue working in a second terminal and Jekyll will rebuild the
-    website incrementally. Refresh the browser to preview your changes.
-@z
-
-@x
+<!--
+TODO re-enable auto-builds, or push master builds to Docker hub
 ## Read these docs offline
 @y
+<!--
+TODO re-enable auto-builds, or push master builds to Docker hub
 ## Read these docs offline
 @z
 
 @x
 To read the docs offline, you can use either a standalone container or a swarm service.
-To see all available tags, go to
-[Docker Hub](https://docs.docker.com/docker-hub/).
+To see all available tags, go to [Docker Hub](https://docs.docker.com/docker-hub/).
 @y
 To read the docs offline, you can use either a standalone container or a swarm service.
-To see all available tags, go to
-[Docker Hub](https://docs.docker.com/docker-hub/).
+To see all available tags, go to [Docker Hub](https://docs.docker.com/docker-hub/).
 @z
 
 @x
@@ -465,8 +439,10 @@ The following examples use the `latest` tag:
 
 @x
 Either way, you can now access the docs at port 4000 on your Docker host.
+-->
 @y
 Either way, you can now access the docs at port 4000 on your Docker host.
+-->
 @z
 
 @x
@@ -545,7 +521,6 @@ following keys are supported. The title, description, and keywords are required.
 | notoc                  | no        | Either `true` or `false`. If `true`, no in-page TOC is generated for the HTML output of this page. Defaults to `false`. Appropriate for some landing pages that have no in-page headings.|
 | toc_min                | no        | Ignored if `notoc` is set to `true`. The minimum heading level included in the in-page TOC. Defaults to `2`, to show `<h2>` headings as the minimum. |
 | toc_max                | no        | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
-| tree                   | no        | Either `true` or `false`. Set to `false` to disable the left-hand site-wide navigation for this page. Appropriate for some pages like the search page or the 404 page. |
 | no_ratings             | no        | Either `true` or `false`. Set to `true` to disable the page-ratings applet for this page. Defaults to `false`. |
 | skip_read_time         | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
 | sitemap                | no        | Exclude the page from indexing by search engines. When set to `false`, the page is excluded from `sitemap.xml`, and a `<meta name="robots" content="noindex"/>` header is added to the page. |
@@ -559,7 +534,6 @@ following keys are supported. The title, description, and keywords are required.
 | notoc                  | no        | Either `true` or `false`. If `true`, no in-page TOC is generated for the HTML output of this page. Defaults to `false`. Appropriate for some landing pages that have no in-page headings.|
 | toc_min                | no        | Ignored if `notoc` is set to `true`. The minimum heading level included in the in-page TOC. Defaults to `2`, to show `<h2>` headings as the minimum. |
 | toc_max                | no        | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
-| tree                   | no        | Either `true` or `false`. Set to `false` to disable the left-hand site-wide navigation for this page. Appropriate for some pages like the search page or the 404 page. |
 | no_ratings             | no        | Either `true` or `false`. Set to `true` to disable the page-ratings applet for this page. Defaults to `false`. |
 | skip_read_time         | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
 | sitemap                | no        | Exclude the page from indexing by search engines. When set to `false`, the page is excluded from `sitemap.xml`, and a `<meta name="robots" content="noindex"/>` header is added to the page. |
@@ -628,7 +602,7 @@ references as you rename, add, and remove tabs.
 @z
 
 @x
-```
+```html
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
   <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
@@ -639,7 +613,7 @@ references as you rename, add, and remove tabs.
 </div>
 ```
 @y
-```
+```html
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
   <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
@@ -762,7 +736,7 @@ still optimizes the bandwidth during browsing).
 @z
 
 @x
-Code and documentation copyright 2017 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2020 Docker, inc, released under the Apache 2.0 license.
 @y
-Code and documentation copyright 2017 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2020 Docker, inc, released under the Apache 2.0 license.
 @z

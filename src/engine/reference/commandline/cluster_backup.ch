@@ -7,7 +7,6 @@ datafolder: cluster
 datafile: docker_cluster_backup
 title: docker cluster backup
 enterprise_only: true
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -19,7 +18,6 @@ datafolder: cluster
 datafile: docker_cluster_backup
 title: docker cluster backup
 enterprise_only: true
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

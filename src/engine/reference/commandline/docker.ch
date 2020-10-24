@@ -9,7 +9,6 @@ title: docker
 redirect_from:
   - /engine/reference/commandline/
   - /edge/engine/reference/commandline/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -23,7 +22,6 @@ title: docker
 redirect_from:
   - /engine/reference/commandline/
   - /edge/engine/reference/commandline/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

@@ -8,7 +8,6 @@ datafile: docker_plugin_create
 title: docker plugin create
 redirect_from:
   - /edge/engine/reference/commandline/plugin_create/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_plugin_create
 title: docker plugin create
 redirect_from:
   - /edge/engine/reference/commandline/plugin_create/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

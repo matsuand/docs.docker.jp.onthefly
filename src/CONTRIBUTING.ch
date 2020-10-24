@@ -19,26 +19,9 @@ let you know so that you can rebase it.
 
 @x
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](/opensource/).
+[Contribution guidelines](/opensource/index.md).
 @y
->**メモ**: Docker プロジェクトへコード提供をする場合は、[貢献のためのガイドライン](/opensource/) を参照してください。
-@z
-
-@x
-### Files not edited here
-@y
-### 編集対象外のファイル
-@z
-
-@x
-Files and directories listed in the `path:` keys in
-[`.NOT_EDITED_HERE.yaml`](/_data/not_edited_here.yaml) are maintained in other
-repositories and should not be edited in this one. Pull requests against these
-files will be rejected. Make your edits to the files in the repository and path
-in the `source:` key in the YAML file.
-@y
-[`.NOT_EDITED_HERE.yaml`](/_data/not_edited_here.yaml) というファイルの `path:` キーに列記されているファイルやディレクトリは、他のリポジトリにおいて管理されているものです。そのためこのリポジトリ内では編集しないでください。そのようなファイルに対してプルリクエストをあげてもリジェクトされます。
-その編集は、YAML ファイル内の `source:` キーに示されているレジストリやパスにおけるファイルに対して行ってください。
+>**メモ**: Docker プロジェクトへコード提供をする場合は、[貢献のためのガイドライン](/opensource/index.md) を参照してください。
 @z
 
 @x
@@ -105,93 +88,6 @@ and we especially value contributions in this area.
 @y
 >グラフィックを作成するのはお好きですか？ 良質のグラフィックは優れたドキュメントを作り出すための重要な要素です。グラフィックに関する貢献も特に歓迎します。
 @z
-
-@x
-### Specific new features for a project
-@y
-### 各プロジェクトにおける特定の新機能
-{: #specific-new-features-for-a-project }
-@z
-
-@x
-Our docs cover many projects which release at different times. **If, and only if,
-your pull request relates to a currently unreleased feature of a project, base
-your work on that project's `vnext` branch.** These branches were created by
-cloning `master` and then importing a project's `master` branch's docs into it
-(at the time of the migration), in a way that preserved the commit history. When
-a project has a release, its `vnext` branch will be merged into `master` and your
-work will be visible on [https://docs.docker.com/](/).
-@y
-このドキュメントには多くのプロジェクトが含まれていて、そのリリース時期は異なります。**プルリクエストを行う対象が、その時点でまだリリースされていない機能に関するものである場合に限り、リクエスト対象はそのプロジェクトの `vnext`ブランチとしてください。** このブランチは`master`からクローンにより生成されたものであり、（移行のタイミングで）そのプロジェクトの`master`ブランチのドキュメントがインポートされています。こうすることでコミット履歴が保持されます。そのプロジェクトが正式リリースされる際には、`vnext` ブランチが `master` にマージされることになるので、貢献した作業が [https://docs.docker.com/](/) のもとで公開されることになります。
-@z
-
-@x
-The following `vnext` branches currently exist:
-@y
-`vnext` ブランチは以下のところに存在しています。
-@z
-
-@x
-- **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
-  docs for upcoming features in the [docker/docker](https://github.com/moby/moby/)
-  project
-@y
-- **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
-  [docker/docker](https://github.com/moby/moby/)プロジェクトの次期機能に関するドキュメント
-@z
-
-@x
-- **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**
-  docs for upcoming features in the [docker/compose](https://github.com/docker/compose/)
-  project
-@y
-- **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**
-  [docker/compose](https://github.com/docker/compose/)プロジェクトの次期機能に関するドキュメント
-@z
-
-@x
-- **[vnext-distribution](https://github.com/docker/docker.github.io/tree/vnext-distribution):**
-  docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
-  project
-@y
-- **[vnext-distribution](https://github.com/docker/docker.github.io/tree/vnext-distribution):**
-  [docker/distribution](https://github.com/docker/distribution/)プロジェクトの次期機能に関するドキュメント
-@z
-
-@x
-- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
-  docs for upcoming features in the [docker/opensource](https://github.com/docker/opensource/)
-  project
-@y
-- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
-  [docker/opensource](https://github.com/docker/opensource/)プロジェクトの次期機能に関するドキュメント
-@z
-
-@x
-- **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
-  docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
-  project
-@y
-- **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
-  [docker/swarm](https://github.com/docker/swarm/)プロジェクトの次期機能に関するドキュメント
-@z
-
-@x
-- **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
-  docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
-  project
-@y
-- **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
-  [docker/toolbox](https://github.com/docker/toolbox/)プロジェクトの次期機能に関するドキュメント
-@z
-
-@x
-- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
-  docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
-  project
-@y
-- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
-  [docker/kitematic](https://github.com/docker/kitematic/)プロジェクトの次期機能に関するドキュメント@z
 
 @x
 ## Collaborate on a pull request

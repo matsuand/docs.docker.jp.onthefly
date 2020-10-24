@@ -6,7 +6,6 @@
 datafolder: engine-cli
 datafile: docker_context
 title: docker context
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -17,7 +16,6 @@ in the source repository on GitHub:
 datafolder: engine-cli
 datafile: docker_context
 title: docker context
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

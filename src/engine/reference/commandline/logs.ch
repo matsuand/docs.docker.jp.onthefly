@@ -8,7 +8,6 @@ datafile: docker_logs
 title: docker logs
 redirect_from:
   - /edge/engine/reference/commandline/logs/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_logs
 title: docker logs
 redirect_from:
   - /edge/engine/reference/commandline/logs/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

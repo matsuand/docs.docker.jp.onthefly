@@ -645,6 +645,9 @@ CPPFLAGS
 LDFLAGS
 CFLAGS
 CC
+CONFIG_YML
+JEKYLL_ENV
+enable_production
 abs_sitedestdir
 SITEDESTDIR
 SITEDIR_DEFINED
@@ -746,6 +749,7 @@ with_uploaddir
 with_uploadurl
 with_uploadbase
 with_sitedestdir
+enable_production
 enable_dependency_tracking
 '
       ac_precious_vars='build_alias
@@ -1376,6 +1380,7 @@ Optional Features:
   --enable-maintainer-mode
                           enable make rules and dependencies not useful (and
                           sometimes confusing) to the casual installer
+  --enable-production     Specify production build
   --enable-dependency-tracking
                           do not reject slow dependency extractors
   --disable-dependency-tracking
@@ -3064,6 +3069,25 @@ fi
 
 
 abs_sitedestdir=`(cd $SITEDESTDIR && pwd)`
+
+
+# Check whether --enable-production was given.
+if test "${enable_production+set}" = set; then :
+  enableval=$enable_production; enable_production=$enableval
+else
+  enable_production=no
+fi
+
+
+
+if test x"${enable_production}" = x"yes"; then
+  JEKYLL_ENV="production"
+  CONFIG_YML="_config.yml,_config_production.yml"
+else
+  JEKYLL_ENV="development"
+  CONFIG_YML="_config.yml"
+fi
+
 
 
 

@@ -8,7 +8,6 @@ datafile: docker_swarm_leave
 title: docker swarm leave
 redirect_from:
   - /edge/engine/reference/commandline/swarm_leave/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_swarm_leave
 title: docker swarm leave
 redirect_from:
   - /edge/engine/reference/commandline/swarm_leave/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

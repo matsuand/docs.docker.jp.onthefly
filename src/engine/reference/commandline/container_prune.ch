@@ -8,7 +8,6 @@ datafile: docker_container_prune
 title: docker container prune
 redirect_from:
   - /edge/engine/reference/commandline/container_prune/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_container_prune
 title: docker container prune
 redirect_from:
   - /edge/engine/reference/commandline/container_prune/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

@@ -8,7 +8,6 @@ datafile: docker_volume_prune
 title: docker volume prune
 redirect_from:
   - /edge/engine/reference/commandline/volume_prune/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_volume_prune
 title: docker volume prune
 redirect_from:
   - /edge/engine/reference/commandline/volume_prune/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

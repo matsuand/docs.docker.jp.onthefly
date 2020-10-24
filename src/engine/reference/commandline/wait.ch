@@ -8,7 +8,6 @@ datafile: docker_wait
 title: docker wait
 redirect_from:
   - /edge/engine/reference/commandline/wait/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_wait
 title: docker wait
 redirect_from:
   - /edge/engine/reference/commandline/wait/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

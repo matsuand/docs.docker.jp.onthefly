@@ -11,7 +11,6 @@ redirect_from:
   - /engine/reference/commandline/deploy/
   - /edge/engine/reference/commandline/deploy/
   - /edge/engine/reference/commandline/stack_deploy/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -27,7 +26,6 @@ redirect_from:
   - /edge/engine/reference/commandline/deploy/
   - /edge/engine/reference/commandline/stack_deploy/
   - /edge/engine/reference/commandline/stack_deploy/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

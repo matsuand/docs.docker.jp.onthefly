@@ -8,7 +8,6 @@ datafile: docker_plugin_rm
 title: docker plugin rm
 redirect_from:
   - /edge/engine/reference/commandline/plugin_rm/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_plugin_rm
 title: docker plugin rm
 redirect_from:
   - /edge/engine/reference/commandline/plugin_rm/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

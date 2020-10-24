@@ -8,7 +8,6 @@ datafile: docker_unpause
 title: docker unpause
 redirect_from:
   - /edge/engine/reference/commandline/unpause/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_unpause
 title: docker unpause
 redirect_from:
   - /edge/engine/reference/commandline/unpause/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

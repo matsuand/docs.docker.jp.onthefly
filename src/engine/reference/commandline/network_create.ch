@@ -8,7 +8,6 @@ datafile: docker_network_create
 title: docker network create
 redirect_from:
   - /edge/engine/reference/commandline/network_create/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_network_create
 title: docker network create
 redirect_from:
   - /edge/engine/reference/commandline/network_create/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

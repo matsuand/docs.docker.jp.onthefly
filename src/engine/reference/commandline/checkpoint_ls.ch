@@ -8,7 +8,6 @@ datafile: docker_checkpoint_ls
 title: docker checkpoint ls
 redirect_from:
   - /edge/engine/reference/commandline/checkpoint_ls/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_checkpoint_ls
 title: docker checkpoint ls
 redirect_from:
   - /edge/engine/reference/commandline/checkpoint_ls/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

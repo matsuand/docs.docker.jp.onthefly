@@ -417,32 +417,133 @@ Service-to-service communication is implemented by the [Security Groups](https:/
 @z
 
 @x
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose). 
 @y
 {% comment %}
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose). 
 {% endcomment %}
 Docker Compose CLI においてアプリケーションデプロイを行うサービスは、[AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} 上に登録されます。
 これは `<サービス>.<composeプロジェクト名>.local` という形の完全修飾ドメイン名として表わされています。
 サービスが、依存するサービスを引き出す際には、この完全修飾ドメイン名を利用するか、あるいは短いサービス名（docker-compose において用いられるもの）が利用されます。
-完全修飾ドメイン名は Docker Compose CLI が自動的に、環境変数`LOCALDOMAIN`に設定します。
-これを使った処理は、Docker イメージにドメイン名解決の機能が実装されていれば、即座に動作します。
-（Alpine ベースの Docker イメージを利用している場合など）その機能が実装されていない場合は、Docker イメージに [エンドポイントスクリプト]({{ site.baseurl }}/develop/develop-images/dockerfile_best-practices/#entrypoint) を用意して、そのオプションを有効にする必要があります。
 @z
 
 @x
-```console
-#! /bin/sh
+### Volumes
+@y
+### Volumes
+@z
 
-if [ "${LOCALDOMAIN}x" != "x" ]; then echo "search ${LOCALDOMAIN}" >> /etc/resolv.conf; fi
-exec "$@"
+@x
+ECS integration supports volume management based on Amazon Elastic File System (Amazon EFS).
+For a Compose file to declare a `volume`, ECS integration will define creation of an EFS
+file system within the CloudFormation template, with `Retain` policy so data won't
+be deleted on application shut-down. If the same application (same project name) is
+deployed again, the file system will be re-attached to offer the same user experience
+developers are used to with docker-compose.
+@y
+ECS integration supports volume management based on Amazon Elastic File System (Amazon EFS).
+For a Compose file to declare a `volume`, ECS integration will define creation of an EFS
+file system within the CloudFormation template, with `Retain` policy so data won't
+be deleted on application shut-down. If the same application (same project name) is
+deployed again, the file system will be re-attached to offer the same user experience
+developers are used to with docker-compose.
+@z
+
+@x
+If required, the initial file system can be customized using `driver-opts`:
+@y
+If required, the initial file system can be customized using `driver-opts`:
+@z
+
+@x
+```yaml
+volumes:
+  my-data: 
+    driver_opts:
+      # Filesystem configuration
+      backup_policy: ENABLED
+      lifecycle_policy: AFTER_14_DAYS
+      performance_mode: maxIO
+      throughput_mode: provisioned
+      provisioned_throughput: 1024
 ```
 @y
-```console
-#! /bin/sh
+```yaml
+volumes:
+  my-data: 
+    driver_opts:
+      # Filesystem configuration
+      backup_policy: ENABLED
+      lifecycle_policy: AFTER_14_DAYS
+      performance_mode: maxIO
+      throughput_mode: provisioned
+      provisioned_throughput: 1024
+```
+@z
 
-if [ "${LOCALDOMAIN}x" != "x" ]; then echo "search ${LOCALDOMAIN}" >> /etc/resolv.conf; fi
-exec "$@"
+@x
+File systems created by executing `docker compose` on AWS can be listed using 
+`docker volume ls` and removed with `docker volume rm <filesystemID>`.
+@y
+File systems created by executing `docker compose` on AWS can be listed using 
+`docker volume ls` and removed with `docker volume rm <filesystemID>`.
+@z
+
+@x
+An existing file system can also be used for users who already have data stored on EFS
+or want to use a file system created by another Compose stack.
+@y
+An existing file system can also be used for users who already have data stored on EFS
+or want to use a file system created by another Compose stack.
+@z
+
+@x
+```yaml
+volumes:
+  my-data: 
+    external: true
+    name: fs-123abcd
+```
+@y
+```yaml
+volumes:
+  my-data: 
+    external: true
+    name: fs-123abcd
+```
+@z
+
+@x
+Accessing a volume from a container can introduce POSIX user ID 
+permission issues, as Docker images can define arbitrary user ID / group ID for the
+process to run inside a container. However, the same `uid:gid` will have to match
+POSIX permissions on the file system. To work around the possible conflict, you can set the volume
+`uid` and `gid` to be used when accessing a volume:
+@y
+Accessing a volume from a container can introduce POSIX user ID 
+permission issues, as Docker images can define arbitrary user ID / group ID for the
+process to run inside a container. However, the same `uid:gid` will have to match
+POSIX permissions on the file system. To work around the possible conflict, you can set the volume
+`uid` and `gid` to be used when accessing a volume:
+@z
+
+@x
+```yaml
+volumes:
+  my-data: 
+    driver_opts:
+      # Access point configuration
+      uid: 0
+      gid: 0
+```
+@y
+```yaml
+volumes:
+  my-data: 
+    driver_opts:
+      # Access point configuration
+      uid: 0
+      gid: 0
 ```
 @z
 
@@ -725,6 +826,46 @@ containers during the update.
 {% endcomment %}
 デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
 またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。
+@z
+
+@x
+### Auto scaling
+@y
+### Auto scaling
+@z
+
+@x
+The Compose file model does not define any attributes to declare auto-scaling conditions.
+Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
+well as cpu _or_ memory to define target metric, expressed as resource usage percent.
+@y
+The Compose file model does not define any attributes to declare auto-scaling conditions.
+Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
+well as cpu _or_ memory to define target metric, expressed as resource usage percent.
+@z
+
+@x
+```yaml
+services:
+  foo:
+    deploy:
+      x-aws-autoscaling:
+        min: 1
+        max: 10 #required
+        cpu: 75 
+        # mem: - mutualy exlusive with cpu
+```
+@y
+```yaml
+services:
+  foo:
+    deploy:
+      x-aws-autoscaling:
+        min: 1
+        max: 10 #required
+        cpu: 75 
+        # mem: - mutualy exlusive with cpu
+```
 @z
 
 @x

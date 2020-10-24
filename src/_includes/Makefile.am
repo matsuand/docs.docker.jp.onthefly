@@ -24,14 +24,11 @@ bases = \
 	kubernetes-mac-win   \
 	registry
 htmlbases = \
-	body             \
-	body-landing     \
 	footer           \
 	head             \
 	header           \
 	navigation       \
 	read_time        \
-	side-menu        \
 	theme-switch     \
 	toc_pure_liquid
 

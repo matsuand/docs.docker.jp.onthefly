@@ -8,7 +8,6 @@ datafile: docker_secret_rm
 title: docker secret rm
 redirect_from:
   - /edge/engine/reference/commandline/secret_rm/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_secret_rm
 title: docker secret rm
 redirect_from:
   - /edge/engine/reference/commandline/secret_rm/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

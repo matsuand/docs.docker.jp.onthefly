@@ -6,7 +6,6 @@
 datafolder: buildx
 datafile: docker_buildx_prune
 title: docker buildx prune
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -17,7 +16,6 @@ in the source repository on GitHub:
 datafolder: buildx
 datafile: docker_buildx_prune
 title: docker buildx prune
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

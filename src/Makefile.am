@@ -22,7 +22,7 @@ thisdate = `date +'%Y/%m/%d'`
 commitdate = `(cd @abs_origdir@ && git log -1 --pretty=format:"%ad %h" --date=short) | sed "s|\-|/|g"`
 
 .PHONY: all
-all: ctie copyorigs tgtdir $(srcs_with_prefix) $(copies_with_prefix) _config.yml
+all: ctie copyorigs tgtdir $(srcs_with_prefix) $(copies_with_prefix) _config.yml _config_production.yml
 
 ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
@@ -76,6 +76,8 @@ copyfiles.sub: $(top_srcdir)/bin/copymake.sh $(top_builddir)/config.log
 
 _config.yml: $(origdir)/_config.yml
 	cp -p $(origdir)/_config.yml .
+_config_production.yml: $(origdir)/_config_production.yml
+	cp -p $(origdir)/_config_production.yml .
 
 @MAINT@.PHONY: chbuild
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
@@ -83,7 +85,7 @@ _config.yml: $(origdir)/_config.yml
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
 
 .PHONY: install build
-install: all ${publishdir}/_config.yml ${publishdir}/_config_ja.yml
+install: all ${publishdir}/_config.yml ${publishdir}/_config_production.yml ${publishdir}/_config_ja.yml
 	@if test ! -d $(publishdir)/_plugins; then cp -pR $(origdir)/_plugins ${publishdir} ; fi
 	@if test ! -d $(publishdir)/_scripts; then cp -pR $(origdir)/_scripts $(publishdir) ; fi
 	@if test ! -d $(publishdir)/favicons; then cp -pR $(origdir)/favicons $(publishdir) ; fi
@@ -91,6 +93,8 @@ install: all ${publishdir}/_config.yml ${publishdir}/_config_ja.yml
 
 ${publishdir}/_config.yml: $(origdir)/_config.yml
 	@cp -p $(origdir)/_config.yml ${publishdir}
+${publishdir}/_config_production.yml: $(origdir)/_config_production.yml
+	@cp -p $(origdir)/_config_production.yml ${publishdir}
 
 ${publishdir}/_config_ja.yml: $(srcdir)/_config_ja.yml.in $(top_builddir)/config.log
 	@sed -e "s|__URL__|${publishurl}|" \
@@ -104,7 +108,7 @@ ${publishdir}/_config_ja.yml: $(srcdir)/_config_ja.yml.in $(top_builddir)/config
 .PHONY: build
 build: install
 	@rm -f ${sitedestdir}/index.html
-	(cd $(publishdir) && rbenv exec jekyll build --trace --config _config.yml,_config_ja.yml)
+	(cd $(publishdir) && rbenv exec jekyll build --config $(CONFIG_YML),_config_ja.yml)
 
 	@find ${sitedestdir}/{,get-docker/}index.html | xargs \
 	  sed -i -e "s|TEMPTITLE|<p><b>暫定公開中 ${thisdate} (${commitdate} 対応)</b></p>|"
@@ -115,7 +119,9 @@ build: install
 	        -e "s|url(\"/images|url(\"/$(uploadbase)/images|g" \
 	        -e "s|url(\"../fonts|url(\"/$(uploadbase)/fonts|g" $(sitedestdir)/css/style.css
 	@sed -i -e "s|SUBBASEURL|${uploadbase}|g" ${sitedestdir}/js/docs.js
-	@sed -i -e "/lastmod/d" ${sitedestdir}/sitemap.xml
+	@if test x"${enable_production}" = xyes; then \
+	  sed -i -e "/lastmod/d" ${sitedestdir}/sitemap.xml ; \
+	fi
 
 .PHONY: rewriteurls
 rewriteurls:
@@ -167,7 +173,9 @@ rewriteurls:
 	@sed -i -e "s|src=\"\.\./|src=\"$(uploadurl)/|g" $(uploaddir)/index.html
 	@sed -i -e "s|src=\"\.\./|src=\"$(uploadurl)/|g" $(uploaddir)/get-docker/index.html
 	@sed -i -e "s|$(publishurl)/$(publishbase)|$(uploadurl)/$(uploadbase)|g" $(uploaddir)/robots.txt
-	@sed -i -e "s|$(publishurl)/$(publishbase)|$(uploadurl)/$(uploadbase)|g" $(uploaddir)/sitemap.xml
+	@if test x"${enable_production}" = xyes; then \
+	  sed -i -e "s|$(publishurl)/$(publishbase)|$(uploadurl)/$(uploadbase)|g" $(uploaddir)/sitemap.xml ; \
+	fi
 	@sed -i -e "103s|href=\"|href=\"/$(uploadbase)|" \
 		-e "132s|href=\"|href=\"/$(uploadbase)|" \
 		-e "143s|href=\"|href=\"/$(uploadbase)|" \

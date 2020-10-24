@@ -825,15 +825,12 @@ Homebrew あるいは別の方法により `kubectl` をインストールして
 @z
 
 @x
-  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: .with-border
-  width="400px"}
+  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
 @y
   {% comment %}
-  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: .with-border
-  width="400px"}
+  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
   {% endcomment %}
-  ![Docker メニュー上の Kubernetes](images/kubernetes/kube-context.png){: .with-border
-  width="400px"}
+  ![Docker メニュー上の Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
 @z
 
 @x

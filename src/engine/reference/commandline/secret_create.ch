@@ -8,7 +8,6 @@ datafile: docker_secret_create
 title: docker secret create
 redirect_from:
   - /edge/engine/reference/commandline/secret_create/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -21,7 +20,6 @@ datafile: docker_secret_create
 title: docker secret create
 redirect_from:
   - /edge/engine/reference/commandline/secret_create/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

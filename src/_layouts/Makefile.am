@@ -14,8 +14,9 @@ ctie:
 
 htmlbases = \
 	archive-redirect \
-	docs \
+	docs       \
 	engine-api \
+	landing    \
 	redirect
 
 ch_htmls = $(htmlbases:=.htmlch)
