@@ -2,12 +2,7 @@
 
 ドキュメント生成に貢献して頂ける方を歓迎します。そこで、このリポジトリ内での作業を、できるだけやりやすくしたいと思っています。まずはじめに取り決めて頂きたいことは、どのブランチに基づいて作業を進めるかです。よく分からない場合は、聞いて頂ければお答えします。あなたが誤ったブランチに基づいて作業していることにレビューアーが気づいたら、リベースして頂くようにお伝えします。
 
->**メモ**: Docker プロジェクトへコード提供をする場合は、[貢献のためのガイドライン](/opensource/) を参照してください。
-
-### 編集対象外のファイル
-
-[`.NOT_EDITED_HERE.yaml`](/_data/not_edited_here.yaml) というファイルの `path:` キーに列記されているファイルやディレクトリは、他のリポジトリにおいて管理されているものです。そのためこのリポジトリ内では編集しないでください。そのようなファイルに対してプルリクエストをあげてもリジェクトされます。
-その編集は、YAML ファイル内の `source:` キーに示されているレジストリやパスにおけるファイルに対して行ってください。
+>**メモ**: Docker プロジェクトへコード提供をする場合は、[貢献のためのガイドライン](/opensource/index.md) を参照してください。
 
 ### クィックスタート
 
@@ -28,40 +23,7 @@
 
 >グラフィックを作成するのはお好きですか？ 良質のグラフィックは優れたドキュメントを作り出すための重要な要素です。グラフィックに関する貢献も特に歓迎します。
 
-### 各プロジェクトにおける特定の新機能
-{: #specific-new-features-for-a-project }
-
-このドキュメントには多くのプロジェクトが含まれていて、そのリリース時期は異なります。**プルリクエストを行う対象が、その時点でまだリリースされていない機能に関するものである場合に限り、リクエスト対象はそのプロジェクトの `vnext`ブランチとしてください。** このブランチは`master`からクローンにより生成されたものであり、（移行のタイミングで）そのプロジェクトの`master`ブランチのドキュメントがインポートされています。こうすることでコミット履歴が保持されます。そのプロジェクトが正式リリースされる際には、`vnext` ブランチが `master` にマージされることになるので、貢献した作業が [https://docs.docker.com/](/) のもとで公開されることになります。
-
-`vnext` ブランチは以下のところに存在しています。
-
-- **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
-  [docker/docker](https://github.com/moby/moby/)プロジェクトの次期機能に関するドキュメント
-
-- **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**
-  [docker/compose](https://github.com/docker/compose/)プロジェクトの次期機能に関するドキュメント
-
-- **[vnext-distribution](https://github.com/docker/docker.github.io/tree/vnext-distribution):**
-  [docker/distribution](https://github.com/docker/distribution/)プロジェクトの次期機能に関するドキュメント
-
-- **[vnext-opensource](https://github.com/docker/docker.github.io/tree/vnext-opensource):**
-  [docker/opensource](https://github.com/docker/opensource/)プロジェクトの次期機能に関するドキュメント
-
-- **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
-  [docker/swarm](https://github.com/docker/swarm/)プロジェクトの次期機能に関するドキュメント
-
-- **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
-  [docker/toolbox](https://github.com/docker/toolbox/)プロジェクトの次期機能に関するドキュメント
-
-- **[vnext-kitematic](https://github.com/docker/docker.github.io/tree/vnext-kitematic):**
-  [docker/kitematic](https://github.com/docker/kitematic/)プロジェクトの次期機能に関するドキュメント@z
-
-@x
-## Collaborate on a pull request
-@y
 ## プルリクエストでの共同作業
-
-## Collaborate on a pull request
 
 プルリクエストを行っている他の貢献者が特に設定をしていない限り、その貢献者に対してコミットをプルすることができます。コマンドラインから追加やリモートのフェッチ、ブランチからのチェックアウト、コメントの追加などを行います。もっと簡単に Github ウェブ画面からコミットすることもできます。これを行うには**File**画面に表示されたファイルに対応した鉛筆アイコンをクリックします。
 

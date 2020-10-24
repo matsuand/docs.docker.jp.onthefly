@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-23 14:08:14 +0900 -->
+<!-- Page generated 2020-10-24 18:31:25 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -17,8 +17,8 @@
   <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
   <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
   <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
-  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script>
-  <script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
   <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
   <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
   <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ECS での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="ECS において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-23T14:08:14+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T18:31:25+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/ecs-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-23T14:08:14+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T18:31:25+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ECS での Docker コンテナーのデプロイ","description":"ECS において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/ecs-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,14 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ECS での Docker コンテナーのデプロイ</h1><span class="reading-time" title="Estimated reading time">
-  <span class="reading-time-label">読む時間の目安: </span>
-  
-  
-    6 分
-  
-</span>
-
+                        <section class="section"><h1>ECS での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p>
 <h2 id="overview">概要</h2>
 
 <p>Docker Compose CLI は、Amazon EC2 コンテナーサービス（Amazon EC2 Container Service; ECS）の中で、ネイティブな Docker コマンドの利用を可能にします。
@@ -237,15 +230,54 @@ services:
 
 <p>Docker Compose CLI においてアプリケーションデプロイを行うサービスは、<a href="https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html" target="_blank" rel="noopener" class="_">AWS Cloud Map</a> 上に登録されます。
 これは <code class="language-plaintext highlighter-rouge">&lt;サービス&gt;.&lt;composeプロジェクト名&gt;.local</code> という形の完全修飾ドメイン名として表わされています。
-サービスが、依存するサービスを引き出す際には、この完全修飾ドメイン名を利用するか、あるいは短いサービス名（docker-compose において用いられるもの）が利用されます。
-完全修飾ドメイン名は Docker Compose CLI が自動的に、環境変数<code class="language-plaintext highlighter-rouge">LOCALDOMAIN</code>に設定します。
-これを使った処理は、Docker イメージにドメイン名解決の機能が実装されていれば、即座に動作します。
-（Alpine ベースの Docker イメージを利用している場合など）その機能が実装されていない場合は、Docker イメージに <a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/#entrypoint">エンドポイントスクリプト</a> を用意して、そのオプションを有効にする必要があります。</p>
+サービスが、依存するサービスを引き出す際には、この完全修飾ドメイン名を利用するか、あるいは短いサービス名（docker-compose において用いられるもの）が利用されます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="o">!</span> /bin/sh
-<span class="go">
-</span><span class="gp">if [ "$</span><span class="o">{</span>LOCALDOMAIN<span class="o">}</span>x<span class="s2">" != "</span>x<span class="s2">" ]; then echo "</span>search <span class="k">${</span><span class="nv">LOCALDOMAIN</span><span class="k">}</span><span class="s2">" &gt;&gt; /etc/resolv.conf; fi
-</span><span class="gp">exec "$</span><span class="s2">@"</span>
+<h3 id="volumes">Volumes</h3>
+
+<p>ECS integration supports volume management based on Amazon Elastic File System (Amazon EFS).
+For a Compose file to declare a <code class="language-plaintext highlighter-rouge">volume</code>, ECS integration will define creation of an EFS
+file system within the CloudFormation template, with <code class="language-plaintext highlighter-rouge">Retain</code> policy so data won’t
+be deleted on application shut-down. If the same application (same project name) is
+deployed again, the file system will be re-attached to offer the same user experience
+developers are used to with docker-compose.</p>
+
+<p>If required, the initial file system can be customized using <code class="language-plaintext highlighter-rouge">driver-opts</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">my-data</span><span class="pi">:</span> 
+    <span class="na">driver_opts</span><span class="pi">:</span>
+      <span class="c1"># Filesystem configuration</span>
+      <span class="na">backup_policy</span><span class="pi">:</span> <span class="s">ENABLED</span>
+      <span class="na">lifecycle_policy</span><span class="pi">:</span> <span class="s">AFTER_14_DAYS</span>
+      <span class="na">performance_mode</span><span class="pi">:</span> <span class="s">maxIO</span>
+      <span class="na">throughput_mode</span><span class="pi">:</span> <span class="s">provisioned</span>
+      <span class="na">provisioned_throughput</span><span class="pi">:</span> <span class="m">1024</span>
+</code></pre></div></div>
+
+<p>File systems created by executing <code class="language-plaintext highlighter-rouge">docker compose</code> on AWS can be listed using 
+<code class="language-plaintext highlighter-rouge">docker volume ls</code> and removed with <code class="language-plaintext highlighter-rouge">docker volume rm &lt;filesystemID&gt;</code>.</p>
+
+<p>An existing file system can also be used for users who already have data stored on EFS
+or want to use a file system created by another Compose stack.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">my-data</span><span class="pi">:</span> 
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">fs-123abcd</span>
+</code></pre></div></div>
+
+<p>Accessing a volume from a container can introduce POSIX user ID 
+permission issues, as Docker images can define arbitrary user ID / group ID for the
+process to run inside a container. However, the same <code class="language-plaintext highlighter-rouge">uid:gid</code> will have to match
+POSIX permissions on the file system. To work around the possible conflict, you can set the volume
+<code class="language-plaintext highlighter-rouge">uid</code> and <code class="language-plaintext highlighter-rouge">gid</code> to be used when accessing a volume:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">my-data</span><span class="pi">:</span> 
+    <span class="na">driver_opts</span><span class="pi">:</span>
+      <span class="c1"># Access point configuration</span>
+      <span class="na">uid</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">gid</span><span class="pi">:</span> <span class="m">0</span>
 </code></pre></div></div>
 
 <h3 id="secrets">Secrets</h3>
@@ -320,6 +352,22 @@ Docker Compose CLI では項目<code class="language-plaintext highlighter-rouge
 
 <p>デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
 またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。</p>
+
+<h3 id="auto-scaling">Auto scaling</h3>
+
+<p>The Compose file model does not define any attributes to declare auto-scaling conditions.
+Therefore, we rely on <code class="language-plaintext highlighter-rouge">x-aws-autoscaling</code> custom extension to define the auto-scaling range, as
+well as cpu <em>or</em> memory to define target metric, expressed as resource usage percent.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">x-aws-autoscaling</span><span class="pi">:</span>
+        <span class="na">min</span><span class="pi">:</span> <span class="m">1</span>
+        <span class="na">max</span><span class="pi">:</span> <span class="m">10</span> <span class="c1">#required</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s">75</span> 
+        <span class="c1"># mem: - mutualy exlusive with cpu</span>
+</code></pre></div></div>
 
 <h3 id="iam-roles">IAM ロール</h3>
 
@@ -446,15 +494,14 @@ AWS では資格情報を取得するメカニズムが用意されていて、S
 <p>Docker Compose CLI を利用していただき、ありがとうございます。
 みなさんからのフィードバックが大変重要です。
 フィードバックをいただくには、Github レポジトリ <a href="https://github.com/docker/compose-cli" target="_blank" rel="noopener" class="_">Compose CLI</a> に issue をあげてください。</p>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=AWS">AWS</a>, <a href="/docs.docker.jp.onthefly/search/?q=ECS">ECS</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=context">context</a>, <a href="/docs.docker.jp.onthefly/search/?q=Compose">Compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=deploy">deploy</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=cloud">cloud</a></span></section>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=AWS">AWS</a>, <a href="/docs.docker.jp.onthefly/search/?q=ECS">ECS</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=context">context</a>, <a href="/docs.docker.jp.onthefly/search/?q=Compose">Compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=deploy">deploy</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=cloud">cloud</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-    <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
-    <ul class="nav" id="jsTOCLeftNav"></ul>
-</div>
-
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
                         </div>
                     </nav>
                     <div class="col-toc">
