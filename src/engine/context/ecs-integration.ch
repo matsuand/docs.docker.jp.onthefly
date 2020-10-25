@@ -430,7 +430,11 @@ Docker Compose CLI においてアプリケーションデプロイを行うサ�
 @x
 ### Volumes
 @y
+{% comment %}
 ### Volumes
+{% endcomment %}
+{: #volumes }
+### ボリューム
 @z
 
 @x
@@ -441,18 +445,27 @@ be deleted on application shut-down. If the same application (same project name)
 deployed again, the file system will be re-attached to offer the same user experience
 developers are used to with docker-compose.
 @y
+{% comment %}
 ECS integration supports volume management based on Amazon Elastic File System (Amazon EFS).
 For a Compose file to declare a `volume`, ECS integration will define creation of an EFS
 file system within the CloudFormation template, with `Retain` policy so data won't
 be deleted on application shut-down. If the same application (same project name) is
 deployed again, the file system will be re-attached to offer the same user experience
 developers are used to with docker-compose.
+{% endcomment %}
+ECS 統合では Amazon Elastic File System (Amazon EFS) をベースとしたボリューム管理をサポートしています。
+ECS 統合において Compose ファイルに`volume`を宣言する際には、CloudFormation テンプレート内に EFS ファイルシステムの生成を定義します。
+`Retain`（維持）ポリシーを利用すれば、アプリケーションのシャットダウン時にデータが削除されることはありません。
+同一のアプリケーション（同一のプロジェクト名）が再度デプロイされると、ファイルシステムが再度アタッチされて、それまで開発者が行っていた docker-compose による作業を再開できます。
 @z
 
 @x
 If required, the initial file system can be customized using `driver-opts`:
 @y
+{% comment %}
 If required, the initial file system can be customized using `driver-opts`:
+{% endcomment %}
+必要であれば、ファイルシステムの初期状態は`driver-opts`を用いて変更することができます。
 @z
 
 @x
@@ -485,16 +498,23 @@ volumes:
 File systems created by executing `docker compose` on AWS can be listed using 
 `docker volume ls` and removed with `docker volume rm <filesystemID>`.
 @y
+{% comment %}
 File systems created by executing `docker compose` on AWS can be listed using 
 `docker volume ls` and removed with `docker volume rm <filesystemID>`.
+{% endcomment %}
+AWS 上において`docker compose`を実行して生成されるファイルシステムは、`docker volume ls`によって一覧確認ができます。
+また`docker volume rm <ファイルシステムID>`によって削除することができます。
 @z
 
 @x
 An existing file system can also be used for users who already have data stored on EFS
 or want to use a file system created by another Compose stack.
 @y
+{% comment %}
 An existing file system can also be used for users who already have data stored on EFS
 or want to use a file system created by another Compose stack.
+{% endcomment %}
+EFS 上にすでにデータを保存している場合や、別の Compose スタックによって生成されたファイルシステムを利用したい場合には、既存のファイルシステムを利用することもできます。
 @z
 
 @x
@@ -520,11 +540,17 @@ process to run inside a container. However, the same `uid:gid` will have to matc
 POSIX permissions on the file system. To work around the possible conflict, you can set the volume
 `uid` and `gid` to be used when accessing a volume:
 @y
+{% comment %}
 Accessing a volume from a container can introduce POSIX user ID 
 permission issues, as Docker images can define arbitrary user ID / group ID for the
 process to run inside a container. However, the same `uid:gid` will have to match
 POSIX permissions on the file system. To work around the possible conflict, you can set the volume
 `uid` and `gid` to be used when accessing a volume:
+{% endcomment %}
+コンテナーからボリュームにアクセスする際には、POSIX ユーザー ID のパーミッションに関する問題が発生する可能性があります。
+Docker イメージにおいては、コンテナー内で稼動するプロセスに対して、任意のユーザー ID およびグループ ID を定義しているからです。
+ただし`uid:gid`が同一であれば、ファイルシステム上での POSIX パーミッションに合致していなければなりません。
+このような衝突を回避するためには、ボリュームにアクセスする際に利用する`uid`と`gid`を設定します。
 @z
 
 @x
