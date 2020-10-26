@@ -295,36 +295,28 @@ See the [links reference](compose-file/compose-file-v2.md#links) for more inform
 @z
 
 @x
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](../engine/reference/commandline/stack_deploy.md) documentation.
+When deploying a Compose application on an Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+you can make use of the built-in `overlay` driver to enable multi-host communication.
 @y
 {% comment %}
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](../engine/reference/commandline/stack_deploy.md) documentation.
+When deploying a Compose application on an Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+you can make use of the built-in `overlay` driver to enable multi-host communication.
 {% endcomment %}
-> **メモ**: ここに示す手順は、[かつての Docker Swarm](swarm.md) の操作に基づいています。 
-> したがってかつてのスウォームクラスターを対象とする場合にのみ動作します。
-> Compose によるプロジェクトを、最新の統合されたスウォームモードにデプロイするには、[Docker Stacks](../engine/reference/commandline/stack_deploy.md) に示すドキュメントを参照してください。
+Docker Engine 上において [Swarm モードの有効化](../engine/swarm/index.md) を行い、Compose アプリケーションをデプロイする際には、ビルトインされている`overlay`ドライバーを利用して、複数ホスト間での通信が利用可能です。
 @z
 
 @x
-When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
+Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
+a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
+to learn about multi-host overlay networks.
 @y
 {% comment %}
-When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
+Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
+a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
+to learn about multi-host overlay networks.
 {% endcomment %}
-[Compose アプリケーションをスウォームクラスターにデプロイする](swarm.md) 際には、ビルトインの `overlay` ドライバーを利用して、コンテナー間で複数ホストによる通信を行うことが可能です。
-Compose ファイルやアプリケーションコードへの変更は必要ありません。
-@z
-
-@x
-Consult the [Getting started with multi-host networking](../network/network-tutorial-overlay.md) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
-@y
-{% comment %}
-Consult the [Getting started with multi-host networking](../network/network-tutorial-overlay.md) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
-{% endcomment %}
-[複数ホストによるネットワークをはじめよう](../network/network-tutorial-overlay.md) を参考に、スウォームクラスターの構築方法を確認してください。
-デフォルトでクラスターは `overlay` ドライバーを用います。
-ただし明示的にこれを指定することもできます。
-詳しくは後述します。
+[Swarm モードの節](../engine/swarm/index.md) を参考にして、Swarm クラスターの設定方法を確認してください。
+また [マルチホストネットワーク](../network/network-tutorial-overlay.md) を参考にして、マルチホストによる overlay ネットワークについて確認してください。
 @z
 
 @x

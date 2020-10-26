@@ -222,42 +222,6 @@ commands work with no further configuration.
 @z
 
 @x
-### Running Compose on a Swarm cluster
-@y
-{% comment %}
-### Running Compose on a Swarm cluster
-{% endcomment %}
-### スウォームクラスター上での Compose の実行
-{: #running-compose-on-a-swarm-cluster }
-@z
-
-@x
-[Docker Swarm](../swarm/overview.md), a Docker-native clustering
-system, exposes the same API as a single Docker host, which means you can use
-Compose against a Swarm instance and run your apps across multiple hosts.
-@y
-{% comment %}
-[Docker Swarm](../swarm/overview.md), a Docker-native clustering
-system, exposes the same API as a single Docker host, which means you can use
-Compose against a Swarm instance and run your apps across multiple hosts.
-{% endcomment %}
-[Docker Swarm](../swarm/overview.md) は Docker のネイティブなクラスターシステムです。
-単一 Docker ホストと同様の API を提供します。
-つまりスウォームインタンスに対しても Compose を利用することができ、また複数ホストにわたってアプリを実行することができるということです。
-@z
-
-@x
-Read more about the Compose/Swarm integration in the
-[integration guide](swarm.md).
-@y
-{% comment %}
-Read more about the Compose/Swarm integration in the
-[integration guide](swarm.md).
-{% endcomment %}
-Compose と Swarm の統合に関しては、[統合に関する説明](swarm.md)を確認してください。
-@z
-
-@x
 ## Compose documentation
 @y
 {% comment %}

@@ -167,6 +167,7 @@ AC_CONFIG_FILES([Makefile
 		 src/engine/swarm/images/Makefile
 		 src/engine/swarm/swarm-tutorial/Makefile
 		 src/engine/tutorials/Makefile
+		 src/go/Makefile
 		 src/get-started/Makefile
 		 src/get-started/images/Makefile
 		 src/get-started/nodejs/Makefile
