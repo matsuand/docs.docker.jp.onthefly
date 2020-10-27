@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-10-27 14:05:18 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>クィックスタート: Compose と Rails | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="クィックスタート: Compose と Rails" />
   <meta property="og:description" content="Rails を使って Docker Compose をはじめる。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-27T14:05:18+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/rails/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-27T14:05:18+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"クィックスタート: Compose と Rails","description":"Rails を使って Docker Compose をはじめる。","url":"https://docs.docker.com/compose/rails/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -165,27 +165,29 @@ gem 'rails', '~&gt;5'
 （データベースは既存の PostgreSQL イメージにより動作します。ウェブアプリはカレントディレクトリ内に生成されます。）
 また、リンクによってそれを結び合わせることが設定されていて、ウェブアプリのポートは外部に公開されています。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '3'
-services:
-  db:
-    image: postgres
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: password
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid &amp;&amp; bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/myapp
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.8"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./tmp/db:/var/lib/postgresql/data</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">bash -c "rm -f tmp/pids/server.pid &amp;&amp; bundle exec rails s -p 3000 -b '0.0.0.0'"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">.:/myapp</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>ヒント</strong>: このファイルの拡張子は<code class="language-plaintext highlighter-rouge">.yml</code>と<code class="language-plaintext highlighter-rouge">.yaml</code>のどちらでも構いません。</p>
+  <p><strong>ヒント</strong></p>
+
+  <p>このファイルの拡張子は<code class="language-plaintext highlighter-rouge">.yml</code>と<code class="language-plaintext highlighter-rouge">.yaml</code>のどちらでも構いません。</p>
 </blockquote>
 
 <h3 id="build-the-project">プロジェクトのビルド</h3>

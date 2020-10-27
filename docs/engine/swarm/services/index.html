@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-10-27 14:05:18 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Swarm へのサービスデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Swarm へのサービスデプロイ" />
   <meta property="og:description" content="Deploy services to a swarm" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-27T14:05:18+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/swarm/services/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-27T14:05:18+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Swarm へのサービスデプロイ","description":"Deploy services to a swarm","url":"https://docs.docker.com/engine/swarm/services/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Swarm へのサービスデプロイ</h1><p><em class="reading-time">読む時間の目安: 40 分</em></p>
+                        <section class="section"><h1>Swarm へのサービスデプロイ</h1><p><em class="reading-time">読む時間の目安: 39 分</em></p>
 <p>Swarm サービスは <strong>宣言型</strong> モデルを採用しています。
 サービスに望むべき状態を定義して、その状態維持を Docker に委ねるものです。
 この状態には以下のような情報があります（ただしこれだけではありません）。</p>
@@ -422,11 +422,9 @@ service’s image.</p>
 <p>Each tag represents a digest, similar to a Git hash. Some tags, such as
 <code class="language-plaintext highlighter-rouge">latest</code>, are updated often to point to a new digest. Others, such as
 <code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>, represent a released software version and are not expected to
-update to point to a new digest often if at all. In Docker 1.13 and higher, when
-you create a service, it is constrained to create tasks using a specific digest
-of an image until you update the service using <code class="language-plaintext highlighter-rouge">service update</code> with the
-<code class="language-plaintext highlighter-rouge">--image</code> flag. If you use an older version of Docker Engine, you must remove
-and re-create the service to update its image.</p>
+update to point to a new digest often if at all. When you create a service, it
+is constrained to create tasks using a specific digest of an image until you
+update the service using <code class="language-plaintext highlighter-rouge">service update</code> with the <code class="language-plaintext highlighter-rouge">--image</code> flag.</p>
 
 <p>When you run <code class="language-plaintext highlighter-rouge">service update</code> with the <code class="language-plaintext highlighter-rouge">--image</code> flag, the swarm manager queries
 Docker Hub or your private Docker registry for the digest the tag currently
@@ -513,11 +511,10 @@ choice for many types of services.</p>
   </li>
   <li>
     <p><a href="#publish-a-services-ports-directly-on-the-swarm-node">You can publish a service task’s port directly on the swarm node</a>
-where that service is running. This feature is available in Docker 1.13 and
-higher. This bypasses the routing mesh and provides the maximum flexibility,
-including the ability for you to develop your own routing framework. However,
-you are responsible for keeping track of where each task is running and
-routing requests to the tasks, and load-balancing across the nodes.</p>
+where that service is running. This bypasses the routing mesh and provides the
+maximum flexibility, including the ability for you to develop your own routing
+framework. However, you are responsible for keeping track of where each task is
+running and routing requests to the tasks, and load-balancing across the nodes.</p>
   </li>
 </ul>
 
@@ -662,7 +659,7 @@ flag. For more information, see
 
 <h3 id="customize-a-services-isolation-mode">Customize a service’s isolation mode</h3>
 
-<p>Docker 17.12 CE and higher allow you to specify a swarm service’s isolation
+<p>Docker allows you to specify a swarm service’s isolation
 mode. <strong>This setting applies to Windows hosts only and is ignored for Linux
 hosts.</strong> The isolation mode can be one of the following:</p>
 
@@ -967,18 +964,12 @@ to the configuration that was in place before the most recent
   my_web
 </code></pre></div></div>
 
-<p>In Docker 17.04 and higher, you can configure a service to roll back
-automatically if a service update fails to deploy. See
-<a href="#automatically-roll-back-if-an-update-fails">Automatically roll back if an update fails</a>.</p>
+<p>You can configure a service to roll back automatically if a service update fails
+to deploy. See <a href="#automatically-roll-back-if-an-update-fails">Automatically roll back if an update fails</a>.</p>
 
-<p>Related to the new automatic rollback feature, in Docker 17.04 and higher,
-manual rollback is handled at the server side, rather than the client, if the
-daemon is running Docker 17.04 or higher. This allows manually-initiated
-rollbacks to respect the new rollback parameters. The client is version-aware,
-so it still uses the old method against an older daemon.</p>
-
-<p>Finally, in Docker 17.04 and higher, <code class="language-plaintext highlighter-rouge">--rollback</code> cannot be used in conjunction
-with other flags to <code class="language-plaintext highlighter-rouge">docker service update</code>.</p>
+<p>Manual rollback is handled at the server side, which allows manually-initiated
+rollbacks to respect the new rollback parameters. Note that <code class="language-plaintext highlighter-rouge">--rollback</code> cannot
+be used in conjunction with other flags to <code class="language-plaintext highlighter-rouge">docker service update</code>.</p>
 
 <h3 id="automatically-roll-back-if-an-update-fails">Automatically roll back if an update fails</h3>
 
