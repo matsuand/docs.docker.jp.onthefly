@@ -84,24 +84,26 @@ The **Pro** plan includes unlimited public repositories, unlimited private repos
 @x
 > **Note**
 >
-> Pro plans allow one service account for private repositories. For more information, see [service accounts](../repos.md#service-accounts).
+> Pro plans allow one service account for private repositories. For more information, see [service accounts](../repos.md#service-accounts). If you already have more than one collaborator in your private repository, you’ll not be able to add any further collaborators. Any new private repository that you create will be restricted to one service account.
 @y
 {% comment %}
 > **Note**
 >
-> Pro plans allow one service account for private repositories. For more information, see [service accounts](../repos.md#service-accounts).
+> Pro plans allow one service account for private repositories. For more information, see [service accounts](../repos.md#service-accounts). If you already have more than one collaborator in your private repository, you’ll not be able to add any further collaborators. Any new private repository that you create will be restricted to one service account.
 {% endcomment %}
 > **メモ**
 >
 > プロプランでは、プライベートリポジトリに対してサービスアカウントを 1 つだけ利用可能です。
 > 詳しくは [サービスアカウント](../repos.md#service-accounts) を参照してください。
+> プライベートリポジトリにおいてすでに複数の協力者を設定している場合は、それ以上の協力者を追加することはできません。
+> 新たに生成するプライベートリポジトリでは 1 つのサービスアカウントに制限されます。
 @z
 
 @x
-The **Free** plan includes unlimited public repositories and unlimited collaborators for public repositories and zero collaborators for private repositories at no cost per month.
+The **Free** plan includes unlimited public repositories and unlimited collaborators for public repositories and zero service accounts for private repositories at no cost per month.
 @y
 {% comment %}
-The **Free** plan includes unlimited public repositories and unlimited collaborators for public repositories and zero collaborators for private repositories at no cost per month.
+The **Free** plan includes unlimited public repositories and unlimited collaborators for public repositories and zero service accounts for private repositories at no cost per month.
 {% endcomment %}
 **無料**プランでは、無制限のパブリックリポジトリ、パブリックリポジトリに対する無制限の協力者が利用できますが、プライベートリポジトリにおいての協力者は利用できません。
 月額は無料です。

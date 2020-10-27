@@ -812,18 +812,16 @@ you demote or remove a manager.
 
 @x
 Docker manager nodes store the swarm state and manager logs in the
-`/var/lib/docker/swarm/` directory. In 1.13 and higher, this data includes the
-keys used to encrypt the Raft logs. Without these keys, you cannot restore the
-swarm.
+`/var/lib/docker/swarm/` directory. This data includes the keys used to encrypt
+the Raft logs. Without these keys, you cannot restore the swarm.
 @y
 {% comment %}
 Docker manager nodes store the swarm state and manager logs in the
-`/var/lib/docker/swarm/` directory. In 1.13 and higher, this data includes the
-keys used to encrypt the Raft logs. Without these keys, you cannot restore the
-swarm.
+`/var/lib/docker/swarm/` directory. This data includes the keys used to encrypt
+the Raft logs. Without these keys, you cannot restore the swarm.
 {% endcomment %}
 マネージャーノードは、Swarm の状態とマネージャーログを`/var/lib/docker/swarm/`ディレクトリに保存しています。
-バージョン 1.13 またはそれ以降においては、そのディレクトリに Raft ログの暗号化に用いる鍵も含まれています。
+そのディレクトリに Raft ログの暗号化に用いる鍵も含まれています。
 この鍵がない状態では、Swarm を復元することはできません。
 @z
 
@@ -1291,20 +1289,18 @@ Swarm に新たなノードを参加させたり、あるいは利用不能だ�
 @z
 
 @x
-In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
-`docker service update` command to force the service to redistribute its tasks
-across the available worker nodes. This causes the service tasks to restart.
-Client applications may be disrupted. If you have configured it, your service
-uses a [rolling update](swarm-tutorial/rolling-update.md).
+You can use the `--force` or `-f` flag with the `docker service update` command
+to force the service to redistribute its tasks across the available worker nodes.
+This causes the service tasks to restart. Client applications may be disrupted.
+If you have configured it, your service uses a [rolling update](swarm-tutorial/rolling-update.md).
 @y
 {% comment %}
-In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
-`docker service update` command to force the service to redistribute its tasks
-across the available worker nodes. This causes the service tasks to restart.
-Client applications may be disrupted. If you have configured it, your service
-uses a [rolling update](swarm-tutorial/rolling-update.md).
+You can use the `--force` or `-f` flag with the `docker service update` command
+to force the service to redistribute its tasks across the available worker nodes.
+This causes the service tasks to restart. Client applications may be disrupted.
+If you have configured it, your service uses a [rolling update](swarm-tutorial/rolling-update.md).
 {% endcomment %}
-Docker 1.13 およびそれ以降においては、`docker service update`コマンドに`--force`あるいは`-f`フラグをつけて実行することで、利用可能なワーカーノードに対して強制的にタスクを再分散します。
+`docker service update`コマンドに`--force`あるいは`-f`フラグをつけて実行すると、利用可能なワーカーノードに対して強制的にタスクを再分散します。
 これを行うとサービスタスクは再起動します。
 このときにはクライアントアプリケーションが中断するかもしれません。
 設定によってサービスが [ローリングアップデート](swarm-tutorial/rolling-update.md) を利用するようにできます。

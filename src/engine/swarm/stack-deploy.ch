@@ -40,26 +40,30 @@ To run through this tutorial, you need:
 @z
 
 @x
-1.  A Docker Engine of version 1.13.0 or later, running in [swarm mode](swarm-mode.md).
+1.  A Docker Engine running in [swarm mode](swarm-mode.md).
     If you're not familiar with swarm mode, you might want to read
     [Swarm mode key concepts](key-concepts.md)
     and [How services work](how-swarm-mode-works/services.md).
 @y
-1.  A Docker Engine of version 1.13.0 or later, running in [swarm mode](swarm-mode.md).
+1.  A Docker Engine running in [swarm mode](swarm-mode.md).
     If you're not familiar with swarm mode, you might want to read
     [Swarm mode key concepts](key-concepts.md)
     and [How services work](how-swarm-mode-works/services.md).
 @z
 
 @x
-    > **Note**: If you're trying things out on a local development environment,
+    > **Note**
+    >
+    > If you're trying things out on a local development environment,
     > you can put your engine into swarm mode with `docker swarm init`.
     >
     > If you've already got a multi-node swarm running, keep in mind that all
     > `docker stack` and `docker service` commands must be run from a manager
     > node.
 @y
-    > **Note**: If you're trying things out on a local development environment,
+    > **Note**
+    >
+    > If you're trying things out on a local development environment,
     > you can put your engine into swarm mode with `docker swarm init`.
     >
     > If you've already got a multi-node swarm running, keep in mind that all
@@ -68,9 +72,9 @@ To run through this tutorial, you need:
 @z
 
 @x
-2.  [Docker Compose](../../compose/install.md) version 1.10 or later.
+2.  A current version of [Docker Compose](../../compose/install.md).
 @y
-2.  [Docker Compose](../../compose/install.md) version 1.10 or later.
+2.  A current version of [Docker Compose](../../compose/install.md).
 @z
 
 @x
@@ -293,10 +297,10 @@ counter whenever you visit it.
 
 @x
     ```none
-    version: '3'
+    version: "{{ site.compose_file_v3 }}"
 @y
     ```none
-    version: '3'
+    version: "{{ site.compose_file_v3 }}"
 @z
 
 @x

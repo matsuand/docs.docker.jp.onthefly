@@ -447,10 +447,10 @@ Docker では以下のようなデモアプリを用意しています。
 
 @x
 ```yaml
-version: '3.3'
+version: "{{ site.compose_file_v3 }}"
 @y
 ```yaml
-version: '3.3'
+version: "{{ site.compose_file_v3 }}"
 @z
 
 @x

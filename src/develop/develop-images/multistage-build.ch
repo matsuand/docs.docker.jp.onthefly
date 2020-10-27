@@ -20,17 +20,14 @@ redirect_from:
 @z
 
 @x
-Multi-stage builds are a new feature requiring Docker 17.05 or higher on the
-daemon and client. Multistage builds are useful to anyone who has struggled to
-optimize Dockerfiles while keeping them easy to read and maintain.
+Multistage builds are useful to anyone who has struggled to optimize Dockerfiles
+while keeping them easy to read and maintain.
 @y
 {% comment %}
-Multi-stage builds are a new feature requiring Docker 17.05 or higher on the
-daemon and client. Multistage builds are useful to anyone who has struggled to
-optimize Dockerfiles while keeping them easy to read and maintain.
+Multistage builds are useful to anyone who has struggled to optimize Dockerfiles
+while keeping them easy to read and maintain.
 {% endcomment %}
-マルチステージビルドは、Docker 17.05 またはそれ以上の Docker デーモンおよび Docker クライアントにおける新機能です。
-マルチステージビルドは、Dockerfile を読みやすく保守しやすくするように、最適化に取り組むユーザーにとって非常にありがたいものです。
+マルチステージビルドは Dockerfile を読みやすく保守しやすくするように、最適化に取り組むユーザーにとって非常にありがたいものです。
 @z
 
 @x

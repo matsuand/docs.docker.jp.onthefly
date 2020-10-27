@@ -654,35 +654,41 @@ respectively.
 If your swarm service relies on one or more
 [plugins](/engine/extend/plugin_api/), these plugins need to be available on
 every node where the service could potentially be deployed. You can manually
-install the plugin on each node or script the installation. In Docker 17.07 and
-higher, you can also deploy the plugin in a similar way as a global service
-using the Docker API, by specifying a `PluginSpec` instead of a `ContainerSpec`.
+install the plugin on each node or script the installation. You can also deploy
+the plugin in a similar way as a global service using the Docker API, by specifying
+a `PluginSpec` instead of a `ContainerSpec`.
 @y
 {% comment %}
 If your swarm service relies on one or more
 [plugins](/engine/extend/plugin_api/), these plugins need to be available on
 every node where the service could potentially be deployed. You can manually
-install the plugin on each node or script the installation. In Docker 17.07 and
-higher, you can also deploy the plugin in a similar way as a global service
-using the Docker API, by specifying a `PluginSpec` instead of a `ContainerSpec`.
+install the plugin on each node or script the installation. You can also deploy
+the plugin in a similar way as a global service using the Docker API, by specifying
+a `PluginSpec` instead of a `ContainerSpec`.
 {% endcomment %}
 Swarm サービスが [プラグイン]({{ site.baseurl }}/engine/extend/plugin_api/) をいくつか必要としている場合は、サービスがデプロイされる可能性のあるすべてのノード上において、そのプラグインが利用できることが必要です。
 プラグインのインストールは、各ノード上において手動で行うか、スクリプトを用意して行うことになります。
-Docker 17.07 およびそれ以降においては、Docker API を利用するグローバルサービスと同様の方法により、プラグインをデプロイすることができます。
+Docker API を利用するグローバルサービスと同様の方法により、プラグインをデプロイすることができます。
 その際には`ContainerSpec`ではなく`PluginSpec`を利用します。
 @z
 
 @x
-> **Note**: There is currently no way to deploy a plugin to a swarm using the
+> **Note**
+>
+> There is currently no way to deploy a plugin to a swarm using the
 > Docker CLI or Docker Compose. In addition, it is not possible to install
 > plugins from a private repository.
 @y
 {% comment %}
-> **Note**: There is currently no way to deploy a plugin to a swarm using the
+> **Note**
+>
+> There is currently no way to deploy a plugin to a swarm using the
 > Docker CLI or Docker Compose. In addition, it is not possible to install
 > plugins from a private repository.
 {% endcomment %}
-> **メモ**: 今のところ、Docker CLI や Docker Compose を使って、プラグインを Swarm にデプロイする手段はありません。
+> **メモ**
+>
+> 今のところ、Docker CLI や Docker Compose を使って、プラグインを Swarm にデプロイする手段はありません。
 > さらにプライベートリポジトリからプラグインをインストールすることもできません。
 @z
 

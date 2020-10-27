@@ -79,19 +79,17 @@ host running elsewhere.
 
 @x
 Although [overlay networks](overlay.md) are generally used for swarm services,
-Docker 17.06 and higher allow you to use an overlay network for standalone
-containers. That's covered as part of the
-[tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
+you can also use an overlay network for standalone containers. That's covered as
+part of the [tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
 @y
 {% comment %}
 Although [overlay networks](overlay.md) are generally used for swarm services,
-Docker 17.06 and higher allow you to use an overlay network for standalone
-containers. That's covered as part of the
-[tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
+you can also use an overlay network for standalone containers. That's covered as
+part of the [tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
 {% endcomment %}
-Swarm サービスにおいて利用されるのは、一般的には [オーバーレイネットワーク](overlay.md) ですが、Docker 17.06 およびそれ以降においては、スタンドアロンコンテナーに対してもオーバーレイネットワークを利用することができます。
-このことは
-[オーバーレイネットワークのチュートリアル](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers) において触れています。
+Swarm サービスにおいて利用されるのは、一般的には [オーバーレイネットワーク](overlay.md) です。
+このオーバーレイネットワークは、スタンドアロンコンテナーに対しても利用することができます。
+このことは [オーバーレイネットワークのチュートリアル](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers) において触れています。
 @z
 
 @x

@@ -1060,22 +1060,18 @@ service's image.
 Each tag represents a digest, similar to a Git hash. Some tags, such as
 `latest`, are updated often to point to a new digest. Others, such as
 `ubuntu:16.04`, represent a released software version and are not expected to
-update to point to a new digest often if at all. In Docker 1.13 and higher, when
-you create a service, it is constrained to create tasks using a specific digest
-of an image until you update the service using `service update` with the
-`--image` flag. If you use an older version of Docker Engine, you must remove
-and re-create the service to update its image.
+update to point to a new digest often if at all. When you create a service, it
+is constrained to create tasks using a specific digest of an image until you
+update the service using `service update` with the `--image` flag.
 @y
 {% comment %}
 {% endcomment %}
 Each tag represents a digest, similar to a Git hash. Some tags, such as
 `latest`, are updated often to point to a new digest. Others, such as
 `ubuntu:16.04`, represent a released software version and are not expected to
-update to point to a new digest often if at all. In Docker 1.13 and higher, when
-you create a service, it is constrained to create tasks using a specific digest
-of an image until you update the service using `service update` with the
-`--image` flag. If you use an older version of Docker Engine, you must remove
-and re-create the service to update its image.
+update to point to a new digest often if at all. When you create a service, it
+is constrained to create tasks using a specific digest of an image until you
+update the service using `service update` with the `--image` flag.
 @z
 
 @x
@@ -1272,20 +1268,18 @@ outside the swarm in two ways:
 
 @x
 - [You can publish a service task's port directly on the swarm node](#publish-a-services-ports-directly-on-the-swarm-node)
-  where that service is running. This feature is available in Docker 1.13 and
-  higher. This bypasses the routing mesh and provides the maximum flexibility,
-  including the ability for you to develop your own routing framework. However,
-  you are responsible for keeping track of where each task is running and
-  routing requests to the tasks, and load-balancing across the nodes.
+  where that service is running. This bypasses the routing mesh and provides the
+  maximum flexibility, including the ability for you to develop your own routing
+  framework. However, you are responsible for keeping track of where each task is
+  running and routing requests to the tasks, and load-balancing across the nodes.
 @y
 {% comment %}
 {% endcomment %}
 - [You can publish a service task's port directly on the swarm node](#publish-a-services-ports-directly-on-the-swarm-node)
-  where that service is running. This feature is available in Docker 1.13 and
-  higher. This bypasses the routing mesh and provides the maximum flexibility,
-  including the ability for you to develop your own routing framework. However,
-  you are responsible for keeping track of where each task is running and
-  routing requests to the tasks, and load-balancing across the nodes.
+  where that service is running. This bypasses the routing mesh and provides the
+  maximum flexibility, including the ability for you to develop your own routing
+  framework. However, you are responsible for keeping track of where each task is
+  running and routing requests to the tasks, and load-balancing across the nodes.
 @z
 
 @x
@@ -1705,13 +1699,13 @@ flag. For more information, see
 @z
 
 @x
-Docker 17.12 CE and higher allow you to specify a swarm service's isolation
+Docker allows you to specify a swarm service's isolation
 mode. **This setting applies to Windows hosts only and is ignored for Linux
 hosts.** The isolation mode can be one of the following:
 @y
 {% comment %}
 {% endcomment %}
-Docker 17.12 CE and higher allow you to specify a swarm service's isolation
+Docker allows you to specify a swarm service's isolation
 mode. **This setting applies to Windows hosts only and is ignored for Linux
 hosts.** The isolation mode can be one of the following:
 @z
@@ -2513,41 +2507,25 @@ $ docker service update \
 @z
 
 @x
-In Docker 17.04 and higher, you can configure a service to roll back
-automatically if a service update fails to deploy. See
-[Automatically roll back if an update fails](#automatically-roll-back-if-an-update-fails).
+You can configure a service to roll back automatically if a service update fails
+to deploy. See [Automatically roll back if an update fails](#automatically-roll-back-if-an-update-fails).
 @y
 {% comment %}
 {% endcomment %}
-In Docker 17.04 and higher, you can configure a service to roll back
-automatically if a service update fails to deploy. See
-[Automatically roll back if an update fails](#automatically-roll-back-if-an-update-fails).
+You can configure a service to roll back automatically if a service update fails
+to deploy. See [Automatically roll back if an update fails](#automatically-roll-back-if-an-update-fails).
 @z
 
 @x
-Related to the new automatic rollback feature, in Docker 17.04 and higher,
-manual rollback is handled at the server side, rather than the client, if the
-daemon is running Docker 17.04 or higher. This allows manually-initiated
-rollbacks to respect the new rollback parameters. The client is version-aware,
-so it still uses the old method against an older daemon.
+Manual rollback is handled at the server side, which allows manually-initiated
+rollbacks to respect the new rollback parameters. Note that `--rollback` cannot
+be used in conjunction with other flags to `docker service update`.
 @y
 {% comment %}
 {% endcomment %}
-Related to the new automatic rollback feature, in Docker 17.04 and higher,
-manual rollback is handled at the server side, rather than the client, if the
-daemon is running Docker 17.04 or higher. This allows manually-initiated
-rollbacks to respect the new rollback parameters. The client is version-aware,
-so it still uses the old method against an older daemon.
-@z
-
-@x
-Finally, in Docker 17.04 and higher, `--rollback` cannot be used in conjunction
-with other flags to `docker service update`.
-@y
-{% comment %}
-{% endcomment %}
-Finally, in Docker 17.04 and higher, `--rollback` cannot be used in conjunction
-with other flags to `docker service update`.
+Manual rollback is handled at the server side, which allows manually-initiated
+rollbacks to respect the new rollback parameters. Note that `--rollback` cannot
+be used in conjunction with other flags to `docker service update`.
 @z
 
 @x

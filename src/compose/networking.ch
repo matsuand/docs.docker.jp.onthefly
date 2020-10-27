@@ -45,18 +45,24 @@ identical to the container name.
 @z
 
 @x
-> **Note**: Your app's network is given a name based on the "project name",
+> **Note**
+>
+> Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
 > project name with either the [`--project-name` flag](reference/overview.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 @y
 {% comment %}
-> **Note**: Your app's network is given a name based on the "project name",
+> **Note**
+>
+> Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
 > project name with either the [`--project-name` flag](reference/overview.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 {% endcomment %}
-> **メモ**: アプリのネットワークには「プロジェクト名」に基づいた名前がつけられます。
+> **メモ**
+>
+> アプリのネットワークには「プロジェクト名」に基づいた名前がつけられます。
 > そしてプロジェクト名はこれが稼動しているディレクトリ名に基づいて定まります。
 > プロジェクト名は [`--project-name` フラグ](reference/overview.md) あるいは [`COMPOSE_PROJECT_NAME` 環境変数](reference/envvars.md#compose_project_name) を使って上書きすることができます。
 @z
@@ -71,27 +77,31 @@ For example, suppose your app is in a directory called `myapp`, and your `docker
 @z
 
 @x
-    version: "3"
-    services:
-      web:
-        build: .
-        ports:
-          - "8000:8000"
-      db:
-        image: postgres
-        ports:
-          - "8001:5432"
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres
+    ports:
+      - "8001:5432"
+```
 @y
-    version: "3"
-    services:
-      web:
-        build: .
-        ports:
-          - "8000:8000"
-      db:
-        image: postgres
-        ports:
-          - "8001:5432"
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres
+    ports:
+      - "8001:5432"
+```
 @z
 
 @x

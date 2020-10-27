@@ -221,50 +221,60 @@ to link them together and expose the web app's port.
 @z
 
 @x
-    version: '3'
-    services:
-      db:
-        image: postgres
-        volumes:
-          - ./tmp/db:/var/lib/postgresql/data
-        environment:
-          POSTGRES_PASSWORD: password
-      web:
-        build: .
-        command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-        volumes:
-          - .:/myapp
-        ports:
-          - "3000:3000"
-        depends_on:
-          - db
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+```
 @y
-    version: '3'
-    services:
-      db:
-        image: postgres
-        volumes:
-          - ./tmp/db:/var/lib/postgresql/data
-        environment:
-          POSTGRES_PASSWORD: password
-      web:
-        build: .
-        command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-        volumes:
-          - .:/myapp
-        ports:
-          - "3000:3000"
-        depends_on:
-          - db
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+```
 @z
 
 @x
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+> **Tip**
+>
+> You can use either a `.yml` or `.yaml` extension for this file.
 @y
 {% comment %}
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+> **Tip**
+>
+> You can use either a `.yml` or `.yaml` extension for this file.
 {% endcomment %}
->**ヒント**: このファイルの拡張子は`.yml`と`.yaml`のどちらでも構いません。
+>**ヒント**
+>
+> このファイルの拡張子は`.yml`と`.yaml`のどちらでも構いません。
 @z
 
 @x

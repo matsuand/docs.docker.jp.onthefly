@@ -270,44 +270,17 @@ happen in sequence:
 @z
 
 @x
-2.  In Docker 17.06 and higher, Docker also tells all nodes to immediately
-    renew their TLS certificates. This process may take several minutes,
-    depending on the number of nodes in the swarm.
+2.  Docker also tells all nodes to immediately renew their TLS certificates.
+    This process may take several minutes, depending on the number of nodes in
+    the swarm.
 @y
 {% comment %}
-2.  In Docker 17.06 and higher, Docker also tells all nodes to immediately
-    renew their TLS certificates. This process may take several minutes,
-    depending on the number of nodes in the swarm.
+2.  Docker also tells all nodes to immediately renew their TLS certificates.
+    This process may take several minutes, depending on the number of nodes in
+    the swarm.
 {% endcomment %}
-2.  Docker 17.06 またはそれ以降において、Docker は全ノードに対して、TLS 証明書をすぐに更新するように指示することになりました。
+2.  Docker は全ノードに対して TLS 証明書をすぐに更新するように指示することになりました。
     この処理は Swarm 内のノード数に応じて数分程度かかります。
-@z
-
-@x
-    > **Note**: If your swarm has nodes with different Docker versions, the
-    > following two things are true:
-    > - Only a manager that is running as the leader **and** running Docker 17.06
-    >   or higher tells nodes to renew their TLS certificates.
-    > - Only nodes running Docker 17.06 or higher obey this directive.
-    >
-    > For the most predictable behavior, ensure that all swarm nodes are running
-    > Docker 17.06 or higher.
-@y
-    {% comment %}
-    > **Note**: If your swarm has nodes with different Docker versions, the
-    > following two things are true:
-    > - Only a manager that is running as the leader **and** running Docker 17.06
-    >   or higher tells nodes to renew their TLS certificates.
-    > - Only nodes running Docker 17.06 or higher obey this directive.
-    >
-    > For the most predictable behavior, ensure that all swarm nodes are running
-    > Docker 17.06 or higher.
-    {% endcomment %}
-    > **メモ**: Swarm 内のノードの Docker バージョンが異なる場合、以下に示す 2 つのことが言えます。
-    > - マネージャーがリーダーとして稼動していて **かつ** Docker 17.06 以上であるもののみが、ノードに対して TLS 証明書の更新を指示します。
-    > - Docker 17.06 以上のノードのみがこの指示に従います。
-    >
-    > 動作をわかりやすくするために、Swarm ノードはすべて Docker 17.6 またはそれ以降を用いるようにしてください。
 @z
 
 @x

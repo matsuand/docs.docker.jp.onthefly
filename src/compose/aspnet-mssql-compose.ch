@@ -237,7 +237,7 @@ configure this app to use our SQL Server database, and then create a
 
 @x
     ```yaml
-    version: "3"
+    version: "{{ site.compose_file_v3 }}"
     services:
         web:
             build: .
@@ -253,7 +253,7 @@ configure this app to use our SQL Server database, and then create a
     ```
 @y
     ```yaml
-    version: "3"
+    version: "{{ site.compose_file_v3 }}"
     services:
         web:
             build: .

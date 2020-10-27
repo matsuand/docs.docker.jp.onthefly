@@ -309,24 +309,27 @@ The following image depicts the various signing keys and their relationships:
 @z
 
 @x
-> **WARNING**:
+> **WARNING**
+>
 > Loss of the root key is **very difficult** to recover from.
->Correcting this loss requires intervention from [Docker
->Support](https://support.docker.com) to reset the repository state. This loss
->also requires **manual intervention** from every consumer that used a signed
->tag from this repository prior to the loss.
+> Correcting this loss requires intervention from [Docker
+> Support](https://support.docker.com) to reset the repository state. This loss
+> also requires **manual intervention** from every consumer that used a signed
+> tag from this repository prior to the loss.
 {:.warning}
 @y
 {% comment %}
-> **WARNING**:
+> **WARNING**
+>
 > Loss of the root key is **very difficult** to recover from.
->Correcting this loss requires intervention from [Docker
->Support](https://support.docker.com) to reset the repository state. This loss
->also requires **manual intervention** from every consumer that used a signed
->tag from this repository prior to the loss.
+> Correcting this loss requires intervention from [Docker
+> Support](https://support.docker.com) to reset the repository state. This loss
+> also requires **manual intervention** from every consumer that used a signed
+> tag from this repository prior to the loss.
 {:.warning}
 {% endcomment %}
-> **警告**:
+> **警告**
+>
 > ルート鍵を失ってしまうと復旧が **極めて困難** になります。
 > これを復旧するためには [Docker サポート](https://support.docker.com) が調整を行う必要があり、リポジトリ状態をリセットしなければなりません。
 > またこのリポジトリを通じてサイン済タグを利用していたすべてのユーザーに対して、ルート鍵を失なう以前のイメージは **手動で復旧操作を行う** 必要があります。
@@ -358,18 +361,6 @@ read how to [manage keys for DCT](trust_key_mng.md).
 {% endcomment %}
 {: #signing-images-with-docker-content-trust }
 ## DCT によるイメージへのサイン
-@z
-
-@x
-> **Note:**
-> This applies to Docker Community Engine 17.12 and newer.
-@y
-{% comment %}
-> **Note:**
-> This applies to Docker Community Engine 17.12 and newer.
-{% endcomment %}
-> **メモ**
-> これは Docker Community Engine 17.12 またはそれ以降に適用されます。
 @z
 
 @x

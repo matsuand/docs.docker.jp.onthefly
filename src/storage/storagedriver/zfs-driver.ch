@@ -108,10 +108,14 @@ use unless you have substantial experience with ZFS on Linux.
 @z
 
 @x
-> **Note**: There is no need to use `MountFlags=slave` with Docker Engine 18.09 or
+> **Note**
+>
+> There is no need to use `MountFlags=slave` with Docker Engine 18.09 or
 > later because `dockerd` and `containerd` are in different mount namespaces. 
 @y
-> **Note**: There is no need to use `MountFlags=slave` with Docker Engine 18.09 or
+> **Note**
+>
+> There is no need to use `MountFlags=slave` with Docker Engine 18.09 or
 > later because `dockerd` and `containerd` are in different mount namespaces. 
 @z
 

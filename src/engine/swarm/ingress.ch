@@ -332,21 +332,21 @@ The output shows the `<CONTAINER-PORT>` (labeled `TargetPort`) from the containe
 By default, when you publish a port, it is a TCP port. You can
 specifically publish a UDP port instead of or in addition to a TCP port. When
 you publish both TCP and UDP ports, If you omit the protocol specifier,
-the port is published as a TCP port. If you use the longer syntax (recommended
-  for Docker 1.13 and higher), set the `protocol` key to either `tcp` or `udp`.
+the port is published as a TCP port. If you use the longer syntax (recommended),
+set the `protocol` key to either `tcp` or `udp`.
 @y
 {% comment %}
 By default, when you publish a port, it is a TCP port. You can
 specifically publish a UDP port instead of or in addition to a TCP port. When
 you publish both TCP and UDP ports, If you omit the protocol specifier,
-the port is published as a TCP port. If you use the longer syntax (recommended
-  for Docker 1.13 and higher), set the `protocol` key to either `tcp` or `udp`.
+the port is published as a TCP port. If you use the longer syntax (recommended),
+set the `protocol` key to either `tcp` or `udp`.
 {% endcomment %}
-ポートを公開すると、デフォルトでは TCP ポートとなります。
+ポートを公開するとデフォルトでは TCP ポートとなります。
 このかわりに、明示的に UDP ポートを指定するか、TCP ポートに UDP ポートを加えた指定とすることができます。
 TCP と UDP の両方を公開するとします。
 プロトコルの指定を省略してしまうと、TCP ポートとしてしか公開されません。
-長い文法（Docker 1.13 またはそれ以降において推奨される）を使って、`protocol` キーに `tcp` または `udp` を設定します。
+長い文法（推奨）を使って、`protocol`キーに`tcp`または`udp`を設定します。
 @z
 
 @x

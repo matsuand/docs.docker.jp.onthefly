@@ -26,21 +26,18 @@ keywords: swarm, configuration, configs
 @z
 
 @x
-Docker 17.06 introduces swarm service configs, which allow you to store
-non-sensitive information, such as configuration files, outside a service's
-image or running containers. This allows you to keep your images as generic
-as possible, without the need to bind-mount configuration files into the
-containers or use environment variables.
+Docker swarm service configs  allow you to store non-sensitive information,
+such as configuration files, outside a service's image or running containers.
+This allows you to keep your images as generic as possible, without the need to
+bind-mount configuration files into the containers or use environment variables.
 @y
 {% comment %}
-Docker 17.06 introduces swarm service configs, which allow you to store
-non-sensitive information, such as configuration files, outside a service's
-image or running containers. This allows you to keep your images as generic
-as possible, without the need to bind-mount configuration files into the
-containers or use environment variables.
+Docker swarm service configs  allow you to store non-sensitive information,
+such as configuration files, outside a service's image or running containers.
+This allows you to keep your images as generic as possible, without the need to
+bind-mount configuration files into the containers or use environment variables.
 {% endcomment %}
-Docker 17.06 からスウォームサービスの configs が導入されました。
-これは設定ファイルのようにそれほど重要ではない情報を、サービスイメージや稼働中のコンテナーの外部に保存できる機能です。
+スウォームサービスでは configs が導入され、設定ファイルのようにそれほど重要ではない情報を、サービスイメージや稼働中のコンテナーの外部に保存できます。
 これがあれば、ビルドイメージをできるだけ汎用的なものとして維持できます。
 また設定ファイルをコンテナーにバインドマウントしたり、環境変数を利用したりすることも不要になります。
 @z
@@ -104,16 +101,16 @@ configs は Linux と Windows においてサポートされます。
 @z
 
 @x
-Docker 17.06 and higher include support for configs on Windows containers.
-Where there are differences in the implementations, they are called out in the
-examples below. Keep the following notable differences in mind:
+Docker includes support for configs on Windows containers, but there are differences
+in the implementations, which are called out in the examples below. Keep the
+following notable differences in mind:
 @y
 {% comment %}
-Docker 17.06 and higher include support for configs on Windows containers.
-Where there are differences in the implementations, they are called out in the
-examples below. Keep the following notable differences in mind:
+Docker includes support for configs on Windows containers, but there are differences
+in the implementations, which are called out in the examples below. Keep the
+following notable differences in mind:
 {% endcomment %}
-Docker 17.06 またはそれ以上には、Windows コンテナーに対する configs サポートが含まれます。
+Docker には Windows コンテナーに対する configs サポートが含まれます。
 ただし実装には違いがあるため、以降の利用例において示しています。
 重要な違いとして以下があることを覚えておいてください。
 @z
@@ -771,16 +768,16 @@ real-world example, continue to
 
 @x
 This is a very simple example which shows how to use configs with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-for Windows 17.06 CE on Microsoft Windows 10. It stores the webpage in a config.
+IIS service running on Docker for Windows running Windows containers on
+Microsoft Windows 10.  It is a naive example that stores the webpage in a config.
 @y
 {% comment %}
 This is a very simple example which shows how to use configs with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-for Windows 17.06 CE on Microsoft Windows 10. It stores the webpage in a config.
+IIS service running on Docker for Windows running Windows containers on
+Microsoft Windows 10.  It is a naive example that stores the webpage in a config.
 {% endcomment %}
 ここでの簡単な例は Windows 上において configs を利用するものです。
-利用にあたっては、Microsoft Windows Server 2016 上の Docker 17.06 EE、または Microsoft Windows 10 上の Docker Windows 17.06 CE を用いて Microsoft IIS サービスを稼動させます。
+利用にあたっては Microsoft Windows 10 上の Docker for Windows を用いて Windows コンテナーを稼動させて、Microsoft IIS サービスを稼動させます。
 この例は config 内にウェブページを保存します。
 @z
 
@@ -804,23 +801,27 @@ PowerShell はインストール済であるとします。
 
 @x
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
       </body>
     </html>
     ```
-2.  If you have not already done so, initialize or join the swarm.
 @y
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
       </body>
     </html>
     ```
+@z
+
+@x
+2.  If you have not already done so, initialize or join the swarm.
+@y
 {% comment %}
 2.  If you have not already done so, initialize or join the swarm.
 {% endcomment %}
@@ -944,7 +945,7 @@ name as its argument. The template will be rendered when container is created.
 
 @x
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello {% raw %}{{ env "HELLO" }}{% endraw %}! I'm service {% raw %}{{ .Service.Name }}{% endraw %}.</p>
@@ -953,7 +954,7 @@ name as its argument. The template will be rendered when container is created.
     ```
 @y
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello {% raw %}{{ env "HELLO" }}{% endraw %}! I'm service {% raw %}{{ .Service.Name }}{% endraw %}.</p>
@@ -1019,13 +1020,8 @@ name as its argument. The template will be rendered when container is created.
 @x
     ```bash
     $ curl http://0.0.0.0:3000
-@y
-    ```bash
-    $ curl http://0.0.0.0:3000
-@z
 
-@x
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! I'm service hello-template.</p>
@@ -1033,7 +1029,10 @@ name as its argument. The template will be rendered when container is created.
     </html>
     ```
 @y
-    <html>
+    ```bash
+    $ curl http://0.0.0.0:3000
+
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! I'm service hello-template.</p>

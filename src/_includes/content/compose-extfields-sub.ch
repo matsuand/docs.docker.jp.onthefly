@@ -37,7 +37,7 @@ your Compose file and their name start with the `x-` character sequence.
 
 @x
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 x-custom:
   items:
     - a
@@ -48,7 +48,7 @@ x-custom:
 ```
 @y
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 x-custom:
   items:
     - a
@@ -105,7 +105,7 @@ You may write your Compose file as follows:
 
 @x
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 x-logging:
   &default-logging
   options:
@@ -114,7 +114,7 @@ x-logging:
   driver: json-file
 @y
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 x-logging:
   &default-logging
   options:
@@ -157,13 +157,13 @@ the [YAML merge type](https://yaml.org/type/merge.html). For example:
 
 @x
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 x-volumes:
   &default-volume
   driver: foobar-storage
 @y
 ```yaml
-version: '3.4'
+version: "{{ site.compose_file_v3 }}"
 x-volumes:
   &default-volume
   driver: foobar-storage

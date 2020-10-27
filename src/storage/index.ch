@@ -377,21 +377,21 @@ mounts is to think about where the data lives on the Docker host.
 @x
 Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`
-mounts, you can use the `--tmpfs` flag. However, in Docker 17.06 and higher,
-we recommend using the `--mount` flag for both containers and services, for
-bind mounts, volumes, or `tmpfs` mounts, as the syntax is more clear.
+mounts, you can use the `--tmpfs` flag. We recommend using the `--mount` flag
+for both containers and services, for bind mounts, volumes, or `tmpfs` mounts,
+as the syntax is more clear.
 @y
 {% comment %}
 Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`
-mounts, you can use the `--tmpfs` flag. However, in Docker 17.06 and higher,
-we recommend using the `--mount` flag for both containers and services, for
-bind mounts, volumes, or `tmpfs` mounts, as the syntax is more clear.
+mounts, you can use the `--tmpfs` flag. We recommend using the `--mount` flag
+for both containers and services, for bind mounts, volumes, or `tmpfs` mounts,
+as the syntax is more clear.
 {% endcomment %}
 バインドマウントとボリュームは `-v` または `--volume` フラグを使って、コンテナーへのマウントを行うことができます。
 しかしその文法は多少異なります。
 `tmpfs` マウントの場合は `--tmpfs` フラグを使います。
-ただし Docker 17.06 およびそれ以降においては、コンテナーとサービスの双方において、バインドマウント、ボリューム、`tmpfs` マウントのどれであっても、`--mount` フラグを利用することが推奨されます。
+コンテナーとサービスの双方において、バインドマウント、ボリューム、`tmpfs` マウントのどれであっても、`--mount` フラグを利用することが推奨されます。
 文法がよりはっきりとしているからです。
 @z
 

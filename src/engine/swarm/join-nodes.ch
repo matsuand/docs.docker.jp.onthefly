@@ -62,17 +62,6 @@ also run tasks.
 @z
 
 @x
-Before you add nodes to a swarm you must install Docker Engine 1.12 or later on
-the host machine.
-@y
-{% comment %}
-Before you add nodes to a swarm you must install Docker Engine 1.12 or later on
-the host machine.
-{% endcomment %}
-Swarm にノードを追加するためには、ホストマシンに Docker Engine 1.12 またはそれ以降をインストールしておく必要があります。
-@z
-
-@x
 The Docker Engine joins the swarm depending on the **join-token** you provide to
 the `docker swarm join` command. The node only uses the token at join time. If
 you subsequently rotate the token, it doesn't affect existing swarm nodes. Refer
@@ -88,24 +77,6 @@ Docker Engine が Swarm に参加する際には、`docker swarm join`コマン�
 ノードがトークンを利用するのはこの参加のときだけです。
 この後にトークンのローテート操作を行っても、既存の Swarm ノードには影響しません。
 [Docker Engine の Swarm モード実行](swarm-mode.md#view-the-join-command-or-update-a-swarm-join-token) を参照してください。
-@z
-
-@x
-> **Note**: Docker engine allows a non-FIPS node to join a FIPS-enabled swarm cluster.
-@y
-{% comment %}
-> **Note**: Docker engine allows a non-FIPS node to join a FIPS-enabled swarm cluster.
-{% endcomment %}
-> **メモ**: Docker engine では、FIPS が有効な Swarm クラスターに対して、FIPS の無効なノードでも参加させることができます。
-@z
-
-@x
-While a mixed FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed FIPS environment in production.
-@y
-{% comment %}
-While a mixed FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed FIPS environment in production.
-{% endcomment %}
-FIPS が混在している環境であっても、ステータスの更新や変更は簡単にできますが、Docker ではそのような混在した状況を本番環境で利用することはお勧めしません。
 @z
 
 @x

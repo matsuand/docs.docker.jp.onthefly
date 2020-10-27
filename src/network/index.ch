@@ -143,18 +143,15 @@ Docker 内のサブシステムであるネットワーク機能は、ドライ�
 
 @x
 - `host`: For standalone containers, remove network isolation between the
-  container and the Docker host, and use the host's networking directly. `host`
-  is only available for swarm services on Docker 17.06 and higher. See
+  container and the Docker host, and use the host's networking directly. See
   [use the host network](host.md).
 @y
 {% comment %}
 - `host`: For standalone containers, remove network isolation between the
-  container and the Docker host, and use the host's networking directly. `host`
-  is only available for swarm services on Docker 17.06 and higher. See
+  container and the Docker host, and use the host's networking directly. See
   [use the host network](host.md).
 {% endcomment %}
 - `host`（ホスト）: スタンドアロンコンテナーにおいて、コンテナーと Docker ホスト間でのネットワーク隔離を取り除き、ホストのネットワーク機能を直接利用します。
-  `host` は Docker 17.06 またはそれ以降の swarm サービスにおいてのみ利用可能です。
   [ホストネットワークの利用](host.md) を参照してください。
 @z
 

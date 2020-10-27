@@ -84,25 +84,26 @@ A custom certificate is configured by creating a directory under
 @z
 
 @x
-> **Note**:
-> As of Docker 1.13, on Linux any root certificates authorities are merged
-> with the system defaults, including as the host's root CA set. On prior
-versions of Docker, and on Docker Enterprise Edition for Windows Server,
-> the system default certificates are only used when no custom root certificates
-> are configured.
+> **Note**
+>
+> On Linux any root certificates authorities are merged with the system defaults,
+> including the host's root CA set. If you are running Docker on Windows Server,
+> or Docker Desktop for Windows with Windows containers, the system default
+> certificates are only used when no custom root certificates are configured.
 @y
 {% comment %}
-> **Note**:
-> As of Docker 1.13, on Linux any root certificates authorities are merged
-> with the system defaults, including as the host's root CA set. On prior
-versions of Docker, and on Docker Enterprise Edition for Windows Server,
-> the system default certificates are only used when no custom root certificates
-> are configured.
+> **Note**
+>
+> On Linux any root certificates authorities are merged with the system defaults,
+> including the host's root CA set. If you are running Docker on Windows Server,
+> or Docker Desktop for Windows with Windows containers, the system default
+> certificates are only used when no custom root certificates are configured.
 {% endcomment %}
-> **メモ**:
-> Docker 1.13 の時点において、Linux 上のルート認証局は、システムが持つデフォルトのものにマージされます。
+> **メモ**
+>
+> Linux 上のルート認証局は、システムが持つデフォルトのものにマージされます。
 > したがってそこにはホストのルート認証局のセットも含まれます。
-> これ以前の Docker や Windows Server 向けの Docker Enterprise Edition においては、カスタムルート証明書が設定されていない場合に限って、システムのデフォルト証明書が利用されます。
+> Windows Server 上の Docker や Docker Desktop for Windows において Windows コンテナーを利用する場合は、カスタムルート証明書が設定されていない場合に限って、システムのデフォルト証明書が利用されます。
 @z
 
 @x

@@ -81,12 +81,10 @@ mechanism to verify other storage back-ends against, in a testing environment.
 
 @x
     If you want to set a quota to control the maximum size the VFS storage
-    driver can use, set the `size` option on the `storage-opts` key. Quotas
-    are only supported in Docker 17.12 and higher.
+    driver can use, set the `size` option on the `storage-opts` key.
 @y
     If you want to set a quota to control the maximum size the VFS storage
-    driver can use, set the `size` option on the `storage-opts` key. Quotas
-    are only supported in Docker 17.12 and higher.
+    driver can use, set the `size` option on the `storage-opts` key.
 @z
 
 @x

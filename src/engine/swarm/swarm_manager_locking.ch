@@ -16,20 +16,18 @@ title: Swarm のロックと暗号鍵の保護
 @z
 
 @x
-In Docker 1.13 and higher, the Raft logs used by swarm managers are encrypted on
-disk by default. This at-rest encryption protects your service's configuration
-and data from attackers who gain access to the encrypted Raft logs. One of the
-reasons this feature was introduced was in support of the [Docker secrets](secrets.md)
-feature.
+The Raft logs used by swarm managers are encrypted on disk by default. This at-rest
+encryption protects your service's configuration and data from attackers who gain
+access to the encrypted Raft logs. One of the reasons this feature was introduced
+was in support of the [Docker secrets](secrets.md) feature.
 @y
 {% comment %}
-In Docker 1.13 and higher, the Raft logs used by swarm managers are encrypted on
-disk by default. This at-rest encryption protects your service's configuration
-and data from attackers who gain access to the encrypted Raft logs. One of the
-reasons this feature was introduced was in support of the [Docker secrets](secrets.md)
-feature.
+The Raft logs used by swarm managers are encrypted on disk by default. This at-rest
+encryption protects your service's configuration and data from attackers who gain
+access to the encrypted Raft logs. One of the reasons this feature was introduced
+was in support of the [Docker secrets](secrets.md) feature.
 {% endcomment %}
-Docker 1.13 およびそれ以降において、Swarm マネージャーが利用する Raft ログは、デフォルトで暗号化されて保存されるようになりました。
+Swarm マネージャーが利用する Raft ログは、デフォルトで暗号化されて保存されます。
 Raft ログへのアクセスを試みようとする攻撃者がいても、ログの静止時には暗号化されているので、サービス設定やデータ内容を守ることができます。
 この機能が導入された理由の 1 つが [Docker secrets](secrets.md) をサポートするためでした。
 @z
@@ -37,21 +35,21 @@ Raft ログへのアクセスを試みようとする攻撃者がいても、ロ
 @x
 When Docker restarts, both the TLS key used to encrypt communication among swarm
 nodes, and the key used to encrypt and decrypt Raft logs on disk, are loaded
-into each manager node's memory. Docker 1.13 introduces the ability to protect
-the mutual TLS encryption key and the key used to encrypt and decrypt Raft logs
-at rest, by allowing you to take ownership of these keys and to require manual
-unlocking of your managers. This feature is called _autolock_.
+into each manager node's memory. Docker has the ability to protect the mutual TLS
+encryption key and the key used to encrypt and decrypt Raft logs at rest, by
+allowing you to take ownership of these keys and to require manual unlocking of
+your managers. This feature is called _autolock_.
 @y
 {% comment %}
 When Docker restarts, both the TLS key used to encrypt communication among swarm
 nodes, and the key used to encrypt and decrypt Raft logs on disk, are loaded
-into each manager node's memory. Docker 1.13 introduces the ability to protect
-the mutual TLS encryption key and the key used to encrypt and decrypt Raft logs
-at rest, by allowing you to take ownership of these keys and to require manual
-unlocking of your managers. This feature is called _autolock_.
+into each manager node's memory. Docker has the ability to protect the mutual TLS
+encryption key and the key used to encrypt and decrypt Raft logs at rest, by
+allowing you to take ownership of these keys and to require manual unlocking of
+your managers. This feature is called _autolock_.
 {% endcomment %}
 Docker が再起動した際には、Swarm ノード間通信の暗号化に用いられる TLS 鍵、およびディスク上の Raft ログの暗号化、復号化に用いられる鍵は、ともにマネージャーノードのメモリにロードされます。
-Docker 1.13 においては、相互 TLS 暗号鍵（mutual TLS encryption key）と、静止時の Raft ログの暗号化、複合化に用いられる鍵を、いずれも保護する機能が導入されています。
+相互 TLS 暗号鍵（mutual TLS encryption key）と、静止時の Raft ログの暗号化、複合化に用いられる鍵を、いずれも保護する機能があります。
 それらの鍵の所有権はユーザーに属していて、マネージャーのロック解除は手動で行う必要があります。
 この機能は「オートロック」（autolock）機能と呼ばれます。
 @z

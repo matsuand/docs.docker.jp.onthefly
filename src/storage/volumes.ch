@@ -137,35 +137,18 @@ configurable for volumes.
 @z
 
 @x
-Originally, the `-v` or `--volume` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
+In general, `--mount` is more explicit and verbose. The biggest difference is that
+the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 @y
 {% comment %}
-Originally, the `-v` or `--volume` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
+In general, `--mount` is more explicit and verbose. The biggest difference is that
+the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 {% endcomment %}
-もともと `-v` フラグや `--volume` フラグはスタンドアロンコンテナーに対して、また `--mount` フラグはスウォームサービスに対して用いられてきたものです。
-しかし Docker 17.06 からは `--mount` をスタンドアロンコンテナーに対しても利用できるようになりました。
-全般に `--mount` の方がわかりやすいものですが、記述は増えます。
-両者の最大の違いは、`-v` の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、`--mount` の文法はそれを 1 つずつ個別に分けている点です。
+全般に`--mount`の方がわかりやすいものですが、記述は増えます。
+両者の最大の違いは、`-v`の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、`--mount` の文法はそれを 1 つずつ個別に分けている点です。
 以下に両フラグにおける文法を比較します。
-@z
-
-@x
-> New users should try `--mount` syntax which is simpler than `--volume` syntax.
-@y
-{% comment %}
-> New users should try `--mount` syntax which is simpler than `--volume` syntax.
-{% endcomment %}
-> はじめて利用する方は、`--volume` よりも `--mount` の方が文法は簡単なので、`--mount` を利用してください。
 @z
 
 @x
@@ -691,8 +674,8 @@ A single docker compose service with a volume looks like this:
 @z
 
 @x
-```yml
-version: "3.7"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts
@@ -702,8 +685,8 @@ volumes:
   myapp:
 ```
 @y
-```yml
-version: "3.7"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts
@@ -739,8 +722,8 @@ then referenced inside `docker-compose.yml` as follows:
 @z
 
 @x
-```yml
-version: "3.7"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts
@@ -751,8 +734,8 @@ volumes:
     external: true
 ```
 @y
-```yml
-version: "3.7"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts

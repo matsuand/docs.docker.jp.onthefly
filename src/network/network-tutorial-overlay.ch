@@ -97,18 +97,15 @@ host running elsewhere.
 @x
 - [Communicate between a container and a swarm service](#communicate-between-a-container-and-a-swarm-service)
   sets up communication between a standalone container and a swarm service,
-  using an attachable overlay network. This is supported in Docker 17.06 and
-  higher.
+  using an attachable overlay network.
 @y
 {% comment %}
 - [Communicate between a container and a swarm service](#communicate-between-a-container-and-a-swarm-service)
   sets up communication between a standalone container and a swarm service,
-  using an attachable overlay network. This is supported in Docker 17.06 and
-  higher.
+  using an attachable overlay network.
 {% endcomment %}
 - [コンテナー、Swarm サービス間の通信](#communicate-between-a-container-and-a-swarm-service) では、スタンドアロンコンテナーと Swarm サービスの間で通信を行うための設定を行います。
   そこではアタッチ可能なオーバーレイネットワークを用います。
-  これは Docker 17.06 またはそれ以降においてサポートされます。
 @z
 
 @x
@@ -122,27 +119,18 @@ host running elsewhere.
 @z
 
 @x
-These requires you to have at least a single-node swarm, which means that
+These require you to have at least a single-node swarm, which means that
 you have started Docker and run `docker swarm init` on the host. You can run
 the examples on a multi-node swarm as well.
 @y
 {% comment %}
-These requires you to have at least a single-node swarm, which means that
+These require you to have at least a single-node swarm, which means that
 you have started Docker and run `docker swarm init` on the host. You can run
 the examples on a multi-node swarm as well.
 {% endcomment %}
 最低でも単一ノードからなる Swarm が必要です。
 つまり Docker ホスト上にデーモンが起動している状態で `docker swarm init` を実行します。
 もちろん複数ノードの Swarm 上でも、利用例を試すことができます。
-@z
-
-@x
-The last example requires Docker 17.06 or higher.
-@y
-{% comment %}
-The last example requires Docker 17.06 or higher.
-{% endcomment %}
-最後に示す利用例では Docker 17.06 またはそれ以降が必要です。
 @z
 
 @x
@@ -192,18 +180,16 @@ the point of view of a service.
 
 @x
 This tutorial requires three physical or virtual Docker hosts which can all
-communicate with one another, all running new installations of Docker 17.03 or
-higher. This tutorial assumes that the three hosts are running on the same
-network with no firewall involved.
+communicate with one another. This tutorial assumes that the three hosts are
+running on the same network with no firewall involved.
 @y
 {% comment %}
 This tutorial requires three physical or virtual Docker hosts which can all
-communicate with one another, all running new installations of Docker 17.03 or
-higher. This tutorial assumes that the three hosts are running on the same
-network with no firewall involved.
+communicate with one another. This tutorial assumes that the three hosts are
+running on the same network with no firewall involved.
 {% endcomment %}
 このチュートリアルでは、物理ホスト、仮想ホストは問わず Docker ホストを 3 つ利用して、互いに通信を行うようにします。
-この 3 つには Docker 17.03 またはそれ以降がインストールされ、同一のネットワーク上にファイアウォールなしに稼動しているものとします。
+この 3 つは、同一のネットワーク上にファイアウォールなしに稼動しているものとします。
 @z
 
 @x
@@ -971,16 +957,16 @@ overlay network. Steps are:
 
 @x
 For this test, you need two different Docker hosts that can communicate with
-each other. Each host must have Docker 17.06 or higher with the following ports
-open between the two Docker hosts:
+each other. Each host must have the following ports open between the two Docker
+hosts:
 @y
 {% comment %}
 For this test, you need two different Docker hosts that can communicate with
-each other. Each host must have Docker 17.06 or higher with the following ports
-open between the two Docker hosts:
+each other. Each host must have the following ports open between the two Docker
+hosts:
 {% endcomment %}
 このテストでは、Docker ホストが 2 つ、互いに通信できるものとして用意する必要があります。
-両ホストは Docker 17.06 またはそれ以降がインストールされている必要があり、両ホスト間で以下のポートが公開されていることが必要です。
+両ホスト間では、以下のポートが公開されていることが必要です。
 @z
 
 @x
@@ -1436,35 +1422,6 @@ example also uses Linux hosts, but the same commands work on Windows.
 {% endcomment %}
 {: #communicate-between-a-container-and-a-swarm-service }
 ## コンテナー、Swarm サービス間の通信
-@z
-
-@x
-### Prerequisites
-@y
-{% comment %}
-### Prerequisites
-{% endcomment %}
-{: #prerequisites-4 }
-### 前提条件
-@z
-
-@x
-You need Docker 17.06 or higher for this example.
-@y
-{% comment %}
-You need Docker 17.06 or higher for this example.
-{% endcomment %}
-この例においては Docker 17.06 またはそれ以降が必要です。
-@z
-
-@x
-### Walkthrough
-@y
-{% comment %}
-### Walkthrough
-{% endcomment %}
-{: #walkthrough-2 }
-### ウォークスルー
 @z
 
 @x
@@ -2005,15 +1962,15 @@ Docker がインストール済みであり起動していることを確認い�
 @x 原文のリンクはおかしいがそのまま
 Remember, the default `bridge` network is not recommended for production. To
 learn about user-defined bridge networks, continue to the
-[next tutorial](#use-user-defined-bridge-networks).
+[next tutorial](network-tutorial-standalone.md#use-user-defined-bridge-networks).
 @y
 {% comment %}
 Remember, the default `bridge` network is not recommended for production. To
 learn about user-defined bridge networks, continue to the
-[next tutorial](#use-user-defined-bridge-networks).
+[next tutorial](network-tutorial-standalone.md#use-user-defined-bridge-networks).
 {% endcomment %}
 デフォルトの `bridge` ネットワークは、本番環境向けとしては推奨されない点を覚えておいてください。
-ユーザー定義のブリッジネットワークについては、[次のチュートリアル](#use-user-defined-bridge-networks) に進んでください。
+ユーザー定義のブリッジネットワークについては、[次のチュートリアル](network-tutorial-standalone.md#use-user-defined-bridge-networks) に進んでください。
 @z
 
 @x

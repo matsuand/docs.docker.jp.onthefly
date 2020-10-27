@@ -1582,8 +1582,8 @@ following:
 @z
 
 @x
-  In Docker 17.06 and higher, you can configure the Docker daemon to allow
-  pushing non-distributable layers to private registries, in this scenario.
+  You can configure the Docker daemon to allow pushing non-distributable layers 
+  to private registries.
   **This is only useful in air-gapped set-ups in the presence of
   non-distributable images, or in extremely bandwidth-limited situations.**
   You are responsible for ensuring that you are in compliance with the terms of
@@ -1591,8 +1591,8 @@ following:
 @y
   {% comment %}
   {% endcomment %}
-  In Docker 17.06 and higher, you can configure the Docker daemon to allow
-  pushing non-distributable layers to private registries, in this scenario.
+  You can configure the Docker daemon to allow pushing non-distributable layers 
+  to private registries.
   **This is only useful in air-gapped set-ups in the presence of
   non-distributable images, or in extremely bandwidth-limited situations.**
   You are responsible for ensuring that you are in compliance with the terms of

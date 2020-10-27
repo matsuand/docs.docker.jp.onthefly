@@ -34,21 +34,16 @@ Docker は、AppArmor ポリシーがロードされ適用されているかど�
 
 @x
 Docker automatically generates and loads a default profile for containers named
-`docker-default`. On Docker versions `1.13.0` and later, the Docker binary generates
-this profile in `tmpfs` and then loads it into the kernel. On Docker versions
-earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
-instead.
+`docker-default`. The Docker binary generates this profile in `tmpfs` and then
+loads it into the kernel.
 @y
 {% comment %}
 Docker automatically generates and loads a default profile for containers named
-`docker-default`. On Docker versions `1.13.0` and later, the Docker binary generates
-this profile in `tmpfs` and then loads it into the kernel. On Docker versions
-earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
-instead.
+`docker-default`. The Docker binary generates this profile in `tmpfs` and then
+loads it into the kernel.
 {% endcomment %}
-Docker はコンテナーに対するデフォルトプロファイルとして `docker-default` というものを、自動的に生成してロードします。
-Docker バージョン `1.13.0` およびそれ以降においては、Docker 実行モジュールが `tmpfs` にこのプロファイルを生成してカーネルにロードします。
-`1.13.0` よりも古いバージョンでは、`/etc/apparmor.d/docker` にプロファイルが生成されます。
+Docker はコンテナーに対するデフォルトプロファイルとして`docker-default`というものを、自動的に生成してロードします。
+Docker 実行モジュールが `tmpfs` にこのプロファイルを生成してカーネルにロードします。
 @z
 
 @x

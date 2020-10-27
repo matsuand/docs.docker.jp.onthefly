@@ -18,7 +18,6 @@ redirect_from:
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
 - /en/latest/installation/
-toc_max: 2
 ---
 @y
 ---
@@ -37,7 +36,6 @@ redirect_from:
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
 - /en/latest/installation/
-toc_max: 2
 ---
 @z
 
@@ -69,19 +67,19 @@ Docker Engine は Docker Desktop を通じて、各種の [Linux プラットフ
 @z
 
 @x
-#### Desktop
+### Desktop
 @y
 {% comment %}
-#### Desktop
+### Desktop
 {% endcomment %}
 {: #desktop }
-#### デスクトップ
+### デスクトップ
 @z
 
 @x
-{% assign yes = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 @y
-{% assign yes = '![yes](../../images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](../../images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 @z
 
 @x
@@ -103,13 +101,13 @@ Docker Engine は Docker Desktop を通じて、各種の [Linux プラットフ
 @z
 
 @x
-#### Server
+### Server
 @y
 {% comment %}
-#### Server
+### Server
 {% endcomment %}
 {: #server }
-#### サーバー
+### サーバー
 @z
 
 @x
@@ -151,13 +149,13 @@ Docker は `.deb` や `.rpm` といったパッケージの形式により、以
 @z
 
 @x
-##### Other Linux distributions
+### Other Linux distributions
 @y
 {% comment %}
-##### Other Linux distributions
+### Other Linux distributions
 {% endcomment %}
 {: #other-linux-distributions }
-##### 上記以外の Linux ディストリビューション
+### 上記以外の Linux ディストリビューション
 @z
 
 @x
@@ -303,24 +301,24 @@ Docker Engine には **安定版**（stable）、**テスト版**（test）、**
 @x
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
-`18.09`. The year-month name indicates the earliest possible calendar
+`19.03`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v18.09.0` is
-released, all subsequent patch releases are built from the `18.09` branch.
+releases are performed from that branch. For example, once `v19.03.0` is
+released, all subsequent patch releases are built from the `19.03` branch.
 @y
 {% comment %}
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
-`18.09`. The year-month name indicates the earliest possible calendar
+`19.03`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v18.09.0` is
-released, all subsequent patch releases are built from the `18.09` branch.
+releases are performed from that branch. For example, once `v19.03.0` is
+released, all subsequent patch releases are built from the `19.03` branch.
 {% endcomment %}
 年月ごとのリリースは、マスターブランチから分岐したリリースブランチより生成されます。
-このブランチ名は `<年>.<月>` という書式、具体例としては `18.09` などです。
+このブランチ名は`<年>.<月>`という書式、具体例としては`19.03`などです。
 年月による名前は、正規安定版としてリリース予定の、最も早い年月を意味しています。
 これ以降のパッチリリースは、そのブランチから生成されます。
-たとえば `v18.09.0` がリリースされると、この後に続くパッチリリースは `18.09` ブランチからビルドされます。
+たとえば`v19.03.0`がリリースされると、この後に続くパッチリリースは`19.03`ブランチからビルドされます。
 @z
 
 @x
@@ -398,24 +396,15 @@ of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
 @z
 
 @x
-These builds allow for testing from the latest code on the master branch.
+These builds allow for testing from the latest code on the master branch. No
+qualifications or guarantees are made for the nightly builds.
 @y
 {% comment %}
-These builds allow for testing from the latest code on the master branch.
+These builds allow for testing from the latest code on the master branch. No
+qualifications or guarantees are made for the nightly builds.
 {% endcomment %}
 このビルドは、マスターブランチから得られる最新コードを使ったもので、テストが可能なものです。
-@z
-
-@x
-> **Note:**
-> No qualifications or guarantees are made for the nightly builds.
-@y
-{% comment %}
-> **Note:**
-> No qualifications or guarantees are made for the nightly builds.
-{% endcomment %}
-> **メモ:**
-> 最新版のビルドでは、その品質や動作の保証はありません。
+最新版のビルドでは、その品質や動作の保証はありません。
 @z
 
 @x

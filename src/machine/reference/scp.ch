@@ -229,8 +229,8 @@ Then write a docker-compose file that bind mounts it in:
 @z
 
 @x
-```none
-version: "3.1"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   webapp:
     image: alpine
@@ -239,8 +239,8 @@ services:
     - "/home/ubuntu/webapp:/app"
 ```
 @y
-```none
-version: "3.1"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   webapp:
     image: alpine

@@ -118,23 +118,15 @@ containers.
 @z
 
 @x
-Originally, the `--tmpfs` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the
-`--tmpfs` flag does not support any configurable options.
+In general, `--mount` is more explicit and verbose. The biggest difference is
+that the `--tmpfs` flag does not support any configurable options.
 @y
 {% comment %}
-Originally, the `--tmpfs` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the
-`--tmpfs` flag does not support any configurable options.
+In general, `--mount` is more explicit and verbose. The biggest difference is
+that the `--tmpfs` flag does not support any configurable options.
 {% endcomment %}
-元々`--tmpfs` フラグはスタンドアロンコンテナー向けに用いられ、`--mount` フラグは Swarm サービス向けに用いられていました。
-しかし Docker 17.06 以降では `--mount` がスタンドアロンコンテナーに対しても利用できるようになりました。
-一般に `--mount` の方が、より明示的なものであり多くの記述を必要とします。
-はっきりとした違いは `--tmpfs` フラグでは設定変更可能なオプションが用意されていないということです。
+一般に`--mount`の方が、より明示的なものであり多くの記述を必要とします。
+はっきりとした違いは`--tmpfs`フラグでは設定変更可能なオプションが用意されていないということです。
 @z
 
 @x

@@ -29,34 +29,31 @@ keywords: swarm, secrets, credentials, sensitive strings, sensitive data, securi
 In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
 password, SSH private key, SSL certificate, or another piece of data that should
 not be transmitted over a network or stored unencrypted in a Dockerfile or in
-your application's source code. In Docker 1.13 and higher, you can use Docker
-_secrets_ to centrally manage this data and securely transmit it to only those
-containers that need access to it. Secrets are encrypted during transit and at
-rest in a Docker swarm. A given secret is only accessible to those services
-which have been granted explicit access to it, and only while those service
-tasks are running.
+your application's source code. You can use Docker _secrets_ to centrally manage
+this data and securely transmit it to only those containers that need access to
+it. Secrets are encrypted during transit and at rest in a Docker swarm. A given
+secret is only accessible to those services which have been granted explicit
+access to it, and only while those service tasks are running.
 @y
 {% comment %}
 In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
 password, SSH private key, SSL certificate, or another piece of data that should
 not be transmitted over a network or stored unencrypted in a Dockerfile or in
-your application's source code. In Docker 1.13 and higher, you can use Docker
-_secrets_ to centrally manage this data and securely transmit it to only those
-containers that need access to it. Secrets are encrypted during transit and at
-rest in a Docker swarm. A given secret is only accessible to those services
-which have been granted explicit access to it, and only while those service
-tasks are running.
+your application's source code. You can use Docker _secrets_ to centrally manage
+this data and securely transmit it to only those containers that need access to
+it. Secrets are encrypted during transit and at rest in a Docker swarm. A given
+secret is only accessible to those services which have been granted explicit
+access to it, and only while those service tasks are running.
 {% endcomment %}
 Docker Swarm サービスにおいて secret とは、パスワード、SSH 秘密鍵、SSL 証明書などのようなデータ
 In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
 password, SSH private key, SSL certificate, or another piece of data that should
 not be transmitted over a network or stored unencrypted in a Dockerfile or in
-your application's source code. In Docker 1.13 and higher, you can use Docker
-_secrets_ to centrally manage this data and securely transmit it to only those
-containers that need access to it. Secrets are encrypted during transit and at
-rest in a Docker swarm. A given secret is only accessible to those services
-which have been granted explicit access to it, and only while those service
-tasks are running.
+your application's source code. You can use Docker _secrets_ to centrally manage
+this data and securely transmit it to only those containers that need access to
+it. Secrets are encrypted during transit and at rest in a Docker swarm. A given
+secret is only accessible to those services which have been granted explicit
+access to it, and only while those service tasks are running.
 @z
 
 @x
@@ -113,12 +110,12 @@ three environments.
 
 @x
 You can also use secrets to manage non-sensitive data, such as configuration
-files. However, Docker 17.06 and higher support the use of [configs](configs.md)
+files. However, Docker supports the use of [configs](configs.md)
 for storing non-sensitive data. Configs are mounted into the container's
 filesystem directly, without the use of a RAM disk.
 @y
 You can also use secrets to manage non-sensitive data, such as configuration
-files. However, Docker 17.06 and higher support the use of [configs](configs.md)
+files. However, Docker supports the use of [configs](configs.md)
 for storing non-sensitive data. Configs are mounted into the container's
 filesystem directly, without the use of a RAM disk.
 @z
@@ -130,12 +127,12 @@ filesystem directly, without the use of a RAM disk.
 @z
 
 @x
-Docker 17.06 and higher include support for secrets on Windows containers.
-Where there are differences in the implementations, they are called out in the
+Docker includes support for secrets on Windows containers. Where there are
+differences in the implementations, they are called out in the
 examples below. Keep the following notable differences in mind:
 @y
-Docker 17.06 and higher include support for secrets on Windows containers.
-Where there are differences in the implementations, they are called out in the
+Docker includes support for secrets on Windows containers. Where there are
+differences in the implementations, they are called out in the
 examples below. Keep the following notable differences in mind:
 @z
 
@@ -216,37 +213,19 @@ management data.
 @z
 
 @x
-> **Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
-> Swarm managers run an earlier version, and one of those managers becomes the
-> manager of the swarm, the secrets are stored unencrypted in that node's
-> Raft logs. Before adding any secrets, update all of your manager nodes to
-> Docker 1.13 or higher to prevent secrets from being written to plain-text Raft
-> logs.
-{:.warning}
-@y
-> **Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
-> Swarm managers run an earlier version, and one of those managers becomes the
-> manager of the swarm, the secrets are stored unencrypted in that node's
-> Raft logs. Before adding any secrets, update all of your manager nodes to
-> Docker 1.13 or higher to prevent secrets from being written to plain-text Raft
-> logs.
-{:.warning}
-@z
-
-@x
 When you grant a newly-created or running service access to a secret, the
 decrypted secret is mounted into the container in an in-memory filesystem. The
 location of the mount point within the container defaults to
 `/run/secrets/<secret_name>` in Linux containers, or
-`C:\ProgramData\Docker\secrets` in Windows containers. You can specify a custom
-location in Docker 17.06 and higher.
+`C:\ProgramData\Docker\secrets` in Windows containers. You can also specify a
+custom location.
 @y
 When you grant a newly-created or running service access to a secret, the
 decrypted secret is mounted into the container in an in-memory filesystem. The
 location of the mount point within the container defaults to
 `/run/secrets/<secret_name>` in Linux containers, or
-`C:\ProgramData\Docker\secrets` in Windows containers. You can specify a custom
-location in Docker 17.06 and higher.
+`C:\ProgramData\Docker\secrets` in Windows containers. You can also specify a
+custom location.
 @z
 
 @x
@@ -356,13 +335,11 @@ a similar way, see
 @x
 > **Note**: These examples use a single-Engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
-> support secrets in Docker 17.06 and higher.
-> See [Windows support](#windows-support).
+> support secrets. See [Windows support](#windows-support).
 @y
 > **Note**: These examples use a single-Engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
-> support secrets in Docker 17.06 and higher.
-> See [Windows support](#windows-support).
+> support secrets. See [Windows support](#windows-support).
 @z
 
 @x
@@ -701,14 +678,12 @@ real-world example, continue to
 
 @x
 This is a very simple example which shows how to use secrets with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-Desktop for Mac 17.06 on Microsoft Windows 10. It is a naive example that stores the
-webpage in a secret.
+IIS service running on Docker for Windows running Windows containers on
+Microsoft Windows 10. It is a naive example that stores the webpage in a secret.
 @y
 This is a very simple example which shows how to use secrets with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-Desktop for Mac 17.06 on Microsoft Windows 10. It is a naive example that stores the
-webpage in a secret.
+IIS service running on Docker for Windows running Windows containers on
+Microsoft Windows 10. It is a naive example that stores the webpage in a secret.
 @z
 
 @x
@@ -725,23 +700,27 @@ This example assumes that you have PowerShell installed.
 
 @x
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
       </body>
     </html>
     ```
+@y
+    ```html
+    <html lang="en">
+      <head><title>Hello Docker</title></head>
+      <body>
+        <p>Hello Docker! You have deployed a HTML page.</p>
+      </body>
+    </html>
+    ```
+@z
+
+@x
 2.  If you have not already done so, initialize or join the swarm.
 @y
-    ```html
-    <html>
-      <head><title>Hello Docker</title></head>
-      <body>
-        <p>Hello Docker! You have deployed a HTML page.</p>
-      </body>
-    </html>
-    ```
 2.  If you have not already done so, initialize or join the swarm.
 @z
 
@@ -797,12 +776,12 @@ This example assumes that you have PowerShell installed.
 
 @x
     > **Note**: There is technically no reason to use secrets for this
-    > example. With Docker 17.06 and higher, [configs](configs.md) are
-    > a better fit. This example is for illustration only.
+    > example; [configs](configs.md) are a better fit. This example is
+    > for illustration only.
 @y
     > **Note**: There is technically no reason to use secrets for this
-    > example. With Docker 17.06 and higher, [configs](configs.md) are
-    > a better fit. This example is for illustration only.
+    > example; [configs](configs.md) are a better fit. This example is
+    > for illustration only.
 @z
 
 @x
@@ -1212,103 +1191,97 @@ generate the site key and certificate, name the files `site.key` and
 @z
 
 @x
-    In Docker 17.05 and earlier, secrets are always located within the
-    `/run/secrets/` directory. Docker 17.06 and higher allow you to specify a
-    custom location for a secret within the container. The two examples below
-    illustrate the difference. The older version of this command requires you to
-    create a symbolic link to the true location of the `site.conf` file so that
-    Nginx can read it, but the newer version does not require this. The older
-    example is preserved so that you can see the difference.
+    Secrets are located within the `/run/secrets/` directory in the container
+    by default, which may require extra steps in the container to make the
+    secret available in a different path. The example below creates a symbolic
+    link to the true location of the `site.conf` file so that Nginx can read it:
 @y
-    In Docker 17.05 and earlier, secrets are always located within the
-    `/run/secrets/` directory. Docker 17.06 and higher allow you to specify a
-    custom location for a secret within the container. The two examples below
-    illustrate the difference. The older version of this command requires you to
-    create a symbolic link to the true location of the `site.conf` file so that
-    Nginx can read it, but the newer version does not require this. The older
-    example is preserved so that you can see the difference.
+    Secrets are located within the `/run/secrets/` directory in the container
+    by default, which may require extra steps in the container to make the
+    secret available in a different path. The example below creates a symbolic
+    link to the true location of the `site.conf` file so that Nginx can read it:
 @z
 
 @x
-    - **Docker 17.06 and higher**:
+    ```bash
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
+    ```
 @y
-    - **Docker 17.06 and higher**:
+    ```bash
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
+    ```
 @z
 
 @x
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "exec nginx -g 'daemon off;'"
-      ```
+    Instead of creating symlinks, secrets allow you to specify a custom location
+    using the `target` option. The example below illustrates how the `site.conf`
+    secret is made available at `/etc/nginx/conf.d/site.conf` inside the container
+    without the use of symbolic links:
 @y
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "exec nginx -g 'daemon off;'"
-      ```
+    Instead of creating symlinks, secrets allow you to specify a custom location
+    using the `target` option. The example below illustrates how the `site.conf`
+    secret is made available at `/etc/nginx/conf.d/site.conf` inside the container
+    without the use of symbolic links:
 @z
 
 @x
-    - **Docker 17.05 and earlier**:
+    ```bash
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "exec nginx -g 'daemon off;'"
+    ```
 @y
-    - **Docker 17.05 and earlier**:
+    ```bash
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "exec nginx -g 'daemon off;'"
+    ```
 @z
 
 @x
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
-      ```
+    The `site.key` and `site.crt` secrets use the short-hand syntax, without a 
+    custom `target` location set. The short syntax mounts the secrets in `/run/secrets/
+    with the same name as the secret. Within the running containers, the following
+    three files now exist:
 @y
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
-      ```
-@z
-
-@x
-    The first example shows both the short and long syntax for secrets, and the
-    second example shows only the short syntax. The short syntax creates files in
-    `/run/secrets/` with the same name as the secret. Within the running
-    containers, the following three files now exist:
-@y
-    The first example shows both the short and long syntax for secrets, and the
-    second example shows only the short syntax. The short syntax creates files in
-    `/run/secrets/` with the same name as the secret. Within the running
-    containers, the following three files now exist:
+    The `site.key` and `site.crt` secrets use the short-hand syntax, without a 
+    custom `target` location set. The short syntax mounts the secrets in `/run/secrets/
+    with the same name as the secret. Within the running containers, the following
+    three files now exist:
 @z
 
 @x
     - `/run/secrets/site.key`
     - `/run/secrets/site.crt`
-    - `/etc/nginx/conf.d/site.conf` (or `/run/secrets/site.conf` if you used the second example)
+    - `/etc/nginx/conf.d/site.conf`
 @y
     - `/run/secrets/site.key`
     - `/run/secrets/site.crt`
-    - `/etc/nginx/conf.d/site.conf` (or `/run/secrets/site.conf` if you used the second example)
+    - `/etc/nginx/conf.d/site.conf`
 @z
 
 @x
@@ -2388,13 +2361,17 @@ the information from a Docker-managed secret instead of being passed directly.
 @z
 
 @x
->**Note**: Docker secrets do not set environment variables directly. This was a
-conscious decision, because environment variables can unintentionally be leaked
-between containers (for instance, if you use `--link`).
+> **Note**
+>
+> Docker secrets do not set environment variables directly. This was a
+> conscious decision, because environment variables can unintentionally be leaked
+> between containers (for instance, if you use `--link`).
 @y
->**Note**: Docker secrets do not set environment variables directly. This was a
-conscious decision, because environment variables can unintentionally be leaked
-between containers (for instance, if you use `--link`).
+> **Note**
+>
+> Docker secrets do not set environment variables directly. This was a
+> conscious decision, because environment variables can unintentionally be leaked
+> between containers (for instance, if you use `--link`).
 @z
 
 @x
@@ -2405,10 +2382,10 @@ between containers (for instance, if you use `--link`).
 
 @x
 ```yaml
-version: '3.1'
+version: "{{ site.compose_file_v3 }}"
 @y
 ```yaml
-version: '3.1'
+version: "{{ site.compose_file_v3 }}"
 @z
 
 @x

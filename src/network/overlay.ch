@@ -375,19 +375,19 @@ $ docker network create --opt encrypted --driver overlay --attachable my-attacha
 @z
 
 @x
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
-conflicts with one that already exists on your network, or you need to customize
-other low-level network settings such as the MTU.
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet conflicts with
+one that already exists on your network, or you need to customize other low-level
+network settings such as the MTU.
 @y
 {% comment %}
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
-conflicts with one that already exists on your network, or you need to customize
-other low-level network settings such as the MTU.
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet conflicts with
+one that already exists on your network, or you need to customize other low-level
+network settings such as the MTU.
 {% endcomment %}
 ほとんどのユーザーにとって `ingress` ネットワークをカスタマイズする必要はありません。
-ただし Docker 17.05 またはそれ以降においては、設定変更が可能です。
+ただし設定を変更することは可能です。
 たとえば自動的に設定されるサブネットが、ネットワーク上にすでにあるものとコンフリクトした場合には、設定が必要になります。
 また MTU のような低レベルのネットワーク設定を行う場合にも必要です。
 @z

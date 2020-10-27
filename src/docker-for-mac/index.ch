@@ -1686,15 +1686,12 @@ After you have successfully authenticated, you can access your organizations and
 
 @x
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
-  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" rel="noopener" class="_"}.
+  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
-  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" rel="noopener" class="_"}.
+  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 * ブログ投稿 [What’s New in Docker 17.06 Community Edition
-  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" rel="noopener" class="_"} を確認してみてください。
+  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:target="_blank" rel="noopener" class="_"} を確認してみてください。
 @z

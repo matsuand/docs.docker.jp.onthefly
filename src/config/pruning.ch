@@ -473,19 +473,17 @@ for more examples.
 
 @x
 The `docker system prune` command is a shortcut that prunes images, containers,
-and networks. In Docker 17.06.0 and earlier, volumes are also pruned. In Docker
-17.06.1 and higher, you must specify the `--volumes` flag for
-`docker system prune` to prune volumes.
+and networks. Volumes are not pruned by default, and you must specify the
+`--volumes` flag for `docker system prune` to prune volumes.
 @y
 {% comment %}
 The `docker system prune` command is a shortcut that prunes images, containers,
-and networks. In Docker 17.06.0 and earlier, volumes are also pruned. In Docker
-17.06.1 and higher, you must specify the `--volumes` flag for
-`docker system prune` to prune volumes.
+and networks. Volumes are not pruned by default, and you must specify the
+`--volumes` flag for `docker system prune` to prune volumes.
 {% endcomment %}
 `docker system prune` コマンドは、イメージ、コンテナー、ネットワークを取り除くコマンドを合わせたものです。
-Docker 17.06.0 およびそれ以前においては、ボリュームも取り除かれていました。
-Docker 17.06.1 およびそれ以降において `docker system prune` 実行時にボリュームも取り除くには `--volumes` フラグをつける必要があります。
+ボリュームはデフォルトでは取り除かれません。
+`docker system prune` 実行時にボリュームも取り除くには `--volumes` フラグをつける必要があります。
 @z
 
 @x
@@ -515,14 +513,13 @@ Are you sure you want to continue? [y/N] y
 @z
 
 @x
-If you are on Docker 17.06.1 or higher and want to also prune volumes, add
-the `--volumes` flag:
+To also prune volumes, add the `--volumes` flag:
 @y
 {% comment %}
-If you are on Docker 17.06.1 or higher and want to also prune volumes, add
+To also prune volumes, add the `--volumes` flag:
 the `--volumes` flag:
 {% endcomment %}
-Docker 17.06.1 およびそれ以降においてボリュームも取り除きたい場合は `--volumes` フラグをつけます。
+ボリュームも取り除きたい場合は`--volumes`フラグをつけます。
 @z
 
 @x

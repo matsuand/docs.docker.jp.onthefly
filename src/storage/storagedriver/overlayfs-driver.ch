@@ -62,22 +62,20 @@ storage driver as `overlay` or `overlay2`.
 @z
 
 @x
-OverlayFS is supported if you meet the following prerequisites:
+OverlayFS is the recommended storage driver, and supported if you meet the following
+prerequisites:
 @y
-OverlayFS is supported if you meet the following prerequisites:
+OverlayFS is the recommended storage driver, and supported if you meet the following
+prerequisites:
 @z
 
 @x
-- The `overlay2` driver is supported on Docker Engine - Community, and Docker EE 17.06.02-ee5 and
-  up, and is the recommended storage driver.
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
   version 3.10.0-514 of the kernel or higher. If you use an older kernel, you need
   to use the `overlay` driver, which is not recommended.
 - The `overlay` and `overlay2` drivers are supported on `xfs` backing filesystems,
   but only with `d_type=true` enabled.
 @y
-- The `overlay2` driver is supported on Docker Engine - Community, and Docker EE 17.06.02-ee5 and
-  up, and is the recommended storage driver.
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
   version 3.10.0-514 of the kernel or higher. If you use an older kernel, you need
   to use the `overlay` driver, which is not recommended.

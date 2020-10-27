@@ -99,18 +99,15 @@ To run this tutorial, you need the following:
 
 @x
 * [three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
-* [Docker Engine 1.12 or later installed](#docker-engine-112-or-newer)
 * [the IP address of the manager machine](#the-ip-address-of-the-manager-machine)
 * [open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
 @y
 {% comment %}
 * [three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
-* [Docker Engine 1.12 or later installed](#docker-engine-112-or-newer)
 * [the IP address of the manager machine](#the-ip-address-of-the-manager-machine)
 * [open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
 {% endcomment %}
 * [3 つの Linux ホストに Docker がインストールされ、ネットワーク上で互いに通信可能であること。](#three-networked-host-machines)
-* [Docker Engine 1.12 またはそれ以降がインストールされていること。](#docker-engine-112-or-newer)
 * [マネージャーマシンの IP アドレス。](#the-ip-address-of-the-manager-machine)
 * [ホスト間でポートが開放されていること。](#open-protocols-and-ports-between-the-hosts)
 @z
@@ -174,51 +171,6 @@ work, but you can initialize a swarm, create services, and scale them.
 @z
 
 @x
-###  Docker Engine 1.12 or newer
-@y
-{% comment %}
-###  Docker Engine 1.12 or newer
-{% endcomment %}
-{: #docker-engine-112-or-newer }
-###  Docker Engine 1.12 またはそれ以降
-@z
-
-@x
-This tutorial requires Docker Engine 1.12 or newer on each of the host machines.
-Install Docker Engine and verify that the Docker Engine daemon is running on
-each of the machines. You can get the latest version of Docker Engine as
-follows:
-@y
-{% comment %}
-This tutorial requires Docker Engine 1.12 or newer on each of the host machines.
-Install Docker Engine and verify that the Docker Engine daemon is running on
-each of the machines. You can get the latest version of Docker Engine as
-follows:
-{% endcomment %}
-このチュートリアルのホストマシンには、いずれも Docker Engine 1.12 またはそれ以降がインストールされていることが必要です。
-適切な Docker Engine をインストールして Docker Engine デーモンが各マシンにおいて実行されていることを確認してください。
-Docker Engine の最新版は以下から入手することができます。
-@z
-
-@x
-* [install Docker Engine on Linux machines](#install-docker-engine-on-linux-machines)
-@y
-{% comment %}
-* [install Docker Engine on Linux machines](#install-docker-engine-on-linux-machines)
-{% endcomment %}
-* [Linux マシンへの Docker Engine インストール](#install-docker-engine-on-linux-machines)
-@z
-
-@x
-* [use Docker Desktop for Mac or Docker Desktop for Windows](#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
-@y
-{% comment %}
-* [use Docker Desktop for Mac or Docker Desktop for Windows](#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
-{% endcomment %}
-* [Docker Desktop for Mac または Docker Desktop for Windows の利用](#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
-@z
-
-@x
 #### Install Docker Engine on Linux machines
 @y
 {% comment %}
@@ -273,37 +225,30 @@ but you need to use Docker Machine to test the multi-node scenarios.
 @z
 
 @x
-* You can use Docker Desktop for Mac or Windows to test _single-node_ features of swarm
-mode, including initializing a swarm with a single node, creating services,
-and scaling services. Docker "Moby" on Hyperkit (Mac) or Hyper-V (Windows)
-serve as the single swarm node.
+* You can use Docker Desktop for Mac or Windows to test _single-node_ features
+  of swarm mode, including initializing a swarm with a single node, creating
+  services, and scaling services.
 @y
 {% comment %}
-* You can use Docker Desktop for Mac or Windows to test _single-node_ features of swarm
-mode, including initializing a swarm with a single node, creating services,
-and scaling services. Docker "Moby" on Hyperkit (Mac) or Hyper-V (Windows)
-serve as the single swarm node.
+* You can use Docker Desktop for Mac or Windows to test _single-node_ features
+  of swarm mode, including initializing a swarm with a single node, creating
+  services, and scaling services.
 {% endcomment %}
 * Docker Desktop for Mac や Docker Desktop for Windows は、Swarm モードにおける **単一ノード** の確認や、単一ノードからなる Swarm の初期化、サービス生成、サービスのスケーリングを行うことができます。
-Hyperkit (Mac) 上、または Hyper-V (Windows) 上の Docker "Moby" が単一 Swarm ノードを提供します。
 @z
 
 @x
-<p />
-@y
-<p />
-@z
-
-@x
-* Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows alone to test a
-_multi-node_ swarm, but many examples are applicable to a single-node Swarm setup.
+* Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows
+  alone to test a _multi-node_ swarm, but many examples are applicable to a
+  single-node Swarm setup.
 @y
 {% comment %}
-* Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows alone to test a
-_multi-node_ swarm, but many examples are applicable to a single-node Swarm setup.
+* Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows
+  alone to test a _multi-node_ swarm, but many examples are applicable to a
+  single-node Swarm setup.
 {% endcomment %}
 * 現時点において Docker Desktop for Mac または Docker Desktop for Windows を単独で利用するだけでは、**複数ノード** Swarm を扱うことはできません。
-ただし単独ノードの Swarm 設定に対して、数多くの利用例を参考にすることはできます。
+  ただし単独ノードの Swarm 設定に対して、数多くの利用例を参考にすることはできます。
 @z
 
 @x

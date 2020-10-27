@@ -88,23 +88,15 @@ manage bind mounts.
 @z
 
 @x
-Originally, the `-v` or `--volume` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
+In general, `--mount` is more explicit and verbose. The biggest difference is that
+the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 @y
 {% comment %}
-Originally, the `-v` or `--volume` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
+In general, `--mount` is more explicit and verbose. The biggest difference is that
+the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 {% endcomment %}
-もともと `-v` フラグや `--volume` フラグはスタンドアロンコンテナーに対して、また `--mount` フラグはスウォームサービスに対して用いられてきたものです。
-しかし Docker 17.06 からは `--mount` をスタンドアロンコンテナーに対しても利用できるようになりました。
 全般に `--mount` の方がわかりやすいものですが、記述は増えます。
 両者の最大の違いは、`-v` の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、`--mount` の文法はそれを 1 つずつ個別に分けている点です。
 以下に両フラグにおける文法を比較します。

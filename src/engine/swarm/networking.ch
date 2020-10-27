@@ -89,12 +89,12 @@ The following three network concepts are important to swarm services:
 
 @x
   The `ingress` network is created automatically when you initialize or join a
-  swarm. Most users do not need to customize its configuration, but Docker 17.05
-  and higher allows you to do so.
+  swarm. Most users do not need to customize its configuration, but Docker allows
+  you to do so.
 @y
   The `ingress` network is created automatically when you initialize or join a
-  swarm. Most users do not need to customize its configuration, but Docker 17.05
-  and higher allows you to do so.
+  swarm. Most users do not need to customize its configuration, but Docker allows
+  you to do so.
 @z
 
 @x
@@ -686,13 +686,13 @@ round robin (DNSRR). You can configure this per service.
 @z
 
 @x
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
 other low-level network settings such as the MTU.
 @y
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
 other low-level network settings such as the MTU.
 @z
@@ -918,7 +918,7 @@ from the service containers.
 @z
 
 @x
-In Docker 17.06 and higher, it is possible to separate this traffic by passing
+You can separate this traffic by passing
 the `--data-path-addr` flag when initializing or joining the swarm. If there are
 multiple interfaces, `--advertise-addr` must be specified explicitly, and
 `--data-path-addr` defaults to `--advertise-addr` if not specified. Traffic about
@@ -927,7 +927,7 @@ joining, leaving, and managing the swarm is sent over the
 sent over the `--data-path-addr` interface. These flags can take an IP address or
 a network device name, such as `eth0`.
 @y
-In Docker 17.06 and higher, it is possible to separate this traffic by passing
+You can separate this traffic by passing
 the `--data-path-addr` flag when initializing or joining the swarm. If there are
 multiple interfaces, `--advertise-addr` must be specified explicitly, and
 `--data-path-addr` defaults to `--advertise-addr` if not specified. Traffic about
