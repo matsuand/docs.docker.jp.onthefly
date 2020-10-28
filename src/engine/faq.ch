@@ -562,13 +562,13 @@ You can find more answers on:
 @z
 
 @x
-- [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
+- [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
 - [Docker Support Forums](https://forums.docker.com){: target="_blank" rel="noopener" class="_"}
 - [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
 - [Ask questions on Stackoverflow](https://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
 - [Join the conversation on Twitter](https://twitter.com/docker){: target="_blank" rel="noopener" class="_"}
 @y
-- [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
+- [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
 - [Docker Support Forums](https://forums.docker.com){: target="_blank" rel="noopener" class="_"}
 - [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
 - [Ask questions on Stackoverflow](https://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
