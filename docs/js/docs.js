@@ -52,7 +52,7 @@ function walkTree(tree) {
             outputLetNav.push("</ul></li>");
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
-            outputLetNav.push('<li><a href="' + page.path + '"')
+            outputLetNav.push('<li><a href="https://matsuand.github.io/docs.docker.jp.onthefly' + page.path + '"')
             if (page.path === pageURL && !page.nosync) {
                 outputLetNav.push('class="active currentPage"')
             }
