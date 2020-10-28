@@ -1,0 +1,452 @@
+<!-- Page generated 2020-10-28 13:14:11 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Configure GitHub Actions | Docker ドキュメント</title>
+  <meta name="description" content="Configure GitHub Actions" />
+  <meta name="keywords" content="CI/CD, GitHub Actions,">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/ci-cd/github-actions/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Configure GitHub Actions"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Configure GitHub Actions" />
+  <meta property="og:description" content="Configure GitHub Actions" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-28T13:14:11+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ci-cd/github-actions/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-28T13:14:11+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Configure GitHub Actions","description":"Configure GitHub Actions","url":"https://docs.docker.com/ci-cd/github-actions/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Configure GitHub Actions</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><p>This page guides you through the process of setting up a GitHub Action CI/CD pipeline with Docker containers. Before setting up a new pipeline, we recommend that you take a look at <a href="https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/" target="_blank" rel="noopener" class="_">Ben’s blog</a> on CI/CD best practices .</p>
+
+<p>This guide contains instructions on how to:</p>
+
+<ol>
+  <li>Use a sample Docker project as an example to configure GitHub Actions</li>
+  <li>Set up the GitHub Actions workflow</li>
+  <li>Optimize your workflow to reduce the number of pull requests and the total build time, and finally,</li>
+  <li>Push only specific versions to Docker Hub.</li>
+</ol>
+
+<h2 id="set-up-a-docker-project">Set up a Docker project</h2>
+
+<p>Let’s get started. This guide uses a simple Docker project as an example. The <a href="https://github.com/usha-mandya/SimpleWhaleDemo" target="_blank" rel="noopener" class="_">SimpleWhaleDemo</a> repository contains an Ngnix alpine image. You can either clone this repository, or use your own Docker project.</p>
+
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/simplewhaledemo.png" alt="SimpleWhaleDemo" width="500px" /></p>
+
+<p>Before we start, ensure you can access <a href="https://hub.docker.com/">Docker Hub</a> from any workflows you create. To do this:</p>
+
+<ol>
+  <li>
+    <p>Add your Docker ID as a secret to GitHub. Navigate to your GitHub repository and click <strong>Settings</strong> &gt; <strong>Secrets</strong> &gt; <strong>New secret</strong>.</p>
+  </li>
+  <li>
+    <p>Create a new secret with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_USERNAME</code> and your Docker ID as value.</p>
+  </li>
+  <li>
+    <p>Create a new Personal Access Token (PAT). To create a new token, go to <a href="https://hub.docker.com/settings/security">Docker Hub Settings</a> and then click <strong>New Access Token</strong>.</p>
+  </li>
+  <li>
+    <p>Let’s call this token <strong>simplewhaleci</strong>.</p>
+
+    <p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-access-token.png" alt="New access token" width="500px" /></p>
+  </li>
+  <li>
+    <p>Now, add this Personal Access Token (PAT) as a second secret into the GitHub secrets UI with the name <code class="language-plaintext highlighter-rouge">DOCKER_HUB_ACCESS_TOKEN</code>.</p>
+
+    <p><img src="/docs.docker.jp.onthefly/ci-cd/images/github-secrets.png" alt="GitHub Secrets" width="500px" /></p>
+  </li>
+</ol>
+
+<h2 id="set-up-the-github-actions-workflow">Set up the GitHub Actions workflow</h2>
+
+<p>In the previous section, we created a PAT and added it to GitHub to ensure we can access Docker Hub from any workflow. Now, let’s set up our GitHub Actions workflow to build and store our images in Hub. We can achieve this by creating two Docker actions:</p>
+
+<ol>
+  <li>The first action enables us to log in to Docker Hub using the secrets we stored in the GitHub Repository.</li>
+  <li>The second one is the build and push action.</li>
+</ol>
+
+<p>In this example, let us set the push flag to <code class="language-plaintext highlighter-rouge">true</code> as we also want to push. We’ll then add a tag to specify to always go to the latest version. Lastly, we’ll echo the image digest to see what was pushed.</p>
+
+<p>To set up the workflow:</p>
+
+<ol>
+  <li>Go to your repository in GitHub and then click <strong>Actions</strong> &gt; <strong>New workflow</strong>.</li>
+  <li>Click <strong>set up a workflow yourself</strong> and add the following content:</li>
+</ol>
+
+<p>First, we will name this workflow:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">CI to Docker Hub</span>
+</code></pre></div></div>
+
+<p>Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">main</span> <span class="pi">]</span>
+</code></pre></div></div>
+
+<p>Now, we need to specify what we actually want to happen within our action (what jobs), we are going to add our build one and select that it runs on the latest Ubuntu instances available:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jobs</span><span class="pi">:</span>
+
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+</code></pre></div></div>
+
+<p>Now, we can add the steps required. The first one is to use our PAT and username to log into Docker Hub. The second is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">steps</span><span class="pi">:</span>
+
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up Docker Buildx</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">buildx</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/setup-buildx-action@v1</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">docker_build</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/build-push-action@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">context</span><span class="pi">:</span> <span class="s">./</span>
+          <span class="na">file</span><span class="pi">:</span> <span class="s">./Dockerfile</span>
+          <span class="na">push</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">tags</span><span class="pi">:</span> <span class="s">ushamandya/simplewhale:latest</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Image digest</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">echo ${{ steps.docker_build.outputs.digest }}</span>
+</code></pre></div></div>
+
+<p>Now, let the workflow run for the first time and then tweak the Dockerfile to make sure the CI is running and pushing the new image changes:</p>
+
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/ci-to-hub.png" alt="CI to Docker Hub" width="500px" /></p>
+
+<h2 id="optimizing-the-workflow">Optimizing the workflow</h2>
+
+<p>Next, let’s look at how we can optimize the GitHub Actions workflow through build cache. This has two main advantages:</p>
+
+<ol>
+  <li>Build cache reduces the build time as it will not have to re-download all of the images, and</li>
+  <li>It also reduces the number of pulls we complete against Docker Hub. We need to make use of GitHub cache to make use of this.</li>
+</ol>
+
+<p>Let us set up a Builder with a build cache. First, we need to set up cache for the builder.  In this example, let us add the path and keys to store this under using GitHub cache for this.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Cache Docker layers</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">path</span><span class="pi">:</span> <span class="s">/tmp/.buildx-cache</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-buildx-${{ github.sha }}</span>
+          <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">${{ runner.os }}-buildx-</span>
+</code></pre></div></div>
+
+<p>And lastly, after adding the builder and build cache snippets to the top of the Actions file, we need to add some extra attributes to the build and push step. This involves:</p>
+
+<p>Setting up the builder to use the output of the buildx step, and then
+Using the cache we set up earlier for it to store to and to retrieve</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">username</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_USERNAME }}</span>
+          <span class="na">password</span><span class="pi">:</span> <span class="s">${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build and push</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">docker_build</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/build-push-action@v2</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">context</span><span class="pi">:</span> <span class="s">./</span>
+          <span class="na">file</span><span class="pi">:</span> <span class="s">./Dockerfile</span>
+          <span class="na">builder</span><span class="pi">:</span> <span class="s">${{ steps.buildx.outputs.name }}</span>
+          <span class="na">push</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">tags</span><span class="pi">:</span>  <span class="s">ushamandya/simplewhale:latest</span>
+          <span class="na">cache-from</span><span class="pi">:</span> <span class="s">type=local,src=/tmp/.buildx-cache</span>
+          <span class="na">cache-to</span><span class="pi">:</span> <span class="s">type=local,dest=/tmp/.buildx-cache</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Image digest</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">echo ${{ steps.docker_build.outputs.digest }}</span>
+</code></pre></div></div>
+
+<p>Now, run the workflow again and verify that it uses the build cache.</p>
+
+<h2 id="push-tagged-versions-to-docker-hub">Push tagged versions to Docker Hub</h2>
+
+<p>Earlier, we learnt how to set up a GitHub Actions workflow to a  Docker project, how to optimize the workflow by setting up a builder with build cache. Let’s now look at how we can improve it further. We can do this by adding the ability to have tagged versions behave differently to all commits to master. This means, only specific versions are pushed, instead of every commit updating the latest version on Docker Hub.</p>
+
+<p>You can consider this approach to have your commits go to a local registry to then use in nightly tests. By doing this, you can always test what is latest while reserving your tagged versions for release to Docker Hub.</p>
+
+<p>This involves two steps:</p>
+
+<ol>
+  <li>Modifying the GitHub workflow to only push commits with specific tags to Docker Hub</li>
+  <li>Setting up a GitHub Actions file to store the latest commit as an image in the GitHub registry</li>
+</ol>
+
+<p>First, let us modify our existing GitHub workflow to only push to Hub if there’s a particular tag. For example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">tags</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">v*.*.*"</span>
+</code></pre></div></div>
+
+<p>This ensures that the main CI will only trigger if we tag our commits with <code class="language-plaintext highlighter-rouge">V.n.n.n.</code> Let’s test this. For example, run the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag <span class="nt">-a</span> v1.0.2
+git push origin v1.0.2
+</code></pre></div></div>
+
+<p>Now, go to GitHub and check your Actions</p>
+
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/push-tagged-version.png" alt="Push tagged version" width="500px" /></p>
+
+<p>Now, let’s set up a second GitHub action file to store our latest commit as an image in the GitHub registry. You may want to do this to:</p>
+
+<ol>
+  <li>Run your nightly tests or recurring tests, or</li>
+  <li>To share work in progress images with colleagues.</li>
+</ol>
+
+<p>Let’s clone our previous GitHub action and add back in our previous logic for all pushes. This will mean we have two workflow files, our previous one and our new one we will now work on.
+Next, change your Docker Hub login to a GitHub container registry login:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="na">if</span><span class="pi">:</span> <span class="s">github.event_name != 'pull_request'</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+        <span class="na">registry</span><span class="pi">:</span> <span class="s">ghcr.io</span>
+          <span class="s">username</span><span class="pi">:</span> <span class="s">${{ github.repository_owner }}</span>
+          <span class="s">password</span><span class="pi">:</span> <span class="s">${{ secrets.GHCR_TOKEN }}</span>
+</code></pre></div></div>
+
+<p>Remember to change how the image is tagged. The following example keeps ‘latest’ as the only tag. However, you can add any logic to this if you prefer:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">tags</span><span class="pi">:</span> <span class="s">ghcr.io/${{ github.repository_owner }}/simplewhale:latest</span>
+</code></pre></div></div>
+
+<p><img src="/docs.docker.jp.onthefly/ci-cd/images/ghcr-logic.png" alt="Update tagged images" width="500px" /></p>
+
+<p>Now, we will have two different flows: one for our changes to master, and one for our pull requests. Next, we need to modify what we had before to ensure we are pushing our PRs to the GitHub registry rather than to Docker Hub.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this guide, you have learnt how to set up GitHub Actions workflow to an existing Docker project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>You can now consider setting up nightly tests against the latest tag, test each PR, or do something more elegant with the tags we are using and make use of the Git tag for the same tag in our image.</p>
+
+<p>To look at how you can do one of these, or to get a full example on how to set up what we have accomplished today, check out <a href="https://github.com/metcalfc/docker-action-examples" target="_blank" rel="noopener" class="_">Chad’s repo</a> which runs you through this and more details on our latest GitHub action.</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=CI/CD">CI/CD</a>, <a href="/docs.docker.jp.onthefly/search/?q=GitHub Actions">GitHub Actions</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/ci-cd/github-actions.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ci-cd/github-actions.ch](https://matsuand.github.io/docs.docker.jp.onthefly/ci-cd/github-actions/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#set-up-a-docker-project" class="nomunge">Set up a Docker project</a></li>
+  <li><a href="#set-up-the-github-actions-workflow" class="nomunge">Set up the GitHub Actions workflow</a></li>
+  <li><a href="#optimizing-the-workflow" class="nomunge">Optimizing the workflow</a></li>
+  <li><a href="#push-tagged-versions-to-docker-hub" class="nomunge">Push tagged versions to Docker Hub</a></li>
+  <li><a href="#conclusion" class="nomunge">Conclusion</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/ci-cd/github-actions/";</script></body>
+</html>
