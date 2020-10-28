@@ -36,9 +36,13 @@ Create an empty file called `Dockerfile`:
 @z
 
 @x
-    $ touch Dockerfile
+```bash
+$ touch Dockerfile
+```
 @y
-    $ touch Dockerfile
+```bash
+$ touch Dockerfile
+```
 @z
 
 @x
@@ -52,21 +56,25 @@ of. We use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
 @z
 
 @x
-    # Riak
-    #
-    # VERSION       0.1.1
+```dockerfile
+# Riak
+#
+# VERSION       0.1.1
 @y
-    # Riak
-    #
-    # VERSION       0.1.1
+```dockerfile
+# Riak
+#
+# VERSION       0.1.1
 @z
 
 @x
-    # Use the Ubuntu parent image provided by dotCloud
-    FROM ubuntu:trusty
+# Use the Ubuntu parent image provided by dotCloud
+FROM ubuntu:trusty
+```
 @y
-    # Use the Ubuntu parent image provided by dotCloud
-    FROM ubuntu:trusty
+# Use the Ubuntu parent image provided by dotCloud
+FROM ubuntu:trusty
+```
 @z
 
 @x
@@ -78,15 +86,19 @@ script and we download the setup script and run it.
 @z
 
 @x
-    # Install Riak repository before we do apt-get update, so that update happens
-    # in a single step
-    RUN apt-get install -q -y curl && \
-        curl -fsSL https://packagecloud.io/install/repositories/basho/riak/script.deb | sudo bash
+```dockerfile
+# Install Riak repository before we do apt-get update, so that update happens
+# in a single step
+RUN apt-get install -q -y curl && \
+    curl -fsSL https://packagecloud.io/install/repositories/basho/riak/script.deb | sudo bash
+```
 @y
-    # Install Riak repository before we do apt-get update, so that update happens
-    # in a single step
-    RUN apt-get install -q -y curl && \
-        curl -fsSL https://packagecloud.io/install/repositories/basho/riak/script.deb | sudo bash
+```dockerfile
+# Install Riak repository before we do apt-get update, so that update happens
+# in a single step
+RUN apt-get install -q -y curl && \
+    curl -fsSL https://packagecloud.io/install/repositories/basho/riak/script.deb | sudo bash
+```
 @z
 
 @x
@@ -104,37 +116,35 @@ Then we install and setup a few dependencies:
 @z
 
 @x
-<!-- -->
+```dockerfile
+# Install and setup project dependencies
+RUN apt-get update && \
+    apt-get install -y supervisor riak=2.0.5-1
 @y
-<!-- -->
+```dockerfile
+# Install and setup project dependencies
+RUN apt-get update && \
+    apt-get install -y supervisor riak=2.0.5-1
 @z
 
 @x
-    # Install and setup project dependencies
-    RUN apt-get update && \
-        apt-get install -y supervisor riak=2.0.5-1
+RUN mkdir -p /var/log/supervisor
 @y
-    # Install and setup project dependencies
-    RUN apt-get update && \
-        apt-get install -y supervisor riak=2.0.5-1
+RUN mkdir -p /var/log/supervisor
 @z
 
 @x
-    RUN mkdir -p /var/log/supervisor
+RUN locale-gen en_US en_US.UTF-8
 @y
-    RUN mkdir -p /var/log/supervisor
+RUN locale-gen en_US en_US.UTF-8
 @z
 
 @x
-    RUN locale-gen en_US en_US.UTF-8
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+```
 @y
-    RUN locale-gen en_US en_US.UTF-8
-@z
-
-@x
-    COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-@y
-    COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+```
 @z
 
 @x
@@ -144,13 +154,17 @@ After that, we modify Riak's configuration:
 @z
 
 @x
-    # Configure Riak to accept connections from any host
-    RUN sed -i "s|listener.http.internal = 127.0.0.1:8098|listener.http.internal = 0.0.0.0:8098|" /etc/riak/riak.conf
-    RUN sed -i "s|listener.protobuf.internal = 127.0.0.1:8087|listener.protobuf.internal = 0.0.0.0:8087|" /etc/riak/riak.conf
+```dockerfile
+# Configure Riak to accept connections from any host
+RUN sed -i "s|listener.http.internal = 127.0.0.1:8098|listener.http.internal = 0.0.0.0:8098|" /etc/riak/riak.conf
+RUN sed -i "s|listener.protobuf.internal = 127.0.0.1:8087|listener.protobuf.internal = 0.0.0.0:8087|" /etc/riak/riak.conf
+```
 @y
-    # Configure Riak to accept connections from any host
-    RUN sed -i "s|listener.http.internal = 127.0.0.1:8098|listener.http.internal = 0.0.0.0:8098|" /etc/riak/riak.conf
-    RUN sed -i "s|listener.protobuf.internal = 127.0.0.1:8087|listener.protobuf.internal = 0.0.0.0:8087|" /etc/riak/riak.conf
+```dockerfile
+# Configure Riak to accept connections from any host
+RUN sed -i "s|listener.http.internal = 127.0.0.1:8098|listener.http.internal = 0.0.0.0:8098|" /etc/riak/riak.conf
+RUN sed -i "s|listener.protobuf.internal = 127.0.0.1:8087|listener.protobuf.internal = 0.0.0.0:8087|" /etc/riak/riak.conf
+```
 @z
 
 @x
@@ -160,11 +174,15 @@ Then, we expose the Riak Protocol Buffers and HTTP interfaces:
 @z
 
 @x
-    # Expose Riak Protocol Buffers and HTTP interfaces
-    EXPOSE 8087 8098
+```dockerfile
+# Expose Riak Protocol Buffers and HTTP interfaces
+EXPOSE 8087 8098
+```
 @y
-    # Expose Riak Protocol Buffers and HTTP interfaces
-    EXPOSE 8087 8098
+```dockerfile
+# Expose Riak Protocol Buffers and HTTP interfaces
+EXPOSE 8087 8098
+```
 @z
 
 @x
@@ -174,9 +192,13 @@ Finally, run `supervisord` so that Riak is started:
 @z
 
 @x
-    CMD ["/usr/bin/supervisord"]
+```dockerfile
+CMD ["/usr/bin/supervisord"]
+```
 @y
-    CMD ["/usr/bin/supervisord"]
+```dockerfile
+CMD ["/usr/bin/supervisord"]
+```
 @z
 
 @x
@@ -194,9 +216,13 @@ sure it's at the same directory level as your `Dockerfile`:
 @z
 
 @x
-    touch supervisord.conf
+```bash
+touch supervisord.conf
+```
 @y
-    touch supervisord.conf
+```bash
+touch supervisord.conf
+```
 @z
 
 @x
@@ -206,33 +232,37 @@ Populate it with the following program definitions:
 @z
 
 @x
-    [supervisord]
-    nodaemon=true
+```ini
+[supervisord]
+nodaemon=true
 @y
-    [supervisord]
-    nodaemon=true
+```ini
+[supervisord]
+nodaemon=true
 @z
 
 @x
-    [program:riak]
-    command=bash -c "/usr/sbin/riak console"
-    numprocs=1
-    autostart=true
-    autorestart=true
-    user=riak
-    environment=HOME="/var/lib/riak"
-    stdout_logfile=/var/log/supervisor/%(program_name)s.log
-    stderr_logfile=/var/log/supervisor/%(program_name)s.log
+[program:riak]
+command=bash -c "/usr/sbin/riak console"
+numprocs=1
+autostart=true
+autorestart=true
+user=riak
+environment=HOME="/var/lib/riak"
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+```
 @y
-    [program:riak]
-    command=bash -c "/usr/sbin/riak console"
-    numprocs=1
-    autostart=true
-    autorestart=true
-    user=riak
-    environment=HOME="/var/lib/riak"
-    stdout_logfile=/var/log/supervisor/%(program_name)s.log
-    stderr_logfile=/var/log/supervisor/%(program_name)s.log
+[program:riak]
+command=bash -c "/usr/sbin/riak console"
+numprocs=1
+autostart=true
+autorestart=true
+user=riak
+environment=HOME="/var/lib/riak"
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+```
 @z
 
 @x
@@ -248,9 +278,13 @@ Now you can build a Docker image for Riak:
 @z
 
 @x
-    $ docker build -t "<yourname>/riak" .
+```bash
+$ docker build -t "<yourname>/riak" .
+```
 @y
-    $ docker build -t "<yourname>/riak" .
+```bash
+$ docker build -t "<yourname>/riak" .
+```
 @z
 
 @x

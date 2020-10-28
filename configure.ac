@@ -46,6 +46,8 @@ AC_CONFIG_FILES([Makefile
 		 src/_scss/Makefile
 		 src/app/Makefile
 		 src/buildx/Makefile
+		 src/ci-cd/Makefile
+		 src/ci-cd/images/Makefile
 		 src/compliance/Makefile
 		 src/compliance/cis/Makefile
 		 src/compliance/images/Makefile

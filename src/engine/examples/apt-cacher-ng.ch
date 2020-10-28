@@ -46,43 +46,43 @@ Use the following Dockerfile:
 @z
 
 @x
-    #
-    # Build: docker build -t apt-cacher .
-    # Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
-    #
-    # and then you can run containers with:
-    #   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
-    #
-    # Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
-    # which acts as an APT proxy server.
-    FROM        ubuntu
-@y
-    #
-    # Build: docker build -t apt-cacher .
-    # Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
-    #
-    # and then you can run containers with:
-    #   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
-    #
-    # Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
-    # which acts as an APT proxy server.
-    FROM        ubuntu
-@z
+```dockerfile
+#
+# Build: docker build -t apt-cacher .
+# Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
+#
+# and then you can run containers with:
+#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
+#
+# Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
+# which acts as an APT proxy server.
+FROM   ubuntu
 
-@x
-    VOLUME      ["/var/cache/apt-cacher-ng"]
-    RUN     apt-get update && apt-get install -y apt-cacher-ng
-@y
-    VOLUME      ["/var/cache/apt-cacher-ng"]
-    RUN     apt-get update && apt-get install -y apt-cacher-ng
-@z
+VOLUME ["/var/cache/apt-cacher-ng"]
+RUN    apt-get update && apt-get install -y apt-cacher-ng
 
-@x
-    EXPOSE      3142
-    CMD     chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
+EXPOSE 3142
+CMD    chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
+```
 @y
-    EXPOSE      3142
-    CMD     chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
+```dockerfile
+#
+# Build: docker build -t apt-cacher .
+# Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
+#
+# and then you can run containers with:
+#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
+#
+# Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
+# which acts as an APT proxy server.
+FROM   ubuntu
+
+VOLUME ["/var/cache/apt-cacher-ng"]
+RUN    apt-get update && apt-get install -y apt-cacher-ng
+
+EXPOSE 3142
+CMD    chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
+```
 @z
 
 @x
@@ -92,9 +92,13 @@ To build the image using:
 @z
 
 @x
-    $ docker build -t eg_apt_cacher_ng .
+```bash
+$ docker build -t eg_apt_cacher_ng .
+```
 @y
-    $ docker build -t eg_apt_cacher_ng .
+```bash
+$ docker build -t eg_apt_cacher_ng .
+```
 @z
 
 @x
@@ -104,9 +108,13 @@ Then run it, mapping the exposed port to one on the host
 @z
 
 @x
-    $ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
+```bash
+$ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
+```
 @y
-    $ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
+```bash
+$ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
+```
 @z
 
 @x
@@ -118,9 +126,13 @@ use:
 @z
 
 @x
-    $ docker logs -f test_apt_cacher_ng
+```bash
+$ docker logs -f test_apt_cacher_ng
+```
 @y
-    $ docker logs -f test_apt_cacher_ng
+```bash
+$ docker logs -f test_apt_cacher_ng
+```
 @z
 
 @x
@@ -164,19 +176,21 @@ a local version of a common base:
 @z
 
 @x
-    FROM ubuntu
-    RUN  echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
-    RUN apt-get update && apt-get install -y vim git
-@y
-    FROM ubuntu
-    RUN  echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
-    RUN apt-get update && apt-get install -y vim git
-@z
+```dockerfile
+FROM ubuntu
+RUN echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
+RUN apt-get update && apt-get install -y vim git
 
-@x
-    # docker build -t my_ubuntu .
+# docker build -t my_ubuntu .
+```
 @y
-    # docker build -t my_ubuntu .
+```dockerfile
+FROM ubuntu
+RUN echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
+RUN apt-get update && apt-get install -y vim git
+
+# docker build -t my_ubuntu .
+```
 @z
 
 @x
@@ -188,9 +202,13 @@ which obey `http_proxy`, such as `curl`, `wget` and others:
 @z
 
 @x
-    $ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
+```bash
+$ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
+```
 @y
-    $ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
+```bash
+$ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
+```
 @z
 
 @x
@@ -208,9 +226,13 @@ from your `Dockerfile` too.
 @z
 
 @x
-    $ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
+```bash
+$ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
+```
 @y
-    $ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
+```bash
+$ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
+```
 @z
 
 @x
@@ -220,13 +242,17 @@ from your `Dockerfile` too.
 @z
 
 @x
-    $ docker network create mynetwork
-    $ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
-    $ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
+```bash
+$ docker network create mynetwork
+$ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
+$ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
+```
 @y
-    $ docker network create mynetwork
-    $ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
-    $ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
+```bash
+$ docker network create mynetwork
+$ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
+$ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
+```
 @z
 
 @x
@@ -240,55 +266,51 @@ instruction, and the image we built to run the service:
 @z
 
 @x
-    $ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
-@y
-    $ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
-@z
+```bash
+$ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
 
-@x
-    root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
-    Scanning /var/cache/apt-cacher-ng, please wait...
-    Found distributions:
-    bla, taggedcount: 0
-         1. precise-security (36 index files)
-         2. wheezy (25 index files)
-         3. precise-updates (36 index files)
-         4. precise (36 index files)
-         5. wheezy-updates (18 index files)
-@y
-    root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
-    Scanning /var/cache/apt-cacher-ng, please wait...
-    Found distributions:
-    bla, taggedcount: 0
-         1. precise-security (36 index files)
-         2. wheezy (25 index files)
-         3. precise-updates (36 index files)
-         4. precise (36 index files)
-         5. wheezy-updates (18 index files)
-@z
+root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
+Scanning /var/cache/apt-cacher-ng, please wait...
+Found distributions:
+bla, taggedcount: 0
+     1. precise-security (36 index files)
+     2. wheezy (25 index files)
+     3. precise-updates (36 index files)
+     4. precise (36 index files)
+     5. wheezy-updates (18 index files)
 
-@x
-    Found architectures:
-         6. amd64 (36 index files)
-         7. i386 (24 index files)
-@y
-    Found architectures:
-         6. amd64 (36 index files)
-         7. i386 (24 index files)
-@z
+Found architectures:
+     6. amd64 (36 index files)
+     7. i386 (24 index files)
 
-@x
-    WARNING: The removal action may wipe out whole directories containing
-             index files. Select d to see detailed list.
-@y
-    WARNING: The removal action may wipe out whole directories containing
-             index files. Select d to see detailed list.
-@z
+WARNING: The removal action may wipe out whole directories containing
+         index files. Select d to see detailed list.
 
-@x
-    (Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
+(Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
+```
 @y
-    (Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
+```bash
+$ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
+
+root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
+Scanning /var/cache/apt-cacher-ng, please wait...
+Found distributions:
+bla, taggedcount: 0
+     1. precise-security (36 index files)
+     2. wheezy (25 index files)
+     3. precise-updates (36 index files)
+     4. precise (36 index files)
+     5. wheezy-updates (18 index files)
+
+Found architectures:
+     6. amd64 (36 index files)
+     7. i386 (24 index files)
+
+WARNING: The removal action may wipe out whole directories containing
+         index files. Select d to see detailed list.
+
+(Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
+```
 @z
 
 @x
@@ -300,11 +322,15 @@ container, and then removing the image.
 @z
 
 @x
-    $ docker container stop test_apt_cacher_ng
-    $ docker container rm test_apt_cacher_ng
-    $ docker image rm eg_apt_cacher_ng
+```bash
+$ docker container stop test_apt_cacher_ng
+$ docker container rm test_apt_cacher_ng
+$ docker image rm eg_apt_cacher_ng
+```
 @y
-    $ docker container stop test_apt_cacher_ng
-    $ docker container rm test_apt_cacher_ng
-    $ docker image rm eg_apt_cacher_ng
+```bash
+$ docker container stop test_apt_cacher_ng
+$ docker container rm test_apt_cacher_ng
+$ docker image rm eg_apt_cacher_ng
+```
 @z

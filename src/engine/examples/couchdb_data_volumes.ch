@@ -16,11 +16,13 @@ title: Dockerize a CouchDB service
 @z
 
 @x
-> **Note**:
-> - **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
+> **Note**
+>
+> **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 @y
-> **Note**:
-> - **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
+> **Note**
+>
+> **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 @z
 
 @x
@@ -46,9 +48,13 @@ We're marking `/var/lib/couchdb` as a data volume.
 @z
 
 @x
-    $ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
+```bash
+$ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
+```
 @y
-    $ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
+```bash
+$ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
+```
 @z
 
 @x
@@ -66,13 +72,17 @@ replace `localhost` with the public IP of your Docker host.
 @z
 
 @x
-    $ HOST=localhost
-    $ URL="http://$HOST:$(docker port $COUCH1 5984 | grep -o '[1-9][0-9]*$')/_utils/"
-    $ echo "Navigate to $URL in your browser, and use the couch interface to add data"
+```bash
+$ HOST=localhost
+$ URL="http://$HOST:$(docker port $COUCH1 5984 | grep -o '[1-9][0-9]*$')/_utils/"
+$ echo "Navigate to $URL in your browser, and use the couch interface to add data"
+```
 @y
-    $ HOST=localhost
-    $ URL="http://$HOST:$(docker port $COUCH1 5984 | grep -o '[1-9][0-9]*$')/_utils/"
-    $ echo "Navigate to $URL in your browser, and use the couch interface to add data"
+```bash
+$ HOST=localhost
+$ URL="http://$HOST:$(docker port $COUCH1 5984 | grep -o '[1-9][0-9]*$')/_utils/"
+$ echo "Navigate to $URL in your browser, and use the couch interface to add data"
+```
 @z
 
 @x
@@ -88,9 +98,13 @@ This time, we're requesting shared access to `$COUCH1`'s volumes.
 @z
 
 @x
-    $ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
+```bash
+$ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
+```
 @y
-    $ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
+```bash
+$ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
+```
 @z
 
 @x
@@ -100,13 +114,17 @@ This time, we're requesting shared access to `$COUCH1`'s volumes.
 @z
 
 @x
-    $ HOST=localhost
-    $ URL="http://$HOST:$(docker port $COUCH2 5984 | grep -o '[1-9][0-9]*$')/_utils/"
-    $ echo "Navigate to $URL in your browser. You should see the same data as in the first database"'!'
+```bash
+$ HOST=localhost
+$ URL="http://$HOST:$(docker port $COUCH2 5984 | grep -o '[1-9][0-9]*$')/_utils/"
+$ echo "Navigate to $URL in your browser. You should see the same data as in the first database"'!'
+```
 @y
-    $ HOST=localhost
-    $ URL="http://$HOST:$(docker port $COUCH2 5984 | grep -o '[1-9][0-9]*$')/_utils/"
-    $ echo "Navigate to $URL in your browser. You should see the same data as in the first database"'!'
+```bash
+$ HOST=localhost
+$ URL="http://$HOST:$(docker port $COUCH2 5984 | grep -o '[1-9][0-9]*$')/_utils/"
+$ echo "Navigate to $URL in your browser. You should see the same data as in the first database"'!'
+```
 @z
 
 @x
