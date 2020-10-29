@@ -200,21 +200,23 @@ docker login azure
 @z
 
 @x
-This opens your web browser and prompts you to enter your Azure login credentials.
+If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} and lets you connect manually.
+Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} login is separated from the Docker CLI Azure login.
 @y
 {% comment %}
 This opens your web browser and prompts you to enter your Azure login credentials.
 {% endcomment %}
-コマンドを実行するとウェブブラウザーが開き、Azure のログイン情報の入力が求められます。
+Docker CLI からブラウザーが開かない場合は、そこから [Azure デバイスコードフロー](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} へ進み、手動で接続できるようになります。
+なお [Azure コマンドライン](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} のログインは Docker CLI Azure ログインからは切り離されています。
 @z
 
 @x
-Alternatively, you can log in without interaction (typically in 
+Alternatively, you can log in without interaction (typically in
 scripts or continuous integration scenarios), using an Azure Service
 Principal, with `docker login azure --client-id xx --client-secret yy --tenant-id zz`
 @y
 {% comment %}
-Alternatively, you can log in without interaction (typically in 
+Alternatively, you can log in without interaction (typically in
 scripts or continuous integration scenarios), using an Azure Service
 Principal, with `docker login azure --client-id xx --client-secret yy --tenant-id zz`
 {% endcomment %}
@@ -225,18 +227,18 @@ Principal, with `docker login azure --client-id xx --client-secret yy --tenant-i
 @x
 >**Note**
 >
-> Logging in through the Azure Service Provider obtains an access token valid 
-for a short period (typically 1h), but it does not allow you to automatically 
-and transparently refresh this token. You must manually re-login 
-when the access token has expired when logging in with a Service Provider. 
+> Logging in through the Azure Service Provider obtains an access token valid
+for a short period (typically 1h), but it does not allow you to automatically
+and transparently refresh this token. You must manually re-login
+when the access token has expired when logging in with a Service Provider.
 @y
 {% comment %}
 >**Note**
 >
-> Logging in through the Azure Service Provider obtains an access token valid 
-for a short period (typically 1h), but it does not allow you to automatically 
-and transparently refresh this token. You must manually re-login 
-when the access token has expired when logging in with a Service Provider. 
+> Logging in through the Azure Service Provider obtains an access token valid
+for a short period (typically 1h), but it does not allow you to automatically
+and transparently refresh this token. You must manually re-login
+when the access token has expired when logging in with a Service Provider.
 {% endcomment %}
 >**メモ**
 >
@@ -246,11 +248,11 @@ when the access token has expired when logging in with a Service Provider.
 @z
 
 @x
-You can also use the `--tenant-id` option alone to specify a tenant, if 
+You can also use the `--tenant-id` option alone to specify a tenant, if
 you have several ones available in Azure.
 @y
 {% comment %}
-You can also use the `--tenant-id` option alone to specify a tenant, if 
+You can also use the `--tenant-id` option alone to specify a tenant, if
 you have several ones available in Azure.
 {% endcomment %}
 Azure 上に複数のテナントを有している場合、`--tenant-id` オプションを単独で用いることもできます。
@@ -267,12 +269,17 @@ Azure 上に複数のテナントを有している場合、`--tenant-id` オプ
 @z
 
 @x
-After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI. For example, let us create a new context called `myacicontext`:
+After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI.
+Creating an ACI context requires an Azure subscription, a resource group, and a region.
+For example, let us create a new context called `myacicontext`:
 @y
 {% comment %}
-After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI. For example, let us create a new context called `myacicontext`:
+After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI.
+Creating an ACI context requires an Azure subscription, a resource group, and a region.
+For example, let us create a new context called `myacicontext`:
 {% endcomment %}
 ログインした後は、ACI においてコンテナーをデプロイできるようにするために、ACI に関する Docker コンテキストを生成することが必要です。
+ACI コンテキストの生成には Azure サブスクリプション、リソースグループ、地域設定が必要です。
 たとえば新たなコンテキストとして `myacicontext` を生成することにします。
 @z
 
@@ -330,23 +337,6 @@ NAME                TYPE                DESCRIPTION                             
 myacicontext        aci                 myResourceGroupGTA@eastus
 default *           moby              Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                          swarm
 ```
-@z
-
-@x
-> **Note**
->
-> If you need to change the subscription and create a new context, you must 
-execute the `docker login azure` command again.
-@y
-{% comment %}
-> **Note**
->
-> If you need to change the subscription and create a new context, you must 
-execute the `docker login azure` command again.
-{% endcomment %}
-> **メモ**
->
-> サブスクリプションの切り替えが必要となって、新たなコンテキストを生成した場合には、`docker login azure` コマンドを再び実行する必要があります。
 @z
 
 @x
@@ -413,12 +403,12 @@ docker run -p 80:80 nginx
 @z
 
 @x
-After you've switched to the `myacicontext` context, you can use docker ps to list your containers running on ACI.
+After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
 @y
 {% comment %}
-After you've switched to the `myacicontext` context, you can use docker ps to list your containers running on ACI.
+After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
 {% endcomment %}
-コンテキストを `myacicontext` に切り替えたら、docker ps を使って、ACI 上に動作するコンテナー一覧を確認することができます。
+コンテキストを `myacicontext` に切り替えたら、`docker ps`を使って ACI 上に動作するコンテナー一覧を確認することができます。
 @z
 
 @x
@@ -497,21 +487,31 @@ docker rm <コンテナーID>
 @z
 
 @x
+You can remove containers using `docker rm`. To remove a running container, you must use the `--force` flag, or stop the container using `docker stop` before removing it.
+@y
+{% comment %}
+You can remove containers using `docker rm`. To remove a running container, you must use the `--force` flag, or stop the container using `docker stop` before removing it.
+{% endcomment %}
+コンテナーの削除には`docker rm`を用います。
+コンテナーが実行中である場合には`--force`フラグをつける必要があります。
+あるいは削除の前に`docker stop`を実行してコンテナーを停止させておくことが必要です。
+@z
+
+@x
 > **Note**
-> 
-> The stop command in ACI differs from the Moby stop command as a stopped 
-container will not retain its state when it is started again on ACI.
+>
+> The semantics of restarting a container on ACI are different to those when using a local Docker context for local development. On ACI, the container will be reset to its initial state and started on a new node. This includes the container's filesystem so all state that is not stored in a volume will be lost on restart.
 @y
 {% comment %}
 > **Note**
 > 
-> The stop command in ACI differs from the Moby stop command as a stopped 
-container will not retain its state when it is started again on ACI.
+> The semantics of restarting a container on ACI are different to those when using a local Docker context for local development. On ACI, the container will be reset to its initial state and started on a new node. This includes the container's filesystem so all state that is not stored in a volume will be lost on restart.
 {% endcomment %}
 > **メモ**
-> 
-> ACI における stop コマンドは Moby の stop コマンドとは異なります。
-> 停止させたコンテナーは、ACI 上において再起動させても元の状態は保持されません。
+>
+> ACI 上においてコンテナーを再起動する意味は、ローカル環境においてローカルな Docker コンテキストを利用している場合とは異なります。
+> ACI の場合、コンテナーはいったん初期状態にリセットされ、新たなノードとして起動されます。
+> これはつまり、コンテナー内のファイルシステムにおいて、ボリューム内に保存されていない状態があったとしたら、再起動時にそれらは失われるということです。
 @z
 
 @x
@@ -525,14 +525,19 @@ container will not retain its state when it is started again on ACI.
 @z
 
 @x
-You can also deploy and manage multi-container applications defined in Compose files to ACI using the `docker compose` command. To do this:
+You can also deploy and manage multi-container applications defined in Compose files to ACI using the `docker compose` command.
+All containers in the same Compose application are started in the same container group. Service discovery between the containers works using the service name specified in the Compose file.
+Name resolution between containers is achieved by writing service names in the `/etc/hosts` file that is shared automatically by all containers in the container group.
 @y
 {% comment %}
 You can also deploy and manage multi-container applications defined in Compose files to ACI using the `docker compose` command. To do this:
 {% endcomment %}
 ACI に対しては、Compose ファイルにて定義されたマルチコンテナーアプリケーションのデプロイと管理も可能です。
 その際には`docker compose` コマンドを利用します。
-そしてこれを実現するにあたっては、以下が必要です。
+同一の Compose アプリケーション内にあるコンテナーは、すべて同一のコンテナーグループ内において起動されます。
+コンテナー間におけるサービス検出は、Compose ファイル内に指定されたサービス名を用いて行われます。
+コンテナー間における名前解決は、`/etc/hosts`ファイル内にサービス名を記述することによって実現されます。
+`/etc/hosts`ファイルは、コンテナーグループ内であればすべてのコンテナーが自動的に共有します。
 @z
 
 @x
@@ -576,13 +581,23 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 @z
 
 @x
-  You can view logs from containers that are part of the Compose application using the command `docker logs <CONTAINER_ID>`. To know the container ID, run `docker ps`.
+  Containers started as part of Compose applications will be displayed along with single containers when using `docker ps`. Their container ID will be of the format: `<COMPOSE-PROJECT>_<SERVICE>`.
+  These containers cannot be stopped, started, or removed independently since they are all part of the same ACI container group.
+  You can view each container's logs with `docker logs`. You can list deployed Compose applications with `docker compose ls`. This will list only compose applications, not single containers started with `docker run`. You can remove a Compose application with `docker compose down`.
 @y
   {% comment %}
-  You can view logs from containers that are part of the Compose application using the command `docker logs <CONTAINER_ID>`. To know the container ID, run `docker ps`.
+  Containers started as part of Compose applications will be displayed along with single containers when using `docker ps`. Their container ID will be of the format: `<COMPOSE-PROJECT>_<SERVICE>`.
+  These containers cannot be stopped, started, or removed independently since they are all part of the same ACI container group.
+  You can view each container's logs with `docker logs`. You can list deployed Compose applications with `docker compose ls`. This will list only compose applications, not single containers started with `docker run`. You can remove a Compose application with `docker compose down`.
   {% endcomment %}
-  Compose アプリケーションを構成するコンテナーに対しては、コマンド `docker logs <コンテナーID>` を実行してそれぞれのログを確認できます。
-  コンテナー ID を調べるには `docker ps` を実行します。
+  Compose アプリケーションの一部として起動したコンテナーは、`docker ps`を実行した際に、単一のコンテナーとともに表示されます。
+  そのコンテナーの ID は`<Composeプロジェクト>_<サービス>`という書式です。
+  こういったコンテナーは、個別に停止、起動、削除を行うことはできません。
+  これらは同一の ACI コンテナーグループを構成する一部であるからです。
+  各コンテナーのログは`docker logs`を使って参照します。
+  デプロイを行った Compose アプリケーションの一覧は`docker compose ls`を実行します。
+  この場合の一覧には Compose アプリケーションのみが表示され、`docker run`によって起動した単一のコンテナーは表示されません。
+  Compose アプリケーションを削除するには`docker compose down`を実行します。
 @z
 
 @x
@@ -601,6 +616,105 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 @z
 
 @x
+## Exposing ports
+@y
+{% comment %}
+## Exposing ports
+{% endcomment %}
+## Exposing ports
+@z
+
+@x
+Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+@y
+{% comment %}
+Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+{% endcomment %}
+Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+@z
+
+@x
+> **Note:**
+>
+> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
+@y
+{% comment %}
+> **Note:**
+>
+> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
+{% endcomment %}
+> **Note:**
+>
+> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
+@z
+
+@x
+> **Note:**
+>
+> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+@y
+{% comment %}
+> **Note:**
+>
+> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+{% endcomment %}
+> **Note:**
+>
+> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+@z
+
+@x
+By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
+This IP address can be obtained when listing containers with `docker ps` or using `docker inspect`.
+@y
+{% comment %}
+By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
+This IP address can be obtained when listing containers with `docker ps` or using `docker inspect`.
+{% endcomment %}
+By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
+This IP address can be obtained when listing containers with `docker ps` or using `docker inspect`.
+@z
+
+@x
+### DNS label name
+@y
+{% comment %}
+### DNS label name
+{% endcomment %}
+### DNS label name
+@z
+
+@x
+In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
+You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+@y
+{% comment %}
+In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
+You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+{% endcomment %}
+In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
+You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+@z
+
+@x
+> **Note:**
+>
+> The domain of a Compose application can only be set once, if you specify the
+> `domain` for several services, the value must be identical.
+@y
+{% comment %}
+> **Note:**
+>
+> The domain of a Compose application can only be set once, if you specify the
+> `domain` for several services, the value must be identical.
+{% endcomment %}
+> **Note:**
+>
+> The domain of a Compose application can only be set once, if you specify the
+> `domain` for several services, the value must be identical.
+@z
+
+@x
 ## Using Azure file share as volumes in ACI containers
 @y
 {% comment %}
@@ -611,13 +725,13 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 @z
 
 @x
-You can deploy containers or Compose applications that use persistent data 
-stored in volumes. Azure File Share can be used to support volumes for ACI 
+You can deploy containers or Compose applications that use persistent data
+stored in volumes. Azure File Share can be used to support volumes for ACI
 containers.
 @y
 {% comment %}
-You can deploy containers or Compose applications that use persistent data 
-stored in volumes. Azure File Share can be used to support volumes for ACI 
+You can deploy containers or Compose applications that use persistent data
+stored in volumes. Azure File Share can be used to support volumes for ACI
 containers.
 {% endcomment %}
 コンテナーや Compose アプリケーションにおいてボリュームを使ったデータ保存を行っている場合でも、デプロイすることが可能です。
@@ -625,12 +739,12 @@ Azure ファイル共有を使えば、ACI コンテナーに対してのボリ�
 @z
 
 @x
-Using an existing Azure File Share with storage account name `mystorageaccount` 
+Using an existing Azure File Share with storage account name `mystorageaccount`
 and file share name `myfileshare`, you can specify a volume in your deployment `run`
 command as follows:
 @y
 {% comment %}
-Using an existing Azure File Share with storage account name `mystorageaccount` 
+Using an existing Azure File Share with storage account name `mystorageaccount`
 and file share name `myfileshare`, you can specify a volume in your deployment `run`
 command as follows:
 {% endcomment %}
@@ -638,11 +752,11 @@ command as follows:
 @z
 
 @x
-```
+```console
 docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 @y
-```
+```console
 docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 @z
@@ -698,14 +812,35 @@ volumes:
 @z
 
 @x
-When you deploy a single container or a Compose application, your 
-Azure login automatically fetches the key to the Azure storage account.
+> **Note:**
+>
+> The volume short syntax in Compose files cannot be used as it is aimed at volume definition for local bind mounts. Using the volume driver and driver option syntax in Compose files makes the volume definition a lot more clear.
 @y
 {% comment %}
-When you deploy a single container or a Compose application, your 
-Azure login will automatically fetch the key to the Azure storage account.
+> **Note:**
+>
+> The volume short syntax in Compose files cannot be used as it is aimed at volume definition for local bind mounts. Using the volume driver and driver option syntax in Compose files makes the volume definition a lot more clear.
 {% endcomment %}
-単一のコンテナーあるいは Compose アプリケーションをデプロイしたら、Azure のログイン内において、Auzre ストレージアカウントに対するアクセスキーが自動的に取得されます。
+> **メモ**
+>
+> Compose ファイル内においては、ボリュームを短い文法で記述することはできません。
+> ボリューム定義というものは、ローカルのバインドマウント向けを目的としているためです。
+> Compose ファイルにおいては、ボリュームドライバーやそのオプションを利用すれば、ボリューム定義がより明確になります。
+@z
+
+@x
+In single or multi-container deployments, the Docker CLI will use your Azure login to fetch the key to the storage account, and provide this key with the container deployment information, so that the container can access the volume.
+Volumes can be used from any file share in any storage account you have access to with your Azure login. You can specify `rw` (read/write) or `ro` (read only) when mounting the volume (`rw` is the default).
+@y
+{% comment %}
+In single or multi-container deployments, the Docker CLI will use your Azure login to fetch the key to the storage account, and provide this key with the container deployment information, so that the container can access the volume.
+Volumes can be used from any file share in any storage account you have access to with your Azure login. You can specify `rw` (read/write) or `ro` (read only) when mounting the volume (`rw` is the default).
+{% endcomment %}
+単一または複数コンテナーのデプロイにおいて Docker CLI は、Azure ストレージアカウントに対する鍵情報を取得するために Azure ログインを行います。
+そしてこの鍵をコンテナーデプロイ情報に利用します。
+こうしてコンテナーがボリュームにアクセスできるようになります。
+Azure ログインによってアクセスするストレージアカウント内であれば、ボリュームはどのファイル共有からでも利用できます。
+ボリュームマウントの際には`rw`（読み書き）または`ro`（読み取り専用）を指定します（デフォルトは`rw`です）。
 @z
 
 @x
@@ -719,13 +854,13 @@ Azure login will automatically fetch the key to the Azure storage account.
 @z
 
 @x
-To create a volume that you can use in containers or Compose applications when 
-using your ACI Docker context, you can use the `docker volume create` command, 
+To create a volume that you can use in containers or Compose applications when
+using your ACI Docker context, you can use the `docker volume create` command,
 and specify an Azure storage account name and the file share name:
 @y
 {% comment %}
-To create a volume that you can use in containers or Compose applications when 
-using your ACI Docker context, you can use the `docker volume create` command, 
+To create a volume that you can use in containers or Compose applications when
+using your ACI Docker context, you can use the `docker volume create` command,
 and specify an Azure storage account name and the file share name:
 {% endcomment %}
 ACI Docker コンテキストを利用して、コンテナーや Compose アプリケーション内で用いるボリュームを生成するには、`docker volume create` コマンドを実行します。
@@ -733,7 +868,7 @@ ACI Docker コンテキストを利用して、コンテナーや Compose アプ
 @z
 
 @x
-```
+```console
 $ docker --context aci volume create test-volume --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount  Created                         26.2s
@@ -741,7 +876,7 @@ $ docker --context aci volume create test-volume --storage-account mystorageacco
 mystorageaccount/test-volume
 ```
 @y
-```
+```console
 $ docker --context aci volume create test-volume --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount  Created                         26.2s
@@ -751,13 +886,13 @@ mystorageaccount/test-volume
 @z
 
 @x
-By default, if the storage account does not already exist, this command 
-creates a new storage account using the Standard LRS as a default SKU, and the 
+By default, if the storage account does not already exist, this command
+creates a new storage account using the Standard LRS as a default SKU, and the
 resource group and location associated with you Docker ACI context.
 @y
 {% comment %}
-By default, if the storage account does not already exist, this command 
-creates a new storage account using the Standard LRS as a default SKU, and the 
+By default, if the storage account does not already exist, this command
+creates a new storage account using the Standard LRS as a default SKU, and the
 resource group and location associated with you Docker ACI context.
 {% endcomment %}
 ストレージアカウントが存在しない場合、このコマンドがデフォルト SKU として 標準 LRS を利用してストレージアカウントを新規生成します。
@@ -765,18 +900,18 @@ resource group and location associated with you Docker ACI context.
 @z
 
 @x
-If you specify an existing storage account, the command creates a new 
+If you specify an existing storage account, the command creates a new
 file share in the exsting account:
 @y
 {% comment %}
-If you specify an existing storage account, the command creates a new 
+If you specify an existing storage account, the command creates a new
 file share in the exsting account:
 {% endcomment %}
 既存のストレージアカウントを指定した場合、このコマンドはそのアカウント内にファイル共有を新規生成します。
 @z
 
 @x
-```
+```console
 $ docker --context aci volume create test-volume2 --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount   Use existing                    0.7s
@@ -784,7 +919,7 @@ $ docker --context aci volume create test-volume2 --storage-account mystorageacc
 mystorageaccount/test-volume2
 ```
 @y
-```
+```console
 $ docker --context aci volume create test-volume2 --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount   Use existing                    0.7s
@@ -815,14 +950,14 @@ You can also list volumes that are available for use in containers or Compose ap
 @z
 
 @x
-```
+```console
 $ docker --context aci volume ls
 ID                                 DESCRIPTION
 mystorageaccount/test-volume       Fileshare test-volume in mystorageaccount storage account
 mystorageaccount/test-volume2      Fileshare test-volume2 in mystorageaccount storage account
 ```
 @y
-```
+```console
 $ docker --context aci volume ls
 ID                                 DESCRIPTION
 mystorageaccount/test-volume       Fileshare test-volume in mystorageaccount storage account
@@ -840,12 +975,12 @@ To delete a volume and the corresponding Azure file share, use the `volume rm` c
 @z
 
 @x
-```
+```console
 $ docker --context aci volume rm mystorageaccount/test-volume
 mystorageaccount/test-volume
 ```
 @y
-```
+```console
 $ docker --context aci volume rm mystorageaccount/test-volume
 mystorageaccount/test-volume
 ```
@@ -862,26 +997,54 @@ This permanently deletes the Azure file share and all its data.
 
 @x
 When deleting a volume in Azure, the command checks whether the specified file share
-is the only file share available in the storage account. If the storage account is 
-created with the `docker volume create` command, `docker volume rm` also 
+is the only file share available in the storage account. If the storage account is
+created with the `docker volume create` command, `docker volume rm` also
 deletes the storage account when it does not have any file shares.
-If you are using a storage account created without the `docker volume create` command 
-(through Azure portal or with the `az` command line for example), `docker volume rm` 
+If you are using a storage account created without the `docker volume create` command
+(through Azure portal or with the `az` command line for example), `docker volume rm`
 does not delete the storage account, even when it has zero remaining file shares.
 @y
 {% comment %}
 When deleting a volume in Azure, the command checks whether the specified file share
-is the only file share available in the storage account. If the storage account is 
-created with the `docker volume create` command, `docker volume rm` also 
+is the only file share available in the storage account. If the storage account is
+created with the `docker volume create` command, `docker volume rm` also
 deletes the storage account when it does not have any file shares.
-If you are using a storage account created without the `docker volume create` command 
-(through Azure portal or with the `az` command line for example), `docker volume rm` 
+If you are using a storage account created without the `docker volume create` command
+(through Azure portal or with the `az` command line for example), `docker volume rm`
 does not delete the storage account, even when it has zero remaining file shares.
 {% endcomment %}
 Azure においてボリュームを削除するとこのコマンドは、指定されたファイル共有が、そのストレージアカウントにおいてのみ利用されているファイル共有であるかどうかをチェックします。
 そのストレージアカウントが `docker volume create` コマンドによって作り出されたものである場合、`docker volume rm` コマンドは、ストレージアカウントがファイル共有を持っていなければ、ストレージアカウントも削除します。
 逆にストレージアカウントが（たとえば Azure ポータルや `az` コマンドを使った場合のように）`docker volume create` 以外において生成されたものである場合は、`docker volume rm` はストレージアカウントを削除しません。
 そのアカウントが一つのファイル共有も残っていなかったとしてもです。
+@z
+
+@x
+## Environment variables
+@y
+## Environment variables
+@z
+
+@x
+When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
+For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
+@y
+When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
+For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
+@z
+
+@x
+## Private Docker Hub images and using the Azure Container Registry
+@y
+## Private Docker Hub images and using the Azure Container Registry
+@z
+
+@x
+You can deploy private images to ACI that are hosted by any container registry. You need to log into the relevant registry using `docker login` before running `docker run` or `docker compose up`. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
+In the case of the Azure Container Registry, the command line will try to automatically log you into ACR from your Azure login. You don't need to manually login to the ACR registry first, if your Azure login has access to the ACR.
+@y
+You can deploy private images to ACI that are hosted by any container registry. You need to log into the relevant registry using `docker login` before running `docker run` or `docker compose up`. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
+In the case of the Azure Container Registry, the command line will try to automatically log you into ACR from your Azure login. You don't need to manually login to the ACR registry first, if your Azure login has access to the ACR.
 @z
 
 @x
@@ -1013,11 +1176,11 @@ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/instal
 @z
 
 @x
-You can download the Docker ACI Integration CLI from the 
+You can download the Docker ACI Integration CLI from the
 [latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} page.
 @y
 {% comment %}
-You can download the Docker ACI Integration CLI from the 
+You can download the Docker ACI Integration CLI from the
 [latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} page.
 {% endcomment %}
 Docker ACI 統合の CLI は、[最新版](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} ページからダウンロードすることができます。

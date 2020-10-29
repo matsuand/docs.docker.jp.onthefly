@@ -1,7 +1,7 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-10-29 22:08:34 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Develop with Docker Engine SDKs | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine SDK を利用した開発 | Docker ドキュメント</title>
   <meta name="description" content="Using Docker SDKs to automate Docker tasks in your language of choice" />
   <meta name="keywords" content="developing, sdk">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/api/sdk/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Develop with Docker Engine SDKs"/>
+  <meta name="twitter:title" itemprop="title name" content="Docker Engine SDK を利用した開発"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Develop with Docker Engine SDKs" />
+  <meta property="og:title" content="Docker Engine SDK を利用した開発" />
   <meta property="og:description" content="Using Docker SDKs to automate Docker tasks in your language of choice" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-29T22:08:34+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/sdk/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Develop with Docker Engine SDKs","description":"Using Docker SDKs to automate Docker tasks in your language of choice","url":"https://docs.docker.com/engine/api/sdk/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-10-29T22:08:34+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine SDK を利用した開発","description":"Using Docker SDKs to automate Docker tasks in your language of choice","url":"https://docs.docker.com/engine/api/sdk/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Develop with Docker Engine SDKs</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p>
+                        <section class="section"><h1>Docker Engine SDK を利用した開発</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p>
 <p>Docker には、Docker デーモンとの対話的な処理を行うための API が提供されています。
 （これを Docker Engine API と呼びます。）
 Go 言語や Python における SDK のようなものです。
@@ -248,17 +248,31 @@ Docker API directly, or using the Python or Go SDK.</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'{"Image": "alpine", "Cmd": ["echo", "hello world"]}'</span> <span class="se">\</span>
-  <span class="nt">-X</span> POST http:/v1.24/containers/create
+  <span class="nt">-X</span> POST http://localhost/v1.40/containers/create
 <span class="o">{</span><span class="s2">"Id"</span>:<span class="s2">"1c6594faf5"</span>,<span class="s2">"Warnings"</span>:null<span class="o">}</span>
 
-<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http:/v1.24/containers/1c6594faf5/start
+<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.40/containers/1c6594faf5/start
 
-<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http:/v1.24/containers/1c6594faf5/wait
+<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.40/containers/1c6594faf5/wait
 <span class="o">{</span><span class="s2">"StatusCode"</span>:0<span class="o">}</span>
 
-<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="s2">"http:/v1.24/containers/1c6594faf5/logs?stdout=1"</span>
+<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="s2">"http://localhost/v1.40/containers/1c6594faf5/logs?stdout=1"</span>
 hello world
 </code></pre></div>    </div>
+
+    <p>When using cURL to connect over a unix socket, the hostname is not important. The
+examples above use <code class="language-plaintext highlighter-rouge">localhost</code>, but any hostname would work.</p>
+
+    <blockquote class="important">
+      <p><strong>Using cURL 7.47.0 or below?</strong></p>
+
+      <p>The examples above assume you are using cURL 7.50.0 or above. Older versions of
+cURL used a <a href="https://github.com/moby/moby/issues/17960" target="_blank" rel="noopener" class="_">non-standard URL notation</a>
+when using a socket connection.</p>
+
+      <p>If you are using an older version of cURL, use <code class="language-plaintext highlighter-rouge">http:/&lt;API version&gt;/</code> instead,
+for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/containers/1c6594faf5/start</code></p>
+    </blockquote>
 
   </div>
 </div>

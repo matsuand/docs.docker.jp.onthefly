@@ -130,3 +130,20 @@ Networks and volumes defined as `external` are never removed.
 {% endcomment %}
 `external` として定義されているネットワークやボリュームは削除されません。
 @z
+
+@x
+Anonymous volumes are not removed by default. However, as they don't 
+have a stable name, they will not be automatically mounted by a subsequent
+`up`. For data that needs to persist between updates, use host or
+named volumes.
+@y
+{% comment %}
+Anonymous volumes are not removed by default. However, as they don't 
+have a stable name, they will not be automatically mounted by a subsequent
+`up`. For data that needs to persist between updates, use host or
+named volumes.
+{% endcomment %}
+匿名ボリュームはデフォルトでは削除されません。
+そしてこのボリュームには明確な名前がついていないため、この後に`up`コマンドが実行されても、自動的にマウントされることもありません。
+更新操作を通じて保存を必要とするデータであれば、ホストか名前つきボリュームを利用するようにしてください。
+@z

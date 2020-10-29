@@ -18,16 +18,16 @@ title: ダウンロードレート制限
 @x
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+For more information, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} and [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
 {% comment %}
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+For more information, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} and [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {% endcomment %}
 Docker では Docker Hub 上でのプルリクエストに対して、ダウンロードレート制限を有効化してきました。
 この制限はアカウントの種類により決定されます。
-詳しくは [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
+詳しくは [リソース消費 FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} や [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -85,14 +85,184 @@ not based on the image being pulled or its owner.
 @z
 
 @x
-Docker will gradually introduce these rate limits, with full
-effects starting from November 1st, 2020.
+Docker will gradually introduce these rate limits starting November 2nd, 2020.
 @y
 {% comment %}
-Docker will gradually introduce these rate limits, with full
-effects starting from November 1st, 2020.
+Docker will gradually introduce these rate limits starting November 2nd, 2020.
 {% endcomment %}
-Docker においてこのレート制限は徐々に導入され、完全な動作となったのは 2020 年 11 月 1 日からです。
+Docker においてこのレート制限は 2020 年 11 月 2 日から徐々に導入していきます。
+@z
+
+@x
+## How do I know my pull requests are being limited
+@y
+{% comment %}
+## How do I know my pull requests are being limited
+{% endcomment %}
+## How do I know my pull requests are being limited
+@z
+
+@x
+When you issue a pull request and you are over the limit for your account type, Docker Hub will return a `429` response code with the following body when the manifest is requested:
+@y
+{% comment %}
+When you issue a pull request and you are over the limit for your account type, Docker Hub will return a `429` response code with the following body when the manifest is requested:
+{% endcomment %}
+When you issue a pull request and you are over the limit for your account type, Docker Hub will return a `429` response code with the following body when the manifest is requested:
+@z
+
+@x
+```
+You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
+```
+@y
+```
+You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
+```
+@z
+
+@x
+You will see this error message in the Docker CLI or in the Docker Engine logs.
+@y
+{% comment %}
+You will see this error message in the Docker CLI or in the Docker Engine logs.
+{% endcomment %}
+You will see this error message in the Docker CLI or in the Docker Engine logs.
+@z
+
+@x
+## How can I check my current rate
+@y
+{% comment %}
+## How can I check my current rate
+{% endcomment %}
+## How can I check my current rate
+@z
+
+@x
+When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+@y
+{% comment %}
+When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+{% endcomment %}
+When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+@z
+
+@x
+```
+RateLimit-Limit    
+RateLimit-Remaining
+```
+@y
+```
+RateLimit-Limit    
+RateLimit-Remaining
+```
+@z
+
+@x
+If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+@y
+{% comment %}
+If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+{% endcomment %}
+If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+@z
+
+@x
+To get a token anonymously (if you are pulling anonymously):
+@y
+{% comment %}
+To get a token anonymously (if you are pulling anonymously):
+{% endcomment %}
+To get a token anonymously (if you are pulling anonymously):
+@z
+
+@x
+```
+$ TOKEN=$(curl "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
+@y
+```
+$ TOKEN=$(curl "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
+@z
+
+@x
+To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
+@y
+{% comment %}
+To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
+{% endcomment %}
+To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
+@z
+
+@x
+```
+$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
+@y
+```
+$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
+@z
+
+@x
+Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+@y
+{% comment %}
+Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+{% endcomment %}
+Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+@z
+
+@x
+```
+$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+```
+@y
+```
+$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+```
+@z
+
+@x
+Which should return something like this:
+@y
+{% comment %}
+Which should return something like this:
+{% endcomment %}
+Which should return something like this:
+@z
+
+@x
+```
+< RateLimit-Limit: 100;w=21600  
+< RateLimit-Remaining: 76;w=21600
+```
+@y
+```
+< RateLimit-Limit: 100;w=21600  
+< RateLimit-Remaining: 76;w=21600
+```
+@z
+
+@x
+This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
+@y
+{% comment %}
+This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
+{% endcomment %}
+This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
+@z
+
+@x
+> Remember that these headers are best-effort and there will be small variations.
+@y
+{% comment %}
+> Remember that these headers are best-effort and there will be small variations.
+{% endcomment %}
+> Remember that these headers are best-effort and there will be small variations.
 @z
 
 @x
@@ -282,16 +452,16 @@ Docker Hub ではアプリケーションやインフラストラクチャーを
 @x
 You can differentiate between these limits by looking at the error 
 code. The "overall limit" will return a simple `429 Too Many Requests` 
-response. The image download limit returns a longer error message that 
+response. The pull limit returns a longer error message that
 includes a link to this page.
 @y
 {% comment %}
 You can differentiate between these limits by looking at the error 
 code. The "overall limit" will return a simple `429 Too Many Requests` 
-response. The image download limit returns a longer error message that 
+response. The pull limit returns a longer error message that
 includes a link to this page.
 {% endcomment %}
 この制限が適用されたかどうかは、エラーコードを見ればわかります。
 総量制限が適用された場合、単純に`429 Too Many Requests`レスポンスが返されます。
-イメージのダウンロードの際に発生する制限の場合は、もっと長いエラーメッセージが示され、その中には本ページへのリンクが示されます。
+プル処理時に発生する制限の場合は、もっと長いエラーメッセージが示され、その中には本ページへのリンクが示されます。
 @z
