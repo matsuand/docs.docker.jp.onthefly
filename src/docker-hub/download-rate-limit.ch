@@ -180,11 +180,11 @@ To get a token anonymously (if you are pulling anonymously):
 
 @x
 ```
-$ TOKEN=$(curl "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+$ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 @y
 ```
-$ TOKEN=$(curl "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+$ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 @z
 
@@ -199,11 +199,11 @@ To get a token with a user account (if you are authenticating your pulls) - don'
 
 @x
 ```
-$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 @y
 ```
-$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 @z
 
