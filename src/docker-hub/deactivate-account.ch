@@ -192,12 +192,22 @@ Before deactivating an organization, please complete the following:
 @z
 
 @x
-3. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+3. Remove all other members, including those in the **Owners** team, within the organization.
 @y
 {% comment %}
-3. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+3. Remove all other members, including those in the **Owners** team, within the organization.
 {% endcomment %}
-3. [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account) をアンリンクします。
+3. 他のメンバーはすべて削除します。
+   組織内の **Owners** チームのメンバーも同様です。
+@z
+
+@x
+4. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+@y
+{% comment %}
+4. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+{% endcomment %}
+4. [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account) をアンリンクします。
 @z
 
 @x
