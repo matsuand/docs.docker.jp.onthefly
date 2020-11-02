@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-29 22:08:34 +0900-->
+<!-- Page generated 2020-11-02 19:57:27 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Azure での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Azure での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="Azure において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-29T22:08:34+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-02T19:57:27+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/aci-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-29T22:08:34+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-02T19:57:27+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Azure での Docker コンテナーのデプロイ","description":"Azure において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/aci-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -288,6 +288,20 @@ ACI の場合、コンテナーはいったん初期状態にリセットされ�
 
   <p>現時点の Docker Azure 統合では、Compose アプリケーションを構成するコンテナーからのログを、すべて集めて取得するようなことはできません。</p>
 </blockquote>
+
+<h2 id="releasing-resources">リソースの解放</h2>
+
+<p>単独のコンテナーや Compose アプリケーションは<code class="language-plaintext highlighter-rouge">docker prune</code>コマンドを使って ACI から削除することができます。
+<code class="language-plaintext highlighter-rouge">docker prune</code>コマンドは、現在実行されていないデプロイ内容を削除します。
+実行中のデプロイ内容を削除するには<code class="language-plaintext highlighter-rouge">--force</code>を指定します。
+<code class="language-plaintext highlighter-rouge">--dry-run</code>オプションを使えば、削除予定のデプロイ一覧が表示されます。
+ただしこれは実際に削除を行うものではありません。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>./bin/docker <span class="nt">--context</span> acicontext prune <span class="nt">--dry-run</span> <span class="nt">--force</span>
+<span class="go">Resources that would be deleted:
+my-application
+Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
+</span></code></pre></div></div>
 
 <h2 id="exposing-ports">Exposing ports</h2>
 
@@ -572,6 +586,7 @@ Docker コンテキストが異なれば、コンテナー名や Compose アプ�
       <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
       <li><a href="#run-docker-containers-on-aci" class="nomunge">ACI での Docker コンテナー実行</a></li>
       <li><a href="#running-compose-applications" class="nomunge">Compose アプリケーションの実行</a></li>
+      <li><a href="#releasing-resources" class="nomunge">リソースの解放</a></li>
       <li><a href="#exposing-ports" class="nomunge">Exposing ports</a></li>
       <li><a href="#using-azure-file-share-as-volumes-in-aci-containers" class="nomunge">ACI コンテナー内での Azure ファイル共有のボリュームとしての利用</a></li>
       <li><a href="#environment-variables" class="nomunge">Environment variables</a></li>

@@ -616,6 +616,53 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 @z
 
 @x
+## Releasing resources
+@y
+{% comment %}
+## Releasing resources
+{% endcomment %}
+{: #releasing-resources }
+## リソースの解放
+@z
+
+@x
+Single containers and Compose applications can be removed from ACI with 
+the `docker prune` command. The `docker prune` command removes deployments 
+that not currently running. To remove running depoyments, you can specify
+`--force`. The `--dry-run` option lists deployments that are planned for 
+removal, but it doesn't actually remove them.
+@y
+{% comment %}
+Single containers and Compose applications can be removed from ACI with 
+the `docker prune` command. The `docker prune` command removes deployments 
+that not currently running. To remove running depoyments, you can specify
+`--force`. The `--dry-run` option lists deployments that are planned for 
+removal, but it doesn't actually remove them.
+{% endcomment %}
+単独のコンテナーや Compose アプリケーションは`docker prune`コマンドを使って ACI から削除することができます。
+`docker prune`コマンドは、現在実行されていないデプロイ内容を削除します。
+実行中のデプロイ内容を削除するには`--force`を指定します。
+`--dry-run`オプションを使えば、削除予定のデプロイ一覧が表示されます。
+ただしこれは実際に削除を行うものではありません。
+@z
+
+@x
+```console
+$ ./bin/docker --context acicontext prune --dry-run --force
+Resources that would be deleted:
+my-application
+Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
+```
+@y
+```console
+$ ./bin/docker --context acicontext prune --dry-run --force
+Resources that would be deleted:
+my-application
+Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
+```
+@z
+
+@x
 ## Exposing ports
 @y
 {% comment %}
