@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-11-03 22:13:46 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>自動ビルドの設定 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="自動ビルドの設定" />
   <meta property="og:description" content="自動ビルドを設定します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-03T22:13:46+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-03T22:13:46+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"自動ビルドの設定","description":"自動ビルドを設定します。","url":"https://docs.docker.com/docker-hub/builds/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,13 +109,26 @@
 そしてビルドされたイメージは Docker Hub レジストリにプッシュされます。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: 自動ビルドの設定が行われているリポジトリであっても <code class="language-plaintext highlighter-rouge">docker push</code> を使えば、それまでと変わらずにビルド済イメージをプッシュすることができます。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>自動ビルドの設定が行われているリポジトリであっても<code class="language-plaintext highlighter-rouge">docker push</code>を使えば、それまでと変わらずにビルド済イメージをプッシュすることができます。</p>
 </blockquote>
 
 <p>If you have automated tests configured, these run after building but before
 pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests does not push the built
 image. Automated tests do not push images to the registry on their own. <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">Learn more about automated image testing here.</a></p>
+
+<p>Depending on your <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">plan</a>, you may get parallel builds, which means that <code class="language-plaintext highlighter-rouge">N</code>
+autobuilds can be run at the same time. <code class="language-plaintext highlighter-rouge">N</code> is configured by the plan that you
+subscribe to. Once <code class="language-plaintext highlighter-rouge">N+1</code> builds are running, any additional builds are
+queued to be run later.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>The total number of pending builds in the queue is limited to 30 and further requests will be discarded.</p>
+</blockquote>
 
 <p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-dashboard.png" alt="An automated build dashboard" /></p>
 
@@ -232,9 +245,9 @@ capture groups and use its result as part of the tag. To learn more, see
 </ul>
 
 <blockquote>
-  <p><strong>Note</strong>: When Docker Hub pulls a branch from a source code repository, it performs
-a shallow clone (only the tip of the specified branch).  Refer to <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/">Advanced options for Autobuild and Autotest</a>
-for more information.</p>
+  <p><strong>Note</strong></p>
+
+  <p>When Docker Hub pulls a branch from a source code repository, it performs a shallow clone (only the tip of the specified branch).  Refer to <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/">Advanced options for Autobuild and Autotest</a> for more information.</p>
 </blockquote>
 
 <h3 id="environment-variables-for-builds">Environment variables for builds</h3>
@@ -289,7 +302,9 @@ display a <strong>Retry</strong> button.</p>
 <p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/retry-build.png" alt="Timeline view showing the retry build button" /></p>
 
 <blockquote>
-  <p><strong>Note</strong>: If you are viewing the build details for a repository that belongs
+  <p><strong>Note</strong></p>
+
+  <p>If you are viewing the build details for a repository that belongs
 to an Organization, the Cancel and Retry buttons only appear if you have <code class="language-plaintext highlighter-rouge">Read &amp; Write</code> access to the repository.</p>
 </blockquote>
 
@@ -379,7 +394,9 @@ the case, you can specify a path where the build looks for the files.</p>
 <p>The <em>build context</em> is the path to the files needed for the build, relative to the root of the repository. Enter the path to these files in the <strong>Build context</strong> field. Enter <code class="language-plaintext highlighter-rouge">/</code> to set the build context as the root of the source code repository.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: If you delete the default path <code class="language-plaintext highlighter-rouge">/</code> from the <strong>Build context</strong> field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.</p>
+  <p><strong>Note</strong></p>
+
+  <p>If you delete the default path <code class="language-plaintext highlighter-rouge">/</code> from the <strong>Build context</strong> field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.</p>
 </blockquote>
 
 <p>You can specify the <strong>Dockerfile location</strong> as a path relative to the build
@@ -424,7 +441,9 @@ and an error is logged in your build timeline.</p>
 <p>To work around this, you can set up your automated build using the <code class="language-plaintext highlighter-rouge">SSH_PRIVATE</code> environment variable to override the deployment key and grant Docker Hub’s build system access to the repositories.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: If you are using autobuild for teams, use <a href="/docs.docker.jp.onthefly/docker-hub/builds/#service-users-for-team-autobuilds">the process below</a> instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub’s access to your source repositories.</p>
+  <p><strong>Note</strong></p>
+
+  <p>If you are using autobuild for teams, use <a href="/docs.docker.jp.onthefly/docker-hub/builds/#service-users-for-team-autobuilds">the process below</a> instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub’s access to your source repositories.</p>
 </blockquote>
 
 <ol>
@@ -442,7 +461,9 @@ and an error is logged in your build timeline.</p>
 </ol>
 
 <blockquote>
-  <p><strong>Note</strong>: You must configure your private git submodules using git clone over SSH (<code class="language-plaintext highlighter-rouge">git@submodule.tld:some-submodule.git</code>) rather than HTTPS.</p>
+  <p><strong>Note</strong></p>
+
+  <p>You must configure your private git submodules using git clone over SSH (<code class="language-plaintext highlighter-rouge">git@submodule.tld:some-submodule.git</code>) rather than HTTPS.</p>
 </blockquote>
 
 <h2 id="autobuild-for-teams">Autobuild for Teams</h2>
@@ -560,7 +581,9 @@ Docker Hub’s <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-tes
 integrates seamlessly with autobuild and autoredeploy.</p>
 
 <blockquote>
-  <p><strong>Note</strong>: While the Autotest feature builds an image for testing purposes, it
+  <p><strong>Note</strong></p>
+
+  <p>While the Autotest feature builds an image for testing purposes, it
 does not push the resulting image to Docker Hub.</p>
 </blockquote>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=automated">automated</a>, <a href="/docs.docker.jp.onthefly/search/?q=build">build</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=Docker Hub">Docker Hub</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
