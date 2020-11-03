@@ -9,6 +9,7 @@ redirect_from:
 - /windows/troubleshoot/
 - /docker-for-win/troubleshoot/
 title: Logs and troubleshooting
+toc_max: 2
 ---
 @y
 ---
@@ -18,17 +19,18 @@ redirect_from:
 - /windows/troubleshoot/
 - /docker-for-win/troubleshoot/
 title: ログとトラブルシューティング
+toc_max: 2
 ---
 @z
 
 @x
-This page contains information on how to diagnose and troubleshoot problems, send logs and communicate with the Docker Desktop team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 @y
 {% comment %}
-This page contains information on how to diagnose and troubleshoot problems, send logs and communicate with the Docker Desktop team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 {% endcomment %}
-本ページでは、問題が発生した際の分析方法や解決方法について示します。
-Docker Desktop チームへログ送付してやりとりを行ったり、フォーラムや Knowledge Hub を活用したりしてください。
+本ページでは Docker Desktop において問題が発生した際の分析方法や解決方法について示します。
+Docker Desktop サポートへの要求を行ったり（プロプランやチームプランのユーザーのみ）、Docker Desktop チームへログ送付してやりとりを行ったり、フォーラムや Success Center を活用したりしてください。
 GitHub 上での issue の確認や情報収集を行って、既知の問題であればその回避策を探してください。
 @z
 
@@ -54,12 +56,12 @@ from the menu bar to see the troubleshoot options.
 @z
 
 @x
-![Uninstall or reset Docker](images/troubleshoot.png){:width="750px"}
+![Troubleshoot Docker Desktop](images/troubleshoot.png){:width="600px"}
 @y
 {% comment %}
-![Uninstall or reset Docker](images/troubleshoot.png){:width="750px"}
+![Troubleshoot Docker Desktop](images/troubleshoot.png){:width="600px"}
 {% endcomment %}
-![Docker のアンインストールやリセット](images/troubleshoot.png){:width="750px"}
+![Docker Desktop のトラブルシューティング](images/troubleshoot.png){:width="600px"}
 @z
 
 @x
@@ -68,7 +70,7 @@ The Troubleshoot page contains the following options:
 {% comment %}
 The Troubleshoot page contains the following options:
 {% endcomment %}
-トラブルシューティングページには、以下のオプションがあります。
+トラブルシューティングページには以下のオプションがあります。
 @z
 
 @x
@@ -81,23 +83,14 @@ The Troubleshoot page contains the following options:
 @z
 
 @x
-* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
+* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 @y
 {% comment %}
 * **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
 {% endcomment %}
-* **Run Diagnostics**（診断処理の開始）: Docker Desktop 上に何か問題があるかどうかを診断するときにこのオプションを実行します。
-  診断処理に関する詳細は [診断、フィードバック送信、GitHub の issue 生成](#diagnose-problems-send-feedback-and-create-github-issues) を参照してください。
-@z
-
-@x
-* **Clean / Purge data**: Select this option to delete container and image data. Choose whether you'd like to delete data from Hyper-V, WSL 2, or Windows Containers and then click **Delete** to confirm.
-@y
-{% comment %}
-* **Clean / Purge data**: Select this option to delete container and image data. Choose whether you'd like to delete data from Hyper-V, WSL 2, or Windows Containers and then click **Delete** to confirm.
-{% endcomment %}
-* **Clean / Purge data**（）: コンテナーとイメージデータを削除するときにこのオプションを実行します。
-  削除するデータが Hyper-V、WSL 2、Windows コンテナーのものかどうかを選び、**Delete** をクリックして確認します。
+* **Support**（サポート）: プロプランおよびチームプランの開発者は、このオプションを利用してサポートリクエストを送信することができます。
+それ以外のユーザーはこのオプションによって Docker Desktop の issue 診断を行うことができます。
+詳しくは [診断とフィードバック](#diagnose-and-feedback) あるいは [サポート](#support) を参照してください。
 @z
 
 @x
@@ -108,6 +101,16 @@ The Troubleshoot page contains the following options:
 {% endcomment %}
 * **Reset Kubernetes cluster**（Kubernetes クラスターのリセット）: Select this option to delete all stacks and Kubernetes resources. 
   詳しくは [Kubernetes](index.md#kubernetes) を参照してください。
+@z
+
+@x
+* **Clean / Purge data**: Select this option to delete container and image data. Choose whether you'd like to delete data from Hyper-V, WSL 2, or Windows Containers and then click **Delete** to confirm.
+@y
+{% comment %}
+* **Clean / Purge data**: Select this option to delete container and image data. Choose whether you'd like to delete data from Hyper-V, WSL 2, or Windows Containers and then click **Delete** to confirm.
+{% endcomment %}
+* **Clean / Purge data**（）: コンテナーとイメージデータを削除するときにこのオプションを実行します。
+  削除するデータが Hyper-V、WSL 2、Windows コンテナーのものかどうかを選び、**Delete** をクリックして確認します。
 @z
 
 @x
@@ -123,13 +126,13 @@ Docker Desktop to their initial state, the same as when Docker Desktop was first
 @z
 
 @x
-## Diagnose problems, send feedback, and create GitHub issues
+## Diagnose and feedback
 @y
 {% comment %}
-## Diagnose problems, send feedback, and create GitHub issues
+## Diagnose and feedback
 {% endcomment %}
-{: #diagnose-problems-send-feedback-and-create-github-issues }
-## 診断、フィードバック送信、GitHub の issue 生成
+{: #diagnose-and-feedback }
+## 診断、フィードバック送信
 @z
 
 @x
@@ -146,91 +149,101 @@ If you experience issues for which you do not find solutions in this
 documentation, on [Docker Desktop for Windows issues on
 GitHub](https://github.com/docker/for-win/issues), or the [Docker Desktop for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data.
+troubleshoot the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
 @y
 {% comment %}
 If you experience issues for which you do not find solutions in this
 documentation, on [Docker Desktop for Windows issues on
 GitHub](https://github.com/docker/for-win/issues), or the [Docker Desktop for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data.
+troubleshoot the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
 {% endcomment %}
 何か問題が発生したとして、その解決方法が本書ではわからなかったとします。
 [GitHub 上の Docker Desktop for Windows に対する issues](https://github.com/docker/for-win/issues) や [Docker Desktop for Windows フォーラム](https://forums.docker.com/c/docker-for-windows) を見ても解決できなかったら、ログデータの解析をお手伝いします。
+issue を報告する際には、本ページに示す情報をよく読んで、よく知られている問題に関して確認の上、報告することをお願いします。
 @z
 
 @x
-Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
+1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu.
+2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+3. Click **Get Support**. This opens the in-app **Diagnose & Support** (**Diagnose & Feedback** for free users) page and starts collecting the diagnostics.
 @y
 {% comment %}
-Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
+1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu.
+2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+3. Click **Get Support**. This opens the in-app **Diagnose & Support** (**Diagnose & Feedback** for free users) page and starts collecting the diagnostics.
 {% endcomment %}
-メニューから ![クジラメニュー](images/whale-x.png){: .inline} > **Troubleshoot** を実行します。
+1. メニューから ![クジラメニュー](images/whale-x.png){: .inline} > **Troubleshoot** を実行します。
+2. Docker Desktop にサインインします。
+   さらに [Docker アカウント](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} にもサインインしていることを確認してください。
+3. **Get Support** をクリックします。
+   ここからアプリ内の **Diagnose & Support** (無償ユーザーの場合は **Diagnose & Feedback**) ページが開いて、診断情報の収集が始まります。
 @z
 
 @x
-![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
+    ![Diagnose & Support](images/diagnose-support.png){:width="600px"}
 @y
 {% comment %}
-![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
+    ![Diagnose & Support](images/diagnose-support.png){:width="600px"}
 {% endcomment %}
-![診断とフィードバック](images/diagnose-feedback.png){:width="600px"}
+    ![診断とサポート](images/diagnose-support.png){:width="600px"}
 @z
 
 @x
+4. When the diagnostics collection process is complete, click **Upload** to upload your diagnostics to Docker Desktop.
+5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
+6. If you have subscribed to a Pro or a Team plan, click **Get support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+@y
+{% comment %}
 When the **Diagnose & Feedback** window initiated, it starts collecting diagnostics. When the diagnostics are available, you can upload them and obtain a **Diagnostic ID**, which must be provided when communicating with the Docker
 team. For more information on our policy regarding personal data, see
 [how is personal data handled in Docker
 Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop).
-@y
-{% comment %}
-When the **Diagnose & Feedback** window initiated, it starts collecting diagnostics. When the diagnostics are available, you can upload them and obtain a **Diagnostic ID**, which must be provided when communicating with the Docker
-team. For more information on our policy regarding personal data, see
-[how is personal data handled in Docker
-Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop).
 {% endcomment %}
-**Diagnose & Feedback**（診断とフィードバック）画面が起動されると、診断情報の収集が始まります。
-診断情報の収集が終わったら、これをアップロードして **Diagnostic ID**（診断 ID）を得ます。
-これは Docker チームとのやりとりを行う際に必要になります。
-個人情報取扱ポリシーについての情報は [how is personal data handled in Docker
-Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop)（Docker Desktop での個人情報の取り扱い） を参照してください。
+4. 診断情報の収集処理が終了したら **Upload** をクリックして、その診断情報を Docker Desktop にアップロードします。
+5. 診断情報がアップロードされると Docker Desktop は診断 ID（Diagnostic ID）を出力するので、これをコピーします。
+6. プロプランまたはチームプランを購入している場合は **Get support** をクリックします。
+   ここから [Docker Desktop サポート](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} 画面が開きます。
+   必要な情報を入力し、上でコピーした ID を診断 ID 欄に入力します。
+   そして **Submit** をクリックして Docker Desktop サポートへ送信します。
 @z
 
 @x
-![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="600px"}
+   > **Note**
+    >
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
 @y
 {% comment %}
-![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="600px"}
+   > **Note**
+    >
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
 {% endcomment %}
-![診断とフィードバックにおける診断 ID](images/diagnostic-id.png){:width="600px"}
+   > **メモ**
+    >
+    > サポート画面にアクセスするためには、プロプランやチームプランの資格情報を利用して Docker Desktop にサインインしておく必要があります。Docker Desktop サポートに関する情報は [サポート](#support) を参照してください。
 @z
 
 @x
-If you click on **Report an issue**, it opens [Docker Desktop for Windows issues on
-GitHub](https://github.com/docker/for-win/issues/) in your web browser in a
-"New issue" template, to be completed before submission. Do not forget to
-include your diagnostic ID.
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
 @y
 {% comment %}
-If you click on **Report an issue**, it opens [Docker Desktop for Windows issues on
-GitHub](https://github.com/docker/for-win/issues/) in your web browser in a
-"New issue" template, to be completed before submission. Do not forget to
-include your diagnostic ID.
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
 {% endcomment %}
-**Report an issue**（問題の報告）をクリックっすると、ブラウザー上に [GitHub の Docker Desktop for Windows issues](https://github.com/docker/for-win/issues/) の「New issue」（新たな問題）のテンプレートページが開きます。
-内容の書き終えたら送信します。
-その際には診断 ID を記入することを忘れないでください。
+7. プロプランやチームプランを購入していない場合は、**Upgrade your account** をクリックして既存のアカウントをアップグレードしてください。
 @z
 
 @x
-![issue-template](images/issue-template.png){:width="600px"}
+    Alternatively, click **Report an issue** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 @y
 {% comment %}
-![issue-template](images/issue-template.png){:width="600px"}
+    Alternatively, click **Report an issue** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 {% endcomment %}
-![問題のテンプレート画面](images/issue-template.png){:width="600px"}
+    こうすることとは別に **Report an issue** をクリックして GitHub 上に Docker Desktop の issue を開くこともできます。
+    この場合には、ウェブブラウザー上に GitHub の Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) に関する新たな issue のテンプレートが開きます。
+    必要な情報を書き入れた上で、上でコピーした診断 ID も忘れずに記入してください。
+    **submit new issue** をクリックして新たな issue を登録します。
 @z
 
 @x
@@ -1730,4 +1743,186 @@ explore other workarounds suggested on Docker Desktop forums.
 {% endcomment %}
 For a temporary workaround, uninstall the anti-virus software, or
 explore other workarounds suggested on Docker Desktop forums.
+@z
+
+@x
+## Support
+@y
+## Support
+@z
+
+@x
+This section contains information on how to get support on Docker Desktop.
+@y
+This section contains information on how to get support on Docker Desktop.
+@z
+
+@x
+>**Note**
+>
+> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+@y
+>**Note**
+>
+> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
+### How do I get Docker Desktop support?
+@y
+### How do I get Docker Desktop support?
+@z
+
+@x
+If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+@y
+If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
+Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
+@y
+Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
+@z
+
+@x
+### What support can I get?
+@y
+### What support can I get?
+@z
+
+@x
+If you are a Pro or a Team user, you can request for support on the following types of issues:
+@y
+If you are a Pro or a Team user, you can request for support on the following types of issues:
+@z
+
+@x
+* Desktop upgrade issues
+* Desktop installation issues
+  * Enabling virtualization in BIOS
+  * Enabling Windows features
+  * Installation crashes
+  * Failure to launch Docker Desktop on first run
+* Usage issues
+  * Crash closing software
+  * Docker Desktop not behaving as expected
+* Configuration issues
+* Basic product ‘how to’ questions such as ‘how to work efficiently on WSL 2’
+@y
+* Desktop upgrade issues
+* Desktop installation issues
+  * Enabling virtualization in BIOS
+  * Enabling Windows features
+  * Installation crashes
+  * Failure to launch Docker Desktop on first run
+* Usage issues
+  * Crash closing software
+  * Docker Desktop not behaving as expected
+* Configuration issues
+* Basic product ‘how to’ questions such as ‘how to work efficiently on WSL 2’
+@z
+
+@x
+### What is not supported?
+@y
+### What is not supported?
+@z
+
+@x
+Docker Desktop excludes support for the following types of issues:
+@y
+Docker Desktop excludes support for the following types of issues:
+@z
+
+@x
+* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+* Running on unsupported operating systems, including beta/preview versions of operating systems
+* Support for the Docker engine, Docker CLI, or other bundled Linux components
+* Support for Kubernetes
+* Features labeled as experimental
+* System/Server administration activities
+* Supporting Desktop as a production runtime
+* Scale deployment/multi-machine installation of Desktop
+* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+* Third-party applications not provided by Docker
+* Altered or modified Docker software
+* Defects in the Docker software due to hardware malfunction, abuse, or improper use
+* Any version of the Docker software other than the latest version
+* Reimbursing and expenses spent for third-party services not provided by Docker
+* Docker Support excludes training, customization, and integration
+@y
+* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+* Running on unsupported operating systems, including beta/preview versions of operating systems
+* Support for the Docker engine, Docker CLI, or other bundled Linux components
+* Support for Kubernetes
+* Features labeled as experimental
+* System/Server administration activities
+* Supporting Desktop as a production runtime
+* Scale deployment/multi-machine installation of Desktop
+* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+* Third-party applications not provided by Docker
+* Altered or modified Docker software
+* Defects in the Docker software due to hardware malfunction, abuse, or improper use
+* Any version of the Docker software other than the latest version
+* Reimbursing and expenses spent for third-party services not provided by Docker
+* Docker Support excludes training, customization, and integration
+@z
+
+@x
+### What versions are supported?
+@y
+### What versions are supported?
+@z
+
+@x
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
+@y
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
+@z
+
+@x
+### How many machines can I get support for Docker Desktop on?
+@y
+### How many machines can I get support for Docker Desktop on?
+@z
+
+@x
+As a Pro user you can get support for Docker Desktop on a single machine.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+@y
+As a Pro user you can get support for Docker Desktop on a single machine.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+@z
+
+@x
+### What OS’s are supported?
+@y
+### What OS’s are supported?
+@z
+
+@x
+Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
+@y
+Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
+@z
+
+@x
+* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+@y
+* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+@z
+
+@x
+### Can I run Docker Desktop on Virtualized hardware?
+@y
+### Can I run Docker Desktop on Virtualized hardware?
+@z
+
+@x
+No, currently this is unsupported and against the terms of use.
+@y
+No, currently this is unsupported and against the terms of use.
 @z

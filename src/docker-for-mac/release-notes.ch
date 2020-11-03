@@ -45,11 +45,11 @@ Docker Desktop のシステム要件については [インストール前に確
 @z
 
 @x
-## Docker Desktop Community 2.4.0.0
-2020-09-30
+## Docker Desktop Community 2.5.0.0
+2020-11-02
 @y
-## Docker Desktop Community 2.4.0.0
-2020-09-30
+## Docker Desktop Community 2.5.0.0
+2020-11-02
 @z
 
 @x
@@ -59,6 +59,141 @@ Docker Desktop のシステム要件については [インストール前に確
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 {% endcomment %}
 > [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+@z
+
+@x
+Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+@y
+{% comment %}
+Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+{% endcomment %}
+Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれます。
+本バージョンのインストール後は、ローカルの Kubernetes クラスターはリセットされます。
+@z
+
+@x
+### New
+@y
+{% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+@z
+
+@x
+- Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
+- Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
+@y
+{% comment %}
+- Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
+- Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
+{% endcomment %}
+- プロプランまたはチームプランを購入しているユーザーは、Docker Desktop 上の Remote repositories タブ上から、ぜい弱性スキャン報告を参照できるようになりました。
+- Docker Desktop では、プロプランまたはチームプランを購入しているユーザー向けのサポートオプションを導入しました。
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
+- [Docker Compose CLI 1.0.1](https://github.com/docker/compose-cli/releases/tag/v1.0.1)
+- [Snyk v1.421.1](https://github.com/snyk/snyk/releases/tag/v1.421.1)
+- [Go 1.15.2](https://github.com/golang/go/releases/tag/go1.15.2)
+- [Kubernetes 1.19.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.3)
+@y
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
+- [Docker Compose CLI 1.0.1](https://github.com/docker/compose-cli/releases/tag/v1.0.1)
+- [Snyk v1.421.1](https://github.com/snyk/snyk/releases/tag/v1.421.1)
+- [Go 1.15.2](https://github.com/golang/go/releases/tag/go1.15.2)
+- [Kubernetes 1.19.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.3)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Renamed 'Run Diagnostics' to 'Get support'.
+- Removed BlueStacks warning message. Fixes [docker/for-mac#4863](https://github.com/docker/for-mac/issues/4863).
+- Made container start faster in cases where shared volumes have lots of files. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
+- File sharing: fixed changing ownership of read-only files. Fixes [docker/for-mac#4989](https://github.com/docker/for-mac/issues/4989), [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- File sharing: generated `ATTRIB` inotify events as well as `MODIFY`. Fixes [docker/for-mac#4962](https://github.com/docker/for-mac/issues/4962).
+- File sharing: returned `EOPNOTSUPP` from `fallocate` for unsupported modes. Fixes `minio`. Fixes [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- File sharing: fixed a possible premature file handle close.
+- When sharing Linux directories (`/var`, `/bin`, etc) with containers, Docker Desktop avoids watching paths in the host file system.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981), [docker/for-mac#4975](https://github.com/docker/for-mac/issues/4975).
+- Fixed an issue related to NFS mounting. Fixes [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- Docker Desktop now supports `S_ISUID`, `S_ISGID` and `S_ISVTX` in calls to `chmod(2)` on shared filesystems. Fixes [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+@y
+{% comment %}
+- Renamed 'Run Diagnostics' to 'Get support'.
+- Removed BlueStacks warning message. Fixes [docker/for-mac#4863](https://github.com/docker/for-mac/issues/4863).
+- Made container start faster in cases where shared volumes have lots of files. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
+- File sharing: fixed changing ownership of read-only files. Fixes [docker/for-mac#4989](https://github.com/docker/for-mac/issues/4989), [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- File sharing: generated `ATTRIB` inotify events as well as `MODIFY`. Fixes [docker/for-mac#4962](https://github.com/docker/for-mac/issues/4962).
+- File sharing: returned `EOPNOTSUPP` from `fallocate` for unsupported modes. Fixes `minio`. Fixes [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- File sharing: fixed a possible premature file handle close.
+- When sharing Linux directories (`/var`, `/bin`, etc) with containers, Docker Desktop avoids watching paths in the host file system.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981), [docker/for-mac#4975](https://github.com/docker/for-mac/issues/4975).
+- Fixed an issue related to NFS mounting. Fixes [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- Docker Desktop now supports `S_ISUID`, `S_ISGID` and `S_ISVTX` in calls to `chmod(2)` on shared filesystems. Fixes [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+{% endcomment %}
+- 「Run Diagnostics」を「Get support」に名称変更しました。
+- BlueStacks の警告メッセージを削除しました。
+  [docker/for-mac#4863](https://github.com/docker/for-mac/issues/4863) を Fix に。
+- 共有ボリュームに大量のファイルがある場合でも、コンテナーの起動を速くしました。
+  [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) を Fix に。
+- ファイル共有： 読み込み専用ファイルの所有者変更を修正しました。
+  [docker/for-mac#4989](https://github.com/docker/for-mac/issues/4989)、[docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964) を Fix に。
+- ファイル共有： 通知イベント`MODIFY`と同様に`ATTRIB`も生成するようにしました。
+  [docker/for-mac#4962](https://github.com/docker/for-mac/issues/4962) を Fix に。
+- ファイル共有： 非対応のモードに対して`fallocate`から`EOPNOTSUPP`を返すようにしました。
+  `minio`を修正。
+  [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964) を Fix に。
+- ファイル共有： ファイルハンドルが閉じてしまう問題を修正しました。
+- コンテナーにおいて Linux ディレクトリ（`/var`、`/bin`など）を共有している場合、Docker Desktop がホストファイルシステムのパスを監視しないようにしました。
+- コンテナー内にファイル共有（たとえば`docker run -v ~/.gitconfig`）を行っている場合に、Docker Desktop が親ディレクトリを監視しないようにしました。[docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981)、[docker/for-mac#4975](https://github.com/docker/for-mac/issues/4975) を Fix に。
+- NFS マウントに関する問題を修正しました。[docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958) を Fix に。
+- 共有ボリュームの外部を指し示すシンボリックリンクを可能にしました。[docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862) を Fix に。
+- 診断処理: Kubernetes が破損状態にあるときの処理停止を回避しました。
+- Docker Desktop にて共有ファイルシステム上での`chmod(2)`呼び出しに対して、`S_ISUID`, `S_ISGID` and `S_ISVTX`に対応しました。
+  [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を Fix に。
+@z
+
+@x
+## Docker Desktop Community 2.4.0.0
+2020-09-30
+@y
+## Docker Desktop Community 2.4.0.0
+2020-09-30
+@z
+
+@x
+> [Download](https://desktop.docker.com/mac/stable/48506/Docker.dmg)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/mac/stable/48506/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/stable/48506/Docker.dmg)
 @z
 
 @x
@@ -77,7 +212,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### New
 {% endcomment %}
-{: #new }
+{: #new-1 }
 ### 新機能
 @z
 
@@ -118,7 +253,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 @z
 
@@ -144,7 +279,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -254,7 +389,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-1 }
+{: #new-2 }
 ### 新機能
 @z
 
@@ -274,7 +409,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 @z
 
@@ -292,7 +427,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes-2 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -354,7 +489,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 @z
 
@@ -376,7 +511,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes-3 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -417,7 +552,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 @z
 
@@ -435,7 +570,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes-4 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -472,7 +607,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-2 }
+{: #new-3 }
 ### 新機能
 @z
 
@@ -482,124 +617,6 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 {% comment %}
 {% endcomment %}
 Docker Desktop introduces a new onboarding tutorial upon first startup. The Quick Start tutorial guides users to get started with Docker in a few easy steps. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
-@z
-
-@x
-### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
-{: #upgrades-4 }
-### アップグレード
-@z
-
-@x
-- [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
-- [Go 1.13.10](https://github.com/golang/go/issues?q=milestone%3AGo1.13.10+label%3ACherryPickApproved)
-- [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-ce15f646db9b062dc947cfc0c1deab019fa63f96-amd64/images/sha256-6c252199aee548e4bdc8457e0a068e7d8e81c2649d4c1e26e4150daa253a85d8?context=repo)
-- LinuxKit [init](https://hub.docker.com/layers/linuxkit/init/1a80a9907b35b9a808e7868ffb7b0da29ee64a95/images/sha256-64cc8fa50d63940dbaa9979a13c362c89ecb4439bcb3ab22c40d300b9c0b597e?context=explore), [runc](https://hub.docker.com/layers/linuxkit/runc/69b4a35eaa22eba4990ee52cccc8f48f6c08ed03/images/sha256-57e3c7cbd96790990cf87d7b0f30f459ea0b6f9768b03b32a89b832b73546280?context=explore) and [containerd](https://hub.docker.com/layers/linuxkit/containerd/09553963ed9da626c25cf8acdf6d62ec37645412/images/sha256-866be7edb0598430709f88d0e1c6ed7bfd4a397b5ed220e1f793ee9067255ff1?context=explore)
-@y
-{% comment %}
-{% endcomment %}
-- [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
-- [Go 1.13.10](https://github.com/golang/go/issues?q=milestone%3AGo1.13.10+label%3ACherryPickApproved)
-- [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-ce15f646db9b062dc947cfc0c1deab019fa63f96-amd64/images/sha256-6c252199aee548e4bdc8457e0a068e7d8e81c2649d4c1e26e4150daa253a85d8?context=repo)
-- LinuxKit [init](https://hub.docker.com/layers/linuxkit/init/1a80a9907b35b9a808e7868ffb7b0da29ee64a95/images/sha256-64cc8fa50d63940dbaa9979a13c362c89ecb4439bcb3ab22c40d300b9c0b597e?context=explore), [runc](https://hub.docker.com/layers/linuxkit/runc/69b4a35eaa22eba4990ee52cccc8f48f6c08ed03/images/sha256-57e3c7cbd96790990cf87d7b0f30f459ea0b6f9768b03b32a89b832b73546280?context=explore) and [containerd](https://hub.docker.com/layers/linuxkit/containerd/09553963ed9da626c25cf8acdf6d62ec37645412/images/sha256-866be7edb0598430709f88d0e1c6ed7bfd4a397b5ed220e1f793ee9067255ff1?context=explore)
-@z
-
-@x
-### Bug fixes and minor changes
-@y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
-### バグフィックスとマイナーチェンジ
-@z
-
-@x
-- Reduced the size of the Docker Desktop installer from 708 MB to 456 MB.
-- Fixed bug where containers disappeared from the UI when Kubernetes context is invalid. Fixes [docker/for-win#6037](https://github.com/docker/for-win/issues/6037).
-- Fixed a file descriptor leak in `vpnkit-bridge`. Fixes [docker/for-win#5841](https://github.com/docker/for-win/issues/5841).
-- Added a link to the Edge channel from the UI.
-- Made the embedded terminal resizable.
-- Fixed a bug where diagnostic upload would fail if the username contained spaces.
-- Fixed a bug where the Docker UI could be started without the engine.
-- Switched from `ahci-hd` to `virtio-blk` to avoid an AHCI deadlock, see [moby/hyperkit#94](https://github.com/moby/hyperkit/issues/94) and [docker/for-mac#1835](https://github.com/docker/for-mac/issues/1835).
-- Fixed an issue where a container port could not be exposed on a specific host IP. See [docker/for-mac#4209](https://github.com/docker/for-mac/issues/4209).
-- Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-mac#4264](https://github.com/docker/for-mac/issues/4264).
-- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
-- Ceph support has been removed from Docker Desktop to save disk space.
-- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423].
-@y
-{% comment %}
-{% endcomment %}
-- Reduced the size of the Docker Desktop installer from 708 MB to 456 MB.
-- Fixed bug where containers disappeared from the UI when Kubernetes context is invalid. Fixes [docker/for-win#6037](https://github.com/docker/for-win/issues/6037).
-- Fixed a file descriptor leak in `vpnkit-bridge`. Fixes [docker/for-win#5841](https://github.com/docker/for-win/issues/5841).
-- Added a link to the Edge channel from the UI.
-- Made the embedded terminal resizable.
-- Fixed a bug where diagnostic upload would fail if the username contained spaces.
-- Fixed a bug where the Docker UI could be started without the engine.
-- Switched from `ahci-hd` to `virtio-blk` to avoid an AHCI deadlock, see [moby/hyperkit#94](https://github.com/moby/hyperkit/issues/94) and [docker/for-mac#1835](https://github.com/docker/for-mac/issues/1835).
-- Fixed an issue where a container port could not be exposed on a specific host IP. See [docker/for-mac#4209](https://github.com/docker/for-mac/issues/4209).
-- Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-mac#4264](https://github.com/docker/for-mac/issues/4264).
-- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
-- Ceph support has been removed from Docker Desktop to save disk space.
-- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423].
-@z
-
-@x
-## Docker Desktop Community 2.2.0.5
-2020-04-02
-@y
-## Docker Desktop Community 2.2.0.5
-2020-04-02
-@z
-
-@x
-> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
-@y
-{% comment %}
-> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
-{% endcomment %}
-> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
-@z
-
-@x
-### Bug fixes and minor changes
-@y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
-### バグフィックスとマイナーチェンジ
-@z
-
-@x
-- Removed dangling `/usr/local/bin/docker-machine` symlinks which avoids custom installs of  Docker Machine being accidentally deleted in future upgrades. Note that if you have installed Docker Machine manually, then the install might have followed the symlink and installed Docker Machine in `/Applications/Docker.app`. In this case, you must manually reinstall Docker Machine after installing this version of Docker Desktop. Fixes [docker/for-mac#4208](https://github.com/docker/for-mac/issues/4208).
-@y
-{% comment %}
-{% endcomment %}
-- Removed dangling `/usr/local/bin/docker-machine` symlinks which avoids custom installs of  Docker Machine being accidentally deleted in future upgrades. Note that if you have installed Docker Machine manually, then the install might have followed the symlink and installed Docker Machine in `/Applications/Docker.app`. In this case, you must manually reinstall Docker Machine after installing this version of Docker Desktop. Fixes [docker/for-mac#4208](https://github.com/docker/for-mac/issues/4208).
-@z
-
-@x
-## Docker Desktop Community 2.2.0.4
-2020-03-13
-@y
-## Docker Desktop Community 2.2.0.4
-2020-03-13
-@z
-
-@x
-> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
-@y
-{% comment %}
-> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
-{% endcomment %}
-> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
 @z
 
 @x
@@ -613,6 +630,124 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 @z
 
 @x
+- [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
+- [Go 1.13.10](https://github.com/golang/go/issues?q=milestone%3AGo1.13.10+label%3ACherryPickApproved)
+- [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-ce15f646db9b062dc947cfc0c1deab019fa63f96-amd64/images/sha256-6c252199aee548e4bdc8457e0a068e7d8e81c2649d4c1e26e4150daa253a85d8?context=repo)
+- LinuxKit [init](https://hub.docker.com/layers/linuxkit/init/1a80a9907b35b9a808e7868ffb7b0da29ee64a95/images/sha256-64cc8fa50d63940dbaa9979a13c362c89ecb4439bcb3ab22c40d300b9c0b597e?context=explore), [runc](https://hub.docker.com/layers/linuxkit/runc/69b4a35eaa22eba4990ee52cccc8f48f6c08ed03/images/sha256-57e3c7cbd96790990cf87d7b0f30f459ea0b6f9768b03b32a89b832b73546280?context=explore) and [containerd](https://hub.docker.com/layers/linuxkit/containerd/09553963ed9da626c25cf8acdf6d62ec37645412/images/sha256-866be7edb0598430709f88d0e1c6ed7bfd4a397b5ed220e1f793ee9067255ff1?context=explore)
+@y
+{% comment %}
+{% endcomment %}
+- [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
+- [Go 1.13.10](https://github.com/golang/go/issues?q=milestone%3AGo1.13.10+label%3ACherryPickApproved)
+- [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-ce15f646db9b062dc947cfc0c1deab019fa63f96-amd64/images/sha256-6c252199aee548e4bdc8457e0a068e7d8e81c2649d4c1e26e4150daa253a85d8?context=repo)
+- LinuxKit [init](https://hub.docker.com/layers/linuxkit/init/1a80a9907b35b9a808e7868ffb7b0da29ee64a95/images/sha256-64cc8fa50d63940dbaa9979a13c362c89ecb4439bcb3ab22c40d300b9c0b597e?context=explore), [runc](https://hub.docker.com/layers/linuxkit/runc/69b4a35eaa22eba4990ee52cccc8f48f6c08ed03/images/sha256-57e3c7cbd96790990cf87d7b0f30f459ea0b6f9768b03b32a89b832b73546280?context=explore) and [containerd](https://hub.docker.com/layers/linuxkit/containerd/09553963ed9da626c25cf8acdf6d62ec37645412/images/sha256-866be7edb0598430709f88d0e1c6ed7bfd4a397b5ed220e1f793ee9067255ff1?context=explore)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-5 }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Reduced the size of the Docker Desktop installer from 708 MB to 456 MB.
+- Fixed bug where containers disappeared from the UI when Kubernetes context is invalid. Fixes [docker/for-win#6037](https://github.com/docker/for-win/issues/6037).
+- Fixed a file descriptor leak in `vpnkit-bridge`. Fixes [docker/for-win#5841](https://github.com/docker/for-win/issues/5841).
+- Added a link to the Edge channel from the UI.
+- Made the embedded terminal resizable.
+- Fixed a bug where diagnostic upload would fail if the username contained spaces.
+- Fixed a bug where the Docker UI could be started without the engine.
+- Switched from `ahci-hd` to `virtio-blk` to avoid an AHCI deadlock, see [moby/hyperkit#94](https://github.com/moby/hyperkit/issues/94) and [docker/for-mac#1835](https://github.com/docker/for-mac/issues/1835).
+- Fixed an issue where a container port could not be exposed on a specific host IP. See [docker/for-mac#4209](https://github.com/docker/for-mac/issues/4209).
+- Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-mac#4264](https://github.com/docker/for-mac/issues/4264).
+- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
+- Ceph support has been removed from Docker Desktop to save disk space.
+- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423].
+@y
+{% comment %}
+{% endcomment %}
+- Reduced the size of the Docker Desktop installer from 708 MB to 456 MB.
+- Fixed bug where containers disappeared from the UI when Kubernetes context is invalid. Fixes [docker/for-win#6037](https://github.com/docker/for-win/issues/6037).
+- Fixed a file descriptor leak in `vpnkit-bridge`. Fixes [docker/for-win#5841](https://github.com/docker/for-win/issues/5841).
+- Added a link to the Edge channel from the UI.
+- Made the embedded terminal resizable.
+- Fixed a bug where diagnostic upload would fail if the username contained spaces.
+- Fixed a bug where the Docker UI could be started without the engine.
+- Switched from `ahci-hd` to `virtio-blk` to avoid an AHCI deadlock, see [moby/hyperkit#94](https://github.com/moby/hyperkit/issues/94) and [docker/for-mac#1835](https://github.com/docker/for-mac/issues/1835).
+- Fixed an issue where a container port could not be exposed on a specific host IP. See [docker/for-mac#4209](https://github.com/docker/for-mac/issues/4209).
+- Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-mac#4264](https://github.com/docker/for-mac/issues/4264).
+- Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
+- Ceph support has been removed from Docker Desktop to save disk space.
+- Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423].
+@z
+
+@x
+## Docker Desktop Community 2.2.0.5
+2020-04-02
+@y
+## Docker Desktop Community 2.2.0.5
+2020-04-02
+@z
+
+@x
+> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
+@y
+{% comment %}
+> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
+{% endcomment %}
+> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-6 }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Removed dangling `/usr/local/bin/docker-machine` symlinks which avoids custom installs of  Docker Machine being accidentally deleted in future upgrades. Note that if you have installed Docker Machine manually, then the install might have followed the symlink and installed Docker Machine in `/Applications/Docker.app`. In this case, you must manually reinstall Docker Machine after installing this version of Docker Desktop. Fixes [docker/for-mac#4208](https://github.com/docker/for-mac/issues/4208).
+@y
+{% comment %}
+{% endcomment %}
+- Removed dangling `/usr/local/bin/docker-machine` symlinks which avoids custom installs of  Docker Machine being accidentally deleted in future upgrades. Note that if you have installed Docker Machine manually, then the install might have followed the symlink and installed Docker Machine in `/Applications/Docker.app`. In this case, you must manually reinstall Docker Machine after installing this version of Docker Desktop. Fixes [docker/for-mac#4208](https://github.com/docker/for-mac/issues/4208).
+@z
+
+@x
+## Docker Desktop Community 2.2.0.4
+2020-03-13
+@y
+## Docker Desktop Community 2.2.0.4
+2020-03-13
+@z
+
+@x
+> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
+@y
+{% comment %}
+> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
+{% endcomment %}
+> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-6 }
+### アップグレード
+@z
+
+@x
 - [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
 @y
 - [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
@@ -624,7 +759,7 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes-7 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -661,54 +796,54 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
-### アップグレード
-@z
-
-@x
-- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
-- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
-@y
-- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
-- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
-@z
-
-@x
-## Docker Desktop Community 2.2.0.0
-2020-01-21
-@y
-## Docker Desktop Community 2.2.0.0
-2020-01-21
-@z
-
-@x
-> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
-@y
-{% comment %}
-> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
-{% endcomment %}
-> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
-@z
-
-@x
-Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
-@y
-{% comment %}
-{% endcomment %}
-Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
-@z
-
-@x
-### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades-7 }
 ### アップグレード
 @z
 
 @x
+- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
+- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
+@y
+- [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
+- [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
+@z
+
+@x
+## Docker Desktop Community 2.2.0.0
+2020-01-21
+@y
+## Docker Desktop Community 2.2.0.0
+2020-01-21
+@z
+
+@x
+> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
+@y
+{% comment %}
+> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
+{% endcomment %}
+> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
+@z
+
+@x
+Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+@y
+{% comment %}
+{% endcomment %}
+Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-8 }
+### アップグレード
+@z
+
+@x
 - [Docker Compose 1.25.2](https://github.com/docker/compose/releases/tag/1.25.2)
 - [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
 - Linux kernel 4.19.76
@@ -728,7 +863,7 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-3 }
+{: #new-4 }
 ### 新機能
 @z
 
@@ -760,7 +895,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes-8 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -861,7 +996,7 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
+{: #upgrades-9 }
 ### アップグレード
 @z
 
@@ -898,7 +1033,7 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-9 }
+{: #upgrades-10 }
 ### アップグレード
 @z
 
@@ -920,7 +1055,7 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-4 }
+{: #new-5 }
 ### 新機能
 @z
 
@@ -957,7 +1092,7 @@ For more information, see [Two-factor authentication](index.md#docker-hub).
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-10 }
+{: #upgrades-11 }
 ### アップグレード
 @z
 
@@ -973,7 +1108,7 @@ For more information, see [Two-factor authentication](index.md#docker-hub).
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-8 }
+{: #bug-fixes-and-minor-changes-9 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1016,7 +1151,7 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
+{: #upgrades-12 }
 ### アップグレード
 @z
 
@@ -1063,7 +1198,7 @@ Note that you must sign in and create a Docker ID in order to download Docker De
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
+{: #upgrades-13 }
 ### アップグレード
 @z
 
@@ -1103,7 +1238,7 @@ Note that you must sign in and create a Docker ID in order to download Docker De
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-5 }
+{: #new-6 }
 ### 新機能
 @z
 
@@ -1159,7 +1294,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-9 }
+{: #bug-fixes-and-minor-changes-10 }
 ### バグフィックスとマイナーチェンジ
 @z
 

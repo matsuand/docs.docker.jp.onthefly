@@ -15,12 +15,11 @@ images = \
 	changelog-placeholder.png \
 	console.png \
 	desktop-buildx-version.png \
-	diagnose-feedback-id.png \
-	diagnose-feedback.png \
 	docker-app-drag.png \
 	docker-app-in-apps.png \
 	docker-for-mac-and-toolbox.png \
 	docker-for-mac-install.png \
+	diagnose-support.png \
 	docker-tutorial-mac.png \
 	desktop-mac-2fa.png \
 	hello-world-nginx.png \

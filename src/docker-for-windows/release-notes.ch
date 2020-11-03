@@ -45,11 +45,11 @@ Docker Desktop のシステム要件については [インストール前に確
 @z
 
 @x
-## Docker Desktop Community 2.4.0.0
-2020-09-30
+## Docker Desktop Community 2.5.0.0
+2020-11-02
 @y
-## Docker Desktop Community 2.4.0.0
-2020-09-30
+## Docker Desktop Community 2.5.0.0
+2020-11-02
 @z
 
 @x
@@ -59,6 +59,148 @@ Docker Desktop のシステム要件については [インストール前に確
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 {% endcomment %}
 > [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+@z
+
+@x
+Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+@y
+{% comment %}
+Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+{% endcomment %}
+Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれます。
+本バージョンのインストール後は、ローカルの Kubernetes クラスターはリセットされます。
+@z
+
+@x
+### New
+@y
+{% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+@z
+
+@x
+- Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
+- Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
+@y
+{% comment %}
+- Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
+- Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
+{% endcomment %}
+- プロプランまたはチームプランを購入しているユーザーは、Docker Desktop 上の Remote repositories タブ上から、ぜい弱性スキャン報告を参照できるようになりました。
+- Docker Desktop では、プロプランまたはチームプランを購入しているユーザー向けのサポートオプションを導入しました。
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
+- [Docker Compose CLI 1.0.1](https://github.com/docker/compose-cli/releases/tag/v1.0.1)
+- [Snyk v1.421.1](https://github.com/snyk/snyk/releases/tag/v1.421.1)
+- [Go 1.15.2](https://github.com/golang/go/releases/tag/go1.15.2)
+- [Kubernetes 1.19.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.3)
+@y
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
+- [Docker Compose CLI 1.0.1](https://github.com/docker/compose-cli/releases/tag/v1.0.1)
+- [Snyk v1.421.1](https://github.com/snyk/snyk/releases/tag/v1.421.1)
+- [Go 1.15.2](https://github.com/golang/go/releases/tag/go1.15.2)
+- [Kubernetes 1.19.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.3)
+@z
+
+@x
+### Deprecation
+@y
+{% comment %}
+### Deprecation
+{% endcomment %}
+{: #deprecation }
+### 非推奨
+@z
+
+@x
+- Docker Desktop cannot be installed on Windows 1703 (build 15063) anymore.
+@y
+{% comment %}
+- Docker Desktop cannot be installed on Windows 1703 (build 15063) anymore.
+{% endcomment %}
+- Docker Desktop は Windows 1703 (build 15063) にはインストールできなくなりました。
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Renamed 'Run Diagnostics' to 'Get support'.
+- Fixed an issue that intermittently made the WSL 2 backend fail to start.
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Fixed an issue where bash in WSL would not find the docker CLI when it is started before Docker Desktop.
+- Fixed an issue with HTTP proxy exclude lists containing entries such as `localhost` or `127.0.0.1`. Fixes [docker/for-win#8750](https://github.com/docker/for-win/issues/8750).
+- When the WSL integration process unexpectedly stops, the user is now notified and can decide to restart it or not, instead of always trying to restart it in a loop. fixes [docker/for-win#8968](https://github.com/docker/for-win/issues/8968).
+- Fixed an issue related to container logs lagging under heavy load. Fixes [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
+- Fixed an issue where some network plugins may fail to load, provoking a crash of the Docker daemon [docker/for-win#9282](https://github.com/docker/for-win/issues/9282).
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+@y
+{% comment %}
+- Renamed 'Run Diagnostics' to 'Get support'.
+- Fixed an issue that intermittently made the WSL 2 backend fail to start.
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Fixed an issue where bash in WSL would not find the docker CLI when it is started before Docker Desktop.
+- Fixed an issue with HTTP proxy exclude lists containing entries such as `localhost` or `127.0.0.1`. Fixes [docker/for-win#8750](https://github.com/docker/for-win/issues/8750).
+- When the WSL integration process unexpectedly stops, the user is now notified and can decide to restart it or not, instead of always trying to restart it in a loop. fixes [docker/for-win#8968](https://github.com/docker/for-win/issues/8968).
+- Fixed an issue related to container logs lagging under heavy load. Fixes [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
+- Fixed an issue where some network plugins may fail to load, provoking a crash of the Docker daemon [docker/for-win#9282](https://github.com/docker/for-win/issues/9282).
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+{% endcomment %}
+- 「Run Diagnostics」を「Get support」に名称変更しました。
+- 断続的に WSL 2 バックエンドが起動に失敗する問題を修正しました。
+- NFS マウントに関する問題を修正しました。[docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958) を Fix に。
+- Docker Desktop の起動前に実行した WSL 内の bash が、Docker CLI を見つけ出せない問題を修正しました。
+- HTTP プロキシーの除外リストに`localhost`や`127.0.0.1`が含まれる場合の問題を修正しました。[docker/for-win#8750](https://github.com/docker/for-win/issues/8750) を Fix に。
+- WSL 統合環境での処理が突然停止した際には、ユーザーへの通知が行われて、再起動するかどうかを指定できるようにしました。それまでは再起動ループを繰り返していました。[docker/for-win#8968](https://github.com/docker/for-win/issues/8968) を Fix に。
+- 高負荷時にコンテナーログが遅延する問題を修正しました。[docker/for-win#8216](https://github.com/docker/for-win/issues/8216) を Fix に。
+- 診断処理: Kubernetes が破損状態にあるときの処理停止を回避しました。
+- ユーザー名にスペース文字を含む場合に、インストーラーログファイルのデフォルトディレクトリへのパスを修正しました。
+  [docker/for-win#7941](https://github.com/docker/for-win/issues/7941) を Fix にしました。
+- ネットワークプラグインにおいて、ロードに失敗し Docker デーモンをクラッシュさせる場合があったのを修正しました。[docker/for-win#9282](https://github.com/docker/for-win/issues/9282)
+- コンテナー内にファイル共有（たとえば`docker run -v ~/.gitconfig`）を行っている場合に、Docker Desktop が親ディレクトリを監視しないようにしました。[docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981) を Fix に。
+@z
+
+@x
+## Docker Desktop Community 2.4.0.0
+2020-09-30
+@y
+## Docker Desktop Community 2.4.0.0
+2020-09-30
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -77,7 +219,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### New
 {% endcomment %}
-{: #new }
+{: #new-1 }
 ### 新機能
 @z
 
@@ -109,7 +251,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 @z
 
@@ -135,7 +277,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -339,7 +481,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-1 }
+{: #new-2 }
 ### 新機能
 @z
 
@@ -359,7 +501,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 @z
 
@@ -377,7 +519,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes-2 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -439,7 +581,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 @z
 
@@ -459,7 +601,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes-3 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -514,7 +656,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 @z
 
@@ -533,7 +675,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes-4 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -670,7 +812,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-2 }
+{: #new-3 }
 ### 新機能
 @z
 
@@ -690,7 +832,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades-5 }
 ### アップグレード
 @z
 
@@ -712,7 +854,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
+{: #bug-fixes-and-minor-changes-5 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -858,7 +1000,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
+{: #bug-fixes-and-minor-changes-6 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -896,7 +1038,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades-6 }
 ### アップグレード
 @z
 
@@ -912,7 +1054,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes-7 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -988,7 +1130,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades-7 }
 ### アップグレード
 @z
 
@@ -1006,7 +1148,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes-8 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1102,7 +1244,7 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades-8 }
 ### アップグレード
 @z
 
@@ -1124,7 +1266,7 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-3 }
+{: #new-4 }
 ### 新機能
 @z
 
@@ -1180,7 +1322,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-8 }
+{: #bug-fixes-and-minor-changes-9 }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1274,90 +1416,38 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
-### アップグレード
-@z
-
-@x
-- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
-- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
-- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
-@y
-- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
-- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
-- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
-@z
-
-@x
-## Docker Desktop Community 2.1.0.4
-2019-10-21
-@y
-## Docker Desktop Community 2.1.0.4
-2019-10-21
-@z
-
-@x
-[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
-@y
-[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
-@z
-
-@x
-Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
-@y
-Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
-@z
-
-@x
-### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades-9 }
 ### アップグレード
 @z
 
 @x
-- [Docker 19.03.4](https://github.com/docker/docker-ce/releases/tag/v19.03.4)
-- [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7)
-- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
-- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
+- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
+- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
 @y
-- [Docker 19.03.4](https://github.com/docker/docker-ce/releases/tag/v19.03.4)
-- [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7)
-- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
-- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
+- [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
+- [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
+- [Go 1.12.13](https://golang.org/doc/devel/release.html#go1.12)
 @z
 
 @x
-### New
+## Docker Desktop Community 2.1.0.4
+2019-10-21
 @y
-{% comment %}
-### New
-{% endcomment %}
-{: #new-4 }
-### 新機能
+## Docker Desktop Community 2.1.0.4
+2019-10-21
 @z
 
 @x
-Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
+[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
 @y
-Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
+[Download](https://download.docker.com/win/stable/39773/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
-## Docker Desktop Community 2.1.0.3
-2019-09-16
+Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 @y
-## Docker Desktop Community 2.1.0.3
-2019-09-16
-@z
-
-@x
-[Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
-@y
-[Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
+Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 @z
 
 @x
@@ -1371,29 +1461,45 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 @z
 
 @x
-- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+- [Docker 19.03.4](https://github.com/docker/docker-ce/releases/tag/v19.03.4)
+- [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7)
+- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
+- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
 @y
-- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+- [Docker 19.03.4](https://github.com/docker/docker-ce/releases/tag/v19.03.4)
+- [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7)
+- [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
+- [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
 @z
 
 @x
-## Docker Desktop Community 2.1.0.2
-2019-09-04
+### New
 @y
-## Docker Desktop Community 2.1.0.2
-2019-09-04
+{% comment %}
+### New
+{% endcomment %}
+{: #new-5 }
+### 新機能
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
+Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
 @y
-[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
+Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
 @z
 
 @x
-Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+## Docker Desktop Community 2.1.0.3
+2019-09-16
 @y
-Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+## Docker Desktop Community 2.1.0.3
+2019-09-16
+@z
+
+@x
+[Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
+@y
+[Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -1407,6 +1513,42 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 @z
 
 @x
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+@y
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
+@z
+
+@x
+## Docker Desktop Community 2.1.0.2
+2019-09-04
+@y
+## Docker Desktop Community 2.1.0.2
+2019-09-04
+@z
+
+@x
+[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
+@y
+[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+@y
+Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-12 }
+### アップグレード
+@z
+
+@x
 - [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
 - [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
 - [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
@@ -1444,7 +1586,7 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
+{: #upgrades-13 }
 ### アップグレード
 @z
 
@@ -1480,7 +1622,7 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-5 }
+{: #new-6 }
 ### 新機能
 @z
 
@@ -1524,7 +1666,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-9 }
+{: #bug-fixes-and-minor-changes-10 }
 ### バグフィックスとマイナーチェンジ
 @z
 

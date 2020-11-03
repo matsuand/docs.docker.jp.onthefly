@@ -80,53 +80,31 @@ When creating a new repository:
 @z
 
 @x
- * You can choose to put it in your Docker ID
-namespace, or in any [organization](orgs.md) where you are an
-[_owner_](orgs.md#the-owners-team).
+* You can choose to put it in your Docker ID namespace, or in any
+  [organization](orgs.md) where you are an [_owner_](orgs.md#the-owners-team).
+* The repository name needs to be unique in that namespace, can be two
+  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`),
+  and underscores (`_`).
+* The description can be up to 100 characters and is used in the search result.
+* You can link a GitHub or Bitbucket account now, or choose to do it later in
+  the repository settings.
 @y
 {% comment %}
- * You can choose to put it in your Docker ID
-namespace, or in any [organization](orgs.md) where you are an
-[_owner_](orgs.md#the-owners-team).
-{% endcomment %}
- * リポジトリを Docker ID 名前空間に含めるか、自身が [**所有者**](orgs.md#the-owners-team) となっている [組織](orgs.md) に含めるかを選びます。
-@z
-
-@x
+* You can choose to put it in your Docker ID namespace, or in any
+  [organization](orgs.md) where you are an [_owner_](orgs.md#the-owners-team).
 * The repository name needs to be unique in that namespace, can be two
-to 255 characters, and can only contain lowercase letters, numbers or `-` and
-`_`.
-@y
-{% comment %}
-* The repository name needs to be unique in that namespace, can be two
-to 255 characters, and can only contain lowercase letters, numbers or `-` and
-`_`.
+  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`),
+  and underscores (`_`).
+* The description can be up to 100 characters and is used in the search result.
+* You can link a GitHub or Bitbucket account now, or choose to do it later in
+  the repository settings.
 {% endcomment %}
+* リポジトリを Docker ID 名前空間に含めるか、自身が [**所有者**](orgs.md#the-owners-team) となっている [組織](orgs.md) に含めるかを選びます。
 * リポジトリ名は、これが属する名前空間内においてユニークである必要があります。
   文字数は 2 文字以上 255 文字までです。
-  利用できる文字は、英小文字、数字、`-`、`_` です。
-@z
-
-@x
-* The description can be up to 100 characters and is used in the search
-result.
-@y
-{% comment %}
-* The description can be up to 100 characters and is used in the search
-result.
-{% endcomment %}
+  利用できる文字は、英小文字、数字、ハイフン（`-`）、アンダースコア（`_`）です。
 * 内容説明を 100 文字以内で記述できます。
   これは検索を行った際に、結果として表示されます。
-@z
-
-@x
-* You can link a GitHub or Bitbucket account now, or choose to do it
-later in the repository settings.
-@y
-{% comment %}
-* You can link a GitHub or Bitbucket account now, or choose to do it
-later in the repository settings.
-{% endcomment %}
 * この場ですぐに GitHub や Bitbucket のアカウントにリンクさせることができます。
   またはリポジトリ設定において、後で行うこともできます。
 @z
@@ -189,35 +167,27 @@ to `latest`.
 
 @x
 Name your local images using one of these methods:
-* When you build them, using
-`docker build -t <hub-user>/<repo-name>[:<tag>]`
 @y
 {% comment %}
 Name your local images using one of these methods:
-* When you build them, using
-`docker build -t <hub-user>/<repo-name>[:<tag>]`
 {% endcomment %}
 ローカルイメージに名前をつけるには、以下の 3 つの方法の中から選びます。
+@z
+
+@x
+* When you build them, using `docker build -t <hub-user>/<repo-name>[:<tag>]`
+* By re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`
+* By using `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]`
+  to commit changes
+@y
+{% comment %}
+* When you build them, using `docker build -t <hub-user>/<repo-name>[:<tag>]`
+* By re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`
+* By using `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]`
+  to commit changes
+{% endcomment %}
 * イメージをビルドする際に`docker build -t <hub-user>/<repo-name>[:<tag>]`を実行します。
-@z
-
-@x
-* By re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`
-@y
-{% comment %}
-* By re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`
-{% endcomment %}
 * ローカルイメージに改めてタグをつける`docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`を実行します。
-@z
-
-@x
-* By using `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]`
-to commit changes
-@y
-{% comment %}
-* By using `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]`
-to commit changes
-{% endcomment %}
 * `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]`を実行して変更をコミットします。
 @z
 
@@ -231,9 +201,13 @@ Now you can push this repository to the registry designated by its name or tag.
 @z
 
 @x
-    $ docker push <hub-user>/<repo-name>:<tag>
+```console
+$ docker push <hub-user>/<repo-name>:<tag>
+```
 @y
-    $ docker push <hub-user>/<repo-name>:<tag>
+```console
+$ docker push <hub-user>/<repo-name>:<tag>
+```
 @z
 
 @x
@@ -279,12 +253,12 @@ To create a private repository, select **Private** when creating a repository:
 @z
 
 @x
-![Create Private Repo](images/repo-create-private.png)
+![Create Private Repo](images/repo-create-private.png){: style="max-width: 60%"}
 @y
 {% comment %}
-![Create Private Repo](images/repo-create-private.png)
+![Create Private Repo](images/repo-create-private.png){: style="max-width: 60%"}
 {% endcomment %}
-![プライベートリポジトリの生成](images/repo-create-private.png)
+![プライベートリポジトリの生成](images/repo-create-private.png){: style="max-width: 60%"}
 @z
 
 @x
@@ -297,12 +271,12 @@ You can also make an existing repository private by going to its **Settings** ta
 @z
 
 @x
-![Convert Repo to Private](images/repo-make-private.png)
+![Convert Repo to Private](images/repo-make-private.png){: style="max-width: 60%"}
 @y
 {% comment %}
-![Convert Repo to Private](images/repo-make-private.png)
+![Convert Repo to Private](images/repo-make-private.png){: style="max-width: 60%"}
 {% endcomment %}
-![リポジトリをプライベートに変更](images/repo-make-private.png)
+![リポジトリをプライベートに変更](images/repo-make-private.png){: style="max-width: 60%"}
 @z
 
 @x
@@ -403,16 +377,19 @@ changing its status from private to public.
 @z
 
 @x
-> **Note**:
+> **Note**
+>
 > A collaborator cannot add other collaborators. Only the owner of
 > the repository has administrative access.
 @y
 {% comment %}
-> **Note**:
+> **Note**
+>
 > A collaborator cannot add other collaborators. Only the owner of
 > the repository has administrative access.
 {% endcomment %}
-> **メモ**:
+> **メモ**
+>
 > 協力者が他の協力者を追加することはできません。
 > 管理操作が可能なのは、あくまでそのリポジトリの所有者のみです。
 @z
@@ -548,8 +525,9 @@ images by image name, username, or description:
 @z
 
 @x
-```
+```console
 $ docker search centos
+
 NAME                                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
 centos                               The official build of CentOS.                   1034      [OK]
 ansible/centos7-ansible              Ansible on Centos7                              43                   [OK]
@@ -557,8 +535,9 @@ tutum/centos                         Centos image with SSH access. For the root.
 ...
 ```
 @y
-```
+```console
 $ docker search centos
+
 NAME                                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
 centos                               The official build of CentOS.                   1034      [OK]
 ansible/centos7-ansible              Ansible on Centos7                              43                   [OK]
@@ -600,8 +579,9 @@ Once you've found the image you want, you can download it with `docker pull <ima
 @z
 
 @x
-```
+```console
 $ docker pull centos
+
 latest: Pulling from centos
 6941bfcbbfca: Pull complete
 41459f052977: Pull complete
@@ -611,8 +591,9 @@ Digest: sha256:d601d3b928eb2954653c59e65862aabb31edefa868bd5148a41fa45004c12288
 Status: Downloaded newer image for centos:latest
 ```
 @y
-```
+```console
 $ docker pull centos
+
 latest: Pulling from centos
 6941bfcbbfca: Pull complete
 41459f052977: Pull complete
@@ -668,22 +649,26 @@ bookmarking your favorites.
 @z
 
 @x
- A service account is a Docker ID used by a bot for automating the build pipeline for containerized applications. Service accounts are typically used in an automated workflow and do not share Docker IDs with the members in the Team plan.
+A service account is a Docker ID used by a bot for automating the build pipeline
+for containerized applications. Service accounts are typically used in automated
+workflows, and do not share Docker IDs with the members in the Team plan.
 @y
- {% comment %}
- A service account is a Docker ID used by a bot for automating the build pipeline for containerized applications. Service accounts are typically used in an automated workflow and do not share Docker IDs with the members in the Team plan.
- {% endcomment %}
- サービスアカウントとは、コンテナー化アプリケーションの自動ビルドを行うためのボット（bot）が用いる Docker ID です。
- 通常は自動化処理において用いられるものであって、チームプランにおけるメンバーの Docker ID として利用するものではありません。
+{% comment %}
+A service account is a Docker ID used by a bot for automating the build pipeline
+for containerized applications. Service accounts are typically used in automated
+workflows, and do not share Docker IDs with the members in the Team plan.
+{% endcomment %}
+サービスアカウントとは、コンテナー化アプリケーションの自動ビルドを行うためのボット（bot）が用いる Docker ID です。
+通常は自動化処理において用いられるものであって、チームプランにおけるメンバーの Docker ID として利用するものではありません。
 @z
 
 @x
- To create a new service account for your Team account:
+To create a new service account for your Team account:
 @y
- {% comment %}
- To create a new service account for your Team account:
- {% endcomment %}
- チームアカウントにおいて新たなサービスアカウントを生成するには、以下のようにします。
+{% comment %}
+To create a new service account for your Team account:
+{% endcomment %}
+チームアカウントにおいて新たなサービスアカウントを生成するには、以下のようにします。
 @z
 
 @x

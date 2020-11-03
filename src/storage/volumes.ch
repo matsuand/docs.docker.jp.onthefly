@@ -749,13 +749,13 @@ volumes:
 
 @x
 For more information about using volumes with compose see
-[the compose reference](../compose/compose-file-v2.md#volume-configuration-reference).
+[the compose reference](../compose/compose-file/index.md#volume-configuration-reference).
 @y
 {% comment %}
 For more information about using volumes with compose see
-[the compose reference](../compose/compose-file-v2.md#volume-configuration-reference).
+[the compose reference](../compose/compose-file/index.md#volume-configuration-reference).
 {% endcomment %}
-Compose においてボリュームを利用する方法に関しては [Compose リファレンス](../compose/compose-file-v2.md#volume-configuration-reference) を参照してください。
+Compose においてボリュームを利用する方法に関しては [Compose リファレンス](../compose/compose-file/index.md#volume-configuration-reference) を参照してください。
 @z
 
 @x

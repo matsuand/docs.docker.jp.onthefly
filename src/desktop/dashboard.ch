@@ -43,14 +43,15 @@ The **Containers/Apps** view provides a runtime view of all your containers and 
 @z
 
 @x
-The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
+The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
 @y
 {% comment %}
-The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
+The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
 {% endcomment %}
 **Images** 画面には Docker イメージが一覧表示されます。
 ここからイメージをコンテナーとして実行したり、Docker Hub からの最新版イメージのプル、イメージの詳細確認を行ったりすることができます。
-またイメージ削除の機能もあり、不要となったイメージをディスク上から削除して容量を確保することができます。
+また Snyk を利用したぜい弱性スキャン報告の概要が表示されます。
+さらにイメージ削除の機能もあり、不要となったイメージをディスク上から削除して容量を確保することができます。
 Docker Hub にログインできていれば、Docker Hub 上において自分や組織が共有しているイメージを参照することもできます。
 @z
 
@@ -847,13 +848,29 @@ An **unused** image is an image which is not used by any running or stopped cont
 @z
 
 @x
-The Images view also allows you to manage and interact with images in remote repositories and lets you switch between organizations.
+The Images view also allows you to manage and interact with images in remote repositories and lets you switch between organizations. Select an organization from the drop-down to view a list of repositories in your organization.
 @y
 {% comment %}
-The Images view also allows you to manage and interact with images in remote repositories and lets you switch between organizations.
+The Images view also allows you to manage and interact with images in remote repositories and lets you switch between organizations. Select an organization from the drop-down to view a list of repositories in your organization.
 {% endcomment %}
 Images 画面では、リモートリポジトリ内のイメージを管理したりやりとりしたりすることができます。
 そして組織間を切り替えることもできます。
+ドロップダウンメニューから組織を選択して、組織内のリポジトリの一覧を確認してください。
+@z
+
+@x
+> **Note**
+>
+> If you have subscribed to a Pro or a Team plan and enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will appear on the Remote repositories tab.
+@y
+{% comment %}
+> **Note**
+>
+> If you have subscribed to a Pro or a Team plan and enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will appear on the Remote repositories tab.
+{% endcomment %}
+> **メモ**
+>
+> プロプランやチームプランを購入していて Docker Hub における [ぜい弱性スキャン](../docker-hub/vulnerability-scanning.md) を有効にしている場合、スキャン結果は Remote repositories タブに表示されます。
 @z
 
 @x
@@ -868,12 +885,12 @@ The **Pull** option allows you to pull the latest version of the image from Dock
 @z
 
 @x
-![View image in Hub](images/image-details.png){:width="700px"}
+![Images in remote repositories](images/image-details.png){:width="700px"}
 @y
 {% comment %}
-![View image in Hub](images/image-details.png){:width="700px"}
+![Images in remote repositories](images/image-details.png){:width="700px"}
 {% endcomment %}
-![Hub 上のイメージ一覧](images/image-details.png){:width="700px"}
+![リモートリポジトリ内のイメージ](images/image-details.png){:width="700px"}
 @z
 
 @x
@@ -890,16 +907,23 @@ To interact with remote repositories:
 2. Select an organization from the drop-down list. This displays a list of repositories in your organization.
 3. Click on an image from the list and then select **Pull** to pull the latest image from the remote repository.
 4. To view a detailed information about the image in Docker Hub, select the image and then click **View in Hub**.
+
+    The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 @y
 {% comment %}
 1. Click the **Remote repositories** tab.
 2. Select an organization from the drop-down list. This displays a list of repositories in your organization.
 3. Click on an image from the list and then select **Pull** to pull the latest image from the remote repository.
 4. To view a detailed information about the image in Docker Hub, select the image and then click **View in Hub**.
+
+    The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 {% endcomment %}
 1. **Remote repositories** タブをクリックします。
 2. ドロップダウンリストから組織を選択します。
    これにより組織内のリポジトリ一覧が表示されます。
 3. 一覧の中からイメージをクリックしてから **Pull** を選び、リモートリポジトリから最新イメージをプルします。
 4. Docker Hub 内のイメージに関する詳細情報を確認するには、イメージを選択して **View in Hub** をクリックします。
+
+   **View in Hub** オプションは Docker Hub ページを開いて、イメージの詳細情報を表示します。
+   たとえば OS アーキテクチャー、イメージサイズ、イメージ公開日、イメージレイヤー一覧などです。
 @z

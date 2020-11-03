@@ -11,8 +11,7 @@ all: tgtdir $(srcs_with_prefix)
 
 images = \
 	desktop-win-2fa.png \
-	diagnose-feedback.png \
-	diagnostic-id.png \
+	diagnose-support.png \
 	docker-app-search.png \
 	docker-app-welcome.png \
 	docker-menu-context-switch.png \

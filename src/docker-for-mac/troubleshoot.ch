@@ -8,6 +8,7 @@ keywords: mac, troubleshooting, logs, issues
 redirect_from:
 - /mackit/troubleshoot/
 title: Logs and troubleshooting
+toc_max: 2
 ---
 @y
 ---
@@ -16,13 +17,14 @@ keywords: mac, troubleshooting, logs, issues
 redirect_from:
 - /mackit/troubleshoot/
 title: ログ機能とトラブルシューティング
+toc_max: 2
 ---
 @z
 
 @x
-This page contains information on how to diagnose and troubleshoot Docker Desktop issues, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 @y
-This page contains information on how to diagnose and troubleshoot Docker Desktop issues, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 @z
 
 @x
@@ -40,9 +42,9 @@ from the menu bar to see the troubleshoot options.
 @z
 
 @x
-![Uninstall or reset Docker](images/menu/troubleshoot.png){:width="750px"}
+![Troubleshoot Docker Desktop](images/menu/troubleshoot.png){:width="600px"}
 @y
-![Uninstall or reset Docker](images/menu/troubleshoot.png){:width="750px"}
+![Troubleshoot Docker Desktop](images/menu/troubleshoot.png){:width="600px"}
 @z
 
 @x
@@ -58,9 +60,9 @@ The Troubleshoot page contains the following options:
 @z
 
 @x
-* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
+* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 @y
-* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
+* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 @z
 
 @x
@@ -70,10 +72,10 @@ The Troubleshoot page contains the following options:
 @z
 
 @x
-* **Reset disk image**: This option resets all Docker data _without_ a
+* **Clean / Purge data**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
 @y
-* **Reset disk image**: This option resets all Docker data _without_ a
+* **Clean / Purge data**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
 @z
 
@@ -124,9 +126,9 @@ system.
 @z
 
 @x
-## Diagnose problems, send feedback, and create GitHub issues
+## Diagnose and feedback
 @y
-## Diagnose problems, send feedback, and create GitHub issues
+## Diagnose and feedback
 @z
 
 @x
@@ -139,48 +141,66 @@ system.
 If you encounter problems for which you do not find solutions in this
 documentation, on [Docker Desktop issues on
 GitHub](https://github.com/docker/for-mac/issues), or the [Docker Desktop forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
-the log data.
+the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
 @y
 If you encounter problems for which you do not find solutions in this
 documentation, on [Docker Desktop issues on
 GitHub](https://github.com/docker/for-mac/issues), or the [Docker Desktop forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
-the log data.
+the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
 @z
 
 @x
-Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot** > **Run Diagnostics**.
+>**Note**
+>
+> Docker Desktop offers support for users subscribed to a Pro or a Team plan. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
 @y
-Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot** > **Run Diagnostics**.
+>**Note**
+>
+> Docker Desktop offers support for users subscribed to a Pro or a Team plan. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
 @z
 
 @x
-![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
+Before you get started, we recommend that you sign into your Docker Desktop application and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 @y
-![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
+Before you get started, we recommend that you sign into your Docker Desktop application and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 @z
 
 @x
-Once the diagnostics are available, you can upload them and obtain a
-**Diagnostic ID**, which must be provided when communicating with the Docker
-team. For more information on our policy regarding personal data, see
-[how is personal data handled in Docker Desktop](faqs.md#how-is-personal-data-handled-in-docker-desktop).
+1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
+2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+3. Click **Get Support**. This opens the in-app **Diagnose & Support** (**Diagnose & Feedback** for free users) page and starts collecting the diagnostics.
 @y
-Once the diagnostics are available, you can upload them and obtain a
-**Diagnostic ID**, which must be provided when communicating with the Docker
-team. For more information on our policy regarding personal data, see
-[how is personal data handled in Docker Desktop](faqs.md#how-is-personal-data-handled-in-docker-desktop).
+1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
+2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+3. Click **Get Support**. This opens the in-app **Diagnose & Support** (**Diagnose & Feedback** for free users) page and starts collecting the diagnostics.
 @z
 
 @x
-![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png){:width="600px"}
+    ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
 @y
-![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png){:width="600px"}
+    ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
 @z
 
 @x
-If you click **Report an issue**, this opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) issues on GitHub in your web browser in a "New issue" template. Add the details before submitting the issue. Do not forget to copy/paste your diagnostic ID.
+   > **Note**
+    >
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
 @y
-If you click **Report an issue**, this opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) issues on GitHub in your web browser in a "New issue" template. Add the details before submitting the issue. Do not forget to copy/paste your diagnostic ID.
+   > **Note**
+    >
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
+@z
+
+@x
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
+@y
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
+@z
+
+@x
+    Alternatively, click **Report an issue** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
+@y
+    Alternatively, click **Report an issue** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 @z
 
 @x
@@ -273,22 +293,20 @@ $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 
 @x
 <a name="logs"></a>
+
 ## Check the logs
 @y
 <a name="logs"></a>
+
 ## Check the logs
 @z
 
 @x
 In addition to using the diagnose and feedback option to submit logs, you can
-browse the logs yourself.  The following documentation is about macOS 10.12
-onwards; for older versions, see
-[older documentation](https://github.com/docker/docker.github.io/blob/v17.12/docker-for-mac/troubleshoot.md#check-the-logs).
+browse the logs yourself.
 @y
 In addition to using the diagnose and feedback option to submit logs, you can
-browse the logs yourself.  The following documentation is about macOS 10.12
-onwards; for older versions, see
-[older documentation](https://github.com/docker/docker.github.io/blob/v17.12/docker-for-mac/troubleshoot.md#check-the-logs).
+browse the logs yourself.
 @z
 
 @x
@@ -881,4 +899,182 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
   sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
   ```
+@z
+
+@x
+## Support
+@y
+## Support
+@z
+
+@x
+This section contains information on how to get support on Docker Desktop.
+@y
+This section contains information on how to get support on Docker Desktop.
+@z
+
+@x
+>**Note**
+>
+> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+@y
+>**Note**
+>
+> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
+### How do I get Docker Desktop support?
+@y
+### How do I get Docker Desktop support?
+@z
+
+@x
+If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+@y
+If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
+Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
+@y
+Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
+@z
+
+@x
+### What support can I get?
+@y
+### What support can I get?
+@z
+
+@x
+If you are a Pro or a Team user, you can request for support on the following types of issues:
+@y
+If you are a Pro or a Team user, you can request for support on the following types of issues:
+@z
+
+@x
+* Desktop upgrade issues
+* Desktop installation issues
+  * Installation crashes
+  * Failure to launch Docker Desktop on first run
+* Usage issues
+  * Crash closing software
+  * Docker Desktop not behaving as expected
+* Configuration issues
+* Basic product ‘how to’ questions
+@y
+* Desktop upgrade issues
+* Desktop installation issues
+  * Installation crashes
+  * Failure to launch Docker Desktop on first run
+* Usage issues
+  * Crash closing software
+  * Docker Desktop not behaving as expected
+* Configuration issues
+* Basic product ‘how to’ questions
+@z
+
+@x
+### What is not supported?
+@y
+### What is not supported?
+@z
+
+@x
+Docker Desktop excludes support for the following types of issues:
+@y
+Docker Desktop excludes support for the following types of issues:
+@z
+
+@x
+* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+* Running on unsupported operating systems, including beta/preview versions of operating systems
+* Support for the Docker engine, Docker CLI, or other bundled Linux components
+* Support for Kubernetes
+* Features labeled as experimental
+* System/Server administration activities
+* Supporting Desktop as a production runtime
+* Scale deployment/multi-machine installation of Desktop
+* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+* Third-party applications not provided by Docker
+* Altered or modified Docker software
+* Defects in the Docker software due to hardware malfunction, abuse, or improper use
+* Any version of the Docker software other than the latest version
+* Reimbursing and expenses spent for third-party services not provided by Docker
+* Docker Support excludes training, customization, and integration
+@y
+* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+* Running on unsupported operating systems, including beta/preview versions of operating systems
+* Support for the Docker engine, Docker CLI, or other bundled Linux components
+* Support for Kubernetes
+* Features labeled as experimental
+* System/Server administration activities
+* Supporting Desktop as a production runtime
+* Scale deployment/multi-machine installation of Desktop
+* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+* Third-party applications not provided by Docker
+* Altered or modified Docker software
+* Defects in the Docker software due to hardware malfunction, abuse, or improper use
+* Any version of the Docker software other than the latest version
+* Reimbursing and expenses spent for third-party services not provided by Docker
+* Docker Support excludes training, customization, and integration
+@z
+
+@x
+### What versions are supported?
+@y
+### What versions are supported?
+@z
+
+@x
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
+@y
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
+@z
+
+@x
+### How many machines can I get support for Docker Desktop on?
+@y
+### How many machines can I get support for Docker Desktop on?
+@z
+
+@x
+As a Pro user you can get support for Docker Desktop on a single machine.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+@y
+As a Pro user you can get support for Docker Desktop on a single machine.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+@z
+
+@x
+### What OS’s are supported?
+@y
+### What OS’s are supported?
+@z
+
+@x
+Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
+@y
+Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
+@z
+
+@x
+* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+@y
+* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+@z
+
+@x
+### Can I run Docker Desktop on Virtualized hardware?
+@y
+### Can I run Docker Desktop on Virtualized hardware?
+@z
+
+@x
+No, currently this is unsupported and against the terms of use.
+@y
+No, currently this is unsupported and against the terms of use.
 @z

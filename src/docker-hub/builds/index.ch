@@ -71,14 +71,20 @@ image. The built image is then pushed to the Docker Hub registry.
 @z
 
 @x
-> **Note**: You can still use `docker push` to push pre-built images to
+> **Note**
+>
+> You can still use `docker push` to push pre-built images to
 repositories with Automated Builds configured.
 @y
 {% comment %}
-> **Note**: You can still use `docker push` to push pre-built images to
+> **Note**
+>
+> You can still use `docker push` to push pre-built images to
 repositories with Automated Builds configured.
 {% endcomment %}
-> **メモ**: 自動ビルドの設定が行われているリポジトリであっても `docker push` を使えば、それまでと変わらずにビルド済イメージをプッシュすることができます。
+> **メモ**
+>
+> 自動ビルドの設定が行われているリポジトリであっても`docker push`を使えば、それまでと変わらずにビルド済イメージをプッシュすることができます。
 @z
 
 @x
@@ -97,6 +103,24 @@ If you have automated tests configured, these run after building but before
 pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests does not push the built
 image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
+@z
+
+@x
+Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get parallel builds, which means that `N`
+autobuilds can be run at the same time. `N` is configured by the plan that you
+subscribe to. Once `N+1` builds are running, any additional builds are
+queued to be run later.
+@y
+{% comment %}
+Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get parallel builds, which means that `N`
+autobuilds can be run at the same time. `N` is configured by the plan that you
+subscribe to. Once `N+1` builds are running, any additional builds are
+queued to be run later.
+{% endcomment %}
+Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get parallel builds, which means that `N`
+autobuilds can be run at the same time. `N` is configured by the plan that you
+subscribe to. Once `N+1` builds are running, any additional builds are
+queued to be run later.
 @z
 
 @x
@@ -422,15 +446,15 @@ For each source:
 @z
 
 @x
-> **Note**: When Docker Hub pulls a branch from a source code repository, it performs
-> a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md)
-> for more information.
+> **Note**
+>
+> When Docker Hub pulls a branch from a source code repository, it performs a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md) for more information.
 @y
 {% comment %}
 {% endcomment %}
-> **Note**: When Docker Hub pulls a branch from a source code repository, it performs
-> a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md)
-> for more information.
+> **Note**
+>
+> When Docker Hub pulls a branch from a source code repository, it performs a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md) for more information.
 @z
 
 @x
@@ -588,12 +612,16 @@ display a **Retry** button.
 @z
 
 @x
-> **Note**: If you are viewing the build details for a repository that belongs
+> **Note**
+>
+> If you are viewing the build details for a repository that belongs
 to an Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
 @y
 {% comment %}
 {% endcomment %}
-> **Note**: If you are viewing the build details for a repository that belongs
+> **Note**
+>
+> If you are viewing the build details for a repository that belongs
 to an Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
 @z
 
@@ -836,11 +864,18 @@ The _build context_ is the path to the files needed for the build, relative to t
 @z
 
 @x
-> **Note**: If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
+> **Note**
+>
+> If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
 @y
 {% comment %}
+> **Note**
+>
+> If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
 {% endcomment %}
-> **Note**: If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
+> **Note**
+>
+> If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
 @z
 
 @x
@@ -960,11 +995,18 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 @z
 
 @x
-> **Note**: If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
+> **Note**
+>
+> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
 @y
 {% comment %}
+> **Note**
+>
+> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
 {% endcomment %}
-> **Note**: If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
+> **Note**
+>
+> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
 @z
 
 @x
@@ -1002,11 +1044,15 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 @z
 
 @x
-> **Note**: You must configure your private git submodules using git clone over SSH (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
+> **Note**
+>
+> You must configure your private git submodules using git clone over SSH (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
 @y
 {% comment %}
 {% endcomment %}
-> **Note**: You must configure your private git submodules using git clone over SSH (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
+> **Note**
+>
+> You must configure your private git submodules using git clone over SSH (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
 @z
 
 @x
@@ -1234,11 +1280,15 @@ integrates seamlessly with autobuild and autoredeploy.
 @z
 
 @x
-> **Note**: While the Autotest feature builds an image for testing purposes, it
+> **Note**
+>
+> While the Autotest feature builds an image for testing purposes, it
 does not push the resulting image to Docker Hub.
 @y
 {% comment %}
 {% endcomment %}
-> **Note**: While the Autotest feature builds an image for testing purposes, it
+> **Note**
+>
+> While the Autotest feature builds an image for testing purposes, it
 does not push the resulting image to Docker Hub.
 @z
