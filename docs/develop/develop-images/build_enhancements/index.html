@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-11-05 11:01:18 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>BuildKit によるイメージ構築 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="BuildKit によるイメージ構築" />
   <meta property="og:description" content="BuildKit により Docker ビルドについて学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-05T11:01:18+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-05T11:01:18+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"BuildKit によるイメージ構築","description":"BuildKit により Docker ビルドについて学びます。","url":"https://docs.docker.com/develop/develop-images/build_enhancements/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -108,7 +108,7 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 <ul>
   <li>BuildKit を用いて生成された Docker イメージは、従来の Docker イメージと同じように Docker Hub にプッシュすることができます。</li>
   <li>従来のビルドに対して動作している Dockerfile の記述は、BuildKit を用いてビルドを行っても同様に動作します。</li>
-  <li>新しくコマンドラインオプション <code class="language-plaintext highlighter-rouge">--secret</code> が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。</li>
+  <li>新しくコマンドラインオプション<code class="language-plaintext highlighter-rouge">--secret</code>が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。</li>
 </ul>
 
 <p>ビルド時のオプションに関しては <a href="/engine/reference/commandline/build/">コマンドライン build オプション</a> を参照してください。</p>
@@ -128,12 +128,12 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 
 <h2 id="to-enable-buildkit-builds">BuildKit によるビルドの有効化</h2>
 
-<p>一番簡単な方法としては docker を起動し始める際に環境変数 <code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code> を設定した上で <code class="language-plaintext highlighter-rouge">docker build</code> コマンドを起動します。</p>
+<p>一番簡単な方法としては docker を起動し始める際に環境変数<code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code>を設定した上で<code class="language-plaintext highlighter-rouge">docker build</code>コマンドを起動します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ DOCKER_BUILDKIT</span><span class="o">=</span>1 docker build <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>docker BuildKit をデフォルトで有効にするには、<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code> にあるデーモン設定の features を true にしデーモンを再起動します。</p>
+<p>docker BuildKit をデフォルトで有効にするには、<code class="language-plaintext highlighter-rouge">/etc/docker/daemon.json</code>にあるデーモン設定の features を true にしデーモンを再起動します。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"buildkit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
@@ -200,29 +200,29 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 <h2 id="overriding-default-frontends">デフォルトフロントエンドの上書き設定</h2>
 
 <p><code class="language-plaintext highlighter-rouge">Dockerfile</code> における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
-これを行うには <code class="language-plaintext highlighter-rouge">Dockerfile</code> の先頭行に、コメントとして特定のフロントエンドイメージを指定します。</p>
+これを行うには<code class="language-plaintext highlighter-rouge">Dockerfile</code>の先頭行に、コメントとして特定のフロントエンドイメージを指定します。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax = &lt;frontend image&gt;, e.g. # syntax = docker/dockerfile:1.0-experimental</span>
 </code></pre></div></div>
 
 <h2 id="new-docker-build-secret-information">新たな Docker ビルドにおける機密情報の扱い</h2>
 
-<p>Docker ビルドにおいては新たに <code class="language-plaintext highlighter-rouge">--secret</code> フラグが導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
+<p>Docker ビルドにおいては新たに<code class="language-plaintext highlighter-rouge">--secret</code>フラグが導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
 機密情報は、最終的にイメージ内に保存されることはないので、安全に取り扱うことができます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">id</code> は <code class="language-plaintext highlighter-rouge">docker build --secret</code> において受け渡される識別子です。
-これは Dockerfile 内において用いられる <code class="language-plaintext highlighter-rouge">RUN --mount</code> 識別子に関連づいています。
+<p><code class="language-plaintext highlighter-rouge">id</code>は<code class="language-plaintext highlighter-rouge">docker build --secret</code>において受け渡される識別子です。
+これは Dockerfile 内において用いられる<code class="language-plaintext highlighter-rouge">RUN --mount</code>識別子に関連づいています。
 Docker では Dockerfile の外に保持されている機密情報のファイル名は用いません。
 これが重要な情報となることもあるからです。</p>
 
-<p><code class="language-plaintext highlighter-rouge">dst</code> は Dockerfile 内にて用いられる <code class="language-plaintext highlighter-rouge">RUN</code> コマンドにおいての機密情報ファイルを、所定ファイル名に名称変更します。</p>
+<p><code class="language-plaintext highlighter-rouge">dst</code>は Dockerfile 内にて用いられる<code class="language-plaintext highlighter-rouge">RUN</code>コマンドにおいての機密情報ファイルを、所定ファイル名に名称変更します。</p>
 
 <p>たとえば以下のようなテキストファイル内に、一部の機密情報が含まれているとします。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s1">'WARMACHINEROX'</span> <span class="o">&gt;</span> mysecret.txt
 </code></pre></div></div>
 
-<p>そして BuildKit フロントエンド <code class="language-plaintext highlighter-rouge">docker/dockerfile:1.0-experimental</code> を指定した Dockerfile を使えば、機密情報にアクセスすることができます。</p>
+<p>そして BuildKit フロントエンド<code class="language-plaintext highlighter-rouge">docker/dockerfile:1.0-experimental</code>を指定した Dockerfile を使えば、機密情報にアクセスすることができます。</p>
 
 <p>たとえば以下のとおりです。</p>
 
@@ -269,16 +269,16 @@ Docker では Dockerfile の外に保持されている機密情報のファイ�
   <p>詳しい情報と利用例については <a href="https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066">Build secrets and SSH forwarding in Docker 18.09</a> （Docker 18.09 における機密情報生成と SSH フォワーディング）を参照してください。</p>
 </blockquote>
 
-<p><code class="language-plaintext highlighter-rouge">docker build</code> には <code class="language-plaintext highlighter-rouge">--ssh</code> オプションがあります。
+<p><code class="language-plaintext highlighter-rouge">docker build</code>には<code class="language-plaintext highlighter-rouge">--ssh</code>オプションがあります。
 これは Docker Engine に対して SSH エージェントのフォワードによる接続を許可するものです。
 SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent">OpenSSH man ページ</a> を参照してください。</p>
 
-<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> 内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを <code class="language-plaintext highlighter-rouge">type=ssh</code> とするだけです。
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを<code class="language-plaintext highlighter-rouge">type=ssh</code>とするだけです。
 これが SSH エージェントによる接続を行うものとなります。
 これ以外のコマンド記述からは、SSH エージェントを利用しているかどうかを知ることはできません。</p>
 
-<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> 内の <code class="language-plaintext highlighter-rouge">RUN</code> コマンドにおいて SSH アクセスを指定するには、マウントタイプを <code class="language-plaintext highlighter-rouge">ssh</code> として定義します。
-これにより環境変数 <code class="language-plaintext highlighter-rouge">SSH_AUTH_SOCK</code> が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>内の<code class="language-plaintext highlighter-rouge">RUN</code>コマンドにおいて SSH アクセスを指定するには、マウントタイプを<code class="language-plaintext highlighter-rouge">ssh</code>として定義します。
+これにより環境変数<code class="language-plaintext highlighter-rouge">SSH_AUTH_SOCK</code>が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。</p>
 
 <p>Docker ファイル内にてコンテナーが SSH を利用する例が以下です。</p>
 
@@ -295,10 +295,12 @@ SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent
 <span class="k">RUN </span><span class="nt">--mount</span><span class="o">=</span><span class="nb">type</span><span class="o">=</span>ssh git clone git@github.com:myorg/myproject.git myproject
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> の用意ができたら、SSH エージェント接続を行う <code class="language-plaintext highlighter-rouge">--ssh</code> オプションを使います。</p>
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>の用意ができたら SSH エージェント接続を行う<code class="language-plaintext highlighter-rouge">--ssh</code>オプションを使います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--ssh</span> default <span class="nb">.</span>
 </code></pre></div></div>
+
+<p>エージェントに対して秘密鍵の認証がまず必要な場合には、<code class="language-plaintext highlighter-rouge">ssh-add</code>の利用が必要な場合があります。</p>
 
 <h2 id="troubleshooting--issues-with-private-registries">トラブルシューティング： プライベートレジストリに関する問題</h2>
 

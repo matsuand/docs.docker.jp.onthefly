@@ -59,7 +59,7 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 {% endcomment %}
 * BuildKit を用いて生成された Docker イメージは、従来の Docker イメージと同じように Docker Hub にプッシュすることができます。
 * 従来のビルドに対して動作している Dockerfile の記述は、BuildKit を用いてビルドを行っても同様に動作します。
-* 新しくコマンドラインオプション `--secret` が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
+* 新しくコマンドラインオプション`--secret`が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
 @z
 
 @x
@@ -132,7 +132,7 @@ environment variable when invoking the `docker build` command, such as:
 Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1`
 environment variable when invoking the `docker build` command, such as:
 {% endcomment %}
-一番簡単な方法としては docker を起動し始める際に環境変数 `DOCKER_BUILDKIT=1` を設定した上で `docker build` コマンドを起動します。
+一番簡単な方法としては docker を起動し始める際に環境変数`DOCKER_BUILDKIT=1`を設定した上で`docker build`コマンドを起動します。
 @z
 
 @x
@@ -153,7 +153,7 @@ To enable docker BuildKit by default, set daemon configuration in
 To enable docker BuildKit by default, set daemon configuration in
 `/etc/docker/daemon.json` feature to true and restart the daemon:
 {% endcomment %}
-docker BuildKit をデフォルトで有効にするには、`/etc/docker/daemon.json` にあるデーモン設定の features を true にしデーモンを再起動します。
+docker BuildKit をデフォルトで有効にするには、`/etc/docker/daemon.json`にあるデーモン設定の features を true にしデーモンを再起動します。
 @z
 
 @x
@@ -331,7 +331,7 @@ frontend. To override the default frontend, set the first line of the
 `Dockerfile` as a comment with a specific frontend image: 
 {% endcomment %}
 `Dockerfile` における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
-これを行うには `Dockerfile` の先頭行に、コメントとして特定のフロントエンドイメージを指定します。
+これを行うには`Dockerfile`の先頭行に、コメントとして特定のフロントエンドイメージを指定します。
 @z
 
 @x
@@ -364,7 +364,7 @@ The new `--secret` flag for docker build allows the user to pass secret
 information to be used in the Dockerfile for building docker images in a safe
 way that will not end up stored in the final image.
 {% endcomment %}
-Docker ビルドにおいては新たに `--secret` フラグが導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
+Docker ビルドにおいては新たに`--secret`フラグが導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
 機密情報は、最終的にイメージ内に保存されることはないので、安全に取り扱うことができます。
 @z
 
@@ -380,8 +380,8 @@ is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docke
 does not use the filename of where the secret is kept outside of the Dockerfile,
 since this may be sensitive information.
 {% endcomment %}
-`id` は `docker build --secret` において受け渡される識別子です。
-これは Dockerfile 内において用いられる `RUN --mount` 識別子に関連づいています。
+`id`は`docker build --secret`において受け渡される識別子です。
+これは Dockerfile 内において用いられる`RUN --mount`識別子に関連づいています。
 Docker では Dockerfile の外に保持されている機密情報のファイル名は用いません。
 これが重要な情報となることもあるからです。
 @z
@@ -394,7 +394,7 @@ to use.
 `dst` renames the secret file to a specific file in the Dockerfile `RUN` command
 to use.
 {% endcomment %}
-`dst` は Dockerfile 内にて用いられる `RUN` コマンドにおいての機密情報ファイルを、所定ファイル名に名称変更します。
+`dst`は Dockerfile 内にて用いられる`RUN`コマンドにおいての機密情報ファイルを、所定ファイル名に名称変更します。
 @z
 
 @x
@@ -424,7 +424,7 @@ And with a Dockerfile that specifies use of a BuildKit frontend
 And with a Dockerfile that specifies use of a BuildKit frontend
 `docker/dockerfile:1.0-experimental`, the secret can be accessed. 
 {% endcomment %}
-そして BuildKit フロントエンド `docker/dockerfile:1.0-experimental` を指定した Dockerfile を使えば、機密情報にアクセスすることができます。
+そして BuildKit フロントエンド`docker/dockerfile:1.0-experimental`を指定した Dockerfile を使えば、機密情報にアクセスすることができます。
 @z
 
 @x
@@ -558,7 +558,7 @@ The `docker build` has a `--ssh` option to allow the Docker Engine to forward
 SSH agent connections. For more information on SSH agent, see the
 [OpenSSH man page](https://man.openbsd.org/ssh-agent).
 {% endcomment %}
-`docker build` には `--ssh` オプションがあります。
+`docker build`には`--ssh`オプションがあります。
 これは Docker Engine に対して SSH エージェントのフォワードによる接続を許可するものです。
 SSH エージェントについては [OpenSSH man ページ](https://man.openbsd.org/ssh-agent) を参照してください。
 @z
@@ -573,7 +573,7 @@ Only the commands in the `Dockerfile` that have explicitly requested the SSH
 access by defining `type=ssh` mount have access to SSH agent connections. The
 other commands have no knowledge of any SSH agent being available.
 {% endcomment %}
-`Dockerfile` 内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを `type=ssh` とするだけです。
+`Dockerfile`内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを`type=ssh`とするだけです。
 これが SSH エージェントによる接続を行うものとなります。
 これ以外のコマンド記述からは、SSH エージェントを利用しているかどうかを知ることはできません。
 @z
@@ -588,8 +588,8 @@ To request SSH access for a `RUN` command in the `Dockerfile`, define a mount
 with type `ssh`. This will set up the `SSH_AUTH_SOCK` environment variable to
 make programs relying on SSH automatically use that socket.
 {% endcomment %}
-`Dockerfile` 内の `RUN` コマンドにおいて SSH アクセスを指定するには、マウントタイプを `ssh` として定義します。
-これにより環境変数 `SSH_AUTH_SOCK` が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。
+`Dockerfile`内の`RUN`コマンドにおいて SSH アクセスを指定するには、マウントタイプを`ssh`として定義します。
+これにより環境変数`SSH_AUTH_SOCK`が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。
 @z
 
 @x
@@ -645,7 +645,7 @@ the SSH agent.
 Once the `Dockerfile` is created, use the `--ssh` option for connectivity with
 the SSH agent.
 {% endcomment %}
-`Dockerfile` の用意ができたら、SSH エージェント接続を行う `--ssh` オプションを使います。
+`Dockerfile`の用意ができたら SSH エージェント接続を行う`--ssh`オプションを使います。
 @z
 
 @x
@@ -656,6 +656,15 @@ $ docker build --ssh default .
 ```bash
 $ docker build --ssh default .
 ```
+@z
+
+@x
+You may need to run `ssh-add` to add private key identities to the authentication agent first for this to work.
+@y
+{% comment %}
+You may need to run `ssh-add` to add private key identities to the authentication agent first for this to work.
+{% endcomment %}
+エージェントに対して秘密鍵の認証がまず必要な場合には、`ssh-add`の利用が必要な場合があります。
 @z
 
 @x

@@ -33,12 +33,13 @@ Options:
     --always-recreate-deps     Recreate dependent containers.
                                Incompatible with --no-recreate.
     --no-recreate              If containers already exist, don't recreate
-                               them. Incompatible with --force-recreate and -V.
+                               them. Incompatible with --force-recreate and 
+                               --renew-anon-volumes.
     --no-build                 Don't build an image, even if it's missing.
     --no-start                 Don't start the services after creating them.
     --build                    Build images before starting containers.
     --abort-on-container-exit  Stops all containers if any container was
-                               stopped. Incompatible with -d.
+                               stopped. Incompatible with --detach.
     --attach-dependencies      Attach to dependent containers.
     -t, --timeout TIMEOUT      Use this timeout in seconds for container
                                shutdown when attached or when containers are
@@ -69,12 +70,13 @@ Options:
     --always-recreate-deps     Recreate dependent containers.
                                Incompatible with --no-recreate.
     --no-recreate              If containers already exist, don't recreate
-                               them. Incompatible with --force-recreate and -V.
+                               them. Incompatible with --force-recreate and 
+                               --renew-anon-volumes.
     --no-build                 Don't build an image, even if it's missing.
     --no-start                 Don't start the services after creating them.
     --build                    Build images before starting containers.
     --abort-on-container-exit  Stops all containers if any container was
-                               stopped. Incompatible with -d.
+                               stopped. Incompatible with --detach.
     --attach-dependencies      Attach to dependent containers.
     -t, --timeout TIMEOUT      Use this timeout in seconds for container
                                shutdown when attached or when containers are
@@ -104,12 +106,13 @@ Options:
     --always-recreate-deps     依存コンテナーを再生成します。
                                --no-recreate と同時に使えません。
     --no-recreate              コンテナーが存在していれば再生成しません。
-                               --force-recreate および -V と同時に使えません。
+                               --force-recreate や --renew-anon-volumes とは同時に
+                               使えません。
     --no-build                 イメージがなかったとしてもビルドの生成を行いません。
     --no-start                 サービスの生成後にその起動は行いません。
     --build                    コンテナー起動前にイメージをビルドします。
     --abort-on-container-exit  コンテナーのいずれかが停止したときにコンテナーすべて
-                               を停止します。-d と同時に使えません。
+                               を停止します。--detach と同時に使えません。
     --attach-dependencies      依存するコンテナーにアタッチします。
     -t, --timeout TIMEOUT      アタッチあるいは起動されているコンテナーのシャット
                                ダウンに要するタイムアウト時間を秒数で指定します。
@@ -144,18 +147,18 @@ Unless they are already running, this command also starts any linked services.
 @z
 
 @x
-The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs -f`). When
-the command exits, all containers are stopped. Running `docker-compose up -d`
+The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs --follow`). When
+the command exits, all containers are stopped. Running `docker-compose up --detach`
 starts the containers in the background and leaves them running.
 @y
 {% comment %}
-The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs -f`). When
-the command exits, all containers are stopped. Running `docker-compose up -d`
+The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs --follow`). When
+the command exits, all containers are stopped. Running `docker-compose up --detach`
 starts the containers in the background and leaves them running.
 {% endcomment %}
-`docker-compose up` コマンドは、各コンテナーからの出力をすべてまとめます（`docker-compose logs -f` の実行と同じです）。 
+`docker-compose up`コマンドは、各コンテナーからの出力をすべてまとめます（`docker-compose logs --follow`の実行と同じです）。 
 コマンドが終了すると、コンテナーはすべて停止します。
-`docker-compose up -d` を実行すると、コンテナーはバックグラウンドで起動し、そのまま実行し続けます。
+`docker-compose up --detach`を実行すると、コンテナーはバックグラウンドで起動し、そのまま実行し続けます。
 @z
 
 @x
