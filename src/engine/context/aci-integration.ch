@@ -628,14 +628,14 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 @x
 Single containers and Compose applications can be removed from ACI with 
 the `docker prune` command. The `docker prune` command removes deployments 
-that not currently running. To remove running depoyments, you can specify
+that are not currently running. To remove running depoyments, you can specify
 `--force`. The `--dry-run` option lists deployments that are planned for 
 removal, but it doesn't actually remove them.
 @y
 {% comment %}
 Single containers and Compose applications can be removed from ACI with 
 the `docker prune` command. The `docker prune` command removes deployments 
-that not currently running. To remove running depoyments, you can specify
+that are not currently running. To remove running depoyments, you can specify
 `--force`. The `--dry-run` option lists deployments that are planned for 
 removal, but it doesn't actually remove them.
 {% endcomment %}
@@ -935,12 +935,12 @@ mystorageaccount/test-volume
 @x
 By default, if the storage account does not already exist, this command
 creates a new storage account using the Standard LRS as a default SKU, and the
-resource group and location associated with you Docker ACI context.
+resource group and location associated with your Docker ACI context.
 @y
 {% comment %}
 By default, if the storage account does not already exist, this command
 creates a new storage account using the Standard LRS as a default SKU, and the
-resource group and location associated with you Docker ACI context.
+resource group and location associated with your Docker ACI context.
 {% endcomment %}
 ストレージアカウントが存在しない場合、このコマンドがデフォルト SKU として 標準 LRS を利用してストレージアカウントを新規生成します。
 そしてリソースグループや Docker ACI コンテキストに関連するディレクトリを生成します。
@@ -948,11 +948,11 @@ resource group and location associated with you Docker ACI context.
 
 @x
 If you specify an existing storage account, the command creates a new
-file share in the exsting account:
+file share in the existing account:
 @y
 {% comment %}
 If you specify an existing storage account, the command creates a new
-file share in the exsting account:
+file share in the existing account:
 {% endcomment %}
 既存のストレージアカウントを指定した場合、このコマンドはそのアカウント内にファイル共有を新規生成します。
 @z
