@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-31 09:56:32 +0900-->
+<!-- Page generated 2020-11-06 09:52:57 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ダウンロードレート制限 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ダウンロードレート制限" />
   <meta property="og:description" content="Download rate limit" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-31T09:56:32+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-06T09:52:57+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/download-rate-limit/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-31T09:56:32+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-06T09:52:57+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ダウンロードレート制限","description":"Download rate limit","url":"https://docs.docker.com/docker-hub/download-rate-limit/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -130,13 +130,13 @@
 
 <h2 id="how-can-i-check-my-current-rate">How can I check my current rate</h2>
 
-<p>When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:</p>
+<p>Valid manifest API requests to Hub will usually include the following rate limit headers in the response:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RateLimit-Limit
 RateLimit-Remaining
 </code></pre></div></div>
 
-<p>If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need <code class="language-plaintext highlighter-rouge">curl</code>, <code class="language-plaintext highlighter-rouge">grep</code>, and <code class="language-plaintext highlighter-rouge">jq</code> installed.</p>
+<p>These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need <code class="language-plaintext highlighter-rouge">curl</code>, <code class="language-plaintext highlighter-rouge">grep</code>, and <code class="language-plaintext highlighter-rouge">jq</code> installed.</p>
 
 <p>To get a token anonymously (if you are pulling anonymously):</p>
 
@@ -148,15 +148,15 @@ RateLimit-Remaining
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&amp;scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 </code></pre></div></div>
 
-<p>Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):</p>
+<p>Then to get the headers showing your limits, run the following:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2&gt;&amp;1 | grep RateLimit
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 </code></pre></div></div>
 
-<p>Which should return something like this:</p>
+<p>Which should return headers including these:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; RateLimit-Limit: 100;w=21600
-&lt; RateLimit-Remaining: 76;w=21600
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RateLimit-Limit: 100;w=21600
+RateLimit-Remaining: 76;w=21600
 </code></pre></div></div>
 
 <p>This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.</p>
@@ -164,6 +164,10 @@ RateLimit-Remaining
 <blockquote>
   <p>Remember that these headers are best-effort and there will be small variations.</p>
 </blockquote>
+
+<h3 id="i-dont-see-any-ratelimit-headers">I don’t see any RateLimit headers</h3>
+
+<p>If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.</p>
 
 <h2 id="how-do-I-authenticate-pull-requests">プルリクエストの認証方法</h2>
 
@@ -256,7 +260,11 @@ Docker Compose ファイルを使ってアプリケーションをデプロイ�
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#how-do-i-know-my-pull-requests-are-being-limited" class="nomunge">How do I know my pull requests are being limited</a></li>
-  <li><a href="#how-can-i-check-my-current-rate" class="nomunge">How can I check my current rate</a></li>
+  <li><a href="#how-can-i-check-my-current-rate" class="nomunge">How can I check my current rate</a>
+    <ul>
+      <li><a href="#i-dont-see-any-ratelimit-headers" class="nomunge">I don’t see any RateLimit headers</a></li>
+    </ul>
+  </li>
   <li><a href="#how-do-I-authenticate-pull-requests" class="nomunge">プルリクエストの認証方法</a>
     <ul>
       <li><a href="#docker-desktop" class="nomunge">Docker Desktop</a></li>

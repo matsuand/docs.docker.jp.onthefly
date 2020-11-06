@@ -170,27 +170,18 @@ example sets two configurable options on the `json-file` logging driver:
 @z
 
 @x
-If you do not specify a logging driver, the default is `json-file`. Thus,
-the default output for commands such as `docker inspect <CONTAINER>` is JSON.
+If you do not specify a logging driver, the default is `json-file`.
+To find the current default logging driver for the Docker daemon, run
+`docker info` and search for `Logging Driver`. You can use the following
+command on Linux, macOS, or PowerShell on Windows:
 @y
 {% comment %}
-If you do not specify a logging driver, the default is `json-file`. Thus,
-the default output for commands such as `docker inspect <CONTAINER>` is JSON.
+If you do not specify a logging driver, the default is `json-file`.
+To find the current default logging driver for the Docker daemon, run
+`docker info` and search for `Logging Driver`. You can use the following
+command on Linux, macOS, or PowerShell on Windows:
 {% endcomment %}
 ログドライバーを指定しなかった場合、デフォルトは `json-file` です。
-したがってたとえば `docker inspect <CONTAINER>` のようなコマンドの出力は JSON 形式となります。
-@z
-
-@x
-To find the current default logging driver for the Docker daemon, run
-`docker info` and search for `Logging Driver`. You can use the following
-command on Linux, macOS, or PowerShell on Windows:
-@y
-{% comment %}
-To find the current default logging driver for the Docker daemon, run
-`docker info` and search for `Logging Driver`. You can use the following
-command on Linux, macOS, or PowerShell on Windows:
-{% endcomment %}
 Docker デーモンにおいて設定されている、その時点でのデフォルトのログドライバーが何であるかは、`docker info` を実行して `Logging Driver` の項目を見ればわかります。
 以下のコマンドは Linux、macOS、Windows 上の PowerShell において実行することができます。
 @z

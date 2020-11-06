@@ -140,12 +140,12 @@ You will see this error message in the Docker CLI or in the Docker Engine logs.
 @z
 
 @x
-When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+Valid manifest API requests to Hub will usually include the following rate limit headers in the response:
 @y
 {% comment %}
-When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+Valid manifest API requests to Hub will usually include the following rate limit headers in the response:
 {% endcomment %}
-When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+Valid manifest API requests to Hub will usually include the following rate limit headers in the response:
 @z
 
 @x
@@ -161,12 +161,12 @@ RateLimit-Remaining
 @z
 
 @x
-If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
 @y
 {% comment %}
-If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
 {% endcomment %}
-If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
 @z
 
 @x
@@ -208,42 +208,42 @@ $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=
 @z
 
 @x
-Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+Then to get the headers showing your limits, run the following:
 @y
 {% comment %}
-Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+Then to get the headers showing your limits, run the following:
 {% endcomment %}
-Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+Then to get the headers showing your limits, run the following:
 @z
 
 @x
 ```
-$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 ```
 @y
 ```
-$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 ```
 @z
 
 @x
-Which should return something like this:
+Which should return headers including these:
 @y
 {% comment %}
-Which should return something like this:
+Which should return headers including these:
 {% endcomment %}
-Which should return something like this:
+Which should return headers including these:
 @z
 
 @x
 ```
-< RateLimit-Limit: 100;w=21600  
-< RateLimit-Remaining: 76;w=21600
+RateLimit-Limit: 100;w=21600
+RateLimit-Remaining: 76;w=21600
 ```
 @y
 ```
-< RateLimit-Limit: 100;w=21600  
-< RateLimit-Remaining: 76;w=21600
+RateLimit-Limit: 100;w=21600
+RateLimit-Remaining: 76;w=21600
 ```
 @z
 
@@ -263,6 +263,18 @@ This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls rema
 > Remember that these headers are best-effort and there will be small variations.
 {% endcomment %}
 > Remember that these headers are best-effort and there will be small variations.
+@z
+
+@x
+### I don't see any RateLimit headers
+@y
+### I don't see any RateLimit headers
+@z
+
+@x
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
+@y
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
 @z
 
 @x
