@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-05 21:17:12 +0900-->
+<!-- Page generated 2020-11-06 22:14:31 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Azure での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Azure での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="Azure において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-05T21:17:12+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-06T22:14:31+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/aci-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-05T21:17:12+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-06T22:14:31+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Azure での Docker コンテナーのデプロイ","description":"Azure において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/aci-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Azure での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p>
+                        <section class="section"><h1>Azure での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p>
 <h2 id="overview">概要</h2>
 
 <p>Docker Azure 統合は、Azure コンテナーインスタンス（Azure Container Instances; ACI） の中で、ネイティブな Docker コマンドの利用を可能にします。
@@ -114,13 +114,6 @@
   <li>Compose を利用すれば、単一コンテナーアプリケーション、複数コンテナーアプリケーションの開発を単純化できます。
 開発者にとってはクラウドコンテナーサービスに対して、シームレスな Docker 完全互換コマンドの実行が初めて可能になります。</li>
 </ul>
-
-<blockquote class="important">
-  <p><strong>メモ</strong></p>
-
-  <p>Docker Azure 統合は、現在ベータ版として提供されます。
-提供されるコマンドやフラグは、将来のリリースにおいて変更されることがあります。</p>
-</blockquote>
 
 <h2 id="prerequisites">前提条件</h2>
 
@@ -158,9 +151,8 @@
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker login azure
 </span></code></pre></div></div>
 
-<p>This opens your web browser and prompts you to enter your Azure login credentials.</p>
-
-<p>Docker CLI からブラウザーが開かない場合は、そこから <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code" target="_blank" rel="noopener" class="_">Azure デバイスコードフロー</a> へ進み、手動で接続できるようになります。
+<p>ここからブラウザーが開いて Azure のログイン情報の入力が求められます。
+Docker CLI からブラウザーが開かない場合は、そこから <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code" target="_blank" rel="noopener" class="_">Azure デバイスコードフロー</a> へ進み、手動で接続します。
 なお <a href="https://docs.microsoft.com/en-us/cli/azure/" target="_blank" rel="noopener" class="_">Azure コマンドライン</a> のログインは Docker CLI Azure ログインからは切り離されています。</p>
 
 <p>これとは別に、対話形式でない方法（スクリプトや継続的インテグレーションの利用時）でのログインも可能です。
@@ -303,35 +295,37 @@ my-application
 Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 </span></code></pre></div></div>
 
-<h2 id="exposing-ports">Exposing ports</h2>
+<h2 id="exposing-ports">ポートの公開</h2>
 
-<p>Single containers and Compose applications can optionally expose ports. For single containers, this is done using the <code class="language-plaintext highlighter-rouge">--publish</code> (<code class="language-plaintext highlighter-rouge">-p</code>) flag of the <code class="language-plaintext highlighter-rouge">docker run</code> command and for Compose applications, you must specify exposed ports in the Compose file service definition.</p>
+<p>単独のコンテナーや Compose アプリケーションは、オプションとしてポートを公開することができます。
+単独のコンテナーの場合は、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドに<code class="language-plaintext highlighter-rouge">--publish</code>（<code class="language-plaintext highlighter-rouge">-p</code>）フラグをつけて実行します。
+また Compose アプリケーションの場合は、Compose ファイルのサービス定義において、公開するポートを設定する必要があります。</p>
 
 <blockquote>
-  <p><strong>Note:</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.</p>
+  <p>ACI ではポートマッピングを行うことはできません（つまりポート公開においてポート番号を変更することはできません）。
+したがって ACI へのデプロイにあたって公開元も公開先も同一のポートでなければなりません。</p>
+
+  <p>Compose アプリケーション内に含まれるコンテナーはすべて、同一の ACI コンテナーグループとしてデプロイされます。
+同一の Compose アプリケーション内の複数コンテナーは、ACI へのデプロイに際して同一のポートを公開することはできません。</p>
 </blockquote>
 
-<blockquote>
-  <p><strong>Note:</strong></p>
+<p>アプリケーションにおいてポート公開を行う際には、デプロイするアプリケーション（単独のコンテナーまたは Compose アプリケーション）に対応するコンテナーグループに対して、ランダムな公開 IP アドレスが関連づけられるのがデフォルトです。
+この IP アドレスは<code class="language-plaintext highlighter-rouge">docker ps</code>を使ってコンテナーを一覧表示したり、<code class="language-plaintext highlighter-rouge">docker inspect</code>を実行したりしたときに確認することができます。</p>
 
-  <p>All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.</p>
-</blockquote>
+<h3 id="dns-label-name">DNS ラベル名</h3>
 
-<p>By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
-This IP address can be obtained when listing containers with <code class="language-plaintext highlighter-rouge">docker ps</code> or using <code class="language-plaintext highlighter-rouge">docker inspect</code>.</p>
-
-<h3 id="dns-label-name">DNS label name</h3>
-
-<p>In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: <code class="language-plaintext highlighter-rouge">&lt;NAME&gt;.region.azurecontainer.io</code>.
-You can set this name with the <code class="language-plaintext highlighter-rouge">--domain</code> flag when performing a <code class="language-plaintext highlighter-rouge">docker run</code>, or by using the <code class="language-plaintext highlighter-rouge">domain</code> field in the Compose file when performing a <code class="language-plaintext highlighter-rouge">docker compose up</code>.</p>
+<p>ランダムな IP アドレスに対するポート公開に加えて、アプリケーションを FQDN の形式で公開するための DNS ラベル名を指定することができます。
+たとえば<code class="language-plaintext highlighter-rouge">&lt;NAME&gt;.region.azurecontainer.io</code>という形式です。
+この名前は<code class="language-plaintext highlighter-rouge">docker run</code>の実行時に<code class="language-plaintext highlighter-rouge">--domain</code>フラグを用いて設定します。
+あるいは Compose ファイル内の<code class="language-plaintext highlighter-rouge">domain</code>項目を利用して<code class="language-plaintext highlighter-rouge">docker compose up</code>により実現します。</p>
 
 <blockquote>
-  <p><strong>Note:</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>The domain of a Compose application can only be set once, if you specify the
-<code class="language-plaintext highlighter-rouge">domain</code> for several services, the value must be identical.</p>
+  <p>複数のサービスに対して<code class="language-plaintext highlighter-rouge">domain</code>を設定していたとしても、Compose アプリケーションのドメイン設定が行われるのは一度だけです。
+したがってそれらは同一でなければなりません。</p>
 </blockquote>
 
 <h2 id="using-azure-file-share-as-volumes-in-aci-containers">ACI コンテナー内での Azure ファイル共有のボリュームとしての利用</h2>
@@ -423,15 +417,18 @@ mystorageaccount/test-volume2      Fileshare test-volume2 in mystorageaccount st
 逆にストレージアカウントが（たとえば Azure ポータルや <code class="language-plaintext highlighter-rouge">az</code> コマンドを使った場合のように）<code class="language-plaintext highlighter-rouge">docker volume create</code> 以外において生成されたものである場合は、<code class="language-plaintext highlighter-rouge">docker volume rm</code> はストレージアカウントを削除しません。
 そのアカウントが一つのファイル共有も残っていなかったとしてもです。</p>
 
-<h2 id="environment-variables">Environment variables</h2>
+<h2 id="environment-variables">環境変数</h2>
 
-<p>When using <code class="language-plaintext highlighter-rouge">docker run</code>, you can pass the environment variables to ACI containers using the <code class="language-plaintext highlighter-rouge">--env</code> flag.
-For Compose applications, you can specify the environment variables in the Compose file with the <code class="language-plaintext highlighter-rouge">environment</code> or <code class="language-plaintext highlighter-rouge">env-file</code> service field, or with the <code class="language-plaintext highlighter-rouge">--environment</code> command line flag.</p>
+<p><code class="language-plaintext highlighter-rouge">docker run</code>の実行時には、<code class="language-plaintext highlighter-rouge">--env</code>フラグを利用して ACI コンテナーに環境変数を受け渡すことができます。
+Compose アプリケーションの場合は、Compose ファイル内においてサービス項目<code class="language-plaintext highlighter-rouge">environment</code>または<code class="language-plaintext highlighter-rouge">env-file</code>において環境変数を指定するか、あるいはコマンドラインフラグ<code class="language-plaintext highlighter-rouge">--environment</code>を利用して指定します。</p>
 
-<h2 id="private-docker-hub-images-and-using-the-azure-container-registry">Private Docker Hub images and using the Azure Container Registry</h2>
+<h2 id="private-docker-hub-images-and-using-the-azure-container-registry">プライベートな Docker Hub イメージと Azure コンテナーレジストリの利用</h2>
 
-<p>You can deploy private images to ACI that are hosted by any container registry. You need to log into the relevant registry using <code class="language-plaintext highlighter-rouge">docker login</code> before running <code class="language-plaintext highlighter-rouge">docker run</code> or <code class="language-plaintext highlighter-rouge">docker compose up</code>. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
-In the case of the Azure Container Registry, the command line will try to automatically log you into ACR from your Azure login. You don’t need to manually login to the ACR registry first, if your Azure login has access to the ACR.</p>
+<p>どのようなコンテナーレジストリにホストされている ACI であっても、プライベートイメージをデプロイすることができます。
+<code class="language-plaintext highlighter-rouge">docker run</code>や<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行するためには、その前に<code class="language-plaintext highlighter-rouge">docker login</code>を使ってそのレジストリにログインしておくことが必要です。
+Docker CLI では、デプロイイメージに対するレジストリログイン情報を取得した上で、資格情報やイメージデプロイ情報を ACI に送信します。
+Azure コンテナーレジストリ（Azure Container Registry; ACR）の場合は、Azure ログインから ACR へのログインを自動的に行います。
+Azure ログインから ACR へのアクセスができていれば、わざわざ ACR レジストリへのログインを手動で行う必要はなくなります。</p>
 
 <h2 id="using-aci-resource-groups-as-namespaces">名前空間としての ACI リソースグループの利用</h2>
 
@@ -446,13 +443,6 @@ Docker コンテキストが異なれば、コンテナー名や Compose アプ�
 <h2 id="install-the-docker-compose-cli-on-linux">Linux における Docker Compose CLI のインストール</h2>
 
 <p>Docker Compose CLI は、Azure コンテナーインスタンス（ACI）上でのコンテナー実行と管理をサポートします。</p>
-
-<blockquote class="important">
-  <p><strong>メモ</strong></p>
-
-  <p><strong>Docker Azure 統合はベータ版です</strong>。
-インストール処理、コマンド、フラグは、将来のリリースにおいて変更されることがあります。</p>
-</blockquote>
 
 <h3 id="prerequisites">前提条件</h3>
 
@@ -528,13 +518,6 @@ Docker コンテキストが異なれば、コンテナー名や Compose アプ�
 
 <p>Docker ACI 統合の CLI をインストールしたら、<code class="language-plaintext highlighter-rouge">--help</code> をつけてコマンド実行し、この時点でのコマンド一覧を確認します。</p>
 
-<blockquote class="important">
-  <p><strong>メモ</strong></p>
-
-  <p>Docker Azure 統合はベータ版です。
-コマンドやフラグは、将来リリースにおいて変更されることがあります。</p>
-</blockquote>
-
 <h3 id="uninstall">アンインストール</h3>
 
 <p>Docker Azure 統合の CLI を削除する場合は、ダウンロードしたバイナリと <code class="language-plaintext highlighter-rouge">com.docker.cli</code> を <code class="language-plaintext highlighter-rouge">PATH</code> 上から削除します。
@@ -587,10 +570,10 @@ Docker コンテキストが異なれば、コンテナー名や Compose アプ�
       <li><a href="#run-docker-containers-on-aci" class="nomunge">ACI での Docker コンテナー実行</a></li>
       <li><a href="#running-compose-applications" class="nomunge">Compose アプリケーションの実行</a></li>
       <li><a href="#releasing-resources" class="nomunge">リソースの解放</a></li>
-      <li><a href="#exposing-ports" class="nomunge">Exposing ports</a></li>
+      <li><a href="#exposing-ports" class="nomunge">ポートの公開</a></li>
       <li><a href="#using-azure-file-share-as-volumes-in-aci-containers" class="nomunge">ACI コンテナー内での Azure ファイル共有のボリュームとしての利用</a></li>
-      <li><a href="#environment-variables" class="nomunge">Environment variables</a></li>
-      <li><a href="#private-docker-hub-images-and-using-the-azure-container-registry" class="nomunge">Private Docker Hub images and using the Azure Container Registry</a></li>
+      <li><a href="#environment-variables" class="nomunge">環境変数</a></li>
+      <li><a href="#private-docker-hub-images-and-using-the-azure-container-registry" class="nomunge">プライベートな Docker Hub イメージと Azure コンテナーレジストリの利用</a></li>
       <li><a href="#using-aci-resource-groups-as-namespaces" class="nomunge">名前空間としての ACI リソースグループの利用</a></li>
       <li><a href="#install-the-docker-compose-cli-on-linux" class="nomunge">Linux における Docker Compose CLI のインストール</a></li>
       <li><a href="#feedback" class="nomunge">フィードバック</a></li>

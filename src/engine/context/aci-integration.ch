@@ -67,25 +67,6 @@ In addition, the integration between Docker and Microsoft developer technologies
 @z
 
 @x
->**Note**
->
-> Docker Azure Integration is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-@y
-{% comment %}
->**Note**
->
-> Docker Azure Integration is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-{% endcomment %}
->**メモ**
->
-> Docker Azure 統合は、現在ベータ版として提供されます。
-> 提供されるコマンドやフラグは、将来のリリースにおいて変更されることがあります。
-{:.important}
-@z
-
-@x
 ## Prerequisites
 @y
 {% comment %}
@@ -200,13 +181,17 @@ docker login azure
 @z
 
 @x
+This opens your web browser and prompts you to enter your Azure login credentials.
 If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} and lets you connect manually.
 Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} login is separated from the Docker CLI Azure login.
 @y
 {% comment %}
 This opens your web browser and prompts you to enter your Azure login credentials.
+If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} and lets you connect manually.
+Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} login is separated from the Docker CLI Azure login.
 {% endcomment %}
-Docker CLI からブラウザーが開かない場合は、そこから [Azure デバイスコードフロー](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} へ進み、手動で接続できるようになります。
+ここからブラウザーが開いて Azure のログイン情報の入力が求められます。
+Docker CLI からブラウザーが開かない場合は、そこから [Azure デバイスコードフロー](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} へ進み、手動で接続します。
 なお [Azure コマンドライン](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} のログインは Docker CLI Azure ログインからは切り離されています。
 @z
 
@@ -668,7 +653,8 @@ Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 {% comment %}
 ## Exposing ports
 {% endcomment %}
-## Exposing ports
+{: #exposing-ports }
+## ポートの公開
 @z
 
 @x
@@ -677,37 +663,34 @@ Single containers and Compose applications can optionally expose ports. For sing
 {% comment %}
 Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
 {% endcomment %}
-Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+単独のコンテナーや Compose アプリケーションは、オプションとしてポートを公開することができます。
+単独のコンテナーの場合は、`docker run`コマンドに`--publish`（`-p`）フラグをつけて実行します。
+また Compose アプリケーションの場合は、Compose ファイルのサービス定義において、公開するポートを設定する必要があります。
 @z
 
 @x
-> **Note:**
+> **Note**
 >
 > ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
-@y
-{% comment %}
-> **Note:**
 >
-> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
-{% endcomment %}
-> **Note:**
->
-> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
-@z
-
-@x
-> **Note:**
 >
 > All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
 @y
 {% comment %}
-> **Note:**
+> **Note**
+>
+> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
+>
 >
 > All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
 {% endcomment %}
-> **Note:**
+> **メモ**
 >
-> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+> ACI ではポートマッピングを行うことはできません（つまりポート公開においてポート番号を変更することはできません）。
+> したがって ACI へのデプロイにあたって公開元も公開先も同一のポートでなければなりません。
+>
+> Compose アプリケーション内に含まれるコンテナーはすべて、同一の ACI コンテナーグループとしてデプロイされます。
+> 同一の Compose アプリケーション内の複数コンテナーは、ACI へのデプロイに際して同一のポートを公開することはできません。
 @z
 
 @x
@@ -718,8 +701,8 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
 This IP address can be obtained when listing containers with `docker ps` or using `docker inspect`.
 {% endcomment %}
-By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
-This IP address can be obtained when listing containers with `docker ps` or using `docker inspect`.
+アプリケーションにおいてポート公開を行う際には、デプロイするアプリケーション（単独のコンテナーまたは Compose アプリケーション）に対応するコンテナーグループに対して、ランダムな公開 IP アドレスが関連づけられるのがデフォルトです。
+この IP アドレスは`docker ps`を使ってコンテナーを一覧表示したり、`docker inspect`を実行したりしたときに確認することができます。
 @z
 
 @x
@@ -728,7 +711,8 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 {% comment %}
 ### DNS label name
 {% endcomment %}
-### DNS label name
+{: #dns-label-name }
+### DNS ラベル名
 @z
 
 @x
@@ -739,26 +723,28 @@ You can set this name with the `--domain` flag when performing a `docker run`, o
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
 You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
 {% endcomment %}
-In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+ランダムな IP アドレスに対するポート公開に加えて、アプリケーションを FQDN の形式で公開するための DNS ラベル名を指定することができます。
+たとえば`<NAME>.region.azurecontainer.io`という形式です。
+この名前は`docker run`の実行時に`--domain`フラグを用いて設定します。
+あるいは Compose ファイル内の`domain`項目を利用して`docker compose up`により実現します。
 @z
 
 @x
-> **Note:**
+> **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
 > `domain` for several services, the value must be identical.
 @y
 {% comment %}
-> **Note:**
+> **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
 > `domain` for several services, the value must be identical.
 {% endcomment %}
-> **Note:**
+> **メモ**
 >
-> The domain of a Compose application can only be set once, if you specify the
-> `domain` for several services, the value must be identical.
+> 複数のサービスに対して`domain`を設定していたとしても、Compose アプリケーションのドメイン設定が行われるのは一度だけです。
+> したがってそれらは同一でなければなりません。
 @z
 
 @x
@@ -859,12 +845,12 @@ volumes:
 @z
 
 @x
-> **Note:**
+> **Note**
 >
 > The volume short syntax in Compose files cannot be used as it is aimed at volume definition for local bind mounts. Using the volume driver and driver option syntax in Compose files makes the volume definition a lot more clear.
 @y
 {% comment %}
-> **Note:**
+> **Note**
 >
 > The volume short syntax in Compose files cannot be used as it is aimed at volume definition for local bind mounts. Using the volume driver and driver option syntax in Compose files makes the volume definition a lot more clear.
 {% endcomment %}
@@ -1069,29 +1055,48 @@ Azure においてボリュームを削除するとこのコマンドは、指�
 @x
 ## Environment variables
 @y
+{% comment %}
 ## Environment variables
+{% endcomment %}
+{: #environment-variables }
+## 環境変数
 @z
 
 @x
 When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
 For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
 @y
+{% comment %}
 When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
 For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
+{% endcomment %}
+`docker run`の実行時には、`--env`フラグを利用して ACI コンテナーに環境変数を受け渡すことができます。
+Compose アプリケーションの場合は、Compose ファイル内においてサービス項目`environment`または`env-file`において環境変数を指定するか、あるいはコマンドラインフラグ`--environment`を利用して指定します。
 @z
 
 @x
 ## Private Docker Hub images and using the Azure Container Registry
 @y
+{% comment %}
 ## Private Docker Hub images and using the Azure Container Registry
+{% endcomment %}
+{: #private-docker-hub-images-and-using-the-azure-container-registry }
+## プライベートな Docker Hub イメージと Azure コンテナーレジストリの利用
 @z
 
 @x
 You can deploy private images to ACI that are hosted by any container registry. You need to log into the relevant registry using `docker login` before running `docker run` or `docker compose up`. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
 In the case of the Azure Container Registry, the command line will try to automatically log you into ACR from your Azure login. You don't need to manually login to the ACR registry first, if your Azure login has access to the ACR.
 @y
+{% comment %}
 You can deploy private images to ACI that are hosted by any container registry. You need to log into the relevant registry using `docker login` before running `docker run` or `docker compose up`. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
 In the case of the Azure Container Registry, the command line will try to automatically log you into ACR from your Azure login. You don't need to manually login to the ACR registry first, if your Azure login has access to the ACR.
+{% endcomment %}
+どのようなコンテナーレジストリにホストされている ACI であっても、プライベートイメージをデプロイすることができます。
+`docker run`や`docker compose up`を実行するためには、その前に`docker login`を使ってそのレジストリにログインしておくことが必要です。
+Docker CLI では、デプロイイメージに対するレジストリログイン情報を取得した上で、資格情報やイメージデプロイ情報を ACI に送信します。
+Azure コンテナーレジストリ（Azure Container Registry; ACR）の場合は、Azure ログインから ACR へのログインを自動的に行います。
+Azure ログインから ACR へのアクセスができていれば、わざわざ ACR レジストリへのログインを手動で行う必要はなくなります。
 @z
 
 @x
@@ -1143,25 +1148,6 @@ The Docker Compose CLI adds support for running and managing containers on Azure
 The Docker Compose CLI adds support for running and managing containers on Azure Container Instances (ACI).
 {% endcomment %}
 Docker Compose CLI は、Azure コンテナーインスタンス（ACI）上でのコンテナー実行と管理をサポートします。
-@z
-
-@x
->**Note**
->
-> **Docker Azure Integration is a beta release**. The installation process, commands, and flags will change in future releases.
-{:.important}
-@y
-{% comment %}
->**Note**
->
-> **Docker Azure Integration is a beta release**. The installation process, commands, and flags will change in future releases.
-{:.important}
-{% endcomment %}
->**メモ**
->
-> **Docker Azure 統合はベータ版です**。
-> インストール処理、コマンド、フラグは、将来のリリースにおいて変更されることがあります。
-{:.important}
 @z
 
 @x
@@ -1427,25 +1413,6 @@ Docker ACI 統合の CLI をインストールしたら、`--help` をつけて�
 @z
 
 @x
-> **Note**
->
-> Docker Azure Integration is a beta release. The commands and flags will change in future releases.
-{:.important}
-@y
-{% comment %}
-> **Note**
->
-> Docker Azure Integration is a beta release. The commands and flags will change in future releases.
-{:.important}
-{% endcomment %}
-> **メモ**
->
-> Docker Azure 統合はベータ版です。
-> コマンドやフラグは、将来リリースにおいて変更されることがあります。
-{:.important}
-@z
-
-@x
 ### Uninstall
 @y
 {% comment %}
@@ -1486,10 +1453,10 @@ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 @z
 
 @x
-Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out Docker Azure Integration. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
 {% comment %}
-Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out Docker Azure Integration. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 {% endcomment %}
 Docker Azure 統合ベータ版を利用していただき、ありがとうございます。
 みなさんからのフィードバックが大変重要です。
