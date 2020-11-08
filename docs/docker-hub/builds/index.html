@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-03 22:13:46 +0900-->
+<!-- Page generated 2020-11-08 12:04:56 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>自動ビルドの設定 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="自動ビルドの設定" />
   <meta property="og:description" content="自動ビルドを設定します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-03T22:13:46+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-08T12:04:56+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/builds/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-03T22:13:46+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-08T12:04:56+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"自動ビルドの設定","description":"自動ビルドを設定します。","url":"https://docs.docker.com/docker-hub/builds/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>自動ビルドの設定</h1><p><em class="reading-time">読む時間の目安: 16 分</em></p>
+                        <section class="section"><h1>自動ビルドの設定</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p>
 <h2 id="how-automated-builds-work">自動ビルドはどのように動くか</h2>
 
 <p>Docker Hub においては、外部リポジトリ内のソースコードから自動的にイメージをビルドして、出来上がったイメージをリポジトリに自動プッシュすることができます。</p>
@@ -114,305 +114,270 @@
   <p>自動ビルドの設定が行われているリポジトリであっても<code class="language-plaintext highlighter-rouge">docker push</code>を使えば、それまでと変わらずにビルド済イメージをプッシュすることができます。</p>
 </blockquote>
 
-<p>If you have automated tests configured, these run after building but before
-pushing to the registry. You can use these tests to create a continuous
-integration workflow where a build that fails its tests does not push the built
-image. Automated tests do not push images to the registry on their own. <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">Learn more about automated image testing here.</a></p>
+<p>自動テストを設定すれば、自動ビルドが行われた直後、そしてレジストリへのプッシュが行われる前に、そのテストが実行されます。
+このようなテストを利用すれば CI ワークフローにおいて、テストに失敗したビルドイメージはプッシュを行わないといったことが可能になります。
+自動テスト自体は、レジストリに対してイメージをプッシュするものではありません。
+<a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">イメージの自動テストに関する詳細はこちらを参照してください</a>。</p>
 
-<p>Depending on your <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">plan</a>, you may get parallel builds, which means that <code class="language-plaintext highlighter-rouge">N</code>
-autobuilds can be run at the same time. <code class="language-plaintext highlighter-rouge">N</code> is configured by the plan that you
-subscribe to. Once <code class="language-plaintext highlighter-rouge">N+1</code> builds are running, any additional builds are
-queued to be run later.</p>
+<p>購入している <a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">プラン</a> によっては、並行ビルドを行うこともできます。
+つまり<code class="language-plaintext highlighter-rouge">N</code>個の自動ビルドを同時に実行します。
+<code class="language-plaintext highlighter-rouge">N</code>という数値は、購入しているプランにおいて設定します。
+<code class="language-plaintext highlighter-rouge">N+1</code>個めのビルドが実行されると、これに続くビルドはキューに入り、後に実行されます。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>The total number of pending builds in the queue is limited to 30 and further requests will be discarded.</p>
+  <p>キューに待機されるビルドの総数は 30 個に制限されていて、それ以上のビルド要求は破棄されます。</p>
 </blockquote>
 
-<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-dashboard.png" alt="An automated build dashboard" /></p>
+<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-dashboard.png" alt="自動ビルドダッシュボード" /></p>
 
 <h2 id="configure-automated-build-settings">自動ビルドの設定</h2>
 
-<p>You can configure repositories in Docker Hub so that they automatically
-build an image each time you push new code to your source provider. If you have
-<a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">automated tests</a> configured, the new image is only pushed
-when the tests succeed.</p>
+<p>Docker Hub 上のリポジトリにおいては、ソースプロバイダーに対して新たなソースコードをプッシュした際に、イメージを自動的にビルドするように設定することができます。
+<a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">自動テスト</a> を設定している場合は、テストに成功したイメージのみがプッシュされます。</p>
 
-<p>Builds can be added to existing repositories, or added when you create a repository.</p>
+<p>自動ビルドは既存のリポジトリに追加することができ、新規にリポジトリ生成を行った際に追加することもできます。</p>
 
 <ol>
   <li>
-    <p>From the <strong>Repositories</strong> section, click into a repository to view its details.</p>
+    <p><strong>Repositories</strong> セクションからリポジトリの詳細画面を開きます。</p>
   </li>
   <li>
-    <p>Click the <strong>Builds</strong> tab.</p>
+    <p><strong>Builds</strong> タブをクリックします。</p>
   </li>
   <li>
-    <p>If you are setting up automated builds for the first time, select
-the code repository service (GitHub or Bitbucket) where the image’s source code is stored.
-You might redirected to the settings page to <a href="/docs.docker.jp.onthefly/docker-hub/builds/link-source/">link</a> the code repository service.</p>
+    <p>自動ビルドの設定を初めて行う場合は、イメージのソースコードを保存しているコードリポジトリサービス（GitHub または Bitbucket）を選択します。
+これを行うと、コードリポジトリサービスに <a href="/docs.docker.jp.onthefly/docker-hub/builds/link-source/">リンク</a> するための設定画面にリダイレクトされます。</p>
 
-    <p>Otherwise, if you are editing the build settings for an existing automated
- build, click <strong>Configure automated builds</strong>.</p>
+    <p>別の方法として、既存の自動ビルドに対するビルド設定を行っている場合は、<strong>Configure automated builds</strong>（自動ビルドの設定）をクリックします。</p>
   </li>
   <li>
-    <p>Select the <strong>source repository</strong> to build the Docker images from.</p>
+    <p>Docker イメージを作り出す <strong>source repository</strong>（ソースリポジトリ）を選択します。</p>
 
-    <p>You might need to specify an organization or user (the <em>namespace</em>) from the
- source code provider. Once you select a namespace, its source code
- repositories appear in the <strong>Select repository</strong> dropdown list.</p>
+    <p>ソースコードプロバイダーにおいては、組織やユーザー（その <strong>名前空間</strong>）の指定が必要になるときもあります。
+ 名前空間を選択しておけば、そのソースコードリポジトリが <strong>Select repository</strong> のドロップダウンリストに表示されるようになります。</p>
   </li>
   <li>
-    <p>Optionally, enable <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/#enable-automated-tests-on-a-repository">autotests</a>.</p>
+    <p>任意の作業として <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/#enable-automated-tests-on-a-repository">autotests</a>（自動テスト）を有効にします。</p>
   </li>
   <li>
-    <p>Review the default <strong>Build Rules</strong>, and optionally click the
-<strong>plus sign</strong> to add and configure more build rules.</p>
+    <p>デフォルトの <strong>Build Rules</strong>（ビルドルール）を確認し、必要に応じて <strong>プラス記号</strong> をクリックして追加のビルドルールを設定します。</p>
 
-    <p><em>Build rules</em> control what Docker Hub builds into images from the contents
-of the source code repository, and how the resulting images are tagged
-within the Docker repository.</p>
+    <p><strong>ビルドルール</strong> とは、ソースコードリポジトリの内容に基づいて Docker Hub が何をイメージとしてビルドするのか、またビルドしたイメージを Docker リポジトリ内にてどのようにタグづけを行うかを制御します。</p>
 
-    <p>A default build rule is set up for you, which you can edit or delete. This
-default set builds from the <code class="language-plaintext highlighter-rouge">Branch</code> in your source code repository called
-<code class="language-plaintext highlighter-rouge">master</code>, and creates a Docker image tagged with <code class="language-plaintext highlighter-rouge">latest</code>.</p>
+    <p>デフォルトのビルドルールがすでに準備されています。
+このルールは編集したり削除したりすることができます。
+デフォルトのルールでは、ソースコードリポジトリ内の<code class="language-plaintext highlighter-rouge">master</code>ブランチからビルドを行うものとして設定されています。
+そして生成する Docker イメージには<code class="language-plaintext highlighter-rouge">latest</code>というタグをつけます。</p>
   </li>
   <li>
-    <p>For each branch or tag, enable or disable the <strong>Autobuild</strong> toggle.</p>
+    <p>各ブランチやタグに対して <strong>Autobuild</strong> トグルを使って、自動ビルドの有効、無効を設定します。</p>
 
-    <p>Only branches or tags with autobuild enabled are built, tested, <em>and</em> have
-the resulting image pushed to the repository. Branches with autobuild
-disabled are built for test purposes (if enabled at the repository
-level), but the built Docker image is not pushed to the repository.</p>
+    <p>自動ビルドが有効として設定されたブランチやタグだけがビルド、テストされ、<strong>さらに</strong> そこから生成されたイメージだけがリポジトリにプッシュされます。
+自動ビルドを無効に設定したブランチは（リポジトリレベルで有効になっている場合）テスト目的でビルドされますが、ビルドされた Docker イメージはリポジトリにプッシュされません。</p>
   </li>
   <li>
-    <p>For each branch or tag, enable or disable the <strong>Build Caching</strong> toggle.</p>
+    <p>各ブランチやタグに対して <strong>Build Caching</strong> トグルを使って、ビルドキャッシュの有効、無効を設定します。</p>
 
-    <p><a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/#leverage-build-cache">Build caching</a> can save time if you are building a large image frequently or have
- many dependencies. You might want to leave build caching disabled to
- make sure all of your dependencies are resolved at build time, or if
- you have a large layer that is quicker to build locally.</p>
+    <p><a href="/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/#leverage-build-cache">ビルドキャッシュ</a> は、大きなイメージを頻繁に生成したり、多くの依存パッケージを有するイメージを生成したりする際に、ビルド時間の短縮に役立ちます。
+ ビルド時に依存関係をすべて解決したい場合や、ローカルでビルドする方が早いくらいの大規模レイヤーがある場合などでは、ビルドキャッシュを無効にしておきたい場合があるかもしれません。</p>
   </li>
   <li>
-    <p>Click <strong>Save</strong> to save the settings, or click <strong>Save and build</strong> to save and
-run an initial test.</p>
+    <p><strong>Save</strong> をクリックして設定を保存します。
+または <strong>Save and build</strong> をクリックして、保存とともに初回のテストを実施します。</p>
 
-    <p>A webhook is automatically added to your source code repository to notify
- Docker Hub on every push. Only pushes to branches that are listed as the
- source for one or more tags trigger a build.</p>
+    <p>ソースコードリポジトリにはウェブフックが自動的に追加されます。
+ これによって Docker Hub 上へのプッシュがすべて通知されるようになります。
+ 1 つまたは複数のタグに対するソースとして一覧にあげられているブランチに対してのみ、プッシュからビルドが起動されます。</p>
   </li>
 </ol>
 
-<h3 id="set-up-build-rules">Set up build rules</h3>
+<h3 id="set-up-build-rules">ビルドルールの設定</h3>
 
-<p>By default when you set up automated builds, a basic build rule is created for you.
-This default rule watches for changes to the <code class="language-plaintext highlighter-rouge">master</code> branch in your source code
-repository, and builds the <code class="language-plaintext highlighter-rouge">master</code> branch into a Docker image tagged with
-<code class="language-plaintext highlighter-rouge">latest</code>.</p>
+<p>自動ビルドを設定すると、デフォルトで基本的なビルドルールが生成されます。
+このデフォルトルールは、ソースコードリポジトリ内の<code class="language-plaintext highlighter-rouge">master</code>ブランチへの変更を監視するものです。 そして<code class="language-plaintext highlighter-rouge">master</code>ブランチのソースをビルドして Docker イメージに<code class="language-plaintext highlighter-rouge">latest</code>というタグづけを行います。</p>
 
-<p>In the <strong>Build Rules</strong> section, enter one or more sources to build.</p>
+<p><strong>Build Rules</strong>（ビルドルール）のセクションにおいて、ビルドするソースを必要な分だけ入力します。</p>
 
-<p>For each source:</p>
+<p>各ソースに対して以下を行います。</p>
 
 <ul>
   <li>
-    <p>Select the <strong>Source type</strong> to build either a <strong>tag</strong> or a
-  <strong>branch</strong>. This tells the build system what to look for in the source code
-  repository.</p>
+    <p><strong>Source type</strong>（ソースタイプ）として <strong>tag</strong>（タグ）または <strong>branch</strong>（ブランチ）のいずれをビルドするかを選びます。
+ビルドシステムがソースコードリポジトリ内のどちらを見にいくかを指示するものです。</p>
   </li>
   <li>
-    <p>Enter the name of the <strong>Source</strong> branch or tag you want to build.</p>
+    <p>ビルドを行う <strong>Source</strong>（ソース）ブランチまたはタグの名前を入力します。</p>
 
-    <p>The first time you configure automated builds, a default build rule is set up
-for you. This default set builds from the <code class="language-plaintext highlighter-rouge">Branch</code> in your source code called
-<code class="language-plaintext highlighter-rouge">master</code>, and creates a Docker image tagged with <code class="language-plaintext highlighter-rouge">latest</code>.</p>
+    <p>自動ビルドの設定を初めて行う場合は、デフォルトのビルドルールが設定されます。
+このデフォルトルールは、ソースコード内の<code class="language-plaintext highlighter-rouge">master</code>ブランチからビルドを行うものとしています。
+そして生成される Docker イメージに<code class="language-plaintext highlighter-rouge">latest</code>というタグをつけます。</p>
 
-    <p>You can also use a regex to select which source branches or tags to build.
-To learn more, see
-<a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">regexes</a>.</p>
+    <p>ビルド対象とするソースのブランチやタグの指定において、正規表現を用いることもできます。
+詳しくは <a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">正規表現</a> を参照してください。</p>
   </li>
   <li>
-    <p>Enter the tag to apply to Docker images built from this source.</p>
+    <p>そのソースからビルドされる Docker イメージにおいて、適用するタグ名を入力します。</p>
 
-    <p>If you configured a regex to select the source, you can reference the
-capture groups and use its result as part of the tag. To learn more, see
-<a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">regexes</a>.</p>
+    <p>ソース指定にあたって正規表現を用いた場合、マッチしたグループを用いて、タグ名の一部分に利用することができます。
+詳しくは <a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">正規表現</a> を参照してください。</p>
   </li>
   <li>
-    <p>Specify the <strong>Dockerfile location</strong> as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to <code class="language-plaintext highlighter-rouge">/</code>.)</p>
+    <p><strong>Dockerfile location</strong>（Dockerfile の場所）として、ソースコードリポジトリのルートからの相対パスを指定します。
+（Dockerfile がリポジトリのルートにあるのであれば、このパス設定は<code class="language-plaintext highlighter-rouge">/</code>のままとしてください。）</p>
   </li>
 </ul>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>When Docker Hub pulls a branch from a source code repository, it performs a shallow clone (only the tip of the specified branch).  Refer to <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/">Advanced options for Autobuild and Autotest</a> for more information.</p>
+  <p>Docker Hub がソースコードリポジトリからブランチをプルする際には、shallow クローン（指定ブランチの最新履歴のみのクローン）を行います。
+詳しくは <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/">自動ビルドや自動テストに対する高度なオプション</a> を参照してください。</p>
 </blockquote>
 
-<h3 id="environment-variables-for-builds">Environment variables for builds</h3>
+<h3 id="environment-variables-for-builds">ビルドにおける環境変数</h3>
 
-<p>You can set the values for environment variables used in your build processes
-when you configure an automated build. Add your build environment variables by
-clicking the plus sign next to the <strong>Build environment variables</strong> section, and
-then entering a variable name and the value.</p>
+<p>自動ビルドの設定の際には、環境変数の値をビルド時に利用するように設定できます。
+ビルド時の環境変数は <strong>Build environment variables</strong> セクションの横にあるプラス記号をクリックして追加します。
+そして変数名と値を入力します。</p>
 
-<p>When you set variable values from the Docker Hub UI, they can be used by the
-commands you set in <code class="language-plaintext highlighter-rouge">hooks</code> files, but they are stored so that only users who
-have <code class="language-plaintext highlighter-rouge">admin</code> access to the Docker Hub repository can see their values. This
-means you can use them to safely store access tokens or other information that
-should remain secret.</p>
+<p>Docker Hub の UI 画面から変数値を設定すると、<code class="language-plaintext highlighter-rouge">hooks</code>ファイル内に設定したコマンドからこれを利用することができます。
+ただしこの情報は保存されるため、Docker Hub リポジトリに対する<code class="language-plaintext highlighter-rouge">admin</code>権限を有するユーザーしか、その値を参照することはできません。
+つまりこれを利用すれば、アクセストークンや機密にしておきたい各種情報を安全に保存しておくことができることになります。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: The variables set on the build configuration screen are used during
-the build processes <em>only</em> and should not be confused with the environment
-values used by your service (for example to create service links).</p>
+  <p><strong>メモ</strong>: ビルド設定画面上から設定した変数は、ビルド処理において <strong>のみ</strong> 利用されます。
+したがってサービスにおいて利用している環境変数（たとえばサービスリンクの生成時に利用するもの）とは混同しないようにしてください。</p>
 </blockquote>
 
-<h2 id="check-your-active-builds">Check your active builds</h2>
+<h2 id="check-your-active-builds">アクティブなビルドの確認</h2>
 
-<p>A summary of a repository’s builds appears both on the repository <strong>General</strong>
-tab, and in the <strong>Builds</strong> tab. The <strong>Builds</strong> tab also displays a color coded
-bar chart of the build queue times and durations. Both views display the
-pending, in progress, successful, and failed builds for any tag of the
-repository.</p>
+<p>リポジトリにおけるビルド概要は、リポジトリの <strong>General</strong>（一般）タブおよび <strong>Builds</strong>（ビルド）タブにおいて見ることができます。
+また <strong>Builds</strong> タブでは、色づけされたバーチャートによってビルドのキュー時間や間隔を見ることもできます。
+いずれの画面においてもリポジトリの各タブごとに、ビルドが中断しているもの、実行中のもの、成功したもの、失敗したものが確認できます。</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-active.png" alt="Active Builds" /></p>
+<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-active.png" alt="アクティブなビルド" /></p>
 
-<p>From either location, you can click a build job to view its build report. The
-build report shows information about the build job including the source
-repository and branch (or tag), the build duration, creation time and location,
-and the user namespace the build occurred in.</p>
+<p>いずれの画面からでもビルドジョブをクリックすれば、ビルド結果を見ることができます。
+ビルド結果にはビルドジョブに関する情報として、ソースリポジトリとブランチ（あるいはタグ）、ビルド時間、生成時刻、生成場所、ビルド処理を行ったユーザー名前空間が示されます。</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-report.png" alt="Build Report" /></p>
+<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/index-report.png" alt="ビルド報告" /></p>
 
-<h2 id="cancel-or-retry-a-build">Cancel or retry a build</h2>
+<h2 id="cancel-or-retry-a-build">ビルドのキャンセルまたは再実行</h2>
 
-<p>While a build is queued or running, a <strong>Cancel</strong> icon appears next to its build
-report link on the General tab and on the Builds tab. You can also click the
-<strong>Cancel</strong> button from the build report page, or from the Timeline tab’s logs
-display for the build.</p>
+<p>ビルド要求がキューに入っている、あるいは実行されている場合に、General タブや Builds タブにおけるビルド報告リンクの横には <strong>Cancel</strong> アイコンが表示されます。
+ビルド結果のページから、あるいは Timeline タブのログ表示から <strong>Cancel</strong> ボタンをクリックすることもできます。</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/build-cancelicon.png" alt="list of builds showing the cancel icon" /></p>
+<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/build-cancelicon.png" alt="キャンセルアイコンが表示されているビルドの一覧" /></p>
 
-<p>If a build fails, a <strong>Retry</strong> icon appears next to the build report line on the
-General and Builds tabs, and the build report page and Timeline logs also
-display a <strong>Retry</strong> button.</p>
+<p>ビルドが失敗した場合、General タブあるいは Builds タブのビルド報告の行の横に <strong>Retry</strong>（再実行）アイコンが表示されます。
+またビルド報告のページや Timeline ログにおいても <strong>Retry</strong> ボタンが表示されます。</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/retry-build.png" alt="Timeline view showing the retry build button" /></p>
+<p><img src="/docs.docker.jp.onthefly/docker-hub/builds/images/retry-build.png" alt="Retry ボタンが表示されている Timeline 画面" /></p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>If you are viewing the build details for a repository that belongs
-to an Organization, the Cancel and Retry buttons only appear if you have <code class="language-plaintext highlighter-rouge">Read &amp; Write</code> access to the repository.</p>
+  <p>ビルド詳細を確認しているリポジトリが組織に属したものである場合、Cancel ボタンや Retry ボタンは、そのリポジトリに対して<code class="language-plaintext highlighter-rouge">Read &amp; Write</code>（読み書き）の権限がある場合にのみ表示されます。</p>
 </blockquote>
 
-<h2 id="disable-an-automated-build">Disable an automated build</h2>
+<h2 id="disable-an-automated-build">自動ビルドの無効化</h2>
 
-<p>Automated builds are enabled per branch or tag, and can be disabled and
-re-enabled easily. You might do this when you want to only build manually for
-a while, for example when you are doing major refactoring in your code. Disabling
-autobuilds does not disable <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">autotests</a>.</p>
+<p>自動ビルドはブランチごと、タグごとに有効化されます。
+無効化したり再び有効化することは簡単です。
+たとえばコードに対して大々的にリファクタリングを行うような場合に、ビルドを手動で行う必要があり、そういった場合に無効化を行いたくなります。</p>
 
-<p>To disable an automated build:</p>
+<p>自動ビルドを無効化するには以下を行います。</p>
 
 <ol>
   <li>
-    <p>From the <strong>Repositories</strong> page, click into a repository, and click the <strong>Builds</strong> tab.</p>
+    <p><strong>Repositories</strong> ページにおいて、1 つのリポジトリをクリックして <strong>Builds</strong> タブを選びます。</p>
   </li>
   <li>
-    <p>Click <strong>Configure automated builds</strong> to edit the repository’s build settings.</p>
+    <p>リポジトリのビルド設定を編集するために <strong>Configure automated builds</strong>（自動ビルドの設定）をクリックします。</p>
   </li>
   <li>
-    <p>In the <strong>Build Rules</strong> section, locate the branch or tag you no longer want
-to automatically build.</p>
+    <p><strong>Build Rules</strong>（ビルドルール）セクションにおいて、自動ビルドを無効にしたいブランチまたはタグを選択します。</p>
   </li>
   <li>
-    <p>Click the <strong>autobuild</strong> toggle next to the configuration line.</p>
+    <p>設定行の横にある <strong>autobuild</strong>（自動ビルド）トグルをクリックします。</p>
 
-    <p>The toggle turns gray when disabled.</p>
+    <p>無効を指定するとトグルボタンは灰色に変わります。</p>
   </li>
   <li>
-    <p>Click <strong>Save</strong> to save your changes.</p>
+    <p><strong>Save</strong>（保存）をクリックして変更を保存します。</p>
   </li>
 </ol>
 
-<h2 id="advanced-automated-build-options">Advanced automated build options</h2>
+<h2 id="advanced-automated-build-options">高度な自動ビルドオプション</h2>
 
-<p>At the minimum you need a build rule composed of a source branch (or tag) and
-destination Docker tag to set up an automated build. You can also change where
-the build looks for the Dockerfile, set a path to the files the build use
-(the build context), set up multiple static tags or branches to build from, and
-use regular expressions (regexes) to dynamically select source code to build and
-create dynamic tags.</p>
+<p>自動ビルドを設定するにはビルドルールにおいて、最低でもソースブランチ（またはタグ）と目的の Docker タグの指定が必要です。
+これ以外に指定可能な内容として、ビルドを行う Dockerfile の場所、ビルドに利用するファイルへのパス（ビルドコンテキスト）設定、複数ブランチやタグの指定、正規表現（regex）利用によるソースコードの動的指定やタグの動的生成などがあります。</p>
 
-<p>All of these options are available from the <strong>Build configuration</strong> screen for
-each repository. Click <strong>Repositories</strong> from the left navigation, click the name
-of the repository you want to edit, click the <strong>Builds</strong> tab, and click
-<strong>Configure Automated builds</strong>.</p>
+<p>このオプションは、各リポジトリにおける <strong>Build configuration</strong>（ビルド設定）画面から利用することができます。
+左側のナビゲーションから <strong>Repositories</strong> をクリックし、編集対象とするリポジトリをクリックします。
+そして <strong>Builds</strong> タブを選んで、<strong>Configure Automated builds</strong>（自動ビルドの設定）をクリックします。</p>
 
-<h3 id="tag-and-branch-builds">Tag and Branch builds</h3>
+<h3 id="tag-and-branch-builds">タグビルドやブランチビルド</h3>
 
-<p>You can configure your automated builds so that pushes to specific branches or tags triggers a build.</p>
+<p>自動ビルドの設定においては、特定のブランチまたはタグへのプッシュからビルドが実行されるように設定することができます。</p>
 
 <ol>
   <li>
-    <p>In the <strong>Build Rules</strong> section, click the plus sign to add more sources to build.</p>
+    <p><strong>Build Rules</strong>（ビルドルール）セクションにおいてプラス記号をクリックして、ビルド対象のソースを追加します。</p>
   </li>
   <li>
-    <p>Select the <strong>Source type</strong> to build: either a <strong>tag</strong> or a <strong>branch</strong>.</p>
+    <p>ビルド対象とする <strong>Source type</strong>（ソースタイプ）を選択します。
+<strong>tag</strong>（タグ）または <strong>branch</strong>（ブランチ）のいずれかです。</p>
 
-    <p>This tells the build system what type of source to look for in the code
-repository.</p>
+    <p>これはビルドシステムがソースコードリポジトリ内のどちらを見にいくかを指示するものです。</p>
   </li>
   <li>
-    <p>Enter the name of the <strong>Source</strong> branch or tag you want to build.</p>
+    <p>ビルドを行う <strong>Source</strong>（ソース）ブランチまたはタグの名前を入力します。</p>
 
-    <p>You can enter a name, or use a regex to match which source branch or tag
- names to build. To learn more, see
- <a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">regexes</a>.</p>
+    <p>名前をそのまま入力します。
+ あるいは正規表現を用いて、ビルド対象とするソースブランチまたはタグを表現することもできます。
+ 詳しくは <a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">正規表現</a> を参照してください。</p>
   </li>
   <li>
-    <p>Enter the tag to apply to Docker images built from this source.</p>
+    <p>そのソースからビルドされる Docker イメージにおいて、適用するタグ名を入力します。</p>
 
-    <p>If you configured a regex to select the source, you can reference the
- capture groups and use its result as part of the tag. To learn more, see
- <a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">regexes</a>.</p>
+    <p>ソース指定にあたって正規表現を用いた場合、マッチしたグループを用いて、タグ名の一部分に利用することができます。
+ 詳しくは <a href="/docs.docker.jp.onthefly/docker-hub/builds/#regexes-and-automated-builds">正規表現</a> を参照してください。</p>
   </li>
   <li>
-    <p>Repeat steps 2 through 4 for each new build rule you set up.</p>
+    <p>新たに設定するビルドに対して、上の手順 2 から 4 を繰り返します。</p>
   </li>
 </ol>
 
-<h3 id="set-the-build-context-and-dockerfile-location">Set the build context and Dockerfile location</h3>
+<h3 id="set-the-build-context-and-dockerfile-location">ビルドコンテキストと Dockerfile の場所指定</h3>
 
-<p>Depending on how the files are arranged in your source code repository, the
-files required to build your images may not be at the repository root. If that’s
-the case, you can specify a path where the build looks for the files.</p>
+<p>ソースコードリポジトリ内でのファイル構成がさまざまであるため、イメージビルドに必要なファイルがリポジトリのルートに存在していないこともあります。
+そのような場合は、ビルド処理において対象ファイルを探しにいくパスを指定します。</p>
 
-<p>The <em>build context</em> is the path to the files needed for the build, relative to the root of the repository. Enter the path to these files in the <strong>Build context</strong> field. Enter <code class="language-plaintext highlighter-rouge">/</code> to set the build context as the root of the source code repository.</p>
+<p><strong>ビルドコンテキスト</strong> は、ビルドに必要となるファイルへのパスのことであり、リポジトリのルートからの相対パスとして表わされます。
+そのようなファイルパスを <strong>Build context</strong>（ビルドコンテキスト）欄に入力します。
+ビルドコンテキストとしてソースコードリポジトリのルートを設定する場合には<code class="language-plaintext highlighter-rouge">/</code>を入力します。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>If you delete the default path <code class="language-plaintext highlighter-rouge">/</code> from the <strong>Build context</strong> field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.</p>
+  <p><strong>Build context</strong> 欄のデフォルトパス<code class="language-plaintext highlighter-rouge">/</code>を削除して、そのまま空欄にすると、ビルド処理では Dockerfile へのパスをビルドコンテキストとして用います。
+ただし混乱を避けるため、完全なパス指定を行うことをお勧めします。</p>
 </blockquote>
 
-<p>You can specify the <strong>Dockerfile location</strong> as a path relative to the build
-context. If the Dockerfile is at the root of the build context path, leave the
-Dockerfile path set to <code class="language-plaintext highlighter-rouge">/</code>. (If the build context field is blank, set the path
-to the Dockerfile from the root of the source repository.)</p>
+<p><strong>Dockerfile location</strong>（Dockerfile の場所）では、ビルドコンテキストへの相対パスを指定します。
+Dockerfile がビルドコンテキストパスのルートに存在する場合は、Dockerfile のパスは<code class="language-plaintext highlighter-rouge">/</code>のままとします。
+（ビルドコンテキストが空欄であった場合 Dockerfile は、ソースリポジトリのルートからのパスを指定してください。）</p>
 
-<h3 id="regexes-and-automated-builds">Regexes and automated builds</h3>
+<h3 id="regexes-and-automated-builds">正規表現と自動ビルド</h3>
 
-<p>You can specify a regular expression (regex) so that only matching branches or
-tags are built. You can also use the results of the regex to create the Docker
-tag that is applied to the built image.</p>
+<p>ビルド指定においては正規表現（regex）を用いて、合致したブランチまたはタグのみをビルドすることができます。
+また正規表現で得られた結果を使って、ビルドイメージに適用される Docker タグを生成することもできます。</p>
 
-<p>You can use up to nine regular expression capture groups
-(expressions enclosed in parentheses) to select a source to build, and reference
-these in the <strong>Docker Tag</strong> field using <code class="language-plaintext highlighter-rouge">{\1}</code> through <code class="language-plaintext highlighter-rouge">{\9}</code>.</p>
+<p>ビルドソースを指定する際の正規表現において、グループ指定（カッコでくくった表現）は 9 個まで利用することができます。
+そのグループに対する参照方法は、<strong>Docker Tag</strong>（Docker タグ）欄において<code class="language-plaintext highlighter-rouge">{\1}</code>から<code class="language-plaintext highlighter-rouge">{\9}</code>を使って行います。</p>
 
 <!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
@@ -421,97 +386,95 @@ You could also use capture groups to build and label images that come from vario
 
 `/(alice|bob)-v([0-9.]+)/` -->
 
-<h3 id="build-images-with-buildkit">Build images with BuildKit</h3>
+<h3 id="build-images-with-buildKit">BuildKit を用いたイメージビルド</h3>
 
-<p>You can enable the BuildKit builder by setting the <code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code>
-<a href="#environment-variables-for-builds">environment variable</a> in the
-<a href="#configure-automated-build-settings">Configure automated build settings</a> section.
-Refer to the <a href="/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/">build images with BuildKit</a>
-page for more information on BuildKit.</p>
+<p><a href="#configure-automated-build-settings">自動ビルドの設定</a> における <a href="#environment-variables-for-builds">環境変数</a> の設定に従って<code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code>を設定すれば、BuildKit ビルダーを有効にすることができます。
+BuildKit に関する詳細は <a href="/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/">BuildKit を使ったイメージビルド</a> を参照してください。</p>
 
-<h2 id="build-repositories-with-linked-private-submodules">Build repositories with linked private submodules</h2>
+<h2 id="プライベートサブモジュールをリンクしているリポジトリのビルド">プライベートサブモジュールをリンクしているリポジトリのビルド</h2>
 
-<p>Docker Hub sets up a deploy key in your source code repository that allows it
-to clone the repository and build it; however this key only works for a single,
-specific code repository. If your source code repository uses private Git
-submodules (or requires that you clone other private repositories to build),
-Docker Hub cannot access these additional repos, your build cannot complete,
-and an error is logged in your build timeline.</p>
+<p>Docker Hub ではデプロイ鍵をソースコードリポジトリ内において設定することが可能であり、リポジトリのクローンやそのビルドを可能にしています。
+ただしこの鍵は、単一の特定コードリポジトリに対してしか動作しません。
+ソースコードリポジトリにおいてプライベート Git サブモジュールを利用している場合（あるいはビルドにあたっては別のプライベートリポジトリをクローンする必要がある場合）、Docker Hub はそのような追加のリポジトリにアクセスすることができません。
+そのためビルドが成功せず、ビルドタイムラインにエラーログが出力されます。</p>
 
-<p>To work around this, you can set up your automated build using the <code class="language-plaintext highlighter-rouge">SSH_PRIVATE</code> environment variable to override the deployment key and grant Docker Hub’s build system access to the repositories.</p>
+<p>これを回避するには、自動ビルドにおいて環境変数<code class="language-plaintext highlighter-rouge">SSH_PRIVATE</code>を利用します。
+これによってデプロイ鍵をオーバーライドして Docker Hub によるビルド処理が他のリポジトリにアクセスできるようにします。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>If you are using autobuild for teams, use <a href="/docs.docker.jp.onthefly/docker-hub/builds/#service-users-for-team-autobuilds">the process below</a> instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub’s access to your source repositories.</p>
+  <p>自動ビルドをチーム内で利用している場合は、代わりに <a href="/docs.docker.jp.onthefly/docker-hub/builds/#service-users-for-team-autobuilds">以下の手順</a> に従って、ソースコードプロバイダーに対するサービスユーザーを設定してください。
+これは個々のアカウントに対して Docker Hub からソースリポジトリに対するアクセスを制限することでも実現することができます。</p>
 </blockquote>
 
 <ol>
   <li>
-    <p>Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.</p>
+    <p>ビルド目的でのみ利用する SSH 鍵ペアを生成します。
+そしてその公開鍵をソースコードプロバイダーのアカウントに追加します。</p>
 
-    <p>This step is optional, but allows you to revoke the build-only keypair without removing other access.</p>
+    <p>この手順は任意です。
+ ただしこれを行っておけば、ビルド専用の鍵を削除しても、別のアクセスまで削除する必要がなくなります。</p>
   </li>
-  <li>Copy the private half of the keypair to your clipboard.</li>
-  <li>In Docker Hub, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps <a href="/docs.docker.jp.onthefly/docker-hub/builds/#configure-automated-build-settings">here</a> to configure the automated build.)</li>
-  <li>At the bottom of the screen, click the plus sign ( <strong>+</strong> ) next to <strong>Build Environment variables</strong>.</li>
-  <li>Enter <code class="language-plaintext highlighter-rouge">SSH_PRIVATE</code> as the name for the new environment variable.</li>
-  <li>Paste the private half of the keypair into the <strong>Value</strong> field.</li>
-  <li>Click <strong>Save</strong>, or <strong>Save and Build</strong> to validate that the build now completes.</li>
+  <li>プライベート鍵をクリップボードにコピーします。</li>
+  <li>Docker Hub において、プライベートサブモジュールへのリンクを持つリポジトリのビルドページにアクセスします。
+（必要であれば <a href="/docs.docker.jp.onthefly/docker-hub/builds/#configure-automated-build-settings">ここ</a> に示す手順に従って自動ビルドの設定を行います。）</li>
+  <li>画面下段にある <strong>Build Environment variables</strong>（環境変数のビルド）の横のプラス記号（<strong>+</strong>）をクリックします。</li>
+  <li>新たな環境変数の名前として<code class="language-plaintext highlighter-rouge">SSH_PRIVATE</code>を入力します。</li>
+  <li>プライベート鍵を <strong>Value</strong>（値）欄に貼り付けます。</li>
+  <li><strong>Save</strong> をクリックします。
+または <strong>Save and build</strong> をクリックして、ビルドが成功することを確認します。</li>
 </ol>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>You must configure your private git submodules using git clone over SSH (<code class="language-plaintext highlighter-rouge">git@submodule.tld:some-submodule.git</code>) rather than HTTPS.</p>
+  <p>git clone を使ってプライベートサブモジュールを設定する際には、HTTPS 経由ではなく SSH 経由（<code class="language-plaintext highlighter-rouge">git@submodule.tld:some-submodule.git</code>）としなければなりません。</p>
 </blockquote>
 
-<h2 id="autobuild-for-teams">Autobuild for Teams</h2>
+<h2 id="autobuild-for-teams">チーム向けの自動ビルド</h2>
 
-<p>When you create an automated build repository in your own account namespace, you can start, cancel, and retry builds, and edit and delete your own repositories.</p>
+<p>自分のアカウント名前空間内において自動ビルドリポジトリを生成すれば、そのリポジトリ内での自動ビルドの起動、キャンセル、再ビルド、編集、削除は思いのままです。</p>
 
-<p>These same actions are also available for team repositories from Docker Hub if
-you are a member of the Organization’s <code class="language-plaintext highlighter-rouge">Owners</code> team. If you are a member of a
-team with <code class="language-plaintext highlighter-rouge">write</code> permissions you can start, cancel, and retry builds in your
-team’s repositories, but you cannot edit the team repository settings or delete
-the team repositories. If your user account has <code class="language-plaintext highlighter-rouge">read</code> permission, or if you’re
-a member of a team with <code class="language-plaintext highlighter-rouge">read</code> permission, you can view the build configuration
-including any testing settings.</p>
+<p>Docker Hub のチームリポジトリに対しての同じ操作は、組織の<code class="language-plaintext highlighter-rouge">Owners</code>（所有者）チームのメンバーであれば可能になります。
+<code class="language-plaintext highlighter-rouge">write</code>（書き込み）権限を持つチームメンバーであれば、チームリポジトリにおいてビルドの起動、キャンセル、再ビルドが可能になります。
+しかしチームリポジトリ設定を書き換えたり、チームリポジトリそのものを削除したりすることはできません。
+<code class="language-plaintext highlighter-rouge">read</code>（読み込み）権限を持つユーザーアカウントである、あるいは<code class="language-plaintext highlighter-rouge">read</code>権限を持つチームメンバーである場合は、ビルド設定やテスト設定の内容を参照することができます。</p>
 
 <table>
   <thead>
     <tr>
-      <th>Action/Permission</th>
-      <th>read</th>
-      <th>write</th>
-      <th>admin</th>
-      <th>owner</th>
+      <th>操作/パーミッション</th>
+      <th>読み</th>
+      <th>書き</th>
+      <th>管理者</th>
+      <th>所有者</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>view build details</td>
+      <td>ビルド結果の参照</td>
       <td>x</td>
       <td>x</td>
       <td>x</td>
       <td>x</td>
     </tr>
     <tr>
-      <td>start, cancel, retry</td>
+      <td>起動,キャンセル,再起動</td>
       <td> </td>
       <td>x</td>
       <td>x</td>
       <td>x</td>
     </tr>
     <tr>
-      <td>edit build settings</td>
+      <td>ビルド設定の編集</td>
       <td> </td>
       <td> </td>
       <td>x</td>
       <td>x</td>
     </tr>
     <tr>
-      <td>delete build</td>
+      <td>ビルドの削除</td>
       <td> </td>
       <td> </td>
       <td> </td>
@@ -520,71 +483,69 @@ including any testing settings.</p>
   </tbody>
 </table>
 
-<h3 id="service-users-for-team-autobuilds">Service users for team autobuilds</h3>
+<h3 id="service-users-for-team-autobuilds">チーム自動ビルドに対するサービスユーザー</h3>
 
 <blockquote>
-  <p><strong>Note</strong>: Only members of the <code class="language-plaintext highlighter-rouge">Owners</code> team can set up automated builds for teams.</p>
+  <p><strong>メモ</strong>: チームに対する自動ビルドの設定は、<code class="language-plaintext highlighter-rouge">Owners</code>（所有者）チームのメンバーのみが行うことができます。</p>
 </blockquote>
 
-<p>When you set up automated builds for teams, you grant Docker Hub access to
-your source code repositories using OAuth tied to a specific user account. This
-means that Docker Hub has access to everything that the linked source provider
-account can access.</p>
+<p>チームに対して自動ビルドの設定を行う際には、Docker Hub からソースコードリポジトリへのアクセスを許可するために、特定のユーザーアカウントに紐づいた OAuth を利用します。
+これによって Docker Hub からは、リンクされたソースプロバイダーのアカウントがアクセス可能なものすべてにアクセスできるようになります。</p>
 
-<p>For organizations and teams, we recommend creating a dedicated service account
-(or “machine user”) to grant access to the source provider. This ensures that no
-builds break as individual users’ access permissions change, and that an
-individual user’s personal projects are not exposed to an entire organization.</p>
+<p>組織やチームにおいては、ソースプロバイダーへのアクセスを許可するために、専用のサービスアカウント（言い換えると「マシンユーザー」）を生成することをお勧めします。
+これを行っておけば、個別ユーザーのアクセス権限が変更されても、ビルドが失敗することがなくなります。
+しかもそのユーザーの個人的なプロジェクトは、組織全体に公開せずに済みます。</p>
 
-<p>This service account should have access to any repositories to be built,
-and must have administrative access to the source code repositories so it can
-manage deploy keys. If needed, you can limit this account to only a specific
-set of repositories required for a specific build.</p>
+<p>このサービスアカウントは、ビルドするリポジトリすべてに対してアクセス可能でなければなりません。
+そしてソースコードリポジトリに対して管理権限を有していて、そのデプロイ鍵を管理できることが必要です。
+必要であればこのアカウントの権限を制限して、特定のビルドに対して必要となる特定のリポジトリのみにアクセスするようにすることもできます。</p>
 
-<p>If you are building repositories with linked private submodules (private
-dependencies), you also need to add an override <code class="language-plaintext highlighter-rouge">SSH_PRIVATE</code> environment
-variable to automated builds associated with the account.</p>
+<p>プライベートサブモジュール（プライベート依存パッケージ）にリンクされたリポジトリをビルドしている際には、環境変数<code class="language-plaintext highlighter-rouge">SSH_PRIVATE</code>をオーバーライドして、そのアカウントに関連づいた自動ビルドを行う必要があります。</p>
 
 <ol>
-  <li>Create a service user account on your source provider, and generate SSH keys for it.</li>
-  <li>Create a “build” team in your organization.</li>
+  <li>ソースプロバイダー上においてサービスユーザーを生成します。
+そしてこれに対する SSH 鍵を生成します。</li>
+  <li>組織内に「ビルド」チームを生成します。</li>
   <li>
-    <p>Ensure that the new “build” team has access to each repository and submodule you need to build.</p>
+    <p>ビルド対象とするリポジトリやサブモジュールに対して、この新たな「ビルド」チームがアクセスできるようにします。</p>
 
-    <p>Go to the repository’s <strong>Settings</strong> page. On GitHub, add the new “build” team to the list of <strong>Collaborators and Teams</strong>. On Bitbucket, add the “build” team to the list of approved users on the <strong>Access management</strong> screen.</p>
+    <p>リポジトリの <strong>Settings</strong>（設定）ページにアクセスします。
+ GitHub では <strong>Collaborators and Teams</strong>（協力者とチーム）の一覧に新たな「ビルド」チームを追加します。
+ Bitbucket では <strong>Access management</strong>（アクセス管理）画面において、承認ｓれたユーザーの一覧に「ビルド」チームを追加します。</p>
   </li>
   <li>
-    <p>Add the service user to the “build” team on the source provider.</p>
+    <p>ソースプロバイダーの「ビルド」チームに対してサービスユーザーを追加します。</p>
   </li>
   <li>
-    <p>Log in to Docker Hub as a member of the <code class="language-plaintext highlighter-rouge">Owners</code> team, switch to the organization, and follow the instructions to <a href="/docs.docker.jp.onthefly/docker-hub/builds/link-source/">link to source code repository</a> using the service account.</p>
+    <p>Docker Hub に対して<code class="language-plaintext highlighter-rouge">Owners</code>（所有者）チームのメンバーとしてログインします。
+そして組織に切り替えて、サービスアカウントを使った <a href="/docs.docker.jp.onthefly/docker-hub/builds/link-source/">ソースコードリポジトリへのリンク</a> の手順を行います。</p>
 
     <blockquote>
-      <p><strong>Note</strong>: You may need to log out of your individual account on the source code provider to create the link to the service account.</p>
+      <p><strong>メモ</strong>: サービスアカウントへのリンクを生成するためには、ソースコードプロバイダー上の個人アカウントからログアウトすることが必要かもしれません。</p>
     </blockquote>
   </li>
-  <li>Optionally, use the SSH keys you generated to set up any builds with private submodules, using the service account and <a href="/docs.docker.jp.onthefly/docker-hub/builds/#build-repositories-with-linked-private-submodules">the instructions above</a>.</li>
+  <li>任意の作業として、生成した SSH 鍵を使ってプライベートサブモジュールを利用するビルドの設定を行います。
+その際にはサービスアカウントを用いて <a href="/docs.docker.jp.onthefly/docker-hub/builds/#build-repositories-with-linked-private-submodules">上の手順</a> に従います。</li>
 </ol>
 
-<h2 id="whats-next">What’s Next?</h2>
+<h2 id="whats-next">次に読むものは</h2>
 
-<h3 id="customize-your-build-process">Customize your build process</h3>
+<h3 id="customize-your-build-process">ビルド処理のカスタマイズ</h3>
 
-<p>Additional advanced options are available for customizing your automated builds,
-including utility environment variables, hooks, and build phase overrides. To
-learn more see <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/">Advanced options for Autobuild and Autotest</a>.</p>
+<p>自動ビルドをカスタマイズするために、高度なオプションも用意されています。
+たとえばユーティリティー環境変数、フック、ビルド時のオーバーライドなどです。
+詳しくは <a href="/docs.docker.jp.onthefly/docker-hub/builds/advanced/">自動ビルドおよび自動テストのための高度なオプション</a> を参照してください。</p>
 
-<h3 id="add-automated-tests">Add automated tests</h3>
+<h3 id="add-automated-tests">自動テストの追加</h3>
 
-<p>To test your code before the image is pushed, you can use
-Docker Hub’s <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">Autotest</a> feature which
-integrates seamlessly with autobuild and autoredeploy.</p>
+<p>イメージがプッシュされるまえにコードのテストを行うには、Docker Hub の <a href="/docs.docker.jp.onthefly/docker-hub/builds/automated-testing/">自動テスト</a> 機能を利用します。
+これは自動ビルドや自動デプロイとシームレスに連携しています。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>While the Autotest feature builds an image for testing purposes, it
-does not push the resulting image to Docker Hub.</p>
+  <p>自動テストからビルドされるイメージはテスト目的に限られます。
+したがってビルドされたイメージは Docker Hub にはプッシュされません。</p>
 </blockquote>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=automated">automated</a>, <a href="/docs.docker.jp.onthefly/search/?q=build">build</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=Docker Hub">Docker Hub</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
@@ -622,31 +583,31 @@ does not push the resulting image to Docker Hub.</p>
   <li><a href="#how-automated-builds-work" class="nomunge">自動ビルドはどのように動くか</a></li>
   <li><a href="#configure-automated-build-settings" class="nomunge">自動ビルドの設定</a>
     <ul>
-      <li><a href="#set-up-build-rules" class="nomunge">Set up build rules</a></li>
-      <li><a href="#environment-variables-for-builds" class="nomunge">Environment variables for builds</a></li>
+      <li><a href="#set-up-build-rules" class="nomunge">ビルドルールの設定</a></li>
+      <li><a href="#environment-variables-for-builds" class="nomunge">ビルドにおける環境変数</a></li>
     </ul>
   </li>
-  <li><a href="#check-your-active-builds" class="nomunge">Check your active builds</a></li>
-  <li><a href="#cancel-or-retry-a-build" class="nomunge">Cancel or retry a build</a></li>
-  <li><a href="#disable-an-automated-build" class="nomunge">Disable an automated build</a></li>
-  <li><a href="#advanced-automated-build-options" class="nomunge">Advanced automated build options</a>
+  <li><a href="#check-your-active-builds" class="nomunge">アクティブなビルドの確認</a></li>
+  <li><a href="#cancel-or-retry-a-build" class="nomunge">ビルドのキャンセルまたは再実行</a></li>
+  <li><a href="#disable-an-automated-build" class="nomunge">自動ビルドの無効化</a></li>
+  <li><a href="#advanced-automated-build-options" class="nomunge">高度な自動ビルドオプション</a>
     <ul>
-      <li><a href="#tag-and-branch-builds" class="nomunge">Tag and Branch builds</a></li>
-      <li><a href="#set-the-build-context-and-dockerfile-location" class="nomunge">Set the build context and Dockerfile location</a></li>
-      <li><a href="#regexes-and-automated-builds" class="nomunge">Regexes and automated builds</a></li>
-      <li><a href="#build-images-with-buildkit" class="nomunge">Build images with BuildKit</a></li>
+      <li><a href="#tag-and-branch-builds" class="nomunge">タグビルドやブランチビルド</a></li>
+      <li><a href="#set-the-build-context-and-dockerfile-location" class="nomunge">ビルドコンテキストと Dockerfile の場所指定</a></li>
+      <li><a href="#regexes-and-automated-builds" class="nomunge">正規表現と自動ビルド</a></li>
+      <li><a href="#build-images-with-buildKit" class="nomunge">BuildKit を用いたイメージビルド</a></li>
     </ul>
   </li>
-  <li><a href="#build-repositories-with-linked-private-submodules" class="nomunge">Build repositories with linked private submodules</a></li>
-  <li><a href="#autobuild-for-teams" class="nomunge">Autobuild for Teams</a>
+  <li><a href="#プライベートサブモジュールをリンクしているリポジトリのビルド" class="nomunge">プライベートサブモジュールをリンクしているリポジトリのビルド</a></li>
+  <li><a href="#autobuild-for-teams" class="nomunge">チーム向けの自動ビルド</a>
     <ul>
-      <li><a href="#service-users-for-team-autobuilds" class="nomunge">Service users for team autobuilds</a></li>
+      <li><a href="#service-users-for-team-autobuilds" class="nomunge">チーム自動ビルドに対するサービスユーザー</a></li>
     </ul>
   </li>
-  <li><a href="#whats-next" class="nomunge">What’s Next?</a>
+  <li><a href="#whats-next" class="nomunge">次に読むものは</a>
     <ul>
-      <li><a href="#customize-your-build-process" class="nomunge">Customize your build process</a></li>
-      <li><a href="#add-automated-tests" class="nomunge">Add automated tests</a></li>
+      <li><a href="#customize-your-build-process" class="nomunge">ビルド処理のカスタマイズ</a></li>
+      <li><a href="#add-automated-tests" class="nomunge">自動テストの追加</a></li>
     </ul>
   </li>
 </ul>
