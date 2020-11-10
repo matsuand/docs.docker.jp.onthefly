@@ -1134,13 +1134,13 @@ Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 
 @x
 In Docker 19.03, rootless mode ignores cgroup-related `docker run` flags such as
-`--cpus`, `--memory`, --pids-limit`.
+`--cpus`, `--memory`, `--pids-limit`.
 @y
 {% comment %}
 In Docker 19.03, rootless mode ignores cgroup-related `docker run` flags such as
-`--cpus`, `--memory`, --pids-limit`.
+`--cpus`, `--memory`, `--pids-limit`.
 {% endcomment %}
-Docker 19.03 において rootless モードは、`docker run`における cgroup 関連のフラグ、たとえば`--cpus`、`--memory`、 --pids-limit`は無視します。
+Docker 19.03 において rootless モードは、`docker run`における cgroup 関連のフラグ、たとえば`--cpus`、`--memory`、` --pids-limit`は無視します。
 @z
 
 @x

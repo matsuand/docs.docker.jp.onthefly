@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-31 11:49:42 +0900-->
+<!-- Page generated 2020-11-10 11:39:39 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>GitHub Actions の設定 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="GitHub Actions の設定" />
   <meta property="og:description" content="GitHub Actions の設定。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-31T11:49:42+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-10T11:39:39+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ci-cd/github-actions/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-31T11:49:42+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-10T11:39:39+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"GitHub Actions の設定","description":"GitHub Actions の設定。","url":"https://docs.docker.com/ci-cd/github-actions/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -196,12 +196,15 @@ GitHub リポジトリにアクセスして <strong>Settings</strong> &gt; <stro
 </code></pre></div></div>
 
 <p>そして必要となる手順を追加します。
-まず 1 つめとして、PAT とユーザー名を使って Docker Hub にログインします。
-2 つめはビルダーです。
+まず $GITHUB_WORKSPACE にあるリポジトリをチェックアウトして、ワークフローからアクセスできるようにします。
+2 つめとして、PAT とユーザー名を使って Docker Hub にログインします。
+3 つめはビルダーです。
 このアクションは BuildKit を利用するものであり、さらに設定する単純な Buildx アクションを実行します。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">steps</span><span class="pi">:</span>
 
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Check Out Repo</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
 
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Login to Docker Hub</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">docker/login-action@v1</span>

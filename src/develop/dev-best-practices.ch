@@ -279,14 +279,14 @@ keep image size small:
 @z
 
 @x
-- Take this even further with by requiring  your development, testing, and
+- Take this even further by requiring your development, testing, and
   security teams to [sign images](../engine/reference/commandline/trust.md)
   before they are deployed into production. This way, before an image is
   deployed into production, it has been tested and signed off by, for instance,
   development, quality, and security teams.
 @y
 {% comment %}
-- Take this even further with by requiring  your development, testing, and
+- Take this even further by requiring your development, testing, and
   security teams to [sign images](../engine/reference/commandline/trust.md)
   before they are deployed into production. This way, before an image is
   deployed into production, it has been tested and signed off by, for instance,

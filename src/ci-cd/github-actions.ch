@@ -293,14 +293,15 @@ jobs:
 @z
 
 @x
-Now, we can add the steps required. The first one is to use our PAT and username to log into Docker Hub. The second is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup
+Now, we can add the steps required. The first one checks-out our repository under $GITHUB_WORKSPACE, so our workflow can access it. The second is to use our PAT and username to log into Docker Hub. The third is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup
 @y
 {% comment %}
-Now, we can add the steps required. The first one is to use our PAT and username to log into Docker Hub. The second is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup
+Now, we can add the steps required. The first one checks-out our repository under $GITHUB_WORKSPACE, so our workflow can access it. The second is to use our PAT and username to log into Docker Hub. The third is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup
 {% endcomment %}
 そして必要となる手順を追加します。
-まず 1 つめとして、PAT とユーザー名を使って Docker Hub にログインします。
-2 つめはビルダーです。
+まず $GITHUB_WORKSPACE にあるリポジトリをチェックアウトして、ワークフローからアクセスできるようにします。
+2 つめとして、PAT とユーザー名を使って Docker Hub にログインします。
+3 つめはビルダーです。
 このアクションは BuildKit を利用するものであり、さらに設定する単純な Buildx アクションを実行します。
 @z
 
@@ -308,19 +309,23 @@ Now, we can add the steps required. The first one is to use our PAT and username
 {% raw %}
 ```yaml
     steps:
-@y
-{% raw %}
-```yaml
-    steps:
-@z
+    
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
 
-@x
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 @y
+{% raw %}
+```yaml
+    steps:
+    
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
+
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
