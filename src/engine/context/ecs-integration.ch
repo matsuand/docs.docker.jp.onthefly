@@ -62,25 +62,6 @@ Docker と Amazon ECS の統合により、開発者が Docker Compose CLI を�
 @z
 
 @x
->**Note**
->
-> The Docker Compose CLI is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-@y
-{% comment %}
->**Note**
->
-> The Docker Compose CLI is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-{% endcomment %}
->**メモ**
->
-> Docker Compose CLIは、現在ベータ版として提供されます。
-> 提供されるコマンドやフラグは、将来のリリースにおいて変更されることがあります。
-{:.important}
-@z
-
-@x
 ## Prerequisites
 @y
 {% comment %}
@@ -367,16 +348,16 @@ services:
 @z
 
 @x
->**Note**
+> **Note**
 >
 > If you set the Compose file version to 3.8 or later, you can use the same Compose file for local deployment using `docker-compose`. Custom extensions will be ignored in this case.
 @y
 {% comment %}
->**Note**
+> **Note**
 >
 > If you set the Compose file version to 3.8 or later, you can use the same Compose file for local deployment using `docker-compose`. Custom extensions will be ignored in this case.
 {% endcomment %}
->**メモ**
+> **メモ**
 >
 > Compose ファイルのバージョンを 3.8 またはそれ以降に指定すると、この Compose ファイルをそのまま、`docker-compose` を使ってローカル開発環境向けに利用することができます。
 その場合、カスタム拡張は無視されます。
@@ -1208,25 +1189,6 @@ Docker Compose CLI は、ECS 上のコンテナー実行と管理をサポート
 @z
 
 @x
->**Note**
->
-> The Docker Compose CLI is a beta release. The installation process, commands, and flags will change in future releases.
-{:.important}
-@y
-{% comment %}
->**Note**
->
-> The Docker Compose CLI is a beta release. The installation process, commands, and flags will change in future releases.
-{:.important}
-{% endcomment %}
->**メモ**
->
-> **Docker Compose CLI はベータ版です**。
-> インストール処理、コマンド、フラグは、将来のリリースにおいて変更されることがあります。
-{:.important}
-@z
-
-@x
 ### Prerequisites
 @y
 {% comment %}
@@ -1484,10 +1446,10 @@ This error message means that your account requires the new ARN resource ID form
 @z
 
 @x
-Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out the Docker Compose CLI. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
 {% comment %}
-Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out the Docker Compose CLI. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
 {% endcomment %}
 Docker Compose CLI を利用していただき、ありがとうございます。
 みなさんからのフィードバックが大変重要です。

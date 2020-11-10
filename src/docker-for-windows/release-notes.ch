@@ -45,11 +45,11 @@ Docker Desktop のシステム要件については [インストール前に確
 @z
 
 @x
-## Docker Desktop Community 2.5.0.0
-2020-11-02
+## Docker Desktop Community 2.5.0.1
+2020-11-10
 @y
-## Docker Desktop Community 2.5.0.0
-2020-11-02
+## Docker Desktop Community 2.5.0.1
+2020-11-10
 @z
 
 @x
@@ -59,6 +59,41 @@ Docker Desktop のシステム要件については [インストール前に確
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 {% endcomment %}
 > [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
+- [Snyk v1.424.2](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+@y
+- [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
+- [Snyk v1.424.2](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+@z
+
+@x
+## Docker Desktop Community 2.5.0.0
+2020-11-02
+@y
+## Docker Desktop Community 2.5.0.0
+2020-11-02
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -99,7 +134,7 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 @z
 
@@ -251,7 +286,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 @z
 
@@ -501,7 +536,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 @z
 
@@ -581,7 +616,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 @z
 
@@ -656,7 +691,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades-5 }
 ### アップグレード
 @z
 
@@ -832,7 +867,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades-6 }
 ### アップグレード
 @z
 
@@ -1038,7 +1073,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades-7 }
 ### アップグレード
 @z
 
@@ -1130,7 +1165,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades-8 }
 ### アップグレード
 @z
 
@@ -1244,7 +1279,7 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
+{: #upgrades-9 }
 ### アップグレード
 @z
 
@@ -1416,7 +1451,7 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-9 }
+{: #upgrades-10 }
 ### アップグレード
 @z
 
@@ -1456,7 +1491,7 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-10 }
+{: #upgrades-11 }
 ### アップグレード
 @z
 
@@ -1508,76 +1543,34 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
-### アップグレード
-@z
-
-@x
-- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
-@y
-- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
-@z
-
-@x
-## Docker Desktop Community 2.1.0.2
-2019-09-04
-@y
-## Docker Desktop Community 2.1.0.2
-2019-09-04
-@z
-
-@x
-[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
-@y
-[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
-@z
-
-@x
-Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
-@y
-Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
-@z
-
-@x
-### Upgrades
-@y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades-12 }
 ### アップグレード
 @z
 
 @x
-- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
-- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
-- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
-- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
 @y
-- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
-- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
-- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
-- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+- [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
 @z
 
 @x
-## Docker Desktop Community 2.1.0.1
-2019-08-08
+## Docker Desktop Community 2.1.0.2
+2019-09-04
 @y
-## Docker Desktop Community 2.1.0.1
-2019-08-08
+## Docker Desktop Community 2.1.0.2
+2019-09-04
 @z
 
 @x
-[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
+[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
 @y
-[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
+[Download](https://download.docker.com/win/stable/37877/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
-  Note that you must sign in and create a Docker ID in order to download Docker Desktop.
+Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 @y
-  Note that you must sign in and create a Docker ID in order to download Docker Desktop.
+Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 @z
 
 @x
@@ -1587,6 +1580,48 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 ### Upgrades
 {% endcomment %}
 {: #upgrades-13 }
+### アップグレード
+@z
+
+@x
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+@y
+- [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
+- [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
+- [Go 1.12.9](https://github.com/golang/go/issues?q=milestone%3AGo1.12.9+label%3ACherryPickApproved)
+- [Docker Machine 0.16.2](https://github.com/docker/machine/releases/tag/v0.16.2)
+@z
+
+@x
+## Docker Desktop Community 2.1.0.1
+2019-08-08
+@y
+## Docker Desktop Community 2.1.0.1
+2019-08-08
+@z
+
+@x
+[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
+@y
+[Download](https://download.docker.com/win/stable/37199/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+  Note that you must sign in and create a Docker ID in order to download Docker Desktop.
+@y
+  Note that you must sign in and create a Docker ID in order to download Docker Desktop.
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-14 }
 ### アップグレード
 @z
 
