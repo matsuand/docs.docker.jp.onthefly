@@ -483,6 +483,69 @@ To view individual tags, click on the **Tags** tab.
 @z
 
 @x
+An image is considered stale if there has been no push/pull activity for more
+than 1 month, i.e.:
+@y
+{% comment %}
+An image is considered stale if there has been no push/pull activity for more
+than 1 month, i.e.:
+{% endcomment %}
+イメージに対するプッシュ、プルの操作が 1 ヶ月以上なかったら、そのイメージは古いものとみなされます。
+たとえば以下のようなものです。
+@z
+
+@x
+* It has not been pulled for more than 1 month
+* And it has not been pushed for more than 1 month
+@y
+{% comment %}
+* It has not been pulled for more than 1 month
+* And it has not been pushed for more than 1 month
+{% endcomment %}
+* 1 ヶ月以上、プル操作が行われていない。
+* 1 ヶ月以上、プッシュ操作が行われていない。
+@z
+
+@x
+A multi-architecture image is considered stale if all single-architecture images
+part of its manifest are stale.
+@y
+{% comment %}
+A multi-architecture image is considered stale if all single-architecture images
+part of its manifest are stale.
+{% endcomment %}
+マルチアーキテクチャーのイメージの場合は、そのマニフェストにある一つずつのアーキテクチャーイメージがすべて古くなった場合に、古いものとみなされます。
+@z
+
+@x
+To delete a tag, select the corresponding checkbox and select **Delete** from the
+**Action** drop-down list.
+@y
+{% comment %}
+To delete a tag, select the corresponding checkbox and select **Delete** from the
+**Action** drop-down list.
+{% endcomment %}
+タグを削除するには、対応するチェックボックスを選択して **Action** ドロップダウンリストから **Delete** を選択します。
+@z
+
+@x
+> **Note**
+>
+> Only a user with administrative access (owner or team member with Admin
+> permission) over the repository can delete tags.
+@y
+{% comment %}
+> **Note**
+>
+> Only a user with administrative access (owner or team member with Admin
+> permission) over the repository can delete tags.
+{% endcomment %}
+> **メモ**
+>
+> リポジトリに対してタグの削除が可能なのは、管理者権限を持つユーザー（所有者まはた管理者権限を持つチームメンバー）のみです。
+@z
+
+@x
 Select a tag's digest to view details.
 @y
 {% comment %}
@@ -672,24 +735,24 @@ To create a new service account for your Team account:
 @z
 
 @x
- 1. Create a new Docker ID.
- 2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
- 3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
- 4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
- 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+1. Create a new Docker ID.
+2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
+3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
+4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
+5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 @y
- {% comment %}
- 1. Create a new Docker ID.
- 2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
- 3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
- 4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
- 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
- {% endcomment %}
- 1. 新たな Docker ID を生成します。
- 2. 組織内に [チーム](orgs.md#create-a-team) を生成し、プライベートリポジトリに対して読み取り専用の権限を与えます。
- 3. その Docker ID を [組織](orgs.md#working-with-organizations) に加えます。
- 4. その Docker ID を、先ほど生成した [チーム](orgs.md#add-a-member-to-a-team) に加えます。
- 5. ユーザーアカウントから新たに [個人用アクセストークン（personal access token; PAT）](/access-tokens.md) を生成して、CI において利用します。
+{% comment %}
+1. Create a new Docker ID.
+2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
+3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
+4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
+5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+{% endcomment %}
+1. 新たな Docker ID を生成します。
+2. 組織内に [チーム](orgs.md#create-a-team) を生成し、プライベートリポジトリに対して読み取り専用の権限を与えます。
+3. その Docker ID を [組織](orgs.md#working-with-organizations) に加えます。
+4. その Docker ID を、先ほど生成した [チーム](orgs.md#add-a-member-to-a-team) に加えます。
+5. ユーザーアカウントから新たに [個人用アクセストークン（personal access token; PAT）](/access-tokens.md) を生成して、CI において利用します。
 @z
 
 @x
@@ -702,37 +765,39 @@ To create a new service account for your Pro account:
 @z
 
 @x
- 1. Create a new Docker ID.
- 2. Click **Repositories** from the main menu.
- 3. Select a repository from the list and go to the **Collaborators** tab.
- 4. Add the new Docker ID as a collaborator.
- 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+1. Create a new Docker ID.
+2. Click **Repositories** from the main menu.
+3. Select a repository from the list and go to the **Collaborators** tab.
+4. Add the new Docker ID as a collaborator.
+5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 @y
- {% comment %}
- 1. Create a new Docker ID.
- 2. Click **Repositories** from the main menu.
- 3. Select a repository from the list and go to the **Collaborators** tab.
- 4. Add the new Docker ID as a collaborator.
- 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
- {% endcomment %}
- 1. 新たな Docker ID を生成します。
- 2. メインメニューから **Repositories** をクリックします。
- 3. 一覧から目的のリポジトリを選択して、**Collaborators** タブにアクセスします。
- 4. 協力者として新たな Docker ID を加えます。
- 5. ユーザーアカウントから新たに [個人用アクセストークン（personal access token; PAT）](/access-tokens.md) を生成して、CI において利用します。
+{% comment %}
+1. Create a new Docker ID.
+2. Click **Repositories** from the main menu.
+3. Select a repository from the list and go to the **Collaborators** tab.
+4. Add the new Docker ID as a collaborator.
+5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+{% endcomment %}
+1. 新たな Docker ID を生成します。
+2. メインメニューから **Repositories** をクリックします。
+3. 一覧から目的のリポジトリを選択して、**Collaborators** タブにアクセスします。
+4. 協力者として新たな Docker ID を加えます。
+5. ユーザーアカウントから新たに [個人用アクセストークン（personal access token; PAT）](/access-tokens.md) を生成して、CI において利用します。
 @z
 
 @x
- > **Note**
- >
- > If you want a read-only PAT just for your open source repos, or to access official images and other public images, you do not have to grant any access permissions to the new Docker ID.
+> **Note**
+>
+> If you want a read-only PAT just for your open source repos, or to access
+> official images and other public images, you do not have to grant any access permissions to the new Docker ID.
 @y
- {% comment %}
- > **Note**
- >
- > If you want a read-only PAT just for your open source repos, or to access official images and other public images, you do not have to grant any access permissions to the new Docker ID.
- {% endcomment %}
- > **メモ**
- >
- > 読み取り専用の PAT を生成して、オープンソースリポジトリ向けに利用したり、公式イメージや他の公開イメージにアクセスするだけの利用としたい場合には、その Docker ID に何も権限を与える必要はありません。
+{% comment %}
+> **Note**
+>
+> If you want a read-only PAT just for your open source repos, or to access
+> official images and other public images, you do not have to grant any access permissions to the new Docker ID.
+{% endcomment %}
+> **メモ**
+>
+> 読み取り専用の PAT を生成して、オープンソースリポジトリ向けに利用したり、公式イメージや他の公開イメージにアクセスするだけの利用としたい場合には、その Docker ID に何も権限を与える必要はありません。
 @z

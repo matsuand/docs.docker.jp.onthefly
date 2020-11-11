@@ -73,10 +73,10 @@ Docker Desktop のシステム要件については [インストール前に確
 
 @x
 - [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
-- [Snyk v1.424.2](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+- [Snyk v1.424.4](https://github.com/snyk/snyk/releases/tag/v1.424.4)
 @y
 - [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
-- [Snyk v1.424.2](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+- [Snyk v1.424.4](https://github.com/snyk/snyk/releases/tag/v1.424.4)
 @z
 
 @x
