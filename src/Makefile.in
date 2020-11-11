@@ -305,7 +305,9 @@ uploadbase = @UPLOADBASE@
 sitedestdir = @abs_sitedestdir@
 sitedefined = @SITEDIR_DEFINED@
 thisdate = `date +'%Y/%m/%d'`
-commitdate = `(cd @abs_origdir@ && git log -1 --pretty=format:"%ad %h" --date=short) | sed "s|\-|/|g"`
+commitdate = `(cd @abs_origdir@ && git log -1 --pretty=format:"%ad" --date=short) | sed "s|\-|/|g"`
+commithash = `(cd @abs_origdir@ && git log -1 --pretty=format:"%h") | sed "s|\-|/|g"`
+dockercommiturl = https://github.com/docker/docker.github.io/commit
 bases = \
 	404          \
 	CONTRIBUTING \
@@ -701,7 +703,7 @@ build: install
 	(cd $(publishdir) && rbenv exec jekyll build --config $(CONFIG_YML),_config_ja.yml)
 
 	@find ${sitedestdir}/{,get-docker/}index.html | xargs \
-	  sed -i -e "s|TEMPTITLE|<p><b>暫定公開中 ${thisdate} (${commitdate} 対応)</b></p>|"
+	  sed -i -e "s|TEMPTITLE|<p><b>暫定公開中 ${thisdate} (${commitdate} \<a href=\"${dockercommiturl}/${commithash}\"\>docker.github.io@${commithash}\</a\> 対応)</b></p>|"
 	@sed -i -e "s|__URL__|${publishurl}|g" \
 	        -e "s|SUBBASEURL|${publishbase}|g" ${sitedestdir}/js/docs.js
 
