@@ -113,56 +113,57 @@ version: '3.8'
 @x
 services:
  notes:
-   build:
-     context: .
-   ports:
-     - 8080:8080
-     - 9229:9229
-   environment:
-     - SERVER_PORT=8080
-     - DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes
-   volumes:
-     - ./:/code
-   command: npm run debug
+  build:
+   context: .
+  ports:
+   - 8080:8080
+   - 9229:9229
+  environment:
+   - SERVER_PORT=8080
+   - DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes
+  volumes:
+   - ./:/code
+  command: npm run debug
 @y
 services:
  notes:
-   build:
-     context: .
-   ports:
-     - 8080:8080
-     - 9229:9229
-   environment:
-     - SERVER_PORT=8080
-     - DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes
-   volumes:
-     - ./:/code
-   command: npm run debug
+  build:
+   context: .
+  ports:
+   - 8080:8080
+   - 9229:9229
+  environment:
+   - SERVER_PORT=8080
+   - DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes
+  volumes:
+   - ./:/code
+  command: npm run debug
 @z
 
 @x
  mongo:
-   image: mongo:4.2.8
-   ports:
-     - 27017:27017
-   volumes:
-     - mongodb:/data/db
-     - mongodb_config:/data/configdb
- volumes:
-   mongodb:
-   mongodb_config:
+  image: mongo:4.2.8
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+volumes:
+ mongodb:
+ mongodb_config:
 ```
 @y
  mongo:
-   image: mongo:4.2.8
-   ports:
-     - 27017:27017
-   volumes:
-     - mongodb:/data/db
-     - mongodb_config:/data/configdb
- volumes:
-   mongodb:
-   mongodb_config:
+ mongo:
+  image: mongo:4.2.8
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+volumes:
+ mongodb:
+ mongodb_config:
 ```
 @z
 
