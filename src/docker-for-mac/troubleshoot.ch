@@ -182,6 +182,16 @@ Before you get started, we recommend that you sign into your Docker Desktop appl
 @z
 
 @x
+4. When the diagnostics collection process is complete, click **Upload** to upload your diagnostics to Docker Desktop.
+5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
+6. If you have subscribed to a Pro or a Team plan, click **Get support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+@y
+4. When the diagnostics collection process is complete, click **Upload** to upload your diagnostics to Docker Desktop.
+5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
+6. If you have subscribed to a Pro or a Team plan, click **Get support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+@z
+
+@x
    > **Note**
     >
     > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
@@ -293,11 +303,13 @@ $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 
 @x
 <a name="logs"></a>
+@y
+<a name="logs"></a>
+@z
 
+@x
 ## Check the logs
 @y
-<a name="logs"></a>
-
 ## Check the logs
 @z
 
@@ -612,16 +624,6 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @z
 
 @x
-* Network connections fail if the macOS Firewall is set to "Block all incoming
-  connections". You can enable the firewall, but `bootpd` must be allowed
-  incoming connections so that the VM can get an IP address.
-@y
-* Network connections fail if the macOS Firewall is set to "Block all incoming
-  connections". You can enable the firewall, but `bootpd` must be allowed
-  incoming connections so that the VM can get an IP address.
-@z
-
-@x
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
   the web server on `http://localhost/`. Make sure that the Docker icon is
   displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
@@ -752,44 +754,6 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @z
 
 @x
-* `docker-compose` 1.7.1 performs DNS unnecessary lookups for
-  `localunixsocket.local` which can take 5s to timeout on some networks. If
-  `docker-compose` commands seem very slow but seem to speed up when the network
-  is disabled, try appending `127.0.0.1 localunixsocket.local` to the file
-  `/etc/hosts`.  Alternatively you could create a plain-text TCP proxy on
-  localhost:1234 using:
-@y
-* `docker-compose` 1.7.1 performs DNS unnecessary lookups for
-  `localunixsocket.local` which can take 5s to timeout on some networks. If
-  `docker-compose` commands seem very slow but seem to speed up when the network
-  is disabled, try appending `127.0.0.1 localunixsocket.local` to the file
-  `/etc/hosts`.  Alternatively you could create a plain-text TCP proxy on
-  localhost:1234 using:
-@z
-
-@x
-  ```
-  docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:1234:1234 bobrik/socat TCP-LISTEN:1234,fork UNIX-CONNECT:/var/run/docker.sock
-  ```
-@y
-  ```
-  docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:1234:1234 bobrik/socat TCP-LISTEN:1234,fork UNIX-CONNECT:/var/run/docker.sock
-  ```
-@z
-
-@x
-  and then `export DOCKER_HOST=tcp://localhost:1234`.
-@y
-  and then `export DOCKER_HOST=tcp://localhost:1234`.
-@z
-
-@x
-<a name="bind-mounted-dirs"></a>
-@y
-<a name="bind-mounted-dirs"></a>
-@z
-
-@x
 * There are a number of issues with the performance of directories bind-mounted
   into containers. In particular, writes of small blocks, and traversals of large
   directories are currently slow. Additionally, containers that perform large
@@ -824,81 +788,19 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 @z
 
 @x
-  As a work-around for this behavior, you can put vendor or third-party library
+  As a workaround for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
   outside of bind mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
   actively working on performance improvements using a number of different
   techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
 @y
-  As a work-around for this behavior, you can put vendor or third-party library
+  As a workaround for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
   outside of bind mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
   actively working on performance improvements using a number of different
   techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
-@z
-
-@x
-* If your system does not have access to an NTP server, then after a hibernate
-  the time seen by Docker Desktop may be considerably out of sync with the host.
-  Furthermore, the time may slowly drift out of sync during use. To manually
-  reset the time after hibernation, run:
-@y
-* If your system does not have access to an NTP server, then after a hibernate
-  the time seen by Docker Desktop may be considerably out of sync with the host.
-  Furthermore, the time may slowly drift out of sync during use. To manually
-  reset the time after hibernation, run:
-@z
-
-@x
-  ```bash
-  docker run --rm --privileged alpine hwclock -s
-  ```
-@y
-  ```bash
-  docker run --rm --privileged alpine hwclock -s
-  ```
-@z
-
-@x
-  Or, to resolve both issues, you can add the local clock as a low-priority
-  (high stratum) fallback NTP time source for the host. To do this, edit the
-  host's `/etc/ntp-restrict.conf` to add:
-@y
-  Or, to resolve both issues, you can add the local clock as a low-priority
-  (high stratum) fallback NTP time source for the host. To do this, edit the
-  host's `/etc/ntp-restrict.conf` to add:
-@z
-
-@x
-  ```
-  server 127.127.1.1              # LCL, local clock
-  fudge  127.127.1.1 stratum 12   # increase stratum
-  ```
-@y
-  ```
-  server 127.127.1.1              # LCL, local clock
-  fudge  127.127.1.1 stratum 12   # increase stratum
-  ```
-@z
-
-@x
-  Then restart the NTP service with:
-@y
-  Then restart the NTP service with:
-@z
-
-@x
-  ```bash
-  sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  ```
-@y
-  ```bash
-  sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  ```
 @z
 
 @x

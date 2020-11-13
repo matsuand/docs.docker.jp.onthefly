@@ -99,7 +99,7 @@ The Troubleshoot page contains the following options:
 {% comment %}
 * **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](index.md#kubernetes).
 {% endcomment %}
-* **Reset Kubernetes cluster**（Kubernetes クラスターのリセット）: Select this option to delete all stacks and Kubernetes resources. 
+* **Reset Kubernetes cluster**（Kubernetes クラスターのリセット）: このオプションを選択すると、全スタックや Kubernetes リソースを削除します。
   詳しくは [Kubernetes](index.md#kubernetes) を参照してください。
 @z
 
@@ -427,16 +427,16 @@ Getting Started topic.
 @z
 
 @x
-Docker Desktop sets permissions on [shared volumes](index.md#file-sharing)
+When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](index.md#file-sharing)
 to a default value of [0777](http://permissions-calculator.org/decode/0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 @y
 {% comment %}
-Docker Desktop sets permissions on [shared volumes](index.md#file-sharing)
+When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](index.md#file-sharing)
 to a default value of [0777](http://permissions-calculator.org/decode/0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 {% endcomment %}
-Docker Desktop は [共有ボリューム](index.md#file-sharing) に対して、デフォルトとして [0777](http://permissions-calculator.org/decode/0777/)（`user`と`group`に対して`read`、`write`、`execute`）のパーミッションを設定します。
+Windows からファイル共有を行う際、Docker Desktop は [共有ボリューム](index.md#file-sharing) に対して、デフォルトとして [0777](http://permissions-calculator.org/decode/0777/)（`user`と`group`に対して`read`、`write`、`execute`）のパーミッションを設定します。
 @z
 
 @x
@@ -498,19 +498,16 @@ you might need to enable [shared folders](index.md#file-sharing).
 @z
 
 @x
-Volume mounting requires shared folders for Linux containers (not for Windows
-containers). Click ![whale menu](images/whale-x.png){: .inline}
+With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. Click ![whale menu](images/whale-x.png){: .inline}
  and then **Settings** > **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
 @y
 {% comment %}
-Volume mounting requires shared folders for Linux containers (not for Windows
-containers). Click ![whale menu](images/whale-x.png){: .inline}
+With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. Click ![whale menu](images/whale-x.png){: .inline}
  and then **Settings** > **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
 {% endcomment %}
-ボリュームをマウントするには、Linux コンテナーに対しての共有フォルダーが必要になります。
-（Windows コンテナーではありません。）
+Hyper-V バックエンドを利用して Windows からファイルをマウントする場合には、Linux コンテナーに対しての共有フォルダーが必要になります。
 ![クジラメニュー](images/whale-x.png){: .inline} をクリックして **Settings** > **Shared Folders** を実行し、Dockerfile やボリュームを含むフォルダーを共有してください。
 @z
 
@@ -610,23 +607,65 @@ script](https://github.com/moby/moby/issues/24388).
 @z
 
 @x
- Your machine must have the following features for Docker Desktop to function correctly:
+Your machine must have the following features for Docker Desktop to function correctly.
 @y
- {% comment %}
- Your machine must have the following features for Docker Desktop to function correctly:
- {% endcomment %}
- Docker Desktop を正しく機能させるためには、マシンには以下の機能がなければなりません。
+{% comment %}
+Your machine must have the following features for Docker Desktop to function correctly.
+{% endcomment %}
+Docker Desktop を正しく機能させるためには、マシンには以下の機能がなければなりません。
 @z
 
 @x
-1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview)
+#### WSL 2 and Windows Home
+@y
+{% comment %}
+#### WSL 2 and Windows Home
+{% endcomment %}
+#### WSL 2 と Windows Home
+@z
+
+@x
+1. Virtual Machine Platform
+2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}
+3. Virtualization enabled in the BIOS
+4. Hypervisor enabled at Windows startup
+@y
+{% comment %}
+1. Virtual Machine Platform
+2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}
+3. Virtualization enabled in the BIOS
+4. Hypervisor enabled at Windows startup
+{% endcomment %}
+1. 仮想マシンプラットフォーム。
+2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}。
+3. BIOS 内での仮想技術有効化。
+4. Windows 起動時のハイパーバイザー有効化。
+@z
+
+@x
+#### Hyper-V
+@y
+#### Hyper-V
+@z
+
+@x
+On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following features enabled:
+@y
+{% comment %}
+On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following features enabled:
+{% endcomment %}
+Windows 10 Pro または Enterprise の場合は、以下の機能を有効にした上で Hyper-V を利用することもできます。
+@z
+
+@x
+1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview){:target="_blank" rel="noopener" class="_"}
    installed and working
 @y
 {% comment %}
-1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview)
+1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview){:target="_blank" rel="noopener" class="_"}
    installed and working
 {% endcomment %}
-1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview) がインストールされ動作していること。
+1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview){:target="_blank" rel="noopener" class="_"} がインストールされ動作していること。
 @z
 
 @x
@@ -648,9 +687,12 @@ script](https://github.com/moby/moby/issues/24388).
 @z
 
 @x
-#### Hyper-V
+![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
 @y
-#### Hyper-V
+{% comment %}
+![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
+{% endcomment %}
+![Windows の Hyper-V 機能](images/hyperv-enabled.png){:width="600px"}
 @z
 
 @x
@@ -697,59 +739,14 @@ Hyper-V のインストール後に再起動を行わないままでいると、
 
 @x
 From the start menu, type **Turn Windows features on or off** and press enter.
-In the subsequent screen, verify that Hyper-V is enabled:
+In the subsequent screen, verify that Hyper-V is enabled.
 @y
 {% comment %}
 From the start menu, type **Turn Windows features on or off** and press enter.
-In the subsequent screen, verify that Hyper-V is enabled:
+In the subsequent screen, verify that Hyper-V is enabled.
 {% endcomment %}
 スタートメニューから **Turn Windows features on or off** と入力して ENTER キーを押してください。
 表示される画面から Hyper-V が有効であることを確認してください。
-@z
-
-@x
-![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
-@y
-{% comment %}
-![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
-{% endcomment %}
-![Windows の Hyper-V 機能](images/hyperv-enabled.png){:width="600px"}
-@z
-
-@x
-#### Hyper-V driver for Docker Machine
-@y
-{% comment %}
-#### Hyper-V driver for Docker Machine
-{% endcomment %}
-#### Docker Machine 用の Hyper-V ドライバー
-@z
-
-@x
-The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
-[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"},
-and the [Microsoft Hyper-V driver](../machine/drivers/hyper-v.md) to create local
-virtual machines. _This is tangential to using Docker Desktop_, but if you want to use Docker Machine
-to create multiple local Virtual Machines (VMs), or to provision remote machines, see the
-[Docker Machine](../machine/index.md) topics. This is documented only for users looking for information about Docker Machine on Windows, which requires that Hyper-V is enabled, an external network switch is active, and referenced in the flags for the `docker-machine create` command
-as described in the [Docker Machine driver example](../machine/drivers/hyper-v.md#example).
-@y
-{% comment %}
-The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
-[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"},
-and the [Microsoft Hyper-V driver](../machine/drivers/hyper-v.md) to create local
-virtual machines. _This is tangential to using Docker Desktop_, but if you want to use Docker Machine
-to create multiple local Virtual Machines (VMs), or to provision remote machines, see the
-[Docker Machine](../machine/index.md) topics. This is documented only for users looking for information about Docker Machine on Windows, which requires that Hyper-V is enabled, an external network switch is active, and referenced in the flags for the `docker-machine create` command
-as described in the [Docker Machine driver example](../machine/drivers/hyper-v.md#example).
-{% endcomment %}
-Docker Desktop をインストールすると、かつてのツール Docker Machine もインストールされます。
-これはローカルに仮想マシンを生成するにあたって、古い [`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"} と [Microsoft Hyper-V ドライバー](../machine/drivers/hyper-v.md) を利用します。
-**Docker Desktop を使う上で、これは関係のないものです**。
-ただしローカルに複数の仮想マシンを生成するために Docker Machine を利用したい場合、あるいはリモートマシンにプロビジョニングしたい場合は [Docker Machine](../machine/index.md) に示されるトピックを参照してください。
-そのトピックは Docker Machine on Windows の情報が必要な方のみに向けたものです。
-そこでは Hyper-V の有効化と外部ネットワークスイッチがアクティブであることが必要であり、`docker-machine create`コマンドのフラグで参照します。
-これに関しては [Docker Machine ドライバー利用例](../machine/drivers/hyper-v.md#example) において説明されています。
 @z
 
 @x
@@ -840,143 +837,12 @@ Virtual Box) and video game installers disable hypervisor on boot. To reenable i
 @z
 
 @x
-### Networking and WiFi problems upon Docker Desktop for Windows install
+You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} on Code flow guard (CFG) settings.
 @y
 {% comment %}
-### Networking and WiFi problems upon Docker Desktop for Windows install
+You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} on Code flow guard (CFG) settings.
 {% endcomment %}
-{: #networking-and-wifi-problems-upon-docker-desktop-for-windows-install }
-### Docker Desktop for Windows インストールにおけるネットワークと Wifi の問題
-@z
-
-@x
-Some users may experience networking issues during install and startup of
-Docker Desktop. For example, upon install or auto-reboot, network adapters
-and/or WiFi may get disabled. In some scenarios, problems are due to having
-VirtualBox or its network adapters still installed, but in other scenarios this
-is not the case. See the GitHub issue [Enabling
-Hyper-V feature turns my wi-fi
-off](https://github.com/docker/for-win/issues/139).
-@y
-{% comment %}
-Some users may experience networking issues during install and startup of
-Docker Desktop. For example, upon install or auto-reboot, network adapters
-and/or WiFi may get disabled. In some scenarios, problems are due to having
-VirtualBox or its network adapters still installed, but in other scenarios this
-is not the case. See the GitHub issue [Enabling
-Hyper-V feature turns my wi-fi
-off](https://github.com/docker/for-win/issues/139).
-{% endcomment %}
-Docker Desktop のインストールと起動の際に、ネットワーク機能の問題が発生するケースがあります。
-たとえばインストールや自動再起動の際に、ネットワークアダプターあるいは Wifi が利用不能になってしまうものです。
-原因の 1 つとして VirtualBox とそのネットワークアダプターがインストールされたまま残っていることがあります。
-またこれが原因ではない場合もあります。
-GitHub の issue [Enabling Hyper-V feature turns my wi-fi off](https://github.com/docker/for-win/issues/139)（Hyper-V 機能を有効にすると Wifi がオフになってしまう）を参照してください。
-@z
-
-@x
-Here are some steps to take if you experience similar problems:
-@y
-{% comment %}
-Here are some steps to take if you experience similar problems:
-{% endcomment %}
-同様の問題が発生した際には、以下の手順で確認してください。
-@z
-
-@x
-1.  Ensure **virtualization** is enabled, as described above in [Virtualization
-    must be enabled](#virtualization-must-be-enabled).
-@y
-{% comment %}
-1.  Ensure **virtualization** is enabled, as described above in [Virtualization
-    must be enabled](#virtualization-must-be-enabled).
-{% endcomment %}
-1.  上の [仮想化技術の有効化](#virtualization-must-be-enabled) で説明したように、**仮想化機能**（virtualization）が有効であることを確認します。
-@z
-
-@x
-2.  Ensure **Hyper-V** is installed and enabled, as described above in [Hyper-V
-    must be enabled](#hyper-v-must-be-enabled).
-@y
-{% comment %}
-2.  Ensure **Hyper-V** is installed and enabled, as described above in [Hyper-V
-    must be enabled](#hyper-v-must-be-enabled).
-{% endcomment %}
-2.  [Hyper-V の有効化](#hyper-v-must-be-enabled) で説明したように、**Hyper-V** をインストールし有効化していることを確認します。
-@z
-
-@x
-3.  Ensure **DockerNAT** is enabled by checking the **Virtual Switch Manager**
-    on the Actions tab on the right side of the **Hyper-V Manager**.
-@y
-{% comment %}
-3.  Ensure **DockerNAT** is enabled by checking the **Virtual Switch Manager**
-    on the Actions tab on the right side of the **Hyper-V Manager**.
-{% endcomment %}
-3.  **DockerNAT** が有効であることを確認します。
-    これは **Hyper-V マネージャー**（Hyper-V Manager）の右側にある Actions タブにおいて **仮想スイッチマネージャー**（Virtual Switch Manager）をチェックします。
-@z
-
-@x
-    ![Hyper-V manager](images/hyperv-manager.png)
-@y
-    {% comment %}
-    ![Hyper-V manager](images/hyperv-manager.png)
-    {% endcomment %}
-    ![Hyper-V マネージャー](images/hyperv-manager.png)
-@z
-
-@x
-4.  Set up an external network switch. If you plan at any point to use
-    [Docker Machine](../machine/index.md) to set up multiple local VMs, you
-    need this anyway, as described in the topic on the
-    [Hyper-V driver for Docker Machine](../machine/drivers/hyper-v.md#example).
-    You can replace `DockerNAT` with this switch.
-@y
-{% comment %}
-4.  Set up an external network switch. If you plan at any point to use
-    [Docker Machine](../machine/index.md) to set up multiple local VMs, you
-    need this anyway, as described in the topic on the
-    [Hyper-V driver for Docker Machine](../machine/drivers/hyper-v.md#example).
-    You can replace `DockerNAT` with this switch.
-{% endcomment %}
-4.  外部ネットワークスイッチを設定します。
-    いずれ [Docker Machine](../machine/index.md) を利用してローカルに複数の VM を利用するつもりなら、これが必要になります。
-    このことは [Docker Machine 用の Hyper-V ドライバー](../machine/drivers/hyper-v.md#example) 内のトピックにおいて説明しています。
-    `DockerNAT`をこのスイッチに置き換えることができます。
-@z
-
-@x
-5.  If previous steps fail to solve the problems, follow steps on the
-    [Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
-@y
-{% comment %}
-5.  If previous steps fail to solve the problems, follow steps on the
-    [Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
-{% endcomment %}
-5.  これまでの手順では問題解決できない場合は、[Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md) の手順に従ってください。
-@z
-
-@x
-    > Read the full description before you run the Windows cleanup script.
-    >
-    >The cleanup command has two flags, `-Cleanup` and
-    >`-ForceDeleteAllSwitches`. Read the whole page before running any scripts,
-    >especially warnings about `-ForceDeleteAllSwitches`. {: .warning}
-@y
-    {% comment %}
-    > Read the full description before you run the Windows cleanup script.
-    >
-    >The cleanup command has two flags, `-Cleanup` and
-    >`-ForceDeleteAllSwitches`. Read the whole page before running any scripts,
-    >especially warnings about `-ForceDeleteAllSwitches`. {: .warning}
-    {% endcomment %}
-    > 上記説明を十分読んでから Windows クリーンアップスクリプトを実行してください。
-    >
-    >クリーンアップ（cleanup）コマンドには、2 つのフラグがあります。
-    > `-Cleanup`と`-ForceDeleteAllSwitches`です。
-    >どのスクリプトを実行する場合も、説明ページ全体をよく読んでから実施してください。
-    >特に`-ForceDeleteAllSwitches`の警告メッセージについてはよく確認してください。{: .warning}
+コードフローガード（Code flow guard; CFG）の設定に関しては [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} も参照してください。
 @z
 
 @x
@@ -1038,225 +904,6 @@ C:\Program Files\Docker\docker.exe:
  image operating system "linux" cannot be used on this platform.
  See 'C:\Program Files\Docker\docker.exe run --help'.
 ```
-@z
-
-@x
-### Limitations of Windows containers for `localhost` and published ports
-@y
-{% comment %}
-### Limitations of Windows containers for `localhost` and published ports
-{% endcomment %}
-{: #limitations-of-windows-containers-for-localhost-and-published-ports }
-### `localhost` や公開ポートに対する Windows コンテナーの制約
-@z
-
-@x
-Docker Desktop for Windows provides the option to switch Windows and Linux containers.
-If you are using Windows containers, keep in mind that there are some
-limitations with regard to networking due to the current implementation of
-Windows NAT (WinNAT). These limitations may potentially resolve as the Windows
-containers project evolves.
-@y
-{% comment %}
-Docker Desktop for Windows provides the option to switch Windows and Linux containers.
-If you are using Windows containers, keep in mind that there are some
-limitations with regard to networking due to the current implementation of
-Windows NAT (WinNAT). These limitations may potentially resolve as the Windows
-containers project evolves.
-{% endcomment %}
-Docker Desktop for Windows には、Windows コンテナーと Linux コンテナーを切り替えるオプションがあります。
-Windows コンテナーを利用している場合、現時点での Windows NAT（WinNAT）の実装上の理由により、ネットワーク機能に一部制限があることに留意してください。
-この制限は、Windows コンテナープロジェクトの進展により、解決される可能性があります。
-@z
-
-@x
-Windows containers work with published ports on localhost beginning with Windows 10 1809 using Docker Desktop for Windows as well as Windows Server 2019 / 1809 using Docker EE.
-@y
-{% comment %}
-Windows containers work with published ports on localhost beginning with Windows 10 1809 using Docker Desktop for Windows as well as Windows Server 2019 / 1809 using Docker EE.
-{% endcomment %}
-Windows コンテナーでは、ローカルホストの公開ポートを使って動作します。
-これは Docker Desktop for Windows を利用した Windows 10 1809 から可能になりました。
-Docker EE を利用する Windows Server 2019 / 1809 についても同様です。
-@z
-
-@x
-If you are working with a version prior to `Windows 10 18.09`, published ports on Windows containers have an issue with loopback to the localhost. You can only reach container endpoints from the host using the container's IP and port. With `Windows 10 18.09`, containers work with published ports on localhost.
-@y
-{% comment %}
-If you are working with a version prior to `Windows 10 18.09`, published ports on Windows containers have an issue with loopback to the localhost. You can only reach container endpoints from the host using the container's IP and port. With `Windows 10 18.09`, containers work with published ports on localhost.
-{% endcomment %}
-`Windows 10 18.09` より前のバージョンを利用している場合、Windows コンテナーの公開ポートに関しては、ローカルホストのループバックに問題があります。
-ホストからコンテナーのエンドポイントにアクセスするには、コンテナーの IP とポートが必要でしたが、`Windows 10 18.09` からは、ローカルホストの公開ポートを使ってアクセスできるようになりました。
-@z
-
-@x
-So, in a scenario where you use Docker to pull an image and run a webserver with
-a command like this:
-@y
-{% comment %}
-So, in a scenario where you use Docker to pull an image and run a webserver with
-a command like this:
-{% endcomment %}
-Docker を使ってイメージをプルしてウェブサーバーを起動するとします。
-まずは以下のようなコマンドを実行します。
-@z
-
-@x
-```shell
-> docker run -d -p 80:80 --name webserver nginx
-```
-@y
-```shell
-> docker run -d -p 80:80 --name webserver nginx
-```
-@z
-
-@x
-Using `curl http://localhost`, or pointing your web browser at
-`http://localhost` does not display the `nginx` web page (as it would do with
-Linux containers).
-@y
-{% comment %}
-Using `curl http://localhost`, or pointing your web browser at
-`http://localhost` does not display the `nginx` web page (as it would do with
-Linux containers).
-{% endcomment %}
-`curl http://localhost`を実行したり、ウェブサーバー上から`http://localhost`にアクセスしても、`nginx`のウェブページは表示されません。
-（Linux コンテナーであれば表示されています。）
-@z
-
-@x
-To reach a Windows container from the local host, you need to specify the IP
-address and port for the container that is running the service.
-@y
-{% comment %}
-To reach a Windows container from the local host, you need to specify the IP
-address and port for the container that is running the service.
-{% endcomment %}
-ローカルホストから Windows コンテナーにアクセスするには、サービスが実行されているコンテナーの IP アドレスとポートを指定する必要があります。
-@z
-
-@x
-You can get the container IP address by using [`docker inspect`](../engine/reference/commandline/inspect.md) with some `--format` options
-and the ID or name of the container. For the example above, the command would
-look like this, using the name we gave to the container (`webserver`) instead of
-the container ID:
-@y
-{% comment %}
-You can get the container IP address by using [`docker inspect`](../engine/reference/commandline/inspect.md) with some `--format` options
-and the ID or name of the container. For the example above, the command would
-look like this, using the name we gave to the container (`webserver`) instead of
-the container ID:
-{% endcomment %}
-コンテナーの IP アドレスは、[`docker inspect`](../engine/reference/commandline/inspect.md)コマンドにコンテナーの ID か名前を指定し、適当に`--format`オプションをつけて確認することができます。
-上の例に対応するコマンドは、たとえば以下のようになります。
-ここではコンテナー ID ではなく、コンテナー名（`webserver`）を指定しています。
-@z
-
-@x
-{% raw %}
-```bash
-$ docker inspect \
-  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-  webserver
-```
-{% endraw %}
-@y
-{% raw %}
-```bash
-$ docker inspect \
-  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-  webserver
-```
-{% endraw %}
-@z
-
-@x
-This gives you the IP address of the container, for example:
-@y
-{% comment %}
-This gives you the IP address of the container, for example:
-{% endcomment %}
-上を実行するとコンテナーの IP アドレスが、たとえば以下のように表示されます。
-@z
-
-@x
-{% raw %}
-```bash
-$ docker inspect \
-  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-  webserver
-
-172.17.0.2
-```
-{% endraw %}
-@y
-{% raw %}
-```bash
-$ docker inspect \
-  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-  webserver
-
-172.17.0.2
-```
-{% endraw %}
-@z
-
-@x
-Now you can connect to the webserver by using `http://172.17.0.2:80` (or simply
-`http://172.17.0.2`, since port `80` is the default HTTP port.)
-@y
-{% comment %}
-Now you can connect to the webserver by using `http://172.17.0.2:80` (or simply
-`http://172.17.0.2`, since port `80` is the default HTTP port.)
-{% endcomment %}
-そこでウェブサーバーには`http://172.17.0.2:80`を使ってアクセスできるようになります。
-（あるいは HTTP のデフォルトポートは`80`なので、単に`http://172.17.0.2`としてもアクセスできます。）
-@z
-
-@x
-For more information, see:
-@y
-{% comment %}
-For more information, see:
-{% endcomment %}
-さらに詳しくは、以下を参照してください。
-@z
-
-@x
-* Docker Desktop for Windows issue on GitHub: [Port binding does not work for
-  locahost](https://github.com/docker/for-win/issues/458)
-@y
-{% comment %}
-* Docker Desktop for Windows issue on GitHub: [Port binding does not work for
-  locahost](https://github.com/docker/for-win/issues/458)
-{% endcomment %}
-* GitHub 上の Docker Desktop for Windows に関する issue: [Port binding does not work for
-  locahost](https://github.com/docker/for-win/issues/458)（ポート割り当てがローカルホストに対して動作しない）
-@z
-
-@x
-* [Published Ports on Windows Containers Don't Do
-  Loopback](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/)
-@y
-{% comment %}
-* [Published Ports on Windows Containers Don't Do
-  Loopback](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/)
-{% endcomment %}
-* [Published Ports on Windows Containers Don't Do
-  Loopback](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/)（Windows コンテナー上の公開ポートがループバックしない）
-@z
-
-@x
-* [Windows NAT capabilities and
-  limitations](https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/)
-@y
-{% comment %}
-* [Windows NAT capabilities and
-  limitations](https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/)
-{% endcomment %}
-* [Windows NAT capabilities and limitations](https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/)（Windows の NAT 機能と制限）
 @z
 
 @x
@@ -1442,28 +1089,6 @@ Docker Desktop on Windows であれば Windows コンテナーと Linux コン�
 @z
 
 @x
-#### Related issues
-@y
-{% comment %}
-#### Related issues
-{% endcomment %}
-{: #related-issues }
-#### 関連する問題
-@z
-
-@x
-Discussion thread on GitHub at [Docker for Windows issue
-267](https://github.com/docker/for-win/issues/267).
-@y
-{% comment %}
-Discussion thread on GitHub at [Docker for Windows issue
-267](https://github.com/docker/for-win/issues/267).
-{% endcomment %}
-Discussion thread on GitHub at [Docker for Windows issue
-267](https://github.com/docker/for-win/issues/267).
-@z
-
-@x
 ### Networking issues
 @y
 {% comment %}
@@ -1480,95 +1105,6 @@ IPv6 is not (yet) supported on Docker Desktop.
 IPv6 is not (yet) supported on Docker Desktop.
 {% endcomment %}
 Docker Desktop では IPv6 は（まだ）サポートされていません。
-@z
-
-@x
-Some users have reported problems connecting to Docker Hub on the Docker Desktop stable version. (See GitHub issue
-[22567](https://github.com/moby/moby/issues/22567).)
-@y
-{% comment %}
-Some users have reported problems connecting to Docker Hub on the Docker Desktop stable version. (See GitHub issue
-[22567](https://github.com/moby/moby/issues/22567).)
-{% endcomment %}
-Docker Desktop 安定版から Docker Hub へ接続する際に、問題が発生する場合があることが報告されています。
-（GitHub issue [22567](https://github.com/moby/moby/issues/22567) を参照してください。）
-@z
-
-@x
-Here is an example command and error message:
-@y
-{% comment %}
-Here is an example command and error message:
-{% endcomment %}
-以下はエラー発生するコマンド例です。
-@z
-
-@x
-```shell
-> docker run hello-world
-
-Unable to find image 'hello-world:latest' locally
-Pulling repository docker.io/library/hello-world
-C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
-See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
-```
-@y
-```shell
-> docker run hello-world
-
-Unable to find image 'hello-world:latest' locally
-Pulling repository docker.io/library/hello-world
-C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
-See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
-```
-@z
-
-@x
-As an immediate workaround to this problem, reset the DNS server to use the
-Google DNS fixed address: `8.8.8.8`. You can configure this through the **Settings**
-> **Network** dialog, as described in the topic [Network](index.md#network).
-Docker automatically restarts when you apply this setting, which could take some
-time.
-@y
-{% comment %}
-As an immediate workaround to this problem, reset the DNS server to use the
-Google DNS fixed address: `8.8.8.8`. You can configure this through the **Settings**
-> **Network** dialog, as described in the topic [Network](index.md#network).
-Docker automatically restarts when you apply this setting, which could take some
-time.
-{% endcomment %}
-As an immediate workaround to this problem, reset the DNS server to use the
-Google DNS fixed address: `8.8.8.8`. You can configure this through the **Settings**
-> **Network** dialog, as described in the topic [Network](index.md#network).
-Docker automatically restarts when you apply this setting, which could take some
-time.
-@z
-
-@x
-### NAT/IP configuration
-@y
-{% comment %}
-### NAT/IP configuration
-{% endcomment %}
-### NAT/IP configuration
-@z
-
-@x
-By default, Docker Desktop uses an internal network prefix of
-`10.0.75.0/24`. Should this clash with your normal network setup, you can change
-the prefix from the **Settings** menu. See the [Network](index.md#network) topic
-under [Settings](index.md#docker-settings).
-@y
-{% comment %}
-By default, Docker Desktop uses an internal network prefix of
-`10.0.75.0/24`. Should this clash with your normal network setup, you can change
-the prefix from the **Settings** menu. See the [Network](index.md#network) topic
-under [Settings](index.md#docker-settings).
-{% endcomment %}
-By default, Docker Desktop uses an internal network prefix of
-`10.0.75.0/24`. Should this clash with your normal network setup, you can change
-the prefix from the **Settings** menu. See the [Network](index.md#network) topic
-under [Settings](index.md#docker-settings).
 @z
 
 @x

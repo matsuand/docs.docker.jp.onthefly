@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-03 22:13:46 +0900-->
+<!-- Page generated 2020-11-13 13:43:02 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ログとトラブルシューティング | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ログとトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting, logs, and known issues" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-03T22:13:46+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-13T13:43:02+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-03T22:13:46+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-13T13:43:02+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ログとトラブルシューティング","description":"Troubleshooting, logs, and known issues","url":"https://docs.docker.com/docker-for-windows/troubleshoot/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ログとトラブルシューティング</h1><p><em class="reading-time">読む時間の目安: 13 分</em></p>
+                        <section class="section"><h1>ログとトラブルシューティング</h1><p><em class="reading-time">読む時間の目安: 10 分</em></p>
 <p>本ページでは Docker Desktop において問題が発生した際の分析方法や解決方法について示します。
 Docker Desktop サポートへの要求を行ったり（プロプランやチームプランのユーザーのみ）、Docker Desktop チームへログ送付してやりとりを行ったり、フォーラムや Success Center を活用したりしてください。
 GitHub 上での issue の確認や情報収集を行って、既知の問題であればその回避策を探してください。</p>
@@ -121,7 +121,7 @@ GitHub 上での issue の確認や情報収集を行って、既知の問題で
 詳しくは <a href="#diagnose-and-feedback">診断とフィードバック</a> あるいは <a href="#support">サポート</a> を参照してください。</p>
   </li>
   <li>
-    <p><strong>Reset Kubernetes cluster</strong>（Kubernetes クラスターのリセット）: Select this option to delete all stacks and Kubernetes resources.
+    <p><strong>Reset Kubernetes cluster</strong>（Kubernetes クラスターのリセット）: このオプションを選択すると、全スタックや Kubernetes リソースを削除します。
 詳しくは <a href="/docs.docker.jp.onthefly/docker-for-windows/#kubernetes">Kubernetes</a> を参照してください。</p>
   </li>
   <li>
@@ -219,7 +219,7 @@ Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 <span cl
 
 <h4 id="permissions-errors-on-data-directories-for-shared-volumes">共有ボリューム上のデータディレクトリに対するパーミッションエラー</h4>
 
-<p>Docker Desktop は <a href="/docs.docker.jp.onthefly/docker-for-windows/#file-sharing">共有ボリューム</a> に対して、デフォルトとして <a href="http://permissions-calculator.org/decode/0777/">0777</a>（<code class="language-plaintext highlighter-rouge">user</code>と<code class="language-plaintext highlighter-rouge">group</code>に対して<code class="language-plaintext highlighter-rouge">read</code>、<code class="language-plaintext highlighter-rouge">write</code>、<code class="language-plaintext highlighter-rouge">execute</code>）のパーミッションを設定します。</p>
+<p>Windows からファイル共有を行う際、Docker Desktop は <a href="/docs.docker.jp.onthefly/docker-for-windows/#file-sharing">共有ボリューム</a> に対して、デフォルトとして <a href="http://permissions-calculator.org/decode/0777/">0777</a>（<code class="language-plaintext highlighter-rouge">user</code>と<code class="language-plaintext highlighter-rouge">group</code>に対して<code class="language-plaintext highlighter-rouge">read</code>、<code class="language-plaintext highlighter-rouge">write</code>、<code class="language-plaintext highlighter-rouge">execute</code>）のパーミッションを設定します。</p>
 
 <p>共有ボリュームにおけるこのデフォルトのパーミッションは、設定変更することができません。
 共有ボリュームのデフォルト設定とは異なるパーミッションを必要とするアプリケーションを稼動させている場合は、ホストにマウントされていないボリュームを利用するか、デフォルトのパーミッションでも動作するようにアプリケーションの変更を行うしかありません。</p>
@@ -232,8 +232,7 @@ Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 <span cl
 たとえば <a href="/docs.docker.jp.onthefly/compose/gettingstarted/">Docker Compose</a> 利用時において、アプリケーションがファイルを見つけられない、ボリュームマウントに対してのアクセスが拒否される、サービスが起動しない、といったものです。
 この場合は <a href="/docs.docker.jp.onthefly/docker-for-windows/#file-sharing">共有フォルダー</a> を有効にすることが必要かもしれません。</p>
 
-<p>ボリュームをマウントするには、Linux コンテナーに対しての共有フォルダーが必要になります。
-（Windows コンテナーではありません。）
+<p>Hyper-V バックエンドを利用して Windows からファイルをマウントする場合には、Linux コンテナーに対しての共有フォルダーが必要になります。
 <img src="/docs.docker.jp.onthefly/docker-for-windows/images/whale-x.png" alt="クジラメニュー" class="inline" /> をクリックして <strong>Settings</strong> &gt; <strong>Shared Folders</strong> を実行し、Dockerfile やボリュームを含むフォルダーを共有してください。</p>
 
 <h4 id="support-for-symlinks">シンボリックリンクのサポート</h4>
@@ -261,9 +260,24 @@ Windows スタイルの<code class="language-plaintext highlighter-rouge">\r\n</
 
 <p>Docker Desktop を正しく機能させるためには、マシンには以下の機能がなければなりません。</p>
 
+<h4 id="wsl-2-と-windows-home">WSL 2 と Windows Home</h4>
+
+<ol>
+  <li>仮想マシンプラットフォーム。</li>
+  <li><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank" rel="noopener" class="_">Windows Subsystem for Linux</a>。</li>
+  <li>BIOS 内での仮想技術有効化。</li>
+  <li>Windows 起動時のハイパーバイザー有効化。</li>
+</ol>
+
+<p><img src="/docs.docker.jp.onthefly/docker-for-windows/images/wsl2-enabled.png" alt="WSL 2 enabled" width="600px" /></p>
+
+<h4 id="hyper-v">Hyper-V</h4>
+
+<p>Windows 10 Pro または Enterprise の場合は、以下の機能を有効にした上で Hyper-V を利用することもできます。</p>
+
 <ol>
   <li>
-    <p><a href="https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview">Hyper-V</a> がインストールされ動作していること。</p>
+    <p><a href="https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview" target="_blank" rel="noopener" class="_">Hyper-V</a> がインストールされ動作していること。</p>
   </li>
   <li>
     <p>BIOS 設定において仮想化機能（virtualization）が有効に設定されていること。</p>
@@ -273,7 +287,7 @@ Windows スタイルの<code class="language-plaintext highlighter-rouge">\r\n</
   </li>
 </ol>
 
-<h4 id="hyper-v">Hyper-V</h4>
+<p><img src="/docs.docker.jp.onthefly/docker-for-windows/images/hyperv-enabled.png" alt="Windows の Hyper-V 機能" width="600px" /></p>
 
 <p>Docker Desktop では Hyper-V が必要です。
 また Windows Powershell における Hyper-V モジュールがインストールされ有効であることも必要です。
@@ -294,18 +308,6 @@ Hyper-V のインストール後に再起動を行わないままでいると、
 
 <p>スタートメニューから <strong>Turn Windows features on or off</strong> と入力して ENTER キーを押してください。
 表示される画面から Hyper-V が有効であることを確認してください。</p>
-
-<p><img src="/docs.docker.jp.onthefly/docker-for-windows/images/hyperv-enabled.png" alt="Windows の Hyper-V 機能" width="600px" /></p>
-
-<h4 id="docker-machine-用の-hyper-v-ドライバー">Docker Machine 用の Hyper-V ドライバー</h4>
-
-<p>Docker Desktop をインストールすると、かつてのツール Docker Machine もインストールされます。
-これはローカルに仮想マシンを生成するにあたって、古い <a href="https://github.com/boot2docker/boot2docker" target="_blank" rel="noopener" class="_"><code class="language-plaintext highlighter-rouge">boot2docker.iso</code></a> と <a href="/docs.docker.jp.onthefly/machine/drivers/hyper-v/">Microsoft Hyper-V ドライバー</a> を利用します。
-<strong>Docker Desktop を使う上で、これは関係のないものです</strong>。
-ただしローカルに複数の仮想マシンを生成するために Docker Machine を利用したい場合、あるいはリモートマシンにプロビジョニングしたい場合は <a href="/docs.docker.jp.onthefly/machine/">Docker Machine</a> に示されるトピックを参照してください。
-そのトピックは Docker Machine on Windows の情報が必要な方のみに向けたものです。
-そこでは Hyper-V の有効化と外部ネットワークスイッチがアクティブであることが必要であり、<code class="language-plaintext highlighter-rouge">docker-machine create</code>コマンドのフラグで参照します。
-これに関しては <a href="/docs.docker.jp.onthefly/machine/drivers/hyper-v/#example">Docker Machine ドライバー利用例</a> において説明されています。</p>
 
 <h4 id="virtualization-must-be-enabled">仮想化技術の有効化</h4>
 
@@ -329,48 +331,7 @@ Hyper-V のインストール後に再起動を行わないままでいると、
   <li>Windows を再起動します。</li>
 </ol>
 
-<h3 id="networking-and-wifi-problems-upon-docker-desktop-for-windows-install">Docker Desktop for Windows インストールにおけるネットワークと Wifi の問題</h3>
-
-<p>Docker Desktop のインストールと起動の際に、ネットワーク機能の問題が発生するケースがあります。
-たとえばインストールや自動再起動の際に、ネットワークアダプターあるいは Wifi が利用不能になってしまうものです。
-原因の 1 つとして VirtualBox とそのネットワークアダプターがインストールされたまま残っていることがあります。
-またこれが原因ではない場合もあります。
-GitHub の issue <a href="https://github.com/docker/for-win/issues/139">Enabling Hyper-V feature turns my wi-fi off</a>（Hyper-V 機能を有効にすると Wifi がオフになってしまう）を参照してください。</p>
-
-<p>同様の問題が発生した際には、以下の手順で確認してください。</p>
-
-<ol>
-  <li>
-    <p>上の <a href="#virtualization-must-be-enabled">仮想化技術の有効化</a> で説明したように、<strong>仮想化機能</strong>（virtualization）が有効であることを確認します。</p>
-  </li>
-  <li>
-    <p><a href="#hyper-v-must-be-enabled">Hyper-V の有効化</a> で説明したように、<strong>Hyper-V</strong> をインストールし有効化していることを確認します。</p>
-  </li>
-  <li>
-    <p><strong>DockerNAT</strong> が有効であることを確認します。
-これは <strong>Hyper-V マネージャー</strong>（Hyper-V Manager）の右側にある Actions タブにおいて <strong>仮想スイッチマネージャー</strong>（Virtual Switch Manager）をチェックします。</p>
-
-    <p><img src="/docs.docker.jp.onthefly/docker-for-windows/images/hyperv-manager.png" alt="Hyper-V マネージャー" /></p>
-  </li>
-  <li>
-    <p>外部ネットワークスイッチを設定します。
-いずれ <a href="/docs.docker.jp.onthefly/machine/">Docker Machine</a> を利用してローカルに複数の VM を利用するつもりなら、これが必要になります。
-このことは <a href="/docs.docker.jp.onthefly/machine/drivers/hyper-v/#example">Docker Machine 用の Hyper-V ドライバー</a> 内のトピックにおいて説明しています。
-<code class="language-plaintext highlighter-rouge">DockerNAT</code>をこのスイッチに置き換えることができます。</p>
-  </li>
-  <li>
-    <p>これまでの手順では問題解決できない場合は、<a href="https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md">Cleanup README</a> の手順に従ってください。</p>
-
-    <blockquote>
-      <p>上記説明を十分読んでから Windows クリーンアップスクリプトを実行してください。</p>
-
-      <p>クリーンアップ（cleanup）コマンドには、2 つのフラグがあります。
-<code class="language-plaintext highlighter-rouge">-Cleanup</code>と<code class="language-plaintext highlighter-rouge">-ForceDeleteAllSwitches</code>です。
-どのスクリプトを実行する場合も、説明ページ全体をよく読んでから実施してください。
-特に<code class="language-plaintext highlighter-rouge">-ForceDeleteAllSwitches</code>の警告メッセージについてはよく確認してください。{: .warning}</p>
-    </blockquote>
-  </li>
-</ol>
+<p>コードフローガード（Code flow guard; CFG）の設定に関しては <a href="https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt" target="_blank" rel="noopener" class="_">Microsoft TechNet article</a> も参照してください。</p>
 
 <h3 id="windows-containers-and-windows-server">Windows コンテナーと Windows Server</h3>
 
@@ -388,67 +349,6 @@ Windows にネイティブな Docker デーモン上において Linux コンテ
  image operating system "linux" cannot be used on this platform.
  See 'C:\Program Files\Docker\docker.exe run --help'.
 </code></pre>
-
-<h3 id="limitations-of-windows-containers-for-localhost-and-published-ports"><code class="language-plaintext highlighter-rouge">localhost</code> や公開ポートに対する Windows コンテナーの制約</h3>
-
-<p>Docker Desktop for Windows には、Windows コンテナーと Linux コンテナーを切り替えるオプションがあります。
-Windows コンテナーを利用している場合、現時点での Windows NAT（WinNAT）の実装上の理由により、ネットワーク機能に一部制限があることに留意してください。
-この制限は、Windows コンテナープロジェクトの進展により、解決される可能性があります。</p>
-
-<p>Windows コンテナーでは、ローカルホストの公開ポートを使って動作します。
-これは Docker Desktop for Windows を利用した Windows 10 1809 から可能になりました。
-Docker EE を利用する Windows Server 2019 / 1809 についても同様です。</p>
-
-<p><code class="language-plaintext highlighter-rouge">Windows 10 18.09</code> より前のバージョンを利用している場合、Windows コンテナーの公開ポートに関しては、ローカルホストのループバックに問題があります。
-ホストからコンテナーのエンドポイントにアクセスするには、コンテナーの IP とポートが必要でしたが、<code class="language-plaintext highlighter-rouge">Windows 10 18.09</code> からは、ローカルホストの公開ポートを使ってアクセスできるようになりました。</p>
-
-<p>Docker を使ってイメージをプルしてウェブサーバーを起動するとします。
-まずは以下のようなコマンドを実行します。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> docker run <span class="nt">-d</span> <span class="nt">-p</span> 80:80 <span class="nt">--name</span> webserver nginx
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">curl http://localhost</code>を実行したり、ウェブサーバー上から<code class="language-plaintext highlighter-rouge">http://localhost</code>にアクセスしても、<code class="language-plaintext highlighter-rouge">nginx</code>のウェブページは表示されません。
-（Linux コンテナーであれば表示されています。）</p>
-
-<p>ローカルホストから Windows コンテナーにアクセスするには、サービスが実行されているコンテナーの IP アドレスとポートを指定する必要があります。</p>
-
-<p>コンテナーの IP アドレスは、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/inspect/"><code class="language-plaintext highlighter-rouge">docker inspect</code></a>コマンドにコンテナーの ID か名前を指定し、適当に<code class="language-plaintext highlighter-rouge">--format</code>オプションをつけて確認することができます。
-上の例に対応するコマンドは、たとえば以下のようになります。
-ここではコンテナー ID ではなく、コンテナー名（<code class="language-plaintext highlighter-rouge">webserver</code>）を指定しています。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker inspect <span class="se">\</span>
-  <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'</span> <span class="se">\</span>
-  webserver
-</code></pre></div></div>
-
-<p>上を実行するとコンテナーの IP アドレスが、たとえば以下のように表示されます。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker inspect <span class="se">\</span>
-  <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'</span> <span class="se">\</span>
-  webserver
-
-172.17.0.2
-</code></pre></div></div>
-
-<p>そこでウェブサーバーには<code class="language-plaintext highlighter-rouge">http://172.17.0.2:80</code>を使ってアクセスできるようになります。
-（あるいは HTTP のデフォルトポートは<code class="language-plaintext highlighter-rouge">80</code>なので、単に<code class="language-plaintext highlighter-rouge">http://172.17.0.2</code>としてもアクセスできます。）</p>
-
-<p>さらに詳しくは、以下を参照してください。</p>
-
-<ul>
-  <li>
-    <p>GitHub 上の Docker Desktop for Windows に関する issue: <a href="https://github.com/docker/for-win/issues/458">Port binding does not work for
-locahost</a>（ポート割り当てがローカルホストに対して動作しない）</p>
-  </li>
-  <li>
-    <p><a href="https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/">Published Ports on Windows Containers Don’t Do
-Loopback</a>（Windows コンテナー上の公開ポートがループバックしない）</p>
-  </li>
-  <li>
-    <p><a href="https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/">Windows NAT capabilities and limitations</a>（Windows の NAT 機能と制限）</p>
-  </li>
-</ul>
 
 <h3 id="running-docker-desktop-in-nested-virtualization-scenarios">ネストした仮想環境での Docker Desktop 実行</h3>
 
@@ -514,42 +414,9 @@ Virtualization</strong>.</p>
   </li>
 </ul>
 
-<h4 id="related-issues">関連する問題</h4>
-
-<p>Discussion thread on GitHub at <a href="https://github.com/docker/for-win/issues/267">Docker for Windows issue
-267</a>.</p>
-
 <h3 id="networking-issues">ネットワークの問題</h3>
 
 <p>Docker Desktop では IPv6 は（まだ）サポートされていません。</p>
-
-<p>Docker Desktop 安定版から Docker Hub へ接続する際に、問題が発生する場合があることが報告されています。
-（GitHub issue <a href="https://github.com/moby/moby/issues/22567">22567</a> を参照してください。）</p>
-
-<p>以下はエラー発生するコマンド例です。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> docker run hello-world
-
-Unable to find image <span class="s1">'hello-world:latest'</span> locally
-Pulling repository docker.io/library/hello-world
-C:<span class="se">\P</span>rogram Files<span class="se">\D</span>ocker<span class="se">\D</span>ocker<span class="se">\R</span>esources<span class="se">\b</span><span class="k">in</span><span class="se">\d</span>ocker.exe: Error <span class="k">while </span>pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
-See <span class="s1">'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'</span><span class="nb">.</span>
-</code></pre></div></div>
-
-<p>As an immediate workaround to this problem, reset the DNS server to use the
-Google DNS fixed address: <code class="language-plaintext highlighter-rouge">8.8.8.8</code>. You can configure this through the <strong>Settings</strong></p>
-<blockquote>
-  <p><strong>Network</strong> dialog, as described in the topic <a href="/docs.docker.jp.onthefly/docker-for-windows/#network">Network</a>.
-Docker automatically restarts when you apply this setting, which could take some
-time.</p>
-</blockquote>
-
-<h3 id="natip-configuration">NAT/IP configuration</h3>
-
-<p>By default, Docker Desktop uses an internal network prefix of
-<code class="language-plaintext highlighter-rouge">10.0.75.0/24</code>. Should this clash with your normal network setup, you can change
-the prefix from the <strong>Settings</strong> menu. See the <a href="/docs.docker.jp.onthefly/docker-for-windows/#network">Network</a> topic
-under <a href="/docs.docker.jp.onthefly/docker-for-windows/#docker-settings">Settings</a>.</p>
 
 <h2 id="workarounds">回避策</h2>
 

@@ -601,6 +601,48 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 @z
 
 @x
+## Updating applications
+@y
+{% comment %}
+## Updating applications
+{% endcomment %}
+{: #updating-applications }
+## アプリケーションの更新
+@z
+
+@x
+From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose up --project-name PROJECT`.
+@y
+{% comment %}
+From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose up --project-name PROJECT`.
+{% endcomment %}
+デプロイされた Compose アプリケーションに対しては、同一のプロジェクト名を用いて、`docker compose up --project-name PROJECT`のようにアプリケーションの再デプロイを行い、アプリケーションの更新を行うことができます。
+@z
+
+@x
+Updating an application means the ACI node will be reused, and the application will keep the same IP address that was previously allocated to expose ports, if any. ACI has some limitations on what can be updated in an existing application (you will not be able to change CPU/memory reservation for example), in these cases, you need to deploy a new application from scratch.
+@y
+{% comment %}
+Updating an application means the ACI node will be reused, and the application will keep the same IP address that was previously allocated to expose ports, if any. ACI has some limitations on what can be updated in an existing application (you will not be able to change CPU/memory reservation for example), in these cases, you need to deploy a new application from scratch.
+{% endcomment %}
+アプリケーションを更新すると ACI ノードは再利用されます。
+そして公開ポートに割り当てられていた IP アドレスは、どのようなものであっても同一値が維持されます。
+ACI においては、既存アプリケーションへのアップデート内容によって制限が発生するものがあります（たとえば CPU/メモリの予約確保量を制限することはできません）。
+その場合は、アプリケーションを新たに一からデプロイすることが必要です。
+@z
+
+@x
+Updating is the default behavior if you invoke `docker compose up` on an already deployed Compose file, as the Compose project name is derived from the directory where the Compose file is located by default. You need to explicitly execute `docker compose down` before running `docker compose up` again in order to totally reset a Compose application.
+@y
+{% comment %}
+Updating is the default behavior if you invoke `docker compose up` on an already deployed Compose file, as the Compose project name is derived from the directory where the Compose file is located by default. You need to explicitly execute `docker compose down` before running `docker compose up` again in order to totally reset a Compose application.
+{% endcomment %}
+すでにデプロイされた Compose ファイルに対して`docker compose up`を実行すれば、アプリケーションを更新するのがデフォルトの動作です。
+そのときにはデフォルトで、Compose ファイルがあるディレクトリ名から Compose プロジェクト名を取り出します。
+Compose アプリケーションを完全にリセットしたいのであれば、再度`docker compose up`を実行する前に、明示的に`docker compose down`を実行することが必要です。
+@z
+
+@x
 ## Releasing resources
 @y
 {% comment %}
@@ -611,17 +653,17 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 @z
 
 @x
-Single containers and Compose applications can be removed from ACI with 
-the `docker prune` command. The `docker prune` command removes deployments 
+Single containers and Compose applications can be removed from ACI with
+the `docker prune` command. The `docker prune` command removes deployments
 that are not currently running. To remove running depoyments, you can specify
-`--force`. The `--dry-run` option lists deployments that are planned for 
+`--force`. The `--dry-run` option lists deployments that are planned for
 removal, but it doesn't actually remove them.
 @y
 {% comment %}
-Single containers and Compose applications can be removed from ACI with 
-the `docker prune` command. The `docker prune` command removes deployments 
+Single containers and Compose applications can be removed from ACI with
+the `docker prune` command. The `docker prune` command removes deployments
 that are not currently running. To remove running depoyments, you can specify
-`--force`. The `--dry-run` option lists deployments that are planned for 
+`--force`. The `--dry-run` option lists deployments that are planned for
 removal, but it doesn't actually remove them.
 {% endcomment %}
 単独のコンテナーや Compose アプリケーションは`docker prune`コマンドを使って ACI から削除することができます。
@@ -1072,6 +1114,107 @@ For Compose applications, you can specify the environment variables in the Compo
 {% endcomment %}
 `docker run`の実行時には、`--env`フラグを利用して ACI コンテナーに環境変数を受け渡すことができます。
 Compose アプリケーションの場合は、Compose ファイル内においてサービス項目`environment`または`env-file`において環境変数を指定するか、あるいはコマンドラインフラグ`--environment`を利用して指定します。
+@z
+
+@x
+## Health checks
+@y
+{% comment %}
+## Health checks
+{% endcomment %}
+{: #health-checks }
+## ヘルスチェック
+@z
+
+@x
+You can specify a container health checks using either the `--healthcheck-` prefixed flags with `docker run`, or in a Compose file with the `healthcheck` section of the service.
+@y
+{% comment %}
+You can specify a container health checks using either the `--healthcheck-` prefixed flags with `docker run`, or in a Compose file with the `healthcheck` section of the service.
+{% endcomment %}
+コンテナーのヘルスチェックを行うことができます。
+`docker run`の実行においては`--healthcheck-`をプレフィックスに持つフラグを利用します。
+また Compose ファイルにおいては、そのサービスの`healthcheck`セクションを利用します。
+@z
+
+@x
+Health checks are converted to ACI `LivenessProbe`s. ACI runs the health check command periodically, and if it fails, the container will be terminated.
+@y
+{% comment %}
+Health checks are converted to ACI `LivenessProbe`s. ACI runs the health check command periodically, and if it fails, the container will be terminated.
+{% endcomment %}
+ヘルスチェックは ACI の`LivenessProbe`に変換されます。
+ACI ではヘルスチェックコマンドを定期的に実行します。
+チェックに失敗したとき、そのコンテナーは停止されます。
+@z
+
+@x
+Health checks must be used in addition to restart policies to ensure the container is then restarted on termination. The default restart policy for `docker run` is `no` which will not restart the container. The default restart policy for Compose is `any` which will always try restarting the service containers.
+@y
+{% comment %}
+Health checks must be used in addition to restart policies to ensure the container is then restarted on termination. The default restart policy for `docker run` is `no` which will not restart the container. The default restart policy for Compose is `any` which will always try restarting the service containers.
+{% endcomment %}
+したがってヘルスチェックには再起動ポリシーを含めて利用することが必要であり、コンテナーの停止後に再起動させることが必要です。
+`docker run`におけるデフォルトの再起動ポリシーは`no`であり、これはコンテナーを再起動しません。
+Compose に対するデフォルトの再起動ポリシーは`any`であり、これは常にサービスコンテナーを再起動します。
+@z
+
+@x
+Example using `docker run`:
+@y
+{% comment %}
+Example using `docker run`:
+{% endcomment %}
+`docker run`の実行例は以下のとおりです。
+@z
+
+@x
+```console
+docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+```
+@y
+```console
+docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+```
+@z
+
+@x
+Example using Compose files:
+@y
+{% comment %}
+Example using Compose files:
+{% endcomment %}
+Compose ファイルの利用例は以下のとおりです。
+@z
+
+@x
+```yaml
+services:
+  web:
+    image: nginx
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 2s
+      start_period: 40s
+```
+@y
+```yaml
+services:
+  web:
+    image: nginx
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 2s
+      start_period: 40s
+```
 @z
 
 @x

@@ -24,7 +24,6 @@ redirect_from:
 - /engine/getstarted/step_two/
 - /engine/tutorials/dockerimages/
 - /engine/tutorials/dockerizing/
-- /engine/tutorials/dockerrepos/
 - /engine/tutorials/usingdocker/
 - /engine/userguide/containers/dockerimages/
 - /engine/userguide/dockerimages/
@@ -81,7 +80,6 @@ redirect_from:
 - /engine/getstarted/step_two/
 - /engine/tutorials/dockerimages/
 - /engine/tutorials/dockerizing/
-- /engine/tutorials/dockerrepos/
 - /engine/tutorials/usingdocker/
 - /engine/userguide/containers/dockerimages/
 - /engine/userguide/dockerimages/

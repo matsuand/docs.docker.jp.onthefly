@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-06 22:14:31 +0900-->
+<!-- Page generated 2020-11-13 13:43:02 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Azure での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Azure での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="Azure において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-06T22:14:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-13T13:43:02+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/aci-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-06T22:14:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-13T13:43:02+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Azure での Docker コンテナーのデプロイ","description":"Azure において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/aci-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Azure での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p>
+                        <section class="section"><h1>Azure での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p>
 <h2 id="overview">概要</h2>
 
 <p>Docker Azure 統合は、Azure コンテナーインスタンス（Azure Container Instances; ACI） の中で、ネイティブな Docker コマンドの利用を可能にします。
@@ -281,6 +281,19 @@ ACI の場合、コンテナーはいったん初期状態にリセットされ�
   <p>現時点の Docker Azure 統合では、Compose アプリケーションを構成するコンテナーからのログを、すべて集めて取得するようなことはできません。</p>
 </blockquote>
 
+<h2 id="updating-applications">アプリケーションの更新</h2>
+
+<p>デプロイされた Compose アプリケーションに対しては、同一のプロジェクト名を用いて、<code class="language-plaintext highlighter-rouge">docker compose up --project-name PROJECT</code>のようにアプリケーションの再デプロイを行い、アプリケーションの更新を行うことができます。</p>
+
+<p>アプリケーションを更新すると ACI ノードは再利用されます。
+そして公開ポートに割り当てられていた IP アドレスは、どのようなものであっても同一値が維持されます。
+ACI においては、既存アプリケーションへのアップデート内容によって制限が発生するものがあります（たとえば CPU/メモリの予約確保量を制限することはできません）。
+その場合は、アプリケーションを新たに一からデプロイすることが必要です。</p>
+
+<p>すでにデプロイされた Compose ファイルに対して<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行すれば、アプリケーションを更新するのがデフォルトの動作です。
+そのときにはデフォルトで、Compose ファイルがあるディレクトリ名から Compose プロジェクト名を取り出します。
+Compose アプリケーションを完全にリセットしたいのであれば、再度<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行する前に、明示的に<code class="language-plaintext highlighter-rouge">docker compose down</code>を実行することが必要です。</p>
+
 <h2 id="releasing-resources">リソースの解放</h2>
 
 <p>単独のコンテナーや Compose アプリケーションは<code class="language-plaintext highlighter-rouge">docker prune</code>コマンドを使って ACI から削除することができます。
@@ -421,6 +434,40 @@ mystorageaccount/test-volume2      Fileshare test-volume2 in mystorageaccount st
 
 <p><code class="language-plaintext highlighter-rouge">docker run</code>の実行時には、<code class="language-plaintext highlighter-rouge">--env</code>フラグを利用して ACI コンテナーに環境変数を受け渡すことができます。
 Compose アプリケーションの場合は、Compose ファイル内においてサービス項目<code class="language-plaintext highlighter-rouge">environment</code>または<code class="language-plaintext highlighter-rouge">env-file</code>において環境変数を指定するか、あるいはコマンドラインフラグ<code class="language-plaintext highlighter-rouge">--environment</code>を利用して指定します。</p>
+
+<h2 id="health-checks">ヘルスチェック</h2>
+
+<p>コンテナーのヘルスチェックを行うことができます。
+<code class="language-plaintext highlighter-rouge">docker run</code>の実行においては<code class="language-plaintext highlighter-rouge">--healthcheck-</code>をプレフィックスに持つフラグを利用します。
+また Compose ファイルにおいては、そのサービスの<code class="language-plaintext highlighter-rouge">healthcheck</code>セクションを利用します。</p>
+
+<p>ヘルスチェックは ACI の<code class="language-plaintext highlighter-rouge">LivenessProbe</code>に変換されます。
+ACI ではヘルスチェックコマンドを定期的に実行します。
+チェックに失敗したとき、そのコンテナーは停止されます。</p>
+
+<p>したがってヘルスチェックには再起動ポリシーを含めて利用することが必要であり、コンテナーの停止後に再起動させることが必要です。
+<code class="language-plaintext highlighter-rouge">docker run</code>におけるデフォルトの再起動ポリシーは<code class="language-plaintext highlighter-rouge">no</code>であり、これはコンテナーを再起動しません。
+Compose に対するデフォルトの再起動ポリシーは<code class="language-plaintext highlighter-rouge">any</code>であり、これは常にサービスコンテナーを再起動します。</p>
+
+<p><code class="language-plaintext highlighter-rouge">docker run</code>の実行例は以下のとおりです。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+</span></code></pre></div></div>
+
+<p>Compose ファイルの利用例は以下のとおりです。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">restart_policy</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">on-failure</span>
+    <span class="na">healthcheck</span><span class="pi">:</span>
+      <span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-f"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">http://localhost:80"</span><span class="pi">]</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">10s</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="s">2s</span>
+      <span class="na">start_period</span><span class="pi">:</span> <span class="s">40s</span>
+</code></pre></div></div>
 
 <h2 id="private-docker-hub-images-and-using-the-azure-container-registry">プライベートな Docker Hub イメージと Azure コンテナーレジストリの利用</h2>
 
@@ -569,10 +616,12 @@ Docker コンテキストが異なれば、コンテナー名や Compose アプ�
       <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
       <li><a href="#run-docker-containers-on-aci" class="nomunge">ACI での Docker コンテナー実行</a></li>
       <li><a href="#running-compose-applications" class="nomunge">Compose アプリケーションの実行</a></li>
+      <li><a href="#updating-applications" class="nomunge">アプリケーションの更新</a></li>
       <li><a href="#releasing-resources" class="nomunge">リソースの解放</a></li>
       <li><a href="#exposing-ports" class="nomunge">ポートの公開</a></li>
       <li><a href="#using-azure-file-share-as-volumes-in-aci-containers" class="nomunge">ACI コンテナー内での Azure ファイル共有のボリュームとしての利用</a></li>
       <li><a href="#environment-variables" class="nomunge">環境変数</a></li>
+      <li><a href="#health-checks" class="nomunge">ヘルスチェック</a></li>
       <li><a href="#private-docker-hub-images-and-using-the-azure-container-registry" class="nomunge">プライベートな Docker Hub イメージと Azure コンテナーレジストリの利用</a></li>
       <li><a href="#using-aci-resource-groups-as-namespaces" class="nomunge">名前空間としての ACI リソースグループの利用</a></li>
       <li><a href="#install-the-docker-compose-cli-on-linux" class="nomunge">Linux における Docker Compose CLI のインストール</a></li>

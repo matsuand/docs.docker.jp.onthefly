@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-03 22:13:46 +0900-->
+<!-- Page generated 2020-11-13 13:43:02 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ログ機能とトラブルシューティング | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ログ機能とトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting, logs, and known issues" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-03T22:13:46+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-13T13:43:02+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/troubleshoot/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-03T22:13:46+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-13T13:43:02+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ログ機能とトラブルシューティング","description":"Troubleshooting, logs, and known issues","url":"https://docs.docker.com/docker-for-mac/troubleshoot/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ログ機能とトラブルシューティング</h1><p><em class="reading-time">読む時間の目安: 16 分</em></p><p>This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.</p>
+                        <section class="section"><h1>ログ機能とトラブルシューティング</h1><p><em class="reading-time">読む時間の目安: 15 分</em></p><p>This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.</p>
 
 <h2 id="troubleshoot">Troubleshoot</h2>
 
@@ -348,11 +348,6 @@ Docker Machine environment in your shell or command window. Unset the
 <code class="language-plaintext highlighter-rouge">DOCKER_HOST</code> environment variable and related variables. If you use bash, use the following command: <code class="language-plaintext highlighter-rouge">unset ${!DOCKER_*}</code></p>
   </li>
   <li>
-    <p>Network connections fail if the macOS Firewall is set to “Block all incoming
-connections”. You can enable the firewall, but <code class="language-plaintext highlighter-rouge">bootpd</code> must be allowed
-incoming connections so that the VM can get an IP address.</p>
-  </li>
-  <li>
     <p>For the <code class="language-plaintext highlighter-rouge">hello-world-nginx</code> example, Docker Desktop must be running to get to
 the web server on <code class="language-plaintext highlighter-rouge">http://localhost/</code>. Make sure that the Docker icon is
 displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
@@ -421,24 +416,6 @@ instances through Unix sockets. For example:</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker-compose</code> 1.7.1 performs DNS unnecessary lookups for
-<code class="language-plaintext highlighter-rouge">localunixsocket.local</code> which can take 5s to timeout on some networks. If
-<code class="language-plaintext highlighter-rouge">docker-compose</code> commands seem very slow but seem to speed up when the network
-is disabled, try appending <code class="language-plaintext highlighter-rouge">127.0.0.1 localunixsocket.local</code> to the file
-<code class="language-plaintext highlighter-rouge">/etc/hosts</code>.  Alternatively you could create a plain-text TCP proxy on
-localhost:1234 using:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:1234:1234 bobrik/socat TCP-LISTEN:1234,fork UNIX-CONNECT:/var/run/docker.sock
-</code></pre></div>    </div>
-
-    <p>and then <code class="language-plaintext highlighter-rouge">export DOCKER_HOST=tcp://localhost:1234</code>.</p>
-  </li>
-</ul>
-
-<p><a name="bind-mounted-dirs"></a></p>
-
-<ul>
-  <li>
     <p>There are a number of issues with the performance of directories bind-mounted
 into containers. In particular, writes of small blocks, and traversals of large
 directories are currently slow. Additionally, containers that perform large
@@ -456,35 +433,12 @@ include:</p>
 dependencies in a <code class="language-plaintext highlighter-rouge">vendor</code> folder<br /><br /></li>
     </ul>
 
-    <p>As a work-around for this behavior, you can put vendor or third-party library
+    <p>As a workaround for this behavior, you can put vendor or third-party library
 directories in Docker volumes, perform temporary file system operations
 outside of bind mounts, and use third-party tools like Unison or <code class="language-plaintext highlighter-rouge">rsync</code> to
 synchronize between container directories and bind-mounted directories. We are
 actively working on performance improvements using a number of different
 techniques.  To learn more, see the <a href="https://github.com/docker/roadmap/issues/7" target="_blank" rel="noopener" class="_">topic on our roadmap</a>.</p>
-  </li>
-  <li>
-    <p>If your system does not have access to an NTP server, then after a hibernate
-the time seen by Docker Desktop may be considerably out of sync with the host.
-Furthermore, the time may slowly drift out of sync during use. To manually
-reset the time after hibernation, run:</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">--privileged</span> alpine hwclock <span class="nt">-s</span>
-</code></pre></div>    </div>
-
-    <p>Or, to resolve both issues, you can add the local clock as a low-priority
-(high stratum) fallback NTP time source for the host. To do this, edit the
-host’s <code class="language-plaintext highlighter-rouge">/etc/ntp-restrict.conf</code> to add:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server 127.127.1.1              # LCL, local clock
-fudge  127.127.1.1 stratum 12   # increase stratum
-</code></pre></div>    </div>
-
-    <p>Then restart the NTP service with:</p>
-
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-<span class="nb">sudo </span>launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-</code></pre></div>    </div>
   </li>
 </ul>
 
