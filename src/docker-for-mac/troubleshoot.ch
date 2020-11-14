@@ -414,6 +414,18 @@ ways, and create reports.
 @z
 
 @x
+### Support for Apple silicon processors
+@y
+### Support for Apple silicon processors
+@z
+
+@x
+At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+@y
+At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
 ### Make sure certificates are set up correctly
 @y
 ### Make sure certificates are set up correctly

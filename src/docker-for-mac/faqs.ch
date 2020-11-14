@@ -106,6 +106,18 @@ You need a Mac that supports hardware virtualization. For more information, see 
 @z
 
 @x
+## Is Docker Desktop compatible with Apple silicon processors?
+@y
+## Is Docker Desktop compatible with Apple silicon processors?
+@z
+
+@x
+At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+@y
+At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+@z
+
+@x
 ## What is an experimental feature?
 @y
 ## What is an experimental feature?
