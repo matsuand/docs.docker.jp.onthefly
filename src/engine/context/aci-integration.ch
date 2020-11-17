@@ -770,33 +770,33 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 
 @x
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`.
 @y
 {% comment %}
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`.
 {% endcomment %}
 ランダムな IP アドレスに対するポート公開に加えて、アプリケーションを FQDN の形式で公開するための DNS ラベル名を指定することができます。
 たとえば`<NAME>.region.azurecontainer.io`という形式です。
-この名前は`docker run`の実行時に`--domain`フラグを用いて設定します。
-あるいは Compose ファイル内の`domain`項目を利用して`docker compose up`により実現します。
+この名前は`docker run`の実行時に`--domainname`フラグを用いて設定します。
+あるいは Compose ファイル内の`domainname`項目を利用して`docker compose up`により実現します。
 @z
 
 @x
 > **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
-> `domain` for several services, the value must be identical.
+> `domainname` for several services, the value must be identical.
 @y
 {% comment %}
 > **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
-> `domain` for several services, the value must be identical.
+> `domainname` for several services, the value must be identical.
 {% endcomment %}
 > **メモ**
 >
-> 複数のサービスに対して`domain`を設定していたとしても、Compose アプリケーションのドメイン設定が行われるのは一度だけです。
+> 複数のサービスに対して`domainname`を設定していたとしても、Compose アプリケーションのドメイン設定が行われるのは一度だけです。
 > したがってそれらは同一でなければなりません。
 @z
 
@@ -1305,22 +1305,22 @@ Docker Compose CLI は、Azure コンテナーインスタンス（ACI）上で�
 @z
 
 @x
-### Prerequisites
+### Install Prerequisites
 @y
 {% comment %}
-### Prerequisites
+### Install Prerequisites
 {% endcomment %}
-{: #prerequisites }
-### 前提条件
+{: #install-prerequisites }
+### インストールの前提条件
 @z
 
 @x
-* [Docker 19.03 or later](https://docs.docker.com/get-docker/)
+- [Docker 19.03 or later](https://docs.docker.com/get-docker/)
 @y
 {% comment %}
-* [Docker 19.03 or later](https://docs.docker.com/get-docker/)
+- [Docker 19.03 or later](https://docs.docker.com/get-docker/)
 {% endcomment %}
-* [Docker 19.03 またはそれ以降](https://docs.docker.com/get-docker/)
+- [Docker 19.03 またはそれ以降](https://docs.docker.com/get-docker/)
 @z
 
 @x

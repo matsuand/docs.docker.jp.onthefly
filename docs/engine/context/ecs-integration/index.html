@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-25 15:10:10 +0900-->
+<!-- Page generated 2020-11-17 18:15:21 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ECS での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="ECS において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-25T15:10:10+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-17T18:15:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/ecs-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-25T15:10:10+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-17T18:15:21+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ECS での Docker コンテナーのデプロイ","description":"ECS において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/ecs-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -112,13 +112,6 @@
   <li>Compose ファイルを使って、Amazon ECS 上の複数コンテナーアプリケーションの開発を単純化できます。</li>
 </ul>
 
-<blockquote class="important">
-  <p><strong>メモ</strong></p>
-
-  <p>Docker Compose CLIは、現在ベータ版として提供されます。
-提供されるコマンドやフラグは、将来のリリースにおいて変更されることがあります。</p>
-</blockquote>
-
 <h2 id="prerequisites">前提条件</h2>
 
 <p>Docker コンテナーを ECS にデプロイするには、以下の条件を満たしていることが必要です。</p>
@@ -143,6 +136,8 @@
 <code class="language-plaintext highlighter-rouge">docker compose up</code> により Compose ファイルを使って Amazon ECS 上の Docker コンテナーをシームレスにデプロイできます。
 以下の節では Amazon ECS 上において Docker コンテナーをデプロイする手順を説明します。</p>
 
+<h2 id="run-an-application-on-ecs">ECS 上でのアプリケーション実行</h2>
+
 <h3 id="create-aws-context">AWS コンテキストの生成</h3>
 
 <p><code class="language-plaintext highlighter-rouge">docker context create ecs myecscontext</code> コマンドを実行して AWS コンテキストを生成します。
@@ -156,7 +151,7 @@ myecscontext *
 default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock     swarm
 </span></code></pre></div></div>
 
-<h2 id="run-compose-applications">Compose アプリケーションの実行</h2>
+<h2 id="run-a-compose-application">Compose アプリケーションの実行</h2>
 
 <p>Compose ファイルに定義したマルチコンテナーによるアプリケーションを、Amazon ECS に対してデプロイし管理するためには、<code class="language-plaintext highlighter-rouge">docker compose</code> コマンドを実行します。
 これを行うためには以下のことが必要です。</p>
@@ -183,6 +178,44 @@ Compose ファイルを直接<code class="language-plaintext highlighter-rouge">
   </li>
 </ul>
 
+<h2 id="rolling-update">ローリングアップデート</h2>
+
+<p>本番環境の実行を妨げることなくアプリケーションのアップデートを行うには、更新された Compose プロジェクト上において<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行するだけです。
+ECS サービスはローリングアップデート設定を含めて生成されます。
+Compose ファイルを修正した上で<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
+この置き換え処理は、サービスの <a href="https://docs.docker.com/compose/compose-file/#update_config"><code class="language-plaintext highlighter-rouge">deploy.update_config</code></a>  設定によって定められるローリングアップデート設定に従います。</p>
+
+<p>AWS ECS ではパーセントベースモデル（percent-based model）を採用して、ローリングアップデート時に起動または停止するコンテナー数を定義しています。
+Docker Compose CLI では項目<code class="language-plaintext highlighter-rouge">prallelism</code>または<code class="language-plaintext highlighter-rouge">replicas</code>に従って、ローリングアップデート設定を算出しています。
+ローリングアップデートの設定を、項目<code class="language-plaintext highlighter-rouge">x-aws-min_percent</code>や<code class="language-plaintext highlighter-rouge">x-aws-max_percent</code>を使って設定したい場合があります。
+<code class="language-plaintext highlighter-rouge">x-aws-min_percent</code>はサービスに対して、起動させるコンテナーの最小パーセントを設定します。
+<code class="language-plaintext highlighter-rouge">x-aws-max_percent</code>は、それまでのバージョンのコンテナーを削除する前に、追加で起動するコンテナーの最大パーセントを設定します。</p>
+
+<p>デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
+またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。</p>
+
+<h2 id="view-application-logs">アプリケーションログの確認</h2>
+
+<p>Docker Compose CLI では、コンテナーに対して AWS CloudWatch ログサービスを設定します。
+Compose アプリケーションログの確認は、デフォルトではローカルデプロイを確認することと同様に行うことができます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>アプリケーションログをカレントなワーキングディレクトリに取り出します。
+<span class="go">docker compose logs
+
+</span><span class="gp">#</span><span class="w"> </span>Compose プロジェクト名を指定します。
+<span class="go">docker compose logs --project-name PROJECT
+
+</span><span class="gp">#</span><span class="w"> </span>Compose ファイルを指定します。
+<span class="go">docker compose logs --file /path/to/docker-compose.yaml
+</span></code></pre></div></div>
+
+<p>アプリケーションにおいて、ロググループ<code class="language-plaintext highlighter-rouge">docker-compose/&lt;アプリケーション名&gt;</code>が生成され、またアプリケーション内の各サービスとコンテナーにおいては、ログストリーム<code class="language-plaintext highlighter-rouge">&lt;アプリケーション名&gt;/&lt;サービス名&gt;/&lt;コンテナーID&gt;</code>が生成されます。</p>
+
+<p>AWS CloudWatch ログに対しては Compose ファイル内の拡張項目<code class="language-plaintext highlighter-rouge">x-aws-logs_retention</code>を使って、イベントの保存日数を調整することができます。
+デフォルトは無期限に保存します。</p>
+
+<p>標準的な Compose ファイルの項目<code class="language-plaintext highlighter-rouge">logging.driver_opts</code>を使えば、コンテナーに対して<code class="language-plaintext highlighter-rouge">awslogs</code>ドライバーのパラメーターを指定することができます。</p>
+
 <h2 id="private-docker-images">プライベートな Docker イメージ</h2>
 
 <p>Docker Compose CLI では自動的に認証が設定されます。
@@ -198,12 +231,11 @@ Compose ファイルを直接<code class="language-plaintext highlighter-rouge">
 
 <p>この ARN を生成したら Compose ファイル内において、カスタム拡張 <code class="language-plaintext highlighter-rouge">x-aws-pull_credentials</code> を利用して、そのサービスに対する Docker イメージ URI を指定することができます。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">version: 3.8
-services:
-  worker:
-    image: mycompany/privateimage
-    x-aws-pull_credentials: "arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken"
-</span></code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">worker</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mycompany/privateimage</span>
+    <span class="na">x-aws-pull_credentials</span><span class="pi">:</span> <span class="s2">"</span><span class="s">arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken"</span>
+</code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong></p>
@@ -232,17 +264,39 @@ services:
 これは <code class="language-plaintext highlighter-rouge">&lt;サービス&gt;.&lt;composeプロジェクト名&gt;.local</code> という形の完全修飾ドメイン名として表わされています。
 サービスが、依存するサービスを引き出す際には、この完全修飾ドメイン名を利用するか、あるいは短いサービス名（docker-compose において用いられるもの）が利用されます。</p>
 
-<h3 id="volumes">ボリューム</h3>
+<h3 id="依存サービスの起動時間と-dns-名前解決">依存サービスの起動時間と DNS 名前解決</h3>
+
+<p>Compose ファイルがデプロイされると ECS 上においてサービスが同タイミングでスケジューリングされます。
+AWS Cloud Map では、サービスドメイン名を解決できるようにするため、DNS サービスの初期遅延処理を行っています。
+したがってアプリケーションコードには、その遅延に対応するような調整が必要になります。
+つまり依存サービスが準備状態となるのを待つか、Docker イメージへエントリーポイントとして、ウェイトを行うスクリプトを追加するなどの対応を行います。
+このことは <a href="/docs.docker.jp.onthefly/compose/startup-order/">起動順の制御</a> において説明しています。</p>
+
+<p>それとは別に Compose ファイルにおける <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on" target="_blank" rel="noopener" class="_">depends_on</a> 機能を利用することができます。
+これを利用すると依存するサービスがまず生成されることになり、アプリケーションのデプロイは生成開始前から稼動するまで待機します。</p>
+
+<h2 id="volumes">ボリューム</h2>
 
 <p>ECS 統合では Amazon Elastic File System (Amazon EFS) をベースとしたボリューム管理をサポートしています。
 ECS 統合において Compose ファイルに<code class="language-plaintext highlighter-rouge">volume</code>を宣言する際には、CloudFormation テンプレート内に EFS ファイルシステムの生成を定義します。
 <code class="language-plaintext highlighter-rouge">Retain</code>（維持）ポリシーを利用すれば、アプリケーションのシャットダウン時にデータが削除されることはありません。
 同一のアプリケーション（同一のプロジェクト名）が再度デプロイされると、ファイルシステムが再度アタッチされて、それまで開発者が行っていた docker-compose による作業を再開できます。</p>
 
+<p>ボリュームを利用した基本的な Compose サービスは、以下のように宣言します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mydata:/some/container/path</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">mydata</span><span class="pi">:</span>
+</code></pre></div></div>
+
 <p>必要であれば、ファイルシステムの初期状態は<code class="language-plaintext highlighter-rouge">driver-opts</code>を用いて変更することができます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
-  <span class="na">my-data</span><span class="pi">:</span> 
+  <span class="na">my-data</span><span class="pi">:</span>
     <span class="na">driver_opts</span><span class="pi">:</span>
       <span class="c1"># Filesystem configuration</span>
       <span class="na">backup_policy</span><span class="pi">:</span> <span class="s">ENABLED</span>
@@ -252,13 +306,13 @@ ECS 統合において Compose ファイルに<code class="language-plaintext hi
       <span class="na">provisioned_throughput</span><span class="pi">:</span> <span class="m">1024</span>
 </code></pre></div></div>
 
-<p>AWS 上において<code class="language-plaintext highlighter-rouge">docker compose</code>を実行して生成されるファイルシステムは、<code class="language-plaintext highlighter-rouge">docker volume ls</code>によって一覧確認ができます。
+<p>AWS 上において<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行して生成されるファイルシステムは、<code class="language-plaintext highlighter-rouge">docker volume ls</code>によって一覧確認ができます。
 また<code class="language-plaintext highlighter-rouge">docker volume rm &lt;ファイルシステムID&gt;</code>によって削除することができます。</p>
 
 <p>EFS 上にすでにデータを保存している場合や、別の Compose スタックによって生成されたファイルシステムを利用したい場合には、既存のファイルシステムを利用することもできます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
-  <span class="na">my-data</span><span class="pi">:</span> 
+  <span class="na">my-data</span><span class="pi">:</span>
     <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">name</span><span class="pi">:</span> <span class="s">fs-123abcd</span>
 </code></pre></div></div>
@@ -269,18 +323,19 @@ Docker イメージにおいては、コンテナー内で稼動するプロセ�
 このような衝突を回避するためには、ボリュームにアクセスする際に利用する<code class="language-plaintext highlighter-rouge">uid</code>と<code class="language-plaintext highlighter-rouge">gid</code>を設定します。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
-  <span class="na">my-data</span><span class="pi">:</span> 
+  <span class="na">my-data</span><span class="pi">:</span>
     <span class="na">driver_opts</span><span class="pi">:</span>
       <span class="c1"># Access point configuration</span>
       <span class="na">uid</span><span class="pi">:</span> <span class="m">0</span>
       <span class="na">gid</span><span class="pi">:</span> <span class="m">0</span>
 </code></pre></div></div>
 
-<h3 id="secrets">Secrets</h3>
+<h2 id="secrets">Secrets</h2>
 
 <p>Docker モデルを使って ECS サービスに Secret 情報を受け渡すことにより、<code class="language-plaintext highlighter-rouge">/run/secrets</code>配下にあるファイルを機密データとして結びつけることができます。
 Compose ファイルに Secret 情報を宣言している場合、ECS 上へのアプリケーションのデプロイにあたって、デプロイの一部としてその情報が生成されます。
 Compose ファイル内にて既存の Secret 情報を<code class="language-plaintext highlighter-rouge">external: true</code>として参照している場合、Secret 名として ECS Secrets Manager の 完全リソース名を使うことができます。</p>
+
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
   <span class="na">webapp</span><span class="pi">:</span>
     <span class="na">image</span><span class="pi">:</span> <span class="s">...</span>
@@ -314,46 +369,11 @@ Docker Compose CLI にて後者の方法を利用する場合には、カスタ�
 <p>このようにするとキー <code class="language-plaintext highlighter-rouge">bar</code> に対する機密データは、サービスの実行時に <code class="language-plaintext highlighter-rouge">/run/secrets/foo/bar</code> というプレーンなテキストファイルとしてアクセスできます。
 特別な値として <code class="language-plaintext highlighter-rouge">*</code> を用いると、コンテナー内のキーすべてを得ることができます。</p>
 
-<h3 id="logging">ログ処理</h3>
+<h2 id="auto-scaling">自動スケーリング</h2>
 
-<p>Docker Compose CLI では、コンテナーに対して AWS CloudWatch ログサービスを設定します。
-アプリケーションにおいて、ロググループ<code class="language-plaintext highlighter-rouge">docker-compose/&lt;アプリケーション名&gt;</code>が生成され、またアプリケーション内の各サービスとコンテナーにおいては、ログストリーム<code class="language-plaintext highlighter-rouge">&lt;アプリケーション名&gt;/&lt;サービス名&gt;/&lt;コンテナーID&gt;</code>が生成されます。</p>
-
-<p>AWS CloudWatch ログに対しては Compose ファイル内の拡張項目<code class="language-plaintext highlighter-rouge">x-aws-logs_retention</code>を使って、イベントの保存日数を調整することができます。
-デフォルトは無期限に保存します。</p>
-
-<p>標準的な Compose ファイルの項目<code class="language-plaintext highlighter-rouge">logging.driver_opts</code>を使えば、コンテナーに対して<code class="language-plaintext highlighter-rouge">awslogs</code>ドライバーのパラメーターを指定することができます。</p>
-
-<h3 id="dependent-service-startup-time-and-dns-resolution">依存サービスの起動タイミングと DNS 名前解決</h3>
-
-<p>ECS 上におけるサービスは、Compose ファイルがデプロイされたと同時にスケジュールされます。
-AWS Cloud Map は DNS サービスに対して初期の待機時間を導入していて、デプロイされたサービスのドメイン名をDNS サービスが解決できるまで待機します。
-このため、開発コードにはこの待機時間への対応が必要であり、依存サービスが準備状態になるまで待つ、あるいはエントリーポイントにウェイトを行うスクリプトを Docker イメージに追加するなどして、調整を行う必要があります。
-このことは <a href="/docs.docker.jp.onthefly/compose/startup-order/">Compose における起動、停止順の制御</a> で述べています。</p>
-
-<p>あるいは Compose ファイルにおける <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on" target="_blank" rel="noopener" class="_">depends_on</a> の機能を利用することもできます。
-これを利用すると、依存サービスがまず初めに生成され、これが起動されるのを待って、アプリケーションのデプロイが行われるようになります。</p>
-
-<h3 id="rolling-update">ローリングアップデート</h3>
-
-<p>ECS サービスはローリングアップデート設定を含めて生成されます。
-Compose ファイルを修正した上で<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
-この置き換え処理は、サービスの <a href="https://docs.docker.com/compose/compose-file/#update_config"><code class="language-plaintext highlighter-rouge">deploy.update_config</code></a>  設定によって定められるローリングアップデート設定に従います。</p>
-
-<p>AWS ECS ではパーセントベースモデル（percent-based model）を採用して、ローリングアップデート時に起動または停止するコンテナー数を定義しています。
-Docker Compose CLI では項目<code class="language-plaintext highlighter-rouge">prallelism</code>または<code class="language-plaintext highlighter-rouge">replicas</code>に従って、ローリングアップデート設定を算出しています。
-ローリングアップデートの設定を、項目<code class="language-plaintext highlighter-rouge">x-aws-min_percent</code>や<code class="language-plaintext highlighter-rouge">x-aws-max_percent</code>を使って設定したい場合があります。
-<code class="language-plaintext highlighter-rouge">x-aws-min_percent</code>はサービスに対して、起動させるコンテナーの最小パーセントを設定します。
-<code class="language-plaintext highlighter-rouge">x-aws-max_percent</code>は、それまでのバージョンのコンテナーを削除する前に、追加で起動するコンテナーの最大パーセントを設定します。</p>
-
-<p>デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
-またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。</p>
-
-<h3 id="auto-scaling">Auto scaling</h3>
-
-<p>The Compose file model does not define any attributes to declare auto-scaling conditions.
-Therefore, we rely on <code class="language-plaintext highlighter-rouge">x-aws-autoscaling</code> custom extension to define the auto-scaling range, as
-well as cpu <em>or</em> memory to define target metric, expressed as resource usage percent.</p>
+<p>Compose ファイルモデルでは、自動スケーリングの条件を定める属性定義はありません。
+したがってカスタム拡張機能<code class="language-plaintext highlighter-rouge">x-aws-autoscaling</code>を利用して自動スケーリングの範囲を定義することになります。
+ターゲットメトリックの定義において、リソース使用率として表現される CPU やメモリを定めることと同様です。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
   <span class="na">foo</span><span class="pi">:</span>
@@ -361,11 +381,11 @@ well as cpu <em>or</em> memory to define target metric, expressed as resource us
       <span class="na">x-aws-autoscaling</span><span class="pi">:</span>
         <span class="na">min</span><span class="pi">:</span> <span class="m">1</span>
         <span class="na">max</span><span class="pi">:</span> <span class="m">10</span> <span class="c1">#required</span>
-        <span class="na">cpu</span><span class="pi">:</span> <span class="s">75</span> 
+        <span class="na">cpu</span><span class="pi">:</span> <span class="m">75</span>
         <span class="c1"># mem: - mutualy exlusive with cpu</span>
 </code></pre></div></div>
 
-<h3 id="iam-roles">IAM ロール</h3>
+<h2 id="iam-roles">IAM ロール</h2>
 
 <p>ECS タスクは、AWS 管理ポリシー<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html"><code class="language-plaintext highlighter-rouge">AmazonECSTaskExecutionRolePolicy</code></a> と <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html"><code class="language-plaintext highlighter-rouge">AmazonEC2ContainerRegistryReadOnly</code></a> へのアクセスが可能な、専用の IAM ロールによって実行されます。
 さらにサービスが Secret を利用している場合、IAM ロールは追加の権限によって AWS Secret マネージャーから Secret の読み込みと復号化を行います。</p>
@@ -458,14 +478,7 @@ AWS では資格情報を取得するメカニズムが用意されていて、S
 
 <p>Docker Compose CLI は、ECS 上のコンテナー実行と管理をサポートします。</p>
 
-<blockquote class="important">
-  <p><strong>メモ</strong></p>
-
-  <p><strong>Docker Compose CLI はベータ版です</strong>。
-インストール処理、コマンド、フラグは、将来のリリースにおいて変更されることがあります。</p>
-</blockquote>
-
-<h3 id="prerequisites">前提条件</h3>
+<h3 id="install-prerequisites">インストールの前提条件</h3>
 
 <ul>
   <li><a href="https://docs.docker.com/get-docker/">Docker 19.03 またはそれ以降</a></li>
@@ -526,9 +539,16 @@ AWS では資格情報を取得するメカニズムが用意されていて、S
   <li><a href="#overview" class="nomunge">概要</a>
     <ul>
       <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
-      <li><a href="#run-compose-applications" class="nomunge">Compose アプリケーションの実行</a></li>
+      <li><a href="#run-an-application-on-ecs" class="nomunge">ECS 上でのアプリケーション実行</a></li>
+      <li><a href="#run-a-compose-application" class="nomunge">Compose アプリケーションの実行</a></li>
+      <li><a href="#rolling-update" class="nomunge">ローリングアップデート</a></li>
+      <li><a href="#view-application-logs" class="nomunge">アプリケーションログの確認</a></li>
       <li><a href="#private-docker-images" class="nomunge">プライベートな Docker イメージ</a></li>
       <li><a href="#service-discovery" class="nomunge">サービスの検出</a></li>
+      <li><a href="#volumes" class="nomunge">ボリューム</a></li>
+      <li><a href="#secrets" class="nomunge">Secrets</a></li>
+      <li><a href="#auto-scaling" class="nomunge">自動スケーリング</a></li>
+      <li><a href="#iam-roles" class="nomunge">IAM ロール</a></li>
       <li><a href="#tuning-the-cloudformation-template" class="nomunge">CloudFormation テンプレートの調整</a></li>
       <li><a href="#using-existing-aws-network-resources" class="nomunge">既存の AWS ネットワークリソースの利用</a></li>
       <li><a href="#local-simulation" class="nomunge">ローカルシミュレーション</a></li>

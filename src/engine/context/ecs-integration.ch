@@ -133,6 +133,16 @@ Docker は、単にローカルのマルチコンテナーを実行するだけ�
 @z
 
 @x
+## Run an application on ECS
+@y
+{% comment %}
+## Run an application on ECS
+{% endcomment %}
+{: #run-an-application-on-ecs }
+## ECS 上でのアプリケーション実行
+@z
+
+@x
 ### Create AWS context
 @y
 {% comment %}
@@ -185,12 +195,12 @@ default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock  
 @z
 
 @x
-## Run Compose applications
+### Run a Compose application
 @y
 {% comment %}
-## Run Compose applications
+### Run a Compose application
 {% endcomment %}
-{: #run-compose-applications }
+{: #run-a-compose-application }
 ## Compose アプリケーションの実行
 @z
 
@@ -278,6 +288,169 @@ using the `docker compose logs` command.
 @z
 
 @x
+## Rolling update
+@y
+{% comment %}
+## Rolling update
+{% endcomment %}
+{: #rolling-update }
+## ローリングアップデート
+@z
+
+@x
+To update your application without interrupting production flow you can simply
+use `docker compose up` on the updated Compose project.
+Your ECS services are created with rolling update configuration. As you run
+`docker compose up` with a modified Compose file, the stack will be
+updated to reflect changes, and if required, some services will be replaced.
+This replacement process will follow the rolling-update configuration set by
+your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+configuration.
+@y
+{% comment %}
+To update your application without interrupting production flow you can simply
+use `docker compose up` on the updated Compose project.
+Your ECS services are created with rolling update configuration. As you run
+`docker compose up` with a modified Compose file, the stack will be
+updated to reflect changes, and if required, some services will be replaced.
+This replacement process will follow the rolling-update configuration set by
+your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+configuration.
+{% endcomment %}
+本番環境の実行を妨げることなくアプリケーションのアップデートを行うには、更新された Compose プロジェクト上において`docker compose up`を実行するだけです。
+ECS サービスはローリングアップデート設定を含めて生成されます。
+Compose ファイルを修正した上で`docker compose up`を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
+この置き換え処理は、サービスの [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)  設定によって定められるローリングアップデート設定に従います。
+@z
+
+@x
+AWS ECS uses a percent-based model to define the number of containers to be
+run or shut down during a rolling update. The Docker Compose CLI computes
+rolling update configuration according to the `parallelism` and `replicas`
+fields. However, you might prefer to directly configure a rolling update
+using the extension fields `x-aws-min_percent` and `x-aws-max_percent`.
+The former sets the minimum percent of containers to run for service, and the
+latter sets the maximum percent of additional containers to start before
+previous versions are removed.
+@y
+{% comment %}
+AWS ECS uses a percent-based model to define the number of containers to be
+run or shut down during a rolling update. The Docker Compose CLI computes
+rolling update configuration according to the `parallelism` and `replicas`
+fields. However, you might prefer to directly configure a rolling update
+using the extension fields `x-aws-min_percent` and `x-aws-max_percent`.
+The former sets the minimum percent of containers to run for service, and the
+latter sets the maximum percent of additional containers to start before
+previous versions are removed.
+{% endcomment %}
+AWS ECS ではパーセントベースモデル（percent-based model）を採用して、ローリングアップデート時に起動または停止するコンテナー数を定義しています。
+Docker Compose CLI では項目`prallelism`または`replicas`に従って、ローリングアップデート設定を算出しています。
+ローリングアップデートの設定を、項目`x-aws-min_percent`や`x-aws-max_percent`を使って設定したい場合があります。
+`x-aws-min_percent`はサービスに対して、起動させるコンテナーの最小パーセントを設定します。
+`x-aws-max_percent`は、それまでのバージョンのコンテナーを削除する前に、追加で起動するコンテナーの最大パーセントを設定します。
+@z
+
+@x
+By default, the ECS rolling update is set to run twice the number of
+containers for a service (200%), and has the ability to shut down 100%
+containers during the update.
+@y
+{% comment %}
+By default, the ECS rolling update is set to run twice the number of
+containers for a service (200%), and has the ability to shut down 100%
+containers during the update.
+{% endcomment %}
+デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
+またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。
+@z
+
+@x
+## View application logs
+@y
+{% comment %}
+## View application logs
+{% endcomment %}
+{: #view-application-logs }
+## アプリケーションログの確認
+@z
+
+@x
+The Docker Compose CLI configures AWS CloudWatch Logs service for your
+containers.
+By default you can see logs of your compose application the same way you check logs of local deployments:
+@y
+{% comment %}
+The Docker Compose CLI configures AWS CloudWatch Logs service for your
+containers.
+By default you can see logs of your compose application the same way you check logs of local deployments:
+{% endcomment %}
+Docker Compose CLI では、コンテナーに対して AWS CloudWatch ログサービスを設定します。
+Compose アプリケーションログの確認は、デフォルトではローカルデプロイを確認することと同様に行うことができます。
+@z
+
+@x
+```console
+# fetch logs for application in current working directory
+docker compose logs
+
+# specify compose project name
+docker compose logs --project-name PROJECT
+
+# specify compose file
+docker compose logs --file /path/to/docker-compose.yaml
+```
+@y
+```console
+# アプリケーションログをカレントなワーキングディレクトリに取り出します。
+docker compose logs
+
+# Compose プロジェクト名を指定します。
+docker compose logs --project-name PROJECT
+
+# Compose ファイルを指定します。
+docker compose logs --file /path/to/docker-compose.yaml
+```
+@z
+
+@x
+A log group is created for the application as `docker-compose/<application_name>`,
+and log streams are created for each service and container in your application
+as `<application_name>/<service_name>/<container_ID>`.
+@y
+{% comment %}
+A log group is created for the application as `docker-compose/<application_name>`,
+and log streams are created for each service and container in your application
+as `<application_name>/<service_name>/<container_ID>`.
+{% endcomment %}
+アプリケーションにおいて、ロググループ`docker-compose/<アプリケーション名>`が生成され、またアプリケーション内の各サービスとコンテナーにおいては、ログストリーム`<アプリケーション名>/<サービス名>/<コンテナーID>`が生成されます。
+@z
+
+@x
+You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention`
+in your Compose file to set the number of retention days for log events. The
+default behavior is to keep logs forever.
+@y
+{% comment %}
+You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention`
+in your Compose file to set the number of retention days for log events. The
+default behavior is to keep logs forever.
+{% endcomment %}
+AWS CloudWatch ログに対しては Compose ファイル内の拡張項目`x-aws-logs_retention`を使って、イベントの保存日数を調整することができます。
+デフォルトは無期限に保存します。
+@z
+
+@x
+You can also pass `awslogs` driver parameters to your container as standard
+Compose file `logging.driver_opts` elements.
+@y
+{% comment %}
+You can also pass `awslogs` driver parameters to your container as standard
+Compose file `logging.driver_opts` elements.
+{% endcomment %}
+標準的な Compose ファイルの項目`logging.driver_opts`を使えば、コンテナーに対して`awslogs`ドライバーのパラメーターを指定することができます。
+@z
+
+@x
 ## Private Docker images
 @y
 {% comment %}
@@ -330,16 +503,14 @@ Once created, you can use this ARN in you Compose file using using `x-aws-pull_c
 @z
 
 @x
-```console
-version: 3.8
+```yaml
 services:
   worker:
     image: mycompany/privateimage
     x-aws-pull_credentials: "arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken"
 ```
 @y
-```console
-version: 3.8
+```yaml
 services:
   worker:
     image: mycompany/privateimage
@@ -398,10 +569,10 @@ Service-to-service communication is implemented by the [Security Groups](https:/
 @z
 
 @x
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose). 
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose).
 @y
 {% comment %}
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose). 
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose).
 {% endcomment %}
 Docker Compose CLI においてアプリケーションデプロイを行うサービスは、[AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} 上に登録されます。
 これは `<サービス>.<composeプロジェクト名>.local` という形の完全修飾ドメイン名として表わされています。
@@ -409,13 +580,45 @@ Docker Compose CLI においてアプリケーションデプロイを行うサ�
 @z
 
 @x
-### Volumes
+### Dependent service startup time and DNS resolution
 @y
 {% comment %}
-### Volumes
+### Dependent service startup time and DNS resolution
+{% endcomment %}
+### 依存サービスの起動時間と DNS 名前解決
+@z
+
+@x
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+@y
+{% comment %}
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+{% endcomment %}
+Compose ファイルがデプロイされると ECS 上においてサービスが同タイミングでスケジューリングされます。
+AWS Cloud Map では、サービスドメイン名を解決できるようにするため、DNS サービスの初期遅延処理を行っています。
+したがってアプリケーションコードには、その遅延に対応するような調整が必要になります。
+つまり依存サービスが準備状態となるのを待つか、Docker イメージへエントリーポイントとして、ウェイトを行うスクリプトを追加するなどの対応を行います。
+このことは [起動順の制御]({{ site.baseurl }}/compose/startup-order/) において説明しています。
+@z
+
+@x
+Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+@y
+{% comment %}
+Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+{% endcomment %}
+それとは別に Compose ファイルにおける [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} 機能を利用することができます。
+これを利用すると依存するサービスがまず生成されることになり、アプリケーションのデプロイは生成開始前から稼動するまで待機します。
+@z
+
+@x
+## Volumes
+@y
+{% comment %}
+## Volumes
 {% endcomment %}
 {: #volumes }
-### ボリューム
+## ボリューム
 @z
 
 @x
@@ -441,9 +644,44 @@ ECS 統合において Compose ファイルに`volume`を宣言する際には�
 @z
 
 @x
+A basic compose service using a volume can be declared like this:
+@y
+{% comment %}
+A basic compose service using a volume can be declared like this:
+{% endcomment %}
+ボリュームを利用した基本的な Compose サービスは、以下のように宣言します。
+@z
+
+@x
+```yaml
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - mydata:/some/container/path
+volumes:
+  mydata:
+```
+@y
+```yaml
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - mydata:/some/container/path
+volumes:
+  mydata:
+```
+@z
+
+@x
+With no specific volume options, the volume still must be declared in the `volumes`section for
+the compose file to be valid (in the above example the empty `mydata:` entry)
 If required, the initial file system can be customized using `driver-opts`:
 @y
 {% comment %}
+With no specific volume options, the volume still must be declared in the `volumes`section for
+the compose file to be valid (in the above example the empty `mydata:` entry)
 If required, the initial file system can be customized using `driver-opts`:
 {% endcomment %}
 必要であれば、ファイルシステムの初期状態は`driver-opts`を用いて変更することができます。
@@ -452,7 +690,7 @@ If required, the initial file system can be customized using `driver-opts`:
 @x
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     driver_opts:
       # Filesystem configuration
       backup_policy: ENABLED
@@ -464,7 +702,7 @@ volumes:
 @y
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     driver_opts:
       # Filesystem configuration
       backup_policy: ENABLED
@@ -476,14 +714,14 @@ volumes:
 @z
 
 @x
-File systems created by executing `docker compose` on AWS can be listed using 
+File systems created by executing `docker compose up` on AWS can be listed using
 `docker volume ls` and removed with `docker volume rm <filesystemID>`.
 @y
 {% comment %}
-File systems created by executing `docker compose` on AWS can be listed using 
+File systems created by executing `docker compose up` on AWS can be listed using
 `docker volume ls` and removed with `docker volume rm <filesystemID>`.
 {% endcomment %}
-AWS 上において`docker compose`を実行して生成されるファイルシステムは、`docker volume ls`によって一覧確認ができます。
+AWS 上において`docker compose up`を実行して生成されるファイルシステムは、`docker volume ls`によって一覧確認ができます。
 また`docker volume rm <ファイルシステムID>`によって削除することができます。
 @z
 
@@ -501,28 +739,28 @@ EFS 上にすでにデータを保存している場合や、別の Compose ス�
 @x
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     external: true
     name: fs-123abcd
 ```
 @y
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     external: true
     name: fs-123abcd
 ```
 @z
 
 @x
-Accessing a volume from a container can introduce POSIX user ID 
+Accessing a volume from a container can introduce POSIX user ID
 permission issues, as Docker images can define arbitrary user ID / group ID for the
 process to run inside a container. However, the same `uid:gid` will have to match
 POSIX permissions on the file system. To work around the possible conflict, you can set the volume
 `uid` and `gid` to be used when accessing a volume:
 @y
 {% comment %}
-Accessing a volume from a container can introduce POSIX user ID 
+Accessing a volume from a container can introduce POSIX user ID
 permission issues, as Docker images can define arbitrary user ID / group ID for the
 process to run inside a container. However, the same `uid:gid` will have to match
 POSIX permissions on the file system. To work around the possible conflict, you can set the volume
@@ -537,7 +775,7 @@ Docker イメージにおいては、コンテナー内で稼動するプロセ�
 @x
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     driver_opts:
       # Access point configuration
       uid: 0
@@ -546,7 +784,7 @@ volumes:
 @y
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     driver_opts:
       # Access point configuration
       uid: 0
@@ -555,9 +793,9 @@ volumes:
 @z
 
 @x
-### Secrets
+## Secrets
 @y
-### Secrets
+## Secrets
 @z
 
 @x
@@ -679,166 +917,13 @@ value `*` to get all keys bound in your container.
 @z
 
 @x
-### Logging
+## Auto scaling
 @y
 {% comment %}
-### Logging
+## Auto scaling
 {% endcomment %}
-{: #logging }
-### ログ処理
-@z
-
-@x
-The Docker Compose CLI configures AWS CloudWatch Logs service for your
-containers.
-A log group is created for the application as `docker-compose/<application_name>`,
-and log streams are created for each service and container in your application
-as `<application_name>/<service_name>/<container_ID>`.
-@y
-{% comment %}
-The Docker Compose CLI configures AWS CloudWatch Logs service for your
-containers.
-A log group is created for the application as `docker-compose/<application_name>`,
-and log streams are created for each service and container in your application
-as `<application_name>/<service_name>/<container_ID>`.
-{% endcomment %}
-Docker Compose CLI では、コンテナーに対して AWS CloudWatch ログサービスを設定します。
-アプリケーションにおいて、ロググループ`docker-compose/<アプリケーション名>`が生成され、またアプリケーション内の各サービスとコンテナーにおいては、ログストリーム`<アプリケーション名>/<サービス名>/<コンテナーID>`が生成されます。
-@z
-
-@x
-You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention`
-in your Compose file to set the number of retention days for log events. The
-default behavior is to keep logs forever.
-@y
-{% comment %}
-You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention`
-in your Compose file to set the number of retention days for log events. The
-default behavior is to keep logs forever.
-{% endcomment %}
-AWS CloudWatch ログに対しては Compose ファイル内の拡張項目`x-aws-logs_retention`を使って、イベントの保存日数を調整することができます。
-デフォルトは無期限に保存します。
-@z
-
-@x
-You can also pass `awslogs` driver parameters to your container as standard
-Compose file `logging.driver_opts` elements.
-@y
-{% comment %}
-You can also pass `awslogs` driver parameters to your container as standard
-Compose file `logging.driver_opts` elements.
-{% endcomment %}
-標準的な Compose ファイルの項目`logging.driver_opts`を使えば、コンテナーに対して`awslogs`ドライバーのパラメーターを指定することができます。
-@z
-
-@x
-### Dependent service startup time and DNS resolution
-@y
-{% comment %}
-### Dependent service startup time and DNS resolution
-{% endcomment %}
-{: #dependent-service-startup-time-and-dns-resolution }
-### 依存サービスの起動タイミングと DNS 名前解決
-@z
-
-@x
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
-@y
-{% comment %}
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
-{% endcomment %}
-ECS 上におけるサービスは、Compose ファイルがデプロイされたと同時にスケジュールされます。
-AWS Cloud Map は DNS サービスに対して初期の待機時間を導入していて、デプロイされたサービスのドメイン名をDNS サービスが解決できるまで待機します。
-このため、開発コードにはこの待機時間への対応が必要であり、依存サービスが準備状態になるまで待つ、あるいはエントリーポイントにウェイトを行うスクリプトを Docker イメージに追加するなどして、調整を行う必要があります。
-このことは [Compose における起動、停止順の制御]({{ site.baseurl }}/compose/startup-order/) で述べています。
-@z
-
-@x
-Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
-@y
-{% comment %}
-Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
-{% endcomment %}
-あるいは Compose ファイルにおける [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} の機能を利用することもできます。
-これを利用すると、依存サービスがまず初めに生成され、これが起動されるのを待って、アプリケーションのデプロイが行われるようになります。
-@z
-
-@x
-### Rolling update
-@y
-{% comment %}
-### Rolling update
-{% endcomment %}
-{: #rolling-update }
-### ローリングアップデート
-@z
-
-@x
-Your ECS services are created with rolling update configuration. As you run
-`docker compose up` with a modified Compose file, the stack will be
-updated to reflect changes, and if required, some services will be replaced.
-This replacement process will follow the rolling-update configuration set by
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
-configuration.
-@y
-{% comment %}
-Your ECS services are created with rolling update configuration. As you run
-`docker compose up` with a modified Compose file, the stack will be
-updated to reflect changes, and if required, some services will be replaced.
-This replacement process will follow the rolling-update configuration set by
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
-configuration.
-{% endcomment %}
-ECS サービスはローリングアップデート設定を含めて生成されます。
-Compose ファイルを修正した上で`docker compose up`を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
-この置き換え処理は、サービスの [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)  設定によって定められるローリングアップデート設定に従います。
-@z
-
-@x
-AWS ECS uses a percent-based model to define the number of containers to be
-run or shut down during a rolling update. The Docker Compose CLI computes
-rolling update configuration according to the `parallelism` and `replicas`
-fields. However, you might prefer to directly configure a rolling update
-using the extension fields `x-aws-min_percent` and `x-aws-max_percent`.
-The former sets the minimum percent of containers to run for service, and the
-latter sets the maximum percent of additional containers to start before
-previous versions are removed.
-@y
-{% comment %}
-AWS ECS uses a percent-based model to define the number of containers to be
-run or shut down during a rolling update. The Docker Compose CLI computes
-rolling update configuration according to the `parallelism` and `replicas`
-fields. However, you might prefer to directly configure a rolling update
-using the extension fields `x-aws-min_percent` and `x-aws-max_percent`.
-The former sets the minimum percent of containers to run for service, and the
-latter sets the maximum percent of additional containers to start before
-previous versions are removed.
-{% endcomment %}
-AWS ECS ではパーセントベースモデル（percent-based model）を採用して、ローリングアップデート時に起動または停止するコンテナー数を定義しています。
-Docker Compose CLI では項目`prallelism`または`replicas`に従って、ローリングアップデート設定を算出しています。
-ローリングアップデートの設定を、項目`x-aws-min_percent`や`x-aws-max_percent`を使って設定したい場合があります。
-`x-aws-min_percent`はサービスに対して、起動させるコンテナーの最小パーセントを設定します。
-`x-aws-max_percent`は、それまでのバージョンのコンテナーを削除する前に、追加で起動するコンテナーの最大パーセントを設定します。
-@z
-
-@x
-By default, the ECS rolling update is set to run twice the number of
-containers for a service (200%), and has the ability to shut down 100%
-containers during the update.
-@y
-{% comment %}
-By default, the ECS rolling update is set to run twice the number of
-containers for a service (200%), and has the ability to shut down 100%
-containers during the update.
-{% endcomment %}
-デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
-またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。
-@z
-
-@x
-### Auto scaling
-@y
-### Auto scaling
+{: #auto-scaling }
+## 自動スケーリング
 @z
 
 @x
@@ -846,9 +931,14 @@ The Compose file model does not define any attributes to declare auto-scaling co
 Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
 well as cpu _or_ memory to define target metric, expressed as resource usage percent.
 @y
+{% comment %}
 The Compose file model does not define any attributes to declare auto-scaling conditions.
 Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
 well as cpu _or_ memory to define target metric, expressed as resource usage percent.
+{% endcomment %}
+Compose ファイルモデルでは、自動スケーリングの条件を定める属性定義はありません。
+したがってカスタム拡張機能`x-aws-autoscaling`を利用して自動スケーリングの範囲を定義することになります。
+ターゲットメトリックの定義において、リソース使用率として表現される CPU やメモリを定めることと同様です。
 @z
 
 @x
@@ -859,7 +949,7 @@ services:
       x-aws-autoscaling:
         min: 1
         max: 10 #required
-        cpu: 75 
+        cpu: 75
         # mem: - mutualy exlusive with cpu
 ```
 @y
@@ -870,19 +960,19 @@ services:
       x-aws-autoscaling:
         min: 1
         max: 10 #required
-        cpu: 75 
+        cpu: 75
         # mem: - mutualy exlusive with cpu
 ```
 @z
 
 @x
-### IAM roles
+## IAM roles
 @y
 {% comment %}
-### IAM roles
+## IAM roles
 {% endcomment %}
 {: #iam-roles }
-### IAM ロール
+## IAM ロール
 @z
 
 @x
@@ -1189,13 +1279,13 @@ Docker Compose CLI は、ECS 上のコンテナー実行と管理をサポート
 @z
 
 @x
-### Prerequisites
+### Install Prerequisites
 @y
 {% comment %}
-### Prerequisites
+### Install Prerequisites
 {% endcomment %}
-{: #prerequisites }
-### 前提条件
+{: #install-prerequisites }
+### インストールの前提条件
 @z
 
 @x
