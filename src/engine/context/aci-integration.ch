@@ -711,14 +711,42 @@ Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 @z
 
 @x
-Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+Single containers and Compose applications can optionally expose ports.
+For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command : `docker run -p 80:80 nginx`.
 @y
 {% comment %}
-Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+Single containers and Compose applications can optionally expose ports.
+For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command : `docker run -p 80:80 nginx`.
 {% endcomment %}
 単独のコンテナーや Compose アプリケーションは、オプションとしてポートを公開することができます。
-単独のコンテナーの場合は、`docker run`コマンドに`--publish`（`-p`）フラグをつけて実行します。
+単独のコンテナーの場合は、`docker run`コマンドに`--publish`（`-p`）フラグをつけて`docker run -p 80:80 nginx`のように実行します。
+@z
+
+@x
+For Compose applications, you must specify exposed ports in the Compose file service definition:
+@y
+{% comment %}
+For Compose applications, you must specify exposed ports in the Compose file service definition:
+{% endcomment %}
 また Compose アプリケーションの場合は、Compose ファイルのサービス定義において、公開するポートを設定する必要があります。
+@z
+
+@x
+```yaml
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+```
+@y
+```yaml
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+```
 @z
 
 @x
@@ -726,16 +754,14 @@ Single containers and Compose applications can optionally expose ports. For sing
 >
 > ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
 >
->
-> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+> All containers in the same Compose application are deployed in the same ACI container group. Different containers in the same Compose application cannot expose the same port when deployed to ACI.
 @y
 {% comment %}
 > **Note**
 >
 > ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
 >
->
-> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+> All containers in the same Compose application are deployed in the same ACI container group. Different containers in the same Compose application cannot expose the same port when deployed to ACI.
 {% endcomment %}
 > **メモ**
 >
@@ -743,7 +769,7 @@ Single containers and Compose applications can optionally expose ports. For sing
 > したがって ACI へのデプロイにあたって公開元も公開先も同一のポートでなければなりません。
 >
 > Compose アプリケーション内に含まれるコンテナーはすべて、同一の ACI コンテナーグループとしてデプロイされます。
-> 同一の Compose アプリケーション内の複数コンテナーは、ACI へのデプロイに際して同一のポートを公開することはできません。
+> 同一の Compose アプリケーション内の異なるコンテナーは、ACI へのデプロイに際して同一のポートを公開することはできません。
 @z
 
 @x
@@ -770,16 +796,42 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 
 @x
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`.
 @y
 {% comment %}
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`.
 {% endcomment %}
 ランダムな IP アドレスに対するポート公開に加えて、アプリケーションを FQDN の形式で公開するための DNS ラベル名を指定することができます。
 たとえば`<NAME>.region.azurecontainer.io`という形式です。
+@z
+
+@x
+You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`:
+@y
+{% comment %}
+You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`:
+{% endcomment %}
 この名前は`docker run`の実行時に`--domainname`フラグを用いて設定します。
 あるいは Compose ファイル内の`domainname`項目を利用して`docker compose up`により実現します。
+@z
+
+@x
+```yaml
+services:
+  nginx:
+    image: nginx
+    domainname: "myapp"
+    ports:
+      - "80:80"
+```
+@y
+```yaml
+services:
+  nginx:
+    image: nginx
+    domainname: "myapp"
+    ports:
+      - "80:80"
+```
 @z
 
 @x
@@ -787,17 +839,23 @@ You can set this name with the `--domainname` flag when performing a `docker run
 >
 > The domain of a Compose application can only be set once, if you specify the
 > `domainname` for several services, the value must be identical.
+>
+> The FQDN `<DOMAINNAME>.region.azurecontainer.io` must be available.
 @y
 {% comment %}
 > **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
 > `domainname` for several services, the value must be identical.
+>
+> The FQDN `<DOMAINNAME>.region.azurecontainer.io` must be available.
 {% endcomment %}
 > **メモ**
 >
 > 複数のサービスに対して`domainname`を設定していたとしても、Compose アプリケーションのドメイン設定が行われるのは一度だけです。
 > したがってそれらは同一でなければなりません。
+>
+> FQDN である`<DOMAINNAME>.region.azurecontainer.io`が利用可能です。
 @z
 
 @x
@@ -1209,8 +1267,6 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 10s
-      timeout: 2s
-      start_period: 40s
 ```
 @y
 ```yaml
@@ -1223,8 +1279,6 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 10s
-      timeout: 2s
-      start_period: 40s
 ```
 @z
 

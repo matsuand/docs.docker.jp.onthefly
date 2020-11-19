@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-18 09:21:32 +0900-->
+<!-- Page generated 2020-11-19 18:33:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Azure での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Azure での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="Azure において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-18T09:21:32+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-19T18:33:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/aci-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-18T09:21:32+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-19T18:33:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Azure での Docker コンテナーのデプロイ","description":"Azure において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/aci-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -315,8 +315,16 @@ Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 <h2 id="exposing-ports">ポートの公開</h2>
 
 <p>単独のコンテナーや Compose アプリケーションは、オプションとしてポートを公開することができます。
-単独のコンテナーの場合は、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドに<code class="language-plaintext highlighter-rouge">--publish</code>（<code class="language-plaintext highlighter-rouge">-p</code>）フラグをつけて実行します。
-また Compose アプリケーションの場合は、Compose ファイルのサービス定義において、公開するポートを設定する必要があります。</p>
+単独のコンテナーの場合は、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドに<code class="language-plaintext highlighter-rouge">--publish</code>（<code class="language-plaintext highlighter-rouge">-p</code>）フラグをつけて<code class="language-plaintext highlighter-rouge">docker run -p 80:80 nginx</code>のように実行します。</p>
+
+<p>また Compose アプリケーションの場合は、Compose ファイルのサービス定義において、公開するポートを設定する必要があります。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">80:80"</span>
+</code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong></p>
@@ -325,7 +333,7 @@ Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 したがって ACI へのデプロイにあたって公開元も公開先も同一のポートでなければなりません。</p>
 
   <p>Compose アプリケーション内に含まれるコンテナーはすべて、同一の ACI コンテナーグループとしてデプロイされます。
-同一の Compose アプリケーション内の複数コンテナーは、ACI へのデプロイに際して同一のポートを公開することはできません。</p>
+同一の Compose アプリケーション内の異なるコンテナーは、ACI へのデプロイに際して同一のポートを公開することはできません。</p>
 </blockquote>
 
 <p>アプリケーションにおいてポート公開を行う際には、デプロイするアプリケーション（単独のコンテナーまたは Compose アプリケーション）に対応するコンテナーグループに対して、ランダムな公開 IP アドレスが関連づけられるのがデフォルトです。
@@ -334,15 +342,26 @@ Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 <h3 id="dns-label-name">DNS ラベル名</h3>
 
 <p>ランダムな IP アドレスに対するポート公開に加えて、アプリケーションを FQDN の形式で公開するための DNS ラベル名を指定することができます。
-たとえば<code class="language-plaintext highlighter-rouge">&lt;NAME&gt;.region.azurecontainer.io</code>という形式です。
-この名前は<code class="language-plaintext highlighter-rouge">docker run</code>の実行時に<code class="language-plaintext highlighter-rouge">--domainname</code>フラグを用いて設定します。
+たとえば<code class="language-plaintext highlighter-rouge">&lt;NAME&gt;.region.azurecontainer.io</code>という形式です。</p>
+
+<p>この名前は<code class="language-plaintext highlighter-rouge">docker run</code>の実行時に<code class="language-plaintext highlighter-rouge">--domainname</code>フラグを用いて設定します。
 あるいは Compose ファイル内の<code class="language-plaintext highlighter-rouge">domainname</code>項目を利用して<code class="language-plaintext highlighter-rouge">docker compose up</code>により実現します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">domainname</span><span class="pi">:</span> <span class="s2">"</span><span class="s">myapp"</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">80:80"</span>
+</code></pre></div></div>
 
 <blockquote>
   <p><strong>メモ</strong></p>
 
   <p>複数のサービスに対して<code class="language-plaintext highlighter-rouge">domainname</code>を設定していたとしても、Compose アプリケーションのドメイン設定が行われるのは一度だけです。
 したがってそれらは同一でなければなりません。</p>
+
+  <p>FQDN である<code class="language-plaintext highlighter-rouge">&lt;DOMAINNAME&gt;.region.azurecontainer.io</code>が利用可能です。</p>
 </blockquote>
 
 <h2 id="using-azure-file-share-as-volumes-in-aci-containers">ACI コンテナー内での Azure ファイル共有のボリュームとしての利用</h2>
@@ -469,8 +488,6 @@ Compose に対するデフォルトの再起動ポリシーは<code class="langu
     <span class="na">healthcheck</span><span class="pi">:</span>
       <span class="na">test</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">CMD"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">curl"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">-f"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">http://localhost:80"</span><span class="pi">]</span>
       <span class="na">interval</span><span class="pi">:</span> <span class="s">10s</span>
-      <span class="na">timeout</span><span class="pi">:</span> <span class="s">2s</span>
-      <span class="na">start_period</span><span class="pi">:</span> <span class="s">40s</span>
 </code></pre></div></div>
 
 <h2 id="private-docker-hub-images-and-using-the-azure-container-registry">プライベートな Docker Hub イメージと Azure コンテナーレジストリの利用</h2>

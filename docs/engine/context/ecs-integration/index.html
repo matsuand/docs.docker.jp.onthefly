@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-18 09:21:32 +0900-->
+<!-- Page generated 2020-11-19 18:33:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ECS での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="ECS において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-18T09:21:32+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-19T18:33:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/ecs-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-18T09:21:32+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-19T18:33:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ECS での Docker コンテナーのデプロイ","description":"ECS において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/ecs-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ECS での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p>
+                        <section class="section"><h1>ECS での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 10 分</em></p>
 <h2 id="overview">概要</h2>
 
 <p>Docker Compose CLI は、Amazon EC2 コンテナーサービス（Amazon EC2 Container Service; ECS）の中で、ネイティブな Docker コマンドの利用を可能にします。
@@ -142,13 +142,21 @@
 
 <p><code class="language-plaintext highlighter-rouge">docker context create ecs myecscontext</code> コマンドを実行して AWS コンテキストを生成します。
 すでに AWS CLI をインストールし設定を行っているのであれば、このセットアップコマンドにより、既存の AWS プロファイルを選んで Amazon への接続を行います。
-これがまだできていない場合は、<a href="https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys" target="_blank" rel="noopener" class="_">AWS access key ID and a secret access key</a> を通じて、新たなプロファイルを生成します。</p>
+これがまだできていない場合は、<a href="https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys" target="_blank" rel="noopener" class="_">AWS access key ID and a secret access key</a> を通じて、新たなプロファイルを生成します。
+Finally, you can configure your ECS context to retrieve AWS credentials by <code class="language-plaintext highlighter-rouge">AWS_*</code> environment variables, which is a common way to integrate with
+third-party tools and single-sign-on providers.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">? Create a Docker context using:  [Use arrows to move, type to filter]
+  An existing AWS profile
+  AWS secret and token credentials
+</span><span class="gp">&gt;</span><span class="w"> </span>AWS environment variables
+</code></pre></div></div>
 
 <p>AWS コンテキストを生成したら、<code class="language-plaintext highlighter-rouge">docker context ls</code> コマンドを実行して Docker コンテキストの一覧を表示します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">NAME   DESCRIPTION  DOCKER ENDPOINT  KUBERNETES ENDPOINT ORCHESTRATOR
-myecscontext *
-default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock     swarm
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT   ORCHESTRATOR
+myecscontext        ecs                 credentials read from environment                                                             
+default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                         swarm
 </span></code></pre></div></div>
 
 <h2 id="run-a-compose-application">Compose アプリケーションの実行</h2>
@@ -164,12 +172,20 @@ default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock  
   <li>
     <p><code class="language-plaintext highlighter-rouge">docker compose up</code>と<code class="language-plaintext highlighter-rouge">docker compose down</code>を実行して、Compose アプリケーションの開始、停止ができることが必要です。</p>
 
-    <p>デフォルトにおいて<code class="language-plaintext highlighter-rouge">docker compose up</code>は、カレントフォルダーの<code class="language-plaintext highlighter-rouge">docker-compose.yaml</code>ファイルを利用します。
+    <p>デフォルトにおいて<code class="language-plaintext highlighter-rouge">docker compose up</code>は、カレントフォルダーの<code class="language-plaintext highlighter-rouge">compose.yaml</code>ファイルまたは<code class="language-plaintext highlighter-rouge">docker-compose.yaml</code>ファイルを利用します。
 Compose ファイルを直接<code class="language-plaintext highlighter-rouge">--file</code>フラグを使って指定することもできます。</p>
 
     <p>Compose アプリケーションのデプロイの際に<code class="language-plaintext highlighter-rouge">--project-name</code>フラグを使って、アプリケーション名を指定することもできます。
 アプリケーション名の指定がなかった場合は、ワーキングディレクトリから名前が定められます。</p>
   </li>
+</ul>
+
+<p>Docker ECS integration converts the Compose application model into a set of AWS resources, described as a <a href="https://aws.amazon.com/cloudformation/" target="_blank" rel="noopener" class="_">CloudFormation</a> template. The actual mapping is described in <a href="https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md" target="_blank" rel="noopener" class="_">technical documentation</a>.
+You can review the generated template using <code class="language-plaintext highlighter-rouge">docker compose convert</code> command, and follow CloudFormation applying this model within 
+<a href="https://console.aws.amazon.com/cloudformation/home" target="_blank" rel="noopener" class="_">AWS web console</a> when you run <code class="language-plaintext highlighter-rouge">docker compose up</code>, in addition to CloudFormation events being displayed 
+in your terminal.</p>
+
+<ul>
   <li>
     <p>Amazon ECS 上の Compose アプリケーションに対して生成されたサービスの情報およびその状態を確認するには<code class="language-plaintext highlighter-rouge">docker compose ps</code>コマンドを実行します。</p>
   </li>
@@ -241,7 +257,7 @@ Compose アプリケーションログの確認は、デフォルトではロー
   <p><strong>メモ</strong></p>
 
   <p>Compose ファイルのバージョンを 3.8 またはそれ以降に指定すると、この Compose ファイルをそのまま、<code class="language-plaintext highlighter-rouge">docker-compose</code> を使ってローカル開発環境向けに利用することができます。
-その場合、カスタム拡張は無視されます。</p>
+その場合、カスタム ECS 拡張は無視されます。</p>
 </blockquote>
 
 <h2 id="service-discovery">サービスの検出</h2>
@@ -253,27 +269,35 @@ Compose アプリケーションログの確認は、デフォルトではロー
 内容がおわかりの方はご教示よろしくお願いします。</p>
 </blockquote>
 
-<p>サービス間の通信は <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html" target="_blank" rel="noopener" class="_">Security Groups</a> ルールによって実現されています。
-サービス間では共通の Compose ファイル「network」が共有され、互いに通信を行います。
-そこでは特定のサービスに対して、異なる（メモリ、CPU の）制約やレプリカに関するルールにもとづいて実行することが可能です。
-ただしこれを行うための条件として、Docker イメージがサービスを検出できて、従属サービスの利用可能状態を待つことができなければなりません。</p>
+<p>サービス間の通信は、デフォルトで透過的に実装されています。
+したがって Compose アプリケーションのデプロイは、複数接続されたサービスに対しても、Compose ファイルをローカル向け、ECS デプロイ向けに切り替えずに行うことができます。
+個々のサービスは、それぞれの（メモリや CPU に対する）制約やレプリカに関するルールに従って動作します。</p>
 
 <h3 id="service-names">サービス名</h3>
 
-<p>Docker Compose CLI においてアプリケーションデプロイを行うサービスは、<a href="https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html" target="_blank" rel="noopener" class="_">AWS Cloud Map</a> 上に登録されます。
-これは <code class="language-plaintext highlighter-rouge">&lt;サービス&gt;.&lt;composeプロジェクト名&gt;.local</code> という形の完全修飾ドメイン名として表わされています。
-サービスが、依存するサービスを引き出す際には、この完全修飾ドメイン名を利用するか、あるいは短いサービス名（docker-compose において用いられるもの）が利用されます。</p>
+<p>アプリケーションデプロイを行うサービスは、Docker Compose CLI により <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html" target="_blank" rel="noopener" class="_">AWS Cloud Map</a> 上に自動登録されます。
+これは <code class="language-plaintext highlighter-rouge">&lt;サービス&gt;.&lt;composeプロジェクト名&gt;.local</code> という形の完全修飾ドメイン名として表わされています。</p>
+
+<p>サービスが、依存するサービスを引き出す際には、Compose サービス名（docker-compose を使ってローカルにデプロイする際にも用いられる）、またはこの完全修飾ドメイン名が利用されます。</p>
 
 <h3 id="依存サービスの起動時間と-dns-名前解決">依存サービスの起動時間と DNS 名前解決</h3>
 
 <p>Compose ファイルがデプロイされると ECS 上においてサービスが同タイミングでスケジューリングされます。
 AWS Cloud Map では、サービスドメイン名を解決できるようにするため、DNS サービスの初期遅延処理を行っています。
-したがってアプリケーションコードには、その遅延に対応するような調整が必要になります。
+したがってアプリケーションコードには、その遅延への対応が必要になります。
 つまり依存サービスが準備状態となるのを待つか、Docker イメージへエントリーポイントとして、ウェイトを行うスクリプトを追加するなどの対応を行います。
-このことは <a href="/docs.docker.jp.onthefly/compose/startup-order/">起動順の制御</a> において説明しています。</p>
+このことは <a href="/docs.docker.jp.onthefly/compose/startup-order/">起動順の制御</a> において説明しています。
+なお Compose アプリケーション内の依存サービスに対しても、docker-compose によりローカルにデプロイする際にもこれが必要です。
+ただし遅延は普通は短いものです。
+明らかな問題が発生するとすれば ECS へのデプロイ時であり、サービスがその依存サービスの起動を待たずに実行されてしまった場合です。</p>
 
 <p>それとは別に Compose ファイルにおける <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on" target="_blank" rel="noopener" class="_">depends_on</a> 機能を利用することができます。
 これを利用すると依存するサービスがまず生成されることになり、アプリケーションのデプロイは生成開始前から稼動するまで待機します。</p>
+
+<h3 id="sService-isolation">サービスの分離</h3>
+
+<p>サービス間の通信は <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html" target="_blank" rel="noopener" class="_">Security Groups</a> ルールによって実現されています。
+サービス間では共通の Compose ファイル「network」が共有され、Compose サービス名を使って互いに通信を行います。</p>
 
 <h2 id="volumes">ボリューム</h2>
 
@@ -371,6 +395,14 @@ Docker Compose CLI にて後者の方法を利用する場合には、カスタ�
 
 <h2 id="auto-scaling">自動スケーリング</h2>
 
+<p>サービスをスケーリングするための固定的な（自動スケーリングではない）情報は、普通に Compose ファイルの文法として指定することができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div></div>
+
 <p>Compose ファイルモデルでは、自動スケーリングの条件を定める属性定義はありません。
 したがってカスタム拡張機能<code class="language-plaintext highlighter-rouge">x-aws-autoscaling</code>を利用して自動スケーリングの範囲を定義することになります。
 ターゲットメトリックの定義において、リソース使用率として表現される CPU やメモリを定めることと同様です。</p>
@@ -425,8 +457,18 @@ Docker Compose CLI にて後者の方法を利用する場合には、カスタ�
 1 つは Compose アプリケーション用の ECS クラスターです。
 もう 1 つはネットワークごとの SecurityGroup です。
 これは AWS でのデフォルト VPC 上において、Compose ファイルによって定義されるネットワークごとのものです。
-そしてサービスのトラフィックをルーティングする LoadBlancer です。
-AWS アカウントに、そのようなリソースを生成する <a href="https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions" target="_blank" rel="noopener" class="_">パーミッション</a> が与えられていない場合、あるいは独自にこれらを管理したい場合は、以下のカスタム Compose 拡張機能を利用することができます。</p>
+そしてサービスのトラフィックをルーティングする LoadBlancer です。</p>
+
+<p>以下のような基本的な Compose ファイルを使えば Docker Compose CLI が、ロードバランサーがトラフィックを公開ポート 80 に振り分けるような ECS 構成を自動的に生成してくれます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">80:80"</span>
+</code></pre></div></div>
+
+<p>AWS アカウントに、そのようなリソースを生成する <a href="https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions" target="_blank" rel="noopener" class="_">パーミッション</a> が与えられていない場合、あるいは独自にこれらを管理したい場合は、以下のカスタム Compose 拡張機能を利用することができます。</p>
 
 <ul>
   <li>
@@ -442,12 +484,57 @@ AWS アカウントに、そのようなリソースを生成する <a href="htt
     <p>Compose ファイルの最上位項目として <code class="language-plaintext highlighter-rouge">x-aws-loadbalancer</code> を利用します。
 これは既存の LoadBalancer の ARN を設定します。</p>
   </li>
+</ul>
+
+<p>The latter can be used for those who want to customize application exposure, typically to
+use an existing domain name for your application:</p>
+
+<ol>
+  <li>Use the AWS web console or CLI to get your VPC and Subnets IDs. You can retrieve the default VPC ID and attached subnets using this AWS CLI commands:</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>aws ec2 describe-vpcs <span class="nt">--filters</span> <span class="nv">Name</span><span class="o">=</span>isDefault,Values<span class="o">=</span><span class="nb">true</span> <span class="nt">--query</span> <span class="s1">'Vpcs[0].VpcId'</span> 
+<span class="go">
+"vpc-123456"
+</span><span class="gp">$</span><span class="w"> </span>aws ec2 describe-subnets <span class="nt">--filters</span> <span class="nv">Name</span><span class="o">=</span>vpc-id,Values<span class="o">=</span>vpc-123456 <span class="nt">--query</span> <span class="s1">'Subnets[*].SubnetId'</span>
+<span class="go">
+[
+    "subnet-1234abcd", 
+    "subnet-6789ef00", 
+]
+</span></code></pre></div></div>
+
+<ol>
+  <li>Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don’t need here.</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>aws elbv2 create-load-balancer <span class="nt">--name</span> myloadbalancer <span class="nt">--type</span> application <span class="nt">--subnets</span> <span class="s2">"subnet-1234abcd"</span> <span class="s2">"subnet-6789ef00"</span>
+<span class="go">
+{
+    "LoadBalancers": [
+        {
+            "IpAddressType": "ipv4", 
+            "VpcId": "vpc-123456", 
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456", 
+            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com", 
+</span><span class="c">...            
+</span></code></pre></div></div>
+
+<ol>
   <li>
-    <p>Docker Compose CLI 向けの Compose ファイルにおいて、ネットワーク定義内に<code class="language-plaintext highlighter-rouge">external: true</code>を記述します。
+    <p>To assign your application an existing domain name, you can configure your DNS with a
+CNAME entry pointing to just-created loadbalancer’s <code class="language-plaintext highlighter-rouge">DNSName</code> reported as you created the loadbalancer.</p>
+  </li>
+  <li>
+    <p>Use Loadbalancer ARN to set <code class="language-plaintext highlighter-rouge">x-aws-loadbalancer</code> in your compose file, and deploy your application using <code class="language-plaintext highlighter-rouge">docker compose up</code> command.</p>
+  </li>
+</ol>
+
+<p>Please note Docker ECS integration won’t be aware of this domain name, so <code class="language-plaintext highlighter-rouge">docker compose ps</code> command will report URLs with loadbalancer DNSName, not your own domain.</p>
+
+<p>Docker Compose CLI 向けの Compose ファイルにおいて、ネットワーク定義内に<code class="language-plaintext highlighter-rouge">external: true</code>を記述することもできます。
 これによってセキュリティグループを生成 <strong>しない</strong> ようにします。
 そしてサービス間のネットワーク接続を実現するために、利用したい既存の SecurityGroup における名前と ID を設定します。</p>
-  </li>
-</ul>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">networks</span><span class="pi">:</span>
   <span class="na">back_tier</span><span class="pi">:</span>
