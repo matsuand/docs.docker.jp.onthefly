@@ -25,8 +25,7 @@ images = \
 	index-create-repo.png          \
 	index-repo-created.png         \
 	index-tag.png                  \
-	index-terminal-2019.png        \
-	index-welcome.png              \
+	index-terminal.png             \
 	orgs-repo-perms2019.png        \
 	orgs-teams-perms2019.png       \
 	repo-create-details.png        \

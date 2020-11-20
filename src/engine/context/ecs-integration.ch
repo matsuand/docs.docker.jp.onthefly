@@ -1143,7 +1143,7 @@ services:
         - Effect: "Allow"
           Action:
             - "some_aws_service"
-          Resource":
+          Resource:
             - "*"
 ```
 @y
@@ -1156,7 +1156,7 @@ services:
         - Effect: "Allow"
           Action:
             - "some_aws_service"
-          Resource":
+          Resource:
             - "*"
 ```
 @z
