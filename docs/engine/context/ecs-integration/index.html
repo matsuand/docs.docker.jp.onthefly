@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-20 22:42:13 +0900-->
+<!-- Page generated 2020-11-30 22:23:56 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS での Docker コンテナーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ECS での Docker コンテナーのデプロイ" />
   <meta property="og:description" content="ECS において Docker コンテナーをデプロイします。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-20T22:42:13+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-30T22:23:56+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/ecs-integration/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-20T22:42:13+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-11-30T22:23:56+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ECS での Docker コンテナーのデプロイ","description":"ECS において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/engine/context/ecs-integration/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -137,6 +137,54 @@
 以下の節では Amazon ECS 上において Docker コンテナーをデプロイする手順を説明します。</p>
 
 <h2 id="run-an-application-on-ecs">ECS 上でのアプリケーション実行</h2>
+
+<h3 id="requirements">前提条件</h3>
+
+<p>AWS uses a fine-grained permission model, with specific role for each resource type and operation.</p>
+
+<p>To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you</p>
+
+<p>have to ensure your AWS credentials grant access to following AWS IAM permissions:</p>
+
+<ul>
+  <li>cloudformation:*</li>
+  <li>ecs:ListAccountSettings</li>
+  <li>ecs:CreateCluster</li>
+  <li>ecs:CreateService</li>
+  <li>ec2:DescribeVpcs</li>
+  <li>ec2:DescribeSubnets</li>
+  <li>ec2:CreateSecurityGroup</li>
+  <li>ec2:DescribeSecurityGroups</li>
+  <li>ec2:DeleteSecurityGroup</li>
+  <li>iam:CreateRole</li>
+  <li>iam:AttachRolePolicy</li>
+  <li>iam:DetachRolePolicy</li>
+  <li>iam:DeleteRole</li>
+  <li>elasticloadbalancing:*</li>
+  <li>application-autoscaling:*</li>
+  <li>servicediscovery:*</li>
+  <li>logs:CreateLogGroup</li>
+  <li>logs:DescribeLogGroups</li>
+  <li>logs:FilterLogEvents</li>
+  <li>logs:DeleteLogGroup</li>
+  <li>route53:CreateHostedZone</li>
+  <li>route53:DeleteHostedZone</li>
+  <li>route53:GetHealthCheck</li>
+  <li>route53:GetHostedZone</li>
+  <li>route53:ListHostedZonesByName</li>
+</ul>
+
+<p>GPU support, which relies on EC2 instances to run containers with attached GPU devices, 
+require a few additional permissions:</p>
+
+<ul>
+  <li>ec2:DescribeVpcs</li>
+  <li>autoscaling:*</li>
+  <li>iam:CreateInstanceProfile</li>
+  <li>iam:AddRoleToInstanceProfile</li>
+  <li>iam:RemoveRoleFromInstanceProfile</li>
+  <li>iam:DeleteInstanceProfile</li>
+</ul>
 
 <h3 id="create-aws-context">AWS コンテキストの生成</h3>
 

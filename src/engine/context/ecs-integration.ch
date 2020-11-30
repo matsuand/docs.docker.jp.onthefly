@@ -143,6 +143,125 @@ Docker は、単にローカルのマルチコンテナーを実行するだけ�
 @z
 
 @x
+### Requirements
+@y
+{% comment %}
+### Requirements
+{% endcomment %}
+{: #requirements }
+### 前提条件
+@z
+
+@x
+AWS uses a fine-grained permission model, with specific role for each resource type and operation. 
+@y
+{% comment %}
+AWS uses a fine-grained permission model, with specific role for each resource type and operation. 
+{% endcomment %}
+AWS uses a fine-grained permission model, with specific role for each resource type and operation. 
+@z
+
+@x
+To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you 
+@y
+{% comment %}
+To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you 
+{% endcomment %}
+To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you 
+@z
+
+@x
+have to ensure your AWS credentials grant access to following AWS IAM permissions:
+@y
+{% comment %}
+have to ensure your AWS credentials grant access to following AWS IAM permissions:
+{% endcomment %}
+have to ensure your AWS credentials grant access to following AWS IAM permissions:
+@z
+
+@x
+* cloudformation:*
+* ecs:ListAccountSettings
+* ecs:CreateCluster
+* ecs:CreateService
+* ec2:DescribeVpcs
+* ec2:DescribeSubnets
+* ec2:CreateSecurityGroup
+* ec2:DescribeSecurityGroups
+* ec2:DeleteSecurityGroup
+* iam:CreateRole
+* iam:AttachRolePolicy
+* iam:DetachRolePolicy
+* iam:DeleteRole
+* elasticloadbalancing:*
+* application-autoscaling:*
+* servicediscovery:*
+* logs:CreateLogGroup
+* logs:DescribeLogGroups
+* logs:FilterLogEvents
+* logs:DeleteLogGroup
+* route53:CreateHostedZone
+* route53:DeleteHostedZone
+* route53:GetHealthCheck
+* route53:GetHostedZone
+* route53:ListHostedZonesByName
+@y
+* cloudformation:*
+* ecs:ListAccountSettings
+* ecs:CreateCluster
+* ecs:CreateService
+* ec2:DescribeVpcs
+* ec2:DescribeSubnets
+* ec2:CreateSecurityGroup
+* ec2:DescribeSecurityGroups
+* ec2:DeleteSecurityGroup
+* iam:CreateRole
+* iam:AttachRolePolicy
+* iam:DetachRolePolicy
+* iam:DeleteRole
+* elasticloadbalancing:*
+* application-autoscaling:*
+* servicediscovery:*
+* logs:CreateLogGroup
+* logs:DescribeLogGroups
+* logs:FilterLogEvents
+* logs:DeleteLogGroup
+* route53:CreateHostedZone
+* route53:DeleteHostedZone
+* route53:GetHealthCheck
+* route53:GetHostedZone
+* route53:ListHostedZonesByName
+@z
+
+@x
+GPU support, which relies on EC2 instances to run containers with attached GPU devices, 
+require a few additional permissions:
+@y
+{% comment %}
+GPU support, which relies on EC2 instances to run containers with attached GPU devices, 
+require a few additional permissions:
+{% endcomment %}
+GPU support, which relies on EC2 instances to run containers with attached GPU devices, 
+require a few additional permissions:
+@z
+
+@x
+* ec2:DescribeVpcs
+* autoscaling:*
+* iam:CreateInstanceProfile
+* iam:AddRoleToInstanceProfile
+* iam:RemoveRoleFromInstanceProfile
+* iam:DeleteInstanceProfile
+@y
+* ec2:DescribeVpcs
+* autoscaling:*
+* iam:CreateInstanceProfile
+* iam:AddRoleToInstanceProfile
+* iam:RemoveRoleFromInstanceProfile
+* iam:DeleteInstanceProfile
+@z
+
+@x
 ### Create AWS context
 @y
 {% comment %}

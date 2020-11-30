@@ -495,13 +495,13 @@ Congratulations! You've successfully:
 - Signed up for a Docker account
 - Created your first repository
 - Built a Docker container image on your computer
-- Pushed it succesfully to Docker Hub
+- Pushed it successfully to Docker Hub
 @y
 {% comment %}
 - Signed up for a Docker account
 - Created your first repository
 - Built a Docker container image on your computer
-- Pushed it succesfully to Docker Hub
+- Pushed it successfully to Docker Hub
 {% endcomment %}
 - Docker アカウントへのサインアップ
 - 初めてのリポジトリ生成

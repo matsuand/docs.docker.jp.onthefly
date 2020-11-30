@@ -277,7 +277,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 - Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
 - Diagnostics: avoid hanging when Kubernetes is in a broken state.
-- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+- Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890).
 @y
 {% comment %}
 - When sharing Linux directories (`/var`, `/bin`, etc) with containers, Docker Desktop avoids watching paths in the host file system.
@@ -289,7 +289,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 - Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
 - Diagnostics: avoid hanging when Kubernetes is in a broken state.
-- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+- Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890).
 {% endcomment %}
 - コンテナーにおいて Linux ディレクトリ（`/var`、`/bin`など）を共有している場合、Docker Desktop がホストファイルシステムのパスを監視しないようにしました。
 - コンテナー内にファイル共有（たとえば`docker run -v ~/.gitconfig`）を行っている場合に、Docker Desktop が親ディレクトリを監視しないようにしました。[docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981) を Fix に。
@@ -300,7 +300,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。[docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
 - 共有ボリュームの外部を指し示すシンボリックリンクを可能にしました。[docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862) を Fix に。
 - 診断処理: Kubernetes が破損状態にあるときの処理停止を回避しました。
-- ログイン時の自動起動を修正しました。[docker/for-mac#4877] と [docker/for-mac#4890] を参照してください。
+- ログイン時の自動起動を修正しました。[docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) と [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890) を参照してください。
 @z
 
 @x
