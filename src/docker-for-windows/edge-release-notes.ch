@@ -43,6 +43,39 @@ For information about Stable releases, see the [Stable release notes](release-no
 @z
 
 @x
+## Docker Desktop Community 2.5.3
+2020-11-30
+@y
+## Docker Desktop Community 2.5.3
+2020-11-30
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
+@y
+- [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
+@z
+
+@x
 ## Docker Desktop Community 2.5.2
 2020-11-26
 @y
@@ -134,7 +167,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 @z
 
@@ -218,7 +251,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 @z
 
@@ -311,7 +344,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 @z
 
@@ -386,7 +419,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 @z
 
@@ -512,7 +545,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades-5 }
 ### アップグレード
 @z
 
@@ -596,7 +629,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades-6 }
 ### アップグレード
 @z
 
@@ -733,7 +766,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades-7 }
 ### アップグレード
 @z
 
@@ -829,7 +862,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades-8 }
 ### アップグレード
 @z
 
@@ -886,7 +919,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
+{: #upgrades-9 }
 ### アップグレード
 @z
 
@@ -957,7 +990,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-9 }
+{: #upgrades-10 }
 ### アップグレード
 @z
 
@@ -1036,7 +1069,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-10 }
+{: #upgrades-11 }
 ### アップグレード
 @z
 
@@ -1119,7 +1152,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
+{: #upgrades-12 }
 ### アップグレード
 @z
 
@@ -1311,7 +1344,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
+{: #upgrades-13 }
 ### アップグレード
 @z
 
@@ -1446,7 +1479,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-13 }
+{: #upgrades-14 }
 ### アップグレード
 @z
 
@@ -1643,7 +1676,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-14 }
+{: #upgrades-15 }
 ### アップグレード
 @z
 
@@ -1722,7 +1755,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-15 }
+{: #upgrades-16 }
 ### アップグレード
 @z
 
@@ -1845,7 +1878,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-16 }
+{: #upgrades-17 }
 ### アップグレード
 @z
 
@@ -1991,7 +2024,7 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-17 }
+{: #upgrades-18 }
 ### アップグレード
 @z
 
@@ -2096,7 +2129,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-18 }
+{: #upgrades-19 }
 ### アップグレード
 @z
 
@@ -2207,7 +2240,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-19 }
+{: #upgrades-20 }
 ### アップグレード
 @z
 
@@ -2301,7 +2334,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-20 }
+{: #upgrades-21 }
 ### アップグレード
 @z
 
@@ -2362,7 +2395,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-21 }
+{: #upgrades-22 }
 ### アップグレード
 @z
 
@@ -2443,7 +2476,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-22 }
+{: #upgrades-23 }
 ### アップグレード
 @z
 
