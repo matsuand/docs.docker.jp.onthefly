@@ -80,7 +80,7 @@ machines.
     > single-node swarm, simply run `docker swarm init` with no arguments. There is no
     > need to specify `--advertise-addr` in this case. To learn more, see the topic
     > on how to
-    > [Use Docker Desktop or Mac or Docker Desktop for Windows](index.md#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
+    > [Use Docker Desktop for Mac or Docker Desktop for Windows](index.md#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
     > with Swarm.
 @y
     {% comment %}
@@ -88,7 +88,7 @@ machines.
     > single-node swarm, simply run `docker swarm init` with no arguments. There is no
     > need to specify `--advertise-addr` in this case. To learn more, see the topic
     > on how to
-    > [Use Docker Desktop or Mac or Docker Desktop for Windows](index.md#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
+    > [Use Docker Desktop for Mac or Docker Desktop for Windows](index.md#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
     > with Swarm.
     {% endcomment %}
     > **メモ**: Docker Desktop for Mac または Docker Desktop for Windows 利用し単一ノードの Swarm を生成する場合は、引数なしで `docker swarm init` を実行します。

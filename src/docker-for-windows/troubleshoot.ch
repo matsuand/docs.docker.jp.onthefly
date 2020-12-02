@@ -24,6 +24,16 @@ toc_max: 2
 @z
 
 @x
+> Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Click [here](#support) to learn more.
+@y
+{% comment %}
+> Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Click [here](#support) to learn more.
+{% endcomment %}
+> Docker Desktop では、プロプランやチームプランを購入している開発者に向けてのサポートを提供しているのをご存知ですか？
+> 詳しくは [こちら](#support) を参照してください。
+@z
+
+@x
 This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 @y
 {% comment %}
@@ -1288,19 +1298,15 @@ explore other workarounds suggested on Docker Desktop forums.
 @z
 
 @x
-This section contains information on how to get support on Docker Desktop.
+Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Click [here](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} to upgrade your existing account.
 @y
-This section contains information on how to get support on Docker Desktop.
+Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Click [here](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} to upgrade your existing account.
 @z
 
 @x
->**Note**
->
-> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 @y
->**Note**
->
-> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 @z
 
 @x
