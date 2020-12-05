@@ -15,6 +15,7 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
+	best-practices \
 	github-actions
 
 ch_mds = $(bases:=.ch)

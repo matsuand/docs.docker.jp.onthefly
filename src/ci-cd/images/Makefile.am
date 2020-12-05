@@ -14,6 +14,7 @@ images = \
 	ghcr-logic.png          \
 	github-access-token.png \
 	github-secrets.png      \
+	inner-outer-loop.png    \
 	push-tagged-version.png \
 	simplewhaledemo.png
 

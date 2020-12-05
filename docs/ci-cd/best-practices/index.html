@@ -1,0 +1,284 @@
+<!-- Page generated 2020-12-05 17:51:35 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>CI/CD のために Docker Hub を用いる際のベストプラクティス | Docker ドキュメント</title>
+  <meta name="description" content="CI/CD のために Docker Hub を用いる際のベストプラクティス" />
+  <meta name="keywords" content="CI/CD, GitHub Actions,">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/ci-cd/best-practices/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="CI/CD のために Docker Hub を用いる際のベストプラクティス"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="CI/CD のために Docker Hub を用いる際のベストプラクティス" />
+  <meta property="og:description" content="CI/CD のために Docker Hub を用いる際のベストプラクティス" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-05T17:51:35+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/ci-cd/best-practices/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-05T17:51:35+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"CI/CD のために Docker Hub を用いる際のベストプラクティス","description":"CI/CD のために Docker Hub を用いる際のベストプラクティス","url":"https://docs.docker.com/ci-cd/best-practices/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>CI/CD のために Docker Hub を用いる際のベストプラクティス</h1>
+<p><a href="https://www.jetbrains.com/lp/devecosystem-2020/" target="_blank" rel="noopener" class="_">Jetbrains 社の2020 年度開発動向調査</a> によると、現時点において 44 % の開発者が、何らかの形で Docker コンテナーを用いた継続的インテグレーション開発を行っています。
+このような環境構築を採用する開発者の多くは、作業フローの一部としてコンテナー登録のため Docker Hub を利用しているものと思われます。
+本ガイドではこれを行うベストプラクティス、そして手始めとして行うガイダンスを示します。</p>
+
+<p>今までにうかがったフィードバックにおいて、以下のようなものもありました。
+<a href="https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/" target="_blank" rel="noopener" class="_">Docker が行った変更</a> として、ネットワーク出力に関すること、そして無償ユーザーが可能な最大プル数に関することがありました。
+CI/CD ワークフローの一部として Docker Hub を利用するにあたって、それらの制限による影響を受けずに Docker Hub を利用する最良の方法はどういったものか、という質問でした。
+本ガイドでは Docker Hub の経験を活かして適切に活用し、そういった制限に抵触するリスクを軽減させるベストプラクティスを提供します。
+またユースケースによってはその制限を緩和するためのヒントにも触れます。</p>
+
+<h2 id="inner-and-outer-loops">内部ループと外部ループ</h2>
+
+<p>Docker を利用していずれの CI/CD を構築する際にも重要になるのが、CI に対するテストをローカル環境においていつ実施すべきかを考えることです。
+Docker を用いる際、内部ループ（inner loop）（コーディング、ビルド、実行、テスト）という観点、および外部ループ（outer loop）（変更のプッシュ、CI ビルド、CI テスト、デプロイ）という観点で、それぞれどのように開発者は作業を進めるのか、われわれは常にそのことを考慮しています。</p>
+
+<p><img src="../images/inner-outer-loop.png" alt="CI/CD 内部ループと外部ループ" /></p>
+
+<p>CI/CD の最適化を図る前にまず重要なのは、内部ループについて考えることであり、それが外部ループ（つまりは CI）とどのように関連させるかを考えることです。
+たいていのユーザーは「CI を通じたデバッグ」を好まないのは承知しています。
+したがって内部ループと外部ループは、できるだけ同じようなものにすることが望まれます。
+そこでお勧めするのは、Dockerfile 内にターゲットを追加して、<code class="language-plaintext highlighter-rouge">docker build</code>コマンドの一部としてユニットテストを実行することです。
+こうしておけば、システムの変更とビルドはローカルで行ない、CI 上で実行するユニットテストは、同じものをローカル上で単純なコマンドを使って実施できることになります。</p>
+
+<p>ブログ投稿「<a href="https://www.docker.com/blog/tag/go-env-series/" target="_blank" rel="noopener" class="_">Go development with Docker</a>」では、Docker プロジェクトにおいてテストをどのように行うか、そしてそれを CI 上でどのように再利用するかが、実によく示されています。
+この例では、問題に対するフィードバックを短くして、CI の実行に必要となるプル操作やビルド処理の数を軽減しています。</p>
+
+<h2 id="optimizing-cicd-deployments">CI/CD デプロイメントの最適化</h2>
+
+<p>実際の外部ループや Docker Hub への作業へ入ったら、CI を最大限に活用して Docker による最速の方法を実現させるための作業がいくつかあります。</p>
+
+<p>何よりもまずはセキュアであることです。
+CI を構築するにあたって Docker Hub に対しては、パスワードを用いるのでなく、アクセストークンを用いるようにします。</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>新たなアクセストークンは Docker Hub の <a href="https://hub.docker.com/settings/security" target="_blank" rel="noopener" class="_">Security</a> ページにおいて生成します。</p>
+</blockquote>
+
+<p>アクセストークンを生成して、プラットフォーム内の機密情報の保存場所に置いたら、次に考えるべきことは、CI/CD におけるシステム変更に対して、プッシュやプルをどのタイミングで行うのか、どこからそれを行うのかということです。</p>
+
+<p>まずできることとして、ビルド時間や処理実行回数を軽減させるために、すでにプルを行ったレイヤーの再利用を図る <strong>ビルドキャッシュ</strong> を活用します。
+これは多くのプラットフォーム上において buildX（buildkits）のキャッシュ機能を利用することで実現でき、プラットフォーム自体が提供するどのようなキャッシュであれ利用します。
+たとえば「<a href="../github-actions#optimizing-the-workflow">Optimizing the GitHub Actions workflow using build cache</a>（ビルドキャッシュを利用した GitHub アクションの最適化）」を参照してください。</p>
+
+<p>システム変更を行う際に、リリースイメージを単に Docker Hub に置きたいだけのときがあります。
+そのような場合であれば、PR イメージを本番環境にまでリリースするのではなく、もっと身近にあるローカルな保存場所を利用して、すばやくプルやテストを行った上でその PR イメージをプッシュする段取りを築きさえすればよいということになります。</p>
+
+<h2 id="next-steps">次のステップ</h2>
+
+<p>CI に対して Docker を利用するためのヒントやコツは、さらにあると考えられます。
+そして最近の Docker Hub ではレート制限があることを考えると、そういったものがテクニックの一部として重要になってきます。</p>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>認証を行った後にまだプル回数に対する制限にお悩みの場合は、<a href="https://www.docker.com/pricing" target="_blank" rel="noopener" class="_">プロアカウントやチームアカウント</a> にアップグレードすることを考えてみてください。</p>
+</blockquote>
+
+<p>CI/CD と GitHub アクションの連携をどのように行うかについては <a href="/docs.docker.jp.onthefly/ci-cd/github-actions/">GitHub アクションの設定</a> を参照してください。</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=CI/CD">CI/CD</a>, <a href="/docs.docker.jp.onthefly/search/?q=GitHub Actions">GitHub Actions</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/ci-cd/best-practices.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [ci-cd/best-practices.ch](https://matsuand.github.io/docs.docker.jp.onthefly/ci-cd/best-practices/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#inner-and-outer-loops" class="nomunge">内部ループと外部ループ</a></li>
+  <li><a href="#optimizing-cicd-deployments" class="nomunge">CI/CD デプロイメントの最適化</a></li>
+  <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/ci-cd/best-practices/";</script></body>
+</html>

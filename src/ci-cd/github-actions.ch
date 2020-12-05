@@ -11,7 +11,7 @@ title: Configure GitHub Actions
 ---
 description: GitHub Actions の設定。
 keywords: CI/CD, GitHub Actions,
-title: GitHub Actions の設定
+title: GitHub アクションの設定
 ---
 @z
 
@@ -46,8 +46,8 @@ This guide contains instructions on how to:
 3. Optimize your workflow to reduce the number of pull requests and the total build time, and finally,
 4. Push only specific versions to Docker Hub.
 {% endcomment %}
-1. GitHub Actions を設定する Docker プロジェクトを例として用います。
-2. GitHub Actions のワークフローを設定します。
+1. GitHub アクションを設定する Docker プロジェクトを例として用います。
+2. GitHub アクションのワークフローを設定します。
 3. ワークフローの最適化を行って、プルリクエスト数と総ビルド時間を軽減します。
 4. 特定バージョンのみを Docker Hub にプッシュします。
 @z
@@ -161,7 +161,7 @@ Before we start, ensure you can access [Docker Hub](https://hub.docker.com/) fro
 ## Set up the GitHub Actions workflow
 {% endcomment %}
 {: #set-up-the-gitHub-actions-workflow }
-## GitHub Actions ワークフローの設定
+## GitHub アクションワークフローの設定
 @z
 
 @x
@@ -172,7 +172,7 @@ In the previous section, we created a PAT and added it to GitHub to ensure we ca
 {% endcomment %}
 前節において PAT を生成し GitHub に追加しました。
 これによってどのワークフローからでも Docker Hub にアクセスできるようになりました。
-そこで GitHub Actions ワークフローを設定して、GitHub 上のイメージのビルドと保存を行ってみます。
+そこで GitHub アクションワークフローを設定して、GitHub 上のイメージのビルドと保存を行ってみます。
 これを行うには以下の 2 つの Docker アクションを生成します。
 @z
 
@@ -411,7 +411,7 @@ Next, let’s look at how we can optimize the GitHub Actions workflow through bu
 {% comment %}
 Next, let’s look at how we can optimize the GitHub Actions workflow through build cache. This has two main advantages:
 {% endcomment %}
-ここからは、ビルドキャッシュを利用して GitHub Actions ワークフローを最適化する方法について見ていきます。
+ここからは、ビルドキャッシュを利用して GitHub アクションワークフローを最適化する方法について見ていきます。
 最適化には主に 2 つの利点があります。
 @z
 
@@ -476,7 +476,7 @@ And lastly, after adding the builder and build cache snippets to the top of the 
 {% comment %}
 And lastly, after adding the builder and build cache snippets to the top of the Actions file, we need to add some extra attributes to the build and push step. This involves:
 {% endcomment %}
-ビルダーとビルドキャッシュの記述を Actions ファイルの上位に加えたら、ビルドとプッシュの処理ステップにおいて必要となる属性をさらに追加していきます。
+ビルダーとビルドキャッシュの記述をアクションファイルの上位に加えたら、ビルドとプッシュの処理ステップにおいて必要となる属性をさらに追加していきます。
 @z
 
 @x
@@ -564,7 +564,7 @@ Earlier, we learnt how to set up a GitHub Actions workflow to a  Docker project,
 {% comment %}
 Earlier, we learnt how to set up a GitHub Actions workflow to a  Docker project, how to optimize the workflow by setting up a builder with build cache. Let’s now look at how we can improve it further. We can do this by adding the ability to have tagged versions behave differently to all commits to master. This means, only specific versions are pushed, instead of every commit updating the latest version on Docker Hub.
 {% endcomment %}
-ここまで Docker プロジェクトに対して GitHub Actions ワークフローの設定方法と、そのワークフローの最適化を行うためにビルドキャッシュを利用したビルダーの設定方法を見てきました。
+ここまで Docker プロジェクトに対して GitHub アクションワークフローの設定方法と、そのワークフローの最適化を行うためにビルドキャッシュを利用したビルダーの設定方法を見てきました。
 そこでここからは、それをさらに改善していく方法を見ていきます。
 この改善というのはタグづけされたバージョンを利用するものであり、master へのコミットに対して異なる動作となる機能を追加することで実現します。
 つまり Docker Hub 上において全コミットが最新版を更新するのではなく、特定バージョンのみをプッシュするようにします。
@@ -598,7 +598,7 @@ This involves two steps:
 2. Setting up a GitHub Actions file to store the latest commit as an image in the GitHub registry
 {% endcomment %}
 1. GitHub ワークフローを修正して、Docker Hub の特定タグに対するコミットのみをプッシュするようにします。
-2. GitHub Actions ファイルを設定します。
+2. GitHub アクションファイルを設定します。
    最新のコミットを GitHub レジストリ内のイメージとして保存します。
 @z
 
@@ -661,7 +661,7 @@ Now, go to GitHub and check your Actions
 {% comment %}
 Now, go to GitHub and check your Actions
 {% endcomment %}
-GitHub にアクセスして Actions を確認します。
+GitHub にアクセスしてアクションを確認します。
 @z
 
 @x
@@ -679,7 +679,7 @@ Now, let’s set up a second GitHub action file to store our latest commit as an
 {% comment %}
 Now, let’s set up a second GitHub action file to store our latest commit as an image in the GitHub registry. You may want to do this to:
 {% endcomment %}
-次に 2 つめの GitHub Action ファイルを生成し、最新のコミットを GitHub レポジトリ内にイメージとして保存するようにします。
+次に 2 つめの GitHub アクションファイルを生成し、最新のコミットを GitHub レポジトリ内にイメージとして保存するようにします。
 これはたとえば以下のような場合に利用できます。
 @z
 
@@ -703,7 +703,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
 Let’s clone our previous GitHub action and add back in our previous logic for all pushes. This will mean we have two workflow files, our previous one and our new one we will now work on.
 Next, change your Docker Hub login to a GitHub container registry login:
 {% endcomment %}
-そこで上の GitHub Action をクローンして、すべてのプッシュに関する前回のロジックを再度追加します。
+そこで上の GitHub アクションをクローンして、すべてのプッシュに関する前回のロジックを再度追加します。
 つまりここで 2 つのワークフローファイルを作り出し、前回のものと今回のものがともに動くということです。
 そして Docker Hub ログインは GitHub コンテナーのレジストリログインに切り替えます。
 @z
@@ -793,7 +793,7 @@ In this guide, you have learnt how to set up GitHub Actions workflow to an exist
 {% comment %}
 In this guide, you have learnt how to set up GitHub Actions workflow to an existing Docker project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub.
 {% endcomment %}
-本ガイドを通じて、Docker プロジェクトに対する GitHub Actions ワークフローの設定方法を説明しました。
+本ガイドを通じて、Docker プロジェクトに対する GitHub アクションワークフローの設定方法を説明しました。
 またそのワークフローを最適化して、ビルド時間とプルリクエスト数の削減を行いました。
 そして Docker Hub に対して特定バージョンのみをプッシュする方法を実現しました。
 @z
@@ -825,5 +825,5 @@ To look at how you can do one of these, or to get a full example on how to set u
 To look at how you can do one of these, or to get a full example on how to set up what we have accomplished today, check out [Chad’s repo](https://github.com/metcalfc/docker-action-examples){:target="_blank" rel="noopener" class="_"} which runs you through this and more details on our latest GitHub action.
 {% endcomment %}
 上に示したような作業を実現するために、あるいはここで実現してきた内容の完全な例を確認するために、[Chad のリポジトリ](https://github.com/metcalfc/docker-action-examples){:target="_blank" rel="noopener" class="_"} の説明を参照してください。
-さらに最新の GitHub Actions に関しての詳細も説明しています。
+さらに最新の GitHub アクションに関しての詳細も説明しています。
 @z
