@@ -6,7 +6,7 @@ command: docker pause
 short: Pause all processes within one or more containers
 @y
 command: docker pause
-short: Pause all processes within one or more containers
+short: 1 つまたは複数のコンテナー内部で実行されているプロセスを一時停止します。
 @z
 
 @x
@@ -15,37 +15,30 @@ long: |-
   On Linux, this uses the freezer cgroup. Traditionally, when suspending a process
   the `SIGSTOP` signal is used, which is observable by the process being suspended.
   With the freezer cgroup the process is unaware, and unable to capture,
+  that it is being suspended, and subsequently resumed. On Windows, only Hyper-V
+  containers can be paused.
 @y
 long: |-
-  The `docker pause` command suspends all processes in the specified containers.
-  On Linux, this uses the freezer cgroup. Traditionally, when suspending a process
-  the `SIGSTOP` signal is used, which is observable by the process being suspended.
-  With the freezer cgroup the process is unaware, and unable to capture,
-@z
-
-@x
-  that it is being suspended, and subsequently resumed. On Windows, only Hyper-V
-  containers can be paused.
-@y
-  that it is being suspended, and subsequently resumed. On Windows, only Hyper-V
-  containers can be paused.
+  `docker pause`コマンドは、指定されたコンテナー内のプロセスをすべて実行停止します。
+  Linux の場合は freezer cgroup が利用されます。
+  従来よりプロセスの一時停止には`SIGSTOP`シグナルが用いられ、そのプロセスの停止によって確認できます。
+  freezer cgroup を用いた場合、一時停止されたこと、およびその後に再開されることに、プロセスは気づくことがなく、またそういう状態を把握することもできません。
+  Windows の場合は Hyper-V コンテナーのみが一時停止できます。
 @z
 
 @x
   See the
-@y
-  See the
-@z
-
-@x
   [freezer cgroup documentation](https://www.kernel.org/doc/Documentation/cgroup-v1/freezer-subsystem.txt)
   for further details.
+@y
+  より詳しくは [freezer cgroup のドキュメント](https://www.kernel.org/doc/Documentation/cgroup-v1/freezer-subsystem.txt) を参照してください。
+@z
+
+@x
 usage: docker pause CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
 @y
-  [freezer cgroup documentation](https://www.kernel.org/doc/Documentation/cgroup-v1/freezer-subsystem.txt)
-  for further details.
 usage: docker pause CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
@@ -56,16 +49,20 @@ examples: |-
   ```bash
   $ docker pause my_container
   ```
+@y
+examples: |-
+  ```bash
+  $ docker pause my_container
+  ```
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-examples: |-
-  ```bash
-  $ docker pause my_container
-  ```
 deprecated: false
 experimental: false
 experimentalcli: false

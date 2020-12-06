@@ -40,15 +40,22 @@ https://github.com/docker/cli
 @x
 ## Warnings about kernel support
 @y
+{% comment %}
 ## Warnings about kernel support
+{% endcomment %}
+{: #warnings-about-kernel-support }
+## カーネルサポートに関する注意
 @z
 
 @x
 If your operating system does not enable certain capabilities, you may see
 warnings such as one of the following, when you run `docker info`:
 @y
+{% comment %}
 If your operating system does not enable certain capabilities, you may see
 warnings such as one of the following, when you run `docker info`:
+{% endcomment %}
+利用しているオペレーティングシステムにおいて利用できないケーパビリティがある場合には、`docker info`の実行時に以下のような警告メッセージが出力されます。
 @z
 
 @x
@@ -58,6 +65,7 @@ WARNING: Your kernel does not support swap limit capabilities. Limitation discar
 @y
 ```none
 WARNING: Your kernel does not support swap limit capabilities. Limitation discarded.
+(警告: 利用中のカーネルはswap limitケーパビリティをサポートしていません。制限は無視されます。)
 ```
 @z
 
@@ -68,6 +76,7 @@ WARNING: No swap limit support
 @y
 ```none
 WARNING: No swap limit support
+(警告: swap limit はサポートされません。)
 ```
 @z
 
@@ -77,8 +86,13 @@ You can ignore these warnings unless you actually need the ability to
 should consult your operating system's documentation for enabling them.
 [Learn more](../../install/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
 @y
+{% comment %}
 You can ignore these warnings unless you actually need the ability to
 [limit these resources](../../../config/containers/resource_constraints.md), in which case you
 should consult your operating system's documentation for enabling them.
 [Learn more](../../install/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).
+{% endcomment %}
+このような警告メッセージは、[リソースの制限](../../../config/containers/resource_constraints.md) 機能を必要としていない場合には無視することができます。
+その場合、その機能を有効にする方法は、利用するオペレーティングシステムのドキュメントを参照してください。
+[詳しくはこちらも参照してください](../../install/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities)。
 @z

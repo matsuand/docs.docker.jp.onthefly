@@ -6,7 +6,7 @@ command: docker logs
 short: Fetch the logs of a container
 @y
 command: docker logs
-short: Fetch the logs of a container
+short: コンテナーからログを取得します。
 @z
 
 @x
@@ -18,7 +18,7 @@ long: |-
 @x
   The `docker logs` command batch-retrieves logs present at the time of execution.
 @y
-  The `docker logs` command batch-retrieves logs present at the time of execution.
+  `docker logs`コマンドは、処理時点に存在するログをバッチ抽出します。
 @z
 
 @x
@@ -27,95 +27,59 @@ long: |-
   > This command is only functional for containers that are started with the
   > `json-file` or `journald` logging driver.
 @y
-  > **Note**
+  > **メモ**
   >
-  > This command is only functional for containers that are started with the
-  > `json-file` or `journald` logging driver.
+  > このコマンドは`json-file`または`journald`ログドライバーを使って起動されたコンテナーに対してのみ動作します。
 @z
 
 @x
   For more information about selecting and configuring logging drivers, refer to
   [Configure logging drivers](https://docs.docker.com/config/containers/logging/configure/).
 @y
-  For more information about selecting and configuring logging drivers, refer to
-  [Configure logging drivers](https://docs.docker.com/config/containers/logging/configure/).
+  ログドライバーの選定や設定についての詳細は [ログドライバーの設定](https://docs.docker.com/config/containers/logging/configure/) を参照してください。
 @z
 
 @x
   The `docker logs --follow` command will continue streaming the new output from
   the container's `STDOUT` and `STDERR`.
 @y
-  The `docker logs --follow` command will continue streaming the new output from
-  the container's `STDOUT` and `STDERR`.
+  `docker logs --follow`を実行すると、コンテナーの`STDOUT`と`STDERR`に出力される情報を継続して受け取ります。
 @z
 
 @x
   Passing a negative number or a non-integer to `--tail` is invalid and the
   value is set to `all` in that case.
 @y
-  Passing a negative number or a non-integer to `--tail` is invalid and the
-  value is set to `all` in that case.
+  `--tail`に対して負数や数字以外を指定することはできません。
+  その場合は`all`が設定されます。
 @z
 
 @x
   The `docker logs --timestamps` command will add an [RFC3339Nano timestamp](https://golang.org/pkg/time/#pkg-constants)
-@y
-  The `docker logs --timestamps` command will add an [RFC3339Nano timestamp](https://golang.org/pkg/time/#pkg-constants)
-@z
-
-@x
   , for example `2014-09-16T06:17:46.000000000Z`, to each
   log entry. To ensure that the timestamps are aligned the
-@y
-  , for example `2014-09-16T06:17:46.000000000Z`, to each
-  log entry. To ensure that the timestamps are aligned the
-@z
-
-@x
   nano-second part of the timestamp will be padded with zero when necessary.
 @y
-  nano-second part of the timestamp will be padded with zero when necessary.
+  `docker logs --timestamps`を実行すると、各ログエントリにおいて [RFC3339Nano タイムスタンプ](https://golang.org/pkg/time/#pkg-constants) を追加します。
+  たとえば`2014-09-16T06:17:46.000000000Z`のような出力です。
+  ナノ秒の桁部分の整形が必要な場合にはゼロが埋められます。
 @z
 
 @x
   The `docker logs --details` command will add on extra attributes, such as
-@y
-  The `docker logs --details` command will add on extra attributes, such as
-@z
-
-@x
   environment variables and labels, provided to `--log-opt` when creating the
   container.
 @y
-  environment variables and labels, provided to `--log-opt` when creating the
-  container.
+  `docker logs --details`を実行すると、コンテナーの生成時に`--log-opt`に対して指定された環境変数やラベルのような追加の属性が表示されます。
 @z
 
 @x
   The `--since` option shows only the container logs generated after
   a given date. You can specify the date as an RFC 3339 date, a UNIX
   timestamp, or a Go duration string (e.g. `1m30s`, `3h`). Besides RFC3339 date
-@y
-  The `--since` option shows only the container logs generated after
-  a given date. You can specify the date as an RFC 3339 date, a UNIX
-  timestamp, or a Go duration string (e.g. `1m30s`, `3h`). Besides RFC3339 date
-@z
-
-@x
   format you may also use RFC3339Nano, `2006-01-02T15:04:05`,
-@y
-  format you may also use RFC3339Nano, `2006-01-02T15:04:05`,
-@z
-
-@x
   `2006-01-02T15:04:05.999999999`, `2006-01-02Z07:00`, and `2006-01-02`. The local
   timezone on the client will be used if you do not provide either a `Z` or a
-@y
-  `2006-01-02T15:04:05.999999999`, `2006-01-02Z07:00`, and `2006-01-02`. The local
-  timezone on the client will be used if you do not provide either a `Z` or a
-@z
-
-@x
   `+-00:00` timezone offset at the end of the timestamp. When providing Unix
   timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
   that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
@@ -123,12 +87,14 @@ long: |-
   fraction of a second no more than nine digits long. You can combine the
   `--since` option with either or both of the `--follow` or `--tail` options.
 @y
-  `+-00:00` timezone offset at the end of the timestamp. When providing Unix
-  timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
-  that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
-  seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
-  fraction of a second no more than nine digits long. You can combine the
-  `--since` option with either or both of the `--follow` or `--tail` options.
+  `--since`オプションを用いると、指定した日付時刻以降に生成されたコンテナーログのみを表示します。
+  指定できる日付書式は RFC 3339 日付、UNIX タイムスタンプ、Go 言語の時間文字列（`1m30s`、`3h`）です。
+  RFC3339 日付書式ではさらに RFC3339Nano 書式が利用可能であり、`2006-01-02T15:04:05`、`2006-01-02T15:04:05.999999999`、`2006-01-02Z07:00`、`2006-01-02`といったものが利用できます。
+  タイムスタンプの終わりに`Z`やタイムスタンプオフセット`+-00:00`を指定しなかった場合には、クライアントのタイムゾーンが用いられます。
+  Unix タイムスタンプを用いる場合は、秒[.ナノ秒]と記述します。
+  ここで秒は 1970年1月1日（UTC/GMT の真夜中）からの経過秒であり、うるう秒を含めません（Unix エポックまたは Unix 時間と呼ばれます）。
+  また任意の指定として .ナノ秒の項目には 9 桁以下の少数を記述します。
+  `--since`オプションは`--follow`オプションや`--tail`オプションと組み合わせて利用することができます。
 @z
 
 @x
@@ -137,7 +103,7 @@ pname: docker
 plink: docker.yaml
 options:
 @y
-usage: docker logs [OPTIONS] CONTAINER
+usage: docker logs [オプション] CONTAINER
 pname: docker
 plink: docker.yaml
 options:
@@ -157,7 +123,7 @@ options:
 - option: details
   value_type: bool
   default_value: "false"
-  description: Show extra details provided to logs
+  description: ログに出力されている詳細を表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -181,7 +147,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Follow log output
+  description: ログ出力を継続します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -203,7 +169,7 @@ options:
 - option: since
   value_type: string
   description: |
-    Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+    指定タイムスタンプ（たとえば 2013-01-02T13:23:37）以降、あるいは相対的な時間（たとえば 42 分なら 42m）以降のログを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -225,7 +191,7 @@ options:
 - option: tail
   value_type: string
   default_value: all
-  description: Number of lines to show from the end of the logs
+  description: ログ最終部分から表示する行数。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -249,7 +215,7 @@ options:
   shorthand: t
   value_type: bool
   default_value: "false"
-  description: Show timestamps
+  description: タイムスタンプを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -260,18 +226,7 @@ options:
 @x
 - option: until
   value_type: string
-@y
-- option: until
-  value_type: string
-@z
-
-@x
   description: |
-@y
-  description: |
-@z
-
-@x
     Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
   deprecated: false
   min_api_version: "1.35"
@@ -280,7 +235,10 @@ options:
   kubernetes: false
   swarm: false
 @y
-    Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+- option: until
+  value_type: string
+  description: |
+    指定タイムスタンプ（たとえば 2013-01-02T13:23:37）以前、あるいは相対的な時間（たとえば 42 分なら 42m）以前のログを表示します。
   deprecated: false
   min_api_version: "1.35"
   experimental: false
@@ -294,6 +252,7 @@ examples: |-
   ### Retrieve logs until a specific point in time
 @y
 examples: |-
+  {: #retrieve-logs-until-a-specific-point-in-time }
   ### Retrieve logs until a specific point in time
 @z
 
@@ -305,27 +264,19 @@ examples: |-
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker run --name test -d busybox sh -c "while true; do $(echo date); sleep 1; done"
   $ date
   Tue 14 Nov 2017 16:40:00 CET
-@y
-  $ docker run --name test -d busybox sh -c "while true; do $(echo date); sleep 1; done"
-  $ date
-  Tue 14 Nov 2017 16:40:00 CET
-@z
-
-@x
   $ docker logs -f --until=2s test
   Tue 14 Nov 2017 16:40:00 CET
   Tue 14 Nov 2017 16:40:01 CET
   Tue 14 Nov 2017 16:40:02 CET
   ```
 @y
+  ```bash
+  $ docker run --name test -d busybox sh -c "while true; do $(echo date); sleep 1; done"
+  $ date
+  Tue 14 Nov 2017 16:40:00 CET
   $ docker logs -f --until=2s test
   Tue 14 Nov 2017 16:40:00 CET
   Tue 14 Nov 2017 16:40:01 CET

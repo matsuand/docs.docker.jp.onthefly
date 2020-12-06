@@ -10,7 +10,7 @@ command: docker inspect
 @x
 short: Return low-level information on Docker objects
 @y
-short: Return low-level information on Docker objects
+short: Docker オブジェクトに対する低レベル情報を返します。
 @z
 
 @x
@@ -18,17 +18,21 @@ long: |-
   Docker inspect provides detailed information on constructs controlled by Docker.
 @y
 long: |-
-  Docker inspect provides detailed information on constructs controlled by Docker.
+  Docker inspect は Docker が制御する構造の詳細情報を提供します。
 @z
 
 @x
   By default, `docker inspect` will render results in a JSON array.
+@y
+  `docker inspect`はデフォルトで JSON 配列による結果を返します。
+@z
+
+@x
 usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 pname: docker
 plink: docker.yaml
 options:
 @y
-  By default, `docker inspect` will render results in a JSON array.
 usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 pname: docker
 plink: docker.yaml
@@ -73,7 +77,7 @@ options:
   shorthand: s
   value_type: bool
   default_value: "false"
-  description: Display total file sizes if the type is container
+  description: オブジェクトタイプがコンテナーである場合に、総ファイルサイズを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -93,7 +97,7 @@ options:
 @y
 - option: type
   value_type: string
-  description: Return JSON for specified type
+  description: 指定されたオブジェクトタイプに対する JSON データを返します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -106,27 +110,23 @@ examples: |-
   ### Get an instance's IP address
 @y
 examples: |-
-  ### Get an instance's IP address
+  {: #get-an-instances-ip-address }
+  ### インスタンスの IP アドレス取得
 @z
 
 @x
   For the most part, you can pick out any field from the JSON in a fairly
   straightforward manner.
 @y
-  For the most part, you can pick out any field from the JSON in a fairly
-  straightforward manner.
+  JSON 形式内の各データは、そのほとんどをごく普通の方法で取り出すことができます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $INSTANCE_ID
   ```
 @y
+  ```bash
   $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $INSTANCE_ID
   ```
 @z
@@ -134,19 +134,16 @@ examples: |-
 @x
   ### Get an instance's MAC address
 @y
-  ### Get an instance's MAC address
+  {: #get-an-instances-mac-address }
+  ### インスタンスの MAC アドレス取得
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID
   ```
 @y
+  ```bash
   $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID
   ```
 @z
@@ -154,19 +151,16 @@ examples: |-
 @x
   ### Get an instance's log path
 @y
-  ### Get an instance's log path
+  {: #get-an-instances-log-path }
+  ### インスタンスのログパス取得
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker inspect --format='{{.LogPath}}' $INSTANCE_ID
   ```
 @y
+  ```bash
   $ docker inspect --format='{{.LogPath}}' $INSTANCE_ID
   ```
 @z
@@ -174,19 +168,16 @@ examples: |-
 @x
   ### Get an instance's image name
 @y
-  ### Get an instance's image name
+  {: #get-an-instances-image-name }
+  ### インスタンスのイメージ名取得
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker inspect --format='{{.Config.Image}}' $INSTANCE_ID
   ```
 @y
+  ```bash
   $ docker inspect --format='{{.Config.Image}}' $INSTANCE_ID
   ```
 @z
@@ -194,27 +185,23 @@ examples: |-
 @x
   ### List all port bindings
 @y
-  ### List all port bindings
+  {: #list-all-port-bindings }
+  ### ポートバインドの一覧取得
 @z
 
 @x
   You can loop over arrays and maps in the results to produce simple text
   output:
 @y
-  You can loop over arrays and maps in the results to produce simple text
-  output:
+  配列やマップをループして、その結果から単純なテキスト出力を得ることができます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' $INSTANCE_ID
   ```
 @y
+  ```bash
   $ docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' $INSTANCE_ID
   ```
 @z
@@ -222,7 +209,8 @@ examples: |-
 @x
   ### Find a specific port mapping
 @y
-  ### Find a specific port mapping
+  {: #find-a-specific-port-mapping }
+  ### 指定ポートのマッピング取得
 @z
 
 @x
@@ -234,25 +222,19 @@ examples: |-
   then `index` 0 contains the first object inside of that. Then we ask for
   the `HostPort` field to get the public address.
 @y
-  The `.Field` syntax doesn't work when the field name begins with a
-  number, but the template language's `index` function does. The
-  `.NetworkSettings.Ports` section contains a map of the internal port
-  mappings to a list of external address/port objects. To grab just the
-  numeric public port, you use `index` to find the specific port map, and
-  then `index` 0 contains the first object inside of that. Then we ask for
-  the `HostPort` field to get the public address.
+  `.Field`を利用する文法は、この項目が数字で始まる場合には正常に動作しませんが、テンプレートの`index`機能では動作します。
+  `.NetworkSettings.Ports`というセクションは、内部ポートから外部アドレスまたはポートのオブジェクト一覧へのマッピング一覧です。
+  公開ポートの数値を取得するには、指定するポートマップの中から検索を行う`index`を利用します。
+  `index` 0 に、その結果内にある初めのオブジェクトがあります。
+  そして`HostPort`項目を調べれば、公開アドレスを得ることができます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker inspect --format='{{(index (index .NetworkSettings.Ports "8787/tcp") 0).HostPort}}' $INSTANCE_ID
   ```
 @y
+  ```bash
   $ docker inspect --format='{{(index (index .NetworkSettings.Ports "8787/tcp") 0).HostPort}}' $INSTANCE_ID
   ```
 @z
@@ -260,42 +242,37 @@ examples: |-
 @x
   ### Get a subsection in JSON format
 @y
-  ### Get a subsection in JSON format
+  {: #get-a-subsection-in-json-format }
+  ### JSON 書式のサブセクション取得
 @z
 
 @x
   If you request a field which is itself a structure containing other
-@y
-  If you request a field which is itself a structure containing other
-@z
-
-@x
   fields, by default you get a Go-style dump of the inner values.
   Docker adds a template function, `json`, which can be applied to get
   results in JSON format.
 @y
-  fields, by default you get a Go-style dump of the inner values.
-  Docker adds a template function, `json`, which can be applied to get
-  results in JSON format.
+  取得する項目が、他の項目を含んだ構造になっている場合、デフォルトで内部データは Go 言語スタイルのダンプ形式で取得します。
+  Docker にはテンプレート関数`json`があり、これを実行すると JSON 書式により結果を取得できます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
   ```
+@y
+  ```bash
+  $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
+  ```
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
-  ```
 deprecated: false
 experimental: false
 experimentalcli: false

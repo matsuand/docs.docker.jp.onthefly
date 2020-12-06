@@ -6,52 +6,44 @@ command: docker kill
 short: Kill one or more running containers
 @y
 command: docker kill
-short: Kill one or more running containers
+short: 起動コンテナーを 1 つまたは複数 kill します。
 @z
 
 @x
 long: |-
   The `docker kill` subcommand kills one or more containers. The main process
   inside the container is sent `SIGKILL` signal (default), or the signal that is
+  specified with the `--signal` option. You can kill a container using the
+  container's ID, ID-prefix, or name.
 @y
 long: |-
-  The `docker kill` subcommand kills one or more containers. The main process
-  inside the container is sent `SIGKILL` signal (default), or the signal that is
-@z
-
-@x
-  specified with the `--signal` option. You can kill a container using the
-@y
-  specified with the `--signal` option. You can kill a container using the
-@z
-
-@x
-  container's ID, ID-prefix, or name.
-@y
-  container's ID, ID-prefix, or name.
+  docker のサブコマンド`docker kill`は、コンテナー 1 つまたは複数 kill します。
+  コンテナー内のメインプロセスに対して、デフォルトでは`SIGKILL`シグナルが送信されます。
+  あるいは`--signal`オプションを指定すると、そのシグナルが送信されます。
+  コンテナーを kill する際には、コンテナー ID、ID のプレフィックス、コンテナー名を指定します。
 @z
 
 @x
   > **Note**
   >
   > `ENTRYPOINT` and `CMD` in the *shell* form run as a child process of
-@y
-  > **Note**
-  >
-  > `ENTRYPOINT` and `CMD` in the *shell* form run as a child process of
-@z
-
-@x
   > `/bin/sh -c`, which does not pass signals. This means that the executable is
   > not the container’s PID 1 and does not receive Unix signals.
+@y
+  > **メモ**
+  >
+  > **シェル** 形式による`ENTRYPOINT`および`CMD`は、`/bin/sh -c`の子プロセスとして実行されます。
+  > これはシグナルを受け渡ししません。
+  > つまりその実行モジュールはコンテナーの PID 1 ではなく、Unix シグナルを受信しないことを意味します。
+@z
+
+@x
 usage: docker kill [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
 options:
 @y
-  > `/bin/sh -c`, which does not pass signals. This means that the executable is
-  > not the container’s PID 1 and does not receive Unix signals.
-usage: docker kill [OPTIONS] CONTAINER [CONTAINER...]
+usage: docker kill [オプション] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
 options:
@@ -86,15 +78,15 @@ examples: |-
   ### Send a KILL signal  to a container
 @y
 examples: |-
-  ### Send a KILL signal  to a container
+  {: #send-a-kill-signal--to-a-container }
+  ### コンテナーへの KILL シグナルの送信
 @z
 
 @x
   The following example sends the default `KILL` signal to the container named
   `my_container`:
 @y
-  The following example sends the default `KILL` signal to the container named
-  `my_container`:
+  以下の例では`my_container`という名前のコンテナーに対して、デフォルトの`KILL`シグナルを送信します。
 @z
 
 @x
@@ -110,27 +102,23 @@ examples: |-
 @x
   ### Send a custom signal  to a container
 @y
-  ### Send a custom signal  to a container
+  {: #send-a-custom-signal--to-a-container }
+  ### コンテナーへの指定シグナルの送信
 @z
 
 @x
   The following example sends a `SIGHUP` signal to the container named
   `my_container`:
 @y
-  The following example sends a `SIGHUP` signal to the container named
-  `my_container`:
+  以下の例では`my_container`という名前のコンテナーに対して、`SIGHUP`シグナルを送信します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker kill --signal=SIGHUP  my_container
   ```
 @y
+  ```bash
   $ docker kill --signal=SIGHUP  my_container
   ```
 @z
@@ -139,28 +127,20 @@ examples: |-
   You can specify a custom signal either by _name_, or _number_. The `SIG` prefix
   is optional, so the following examples are equivalent:
 @y
-  You can specify a custom signal either by _name_, or _number_. The `SIG` prefix
-  is optional, so the following examples are equivalent:
+  シグナルの指定においては、シグナル名、シグナル番号を指定することができます。
+  プレフィックス`SIG`は任意であるため、以下に示す例はいずれも同じになります。
 @z
 
 @x
   ```bash
   $ docker kill --signal=SIGHUP my_container
-@y
-  ```bash
-  $ docker kill --signal=SIGHUP my_container
-@z
-
-@x
   $ docker kill --signal=HUP my_container
-@y
-  $ docker kill --signal=HUP my_container
-@z
-
-@x
   $ docker kill --signal=1 my_container
   ```
 @y
+  ```bash
+  $ docker kill --signal=SIGHUP my_container
+  $ docker kill --signal=HUP my_container
   $ docker kill --signal=1 my_container
   ```
 @z
@@ -169,8 +149,7 @@ examples: |-
   Refer to the [`signal(7)`](http://man7.org/linux/man-pages/man7/signal.7.html)
   man-page for a list of standard Linux signals.
 @y
-  Refer to the [`signal(7)`](http://man7.org/linux/man-pages/man7/signal.7.html)
-  man-page for a list of standard Linux signals.
+  標準的な Linux のシグナル一覧については、man ページ [`signal(7)`](http://man7.org/linux/man-pages/man7/signal.7.html) を参照してください。
 @z
 
 @x
