@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-12-08 22:23:03 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize an ASP.NET Core application | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerize an ASP.NET Core application" />
   <meta property="og:description" content="Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-08T22:23:03+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/examples/dotnetcore/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-08T22:23:03+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize an ASP.NET Core application","description":"Create a Docker image by layering your ASP.NET Core app on debian for Linux Containers or with Windows Nano Server containers using a Dockerfile.","url":"https://docs.docker.com/engine/examples/dotnetcore/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Dockerize an ASP.NET Core application</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><h2 id="introduction">Introduction</h2>
+                        <section class="section"><h1>Dockerize an ASP.NET Core application</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="introduction">Introduction</h2>
 
 <p>This example demonstrates how to dockerize an ASP.NET Core application.</p>
 
@@ -126,6 +126,8 @@ on your machine. If you are new to ASP.NET you can follow a <a href="https://www
 tutorial</a> to initialize a project or clone our <a href="https://github.com/dotnet/dotnet-docker/tree/master/samples/aspnetapp">ASP.NET Docker Sample</a>.</p>
 
 <h2 id="create-a-dockerfile-for-an-aspnet-core-application">Create a Dockerfile for an ASP.NET Core application</h2>
+
+<h3 id="method-1">Method 1:</h3>
 
 <ol>
   <li>Create a <code class="language-plaintext highlighter-rouge">Dockerfile</code> in your project folder.</li>
@@ -166,6 +168,33 @@ Linux containers depending on what mode is set in
 <pre><code class="language-dockerignore">bin/
 obj/
 </code></pre>
+<h3 id="method-2-build-app-outside-docker-container">Method 2 (build app outside Docker container):</h3>
+
+<ol>
+  <li>Create a <code class="language-plaintext highlighter-rouge">Dockerfile</code> in your project folder.</li>
+  <li>Add the text below to your <code class="language-plaintext highlighter-rouge">Dockerfile</code> for either Linux or <a href="https://docs.microsoft.com/virtualization/windowscontainers/about/">Windows
+   Containers</a>.
+The tags below are multi-arch meaning they pull either Windows or
+Linux containers depending on what mode is set in
+<a href="/docs.docker.jp.onthefly/docker-for-windows/">Docker Desktop for Windows</a>. Read more on
+<a href="/docs.docker.jp.onthefly/docker-for-windows/#switch-between-windows-and-linux-containers">switching containers</a>.</li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">Dockerfile</code> assumes that your application is called <code class="language-plaintext highlighter-rouge">aspnetapp</code>. Change the <code class="language-plaintext highlighter-rouge">Dockerfile</code> to use the DLL file of your project. This method assumes that your project is already built and it copies the build artifacts from the publish folder. Refer to the Microsoft documentation on <a href="https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile" target="blank" rel="noopener">Containerize a .Net Core app</a>.</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">docker build</code> step here will be much faster than method 1, as all the artifacts are built outside of the <code class="language-plaintext highlighter-rouge">docker build</code> step and the size of the base     image is much smaller compared to the build base image.</p>
+
+    <p>This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn’t the only deployment model being used. Addittionally, you’ll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.</p>
+
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+  COPY bin/Release/netcoreapp3.1/publish/ App/
+  WORKDIR /App
+  ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+</code></pre></div>    </div>
+  </li>
+  <li>To make your build context as small as possible add a <a href="/engine/reference/builder/#dockerignore-file"><code class="language-plaintext highlighter-rouge">.dockerignore</code>
+   file</a>
+   to your project folder.</li>
+</ol>
 
 <h2 id="build-and-run-the-docker-image">Build and run the Docker image</h2>
 
@@ -240,7 +269,12 @@ steps:
   <li><a href="#introduction" class="nomunge">Introduction</a></li>
   <li><a href="#why-build-aspnet-core" class="nomunge">Why build ASP.NET Core?</a></li>
   <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
-  <li><a href="#create-a-dockerfile-for-an-aspnet-core-application" class="nomunge">Create a Dockerfile for an ASP.NET Core application</a></li>
+  <li><a href="#create-a-dockerfile-for-an-aspnet-core-application" class="nomunge">Create a Dockerfile for an ASP.NET Core application</a>
+    <ul>
+      <li><a href="#method-1" class="nomunge">Method 1:</a></li>
+      <li><a href="#method-2-build-app-outside-docker-container" class="nomunge">Method 2 (build app outside Docker container):</a></li>
+    </ul>
+  </li>
   <li><a href="#build-and-run-the-docker-image" class="nomunge">Build and run the Docker image</a></li>
   <li><a href="#view-the-web-page-running-from-a-container" class="nomunge">View the web page running from a container</a></li>
   <li><a href="#further-reading" class="nomunge">Further reading</a></li>
