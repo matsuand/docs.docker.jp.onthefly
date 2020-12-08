@@ -888,7 +888,7 @@ volumes:
       lifecycle_policy: AFTER_14_DAYS
       performance_mode: maxIO
       throughput_mode: provisioned
-      provisioned_throughput: 1024
+      provisioned_throughput: 1
 ```
 @y
 ```yaml
@@ -900,7 +900,7 @@ volumes:
       lifecycle_policy: AFTER_14_DAYS
       performance_mode: maxIO
       throughput_mode: provisioned
-      provisioned_throughput: 1024
+      provisioned_throughput: 1
 ```
 @z
 
