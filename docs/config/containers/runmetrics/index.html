@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-12-09 15:10:20 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ランタイムメトリックス | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ランタイムメトリックス" />
   <meta property="og:description" content="Measure the behavior of running containers" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-09T15:10:20+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/runmetrics/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-09T15:10:20+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ランタイムメトリックス","description":"Measure the behavior of running containers","url":"https://docs.docker.com/config/containers/runmetrics/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ランタイムメトリックス</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p>
+                        <section class="section"><h1>ランタイムメトリックス</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p>
 <h2 id="docker-stats">docker stats</h2>
 
 <p><code class="language-plaintext highlighter-rouge">docker stats</code> コマンドを使うと、コンテナーの実行メトリックスからの出力を順次得ることができます。
@@ -137,12 +137,65 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 
 <h3 id="enumerate-cgroups">cgroups の確認</h3>
 
+<p>The file layout of cgroups is significantly different between v1 and v2.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/cgroup.controllers</code> is present on your system, you are using v2,
+otherwise you are using v1.
+Refer to the subsection that corresponds to your cgroup version.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>As of 2020, Fedora is the only well-known Linux distributon that uses cgroup v2 by default.
+Fedora uses cgroup v2 by default since Fedora 31.</p>
+</blockquote>
+
+<h4 id="cgroup-v1">cgroup v1</h4>
+
 <p><code class="language-plaintext highlighter-rouge">/proc/cgroups</code> を覗いてみるとわかりますが、システムが利用するコントロールグループのサブシステムには実にさまざまなものがあり、それが階層化されていて、数多くのグループが含まれているのがわかります。</p>
 
 <p>また <code class="language-plaintext highlighter-rouge">/proc/&lt;pid&gt;/cgroup</code> を確認してみれば、1 つのプロセスがどのコントロールグループに属しているかがわかります。
 そのときのコントロールグループは、階層構造のルートとなるマウントポイントからの相対パスで表わされます。
 <code class="language-plaintext highlighter-rouge">/</code> が表示されていれば、そのプロセスにはグループが割り当てられていません。
 一方 <code class="language-plaintext highlighter-rouge">/lxc/pumpkin</code> といった表示になっていれば、そのプロセスは <code class="language-plaintext highlighter-rouge">pumpkin</code> という名のコンテナーのメンバーであることがわかります。</p>
+
+<h4 id="cgroup-v2">cgroup v2</h4>
+
+<p>On cgroup v2 hosts, the content of <code class="language-plaintext highlighter-rouge">/proc/cgroups</code> isn’t meaningful.
+See <code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/cgroup.controllers</code> to the available controllers.</p>
+
+<h3 id="changing-cgroup-version">Changing cgroup version</h3>
+
+<p>Changing cgroup version requires rebooting the entire system.</p>
+
+<p>On systemd-based systems, cgroup v2 can be enabled by adding <code class="language-plaintext highlighter-rouge">systemd.unified_cgroup_hierarchy=1</code>
+to the kernel cmdline.
+To revert the cgroup version to v1, you need to set <code class="language-plaintext highlighter-rouge">systemd.unified_cgroup_hierarchy=0</code> instead.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">grubby</code> command is available on your system (e.g. on Fedora), the cmdline can be modified as follows:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>grubby <span class="nt">--update-kernel</span><span class="o">=</span>ALL <span class="nt">--args</span><span class="o">=</span><span class="s2">"systemd.unified_cgroup_hierarchy=1"</span>
+</code></pre></div></div>
+
+<p>If <code class="language-plaintext highlighter-rouge">grubby</code> command is not available, edit the <code class="language-plaintext highlighter-rouge">GRUB_CMDLINE_LINUX</code> line in <code class="language-plaintext highlighter-rouge">/etc/default/grub</code>
+and run <code class="language-plaintext highlighter-rouge">sudo update-grub</code>.</p>
+
+<h3 id="running-docker-on-cgroup-v2">Running Docker on cgroup v2</h3>
+
+<p>Docker supports cgroup v2 experimentally since Docker 20.10.
+Running Docker on cgroup v2 also requires the following conditions to be satisfied:</p>
+<ul>
+  <li>containerd: v1.4 or later</li>
+  <li>runc: v1.0.0-rc91 or later</li>
+  <li>Kernel: v4.15 or later (v5.2 or later is recommended)</li>
+</ul>
+
+<p>Note that the cgroup v2 mode behaves slightly different from the cgroup v1 mode:</p>
+<ul>
+  <li>The default cgroup driver (<code class="language-plaintext highlighter-rouge">dockerd --exec-opt native.cgroupdriver</code>) is “systemd” on v2, “cgroupfs” on v1.</li>
+  <li>The default cgroup namespace mode (<code class="language-plaintext highlighter-rouge">docker run --cgroupns</code>) is “private” on v2, “host” on v1.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">docker run</code> flags <code class="language-plaintext highlighter-rouge">--oom-kill-disable</code> and <code class="language-plaintext highlighter-rouge">--kernel-memory</code> are discarded on v2.</li>
+</ul>
 
 <h3 id="find-the-cgroup-for-a-given-container">特定コンテナーに対応する cgroup の検索</h3>
 
@@ -154,9 +207,22 @@ redis2              0.07%               2.746 MB / 64 MB      4.29%             
 <code class="language-plaintext highlighter-rouge">docker ps</code> によってコンテナーが ae836c95b4c3 のように示されていたら、長めの ID はたとえば <code class="language-plaintext highlighter-rouge">ae836c95b4c3c9e9179e0e91015512da89fdec91612f63cebae57df9a5444c79</code> のようなものになります。
 これは <code class="language-plaintext highlighter-rouge">docker inspect</code> を用いるか、あるいは <code class="language-plaintext highlighter-rouge">docker ps --no-trunc</code> とすれば確認することができます。</p>
 
-<p>Docker コンテナーに対するメモリメトリックスを取りまとめて確認するには、<code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/memory/docker/&lt;longid&gt;/</code> を見ます。</p>
+<p>Docker コンテナーに対するメモリメトリックスを取りまとめて確認するには、以下のパスを見ます。</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/memory/docker/&lt;longid&gt;/</code>、cgroup v1、<code class="language-plaintext highlighter-rouge">cgroupfs</code>ドライバー利用時。</li>
+  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/memory/system.slice/docker-&lt;longid&gt;.scope/</code>、cgroup v1、<code class="language-plaintext highlighter-rouge">systemd</code>ドライバー利用時。</li>
+  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/docker/&lt;longid/&gt;</code>、cgroup v2、<code class="language-plaintext highlighter-rouge">cgroupfs</code>ドライバー利用時。</li>
+  <li><code class="language-plaintext highlighter-rouge">/sys/fs/cgroup/system.slice/docker-&lt;longid&gt;.scope/</code>、cgroup v2、<code class="language-plaintext highlighter-rouge">systemd</code>ドライバー利用時。</li>
+</ul>
 
 <h3 id="metrics-from-cgroups-memory-cpu-block-io">cgroups の各メトリックス、メモリ、CPU、ブロック I/O</h3>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>This section is not yet updated for cgroup v2.
+For further information about cgroup v2, refer to <a href="https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html">the kernel documentation</a>.</p>
+</blockquote>
 
 <p>各サブシステム（メモリ、CPU、ブロック I/O）に対しては、擬似ファイルシステムが存在し、そこに統計情報が含まれます。</p>
 
@@ -505,6 +571,8 @@ DNS の逆引きを避けるためのものですが、ここでの作業では�
   <li><a href="#control-groups" class="nomunge">コントロールグループ</a>
     <ul>
       <li><a href="#enumerate-cgroups" class="nomunge">cgroups の確認</a></li>
+      <li><a href="#changing-cgroup-version" class="nomunge">Changing cgroup version</a></li>
+      <li><a href="#running-docker-on-cgroup-v2" class="nomunge">Running Docker on cgroup v2</a></li>
       <li><a href="#find-the-cgroup-for-a-given-container" class="nomunge">特定コンテナーに対応する cgroup の検索</a></li>
       <li><a href="#metrics-from-cgroups-memory-cpu-block-io" class="nomunge">cgroups の各メトリックス、メモリ、CPU、ブロック I/O</a></li>
       <li><a href="#cpu-metrics-cpuacctstat" class="nomunge">CPU メトリックス: cpuacct.stat</a></li>

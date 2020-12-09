@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-10 11:39:39 +0900-->
+<!-- Page generated 2020-12-09 15:10:20 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>root ユーザー以外による Docker デーモン起動（rootless モード） | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="root ユーザー以外による Docker デーモン起動（rootless モード）" />
   <meta property="og:description" content="root ユーザー以外によって Docker デーモンを起動します（rootless モード）。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-10T11:39:39+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-09T15:10:20+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-10T11:39:39+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-09T15:10:20+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"root ユーザー以外による Docker デーモン起動（rootless モード）","description":"root ユーザー以外によって Docker デーモンを起動します（rootless モード）。","url":"https://docs.docker.com/engine/security/rootless/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,20 +98,14 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>root ユーザー以外による Docker デーモン起動（rootless モード）</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p>
+                        <section class="section"><h1>root ユーザー以外による Docker デーモン起動（rootless モード）</h1><p><em class="reading-time">読む時間の目安: 12 分</em></p>
 <p>rootless モードとは、root 以外のユーザーによって Docker デーモンやコンテナーを起動するものであり、デーモンや起動コンテナーにおける潜在的なぜい弱性を軽減します。</p>
 
 <p>rootless モードは root 権限を必要としません。
 しかも <a href="#prerequisites">前提条件</a> を満たしていれば、Docker デーモンのインストール時も必要としません。</p>
 
-<p>rootless モードは Docker Engine v19.03 から導入されました。</p>
-
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>rootless モードは試験的な機能であるため、制約がいくつかあります。
-詳しくは <a href="#known-limitations">既知の問題</a> を参照してください。</p>
-</blockquote>
+<p>rootless モードは Docker Engine v19.03 において試験的機能として導入されました。
+rootless モードは Docker Engine v20.10 から正規機能となりました。</p>
 
 <h2 id="how-it-works">どのように動作するか</h2>
 
@@ -188,12 +182,22 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
 <h4 id="arch-linux">Arch Linux</h4>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
+その場合は<code class="language-plaintext highlighter-rouge">sudo pacman -S fuse-overlayfs</code>を実行します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
+  </li>
 </ul>
 
 <h4 id="opensuse">openSUSE</h4>
 
 <ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
+その場合は<code class="language-plaintext highlighter-rouge">sudo zypper install -y fuse-overlayfs</code>を実行します。</p>
+  </li>
   <li>
     <p><code class="language-plaintext highlighter-rouge">sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter</code>を実行することが必要です。
 設定方法によっては他のディストリビューションにおいても必要なことかもしれません。</p>
@@ -203,19 +207,19 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
   </li>
 </ul>
 
-<h4 id="fedora-31-and-later">Fedora 31 およびそれ以降</h4>
+<h4 id="centos-8-and-fedora">CentOS 8 と Fedora</h4>
 
 <ul>
-  <li>Fedora 31 はデフォルトで cgroup v2 を利用しています。
-これは今のところ、コンテナー起動においてサポートされていません。
-<code class="language-plaintext highlighter-rouge">sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"</code>を実行して cgroup v1 を利用するようにしてください。</li>
-  <li><code class="language-plaintext highlighter-rouge">sudo dnf install -y iptables</code>が必要かもしれません。</li>
-</ul>
-
-<h4 id="centos-8">CentOS 8</h4>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">sudo dnf install -y iptables</code>が必要かもしれません。</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
+その場合は<code class="language-plaintext highlighter-rouge">sudo dnf install -y fuse-overlayfs</code>を実行します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sudo dnf install -y iptables</code>が必要かもしれません。</p>
+  </li>
+  <li>
+    <p>CentOS 8 と Fedora 32 において動作します。</p>
+  </li>
 </ul>
 
 <h4 id="centos-7">CentOS 7</h4>
@@ -226,8 +230,7 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
   </li>
   <li>
     <p>デフォルトでは<code class="language-plaintext highlighter-rouge">systemctl --user</code>は動作しません。
-デーモンは sysmted を使わずに直接起動してください。
-<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh --experimental --storage-driver vfs</code>などです。</p>
+デーモンは sysmted を使わずに直接<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>を起動してください。</p>
   </li>
   <li>
     <p>CentOS 7.7 において動作します。
@@ -244,11 +247,17 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
 <h2 id="known-limitations">既知の制約</h2>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">vfs</code>グラフドライバーだけがサポートされます。
-ただし Ubuntu と Debian 10 の場合は<code class="language-plaintext highlighter-rouge">overlay2</code>と<code class="language-plaintext highlighter-rouge">overlay</code>もサポートされます。</li>
+  <li>以下のストレージドライバーのみがサポートされます。
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">overlay2</code>（Ubuntu ホストおよび Debian 10 ホストのみ。）</li>
+      <li><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>（カーネル 4.18 またはそれ以降の稼動時、そして<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>インストール時のみ。）</li>
+      <li><code class="language-plaintext highlighter-rouge">vfs</code></li>
+    </ul>
+  </li>
+  <li>cgroup は cgroup v2 および systemd を用いて実行するときのみサポートされます。
+<a href="#limiting-resources">リソースの利用制限</a> を参照してください。</li>
   <li>以下の機能はサポートされません。
     <ul>
-      <li>cgroups （cgroups に依存している<code class="language-plaintext highlighter-rouge">docker top</code>も同様。）</li>
       <li>AppArmor</li>
       <li>Checkpoint</li>
       <li>Overlay ネットワーク</li>
@@ -364,14 +373,8 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 
 <p>Systemd を使わずにデーモンを直接起動するには、<code class="language-plaintext highlighter-rouge">dockerd</code>の代わりに<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>を起動する必要があります。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd-rootless.sh <span class="nt">--experimental</span> <span class="nt">--storage-driver</span> vfs
-</code></pre></div></div>
-
-<p>rootless モードは試験的機能であるため、<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>は<code class="language-plaintext highlighter-rouge">--experimental</code>をつけて実行する必要があります。</p>
-
-<p>さらに Ubuntu や Debian 10 を利用していないなら、<code class="language-plaintext highlighter-rouge">--storage-driver vfs</code>の指定も必要です。
-Systemd を利用してデーモンを管理する場合は、これらのフラグについて気にかける必要はありません。
-フラグは Systemd ユニットファイルに自動的に追加されます。</p>
+<p>Docker 19.03 において<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>を実行する際には<code class="language-plaintext highlighter-rouge">--experimental</code>の指定が必要でした。
+Docker 20.10 からは<code class="language-plaintext highlighter-rouge">--experimental</code>フラグを不要になりました。</p>
 
 <p>ディレクトリパスについて触れておきます。</p>
 
@@ -389,7 +392,6 @@ Systemd を利用してデーモンを管理する場合は、これらのフラ
   <li><code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>スクリプトは、これが有するユーザー、マウント、ネットワーク名前空間のもとで<code class="language-plaintext highlighter-rouge">dockerd</code>を実行します。
 その名前空間に入るには<code class="language-plaintext highlighter-rouge">nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)</code>を実行します。</li>
   <li><code class="language-plaintext highlighter-rouge">docker info</code>を実行すると<code class="language-plaintext highlighter-rouge">SecurityOptions</code>欄に<code class="language-plaintext highlighter-rouge">rootless</code>と表示されます。</li>
-  <li><code class="language-plaintext highlighter-rouge">docker info</code>を実行すると<code class="language-plaintext highlighter-rouge">Cgroup Driver</code>欄が<code class="language-plaintext highlighter-rouge">none</code>と表示されます。</li>
 </ul>
 
 <h3 id="client">クライアント</h3>
@@ -419,11 +421,16 @@ Current context is now "rootless"
 
 <p>「完全な root」で動作する Docker 内において Rootless Docker を起動するには、<code class="language-plaintext highlighter-rouge">docker:&lt;version&gt;-dind</code>イメージの代わりに<code class="language-plaintext highlighter-rouge">docker:&lt;version&gt;-dind-rootless</code>イメージを利用します。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--name</span> dind-rootless <span class="nt">--privileged</span> docker:19.03-dind-rootless <span class="nt">--experimental</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--name</span> dind-rootless <span class="nt">--privileged</span> docker:20.10-dind-rootless
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker:&lt;version&gt;-dind-rootless</code>イメージは非 root ユーザー（UID 1000）により動作します。
 ただし seccomp、AppArmor、マウントマスクを無効化するには<code class="language-plaintext highlighter-rouge">--privileged</code>の指定が必要です。</p>
+
+<p>Docker 19.03 においては<code class="language-plaintext highlighter-rouge">--experimental</code>フラグの指定が必要です。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--name</span> dind-rootless <span class="nt">--privileged</span> docker:19.03-dind-rootless <span class="nt">--experimental</span>
+</code></pre></div></div>
 
 <h3 id="expose-docker-api-socket-through-tcp">TCP を通じた Docker API ソケットの公開</h3>
 
@@ -461,10 +468,41 @@ Current context is now "rootless"
 
 <h3 id="limiting-resources">リソースの利用制限</h3>
 
-<p>Docker 19.03 において rootless モードは、<code class="language-plaintext highlighter-rouge">docker run</code>における cgroup 関連のフラグ、たとえば<code class="language-plaintext highlighter-rouge">--cpus</code>、<code class="language-plaintext highlighter-rouge">--memory</code>、<code class="language-plaintext highlighter-rouge"> --pids-limit</code>は無視します。</p>
+<p>Limiting resources with cgroup-related <code class="language-plaintext highlighter-rouge">docker run</code> flags such as <code class="language-plaintext highlighter-rouge">--cpus</code>, <code class="language-plaintext highlighter-rouge">--memory</code>, <code class="language-plaintext highlighter-rouge">--pids-limit</code>
+is supported only when running with cgroup v2 and systemd.
+See <a href="/docs.docker.jp.onthefly/config/containers/runmetrics/">Changing cgroup version</a> to enable cgroup v2.</p>
 
-<p>ただし従来からの<code class="language-plaintext highlighter-rouge">ulimit</code>や<a href="https://github.com/opsengine/cpulimit"><code class="language-plaintext highlighter-rouge">cpulimit</code></a> は利用することができます。
-これらはコンテナー単位というよりもプロセス単位での処理動作を規定するものではありますが、コンテナープロセスごとに無効化することができます。</p>
+<p>If <code class="language-plaintext highlighter-rouge">docker info</code> shows <code class="language-plaintext highlighter-rouge">none</code> as <code class="language-plaintext highlighter-rouge">Cgroup Driver</code>, the conditions are not satisfied.
+When these conditions are not satisfied, rootless mode ignores the cgroup-related <code class="language-plaintext highlighter-rouge">docker run</code> flags.
+See <a href="#limiting-resources-without-cgroup">Limiting resources without cgroup</a> for workarounds.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">docker info</code> shows <code class="language-plaintext highlighter-rouge">systemd</code> as <code class="language-plaintext highlighter-rouge">Cgroup Driver</code>, the conditions are satisfied.
+However, typically, only <code class="language-plaintext highlighter-rouge">memory</code> and <code class="language-plaintext highlighter-rouge">pids</code> controllers are delegated to non-root users by default.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /sys/fs/cgroup/user.slice/user-<span class="si">$(</span><span class="nb">id</span> <span class="nt">-u</span><span class="si">)</span>.slice/user@<span class="si">$(</span><span class="nb">id</span> <span class="nt">-u</span><span class="si">)</span>.service/cgroup.controllers
+<span class="go">memory pids
+</span></code></pre></div></div>
+
+<p>To allow delegation of all controllers, you need to change the systemd configuration as follows:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/systemd/system/user@.service.d
+<span class="gp">#</span><span class="w"> </span><span class="nb">cat</span> <span class="o">&gt;</span> /etc/systemd/system/user@.service.d/delegate.conf <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh">
+</span><span class="go">[Service]
+Delegate=cpu cpuset io memory pids
+EOF
+</span><span class="gp">#</span><span class="w"> </span>systemctl daemon-reload
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p><code class="language-plaintext highlighter-rouge">cpuset</code>のデリゲートには systemd 244 またはそれ以降が必要です。</p>
+</blockquote>
+
+<h4 id="limiting-resources-without-cgroup">Limiting resources without cgroup</h4>
+<p>Even when cgroup is not available, you can still use the traditional <code class="language-plaintext highlighter-rouge">ulimit</code> and <a href="https://github.com/opsengine/cpulimit"><code class="language-plaintext highlighter-rouge">cpulimit</code></a>,
+though they work in process-granularity rather than in container-granularity,
+and can be arbitrarily disabled by the container process.</p>
 
 <p>たとえば以下です。</p>
 
@@ -525,7 +563,7 @@ Current context is now "rootless"
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XDG_RUNTIME_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/.docker/xrd
 <span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-rf</span> <span class="nv">$XDG_RUNTIME_DIR</span>
 <span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$XDG_RUNTIME_DIR</span>
-<span class="gp">$</span><span class="w"> </span>dockerd-rootless.sh <span class="nt">--experimental</span>
+<span class="gp">$</span><span class="w"> </span>dockerd-rootless.sh
 </code></pre></div></div>
 
 <blockquote>
@@ -560,8 +598,10 @@ up automatically. See <a href="#usage">Usage</a>.</p>
 
 <p><strong><code class="language-plaintext highlighter-rouge">dockerd</code> fails with “rootless mode is supported only when running in experimental mode”</strong></p>
 
-<p>This error occurs when the daemon is launched without the <code class="language-plaintext highlighter-rouge">--experimental</code> flag.
+<p>This error occurs when the daemon is launched without the <code class="language-plaintext highlighter-rouge">--experimental</code> flag on Docker 19.03.
 See <a href="#usage">Usage</a>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">--experimental</code>フラグは Docker 20.10 からは不要になりました。</p>
 
 <h3 id="docker-pull-errors"><code class="language-plaintext highlighter-rouge">docker pull</code> errors</h3>
 
@@ -576,7 +616,9 @@ images. However, 65,536 entries are sufficient for most images. See
 
 <p><strong><code class="language-plaintext highlighter-rouge">--cpus</code>, <code class="language-plaintext highlighter-rouge">--memory</code>, and <code class="language-plaintext highlighter-rouge">--pids-limit</code> are ignored</strong></p>
 
-<p>This is an expected behavior in Docker 19.03. For more information, see <a href="#limiting-resources">Limiting resources</a>.</p>
+<p>This is an expected behavior on cgroup v1 mode.
+To use these flags, the host needs to be configured for enabling cgroup v2.
+For more information, see <a href="#limiting-resources">Limiting resources</a>.</p>
 
 <p><strong>Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.</strong></p>
 
