@@ -4,6 +4,7 @@
 @x
 | Docker version | Maximum API version        | Change log                                               |
 |:---------------|:---------------------------|:---------------------------------------------------------|
+| 20.10          | [1.41](/engine/api/v1.41/) | [changes](/engine/api/version-history/#v141-api-changes) |
 | 19.03          | [1.40](/engine/api/v1.40/) | [changes](/engine/api/version-history/#v140-api-changes) |
 | 18.09          | [1.39](/engine/api/v1.39/) | [changes](/engine/api/version-history/#v139-api-changes) |
 | 18.06          | [1.38](/engine/api/v1.38/) | [changes](/engine/api/version-history/#v138-api-changes) |
@@ -33,6 +34,7 @@
 @y
 | Docker version | Maximum API version        | Change log                                               |
 |:---------------|:---------------------------|:---------------------------------------------------------|
+| 20.10          | [1.41](/engine/api/v1.41/) | [changes](/engine/api/version-history/#v141-api-changes) |
 | 19.03          | [1.40](/engine/api/v1.40/) | [changes](/engine/api/version-history/#v140-api-changes) |
 | 18.09          | [1.39](/engine/api/v1.39/) | [changes](/engine/api/version-history/#v139-api-changes) |
 | 18.06          | [1.38](/engine/api/v1.38/) | [changes](/engine/api/version-history/#v138-api-changes) |

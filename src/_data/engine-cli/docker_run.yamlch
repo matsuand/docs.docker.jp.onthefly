@@ -209,6 +209,38 @@ options:
 @z
 
 @x
+- option: cgroupns
+  value_type: string
+  description: |-
+    Cgroup namespace to use (host|private)
+    'host':    Run the container in the Docker host's cgroup namespace
+    'private': Run the container in its own private cgroup namespace
+    '':        Use the cgroup namespace as configured by the
+               default-cgroupns-mode option on the daemon (default)
+  deprecated: false
+  min_api_version: "1.41"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: cgroupns
+  value_type: string
+  description: |-
+    利用する cgroup 名前空間（host|private）。
+    'host':    Dockerホストのcgroup名前空間内でコンテナーを起動。
+    'private': プライベートなcgroup名前空間内でコンテナーを起動。
+    '':        デーモンのdefault-cgroupns-modeオプションによって
+               設定されるcgroup名前空間を利用（デフォルト）。
+  deprecated: false
+  min_api_version: "1.41"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
 - option: cidfile
   value_type: string
   description: Write the container ID to the file
@@ -1708,7 +1740,7 @@ options:
   description: Set platform if server is multi-platform capable
   deprecated: false
   min_api_version: "1.32"
-  experimental: true
+  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
@@ -1718,7 +1750,7 @@ options:
   description: サーバーがマルチプラットフォームに対応している場合に、プラットフォームを指定します。
   deprecated: false
   min_api_version: "1.32"
-  experimental: true
+  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
@@ -1785,6 +1817,28 @@ options:
   value_type: bool
   default_value: "false"
   description: 公開されたポートをランダムポートとして公開します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@z
+
+@x
+- option: pull
+  value_type: string
+  default_value: missing
+  description: Pull image before running ("always"|"missing"|"never")
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+@y
+- option: pull
+  value_type: string
+  default_value: missing
+  description: イメージ生成前にプルを行います（"always"|"missing"|"never"）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -3381,15 +3435,11 @@ examples: |-
   It is often necessary to directly expose devices to a container. The `--device`
   option enables that. For example, a specific block storage device or loop
   device or audio device can be added to an otherwise unprivileged container
+  (without the `--privileged` flag) and have the application directly access it.
 @y
   It is often necessary to directly expose devices to a container. The `--device`
   option enables that. For example, a specific block storage device or loop
   device or audio device can be added to an otherwise unprivileged container
-@z
-
-@x
-  (without the `--privileged` flag) and have the application directly access it.
-@y
   (without the `--privileged` flag) and have the application directly access it.
 @z
 
@@ -3401,10 +3451,12 @@ examples: |-
 
 @x
   This can be overridden using a third `:rwm` set of options to each `--device`
-  flag:
+  flag. If the container is running in privileged mode, then the permissions specified
+  will be ignored.
 @y
   This can be overridden using a third `:rwm` set of options to each `--device`
-  flag:
+  flag. If the container is running in privileged mode, then the permissions specified
+  will be ignored.
 @z
 
 @x

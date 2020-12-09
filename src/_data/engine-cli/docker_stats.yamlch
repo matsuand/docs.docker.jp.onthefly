@@ -32,15 +32,24 @@ long: |-
 @x
   > **Note**
   >
-  > On Linux, the Docker CLI reports memory usage by subtracting page cache usage
-  > from the total memory usage. The API does not perform such a calculation but
-  > rather provides the total memory usage and the amount from the page cache so
-  > that clients can use the data as needed.
+  > On Linux, the Docker CLI reports memory usage by subtracting cache usage from
+  > the total memory usage. The API does not perform such a calculation but rather
+  > provides the total memory usage and the amount from the cache so that clients
+  > can use the data as needed. The cache usage is defined as the value of
+  > `total_inactive_file` field in the `memory.stat` file on cgroup v1 hosts.
+  >
+  > On Docker 19.03 and older, the cache usage was defined as the value of `cache`
+  > field. On cgroup v2 hosts, the cache usage is defined as the value of
+  > `inactive_file` field.
 @y
   > **メモ**
   >
-  > Linux 上の Docker CLI が表示するメモリ使用量は、全メモリ使用量からページキャッシュ使用量を差し引いたものです。
-  > API ではそういった計算は行いませんが、クライアントが必要に応じてデータ利用できるように、全メモリ使用量とページキャッシュ量は示します。
+  > Linux 上の Docker CLI が表示するメモリ使用量は、全メモリ使用量からキャッシュ使用量を差し引いたものです。
+  > API ではそういった計算は行いませんが、クライアントが必要に応じてデータ利用できるように、全メモリ使用量とキャッシュ量は示します。
+  > キャッシュ使用量は cgroup v1 ホスト上の`memory.stat`ファイル内において`total_inactive_file`項目の値として定義されます。
+  >
+  > Docker 19.03 またはそれ以前においてキャッシュ使用量は`cache`項目の値として定義されていました。
+  > cgroup v2 ホストにおいてキャッシュ使用量は`inactive_file`項目の値として定義されます。
 @z
 
 @x

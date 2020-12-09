@@ -142,6 +142,7 @@ bases = \
 	manifest_create \
 	manifest_inspect \
 	manifest_push \
+	manifest_rm \
 	network \
 	network_connect \
 	network_create \

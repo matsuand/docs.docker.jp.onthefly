@@ -142,42 +142,42 @@ $ docker version
 @z
 
 @x
-Client:
-  Version:           19.03.5
-  API version:       1.40
-  Go version:        go1.12.12
-  Git commit:        633a0ea
-  Built:             Wed Nov 13 07:22:37 2019
-  OS/Arch:           windows/amd64
-  Experimental:      true
-@y
-Client:
-  Version:           19.03.5
-  API version:       1.40
-  Go version:        go1.12.12
-  Git commit:        633a0ea
-  Built:             Wed Nov 13 07:22:37 2019
-  OS/Arch:           windows/amd64
-  Experimental:      true
-@z
-
-@x
-Server:
-  Version:          19.03.5
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.12
-  Git commit:       633a0ea
-  Built:            Wed Nov 13 07:29:19 2019
+Client: Docker Engine - Community
+ Version:           20.10.0
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        7287ab3
+ Built:             Tue Dec  8 19:00:39 2020
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.0
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.13.15
+  Git commit:       eeddea2
+  Built:            Tue Dec  8 18:58:12 2020
   OS/Arch:          linux/amd64
   ...
 ```
 @y
-Server:
-  Version:          19.03.5
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.12
-  Git commit:       633a0ea
-  Built:            Wed Nov 13 07:29:19 2019
+Client: Docker Engine - Community
+ Version:           20.10.0
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        7287ab3
+ Built:             Tue Dec  8 19:00:39 2020
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.0
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.13.15
+  Git commit:       eeddea2
+  Built:            Tue Dec  8 18:58:12 2020
   OS/Arch:          linux/amd64
   ...
 ```
@@ -200,11 +200,11 @@ You can specify the API version to use, in one of the following ways:
 @x
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/`, you can use
-  `/v1.40/containers/`.
+  `/v1.41/containers/`.
 @y
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/`, you can use
-  `/v1.40/containers/`.
+  `/v1.41/containers/`.
 @z
 
 @x
@@ -221,11 +221,11 @@ You can specify the API version to use, in one of the following ways:
 
 @x
   ```bash
-  DOCKER_API_VERSION='1.40'
+  DOCKER_API_VERSION='1.41'
   ```
 @y
   ```bash
-  DOCKER_API_VERSION='1.40'
+  DOCKER_API_VERSION='1.41'
   ```
 @z
 

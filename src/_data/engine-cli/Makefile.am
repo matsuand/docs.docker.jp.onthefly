@@ -99,6 +99,7 @@ bases = \
 	docker_manifest_create \
 	docker_manifest_inspect \
 	docker_manifest_push \
+	docker_manifest_rm \
 	docker_network \
 	docker_network_connect \
 	docker_network_create \
@@ -215,6 +216,7 @@ tgtdir:
 Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
 	sed -i -e "/docker_build.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_build.yaml" $@
+	sed -i -e "/docker_export.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_export.yaml" $@
 	sed -i -e "/docker_network_create.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_network_create.yaml" $@
 	sed -i -e "/docker_node_demote.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_demote.yaml" $@
 	sed -i -e "/docker_node_promote.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_promote.yaml" $@

@@ -184,6 +184,40 @@ $ grep cgroup /proc/mounts
 @z
 
 @x
+The file layout of cgroups is significantly different between v1 and v2.
+@y
+The file layout of cgroups is significantly different between v1 and v2.
+@z
+
+@x
+If `/sys/fs/cgroup/cgroup.controllers` is present on your system, you are using v2,
+otherwise you are using v1.
+Refer to the subsection that corresponds to your cgroup version.
+@y
+If `/sys/fs/cgroup/cgroup.controllers` is present on your system, you are using v2,
+otherwise you are using v1.
+Refer to the subsection that corresponds to your cgroup version.
+@z
+
+@x
+> **Note**
+>
+> As of 2020, Fedora is the only well-known Linux distributon that uses cgroup v2 by default.
+> Fedora uses cgroup v2 by default since Fedora 31.
+@y
+> **Note**
+>
+> As of 2020, Fedora is the only well-known Linux distributon that uses cgroup v2 by default.
+> Fedora uses cgroup v2 by default since Fedora 31.
+@z
+
+@x
+#### cgroup v1
+@y
+#### cgroup v1
+@z
+
+@x
 You can look into `/proc/cgroups` to see the different control group subsystems
 known to the system, the hierarchy they belong to, and how many groups they contain.
 @y
@@ -212,6 +246,98 @@ container named `pumpkin`.
 そのときのコントロールグループは、階層構造のルートとなるマウントポイントからの相対パスで表わされます。
 `/` が表示されていれば、そのプロセスにはグループが割り当てられていません。
 一方 `/lxc/pumpkin` といった表示になっていれば、そのプロセスは `pumpkin` という名のコンテナーのメンバーであることがわかります。
+@z
+
+@x
+#### cgroup v2
+@y
+#### cgroup v2
+@z
+
+@x
+On cgroup v2 hosts, the content of `/proc/cgroups` isn't meaningful.
+See `/sys/fs/cgroup/cgroup.controllers` to the available controllers.
+@y
+On cgroup v2 hosts, the content of `/proc/cgroups` isn't meaningful.
+See `/sys/fs/cgroup/cgroup.controllers` to the available controllers.
+@z
+
+@x
+### Changing cgroup version
+@y
+### Changing cgroup version
+@z
+
+@x
+Changing cgroup version requires rebooting the entire system.
+@y
+Changing cgroup version requires rebooting the entire system.
+@z
+
+@x
+On systemd-based systems, cgroup v2 can be enabled by adding `systemd.unified_cgroup_hierarchy=1`
+to the kernel cmdline.
+To revert the cgroup version to v1, you need to set `systemd.unified_cgroup_hierarchy=0` instead.
+@y
+On systemd-based systems, cgroup v2 can be enabled by adding `systemd.unified_cgroup_hierarchy=1`
+to the kernel cmdline.
+To revert the cgroup version to v1, you need to set `systemd.unified_cgroup_hierarchy=0` instead.
+@z
+
+@x
+If `grubby` command is available on your system (e.g. on Fedora), the cmdline can be modified as follows:
+@y
+If `grubby` command is available on your system (e.g. on Fedora), the cmdline can be modified as follows:
+@z
+
+@x
+```console
+$ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=1"
+```
+@y
+```console
+$ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=1"
+```
+@z
+
+@x
+If `grubby` command is not available, edit the `GRUB_CMDLINE_LINUX` line in `/etc/default/grub`
+and run `sudo update-grub`.
+@y
+If `grubby` command is not available, edit the `GRUB_CMDLINE_LINUX` line in `/etc/default/grub`
+and run `sudo update-grub`.
+@z
+
+@x
+### Running Docker on cgroup v2
+@y
+### Running Docker on cgroup v2
+@z
+
+@x
+Docker supports cgroup v2 experimentally since Docker 20.10.
+Running Docker on cgroup v2 also requires the following conditions to be satisfied:
+* containerd: v1.4 or later
+* runc: v1.0.0-rc91 or later
+* Kernel: v4.15 or later (v5.2 or later is recommended)
+@y
+Docker supports cgroup v2 experimentally since Docker 20.10.
+Running Docker on cgroup v2 also requires the following conditions to be satisfied:
+* containerd: v1.4 or later
+* runc: v1.0.0-rc91 or later
+* Kernel: v4.15 or later (v5.2 or later is recommended)
+@z
+
+@x
+Note that the cgroup v2 mode behaves slightly different from the cgroup v1 mode:
+* The default cgroup driver (`dockerd --exec-opt native.cgroupdriver`) is "systemd" on v2, "cgroupfs" on v1.
+* The default cgroup namespace mode (`docker run --cgroupns`) is "private" on v2, "host" on v1.
+* The `docker run` flags `--oom-kill-disable` and `--kernel-memory` are discarded on v2.
+@y
+Note that the cgroup v2 mode behaves slightly different from the cgroup v1 mode:
+* The default cgroup driver (`dockerd --exec-opt native.cgroupdriver`) is "systemd" on v2, "cgroupfs" on v1.
+* The default cgroup namespace mode (`docker run --cgroupns`) is "private" on v2, "host" on v1.
+* The `docker run` flags `--oom-kill-disable` and `--kernel-memory` are discarded on v2.
 @z
 
 @x
@@ -262,13 +388,25 @@ cgroup を利用する Docker コンテナーにおいて、コンテナー名�
 
 @x
 Putting everything together to look at the memory metrics for a Docker
-container, take a look at `/sys/fs/cgroup/memory/docker/<longid>/`.
+container, take a look at the following paths:
+- `/sys/fs/cgroup/memory/docker/<longid>/` on cgroup v1, `cgroupfs` driver
+- `/sys/fs/cgroup/memory/system.slice/docker-<longid>.scope/` on cgroup v1, `systemd` driver
+- `/sys/fs/cgroup/docker/<longid/>` on cgroup v2, `cgroupfs` driver
+- `/sys/fs/cgroup/system.slice/docker-<longid>.scope/` on cgroup v2, `systemd` driver
 @y
 {% comment %}
 Putting everything together to look at the memory metrics for a Docker
-container, take a look at `/sys/fs/cgroup/memory/docker/<longid>/`.
+container, take a look at the following paths:
+- `/sys/fs/cgroup/memory/docker/<longid>/` on cgroup v1, `cgroupfs` driver
+- `/sys/fs/cgroup/memory/system.slice/docker-<longid>.scope/` on cgroup v1, `systemd` driver
+- `/sys/fs/cgroup/docker/<longid/>` on cgroup v2, `cgroupfs` driver
+- `/sys/fs/cgroup/system.slice/docker-<longid>.scope/` on cgroup v2, `systemd` driver
 {% endcomment %}
-Docker コンテナーに対するメモリメトリックスを取りまとめて確認するには、`/sys/fs/cgroup/memory/docker/<longid>/` を見ます。
+Docker コンテナーに対するメモリメトリックスを取りまとめて確認するには、以下のパスを見ます。
+- `/sys/fs/cgroup/memory/docker/<longid>/`、cgroup v1、`cgroupfs`ドライバー利用時。
+- `/sys/fs/cgroup/memory/system.slice/docker-<longid>.scope/`、cgroup v1、`systemd`ドライバー利用時。
+- `/sys/fs/cgroup/docker/<longid/>`、cgroup v2、`cgroupfs`ドライバー利用時。
+- `/sys/fs/cgroup/system.slice/docker-<longid>.scope/`、cgroup v2、`systemd`ドライバー利用時。
 @z
 
 @x
@@ -279,6 +417,18 @@ Docker コンテナーに対するメモリメトリックスを取りまとめ�
 {% endcomment %}
 {: #metrics-from-cgroups-memory-cpu-block-io }
 ### cgroups の各メトリックス、メモリ、CPU、ブロック I/O
+@z
+
+@x
+> **Note**
+>
+> This section is not yet updated for cgroup v2.
+> For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
+@y
+> **Note**
+>
+> This section is not yet updated for cgroup v2.
+> For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
 @z
 
 @x

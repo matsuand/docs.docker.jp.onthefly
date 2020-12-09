@@ -41,30 +41,15 @@ rootless モードは root 権限を必要としません。
 @z
 
 @x
-Rootless mode was introduced in Docker Engine v19.03.
+Rootless mode was introduced in Docker Engine v19.03 as an experimental feature.
+Rootless mode graduated from experimental in Docker Engine v20.10.
 @y
 {% comment %}
-Rootless mode was introduced in Docker Engine v19.03.
+Rootless mode was introduced in Docker Engine v19.03 as an experimental feature.
+Rootless mode graduated from experimental in Docker Engine v20.10.
 {% endcomment %}
-rootless モードは Docker Engine v19.03 から導入されました。
-@z
-
-@x
-> **Note**
->
-> Rootless mode is an experimental feature and has some limitations. For details,
-> see [Known limitations](#known-limitations).
-@y
-{% comment %}
-> **Note**
->
-> Rootless mode is an experimental feature and has some limitations. For details,
-> see [Known limitations](#known-limitations).
-{% endcomment %}
-> **メモ**
->
-> rootless モードは試験的な機能であるため、制約がいくつかあります。
-> 詳しくは [既知の問題](#known-limitations) を参照してください。
+rootless モードは Docker Engine v19.03 において試験的機能として導入されました。
+rootless モードは Docker Engine v20.10 から正規機能となりました。
 @z
 
 @x
@@ -282,6 +267,16 @@ testuser:231072:65536
 @z
 
 @x
+- Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
+@y
+{% comment %}
+- Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
+{% endcomment %}
+- `fuse-overlayfs`をインストールすることが推奨されます。
+  その場合は`sudo pacman -S fuse-overlayfs`を実行します。
+@z
+
+@x
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 @y
@@ -296,6 +291,16 @@ testuser:231072:65536
 #### openSUSE
 @y
 #### openSUSE
+@z
+
+@x
+- Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
+@y
+{% comment %}
+- Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
+{% endcomment %}
+- `fuse-overlayfs`をインストールすることが推奨されます。
+  その場合は`sudo zypper install -y fuse-overlayfs`を実行します。
 @z
 
 @x
@@ -320,37 +325,23 @@ testuser:231072:65536
 @z
 
 @x
-#### Fedora 31 and later
+#### CentOS 8 and Fedora
 @y
 {% comment %}
-#### Fedora 31 and later
+#### CentOS 8 and Fedora
 {% endcomment %}
-{: #fedora-31-and-later }
-#### Fedora 31 およびそれ以降
+{: #centos-8-and-fedora }
+#### CentOS 8 と Fedora
 @z
 
 @x
-- Fedora 31 uses cgroup v2 by default, which is not yet supported by the containerd runtime.
-  Run `sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"`
-  to use cgroup v1.
-- You might need `sudo dnf install -y iptables`.
+- Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
 @y
 {% comment %}
-- Fedora 31 uses cgroup v2 by default, which is not yet supported by the containerd runtime.
-  Run `sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"`
-  to use cgroup v1.
-- You might need `sudo dnf install -y iptables`.
+- Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
 {% endcomment %}
-- Fedora 31 はデフォルトで cgroup v2 を利用しています。
-  これは今のところ、コンテナー起動においてサポートされていません。
-  `sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"`を実行して cgroup v1 を利用するようにしてください。
-- `sudo dnf install -y iptables`が必要かもしれません。
-@z
-
-@x
-#### CentOS 8
-@y
-#### CentOS 8
+- `fuse-overlayfs`をインストールすることが推奨されます。
+  その場合は`sudo dnf install -y fuse-overlayfs`を実行します。
 @z
 
 @x
@@ -360,6 +351,15 @@ testuser:231072:65536
 - You might need `sudo dnf install -y iptables`.
 {% endcomment %}
 - `sudo dnf install -y iptables`が必要かもしれません。
+@z
+
+@x
+- Known to work on CentOS 8 and Fedora 32.
+@y
+{% comment %}
+- Known to work on CentOS 8 and Fedora 32.
+{% endcomment %}
+- CentOS 8 と Fedora 32 において動作します。
 @z
 
 @x
@@ -381,17 +381,14 @@ testuser:231072:65536
 
 @x
 - `systemctl --user` does not work by default. 
-  Run the daemon directly without systemd:
-  `dockerd-rootless.sh --experimental --storage-driver vfs`
+  Run `dockerd-rootless.sh` directly without systemd.
 @y
 {% comment %}
 - `systemctl --user` does not work by default. 
-  Run the daemon directly without systemd:
-  `dockerd-rootless.sh --experimental --storage-driver vfs`
+  Run `dockerd-rootless.sh` directly without systemd.
 {% endcomment %}
 - デフォルトでは`systemctl --user`は動作しません。
-  デーモンは sysmted を使わずに直接起動してください。
-  `dockerd-rootless.sh --experimental --storage-driver vfs`などです。
+  デーモンは sysmted を使わずに直接`dockerd-rootless.sh`を起動してください。
 @z
 
 @x
@@ -437,10 +434,12 @@ testuser:231072:65536
 @z
 
 @x
-- Only `vfs` graphdriver is supported. However, on Ubuntu and Debian 10,
-  `overlay2` and `overlay` are also supported.
+- Only the following storage drivers are supported:
+  - `overlay2` (only on Ubuntu and Debian 10 hosts)
+  - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
+  - `vfs`
+- Cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](#limiting-resources).
 - Following features are not supported:
-  - Cgroups (including `docker top`, which depends on the cgroups)
   - AppArmor
   - Checkpoint
   - Overlay network
@@ -452,10 +451,12 @@ testuser:231072:65536
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
 @y
 {% comment %}
-- Only `vfs` graphdriver is supported. However, on Ubuntu and Debian 10,
-  `overlay2` and `overlay` are also supported.
+- Only the following storage drivers are supported:
+  - `overlay2` (only on Ubuntu and Debian 10 hosts)
+  - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
+  - `vfs`
+- Cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](#limiting-resources).
 - Following features are not supported:
-  - Cgroups (including `docker top`, which depends on the cgroups)
   - AppArmor
   - Checkpoint
   - Overlay network
@@ -466,10 +467,13 @@ testuser:231072:65536
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
 {% endcomment %}
-- `vfs`グラフドライバーだけがサポートされます。
-  ただし Ubuntu と Debian 10 の場合は`overlay2`と`overlay`もサポートされます。
+- 以下のストレージドライバーのみがサポートされます。
+  - `overlay2`（Ubuntu ホストおよび Debian 10 ホストのみ。）
+  - `fuse-overlayfs`（カーネル 4.18 またはそれ以降の稼動時、そして`fuse-overlayfs`インストール時のみ。）
+  - `vfs`
+- cgroup は cgroup v2 および systemd を用いて実行するときのみサポートされます。
+  [リソースの利用制限](#limiting-resources) を参照してください。
 - 以下の機能はサポートされません。
-  - cgroups （cgroups に依存している`docker top`も同様。）
   - AppArmor
   - Checkpoint
   - Overlay ネットワーク
@@ -758,39 +762,15 @@ Systemd を使わずにデーモンを直接起動するには、`dockerd`の代
 @z
 
 @x
-```console
-$ dockerd-rootless.sh --experimental --storage-driver vfs
-```
-@y
-```console
-$ dockerd-rootless.sh --experimental --storage-driver vfs
-```
-@z
-
-@x
-As Rootless mode is experimental, you need to run
-`dockerd-rootless.sh` with `--experimental`.
+On Docker 19.03, you had to run `dockerd-rootless.sh` with `--experimental`.
+The `--experimental` flag is no longer needed since Docker 20.10.
 @y
 {% comment %}
-As Rootless mode is experimental, you need to run
-`dockerd-rootless.sh` with `--experimental`.
+On Docker 19.03, you had to run `dockerd-rootless.sh` with `--experimental`.
+The `--experimental` flag is no longer needed since Docker 20.10.
 {% endcomment %}
-rootless モードは試験的機能であるため、`dockerd-rootless.sh`は`--experimental`をつけて実行する必要があります。
-@z
-
-@x
-You also need `--storage-driver vfs` unless you are using Ubuntu or Debian 10
-kernel. You don't need to care about these flags if you manage the daemon using
-systemd, as these flags are automatically added to the systemd unit file.
-@y
-{% comment %}
-You also need `--storage-driver vfs` unless you are using Ubuntu or Debian 10
-kernel. You don't need to care about these flags if you manage the daemon using
-systemd, as these flags are automatically added to the systemd unit file.
-{% endcomment %}
-さらに Ubuntu や Debian 10 を利用していないなら、`--storage-driver vfs`の指定も必要です。
-Systemd を利用してデーモンを管理する場合は、これらのフラグについて気にかける必要はありません。
-フラグは Systemd ユニットファイルに自動的に追加されます。
+Docker 19.03 において`dockerd-rootless.sh`を実行する際には`--experimental`の指定が必要でした。
+Docker 20.10 からは`--experimental`フラグを不要になりました。
 @z
 
 @x
@@ -839,19 +819,16 @@ Other remarks:
   and network namespaces. You can enter the namespaces by running
   `nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`.
 - `docker info` shows `rootless` in `SecurityOptions`
-- `docker info` shows `none` as `Cgroup Driver`
 @y
 {% comment %}
 - The `dockerd-rootless.sh` script executes `dockerd` in its own user, mount,
   and network namespaces. You can enter the namespaces by running
   `nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`.
 - `docker info` shows `rootless` in `SecurityOptions`
-- `docker info` shows `none` as `Cgroup Driver`
 {% endcomment %}
 - `dockerd-rootless.sh`スクリプトは、これが有するユーザー、マウント、ネットワーク名前空間のもとで`dockerd`を実行します。
   その名前空間に入るには`nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`を実行します。
 - `docker info`を実行すると`SecurityOptions`欄に`rootless`と表示されます。
-- `docker info`を実行すると`Cgroup Driver`欄が`none`と表示されます。
 @z
 
 @x
@@ -958,11 +935,11 @@ image instead of `docker:<version>-dind`.
 
 @x
 ```console
-$ docker run -d --name dind-rootless --privileged docker:19.03-dind-rootless --experimental
+$ docker run -d --name dind-rootless --privileged docker:20.10-dind-rootless
 ```
 @y
 ```console
-$ docker run -d --name dind-rootless --privileged docker:19.03-dind-rootless --experimental
+$ docker run -d --name dind-rootless --privileged docker:20.10-dind-rootless
 ```
 @z
 
@@ -978,6 +955,25 @@ masks.
 {% endcomment %}
 `docker:<version>-dind-rootless`イメージは非 root ユーザー（UID 1000）により動作します。
 ただし seccomp、AppArmor、マウントマスクを無効化するには`--privileged`の指定が必要です。
+@z
+
+@x
+To run Docker 19.03 in Docker, the `--experimental` flag is needed:
+@y
+{% comment %}
+To run Docker 19.03 in Docker, the `--experimental` flag is needed:
+{% endcomment %}
+Docker 19.03 においては`--experimental`フラグの指定が必要です。
+@z
+
+@x
+```console
+$ docker run -d --name dind-rootless --privileged docker:19.03-dind-rootless --experimental
+```
+@y
+```console
+$ docker run -d --name dind-rootless --privileged docker:19.03-dind-rootless --experimental
+```
 @z
 
 @x
@@ -1133,28 +1129,117 @@ Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 @z
 
 @x
-In Docker 19.03, rootless mode ignores cgroup-related `docker run` flags such as
-`--cpus`, `--memory`, `--pids-limit`.
+Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
+is supported only when running with cgroup v2 and systemd.
+See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
 @y
 {% comment %}
-In Docker 19.03, rootless mode ignores cgroup-related `docker run` flags such as
-`--cpus`, `--memory`, `--pids-limit`.
+Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
+is supported only when running with cgroup v2 and systemd.
+See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
 {% endcomment %}
-Docker 19.03 において rootless モードは、`docker run`における cgroup 関連のフラグ、たとえば`--cpus`、`--memory`、` --pids-limit`は無視します。
+Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
+is supported only when running with cgroup v2 and systemd.
+See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
 @z
 
 @x
-However, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
+If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfied.
+When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.
+See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for workarounds.
+@y
+{% comment %}
+If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfied.
+When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.
+See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for workarounds.
+{% endcomment %}
+If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfied.
+When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.
+See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for workarounds.
+@z
+
+@x
+If `docker info` shows `systemd` as `Cgroup Driver`, the conditions are satisfied.
+However, typically, only `memory` and `pids` controllers are delegated to non-root users by default.
+@y
+{% comment %}
+If `docker info` shows `systemd` as `Cgroup Driver`, the conditions are satisfied.
+However, typically, only `memory` and `pids` controllers are delegated to non-root users by default.
+{% endcomment %}
+If `docker info` shows `systemd` as `Cgroup Driver`, the conditions are satisfied.
+However, typically, only `memory` and `pids` controllers are delegated to non-root users by default.
+@z
+
+@x
+```console
+$ cat /sys/fs/cgroup/user.slice/user-$(id -u).slice/user@$(id -u).service/cgroup.controllers
+memory pids
+```
+@y
+```console
+$ cat /sys/fs/cgroup/user.slice/user-$(id -u).slice/user@$(id -u).service/cgroup.controllers
+memory pids
+```
+@z
+
+@x
+To allow delegation of all controllers, you need to change the systemd configuration as follows:
+@y
+{% comment %}
+To allow delegation of all controllers, you need to change the systemd configuration as follows:
+{% endcomment %}
+To allow delegation of all controllers, you need to change the systemd configuration as follows:
+@z
+
+@x
+```console
+# mkdir -p /etc/systemd/system/user@.service.d
+# cat > /etc/systemd/system/user@.service.d/delegate.conf << EOF
+[Service]
+Delegate=cpu cpuset io memory pids
+EOF
+# systemctl daemon-reload
+```
+@y
+```console
+# mkdir -p /etc/systemd/system/user@.service.d
+# cat > /etc/systemd/system/user@.service.d/delegate.conf << EOF
+[Service]
+Delegate=cpu cpuset io memory pids
+EOF
+# systemctl daemon-reload
+```
+@z
+
+@x
+> **Note**
+>
+> Delegating `cpuset` requires systemd 244 or later.
+@y
+{% comment %}
+> **Note**
+>
+> Delegating `cpuset` requires systemd 244 or later.
+{% endcomment %}
+> **メモ**
+>
+> `cpuset`のデリゲートには systemd 244 またはそれ以降が必要です。
+@z
+
+@x
+#### Limiting resources without cgroup
+@y
+#### Limiting resources without cgroup
+@z
+
+@x
+Even when cgroup is not available, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
 though they work in process-granularity rather than in container-granularity,
 and can be arbitrarily disabled by the container process.
 @y
-{% comment %}
-However, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
+Even when cgroup is not available, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
 though they work in process-granularity rather than in container-granularity,
 and can be arbitrarily disabled by the container process.
-{% endcomment %}
-ただし従来からの`ulimit`や[`cpulimit`](https://github.com/opsengine/cpulimit) は利用することができます。
-これらはコンテナー単位というよりもプロセス単位での処理動作を規定するものではありますが、コンテナープロセスごとに無効化することができます。
 @z
 
 @x
@@ -1397,14 +1482,14 @@ On a non-systemd host, you need to create a directory and then set the path:
 $ export XDG_RUNTIME_DIR=$HOME/.docker/xrd
 $ rm -rf $XDG_RUNTIME_DIR
 $ mkdir -p $XDG_RUNTIME_DIR
-$ dockerd-rootless.sh --experimental
+$ dockerd-rootless.sh
 ```
 @y
 ```console
 $ export XDG_RUNTIME_DIR=$HOME/.docker/xrd
 $ rm -rf $XDG_RUNTIME_DIR
 $ mkdir -p $XDG_RUNTIME_DIR
-$ dockerd-rootless.sh --experimental
+$ dockerd-rootless.sh
 ```
 @z
 
@@ -1519,15 +1604,24 @@ up automatically. See [Usage](#usage).
 @z
 
 @x
-This error occurs when the daemon is launched without the `--experimental` flag.
+This error occurs when the daemon is launched without the `--experimental` flag on Docker 19.03.
 See [Usage](#usage).
 @y
 {% comment %}
-This error occurs when the daemon is launched without the `--experimental` flag.
+This error occurs when the daemon is launched without the `--experimental` flag on Docker 19.03.
 See [Usage](#usage).
 {% endcomment %}
-This error occurs when the daemon is launched without the `--experimental` flag.
+This error occurs when the daemon is launched without the `--experimental` flag on Docker 19.03.
 See [Usage](#usage).
+@z
+
+@x
+The `--experimental` flag is no longer needed since Docker 20.10.
+@y
+{% comment %}
+The `--experimental` flag is no longer needed since Docker 20.10.
+{% endcomment %}
+`--experimental`フラグは Docker 20.10 からは不要になりました。
 @z
 
 @x
@@ -1585,12 +1679,18 @@ images. However, 65,536 entries are sufficient for most images. See
 @z
 
 @x
-This is an expected behavior in Docker 19.03. For more information, see [Limiting resources](#limiting-resources).
+This is an expected behavior on cgroup v1 mode.
+To use these flags, the host needs to be configured for enabling cgroup v2.
+For more information, see [Limiting resources](#limiting-resources).
 @y
 {% comment %}
-This is an expected behavior in Docker 19.03. For more information, see [Limiting resources](#limiting-resources).
+This is an expected behavior on cgroup v1 mode.
+To use these flags, the host needs to be configured for enabling cgroup v2.
+For more information, see [Limiting resources](#limiting-resources).
 {% endcomment %}
-This is an expected behavior in Docker 19.03. For more information, see [Limiting resources](#limiting-resources).
+This is an expected behavior on cgroup v1 mode.
+To use these flags, the host needs to be configured for enabling cgroup v2.
+For more information, see [Limiting resources](#limiting-resources).
 @z
 
 @x

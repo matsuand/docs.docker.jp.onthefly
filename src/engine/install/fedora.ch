@@ -70,11 +70,11 @@ Docker Engine をインストールするには、以下に示す Fedora の 64 
 @z
 
 @x
-- Fedora 30
-- Fedora 31
+- Fedora 32
+- Fedora 33
 @y
-- Fedora 30
-- Fedora 31
+- Fedora 32
+- Fedora 33
 @z
 
 @x
@@ -538,36 +538,12 @@ $ sudo dnf config-manager \
 @z
 
 @x
-3.  Cgroups Exception:
-    For Fedora 31 and higher, you need to enable the [backward compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
-@y
-3.  Cgroups Exception:
-    For Fedora 31 and higher, you need to enable the [backward compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
-@z
-
-@x
-    ```bash
-    $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-    ```
-@y
-    ```bash
-    $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-    ```
-@z
-
-@x
-    After running the command, you must reboot for the changes to take effect.
-@y
-    After running the command, you must reboot for the changes to take effect.
-@z
-
-@x
-4.  Start Docker.
+3.  Start Docker.
 @y
 {% comment %}
-4.  Start Docker.
+3.  Start Docker.
 {% endcomment %}
-4.  Docker を起動します。
+3.  Docker を起動します。
 @z
 
 @x
@@ -581,14 +557,14 @@ $ sudo dnf config-manager \
 @z
 
 @x
-5.  Verify that Docker Engine is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 @y
 {% comment %}
-5.  Verify that Docker Engine is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 {% endcomment %}
-5.  Docker Engine が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
+4.  Docker Engine が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
 @z
 
 @x

@@ -29,6 +29,7 @@ bases = \
 	18.05 \
 	18.06 \
 	18.09 \
+	19.03 \
 	index \
 	prior-releases
 

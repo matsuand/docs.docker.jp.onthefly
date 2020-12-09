@@ -107,6 +107,11 @@ Docker は以下のストレージドライバーをサポートします。
    Linux distributions, and requires no extra configuration.
 * `aufs` was the preferred storage driver for Docker 18.06 and older, when
    running on Ubuntu 14.04 on kernel 3.13 which had no support for `overlay2`.
+*  `fuse-overlayfs` is preferred only for running Rootless Docker
+   on a host that does not provide support for rootless `overlay2`.
+   On Ubuntu and Debian 10, the `fuse-overlayfs` driver does not need to be
+   used `overlay2` works even in rootless mode.
+   See [Rootless mode documentation](../../engine/security/rootless.md).
 * `devicemapper` is supported, but requires `direct-lvm` for production
    environments, because `loopback-lvm`, while zero-configuration, has very
    poor performance. `devicemapper` was the recommended storage driver for
@@ -127,6 +132,11 @@ Docker は以下のストレージドライバーをサポートします。
    Linux distributions, and requires no extra configuration.
 * `aufs` was the preferred storage driver for Docker 18.06 and older, when
    running on Ubuntu 14.04 on kernel 3.13 which had no support for `overlay2`.
+*  `fuse-overlayfs` is preferred only for running Rootless Docker
+   on a host that does not provide support for rootless `overlay2`.
+   On Ubuntu and Debian 10, the `fuse-overlayfs` driver does not need to be
+   used `overlay2` works even in rootless mode.
+   See [Rootless mode documentation](../../engine/security/rootless.md).
 * `devicemapper` is supported, but requires `direct-lvm` for production
    environments, because `loopback-lvm`, while zero-configuration, has very
    poor performance. `devicemapper` was the recommended storage driver for
@@ -146,6 +156,9 @@ Docker は以下のストレージドライバーをサポートします。
    特別な設定は必要ありません。
 * `aufs` は Docker 18.06 あるいはそれ以前においては、よく用いられていました。
    そのときはカーネル 3.13 を利用する Ubuntu 14.04 において稼動しており、`overlay2` がサポートされていないときでした。
+*  rootless の`overlay2`をサポートしていないホスト上において rootless Docker だけを実行するのであれば、`fuse-overlayfs`が推奨されます。
+   Ubuntu や Debian 10 の場合、`fuse-overlayfs`ドライバーは rootless モードであっても、`overlay2`が動作している必要はありません。
+   詳しくは [rootless モードのドキュメント](../../engine/security/rootless.md) を参照してください。
 * `devicemapper` はサポートされているものですが、本番環境において `direct-lvm` が必要となります。
    というのも `loopback-lvm` は何も設定する必要がないのですが、処理性能が極めて低いためです。
    `devicemapper` は CentOS や RHEL において推奨されていました。
@@ -341,6 +354,18 @@ to `overlay2`.
 @z
 
 @x
+> **Note**
+>
+> The comparison table above is not applicable for Rootless mode.
+> For the drivers available in Rootless mode, see [the Rootless mode documentation](../../engine/security/rootless.md).
+@y
+> **Note**
+>
+> The comparison table above is not applicable for Rootless mode.
+> For the drivers available in Rootless mode, see [the Rootless mode documentation](../../engine/security/rootless.md).
+@z
+
+@x
 When possible, `overlay2` is the recommended storage driver. When installing
 Docker for the first time, `overlay2` is used by default. Previously, `aufs` was
 used by default when available, but this is no longer the case. If you want to
@@ -506,6 +531,7 @@ backing filesystems.
 | Storage driver        | Supported backing filesystems  |
 |:----------------------|:------------------------------|
 | `overlay2`, `overlay` | `xfs` with ftype=1, `ext4`    |
+| `fuse-overlayfs`      | any filesystem                |
 | `aufs`                | `xfs`, `ext4`                 |
 | `devicemapper`        | `direct-lvm`                  |
 | `btrfs`               | `btrfs`                       |
@@ -516,6 +542,7 @@ backing filesystems.
 | Storage driver        | Supported backing filesystems  |
 |:----------------------|:------------------------------|
 | `overlay2`, `overlay` | `xfs` with ftype=1, `ext4`    |
+| `fuse-overlayfs`      | any filesystem                |
 | `aufs`                | `xfs`, `ext4`                 |
 | `devicemapper`        | `direct-lvm`                  |
 | `btrfs`               | `btrfs`                       |

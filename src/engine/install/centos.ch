@@ -63,14 +63,14 @@ CentOS 向けに Docker Engine を始めるには、[前提条件を満たして
 @z
 
 @x
-To install Docker Engine, you need a maintained version of CentOS 7. Archived
-versions aren't supported or tested.
+To install Docker Engine, you need a maintained version of CentOS 7 or 8.
+Archived versions aren't supported or tested.
 @y
 {% comment %}
-To install Docker Engine, you need a maintained version of CentOS 7. Archived
-versions aren't supported or tested.
+To install Docker Engine, you need a maintained version of CentOS 7 or 8.
+Archived versions aren't supported or tested.
 {% endcomment %}
-Docker Engine をインストールするには保守対象の CentOS 7 が必要です。
+Docker Engine をインストールするには保守対象の CentOS 7 または 8 が必要です。
 古いバージョンはサポートもテストも行っていません。
 @z
 
