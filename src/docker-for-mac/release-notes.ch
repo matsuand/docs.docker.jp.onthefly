@@ -92,9 +92,11 @@ This page contains information about the new features, improvements, known issue
 - Starting with Docker Desktop 3.0.0, updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
 - First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
 {% endcomment %}
-- Use of three-digit version number for Docker Desktop releases.
-- Starting with Docker Desktop 3.0.0, updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
-- First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
+- Docker Desktop リリースに対して 3 桁のバージョン番号を用いるようにしました。
+- Docker Desktop 3.0.0 から、デルタパッチを用いてアップデートを行うことにより、アップデートをより小さなものにしました。
+  詳しくは [自動アップデート](install.md#automatic-updates) を参照してください。
+- `docker compose`の初めてのバージョン（これまでの`docker-compose`に対応づくもの）。 
+  基本的なコマンドはサポートしていますが、`docker-compose`の全機能をまだ実現していません。
 @z
 
 @x
@@ -105,8 +107,9 @@ This page contains information about the new features, improvements, known issue
   - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
   - Supports basic volumes, bind mounts, networks, and environment variables
   {% endcomment %}
-  - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
-  - Supports basic volumes, bind mounts, networks, and environment variables
+  - 以下のサブコマンドをサポートします。
+    `up`、`down`、`logs`、`build`、`pull`、`push`、`ls`、`ps`
+  - 基本的なボリューム、バインドマウント、ネットワーク、環境変数をそれぞれサポートします。
 @z
 
 @x
@@ -117,8 +120,8 @@ This page contains information about the new features, improvements, known issue
     Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
 - [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
     {% endcomment %}
-    Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
-- [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
+    フィードバックは [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub リポジトリに issue を生成してください。
+- [Docker Hub ツール v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
 @z
 
 @x
@@ -173,14 +176,20 @@ This page contains information about the new features, improvements, known issue
 - Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
 - Display an error message instead of crashing when the application needs write access on specific directories. See [docker/for-mac#5068](https://github.com/docker/for-mac/issues/5068)
 {% endcomment %}
-- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
-- Fixed a bug that DNS would return `NXDOMAIN` when a name exists but the type of record was not found. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020). Related to https://gitlab.alpinelinux.org/alpine/aports/-/issues/11879
-- Avoid caching bad file sizes and modes when using `osxfs`. Fixes [docker/for-mac#5045](https://github.com/docker/for-mac/issues/5045).
-- Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is a partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
-- Removed unnecessary log messages which slow down filesystem event injection.
-- Re-enabled the experimental SOCKS proxy. Fixes [docker/for-mac#5048](https://github.com/docker/for-mac/issues/5048).
-- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
-- Display an error message instead of crashing when the application needs write access on specific directories. See [docker/for-mac#5068](https://github.com/docker/for-mac/issues/5068)
+- Hyperkit の CPU 使用量を軽減するため、カーネル [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) にダウングレードしました。
+- ドメイン名は存在するものの、そのレコードタイプが存在しない場合に、DNS が`NXDOMAIN`を返すバグを修正しました。
+  [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020) を Fix に。
+  これは https://gitlab.alpinelinux.org/alpine/aports/-/issues/11879 に関連します。
+- `osxfs`利用時にファイルサイズやモードを誤ってキャッシングしないようにしました。
+  [docker/for-mac#5045](https://github.com/docker/for-mac/issues/5045) を Fix に。
+- コンテナー内でのファイルがホスト上において修正された際に、そのファイルサイズに誤りがあると、ファイル共有に失敗する可能性がある点を修正しました。
+  これにより [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999) を部分的に Fix に。- ファイルシステムイベントの処理を低下させる不要なログメッセージを削除しました。
+- 試験的な SOCKS プロキシーを再度有効にしました。
+  [docker/for-mac#5048](https://github.com/docker/for-mac/issues/5048) を Fix に。
+- `-v /var/run/docker.sock:` を指定により、存在しないコンテナーを起動しようとして、予期しない EOF エラーとなる点を修正しました。
+  [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025) を参照のこと。
+- アプリケーションが特定のディレクトリへの書き込み権限を必要とする際に、クラッシュせずにエラーメッセージを表示するようにしました。
+  [docker/for-mac#5068](https://github.com/docker/for-mac/issues/5068) を参照のこと。
 @z
 
 @x
@@ -201,8 +210,9 @@ This page contains information about the new features, improvements, known issue
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
 {% endcomment %}
-- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
-- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
+- git URL から BuildKit を使ってイメージをビルドする際に、`github.com/org/repo`の形を用いているとビルドに失敗します。
+  この問題を回避するには`git://github.com/org/repo`の形を用いるようにします。
+- Alpine Linux 3.13 に基づくコンテナー内において DNS アドレス解決に失敗することがあります。
 @z
 
 @x

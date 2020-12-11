@@ -9,9 +9,9 @@ title: Docker release notes
 ---
 @y
 ---
-description: Release notes for Docker
+description: Docker リリースノート。
 keywords: docker, documentation, about, technology, understanding,  release
-title: Docker release notes
+title: Docker リリースノート
 ---
 @z
 
@@ -21,10 +21,16 @@ features, improvements, known issues, and bug fixes in each release. You can
 find release notes for each component in the product manuals section. We suggest
 that you regularly visit the release notes to learn about updates.
 @y
+{% comment %}
 Find out what's new in Docker! Release notes contain information about new
 features, improvements, known issues, and bug fixes in each release. You can
 find release notes for each component in the product manuals section. We suggest
 that you regularly visit the release notes to learn about updates.
+{% endcomment %}
+Docker の最新情報を確認してください。
+リリースノートには、各リリースにおける新機能、改善項目、既知の問題、バグフィックスが示されています。
+各コンポーネントに対するリリースノートは、製品マニュアルの各節において示しています。
+更新情報を定期的に確認していただくことをお勧めします。
 @z
 
 @x

@@ -240,7 +240,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--json` | スキャン結果を JSON 書式により表示します。|
 | `--login` | 任意に指定されたトークン（--token フラグ利用）を使って Snyk にログインします。あるいはウェブベースのトークンを利用します。|
 | `--reject-license` | サードパーティー製プロバイダーのライセンスを否認します。|
-| `--severity string` | 指定されたレベル以上のぜい弱性のみを表示します。(low|medium|high) |
+| `--severity string` | 指定されたレベル以上のぜい弱性のみを表示します。(low\|medium\|high) |
 | `--token string`  | 認証トークンを使ってサードパーティー製スキャンプロバイダーにログインします。|
 | `--version` | Docker Scan プラグインのバージョンを表示します。|
 @z
@@ -854,13 +854,20 @@ For more free scans that keep your images secure, sign up to Snyk at https://doc
 @x
 For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
 @y
+{% comment %}
 For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
+{% endcomment %}
+ぜい弱性データの詳細については [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
 ### Limiting the level of vulnerabilities displayed
 @y
+{% comment %}
 ### Limiting the level of vulnerabilities displayed
+{% endcomment %}
+{: #limiting-the-level-of-vulnerabilities-displayed }
+### ぜい弱性レベルの表示制限
 @z
 
 @x
@@ -868,9 +875,14 @@ Docker scan allows you to choose the level of vulnerabilities displayed in your 
 You can set the severity flag to `low`, `medium`, or` high` depending on the level of vulnerabilities you’d like to see in your report.  
 For example, if you set the severity level as `medium`, the scan report displays all vulnerabilities that are classified as medium and high.
 @y
+{% comment %}
 Docker scan allows you to choose the level of vulnerabilities displayed in your scan report using the `--severity` flag.
 You can set the severity flag to `low`, `medium`, or` high` depending on the level of vulnerabilities you’d like to see in your report.  
 For example, if you set the severity level as `medium`, the scan report displays all vulnerabilities that are classified as medium and high.
+{% endcomment %}
+Docker スキャンにおいては`--severity`フラグを利用することで、ぜい弱性レベルを選んで表示することができます。
+この`--severity`フラグには、レポート内において確認したいぜい弱性レベルに応じて`low`、`medium`、` high`のいずれかを指定します。
+たとえばこのレベルを`medium`に設定した場合、スキャンレポートにはぜい弱性レベルが medium（中程度）と high（重要）のものが表示されます。
 @z
 
 @x
