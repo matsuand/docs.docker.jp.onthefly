@@ -373,6 +373,37 @@ Windows Home 上に Docker Desktop が正常に起動できるようになりま
 @z
 
 @x
+## Automatic updates
+@y
+{% comment %}
+## Automatic updates
+{% endcomment %}
+{: #automatic-updates }
+## 自動アップデート
+@z
+
+@x
+Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
+@y
+{% comment %}
+Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
+{% endcomment %}
+Docker Desktop 3.0.0 から Docker Desktop のアップデータが自動的に行われるようになりました。
+その場合には旧バージョンからのデルタアップデートが行われます。
+@z
+
+@x
+When an update is available, Docker Desktop automatically downloads it to your machine and displays an icon to indicate the availability of a newer version. All you need to do now is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+@y
+{% comment %}
+When an update is available, Docker Desktop automatically downloads it to your machine and displays an icon to indicate the availability of a newer version. All you need to do now is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+{% endcomment %}
+アップデートが利用可能になると、Docker Desktop は自動的にアップデートをマシンにダウンロードして、新たなバージョンが利用可能であることを示すアイコンを表示します。
+そのときには Docker メニューから **Update and restart**（アップデートと再起動）をクリックするだけです。
+これによって最新のアップデートがインストールされて、変更を適用するため Docker Desktop が再起動されます。
+@z
+
+@x
 ## Uninstall Docker Desktop
 @y
 {% comment %}
@@ -422,59 +453,6 @@ Windows Home から Docker Desktop をアンインストールするには、以
 @z
 
 @x
-## Switch between Stable and Edge versions
-@y
-{% comment %}
-## Switch between Stable and Edge versions
-{% endcomment %}
-{: #switch-between-stable-and-edge-versions }
-## 安定版と最新版の切り替え
-@z
-
-@x
-Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
-@y
-{% comment %}
-Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
-{% endcomment %}
-Docker Desktop では安定版（stable）と最新版（edge）の切り替えができるようになっています。
-ただし **一度にインストールできるのは、どちらか一つの Docker Desktop バージョンです**。
-安定版と最新版の切り替えを行うと、手元の開発環境が不安定になることがあります。
-特により最新に近いバージョンから、古い安定版に切り替えた場合に、起こることがあります。
-@z
-
-@x
-For example, containers created with a newer Edge version of Docker Desktop may
-not work after you switch back to Stable because they may have been created
-using Edge features that aren't in Stable yet. Keep this in mind as
-you create and work with Edge containers, perhaps in the spirit of a playground
-space where you are prepared to troubleshoot or start over.
-@y
-{% comment %}
-For example, containers created with a newer Edge version of Docker Desktop may
-not work after you switch back to Stable because they may have been created
-using Edge features that aren't in Stable yet. Keep this in mind as
-you create and work with Edge containers, perhaps in the spirit of a playground
-space where you are prepared to troubleshoot or start over.
-{% endcomment %}
-たとえば Docker Desktop 最新版を使って生成したコンテナーは、古い安定版に切り替えたら、動作しなくなるかもしれません。
-そのコンテナーが最新版の機能を使って生成されていたとすると、それが古い安定版には存在しないことになるからです。
-最新版を使ってコンテナーを生成して実行するときには、このことを十分に理解しておいてください。
-いってみれば遊び感覚で操作するつもりで、なにかあっても自分で解決するか、初めからやり直す覚悟を持っておいてください。
-@z
-
-@x
-To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section _Save and Restore data_ below.
-@y
-{% comment %}
-To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section _Save and Restore data_ below.
-{% endcomment %}
-最新版と安定版の間で安全に切り替えを行うためには、必要なイメージの保存、コンテナーのエクスポートを行っておいてください。
-そして切り替えるバージョンをインストールする前に、それまでのバージョンはアンインストールしてください。
-詳しくは、以下の「データの保存と復元」を参照してください。
-@z
-
-@x
 ### Save and restore data
 @y
 {% comment %}
@@ -485,13 +463,13 @@ To safely switch between Edge and Stable versions, ensure you save images and ex
 @z
 
 @x
-You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
+You can use the following procedure to save and restore images and container data. For example, to reset your VM disk:
 @y
 {% comment %}
-You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
+You can use the following procedure to save and restore images and container data. For example, to reset your VM disk:
 {% endcomment %}
 以下の手順に従うと、イメージやコンテナーのデータを保存し復元することができます。
-たとえば安定版と最新版を切り替える場合や、VM ディスクを初期化するような場合には、以下を行います。
+たとえば VM ディスクを初期化するような場合には、以下を行います。
 @z
 
 @x
@@ -523,12 +501,12 @@ You can use the following procedure to save and restore images and container dat
 @z
 
 @x
-3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
+3. Uninstall the current version of Docker Desktop and install a different version, or reset your VM disk.
 @y
 {% comment %}
-3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
+3. Uninstall the current version of Docker Desktop and install a different version, or reset your VM disk.
 {% endcomment %}
-3. 現在の Docker Desktop をアンインストールし、別のバージョン（安定版または最新版）をインストールします。
+3. 現在の Docker Desktop をアンインストールし、別のバージョンをインストールします。
    あるいは VM ディスクを初期化します。
 @z
 
@@ -584,7 +562,7 @@ For information on how to back up and restore data volumes, see [Backup, restore
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](faqs.md) provides answers to frequently asked questions.
-* [Stable Release Notes](release-notes.md) or [Edge Release Notes](edge-release-notes.md).
+* [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 @y
 {% comment %}
 * [Getting started](index.md) introduces Docker Desktop for Windows.
@@ -593,11 +571,11 @@ For information on how to back up and restore data volumes, see [Backup, restore
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](faqs.md) provides answers to frequently asked questions.
-* [Stable Release Notes](release-notes.md) or [Edge Release Notes](edge-release-notes.md).
+* [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 {% endcomment %}
 * [はじめよう](index.md) では Docker Desktop for Windows を紹介しています。
 * [Docker をはじめよう](../../get-started/) はマルチサービススタックのデプロイ方法を説明するチュートリアルです。
 * [トラブルシューティング](troubleshoot.md) では、一般的な問題、回避策、サポートの受け方などについて説明しています。
 * [FAQ](faqs.md) ではよく尋ねられる質問を示しています。
-* [安定版リリースノード](release-notes.md) または [最新版リリースノート](edge-release-notes.md)。
+* [リリースノート](release-notes.md) では、Docker Desktop リリースにおけるコンポーネントアップデート、新機能、改善項目を一覧にしています。
 @z

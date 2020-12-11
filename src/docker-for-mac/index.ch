@@ -69,22 +69,6 @@ Docker Desktop のダウンロード、システム要件、インストール�
 @z
 
 @x
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/).
-@y
-{% comment %}
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/).
-{% endcomment %}
->**メモ**
->
-> 本ページでは Docker Desktop 安定版（Stable）についての情報を示します。
-最新版（Edge）において利用可能な機能については [Edge リリースノート](edge-release-notes/) を参照してください。
-@z
-
-@x
 ## Preferences
 @y
 {% comment %}
@@ -163,16 +147,6 @@ On the **General** tab, you can configure when to start and update Docker:
 @z
 
 @x
-- **Automatically check for updates**: By default, Docker Desktop automatically checks for updates and notifies you when an update is available. You can manually check for updates anytime by choosing **Check for Updates** from the main Docker menu.
-@y
-{% comment %}
-- **Automatically check for updates**: By default, Docker Desktop automatically checks for updates and notifies you when an update is available. You can manually check for updates anytime by choosing **Check for Updates** from the main Docker menu.
-{% endcomment %}
-- **Automatically check for updates**（アップデートの自動更新） デフォルトでは、Docker Desktop の更新チェックは自動的に行われ、利用可能な更新がある場合は通知されます。
-  Docker のメインメニューにある **Check for Updates** を実行すれば、いつでも手動による更新ができます。
-@z
-
-@x
 - **Include VM in Time Machine backups**: Select this option to back up the Docker Desktop virtual machine. This option is disabled by default.
 @y
 {% comment %}
@@ -200,12 +174,6 @@ On the **General** tab, you can configure when to start and update Docker:
 - **Send usage statistics**（利用統計の送信） Docker Desktop は、診断情報、クラッシュレポート、利用状況の各情報を送信します。
   この情報を通じて Docker は改良を行い、アプリケーションのトラブルシューティングに役立てています。
   チェックボックスをオフにすれば、データ送信を行いません。
-@z
-
-@x
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
-@y
-  **Switch to the Edge version**（最新版への切り替え）をクリックすると、Docker Desktop 最新版について確認できます。
 @z
 
 @x
@@ -612,13 +580,13 @@ Command Line のページでは、試験的機能を有効にするかどうか�
 @z
 
 @x
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 @y
 {% comment %}
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 {% endcomment %}
-Docker Desktop の最新版（Edge）と安定版（Stable）の両方において、試験的機能は有効無効を切り替えることができます。
-試験的機能を無効にした場合、Docker Desktop は、Docker Engine の安定版を利用することになります。
+Docker Desktop において試験的機能は有効無効を切り替えることができます。
+試験的機能を無効にした場合、Docker Desktop は、その時点で利用可能な通常版の Docker Engine を利用することになります。
 @z
 
 @x

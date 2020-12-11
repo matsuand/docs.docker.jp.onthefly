@@ -3,45 +3,188 @@
 
 @x
 ---
-description: Change log / release notes per stable release
-keywords: Docker Desktop for Windows, stable, release notes
+description: Docker Desktop for Windows Release notes
+keywords: Docker Desktop for Windows, release notes
 redirect_from:
 - /winkit/release-notes/
-title: Docker Desktop for Windows Stable Release notes
+- /docker-for-windows/edge-release-notes/
+title: Docker for Windows release notes
 toc_min: 1
 toc_max: 2
 ---
 @y
 ---
-description: 安定版リリースの変更履歴、リリースノート。
-keywords: Docker Desktop for Windows, stable, release notes
+description: Docker Desktop for Windows リリースノート。
+keywords: Docker Desktop for Windows, release notes
 redirect_from:
 - /winkit/release-notes/
-title: Docker Desktop for Windows 安定版リリースノート
+- /docker-for-windows/edge-release-notes/
+title: Docker Desktop for Windows リリースノート
 toc_min: 1
 toc_max: 2
 ---
 @z
 
 @x
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 @y
 {% comment %}
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 {% endcomment %}
 このページでは Docker Desktop リリースにおける新機能、更新状況、既知の不具合、バグフィックスといった情報を示します。
 @z
 
 @x
-For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+> **Important**
+>
+> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
+{: .important }
 @y
 {% comment %}
-For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+> **Important**
+>
+> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
+{: .important }
 {% endcomment %}
-最新版（Edge）リリースについての情報は [最新版リリースノート](edge-release-notes.md) を参照してください。
-Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#what-to-know-before-you-install) を参照してください。
+> **重要**
+>
+> Docker Desktop 3.0.0 から安定版（stable）と最新版（edge）のリリースは、どのユーザーに対しても 1 つのリリースとして統合されました。
+> Docker Desktop のアップデートは、旧バージョンからのデルタアップデートとして自動的に適用されます。
+> つまり Docker Desktop の新バージョンがリリースされると、自動的にマシンにダウンロードされます。
+> そのときには Docker メニューから **Update and restart**（アップデートと再起動）をクリックするだけです。
+{: .important }
+@z
+
+@x
+## Docker Desktop Community 3.0.0
+2020-12-10
+@y
+## Docker Desktop Community 3.0.0
+2020-12-10
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### New
+@y
+{% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+@z
+
+@x
+- Use of three-digit version number for Docker Desktop releases.
+- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
+- First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
+@y
+{% comment %}
+- Use of three-digit version number for Docker Desktop releases.
+- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
+- First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
+{% endcomment %}
+- Use of three-digit version number for Docker Desktop releases.
+- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
+- First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
+@z
+
+@x
+  - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
+  - Supports basic volumes, bind mounts, networks, and environment variables
+@y
+  {% comment %}
+  - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
+  - Supports basic volumes, bind mounts, networks, and environment variables
+  {% endcomment %}
+  - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
+  - Supports basic volumes, bind mounts, networks, and environment variables
+@z
+
+@x
+    Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
+- [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
+@y
+    {% comment %}
+    Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
+- [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
+    {% endcomment %}
+    Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
+- [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
+@z
+
+@x
+### Upgrades
+@y
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine 20.10.0](https://docs.docker.com/engine/release-notes/#20100)
+- [Go 1.15.6](https://github.com/golang/go/issues?q=milestone%3AGo1.15.6+label%3ACherryPickApproved+)
+- [Compose CLI v1.0.4](https://github.com/docker/compose-cli/releases/tag/v1.0.4)
+- [Snyk v1.432.0](https://github.com/snyk/snyk/releases/tag/v1.432.0)
+@y
+- [Docker Engine 20.10.0](https://docs.docker.com/engine/release-notes/#20100)
+- [Go 1.15.6](https://github.com/golang/go/issues?q=milestone%3AGo1.15.6+label%3ACherryPickApproved+)
+- [Compose CLI v1.0.4](https://github.com/docker/compose-cli/releases/tag/v1.0.4)
+- [Snyk v1.432.0](https://github.com/snyk/snyk/releases/tag/v1.432.0)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+@y
+{% comment %}
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+{% endcomment %}
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+@z
+
+@x
+### Known issues
+@y
+{% comment %}
+### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
+@y
+{% comment %}
+- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
+{% endcomment %}
+- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
 @z
 
 @x
@@ -134,7 +277,7 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -254,7 +397,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-1 }
+{: #new }
 ### 新機能
 @z
 
@@ -286,7 +429,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -312,7 +455,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -516,7 +659,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-2 }
+{: #new }
 ### 新機能
 @z
 
@@ -536,7 +679,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -554,7 +697,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -574,7 +717,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 {% comment %}
 ### Known issues
 {% endcomment %}
-{: #known-issues-1 }
+{: #known-issues }
 ### 既知の問題
 @z
 
@@ -616,7 +759,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -636,7 +779,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -691,7 +834,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -710,7 +853,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -847,7 +990,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-3 }
+{: #new }
 ### 新機能
 @z
 
@@ -867,7 +1010,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -889,7 +1032,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -991,7 +1134,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Known issues
 {% endcomment %}
-{: #known-issues-2 }
+{: #known-issues }
 ### 既知の問題
 @z
 
@@ -1035,7 +1178,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1073,7 +1216,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1089,7 +1232,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1123,7 +1266,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Known issues
 {% endcomment %}
-{: #known-issues-3 }
+{: #known-issues }
 ### 既知の問題
 @z
 
@@ -1165,7 +1308,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1183,7 +1326,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-8 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1233,7 +1376,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 {% comment %}
 ### Known issues
 {% endcomment %}
-{: #known-issues-4 }
+{: #known-issues }
 ### 既知の問題
 @z
 
@@ -1279,7 +1422,7 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-9 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1301,7 +1444,7 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-4 }
+{: #new }
 ### 新機能
 @z
 
@@ -1357,7 +1500,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-9 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 
@@ -1405,7 +1548,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 {% comment %}
 ### Known issues
 {% endcomment %}
-{: #known-issues-5 }
+{: #known-issues }
 ### 既知の問題
 @z
 
@@ -1451,7 +1594,7 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-10 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1491,7 +1634,7 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1513,7 +1656,7 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-5 }
+{: #new }
 ### 新機能
 @z
 
@@ -1543,7 +1686,7 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1579,7 +1722,7 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-13 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1621,7 +1764,7 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-14 }
+{: #upgrades }
 ### アップグレード
 @z
 
@@ -1657,7 +1800,7 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-6 }
+{: #new }
 ### 新機能
 @z
 
@@ -1701,7 +1844,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-10 }
+{: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
 

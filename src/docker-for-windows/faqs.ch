@@ -16,71 +16,81 @@ title: Frequently asked questions (FAQ)
 @z
 
 @x
-## Stable and Edge releases
+## Docker Desktop releases
 @y
-## Stable and Edge releases
+## Docker Desktop releases
 @z
 
 @x
-### How do I get the Stable or the Edge version of Docker Desktop?
+### When will Docker Desktop move to a cumulative release stream?
 @y
-### How do I get the Stable or the Edge version of Docker Desktop?
+### When will Docker Desktop move to a cumulative release stream?
 @z
 
 @x
-You can download the Stable or the Edge version of Docker Desktop from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/).
+Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](install.md#automatic-updates).
 @y
-You can download the Stable or the Edge version of Docker Desktop from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/).
+Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](install.md#automatic-updates).
 @z
 
 @x
-For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" rel="noopener" class="_"}.
+### How do new users install Docker Desktop?
 @y
-For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" rel="noopener" class="_"}.
+### How do new users install Docker Desktop?
 @z
 
 @x
-### What is the difference between the Stable and Edge versions of Docker Desktop?
+Each Docker Desktop release will also be delivered as a full installer for new users. The same will apply if you have skipped a version, although this will not normally happen as updates will be applied automatically.
 @y
-### What is the difference between the Stable and Edge versions of Docker Desktop?
+Each Docker Desktop release will also be delivered as a full installer for new users. The same will apply if you have skipped a version, although this will not normally happen as updates will be applied automatically.
 @z
 
 @x
-Two different download channels are available in the Community version of Docker Desktop:
+### How frequent will new releases be?
 @y
-Two different download channels are available in the Community version of Docker Desktop:
+### How frequent will new releases be?
 @z
 
 @x
-The **Stable channel** provides a general availability release-ready installer
-for a fully baked and tested, more reliable app. The Stable version of Docker
-Desktop includes the latest released version of Docker Engine. The
-release schedule is synced with Docker Engine releases and patch releases. On the Stable channel, you can select whether to send usage statistics and other data.
+New releases will be available roughly monthly, similar to Edge today, unless there are critical fixes that need to be released sooner.
 @y
-The **Stable channel** provides a general availability release-ready installer
-for a fully baked and tested, more reliable app. The Stable version of Docker
-Desktop includes the latest released version of Docker Engine. The
-release schedule is synced with Docker Engine releases and patch releases. On the Stable channel, you can select whether to send usage statistics and other data.
+New releases will be available roughly monthly, similar to Edge today, unless there are critical fixes that need to be released sooner.
 @z
 
 @x
-The **Edge channel** provides an installer with new features we are working on, but is not necessarily fully tested. It includes the experimental version of
-Docker Engine. Bugs, crashes, and issues can occur when using the Edge version, but you get a chance to preview new functionality, experiment, and provide feedback as Docker Desktop evolves. Edge releases are typically more frequent than for Stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the Edge channel.
+### How do I ensure that all users on my team are using the same version?
 @y
-The **Edge channel** provides an installer with new features we are working on, but is not necessarily fully tested. It includes the experimental version of
-Docker Engine. Bugs, crashes, and issues can occur when using the Edge version, but you get a chance to preview new functionality, experiment, and provide feedback as Docker Desktop evolves. Edge releases are typically more frequent than for Stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the Edge channel.
+### How do I ensure that all users on my team are using the same version?
 @z
 
 @x
-### Can I switch between Stable and Edge versions of Docker Desktop?
+Previously you had to manage this yourself: now it will happen automatically as a side effect of all users being on the latest version.
 @y
-### Can I switch between Stable and Edge versions of Docker Desktop?
+Previously you had to manage this yourself: now it will happen automatically as a side effect of all users being on the latest version.
 @z
 
 @x
-Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](install.md#switch-between-stable-and-edge-versions).
+### My colleague has got a new version but I haven’t got it yet.
 @y
-Yes, you can switch between Stable and Edge versions. You can try out the Edge releases to see what's new, then go back to Stable for other work. However, **you can only have one version of Docker Desktop installed at a time**. For more information, see [Switch between Stable and Edge versions](install.md#switch-between-stable-and-edge-versions).
+### My colleague has got a new version but I haven’t got it yet.
+@z
+
+@x
+Sometimes we may roll out a new version gradually over a few days. Therefore, if you wait, it will turn up soon. Alternatively, you can select **Check for Updates** from the Docker menu to jump the queue and get the latest version immediately.
+@y
+Sometimes we may roll out a new version gradually over a few days. Therefore, if you wait, it will turn up soon. Alternatively, you can select **Check for Updates** from the Docker menu to jump the queue and get the latest version immediately.
+@z
+
+@x
+### Where can I find information about Stable and Edge releases?
+@y
+### Where can I find information about Stable and Edge releases?
+@z
+
+@x
+Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single, cumulative release stream for all users.
+@y
+Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single, cumulative release stream for all users.
 @z
 
 @x

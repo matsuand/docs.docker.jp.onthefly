@@ -333,46 +333,6 @@ Docker のビルド時における変数についての詳細は [docker build �
 @z
 
 @x
-#### Two-phase build
-@y
-{% comment %}
-#### Two-phase build
-{% endcomment %}
-{: #two-phase-build }
-#### 二段階ビルド
-@z
-
-@x
-If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the `hooks/pre_build` file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary that is required before the build.
-@y
-{% comment %}
-If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the `hooks/pre_build` file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary that is required before the build.
-{% endcomment %}
-ビルド処理に必要となるコンポーネントが、アプリケーションの依存パッケージには含まれていない場合、プレビルドフック（`hooks/pre_build`ファイルにより実現）を用いて、必要なコンポーネントの取得とコンパイルを行うことができます。
-以下に示す例では、フック内から Docker コンテナーを利用して、ビルド前に必要となる golang バイナリーをコンパイルするものです。
-@z
-
-@x
-```bash
-#!/bin/bash
-echo "=> Building the binary"
-docker run --privileged \
-  -v $(pwd):/src \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  centurylink/golang-builder
-```
-@y
-```bash
-#!/bin/bash
-echo "=> Building the binary"
-docker run --privileged \
-  -v $(pwd):/src \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  centurylink/golang-builder
-```
-@z
-
-@x
 #### Push to multiple repos
 @y
 {% comment %}

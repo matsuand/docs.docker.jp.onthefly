@@ -322,6 +322,37 @@ and select **Learn**.
 @z
 
 @x
+## Automatic updates
+@y
+{% comment %}
+## Automatic updates
+{% endcomment %}
+{: #automatic-updates }
+## 自動アップデート
+@z
+
+@x
+Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
+@y
+{% comment %}
+Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
+{% endcomment %}
+Docker Desktop 3.0.0 から Docker Desktop のアップデータが自動的に行われるようになりました。
+その場合には旧バージョンからのデルタアップデートが行われます。
+@z
+
+@x
+When an update is available, Docker Desktop automatically downloads it to your machine and displays an icon to indicate the availability of a newer version. All you need to do now is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+@y
+{% comment %}
+When an update is available, Docker Desktop automatically downloads it to your machine and displays an icon to indicate the availability of a newer version. All you need to do now is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+{% endcomment %}
+アップデートが利用可能になると、Docker Desktop は自動的にアップデートをマシンにダウンロードして、新たなバージョンが利用可能であることを示すアイコンを表示します。
+そのときには Docker メニューから **Update and restart**（アップデートと再起動）をクリックするだけです。
+これによって最新のアップデートがインストールされて、変更を適用するため Docker Desktop が再起動されます。
+@z
+
+@x
 ## Uninstall Docker Desktop
 @y
 {% comment %}
@@ -362,71 +393,6 @@ Mac から Docker Desktop をアンインストールするには以下を実行
 @z
 
 @x
-## Switch between Stable and Edge versions
-@y
-{% comment %}
-## Switch between Stable and Edge versions
-{% endcomment %}
-{: #switch-between-stable-and-edge-versions }
-## 安定版と最新版の切り替え
-@z
-
-@x
-Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
-@y
-{% comment %}
-Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
-{% endcomment %}
-Docker Desktop では安定版と最新版の切り替えができるようになっています。
-ただし **一度にインストールしておくことができるバージョンはただ一つです**。
-安定版と最新版を切り替えると、開発環境を不安定にする原因となることがあります。
-特に、より新しい最新版から、それに比べて古い安定版に切り替える場合には、注意してください。
-@z
-
-@x
-For example, containers created with a newer Edge version of Docker Desktop may
-not work after you switch back to Stable because they may have been created
-using Edge features that aren't in Stable yet. Keep this in mind as
-you create and work with Edge containers, perhaps in the spirit of a playground
-space where you are prepared to troubleshoot or start over.
-@y
-{% comment %}
-For example, containers created with a newer Edge version of Docker Desktop may
-not work after you switch back to Stable because they may have been created
-using Edge features that aren't in Stable yet. Keep this in mind as
-you create and work with Edge containers, perhaps in the spirit of a playground
-space where you are prepared to troubleshoot or start over.
-{% endcomment %}
-たとえば、より新しい最新版によって生成したコンテナーは、安定版に切り替えたときに動作しない場合があります。
-それは最新版の機能を利用してコンテナーを生成している場合であり、そのような機能が安定版にはないからです。
-したがって最新版においてコンテナーを生成して利用する場合には十分に注意してください。
-問題の解決ややり直しは自分で行わなければならない、そういうお試し版であることを覚えておいてください。
-@z
-
-@x
-Experimental features are turned on by default on Edge releases. However, when you switch from a Stable to an Edge release, you must turn on the experimental features flag to access experimental features. From the Docker Desktop menu, click **Preferences** > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
-@y
-{% comment %}
-Experimental features are turned on by default on Edge releases. However, when you switch from a Stable to an Edge release, you must turn on the experimental features flag to access experimental features. From the Docker Desktop menu, click **Preferences** > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
-{% endcomment %}
-試験的機能は、最新版においてはデフォルトで有効になっています。
-しかし安定版から最新版に切り替えた場合は、試験的機能のフラグを有効にしないと、その機能にアクセスすることはできません。
-Docker Desktop メニューから **Preferences** > **Command Line** をクリックして、**Enable experimental features**（試験的機能の有効化）トグルをオンにしてください。
-そして **Apply & Restart** をクリックして変更を適用します。
-@z
-
-@x
-To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section **Save and Restore data** below.
-@y
-{% comment %}
-To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section **Save and Restore data** below.
-{% endcomment %}
-最新版と安定版を安全に切り替えるために、イメージの保存や、必要に応じてコンテナーのエクスポートを行っておいてください。
-これを行ってから、旧バージョンをアンインストールし、新バージョンをインストールするようにしてください。
-詳しくは、以下の **データの保存と復元** の節を参照してください。
-@z
-
-@x
 ### Save and restore data
 @y
 {% comment %}
@@ -437,13 +403,13 @@ To safely switch between Edge and Stable versions, ensure you save images and ex
 @z
 
 @x
-You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
+You can use the following procedure to save and restore images and container data. For example to reset your VM disk:
 @y
 {% comment %}
-You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
+You can use the following procedure to save and restore images and container data. For example to reset your VM disk:
 {% endcomment %}
 イメージやコンテナーのデータを保存し復元するためには、以下に示す手順を実施します。
-たとえば最新版から安定版に切り替える場合、あるいは VM ディスクを入れ替える場合とします。
+たとえば VM ディスクを入れ替える場合とします。
 @z
 
 @x
@@ -534,9 +500,7 @@ For information on how to back up and restore data volumes, see [Backup, restore
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](faqs.md) provide answers to frequently asked questions.
-- [Release notes](release-notes.md) lists component updates, new features, and
-  improvements associated with Stable releases. For information about Edge releases, see
-  [Edge release notes](edge-release-notes.md).
+- [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](/get-started/) provides a general Docker tutorial.
 @y
 {% comment %}
@@ -544,15 +508,12 @@ For information on how to back up and restore data volumes, see [Backup, restore
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](faqs.md) provide answers to frequently asked questions.
-- [Release notes](release-notes.md) lists component updates, new features, and
-  improvements associated with Stable releases. For information about Edge releases, see
-  [Edge release notes](edge-release-notes.md).
+- [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](/get-started/) provides a general Docker tutorial.
 {% endcomment %}
 * [はじめよう](index.md)では Mac 上での Docker Desktop の概要、基本的な Docker コマンド例、ヘルプを得たりフィードバックを行う方法、また Mac 上の Docker Desktop に関する他のトピックへのリンクを示しています。
 * [トラブルシューティング](troubleshoot.md) では一般的な質問、解決方法、診断実行や課題送信などを示しています。
 * [FAQ](faqs.md) はよくたずねられる質問とその回答を示します。
-* [リリースノート](release-notes.md) ではコンポーネントのアップデート、新機能、また安定版に関連した改善機能を示しています。
-  最新版については [最新版リリースノート](edge-release-notes.md) を参照してください。
+* [リリースノート](release-notes.md) では Docker Desktop リリースに関連したコンポーネントのアップデート、新機能、改善機能を示しています。
 * [Docker をはじめよう](/get-started/) は Docker の全般的なチュートリアルです。
 @z

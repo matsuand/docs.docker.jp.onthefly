@@ -59,22 +59,6 @@ Docker Desktop のダウンロード、システム要件、インストール�
 @z
 
 @x
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes.md).
-@y
-{% comment %}
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes.md).
-{% endcomment %}
->**メモ**
->
-> 本ページでは Docker Desktop 安定版（Stable）についての情報を示します。
-最新版（Edge）において利用可能な機能については [最新版リリースノート](edge-release-notes.md) を参照してください。
-@z
-
-@x
 ## Settings
 @y
 {% comment %}
@@ -178,24 +162,6 @@ Settings ダイアログの **General** タブにおいて、Docker の起動や
 @z
 
 @x
-* **Automatically check for updates** - By default, Docker Desktop automatically checks for updates and notifies you when an update is available.
-Click **OK** to accept and install updates (or cancel to keep the current
-version). You can manually update by choosing **Check for Updates** from the
-main Docker menu.
-@y
-{% comment %}
-* **Automatically check for updates** - By default, Docker Desktop automatically checks for updates and notifies you when an update is available.
-Click **OK** to accept and install updates (or cancel to keep the current
-version). You can manually update by choosing **Check for Updates** from the
-main Docker menu.
-{% endcomment %}
-* **Automatically check for updates**（アップデートの自動更新） - デフォルトでは、Docker Desktop の更新チェックは自動的に行われ、利用可能な更新がある場合は通知されます。
-  **OK** のクリックにより決定し、更新をインストールします。
-  （または現行バージョンのままとする場合はキャンセルします。）
-  Docker のメインメニューにある **Check for Updates** を実行すれば、いつでも手動による更新ができます。
-@z
-
-@x
 * **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 @y
 {% comment %}
@@ -220,15 +186,6 @@ troubleshoot the application. Clear the check box to opt out. Docker may periodi
 こういった情報は Docker の改善や、アプリケーションにおける問題解決に役立てることができます。
 チェックボックスをオフにすれば、情報を送信しないようにすることができます。
 Docker では定期的に情報確認を行うことがあります。
-@z
-
-@x
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
-@y
-  {% comment %}
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
-  {% endcomment %}
-  **Switch to the Edge version**（最新版への切り替え）をクリックすれば、Docker Desktop 最新版（Edge）について確認することができます。
 @z
 
 @x
@@ -677,7 +634,7 @@ Docker Desktop のネットワーク設定により、仮想プライベート�
 @x
 > **Note**
 >
-> Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
+> Some users reported problems connecting to Docker Hub on Docker Desktop. This would manifest as an error when trying to run
 `docker` commands that pull images from Docker Hub that are not already
 downloaded, such as a first time run of `docker run hello-world`. If you
 encounter this, reset the DNS server to use the Google DNS fixed address:
@@ -687,7 +644,7 @@ encounter this, reset the DNS server to use the Google DNS fixed address:
 {% comment %}
 > **Note**
 >
-> Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
+> Some users reported problems connecting to Docker Hub on Docker Desktop. This would manifest as an error when trying to run
 `docker` commands that pull images from Docker Hub that are not already
 downloaded, such as a first time run of `docker run hello-world`. If you
 encounter this, reset the DNS server to use the Google DNS fixed address:
@@ -696,7 +653,7 @@ encounter this, reset the DNS server to use the Google DNS fixed address:
 {% endcomment %}
 > **メモ**
 >
-> Docker Desktop 安定版を使って Docker Hub に接続する際に、問題が発生するとの報告があります。
+> Docker Desktop を使って Docker Hub に接続する際に、問題が発生するとの報告があります。
 > これは `docker` コマンドの実行時に発生するものです。
 > Docker Hub からイメージをプルする際に、それまでダウンロードしていないイメージであったとき、たとえば `docker run hello-world` を初めて実行したような場合に発生します。
 > この症状が発生した場合は、DNS サーバーをリセットして Google DNS 固定アドレス `8.8.8.8` を設定してみてください。
@@ -831,13 +788,13 @@ Command Line のページでは、試験的機能を有効にするかどうか�
 @z
 
 @x
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 @y
 {% comment %}
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 {% endcomment %}
-Docker Desktop の最新版（Edge）と安定版（Stable）の両方において、試験的機能は有効無効を切り替えることができます。
-試験的機能を無効にした場合、Docker Desktop は、Docker Engine の安定版を利用することになります。
+Docker Desktop においては試験的機能は有効無効を切り替えることができます。
+試験的機能を無効にした場合、Docker Desktop は、その時点で利用可能な通常版の Docker Engine を利用することになります。
 @z
 
 @x
@@ -848,18 +805,6 @@ Docker Desktop の最新版（Edge）と安定版（Stable）の両方におい�
 {% endcomment %}
 {: #experimental-features }
 #### Experimental features
-@z
-
-@x
-Docker Desktop Edge releases have the experimental version
-of Docker Engine enabled by default, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on GitHub.
-@y
-{% comment %}
-Docker Desktop Edge releases have the experimental version
-of Docker Engine enabled by default, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on GitHub.
-{% endcomment %}
-Docker Desktop 最新版（Edge）には、デフォルトで Docker Engine の試験的（experimental）バージョンが含まれています。
-詳しくは GitHub 上の [Docker 試験的機能 README](https://github.com/docker/cli/blob/master/experimental/README.md) に示しています。
 @z
 
 @x

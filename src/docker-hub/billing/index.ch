@@ -6,16 +6,12 @@
 description: Docker Billing overview
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
 title: Docker Billing overview
-redirect_from:
-- /docker-hub/billing/faq/
 ---
 @y
 ---
 description: Docker Billing overview
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
 title: Docker の有料プラン概要
-redirect_from:
-- /docker-hub/billing/faq/
 ---
 @z
 
