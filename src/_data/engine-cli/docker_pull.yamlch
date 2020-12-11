@@ -15,30 +15,28 @@ long: |-
   [Docker Hub](https://hub.docker.com) registry.
 @y
 long: |-
-  Most of your images will be created on top of a base image from the
-  [Docker Hub](https://hub.docker.com) registry.
+  たいていのイメージは [Docker Hub](https://hub.docker.com) レジストリから取得したイメージを最上位のベースイメージとして生成されています。
 @z
 
 @x
   [Docker Hub](https://hub.docker.com) contains many pre-built images that you
   can `pull` and try without needing to define and configure your own.
 @y
-  [Docker Hub](https://hub.docker.com) contains many pre-built images that you
-  can `pull` and try without needing to define and configure your own.
+  [Docker Hub](https://hub.docker.com) にはあらかじめビルドされた数多くのイメージがあり、何も定義したり設定したりせず、ただ`pull`するだけで利用することができます。
 @z
 
 @x
   To download a particular image, or set of images (i.e., a repository),
   use `docker pull`.
 @y
-  To download a particular image, or set of images (i.e., a repository),
-  use `docker pull`.
+  特定のイメージあるいはイメージのセット（つまりリポジトリ）をダウンロードするには`docker pull`を利用します。
 @z
 
 @x
   ### Proxy configuration
 @y
-  ### Proxy configuration
+  {: #proxy-configuration }
+  ### プロキシー設定
 @z
 
 @x
@@ -46,41 +44,31 @@ long: |-
   before open a connect to registry, you may need to configure the Docker
   daemon's proxy settings, using the `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`
   environment variables. To set these environment variables on a host using
-@y
-  If you are behind an HTTP proxy server, for example in corporate settings,
-  before open a connect to registry, you may need to configure the Docker
-  daemon's proxy settings, using the `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`
-  environment variables. To set these environment variables on a host using
-@z
-
-@x
   `systemd`, refer to the [control and configure Docker with systemd](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
   for variables configuration.
 @y
-  `systemd`, refer to the [control and configure Docker with systemd](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
-  for variables configuration.
+  たとえば会社の設定として HTTP プロキシーサーバーを介している場合、レジストリへの接続を開始する前に、デーモンのプロキシー設定を行う必要があるかもしれません。
+  その場合は環境変数`HTTP_PROXY`、`HTTPS_PROXY`、`NO_PROXY`を用います。
+  `systemd`を利用するホスト上においてこのような変数を設定するには、[control and configure Docker with systemd](__HOSTURL__/config/daemon/systemd/#httphttps-proxy) を参考にして変数設定を行ってください。
 @z
 
 @x
   ### Concurrent downloads
 @y
-  ### Concurrent downloads
+  {: #concurrent-downloads }
+  ### 並列ダウンロード
 @z
 
 @x
   By default the Docker daemon will pull three layers of an image at a time.
   If you are on a low bandwidth connection this may cause timeout issues and you may want to lower
-@y
-  By default the Docker daemon will pull three layers of an image at a time.
-  If you are on a low bandwidth connection this may cause timeout issues and you may want to lower
-@z
-
-@x
   this via the `--max-concurrent-downloads` daemon option. See the
   [daemon documentation](dockerd.md) for more details.
 @y
-  this via the `--max-concurrent-downloads` daemon option. See the
-  [daemon documentation](dockerd.md) for more details.
+  Docker デーモンはデフォルトにおいて、イメージからプルを行うレイヤー数は、一度に 3 つまでです。
+  低帯域幅の接続を行っている場合には、タイムアウトの原因となることがあります。
+  そのような場合にはデーモンオプション`--max-concurrent-downloads`を通じて、その数を減らすことができます。
+  詳しくは [デーモンのドキュメント](dockerd.md) を参照してください。
 @z
 
 @x
@@ -89,7 +77,7 @@ pname: docker
 plink: docker.yaml
 options:
 @y
-usage: docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+usage: docker pull [オプション] NAME[:TAG|@DIGEST]
 pname: docker
 plink: docker.yaml
 options:
@@ -192,7 +180,8 @@ examples: |-
   ### Pull an image from Docker Hub
 @y
 examples: |-
-  ### Pull an image from Docker Hub
+  {: #pull-an-image-from-docker-hub }
+  ### Docker Hub からのイメージのプル
 @z
 
 @x
@@ -200,20 +189,15 @@ examples: |-
   `docker pull`. If no tag is provided, Docker Engine uses the `:latest` tag as a
   default. This command pulls the `debian:latest` image:
 @y
-  To download a particular image, or set of images (i.e., a repository), use
-  `docker pull`. If no tag is provided, Docker Engine uses the `:latest` tag as a
-  default. This command pulls the `debian:latest` image:
+  特定のイメージあるいはイメージのセット（つまりリポジトリ）をダウンロードするには`docker pull`を利用します。
+  タグ名を指定しなかった場合、Docker Engine はデフォルトとして`:latest`というタグを用います。
+  したがって以下のコマンドは`debian:latest`イメージをプルします。
 @z
 
 @x
   ```bash
   $ docker pull debian
-@y
-  ```bash
-  $ docker pull debian
-@z
 
-@x
   Using default tag: latest
   latest: Pulling from library/debian
   fdd5d7827f33: Pull complete
@@ -222,6 +206,9 @@ examples: |-
   Status: Downloaded newer image for debian:latest
   ```
 @y
+  ```bash
+  $ docker pull debian
+
   Using default tag: latest
   latest: Pulling from library/debian
   fdd5d7827f33: Pull complete
@@ -235,8 +222,8 @@ examples: |-
   Docker images can consist of multiple layers. In the example above, the image
   consists of two layers; `fdd5d7827f33` and `a3ed95caeb02`.
 @y
-  Docker images can consist of multiple layers. In the example above, the image
-  consists of two layers; `fdd5d7827f33` and `a3ed95caeb02`.
+  Docker イメージは複数レイヤーにより構成することができます。
+  上の例におけるイメージは 2 つのレイヤー、つまり`fdd5d7827f33`と`a3ed95caeb02`から構成されています。
 @z
 
 @x
@@ -245,21 +232,16 @@ examples: |-
   only pulls its metadata, but not its layers, because all layers are already
   present locally:
 @y
-  Layers can be reused by images. For example, the `debian:jessie` image shares
-  both layers with `debian:latest`. Pulling the `debian:jessie` image therefore
-  only pulls its metadata, but not its layers, because all layers are already
-  present locally:
+  レイヤーはイメージによって再利用されます。
+  たとえば`debian:jessie`イメージは、`debian:latest`イメージの 2 つのレイヤーを共有しています。
+  したがって`debian:jessie`イメージをプルすると、レイヤーはプルせず、メタデータのみをプルすることになります。
+  全レイヤーがすでにローカルに取得できているためです。
 @z
 
 @x
   ```bash
   $ docker pull debian:jessie
-@y
-  ```bash
-  $ docker pull debian:jessie
-@z
 
-@x
   jessie: Pulling from library/debian
   fdd5d7827f33: Already exists
   a3ed95caeb02: Already exists
@@ -267,6 +249,9 @@ examples: |-
   Status: Downloaded newer image for debian:jessie
   ```
 @y
+  ```bash
+  $ docker pull debian:jessie
+
   jessie: Pulling from library/debian
   fdd5d7827f33: Already exists
   a3ed95caeb02: Already exists
@@ -279,24 +264,21 @@ examples: |-
   To see which images are present locally, use the [`docker images`](images.md)
   command:
 @y
-  To see which images are present locally, use the [`docker images`](images.md)
-  command:
+  どのイメージがローカルに存在するかを確認するには [`docker images`](images.md) コマンドを用います。
 @z
 
 @x
   ```bash
   $ docker images
-@y
-  ```bash
-  $ docker images
-@z
 
-@x
   REPOSITORY   TAG      IMAGE ID        CREATED      SIZE
   debian       jessie   f50f9524513f    5 days ago   125.1 MB
   debian       latest   f50f9524513f    5 days ago   125.1 MB
   ```
 @y
+  ```bash
+  $ docker images
+
   REPOSITORY   TAG      IMAGE ID        CREATED      SIZE
   debian       jessie   f50f9524513f    5 days ago   125.1 MB
   debian       latest   f50f9524513f    5 days ago   125.1 MB
@@ -311,44 +293,38 @@ examples: |-
   same image, their layers are stored only once and do not consume extra disk
   space.
 @y
-  Docker uses a content-addressable image store, and the image ID is a SHA256
-  digest covering the image's configuration and layers. In the example above,
-  `debian:jessie` and `debian:latest` have the same image ID because they are
-  actually the *same* image tagged with different names. Because they are the
-  same image, their layers are stored only once and do not consume extra disk
-  space.
+  Docker ではイメージ内容をアドレス検索できるイメージストア（content-addressable image store）を利用します。
+  そこでのイメージ ID は、イメージ設定とレイヤーから算出される SHA256 ダイジェスト値です。
+  上の例において`debian:jessie`と`debian:latest`は、まったく同一のイメージ ID を持っています。
+  タグ名が異なるだけで、実際には **同一の** イメージであるからです。
+  同一のイメージであることから、レイヤーが保存されるのは 1 度だけであって、別のディスク容量を消費することはありません。
 @z
 
 @x
   For more information about images, layers, and the content-addressable store,
   refer to [understand images, containers, and storage drivers](https://docs.docker.com/storage/storagedriver/).
 @y
-  For more information about images, layers, and the content-addressable store,
-  refer to [understand images, containers, and storage drivers](https://docs.docker.com/storage/storagedriver/).
+  イメージ、レイヤー、イメージストアに関する詳細は [イメージ、コンテナー、ストレージドライバーの理解](__HOSTURL__/storage/storagedriver/) を参照してください。
 @z
 
 @x
   ### Pull an image by digest (immutable identifier)
 @y
-  ### Pull an image by digest (immutable identifier)
+  {: #pull-an-image-by-digest-immutable-identifier }
+  ### 不変の識別子であるダイジェスト値によるイメージのプル
 @z
 
 @x
   So far, you've pulled images by their name (and "tag"). Using names and tags is
   a convenient way to work with images. When using tags, you can `docker pull` an
-@y
-  So far, you've pulled images by their name (and "tag"). Using names and tags is
-  a convenient way to work with images. When using tags, you can `docker pull` an
-@z
-
-@x
   image again to make sure you have the most up-to-date version of that image.
   For example, `docker pull ubuntu:14.04` pulls the latest version of the Ubuntu
   14.04 image.
 @y
-  image again to make sure you have the most up-to-date version of that image.
-  For example, `docker pull ubuntu:14.04` pulls the latest version of the Ubuntu
-  14.04 image.
+  ここまでイメージのプルには、イメージ名（とそのタグ名）を用いてきました。
+  イメージを取り扱う際には、イメージ名とタグ名を使うのが簡単な方法です。
+  タグを利用すれば`docker pull`によってイメージをプルする際に、イメージの最新バージョンを取得することができます。
+  たとえば`docker pull ubuntu:14.04`を実行すると Ubuntu 14.04 イメージの最新バージョンが取得できます。
 @z
 
 @x
@@ -358,30 +334,24 @@ examples: |-
   of an image to pull. Doing so, allows you to "pin" an image to that version,
   and guarantee that the image you're using is always the same.
 @y
-  In some cases you don't want images to be updated to newer versions, but prefer
-  to use a fixed version of an image. Docker enables you to pull an image by its
-  *digest*. When pulling an image by digest, you specify *exactly* which version
-  of an image to pull. Doing so, allows you to "pin" an image to that version,
-  and guarantee that the image you're using is always the same.
+  場合によっては、最新バージョンにアップデートする必要がなく、イメージの特定バージョンを利用したいときがあります。
+  イメージプルの際には **ダイジェスト値** を使うことができます。
+  ダイジェスト値を使ってイメージをプルするということは、プルするイメージがどれであるかを **正確に** 指定することになります。
+  これを行うと特定バージョンを「ねらい打ち」することができ、取り扱うイメージを常に同一のものとすることができます。
 @z
 
 @x
   To know the digest of an image, pull the image first. Let's pull the latest
   `ubuntu:14.04` image from Docker Hub:
 @y
-  To know the digest of an image, pull the image first. Let's pull the latest
-  `ubuntu:14.04` image from Docker Hub:
+  イメージのダイジェスト値を知るには、まずはイメージをプルします。
+  そこで Docker Hub から最新の`ubuntu:14.04`イメージをプルしてみます。
 @z
 
 @x
   ```bash
   $ docker pull ubuntu:14.04
-@y
-  ```bash
-  $ docker pull ubuntu:14.04
-@z
 
-@x
   14.04: Pulling from library/ubuntu
   5a132a7e7af1: Pull complete
   fd2731e4c50c: Pull complete
@@ -391,6 +361,9 @@ examples: |-
   Status: Downloaded newer image for ubuntu:14.04
   ```
 @y
+  ```bash
+  $ docker pull ubuntu:14.04
+
   14.04: Pulling from library/ubuntu
   5a132a7e7af1: Pull complete
   fd2731e4c50c: Pull complete
@@ -405,8 +378,8 @@ examples: |-
   Docker prints the digest of the image after the pull has finished. In the example
   above, the digest of the image is:
 @y
-  Docker prints the digest of the image after the pull has finished. In the example
-  above, the digest of the image is:
+  プルが完了するとイメージのダイジェスト値が表示されます。
+  上の例におけるイメージのダイジェスト値は以下のものです。
 @z
 
 @x
@@ -419,27 +392,22 @@ examples: |-
   Docker also prints the digest of an image when *pushing* to a registry. This
   may be useful if you want to pin to a version of the image you just pushed.
 @y
-  Docker also prints the digest of an image when *pushing* to a registry. This
-  may be useful if you want to pin to a version of the image you just pushed.
+  レジストリへの **プッシュ** を行う際にもこのダイジェスト値は表示されます。
+  プッシュしたばかりのイメージバージョンを特定したいときに便利です。
 @z
 
 @x
   A digest takes the place of the tag when pulling an image, for example, to
   pull the above image by digest, run the following command:
 @y
-  A digest takes the place of the tag when pulling an image, for example, to
-  pull the above image by digest, run the following command:
+  イメージをプルする際には、タグの代わりにダイジェスト値を用いることができます。
+  たとえば上のイメージをダイジェスト値によってプルするには、以下のコマンドを実行します。
 @z
 
 @x
   ```bash
   $ docker pull ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-@y
-  ```bash
-  $ docker pull ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-@z
 
-@x
   sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2: Pulling from library/ubuntu
   5a132a7e7af1: Already exists
   fd2731e4c50c: Already exists
@@ -449,6 +417,9 @@ examples: |-
   Status: Downloaded newer image for ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
   ```
 @y
+  ```bash
+  $ docker pull ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
+
   sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2: Pulling from library/ubuntu
   5a132a7e7af1: Already exists
   fd2731e4c50c: Already exists
@@ -462,7 +433,8 @@ examples: |-
 @x
   Digest can also be used in the `FROM` of a Dockerfile, for example:
 @y
-  Digest can also be used in the `FROM` of a Dockerfile, for example:
+  ダイジェスト値は Dockerfile 内の`FROM`命令においても利用可能です。
+  たとえば以下です。
 @z
 
 @x
@@ -485,18 +457,18 @@ examples: |-
   > security updates. If you want to pull an updated image, you need to change the
   > digest accordingly.
 @y
-  > **Note**
+  > **メモ**
   >
-  > Using this feature "pins" an image to a specific version in time.
-  > Docker will therefore not pull updated versions of an image, which may include
-  > security updates. If you want to pull an updated image, you need to change the
-  > digest accordingly.
+  > この機能を利用すると、忘れずにイメージのバージョンを特定することができます。
+  > したがってイメージの最新バージョンにはセキュリティアップデートが含まれているかもしれませんが、これを取得しません。
+  > 更新されたイメージをプルするのであれば、それに合わせてダイジェスト値を書き換える必要があります。
 @z
 
 @x
   ### Pull from a different registry
 @y
-  ### Pull from a different registry
+  {: #pull-from-a-different-registry }
+  ### 別レジストリからのプル
 @z
 
 @x
@@ -505,30 +477,25 @@ examples: |-
   set up a local registry, you can specify its path to pull from it. A registry
   path is similar to a URL, but does not contain a protocol specifier (`https://`).
 @y
-  By default, `docker pull` pulls images from [Docker Hub](https://hub.docker.com). It is also possible to
-  manually specify the path of a registry to pull from. For example, if you have
-  set up a local registry, you can specify its path to pull from it. A registry
-  path is similar to a URL, but does not contain a protocol specifier (`https://`).
+  `docker pull`はデフォルトで [Docker Hub](https://hub.docker.com) からイメージをプルします。
+  プルを行うレジストリは、そのパスを手動で指定することもできます。
+  たとえばローカルにレジストリを作り出している場合、そこからプルするようにパス指定ができます。
+  レジストリへのパスは URL に似ていますが、プロトコルの識別子（`https://`）を含みません。
 @z
 
 @x
   The following command pulls the `testing/test-image` image from a local registry
   listening on port 5000 (`myregistry.local:5000`):
 @y
-  The following command pulls the `testing/test-image` image from a local registry
-  listening on port 5000 (`myregistry.local:5000`):
+  以下のコマンドは、ローカルレジストリがポート 5000 番で待ち受けているものとして、そこから`testing/test-image`イメージをプルするものです。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker pull myregistry.local:5000/testing/test-image
   ```
 @y
+  ```bash
   $ docker pull myregistry.local:5000/testing/test-image
   ```
 @z
@@ -536,81 +503,65 @@ examples: |-
 @x
   Registry credentials are managed by [docker login](login.md).
 @y
-  Registry credentials are managed by [docker login](login.md).
+  レジストリの資格情報は [docker login](login.md) を用いて管理されます。
 @z
 
 @x
   Docker uses the `https://` protocol to communicate with a registry, unless the
   registry is allowed to be accessed over an insecure connection. Refer to the
-@y
-  Docker uses the `https://` protocol to communicate with a registry, unless the
-  registry is allowed to be accessed over an insecure connection. Refer to the
-@z
-
-@x
   [insecure registries](dockerd.md#insecure-registries) section for more information.
 @y
-  [insecure registries](dockerd.md#insecure-registries) section for more information.
+  Docker では`https://`プロトコルを使ったレジストリとのやりとりを行ないますが、ただしセキュアではない接続を許容しているレジストリの場合、それはできません。
+  詳しくは [セキュアでないレジストリ](dockerd.md#insecure-registries) の節を参照してください。
 @z
 
 @x
   ### Pull a repository with multiple images
 @y
-  ### Pull a repository with multiple images
+  {: #pull-a-repository-with-multiple-images }
+  ### レジストリからの複数イメージのプル
 @z
 
 @x
   By default, `docker pull` pulls a *single* image from the registry. A repository
   can contain multiple images. To pull all images from a repository, provide the
-@y
-  By default, `docker pull` pulls a *single* image from the registry. A repository
-  can contain multiple images. To pull all images from a repository, provide the
-@z
-
-@x
   `-a` (or `--all-tags`) option when using `docker pull`.
 @y
-  `-a` (or `--all-tags`) option when using `docker pull`.
+  `docker pull`はデフォルトでは、レジストリから **1 つの** イメージをプルします。
+  リポジトリには多くのイメージがあります。
+  そこでリポジトリから全イメージをプルするには`docker pull`の実行時に`-a`（または`--all-tags`）オプションを指定します。
 @z
 
 @x
   This command pulls all images from the `fedora` repository:
 @y
-  This command pulls all images from the `fedora` repository:
+  以下のコマンドは`fedora`リポジトリから全イメージをプルします。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker pull --all-tags fedora
-@y
-  $ docker pull --all-tags fedora
-@z
 
-@x
   Pulling repository fedora
   ad57ef8d78d7: Download complete
   105182bb5e8b: Download complete
   511136ea3c5a: Download complete
   73bd853d2ea5: Download complete
   ....
-@y
-  Pulling repository fedora
-  ad57ef8d78d7: Download complete
-  105182bb5e8b: Download complete
-  511136ea3c5a: Download complete
-  73bd853d2ea5: Download complete
-  ....
-@z
 
-@x
   Status: Downloaded newer image for fedora
   ```
 @y
+  ```bash
+  $ docker pull --all-tags fedora
+
+  Pulling repository fedora
+  ad57ef8d78d7: Download complete
+  105182bb5e8b: Download complete
+  511136ea3c5a: Download complete
+  73bd853d2ea5: Download complete
+  ....
+
   Status: Downloaded newer image for fedora
   ```
 @z
@@ -620,20 +571,14 @@ examples: |-
   images that were pulled. The example below shows all the `fedora` images
   that are present locally:
 @y
-  After the pull has completed use the `docker images` command to see the
-  images that were pulled. The example below shows all the `fedora` images
-  that are present locally:
+  プル処理が終わったら`docker images`コマンドを使って、プルされたイメージを確認することができます。
+  以下の例では、ローカルに存在する`fedora`イメージをすべて確認するものです。
 @z
 
 @x
   ```bash
   $ docker images fedora
-@y
-  ```bash
-  $ docker images fedora
-@z
 
-@x
   REPOSITORY   TAG         IMAGE ID        CREATED      SIZE
   fedora       rawhide     ad57ef8d78d7    5 days ago   359.3 MB
   fedora       20          105182bb5e8b    5 days ago   372.7 MB
@@ -641,6 +586,9 @@ examples: |-
   fedora       latest      105182bb5e8b    5 days ago   372.7 MB
   ```
 @y
+  ```bash
+  $ docker images fedora
+
   REPOSITORY   TAG         IMAGE ID        CREATED      SIZE
   fedora       rawhide     ad57ef8d78d7    5 days ago   359.3 MB
   fedora       20          105182bb5e8b    5 days ago   372.7 MB
@@ -652,26 +600,21 @@ examples: |-
 @x
   ### Cancel a pull
 @y
-  ### Cancel a pull
+  {: #cancel-a-pull }
+  ### プル処理のキャンセル
 @z
 
 @x
   Killing the `docker pull` process, for example by pressing `CTRL-c` while it is
   running in a terminal, will terminate the pull operation.
 @y
-  Killing the `docker pull` process, for example by pressing `CTRL-c` while it is
-  running in a terminal, will terminate the pull operation.
+  `docker pull`を実行した端末上において、たとえば`CTRL-c`を押下してプロセスを kill した場合、プル処理は停止します。
 @z
 
 @x
   ```bash
   $ docker pull fedora
-@y
-  ```bash
-  $ docker pull fedora
-@z
 
-@x
   Using default tag: latest
   latest: Pulling from library/fedora
   a3ed95caeb02: Pulling fs layer
@@ -679,6 +622,9 @@ examples: |-
   ^C
   ```
 @y
+  ```bash
+  $ docker pull fedora
+
   Using default tag: latest
   latest: Pulling from library/fedora
   a3ed95caeb02: Pulling fs layer
@@ -695,12 +641,10 @@ examples: |-
   > connection with the Engine daemon is lost for other reasons than a manual
   > interaction, the pull is also aborted.
 @y
-  > **Note**
+  > **メモ**
   >
-  > The Engine terminates a pull operation when the connection between the Docker
-  > Engine daemon and the Docker Engine client initiating the pull is lost. If the
-  > connection with the Engine daemon is lost for other reasons than a manual
-  > interaction, the pull is also aborted.
+  > Docker Engine がプル処理を停止させるのは、Docker Engine デーモンとプル停止を指示したクライアントとの接続が失われたときです。
+  > 手動操作以外の別の理由によって Docker Engine デーモンとの接続が失われた場合も、同様にプル処理は停止します。
 @z
 
 @x

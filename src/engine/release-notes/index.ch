@@ -82,7 +82,8 @@ for Docker Engine.
 @x
 ### Deprecation / Removal
 @y
-### Deprecation / Removal
+{: #deprecation--removal }
+### 廃止決定、削除
 @z
 
 @x
@@ -216,7 +217,8 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 @x
 ### Client
 @y
-### Client
+{: #client }
+### クライアント
 @z
 
 @x
@@ -278,7 +280,8 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 @x
 ### Logging
 @y
-### Logging
+{: #logging }
+### ログ処理
 @z
 
 @x
@@ -298,7 +301,8 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 @x
 ### Runtime
 @y
-### Runtime
+{: #runtime }
+### ランタイム
 @z
 
 @x
@@ -346,7 +350,8 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 @x
 ### Networking
 @y
-### Networking
+{: #networking }
+### ネットワーク処理
 @z
 
 @x
@@ -390,7 +395,8 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 @x
 ### Packaging
 @y
-### Packaging
+{: #Packaging }
+### パッケージ
 @z
 
 @x
@@ -422,7 +428,8 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 @x
 ### Security
 @y
-### Security
+{: #security }
+### セキュリティ
 @z
 
 @x

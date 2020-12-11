@@ -11,8 +11,8 @@ plink: docker.yaml
 options:
 @y
 command: docker ps
-short: List containers
-long: List containers
+short: コンテナーの一覧表示。
+long: コンテナーの一覧表示。
 usage: docker ps [オプション]
 pname: docker
 plink: docker.yaml
@@ -101,7 +101,7 @@ options:
   shorthand: "n"
   value_type: int
   default_value: "-1"
-  description: Show n last created containers (includes all states)
+  description: 直近に生成された n 個のコンテナーを表示します（すべての状態を含みます）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -125,7 +125,7 @@ options:
   shorthand: l
   value_type: bool
   default_value: "false"
-  description: Show the latest created container (includes all states)
+  description: 最新のコンテナーを表示します（すべての状態を含みます）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -209,39 +209,29 @@ examples: |-
 @y
 examples: |-
   {: #prevent-truncating-output }
-  ### Prevent truncating output
+  ### 詳細出力
 @z
 
 @x
   Running `docker ps --no-trunc` showing 2 linked containers.
 @y
-  Running `docker ps --no-trunc` showing 2 linked containers.
+  `docker ps --no-trunc`を実行すると、リンクされている 2 つのコンテナーが表示されています。
 @z
 
 @x
   ```bash
   $ docker ps
-@y
-  ```bash
-  $ docker ps
-@z
 
-@x
   CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES
-@y
-  CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES
-@z
-
-@x
   4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp
-@y
-  4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp
-@z
-
-@x
   d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db
   ```
 @y
+  ```bash
+  $ docker ps
+
+  CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES
+  4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp
   d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db
   ```
 @z
@@ -250,15 +240,15 @@ examples: |-
   ### Show both running and stopped containers
 @y
   {: #show-both-running-and-stopped-containers }
-  ### Show both running and stopped containers
+  ### 実行中、停止中コンテナーの混在表示
 @z
 
 @x
   The `docker ps` command only shows running containers by default. To see all
   containers, use the `-a` (or `--all`) flag:
 @y
-  `docker ps` コマンドは、デフォルトでは実行中のコンテナーのみを表示します。
-  コンテナーすべてを表示するには `-a`（または `--all`）フラグを指定します。
+  `docker ps`コマンドは、デフォルトでは実行中のコンテナーのみを表示します。
+  コンテナーすべてを表示するには`-a`（または`--all`）フラグを指定します。
 @z
 
 @x
@@ -273,16 +263,11 @@ examples: |-
 
 @x
   `docker ps` groups exposed ports into a single range if possible. E.g., a
-@y
-  `docker ps` groups exposed ports into a single range if possible. E.g., a
-@z
-
-@x
   container that exposes TCP ports `100, 101, 102` displays `100-102/tcp` in
   the `PORTS` column.
 @y
-  container that exposes TCP ports `100, 101, 102` displays `100-102/tcp` in
-  the `PORTS` column.
+  `docker ps`では公開ポートを 1 つにまとめられる場合には、まとめて表示します。
+  たとえばコンテナーが TCP ポート`100, 101, 102`を公開している場合、`PORTS`欄には`100-102/tcp`と表示します。
 @z
 
 @x
@@ -295,32 +280,22 @@ examples: |-
 @x
   The `docker ps -s` command displays two different on-disk-sizes for each container:
 @y
-  The `docker ps -s` command displays two different on-disk-sizes for each container:
+  `docker ps -s`コマンドでは、各コンテナーにおいてディスクサイズの情報を 2 つ表示します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker ps -s
-@y
-  $ docker ps -s
-@z
 
-@x
   CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS   NAMES        SIZE                                                                                      SIZE
-@y
-  CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS   NAMES        SIZE                                                                                      SIZE
-@z
-
-@x
   e90b8831a4b8   nginx          "/bin/bash -c 'mkdir "   11 weeks ago   Up 4 hours           my_nginx     35.58 kB (virtual 109.2 MB)
   00c6131c5e30   telegraf:1.5   "/entrypoint.sh"         11 weeks ago   Up 11 weeks          my_telegraf  0 B (virtual 209.5 MB)
   ```
 @y
+  ```bash
+  $ docker ps -s
+
+  CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS   NAMES        SIZE                                                                                      SIZE
   e90b8831a4b8   nginx          "/bin/bash -c 'mkdir "   11 weeks ago   Up 4 hours           my_nginx     35.58 kB (virtual 109.2 MB)
   00c6131c5e30   telegraf:1.5   "/entrypoint.sh"         11 weeks ago   Up 11 weeks          my_telegraf  0 B (virtual 209.5 MB)
   ```
@@ -329,19 +304,19 @@ examples: |-
 @x
     * The "size" information shows the amount of data (on disk) that is used for the _writable_ layer of each container
 @y
-    * The "size" information shows the amount of data (on disk) that is used for the _writable_ layer of each container
+    * 「size」（サイズ）は、各コンテナーの **書き込み可能** レイヤーが利用している（ディスク上の）データ使用量を表わします。
 @z
 
 @x
     * The "virtual size" is the total amount of disk-space used for the read-only _image_ data used by the container and the writable layer.
 @y
-    * The "virtual size" is the total amount of disk-space used for the read-only _image_ data used by the container and the writable layer.
+    * 「virtual size」（仮想サイズ）は、コンテナーの読み込み専用 **イメージ** データおよび書き込み可能レイヤーが利用しているディスク総使用量を表わします。
 @z
 
 @x
   For more information, refer to the [container size on disk](https://docs.docker.com/storage/storagedriver/#container-size-on-disk) section.
 @y
-  For more information, refer to the [container size on disk](https://docs.docker.com/storage/storagedriver/#container-size-on-disk) section.
+  詳しくは [ディスク上のコンテナーサイズ](__HOSTURL__/storage/storagedriver/#container-size-on-disk) の節を参照してください。
 @z
 
 @x
@@ -355,9 +330,9 @@ examples: |-
   The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there is more
   than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`)
 @y
-  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  フィルターフラグ（`-f`または`--filter`）の指定書式は「キー=値」というものです。
   複数のフィルターが必要な場合は、フラグを複数指定します。
-  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+  （たとえば`--filter "foo=bar" --filter "bif=baz"`など。）
 @z
 
 @x
@@ -383,21 +358,21 @@ examples: |-
   | `isolation`           | Windows daemon only. One of `default`, `process`, or `hyperv`.                                                                       |
   | `is-task`             | Filters containers that are a "task" for a service. Boolean option (`true` or `false`)                                               |
 @y
-  | フィルター            | 内容説明                                                                                                                             |
-  |:----------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
-  | `id`                  | コンテナー ID                                                                                                                        |
-  | `name`                | コンテナー名                                                                                                                         |
-  | `label`               | An arbitrary string representing either a key or a key-value pair. Expressed as `<key>` or `<key>=<value>`                           |
-  | `exited`              | An integer representing the container's exit code. Only useful with `--all`.                                                         |
-  | `status`              | One of `created`, `restarting`, `running`, `removing`, `paused`, `exited`, or `dead`                                                 |
-  | `ancestor`            | Filters containers which share a given image as an ancestor. Expressed as `<image-name>[:<tag>]`,  `<image id>`, or `<image@digest>` |
-  | `before` or `since`   | Filters containers created before or after a given container ID or name                                                              |
-  | `volume`              | Filters running containers which have mounted a given volume or bind mount.                                                          |
-  | `network`             | Filters running containers connected to a given network.                                                                             |
-  | `publish` or `expose` | Filters containers which publish or expose a given port. Expressed as `<port>[/<proto>]` or `<startport-endport>/[<proto>]`          |
-  | `health`              | Filters containers based on their healthcheck status. One of `starting`, `healthy`, `unhealthy` or `none`.                           |
-  | `isolation`           | Windows daemon only. One of `default`, `process`, or `hyperv`.                                                                       |
-  | `is-task`             | Filters containers that are a "task" for a service. Boolean option (`true` or `false`)                                               |
+  | フィルター              | 内容説明                                                                                                             |
+  |:------------------------|:---------------------------------------------------------------------------------------------------------------------|
+  | `id`                    | コンテナー ID                                                                                                        |
+  | `name`                  | コンテナー名                                                                                                         |
+  | `label`                 | キーまたはキーバリューペアを表現する任意の文字列。表現形式は`<key>`または`<key>=<value>`                             |
+  | `exited`                | コンテナーの終了コードを表わす整数値。`--all`を用いるときのみ有用。                                                  |
+  | `status`                | 以下のいずれか。`created`、`restarting`、`running`、`removing`、`paused`、`exited`、`dead`                           |
+  | `ancestor`              | 指定されたイメージを先祖として持つコンテナーを検索。表現形式は`<image-name>[:<tag>]`、`<image id>`、`<image@digest>` |
+  | `before`または`since`   | 指定された名前または ID のコンテナーの前後に生成されたコンテナーを検索。                                             |
+  | `volume`                | 指定されたボリュームまたはバインドマウントを持つ実行コンテナーを検索。                                               |
+  | `network`               | 指定されたネットワークに接続する実行コンテナーを検索。                                                               |
+  | `publish`または`expose` | 指定されたポートを公開するコンテナーを検索。表現形式は`<port>[/<proto>]`、`<startport-endport>/[<proto>]`            |
+  | `health`                | ヘルスチェックステータスによるコンテナーを検索。以下のいずれか。`starting`、`healthy`、`unhealthy`、`none`           |
+  | `isolation`             | Windows デーモンのみ。以下のいずれか。`default`、`process`、`hyperv`                                                 |
+  | `is-task`               | サービスに対して「タスク」であるコンテナーを検索。ブール値オプション（`true`、`false`）。                            |
 @z
 
 @x
@@ -411,34 +386,28 @@ examples: |-
   The `label` filter matches containers based on the presence of a `label` alone or a `label` and a
   value.
 @y
-  `label` フィルターは、`label` だけが存在する、あるいは `label` とその値が存在するコンテナーを検索します。
+  `label`フィルターは、`label`だけが存在する、あるいは`label`とその値が存在するコンテナーを検索します。
 @z
 
 @x
   The following filter matches containers with the `color` label regardless of its value.
 @y
-  以下の例では `color` ラベルを持ったコンテナーが検索されます。
+  以下の例では`color`ラベルを持ったコンテナーが検索されます。
   この場合、その値の内容は問いません。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker ps --filter "label=color"
-@y
-  $ docker ps --filter "label=color"
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   673394ef1d4c        busybox             "top"               47 seconds ago      Up 45 seconds                           nostalgic_shockley
   d85756f57265        busybox             "top"               52 seconds ago      Up 51 seconds                           high_albattani
   ```
 @y
+  ```bash
+  $ docker ps --filter "label=color"
+
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   673394ef1d4c        busybox             "top"               47 seconds ago      Up 45 seconds                           nostalgic_shockley
   d85756f57265        busybox             "top"               52 seconds ago      Up 51 seconds                           high_albattani
@@ -448,7 +417,7 @@ examples: |-
 @x
   The following filter matches containers with the `color` label with the `blue` value.
 @y
-  以下の例では `color` ラベルに `blue` という値を持つコンテナーが抽出されます。
+  以下の例では`color`ラベルに`blue`という値を持つコンテナーが抽出されます。
 @z
 
 @x
@@ -477,32 +446,26 @@ examples: |-
 @x
   The `name` filter matches on all or part of a container's name.
 @y
-  `name` フィルターは、コンテナー名の全部または一部を検索します。
+  `name`フィルターは、コンテナー名の全部または一部を検索します。
 @z
 
 @x
   The following filter matches all containers with a name containing the `nostalgic_stallman` string.
 @y
-  以下のフィルター指定では、`nostalgic_stallman` という文字列を名前に含んだコンテナーすべてが検索されます。
+  以下のフィルター指定では、`nostalgic_stallman`という文字列を名前に含んだコンテナーすべてが検索されます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker ps --filter "name=nostalgic_stallman"
-@y
-  $ docker ps --filter "name=nostalgic_stallman"
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   9b6247364a03        busybox             "top"               2 minutes ago       Up 2 minutes                            nostalgic_stallman
   ```
 @y
+  ```bash
+  $ docker ps --filter "name=nostalgic_stallman"
+
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   9b6247364a03        busybox             "top"               2 minutes ago       Up 2 minutes                            nostalgic_stallman
   ```
@@ -517,23 +480,17 @@ examples: |-
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker ps --filter "name=nostalgic"
-@y
-  $ docker ps --filter "name=nostalgic"
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   715ebfcee040        busybox             "top"               3 seconds ago       Up 1 second                             i_am_nostalgic
   9b6247364a03        busybox             "top"               7 minutes ago       Up 7 minutes                            nostalgic_stallman
   673394ef1d4c        busybox             "top"               38 minutes ago      Up 38 minutes                           nostalgic_shockley
   ```
 @y
+  ```bash
+  $ docker ps --filter "name=nostalgic"
+
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   715ebfcee040        busybox             "top"               3 seconds ago       Up 1 second                             i_am_nostalgic
   9b6247364a03        busybox             "top"               7 minutes ago       Up 7 minutes                            nostalgic_stallman
@@ -551,39 +508,25 @@ examples: |-
   The `exited` filter matches containers by exist status code. For example, to
   filter for containers that have exited successfully:
 @y
-  `exited` フィルターは、ステータスコードが exist であるコンテナーに一致します。
+  `exited`フィルターは、終了ステータスコードを持つコンテナーに一致します。
   たとえば正常に終了しているコンテナーに一致させるには、以下のようにします。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker ps -a --filter 'exited=0'
-@y
-  $ docker ps -a --filter 'exited=0'
-@z
 
-@x
   CONTAINER ID        IMAGE             COMMAND                CREATED             STATUS                   PORTS                      NAMES
-@y
-  CONTAINER ID        IMAGE             COMMAND                CREATED             STATUS                   PORTS                      NAMES
-@z
-
-@x
   ea09c3c82f6e        registry:latest   /srv/run.sh            2 weeks ago         Exited (0) 2 weeks ago   127.0.0.1:5000->5000/tcp   desperate_leakey
-@y
-  ea09c3c82f6e        registry:latest   /srv/run.sh            2 weeks ago         Exited (0) 2 weeks ago   127.0.0.1:5000->5000/tcp   desperate_leakey
-@z
-
-@x
   106ea823fe4e        fedora:latest     /bin/sh -c 'bash -l'   2 weeks ago         Exited (0) 2 weeks ago                              determined_albattani
   48ee228c9464        fedora:20         bash                   2 weeks ago         Exited (0) 2 weeks ago                              tender_torvalds
   ```
 @y
+  ```bash
+  $ docker ps -a --filter 'exited=0'
+
+  CONTAINER ID        IMAGE             COMMAND                CREATED             STATUS                   PORTS                      NAMES
+  ea09c3c82f6e        registry:latest   /srv/run.sh            2 weeks ago         Exited (0) 2 weeks ago   127.0.0.1:5000->5000/tcp   desperate_leakey
   106ea823fe4e        fedora:latest     /bin/sh -c 'bash -l'   2 weeks ago         Exited (0) 2 weeks ago                              determined_albattani
   48ee228c9464        fedora:20         bash                   2 weeks ago         Exited (0) 2 weeks ago                              tender_torvalds
   ```
@@ -593,31 +536,28 @@ examples: |-
   #### Filter by exit signal
 @y
   {: #filter-by-exit-signal }
-  #### exit シグナルによるフィルター
+  #### 終了シグナルによるフィルター
 @z
 
 @x
   You can use a filter to locate containers that exited with status of `137`
   meaning a `SIGKILL(9)` killed them.
 @y
-  You can use a filter to locate containers that exited with status of `137`
-  meaning a `SIGKILL(9)` killed them.
+  終了コードを用いて、たとえば`SIGKILL(9)`によって kill された終了コード`137`のコンテナーをフィルター検索することができます。
 @z
 
 @x
   ```bash
   $ docker ps -a --filter 'exited=137'
-@y
-  ```bash
-  $ docker ps -a --filter 'exited=137'
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                       PORTS               NAMES
   b3e1c0ed5bfe        ubuntu:latest       "sleep 1000"           12 seconds ago      Exited (137) 5 seconds ago                       grave_kowalevski
   a2eb5558d669        redis:latest        "/entrypoint.sh redi   2 hours ago         Exited (137) 2 hours ago                         sharp_lalande
   ```
 @y
+  ```bash
+  $ docker ps -a --filter 'exited=137'
+
   CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                       PORTS               NAMES
   b3e1c0ed5bfe        ubuntu:latest       "sleep 1000"           12 seconds ago      Exited (137) 5 seconds ago                       grave_kowalevski
   a2eb5558d669        redis:latest        "/entrypoint.sh redi   2 hours ago         Exited (137) 2 hours ago                         sharp_lalande
@@ -627,7 +567,7 @@ examples: |-
 @x
   Any of these events result in a `137` status:
 @y
-  Any of these events result in a `137` status:
+  以下に示すイベントにおいても`137`ステータスになります。
 @z
 
 @x
@@ -635,9 +575,9 @@ examples: |-
   * `docker kill` kills the container
   * Docker daemon restarts which kills all running containers
 @y
-  * the `init` process of the container is killed manually
-  * `docker kill` kills the container
-  * Docker daemon restarts which kills all running containers
+  * コンテナーの`init`プロセスが手動で kill されたとき。
+  * `docker kill`によってコンテナーを kill したとき。
+  * Docker デーモンが再起動にあたって、実行中コンテナーをすべて kill したとき。
 @z
 
 @x
@@ -651,30 +591,24 @@ examples: |-
   `created`, `restarting`, `running`, `removing`, `paused`, `exited` and `dead`. For example,
   to filter for `running` containers:
 @y
-  The `status` filter matches containers by status. You can filter using
-  `created`, `restarting`, `running`, `removing`, `paused`, `exited` and `dead`. For example,
-  to filter for `running` containers:
+  `status`はコンテナーのステータスをフィルター検索します。
+  利用できるフィルターは`created`、`restarting`、`running`、`removing`、`paused`、`exited`、`dead`です。
+  たとえば`running`（実行中）コンテナーは以下のようにしてフィルター検索できます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker ps --filter status=running
-@y
-  $ docker ps --filter status=running
-@z
 
-@x
   CONTAINER ID        IMAGE                  COMMAND             CREATED             STATUS              PORTS               NAMES
   715ebfcee040        busybox                "top"               16 minutes ago      Up 16 minutes                           i_am_nostalgic
   d5c976d3c462        busybox                "top"               23 minutes ago      Up 23 minutes                           top
   9b6247364a03        busybox                "top"               24 minutes ago      Up 24 minutes                           nostalgic_stallman
   ```
 @y
+  ```bash
+  $ docker ps --filter status=running
+
   CONTAINER ID        IMAGE                  COMMAND             CREATED             STATUS              PORTS               NAMES
   715ebfcee040        busybox                "top"               16 minutes ago      Up 16 minutes                           i_am_nostalgic
   d5c976d3c462        busybox                "top"               23 minutes ago      Up 23 minutes                           top
@@ -685,26 +619,20 @@ examples: |-
 @x
   To filter for `paused` containers:
 @y
-  To filter for `paused` containers:
+  `paused`（一時停止中の）コンテナーは以下のようになります。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker ps --filter status=paused
-@y
-  $ docker ps --filter status=paused
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
   673394ef1d4c        busybox             "top"               About an hour ago   Up About an hour (Paused)                       nostalgic_shockley
   ```
 @y
+  ```bash
+  $ docker ps --filter status=paused
+
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
   673394ef1d4c        busybox             "top"               About an hour ago   Up About an hour (Paused)                       nostalgic_shockley
   ```
@@ -720,37 +648,21 @@ examples: |-
   The `ancestor` filter matches containers based on its image or a descendant of
   it. The filter supports the following image representation:
 @y
-  The `ancestor` filter matches containers based on its image or a descendant of
-  it. The filter supports the following image representation:
+  `ancestor`はコンテナーがベースとしているイメージまたはその子孫をフィルター検索します。
+  このフィルターでは以下のイメージ表現をサポートしています。
 @z
 
 @x
   - `image`
-@y
-  - `image`
-@z
-
-@x
   - `image:tag`
-@y
-  - `image:tag`
-@z
-
-@x
   - `image:tag@digest`
-@y
-  - `image:tag@digest`
-@z
-
-@x
   - `short-id`
-@y
-  - `short-id`
-@z
-
-@x
   - `full-id`
 @y
+  - `image`
+  - `image:tag`
+  - `image:tag@digest`
+  - `short-id`
   - `full-id`
 @z
 
@@ -758,36 +670,26 @@ examples: |-
   If you don't specify a `tag`, the `latest` tag is used. For example, to filter
   for containers that use the latest `ubuntu` image:
 @y
-  If you don't specify a `tag`, the `latest` tag is used. For example, to filter
-  for containers that use the latest `ubuntu` image:
+  `tag`を指定しなかった場合は`latest`タグが用いられます。
+  たとえば最新の`ubuntu`イメージを利用するコンテナーをフィルター検索するには、以下のようにします。
 @z
 
 @x
   ```bash
   $ docker ps --filter ancestor=ubuntu
-@y
-  ```bash
-  $ docker ps --filter ancestor=ubuntu
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
-@y
-  CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
-@z
-
-@x
   919e1179bdb8        ubuntu-c1           "top"               About a minute ago   Up About a minute                       admiring_lovelace
-@y
-  919e1179bdb8        ubuntu-c1           "top"               About a minute ago   Up About a minute                       admiring_lovelace
-@z
-
-@x
   5d1e4a540723        ubuntu-c2           "top"               About a minute ago   Up About a minute                       admiring_sammet
   82a598284012        ubuntu              "top"               3 minutes ago        Up 3 minutes                            sleepy_bose
   bab2a34ba363        ubuntu              "top"               3 minutes ago        Up 3 minutes                            focused_yonath
   ```
 @y
+  ```bash
+  $ docker ps --filter ancestor=ubuntu
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+  919e1179bdb8        ubuntu-c1           "top"               About a minute ago   Up About a minute                       admiring_lovelace
   5d1e4a540723        ubuntu-c2           "top"               About a minute ago   Up About a minute                       admiring_sammet
   82a598284012        ubuntu              "top"               3 minutes ago        Up 3 minutes                            sleepy_bose
   bab2a34ba363        ubuntu              "top"               3 minutes ago        Up 3 minutes                            focused_yonath
@@ -798,28 +700,22 @@ examples: |-
   Match containers based on the `ubuntu-c1` image which, in this case, is a child
   of `ubuntu`:
 @y
-  Match containers based on the `ubuntu-c1` image which, in this case, is a child
-  of `ubuntu`:
+  `ubuntu-c1`イメージをベースとうるコンテナーを検索します。
+  この例においてこれは`ubuntu`の子イメージです。
 @z
 
 @x
   ```bash
   $ docker ps --filter ancestor=ubuntu-c1
-@y
-  ```bash
-  $ docker ps --filter ancestor=ubuntu-c1
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
-@y
-  CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
-@z
-
-@x
   919e1179bdb8        ubuntu-c1           "top"               About a minute ago   Up About a minute                       admiring_lovelace
   ```
 @y
+  ```bash
+  $ docker ps --filter ancestor=ubuntu-c1
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
   919e1179bdb8        ubuntu-c1           "top"               About a minute ago   Up About a minute                       admiring_lovelace
   ```
 @z
@@ -827,22 +723,20 @@ examples: |-
 @x
   Match containers based on the `ubuntu` version `12.04.5` image:
 @y
-  Match containers based on the `ubuntu` version `12.04.5` image:
+  `ubuntu`のバージョン`12.04.5`に基づいたイメージを検索します。
 @z
 
 @x
   ```bash
   $ docker ps --filter ancestor=ubuntu:12.04.5
-@y
-  ```bash
-  $ docker ps --filter ancestor=ubuntu:12.04.5
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
   82a598284012        ubuntu:12.04.5      "top"               3 minutes ago        Up 3 minutes                            sleepy_bose
   ```
 @y
+  ```bash
+  $ docker ps --filter ancestor=ubuntu:12.04.5
+
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
   82a598284012        ubuntu:12.04.5      "top"               3 minutes ago        Up 3 minutes                            sleepy_bose
   ```
@@ -852,23 +746,20 @@ examples: |-
   The following matches containers based on the layer `d0e008c6cf02` or an image
   that have this layer in its layer stack.
 @y
-  The following matches containers based on the layer `d0e008c6cf02` or an image
-  that have this layer in its layer stack.
+  以下の例では、レイヤー`d0e008c6cf02`に基づくコンテナー、あるいはレイヤー層の中にこのレイヤーを持つイメージが検索されます。
 @z
 
 @x
   ```bash
   $ docker ps --filter ancestor=d0e008c6cf02
-@y
-  ```bash
-  $ docker ps --filter ancestor=d0e008c6cf02
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
   82a598284012        ubuntu:12.04.5      "top"               3 minutes ago        Up 3 minutes                            sleepy_bose
   ```
 @y
+  ```bash
+  $ docker ps --filter ancestor=d0e008c6cf02
+
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
   82a598284012        ubuntu:12.04.5      "top"               3 minutes ago        Up 3 minutes                            sleepy_bose
   ```
@@ -877,7 +768,8 @@ examples: |-
 @x
   #### Create time
 @y
-  #### Create time
+  {: #create-time }
+  #### 生成時刻
 @z
 
 @x
@@ -890,25 +782,23 @@ examples: |-
   The `before` filter shows only containers created before the container with
   given id or name. For example, having these containers created:
 @y
-  The `before` filter shows only containers created before the container with
-  given id or name. For example, having these containers created:
+  `before`フィルターは、ID または名前によって指定されたコンテナーよりも以前に生成されたコンテナーのみを検索します。
+  たとえば以下のようなコンテナーがすでに生成済みであるとします。
 @z
 
 @x
   ```bash
   $ docker ps
-@y
-  ```bash
-  $ docker ps
-@z
 
-@x
   CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
   9c3527ed70ce        busybox     "top"         14 seconds ago       Up 15 seconds                          desperate_dubinsky
   4aace5031105        busybox     "top"         48 seconds ago       Up 49 seconds                          focused_hamilton
   6e63f6ff38b0        busybox     "top"         About a minute ago   Up About a minute                      distracted_fermat
   ```
 @y
+  ```bash
+  $ docker ps
+
   CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
   9c3527ed70ce        busybox     "top"         14 seconds ago       Up 15 seconds                          desperate_dubinsky
   4aace5031105        busybox     "top"         48 seconds ago       Up 49 seconds                          focused_hamilton
@@ -919,23 +809,21 @@ examples: |-
 @x
   Filtering with `before` would give:
 @y
-  Filtering with `before` would give:
+  `before`フィルターにより以下のような結果が得られます。
 @z
 
 @x
   ```bash
   $ docker ps -f before=9c3527ed70ce
-@y
-  ```bash
-  $ docker ps -f before=9c3527ed70ce
-@z
 
-@x
   CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
   4aace5031105        busybox     "top"         About a minute ago   Up About a minute                      focused_hamilton
   6e63f6ff38b0        busybox     "top"         About a minute ago   Up About a minute                      distracted_fermat
   ```
 @y
+  ```bash
+  $ docker ps -f before=9c3527ed70ce
+
   CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
   4aace5031105        busybox     "top"         About a minute ago   Up About a minute                      focused_hamilton
   6e63f6ff38b0        busybox     "top"         About a minute ago   Up About a minute                      distracted_fermat
@@ -952,24 +840,22 @@ examples: |-
   The `since` filter shows only containers created since the container with given
   id or name. For example, with the same containers as in `before` filter:
 @y
-  The `since` filter shows only containers created since the container with given
-  id or name. For example, with the same containers as in `before` filter:
+  `since`フィルターは、ID または名前によって指定されたコンテナーよりも以降に生成されたコンテナーのみを検索します。 
+  たとえば`before`フィルターのときと同じコンテナーに対して検索します。
 @z
 
 @x
   ```bash
   $ docker ps -f since=6e63f6ff38b0
-@y
-  ```bash
-  $ docker ps -f since=6e63f6ff38b0
-@z
 
-@x
   CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
   9c3527ed70ce        busybox     "top"         10 minutes ago      Up 10 minutes                           desperate_dubinsky
   4aace5031105        busybox     "top"         10 minutes ago      Up 10 minutes                           focused_hamilton
   ```
 @y
+  ```bash
+  $ docker ps -f since=6e63f6ff38b0
+
   CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
   9c3527ed70ce        busybox     "top"         10 minutes ago      Up 10 minutes                           desperate_dubinsky
   4aace5031105        busybox     "top"         10 minutes ago      Up 10 minutes                           focused_hamilton
@@ -986,46 +872,31 @@ examples: |-
   The `volume` filter shows only containers that mount a specific volume or have
   a volume mounted in a specific path:
 @y
-  The `volume` filter shows only containers that mount a specific volume or have
-  a volume mounted in a specific path:
+  `volume`フィルターは、指定するボリュームをマウントしているコンテナーまたは指定パスにマウントされているボリュームを持つコンテナーのみを検索します。
 @z
 
 @x
   ```bash
   $ docker ps --filter volume=remote-volume --format "table {{.ID}}\t{{.Mounts}}"
-@y
-  ```bash
-  $ docker ps --filter volume=remote-volume --format "table {{.ID}}\t{{.Mounts}}"
-@z
 
-@x
   CONTAINER ID        MOUNTS
-@y
-  CONTAINER ID        MOUNTS
-@z
-
-@x
   9c3527ed70ce        remote-volume
-@y
-  9c3527ed70ce        remote-volume
-@z
 
-@x
   $ docker ps --filter volume=/data --format "table {{.ID}}\t{{.Mounts}}"
-@y
-  $ docker ps --filter volume=/data --format "table {{.ID}}\t{{.Mounts}}"
-@z
 
-@x
   CONTAINER ID        MOUNTS
-@y
-  CONTAINER ID        MOUNTS
-@z
-
-@x
   9c3527ed70ce        remote-volume
   ```
 @y
+  ```bash
+  $ docker ps --filter volume=remote-volume --format "table {{.ID}}\t{{.Mounts}}"
+
+  CONTAINER ID        MOUNTS
+  9c3527ed70ce        remote-volume
+
+  $ docker ps --filter volume=/data --format "table {{.ID}}\t{{.Mounts}}"
+
+  CONTAINER ID        MOUNTS
   9c3527ed70ce        remote-volume
   ```
 @z
@@ -1040,43 +911,33 @@ examples: |-
   The `network` filter shows only containers that are connected to a network with
   a given name or id.
 @y
-  The `network` filter shows only containers that are connected to a network with
-  a given name or id.
+  `network`フィルターは、指定された名前または ID のネットワークに接続しているコンテナーのみを検索します。
 @z
 
 @x
   The following filter matches all containers that are connected to a network
   with a name containing `net1`.
 @y
-  The following filter matches all containers that are connected to a network
-  with a name containing `net1`.
+  以下のフィルターでは、ネットワーク名に`net1`を含むネットワークに接続しているコンテナーを検索します。
 @z
 
 @x
   ```bash
   $ docker run -d --net=net1 --name=test1 ubuntu top
-@y
-  ```bash
-  $ docker run -d --net=net1 --name=test1 ubuntu top
-@z
-
-@x
   $ docker run -d --net=net2 --name=test2 ubuntu top
-@y
-  $ docker run -d --net=net2 --name=test2 ubuntu top
-@z
 
-@x
   $ docker ps --filter network=net1
-@y
-  $ docker ps --filter network=net1
-@z
 
-@x
   CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
   9d4893ed80fe        ubuntu      "top"         10 minutes ago      Up 10 minutes                           test1
   ```
 @y
+  ```bash
+  $ docker run -d --net=net1 --name=test1 ubuntu top
+  $ docker run -d --net=net2 --name=test2 ubuntu top
+
+  $ docker ps --filter network=net1
+
   CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
   9d4893ed80fe        ubuntu      "top"         10 minutes ago      Up 10 minutes                           test1
   ```
@@ -1087,36 +948,29 @@ examples: |-
   example shows all containers that are attached to the `net1` network, using
   the network id as a filter;
 @y
-  The network filter matches on both the network's name and id. The following
-  example shows all containers that are attached to the `net1` network, using
-  the network id as a filter;
+  ネットワークフィルターでは、ネットワーク名とネットワーク ID のどちらを使っても検索されます。
+  以下の例では、`net1`ネットワークに接続されているコンテナーを検索するものであり、検索にはネットワーク ID を利用しています。
 @z
 
 @x
   ```bash
   $ docker network inspect --format "{{.ID}}" net1
-@y
-  ```bash
-  $ docker network inspect --format "{{.ID}}" net1
-@z
 
-@x
   8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
-@y
-  8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
-@z
 
-@x
   $ docker ps --filter network=8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
-@y
-  $ docker ps --filter network=8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
-@z
 
-@x
   CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
   9d4893ed80fe        ubuntu      "top"         10 minutes ago      Up 10 minutes                           test1
   ```
 @y
+  ```bash
+  $ docker network inspect --format "{{.ID}}" net1
+
+  8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
+
+  $ docker ps --filter network=8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
+
   CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
   9d4893ed80fe        ubuntu      "top"         10 minutes ago      Up 10 minutes                           test1
   ```
@@ -1125,96 +979,77 @@ examples: |-
 @x
   #### publish and expose
 @y
-  #### publish and expose
+  {: #publish-and-expose }
+  #### publish と expose
 @z
 
 @x
   The `publish` and `expose` filters show only containers that have published or exposed port with a given port
   number, port range, and/or protocol. The default protocol is `tcp` when not specified.
 @y
-  The `publish` and `expose` filters show only containers that have published or exposed port with a given port
-  number, port range, and/or protocol. The default protocol is `tcp` when not specified.
+  `publish`フィルターと`expose`フィルターは、指定されたポート番号、ポート範囲、プロトコルによる公開ポートを持ったコンテナーのみが検索されます。、
+  プロトコルが指定されなかった場合のデフォルトは`tcp`です。
 @z
 
 @x
   The following filter matches all containers that have published port of 80:
 @y
-  The following filter matches all containers that have published port of 80:
+  以下のフィルターは公開ポート 80 を持つコンテナーがすべて検索されます。
 @z
 
 @x
   ```bash
   $ docker run -d --publish=80 busybox top
+  $ docker run -d --expose=8080 busybox top
+
+  $ docker ps -a
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                   NAMES
+  9833437217a5        busybox             "top"               5 seconds ago       Up 4 seconds        8080/tcp                dreamy_mccarthy
+  fc7e477723b7        busybox             "top"               50 seconds ago      Up 50 seconds       0.0.0.0:32768->80/tcp   admiring_roentgen
 @y
   ```bash
   $ docker run -d --publish=80 busybox top
-@z
-
-@x
   $ docker run -d --expose=8080 busybox top
-@y
-  $ docker run -d --expose=8080 busybox top
-@z
 
-@x
   $ docker ps -a
-@y
-  $ docker ps -a
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                   NAMES
   9833437217a5        busybox             "top"               5 seconds ago       Up 4 seconds        8080/tcp                dreamy_mccarthy
-@y
-  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                   NAMES
-  9833437217a5        busybox             "top"               5 seconds ago       Up 4 seconds        8080/tcp                dreamy_mccarthy
-@z
-
-@x
-  fc7e477723b7        busybox             "top"               50 seconds ago      Up 50 seconds       0.0.0.0:32768->80/tcp   admiring_roentgen
-@y
   fc7e477723b7        busybox             "top"               50 seconds ago      Up 50 seconds       0.0.0.0:32768->80/tcp   admiring_roentgen
 @z
 
 @x
   $ docker ps --filter publish=80
-@y
-  $ docker ps --filter publish=80
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS                   NAMES
-@y
-  CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS                   NAMES
-@z
-
-@x
   fc7e477723b7        busybox             "top"               About a minute ago   Up About a minute   0.0.0.0:32768->80/tcp   admiring_roentgen
   ```
 @y
+  $ docker ps --filter publish=80
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS                   NAMES
   fc7e477723b7        busybox             "top"               About a minute ago   Up About a minute   0.0.0.0:32768->80/tcp   admiring_roentgen
   ```
 @z
 
 @x
   The following filter matches all containers that have exposed TCP port in the range of `8000-8080`:
-  ```bash
 @y
-  The following filter matches all containers that have exposed TCP port in the range of `8000-8080`:
-  ```bash
+  以下のフィルターは、公開されている TCP ポートが`8000-8080`であるようなコンテナーがすべて検索されます。
 @z
 
 @x
+  ```bash
   $ docker ps --filter expose=8000-8080/tcp
-@y
-  $ docker ps --filter expose=8000-8080/tcp
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   9833437217a5        busybox             "top"               21 seconds ago      Up 19 seconds       8080/tcp            dreamy_mccarthy
   ```
 @y
+  ```bash
+  $ docker ps --filter expose=8000-8080/tcp
+
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   9833437217a5        busybox             "top"               21 seconds ago      Up 19 seconds       8080/tcp            dreamy_mccarthy
   ```
@@ -1223,21 +1058,19 @@ examples: |-
 @x
   The following filter matches all containers that have exposed UDP port `80`:
 @y
-  The following filter matches all containers that have exposed UDP port `80`:
+  以下のフィルターは公開されているポートが UDP 80 であるようなコンテナーすべてが検索されます。
 @z
 
 @x
   ```bash
   $ docker ps --filter publish=80/udp
-@y
-  ```bash
-  $ docker ps --filter publish=80/udp
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   ```
 @y
+  ```bash
+  $ docker ps --filter publish=80/udp
+
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   ```
 @z
@@ -1280,22 +1113,22 @@ examples: |-
   | `.Mounts`     | Names of the volumes mounted in this container.                                                 |
   | `.Networks`   | Names of the networks attached to this container.                                               |
 @y
-  | プレースホルダー | 内容説明                                                                                     |
-  |:--------------|:------------------------------------------------------------------------------------------------|
-  | `.ID`         | Container ID                                                                                    |
-  | `.Image`      | Image ID                                                                                        |
-  | `.Command`    | Quoted command                                                                                  |
-  | `.CreatedAt`  | Time when the container was created.                                                            |
-  | `.RunningFor` | Elapsed time since the container was started.                                                   |
-  | `.Ports`      | Exposed ports.                                                                                  |
-  | `.State`      | Container status (for example; "created", "running", "exited").                                 |
-  | `.Status`     | Container status with details about duration and health-status.                                 |
-  | `.Size`       | Container disk size.                                                                            |
-  | `.Names`      | Container names.                                                                                |
-  | `.Labels`     | All labels assigned to the container.                                                           |
-  | `.Label`      | Value of a specific label for this container. For example `'{{.Label "com.docker.swarm.cpu"}}'` |
-  | `.Mounts`     | Names of the volumes mounted in this container.                                                 |
-  | `.Networks`   | Names of the networks attached to this container.                                               |
+  | プレースホルダー | 内容説明                                                                                        |
+  |:-----------------|:------------------------------------------------------------------------------------------------|
+  | `.ID`            | コンテナー ID。                                                                                 |
+  | `.Image`         | イメージ ID。                                                                                   |
+  | `.Command`       | クォートでくくられたコメント。                                                                  |
+  | `.CreatedAt`     | コンテナーの生成時刻。                                                                          |
+  | `.RunningFor`    | コンテナーが起動してからの経過時間。                                                            |
+  | `.Ports`         | 公開ポート。                                                                                    |
+  | `.State`         | コンテナーのステータス（たとえば「created」、「running」、「exited」）                          |
+  | `.Status`        | コンテナーのステータスとして、時刻や健康状態などの詳細。                                        |
+  | `.Size`          | コンテナーのディスクサイズ。                                                                    |
+  | `.Names`         | コンテナー名。                                                                                  |
+  | `.Labels`        | コンテナーに割り当てられている全ラベル名。                                                      |
+  | `.Label`         | コンテナーにおける特定ラベルの値。たとえば`'{{.Label "com.docker.swarm.cpu"}}'`                 |
+  | `.Mounts`        | コンテナーにマウントされているボリューム名。                                                    |
+  | `.Networks`      | コンテナーに割り当てられているネットワーク名。                                                  |
 @z
 
 @x

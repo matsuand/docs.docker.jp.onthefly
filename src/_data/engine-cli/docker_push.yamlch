@@ -6,7 +6,7 @@ command: docker push
 short: Push an image or a repository to a registry
 @y
 command: docker push
-short: Push an image or a repository to a registry
+short: リポジトリまたはレジストリに対してイメージをプッシュします。
 @z
 
 @x
@@ -15,24 +15,21 @@ long: |-
   registry or to a self-hosted one.
 @y
 long: |-
-  Use `docker image push` to share your images to the [Docker Hub](https://hub.docker.com)
-  registry or to a self-hosted one.
+  [Docker Hub](https://hub.docker.com) レジストリや独自レジストリに対して`docker image push`を実行することで、そのイメージを共有することができます。
 @z
 
 @x
   Refer to the [`docker image tag`](tag.md) reference for more information about valid
   image and tag names.
 @y
-  Refer to the [`docker image tag`](tag.md) reference for more information about valid
-  image and tag names.
+  適正なイメージ名やタグ名についての詳細は [`docker image tag`](tag.md) リファレンスを参照してください。
 @z
 
 @x
   Killing the `docker image push` process, for example by pressing `CTRL-c` while it is
   running in a terminal, terminates the push operation.
 @y
-  Killing the `docker image push` process, for example by pressing `CTRL-c` while it is
-  running in a terminal, terminates the push operation.
+  `docker image push`を実行した端末上において、たとえば`CTRL-c`を押下してプロセスを kill した場合、プッシュ処理は停止します。
 @z
 
 @x
@@ -40,21 +37,21 @@ long: |-
   The actual amount of data that's pushed will be compressed before sending, so
   the uploaded size will not be reflected by the progress bar.
 @y
-  Progress bars are shown during docker push, which show the uncompressed size.
-  The actual amount of data that's pushed will be compressed before sending, so
-  the uploaded size will not be reflected by the progress bar.
+  プッシュ処理中にはプログレスバーが表示され、非圧縮時のサイズが示されます。
+  プッシュされるデータは送信前に圧縮されるため、実際にアップロードされたサイズはプログレスバー上には反映されません。
 @z
 
 @x
   Registry credentials are managed by [docker login](login.md).
 @y
-  Registry credentials are managed by [docker login](login.md).
+  レジストリの資格情報は [docker login](login.md) を用いて管理されます。
 @z
 
 @x
   ### Concurrent uploads
 @y
-  ### Concurrent uploads
+  {: #concurrent-uploads }
+  ### 並列アップロード
 @z
 
 @x
@@ -63,10 +60,10 @@ long: |-
   this via the `--max-concurrent-uploads` daemon option. See the
   [daemon documentation](dockerd.md) for more details.
 @y
-  By default the Docker daemon will push five layers of an image at a time.
-  If you are on a low bandwidth connection this may cause timeout issues and you may want to lower
-  this via the `--max-concurrent-uploads` daemon option. See the
-  [daemon documentation](dockerd.md) for more details.
+  Docker デーモンはデフォルトにおいて、イメージのプッシュ時に同時にプッシュするレイヤー数は 5 つまでです。
+  低帯域幅の接続を行っている場合には、タイムアウトの原因となることがあります。
+  そのような場合にはデーモンオプション`--max-concurrent-downloads`を通じて、その数を減らすことができます。
+  詳しくは [デーモンのドキュメント](dockerd.md) を参照してください。
 @z
 
 @x
@@ -75,7 +72,7 @@ pname: docker
 plink: docker.yaml
 options:
 @y
-usage: docker push [OPTIONS] NAME[:TAG]
+usage: docker push [オプション] NAME[:TAG]
 pname: docker
 plink: docker.yaml
 options:
@@ -156,7 +153,8 @@ examples: |-
   ### Push a new image to a registry
 @y
 examples: |-
-  ### Push a new image to a registry
+  {: #push-a-new-image-to-a-registry }
+  ### レジストリへのイメージの新規プッシュ
 @z
 
 @x
@@ -164,9 +162,9 @@ examples: |-
   and then committing it to a new image name.  Note that only `a-z0-9-_.` are
   allowed when naming images:
 @y
-  First save the new image by finding the container ID (using [`docker container ls`](ps.md))
-  and then committing it to a new image name.  Note that only `a-z0-9-_.` are
-  allowed when naming images:
+  新規イメージを保存する際には、まず（[`docker container ls`](ps.md) を利用して）コンテナー ID を確認しておきます。
+  そして新たなイメージ名をつけてコミットします。
+  イメージ名に利用できる文字は`a-z0-9-_.`のみです。
 @z
 
 @x
@@ -181,18 +179,13 @@ examples: |-
 
 @x
   Now, push the image to the registry using the image ID. In this example the
-@y
-  Now, push the image to the registry using the image ID. In this example the
-@z
-
-@x
   registry is on host named `registry-host` and listening on port `5000`. To do
   this, tag the image with the host name or IP address, and the port of the
   registry:
 @y
-  registry is on host named `registry-host` and listening on port `5000`. To do
-  this, tag the image with the host name or IP address, and the port of the
-  registry:
+  そしてイメージ ID を利用してそのイメージをレジストリにプッシュします。
+  以下の例ではレジストリが`registry-host`というホスト上にあり、ポート`5000`で待ち受けているものとします。
+  以下ではイメージにタグづけを行い、レジストリのホスト名または IP アドレスとポート番号を指定して実行します。
 @z
 
 @x
@@ -212,7 +205,7 @@ examples: |-
 @x
   Check that this worked by running:
 @y
-  Check that this worked by running:
+  正常処理されたことを確認するために、以下を実行します。
 @z
 
 @x
@@ -229,28 +222,28 @@ examples: |-
   You should see both `rhel-httpd` and `registry-host:5000/myadmin/rhel-httpd`
   listed.
 @y
-  You should see both `rhel-httpd` and `registry-host:5000/myadmin/rhel-httpd`
-  listed.
+  出力結果には`rhel-httpd`と`registry-host:5000/myadmin/rhel-httpd`が一覧にあがります。
 @z
 
 @x
   ### Push all tags of an image
 @y
-  ### Push all tags of an image
+  {: #push-all-tags-of-an-image }
+  ### イメージの全タグのプッシュ
 @z
 
 @x
   Use the `-a` (or `--all-tags`) option to push To push all tags of a local image.
 @y
-  Use the `-a` (or `--all-tags`) option to push To push all tags of a local image.
+  `-a`（または`--all-tags`）オプションを使うと、ローカルイメージに対するすべてのタグをプッシュします。
 @z
 
 @x
   The following example creates multiple tags for an image, and pushes all those
   tags to Docker Hub.
 @y
-  The following example creates multiple tags for an image, and pushes all those
-  tags to Docker Hub.
+  以下の例では 1 つのイメージに対して複数のタグを生成しています。
+  そしてそのタグすべてを Docker Hub にプッシュします。
 @z
 
 @x
@@ -272,7 +265,7 @@ examples: |-
 @x
   The image is now tagged under multiple names:
 @y
-  The image is now tagged under multiple names:
+  イメージには複数のタグ名がつけられています。
 @z
 
 @x
@@ -303,8 +296,7 @@ examples: |-
   When pushing with the `--all-tags` option, all tags of the `registry-host:5000/myname/myimage`
   image are pushed:
 @y
-  When pushing with the `--all-tags` option, all tags of the `registry-host:5000/myname/myimage`
-  image are pushed:
+  そして`--all-tags`オプションを使ってプッシュを行うと、`registry-host:5000/myname/myimage`イメージのタグがすべてプッシュされます。
 @z
 
 @x

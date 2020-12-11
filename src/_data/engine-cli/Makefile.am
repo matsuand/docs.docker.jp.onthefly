@@ -220,10 +220,12 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	sed -i -e "/docker_network_create.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_network_create.yaml" $@
 	sed -i -e "/docker_node_demote.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_demote.yaml" $@
 	sed -i -e "/docker_node_promote.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_promote.yaml" $@
+	sed -i -e "/docker_node_pull.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_pull.yaml" $@
 	sed -i -e "/docker_node_ls.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_ls.yaml" $@
 	sed -i -e "/docker_node_ps.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_ps.yaml" $@
 	sed -i -e "/docker_node_rm.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_rm.yaml" $@
 	sed -i -e "/docker_node_update.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_update.yaml" $@
+	sed -i -e "/docker_ps.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_ps.yaml" $@
 	sed -i -e "/docker_run.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_run.yaml" $@
 	sed -i -e "/docker_service_ls.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_ls.yaml" $@
 
