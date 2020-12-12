@@ -56,6 +56,67 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop Community 3.0.1
+2020-12-11
+@y
+## Docker Desktop Community 3.0.1
+2020-12-11
+@z
+
+@x
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+@y
+{% comment %}
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+{% endcomment %}
+> [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue that caused certain directories not to be mountable into containers. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115)
+@y
+{% comment %}
+- Fixed an issue that caused certain directories not to be mountable into containers. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115)
+{% endcomment %}
+- 特定のディレクトリをコンテナーに対してマウントできなくなる問題を修正しました。
+  [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115) を Fix に。
+@z
+
+@x
+### Known issues
+@y
+{% comment %}
+### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+@y
+{% comment %}
+- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+{% endcomment %}
+- git URL から BuildKit を使ってイメージをビルドする際に、`github.com/org/repo`の形を用いているとビルドに失敗します。
+  この問題を回避するには`git://github.com/org/repo`の形を用いるようにします。
+- Alpine Linux 3.13 に基づくコンテナー内において DNS アドレス解決に失敗することがあります。
+  [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020) を参照のこと。
+@z
+
+@x
 ## Docker Desktop Community 3.0.0
 2020-12-10
 @y
@@ -224,12 +285,12 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://desktop.docker.com/mac/stable/49550/Docker.dmg)
 @y
 {% comment %}
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://desktop.docker.com/mac/stable/49550/Docker.dmg)
 {% endcomment %}
-> [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [ダウンロード](https://desktop.docker.com/mac/stable/49550/Docker.dmg)
 @z
 
 @x

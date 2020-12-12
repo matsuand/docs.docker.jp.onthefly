@@ -213,7 +213,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--json` | Display the result of the scan in JSON format|
 | `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
 | `--reject-license` | Reject the license agreement of the third-party scanning provider |
-| `--severity string` | Only report vulnerabilities of provided level or higher (low|medium|high) |
+| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
 | `--token string`  | Use the authentication token to log into the third-party scanning provider |
 | `--version` | Display the Docker Scan plugin version |
 @y
@@ -227,7 +227,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--json` | Display the result of the scan in JSON format|
 | `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
 | `--reject-license` | Reject the license agreement of the third-party scanning provider |
-| `--severity string` | Only report vulnerabilities of provided level or higher (low|medium|high) |
+| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
 | `--token string`  | Use the authentication token to log into the third-party scanning provider |
 | `--version` | Display the Docker Scan plugin version |
 {% endcomment %}
@@ -240,7 +240,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--json` | スキャン結果を JSON 書式により表示します。|
 | `--login` | 任意に指定されたトークン（--token フラグ利用）を使って Snyk にログインします。あるいはウェブベースのトークンを利用します。|
 | `--reject-license` | サードパーティー製プロバイダーのライセンスを否認します。|
-| `--severity string` | 指定されたレベル以上のぜい弱性のみを表示します。(low\|medium\|high) |
+| `--severity string` | 指定されたレベル以上のぜい弱性のみを表示します。(low、medium、high) |
 | `--token string`  | 認証トークンを使ってサードパーティー製スキャンプロバイダーにログインします。|
 | `--version` | Docker Scan プラグインのバージョンを表示します。|
 @z

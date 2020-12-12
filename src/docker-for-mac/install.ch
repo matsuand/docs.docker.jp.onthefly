@@ -92,12 +92,12 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-- **Mac hardware must be a 2010 or a newer model**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+- **Mac hardware must be a 2010 or a newer model with an Intel processor**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 @y
 {% comment %}
-- **Mac hardware must be a 2010 or a newer model**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+- **Mac hardware must be a 2010 or a newer model with an Intel processor**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 {% endcomment %}
-- **Mac ハードウェアは 2010 あるいはそれより最新のモデルであること**。
+- **Mac ハードウェアは Intel プロセッサーを利用した 2010 あるいはそれより最新のモデルであること**。
   そして Extended Page Tables (EPT) や Unrestricted モードを含んだ、MMU 仮想化に対する Intel ハードウェアサポートが必要です。
   利用マシンがこれをサポートしているかどうかは、端末画面から `sysctl kern.hv_support` を実行してみればわかります。
 @z
@@ -112,13 +112,13 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-- **macOS must be version 10.14 or newer**. That is, Mojave or Catalina. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
 @y
 {% comment %}
-- **macOS must be version 10.14 or newer**. That is, Mojave or Catalina. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
 {% endcomment %}
 - **macOS はバージョン 10.14 またはそれ以降であること**。
-  つまり Catalina または Mojave であることが必要です。
+  つまり Catalina、Mojave、Big Sur であることが必要です。
   macOS は最新バージョンにアップグレードすることをお勧めします。
 @z
 
@@ -132,13 +132,13 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave and macOS Catalina.
+  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
 @y
   {% comment %}
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave and macOS Catalina.
+  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
   {% endcomment %}
   **メモ:** Docker では、ほぼ最新の macOS であれば Docker Desktop をサポートしています。
-  Docker Desktop が現時点でサポートするのは、macOS Catalina、macOS Mojave です。
+  Docker Desktop が現時点でサポートするのは、macOS Catalina、macOS Mojave、macOS Big Sur です。
 @z
 
 @x
