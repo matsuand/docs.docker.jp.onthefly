@@ -1,7 +1,7 @@
-<!-- Page generated 2020-12-09 15:10:20 +0900-->
+<!-- Page generated 2020-12-12 22:18:52 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Access authorization plugin | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>アクセス承認プラグイン | Docker ドキュメント</title>
   <meta name="description" content="How to create authorization plugins to manage access control to your Docker daemon." />
   <meta name="keywords" content="security, authorization, authentication, docker, documentation, plugin, extend">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/extend/plugins_authorization/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Access authorization plugin"/>
+  <meta name="twitter:title" itemprop="title name" content="アクセス承認プラグイン"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Access authorization plugin" />
+  <meta property="og:title" content="アクセス承認プラグイン" />
   <meta property="og:description" content="How to create authorization plugins to manage access control to your Docker daemon." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-09T15:10:20+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-12T22:18:52+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/plugins_authorization/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-09T15:10:20+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Access authorization plugin","description":"How to create authorization plugins to manage access control to your Docker daemon.","url":"https://docs.docker.com/engine/extend/plugins_authorization/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-12T22:18:52+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"アクセス承認プラグイン","description":"How to create authorization plugins to manage access control to your Docker daemon.","url":"https://docs.docker.com/engine/extend/plugins_authorization/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><p><em class="reading-time">読む時間の目安: 9 分</em></p><!-- This file is maintained within the docker/cli GitHub
+                        <section class="section"><p><em class="reading-time">読む時間の目安: 5 分</em></p><!-- This file is maintained within the docker/cli GitHub
      repository at https://github.com/docker/cli/. Make all
      pull requests against that repo. If you see this file in
      another repository, consider it read-only there, as it will
@@ -107,112 +107,95 @@
      will be rejected.
 -->
 
-<h1 id="access-authorization-plugin">Access authorization plugin</h1>
+<h1 id="access-authorization-plugin">アクセス承認プラグイン</h1>
 
-<p>This document describes the Docker Engine plugins generally available in Docker
-Engine. To view information on plugins managed by Docker Engine,
-refer to <a href="/docs.docker.jp.onthefly/engine/extend/">Docker Engine plugin system</a>.</p>
+<p>本節では Docker Engine において一般的に利用されているプラグインについて説明します。
+Docker Engine によって管理されるプラグインに関する情報については <a href="/docs.docker.jp.onthefly/engine/extend/">Docker Engine プラグインシステム</a> を参照してください。</p>
 
-<p>Docker’s out-of-the-box authorization model is all or nothing. Any user with
-permission to access the Docker daemon can run any Docker client command. The
-same is true for callers using Docker’s Engine API to contact the daemon. If you
-require greater access control, you can create authorization plugins and add
-them to your Docker daemon configuration. Using an authorization plugin, a
-Docker administrator can configure granular access policies for managing access
-to the Docker daemon.</p>
+<p>Docker において即座に利用できる承認モデルは、使うか使わないかだけの単純なものです。
+Docker デーモンへのアクセス権限を持ったユーザーは、どのような Docker クライアントコマンドでも実行できます。
+Docker Engine API 呼び出しによりデーモンにアクセスできる権限に関しても同じことが言えます。
+これ以上のアクセス制御を必要とするなら、承認プラグインを生成して Docker デーモンの設定に加えることになります。
+承認プラグインを利用すれば Docker 管理者は、Docker デーモンへのアクセスを管理するための詳細なアクセスポリシーを設定することができます。</p>
 
-<p>Anyone with the appropriate skills can develop an authorization plugin. These
-skills, at their most basic, are knowledge of Docker, understanding of REST, and
-sound programming knowledge. This document describes the architecture, state,
-and methods information available to an authorization plugin developer.</p>
+<p>承認プラグインは、適切な開発スキルを持っていれば誰でも作り出すことができます。
+開発スキルの基本として必要になるのは、Docker の知識、REST への理解、的確なプログラミングノウハウです。
+本節では承認プラグイン開発者に向けて、プラグインのアーキテクチャー、状況、手法などの有用な情報を示します。</p>
 
-<h2 id="basic-principles">Basic principles</h2>
+<h2 id="basic-principles">基本的な仕組み</h2>
 
-<p>Docker’s <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/">plugin infrastructure</a> enables
-extending Docker by loading, removing and communicating with
-third-party components using a generic API. The access authorization subsystem
-was built using this mechanism.</p>
+<p>Docker が提供する <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/">プラグインインフラストラクチャー</a> は Docker を拡張するものであり、汎用 API を利用したサードパーティー製のコンポーネントをロードして、やりとりを行ないます。
+アクセス承認サブシステムは、このようなメカニズムのもとで構築されました。</p>
 
-<p>Using this subsystem, you don’t need to rebuild the Docker daemon to add an
-authorization plugin.  You can add a plugin to an installed Docker daemon. You do
-need to restart the Docker daemon to add a new plugin.</p>
+<p>このサブシステムを利用すれば、Docker デーモンを再ビルドすることなく、承認プラグインを追加することができます。
+つまりインストール済みの Docker デーモンに対してプラグイン追加ができるわけです。
+ただし新たなプラグインを追加したら Docker デーモンの再起動が必要です。</p>
 
-<p>An authorization plugin approves or denies requests to the Docker daemon based
-on both the current authentication context and the command context. The
-authentication context contains all user details and the authentication method.
-The command context contains all the relevant request data.</p>
+<p>承認プラグインは、その時点での承認コンテキスト（authentication context）とコマンドコンテキスト（command context）の双方に基づいて、Docker デーモンへの要求を承認または拒否します。
+承認コンテキストには、ユーザー情報の詳細や承認手法があります。
+またコマンドコンテキストには関連するリクエストデータすべてがあります。</p>
 
-<p>Authorization plugins must follow the rules described in <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/">Docker Plugin API</a>.
-Each plugin must reside within directories described under the
-<a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/#plugin-discovery">Plugin discovery</a> section.</p>
+<p>承認プラグインは <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/">Docker プラグイン API</a> に示すルールに従わなければなりません。
+また各プラグインは <a href="/docs.docker.jp.onthefly/engine/extend/plugin_api/#plugin-discovery">プラグインの検出</a> に示すディレクトリ配下に置く必要があります。</p>
 
-<p><strong>Note</strong>: the abbreviations <code class="language-plaintext highlighter-rouge">AuthZ</code> and <code class="language-plaintext highlighter-rouge">AuthN</code> mean authorization and authentication
-respectively.</p>
+<p><strong>メモ</strong>: <code class="language-plaintext highlighter-rouge">AuthZ</code>と<code class="language-plaintext highlighter-rouge">AuthN</code>という略表記は、それぞれ承認（authorization）と認証（authentication）を表わします。</p>
 
-<h2 id="default-user-authorization-mechanism">Default user authorization mechanism</h2>
+<h2 id="default-user-authorization-mechanism">デフォルトのユーザー承認メカニズム</h2>
 
-<p>If TLS is enabled in the <a href="https://docs.docker.com/engine/security/https/">Docker daemon</a>, the default user authorization flow extracts the user details from the certificate subject name.
-That is, the <code class="language-plaintext highlighter-rouge">User</code> field is set to the client certificate subject common name, and the <code class="language-plaintext highlighter-rouge">AuthenticationMethod</code> field is set to <code class="language-plaintext highlighter-rouge">TLS</code>.</p>
+<p><a href="https://docs.docker.com/engine/security/https/">Docker デーモン</a> において TLS が有効である場合、デフォルトのユーザー承認処理においては、ユーザー情報を証明書のサブジェクト名（subject name）から引き出します。
+つまり<code class="language-plaintext highlighter-rouge">User</code>の項目にはクライアント証明書のサブジェクトコモン名（subject common name）が設定されており、<code class="language-plaintext highlighter-rouge">AuthenticationMethod</code>の項目には<code class="language-plaintext highlighter-rouge">TLS</code>が設定されています。</p>
 
-<h2 id="basic-architecture">Basic architecture</h2>
+<h2 id="basic-architecture">基本的なアーキテクチャー</h2>
 
-<p>You are responsible for registering your plugin as part of the Docker daemon
-startup. You can install multiple plugins and chain them together. This chain
-can be ordered. Each request to the daemon passes in order through the chain.
-Only when all the plugins grant access to the resource, is the access granted.</p>
+<p>利用するプラグインは Docker デーモンを起動するにあたって、あらかじめ登録しておく必要があります。
+プラグインは複数インストールして、それらを結びつけることが可能です。
+この結びつき（chain）には順序があります。
+デーモンに対するリクエストは、それぞれその結びつきの順に受け渡されます。
+この場合、すべてのプラグインがリソースに対するアクセス権限を有している場合に限って、アクセスが許可されます。</p>
 
-<p>When an HTTP request is made to the Docker daemon through the CLI or via the
-Engine API, the authentication subsystem passes the request to the installed
-authentication plugin(s). The request contains the user (caller) and command
-context. The plugin is responsible for deciding whether to allow or deny the
-request.</p>
+<p>HTTP リクエストが CLI または Engine API を通じて Docker デーモンに要求されると、承認サブシステムがそのリクエストをインストールされた承認プラグインに受け渡します。
+このリクエストには（呼び出しを行った）ユーザー情報とコマンドコンテキストが含まれています。
+プラグインはこのリクエストを許可するか拒否するかを決定しなければなりません。</p>
 
-<p>The sequence diagrams below depict an allow and deny authorization flow:</p>
+<p>以下に示すシーケンス図は、承認の許可と拒否の処理フローを示しています。</p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/extend/images/authz_allow.png" alt="Authorization Allow flow" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/extend/images/authz_allow.png" alt="承認許可の処理フロー" /></p>
 
-<p><img src="/docs.docker.jp.onthefly/engine/extend/images/authz_deny.png" alt="Authorization Deny flow" /></p>
+<p><img src="/docs.docker.jp.onthefly/engine/extend/images/authz_deny.png" alt="承認拒否の処理フロー" /></p>
 
-<p>Each request sent to the plugin includes the authenticated user, the HTTP
-headers, and the request/response body. Only the user name and the
-authentication method used are passed to the plugin. Most importantly, no user
-credentials or tokens are passed. Finally, not all request/response bodies
-are sent to the authorization plugin. Only those request/response bodies where
-the <code class="language-plaintext highlighter-rouge">Content-Type</code> is either <code class="language-plaintext highlighter-rouge">text/*</code> or <code class="language-plaintext highlighter-rouge">application/json</code> are sent.</p>
+<p>プラグインに送信された各リクエストには、認証されたユーザー情報、HTTP ヘッダー、リクエストまたはレスポンスの本体が含まれています。
+プラグインに受け渡されるのは、ユーザー名と使用される認証方法だけです。
+ここで重要なのは、ユーザーの資格情報やトークンは受け渡されないということです。
+そしてリクエストやレスポンス本体のほとんどは、承認プラグインには受け渡されません。
+リクエストやレスポンス本体が受け渡されるのは、唯一<code class="language-plaintext highlighter-rouge">Content-Type</code>が<code class="language-plaintext highlighter-rouge">text/*</code>か<code class="language-plaintext highlighter-rouge">application/json</code>であるときだけです。</p>
 
-<p>For commands that can potentially hijack the HTTP connection (<code class="language-plaintext highlighter-rouge">HTTP
-Upgrade</code>), such as <code class="language-plaintext highlighter-rouge">exec</code>, the authorization plugin is only called for the
-initial HTTP requests. Once the plugin approves the command, authorization is
-not applied to the rest of the flow. Specifically, the streaming data is not
-passed to the authorization plugins. For commands that return chunked HTTP
-response, such as <code class="language-plaintext highlighter-rouge">logs</code> and <code class="language-plaintext highlighter-rouge">events</code>, only the HTTP request is sent to the
-authorization plugins.</p>
+<p>HTTP 接続を乗っ取る可能性のあるコマンド（<code class="language-plaintext highlighter-rouge">HTTP Upgrade</code>）、たとえば<code class="language-plaintext highlighter-rouge">exec</code>などの場合には、承認プラグインは、最初の HTTP リクエストに対してのみ呼び出されます。
+プラグインがそのコマンドを一度受け入れたら、その後の処理フローにおいて承認処理は適用されません。
+特にストリーミングデータは承認プラグインに受け渡されません。
+チャンク形式の HTTP レスポンスを返す<code class="language-plaintext highlighter-rouge">logs</code>や<code class="language-plaintext highlighter-rouge">events</code>のようなコマンドでは HTTP リクエストだけが承認プラグインに送信されます。</p>
 
-<p>During request/response processing, some authorization flows might
-need to do additional queries to the Docker daemon. To complete such flows,
-plugins can call the daemon API similar to a regular user. To enable these
-additional queries, the plugin must provide the means for an administrator to
-configure proper authentication and security policies.</p>
+<p>承認処理フロー内でのリクエストやレスポンスの処理中には、Docker デーモンに対してさらにクエリーの実行が必要になる場合があります。
+そのような処理フローを実施するため、プラグインは通常ユーザーが行うのと同様にデーモン API を呼び出します。
+そういった追加のクエリーを可能とするためにプラグインの機能として、管理者が適切な承認やセキュリティポリシーを設定できるような手段を提供しておくことが必要になります。</p>
 
-<h2 id="docker-client-flows">Docker client flows</h2>
+<h2 id="docker-client-flows">Docker クライアントの処理フロー</h2>
 
-<p>To enable and configure the authorization plugin, the plugin developer must
-support the Docker client interactions detailed in this section.</p>
+<p>承認プラグインを有効化し設定可能とするために、プラグイン開発者が Docker クライアントとのやりとりにおいて対応すべきことを、本節において説明します。</p>
 
-<h3 id="setting-up-docker-daemon">Setting up Docker daemon</h3>
+<h3 id="setting-up-docker-daemon">Docker デーモンの設定</h3>
 
-<p>Enable the authorization plugin with a dedicated command line flag in the
-<code class="language-plaintext highlighter-rouge">--authorization-plugin=PLUGIN_ID</code> format. The flag supplies a <code class="language-plaintext highlighter-rouge">PLUGIN_ID</code>
-value. This value can be the plugin’s socket or a path to a specification file.
-Authorization plugins can be loaded without restarting the daemon. Refer
-to the <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#configuration-reloading"><code class="language-plaintext highlighter-rouge">dockerd</code> documentation</a> for more information.</p>
+<p>承認プラグインの有効化は、専用のコマンドラインフラグを使って<code class="language-plaintext highlighter-rouge">--authorization-plugin=PLUGIN_ID</code>のように指定します。
+このフラグには<code class="language-plaintext highlighter-rouge">PLUGIN_ID</code>という値を与えます。
+この値はプラグインのソケット、または仕様ファイルへのパスのいずれかです。
+承認プラグインはデーモンを再起動しなくてもロードされます。
+詳しくは <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#configuration-reloading"><code class="language-plaintext highlighter-rouge">dockerd</code>のドキュメント</a> を参照してください。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>dockerd <span class="nt">--authorization-plugin</span><span class="o">=</span>plugin1 <span class="nt">--authorization-plugin</span><span class="o">=</span>plugin2,...
 </code></pre></div></div>
 
-<p>Docker’s authorization subsystem supports multiple <code class="language-plaintext highlighter-rouge">--authorization-plugin</code> parameters.</p>
+<p>Docker の承認サブシステムでは複数の<code class="language-plaintext highlighter-rouge">--authorization-plugin</code>パラメーターを指定することができます。</p>
 
-<h3 id="calling-authorized-command-allow">Calling authorized command (allow)</h3>
+<h3 id="calling-authorized-command-allow">コマンドの呼び出し（承認許可時）</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull centos
 ...
@@ -220,37 +203,36 @@ f1b10cd84249: Pull <span class="nb">complete</span>
 ...
 </code></pre></div></div>
 
-<h3 id="calling-unauthorized-command-deny">Calling unauthorized command (deny)</h3>
+<h3 id="calling-unauthorized-command-deny">コマンドの呼び出し（承認拒否時）</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull centos
 ...
 docker: Error response from daemon: authorization denied by plugin PLUGIN_NAME: volumes are not allowed.
 </code></pre></div></div>
 
-<h3 id="error-from-plugins">Error from plugins</h3>
+<h3 id="error-from-plugins">プラグインからのエラー</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull centos
 ...
 docker: Error response from daemon: plugin PLUGIN_NAME failed with error: AuthZPlugin.AuthZReq: Cannot connect to the Docker daemon. Is the docker daemon running on this host?.
 </code></pre></div></div>
 
-<h2 id="api-schema-and-implementation">API schema and implementation</h2>
+<h2 id="api-schema-and-implementation">API スキーマと実装</h2>
 
-<p>In addition to Docker’s standard plugin registration method, each plugin
-should implement the following two methods:</p>
+<p>Docker の標準的なプラグインにおける登録メソッドに加えて、各プラグインには以下に示す 2 つのメソッドを実装していなければなりません。</p>
 
 <ul>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">/AuthZPlugin.AuthZReq</code> This authorize request method is called before the Docker daemon processes the client request.</p>
+    <p><code class="language-plaintext highlighter-rouge">/AuthZPlugin.AuthZReq</code> この承認リクエストメソッドは、クライアントからのリクエストをデーモンが処理する前に呼び出されます。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">/AuthZPlugin.AuthZRes</code> This authorize response method is called before the response is returned from Docker daemon to the client.</p>
+    <p><code class="language-plaintext highlighter-rouge">/AuthZPlugin.AuthZRes</code> この承認レスポンスメソッドは、クライアントに対して Docker デーモンがレスポンスを返信するまえに呼び出されます。</p>
   </li>
 </ul>
 
 <h4 id="authzpluginauthzreq">/AuthZPlugin.AuthZReq</h4>
 
-<p><strong>Request</strong>:</p>
+<p><strong>リクエスト</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"User"</span><span class="p">:</span><span class="w">              </span><span class="s2">"The user identification"</span><span class="p">,</span><span class="w">
@@ -262,7 +244,7 @@ should implement the following two methods:</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><strong>Response</strong>:</p>
+<p><strong>レスポンス</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"Allow"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Determined whether the user is allowed or not"</span><span class="p">,</span><span class="w">
@@ -272,7 +254,7 @@ should implement the following two methods:</p>
 </span></code></pre></div></div>
 <h4 id="authzpluginauthzres">/AuthZPlugin.AuthZRes</h4>
 
-<p><strong>Request</strong>:</p>
+<p><strong>リクエスト</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"User"</span><span class="p">:</span><span class="w">              </span><span class="s2">"The user identification"</span><span class="p">,</span><span class="w">
@@ -287,7 +269,7 @@ should implement the following two methods:</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><strong>Response</strong>:</p>
+<p><strong>レスポンス</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
    </span><span class="nl">"Allow"</span><span class="p">:</span><span class="w">              </span><span class="s2">"Determined whether the user is allowed or not"</span><span class="p">,</span><span class="w">
@@ -296,171 +278,200 @@ should implement the following two methods:</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<h3 id="request-authorization">Request authorization</h3>
+<h3 id="request-authorization">リクエスト承認</h3>
 
-<p>Each plugin must support two request authorization messages formats, one from the daemon to the plugin and then from the plugin to the daemon. The tables below detail the content expected in each message.</p>
+<p>各プラグインはリクエスト承認メッセージにおいて、2 種類のフォーマットをサポートしなければなりません。
+1 つはデーモンからプラグインに向けてのものであり、もう 1 つはその後に発生するプラグインからデーモンに向けてのものです。
+以下の一覧表は、各メッセージにおける内容を示します。</p>
 
-<h4 id="daemon---plugin">Daemon -&gt; Plugin</h4>
+<h4 id="daemon---plugin">デーモン -&gt; プラグイン</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
+      <th>項目</th>
+      <th>日本語訳</th>
+      <th>型</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>User</td>
+      <td>ユーザー</td>
       <td>string</td>
-      <td>The user identification</td>
+      <td>ユーザー ID。</td>
     </tr>
     <tr>
       <td>Authentication method</td>
+      <td>承認メソッド</td>
       <td>string</td>
-      <td>The authentication method used</td>
+      <td>利用する承認メソッド。</td>
     </tr>
     <tr>
       <td>Request method</td>
+      <td>リクエストメソッド</td>
       <td>enum</td>
-      <td>The HTTP method (GET/DELETE/POST)</td>
+      <td>HTTP メソッド (GET/DELETE/POST)</td>
     </tr>
     <tr>
       <td>Request URI</td>
+      <td>リクエスト URI</td>
       <td>string</td>
-      <td>The HTTP request URI including API version (e.g., v.1.17/containers/json)</td>
+      <td>HTTP リクエスト URI。API バージョンを含む。（たとえば v.1.17/containers/json）</td>
     </tr>
     <tr>
       <td>Request headers</td>
+      <td>リクエストヘッダー</td>
       <td>map[string]string</td>
-      <td>Request headers as key value pairs (without the authorization header)</td>
+      <td>キーバリューペアによるリクエストヘッダー（承認ヘッダーは除く）。</td>
     </tr>
     <tr>
       <td>Request body</td>
+      <td>リクエスト本体</td>
       <td>[]byte</td>
-      <td>Raw request body</td>
+      <td>生のリクエスト本体</td>
     </tr>
   </tbody>
 </table>
 
-<h4 id="plugin---daemon">Plugin -&gt; Daemon</h4>
+<h4 id="plugin---daemon">プラグイン -&gt; デーモン</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
+      <th>項目</th>
+      <th>日本語訳</th>
+      <th>型</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Allow</td>
+      <td>許可</td>
       <td>bool</td>
-      <td>Boolean value indicating whether the request is allowed or denied</td>
+      <td>リクエストが許可あるいは拒否されたことを表わすブール値。</td>
     </tr>
     <tr>
       <td>Msg</td>
+      <td>メッセージ</td>
       <td>string</td>
-      <td>Authorization message (will be returned to the client in case the access is denied)</td>
+      <td>承認メッセージ。（アクセス拒否時にクライアントに返される。）</td>
     </tr>
     <tr>
       <td>Err</td>
+      <td>エラー</td>
       <td>string</td>
-      <td>Error message (will be returned to the client in case the plugin encounter an error. The string value supplied may appear in logs, so should not include confidential information)</td>
+      <td>エラーメッセージ。（プラグインエラーの際にクライアントに返される。文字列値はログに出力されるため資格情報は含めてはならない。）</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="response-authorization">Response authorization</h3>
+<h3 id="レスポンス承認">レスポンス承認</h3>
 
-<p>The plugin must support two authorization messages formats, one from the daemon to the plugin and then from the plugin to the daemon. The tables below detail the content expected in each message.</p>
+<p>各プラグインはリクエスト承認メッセージにおいて、2 種類のフォーマットをサポートしなければなりません。
+1 つはデーモンからプラグインに向けてのものであり、もう 1 つはその後に発生するプラグインからデーモンに向けてのものです。
+以下の一覧表は、各メッセージにおける内容を示します。</p>
 
-<h4 id="daemon---plugin-1">Daemon -&gt; Plugin</h4>
+<h4 id="daemon---plugin">デーモン -&gt; プラグイン</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
+      <th>項目</th>
+      <th>日本語訳</th>
+      <th>型</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>User</td>
+      <td>ユーザー</td>
       <td>string</td>
-      <td>The user identification</td>
+      <td>ユーザー ID。</td>
     </tr>
     <tr>
       <td>Authentication method</td>
+      <td>承認メソッド</td>
       <td>string</td>
-      <td>The authentication method used</td>
+      <td>利用する承認メソッド。</td>
     </tr>
     <tr>
       <td>Request method</td>
+      <td>リクエストメソッド</td>
       <td>string</td>
-      <td>The HTTP method (GET/DELETE/POST)</td>
+      <td>HTTP メソッド (GET/DELETE/POST)</td>
     </tr>
     <tr>
       <td>Request URI</td>
+      <td>リクエスト URI</td>
       <td>string</td>
-      <td>The HTTP request URI including API version (e.g., v.1.17/containers/json)</td>
+      <td>HTTP リクエスト URI。API バージョンを含む。（たとえば v.1.17/containers/json）</td>
     </tr>
     <tr>
       <td>Request headers</td>
+      <td>リクエストヘッダー</td>
       <td>map[string]string</td>
-      <td>Request headers as key value pairs (without the authorization header)</td>
+      <td>キーバリューペアによるリクエストヘッダー（承認ヘッダーは除く）。</td>
     </tr>
     <tr>
       <td>Request body</td>
+      <td>リクエスト本体</td>
       <td>[]byte</td>
-      <td>Raw request body</td>
+      <td>生のリクエスト本体。</td>
     </tr>
     <tr>
       <td>Response status code</td>
+      <td>レスポンスステータスコード</td>
       <td>int</td>
-      <td>Status code from the docker daemon</td>
+      <td>Docker デーモンからのステータスコード。</td>
     </tr>
     <tr>
       <td>Response headers</td>
+      <td>レスポンスヘッダー</td>
       <td>map[string]string</td>
-      <td>Response headers as key value pairs</td>
+      <td>キーバリューペアによるレスポンスヘッダー。</td>
     </tr>
     <tr>
       <td>Response body</td>
+      <td>レスポンス本体</td>
       <td>[]byte</td>
-      <td>Raw docker daemon response body</td>
+      <td>Docker デーモンからの生のレスポンス本体。</td>
     </tr>
   </tbody>
 </table>
 
-<h4 id="plugin---daemon-1">Plugin -&gt; Daemon</h4>
+<h4 id="plugin---daemon">プラグイン -&gt; デーモン</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
+      <th>項目</th>
+      <th>日本語訳</th>
+      <th>型</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Allow</td>
+      <td>許可</td>
       <td>bool</td>
-      <td>Boolean value indicating whether the response is allowed or denied</td>
+      <td>レスポンスが許可あるいは拒否されたことを表わすブール値。</td>
     </tr>
     <tr>
       <td>Msg</td>
+      <td>メッセージ</td>
       <td>string</td>
-      <td>Authorization message (will be returned to the client in case the access is denied)</td>
+      <td>承認メッセージ。（アクセス拒否時にクライアントに返される。）</td>
     </tr>
     <tr>
       <td>Err</td>
+      <td>エラー</td>
       <td>string</td>
-      <td>Error message (will be returned to the client in case the plugin encounter an error. The string value supplied may appear in logs, so should not include confidential information)</td>
+      <td>エラーメッセージ。（プラグインエラーの際にクライアントに返される。文字列値はログに出力されるため資格情報は含めてはならない。）</td>
     </tr>
   </tbody>
 </table>
@@ -497,21 +508,21 @@ should implement the following two methods:</p>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#basic-principles" class="nomunge">Basic principles</a></li>
-  <li><a href="#default-user-authorization-mechanism" class="nomunge">Default user authorization mechanism</a></li>
-  <li><a href="#basic-architecture" class="nomunge">Basic architecture</a></li>
-  <li><a href="#docker-client-flows" class="nomunge">Docker client flows</a>
+  <li><a href="#basic-principles" class="nomunge">基本的な仕組み</a></li>
+  <li><a href="#default-user-authorization-mechanism" class="nomunge">デフォルトのユーザー承認メカニズム</a></li>
+  <li><a href="#basic-architecture" class="nomunge">基本的なアーキテクチャー</a></li>
+  <li><a href="#docker-client-flows" class="nomunge">Docker クライアントの処理フロー</a>
     <ul>
-      <li><a href="#setting-up-docker-daemon" class="nomunge">Setting up Docker daemon</a></li>
-      <li><a href="#calling-authorized-command-allow" class="nomunge">Calling authorized command (allow)</a></li>
-      <li><a href="#calling-unauthorized-command-deny" class="nomunge">Calling unauthorized command (deny)</a></li>
-      <li><a href="#error-from-plugins" class="nomunge">Error from plugins</a></li>
+      <li><a href="#setting-up-docker-daemon" class="nomunge">Docker デーモンの設定</a></li>
+      <li><a href="#calling-authorized-command-allow" class="nomunge">コマンドの呼び出し（承認許可時）</a></li>
+      <li><a href="#calling-unauthorized-command-deny" class="nomunge">コマンドの呼び出し（承認拒否時）</a></li>
+      <li><a href="#error-from-plugins" class="nomunge">プラグインからのエラー</a></li>
     </ul>
   </li>
-  <li><a href="#api-schema-and-implementation" class="nomunge">API schema and implementation</a>
+  <li><a href="#api-schema-and-implementation" class="nomunge">API スキーマと実装</a>
     <ul>
-      <li><a href="#request-authorization" class="nomunge">Request authorization</a></li>
-      <li><a href="#response-authorization" class="nomunge">Response authorization</a></li>
+      <li><a href="#request-authorization" class="nomunge">リクエスト承認</a></li>
+      <li><a href="#レスポンス承認" class="nomunge">レスポンス承認</a></li>
     </ul>
   </li>
 </ul>

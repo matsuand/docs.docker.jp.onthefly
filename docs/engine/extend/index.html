@@ -1,7 +1,7 @@
-<!-- Page generated 2020-12-09 15:10:20 +0900-->
+<!-- Page generated 2020-12-12 22:18:52 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine managed plugin system | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine が管理するプラグインシステム | Docker ドキュメント</title>
   <meta name="description" content="Develop and use a plugin with the managed plugin system" />
   <meta name="keywords" content="API, Usage, plugins, documentation, developer">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/extend/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Docker Engine managed plugin system"/>
+  <meta name="twitter:title" itemprop="title name" content="Docker Engine が管理するプラグインシステム"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Docker Engine managed plugin system" />
+  <meta property="og:title" content="Docker Engine が管理するプラグインシステム" />
   <meta property="og:description" content="Develop and use a plugin with the managed plugin system" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-09T15:10:20+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-12T22:18:52+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/extend/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-09T15:10:20+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine managed plugin system","description":"Develop and use a plugin with the managed plugin system","url":"https://docs.docker.com/engine/extend/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-12T22:18:52+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine が管理するプラグインシステム","description":"Develop and use a plugin with the managed plugin system","url":"https://docs.docker.com/engine/extend/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><p><em class="reading-time">読む時間の目安: 8 分</em></p><!-- This file is maintained within the docker/cli GitHub
+                        <section class="section"><p><em class="reading-time">読む時間の目安: 5 分</em></p><!-- This file is maintained within the docker/cli GitHub
      repository at https://github.com/docker/cli/. Make all
      pull requests against that repo. If you see this file in
      another repository, consider it read-only there, as it will
@@ -107,50 +107,47 @@
      will be rejected.
 -->
 
-<h1 id="docker-engine-managed-plugin-system">Docker Engine managed plugin system</h1>
+<h1 id="docker-engine-managed-plugin-system">Docker Engine が管理するプラグインシステム</h1>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/engine/extend/#installing-and-using-a-plugin">Installing and using a plugin</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/extend/#developing-a-plugin">Developing a plugin</a></li>
-  <li><a href="/docs.docker.jp.onthefly/engine/extend/#debugging-plugins">Debugging plugins</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/extend/#installing-and-using-a-plugin">プラグインのインストールと利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/extend/#developing-a-plugin">プラグインの開発</a></li>
+  <li><a href="/docs.docker.jp.onthefly/engine/extend/#debugging-plugins">プラグインのデバッグ</a></li>
 </ul>
 
-<p>Docker Engine’s plugin system allows you to install, start, stop, and remove
-plugins using Docker Engine.</p>
+<p>Docker Engine のプラグインシステムは Docker Engine を使って、プラグインのインストール、起動、停止、削除を行うものです。</p>
 
-<p>For information about the legacy plugin system available in Docker Engine 1.12
-and earlier, see <a href="/docs.docker.jp.onthefly/engine/extend/legacy_plugins/">Understand legacy Docker Engine plugins</a>.</p>
+<p>Docker Engine 1.12 またはそれ以前において利用可能な古いプラグインシステムに関しては <a href="/docs.docker.jp.onthefly/engine/extend/legacy_plugins/">以前の Docker Engine プラグインの理解</a> を参照してください。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: Docker Engine managed plugins are currently not supported
-on Windows daemons.</p>
+  <p><strong>メモ</strong>: Docker Engine 管理のプラグインシステムは、現在 Windows デーモン上ではサポートされません。</p>
 </blockquote>
 
-<h2 id="installing-and-using-a-plugin">Installing and using a plugin</h2>
+<h2 id="installing-and-using-a-plugin">プラグインのインストールと利用</h2>
 
-<p>Plugins are distributed as Docker images and can be hosted on Docker Hub or on
-a private registry.</p>
+<p>プラグインは Docker イメージとして配布されます。
+したがって Docker Hub やプライベートリポジトリからホスティングすることができます。</p>
 
-<p>To install a plugin, use the <code class="language-plaintext highlighter-rouge">docker plugin install</code> command, which pulls the
-plugin from Docker Hub or your private registry, prompts you to grant
-permissions or capabilities if necessary, and enables the plugin.</p>
+<p>プラグインのインストールには<code class="language-plaintext highlighter-rouge">docker plugin install</code>コマンドを用います。
+このコマンドは Docker Hub やプライベートリポジトリからプラグインをプルして、必要に応じて権限や機能の追加を求めた上で、そのプラグインを有効にします。</p>
 
-<p>To check the status of installed plugins, use the <code class="language-plaintext highlighter-rouge">docker plugin ls</code> command.
-Plugins that start successfully are listed as enabled in the output.</p>
+<p>インストールされているプラグインを確認するには<code class="language-plaintext highlighter-rouge">docker plugin ls</code>コマンドを用います。
+起動に成功しているプラグインは、有効なプラグインとして一覧に出力されます。</p>
 
-<p>After a plugin is installed, you can use it as an option for another Docker
-operation, such as creating a volume.</p>
+<p>プラグインをインストールしたら、たとえばボリューム生成などのように、それまでとは違った Docker 操作を行うことができます。</p>
 
-<p>In the following example, you install the <code class="language-plaintext highlighter-rouge">sshfs</code> plugin, verify that it is
-enabled, and use it to create a volume.</p>
+<p>以下の例では<code class="language-plaintext highlighter-rouge">sshfs</code>プラグインをインストールします。
+これが有効化されていることを確認した上で、ボリューム生成に利用します。</p>
 
 <blockquote>
-  <p><strong>Note</strong>: This example is intended for instructional purposes only. Once the volume is created, your SSH password to the remote host will be exposed as plaintext when inspecting the volume. You should delete the volume as soon as you are done with the example.</p>
+  <p><strong>メモ</strong>: この例は説明目的で示しているにすぎません。
+ボリュームが生成された後にボリューム詳細を確認すると、リモートホストの SSH パスワードが表示されてしまいます。
+したがってこの例による作業を終えたら、できるだけ早くにボリュームを削除するようにしてください。</p>
 </blockquote>
 
 <ol>
   <li>
-    <p>Install the <code class="language-plaintext highlighter-rouge">sshfs</code> plugin.</p>
+    <p><code class="language-plaintext highlighter-rouge">sshfs</code>プラグインをインストールします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">install </span>vieux/sshfs
 
@@ -162,16 +159,16 @@ Do you grant the above permissions? <span class="o">[</span>y/N] y
 vieux/sshfs
 </code></pre></div>    </div>
 
-    <p>The plugin requests 2 privileges:</p>
+    <p>このプラグインは 2 つの権限を要求しています。</p>
 
     <ul>
-      <li>It needs access to the <code class="language-plaintext highlighter-rouge">host</code> network.</li>
-      <li>It needs the <code class="language-plaintext highlighter-rouge">CAP_SYS_ADMIN</code> capability, which allows the plugin to run
-the <code class="language-plaintext highlighter-rouge">mount</code> command.</li>
+      <li><code class="language-plaintext highlighter-rouge">host</code>ネットワークへのアクセスを必要とします。</li>
+      <li>ケーパビリティー<code class="language-plaintext highlighter-rouge">CAP_SYS_ADMIN</code>を必要とします。
+これによってプラグインから<code class="language-plaintext highlighter-rouge">mount</code>コマンドが実行できるようになります。</li>
     </ul>
   </li>
   <li>
-    <p>Check that the plugin is enabled in the output of <code class="language-plaintext highlighter-rouge">docker plugin ls</code>.</p>
+    <p><code class="language-plaintext highlighter-rouge">docker plugin ls</code>の出力から、このプラグインが有効化されたことを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">ls
 
@@ -180,11 +177,10 @@ the <code class="language-plaintext highlighter-rouge">mount</code> command.</li
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a volume using the plugin.
-This example mounts the <code class="language-plaintext highlighter-rouge">/remote</code> directory on host <code class="language-plaintext highlighter-rouge">1.2.3.4</code> into a
-volume named <code class="language-plaintext highlighter-rouge">sshvolume</code>.</p>
+    <p>プラグインを利用してボリュームを生成します。
+この例では、ホスト<code class="language-plaintext highlighter-rouge">1.2.3.4</code>上の<code class="language-plaintext highlighter-rouge">/remote</code>ディレクトリを、<code class="language-plaintext highlighter-rouge">sshvolume</code>という名のボリュームとしてマウントします。</p>
 
-    <p>This volume can now be mounted into containers.</p>
+    <p>このボリュームはこうしてコンテナーにマウントされます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create <span class="se">\</span>
   <span class="nt">-d</span> vieux/sshfs <span class="se">\</span>
@@ -196,7 +192,7 @@ sshvolume
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Verify that the volume was created successfully.</p>
+    <p>ボリュームの生成が成功したことを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume <span class="nb">ls
 
@@ -205,35 +201,36 @@ vieux/sshfs         sshvolume
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Start a container that uses the volume <code class="language-plaintext highlighter-rouge">sshvolume</code>.</p>
+    <p>ボリューム<code class="language-plaintext highlighter-rouge">sshvolume</code>を利用するコンテナーを起動します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-v</span> sshvolume:/data busybox <span class="nb">ls</span> /data
 
-&lt;content of /remote on machine 1.2.3.4&gt;
+＜マシン 1.2.3.4 の /remote の内容一覧＞
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Remove the volume <code class="language-plaintext highlighter-rouge">sshvolume</code></p>
+    <p>ボリューム<code class="language-plaintext highlighter-rouge">sshvolume</code>を削除します。</p>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker volume <span class="nb">rm </span>sshvolume
 
 sshvolume
 </code></pre></div>    </div>
-    <p>To disable a plugin, use the <code class="language-plaintext highlighter-rouge">docker plugin disable</code> command. To completely
-remove it, use the <code class="language-plaintext highlighter-rouge">docker plugin remove</code> command. For other available
-commands and options, see the
-<a href="../reference/commandline/index.md">command line reference</a>.</p>
   </li>
 </ol>
 
-<h2 id="developing-a-plugin">Developing a plugin</h2>
+<p>プラグインを無効にする場合は<code class="language-plaintext highlighter-rouge">docker plugin disable</code>コマンドを用います。
+また完全に削除するには<code class="language-plaintext highlighter-rouge">docker plugin remove</code>コマンドを用います。
+これ以外に利用可能なコマンドやオプションについては <a href="../reference/commandline/index.md">コマンドラインリファレンス</a> を参照してください。</p>
 
-<h4 id="the-rootfs-directory">The rootfs directory</h4>
-<p>The <code class="language-plaintext highlighter-rouge">rootfs</code> directory represents the root filesystem of the plugin. In this
-example, it was created from a Dockerfile:</p>
+<h2 id="developing-a-plugin">プラグインの開発</h2>
+
+<h4 id="the-rootfs-directory">rootfs ディレクトリ</h4>
+
+<p><code class="language-plaintext highlighter-rouge">rootfs</code>ディレクトリはそのプラグインのルートファイルシステムを表わします。
+以下の例においては Dockerfile から生成しています。</p>
 
 <blockquote>
-  <p><strong>Note:</strong> The <code class="language-plaintext highlighter-rouge">/run/docker/plugins</code> directory is mandatory inside of the
-plugin’s filesystem for docker to communicate with the plugin.</p>
+  <p><strong>メモ:</strong> <code class="language-plaintext highlighter-rouge">/run/docker/plugins</code>ディレクトリはプラグインのファイルシステム上に存在している必要があります。
+これは Docker がプラグインと通信を行うために用いられます。</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/vieux/docker-volume-sshfs
@@ -246,11 +243,12 @@ plugin’s filesystem for docker to communicate with the plugin.</p>
 <span class="nv">$ </span>docker rmi rootfsimage
 </code></pre></div></div>
 
-<h4 id="the-configjson-file">The config.json file</h4>
+<h4 id="the-configjson-file">config.json ファイル</h4>
 
-<p>The <code class="language-plaintext highlighter-rouge">config.json</code> file describes the plugin. See the <a href="/docs.docker.jp.onthefly/engine/extend/config/">plugins config reference</a>.</p>
+<p><code class="language-plaintext highlighter-rouge">config.json</code>ファイルはプラグインを記述するものです。
+<a href="/docs.docker.jp.onthefly/engine/extend/config/">プラグイン設定リファレンス</a> を参照してください。</p>
 
-<p>Consider the following <code class="language-plaintext highlighter-rouge">config.json</code> file.</p>
+<p>以下のような<code class="language-plaintext highlighter-rouge">config.json</code>ファイルがあったとします。</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
 	</span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sshFS plugin for Docker"</span><span class="p">,</span><span class="w">
@@ -269,28 +267,24 @@ plugin’s filesystem for docker to communicate with the plugin.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>This plugin is a volume driver. It requires a <code class="language-plaintext highlighter-rouge">host</code> network and the
-<code class="language-plaintext highlighter-rouge">CAP_SYS_ADMIN</code> capability. It depends upon the <code class="language-plaintext highlighter-rouge">/docker-volume-sshfs</code>
-entrypoint and uses the <code class="language-plaintext highlighter-rouge">/run/docker/plugins/sshfs.sock</code> socket to communicate
-with Docker Engine. This plugin has no runtime parameters.</p>
+<p>このプラグインは 1 つのボリュームドライバーです。
+これは<code class="language-plaintext highlighter-rouge">host</code>ネットワークとケーパビリティー<code class="language-plaintext highlighter-rouge">CAP_SYS_ADMIN</code>を必要とします。
+エントリーポイント<code class="language-plaintext highlighter-rouge">/docker-volume-sshfs</code>を持ち、ソケットとして<code class="language-plaintext highlighter-rouge">/run/docker/plugins/sshfs.sock</code>を用いて Docker Engine とやりとりを行います。
+このプラグインに対しての実行パラメーターはありません。</p>
 
-<h4 id="creating-the-plugin">Creating the plugin</h4>
+<h4 id="creating-the-plugin">プラグインの生成</h4>
 
-<p>A new plugin can be created by running
-<code class="language-plaintext highlighter-rouge">docker plugin create &lt;plugin-name&gt; ./path/to/plugin/data</code> where the plugin
-data contains a plugin configuration file <code class="language-plaintext highlighter-rouge">config.json</code> and a root filesystem
-in subdirectory <code class="language-plaintext highlighter-rouge">rootfs</code>.</p>
+<p>新たなプラグインは<code class="language-plaintext highlighter-rouge">docker plugin create &lt;プラグイン名&gt; ./path/to/plugin/data</code>を実行することで生成されます。
+ここで<code class="language-plaintext highlighter-rouge">/path/to/plugin/data</code>は、プラグインの設定ファイル<code class="language-plaintext highlighter-rouge">config.json</code>が置かれていて、サブディレクトリ<code class="language-plaintext highlighter-rouge">rootfs</code>がこのプラグインのルートファイルシステムとなるようなディレクトリのことです。</p>
 
-<p>After that the plugin <code class="language-plaintext highlighter-rouge">&lt;plugin-name&gt;</code> will show up in <code class="language-plaintext highlighter-rouge">docker plugin ls</code>.
-Plugins can be pushed to remote registries with
-<code class="language-plaintext highlighter-rouge">docker plugin push &lt;plugin-name&gt;</code>.</p>
+<p>プラグインの生成後は<code class="language-plaintext highlighter-rouge">docker plugin ls</code>の実行によってそのプラグインの<code class="language-plaintext highlighter-rouge">&lt;プラグイン名&gt;</code>が表示されます。
+プラグインは<code class="language-plaintext highlighter-rouge">docker plugin push &lt;プラグイン名&gt;</code>の実行により、リモートリポジトリにプッシュすることができます。</p>
 
-<h2 id="debugging-plugins">Debugging plugins</h2>
+<h2 id="debugging-plugins">プラグインのデバッグ</h2>
 
-<p>Stdout of a plugin is redirected to dockerd logs. Such entries have a
-<code class="language-plaintext highlighter-rouge">plugin=&lt;ID&gt;</code> suffix. Here are a few examples of commands for pluginID
-<code class="language-plaintext highlighter-rouge">f52a3df433b9aceee436eaada0752f5797aab1de47e5485f1690a073b860ff62</code> and their
-corresponding log entries in the docker daemon logs.</p>
+<p>プラグインの標準出力は dockerd のログにリダイレクトされます。
+ログエントリーには<code class="language-plaintext highlighter-rouge">plugin=&lt;ID&gt;</code>というサフィックスがつきます。
+以下に示すコマンド利用例は、プラグイン ID <code class="language-plaintext highlighter-rouge">f52a3df433b9aceee436eaada0752f5797aab1de47e5485f1690a073b860ff62</code> に対するものであり、これに対応する Docker デーモンのログエントリーを示しています。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">install </span>tiborvass/sample-volume-plugin
 
@@ -313,11 +307,10 @@ INFO[0421] Path Called...    Returned path /data/samplevol  <span class="nv">plu
 INFO[0421] Unmount Called... Unmounted samplevol            <span class="nv">plugin</span><span class="o">=</span>f52a3df433b9aceee436eaada0752f5797aab1de47e5485f1690a073b860ff62
 </code></pre></div></div>
 
-<h4 id="using-docker-runc-to-obtain-logfiles-and-shell-into-the-plugin">Using docker-runc to obtain logfiles and shell into the plugin.</h4>
+<h4 id="Using">docker-runc によるログファイルおよびシェルの取得</h4>
 
-<p><code class="language-plaintext highlighter-rouge">docker-runc</code>, the default docker container runtime can be used for debugging
-plugins. This is specifically useful to collect plugin logs if they are
-redirected to a file.</p>
+<p><code class="language-plaintext highlighter-rouge">docker-runc</code>はデフォルトの Docker コンテナーランタイムであり、プラグインのデバッグに利用します。
+プラグインログがファイルに対してリダイレクト出力される場合に、そのログを収集する目的で活用することができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>docker-runc <span class="nt">--root</span> /var/run/docker/plugins/runtime-root/moby-plugins list
 
@@ -330,18 +323,17 @@ c5bb4b90941efcaccca999439ed06d6a6affdde7081bb34dc84126b57b3e793d   14984       r
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>docker-runc <span class="nt">--root</span> /var/run/docker/plugins/runtime-root/moby-plugins <span class="nb">exec </span>93f1e7dbfe11c938782c2993628c895cf28e2274072c4a346a6002446c949b25 <span class="nb">cat</span> /var/log/plugin.log
 </code></pre></div></div>
 
-<p>If the plugin has a built-in shell, then exec into the plugin can be done as
-follows:</p>
+<p>プラグインにビルトインのシェルがある場合、プラグインに対する exec 実行を以下のように行うことができます。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>docker-runc <span class="nt">--root</span> /var/run/docker/plugins/runtime-root/moby-plugins <span class="nb">exec</span> <span class="nt">-t</span> 93f1e7dbfe11c938782c2993628c895cf28e2274072c4a346a6002446c949b25 sh
 </code></pre></div></div>
 
-<h4 id="using-curl-to-debug-plugin-socket-issues">Using curl to debug plugin socket issues.</h4>
+<h4 id="using-curl-to-debug-plugin-socket-issues">curl 利用によるプラグインソケットデバッグ</h4>
 
-<p>To verify if the plugin API socket that the docker daemon communicates with
-is responsive, use curl. In this example, we will make API calls from the
-docker host to volume and network plugins using curl 7.47.0 to ensure that
-the plugin is listening on the said socket. For a well functioning plugin,
-these basic requests should work. Note that plugin sockets are available on the host under <code class="language-plaintext highlighter-rouge">/var/run/docker/plugins/&lt;pluginID&gt;</code></p>
+<p>プラグイン API ソケットが Docker デーモンとのやりとりに反応するかどうかの確認には curl を用います。
+以下の例では Docker ホストから curl 7.47.0 を利用して、ボリュームプラグインおよびネットワークプラグインに API 呼び出しを行っています。
+これによってプラグインがソケットを待ち受けていることを確認します。
+プラグイン機能が適正に構築されているものであれば、こういった基本的なリクエストが動作します。
+なおプラグインソケットは、ホスト上の<code class="language-plaintext highlighter-rouge">/var/run/docker/plugins/&lt;プラグインID&gt;</code>において利用可能です。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-XPOST</span> <span class="nt">-d</span> <span class="s1">'{}'</span> <span class="nt">--unix-socket</span> /var/run/docker/plugins/e8a37ba56fc879c991f7d7921901723c64df6b42b87e6a0b055771ecf8477a6d/plugin.sock http:/VolumeDriver.List
 
@@ -352,11 +344,11 @@ these basic requests should work. Note that plugin sockets are available on the 
 
 <span class="o">{</span><span class="s2">"Scope"</span>:<span class="s2">"local"</span><span class="o">}</span>
 </code></pre></div></div>
-<p>When using curl 7.5 and above, the URL should be of the form
-<code class="language-plaintext highlighter-rouge">http://hostname/APICall</code>, where <code class="language-plaintext highlighter-rouge">hostname</code> is the valid hostname where the
-plugin is installed and <code class="language-plaintext highlighter-rouge">APICall</code> is the call to the plugin API.</p>
 
-<p>For example, <code class="language-plaintext highlighter-rouge">http://localhost/VolumeDriver.List</code></p>
+<p>curl 7.5 またはそれ以降を利用する場合、URL の書式は<code class="language-plaintext highlighter-rouge">http://hostname/APICall</code>のようにします。
+ここで<code class="language-plaintext highlighter-rouge">hostname</code>はプラグインがインストールされている正確なホスト名を指定し、<code class="language-plaintext highlighter-rouge">APICall</code>はプラグイン API 呼び出しを指定します。</p>
+
+<p>たとえば<code class="language-plaintext highlighter-rouge">http://localhost/VolumeDriver.List</code>のようにします。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=API">API</a>, <a href="/docs.docker.jp.onthefly/search/?q=Usage">Usage</a>, <a href="/docs.docker.jp.onthefly/search/?q=plugins">plugins</a>, <a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=developer">developer</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -390,9 +382,9 @@ plugin is installed and <code class="language-plaintext highlighter-rouge">APICa
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#installing-and-using-a-plugin" class="nomunge">Installing and using a plugin</a></li>
-  <li><a href="#developing-a-plugin" class="nomunge">Developing a plugin</a></li>
-  <li><a href="#debugging-plugins" class="nomunge">Debugging plugins</a></li>
+  <li><a href="#installing-and-using-a-plugin" class="nomunge">プラグインのインストールと利用</a></li>
+  <li><a href="#developing-a-plugin" class="nomunge">プラグインの開発</a></li>
+  <li><a href="#debugging-plugins" class="nomunge">プラグインのデバッグ</a></li>
 </ul>
 
 </div>
