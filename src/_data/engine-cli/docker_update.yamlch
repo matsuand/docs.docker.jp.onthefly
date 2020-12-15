@@ -18,11 +18,10 @@ long: |-
   provide space-separated list of container names or IDs.
 @y
 long: |-
-  The `docker update` command dynamically updates container configuration.
-  You can use this command to prevent containers from consuming too many
-  resources from their Docker host.  With a single command, you can place
-  limits on a single container or on many. To specify more than one container,
-  provide space-separated list of container names or IDs.
+  `docker update`コマンドはコンテナー設定を動的に変更します。
+  このコマンドを使って、コンテナーによる Docker ホストリソースの過度の消費を抑えることができます。
+  本コマンドの 1 度の実行により、1 つのコンテナーだけでなく複数のコンテナーに対しても設定を行うことができます。
+  複数コンテナーを対象とする場合は、コンテナー名またはコンテナー ID を空白文字で区切ったリストとして指定します。
 @z
 
 @x
@@ -31,10 +30,8 @@ long: |-
   4.6, you can only update `--kernel-memory` on a stopped container or on
   a running container with kernel memory initialized.
 @y
-  With the exception of the `--kernel-memory` option, you can specify these
-  options on a running or a stopped container. On kernel version older than
-  4.6, you can only update `--kernel-memory` on a stopped container or on
-  a running container with kernel memory initialized.
+  `--kernel-memory`オプションだけは例外ですが、本コマンドのそれ以外のオプションは、実行中および停止中のコンテナーに対して指定することができます。
+  カーネルバージョンが 4.6 よりも古い場合、本コマンドは停止しているコンテナーに対してのみ、あるいはカーネルメモリが初期化されている実行中コンテナーに対してのみ、設定変更を行うことができます。
 @z
 
 @x
@@ -46,7 +43,7 @@ long: |-
 @y
   > **警告**
   >
-  > `docker update` コマンドと `docker container update` コマンドは Windows コンテナーに対してはサポートされていません。
+  > `docker update`コマンドと`docker container update`コマンドは Windows コンテナーに対してはサポートされていません。
   {: .warning }
 @z
 
@@ -227,12 +224,6 @@ options:
 @x
 - option: cpuset-cpus
   value_type: string
-@y
-- option: cpuset-cpus
-  value_type: string
-@z
-
-@x
   description: CPUs in which to allow execution (0-3, 0,1)
   deprecated: false
   experimental: false
@@ -240,6 +231,8 @@ options:
   kubernetes: false
   swarm: false
 @y
+- option: cpuset-cpus
+  value_type: string
   description: 利用を許容する CPU 数。（0-3、0,1）
   deprecated: false
   experimental: false
@@ -409,13 +402,14 @@ examples: |-
   The following sections illustrate ways to use this command.
 @y
 examples: |-
-  The following sections illustrate ways to use this command.
+  以下の各節では本コマンドの利用方法を示します。
 @z
 
 @x
   ### Update a container's cpu-shares
 @y
-  ### Update a container's cpu-shares
+  {: #update-a-containers-cpu-shares }
+  ### CPU 共有の設定変更
 @z
 
 @x
@@ -423,9 +417,10 @@ examples: |-
   name or ID. You can use `docker ps` to find these values. You can also
   use the ID returned from the `docker run` command.  Then, do the following:
 @y
-  To limit a container's cpu-shares to 512, first identify the container
-  name or ID. You can use `docker ps` to find these values. You can also
-  use the ID returned from the `docker run` command.  Then, do the following:
+  cpu-shares（CPU 共有）値の上限を 512 に制限するため、まずはコンテナー名またはコンテナー ID を確認します。
+  この値は`docker ps`からわかります。
+  コンテナー ID は`docker run`コマンドの実行直後にも表示されます。
+  そして以下のコマンドを実行します。
 @z
 
 @x
@@ -441,13 +436,14 @@ examples: |-
 @x
   ### Update a container with cpu-shares and memory
 @y
-  ### Update a container with cpu-shares and memory
+  {: #update-a-container-with-cpu-shares-and-memory }
+  ### CPU 共有およびメモリの設定変更
 @z
 
 @x
   To update multiple resource configurations for multiple containers:
 @y
-  To update multiple resource configurations for multiple containers:
+  複数のコンテナーに対して複数リソースに対する設定を更新します。
 @z
 
 @x
@@ -463,29 +459,24 @@ examples: |-
 @x
   ### Update a container's kernel memory constraints
 @y
-  ### Update a container's kernel memory constraints
+  {: #update-a-containers-kernel-memory-constraints }
+  ### カーネルメモリ制約の設定変更
 @z
 
 @x
   You can update a container's kernel memory limit using the `--kernel-memory`
   option. On kernel version older than 4.6, this option can be updated on a
-@y
-  You can update a container's kernel memory limit using the `--kernel-memory`
-  option. On kernel version older than 4.6, this option can be updated on a
-@z
-
-@x
   running container only if the container was started with `--kernel-memory`.
 @y
-  running container only if the container was started with `--kernel-memory`.
+  カーネルメモリ制限は`--kernel-memory`オプションを使って設定します。
+  カーネルバージョンが 4.6 よりも古い場合、`--kernel-memory`オプションを用いて起動されたコンテナーである場合に限って、実行中に設定変更を行うことができます。
 @z
 
 @x
   If the container was started *without* `--kernel-memory` you need to stop
   the container before updating kernel memory.
 @y
-  If the container was started *without* `--kernel-memory` you need to stop
-  the container before updating kernel memory.
+  コンテナーを`--kernel-memory`オプション **なしに** 起動していた場合、カーネルメモリを設定するにはコンテナーを停止させる必要があります。
 @z
 
 @x
@@ -493,15 +484,15 @@ examples: |-
   >
   > The `--kernel-memory` option has been deprecated since Docker 20.10.
 @y
-  > **Note**
+  > **メモ**
   >
-  > The `--kernel-memory` option has been deprecated since Docker 20.10.
+  > `--kernel-memory`オプションは Docker 20.10 において廃止決定になりました。
 @z
 
 @x
   For example, if you started a container with this command:
 @y
-  For example, if you started a container with this command:
+  たとえば以下のようなコマンドによってコンテナーを起動しているとします。
 @z
 
 @x
@@ -517,7 +508,7 @@ examples: |-
 @x
   You can update kernel memory while the container is running:
 @y
-  You can update kernel memory while the container is running:
+  コンテナー実行中にカーネルメモリを以下のようにして変更します。
 @z
 
 @x
@@ -533,7 +524,7 @@ examples: |-
 @x
   If you started a container *without* kernel memory initialized:
 @y
-  If you started a container *without* kernel memory initialized:
+  コンテナー起動時にカーネルメモリを初期化 **していない** とします。
 @z
 
 @x
@@ -548,34 +539,27 @@ examples: |-
 
 @x
   Update kernel memory of running container `test2` will fail. You need to stop
-@y
-  Update kernel memory of running container `test2` will fail. You need to stop
-@z
-
-@x
   the container before updating the `--kernel-memory` setting. The next time you
   start it, the container uses the new value.
 @y
-  the container before updating the `--kernel-memory` setting. The next time you
-  start it, the container uses the new value.
+  実行中のコンテナー`test2`に対してカーネルメモリを変更しようとしても失敗します。
+  `--kernel-memory`設定を行うには、コンテナーを停止させる必要があります。
+  次にこのコンテナーを起動したときに、新たな設定値が利用されます。
 @z
 
 @x
   Kernel version newer than (include) 4.6 does not have this limitation, you
-@y
-  Kernel version newer than (include) 4.6 does not have this limitation, you
-@z
-
-@x
   can use `--kernel-memory` the same way as other options.
 @y
-  can use `--kernel-memory` the same way as other options.
+  カーネルバージョンが 4.6 以上の場合、上の制約はありません。
+  つまり`--kernel-memory`オプションは、他のオプションと同様に利用することができます。
 @z
 
 @x
   ### Update a container's restart policy
 @y
-  ### Update a container's restart policy
+  {: #update-a-containers-restart-policy }
+  ### コンテナーの再起動ポリシーの設定変更
 @z
 
 @x
@@ -583,15 +567,14 @@ examples: |-
   restart policy takes effect instantly after you run `docker update` on a
   container.
 @y
-  You can change a container's restart policy on a running container. The new
-  restart policy takes effect instantly after you run `docker update` on a
-  container.
+  実行中コンテナーに対して、コンテナーの再起動ポリシーを変更することができます。
+  新たな再起動ポリシーは、`docker update`を実行した後、ただちに適用されます。
 @z
 
 @x
   To update restart policy for one or more containers:
 @y
-  To update restart policy for one or more containers:
+  1 つまたは複数のコンテナーにおける再起動ポリシーを更新するには、以下のようにします。
 @z
 
 @x
@@ -609,9 +592,8 @@ examples: |-
   policy for it. The `AutoRemove` and `RestartPolicy` are mutually exclusive for the
   container.
 @y
-  Note that if the container is started with "--rm" flag, you cannot update the restart
-  policy for it. The `AutoRemove` and `RestartPolicy` are mutually exclusive for the
-  container.
+  コンテナーの起動時に「--rm」フラグを指定していた場合、このコンテナーの再起動ポリシーを更新することはできません。
+  `AutoRemove`と`RestartPolicy`は同時に指定することができません。
 @z
 
 @x

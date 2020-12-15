@@ -1,4 +1,4 @@
-<!-- Page generated 2020-12-06 20:42:19 +0900-->
+<!-- Page generated 2020-12-15 13:14:25 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker rm | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker rm" />
   <meta property="og:description" content="docker rm: 1 つまたは複数のコンテナーを削除します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-06T20:42:19+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-15T13:14:25+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/rm/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-06T20:42:19+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-15T13:14:25+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker rm","description":"docker rm: 1 つまたは複数のコンテナーを削除します。","url":"https://docs.docker.com/engine/reference/commandline/rm/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker rm</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><!--
+                        <section class="section"><h1>docker rm</h1><!--
 This page is automatically generated from Docker's source code. If you want to
 suggest a change to the text that appears here, open a ticket or pull request
 in the source repository on GitHub:
@@ -180,56 +180,54 @@ https://github.com/docker/cli
 
 <h3 id="remove-a-container">コンテナーの削除</h3>
 
-<p>This removes the container referenced under the link <code class="language-plaintext highlighter-rouge">/redis</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">/redis</code>リンクとして参照されているコンテナーを削除します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm</span> /redis
 
 /redis
 </code></pre></div></div>
 
-<h3 id="remove-a-link-specified-with---link-on-the-default-bridge-network">Remove a link specified with <code class="language-plaintext highlighter-rouge">--link</code> on the default bridge network</h3>
+<h3 id="remove-a-link-specified-with---link-on-the-default-bridge-network">デフォルトプリッジネットワーク上での<code class="language-plaintext highlighter-rouge">--link</code>を使ったリンク削除</h3>
 
-<p>This removes the underlying link between <code class="language-plaintext highlighter-rouge">/webapp</code> and the <code class="language-plaintext highlighter-rouge">/redis</code>
-containers on the default bridge network, removing all network communication
-between the two containers. This does not apply when <code class="language-plaintext highlighter-rouge">--link</code> is used with
-user-specified networks.</p>
+<p>以下は、デフォルトブリッジネットワーク上の<code class="language-plaintext highlighter-rouge">/webapp</code>コンテナーと<code class="language-plaintext highlighter-rouge">/redis</code>コンテナーとの間にあるリンクを削除します。
+これによって両コンテナー間のネットワーク接続がすべて削除されます。
+これは<code class="language-plaintext highlighter-rouge">--link</code>フラグがユーザー指定ネットワークに対して用いられている場合には適用されません。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm</span> <span class="nt">--link</span> /webapp/redis
 
 /webapp/redis
 </code></pre></div></div>
 
-<h3 id="force-remove-a-running-container">Force-remove a running container</h3>
+<h3 id="force-remove-a-running-container">実行中コンテナーの強制削除</h3>
 
-<p>This command force-removes a running container.</p>
+<p>以下のコマンドは実行中コンテナーを強制削除します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm</span> <span class="nt">--force</span> redis
 
 redis
 </code></pre></div></div>
 
-<p>The main process inside the container referenced under the link <code class="language-plaintext highlighter-rouge">redis</code> will receive
-<code class="language-plaintext highlighter-rouge">SIGKILL</code>, then the container will be removed.</p>
+<p><code class="language-plaintext highlighter-rouge">redis</code>というリンクとして参照されているコンテナーの内部にて、メインのプロセスが<code class="language-plaintext highlighter-rouge">SIGKILL</code>を受け取り、その次にコンテナーが削除されます。</p>
 
-<h3 id="remove-all-stopped-containers">Remove all stopped containers</h3>
+<h3 id="remove-all-stopped-containers">停止中コンテナーの全削除</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm</span> <span class="si">$(</span>docker ps <span class="nt">-a</span> <span class="nt">-q</span><span class="si">)</span>
 </code></pre></div></div>
 
-<p>This command deletes all stopped containers. The command
-<code class="language-plaintext highlighter-rouge">docker ps -a -q</code> above returns all existing container IDs and passes them to
-the <code class="language-plaintext highlighter-rouge">rm</code> command which deletes them. Running containers are not deleted.</p>
+<p>上のコマンドは停止しているコンテナーをすべて削除します。
+上において<code class="language-plaintext highlighter-rouge">docker ps -a -q</code>コマンドが、存在するコンテナー ID すべてを取得し、それが<code class="language-plaintext highlighter-rouge">rm</code>コマンドに受け渡されコンテナーが削除されます。
+実行中のコンテナーは削除されません。</p>
 
-<h3 id="remove-a-container-and-its-volumes">Remove a container and its volumes</h3>
+<h3 id="remove-a-container-and-its-volumes">コンテナーとそのボリュームの削除</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm</span> <span class="nt">-v</span> redis
 redis
 </code></pre></div></div>
 
-<p>This command removes the container and any volumes associated with it.
-Note that if a volume was specified with a name, it will not be removed.</p>
+<p>上のコマンドはコンテナーを削除した上で、これに関連するボリュームもすべて削除します。
+なおボリュームに名前が指定されている場合、そのボリュームは削除されません。</p>
 
-<h3 id="remove-a-container-and-selectively-remove-volumes">Remove a container and selectively remove volumes</h3>
+<h3 id="remove-a-container-and-selectively-remove-volumes">コンテナーの削除と特定ボリュームの削除</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker create <span class="nt">-v</span> awesome:/foo <span class="nt">-v</span> /bar <span class="nt">--name</span> hello redis
 hello
@@ -237,9 +235,8 @@ hello
 <span class="nv">$ </span>docker <span class="nb">rm</span> <span class="nt">-v</span> hello
 </code></pre></div></div>
 
-<p>In this example, the volume for <code class="language-plaintext highlighter-rouge">/foo</code> remains intact, but the volume for
-<code class="language-plaintext highlighter-rouge">/bar</code> is removed. The same behavior holds for volumes inherited with
-<code class="language-plaintext highlighter-rouge">--volumes-from</code>.</p>
+<p>上の例において<code class="language-plaintext highlighter-rouge">/foo</code>に対するボリュームはそのまま残りますが、<code class="language-plaintext highlighter-rouge">/bar</code>に対するボリュームは削除されます。
+<code class="language-plaintext highlighter-rouge">--volumes-from</code>によって継承されたボリュームに対しても、同じ動作になります。</p>
 
 <h2 id="parent-command">上位コマンド</h2>
 
@@ -297,11 +294,11 @@ hello
   <li><a href="#examples" class="nomunge">利用例</a>
     <ul>
       <li><a href="#remove-a-container" class="nomunge">コンテナーの削除</a></li>
-      <li><a href="#remove-a-link-specified-with---link-on-the-default-bridge-network" class="nomunge">Remove a link specified with --link on the default bridge network</a></li>
-      <li><a href="#force-remove-a-running-container" class="nomunge">Force-remove a running container</a></li>
-      <li><a href="#remove-all-stopped-containers" class="nomunge">Remove all stopped containers</a></li>
-      <li><a href="#remove-a-container-and-its-volumes" class="nomunge">Remove a container and its volumes</a></li>
-      <li><a href="#remove-a-container-and-selectively-remove-volumes" class="nomunge">Remove a container and selectively remove volumes</a></li>
+      <li><a href="#remove-a-link-specified-with---link-on-the-default-bridge-network" class="nomunge">デフォルトプリッジネットワーク上での--linkを使ったリンク削除</a></li>
+      <li><a href="#force-remove-a-running-container" class="nomunge">実行中コンテナーの強制削除</a></li>
+      <li><a href="#remove-all-stopped-containers" class="nomunge">停止中コンテナーの全削除</a></li>
+      <li><a href="#remove-a-container-and-its-volumes" class="nomunge">コンテナーとそのボリュームの削除</a></li>
+      <li><a href="#remove-a-container-and-selectively-remove-volumes" class="nomunge">コンテナーの削除と特定ボリュームの削除</a></li>
     </ul>
   </li>
   <li><a href="#parent-command" class="nomunge">上位コマンド</a></li>

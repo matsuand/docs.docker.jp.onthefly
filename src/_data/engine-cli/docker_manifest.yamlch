@@ -24,9 +24,8 @@ long: |-
   The docker manifest command also gives users additional information such as the os
   and architecture an image was built for.
 @y
-  A single manifest is information about an image, such as layers, size, and digest.
-  The docker manifest command also gives users additional information such as the os
-  and architecture an image was built for.
+  1 つのマニフェストには、イメージに関するレイヤー、サイズ、ダイジェスト値などの情報を含みます。
+  docker manifest コマンドを使うと、これに加えてイメージがビルド対象とした OS やアーキテクチャーなどの情報も示されます。
 @z
 
 @x
@@ -34,9 +33,8 @@ long: |-
   more (ideally more than one) image names. It can then be used in the same way as
   an image name in `docker pull` and `docker run` commands, for example.
 @y
-  A manifest list is a list of image layers that is created by specifying one or
-  more (ideally more than one) image names. It can then be used in the same way as
-  an image name in `docker pull` and `docker run` commands, for example.
+  マニフェストリストは、1 つまたは複数（できれば複数）のイメージ名の指定によって生成されたイメージレイヤーのリストのことです。
+  そこでこの情報は、たとえば`docker pull`コマンドや`docker run`コマンドのようなイメージ名を指定するコマンドにおいて、同様に利用することができます。
 @z
 
 @x
@@ -45,10 +43,9 @@ long: |-
   to as "multi-arch images". However, a user could create a manifest list that points
   to two images -- one for windows on amd64, and one for darwin on amd64.
 @y
-  Ideally a manifest list is created from images that are identical in function for
-  different os/arch combinations. For this reason, manifest lists are often referred
-  to as "multi-arch images". However, a user could create a manifest list that points
-  to two images -- one for windows on amd64, and one for darwin on amd64.
+  マニフェストリストは理想で言えば、さまざまな OS やアーキテクチャーを組み合わせても同等に機能するイメージを集めて生成します。
+  こういったことからマニフェストリストは「マルチアーキテクチャーのイメージ」（multi-arch images）と呼ばれることがあります。
+  2 つのイメージとして 1 つは Windows の amd64 用、もう 1 つは Darwin の amd64 用といったイメージをマニフェストリストとして生成することもできます。
 @z
 
 @x
@@ -94,39 +91,23 @@ long: |-
 @x
   ```bash
   Usage:  docker manifest create MANIFEST_LIST MANIFEST [MANIFEST...]
+
+  Create a local manifest list for annotating and pushing to a registry
+
+  Options:
+    -a, --amend      Amend an existing manifest list
+        --insecure   Allow communication with an insecure registry
+        --help       Print usage
+  ```
 @y
   ```bash
   Usage:  docker manifest create MANIFEST_LIST MANIFEST [MANIFEST...]
-@z
 
-@x
   Create a local manifest list for annotating and pushing to a registry
-@y
-  Create a local manifest list for annotating and pushing to a registry
-@z
 
-@x
   Options:
-@y
-  Options:
-@z
-
-@x
     -a, --amend      Amend an existing manifest list
-@y
-    -a, --amend      Amend an existing manifest list
-@z
-
-@x
         --insecure   Allow communication with an insecure registry
-@y
-        --insecure   Allow communication with an insecure registry
-@z
-
-@x
-        --help       Print usage
-  ```
-@y
         --help       Print usage
   ```
 @z
@@ -140,62 +121,31 @@ long: |-
 @x
   ```bash
   Usage:  docker manifest annotate [OPTIONS] MANIFEST_LIST MANIFEST
+
+  Add additional information to a local image manifest
+
+  Options:
+        --arch string               Set architecture
+        --help                      Print usage
+        --os string                 Set operating system
+        --os-version string         Set operating system version
+        --os-features stringSlice   Set operating system feature
+        --variant string            Set architecture variant
+
+  ```
 @y
   ```bash
   Usage:  docker manifest annotate [OPTIONS] MANIFEST_LIST MANIFEST
-@z
 
-@x
   Add additional information to a local image manifest
-@y
-  Add additional information to a local image manifest
-@z
 
-@x
   Options:
-@y
-  Options:
-@z
-
-@x
         --arch string               Set architecture
-@y
-        --arch string               Set architecture
-@z
-
-@x
         --help                      Print usage
-@y
-        --help                      Print usage
-@z
-
-@x
         --os string                 Set operating system
-@y
-        --os string                 Set operating system
-@z
-
-@x
         --os-version string         Set operating system version
-@y
-        --os-version string         Set operating system version
-@z
-
-@x
         --os-features stringSlice   Set operating system feature
-@y
-        --os-features stringSlice   Set operating system feature
-@z
-
-@x
         --variant string            Set architecture variant
-@y
-        --variant string            Set architecture variant
-@z
-
-@x
-  ```
-@y
   ```
 @z
 
@@ -208,39 +158,23 @@ long: |-
 @x
   ```bash
   Usage:  docker manifest push [OPTIONS] MANIFEST_LIST
+
+  Push a manifest list to a repository
+
+  Options:
+        --help       Print usage
+        --insecure   Allow push to an insecure registry
+    -p, --purge      Remove the local manifest list after push
+  ```
 @y
   ```bash
   Usage:  docker manifest push [OPTIONS] MANIFEST_LIST
-@z
 
-@x
   Push a manifest list to a repository
-@y
-  Push a manifest list to a repository
-@z
 
-@x
   Options:
-@y
-  Options:
-@z
-
-@x
         --help       Print usage
-@y
-        --help       Print usage
-@z
-
-@x
         --insecure   Allow push to an insecure registry
-@y
-        --insecure   Allow push to an insecure registry
-@z
-
-@x
-    -p, --purge      Remove the local manifest list after push
-  ```
-@y
     -p, --purge      Remove the local manifest list after push
   ```
 @z
@@ -248,51 +182,37 @@ long: |-
 @x
   ### Working with insecure registries
 @y
-  ### Working with insecure registries
+  {: #working-with-insecure-registries }
+  ### セキュアでないレジストリの操作
 @z
 
 @x
   The manifest command interacts solely with a Docker registry. Because of this,
   it has no way to query the engine for the list of allowed insecure registries.
   To allow the CLI to interact with an insecure registry, some `docker manifest`
-@y
-  The manifest command interacts solely with a Docker registry. Because of this,
-  it has no way to query the engine for the list of allowed insecure registries.
-  To allow the CLI to interact with an insecure registry, some `docker manifest`
-@z
-
-@x
   commands have an `--insecure` flag. For each transaction, such as a `create`,
-@y
-  commands have an `--insecure` flag. For each transaction, such as a `create`,
-@z
-
-@x
   which queries a registry, the `--insecure` flag must be specified. This flag
   tells the CLI that this registry call may ignore security concerns like missing
-@y
-  which queries a registry, the `--insecure` flag must be specified. This flag
-  tells the CLI that this registry call may ignore security concerns like missing
-@z
-
-@x
   or self-signed certificates. Likewise, on a `manifest push` to an insecure
-@y
-  or self-signed certificates. Likewise, on a `manifest push` to an insecure
-@z
-
-@x
   registry, the `--insecure` flag must be specified. If this is not used with an
   insecure registry, the manifest command fails to find a registry that meets the
   default requirements.
+@y
+  マニフェストに関するコマンドは Docker レジストリとの間で独自にやりとりを行います。
+  このためセキュアでないレジストリであっても接続を認めるかどうかを Engine に対して問い合わせる手段を持っていません。
+  CLI においてセキュアでないレジストリへの接続を許可するため、`docker manifest`の中には`--insecure`フラグを持つものがあります。
+  `create`のようにレジストリへのクエリーを行うトランザクションに対しては`--insecure`フラグの指定がなければなりません。
+  このフラグは、レジストリに対する呼び出し時に、証明書がなかったり自己署名の証明書であったりしても、そういったセキュリティ上のリスクを無視する場合があることを CLI に対して伝えるものです。
+  同様にして`manifest push`をセキュアでないレジストリに対して実行する際も、`--insecure`フラグの指定が必要になります。
+  セキュアでないレジストリに対してこのフラグをつけずにコマンド実行すると、マニフェストに関するコマンドはデフォルトで要求される条件を満たすレジストリが見つからなかったとして失敗します。
+@z
+
+@x
 usage: docker manifest COMMAND
 pname: docker
 plink: docker.yaml
 cname:
 @y
-  registry, the `--insecure` flag must be specified. If this is not used with an
-  insecure registry, the manifest command fails to find a registry that meets the
-  default requirements.
 usage: docker manifest COMMAND
 pname: docker
 plink: docker.yaml
@@ -301,39 +221,27 @@ cname:
 
 @x
 - docker manifest annotate
+- docker manifest create
+- docker manifest inspect
+- docker manifest push
+- docker manifest rm
 @y
 - docker manifest annotate
-@z
-
-@x
 - docker manifest create
-@y
-- docker manifest create
-@z
-
-@x
 - docker manifest inspect
-@y
-- docker manifest inspect
-@z
-
-@x
 - docker manifest push
 - docker manifest rm
-clink:
-@y
-- docker manifest push
-- docker manifest rm
-clink:
 @z
 
 @x
+clink:
 - docker_manifest_annotate.yaml
 - docker_manifest_create.yaml
 - docker_manifest_inspect.yaml
 - docker_manifest_push.yaml
 - docker_manifest_rm.yaml
 @y
+clink:
 - docker_manifest_annotate.yaml
 - docker_manifest_create.yaml
 - docker_manifest_inspect.yaml
@@ -346,16 +254,12 @@ examples: |-
   ### Inspect an image's manifest object
 @y
 examples: |-
-  ### Inspect an image's manifest object
+  {: #inspect-an-images-manifest-object }
+  ### イメージ内のマニフェストオブジェクトの確認
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker manifest inspect hello-world
   {
           "schemaVersion": 2,
@@ -375,6 +279,7 @@ examples: |-
   }
   ```
 @y
+  ```bash
   $ docker manifest inspect hello-world
   {
           "schemaVersion": 2,
@@ -398,50 +303,34 @@ examples: |-
 @x
   ### Inspect an image's manifest and get the os/arch info
 @y
-  ### Inspect an image's manifest and get the os/arch info
+  {: #inspect-an-images-manifest-and-get-the-osarch-info }
+  ### イメージ内のマニフェストと OS/アーキテクチャー情報の確認
 @z
 
 @x
   The `docker manifest inspect` command takes an optional `--verbose` flag
   that gives you the image's name (Ref), and architecture and os (Platform).
 @y
-  The `docker manifest inspect` command takes an optional `--verbose` flag
-  that gives you the image's name (Ref), and architecture and os (Platform).
+  `docker manifest inspect`コマンドには任意のフラグとして`--verbose`があり、イメージ名（Ref）、アークテクチャーと OS（Platform）を表示します。
 @z
 
 @x
   Just as with other docker commands that take image names, you can refer to an image with or
-@y
-  Just as with other docker commands that take image names, you can refer to an image with or
-@z
-
-@x
   without a tag, or by digest (e.g. `hello-world@sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f`).
 @y
-  without a tag, or by digest (e.g. `hello-world@sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f`).
+  イメージ名を取り扱う Docker コマンドと同じく、イメージの参照にあたってタグはつけてもつけなくてもよく、またダイジェスト値により参照することもできます（つまり`hello-world@sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f`など）。
 @z
 
 @x
   Here is an example of inspecting an image's manifest with the `--verbose` flag:
 @y
-  Here is an example of inspecting an image's manifest with the `--verbose` flag:
+  以下に示す例は、イメージのマニフェスト確認にあたって`--verbose`フラグを利用したものです。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker manifest inspect --verbose hello-world
   {
-@y
-  $ docker manifest inspect --verbose hello-world
-  {
-@z
-
-@x
           "Ref": "docker.io/library/hello-world:latest",
           "Digest": "sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f",
           "SchemaV2Manifest": {
@@ -467,6 +356,9 @@ examples: |-
   }
   ```
 @y
+  ```bash
+  $ docker manifest inspect --verbose hello-world
+  {
           "Ref": "docker.io/library/hello-world:latest",
           "Digest": "sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f",
           "SchemaV2Manifest": {
@@ -496,7 +388,8 @@ examples: |-
 @x
   ### Create and push a manifest list
 @y
-  ### Create and push a manifest list
+  {: #create-and-push-a-manifest-list }
+  ### マニフェストリストの生成とプッシュ
 @z
 
 @x
@@ -507,12 +400,11 @@ examples: |-
   manifest list with the registry name or IP and port.
   This is similar to tagging an image and pushing it to a foreign registry.
 @y
-  To create a manifest list, you first `create` the manifest list locally by
-  specifying the constituent images you would like to have included in your
-  manifest list. Keep in mind that this is pushed to a registry, so if you want to
-  push to a registry other than the docker registry, you need to create your
-  manifest list with the registry name or IP and port.
-  This is similar to tagging an image and pushing it to a foreign registry.
+  マニフェストリストを生成するには、まずローカルにてマニフェストリストを生成する`create`コマンドを実行します。
+  その実行において、マニフェストリストに含めたいイメージを指定します。
+  このマニフェストリストはレジストリにプッシュされるものです。
+  したがって Docker レジストリ以外のレジストリにプッシュを行うのであれば、レジストリ名、IP、ポートを含めてマニフェストリストを生成します。
+  これはイメージにタグづけを行って Docker レジストリ以外のレジストリにプッシュする場合と同様です。
 @z
 
 @x
@@ -520,69 +412,46 @@ examples: |-
   `annotate` it. Annotations allowed are the architecture and operating system
   (overriding the image's current values), os features, and an architecture variant.
 @y
-  After you have created your local copy of the manifest list, you may optionally
-  `annotate` it. Annotations allowed are the architecture and operating system
-  (overriding the image's current values), os features, and an architecture variant.
+  マニフェストリストのコピーをローカルに生成したら、任意の操作としてそのリストに注釈を追加する`annotate`を実行できます。
+  注釈として追加できる内容は、アーキテクチャーとオペレーティングシステム（イメージが持つ現在値を上書きします）、OS 機能、アークテクチャーバリアントです。
 @z
 
 @x
   Finally, you need to `push` your manifest list to the desired registry. Below are
   descriptions of these three commands, and an example putting them all together.
 @y
-  Finally, you need to `push` your manifest list to the desired registry. Below are
-  descriptions of these three commands, and an example putting them all together.
+  最後にマニフェストリストを`push`コマンドにより目的のレジストリにプッシュします。
+  以下に示すのはここまでの 3 つのコマンドの説明と、それらを合わせた利用例です。
 @z
 
 @x
   ```bash
   $ docker manifest create 45.55.81.106:5000/coolapp:v1 \
-@y
-  ```bash
-  $ docker manifest create 45.55.81.106:5000/coolapp:v1 \
-@z
-
-@x
       45.55.81.106:5000/coolapp-ppc64le-linux:v1 \
-@y
-      45.55.81.106:5000/coolapp-ppc64le-linux:v1 \
-@z
-
-@x
       45.55.81.106:5000/coolapp-arm-linux:v1 \
-@y
-      45.55.81.106:5000/coolapp-arm-linux:v1 \
-@z
-
-@x
       45.55.81.106:5000/coolapp-amd64-linux:v1 \
-@y
-      45.55.81.106:5000/coolapp-amd64-linux:v1 \
-@z
-
-@x
       45.55.81.106:5000/coolapp-amd64-windows:v1
-@y
-      45.55.81.106:5000/coolapp-amd64-windows:v1
-@z
 
-@x
   Created manifest list 45.55.81.106:5000/coolapp:v1
   ```
 @y
+  ```bash
+  $ docker manifest create 45.55.81.106:5000/coolapp:v1 \
+      45.55.81.106:5000/coolapp-ppc64le-linux:v1 \
+      45.55.81.106:5000/coolapp-arm-linux:v1 \
+      45.55.81.106:5000/coolapp-amd64-linux:v1 \
+      45.55.81.106:5000/coolapp-amd64-windows:v1
+
   Created manifest list 45.55.81.106:5000/coolapp:v1
   ```
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker manifest annotate 45.55.81.106:5000/coolapp:v1 45.55.81.106:5000/coolapp-arm-linux --arch arm
   ```
 @y
+  ```bash
   $ docker manifest annotate 45.55.81.106:5000/coolapp:v1 45.55.81.106:5000/coolapp-arm-linux --arch arm
   ```
 @z
@@ -595,6 +464,8 @@ examples: |-
   Pushed manifest 45.55.81.106:5000/coolapp@sha256:39dc41c658cf25f33681a41310372f02728925a54aac3598310bfb1770615fc9 with digest: sha256:df436846483aff62bad830b730a0d3b77731bcf98ba5e470a8bbb8e9e346e4e8
   Pushed manifest 45.55.81.106:5000/coolapp@sha256:f91b1145cd4ac800b28122313ae9e88ac340bb3f1e3a4cd3e59a3648650f3275 with digest: sha256:5bb8e50aa2edd408bdf3ddf61efb7338ff34a07b762992c9432f1c02fc0e5e62
   sha256:050b213d49d7673ba35014f21454c573dcbec75254a08f4a7c34f66a47c06aba
+
+  ```
 @y
   ```bash
   $ docker manifest push 45.55.81.106:5000/coolapp:v1
@@ -603,18 +474,14 @@ examples: |-
   Pushed manifest 45.55.81.106:5000/coolapp@sha256:39dc41c658cf25f33681a41310372f02728925a54aac3598310bfb1770615fc9 with digest: sha256:df436846483aff62bad830b730a0d3b77731bcf98ba5e470a8bbb8e9e346e4e8
   Pushed manifest 45.55.81.106:5000/coolapp@sha256:f91b1145cd4ac800b28122313ae9e88ac340bb3f1e3a4cd3e59a3648650f3275 with digest: sha256:5bb8e50aa2edd408bdf3ddf61efb7338ff34a07b762992c9432f1c02fc0e5e62
   sha256:050b213d49d7673ba35014f21454c573dcbec75254a08f4a7c34f66a47c06aba
-@z
-
-@x
-  ```
-@y
   ```
 @z
 
 @x
   ### Inspect a manifest list
 @y
-  ### Inspect a manifest list
+  {: #inspect-a-manifest-list }
+  ### マニフェストリストの確認
 @z
 
 @x
@@ -714,69 +581,39 @@ examples: |-
 @x
   ### Push to an insecure registry
 @y
-  ### Push to an insecure registry
+  {: #push-to-an-insecure-registry }
+  ### セキュアでないレジストリへのプッシュ
 @z
 
 @x
   Here is an example of creating and pushing a manifest list using a known
   insecure registry.
 @y
-  Here is an example of creating and pushing a manifest list using a known
-  insecure registry.
+  以下の例はマニフェストリストを生成して、セキュアでないことがわかっているレジストリにプッシュするものです。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker manifest create --insecure myprivateregistry.mycompany.com/repo/image:1.0 \
-@y
-  $ docker manifest create --insecure myprivateregistry.mycompany.com/repo/image:1.0 \
-@z
-
-@x
       myprivateregistry.mycompany.com/repo/image-linux-ppc64le:1.0 \
-@y
-      myprivateregistry.mycompany.com/repo/image-linux-ppc64le:1.0 \
-@z
-
-@x
       myprivateregistry.mycompany.com/repo/image-linux-s390x:1.0 \
-@y
-      myprivateregistry.mycompany.com/repo/image-linux-s390x:1.0 \
-@z
-
-@x
       myprivateregistry.mycompany.com/repo/image-linux-arm:1.0 \
-@y
-      myprivateregistry.mycompany.com/repo/image-linux-arm:1.0 \
-@z
-
-@x
       myprivateregistry.mycompany.com/repo/image-linux-armhf:1.0 \
-@y
-      myprivateregistry.mycompany.com/repo/image-linux-armhf:1.0 \
-@z
-
-@x
       myprivateregistry.mycompany.com/repo/image-windows-amd64:1.0 \
-@y
-      myprivateregistry.mycompany.com/repo/image-windows-amd64:1.0 \
-@z
-
-@x
       myprivateregistry.mycompany.com/repo/image-linux-amd64:1.0
-@y
-      myprivateregistry.mycompany.com/repo/image-linux-amd64:1.0
-@z
 
-@x
   $ docker manifest push --insecure myprivateregistry.mycompany.com/repo/image:tag
   ```
 @y
+  ```bash
+  $ docker manifest create --insecure myprivateregistry.mycompany.com/repo/image:1.0 \
+      myprivateregistry.mycompany.com/repo/image-linux-ppc64le:1.0 \
+      myprivateregistry.mycompany.com/repo/image-linux-s390x:1.0 \
+      myprivateregistry.mycompany.com/repo/image-linux-arm:1.0 \
+      myprivateregistry.mycompany.com/repo/image-linux-armhf:1.0 \
+      myprivateregistry.mycompany.com/repo/image-windows-amd64:1.0 \
+      myprivateregistry.mycompany.com/repo/image-linux-amd64:1.0
+
   $ docker manifest push --insecure myprivateregistry.mycompany.com/repo/image:tag
   ```
 @z
@@ -790,13 +627,12 @@ examples: |-
   > on a locally-stored manifest list. Be sure to keep in mind that locally-stored
   > manifest lists are never used by the engine on a `docker pull`.
 @y
-  > **Note**
+  > **メモ**
   >
-  > The `--insecure` flag is not required to annotate a manifest list,
-  > since annotations are to a locally-stored copy of a manifest list. You may also
-  > skip the `--insecure` flag if you are performing a `docker manifest inspect`
-  > on a locally-stored manifest list. Be sure to keep in mind that locally-stored
-  > manifest lists are never used by the engine on a `docker pull`.
+  > `--insecure`フラグはマニフェストリストに annotate する際には必要ありません。
+  > 注釈はローカルに保存されたマニフェストリストのコピーに対して行われるためです。
+  > また`docker manifest inspect`もローカル保存されたマニフェストリストに対しての処理であるため`--insecure`はつける必要がありません。
+  > なおローカルに保存されているマニフェストリストは、`docker pull`を実行しても Engine がこれを利用することはありません。
 @z
 
 @x

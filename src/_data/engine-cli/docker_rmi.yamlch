@@ -6,44 +6,39 @@ command: docker rmi
 short: Remove one or more images
 @y
 command: docker rmi
-short: Remove one or more images
+short: 1 つまたは複数のイメージを削除します。
 @z
 
 @x
 long: |-
-@y
-long: |-
-@z
-
-@x
   Removes (and un-tags) one or more images from the host node. If an image has
   multiple tags, using this command with the tag as a parameter only removes the
   tag. If the tag is the only one for the image, both the image and the tag are
   removed.
 @y
-  Removes (and un-tags) one or more images from the host node. If an image has
-  multiple tags, using this command with the tag as a parameter only removes the
-  tag. If the tag is the only one for the image, both the image and the tag are
-  removed.
+long: |-
+  ホストノードから 1 つまたは複数のイメージを削除（そしてタグづけ解除）します。
+  イメージに複数のタグがつけられている場合、パラメーターにそのタグを指定して本コマンドを実行すればそのタグだけが削除されます。
+  そのタグがイメージにとって唯一のものであれば、イメージとタグがともに削除されます。
 @z
 
 @x
   This does not remove images from a registry. You cannot remove an image of a
-@y
-  This does not remove images from a registry. You cannot remove an image of a
-@z
-
-@x
   running container unless you use the `-f` option. To see all images on a host
   use the [`docker image ls`](images.md) command.
+@y
+  このコマンドはイメージをレジストリから削除するものではありません。
+  実行中コンテナーのイメージは`-f`オプションをつけない限りは削除することができません。
+  ホスト上のイメージをすべて確認するには [`docker image ls`](images.md) コマンドを使います。
+@z
+
+@x
 usage: docker rmi [OPTIONS] IMAGE [IMAGE...]
 pname: docker
 plink: docker.yaml
 options:
 @y
-  running container unless you use the `-f` option. To see all images on a host
-  use the [`docker image ls`](images.md) command.
-usage: docker rmi [OPTIONS] IMAGE [IMAGE...]
+usage: docker rmi [オプション] IMAGE [IMAGE...]
 pname: docker
 plink: docker.yaml
 options:
@@ -65,7 +60,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Force removal of the image
+  description: イメージを強制的に削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -87,7 +82,7 @@ options:
 - option: no-prune
   value_type: bool
   default_value: "false"
-  description: Do not delete untagged parents
+  description: タグづけされていない親イメージは削除しません。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -103,26 +98,23 @@ examples: |-
   is removed by tag.
 @y
 examples: |-
-  You can remove an image using its short or long ID, its tag, or its digest. If
-  an image has one or more tags referencing it, you must remove all of them before
-  the image is removed. Digest references are removed automatically when an image
-  is removed by tag.
+  イメージの削除には、短い ID と長い ID、タグ、あるいは ダイジェスト値を指定します。
+  イメージを参照するタグが存在する場合は、イメージを削除する前にそのタグを削除しておかなければなりません。
+  ダイジェスト値による参照は、イメージをタグによって削除した際に、自動的に削除されます。
 @z
 
 @x
   ```bash
   $ docker images
-@y
-  ```bash
-  $ docker images
-@z
 
-@x
   REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
   test1                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
   test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
   test2                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
 @y
+  ```bash
+  $ docker images
+
   REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
   test1                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
   test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
@@ -131,67 +123,57 @@ examples: |-
 
 @x
   $ docker rmi fd484f19954f
+
+  Error: Conflict, cannot delete image fd484f19954f because it is tagged in multiple repositories, use -f to force
+  2013/12/11 05:47:16 Error: failed to remove one or more images
 @y
   $ docker rmi fd484f19954f
-@z
 
-@x
-  Error: Conflict, cannot delete image fd484f19954f because it is tagged in multiple repositories, use -f to force
-  2013/12/11 05:47:16 Error: failed to remove one or more images
-@y
   Error: Conflict, cannot delete image fd484f19954f because it is tagged in multiple repositories, use -f to force
   2013/12/11 05:47:16 Error: failed to remove one or more images
 @z
 
 @x
   $ docker rmi test1:latest
+
+  Untagged: test1:latest
 @y
   $ docker rmi test1:latest
-@z
 
-@x
-  Untagged: test1:latest
-@y
   Untagged: test1:latest
 @z
 
 @x
   $ docker rmi test2:latest
+
+  Untagged: test2:latest
 @y
   $ docker rmi test2:latest
-@z
 
-@x
-  Untagged: test2:latest
-@y
   Untagged: test2:latest
 @z
 
 @x
   $ docker images
-@y
-  $ docker images
-@z
 
-@x
   REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
   test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
 @y
+  $ docker images
+
   REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
   test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
 @z
 
 @x
   $ docker rmi test:latest
-@y
-  $ docker rmi test:latest
-@z
 
-@x
   Untagged: test:latest
   Deleted: fd484f19954f4920da7ff372b5067f5b7ddb2fd3830cecd17b96ea9e286ba5b8
   ```
 @y
+  $ docker rmi test:latest
+
   Untagged: test:latest
   Deleted: fd484f19954f4920da7ff372b5067f5b7ddb2fd3830cecd17b96ea9e286ba5b8
   ```
@@ -201,24 +183,21 @@ examples: |-
   If you use the `-f` flag and specify the image's short or long ID, then this
   command untags and removes all images that match the specified ID.
 @y
-  If you use the `-f` flag and specify the image's short or long ID, then this
-  command untags and removes all images that match the specified ID.
+  `-f`フラグを使い、短いイメージ ID または長いイメージ ID を指定した場合、このコマンドは指定した ID に合致するイメージのタグづけを解除した上で、イメージすべてを削除します。
 @z
 
 @x
   ```bash
   $ docker images
-@y
-  ```bash
-  $ docker images
-@z
 
-@x
   REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
   test1                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
   test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
   test2                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
 @y
+  ```bash
+  $ docker images
+
   REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
   test1                     latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
   test                      latest              fd484f19954f        23 seconds ago      7 B (virtual 4.964 MB)
@@ -227,17 +206,15 @@ examples: |-
 
 @x
   $ docker rmi -f fd484f19954f
-@y
-  $ docker rmi -f fd484f19954f
-@z
 
-@x
   Untagged: test1:latest
   Untagged: test:latest
   Untagged: test2:latest
   Deleted: fd484f19954f4920da7ff372b5067f5b7ddb2fd3830cecd17b96ea9e286ba5b8
   ```
 @y
+  $ docker rmi -f fd484f19954f
+
   Untagged: test1:latest
   Untagged: test:latest
   Untagged: test2:latest
@@ -248,26 +225,20 @@ examples: |-
 @x
   An image pulled by digest has no tag associated with it:
 @y
-  An image pulled by digest has no tag associated with it:
+  ダイジェスト値を使ってプルを行ったイメージにはタグが関連づけられていません。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker images --digests
-@y
-  $ docker images --digests
-@z
 
-@x
   REPOSITORY                     TAG       DIGEST                                                                    IMAGE ID        CREATED         SIZE
   localhost:5000/test/busybox    <none>    sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf   4986bf8c1536    9 weeks ago     2.43 MB
   ```
 @y
+  ```bash
+  $ docker images --digests
+
   REPOSITORY                     TAG       DIGEST                                                                    IMAGE ID        CREATED         SIZE
   localhost:5000/test/busybox    <none>    sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf   4986bf8c1536    9 weeks ago     2.43 MB
   ```
@@ -276,7 +247,7 @@ examples: |-
 @x
   To remove an image using its digest:
 @y
-  To remove an image using its digest:
+  ダイジェスト値を使ってイメージを削除するには、以下のようにします。
 @z
 
 @x
@@ -287,19 +258,23 @@ examples: |-
   Deleted: ea13149945cb6b1e746bf28032f02e9b5a793523481a0a18645fc77ad53c4ea2
   Deleted: df7546f9f060a2268024c8a230d8639878585defcc1bc6f79d2728a13957871b
   ```
+@y
+  ```bash
+  $ docker rmi localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
+  Untagged: localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
+  Deleted: 4986bf8c15363d1c5d15512d5266f8777bfba4974ac56e3270e7760f6f0a8125
+  Deleted: ea13149945cb6b1e746bf28032f02e9b5a793523481a0a18645fc77ad53c4ea2
+  Deleted: df7546f9f060a2268024c8a230d8639878585defcc1bc6f79d2728a13957871b
+  ```
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  ```bash
-  $ docker rmi localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
-  Untagged: localhost:5000/test/busybox@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
-  Deleted: 4986bf8c15363d1c5d15512d5266f8777bfba4974ac56e3270e7760f6f0a8125
-  Deleted: ea13149945cb6b1e746bf28032f02e9b5a793523481a0a18645fc77ad53c4ea2
-  Deleted: df7546f9f060a2268024c8a230d8639878585defcc1bc6f79d2728a13957871b
-  ```
 deprecated: false
 experimental: false
 experimentalcli: false

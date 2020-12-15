@@ -103,7 +103,7 @@ examples: |-
 @x
   This removes the container referenced under the link `/redis`.
 @y
-  This removes the container referenced under the link `/redis`.
+  `/redis`リンクとして参照されているコンテナーを削除します。
 @z
 
 @x
@@ -123,45 +123,31 @@ examples: |-
 @x
   ### Remove a link specified with `--link` on the default bridge network
 @y
-  ### Remove a link specified with `--link` on the default bridge network
+  {: #remove-a-link-specified-with---link-on-the-default-bridge-network }
+  ### デフォルトプリッジネットワーク上での`--link`を使ったリンク削除
 @z
 
 @x
   This removes the underlying link between `/webapp` and the `/redis`
   containers on the default bridge network, removing all network communication
-@y
-  This removes the underlying link between `/webapp` and the `/redis`
-  containers on the default bridge network, removing all network communication
-@z
-
-@x
   between the two containers. This does not apply when `--link` is used with
-@y
-  between the two containers. This does not apply when `--link` is used with
-@z
-
-@x
   user-specified networks.
 @y
-  user-specified networks.
+  以下は、デフォルトブリッジネットワーク上の`/webapp`コンテナーと`/redis`コンテナーとの間にあるリンクを削除します。
+  これによって両コンテナー間のネットワーク接続がすべて削除されます。
+  これは`--link`フラグがユーザー指定ネットワークに対して用いられている場合には適用されません。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker rm --link /webapp/redis
-@y
-  $ docker rm --link /webapp/redis
-@z
 
-@x
   /webapp/redis
   ```
 @y
+  ```bash
+  $ docker rm --link /webapp/redis
+
   /webapp/redis
   ```
 @z
@@ -169,31 +155,26 @@ examples: |-
 @x
   ### Force-remove a running container
 @y
-  ### Force-remove a running container
+  {: #force-remove-a-running-container }
+  ### 実行中コンテナーの強制削除
 @z
 
 @x
   This command force-removes a running container.
 @y
-  This command force-removes a running container.
+  以下のコマンドは実行中コンテナーを強制削除します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker rm --force redis
-@y
-  $ docker rm --force redis
-@z
 
-@x
   redis
   ```
 @y
+  ```bash
+  $ docker rm --force redis
+
   redis
   ```
 @z
@@ -202,61 +183,50 @@ examples: |-
   The main process inside the container referenced under the link `redis` will receive
   `SIGKILL`, then the container will be removed.
 @y
-  The main process inside the container referenced under the link `redis` will receive
-  `SIGKILL`, then the container will be removed.
+  `redis`というリンクとして参照されているコンテナーの内部にて、メインのプロセスが`SIGKILL`を受け取り、その次にコンテナーが削除されます。
 @z
 
 @x
   ### Remove all stopped containers
 @y
-  ### Remove all stopped containers
+  {: #remove-all-stopped-containers }
+  ### 停止中コンテナーの全削除
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker rm $(docker ps -a -q)
   ```
 @y
+  ```bash
   $ docker rm $(docker ps -a -q)
   ```
 @z
 
 @x
   This command deletes all stopped containers. The command
-@y
-  This command deletes all stopped containers. The command
-@z
-
-@x
   `docker ps -a -q` above returns all existing container IDs and passes them to
   the `rm` command which deletes them. Running containers are not deleted.
 @y
-  `docker ps -a -q` above returns all existing container IDs and passes them to
-  the `rm` command which deletes them. Running containers are not deleted.
+  上のコマンドは停止しているコンテナーをすべて削除します。
+  上において`docker ps -a -q`コマンドが、存在するコンテナー ID すべてを取得し、それが`rm`コマンドに受け渡されコンテナーが削除されます。
+  実行中のコンテナーは削除されません。
 @z
 
 @x
   ### Remove a container and its volumes
 @y
-  ### Remove a container and its volumes
+  {: #remove-a-container-and-its-volumes }
+  ### コンテナーとそのボリュームの削除
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker rm -v redis
   redis
   ```
 @y
+  ```bash
   $ docker rm -v redis
   redis
   ```
@@ -266,34 +236,29 @@ examples: |-
   This command removes the container and any volumes associated with it.
   Note that if a volume was specified with a name, it will not be removed.
 @y
-  This command removes the container and any volumes associated with it.
-  Note that if a volume was specified with a name, it will not be removed.
+  上のコマンドはコンテナーを削除した上で、これに関連するボリュームもすべて削除します。
+  なおボリュームに名前が指定されている場合、そのボリュームは削除されません。
 @z
 
 @x
   ### Remove a container and selectively remove volumes
 @y
-  ### Remove a container and selectively remove volumes
+  {: #remove-a-container-and-selectively-remove-volumes }
+  ### コンテナーの削除と特定ボリュームの削除
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker create -v awesome:/foo -v /bar --name hello redis
   hello
-@y
-  $ docker create -v awesome:/foo -v /bar --name hello redis
-  hello
-@z
 
-@x
   $ docker rm -v hello
   ```
 @y
+  ```bash
+  $ docker create -v awesome:/foo -v /bar --name hello redis
+  hello
+
   $ docker rm -v hello
   ```
 @z
@@ -301,20 +266,19 @@ examples: |-
 @x
   In this example, the volume for `/foo` remains intact, but the volume for
   `/bar` is removed. The same behavior holds for volumes inherited with
-@y
-  In this example, the volume for `/foo` remains intact, but the volume for
-  `/bar` is removed. The same behavior holds for volumes inherited with
-@z
-
-@x
   `--volumes-from`.
+@y
+  上の例において`/foo`に対するボリュームはそのまま残りますが、`/bar`に対するボリュームは削除されます。
+  `--volumes-from`によって継承されたボリュームに対しても、同じ動作になります。
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  `--volumes-from`.
 deprecated: false
 experimental: false
 experimentalcli: false

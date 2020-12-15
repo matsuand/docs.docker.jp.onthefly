@@ -6,7 +6,7 @@ command: docker version
 short: Show the Docker version information
 @y
 command: docker version
-short: Show the Docker version information
+short: Docker のバージョン情報を表示します。
 @z
 
 @x
@@ -15,21 +15,24 @@ long: |-
   layout. If a format is specified, the given template will be executed instead.
 @y
 long: |-
-  By default, this will render all version information in an easy to read
-  layout. If a format is specified, the given template will be executed instead.
+  デフォルトで本コマンドは、バージョン情報をわかりやすいレイアウトによりすべて表示します。
+  出力フォーマットが指定されたときには、そのテンプレートが利用されます。
 @z
 
 @x
   Go's [text/template](http://golang.org/pkg/text/template/) package
   describes all the details of the format.
+@y
+  Go 言語の [text/template](http://golang.org/pkg/text/template/) パッケージに、そのフォーマットに関する詳細が説明されています。
+@z
+
+@x
 usage: docker version [OPTIONS]
 pname: docker
 plink: docker.yaml
 options:
 @y
-  Go's [text/template](http://golang.org/pkg/text/template/) package
-  describes all the details of the format.
-usage: docker version [OPTIONS]
+usage: docker version [オプション]
 pname: docker
 plink: docker.yaml
 options:
@@ -69,7 +72,7 @@ options:
 @y
 - option: kubeconfig
   value_type: string
-  description: Kubernetes config file
+  description: Kubernetes 設定ファイル。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -82,7 +85,8 @@ examples: |-
   ### Default output
 @y
 examples: |-
-  ### Default output
+  {: #default-output }
+  ### デフォルト出力
 @z
 
 @x
@@ -129,6 +133,12 @@ examples: |-
     Version:          v1.2.13
     GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
    runc:
+    Version:          1.0.0-rc10
+    GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+   docker-init:
+    Version:          0.18.0
+    GitCommit:        fec3683
+  ```
 @y
   Server:
    Engine:
@@ -143,22 +153,8 @@ examples: |-
     Version:          v1.2.13
     GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
    runc:
-@z
-
-@x
     Version:          1.0.0-rc10
     GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
-@y
-    Version:          1.0.0-rc10
-    GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
-@z
-
-@x
-   docker-init:
-    Version:          0.18.0
-    GitCommit:        fec3683
-  ```
-@y
    docker-init:
     Version:          0.18.0
     GitCommit:        fec3683
@@ -168,25 +164,20 @@ examples: |-
 @x
   ### Get the server version
 @y
-  ### Get the server version
+  {: #get-the-server-version }
+  ### サーバーバージョンの取得
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker version --format '{{.Server.Version}}'
-@y
-  $ docker version --format '{{.Server.Version}}'
-@z
 
-@x
   19.03.8
   ```
 @y
+  ```bash
+  $ docker version --format '{{.Server.Version}}'
+
   19.03.8
   ```
 @z
@@ -194,25 +185,20 @@ examples: |-
 @x
   ### Dump raw JSON data
 @y
-  ### Dump raw JSON data
+  {: #dump-raw-json-data }
+  ### JSON データのダンプ出力
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker version --format '{{json .}}'
-@y
-  $ docker version --format '{{json .}}'
-@z
 
-@x
   {"Client":{"Platform":{"Name":"Docker Engine - Community"},"Version":"19.03.8","ApiVersion":"1.40","DefaultAPIVersion":"1.40","GitCommit":"afacb8b","GoVersion":"go1.12.17","Os":"darwin","Arch":"amd64","BuildTime":"Wed Mar 11 01:21:11 2020","Experimental":true},"Server":{"Platform":{"Name":"Docker Engine - Community"},"Components":[{"Name":"Engine","Version":"19.03.8","Details":{"ApiVersion":"1.40","Arch":"amd64","BuildTime":"Wed Mar 11 01:29:16 2020","Experimental":"true","GitCommit":"afacb8b","GoVersion":"go1.12.17","KernelVersion":"4.19.76-linuxkit","MinAPIVersion":"1.12","Os":"linux"}},{"Name":"containerd","Version":"v1.2.13","Details":{"GitCommit":"7ad184331fa3e55e52b890ea95e65ba581ae3429"}},{"Name":"runc","Version":"1.0.0-rc10","Details":{"GitCommit":"dc9208a3303feef5b3839f4323d9beb36df0a9dd"}},{"Name":"docker-init","Version":"0.18.0","Details":{"GitCommit":"fec3683"}}],"Version":"19.03.8","ApiVersion":"1.40","MinAPIVersion":"1.12","GitCommit":"afacb8b","GoVersion":"go1.12.17","Os":"linux","Arch":"amd64","KernelVersion":"4.19.76-linuxkit","Experimental":true,"BuildTime":"2020-03-11T01:29:16.000000000+00:00"}}
   ```
 @y
+  ```bash
+  $ docker version --format '{{json .}}'
+
   {"Client":{"Platform":{"Name":"Docker Engine - Community"},"Version":"19.03.8","ApiVersion":"1.40","DefaultAPIVersion":"1.40","GitCommit":"afacb8b","GoVersion":"go1.12.17","Os":"darwin","Arch":"amd64","BuildTime":"Wed Mar 11 01:21:11 2020","Experimental":true},"Server":{"Platform":{"Name":"Docker Engine - Community"},"Components":[{"Name":"Engine","Version":"19.03.8","Details":{"ApiVersion":"1.40","Arch":"amd64","BuildTime":"Wed Mar 11 01:29:16 2020","Experimental":"true","GitCommit":"afacb8b","GoVersion":"go1.12.17","KernelVersion":"4.19.76-linuxkit","MinAPIVersion":"1.12","Os":"linux"}},{"Name":"containerd","Version":"v1.2.13","Details":{"GitCommit":"7ad184331fa3e55e52b890ea95e65ba581ae3429"}},{"Name":"runc","Version":"1.0.0-rc10","Details":{"GitCommit":"dc9208a3303feef5b3839f4323d9beb36df0a9dd"}},{"Name":"docker-init","Version":"0.18.0","Details":{"GitCommit":"fec3683"}}],"Version":"19.03.8","ApiVersion":"1.40","MinAPIVersion":"1.12","GitCommit":"afacb8b","GoVersion":"go1.12.17","Os":"linux","Arch":"amd64","KernelVersion":"4.19.76-linuxkit","Experimental":true,"BuildTime":"2020-03-11T01:29:16.000000000+00:00"}}
   ```
 @z
@@ -220,13 +206,14 @@ examples: |-
 @x
   ### Print the current context
 @y
-  ### Print the current context
+  {: #print-the-current-context }
+  ### カレントなコンテキストの表示
 @z
 
 @x
   The following example prints the currently used [`docker context`](context.md):
 @y
-  The following example prints the currently used [`docker context`](context.md):
+  以下の例では、現時点において利用されている [`docker context`](context.md) を表示します。
 @z
 
 @x
@@ -246,17 +233,15 @@ examples: |-
   to indicate your active context. The example below illustrates how this output
   could be used when using Bash as your shell.
 @y
-  As an example, this output can be used to dynamically change your shell prompt
-  to indicate your active context. The example below illustrates how this output
-  could be used when using Bash as your shell.
+  1 つの例として上の出力結果は、利用するシェルプロンプトにおいて、アクティブなコンテキストを動的に設定するために利用することができます。
+  下に示すのは、シェルが Bash である場合に上の出力を利用する例です。
 @z
 
 @x
   Declare a function to obtain the current context in your `~/.bashrc`, and set
   this command as your `PROMPT_COMMAND`
 @y
-  Declare a function to obtain the current context in your `~/.bashrc`, and set
-  this command as your `PROMPT_COMMAND`
+  `~/.bashrc`ファイル内において、カレントなコンテキストを取得する関数を宣言し、このコマンドを`PROMPT_COMMAND`として設定しています。
 @z
 
 @x
@@ -281,8 +266,7 @@ examples: |-
   After reloading the `~/.bashrc`, the prompt now shows the currently selected
   `docker context`:
 @y
-  After reloading the `~/.bashrc`, the prompt now shows the currently selected
-  `docker context`:
+  `~/.bashrc`を再読み込みすれば、プロンプト表示にカレントな`docker context`が表示されます。
 @z
 
 @x
@@ -319,8 +303,7 @@ examples: |-
   Refer to the [`docker context` section](context.md) in the command line reference
   for more information about `docker context`.
 @y
-  Refer to the [`docker context` section](context.md) in the command line reference
-  for more information about `docker context`.
+  `docker context`に関する詳細は、コマンドラインリファレンス内の [`docker context`の節](context.md) を参照してください。
 @z
 
 @x

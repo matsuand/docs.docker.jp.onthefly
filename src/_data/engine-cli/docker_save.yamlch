@@ -6,7 +6,7 @@ command: docker save
 short: Save one or more images to a tar archive (streamed to STDOUT by default)
 @y
 command: docker save
-short: Save one or more images to a tar archive (streamed to STDOUT by default)
+short: 1 つまたは複数のイメージを tar アーカイブとして保存します（デフォルトでは STDOUT にストリーム出力します）。
 @z
 
 @x
@@ -14,16 +14,19 @@ long: |-
   Produces a tarred repository to the standard output stream.
   Contains all parent layers, and all tags + versions, or specified `repo:tag`, for
   each argument provided.
+@y
+long: |-
+  リポジトリを tar 処理して標準出力にストリーム出力します。
+  そこには親レイヤーすべて、全タグ、全バージョン、あるいは`repo:tag`が指定されればその引数に応じたタグ、バージョンが含まれます。
+@z
+
+@x
 usage: docker save [OPTIONS] IMAGE [IMAGE...]
 pname: docker
 plink: docker.yaml
 options:
 @y
-long: |-
-  Produces a tarred repository to the standard output stream.
-  Contains all parent layers, and all tags + versions, or specified `repo:tag`, for
-  each argument provided.
-usage: docker save [OPTIONS] IMAGE [IMAGE...]
+usage: docker save [オプション] IMAGE [IMAGE...]
 pname: docker
 plink: docker.yaml
 options:
@@ -56,7 +59,8 @@ examples: |-
   ### Create a backup that can then be used with `docker load`.
 @y
 examples: |-
-  ### Create a backup that can then be used with `docker load`.
+  {: #create-a-backup-that-can-then-be-used-with-docker-load }
+  ### `docker load`で利用可能なバックアップの生成
 @z
 
 @x
@@ -69,13 +73,11 @@ examples: |-
 
 @x
   $ ls -sh busybox.tar
-@y
-  $ ls -sh busybox.tar
-@z
 
-@x
   2.7M busybox.tar
 @y
+  $ ls -sh busybox.tar
+
   2.7M busybox.tar
 @z
 
@@ -87,13 +89,11 @@ examples: |-
 
 @x
   $ ls -sh busybox.tar
-@y
-  $ ls -sh busybox.tar
-@z
 
-@x
   2.7M busybox.tar
 @y
+  $ ls -sh busybox.tar
+
   2.7M busybox.tar
 @z
 
@@ -112,34 +112,59 @@ examples: |-
 @z
 
 @x
+  ### Save an image to a tar.gz file using gzip
+@y
+  {: #save-an-image-to-a-targz-file-using-gzip }
+  ### gzip 利用による tar.gz ファイルへのイメージ保存
+@z
+
+@x
+  You can use gzip to save the image file and make the backup smaller.
+@y
+  gzip を使ってイメージファイルを保存することができます。
+  これによってバックアップ容量を少なくすることができます。
+@z
+
+@x
+  ```bash
+  docker save myimage:latest | gzip > myimage_latest.tar.gz
+  ```
+@y
+  ```bash
+  docker save myimage:latest | gzip > myimage_latest.tar.gz
+  ```
+@z
+
+@x
   ### Cherry-pick particular tags
 @y
-  ### Cherry-pick particular tags
+  {: #cherry-pick-particular-tags }
+  ### 特定タグのチェリーピック
 @z
 
 @x
   You can even cherry-pick particular tags of an image repository.
 @y
-  You can even cherry-pick particular tags of an image repository.
+  イメージリポジトリから特定のタグをチェリーピックすることもできます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker save -o ubuntu.tar ubuntu:lucid ubuntu:saucy
   ```
+@y
+  ```bash
+  $ docker save -o ubuntu.tar ubuntu:lucid ubuntu:saucy
+  ```
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  $ docker save -o ubuntu.tar ubuntu:lucid ubuntu:saucy
-  ```
 deprecated: false
 experimental: false
 experimentalcli: false
