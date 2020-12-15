@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-12-15 11:55:48 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker と iptables | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker と iptables" />
   <meta property="og:description" content="Docker と iptables がどのように動作するか、その基本を説明します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-15T11:55:48+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/network/iptables/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-15T11:55:48+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker と iptables","description":"Docker と iptables がどのように動作するか、その基本を説明します。","url":"https://docs.docker.com/network/iptables/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker と iptables</h1>
+                        <section class="section"><h1>Docker と iptables</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p>
 <p>Linux 上において Docker は <code class="language-plaintext highlighter-rouge">iptables</code> ルールを利用して、ネットワークを分離します。
 このことは実装に関わることであって、Docker が <code class="language-plaintext highlighter-rouge">iptables</code> ポリシーに挿入するルールを修正するべきではありません。
 Docker が管理するポリシーとは別に、独自のポリシーを追加しようとする場合は、そこには重要な観点がいくつかあります。</p>
@@ -172,6 +172,19 @@ Docker が <code class="language-plaintext highlighter-rouge">iptables</code> �
 <p>デフォルトで Docker デーモンは、ホスト上でのあらゆるアドレスを意味する <code class="language-plaintext highlighter-rouge">0.0.0.0</code> において、ポートを公開します。
 この状態を変更して、公開するポートは内部 IP アドレスに対してのみとする場合は、<code class="language-plaintext highlighter-rouge">--ip</code> オプションを使って、別の IP アドレスを指定します。
 ただし <code class="language-plaintext highlighter-rouge">--ip</code> による設定は <strong>デフォルトを</strong> 変更するだけであり、その IP に対してサービスを <strong>限定</strong> するものではありません。</p>
+
+<h2 id="integration-with-firewalld">Firewalld との統合</h2>
+
+<p>Docker version 20.10.0 またはそれ以上の利用にあたって、<code class="language-plaintext highlighter-rouge">--iptables</code>を有効にして <a href="https://firewalld.org" target="blank" rel="noopener">firewalld</a> を利用する場合、Docker は自動的に<code class="language-plaintext highlighter-rouge">firewalld</code>のゾーンとして<code class="language-plaintext highlighter-rouge">docker</code>を生成し、生成するネットワークインターフェース（たとえば<code class="language-plaintext highlighter-rouge">docker0</code>など）すべてを<code class="language-plaintext highlighter-rouge">docker</code>ゾーンに加えることでシームレスなネットワークを実現します。</p>
+
+<p>Docker のネットワークインターフェースをゾーンから除くには、以下の<code class="language-plaintext highlighter-rouge">firewalld</code>コマンドを実行することを覚えておいてください。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ゾーンと Docker インターフェースは適切なものに書き換えてください。</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--zone</span><span class="o">=</span>trusted <span class="nt">--remove-interface</span><span class="o">=</span>docker0 <span class="nt">--permanent</span>
+<span class="nv">$ </span>firewall-cmd <span class="nt">--reload</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">dockerd</code>デーモンを再起動すれば、インターフェースが<code class="language-plaintext highlighter-rouge">docker</code>ゾーンに挿入されます。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=network">network</a>, <a href="/docs.docker.jp.onthefly/search/?q=iptables">iptables</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -213,6 +226,7 @@ Docker が <code class="language-plaintext highlighter-rouge">iptables</code> �
   <li><a href="#docker-on-a-router" class="nomunge">ルーター上の Docker</a></li>
   <li><a href="#prevent-docker-from-manipulating-iptables" class="nomunge">Docker による iptables 操作の防止</a></li>
   <li><a href="#setting-the-default-bind-address-for-containers" class="nomunge">コンテナーへのデフォルトバインドアドレス設定</a></li>
+  <li><a href="#integration-with-firewalld" class="nomunge">Firewalld との統合</a></li>
 </ul>
 
 </div>

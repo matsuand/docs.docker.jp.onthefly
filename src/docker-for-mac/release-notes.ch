@@ -83,13 +83,14 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-- Fixed an issue that caused certain directories not to be mountable into containers. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115)
+- Fixed an issue that caused certain directories not to be mountable into containers. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115). See Known issues below.
 @y
 {% comment %}
-- Fixed an issue that caused certain directories not to be mountable into containers. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115)
+- Fixed an issue that caused certain directories not to be mountable into containers. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115). See Known issues below.
 {% endcomment %}
 - 特定のディレクトリをコンテナーに対してマウントできなくなる問題を修正しました。
   [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115) を Fix に。
+  以下の既知の問題を参照のこと。
 @z
 
 @x
@@ -103,13 +104,17 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+- It is currently not possible to bind mount files within `~/Libary` into a container. See [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115).
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 @y
 {% comment %}
+- It is currently not possible to bind mount files within `~/Libary` into a container. See [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115).
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 {% endcomment %}
+- 現時点では、`~/Libary`内のファイルをコンテナーに対してバインドマウントすることができません。
+  [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115) を参照のこと。
 - git URL から BuildKit を使ってイメージをビルドする際に、`github.com/org/repo`の形を用いているとビルドに失敗します。
   この問題を回避するには`git://github.com/org/repo`の形を用いるようにします。
 - Alpine Linux 3.13 に基づくコンテナー内において DNS アドレス解決に失敗することがあります。
@@ -219,7 +224,6 @@ This page contains information about the new features, improvements, known issue
 
 @x
 - Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
-- Fixed a bug that DNS would return `NXDOMAIN` when a name exists but the type of record was not found. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020). Related to https://gitlab.alpinelinux.org/alpine/aports/-/issues/11879
 - Avoid caching bad file sizes and modes when using `osxfs`. Fixes [docker/for-mac#5045](https://github.com/docker/for-mac/issues/5045).
 - Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is a partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
 - Removed unnecessary log messages which slow down filesystem event injection.
@@ -229,7 +233,6 @@ This page contains information about the new features, improvements, known issue
 @y
 {% comment %}
 - Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
-- Fixed a bug that DNS would return `NXDOMAIN` when a name exists but the type of record was not found. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020). Related to https://gitlab.alpinelinux.org/alpine/aports/-/issues/11879
 - Avoid caching bad file sizes and modes when using `osxfs`. Fixes [docker/for-mac#5045](https://github.com/docker/for-mac/issues/5045).
 - Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is a partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
 - Removed unnecessary log messages which slow down filesystem event injection.
@@ -238,9 +241,6 @@ This page contains information about the new features, improvements, known issue
 - Display an error message instead of crashing when the application needs write access on specific directories. See [docker/for-mac#5068](https://github.com/docker/for-mac/issues/5068)
 {% endcomment %}
 - Hyperkit の CPU 使用量を軽減するため、カーネル [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) にダウングレードしました。
-- ドメイン名は存在するものの、そのレコードタイプが存在しない場合に、DNS が`NXDOMAIN`を返すバグを修正しました。
-  [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020) を Fix に。
-  これは https://gitlab.alpinelinux.org/alpine/aports/-/issues/11879 に関連します。
 - `osxfs`利用時にファイルサイズやモードを誤ってキャッシングしないようにしました。
   [docker/for-mac#5045](https://github.com/docker/for-mac/issues/5045) を Fix に。
 - コンテナー内でのファイルがホスト上において修正された際に、そのファイルサイズに誤りがあると、ファイル共有に失敗する可能性がある点を修正しました。

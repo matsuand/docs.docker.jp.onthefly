@@ -1376,15 +1376,15 @@ cluster will be created for the Compose project.
 @z
 
 @x
-- Use `x-aws-vpc` as a top-level element in your Compose file to set the ARN
+- Use `x-aws-vpc` as a top-level element in your Compose file to set the ID
 of a VPC when deploying a Compose application.
 @y
 {% comment %}
-- Use `x-aws-vpc` as a top-level element in your Compose file to set the ARN
+- Use `x-aws-vpc` as a top-level element in your Compose file to set the ID
 of a VPC when deploying a Compose application.
 {% endcomment %}
 - Compose ファイルの最上位項目として`x-aws-vpc`を利用します。
-  これは Compose アプリケーションのデプロイ時に利用する VPC の ARN を設定します。
+  これは Compose アプリケーションのデプロイ時に利用する VPC の ID を設定します。
 @z
 
 @x

@@ -326,3 +326,54 @@ _default_, it does not _restrict_ services to that IP.
 この状態を変更して、公開するポートは内部 IP アドレスに対してのみとする場合は、`--ip` オプションを使って、別の IP アドレスを指定します。
 ただし `--ip` による設定は **デフォルトを** 変更するだけであり、その IP に対してサービスを **限定** するものではありません。
 @z
+
+@x
+## Integration with Firewalld
+@y
+{% comment %}
+## Integration with Firewalld
+{% endcomment %}
+{: #integration-with-firewalld }
+## Firewalld との統合
+@z
+
+@x
+If you are running Docker version 20.10.0 or higher with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} on your system with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (for example, `docker0`) into the `docker` zone to allow seamless networking.
+@y
+{% comment %}
+If you are running Docker version 20.10.0 or higher with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} on your system with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (for example, `docker0`) into the `docker` zone to allow seamless networking.
+{% endcomment %}
+Docker version 20.10.0 またはそれ以上の利用にあたって、`--iptables`を有効にして [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} を利用する場合、Docker は自動的に`firewalld`のゾーンとして`docker`を生成し、生成するネットワークインターフェース（たとえば`docker0`など）すべてを`docker`ゾーンに加えることでシームレスなネットワークを実現します。
+@z
+
+@x
+Consider running the following `firewalld` command to remove the docker interface from the zone.
+@y
+{% comment %}
+Consider running the following `firewalld` command to remove the docker interface from the zone.
+{% endcomment %}
+Docker のネットワークインターフェースをゾーンから除くには、以下の`firewalld`コマンドを実行することを覚えておいてください。
+@z
+
+@x
+```bash
+# Please substitute the appropriate zone and docker interface
+$ firewall-cmd --zone=trusted --remove-interface=docker0 --permanent
+$ firewall-cmd --reload
+```
+@y
+```bash
+# ゾーンと Docker インターフェースは適切なものに書き換えてください。
+$ firewall-cmd --zone=trusted --remove-interface=docker0 --permanent
+$ firewall-cmd --reload
+```
+@z
+
+@x
+Restarting `dockerd` daemon inserts the interface into the `docker` zone.
+@y
+{% comment %}
+Restarting `dockerd` daemon inserts the interface into the `docker` zone.
+{% endcomment %}
+`dockerd`デーモンを再起動すれば、インターフェースが`docker`ゾーンに挿入されます。
+@z
