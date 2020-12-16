@@ -227,6 +227,10 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	sed -i -e "/docker_node_update.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_update.yaml" $@
 	sed -i -e "/docker_ps.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_ps.yaml" $@
 	sed -i -e "/docker_run.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_run.yaml" $@
+	sed -i -e "/docker_secret_create.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_secret_create.yaml" $@
+	sed -i -e "/docker_secret_inspect.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_secret_inspect.yaml" $@
+	sed -i -e "/docker_secret_ls.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_secret_ls.yaml" $@
+	sed -i -e "/docker_secret_rm.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_secret_rm.yaml" $@
 	sed -i -e "/docker_service_ls.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_ls.yaml" $@
 	sed -i -e "/docker_tag.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_tag.yaml" $@
 
