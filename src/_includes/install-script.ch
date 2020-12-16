@@ -160,11 +160,11 @@ adding your user to the "docker" group with something like:
 
 @x
 ```bash
-  sudo usermod -aG docker your-user
+  sudo usermod -aG docker <your-user>
 ```
 @y
 ```bash
-  sudo usermod -aG docker your-user
+  sudo usermod -aG docker <your-user>
 ```
 @z
 

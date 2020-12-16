@@ -1,4 +1,4 @@
-<!-- Page generated 2020-12-15 11:55:48 +0900-->
+<!-- Page generated 2020-12-16 13:50:29 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine リリースノート | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine リリースノート" />
   <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Engine" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-15T11:55:48+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-16T13:50:29+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/release-notes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-15T11:55:48+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-16T13:50:29+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine","url":"https://docs.docker.com/engine/release-notes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -111,46 +111,88 @@
 
 <h1 id="version-2010">Version 20.10</h1>
 
+<h2 id="20101">20.10.1</h2>
+<p>2020-12-14</p>
+
+<h3 id="builder">Builder</h3>
+
+<ul>
+  <li>buildkit: <a href="https://github.com/moby/buildkit/releases/tag/v0.8.1">v0.8.1</a> へのアップデート。
+多くのバグフィックス。
+<a href="https://github.com/moby/moby/pull/41793">moby/moby#41793</a></li>
+</ul>
+
+<h3 id="パッケージ">パッケージ</h3>
+
+<ul>
+  <li>起動順の衝突により Docker が起動できなくなる systemd ユニットへの変更を元に戻す。
+<a href="https://github.com/docker/docker-ce-packaging/pull/514">docker/docker-ce-packaging#514</a></li>
+  <li>buildx を <a href="https://github.com/docker/buildx/releases/tag/v0.5.0">v0.5.0</a> にアップデート。
+<a href="https://github.com/docker/docker-ce-packaging/pull/515">docker/docker-ce-packaging#515</a></li>
+</ul>
+
 <h2 id="20100">20.10.0</h2>
 <p>2020-12-08</p>
 
 <h3 id="deprecation--removal">廃止決定、削除</h3>
 
-<p>For an overview of all deprecated features, refer to the <a href="/engine/deprecated/">Deprecated Engine Features</a> page.</p>
+<p>廃止決定した機能の概要は <a href="/docs.docker.jp.onthefly/engine/deprecated/">廃止となった Engine 機能</a> のページを参照してください。</p>
 
 <ul>
-  <li>Warnings and deprecation notice when <code class="language-plaintext highlighter-rouge">docker pull</code>-ing from non-compliant registries not supporting pull-by-digest <a href="https://github.com/docker/cli/pull/2872">docker/cli#2872</a></li>
-  <li>Sterner warnings and deprecation notice for unauthenticated tcp access <a href="https://github.com/moby/moby/pull/41285">moby/moby#41285</a></li>
-  <li>Deprecate KernelMemory (<code class="language-plaintext highlighter-rouge">docker run --kernel-memory</code>) <a href="https://github.com/moby/moby/pull/41254">moby/moby#41254</a> <a href="https://github.com/docker/cli/pull/2652">docker/cli#2652</a></li>
-  <li>Deprecate <code class="language-plaintext highlighter-rouge">aufs</code> storage driver <a href="https://github.com/docker/cli/pull/1484">docker/cli#1484</a></li>
-  <li>Deprecate host-discovery and overlay networks with external k/v stores <a href="https://github.com/moby/moby/pull/40614">moby/moby#40614</a> <a href="https://github.com/moby/moby/pull/40510">moby/moby#40510</a></li>
-  <li>Deprecate Dockerfile legacy ‘ENV name value’ syntax, use <code class="language-plaintext highlighter-rouge">ENV name=value</code> instead <a href="https://github.com/docker/cli/pull/2743">docker/cli#2743</a></li>
-  <li>Remove deprecated “filter” parameter for API v1.41 and up <a href="https://github.com/moby/moby/pull/40491">moby/moby#40491</a></li>
-  <li>Disable distribution manifest v2 schema 1 on push <a href="https://github.com/moby/moby/pull/41295">moby/moby#41295</a></li>
-  <li>Remove hack MalformedHostHeaderOverride breaking old docker clients (&lt;= 1.12) in which case, set <code class="language-plaintext highlighter-rouge">DOCKER_API_VERSION</code> <a href="https://github.com/moby/moby/pull/39076">moby/moby#39076</a></li>
-  <li>Remove “docker engine” subcommands <a href="https://github.com/docker/cli/pull/2207">docker/cli#2207</a></li>
-  <li>Remove experimental “deploy” from “dab” files <a href="https://github.com/docker/cli/pull/2216">docker/cli#2216</a></li>
-  <li>Remove deprecated <code class="language-plaintext highlighter-rouge">docker search --automated</code> and <code class="language-plaintext highlighter-rouge">--stars</code> flags <a href="https://github.com/docker/cli/pull/2338">docker/cli#2338</a></li>
-  <li>No longer allow reserved namespaces in engine labels <a href="https://github.com/docker/cli/pull/2326">docker/cli#2326</a></li>
+  <li>ダイジェスト値によるプルをサポートしていない非準拠 レジストリから<code class="language-plaintext highlighter-rouge">docker pull</code>を行った際の警告および廃止機能に関するメッセージ。
+<a href="https://github.com/docker/cli/pull/2872">docker/cli#2872</a></li>
+  <li>Sterner warnings and deprecation notice for unauthenticated tcp access
+<a href="https://github.com/moby/moby/pull/41285">moby/moby#41285</a></li>
+  <li>KernelMemory の廃止決定。
+（<code class="language-plaintext highlighter-rouge">docker run --kernel-memory</code>）
+<a href="https://github.com/moby/moby/pull/41254">moby/moby#41254</a>
+<a href="https://github.com/docker/cli/pull/2652">docker/cli#2652</a></li>
+  <li><code class="language-plaintext highlighter-rouge">aufs</code>ストレージドライバーの廃止決定。
+<a href="https://github.com/docker/cli/pull/1484">docker/cli#1484</a></li>
+  <li>外部キーバリューストアを利用したホスト検出とオーバーレイネットワークの廃止決定。
+<a href="https://github.com/moby/moby/pull/40614">moby/moby#40614</a>
+<a href="https://github.com/moby/moby/pull/40510">moby/moby#40510</a></li>
+  <li>Dockerfile における古い文法「ENV name value」の廃止決定。
+代わりに<code class="language-plaintext highlighter-rouge">ENV name=value</code>とする。
+<a href="https://github.com/docker/cli/pull/2743">docker/cli#2743</a></li>
+  <li>API v1.41 またはそれ以上において、廃止決定の「filter」パラメーターを削除。
+<a href="https://github.com/moby/moby/pull/40491">moby/moby#40491</a></li>
+  <li>Disable distribution manifest v2 schema 1 on push
+<a href="https://github.com/moby/moby/pull/41295">moby/moby#41295</a></li>
+  <li>Remove hack MalformedHostHeaderOverride breaking old docker clients (&lt;= 1.12) in which case, set <code class="language-plaintext highlighter-rouge">DOCKER_API_VERSION</code>
+<a href="https://github.com/moby/moby/pull/39076">moby/moby#39076</a></li>
+  <li>サブコマンド「docker engine」を削除。
+<a href="https://github.com/docker/cli/pull/2207">docker/cli#2207</a></li>
+  <li>「dab」ファイルから試験的な「deploy」を削除。
+<a href="https://github.com/docker/cli/pull/2216">docker/cli#2216</a></li>
+  <li>廃止決定した<code class="language-plaintext highlighter-rouge">docker search --automated</code>と<code class="language-plaintext highlighter-rouge">--stars</code>フラグを削除。
+<a href="https://github.com/docker/cli/pull/2338">docker/cli#2338</a></li>
+  <li>No longer allow reserved namespaces in engine labels
+<a href="https://github.com/docker/cli/pull/2326">docker/cli#2326</a></li>
 </ul>
 
 <h3 id="api">API</h3>
 
 <ul>
-  <li>Update API version to v1.41</li>
-  <li>Do not require “experimental” for metrics API <a href="https://github.com/moby/moby/pull/40427">moby/moby#40427</a></li>
+  <li>API バージョンの v1.41 へのアップデート。</li>
+  <li>メトリックス API に対して「試験的」は不要。
+<a href="https://github.com/moby/moby/pull/40427">moby/moby#40427</a></li>
   <li><code class="language-plaintext highlighter-rouge">GET /events</code> now returns <code class="language-plaintext highlighter-rouge">prune</code> events after pruning resources have completed <a href="https://github.com/moby/moby/pull/41259">moby/moby#41259</a>
     <ul>
       <li>Prune events are returned for <code class="language-plaintext highlighter-rouge">container</code>, <code class="language-plaintext highlighter-rouge">network</code>, <code class="language-plaintext highlighter-rouge">volume</code>, <code class="language-plaintext highlighter-rouge">image</code>, and <code class="language-plaintext highlighter-rouge">builder</code>, and have a <code class="language-plaintext highlighter-rouge">reclaimed</code> attribute, indicating the amount of space reclaimed (in bytes)</li>
     </ul>
   </li>
-  <li>Add <code class="language-plaintext highlighter-rouge">one-shot</code> stats option to not prime the stats <a href="https://github.com/moby/moby/pull/40478">moby/moby#40478</a></li>
-  <li>Adding OS version info to the system info’s API (<code class="language-plaintext highlighter-rouge">/info</code>) <a href="https://github.com/moby/moby/pull/38349">moby/moby#38349</a></li>
-  <li>Add DefaultAddressPools to docker info <a href="https://github.com/moby/moby/pull/40714">moby/moby#40714</a></li>
-  <li>Add API support for PidsLimit on services <a href="https://github.com/moby/moby/pull/39882">moby/moby#39882</a></li>
+  <li>Add <code class="language-plaintext highlighter-rouge">one-shot</code> stats option to not prime the stats
+<a href="https://github.com/moby/moby/pull/40478">moby/moby#40478</a></li>
+  <li>info API（<code class="language-plaintext highlighter-rouge">/info</code>）に OS バージョンを追加。
+<a href="https://github.com/moby/moby/pull/38349">moby/moby#38349</a></li>
+  <li>docker info に DefaultAddressPools を追加。
+<a href="https://github.com/moby/moby/pull/40714">moby/moby#40714</a></li>
+  <li>サービス上に PidsLimit に対する API サポートを追加。
+<a href="https://github.com/moby/moby/pull/39882">moby/moby#39882</a></li>
 </ul>
 
-<h3 id="builder">Builder</h3>
+<h3 id="builder-1">Builder</h3>
 
 <ul>
   <li>buildkit,dockerfile: Support for <code class="language-plaintext highlighter-rouge">RUN --mount</code> options without needing to specify experimental dockerfile <code class="language-plaintext highlighter-rouge">#syntax</code> directive. <a href="https://github.com/moby/buildkit/pull/1717">moby/buildkit#1717</a></li>
@@ -238,7 +280,7 @@
   <li>Support cgroup2 <a href="https://github.com/moby/moby/pull/40174">moby/moby#40174</a> <a href="https://github.com/moby/moby/pull/40657">moby/moby#40657</a> <a href="https://github.com/moby/moby/pull/40662">moby/moby#40662</a></li>
   <li>cgroup2: use “systemd” cgroup driver by default when available <a href="https://github.com/moby/moby/pull/40846">moby/moby#40846</a></li>
   <li>new storage driver: fuse-overlayfs <a href="https://github.com/moby/moby/pull/40483">moby/moby#40483</a></li>
-  <li>Update containerd binary to v1.4.0 <a href="https://github.com/moby/moby/pull/40982">moby/moby#40982</a></li>
+  <li>Update containerd binary to v1.4.3 <a href="https://github.com/moby/moby/pull/41732">moby/moby#41732</a></li>
   <li><code class="language-plaintext highlighter-rouge">docker push</code> now defaults to <code class="language-plaintext highlighter-rouge">latest</code> tag instead of all tags <a href="https://github.com/moby/moby/pull/40302">moby/moby#40302</a></li>
   <li>Added ability to change the number of reconnect attempts during connection loss while pulling an image by adding max-download-attempts to the config file <a href="https://github.com/moby/moby/pull/39949">moby/moby#39949</a></li>
   <li>Add support for containerd v2 shim by using the now default <code class="language-plaintext highlighter-rouge">io.containerd.runc.v2</code> runtime <a href="https://github.com/moby/moby/pull/41182">moby/moby#41182</a></li>
@@ -292,9 +334,12 @@
 <h3 id="rootless">Rootless</h3>
 
 <ul>
-  <li>rootless: graduate from experimental <a href="https://github.com/moby/moby/pull/40759">moby/moby#40759</a></li>
-  <li>Add dockerd-rootless-setuptool.sh <a href="https://github.com/moby/moby/pull/40950">moby/moby#40950</a></li>
-  <li>Support <code class="language-plaintext highlighter-rouge">--exec-opt native.cgroupdriver=systemd</code> <a href="https://github.com/moby/moby/pull/40486">moby/moby#40486</a></li>
+  <li>rootless: 試験的機能から格上げ。
+<a href="https://github.com/moby/moby/pull/40759">moby/moby#40759</a></li>
+  <li>dockerd-rootless-setuptool.sh 追加。
+<a href="https://github.com/moby/moby/pull/40950">moby/moby#40950</a></li>
+  <li><code class="language-plaintext highlighter-rouge">--exec-opt native.cgroupdriver=systemd</code>のサポート。
+<a href="https://github.com/moby/moby/pull/40486">moby/moby#40486</a></li>
 </ul>
 
 <h3 id="security">セキュリティ</h3>
@@ -313,11 +358,20 @@
 <h3 id="swarm">Swarm</h3>
 
 <ul>
-  <li>Add support for swarm jobs <a href="https://github.com/moby/moby/pull/40307">moby/moby#40307</a></li>
-  <li>Add capabilities support to stack/service commands <a href="https://github.com/docker/cli/pull/2687">docker/cli#2687</a> <a href="https://github.com/docker/cli/pull/2709">docker/cli#2709</a> <a href="https://github.com/moby/moby/pull/39173">moby/moby#39173</a> <a href="https://github.com/moby/moby/pull/41249">moby/moby#41249</a></li>
-  <li>Add support for sending down service Running and Desired task counts <a href="https://github.com/moby/moby/pull/39231">moby/moby#39231</a></li>
-  <li>service: support <code class="language-plaintext highlighter-rouge">--mount type=bind,bind-nonrecursive</code> <a href="https://github.com/moby/moby/pull/38788">moby/moby#38788</a></li>
-  <li>Support ulimits on Swarm services. <a href="https://github.com/moby/moby/pull/41284">moby/moby#41284</a> <a href="https://github.com/docker/cli/pull/2712">docker/cli#2712</a></li>
+  <li>Swarm ジョブへのサポートを追加。
+<a href="https://github.com/moby/moby/pull/40307">moby/moby#40307</a></li>
+  <li>stack/service コマンドに対してケーパビリティーのサポートを追加。
+<a href="https://github.com/docker/cli/pull/2687">docker/cli#2687</a>
+<a href="https://github.com/docker/cli/pull/2709">docker/cli#2709</a>
+<a href="https://github.com/moby/moby/pull/39173">moby/moby#39173</a>
+<a href="https://github.com/moby/moby/pull/41249">moby/moby#41249</a></li>
+  <li>Add support for sending down service Running and Desired task counts
+<a href="https://github.com/moby/moby/pull/39231">moby/moby#39231</a></li>
+  <li>service: <code class="language-plaintext highlighter-rouge">--mount type=bind,bind-nonrecursive</code>のサポート。
+<a href="https://github.com/moby/moby/pull/38788">moby/moby#38788</a></li>
+  <li>Support ulimits on Swarm services.
+<a href="https://github.com/moby/moby/pull/41284">moby/moby#41284</a>
+<a href="https://github.com/docker/cli/pull/2712">docker/cli#2712</a></li>
   <li>Fixed an issue where service logs could leak goroutines on the worker <a href="https://github.com/moby/moby/pull/40426">moby/moby#40426</a></li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker engine">docker engine</a>, <a href="/docs.docker.jp.onthefly/search/?q=ce">ce</a>, <a href="/docs.docker.jp.onthefly/search/?q=whats new">whats new</a>, <a href="/docs.docker.jp.onthefly/search/?q=release notes">release notes</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
@@ -355,6 +409,7 @@
 <ul id="my_toc" class="inline_toc">
   <li><a href="#version-2010" class="nomunge">Version 20.10</a>
     <ul>
+      <li><a href="#20101" class="nomunge">20.10.1</a></li>
       <li><a href="#20100" class="nomunge">20.10.0</a></li>
     </ul>
   </li>
