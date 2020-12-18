@@ -121,7 +121,7 @@ A `docker-compose.yml` looks like this:
 
 @x
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{ site.compose_file_v3 }}"  # optional since v1.27.0
 services:
   web:
     build: .
@@ -139,7 +139,7 @@ volumes:
 ```
 @y
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{ site.compose_file_v3 }}"  # v1.27.0 以降は任意
 services:
   web:
     build: .

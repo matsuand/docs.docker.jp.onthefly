@@ -38,20 +38,23 @@ Compose ファイルのフォーマットは、各バージョンごとに以下
 @x
 | **Reference file**                                    | **What changed in this version** |
 |:------------------------------------------------------|:---------------------------------|
-| [Version 3](index.md) (most current, and recommended) | [Version 3 updates](#version-3)  |
+| [Compose Specification](index.md) (most current, and recommended) | [Versioning](compose-versioning.md#versioning)  |
+| [Version 3](compose-file-v3.md)                       | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
 | [Version 1](compose-file-v1.md)                       | [Version 1 updates](#version-1)  |
 @y
 {% comment %}
 | **Reference file**                                    | **What changed in this version** |
 |:------------------------------------------------------|:---------------------------------|
-| [Version 3](index.md) (most current, and recommended) | [Version 3 updates](#version-3)  |
+| [Compose Specification](index.md) (most current, and recommended) | [Versioning](compose-versioning.md#versioning)  |
+| [Version 3](compose-file-v3.md)                       | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
 | [Version 1](compose-file-v1.md)                       | [Version 1 updates](#version-1)  |
 {% endcomment %}
 | **リファレンスファイル**                        | **各バージョンでの変更点**           |
 |:------------------------------------------------|:-------------------------------------|
-| [バージョン 3](index.md) （最新版、利用を推奨） | [バージョン 3 での変更](#version-3)  |
+| [Compose 仕様](index.md) （最新版、利用を推奨） | [バージョンづけ](compose-versioning.md#versioning) |
+| [バージョン 3](compose-file-v3.md)              | [バージョン 3 での変更](#version-3)  |
 | [バージョン 2](compose-file-v2.md)              | [バージョン 2 での変更](#version-2)  |
 | [バージョン 1](compose-file-v1.md)              | [バージョン 1 での変更](#version-1)  |
 @z
@@ -152,25 +155,22 @@ For details on versions and how to upgrade, see
 @z
 
 @x
-There are currently three versions of the Compose file format:
+There are three legacy versions of the Compose file format:
 @y
 {% comment %}
-There are currently three versions of the Compose file format:
+There are three legacy versions of the Compose file format:
 {% endcomment %}
-Compose ファイルフォーマットには、現在のところ 3 つのバージョンがあります。
+Compose ファイルフォーマットには、以下の古くなった 3 つのバージョンがあります。
 @z
 
 @x
-- Version 1, the legacy format. This is specified by
-omitting a `version` key at the root of the YAML.
+- Version 1. This is specified by omitting a `version` key at the root of the YAML.
 @y
 {% comment %}
-- Version 1, the legacy format. This is specified by
-omitting a `version` key at the root of the YAML.
+- Version 1. This is specified by omitting a `version` key at the root of the YAML.
 {% endcomment %}
 - バージョン 1。 
-  古いフォーマットです。
-  YAML ファイルのルートにおいて `version` キーを省略することで指定されます。
+  YAML ファイルのルートにおいて`version`キーを省略することで指定されます。
 @z
 
 @x
@@ -184,18 +184,24 @@ omitting a `version` key at the root of the YAML.
 @z
 
 @x
-- Version 3.x, the latest and recommended version, designed to
-be cross-compatible between Compose and the Docker Engine's
+- Version 3.x, designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 @y
 {% comment %}
-- Version 3.x, the latest and recommended version, designed to
-be cross-compatible between Compose and the Docker Engine's
+- Version 3.x, designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 {% endcomment %}
-- Version 3.x, the latest and recommended version, designed to
-be cross-compatible between Compose and the Docker Engine's
+- Version 3.x, designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
+@z
+
+@x
+The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). This format merges the 2.x and 3.x versions and is implemented by **Compose 1.27.0+**.
+@y
+{% comment %}
+The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). This format merges the 2.x and 3.x versions and is implemented by **Compose 1.27.0+**.
+{% endcomment %}
+The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). This format merges the 2.x and 3.x versions and is implemented by **Compose 1.27.0+**.
 @z
 
 @x
@@ -1457,11 +1463,13 @@ flag with the `config` command.
 @z
 
 @x
-- [Compose file version 3](index.md)
+- [Compose Specification](index.md)
+- [Compose file version 3](compose-file-v3.md)
 - [Compose file version 2](compose-file-v2.md)
 - [Compose file version 1](compose-file-v1.md)
 @y
-- [Compose file version 3](index.md)
+- [Compose Specification](index.md)
+- [Compose file version 3](compose-file-v3.md)
 - [Compose file version 2](compose-file-v2.md)
 - [Compose file version 1](compose-file-v1.md)
 @z

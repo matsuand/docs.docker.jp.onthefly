@@ -13,6 +13,7 @@ This table shows which Compose file versions support specific Docker releases.
 @x
 | **Compose file format** | **Docker Engine release** |
 |  -------------------    |    ------------------     |
+|  Compose specification  |       19.03.0+            |
 |      3.8                |       19.03.0+            |
 |      3.7                |       18.06.0+            |
 |      3.6                |       18.02.0+            |
@@ -35,6 +36,7 @@ This table shows which Compose file versions support specific Docker releases.
 {% endcomment %}
 | **Compose ファイルフォーマット** | **Docker Engine リリース** |
 |  -------------------    |    ------------------     |
+|  Compose 仕様           |       19.03.0 以上        |
 |      3.8                |       19.03.0 以上        |
 |      3.7                |       18.06.0 以上        |
 |      3.6                |       18.02.0 以上        |
@@ -74,4 +76,13 @@ gradually in subsequent releases.
 詳しくは [Compose リリース](https://github.com/docker/compose/releases/)に示されています。
 しかしファイルフォーマットのバージョンは、個々のリリースに合わせてバージョンアップする必要がありません。
 たとえば Compose ファイルフォーマット 3.0 が初めて導入されたのは  [Compose リリース 1.10.0](https://github.com/docker/compose/releases/tag/1.10.0) ですが、その後のリリースの中で、徐々にバージョンアップを行ってきています。
+@z
+
+@x
+The latest Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:target="_blank" rel="noopener" class="_"} and is implemented by Docker Compose **1.27.0+**).
+@y
+{% comment %}
+The latest Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:target="_blank" rel="noopener" class="_"} and is implemented by Docker Compose **1.27.0+**).
+{% endcomment %}
+最新の Compose ファイルフォーマットは [Compose 仕様](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:target="_blank" rel="noopener" class="_"} において定義されていて、Docker Compose **1.27.0 以上** において実装されています。
 @z

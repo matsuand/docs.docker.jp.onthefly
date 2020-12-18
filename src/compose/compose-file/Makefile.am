@@ -16,6 +16,7 @@ ctie:
 bases = \
 	compose-file-v1 \
 	compose-file-v2 \
+	compose-file-v3 \
 	compose-versioning \
 	index
 
