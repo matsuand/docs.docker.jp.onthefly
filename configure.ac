@@ -96,12 +96,6 @@ AC_CONFIG_FILES([Makefile
 		 src/datacenter/ucp/3.1/guides/admin/install/Makefile
 		 src/desktop/Makefile
 		 src/desktop/enterprise/Makefile
-		 src/desktop/enterprise/admin/Makefile
-		 src/desktop/enterprise/admin/configure/Makefile
-		 src/desktop/enterprise/admin/install/Makefile
-		 src/desktop/enterprise/images/Makefile
-		 src/desktop/enterprise/troubleshoot/Makefile
-		 src/desktop/enterprise/user/Makefile
 		 src/desktop/images/Makefile
 		 src/develop/Makefile
 		 src/develop/develop-images/Makefile

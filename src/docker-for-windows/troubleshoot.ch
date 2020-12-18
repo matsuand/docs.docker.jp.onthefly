@@ -1258,7 +1258,8 @@ docker app.
 {% comment %}
 ### Docker Desktop fails to start when anti-virus software is installed
 {% endcomment %}
-### Docker Desktop fails to start when anti-virus software is installed
+{: #docker-desktop-fails-to-start-when-anti-virus-software-is-installed }
+### アンチウィルスソフトのインストール時における Docker Desktop 起動の失敗
 @z
 
 @x

@@ -72,23 +72,23 @@ Docker の [公式イメージ](https://hub.docker.com/search?q=&type=image&imag
   and provide clear documentation to serve as a reference for other `Dockerfile`
   authors.
 {% endcomment %}
-* [`Dockerfile` のベストプラクティス](/engine/userguide/eng-image/dockerfile_best-practices/) の例として示し、わかりやすいドキュメントを提供します。
-  これによって、`Dockerfile` を作成する際のリファレンスとなるようにします。
+* [`Dockerfile`のベストプラクティス](/engine/userguide/eng-image/dockerfile_best-practices/) の例として示し、わかりやすいドキュメントを提供します。
+  これによって、`Dockerfile`を作成する際のリファレンスとなるようにします。
 @z
 
 @x
 * Ensure that security updates are applied in a timely manner. This is
-  particularly important as many Official Images are some of the most
+  particularly important as Official Images are some of the most
   popular on Docker Hub.
 @y
 {% comment %}
 * Ensure that security updates are applied in a timely manner. This is
-  particularly important as many Official Images are some of the most
+  particularly important as Official Images are some of the most
   popular on Docker Hub.
 {% endcomment %}
 * 適切なタイミングでセキュリティアップデートを適用するようにします。
   これは特に重要なことです。
-  Docker Hub 上における公式イメージは、人気を得ているものが数多くあるからです。
+  Docker Hub 上における公式イメージは、人気を得ているものがあるからです。
 @z
 
 @x
@@ -110,7 +110,7 @@ Docker 社としては、公式イメージに関わるさまざまな内容に�
 @x
 While it is preferable to have upstream software authors maintaining their
 corresponding Official Images, this is not a strict requirement. Creating
-and maintaining images for Official Images is a public process. It takes
+and maintaining images for Official Images is a collaborative process. It takes
 place openly on GitHub where participation is encouraged. Anyone can provide
 feedback, contribute code, suggest process changes, or even propose a new
 Official Image.
@@ -118,16 +118,32 @@ Official Image.
 {% comment %}
 While it is preferable to have upstream software authors maintaining their
 corresponding Official Images, this is not a strict requirement. Creating
-and maintaining images for Official Images is a public process. It takes
+and maintaining images for Official Images is a collaborative process. It takes
 place openly on GitHub where participation is encouraged. Anyone can provide
 feedback, contribute code, suggest process changes, or even propose a new
 Official Image.
 {% endcomment %}
 ソフトウェア開発者が、担当している公式イメージを保守することが好ましいのは言うまでもありません。
 しかしこれを厳密に要求することはしていません。
-そもそも公式イメージを生成して保守していくことは、公開で行われている作業です。
+そもそも公式イメージを生成して保守していくことは、共同で行われている作業です。
 GitHub 上にて公開で行われているため、そこに参加することが大いに推奨されています。
 どなたであっても、フィードバック、コード提供、プロセス変更の提案、さらには新たな公式イメージの提案までもが提供できるわけです。
+@z
+
+@x
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+@y
+{% comment %}
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+{% endcomment %}
+> **メモ**
+>
+> Docker 公式イメージは Docker の知的財産です。
+> 事前の許諾なしに Docker 公式イメージを配布することは、[Docker 利用規約](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”} に違反する可能性があります。
 @z
 
 @x
@@ -141,21 +157,21 @@ GitHub 上にて公開で行われているため、そこに参加すること�
 @z
 
 @x
-New Docker users are encouraged to use the Official Images in their
+If you are new to Docker, we recommend that you use the Official Images in your
 projects. These images have clear documentation, promote best practices,
-and are designed for the most common use cases. Advanced users are encouraged to
-review the Official Images as part of their `Dockerfile` learning process.
+and are designed for the most common use cases. Advanced users can
+review the Official Images as part of your `Dockerfile` learning process.
 @y
 {% comment %}
-New Docker users are encouraged to use the Official Images in their
+If you are new to Docker, we recommend that you use the Official Images in your
 projects. These images have clear documentation, promote best practices,
-and are designed for the most common use cases. Advanced users are encouraged to
-review the Official Images as part of their `Dockerfile` learning process.
+and are designed for the most common use cases. Advanced users can
+review the Official Images as part of your `Dockerfile` learning process.
 {% endcomment %}
 Docker を初めて利用するユーザーは、公式イメージを用いてプロジェクトを構築することをお勧めしています。
 このイメージには分かり易いドキュメントがあって、ベストプラクティスを示しています。
 そして一般的な利用を前提にして設計されています。
-上級者の方は、`Dockerfile` を勉強する一環として、公式イメージをレビューしていただくことをお願いします。
+上級者の方は`Dockerfile`を勉強する一環として、公式イメージを確認していただくことができます。
 @z
 
 @x
@@ -195,7 +211,7 @@ insufficient, it is still recommended to inherit from an Official Image
 base OS image to leverage the ongoing maintenance work, rather than duplicating
 these efforts.
 {% endcomment %}
-[python](https://hub.docker.com/_/python/) や [ruby](https://hub.docker.com/_/ruby/) のような数多くのプログラミング言語環境向けには `-slim` というタグをつけています。
+[python](https://hub.docker.com/_/python/) や [ruby](https://hub.docker.com/_/ruby/) のような数多くのプログラミング言語環境向けには`-slim`というタグをつけています。
 これは最適化への要求を満たす目的で作られています。
 この「slim」でも不十分に感じる方は、公式イメージ内のベース OS イメージから派生イメージを作り上げて、その後も保守を行っていただくことをお勧めします。
 同じやり方を繰り返しても無駄かもしれないからです。
@@ -227,7 +243,7 @@ questions should be directed to `#docker-library` on Freenode IRC.
 {% endcomment %}
 すべての公式イメージのページにはドキュメントが含まれていて、そのリポジトリに対する詳細が説明されています。そしてその中に**ユーザーフィードバック**の節があります。
 たいていの場合 GitHub リポジトリには、公式リポジトリに対する Dockerfile が含まれており、さらに有効な issue トラッカーも提供されています。
-一般的なフィードバックやサポートに関する質問は、Freenode IRC 上の `#docker-library` に対して行ってください。
+一般的なフィードバックやサポートに関する質問は、Freenode IRC 上の`#docker-library`に対して行ってください。
 @z
 
 @x
