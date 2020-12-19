@@ -22,10 +22,27 @@ images = \
 	cloud-swarm-connect-desktop.png \
 	cloud-swarm-connect.png \
 	cloud-visualizer.png \
+	dashboard-app-project-collapsed.png \
+	dashboard-app-project-expanded.png  \
+	dashboard-multi-container-app.png   \
+	dashboard-open-cli-ubuntu.png       \
+	dashboard-removing-container.png    \
+	dashboard-two-containers.png        \
 	get-started-visualizer1.png \
+	hvs.png \
+	ide-screenshot.png \
+	items-added.png \
 	laurel-docker-containers.png \
 	laurel-docker-containers2019.png \
+	multi-app-architecture.png \
 	newrepo.png \
+	push-command.png \
+	pwd-add-new-instance.png \
+	todo-list-empty.png \
+	todo-list-sample.png \
+	todo-list-updated-empty-text.png \
+	tutorial-in-dashboard.png \
+	updated-add-button.png \
 	vid-get-started-pmckee.png \
 	visualizer-with-redis.png
 

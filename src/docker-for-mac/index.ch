@@ -365,11 +365,20 @@ File share の設定には以下のものがあります。
 @x
 > Tips on shared folders, permissions, and volume mounts
 >
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
  * Shared folders are designed to allow application code to be edited 
  on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much 
  better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
  (named volume) or [data container](../storage/volumes.md).
+>
+ * If you share the whole of your home directory into a container, MacOS may
+ prompt you to give Docker access to personal areas of your home directory such as
+ your Reminders or Downloads.
 >
  * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
  On Linux, it is possible to create 2 separate files: `test` and `Test`, 
@@ -386,11 +395,20 @@ File share の設定には以下のものがあります。
 {% comment %}
 > Tips on shared folders, permissions, and volume mounts
 >
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
  * Shared folders are designed to allow application code to be edited 
  on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much 
  better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
  (named volume) or [data container](../storage/volumes.md).
+>
+ * If you share the whole of your home directory into a container, MacOS may
+ prompt you to give Docker access to personal areas of your home directory such as
+ your Reminders or Downloads.
 >
  * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
  On Linux, it is possible to create 2 separate files: `test` and `Test`, 
@@ -406,8 +424,15 @@ File share の設定には以下のものがあります。
 {% endcomment %}
 > 共有フォルダー、パーミッション、ボリュームマウントに関するヒント
 >
+ * コンテナーにおいて必要となるディレクトリのみを共有するようにしてください。
+   ファイル共有にはオーバーヘッドがあります。
+   ホスト上のファイルへの変更は Linux VM に対する通知を必要とするためです。
+   共有ファイルが多いと CPU の高負荷を発生させ、ファイルシステムの性能低下を引き起こします。
+>
  * 共有フォルダーは、アプリケーションコードの編集をホスト上で行い、その実行はコンテナー内にて行うということを実現するために用いられます。
    ソースコード以外のキャッシュディレクトリやデータベースなどの場合は、[データボリューム](../storage/volumes.md)（名前つきボリューム）や [データコンテナー](../storage/volumes.md) を利用し、Linux VM 内に配置すれば、性能向上を図ることができます。
+>
+ * コンテナーに対してホームディレクトリ全体を共有する場合、MacOS からのプロンプトが表示され、ホームディレクトリ内の Reminders や Downloads などのような個人データへのアクセス権を Docker に与えるように示されます。
 >
  * Linux のファイルシステムでは英字の大文字小文字が区別されますが、Mac はデフォルトではその区別は行われません。
    Linux 上では`test`と`Test`というファイルは 2 つの別ファイルとして生成可能です。

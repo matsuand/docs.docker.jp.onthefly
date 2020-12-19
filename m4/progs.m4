@@ -11,7 +11,7 @@ AC_ARG_WITH(origdir,
 ]
 )
 AC_MSG_CHECKING([for the original files])
-if test ! -f "${ORIGDIR}/get-started/part2.md"; then
+if test ! -f "${ORIGDIR}/docker-for-mac/index.md"; then
   AC_MSG_RESULT([no])
   AC_MSG_ERROR([The original files not found in ${ORIGDIR}])
 else

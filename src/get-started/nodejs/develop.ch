@@ -61,6 +61,287 @@ Docker を使ってイメージをビルドするとともに Docker Compose を
 @z
 
 @x
+## Local Database and Containers
+@y
+{% comment %}
+## Local Database and Containers
+{% endcomment %}
+{: #local-database-and-containers }
+## ローカルデータベースとコンテナー
+@z
+
+@x
+First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+@y
+{% comment %}
+First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+{% endcomment %}
+まずはコンテナー内でデータベースが起動することを確認します。
+そしてボリュームやネットワークを通じてデータを保存する方法、アプリケーションがデータベースとアクセスする方法を見ていきます。
+これらを 1 つの Compose ファイルにまとめ上げて、ローカル開発環境上においてたった 1 つのコマンドから設定と実行を行うようにします。
+最後にデバッガーへの接続を行って、コンテナー内で稼動するアプリケーションの動作を確認します。
+@z
+
+@x
+Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
+@y
+{% comment %}
+Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
+{% endcomment %}
+MongoDB をダウンロード、インストール、諸設定、サービスとして Mongo データベースの実行、これらは行いません。
+MongoDB 用の Docker 公式イメージがあるので、これをコンテナー内で実行します。
+@z
+
+@x
+Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
+@y
+{% comment %}
+Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
+{% endcomment %}
+コンテナー内で MongoDB を実行するにあたっては、利用データや設定を保存するためのボリュームをいくつか生成します。
+バインドマウントは利用せずに、Docker が提供しているボリューム管理機能を利用します。
+ボリュームに関することは本書のいたるところですべて説明しています。
+@z
+
+@x
+Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+@y
+{% comment %}
+Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+{% endcomment %}
+ボリュームを生成します。
+1 つは MongoDB のデータ用、1 つは MongoDB の設定用です。
+@z
+
+@x
+```shell
+$ docker volume create mongodb
+$ docker volume create mongodb_config
+```
+@y
+```shell
+$ docker volume create mongodb
+$ docker volume create mongodb_config
+```
+@z
+
+@x
+Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
+@y
+{% comment %}
+Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
+{% endcomment %}
+次にアプリケーションとデータベースが互いにやりとりを行うためのネットワークを生成します。
+このネットワークはユーザー定義のブリッジネットワークと呼ばれるもので、接続設定文字列を適切に使えば DNS ルックアップサービスを簡単に提供してくれます。
+@z
+
+@x
+```shell
+$ docker network create mongodb
+```
+@y
+```shell
+$ docker network create mongodb
+```
+@z
+
+@x
+Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
+@y
+{% comment %}
+Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
+{% endcomment %}
+MongoDB をコンテナーにおいて実行し、上で生成したボリュームとネットワークを割り当てます。
+Docker が Hub からイメージをプルして、ローカルでこれを実行します。
+@z
+
+@x
+```shell
+$ docker run -it --rm -d -v mongodb:/data/db \
+  -v mongodb_config:/data/configdb -p 27017:27017 \
+  --network mongodb \
+  --name mongodb \
+  mongo
+```
+@y
+```shell
+$ docker run -it --rm -d -v mongodb:/data/db \
+  -v mongodb_config:/data/configdb -p 27017:27017 \
+  --network mongodb \
+  --name mongodb \
+  mongo
+```
+@z
+
+@x
+Okay, now that we have a running mongodb, let’s update `server.js` to use a the MongoDB and not an in-memory data store.
+@y
+{% comment %}
+Okay, now that we have a running mongodb, let’s update `server.js` to use a the MongoDB and not an in-memory data store.
+{% endcomment %}
+さあ、MongoDB を動かすことができました。
+そこで`server.js`を書き換えて、データ保存をインメモリでなく MongoDB を用いるようにします。
+@z
+
+@x
+```javascript
+const ronin     = require( 'ronin-server' )
+const mocks     = require( 'ronin-mocks' )
+const database  = require( 'ronin-database' )
+const server = ronin.server()
+
+database.connect( process.env.CONNECTIONSTRING )
+server.use( '/', mocks.server( server.Router(), false, false ) )
+server.start()
+```
+@y
+```javascript
+const ronin     = require( 'ronin-server' )
+const mocks     = require( 'ronin-mocks' )
+const database  = require( 'ronin-database' )
+const server = ronin.server()
+
+database.connect( process.env.CONNECTIONSTRING )
+server.use( '/', mocks.server( server.Router(), false, false ) )
+server.start()
+```
+@z
+
+@x
+We’ve add the ronin-database module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
+@y
+{% comment %}
+We’ve add the ronin-database module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
+{% endcomment %}
+上では ronin-database モジュールを追加し、データベースへの接続コードを変更した上で、インメモリフラグを false にしています。
+この変更を反映させるためイメージを再ビルドする必要があります。
+@z
+
+@x
+First let’s add the ronin-database module to our application using npm.
+@y
+{% comment %}
+First let’s add the ronin-database module to our application using npm.
+{% endcomment %}
+その前に npm を使ってアプリケーションに ronin-database モジュールを追加します。
+@z
+
+@x
+```shell
+$ npm install ronin-database
+```
+@y
+```shell
+$ npm install ronin-database
+```
+@z
+
+@x
+Now we can build our image.
+@y
+{% comment %}
+Now we can build our image.
+{% endcomment %}
+イメージをビルドします。
+@z
+
+@x
+```shell
+$ docker build --tag node-docker .
+```
+@y
+```shell
+$ docker build --tag node-docker .
+```
+@z
+
+@x
+Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
+@y
+{% comment %}
+Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
+{% endcomment %}
+コンテナーを起動させます。
+ただし今回は環境変数`CONNECTIONSTRING`を設定することが必要です。
+アプリケーションがどういった接続文字列を使ってデータベースにアクセスするかを伝えるためです。
+`docker run`コマンドの実行時にこれを適切に指定します。
+@z
+
+@x
+```shell
+$ docker run \
+  -it --rm -d \
+  --network mongodb \
+  --name rest-server \
+  -p 8000:8000 \
+  -e CONNECTIONSTRING=mongodb://mongodb:27017/yoda_notes \
+  node-docker
+```
+@y
+```shell
+$ docker run \
+  -it --rm -d \
+  --network mongodb \
+  --name rest-server \
+  -p 8000:8000 \
+  -e CONNECTIONSTRING=mongodb://mongodb:27017/yoda_notes \
+  node-docker
+```
+@z
+
+@x
+Let’s test that our application is connected to the database and is able to add a note.
+@y
+{% comment %}
+Let’s test that our application is connected to the database and is able to add a note.
+{% endcomment %}
+アプリケーションがデータベースに接続できること、メモ（note）を追加できることを確認します。
+@z
+
+@x
+```shell
+$ curl --request POST \
+  --url http://localhost:8000/notes \
+  --header 'content-type: application/json' \
+  --data '{
+"name": "this is a note",
+"text": "this is a note that I wanted to take while I was working on writing a blog post.",
+"owner": "peter"
+}'
+```
+@y
+```shell
+$ curl --request POST \
+  --url http://localhost:8000/notes \
+  --header 'content-type: application/json' \
+  --data '{
+"name": "this is a note",
+"text": "this is a note that I wanted to take while I was working on writing a blog post.",
+"owner": "peter"
+}'
+```
+@z
+
+@x
+You should receive the following json back from our service.
+@y
+{% comment %}
+You should receive the following json back from our service.
+{% endcomment %}
+サービスからの戻り値として以下のような JSON データを受け取るはずです。
+@z
+
+@x
+```json
+{"code":"success","payload":{"_id":"5efd0a1552cd422b59d4f994","name":"this is a note","text":"this is a note that I wanted to take while I was working on writing a blog post.","owner":"peter","createDate":"2020-07-01T22:11:33.256Z"}}
+```
+@y
+```json
+{"code":"success","payload":{"_id":"5efd0a1552cd422b59d4f994","name":"this is a note","text":"this is a note that I wanted to take while I was working on writing a blog post.","owner":"peter","createDate":"2020-07-01T22:11:33.256Z"}}
+```
+@z
+
+@x
 ## Use Compose to develop locally
 @y
 {% comment %}
@@ -70,17 +351,17 @@ Docker を使ってイメージをビルドするとともに Docker Compose を
 ## Compose を使ったローカル開発
 @z
 
-@x
-The notes-service project uses MongoDB as its data store. If you remember from Part I of this series, we had to start the Mongo container manually and connect it to the same network that our notes-service is running on. We also had to create a couple of volumes so we could persist our data across restarts of our application and MongoDB.
-@y
-{% comment %}
-The notes-service project uses MongoDB as its data store. If you remember from Part I of this series, we had to start the Mongo container manually and connect it to the same network that our notes-service is running on. We also had to create a couple of volumes so we could persist our data across restarts of our application and MongoDB.
-{% endcomment %}
-notes-service プロジェクトは、データストアとして MongoDB を利用します。
-本チュートリアルの 1 部からわかるように、Mongo コンテナーは手動で起動して、notes-service が起動している同一のネットワークに接続しなければなりません。
-またボリュームをいくつか生成してデータ保存を行います。
-こうすることでアプリケーションや MongoDB の再起動を行っても、データが失われないようにします。
-@z
+%@x
+%The notes-service project uses MongoDB as its data store. If you remember from Part I of this series, we had to start the Mongo container manually and connect it to the same network that our notes-service is running on. We also had to create a couple of volumes so we could persist our data across restarts of our application and MongoDB.
+%@y
+%{% comment %}
+%The notes-service project uses MongoDB as its data store. If you remember from Part I of this series, we had to start the Mongo container manually and connect it to the same network that our notes-service is running on. We also had to create a couple of volumes so we could persist our data across restarts of our application and MongoDB.
+%{% endcomment %}
+%notes-service プロジェクトは、データストアとして MongoDB を利用します。
+%本チュートリアルの 1 部からわかるように、Mongo コンテナーは手動で起動して、notes-service が起動している同一のネットワークに接続しなければなりません。
+%またボリュームをいくつか生成してデータ保存を行います。
+%こうすることでアプリケーションや MongoDB の再起動を行っても、データが失われないようにします。
+%@z
 
 @x
 In this section, we’ll create a Compose file to start our node-docker and the MongoDB with one command. We’ll also set up the Compose file to start the node-docker in debug mode so that we can connect a debugger to the running node process.

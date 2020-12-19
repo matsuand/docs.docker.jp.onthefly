@@ -56,11 +56,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop Community 3.0.1
-2020-12-11
+## Docker Desktop Community 3.0.2
+2020-12-18
 @y
-## Docker Desktop Community 3.0.1
-2020-12-11
+## Docker Desktop Community 3.0.2
+2020-12-18
 @z
 
 @x
@@ -70,6 +70,74 @@ This page contains information about the new features, improvements, known issue
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 {% endcomment %}
 > [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Avoid timeouts during `docker-compose up` by making cache invalidation faster. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
+- Avoid generating a spurious filesystem DELETE event while invalidating caches. Fixes [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
+- It is now possible to share directories in `~/Library` (except Docker Desktop data directories) with a container. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115).
+- You will now see a performance warning pop-up message if you create a container that shares the `Home` or  a user `Library` directory.
+@y
+{% comment %}
+- Avoid timeouts during `docker-compose up` by making cache invalidation faster. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
+- Avoid generating a spurious filesystem DELETE event while invalidating caches. Fixes [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
+- It is now possible to share directories in `~/Library` (except Docker Desktop data directories) with a container. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115).
+- You will now see a performance warning pop-up message if you create a container that shares the `Home` or  a user `Library` directory.
+{% endcomment %}
+- キャッシュ無効化を高速にすることで`docker-compose up`のタイムアウトを防止しました。
+  [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) を Fix に。
+- キャッシュ無効化の際には、偽のファイルシステムイベント DELETE を生成しないようにしました。
+  [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124) を Fix に。
+- `~/Library`内のディレクトリ（Docker Desktop データディレクトリは除く）をコンテナーと共有できるようにしました。
+  [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115) を Fix に。
+- `Home`ディレクトリまたはユーザーの`Library`ディレクトリを共有するコンテナーを生成した際に、性能に関する警告ポップアップメッセージが表示されるようになります。
+@z
+
+@x
+### Known issues
+@y
+{% comment %}
+### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+@y
+{% comment %}
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+{% endcomment %}
+- Alpine Linux 3.13 に基づくコンテナー内において DNS アドレス解決に失敗することがあります。
+  [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020) を参照のこと。
+@z
+
+@x
+## Docker Desktop Community 3.0.1
+2020-12-11
+@y
+## Docker Desktop Community 3.0.1
+2020-12-11
+@z
+
+@x
+> [Download](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
+@y
+{% comment %}
+> [Download](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
 @z
 
 @x

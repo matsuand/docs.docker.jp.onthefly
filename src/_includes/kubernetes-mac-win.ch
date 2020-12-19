@@ -188,15 +188,29 @@ Kubernetes 有効化の方法、Kubernetes に開発内容をデプロイして�
 @z
 
 @x
-You can deploy a stack on Kubernetes with `docker stack deploy`, the
-`docker-compose.yml` file, and the name of the stack.
+To ensure that the docker stack commands are available on your installation, try
+`docker stack ls`.  If you see the message `failed to find a Stack API version`
+then the commands described on this page are not available.  This can be confirmed
+with `docker version` which should contain the line `StackAPI: Unknown`.
+
+If docker stack commands are working then you can deploy a stack on Kubernetes with
+`docker stack deploy`, the `docker-compose.yml` file, and the name of the stack.
 @y
 {% comment %}
-You can deploy a stack on Kubernetes with `docker stack deploy`, the
-`docker-compose.yml` file, and the name of the stack.
+To ensure that the docker stack commands are available on your installation, try
+`docker stack ls`.  If you see the message `failed to find a Stack API version`
+then the commands described on this page are not available.  This can be confirmed
+with `docker version` which should contain the line `StackAPI: Unknown`.
+
+If docker stack commands are working then you can deploy a stack on Kubernetes with
+`docker stack deploy`, the `docker-compose.yml` file, and the name of the stack.
 {% endcomment %}
-Kubernetes に対して Stack をデプロイすることができます。
-その際には `docker stack deploy`、`docker-compose.yml` ファイル、Stack 名を用います。
+docker stack コマンドがインストールされ利用可能であることを確認するため`docker stack ls`を実行してください。
+`failed to find a Stack API version`というメッセージが表示されたら、本ページに説明しているコマンドを実行することができません。
+`docker version`を実行すれば`StackAPI: Unknown`という行が示されているはずです。
+
+docker stack コマンドが動作している場合は、Kubernetes に対して Stack をデプロイすることができます。
+その際には`docker stack deploy`、`docker-compose.yml`ファイル、Stack 名を用います。
 @z
 
 @x
@@ -217,7 +231,7 @@ You can see the service deployed with the `kubectl get services` command.
 {% comment %}
 You can see the service deployed with the `kubectl get services` command.
 {% endcomment %}
-`kubectl get services` コマンドを使うと、デプロイされているサービスを確認することができます。
+`kubectl get services`コマンドを使うと、デプロイされているサービスを確認することができます。
 @z
 
 @x
@@ -238,8 +252,8 @@ the `--namespace` flag.
 By default, the `default` namespace is used. You can specify a namespace with
 the `--namespace` flag.
 {% endcomment %}
-デフォルトにおいて `default` という名前空間が用いられます。
-名前空間は `--namespace` フラグを使って指定することができます。
+デフォルトにおいて`default`という名前空間が用いられます。
+名前空間は`--namespace`フラグを使って指定することができます。
 @z
 
 @x
@@ -260,7 +274,7 @@ Run `kubectl get services -n my-app` to see only the services deployed in the
 Run `kubectl get services -n my-app` to see only the services deployed in the
 `my-app` namespace.
 {% endcomment %}
-`kubectl get services -n my-app` を実行すると、`my-app` 名前空間内にデプロイされたサービスのみを確認することができます。
+`kubectl get services -n my-app`を実行すると、`my-app`名前空間内にデプロイされたサービスのみを確認することができます。
 @z
 
 @x
@@ -316,8 +330,8 @@ docker stack deploy --compose-file /path/to/docker-compose.yml mystack
 {% endif %}
 {% endcomment %}
 Kubernetes をテストする際に、開発内容を Swarm にデプロイしたいことがあります。
-操作を行っているターミナルのセッション内、あるいは 1 つの Docker コマンド内において、環境変数 `DOCKER_STACK_ORCHESTRATOR` を使うと、デフォルトのオーケストレーターをオーバーライドすることができます。
-この変数は未指定とする（これがデフォルトであり、Kubernetes がオーケストレーターとなる）か、あるいは `swarm` や `kubernetes` に指定します。
+操作を行っているターミナルのセッション内、あるいは 1 つの Docker コマンド内において、環境変数`DOCKER_STACK_ORCHESTRATOR`を使うと、デフォルトのオーケストレーターをオーバーライドすることができます。
+この変数は未指定とする（これがデフォルトであり、Kubernetes がオーケストレーターとなる）か、あるいは`swarm`や`kubernetes`に指定します。
 以下のコマンドは 1 つのデプロイメントにおいてオーケストレーターをオーバーライドします。
 {% if platform == "mac"" %}これが行われるのはコマンドの実行時です。
 
@@ -342,7 +356,7 @@ when deploying to override the default orchestrator for that deployment.
 Alternatively, the `--orchestrator` flag may be set to `swarm` or `kubernetes`
 when deploying to override the default orchestrator for that deployment.
 {% endcomment %}
-別のやり方として `--orchestrator` フラグを利用して `swarm` や `kubernetes` に設定することで、デプロイの際にデフォルトオーケストレーターをオーバーライドする方法もあります。
+別のやり方として`--orchestrator`フラグを利用して`swarm`や`kubernetes`に設定することで、デプロイの際にデフォルトオーケストレーターをオーバーライドする方法もあります。
 @z
 
 @x
@@ -398,10 +412,10 @@ the `PATH`. For more information about `kubectl`, see the
 [official `kubectl` documentation](https://kubernetes.io/docs/reference/kubectl/overview/).
 You can test the command by listing the available nodes:
 {% endcomment %}
-{{ platform }} における Kubernetes 統合環境では、`{{ kubectl-path }}` に Kubernetes CLI コマンドが提供されています。
-このパスは、利用しているシェルの `PATH` 変数には含まれていないかもしれません。
-そこでコマンド実行時にはフルパスを指定するか、`PATH` 設定に加えることが必要になります。
-`kubectl` に関する詳細は [公式の `kubectl` ドキュメント](https://kubernetes.io/docs/reference/kubectl/overview/) を参照してください。
+{{ platform }} における Kubernetes 統合環境では、`{{ kubectl-path }}`に Kubernetes CLI コマンドが提供されています。
+このパスは、利用しているシェルの`PATH`変数には含まれていないかもしれません。
+そこでコマンド実行時にはフルパスを指定するか、`PATH`設定に加えることが必要になります。
+`kubectl`に関する詳細は [公式の`kubectl`ドキュメント](https://kubernetes.io/docs/reference/kubectl/overview/) を参照してください。
 以下のコマンドを実行すれば、利用可能なノード一覧が得られます。
 @z
 
@@ -442,7 +456,7 @@ Docker has created the following demo app that you can deploy to swarm mode or
 to Kubernetes using the `docker stack deploy` command.
 {% endcomment %}
 Docker では以下のようなデモアプリを用意しています。
-`docker stack deploy` コマンドを使って、Swarm へのデプロイ、Kubernetes へのデプロイを行うことができます。
+`docker stack deploy`コマンドを使って、Swarm へのデプロイ、Kubernetes へのデプロイを行うことができます。
 @z
 
 @x
@@ -509,5 +523,5 @@ If you already have a Kubernetes YAML file, you can deploy it using the
 If you already have a Kubernetes YAML file, you can deploy it using the
 `kubectl` command.
 {% endcomment %}
-Kubernetes YAML ファイルがすでにある場合は、`kubectl` コマンドを使ってデプロイを行うことができます。
+Kubernetes YAML ファイルがすでにある場合は、`kubectl`コマンドを使ってデプロイを行うことができます。
 @z

@@ -413,6 +413,11 @@ File share settings are:
 @x
 > Tips on shared folders, permissions, and volume mounts
 >
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
  * Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much better if they are stored in
  the Linux VM, using a [data volume](../storage/volumes.md)
@@ -426,6 +431,11 @@ File share settings are:
 {% comment %}
 > Tips on shared folders, permissions, and volume mounts
 >
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
  * Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much better if they are stored in
  the Linux VM, using a [data volume](../storage/volumes.md)
@@ -437,6 +447,11 @@ File share settings are:
  * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
 {% endcomment %}
 > 共有フォルダー、パーミッション、ボリュームマウントに関するヒント
+>
+ * コンテナーにおいて必要となるディレクトリのみを共有するようにしてください。
+   ファイル共有にはオーバーヘッドがあります。
+   ホスト上のファイルへの変更は Linux VM に対する通知を必要とするためです。
+   共有ファイルが多いと CPU の高負荷を発生させ、ファイルシステムの性能低下を引き起こします。
 >
  * 共有フォルダーは、ホスト上においてアプリケーションコードを編集できるようにしつつ、その実行はコンテナー上で行うという目的で用いられます。
    コード以外のものとしてキャッシュディレクトリ、データベースなどにおいては、[データボリューム](../storage/volumes.md)（名前つきボリューム）や [データコンテナー](../storage/volumes.md) を利用して Linux VM 上に保存しておけば、性能は格段によくなります。
