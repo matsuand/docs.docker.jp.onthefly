@@ -1,0 +1,605 @@
+<!-- Page generated 2020-12-19 12:03:50 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Using Docker Compose | Docker ドキュメント</title>
+  <meta name="description" content="Making our lives easier with Compose for our application" />
+  <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/08_using_compose/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Using Docker Compose"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Using Docker Compose" />
+  <meta property="og:description" content="Making our lives easier with Compose for our application" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/08_using_compose/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Using Docker Compose","description":"Making our lives easier with Compose for our application","url":"https://docs.docker.com/get-started/08_using_compose/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Using Docker Compose</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p><p><a href="/compose/">Docker Compose</a> is a tool that was developed to help define and
+share multi-container applications. With Compose, we can create a YAML file to define the services
+and with a single command, can spin everything up or tear it all down.</p>
+
+<p>The <em>big</em> advantage of using Compose is you can define your application stack in a file, keep it at the root of
+your project repo (it’s now version controlled), and easily enable someone else to contribute to your project.
+Someone would only need to clone your repo and start the compose app. In fact, you might see quite a few projects
+on GitHub/GitLab doing exactly this now.</p>
+
+<p>So, how do we get started?</p>
+
+<h2 id="installing-docker-compose">Installing Docker Compose</h2>
+
+<p>If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose!
+Play-with-Docker instances already have Docker Compose installed as well. If you are on
+a Linux machine, you will need to install Docker Compose using
+<a href="/compose/install/">the instructions here</a>.</p>
+
+<p>After installation, you should be able to run the following and see version information.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose version
+</code></pre></div></div>
+
+<h2 id="creating-our-compose-file">Creating our Compose File</h2>
+
+<ol>
+  <li>
+    <p>At the root of the app project, create a file named <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>.</p>
+  </li>
+  <li>
+    <p>In the compose file, we’ll start off by defining the schema version. In most cases, it’s best to use
+the latest supported version. You can look at the <a href="https://docs.docker.com/compose/compose-file/">Compose file reference</a>
+for the current schema versions and the compatibility matrix.</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.7"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Next, we’ll define the list of services (or containers) we want to run as part of our application.</p>
+
+    <p>```yaml hl_lines=”3”
+ version: “3.7”</p>
+
+    <p>services:
+ ```</p>
+  </li>
+</ol>
+
+<p>And now, we’ll start migrating a service at a time into the compose file.</p>
+
+<h2 id="defining-the-app-service">Defining the App Service</h2>
+
+<p>To remember, this was the command we were using to define our app container.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-dp</span> 3000:3000 <span class="se">\</span>
+  <span class="nt">-w</span> /app <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">:/app"</span> <span class="se">\</span>
+  <span class="nt">--network</span> todo-app <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_USER</span><span class="o">=</span>root <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>secret <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_DB</span><span class="o">=</span>todos <span class="se">\</span>
+  node:12-alpine <span class="se">\</span>
+  sh <span class="nt">-c</span> <span class="s2">"yarn install &amp;&amp; yarn run dev"</span>
+</code></pre></div></div>
+
+<p>If you are using PowerShell then use this command.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-dp</span><span class="w"> </span><span class="nx">3000:3000</span><span class="w"> </span><span class="se">`
+</span><span class="w">  </span><span class="nt">-w</span><span class="w"> </span><span class="nx">/app</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="s2">"</span><span class="si">$(</span><span class="nf">pwd</span><span class="p">):</span><span class="nf">/app</span><span class="s2">" </span><span class="se">`</span><span class="s2">
+  --network todo-app </span><span class="se">`</span><span class="s2">
+  -e MYSQL_HOST=mysql </span><span class="se">`</span><span class="s2">
+  -e MYSQL_USER=root </span><span class="se">`</span><span class="s2">
+  -e MYSQL_PASSWORD=secret </span><span class="se">`</span><span class="s2">
+  -e MYSQL_DB=todos </span><span class="se">`</span><span class="s2">
+  node:12-alpine </span><span class="se">`</span><span class="s2">
+  sh -c "</span><span class="nx">yarn</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">dev</span><span class="s2">"
+</span></code></pre></div></div>
+
+<ol>
+  <li>
+    <p>First, let’s define the service entry and the image for the container. We can pick any name for the service.
+The name will automatically become a network alias, which will be useful when defining our MySQL service.</p>
+
+    <p>```yaml hl_lines=”4 5”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     image: node:12-alpine
+ ```</p>
+  </li>
+  <li>
+    <p>Typically, you will see the command close to the <code class="language-plaintext highlighter-rouge">image</code> definition, although there is no requirement on ordering.
+So, let’s go ahead and move that into our file.</p>
+
+    <p>```yaml hl_lines=”6”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     image: node:12-alpine
+     command: sh -c “yarn install &amp;&amp; yarn run dev”
+ ```</p>
+  </li>
+  <li>
+    <p>Let’s migrate the <code class="language-plaintext highlighter-rouge">-p 3000:3000</code> part of the command by defining the <code class="language-plaintext highlighter-rouge">ports</code> for the service. We will use the
+<a href="https://docs.docker.com/compose/compose-file/#short-syntax-1">short syntax</a> here, but there is also a more verbose
+<a href="https://docs.docker.com/compose/compose-file/#long-syntax-1">long syntax</a> available as well.</p>
+
+    <p>```yaml hl_lines=”7 8”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     image: node:12-alpine
+     command: sh -c “yarn install &amp;&amp; yarn run dev”
+     ports:
+       - 3000:3000
+ ```</p>
+  </li>
+  <li>
+    <p>Next, we’ll migrate both the working directory (<code class="language-plaintext highlighter-rouge">-w /app</code>) and the volume mapping (<code class="language-plaintext highlighter-rouge">-v "$(pwd):/app"</code>) by using
+the <code class="language-plaintext highlighter-rouge">working_dir</code> and <code class="language-plaintext highlighter-rouge">volumes</code> definitions. Volumes also has a <a href="https://docs.docker.com/compose/compose-file/#short-syntax-3">short</a> and <a href="https://docs.docker.com/compose/compose-file/#long-syntax-3">long</a> syntax.</p>
+
+    <p>One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.</p>
+
+    <p>```yaml hl_lines=”9 10 11”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     image: node:12-alpine
+     command: sh -c “yarn install &amp;&amp; yarn run dev”
+     ports:
+       - 3000:3000
+     working_dir: /app
+     volumes:
+       - ./:/app
+ ```</p>
+  </li>
+  <li>
+    <p>Finally, we need to migrate the environment variable definitions using the <code class="language-plaintext highlighter-rouge">environment</code> key.</p>
+
+    <p>```yaml hl_lines=”12 13 14 15 16”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     image: node:12-alpine
+     command: sh -c “yarn install &amp;&amp; yarn run dev”
+     ports:
+       - 3000:3000
+     working_dir: /app
+     volumes:
+       - ./:/app
+     environment:
+       MYSQL_HOST: mysql
+       MYSQL_USER: root
+       MYSQL_PASSWORD: secret
+       MYSQL_DB: todos
+ ```</p>
+  </li>
+</ol>
+
+<h3 id="defining-the-mysql-service">Defining the MySQL Service</h3>
+
+<p>Now, it’s time to define the MySQL service. The command that we used for that container was the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--network</span> todo-app <span class="nt">--network-alias</span> mysql <span class="se">\</span>
+  <span class="nt">-v</span> todo-mysql-data:/var/lib/mysql <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">\</span>
+  mysql:5.7
+</code></pre></div></div>
+
+<p>If you are using PowerShell then use this command.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="se">`
+</span><span class="w">  </span><span class="nt">--network</span><span class="w"> </span><span class="nx">todo-app</span><span class="w"> </span><span class="nt">--network-alias</span><span class="w"> </span><span class="nx">mysql</span><span class="w"> </span><span class="se">`
+</span><span class="w">  </span><span class="nt">-v</span><span class="w"> </span><span class="nx">todo-mysql-data:/var/lib/mysql</span><span class="w"> </span><span class="se">`
+</span><span class="w">  </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="nf">secret</span><span class="w"> </span><span class="se">`
+</span><span class="w">  </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_DATABASE</span><span class="o">=</span><span class="nf">todos</span><span class="w"> </span><span class="se">`
+</span><span class="w">  </span><span class="nx">mysql:5.7</span><span class="w">
+</span></code></pre></div></div>
+
+<ol>
+  <li>
+    <p>We will first define the new service and name it <code class="language-plaintext highlighter-rouge">mysql</code> so it automatically gets the network alias. We’ll
+go ahead and specify the image to use as well.</p>
+
+    <p>```yaml hl_lines=”6 7”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     # The app service definition
+   mysql:
+     image: mysql:5.7
+ ```</p>
+  </li>
+  <li>
+    <p>Next, we’ll define the volume mapping. When we ran the container with <code class="language-plaintext highlighter-rouge">docker run</code>, the named volume was created
+automatically. However, that doesn’t happen when running with Compose. We need to define the volume in the top-level
+<code class="language-plaintext highlighter-rouge">volumes:</code> section and then specify the mountpoint in the service config. By simply providing only the volume name,
+the default options are used. There are <a href="https://docs.docker.com/compose/compose-file/#volume-configuration-reference">many more options available</a> though.</p>
+
+    <p>```yaml hl_lines=”8 9 10 11 12”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     # The app service definition
+   mysql:
+     image: mysql:5.7
+     volumes:
+       - todo-mysql-data:/var/lib/mysql</p>
+
+    <p>volumes:
+   todo-mysql-data:
+ ```</p>
+  </li>
+  <li>
+    <p>Finally, we only need to specify the environment variables.</p>
+
+    <p>```yaml hl_lines=”10 11 12”
+ version: “3.7”</p>
+
+    <p>services:
+   app:
+     # The app service definition
+   mysql:
+     image: mysql:5.7
+     volumes:
+       - todo-mysql-data:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD: secret
+       MYSQL_DATABASE: todos</p>
+
+    <p>volumes:
+   todo-mysql-data:
+ ```</p>
+  </li>
+</ol>
+
+<p>At this point, our complete <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> should look like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.7"</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">node:12-alpine</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">sh -c "yarn install &amp;&amp; yarn run dev"</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">3000:3000</span>
+    <span class="na">working_dir</span><span class="pi">:</span> <span class="s">/app</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./:/app</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_HOST</span><span class="pi">:</span> <span class="s">mysql</span>
+      <span class="na">MYSQL_USER</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">MYSQL_PASSWORD</span><span class="pi">:</span> <span class="s">secret</span>
+      <span class="na">MYSQL_DB</span><span class="pi">:</span> <span class="s">todos</span>
+
+  <span class="na">mysql</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:5.7</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">todo-mysql-data:/var/lib/mysql</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">secret</span>
+      <span class="na">MYSQL_DATABASE</span><span class="pi">:</span> <span class="s">todos</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">todo-mysql-data</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<h2 id="running-our-application-stack">Running our Application Stack</h2>
+
+<p>Now that we have our <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file, we can start it up!</p>
+
+<ol>
+  <li>
+    <p>Make sure no other copies of the app/db are running first (<code class="language-plaintext highlighter-rouge">docker ps</code> and <code class="language-plaintext highlighter-rouge">docker rm -f &lt;ids&gt;</code>).</p>
+  </li>
+  <li>
+    <p>Start up the application stack using the <code class="language-plaintext highlighter-rouge">docker-compose up</code> command. We’ll add the <code class="language-plaintext highlighter-rouge">-d</code> flag to run everything in the
+background.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker-compose up <span class="nt">-d</span>
+</code></pre></div>    </div>
+
+    <p>When we run this, we should see output like this:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Creating network "app_default" with the default driver
+ Creating volume "app_todo-mysql-data" with default driver
+ Creating app_app_1   ... done
+ Creating app_mysql_1 ... done
+</code></pre></div>    </div>
+
+    <p>You’ll notice that the volume was created as well as a network! By default, Docker Compose automatically creates a
+ network specifically for the application stack (which is why we didn’t define one in the compose file).</p>
+  </li>
+  <li>
+    <p>Let’s look at the logs using the <code class="language-plaintext highlighter-rouge">docker-compose logs -f</code> command. You’ll see the logs from each of the services interleaved
+ into a single stream. This is incredibly useful when you want to watch for timing-related issues. The <code class="language-plaintext highlighter-rouge">-f</code> flag “follows” the
+ log, so will give you live output as it’s generated.</p>
+
+    <p>If you don’t already, you’ll see output that looks like this...</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql_1  | 2019-10-03T03:07:16.083639Z 0 [Note] mysqld: ready for connections.
+ mysql_1  | Version: '5.7.27'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+ app_1    | Connected to mysql db at host mysql
+ app_1    | Listening on port 3000
+</code></pre></div>    </div>
+
+    <p>The service name is displayed at the beginning of the line (often colored) to help distinguish messages. If you want to
+ view the logs for a specific service, you can add the service name to the end of the logs command (for example,
+ <code class="language-plaintext highlighter-rouge">docker-compose logs -f app</code>).</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p><strong>Pro tip</strong>  Waiting for the DB before starting the app</p>
+
+  <p>When the app is starting up, it actually sits and waits for MySQL to be up and ready before trying to connect to it.
+Docker doesn’t have any built-in support to wait for another container to be fully up, running, and ready
+before starting another container. For Node-based projects, you can use the
+<a href="https://github.com/dwmkerr/wait-port">wait-port</a> dependency. Similar projects exist for other languages/frameworks.</p>
+</blockquote>
+
+<ol>
+  <li>At this point, you should be able to open your app and see it running. And hey! We’re down to a single command!</li>
+</ol>
+
+<h2 id="seeing-our-app-stack-in-docker-dashboard">Seeing our App Stack in Docker Dashboard</h2>
+
+<p>If we look at the Docker Dashboard, we’ll see that there is a group named <strong>app</strong>. This is the “project name” from Docker
+Compose and used to group the containers together. By default, the project name is simply the name of the directory that the
+<code class="language-plaintext highlighter-rouge">docker-compose.yml</code> was located in.</p>
+
+<p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-app-project-collapsed.png" alt="Docker Dashboard with app project" /></p>
+
+<p>If you twirl down the app, you will see the two containers we defined in the compose file. The names are also a little
+more descriptive, as they follow the pattern of <code class="language-plaintext highlighter-rouge">&lt;project-name&gt;_&lt;service-name&gt;_&lt;replica-number&gt;</code>. So, it’s very easy to
+quickly see what container is our app and which container is the mysql database.</p>
+
+<p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-app-project-expanded.png" alt="Docker Dashboard with app project expanded" /></p>
+
+<h2 id="tearing-it-all-down">Tearing it All Down</h2>
+
+<p>When you’re ready to tear it all down, simply run <code class="language-plaintext highlighter-rouge">docker-compose down</code> or hit the trash can on the Docker Dashboard
+for the entire app. The containers will stop and the network will be removed.</p>
+
+<blockquote>
+  <p><strong>Warning</strong>
+Removing Volumes
+By default, named volumes in your compose file are NOT removed when running <code class="language-plaintext highlighter-rouge">docker-compose down</code>. If you want to
+remove the volumes, you will need to add the <code class="language-plaintext highlighter-rouge">--volumes</code> flag.</p>
+
+  <p>The Docker Dashboard does <em>not</em> remove volumes when you delete the app stack.</p>
+</blockquote>
+
+<p>Once torn down, you can switch to another project, run <code class="language-plaintext highlighter-rouge">docker-compose up</code> and be ready to contribute to that project! It really
+doesn’t get much simpler than that!</p>
+
+<h2 id="recap">Recap</h2>
+
+<p>In this section, we learned about Docker Compose and how it helps us dramatically simplify the defining and
+sharing of multi-service applications. We created a Compose file by translating the commands we were
+using into the appropriate compose format.</p>
+
+<p>At this point, we’re starting to wrap up the tutorial. However, there are a few best practices about
+image building we want to cover, as there is a big issue with the Dockerfile we’ve been using. So,
+let’s take a look!</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/08_using_compose.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/08_using_compose.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/08_using_compose/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#installing-docker-compose" class="nomunge">Installing Docker Compose</a></li>
+  <li><a href="#creating-our-compose-file" class="nomunge">Creating our Compose File</a></li>
+  <li><a href="#defining-the-app-service" class="nomunge">Defining the App Service</a>
+    <ul>
+      <li><a href="#defining-the-mysql-service" class="nomunge">Defining the MySQL Service</a></li>
+    </ul>
+  </li>
+  <li><a href="#running-our-application-stack" class="nomunge">Running our Application Stack</a></li>
+  <li><a href="#seeing-our-app-stack-in-docker-dashboard" class="nomunge">Seeing our App Stack in Docker Dashboard</a></li>
+  <li><a href="#tearing-it-all-down" class="nomunge">Tearing it All Down</a></li>
+  <li><a href="#recap" class="nomunge">Recap</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/get-started/08_using_compose/";</script></body>
+</html>

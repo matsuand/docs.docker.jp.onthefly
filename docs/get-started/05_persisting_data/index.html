@@ -1,10 +1,10 @@
 <!-- Page generated 2020-12-19 12:03:50 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Orientation and setup | Docker ドキュメント</title>
-  <meta name="description" content="Get oriented on some basics of Docker and install Docker Desktop." />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Persisting our DB | Docker ドキュメント</title>
+  <meta name="description" content="Making our DB persistent in our application" />
   <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/" />
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/05_persisting_data/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Orientation and setup"/>
+  <meta name="twitter:title" itemprop="title name" content="Persisting our DB"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Orientation and setup" />
-  <meta property="og:description" content="Get oriented on some basics of Docker and install Docker Desktop." />
+  <meta property="og:title" content="Persisting our DB" />
+  <meta property="og:description" content="Making our DB persistent in our application" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/05_persisting_data/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Orientation and setup","description":"Get oriented on some basics of Docker and install Docker Desktop.","url":"https://docs.docker.com/get-started/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Persisting our DB","description":"Making our DB persistent in our application","url":"https://docs.docker.com/get-started/05_persisting_data/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,95 +98,184 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Orientation and setup</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Welcome! We are excited that you want to learn Docker.</p>
+                        <section class="section"><h1>Persisting our DB</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><p>In case you didn’t notice, our todo list is being wiped clean every single time
+we launch the container. Why is this? Let’s dive into how the container is working.</p>
 
-<p>This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from DockerCon 2020.</p>
+<h2 id="the-containers-filesystem">The Container’s Filesystem</h2>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<p>When a container runs, it uses the various layers from an image for its filesystem.
+Each container also gets its own “scratch space” to create/update/remove files. Any
+changes won’t be seen in another container, <em>even if</em> they are using the same image.</p>
 
-<p>In this tutorial, you’ll learn about creating and deploying Docker apps, including using multiple containers with a database, and using Docker Compose. You’ll also deploy your containerized app to Azure.</p>
+<h3 id="seeing-this-in-practice">Seeing this in Practice</h3>
 
-<h2 id="start-the-tutorial">Start the tutorial</h2>
+<p>To see this in action, we’re going to start two containers and create a file in each.
+What you’ll see is that the files created in one container aren’t available in another.</p>
 
-<p>If you’ve already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:</p>
+<ol class="text-center">
+  <li>
+    <p>Start a <code class="language-plaintext highlighter-rouge">ubuntu</code> container that will create a file named <code class="language-plaintext highlighter-rouge">/data.txt</code> with a random number
+between 1 and 10000.</p>
 
-<pre><code class="language-cli">docker run -d -p 80:80 docker/getting-started
-</code></pre>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-d</span> ubuntu bash <span class="nt">-c</span> <span class="s2">"shuf -i 1-10000 -n 1 -o /data.txt &amp;&amp; tail -f /dev/null"</span>
+</code></pre></div>    </div>
 
-<p>You’ll notice a few flags being used. Here’s some more info on them:</p>
+    <p>In case you’re curious about the command, we’re starting a bash shell and invoking two
+ commands (why we have the <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>). The first portion picks a single random number and writes
+ it to <code class="language-plaintext highlighter-rouge">/data.txt</code>. The second command is simply watching a file to keep the container running.</p>
+  </li>
+  <li>
+    <p>Validate we can see the output by <code class="language-plaintext highlighter-rouge">exec</code>‘ing into the container. To do so, open the Dashboard and click the first action of the container that is running the <code class="language-plaintext highlighter-rouge">ubuntu</code> image.</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">-d</code> - run the container in detached mode (in the background)</li>
-  <li><code class="language-plaintext highlighter-rouge">-p 80:80</code> - map port 80 of the host to port 80 in the container</li>
-  <li><code class="language-plaintext highlighter-rouge">docker/getting-started</code> - the image to use</li>
-</ul>
+    <p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-open-cli-ubuntu.png" alt="Dashboard open CLI into ubuntu container" /></p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
+
+```bash
+cat /data.txt
+```
+
+If you prefer the command line you can use the `docker exec` command to do the same. You need to get the    container's ID (use `docker ps` to get it) and get the content with the following command.
+
+```bash
+docker exec &lt;container-id&gt; cat /data.txt
+```
+
+You should see a random number!
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Now, let’s start another <code class="language-plaintext highlighter-rouge">ubuntu</code> container (the same image) and we’ll see we don’t have the same
+file.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-it</span> ubuntu <span class="nb">ls</span> /
+</code></pre></div>    </div>
+
+    <p>And look! There’s no <code class="language-plaintext highlighter-rouge">data.txt</code> file there! That’s because it was written to the scratch space for
+ only the first container.</p>
+  </li>
+  <li>
+    <p>Go ahead and remove the first container using the <code class="language-plaintext highlighter-rouge">docker rm -f</code> command.</p>
+  </li>
+</ol>
+
+<h2 id="container-volumes">Container Volumes</h2>
+
+<p>With the previous experiment, we saw that each container starts from the image definition each time it starts.
+While containers can create, update, and delete files, those changes are lost when the container is removed
+and all changes are isolated to that container. With volumes, we can change all of this.</p>
+
+<p><a href="/storage/volumes/">Volumes</a> provide the ability to connect specific filesystem paths of
+the container back to the host machine. If a directory in the container is mounted, changes in that
+directory are also seen on the host machine. If we mount that same directory across container restarts, we’d see
+the same files.</p>
+
+<p>There are two main types of volumes. We will eventually use both, but we will start with <strong>named volumes</strong>.</p>
+
+<h2 id="persisting-our-todo-data">Persisting our Todo Data</h2>
+
+<p>By default, the todo app stores its data in a <a href="https://www.sqlite.org/index.html">SQLite Database</a> at
+<code class="language-plaintext highlighter-rouge">/etc/todos/todo.db</code>. If you’re not familiar with SQLite, no worries! It’s simply a relational database in
+which all of the data is stored in a single file. While this isn’t the best for large-scale applications,
+it works for small demos. We’ll talk about switching this to a different database engine later.</p>
+
+<p>With the database being a single file, if we can persist that file on the host and make it available to the
+next container, it should be able to pick up where the last one left off. By creating a volume and attaching
+(often called “mounting”) it to the directory the data is stored in, we can persist the data. As our container
+writes to the <code class="language-plaintext highlighter-rouge">todo.db</code> file, it will be persisted to the host in the volume.</p>
+
+<p>As mentioned, we are going to use a <strong>named volume</strong>. Think of a named volume as simply a bucket of data.
+Docker maintains the physical location on the disk and you only need to remember the name of the volume.
+Every time you use the volume, Docker will make sure the correct data is provided.</p>
+
+<ol>
+  <li>
+    <p>Create a volume by using the <code class="language-plaintext highlighter-rouge">docker volume create</code> command.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker volume create todo-db
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Stop the todo app container once again in the Dashboard (or with <code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code>), as it is still running without using the persistent volume.</p>
+  </li>
+  <li>
+    <p>Start the todo app container, but add the <code class="language-plaintext highlighter-rouge">-v</code> flag to specify a volume mount. We will use the named volume and mount
+it to <code class="language-plaintext highlighter-rouge">/etc/todos</code>, which will capture all files created at the path.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-dp</span> 3000:3000 <span class="nt">-v</span> todo-db:/etc/todos getting-started
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Once the container starts up, open the app and add a few items to your todo list.</p>
+
+    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/items-added.png" alt="Items added to todo list" style="width: 55%; " /></p>
+  </li>
+  <li>
+    <p>Remove the container for the todo app. Use the Dashboard or <code class="language-plaintext highlighter-rouge">docker ps</code> to get the ID and then <code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code> to remove it.</p>
+  </li>
+  <li>
+    <p>Start a new container using the same command from above.</p>
+  </li>
+  <li>
+    <p>Open the app. You should see your items still in your list!</p>
+  </li>
+  <li>
+    <p>Go ahead and remove the container when you’re done checking out your list.</p>
+  </li>
+</ol>
+
+<p>Hooray! You’ve now learned how to persist data!</p>
 
 <blockquote>
-  <p><strong>Pro tip</strong></p>
+  <p><strong>Pro-tip</strong></p>
 
-  <p>You can combine single character flags to shorten the full command.
-As an example, the command above could be written as:</p>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -dp 80:80 docker/getting-started
-</code></pre></div>  </div>
+  <p>While named volumes and bind mounts (which we’ll talk about in a minute) are the two main types of volumes supported
+by a default Docker engine installation, there are many volume driver plugins available to support NFS, SFTP, NetApp,
+and more! This will be especially important once you start running containers on multiple hosts in a clustered
+environment with Swarm, Kubernetes, etc.</p>
 
 </blockquote>
 
-<h2 id="the-docker-dashboard">The Docker Dashboard</h2>
+<h2 id="diving-into-our-volume">Diving into our Volume</h2>
 
-<p>Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. It gives you quick
-access to container logs, lets you get a shell inside the container, and lets you
-easily manage container lifecycle (stop, remove, etc.).</p>
+<p>A lot of people frequently ask “Where is Docker <em>actually</em> storing my data when I use a named volume?” If you want to know,
+you can use the <code class="language-plaintext highlighter-rouge">docker volume inspect</code> command.</p>
 
-<p>To access the dashboard, follow the instructions for either
-<a href="https://docs.docker.com/docker-for-mac/dashboard/">Mac</a> or
-<a href="https://docs.docker.com/docker-for-windows/dashboard/">Windows</a>. If you open the dashboard
-now, you will see this tutorial running! The container name (<code class="language-plaintext highlighter-rouge">jolly_bouman</code> below) is a
-randomly created name. So, you’ll most likely have a different name.</p>
-
-<p><img src="/docs.docker.jp.onthefly/get-started/images/tutorial-in-dashboard.png" alt="Tutorial container running in Docker Dashboard" /></p>
-
-<h2 id="what-is-a-container">What is a container?</h2>
-
-<p>Now that you’ve run a container, what <em>is</em> a container? Simply put, a container is
-simply another process on your machine that has been isolated from all other processes
-on the host machine. That isolation leverages <a href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">kernel namespaces and cgroups</a>, features that have been
-in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use.</p>
-
-<p>!!! info “Creating Containers from Scratch”
-    If you’d like to see how containers are built from scratch, Liz Rice from Aqua Security
-    has a fantastic talk in which she creates a container from scratch in Go. While she makes
-    a simple container, this talk doesn’t go into networking, using images for the filesystem,
-    and more. But, it gives a <em>fantastic</em> deep dive into how things are working.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker volume inspect todo-db
+<span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">"CreatedAt"</span>: <span class="s2">"2019-09-26T02:18:36Z"</span>,
+        <span class="s2">"Driver"</span>: <span class="s2">"local"</span>,
+        <span class="s2">"Labels"</span>: <span class="o">{}</span>,
+        <span class="s2">"Mountpoint"</span>: <span class="s2">"/var/lib/docker/volumes/todo-db/_data"</span>,
+        <span class="s2">"Name"</span>: <span class="s2">"todo-db"</span>,
+        <span class="s2">"Options"</span>: <span class="o">{}</span>,
+        <span class="s2">"Scope"</span>: <span class="s2">"local"</span>
+    <span class="o">}</span>
+<span class="o">]</span>
 </code></pre></div></div>
 
-<h2 id="what-is-a-container-image">What is a container image?</h2>
+<p>The <code class="language-plaintext highlighter-rouge">Mountpoint</code> is the actual location on the disk where the data is stored. Note that on most machines, you will
+need to have root access to access this directory from the host. But, that’s where it is!</p>
 
-<p>When running a container, it uses an isolated filesystem. This custom filesystem is provided
-by a <strong>container image</strong>. Since the image contains the container’s filesystem, it must contain everything
-needed to run an application - all dependencies, configuration, scripts, binaries, etc. The
-image also contains other configuration for the container, such as environment variables,
-a default command to run, and other metadata.</p>
+<blockquote>
+  <p><strong>Accessing Volume data directly on Docker Desktop</strong></p>
 
-<p>We’ll dive deeper into images later on, covering topics such as layering, best practices, and more.</p>
+  <p>While running in Docker Desktop, the Docker commands are actually running inside a small VM on your machine.
+If you wanted to look at the actual contents of the Mountpoint directory, you would need to first get inside
+of the VM.</p>
+</blockquote>
 
-<p>!!! info
-    If you’re familiar with <code class="language-plaintext highlighter-rouge">chroot</code>, think of a container as an extended version of <code class="language-plaintext highlighter-rouge">chroot</code>. The
-    filesystem is simply coming from the image. But, a container adds additional isolation not
-    available when simply using chroot.</p>
+<h2 id="recap">Recap</h2>
 
-<h2 id="cli-references">CLI references</h2>
+<p>At this point, we have a functioning application that can survive restarts! We can show it off to our investors and
+hope they can catch our vision!</p>
 
-<p>Refer to the following topics for further documentation on all CLI commands used in this article:</p>
-
-<ul>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/version/">docker version</a></li>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/run/">docker run</a></li>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/image/">docker image</a></li>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/container/">docker container</a></li>
-</ul>
+<p>However, we saw earlier that rebuilding images for every change takes quite a bit of time. There’s got to be a better
+way to make changes, right? With bind mounts (which we hinted at earlier), there is a better way! Let’s take a look at that now!</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -201,7 +290,7 @@ a default command to run, and other metadata.</p>
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/index.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/index.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/05_persisting_data.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/05_persisting_data.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/05_persisting_data/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -220,11 +309,15 @@ a default command to run, and other metadata.</p>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#start-the-tutorial" class="nomunge">Start the tutorial</a></li>
-  <li><a href="#the-docker-dashboard" class="nomunge">The Docker Dashboard</a></li>
-  <li><a href="#what-is-a-container" class="nomunge">What is a container?</a></li>
-  <li><a href="#what-is-a-container-image" class="nomunge">What is a container image?</a></li>
-  <li><a href="#cli-references" class="nomunge">CLI references</a></li>
+  <li><a href="#the-containers-filesystem" class="nomunge">The Container’s Filesystem</a>
+    <ul>
+      <li><a href="#seeing-this-in-practice" class="nomunge">Seeing this in Practice</a></li>
+    </ul>
+  </li>
+  <li><a href="#container-volumes" class="nomunge">Container Volumes</a></li>
+  <li><a href="#persisting-our-todo-data" class="nomunge">Persisting our Todo Data</a></li>
+  <li><a href="#diving-into-our-volume" class="nomunge">Diving into our Volume</a></li>
+  <li><a href="#recap" class="nomunge">Recap</a></li>
 </ul>
 
 </div>
@@ -310,5 +403,5 @@ a default command to run, and other metadata.</p>
     </div>
 
     </footer>
-    <script>const pageURL = "/get-started/";</script></body>
+    <script>const pageURL = "/get-started/05_persisting_data/";</script></body>
 </html>

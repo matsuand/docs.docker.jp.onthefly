@@ -1,0 +1,498 @@
+<!-- Page generated 2020-12-19 12:03:50 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Multi container apps | Docker ドキュメント</title>
+  <meta name="description" content="Using more than one container in our application" />
+  <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/07_multi_container/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Multi container apps"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Multi container apps" />
+  <meta property="og:description" content="Using more than one container in our application" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/07_multi_container/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Multi container apps","description":"Using more than one container in our application","url":"https://docs.docker.com/get-started/07_multi_container/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Multi container apps</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><p>Up to this point, we have been working with single container apps. But, we now want to add MySQL to the
+application stack. The following question often arises - “Where will MySQL run? Install it in the same
+container or run it separately?” In general, <strong>each container should do one thing and do it well.</strong> A few
+reasons:</p>
+
+<ul>
+  <li>There’s a good chance you’d have to scale APIs and front-ends differently than databases</li>
+  <li>Separate containers let you version and update versions in isolation</li>
+  <li>While you may use a container for the database locally, you may want to use a managed service
+for the database in production. You don’t want to ship your database engine with your app then.</li>
+  <li>Running multiple processes will require a process manager (the container only starts one process),
+which adds complexity to container startup/shutdown</li>
+</ul>
+
+<p>And there are more reasons. So, we will update our application to work like this:</p>
+
+<p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/multi-app-architecture.png" alt="Todo App connected to MySQL container" /></p>
+
+<h2 id="container-networking">Container Networking</h2>
+
+<p>Remember that containers, by default, run in isolation and don’t know anything about other processes
+or containers on the same machine. So, how do we allow one container to talk to another? The answer is
+<strong>networking</strong>. Now, you don’t have to be a network engineer (hooray!). Simply remember this rule...</p>
+
+<blockquote>
+  <p>If two containers are on the same network, they can talk to each other. If they aren’t, they can’t.</p>
+</blockquote>
+
+<h2 id="starting-mysql">Starting MySQL</h2>
+
+<p>There are two ways to put a container on a network: 1) Assign it at start or 2) connect an existing container.
+For now, we will create the network first and attach the MySQL container at startup.</p>
+
+<ol>
+  <li>
+    <p>Create the network.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker network create todo-app
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Start a MySQL container and attach it to the network. We’re also going to define a few environment variables that the
+  database will use to initialize the database (see the “Environment Variables” section in the <a href="https://hub.docker.com/_/mysql/">MySQL Docker Hub listing</a>).</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-d</span> <span class="se">\</span>
+     <span class="nt">--network</span> todo-app <span class="nt">--network-alias</span> mysql <span class="se">\</span>
+     <span class="nt">-v</span> todo-mysql-data:/var/lib/mysql <span class="se">\</span>
+     <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret <span class="se">\</span>
+     <span class="nt">-e</span> <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos <span class="se">\</span>
+     mysql:5.7
+</code></pre></div>    </div>
+
+    <p>If you are using PowerShell then use this command.</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">--network</span><span class="w"> </span><span class="nx">todo-app</span><span class="w"> </span><span class="nt">--network-alias</span><span class="w"> </span><span class="nx">mysql</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">-v</span><span class="w"> </span><span class="nx">todo-mysql-data:/var/lib/mysql</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="nf">secret</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">-e</span><span class="w"> </span><span class="nx">MYSQL_DATABASE</span><span class="o">=</span><span class="nf">todos</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nx">mysql:5.7</span><span class="w">
+</span></code></pre></div>    </div>
+
+    <p>You’ll also see we specified the <code class="language-plaintext highlighter-rouge">--network-alias</code> flag. We’ll come back to that in just a moment.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p><strong>Pro-tip</strong></p>
+
+  <p>You’ll notice we’re using a volume named <code class="language-plaintext highlighter-rouge">todo-mysql-data</code> here and mounting it at <code class="language-plaintext highlighter-rouge">/var/lib/mysql</code>, which is
+where MySQL stores its data. However, we never ran a <code class="language-plaintext highlighter-rouge">docker volume create</code> command. Docker recognizes we want
+to use a named volume and creates one automatically for us.</p>
+
+</blockquote>
+
+<ol>
+  <li>
+    <p>To confirm we have the database up and running, connect to the database and verify it connects.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;mysql-container-id&gt; mysql <span class="nt">-p</span>
+</code></pre></div>    </div>
+
+    <p>When the password prompt comes up, type in <strong>secret</strong>. In the MySQL shell, list the databases and verify
+ you see the <code class="language-plaintext highlighter-rouge">todos</code> database.</p>
+
+    <pre><code class="language-cli"> mysql&gt; SHOW DATABASES;
+</code></pre>
+
+    <p>You should see output that looks like this:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> +--------------------+
+ | Database           |
+ +--------------------+
+ | information_schema |
+ | mysql              |
+ | performance_schema |
+ | sys                |
+ | todos              |
+ +--------------------+
+ 5 rows in set (0.00 sec)
+</code></pre></div>    </div>
+
+    <p>Hooray! We have our <code class="language-plaintext highlighter-rouge">todos</code> database and it’s ready for us to use!</p>
+  </li>
+</ol>
+
+<h2 id="connecting-to-mysql">Connecting to MySQL</h2>
+
+<p>Now that we know MySQL is up and running, let’s use it! But, the question is... how? If we run
+another container on the same network, how do we find the container (remember each container has its own IP
+address)?</p>
+
+<p>To figure it out, we’re going to make use of the <a href="https://github.com/nicolaka/netshoot">nicolaka/netshoot</a> container,
+which ships with a <em>lot</em> of tools that are useful for troubleshooting or debugging networking issues.</p>
+
+<ol>
+  <li>
+    <p>Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-it</span> <span class="nt">--network</span> todo-app nicolaka/netshoot
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Inside the container, we’re going to use the <code class="language-plaintext highlighter-rouge">dig</code> command, which is a useful DNS tool. We’re going to look up
+the IP address for the hostname <code class="language-plaintext highlighter-rouge">mysql</code>.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> dig mysql
+</code></pre></div>    </div>
+
+    <p>And you’ll get an output like this...</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ; &lt;&lt;&gt;&gt; DiG 9.14.1 &lt;&lt;&gt;&gt; mysql
+ ;; global options: +cmd
+ ;; Got answer:
+ ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 32162
+ ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+ ;; QUESTION SECTION:
+ ;mysql.				IN	A
+
+ ;; ANSWER SECTION:
+ mysql.			600	IN	A	172.23.0.2
+
+ ;; Query time: 0 msec
+ ;; SERVER: 127.0.0.11#53(127.0.0.11)
+ ;; WHEN: Tue Oct 01 23:47:24 UTC 2019
+ ;; MSG SIZE  rcvd: 44
+</code></pre></div>    </div>
+
+    <p>In the “ANSWER SECTION”, you will see an <code class="language-plaintext highlighter-rouge">A</code> record for <code class="language-plaintext highlighter-rouge">mysql</code> that resolves to <code class="language-plaintext highlighter-rouge">172.23.0.2</code>
+ (your IP address will most likely have a different value). While <code class="language-plaintext highlighter-rouge">mysql</code> isn’t normally a valid hostname,
+ Docker was able to resolve it to the IP address of the container that had that network alias (remember the
+ <code class="language-plaintext highlighter-rouge">--network-alias</code> flag we used earlier?).</p>
+
+    <p>What this means is... our app only simply needs to connect to a host named <code class="language-plaintext highlighter-rouge">mysql</code> and it’ll talk to the
+ database! It doesn’t get much simpler than that!</p>
+  </li>
+</ol>
+
+<h2 id="running-our-app-with-mysql">Running our App with MySQL</h2>
+
+<p>The todo app supports the setting of a few environment variables to specify MySQL connection settings. They are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MYSQL_HOST</code> - the hostname for the running MySQL server</li>
+  <li><code class="language-plaintext highlighter-rouge">MYSQL_USER</code> - the username to use for the connection</li>
+  <li><code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD</code> - the password to use for the connection</li>
+  <li><code class="language-plaintext highlighter-rouge">MYSQL_DB</code> - the database to use once connected</li>
+</ul>
+
+<blockquote>
+  <p><strong>warning</strong>
+Setting Connection Settings via Env Vars
+While using env vars to set connection settings is generally ok for development, it is <strong>HIGHLY DISCOURAGED</strong>
+when running applications in production. Diogo Monica, the former lead of security at Docker,
+<a href="https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/">wrote a fantastic blog post</a>
+explaining why.</p>
+
+  <p>A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
+these secrets are mounted as files in the running container. You’ll see many apps (including the MySQL image and the todo app)
+also support env vars with a <code class="language-plaintext highlighter-rouge">_FILE</code> suffix to point to a file containing the variable.</p>
+
+  <p>As an example, setting the <code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD_FILE</code> var will cause the app to use the contents of the referenced file
+as the connection password. Docker doesn’t do anything to support these env vars. Your app will need to know to look for
+the variable and get the file contents.</p>
+</blockquote>
+
+<p>With all of that explained, let’s start our dev-ready container!</p>
+
+<ol>
+  <li>
+    <p>We’ll specify each of the environment variables above, as well as connect the container to our app network.</p>
+
+    <p>docker run -dp 3000:3000 <br />
+   -w /app -v “$(pwd):/app” <br />
+   --network todo-app <br />
+   -e MYSQL_HOST=mysql <br />
+   -e MYSQL_USER=root <br />
+   -e MYSQL_PASSWORD=secret <br />
+   -e MYSQL_DB=todos <br />
+   node:12-alpine <br />
+   sh -c “yarn install &amp;&amp; yarn run dev”</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ If you are using PowerShell then use this command.
+
+ ```powershell
+ docker run -dp 3000:3000 `
+   -w /app -v "$(pwd):/app" `
+   --network todo-app `
+   -e MYSQL_HOST=mysql `
+   -e MYSQL_USER=root `
+   -e MYSQL_PASSWORD=secret `
+   -e MYSQL_DB=todos `
+   node:12-alpine `
+   sh -c "yarn install &amp;&amp; yarn run dev"
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>If we look at the logs for the container (<code class="language-plaintext highlighter-rouge">docker logs &lt;container-id&gt;</code>), we should see a message indicating it’s
+using the mysql database.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Previous log messages omitted
+ $ nodemon src/index.js
+ [nodemon] 1.19.2
+ [nodemon] to restart at any time, enter `rs`
+ [nodemon] watching dir(s): *.*
+ [nodemon] starting `node src/index.js`
+ Connected to mysql db at host mysql
+ Listening on port 3000
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Open the app in your browser and add a few items to your todo list.</p>
+  </li>
+  <li>
+    <p>Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+is <strong>secret</strong>.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;mysql-container-id&gt; mysql <span class="nt">-p</span> todos
+</code></pre></div>    </div>
+
+    <p>And in the mysql shell, run the following:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; select * from todo_items;
+ +--------------------------------------+--------------------+-----------+
+ | id                                   | name               | completed |
+ +--------------------------------------+--------------------+-----------+
+ | c906ff08-60e6-44e6-8f49-ed56a0853e85 | Do amazing things! |         0 |
+ | 2912a79e-8486-4bc3-a4c5-460793a575ab | Be awesome!        |         0 |
+ +--------------------------------------+--------------------+-----------+
+</code></pre></div>    </div>
+
+    <p>Obviously, your table will look different because it has your items. But, you should see them stored there!</p>
+  </li>
+</ol>
+
+<p>If you take a quick look at the Docker Dashboard, you’ll see that we have two app containers running. But, there’s
+no real indication that they are grouped together in a single app. We’ll see how to make that better shortly!</p>
+
+<p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-multi-container-app.png" alt="Docker Dashboard showing two ungrouped app containers" /></p>
+
+<h2 id="recap">Recap</h2>
+
+<p>At this point, we have an application that now stores its data in an external database running in a separate
+container. We learned a little bit about container networking and saw how service discovery can be performed
+using DNS.</p>
+
+<p>But, there’s a good chance you are starting to feel a little overwhelmed with everything you need to do to start up
+this application. We have to create a network, start containers, specify all of the environment variables, expose
+ports, and more! That’s a lot to remember and it’s certainly making things harder to pass along to someone else.</p>
+
+<p>In the next section, we’ll talk about Docker Compose. With Docker Compose, we can share our application stacks in a
+much easier way and let others spin them up with a single (and simple) command!</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/07_multi_container.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/07_multi_container.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/07_multi_container/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#container-networking" class="nomunge">Container Networking</a></li>
+  <li><a href="#starting-mysql" class="nomunge">Starting MySQL</a></li>
+  <li><a href="#connecting-to-mysql" class="nomunge">Connecting to MySQL</a></li>
+  <li><a href="#running-our-app-with-mysql" class="nomunge">Running our App with MySQL</a></li>
+  <li><a href="#recap" class="nomunge">Recap</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/get-started/07_multi_container/";</script></body>
+</html>

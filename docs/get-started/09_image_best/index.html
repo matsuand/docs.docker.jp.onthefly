@@ -1,0 +1,499 @@
+<!-- Page generated 2020-12-19 12:03:50 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Image building tips | Docker ドキュメント</title>
+  <meta name="description" content="Tips for building the images for our application" />
+  <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/09_image_best/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Image building tips"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Image building tips" />
+  <meta property="og:description" content="Tips for building the images for our application" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/09_image_best/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Image building tips","description":"Tips for building the images for our application","url":"https://docs.docker.com/get-started/09_image_best/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Image building tips</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><h2 id="security-scanning">Security Scanning</h2>
+
+<p>When you have built an image, it is good practice to scan it for security vulnerabilities using the <code class="language-plaintext highlighter-rouge">docker scan</code> command.
+Docker has partnered with <a href="http://snyk.io">Snyk</a> to provide the vulnerability scanning service.</p>
+
+<p>For example, to scan the <code class="language-plaintext highlighter-rouge">getting-started</code> image you created earlier in the tutorial, you can just type</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker scan getting-started
+</code></pre></div></div>
+
+<p>The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new
+vulnerabilities are discovered, but it might look something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✗ Low severity vulnerability found in freetype/freetype
+  Description: CVE-2020-15999
+  Info: https://snyk.io/vuln/SNYK-ALPINE310-FREETYPE-1019641
+  Introduced through: freetype/freetype@2.10.0-r0, gd/libgd@2.2.5-r2
+  From: freetype/freetype@2.10.0-r0
+  From: gd/libgd@2.2.5-r2 &gt; freetype/freetype@2.10.0-r0
+  Fixed in: 2.10.0-r1
+
+✗ Medium severity vulnerability found in libxml2/libxml2
+  Description: Out-of-bounds Read
+  Info: https://snyk.io/vuln/SNYK-ALPINE310-LIBXML2-674791
+  Introduced through: libxml2/libxml2@2.9.9-r3, libxslt/libxslt@1.1.33-r3, nginx-module-xslt/nginx-module-xslt@1.17.9-r1
+  From: libxml2/libxml2@2.9.9-r3
+  From: libxslt/libxslt@1.1.33-r3 &gt; libxml2/libxml2@2.9.9-r3
+  From: nginx-module-xslt/nginx-module-xslt@1.17.9-r1 &gt; libxml2/libxml2@2.9.9-r3
+  Fixed in: 2.9.9-r4
+</code></pre></div></div>
+
+<p>The output lists the type of vulnerability, a URL to learn more, and importantly which version of the relevant library
+fixes the vulnerability.</p>
+
+<p>There are several other options, which you can read about in the <a href="https://docs.docker.com/engine/scan/">docker scan documentation</a>.</p>
+
+<p>As well as scanning your newly built image on the command line, you can also <a href="https://docs.docker.com/docker-hub/vulnerability-scanning/">configure Docker Hub</a>
+to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.</p>
+
+<p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/hvs.png" alt="Hub vulnerability scanning" /></p>
+
+<h2 id="image-layering">Image Layering</h2>
+
+<p>Did you know that you can look at what makes up an image? Using the <code class="language-plaintext highlighter-rouge">docker image history</code>
+command, you can see the command that was used to create each layer within an image.</p>
+
+<ol>
+  <li>
+    <p>Use the <code class="language-plaintext highlighter-rouge">docker image history</code> command to see the layers in the <code class="language-plaintext highlighter-rouge">getting-started</code> image you
+created earlier in the tutorial.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker image <span class="nb">history </span>getting-started
+</code></pre></div>    </div>
+
+    <p>You should get output that looks something like this (dates/IDs may be different).</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+ a78a40cbf866        18 seconds ago      /bin/sh -c #(nop)  CMD ["node" "src/index.j…    0B
+ f1d1808565d6        19 seconds ago      /bin/sh -c yarn install --production            85.4MB
+ a2c054d14948        36 seconds ago      /bin/sh -c #(nop) COPY dir:5dc710ad87c789593…   198kB
+ 9577ae713121        37 seconds ago      /bin/sh -c #(nop) WORKDIR /app                  0B
+ b95baba1cfdb        13 days ago         /bin/sh -c #(nop)  CMD ["node"]                 0B
+ &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B
+ &lt;missing&gt;           13 days ago         /bin/sh -c #(nop) COPY file:238737301d473041…   116B
+ &lt;missing&gt;           13 days ago         /bin/sh -c apk add --no-cache --virtual .bui…   5.35MB
+ &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  ENV YARN_VERSION=1.21.1      0B
+ &lt;missing&gt;           13 days ago         /bin/sh -c addgroup -g 1000 node     &amp;&amp; addu…   74.3MB
+ &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  ENV NODE_VERSION=12.14.1     0B
+ &lt;missing&gt;           13 days ago         /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B
+ &lt;missing&gt;           13 days ago         /bin/sh -c #(nop) ADD file:e69d441d729412d24…   5.59MB
+</code></pre></div>    </div>
+
+    <p>Each of the lines represents a layer in the image. The display here shows the base at the bottom with
+ the newest layer at the top. Using this, you can also quickly see the size of each layer, helping
+ diagnose large images.</p>
+  </li>
+  <li>
+    <p>You’ll notice that several of the lines are truncated. If you add the <code class="language-plaintext highlighter-rouge">--no-trunc</code> flag, you’ll get the
+full output (yes... funny how you use a truncated flag to get untruncated output, huh?)</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker image <span class="nb">history</span> <span class="nt">--no-trunc</span> getting-started
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="layer-caching">Layer Caching</h2>
+
+<p>Now that you’ve seen the layering in action, there’s an important lesson to learn to help decrease build
+times for your container images.</p>
+
+<blockquote>
+  <p>Once a layer changes, all downstream layers have to be recreated as well</p>
+</blockquote>
+
+<p>Let’s look at the Dockerfile we were using one more time...</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12-alpine</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> . .</span>
+<span class="k">RUN </span>yarn <span class="nb">install</span> <span class="nt">--production</span>
+<span class="k">CMD</span><span class="s"> ["node", "src/index.js"]</span>
+</code></pre></div></div>
+
+<p>Going back to the image history output, we see that each command in the Dockerfile becomes a new layer in the image.
+You might remember that when we made a change to the image, the yarn dependencies had to be reinstalled. Is there a
+way to fix this? It doesn’t make much sense to ship around the same dependencies every time we build, right?</p>
+
+<p>To fix this, we need to restructure our Dockerfile to help support the caching of the dependencies. For Node-based
+applications, those dependencies are defined in the <code class="language-plaintext highlighter-rouge">package.json</code> file. So, what if we copied only that file in first,
+install the dependencies, and <em>then</em> copy in everything else? Then, we only recreate the yarn dependencies if there was
+a change to the <code class="language-plaintext highlighter-rouge">package.json</code>. Make sense?</p>
+
+<ol>
+  <li>
+    <p>Update the Dockerfile to copy in the <code class="language-plaintext highlighter-rouge">package.json</code> first, install dependencies, and then copy everything else in.</p>
+
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> FROM node:12-alpine
+ WORKDIR /app
+ COPY package.json yarn.lock ./
+ RUN yarn install --production
+ COPY . .
+ CMD ["node", "src/index.js"]
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a file named <code class="language-plaintext highlighter-rouge">.dockerignore</code> in the same folder as the Dockerfile with the following contents.</p>
+
+    <pre><code class="language-ignore"> node_modules
+</code></pre>
+
+    <p><code class="language-plaintext highlighter-rouge">.dockerignore</code> files are an easy way to selectively copy only image relevant files.
+ You can read more about this
+ <a href="https://docs.docker.com/engine/reference/builder/#dockerignore-file">here</a>.
+ In this case, the <code class="language-plaintext highlighter-rouge">node_modules</code> folder should be omitted in the second <code class="language-plaintext highlighter-rouge">COPY</code> step because otherwise,
+ it would possibly overwrite files which were created by the command in the <code class="language-plaintext highlighter-rouge">RUN</code> step.
+ For further details on why this is recommended for Node.js applications and other best practices,
+ have a look at their guide on
+ <a href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/">Dockerizing a Node.js web app</a>.</p>
+  </li>
+  <li>
+    <p>Build a new image using <code class="language-plaintext highlighter-rouge">docker build</code>.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker build <span class="nt">-t</span> getting-started <span class="nb">.</span>
+</code></pre></div>    </div>
+
+    <p>You should see output like this...</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Sending build context to Docker daemon  219.1kB
+ Step 1/6 : FROM node:12-alpine
+ ---&gt; b0dc3a5e5e9e
+ Step 2/6 : WORKDIR /app
+ ---&gt; Using cache
+ ---&gt; 9577ae713121
+ Step 3/6 : COPY package.json yarn.lock ./
+ ---&gt; bd5306f49fc8
+ Step 4/6 : RUN yarn install --production
+ ---&gt; Running in d53a06c9e4c2
+ yarn install v1.17.3
+ [1/4] Resolving packages...
+ [2/4] Fetching packages...
+ info fsevents@1.2.9: The platform "linux" is incompatible with this module.
+ info "fsevents@1.2.9" is an optional dependency and failed compatibility check. Excluding it from installation.
+ [3/4] Linking dependencies...
+ [4/4] Building fresh packages...
+ Done in 10.89s.
+ Removing intermediate container d53a06c9e4c2
+ ---&gt; 4e68fbc2d704
+ Step 5/6 : COPY . .
+ ---&gt; a239a11f68d8
+ Step 6/6 : CMD ["node", "src/index.js"]
+ ---&gt; Running in 49999f68df8f
+ Removing intermediate container 49999f68df8f
+ ---&gt; e709c03bc597
+ Successfully built e709c03bc597
+ Successfully tagged getting-started:latest
+</code></pre></div>    </div>
+
+    <p>You’ll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.</p>
+  </li>
+  <li>
+    <p>Now, make a change to the <code class="language-plaintext highlighter-rouge">src/static/index.html</code> file (like change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> to say “The Awesome Todo App”).</p>
+  </li>
+  <li>
+    <p>Build the Docker image now using <code class="language-plaintext highlighter-rouge">docker build -t getting-started .</code> again. This time, your output should look a little different.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Sending build context to Docker daemon  219.1kB
+ Step 1/6 : FROM node:12-alpine
+ ---&gt; b0dc3a5e5e9e
+ Step 2/6 : WORKDIR /app
+ ---&gt; Using cache
+ ---&gt; 9577ae713121
+ Step 3/6 : COPY package.json yarn.lock ./
+ ---&gt; Using cache
+ ---&gt; bd5306f49fc8
+ Step 4/6 : RUN yarn install --production
+ ---&gt; Using cache
+ ---&gt; 4e68fbc2d704
+ Step 5/6 : COPY . .
+ ---&gt; cccde25a3d9a
+ Step 6/6 : CMD ["node", "src/index.js"]
+ ---&gt; Running in 2be75662c150
+ Removing intermediate container 2be75662c150
+ ---&gt; 458e5c6f080c
+ Successfully built 458e5c6f080c
+ Successfully tagged getting-started:latest
+</code></pre></div>    </div>
+
+    <p>First off, you should notice that the build was MUCH faster! And, you’ll see that steps 1-4 all have
+ <code class="language-plaintext highlighter-rouge">Using cache</code>. So, hooray! We’re using the build cache. Pushing and pulling this image and updates to it
+ will be much faster as well. Hooray!</p>
+  </li>
+</ol>
+
+<h2 id="multi-stage-builds">Multi-Stage Builds</h2>
+
+<p>While we’re not going to dive into it too much in this tutorial, multi-stage builds are an incredibly powerful
+tool to help use multiple stages to create an image. There are several advantages for them:</p>
+
+<ul>
+  <li>Separate build-time dependencies from runtime dependencies</li>
+  <li>Reduce overall image size by shipping <em>only</em> what your app needs to run</li>
+</ul>
+
+<h3 id="maventomcat-example">Maven/Tomcat Example</h3>
+
+<p>When building Java-based applications, a JDK is needed to compile the source code to Java bytecode. However,
+that JDK isn’t needed in production. Also, you might be using tools like Maven or Gradle to help build the app.
+Those also aren’t needed in our final image. Multi-stage builds help.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> maven AS build</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> . .</span>
+<span class="k">RUN </span>mvn package
+
+<span class="k">FROM</span><span class="s"> tomcat</span>
+<span class="k">COPY</span><span class="s"> --from=build /app/target/file.war /usr/local/tomcat/webapps</span>
+</code></pre></div></div>
+
+<p>In this example, we use one stage (called <code class="language-plaintext highlighter-rouge">build</code>) to perform the actual Java build using Maven. In the second
+stage (starting at <code class="language-plaintext highlighter-rouge">FROM tomcat</code>), we copy in files from the <code class="language-plaintext highlighter-rouge">build</code> stage. The final image is only the last stage
+being created (which can be overridden using the <code class="language-plaintext highlighter-rouge">--target</code> flag).</p>
+
+<h3 id="react-example">React Example</h3>
+
+<p>When building React applications, we need a Node environment to compile the JS code (typically JSX), SASS stylesheets,
+and more into static HTML, JS, and CSS. If we aren’t doing server-side rendering, we don’t even need a Node environment
+for our production build. Why not ship the static resources in a static nginx container?</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12 AS build</span>
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+<span class="k">COPY</span><span class="s"> package* yarn.lock ./</span>
+<span class="k">RUN </span>yarn <span class="nb">install</span>
+<span class="k">COPY</span><span class="s"> public ./public</span>
+<span class="k">COPY</span><span class="s"> src ./src</span>
+<span class="k">RUN </span>yarn run build
+
+<span class="k">FROM</span><span class="s"> nginx:alpine</span>
+<span class="k">COPY</span><span class="s"> --from=build /app/build /usr/share/nginx/html</span>
+</code></pre></div></div>
+
+<p>Here, we are using a <code class="language-plaintext highlighter-rouge">node:12</code> image to perform the build (maximizing layer caching) and then copying the output
+into an nginx container. Cool, huh?</p>
+
+<h2 id="recap">Recap</h2>
+
+<p>By understanding a little bit about how images are structured, we can build images faster and ship fewer changes.
+Scanning images gives us confidence that the containers we are running and distributing are secure.
+Multi-stage builds also help us reduce overall image size and increase final container security by separating
+build-time dependencies from runtime dependencies.</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/09_image_best.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/09_image_best.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/09_image_best/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#security-scanning" class="nomunge">Security Scanning</a></li>
+  <li><a href="#image-layering" class="nomunge">Image Layering</a></li>
+  <li><a href="#layer-caching" class="nomunge">Layer Caching</a></li>
+  <li><a href="#multi-stage-builds" class="nomunge">Multi-Stage Builds</a>
+    <ul>
+      <li><a href="#maventomcat-example" class="nomunge">Maven/Tomcat Example</a></li>
+      <li><a href="#react-example" class="nomunge">React Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#recap" class="nomunge">Recap</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/get-started/09_image_best/";</script></body>
+</html>

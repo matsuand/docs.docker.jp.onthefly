@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-27 14:05:18 +0900-->
+<!-- Page generated 2020-12-19 12:03:50 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Kubernetes へのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Kubernetes へのデプロイ" />
   <meta property="og:description" content="Deploying to Kubernetes on Docker Desktop for Windows" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-27T14:05:18+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/kubernetes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-27T14:05:18+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Kubernetes へのデプロイ","description":"Deploying to Kubernetes on Docker Desktop for Windows","url":"https://docs.docker.com/docker-for-windows/kubernetes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -112,30 +112,34 @@ Kubernetes サーバーの有効、無効は、他の開発内容へは影響し
 
 <h2 id="use-docker-commands">Docker コマンドの利用</h2>
 
-<p>Kubernetes に対して Stack をデプロイすることができます。
-その際には <code class="language-plaintext highlighter-rouge">docker stack deploy</code>、<code class="language-plaintext highlighter-rouge">docker-compose.yml</code> ファイル、Stack 名を用います。</p>
+<p>docker stack コマンドがインストールされ利用可能であることを確認するため<code class="language-plaintext highlighter-rouge">docker stack ls</code>を実行してください。
+<code class="language-plaintext highlighter-rouge">failed to find a Stack API version</code>というメッセージが表示されたら、本ページに説明しているコマンドを実行することができません。
+<code class="language-plaintext highlighter-rouge">docker version</code>を実行すれば<code class="language-plaintext highlighter-rouge">StackAPI: Unknown</code>という行が示されているはずです。</p>
+
+<p>docker stack コマンドが動作している場合は、Kubernetes に対して Stack をデプロイすることができます。
+その際には<code class="language-plaintext highlighter-rouge">docker stack deploy</code>、<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイル、Stack 名を用います。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">--compose-file</span> /path/to/docker-compose.yml mystack
 docker stack services mystack
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">kubectl get services</code> コマンドを使うと、デプロイされているサービスを確認することができます。</p>
+<p><code class="language-plaintext highlighter-rouge">kubectl get services</code>コマンドを使うと、デプロイされているサービスを確認することができます。</p>
 
 <h3 id="specify-a-namespace">名前空間の指定</h3>
 
-<p>デフォルトにおいて <code class="language-plaintext highlighter-rouge">default</code> という名前空間が用いられます。
-名前空間は <code class="language-plaintext highlighter-rouge">--namespace</code> フラグを使って指定することができます。</p>
+<p>デフォルトにおいて<code class="language-plaintext highlighter-rouge">default</code>という名前空間が用いられます。
+名前空間は<code class="language-plaintext highlighter-rouge">--namespace</code>フラグを使って指定することができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">--namespace</span> my-app <span class="nt">--compose-file</span> /path/to/docker-compose.yml mystack
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">kubectl get services -n my-app</code> を実行すると、<code class="language-plaintext highlighter-rouge">my-app</code> 名前空間内にデプロイされたサービスのみを確認することができます。</p>
+<p><code class="language-plaintext highlighter-rouge">kubectl get services -n my-app</code>を実行すると、<code class="language-plaintext highlighter-rouge">my-app</code>名前空間内にデプロイされたサービスのみを確認することができます。</p>
 
 <h3 id="override-the-default-orchestrator">デフォルトオーケストレーターのオーバーライド</h3>
 
 <p>Kubernetes をテストする際に、開発内容を Swarm にデプロイしたいことがあります。
-操作を行っているターミナルのセッション内、あるいは 1 つの Docker コマンド内において、環境変数 <code class="language-plaintext highlighter-rouge">DOCKER_STACK_ORCHESTRATOR</code> を使うと、デフォルトのオーケストレーターをオーバーライドすることができます。
-この変数は未指定とする（これがデフォルトであり、Kubernetes がオーケストレーターとなる）か、あるいは <code class="language-plaintext highlighter-rouge">swarm</code> や <code class="language-plaintext highlighter-rouge">kubernetes</code> に指定します。
+操作を行っているターミナルのセッション内、あるいは 1 つの Docker コマンド内において、環境変数<code class="language-plaintext highlighter-rouge">DOCKER_STACK_ORCHESTRATOR</code>を使うと、デフォルトのオーケストレーターをオーバーライドすることができます。
+この変数は未指定とする（これがデフォルトであり、Kubernetes がオーケストレーターとなる）か、あるいは<code class="language-plaintext highlighter-rouge">swarm</code>や<code class="language-plaintext highlighter-rouge">kubernetes</code>に指定します。
 以下のコマンドは 1 つのデプロイメントにおいてオーケストレーターをオーバーライドします。</p>
 
 <p>これはコマンド実行前に行われます。</p>
@@ -144,7 +148,7 @@ docker stack services mystack
 docker stack deploy <span class="nt">--compose-file</span> /path/to/docker-compose.yml mystack
 </code></pre></div></div>
 
-<p>別のやり方として <code class="language-plaintext highlighter-rouge">--orchestrator</code> フラグを利用して <code class="language-plaintext highlighter-rouge">swarm</code> や <code class="language-plaintext highlighter-rouge">kubernetes</code> に設定することで、デプロイの際にデフォルトオーケストレーターをオーバーライドする方法もあります。</p>
+<p>別のやり方として<code class="language-plaintext highlighter-rouge">--orchestrator</code>フラグを利用して<code class="language-plaintext highlighter-rouge">swarm</code>や<code class="language-plaintext highlighter-rouge">kubernetes</code>に設定することで、デプロイの際にデフォルトオーケストレーターをオーバーライドする方法もあります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stack deploy <span class="nt">--orchestrator</span> swarm <span class="nt">--compose-file</span> /path/to/docker-compose.yml mystack
 </code></pre></div></div>
@@ -157,10 +161,10 @@ docker stack deploy <span class="nt">--compose-file</span> /path/to/docker-compo
 
 <h2 id="use-the-kubectl-command">kubectl コマンドの利用</h2>
 
-<p>windows における Kubernetes 統合環境では、<code class="language-plaintext highlighter-rouge">C:\&gt;Program Files\Docker\Docker\Resources\bin\kubectl.exe</code> に Kubernetes CLI コマンドが提供されています。
-このパスは、利用しているシェルの <code class="language-plaintext highlighter-rouge">PATH</code> 変数には含まれていないかもしれません。
-そこでコマンド実行時にはフルパスを指定するか、<code class="language-plaintext highlighter-rouge">PATH</code> 設定に加えることが必要になります。
-<code class="language-plaintext highlighter-rouge">kubectl</code> に関する詳細は <a href="https://kubernetes.io/docs/reference/kubectl/overview/">公式の <code class="language-plaintext highlighter-rouge">kubectl</code> ドキュメント</a> を参照してください。
+<p>windows における Kubernetes 統合環境では、<code class="language-plaintext highlighter-rouge">C:\&gt;Program Files\Docker\Docker\Resources\bin\kubectl.exe</code>に Kubernetes CLI コマンドが提供されています。
+このパスは、利用しているシェルの<code class="language-plaintext highlighter-rouge">PATH</code>変数には含まれていないかもしれません。
+そこでコマンド実行時にはフルパスを指定するか、<code class="language-plaintext highlighter-rouge">PATH</code>設定に加えることが必要になります。
+<code class="language-plaintext highlighter-rouge">kubectl</code>に関する詳細は <a href="https://kubernetes.io/docs/reference/kubectl/overview/">公式の<code class="language-plaintext highlighter-rouge">kubectl</code>ドキュメント</a> を参照してください。
 以下のコマンドを実行すれば、利用可能なノード一覧が得られます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get nodes
@@ -172,9 +176,9 @@ docker-desktop       Ready     master    3h        v1.8.2
 <h2 id="example-app">サンプルアプリ</h2>
 
 <p>Docker では以下のようなデモアプリを用意しています。
-<code class="language-plaintext highlighter-rouge">docker stack deploy</code> コマンドを使って、Swarm へのデプロイ、Kubernetes へのデプロイを行うことができます。</p>
+<code class="language-plaintext highlighter-rouge">docker stack deploy</code>コマンドを使って、Swarm へのデプロイ、Kubernetes へのデプロイを行うことができます。</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.8"</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
 
 <span class="na">services</span><span class="pi">:</span>
   <span class="na">web</span><span class="pi">:</span>
@@ -197,7 +201,7 @@ docker-desktop       Ready     master    3h        v1.8.2
     <span class="na">image</span><span class="pi">:</span> <span class="s">dockersamples/k8s-wordsmith-db</span>
 </code></pre></div></div>
 
-<p>Kubernetes YAML ファイルがすでにある場合は、<code class="language-plaintext highlighter-rouge">kubectl</code> コマンドを使ってデプロイを行うことができます。</p>
+<p>Kubernetes YAML ファイルがすでにある場合は、<code class="language-plaintext highlighter-rouge">kubectl</code>コマンドを使ってデプロイを行うことができます。</p>
 
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=windows">windows</a>, <a href="/docs.docker.jp.onthefly/search/?q=edge">edge</a>, <a href="/docs.docker.jp.onthefly/search/?q=kubernetes">kubernetes</a>, <a href="/docs.docker.jp.onthefly/search/?q=kubectl">kubectl</a>, <a href="/docs.docker.jp.onthefly/search/?q=orchestration">orchestration</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>

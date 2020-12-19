@@ -1,10 +1,10 @@
 <!-- Page generated 2020-12-19 12:03:50 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Hub におけるイメージ共有 | Docker ドキュメント</title>
-  <meta name="description" content="Learn how to share images on Docker Hub." />
-  <meta name="keywords" content="docker hub, push, images">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/part3/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Our Application | Docker ドキュメント</title>
+  <meta name="description" content="overview of our simple applicaiton for learning docker" />
+  <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/02_our_app/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Docker Hub におけるイメージ共有"/>
+  <meta name="twitter:title" itemprop="title name" content="Our Application"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Docker Hub におけるイメージ共有" />
-  <meta property="og:description" content="Learn how to share images on Docker Hub." />
+  <meta property="og:title" content="Our Application" />
+  <meta property="og:description" content="overview of our simple applicaiton for learning docker" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/02_our_app/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Hub におけるイメージ共有","description":"Learn how to share images on Docker Hub.","url":"https://docs.docker.com/get-started/part3/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Our Application","description":"overview of our simple applicaiton for learning docker","url":"https://docs.docker.com/get-started/02_our_app/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,119 +98,125 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Hub におけるイメージ共有</h1><ul class="pagination">
-  <li><a href="/docs.docker.jp.onthefly/get-started/">概要と準備</a></li>
-  <li><a href="/docs.docker.jp.onthefly/get-started/02_our_app/">アプリケーション作り</a></li>
-  <li class="active"><a href="/docs.docker.jp.onthefly/get-started/part3/">Docker Hub でのイメージ共有</a></li>
-</ul>
+                        <section class="section"><h1>Our Application</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>For the rest of this tutorial, we will be working with a simple todo
+list manager that is running in Node.js. If you’re not familiar with Node.js,
+don’t worry! No real JavaScript experience is needed!</p>
 
-<h2 id="prerequisites">前提条件</h2>
+<p>At this point, your development team is quite small and you’re simply
+building an app to prove out your MVP (minimum viable product). You want
+to show how it works and what it’s capable of doing without needing to
+think about how it will work for a large team, multiple developers, etc.</p>
 
-<p><a href="/docs.docker.jp.onthefly/get-started/part2/">2 部</a> にてイメージをビルドし、コンテナー化アプリケーションとして実行できていること。</p>
+<p><img src="/docs.docker.jp.onthefly/get-started/images/todo-list-sample.png" alt="Todo List Manager Screenshot" style="width:50%;" /></p>
 
-<h2 id="introduction">はじめに</h2>
+<h2 id="getting-our-app">Getting our App</h2>
 
-<p>ここでは <a href="/docs.docker.jp.onthefly/get-started/part2/">2 部</a> に示した作業を通じて、ローカル開発マシン上にコンテナー化されたアプリケーションが構築できているものとします。</p>
-
-<p>最後の作業として、開発しているコンテナー化アプリケーションを、<a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a> のようなレジストリ上にてイメージを共有していきます。
-こうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。</p>
-
-<h2 id="set-up-your-docker-hub-account">Docker Hub アカウントの設定</h2>
-
-<p>Docker ID を持っていない場合は、以下の手順により取得します。
-これを行っておくことで Docker Hub 上でのイメージの共有ができるようになります。</p>
+<p>Before we can run the application, we need to get the application source code onto
+our machine. For real projects, you will typically clone the repo. But, for this tutorial,
+we have created a ZIP file containing the application.</p>
 
 <ol>
   <li>
-    <p><a href="https://hub.docker.com/signup" target="_blank" rel="noopener">Docker Hub のサインアップページ</a> にアクセスします。</p>
+    <p><a href="https://github.com/docker/getting-started/tree/master/app">Download the App contents</a>. You can either pull the entire project or download it as a zip and extract the app folder out to get started with</p>
   </li>
   <li>
-    <p>入力欄への入力を行って submit ボタンをクリックし Docker ID を生成します。</p>
-  </li>
-  <li>
-    <p>電子メールアドレスを確認し、登録手順を終了します。</p>
-  </li>
-  <li>
-    <p>ツールバーあるいはシステムトレイにある Docker アイコンをクリックして <strong>Sign in / Create Docker ID</strong> を実行します。</p>
-  </li>
-  <li>
-    <p>Docker ID とパスワードを入力します。
-認証が正しく行われると、先ほど実行した Docker Desktop メニューの ‘Sign in’ のところに Docker ID が表示されます。</p>
+    <p>Once extracted, use your favorite code editor to open the project. If you’re in need of
+ an editor, you can use <a href="https://code.visualstudio.com/">Visual Studio Code</a>. You should
+ see the <code class="language-plaintext highlighter-rouge">package.json</code> and two subdirectories (<code class="language-plaintext highlighter-rouge">src</code> and <code class="language-plaintext highlighter-rouge">spec</code>).</p>
 
-    <p>Docker Hub へのサインインは、コマンドラインから <code class="language-plaintext highlighter-rouge">docker login</code> を入力して行うこともできます。</p>
+    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/ide-screenshot.png" alt="Screenshot of Visual Studio Code opened with the app loaded" style="width:650px;margin-top:20px;" /></p>
   </li>
 </ol>
 
-<h2 id="create-a-docker-hub-repository-and-push-your-image">Docker Hub リポジトリの生成とイメージプッシュ</h2>
+<h2 id="building-the-apps-container-image">Building the App’s Container Image</h2>
 
-<blockquote>
-
-  <p>リポジトリを生成する前に、Docker Hub のアカウントが取得済であり、Docker Desktop から接続できていることを確認してください。</p>
-</blockquote>
-
-<p>それでは初めてのリポジトリを生成し、掲示板アプリのイメージをプッシュしましょう。</p>
+<p>In order to build the application, we need to use a <code class="language-plaintext highlighter-rouge">Dockerfile</code>. A
+Dockerfile is simply a text-based script of instructions that is used to
+create a container image. If you’ve created Dockerfiles before, you might
+see a few flaws in the Dockerfile below. But, don’t worry! We’ll go over them.</p>
 
 <ol>
   <li>
-    <p>メニューバー上の Docker アイコンをクリックして <strong>Repositories &gt; Create</strong> を実行します。
-Docker Hub の <strong>Create Repository</strong> というページにリダイレクトされます。</p>
-  </li>
-  <li>
-    <p>リポジトリ名に <code class="language-plaintext highlighter-rouge">bulletinboard</code> と入力して、下段にある <strong>Create</strong> をクリックします。
-リポジトリ以外の欄は、とりあえずここでは何も入力しないことにします。</p>
+    <p>Create a file named <code class="language-plaintext highlighter-rouge">Dockerfile</code> in the same folder as the file <code class="language-plaintext highlighter-rouge">package.json</code> with the following contents.</p>
 
-    <p><img src="/docs.docker.jp.onthefly/get-started/images/newrepo.png" alt="リポジトリの生成" width="100%" /></p>
-  </li>
-  <li>
-    <p>Docker Hub 上においてイメージを共有できる状態になりました。
-ただし共有する前に、まずやっておくべきことがあります。
-Docker Hub 上にイメージを共有するには、イメージの名前空間を適切に設定しておかなければなりません。
-具体的には、イメージ名を <code class="language-plaintext highlighter-rouge">&lt;Docker ID&gt;/&lt;リポジトリ名&gt;:&lt;タグ&gt;</code> とする必要があります。</p>
-
-    <p>そこで端末画面か PowerShell 上において、<code class="language-plaintext highlighter-rouge">node-bulletin-board/bulletin-board-app</code> ディレクトリにいることを確認して、以下を実行します。</p>
-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker tag bulletinboard:1.0 &lt;あなたの Docker ID&gt;/bulletinboard:1.0
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>最後にイメージを Docker Hub にプッシュします。</p>
-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push &lt;あなたの Docker ID&gt;/bulletinboard:1.0
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> FROM node:12-alpine
+ WORKDIR /app
+ COPY . .
+ RUN yarn install --production
+ CMD ["node", "src/index.js"]
 </code></pre></div>    </div>
 
-    <p><a href="https://hub.docker.com/repositories" target="_blank" rel="noopener">Docker Hub</a> においてこのリポジトリにアクセスしてみると、新たなイメージがそこに表示されています。
-Docker Hub リポジトリは、デフォルトで公開されている（public となっている）ことに注意してください。</p>
+    <p>Please check that the file <code class="language-plaintext highlighter-rouge">Dockerfile</code> has no file extension like <code class="language-plaintext highlighter-rouge">.txt</code>. Some editors may append this file extension automatically and this would result in an error in the next step.</p>
+  </li>
+  <li>
+    <p>If you haven’t already done so, open a terminal and go to the <code class="language-plaintext highlighter-rouge">app</code> directory with the <code class="language-plaintext highlighter-rouge">Dockerfile</code>. Now build the container image using the <code class="language-plaintext highlighter-rouge">docker build</code> command.</p>
 
-    <blockquote>
-      <p><strong>プッシュに失敗した場合</strong> Docker Hub へは Docker Desktop から、あるいはコマンドラインからサインインしていることが必要です。
-また上記の手順にて示したように、イメージは適切な名称としていなければなりません。
-プッシュを行っても Docker Hub 上に表示されていない場合は、数分待ってからブラウザーを再表示して確認してください。</p>
-    </blockquote>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker build <span class="nt">-t</span> getting-started <span class="nb">.</span>
+</code></pre></div>    </div>
+
+    <p>This command used the Dockerfile to build a new container image. You might
+ have noticed that a lot of “layers” were downloaded. This is because we instructed
+ the builder that we wanted to start from the <code class="language-plaintext highlighter-rouge">node:12-alpine</code> image. But, since we
+ didn’t have that on our machine, that image needed to be downloaded.</p>
+
+    <p>After the image was downloaded, we copied in our application and used <code class="language-plaintext highlighter-rouge">yarn</code> to
+ install our application’s dependencies. The <code class="language-plaintext highlighter-rouge">CMD</code> directive specifies the default
+ command to run when starting a container from this image.</p>
+
+    <p>Finally, the <code class="language-plaintext highlighter-rouge">-t</code> flag tags our image. Think of this simply as a human-readable name
+ for the final image. Since we named the image <code class="language-plaintext highlighter-rouge">getting-started</code>, we can refer to that
+ image when we run a container.</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">.</code> at the end of the <code class="language-plaintext highlighter-rouge">docker build</code> command tells that Docker should look for the <code class="language-plaintext highlighter-rouge">Dockerfile</code> in the current directory.</p>
   </li>
 </ol>
 
-<h2 id="conclusion">まとめ</h2>
+<h2 id="starting-an-app-container">Starting an App Container</h2>
 
-<p>こうして Docker Hub 上でのイメージ共有ができるようになりました。
-これからはどのような環境上でもこれを実行できることになります。
-このイメージをまだ入手していない新たなマシンを使って、このイメージを利用しようとすると、Docker が自動的に Docker Hub からイメージを入手、ダウンロードします。
-このようにしてイメージをあちこちに移動して利用します。
-つまりソフトウェアを実行しようとしているマシン上には、Docker 以外に依存パッケージをインストールしておく必要がありません。
-コンテナー化アプリケーションにとっての依存パッケージは、完全にイメージ内部にカプセル化され切り離されます。
-こうしてそのイメージは、上で説明した Docker Hub を利用して共有できることになります。</p>
+<p>Now that we have an image, let’s run the application! To do so, we will use the <code class="language-plaintext highlighter-rouge">docker run</code>
+command (remember that from earlier?).</p>
 
-<p>もう一つ意識しておくことがあります。
-この時点では Docker Hub にイメージをプッシュしただけです。
-さて対応する Dockerfile はどうしますか？
-重要なベストプラクティスとして、こういったファイルはバージョン管理システムを使い、おそらくはアプリケーションソースコードとともに管理すべきです。
-Docker Hub リポジトリにおいては、それらファイルがどこにあるかをメモやリンクにより説明することができます。
-そこでは単にイメージのビルド方法を示すだけではなく、アプリケーションを完全に動作させるための方法を示すことが必要になります。</p>
+<ol>
+  <li>
+    <p>Start your container using the <code class="language-plaintext highlighter-rouge">docker run</code> command and specify the name of the image we
+ just created:</p>
 
-<h2 id="where-to-go-next">次に読むものは</h2>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-dp</span> 3000:3000 getting-started
+</code></pre></div>    </div>
 
-<p>以下のトピック <a href="/docs.docker.jp.onthefly/develop/">Docker を用いた開発</a> の一読をおすすめします。
-Docker を用いた独自アプリケーションの開発方法を学んでください。</p>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker hub">docker hub</a>, <a href="/docs.docker.jp.onthefly/search/?q=push">push</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+    <p>Remember the <code class="language-plaintext highlighter-rouge">-d</code> and <code class="language-plaintext highlighter-rouge">-p</code> flags? We’re running the new container in “detached” mode (in the
+ background) and creating a mapping between the host’s port 3000 to the container’s port 3000.
+ Without the port mapping, we wouldn’t be able to access the application.</p>
+  </li>
+  <li>
+    <p>After a few seconds, open your web browser to <a href="http://localhost:3000">http://localhost:3000</a>.
+ You should see our app!</p>
+
+    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/todo-list-empty.png" alt="Empty Todo List" style="width:450px;margin-top:20px;" /></p>
+  </li>
+  <li>
+    <p>Go ahead and add an item or two and see that it works as you expect. You can mark items as
+complete and remove items. Your frontend is successfully storing items in the backend!
+Pretty quick and easy, huh?</p>
+  </li>
+</ol>
+
+<p>At this point, you should have a running todo list manager with a few items, all built by you!
+Now, let’s make a few changes and learn about managing our containers.</p>
+
+<p>If you take a quick look at the Docker Dashboard, you should see your two containers running now
+(this tutorial and your freshly launched app container)!</p>
+
+<p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-two-containers.png" alt="Docker Dashboard with tutorial and app containers running" /></p>
+
+<h2 id="recap">Recap</h2>
+
+<p>In this short section, we learned the very basics about building a container image and created a
+Dockerfile to do so. Once we built an image, we started the container and saw the running app!</p>
+
+<p>Next, we’re going to make a modification to our app and learn how to update our running application
+with a new image. Along the way, we’ll learn a few other useful commands.</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -224,7 +230,7 @@ Docker を用いた独自アプリケーションの開発方法を学んでく�
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/part3.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/part3.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/part3/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/02_our_app.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/02_our_app.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/02_our_app/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -243,12 +249,10 @@ Docker を用いた独自アプリケーションの開発方法を学んでく�
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
-  <li><a href="#introduction" class="nomunge">はじめに</a></li>
-  <li><a href="#set-up-your-docker-hub-account" class="nomunge">Docker Hub アカウントの設定</a></li>
-  <li><a href="#create-a-docker-hub-repository-and-push-your-image" class="nomunge">Docker Hub リポジトリの生成とイメージプッシュ</a></li>
-  <li><a href="#conclusion" class="nomunge">まとめ</a></li>
-  <li><a href="#where-to-go-next" class="nomunge">次に読むものは</a></li>
+  <li><a href="#getting-our-app" class="nomunge">Getting our App</a></li>
+  <li><a href="#building-the-apps-container-image" class="nomunge">Building the App’s Container Image</a></li>
+  <li><a href="#starting-an-app-container" class="nomunge">Starting an App Container</a></li>
+  <li><a href="#recap" class="nomunge">Recap</a></li>
 </ul>
 
 </div>
@@ -334,5 +338,5 @@ Docker を用いた独自アプリケーションの開発方法を学んでく�
     </div>
 
     </footer>
-    <script>const pageURL = "/get-started/part3/";</script></body>
+    <script>const pageURL = "/get-started/02_our_app/";</script></body>
 </html>

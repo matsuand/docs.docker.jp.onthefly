@@ -1,10 +1,10 @@
 <!-- Page generated 2020-12-19 12:03:50 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Orientation and setup | Docker ドキュメント</title>
-  <meta name="description" content="Get oriented on some basics of Docker and install Docker Desktop." />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Using bind mounts | Docker ドキュメント</title>
+  <meta name="description" content="Using bind mounts in our application" />
   <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/" />
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/06_bind_mounts/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Orientation and setup"/>
+  <meta name="twitter:title" itemprop="title name" content="Using bind mounts"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Orientation and setup" />
-  <meta property="og:description" content="Get oriented on some basics of Docker and install Docker Desktop." />
+  <meta property="og:title" content="Using bind mounts" />
+  <meta property="og:description" content="Using bind mounts in our application" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/06_bind_mounts/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Orientation and setup","description":"Get oriented on some basics of Docker and install Docker Desktop.","url":"https://docs.docker.com/get-started/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Using bind mounts","description":"Using bind mounts in our application","url":"https://docs.docker.com/get-started/06_bind_mounts/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,95 +98,148 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Orientation and setup</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Welcome! We are excited that you want to learn Docker.</p>
+                        <section class="section"><h1>Using bind mounts</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>In the previous chapter, we talked about and used a <strong>named volume</strong> to persist the data in our database.
+Named volumes are great if we simply want to store data, as we don’t have to worry about <em>where</em> the data
+is stored.</p>
 
-<p>This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from DockerCon 2020.</p>
+<p>With <strong>bind mounts</strong>, we control the exact mountpoint on the host. We can use this to persist data, but is often
+used to provide additional data into containers. When working on an application, we can use a bind mount to
+mount our source code into the container to let it see code changes, respond, and let us see the changes right
+away.</p>
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<p>For Node-based applications, <a href="https://npmjs.com/package/nodemon">nodemon</a> is a great tool to watch for file
+changes and then restart the application. There are equivalent tools in most other languages and frameworks.</p>
 
-<p>In this tutorial, you’ll learn about creating and deploying Docker apps, including using multiple containers with a database, and using Docker Compose. You’ll also deploy your containerized app to Azure.</p>
+<h2 id="quick-volume-type-comparisons">Quick Volume Type Comparisons</h2>
 
-<h2 id="start-the-tutorial">Start the tutorial</h2>
+<p>Bind mounts and named volumes are the two main types of volumes that come with the Docker engine. However, additional
+volume drivers are available to support other uses cases (<a href="https://github.com/vieux/docker-volume-sshfs">SFTP</a>, <a href="https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/">Ceph</a>, <a href="https://netappdvp.readthedocs.io/en/stable/">NetApp</a>, <a href="https://github.com/elementar/docker-s3-volume">S3</a>, and more).</p>
 
-<p>If you’ve already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:</p>
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Named Volumes</th>
+      <th>Bind Mounts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Host Location</td>
+      <td>Docker chooses</td>
+      <td>You control</td>
+    </tr>
+    <tr>
+      <td>Mount Example (using <code class="language-plaintext highlighter-rouge">-v</code>)</td>
+      <td>my-volume:/usr/local/data</td>
+      <td>/path/to/data:/usr/local/data</td>
+    </tr>
+    <tr>
+      <td>Populates new volume with container contents</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Supports Volume Drivers</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
 
-<pre><code class="language-cli">docker run -d -p 80:80 docker/getting-started
-</code></pre>
+<h2 id="starting-a-dev-mode-container">Starting a Dev-Mode Container</h2>
 
-<p>You’ll notice a few flags being used. Here’s some more info on them:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">-d</code> - run the container in detached mode (in the background)</li>
-  <li><code class="language-plaintext highlighter-rouge">-p 80:80</code> - map port 80 of the host to port 80 in the container</li>
-  <li><code class="language-plaintext highlighter-rouge">docker/getting-started</code> - the image to use</li>
-</ul>
-
-<blockquote>
-  <p><strong>Pro tip</strong></p>
-
-  <p>You can combine single character flags to shorten the full command.
-As an example, the command above could be written as:</p>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -dp 80:80 docker/getting-started
-</code></pre></div>  </div>
-
-</blockquote>
-
-<h2 id="the-docker-dashboard">The Docker Dashboard</h2>
-
-<p>Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. It gives you quick
-access to container logs, lets you get a shell inside the container, and lets you
-easily manage container lifecycle (stop, remove, etc.).</p>
-
-<p>To access the dashboard, follow the instructions for either
-<a href="https://docs.docker.com/docker-for-mac/dashboard/">Mac</a> or
-<a href="https://docs.docker.com/docker-for-windows/dashboard/">Windows</a>. If you open the dashboard
-now, you will see this tutorial running! The container name (<code class="language-plaintext highlighter-rouge">jolly_bouman</code> below) is a
-randomly created name. So, you’ll most likely have a different name.</p>
-
-<p><img src="/docs.docker.jp.onthefly/get-started/images/tutorial-in-dashboard.png" alt="Tutorial container running in Docker Dashboard" /></p>
-
-<h2 id="what-is-a-container">What is a container?</h2>
-
-<p>Now that you’ve run a container, what <em>is</em> a container? Simply put, a container is
-simply another process on your machine that has been isolated from all other processes
-on the host machine. That isolation leverages <a href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">kernel namespaces and cgroups</a>, features that have been
-in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use.</p>
-
-<p>!!! info “Creating Containers from Scratch”
-    If you’d like to see how containers are built from scratch, Liz Rice from Aqua Security
-    has a fantastic talk in which she creates a container from scratch in Go. While she makes
-    a simple container, this talk doesn’t go into networking, using images for the filesystem,
-    and more. But, it gives a <em>fantastic</em> deep dive into how things are working.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-</code></pre></div></div>
-
-<h2 id="what-is-a-container-image">What is a container image?</h2>
-
-<p>When running a container, it uses an isolated filesystem. This custom filesystem is provided
-by a <strong>container image</strong>. Since the image contains the container’s filesystem, it must contain everything
-needed to run an application - all dependencies, configuration, scripts, binaries, etc. The
-image also contains other configuration for the container, such as environment variables,
-a default command to run, and other metadata.</p>
-
-<p>We’ll dive deeper into images later on, covering topics such as layering, best practices, and more.</p>
-
-<p>!!! info
-    If you’re familiar with <code class="language-plaintext highlighter-rouge">chroot</code>, think of a container as an extended version of <code class="language-plaintext highlighter-rouge">chroot</code>. The
-    filesystem is simply coming from the image. But, a container adds additional isolation not
-    available when simply using chroot.</p>
-
-<h2 id="cli-references">CLI references</h2>
-
-<p>Refer to the following topics for further documentation on all CLI commands used in this article:</p>
+<p>To run our container to support a development workflow, we will do the following:</p>
 
 <ul>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/version/">docker version</a></li>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/run/">docker run</a></li>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/image/">docker image</a></li>
-  <li><a href="https://docs.docker.com/engine/reference/commandline/container/">docker container</a></li>
+  <li>Mount our source code into the container</li>
+  <li>Install all dependencies, including the “dev” dependencies</li>
+  <li>Start nodemon to watch for filesystem changes</li>
 </ul>
+
+<p>So, let’s do it!</p>
+
+<ol>
+  <li>
+    <p>Make sure you don’t have any previous <code class="language-plaintext highlighter-rouge">getting-started</code> containers running.</p>
+  </li>
+  <li>
+    <p>Run the following command. We’ll explain what’s going on afterwards:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-dp</span> 3000:3000 <span class="se">\</span>
+     <span class="nt">-w</span> /app <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">:/app"</span> <span class="se">\</span>
+     node:12-alpine <span class="se">\</span>
+     sh <span class="nt">-c</span> <span class="s2">"yarn install &amp;&amp; yarn run dev"</span>
+</code></pre></div>    </div>
+
+    <p>If you are using PowerShell then use this command.</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-dp</span><span class="w"> </span><span class="nx">3000:3000</span><span class="w"> </span><span class="se">`
+</span><span class="w">     </span><span class="nt">-w</span><span class="w"> </span><span class="nx">/app</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="s2">"</span><span class="si">$(</span><span class="nf">pwd</span><span class="p">):</span><span class="nf">/app</span><span class="s2">" </span><span class="se">`</span><span class="s2">
+     node:12-alpine </span><span class="se">`</span><span class="s2">
+     sh -c "</span><span class="nx">yarn</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">yarn</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">dev</span><span class="s2">"
+</span></code></pre></div>    </div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-dp 3000:3000</code> - same as before. Run in detached (background) mode and create a port mapping</li>
+      <li><code class="language-plaintext highlighter-rouge">-w /app</code> - sets the “working directory” or the current directory that the command will run from</li>
+      <li><code class="language-plaintext highlighter-rouge">-v "$(pwd):/app"</code> - bind mount the current directory from the host in the container into the <code class="language-plaintext highlighter-rouge">/app</code> directory</li>
+      <li><code class="language-plaintext highlighter-rouge">node:12-alpine</code> - the image to use. Note that this is the base image for our app from the Dockerfile</li>
+      <li><code class="language-plaintext highlighter-rouge">sh -c "yarn install &amp;&amp; yarn run dev"</code> - the command. We’re starting a shell using <code class="language-plaintext highlighter-rouge">sh</code> (alpine doesn’t have <code class="language-plaintext highlighter-rouge">bash</code>) and
+running <code class="language-plaintext highlighter-rouge">yarn install</code> to install <em>all</em> dependencies and then running <code class="language-plaintext highlighter-rouge">yarn run dev</code>. If we look in the <code class="language-plaintext highlighter-rouge">package.json</code>,
+we’ll see that the <code class="language-plaintext highlighter-rouge">dev</code> script is starting <code class="language-plaintext highlighter-rouge">nodemon</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>You can watch the logs using <code class="language-plaintext highlighter-rouge">docker logs -f &lt;container-id&gt;</code>. You’ll know you’re ready to go when you see this...</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker logs <span class="nt">-f</span> &lt;container-id&gt;
+ <span class="nv">$ </span>nodemon src/index.js
+ <span class="o">[</span>nodemon] 1.19.2
+ <span class="o">[</span>nodemon] to restart at any <span class="nb">time</span>, enter <span class="sb">`</span>rs<span class="sb">`</span>
+ <span class="o">[</span>nodemon] watching <span class="nb">dir</span><span class="o">(</span>s<span class="o">)</span>: <span class="k">*</span>.<span class="k">*</span>
+ <span class="o">[</span>nodemon] starting <span class="sb">`</span>node src/index.js<span class="sb">`</span>
+ Using sqlite database at /etc/todos/todo.db
+ Listening on port 3000
+</code></pre></div>    </div>
+
+    <p>When you’re done watching the logs, exit out by hitting <code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">C</code>.</p>
+  </li>
+  <li>
+    <p>Now, let’s make a change to the app. In the <code class="language-plaintext highlighter-rouge">src/static/js/app.js</code> file, let’s change the “Add Item” button to simply say
+“Add”. This change will be on line 109.</p>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code> -                         {submitting ? 'Adding...' : 'Add Item'}
+ +                         {submitting ? 'Adding...' : 'Add'}
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might
+take a few seconds for the Node server to restart, so if you get an error, just try refreshing after a few seconds.</p>
+
+    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/updated-add-button.png" alt="Screenshot of updated label for Add button" style="width:75%;" /></p>
+  </li>
+  <li>
+    <p>Feel free to make any other changes you’d like to make. When you’re done, stop the container and build your new image
+using <code class="language-plaintext highlighter-rouge">docker build -t getting-started .</code>.</p>
+  </li>
+</ol>
+
+<p>Using bind mounts is <em>very</em> common for local development setups. The advantage is that the dev machine doesn’t need to have
+all of the build tools and environments installed. With a single <code class="language-plaintext highlighter-rouge">docker run</code> command, the dev environment is pulled and ready
+to go. We’ll talk about Docker Compose in a future step, as this will help simplify our commands (we’re already getting a lot
+of flags).</p>
+
+<h2 id="recap">Recap</h2>
+
+<p>At this point, we can persist our database and respond rapidly to the needs and demands of our investors and founders. Hooray!
+But, guess what? We received great news!</p>
+
+<p><strong>Your project has been selected for future development!</strong></p>
+
+<p>In order to prepare for production, we need to migrate our database from working in SQLite to something that can scale a
+little better. For simplicity, we’ll keep with a relational database and switch our application to use MySQL. But, how
+should we run MySQL? How do we allow the containers to talk to each other? We’ll talk about that next!</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -201,7 +254,7 @@ a default command to run, and other metadata.</p>
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/index.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/index.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/get-started/06_bind_mounts.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [get-started/06_bind_mounts.ch](https://matsuand.github.io/docs.docker.jp.onthefly/get-started/06_bind_mounts/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -220,11 +273,9 @@ a default command to run, and other metadata.</p>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#start-the-tutorial" class="nomunge">Start the tutorial</a></li>
-  <li><a href="#the-docker-dashboard" class="nomunge">The Docker Dashboard</a></li>
-  <li><a href="#what-is-a-container" class="nomunge">What is a container?</a></li>
-  <li><a href="#what-is-a-container-image" class="nomunge">What is a container image?</a></li>
-  <li><a href="#cli-references" class="nomunge">CLI references</a></li>
+  <li><a href="#quick-volume-type-comparisons" class="nomunge">Quick Volume Type Comparisons</a></li>
+  <li><a href="#starting-a-dev-mode-container" class="nomunge">Starting a Dev-Mode Container</a></li>
+  <li><a href="#recap" class="nomunge">Recap</a></li>
 </ul>
 
 </div>
@@ -310,5 +361,5 @@ a default command to run, and other metadata.</p>
     </div>
 
     </footer>
-    <script>const pageURL = "/get-started/";</script></body>
+    <script>const pageURL = "/get-started/06_bind_mounts/";</script></body>
 </html>

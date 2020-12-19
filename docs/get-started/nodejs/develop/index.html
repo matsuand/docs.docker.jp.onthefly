@@ -1,4 +1,4 @@
-<!-- Page generated 2020-11-13 13:43:02 +0900-->
+<!-- Page generated 2020-12-19 12:03:50 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>開発向けのコンテナー利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="開発向けのコンテナー利用" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-11-13T13:43:02+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/nodejs/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-11-13T13:43:02+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"開発向けのコンテナー利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/get-started/nodejs/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>開発向けのコンテナー利用</h1><ul class="pagination">
+                        <section class="section"><h1>開発向けのコンテナー利用</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/get-started/nodejs/build-images/">イメージのビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/get-started/nodejs/run-containers/">イメージのコンテナーとしての実行</a></li>
   <li class="active"><a href="/docs.docker.jp.onthefly/get-started/nodejs/develop/">開発向けのコンテナー利用</a></li>
@@ -113,12 +113,101 @@
 <p>このチュートリアルでは、その前で作ったアプリケーションの開発環境をローカルに構築する手順を進めていきます。
 Docker を使ってイメージをビルドするとともに Docker Compose を使って、あらゆるものを簡単に取り扱っていきます。</p>
 
-<h2 id="use-compose-to-develop-locally">Compose を使ったローカル開発</h2>
+<h2 id="local-database-and-containers">ローカルデータベースとコンテナー</h2>
 
-<p>notes-service プロジェクトは、データストアとして MongoDB を利用します。
-本チュートリアルの 1 部からわかるように、Mongo コンテナーは手動で起動して、notes-service が起動している同一のネットワークに接続しなければなりません。
-またボリュームをいくつか生成してデータ保存を行います。
-こうすることでアプリケーションや MongoDB の再起動を行っても、データが失われないようにします。</p>
+<p>まずはコンテナー内でデータベースが起動することを確認します。
+そしてボリュームやネットワークを通じてデータを保存する方法、アプリケーションがデータベースとアクセスする方法を見ていきます。
+これらを 1 つの Compose ファイルにまとめ上げて、ローカル開発環境上においてたった 1 つのコマンドから設定と実行を行うようにします。
+最後にデバッガーへの接続を行って、コンテナー内で稼動するアプリケーションの動作を確認します。</p>
+
+<p>MongoDB をダウンロード、インストール、諸設定、サービスとして Mongo データベースの実行、これらは行いません。
+MongoDB 用の Docker 公式イメージがあるので、これをコンテナー内で実行します。</p>
+
+<p>コンテナー内で MongoDB を実行するにあたっては、利用データや設定を保存するためのボリュームをいくつか生成します。
+バインドマウントは利用せずに、Docker が提供しているボリューム管理機能を利用します。
+ボリュームに関することは本書のいたるところですべて説明しています。</p>
+
+<p>ボリュームを生成します。
+1 つは MongoDB のデータ用、1 つは MongoDB の設定用です。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create mongodb
+<span class="nv">$ </span>docker volume create mongodb_config
+</code></pre></div></div>
+
+<p>次にアプリケーションとデータベースが互いにやりとりを行うためのネットワークを生成します。
+このネットワークはユーザー定義のブリッジネットワークと呼ばれるもので、接続設定文字列を適切に使えば DNS ルックアップサービスを簡単に提供してくれます。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create mongodb
+</code></pre></div></div>
+
+<p>MongoDB をコンテナーにおいて実行し、上で生成したボリュームとネットワークを割り当てます。
+Docker が Hub からイメージをプルして、ローカルでこれを実行します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mongodb:/data/db <span class="se">\</span>
+  <span class="nt">-v</span> mongodb_config:/data/configdb <span class="nt">-p</span> 27017:27017 <span class="se">\</span>
+  <span class="nt">--network</span> mongodb <span class="se">\</span>
+  <span class="nt">--name</span> mongodb <span class="se">\</span>
+  mongo
+</code></pre></div></div>
+
+<p>さあ、MongoDB を動かすことができました。
+そこで<code class="language-plaintext highlighter-rouge">server.js</code>を書き換えて、データ保存をインメモリでなく MongoDB を用いるようにします。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ronin</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-server</span><span class="dl">'</span> <span class="p">)</span>
+<span class="kd">const</span> <span class="nx">mocks</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-mocks</span><span class="dl">'</span> <span class="p">)</span>
+<span class="kd">const</span> <span class="nx">database</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="dl">'</span><span class="s1">ronin-database</span><span class="dl">'</span> <span class="p">)</span>
+<span class="kd">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">ronin</span><span class="p">.</span><span class="nx">server</span><span class="p">()</span>
+
+<span class="nx">database</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">CONNECTIONSTRING</span> <span class="p">)</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">,</span> <span class="nx">mocks</span><span class="p">.</span><span class="nx">server</span><span class="p">(</span> <span class="nx">server</span><span class="p">.</span><span class="nx">Router</span><span class="p">(),</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>上では ronin-database モジュールを追加し、データベースへの接続コードを変更した上で、インメモリフラグを false にしています。
+この変更を反映させるためイメージを再ビルドする必要があります。</p>
+
+<p>その前に npm を使ってアプリケーションに ronin-database モジュールを追加します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>ronin-database
+</code></pre></div></div>
+
+<p>イメージをビルドします。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> node-docker <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>コンテナーを起動させます。
+ただし今回は環境変数<code class="language-plaintext highlighter-rouge">CONNECTIONSTRING</code>を設定することが必要です。
+アプリケーションがどういった接続文字列を使ってデータベースにアクセスするかを伝えるためです。
+<code class="language-plaintext highlighter-rouge">docker run</code>コマンドの実行時にこれを適切に指定します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+  <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--network</span> mongodb <span class="se">\</span>
+  <span class="nt">--name</span> rest-server <span class="se">\</span>
+  <span class="nt">-p</span> 8000:8000 <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">CONNECTIONSTRING</span><span class="o">=</span>mongodb://mongodb:27017/yoda_notes <span class="se">\</span>
+  node-docker
+</code></pre></div></div>
+
+<p>アプリケーションがデータベースに接続できること、メモ（note）を追加できることを確認します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost:8000/notes <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'{
+"name": "this is a note",
+"text": "this is a note that I wanted to take while I was working on writing a blog post.",
+"owner": "peter"
+}'</span>
+</code></pre></div></div>
+
+<p>サービスからの戻り値として以下のような JSON データを受け取るはずです。</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"code"</span><span class="p">:</span><span class="s2">"success"</span><span class="p">,</span><span class="nl">"payload"</span><span class="p">:{</span><span class="nl">"_id"</span><span class="p">:</span><span class="s2">"5efd0a1552cd422b59d4f994"</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"this is a note"</span><span class="p">,</span><span class="nl">"text"</span><span class="p">:</span><span class="s2">"this is a note that I wanted to take while I was working on writing a blog post."</span><span class="p">,</span><span class="nl">"owner"</span><span class="p">:</span><span class="s2">"peter"</span><span class="p">,</span><span class="nl">"createDate"</span><span class="p">:</span><span class="s2">"2020-07-01T22:11:33.256Z"</span><span class="p">}}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="use-compose-to-develop-locally">Compose を使ったローカル開発</h2>
 
 <p>本節では Compose ファイルを生成して node-docker と MongoDB を 1 つのコマンドで起動していきます。
 さらに Compose ファイルにおいては node-docker をデバッグモードで起動するように設定して、実行中のノードプロセスにデバッガーから接続します。</p>
@@ -266,6 +355,7 @@ Compose ファイルを生成して、ソースコードを実行コンテナー
 <ul id="my_toc" class="inline_toc">
   <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
   <li><a href="#introduction" class="nomunge">はじめに</a></li>
+  <li><a href="#local-database-and-containers" class="nomunge">ローカルデータベースとコンテナー</a></li>
   <li><a href="#use-compose-to-develop-locally" class="nomunge">Compose を使ったローカル開発</a></li>
   <li><a href="#connect-a-debugger" class="nomunge">デバッガーへの接続</a></li>
   <li><a href="#conclusion" class="nomunge">まとめ</a></li>
