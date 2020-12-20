@@ -9,7 +9,7 @@ description: Sharing our image we built for our example application so we can ru
 ---
 @y
 ---
-title: "Sharing Our Application"
+title: "アプリケーションの共有"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop, docker hub, sharing 
 description: Sharing our image we built for our example application so we can run it else where and other developers can use it
 ---
@@ -19,74 +19,80 @@ description: Sharing our image we built for our example application so we can ru
 Now that we've built an image, let's share it! To share Docker images, you have to use a Docker
 registry. The default registry is Docker Hub and is where all of the images we've used have come from.
 @y
-Now that we've built an image, let's share it! To share Docker images, you have to use a Docker
-registry. The default registry is Docker Hub and is where all of the images we've used have come from.
+ここまでにイメージをビルドしたので、これを共有しましょう。
+Docker イメージを共有するには Docker レジストリを使うことになります。
+デフォルトのレジストリは Docker Hub です。
+これまで利用してきたイメージがすべて Docker Hub にあります。
 @z
 
 @x
 ## Create a Repo
 @y
-## Create a Repo
+{: #create-a-repo }
+## リポジトリの生成
 @z
 
 @x
 To push an image, we first need to create a repo on Docker Hub.
 @y
-To push an image, we first need to create a repo on Docker Hub.
+イメージをプッシュするには、まず Docker Hub 上にリポジトリを生成する必要があります。
 @z
 
 @x
 1. Go to [Docker Hub](https://hub.docker.com) and log in if you need to.
 @y
-1. Go to [Docker Hub](https://hub.docker.com) and log in if you need to.
+1. [Docker Hub](https://hub.docker.com) にアクセスしてログインします。
 @z
 
 @x
 1. Click the **Create Repository** button.
 @y
-1. Click the **Create Repository** button.
+1. **Create Repository**（リポジトリの生成）ボタンをクリックします。
 @z
 
 @x
 1. For the repo name, use `getting-started`. Make sure the Visibility is `Public`.
 @y
-1. For the repo name, use `getting-started`. Make sure the Visibility is `Public`.
+1. リポジトリ名を`getting-started`とします。
+   Visibility は`Public`としてください。
 @z
 
 @x
 1. Click the **Create** button!
 @y
-1. Click the **Create** button!
+1. **Create**（生成）ボタンをクリックします。
 @z
 
 @x
 If you look on the right-side of the page, you'll see a section named **Docker commands**. This gives
 an example command that you will need to run to push to this repo.
 @y
-If you look on the right-side of the page, you'll see a section named **Docker commands**. This gives
-an example command that you will need to run to push to this repo.
+ページの右側を見てみると、**Docker commands** というセクションがあります。
+そこにはこのリポジトリへのプッシュを行うコマンド例が示されています。
 @z
 
 @x
 ![Docker command with push example](images/push-command.png){: style=width:75% }
 {: .text-center }
 @y
-![Docker command with push example](images/push-command.png){: style=width:75% }
+![Docker command に示されるプッシュ例](images/push-command.png){: style=width:75% }
 {: .text-center }
 @z
 
 @x
 ## Pushing our Image
 @y
-## Pushing our Image
+{: #pushing-our-image }
+## イメージのプッシュ
 @z
 
 @x
 1. In the command line, try running the push command you see on Docker Hub. Note that your command
    will be using your namespace, not "docker".
 @y
-1. In the command line, try running the push command you see on Docker Hub. Note that your command
-   will be using your namespace, not "docker".
+1. コマンドラインから Docker Hub 上に示されていたプッシュコマンドを実行してみます。
+   なお実行すべきコマンドでは、あなたの名前空間を利用することになります。
+   それは「docker」ではありません。
 @z
 
 @x
@@ -107,28 +113,30 @@ an example command that you will need to run to push to this repo.
     Why did it fail? The push command was looking for an image named docker/getting-started, but
     didn't find one. If you run `docker image ls`, you won't see one either.
 @y
-    Why did it fail? The push command was looking for an image named docker/getting-started, but
-    didn't find one. If you run `docker image ls`, you won't see one either.
+    失敗したのはなぜでしょう。
+    上のプッシュコマンドは docker/getting-started という名前のイメージを探しに行っています。
+    そしてそれを見つけられませんでした。
+    `docker image ls`を実行しても、そのイメージはありません。
 @z
 
 @x
     To fix this, we need to "tag" our existing image we've built to give it another name.
 @y
-    To fix this, we need to "tag" our existing image we've built to give it another name.
+    これを解決するには、作り出したイメージに対して別の名前をつける必要があります。
 @z
 
 @x
 1. Login to the Docker Hub using the command `docker login -u YOUR-USER-NAME`.
 @y
-1. Login to the Docker Hub using the command `docker login -u YOUR-USER-NAME`.
+1. `docker login -u YOUR-USER-NAME`コマンドを実行して Docker Hub にログインします。
 @z
 
 @x
 1. Use the `docker tag` command to give the `getting-started` image a new name. Be sure to swap out
    `YOUR-USER-NAME` with your Docker ID.
 @y
-1. Use the `docker tag` command to give the `getting-started` image a new name. Be sure to swap out
-   `YOUR-USER-NAME` with your Docker ID.
+1. `docker tag`コマンドを実行して`getting-started`イメージに新たな名前をつけます。
+   `YOUR-USER-NAME`の部分は自分の Docker ID に書き換えてください。
 @z
 
 @x
@@ -146,9 +154,10 @@ an example command that you will need to run to push to this repo.
    `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
    will use a tag called `latest`.
 @y
-1. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
-   `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
-   will use a tag called `latest`.
+1. そこでもう一度プッシュコマンドを実行します。
+   コマンドを Docker Hub からコピーしていた場合、`tagname`部分がないことになります。
+   イメージ名にはタグを追加しなかったからです。
+   タグ指定がない場合 Docker は`latest`というタグを利用します。
 @z
 
 @x
@@ -164,47 +173,50 @@ an example command that you will need to run to push to this repo.
 @x
 ## Running our Image on a New Instance
 @y
-## Running our Image on a New Instance
+{: #running-our-image-on-a-new-instance }
+## 新たなインスタンス上でのイメージの実行
 @z
 
 @x
 Now that our image has been built and pushed into a registry, let's try running our app on a brand
 new instance that has never seen this container image! To do this, we will use Play with Docker.
 @y
-Now that our image has been built and pushed into a registry, let's try running our app on a brand
-new instance that has never seen this container image! To do this, we will use Play with Docker.
+イメージをビルドしてレジストリにプッシュするところまでできました。
+そこでこのコンテナーイメージをまだ参照していない新たなインスタンスを起動することにします。
+これを行うために、ここでは Play with Docker を利用します。
 @z
 
 @x
 1. Open your browser to [Play with Docker](http://play-with-docker.com).
 @y
-1. Open your browser to [Play with Docker](http://play-with-docker.com).
+1.  ブラウザーを開いて [Play with Docker](http://play-with-docker.com) にアクセスします。
 @z
 
 @x
 1. Log in with your Docker Hub account.
 @y
-1. Log in with your Docker Hub account.
+1. Docker Hub アカウントを使ってログインします。
 @z
 
 @x
 1. Once you're logged in, click on the "+ ADD NEW INSTANCE" link in the left side bar. (If you don't see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.
 @y
-1. Once you're logged in, click on the "+ ADD NEW INSTANCE" link in the left side bar. (If you don't see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.
+1. ログインを行ったら、左サイドバーにある「+ ADD NEW INSTANCE」（新たなインスタンス追加）リンクをクリックします。
+   （このリンクが見えなかったらブラウザー画面をもう少し広げてください。）
+   数秒してブラウザーの中にターミナル画面が開きます。
 @z
 
 @x
     ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
 {: .text-center }
 @y
-    ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
-{: .text-center }
+   ![Play with Docker から新たなインスタンス追加](images/pwd-add-new-instance.png){: style=width:75% }{: .text-center }
 @z
 
 @x
 1. In the terminal, start your freshly pushed app.
 @y
-1. In the terminal, start your freshly pushed app.
+1. ターミナルからプッシュした新しいアプリを起動します。
 @z
 
 @x
@@ -212,29 +224,32 @@ new instance that has never seen this container image! To do this, we will use P
     docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
     ```
 @y
-    ```bash
-    docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
-    ```
+   ```bash
+   docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
+   ```
 @z
 
 @x
     You should see the image get pulled down and eventually start up!
 @y
-    You should see the image get pulled down and eventually start up!
+    イメージがプルされた後に起動されます。
 @z
 
 @x
 1. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
     If the 3000 badge doesn't show up, you can click on the "Open Port" button and type in 3000.
 @y
-1. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
-    If the 3000 badge doesn't show up, you can click on the "Open Port" button and type in 3000.
+1. アプリが起動したら 3000 badge をクリックします。
+   変更を加えたアプリが起動されたことがわかります。
+   やりました。
+   3000 badge が表示されなかった場合は、「Open Port」ボタンをクリックして 3000 を入力してください。
 @z
 
 @x
 ## Recap
 @y
-## Recap
+{: #recap }
+## まとめ
 @z
 
 @x
@@ -243,10 +258,11 @@ brand new instance and were able to run the freshly pushed image. This is quite 
 where the pipeline will create the image and push it to a registry and then the production environment
 can use the latest version of the image.
 @y
-In this section, we learned how to share our images by pushing them to a registry. We then went to a
-brand new instance and were able to run the freshly pushed image. This is quite common in CI pipelines,
-where the pipeline will create the image and push it to a registry and then the production environment
-can use the latest version of the image.
+本節では、レジストリにイメージをプッシュしてこれを共有する方法を学びました。
+また新たなインスタンスを実行させ、プッシュした新たなイメージの起動に成功しました。
+CI パイプラインとしてこれはいたって普通のことです。
+このパイプラインによってイメージを生成しレジストリにイメージをプッシュします。
+そして本番環境ではイメージの最新バージョンを用いることができます。
 @z
 
 @x
@@ -255,8 +271,8 @@ section. As a reminder, we noticed that when we restarted the app, we lost all o
 That's obviously not a great user experience, so let's learn how we can persist the data across 
 restarts!
 @y
-Now that we have that figured out, let's circle back around to what we noticed at the end of the last
-section. As a reminder, we noticed that when we restarted the app, we lost all of our todo list items.
-That's obviously not a great user experience, so let's learn how we can persist the data across 
-restarts!
+ここでのことは明らかになったので、前節の終わりに示していた気がかりな点に戻ることにします。
+もう一度言うと、アプリを再起動すると、それまでの Todo リストアイテムが消えてしまっていたということです。
+これは明らかに正しい形ではありません。
+そこで再起動してもデータが残るような方法を学んでいきましょう。
 @z

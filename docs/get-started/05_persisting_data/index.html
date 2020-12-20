@@ -1,8 +1,8 @@
-<!-- Page generated 2020-12-19 12:03:50 +0900-->
+<!-- Page generated 2020-12-20 18:58:56 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Persisting our DB | Docker ドキュメント</title>
-  <meta name="description" content="Making our DB persistent in our application" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>DB へのデータ保存 | Docker ドキュメント</title>
+  <meta name="description" content="アプリケーションにおける DB データを保存します。" />
   <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/05_persisting_data/" />
 
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Persisting our DB"/>
+  <meta name="twitter:title" itemprop="title name" content="DB へのデータ保存"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Persisting our DB" />
-  <meta property="og:description" content="Making our DB persistent in our application" />
+  <meta property="og:title" content="DB へのデータ保存" />
+  <meta property="og:description" content="アプリケーションにおける DB データを保存します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-19T12:03:50+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-20T18:58:56+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/05_persisting_data/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-19T12:03:50+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Persisting our DB","description":"Making our DB persistent in our application","url":"https://docs.docker.com/get-started/05_persisting_data/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-20T18:58:56+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"DB へのデータ保存","description":"アプリケーションにおける DB データを保存します。","url":"https://docs.docker.com/get-started/05_persisting_data/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,151 +98,162 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Persisting our DB</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><p>In case you didn’t notice, our todo list is being wiped clean every single time
-we launch the container. Why is this? Let’s dive into how the container is working.</p>
+                        <section class="section"><h1>DB へのデータ保存</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>状況がわかりますか。
+コンテナーを起動するたびに、Todo リストはきれいにクリアされてしまうということです。
+なぜこうなるのでしょう。
+そこでコンテナーがどのように動作するのかを確認していきましょう。</p>
 
-<h2 id="the-containers-filesystem">The Container’s Filesystem</h2>
+<h2 id="the-containers-filesystem">コンテナーのファイルシステム</h2>
 
-<p>When a container runs, it uses the various layers from an image for its filesystem.
-Each container also gets its own “scratch space” to create/update/remove files. Any
-changes won’t be seen in another container, <em>even if</em> they are using the same image.</p>
+<p>コンテナーが起動すると、イメージ内のさまざまなレイヤーがファイルシステムに利用されます。
+また各コンテナーには、ファイルの生成/更新/削除を行うための「スクラッチスペース」（scratch space、一時的な領域）をもっています。
+1 つのイメージを共通に利用しているからといって、1 つのコンテナー上の変更が他のコンテナーに及ぶわけではありません。</p>
 
-<h3 id="seeing-this-in-practice">Seeing this in Practice</h3>
+<h3 id="seeing-this-in-practice">実際を確認</h3>
 
-<p>To see this in action, we’re going to start two containers and create a file in each.
-What you’ll see is that the files created in one container aren’t available in another.</p>
+<p>実際の動作を見てみるために、2 つのコンテナーを起動させてそれぞれにファイル生成を行ってみます。
+そこでわかってくるのは、1 つのコンテナーで生成したファイルは、もう 1 つのコンテナーで利用することはできないということです。</p>
 
-<ol class="text-center">
+<ol>
   <li>
-    <p>Start a <code class="language-plaintext highlighter-rouge">ubuntu</code> container that will create a file named <code class="language-plaintext highlighter-rouge">/data.txt</code> with a random number
-between 1 and 10000.</p>
+    <p><code class="language-plaintext highlighter-rouge">ubuntu</code>コンテナーを起動させます。
+その際には、1 から 10000 までの間の乱数を発生させて、<code class="language-plaintext highlighter-rouge">/data.txt</code>というファイルに書き込みます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-d</span> ubuntu bash <span class="nt">-c</span> <span class="s2">"shuf -i 1-10000 -n 1 -o /data.txt &amp;&amp; tail -f /dev/null"</span>
 </code></pre></div>    </div>
 
-    <p>In case you’re curious about the command, we’re starting a bash shell and invoking two
- commands (why we have the <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>). The first portion picks a single random number and writes
- it to <code class="language-plaintext highlighter-rouge">/data.txt</code>. The second command is simply watching a file to keep the container running.</p>
+    <p>このコマンドがよくわからない方のために説明しておくと、上では Bash シェルを起動させて 2 つのコマンドを実行させています（だから<code class="language-plaintext highlighter-rouge">&amp;&amp;</code>を使っています）。
+ 前半のコマンドは 1 つの乱数を発生させて<code class="language-plaintext highlighter-rouge">/data.txt</code>に出力しています。
+ そして後半のコマンドでは、単純にこのファイルを見ることによってこのコンテナーを実行し続けます。</p>
   </li>
   <li>
-    <p>Validate we can see the output by <code class="language-plaintext highlighter-rouge">exec</code>‘ing into the container. To do so, open the Dashboard and click the first action of the container that is running the <code class="language-plaintext highlighter-rouge">ubuntu</code> image.</p>
+    <p>コンテナー内で<code class="language-plaintext highlighter-rouge">exec</code>を実行し、その結果を確認します。
+これを行うにはダッシュボードを開いて、<code class="language-plaintext highlighter-rouge">ubuntu</code>イメージを起動させているコンテナーの 1 つめの動作をクリックします。</p>
 
-    <p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-open-cli-ubuntu.png" alt="Dashboard open CLI into ubuntu container" /></p>
+    <p><img src="/docs.docker.jp.onthefly/get-started/images/dashboard-open-cli-ubuntu.png" alt="ダッシュボードでの ubuntu コンテナーに対する CLI オープン" class="text-center" /></p>
+
+    <p>ターミナルを見れば Ubuntu コンテナー内にシェルが実行されたことがわかります。
+ そこで以下のコマンドを実行して<code class="language-plaintext highlighter-rouge">/data.txt</code>ファイルの中身を確認します。
+ その後はこのターミナルを再び閉じてください。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cat</span> /data.txt
+</code></pre></div>    </div>
+
+    <p>コマンドラインを選ぶ場合は、<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドを実行して同じことを行います。
+ その場合は（<code class="language-plaintext highlighter-rouge">docker ps</code>を実行して）コンテナー ID を得る必要があります。
+ そしてファイル内容を以下のようにして確認します。</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker <span class="nb">exec</span> &lt;container-id&gt; <span class="nb">cat</span> /data.txt
+</code></pre></div>    </div>
+
+    <p>乱数が書き込まれているはずです。</p>
   </li>
-</ol>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
-
-```bash
-cat /data.txt
-```
-
-If you prefer the command line you can use the `docker exec` command to do the same. You need to get the    container's ID (use `docker ps` to get it) and get the content with the following command.
-
-```bash
-docker exec &lt;container-id&gt; cat /data.txt
-```
-
-You should see a random number!
-</code></pre></div></div>
-
-<ol>
   <li>
-    <p>Now, let’s start another <code class="language-plaintext highlighter-rouge">ubuntu</code> container (the same image) and we’ll see we don’t have the same
-file.</p>
+    <p>そこで（同一イメージから）別の<code class="language-plaintext highlighter-rouge">ubuntu</code>コンテナーを起動させます。
+このコンテナーに同じファイルを持っていないかどうかを見てみます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-it</span> ubuntu <span class="nb">ls</span> /
 </code></pre></div>    </div>
 
-    <p>And look! There’s no <code class="language-plaintext highlighter-rouge">data.txt</code> file there! That’s because it was written to the scratch space for
- only the first container.</p>
+    <p>見てください。
+ たしかに<code class="language-plaintext highlighter-rouge">data.txt</code>ファイルはありません。
+ こうなった理由は、ファイルの書き込みが 1 つめのコンテナーのスクラッチスペースにしか行われていないからです。</p>
   </li>
   <li>
-    <p>Go ahead and remove the first container using the <code class="language-plaintext highlighter-rouge">docker rm -f</code> command.</p>
+    <p><code class="language-plaintext highlighter-rouge">docker rm -f</code>コマンドを実行して 1 つめのコンテナーを削除します。</p>
   </li>
 </ol>
 
-<h2 id="container-volumes">Container Volumes</h2>
+<h2 id="container-volumes">コンテナーボリューム</h2>
 
-<p>With the previous experiment, we saw that each container starts from the image definition each time it starts.
-While containers can create, update, and delete files, those changes are lost when the container is removed
-and all changes are isolated to that container. With volumes, we can change all of this.</p>
+<p>上で行った実験では、起動元となるイメージ定義に基づいて、各コンテナーがその都度起動する様子を見ました。
+コンテナーではファイルの生成、更新、削除を行うことができますが、コンテナーを削除すると、そういった変更はすべて失われ、コンテナーから切り離されます。
+そこでボリュームを利用すると、この状況を変えることができます。</p>
 
-<p><a href="/storage/volumes/">Volumes</a> provide the ability to connect specific filesystem paths of
-the container back to the host machine. If a directory in the container is mounted, changes in that
-directory are also seen on the host machine. If we mount that same directory across container restarts, we’d see
-the same files.</p>
+<p><a href="/storage/volumes/">ボリューム</a> とは、ホストマシンに向けられたコンテナー内の特別なファイルシステムにアクセスする機能を提供するものです。
+コンテナー内のあるディレクトリがマウントされていると、そのディレクトリ内で行われた変更が、ホストマシンからも見ることができます。
+仮にコンテナーの再起動の前後で 1 つのディレクトリをマウントしておけば、同一のファイルを維持できることになります。</p>
 
-<p>There are two main types of volumes. We will eventually use both, but we will start with <strong>named volumes</strong>.</p>
+<p>ボリュームには大きく 2 つの種類があります。
+最終的にはその両方を利用しますが、まずは <strong>名前つきボリューム</strong>（named volumes）から始めます。</p>
 
-<h2 id="persisting-our-todo-data">Persisting our Todo Data</h2>
+<h2 id="persisting-our-todo-data">Todo データの保存</h2>
 
-<p>By default, the todo app stores its data in a <a href="https://www.sqlite.org/index.html">SQLite Database</a> at
-<code class="language-plaintext highlighter-rouge">/etc/todos/todo.db</code>. If you’re not familiar with SQLite, no worries! It’s simply a relational database in
-which all of the data is stored in a single file. While this isn’t the best for large-scale applications,
-it works for small demos. We’ll talk about switching this to a different database engine later.</p>
+<p>Todo アプリはデフォルトで各種データを<code class="language-plaintext highlighter-rouge">/etc/todos/todo.db</code>にある <a href="https://www.sqlite.org/index.html">SQLite データベース</a> に保存します。
+SQLite がよくわからなくても心配無用です。
+これは単純なリレーショナルデータベースであって、すべてのデータを 1 つのファイル内に保存するものです。
+大規模アプリケーションに対して利用するのは適切ではありませんが、ちょっとしたデモであれば十分に動作します。
+この後には別のデータベースエンジンにも話を移していきます。</p>
 
-<p>With the database being a single file, if we can persist that file on the host and make it available to the
-next container, it should be able to pick up where the last one left off. By creating a volume and attaching
-(often called “mounting”) it to the directory the data is stored in, we can persist the data. As our container
-writes to the <code class="language-plaintext highlighter-rouge">todo.db</code> file, it will be persisted to the host in the volume.</p>
+<p>データベースが 1 つのファイルに収められているので、ホスト上のファイルとして保存しておけば、新たなコンテナーからも利用できます。
+したがって最後に更新されたものを、その次にも使い続けられます。
+ボリュームを生成して、データを保存するディレクトリに割り当てます（通常これを「マウンティングする」と言い表します）。
+こうすればデータを失うことなく保存できます。
+今の場合、コンテナーから<code class="language-plaintext highlighter-rouge">todo.db</code>ファイルへの書き込みを行っているので、ボリュームを通じてホスト上にデータが保持されることになります。</p>
 
-<p>As mentioned, we are going to use a <strong>named volume</strong>. Think of a named volume as simply a bucket of data.
-Docker maintains the physical location on the disk and you only need to remember the name of the volume.
-Every time you use the volume, Docker will make sure the correct data is provided.</p>
+<p>先ほど言ったように、これから扱うのは <strong>名前つきボリューム</strong> です。
+名前つきボリュームとは、単純にデータが入った 1 つのバケツだと思ってください。
+Docker はディスク上の物理的なディレクトリ位置を管理しますが、われわれにとってはボリュームの名前を覚えておくだけで十分です。
+ボリュームを使う際には、Docker が適切なデータを提供してくれます。</p>
 
 <ol>
   <li>
-    <p>Create a volume by using the <code class="language-plaintext highlighter-rouge">docker volume create</code> command.</p>
+    <p><code class="language-plaintext highlighter-rouge">docker volume create</code>コマンドを実行してボリュームを生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker volume create todo-db
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Stop the todo app container once again in the Dashboard (or with <code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code>), as it is still running without using the persistent volume.</p>
+    <p>ダッシュボード上から再度 Todo アプリコンテナーを停止させます（あるいは<code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code>を実行します）。
+なぜならデータ保存を行うボリュームを利用しない状態で、アプリコンテナーがまだ実行しているからです。</p>
   </li>
   <li>
-    <p>Start the todo app container, but add the <code class="language-plaintext highlighter-rouge">-v</code> flag to specify a volume mount. We will use the named volume and mount
-it to <code class="language-plaintext highlighter-rouge">/etc/todos</code>, which will capture all files created at the path.</p>
+    <p>Todo アプリコンテナーを起動します。
+ただし今回は<code class="language-plaintext highlighter-rouge">-v</code>フラグを使ってボリュームマウントの指定を行います。
+名前つきボリュームを利用し、これを<code class="language-plaintext highlighter-rouge">/etc/todos</code>にマウントします。
+これによってそのパス上に生成されるファイルをすべて取得できるようにします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-dp</span> 3000:3000 <span class="nt">-v</span> todo-db:/etc/todos getting-started
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Once the container starts up, open the app and add a few items to your todo list.</p>
+    <p>コンテナーが起動したら、アプリを開いて Todo リストに 2、3 のアイテムを追加します。</p>
 
-    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/items-added.png" alt="Items added to todo list" style="width: 55%; " /></p>
+    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/items-added.png" alt="Todo リストに追加されたアイテム" style="width: 55%; " /></p>
   </li>
   <li>
-    <p>Remove the container for the todo app. Use the Dashboard or <code class="language-plaintext highlighter-rouge">docker ps</code> to get the ID and then <code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code> to remove it.</p>
+    <p>Todo アプリを実現するコンテナーを削除します。
+それにはダッシュボードを利用するか、あるいは<code class="language-plaintext highlighter-rouge">docker ps</code>によって ID を得た上で<code class="language-plaintext highlighter-rouge">docker rm -f &lt;id&gt;</code>を実行します。</p>
   </li>
   <li>
-    <p>Start a new container using the same command from above.</p>
+    <p>新たなコンテナーを起動します。
+実行コマンドは前回と同じです。</p>
   </li>
   <li>
-    <p>Open the app. You should see your items still in your list!</p>
+    <p>アプリを開きます。
+登録したアイテムがリスト内に表示されているはずです。</p>
   </li>
   <li>
-    <p>Go ahead and remove the container when you’re done checking out your list.</p>
+    <p>先に進めるため、リスト表示を確認したらコンテナーを削除します。</p>
   </li>
 </ol>
 
-<p>Hooray! You’ve now learned how to persist data!</p>
+<p>やりました。
+データ保存の方法がこれでわかりました。</p>
 
 <blockquote>
-  <p><strong>Pro-tip</strong></p>
+  <p><strong>上級者向けヒント</strong></p>
 
-  <p>While named volumes and bind mounts (which we’ll talk about in a minute) are the two main types of volumes supported
-by a default Docker engine installation, there are many volume driver plugins available to support NFS, SFTP, NetApp,
-and more! This will be especially important once you start running containers on multiple hosts in a clustered
-environment with Swarm, Kubernetes, etc.</p>
-
+  <p>名前つきボリュームとバインドボリューム（これについては後に説明）は、Docker Engine においてデフォルトでサポートされている 2 種類のボリュームです。
+ただしそれ以外にもボリュームドライバープラグインというものが多数あって、NFS、SFTP、NetApp などに対応しています。
+これが特に重要になってくるのが、複数のホストを利用して Swarm や Kubernetes といったクラスター環境を稼動させる場合です。</p>
 </blockquote>
 
-<h2 id="diving-into-our-volume">Diving into our Volume</h2>
+<h2 id="diving-into-our-volume">ボリュームの詳細</h2>
 
-<p>A lot of people frequently ask “Where is Docker <em>actually</em> storing my data when I use a named volume?” If you want to know,
-you can use the <code class="language-plaintext highlighter-rouge">docker volume inspect</code> command.</p>
+<p>多くの方からよくたずねられる質問があります。
+「名前つきボリュームを利用したときに Docker は <strong>実際には</strong> どこにデータを保存するのですか。」
+これを知りたいなら<code class="language-plaintext highlighter-rouge">docker volume inspect</code>コマンドを実行してみてください。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker volume inspect todo-db
 <span class="o">[</span>
@@ -258,24 +269,27 @@ you can use the <code class="language-plaintext highlighter-rouge">docker volume
 <span class="o">]</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">Mountpoint</code> is the actual location on the disk where the data is stored. Note that on most machines, you will
-need to have root access to access this directory from the host. But, that’s where it is!</p>
+<p><code class="language-plaintext highlighter-rouge">Mountpoint</code>というのが、データが保存されるディスク上の本当の保存場所です。
+たいていのマシンにおいては、この場所に対してホストからアクセスするにはルート権限が必要です。
+ともあれそういう場所にあるということです。</p>
 
 <blockquote>
-  <p><strong>Accessing Volume data directly on Docker Desktop</strong></p>
+  <p><strong>Docker Desktop におけるボリュームデータへの直接アクセス</strong></p>
 
-  <p>While running in Docker Desktop, the Docker commands are actually running inside a small VM on your machine.
-If you wanted to look at the actual contents of the Mountpoint directory, you would need to first get inside
-of the VM.</p>
+  <p>Docker Desktop の実行中には、Docker コマンドは実際にはマシン上の小さな VM 内部で実行されています。
+したがって Mountpoint ディレクトリの実際の場所を見たい場合には、その VM の内部にまず入ることが必要になります。</p>
 </blockquote>
 
-<h2 id="recap">Recap</h2>
+<h2 id="recap">まとめ</h2>
 
-<p>At this point, we have a functioning application that can survive restarts! We can show it off to our investors and
-hope they can catch our vision!</p>
+<p>この時点で、再起動をしても問題のないアプリケーションを動作させました。
+お客さんにこれを見せつけて、われわれの構想を理解してもらえるよう願いましょう。</p>
 
-<p>However, we saw earlier that rebuilding images for every change takes quite a bit of time. There’s got to be a better
-way to make changes, right? With bind mounts (which we hinted at earlier), there is a better way! Let’s take a look at that now!</p>
+<p>ところで前回までに、変更をかけるたびにイメージを再ビルドするのも、かなりの手間がかかることを見てきました。
+変更を加えるもっと良い方法が必要ですよね。
+バインドマウントです（上でちょっとだけ話していました）。
+これを使えばよいのです。
+次にこれを見ていきましょう。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -309,15 +323,15 @@ way to make changes, right? With bind mounts (which we hinted at earlier), there
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#the-containers-filesystem" class="nomunge">The Container’s Filesystem</a>
+  <li><a href="#the-containers-filesystem" class="nomunge">コンテナーのファイルシステム</a>
     <ul>
-      <li><a href="#seeing-this-in-practice" class="nomunge">Seeing this in Practice</a></li>
+      <li><a href="#seeing-this-in-practice" class="nomunge">実際を確認</a></li>
     </ul>
   </li>
-  <li><a href="#container-volumes" class="nomunge">Container Volumes</a></li>
-  <li><a href="#persisting-our-todo-data" class="nomunge">Persisting our Todo Data</a></li>
-  <li><a href="#diving-into-our-volume" class="nomunge">Diving into our Volume</a></li>
-  <li><a href="#recap" class="nomunge">Recap</a></li>
+  <li><a href="#container-volumes" class="nomunge">コンテナーボリューム</a></li>
+  <li><a href="#persisting-our-todo-data" class="nomunge">Todo データの保存</a></li>
+  <li><a href="#diving-into-our-volume" class="nomunge">ボリュームの詳細</a></li>
+  <li><a href="#recap" class="nomunge">まとめ</a></li>
 </ul>
 
 </div>
