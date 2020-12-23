@@ -1,8 +1,8 @@
-<!-- Page generated 2020-12-20 18:58:56 +0900-->
+<!-- Page generated 2020-12-23 17:45:31 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Using bind mounts | Docker ドキュメント</title>
-  <meta name="description" content="Using bind mounts in our application" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>バインドマウントの利用 | Docker ドキュメント</title>
+  <meta name="description" content="アプリケーションにおいてバインドマウントを利用します。" />
   <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/06_bind_mounts/" />
 
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Using bind mounts"/>
+  <meta name="twitter:title" itemprop="title name" content="バインドマウントの利用"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Using bind mounts" />
-  <meta property="og:description" content="Using bind mounts in our application" />
+  <meta property="og:title" content="バインドマウントの利用" />
+  <meta property="og:description" content="アプリケーションにおいてバインドマウントを利用します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-20T18:58:56+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-23T17:45:31+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/06_bind_mounts/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-20T18:58:56+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Using bind mounts","description":"Using bind mounts in our application","url":"https://docs.docker.com/get-started/06_bind_mounts/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-23T17:45:31+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"バインドマウントの利用","description":"アプリケーションにおいてバインドマウントを利用します。","url":"https://docs.docker.com/get-started/06_bind_mounts/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,73 +98,74 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Using bind mounts</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>In the previous chapter, we talked about and used a <strong>named volume</strong> to persist the data in our database.
-Named volumes are great if we simply want to store data, as we don’t have to worry about <em>where</em> the data
-is stored.</p>
+                        <section class="section"><h1>バインドマウントの利用</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>前節においては <strong>名前つきボリューム</strong> を取り上げて、データベース上のデータを保存するようにしました。
+名前つきボリュームは単にデータを保存したいだけであれば、十分に使えます。
+その際には <strong>どこに</strong> データが保存されるのかを気にかける必要もありません。</p>
 
-<p>With <strong>bind mounts</strong>, we control the exact mountpoint on the host. We can use this to persist data, but is often
-used to provide additional data into containers. When working on an application, we can use a bind mount to
-mount our source code into the container to let it see code changes, respond, and let us see the changes right
-away.</p>
+<p><strong>バインドマウント</strong>（bind mounts）の場合は、ホスト上のマウントポイントを正確に制御することになります。
+このマウントによってデータ保存を行ないますが、コンテナーに対してこれとは違ったデータ提供のためにも用いられることがあります。
+アプリケーションを開発する際には、バインドマウントを利用してソースコードをコンテナー内にマウントすることができます。
+これを行うことでアプリケーションがコード変更を識別でき、これに応じてわれわれも正しく変更を確認することができます。</p>
 
-<p>For Node-based applications, <a href="https://npmjs.com/package/nodemon">nodemon</a> is a great tool to watch for file
-changes and then restart the application. There are equivalent tools in most other languages and frameworks.</p>
+<p>Node ベースのアプリケーションとして <a href="https://npmjs.com/package/nodemon">nodemon</a> があり、ファイル変更を監視してその後にアプリケーションを再起動するという優れたツールです。
+たいていのプログラミング言語やフレームワークに対しても同様のツールがあります。</p>
 
-<h2 id="quick-volume-type-comparisons">Quick Volume Type Comparisons</h2>
+<h2 id="ボリューム種類の単純比較">ボリューム種類の単純比較</h2>
 
-<p>Bind mounts and named volumes are the two main types of volumes that come with the Docker engine. However, additional
-volume drivers are available to support other uses cases (<a href="https://github.com/vieux/docker-volume-sshfs">SFTP</a>, <a href="https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/">Ceph</a>, <a href="https://netappdvp.readthedocs.io/en/stable/">NetApp</a>, <a href="https://github.com/elementar/docker-s3-volume">S3</a>, and more).</p>
+<p>バインドマウントと名前つきボリュームは Docker Engine が提供する 2 種類のボリュームです。
+これ以外にも別の状況において利用できるボリュームドライバーがあります（<a href="https://github.com/vieux/docker-volume-sshfs">SFTP</a>、<a href="https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/">Ceph</a>、<a href="https://netappdvp.readthedocs.io/en/stable/">NetApp</a>、<a href="https://github.com/elementar/docker-s3-volume">S3</a> などです）。</p>
 
 <table>
   <thead>
     <tr>
       <th> </th>
-      <th>Named Volumes</th>
-      <th>Bind Mounts</th>
+      <th>名前つきボリューム</th>
+      <th>バインドマウント</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Host Location</td>
-      <td>Docker chooses</td>
-      <td>You control</td>
+      <td>ホスト側ディレクトリ</td>
+      <td>Docker が制御</td>
+      <td>ユーザーが制御</td>
     </tr>
     <tr>
-      <td>Mount Example (using <code class="language-plaintext highlighter-rouge">-v</code>)</td>
+      <td>マウント例（<code class="language-plaintext highlighter-rouge">-v</code>利用時）</td>
       <td>my-volume:/usr/local/data</td>
       <td>/path/to/data:/usr/local/data</td>
     </tr>
     <tr>
-      <td>Populates new volume with container contents</td>
+      <td>新ボリュームにコンテナー内容を取り込む</td>
       <td>Yes</td>
       <td>No</td>
     </tr>
     <tr>
-      <td>Supports Volume Drivers</td>
+      <td>ボリュームドライバーのサポート</td>
       <td>Yes</td>
       <td>No</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="starting-a-dev-mode-container">Starting a Dev-Mode Container</h2>
+<h2 id="starting-a-dev-mode-container">開発対応のコンテナー起動</h2>
 
-<p>To run our container to support a development workflow, we will do the following:</p>
+<p>開発作業に対応するようなコンテナー起動を行うため、以下を行っていくことにします。</p>
 
 <ul>
-  <li>Mount our source code into the container</li>
-  <li>Install all dependencies, including the “dev” dependencies</li>
-  <li>Start nodemon to watch for filesystem changes</li>
+  <li>ソースコードをコンテナー内にマウントします。</li>
+  <li>依存パッケージをすべてインストールします。「dev」パッケージもインストールします。</li>
+  <li>ファイルシステム変更の監視に nodemon を利用します。</li>
 </ul>
 
-<p>So, let’s do it!</p>
+<p>さて始めていきます。</p>
 
 <ol>
   <li>
-    <p>Make sure you don’t have any previous <code class="language-plaintext highlighter-rouge">getting-started</code> containers running.</p>
+    <p>これまでの<code class="language-plaintext highlighter-rouge">getting-started</code>コンテナーは一切動いていないことを確認します。</p>
   </li>
   <li>
-    <p>Run the following command. We’ll explain what’s going on afterwards:</p>
+    <p>以下のコマンドを実行します。
+これがどのようになるのかは後に説明します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-dp</span> 3000:3000 <span class="se">\</span>
      <span class="nt">-w</span> /app <span class="nt">-v</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">:/app"</span> <span class="se">\</span>
@@ -172,7 +173,7 @@ volume drivers are available to support other uses cases (<a href="https://githu
      sh <span class="nt">-c</span> <span class="s2">"yarn install &amp;&amp; yarn run dev"</span>
 </code></pre></div>    </div>
 
-    <p>If you are using PowerShell then use this command.</p>
+    <p>PowerShell を利用している場合は以下のコマンドとします。</p>
 
     <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-dp</span><span class="w"> </span><span class="nx">3000:3000</span><span class="w"> </span><span class="se">`
 </span><span class="w">     </span><span class="nt">-w</span><span class="w"> </span><span class="nx">/app</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="s2">"</span><span class="si">$(</span><span class="nf">pwd</span><span class="p">):</span><span class="nf">/app</span><span class="s2">" </span><span class="se">`</span><span class="s2">
@@ -181,17 +182,21 @@ volume drivers are available to support other uses cases (<a href="https://githu
 </span></code></pre></div>    </div>
 
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">-dp 3000:3000</code> - same as before. Run in detached (background) mode and create a port mapping</li>
-      <li><code class="language-plaintext highlighter-rouge">-w /app</code> - sets the “working directory” or the current directory that the command will run from</li>
-      <li><code class="language-plaintext highlighter-rouge">-v "$(pwd):/app"</code> - bind mount the current directory from the host in the container into the <code class="language-plaintext highlighter-rouge">/app</code> directory</li>
-      <li><code class="language-plaintext highlighter-rouge">node:12-alpine</code> - the image to use. Note that this is the base image for our app from the Dockerfile</li>
-      <li><code class="language-plaintext highlighter-rouge">sh -c "yarn install &amp;&amp; yarn run dev"</code> - the command. We’re starting a shell using <code class="language-plaintext highlighter-rouge">sh</code> (alpine doesn’t have <code class="language-plaintext highlighter-rouge">bash</code>) and
-running <code class="language-plaintext highlighter-rouge">yarn install</code> to install <em>all</em> dependencies and then running <code class="language-plaintext highlighter-rouge">yarn run dev</code>. If we look in the <code class="language-plaintext highlighter-rouge">package.json</code>,
-we’ll see that the <code class="language-plaintext highlighter-rouge">dev</code> script is starting <code class="language-plaintext highlighter-rouge">nodemon</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">-dp 3000:3000</code> - 前回と同様です。
+デタッチ（バックグラウンド）モードで実行し、ポートマッピングを生成します。</li>
+      <li><code class="language-plaintext highlighter-rouge">-w /app</code> - 「ワーキングディレクトリ」つまりカレントディレクトリを設定し、コマンドをそこから実行します。</li>
+      <li><code class="language-plaintext highlighter-rouge">-v "$(pwd):/app"</code> - ホスト上のカレントディレクトリを、コンテナー内の<code class="language-plaintext highlighter-rouge">/app</code>ディレクトリにバインドマウントします。</li>
+      <li><code class="language-plaintext highlighter-rouge">node:12-alpine</code> - 利用イメージです。
+ちなみにこれはアプリケーションがベースイメージとするように Dockerfile 内で指定しています。</li>
+      <li><code class="language-plaintext highlighter-rouge">sh -c "yarn install &amp;&amp; yarn run dev"</code> - コマンドです。
+ここでは<code class="language-plaintext highlighter-rouge">sh</code>を起動して（alpine には<code class="language-plaintext highlighter-rouge">bash</code>がないので）<code class="language-plaintext highlighter-rouge">yarn install</code>を実行します。
+これによって依存パッケージを <strong>すべて</strong> インストールし、さらに<code class="language-plaintext highlighter-rouge">yarn run dev</code>を実行します。
+<code class="language-plaintext highlighter-rouge">package.json</code>の中身を見ればわかるように、<code class="language-plaintext highlighter-rouge">dev</code>スクリプトから<code class="language-plaintext highlighter-rouge">nodemon</code>を起動しています。</li>
     </ul>
   </li>
   <li>
-    <p>You can watch the logs using <code class="language-plaintext highlighter-rouge">docker logs -f &lt;container-id&gt;</code>. You’ll know you’re ready to go when you see this...</p>
+    <p><code class="language-plaintext highlighter-rouge">docker logs -f &lt;container-id&gt;</code>を実行すればログ確認ができます。
+このログから準備万端であることがわかります。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker logs <span class="nt">-f</span> &lt;container-id&gt;
  <span class="nv">$ </span>nodemon src/index.js
@@ -203,43 +208,49 @@ we’ll see that the <code class="language-plaintext highlighter-rouge">dev</cod
  Listening on port 3000
 </code></pre></div>    </div>
 
-    <p>When you’re done watching the logs, exit out by hitting <code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">C</code>.</p>
+    <p>ログの確認を終えるには<code class="language-plaintext highlighter-rouge">Ctrl</code>+<code class="language-plaintext highlighter-rouge">C</code>を入力して終了させます。</p>
   </li>
   <li>
-    <p>Now, let’s make a change to the app. In the <code class="language-plaintext highlighter-rouge">src/static/js/app.js</code> file, let’s change the “Add Item” button to simply say
-“Add”. This change will be on line 109.</p>
+    <p>それではアプリに変更を加えてみます。
+<code class="language-plaintext highlighter-rouge">src/static/js/app.js</code>ファイルにおいて「Add Item」ボタン”の名前を単純に「Add」とします。
+この修正を行うのは 109 行めです。</p>
 
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code> -                         {submitting ? 'Adding...' : 'Add Item'}
  +                         {submitting ? 'Adding...' : 'Add'}
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might
-take a few seconds for the Node server to restart, so if you get an error, just try refreshing after a few seconds.</p>
+    <p>単純にページを更新します（あるいは改めて開きます）。
+ブラウザー上には変更した内容がほぼ即座に反映されたはずです。
+Node サーバーの再起動にはほんの数秒しかかかりませんから、もしエラー発生した場合は数秒待ってページ更新を行ってみてください。</p>
 
-    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/updated-add-button.png" alt="Screenshot of updated label for Add button" style="width:75%;" /></p>
+    <p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/updated-add-button.png" alt="Add ボタンのラベルを修正したスナップショット" style="width:75%;" /></p>
   </li>
   <li>
-    <p>Feel free to make any other changes you’d like to make. When you’re done, stop the container and build your new image
-using <code class="language-plaintext highlighter-rouge">docker build -t getting-started .</code>.</p>
+    <p>他に変更したい内容があれば、どんどん行ってください。
+作業が完了したらコンテナーを停止した上で、<code class="language-plaintext highlighter-rouge">docker build -t getting-started .</code>の実行により新たなイメージをビルドしてください。</p>
   </li>
 </ol>
 
-<p>Using bind mounts is <em>very</em> common for local development setups. The advantage is that the dev machine doesn’t need to have
-all of the build tools and environments installed. With a single <code class="language-plaintext highlighter-rouge">docker run</code> command, the dev environment is pulled and ready
-to go. We’ll talk about Docker Compose in a future step, as this will help simplify our commands (we’re already getting a lot
-of flags).</p>
+<p>バインドマウントを利用することは、ローカル開発環境においては <strong>ごくごく</strong> 普通のことです。
+これを使う利点は、開発作業を進めるマシンにおいては、ビルドツールや開発環境すべてをインストールする必要がなくなるということです。
+<code class="language-plaintext highlighter-rouge">docker run</code>コマンドを 1 つ実行するだけで、開発環境がプルされすぐに利用可能になります。
+この後には Docker Compose の説明を行っていきますが、そのときにはコマンド実行がもっと単純になります（もうすでにたくさんのフラグを使っていますから）。</p>
 
-<h2 id="recap">Recap</h2>
+<h2 id="recap">まとめ</h2>
 
-<p>At this point, we can persist our database and respond rapidly to the needs and demands of our investors and founders. Hooray!
-But, guess what? We received great news!</p>
+<p>ここまでにデータの保存を行い、会社へ投資してくれる人、会社の設立者から要求があったとしても、即対応できるようになりました。
+やりました。
+あれ、何でしょう？
+驚きのニュースが飛び込んできましたよ。</p>
 
-<p><strong>Your project has been selected for future development!</strong></p>
+<p><strong>このプロジェクトが今後の開発対象として選定されました！</strong></p>
 
-<p>In order to prepare for production, we need to migrate our database from working in SQLite to something that can scale a
-little better. For simplicity, we’ll keep with a relational database and switch our application to use MySQL. But, how
-should we run MySQL? How do we allow the containers to talk to each other? We’ll talk about that next!</p>
+<p>本番環境へ移行させるためには、データベースとして SQLite での作業としていたものを、もっとスケールアップしたものに変更することが必要です。
+作業が複雑にはならないようにリレーショナルデータベースは使い続けるとして、アプリケーションから利用するデータベースは MySQL とします。
+だけどどうやって MySQL を実行するのでしょう。
+どうやったら複数コンテナーが互いにやりとりできるようになるのでしょう。
+さぁ次の説明に進みます。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -273,9 +284,9 @@ should we run MySQL? How do we allow the containers to talk to each other? We’
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#quick-volume-type-comparisons" class="nomunge">Quick Volume Type Comparisons</a></li>
-  <li><a href="#starting-a-dev-mode-container" class="nomunge">Starting a Dev-Mode Container</a></li>
-  <li><a href="#recap" class="nomunge">Recap</a></li>
+  <li><a href="#ボリューム種類の単純比較" class="nomunge">ボリューム種類の単純比較</a></li>
+  <li><a href="#starting-a-dev-mode-container" class="nomunge">開発対応のコンテナー起動</a></li>
+  <li><a href="#recap" class="nomunge">まとめ</a></li>
 </ul>
 
 </div>
