@@ -1,4 +1,4 @@
-<!-- Page generated 2020-12-23 17:45:31 +0900-->
+<!-- Page generated 2020-12-24 20:31:45 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>マルチコンテナーアプリケーション | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="マルチコンテナーアプリケーション" />
   <meta property="og:description" content="Using more than one container in our application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-23T17:45:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-24T20:31:45+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/07_multi_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-23T17:45:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-24T20:31:45+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"マルチコンテナーアプリケーション","description":"Using more than one container in our application","url":"https://docs.docker.com/get-started/07_multi_container/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>マルチコンテナーアプリケーション</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>これまでは 1 つのコンテナーからなるアプリを使って作業を進めてきました。
+                        <section class="section"><h1>マルチコンテナーアプリケーション</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>これまでは 1 つのコンテナーからなるアプリを使って作業を進めてきました。
 ここからはアプリケーションに MySQL を加えようとしています。
 ところが以下の質問があがってきます。
 「MySQL はどこで動かすの？」
@@ -132,7 +132,7 @@
 
 <blockquote>
   <p>2 つのコンテナーが同一ネットワーク上にあれば互いにやりとりができます。
-同一ネットワーク上にないならできません。</p>
+同一ネットワーク上にないときはできません。</p>
 </blockquote>
 
 <h2 id="starting-mysql">MySQL の起動</h2>
@@ -281,20 +281,20 @@ Docker が名前つきボリュームが指定されたことを認識して、�
   <li><code class="language-plaintext highlighter-rouge">MYSQL_DB</code> - 接続後の利用データベース。</li>
 </ul>
 
-<blockquote>
-  <p><strong>警告</strong> 環境変数を利用した接続設定</p>
+<blockquote class="warning">
+  <p>環境変数を利用した接続設定</p>
 
   <p>環境変数を使って接続設定を行うことは、開発環境においては問題ありません。
 しかし本番環境において動作させるアプリケーションに、そうした設定を行うことは <strong>極めて不適切</strong> です。
 Docker の前セキュリティリーダー Diogo Monica 氏が <a href="https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/">すばらしいブログ投稿</a> においてその理由を説明してくれています。</p>
 
-  <p>A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
-these secrets are mounted as files in the running container. You’ll see many apps (including the MySQL image and the todo app)
-also support env vars with a <code class="language-plaintext highlighter-rouge">_FILE</code> suffix to point to a file containing the variable.</p>
+  <p>コンテナーオーケストレーションのメカニズムにおいては、よりセキュアなものとして Secret 機能がサポートされています。
+たいていの場合、この Secret というものは実行コンテナーに対してファイルの形でマウントされます。
+多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に<code class="language-plaintext highlighter-rouge">_FILE</code>をつけて、変数を含んだファイルを指し示しているものがあります。</p>
 
-  <p>As an example, setting the <code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD_FILE</code> var will cause the app to use the contents of the referenced file
-as the connection password. Docker doesn’t do anything to support these env vars. Your app will need to know to look for
-the variable and get the file contents.</p>
+  <p>たとえば<code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD_FILE</code>という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
+Docker はそういった変数の受け渡しをサポートする機能はありません。
+この変数を求めたりファイル内容を得たりするのは、アプリが行わなければならないことです。</p>
 </blockquote>
 
 <p>ここまで説明してきましたので、開発向けコンテナーを起動させましょう。</p>

@@ -97,7 +97,7 @@ docker-compose version
 @y
 1. Compose ファイルではまずスキーマバージョンの定義から書き始めます。
    たいていはサポートされている最新バージョンを利用します。
-   [Compose ファイルリファレンス](https://docs.docker.com/compose/compose-file/) を見れば、最新のスキーマバージョンや互換性マトリックスを確認できます。
+   [Compose ファイルリファレンス]({{ site.baseurl }}/compose/compose-file/) を見れば、最新のスキーマバージョンや互換性マトリックスを確認できます。
 @z
 
 @x
@@ -271,8 +271,8 @@ docker run -dp 3000:3000 `
 @y
 1. `-p 3000:3000`というコマンド部分を作ります。
    サービスに対する`ports`を定義するものです。
-   ここでは [短い文法](https://docs.docker.com/compose/compose-file/#short-syntax-1) で記述することにします。
-   もちろん [長い文法](https://docs.docker.com/compose/compose-file/#long-syntax-1) で記述することもできます。
+   ここでは [短い文法]({{ site.baseurl }}/compose/compose-file/#short-syntax-1) で記述することにします。
+   もちろん [長い文法]({{ site.baseurl }}/compose/compose-file/#long-syntax-1) で記述することもできます。
 @z
 
 @x
@@ -305,7 +305,7 @@ docker run -dp 3000:3000 `
 @y
 1. 次はワーキングディレクトリ（`-w /app`）とボリュームマッピング（`-v "$(pwd):/app"`）です。
    それぞれ`working_dir`と`volumes`の定義を行います。
-   ボリュームにも [短い文法](https://docs.docker.com/compose/compose-file/#short-syntax-3) と [長い文法](https://docs.docker.com/compose/compose-file/#long-syntax-3) があります。
+   ボリュームにも [短い文法]({{ site.baseurl }}/compose/compose-file/#short-syntax-3) と [長い文法]({{ site.baseurl }}/compose/compose-file/#long-syntax-3) があります。
 @z
 
 @x
@@ -493,7 +493,7 @@ docker run -d `
    しかし Compose を使って起動するときには、そのようにはなりません。
    まずボリュームの定義は、最上位項目として`volumes:`というセクションを設けて、サービス定義の中のマウントポイントをここに指定します。
    単純にボリューム名だけを指定すれば、デフォルトのオプションが用いられるようになります。
-   ただしここには [数多くのオプションが利用可能](https://docs.docker.com/compose/compose-file/#volume-configuration-reference) です。
+   ただしここには [数多くのオプションが利用可能]({{ site.baseurl }}/compose/compose-file/#volume-configuration-reference) です。
 @z
 
 @x
@@ -851,7 +851,7 @@ for the entire app. The containers will stop and the network will be removed.
 >Compose ファイル内で定めた名前つきボリュームは、`docker-compose down`を実行してもデフォルトでは削除 **されません**。
 >ボリュームも削除したいなら`--volumes`フラグをつける必要があります。
 >Docker ダッシュボードではアプリを削除してもボリュームは削除 **されません**。
-{.warning}
+{:.warning}
 @z
 
 @x

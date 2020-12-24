@@ -1,7 +1,7 @@
-<!-- Page generated 2020-12-20 18:58:56 +0900-->
+<!-- Page generated 2020-12-24 20:31:45 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Image building tips | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>イメージビルドのヒント | Docker ドキュメント</title>
   <meta name="description" content="Tips for building the images for our application" />
   <meta name="keywords" content="get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/get-started/09_image_best/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Image building tips"/>
+  <meta name="twitter:title" itemprop="title name" content="イメージビルドのヒント"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Image building tips" />
+  <meta property="og:title" content="イメージビルドのヒント" />
   <meta property="og:description" content="Tips for building the images for our application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-20T18:58:56+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-24T20:31:45+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/09_image_best/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-20T18:58:56+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Image building tips","description":"Tips for building the images for our application","url":"https://docs.docker.com/get-started/09_image_best/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-24T20:31:45+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"イメージビルドのヒント","description":"Tips for building the images for our application","url":"https://docs.docker.com/get-started/09_image_best/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,18 +98,20 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Image building tips</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><h2 id="security-scanning">Security Scanning</h2>
+                        <section class="section"><h1>イメージビルドのヒント</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><h2 id="security-scanning">セキュリティスキャン</h2>
 
-<p>When you have built an image, it is good practice to scan it for security vulnerabilities using the <code class="language-plaintext highlighter-rouge">docker scan</code> command.
-Docker has partnered with <a href="http://snyk.io">Snyk</a> to provide the vulnerability scanning service.</p>
+<p>イメージをビルドしたら<code class="language-plaintext highlighter-rouge">docker scan</code>コマンドを実行して、イメージにセキュリティぜい弱性がないかどうかをスキャンする。
+これがベストプラクティスです。
+Docker は <a href="http://snyk.io">Snyk</a> 社と連携してセキュリティスキャンサービスを提供しています。</p>
 
-<p>For example, to scan the <code class="language-plaintext highlighter-rouge">getting-started</code> image you created earlier in the tutorial, you can just type</p>
+<p>たとえば本チュートリアルの初期の頃に生成した<code class="language-plaintext highlighter-rouge">getting-started</code>イメージをスキャンする場合は、以下のようにします。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker scan getting-started
 </code></pre></div></div>
 
-<p>The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new
-vulnerabilities are discovered, but it might look something like this:</p>
+<p>スキャン処理では常時更新されているぜい弱性データベースを利用しています。
+したがって処理結果は、新たなぜい弱性が発見されるたびに変わります。
+出力例は以下のようなものです。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✗ Low severity vulnerability found in freetype/freetype
   Description: CVE-2020-15999
@@ -129,30 +131,31 @@ vulnerabilities are discovered, but it might look something like this:</p>
   Fixed in: 2.9.9-r4
 </code></pre></div></div>
 
-<p>The output lists the type of vulnerability, a URL to learn more, and importantly which version of the relevant library
-fixes the vulnerability.</p>
+<p>出力結果にはぜい弱性の種類、詳細 URL が示されます。
+そして最も重要なのが対象となるライブラリです。
+そこには対象ライブラリのどのバージョンがぜい弱性を解消しているかが示されます。</p>
 
-<p>There are several other options, which you can read about in the <a href="https://docs.docker.com/engine/scan/">docker scan documentation</a>.</p>
+<p>その他にもいくつかオプションがあります。
+その詳細については <a href="/docs.docker.jp.onthefly/engine/scan/">docker scan のドキュメント</a> を参照してください。</p>
 
-<p>As well as scanning your newly built image on the command line, you can also <a href="https://docs.docker.com/docker-hub/vulnerability-scanning/">configure Docker Hub</a>
-to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.</p>
+<p>新たに作り出したイメージに対するスキャンをコマンドラインから行う方法と、さらに <a href="/docs.docker.jp.onthefly/docker-hub/vulnerability-scanning/">Docker Hub の設定</a> を行って新規にプッシュされたイメージを自動的にスキャンすることも可能です。
+その場合の処理結果は Docker Hub と Docker Desktop のいずれからでも確認できます。</p>
 
-<p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/hvs.png" alt="Hub vulnerability scanning" /></p>
+<p class="text-center"><img src="/docs.docker.jp.onthefly/get-started/images/hvs.png" alt="Docker Hub のぜい弱性スキャン" /></p>
 
-<h2 id="image-layering">Image Layering</h2>
+<h2 id="image-layering">イメージのレイヤー管理</h2>
 
-<p>Did you know that you can look at what makes up an image? Using the <code class="language-plaintext highlighter-rouge">docker image history</code>
-command, you can see the command that was used to create each layer within an image.</p>
+<p>イメージがどのように構成されているかを確認できるのはご存知でしたか？
+<code class="language-plaintext highlighter-rouge">docker image history</code>コマンドを実行すれば、イメージ内のコンテナーがどのようなコマンドによって生成されたかを確認することができます。</p>
 
 <ol>
   <li>
-    <p>Use the <code class="language-plaintext highlighter-rouge">docker image history</code> command to see the layers in the <code class="language-plaintext highlighter-rouge">getting-started</code> image you
-created earlier in the tutorial.</p>
+    <p><code class="language-plaintext highlighter-rouge">docker image history</code>コマンドを実行して、本チュートリアルの初期に生成した<code class="language-plaintext highlighter-rouge">getting-started</code>イメージ内のレイヤーを確認してみます。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker image <span class="nb">history </span>getting-started
 </code></pre></div>    </div>
 
-    <p>You should get output that looks something like this (dates/IDs may be different).</p>
+    <p>結果として以下のような出力が得られます（日付や ID は異なるはずです）。</p>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
  a78a40cbf866        18 seconds ago      /bin/sh -c #(nop)  CMD ["node" "src/index.j…    0B
@@ -170,29 +173,30 @@ created earlier in the tutorial.</p>
  &lt;missing&gt;           13 days ago         /bin/sh -c #(nop) ADD file:e69d441d729412d24…   5.59MB
 </code></pre></div>    </div>
 
-    <p>Each of the lines represents a layer in the image. The display here shows the base at the bottom with
- the newest layer at the top. Using this, you can also quickly see the size of each layer, helping
- diagnose large images.</p>
+    <p>各行はイメージ内のレイヤーを表わしています。
+ この出力結果はベースイメージが最下段に、そして最も新しいレイヤーが最上段に示されます。
+ このコマンドを用いると、各レイヤーのサイズを簡単に知ることができるので、大容量イメージの調査に役立てることができます。</p>
   </li>
   <li>
-    <p>You’ll notice that several of the lines are truncated. If you add the <code class="language-plaintext highlighter-rouge">--no-trunc</code> flag, you’ll get the
-full output (yes... funny how you use a truncated flag to get untruncated output, huh?)</p>
+    <p>上の表示においては何行かが省略（truncate）表示されているのがわかります。
+<code class="language-plaintext highlighter-rouge">--no-trunc</code>フラグをつければ、省略せずに表示することができます。
+（<code class="language-plaintext highlighter-rouge">--no-trunc</code>って英単語が省略されたフラグを使っておきながら、省略されていない結果を得ようなんて、どういうことなんでしょうねぇ。）</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker image <span class="nb">history</span> <span class="nt">--no-trunc</span> getting-started
 </code></pre></div>    </div>
   </li>
 </ol>
 
-<h2 id="layer-caching">Layer Caching</h2>
+<h2 id="layer-caching">レイヤーのキャッシュ処理</h2>
 
-<p>Now that you’ve seen the layering in action, there’s an important lesson to learn to help decrease build
-times for your container images.</p>
+<p>レイヤー管理の様子をじかに見ましたので、次に重要なレッスンに進みます。
+コンテナーイメージのビルド時間を減らす方法についてです。</p>
 
 <blockquote>
-  <p>Once a layer changes, all downstream layers have to be recreated as well</p>
+  <p>1 つのレイヤーに変更が入ると、それ以降に続く全レイヤーは再生成されます。</p>
 </blockquote>
 
-<p>Let’s look at the Dockerfile we were using one more time...</p>
+<p>利用してきた Dockerfile をもう一度見てみます...</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12-alpine</span>
 <span class="k">WORKDIR</span><span class="s"> /app</span>
@@ -201,18 +205,21 @@ times for your container images.</p>
 <span class="k">CMD</span><span class="s"> ["node", "src/index.js"]</span>
 </code></pre></div></div>
 
-<p>Going back to the image history output, we see that each command in the Dockerfile becomes a new layer in the image.
-You might remember that when we made a change to the image, the yarn dependencies had to be reinstalled. Is there a
-way to fix this? It doesn’t make much sense to ship around the same dependencies every time we build, right?</p>
+<p>image history コマンドの出力結果に戻ってみると、Dockerfile の各コマンドがイメージ内の 1 つのレイヤーに対応していることがわかります。
+覚えてるでしょうか。
+イメージに変更を加えたときに yarn による依存パッケージが再インストールされていました。
+ではこれを変える方法ってあるんでしょうか。
+ビルドのたびに同じ依存パッケージを何度も導入することになるなんて、無駄なことですよね？</p>
 
-<p>To fix this, we need to restructure our Dockerfile to help support the caching of the dependencies. For Node-based
-applications, those dependencies are defined in the <code class="language-plaintext highlighter-rouge">package.json</code> file. So, what if we copied only that file in first,
-install the dependencies, and <em>then</em> copy in everything else? Then, we only recreate the yarn dependencies if there was
-a change to the <code class="language-plaintext highlighter-rouge">package.json</code>. Make sense?</p>
+<p>これを変更するには Dockerfile の記述を組み立て直して、依存パッケージをキャッシングするようにします。
+Node ベースのアプリケーションの場合、そういった依存パッケージは<code class="language-plaintext highlighter-rouge">package.json</code>ファイルに定義されます。
+そこでこのファイルのコピーを一番最初に行っておいて、その後に依存パッケージのインストールとその他ファイルのコピーを行うようにしたら、どうなるでしょう。
+<code class="language-plaintext highlighter-rouge">package.json</code>に対する変更があったときだけ、yarn による依存パッケージの再生成を行うようにするということです。
+どうなるでしょう？</p>
 
 <ol>
   <li>
-    <p>Update the Dockerfile to copy in the <code class="language-plaintext highlighter-rouge">package.json</code> first, install dependencies, and then copy everything else in.</p>
+    <p>Dockerfile において最初に<code class="language-plaintext highlighter-rouge">package.json</code>をコピーするようにし、その後で依存パッケージのインストールとその他ファイルのコピーを行うように修正します。</p>
 
     <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code> FROM node:12-alpine
  WORKDIR /app
@@ -223,27 +230,24 @@ a change to the <code class="language-plaintext highlighter-rouge">package.json<
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a file named <code class="language-plaintext highlighter-rouge">.dockerignore</code> in the same folder as the Dockerfile with the following contents.</p>
+    <p>Dockerfile と同じフォルダー内に<code class="language-plaintext highlighter-rouge">.dockerignore</code>という名前のファイルを生成して、その内容を以下とします。</p>
 
     <pre><code class="language-ignore"> node_modules
 </code></pre>
 
-    <p><code class="language-plaintext highlighter-rouge">.dockerignore</code> files are an easy way to selectively copy only image relevant files.
- You can read more about this
- <a href="https://docs.docker.com/engine/reference/builder/#dockerignore-file">here</a>.
- In this case, the <code class="language-plaintext highlighter-rouge">node_modules</code> folder should be omitted in the second <code class="language-plaintext highlighter-rouge">COPY</code> step because otherwise,
- it would possibly overwrite files which were created by the command in the <code class="language-plaintext highlighter-rouge">RUN</code> step.
- For further details on why this is recommended for Node.js applications and other best practices,
- have a look at their guide on
- <a href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/">Dockerizing a Node.js web app</a>.</p>
+    <p><code class="language-plaintext highlighter-rouge">.dockerignore</code>ファイルを使うと、イメージに関係するファイルのみを選別してコピーするという方法を簡単に実現できます。
+ この点に関しては <a href="/docs.docker.jp.onthefly/engine/reference/builder/#dockerignore-file">こちら</a> に説明しています。
+ 今の場合<code class="language-plaintext highlighter-rouge">node_modules</code>フォルダーは 2 番めの<code class="language-plaintext highlighter-rouge">COPY</code>においては処理対象からはずす必要があります。
+ そうしないと、<code class="language-plaintext highlighter-rouge">RUN</code>におけるコマンド実行によって生成されたファイルを上書きしてしまう可能性があるからです。
+ Node.js アプリケーションにおいてなぜこういったことが推奨されるか、あるいはその他のベストプラクティスについて、<a href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/">Dockerizing a Node.js web app</a> にガイドが示されているのでご覧ください。</p>
   </li>
   <li>
-    <p>Build a new image using <code class="language-plaintext highlighter-rouge">docker build</code>.</p>
+    <p><code class="language-plaintext highlighter-rouge">docker build</code>を実行して新たなイメージをビルドします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker build <span class="nt">-t</span> getting-started <span class="nb">.</span>
 </code></pre></div>    </div>
 
-    <p>You should see output like this...</p>
+    <p>以下のような出力が得られます。</p>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Sending build context to Docker daemon  219.1kB
  Step 1/6 : FROM node:12-alpine
@@ -275,13 +279,15 @@ a change to the <code class="language-plaintext highlighter-rouge">package.json<
  Successfully tagged getting-started:latest
 </code></pre></div>    </div>
 
-    <p>You’ll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.</p>
+    <p>すべてのレイヤーが再ビルドされたことが見てとれます。
+ Dockerfile を大きく変更したのですから、そうなるのも当たり前です。</p>
   </li>
   <li>
-    <p>Now, make a change to the <code class="language-plaintext highlighter-rouge">src/static/index.html</code> file (like change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> to say “The Awesome Todo App”).</p>
+    <p>そこで<code class="language-plaintext highlighter-rouge">src/static/index.html</code>ファイルに変更を加えます（たとえば<code class="language-plaintext highlighter-rouge">&lt;title&gt;</code>を「The Awesome Todo App」にするとか）。</p>
   </li>
   <li>
-    <p>Build the Docker image now using <code class="language-plaintext highlighter-rouge">docker build -t getting-started .</code> again. This time, your output should look a little different.</p>
+    <p>もう一度<code class="language-plaintext highlighter-rouge">docker build -t getting-started .</code>を実行して Docker イメージを作り直します。
+今回の出力結果はやや異なります。</p>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Sending build context to Docker daemon  219.1kB
  Step 1/6 : FROM node:12-alpine
@@ -305,27 +311,32 @@ a change to the <code class="language-plaintext highlighter-rouge">package.json<
  Successfully tagged getting-started:latest
 </code></pre></div>    </div>
 
-    <p>First off, you should notice that the build was MUCH faster! And, you’ll see that steps 1-4 all have
- <code class="language-plaintext highlighter-rouge">Using cache</code>. So, hooray! We’re using the build cache. Pushing and pulling this image and updates to it
- will be much faster as well. Hooray!</p>
+    <p>まずなによりもビルドが格段に速くなったことがわかります。
+ そして Step 1 から 4 は<code class="language-plaintext highlighter-rouge">Using cache</code>と表記され、キャッシュが利用されていることがわかります。
+ やりました。
+ ビルドキャッシュを利用することができました。
+ つまりこのイメージのプッシュとプル、あるいはイメージ更新がぐっと速くなるということです。
+ お疲れさま。</p>
   </li>
 </ol>
 
-<h2 id="multi-stage-builds">Multi-Stage Builds</h2>
+<h2 id="multi-stage-builds">マルチステージビルド</h2>
 
-<p>While we’re not going to dive into it too much in this tutorial, multi-stage builds are an incredibly powerful
-tool to help use multiple stages to create an image. There are several advantages for them:</p>
+<p>本チュートリアルではさほど深く突き詰めていませんが、極めて強力なツールとしてマルチステージビルドがあります。
+イメージの生成に複数ステージを利用するというものです。
+これにはいくつかの利点があります。</p>
 
 <ul>
-  <li>Separate build-time dependencies from runtime dependencies</li>
-  <li>Reduce overall image size by shipping <em>only</em> what your app needs to run</li>
+  <li>ビルド時の依存パッケージと実行時の依存パッケージを分離します。</li>
+  <li>アプリとして実行する必要のあるもの <strong>だけ</strong> を作り出すことによって、イメージ全体のサイズを削減します。</li>
 </ul>
 
-<h3 id="maventomcat-example">Maven/Tomcat Example</h3>
+<h3 id="maventomcat-example">Maven/Tomcat の例</h3>
 
-<p>When building Java-based applications, a JDK is needed to compile the source code to Java bytecode. However,
-that JDK isn’t needed in production. Also, you might be using tools like Maven or Gradle to help build the app.
-Those also aren’t needed in our final image. Multi-stage builds help.</p>
+<p>Java ベースのアプリケーションをビルドするには、ソースコードを Java のバイトコードにコンパイルするために JDK が必要になります。
+しかし JDK は本番環境では必要ありません。
+またアプリのビルドに Maven や Gradle といったツールを利用するかもしれませんが、こういったものも最終イメージ内には不要のものです。
+そこでマルチステージビルドが役立ちます。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> maven AS build</span>
 <span class="k">WORKDIR</span><span class="s"> /app</span>
@@ -336,15 +347,15 @@ Those also aren’t needed in our final image. Multi-stage builds help.</p>
 <span class="k">COPY</span><span class="s"> --from=build /app/target/file.war /usr/local/tomcat/webapps</span>
 </code></pre></div></div>
 
-<p>In this example, we use one stage (called <code class="language-plaintext highlighter-rouge">build</code>) to perform the actual Java build using Maven. In the second
-stage (starting at <code class="language-plaintext highlighter-rouge">FROM tomcat</code>), we copy in files from the <code class="language-plaintext highlighter-rouge">build</code> stage. The final image is only the last stage
-being created (which can be overridden using the <code class="language-plaintext highlighter-rouge">--target</code> flag).</p>
+<p>この例では 1 つめのステージ（<code class="language-plaintext highlighter-rouge">build</code>と呼ぶ）を使って Maven を利用した Java ビルドを実現します。
+2 つめのステージ（<code class="language-plaintext highlighter-rouge">FROM tomcat</code>から始まるところ）において、<code class="language-plaintext highlighter-rouge">build</code>ステージの生成ファイルをコピーします。
+最終イメージは、この 2 つめに作り出されたステージです（これは<code class="language-plaintext highlighter-rouge">--target</code>フラグを使えば上書き可能です）。</p>
 
-<h3 id="react-example">React Example</h3>
+<h3 id="react-example">React の例</h3>
 
-<p>When building React applications, we need a Node environment to compile the JS code (typically JSX), SASS stylesheets,
-and more into static HTML, JS, and CSS. If we aren’t doing server-side rendering, we don’t even need a Node environment
-for our production build. Why not ship the static resources in a static nginx container?</p>
+<p>React アプリケーションをビルドするには JS コード（通常 JSX）、SASS スタイルシートなどをコンパイルしてスタティック HTML、JS、CSS を生成するために Node 環境が必要です。
+サーバーにおいてレンダリングを行わないのであれば、本番ビルド用の Node 環境すら必要ありません。
+スタティックリソースであるならスタティック Nginx コンテナーを使いましょう。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12 AS build</span>
 <span class="k">WORKDIR</span><span class="s"> /app</span>
@@ -358,15 +369,15 @@ for our production build. Why not ship the static resources in a static nginx co
 <span class="k">COPY</span><span class="s"> --from=build /app/build /usr/share/nginx/html</span>
 </code></pre></div></div>
 
-<p>Here, we are using a <code class="language-plaintext highlighter-rouge">node:12</code> image to perform the build (maximizing layer caching) and then copying the output
-into an nginx container. Cool, huh?</p>
+<p>ここで利用した<code class="language-plaintext highlighter-rouge">node:12</code>イメージは（レイヤーキャッシングの最大化を目指した上で）ビルド処理を実現するものであり、その出力結果を Nginx コンテナーにコピーしています。
+すばらしい。</p>
 
-<h2 id="recap">Recap</h2>
+<h2 id="recap">まとめ</h2>
 
-<p>By understanding a little bit about how images are structured, we can build images faster and ship fewer changes.
-Scanning images gives us confidence that the containers we are running and distributing are secure.
-Multi-stage builds also help us reduce overall image size and increase final container security by separating
-build-time dependencies from runtime dependencies.</p>
+<p>イメージがどのように構成されているかについて何となく理解できたところで、イメージビルドをより速く、変更はより少なくすることができました。
+イメージをスキャンしておけば、実行および配布するイメージの安全性が確実になります。
+マルチステージビルドを使えば、イメージサイズ全体を小さくできることもわかりました。
+ビルド時の依存パッケージを実行時の依存パッケージから切り離すことができるので、最終コンテナーの安全性が増すことになります。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=get started">get started</a>, <a href="/docs.docker.jp.onthefly/search/?q=setup">setup</a>, <a href="/docs.docker.jp.onthefly/search/?q=orientation">orientation</a>, <a href="/docs.docker.jp.onthefly/search/?q=quickstart">quickstart</a>, <a href="/docs.docker.jp.onthefly/search/?q=intro">intro</a>, <a href="/docs.docker.jp.onthefly/search/?q=concepts">concepts</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker desktop">docker desktop</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -400,16 +411,16 @@ build-time dependencies from runtime dependencies.</p>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#security-scanning" class="nomunge">Security Scanning</a></li>
-  <li><a href="#image-layering" class="nomunge">Image Layering</a></li>
-  <li><a href="#layer-caching" class="nomunge">Layer Caching</a></li>
-  <li><a href="#multi-stage-builds" class="nomunge">Multi-Stage Builds</a>
+  <li><a href="#security-scanning" class="nomunge">セキュリティスキャン</a></li>
+  <li><a href="#image-layering" class="nomunge">イメージのレイヤー管理</a></li>
+  <li><a href="#layer-caching" class="nomunge">レイヤーのキャッシュ処理</a></li>
+  <li><a href="#multi-stage-builds" class="nomunge">マルチステージビルド</a>
     <ul>
-      <li><a href="#maventomcat-example" class="nomunge">Maven/Tomcat Example</a></li>
-      <li><a href="#react-example" class="nomunge">React Example</a></li>
+      <li><a href="#maventomcat-example" class="nomunge">Maven/Tomcat の例</a></li>
+      <li><a href="#react-example" class="nomunge">React の例</a></li>
     </ul>
   </li>
-  <li><a href="#recap" class="nomunge">Recap</a></li>
+  <li><a href="#recap" class="nomunge">まとめ</a></li>
 </ul>
 
 </div>
