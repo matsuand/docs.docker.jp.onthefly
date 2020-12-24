@@ -108,7 +108,7 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 Python package manager or installing Compose as a container.
 {% endcomment %}
 以下に示す手順を通して Mac、Windows、Windows Server 2016、Linux に Compose をインストールします。
-またその他の方法として Python パッケージマネージャー `pip` を使う方法や、コンテナーとして Compose をインストール方法もあります。
+またその他の方法として Python パッケージマネージャー`pip`を使う方法や、コンテナーとして Compose をインストール方法もあります。
 @z
 
 @x
@@ -324,8 +324,8 @@ Docker デーモンや Docker クライアントを Microsoft Windows Server 上
     {% comment %}
     **Note**: On Windows Server 2019, you can add the Compose executable to `$Env:ProgramFiles\Docker`. Because this directory is  registered in the system `PATH`, you can run the `docker-compose --version` command on the subsequent step with no additional configuration.
     {% endcomment %}
-    **メモ**: Windows Server 2019 の場合は、Compose の実行パスとして `$Env:ProgramFiles\Docker` を加えます。
-     このディレクトリはシステムの `PATH` に登録されるので、この後の手順における `docker-compose --version` コマンドが、他になにも設定せずに実行できるようになります。
+    **メモ**: Windows Server 2019 の場合は、Compose の実行パスとして`$Env:ProgramFiles\Docker`を加えます。
+     このディレクトリはシステムの`PATH`に登録されるので、この後の手順における`docker-compose --version`コマンドが、他になにも設定せずに実行できるようになります。
 @z
 
 @x
@@ -397,7 +397,7 @@ in your terminal to download the binaries. These step-by-step instructions are
 also included below.
 {% endcomment %}
 Linux の場合は、[GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} から Docker Compose の実行バイナリをダウンロードします。
-リンク先の手順では、端末画面上から `curl` コマンドを使ってダウンロードを行います。
+リンク先の手順では、端末画面上から`curl`コマンドを使ってダウンロードを行います。
 その手順は以下にも示します。
 @z
 
@@ -454,7 +454,7 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options) tab above.
     {% endcomment %}
-    `curl` を使ったインストールに問題がある場合は、上のタブにある [その他のインストール](install.md#alternative-install-options) を確認してください。
+    `curl`を使ったインストールに問題がある場合は、上のタブにある [その他のインストール](install.md#alternative-install-options) を確認してください。
 @z
 
 @x
@@ -484,8 +484,8 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
     > **Note**: If the command `docker-compose` fails after installation, check your path.
     > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
     {% endcomment %}
-    > **メモ**: インストールした後に `docker-compose` の実行に失敗する場合は、パスを確認してください。
-    > `/usr/bin`、あるいはパス設定されているディレクトリへのシンボリックリンクを作る方法もあります。
+    > **メモ**: インストールした後に`docker-compose`の実行に失敗する場合は、パスを確認してください。
+    > `/usr/bin`あるいはパス設定されているディレクトリへのシンボリックリンクを作る方法もあります。
 @z
 
 @x
@@ -515,7 +515,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     3.  Optionally, install [command completion](completion.md) for the
         `bash` and `zsh` shell.
     {% endcomment %}
-3.  必要に応じて `bash` や `zsh` シェルに対する[コマンド補完](completion.md)をインストールします。
+3.  必要に応じて`bash`や`zsh`シェルに対する [コマンド補完](completion.md) をインストールします。
 @z
 
 @x
@@ -585,7 +585,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 > `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
 {: .important}
 {% endcomment %}
-> `alpine` では、以下に示す依存パッケージが必要です。
+> `alpine`では、以下に示す依存パッケージが必要です。
 > `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`,  `make`
 {: .important}
 @z
@@ -610,7 +610,7 @@ dependencies. See the [virtualenv
 tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 {% endcomment %}
-Compose は `pip` を使って [pypi](https://pypi.python.org/pypi/docker-compose) からインストールすることができます。
+Compose は`pip`を使って [pypi](https://pypi.python.org/pypi/docker-compose) からインストールすることができます。
 `pip` を使ったインストールでは [virtualenv](https://virtualenv.pypa.io/en/latest/) を用いることをお勧めします。
 これは多くのオペレーティングシステムにおいて、python パッケージが docker-compose の依存パッケージと不整合を起こすことがあるからです。
 [virtualenv チュートリアル](https://docs.python-guide.org/dev/virtualenvs/) から始めてみてください。
@@ -721,7 +721,7 @@ Follow the instructions from the link, which involves running the `curl` command
 in your terminal to download the binaries.
 {% endcomment %}
 プレリリース版を試してみたい方は [GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){: target="_blank" rel="noopener" class="_"} からリリース候補（release candidate）をダウンロードしてください。
-リンク先の手順では、端末画面上から `curl` コマンドを使って実行バイナリをダウンロードします。
+リンク先の手順では、端末画面上から`curl`コマンドを使って実行バイナリをダウンロードします。
 @z
 
 @x
@@ -892,10 +892,10 @@ pip uninstall docker-compose
 > `docker-compose`. To force the removal, prepend `sudo` to either of the above
 > commands and run again.
 {% endcomment %}
-> "Permission denied" エラーが出たときは
+> 「Permission denied」エラーが出たときは
 >
-> 上のコマンドのいずれかを実行したときに "Permission denied" エラーが発生したら、それは `docker-compose` を削除するための適切な権限がないことが考えられます。
-> どうしても削除したいときは、上のコマンドの先頭に `sudo` をつけて、もう一度コマンドを実行してください。
+> 上のコマンドのいずれかを実行したときに「Permission denied」エラーが発生したら、それは`docker-compose`を削除するための適切な権限がないことが考えられます。
+> どうしても削除したいときは、上のコマンドの先頭に`sudo`をつけて、もう一度コマンドを実行してください。
 @z
 
 @x
@@ -910,7 +910,6 @@ pip uninstall docker-compose
 
 @x
 - [User guide](index.md)
-- [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
@@ -918,14 +917,12 @@ pip uninstall docker-compose
 @y
 {% comment %}
 - [User guide](index.md)
-- [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
 - [Sample apps with Compose](samples-for-compose.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
-- [Compose のインストール](install.md)
 - [Compose をはじめよう](gettingstarted.md)
 - [コマンドラインリファレンス](reference/index.md)
 - [Compose ファイルリファレンス](compose-file/index.md)
