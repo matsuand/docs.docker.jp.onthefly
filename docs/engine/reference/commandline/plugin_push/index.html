@@ -1,8 +1,10 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2020-12-24 21:01:05 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker plugin push | Docker ドキュメント</title>
-  <meta name="description" content="docker plugin push: After you have created a plugin using `docker plugin create` and the plugin is ready for distribution, use `docker plugin push` to share your images to Docker..." />
+  <meta name="description" content="docker plugin push: `docker plugin create`を使ってプラグインを生成して配布する準備ができたら、Docker Hub や独自レジストリ上にイメージを共有するために`docker plugin push`を実行します。
+
+レジストリの資格情報は [docker login](login.md) によって管理されます。" />
   <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/reference/commandline/plugin_push/" />
 
@@ -29,7 +31,9 @@
 
   <!-- SEO stuff -->
   <meta name="twitter:title" itemprop="title name" content="docker plugin push"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="docker plugin push: After you have created a plugin using `docker plugin create` and the plugin is ready for distribution, use `docker plugin push` to share your images to Docker..." />
+  <meta name="twitter:description" property="og:description" itemprop="description" content="docker plugin push: `docker plugin create`を使ってプラグインを生成して配布する準備ができたら、Docker Hub や独自レジストリ上にイメージを共有するために`docker plugin push`を実行します。
+
+レジストリの資格情報は [docker login](login.md) によって管理されます。" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
   <meta name="twitter:site" content="@docker_docs"/>
@@ -37,15 +41,17 @@
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
   <meta property="og:title" content="docker plugin push" />
-  <meta property="og:description" content="docker plugin push: After you have created a plugin using `docker plugin create` and the plugin is ready for distribution, use `docker plugin push` to share your images to Docker..." />
+  <meta property="og:description" content="docker plugin push: `docker plugin create`を使ってプラグインを生成して配布する準備ができたら、Docker Hub や独自レジストリ上にイメージを共有するために`docker plugin push`を実行します。
+
+レジストリの資格情報は [docker login](login.md) によって管理されます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-24T21:01:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/plugin_push/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker plugin push","description":"docker plugin push: After you have created a plugin using `docker plugin create` and the plugin is ready for distribution, use `docker plugin push` to share your images to Docker...","url":"https://docs.docker.com/engine/reference/commandline/plugin_push/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-24T21:01:05+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker plugin push","description":"docker plugin push: `docker plugin create`を使ってプラグインを生成して配布する準備ができたら、Docker Hub や独自レジストリ上にイメージを共有するために`docker plugin push`を実行します。\n\nレジストリの資格情報は [docker login](login.md) によって管理されます。","url":"https://docs.docker.com/engine/reference/commandline/plugin_push/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,7 +104,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker plugin push</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><!--
+                        <section class="section"><h1>docker plugin push</h1><!--
 This page is automatically generated from Docker's source code. If you want to
 suggest a change to the text that appears here, open a ticket or pull request
 in the source repository on GitHub:
@@ -109,7 +115,7 @@ https://github.com/docker/cli
 
 <h2 id="description">説明</h2>
 
-<p>Push a plugin to a registry</p>
+<p>レジストリにプラグインをプッシュします。</p>
 
 <p><a href="/engine/api/v1.25/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="1.25 API リファレンスを開く (別ウィンドウ)">API 1.25+</span></a> 
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
@@ -119,16 +125,14 @@ https://github.com/docker/cli
 
 <h2 id="usage">利用方法</h2>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker plugin push [OPTIONS] PLUGIN[:TAG]
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker plugin push [オプション] PLUGIN[:TAG]
 </span></code></pre></div></div>
 
 <h2 id="extended-description">追加説明</h2>
 
-<p>After you have created a plugin using <code class="language-plaintext highlighter-rouge">docker plugin create</code> and the plugin is
-ready for distribution, use <code class="language-plaintext highlighter-rouge">docker plugin push</code> to share your images to Docker
-Hub or a self-hosted registry.</p>
+<p><code class="language-plaintext highlighter-rouge">docker plugin create</code>を使ってプラグインを生成して配布する準備ができたら、Docker Hub や独自レジストリ上にイメージを共有するために<code class="language-plaintext highlighter-rouge">docker plugin push</code>を実行します。</p>
 
-<p>Registry credentials are managed by <a href="/engine/reference/commandline/login/">docker login</a>.</p>
+<p>レジストリの資格情報は <a href="/engine/reference/commandline/login/">docker login</a> によって管理されます。</p>
 
 <p>本コマンドの利用例については、以下に示す <a href="#examples">利用例の節</a> を参照してください。</p>
 
@@ -164,7 +168,7 @@ Hub or a self-hosted registry.</p>
 
 <h2 id="examples">利用例</h2>
 
-<p>The following example shows how to push a sample <code class="language-plaintext highlighter-rouge">user/plugin</code>.</p>
+<p>以下の例はサンプルの<code class="language-plaintext highlighter-rouge">user/plugin</code>をプッシュする方法を示します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker plugin <span class="nb">ls
 
@@ -205,61 +209,61 @@ Hub or a self-hosted registry.</p>
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_create/">docker plugin create</a></td>
-    <td>Create a plugin from a rootfs and configuration. Plugin data directory must contain config.json and rootfs directory.</td>
+    <td>rootfs と設定情報からプラグインを生成します。 プラグインデータのディレクトリには config.json と rootfs ディレクトリが必要です。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_disable/">docker plugin disable</a></td>
-    <td>Disable a plugin</td>
+    <td>プラグインを無効化します。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_enable/">docker plugin enable</a></td>
-    <td>Enable a plugin</td>
+    <td>プラグインを有効化します。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_inspect/">docker plugin inspect</a></td>
-    <td>Display detailed information on one or more plugins</td>
+    <td>1 つまたは複数のプラグインについての詳細情報を表示します。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_install/">docker plugin install</a></td>
-    <td>Install a plugin</td>
+    <td>プラグインをインストールします。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_ls/">docker plugin ls</a></td>
-    <td>List plugins</td>
+    <td>プラグインを一覧表示します。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_push/">docker plugin push</a></td>
-    <td>Push a plugin to a registry</td>
+    <td>レジストリにプラグインをプッシュします。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_rm/">docker plugin rm</a></td>
-    <td>Remove one or more plugins</td>
+    <td>1 つまたは複数のプラグインを削除します。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_set/">docker plugin set</a></td>
-    <td>Change settings for a plugin</td>
+    <td>プラグインの設定を変更します。</td>
   </tr>
 
   
   <tr>
     <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/plugin_upgrade/">docker plugin upgrade</a></td>
-    <td>Upgrade an existing plugin</td>
+    <td>既存プラグインをアップグレードします。</td>
   </tr>
 
 </tbody>

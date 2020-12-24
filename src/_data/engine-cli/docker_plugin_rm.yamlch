@@ -8,30 +8,30 @@ short: Remove one or more plugins
 @y
 command: docker plugin rm
 aliases: remove
-short: Remove one or more plugins
+short: 1 つまたは複数のプラグインを削除します。
 @z
 
 @x
 long: |-
   Removes a plugin. You cannot remove a plugin if it is enabled, you must disable
   a plugin using the [`docker plugin disable`](plugin_disable.md) before removing
-@y
-long: |-
-  Removes a plugin. You cannot remove a plugin if it is enabled, you must disable
-  a plugin using the [`docker plugin disable`](plugin_disable.md) before removing
-@z
-
-@x
   it (or use --force, use of force is not recommended, since it can affect
   functioning of running containers using the plugin).
+@y
+long: |-
+  プラグインを削除します。
+  プラグインが有効化されているときは削除できません。
+  削除するためには [`docker plugin disable`](plugin_disable.md) を使ってプラグインを無効化する必要があります。
+  （または`--force`を用います。ただしこれは推奨されません。このプラグインを利用している実行中コンテナーに影響を及ぼすからです。）
+@z
+
+@x
 usage: docker plugin rm [OPTIONS] PLUGIN [PLUGIN...]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
 @y
-  it (or use --force, use of force is not recommended, since it can affect
-  functioning of running containers using the plugin).
-usage: docker plugin rm [OPTIONS] PLUGIN [PLUGIN...]
+usage: docker plugin rm [オプション] PLUGIN [PLUGIN...]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
@@ -53,7 +53,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Force the removal of an active plugin
+  description: アクティブなプラグインを強制的に削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -63,45 +63,38 @@ options:
 
 @x
 examples: |-
+  The following example disables and removes the `sample-volume-plugin:latest`
+  plugin:
 @y
 examples: |-
-@z
-
-@x
-  The following example disables and removes the `sample-volume-plugin:latest`
-  plugin:
-@y
-  The following example disables and removes the `sample-volume-plugin:latest`
-  plugin:
+  以下の例はプラグイン`sample-volume-plugin:latest`を無効化して削除します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker plugin disable tiborvass/sample-volume-plugin
-@y
-  $ docker plugin disable tiborvass/sample-volume-plugin
-@z
 
-@x
   tiborvass/sample-volume-plugin
 @y
+  ```bash
+  $ docker plugin disable tiborvass/sample-volume-plugin
+
   tiborvass/sample-volume-plugin
 @z
 
 @x
   $ docker plugin rm tiborvass/sample-volume-plugin:latest
-@y
-  $ docker plugin rm tiborvass/sample-volume-plugin:latest
-@z
 
-@x
   tiborvass/sample-volume-plugin
   ```
+@y
+  $ docker plugin rm tiborvass/sample-volume-plugin:latest
+
+  tiborvass/sample-volume-plugin
+  ```
+@z
+
+@x
 deprecated: false
 min_api_version: "1.25"
 experimental: false
@@ -109,8 +102,6 @@ experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  tiborvass/sample-volume-plugin
-  ```
 deprecated: false
 min_api_version: "1.25"
 experimental: false

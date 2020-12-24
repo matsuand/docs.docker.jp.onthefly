@@ -6,7 +6,7 @@ command: docker plugin set
 short: Change settings for a plugin
 @y
 command: docker plugin set
-short: Change settings for a plugin
+short: プラグインの設定を変更します。
 @z
 
 @x
@@ -14,7 +14,8 @@ long: |-
   Change settings for a plugin. The plugin must be disabled.
 @y
 long: |-
-  Change settings for a plugin. The plugin must be disabled.
+  プラグインの設定を変更します。
+  プラグインは無効化しておく必要があります。
 @z
 
 @x
@@ -23,15 +24,19 @@ long: |-
    * source of mounts
    * path of devices
    * args
+@y
+  サポートされる設定項目は、現在のところ以下のものです。
+   * 環境変数
+   * マウント元ディレクトリ
+   * デバイスへのパス
+   * 引数
+@z
+
+@x
 usage: docker plugin set PLUGIN KEY=VALUE [KEY=VALUE...]
 pname: docker plugin
 plink: docker_plugin.yaml
 @y
-  The settings currently supported are:
-   * env variables
-   * source of mounts
-   * path of devices
-   * args
 usage: docker plugin set PLUGIN KEY=VALUE [KEY=VALUE...]
 pname: docker plugin
 plink: docker_plugin.yaml
@@ -42,31 +47,23 @@ examples: |-
   ### Change an environment variable
 @y
 examples: |-
-  ### Change an environment variable
+  {: #change-an-environment-variable }
+  ### 環境変数の変更
 @z
 
 @x
   The following example change the env variable `DEBUG` on the
-@y
-  The following example change the env variable `DEBUG` on the
-@z
-
-@x
   `sample-volume-plugin` plugin.
 @y
-  `sample-volume-plugin` plugin.
+  以下の例は、プラグイン`sample-volume-plugin`上において環境変数`DEBUG`を変更します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker plugin inspect -f {{.Settings.Env}} tiborvass/sample-volume-plugin
   [DEBUG=0]
 @y
+  ```bash
   $ docker plugin inspect -f {{.Settings.Env}} tiborvass/sample-volume-plugin
   [DEBUG=0]
 @z
@@ -90,27 +87,23 @@ examples: |-
 @x
   ### Change the source of a mount
 @y
-  ### Change the source of a mount
+  {: #change-the-source-of-a-mount }
+  ### マウント元ディレクトリの変更
 @z
 
 @x
   The following example change the source of the `mymount` mount on
   the `myplugin` plugin.
 @y
-  The following example change the source of the `mymount` mount on
-  the `myplugin` plugin.
+  以下の例は、プラグイン`myplugin`上のマウント`mymount`に対するマウント元ディレクトリを変更します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker plugin inspect -f '{{with $mount := index .Settings.Mounts 0}}{{$mount.Source}}{{end}}' myplugin
   /foo
 @y
+  ```bash
   $ docker plugin inspect -f '{{with $mount := index .Settings.Mounts 0}}{{$mount.Source}}{{end}}' myplugin
   /foo
 @z
@@ -137,41 +130,34 @@ examples: |-
   > Since only `source` is settable in `mymount`,
   > `docker plugins set mymount=/bar myplugin` would work too.
 @y
-  > **Note**
+  > **メモ**
   >
-  > Since only `source` is settable in `mymount`,
-  > `docker plugins set mymount=/bar myplugin` would work too.
+  > `mymount`においては`source`だけが設定可能であるため`docker plugins set mymount=/bar myplugin`としても動作します。
 @z
 
 @x
   ### Change a device path
 @y
-  ### Change a device path
+  {: #change-a-device-path }
+  ### デバイスパスの変更
 @z
 
 @x
   The following example change the path of the `mydevice` device on
   the `myplugin` plugin.
 @y
-  The following example change the path of the `mydevice` device on
-  the `myplugin` plugin.
+  以下の例は、プラグイン`myplugin`上のデバイス`mydevice`のパスを変更します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
-@y
-  $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
-@z
 
-@x
   /dev/foo
 @y
+  ```bash
+  $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
+
   /dev/foo
 @z
 
@@ -183,14 +169,12 @@ examples: |-
 
 @x
   $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
+
+  /dev/bar
+  ```
 @y
   $ docker plugin inspect -f '{{with $device := index .Settings.Devices 0}}{{$device.Path}}{{end}}' myplugin
-@z
 
-@x
-  /dev/bar
-  ```
-@y
   /dev/bar
   ```
 @z
@@ -200,38 +184,32 @@ examples: |-
   > Since only `path` is settable in `mydevice`,
   > `docker plugins set mydevice=/dev/bar myplugin` would work too.
 @y
-  > **Note**
-  > Since only `path` is settable in `mydevice`,
-  > `docker plugins set mydevice=/dev/bar myplugin` would work too.
+  > **メモ**
+  > `mydevice`においては`path`だけが設定可能であるため`docker plugins set mydevice=/dev/bar myplugin`としても動作します。
 @z
 
 @x
   ### Change the source of the arguments
 @y
-  ### Change the source of the arguments
+  {: #change-the-source-of-the-arguments }
+  ### 引数値の変更
 @z
 
 @x
   The following example change the value of the args on the `myplugin` plugin.
 @y
-  The following example change the value of the args on the `myplugin` plugin.
+  以下の例は、プラグイン`myplugin`上の引数値を変更します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
-@y
-  $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
-@z
 
-@x
   ["foo", "bar"]
 @y
+  ```bash
+  $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
+
   ["foo", "bar"]
 @z
 
@@ -243,13 +221,17 @@ examples: |-
 
 @x
   $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
-@y
-  $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
-@z
 
-@x
   ["foo", "bar", "baz"]
   ```
+@y
+  $ docker plugin inspect -f '{{.Settings.Args}}' myplugin
+
+  ["foo", "bar", "baz"]
+  ```
+@z
+
+@x
 deprecated: false
 min_api_version: "1.25"
 experimental: false
@@ -257,8 +239,6 @@ experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  ["foo", "bar", "baz"]
-  ```
 deprecated: false
 min_api_version: "1.25"
 experimental: false

@@ -8,7 +8,7 @@ short: List plugins
 @y
 command: docker plugin ls
 aliases: list
-short: List plugins
+short: プラグインを一覧表示します。
 @z
 
 @x
@@ -17,16 +17,16 @@ long: |-
   using the [`docker plugin install`](plugin_install.md) command.
 @y
 long: |-
-  Lists all the plugins that are currently installed. You can install plugins
-  using the [`docker plugin install`](plugin_install.md) command.
+  現在インストールされているプラグインの一覧を表示します。
+  プラグインのインストールには [`docker plugin install`](plugin_install.md) コマンドを利用します。
 @z
 
 @x
   You can also filter using the `-f` or `--filter` flag.
   Refer to the [filtering](#filtering) section for more information about available filter options.
 @y
-  You can also filter using the `-f` or `--filter` flag.
-  Refer to the [filtering](#filtering) section for more information about available filter options.
+  フィルター検索には`-f`または`--filter`フラグを利用できます。
+  利用可能な検索フィルターについては [フィルター検索](#filtering) の節を参照してください。
 @z
 
 @x
@@ -35,7 +35,7 @@ pname: docker plugin
 plink: docker_plugin.yaml
 options:
 @y
-usage: docker plugin ls [OPTIONS]
+usage: docker plugin ls [オプション]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
@@ -55,7 +55,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Provide filter values (e.g. 'enabled=true')
+  description: フィルター値を指定します。（たとえば 'enabled=true'）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -75,7 +75,7 @@ options:
 @y
 - option: format
   value_type: string
-  description: Pretty-print plugins using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -158,9 +158,9 @@ examples: |-
   The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
 @y
-  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  フィルターフラグ（`-f`または`--filter`）の指定書式は「キー=値」というものです。
   複数のフィルターが必要な場合は、フラグを複数指定します。
-  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+  （たとえば`--filter "foo=bar" --filter "bif=baz"`など。）
 @z
 
 @x
@@ -171,14 +171,10 @@ examples: |-
 
 @x
   * enabled (boolean - true or false, 0 or 1)
-@y
-  * enabled (boolean - true or false, 0 or 1)
-@z
-
-@x
   * capability (string - currently `volumedriver`, `networkdriver`, `ipamdriver`, `logdriver`, `metricscollector`, or `authz`)
 @y
-  * capability (string - currently `volumedriver`, `networkdriver`, `ipamdriver`, `logdriver`, `metricscollector`, or `authz`)
+  * enabled （ブール値。true または false、0 または 1）
+  * capability （文字列。現在のところ以下のいずれか。`volumedriver`、`networkdriver`、`ipamdriver`、`logdriver`、`metricscollector`、`authz`）
 @z
 
 @x
@@ -190,7 +186,7 @@ examples: |-
 @x
   The `enabled` filter matches on plugins enabled or disabled.
 @y
-  The `enabled` filter matches on plugins enabled or disabled.
+  `enabled`フィルターは、有効プラグインまたは無効プラグインを検索します。
 @z
 
 @x
@@ -204,22 +200,21 @@ examples: |-
   might have multiple capabilities. Currently `volumedriver`, `networkdriver`,
   `ipamdriver`, `logdriver`, `metricscollector`, and `authz` are supported capabilities.
 @y
-  The `capability` filter matches on plugin capabilities. One plugin
-  might have multiple capabilities. Currently `volumedriver`, `networkdriver`,
-  `ipamdriver`, `logdriver`, `metricscollector`, and `authz` are supported capabilities.
+  `capability`フィルターはプラグインのケーパビリティーを検索します。
+  プラグインは複数のケーパビリティーを持つことがあります。
+  現在のところサポートされているケーパビリティーは以下です。
+  `volumedriver`、`networkdriver`、`ipamdriver`、`logdriver`、`metricscollector`、`authz`
 @z
 
 @x
   ```bash
   $ docker plugin install --disable vieux/sshfs
-@y
-  ```bash
-  $ docker plugin install --disable vieux/sshfs
-@z
 
-@x
   Installed plugin vieux/sshfs
 @y
+  ```bash
+  $ docker plugin install --disable vieux/sshfs
+
   Installed plugin vieux/sshfs
 @z
 
@@ -266,11 +261,11 @@ examples: |-
 @y
   プレースホルダー   | 内容説明
   -------------------|------------------------------------------------------------
-  `.ID`              | Plugin ID
-  `.Name`            | Plugin name and tag
-  `.Description`     | Plugin description
-  `.Enabled`         | Whether plugin is enabled or not
-  `.PluginReference` | The reference used to push/pull from a registry
+  `.ID`              | プラグイン ID。
+  `.Name`            | プラグイン名とタグ。
+  `.Description`     | プラグインの内容説明。
+  `.Enabled`         | プラグインが有効であるかどうか。
+  `.PluginReference` | レジストリに対するプッシュ、プルにおいて利用される参照名。
 @z
 
 @x
@@ -278,15 +273,15 @@ examples: |-
   output the data exactly as the template declares or, when using the
   `table` directive, includes column headers as well.
 @y
-  `--format` オプションを利用すると `plugin ls` コマンドは、テンプレートが定めるデータを直接出力します。
-  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
+  `--format`オプションを利用すると`plugin ls`コマンドは、テンプレートが定めるデータを直接出力します。
+  また`table`ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 @z
 
 @x
   The following example uses a template without headers and outputs the
   `ID` and `Name` entries separated by a colon (`:`) for all plugins:
 @y
-  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのプラグインにおける `ID`、`Name` の各項目がコロン（`:`）で区切って表示されます。
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのプラグインにおける`ID`、`Name`の各項目がコロン（`:`）で区切って表示されます。
 @z
 
 @x

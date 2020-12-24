@@ -6,7 +6,7 @@ command: docker plugin install
 short: Install a plugin
 @y
 command: docker plugin install
-short: Install a plugin
+short: プラグインをインストールします。
 @z
 
 @x
@@ -17,10 +17,10 @@ long: |-
   plugins is 2.3.0
 @y
 long: |-
-  Installs and enables a plugin. Docker looks first for the plugin on your Docker
-  host. If the plugin does not exist locally, then the plugin is pulled from
-  the registry. Note that the minimum required registry version to distribute
-  plugins is 2.3.0
+  プラグインをインストールして有効化します。
+  Docker は初めに Docker ホスト内のプラグインを探しにいきます。
+  ローカルにプラグインが存在していなかった場合は、レジストリからプルされます。
+  プラグインを提供するために必要となるレジストリの最低バージョンは 2.3.0 です。
 @z
 
 @x
@@ -29,7 +29,7 @@ pname: docker plugin
 plink: docker_plugin.yaml
 options:
 @y
-usage: docker plugin install [OPTIONS] PLUGIN [KEY=VALUE...]
+usage: docker plugin install [オプション] PLUGIN [KEY=VALUE...]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
@@ -47,7 +47,7 @@ options:
 @y
 - option: alias
   value_type: string
-  description: Local name for plugin
+  description: プラグインのローカル名。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -69,7 +69,7 @@ options:
 - option: disable
   value_type: bool
   default_value: "false"
-  description: Do not enable the plugin on install
+  description: インストール後にプラグインを有効にしません。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -113,7 +113,7 @@ options:
 - option: grant-all-permissions
   value_type: bool
   default_value: "false"
-  description: Grant all permissions necessary to run the plugin
+  description: プラグイン実行に必要となる権限をすべて許可します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -129,44 +129,29 @@ examples: |-
   set the plugin's parameters and enable the plugin.
 @y
 examples: |-
-  The following example installs `vieus/sshfs` plugin and [sets](plugin_set.md) its
-  `DEBUG` environment variable to `1`. To install, `pull` the plugin from Docker
-  Hub and prompt the user to accept the list of privileges that the plugin needs,
-  set the plugin's parameters and enable the plugin.
+  以下の例ではプラグイン`vieus/sshfs`をインストールし、環境変数`DEBUG`を`1`に [設定](plugin_set.md) します。
+  インストールの際には Docker Hub からプラグインを`pull`し、プラグインに必要となる権限一覧を示してユーザーへの許可を求めます。
+  そしてプラグインへのパラメーターを設定した上で、このプラグインを有効にします。
 @z
 
 @x
   ```bash
   $ docker plugin install vieux/sshfs DEBUG=1
-@y
-  ```bash
-  $ docker plugin install vieux/sshfs DEBUG=1
-@z
 
-@x
   Plugin "vieux/sshfs" is requesting the following privileges:
-@y
-  Plugin "vieux/sshfs" is requesting the following privileges:
-@z
-
-@x
    - network: [host]
-@y
-   - network: [host]
-@z
-
-@x
    - device: [/dev/fuse]
-@y
-   - device: [/dev/fuse]
-@z
-
-@x
    - capabilities: [CAP_SYS_ADMIN]
   Do you grant the above permissions? [y/N] y
   vieux/sshfs
   ```
 @y
+  ```bash
+  $ docker plugin install vieux/sshfs DEBUG=1
+
+  Plugin "vieux/sshfs" is requesting the following privileges:
+   - network: [host]
+   - device: [/dev/fuse]
    - capabilities: [CAP_SYS_ADMIN]
   Do you grant the above permissions? [y/N] y
   vieux/sshfs
@@ -176,7 +161,7 @@ examples: |-
 @x
   After the plugin is installed, it appears in the list of plugins:
 @y
-  After the plugin is installed, it appears in the list of plugins:
+  プラグインをインストールすれば、プラグイン一覧に表示されるようになります。
 @z
 
 @x
