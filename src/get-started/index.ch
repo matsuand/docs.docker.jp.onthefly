@@ -298,7 +298,7 @@ needed to run an application - all dependencies, configuration, scripts, binarie
 image also contains other configuration for the container, such as environment variables,
 a default command to run, and other metadata.
 @y
-コンテナーを実行すると、このコンテナーは分離されたファイルシステムを利用します。
+コンテナーを実行すると、コンテナーは分離されたファイルシステムを利用します。
 このカスタムファイルシステムは **コンテナーイメージ** によって提供されます。
 イメージにはコンテナーのファイルシステムが含まれるため、アプリケーションの実行に必要となるものをすべて含んでいなければなりません。
 それは依存パッケージであり設定であり、スクリプトやバイナリです。
@@ -309,7 +309,7 @@ a default command to run, and other metadata.
 We'll dive deeper into images later on, covering topics such as layering, best practices, and more.
 @y
 イメージについては後に詳細に見ていくことにします。
-そこではレイヤー構成やベストプラクティスなどのトピックをカバーします。
+そこでレイヤー構成やベストプラクティスなどのトピックをカバーします。
 @z
 
 @x
@@ -320,7 +320,7 @@ We'll dive deeper into images later on, covering topics such as layering, best p
 @y
 > `chroot`コマンドについてよくわかっている方は、コンテナーが`chroot`の拡張版として動作するものであると考えてください。
 > ファイルシステムは単純にイメージから利用されます。
-> しかしコンテナーでは、chroot を利用するだけでは実現できない、追加の分離処理を行います。
+> しかしコンテナーでは chroot を利用するだけでは実現できない、追加の分離処理を行います。
 {: .information }
 @z
 

@@ -22,7 +22,7 @@ container or run it separately?" In general, **each container should do one thin
 reasons:
 @y
 これまでは 1 つのコンテナーからなるアプリを使って作業を進めてきました。
-ここからはアプリケーションに MySQL を加えようとしています。
+ここからはアプリケーションに MySQL を加えることにします。
 ところが以下の質問があがってきます。
 「MySQL はどこで動かすの？」
 「同じコンテナー内にインストール？ それとも別に動かす？」

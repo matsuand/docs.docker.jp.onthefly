@@ -32,7 +32,7 @@ to show how it works and what it's capable of doing without needing to
 think about how it will work for a large team, multiple developers, etc.
 @y
 この時点で開発体制の規模は極めて小さく、MVP（minimum viable product; 最小限の実行可能な製品）となるように単にアプリをビルドするだけです。
-ここで示しておきたいのは、アプリがどのように動作し何ができるかということです。
+ここで理解するのは、アプリがどのように動作し何ができるかということです。
 大規模チーム向けや多人数の開発者向けにどのように機能するかという点を考慮する必要はありません。
 @z
 
@@ -99,7 +99,7 @@ create a container image. If you've created Dockerfiles before, you might
 see a few flaws in the Dockerfile below. But, don't worry! We'll go over them.
 @y
 アプリケーションをビルドするためには`Dockerfile`を利用する必要があります。
-Dockerfile とは単純なテキストベースのスクリプトファイルであり、コンテナーイメージを生成するための命令が記述されています。
+Dockerfile とは単純なテキストベースのスクリプトファイルであり、コンテナーイメージを生成するための命令を記述するものです。
 Dockerfile を作ったことがある方なら、以下に示す Dockerfile は不十分なものであると気づくかもしれません。
 しかし心配はいりません。
 これについては説明していきます。
@@ -160,8 +160,8 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
     didn't have that on our machine, that image needed to be downloaded.
 @y
     このコマンドは Dockerfile を利用して新たにコンテナーイメージをビルドします。
-    実行の際には数々の「レイヤー」をダウンロードしましたと表示されます。
-    これはイメージのビルド処理において、`node:12-alpine`イメージから作業を始めたいというように指示を下したからです。
+    実行の際には数々の「レイヤー」をダウンロードしたことが表示されます。
+    イメージのビルド処理において`node:12-alpine`イメージから作業を始めたいという指示を下したからです。
     マシン内に必要なイメージが存在しなかったために、そのダウンロードが必要であったということです。
 @z
 
@@ -181,7 +181,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @y
     最後に`-t`フラグによってイメージに名前づけを行います。
     最終イメージに対して、人が読みやすいような名称をつけたものと思ってください。
-    ここでは`getting-started`というイメージ名としたので、コンテナーを起動する際にこのイメージを参照できるようになりました。
+    ここでは`getting-started`というイメージ名としたので、コンテナーを起動する際にこのイメージが参照できるようになりました。
 @z
 
 @x

@@ -19,8 +19,8 @@ description: アプリケーションにおける DB データを保存します
 In case you didn't notice, our todo list is being wiped clean every single time
 we launch the container. Why is this? Let's dive into how the container is working.
 @y
-状況がわかりますか。
-コンテナーを起動するたびに、Todo リストはきれいにクリアされてしまうということです。
+状況はおわかりですか。
+コンテナーを起動するたびに Todo リストがきれいにクリアされてしまいます。
 なぜこうなるのでしょう。
 そこでコンテナーがどのように動作するのかを確認していきましょう。
 @z
@@ -53,7 +53,7 @@ changes won't be seen in another container, _even if_ they are using the same im
 To see this in action, we're going to start two containers and create a file in each.
 What you'll see is that the files created in one container aren't available in another.
 @y
-実際の動作を見てみるために、2 つのコンテナーを起動させてそれぞれにファイル生成を行ってみます。
+実際の動作を見てみるために 2 つのコンテナーを起動させて、それぞれにファイル生成を行ってみます。
 そこでわかってくるのは、1 つのコンテナーで生成したファイルは、もう 1 つのコンテナーで利用することはできないということです。
 @z
 
@@ -121,7 +121,7 @@ What you'll see is that the files created in one container aren't available in a
     If you prefer the command line you can use the `docker exec` command to do the same. You need to get the
    container's ID (use `docker ps` to get it) and get the content with the following command.
 @y
-    コマンドラインを選ぶ場合は、`docker exec`コマンドを実行して同じことを行います。
+    コマンドラインを選ぶ場合は`docker exec`コマンドを実行して同じことを行います。
     その場合は（`docker ps`を実行して）コンテナー ID を得る必要があります。
     そしてファイル内容を以下のようにして確認します。
 @z
@@ -198,8 +198,8 @@ the container back to the host machine. If a directory in the container is mount
 directory are also seen on the host machine. If we mount that same directory across container restarts, we'd see
 the same files.
 @y
-[ボリューム](/storage/volumes/) とは、ホストマシンに向けられたコンテナー内の特別なファイルシステムにアクセスする機能を提供するものです。
-コンテナー内のあるディレクトリがマウントされていると、そのディレクトリ内で行われた変更が、ホストマシンからも見ることができます。
+[ボリューム](/storage/volumes/) とは、コンテナー内に特別なファイルシステムがホストシステムに向けて生成され、そこにアクセスする機能を提供するものです。
+コンテナー内のあるディレクトリがマウントされていると、そのディレクトリ内で行われた変更がホストマシンからも見ることができます。
 仮にコンテナーの再起動の前後で 1 つのディレクトリをマウントしておけば、同一のファイルを維持できることになります。
 @z
 
@@ -225,9 +225,9 @@ it works for small demos. We'll talk about switching this to a different databas
 @y
 Todo アプリはデフォルトで各種データを`/etc/todos/todo.db`にある [SQLite データベース](https://www.sqlite.org/index.html) に保存します。
 SQLite がよくわからなくても心配無用です。
-これは単純なリレーショナルデータベースであって、すべてのデータを 1 つのファイル内に保存するものです。
+これは単純なリレーショナルデータベースであって、すべてのデータを 1 つのファイルに保存するものです。
 大規模アプリケーションに対して利用するのは適切ではありませんが、ちょっとしたデモであれば十分に動作します。
-この後には別のデータベースエンジンにも話を移していきます。
+この後には別のデータベースエンジンに話を移していきます。
 @z
 
 @x
@@ -284,7 +284,7 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 1. Todo アプリコンテナーを起動します。
    ただし今回は`-v`フラグを使ってボリュームマウントの指定を行います。
    名前つきボリュームを利用し、これを`/etc/todos`にマウントします。
-   これによってそのパス上に生成されるファイルをすべて取得できるようにします。
+   これによってそのパス上に生成されるファイルをすべてアクセスできるようにします。
 @z
 
 @x
@@ -357,7 +357,7 @@ Hooray! You've now learned how to persist data!
 >**上級者向けヒント**
 >
 >名前つきボリュームとバインドボリューム（これについては後に説明）は、Docker Engine においてデフォルトでサポートされている 2 種類のボリュームです。
->ただしそれ以外にもボリュームドライバープラグインというものが多数あって、NFS、SFTP、NetApp などに対応しています。
+>ただしそれ以外にもボリュームドライバープラグインが多数あって、NFS、SFTP、NetApp などに対応しています。
 >これが特に重要になってくるのが、複数のホストを利用して Swarm や Kubernetes といったクラスター環境を稼動させる場合です。
 @z
 

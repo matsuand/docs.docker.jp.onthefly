@@ -52,10 +52,10 @@ The general idea is that you have "managers" who receive **expected state**. Thi
 machines in the cluster and delegate work to "worker" nodes. The managers watch for changes (such as
 a container quitting) and then work to make **actual state** reflect the expected state.
 @y
-一般的な考え方としては、あなたが **こうあるべき** という状態を知る「マネージャー」であるということです。
-その状態というのは「ウェブアプリのインスタンスを 2 つ立ち上げてポート 80 で公開したいんです」といったものです。
+一般的な考え方として、あなたの横に **こうあるべき** という状態を知る「マネージャー」がいます。
+この状態というのは「ウェブアプリのインスタンスを 2 つ立ち上げてポート 80 で公開したいんです」といったものです。
 マネージャーはそこで、クラスター内にあるマシンすべてを見渡して、「ワーカー」ノードに作業を依頼します。
-マネージャーは状況変化（たとえばコンテナーが停止していないか）を常に監視していて、**実際の状態** を **こうあるべき** 状態に持っていく作業を行います。
+マネージャーは状況変化（たとえばコンテナーが停止していないか）を常に監視していて、**実際の状態** を **こうあるべき状態** に持っていく作業を行います。
 @z
 
 @x

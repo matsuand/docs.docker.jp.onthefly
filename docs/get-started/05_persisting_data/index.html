@@ -1,4 +1,4 @@
-<!-- Page generated 2020-12-20 18:58:56 +0900-->
+<!-- Page generated 2020-12-25 18:09:26 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>DB へのデータ保存 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="DB へのデータ保存" />
   <meta property="og:description" content="アプリケーションにおける DB データを保存します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-20T18:58:56+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-12-25T18:09:26+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/05_persisting_data/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-12-20T18:58:56+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2020-12-25T18:09:26+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"DB へのデータ保存","description":"アプリケーションにおける DB データを保存します。","url":"https://docs.docker.com/get-started/05_persisting_data/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,8 +98,8 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>DB へのデータ保存</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>状況がわかりますか。
-コンテナーを起動するたびに、Todo リストはきれいにクリアされてしまうということです。
+                        <section class="section"><h1>DB へのデータ保存</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>状況はおわかりですか。
+コンテナーを起動するたびに Todo リストがきれいにクリアされてしまいます。
 なぜこうなるのでしょう。
 そこでコンテナーがどのように動作するのかを確認していきましょう。</p>
 
@@ -111,7 +111,7 @@
 
 <h3 id="seeing-this-in-practice">実際を確認</h3>
 
-<p>実際の動作を見てみるために、2 つのコンテナーを起動させてそれぞれにファイル生成を行ってみます。
+<p>実際の動作を見てみるために 2 つのコンテナーを起動させて、それぞれにファイル生成を行ってみます。
 そこでわかってくるのは、1 つのコンテナーで生成したファイルは、もう 1 つのコンテナーで利用することはできないということです。</p>
 
 <ol>
@@ -139,7 +139,7 @@
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cat</span> /data.txt
 </code></pre></div>    </div>
 
-    <p>コマンドラインを選ぶ場合は、<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドを実行して同じことを行います。
+    <p>コマンドラインを選ぶ場合は<code class="language-plaintext highlighter-rouge">docker exec</code>コマンドを実行して同じことを行います。
  その場合は（<code class="language-plaintext highlighter-rouge">docker ps</code>を実行して）コンテナー ID を得る必要があります。
  そしてファイル内容を以下のようにして確認します。</p>
 
@@ -170,8 +170,8 @@
 コンテナーではファイルの生成、更新、削除を行うことができますが、コンテナーを削除すると、そういった変更はすべて失われ、コンテナーから切り離されます。
 そこでボリュームを利用すると、この状況を変えることができます。</p>
 
-<p><a href="/storage/volumes/">ボリューム</a> とは、ホストマシンに向けられたコンテナー内の特別なファイルシステムにアクセスする機能を提供するものです。
-コンテナー内のあるディレクトリがマウントされていると、そのディレクトリ内で行われた変更が、ホストマシンからも見ることができます。
+<p><a href="/storage/volumes/">ボリューム</a> とは、コンテナー内に特別なファイルシステムがホストシステムに向けて生成され、そこにアクセスする機能を提供するものです。
+コンテナー内のあるディレクトリがマウントされていると、そのディレクトリ内で行われた変更がホストマシンからも見ることができます。
 仮にコンテナーの再起動の前後で 1 つのディレクトリをマウントしておけば、同一のファイルを維持できることになります。</p>
 
 <p>ボリュームには大きく 2 つの種類があります。
@@ -181,9 +181,9 @@
 
 <p>Todo アプリはデフォルトで各種データを<code class="language-plaintext highlighter-rouge">/etc/todos/todo.db</code>にある <a href="https://www.sqlite.org/index.html">SQLite データベース</a> に保存します。
 SQLite がよくわからなくても心配無用です。
-これは単純なリレーショナルデータベースであって、すべてのデータを 1 つのファイル内に保存するものです。
+これは単純なリレーショナルデータベースであって、すべてのデータを 1 つのファイルに保存するものです。
 大規模アプリケーションに対して利用するのは適切ではありませんが、ちょっとしたデモであれば十分に動作します。
-この後には別のデータベースエンジンにも話を移していきます。</p>
+この後には別のデータベースエンジンに話を移していきます。</p>
 
 <p>データベースが 1 つのファイルに収められているので、ホスト上のファイルとして保存しておけば、新たなコンテナーからも利用できます。
 したがって最後に更新されたものを、その次にも使い続けられます。
@@ -211,7 +211,7 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
     <p>Todo アプリコンテナーを起動します。
 ただし今回は<code class="language-plaintext highlighter-rouge">-v</code>フラグを使ってボリュームマウントの指定を行います。
 名前つきボリュームを利用し、これを<code class="language-plaintext highlighter-rouge">/etc/todos</code>にマウントします。
-これによってそのパス上に生成されるファイルをすべて取得できるようにします。</p>
+これによってそのパス上に生成されるファイルをすべてアクセスできるようにします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run <span class="nt">-dp</span> 3000:3000 <span class="nt">-v</span> todo-db:/etc/todos getting-started
 </code></pre></div>    </div>
@@ -245,7 +245,7 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
   <p><strong>上級者向けヒント</strong></p>
 
   <p>名前つきボリュームとバインドボリューム（これについては後に説明）は、Docker Engine においてデフォルトでサポートされている 2 種類のボリュームです。
-ただしそれ以外にもボリュームドライバープラグインというものが多数あって、NFS、SFTP、NetApp などに対応しています。
+ただしそれ以外にもボリュームドライバープラグインが多数あって、NFS、SFTP、NetApp などに対応しています。
 これが特に重要になってくるのが、複数のホストを利用して Swarm や Kubernetes といったクラスター環境を稼動させる場合です。</p>
 </blockquote>
 

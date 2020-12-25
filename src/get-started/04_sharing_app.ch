@@ -22,7 +22,7 @@ registry. The default registry is Docker Hub and is where all of the images we'v
 ここまでにイメージをビルドしたので、これを共有しましょう。
 Docker イメージを共有するには Docker レジストリを使うことになります。
 デフォルトのレジストリは Docker Hub です。
-これまで利用してきたイメージがすべて Docker Hub にあります。
+これまで利用してきたイメージはすべて Docker Hub から取得したものでした。
 @z
 
 @x
@@ -91,8 +91,7 @@ an example command that you will need to run to push to this repo.
    will be using your namespace, not "docker".
 @y
 1. コマンドラインから Docker Hub 上に示されていたプッシュコマンドを実行してみます。
-   なお実行すべきコマンドでは、あなたの名前空間を利用することになります。
-   それは「docker」ではありません。
+   なお実行コマンドでは、名前空間は「docker」ではなく、あなた自身のものを利用することになります。
 @z
 
 @x
@@ -182,8 +181,8 @@ Now that our image has been built and pushed into a registry, let's try running 
 new instance that has never seen this container image! To do this, we will use Play with Docker.
 @y
 イメージをビルドしてレジストリにプッシュするところまでできました。
-そこでこのコンテナーイメージをまだ参照していない新たなインスタンスを起動することにします。
-これを行うために、ここでは Play with Docker を利用します。
+そこでこのコンテナーイメージをまだ一度も参照したことがない新たなインスタンスを起動することにします。
+これを行うためにここでは Play with Docker を利用します。
 @z
 
 @x

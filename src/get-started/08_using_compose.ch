@@ -30,8 +30,8 @@ your project repo (it's now version controlled), and easily enable someone else 
 Someone would only need to clone your repo and start the compose app. In fact, you might see quite a few projects
 on GitHub/GitLab doing exactly this now.
 @y
-Compose を利用する **最大** の利点は、アプリケーション全体の定義を 1 つのファイルに収めることができることです。
-このファイルはプロジェクトリポジトリのトップに置きます（ここからはバージョン管理していくことにします）。
+Compose を利用する **最大** の利点は、アプリケーション全体の定義を 1 つのファイルに収められることです。
+そのファイルはプロジェクトリポジトリのトップに置きます（ここからはバージョン管理していくことにします）。
 Compose を使えば他の人がプロジェクトに参加しやすくなります。
 他の人はただリポジトリをクローンするだけで Compose アプリを起動します。
 現在 GitHub/GitLab 上にある実に多くのプロジェクトが、まさにそのようにして作業を進めています。
