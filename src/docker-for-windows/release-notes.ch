@@ -28,9 +28,6 @@ toc_max: 2
 @x
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 @y
-{% comment %}
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
-{% endcomment %}
 このページでは Docker Desktop リリースにおける新機能、更新状況、既知の不具合、バグフィックスといった情報を示します。
 @z
 
@@ -40,12 +37,6 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 @y
-{% comment %}
-> **Important**
->
-> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
-{: .important }
-{% endcomment %}
 > **重要**
 >
 > Docker Desktop 3.0.0 から安定版（stable）と最新版（edge）のリリースは、どのユーザーに対しても 1 つのリリースとして統合されました。
@@ -66,18 +57,12 @@ This page contains information about the new features, improvements, known issue
 @x
 > [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
 > [ダウンロード](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -87,11 +72,6 @@ This page contains information about the new features, improvements, known issue
 - Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
 - First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
 @y
-{% comment %}
-- Use of three-digit version number for Docker Desktop releases.
-- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
-- First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
-{% endcomment %}
 - Docker Desktop リリースに対して 3 桁のバージョン番号を用いるようにしました。
 - Docker Desktop のアップデートでは、デルタパッチを用いることにより、アップデートをより小さなものにしました。
   詳しくは [自動アップデート](install.md#automatic-updates) を参照してください。
@@ -103,10 +83,6 @@ This page contains information about the new features, improvements, known issue
   - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
   - Supports basic volumes, bind mounts, networks, and environment variables
 @y
-  {% comment %}
-  - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
-  - Supports basic volumes, bind mounts, networks, and environment variables
-  {% endcomment %}
   - 以下のサブコマンドをサポートします。
     `up`、`down`、`logs`、`build`、`pull`、`push`、`ls`、`ps`
   - 基本的なボリューム、バインドマウント、ネットワーク、環境変数をそれぞれサポートします。
@@ -116,10 +92,6 @@ This page contains information about the new features, improvements, known issue
     Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
 - [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
 @y
-    {% comment %}
-    Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
-- [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
-    {% endcomment %}
     フィードバックは [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub リポジトリに issue を生成してください。
 - [Docker Hub ツール v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
 @z
@@ -127,9 +99,6 @@ This page contains information about the new features, improvements, known issue
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -149,9 +118,6 @@ This page contains information about the new features, improvements, known issue
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -160,10 +126,6 @@ This page contains information about the new features, improvements, known issue
 - Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
 - Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
 @y
-{% comment %}
-- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
-- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
-{% endcomment %}
 - Hyperkit の CPU 使用量を軽減するため、カーネル [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) にダウングレードしました。
 - `-v /var/run/docker.sock:` を指定により、存在しないコンテナーを起動しようとして、予期しない EOF エラーとなる点を修正しました。
   [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025) を参照のこと。
@@ -172,9 +134,6 @@ This page contains information about the new features, improvements, known issue
 @x
 ### Known issues
 @y
-{% comment %}
-### Known issues
-{% endcomment %}
 {: #known-issues }
 ### 既知の問題
 @z
@@ -183,10 +142,6 @@ This page contains information about the new features, improvements, known issue
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
 @y
-{% comment %}
-- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
-- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
-{% endcomment %}
 - git URL から BuildKit を使ってイメージをビルドする際に、`github.com/org/repo`の形を用いているとビルドに失敗します。
   この問題を回避するには`git://github.com/org/repo`の形を用いるようにします。
 - Alpine Linux 3.13 に基づくコンテナー内において DNS アドレス解決に失敗することがあります。
@@ -201,20 +156,14 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+> [Download](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
-{% endcomment %}
-> [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+> [ダウンロード](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -238,18 +187,12 @@ This page contains information about the new features, improvements, known issue
 @x
 > [Download](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
 > [ダウンロード](https://desktop.docker.com/win/stable/49427/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 @y
-{% comment %}
-Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
-{% endcomment %}
 Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれます。
 本バージョンのインストール後は、ローカルの Kubernetes クラスターはリセットされます。
 @z
@@ -257,9 +200,6 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -268,10 +208,6 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 - Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
 - Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
 @y
-{% comment %}
-- Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
-- Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
-{% endcomment %}
 - プロプランまたはチームプランを購入しているユーザーは、Docker Desktop 上の Remote repositories タブ上から、ぜい弱性スキャン報告を参照できるようになりました。
 - Docker Desktop では、プロプランまたはチームプランを購入しているユーザー向けのサポートオプションを導入しました。
 @z
@@ -279,9 +215,6 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -303,9 +236,6 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @x
 ### Deprecation
 @y
-{% comment %}
-### Deprecation
-{% endcomment %}
 {: #deprecation }
 ### 非推奨
 @z
@@ -313,18 +243,12 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @x
 - Docker Desktop cannot be installed on Windows 1703 (build 15063) anymore.
 @y
-{% comment %}
-- Docker Desktop cannot be installed on Windows 1703 (build 15063) anymore.
-{% endcomment %}
 - Docker Desktop は Windows 1703 (build 15063) にはインストールできなくなりました。
 @z
 
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -342,19 +266,6 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 - Fixed an issue where some network plugins may fail to load, provoking a crash of the Docker daemon [docker/for-win#9282](https://github.com/docker/for-win/issues/9282).
 - When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
 @y
-{% comment %}
-- Renamed 'Run Diagnostics' to 'Get support'.
-- Fixed an issue that intermittently made the WSL 2 backend fail to start.
-- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
-- Fixed an issue where bash in WSL would not find the docker CLI when it is started before Docker Desktop.
-- Fixed an issue with HTTP proxy exclude lists containing entries such as `localhost` or `127.0.0.1`. Fixes [docker/for-win#8750](https://github.com/docker/for-win/issues/8750).
-- When the WSL integration process unexpectedly stops, the user is now notified and can decide to restart it or not, instead of always trying to restart it in a loop. fixes [docker/for-win#8968](https://github.com/docker/for-win/issues/8968).
-- Fixed an issue related to container logs lagging under heavy load. Fixes [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
-- Diagnostics: avoid hanging when Kubernetes is in a broken state.
-- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
-- Fixed an issue where some network plugins may fail to load, provoking a crash of the Docker daemon [docker/for-win#9282](https://github.com/docker/for-win/issues/9282).
-- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
-{% endcomment %}
 - 「Run Diagnostics」を「Get support」に名称変更しました。
 - 断続的に WSL 2 バックエンドが起動に失敗する問題を修正しました。
 - NFS マウントに関する問題を修正しました。[docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958) を Fix に。
@@ -380,18 +291,12 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @x
 > [Download](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
 > [ダウンロード](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 @y
-{% comment %}
-Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
-{% endcomment %}
 Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます。
 ローカルに Kubernetes クラスターがある場合は、このバージョンをインストールした後にリセットされます。
 @z
@@ -399,9 +304,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -412,12 +314,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 - Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
 - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
 @y
-{% comment %}
-- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
-- Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
-- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
-- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
-{% endcomment %}
 - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), ECS と ACI を通じて Compose とクラウドのボリューム利用が可能になりました。
 - Docker ダッシュボードに、新たに Images 画面が導入されました。
   Images 画面では Docker Hub イメージの参照、そのプル、ディスク上のローカルイメージ管理が可能になります。
@@ -431,9 +327,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -457,9 +350,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -489,31 +379,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 - Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
 - Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 @y
-{% comment %}
-- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
-- Removed the option to start with Windows containers from the installer
-- Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
-- Left-clicking on the whale in the system tray now launches the dashboard container view.
-- Docker Desktop now uses a different systray icon for dark and light mode. Fixes [docker/for-win#4113](https://github.com/docker/for-win/issues/4113).
-- Added support for emulating Risc-V via Qemu 4.2.0.
-- Added a low-level debug shell accessible via `putty -serial \\.\pipe\dockerDebugShell`.
-- Copy container logs without ansi colors to clipboard. Fixes [docker/for-mac#4786](https://github.com/docker/for-mac/issues/4786).
-- Fix application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117)
-- Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425).
-- Switched from `chronyd` to `sntpcd` to work around host time synchronisation problems. Fixes [docker/for-win#4526](https://github.com/docker/for-win/issues/4526).
-- Avoid blocking startup if "Expose daemon on tcp://localhost:2375 without TLS" is set and `localhost:2375` is in use by another program. See [docker/for-win#6929](https://github.com/docker/for-win/issues/6929) [docker/for-win#6961](https://github.com/docker/for-win/issues/6961).
-- Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](https://github.com/docker/for-win/issues/6797).
-- Avoid failing with "Function not implemented" during file I/O on shared volumes. Fixes [docker/for-win#5955](https://github.com/docker/for-win/issues/5955)
-- Ensure that `docker run -v /var/run/docker.sock` rewrites Windows paths properly, see [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
-- Fixed a crash which occurred when Docker Desktop loads a corrupted Docker CLI configuration file. Fixes [docker/for-win#6657](https://github.com/docker/for-win/issues/6657).
-- Ensure `localhost` and `127.0.0.1` can both be used in the proxy settings to redirect to a proxy on the host. Fixes [docker/for-win#5715](https://github.com/docker/for-win/issues/5715) and [docker/for-win#6260](https://github.com/docker/for-win/issues/6260).
-- Fixed a crash when failing to login with no Internet connection.
-- Fixed bug in handling shared volume paths with ".." characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
-- Report check for updates errors in toast notification. Fixes [docker/for-win#6364](https://github.com/docker/for-win/issues/6364).
-- Fixed an upgrade bug where users on versions still using the PowerShell based VM management can experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
-- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
-- Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
-{% endcomment %}
 - かつての Kubernetes コンテキスト`docker-for-desktop`は削除しました。
   代わりにコンテキスト`docker-desktop`を利用してください。
   [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) と [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089) を Fix にしました。
@@ -560,9 +425,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### WSL 2 changes
 @y
-{% comment %}
-### WSL 2 changes
-{% endcomment %}
 {: #wsl-2-changes }
 ### WSL 2 の変更
 @z
@@ -580,19 +442,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 - Fix a race condition when exposing ports.
 - Enable dialog no longer blocks other windows.
 @y
-{% comment %}
-- Docker contexts are now synced between Windows and WSL distros.
-- Fixed an issue that intermittently causes the backend to fail to start.
-- Fixed a proxy crash that happened when glibc was not compatible. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
-- Fixed an issue when removing a container mounting `/mnt/wsl` would break WSL integration. See [docker/for-win#7836](https://github.com/docker/for-win/issues/7836).
-- Added support for mounting files from a distro using the Windows CLI (e.g. `docker run -v \\wsl$\Ubuntu\home\simon\web:/web ...`)
-- Fixed the error message when attempting to use a shared volume with a relative path. Fixes [docker/for-win#6894](https://github.com/docker/for-win/issues/6894).
-- Fixed an issue when updating Windows to a WSL 2 capable version, where a configuration file is locked by the old Hyper-V VM.
-- Fixed a discrepancy in the version of Docker Compose inside and outside of WSL 2. Fixes [docker/for-win#6461](https://github.com/docker/for-win/issues/6461).
-- Detect when the `docker-desktop` wsl distro is stopped and display a clearer error message.
-- Fix a race condition when exposing ports.
-- Enable dialog no longer blocks other windows.
-{% endcomment %}
 - Docker コンテキストを Windows と WSL ディストリビューション間で同期するようにしました。
 - バックエンドが断続的に起動に失敗する問題を修正しました。
 - glibc が互換性のないものである場合に発生するプロキシーのクラッシュを修正しました。
@@ -615,9 +464,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### Known issues
 @y
-{% comment %}
-### Known issues
-{% endcomment %}
 {: #known-issues }
 ### 既知の問題
 @z
@@ -627,11 +473,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 - There is a known issue when enabling Kubernetes where the settings UI sometimes fails to update the Kubernetes state. To work around this issue, close and re-open the Window.
 - There is a rare known issue when switching users, where the images UI sometimes continues to show the repositories of the previous user. To work around this issue, close and re-open the Window.
 @y
-{% comment %}
--  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`.
-- There is a known issue when enabling Kubernetes where the settings UI sometimes fails to update the Kubernetes state. To work around this issue, close and re-open the Window.
-- There is a rare known issue when switching users, where the images UI sometimes continues to show the repositories of the previous user. To work around this issue, close and re-open the Window.
-{% endcomment %}
 -  名前つきボリュームと gRPC FUSE を利用して`docker-compose`を実行した際に問題が発生します。
    2 度め以降の`docker-compose up`の呼び出しが失敗します。
    ボリュームパスのプリフィックスに`/host_mnt`があるためです。
@@ -652,18 +493,12 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 > [Download](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
 > [ダウンロード](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -671,9 +506,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
 @y
-{% comment %}
-- The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
-{% endcomment %}
 - Docker CLI の新しいクラウド統合環境によって、Amazon ECS や Microsoft ACI を用いたコンテナー実行が簡単になりました。
   詳しくは [ECS での Docker コンテナーのデプロイ](../../engine/context/ecs-integration/) や [Azure での Docker コンテナーのデプロイ](../../engine/context/aci-integration/) を参照してください。
 @z
@@ -681,9 +513,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -699,9 +528,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -709,9 +535,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 - WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
 @y
-{% comment %}
-- WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
-{% endcomment %}
 - WSL2: 非互換の glibc を利用している際のクラッシュを修正しました。
   [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) を参照してください。
 @z
@@ -719,9 +542,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 ### Known issues
 @y
-{% comment %}
-### Known issues
-{% endcomment %}
 {: #known-issues }
 ### 既知の問題
 @z
@@ -731,11 +551,6 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 in i386 images. To work around this issue, disable `seccomp` by using
 the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
 @y
-{% comment %}
-- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
-in i386 images. To work around this issue, disable `seccomp` by using
-the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
-{% endcomment %}
 - システムコール`clock_gettime64`は、i386 イメージにおいて`ENOSYS`ではなく`EPERM`を返します。
   この問題を回避するには、`--privileged`フラグを指定して`seccomp`を無効にしてください。
   [docker/for-win#8326](https://github.com/docker/for-win/issues/8326) を参照してください。
@@ -752,18 +567,12 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 > [Download](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
 > [ダウンロード](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -781,9 +590,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -797,15 +603,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 - WSL 2: Fixed an issue where changing the user's default shell blocked WSL integration. Fixes [docker/for-win#7653](https://github.com/docker/for-win/issues/7653)
 - WSL 2: Fixed an issue to recover WSL distributions stuck in the "Installing" state.
 @y
-{% comment %}
-- Docker Desktop now prompts users to share directories for paths like `////c/Users/foo`, rather than only paths like `C:\Users\foo` and `C:/Users/foo`.
-- The installer now returns a non-zero exit code on error, or when the user cancels the installation.
-- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#6552](https://github.com/docker/for-win/issues/6552)
-- Dashboard: Fixed opening a CLI for Windows containers. See [docker/for-win#7079](https://github.com/docker/for-win/issues/7079)
-- Dashboard: Fixed containers logs which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954)
-- WSL 2: Fixed an issue where changing the user's default shell blocked WSL integration. Fixes [docker/for-win#7653](https://github.com/docker/for-win/issues/7653)
-- WSL 2: Fixed an issue to recover WSL distributions stuck in the "Installing" state.
-{% endcomment %}
 - Docker Desktop において共有ディレクトリを生成する際、`C:\Users\foo` や `C:/Users/foo` といったパスだけでなく、`////c/Users/foo` のようなパスに対しても、ユーザープロンプトを表示するようにする。
 - インストール時のエラー、あるいはユーザーがインストールをキャンセルした場合、インストーラーがゼロではないエラーコードを返すようにする。
 - インストール時のログファイルを出力するデフォルトディレクトリにおいて、ユーザー名が空白文字を含む場合の不備を修正。
@@ -827,18 +624,12 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 > [Download](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
 > [ダウンロード](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -846,18 +637,12 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
 @y
-{% comment %}
-- [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
-{% endcomment %}
 - [Linux カーネル 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
 @z
 
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -865,9 +650,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed a crash when resetting to factory defaults with Hyper-V disabled. Fixes [docker/for-win#6738](https://github.com/docker/for-win/issues/6738).
 @y
-{% comment %}
-- Fixed a crash when resetting to factory defaults with Hyper-V disabled. Fixes [docker/for-win#6738](https://github.com/docker/for-win/issues/6738).
-{% endcomment %}
 - Hyper-V 無効の状態で、ファクトリ設定をデフォルトにリセットする際に発生するクラッシュを修正。
   [docker/for-win#6738](https://github.com/docker/for-win/issues/6738) を Fix に。
 @z
@@ -875,9 +657,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed opening an application in VS Code from a WSL 2 running app. Fixes [docker/for-win#6472](https://github.com/docker/for-win/issues/6472).
 @y
-{% comment %}
-- Fixed opening an application in VS Code from a WSL 2 running app. Fixes [docker/for-win#6472](https://github.com/docker/for-win/issues/6472).
-{% endcomment %}
 - WSL 2 上にて起動しているアプリに対して、VS Code からアプリを開く際の問題を修正。
   [docker/for-win#6472](https://github.com/docker/for-win/issues/6472) を Fix に。
 @z
@@ -885,9 +664,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed Swarm mounts in WSL 2. Fixes [docker/for-win#6507](https://github.com/docker/for-win/issues/6507).
 @y
-{% comment %}
-- Fixed Swarm mounts in WSL 2. Fixes [docker/for-win#6507](https://github.com/docker/for-win/issues/6507).
-{% endcomment %}
 - WSL 2 における Swarm マウントを修正。
   [docker/for-win#6507](https://github.com/docker/for-win/issues/6507) を Fix に。
 @z
@@ -895,9 +671,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed a bug when using the Microsoft `mssql` image. Fixes [docker/for-win#6646](https://github.com/docker/for-win/issues/6646)
 @y
-{% comment %}
-- Fixed a bug when using the Microsoft `mssql` image. Fixes [docker/for-win#6646](https://github.com/docker/for-win/issues/6646)
-{% endcomment %}
 - Microsoft の `mssql` イメージを用いた際のバグを修正。
   [docker/for-win#6646](https://github.com/docker/for-win/issues/6646) を Fix に。
 @z
@@ -905,9 +678,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Implemented `fallocate` for shared file systems. See [docker/for-win#6658](https://github.com/docker/for-win/issues/6658#issuecomment-627736820)
 @y
-{% comment %}
-- Implemented `fallocate` for shared file systems. See [docker/for-win#6658](https://github.com/docker/for-win/issues/6658#issuecomment-627736820)
-{% endcomment %}
 - `fallocate` を共有ファイルシステムに対して実装。
   [docker/for-win#6658](https://github.com/docker/for-win/issues/6658#issuecomment-627736820) 参照。
 @z
@@ -915,9 +685,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed an installer crash when an old and/or partially uninstalled version of Docker Desktop was present on the system. Fixes [docker/for-win#6536](https://github.com/docker/for-win/issues/6536).
 @y
-{% comment %}
-- Fixed an installer crash when an old and/or partially uninstalled version of Docker Desktop was present on the system. Fixes [docker/for-win#6536](https://github.com/docker/for-win/issues/6536).
-{% endcomment %}
 - インストールされている Docker Desktop が古い場合、あるいは部分的にインストールが残っている場合に、インストーラーがクラッシュするのを修正。
   [docker/for-win#6536](https://github.com/docker/for-win/issues/6536) を Fix に。
 @z
@@ -925,9 +692,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed a delay caused when opening the systray menu. Fixes [docker/for-win#1011](https://github.com/docker/for-win/issues/1011).
 @y
-{% comment %}
-- Fixed a delay caused when opening the systray menu. Fixes [docker/for-win#1011](https://github.com/docker/for-win/issues/1011).
-{% endcomment %}
 - システムトレイメニューを開いている際に動作が遅くなるのを修正。
   [docker/for-win#1011](https://github.com/docker/for-win/issues/1011) を Fix に。
 @z
@@ -935,9 +699,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed a regression where containers couldn’t anymore refer to mounted folders using the host drive letters. Fixes [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
 @y
-{% comment %}
-- Fixed a regression where containers couldn’t anymore refer to mounted folders using the host drive letters. Fixes [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
-{% endcomment %}
 - コンテナーがマウントしているフォルダーに、ホストのドライブ文字を含めていた場合に、参照できなくなる不具合を修正。
   [docker/for-win#6628](https://github.com/docker/for-win/issues/6628) を Fix に。
 @z
@@ -945,9 +706,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed a regression where sharing a folder using a double leading slash notation would fail. Fixes [docker/for-win#6668](https://github.com/docker/for-win/issues/6668).
 @y
-{% comment %}
-- Fixed a regression where sharing a folder using a double leading slash notation would fail. Fixes [docker/for-win#6668](https://github.com/docker/for-win/issues/6668).
-{% endcomment %}
 - フォルダー共有において、先頭にスラッシュを 2 つ記述した場合の不具合を修正。
   [docker/for-win#6668](https://github.com/docker/for-win/issues/6668) を Fix に。
 @z
@@ -955,9 +713,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Re-added device-mapper to the embedded Linux kernel. Fixes [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
 @y
-{% comment %}
-- Re-added device-mapper to the embedded Linux kernel. Fixes [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
-{% endcomment %}
 - 埋め込み Linux カーネルに対するデバイスマッパーを再追加。
   [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549) を Fix に。
 @z
@@ -965,9 +720,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 - Fixed an issue which caused the `:z` attribute in bind mounts to fail. Fixes [docker/for-win#6634](https://github.com/docker/for-win/issues/6634).
 @y
-{% comment %}
-- Fixed an issue which caused the `:z` attribute in bind mounts to fail. Fixes [docker/for-win#6634](https://github.com/docker/for-win/issues/6634).
-{% endcomment %}
 - バインドマウントにおける `:z` 属性が機能しない不具合を修正。
   [docker/for-win#6634](https://github.com/docker/for-win/issues/6634) を Fix に。
 @z
@@ -983,18 +735,12 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 > [Download](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
 @y
-{% comment %}
-> [Download](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
 > [ダウンロード](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -1012,9 +758,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1034,9 +777,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -1136,9 +876,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Known issues
 @y
-{% comment %}
-### Known issues
-{% endcomment %}
 {: #known-issues }
 ### 既知の問題
 @z
@@ -1180,9 +917,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -1218,9 +952,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1234,9 +965,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -1268,9 +996,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Known issues
 @y
-{% comment %}
-### Known issues
-{% endcomment %}
 {: #known-issues }
 ### 既知の問題
 @z
@@ -1310,9 +1035,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1328,9 +1050,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -1378,17 +1097,14 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 @x
 ### Known issues
 @y
-{% comment %}
-### Known issues
-{% endcomment %}
 {: #known-issues }
 ### 既知の問題
 @z
 
 @x
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md/#use-cases-and-workarounds).
 @y
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md/#use-cases-and-workarounds).
 @z
 
 @x
@@ -1424,9 +1140,6 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1446,9 +1159,6 @@ Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -1502,9 +1212,6 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z
@@ -1550,9 +1257,6 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 @x
 ### Known issues
 @y
-{% comment %}
-### Known issues
-{% endcomment %}
 {: #known-issues }
 ### 既知の問題
 @z
@@ -1596,9 +1300,6 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1636,9 +1337,6 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1658,9 +1356,6 @@ Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kuber
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -1688,9 +1383,6 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1724,9 +1416,6 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1766,9 +1455,6 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 @x
 ### Upgrades
 @y
-{% comment %}
-### Upgrades
-{% endcomment %}
 {: #upgrades }
 ### アップグレード
 @z
@@ -1802,9 +1488,6 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 @x
 ### New
 @y
-{% comment %}
-### New
-{% endcomment %}
 {: #new }
 ### 新機能
 @z
@@ -1846,9 +1529,6 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 @x
 ### Bug fixes and minor changes
 @y
-{% comment %}
-### Bug fixes and minor changes
-{% endcomment %}
 {: #bug-fixes-and-minor-changes }
 ### バグフィックスとマイナーチェンジ
 @z

@@ -1,8 +1,8 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
-AC_INIT([dockerWithCtie], [0.0.0], [matsuand AT osdn DOT me])
+AC_PREREQ([2.70])
+AC_INIT([dockerWithCtie],[0.0.0],[matsuand AT osdn DOT me])
 AC_CONFIG_SRCDIR([ctie/ctie-k.c])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([-Wno-portability])
@@ -48,6 +48,7 @@ AC_CONFIG_FILES([Makefile
 		 src/buildx/Makefile
 		 src/ci-cd/Makefile
 		 src/ci-cd/images/Makefile
+		 src/cloud/Makefile
 		 src/compliance/Makefile
 		 src/compliance/cis/Makefile
 		 src/compliance/images/Makefile

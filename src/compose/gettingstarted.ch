@@ -21,12 +21,6 @@ Compose. The application uses the Flask framework and maintains a hit counter in
 Redis. While the sample uses Python, the concepts demonstrated here should be
 understandable even if you're not familiar with it.
 @y
-{% comment %}
-On this page you build a simple Python web application running on Docker
-Compose. The application uses the Flask framework and maintains a hit counter in
-Redis. While the sample uses Python, the concepts demonstrated here should be
-understandable even if you're not familiar with it.
-{% endcomment %}
 このページでは、簡単な Python ウェブアプリケーションを Docker Compose 上に作り上げます。
 このアプリケーションは Flask フレームワークを利用し、Redis によりアクセスカウンターを管理します。
 サンプルでは Python を用いていますが、ここで示す考え方は Python に不慣れな方でも理解できるようにしています。
@@ -35,9 +29,6 @@ understandable even if you're not familiar with it.
 @x
 ## Prerequisites
 @y
-{% comment %}
-## Prerequisites
-{% endcomment %}
 {: #prerequisites }
 ## 前提条件
 @z
@@ -47,11 +38,6 @@ Make sure you have already installed both [Docker Engine](../get-docker.md)
 and [Docker Compose](install.md). You don't need to install Python or Redis, as
 both are provided by Docker images.
 @y
-{% comment %}
-Make sure you have already installed both [Docker Engine](../get-docker.md)
-and [Docker Compose](install.md). You don't need to install Python or Redis, as
-both are provided by Docker images.
-{% endcomment %}
 [Docker Engine](../get-docker.md) と [Docker Compose](install.md) をインストールしておいてください。
 Python や Redis はインストールする必要はありません。
 これはいずれも Docker イメージとして提供されます。
@@ -60,9 +46,6 @@ Python や Redis はインストールする必要はありません。
 @x
 ## Step 1: Setup
 @y
-{% comment %}
-## Step 1: Setup
-{% endcomment %}
 {: #step-1-setup }
 ## ステップ 1: セットアップ
 @z
@@ -70,18 +53,12 @@ Python や Redis はインストールする必要はありません。
 @x
 Define the application dependencies.
 @y
-{% comment %}
-Define the application dependencies.
-{% endcomment %}
 アプリケーションの依存パッケージを定義します。
 @z
 
 @x
 1. Create a directory for the project:
 @y
-{% comment %}
-1. Create a directory for the project:
-{% endcomment %}
 1. プロジェクト用のディレクトリを生成します。
 @z
 
@@ -100,9 +77,6 @@ Define the application dependencies.
 @x
 2. Create a file called `app.py` in your project directory and paste this in:
 @y
-{% comment %}
-2. Create a file called `app.py` in your project directory and paste this in:
-{% endcomment %}
 2. プロジェクトディレクトリ内に`app.py`というファイルを生成して、以下の記述を書き写してください。
 @z
 
@@ -164,10 +138,6 @@ Define the application dependencies.
    In this example, `redis` is the hostname of the redis container on the
    application's network. We use the default port for Redis, `6379`.
 @y
-   {% comment %}
-   In this example, `redis` is the hostname of the redis container on the
-   application's network. We use the default port for Redis, `6379`.
-   {% endcomment %}
    この例において`redis`とは、このアプリケーションネットワーク上の redis コンテナーのホスト名です。
    Redis のデフォルトポートとして`6379`を利用します。
 @z
@@ -183,17 +153,6 @@ Define the application dependencies.
    > cluster, this also helps handling momentary connection drops between
    > nodes.
 @y
-   {% comment %}
-   > Handling transient errors
-   >
-   > Note the way the `get_hit_count` function is written. This basic retry
-   > loop lets us attempt our request multiple times if the redis service is
-   > not available. This is useful at startup while the application comes
-   > online, but also makes our application more resilient if the Redis
-   > service needs to be restarted anytime during the app's lifetime. In a
-   > cluster, this also helps handling momentary connection drops between
-   > nodes.
-   {% endcomment %}
    > 一時的なエラーの取り扱い
    >
    > `get_hit_count`という関数がどのように書かれているかを見てください。
@@ -206,10 +165,6 @@ Define the application dependencies.
 3. Create another file called `requirements.txt` in your project directory and
    paste this in:
 @y
-{% comment %}
-3. Create another file called `requirements.txt` in your project directory and
-   paste this in:
-{% endcomment %}
 3. プロジェクト用のディレクトリにもう一つ`requirements.txt`という名称のファイルを作成し、次のようにします。
 @z
 
@@ -228,9 +183,6 @@ Define the application dependencies.
 @x
 ## Step 2: Create a Dockerfile
 @y
-{% comment %}
-## Step 2: Create a Dockerfile
-{% endcomment %}
 {: #step-2-create-a-dockerfile }
 ## ステップ 2: Dockerfile の生成
 @z
@@ -240,11 +192,6 @@ In this step, you write a Dockerfile that builds a Docker image. The image
 contains all the dependencies the Python application requires, including Python
 itself.
 @y
-{% comment %}
-In this step, you write a Dockerfile that builds a Docker image. The image
-contains all the dependencies the Python application requires, including Python
-itself.
-{% endcomment %}
 このステップでは、Docker イメージを構築する Dockerfile を作ります。
 そのイメージには依存するすべてのもの、つまり Python と Python アプリケーションが含まれます。
 @z
@@ -253,10 +200,6 @@ itself.
 In your project directory, create a file named `Dockerfile` and paste the
 following:
 @y
-{% comment %}
-In your project directory, create a file named `Dockerfile` and paste the
-following:
-{% endcomment %}
 プロジェクト用のディレクトリ内で `Dockerfile` という名称のファイルを作成し、次の内容にします。
 @z
 
@@ -291,9 +234,6 @@ CMD ["flask", "run"]
 @x
 This tells Docker to:
 @y
-{% comment %}
-This tells Docker to:
-{% endcomment %}
 これは Docker に対して以下の指示を行います。
 @z
 
@@ -307,16 +247,6 @@ This tells Docker to:
 * Copy the current directory `.` in the project to the workdir `.` in the image.
 * Set the default command for the container to `flask run`.
 @y
-{% comment %}
-* Build an image starting with the Python 3.7 image.
-* Set the working directory to `/code`.
-* Set environment variables used by the `flask` command.
-* Install gcc and other dependencies
-* Copy `requirements.txt` and install the Python dependencies.
-* Add metadata to the image to describe that the container is listening on port 5000
-* Copy the current directory `.` in the project to the workdir `.` in the image.
-* Set the default command for the container to `flask run`.
-{% endcomment %}
 * Python 3.7 イメージを使って当イメージを構築する。
 * 作業用ディレクトリを `/code` に指定する。
 * `flask`コマンドにより用いられる環境変数を設定する。
@@ -332,20 +262,12 @@ For more information on how to write Dockerfiles, see the
 [Docker user guide](../develop/index.md)
 and the [Dockerfile reference](/engine/reference/builder/).
 @y
-{% comment %}
-For more information on how to write Dockerfiles, see the
-[Docker user guide](../develop/index.md)
-and the [Dockerfile reference](/engine/reference/builder/).
-{% endcomment %}
 Dockerfile の書き方の詳細については、[Docker ユーザーガイド](../develop/index.md)や [Dockerfile リファレンス](/engine/reference/builder/) をご覧ください。
 @z
 
 @x
 ## Step 3: Define services in a Compose file
 @y
-{% comment %}
-## Step 3: Define services in a Compose file
-{% endcomment %}
 {: #step-3-define-services-in-a-compose-file }
 ## ステップ 3: Compose ファイル内でのサービス定義
 @z
@@ -354,10 +276,6 @@ Dockerfile の書き方の詳細については、[Docker ユーザーガイド]
 Create a file called `docker-compose.yml` in your project directory and paste
 the following:
 @y
-{% comment %}
-Create a file called `docker-compose.yml` in your project directory and paste
-the following:
-{% endcomment %}
 プロジェクト用のディレクトリ内で `Dockerfile` という名称のファイルを作成し、次の内容にします。
 @z
 
@@ -388,18 +306,12 @@ services:
 @x
 This Compose file defines two services: `web` and `redis`. 
 @y
-{% comment %}
-This Compose file defines two services: `web` and `redis`. 
-{% endcomment %}
 この Compose ファイルは `web` と `redis` という 2 つのサービスを定義します。
 @z
 
 @x
 ### Web service
 @y
-{% comment %}
-### Web service
-{% endcomment %}
 {: #web-service }
 ### ウェブサービス
 @z
@@ -409,11 +321,6 @@ The `web` service uses an image that's built from the `Dockerfile` in the curren
 It then binds the container and the host machine to the exposed port, `5000`. This example service uses the default port for 
 the Flask web server, `5000`.
 @y
-{% comment %}
-The `web` service uses an image that's built from the `Dockerfile` in the current directory.
-It then binds the container and the host machine to the exposed port, `5000`. This example service uses the default port for 
-the Flask web server, `5000`.
-{% endcomment %}
 `web` サービスは、カレントディレクトリ内の `Dockerfile` からビルドされたイメージを利用します。
 そしてコンテナーとホストマシンを、公開用ポート `5000` でつなぎます。
 このサービス例では、Flask ウェブサーバーのデフォルトポートである `5000` を利用するものです。
@@ -423,9 +330,6 @@ the Flask web server, `5000`.
 @x
 ### Redis service
 @y
-{% comment %}
-### Redis service
-{% endcomment %}
 {: #redis-service }
 ### Redis サービス
 @z
@@ -434,19 +338,12 @@ the Flask web server, `5000`.
 The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) 
 image pulled from the Docker Hub registry.
 @y
-{% comment %}
-The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) 
-image pulled from the Docker Hub registry.
-{% endcomment %}
 `redis` サービスには Docker Hub レジストリから取得した、公開の [Redis](https://registry.hub.docker.com/_/redis/) イメージを利用します。
 @z
 
 @x
 ## Step 4: Build and run your app with Compose
 @y
-{% comment %}
-## Step 4: Build and run your app with Compose
-{% endcomment %}
 {: #step-4-build-and-run-your-app-with-compose }
 ## ステップ 4: Compose によるアプリケーションの構築と実行
 @z
@@ -454,9 +351,6 @@ image pulled from the Docker Hub registry.
 @x
 1. From your project directory, start up your application by running `docker-compose up`.
 @y
-{% comment %}
-1. From your project directory, start up your application by running `docker-compose up`.
-{% endcomment %}
 1.  プロジェクト用のディレクトリで`docker-compose up`によりアプリケーションを起動します。
 @z
 
@@ -512,10 +406,6 @@ image pulled from the Docker Hub registry.
    Compose pulls a Redis image, builds an image for your code, and starts the
    services you defined. In this case, the code is statically copied into the image at build time.
 @y
-   {% comment %}
-   Compose pulls a Redis image, builds an image for your code, and starts the
-   services you defined. In this case, the code is statically copied into the image at build time.
-   {% endcomment %}
    Compose は Redis イメージを取得し、コードが動作するイメージを構築した上で、定義されているサービスを開始します。
    この例ではビルド時において、コードがイメージ内に静的にコピーされます。
 @z
@@ -523,9 +413,6 @@ image pulled from the Docker Hub registry.
 @x
 2. Enter http://localhost:5000/ in a browser to see the application running.
 @y
-{% comment %}
-2. Enter http://localhost:5000/ in a browser to see the application running.
-{% endcomment %}
 2. ブラウザーで`http://localhost:5000/`を開き、アプリケーションの動作を確認します。
 @z
 
@@ -536,13 +423,6 @@ image pulled from the Docker Hub registry.
    find the `Hello World` message. If this doesn't resolve, you can also try
    http://127.0.0.1:5000.
 @y
-   {% comment %}
-   If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
-   Windows, then the web app should now be listening on port 5000 on your
-   Docker daemon host. Point your web browser to http://localhost:5000 to
-   find the `Hello World` message. If this doesn't resolve, you can also try
-   http://127.0.0.1:5000.
-   {% endcomment %}
    Docker を Linux、Docker Desktop for Mac、Docker Desktop for Windows で直接使っている場合、ウェブアプリは Docker デーモンのホスト上でポート 5000 を開いています。
    ブラウザーから http://localhost:5000 にアクセスして、`Hello World`メッセージが表示されることを確認してください。
    接続できなければ`http://127.0.0.1:5000`も試してください。
@@ -553,11 +433,6 @@ image pulled from the Docker Hub registry.
    MACHINE_VM` to get the IP address of your Docker host. Then, open
    `http://MACHINE_VM_IP:5000` in a browser.
 @y
-   {% comment %}
-   If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
-   MACHINE_VM` to get the IP address of your Docker host. Then, open
-   `http://MACHINE_VM_IP:5000` in a browser.
-   {% endcomment %}
    Docker Machine on Mac や Docker Machine on Windows を利用している場合は、`docker-machine ip 仮想マシン名`を実行して Docker ホスト上の IP アドレスを取得します。
    そしてブラウザーから`http://仮想マシンのIP:5000`を開きます。
 @z
@@ -565,9 +440,6 @@ image pulled from the Docker Hub registry.
 @x
    You should see a message in your browser saying:
 @y
-   {% comment %}
-   You should see a message in your browser saying:
-   {% endcomment %}
    ブラウザーには以下のメッセージが表示されます。
 @z
 
@@ -584,27 +456,18 @@ image pulled from the Docker Hub registry.
 @x
    ![hello world in browser](images/quick-hello-world-1.png)
 @y
-   {% comment %}
-   ![hello world in browser](images/quick-hello-world-1.png)
-   {% endcomment %}
    ![ブラウザー上の hello world](images/quick-hello-world-1.png)
 @z
 
 @x
 3. Refresh the page.
 @y
-{% comment %}
-3. Refresh the page.
-{% endcomment %}
 3. ページを更新します。
 @z
 
 @x
    The number should increment.
 @y
-   {% comment %}
-   The number should increment.
-   {% endcomment %}
    数値が更新されたはずです。
 @z
 
@@ -621,27 +484,18 @@ image pulled from the Docker Hub registry.
 @x
    ![hello world in browser](images/quick-hello-world-2.png)
 @y
-   {% comment %}
-   ![hello world in browser](images/quick-hello-world-2.png)
-   {% endcomment %}
    ![ブラウザー上の hello world](images/quick-hello-world-2.png)
 @z
 
 @x
 4. Switch to another terminal window, and type `docker image ls` to list local images.
 @y
-{% comment %}
-4. Switch to another terminal window, and type `docker image ls` to list local images.
-{% endcomment %}
 4. 別の端末画面を開いて`docker image ls`を実行し、ローカルのイメージ一覧を表示します。
 @z
 
 @x
    Listing images at this point should return `redis` and `web`.
 @y
-   {% comment %}
-   Listing images at this point should return `redis` and `web`.
-   {% endcomment %}
    この時点で一覧表示されるイメージに`redis`と`web`が含まれます。
 @z
 
@@ -668,9 +522,6 @@ image pulled from the Docker Hub registry.
 @x
    You can inspect images with `docker inspect <tag or id>`.
 @y
-   {% comment %}
-   You can inspect images with `docker inspect <tag or id>`.
-   {% endcomment %}
    `docker inspect <tag または id>`によってイメージを確認することもできます。
 @z
 
@@ -679,11 +530,6 @@ image pulled from the Docker Hub registry.
    from within your project directory in the second terminal, or by
    hitting CTRL+C in the original terminal where you started the app.
 @y
-{% comment %}
-5. Stop the application, either by running `docker-compose down`
-   from within your project directory in the second terminal, or by
-   hitting CTRL+C in the original terminal where you started the app.
-{% endcomment %}
 5. アプリケーションを停止させます。
    2 つめに開いた端末画面上のプロジェクトディレクトリにおいて`docker-compose down`を実行します。
    またはアプリを開始したはじめの端末画面上において CTRL+C を入力します。
@@ -692,9 +538,6 @@ image pulled from the Docker Hub registry.
 @x
 ## Step 5: Edit the Compose file to add a bind mount
 @y
-{% comment %}
-## Step 5: Edit the Compose file to add a bind mount
-{% endcomment %}
 {: #step-5-edit-the-compose-file-to-add-a-bind-mount }
 ## ステップ 5: Compose ファイルにバインドマウントを追加
 @z
@@ -703,10 +546,6 @@ image pulled from the Docker Hub registry.
 Edit `docker-compose.yml` in your project directory to add a
 [bind mount](../storage/bind-mounts.md) for the `web` service:
 @y
-{% comment %}
-Edit `docker-compose.yml` in your project directory to add a
-[bind mount](../storage/bind-mounts.md) for the `web` service:
-{% endcomment %}
 プロジェクトディレクトリ内にある `docker-compose.yml` を編集して、`web` サービスへの [バインドマウント](../storage/bind-mounts.md) を追加します。
 @z
 
@@ -749,13 +588,6 @@ fly, without having to rebuild the image. The `environment` key sets the
 `FLASK_ENV` environment variable, which tells `flask run` to run in development
 mode and reload the code on change. This mode should only be used in development.
 @y
-{% comment %}
-The new `volumes` key mounts the project directory (current directory) on the
-host to `/code` inside the container, allowing you to modify the code on the
-fly, without having to rebuild the image. The `environment` key sets the
-`FLASK_ENV` environment variable, which tells `flask run` to run in development
-mode and reload the code on change. This mode should only be used in development.
-{% endcomment %}
 新しい `volumes` というキーは、ホスト上のプロジェクトディレクトリ（カレントディレクトリ）を、コンテナー内にある `/code` ディレクトリにマウントします。
 こうすることで、イメージを再構築することなく、実行中のコードを修正できるようになります。
 `environment`キーには環境変数`FLASK_ENV`を設定しています。
@@ -766,9 +598,6 @@ mode and reload the code on change. This mode should only be used in development
 @x
 ## Step 6: Re-build and run the app with Compose
 @y
-{% comment %}
-## Step 6: Re-build and run the app with Compose
-{% endcomment %}
 ## ステップ 6: Compose によるアプリの再構築と実行
 {: #step-6-re-build-and-run-the-app-with-compose }
 @z
@@ -776,9 +605,6 @@ mode and reload the code on change. This mode should only be used in development
 @x
 From your project directory, type `docker-compose up` to build the app with the updated Compose file, and run it.
 @y
-{% comment %}
-From your project directory, type `docker-compose up` to build the app with the updated Compose file, and run it.
-{% endcomment %}
 プロジェクトディレクトリにて `docker-compose up` を入力する際に、Compose ファイルが更新されていると、アプリは再構築され実行されます。
 @z
 
@@ -814,10 +640,6 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 Check the `Hello World` message in a web browser again, and refresh to see the
 count increment.
 @y
-{% comment %}
-Check the `Hello World` message in a web browser again, and refresh to see the
-count increment.
-{% endcomment %}
 `Hello World` メッセージをもう一度確認してみます。
 再読み込みをすると、さらにカウンターが増えるはずです。
 @z
@@ -842,26 +664,6 @@ requirements for [Docker Desktop for Windows](../docker-for-windows/install.md) 
 need VirtualBox.
 {: .important}
 @y
-{% comment %}
-> Shared folders, volumes, and bind mounts
->
-> * If your project is outside of the `Users` directory (`cd ~`), then you
-need to share the drive or location of the Dockerfile and volume you are using.
-If you get runtime errors indicating an application file is not found, a volume
-mount is denied, or a service cannot start, try enabling file or drive sharing.
-Volume mounting requires shared drives for projects that live outside of
-`C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker Desktop for Windows that uses [Linux containers](../docker-for-windows/index.md#switch-between-windows-and-linux-containers).
-For more information, see [File sharing](../docker-for-mac/index.md#file-sharing) on Docker
-for Mac, and the general examples on how to
-> [Manage data in containers](../storage/volumes.md).
->
-> * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
-ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
-requirements for [Docker Desktop for Windows](../docker-for-windows/install.md) and do not
-need VirtualBox.
-{: .important}
-{% endcomment %}
 > フォルダ、ボリューム、バインドマウントの共有
 >
 > * プロジェクトを `Users` ディレクトリ（`cd ~`）以外に置いている場合、利用している Dockerfile やボリュームのドライブ、ディレクトリは、共有できるようにしておく必要があります。
@@ -879,9 +681,6 @@ need VirtualBox.
 @x
 ## Step 7: Update the application
 @y
-{% comment %}
-## Step 7: Update the application
-{% endcomment %}
 {: #step-7-update-the-application }
 ## ステップ 7: アプリケーションの更新
 @z
@@ -891,11 +690,6 @@ Because the application code is now mounted into the container using a volume,
 you can make changes to its code and see the changes instantly, without having
 to rebuild the image.
 @y
-{% comment %}
-Because the application code is now mounted into the container using a volume,
-you can make changes to its code and see the changes instantly, without having
-to rebuild the image.
-{% endcomment %}
 アプリケーションのコードは、ボリュームを利用してコンテナー内にマウントされたため、コードへの変更とその確認はすぐにできます。
 イメージを再構築することは必要なくなりました。
 @z
@@ -904,10 +698,6 @@ to rebuild the image.
 Change the greeting in `app.py` and save it. For example, change the `Hello World!`
 message to `Hello from Docker!`:
 @y
-{% comment %}
-Change the greeting in `app.py` and save it. For example, change the `Hello World!`
-message to `Hello from Docker!`:
-{% endcomment %}
 `app.py`内のメッセージを変更して保存します。
 たとえば`Hello World!`メッセージを`Hello from Docker!`に変更することにします。
 @z
@@ -926,10 +716,6 @@ return 'Hello from Docker! I have been seen {} times.\n'.format(count)
 Refresh the app in your browser. The greeting should be updated, and the
 counter should still be incrementing.
 @y
-{% comment %}
-Refresh the app in your browser. The greeting should be updated, and the
-counter should still be incrementing.
-{% endcomment %}
 ブラウザーにてアプリを再読み込みします。
 メッセージは更新され、カウンターも加算されているはずです。
 @z
@@ -937,18 +723,12 @@ counter should still be incrementing.
 @x
 ![hello world in browser](images/quick-hello-world-3.png)
 @y
-{% comment %}
-![hello world in browser](images/quick-hello-world-3.png)
-{% endcomment %}
 ![ブラウザー上の hello world](images/quick-hello-world-3.png)
 @z
 
 @x
 ## Step 8: Experiment with some other commands
 @y
-{% comment %}
-## Step 8: Experiment with some other commands
-{% endcomment %}
 {: #step-8-experiment-with-some-other-commands }
 ## ステップ 8: その他のコマンドを試す
 @z
@@ -958,11 +738,6 @@ If you want to run your services in the background, you can pass the `-d` flag
 (for "detached" mode) to `docker-compose up` and use `docker-compose ps` to
 see what is currently running:
 @y
-{% comment %}
-If you want to run your services in the background, you can pass the `-d` flag
-(for "detached" mode) to `docker-compose up` and use `docker-compose ps` to
-see what is currently running:
-{% endcomment %}
 サービスをバックグラウンドで実行したい場合は `docker-compose up` に `-d` フラグ（"デタッチ"モード用のフラグ）をつけます。
 `docker-compose ps` を実行して、現在動いているものを確認します。
 @z
@@ -976,10 +751,10 @@ Starting composetest_web_1...
 
 $ docker-compose ps
 
-Name                 Command            State       Ports
--------------------------------------------------------------------
-composetest_redis_1   /usr/local/bin/run         Up
-composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
+       Name                      Command               State           Ports         
+-------------------------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
+composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
 ```
 @y
 ```console
@@ -990,10 +765,10 @@ Starting composetest_web_1...
 
 $ docker-compose ps
 
-Name                 Command            State       Ports
--------------------------------------------------------------------
-composetest_redis_1   /usr/local/bin/run         Up
-composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
+       Name                      Command               State           Ports         
+-------------------------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
+composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
 ```
 @z
 
@@ -1002,11 +777,6 @@ The `docker-compose run` command allows you to run one-off commands for your
 services. For example, to see what environment variables are available to the
 `web` service:
 @y
-{% comment %}
-The `docker-compose run` command allows you to run one-off commands for your
-services. For example, to see what environment variables are available to the
-`web` service:
-{% endcomment %}
 `docker-compose run` コマンドを使えば、サービスに対してのコマンド実行を行うことができます。
 たとえば `web` サービス上でどのような環境変数が利用可能であるかは、以下のコマンドを実行します。
 @z
@@ -1024,9 +794,6 @@ $ docker-compose run web env
 @x
 See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which also shows you available commands.
 @y
-{% comment %}
-See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which also shows you available commands.
-{% endcomment %}
 `docker-compose --help` を実行すれば、その他のコマンドを確認できます。
 bash や zsh シェルにおいて [コマンド補完](completion.md)をインストールしている場合は、利用可能なコマンドを確認することもできます。
 @z
@@ -1035,10 +802,6 @@ bash や zsh シェルにおいて [コマンド補完](completion.md)をイン�
 If you started Compose with `docker-compose up -d`, stop
 your services once you've finished with them:
 @y
-{% comment %}
-If you started Compose with `docker-compose up -d`, stop
-your services once you've finished with them:
-{% endcomment %}
 `docker-compose up -d` により Compose を起動していた場合は、サービスを停止させるために以下のコマンドを実行します。
 @z
 
@@ -1057,11 +820,6 @@ You can bring everything down, removing the containers entirely, with the `down`
 command. Pass `--volumes` to also remove the data volume used by the Redis
 container:
 @y
-{% comment %}
-You can bring everything down, removing the containers entirely, with the `down`
-command. Pass `--volumes` to also remove the data volume used by the Redis
-container:
-{% endcomment %}
 コンテナーも完全に削除し、すべてを終わらせる場合には `down` コマンドを使います。
 `--volumes` を指定すれば Redis コンテナーにおいて利用されているデータボリュームも削除することができます。
 @z
@@ -1079,18 +837,12 @@ $ docker-compose down --volumes
 @x
 At this point, you have seen the basics of how Compose works.
 @y
-{% comment %}
-At this point, you have seen the basics of how Compose works.
-{% endcomment %}
 ここまで Compose の基本動作について見てきました。
 @z
 
 @x
 ## Where to go next
 @y
-{% comment %}
-## Where to go next
-{% endcomment %}
 {: #where-to-go-next }
 ## 次に読むものは
 @z
@@ -1101,12 +853,6 @@ At this point, you have seen the basics of how Compose works.
 - [Compose configuration file reference](compose-file/index.md)
 - To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)
 @y
-{% comment %}
-- Next, try the [Sample apps with Compose](samples-for-compose.md)
-- [Explore the full list of Compose commands](reference/index.md)
-- [Compose configuration file reference](compose-file/index.md)
-- To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)
-{% endcomment %}
 - 次は [Compose を使ったサンプルアプリ](samples-for-compose.md) を試してみましょう。
 - [Compose コマンドの全一覧](reference/index.md)
 - [Compose ファイルリファレンス](compose-file/index.md)

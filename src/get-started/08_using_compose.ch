@@ -117,13 +117,13 @@ docker-compose version
 @z
 
 @x
-    ```yaml hl_lines="3"
+    ```yaml
     version: "3.7"
 
     services:
     ```
 @y
-    ```yaml{3}
+    ```yaml
     version: "3.7"
 
     services:
@@ -218,7 +218,7 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-    ```yaml hl_lines="4 5"
+    ```yaml
     version: "3.7"
 
     services:
@@ -226,7 +226,7 @@ docker run -dp 3000:3000 `
         image: node:12-alpine
     ```
 @y
-    ```yaml{4,5}
+    ```yaml
     version: "3.7"
 
     services:
@@ -245,7 +245,7 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-    ```yaml hl_lines="6"
+    ```yaml
     version: "3.7"
 
     services:
@@ -254,7 +254,7 @@ docker run -dp 3000:3000 `
         command: sh -c "yarn install && yarn run dev"
     ```
 @y
-    ```yaml{6}
+    ```yaml
     version: "3.7"
 
     services:
@@ -276,7 +276,7 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-    ```yaml hl_lines="7 8"
+    ```yaml
     version: "3.7"
 
     services:
@@ -287,7 +287,7 @@ docker run -dp 3000:3000 `
           - 3000:3000
     ```
 @y
-    ```yaml{7,8}
+    ```yaml
     version: "3.7"
 
     services:
@@ -315,7 +315,7 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-    ```yaml hl_lines="9 10 11"
+    ```yaml
     version: "3.7"
 
     services:
@@ -329,7 +329,7 @@ docker run -dp 3000:3000 `
           - ./:/app
     ```
 @y
-    ```yaml{9,10,11}
+    ```yaml
     version: "3.7"
 
     services:
@@ -352,7 +352,7 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-    ```yaml hl_lines="12 13 14 15 16"
+    ```yaml
     version: "3.7"
 
     services:
@@ -371,7 +371,7 @@ docker run -dp 3000:3000 `
           MYSQL_DB: todos
     ```
 @y
-    ```yaml{12,13,14,15,16}
+    ```yaml
     version: "3.7"
 
     services:
@@ -461,7 +461,7 @@ docker run -d `
 @z
 
 @x
-    ```yaml hl_lines="6 7"
+    ```yaml
     version: "3.7"
 
     services:
@@ -471,7 +471,7 @@ docker run -d `
         image: mysql:5.7
     ```
 @y
-    ```yaml{6,7}
+    ```yaml
     version: "3.7"
 
     services:
@@ -497,7 +497,7 @@ docker run -d `
 @z
 
 @x
-    ```yaml hl_lines="8 9 10 11 12"
+    ```yaml
     version: "3.7"
 
     services:
@@ -512,7 +512,7 @@ docker run -d `
       todo-mysql-data:
     ```
 @y
-    ```yaml{8,9,10,11,12}
+    ```yaml
     version: "3.7"
 
     services:
@@ -535,7 +535,7 @@ docker run -d `
 @z
 
 @x
-    ```yaml hl_lines="10 11 12"
+    ```yaml
     version: "3.7"
 
     services:
@@ -553,7 +553,7 @@ docker run -d `
       todo-mysql-data:
     ```
 @y
-    ```yaml{10,11,12}
+    ```yaml
     version: "3.7"
 
     services:
@@ -840,18 +840,21 @@ for the entire app. The containers will stop and the network will be removed.
 
 @x
 >**Warning** 
+>
 >Removing Volumes
+>
 >By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
 >remove the volumes, you will need to add the `--volumes` flag.
 >
 >The Docker Dashboard does _not_ remove volumes when you delete the app stack.
 @y
+>**警告** 
+>
 >ボリュームの削除
 >
 >Compose ファイル内で定めた名前つきボリュームは、`docker-compose down`を実行してもデフォルトでは削除 **されません**。
 >ボリュームも削除したいなら`--volumes`フラグをつける必要があります。
 >Docker ダッシュボードではアプリを削除してもボリュームは削除 **されません**。
-{:.warning}
 @z
 
 @x

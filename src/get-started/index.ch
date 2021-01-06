@@ -264,24 +264,22 @@ Docker はそういった機能を活用し利用しやすくして動作して�
 @z
 
 @x
-!!! info "Creating Containers from Scratch"
-    If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
-    has a fantastic talk in which she creates a container from scratch in Go. While she makes
-    a simple container, this talk doesn't go into networking, using images for the filesystem, 
-    and more. But, it gives a _fantastic_ deep dive into how things are working.
+> **Creating containers from scratch**
+>
+> If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
+> has a fantastic talk in which she creates a container from scratch in Go. While she makes
+> a simple container, this talk doesn't go into networking, using images for the filesystem, 
+> and more. But, it gives a _fantastic_ deep dive into how things are working.
+> 
+> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 @y
-> 一からコンテナーを生成する
+> **一からコンテナーを生成する**
 >
 > コンテナーがどのようにして一から作り出されているのかを知りたい方は、Aqua Security 社の Liz Rice 氏が、Go 言語をつかって一からコンテナーを作りだすという、すばらしい話を聞かせてくれています。
 > 彼女が作り出しているコンテナーはとても単純なものなので、ネットワークやファイルシステムイメージを利用するような話にまでは及んでいません。
 > しかし何がどのようにして動作しているのかを、実に深く切り込んだ **すばらしい** 話が聞けます。
-{: .information }
-@z
-
-@x
-    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-@y
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>
+> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 @z
 
 @x
@@ -313,15 +311,17 @@ We'll dive deeper into images later on, covering topics such as layering, best p
 @z
 
 @x
-!!! info
-    If you're familiar with `chroot`, think of a container as an extended version of `chroot`. The
-    filesystem is simply coming from the image. But, a container adds additional isolation not
-    available when simply using chroot.
+> **Info**
+> 
+> If you're familiar with `chroot`, think of a container as an extended version of `chroot`. The
+> filesystem is simply coming from the image. But, a container adds additional isolation not
+> available when simply using chroot.
 @y
+> **情報**
+>
 > `chroot`コマンドについてよくわかっている方は、コンテナーが`chroot`の拡張版として動作するものであると考えてください。
 > ファイルシステムは単純にイメージから利用されます。
 > しかしコンテナーでは chroot を利用するだけでは実現できない、追加の分離処理を行います。
-{: .information }
 @z
 
 @x

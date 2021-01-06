@@ -268,13 +268,13 @@ func main() {
 ```python
 import docker
 client = docker.from_env()
-print client.containers.run("alpine", ["echo", "hello", "world"])
+print(client.containers.run("alpine", ["echo", "hello", "world"]))
 ```
 @y
 ```python
 import docker
 client = docker.from_env()
-print client.containers.run("alpine", ["echo", "hello", "world"])
+print(client.containers.run("alpine", ["echo", "hello", "world"]))
 ```
 @z
 
@@ -537,14 +537,14 @@ func main() {
 import docker
 client = docker.from_env()
 container = client.containers.run("bfirsh/reticulate-splines", detach=True)
-print container.id
+print(container.id)
 ```
 @y
 ```python
 import docker
 client = docker.from_env()
 container = client.containers.run("bfirsh/reticulate-splines", detach=True)
-print container.id
+print(container.id)
 ```
 @z
 
@@ -724,14 +724,14 @@ func main() {
 import docker
 client = docker.from_env()
 for container in client.containers.list():
-  print container.id
+  print(container.id)
 ```
 @y
 ```python
 import docker
 client = docker.from_env()
 for container in client.containers.list():
-  print container.id
+  print(container.id)
 ```
 @z
 
@@ -1135,14 +1135,14 @@ func main() {
 import docker
 client = docker.from_env()
 container = client.containers.get('f1064a8a4c82')
-print container.logs()
+print(container.logs())
 ```
 @y
 ```python
 import docker
 client = docker.from_env()
 container = client.containers.get('f1064a8a4c82')
-print container.logs()
+print(container.logs())
 ```
 @z
 
@@ -1315,14 +1315,14 @@ func main() {
 import docker
 client = docker.from_env()
 for image in client.images.list():
-  print image.id
+  print(image.id)
 ```
 @y
 ```python
 import docker
 client = docker.from_env()
 for image in client.images.list():
-  print image.id
+  print(image.id)
 ```
 @z
 
@@ -1502,14 +1502,14 @@ func main() {
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print(image.id)
 ```
 @y
 ```python
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print(image.id)
 ```
 @z
 
@@ -1743,14 +1743,14 @@ Python SDK では、認証情報を [認証情報ストア](/engine/reference/co
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print(image.id)
 ```
 @y
 ```python
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print(image.id)
 ```
 @z
 
@@ -2001,7 +2001,7 @@ client = docker.from_env()
 container = client.containers.run("alpine", ["touch", "/helloworld"], detach=True)
 container.wait()
 image = container.commit("helloworld")
-print image.id
+print(image.id)
 ```
 @y
 ```python
@@ -2010,7 +2010,7 @@ client = docker.from_env()
 container = client.containers.run("alpine", ["touch", "/helloworld"], detach=True)
 container.wait()
 image = container.commit("helloworld")
-print image.id
+print(image.id)
 ```
 @z
 

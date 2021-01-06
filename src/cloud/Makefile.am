@@ -1,4 +1,4 @@
-thisdir    = engine/context
+thisdir    = cloud
 origdir    = @abs_origdir@/$(thisdir)
 srcdir     = @srcdir@
 mysrcdir   = $(shell cd $(srcdir) && pwd)
@@ -13,10 +13,11 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	working-with-contexts
+	aci-integration \
+	ecs-integration
 
-ch_mds = $(bases:=.ch) # ch means change files
-tr_mds = $(bases:=.md) # tr means translated files
+ch_mds = $(bases:=.ch)
+tr_mds = $(bases:=.md)
 EXTRA_DIST = $(ch_mds)
 #DISTCLEANFILES = 
 
@@ -35,23 +36,3 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
 @MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(targetdir)/,$(srcs))
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(targetdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-include $(top_srcdir)/rewriteurls.mk
-
-.PHONY: publishclean
-publishclean:
-	@for f in $(srcs); do rm -f ${publishdir}/$$f; done

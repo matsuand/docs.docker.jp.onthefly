@@ -5,12 +5,16 @@
 ---
 title: "Our Application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
-description: overview of our simple applicaiton for learning docker
+redirect_from:
+- /get-started/part2/
+description: overview of our simple application for learning docker
 ---
 @y
 ---
 title: "アプリケーション作り"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+redirect_from:
+- /get-started/part2/
 description: overview of our simple applicaiton for learning docker
 ---
 @z

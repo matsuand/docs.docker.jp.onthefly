@@ -478,6 +478,7 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
+    ```bash
     docker run -dp 3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \

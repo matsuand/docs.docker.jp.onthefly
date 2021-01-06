@@ -86,7 +86,7 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-1. Validate we can see the output by `exec`'ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
+1. Validate we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
 @y
 1. コンテナー内で`exec`を実行し、その結果を確認します。
    これを行うにはダッシュボードを開いて、`ubuntu`イメージを起動させているコンテナーの 1 つめの動作をクリックします。
@@ -94,9 +94,8 @@ What you'll see is that the files created in one container aren't available in a
 
 @x
     ![Dashboard open CLI into ubuntu container](images/dashboard-open-cli-ubuntu.png){: style=width:75% }
-{: .text-center }
 @y
-    ![ダッシュボードでの ubuntu コンテナーに対する CLI オープン](images/dashboard-open-cli-ubuntu.png){: style=width:75% }{: .text-center }
+    ![ダッシュボードでの ubuntu コンテナーに対する CLI オープン](images/dashboard-open-cli-ubuntu.png){: style=width:75% }
 @z
 
 @x

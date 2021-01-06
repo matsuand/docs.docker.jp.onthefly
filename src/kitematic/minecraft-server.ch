@@ -102,9 +102,9 @@ to.
 @z
 
 @x
-![Add server](images/minecraft-login.png)
+![Add server](images/minecraft-add-server.png)
 @y
-![Add server](images/minecraft-login.png)
+![Add server](images/minecraft-add-server.png)
 @z
 
 @x

@@ -155,7 +155,7 @@ abs_sitedestdir=`(cd $SITEDESTDIR && pwd)`
 AC_SUBST(abs_sitedestdir)
 
 AC_ARG_ENABLE(production,
-[AC_HELP_STRING([--enable-production],[Specify production build])],
+[AS_HELP_STRING([--enable-production],[Specify production build])],
 enable_production=$enableval, enable_production=no)
 AC_SUBST(enable_production)
 

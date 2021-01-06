@@ -18,6 +18,96 @@ skip_read_time: true
 @z
 
 @x
+## 19.03.14
+2020-12-01
+@y
+## 19.03.14
+2020-12-01
+@z
+
+@x
+### Security
+@y
+### Security
+@z
+
+@x
+- [CVE-2020-15257](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15257):
+  Update bundled static binaries of containerd to v1.3.9 [moby/moby#41731](https://github.com/moby/moby/pull/41731).
+  Package managers should update the containerd.io package.
+@y
+- [CVE-2020-15257](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15257):
+  Update bundled static binaries of containerd to v1.3.9 [moby/moby#41731](https://github.com/moby/moby/pull/41731).
+  Package managers should update the containerd.io package.
+@z
+
+@x
+### Builder
+@y
+### Builder
+@z
+
+@x
+- Beta versions of apparmor are now parsed correctly preventing build failures [moby/moby#41542](https://github.com/moby/moby/pull/41542)
+@y
+- Beta versions of apparmor are now parsed correctly preventing build failures [moby/moby#41542](https://github.com/moby/moby/pull/41542)
+@z
+
+@x
+### Networking
+@y
+{: #networking }
+### ネットワーク
+@z
+
+@x
+- Fix panic when swarmkit service keeps failing to start [moby/moby#41635](https://github.com/moby/moby/pull/41635)
+@y
+- Fix panic when swarmkit service keeps failing to start [moby/moby#41635](https://github.com/moby/moby/pull/41635)
+@z
+
+@x
+### Runtime
+@y
+{: #runtime }
+### ランタイム
+@z
+
+@x
+- Return correct errors instead of spurrious -EINVAL [moby/moby#41293](https://github.com/moby/moby/pull/41293)
+@y
+- Return correct errors instead of spurrious -EINVAL [moby/moby#41293](https://github.com/moby/moby/pull/41293)
+@z
+
+@x
+### Rootless
+@y
+### Rootless
+@z
+
+@x
+- Lock state dir for preventing automatic clean-up by systemd-tmpfiles [moby/moby#41635](https://github.com/moby/moby/pull/41635)
+- dockerd-rootless.sh: support new containerd shim socket path convention [moby/moby#41557](https://github.com/moby/moby/pull/41557)
+@y
+- Lock state dir for preventing automatic clean-up by systemd-tmpfiles [moby/moby#41635](https://github.com/moby/moby/pull/41635)
+- dockerd-rootless.sh: support new containerd shim socket path convention [moby/moby#41557](https://github.com/moby/moby/pull/41557)
+@z
+
+@x
+### Logging
+@y
+### Logging
+@z
+
+@x
+- gcplogs: Fix memory/connection leak [moby/moby#41522](https://github.com/moby/moby/pull/41522)
+- awslogs: Support for AWS imdsv2 [moby/moby#41494](https://github.com/moby/moby/pull/41494)
+@y
+- gcplogs: Fix memory/connection leak [moby/moby#41522](https://github.com/moby/moby/pull/41522)
+- awslogs: Support for AWS imdsv2 [moby/moby#41494](https://github.com/moby/moby/pull/41494)
+@z
+
+@x
 ## 19.03.13
 2020-09-16
 @y
@@ -38,13 +128,6 @@ skip_read_time: true
 - buildkit: Make `--cache-from` behavior more reliable [moby/moby#41222](https://github.com/moby/moby/pull/41222)
 - buildkit: Fix infinite loop burning CPU when exporting cache [moby/moby#41185](https://github.com/moby/moby/pull/41185)
 @y
-{% comment %}
-- buildkit: Fix nil dereference in cache logic [moby/moby#41279](https://github.com/moby/moby/pull/41279)
-- buildkit: Treat Unix sockets as regular files during COPY/ADD [moby/moby#41269](https://github.com/moby/moby/pull/41269)
-- buildkit: Ignore system and security xattrs in calculation to ensure consistent COPY caching regardless of SELinux environment [moby/moby#41222](https://github.com/moby/moby/pull/41222)
-- buildkit: Make `--cache-from` behavior more reliable [moby/moby#41222](https://github.com/moby/moby/pull/41222)
-- buildkit: Fix infinite loop burning CPU when exporting cache [moby/moby#41185](https://github.com/moby/moby/pull/41185)
-{% endcomment %}
 - buildkit: キャッシュロジックにおける nil 参照を修正しました。
   [moby/moby#41279](https://github.com/moby/moby/pull/41279)
 - buildkit: COPY/ADD の処理中は Unix ソケットを通常ファイルとして取り扱います。
@@ -60,9 +143,6 @@ skip_read_time: true
 @x
 ### Client
 @y
-{% comment %}
-### Client
-{% endcomment %}
 {: #client }
 ### クライアント
 @z
@@ -73,12 +153,6 @@ skip_read_time: true
 - build: Fix panic on terminals with zero height [docker/cli#2719](https://github.com/docker/cli/pull/2719)
 - windows: Fix potential issue with newline character in console [docker/cli#2623](https://github.com/docker/cli/pull/2623)
 @y
-{% comment %}
-- Bump Golang 1.13.15 [docker/cli#2674](https://github.com/docker/cli/pull/2674)
-- Fix config file permission issues (~/.docker/config.json) [docker/cli#2631](https://github.com/docker/cli/pull/2631)
-- build: Fix panic on terminals with zero height [docker/cli#2719](https://github.com/docker/cli/pull/2719)
-- windows: Fix potential issue with newline character in console [docker/cli#2623](https://github.com/docker/cli/pull/2623)
-{% endcomment %}
 - Golang 1.13.15 へのアップデート。
   [docker/cli#2674](https://github.com/docker/cli/pull/2674)
 - 設定ファイル（~/.docker/config.json）のパーミッション問題を修正しました。
@@ -92,9 +166,6 @@ skip_read_time: true
 @x
 ### Networking
 @y
-{% comment %}
-### Networking
-{% endcomment %}
 {: #networking }
 ### ネットワーク
 @z
@@ -104,11 +175,6 @@ skip_read_time: true
 - Fix shallow error messages by forwarding deadline-related errors to user [moby/moby#41312](https://github.com/moby/moby/pull/41312)
 - Fix leaking of netns file descriptors [moby/moby#41287](https://github.com/moby/moby/41287)
 @y
-{% comment %}
-- Clean up network sandbox on failure [moby/moby#41081](https://github.com/moby/moby/pull/41081)
-- Fix shallow error messages by forwarding deadline-related errors to user [moby/moby#41312](https://github.com/moby/moby/pull/41312)
-- Fix leaking of netns file descriptors [moby/moby#41287](https://github.com/moby/moby/41287)
-{% endcomment %}
 - 処理失敗時にネットワークサンドボックスを削除しました。
   [moby/moby#41081](https://github.com/moby/moby/pull/41081)
 - deadline に関するエラーをユーザーにフォワードすることによって、情報量の少ないエラーメッセージを修正しました。
@@ -126,9 +192,6 @@ skip_read_time: true
 @x
 - Fix port forwarder resource leak [moby/moby#41277](https://github.com/moby/moby/pull/41277)
 @y
-{% comment %}
-- Fix port forwarder resource leak [moby/moby#41277](https://github.com/moby/moby/pull/41277)
-{% endcomment %}
 - port forwarder のリソースリークを修正しました。
   [moby/moby#41277](https://github.com/moby/moby/pull/41277)
 @z
@@ -136,9 +199,6 @@ skip_read_time: true
 @x
 ### Runtime
 @y
-{% comment %}
-### Runtime
-{% endcomment %}
 {: #runtime }
 ### ランタイム
 @z
@@ -147,10 +207,6 @@ skip_read_time: true
 - Bump Golang 1.13.15 [moby/moby#41334](https://github.com/moby/moby/pull/41334)
 - Update to containerd 1.3.7 [moby/moby#40408](https://github.com/moby/moby/pull/40408)
 @y
-{% comment %}
-- Bump Golang 1.13.15 [moby/moby#41334](https://github.com/moby/moby/pull/41334)
-- Update to containerd 1.3.7 [moby/moby#40408](https://github.com/moby/moby/pull/40408)
-{% endcomment %}
 - Golang 1.13.15 へのアップデート。
   [moby/moby#41334](https://github.com/moby/moby/pull/41334)
 - containerd 1.3.7 へのアップデート。
@@ -166,9 +222,6 @@ skip_read_time: true
 @x
 - Fix slow Windows container start time when using servercore image [moby/moby#41192](https://github.com/moby/moby/pull/41192)
 @y
-{% comment %}
-- Fix slow Windows container start time when using servercore image [moby/moby#41192](https://github.com/moby/moby/pull/41192)
-{% endcomment %}
 - servercore イメージ利用時に、Windows コンテナーの起動が遅くなることを修正しました。
   [moby/moby#41192](https://github.com/moby/moby/pull/41192)
 @z
@@ -184,10 +237,7 @@ skip_read_time: true
 @x
 ### Client
 @y
-{% comment %}
-### Client
-{% endcomment %}
-{: #client-1 }
+{: #client }
 ### クライアント
 @z
 
@@ -204,9 +254,6 @@ skip_read_time: true
 @x
 ### Networking
 @y
-{% comment %}
-### Networking
-{% endcomment %}
 {: #networking-1 }
 ### ネットワーク
 @z
@@ -215,10 +262,6 @@ skip_read_time: true
 - Fix regression preventing daemon start up in a systemd-nspawn environment [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2567](https://github.com/moby/libnetwork/pull/2567)
 - Fix the retry logic for creating overlay networks in swarm [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2565](https://github.com/moby/libnetwork/pull/2565)
 @y
-{% comment %}
-- Fix regression preventing daemon start up in a systemd-nspawn environment [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2567](https://github.com/moby/libnetwork/pull/2567)
-- Fix the retry logic for creating overlay networks in swarm [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2565](https://github.com/moby/libnetwork/pull/2565)
-{% endcomment %}
 - Fix regression preventing daemon start up in a systemd-nspawn environment [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2567](https://github.com/moby/libnetwork/pull/2567)
 - Fix the retry logic for creating overlay networks in swarm [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2565](https://github.com/moby/libnetwork/pull/2565)
 @z
@@ -226,19 +269,13 @@ skip_read_time: true
 @x
 ### Runtime
 @y
-{% comment %}
-### Runtime
-{% endcomment %}
-{: #runtime-1 }
+{: #runtime }
 ### ランタイム
 @z
 
 @x
 - Bump Golang 1.13.12 [moby/moby#41082](https://github.com/moby/moby/pull/41082)
 @y
-{% comment %}
-- Bump Golang 1.13.12 [moby/moby#41082](https://github.com/moby/moby/pull/41082)
-{% endcomment %}
 - Bump Golang 1.13.12 [moby/moby#41082](https://github.com/moby/moby/pull/41082)
 @z
 
@@ -253,9 +290,6 @@ skip_read_time: true
 @x
 ### Network
 @y
-{% comment %}
-### Network
-{% endcomment %}
 {: #network }
 ### ネットワーク
 @z
@@ -263,9 +297,6 @@ skip_read_time: true
 @x
 Disable IPv6 Router Advertisements to prevent address spoofing. [CVE-2020-13401](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13401)
 @y
-{% comment %}
-Disable IPv6 Router Advertisements to prevent address spoofing. [CVE-2020-13401](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13401)
-{% endcomment %}
 アドレススプーフィングを防止するため、IPv6 ルーター広告（Router Advertisements）を無効にする。
 [CVE-2020-13401](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13401)
 @z
@@ -273,9 +304,6 @@ Disable IPv6 Router Advertisements to prevent address spoofing. [CVE-2020-13401]
 @x
 **Description**
 @y
-{% comment %}
-**Description**
-{% endcomment %}
 **内容説明**
 @z
 
@@ -283,10 +311,6 @@ Disable IPv6 Router Advertisements to prevent address spoofing. [CVE-2020-13401]
 In the Docker default configuration, the container network interface is a virtual ethernet link going to the host (veth interface).
 In this configuration, an attacker able to run a process as root in a container can send and receive arbitrary packets to the host using the `CAP_NET_RAW` capability (present in the default configuration).
 @y
-{% comment %}
-In the Docker default configuration, the container network interface is a virtual ethernet link going to the host (veth interface).
-In this configuration, an attacker able to run a process as root in a container can send and receive arbitrary packets to the host using the `CAP_NET_RAW` capability (present in the default configuration).
-{% endcomment %}
 In the Docker default configuration, the container network interface is a virtual ethernet link going to the host (veth interface).
 In this configuration, an attacker able to run a process as root in a container can send and receive arbitrary packets to the host using the `CAP_NET_RAW` capability (present in the default configuration).
 @z
@@ -294,18 +318,12 @@ In this configuration, an attacker able to run a process as root in a container 
 @x
 If IPv6 is not totally disabled on the host (via `ipv6.disable=1` on the kernel cmdline), it will be either unconfigured or configured on some interfaces, but it’s pretty likely that ipv6 forwarding is disabled, that is, `/proc/sys/net/ipv6/conf//forwarding == 0`. Also by default, `/proc/sys/net/ipv6/conf//accept_ra == 1`. The combination of these 2 sysctls means that the host accepts router advertisements and configures the IPv6 stack using them.
 @y
-{% comment %}
-If IPv6 is not totally disabled on the host (via `ipv6.disable=1` on the kernel cmdline), it will be either unconfigured or configured on some interfaces, but it’s pretty likely that ipv6 forwarding is disabled, that is, `/proc/sys/net/ipv6/conf//forwarding == 0`. Also by default, `/proc/sys/net/ipv6/conf//accept_ra == 1`. The combination of these 2 sysctls means that the host accepts router advertisements and configures the IPv6 stack using them.
-{% endcomment %}
 If IPv6 is not totally disabled on the host (via `ipv6.disable=1` on the kernel cmdline), it will be either unconfigured or configured on some interfaces, but it’s pretty likely that ipv6 forwarding is disabled, that is, `/proc/sys/net/ipv6/conf//forwarding == 0`. Also by default, `/proc/sys/net/ipv6/conf//accept_ra == 1`. The combination of these 2 sysctls means that the host accepts router advertisements and configures the IPv6 stack using them.
 @z
 
 @x
 By sending “rogue” router advertisements from a container, an attacker can reconfigure the host to redirect part or all of the IPv6 traffic of the host to the attacker-controlled container.
 @y
-{% comment %}
-By sending “rogue” router advertisements from a container, an attacker can reconfigure the host to redirect part or all of the IPv6 traffic of the host to the attacker-controlled container.
-{% endcomment %}
 By sending “rogue” router advertisements from a container, an attacker can reconfigure the host to redirect part or all of the IPv6 traffic of the host to the attacker-controlled container.
 @z
 
@@ -313,10 +331,6 @@ By sending “rogue” router advertisements from a container, an attacker can r
 Even if there was no IPv6 traffic before, if the DNS returns A (IPv4) and AAAA (IPv6) records, many HTTP libraries will try to connect via IPv6 first then fallback to IPv4, giving an opportunity to the attacker to respond.
 If by chance the host has a vulnerability like last year’s RCE in apt (CVE-2019-3462), the attacker can now escalate to the host.
 @y
-{% comment %}
-Even if there was no IPv6 traffic before, if the DNS returns A (IPv4) and AAAA (IPv6) records, many HTTP libraries will try to connect via IPv6 first then fallback to IPv4, giving an opportunity to the attacker to respond.
-If by chance the host has a vulnerability like last year’s RCE in apt (CVE-2019-3462), the attacker can now escalate to the host.
-{% endcomment %}
 Even if there was no IPv6 traffic before, if the DNS returns A (IPv4) and AAAA (IPv6) records, many HTTP libraries will try to connect via IPv6 first then fallback to IPv4, giving an opportunity to the attacker to respond.
 If by chance the host has a vulnerability like last year’s RCE in apt (CVE-2019-3462), the attacker can now escalate to the host.
 @z
@@ -325,10 +339,6 @@ If by chance the host has a vulnerability like last year’s RCE in apt (CVE-201
 As `CAP_NET_ADMIN` is not present by default for Docker containers, the attacker can’t configure the IPs they want to MitM, they can’t use iptables to NAT or REDIRECT the traffic, and they can’t use `IP_TRANSPARENT`.
 The attacker can however still use `CAP_NET_RAW` and implement a tcp/ip stack in user space.
 @y
-{% comment %}
-As `CAP_NET_ADMIN` is not present by default for Docker containers, the attacker can’t configure the IPs they want to MitM, they can’t use iptables to NAT or REDIRECT the traffic, and they can’t use `IP_TRANSPARENT`.
-The attacker can however still use `CAP_NET_RAW` and implement a tcp/ip stack in user space.
-{% endcomment %}
 As `CAP_NET_ADMIN` is not present by default for Docker containers, the attacker can’t configure the IPs they want to MitM, they can’t use iptables to NAT or REDIRECT the traffic, and they can’t use `IP_TRANSPARENT`.
 The attacker can however still use `CAP_NET_RAW` and implement a tcp/ip stack in user space.
 @z
@@ -336,9 +346,6 @@ The attacker can however still use `CAP_NET_RAW` and implement a tcp/ip stack in
 @x
 See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issues/91507) for related issues.
 @y
-{% comment %}
-See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issues/91507) for related issues.
-{% endcomment %}
 See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issues/91507) for related issues.
 @z
 
@@ -353,10 +360,7 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Client
 @y
-{% comment %}
-### Client
-{% endcomment %}
-{: #client-2 }
+{: #client }
 ### クライアント
 @z
 
@@ -366,12 +370,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Fix panic when DOCKER_CLI_EXPERIMENTAL is invalid. [docker/cli#2558](https://github.com/docker/cli/pull/2558)
 - Avoid potential panic on s390x by upgrading Go to 1.13.11. [docker/cli#2532](https://github.com/docker/cli/pull/2532)
 @y
-{% comment %}
-- Fix version negotiation with older engine. [docker/cli#2538](https://github.com/docker/cli/pull/2538)
-- Avoid setting SSH flags through hostname. [docker/cli#2560](https://github.com/docker/cli/pull/2560)
-- Fix panic when DOCKER_CLI_EXPERIMENTAL is invalid. [docker/cli#2558](https://github.com/docker/cli/pull/2558)
-- Avoid potential panic on s390x by upgrading Go to 1.13.11. [docker/cli#2532](https://github.com/docker/cli/pull/2532)
-{% endcomment %}
 - Fix version negotiation with older engine. [docker/cli#2538](https://github.com/docker/cli/pull/2538)
 - Avoid setting SSH flags through hostname. [docker/cli#2560](https://github.com/docker/cli/pull/2560)
 - DOCKER_CLI_EXPERIMENTAL が不適切な場合の panic エラーを修正。[docker/cli#2558](https://github.com/docker/cli/pull/2558)
@@ -387,9 +385,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 - Fix DNS fallback regression. [moby/moby#41009](https://github.com/moby/moby/pull/41009)
 @y
-{% comment %}
-- Fix DNS fallback regression. [moby/moby#41009](https://github.com/moby/moby/pull/41009)
-{% endcomment %}
 - Fix DNS fallback regression. [moby/moby#41009](https://github.com/moby/moby/pull/41009)
 @z
 
@@ -402,8 +397,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 - Avoid potential panic on s390x by upgrading Go to 1.13.11. [moby/moby#40978](https://github.com/moby/moby/pull/40978)
 @y
-{% comment %}
-{% endcomment %}
 - Avoid potential panic on s390x by upgrading Go to 1.13.11. [moby/moby#40978](https://github.com/moby/moby/pull/40978)
 @z
 
@@ -416,8 +409,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 - Fix ARM builds on ARM64. [moby/moby#41027](https://github.com/moby/moby/pull/41027)
 @y
-{% comment %}
-{% endcomment %}
 - Fix ARM builds on ARM64. [moby/moby#41027](https://github.com/moby/moby/pull/41027)
 @z
 
@@ -440,8 +431,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - buildkit: Fix issue preventing chowning of non-root-owned files between stages with userns. [moby/moby#40955](https://github.com/moby/moby/pull/40955)
 - Avoid creation of irrelevant temporary files on Windows. [moby/moby#40877](https://github.com/moby/moby/pull/40877)
 @y
-{% comment %}
-{% endcomment %}
 - buildkit: Fix concurrent map write panic when building multiple images in parallel. [moby/moby#40780](https://github.com/moby/moby/pull/40780)
 - buildkit: Fix issue preventing chowning of non-root-owned files between stages with userns. [moby/moby#40955](https://github.com/moby/moby/pull/40955)
 - Avoid creation of irrelevant temporary files on Windows. [moby/moby#40877](https://github.com/moby/moby/pull/40877)
@@ -460,8 +449,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Bump Golang 1.13.10. [docker/cli#2431](https://github.com/docker/cli/pull/2431)
 - Bump gopkg.in/yaml.v2 to v2.2.8. [docker/cli#2470](https://github.com/docker/cli/pull/2470)
 @y
-{% comment %}
-{% endcomment %}
 - Fix panic on single-character volumes. [docker/cli#2471](https://github.com/docker/cli/pull/2471)
 - Lazy daemon feature detection to avoid long timeouts on simple commands. [docker/cli#2442](https://github.com/docker/cli/pull/2442)
 - docker context inspect on Windows is now faster. [docker/cli#2516](https://github.com/docker/cli/pull/2516)
@@ -478,8 +465,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 - Avoid situation preventing container logs to rotate due to closing a closed log file. [moby/moby#40921](https://github.com/moby/moby/pull/40921)
 @y
-{% comment %}
-{% endcomment %}
 - Avoid situation preventing container logs to rotate due to closing a closed log file. [moby/moby#40921](https://github.com/moby/moby/pull/40921)
 @z
 
@@ -493,8 +478,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Fix potential panic upon restart. [moby/moby#40809](https://github.com/moby/moby/pull/40809)
 - Assign the correct network value to the default bridge Subnet field. [moby/moby#40565](https://github.com/moby/moby/pull/40565)
 @y
-{% comment %}
-{% endcomment %}
 - Fix potential panic upon restart. [moby/moby#40809](https://github.com/moby/moby/pull/40809)
 - Assign the correct network value to the default bridge Subnet field. [moby/moby#40565](https://github.com/moby/moby/pull/40565)
 @z
@@ -514,8 +497,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Use FILE_SHARE_DELETE for log files on Windows. [moby/moby#40563](https://github.com/moby/moby/pull/40563)
 - Bump Golang 1.13.10. [moby/moby#40803](https://github.com/moby/moby/pull/40803)
 @y
-{% comment %}
-{% endcomment %}
 - Fix docker crash when creating namespaces with UID in /etc/subuid and /etc/subgid. [moby/moby#40562](https://github.com/moby/moby/pull/40562)
 - Improve ARM platform matching. [moby/moby#40758](https://github.com/moby/moby/pull/40758)
 - overlay2: show backing filesystem. [moby/moby#40652](https://github.com/moby/moby/pull/40652)
@@ -535,8 +516,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Now rootlesskit-docker-proxy returns detailed error message on exposing privileged ports. [moby/moby#40863](https://github.com/moby/moby/pull/40863)
 - Supports numeric ID in /etc/subuid and /etc/subgid. [moby/moby#40951](https://github.com/moby/moby/pull/40951)
 @y
-{% comment %}
-{% endcomment %}
 - Now rootlesskit-docker-proxy returns detailed error message on exposing privileged ports. [moby/moby#40863](https://github.com/moby/moby/pull/40863)
 - Supports numeric ID in /etc/subuid and /etc/subgid. [moby/moby#40951](https://github.com/moby/moby/pull/40951)
 @z
@@ -551,8 +530,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - apparmor: add missing rules for userns. [moby/moby#40564](https://github.com/moby/moby/pull/40564)
 - SElinux: fix ENOTSUP errors not being detected when relabeling. [moby/moby#40946](https://github.com/moby/moby/pull/40946)
 @y
-{% comment %}
-{% endcomment %}
 - apparmor: add missing rules for userns. [moby/moby#40564](https://github.com/moby/moby/pull/40564)
 - SElinux: fix ENOTSUP errors not being detected when relabeling. [moby/moby#40946](https://github.com/moby/moby/pull/40946)
 @z
@@ -568,8 +545,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Fix issue where single swarm manager is stuck in Down state after reboot. [moby/moby#40831](https://github.com/moby/moby/pull/40831)
 - tasks.db no longer grows indefinitely. [moby/moby#40831](https://github.com/moby/moby/pull/40831)
 @y
-{% comment %}
-{% endcomment %}
 - Increase refill rate for logger to avoid hanging on service logs. [moby/moby#40628](https://github.com/moby/moby/pull/40628)
 - Fix issue where single swarm manager is stuck in Down state after reboot. [moby/moby#40831](https://github.com/moby/moby/pull/40831)
 - tasks.db no longer grows indefinitely. [moby/moby#40831](https://github.com/moby/moby/pull/40831)
@@ -586,16 +561,12 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Runtime
 @y
-{% comment %}
-{% endcomment %}
 ### Runtime
 @z
 
 @x
 - Improve mitigation for [CVE-2019-14271](https://nvd.nist.gov/vuln/detail/CVE-2019-14271) for some nscd configuration.
 @y
-{% comment %}
-{% endcomment %}
 - Improve mitigation for [CVE-2019-14271](https://nvd.nist.gov/vuln/detail/CVE-2019-14271) for some nscd configuration.
 @z
 
@@ -610,24 +581,18 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Builder
 @y
-{% comment %}
-{% endcomment %}
 ### Builder
 @z
 
 @x
 - builder-next: Fix deadlock issues in corner cases. [moby/moby#40557](https://github.com/moby/moby/pull/40557)
 @y
-{% comment %}
-{% endcomment %}
 - builder-next: Fix deadlock issues in corner cases. [moby/moby#40557](https://github.com/moby/moby/pull/40557)
 @z
 
 @x
 ### Runtime
 @y
-{% comment %}
-{% endcomment %}
 ### Runtime
 @z
 
@@ -642,8 +607,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Prevent showing stopped containers as running in an edge case. [moby/moby#40555](https://github.com/moby/moby/pull/40555)
 - Prevent potential lock. [moby/moby#40604](https://github.com/moby/moby/pull/40604)
 @y
-{% comment %}
-{% endcomment %}
 * overlay: remove modprobe execs. [moby/moby#40462](https://github.com/moby/moby/pull/40462)
 * selinux: display better error messages when setting file labels. [moby/moby#40547](https://github.com/moby/moby/pull/40547)
 * Speed up initial stats collection. [moby/moby#40549](https://github.com/moby/moby/pull/40549)
@@ -658,8 +621,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Client
 @y
-{% comment %}
-{% endcomment %}
 ### Client
 @z
 
@@ -667,8 +628,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Bump Golang 1.12.17. [docker/cli#2342](https://github.com/docker/cli/pull/2342)
 - Bump google.golang.org/grpc to v1.23.1. [docker/cli#1884](https://github.com/docker/cli/pull/1884) [docker/cli#2373](https://github.com/docker/cli/pull/2373)
 @y
-{% comment %}
-{% endcomment %}
 - Bump Golang 1.12.17. [docker/cli#2342](https://github.com/docker/cli/pull/2342)
 - Bump google.golang.org/grpc to v1.23.1. [docker/cli#1884](https://github.com/docker/cli/pull/1884) [docker/cli#2373](https://github.com/docker/cli/pull/2373)
 @z
@@ -684,8 +643,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Builder
 @y
-{% comment %}
-{% endcomment %}
 ### Builder
 @z
 
@@ -695,8 +652,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - builder-next: Fix issue with directory permissions when usernamespaces is enabled. [moby/moby#40440](https://github.com/moby/moby/pull/40440)
 - Bump hcsshim to fix docker build failing on Windows 1903. [docker/engine#429](https://github.com/docker/engine/pull/429)
 @y
-{% comment %}
-{% endcomment %}
 - builder-next: Allow modern sign hashes for ssh forwarding. [docker/engine#453](https://github.com/docker/engine/pull/453)
 - builder-next: Clear onbuild rules after triggering. [docker/engine#453](https://github.com/docker/engine/pull/453)
 - builder-next: Fix issue with directory permissions when usernamespaces is enabled. [moby/moby#40440](https://github.com/moby/moby/pull/40440)
@@ -706,8 +661,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Networking
 @y
-{% comment %}
-{% endcomment %}
 ### Networking
 @z
 
@@ -716,8 +669,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Fix panic in drivers/overlay/encryption.go. [docker/engine#424](https://github.com/docker/engine/pull/424)
 - Fix hwaddr set race between us and udev. [docker/engine#439](https://github.com/docker/engine/pull/439)
 @y
-{% comment %}
-{% endcomment %}
 - Shorten controller ID in exec-root to not hit UNIX_PATH_MAX. [docker/engine#424](https://github.com/docker/engine/pull/424)
 - Fix panic in drivers/overlay/encryption.go. [docker/engine#424](https://github.com/docker/engine/pull/424)
 - Fix hwaddr set race between us and udev. [docker/engine#439](https://github.com/docker/engine/pull/439)
@@ -726,8 +677,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Runtime
 @y
-{% comment %}
-{% endcomment %}
 ### Runtime
 @z
 
@@ -738,8 +687,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 - Fix possible runtime panic in Lgetxattr. [docker/engine#454](https://github.com/docker/engine/pull/454)
 - rootless: fix proxying UDP packets. [docker/engine#434](https://github.com/docker/engine/pull/434)
 @y
-{% comment %}
-{% endcomment %}
 * Bump Golang 1.12.16. [moby/moby#40433](https://github.com/moby/moby/pull/40433)
 * Update containerd binary to v1.2.12. [moby/moby#40433](https://github.com/moby/moby/pull/40453)
 * Update to runc v1.0.0-rc10. [moby/moby#40433](https://github.com/moby/moby/pull/40453)
@@ -758,8 +705,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Builder
 @y
-{% comment %}
-{% endcomment %}
 ### Builder
 @z
 
@@ -768,8 +713,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 * Fix builder-next: permission errors on using build secrets or ssh forwarding with userns-remap. [docker/engine#420](https://github.com/docker/engine/pull/420)
 * Fix builder-next: copying a symlink inside an already copied directory. [docker/engine#420](https://github.com/docker/engine/pull/420)
 @y
-{% comment %}
-{% endcomment %}
 * builder-next: Added `entitlements` in builder config. [docker/engine#412](https://github.com/docker/engine/pull/412)
 * Fix builder-next: permission errors on using build secrets or ssh forwarding with userns-remap. [docker/engine#420](https://github.com/docker/engine/pull/420)
 * Fix builder-next: copying a symlink inside an already copied directory. [docker/engine#420](https://github.com/docker/engine/pull/420)
@@ -778,24 +721,18 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Packaging
 @y
-{% comment %}
-{% endcomment %}
 ### Packaging
 @z
 
 @x
 * Support RHEL 8 packages
 @y
-{% comment %}
-{% endcomment %}
 * Support RHEL 8 packages
 @z
 
 @x
 ### Runtime
 @y
-{% comment %}
-{% endcomment %}
 ### Runtime
 @z
 
@@ -805,8 +742,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 * Fix to propagate GetContainer error from event processor. [docker/engine#407](https://github.com/docker/engine/pull/407)
 * Fix push of OCI image. [docker/engine#405](https://github.com/docker/engine/pull/405)
 @y
-{% comment %}
-{% endcomment %}
 * Bump Golang to 1.12.12. [docker/engine#418](https://github.com/docker/engine/pull/418)
 * Update to RootlessKit to v0.7.0 to harden slirp4netns with mount namespace and seccomp. [docker/engine#397](https://github.com/docker/engine/pull/397)
 * Fix to propagate GetContainer error from event processor. [docker/engine#407](https://github.com/docker/engine/pull/407)
@@ -824,32 +759,24 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Networking
 @y
-{% comment %}
-{% endcomment %}
 ### Networking
 @z
 
 @x
 * Rollback libnetwork changes to fix `DOCKER-USER` iptables chain issue. [docker/engine#404](https://github.com/docker/engine/pull/404)
 @y
-{% comment %}
-{% endcomment %}
 * Rollback libnetwork changes to fix `DOCKER-USER` iptables chain issue. [docker/engine#404](https://github.com/docker/engine/pull/404)
 @z
 
 @x
 ### Known Issues
 @y
-{% comment %}
-{% endcomment %}
 ### Known Issues
 @z
 
 @x
 #### Existing
 @y
-{% comment %}
-{% endcomment %}
 #### Existing
 @z
 
@@ -865,8 +792,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
 @y
-{% comment %}
-{% endcomment %}
 * In some circumstances with large clusters, Docker information might, as part of the Swarm section,
   include the error `code = ResourceExhausted desc = grpc: received message larger than
   max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
@@ -890,192 +815,144 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Security
 @y
-{% comment %}
-{% endcomment %}
 ### Security
 @z
 
 @x
 * Patched `runc` in containerd. [CVE-2017-18367](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18367)
 @y
-{% comment %}
-{% endcomment %}
 * Patched `runc` in containerd. [CVE-2017-18367](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-18367)
 @z
 
 @x
 ### Builder
 @y
-{% comment %}
-{% endcomment %}
 ### Builder
 @z
 
 @x
 * Fix builder-next: resolve digest for third party registries. [docker/engine#339](https://github.com/docker/engine/pull/339)
 @y
-{% comment %}
-{% endcomment %}
 * Fix builder-next: resolve digest for third party registries. [docker/engine#339](https://github.com/docker/engine/pull/339)
 @z
 
 @x
 * Fix builder-next: user namespace builds when daemon started with socket activation. [docker/engine#373](https://github.com/docker/engine/pull/373)
 @y
-{% comment %}
-{% endcomment %}
 * Fix builder-next: user namespace builds when daemon started with socket activation. [docker/engine#373](https://github.com/docker/engine/pull/373)
 @z
 
 @x
 * Fix builder-next; session: release forwarded ssh socket connection per connection. [docker/engine#373](https://github.com/docker/engine/pull/373)
 @y
-{% comment %}
-{% endcomment %}
 * Fix builder-next; session: release forwarded ssh socket connection per connection. [docker/engine#373](https://github.com/docker/engine/pull/373)
 @z
 
 @x
 * Fix build-next: llbsolver: error on multiple cache importers. [docker/engine#373](https://github.com/docker/engine/pull/373)
 @y
-{% comment %}
-{% endcomment %}
 * Fix build-next: llbsolver: error on multiple cache importers. [docker/engine#373](https://github.com/docker/engine/pull/373)
 @z
 
 @x
 ### Client
 @y
-{% comment %}
-{% endcomment %}
 ### Client
 @z
 
 @x
 * Added support for Docker Template 0.1.6.
 @y
-{% comment %}
-{% endcomment %}
 * Added support for Docker Template 0.1.6.
 @z
 
 @x
 * Mitigate against YAML files that have excessive aliasing. [docker/cli#2119](https://github.com/docker/cli/pull/2119)
 @y
-{% comment %}
-{% endcomment %}
 * Mitigate against YAML files that have excessive aliasing. [docker/cli#2119](https://github.com/docker/cli/pull/2119)
 @z
 
 @x
 ### Runtime
 @y
-{% comment %}
-{% endcomment %}
 ### Runtime
 @z
 
 @x
 * Bump Golang to 1.12.10. [docker/engine#387](https://github.com/docker/engine/pull/387)
 @y
-{% comment %}
-{% endcomment %}
 * Bump Golang to 1.12.10. [docker/engine#387](https://github.com/docker/engine/pull/387)
 @z
 
 @x
 * Bump containerd to 1.2.10. [docker/engine#385](https://github.com/docker/engine/pull/385)
 @y
-{% comment %}
-{% endcomment %}
 * Bump containerd to 1.2.10. [docker/engine#385](https://github.com/docker/engine/pull/385)
 @z
 
 @x
 * Distribution: modify warning logic when pulling v2 schema1 manifests. [docker/engine#368](https://github.com/docker/engine/pull/368)
 @y
-{% comment %}
-{% endcomment %}
 * Distribution: modify warning logic when pulling v2 schema1 manifests. [docker/engine#368](https://github.com/docker/engine/pull/368)
 @z
 
 @x
 * Fix `POST /images/create` returning a 500 status code when providing an incorrect platform option. [docker/engine#365](https://github.com/docker/engine/pull/365)
 @y
-{% comment %}
-{% endcomment %}
 * Fix `POST /images/create` returning a 500 status code when providing an incorrect platform option. [docker/engine#365](https://github.com/docker/engine/pull/365)
 @z
 
 @x
 * Fix `POST /build` returning a 500 status code when providing an incorrect platform option. [docker/engine#365](https://github.com/docker/engine/pull/365)
 @y
-{% comment %}
-{% endcomment %}
 * Fix `POST /build` returning a 500 status code when providing an incorrect platform option. [docker/engine#365](https://github.com/docker/engine/pull/365)
 @z
 
 @x
 * Fix panic on 32-bit ARMv7 caused by misaligned struct member. [docker/engine#363](https://github.com/docker/engine/pull/363)
 @y
-{% comment %}
-{% endcomment %}
 * Fix panic on 32-bit ARMv7 caused by misaligned struct member. [docker/engine#363](https://github.com/docker/engine/pull/363)
 @z
 
 @x
 * Fix to return "invalid parameter" when linking to non-existing container. [docker/engine#352](https://github.com/docker/engine/pull/352)
 @y
-{% comment %}
-{% endcomment %}
 * Fix to return "invalid parameter" when linking to non-existing container. [docker/engine#352](https://github.com/docker/engine/pull/352)
 @z
 
 @x
 * Fix overlay2: busy error on mount when using kernel >= 5.2. [docker/engine#332](https://github.com/docker/engine/pull/332)
 @y
-{% comment %}
-{% endcomment %}
 * Fix overlay2: busy error on mount when using kernel >= 5.2. [docker/engine#332](https://github.com/docker/engine/pull/332)
 @z
 
 @x
 * Fix `docker rmi` stuck in certain misconfigured systems, e.g. dead NFS share. [docker/engine#335](https://github.com/docker/engine/pull/335)
 @y
-{% comment %}
-{% endcomment %}
 * Fix `docker rmi` stuck in certain misconfigured systems, e.g. dead NFS share. [docker/engine#335](https://github.com/docker/engine/pull/335)
 @z
 
 @x
 * Fix handling of blocked I/O of exec'd processes. [docker/engine#296](https://github.com/docker/engine/pull/296)
 @y
-{% comment %}
-{% endcomment %}
 * Fix handling of blocked I/O of exec'd processes. [docker/engine#296](https://github.com/docker/engine/pull/296)
 @z
 
 @x
 * Fix jsonfile logger: follow logs stuck when `max-size` is set and `max-file=1`. [docker/engine#378](https://github.com/docker/engine/pull/378)
 @y
-{% comment %}
-{% endcomment %}
 * Fix jsonfile logger: follow logs stuck when `max-size` is set and `max-file=1`. [docker/engine#378](https://github.com/docker/engine/pull/378)
 @z
 
 @x
 ### Known Issues
 @y
-{% comment %}
-{% endcomment %}
 ### Known Issues
 @z
 
 @x
 #### New
 @y
-{% comment %}
-{% endcomment %}
 #### New
 @z
 
@@ -1092,8 +969,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
        iptables -A DOCKER-USER -j RETURN
        ```
 @y
-{% comment %}
-{% endcomment %}
 * `DOCKER-USER` iptables chain is missing: [docker/for-linux#810](https://github.com/docker/for-linux/issues/810).
   Users cannot perform additional container network traffic filtering on top of
   this iptables chain. You are not affected by this issue if you are not
@@ -1110,8 +985,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 #### Existing
 @y
-{% comment %}
-{% endcomment %}
 #### Existing
 @z
 
@@ -1127,8 +1000,6 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 * [CVE-2018-15664](https://nvd.nist.gov/vuln/detail/CVE-2018-15664) symlink-exchange attack with directory traversal. Workaround until proper fix is available in upcoming patch release: `docker pause` container before doing file operations. [moby/moby#39252](https://github.com/moby/moby/pull/39252)
 * `docker cp` regression due to CVE mitigation. An error is produced when the source of `docker cp` is set to `/`.
 @y
-{% comment %}
-{% endcomment %}
 * In some circumstances with large clusters, docker information might, as part of the Swarm section,
   include the error `code = ResourceExhausted desc = grpc: received message larger than
   max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
@@ -1152,16 +1023,12 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Builder
 @y
-{% comment %}
-{% endcomment %}
 ### Builder
 @z
 
 @x
 * Fix `COPY --from` to non-existing directory on Windows. [moby/moby#39695](https://github.com/moby/moby/pull/39695)
 @y
-{% comment %}
-{% endcomment %}
 * Fix `COPY --from` to non-existing directory on Windows. [moby/moby#39695](https://github.com/moby/moby/pull/39695)
 @z
 
