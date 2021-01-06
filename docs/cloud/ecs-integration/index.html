@@ -1,0 +1,782 @@
+<!-- Page generated 2021-01-06 13:33:23 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS での Docker コンテナーのデプロイ | Docker ドキュメント</title>
+  <meta name="description" content="ECS において Docker コンテナーをデプロイします。" />
+  <meta name="keywords" content="Docker, AWS, ECS, Integration, context, Compose, cli, deploy, containers, cloud">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/cloud/ecs-integration/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="ECS での Docker コンテナーのデプロイ"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="ECS での Docker コンテナーのデプロイ" />
+  <meta property="og:description" content="ECS において Docker コンテナーをデプロイします。" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-06T13:33:23+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-integration/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-06T13:33:23+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ECS での Docker コンテナーのデプロイ","description":"ECS において Docker コンテナーをデプロイします。","url":"https://docs.docker.com/cloud/ecs-integration/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>ECS での Docker コンテナーのデプロイ</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p><h2 id="overview">概要</h2>
+
+<p>Docker Compose CLI は、Amazon EC2 コンテナーサービス（Amazon EC2 Container Service; ECS）の中で、ネイティブな Docker コマンドの利用を可能にします。
+これを使って、クラウドに適したアプリケーションを構築し実行します。</p>
+
+<p>Docker と Amazon ECS の統合により、開発者が Docker Compose CLI を用いる際には、以下のことが可能になります。</p>
+
+<ul>
+  <li>1 つの Docker コマンドに対して AWS コンテキストを設定することができます。
+これによってローカルコンテキストとクラウドコンテキストを切り替えられるようになり、アプリケーションの実行をすばやく簡単に行うことができます。</li>
+  <li>Compose ファイルを使って、Amazon ECS 上の複数コンテナーアプリケーションの開発を単純化できます。</li>
+</ul>
+
+<p><a href="ecs-architecture.md">ECS 統合アーキテクチャー</a>、<a href="ecs-compose-features.md">Compose 機能一覧</a>、<a href="ecs-compose-examples.md">ECS 統合の Compose 利用例</a> も参照してください。</p>
+
+<h2 id="prerequisites">前提条件</h2>
+
+<p>Docker コンテナーを ECS にデプロイするには、以下の条件を満たしていることが必要です。</p>
+
+<ol>
+  <li>
+    <p>Docker Desktop 安定版（Stable）2.3.0.5 またはそれ以降、あるいは最新版（Edge）2.3.2.0 またはそれ以降をダウンロードしインストールしていることが必要です。</p>
+
+    <ul>
+      <li><a href="https://desktop.docker.com/mac/edge/Docker.dmg" target="_blank" rel="noopener" class="_">Download for Mac</a></li>
+      <li><a href="https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe" target="_blank" rel="noopener" class="_">Download for Windows</a></li>
+    </ul>
+
+    <p>あるいは <a href="#install-the-docker-compose-cli-on-linux">Docker Compose CLI for Linux</a> をインストールしていることが必要です。</p>
+  </li>
+  <li>
+    <p>AWS アカウントを持っていることが必要です。</p>
+  </li>
+</ol>
+
+<p>Docker は、単にローカルのマルチコンテナーを実行するだけのものではなくなります。
+<code class="language-plaintext highlighter-rouge">docker compose up</code> により Compose ファイルを使って Amazon ECS 上の Docker コンテナーをシームレスにデプロイできます。
+以下の節では Amazon ECS 上において Docker コンテナーをデプロイする手順を説明します。</p>
+
+<h2 id="run-an-application-on-ecs">ECS 上でのアプリケーション実行</h2>
+
+<h3 id="requirements">前提条件</h3>
+
+<p>AWS uses a fine-grained permission model, with specific role for each resource type and operation.</p>
+
+<p>To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you have to ensure your AWS credentials <a href="https://aws.amazon.com/iam/features/manage-permissions/">grant access to following AWS IAM permissions</a>:</p>
+
+<ul>
+  <li>cloudformation:*</li>
+  <li>ecs:ListAccountSettings</li>
+  <li>ecs:CreateCluster</li>
+  <li>ecs:CreateService</li>
+  <li>ec2:DescribeVpcs</li>
+  <li>ec2:DescribeSubnets</li>
+  <li>ec2:CreateSecurityGroup</li>
+  <li>ec2:DescribeSecurityGroups</li>
+  <li>ec2:DeleteSecurityGroup</li>
+  <li>iam:CreateRole</li>
+  <li>iam:AttachRolePolicy</li>
+  <li>iam:DetachRolePolicy</li>
+  <li>iam:DeleteRole</li>
+  <li>elasticloadbalancing:*</li>
+  <li>application-autoscaling:*</li>
+  <li>servicediscovery:*</li>
+  <li>logs:CreateLogGroup</li>
+  <li>logs:DescribeLogGroups</li>
+  <li>logs:FilterLogEvents</li>
+  <li>logs:DeleteLogGroup</li>
+  <li>route53:CreateHostedZone</li>
+  <li>route53:DeleteHostedZone</li>
+  <li>route53:GetHealthCheck</li>
+  <li>route53:GetHostedZone</li>
+  <li>route53:ListHostedZonesByName</li>
+</ul>
+
+<p>GPU support, which relies on EC2 instances to run containers with attached GPU devices,
+require a few additional permissions:</p>
+
+<ul>
+  <li>ec2:DescribeVpcs</li>
+  <li>autoscaling:*</li>
+  <li>iam:CreateInstanceProfile</li>
+  <li>iam:AddRoleToInstanceProfile</li>
+  <li>iam:RemoveRoleFromInstanceProfile</li>
+  <li>iam:DeleteInstanceProfile</li>
+</ul>
+
+<h3 id="create-aws-context">AWS コンテキストの生成</h3>
+
+<p><code class="language-plaintext highlighter-rouge">docker context create ecs myecscontext</code> コマンドを実行して AWS コンテキストを生成します。
+すでに AWS CLI をインストールし設定を行っているのであれば、このセットアップコマンドにより、既存の AWS プロファイルを選んで Amazon への接続を行います。
+これがまだできていない場合は、<a href="https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys" target="_blank" rel="noopener" class="_">AWS access key ID and a secret access key</a> を通じて、新たなプロファイルを生成します。
+Finally, you can configure your ECS context to retrieve AWS credentials by <code class="language-plaintext highlighter-rouge">AWS_*</code> environment variables, which is a common way to integrate with
+third-party tools and single-sign-on providers.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">? Create a Docker context using:  [Use arrows to move, type to filter]
+  An existing AWS profile
+  AWS secret and token credentials
+</span><span class="gp">&gt;</span><span class="w"> </span>AWS environment variables
+</code></pre></div></div>
+
+<p>AWS コンテキストを生成したら、<code class="language-plaintext highlighter-rouge">docker context ls</code> コマンドを実行して Docker コンテキストの一覧を表示します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT   ORCHESTRATOR
+myecscontext        ecs                 credentials read from environment
+default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                         swarm
+</span></code></pre></div></div>
+
+<h2 id="run-a-compose-application">Compose アプリケーションの実行</h2>
+
+<p>Compose ファイルに定義したマルチコンテナーによるアプリケーションを、Amazon ECS に対してデプロイし管理するためには、<code class="language-plaintext highlighter-rouge">docker compose</code> コマンドを実行します。
+これを行うためには以下のことが必要です。</p>
+
+<ul>
+  <li>
+    <p>AWS コンテキストを利用していることが必要です。
+これはコマンド実行時に<code class="language-plaintext highlighter-rouge">--context myecscontext</code>フラグを指定するか、あるいはカレントなコンテキストを設定するコマンド<code class="language-plaintext highlighter-rouge">docker context use myecscontext</code>を実行します。</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">docker compose up</code>と<code class="language-plaintext highlighter-rouge">docker compose down</code>を実行して、Compose アプリケーションの開始、停止ができることが必要です。</p>
+
+    <p>デフォルトにおいて<code class="language-plaintext highlighter-rouge">docker compose up</code>は、カレントフォルダーの<code class="language-plaintext highlighter-rouge">compose.yaml</code>ファイルまたは<code class="language-plaintext highlighter-rouge">docker-compose.yaml</code>ファイルを利用します。
+Compose ファイルを直接<code class="language-plaintext highlighter-rouge">--file</code>フラグを使って指定することもできます。</p>
+
+    <p>Compose アプリケーションのデプロイの際に<code class="language-plaintext highlighter-rouge">--project-name</code>フラグを使って、アプリケーション名を指定することもできます。
+アプリケーション名の指定がなかった場合は、ワーキングディレクトリから名前が定められます。</p>
+  </li>
+</ul>
+
+<p>Docker ECS integration converts the Compose application model into a set of AWS resources, described as a <a href="https://aws.amazon.com/cloudformation/" target="_blank" rel="noopener" class="_">CloudFormation</a> template. The actual mapping is described in <a href="https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md" target="_blank" rel="noopener" class="_">technical documentation</a>.
+You can review the generated template using <code class="language-plaintext highlighter-rouge">docker compose convert</code> command, and follow CloudFormation applying this model within
+<a href="https://console.aws.amazon.com/cloudformation/home" target="_blank" rel="noopener" class="_">AWS web console</a> when you run <code class="language-plaintext highlighter-rouge">docker compose up</code>, in addition to CloudFormation events being displayed
+in your terminal.</p>
+
+<ul>
+  <li>
+    <p>Amazon ECS 上の Compose アプリケーションに対して生成されたサービスの情報およびその状態を確認するには<code class="language-plaintext highlighter-rouge">docker compose ps</code>コマンドを実行します。</p>
+  </li>
+  <li>
+    <p>Compose アプリケーションを構成するコンテナーに対しては、コマンド<code class="language-plaintext highlighter-rouge">docker compose logs</code>を実行してそれぞれのログを確認できます。</p>
+  </li>
+</ul>
+
+<p><a href="ecs-compose-features.md">Compose 機能一覧</a> も参照してください。</p>
+
+<h2 id="rolling-update">ローリングアップデート</h2>
+
+<p>本番環境の実行を妨げることなくアプリケーションのアップデートを行うには、更新された Compose プロジェクト上において<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行するだけです。
+ECS サービスはローリングアップデート設定を含めて生成されます。
+Compose ファイルを修正した上で<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
+この置き換え処理は、サービスの <a href="https://docs.docker.com/compose/compose-file/#update_config"><code class="language-plaintext highlighter-rouge">deploy.update_config</code></a>  設定によって定められるローリングアップデート設定に従います。</p>
+
+<p>AWS ECS ではパーセントベースモデル（percent-based model）を採用して、ローリングアップデート時に起動または停止するコンテナー数を定義しています。
+Docker Compose CLI では項目<code class="language-plaintext highlighter-rouge">prallelism</code>または<code class="language-plaintext highlighter-rouge">replicas</code>に従って、ローリングアップデート設定を算出しています。
+ローリングアップデートの設定を、項目<code class="language-plaintext highlighter-rouge">x-aws-min_percent</code>や<code class="language-plaintext highlighter-rouge">x-aws-max_percent</code>を使って設定したい場合があります。
+<code class="language-plaintext highlighter-rouge">x-aws-min_percent</code>はサービスに対して、起動させるコンテナーの最小パーセントを設定します。
+<code class="language-plaintext highlighter-rouge">x-aws-max_percent</code>は、それまでのバージョンのコンテナーを削除する前に、追加で起動するコンテナーの最大パーセントを設定します。</p>
+
+<p>デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
+またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。</p>
+
+<h2 id="view-application-logs">アプリケーションログの確認</h2>
+
+<p>Docker Compose CLI では、コンテナーに対して AWS CloudWatch ログサービスを設定します。
+Compose アプリケーションログの確認は、デフォルトではローカルデプロイを確認することと同様に行うことができます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>アプリケーションログをカレントなワーキングディレクトリに取り出します。
+<span class="go">docker compose logs
+
+</span><span class="gp">#</span><span class="w"> </span>Compose プロジェクト名を指定します。
+<span class="go">docker compose logs --project-name PROJECT
+
+</span><span class="gp">#</span><span class="w"> </span>Compose ファイルを指定します。
+<span class="go">docker compose logs --file /path/to/docker-compose.yaml
+</span></code></pre></div></div>
+
+<p>アプリケーションにおいて、ロググループ<code class="language-plaintext highlighter-rouge">docker-compose/&lt;アプリケーション名&gt;</code>が生成され、またアプリケーション内の各サービスとコンテナーにおいては、ログストリーム<code class="language-plaintext highlighter-rouge">&lt;アプリケーション名&gt;/&lt;サービス名&gt;/&lt;コンテナーID&gt;</code>が生成されます。</p>
+
+<p>AWS CloudWatch ログに対しては Compose ファイル内の拡張項目<code class="language-plaintext highlighter-rouge">x-aws-logs_retention</code>を使って、イベントの保存日数を調整することができます。
+デフォルトは無期限に保存します。</p>
+
+<p>標準的な Compose ファイルの項目<code class="language-plaintext highlighter-rouge">logging.driver_opts</code>を使えば、コンテナーに対して<code class="language-plaintext highlighter-rouge">awslogs</code>ドライバーのパラメーターを指定することができます。</p>
+
+<h2 id="private-docker-images">プライベートな Docker イメージ</h2>
+
+<p>Docker Compose CLI では自動的に認証が設定されます。
+したがって Amazon ECR レジストリにあるプライベートイメージは、同じ AWS アカウントを使ってプルすることができます。
+一方 Docker Hub も含め、別のレジストリからプライベートイメージをプルするには、<a href="https://docs.aws.amazon.com/secretsmanager/" target="_blank" rel="noopener" class="_">AWS Secrets Manager service</a> 上にユーザー名とパスワード（あるいはユーザー名とトークン）を生成する必要があります。</p>
+
+<p>Docker Compose CLI では、便利なコマンドとして<code class="language-plaintext highlighter-rouge">docker secret</code>が提供されています。
+したがって AWS CLI をインストールしていなくても、AWS SMS において生成した機密情報を管理することができます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">docker secret create dockerhubAccessToken --username &lt;dockerhubuser&gt;</span><span class="w">  </span><span class="nt">--password</span> &lt;dockerhubtoken&gt;
+<span class="go">arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
+</span></code></pre></div></div>
+
+<p>この ARN を生成したら Compose ファイル内において、カスタム拡張 <code class="language-plaintext highlighter-rouge">x-aws-pull_credentials</code> を利用して、そのサービスに対する Docker イメージ URI を指定することができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">worker</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mycompany/privateimage</span>
+    <span class="na">x-aws-pull_credentials</span><span class="pi">:</span> <span class="s2">"</span><span class="s">arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>Compose ファイルのバージョンを 3.8 またはそれ以降に指定すると、この Compose ファイルをそのまま、<code class="language-plaintext highlighter-rouge">docker-compose</code> を使ってローカル開発環境向けに利用することができます。
+その場合、カスタム ECS 拡張は無視されます。</p>
+</blockquote>
+
+<h2 id="service-discovery">サービスの検出</h2>
+
+<blockquote class="warning">
+  <p><strong>日本語訳情報</strong></p>
+
+  <p>当節の内容はよく理解できなかったため、訳出に自信がありません。
+内容がおわかりの方はご教示よろしくお願いします。</p>
+</blockquote>
+
+<p>サービス間の通信は、デフォルトで透過的に実装されています。
+したがって Compose アプリケーションのデプロイは、複数接続されたサービスに対しても、Compose ファイルをローカル向け、ECS デプロイ向けに切り替えずに行うことができます。
+個々のサービスは、それぞれの（メモリや CPU に対する）制約やレプリカに関するルールに従って動作します。</p>
+
+<h3 id="service-names">サービス名</h3>
+
+<p>アプリケーションデプロイを行うサービスは、Docker Compose CLI により <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html" target="_blank" rel="noopener" class="_">AWS Cloud Map</a> 上に自動登録されます。
+これは <code class="language-plaintext highlighter-rouge">&lt;サービス&gt;.&lt;composeプロジェクト名&gt;.local</code> という形の完全修飾ドメイン名として表わされています。</p>
+
+<p>サービスが、依存するサービスを引き出す際には、Compose サービス名（docker-compose を使ってローカルにデプロイする際にも用いられる）、またはこの完全修飾ドメイン名が利用されます。</p>
+
+<h3 id="依存サービスの起動時間と-dns-名前解決">依存サービスの起動時間と DNS 名前解決</h3>
+
+<p>Compose ファイルがデプロイされると ECS 上においてサービスが同タイミングでスケジューリングされます。
+AWS Cloud Map では、サービスドメイン名を解決できるようにするため、DNS サービスの初期遅延処理を行っています。
+したがってアプリケーションコードには、その遅延への対応が必要になります。
+つまり依存サービスが準備状態となるのを待つか、Docker イメージへエントリーポイントとして、ウェイトを行うスクリプトを追加するなどの対応を行います。
+このことは <a href="/docs.docker.jp.onthefly/compose/startup-order/">起動順の制御</a> において説明しています。
+なお Compose アプリケーション内の依存サービスに対しても、docker-compose によりローカルにデプロイする際にもこれが必要です。
+ただし遅延は普通は短いものです。
+明らかな問題が発生するとすれば ECS へのデプロイ時であり、サービスがその依存サービスの起動を待たずに実行されてしまった場合です。</p>
+
+<p>それとは別に Compose ファイルにおける <a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on" target="_blank" rel="noopener" class="_">depends_on</a> 機能を利用することができます。
+これを利用すると依存するサービスがまず生成されることになり、アプリケーションのデプロイは生成開始前から稼動するまで待機します。</p>
+
+<h3 id="sService-isolation">サービスの分離</h3>
+
+<p>サービス間の通信は <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html" target="_blank" rel="noopener" class="_">Security Groups</a> ルールによって実現されています。
+サービス間では共通の Compose ファイル「network」が共有され、Compose サービス名を使って互いに通信を行います。</p>
+
+<h2 id="volumes">ボリューム</h2>
+
+<p>ECS 統合では Amazon Elastic File System (Amazon EFS) をベースとしたボリューム管理をサポートしています。
+ECS 統合において Compose ファイルに<code class="language-plaintext highlighter-rouge">volume</code>を宣言する際には、CloudFormation テンプレート内に EFS ファイルシステムの生成を定義します。
+<code class="language-plaintext highlighter-rouge">Retain</code>（維持）ポリシーを利用すれば、アプリケーションのシャットダウン時にデータが削除されることはありません。
+同一のアプリケーション（同一のプロジェクト名）が再度デプロイされると、ファイルシステムが再度アタッチされて、それまで開発者が行っていた docker-compose による作業を再開できます。</p>
+
+<p>ボリュームを利用した基本的な Compose サービスは、以下のように宣言します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mydata:/some/container/path</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">mydata</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>With no specific volume options, the volume still must be declared in the <code class="language-plaintext highlighter-rouge">volumes</code>section for
+the compose file to be valid (in the above example the empty <code class="language-plaintext highlighter-rouge">mydata:</code> entry)
+必要であれば、ファイルシステムの初期状態は<code class="language-plaintext highlighter-rouge">driver-opts</code>を用いて変更することができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">my-data</span><span class="pi">:</span>
+    <span class="na">driver_opts</span><span class="pi">:</span>
+      <span class="c1"># Filesystem configuration</span>
+      <span class="na">backup_policy</span><span class="pi">:</span> <span class="s">ENABLED</span>
+      <span class="na">lifecycle_policy</span><span class="pi">:</span> <span class="s">AFTER_14_DAYS</span>
+      <span class="na">performance_mode</span><span class="pi">:</span> <span class="s">maxIO</span>
+      <span class="na">throughput_mode</span><span class="pi">:</span> <span class="s">provisioned</span>
+      <span class="na">provisioned_throughput</span><span class="pi">:</span> <span class="m">1</span>
+</code></pre></div></div>
+
+<p>AWS 上において<code class="language-plaintext highlighter-rouge">docker compose up</code>を実行して生成されるファイルシステムは、<code class="language-plaintext highlighter-rouge">docker volume ls</code>によって一覧確認ができます。
+また<code class="language-plaintext highlighter-rouge">docker volume rm &lt;ファイルシステムID&gt;</code>によって削除することができます。</p>
+
+<p>EFS 上にすでにデータを保存している場合や、別の Compose スタックによって生成されたファイルシステムを利用したい場合には、既存のファイルシステムを利用することもできます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">my-data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">fs-123abcd</span>
+</code></pre></div></div>
+
+<p>コンテナーからボリュームにアクセスする際には、POSIX ユーザー ID のパーミッションに関する問題が発生する可能性があります。
+Docker イメージにおいては、コンテナー内で稼動するプロセスに対して、任意のユーザー ID およびグループ ID を定義しているからです。
+ただし<code class="language-plaintext highlighter-rouge">uid:gid</code>が同一であれば、ファイルシステム上での POSIX パーミッションに合致していなければなりません。
+このような衝突を回避するためには、ボリュームにアクセスする際に利用する<code class="language-plaintext highlighter-rouge">uid</code>と<code class="language-plaintext highlighter-rouge">gid</code>を設定します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">my-data</span><span class="pi">:</span>
+    <span class="na">driver_opts</span><span class="pi">:</span>
+      <span class="c1"># Access point configuration</span>
+      <span class="na">uid</span><span class="pi">:</span> <span class="m">0</span>
+      <span class="na">gid</span><span class="pi">:</span> <span class="m">0</span>
+</code></pre></div></div>
+
+<h2 id="secrets">Secrets</h2>
+
+<p>Docker モデルを使って ECS サービスに Secret 情報を受け渡すことにより、<code class="language-plaintext highlighter-rouge">/run/secrets</code>配下にあるファイルを機密データとして結びつけることができます。
+Compose ファイルに Secret 情報を宣言している場合、ECS 上へのアプリケーションのデプロイにあたって、デプロイの一部としてその情報が生成されます。
+Compose ファイル内にて既存の Secret 情報を<code class="language-plaintext highlighter-rouge">external: true</code>として参照している場合、Secret 名として ECS Secrets Manager の 完全リソース名を使うことができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">...</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">foo</span>
+
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<p>Secret はサービス実行時には、<code class="language-plaintext highlighter-rouge">/run/secrets/foo</code> というプレーンなテキストファイルとしてアクセスできます。</p>
+
+<p>AWS Secrets マネージャーにおいて機密情報を保存する際には、（Docker の Secret と同じように）プレーンテキストとして保存する方法と、階層化した JSON ドキュメントとして保存する方法があります。
+Docker Compose CLI にて後者の方法を利用する場合には、カスタム項目<code class="language-plaintext highlighter-rouge">x-aws-keys</code>を利用して、サービスコンテナー内の Secret として、JSON ドキュメント内のどの項目を結びつけるかを定義します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">webapp</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">...</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">foo</span>
+
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"</span>
+    <span class="na">keys</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">bar"</span>
+</code></pre></div></div>
+
+<p>このようにするとキー <code class="language-plaintext highlighter-rouge">bar</code> に対する機密データは、サービスの実行時に <code class="language-plaintext highlighter-rouge">/run/secrets/foo/bar</code> というプレーンなテキストファイルとしてアクセスできます。
+特別な値として <code class="language-plaintext highlighter-rouge">*</code> を用いると、コンテナー内のキーすべてを得ることができます。</p>
+
+<h2 id="auto-scaling">自動スケーリング</h2>
+
+<p>サービスをスケーリングするための固定的な（自動スケーリングではない）情報は、普通に Compose ファイルの文法として指定することができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+</code></pre></div></div>
+
+<p>Compose ファイルモデルでは、自動スケーリングの条件を定める属性定義はありません。
+したがってカスタム拡張機能<code class="language-plaintext highlighter-rouge">x-aws-autoscaling</code>を利用して自動スケーリングの範囲を定義することになります。
+ターゲットメトリックの定義において、リソース使用率として表現される CPU やメモリを定めることと同様です。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">x-aws-autoscaling</span><span class="pi">:</span>
+        <span class="na">min</span><span class="pi">:</span> <span class="m">1</span>
+        <span class="na">max</span><span class="pi">:</span> <span class="m">10</span> <span class="c1">#required</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="m">75</span>
+        <span class="c1"># mem: - mutualy exlusive with cpu</span>
+</code></pre></div></div>
+
+<h2 id="iam-roles">IAM ロール</h2>
+
+<p>ECS タスクは、AWS 管理ポリシー<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html"><code class="language-plaintext highlighter-rouge">AmazonECSTaskExecutionRolePolicy</code></a> と <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html"><code class="language-plaintext highlighter-rouge">AmazonEC2ContainerRegistryReadOnly</code></a> へのアクセスが可能な、専用の IAM ロールによって実行されます。
+さらにサービスが Secret を利用している場合、IAM ロールは追加の権限によって AWS Secret マネージャーから Secret の読み込みと復号化を行います。</p>
+
+<p>サービスの実行にあたって管理ポリシーを追加で利用するには、サービス定義の内部において<code class="language-plaintext highlighter-rouge">x-aws-policies</code>を用います。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">x-aws-policies</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">arn:aws:iam::aws:policy/AmazonS3FullAccess"</span>
+</code></pre></div></div>
+
+<p>また独自に <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html">IAM ポリシードキュメント</a> を記述して、ECS サービスに適用する IAM ロールを調整することができます。
+そしてサービス定義内に<code class="language-plaintext highlighter-rouge">x-aws-role</code>を用いることで、YAML 書式のポリシードキュメントを受け渡すことができます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">x-aws-role</span><span class="pi">:</span>
+      <span class="na">Version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2012-10-17"</span>
+      <span class="na">Statement</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">Effect</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Allow"</span>
+          <span class="na">Action</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">some_aws_service"</span>
+          <span class="na">Resource</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s2">"</span><span class="s">*"</span>
+</code></pre></div></div>
+
+<h2 id="tuning-the-cloudformation-template">CloudFormation テンプレートの調整</h2>
+
+<p>Docker Compose CLI では <a href="https://docs.aws.amazon.com/cloudformation/" target="_blank" rel="noopener" class="_">Amazon CloudFormation</a> を活用して、アプリケーションのデプロイ管理を行っています。
+生成済みのリソースをより的確に制御するには、<code class="language-plaintext highlighter-rouge">docker compose convert</code> を使い、Compose ファイルから CloudFormation スタックファイルを生成します。
+スタックファイルを生成すると、そこに定義されたリソースの確認や、必要に応じたテンプレートのカスタマイズ、AWS CLI や AWS ウェブコンソールからのテンプレートの適用を行うことができます。</p>
+
+<h2 id="using-existing-aws-network-resources">既存の AWS ネットワークリソースの利用</h2>
+
+<p>Docker Compose CLI では、Compose アプリケーションに対して、デフォルトで以下のものを生成します。
+1 つは Compose アプリケーション用の ECS クラスターです。
+もう 1 つはネットワークごとの SecurityGroup です。
+これは AWS でのデフォルト VPC 上において、Compose ファイルによって定義されるネットワークごとのものです。
+そしてサービスのトラフィックをルーティングする LoadBlancer です。</p>
+
+<p>以下のような基本的な Compose ファイルを使えば Docker Compose CLI が、ロードバランサーがトラフィックを公開ポート 80 に振り分けるような ECS 構成を自動的に生成してくれます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">80:80"</span>
+</code></pre></div></div>
+
+<p>AWS アカウントに、そのようなリソースを生成する <a href="https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions" target="_blank" rel="noopener" class="_">パーミッション</a> が与えられていない場合、あるいは独自にこれらを管理したい場合は、以下のカスタム Compose 拡張機能を利用することができます。</p>
+
+<ul>
+  <li>
+    <p>Compose ファイルの最上位項目として<code class="language-plaintext highlighter-rouge">x-aws-cluster</code>を利用します。
+これは Compose アプリケーションのデプロイ時に利用する ECS クラスターの ID を設定するものです。
+これがない場合、クラスターは Compose プロジェクトに対して生成されます。</p>
+  </li>
+  <li>
+    <p>Compose ファイルの最上位項目として<code class="language-plaintext highlighter-rouge">x-aws-vpc</code>を利用します。
+これは Compose アプリケーションのデプロイ時に利用する VPC の ARN を設定します。</p>
+  </li>
+  <li>
+    <p>Compose ファイルの最上位項目として <code class="language-plaintext highlighter-rouge">x-aws-loadbalancer</code> を利用します。
+これは既存の LoadBalancer の ARN を設定します。</p>
+  </li>
+</ul>
+
+<p>The latter can be used for those who want to customize application exposure, typically to
+use an existing domain name for your application:</p>
+
+<ol>
+  <li>Use the AWS web console or CLI to get your VPC and Subnets IDs. You can retrieve the default VPC ID and attached subnets using this AWS CLI commands:</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>aws ec2 describe-vpcs <span class="nt">--filters</span> <span class="nv">Name</span><span class="o">=</span>isDefault,Values<span class="o">=</span><span class="nb">true</span> <span class="nt">--query</span> <span class="s1">'Vpcs[0].VpcId'</span>
+<span class="go">
+"vpc-123456"
+</span><span class="gp">$</span><span class="w"> </span>aws ec2 describe-subnets <span class="nt">--filters</span> <span class="nv">Name</span><span class="o">=</span>vpc-id,Values<span class="o">=</span>vpc-123456 <span class="nt">--query</span> <span class="s1">'Subnets[*].SubnetId'</span>
+<span class="go">
+[
+    "subnet-1234abcd",
+    "subnet-6789ef00",
+]
+</span></code></pre></div></div>
+<ol>
+  <li>Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don’t need here.</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>aws elbv2 create-load-balancer <span class="nt">--name</span> myloadbalancer <span class="nt">--type</span> application <span class="nt">--subnets</span> <span class="s2">"subnet-1234abcd"</span> <span class="s2">"subnet-6789ef00"</span>
+<span class="go">
+{
+    "LoadBalancers": [
+        {
+            "IpAddressType": "ipv4",
+            "VpcId": "vpc-123456",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
+            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
+</span><span class="c">...
+</span></code></pre></div></div>
+<ol>
+  <li>
+    <p>To assign your application an existing domain name, you can configure your DNS with a
+CNAME entry pointing to just-created loadbalancer’s <code class="language-plaintext highlighter-rouge">DNSName</code> reported as you created the loadbalancer.</p>
+  </li>
+  <li>
+    <p>Use Loadbalancer ARN to set <code class="language-plaintext highlighter-rouge">x-aws-loadbalancer</code> in your compose file, and deploy your application using <code class="language-plaintext highlighter-rouge">docker compose up</code> command.</p>
+  </li>
+</ol>
+
+<p>Please note Docker ECS integration won’t be aware of this domain name, so <code class="language-plaintext highlighter-rouge">docker compose ps</code> command will report URLs with loadbalancer DNSName, not your own domain.</p>
+
+<p>Docker Compose CLI 向けの Compose ファイルにおいて、ネットワーク定義内に<code class="language-plaintext highlighter-rouge">external: true</code>を記述することもできます。
+これによってセキュリティグループを生成 <strong>しない</strong> ようにします。
+そしてサービス間のネットワーク接続を実現するために、利用したい既存の SecurityGroup における名前と ID を設定します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">networks</span><span class="pi">:</span>
+  <span class="na">back_tier</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">sg-1234acbd"</span>
+</code></pre></div></div>
+
+<h2 id="local-simulation">ローカルシミュレーション</h2>
+
+<p>ECS 上にアプリケーションをデプロイする際に、追加の AWS サービスを用いたい場合があります。
+そのような場合には、コード内に AWS SDK を埋め込んで、実行時に API 資格情報を取り出すことが必要になります。
+AWS では資格情報を取得するメカニズムが用意されていて、SDK を使って完全実装されています。
+そして固定 IP アドレス上のメタデータサービスにアクセスすることで、これを実現しています。</p>
+
+<p>ただこの手法を採用してしまうと、ローカル環境においてテストやデバッグ目的でアプリケーションを実行することが困難になります。
+そこでコンテキストを生成する際のオプションを導入しています。
+そのオプションでは<code class="language-plaintext highlighter-rouge">ecs-local</code>コンテキストを設定して、ローカルマシンと AWS クラウドプロバイダー間でのアプリケーションの可搬性を確保しています。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context create ecs <span class="nt">--local-simulation</span> ecsLocal
+<span class="go">Successfully created ecs-local context "ecsLocal"
+</span></code></pre></div></div>
+
+<p>ローカルシミュレーションコンテキストを選んだ場合、<code class="language-plaintext highlighter-rouge">docker compose up</code>コマンドを実行しても、アプリケーションは ECS 上にデプロイされません。
+したがってアプリケーションはローカルでの実行となり、Compose アプリケーションは <a href="https://github.com/awslabs/amazon-ecs-local-container-endpoints/">ECS local endpoints</a> を用いるように、自動的に調整されます。
+このことから、アプリケーションコード内にて利用する AWS SDK は、「AWS メタデータ API」としてローカルの一時的なコンテナーにアクセスし、ローカルの設定ファイル<code class="language-plaintext highlighter-rouge">.aws/credentials</code>から資格情報を取得することになります。</p>
+
+<h2 id="install-the-docker-compose-cli-on-linux">Linux における Docker Compose CLI のインストール</h2>
+
+<p>Docker Compose CLI は、ECS 上のコンテナー実行と管理をサポートします。</p>
+
+<h3 id="install-prerequisites">インストールの前提条件</h3>
+
+<ul>
+  <li><a href="https://docs.docker.com/get-docker/">Docker 19.03 またはそれ以降</a></li>
+</ul>
+
+<h3 id="install-script">インストールスクリプト</h3>
+
+<p>インストールスクリプトを使えば、新たな CLI をインストールできます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+</span></code></pre></div></div>
+
+<h2 id="faq">FAQ</h2>
+
+<p><strong><code class="language-plaintext highlighter-rouge">this tool requires the "new ARN resource ID format"</code> というエラーはどんな意味？</strong></p>
+
+<p>このエラーメッセージは、利用アカウントに対しては ECS 向けの新たな ARN リソース ID フォーマットが必要であることを示しています。
+詳しくは <a href="https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/" target="_blank" rel="noopener" class="_">Migrating your Amazon ECS deployment to the new ARN and resource ID format</a> を参照してください。</p>
+
+<h2 id="feedback">フィードバック</h2>
+
+<p>Docker Compose CLI を利用していただき、ありがとうございます。
+みなさんからのフィードバックが大変重要です。
+フィードバックをいただくには、Github レポジトリ <a href="https://github.com/docker/compose-cli" target="_blank" rel="noopener" class="_">Compose CLI</a> に issue をあげてください。</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=AWS">AWS</a>, <a href="/docs.docker.jp.onthefly/search/?q=ECS">ECS</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=context">context</a>, <a href="/docs.docker.jp.onthefly/search/?q=Compose">Compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=deploy">deploy</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=cloud">cloud</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/cloud/ecs-integration.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [cloud/ecs-integration.ch](https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-integration/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#overview" class="nomunge">概要</a>
+    <ul>
+      <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
+      <li><a href="#run-an-application-on-ecs" class="nomunge">ECS 上でのアプリケーション実行</a></li>
+      <li><a href="#run-a-compose-application" class="nomunge">Compose アプリケーションの実行</a></li>
+      <li><a href="#rolling-update" class="nomunge">ローリングアップデート</a></li>
+      <li><a href="#view-application-logs" class="nomunge">アプリケーションログの確認</a></li>
+      <li><a href="#private-docker-images" class="nomunge">プライベートな Docker イメージ</a></li>
+      <li><a href="#service-discovery" class="nomunge">サービスの検出</a></li>
+      <li><a href="#volumes" class="nomunge">ボリューム</a></li>
+      <li><a href="#secrets" class="nomunge">Secrets</a></li>
+      <li><a href="#auto-scaling" class="nomunge">自動スケーリング</a></li>
+      <li><a href="#iam-roles" class="nomunge">IAM ロール</a></li>
+      <li><a href="#tuning-the-cloudformation-template" class="nomunge">CloudFormation テンプレートの調整</a></li>
+      <li><a href="#using-existing-aws-network-resources" class="nomunge">既存の AWS ネットワークリソースの利用</a></li>
+      <li><a href="#local-simulation" class="nomunge">ローカルシミュレーション</a></li>
+      <li><a href="#install-the-docker-compose-cli-on-linux" class="nomunge">Linux における Docker Compose CLI のインストール</a></li>
+      <li><a href="#faq" class="nomunge">FAQ</a></li>
+      <li><a href="#feedback" class="nomunge">フィードバック</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/cloud/ecs-integration/";</script></body>
+</html>

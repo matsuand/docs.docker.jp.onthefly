@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-29 22:08:34 +0900-->
+<!-- Page generated 2021-01-06 13:33:23 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine SDK および Docker API の利用例 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine SDK および Docker API の利用例" />
   <meta property="og:description" content="Examples on how to perform a given Docker operation using the Go and Python SDKs and the HTTP API using curl." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-29T22:08:34+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-06T13:33:23+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/api/sdk/examples/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-29T22:08:34+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-06T13:33:23+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine SDK および Docker API の利用例","description":"Examples on how to perform a given Docker operation using the Go and Python SDKs and the HTTP API using curl.","url":"https://docs.docker.com/engine/api/sdk/examples/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -183,7 +183,7 @@
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
-<span class="k">print</span> <span class="n">client</span><span class="p">.</span><span class="n">containers</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="s">"alpine"</span><span class="p">,</span> <span class="p">[</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">containers</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="s">"alpine"</span><span class="p">,</span> <span class="p">[</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">]))</span>
 </code></pre></div>    </div>
 
   </div>
@@ -191,15 +191,15 @@
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'{"Image": "alpine", "Cmd": ["echo", "hello world"]}'</span> <span class="se">\</span>
-  <span class="nt">-X</span> POST http://localhost/v1.40/containers/create
+  <span class="nt">-X</span> POST http://localhost/v1.41/containers/create
 <span class="o">{</span><span class="s2">"Id"</span>:<span class="s2">"1c6594faf5"</span>,<span class="s2">"Warnings"</span>:null<span class="o">}</span>
 
-<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.40/containers/1c6594faf5/start
+<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.41/containers/1c6594faf5/start
 
-<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.40/containers/1c6594faf5/wait
+<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.41/containers/1c6594faf5/wait
 <span class="o">{</span><span class="s2">"StatusCode"</span>:0<span class="o">}</span>
 
-<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="s2">"http://localhost/v1.40/containers/1c6594faf5/logs?stdout=1"</span>
+<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="s2">"http://localhost/v1.41/containers/1c6594faf5/logs?stdout=1"</span>
 hello world
 </code></pre></div>    </div>
 
@@ -214,7 +214,7 @@ cURL used a <a href="https://github.com/moby/moby/issues/17960" target="_blank" 
 when using a socket connection.</p>
 
       <p>If you are using an older version of cURL, use <code class="language-plaintext highlighter-rouge">http:/&lt;API version&gt;/</code> instead,
-for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/containers/1c6594faf5/start</code></p>
+for example, <code class="language-plaintext highlighter-rouge">http:/v1.41/containers/1c6594faf5/start</code></p>
     </blockquote>
 
   </div>
@@ -284,7 +284,7 @@ for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/cont
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
 <span class="n">container</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">containers</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="s">"bfirsh/reticulate-splines"</span><span class="p">,</span> <span class="n">detach</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">container</span><span class="p">.</span><span class="nb">id</span>
+<span class="k">print</span><span class="p">(</span><span class="n">container</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </div>
@@ -292,10 +292,10 @@ for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/cont
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   <span class="nt">-d</span> <span class="s1">'{"Image": "bfirsh/reticulate-splines"}'</span> <span class="se">\</span>
-  <span class="nt">-X</span> POST http://localhost/v1.40/containers/create
+  <span class="nt">-X</span> POST http://localhost/v1.41/containers/create
 <span class="o">{</span><span class="s2">"Id"</span>:<span class="s2">"1c6594faf5"</span>,<span class="s2">"Warnings"</span>:null<span class="o">}</span>
 
-<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.40/containers/1c6594faf5/start
+<span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="nt">-X</span> POST http://localhost/v1.41/containers/1c6594faf5/start
 </code></pre></div>    </div>
 
   </div>
@@ -349,13 +349,13 @@ for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/cont
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">client</span><span class="p">.</span><span class="n">containers</span><span class="p">.</span><span class="nb">list</span><span class="p">():</span>
-  <span class="k">print</span> <span class="n">container</span><span class="p">.</span><span class="nb">id</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">container</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </div>
   <div id="tab-listcontainers-curl" class="tab-pane fade">
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock http://localhost/v1.40/containers/json
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock http://localhost/v1.41/containers/json
 <span class="o">[{</span>
   <span class="s2">"Id"</span>:<span class="s2">"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772"</span>,
   <span class="s2">"Names"</span>:[<span class="s2">"/tender_wing"</span><span class="o">]</span>,
@@ -431,7 +431,7 @@ for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/cont
   </div>
   <div id="tab-stopcontainers-curl" class="tab-pane fade">
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock http://localhost/v1.40/containers/json
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock http://localhost/v1.41/containers/json
 <span class="o">[{</span>
   <span class="s2">"Id"</span>:<span class="s2">"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772"</span>,
   <span class="s2">"Names"</span>:[<span class="s2">"/tender_wing"</span><span class="o">]</span>,
@@ -440,7 +440,7 @@ for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/cont
 <span class="o">}]</span>
 
 <span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="se">\</span>
-  <span class="nt">-X</span> POST http://localhost/v1.40/containers/ae63e8b89a26/stop
+  <span class="nt">-X</span> POST http://localhost/v1.41/containers/ae63e8b89a26/stop
 </code></pre></div>    </div>
 
   </div>
@@ -497,13 +497,13 @@ for example, <code class="language-plaintext highlighter-rouge">http:/v1.40/cont
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
 <span class="n">container</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">containers</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'f1064a8a4c82'</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">container</span><span class="p">.</span><span class="n">logs</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">container</span><span class="p">.</span><span class="n">logs</span><span class="p">())</span>
 </code></pre></div>    </div>
 
   </div>
   <div id="tab-containerlogs-curl" class="tab-pane fade">
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="s2">"http://localhost/v1.40/containers/ca5f55cdb/logs?stdout=1"</span>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="s2">"http://localhost/v1.41/containers/ca5f55cdb/logs?stdout=1"</span>
 Reticulating spline 1...
 Reticulating spline 2...
 Reticulating spline 3...
@@ -562,13 +562,13 @@ Reticulating spline 5...
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">client</span><span class="p">.</span><span class="n">images</span><span class="p">.</span><span class="nb">list</span><span class="p">():</span>
-  <span class="k">print</span> <span class="n">image</span><span class="p">.</span><span class="nb">id</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </div>
   <div id="tab-listimages-curl" class="tab-pane fade">
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock http://localhost/v1.40/images/json
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock http://localhost/v1.41/images/json
 <span class="o">[{</span>
   <span class="s2">"Id"</span>:<span class="s2">"sha256:31d9a31e1dd803470c5a151b8919ef1988ac3efd44281ac59d43ad623f275dcd"</span>,
   <span class="s2">"ParentId"</span>:<span class="s2">"sha256:ee4603260daafe1a8c2f3b78fd760922918ab2441cbb2853ed5c439e59c52f96"</span>,
@@ -628,14 +628,14 @@ Reticulating spline 5...
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">images</span><span class="p">.</span><span class="n">pull</span><span class="p">(</span><span class="s">"alpine"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span><span class="p">.</span><span class="nb">id</span>
+<span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </div>
   <div id="tab-pullimages-curl" class="tab-pane fade">
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="se">\</span>
-  <span class="nt">-X</span> POST <span class="s2">"http://localhost/v1.40/images/create?fromImage=alpine"</span>
+  <span class="nt">-X</span> POST <span class="s2">"http://localhost/v1.41/images/create?fromImage=alpine"</span>
 <span class="o">{</span><span class="s2">"status"</span>:<span class="s2">"Pulling from library/alpine"</span>,<span class="s2">"id"</span>:<span class="s2">"3.1"</span><span class="o">}</span>
 <span class="o">{</span><span class="s2">"status"</span>:<span class="s2">"Pulling fs layer"</span>,<span class="s2">"progressDetail"</span>:<span class="o">{}</span>,<span class="s2">"id"</span>:<span class="s2">"8f13703509f7"</span><span class="o">}</span>
 <span class="o">{</span><span class="s2">"status"</span>:<span class="s2">"Downloading"</span>,<span class="s2">"progressDetail"</span>:<span class="o">{</span><span class="s2">"current"</span>:32768,<span class="s2">"total"</span>:2244027<span class="o">}</span>,<span class="s2">"progress"</span>:<span class="s2">"[</span><span class="se">\u</span><span class="s2">003e                                                  ] 32.77 kB/2.244 MB"</span>,<span class="s2">"id"</span>:<span class="s2">"8f13703509f7"</span><span class="o">}</span>
@@ -715,7 +715,7 @@ Docker の公式レジストリでは HTTPS が用いられています。
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">docker</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">docker</span><span class="p">.</span><span class="n">from_env</span><span class="p">()</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">images</span><span class="p">.</span><span class="n">pull</span><span class="p">(</span><span class="s">"alpine"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span><span class="p">.</span><span class="nb">id</span>
+<span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </div>
@@ -729,7 +729,7 @@ Docker の公式レジストリでは HTTPS が用いられています。
 
 <span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock <span class="se">\</span>
   <span class="nt">-H</span> <span class="s2">"Content-Type: application/tar"</span>
-  <span class="nt">-X</span> POST <span class="s2">"http://localhost/v1.40/images/create?fromImage=alpine"</span>
+  <span class="nt">-X</span> POST <span class="s2">"http://localhost/v1.41/images/create?fromImage=alpine"</span>
   <span class="nt">-H</span> <span class="s2">"X-Registry-Auth"</span>
   <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$JSON</span><span class="s2">"</span>
 <span class="o">{</span><span class="s2">"status"</span>:<span class="s2">"Pulling from library/alpine"</span>,<span class="s2">"id"</span>:<span class="s2">"3.1"</span><span class="o">}</span>
@@ -811,7 +811,7 @@ Docker の公式レジストリでは HTTPS が用いられています。
 <span class="n">container</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">containers</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="s">"alpine"</span><span class="p">,</span> <span class="p">[</span><span class="s">"touch"</span><span class="p">,</span> <span class="s">"/helloworld"</span><span class="p">],</span> <span class="n">detach</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">container</span><span class="p">.</span><span class="n">wait</span><span class="p">()</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">commit</span><span class="p">(</span><span class="s">"helloworld"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span><span class="p">.</span><span class="nb">id</span>
+<span class="k">print</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </div>
@@ -820,7 +820,7 @@ Docker の公式レジストリでは HTTPS が用いられています。
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> alpine <span class="nb">touch</span> /helloworld
 0888269a9d584f0fa8fc96b3c0d8d57969ceea3a64acf47cd34eebb4744dbc52
 <span class="nv">$ </span>curl <span class="nt">--unix-socket</span> /var/run/docker.sock<span class="se">\</span>
-  <span class="nt">-X</span> POST <span class="s2">"http://localhost/v1.40/commit?container=0888269a9d&amp;repo=helloworld"</span>
+  <span class="nt">-X</span> POST <span class="s2">"http://localhost/v1.41/commit?container=0888269a9d&amp;repo=helloworld"</span>
 <span class="o">{</span><span class="s2">"Id"</span>:<span class="s2">"sha256:6c86a5cd4b87f2771648ce619e319f3e508394b5bfc2cdbd2d60f59d52acda6c"</span><span class="o">}</span>
 </code></pre></div>    </div>
 

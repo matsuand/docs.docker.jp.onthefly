@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2021-01-06 13:33:23 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Kubernetes へのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Kubernetes へのデプロイ" />
   <meta property="og:description" content="Kubernetes 上での簡単なアプリケーションを構築してデプロイする方法を学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-06T13:33:23+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/kube-deploy/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-06T13:33:23+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Kubernetes へのデプロイ","description":"Kubernetes 上での簡単なアプリケーションを構築してデプロイする方法を学びます。","url":"https://docs.docker.com/get-started/kube-deploy/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,12 +98,11 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Kubernetes へのデプロイ</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p>
-<h2 id="prerequisites">前提条件</h2>
+                        <section class="section"><h1>Kubernetes へのデプロイ</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><h2 id="prerequisites">前提条件</h2>
 
 <ul>
   <li><a href="/docs.docker.jp.onthefly/get-started/">概要</a> にて説明している Docker Desktop をダウンロードしインストールしていること。</li>
-  <li><a href="/docs.docker.jp.onthefly/get-started/part2/">クイックスタート 2 部</a> においてアプリケーションのコンテナー化を一通り学んでいること。</li>
+  <li><a href="/docs.docker.jp.onthefly/get-started/02_our_app/">クイックスタート 2 部</a> においてアプリケーションのコンテナー化を一通り学んでいること。</li>
   <li>Docker Desktop 上において Kubernetes が有効になっていること。
     <ul>
       <li><strong>Mac</strong>: メニューバーの Docker アイコンをクリック、<strong>Preferences</strong> を実行し ‘Kubernetes’ の横がグリーンに点灯していること。</li>
@@ -140,7 +139,7 @@ Docker Desktop によって構築されている Kubernetes 環境は <strong>�
   <li>
     <p>本チュートリアルのオーケストレーション概要の部において、すでに基本的な Kubernetes YAML ファイルを作り出しました。
 そこでこの YAML ファイルをもう少し洗練されたものにして、掲示板アプリの実行と管理を行っていきます。
-<code class="language-plaintext highlighter-rouge">bb.yaml</code> というファイルに以下の内容を記述してください。</p>
+<code class="language-plaintext highlighter-rouge">bb.yaml</code>というファイルに以下の内容を記述してください。</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
@@ -179,20 +178,20 @@ Docker Desktop によって構築されている Kubernetes 環境は <strong>�
     <p>この Kubernetes YAML ファイルには二つのオブジェクトを定義しています。
 それらは <code class="language-plaintext highlighter-rouge">---</code> で区切られています。</p>
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">Deployment</code> は、スケール変更可能な同一ポッドのグループを表わします。
-この例では <code class="language-plaintext highlighter-rouge">replica</code> すなわちポッドのコピーを１つだけ用意します。
-そしてこのポッドは、その中に１つだけコンテナーを持ちます（このことは <code class="language-plaintext highlighter-rouge">template:</code> キー配下により示されます）。
-ベースとするイメージは、本チュートリアルの以前の手順にて利用した <code class="language-plaintext highlighter-rouge">bulletinboard:1.0</code> です。</li>
-      <li><code class="language-plaintext highlighter-rouge">NodePort</code> サービスは、ホストのポート 30001 からのトラフィックを処理して、ポッド内の 8080 ポートへ接続します。
+      <li><code class="language-plaintext highlighter-rouge">Deployment</code>は、スケール変更可能な同一ポッドのグループを表わします。
+この例では<code class="language-plaintext highlighter-rouge">replica</code>すなわちポッドのコピーを１つだけ用意します。
+そしてこのポッドは、その中に１つだけコンテナーを持ちます（このことは<code class="language-plaintext highlighter-rouge">template:</code>キー配下により示されます）。
+ベースとするイメージは、本チュートリアルの以前の手順にて利用した<code class="language-plaintext highlighter-rouge">bulletinboard:1.0</code>です。</li>
+      <li><code class="language-plaintext highlighter-rouge">NodePort</code>サービスは、ホストのポート 30001 からのトラフィックを処理して、ポッド内の 8080 ポートへ接続します。
 こうしてネットワーク上から掲示板アプリへアクセスできるようになります。</li>
     </ul>
 
     <p>また Kubernetes YAML は、はじめのうちは長く複雑に見えがちですが、たいていは同一パターンを持っています。</p>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">apiVersion</code>、オブジェクトを扱うための Kubernetes API を表わします。</li>
-      <li><code class="language-plaintext highlighter-rouge">kind</code> は、このオブジェクトがどういう種類のものかを表わします。</li>
-      <li><code class="language-plaintext highlighter-rouge">metadata</code> は、たとえば name などの情報をオブジェクトに適用します。</li>
-      <li><code class="language-plaintext highlighter-rouge">spec</code> は、オブジェクトに対するパラメーターや設定項目を指定します。</li>
+      <li><code class="language-plaintext highlighter-rouge">kind</code>は、このオブジェクトがどういう種類のものかを表わします。</li>
+      <li><code class="language-plaintext highlighter-rouge">metadata</code>は、たとえば name などの情報をオブジェクトに適用します。</li>
+      <li><code class="language-plaintext highlighter-rouge">spec</code>は、オブジェクトに対するパラメーターや設定項目を指定します。</li>
     </ul>
   </li>
 </ol>
@@ -235,13 +234,13 @@ bb-entrypoint   NodePort    10.106.145.116   &lt;none&gt;        8080:30001/TCP 
 kubernetes      ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP          138d
 </code></pre></div>    </div>
 
-    <p>デフォルトの <code class="language-plaintext highlighter-rouge">kubernetes</code> サービスに加えて <code class="language-plaintext highlighter-rouge">bb-entrypoint</code> サービスが表示されます。
+    <p>デフォルトの<code class="language-plaintext highlighter-rouge">kubernetes</code>サービスに加えて<code class="language-plaintext highlighter-rouge">bb-entrypoint</code>サービスが表示されます。
 このサービスはトラフィックをポート 30001/TCP から受け付けます。</p>
   </li>
   <li>
-    <p>ブラウザーを開いて <code class="language-plaintext highlighter-rouge">localhost:30001</code> にアクセスし掲示板アプリを開きます。
+    <p>ブラウザーを開いて<code class="language-plaintext highlighter-rouge">localhost:30001</code>にアクセスし掲示板アプリを開きます。
 ここでも掲示板アプリを見ることができます。
-これはクイックスタートチュートリアルの <a href="/docs.docker.jp.onthefly/get-started/part2/">2 部</a> において、スタンドアロンなコンテナー上に起動させたアプリと同一のものです。</p>
+これはクイックスタートチュートリアルの <a href="/docs.docker.jp.onthefly/get-started/02_our_app/">2 部</a> において、スタンドアロンなコンテナー上に起動させたアプリと同一のものです。</p>
   </li>
   <li>
     <p>結果を確認できたらアプリケーションを削除します。</p>
