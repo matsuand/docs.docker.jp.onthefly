@@ -401,7 +401,7 @@ services:
    - 9229:9229
   environment:
    - SERVER_PORT=8080
-   - DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes
+   - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
    - ./:/code
   command: npm run debug
@@ -415,7 +415,7 @@ services:
    - 9229:9229
   environment:
    - SERVER_PORT=8080
-   - DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes
+   - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
    - ./:/code
   command: npm run debug
