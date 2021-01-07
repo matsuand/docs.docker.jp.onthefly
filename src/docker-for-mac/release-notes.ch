@@ -139,7 +139,8 @@ This page contains information about the new features, improvements, known issue
 @y
 - ボリュームマウントのオーバーラップが失敗する点を修正しました。
   [docker/for-mac#5157](https://github.com/docker/for-mac/issues/5157) を Fix に。
-  ただし [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) や [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124) に対する修正によって本修正が元に戻ってしまったため、これらは再度問題として残ります。@z
+  ただし [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) や [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124) に対する修正によって本修正が元に戻ってしまったため、これらは再度問題として残ります。
+@z
 
 @x
 ### Known issues
