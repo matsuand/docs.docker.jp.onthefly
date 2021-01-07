@@ -47,6 +47,47 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop Community 3.0.4
+2021-01-06
+@y
+## Docker Desktop Community 3.0.4
+2021-01-06
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+@y
+> [ダウンロード](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine 20.10.2](https://docs.docker.com/engine/release-notes/#20102)
+@y
+- [Docker Engine 20.10.2](https://docs.docker.com/engine/release-notes/#20102)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue that could cause Docker Desktop to fail to start after upgrading to 3.0.0. Fixes [docker/for-win#9755](https://github.com/docker/for-win/issues/9755).
+@y
+- Docker Desktop を 3.0.0 にアップグレードした後に、起動に失敗する場合がある点を修正しました。
+  [docker/for-win#9755](https://github.com/docker/for-win/issues/9755) を Fix に。
+@z
+
+@x
 ## Docker Desktop Community 3.0.0
 2020-12-10
 @y
