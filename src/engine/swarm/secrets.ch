@@ -18,9 +18,6 @@ keywords: swarm, secrets, credentials, sensitive strings, sensitive data, securi
 @x
 ## About secrets
 @y
-{% comment %}
-## About secrets
-{% endcomment %}
 ## secrets について
 {: #about-secrets }
 @z
@@ -35,16 +32,6 @@ it. Secrets are encrypted during transit and at rest in a Docker swarm. A given
 secret is only accessible to those services which have been granted explicit
 access to it, and only while those service tasks are running.
 @y
-{% comment %}
-In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
-password, SSH private key, SSL certificate, or another piece of data that should
-not be transmitted over a network or stored unencrypted in a Dockerfile or in
-your application's source code. You can use Docker _secrets_ to centrally manage
-this data and securely transmit it to only those containers that need access to
-it. Secrets are encrypted during transit and at rest in a Docker swarm. A given
-secret is only accessible to those services which have been granted explicit
-access to it, and only while those service tasks are running.
-{% endcomment %}
 Docker Swarm サービスにおいて secret とは、パスワード、SSH 秘密鍵、SSL 証明書などのようなデータ
 In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
 password, SSH private key, SSL certificate, or another piece of data that should
@@ -351,11 +338,11 @@ a similar way, see
 @x
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](../../compose/compose-file/index.md#secrets) for details.
+[the Compose file reference](../../compose/compose-file/compose-file-v3.md#secrets) for details.
 @y
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](../../compose/compose-file/index.md#secrets) for details.
+[the Compose file reference](../../compose/compose-file/compose-file-v3.md#secrets) for details.
 @z
 
 @x
@@ -2518,8 +2505,8 @@ for that secret data.
 
 @x
 More information on short and long syntax for secrets can be found at
-[Compose file version 3 reference](../../compose/compose-file/index.md#secrets).
+[Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).
 @y
 More information on short and long syntax for secrets can be found at
-[Compose file version 3 reference](../../compose/compose-file/index.md#secrets).
+[Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).
 @z

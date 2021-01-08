@@ -312,11 +312,11 @@ These differences are explained below.
 
 @x
 Compose files that do not declare a version are considered "version 1". In those
-files, all the [services](index.md#service-configuration-reference) are
+files, all the [services](compose-file-v3.md#service-configuration-reference) are
 declared at the root of the document.
 @y
 Compose files that do not declare a version are considered "version 1". In those
-files, all the [services](index.md#service-configuration-reference) are
+files, all the [services](compose-file-v3.md#service-configuration-reference) are
 declared at the root of the document.
 @z
 
@@ -330,12 +330,12 @@ future Compose release.
 
 @x
 Version 1 files cannot declare named
-[volumes](index.md#volume-configuration-reference), [networks](index.md#network-configuration-reference) or
-[build arguments](index.md#args).
+[volumes](compose-file-v3.md#volume-configuration-reference), [networks](compose-file-v3.md#network-configuration-reference) or
+[build arguments](compose-file-v3.md#args).
 @y
 Version 1 files cannot declare named
-[volumes](index.md#volume-configuration-reference), [networks](index.md#network-configuration-reference) or
-[build arguments](index.md#args).
+[volumes](compose-file-v3.md#volume-configuration-reference), [networks](compose-file-v3.md#network-configuration-reference) or
+[build arguments](compose-file-v3.md#args).
 @z
 
 @x
@@ -634,7 +634,7 @@ Introduces the following additional parameters:
   service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference),
   [networks](compose-file-v2.md#network-configuration-reference), and
-  [build](index.md#build)
+  [build](compose-file-v3.md#build)
 - `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
@@ -648,7 +648,7 @@ Introduces the following additional parameters:
   service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference),
   [networks](compose-file-v2.md#network-configuration-reference), and
-  [build](index.md#build)
+  [build](compose-file-v3.md#build)
 - `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
@@ -807,9 +807,9 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 @z
 
 @x
-- Added: [deploy](index.md#deploy)
+- Added: [deploy](compose-file-v3.md#deploy)
 @y
-- Added: [deploy](index.md#deploy)
+- Added: [deploy](compose-file-v3.md#deploy)
 @z
 
 @x
@@ -865,9 +865,9 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [`secrets`](index.md#secrets)
+- [`secrets`](compose-file-v3.md#secrets)
 @y
-- [`secrets`](index.md#secrets)
+- [`secrets`](compose-file-v3.md#secrets)
 @z
 
 @x
@@ -891,17 +891,17 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [`cache_from`](index.md#cache_from) in [build configurations](index.md#build)
-- Long syntax for [ports](index.md#ports) and [volume mounts](index.md#volumes)
-- [`attachable`](index.md#attachable) network driver option
-- [deploy `endpoint_mode`](index.md#endpoint_mode)
-- [deploy placement `preference`](index.md#placement)
+- [`cache_from`](compose-file-v3.md#cache_from) in [build configurations](compose-file-v3.md#build)
+- Long syntax for [ports](compose-file-v3.md#ports) and [volume mounts](compose-file-v3.md#volumes)
+- [`attachable`](compose-file-v3.md#attachable) network driver option
+- [deploy `endpoint_mode`](compose-file-v3.md#endpoint_mode)
+- [deploy placement `preference`](compose-file-v3.md#placement)
 @y
-- [`cache_from`](index.md#cache_from) in [build configurations](index.md#build)
-- Long syntax for [ports](index.md#ports) and [volume mounts](index.md#volumes)
-- [`attachable`](index.md#attachable) network driver option
-- [deploy `endpoint_mode`](index.md#endpoint_mode)
-- [deploy placement `preference`](index.md#placement)
+- [`cache_from`](compose-file-v3.md#cache_from) in [build configurations](compose-file-v3.md#build)
+- Long syntax for [ports](compose-file-v3.md#ports) and [volume mounts](compose-file-v3.md#volumes)
+- [`attachable`](compose-file-v3.md#attachable) network driver option
+- [deploy `endpoint_mode`](compose-file-v3.md#endpoint_mode)
+- [deploy placement `preference`](compose-file-v3.md#placement)
 @z
 
 @x
@@ -925,13 +925,13 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [build `labels`](index.md#build)
-- [`credential_spec`](index.md#credential_spec)
-- [`configs`](index.md#configs)
+- [build `labels`](compose-file-v3.md#build)
+- [`credential_spec`](compose-file-v3.md#credential_spec)
+- [`configs`](compose-file-v3.md#configs)
 @y
-- [build `labels`](index.md#build)
-- [`credential_spec`](index.md#credential_spec)
-- [`configs`](index.md#configs)
+- [build `labels`](compose-file-v3.md#build)
+- [`credential_spec`](compose-file-v3.md#credential_spec)
+- [`configs`](compose-file-v3.md#configs)
 @z
 
 @x
@@ -955,17 +955,17 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [`target`](index.md#target) and [`network`](index.md#network) in
-  [build configurations](index.md#build)
-- `start_period` for [`healthchecks`](index.md#healthcheck)
-- `order` for [update configurations](index.md#update_config)
-- `name` for [volumes](index.md#volume-configuration-reference)
+- [`target`](compose-file-v3.md#target) and [`network`](compose-file-v3.md#network) in
+  [build configurations](compose-file-v3.md#build)
+- `start_period` for [`healthchecks`](compose-file-v3.md#healthcheck)
+- `order` for [update configurations](compose-file-v3.md#update_config)
+- `name` for [volumes](compose-file-v3.md#volume-configuration-reference)
 @y
-- [`target`](index.md#target) and [`network`](index.md#network) in
-  [build configurations](index.md#build)
-- `start_period` for [`healthchecks`](index.md#healthcheck)
-- `order` for [update configurations](index.md#update_config)
-- `name` for [volumes](index.md#volume-configuration-reference)
+- [`target`](compose-file-v3.md#target) and [`network`](compose-file-v3.md#network) in
+  [build configurations](compose-file-v3.md#build)
+- `start_period` for [`healthchecks`](compose-file-v3.md#healthcheck)
+- `order` for [update configurations](compose-file-v3.md#update_config)
+- `name` for [volumes](compose-file-v3.md#volume-configuration-reference)
 @z
 
 @x
@@ -989,13 +989,13 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [`isolation`](index.md#isolation) in service definitions
+- [`isolation`](compose-file-v3.md#isolation) in service definitions
 - `name` for networks, secrets and configs
-- `shm_size` in [build configurations](index.md#build)
+- `shm_size` in [build configurations](compose-file-v3.md#build)
 @y
-- [`isolation`](index.md#isolation) in service definitions
+- [`isolation`](compose-file-v3.md#isolation) in service definitions
 - `name` for networks, secrets and configs
-- `shm_size` in [build configurations](index.md#build)
+- `shm_size` in [build configurations](compose-file-v3.md#build)
 @z
 
 @x
@@ -1019,9 +1019,9 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [`tmpfs` size](index.md#long-syntax-3) for `tmpfs`-type mounts
+- [`tmpfs` size](compose-file-v3.md#long-syntax-3) for `tmpfs`-type mounts
 @y
-- [`tmpfs` size](index.md#long-syntax-3) for `tmpfs`-type mounts
+- [`tmpfs` size](compose-file-v3.md#long-syntax-3) for `tmpfs`-type mounts
 @z
 
 @x
@@ -1045,13 +1045,13 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [`init`](index.md#init) in service definitions
-- [`rollback_config`](index.md#rollback_config) in deploy configurations
+- [`init`](compose-file-v3.md#init) in service definitions
+- [`rollback_config`](compose-file-v3.md#rollback_config) in deploy configurations
 - Support for extension fields at the root of service, network, volume, secret
   and config definitions
 @y
-- [`init`](index.md#init) in service definitions
-- [`rollback_config`](index.md#rollback_config) in deploy configurations
+- [`init`](compose-file-v3.md#init) in service definitions
+- [`rollback_config`](compose-file-v3.md#rollback_config) in deploy configurations
 - Support for extension fields at the root of service, network, volume, secret
   and config definitions
 @z
@@ -1077,23 +1077,23 @@ Introduces the following additional parameters:
 @z
 
 @x
-- [`max_replicas_per_node`](index.md#max_replicas_per_node) in placement
+- [`max_replicas_per_node`](compose-file-v3.md#max_replicas_per_node) in placement
   configurations
-- `template_driver` option for [config](index.md#configs-configuration-reference)
-   and [secret](index.md#secrets-configuration-reference) configurations. This
+- `template_driver` option for [config](compose-file-v3.md#configs-configuration-reference)
+   and [secret](compose-file-v3.md#secrets-configuration-reference) configurations. This
    option is only supported when deploying swarm services using
    `docker stack deploy`.
-- `driver` and `driver_opts` option for [secret](index.md#secrets-configuration-reference)
+- `driver` and `driver_opts` option for [secret](compose-file-v3.md#secrets-configuration-reference)
    configurations. This option is only supported when deploying swarm services
    using `docker stack deploy`.
 @y
-- [`max_replicas_per_node`](index.md#max_replicas_per_node) in placement
+- [`max_replicas_per_node`](compose-file-v3.md#max_replicas_per_node) in placement
   configurations
-- `template_driver` option for [config](index.md#configs-configuration-reference)
-   and [secret](index.md#secrets-configuration-reference) configurations. This
+- `template_driver` option for [config](compose-file-v3.md#configs-configuration-reference)
+   and [secret](compose-file-v3.md#secrets-configuration-reference) configurations. This
    option is only supported when deploying swarm services using
    `docker stack deploy`.
-- `driver` and `driver_opts` option for [secret](index.md#secrets-configuration-reference)
+- `driver` and `driver_opts` option for [secret](compose-file-v3.md#secrets-configuration-reference)
    configurations. This option is only supported when deploying swarm services
    using `docker stack deploy`.
 @z
@@ -1121,12 +1121,12 @@ several options have been removed:
 @x
 -   `volume_driver`: Instead of setting the volume driver on the service, define
     a volume using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](compose-file-v3.md#volume-configuration-reference)
     and specify the driver there.
 @y
 -   `volume_driver`: Instead of setting the volume driver on the service, define
     a volume using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](compose-file-v3.md#volume-configuration-reference)
     and specify the driver there.
 @z
 
@@ -1154,24 +1154,24 @@ several options have been removed:
 
 @x
 -   `volumes_from`: To share a volume between services, define it using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](compose-file-v3.md#volume-configuration-reference)
     and reference it from each service that shares it using the
-    [service-level `volumes` option](index.md#driver).
+    [service-level `volumes` option](compose-file-v3.md#driver).
 @y
 -   `volumes_from`: To share a volume between services, define it using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](compose-file-v3.md#volume-configuration-reference)
     and reference it from each service that shares it using the
-    [service-level `volumes` option](index.md#driver).
+    [service-level `volumes` option](compose-file-v3.md#driver).
 @z
 
 @x
 -   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
-    have been replaced by the [resources](index.md#resources) key under
+    have been replaced by the [resources](compose-file-v3.md#resources) key under
     `deploy`. `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 @y
 -   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
-    have been replaced by the [resources](index.md#resources) key under
+    have been replaced by the [resources](compose-file-v3.md#resources) key under
     `deploy`. `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 @z
@@ -1305,9 +1305,9 @@ It's more complicated if you're using particular configuration features:
 @z
 
 @x
--   `net`: This is now replaced by [network_mode](index.md#network_mode):
+-   `net`: This is now replaced by [network_mode](compose-file-v3.md#network_mode):
 @y
--   `net`: This is now replaced by [network_mode](index.md#network_mode):
+-   `net`: This is now replaced by [network_mode](compose-file-v3.md#network_mode):
 @z
 
 @x
@@ -1423,13 +1423,13 @@ the following deploy keys are translated:
 @z
 
 @x
-- [resources](index.md#resources) limits and memory reservations
-- [replicas](index.md#replicas)
-- [restart_policy](index.md#restart_policy) `condition` and `max_attempts`
+- [resources](compose-file-v3.md#resources) limits and memory reservations
+- [replicas](compose-file-v3.md#replicas)
+- [restart_policy](compose-file-v3.md#restart_policy) `condition` and `max_attempts`
 @y
-- [resources](index.md#resources) limits and memory reservations
-- [replicas](index.md#replicas)
-- [restart_policy](index.md#restart_policy) `condition` and `max_attempts`
+- [resources](compose-file-v3.md#resources) limits and memory reservations
+- [replicas](compose-file-v3.md#replicas)
+- [restart_policy](compose-file-v3.md#restart_policy) `condition` and `max_attempts`
 @z
 
 @x

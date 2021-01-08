@@ -40,25 +40,6 @@ Options:
     -q, --quiet             Don't print anything to `STDOUT`.
 ```
 @y
-{% comment %}
-```none
-Usage: build [options] [--build-arg key=val...] [SERVICE...]
-
-Options:
-    --build-arg key=val     Set build-time variables for services.
-    --compress              Compress the build context using gzip.
-    --force-rm              Always remove intermediate containers.
-    -m, --memory MEM        Set memory limit for the build container.
-    --no-cache              Do not use cache when building the image.
-    --no-rm                 Do not remove intermediate containers after a successful build.
-    --parallel              Build images in parallel.
-    --progress string       Set type of progress output (`auto`, `plain`, `tty`).
-                            `EXPERIMENTAL` flag for native builder.
-                            To enable, run with `COMPOSE_DOCKER_CLI_BUILD=1`)
-    --pull                  Always attempt to pull a newer version of the image.
-    -q, --quiet             Don't print anything to `STDOUT`.
-```
-{% endcomment %}
 ```none
 利用方法: build [オプション] [--build-arg key=val...] [SERVICE...]
 
@@ -81,30 +62,19 @@ Options:
 @x
 Services are built once and then tagged, by default as `project_service`. For
 example, `composetest_db`. If the Compose file specifies an
-[image](../compose-file/index.md#image) name, the image is
+[image](../compose-file/compose-file-v3.md#image) name, the image is
 tagged with that name, substituting any variables beforehand. See
-[variable substitution](../compose-file/index.md#variable-substitution).
+[variable substitution](../compose-file/compose-file-v3.md#variable-substitution).
 @y
-{% comment %}
-Services are built once and then tagged, by default as `project_service`. For
-example, `composetest_db`. If the Compose file specifies an
-[image](../compose-file/index.md#image) name, the image is
-tagged with that name, substituting any variables beforehand. See
-[variable substitution](../compose-file/index.md#variable-substitution).
-{% endcomment %}
 サービスは `プロジェクト名_サービス` として構築時にタグ付けられます。
 例えば `composetest_db` です。
-Compose ファイルが[イメージ](../compose-file/index.md#image) 名を指定している場合、イメージはその名称によってタグづけされます。変数が用いられている場合は、あらかじめ置換されます。
-これについては[変数置換](../compose-file/index.md#variable-substitution) を参照してください。
+Compose ファイルが[イメージ](../compose-file/compose-file-v3.md#image) 名を指定している場合、イメージはその名称によってタグづけされます。変数が用いられている場合は、あらかじめ置換されます。
+これについては[変数置換](../compose-file/compose-file-v3.md#variable-substitution) を参照してください。
 @z
 
 @x
 If you change a service's Dockerfile or the contents of its
 build directory, run `docker-compose build` to rebuild it.
 @y
-{% comment %}
-If you change a service's Dockerfile or the contents of its
-build directory, run `docker-compose build` to rebuild it.
-{% endcomment %}
 サービスの Dockerfile やビルドディレクトリの内容を変更する場合は、`docker-compose build` を実行して再ビルドします。
 @z

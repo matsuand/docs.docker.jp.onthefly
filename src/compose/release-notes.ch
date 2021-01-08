@@ -32,9 +32,6 @@ redirect_from:
 @x
 ### Bugs
 @y
-{% comment %}
-### Bugs
-{% endcomment %}
 {: #bugs }
 ### バグ
 @z
@@ -68,55 +65,37 @@ redirect_from:
 @x
 ### Bugs
 @y
-{% comment %}
-### Bugs
-{% endcomment %}
-{: #bugs-1}
+{: #bugs }
 ### バグ
 @z
 
 @x
 - Merged `max_replicas_per_node` on `docker-compose config`.
 @y
-{% comment %}
-- Merged `max_replicas_per_node` on `docker-compose config`.
-{% endcomment %}
 - `docker-compose config` に `max_replicas_per_node` をマージしました。
 @z
 
 @x
 - Fixed `depends_on` serialization on `docker-compose config`.
 @y
-{% comment %}
-- Fixed `depends_on` serialization on `docker-compose config`.
-{% endcomment %}
 - `docker-compose config` における `depends_on` のシリアライズ処理を修正しました。
 @z
 
 @x
 - Fixed scaling when some containers are not running on `docker-compose up`.
 @y
-{% comment %}
-- Fixed scaling when some containers are not running on `docker-compose up`.
-{% endcomment %}
 - `docker-compose up` において動作していないコンテナーがある際のスケール処理を修正しました。
 @z
 
 @x
 - Enabled relative paths for `driver_opts.device` for `local` driver.
 @y
-{% comment %}
-- Enabled relative paths for `driver_opts.device` for `local` driver.
-{% endcomment %}
 - `local` ドライバー利用時の `driver_opts.device` において相対パスを可能にしました。
 @z
 
 @x
 - Allowed strings for `cpus` fields.
 @y
-{% comment %}
-- Allowed strings for `cpus` fields.
-{% endcomment %}
 - `cpus` に対して文字列指定を可能にしました。
 @z
 
@@ -131,19 +110,13 @@ redirect_from:
 @x
 ### Bugs
 @y
-{% comment %}
-### Bugs
-{% endcomment %}
-{: #bugs-2 }
+{: #bugs }
 ### バグ
 @z
 
 @x
 - Fixed bug on `docker-compose run` container attach.
 @y
-{% comment %}
-- Fixed bug on `docker-compose run` container attach.
-{% endcomment %}
 - `docker-compose run` によるコンテナーアタッチのバグを修正しました。
 @z
 
@@ -158,46 +131,31 @@ redirect_from:
 @x
 ### Bugs
 @y
-{% comment %}
-### Bugs
-{% endcomment %}
-{: #bugs-3 }
+{: #bugs }
 ### バグ
 @z
 
 @x
 - Fixed `docker-compose run` when `service.scale` is specified.
 @y
-{% comment %}
-- Fixed `docker-compose run` when `service.scale` is specified.
-{% endcomment %}
 - `service.scale` 指定時の `docker-compose run` コマンドを修正しました。
 @z
 
 @x
 - Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
 @y
-{% comment %}
-- Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
-{% endcomment %}
 - Swarm ネットワーク通信における障害への一時対応として、`driver` プロパティを外部ネットワークに対して機能させるようにしました。
 @z
 
 @x
 - Pinned the new internal schema version to `3.9` as the default.
 @y
-{% comment %}
-- Pinned the new internal schema version to `3.9` as the default.
-{% endcomment %}
 - 内部スキーマバージョン `3.9` をデフォルトにしました。
 @z
 
 @x
 - Preserved the version number configured in the Compose file.
 @y
-{% comment %}
-- Preserved the version number configured in the Compose file.
-{% endcomment %}
 - Compose ファイル内に設定されたバージョン番号を保持するようにしました。
 @z
 
@@ -212,9 +170,6 @@ redirect_from:
 @x
 ### Features
 @y
-{% comment %}
-### Features
-{% endcomment %}
 {: #features }
 ### 機能
 @z
@@ -222,136 +177,91 @@ redirect_from:
 @x
 - Merged 2.x and 3.x Compose formats and aligned with `COMPOSE_SPEC` schema.
 @y
-{% comment %}
-- Merged 2.x and 3.x Compose formats and aligned with `COMPOSE_SPEC` schema.
-{% endcomment %}
 - Compose フォーマット 2.x と 3.x をマージし、`COMPOSE_SPEC` スキーマに合わせました。
 @z
 
 @x
 - Implemented service mode for `ipc`.
 @y
-{% comment %}
-- Implemented service mode for `ipc`.
-{% endcomment %}
 - `ipc` に対応するサービスモードを導入しました。
 @z
 
 @x
 - Passed `COMPOSE_PROJECT_NAME` environment variable in container mode.
 @y
-{% comment %}
-- Passed `COMPOSE_PROJECT_NAME` environment variable in container mode.
-{% endcomment %}
 - コンテナーモードにおいて環境変数 `COMPOSE_PROJECT_NAME` を設定しました。
 @z
 
 @x
 - Made `run` behave in the same way as `up`.
 @y
-{% comment %}
-- Made `run` behave in the same way as `up`.
-{% endcomment %}
 - `run` の動作を `up` と同様にしました。
 @z
 
 @x
 - Used `docker build` on `docker-compose run` when `COMPOSE_DOCKER_CLI_BUILD` environment variable is set.
 @y
-{% comment %}
-- Used `docker build` on `docker-compose run` when `COMPOSE_DOCKER_CLI_BUILD` environment variable is set.
-{% endcomment %}
 - 環境変数 `COMPOSE_DOCKER_CLI_BUILD` の設定時には `docker-compose run` において `docker build` を利用するようにしました。
 @z
 
 @x
 - Used the docker-py default API version for engine queries (`auto`).
 @y
-{% comment %}
-- Used the docker-py default API version for engine queries (`auto`).
-{% endcomment %}
 - Engine のクエリー（`auto`）に対して docker-py のデフォルト API バージョンを利用するようにしました。
 @z
 
 @x
 - Parsed `network_mode` on build.
 @y
-{% comment %}
-- Parsed `network_mode` on build.
-{% endcomment %}
 - ビルド時に `network_mode` を取得するようにしました。
 @z
 
 @x
 ### Bugs
 @y
-{% comment %}
-### Bugs
-{% endcomment %}
-{: #bugs-4 }
+{: #bugs }
 ### バグ
 @z
 
 @x
 - Ignored build context path validation when building is not required.
 @y
-{% comment %}
-- Ignored build context path validation when building is not required.
-{% endcomment %}
 - ビルドが必要ではない場合には、ビルドコンテキストのパス確認を無視するようにしました。
 @z
 
 @x
 - Fixed float to bytes conversion via docker-py bump to 4.3.1.
 @y
-{% comment %}
-- Fixed float to bytes conversion via docker-py bump to 4.3.1.
-{% endcomment %}
 - docker-py 4.3.1 へのアップグレードにともなって、float から byte への変換を修正しました。
 @z
 
 @x
 - Fixed the scale bug when the deploy section is set.
 @y
-{% comment %}
-- Fixed the scale bug when the deploy section is set.
-{% endcomment %}
 - デプロイの項が設定されているときのスケールに関するバグを修正しました。
 @z
 
 @x
 - Fixed `docker-py` bump in `setup.py`.
 @y
-{% comment %}
-- Fixed `docker-py` bump in `setup.py`.
-{% endcomment %}
 - `setup.py` において `docker-py` のバージョンアップに対応しました。
 @z
 
 @x
 - Fixed experimental build failure detection.
 @y
-{% comment %}
-- Fixed experimental build failure detection.
-{% endcomment %}
 - 試験的ビルドに失敗検出を修正しました。
 @z
 
 @x
 - Fixed context propagation to the Docker CLI.
 @y
-{% comment %}
-- Fixed context propagation to the Docker CLI.
-{% endcomment %}
 - Docker CLI へのコンテキスト送信を修正しました。
 @z
 
 @x
 ### Miscellaneous
 @y
-{% comment %}
-### Miscellaneous
-{% endcomment %}
 {: #miscellaneous }
 ### その他
 @z
@@ -359,36 +269,24 @@ redirect_from:
 @x
 - Bumped `docker-py` to 4.3.1.
 @y
-{% comment %}
-- Bumped `docker-py` to 4.3.1.
-{% endcomment %}
 - `docker-py` 4.3.1 へのアップデート。
 @z
 
 @x
 - Bumped `tox` to 3.19.0.
 @y
-{% comment %}
-- Bumped `tox` to 3.19.0.
-{% endcomment %}
 - `tox` 3.19.0 へのアップデート。
 @z
 
 @x
 - Bumped `virtualenv` to 20.0.30.
 @y
-{% comment %}
-- Bumped `virtualenv` to 20.0.30.
-{% endcomment %}
 - `virtualenv` 20.0.30 へのアップデート。
 @z
 
 @x
 - Added script for Docs synchronization.
 @y
-{% comment %}
-- Added script for Docs synchronization.
-{% endcomment %}
 - Docs 同期に対するスクリプトを追加しました。
 @z
 
@@ -403,9 +301,6 @@ redirect_from:
 @x
 ### Bug fixes
 @y
-{% comment %}
-### Bug fixes
-{% endcomment %}
 {: #bug-fixes }
 ### バグフィックス
 @z
@@ -413,9 +308,6 @@ redirect_from:
 @x
 - Enforced `docker-py` 4.2.2 as minimum version when installing with pip.
 @y
-{% comment %}
-- Enforced `docker-py` 4.2.2 as minimum version when installing with pip.
-{% endcomment %}
 - Enforced `docker-py` 4.2.2 as minimum version when installing with pip.
 @z
 
@@ -430,9 +322,6 @@ redirect_from:
 @x
 ### Features
 @y
-{% comment %}
-### Features
-{% endcomment %}
 {: #features-1 }
 ### 機能
 @z
@@ -440,37 +329,25 @@ redirect_from:
 @x
 - Bumped `docker-py` from 4.2.1 to 4.2.2.
 @y
-{% comment %}
-- Bumped `docker-py` from 4.2.1 to 4.2.2.
-{% endcomment %}
 - Bumped `docker-py` from 4.2.1 to 4.2.2.
 @z
 
 @x
 ### Bug fixes
 @y
-{% comment %}
-### Bug fixes
-{% endcomment %}
-{: #bug-fixes-1 }
+{: #bug-fixes }
 ### バグフィックス
 @z
 
 @x
 - Enforced `docker-py` 4.2.1 as minimum version when installing with pip.
 @y
-{% comment %}
-- Enforced `docker-py` 4.2.1 as minimum version when installing with pip.
-{% endcomment %}
 - Enforced `docker-py` 4.2.1 as minimum version when installing with pip.
 @z
 
 @x
 - Fixed context load for non-docker endpoints.
 @y
-{% comment %}
-- Fixed context load for non-docker endpoints.
-{% endcomment %}
 - Fixed context load for non-docker endpoints.
 @z
 
@@ -485,92 +362,62 @@ redirect_from:
 @x
 ### Features
 @y
-{% comment %}
-### Features
-{% endcomment %}
-{: #features-2 }
+{: #features }
 ### 機能
 @z
 
 @x
 - Added `docker context` support.
 @y
-{% comment %}
-- Added `docker context` support.
-{% endcomment %}
 - `docker context` サポートの追加。
 @z
 
 @x
 - Added missing test dependency `ddt` to `setup.py`.
 @y
-{% comment %}
-- Added missing test dependency `ddt` to `setup.py`.
-{% endcomment %}
 - Added missing test dependency `ddt` to `setup.py`.
 @z
 
 @x
 - Added `--attach-dependencies` to command `up` for attaching to dependencies.
 @y
-{% comment %}
-- Added `--attach-dependencies` to command `up` for attaching to dependencies.
-{% endcomment %}
 - Added `--attach-dependencies` to command `up` for attaching to dependencies.
 @z
 
 @x
 - Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
 @y
-{% comment %}
-- Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
-{% endcomment %}
 - Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
 @z
 
 @x
 - Bumped `Pytest` to 5.3.4 and add refactor compatibility with the new version.
 @y
-{% comment %}
-- Bumped `Pytest` to 5.3.4 and add refactor compatibility with the new version.
-{% endcomment %}
 - Bumped `Pytest` to 5.3.4 and add refactor compatibility with the new version.
 @z
 
 @x
 - Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
 @y
-{% comment %}
-- Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
-{% endcomment %}
 - Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
 @z
 
 @x
 - Bumped `certifi` from 2019.11.28 to 2020.4.5.1.
 @y
-{% comment %}
-- Bumped `certifi` from 2019.11.28 to 2020.4.5.1.
-{% endcomment %}
 - Bumped `certifi` from 2019.11.28 to 2020.4.5.1.
 @z
 
 @x
 - Bumped `docker-py` from 4.2.0 to 4.2.1.
 @y
-{% comment %}
-- Bumped `docker-py` from 4.2.0 to 4.2.1.
-{% endcomment %}
 - Bumped `docker-py` from 4.2.0 to 4.2.1.
 @z
 
 @x
 ### Bug fixes
 @y
-{% comment %}
-### Bug fixes
-{% endcomment %}
-{: #bug-fixes-2 }
+{: #bug-fixes }
 ### バグフィックス
 @z
 
@@ -633,10 +480,7 @@ redirect_from:
 @x
 ### Features
 @y
-{% comment %}
-### Features
-{% endcomment %}
-{: #features-3 }
+{: #features }
 ### 機能
 @z
 
@@ -1071,10 +915,7 @@ This release contains minor improvements and bug fixes.
 @x
 ### Features
 @y
-{% comment %}
-### Features
-{% endcomment %}
-{: #features-4 }
+{: #features }
 ### 機能
 @z
 
@@ -1335,10 +1176,7 @@ naming scheme accordingly before upgrading.
 @x
 ### Features
 @y
-{% comment %}
-### Features
-{% endcomment %}
-{: #features-5 }
+{: #features }
 ### 機能
 @z
 
@@ -2469,10 +2307,10 @@ naming scheme accordingly before upgrading.
 @z
 
 @x
-- Added support for the [long syntax](compose-file/index.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
+- Added support for the [long syntax](compose-file/compose-file-v3.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
   Using this syntax will create [mounts](../storage/bind-mounts.md) instead of volumes.
 @y
-- Added support for the [long syntax](compose-file/index.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
+- Added support for the [long syntax](compose-file/compose-file-v3.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
   Using this syntax will create [mounts](../storage/bind-mounts.md) instead of volumes.
 @z
 
