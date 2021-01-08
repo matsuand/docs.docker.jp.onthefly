@@ -457,10 +457,12 @@ AWS CloudWatch ログに対しては Compose ファイル内の拡張項目`x-aw
 @z
 
 @x
-You can also pass `awslogs` driver parameters to your container as standard
-Compose file `logging.driver_opts` elements.
+You can also pass `awslogs` 
+parameters to your container as standard
+Compose file `logging.driver_opts` elements. See [AWS documentation](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html){:target="_blank" rel="noopener" class="_"} for details on available log driver options.
 @y
-標準的な Compose ファイルの項目`logging.driver_opts`を使えば、コンテナーに対して`awslogs`ドライバーのパラメーターを指定することができます。
+標準的な Compose ファイルの項目`logging.driver_opts`を使い、コンテナーに対して`awslogs`パラメーターを指定することもできます。
+利用可能なログドライバーオプションの詳細は [AWS ドキュメント](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
