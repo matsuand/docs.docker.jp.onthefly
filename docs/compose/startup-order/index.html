@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2021-01-08 22:30:21 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose における起動、停止順の制御 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Compose における起動、停止順の制御" />
   <meta property="og:description" content="Docker Compose においてサービスの起動順、停止順を制御する方法を説明します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-08T22:30:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/startup-order/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-08T22:30:21+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose における起動、停止順の制御","description":"Docker Compose においてサービスの起動順、停止順を制御する方法を説明します。","url":"https://docs.docker.com/compose/startup-order/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,11 +98,10 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose における起動、停止順の制御</h1>
-<p>サービスの起動順や停止順は、<a href="/docs.docker.jp.onthefly/compose/compose-file/#depends_on">depends_on</a> オプションを使って制御することができます。
-Compose では必ず依存順に応じて、コンテナーの起動または停止を行いますが、この依存順とは <code class="language-plaintext highlighter-rouge">depends_on</code>、<code class="language-plaintext highlighter-rouge">links</code>、<code class="language-plaintext highlighter-rouge">volumes_from</code>、<code class="language-plaintext highlighter-rouge">network_mode: "service:..."</code> によって決定します。</p>
+                        <section class="section"><h1>Compose における起動、停止順の制御</h1><p>サービスの起動順や停止順は、<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#depends_on">depends_on</a> オプションを使って制御することができます。
+Compose では必ず依存順に応じて、コンテナーの起動または停止を行いますが、この依存順とは<code class="language-plaintext highlighter-rouge">depends_on</code>、<code class="language-plaintext highlighter-rouge">links</code>、<code class="language-plaintext highlighter-rouge">volumes_from</code>、<code class="language-plaintext highlighter-rouge">network_mode: "service:..."</code>によって決定します。</p>
 
-<p>しかし起動時の場合、Compose はコンテナーが “準備状態” になって初めて制御を待ちます。
+<p>しかし起動時の場合、Compose はコンテナーが「準備状態」になって初めて制御を待ちます。
 （これがアプリケーションにとってどのような意味になるかには無関係です。）
 つまり稼動していることが必要です。
 これには十分な理由があります。</p>
@@ -125,7 +124,7 @@ Compose では必ず依存順に応じて、コンテナーの起動または停
 これは非常に小さなラッパースクリプトです。
 これをアプリケーションイメージに含めて、指定されたホストが TCP 接続を受け入れるまでの間、指定ポートに問い合わせを行うようにすることができます。</p>
 
-    <p>たとえば <code class="language-plaintext highlighter-rouge">wait-for-it.sh</code> または <code class="language-plaintext highlighter-rouge">wait-for</code> を使って、サービスコマンドをラップするには以下のようにします。</p>
+    <p>たとえば<code class="language-plaintext highlighter-rouge">wait-for-it.sh</code>または<code class="language-plaintext highlighter-rouge">wait-for</code>を使って、サービスコマンドをラップするには以下のようにします。</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -145,7 +144,7 @@ Compose では必ず依存順に応じて、コンテナーの起動または停
 
       <p>この解決方法には限界があります。
 たとえば指定するサービスが、本当に準備状態であるかどうかは確認できません。
-コマンドにさらに引数を追加して <code class="language-plaintext highlighter-rouge">bash shift</code> を利用し、ループによって対処するのが次の例です。</p>
+コマンドにさらに引数を追加して<code class="language-plaintext highlighter-rouge">bash shift</code>を利用し、ループによって対処するのが次の例です。</p>
     </blockquote>
   </li>
   <li>
