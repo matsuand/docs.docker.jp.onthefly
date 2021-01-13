@@ -14,9 +14,6 @@
 @x
 ## Description
 @y
-{% comment %}
-## Description
-{% endcomment %}
 {: #description }
 ## 説明
 @z
@@ -40,13 +37,6 @@ The client and daemon API must both be at least
 to use this command. Use the `docker version` command on the client to check
 your client and daemon API versions.
 @y
-{% comment %}
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
-The client and daemon API must both be at least
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_">{{ controller_data.min_api_version }}</a>
-to use this command. Use the `docker version` command on the client to check
-your client and daemon API versions.
-{% endcomment %}
 <a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="{{ controller_data.min_api_version }} API リファレンスを開く (別ウィンドウ)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_">{{ controller_data.min_api_version }}</a>
@@ -96,12 +86,6 @@ your client and daemon API versions.
 > Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 @y
-{% comment %}
-> This command is only available on Docker Enterprise Edition.
->
-> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"}.
-{: .important }
-{% endcomment %}
 > このコマンドは Docker Enterprise Edition においてのみ利用可能です。
 >
 > 詳しくは [Docker Enterprise 製品](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"} を参照してください。
@@ -224,9 +208,6 @@ your client and daemon API versions.
 @x
 ## Usage
 @y
-{% comment %}
-## Usage
-{% endcomment %}
 {: #usage }
 ## 利用方法
 @z
@@ -252,9 +233,6 @@ your client and daemon API versions.
 @x
 ## Extended description
 @y
-{% comment %}
-## Extended description
-{% endcomment %}
 {: #extended-description }
 ## 追加説明
 @z
@@ -277,9 +255,6 @@ For example uses of this command, refer to the [examples section](#examples) bel
 {% endif %}
 @y
 {% if controller_data.examples %}
-{% comment %}
-For example uses of this command, refer to the [examples section](#examples) below.
-{% endcomment %}
 本コマンドの利用例については、以下に示す [利用例の節](#examples) を参照してください。
 {% endif %}
 @z
@@ -303,9 +278,6 @@ For example uses of this command, refer to the [examples section](#examples) bel
 @x
 ## Options
 @y
-{% comment %}
-## Options
-{% endcomment %}
 {: #options }
 ## オプション
 @z
@@ -360,7 +332,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
   <tr>
     <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
     <td markdown="span">{{ option-default }}</td>
-    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip }}</td>
+    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip | escape }}</td>
   </tr>
 @y
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
@@ -368,7 +340,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
   <tr>
     <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
     <td markdown="span">{{ option-default }}</td>
-    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip }}</td>
+    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip | escape }}</td>
   </tr>
 @z
 
@@ -397,9 +369,6 @@ For example uses of this command, refer to the [examples section](#examples) bel
 @x
 ## Examples
 @y
-{% comment %}
-## Examples
-{% endcomment %}
 {: #examples }
 ## 利用例
 @z
@@ -427,9 +396,6 @@ For example uses of this command, refer to the [examples section](#examples) bel
 @x
 ## Parent command
 @y
-{% comment %}
-## Parent command
-{% endcomment %}
 {: #parent-command }
 ## 上位コマンド
 @z
@@ -471,9 +437,6 @@ For example uses of this command, refer to the [examples section](#examples) bel
 @x
 ## Child commands
 @y
-{% comment %}
-## Child commands
-{% endcomment %}
 {: #child-commands }
 ## 下位コマンド
 @z
@@ -527,9 +490,6 @@ For example uses of this command, refer to the [examples section](#examples) bel
 @x
 ## Related commands
 @y
-{% comment %}
-## Related commands
-{% endcomment %}
 {: #related-commands }
 ## 関連コマンド
 @z
