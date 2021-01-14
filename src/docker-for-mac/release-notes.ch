@@ -452,6 +452,19 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @z
 
 @x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+- Fixed local privilege escalation vulnerability caused by inadequate certificate checking
+@y
+- 証明書に対する不十分なチェック処理が原因で、ローカル権限が昇格してしまうぜい弱性を修正しました。
+@z
+
+@x
 ### Upgrades
 @y
 {: #upgrades }
