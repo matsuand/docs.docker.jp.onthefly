@@ -24,9 +24,6 @@ toc_max: 2
 @x
 > Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Click [here](#support) to learn more.
 @y
-{% comment %}
-> Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Click [here](#support) to learn more.
-{% endcomment %}
 > Docker Desktop では、プロプランやチームプランを購入している開発者に向けてのサポートを提供しているのをご存知ですか？
 > 詳しくは [こちら](#support) を参照してください。
 @z
@@ -178,49 +175,29 @@ Before you get started, we recommend that you sign into your Docker Desktop appl
 @x
 1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
 2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
-3. Click **Get Support**. This opens the in-app **Diagnose & Support** (**Diagnose & Feedback** for free users) page and starts collecting the diagnostics.
+3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
+    ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
+4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
+5. When the diagnostics have been uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
+6. If you have subscribed to a Pro or a Team plan, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+   > **Note**
+    >
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade to benefit from Docker Support** to upgrade your existing account.
+    Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 @y
 1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
 2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
-3. Click **Get Support**. This opens the in-app **Diagnose & Support** (**Diagnose & Feedback** for free users) page and starts collecting the diagnostics.
-@z
-
-@x
+3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
-@y
-    ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
-@z
-
-@x
-4. When the diagnostics collection process is complete, click **Upload** to upload your diagnostics to Docker Desktop.
-5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
-6. If you have subscribed to a Pro or a Team plan, click **Get support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
-@y
-4. When the diagnostics collection process is complete, click **Upload** to upload your diagnostics to Docker Desktop.
-5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
-6. If you have subscribed to a Pro or a Team plan, click **Get support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
-@z
-
-@x
+4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
+5. When the diagnostics have been uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
+6. If you have subscribed to a Pro or a Team plan, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
    > **Note**
     >
     > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
-@y
-   > **Note**
-    >
-    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
-@z
-
-@x
-7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
-@y
-7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
-@z
-
-@x
-    Alternatively, click **Report an issue** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
-@y
-    Alternatively, click **Report an issue** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade to benefit from Docker Support** to upgrade your existing account.
+    Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 @z
 
 @x

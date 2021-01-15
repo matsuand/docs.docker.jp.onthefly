@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2021-01-15 11:39:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Desktop WSL 2 バックエンド | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Desktop WSL 2 バックエンド" />
   <meta property="og:description" content="Docker Desktop WSL 2 backend" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-15T11:39:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/wsl/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-15T11:39:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop WSL 2 バックエンド","description":"Docker Desktop WSL 2 backend","url":"https://docs.docker.com/docker-for-windows/wsl/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,8 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Desktop WSL 2 バックエンド</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p>
-<p>Windows Subsystem for Linux (WSL) 2 は、Microsoft がビルドした完全な Linux カーネルを導入する、画期的な構造変化をもたらします。
+                        <section class="section"><h1>Docker Desktop WSL 2 バックエンド</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Windows Subsystem for Linux (WSL) 2 は、Microsoft がビルドした完全な Linux カーネルを導入する、画期的な構造変化をもたらします。
 これにより Linux コンテナーはエミュレーションとしてではなく、ネイティブな実行が可能になります。
 WSL 2 上において Docker Desktop を実行すれば、Linux ワークスペースの活用が可能となり、Linux と Windows の双方に対するビルドスクリプトを準備する必要はなくなります。
 また WSL 2 では、ファイルシステム共有や起動時間に関する改善がなされていて、Docker Desktop ユーザーにとって、優れた機能を利用できるものになりました。</p>
@@ -226,6 +225,50 @@ Docker Desktop において WSL 2 を有効にしていれば、その Linux デ
 これによってソースコードをプルし、Windows マシン内からネイティブ環境のように作業を進めていくことができます。</li>
 </ol>
 
+<h2 id="gpu-support">GPU サポート</h2>
+
+<p>Docker Desktop 3.1.0 から Docker Desktop は、NVIDIA GPU に対して WSL 2 GPU 準仮想化（GPU Paravirtualization; GPU-PV）をサポートするようになりました。
+WSL 2 GPU 準仮想化を有効にするためには以下が必要です。</p>
+
+<ul>
+  <li>NVIDIA GPU を搭載するマシン。</li>
+  <li>開発プレビューリング（Dev Preview ring）から最新の Windows Insider 版。</li>
+  <li>WSL 2 GPU 準仮想化をサポートする NVIDIA の <a href="https://developer.nvidia.com/cuda/wsl" target="_blank" rel="noopener" class="_">ベータドライバー</a>。</li>
+  <li>WSL 2 Linux カーネルの最新版への更新。
+昇格権限によるコマンドプロンプトから <code class="language-plaintext highlighter-rouge">wsl --update</code> を実行。</li>
+  <li>Docker Desktop において WSL 2 バックエンドの有効化。</li>
+</ul>
+
+<p>システムが期待どおりに動作するかどうかを確認するには、以下のように GPU に対する簡単なベンチマークを確認するコマンドを実行します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
+Run "nbody -benchmark [-numbodies=&lt;numBodies&gt;]" to measure performance.
+        -fullscreen       (run n-body simulation in fullscreen mode)
+        -fp64             (use double precision floating point values for simulation)
+        -hostmem          (stores simulation data in host memory)
+        -benchmark        (run benchmark to measure performance)
+        -numbodies=&lt;N&gt;    (number of bodies (&gt;= 1) to run in simulation)
+        -device=&lt;d&gt;       (where d=0,1,2.... for the CUDA device to use)
+        -numdevices=&lt;i&gt;   (where i=(number of CUDA devices &gt; 0) to use for simulation)
+        -compare          (compares simulation results running once on the default GPU and once on the CPU)
+        -cpu              (run n-body simulation on the CPU)
+        -tipsy=&lt;file.bin&gt; (load a tipsy model file for simulation)
+
+&gt; NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+
+&gt; Windowed mode
+&gt; Simulation data stored in video memory
+&gt; Single precision floating point simulation
+&gt; 1 Devices used for simulation
+MapSMtoCores for SM 7.5 is undefined.  Default to use 64 Cores/SM
+GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
+
+&gt; Compute 7.5 CUDA device: [GeForce RTX 2060 with Max-Q Design]
+30720 bodies, total time for 10 iterations: 69.280 ms
+= 136.219 billion interactions per second
+= 2724.379 single-precision GFLOP/s at 20 flops per interaction
+</code></pre></div></div>
+
 <h2 id="feedback">フィードバック</h2>
 
 <p>みなさんからのフィードバックは大変重要です。
@@ -268,6 +311,7 @@ Docker Desktop において WSL 2 を有効にしていれば、その Linux デ
   <li><a href="#download" class="nomunge">ダウンロード</a></li>
   <li><a href="#install" class="nomunge">インストール</a></li>
   <li><a href="#docker-と-wsl-2-を用いた開発" class="nomunge">Docker と WSL 2 を用いた開発</a></li>
+  <li><a href="#gpu-support" class="nomunge">GPU サポート</a></li>
   <li><a href="#feedback" class="nomunge">フィードバック</a></li>
 </ul>
 

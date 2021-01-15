@@ -56,6 +56,64 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop Community 3.1.0
+2021-01-14
+@y
+## Docker Desktop Community 3.1.0
+2021-01-14
+@z
+
+@x
+> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+@y
+> [ダウンロード](https://desktop.docker.com/mac/stable/Docker.dmg)
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- Docker daemon now runs within a Debian Buster based container (instead of Alpine).
+@y
+- Docker デーモンは（Alpine に代わって）Debian Buster ベースのコンテナー内で動作します。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose CLI v1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
+@y
+- [Compose CLI v1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+  - Fixed UI reliability issues when users create or delete a lot of objects in batches.
+  - Fixed an issue with DNS address resolution in Alpine containers. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+  - Redesigned the **Support** UI to improve usability.
+@y
+  - ユーザーがバッチ処理によって数多くのオブジェクトを生成したり削除したりしても、UI の信頼性に問題がないように修正しました。
+  - Alpine コンテナーにおける DNS アドレス解決の問題を修正しました。
+    [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020) を Fix に。
+  - **Support** 画面を再設計して操作性を向上しました。
+@z
+
+@x
 ## Docker Desktop Community 3.0.4
 2021-01-06
 @y
@@ -64,9 +122,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/Docker.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
 @z
 
 @x
