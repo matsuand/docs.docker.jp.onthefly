@@ -7,7 +7,7 @@ description: Networking
 keywords: windows, networking
 title: Networking features in Docker Desktop for Windows
 redirect_from:
-- /docker-for-windows/networking/
+- /docker-for-win/networking/
 ---
 {% assign Arch = 'Windows' %}
 @y
@@ -16,7 +16,7 @@ description: ネットワーク機能。
 keywords: windows, networking
 title: Docker Desktop for Windows のネットワーク機能
 redirect_from:
-- /docker-for-windows/networking/
+- /docker-for-win/networking/
 ---
 {% assign Arch = 'Windows' %}
 @z
