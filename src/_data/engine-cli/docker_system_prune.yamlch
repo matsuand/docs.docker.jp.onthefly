@@ -6,7 +6,7 @@ command: docker system prune
 short: Remove unused data
 @y
 command: docker system prune
-short: Remove unused data
+short: 未使用データを削除します。
 @z
 
 @x
@@ -15,8 +15,8 @@ long: |-
   and optionally, volumes.
 @y
 long: |-
-  Remove all unused containers, networks, images (both dangling and unreferenced),
-  and optionally, volumes.
+  未使用の（「浮いている」（dangling）そして未参照の）コンテナー、ネットワーク、イメージをすべて削除します。
+  またオプションとして未使用のボリュームも削除します。
 @z
 
 @x
@@ -115,7 +115,7 @@ options:
 - option: volumes
   value_type: bool
   default_value: "false"
-  description: Prune volumes
+  description: ボリュームを削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -127,40 +127,22 @@ options:
 examples: |-
   ```bash
   $ docker system prune
+
+  WARNING! This will remove:
+          - all stopped containers
+          - all networks not used by at least one container
+          - all dangling images
+          - all build cache
+  Are you sure you want to continue? [y/N] y
 @y
 examples: |-
   ```bash
   $ docker system prune
-@z
 
-@x
   WARNING! This will remove:
-@y
-  WARNING! This will remove:
-@z
-
-@x
           - all stopped containers
-@y
-          - all stopped containers
-@z
-
-@x
           - all networks not used by at least one container
-@y
-          - all networks not used by at least one container
-@z
-
-@x
           - all dangling images
-@y
-          - all dangling images
-@z
-
-@x
-          - all build cache
-  Are you sure you want to continue? [y/N] y
-@y
           - all build cache
   Are you sure you want to continue? [y/N] y
 @z
@@ -187,15 +169,11 @@ examples: |-
 
 @x
   Deleted Images:
+  untagged: hello-world@sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
+  deleted: sha256:1815c82652c03bfd8644afda26fb184f2ed891d921b20a0703b46768f9755c57
+  deleted: sha256:45761469c965421a92a69cc50e92c01e0cfa94fe026cdd1233445ea00e96289a
 @y
   Deleted Images:
-@z
-
-@x
-  untagged: hello-world@sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
-  deleted: sha256:1815c82652c03bfd8644afda26fb184f2ed891d921b20a0703b46768f9755c57
-  deleted: sha256:45761469c965421a92a69cc50e92c01e0cfa94fe026cdd1233445ea00e96289a
-@y
   untagged: hello-world@sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
   deleted: sha256:1815c82652c03bfd8644afda26fb184f2ed891d921b20a0703b46768f9755c57
   deleted: sha256:45761469c965421a92a69cc50e92c01e0cfa94fe026cdd1233445ea00e96289a
@@ -211,64 +189,34 @@ examples: |-
 
 @x
   By default, volumes are not removed to prevent important data from being
-@y
-  By default, volumes are not removed to prevent important data from being
-@z
-
-@x
   deleted if there is currently no container using the volume. Use the `--volumes`
   flag when running the command to prune volumes as well:
 @y
-  deleted if there is currently no container using the volume. Use the `--volumes`
-  flag when running the command to prune volumes as well:
+  ボリュームはデフォルトでは削除されません。
+  そのボリュームを参照するコンテナーがなかったために、重要なデータが削除されてしまうことを防止するためです。
+  コマンド実行時に`--volumes`フラグをつければ、ボリュームも削除することができます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker system prune -a --volumes
-@y
-  $ docker system prune -a --volumes
-@z
 
-@x
   WARNING! This will remove:
-@y
-  WARNING! This will remove:
-@z
-
-@x
           - all stopped containers
-@y
-          - all stopped containers
-@z
-
-@x
           - all networks not used by at least one container
-@y
-          - all networks not used by at least one container
-@z
-
-@x
           - all volumes not used by at least one container
-@y
-          - all volumes not used by at least one container
-@z
-
-@x
           - all images without at least one container associated to them
-@y
-          - all images without at least one container associated to them
-@z
-
-@x
           - all build cache
   Are you sure you want to continue? [y/N] y
 @y
+  ```bash
+  $ docker system prune -a --volumes
+
+  WARNING! This will remove:
+          - all stopped containers
+          - all networks not used by at least one container
+          - all volumes not used by at least one container
+          - all images without at least one container associated to them
           - all build cache
   Are you sure you want to continue? [y/N] y
 @z
@@ -285,41 +233,24 @@ examples: |-
 
 @x
   Deleted Networks:
+  my-network-a
+  my-network-b
 @y
   Deleted Networks:
-@z
-
-@x
   my-network-a
-@y
-  my-network-a
-@z
-
-@x
-  my-network-b
-@y
   my-network-b
 @z
 
 @x
   Deleted Volumes:
+  named-vol
 @y
   Deleted Volumes:
-@z
-
-@x
-  named-vol
-@y
   named-vol
 @z
 
 @x
   Deleted Images:
-@y
-  Deleted Images:
-@z
-
-@x
   untagged: my-curl:latest
   deleted: sha256:7d88582121f2a29031d92017754d62a0d1a215c97e8f0106c586546e7404447d
   deleted: sha256:dd14a93d83593d4024152f85d7c63f76aaa4e73e228377ba1d130ef5149f4d8b
@@ -330,25 +261,22 @@ examples: |-
   deleted: sha256:9007f5987db353ec398a223bc5a135c5a9601798ba20a1abba537ea2f8ac765f
   deleted: sha256:71fa90c8f04769c9721459d5aa0936db640b92c8c91c9b589b54abd412d120ab
   deleted: sha256:bb1c3357b3c30ece26e6604aea7d2ec0ace4166ff34c3616701279c22444c0f3
-@y
-  untagged: my-curl:latest
-  deleted: sha256:7d88582121f2a29031d92017754d62a0d1a215c97e8f0106c586546e7404447d
-  deleted: sha256:dd14a93d83593d4024152f85d7c63f76aaa4e73e228377ba1d130ef5149f4d8b
-  untagged: alpine:3.3
-  deleted: sha256:695f3d04125db3266d4ab7bbb3c6b23aa4293923e762aa2562c54f49a28f009f
-  untagged: alpine:latest
-  deleted: sha256:ee4603260daafe1a8c2f3b78fd760922918ab2441cbb2853ed5c439e59c52f96
-  deleted: sha256:9007f5987db353ec398a223bc5a135c5a9601798ba20a1abba537ea2f8ac765f
-  deleted: sha256:71fa90c8f04769c9721459d5aa0936db640b92c8c91c9b589b54abd412d120ab
-  deleted: sha256:bb1c3357b3c30ece26e6604aea7d2ec0ace4166ff34c3616701279c22444c0f3
-@z
-
-@x
   untagged: my-jq:latest
   deleted: sha256:6e66d724542af9bc4c4abf4a909791d7260b6d0110d8e220708b09e4ee1322e1
   deleted: sha256:07b3fa89d4b17009eb3988dfc592c7d30ab3ba52d2007832dffcf6d40e3eda7f
   deleted: sha256:3a88a5c81eb5c283e72db2dbc6d65cbfd8e80b6c89bb6e714cfaaa0eed99c548
 @y
+  Deleted Images:
+  untagged: my-curl:latest
+  deleted: sha256:7d88582121f2a29031d92017754d62a0d1a215c97e8f0106c586546e7404447d
+  deleted: sha256:dd14a93d83593d4024152f85d7c63f76aaa4e73e228377ba1d130ef5149f4d8b
+  untagged: alpine:3.3
+  deleted: sha256:695f3d04125db3266d4ab7bbb3c6b23aa4293923e762aa2562c54f49a28f009f
+  untagged: alpine:latest
+  deleted: sha256:ee4603260daafe1a8c2f3b78fd760922918ab2441cbb2853ed5c439e59c52f96
+  deleted: sha256:9007f5987db353ec398a223bc5a135c5a9601798ba20a1abba537ea2f8ac765f
+  deleted: sha256:71fa90c8f04769c9721459d5aa0936db640b92c8c91c9b589b54abd412d120ab
+  deleted: sha256:bb1c3357b3c30ece26e6604aea7d2ec0ace4166ff34c3616701279c22444c0f3
   untagged: my-jq:latest
   deleted: sha256:6e66d724542af9bc4c4abf4a909791d7260b6d0110d8e220708b09e4ee1322e1
   deleted: sha256:07b3fa89d4b17009eb3988dfc592c7d30ab3ba52d2007832dffcf6d40e3eda7f
@@ -374,9 +302,9 @@ examples: |-
   The filtering flag (`--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
 @y
-  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  フィルターフラグ（`-f`または`--filter`）の指定書式は「キー=値」というものです。
   複数のフィルターが必要な場合は、フラグを複数指定します。
-  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+  （たとえば`--filter "foo=bar" --filter "bif=baz"`など。）
 @z
 
 @x
@@ -388,51 +316,34 @@ examples: |-
 @x
   * until (`<timestamp>`) - only remove containers, images, and networks created before given timestamp
 @y
-  * until (`<timestamp>`) - only remove containers, images, and networks created before given timestamp
+  * until (`<timestamp>`) - 指定されたタイムスタンプ以前に生成されたコンテナー、イメージ、ネットワークのみを削除します。
 @z
 
 @x
   * label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) - only remove containers, images, networks, and volumes with (or without, in case `label!=...` is used) the specified labels.
 @y
-  * label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) - only remove containers, images, networks, and volumes with (or without, in case `label!=...` is used) the specified labels.
+  * label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, `label!=<key>=<value>`) - 指定されたラベルに該当する（あるいは`label!=...`の場合はそれに該当しない）コンテナー、イメージ、ネットワーク、ボリュームのみを削除します。
 @z
 
 @x
   The `until` filter can be Unix timestamps, date formatted
   timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed
   relative to the daemon machine’s time. Supported formats for date
-@y
-  The `until` filter can be Unix timestamps, date formatted
-  timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed
-  relative to the daemon machine’s time. Supported formats for date
-@z
-
-@x
   formatted time stamps include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,
-@y
-  formatted time stamps include RFC3339Nano, RFC3339, `2006-01-02T15:04:05`,
-@z
-
-@x
   `2006-01-02T15:04:05.999999999`, `2006-01-02Z07:00`, and `2006-01-02`. The local
   timezone on the daemon will be used if you do not provide either a `Z` or a
-@y
-  `2006-01-02T15:04:05.999999999`, `2006-01-02Z07:00`, and `2006-01-02`. The local
-  timezone on the daemon will be used if you do not provide either a `Z` or a
-@z
-
-@x
   `+-00:00` timezone offset at the end of the timestamp.  When providing Unix
   timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
   that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
   seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
   fraction of a second no more than nine digits long.
 @y
-  `+-00:00` timezone offset at the end of the timestamp.  When providing Unix
-  timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
-  that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
-  seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
-  fraction of a second no more than nine digits long.
+  `until`フィルターは Unix タイムスタンプから生成されるタイムスタンプや日付、Go 言語の時間文字列 （たとえば`10m`,`1h30m`）を、デーモンマシンの時刻との相対的な差異によって計算されます。
+  タイムスタンプから生成される日付の書式として、RFC3339Nano、RFC3339、`2006-01-02T15:04:05`、`2006-01-02T15:04:05.999999999`、`2006-01-02Z07:00`、`2006-01-02`などがサポートされます。
+  タイムスタンプの最後に`Z`やタイムゾーンオフセット`+-00:00`が指示されていなかった場合は、デーモンが利用しているタイムゾーンが用いられます。
+  Unix タイムスタンプを指定する場合は seconds[.nanoseconds]（[秒.ナノ秒]）の書式とします。
+  ここで秒には 1970 年 1 月 1 日（UTC/GMT の真夜中）からの経過秒数値を指定し、うるう秒を含めません（Unix エポックまたは Unix タイムとも言われます）。
+  そしてナノ秒には、8 桁以下の秒の少数値を指定します。
 @z
 
 @x
@@ -440,6 +351,13 @@ examples: |-
   which removes containers, images, networks, and volumes with the specified labels. The other
   format is the `label!=...` (`label!=<key>` or `label!=<key>=<value>`), which removes
   containers, images, networks, and volumes without the specified labels.
+@y
+  `label`フィルターは 2 つの書式をとります。
+  1 つは`label=...`（`label=<key>`または`label=<key>=<value>`）であり、ここに指定されたラベルを持ったコンテナー、イメージ、ネットワーク、ボリュームが削除されます。
+  もう 1 つは`label!=...`（`label!=<key>`または`label!=<key>=<value>`）であり、ここに指定されたラベル以外を持ったコンテナー、イメージ、ネットワーク、ボリュームが削除されます。
+@z
+
+@x
 deprecated: false
 min_api_version: "1.25"
 experimental: false
@@ -447,10 +365,6 @@ experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  The `label` filter accepts two formats. One is the `label=...` (`label=<key>` or `label=<key>=<value>`),
-  which removes containers, images, networks, and volumes with the specified labels. The other
-  format is the `label!=...` (`label!=<key>` or `label!=<key>=<value>`), which removes
-  containers, images, networks, and volumes without the specified labels.
 deprecated: false
 min_api_version: "1.25"
 experimental: false

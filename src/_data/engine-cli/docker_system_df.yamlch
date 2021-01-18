@@ -4,24 +4,19 @@
 @x
 command: docker system df
 short: Show docker disk usage
+long: |-
+  The `docker system df` command displays information regarding the
+  amount of disk space used by the docker daemon.
+usage: docker system df [OPTIONS]
+pname: docker system
+plink: docker_system.yaml
+options:
 @y
 command: docker system df
-short: Show docker disk usage
-@z
-
-@x
+short: Docker のディスク使用量を表示します。
 long: |-
-  The `docker system df` command displays information regarding the
-  amount of disk space used by the docker daemon.
-usage: docker system df [OPTIONS]
-pname: docker system
-plink: docker_system.yaml
-options:
-@y
-long: |-
-  The `docker system df` command displays information regarding the
-  amount of disk space used by the docker daemon.
-usage: docker system df [OPTIONS]
+  コマンド`docker system df`は Docker デーモンによって利用されているディスク総容量に関する情報を表示します。
+usage: docker system df [オプション]
 pname: docker system
 plink: docker_system.yaml
 options:
@@ -30,12 +25,6 @@ options:
 @x
 - option: format
   value_type: string
-@y
-- option: format
-  value_type: string
-@z
-
-@x
   description: Pretty-print images using a Go template
   deprecated: false
   experimental: false
@@ -43,6 +32,8 @@ options:
   kubernetes: false
   swarm: false
 @y
+- option: format
+  value_type: string
   description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
@@ -67,7 +58,7 @@ options:
   shorthand: v
   value_type: bool
   default_value: "false"
-  description: Show detailed information on space usage
+  description: ディスク使用量に関する詳細情報を表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -80,24 +71,22 @@ examples: |-
   By default the command will just show a summary of the data used:
 @y
 examples: |-
-  By default the command will just show a summary of the data used:
+  本コマンドはデフォルトでは、利用されているデータの概要を単に表示するだけです。
 @z
 
 @x
   ```bash
   $ docker system df
-@y
-  ```bash
-  $ docker system df
-@z
 
-@x
   TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
   Images              5                   2                   16.43 MB            11.63 MB (70%)
   Containers          2                   0                   212 B               212 B (100%)
   Local Volumes       2                   1                   36 B                0 B (0%)
   ```
 @y
+  ```bash
+  $ docker system df
+
   TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
   Images              5                   2                   16.43 MB            11.63 MB (70%)
   Containers          2                   0                   212 B               212 B (100%)
@@ -108,45 +97,29 @@ examples: |-
 @x
   A more detailed view can be requested using the `-v, --verbose` flag:
 @y
-  A more detailed view can be requested using the `-v, --verbose` flag:
+  さらに詳細な情報が必要な場合は`-v, --verbose`フラグを利用します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker system df -v
-@y
-  $ docker system df -v
-@z
 
-@x
   Images space usage:
-@y
-  Images space usage:
-@z
 
-@x
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE                SHARED SIZE         UNIQUE SIZE         CONTAINERS
-@y
-  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE                SHARED SIZE         UNIQUE SIZE         CONTAINERS
-@z
-
-@x
   my-curl             latest              b2789dd875bf        6 minutes ago       11 MB               11 MB               5 B                 0
-@y
-  my-curl             latest              b2789dd875bf        6 minutes ago       11 MB               11 MB               5 B                 0
-@z
-
-@x
   my-jq               latest              ae67841be6d0        6 minutes ago       9.623 MB            8.991 MB            632.1 kB            0
   <none>              <none>              a0971c4015c1        6 minutes ago       11 MB               11 MB               0 B                 0
   alpine              latest              4e38e38c8ce0        9 weeks ago         4.799 MB            0 B                 4.799 MB            1
   alpine              3.3                 47cf20d8c26c        9 weeks ago         4.797 MB            4.797 MB            0 B                 1
 @y
+  ```bash
+  $ docker system df -v
+
+  Images space usage:
+
+  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE                SHARED SIZE         UNIQUE SIZE         CONTAINERS
+  my-curl             latest              b2789dd875bf        6 minutes ago       11 MB               11 MB               5 B                 0
   my-jq               latest              ae67841be6d0        6 minutes ago       9.623 MB            8.991 MB            632.1 kB            0
   <none>              <none>              a0971c4015c1        6 minutes ago       11 MB               11 MB               0 B                 0
   alpine              latest              4e38e38c8ce0        9 weeks ago         4.799 MB            0 B                 4.799 MB            1
@@ -155,42 +128,30 @@ examples: |-
 
 @x
   Containers space usage:
+
+  CONTAINER ID        IMAGE               COMMAND             LOCAL VOLUMES       SIZE                CREATED             STATUS                      NAMES
+  4a7f7eebae0f        alpine:latest       "sh"                1                   0 B                 16 minutes ago      Exited (0) 5 minutes ago    hopeful_yalow
+  f98f9c2aa1ea        alpine:3.3          "sh"                1                   212 B               16 minutes ago      Exited (0) 48 seconds ago   anon-vol
 @y
   Containers space usage:
-@z
 
-@x
   CONTAINER ID        IMAGE               COMMAND             LOCAL VOLUMES       SIZE                CREATED             STATUS                      NAMES
   4a7f7eebae0f        alpine:latest       "sh"                1                   0 B                 16 minutes ago      Exited (0) 5 minutes ago    hopeful_yalow
-@y
-  CONTAINER ID        IMAGE               COMMAND             LOCAL VOLUMES       SIZE                CREATED             STATUS                      NAMES
-  4a7f7eebae0f        alpine:latest       "sh"                1                   0 B                 16 minutes ago      Exited (0) 5 minutes ago    hopeful_yalow
-@z
-
-@x
-  f98f9c2aa1ea        alpine:3.3          "sh"                1                   212 B               16 minutes ago      Exited (0) 48 seconds ago   anon-vol
-@y
   f98f9c2aa1ea        alpine:3.3          "sh"                1                   212 B               16 minutes ago      Exited (0) 48 seconds ago   anon-vol
 @z
 
 @x
   Local Volumes space usage:
-@y
-  Local Volumes space usage:
-@z
 
-@x
   NAME                                                               LINKS               SIZE
   07c7bdf3e34ab76d921894c2b834f073721fccfbbcba792aa7648e3a7a664c2e   2                   36 B
-@y
-  NAME                                                               LINKS               SIZE
-  07c7bdf3e34ab76d921894c2b834f073721fccfbbcba792aa7648e3a7a664c2e   2                   36 B
-@z
-
-@x
   my-named-vol                                                       0                   0 B
   ```
 @y
+  Local Volumes space usage:
+
+  NAME                                                               LINKS               SIZE
+  07c7bdf3e34ab76d921894c2b834f073721fccfbbcba792aa7648e3a7a664c2e   2                   36 B
   my-named-vol                                                       0                   0 B
   ```
 @z
@@ -200,15 +161,23 @@ examples: |-
   * `UNIQUE SIZE` is the amount of space that is only used by a given image
   * `SIZE` is the virtual size of the image, it is the sum of `SHARED SIZE` and `UNIQUE SIZE`
 @y
-  * `SHARED SIZE` is the amount of space that an image shares with another one (i.e. their common data)
-  * `UNIQUE SIZE` is the amount of space that is only used by a given image
-  * `SIZE` is the virtual size of the image, it is the sum of `SHARED SIZE` and `UNIQUE SIZE`
+  * `SHARED SIZE` は 1 つのイメージが他のイメージと共有する（つまり共通の）データ容量です。
+  * `UNIQUE SIZE` は指定されたイメージによってのみ利用されているデータ容量です。
+  * `SIZE` はイメージの仮想サイズです。
+    これは`SHARED SIZE`と`UNIQUE SIZE`を足し合わせたものです。
 @z
 
 @x
   > **Note**
   >
   > Network information is not shown because it does not consume disk space.
+@y
+  > **メモ**
+  >
+  > ネットワークに関する情報はディスクを消費しないため表示されません。
+@z
+
+@x
 deprecated: false
 min_api_version: "1.25"
 experimental: false
@@ -216,9 +185,6 @@ experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  > **Note**
-  >
-  > Network information is not shown because it does not consume disk space.
 deprecated: false
 min_api_version: "1.25"
 experimental: false
