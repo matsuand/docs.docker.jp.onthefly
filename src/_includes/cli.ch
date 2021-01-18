@@ -37,7 +37,7 @@ The client and daemon API must both be at least
 to use this command. Use the `docker version` command on the client to check
 your client and daemon API versions.
 @y
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="{{ controller_data.min_api_version }} API リファレンスを開く (別ウィンドウ)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="{{ controller_data.min_api_version }} API リファレンスを開く (別ウィンドウ)">API {{ controller_data.min_api_version }} 以上</span></a>&nbsp;
 このコマンドを利用するには、クライアントとデーモンの API はともに、最低でも
 <a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_">{{ controller_data.min_api_version }}</a>
 である必要があります。
@@ -316,7 +316,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
   {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" rel="noopener" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
   {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" rel="noopener" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認します。(別ウィンドウ)">試験的 (デーモン)</span></a>{% endif %}{% endcapture %}
   {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" rel="noopener" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="CLI の試験的オプションを確認します。(別ウィンドウ)">試験的 (CLI)</span></a>{% endif %}{% endcapture %}
-  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="{{ controller_data.min_api_version }} API リファレンスを開きます。(別ウィンドウ)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
+  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="{{ controller_data.min_api_version }} API リファレンスを開きます。(別ウィンドウ)">API {{ option.min_api_version }} 以上</span></a>{% endif %}{%endcapture%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="このオプションは Kubernetes オーケストレーターにおいて動作します。">Kubernetes</span>{% endif %}{% endcapture %}
 @z
 
