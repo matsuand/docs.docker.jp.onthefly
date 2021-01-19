@@ -1,0 +1,489 @@
+<!-- Page generated 2021-01-19 11:23:27 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS integration composefile examples | Docker ドキュメント</title>
+  <meta name="description" content="Examples of ECS compose files" />
+  <meta name="keywords" content="Docker, Amazon, Integration, ECS, Compose, cli, deploy, cloud, sample">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/cloud/ecs-compose-examples/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="ECS integration composefile examples"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="ECS integration composefile examples" />
+  <meta property="og:description" content="Examples of ECS compose files" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-19T11:23:27+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-compose-examples/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-19T11:23:27+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ECS integration composefile examples","description":"Examples of ECS compose files","url":"https://docs.docker.com/cloud/ecs-compose-examples/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>ECS integration composefile examples</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><h1 id="compose-file-samples---ecs-specific">Compose file samples - ECS specific</h1>
+
+<h2 id="service">Service</h2>
+
+<p>A service mapping may define a Docker image and runtime constraints and container requirements.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">image"</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">command"</span>
+    <span class="na">entrypoint</span><span class="pi">:</span> <span class="s2">"</span><span class="s">entrypoint"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">FOO=BAR"</span>
+    <span class="na">cap_add</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">SYS_PTRACE</span>
+    <span class="na">cap_drop</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">SYSLOG</span>
+    <span class="na">init</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">user</span><span class="pi">:</span> <span class="s2">"</span><span class="s">user"</span>
+    <span class="na">working_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">working_dir"</span>
+</code></pre></div></div>
+
+<h6 id="task-size">Task size</h6>
+
+<p>Set resource limits that will get translated to Fargate task size values:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">limits</span><span class="pi">:</span>
+          <span class="na">cpus</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0.5'</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s">2048M</span>
+</code></pre></div></div>
+
+<h6 id="iam-roles">IAM roles</h6>
+
+<p>Assign an existing user role to a task:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">x-aws-policies</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">arn:aws:iam::aws:policy/AmazonS3FullAccess"</span>
+</code></pre></div></div>
+
+<h6 id="iam-policies">IAM policies</h6>
+
+<p>Assign an in-line IAM policy to a task:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">x-aws-role</span><span class="pi">:</span>
+        <span class="na">Version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2012-10-17'</span>
+        <span class="na">Statement</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">Effect</span><span class="pi">:</span> <span class="s">Allow</span>
+          <span class="na">Action</span><span class="pi">:</span> <span class="s">sqs:*</span>
+          <span class="na">Resource</span><span class="pi">:</span> <span class="s">arn:aws:sqs:us-east-1:12345678:myqueue</span>
+</code></pre></div></div>
+
+<h6 id="logging">Logging</h6>
+<p>Pass options to awslogs driver</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">logging</span><span class="pi">:</span>
+      <span class="na">options</span><span class="pi">:</span>
+        <span class="na">awslogs-datetime-pattern</span><span class="pi">:</span> <span class="s2">"</span><span class="s">FOO"</span>
+
+<span class="na">x-aws-logs_retention</span><span class="pi">:</span> <span class="m">10</span>
+</code></pre></div></div>
+
+<h6 id="autoscaling">Autoscaling</h6>
+
+<p>Set a CPU percent target</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">foo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">x-aws-autoscaling</span><span class="pi">:</span> <span class="m">75</span>
+</code></pre></div></div>
+
+<h6 id="gpu">GPU</h6>
+<p>Set <code class="language-plaintext highlighter-rouge">generic_resources</code> for services that require accelerators as GPUs.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">learning</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">tensorflow/tensorflow:latest-gpus</span>
+    <span class="na">deploy</span><span class="pi">:</span>
+      <span class="na">resources</span><span class="pi">:</span>
+        <span class="na">reservations</span><span class="pi">:</span>
+          <span class="na">memory</span><span class="pi">:</span> <span class="s">32Gb</span>
+          <span class="na">cpus</span><span class="pi">:</span> <span class="s2">"</span><span class="s">32"</span>
+          <span class="na">generic_resources</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">discrete_resource_spec</span><span class="pi">:</span>
+            <span class="na">kind</span><span class="pi">:</span> <span class="s">gpus</span>
+            <span class="na">value</span><span class="pi">:</span> <span class="m">2</span>
+</code></pre></div></div>
+
+<h5 id="load-balancers">Load Balancers</h5>
+
+<p>When a service in the compose file exposes a port, a load balancer is being created and configured to distribute the traffic between all containers.</p>
+
+<p>There are 2 types of Load Balancers that can be created. For a service exposing a non-http port/protocol, a <strong>Network Load Balancer (NLB)</strong> is created. Services with http/https ports/protocols get an <strong>Application Load Balancer (ALB)</strong>.</p>
+
+<p>There is only one load balancer created/configured for a Compose stack. If there are both http/non-http ports configured for services in a compose stack, an NLB is created.</p>
+
+<p>The compose file below configured only the http port,therefore, on deployment it gets an ALB created.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">80:80</span>
+</code></pre></div></div>
+<p>NLB is created for non-http port</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">8080:8080</span>
+</code></pre></div></div>
+
+<p>To use the http protocol with custom ports and get an ALB, use the <code class="language-plaintext highlighter-rouge">x-aws-protocol</code> port property.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">target</span><span class="pi">:</span> <span class="m">8080</span>
+        <span class="na">x-aws-protocol</span><span class="pi">:</span> <span class="s">http</span>
+</code></pre></div></div>
+
+<p>To re-use an external load balancer and avoid creating a dedicated one, set the top-level property <code class="language-plaintext highlighter-rouge">x-aws-loadbalancer</code> as below:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">x-aws-loadbalancer</span><span class="pi">:</span> <span class="s2">"</span><span class="s">LoadBalancerName"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">80:80</span>
+</code></pre></div></div>
+
+<p>Similarly, an external <code class="language-plaintext highlighter-rouge">VPC</code> and <code class="language-plaintext highlighter-rouge">Cluster</code> can be reused:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">x-aws-vpc</span><span class="pi">:</span> <span class="s2">"</span><span class="s">vpc-25435e"</span>
+<span class="na">x-aws-cluster</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ClusterName"</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">80:80</span>
+</code></pre></div></div>
+
+<p>Keep in mind, that external resources are not managed as part of the compose stack’s lifecycle.</p>
+
+<h2 id="volumes">Volumes</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">data:/test</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+</code></pre></div></div>
+<p>To use of an external volume that has been previously created, set its id/ARN as the name:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">data:/test</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">fs-f534645"</span>
+</code></pre></div></div>
+
+<p>Customize volume configuration via <code class="language-plaintext highlighter-rouge">driver_opts</code></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db-data</span><span class="pi">:</span>
+    <span class="na">driver_opts</span><span class="pi">:</span>
+        <span class="na">backup_policy</span><span class="pi">:</span> <span class="s">ENABLED</span>
+        <span class="na">lifecycle_policy</span><span class="pi">:</span> <span class="s">AFTER_30_DAYS</span>
+        <span class="na">performance_mode</span><span class="pi">:</span> <span class="s">maxIO</span>
+        <span class="na">throughput_mode</span><span class="pi">:</span> <span class="s">provisioned</span>
+        <span class="na">provisioned_throughput</span><span class="pi">:</span> <span class="m">1024</span>
+</code></pre></div></div>
+
+<h2 id="networks">Networks</h2>
+
+<p>Networks are mapped to security groups.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span>
+</code></pre></div></div>
+<p>Using an external network/security group:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">test</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">sg-123abc</span>
+</code></pre></div></div>
+
+<h2 id="secrets">Secrets</h2>
+<p>Secrets are stored in <strong>AWS SecretsManager</strong> as strings and are mounted to containers  under <code class="language-plaintext highlighter-rouge">/run/secrets/</code>.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">80:80</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mysecret</span>
+
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">mysecret</span><span class="pi">:</span>
+    <span class="na">file</span><span class="pi">:</span> <span class="s">./secrets/mysecret.txt</span>
+</code></pre></div></div>
+
+<p>When using external secrets, set a valid secret <code class="language-plaintext highlighter-rouge">ARN</code> under the <code class="language-plaintext highlighter-rouge">name</code> property:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">secrets</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">foo_bar</span>
+
+<span class="na">secrets</span><span class="pi">:</span>
+  <span class="na">foo_bar</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">arn:aws:secretsmanager:eu-west-3:xxx:secret:foo_bar"</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="no">true</span>
+</code></pre></div></div>
+
+<h2 id="access-private-images">Access private images</h2>
+<p>When a service is configured with an image from a private repository on Docker Hub, make sure you have configured pull credentials correctly before deploying the Compose stack.</p>
+
+<p>To create a pull credential, create a file with the following content:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>creds.json
+<span class="o">{</span>
+  <span class="s2">"username"</span>:<span class="s2">"DockerHubID"</span>,
+  <span class="s2">"password"</span>:<span class="s2">"GeneratedHubTokenOrPassword"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>To create the pull credential and retrieve the <code class="language-plaintext highlighter-rouge">ARN/ID</code> to use in the compose file run:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker secret create pullcred /path/to/creds.json
+arn:aws:secretsmanager:eu-west-3:xxx:secret:pullcred
+</code></pre></div></div>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">ARN</code> in the output to set the <code class="language-plaintext highlighter-rouge">x-aws-pull_credentials</code> service property as below:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">services</span><span class="pi">:</span>
+  <span class="na">app</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">DockerHubID/privateimage</span>
+    <span class="na">x-aws-pull_credentials</span><span class="pi">:</span> <span class="s">arn:aws:secretsmanager:eu-west-3:xxx:secret:pullcred</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">80:80</span>
+</code></pre></div></div>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=Amazon">Amazon</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=ECS">ECS</a>, <a href="/docs.docker.jp.onthefly/search/?q=Compose">Compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=deploy">deploy</a>, <a href="/docs.docker.jp.onthefly/search/?q=cloud">cloud</a>, <a href="/docs.docker.jp.onthefly/search/?q=sample">sample</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/cloud/ecs-compose-examples.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [cloud/ecs-compose-examples.ch](https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-compose-examples/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#service" class="nomunge">Service</a></li>
+  <li><a href="#volumes" class="nomunge">Volumes</a></li>
+  <li><a href="#networks" class="nomunge">Networks</a></li>
+  <li><a href="#secrets" class="nomunge">Secrets</a></li>
+  <li><a href="#access-private-images" class="nomunge">Access private images</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/cloud/ecs-compose-examples/";</script></body>
+</html>

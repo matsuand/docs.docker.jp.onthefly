@@ -13,7 +13,13 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	aci-integration \
+	aci-compose-features   \
+	aci-container-features \
+	aci-integration        \
+	architecture           \
+	ecs-architecture       \
+	ecs-compose-examples   \
+	ecs-compose-features   \
 	ecs-integration
 
 ch_mds = $(bases:=.ch)

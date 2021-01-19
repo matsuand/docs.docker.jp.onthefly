@@ -1,0 +1,297 @@
+<!-- Page generated 2021-01-19 11:23:27 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ECS integration architecture | Docker ドキュメント</title>
+  <meta name="description" content="Mapping of Docker compose entities to Amazon constructs" />
+  <meta name="keywords" content="Docker, Amazon, Integration, ECS, Compose, architecture, mapping">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/cloud/ecs-architecture/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="ECS integration architecture"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="ECS integration architecture" />
+  <meta property="og:description" content="Mapping of Docker compose entities to Amazon constructs" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-19T11:23:27+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-architecture/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-19T11:23:27+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ECS integration architecture","description":"Mapping of Docker compose entities to Amazon constructs","url":"https://docs.docker.com/cloud/ecs-architecture/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>ECS integration architecture</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><h1 id="architecture">Architecture</h1>
+
+<p>ECS integration relies on CloudFormation to manage AWS resrouces as an atomic operation.
+This document describes the mapping between compose application model and AWS components</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This diagram shows compose model and on same line AWS components that get created as equivalent resources</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+----------+                                +-------------+                              +-------------------+
+| Project  |  . . . . . . . . . . . . . .   | Cluster     |    . . . . . . .             | LoadBalancer      |
++-+--------+                                +-------------+                              +-------------------+
+  |
+  |    +----------+                         +-------------++-------------------+         +-------------------+
+  +----+ Service  |   . . . . . . . . . .   | Service     || TaskDefinition    |         | TargetGroup       |
+  |    +--+-------+                         +-------------++-------------------+-+       +-------------------+
+  |       |                                                  | TaskRole          |
+  |       |                                                  +-------------------+-+
+  |       |  x-aws-role, x-aws-policies     . . . . . . . .    | TaskExecutionRole |
+  |       |                                                    +-------------------+
+  |       |  +---------+
+  |       +--+ Deploy  |
+  |       |  +---------+                    +-------------------+
+  |       |  x-aws-autoscaling  . . . . . . | ScalableTarget    |
+  |       |                                 +-------------------+---+
+  |       |                                     | ScalingPolicy     |
+  |       |                                     +-------------------+-+
+  |       |                                       | AutoScalingRole   |
+  |       |                                       +-------------------+
+  |       |
+  |       |  +---------+                    +-------------+                              +-------------------+
+  |       +--+ Ports   |   . . . . . . .    | IngressRule +-----+                        | Listener          |
+  |       |  +---------+                    +-------------+     |                        +-------------------+
+  |       |                                                     |
+  |       |  +---------+                    +---------------+ +------------------+
+  |       +--+ Secrets |   . . . . . . .    | InitContainer | |TaskExecutionRole |
+  |       |  +---------+                    +---------------+ +------------+-----+
+  |       |                                                     |          |
+  |       |  +---------+                                        |          |
+  |       +--+ Volumes |                                        |          |
+  |       |  +---------+                                        |          |
+  |       |                                                     |          |
+  |       |  +---------------+                                  |          |         +-------------------+
+  |       +--+ DeviceRequest |  . . . . . . . . . . . . .  . .  | . . . .  | . . .   | CapacityProvider  |
+  |          +---------------+                                  |          |         +-------------------+--------+
+  |                                                             |          |                | AutoscalingGroup    |
+  |   +------------+                        +---------------+   |          |                +---------------------+
+  +---+ Networks   |   . . . . . . . . .    | SecurityGroup +---+          |                | LaunchConfiguration |
+  |   +------------+                        +---------------+              |                +---------------------+
+  |                                                                        |
+  |   +------------+                        +---------------+              |
+  +---+ Secret     |   . . . . . . . . .    | Secret        +--------------+
+      +------------+                        +---------------+
+</code></pre></div></div>
+
+<p>Each compose application service is mapped to an ECS <code class="language-plaintext highlighter-rouge">Service</code>. A <code class="language-plaintext highlighter-rouge">TaksDefinition</code> is created according to compose definition.
+Actual mapping is constrained by both Cloud platform and Fargate limitations. Such a <code class="language-plaintext highlighter-rouge">TaskDefinition</code> is set with a single container,
+according to the compose model which doesn’t offer a syntax to support sidecar containers.</p>
+
+<p>An IAM Role is created and configured as <code class="language-plaintext highlighter-rouge">TaskRole</code> to grant service access to additional AWS resources when required. For this
+purpose, user can set <code class="language-plaintext highlighter-rouge">x-aws-policies</code> or define a fine grained <code class="language-plaintext highlighter-rouge">x-aws-role</code> IAM role document.</p>
+
+<p>Service’s ports get mapped into security group’s <code class="language-plaintext highlighter-rouge">IngressRule</code>s and load balancer <code class="language-plaintext highlighter-rouge">Listener</code>s.
+Compose application whith HTTP services only (using ports 80/443 or <code class="language-plaintext highlighter-rouge">x-aws-protocol</code> set to <code class="language-plaintext highlighter-rouge">http</code>) get an Application Load Balancer
+created, otherwise a Network Load Balancer is used.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">TargetGroup</code> is created per service to dispatch traffic by load balancer to the matching containers</p>
+
+<p>Secrets bound to a service get translated into an <code class="language-plaintext highlighter-rouge">InitContainer</code> added to the service’s <code class="language-plaintext highlighter-rouge">TaskDefinition</code>. This init container is
+responsible to create a <code class="language-plaintext highlighter-rouge">/run/secrets</code> file for secret to match docker secret model and make application code portable.
+A <code class="language-plaintext highlighter-rouge">TaskExecutionRole</code> is also created per service, and is updated to grant access to bound secrets.</p>
+
+<p>Services using a GPU (<code class="language-plaintext highlighter-rouge">DeviceRequest</code>) get the <code class="language-plaintext highlighter-rouge">Cluster</code> extended with an EC2 <code class="language-plaintext highlighter-rouge">CapacityProvider</code>, using an <code class="language-plaintext highlighter-rouge">AutoscalingGroup</code> to manage
+EC2 resources allocation based on a <code class="language-plaintext highlighter-rouge">LaunchConfiguration</code>. The latter uses ECS recommended AMI and machine type for GPU.</p>
+
+<p>Service to declare <code class="language-plaintext highlighter-rouge">deploy.x-aws-autoscaling</code> get a <code class="language-plaintext highlighter-rouge">ScalingPolicy</code> created targeting specified the configured CPU usage metric</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=Amazon">Amazon</a>, <a href="/docs.docker.jp.onthefly/search/?q=Integration">Integration</a>, <a href="/docs.docker.jp.onthefly/search/?q=ECS">ECS</a>, <a href="/docs.docker.jp.onthefly/search/?q=Compose">Compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=architecture">architecture</a>, <a href="/docs.docker.jp.onthefly/search/?q=mapping">mapping</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/cloud/ecs-architecture.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [cloud/ecs-architecture.ch](https://matsuand.github.io/docs.docker.jp.onthefly/cloud/ecs-architecture/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#overview" class="nomunge">Overview</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/docker-security">セキュリティ</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2020 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/cloud/ecs-architecture/";</script></body>
+</html>
