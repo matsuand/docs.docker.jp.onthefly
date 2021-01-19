@@ -736,7 +736,7 @@ still optimizes the bandwidth during browsing).
 @z
 
 @x
-Copyright 2013-2020 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2021 Docker, inc, released under the Apache 2.0 license.
 @y
-Copyright 2013-2020 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2021 Docker, inc, released under the Apache 2.0 license.
 @z
