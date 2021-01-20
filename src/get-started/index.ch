@@ -126,9 +126,20 @@ Docker の使い方を学ぼうとしているみなさん。
 @z
 
 @x
-This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from DockerCon 2020.
+This page contains step-by-step instructions on how to get started with Docker.
 @y
 このページでは順を追って手順を進めていくことで Docker を学んでいきます。
+@z
+
+@x
+If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](/language).
+@y
+好みのプログラミング言語を使ってアプリケーションをコンテナー化する方法をお探しであれば、[言語ごとのガイドをはじめよう](/language) を参照してください。
+@z
+
+@x
+We also recommend the video walkthrough from DockerCon 2020.
+@y
 DockerCon 2020 のビデオウォークスルーもお勧めします。
 @z
 

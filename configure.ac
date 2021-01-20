@@ -173,6 +173,11 @@ AC_CONFIG_FILES([Makefile
 		 src/js/Makefile
 		 src/kitematic/Makefile
 		 src/kitematic/images/Makefile
+		 src/language/Makefile
+		 src/language/images/Makefile
+		 src/language/java/Makefile
+		 src/language/nodejs/Makefile
+		 src/language/python/Makefile
 		 src/machine/Makefile
 		 src/machine/drivers/Makefile
 		 src/machine/examples/Makefile

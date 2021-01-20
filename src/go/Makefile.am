@@ -15,7 +15,8 @@ ctie:
 bases = \
 	about         \
 	apple-silicon \
-	buildkit
+	buildkit      \
+	formatting
 
 ch_mds = $(bases:=.ch)
 tr_mds = $(bases:=.md)
