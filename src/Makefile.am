@@ -2,7 +2,7 @@ SUBDIRS = _data _includes _layouts _samples _scss app buildx \
 	ci-cd cloud compose compliance config css \
 	datacenter desktop develop docker-for-mac \
 	docker-for-windows docker-hub docker-id ee engine get-started \
-	go images js kitematic machine network notary \
+	go images js language kitematic machine network notary \
 	opensource reference registry release-notes samples storage
 
 origdir     = @abs_origdir@
