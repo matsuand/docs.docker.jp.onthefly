@@ -11,9 +11,9 @@ plink: docker_trust_signer.yaml
 options:
 @y
 command: docker trust signer add
-short: Add a signer
-long: '`docker trust signer add` adds signers to signed repositories.'
-usage: 'docker trust signer add OPTIONS NAME REPOSITORY [REPOSITORY...] '
+short: 署名者（signer）を追加します。
+long: '`docker trust signer add`は署名されたリポジトリに署名者（signer）を追加します。'
+usage: 'docker trust signer add オプション NAME REPOSITORY [REPOSITORY...] '
 pname: docker trust signer
 plink: docker_trust_signer.yaml
 options:
@@ -31,7 +31,7 @@ options:
 @y
 - option: key
   value_type: list
-  description: Path to the signer's public key file
+  description: 署名者（signer）の公開鍵ファイルへのパス。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -44,53 +44,44 @@ examples: |-
   ### Add a signer to a repo
 @y
 examples: |-
-  ### Add a signer to a repo
+  {: #add-a-signer-to-a-repo }
+  ### リポジトリへの署名者の追加
 @z
 
 @x
   To add a new signer, `alice`, to this repository:
 @y
-  To add a new signer, `alice`, to this repository:
+  以下のリポジトリに対して、新たな署名者`alice`を加えていきます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker trust inspect --pretty example/trust-demo
-@y
-  $ docker trust inspect --pretty example/trust-demo
-@z
 
-@x
   No signatures for example/trust-demo
-@y
-  No signatures for example/trust-demo
-@z
 
-@x
-  List of signers and their keys:
-@y
-  List of signers and their keys:
-@z
 
-@x
+  List of signers and their keys:
+
   SIGNER              KEYS
   bob                 5600f5ab76a2
-@y
-  SIGNER              KEYS
-  bob                 5600f5ab76a2
-@z
 
-@x
   Administrative keys for example/trust-demo:
   Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
   Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
   ```
 @y
+  ```bash
+  $ docker trust inspect --pretty example/trust-demo
+
+  No signatures for example/trust-demo
+
+
+  List of signers and their keys:
+
+  SIGNER              KEYS
+  bob                 5600f5ab76a2
+
   Administrative keys for example/trust-demo:
   Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
   Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
@@ -100,33 +91,21 @@ examples: |-
 @x
   Add `alice` with `docker trust signer add`:
 @y
-  Add `alice` with `docker trust signer add`:
+  `docker trust signer add`を実行して`alice`を追加します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker trust signer add alice example/trust-demo --key alice.crt
-@y
-  $ docker trust signer add alice example/trust-demo --key alice.crt
-@z
-
-@x
     Adding signer "alice" to example/trust-demo...
     Enter passphrase for repository key with ID 642692c:
-@y
-    Adding signer "alice" to example/trust-demo...
-    Enter passphrase for repository key with ID 642692c:
-@z
-
-@x
   Successfully added signer: alice to example/trust-demo
   ```
 @y
+  ```bash
+  $ docker trust signer add alice example/trust-demo --key alice.crt
+    Adding signer "alice" to example/trust-demo...
+    Enter passphrase for repository key with ID 642692c:
   Successfully added signer: alice to example/trust-demo
   ```
 @z
@@ -134,58 +113,52 @@ examples: |-
 @x
   `docker trust inspect --pretty` now lists `alice` as a valid signer:
 @y
-  `docker trust inspect --pretty` now lists `alice` as a valid signer:
+  `docker trust inspect --pretty`の実行により、今度は`alice`が署名者として表示されます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker trust inspect --pretty example/trust-demo
-@y
-  $ docker trust inspect --pretty example/trust-demo
-@z
 
-@x
   No signatures for example/trust-demo
-@y
-  No signatures for example/trust-demo
-@z
 
-@x
-  List of signers and their keys:
-@y
-  List of signers and their keys:
-@z
 
-@x
+  List of signers and their keys:
+
   SIGNER              KEYS
   alice               05e87edcaecb
   bob                 5600f5ab76a2
-@y
-  SIGNER              KEYS
-  alice               05e87edcaecb
-  bob                 5600f5ab76a2
-@z
 
-@x
   Administrative keys for example/trust-demo:
   Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
   Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
   ```
+@y
+  ```bash
+  $ docker trust inspect --pretty example/trust-demo
+
+  No signatures for example/trust-demo
+
+
+  List of signers and their keys:
+
+  SIGNER              KEYS
+  alice               05e87edcaecb
+  bob                 5600f5ab76a2
+
+  Administrative keys for example/trust-demo:
+  Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+  Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+  ```
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  Administrative keys for example/trust-demo:
-  Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
-  Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
-  ```
 deprecated: false
 experimental: false
 experimentalcli: false

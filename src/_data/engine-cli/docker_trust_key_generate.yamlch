@@ -3,32 +3,24 @@
 
 @x
 command: docker trust key generate
+short: Generate and load a signing key-pair
+long: |-
+  `docker trust key generate` generates a key-pair to be used with signing,
+   and loads the private key into the local docker trust keystore.
 @y
 command: docker trust key generate
-@z
-
-@x
-short: Generate and load a signing key-pair
-@y
-short: Generate and load a signing key-pair
-@z
-
-@x
+short: 署名する鍵ペアを生成してロードします。
 long: |-
-@y
-long: |-
+  `docker trust key generate`は署名の際に利用する鍵ペアを生成します。
+  そしてローカルの Docker トラスト鍵ストアに秘密鍵をロードします。
 @z
 
 @x
-  `docker trust key generate` generates a key-pair to be used with signing,
-   and loads the private key into the local docker trust keystore.
 usage: docker trust key generate NAME
 pname: docker trust key
 plink: docker_trust_key.yaml
 options:
 @y
-  `docker trust key generate` generates a key-pair to be used with signing,
-   and loads the private key into the local docker trust keystore.
 usage: docker trust key generate NAME
 pname: docker trust key
 plink: docker_trust_key.yaml
@@ -47,7 +39,7 @@ options:
 @y
 - option: dir
   value_type: string
-  description: Directory to generate key in, defaults to current directory
+  description: 鍵を生成するディレクトリ。デフォルトはカレントディレクトリ。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -57,25 +49,17 @@ options:
 
 @x
 examples: |-
+  ### Generate a key-pair
 @y
 examples: |-
-@z
-
-@x
-  ### Generate a key-pair
-@y
-  ### Generate a key-pair
+  {: #generate-a-key-pair }
+  ### 鍵ペアの生成
 @z
 
 @x
   ```bash
   $ docker trust key generate alice
-@y
-  ```bash
-  $ docker trust key generate alice
-@z
 
-@x
   Generating key for alice...
   Enter passphrase for new alice key with ID 17acf3c:
   Repeat passphrase for new alice key with ID 17acf3c:
@@ -84,6 +68,9 @@ examples: |-
   alice.pub
   ```
 @y
+  ```bash
+  $ docker trust key generate alice
+
   Generating key for alice...
   Enter passphrase for new alice key with ID 17acf3c:
   Repeat passphrase for new alice key with ID 17acf3c:
@@ -97,37 +84,28 @@ examples: |-
   The private signing key is encrypted by the passphrase and loaded into the docker trust keystore.
   All passphrase requests to sign with the key will be referred to by the provided `NAME`.
 @y
-  The private signing key is encrypted by the passphrase and loaded into the docker trust keystore.
-  All passphrase requests to sign with the key will be referred to by the provided `NAME`.
+  秘密鍵（private key）はパスフレーズによって暗号化されるものであり、Docker トラスト鍵ストアにロードされます。
+  鍵に対して署名する際のパスフレーズは、指定された`NAME`に対して求められます。
 @z
 
 @x
   The public key component `alice.pub` will be available in the current working directory, and can
   be used directly by `docker trust signer add`.
 @y
-  The public key component `alice.pub` will be available in the current working directory, and can
-  be used directly by `docker trust signer add`.
+  公開鍵（public key）`alice.pub`はカレントなワーキングディレクトリに生成されます。
+  これは`docker trust signer add`コマンドによって直接利用されます。
 @z
 
 @x
   Provide the `--dir` argument to specify a directory to generate the key in:
 @y
-  Provide the `--dir` argument to specify a directory to generate the key in:
+  `--dir`引数を指定すれば、鍵を生成するディレクトリを指定できます。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker trust key generate alice --dir /foo
-@y
-  $ docker trust key generate alice --dir /foo
-@z
 
-@x
   Generating key for alice...
   Enter passphrase for new alice key with ID 17acf3c:
   Repeat passphrase for new alice key with ID 17acf3c:
@@ -135,19 +113,26 @@ examples: |-
   $ ls /foo
   alice.pub
   ```
+@y
+  ```bash
+  $ docker trust key generate alice --dir /foo
+
+  Generating key for alice...
+  Enter passphrase for new alice key with ID 17acf3c:
+  Repeat passphrase for new alice key with ID 17acf3c:
+  Successfully generated and loaded private key. Corresponding public key available: alice.pub
+  $ ls /foo
+  alice.pub
+  ```
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  Generating key for alice...
-  Enter passphrase for new alice key with ID 17acf3c:
-  Repeat passphrase for new alice key with ID 17acf3c:
-  Successfully generated and loaded private key. Corresponding public key available: alice.pub
-  $ ls /foo
-  alice.pub
-  ```
 deprecated: false
 experimental: false
 experimentalcli: false
