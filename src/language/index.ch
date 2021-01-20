@@ -110,9 +110,9 @@ Learn how to set up your Docker environment and start containerizing your applic
 @z
 
 @x
-To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=[Language%20specific%guides%20request]){:target="_blank" rel="noopener" class="_"}.
+To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
 @y
-To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=[Language%20specific%guides%20request]){:target="_blank" rel="noopener" class="_"}.
+To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
 @z
 
 @x
