@@ -58,13 +58,18 @@ web:
 @x
 If you have multiple environment variables, you can substitute them by providing 
 a path to your environment variables file. By default, the `docker-compose` 
-command will look for a file named `.env` in the directory you run the command.
+command will look for a file named `.env` in the project directory (parent folder 
+of your Compose file).
+@y
+環境変数が複数ある場合、環境変数ファイルへのパスを指定して利用することができます。
+`docker-compose`コマンドを実行すると、デフォルトでそのプロジェクトディレクトリ（Compose ファイルの親ディレクトリ）内の`.env`というファイルを探します。
+@z
+
+@x
 By passing the file as an argument, you can store it anywhere and name it 
 appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
 done using the `--env-file` option:
 @y
-環境変数が複数ある場合、環境変数ファイルへのパスを指定して利用することができます。
-`docker-compose` コマンドを実行すると、デフォルトでその実行ディレクトリ内の `.env` というファイルを探します。
 ファイル名を引数に与えれば、どこの何というファイルでも指定できます。
 たとえば `.env.ci`、`.env.dev`、`.env.prod` などとすることができます。
 ファイルパスの指定は `--env-file` オプションを使って行います。

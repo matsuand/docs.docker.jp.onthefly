@@ -28,9 +28,6 @@ toc_max: 2
 @x
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 @y
-{% comment %}
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
-{% endcomment %}
 このページでは Docker Desktop リリースにおける新機能、更新状況、既知の不具合、バグフィックスといった情報を示します。
 @z
 
@@ -40,12 +37,6 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 @y
-{% comment %}
-> **Important**
->
-> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
-{: .important }
-{% endcomment %}
 > **重要**
 >
 > Docker Desktop 3.0.0 から安定版（stable）と最新版（edge）のリリースは、どのユーザーに対しても 1 つのリリースとして統合されました。
@@ -517,9 +508,10 @@ Docker Desktop 2.5.0.0 には Kubernetes のアップグレードが含まれま
 @z
 
 @x
-- Fixed local privilege escalation vulnerability caused by inadequate certificate checking
+- Fixed local privilege escalation vulnerability caused by inadequate certificate checking. See [CVE-2021-3162](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3162){:target="_blank" rel="noopener" class="_"}.
 @y
 - 証明書に対する不十分なチェック処理が原因で、ローカル権限が昇格してしまうぜい弱性を修正しました。
+  [CVE-2021-3162](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3162){:target="_blank" rel="noopener" class="_"} を参照のこと。
 @z
 
 @x

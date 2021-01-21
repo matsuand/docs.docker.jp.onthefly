@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2021-01-21 22:48:26 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>リモートログドライバーに対する docker logs の利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="リモートログドライバーに対する docker logs の利用" />
   <meta property="og:description" content="Learn how to read container logs locally when using a third party logging solution." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-21T22:48:26+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/dual-logging/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-21T22:48:26+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"リモートログドライバーに対する docker logs の利用","description":"Learn how to read container logs locally when using a third party logging solution.","url":"https://docs.docker.com/config/containers/logging/dual-logging/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,72 +98,56 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>リモートログドライバーに対する docker logs の利用</h1>
-<h2 id="overview">概要</h2>
+                        <section class="section"><h1>リモートログドライバーに対する docker logs の利用</h1><h2 id="overview">概要</h2>
 
-<p>Docker Engine Enterprise 18.03 より前は、<code class="language-plaintext highlighter-rouge">docker logs</code> を実行してコンテナーログを参照する際には、ログドライバーとして <code class="language-plaintext highlighter-rouge">jsonfile</code> と <code class="language-plaintext highlighter-rouge">journald</code> がサポートされていました。
-他にもサードパーティー製のログドライバーはあったのですが、<code class="language-plaintext highlighter-rouge">docker logs</code> を使ってローカルでログを参照することはサポートされていませんでした。サポートされていなかったログドライバーは以下のとおりです。</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">syslog</code></li>
-  <li><code class="language-plaintext highlighter-rouge">gelf</code></li>
-  <li><code class="language-plaintext highlighter-rouge">fluentd</code></li>
-  <li><code class="language-plaintext highlighter-rouge">awslogs</code></li>
-  <li><code class="language-plaintext highlighter-rouge">splunk</code></li>
-  <li><code class="language-plaintext highlighter-rouge">etwlogs</code></li>
-  <li><code class="language-plaintext highlighter-rouge">gcplogs</code></li>
-  <li><code class="language-plaintext highlighter-rouge">logentries</code></li>
-</ul>
+<p>Docker Engine 20.10 より前は、<code class="language-plaintext highlighter-rouge">docker logs</code>を実行してコンテナーログを参照する際には、ログドライバーとして<code class="language-plaintext highlighter-rouge">local</code>、<code class="language-plaintext highlighter-rouge">json-file</code>、<code class="language-plaintext highlighter-rouge">journald</code>しかサポートされていませんでした。
+他にもサードパーティー製のログドライバーはあったのですが、<code class="language-plaintext highlighter-rouge">docker logs</code>を使ってローカルでログを参照することはサポートされていませんでした。</p>
 
 <p>そういった状態でログデータを収集するのは、自動化されていようが普通に行うのであろうが、大いに問題を引き起こしていました。
 サードパーティー製のログソリューションを利用した場合、ログ情報はそのサードパーティーが提供するツールが指定する書式でしか、アクセスできず参照もできませんでした。</p>
 
-<p>Docker Engine Enterprise 18.03.1-ee-1 からは、ログドライバーやプラグインを設定するしないに関わらず、コンテナーのログを参照するには <code class="language-plaintext highlighter-rouge">docker logs</code> を使えばよいことになりました。
-この機能はデュアルログ（dual logging）と呼ばれることがあります。
-この機能を利用すると、リモートログドライバーが利用されていたとしても、<code class="language-plaintext highlighter-rouge">docker logs</code> を実行してローカルなコンテナーログを参照するだけでよく、一定の書式でログが得られることになります。
+<p>Docker Engine 20.10 からは、ログドライバーやプラグインを設定するしないに関わらず、コンテナーのログを参照するには<code class="language-plaintext highlighter-rouge">docker logs</code>を使えばよいことになりました。
+この機能は「デュアルログ」（dual logging）と呼ばれることがあります。
+この機能を利用すると、リモートログドライバーが利用されていたとしても、<code class="language-plaintext highlighter-rouge">docker logs</code>を実行してローカルなコンテナーログを参照するだけでよく、一定の書式でログが得られることになります。
 というのも、Engine が「ローカルな」ログドライバーに合わせて、ログ情報を設定してくれるからです。
-詳細な情報については <a href="/config/containers/logging/configure">デフォルトのログドライバーの設定</a> を参照してください。</p>
+詳細な情報については <a href="/docs.docker.jp.onthefly/config/containers/logging/configure">デフォルトのログドライバーの設定</a> を参照してください。</p>
 
 <h2 id="prerequisites">前提条件</h2>
 
-<p>デュアルログは Docker Enterprise においてのみサポートされ、さらにデフォルトで有効となっているのは Engine Enterprise 18.03.1-ee-1 以降です。</p>
+<p>デュアルログを利用するために設定変更する必要はありません。
+Docker Engine 20.10 またはそれ以降においては、設定されたログドライバーにログ読み込み機能がサポートされていない場合には、自動的にデュアルログ機能が有効になります。</p>
 
-<h2 id="usage">利用方法</h2>
-
-<p>デュアルログはデフォルトで有効になっています。
-リモートログドライバーを用いる際には、Docker デーモンまたはコンテナーのいずれかの設定が必要になります。</p>
-
-<p>以下の例は、デュアルログ機能がある場合とない場合において、<code class="language-plaintext highlighter-rouge">docker logs</code> コマンドを実行した結果を示すものです。</p>
+<p>以下の例は、デュアルログ機能がある場合とない場合において、<code class="language-plaintext highlighter-rouge">docker logs</code>コマンドを実行した結果を示すものです。</p>
 
 <h3 id="without-dual-logging-capability">デュアルログ機能がない場合</h3>
 
-<p>コンテナーあるいは <code class="language-plaintext highlighter-rouge">dockerd</code> に対して、<code class="language-plaintext highlighter-rouge">splunk</code> のようなリモートログドライバーを設定していた場合、ローカルのコンテナーログを参照しようとすると、エラーが表示されます。</p>
+<p>コンテナーあるいは<code class="language-plaintext highlighter-rouge">dockerd</code>に対して、<code class="language-plaintext highlighter-rouge">splunk</code>のようなリモートログドライバーを設定していた場合、ローカルのコンテナーログを参照しようとすると、エラーが表示されます。</p>
 
 <ul>
   <li>
     <p>手順 1： Docker デーモンを設定します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">cat</span> /etc/docker/daemon.json
-  <span class="o">{</span>
-    <span class="s2">"log-driver"</span>: <span class="s2">"splunk"</span>,
-    <span class="s2">"log-opts"</span>: <span class="o">{</span>
-      ...
-    <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span><span class="nb">cat</span> /etc/docker/daemon.json
+<span class="go">  {
+    "log-driver": "splunk",
+    "log-opts": {
+</span><span class="c">      ...
+</span><span class="go">    }
+  }
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>手順 2： コンテナーを起動します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker run <span class="nt">-d</span> busybox <span class="nt">--name</span> testlog top
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span>docker run <span class="nt">-d</span> busybox <span class="nt">--name</span> testlog top
 </code></pre></div>    </div>
   </li>
   <li>
     <p>手順 3： コンテナーログを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker logs 7d6ac83a89a0
-  The docker logs <span class="nb">command </span>was not available <span class="k">for </span>drivers other than json-file and journald.
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span>docker logs 7d6ac83a89a0
+<span class="go">  Error response from daemon: configured logging driver does not support reading
+</span></code></pre></div>    </div>
   </li>
 </ul>
 
@@ -175,40 +159,40 @@
   <li>
     <p>手順 1： Docker デーモンを設定します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">cat</span> /etc/docker/daemon.json
-  <span class="o">{</span>
-    <span class="s2">"log-driver"</span>: <span class="s2">"splunk"</span>,
-    <span class="s2">"log-opts"</span>: <span class="o">{</span>
-      ...
-    <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span><span class="nb">cat</span> /etc/docker/daemon.json
+<span class="go">  {
+    "log-driver": "splunk",
+    "log-opts": {
+</span><span class="c">      ...
+</span><span class="go">    }
+  }
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>手順 2： コンテナーを起動します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker run <span class="nt">-d</span> busybox <span class="nt">--name</span> testlog top
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span>docker run <span class="nt">-d</span> busybox <span class="nt">--name</span> testlog top
 </code></pre></div>    </div>
   </li>
   <li>
     <p>手順 3： コンテナーログを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>docker logs 7d6ac83a89a0
-  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: marked as sealed                                          	
-  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: pre-seal teardown starting                                                                                                 	
-  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: stopping cluster listeners                                                                                             	
-  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: shutting down forwarding rpc listeners                                                                                 	
-  2019-02-04T19:48:15.423Z <span class="o">[</span>INFO]  core: forwarding rpc listeners stopped
-  2019-02-04T19:48:15.599Z <span class="o">[</span>INFO]  core: rpc listeners successfully shut down
-  2019-02-04T19:48:15.599Z <span class="o">[</span>INFO]  core: cluster listeners successfully shut down	
-</code></pre></div>    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">  $</span><span class="w"> </span>docker logs 7d6ac83a89a0
+<span class="go">  2019-02-04T19:48:15.423Z [INFO]  core: marked as sealed                                          	
+  2019-02-04T19:48:15.423Z [INFO]  core: pre-seal teardown starting                                                                                                 	
+  2019-02-04T19:48:15.423Z [INFO]  core: stopping cluster listeners                                                                                             	
+  2019-02-04T19:48:15.423Z [INFO]  core: shutting down forwarding rpc listeners                                                                                 	
+  2019-02-04T19:48:15.423Z [INFO]  core: forwarding rpc listeners stopped
+  2019-02-04T19:48:15.599Z [INFO]  core: rpc listeners successfully shut down
+  2019-02-04T19:48:15.599Z [INFO]  core: cluster listeners successfully shut down	
+</span></code></pre></div>    </div>
   </li>
 </ul>
 
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>デュアルログ機能を有効にする前後において、json-file や journald のようなローカルドライバーの機能は何も変わりません。
+  <p>デュアルログ機能を有効にする前後において、<code class="language-plaintext highlighter-rouge">json-file</code>や<code class="language-plaintext highlighter-rouge">journald</code>のようなローカルドライバーの機能は何も変わりません。
 ローカルのログは、上のどちらのケースにおいても参照可能です。</p>
 </blockquote>
 
@@ -217,7 +201,7 @@
 <ul>
   <li>複数のログドライバーを指定することはできません。</li>
   <li>コンテナーにおいて利用するログドライバーやプラグインが、リモートに向けてログ送信を行うものである場合、突然「ネットワーク的な」問題や、ローカルキャッシュへの書き込み不能となる事態が発生する場合があります。</li>
-  <li><code class="language-plaintext highlighter-rouge">logdriver</code> への書き込みが何らかの理由（ファイルシステムがいっぱい、書き込み権限消失）により失敗した場合、キャッシュの書き込みが失敗し、このことはデーモンのログに記録されます。
+  <li><code class="language-plaintext highlighter-rouge">logdriver</code>への書き込みが何らかの理由（ファイルシステムがいっぱい、書き込み権限消失）により失敗した場合、キャッシュの書き込みが失敗し、このことはデーモンのログに記録されます。
 キャッシュへのログエントリーは、リトライされることはありません。ed.</li>
   <li>デフォルトの設定のままでは、ログがキャッシュから失われる場合があります。
 低速なファイル書き込みなどの際に、コンテナーの標準入出力からの情報をブロックしないように、リングバッファーが利用されるからです。
@@ -257,8 +241,7 @@
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#overview" class="nomunge">概要</a></li>
-  <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
-  <li><a href="#usage" class="nomunge">利用方法</a>
+  <li><a href="#prerequisites" class="nomunge">前提条件</a>
     <ul>
       <li><a href="#without-dual-logging-capability" class="nomunge">デュアルログ機能がない場合</a></li>
       <li><a href="#with-dual-logging-capability" class="nomunge">デュアルログ機能がある場合</a></li>

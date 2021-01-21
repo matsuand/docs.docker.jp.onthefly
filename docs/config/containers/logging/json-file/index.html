@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2021-01-21 22:48:26 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>JSON File logging driver | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="JSON File logging driver" />
   <meta property="og:description" content="Describes how to use the json-file logging driver." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-21T22:48:26+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/json-file/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-21T22:48:26+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"JSON File logging driver","description":"Describes how to use the json-file logging driver.","url":"https://docs.docker.com/config/containers/logging/json-file/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,13 +98,22 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>JSON File logging driver</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>By default, Docker captures the standard output (and standard error) of all your containers,
+                        <section class="section"><h1>JSON File logging driver</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>By default, Docker captures the standard output (and standard error) of all your containers,
 and writes them in files using the JSON format. The JSON format annotates each line with its
 origin (<code class="language-plaintext highlighter-rouge">stdout</code> or <code class="language-plaintext highlighter-rouge">stderr</code>) and its timestamp. Each log file contains information about
 only one container.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"log"</span><span class="p">:</span><span class="s2">"Log line is here</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="nl">"stream"</span><span class="p">:</span><span class="s2">"stdout"</span><span class="p">,</span><span class="nl">"time"</span><span class="p">:</span><span class="s2">"2019-01-01T11:11:11.111111111Z"</span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
+
+<blockquote>
+  <p><em>Warning</em></p>
+
+  <p>The <code class="language-plaintext highlighter-rouge">json-file</code> logging driver uses file-based storage. These files are designed
+to be exclusively accessed by the Docker daemon. Interacting with these files
+with external tools may interfere with Docker’s logging system and result in
+unexpected behavior, and should be avoided.</p>
+</blockquote>
 
 <h2 id="usage">Usage</h2>
 
@@ -115,7 +124,8 @@ located in <code class="language-plaintext highlighter-rouge">/etc/docker/</code
 configuring Docker using <code class="language-plaintext highlighter-rouge">daemon.json</code>, see
 <a href="/docs.docker.jp.onthefly/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon.json</a>.</p>
 
-<p>The following example sets the log driver to <code class="language-plaintext highlighter-rouge">json-file</code> and sets the <code class="language-plaintext highlighter-rouge">max-size</code> and <code class="language-plaintext highlighter-rouge">max-file</code> options.</p>
+<p>The following example sets the log driver to <code class="language-plaintext highlighter-rouge">json-file</code> and sets the <code class="language-plaintext highlighter-rouge">max-size</code>
+and <code class="language-plaintext highlighter-rouge">max-file</code> options to enable automatic log-rotation.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"log-driver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json-file"</span><span class="p">,</span><span class="w">
@@ -174,6 +184,11 @@ Existing containers do not use the new logging configuration.</p>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt labels=production_status,geo</code></td>
     </tr>
     <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">labels-regex</code></td>
+      <td style="text-align: left">Similar to and compatible with <code class="language-plaintext highlighter-rouge">labels</code>. A regular expression to match logging-related labels. Used for advanced <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag options</a>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt labels-regex=^(production_status|geo)</code></td>
+    </tr>
+    <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">env</code></td>
       <td style="text-align: left">Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon accepts. Used for advanced <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag options</a>.</td>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt env=os,customer</code></td>
@@ -181,7 +196,7 @@ Existing containers do not use the new logging configuration.</p>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">env-regex</code></td>
       <td style="text-align: left">Similar to and compatible with <code class="language-plaintext highlighter-rouge">env</code>. A regular expression to match logging-related environment variables. Used for advanced <a href="/docs.docker.jp.onthefly/config/containers/logging/log_tags/">log tag options</a>.</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt env-regex=^(os|customer).</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--log-opt env-regex=^(os|customer)</code></td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">compress</code></td>

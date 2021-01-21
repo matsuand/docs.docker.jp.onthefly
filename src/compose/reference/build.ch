@@ -34,8 +34,6 @@ Options:
     --no-rm                 Do not remove intermediate containers after a successful build.
     --parallel              Build images in parallel.
     --progress string       Set type of progress output (`auto`, `plain`, `tty`).
-                            `EXPERIMENTAL` flag for native builder.
-                            To enable, run with `COMPOSE_DOCKER_CLI_BUILD=1`)
     --pull                  Always attempt to pull a newer version of the image.
     -q, --quiet             Don't print anything to `STDOUT`.
 ```
@@ -52,8 +50,6 @@ Options:
     --no-rm                 ビルド生成後に中間コンテナーを削除しません。
     --parallel              並行的にイメージをビルドします。
     --progress string       処理経過の出力タイプ。（`auto`、`plain`、`tty`）
-                            ネイティブビルダー用に `EXPERIMENTAL` フラグがあり、これを有効
-                            にするには `COMPOSE_DOCKER_CLI_BUILD=1` を指定して実行。
     --pull                  プルを行う際に常に最新版のイメージの取得を試みます。
     -q, --quiet             `STDOUT` に何も出力しません。
 ```
@@ -77,4 +73,33 @@ If you change a service's Dockerfile or the contents of its
 build directory, run `docker-compose build` to rebuild it.
 @y
 サービスの Dockerfile やビルドディレクトリの内容を変更する場合は、`docker-compose build` を実行して再ビルドします。
+@z
+
+@x
+## Native build using the docker CLI
+@y
+{: #native-build-using-the-docker-cli }
+## Docker CLI を利用したネイティブビルド
+@z
+
+@x
+Compose by default uses the `docker` CLI to perform builds (also known as "native
+build"). By using the `docker` CLI, Compose can take advantage of features such
+as [BuildKit](../../develop/develop-images/build_enhancements.md), which are not
+supported by Compose itself. BuildKit is enabled by default on Docker Desktop,
+but requires the `DOCKER_BUILDKIT=1` environment variable to be set on other
+platforms.
+@y
+Compose ではデフォルトで`docker` CLI を利用してビルドを実現しています（これは「ネイティブビルド」と呼ばれます）。
+`docker` CLI を利用することによって、[BuildKit](../../develop/develop-images/build_enhancements.md) のような機能を活用できることになります。
+そのような機能は Compose そのものにおいてはサポートされていません。
+BuildKit は Docker Desktop においてはデフォルトで有効になっています。
+しかしこれ以外のプラットフォームでは環境変数`DOCKER_BUILDKIT=1`を設定しておくことが必要になります。
+@z
+
+@x
+Refer to the [Compose CLI environment variables](envvars.md#COMPOSE_DOCKER_CLI_BUILD)
+section to learn how to switch between "native build" and "compose build".
+@y
+「ネイティブビルド」と「Compose ビルド」を切り替える方法については [Compose CLI 環境変数](envvars.md#COMPOSE_DOCKER_CLI_BUILD) の節を参照してください。
 @z
