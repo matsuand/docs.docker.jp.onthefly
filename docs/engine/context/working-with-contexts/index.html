@@ -1,4 +1,4 @@
-<!-- Page generated 2020-10-24 20:20:55 +0900-->
+<!-- Page generated 2021-01-22 10:50:51 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Context | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Context" />
   <meta property="og:description" content="Docker コンテキストについて学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-22T10:50:51+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/context/working-with-contexts/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2020-10-24T20:20:55+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-22T10:50:51+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Context","description":"Docker コンテキストについて学びます。","url":"https://docs.docker.com/engine/context/working-with-contexts/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,31 +98,30 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Context</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p>
-<h2 id="introduction">はじめに</h2>
+                        <section class="section"><h1>Docker Context</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="introduction">はじめに</h2>
 
 <p>本ガイドでは <strong>コンテキスト</strong>（context）というものが、いかに簡単に、<strong>単一の Docker CLI</strong> から複数 Swarm クラスターを、そして複数 Kubernetes クラスター、各 Docker ノードを操作できるかを示します。</p>
 
 <p>1 つの Docker CLI に対しては、複数のコンテキスト（context）を持たせることができます。
 各コンテキストには、さまざまなクラスターやノードの管理に必要となる、エンドポイント情報やセキュリティ情報が含まれています。
-<code class="language-plaintext highlighter-rouge">docker context</code> コマンドを使うと、そういったコンテキストを簡単に設定したり切り替えたりすることができます。</p>
+<code class="language-plaintext highlighter-rouge">docker context</code>コマンドを使うと、そういったコンテキストを簡単に設定したり切り替えたりすることができます。</p>
 
 <p>その例として、会社で利用するノート PC 上において、1 つの Docker クライアントから 2 つのコンテキスト、<strong>dev-k8s</strong> と <strong>prod-swarm</strong> の利用設定が必要であるとします。
 <strong>dev-k8s</strong> は、開発環境上の Kubernetes クラスターの設定管理を行うものであり、エンドポイントデータやセキュリティ情報が含まれています。
 一方 <strong>prod-swarm</strong> は、本番環境上の Swarm クラスター管理を一手に引き受けているものとします。
-コンテキストの設定を一度行ってしまえば、トップレベルのコマンド <code class="language-plaintext highlighter-rouge">docker context use &lt;コンテキスト名&gt;</code> を実行するだけで、コンテキストを簡単に切り替えられるようになります。</p>
+コンテキストの設定を一度行ってしまえば、トップレベルのコマンド<code class="language-plaintext highlighter-rouge">docker context use &lt;コンテキスト名&gt;</code>を実行するだけで、コンテキストを簡単に切り替えられるようになります。</p>
 
-<p>Docker Context を利用し、開発アプリをクラウド上にデプロイする方法については、<a href="/docs.docker.jp.onthefly/engine/context/aci-integration/">Azure 上の Docker コンテナーのデプロイ</a> や <a href="/docs.docker.jp.onthefly/engine/context/ecs-integration/">ECS 上への Docker コンテナーのデプロイ</a> を参照してください。</p>
+<p>Docker Context を利用し、開発アプリをクラウド上にデプロイする方法については、<a href="/docs.docker.jp.onthefly/cloud/aci-integration/">Azure 上の Docker コンテナーのデプロイ</a> や <a href="/docs.docker.jp.onthefly/cloud/ecs-integration/">ECS 上への Docker コンテナーのデプロイ</a> を参照してください。</p>
 
 <h2 id="prerequisites">前提条件</h2>
 
 <p>本ガイドの利用例を進めていくためには、以下が必要になります。</p>
 
 <ul>
-  <li>トップレベルコマンド <code class="language-plaintext highlighter-rouge">context</code> をサポートしている Docker クライアント。</li>
+  <li>トップレベルコマンド<code class="language-plaintext highlighter-rouge">context</code>をサポートしている Docker クライアント。</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">docker context</code> を実行して、Docker クライアントがコンテキストをサポートしていることを確認してください。</p>
+<p><code class="language-plaintext highlighter-rouge">docker context</code>を実行して、Docker クライアントがコンテキストをサポートしていることを確認してください。</p>
 
 <p>また以下のいずれかが必要です。</p>
 
@@ -152,15 +151,15 @@ default *     Current...      unix:///var/run/docker.sock                       
 </code></pre></div></div>
 
 <p>上の結果より、「default」という単一のコンテキストがあることがわかります。
-これは Swarm クラスターとやりとりするものとして設定されていて、ローカルの Unix ソケット <code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code> を利用して実現するものとなっています。
+これは Swarm クラスターとやりとりするものとして設定されていて、ローカルの Unix ソケット<code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code>を利用して実現するものとなっています。
 ここには Kubernetes のエンドポイントは設定されていません。</p>
 
-<p><code class="language-plaintext highlighter-rouge">NAME</code> 列の横に示されるアスタリスクは、そのコンテキストがアクティブであることを表わします。
-これはつまり <code class="language-plaintext highlighter-rouge">docker</code> コマンドがすべて、この「default」コンテキストに対して実行されることを意味します。
-<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code> や <code class="language-plaintext highlighter-rouge">DOCKER_CONTEXT</code> といった環境変数を使うか、コマンドラインから <code class="language-plaintext highlighter-rouge">--context</code> や <code class="language-plaintext highlighter-rouge">--host</code> フラグを指定することで、その対象をオーバーライドすることができます。</p>
+<p><code class="language-plaintext highlighter-rouge">NAME</code>列の横に示されるアスタリスクは、そのコンテキストがアクティブであることを表わします。
+これはつまり<code class="language-plaintext highlighter-rouge">docker</code>コマンドがすべて、この「default」コンテキストに対して実行されることを意味します。
+<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code>や<code class="language-plaintext highlighter-rouge">DOCKER_CONTEXT</code>といった環境変数を使うか、コマンドラインから<code class="language-plaintext highlighter-rouge">--context</code>や<code class="language-plaintext highlighter-rouge">--host</code>フラグを指定することで、その対象をオーバーライドすることができます。</p>
 
-<p>さらに詳しく見るには <code class="language-plaintext highlighter-rouge">docker context inspect</code> を実行します。
-この例においては、<code class="language-plaintext highlighter-rouge">default</code> というコンテキストを確認しています。</p>
+<p>さらに詳しく見るには<code class="language-plaintext highlighter-rouge">docker context inspect</code>を実行します。
+この例においては、<code class="language-plaintext highlighter-rouge">default</code>というコンテキストを確認しています。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context inspect default
 [
@@ -185,18 +184,18 @@ default *     Current...      unix:///var/run/docker.sock                       
 </code></pre></div></div>
 
 <p>このコンテキストでは、オーケストレーター（<code class="language-plaintext highlighter-rouge">metadata.stackOrchestrator</code>）として「swarm」を利用しています。
-また <code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code> にあるローカル Unix ソケットを使い、利用可能なエンドポイントとの間でやりとりを行うように設定されています（<code class="language-plaintext highlighter-rouge">Endpoints.docker.Host</code>）。
+また <code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code>にあるローカル Unix ソケットを使い、利用可能なエンドポイントとの間でやりとりを行うように設定されています（<code class="language-plaintext highlighter-rouge">Endpoints.docker.Host</code>）。
 そして TLS 検証を必要とする設定もあります（<code class="language-plaintext highlighter-rouge">Endpoints.docker.SkipTLSVerify</code>）。</p>
 
 <h3 id="create-a-new-context">新たなコンテキストの生成</h3>
 
-<p>新たなコンテキストを生成するには <code class="language-plaintext highlighter-rouge">docker context create</code> コマンドを実行します。</p>
+<p>新たなコンテキストを生成するには<code class="language-plaintext highlighter-rouge">docker context create</code>コマンドを実行します。</p>
 
 <p>以下の例では「docker-test」というコンテキストを生成するものとし、以下を設定するものとします。</p>
 
 <ul>
   <li>デフォルトのオーケストレーターを Swarm とします。</li>
-  <li>ローカル Unix ソケット <code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code> に対してコマンド実行するものとします。</li>
+  <li>ローカル Unix ソケット<code class="language-plaintext highlighter-rouge">/var/run/docker.sock</code>に対してコマンド実行するものとします。</li>
 </ul>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context create docker-test \
@@ -206,21 +205,21 @@ default *     Current...      unix:///var/run/docker.sock                       
 Successfully created context "docker-test"
 </code></pre></div></div>
 
-<p>新たなコンテキストは <code class="language-plaintext highlighter-rouge">~/.docker/contexts/</code> 配下の <code class="language-plaintext highlighter-rouge">meta.json</code> 内に保存されます。
-コンテキストを新規に生成すると、<code class="language-plaintext highlighter-rouge">~/.docker/contexts/</code> に専用のサブディレクトリが生成され、それぞれの <code class="language-plaintext highlighter-rouge">meta.json</code> が保存されるものです。</p>
+<p>新たなコンテキストは<code class="language-plaintext highlighter-rouge">~/.docker/contexts/</code>配下の<code class="language-plaintext highlighter-rouge">meta.json</code>内に保存されます。
+コンテキストを新規に生成すると、<code class="language-plaintext highlighter-rouge">~/.docker/contexts/</code>に専用のサブディレクトリが生成され、それぞれの<code class="language-plaintext highlighter-rouge">meta.json</code>が保存されるものです。</p>
 
 <blockquote>
   <p><strong>メモ:</strong> デフォルトのコンテキストは、手動で生成したコンテキストとは、多少違った動きをします。
-デフォルトのコンテキストには、設定ファイル <code class="language-plaintext highlighter-rouge">meta.json</code> が存在しません。
+デフォルトのコンテキストには、設定ファイル<code class="language-plaintext highlighter-rouge">meta.json</code>が存在しません。
 そしてその時点の設定に基づいて、動的に設定が更新されます。
-たとえばコマンド <code class="language-plaintext highlighter-rouge">kubectl config use-context</code> を実行して、現在の Kubernetes 設定を切り替えたとします。
+たとえばコマンド<code class="language-plaintext highlighter-rouge">kubectl config use-context</code>を実行して、現在の Kubernetes 設定を切り替えたとします。
 この場合 Docker のデフォルトコンテキストは、新たに Kubernetes エンドポイントに対応して、動的にコンテキスト自体を更新します。</p>
 </blockquote>
 
-<p>新たに生成したコンテキストは、<code class="language-plaintext highlighter-rouge">docker context ls</code> や <code class="language-plaintext highlighter-rouge">docker context inspect &lt;コンテキスト名&gt;</code> により確認することができます。</p>
+<p>新たに生成したコンテキストは、<code class="language-plaintext highlighter-rouge">docker context ls</code>や<code class="language-plaintext highlighter-rouge">docker context inspect &lt;コンテキスト名&gt;</code>により確認することができます。</p>
 
-<p>以下のコマンドは新たな設定を生成するものであり、<code class="language-plaintext highlighter-rouge">/home/ubuntu/.kube/config</code> に保存されている既存の kubeconfig を使って、デフォルトのオーケストレーターを Kubernetes とする設定を行うものです。
-これを動作させるためには、<code class="language-plaintext highlighter-rouge">/home/ubuntu/.kube/config</code> に Kubernetes の適切な設定ファイルが存在している必要があります。
+<p>以下のコマンドは新たな設定を生成するものであり、<code class="language-plaintext highlighter-rouge">/home/ubuntu/.kube/config</code>に保存されている既存の kubeconfig を使って、デフォルトのオーケストレーターを Kubernetes とする設定を行うものです。
+これを動作させるためには、<code class="language-plaintext highlighter-rouge">/home/ubuntu/.kube/config</code>に Kubernetes の適切な設定ファイルが存在している必要があります。
 kubeconfig に複数のコンテキストが設定されている場合、現在のコンテキスト（<code class="language-plaintext highlighter-rouge">kubectl config current-context</code>）が用いられます。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context create k8s-test \
@@ -231,7 +230,7 @@ kubeconfig に複数のコンテキストが設定されている場合、現在
 Successfully created context "k8s-test"
 </code></pre></div></div>
 
-<p>システム上にあるコンテキストをすべて確認するには <code class="language-plaintext highlighter-rouge">docker context ls</code> を実行します。</p>
+<p>システム上にあるコンテキストをすべて確認するには<code class="language-plaintext highlighter-rouge">docker context ls</code>を実行します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context ls
 NAME           DESCRIPTION   DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
@@ -244,9 +243,9 @@ docker-test                  unix:///var/run/docker.sock                        
 
 <h2 id="use-a-different-context">別のコンテキストへの切り替え</h2>
 
-<p><code class="language-plaintext highlighter-rouge">docker context use</code> コマンドを利用すれば、コンテキストの切り替えをすばやく行うことができます。</p>
+<p><code class="language-plaintext highlighter-rouge">docker context use</code>コマンドを利用すれば、コンテキストの切り替えをすばやく行うことができます。</p>
 
-<p>以下のコマンドは <code class="language-plaintext highlighter-rouge">docker</code> CLI が「k8s-test」コンテキストを利用するように切り替えるものです。</p>
+<p>以下のコマンドは<code class="language-plaintext highlighter-rouge">docker</code>CLI が「k8s-test」コンテキストを利用するように切り替えるものです。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context use k8s-test
 
@@ -263,12 +262,12 @@ docker-test                                               unix:///var/run/docker
 k8s-test *                                                unix:///var/run/docker.sock   https://35.226.99.100 (default)   kubernetes
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker</code> コマンドはこれ以降、「k8s-test」コンテキストに定義されたエンドポイントを操作対象とします。</p>
+<p><code class="language-plaintext highlighter-rouge">docker</code>コマンドはこれ以降、「k8s-test」コンテキストに定義されたエンドポイントを操作対象とします。</p>
 
-<p>コンテキストの設定は、環境変数 <code class="language-plaintext highlighter-rouge">DOCKER_CONTEXT</code> を使って行うこともできます。
-これは <code class="language-plaintext highlighter-rouge">docker context use</code> によって設定されたコンテキストをオーバーライドします。</p>
+<p>コンテキストの設定は、環境変数<code class="language-plaintext highlighter-rouge">DOCKER_CONTEXT</code>を使って行うこともできます。
+これは<code class="language-plaintext highlighter-rouge">docker context use</code>によって設定されたコンテキストをオーバーライドします。</p>
 
-<p>以下の中から適切なコマンドを選んで、環境変数を利用した <code class="language-plaintext highlighter-rouge">docker-test</code> コンテキストの設定を行います。</p>
+<p>以下の中から適切なコマンドを選んで、環境変数を利用した<code class="language-plaintext highlighter-rouge">docker-test</code>コンテキストの設定を行います。</p>
 
 <p>Windows PowerShell の場合</p>
 
@@ -280,9 +279,9 @@ k8s-test *                                                unix:///var/run/docker
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CONTEXT=docker-test
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker context ls</code> を実行すると、「docker-test」コンテキストが現在のアクティブコンテキストであることがわかります。</p>
+<p><code class="language-plaintext highlighter-rouge">docker context ls</code>を実行すると、「docker-test」コンテキストが現在のアクティブコンテキストであることがわかります。</p>
 
-<p>またグローバルな <code class="language-plaintext highlighter-rouge">--context</code> フラグを使うと <code class="language-plaintext highlighter-rouge">DOCKER_CONTEXT</code> 環境変数によるコンテキスト指定ををオーバーライドします。
+<p>またグローバルな<code class="language-plaintext highlighter-rouge">--context</code>フラグを使うと<code class="language-plaintext highlighter-rouge">DOCKER_CONTEXT</code>環境変数によるコンテキスト指定ををオーバーライドします。
 たとえば以下は、コマンドに対して「production」というコンテキストを指定します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker --context production container ls
@@ -290,18 +289,18 @@ k8s-test *                                                unix:///var/run/docker
 
 <h2 id="exporting-and-importing-docker-contexts">Docker Context のインポート、エクスポート</h2>
 
-<p><code class="language-plaintext highlighter-rouge">docker context</code> コマンドでは、Docker クライアントがインストールされている別のマシンにおいて、コンテキストを簡単にインポート、エクスポートすることができます。</p>
+<p><code class="language-plaintext highlighter-rouge">docker context</code>コマンドでは、Docker クライアントがインストールされている別のマシンにおいて、コンテキストを簡単にインポート、エクスポートすることができます。</p>
 
-<p><code class="language-plaintext highlighter-rouge">docker context export</code> コマンドを使うと、既存のコンテキストをファイルにエクスポートします。
-そのファイルは、<code class="language-plaintext highlighter-rouge">docker</code> クライアントがインストールされている別のマシンにインポートすることができます。</p>
+<p><code class="language-plaintext highlighter-rouge">docker context export</code>コマンドを使うと、既存のコンテキストをファイルにエクスポートします。
+そのファイルは、<code class="language-plaintext highlighter-rouge">docker</code>クライアントがインストールされている別のマシンにインポートすることができます。</p>
 
 <p>デフォルトでコンテキストは <strong>ネイティブな Docker Context</strong> としてエクスポートされます。
-これは <code class="language-plaintext highlighter-rouge">docker context</code> コマンドを使って、インポートエクスポートができるものです。
-エクスポートしたコンテキストに Kubernetes エンドポイントが含まれている場合、その Kubernetes 部分のコンテキストも <code class="language-plaintext highlighter-rouge">export</code>、<code class="language-plaintext highlighter-rouge">import</code> 操作を通じて含まれることになります。</p>
+これは<code class="language-plaintext highlighter-rouge">docker context</code>コマンドを使って、インポートエクスポートができるものです。
+エクスポートしたコンテキストに Kubernetes エンドポイントが含まれている場合、その Kubernetes 部分のコンテキストも <code class="language-plaintext highlighter-rouge">export</code>、<code class="language-plaintext highlighter-rouge">import</code>操作を通じて含まれることになります。</p>
 
 <p>エクスポートにあたっては Kubernetes 部分のコンテキストだけをエクスポートすることもできます。
-これにより、ネイティブな kubeconfig ファイルが生成され、そのファイル内容は、<code class="language-plaintext highlighter-rouge">kubectl</code> がインストールされている他のホスト上において、<code class="language-plaintext highlighter-rouge">~/.kube/config</code> ファイルへ手動でマージすることができます。
-Kubernetes 部分のコンテキストだけをエクスポートし、これをインポートする場合は、<code class="language-plaintext highlighter-rouge">docker context import</code> コマンドは使えません。
+これにより、ネイティブな kubeconfig ファイルが生成され、そのファイル内容は、<code class="language-plaintext highlighter-rouge">kubectl</code>がインストールされている他のホスト上において<code class="language-plaintext highlighter-rouge">~/.kube/config</code>ファイルへ手動でマージすることができます。
+Kubernetes 部分のコンテキストだけをエクスポートし、これをインポートする場合は、<code class="language-plaintext highlighter-rouge">docker context import</code>コマンドは使えません。
 エクスポートされた Kubernetes 設定をインポートするには、既存の kubeconfig ファイルに対して、手動でマージする以外に方法はありません。</p>
 
 <p>ネイティブな Docker コンテキストのエクスポートとインポートを以降に示します。</p>
@@ -309,7 +308,7 @@ Kubernetes 部分のコンテキストだけをエクスポートし、これを
 <h3 id="exporting-and-importing-a-native-docker-context">ネイティブな Docker コンテキストのエクスポートとインポート</h3>
 
 <p>以下の例では「docker-test」という既存のコンテキストをエクスポートします。
-これはコンテキストを <code class="language-plaintext highlighter-rouge">docker-test.dockercontext</code> というファイルに出力します。</p>
+これはコンテキストを<code class="language-plaintext highlighter-rouge">docker-test.dockercontext</code>というファイルに出力します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context export docker-test
 Written file "docker-test.dockercontext"
@@ -321,7 +320,7 @@ Written file "docker-test.dockercontext"
 meta.json0000644000000000000000000000022300000000000011023 0ustar0000000000000000{"Name":"docker-test","Metadata":{"StackOrchestrator":"swarm"},"Endpoints":{"docker":{"Host":"unix:///var/run/docker.sock","SkipTLSVerify":false}}}tls0000700000000000000000000000000000000000000007716 5ustar0000000000000000
 </code></pre></div></div>
 
-<p>このファイルは、別のホスト上において <code class="language-plaintext highlighter-rouge">docker context import</code> を使ってインポートできます。
+<p>このファイルは、別のホスト上において<code class="language-plaintext highlighter-rouge">docker context import</code>を使ってインポートできます。
 対象とするホストには、Docker クライアントがインストールされている必要があります。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context import docker-test docker-test.dockercontext
@@ -329,20 +328,20 @@ docker-test
 Successfully imported context "docker-test"
 </code></pre></div></div>
 
-<p>コンテキストがインポートできたかどうかは <code class="language-plaintext highlighter-rouge">docker context ls</code> により確認します。</p>
+<p>コンテキストがインポートできたかどうかは<code class="language-plaintext highlighter-rouge">docker context ls</code>により確認します。</p>
 
-<p>インポートするコマンドの記述書式は <code class="language-plaintext highlighter-rouge">docker context import &lt;コンテキスト名&gt; &lt;コンテキストファイル&gt;</code> です。</p>
+<p>インポートするコマンドの記述書式は<code class="language-plaintext highlighter-rouge">docker context import &lt;コンテキスト名&gt; &lt;コンテキストファイル&gt;</code>です。</p>
 
 <p>次は、コンテキストの Kubernetes 部分のみをエクスポートする例です。</p>
 
 <h3 id="exporting-a-Kubernetes-context">Kubernetes コンテキストのエクスポート</h3>
 
 <p>Kubernetes コンテキストがエクスポートできるのは、エクスポートするコンテキスト内に Kubernetes エンドポイントが設定されている場合に限ります。
-Kubernetes コンテキストのインポートには <code class="language-plaintext highlighter-rouge">docker context import</code> を使うことはできません。</p>
+Kubernetes コンテキストのインポートには<code class="language-plaintext highlighter-rouge">docker context import</code>を使うことはできません。</p>
 
-<p>この手順では <code class="language-plaintext highlighter-rouge">--kubeconfig</code> フラグを使って Kubernetes 部分のコンテキスト <strong>のみ</strong> をエクスポートします。
-コンテキスト名は既存の <code class="language-plaintext highlighter-rouge">k8s-test</code> であり、これを「k8s-test.kubeconfig」というファイルに出力します。
-<code class="language-plaintext highlighter-rouge">cat</code> コマンドを実行すれば、適正な kubeconfig ファイルとして出力されていることがわかります。</p>
+<p>この手順では<code class="language-plaintext highlighter-rouge">--kubeconfig</code>フラグを使って Kubernetes 部分のコンテキスト <strong>のみ</strong> をエクスポートします。
+コンテキスト名は既存の<code class="language-plaintext highlighter-rouge">k8s-test</code>であり、これを「k8s-test.kubeconfig」というファイルに出力します。
+<code class="language-plaintext highlighter-rouge">cat</code>コマンドを実行すれば、適正な kubeconfig ファイルとして出力されていることがわかります。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context export k8s-test --kubeconfig
 Written file "k8s-test.kubeconfig"
@@ -379,13 +378,13 @@ users:
       name: gcp
 </code></pre></div></div>
 
-<p>上の内容を、別のマシン上の <code class="language-plaintext highlighter-rouge">~/.kube/config</code> ファイルにマージします。</p>
+<p>上の内容を、別のマシン上の<code class="language-plaintext highlighter-rouge">~/.kube/config</code>ファイルにマージします。</p>
 
 <h2 id="updating-a-context">コンテキストの更新</h2>
 
-<p>既存のコンテキストにおいて項目を更新するには <code class="language-plaintext highlighter-rouge">docker context update</code> を実行します。</p>
+<p>既存のコンテキストにおいて項目を更新するには<code class="language-plaintext highlighter-rouge">docker context update</code>を実行します。</p>
 
-<p>以下の例は、既存の <code class="language-plaintext highlighter-rouge">k8s-test</code> コンテキストにおいて「Description」という項目を更新するものです。</p>
+<p>以下の例は、既存の<code class="language-plaintext highlighter-rouge">k8s-test</code>コンテキストにおいて「Description」という項目を更新するものです。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker context update k8s-test --description "Test Kubernetes cluster"
 k8s-test

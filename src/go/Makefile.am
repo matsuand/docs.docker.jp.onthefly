@@ -13,10 +13,10 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	about                 \
-	apple-silicon         \
-	buildkit              \
-	compose-native-builds \
+	about                \
+	apple-silicon        \
+	buildkit             \
+	compose-native-build \
 	formatting
 
 ch_mds = $(bases:=.ch)
