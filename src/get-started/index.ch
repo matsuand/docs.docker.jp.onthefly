@@ -134,7 +134,7 @@ This page contains step-by-step instructions on how to get started with Docker.
 @x
 If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](/language).
 @y
-好みのプログラミング言語を使ってアプリケーションをコンテナー化する方法をお探しであれば、[言語ごとのガイドをはじめよう](/language) を参照してください。
+好みのプログラミング言語を使ってアプリケーションをコンテナー化する方法をお探しであれば、[各種言語別ガイド]({{ site.baseurl }}/language) を参照してください。
 @z
 
 @x
