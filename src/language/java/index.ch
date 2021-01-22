@@ -13,7 +13,7 @@ toc_max: 2
 ---
 description: Containerize Java apps using Docker
 keywords: Docker, getting started, java, language
-title: What will you learn in this module?
+title: このモジュールから学びましょう
 toc_min: 1
 toc_max: 2
 ---

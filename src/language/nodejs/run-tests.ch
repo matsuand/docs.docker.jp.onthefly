@@ -9,7 +9,7 @@ description: How to Build and Run your Tests using Node.js and Mocha frameworks
 ---
 @y
 ---
-title: "Run your Tests using Node.js and Mocha frameworks"
+title: "Node.js と Mocha フレームワークを用いたテスト実行"
 keywords: Node.js, build, Mocha, test
 description: How to Build and Run your Tests using Node.js and Mocha frameworks
 ---
@@ -612,7 +612,7 @@ In the next module, we’ll take a look at how to set up a CI/CD pipeline using 
 @x
 [Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
 @y
-[Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
+[CI/CD の設定](configure-ci-cd.md){: .button .outline-btn}
 @z
 
 @x

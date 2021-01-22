@@ -9,7 +9,7 @@ description: Learn how to Configure CI/CD for your application
 ---
 @y
 ---
-title: "Configure CI/CD for your application"
+title: "アプリケーション向けの CI/CD 設定"
 keywords: python, CI/CD, local, development
 description: Learn how to Configure CI/CD for your application
 ---

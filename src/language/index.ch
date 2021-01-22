@@ -13,7 +13,7 @@ toc_max: 2
 ---
 description: :Language-specific getting started guides overview
 keywords: guides, docker, language, node, java, python
-title: Overview
+title: 概要
 toc_min: 1
 toc_max: 2
 ---
@@ -22,7 +22,8 @@ toc_max: 2
 @x
 The language-specific getting started guides walk you through the process of setting up your development environment and start containerizing language-specific applications using Docker. The learning modules contain best practices and guidelines that explain how to create a new Dockerfile in your preferred language, what to include in the Docker image, how to develop and run your Docker image, set up a CI/CD pipeline, and finally provides information on how to push the application you've developed to the cloud.
 @y
-The language-specific getting started guides walk you through the process of setting up your development environment and start containerizing language-specific applications using Docker. The learning modules contain best practices and guidelines that explain how to create a new Dockerfile in your preferred language, what to include in the Docker image, how to develop and run your Docker image, set up a CI/CD pipeline, and finally provides information on how to push the application you've developed to the cloud.
+プログラミング言語別の初級ガイドでは、開発環境の構築手順を示した上で、各言語に基づき Docker を使ってアプリケーションのコンテナー化を行います。
+The learning modules contain best practices and guidelines that explain how to create a new Dockerfile in your preferred language, what to include in the Docker image, how to develop and run your Docker image, set up a CI/CD pipeline, and finally provides information on how to push the application you've developed to the cloud.
 @z
 
 @x
@@ -90,19 +91,19 @@ Learn how to set up your Docker environment and start containerizing your applic
     <div class="row" style="display: flex; align-items: center">
         <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
                 <div class="component-icon">
-                    <a href="/language/nodejs/"><img src="/language/images/nodejs.png" alt="Develop with Node"></a>
+                    <a href="{{ site.baseurl }}/language/nodejs/"><img src="{{ site.baseurl }}/language/images/nodejs.png" alt="Develop with Node"></a>
                 </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
-        <a href="/language/python/">
+        <a href="{{ site.baseurl }}/language/python/">
                 <div class="component-icon">
-                    <img src="/language/images/python.png" alt="Develop with Python">
+                    <img src="{{ site.baseurl }}/language/images/python.png" alt="Develop with Python">
                 </div>
             </a>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
                 <div class="component-icon">
-                    <a href="/language/java/"><img src="/language/images/java.png" alt="Develop with Java"></a>
+                    <a href="{{ site.baseurl }}/language/java/"><img src="{{ site.baseurl }}/language/images/java.png" alt="Develop with Java"></a>
                 </div>
         </div>
     </div>

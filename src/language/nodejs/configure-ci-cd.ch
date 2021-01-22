@@ -9,7 +9,7 @@ description: Learn how to develop your application locally.
 ---
 @y
 ---
-title: "Configure CI/CD for your application"
+title: "アプリケーションにおける CI/CD 設定"
 keywords: CI/CD, GitHub Actions, NodeJS, local, development
 description: Learn how to develop your application locally.
 ---
@@ -614,13 +614,13 @@ You can also consider deploying your application to the cloud. For detailed inst
 @x
 [Deploying Docker containers on Azure](/cloud/aci-integration/){: .button .outline-btn}
 @y
-[Deploying Docker containers on Azure](/cloud/aci-integration/){: .button .outline-btn}
+[Docker コンテナーの Azure へのデプロイ]({{ site.baseurl }}/cloud/aci-integration/){: .button .outline-btn}
 @z
 
 @x
 [Deploying Docker containers on ECS](/cloud/ecs-integration.md){: .button .outline-btn}
 @y
-[Deploying Docker containers on ECS](/cloud/ecs-integration.md){: .button .outline-btn}
+[Docker コンテナーの ECS へのデプロイ]({{ site.baseurl }}/cloud/ecs-integration.md){: .button .outline-btn}
 @z
 
 @x

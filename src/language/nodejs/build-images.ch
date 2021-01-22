@@ -11,7 +11,7 @@ redirect_from:
 ---
 @y
 ---
-title: "Build your Node image"
+title: "Node イメージのビルド"
 keywords: containers, images, node.js, node, dockerfiles, node, coding, build, push, run
 description: Learn how to build your first Docker image by writing a Dockerfile
 redirect_from:
@@ -664,7 +664,7 @@ In this module, we took a look at setting up our example Node application that w
 @x
 [Run your image as a container](run-containers.md){: .button .outline-btn}
 @y
-[Run your image as a container](run-containers.md){: .button .outline-btn}
+[コンテナーとしてイメージ実行](run-containers.md){: .button .outline-btn}
 @z
 
 @x

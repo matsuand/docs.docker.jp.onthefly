@@ -11,7 +11,7 @@ redirect_from:
 ---
 @y
 ---
-title: "Run your image as a container"
+title: "コンテナーとしてイメージ実行"
 keywords: get started, Node JS, run, container,
 description: Learn how to run the image as a container.
 redirect_from:
@@ -522,7 +522,7 @@ In this module, we took a look at running containers, publishing ports, and runn
 @x
 [How to develop your application](develop.md){: .button .outline-btn}
 @y
-[How to develop your application](develop.md){: .button .outline-btn}
+[アプリケーションの開発方法](develop.md){: .button .outline-btn}
 @z
 
 @x

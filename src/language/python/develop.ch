@@ -9,7 +9,7 @@ description: Learn how to develop your application locally.
 ---
 @y
 ---
-title: "Use containers for development"
+title: "コンテナーを用いた開発"
 keywords: python, local, development, run,
 description: Learn how to develop your application locally.
 ---

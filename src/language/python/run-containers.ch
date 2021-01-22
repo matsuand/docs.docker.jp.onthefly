@@ -9,7 +9,7 @@ description: Learn how to run the image as a container.
 ---
 @y
 ---
-title: "Run your image as a container"
+title: "イメージをコンテナーとして実行"
 keywords: Python, run, image, container,
 description: Learn how to run the image as a container.
 ---

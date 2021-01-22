@@ -9,7 +9,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 ---
 @y
 ---
-title: "Build your Python image"
+title: "Python イメージのビルド"
 keywords: python, build, images, dockerfile
 description: Learn how to build your first Docker image by writing a Dockerfile
 ---
