@@ -62,7 +62,7 @@ Docker が提供するログドライバーの利用だけでなく、[ログド
 > 
 > For other situations, the "local" logging driver is recommended as it performs
 > log-rotation by default, and uses a more efficient file format. Refer to the
-> [Configure the default logging driver](configure-the-default-logging-driver)
+> [Configure the default logging driver](#configure-the-default-logging-driver)
 > section below to learn how to configure the "local" logging driver as a default,
 > and the [local file logging driver](local.md) page for more details about the
 > "local" logging driver.
@@ -80,7 +80,7 @@ Docker が提供するログドライバーの利用だけでなく、[ログド
 > 
 > For other situations, the "local" logging driver is recommended as it performs
 > log-rotation by default, and uses a more efficient file format. Refer to the
-> [Configure the default logging driver](configure-the-default-logging-driver)
+> [Configure the default logging driver](#configure-the-default-logging-driver)
 > section below to learn how to configure the "local" logging driver as a default,
 > and the [local file logging driver](local.md) page for more details about the
 > "local" logging driver.

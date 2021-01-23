@@ -22,24 +22,6 @@ Docker ではこの試験的機能に対するサポートは行っていませ�
 @z
 
 @x
-> To enable experimental features in the Docker CLI, edit the `config.json`
-> file and set `experimental` to enabled.
-@y
-> Docker CLI において試験的機能を有効にするには、`config.json` ファイルを編集して `experimental` を有効に設定してください。
-@z
-
-@x
-> To enable experimental features from the Docker Desktop menu, click
-> **Settings** (**Preferences** on macOS) > **Command Line** and then turn on
-> the **Enable experimental features** toggle. Click **Apply & Restart**.
-{: .important }
-@y
-> Docker Desktop メニューから試験的機能を有効にするには、**Settings** (macOS の場合は **Preferences**) > **Command Line** をクリックし、**Enable experimental features** チェックを有効にします。
-そして **Apply & Restart** をクリックしてください。
-{: .important }
-@z
-
-@x
 For a list of current experimental features in the Docker CLI, see [Docker CLI Experimental features](https://github.com/docker/cli/blob/master/experimental/README.md).
 @y
 Docker CLI における現時点での試験的機能については [Docker CLI 試験的機能](https://github.com/docker/cli/blob/master/experimental/README.md) の一覧を参照してください。

@@ -18,7 +18,6 @@ bases = \
 	apple-m1           \
 	docker-toolbox     \
 	edge-release-notes \
-	faqs               \
 	index              \
 	install            \
 	kubernetes         \
