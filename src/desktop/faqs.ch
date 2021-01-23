@@ -62,21 +62,21 @@ Docker Desktop のシステム要件については、[Docker Desktop for Mac �
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 @y
 {: #where-can-i-find-information-about-diagnosing-and-troubleshooting-docker-desktop-issues }
-### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
+### Docker Desktop の問題を調べて解決する情報はどこにありますか
 @z
 
 @x
 You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](../docker-for-mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](../docker-for-windows/troubleshoot.md).
 @y
-You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](../docker-for-mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](../docker-for-windows/troubleshoot.md).
+問題を調べて解決する一般的な方法はトラブルシューティングのトピックとして示されています。
+[Mac のログとトラブルシューティング](../docker-for-mac/troubleshoot.md) や [Windows のログとトラブルシューティング](../docker-for-windows/troubleshoot.md) を参照してください。
 @z
 
 @x
 If you do not find a solution in Troubleshooting, browse issues on
 [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} or [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"} GitHub repository, or create a new one.
 @y
-If you do not find a solution in Troubleshooting, browse issues on
-[docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} or [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"} GitHub repository, or create a new one.
+トラブルシューティングでは解決策が見つからなかった場合は、GitHub リポジトリ [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} または [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"} を確認し、必要に応じて issue をあげてください。
 @z
 
 @x
@@ -95,7 +95,7 @@ To connect to the remote Engine API, you might need to provide the location of t
 @x
 Mac and Windows WSL 2 users can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
 @y
-Mac and Windows WSL 2 users can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
+Mac や Windows WSL 2 を利用する場合、Docker Engine への接続は Unix ソケット`unix:///var/run/docker.sock`を通じて行います。
 @z
 
 @x
@@ -103,15 +103,13 @@ If you are working with applications like [Apache Maven](https://maven.apache.or
 that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
 variables, specify these to connect to Docker instances through Unix sockets.
 @y
-If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" rel="noopener" class="_"}
-that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
-variables, specify these to connect to Docker instances through Unix sockets.
+[Apache Maven](https://maven.apache.org/){: target="_blank" rel="noopener" class="_"} のようなアプリケーションを使った作業を行っている場合、環境変数`DOCKER_HOST`や`DOCKER_CERT_PATH`の設定が必要になるので、これらを設定することで Unix ソケットを通じた Docker インスタンスへの接続を指定します。
 @z
 
 @x
 For example:
 @y
-For example:
+たとえば以下のとおりです。
 @z
 
 @x
@@ -128,8 +126,7 @@ export DOCKER_HOST=unix:///var/run/docker.sock
 Docker Desktop Windows users can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:
 `tcp://localhost:2375`.
 @y
-Docker Desktop Windows users can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:
-`tcp://localhost:2375`.
+Docker Desktop Windows ユーザーであれば Docker Engine に対して **名前つきパイプ**`npipe:////./pipe/docker_engine`、あるいはその URL に応じた **TCP ソケット**`tcp://localhost:2375` を通じて接続することができます。
 @z
 
 @x
@@ -158,8 +155,7 @@ Mac と Windows では、ともに動的 IP アドレスを利用します（た
 For more information and examples, see how to connect from a container to a service on the host
 [on Mac](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 @y
-For more information and examples, see how to connect from a container to a service on the host
-[on Mac](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+詳しい説明あるいは利用例については、コンテナーからサービスに接続する方法を示した [Mac での説明](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) あるいは [Windows での説明](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) を参照してください。
 @z
 
 @x
@@ -195,8 +191,8 @@ For more information and examples, see
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
 [Add TLS certificates on Mac](../docker-for-mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](../docker-for-windows/index.md#adding-tls-certificates).
 @y
-Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates on Mac](../docker-for-mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](../docker-for-windows/index.md#adding-tls-certificates).
+Docker Desktop は信頼された（ルートあるいは中間の）認証局をすべてサポートします。
+サーバー側およびクライアント側に証明書を追加する詳しい説明は [Mac での TLS 証明書の追加](../docker-for-mac/index.md#add-tls-certificates) や [Windows での TLS 証明書の追加](../docker-for-windows/index.md#adding-tls-certificates) を参照してください。
 @z
 
 @x
@@ -348,19 +344,21 @@ Docker Desktop 3.0.0 から安定版（Stable）と最新版（Edge）は、ど�
 ### Does Docker Desktop offer support?
 @y
 {: #does-docker-desktop-offer-support }
-### Does Docker Desktop offer support?
+### Docker Desktop ではサポートを行っていますか
 @z
 
 @x
 Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](../docker-for-mac/troubleshoot.md#support).
 @y
-Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](../docker-for-mac/troubleshoot.md#support).
+はい。
+Docker Desktop ではプロユーザーおよびチームユーザーに対してのサポートを行っています。
+詳しくは [Docker Desktop サポート](../docker-for-mac/troubleshoot.md#support) を参照してください。
 @z
 
 @x
 For information about the pricing plans and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 @y
-For information about the pricing plans and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+有償プランや既存アカウントの更新に関する情報については [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
@@ -399,87 +397,94 @@ Docker が問題を調査できるようにするための診断情報のアッ�
 @x
 By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
 @y
-By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
+原則として Docker 社はアップロードされた診断情報を 30 日後には削除します。
+ユーザーから診断情報の削除を要請することもでき、その場合は診断情報 ID か、あるいは GitHub ID（その診断情報が GitHub issue に言及している場合）を送付します。
+Docker 社は診断情報内のデータを、特定の問題を調査するためだけに利用します。
+ただし issue の頻度などのように高度な（個人情報ではない）メトリックスを収集する場合があります。
 @z
 
 @x
 ## Mac FAQs
 @y
 {: #mac-faqs }
-## Mac FAQs
+## Mac FAQ
 @z
 
 @x
 ### What is Docker.app?
 @y
 {: #what-is-dockerapp }
-### What is Docker.app?
+### Docker.app とは何ですか
 @z
 
 @x
 `Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers.
 @y
-`Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers.
+`Docker.app`は Docker Desktop on Mac のことです。
+ここから Docker クライアントと Docker Engine が提供されます。
+`Docker.app`は macOS の Hypervisor.framework を利用してコンテナー実行を行います。
 @z
 
 @x
 ### Is Docker Desktop compatible with Apple silicon processors?
 @y
 {: #is-docker-desktop-compatible-with-apple-silicon-processors }
-### Is Docker Desktop compatible with Apple silicon processors?
+### Docker Desktop は Apple のシリコンプロセッサーと互換性がありますか
 @z
 
 @x
 At the moment, Docker Desktop is compatible with Intel processors only. For more information, see [Apple M1 Tech preview](../docker-for-mac/apple-m1.md).
 @y
-At the moment, Docker Desktop is compatible with Intel processors only. For more information, see [Apple M1 Tech preview](../docker-for-mac/apple-m1.md).
+現時点において Docker Desktop は Intel プロセッサーのみ互換性があります。
+詳しくは [Apple M1 技術プレビュー](../docker-for-mac/apple-m1.md) を参照してください。
 @z
 
 @x
 You can also follow the status of Apple Silicon support in our [Roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
 @y
-You can also follow the status of Apple Silicon support in our [Roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+あるいは [ロードマップ](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"} から Apple シリコンサポートの状況を確認することができます。
 @z
 
 @x
 ### What is HyperKit?
 @y
 {: #what-is-hyperkit }
-### What is HyperKit?
+### HyperKit とは何ですか
 @z
 
 @x
 HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other dependencies.
 @y
-HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other dependencies.
+HyperKit は macOS において Hypervisor.framework の最上位に構築されているハイパーバイザーのことです。
+これは完全にユーザー空間内において動作し、依存するパッケージは何もありません。
 @z
 
 @x
 We use HyperKit to eliminate the need for other VM products, such as Oracle
 VirtualBox or VMWare Fusion.
 @y
-We use HyperKit to eliminate the need for other VM products, such as Oracle
-VirtualBox or VMWare Fusion.
+HyperKit を利用することによって、Oracle VirtualBox や VMWare Fusion などのような他の VM 製品が不要になります。
 @z
 
 @x
 ### What is the benefit of HyperKit?
 @y
 {: #what-is-the-benefit-of-hyperkit }
-### What is the benefit of HyperKit?
+### HyperKit の利点は何ですか
 @z
 
 @x
 HyperKit is thinner than VirtualBox and VMWare fusion, and the version we include is customized for Docker workloads on Mac.
 @y
-HyperKit is thinner than VirtualBox and VMWare fusion, and the version we include is customized for Docker workloads on Mac.
+HyperKit は VirtualBox や VMWare fusion に比べて軽量です。
+本製品に含まれているバージョンは Mac 上の Docker 処理に合わせてカスタマイズされています。
 @z
 
 @x
 ### Why is com.docker.vmnetd still running after I quit the app?
 @y
 {: #why-is-comdockervmnetd-still-running-after-i-quit-the-app }
-### Why is com.docker.vmnetd still running after I quit the app?
+### アプリ終了しても com.docker.vmnetd が動作しているのはなぜですか
 @z
 
 @x
@@ -487,75 +492,77 @@ The privileged helper process `com.docker.vmnetd` is started by `launchd` and
 runs in the background. The process does not consume any resources unless
 Docker.app connects to it, so it's safe to ignore.
 @y
-The privileged helper process `com.docker.vmnetd` is started by `launchd` and
-runs in the background. The process does not consume any resources unless
-Docker.app connects to it, so it's safe to ignore.
+特権によるヘルパープロセス`com.docker.vmnetd`は`launchd`により起動され、バックグラウンドで動作します。
+Docker.app からのアクセスがない場合には、このプロセスはリソースを全く消費しないため、何も気にせず動作させておくことができます。
 @z
 
 @x
 ## Windows FAQs
 @y
 {: #windows-faqs }
-## Windows FAQs
+## Windows FAQ
 @z
 
 @x
 ### Can I use VirtualBox alongside Docker Desktop?
 @y
 {: #can-i-use-virtualbox-alongside-docker-desktop }
-### Can I use VirtualBox alongside Docker Desktop?
+### Docker Desktop とともに VirtualBox を利用できますか
 @z
 
 @x
 Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 @y
-Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
+はい。
+マシン上において [Windows ハイパーバイザープラットフォーム](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} 機能を有効にしていれば、Docker Desktop とともに VirtualBox を利用することができます。
 @z
 
 @x
 ### Why is Windows 10 required?
 @y
 {: #why-is-windows-10-required }
-### Why is Windows 10 required?
+### なぜ Windows 10 が必要なのですか
 @z
 
 @x
 Docker Desktop uses the Windows Hyper-V features. While older Windows versions have Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop to work.
 @y
-Docker Desktop uses the Windows Hyper-V features. While older Windows versions have Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop to work.
+Docker Desktop は Windows の Hyper-V 機能を利用します。
+Windows のバージョンが古くても Hyper-V 機能が利用できますが、その場合の Hyper-V の実装には機能が不十分であるため、Docker Desktop を動作させることができません。
 @z
 
 @x
 ### Can I install Docker Desktop on Windows 10 Home?
 @y
 {: #can-i-install-docker-desktop-on-windows-10-home }
-### Can I install Docker Desktop on Windows 10 Home?
+### Docker Desktop は Windows 10 Home にインストールできますか
 @z
 
 @x
 If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](../docker-for-windows/wsl.md).
 @y
-If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](../docker-for-windows/wsl.md).
+Windows 10 Home を利用している場合（バージョン 1903 以降）、[WSL 2 バックエンド](../docker-for-windows/wsl.md) を利用して [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} をインストールすることができます。
 @z
 
 @x
 ### Can I run Docker Desktop on Windows Server?
 @y
 {: #can-i-run-docker-desktop-on-windows-server }
-### Can I run Docker Desktop on Windows Server?
+### Windows Server 上で Docker Desktop を実行できますか
 @z
 
 @x
 No, running Docker Desktop on Windows Server is not supported.
 @y
-No, running Docker Desktop on Windows Server is not supported.
+いいえ。
+Windows Server での Docker Desktop の実行はサポートされていません。
 @z
 
 @x
 ### How do I run Windows containers on Windows Server?
 @y
 {: #how-do-i-run-windows-containers-on-windows-server }
-### How do I run Windows containers on Windows Server?
+### Windows Server 上で Windows コンテナーはどのようにして実行したらよいですか
 @z
 
 @x
@@ -563,56 +570,57 @@ You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" rel="noopener" class="_"}.
 @y
-You can install a native Windows binary which allows you to develop and run
-Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" rel="noopener" class="_"}.
+ネイティブな Windows バイナリをインストールして利用すれば Docker Desktop がなくても Windows コンテナーの開発と実行ができます。
+詳しくは [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" rel="noopener" class="_"}（Windows コンテナーをはじめよう）に示されている、Windows Server 上の Windows コンテナー起動のチュートリアルを参照してください。
 @z
 
 @x
 ### Why do I see the `Docker Desktop Access Denied` error message when I try to start Docker Desktop?
 @y
 {: #why-do-i-see-the-docker-desktop-access-denied-error-message-when-i-try-to-start-docker-desktop }
-### Why do I see the `Docker Desktop Access Denied` error message when I try to start Docker Desktop?
+### Docker Desktop 起動時に`Docker Desktop Access Denied`エラーとなるのはなぜですか
 @z
 
 @x
 Docker Desktop displays the **Docker Desktop - Access Denied** error if a Windows user is not part of the **docker-users** group.
 @y
-Docker Desktop displays the **Docker Desktop - Access Denied** error if a Windows user is not part of the **docker-users** group.
+Docker Desktop では Windows ユーザーが **docker-users** グループに属していない場合に **Docker Desktop - Access Denied** エラーを表示します。
 @z
 
 @x
 If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users* and Groups** > **Groups** > **docker-users**.
 @y
-If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users* and Groups** > **Groups** > **docker-users**.
+管理ユーザーがふだんのユーザーアカウントではない場合は **docker-users** グループを追加します。
+管理ユーザーになって **Computer Management**（コンピューターの管理）画面から、**Local Users and Groups** > **Groups** > **docker-users** を実行します。
 @z
 
 @x
 Right-click to add the user to the group. Log out and log back in for the changes to take effect.
 @y
-Right-click to add the user to the group. Log out and log back in for the changes to take effect.
+右クリックにより目的のユーザーをグループに追加します。
+変更を適用するために、いったんログアウトしてから再度ログインします。
 @z
 
 @x
 ### Why does Docker Desktop fail to start when anti-virus software is installed?
 @y
 {: #why-does-docker-desktop-fail-to-start-when-anti-virus-software-is-installed }
-### Why does Docker Desktop fail to start when anti-virus software is installed?
+### アンチウィルスソフトをインストールしていると Docker Desktop の起動に失敗するのはなぜですか
 @z
 
 @x
 Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
 Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../docker-for-windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
 @y
-Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
-Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../docker-for-windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
+アンチウィルスソフトの中には、Docker Desktop に必要となる Hyper-V と Windows 10 ビルドと互換性がないものがあります。
+詳しくは [トラブルシューティング](troubleshoot.md) 内にある [アンチウィルスソフトのインストール時における Docker Desktop 起動の失敗](../docker-for-windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed) を参照してください
 @z
 
 @x
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 @y
 {: #can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements }
-### Can I change permissions on shared volumes for container-specific deployment requirements?
+### コンテナーに固有のデプロイ方法が必要なので、共有ボリュームのパーミッションを変更できますか
 @z
 
 @x
@@ -623,37 +631,35 @@ deployed containers, but rather sets permissions to a default value of
 (`read`, `write`, `execute` permissions for `user` and for
 `group`) which is not configurable.
 @y
-Docker Desktop does not enable you to control (`chmod`)
-the Unix-style permissions on [shared volumes](../docker-for-windows/index.md#file-sharing) for
-deployed containers, but rather sets permissions to a default value of
-[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
-(`read`, `write`, `execute` permissions for `user` and for
-`group`) which is not configurable.
+Docker Desktop では、デプロイコンテナーの [共有ボリューム](../docker-for-windows/index.md#file-sharing) に対して、Unix 流のパーミッション制御（`chmod`）を行うことはできません。
+パーミッションはそもそもデフォルトの [0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}（ユーザーおよびグループに対しての`read`、`write`、`execute`権限）に設定され、変更することはできません。
 @z
 
 @x
 For workarounds and to learn more, see
 [Permissions errors on data directories for shared volumes](../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 @y
-For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+回避策や詳細に関しては [共有ボリューム上のデータディレクトリに対するパーミッションエラー](../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) を参照してください。
 @z
 
 @x
 ### How do symlinks work on Windows?
 @y
 {: #how-do-symlinks-work-on-windows }
-### How do symlinks work on Windows?
+### Windows においてシンボリックリンクはどのように動作しますか
 @z
 
 @x
 Docker Desktop supports two types of symlinks: Windows native symlinks and symlinks created inside a container.
 @y
-Docker Desktop supports two types of symlinks: Windows native symlinks and symlinks created inside a container.
+Docker Desktop では以下の 2 種類のシンボリックリンクをサポートします。
+Windows のネイティブシンボリックリンクと、コンテナー内部で生成されるシンボリックリンクです。
 @z
 
 @x
 The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks): target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
 @y
-The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){: target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
+Windows のネイティブシンボリックリンクは、コンテナー内からもシンボリックリンクとして見えます。
+一方コンテナー内部に生成されるシンボリックリンクは [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){: target="_blank" rel="noopener" class="_"} と表現されるもので、特殊なメタデータを持った通常の Windows ファイルです。
+したがってコンテナー内部からはシンボリックリンクとして見えますが、ホスト上はシンボリックリンクではありません。
 @z
