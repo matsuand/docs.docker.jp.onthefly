@@ -28,31 +28,35 @@ redirect_from:
 @x
 ## Prerequisites
 @y
-## Prerequisites
+{: #prerequisites }
+## 前提条件
 @z
 
 @x
 Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
 @y
-Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
+「はじめよう」の [1 部]({{ site.baseurl }}/get-started/) に示しているガイドや設定をひととおり読んで、Docker の考え方について理解してください。
 @z
 
 @x
 ## Overview
 @y
-## Overview
+{: #overview }
+## 概要
 @z
 
 @x
 Now that we have a good overview of containers and the Docker platform, let’s take a look at building our first image. An image includes everything you need to run an application - the code or binary, runtime, dependencies, and any other file system objects required.
 @y
-Now that we have a good overview of containers and the Docker platform, let’s take a look at building our first image. An image includes everything you need to run an application - the code or binary, runtime, dependencies, and any other file system objects required.
+ここまでに コンテナーや Docker プラットフォームについての概要を理解してきたので、ここからは初めてのイメージ作りを見ていくことにしましょう。
+イメージというものは、アプリケーションを動作させるために必要なものをすべて含みます。
+コード、実行モジュール、ランタイム、依存パッケージ、その他にシステムオブジェクトが必要とするあらゆるファイルです。
 @z
 
 @x
 To complete this tutorial, you need the following:
 @y
-To complete this tutorial, you need the following:
+本チュートリアルを進めていくためには、以下が必要になります。
 @z
 
 @x
@@ -60,21 +64,26 @@ To complete this tutorial, you need the following:
 - Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 @y
-- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
-- Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
-- An IDE or a text editor to edit files. We recommend using Visual Studio Code.
+- Node.js バージョン 12.18 またはそれ以降。
+  [Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"} をダウンロードしてください。
+- ローカルで動作している Docker。
+  以下の手順に従って [Docker のダウンロードとインストール]({{ site.baseurl }}/desktop/) を行ってください。
+- ファイル編集を行うための IDE またはテキストエディター。
+  ここでは Visual Studio Code をお勧めします。
 @z
 
 @x
 ## Sample application
 @y
-## Sample application
+{: #sample-application }
+## サンプルアプリケーション
 @z
 
 @x
 Let’s create a simple Node.js application that we can use as our example. Create a directory on your local machine named `node-docker` and follow the steps below to create a simple REST API.
 @y
-Let’s create a simple Node.js application that we can use as our example. Create a directory on your local machine named `node-docker` and follow the steps below to create a simple REST API.
+例として用いる簡単な Node.js アプリケーションを作っていきます。
+ローカルマシン内に`node-docker`という名前のディレクトリを生成し、以下の手順により簡単な REST API を生成します。
 @z
 
 @x
@@ -86,7 +95,7 @@ $ touch server.js
 ```
 @y
 ```shell
-$ cd [path to your node-docker directory]
+$ cd [各自のnode-dockerディレクトリ]
 $ npm init -y
 $ npm install ronin-server ronin-mocks
 $ touch server.js
@@ -96,36 +105,34 @@ $ touch server.js
 @x
 Now, let’s add some code to handle our REST requests. We’ll use a mock server so we can focus on Dockerizing the application.
 @y
-Now, let’s add some code to handle our REST requests. We’ll use a mock server so we can focus on Dockerizing the application.
+そこで REST 要求を行うコードを追加してみます。
+簡単なモックサーバーを用いて、アプリケーションの Docker 化を行っていきます。
 @z
 
 @x
 Open this working directory in your IDE and add the following code into the `server.js` file.
 @y
-Open this working directory in your IDE and add the following code into the `server.js` file.
+IDE 環境においてワーキングディレクトリを開きます。
+そして以下のコードを`server.js`ファイルとして書き込みます。
 @z
 
 @x
 ```node
 const ronin     = require( 'ronin-server' )
 const mocks     = require( 'ronin-mocks' )
-@y
-```node
-const ronin     = require( 'ronin-server' )
-const mocks     = require( 'ronin-mocks' )
-@z
 
-@x
 const server = ronin.server()
-@y
-const server = ronin.server()
-@z
 
-@x
 server.use( '/', mocks.server( server.Router(), false, true ) )
 server.start()
 ```
 @y
+```node
+const ronin     = require( 'ronin-server' )
+const mocks     = require( 'ronin-mocks' )
+
+const server = ronin.server()
+
 server.use( '/', mocks.server( server.Router(), false, true ) )
 server.start()
 ```
@@ -134,19 +141,23 @@ server.start()
 @x
 The mocking server is called `Ronin.js` and will listen on port 8000 by default. You can make POST requests to the root (/) endpoint and any JSON structure you send to the server will be saved in memory. You can also send GET requests to the same endpoint and receive an array of JSON objects that you have previously POSTed.
 @y
-The mocking server is called `Ronin.js` and will listen on port 8000 by default. You can make POST requests to the root (/) endpoint and any JSON structure you send to the server will be saved in memory. You can also send GET requests to the same endpoint and receive an array of JSON objects that you have previously POSTed.
+モックサーバーは`Ronin.js`と呼ぶことにして、デフォルトでポート8000 番を待ち受けるものとします。
+ルート（/）エンドポイントに対して POST 要求が行えるものとし、サーバーに送信した JSON データは、すべてメモリに保存されるようにします。
+同じくルートエンドポイントに GET 要求が送信可能であり、その前に POST 要求した結果を JSON オブジェクトの配列として受信するものとします。
 @z
 
 @x
 ## Test application
 @y
-## Test application
+{: #test-application }
+## テストアプリケーション
 @z
 
 @x
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to your working directory you created.
 @y
-Let’s start our application and make sure it’s running properly. Open your terminal and navigate to your working directory you created.
+ここからアプリケーションを起動させて正しく動作することを確認します。
+ターミナルを開いて、上で生成したワーキングディレクトリに移動します。
 @z
 
 @x
@@ -162,7 +173,9 @@ $ node server.js
 @x
 To test that the application is working properly, we’ll first POST some JSON to the API and then make a GET request to see that the data has been saved. Open a new terminal and run the following curl commands:
 @y
-To test that the application is working properly, we’ll first POST some JSON to the API and then make a GET request to see that the data has been saved. Open a new terminal and run the following curl commands:
+アプリケーションが適切に動作していることを確認するため、初めに API に対して JSON データを POST します。
+そして GET リクエストを送信して、データがどのように保存されるかを見てみます。
+新たなターミナルを開いて、以下の curl コマンドを実行します。
 @z
 
 @x
@@ -194,7 +207,8 @@ $ curl http://localhost:8000/test
 @x
 Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
 @y
-Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
+サーバーを起動しているターミナルに戻ります。
+サーバーログとして以下のようなリクエストが表示されているはずです。
 @z
 
 @x
@@ -212,19 +226,22 @@ Switch back to the terminal where our server is running. You should now see the 
 @x
 ## Create a Dockerfile for Node.js
 @y
-## Create a Dockerfile for Node.js
+{: #create-a-dockerfile-for-nodejs }
+## Node.js を用いた Dockerfile の生成
 @z
 
 @x
 A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
 @y
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
+Dockerfile はテキストファイルであり、コマンドラインから実行するイメージ生成コマンドを記述したようなものです。
+Docker に対して`docker build`コマンドを実行してイメージビルドを指示すると、Docker は記述された命令を読み込んで 1 つずつそれを実行し、最終的に Docker イメージを作り出します。
 @z
 
 @x
 Let’s walk through the process of creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
 @y
-Let’s walk through the process of creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
+ではアプリケーション向けに Dockerfile を生成していく手順を見ていきます。
+ワーキングディレクトリのルートに`Dockerfile`という名前のファイルを生成して、テキストエディターでこれを開きます。
 @z
 
 @x
@@ -232,15 +249,17 @@ Let’s walk through the process of creating a Dockerfile for our application. I
 >
 > The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
 @y
-> **Note**
+> **メモ**
 >
-> The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
+> Dockerfile という名前はさして重要ではありません。
+> ただし各種コマンドが扱うデフォルト名が`Dockerfile`となっています。
+> したがってここではこのファイル名を用いていくことにします。
 @z
 
 @x
 The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
 @y
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+まず初めに行うべきなのは、アプリケーションに利用したいベースイメージが何であるのかを Docker に伝えるための 1 行を Dockerfile に記述することです。
 @z
 
 @x
@@ -256,7 +275,11 @@ FROM node:12.18.1
 @x
 Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Node.js image that already has all the tools and packages that we need to run a Node.js application. You can think of this in the same way you would think about class inheritance in object oriented programming. For example, if we were able to create Docker images in JavaScript, we might write something like the following.
 @y
-Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Node.js image that already has all the tools and packages that we need to run a Node.js application. You can think of this in the same way you would think about class inheritance in object oriented programming. For example, if we were able to create Docker images in JavaScript, we might write something like the following.
+Docker イメージというものは、別のイメージを継承することができます。
+したがって独自のベースイメージを作るのではなく、公式の Node.js イメージを利用することにします。
+そのイメージには、Node.js アプリケーションの実行に必要となるツールやパッケージがすでに含まれています。
+ここで行った継承は、オブジェクト指向プログラミング言語におけるクラス継承と同じようなものとして考えることができます。
+たとえば Docker イメージを JavaScript 言語によってプログラミングできるとしたら、以下のように記述するイメージです。
 @z
 
 @x
@@ -268,13 +291,14 @@ Docker images can be inherited from other images. Therefore, instead of creating
 @x
 This would create a class called `MyImage` that inherited functionality from the base class `NodeBaseImage`.
 @y
-This would create a class called `MyImage` that inherited functionality from the base class `NodeBaseImage`.
+上は`MyImage`という名のクラスを生成し、それは`NodeBaseImage`というベースクラスから機能性を継承するものです。
 @z
 
 @x
 In the same way, when we use the `FROM` command, we tell Docker to include in our image all the functionality from the `node:12.18.1` image.
 @y
-In the same way, when we use the `FROM` command, we tell Docker to include in our image all the functionality from the `node:12.18.1` image.
+同じようなこととして Docker では`FROM`コマンドを用います。
+ここでは`node:12.18.1`というイメージの機能性をすべて含んだイメージとすることを Docker に指示します。
 @z
 
 @x
@@ -282,15 +306,16 @@ In the same way, when we use the `FROM` command, we tell Docker to include in ou
 >
 > If you want to learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
 @y
-> **Note**
+> **メモ**
 >
-> If you want to learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> 独自のベースイメージ作りについて学びたい場合は、[ベースイメージの生成]({{ site.basrurl }}/develop/develop-images/baseimages/) を参照してください。
 @z
 
 @x
 The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set `NODE_ENV` to `production`.
 @y
-The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set `NODE_ENV` to `production`.
+環境変数`NODE_ENV`はアプリケーションが動作する環境を定義します（通常は development（開発環境） か production（本番環境）です。）。
+性能を改善させるために取るべき単純な方法は、この`NODE_ENV`変数を`production`に設定することです。
 @z
 
 @x
@@ -306,7 +331,9 @@ ENV NODE_ENV=production
 @x
 To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. This way we do not have to type out full file paths but can use relative paths based on the working directory.
 @y
-To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. This way we do not have to type out full file paths but can use relative paths based on the working directory.
+これ以降のコマンド実行をやりやすくするように、ここでワーキングディレクトリを生成します。
+Docker に対してこれを指示しておけば、この後に続くコマンドにおいてデフォルトディレクトリとして用いられます。
+これによりファイルのフルパスを記述する必要がなくなり、ワーキングディレクトリからの相対パスを用いることができます。
 @z
 
 @x
@@ -322,13 +349,20 @@ WORKDIR /app
 @x
 Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This will ensure that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
 @y
-Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This will ensure that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
+通常は Node.js で書かれたプロジェクトのダウンロード後、一番に行っておくことが npm パッケージのインストールです。
+これを行っておくとアプリケーションの依存パッケージがすべて`node_modules`ディレクトリ内にインストールされます。
+Node ランタイムはそこから必要なパッケージを探し出せるようになります。
 @z
 
 @x
 Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The  `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
 @y
-Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The  `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
+`npm install`を実行する前には、`package.json`と`package-lock.json`の両ファイルをイメージ内にコピーしておくことが必要です。
+`COPY`コマンドを使ってこれを行います。
+`COPY`コマンドには引数が 2 つあります。
+1 つめの引数は、Docker に対してイメージ内にコピーしたい元のファイルを指示します。
+2 つめの引数は、Docker に対してそのファイルをイメージ内のどこにコピーするかを指示します。
+ここでは`package.json`と`package-lock.json`をワーキングディレクトリ`/app`にコピーします。
 @z
 
 @x
@@ -344,7 +378,9 @@ COPY ["package.json", "package-lock.json*", "./"]
 @x
 Once we have our `package.json` files inside the image, we can use the `RUN` command to execute the command npm install. This works exactly the same as if we were running npm install locally on our machine, but this time these Node modules will be installed into the `node_modules` directory inside our image.
 @y
-Once we have our `package.json` files inside the image, we can use the `RUN` command to execute the command npm install. This works exactly the same as if we were running npm install locally on our machine, but this time these Node modules will be installed into the `node_modules` directory inside our image.
+`package.json`ファイルをイメージ内に置いたら`RUN`コマンドによって npm install を行います。
+この際の処理は npm install をマシン内でローカルに実行しているかのようにして動作します。
+ただし Node モジュール類のインストール先は、イメージ内の`node_modules`ディレクトリとなります。
 @z
 
 @x
@@ -360,7 +396,9 @@ RUN npm install --production
 @x
 At this point, we have an image that is based on node version 12.18.1 and we have installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the COPY command just like we did with our `package.json` files above.
 @y
-At this point, we have an image that is based on node version 12.18.1 and we have installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the COPY command just like we did with our `package.json` files above.
+ここまでに Node バージョン 12.18.1 に基づくイメージを構築して、依存パッケージのインストールを行いました。
+次に行うのは、イメージ内にソースコードを置くことです。
+先に行った`package.json`ファイルと同じように COPY コマンドを用いることにします。
 @z
 
 @x
@@ -376,7 +414,9 @@ COPY . .
 @x
 The COPY command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is run inside of a container. We do this with the `CMD` command.
 @y
-The COPY command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is run inside of a container. We do this with the `CMD` command.
+この COPY コマンドは、カレントディレクトリにあるファイルすべてをイメージ内にコピーします。
+最後に行うのは、このイメージがコンテナー内において実行される際に実行させたいコマンドを指定します。
+これを行うには`CMD`コマンドを用います。
 @z
 
 @x
@@ -392,47 +432,37 @@ CMD [ "node", "server.js" ]
 @x
 Here's the complete Dockerfile.
 @y
-Here's the complete Dockerfile.
+以下が完全な Dockerfile です。
 @z
 
 @x
 ```dockerfile
 FROM node:12.18.1
 ENV NODE_ENV=production
-@y
-```dockerfile
-FROM node:12.18.1
-ENV NODE_ENV=production
-@z
 
-@x
 WORKDIR /app
-@y
-WORKDIR /app
-@z
 
-@x
 COPY ["package.json", "package-lock.json*", "./"]
-@y
-COPY ["package.json", "package-lock.json*", "./"]
-@z
 
-@x
 RUN npm install --production
-@y
-RUN npm install --production
-@z
 
-@x
 COPY . .
-@y
-COPY . .
-@z
 
-@x
 CMD [ "node", "server.js" ]
 ```
 @y
+```dockerfile
+FROM node:12.18.1
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install --production
+
+COPY . .
+
 CMD [ "node", "server.js" ]
 ```
 @z
@@ -440,25 +470,34 @@ CMD [ "node", "server.js" ]
 @x
 ## Build image
 @y
-## Build image
+{: #build-image }
+## イメージのビルド
 @z
 
 @x
 Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in the context.
 @y
-Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in the context.
+Dockerfile を生成したので、ここからイメージをビルドします。
+これを行うには`docker build`コマンドを使います。
+`docker build`コマンドは Dockerfile と「コンテキスト（context）」から Docker イメージをビルドします。
+ビルドのコンテキストとは、指定されているパスや URL 内にある一連のファイルのことです。
+Docker のビルド処理においては、コンテキスト内にあるファイルはどれにでもアクセスすることができます。
 @z
 
 @x
 The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `‘name:tag’`. We’ll leave off the optional “tag” for now to help simplify things. If you do not pass a tag, Docker will use “latest” as its default tag. You’ll see this in the last line of the build output.
 @y
-The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `‘name:tag’`. We’ll leave off the optional “tag” for now to help simplify things. If you do not pass a tag, Docker will use “latest” as its default tag. You’ll see this in the last line of the build output.
+build コマンドにはオプションとして`--tag`フラグをつけることができます。
+タグ（tag）はイメージ名とオプションとなるタグ名を`‘name:tag’`という書式で指定します。
+話を単純にするため、ここでは「タグ」は用いないことにします。
+タグを指定しなければ Docker はデフォルトのタグ名として「latest」を用います。
+これはビルド処理結果の出力最終行に示されます。
 @z
 
 @x
 Let’s build our first Docker image.
 @y
-Let’s build our first Docker image.
+では初めての Docker イメージをビルドしてみます。
 @z
 
 @x
@@ -496,19 +535,22 @@ Successfully tagged node-docker:latest
 @x
 ## Viewing local images
 @y
-## Viewing local images
+{: #viewing-local-images }
+## ローカルイメージの確認
 @z
 
 @x
 To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use Docker Desktop. Since we are currently working in the terminal let’s take a look at listing images with the CLI.
 @y
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use Docker Desktop. Since we are currently working in the terminal let’s take a look at listing images with the CLI.
+ローカルマシン内にあるイメージの一覧を見るには 2 つの方法があります。
+1 つは CLI を用いる方法、もう 1 つは Docker Desktop を用いる方法です。
+これまでターミナルを使って作業を進めてきていますから、イメージ一覧は CLI を使って取得することにします。
 @z
 
 @x
 To list images, simply run the `images` command.
 @y
-To list images, simply run the `images` command.
+イメージを一覧表示するには、単純に`images`コマンドを実行します。
 @z
 
 @x
@@ -530,30 +572,40 @@ node                12.18.1             f5be1883c8e0        2 months ago        
 @x
 You should see at least two images listed. One for the base image `node:12.18.1` and the other for our image we just build `node-docker:latest`.
 @y
-You should see at least two images listed. One for the base image `node:12.18.1` and the other for our image we just build `node-docker:latest`.
+一覧には少なくとも 2 つのイメージが表示されるはずです。
+1 つはベースイメージ`node:12.18.1`であり、もう 1 つは`node-docker:latest`としてビルドしたイメージです。
 @z
 
 @x
 ## Tag images
 @y
-## Tag images
+{: #tag-images }
+## イメージへのタグづけ
 @z
 
 @x
 An image name is made up of slash-separated name components. Name components may contain lowercase letters, digits and separators. A separator is defined as a period, one or two underscores, or one or more dashes. A name component may not start or end with a separator.
 @y
-An image name is made up of slash-separated name components. Name components may contain lowercase letters, digits and separators. A separator is defined as a period, one or two underscores, or one or more dashes. A name component may not start or end with a separator.
+イメージ名はスラッシュによって区切られた名称により構成されます。
+この名称には、英字の小文字、数字、セパレーター文字が利用可能です。
+このセパレーター文字とは、1 つのピリオド、1 つまたは 2 つのアンダースコア、いくつかのダッシュ、のいずれかです。
+各名称のはじめと終わりにセパレーター文字を用いることはできません。
 @z
 
 @x
 An image is made up of a manifest and a list of layers. In simple terms, a “tag” points to a combination of these artifacts. You can have multiple tags for an image. Let’s create a second tag for the image we built and take a look at its layers.
 @y
-An image is made up of a manifest and a list of layers. In simple terms, a “tag” points to a combination of these artifacts. You can have multiple tags for an image. Let’s create a second tag for the image we built and take a look at its layers.
+イメージとは、マニフェストと複数レイヤーによって構成されるものです。
+単純に言って「タグ」というものは、それらの生成要素の組み合わせを指しています。
+イメージに対しては複数のタグを設定できます。
+作り上げてきたイメージに対する 2 つめのタグを生成します。
+そしてそのレイヤー構成を見てみます。
 @z
 
 @x
 To create a new tag for the image we built above, run the following command.
 @y
+イメージに対して新たなタグを生成するには、以下のコマンドを実行します。
 To create a new tag for the image we built above, run the following command.
 @z
 
@@ -570,13 +622,15 @@ $ docker tag node-docker:latest node-docker:v1.0.0
 @x
 The Docker tag command creates a new tag for an image. It does not create a new image. The tag points to the same image and is just another way to reference the image.
 @y
-The Docker tag command creates a new tag for an image. It does not create a new image. The tag points to the same image and is just another way to reference the image.
+Docker tag コマンドはイメージに対するタグを生成します。
+新たなイメージが作り出されるわけではありません。
+このタグもまた同じイメージを指していて、イメージを参照するもう 1 つの手段が出来上がったことになります。
 @z
 
 @x
 Now run the `docker images` command to see a list of our local images.
 @y
-Now run the `docker images` command to see a list of our local images.
+そこで`docker images`コマンドを実行して、ローカルイメージの一覧を確認します。
 @z
 
 @x
@@ -600,13 +654,17 @@ node                12.18.1             f5be1883c8e0        2 months ago        
 @x
 You can see that we have two images that start with `node-docker`. We know they are the same image because if you look at the IMAGE ID column, you can see that the values are the same for the two images.
 @y
-You can see that we have two images that start with `node-docker`. We know they are the same image because if you look at the IMAGE ID column, you can see that the values are the same for the two images.
+`node-docker`で始まるイメージが一覧に 2 つ表示されています。
+IMAGE ID 列を見てみれば、その 2 つのイメージは同一のものであることがわかります。
+2 つのイメージの ID 値は同じだからです。
 @z
 
 @x
 Let’s remove the tag that we just created. To do this, we’ll use the rmi command. The rmi command stands for “remove image”.
 @y
-Let’s remove the tag that we just created. To do this, we’ll use the rmi command. The rmi command stands for “remove image”.
+では今生成したタグを削除してみます。
+これを行うには rmi コマンドを使います。
+rmi コマンドは「remove image」を表しています。
 @z
 
 @x
@@ -624,7 +682,8 @@ Untagged: node-docker:v1.0.0
 @x
 Notice that the response from Docker tells us that the image has not been removed but only “untagged”. Verify this by running the images command.
 @y
-Notice that the response from Docker tells us that the image has not been removed but only “untagged”. Verify this by running the images command.
+Docker の出力結果からわかるように、イメージは削除されたわけではなく「タグづけ解除」が行われただけです。
+images コマンドを実行して確認してみます。
 @z
 
 @x
@@ -646,19 +705,24 @@ node                12.18.1             f5be1883c8e0        2 months ago        
 @x
 Our image that was tagged with `:v1.0.0` has been removed but we still have the `node-docker:latest` tag available on our machine.
 @y
-Our image that was tagged with `:v1.0.0` has been removed but we still have the `node-docker:latest` tag available on our machine.
+`:v1.0.0`としてタグづけを行ったイメージは削除されましたが、マシン上には`node-docker:latest`というタグを通じてイメージが参照可能です。
 @z
 
 @x
 ## Next steps
 @y
-## Next steps
+{: #next-steps }
+## 次のステップ
 @z
 
 @x
 In this module, we took a look at setting up our example Node application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module, we’ll take a look at how to:
 @y
-In this module, we took a look at setting up our example Node application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module, we’ll take a look at how to:
+本節ではサンプル Node アプリケーションの設定を行いました。
+これはこの先のチュートリアルを通じて利用していきます。
+また Dockerfile を生成して Docker イメージのビルドに利用しました。
+そしてイメージへのタグづけ、タグづけ解除を行いました。
+次節では以下のことを行います。
 @z
 
 @x
@@ -670,13 +734,16 @@ In this module, we took a look at setting up our example Node application that w
 @x
 ## Feedback
 @y
-## Feedback
+{: #feedback } 
+## フィードバック
 @z
 
 @x
 Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @y
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+本トピック改善のためにフィードバックをお寄せください。
+お気づきの点があれば [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} の GitHub リポジトリに isshue をあげてください。
+あるいは [PR の生成](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} により変更の提案を行ってください。
 @z
 
 @x

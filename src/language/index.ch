@@ -23,19 +23,22 @@ toc_max: 2
 The language-specific getting started guides walk you through the process of setting up your development environment and start containerizing language-specific applications using Docker. The learning modules contain best practices and guidelines that explain how to create a new Dockerfile in your preferred language, what to include in the Docker image, how to develop and run your Docker image, set up a CI/CD pipeline, and finally provides information on how to push the application you've developed to the cloud.
 @y
 プログラミング言語別の初級ガイドでは、開発環境の構築手順を示した上で、各言語に基づき Docker を使ってアプリケーションのコンテナー化を行います。
-The learning modules contain best practices and guidelines that explain how to create a new Dockerfile in your preferred language, what to include in the Docker image, how to develop and run your Docker image, set up a CI/CD pipeline, and finally provides information on how to push the application you've developed to the cloud.
+この学習モジュールにおいては、さまざまなベストプラクティスやガイドを示します。
+好みのプログラミング言語を使った Dockerfile の新規生成、Docker イメージに含めるべきもの、Docker イメージの開発と実行、CI/CD パイプラインの設定、開発したアプリケーションのクラウドへのプッシュ方法、などなどです。
 @z
 
 @x
 In addition to the language-specific modules, Docker documentation also provides guidelines to build and efficiently manage your development environment. You can find information on the best practices for writing Dockerfiles, building and managing images efficiently, gaining performance improvements by building images using BuildKit, etc. You can also find specific instructions on how to keep your images small, and how to persist application data, how to use multi-stage builds, etc.
 @y
-In addition to the language-specific modules, Docker documentation also provides guidelines to build and efficiently manage your development environment. You can find information on the best practices for writing Dockerfiles, building and managing images efficiently, gaining performance improvements by building images using BuildKit, etc. You can also find specific instructions on how to keep your images small, and how to persist application data, how to use multi-stage builds, etc.
+プログラミング言語に特有の情報に加えて、この Docker ドキュメントでは開発環境の構築および効率的な管理方法についてのガイドも示します。
+この中には Dockerfile 記述のベストプラクティス、イメージビルドと効率的な管理、BuildKit を使ってイメージビルドを行う性能改善方法、なども含まれています。
+またイメージサイズを小さくするための命令記述、アプリケーションデータの保存方法、マルチステージビルドの利用方法についてもふれています。
 @z
 
 @x
 For more information, refer to the following topics:
 @y
-For more information, refer to the following topics:
+詳しくは以下のトピックを参照してください。
 @z
 
 @x
@@ -44,22 +47,24 @@ For more information, refer to the following topics:
 * [Build images with BuildKit](/develop-images/build_enhancements/)
 * [Manage images](/develop/develop-images/image_management/)
 @y
-* [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/)
-* [Docker development best practices](/develop/dev-best-practices/)
-* [Build images with BuildKit](/develop-images/build_enhancements/)
-* [Manage images](/develop/develop-images/image_management/)
+* [Dockerfile 記述のベストプラクティス]({{ site.baseurl }}/develop/develop-images/dockerfile_best-practices/)
+* [Docker 開発のベストプラクティス]({{ site.baseurl }}/develop/dev-best-practices/)
+* [BuildKit を使ったイメージビルド]({{ site.baseurl }}/develop-images/build_enhancements/)
+* [イメージの管理]({{ site.baseurl }}/develop/develop-images/image_management/)
 @z
 
 @x
 ## Language-specific getting started guides
 @y
-## Language-specific getting started guides
+{: #language-specific-getting-started-guides }
+## プログラミング言語別の初級ガイド
 @z
 
 @x
 Learn how to set up your Docker environment and start containerizing your applications. Choose a language below to get started.
 @y
-Learn how to set up your Docker environment and start containerizing your applications. Choose a language below to get started.
+Docker 環境の構築とアプリケーションのコンテナー化について学んでください。
+以下の中からプログラミング言語を選んでください。
 @z
 
 @x
@@ -113,7 +118,7 @@ Learn how to set up your Docker environment and start containerizing your applic
 @x
 To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
 @y
-To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
+他の言語に対するガイドをご要望であれば、[Docker Docs github リポジトリ](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"} に issue をあげてください。
 @z
 
 @x
