@@ -16,6 +16,7 @@ ctie:
 
 bases = \
 	access-tokens          \
+	audit-log              \
 	convert-account        \
 	deactivate-account     \
 	download-rate-limit    \

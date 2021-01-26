@@ -398,33 +398,9 @@ Open the `package.json` file and add the following line to the scripts section:
 @z
 
 @x
-As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s add nodemon to our `package.json` file.
+As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s run the following command in a terminal to install nodemon into our project directory.
 @y
-As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s add nodemon to our `package.json` file.
-@z
-
-@x
-```json
-$ npm install nodemon
-```
-@y
-```json
-$ npm install nodemon
-```
-@z
-
-@x
-To start our application in debug mode, we need to add a line to our `package.json` file to tell npm how to start our application in debug mode.
-@y
-To start our application in debug mode, we need to add a line to our `package.json` file to tell npm how to start our application in debug mode.
-@z
-
-@x
-Open the `package.json` file and add the following line to the scripts section.
-As you can see, we are going to use `nodemon`. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s add nodemon to our `package.json` file.
-@y
-Open the `package.json` file and add the following line to the scripts section.
-As you can see, we are going to use `nodemon`. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s add nodemon to our `package.json` file.
+As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s run the following command in a terminal to install nodemon into our project directory.
 @z
 
 @x
@@ -620,7 +596,7 @@ In the next module, we’ll take a look at how to run unit tests in Docker. See:
 @x
 [Run your tests](run-tests.md){: .button .outline-btn}
 @y
-[テストの実行](run-tests.md){: .button .outline-btn}
+[Run your tests](run-tests.md){: .button .outline-btn}
 @z
 
 @x

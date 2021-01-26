@@ -19,6 +19,7 @@ images = \
 	2fa-pw-new-code.png            \
 	2fa-recovery-code.png          \
 	2fa-security-home.png          \
+	activity-list.png              \
 	hub-copy-token.png             \
 	hub-create-token.png           \
 	hub-edit-token.png             \
@@ -26,6 +27,8 @@ images = \
 	index-repo-created.png         \
 	index-tag.png                  \
 	index-terminal.png             \
+	org-activity-tab.png           \
+	org-all-actions.png            \
 	orgs-repo-perms2019.png        \
 	orgs-teams-perms2019.png       \
 	repo-create-details.png        \

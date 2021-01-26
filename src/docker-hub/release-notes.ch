@@ -28,22 +28,46 @@ known issues for each Docker Hub release.
 @z
 
 @x
+# 2021-01-25
+@y
+# 2021-01-25
+@z
+
+@x
+### New feature
+@y
+### New feature
+@z
+
+@x
+Docker introduces Audit log, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
+@y
+Docker introduces Audit log, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
+@z
+
+@x
+For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
+@y
+For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
+@z
+
+@x
 # 2020-11-10
 @y
 # 2020-11-10
 @z
 
 @x
-### New features
+### New feature
 @y
-### New features
+### New feature
 @z
 
 @x
-* The **Repositories** view now shows which images have gone stale because they haven't been 
+The **Repositories** view now shows which images have gone stale because they haven't been 
 pulled or pushed recently. For more information, see [repository tags](repos.md/#viewing-repository-tags).
 @y
-* The **Repositories** view now shows which images have gone stale because they haven't been 
+The **Repositories** view now shows which images have gone stale because they haven't been 
 pulled or pushed recently. For more information, see [repository tags](repos.md/#viewing-repository-tags).
 @z
 
@@ -54,15 +78,15 @@ pulled or pushed recently. For more information, see [repository tags](repos.md/
 @z
 
 @x
-### New features
+### New feature
 @y
-### New features
+### New feature
 @z
 
 @x
-* Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
+Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
 @y
-* Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
+Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
 @z
 
 @x
