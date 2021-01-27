@@ -61,13 +61,13 @@ To complete this tutorial, you need the following:
 
 @x
 - Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
-- Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
+- Docker running locally: Follow the instructions to [download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 @y
 - Node.js バージョン 12.18 またはそれ以降。
   [Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"} をダウンロードしてください。
 - ローカルで動作している Docker。
-  以下の手順に従って [Docker のダウンロードとインストール]({{ site.baseurl }}/desktop/) を行ってください。
+  以下の手順に従って [Docker のダウンロードとインストール](../../desktop/index.md) を行ってください。
 - ファイル編集を行うための IDE またはテキストエディター。
   ここでは Visual Studio Code をお勧めします。
 @z
@@ -80,7 +80,7 @@ To complete this tutorial, you need the following:
 @z
 
 @x
-Let’s create a simple Node.js application that we can use as our example. Create a directory on your local machine named `node-docker` and follow the steps below to create a simple REST API.
+Let’s create a simple Node.js application that we can use as our example. Create a directory in your local machine named `node-docker` and follow the steps below to create a simple REST API.
 @y
 例として用いる簡単な Node.js アプリケーションを作っていきます。
 ローカルマシン内に`node-docker`という名前のディレクトリを生成し、以下の手順により簡単な REST API を生成します。
@@ -147,10 +147,10 @@ The mocking server is called `Ronin.js` and will listen on port 8000 by default.
 @z
 
 @x
-## Test application
+## Test the application
 @y
-{: #test-application }
-## テストアプリケーション
+{: #test-the-application }
+## アプリケーションのテスト
 @z
 
 @x
@@ -347,7 +347,7 @@ WORKDIR /app
 @z
 
 @x
-Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This will ensure that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
+Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This ensures that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
 @y
 通常は Node.js で書かれたプロジェクトのダウンロード後、一番に行っておくことが npm パッケージのインストールです。
 これを行っておくとアプリケーションの依存パッケージがすべて`node_modules`ディレクトリ内にインストールされます。
@@ -533,9 +533,9 @@ Successfully tagged node-docker:latest
 @z
 
 @x
-## Viewing local images
+## View local images
 @y
-{: #viewing-local-images }
+{: #view-local-images }
 ## ローカルイメージの確認
 @z
 

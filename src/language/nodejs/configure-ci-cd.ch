@@ -612,15 +612,9 @@ You can also consider deploying your application to the cloud. For detailed inst
 @z
 
 @x
-[Deploying Docker containers on Azure](/cloud/aci-integration/){: .button .outline-btn}
+[Deploy your app to the cloud](/deploy.md){: .button .outline-btn}
 @y
-[Docker コンテナーの Azure へのデプロイ]({{ site.baseurl }}/cloud/aci-integration/){: .button .outline-btn}
-@z
-
-@x
-[Deploying Docker containers on ECS](/cloud/ecs-integration.md){: .button .outline-btn}
-@y
-[Docker コンテナーの ECS へのデプロイ]({{ site.baseurl }}/cloud/ecs-integration.md){: .button .outline-btn}
+[Deploy your app to the cloud](/deploy.md){: .button .outline-btn}
 @z
 
 @x

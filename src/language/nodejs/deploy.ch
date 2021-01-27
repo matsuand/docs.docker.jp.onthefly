@@ -3,15 +3,15 @@
 
 @x
 ---
-title: "Configure CI/CD for your application"
-keywords: CI/CD, GitHub Actions, NodeJS, local, development
-description: Learn how to develop your application locally.
+title: "Deploy your app to the cloud"
+keywords: deploy, cloud, ACI, ECS, NodeJS, local, development
+description: Learn how to deploy your application to the cloud
 ---
 @y
 ---
-title: "Configure CI/CD for your application"
-keywords: CI/CD, GitHub Actions, NodeJS, local, development
-description: Learn how to develop your application locally.
+title: "クラウドへのアプリのデプロイ"
+keywords: deploy, cloud, ACI, ECS, NodeJS, local, development
+description: Learn how to deploy your application to the cloud
 ---
 @z
 
