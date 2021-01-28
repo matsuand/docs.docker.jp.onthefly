@@ -1,4 +1,4 @@
-<!-- Page generated 2021-01-22 22:36:27 +0900-->
+<!-- Page generated 2021-01-28 13:21:25 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose ファイル バージョン 3 リファレンス | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Compose ファイル バージョン 3 リファレンス" />
   <meta property="og:description" content="Compose ファイルリファレンス" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-22T22:36:27+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-28T13:21:25+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-01-22T22:36:27+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-28T13:21:25+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose ファイル バージョン 3 リファレンス","description":"Compose ファイルリファレンス","url":"https://docs.docker.com/compose/compose-file/compose-file-v3/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -1798,13 +1798,29 @@ Docker クライアントの <code class="language-plaintext highlighter-rouge">
   <p>長い文法は v3.2 から導入されました。</p>
 </blockquote>
 
+<h3 id="profiles">profiles</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">profiles</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">frontend"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">debug"</span><span class="pi">]</span>
+<span class="na">profiles</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">frontend</span>
+  <span class="pi">-</span> <span class="s">debug</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">profiles</code>は、名前つきプロファイルに従ってサービスが有効になる、そういったプロファイルの一覧を定義します。
+これが設定されていない場合、サービスは <strong>常に</strong> 有効です。
+重要なアプリケーションを構成するサービスに対しては、この<code class="language-plaintext highlighter-rouge">profiles</code>は省略して、常にそのサービスは起動するようにしてください。</p>
+
+<p>適正なプロファイル名は、正規表現<code class="language-plaintext highlighter-rouge">[a-zA-Z0-9][a-zA-Z0-9_.-]+</code>に従うものです。</p>
+
+<p>プロファイルの詳細については <a href="/docs.docker.jp.onthefly/compose/profiles/"><strong>Compose におけるプロファイル利用</strong></a> も参照してください。</p>
+
 <h3 id="restart">restart</h3>
 
 <p><a href="/docs.docker.jp.onthefly/config/containers/start-containers-automatically/#use-a-restart-policy">再起動ポリシー</a>（restart policy）のデフォルトは <code class="language-plaintext highlighter-rouge">no</code> です。
 この場合はどういう状況であってもコンテナーは再起動しません。
-<code class="language-plaintext highlighter-rouge">always</code> を指定した場合、コンテナーは常に再起動することになります。
-また <code class="language-plaintext highlighter-rouge">on-failure</code> ポリシーでは、終了コードが on-failure エラーを表わしている場合にコンテナーが再起動します。
-<code class="language-plaintext highlighter-rouge">unless-stopped</code> は、コンテナーが（手動で、あるいは別の原因で）停止する場合を除き、常にコンテナーが再起動します。</p>
+<code class="language-plaintext highlighter-rouge">always</code>を指定した場合、コンテナーは常に再起動することになります。
+また<code class="language-plaintext highlighter-rouge">on-failure</code>ポリシーでは、終了コードが on-failure エラーを表わしている場合にコンテナーが再起動します。
+<code class="language-plaintext highlighter-rouge">unless-stopped</code>は、コンテナーが（手動で、あるいは別の原因で）停止する場合を除き、常にコンテナーが再起動します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>restart: "no"
 restart: always
@@ -3025,6 +3041,7 @@ Compose はプロジェクトディレクトリ（Compose ファイルの親デ�
               <li><a href="#long-syntax" class="nomunge">長い文法</a></li>
             </ul>
           </li>
+          <li><a href="#profiles" class="nomunge">profiles</a></li>
           <li><a href="#restart" class="nomunge">restart</a></li>
           <li><a href="#secrets" class="nomunge">secrets</a>
             <ul>
