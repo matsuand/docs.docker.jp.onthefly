@@ -22,6 +22,46 @@ redirect_from:
 @z
 
 @x
+## 1.28.2
+(2021-01-26)
+@y
+## 1.28.2
+(2021-01-26)
+@z
+
+@x
+### Bug fixes
+@y
+{: #bug-fixes }
+### バグフィックス
+@z
+
+@x
+- Revert to Python 3.7 bump for Linux static builds
+@y
+- Linux のスタティックビルドのために Python 3.7 に戻しました。
+@z
+
+@x
+- Add bash completion for `docker-compose logs|up --no-log-prefix`
+@y
+- `docker-compose logs|up --no-log-prefix`に対して bash 補完を追加しました。
+@z
+
+@x
+### Miscellaneous
+@y
+{: #miscellaneous }
+### その他
+@z
+
+@x
+- CI setup update
+@y
+- CI のセットアップを更新しました。
+@z
+
+@x
 ## 1.28.0 
 (2021-01-20)
 @y
@@ -32,7 +72,8 @@ redirect_from:
 @x
 ### Features
 @y
-### Features
+{: #features }
+### 機能
 @z
 
 @x
@@ -48,23 +89,26 @@ redirect_from:
 
 - Docker Compose now uses the native Docker CLI's `build` command when building images. Set the `COMPOSE_DOCKER_CLI_BUILD=0` environment variable to disable this feature.
 @y
-- Added support for NVIDIA GPUs through device requests.
+- デバイス要求を通じた NVIDIA GPU への対応を追加しました。
 
-- Added support for service profiles.
+- サービスプロファイルへのサポートを追加しました。
 
-- Changed the SSH connection approach to the Docker CLI by shelling out to the local SSH client. Set the `COMPOSE_PARAMIKO_SSH=1` environment variable to enable the old behavior.
+- Docker CLI における SSH 接続方式を、ローカルの SSH クライアント処理とするように変更しました。
+  環境変数`COMPOSE_PARAMIKO_SSH=1`を設定すれば、従来の挙動に戻すことができます。
 
-- Added a flag to disable log prefix.
+- ログプレフィックスを無効にするフラグを追加しました。
 
-- Added a flag for ANSI output control.
+- ANSI 出力制御のためのフラグを追加しました。
 
-- Docker Compose now uses the native Docker CLI's `build` command when building images. Set the `COMPOSE_DOCKER_CLI_BUILD=0` environment variable to disable this feature.
+- Docker Compose ではイメージビルド時に、ネイティブな Docker CLI`build`コマンドを用いるようにしました。
+  この機能は環境変数`COMPOSE_DOCKER_CLI_BUILD=0`の設定により無効化できます。
 @z
 
 @x
-### Bugs
+### Bug fixes
 @y
-### Bugs
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -76,19 +120,20 @@ redirect_from:
 
 - Fixed a service attach bug on `compose up`.
 @y
-- Made `parallel_pull=True` by default.
+- デフォルトで`parallel_pull=True`としました。
 
-- Restored the warning for configs in non-swarm mode.
+- 非 Swarm モードにおける config に対する警告メッセージを元に戻しました。
 
-- Took `--file` into account when defining `project_dir`.
+- `project_dir`の定義時には`--file`を考慮するようにしました。
 
-- Fixed a service attach bug on `compose up`.
+- `compose up`においてサービスをアタッチする際のバグを修正しました。
 @z
 
 @x
 ### Miscellaneous
 @y
-### Miscellaneous
+{: #miscellaneous }
+### その他
 @z
 
 @x
@@ -126,37 +171,37 @@ redirect_from:
 
 - Updated READMEs.
 @y
-- Added usage metrics.
+- 使用状況のメトリックスを追加しました。
 
-- Synced schema with COMPOSE specification.
+- COMPOSE 仕様でのスキーマを揃えました。
 
-- Improved failure report for missing mandatory environment variables.
+- 必須の環境変数が指定されていない場合のエラーメッセージを改善しました。
 
-- Bumped `attrs` to 20.3.0.
+- `attrs`を 20.3.0 に。
 
-- Bumped `more_itertools` to 8.6.0.
+- `more_itertools`を 8.6.0 に。
 
-- Bumped `cryptograhy` to 3.2.1.
+- `cryptograhy` to 3.2.1 に。
 
-- Bumped `cffi` to 1.14.4.
+- `cffi`を 1.14.4 に。
 
-- Bumped `virtualenv` to 20.2.2.
+- `virtualenv`を 20.2.2 に。
 
-- Bumped `bcrypt` to 3.2.0.
+- `bcrypt`を 3.2.0 に。
 
-- Bumped GitPython to 3.1.11.
+- GitPython を 3.1.11 に。
 
-- Bumped `docker-py` to 4.4.1.
+- `docker-py`を 4.4.1 に。
 
-- Bumped Python to 3.9.
+- Python を 3.9 に。
 
-- Linux: bumped Debian base image from stretch to buster (required for Python 3.9).
+- Linux: Debian のベースイメージを buster に。（Python 3.9 が必要）
 
-- macOS: Bumped OpenSSL 1.1.1g to 1.1.1h, and Python 3.7.7 to 3.9.0.
+- macOS: OpenSSL 1.1.1g を 1.1.1h に。Python 3.7.7 を 3.9.0 に。
 
-- Bumped PyInstaller to 4.1.
+- PyInstaller を 4.1 に。
 
-- Relaxed the restriction on base images to latest minor.
+- ベースイメージに対する制限を、最新のマイナーバージョンにまで緩和しました。
 
 - README を更新しました。
 @z
@@ -170,10 +215,10 @@ redirect_from:
 @z
 
 @x
-### Bugs
+### Bug fixes
 @y
-{: #bugs }
-### バグ
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -203,40 +248,40 @@ redirect_from:
 @z
 
 @x
-### Bugs
+### Bug fixes
 @y
-{: #bugs }
-### バグ
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
 - Merged `max_replicas_per_node` on `docker-compose config`.
 @y
-- `docker-compose config` に `max_replicas_per_node` をマージしました。
+- `docker-compose config`に`max_replicas_per_node`をマージしました。
 @z
 
 @x
 - Fixed `depends_on` serialization on `docker-compose config`.
 @y
-- `docker-compose config` における `depends_on` のシリアライズ処理を修正しました。
+- `docker-compose config`における`depends_on`のシリアライズ処理を修正しました。
 @z
 
 @x
 - Fixed scaling when some containers are not running on `docker-compose up`.
 @y
-- `docker-compose up` において動作していないコンテナーがある際のスケール処理を修正しました。
+- `docker-compose up`において動作していないコンテナーがある際のスケール処理を修正しました。
 @z
 
 @x
 - Enabled relative paths for `driver_opts.device` for `local` driver.
 @y
-- `local` ドライバー利用時の `driver_opts.device` において相対パスを可能にしました。
+- `local`ドライバー利用時の`driver_opts.device`において相対パスを可能にしました。
 @z
 
 @x
 - Allowed strings for `cpus` fields.
 @y
-- `cpus` に対して文字列指定を可能にしました。
+- `cpus`に対して文字列指定を可能にしました。
 @z
 
 @x
@@ -248,10 +293,10 @@ redirect_from:
 @z
 
 @x
-### Bugs
+### Bug fixes
 @y
-{: #bugs }
-### バグ
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -269,10 +314,10 @@ redirect_from:
 @z
 
 @x
-### Bugs
+### Bug fixes
 @y
-{: #bugs }
-### バグ
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -317,19 +362,19 @@ redirect_from:
 @x
 - Merged 2.x and 3.x Compose formats and aligned with `COMPOSE_SPEC` schema.
 @y
-- Compose フォーマット 2.x と 3.x をマージし、`COMPOSE_SPEC` スキーマに合わせました。
+- Compose フォーマット 2.x と 3.x をマージし、`COMPOSE_SPEC`スキーマに合わせました。
 @z
 
 @x
 - Implemented service mode for `ipc`.
 @y
-- `ipc` に対応するサービスモードを導入しました。
+- `ipc`に対応するサービスモードを導入しました。
 @z
 
 @x
 - Passed `COMPOSE_PROJECT_NAME` environment variable in container mode.
 @y
-- コンテナーモードにおいて環境変数 `COMPOSE_PROJECT_NAME` を設定しました。
+- コンテナーモードにおいて環境変数`COMPOSE_PROJECT_NAME`を設定しました。
 @z
 
 @x
@@ -341,7 +386,7 @@ redirect_from:
 @x
 - Used `docker build` on `docker-compose run` when `COMPOSE_DOCKER_CLI_BUILD` environment variable is set.
 @y
-- 環境変数 `COMPOSE_DOCKER_CLI_BUILD` の設定時には `docker-compose run` において `docker build` を利用するようにしました。
+- 環境変数`COMPOSE_DOCKER_CLI_BUILD`の設定時には`docker-compose run`において`docker build`を利用するようにしました。
 @z
 
 @x
@@ -357,10 +402,10 @@ redirect_from:
 @z
 
 @x
-### Bugs
+### Bug fixes
 @y
-{: #bugs }
-### バグ
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -384,7 +429,7 @@ redirect_from:
 @x
 - Fixed `docker-py` bump in `setup.py`.
 @y
-- `setup.py` において `docker-py` のバージョンアップに対応しました。
+- `setup.py`において`docker-py`のバージョンアップに対応しました。
 @z
 
 @x
@@ -653,7 +698,8 @@ redirect_from:
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -679,7 +725,8 @@ redirect_from:
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -705,7 +752,8 @@ redirect_from:
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -717,7 +765,8 @@ redirect_from:
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -743,7 +792,8 @@ redirect_from:
 @x
 ### Bugfixes
 @y
-### Bugfixes
+{: #bugfixes }
+### バグフィックス
 @z
 
 @x
@@ -787,7 +837,8 @@ redirect_from:
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -925,7 +976,8 @@ redirect_from:
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1094,7 +1146,8 @@ This release contains minor improvements and bug fixes.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1202,7 +1255,8 @@ This release contains minor improvements and bug fixes.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1266,7 +1320,8 @@ This release contains minor improvements and bug fixes.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1365,7 +1420,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1475,7 +1531,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Miscellaneous
 @y
-### Miscellaneous
+{: #miscellaneous }
+### その他
 @z
 
 @x
@@ -1497,7 +1554,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -1551,7 +1609,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1645,7 +1704,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1667,7 +1727,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1735,7 +1796,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -1845,7 +1907,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -1909,7 +1972,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -2043,7 +2107,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -2167,7 +2232,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -2287,7 +2353,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -2399,7 +2466,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -2517,7 +2585,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -2629,7 +2698,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -2711,7 +2781,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -2789,7 +2860,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -2857,7 +2929,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -2955,7 +3028,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -3013,7 +3087,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3085,7 +3160,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -3157,7 +3233,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3251,7 +3328,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -3299,7 +3377,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3385,7 +3464,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -3557,7 +3637,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3651,7 +3732,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3707,7 +3789,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3729,7 +3812,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New Features
 @y
-### New Features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -3765,7 +3849,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3795,7 +3880,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -3857,7 +3943,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New Features
 @y
-### New Features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -3935,7 +4022,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -4007,7 +4095,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New Features
 @y
-### New Features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -4075,7 +4164,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -4135,7 +4225,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -4271,7 +4362,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New Features
 @y
-### New Features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -4303,7 +4395,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -4407,7 +4500,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -4539,7 +4633,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New Features
 @y
-### New Features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -4667,7 +4762,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -4759,7 +4855,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -5027,7 +5124,8 @@ naming scheme accordingly before upgrading.
 @x
 ### New Features:
 @y
-### New Features:
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -5105,7 +5203,8 @@ naming scheme accordingly before upgrading.
 @x
 ### Bug Fixes:
 @y
-### Bug Fixes:
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -5501,7 +5600,8 @@ https://github.com/docker/compose/blob/8cc8e61/docs/compose-file.md#variable-sub
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -5643,7 +5743,8 @@ https://github.com/docker/compose/blob/8cc8e61/docs/compose-file.md#variable-sub
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -5687,7 +5788,8 @@ https://github.com/docker/compose/blob/8cc8e61/docs/compose-file.md#variable-sub
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -5861,7 +5963,8 @@ Thanks @mnowster, @dnephin, @ekristen, @funkyfuture, @jeffk and @lukemarsden!
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -5899,7 +6002,8 @@ Thanks @dano, @josephpage, @kevinsimper, @lieryan, @phemmer, @soulrebel and @ssc
 @x
 ### Bug fixes
 @y
-### Bug fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x
@@ -5959,7 +6063,8 @@ Thanks @dano, @josephpage, @kevinsimper, @lieryan, @phemmer, @soulrebel and @ssc
 @x
 ### New features
 @y
-### New features
+{: #new-features }
+### 新規機能
 @z
 
 @x
@@ -6009,7 +6114,8 @@ Several new configuration keys have been added to `docker-compose.yml`:
 @x
 ### Bug Fixes
 @y
-### Bug Fixes
+{: #bug-fixes }
+### バグフィックス
 @z
 
 @x

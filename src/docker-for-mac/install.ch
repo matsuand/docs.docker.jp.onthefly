@@ -77,16 +77,16 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
+  > **Note**
+  >
+  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
 @y
-  **メモ:** Docker では、ほぼ最新の macOS であれば Docker Desktop をサポートしています。
-  Docker Desktop が現時点でサポートするのは、macOS Catalina、macOS Mojave、macOS Big Sur です。
-@z
-
-@x
-    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS.
-@y
-    macOS の最新メジャーバージョンが公開された場合、Docker はそれまでの一番古い対応バージョンへのサポートを停止し、最新版をサポート対象とします。
+  > **メモ**
+  >
+  > Docker では、ほぼ最新の macOS であれば Docker Desktop をサポートしています。
+  > 具体的には、現状最新の macOS とその前の 2 つのリリースまで含みます。
+  > 最新の macOS バージョンが利用可能となっているため、Docker では古いバージョンへのサポートは取りやめとし、最新バージョン（それに加えて直前の 2 リリース）のみをサポートすることにします。
+  > Docker Desktop が現時点でサポートするのは、macOS Mojave、macOS Catalina、macOS Big Sur です。
 @z
 
 @x

@@ -15,22 +15,23 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	aspnet-mssql-compose \
-	completion \
-	django \
-	env-file \
+	aspnet-mssql-compose  \
+	completion            \
+	django                \
+	env-file              \
 	environment-variables \
-	extends \
-	faq \
-	gettingstarted \
-	index \
-	install \
-	networking \
-	production \
-	rails \
-	release-notes \
-	samples-for-compose \
-	startup-order \
+	extends               \
+	faq                   \
+	gettingstarted        \
+	index                 \
+	install               \
+	networking            \
+	production            \
+	profiles              \
+	rails                 \
+	release-notes         \
+	samples-for-compose   \
+	startup-order         \
 	wordpress
 
 ch_mds = $(bases:=.ch) # ch means change files

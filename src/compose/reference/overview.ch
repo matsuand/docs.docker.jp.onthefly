@@ -59,11 +59,11 @@ Docker で使う複数コンテナーアプリケーションを定義し実行�
 
 @x
 Usage:
-  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
+  docker-compose [-f <arg>...] [--profile <name>...] [options] [COMMAND] [ARGS...]
   docker-compose -h|--help
 @y
 利用方法:
-  docker-compose [-f <引数>...] [オプション] [コマンド] [引数...]
+  docker-compose [-f <引数>...] [--profile <名前>...] [オプション] [コマンド] [引数...]
   docker-compose -h|--help
 @z
 
@@ -73,6 +73,7 @@ Options:
                               (default: docker-compose.yml)
   -p, --project-name NAME     Specify an alternate project name
                               (default: directory name)
+  --profile NAME              Specify a profile to enable
   --verbose                   Show more output
   --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   Do not print ANSI control characters
@@ -84,6 +85,7 @@ Options:
                               (デフォルト: docker-compose.yml)
   -p, --project-name NAME     プロジェクト名を指定
                               (デフォルト: ディレクトリ名)
+  --profile NAME              有効にするプロファイルを指定
   --verbose                   詳細情報を表示
   --log-level LEVEL           ログレベルを設定 (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   ANSI コントロール文字を表示しない
@@ -484,6 +486,32 @@ directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars
 `-p` フラグを用いると、プロジェクト名を指定することができます。
 フラグを指定しなかった場合、Compose はカレントディレクトリ名をプロジェクト名とします。
 詳細は [環境変数 COMPOSE_PROJECT_NAME](envvars.md#compose_project_name) を参照してください。
+@z
+
+@x
+## Use `--profile` to specify one or more active profiles
+@y
+## Use `--profile` to specify one or more active profiles
+@z
+
+@x
+Calling `docker-compose --profile frontend up` will start the services with the
+profile `frontend` and services without specified profiles. You can also enable
+multiple profiles, e.g. with `docker-compose --profile frontend --profile debug up`
+the profiles `frontend` and `debug` will be enabled.
+@y
+Calling `docker-compose --profile frontend up` will start the services with the
+profile `frontend` and services without specified profiles. You can also enable
+multiple profiles, e.g. with `docker-compose --profile frontend --profile debug up`
+the profiles `frontend` and `debug` will be enabled.
+@z
+
+@x
+See also [_Using profiles with Compose_](../profiles.md) and the
+[`COMPOSE_PROFILES` environment variable](envvars.md#compose_profiles).
+@y
+See also [_Using profiles with Compose_](../profiles.md) and the
+[`COMPOSE_PROFILES` environment variable](envvars.md#compose_profiles).
 @z
 
 @x

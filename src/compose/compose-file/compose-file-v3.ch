@@ -4941,6 +4941,51 @@ ports:
 @z
 
 @x
+### profiles
+@y
+### profiles
+@z
+
+@x
+```yaml
+profiles: ["frontend", "debug"]
+profiles:
+  - frontend
+  - debug
+```
+@y
+```yaml
+profiles: ["frontend", "debug"]
+profiles:
+  - frontend
+  - debug
+```
+@z
+
+@x
+`profiles` defines a list of named profiles for the service to be enabled under.
+When not set, the service is _always_ enabled. For the services that make up
+your core application you should omit `profiles` so they will always be started.
+@y
+`profiles`は、名前つきプロファイルに従ってサービスが有効になる、そういったプロファイルの一覧を定義します。
+これが設定されていない場合、サービスは **常に** 有効です。
+重要なアプリケーションを構成するサービスに対しては、この`profiles`は省略して、常にそのサービスは起動するようにしてください。
+@z
+
+@x
+Valid profile names follow the regex format `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
+@y
+適正なプロファイル名は、正規表現`[a-zA-Z0-9][a-zA-Z0-9_.-]+`に従うものです。
+@z
+
+@x
+See also [_Using profiles with Compose_](../profiles.md) to learn more about
+profiles.
+@y
+プロファイルの詳細については [**Compose におけるプロファイル利用**](../profiles.md) も参照してください。
+@z
+
+@x
 ### restart
 @y
 ### restart
@@ -4962,9 +5007,9 @@ container is stopped (manually or otherwise).
 {% endcomment %}
 [再起動ポリシー](../../config/containers/start-containers-automatically.md#use-a-restart-policy)（restart policy）のデフォルトは `no` です。
 この場合はどういう状況であってもコンテナーは再起動しません。
-`always` を指定した場合、コンテナーは常に再起動することになります。
-また `on-failure` ポリシーでは、終了コードが on-failure エラーを表わしている場合にコンテナーが再起動します。
-`unless-stopped` は、コンテナーが（手動で、あるいは別の原因で）停止する場合を除き、常にコンテナーが再起動します。
+`always`を指定した場合、コンテナーは常に再起動することになります。
+また`on-failure`ポリシーでは、終了コードが on-failure エラーを表わしている場合にコンテナーが再起動します。
+`unless-stopped`は、コンテナーが（手動で、あるいは別の原因で）停止する場合を除き、常にコンテナーが再起動します。
 @z
 
 @x

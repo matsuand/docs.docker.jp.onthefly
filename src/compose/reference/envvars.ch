@@ -100,6 +100,40 @@ See also the `-f` [command-line option](overview.md).
 @z
 
 @x
+## COMPOSE\_PROFILES
+@y
+## COMPOSE\_PROFILES
+@z
+
+@x
+Specify one or multiple active profiles to enable. Calling `docker-compose up`
+with `COMPOSE_PROFILES=frontend` will start the services with the profile
+`frontend` and services without specified profiles.
+@y
+Specify one or multiple active profiles to enable. Calling `docker-compose up`
+with `COMPOSE_PROFILES=frontend` will start the services with the profile
+`frontend` and services without specified profiles.
+@z
+
+@x
+You can specify a list of profiles separated with a comma:
+`COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
+`debug`.
+@y
+You can specify a list of profiles separated with a comma:
+`COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
+`debug`.
+@z
+
+@x
+See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
+[command-line option](overview.md).
+@y
+See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
+[command-line option](overview.md).
+@z
+
+@x
 ## COMPOSE\_API\_VERSION
 @y
 ## COMPOSE\_API\_VERSION
