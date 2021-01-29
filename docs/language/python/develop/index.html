@@ -1,7 +1,7 @@
-<!-- Page generated 2021-01-22 11:17:02 +0900-->
+<!-- Page generated 2021-01-29 10:35:57 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーを用いた開発 | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use containers for development | Docker ドキュメント</title>
   <meta name="description" content="Learn how to develop your application locally." />
   <meta name="keywords" content="python, local, development, run,">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/python/develop/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="コンテナーを用いた開発"/>
+  <meta name="twitter:title" itemprop="title name" content="Use containers for development"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="コンテナーを用いた開発" />
+  <meta property="og:title" content="Use containers for development" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-22T11:17:02+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-29T10:35:57+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-01-22T11:17:02+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーを用いた開発","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/python/develop/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-29T10:35:57+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use containers for development","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/python/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,13 +98,250 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテナーを用いた開発</h1><blockquote>
-  <h3 id="coming-soon">Coming soon</h3>
+                        <section class="section"><h1>Use containers for development</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><ul class="pagination">
+  <li><a href="/language/python/build-images/">Build images</a></li>
+  <li><a href="/language/python/run-containers/">Run your image as a container</a></li>
+  <li class="active"><a href="/language/python/develop/">Use containers for development</a></li>
+  <li><a href="/language/python/configure-ci-cd/">Configure CI/CD</a></li>
+  <li><a href="/language/python/deploy/">Deploy your app</a></li>
+</ul>
 
-  <p>Thanks for your interest in learning how to containerize a Python application. We are actively working on this topic. Watch this space!</p>
-</blockquote>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<p><br /></p>
+<p>Work through the steps to build an image and run it as a containerized application in <a href="/docs.docker.jp.onthefly/language/python/run-containers/">Run your image as a container</a>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.</p>
+
+<h2 id="run-a-database-in-a-container">Run a database in a container</h2>
+
+<p>First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.</p>
+
+<p>Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.</p>
+
+<p>Before we run MySQL in a container, we’ll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about <a href="/docs.docker.jp.onthefly/storage/volumes/">Using volumes</a> in our documentation.</p>
+
+<p>Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create mysql
+<span class="nv">$ </span>docker volume create mysql_config
+</code></pre></div></div>
+
+<p>Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create mysqlnet
+</code></pre></div></div>
+
+<p>Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and run it for you locally.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mysql:/var/lib/mysql <span class="se">\</span>
+  <span class="nt">-v</span> mysql_config:/etc/mysql <span class="nt">-p</span> 3306:3306 <span class="se">\</span>
+  <span class="nt">--network</span> mysqlnet <span class="se">\</span>
+  <span class="nt">--name</span> mysqldb <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_ALLOW_EMPTY_PASSWORD</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+  mysql
+</code></pre></div></div>
+
+<p>Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--network</span> mysqlnet <span class="nt">--rm</span> mysql mysql <span class="nt">-hmysqldb</span>
+Enter password: <span class="k">********</span>
+
+Welcome to the MySQL monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span><span class="nb">.</span>
+Your MySQL connection <span class="nb">id </span>is 8
+Server version: 8.0.23 MySQL Community Server - GPL
+
+Copyright <span class="o">(</span>c<span class="o">)</span> 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type <span class="s1">'help;'</span> or <span class="s1">'\h'</span> <span class="k">for </span>help. Type <span class="s1">'\c'</span> to clear the current input statement.
+
+mysql&gt;
+</code></pre></div></div>
+
+<h3 id="connect-the-application-to-the-database">Connect the application to the database</h3>
+
+<p>In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the <code class="language-plaintext highlighter-rouge">-h</code> flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.</p>
+
+<p>Next, we’ll update the sample application we created in the <a href="/docs.docker.jp.onthefly/language/python/build-images/#sample-application">Build images</a> module. To see the directory structure of the Python app, see <a href="/docs.docker.jp.onthefly/language/python/build-images/#directory-structure">Python application directory structure</a>.</p>
+
+<p>Okay, now that we have a running MySQL, let’s update the<code class="language-plaintext highlighter-rouge">app.py</code> to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import mysql.connector
+import json
+from flask import Flask
+
+app <span class="o">=</span> Flask<span class="o">(</span>__name__<span class="o">)</span>
+
+@app.route<span class="o">(</span><span class="s1">'/'</span><span class="o">)</span>
+def hello_world<span class="o">()</span>:
+  <span class="k">return</span> <span class="s1">'Hello, Docker!'</span>
+
+@app.route<span class="o">(</span><span class="s1">'/widgets'</span><span class="o">)</span>
+def get_widgets<span class="o">()</span> :
+  mydb <span class="o">=</span> mysql.connector.connect<span class="o">(</span>
+    <span class="nv">host</span><span class="o">=</span><span class="s2">"mysqldb"</span>,
+    <span class="nv">user</span><span class="o">=</span><span class="s2">"root"</span>,
+    <span class="nv">password</span><span class="o">=</span><span class="s2">"p@ssw0rd1"</span>,
+    <span class="nv">database</span><span class="o">=</span><span class="s2">"inventory"</span>
+  <span class="o">)</span>
+  cursor <span class="o">=</span> mydb.cursor<span class="o">()</span>
+
+
+  cursor.execute<span class="o">(</span><span class="s2">"SELECT * FROM widgets"</span><span class="o">)</span>
+
+  <span class="nv">row_headers</span><span class="o">=[</span>x[0] <span class="k">for </span>x <span class="k">in </span>cursor.description] <span class="c">#this will extract row headers</span>
+
+  results <span class="o">=</span> cursor.fetchall<span class="o">()</span>
+  <span class="nv">json_data</span><span class="o">=[]</span>
+  <span class="k">for </span>result <span class="k">in </span>results:
+    json_data.append<span class="o">(</span>dict<span class="o">(</span>zip<span class="o">(</span>row_headers,result<span class="o">)))</span>
+
+  cursor.close<span class="o">()</span>
+
+  <span class="k">return </span>json.dumps<span class="o">(</span>json_data<span class="o">)</span>
+
+@app.route<span class="o">(</span><span class="s1">'/db'</span><span class="o">)</span>
+def db_init<span class="o">()</span>:
+  mydb <span class="o">=</span> mysql.connector.connect<span class="o">(</span>
+    <span class="nv">host</span><span class="o">=</span><span class="s2">"mysqldb"</span>,
+    <span class="nv">user</span><span class="o">=</span><span class="s2">"root"</span>,
+    <span class="nv">password</span><span class="o">=</span><span class="s2">"p@ssw0rd1"</span>
+  <span class="o">)</span>
+  cursor <span class="o">=</span> mydb.cursor<span class="o">()</span>
+
+  cursor.execute<span class="o">(</span><span class="s2">"DROP DATABASE IF EXISTS inventory"</span><span class="o">)</span>
+  cursor.execute<span class="o">(</span><span class="s2">"CREATE DATABASE inventory"</span><span class="o">)</span>
+  cursor.close<span class="o">()</span>
+
+  mydb <span class="o">=</span> mysql.connector.connect<span class="o">(</span>
+    <span class="nv">host</span><span class="o">=</span><span class="s2">"mysqldb"</span>,
+    <span class="nv">user</span><span class="o">=</span><span class="s2">"root"</span>,
+    <span class="nv">password</span><span class="o">=</span><span class="s2">"p@ssw0rd1"</span>,
+    <span class="nv">database</span><span class="o">=</span><span class="s2">"inventory"</span>
+  <span class="o">)</span>
+  cursor <span class="o">=</span> mydb.cursor<span class="o">()</span>
+
+  cursor.execute<span class="o">(</span><span class="s2">"DROP TABLE IF EXISTS widgets"</span><span class="o">)</span>
+  cursor.execute<span class="o">(</span><span class="s2">"CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))"</span><span class="o">)</span>
+  cursor.close<span class="o">()</span>
+
+  <span class="k">return</span> <span class="s1">'init database'</span>
+
+<span class="k">if </span>__name__ <span class="o">==</span> <span class="s2">"__main__"</span>:
+  app.run<span class="o">(</span>host <span class="o">=</span><span class="s1">'0.0.0.0'</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.</p>
+
+<p>First, let’s add the <code class="language-plaintext highlighter-rouge">mysql-connector-python </code>module to our application using pip.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip3 <span class="nb">install </span>mysql-connector-python
+<span class="nv">$ </span>pip3 freeze <span class="nt">-r</span> requirements.txt
+</code></pre></div></div>
+
+<p>Now we can build our image.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> python-docker <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
+  <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--network</span> mysqlnet <span class="se">\</span>
+  <span class="nt">--name</span> rest-server <span class="se">\</span>
+  <span class="nt">-p</span> 5000:5000 <span class="se">\</span>
+  python-docker
+</code></pre></div></div>
+
+<p>Let’s test that our application is connected to the database and is able to add a note.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:5000/initdb
+<span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost:5000/widgets <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'name=widget01'</span> <span class="se">\</span>
+  <span class="nt">--data</span> <span class="s1">'description=this is a test widget'</span>
+</code></pre></div></div>
+
+<p>You should receive the following JSON back from our service.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[{</span><span class="s2">"name"</span>: <span class="s2">"widget01"</span>, <span class="s2">"description"</span>: <span class="s2">"this is a test widget"</span><span class="o">}]</span>
+</code></pre></div></div>
+
+<h2 id="use-compose-to-develop-locally">Use Compose to develop locally</h2>
+
+<p>In this section, we’ll create a Compose file to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the <code class="language-plaintext highlighter-rouge">python-docker</code> application in debug mode so that we can connect a debugger to the running process.</p>
+
+<p>Open the <code class="language-plaintext highlighter-rouge">python-docker</code> code in your IDE or a text editor and create a new file named <code class="language-plaintext highlighter-rouge">docker-compose.dev.yml</code>. Copy and paste the following commands into the file.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+ <span class="na">web</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+   <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">5000:5000</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">./:/app</span>
+
+ <span class="na">mysqldb</span><span class="pi">:</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>
+  <span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">3306:3306</span>
+  <span class="na">environment</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">MYSQL_ROOT_PASSWORD=p@ssw0rd1</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">mysql:/var/lib/mysql</span>
+  <span class="pi">-</span> <span class="s">mysql_config:/etc/mysql</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">mysql</span><span class="pi">:</span>
+  <span class="na">mysql_config</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>This Compose file is super convenient as we do not have to type all the parameters to pass to the <code class="language-plaintext highlighter-rouge">docker run</code> command. We can declaratively do that using a Compose file.</p>
+
+<p>We expose port 5000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.</p>
+
+<p>Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we’ve named our MySQL service as in the Compose file.</p>
+
+<p>Now, to start our application and to confirm that it is running properly, run the following command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
+</code></pre></div></div>
+
+<p>We pass the <code class="language-plaintext highlighter-rouge">--build</code> flag so Docker will compile our image and then starts the containers.</p>
+
+<p>Now let’s test our API endpoint. Run the following curl command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/widgets
+</code></pre></div></div>
+
+<p>You should receive the following response:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[]</span>
+</code></pre></div></div>
+
+<p>This is because our database is empty.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.</p>
+
+<p>In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:</p>
+
+<p><a href="/docs.docker.jp.onthefly/language/python/configure-ci-cd/" class="button outline-btn">Configure CI/CD</a></p>
+
+<h2 id="feedback">Feedback</h2>
+
+<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs </a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=python">python</a>, <a href="/docs.docker.jp.onthefly/search/?q=local">local</a>, <a href="/docs.docker.jp.onthefly/search/?q=development">development</a>, <a href="/docs.docker.jp.onthefly/search/?q=run">run</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -138,7 +375,16 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#coming-soon" class="nomunge">Coming soon</a></li>
+  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="#introduction" class="nomunge">Introduction</a></li>
+  <li><a href="#run-a-database-in-a-container" class="nomunge">Run a database in a container</a>
+    <ul>
+      <li><a href="#connect-the-application-to-the-database" class="nomunge">Connect the application to the database</a></li>
+    </ul>
+  </li>
+  <li><a href="#use-compose-to-develop-locally" class="nomunge">Use Compose to develop locally</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="#feedback" class="nomunge">Feedback</a></li>
 </ul>
 
 </div>

@@ -1,7 +1,7 @@
-<!-- Page generated 2021-01-22 11:17:02 +0900-->
+<!-- Page generated 2021-01-29 10:35:57 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Python イメージのビルド | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Build your Python image | Docker ドキュメント</title>
   <meta name="description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta name="keywords" content="python, build, images, dockerfile">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/python/build-images/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Python イメージのビルド"/>
+  <meta name="twitter:title" itemprop="title name" content="Build your Python image"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Python イメージのビルド" />
+  <meta property="og:title" content="Build your Python image" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-22T11:17:02+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-29T10:35:57+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-01-22T11:17:02+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Python イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/python/build-images/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-01-29T10:35:57+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Build your Python image","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/python/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,11 +98,233 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Python イメージのビルド</h1><blockquote>
-  <h3 id="coming-soon">Coming soon</h3>
+                        <section class="section"><h1>Build your Python image</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p><ul class="pagination">
+  <li class="active"><a href="/language/python/build-images/">Build images</a></li>
+  <li><a href="/language/python/run-containers/">Run your image as a container</a></li>
+  <li><a href="/language/python/develop/">Use containers for development</a></li>
+  <li><a href="/language/python/configure-ci-cd/">Configure CI/CD</a></li>
+  <li><a href="/language/python/deploy/">Deploy your app</a></li>
+</ul>
 
-  <p>Thanks for your interest in learning how to containerize a Python application. We are actively working on this topic. Watch this space!</p>
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Work through the orientation and setup in Get started <a href="/get-started/">Part 1</a> to understand Docker concepts.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>Now that we have a good overview of containers and the Docker platform, let’s take a look at building our first image. An image includes everything needed to run an application - the code or binary, runtime, dependencies, and any other file system objects required.</p>
+
+<p>To complete this tutorial, you need the following:</p>
+
+<ul>
+  <li>Python version 3.8 or later. <a href="https://www.python.org/downloads/" target="_blank" rel="noopener" class="_">Download Python</a></li>
+  <li>Docker running locally. Follow the instructions to <a href="/docs.docker.jp.onthefly/desktop/">download and install Docker</a></li>
+  <li>An IDE or a text editor to edit files. We recommend using <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener" class="_">Visual Studio Code</a>.</li>
+</ul>
+
+<h2 id="sample-application">Sample application</h2>
+
+<p>Let’s create a simple Python application using the Flask framework that we’ll use as our example. Create a directory in your local machine named <code class="language-plaintext highlighter-rouge">python-docker</code> and follow the steps below to create a simple web server.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /path/to/python-docker
+<span class="nv">$ </span>pip3 <span class="nb">install </span>Flask
+<span class="nv">$ </span>pip3 freeze <span class="o">&gt;</span> requirements.txt
+<span class="nv">$ </span><span class="nb">touch </span>app.py
+</code></pre></div></div>
+
+<p>Now, let’s add some code to handle simple web requests. Open this working directory in your favorite IDE and enter the following code into the <code class="language-plaintext highlighter-rouge">app.py</code> file.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from flask import Flask
+app <span class="o">=</span> Flask<span class="o">(</span>__name__<span class="o">)</span>
+
+@app.route<span class="o">(</span><span class="s1">'/'</span><span class="o">)</span>
+def hello_world<span class="o">()</span>:
+    <span class="k">return</span> <span class="s1">'Hello, Docker!'</span>
+</code></pre></div></div>
+
+<h2 id="test-the-application">Test the application</h2>
+
+<p>Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python3 <span class="nt">-m</span> flask run
+</code></pre></div></div>
+
+<p>To test that the application is working properly, open a new browser and navigate to <code class="language-plaintext highlighter-rouge">http://localhost:5000</code>.</p>
+
+<p>Switch back to the terminal where our server is running and you should see the following requests in the server logs. The data and timestamp will be different on your machine.</p>
+
+<pre><code class="language-shel">127.0.0.1 - - [22/Sep/2020 11:07:41] "GET / HTTP/1.1" 200 -
+</code></pre>
+
+<h2 id="create-a-dockerfile-for-python">Create a Dockerfile for Python</h2>
+
+<p>Now that our application is running properly, let’s take a look at creating a Dockerfile.</p>
+
+<p>A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the <code class="language-plaintext highlighter-rouge">docker build</code> command, Docker reads these instructions and execute them consecutively and create a Docker image as a result.</p>
+
+<p>Let’s walk through creating a Dockerfile for our application. In the root of your working directory, create a file named <code class="language-plaintext highlighter-rouge">Dockerfile</code> and open this file in your text editor.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>The name of the Dockerfile is not important but the default filename for many commands is simply <code class="language-plaintext highlighter-rouge">Dockerfile</code>. Therefore, we’ll use that as our filename throughout this series.</p>
 </blockquote>
+
+<p>The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> python:3.8-slim-buster</span>
+</code></pre></div></div>
+
+<p>Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Python image that already has all the tools and packages that we need to run a Python application.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>To learn more about creating your own base images, see <a href="https://docs.docker.com/develop/develop-images/baseimages/">Creating base images</a>.</p>
+</blockquote>
+
+<p>To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WORKDIR</span><span class="s"> /app</span>
+</code></pre></div></div>
+
+<p>Usually, the very first thing you do once you’ve downloaded a project written in Python is to install <code class="language-plaintext highlighter-rouge">pip</code> packages. This ensures that your application has all its dependencies installed.</p>
+
+<p>Before we can run <code class="language-plaintext highlighter-rouge">pip3 install</code>, we need to get our <code class="language-plaintext highlighter-rouge">requirements.txt</code> file into our image. We’ll use the <code class="language-plaintext highlighter-rouge">COPY</code> command to do this. The <code class="language-plaintext highlighter-rouge">COPY</code> command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the <code class="language-plaintext highlighter-rouge">requirements.txt</code> file into our working directory <code class="language-plaintext highlighter-rouge">/app</code>.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> requirements.txt requirements.txt</span>
+</code></pre></div></div>
+
+<p>Once we have our <code class="language-plaintext highlighter-rouge">requirements.txt</code> file inside the image, we can use the <code class="language-plaintext highlighter-rouge">RUN</code> command to execute the command <code class="language-plaintext highlighter-rouge">pip3 install</code>. This works exactly the same as if we were running <code class="language-plaintext highlighter-rouge">pip3 install</code> locally on our machine, but this time the modules are installed into the image.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RUN </span>pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+</code></pre></div></div>
+
+<p>At this point, we have an image that is based on Python version 3.8 and we have installed our dependencies. The next step is to add our source code into the image. We’ll use the <code class="language-plaintext highlighter-rouge">COPY</code> command just like we did with our <code class="language-plaintext highlighter-rouge">requirements.txt</code> file above.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span><span class="s"> . .</span>
+</code></pre></div></div>
+
+<p>This <code class="language-plaintext highlighter-rouge">COPY</code> command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is executed inside a container. We do this using the <code class="language-plaintext highlighter-rouge">CMD</code> command.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> [ "python3", "app.py" ]</span>
+</code></pre></div></div>
+
+<p>Here’s the complete Dockerfile.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> python:3.8-slim-buster</span>
+
+<span class="k">WORKDIR</span><span class="s"> /app</span>
+
+<span class="k">COPY</span><span class="s"> requirements.txt requirements.txt</span>
+<span class="k">RUN </span>pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+
+<span class="k">COPY</span><span class="s"> . .</span>
+
+<span class="k">CMD</span><span class="s"> [ "python3", "app.py" ]</span>
+</code></pre></div></div>
+
+<h3 id="directory-structure">Directory structure</h3>
+
+<p>Just to recap, we created a directory in our local machine called <code class="language-plaintext highlighter-rouge">docker-python</code> and created a simple Python application using the Flask framework. We also used the <code class="language-plaintext highlighter-rouge">requirements.txt</code> file to gather our requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure would now look like:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python-docker
+|____ app.py
+|____ requirements.txt
+|____ Dockerfile
+</code></pre></div></div>
+
+<h2 id="build-an-image">Build an image</h2>
+
+<p>Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the <code class="language-plaintext highlighter-rouge">docker build</code> command. The <code class="language-plaintext highlighter-rouge">docker build</code> command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in this context.</p>
+
+<p>The build command optionally takes a <code class="language-plaintext highlighter-rouge">--tag</code> flag. The tag is used to set the name of the image and an optional tag in the format <code class="language-plaintext highlighter-rouge">name:tag</code>. We’ll leave off the optional <code class="language-plaintext highlighter-rouge">tag</code> for now to help simplify things. If you do not pass a tag, Docker uses “latest” as its default tag. You can see this in the last line of the build output.</p>
+
+<p>Let’s build our first Docker image.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> python-docker <span class="nb">.</span>
+<span class="o">[</span>+] Building 2.7s <span class="o">(</span>10/10<span class="o">)</span> FINISHED
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load build definition from Dockerfile
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring dockerfile: 203B
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 2B
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/python:3.8-slim-buster
+ <span class="o">=&gt;</span> <span class="o">[</span>1/5] FROM docker.io/library/python:3.8-slim-buster
+ <span class="o">=&gt;</span> <span class="o">[</span>internal] load build context
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 953B
+ <span class="o">=&gt;</span> CACHED <span class="o">[</span>2/5] WORKDIR /app
+ <span class="o">=&gt;</span> <span class="o">[</span>3/5] COPY requirements.txt requirements.txt
+ <span class="o">=&gt;</span> <span class="o">[</span>4/5] RUN pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+ <span class="o">=&gt;</span> <span class="o">[</span>5/5] COPY <span class="nb">.</span> <span class="nb">.</span>
+ <span class="o">=&gt;</span> exporting to image
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> exporting layers
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
+ <span class="o">=&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/python-docker
+</code></pre></div></div>
+
+<h2 id="view-local-images">View local images</h2>
+
+<p>To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use <a href="/docs.docker.jp.onthefly/desktop/dashboard/#explore-your-images">Docker Desktop</a>. As we are currently working in the terminal let’s take a look at listing images using the CLI.</p>
+
+<p>To list images, simply run the <code class="language-plaintext highlighter-rouge">docker images</code> command.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
+REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
+python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
+python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
+</code></pre></div></div>
+
+<p>You should see at least two images listed. One for the base image <code class="language-plaintext highlighter-rouge">3.8-slim-buster</code> and the other for the image we just built <code class="language-plaintext highlighter-rouge">python-docker:latest</code>.</p>
+
+<h2 id="tag-images">Tag images</h2>
+
+<p>As mentioned earlier, an image name is made up of slash-separated name components. Name components may contain lowercase letters, digits and separators. A separator is defined as a period, one or two underscores, or one or more dashes. A name component may not start or end with a separator.</p>
+
+<p>An image is made up of a manifest and a list of layers. Do not worry too much about manifests and layers at this point other than a “tag” points to a combination of these artifacts. You can have multiple tags for an image. Let’s create a second tag for the image we built and take a look at its layers.</p>
+
+<p>To create a new tag for the image we’ve built above, run the following command.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker tag python-docker:latest python-docker:v1.0.0
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">docker tag</code> command creates a new tag for an image. It does not create a new image. The tag points to the same image and is just another way to reference the image.</p>
+
+<p>Now, run the <code class="language-plaintext highlighter-rouge">docker images</code> command to see a list of our local images.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
+REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
+python-docker   latest            8cae92a8fbd6   4 minutes ago   123MB
+python-docker   v1.0.0            8cae92a8fbd6   4 minutes ago   123MB
+python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
+</code></pre></div></div>
+
+<p>You can see that we have two images that start with <code class="language-plaintext highlighter-rouge">python-docker</code>. We know they are the same image because if you take a look at the <code class="language-plaintext highlighter-rouge">IMAGE ID</code> column, you can see that the values are the same for the two images.</p>
+
+<p>Let’s remove the tag that we just created. To do this, we’ll use the <code class="language-plaintext highlighter-rouge">rmi</code> command. The <code class="language-plaintext highlighter-rouge">rmi</code> command stands for remove image.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker rmi python-docker:v1.0.0
+Untagged: python-docker:v1.0.0
+</code></pre></div></div>
+
+<p>Note that the response from Docker tells us that the image has not been removed but only “untagged”. You can check this by running the <code class="language-plaintext highlighter-rouge">docker images</code> command.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker images
+REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
+python-docker   latest            8cae92a8fbd6   6 minutes ago   123MB
+python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
+</code></pre></div></div>
+
+<p>Our image that was tagged with <code class="language-plaintext highlighter-rouge">:v1.0.0</code> has been removed, but we still have the <code class="language-plaintext highlighter-rouge">python-docker:latest</code> tag available on our machine.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>In this module, we took a look at setting up our example Python application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module we’ll take a look at how to:</p>
+
+<p><a href="/docs.docker.jp.onthefly/language/python/run-containers/" class="button outline-btn">Run your image as a container</a></p>
+
+<h2 id="feedback">Feedback</h2>
+
+<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs </a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
 
 <p><br /></p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=python">python</a>, <a href="/docs.docker.jp.onthefly/search/?q=build">build</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=dockerfile">dockerfile</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
@@ -138,7 +360,20 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#coming-soon" class="nomunge">Coming soon</a></li>
+  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="#overview" class="nomunge">Overview</a></li>
+  <li><a href="#sample-application" class="nomunge">Sample application</a></li>
+  <li><a href="#test-the-application" class="nomunge">Test the application</a></li>
+  <li><a href="#create-a-dockerfile-for-python" class="nomunge">Create a Dockerfile for Python</a>
+    <ul>
+      <li><a href="#directory-structure" class="nomunge">Directory structure</a></li>
+    </ul>
+  </li>
+  <li><a href="#build-an-image" class="nomunge">Build an image</a></li>
+  <li><a href="#view-local-images" class="nomunge">View local images</a></li>
+  <li><a href="#tag-images" class="nomunge">Tag images</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="#feedback" class="nomunge">Feedback</a></li>
 </ul>
 
 </div>
