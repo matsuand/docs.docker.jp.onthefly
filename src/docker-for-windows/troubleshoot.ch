@@ -334,10 +334,10 @@ permissions.
 
 @x
 See also,
-[Can I change permissions on shared volumes for container-specific deployment requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+[Can I change permissions on shared volumes for container-specific deployment requirements?](../desktop/faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 @y
-FAQ にある [コンテナー固有のデプロイ要件に従って共有ボリュームのパーミッションは変更できますか？](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements) も参考にしてください。
+FAQ にある [コンテナー固有のデプロイ要件に従って共有ボリュームのパーミッションは変更できますか？](../desktop/faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements) も参考にしてください。
 @z
 
 @x
@@ -375,10 +375,10 @@ Hyper-V バックエンドを利用して Windows からファイルをマウン
 @z
 
 @x
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../desktop/faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
 @y
 コンテナー内やコンテナー間ではシンボリックリンクが活用できます。
-詳しくは FAQ 内にある [Windows においてシンボリックリンクはどうやって動作するのか？](faqs.md#how-do-symlinks-work-on-windows) を参照してください。
+詳しくは FAQ 内にある [Windows においてシンボリックリンクはどうやって動作するのか？](../desktop/faqs.md#how-do-symlinks-work-on-windows) を参照してください。
 @z
 
 @x

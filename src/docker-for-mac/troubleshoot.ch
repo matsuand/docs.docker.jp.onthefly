@@ -465,22 +465,6 @@ For more about using client and server side certificates, see
 @z
 
 @x
-### Docker Desktop does not start if Mac user account and home folder are renamed after installing the app
-@y
-### Docker Desktop does not start if Mac user account and home folder are renamed after installing the app
-@z
-
-@x
-See
-[Do I need to reinstall Docker Desktop if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
-in the FAQs.
-@y
-See
-[Do I need to reinstall Docker Desktop if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
-in the FAQs.
-@z
-
-@x
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 @y
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
