@@ -122,9 +122,7 @@ WSL 2 on Windows 10 Home:
 @x
 > **Note**
 >
-> Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle
-> for Windows 10 operating system. For more information, see the
-> [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+> Docker supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 @y
 > **メモ**
 >
