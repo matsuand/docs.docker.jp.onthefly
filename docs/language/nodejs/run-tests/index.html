@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-02 14:39:01 +0900-->
+<!-- Page generated 2021-02-02 17:02:02 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node.js と Mocha フレームワークを用いたテスト実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node.js と Mocha フレームワークを用いたテスト実行" />
   <meta property="og:description" content="How to Build and Run your Tests using Node.js and Mocha frameworks" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-02T14:39:01+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-02T17:02:02+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/run-tests/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-02T14:39:01+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-02T17:02:02+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node.js と Mocha フレームワークを用いたテスト実行","description":"How to Build and Run your Tests using Node.js and Mocha frameworks","url":"https://docs.docker.com/language/nodejs/run-tests/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Node.js と Mocha フレームワークを用いたテスト実行</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><ul class="pagination">
+                        <section class="section"><h1>Node.js と Mocha フレームワークを用いたテスト実行</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/develop/">開発向けコンテナー利用</a></li>
@@ -107,17 +107,23 @@
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/deploy/">アプリのデプロイ</a></li>
 </ul>
 
-<p>Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide we take a look at running your unit tests in Docker. Let’s assume we have defined Mocha tests in a <code class="language-plaintext highlighter-rouge">./test</code> folder within our application.</p>
+<p>最近のソフトウェア開発においてテストは重要な工程です。
+テストは、さまざまな開発チームによって実に多くのことを実施します。
+ユニットテスト、結合テスト、総合テスト（end-to-end testing）です。
+本ガイドでは Docker においてユニットテストを実行していきます。
+前提として、アプリケーション内の<code class="language-plaintext highlighter-rouge">./test</code>フォルダーには Mocha テストが定義されているものとします。</p>
 
-<h3 id="running-locally-and-testing-the-application">Running locally and testing the application</h3>
+<h3 id="running-locally-and-testing-the-application">アプリケーションのローカル実行とテスト</h3>
 
-<p>Now that we have our sample application locally, let’s build our Docker image and make sure everything is running properly. Run the following commands to build and then run your Docker image in a container.</p>
+<p>ローカル環境にはサンプルアプリケーションを構築しているので、Docker イメージをビルドして正常動作することを確認します。
+以下のコマンドを入力して、Docker イメージをコンテナーとして実行します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nb">.</span>
 <span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> app <span class="nt">-p</span> 8080:80 node-docker
 </code></pre></div></div>
 
-<p>Now let’s test our application by POSTing a JSON payload and then make an HTTP GET request to make sure our JSON was saved correctly.</p>
+<p>そこでアプリケーションに対して JSON データを POST して、HTTP GET リクエストを取得します。
+これによって JSON データが正しく返ってくることを確認します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
   <span class="nt">--url</span> http://localhost:8080/services/test <span class="se">\</span>
@@ -127,23 +133,29 @@
 }'</span>
 </code></pre></div></div>
 
-<p>Now, perform a GET request to the same endpoint to make sure our JSON payload was saved and retrieved correctly. The “id” and “createDate” will be different for you.</p>
+<p>同じエンドポイントに対して GET リクエストを実行して、JSON データが正しく返されることを確認します。
+以下において「id」や「createDate」は、処理環境によって異なります。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8080/services/test
 
 <span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"e88acedb-203d-4a7d-8269-1df6c1377512"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-10-11T23:21:16.378Z"</span><span class="o">}]}</span>
 </code></pre></div></div>
 
-<h2 id="install-mocha">Install Mocha</h2>
+<h2 id="install-mocha">Mocha のインストール</h2>
 
-<p>Run the following command to install Mocha and add it to the developer dependencies:</p>
+<p>以下のコマンドを実行して Mocha をインストールします。
+そして開発用の依存パッケージを追加します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--save-dev</span> mocha
 </code></pre></div></div>
 
-<h2 id="refactor-dockerfile-to-run-tests">Refactor Dockerfile to run tests</h2>
+<h2 id="refactor-dockerfile-to-run-tests">テスト用 Dockerfile への変更</h2>
 
-<p>Okay, now that we know our application is running properly, let’s try and run our tests inside of the container. We’ll use the same docker run command we used above but this time, we’ll override the CMD that is inside of our container with npm run test. This will invoke the command that is in the package.json file under the “script” section. See below.</p>
+<p>さて、アプリケーションは正しく動作することがわかりました。
+そこでコンテナー内部においてテストを実行してみます。
+先ほどと同じ docker run コマンドを用いますが、ただし今回の場合、コンテナー内部にある CMD をオーバーライドして npm run test を実行するようにします。
+このコマンドは、package.json ファイルの「script」セクションのもとにあるコマンドを起動します。
+以下を見てください。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
 ...
@@ -155,7 +167,7 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Below is the Docker command to start the container and run tests:</p>
+<p>そして以下の Docker コマンドによって、コンテナーを起動してテストを実行します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> app <span class="nt">-p</span> 8080:80 node-docker npm run <span class="nb">test</span>
 <span class="o">&gt;</span> node-docker@0.1.0 <span class="nb">test</span> /code
@@ -164,7 +176,9 @@
 sh: 1: mocha: not found
 </code></pre></div></div>
 
-<p>As you can see, we received an error. This error is telling us that the Mocha executable could not be found. Let’s take a look at the Dockerfile.</p>
+<p>上を見てわかるようにエラーが発生しました。
+このエラーは実行モジュール mocha が見つからなったということです。
+Dockerfile を確認します。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:14.15.4</span>
 
@@ -179,13 +193,25 @@ sh: 1: mocha: not found
 <span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
 </code></pre></div></div>
 
-<p>The error is occurring because we are passing the <code class="language-plaintext highlighter-rouge">--production</code> flag to the npm ci command when it installs our dependencies. This tells npm to not install packages that are located under the “devDependencies” section in the package.json file. Therefore, Mocha will not be installed inside the image and will not be found when we try to run it.</p>
+<p>エラーが発生した理由は、npm ci コマンドを使って依存パッケージをインストールする際に<code class="language-plaintext highlighter-rouge">--production</code>フラグを指定していたからです。
+こうしてしまうと npm に対して、package.json ファイル内の「devDependencies」セクションにあるパッケージはインストールしない指示となってしまいます。
+したがってイメージ内に Mocha がインストールされなかったことから、実行しても見つからないことになったわけです。</p>
 
-<p>Since we want to follow best practices and not include anything inside the container that we do not need to run our application we can’t just remove the <code class="language-plaintext highlighter-rouge">--production</code> flag. We have a couple of options to fix this. One option is to create a second Dockerfile that would only be used to run tests. This has a couple of problems. The primary being keeping two Dockerfiles up-to-date. The second option is to use multi-stage builds. We can create a stage for production and one for testing. This is our preferred solution.</p>
+<p>ベストプラクティスを守って、アプリケーションの実行に必要のないものはコンテナー内にいっさい含めたくありません。
+したがって<code class="language-plaintext highlighter-rouge">--production</code>フラグを取り除くということはできません。
+これに対処する方法はいくつかあります。
+その 1 つは、テストを実行するために利用する 2 つめの Dockerfile を生成することです。
+ただしこれには問題があります。
+2 つの Dockerfile を常に更新していかなければなりません。
+そこで 2 つめの選択肢となるのがマルチステージビルドです。
+ビルドステージを 1 つは本番用、1 つはテスト用として生成します。
+こちらの方が適切な解決策です。</p>
 
-<h3 id="multi-stage-dockerfile-for-testing">Multi-stage Dockerfile for testing</h3>
+<h3 id="multi-stage-dockerfile-for-testing">テスト用 Dockerfile のマルチステージ化</h3>
 
-<p>Below is a multi-stage Dockerfile tha we will use to build our production image and our test image. Add the highlighted lines to your Dockerfile.</p>
+<p>以下に示すのがマルチステージビルド化を行っている Dockerfile です。
+これにより本番用イメージとテスト用イメージのビルドを行います。
+以下でハイライト表示されている行を Dockerfile に追加してください。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:14.15.4 as base</span>
 
@@ -205,9 +231,14 @@ sh: 1: mocha: not found
 <span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
 </code></pre></div></div>
 
-<p>We first add a label to the <code class="language-plaintext highlighter-rouge">FROM node:14.15.4</code> statement. This allows us to refer to this build stage in other build stages. Next we add a new build stage labeled test. We will use this stage for running our tests.</p>
+<p>ここではまずはじめに<code class="language-plaintext highlighter-rouge">FROM node:14.15.4</code>行にラベルをつけます。
+これを行うと、このビルドステージを他のビルドステージにおいて参照することができます。
+次に新たなビルドステージに対して test というラベルをつけます。
+このステージはテスト実行用に利用します。</p>
 
-<p>Now let’s rebuild our image and run our tests. We will run the same docker build command as above but this time we will add the <code class="language-plaintext highlighter-rouge">--target test</code> flag so that we specifically run the test build stage.</p>
+<p>そこでイメージを再ビルドしてテストを実行してみます。
+ここで実行する docker build コマンドは上と同様ですが、今回は<code class="language-plaintext highlighter-rouge">--target test</code>というフラグをつけます。
+これによってテストビルドステージを指定してビルドします。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
 <span class="o">[</span>+] Building 0.7s <span class="o">(</span>11/11<span class="o">)</span> FINISHED
@@ -216,7 +247,7 @@ sh: 1: mocha: not found
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/node-docker
 </code></pre></div></div>
 
-<p>Now that our test image is built, we can run it in a container and see if our tests pass.</p>
+<p>テストイメージがビルドできたので、これをコンテナー内において実行しテストが実施できるかどうかを見てみます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> app <span class="nt">-p</span> 8080:80 node-docker
 <span class="o">&gt;</span> node-docker@0.1.0 <span class="nb">test</span> /code
@@ -233,11 +264,16 @@ sh: 1: mocha: not found
   4 passing <span class="o">(</span>11ms<span class="o">)</span>
 </code></pre></div></div>
 
-<p>I’ve truncated the build output but you can see that the Mocha test runner completed and all our tests passed.</p>
+<p>ビルド処理の結果は上では省略しましたが、Mocha test runner の実行は完了し、テストが正常終了していることがわかります。</p>
 
-<p>This is great but at the moment we have to run two docker commands to build and run our tests. We can improve this slightly by using a RUN statement instead of the CMD statement in the test stage. The CMD statement is not executed during the building of the image but is executed when you run the image in a container. While with the RUN statement, our tests will be run during the building of the image and stop the build when they fail.</p>
+<p>うまくできましたが、これでもイメージのビルドとテスト実行に対して 2 つの docker コマンドを実行しなければなりません。
+これを少しだけ改善します。
+テストステージにおいて CMD 命令ではなく RUN 命令を使うようにします。
+CMD 命令はイメージビルド時には実行されません。
+これが実行されるのはコンテナー内においてイメージが実行されたときです。
+一方 RUN 命令の場合は、イメージビルドの最中にテストが実行され、テストが失敗したときにはビルドが停止します。</p>
 
-<p>Update your Dockerfile with the highlighted line below.</p>
+<p>以下の Dockerfile においてハイライト表示されている行を修正してください。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:14.15.4 as base</span>
 
@@ -257,7 +293,7 @@ sh: 1: mocha: not found
 <span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
 </code></pre></div></div>
 
-<p>Now to run our tests, we just need to run the docker build command as above.</p>
+<p>テストを実行するには、先ほどと同様に docker build コマンドを実行する必要があります。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t node-docker --target test .
 [+] Building 1.2s (13/13) FINISHED
@@ -273,16 +309,18 @@ sh: 1: mocha: not found
  =&gt; =&gt; writing image sha256:bcedeeb7d9dd13d...18ca0a05034ed4dd4
 </code></pre></div></div>
 
-<p>I’ve truncated the output again for simplicity but you can see that our tests are run and passed. Let’s break one of the tests and observe the output when our tests fail.</p>
+<p>ここでもわかりやすくなるように、ビルド結果の出力は省略しましたが、テストの実行と正常終了が見てとれます。
+そこでテストが失敗したときにはどうなるかを見るために、ブレークポイントを設定して出力結果を確認します。</p>
 
-<p>Open the util/math.js file and change line 12 to the following.</p>
+<p>util/math.js ファイルを開いて 12 行めを以下のように変更します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>11 <span class="k">function </span>subtract<span class="o">(</span> num1, num2 <span class="o">)</span> <span class="o">{</span>
 12   <span class="k">return </span>num2 - num1
 13 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>Now, run the same docker build command from above and observe that the build fails and the failing testing information is printed to the console.</p>
+<p>そして先ほどと同じ docker build コマンドを実行します。
+ビルド処理は失敗して、失敗したテストに関する情報がコンソールに出力されます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
  <span class="o">&gt;</span> <span class="o">[</span><span class="nb">test </span>3/3] RUN npm run <span class="nb">test</span>:
@@ -323,17 +361,23 @@ sh: 1: mocha: not found
 executor failed running <span class="o">[</span>/bin/sh <span class="nt">-c</span> npm run <span class="nb">test</span><span class="o">]</span>: <span class="nb">exit </span>code: 1
 </code></pre></div></div>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
-<p>In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.</p>
+<p>本節では汎用的な開発イメージを生成しました。
+このイメージは、ふだんのコマンドラインツールと何ら変わらずに実行できました。
+また Compose ファイルを生成してソースコードを実行コンテナー内にマッピングし、デバッグ用のポートを公開しました。</p>
 
-<p>In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:</p>
+<p>次節では
+GitHub アクションを使って CI/CD パイプラインを設定する方法を見ていきます。
+以下を参照してください。</p>
 
 <p><a href="/docs.docker.jp.onthefly/language/nodejs/configure-ci-cd/" class="button outline-btn">CI/CD の設定</a></p>
 
-<h2 id="feedback">Feedback</h2>
+<h2 id="feedback">フィードバック</h2>
 
-<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+<p>本トピック改善のためにフィードバックをお寄せください。
+お気づきの点があれば <a href="https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> の GitHub リポジトリに isshue をあげてください。
+あるいは <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">PR の生成</a> により変更の提案を行ってください。</p>
 
 <p><br /></p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Node.js">Node.js</a>, <a href="/docs.docker.jp.onthefly/search/?q=build">build</a>, <a href="/docs.docker.jp.onthefly/search/?q=Mocha">Mocha</a>, <a href="/docs.docker.jp.onthefly/search/?q=test">test</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
@@ -369,15 +413,15 @@ executor failed running <span class="o">[</span>/bin/sh <span class="nt">-c</spa
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#running-locally-and-testing-the-application" class="nomunge">Running locally and testing the application</a></li>
-  <li><a href="#install-mocha" class="nomunge">Install Mocha</a></li>
-  <li><a href="#refactor-dockerfile-to-run-tests" class="nomunge">Refactor Dockerfile to run tests</a>
+  <li><a href="#running-locally-and-testing-the-application" class="nomunge">アプリケーションのローカル実行とテスト</a></li>
+  <li><a href="#install-mocha" class="nomunge">Mocha のインストール</a></li>
+  <li><a href="#refactor-dockerfile-to-run-tests" class="nomunge">テスト用 Dockerfile への変更</a>
     <ul>
-      <li><a href="#multi-stage-dockerfile-for-testing" class="nomunge">Multi-stage Dockerfile for testing</a></li>
+      <li><a href="#multi-stage-dockerfile-for-testing" class="nomunge">テスト用 Dockerfile のマルチステージ化</a></li>
     </ul>
   </li>
-  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
-  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+  <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
+  <li><a href="#feedback" class="nomunge">フィードバック</a></li>
 </ul>
 
 </div>

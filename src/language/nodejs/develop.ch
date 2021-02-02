@@ -411,7 +411,7 @@ npm に対してアプリケーションをどのように起動するかを指�
 @x
 Open the `package.json` file and add the following line to the scripts section:
 @y
-`package.json`ファイルを開いて、スクリプトの記述セクションに以下の行を追加します。
+`package.json`ファイルを開いて、scripts セクションに以下の行を追加します。
 @z
 
 @x
