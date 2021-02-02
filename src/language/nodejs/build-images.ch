@@ -33,9 +33,9 @@ redirect_from:
 @z
 
 @x
-Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
+Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
 @y
-「はじめよう」の [1 部]({{ site.baseurl }}/get-started/) に示しているガイドや設定をひととおり読んで、Docker の考え方について理解してください。
+「はじめよう」の [1 部](../../get-started/index.md) に示しているガイドや設定をひととおり読んで、Docker の考え方について理解してください。
 @z
 
 @x
@@ -304,11 +304,11 @@ In the same way, when we use the `FROM` command, we tell Docker to include in ou
 @x
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> If you want to learn more about creating your own base images, see [Creating base images](../../develop/develop-images/baseimages.md).
 @y
 > **メモ**
 >
-> 独自のベースイメージ作りについて学びたい場合は、[ベースイメージの生成]({{ site.basrurl }}/develop/develop-images/baseimages/) を参照してください。
+> 独自のベースイメージ作りについて学びたい場合は、[ベースイメージの生成](../../develop/develop-images/baseimages.md) を参照してください。
 @z
 
 @x
@@ -739,7 +739,7 @@ In this module, we took a look at setting up our example Node application that w
 @z
 
 @x
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @y
 本トピック改善のためにフィードバックをお寄せください。
 お気づきの点があれば [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} の GitHub リポジトリに isshue をあげてください。

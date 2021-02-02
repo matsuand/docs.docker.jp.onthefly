@@ -28,9 +28,9 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 @z
 
 @x
-Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
+Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
 @y
-Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
+Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
 @z
 
 @x
@@ -152,11 +152,11 @@ Switch back to the terminal where our server is running and you should see the f
 @z
 
 @x
-```shel
+```shell
 127.0.0.1 - - [22/Sep/2020 11:07:41] "GET / HTTP/1.1" 200 -
 ```
 @y
-```shel
+```shell
 127.0.0.1 - - [22/Sep/2020 11:07:41] "GET / HTTP/1.1" 200 -
 ```
 @z
@@ -632,9 +632,9 @@ In this module, we took a look at setting up our example Python application that
 @z
 
 @x
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @y
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @z
 
 @x

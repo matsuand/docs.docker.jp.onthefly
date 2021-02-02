@@ -18,6 +18,46 @@ skip_read_time: true
 @z
 
 @x
+## 19.03.15
+2021-02-01
+@y
+## 19.03.15
+2021-02-01
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+* [CVE-2021-21285](https://github.com/moby/moby/security/advisories/GHSA-6fj5-m822-rqx8) Prevent an invalid image from crashing docker daemon
+* [CVE-2021-21284](https://github.com/moby/moby/security/advisories/GHSA-7452-xqpj-6rpc) Lock down file permissions to prevent remapped root from accessing docker state
+* Ensure AppArmor and SELinux profiles are applied when building with BuildKit
+@y
+* [CVE-2021-21285](https://github.com/moby/moby/security/advisories/GHSA-6fj5-m822-rqx8)
+  Docker デーモンがクラッシュしても不正なイメージとならないようにしました。
+* [CVE-2021-21284](https://github.com/moby/moby/security/advisories/GHSA-7452-xqpj-6rpc)
+  ファイルパーミッションを落とすことで、再マップされたルートが Docker 状態にアクセスできないようにしました。
+* BuildKit 利用によるビルド時に AppArmor や SELinux プロファイルが必ず適用されるようにしました。
+@z
+
+@x
+### Client
+@y
+{: #client }
+### クライアント
+@z
+
+@x
+* Check contexts before importing them to reduce risk of extracted files escaping context store
+@y
+* インポート前にコンテキストをチェックするようにし、抽出（解凍）されたファイルがコンテキスト外に保存されるリスクを軽減しました。
+@z
+
+@x
 ## 19.03.14
 2020-12-01
 @y
@@ -28,7 +68,8 @@ skip_read_time: true
 @x
 ### Security
 @y
-### Security
+{: #security }
+### セキュリティ
 @z
 
 @x
@@ -439,7 +480,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Client
 @y
-### Client
+{: #client }
+### クライアント
 @z
 
 @x
@@ -523,7 +565,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Security
 @y
-### Security
+{: #security }
+### セキュリティ
 @z
 
 @x
@@ -621,7 +664,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Client
 @y
-### Client
+{: #client }
+### クライアント
 @z
 
 @x
@@ -815,7 +859,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Security
 @y
-### Security
+{: #security }
+### セキュリティ
 @z
 
 @x
@@ -857,7 +902,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Client
 @y
-### Client
+{: #client }
+### クライアント
 @z
 
 @x
@@ -1053,7 +1099,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Client
 @y
-### Client
+{: #client }
+### クライアント
 @z
 
 @x
@@ -1199,7 +1246,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Security
 @y
-### Security
+{: #security }
+### セキュリティ
 @z
 
 @x
@@ -1321,7 +1369,8 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 @x
 ### Client
 @y
-### Client
+{: #client }
+### クライアント
 @z
 
 @x
@@ -1447,7 +1496,8 @@ in compose-files service configs. [docker/cli#1617](https://github.com/docker/cl
 @x
 ### Security
 @y
-### Security
+{: #security }
+### セキュリティ
 @z
 
 @x

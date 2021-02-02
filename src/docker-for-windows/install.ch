@@ -60,14 +60,14 @@ Docker Desktop をダウンロードすると、[Docker Software End User Licens
 @z
 
 @x
-  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 16299 or later).
+  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or later).
   
     For Windows 10 Home, see [Install Docker Desktop on Windows Home](install-windows-home.md).
   - Hyper-V and Containers Windows features must be enabled.
   - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
 @y
-  - Windows 10 64 ビット: Pro、Enterprise、Education (Build 16299 またはそれ以降)
+  - Windows 10 64 ビット: Pro、Enterprise、Education (Build 17134 またはそれ以降)
   
     Windows 10 Home については [Windows Home への Docker Desktop のインストール](install-windows-home.md) を参照してください。
   - Hyper-V とコンテナー機能を有効にしていることが必要です。

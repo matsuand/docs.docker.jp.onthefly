@@ -40,9 +40,9 @@ The Docker Azure Integration enables developers to use native Docker commands to
 @z
 
 @x
-For detailed instructions, see [Deploying Docker containers on Azure](/cloud/aci-integration/).
+For detailed instructions, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md).
 @y
-For detailed instructions, see [Deploying Docker containers on Azure](/cloud/aci-integration/).
+For detailed instructions, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md).
 @z
 
 @x
@@ -64,9 +64,9 @@ The integration between Docker and Amazon ECS allows developers to use the Docke
 @z
 
 @x
-For detailed instructions, see [Deploying Docker containers on ECS](/cloud/ecs-integration.md).
+For detailed instructions, see [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
 @y
-For detailed instructions, see [Deploying Docker containers on ECS](/cloud/ecs-integration.md).
+For detailed instructions, see [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
 @z
 
 @x
@@ -76,9 +76,9 @@ For detailed instructions, see [Deploying Docker containers on ECS](/cloud/ecs-i
 @z
 
 @x
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @y
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @z
 
 @x

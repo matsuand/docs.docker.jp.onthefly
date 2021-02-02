@@ -69,6 +69,49 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.3
+2021-02-01
+@y
+## 20.10.3
+2021-02-01
+@z
+
+@x
+### Security
+@y
+{: #security }
+### セキュリティ
+@z
+
+@x
+* [CVE-2021-21285](https://github.com/moby/moby/security/advisories/GHSA-6fj5-m822-rqx8) Prevent an invalid image from crashing docker daemon
+* [CVE-2021-21284](https://github.com/moby/moby/security/advisories/GHSA-7452-xqpj-6rpc) Lock down file permissions to prevent remapped root from accessing docker state
+* Ensure AppArmor and SELinux profiles are applied when building with BuildKit
+@y
+* [CVE-2021-21285](https://github.com/moby/moby/security/advisories/GHSA-6fj5-m822-rqx8)
+  Docker デーモンがクラッシュしても不正なイメージとならないようにしました。
+* [CVE-2021-21284](https://github.com/moby/moby/security/advisories/GHSA-7452-xqpj-6rpc)
+  ファイルパーミッションを落とすことで、再マップされたルートが Docker 状態にアクセスできないようにしました。
+* BuildKit 利用によるビルド時に AppArmor や SELinux プロファイルが必ず適用されるようにしました。
+@z
+
+@x
+### Client
+@y
+{: #client }
+### クライアント
+@z
+
+@x
+* Check contexts before importing them to reduce risk of extracted files escaping context store
+* Windows: prevent executing certain binaries from current directory [docker/cli#2950](https://github.com/docker/cli/pull/2950)
+@y
+* インポート前にコンテキストをチェックするようにし、抽出（解凍）されたファイルがコンテキスト外に保存されるリスクを軽減しました。
+* Windows: カレントディレクトリからバイナリが実行されないようにしました。
+  [docker/cli#2950](https://github.com/docker/cli/pull/2950)
+@z
+
+@x
 ## 20.10.2
 2021-01-04
 @y

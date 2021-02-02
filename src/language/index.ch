@@ -42,15 +42,15 @@ For more information, refer to the following topics:
 @z
 
 @x
-* [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/)
-* [Docker development best practices](/develop/dev-best-practices/)
-* [Build images with BuildKit](/develop-images/build_enhancements/)
-* [Manage images](/develop/develop-images/image_management/)
+* [Best practices for writing Dockerfiles](../../develop/develop-images/dockerfile_best-practices.md)
+* [Docker development best practices](../../develop/dev-best-practices.md)
+* [Build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+* [Manage images](../../develop/develop-images/image_management.md)
 @y
-* [Dockerfile 記述のベストプラクティス]({{ site.baseurl }}/develop/develop-images/dockerfile_best-practices/)
-* [Docker 開発のベストプラクティス]({{ site.baseurl }}/develop/dev-best-practices/)
-* [BuildKit を使ったイメージビルド]({{ site.baseurl }}/develop-images/build_enhancements/)
-* [イメージの管理]({{ site.baseurl }}/develop/develop-images/image_management/)
+* [Dockerfile 記述のベストプラクティス](../../develop/develop-images/dockerfile_best-practices.md)
+* [Docker 開発のベストプラクティス](../../develop/dev-best-practices.md)
+* [BuildKit を使ったイメージビルド](../../develop/develop-images/build_enhancements.md)
+* [イメージの管理](../../develop/develop-images/image_management.md)
 @z
 
 @x
