@@ -606,7 +606,6 @@ An image is made up of a manifest and a list of layers. In simple terms, a “ta
 To create a new tag for the image we built above, run the following command.
 @y
 イメージに対して新たなタグを生成するには、以下のコマンドを実行します。
-To create a new tag for the image we built above, run the following command.
 @z
 
 @x
@@ -622,7 +621,7 @@ $ docker tag node-docker:latest node-docker:v1.0.0
 @x
 The Docker tag command creates a new tag for an image. It does not create a new image. The tag points to the same image and is just another way to reference the image.
 @y
-Docker tag コマンドはイメージに対するタグを生成します。
+docker tag コマンドはイメージに対するタグを生成します。
 新たなイメージが作り出されるわけではありません。
 このタグもまた同じイメージを指していて、イメージを参照するもう 1 つの手段が出来上がったことになります。
 @z
