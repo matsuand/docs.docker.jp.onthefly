@@ -1,4 +1,4 @@
-<!-- Page generated 2021-01-07 13:16:43 +0900-->
+<!-- Page generated 2021-02-06 14:18:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>マルチコンテナーアプリケーション | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="マルチコンテナーアプリケーション" />
   <meta property="og:description" content="Using more than one container in our application" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-01-07T13:16:43+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-06T14:18:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/get-started/07_multi_container/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-01-07T13:16:43+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-06T14:18:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"マルチコンテナーアプリケーション","description":"Using more than one container in our application","url":"https://docs.docker.com/get-started/07_multi_container/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -131,11 +131,13 @@
 そこで以下の単純なルールを覚えてください。</p>
 
 <blockquote>
+  <p><strong>メモ</strong></p>
+
   <p>2 つのコンテナーが同一ネットワーク上にあれば互いにやりとりができます。
 同一ネットワーク上にないときはできません。</p>
 </blockquote>
 
-<h2 id="starting-mysql">MySQL の起動</h2>
+<h2 id="start-mysql">MySQL の起動</h2>
 
 <p>コンテナーをネットワークに加えるには 2 つの方法があります。
 1) そのコンテナーの起動時にネットワークを割り当てる、あるいは 2) 既存のコンテナーを接続する、です。
@@ -175,7 +177,7 @@
  これについてはすぐに説明します。</p>
 
     <blockquote>
-      <p><strong>上級者向けのヒント</strong></p>
+      <p><strong>ヒント</strong></p>
 
       <p>上ではボリューム名として<code class="language-plaintext highlighter-rouge">todo-mysql-data</code>を指定し<code class="language-plaintext highlighter-rouge">/var/lib/mysql</code>にマウントしました。
 このディレクトリは MySQL がデータを保存する場所です。
@@ -214,7 +216,7 @@ Docker が名前つきボリュームが指定されたことを認識して、�
   </li>
 </ol>
 
-<h2 id="connecting-to-mysql">MySQL への接続</h2>
+<h2 id="connect-to-mysql">MySQL への接続</h2>
 
 <p>MySQL が起動し実行されていることが確認できたので、さっそく使ってみます。
 ただし疑問があります ... どうやって？
@@ -269,7 +271,7 @@ Docker が名前つきボリュームが指定されたことを認識して、�
   </li>
 </ol>
 
-<h2 id="running-our-app-with-mysql">MySQL を使ったアプリ実行</h2>
+<h2 id="run-your-app-with-mysql">MySQL を使ったアプリ実行</h2>
 
 <p>Todo アプリは環境変数をいくつか設定することによって MySQL への接続をサポートしています。
 それは以下のようなものです。</p>
@@ -281,18 +283,16 @@ Docker が名前つきボリュームが指定されたことを認識して、�
   <li><code class="language-plaintext highlighter-rouge">MYSQL_DB</code> - 接続後の利用データベース。</li>
 </ul>
 
-<blockquote class="warning">
-  <p>環境変数を利用した接続設定</p>
+<blockquote>
+  <p><strong>環境変数を利用した接続設定</strong></p>
 
   <p>環境変数を使って接続設定を行うことは、開発環境においては問題ありません。
 しかし本番環境において動作させるアプリケーションに、そうした設定を行うことは <strong>極めて不適切</strong> です。
-Docker の前セキュリティリーダー Diogo Monica 氏が <a href="https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/">すばらしいブログ投稿</a> においてその理由を説明してくれています。</p>
-
-  <p>コンテナーオーケストレーションのメカニズムにおいては、よりセキュアなものとして Secret 機能がサポートされています。
+Docker の前セキュリティリーダー Diogo Monica 氏が <a href="https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/" target="_blank" rel="noopener" class="_">すばらしいブログ投稿</a> においてその理由を説明してくれています。
+コンテナーオーケストレーションのメカニズムにおいては、よりセキュアなものとして Secret 機能がサポートされています。
 たいていの場合、この Secret というものは実行コンテナーに対してファイルの形でマウントされます。
-多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に<code class="language-plaintext highlighter-rouge">_FILE</code>をつけて、変数を含んだファイルを指し示しているものがあります。</p>
-
-  <p>たとえば<code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD_FILE</code>という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
+多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に<code class="language-plaintext highlighter-rouge">_FILE</code>をつけて、変数を含んだファイルを指し示しているものがあります。
+たとえば<code class="language-plaintext highlighter-rouge">MYSQL_PASSWORD_FILE</code>という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
 Docker はそういった変数の受け渡しをサポートする機能はありません。
 この変数を求めたりファイル内容を得たりするのは、アプリが行わなければならないことです。</p>
 </blockquote>
@@ -418,9 +418,9 @@ Docker Compose を利用すると、もっと簡単な方法でアプリケー�
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
   <li><a href="#container-networking" class="nomunge">コンテナーのネットワーク</a></li>
-  <li><a href="#starting-mysql" class="nomunge">MySQL の起動</a></li>
-  <li><a href="#connecting-to-mysql" class="nomunge">MySQL への接続</a></li>
-  <li><a href="#running-our-app-with-mysql" class="nomunge">MySQL を使ったアプリ実行</a></li>
+  <li><a href="#start-mysql" class="nomunge">MySQL の起動</a></li>
+  <li><a href="#connect-to-mysql" class="nomunge">MySQL への接続</a></li>
+  <li><a href="#run-your-app-with-mysql" class="nomunge">MySQL を使ったアプリ実行</a></li>
   <li><a href="#recap" class="nomunge">まとめ</a></li>
 </ul>
 

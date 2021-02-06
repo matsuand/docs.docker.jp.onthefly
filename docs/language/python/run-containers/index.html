@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-04 16:22:04 +0900-->
+<!-- Page generated 2021-02-06 14:18:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Run your image as a container | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Run your image as a container" />
   <meta property="og:description" content="Learn how to run the image as a container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-04T16:22:04+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-06T14:18:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/run-containers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-04T16:22:04+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-06T14:18:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Run your image as a container","description":"Learn how to run the image as a container.","url":"https://docs.docker.com/language/python/run-containers/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Run your image as a container</h1><p><em class="reading-time">読む時間の目安: 10 分</em></p><ul class="pagination">
+                        <section class="section"><h1>Run your image as a container</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/python/build-images/">イメージビルド</a></li>
   <li class="active"><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/develop/">開発向けコンテナー利用</a></li>
@@ -125,12 +125,7 @@
 
 <p>Let’s make a <code class="language-plaintext highlighter-rouge">GET</code> request to the server using the <code class="language-plaintext highlighter-rouge">curl</code> command.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
-  <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'{
-	"msg": "testing"
-}'</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
 curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to localhost port 8000: Connection refused
 </code></pre></div></div>
 
@@ -140,25 +135,20 @@ curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to loc
 
 <p>To publish a port for our container, we’ll use the <code class="language-plaintext highlighter-rouge">--publish flag</code> (<code class="language-plaintext highlighter-rouge">-p</code> for short) on the <code class="language-plaintext highlighter-rouge">docker run</code> command. The format of the <code class="language-plaintext highlighter-rouge">--publish</code> command is <code class="language-plaintext highlighter-rouge">[host port]:[container port]</code>. So, if we wanted to expose port 8000 inside the container to port 3000 outside the container, we would pass <code class="language-plaintext highlighter-rouge">3000:8000</code> to the <code class="language-plaintext highlighter-rouge">--publish</code> flag.</p>
 
-<p>Start the container and expose port 8000 to port 8000 on the host:</p>
+<p>We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 8000 to work we can map the host’s port 8000 to the container’s port 5000:</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 8000:8000 python-docker
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 8000:5000 python-docker
 </code></pre></div></div>
 
 <p>Now, let’s rerun the curl command from above:</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
-  <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'{
-	"msg": "testing"
-}'</span>
-<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"dc0e2c2b-793d-433c-8645-b3a553ea26de"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-09-01T17:36:09.897Z"</span><span class="o">}]}</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
+Hello, Docker!
 </code></pre></div></div>
 
 <p>Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the POST request logged to the console.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2020-09-01T17:36:09:8770  INFO: POST /test
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>31/Jan/2021 23:39:31] <span class="s2">"GET / HTTP/1.1"</span> 200 -
 </code></pre></div></div>
 
 <p>Press ctrl-c to stop the container.</p>
@@ -167,7 +157,7 @@ curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to loc
 
 <p>This is great so far, but our sample application is a web server and we don’t have to be connected to the container. Docker can run your container in detached mode or in the background. To do this, we can use the <code class="language-plaintext highlighter-rouge">--detach</code> or <code class="language-plaintext highlighter-rouge">-d</code> for short. Docker starts your container the same as before but this time will “detach” from the container and return you to the terminal prompt.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:8000 python-docker
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 </code></pre></div></div>
 
@@ -175,13 +165,8 @@ ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 
 <p>Again, let’s make sure that our container is running properly. Run the same curl command from above.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
-  <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'{
-	"msg": "testing"
-}'</span>
-<span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"dc0e2c2b-793d-433c-8645-b3a553ea26de"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-09-01T17:36:09.897Z"</span><span class="o">}]}</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
+Hello, Docker!
 </code></pre></div></div>
 
 <h2 id="list-containers">List containers</h2>
@@ -190,7 +175,7 @@ ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   6 minutes ago       Up 6 minutes        0.0.0.0:8000-&gt;8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   6 minutes ago       Up 6 minutes        0.0.0.0:8000-&gt;5000/tcp   wonderful_kalam
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">docker ps</code> command provides a bunch of information about our running containers. We can see the container ID, The image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.</p>
@@ -246,7 +231,7 @@ wonderful_kalam
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   31 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
 </code></pre></div></div>
@@ -265,11 +250,11 @@ goofy_khayyam
 
 <p>To name a container, we just need to pass the <code class="language-plaintext highlighter-rouge">--name</code> flag to the <code class="language-plaintext highlighter-rouge">docker run</code> command.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:8000 <span class="nt">--name</span> rest-server python-docker
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:5000 <span class="nt">--name</span> rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 <span class="nv">$ </span>docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   3 seconds ago       Up 3 seconds        0.0.0.0:8000-&gt;8000/tcp   rest-server
+1aa5d46418a6        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   3 seconds ago       Up 3 seconds        0.0.0.0:8000-&gt;5000/tcp   rest-server
 </code></pre></div></div>
 
 <p>That’s better! We can now easily identify our container based on the name.</p>

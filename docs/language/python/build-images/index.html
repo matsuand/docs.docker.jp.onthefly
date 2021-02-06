@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-04 16:22:04 +0900-->
+<!-- Page generated 2021-02-06 14:18:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Python イメージのビルド | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Python イメージのビルド" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-04T16:22:04+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-06T14:18:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-04T16:22:04+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-06T14:18:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Python イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/python/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -236,9 +236,10 @@ Docker に対してこれを指示しておけば、この後に続くコマン�
 
 <p>この<code class="language-plaintext highlighter-rouge">COPY</code>コマンドは、カレントディレクトリにあるファイルすべてをイメージ内にコピーします。
 最後に行うのは、このイメージがコンテナー内において実行される際に実行させたいコマンドを指定します。
-これを行うには<code class="language-plaintext highlighter-rouge">CMD</code>コマンドを用います。</p>
+これを行うには<code class="language-plaintext highlighter-rouge">CMD</code>コマンドを用います。
+なおここでアプリケーションは外部から（つまりコンテナーの外から）アクセスできるようにすることが必要であるため、<code class="language-plaintext highlighter-rouge">--host=0.0.0.0</code>を指定します。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> [ "python3", "app.py" ]</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]</span>
 </code></pre></div></div>
 
 <p>以下が完全な Dockerfile です。</p>
@@ -252,7 +253,7 @@ Docker に対してこれを指示しておけば、この後に続くコマン�
 
 <span class="k">COPY</span><span class="s"> . .</span>
 
-<span class="k">CMD</span><span class="s"> [ "python3", "app.py" ]</span>
+<span class="k">CMD</span><span class="s"> [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]</span>
 </code></pre></div></div>
 
 <h3 id="directory-structure">ディレクトリ構造</h3>
@@ -290,13 +291,14 @@ Docker のビルド処理においては、コンテキスト内にあるファ�
  <span class="o">=&gt;</span> <span class="o">[</span>internal] load .dockerignore
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 2B
  <span class="o">=&gt;</span> <span class="o">[</span>internal] load metadata <span class="k">for </span>docker.io/library/python:3.8-slim-buster
- <span class="o">=&gt;</span> <span class="o">[</span>1/5] FROM docker.io/library/python:3.8-slim-buster
+ <span class="o">=&gt;</span> <span class="o">[</span>1/6] FROM docker.io/library/python:3.8-slim-buster
  <span class="o">=&gt;</span> <span class="o">[</span>internal] load build context
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> transferring context: 953B
- <span class="o">=&gt;</span> CACHED <span class="o">[</span>2/5] WORKDIR /app
- <span class="o">=&gt;</span> <span class="o">[</span>3/5] COPY requirements.txt requirements.txt
- <span class="o">=&gt;</span> <span class="o">[</span>4/5] RUN pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
- <span class="o">=&gt;</span> <span class="o">[</span>5/5] COPY <span class="nb">.</span> <span class="nb">.</span>
+ <span class="o">=&gt;</span> CACHED <span class="o">[</span>2/6] WORKDIR /app
+ <span class="o">=&gt;</span> <span class="o">[</span>3/6] COPY requirements.txt requirements.txt
+ <span class="o">=&gt;</span> <span class="o">[</span>4/6] RUN pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+ <span class="o">=&gt;</span> <span class="o">[</span>5/6] COPY <span class="nb">.</span> <span class="nb">.</span>
+ <span class="o">=&gt;</span> <span class="o">[</span>6/6] CMD <span class="o">[</span> <span class="s2">"python3"</span>, <span class="s2">"-m"</span>, <span class="s2">"flask"</span>, <span class="s2">"run"</span>, <span class="s2">"--host=0.0.0.0"</span><span class="o">]</span>
  <span class="o">=&gt;</span> exporting to image
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> exporting layers
  <span class="o">=&gt;</span> <span class="o">=&gt;</span> writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
