@@ -132,9 +132,9 @@ This page contains step-by-step instructions on how to get started with Docker.
 @z
 
 @x
-If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](/language).
+If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).
 @y
-好みのプログラミング言語を使ってアプリケーションをコンテナー化する方法をお探しであれば、[各種言語別ガイド]({{ site.baseurl }}/language) を参照してください。
+好みのプログラミング言語を使ってアプリケーションをコンテナー化する方法をお探しであれば、[各種言語別ガイド](../language/index.md) を参照してください。
 @z
 
 @x
@@ -155,6 +155,45 @@ In this tutorial, you'll learn about creating and deploying Docker apps, includi
 本チュートリアルでは Docker アプリの生成とデプロイについて学びます。
 その中ではデータベースを用いたマルチコンテナーや Docker Compose の利用も行います。
 またコンテナー化したアプリの Azure へのデプロイも行います。
+@z
+
+@x
+## Download and install Docker
+@y
+{: #download-and-install-docker }
+## Docker のダウンロードとインストール
+@z
+
+@x
+This tutorial assumes you have a current version of Docker installed on your
+machine. If you do not have Docker installed, choose your preferred operating system below to download Docker:
+@y
+本チュートリアルでは、手元のマシンに Docker 最新版がインストールされているものとします。
+もし DOcker をインストールしていない場合は、以下に示す適切なオペレーティングシステムを選んで Docker をダウンロードしてください。
+@z
+
+@x
+- [Download Docker Desktop for Mac](https://desktop.docker.com/mac/stable/Docker.dmg)
+@y
+- [Docker Desktop for Mac](https://desktop.docker.com/mac/stable/Docker.dmg) のダウンロード。
+@z
+
+@x
+- [Download Docker Desktop for Windows](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+@y
+- [Docker Desktop for Windows](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe) のダウンロード。
+@z
+
+@x
+- [Install Docker Engine on Linux](../engine/install/index.md)
+@y
+- [Docker Engine on Linux](../engine/install/index.md) のインストール。
+@z
+
+@x
+For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+@y
+Docker Desktop のインストール手順については、[Mac 上での Docker Desktop のインストール](../docker-for-mac/install.md) や [Windows 上での Docker Desktop のインストール](../docker-for-windows/install.md) を参照してください。
 @z
 
 @x
@@ -199,23 +238,21 @@ You'll notice a few flags being used. Here's some more info on them:
 @z
 
 @x
->**Pro tip**
+> **Tip**
 >
->You can combine single character flags to shorten the full command.
->As an example, the command above could be written as:
->```
->docker run -dp 80:80 docker/getting-started
->```
-> 
+> You can combine single character flags to shorten the full command.
+> As an example, the command above could be written as:
+> ```
+> docker run -dp 80:80 docker/getting-started
+> ```
 @y
->**上級者向けのヒント**
+> **ヒント**
 >
->1 文字からなるフラグはつなぎ合わせることで、コマンド記述を短くすることができます。
->たとえば上のコマンドは以下のようにすることもできます。
->```
->docker run -dp 80:80 docker/getting-started
->```
-> 
+> 1 文字からなるフラグはつなぎ合わせることで、コマンド記述を短くすることができます。
+> たとえば上のコマンドは以下のようにすることもできます。
+> ```
+> docker run -dp 80:80 docker/getting-started
+> ```
 @z
 
 @x
@@ -229,7 +266,7 @@ You'll notice a few flags being used. Here's some more info on them:
 Before going too far, we want to highlight the Docker Dashboard, which gives
 you a quick view of the containers running on your machine. It gives you quick
 access to container logs, lets you get a shell inside the container, and lets you
-easily manage container lifecycle (stop, remove, etc.). 
+easily manage container lifecycle (stop, remove, etc.).
 @y
 この先に進む前に Docker ダッシュボードについて説明しておきたいと思います。
 これはマシン上に動作するコンテナーを簡単に参照できるものです。
@@ -239,12 +276,12 @@ easily manage container lifecycle (stop, remove, etc.).
 
 @x
 To access the dashboard, follow the instructions for either 
-[Mac](https://docs.docker.com/docker-for-mac/dashboard/) or 
-[Windows](https://docs.docker.com/docker-for-windows/dashboard/). If you open the dashboard
+[Mac](../../docker-for-mac/dashboard/) or 
+[Windows](../../docker-for-windows/dashboard/). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 @y
-ダッシュボードにアクセスするには [Mac](https://docs.docker.com/docker-for-mac/dashboard/) 用または [Windows](https://docs.docker.com/docker-for-windows/dashboard/) 用の手順に従ってください。
+ダッシュボードにアクセスするには [Mac](../../docker-for-mac/dashboard/) 用または [Windows](../../docker-for-windows/dashboard/) 用の手順に従ってください。
 ダッシュボードを今開いている場合は、チュートリアルコンテナーが動作中であるのが見てとれるはずです。
 コンテナー名（以下では`jolly_bouman`）はランダムに生成されます。
 したがって手元のコンテナー名は、きっと別の名前になっているはずです。
@@ -325,7 +362,7 @@ We'll dive deeper into images later on, covering topics such as layering, best p
 
 @x
 > **Info**
-> 
+>
 > If you're familiar with `chroot`, think of a container as an extended version of `chroot`. The
 > filesystem is simply coming from the image. But, a container adds additional isolation not
 > available when simply using chroot.
@@ -351,13 +388,13 @@ Refer to the following topics for further documentation on all CLI commands used
 @z
 
 @x
-- [docker version](https://docs.docker.com/engine/reference/commandline/version/)
-- [docker run](https://docs.docker.com/engine/reference/commandline/run/)
-- [docker image](https://docs.docker.com/engine/reference/commandline/image/)
-- [docker container](https://docs.docker.com/engine/reference/commandline/container/)
+- [docker version](../engine/reference/commandline/version.md)
+- [docker run](../engine/reference/commandline/run.md)
+- [docker image](../engine/reference/commandline/image.md)
+- [docker container](../engine/reference/commandline/container.md)
 @y
-- [docker version](https://docs.docker.com/engine/reference/commandline/version/)
-- [docker run](https://docs.docker.com/engine/reference/commandline/run/)
-- [docker image](https://docs.docker.com/engine/reference/commandline/image/)
-- [docker container](https://docs.docker.com/engine/reference/commandline/container/)
+- [docker version](../engine/reference/commandline/version.md)
+- [docker run](../engine/reference/commandline/run.md)
+- [docker image](../engine/reference/commandline/image.md)
+- [docker container](../engine/reference/commandline/container.md)
 @z

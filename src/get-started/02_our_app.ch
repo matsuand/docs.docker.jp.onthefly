@@ -3,7 +3,7 @@
 
 @x
 ---
-title: "Our Application"
+title: "Sample application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 redirect_from:
 - /get-started/part2/
@@ -11,7 +11,7 @@ description: overview of our simple application for learning docker
 ---
 @y
 ---
-title: "アプリケーション作り"
+title: "サンプルアプリケーション"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 redirect_from:
 - /get-started/part2/
@@ -47,9 +47,9 @@ think about how it will work for a large team, multiple developers, etc.
 @z
 
 @x
-## Getting our App
+## Get the app
 @y
-{: #getting-our-app }
+{: #get-the-app }
 ## アプリの入手
 @z
 
@@ -64,20 +64,20 @@ we have created a ZIP file containing the application.
 @z
 
 @x
-1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app). You can either pull the entire project or download it as a zip and extract the app folder out to get started with
+1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or download it as a zip and extract the app folder out to get started with
 @y
-1. [アプリ配布をダウンロードします](https://github.com/docker/getting-started/tree/master/app)。
+1. [アプリ配布をダウンロードします](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}。
    プロジェクト全体をプルして入手することもできます。
    ZIP ファイルとしてダウンロードした場合は、アプリケーションフォルダーを抽出（解凍）します。
 @z
 
 @x
-1. Once extracted, use your favorite code editor to open the project. If you're in need of
-    an editor, you can use [Visual Studio Code](https://code.visualstudio.com/). You should
+2. Once extracted, use your favorite code editor to open the project. If you're in need of
+    an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should
     see the `package.json` and two subdirectories (`src` and `spec`).
 @y
 1. 抽出（解凍）を行ったら、普段使っているエディターを使ってプロジェクトを開きます。
-   ソース編集を必要とする場合は [Visual Studio Code](https://code.visualstudio.com/) が利用できます。
+   ソース編集を必要とする場合は [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"} が利用できます。
    ソースディレクトリ内には`package.json`と 2 つのサブディレクトリ`src`と`spec`があります。
 @z
 
@@ -90,9 +90,9 @@ we have created a ZIP file containing the application.
 @z
 
 @x
-## Building the App's Container Image
+## Build the app's container image
 @y
-{: #building-the-apps-container-image }
+{: #build-the-apps-container-image }
 ## アプリのコンテナーイメージのビルド
 @z
 
@@ -141,9 +141,9 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @z
 
 @x
-1. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
+2. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
 @y
-1. ターミナルをまだ開いていなければこれを開き、`Dockerfile`ファイルがある`app`ディレクトリに移動します。
+2. ターミナルをまだ開いていなければこれを開き、`Dockerfile`ファイルがある`app`ディレクトリに移動します。
    そして`docker build`コマンドを実行してコンテナーイメージをビルドします。
 @z
 
@@ -195,9 +195,9 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @z
 
 @x
-## Starting an App Container
+## Start an app container
 @y
-{: #starting-an-app-container }
+{: #start-an-app-container }
 ## アプリコンテナーの起動
 @z
 
@@ -238,10 +238,10 @@ command (remember that from earlier?).
 @z
 
 @x
-1. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
+2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
     You should see our app!
 @y
-1. 数秒待ってから、ブラウザーを使って [http://localhost:3000](http://localhost:3000) にアクセスします。
+2. 数秒待ってから、ブラウザーを使って [http://localhost:3000](http://localhost:3000) にアクセスします。
     アプリケーションが表示されるはずです。
 @z
 
@@ -254,11 +254,11 @@ command (remember that from earlier?).
 @z
 
 @x
-1. Go ahead and add an item or two and see that it works as you expect. You can mark items as
+3. Go ahead and add an item or two and see that it works as you expect. You can mark items as
    complete and remove items. Your frontend is successfully storing items in the backend!
    Pretty quick and easy, huh?
 @y
-1. 作業を行ってみます。
+3. 作業を行ってみます。
    アイテムを 2、3 追加して、思ったとおりに動作するかを確認します。
    アイテムにはマークづけとして完了や削除を指定できます。
    フロントエンドからの操作によってバックエンドにアイテム保存されました。

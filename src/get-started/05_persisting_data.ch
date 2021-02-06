@@ -3,7 +3,7 @@
 
 @x
 ---
-title: "Persisting our DB"
+title: "Persist the DB"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Making our DB persistent in our application
 ---
@@ -26,7 +26,7 @@ we launch the container. Why is this? Let's dive into how the container is worki
 @z
 
 @x
-## The Container's Filesystem
+## The container's filesystem
 @y
 {: #the-containers-filesystem }
 ## コンテナーのファイルシステム
@@ -43,9 +43,9 @@ changes won't be seen in another container, _even if_ they are using the same im
 @z
 
 @x
-### Seeing this in Practice
+### See this in practice
 @y
-{: #seeing-this-in-practice }
+{: #see-this-in-practice }
 ### 実際を確認
 @z
 
@@ -86,9 +86,9 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-1. Validate we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
+2. Validate we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
 @y
-1. コンテナー内で`exec`を実行し、その結果を確認します。
+2. コンテナー内で`exec`を実行し、その結果を確認します。
    これを行うにはダッシュボードを開いて、`ubuntu`イメージを起動させているコンテナーの 1 つめの動作をクリックします。
 @z
 
@@ -142,10 +142,10 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-1. Now, let's start another `ubuntu` container (the same image) and we'll see we don't have the same
+3. Now, let's start another `ubuntu` container (the same image) and we'll see we don't have the same
    file.
 @y
-1. そこで（同一イメージから）別の`ubuntu`コンテナーを起動させます。
+3. そこで（同一イメージから）別の`ubuntu`コンテナーを起動させます。
    このコンテナーに同じファイルを持っていないかどうかを見てみます。
 @z
 
@@ -169,13 +169,13 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-1. Go ahead and remove the first container using the `docker rm -f` command.
+4. Go ahead and remove the first container using the `docker rm -f` command.
 @y
-1. `docker rm -f`コマンドを実行して 1 つめのコンテナーを削除します。
+4. `docker rm -f`コマンドを実行して 1 つめのコンテナーを削除します。
 @z
 
 @x
-## Container Volumes
+## Container volumes
 @y
 {: #container-volumes }
 ## コンテナーボリューム
@@ -192,12 +192,12 @@ and all changes are isolated to that container. With volumes, we can change all 
 @z
 
 @x
-[Volumes](/storage/volumes/) provide the ability to connect specific filesystem paths of 
+[Volumes](../storage/volumes.md) provide the ability to connect specific filesystem paths of 
 the container back to the host machine. If a directory in the container is mounted, changes in that
 directory are also seen on the host machine. If we mount that same directory across container restarts, we'd see
 the same files.
 @y
-[ボリューム](/storage/volumes/) とは、コンテナー内に特別なファイルシステムがホストシステムに向けて生成され、そこにアクセスする機能を提供するものです。
+[ボリューム](../storage/volumes.md) とは、コンテナー内に特別なファイルシステムがホストシステムに向けて生成され、そこにアクセスする機能を提供するものです。
 コンテナー内のあるディレクトリがマウントされていると、そのディレクトリ内で行われた変更がホストマシンからも見ることができます。
 仮にコンテナーの再起動の前後で 1 つのディレクトリをマウントしておけば、同一のファイルを維持できることになります。
 @z
@@ -210,19 +210,19 @@ There are two main types of volumes. We will eventually use both, but we will st
 @z
 
 @x
-## Persisting our Todo Data
+## Persist the todo data
 @y
-{: #persisting-our-todo-data }
+{: #persist-the-todo-data }
 ## Todo データの保存
 @z
 
 @x
-By default, the todo app stores its data in a [SQLite Database](https://www.sqlite.org/index.html) at
+By default, the todo app stores its data in a [SQLite Database](https://www.sqlite.org/index.html){:target="_blank" rel="noopener" class="_"} at
 `/etc/todos/todo.db`. If you're not familiar with SQLite, no worries! It's simply a relational database in 
 which all of the data is stored in a single file. While this isn't the best for large-scale applications,
 it works for small demos. We'll talk about switching this to a different database engine later.
 @y
-Todo アプリはデフォルトで各種データを`/etc/todos/todo.db`にある [SQLite データベース](https://www.sqlite.org/index.html) に保存します。
+Todo アプリはデフォルトで各種データを`/etc/todos/todo.db`にある [SQLite データベース](https://www.sqlite.org/index.html){:target="_blank" rel="noopener" class="_"} に保存します。
 SQLite がよくわからなくても心配無用です。
 これは単純なリレーショナルデータベースであって、すべてのデータを 1 つのファイルに保存するものです。
 大規模アプリケーションに対して利用するのは適切ではありませんが、ちょっとしたデモであれば十分に動作します。
@@ -270,17 +270,17 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 @z
 
 @x
-1. Stop the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
+2. Stop the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
 @y
-1. ダッシュボード上から再度 Todo アプリコンテナーを停止させます（あるいは`docker rm -f <id>`を実行します）。
+2. ダッシュボード上から再度 Todo アプリコンテナーを停止させます（あるいは`docker rm -f <id>`を実行します）。
    なぜならデータ保存を行うボリュームを利用しない状態で、アプリコンテナーがまだ実行しているからです。
 @z
 
 @x
-1. Start the todo app container, but add the `-v` flag to specify a volume mount. We will use the named volume and mount
+3. Start the todo app container, but add the `-v` flag to specify a volume mount. We will use the named volume and mount
    it to `/etc/todos`, which will capture all files created at the path.
 @y
-1. Todo アプリコンテナーを起動します。
+3. Todo アプリコンテナーを起動します。
    ただし今回は`-v`フラグを使ってボリュームマウントの指定を行います。
    名前つきボリュームを利用し、これを`/etc/todos`にマウントします。
    これによってそのパス上に生成されるファイルをすべてアクセスできるようにします。
@@ -297,9 +297,9 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 @z
 
 @x
-1. Once the container starts up, open the app and add a few items to your todo list.
+4. Once the container starts up, open the app and add a few items to your todo list.
 @y
-1. コンテナーが起動したら、アプリを開いて Todo リストに 2、3 のアイテムを追加します。
+4. コンテナーが起動したら、アプリを開いて Todo リストに 2、3 のアイテムを追加します。
 @z
 
 @x
@@ -311,30 +311,30 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 @z
 
 @x
-1. Remove the container for the todo app. Use the Dashboard or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
+5. Remove the container for the todo app. Use the Dashboard or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
 @y
-1. Todo アプリを実現するコンテナーを削除します。
+5. Todo アプリを実現するコンテナーを削除します。
    それにはダッシュボードを利用するか、あるいは`docker ps`によって ID を得た上で`docker rm -f <id>`を実行します。
 @z
 
 @x
-1. Start a new container using the same command from above.
+6. Start a new container using the same command from above.
 @y
-1. 新たなコンテナーを起動します。
+6. 新たなコンテナーを起動します。
    実行コマンドは前回と同じです。
 @z
 
 @x
-1. Open the app. You should see your items still in your list!
+7. Open the app. You should see your items still in your list!
 @y
-1. アプリを開きます。
+7. アプリを開きます。
    登録したアイテムがリスト内に表示されているはずです。
 @z
 
 @x
-1. Go ahead and remove the container when you're done checking out your list.
+8. Go ahead and remove the container when you're done checking out your list.
 @y
-1. 先に進めるため、リスト表示を確認したらコンテナーを削除します。
+8. 先に進めるため、リスト表示を確認したらコンテナーを削除します。
 @z
 
 @x
@@ -345,7 +345,7 @@ Hooray! You've now learned how to persist data!
 @z
 
 @x
->**Pro-tip**
+>**Note**
 >
 >While named volumes and bind mounts (which we'll talk about in a minute) are the two main types of volumes supported
 >by a default Docker engine installation, there are many volume driver plugins available to support NFS, SFTP, NetApp, 
@@ -353,7 +353,7 @@ Hooray! You've now learned how to persist data!
 >environment with Swarm, Kubernetes, etc.
 >
 @y
->**上級者向けヒント**
+>**メモ**
 >
 >名前つきボリュームとバインドボリューム（これについては後に説明）は、Docker Engine においてデフォルトでサポートされている 2 種類のボリュームです。
 >ただしそれ以外にもボリュームドライバープラグインが多数あって、NFS、SFTP、NetApp などに対応しています。
@@ -361,9 +361,9 @@ Hooray! You've now learned how to persist data!
 @z
 
 @x
-## Diving into our Volume
+## Dive into the volume
 @y
-{: #diving-into-our-volume }
+{: #dive-into-our-volume }
 ## ボリュームの詳細
 @z
 
@@ -418,7 +418,7 @@ need to have root access to access this directory from the host. But, that's whe
 @z
 
 @x
->**Accessing Volume data directly on Docker Desktop**
+>**Accessing volume data directly on Docker Desktop**
 >
 >While running in Docker Desktop, the Docker commands are actually running inside a small VM on your machine.
 >If you wanted to look at the actual contents of the Mountpoint directory, you would need to first get inside

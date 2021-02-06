@@ -3,20 +3,20 @@
 
 @x
 ---
-title: "Image building tips"
+title: "Image-building best practices"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Tips for building the images for our application
 ---
 @y
 ---
-title: "イメージビルドのヒント"
+title: "イメージビルドのベストプラクティス"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Tips for building the images for our application
 ---
 @z
 
 @x
-## Security Scanning
+## Security scanning
 @y
 {: #security-scanning }
 ## セキュリティスキャン
@@ -24,11 +24,11 @@ description: Tips for building the images for our application
 
 @x
 When you have built an image, it is good practice to scan it for security vulnerabilities using the `docker scan` command.
-Docker has partnered with [Snyk](http://snyk.io) to provide the vulnerability scanning service.
+Docker has partnered with [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
 @y
 イメージをビルドしたら`docker scan`コマンドを実行して、イメージにセキュリティぜい弱性がないかどうかをスキャンする。
 これがベストプラクティスです。
-Docker は [Snyk](http://snyk.io) 社と連携してセキュリティスキャンサービスを提供しています。
+Docker は [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} 社と連携してセキュリティスキャンサービスを提供しています。
 @z
 
 @x
@@ -108,17 +108,17 @@ fixes the vulnerability.
 @z
 
 @x
-There are several other options, which you can read about in the [docker scan documentation](https://docs.docker.com/engine/scan/).
+There are several other options, which you can read about in the [docker scan documentation](../engine/scan/index.md).
 @y
 その他にもいくつかオプションがあります。
-その詳細については [docker scan のドキュメント]({{ site.baseurl }}/engine/scan/) を参照してください。
+その詳細については [docker scan のドキュメント](../engine/scan/index.md) を参照してください。
 @z
 
 @x
-As well as scanning your newly built image on the command line, you can also [configure Docker Hub](https://docs.docker.com/docker-hub/vulnerability-scanning/)
+As well as scanning your newly built image on the command line, you can also [configure Docker Hub](../docker-hub/vulnerability-scanning.md)
 to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.
 @y
-新たに作り出したイメージに対するスキャンをコマンドラインから行う方法と、さらに [Docker Hub の設定]({{ site.baseurl }}/docker-hub/vulnerability-scanning/) を行って新規にプッシュされたイメージを自動的にスキャンすることも可能です。
+新たに作り出したイメージに対するスキャンをコマンドラインから行う方法と、さらに [Docker Hub の設定](../docker-hub/vulnerability-scanning.md) を行って新規にプッシュされたイメージを自動的にスキャンすることも可能です。
 その場合の処理結果は Docker Hub と Docker Desktop のいずれからでも確認できます。
 @z
 
@@ -131,7 +131,7 @@ to scan all newly pushed images automatically, and you can then see the results 
 @z
 
 @x
-## Image Layering
+## Image layering
 @y
 {: #image-layering }
 ## イメージのレイヤー管理
@@ -215,10 +215,10 @@ command, you can see the command that was used to create each layer within an im
 @z
 
 @x
-1. You'll notice that several of the lines are truncated. If you add the `--no-trunc` flag, you'll get the
+2. You'll notice that several of the lines are truncated. If you add the `--no-trunc` flag, you'll get the
    full output (yes... funny how you use a truncated flag to get untruncated output, huh?)
 @y
-1. 上の表示においては何行かが省略（truncate）表示されているのがわかります。
+2. 上の表示においては何行かが省略（truncate）表示されているのがわかります。
    `--no-trunc`フラグをつければ、省略せずに表示することができます。
    （`--no-trunc`って英単語が省略されたフラグを使っておきながら、省略されていない結果を得ようなんて、どういうことなんでしょうねぇ。）
 @z
@@ -234,7 +234,7 @@ command, you can see the command that was used to create each layer within an im
 @z
 
 @x
-## Layer Caching
+## Layer caching
 @y
 {: #layer-caching }
 ## レイヤーのキャッシュ処理
@@ -330,9 +330,9 @@ Node ベースのアプリケーションの場合、そういった依存パッ
 @z
 
 @x
-1. Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
+2. Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
 @y
-1. Dockerfile と同じフォルダー内に`.dockerignore`という名前のファイルを生成して、その内容を以下とします。
+2. Dockerfile と同じフォルダー内に`.dockerignore`という名前のファイルを生成して、その内容を以下とします。
 @z
 
 @x
@@ -348,24 +348,24 @@ Node ベースのアプリケーションの場合、そういった依存パッ
 @x
     `.dockerignore` files are an easy way to selectively copy only image relevant files.
     You can read more about this
-    [here](https://docs.docker.com/engine/reference/builder/#dockerignore-file).
+    [here](../engine/reference/builder.md#dockerignore-file).
     In this case, the `node_modules` folder should be omitted in the second `COPY` step because otherwise,
     it would possibly overwrite files which were created by the command in the `RUN` step.
     For further details on why this is recommended for Node.js applications and other best practices,
     have a look at their guide on
-    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
+    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/){:target="_blank" rel="noopener" class="_"}.
 @y
     `.dockerignore`ファイルを使うと、イメージに関係するファイルのみを選別してコピーするという方法を簡単に実現できます。
-    この点に関しては [こちら]({{ site.baseurl }}/engine/reference/builder/#dockerignore-file) に説明しています。
+    この点に関しては [こちら](../engine/reference/builder.md#dockerignore-file) に説明しています。
     今の場合`node_modules`フォルダーは 2 番めの`COPY`においては処理対象からはずす必要があります。
     そうしないと、`RUN`におけるコマンド実行によって生成されたファイルを上書きしてしまう可能性があるからです。
-    Node.js アプリケーションにおいてなぜこういったことが推奨されるか、あるいはその他のベストプラクティスについて、[Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/) にガイドが示されているのでご覧ください。
+    Node.js アプリケーションにおいてなぜこういったことが推奨されるか、あるいはその他のベストプラクティスについて、[Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/){:target="_blank" rel="noopener" class="_"} にガイドが示されているのでご覧ください。
 @z
 
 @x
-1. Build a new image using `docker build`.
+3. Build a new image using `docker build`.
 @y
-1. `docker build`を実行して新たなイメージをビルドします。
+3. `docker build`を実行して新たなイメージをビルドします。
 @z
 
 @x
@@ -456,15 +456,15 @@ Node ベースのアプリケーションの場合、そういった依存パッ
 @z
 
 @x
-1. Now, make a change to the `src/static/index.html` file (like change the `<title>` to say "The Awesome Todo App").
+4. Now, make a change to the `src/static/index.html` file (like change the `<title>` to say "The Awesome Todo App").
 @y
-1. そこで`src/static/index.html`ファイルに変更を加えます（たとえば`<title>`を「The Awesome Todo App」にするとか）。
+4. そこで`src/static/index.html`ファイルに変更を加えます（たとえば`<title>`を「The Awesome Todo App」にするとか）。
 @z
 
 @x
-1. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
+5. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
 @y
-1. もう一度`docker build -t getting-started .`を実行して Docker イメージを作り直します。
+5. もう一度`docker build -t getting-started .`を実行して Docker イメージを作り直します。
    今回の出力結果はやや異なります。
 @z
 
@@ -530,7 +530,7 @@ Node ベースのアプリケーションの場合、そういった依存パッ
 @z
 
 @x
-## Multi-Stage Builds
+## Multi-stage builds
 @y
 {: #multi-stage-builds }
 ## マルチステージビルド
@@ -554,7 +554,7 @@ tool to help use multiple stages to create an image. There are several advantage
 @z
 
 @x
-### Maven/Tomcat Example
+### Maven/Tomcat example
 @y
 {: #maventomcat-example }
 ### Maven/Tomcat の例
@@ -604,7 +604,7 @@ being created (which can be overridden using the `--target` flag).
 @z
 
 @x
-### React Example
+### React example
 @y
 {: #react-example }
 ### React の例

@@ -81,22 +81,12 @@ Let’s make a `GET` request to the server using the `curl` command.
 
 @x
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+$ curl localhost:8000
 curl: (7) Failed to connect to localhost port 8000: Connection refused
 ```
 @y
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+$ curl localhost:8000
 curl: (7) Failed to connect to localhost port 8000: Connection refused
 ```
 @z
@@ -120,18 +110,18 @@ To publish a port for our container, we’ll use the `--publish flag` (`-p` for 
 @z
 
 @x
-Start the container and expose port 8000 to port 8000 on the host:
+We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 8000 to work we can map the host's port 8000 to the container's port 5000:
 @y
-Start the container and expose port 8000 to port 8000 on the host:
+We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 8000 to work we can map the host's port 8000 to the container's port 5000:
 @z
 
 @x
 ```shell
-$ docker run --publish 8000:8000 python-docker
+$ docker run --publish 8000:5000 python-docker
 ```
 @y
 ```shell
-$ docker run --publish 8000:8000 python-docker
+$ docker run --publish 8000:5000 python-docker
 ```
 @z
 
@@ -143,23 +133,13 @@ Now, let’s rerun the curl command from above:
 
 @x
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl localhost:8000
+Hello, Docker!
 ```
 @y
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl localhost:8000
+Hello, Docker!
 ```
 @z
 
@@ -171,11 +151,11 @@ Success! We were able to connect to the application running inside of our contai
 
 @x
 ```shell
-2020-09-01T17:36:09:8770  INFO: POST /test
+[31/Jan/2021 23:39:31] "GET / HTTP/1.1" 200 -
 ```
 @y
 ```shell
-2020-09-01T17:36:09:8770  INFO: POST /test
+[31/Jan/2021 23:39:31] "GET / HTTP/1.1" 200 -
 ```
 @z
 
@@ -199,12 +179,12 @@ This is great so far, but our sample application is a web server and we don't ha
 
 @x
 ```shell
-$ docker run -d -p 8000:8000 python-docker
+$ docker run -d -p 8000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
 @y
 ```shell
-$ docker run -d -p 8000:8000 python-docker
+$ docker run -d -p 8000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
 @z
@@ -223,23 +203,13 @@ Again, let’s make sure that our container is running properly. Run the same cu
 
 @x
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl localhost:8000
+Hello, Docker!
 ```
 @y
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl localhost:8000
+Hello, Docker!
 ```
 @z
 
@@ -259,13 +229,13 @@ Since we ran our container in the background, how do we know if our container is
 ```shell
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ce02b3179f0f        python-docker         "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->5000/tcp   wonderful_kalam
 ```
 @y
 ```shell
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ce02b3179f0f        python-docker         "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->5000/tcp   wonderful_kalam
 ```
 @z
 
@@ -421,7 +391,7 @@ Now that all of our containers are stopped, let’s remove them. When you remove
 ```shell
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         "docker-entrypoint.s…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
@@ -429,7 +399,7 @@ fb7a41809e5d        python-docker         "docker-entrypoint.s…"   40 minutes 
 ```shell
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         "docker-entrypoint.s…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
@@ -477,19 +447,19 @@ To name a container, we just need to pass the `--name` flag to the `docker run` 
 
 @x
 ```shell
-$ docker run -d -p 8000:8000 --name rest-server python-docker
+$ docker run -d -p 8000:5000 --name rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        python-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->8000/tcp   rest-server
+1aa5d46418a6        python-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->5000/tcp   rest-server
 ```
 @y
 ```shell
-$ docker run -d -p 8000:8000 --name rest-server python-docker
+$ docker run -d -p 8000:5000 --name rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        python-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->8000/tcp   rest-server
+1aa5d46418a6        python-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->5000/tcp   rest-server
 ```
 @z
 

@@ -3,7 +3,7 @@
 
 @x
 ---
-title: "Using Docker Compose"
+title: "Use Docker Compose"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Making our lives easier with Compose for our application
 ---
@@ -16,11 +16,11 @@ description: アプリケーションにおいて Compose を使ってラクラ�
 @z
 
 @x
-[Docker Compose](/compose/) is a tool that was developed to help define and
+[Docker Compose](../compose/index.md) is a tool that was developed to help define and
 share multi-container applications. With Compose, we can create a YAML file to define the services
 and with a single command, can spin everything up or tear it all down. 
 @y
-[Docker Compose](/compose/) は、複数コンテナーによるアプリケーションを定義しやすく共有しやすくする目的で開発されたツールです。
+[Docker Compose](../compose/index.md) は、複数コンテナーによるアプリケーションを定義しやすく共有しやすくする目的で開発されたツールです。
 この Compose を使う場合には、YAML ファイルを生成してそこにサービス定義を行い、ただ 1 つのコマンドだけですべてを結び合わせたり切り離したりすることができます。
 @z
 
@@ -44,21 +44,20 @@ So, how do we get started?
 @z
 
 @x
-## Installing Docker Compose
+## Install Docker Compose
 @y
-{: #installing-docker-compose }
+{: #install-docker-compose }
 ## Docker Compose のインストール
 @z
 
 @x
 If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose!
 Play-with-Docker instances already have Docker Compose installed as well. If you are on 
-a Linux machine, you will need to install Docker Compose using 
-[the instructions here](/compose/install/). 
+a Linux machine, you will need to [install Docker Compose](../compose/install.md). 
 @y
 Windows または Mac 上において Docker Desktop/Toolbox をインストールしていれば、すでに Docker Compose もインストールされています。
 Play-with-Docker インスタンスにも Docker Compose がインストールされています。
-Linux マシンを利用している方は [こちらにあるインストール手順](/compose/install/) に従って Docker Compose をインストールしてください。
+Linux マシンを利用している方は [Docker Compose のインストール](../compose/install.md) が必要です。
 @z
 
 @x
@@ -78,9 +77,9 @@ docker-compose version
 @z
 
 @x
-## Creating our Compose File
+## Create the Compose file
 @y
-{: #creating-our-compose-file }
+{: #create-the-compose-file }
 ## Compose ファイルの生成
 @z
 
@@ -91,13 +90,13 @@ docker-compose version
 @z
 
 @x
-1. In the compose file, we'll start off by defining the schema version. In most cases, it's best to use 
-   the latest supported version. You can look at the [Compose file reference](https://docs.docker.com/compose/compose-file/)
+2. In the compose file, we'll start off by defining the schema version. In most cases, it's best to use 
+   the latest supported version. You can look at the [Compose file reference](../compose/compose-file/index.md)
    for the current schema versions and the compatibility matrix.
 @y
-1. Compose ファイルではまずスキーマバージョンの定義から書き始めます。
+2. Compose ファイルではまずスキーマバージョンの定義から書き始めます。
    たいていはサポートされている最新バージョンを利用します。
-   [Compose ファイルリファレンス]({{ site.baseurl }}/compose/compose-file/) を見れば、最新のスキーマバージョンや互換性マトリックスを確認できます。
+   [Compose ファイルリファレンス](../compose/compose-file/index.md) を見れば、最新のスキーマバージョンや互換性マトリックスを確認できます。
 @z
 
 @x
@@ -111,9 +110,9 @@ docker-compose version
 @z
 
 @x
-1. Next, we'll define the list of services (or containers) we want to run as part of our application.
+3. Next, we'll define the list of services (or containers) we want to run as part of our application.
 @y
-1. 次にアプリケーションを構成するサービス（つまりコンテナー）一覧を定義します。
+3. 次にアプリケーションを構成するサービス（つまりコンテナー）一覧を定義します。
 @z
 
 @x
@@ -137,9 +136,9 @@ And now, we'll start migrating a service at a time into the compose file.
 @z
 
 @x
-## Defining the App Service
+## Define the app service
 @y
-{: #defining-the-app-service }
+{: #define-the-app-service }
 ## アプリサービスの定義
 @z
 
@@ -236,10 +235,10 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-1. Typically, you will see the command close to the `image` definition, although there is no requirement on ordering.
+2. Typically, you will see the command close to the `image` definition, although there is no requirement on ordering.
    So, let's go ahead and move that into our file.
 @y
-1. `image`定義のすぐ近くに、コマンド記述があるのが普通です。
+2. `image`定義のすぐ近くに、コマンド記述があるのが普通です。
    ただし記述順はどちらを先にしてもかまいません。
    そこでさらにこの先に進みます。
 @z
@@ -265,14 +264,14 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-1. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
-   [short syntax](https://docs.docker.com/compose/compose-file/#short-syntax-1) here, but there is also a more verbose 
-   [long syntax](https://docs.docker.com/compose/compose-file/#long-syntax-1) available as well.
+3. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
+   [short syntax](../compose/compose-file/index.md#short-syntax-1) here, but there is also a more verbose
+   [long syntax](../compose/compose-file/index.md#long-syntax-1) available as well.
 @y
-1. `-p 3000:3000`というコマンド部分を作ります。
+3. `-p 3000:3000`というコマンド部分を作ります。
    サービスに対する`ports`を定義するものです。
-   ここでは [短い文法]({{ site.baseurl }}/compose/compose-file/#short-syntax-1) で記述することにします。
-   もちろん [長い文法]({{ site.baseurl }}/compose/compose-file/#long-syntax-1) で記述することもできます。
+   ここでは [短い文法](../compose/compose-file/index.md#short-syntax-1) で記述することにします。
+   もちろん [長い文法](../compose/compose-file/index.md#long-syntax-1) で記述することもできます。
 @z
 
 @x
@@ -300,12 +299,12 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-1. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
-   the `working_dir` and `volumes` definitions. Volumes also has a [short](https://docs.docker.com/compose/compose-file/#short-syntax-3) and [long](https://docs.docker.com/compose/compose-file/#long-syntax-3) syntax.
+4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
+   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/index.md#short-syntax-3) and [long](../compose/compose-file/index.md#long-syntax-3) syntax.
 @y
-1. 次はワーキングディレクトリ（`-w /app`）とボリュームマッピング（`-v "$(pwd):/app"`）です。
+4. 次はワーキングディレクトリ（`-w /app`）とボリュームマッピング（`-v "$(pwd):/app"`）です。
    それぞれ`working_dir`と`volumes`の定義を行います。
-   ボリュームにも [短い文法]({{ site.baseurl }}/compose/compose-file/#short-syntax-3) と [長い文法]({{ site.baseurl }}/compose/compose-file/#long-syntax-3) があります。
+   ボリュームにも [短い文法](../compose/compose-file/index.md#short-syntax-3) と [長い文法](../compose/compose-file/index.md#long-syntax-3) があります。
 @z
 
 @x
@@ -345,9 +344,9 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-1. Finally, we need to migrate the environment variable definitions using the `environment` key.
+5. Finally, we need to migrate the environment variable definitions using the `environment` key.
 @y
-1. 最後に環境変数設定を行います。
+5. 最後に環境変数設定を行います。
    これには`environment`キーを用います。
 @z
 
@@ -392,9 +391,9 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-### Defining the MySQL Service
+### Define the MySQL service
 @y
-{: #defining-the-mysql-service }
+{: #define-the-mysql-service }
 ### MySQL サーバーの定義
 @z
 
@@ -483,17 +482,17 @@ docker run -d `
 @z
 
 @x
-1. Next, we'll define the volume mapping. When we ran the container with `docker run`, the named volume was created
+2. Next, we'll define the volume mapping. When we ran the container with `docker run`, the named volume was created
    automatically. However, that doesn't happen when running with Compose. We need to define the volume in the top-level
    `volumes:` section and then specify the mountpoint in the service config. By simply providing only the volume name,
-   the default options are used. There are [many more options available](https://docs.docker.com/compose/compose-file/#volume-configuration-reference) though.
+   the default options are used. There are [many more options available](../compose/compose-file/compose-file-v3.md#volume-configuration-reference) though.
 @y
-1. 次はボリュームマッピングの定義です。
+2. 次はボリュームマッピングの定義です。
    `docker run`を実行してコンテナーを起動したときは、名前つきボリュームが自動生成されていました。
    しかし Compose を使って起動するときには、そのようにはなりません。
    まずボリュームの定義は、最上位項目として`volumes:`というセクションを設けて、サービス定義の中のマウントポイントをここに指定します。
    単純にボリューム名だけを指定すれば、デフォルトのオプションが用いられるようになります。
-   ただしここには [数多くのオプションが利用可能]({{ site.baseurl }}/compose/compose-file/#volume-configuration-reference) です。
+   ただしここには [数多くのオプションが利用可能](../compose/compose-file/compose-file-v3.md#volume-configuration-reference) です。
 @z
 
 @x
@@ -529,9 +528,9 @@ docker run -d `
 @z
 
 @x
-1. Finally, we only need to specify the environment variables.
+3. Finally, we only need to specify the environment variables.
 @y
-1. 最後は必要な環境変数を定義するだけです。
+3. 最後は必要な環境変数を定義するだけです。
 @z
 
 @x
@@ -647,9 +646,9 @@ volumes:
 @z
 
 @x
-## Running our Application Stack
+## Run the application stack
 @y
-{: #running-our-application-stack }
+{: #run-the-application-stack }
 ## アプリケーションの起動
 @z
 
@@ -666,10 +665,10 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 @z
 
 @x
-1. Start up the application stack using the `docker-compose up` command. We'll add the `-d` flag to run everything in the
+2. Start up the application stack using the `docker-compose up` command. We'll add the `-d` flag to run everything in the
    background.
 @y
-1. `docker-compose up`コマンドを実行してアプリケーション全体を起動します。
+2. `docker-compose up`コマンドを実行してアプリケーション全体を起動します。
    すべてをバックグラウンド実行とするため`-d`フラグをつけます。
 @z
 
@@ -715,11 +714,11 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 @z
 
 @x
-1. Let's look at the logs using the `docker-compose logs -f` command. You'll see the logs from each of the services interleaved
+3. Let's look at the logs using the `docker-compose logs -f` command. You'll see the logs from each of the services interleaved
     into a single stream. This is incredibly useful when you want to watch for timing-related issues. The `-f` flag "follows" the
     log, so will give you live output as it's generated.
 @y
-1. `docker-compose logs -f`コマンドを実行してログを確認してみます。
+3. `docker-compose logs -f`コマンドを実行してログを確認してみます。
    どちらのサービスのログも 1 つにまとめれてログ表示されています。
    これは処理タイミングに問題があった場合に、監視を行うのが大変便利になります。
    `-f`フラグはログ出力を「継続する」ものです。
@@ -759,33 +758,35 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 @z
 
 @x
->**Pro tip**  Waiting for the DB before starting the app
->
->When the app is starting up, it actually sits and waits for MySQL to be up and ready before trying to connect to it.
->Docker doesn't have any built-in support to wait for another container to be fully up, running, and ready
->before starting another container. For Node-based projects, you can use the 
->[wait-port](https://github.com/dwmkerr/wait-port) dependency. Similar projects exist for other languages/frameworks.
-@y
-    >**上級者向けのヒント**  DB 準備を待ったアプリ起動
+    > **Tip: Waiting for the DB before starting the app**
     >
-    >アプリが起動すると MySQL が起動するまで待ちます。
-    >そしてその後に接続を試みます。
-    >Docker には別のコンテナーが起動、実行、接続可能といった状態になるまで待つようなビルトイン機能はありません。
-    >Node ベースのプロジェクトでは [wait-port](https://github.com/dwmkerr/wait-port) という依存パッケージを利用することができます。
-    >同じようなプロジェクトは、他のプログラミング言語、他のフレームワーク向けにも存在します。
+    > When the app is starting up, it actually sits and waits for MySQL to be up
+    > and ready before trying to connect to it. Docker doesn't have any built-in
+    > support to wait for another container to be fully up, running, and ready
+    > before starting another container. For Node-based projects, you can use
+    > the [wait-port](https://github.com/dwmkerr/wait-port){:target="_blank" rel="noopener" class="_"}
+    > dependency. Similar projects exist for other languages/frameworks.
+@y
+    > **ヒント： DB 準備を待ったアプリ起動**
+    >
+    > アプリが起動すると MySQL が起動するまで待ちます。
+    > そしてその後に接続を試みます。
+    > Docker には別のコンテナーが起動、実行、接続可能といった状態になるまで待つようなビルトイン機能はありません。
+    > Node ベースのプロジェクトでは [wait-port](https://github.com/dwmkerr/wait-port) という依存パッケージを利用することができます。
+    > 同じようなプロジェクトは、他のプログラミング言語、他のフレームワーク向けにも存在します。
 @z
 
 @x
-1. At this point, you should be able to open your app and see it running. And hey! We're down to a single command!
+4. At this point, you should be able to open your app and see it running. And hey! We're down to a single command!
 @y
-1. ここまでくれば、アプリを開いて実行確認を行うことができます。
+4. ここまでくれば、アプリを開いて実行確認を行うことができます。
    ほら、実行コマンドたった一つで出来上がりです。
 @z
 
 @x
-## Seeing our App Stack in Docker Dashboard
+## See the app stack in Docker Dashboard
 @y
-{: #seeing-our-app-stack-in-docker-dashboard }
+{: #see-the-app-stack-in-docker-dashboard }
 ## Docker ダッシュボードからのアプリ全体の確認
 @z
 
@@ -823,9 +824,9 @@ app を展開して詳細表示すると、Compose ファイル内で定義し�
 @z
 
 @x
-## Tearing it All Down
+## Tear it all down
 @y
-{: #tearing-it-all-down }
+{: #tear-it-all-down }
 ## すべての削除
 @z
 
@@ -839,7 +840,7 @@ for the entire app. The containers will stop and the network will be removed.
 @z
 
 @x
->**Warning** 
+>**Warning**
 >
 >Removing Volumes
 >
@@ -847,14 +848,16 @@ for the entire app. The containers will stop and the network will be removed.
 >remove the volumes, you will need to add the `--volumes` flag.
 >
 >The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+{: .warning}
 @y
->**警告** 
+>**警告**
 >
 >ボリュームの削除
 >
 >Compose ファイル内で定めた名前つきボリュームは、`docker-compose down`を実行してもデフォルトでは削除 **されません**。
 >ボリュームも削除したいなら`--volumes`フラグをつける必要があります。
 >Docker ダッシュボードではアプリを削除してもボリュームは削除 **されません**。
+{: .warning}
 @z
 
 @x

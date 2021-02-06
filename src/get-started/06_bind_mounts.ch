@@ -3,7 +3,7 @@
 
 @x
 ---
-title: "Using bind mounts"
+title: "Use bind mounts"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Using bind mounts in our application
 ---
@@ -38,25 +38,26 @@ away.
 @z
 
 @x
-For Node-based applications, [nodemon](https://npmjs.com/package/nodemon) is a great tool to watch for file
+For Node-based applications, [nodemon](https://npmjs.com/package/nodemon){:target="_blank" rel="noopener" class="_"} is a great tool to watch for file
 changes and then restart the application. There are equivalent tools in most other languages and frameworks.
 @y
-Node ベースのアプリケーションとして [nodemon](https://npmjs.com/package/nodemon) があり、ファイル変更を監視してその後にアプリケーションを再起動するという優れたツールです。
+Node ベースのアプリケーションとして [nodemon](https://npmjs.com/package/nodemon){:target="_blank" rel="noopener" class="_"} があり、ファイル変更を監視してその後にアプリケーションを再起動するという優れたツールです。
 たいていのプログラミング言語やフレームワークに対しても同様のツールがあります。
 @z
 
 @x
-## Quick Volume Type Comparisons
+## Quick volume type comparisons
 @y
+{: #quick-volume-type-comparisons }
 ## ボリューム種類の単純比較
 @z
 
 @x
 Bind mounts and named volumes are the two main types of volumes that come with the Docker engine. However, additional
-volume drivers are available to support other uses cases ([SFTP](https://github.com/vieux/docker-volume-sshfs), [Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/), [NetApp](https://netappdvp.readthedocs.io/en/stable/), [S3](https://github.com/elementar/docker-s3-volume), and more).
+volume drivers are available to support other uses cases ([SFTP](https://github.com/vieux/docker-volume-sshfs){:target="_blank" rel="noopener" class="_"}, [Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/){:target="_blank" rel="noopener" class="_"}, [NetApp](https://netappdvp.readthedocs.io/en/stable/){:target="_blank" rel="noopener" class="_"}, [S3](https://github.com/elementar/docker-s3-volume){:target="_blank" rel="noopener" class="_"}, and more).
 @y
 バインドマウントと名前つきボリュームは Docker Engine が提供する 2 種類のボリュームです。
-これ以外にも別の状況において利用できるボリュームドライバーがあります（[SFTP](https://github.com/vieux/docker-volume-sshfs)、[Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/)、[NetApp](https://netappdvp.readthedocs.io/en/stable/)、[S3](https://github.com/elementar/docker-s3-volume) などです）。
+これ以外にも別の状況において利用できるボリュームドライバーがあります（[SFTP](https://github.com/vieux/docker-volume-sshfs){:target="_blank" rel="noopener" class="_"}、[Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/){:target="_blank" rel="noopener" class="_"}、[NetApp](https://netappdvp.readthedocs.io/en/stable/){:target="_blank" rel="noopener" class="_"}、[S3](https://github.com/elementar/docker-s3-volume){:target="_blank" rel="noopener" class="_"} などです）。
 @z
 
 @x
@@ -76,9 +77,9 @@ volume drivers are available to support other uses cases ([SFTP](https://github.
 @z
 
 @x
-## Starting a Dev-Mode Container
+## Start a dev-mode container
 @y
-{: #starting-a-dev-mode-container }
+{: #start-a-dev-mode-container }
 ## 開発対応のコンテナー起動
 @z
 
@@ -111,9 +112,9 @@ So, let's do it!
 @z
 
 @x
-1. Run the following command. We'll explain what's going on afterwards:
+2. Run the following command. We'll explain what's going on afterwards:
 @y
-1. 以下のコマンドを実行します。
+2. 以下のコマンドを実行します。
    これがどのようになるのかは後に説明します。
 @z
 
@@ -177,9 +178,9 @@ So, let's do it!
 @z
 
 @x
-1. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this...
+3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this...
 @y
-1. `docker logs -f <container-id>`を実行すればログ確認ができます。
+3. `docker logs -f <container-id>`を実行すればログ確認ができます。
    このログから準備万端であることがわかります。
 @z
 
@@ -214,10 +215,10 @@ So, let's do it!
 @z
 
 @x
-1. Now, let's make a change to the app. In the `src/static/js/app.js` file, let's change the "Add Item" button to simply say
+4. Now, let's make a change to the app. In the `src/static/js/app.js` file, let's change the "Add Item" button to simply say
    "Add". This change will be on line 109.
 @y
-1. それではアプリに変更を加えてみます。
+4. それではアプリに変更を加えてみます。
    `src/static/js/app.js`ファイルにおいて「Add Item」ボタン"の名前を単純に「Add」とします。
    この修正を行うのは 109 行めです。
 @z
@@ -235,10 +236,10 @@ So, let's do it!
 @z
 
 @x
-1. Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might
+5. Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might
    take a few seconds for the Node server to restart, so if you get an error, just try refreshing after a few seconds.
 @y
-1. 単純にページを更新します（あるいは改めて開きます）。
+5. 単純にページを更新します（あるいは改めて開きます）。
    ブラウザー上には変更した内容がほぼ即座に反映されたはずです。
    Node サーバーの再起動にはほんの数秒しかかかりませんから、もしエラー発生した場合は数秒待ってページ更新を行ってみてください。
 @z
@@ -252,10 +253,10 @@ So, let's do it!
 @z
 
 @x
-1. Feel free to make any other changes you'd like to make. When you're done, stop the container and build your new image
+6. Feel free to make any other changes you'd like to make. When you're done, stop the container and build your new image
    using `docker build -t getting-started .`.
 @y
-1. 他に変更したい内容があれば、どんどん行ってください。
+6. 他に変更したい内容があれば、どんどん行ってください。
    作業が完了したらコンテナーを停止した上で、`docker build -t getting-started .`の実行により新たなイメージをビルドしてください。
 @z
 

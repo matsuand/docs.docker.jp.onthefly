@@ -3,7 +3,7 @@
 
 @x
 ---
-title: "Sharing Our Application"
+title: "Share the application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop, docker hub, sharing 
 redirect_from:
 - /get-started/part3/
@@ -30,41 +30,41 @@ Docker イメージを共有するには Docker レジストリを使うこと�
 @z
 
 @x
-## Create a Repo
+## Create a repo
 @y
 {: #create-a-repo }
 ## リポジトリの生成
 @z
 
 @x
-To push an image, we first need to create a repo on Docker Hub.
+To push an image, we first need to create a repository on Docker Hub.
 @y
 イメージをプッシュするには、まず Docker Hub 上にリポジトリを生成する必要があります。
 @z
 
 @x
-1. Go to [Docker Hub](https://hub.docker.com) and log in if you need to.
+1. Go to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} and log in if you need to.
 @y
-1. [Docker Hub](https://hub.docker.com) にアクセスしてログインします。
+1. [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} にアクセスしてログインします。
 @z
 
 @x
-1. Click the **Create Repository** button.
+2. Click the **Create Repository** button.
 @y
-1. **Create Repository**（リポジトリの生成）ボタンをクリックします。
+2. **Create Repository**（リポジトリの生成）ボタンをクリックします。
 @z
 
 @x
-1. For the repo name, use `getting-started`. Make sure the Visibility is `Public`.
+3. For the repo name, use `getting-started`. Make sure the Visibility is `Public`.
 @y
-1. リポジトリ名を`getting-started`とします。
+3. リポジトリ名を`getting-started`とします。
    Visibility は`Public`としてください。
 @z
 
 @x
-1. Click the **Create** button!
+4. Click the **Create** button!
 @y
-1. **Create**（生成）ボタンをクリックします。
+4. **Create**（生成）ボタンをクリックします。
 @z
 
 @x
@@ -84,9 +84,9 @@ an example command that you will need to run to push to this repo.
 @z
 
 @x
-## Pushing our Image
+## Push the image
 @y
-{: #pushing-our-image }
+{: #push-the-image }
 ## イメージのプッシュ
 @z
 
@@ -129,16 +129,16 @@ an example command that you will need to run to push to this repo.
 @z
 
 @x
-1. Login to the Docker Hub using the command `docker login -u YOUR-USER-NAME`.
+2. Login to the Docker Hub using the command `docker login -u YOUR-USER-NAME`.
 @y
-1. `docker login -u YOUR-USER-NAME`コマンドを実行して Docker Hub にログインします。
+2. `docker login -u YOUR-USER-NAME`コマンドを実行して Docker Hub にログインします。
 @z
 
 @x
-1. Use the `docker tag` command to give the `getting-started` image a new name. Be sure to swap out
+3. Use the `docker tag` command to give the `getting-started` image a new name. Be sure to swap out
    `YOUR-USER-NAME` with your Docker ID.
 @y
-1. `docker tag`コマンドを実行して`getting-started`イメージに新たな名前をつけます。
+3. `docker tag`コマンドを実行して`getting-started`イメージに新たな名前をつけます。
    `YOUR-USER-NAME`の部分は自分の Docker ID に書き換えてください。
 @z
 
@@ -153,11 +153,11 @@ an example command that you will need to run to push to this repo.
 @z
 
 @x
-1. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
+4. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
    `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
    will use a tag called `latest`.
 @y
-1. そこでもう一度プッシュコマンドを実行します。
+4. そこでもう一度プッシュコマンドを実行します。
    コマンドを Docker Hub からコピーしていた場合、`tagname`部分がないことになります。
    イメージ名にはタグを追加しなかったからです。
    タグ指定がない場合 Docker は`latest`というタグを利用します。
@@ -174,9 +174,9 @@ an example command that you will need to run to push to this repo.
 @z
 
 @x
-## Running our Image on a New Instance
+## Run the image on a new instance
 @y
-{: #running-our-image-on-a-new-instance }
+{: #run-the-image-on-a-new-instance }
 ## 新たなインスタンス上でのイメージの実行
 @z
 
@@ -190,36 +190,35 @@ new instance that has never seen this container image! To do this, we will use P
 @z
 
 @x
-1. Open your browser to [Play with Docker](http://play-with-docker.com).
+1. Open your browser to [Play with Docker](http://play-with-docker.com){:target="_blank" rel="noopener" class="_"}.
 @y
-1.  ブラウザーを開いて [Play with Docker](http://play-with-docker.com) にアクセスします。
+1.  ブラウザーを開いて [Play with Docker](http://play-with-docker.com){:target="_blank" rel="noopener" class="_"} にアクセスします。
 @z
 
 @x
-1. Log in with your Docker Hub account.
+2. Log in with your Docker Hub account.
 @y
-1. Docker Hub アカウントを使ってログインします。
+2. Docker Hub アカウントを使ってログインします。
 @z
 
 @x
-1. Once you're logged in, click on the "+ ADD NEW INSTANCE" link in the left side bar. (If you don't see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.
+3. Once you're logged in, click on the "+ ADD NEW INSTANCE" link in the left side bar. (If you don't see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.
 @y
-1. ログインを行ったら、左サイドバーにある「+ ADD NEW INSTANCE」（新たなインスタンス追加）リンクをクリックします。
+3. ログインを行ったら、左サイドバーにある「+ ADD NEW INSTANCE」（新たなインスタンス追加）リンクをクリックします。
    （このリンクが見えなかったらブラウザー画面をもう少し広げてください。）
    数秒してブラウザーの中にターミナル画面が開きます。
 @z
 
 @x
     ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
-{: .text-center }
 @y
-   ![Play with Docker から新たなインスタンス追加](images/pwd-add-new-instance.png){: style=width:75% }{: .text-center }
+   ![Play with Docker から新たなインスタンス追加](images/pwd-add-new-instance.png){: style=width:75% }
 @z
 
 @x
-1. In the terminal, start your freshly pushed app.
+4. In the terminal, start your freshly pushed app.
 @y
-1. ターミナルからプッシュした新しいアプリを起動します。
+4. ターミナルからプッシュした新しいアプリを起動します。
 @z
 
 @x
@@ -239,10 +238,10 @@ new instance that has never seen this container image! To do this, we will use P
 @z
 
 @x
-1. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
+5. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
     If the 3000 badge doesn't show up, you can click on the "Open Port" button and type in 3000.
 @y
-1. アプリが起動したら 3000 badge をクリックします。
+5. アプリが起動したら 3000 badge をクリックします。
    変更を加えたアプリが起動されたことがわかります。
    やりました。
    3000 badge が表示されなかった場合は、「Open Port」ボタンをクリックして 3000 を入力してください。

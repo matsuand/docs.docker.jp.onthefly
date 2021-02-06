@@ -63,7 +63,7 @@ And there are more reasons. So, we will update our application to work like this
 @z
 
 @x
-## Container Networking
+## Container networking
 @y
 {: #container-networking }
 ## コンテナーのネットワーク
@@ -83,16 +83,20 @@ or containers on the same machine. So, how do we allow one container to talk to 
 @z
 
 @x
+> **Note**
+>
 > If two containers are on the same network, they can talk to each other. If they aren't, they can't.
 @y
+> **メモ**
+>
 > 2 つのコンテナーが同一ネットワーク上にあれば互いにやりとりができます。
 > 同一ネットワーク上にないときはできません。
 @z
 
 @x
-## Starting MySQL
+## Start MySQL
 @y
-{: #starting-mysql }
+{: #start-mysql }
 ## MySQL の起動
 @z
 
@@ -122,10 +126,10 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-1. Start a MySQL container and attach it to the network. We're also going to define a few environment variables that the
+2. Start a MySQL container and attach it to the network. We're also going to define a few environment variables that the
   database will use to initialize the database (see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/)).
 @y
-1. MySQL コンテナーを起動してネットワークに割り当てます。
+2. MySQL コンテナーを起動してネットワークに割り当てます。
    同時に環境変数をいくつか定義して、データベースの初期化に利用します。
    （[MySQL Docker Hub 一覧](https://hub.docker.com/_/mysql/) の「Environment Variables」の節を参照してください。）
 @z
@@ -184,25 +188,22 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
->**Pro-tip**
->
->You'll notice we're using a volume named `todo-mysql-data` here and mounting it at `/var/lib/mysql`, which is
->where MySQL stores its data. However, we never ran a `docker volume create` command. Docker recognizes we want
->to use a named volume and creates one automatically for us.
->
-@y
-    >**上級者向けのヒント**
+    > **Tip**
     >
-    >上ではボリューム名として`todo-mysql-data`を指定し`/var/lib/mysql`にマウントしました。
-    >このディレクトリは MySQL がデータを保存する場所です。
-    >だからといって`docker volume create`コマンドは実行していません。
-    >Docker が名前つきボリュームが指定されたことを認識して、これを自動的に生成してくれます。
+    > You'll notice we're using a volume named `todo-mysql-data` here and mounting it at `/var/lib/mysql`, which is where MySQL stores its data. However, we never ran a `docker volume create` command. Docker recognizes we want to use a named volume and creates one automatically for us.
+@y
+    > **ヒント**
+    >
+    > 上ではボリューム名として`todo-mysql-data`を指定し`/var/lib/mysql`にマウントしました。
+    > このディレクトリは MySQL がデータを保存する場所です。
+    > だからといって`docker volume create`コマンドは実行していません。
+    > Docker が名前つきボリュームが指定されたことを認識して、これを自動的に生成してくれます。
 @z
 
 @x
-1. To confirm we have the database up and running, connect to the database and verify it connects.
+3. To confirm we have the database up and running, connect to the database and verify it connects.
 @y
-1. データベースが起動され実行していることを確認するため、データベースに接続して接続確認を行います。
+3. データベースが起動され実行していることを確認するため、データベースに接続して接続確認を行います。
 @z
 
 @x
@@ -275,9 +276,9 @@ For now, we will create the network first and attach the MySQL container at star
 @z
 
 @x
-## Connecting to MySQL
+## Connect to MySQL
 @y
-{: #connecting-to-mysql }
+{: #connect-to-mysql }
 ## MySQL への接続
 @z
 
@@ -317,10 +318,10 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
 @z
 
 @x
-1. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
+2. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
    the IP address for the hostname `mysql`.
 @y
-1. コンテナー内部にて`dig`コマンドを実行することにします。
+2. コンテナー内部にて`dig`コマンドを実行することにします。
    これは便利な DNS ツールです。
    ホスト名`mysql`に対する IP アドレスを探し出してみます。
 @z
@@ -408,9 +409,9 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
 @z
 
 @x
-## Running our App with MySQL
+## Run your app with MySQL
 @y
-{: #running-our-app-with-mysql }
+{: #run-your-app-with-mysql }
 ## MySQL を使ったアプリ実行
 @z
 
@@ -434,35 +435,32 @@ Todo アプリは環境変数をいくつか設定することによって MySQL
 @z
 
 @x
->**warning** 
->Setting Connection Settings via Env Vars
->While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
->when running applications in production. Diogo Monica, the former lead of security at Docker, 
->[wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)
->explaining why. 
->  
->A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
->these secrets are mounted as files in the running container. You'll see many apps (including the MySQL image and the todo app)
->also support env vars with a `_FILE` suffix to point to a file containing the variable. 
->   
->As an example, setting the `MYSQL_PASSWORD_FILE` var will cause the app to use the contents of the referenced file 
->as the connection password. Docker doesn't do anything to support these env vars. Your app will need to know to look for
->the variable and get the file contents.
+> **Setting Connection Settings via Env Vars**
+>
+> While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
+> when running applications in production. Diogo Monica, the former lead of security at Docker,
+> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/):target="_blank" rel="noopener" class="_"}
+> explaining why.
+>
+> A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
+> these secrets are mounted as files in the running container. You'll see many apps (including the MySQL image and the todo app)
+> also support env vars with a `_FILE` suffix to point to a file containing the variable.
+>
+> As an example, setting the `MYSQL_PASSWORD_FILE` var will cause the app to use the contents of the referenced file
+> as the connection password. Docker doesn't do anything to support these env vars. Your app will need to know to look for
+> the variable and get the file contents.
 @y
->環境変数を利用した接続設定
+> **環境変数を利用した接続設定**
 >
->環境変数を使って接続設定を行うことは、開発環境においては問題ありません。
->しかし本番環境において動作させるアプリケーションに、そうした設定を行うことは **極めて不適切** です。
->Docker の前セキュリティリーダー Diogo Monica 氏が [すばらしいブログ投稿](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/) においてその理由を説明してくれています。
->
->コンテナーオーケストレーションのメカニズムにおいては、よりセキュアなものとして Secret 機能がサポートされています。
->たいていの場合、この Secret というものは実行コンテナーに対してファイルの形でマウントされます。
->多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に`_FILE`をつけて、変数を含んだファイルを指し示しているものがあります。
->
->たとえば`MYSQL_PASSWORD_FILE`という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
->Docker はそういった変数の受け渡しをサポートする機能はありません。
->この変数を求めたりファイル内容を得たりするのは、アプリが行わなければならないことです。
-{:.warning}
+> 環境変数を使って接続設定を行うことは、開発環境においては問題ありません。
+> しかし本番環境において動作させるアプリケーションに、そうした設定を行うことは **極めて不適切** です。
+> Docker の前セキュリティリーダー Diogo Monica 氏が [すばらしいブログ投稿](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"} においてその理由を説明してくれています。
+> コンテナーオーケストレーションのメカニズムにおいては、よりセキュアなものとして Secret 機能がサポートされています。
+> たいていの場合、この Secret というものは実行コンテナーに対してファイルの形でマウントされます。
+> 多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に`_FILE`をつけて、変数を含んだファイルを指し示しているものがあります。
+> たとえば`MYSQL_PASSWORD_FILE`という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
+> Docker はそういった変数の受け渡しをサポートする機能はありません。
+> この変数を求めたりファイル内容を得たりするのは、アプリが行わなければならないことです。
 @z
 
 @x
@@ -536,10 +534,10 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-1. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
+2. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
    using the mysql database.
 @y
-1. コンテナーのログ（`docker logs <container-id>`）を見てみると、MySQL データベースの利用を示すメッセージが出力されているはずです。
+2. コンテナーのログ（`docker logs <container-id>`）を見てみると、MySQL データベースの利用を示すメッセージが出力されているはずです。
 @z
 
 @x
@@ -567,16 +565,16 @@ With all of that explained, let's start our dev-ready container!
 @z
 
 @x
-1. Open the app in your browser and add a few items to your todo list.
+3. Open the app in your browser and add a few items to your todo list.
 @y
-1. ブラウザー上においてアプリを開き、Todo リストに 2、3 のアイテムを追加します。
+3. ブラウザー上においてアプリを開き、Todo リストに 2、3 のアイテムを追加します。
 @z
 
 @x
-1. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+4. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
    is **secret**.
 @y
-1. MySQL データベースに接続してみて、間違いなくアイテムがデータベースに書き込まれたことを確認します。
+4. MySQL データベースに接続してみて、間違いなくアイテムがデータベースに書き込まれたことを確認します。
    パスワードは **secret** です。
 @z
 

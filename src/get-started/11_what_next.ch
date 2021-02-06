@@ -24,7 +24,7 @@ We're not going to go deep-dive here, but here are a few other areas to look at 
 @z
 
 @x
-## Container Orchestration
+## Container orchestration
 @y
 {: #container-orchestration }
 ## コンテナーのオーケストレーション
@@ -59,7 +59,7 @@ a container quitting) and then work to make **actual state** reflect the expecte
 @z
 
 @x
-## Cloud Native Computing Foundation Projects
+## Cloud Native Computing Foundation projects
 @y
 {: #cloud-native-computing-foundation-projects }
 ## Cloud Native Computing Foundation プロジェクト
@@ -67,13 +67,13 @@ a container quitting) and then work to make **actual state** reflect the expecte
 
 @x
 The CNCF is a vendor-neutral home for various open-source projects, including Kubernetes, Prometheus, 
-Envoy, Linkerd, NATS, and more! You can view the [graduated and incubated projects here](https://www.cncf.io/projects/)
-and the entire [CNCF Landscape here](https://landscape.cncf.io/). There are a LOT of projects to help
+Envoy, Linkerd, NATS, and more! You can view the [graduated and incubated projects here](https://www.cncf.io/projects/){:target="_blank" rel="noopener" class="_"}
+and the entire [CNCF Landscape here](https://landscape.cncf.io/){:target="_blank" rel="noopener" class="_"}. There are a LOT of projects to help
 solve problems around monitoring, logging, security, image registries, messaging, and more!
 @y
 CNCF（Cloud Native Computing Foundation）はベンダーには依存しない、さまざまなオープンソースプロジェクトの協同体です。
 ここには Kubernetes、Prometheus、Envoy、Linkerd、NATS など実にさまざまなプロジェクトがあります。
-プロジェクトについては [graduated and incubated projects here](https://www.cncf.io/projects/) に示されており、[CNCF Landscape はこちら](https://landscape.cncf.io/) から参照できます。
+プロジェクトについては [graduated and incubated projects here](https://www.cncf.io/projects/){:target="_blank" rel="noopener" class="_"} に示されており、[CNCF Landscape はこちら](https://landscape.cncf.io/){:target="_blank" rel="noopener" class="_"} から参照できます。
 ここにはさまざまなプロジェクトがあり、各種の問題、たとえばシステムの監視、ログ処理、セキュリティ、イメージ登録、メッセージ処理などを解決することができます。
 @z
 

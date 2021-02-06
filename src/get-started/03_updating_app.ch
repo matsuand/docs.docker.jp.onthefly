@@ -3,7 +3,7 @@
 
 @x
 ---
-title: "Updating our Application"
+title: "Update the application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Making changes to our example learning application
 ---
@@ -40,9 +40,9 @@ Pretty simple, right? Let's make the change.
 @z
 
 @x
-## Updating our Source Code
+## Update the source code
 @y
-{: #updating-our-source-code }
+{: #updat-the-source-code }
 ## ソースコードの更新
 @z
 
@@ -65,9 +65,9 @@ Pretty simple, right? Let's make the change.
 @z
 
 @x
-1. Let's build our updated version of the image, using the same command we used before.
+2. Let's build our updated version of the image, using the same command we used before.
 @y
-1. 更新バージョンに基づいてイメージを再ビルドします。
+2. 更新バージョンに基づいてイメージを再ビルドします。
    実行するコマンドは前回と同じです。
 @z
 
@@ -82,9 +82,9 @@ Pretty simple, right? Let's make the change.
 @z
 
 @x
-1. Let's start a new container using the updated code.
+3. Let's start a new container using the updated code.
 @y
-1. 更新したソースコードを利用した新たなコンテナーを起動します。
+3. 更新したソースコードを利用した新たなコンテナーを起動します。
 @z
 
 @x
@@ -129,9 +129,9 @@ we need to remove the old container.
 @z
 
 @x
-## Replacing our Old Container
+## Replace the old container
 @y
-{: #replacing-our-old-container }
+{: #replace-the-old-container }
 ## 古いコンテナーの入れ替え
 @z
 
@@ -146,9 +146,9 @@ ways that we can remove the old container. Feel free to choose the path that you
 @z
 
 @x
-### Removing a container using the CLI
+### Remove a container using the CLI
 @y
-{: #removing-a-container-using-the-cli }
+{: #remove-a-container-using-the-cli }
 ### CLI を用いたコンテナーの削除
 @z
 
@@ -169,9 +169,9 @@ ways that we can remove the old container. Feel free to choose the path that you
 @z
 
 @x
-1. Use the `docker stop` command to stop the container.
+2. Use the `docker stop` command to stop the container.
 @y
-1. `docker stop`コマンドを実行してコンテナーを停止します。
+2. `docker stop`コマンドを実行してコンテナーを停止します。
 @z
 
 @x
@@ -187,9 +187,9 @@ ways that we can remove the old container. Feel free to choose the path that you
 @z
 
 @x
-1. Once the container has stopped, you can remove it by using the `docker rm` command.
+3. Once the container has stopped, you can remove it by using the `docker rm` command.
 @y
-1. コンテナーを停止したら、`docker rm`コマンドを実行してコンテナーを削除します。
+3. コンテナーを停止したら、`docker rm`コマンドを実行してコンテナーを削除します。
 @z
 
 @x
@@ -218,9 +218,9 @@ ways that we can remove the old container. Feel free to choose the path that you
 @z
 
 @x
-### Removing a container using the Docker Dashboard
+### Remove a container using the Docker Dashboard
 @y
-{: #removing-a-container-using-the-docker-dashboard }
+{: #remove-a-container-using-the-docker-dashboard }
 ### Docker ダッシュボードを用いたコンテナーの削除
 @z
 
@@ -240,15 +240,15 @@ Docker ダッシュボードを開いていたら、コンテナーの削除は�
 @z
 
 @x
-1. Click on the trash can icon to delete the container. 
+2. Click on the trash can icon to delete the container. 
 @y
-1. trash can（ゴミ箱）アイコンをクリックしてコンテナーを削除します。
+2. trash can（ゴミ箱）アイコンをクリックしてコンテナーを削除します。
 @z
 
 @x
-1. Confirm the removal and you're done!
+3. Confirm the removal and you're done!
 @y
-1. 削除確認を行って削除完了。
+3. 削除確認を行って削除完了。
 @z
 
 @x
@@ -258,9 +258,9 @@ Docker ダッシュボードを開いていたら、コンテナーの削除は�
 @z
 
 @x
-### Starting our updated app container
+### Start the updated app container
 @y
-{: #starting-our-updated-app-container }
+{: #start-the-updated-app-container }
 ### 更新したアプリコンテナーの起動
 @z
 
@@ -281,9 +281,9 @@ Docker ダッシュボードを開いていたら、コンテナーの削除は�
 @z
 
 @x
-1. Refresh your browser on [http://localhost:3000](http://localhost:3000) and you should see your updated help text!
+2. Refresh your browser on [http://localhost:3000](http://localhost:3000) and you should see your updated help text!
 @y
-1. ブラウザー上で [http://localhost:3000](http://localhost:3000) にアクセスしている画面を更新します。
+2. ブラウザー上で [http://localhost:3000](http://localhost:3000) にアクセスしている画面を更新します。
    更新したヘルプテキストが表示されたはずです。
 @z
 

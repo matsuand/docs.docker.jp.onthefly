@@ -236,6 +236,18 @@ Docker Desktop 安定版 2.3.0.2 をインストールする **前に**、上の
 @z
 
 @x
+    > **Note**
+    >
+    > WSL Integration components running in your distro depend on glibc. This can cause issues when running WSL 2 on musl-based distros such as Alpine Linux. Alpine users can use the [alpine-pkg-glibc(https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} package to deploy glibc alongside musl to run the integration.
+@y
+    > **メモ**
+    >
+    > ディストリビューション内で稼働する WSL 統合環境は glibc に依存しています。
+    > したがって Alpine Linux のような musl ベースのディストリビューションにおいて WSL 2 を動作させる場合には、問題が発生することがあります。
+    > Alpine ユーザーが統合環境を動作させる際には [alpine-pkg-glibc(https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} パッケージを導入し、musl に合わせた glibc を用いることが必要かもしれません。
+@z
+
+@x
     ![WSL 2 Choose Linux distro](images/wsl2-choose-distro.png)
 @y
     ![WSL 2 による Linux ディストリビューションの決定](images/wsl2-choose-distro.png)

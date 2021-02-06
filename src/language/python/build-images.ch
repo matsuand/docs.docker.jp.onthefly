@@ -332,20 +332,21 @@ COPY . .
 @z
 
 @x
-This `COPY` command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is executed inside a container. We do this using the `CMD` command.
+This `COPY` command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is executed inside a container. We do this using the `CMD` command. Note that we need to make the application externally visible (i.e. from outside the container) by specifying `--host=0.0.0.0`.
 @y
 この`COPY`コマンドは、カレントディレクトリにあるファイルすべてをイメージ内にコピーします。
 最後に行うのは、このイメージがコンテナー内において実行される際に実行させたいコマンドを指定します。
 これを行うには`CMD`コマンドを用います。
+なおここでアプリケーションは外部から（つまりコンテナーの外から）アクセスできるようにすることが必要であるため、`--host=0.0.0.0`を指定します。
 @z
 
 @x
 ```dockerfile
-CMD [ "python3", "app.py" ]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 @y
 ```dockerfile
-CMD [ "python3", "app.py" ]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 @z
 
@@ -366,7 +367,7 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "app.py" ]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 @y
 ```dockerfile
@@ -379,7 +380,7 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "app.py" ]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 @z
 
@@ -456,13 +457,14 @@ $ docker build --tag python-docker .
  => [internal] load .dockerignore
  => => transferring context: 2B
  => [internal] load metadata for docker.io/library/python:3.8-slim-buster
- => [1/5] FROM docker.io/library/python:3.8-slim-buster
+ => [1/6] FROM docker.io/library/python:3.8-slim-buster
  => [internal] load build context
  => => transferring context: 953B
- => CACHED [2/5] WORKDIR /app
- => [3/5] COPY requirements.txt requirements.txt
- => [4/5] RUN pip3 install -r requirements.txt
- => [5/5] COPY . .
+ => CACHED [2/6] WORKDIR /app
+ => [3/6] COPY requirements.txt requirements.txt
+ => [4/6] RUN pip3 install -r requirements.txt
+ => [5/6] COPY . .
+ => [6/6] CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0"]
  => exporting to image
  => => exporting layers
  => => writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
@@ -477,13 +479,14 @@ $ docker build --tag python-docker .
  => [internal] load .dockerignore
  => => transferring context: 2B
  => [internal] load metadata for docker.io/library/python:3.8-slim-buster
- => [1/5] FROM docker.io/library/python:3.8-slim-buster
+ => [1/6] FROM docker.io/library/python:3.8-slim-buster
  => [internal] load build context
  => => transferring context: 953B
- => CACHED [2/5] WORKDIR /app
- => [3/5] COPY requirements.txt requirements.txt
- => [4/5] RUN pip3 install -r requirements.txt
- => [5/5] COPY . .
+ => CACHED [2/6] WORKDIR /app
+ => [3/6] COPY requirements.txt requirements.txt
+ => [4/6] RUN pip3 install -r requirements.txt
+ => [5/6] COPY . .
+ => [6/6] CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0"]
  => exporting to image
  => => exporting layers
  => => writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c
