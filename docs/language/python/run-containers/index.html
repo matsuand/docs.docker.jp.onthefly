@@ -1,7 +1,7 @@
-<!-- Page generated 2021-02-06 14:18:43 +0900-->
+<!-- Page generated 2021-02-08 17:39:06 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Run your image as a container | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーとしてのイメージ実行 | Docker ドキュメント</title>
   <meta name="description" content="Learn how to run the image as a container." />
   <meta name="keywords" content="Python, run, image, container,">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/python/run-containers/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Run your image as a container"/>
+  <meta name="twitter:title" itemprop="title name" content="コンテナーとしてのイメージ実行"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Run your image as a container" />
+  <meta property="og:title" content="コンテナーとしてのイメージ実行" />
   <meta property="og:description" content="Learn how to run the image as a container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-06T14:18:43+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-08T17:39:06+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/run-containers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-06T14:18:43+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Run your image as a container","description":"Learn how to run the image as a container.","url":"https://docs.docker.com/language/python/run-containers/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-08T17:39:06+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーとしてのイメージ実行","description":"Learn how to run the image as a container.","url":"https://docs.docker.com/language/python/run-containers/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Run your image as a container</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><ul class="pagination">
+                        <section class="section"><h1>コンテナーとしてのイメージ実行</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/python/build-images/">イメージビルド</a></li>
   <li class="active"><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/develop/">開発向けコンテナー利用</a></li>
@@ -106,95 +106,132 @@
   <li><a href="/docs.docker.jp.onthefly/language/python/deploy/">アプリのデプロイ</a></li>
 </ul>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">前提条件</h2>
 
-<p>Work through the steps to build a Python image in <a href="/docs.docker.jp.onthefly/language/python/build-images/">Build your Python image</a>.</p>
+<p><a href="/docs.docker.jp.onthefly/language/python/build-images/">Python イメージのビルド</a> の手順により Python イメージをビルドしていること。</p>
 
-<h2 id="overview">Overview</h2>
+<h2 id="overview">概要</h2>
 
-<p>In the previous module, we created our sample application and then we created a Dockerfile that we used to produce an image. We created our image using the docker command docker build. Now that we have an image, we can run that image and see if our application is running correctly.</p>
+<p>前節においてはサンプルアプリケーションを構築し、イメージビルドに利用する Dockerfile を生成しました。
+イメージのビルドには<code class="language-plaintext highlighter-rouge">docker build</code>というコマンドを使いました。
+イメージのビルドができたので、そのイメージを実行して、アプリケーションが正しく動作することを確認します。</p>
 
-<p>A container is a normal operating system process except that this process is isolated in that it has its own file system, its own networking, and its own isolated process tree separate from the host.</p>
+<p>コンテナーというものは、オペレーティングシステム内の通常のプロセスにすぎません。
+ただしこのプロセスは他から隔離されていて、独自のファイルシステム、独自のネットワークを持ちます。
+またホストからは引き離された独自のプロセスツリーを持ちます。</p>
 
-<p>To run an image inside of a container, we use the <code class="language-plaintext highlighter-rouge">docker run</code> command. The <code class="language-plaintext highlighter-rouge">docker run</code> command requires one parameter which is the name of the image. Let’s start our image and make sure it is running correctly. Run the following command in your terminal.</p>
+<p>コンテナー内においてイメージを実行するには<code class="language-plaintext highlighter-rouge">docker run</code>コマンドを使います。
+<code class="language-plaintext highlighter-rouge">docker run</code>コマンドには 1 つの引数を必要とします。
+それはイメージ名です。
+ここまでに作り出したイメージを使って、正しく動作することを確認します。
+ターミナルから以下のコマンドを実行します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run python-docker
 </code></pre></div></div>
 
-<p>After running this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.</p>
+<p>このコマンドを実行しても、コマンドプロンプトの入力状態には戻りません。
+この理由は、実行したアプリケーションが REST サーバーであって、入ってくる要求を待ち受けるためのループ内で実行されるからです。
+つまり OS へ戻る制御はなく、戻るためにはコンテナーを停止させることになります。</p>
 
-<p>Let’s make a <code class="language-plaintext highlighter-rouge">GET</code> request to the server using the <code class="language-plaintext highlighter-rouge">curl</code> command.</p>
+<p>さてそこでこのサーバーに対して、<code class="language-plaintext highlighter-rouge">curl</code>コマンドを使って<code class="language-plaintext highlighter-rouge">GET</code>リクエストを行ってみます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
 curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to localhost port 8000: Connection refused
 </code></pre></div></div>
 
-<p>As you can see, our <code class="language-plaintext highlighter-rouge">curl</code> command failed because the connection to our server was refused. This means, we were not able to connect to the localhost on <code class="language-plaintext highlighter-rouge">port 8000</code>. This is expected because our container is run in isolation which includes networking. Let’s stop the container and restart with <code class="language-plaintext highlighter-rouge">port 8000</code> published on our local network.</p>
+<p>上の<code class="language-plaintext highlighter-rouge">curl</code>コマンドは、サーバーへの接続が拒否されたために失敗しました。
+localhost のポート 8000 には接続できなかったということです。
+この動作は期待どおりであって、コンテナーはネットワークも含めて隔離された環境内で実行されているからです。
+一度コンテナーを停止させて、今度はローカルネットワーク上にポート<code class="language-plaintext highlighter-rouge">8000</code>を公開した上で再起動してみます。</p>
 
-<p>To stop the container, press ctrl-c. This will return you to the terminal prompt.</p>
+<p>コンテナーを停止するには Ctrl-C を入力します。
+これによってターミナルのコマンドプロンプトが入力状態に戻ります。</p>
 
-<p>To publish a port for our container, we’ll use the <code class="language-plaintext highlighter-rouge">--publish flag</code> (<code class="language-plaintext highlighter-rouge">-p</code> for short) on the <code class="language-plaintext highlighter-rouge">docker run</code> command. The format of the <code class="language-plaintext highlighter-rouge">--publish</code> command is <code class="language-plaintext highlighter-rouge">[host port]:[container port]</code>. So, if we wanted to expose port 8000 inside the container to port 3000 outside the container, we would pass <code class="language-plaintext highlighter-rouge">3000:8000</code> to the <code class="language-plaintext highlighter-rouge">--publish</code> flag.</p>
+<p>コンテナーのポートを公開するには、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドにおいて<code class="language-plaintext highlighter-rouge">--publish</code>フラグ（あるいは<code class="language-plaintext highlighter-rouge">-p</code>フラグ）を指定します。
+<code class="language-plaintext highlighter-rouge">--publish</code>フラグの書式は<code class="language-plaintext highlighter-rouge">[ホストポート]:[コンテナーポート]</code>です。
+そこでコンテナー内部のポート 8000 をコンテナー外部のポート 3000 として公開するには、<code class="language-plaintext highlighter-rouge">--publish</code>フラグに<code class="language-plaintext highlighter-rouge">3000:8000</code>と指定します。</p>
 
-<p>We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 8000 to work we can map the host’s port 8000 to the container’s port 5000:</p>
+<p>コンテナーを起動させ、ポート 8000 をホスト上のポート 8000 として公開します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 8000:5000 python-docker
 </code></pre></div></div>
 
-<p>Now, let’s rerun the curl command from above:</p>
+<p>そこで先ほどの curl コマンドを再度実行してみます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
 Hello, Docker!
 </code></pre></div></div>
 
-<p>Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the POST request logged to the console.</p>
+<p>成功しました。
+コンテナー内部で実行されているアプリケーションに対して、ポート 8000 による接続ができました。
+コンテナーを実行させたターミナルに戻ってみると、コンソール上に POST リクエストのログが出力されているはずです。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>31/Jan/2021 23:39:31] <span class="s2">"GET / HTTP/1.1"</span> 200 -
 </code></pre></div></div>
 
-<p>Press ctrl-c to stop the container.</p>
+<p>Ctrl-C を入力してコンテナーを停止します。</p>
 
-<h2 id="run-in-detached-mode">Run in detached mode</h2>
+<h2 id="run-in-detached-mode">デタッチモード実行</h2>
 
-<p>This is great so far, but our sample application is a web server and we don’t have to be connected to the container. Docker can run your container in detached mode or in the background. To do this, we can use the <code class="language-plaintext highlighter-rouge">--detach</code> or <code class="language-plaintext highlighter-rouge">-d</code> for short. Docker starts your container the same as before but this time will “detach” from the container and return you to the terminal prompt.</p>
+<p>ここまではうまくいきました。
+もっともこのサンプルアプリケーションはウェブサーバーなので、ターミナルからコンテナーに接続するものではありません。
+Docker ではコンテナーをデタッチモード（detached mode）、つまりバックグラウンドで実行することができます。
+これを行うには<code class="language-plaintext highlighter-rouge">--detach</code>フラグ、あるいは短く<code class="language-plaintext highlighter-rouge">-d</code>フラグを指定します。
+Docker は先ほどと同じようにコンテナーを起動させますが、今回はコンテナーから「デタッチされた」つまり切り離されて実行されるので、ターミナルにプロンプトが戻ってきます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 </code></pre></div></div>
 
-<p>Docker started our container in the background and printed the Container ID on the terminal.</p>
+<p>Docker はバックグラウンドでコンテナーを起動させ、ターミナル上にそのコンテナー ID を出力します。</p>
 
-<p>Again, let’s make sure that our container is running properly. Run the same curl command from above.</p>
+<p>同じようにコンテナーが適切に動作していることを確認します。
+前とまったく同じ curl コマンドを実行してみます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
 Hello, Docker!
 </code></pre></div></div>
 
-<h2 id="list-containers">List containers</h2>
+<h2 id="list-containers">コンテナーの一覧表示</h2>
 
-<p>Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, we can run the <code class="language-plaintext highlighter-rouge">docker ps</code> command. Just like on Linux to see a list of processes on your machine, we would run the <code class="language-plaintext highlighter-rouge">ps</code> command. In the same spirit, we can run the <code class="language-plaintext highlighter-rouge">docker ps</code> command which displays a list of containers running on our machine.</p>
+<p>コンテナーをバックグラウンドで実行したので、コンテナーが実行しているかどうか、他にどんなコンテナーがマシン上で動作しているかは、どうやって調べたらよいでしょう。
+それは<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを使います。
+Linux 上であれば、マシン上のプロセス一覧を確認するには<code class="language-plaintext highlighter-rouge">ps</code>コマンドを実行します。
+同じように Docker では<code class="language-plaintext highlighter-rouge">docker ps</code>を実行します。
+このコマンドによって、マシン上で稼働しているコンテナーの一覧が表示されます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
 ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   6 minutes ago       Up 6 minutes        0.0.0.0:8000-&gt;5000/tcp   wonderful_kalam
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">docker ps</code> command provides a bunch of information about our running containers. We can see the container ID, The image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.</p>
+<p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドは実行中コンテナーに関して、いろいろな情報を表示します。
+その情報とは以下です。
+コンテナー ID、コンテナー内部で実行しているイメージ、コンテナー起動時に用いられた実行コマンド、コンテナー生成時刻、ステータス、公開ポート、コンテナー名です。</p>
 
-<p>You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute, but first we need to stop the container. To stop the container, run the <code class="language-plaintext highlighter-rouge">docker stop</code> command which does just that, stops the container. You need to pass the name of the container or you can use the container ID.</p>
+<p>コンテナー名はどうやって決まったんだろうと不思議に思うかもしれません。
+コンテナーを起動したときにはコンテナー名を指定したわけではないので、Docker がランダムに名前を生成します。
+コンテナー名はこの後すぐに変更していきますが、そのためにはまずコンテナーを停止する必要があります。
+コンテナーを停止するには<code class="language-plaintext highlighter-rouge">docker stop</code>コマンドを実行します。
+このコマンドはそのとおりにコンテナーを停止させます。
+この際にはコンテナー名あるいはコンテナー ID を指定します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop wonderful_kalam
 wonderful_kalam
 </code></pre></div></div>
 
-<p>Now, rerun the <code class="language-plaintext highlighter-rouge">docker ps</code> command to see a list of running containers.</p>
+<p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドをもう一度実行して、実行中コンテナーの一覧を確認します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 </code></pre></div></div>
 
-<h2 id="stop-start-and-name-containers">Stop, start, and name containers</h2>
+<h2 id="stop-start-and-name-containers">コンテナーの停止、起動、名前変更</h2>
 
-<p>You can start, stop, and restart Docker containers. When we stop a container, it is not removed, but the status is changed to stopped and the process inside the container is stopped. When we ran the <code class="language-plaintext highlighter-rouge">docker ps</code> command in the previous ,module, the default output only shows running containers. When we pass the <code class="language-plaintext highlighter-rouge">--all</code> or <code class="language-plaintext highlighter-rouge">-a</code> for short, we see all containers on our machine, irrespective of their start or stop status.</p>
+<p>Docker コンテナーは起動させ停止させ、再起動することができます。
+コンテナーを停止してもコンテナーが削除されるわけではなく、ステータスが停止となり、コンテナー内のプロセスが停止します。
+<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行したときに、出力されるコンテナーはデフォルトでは実行中コンテナーのみです。
+<code class="language-plaintext highlighter-rouge">--all</code>または<code class="language-plaintext highlighter-rouge">-a</code>を指定すると、システム上にあるコンテナーすべて、つまり停止、起動にかかわらずすべてが表示されます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span>
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
@@ -203,14 +240,16 @@ ec45285c456d        python-docker         <span class="s2">"docker-entrypoint.s�
 fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   37 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 36 minutes ago                       goofy_khayyam
 </code></pre></div></div>
 
-<p>You should now see several containers listed. These are containers that we started and stopped but have not been removed.</p>
+<p>コンテナーがいくつか出力されたはずです。
+このコンテナーはこれまでに起動し停止し、そのまま削除していないものです。</p>
 
-<p>Let’s restart the container that we just stopped. Locate the name of the container we just stopped and replace the name of the container below in the restart command.</p>
+<p>停止したコンテナーをここで再起動してみましょう。
+停止したコンテナーの名前を確認して、再起動を行う以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker restart wonderful_kalam
 </code></pre></div></div>
 
-<p>Now list all the containers again using the <code class="language-plaintext highlighter-rouge">docker ps</code> command.</p>
+<p>そこで再び<code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを使ってコンテナー一覧を確認します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
@@ -219,15 +258,22 @@ ec45285c456d        python-docker         <span class="s2">"docker-entrypoint.s�
 fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
 </code></pre></div></div>
 
-<p>Notice that the container we just restarted has been started in detached mode and has port 8000 exposed. Also, observe the status of the container is “Up X seconds”. When you restart a container, it starts with the same flags or commands that it was originally started with.</p>
+<p>上で再起動したコンテナーはデタッチモードで起動され、ポート 8000 が公開されています。
+またコンテナーのステータスを見てみると「Up X seconds」（起動後 X 秒）となっています。
+コンテナーを再起動したときには、はじめに起動したときと同じフラグ、同じコマンドによって起動されます。</p>
 
-<p>Now, let’s stop and remove all of our containers and take a look at fixing the random naming issue. Stop the container we just started. Find the name of your running container and replace the name in the command below with the name of the container on your system.</p>
+<p>ではコンテナーすべてを停止して削除します。
+そしてランダムな名前になってしまう点を修正していきます。
+起動したばかりのコンテナーを停止させます。
+システム上の実行中コンテナーの名前を確認して、以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop wonderful_kalam
 wonderful_kalam
 </code></pre></div></div>
 
-<p>Now that all of our containers are stopped, let’s remove them. When you remove a container, it is no longer running, nor it is in the stopped status, but the process inside the container has been stopped and the metadata for the container has been removed.</p>
+<p>こうしてコンテナーはすべて停止したので削除します。
+コンテナーを削除するということは、実行することも停止状態にすることもできなくなります。
+コンテナー内のプロセスはすでに停止され、コンテナーに対するメタデータも削除されています。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
@@ -236,7 +282,9 @@ ec45285c456d        python-docker         <span class="s2">"docker-entrypoint.s�
 fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
 </code></pre></div></div>
 
-<p>To remove a container, simple run the <code class="language-plaintext highlighter-rouge">docker rm</code> command passing the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.</p>
+<p>コンテナーを削除するには、<code class="language-plaintext highlighter-rouge">docker rm</code>コマンドにコンテナー名を与えて実行します。
+このコマンド 1 つに対して複数のコンテナー名を指定することもできます。
+同じように、以下のコマンドにおけるコンテナー名を書き換えて指定してください。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">rm </span>wonderful_kalam agitated_moser goofy_khayyam
 wonderful_kalam
@@ -244,11 +292,14 @@ agitated_moser
 goofy_khayyam
 </code></pre></div></div>
 
-<p>Run the <code class="language-plaintext highlighter-rouge">docker ps --all</code> command again to see that all containers are removed.</p>
+<p>再度<code class="language-plaintext highlighter-rouge">docker ps --all</code>コマンドを実行し、コンテナーすべてがなくなっていることを確認してください。</p>
 
-<p>Now, let’s address the random naming issue. Standard practice is to name your containers for the simple reason that it is easier to identify what is running in the container and what application or service it is associated with.</p>
+<p>それではランダム名となる点を解決します。
+コンテナーに名前をつける理由は単純なものです。
+どんなコンテナーが実行されているのかがすぐにわかります。
+またどんなアプリケーションやサービスが関連づいているのかがわかります。</p>
 
-<p>To name a container, we just need to pass the <code class="language-plaintext highlighter-rouge">--name</code> flag to the <code class="language-plaintext highlighter-rouge">docker run</code> command.</p>
+<p>コンテナー名をつけるには<code class="language-plaintext highlighter-rouge">docker run</code>コマンドに<code class="language-plaintext highlighter-rouge">--name</code>フラグをつけます。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:5000 <span class="nt">--name</span> rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
@@ -257,17 +308,24 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 1aa5d46418a6        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   3 seconds ago       Up 3 seconds        0.0.0.0:8000-&gt;5000/tcp   rest-server
 </code></pre></div></div>
 
-<p>That’s better! We can now easily identify our container based on the name.</p>
+<p>わかりやすくなりました。
+こうしてコンテナーの識別は、名前を使って簡単に行えます。</p>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
-<p>In this module, we took a look at running containers, publishing ports, and running containers in detached mode. We also took a look at managing containers by starting, stopping, and, restarting them. We also looked at naming our containers so they are more easily identifiable. In the next module, we’ll learn how to run a database in a container and connect it to our application. See:</p>
+<p>本節ではコンテナーの実行、ポート公開、デタッチモードでの実行を行いました。
+またコンテナーの起動、停止、再起動という制御を行いました。
+そしてコンテナーに名前づけを行って、識別しやすくしました。
+次節ではコンテナー内においてデータベースを実行して、アプリケーションを接続する方法を示します。
+以下を参照してください。</p>
 
-<p><a href="/docs.docker.jp.onthefly/language/python/develop/" class="button outline-btn">How to develop your application</a></p>
+<p><a href="/docs.docker.jp.onthefly/language/python/develop/" class="button outline-btn">アプリケーションの開発方法</a></p>
 
-<h2 id="feedback">Feedback</h2>
+<h2 id="feedback">フィードバック</h2>
 
-<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+<p>本トピック改善のためにフィードバックをお寄せください。
+お気づきの点があれば <a href="https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> の GitHub リポジトリに issue をあげてください。
+あるいは <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">PR の生成</a> により変更の提案を行ってください。</p>
 
 <p><br /></p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Python">Python</a>, <a href="/docs.docker.jp.onthefly/search/?q=run">run</a>, <a href="/docs.docker.jp.onthefly/search/?q=image">image</a>, <a href="/docs.docker.jp.onthefly/search/?q=container">container</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
@@ -303,13 +361,13 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
-  <li><a href="#overview" class="nomunge">Overview</a></li>
-  <li><a href="#run-in-detached-mode" class="nomunge">Run in detached mode</a></li>
-  <li><a href="#list-containers" class="nomunge">List containers</a></li>
-  <li><a href="#stop-start-and-name-containers" class="nomunge">Stop, start, and name containers</a></li>
-  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
-  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+  <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
+  <li><a href="#overview" class="nomunge">概要</a></li>
+  <li><a href="#run-in-detached-mode" class="nomunge">デタッチモード実行</a></li>
+  <li><a href="#list-containers" class="nomunge">コンテナーの一覧表示</a></li>
+  <li><a href="#stop-start-and-name-containers" class="nomunge">コンテナーの停止、起動、名前変更</a></li>
+  <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
+  <li><a href="#feedback" class="nomunge">フィードバック</a></li>
 </ul>
 
 </div>

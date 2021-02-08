@@ -1,7 +1,7 @@
-<!-- Page generated 2021-02-04 16:22:04 +0900-->
+<!-- Page generated 2021-02-08 17:39:06 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use containers for development | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>開発向けのコンテナー利用 | Docker ドキュメント</title>
   <meta name="description" content="Learn how to develop your application locally." />
   <meta name="keywords" content="python, local, development, run,">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/python/develop/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Use containers for development"/>
+  <meta name="twitter:title" itemprop="title name" content="開発向けのコンテナー利用"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Use containers for development" />
+  <meta property="og:title" content="開発向けのコンテナー利用" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-04T16:22:04+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-08T17:39:06+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-04T16:22:04+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use containers for development","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/python/develop/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-08T17:39:06+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"開発向けのコンテナー利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/python/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Use containers for development</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><ul class="pagination">
+                        <section class="section"><h1>開発向けのコンテナー利用</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/python/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li class="active"><a href="/docs.docker.jp.onthefly/language/python/develop/">開発向けコンテナー利用</a></li>
@@ -106,34 +106,46 @@
   <li><a href="/docs.docker.jp.onthefly/language/python/deploy/">アプリのデプロイ</a></li>
 </ul>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">前提条件</h2>
 
-<p>Work through the steps to build an image and run it as a containerized application in <a href="/docs.docker.jp.onthefly/language/python/run-containers/">Run your image as a container</a>.</p>
+<p><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a> において、イメージビルドを行いコンテナー化アプリケーションを実行していること。</p>
 
-<h2 id="introduction">Introduction</h2>
+<h2 id="introduction">はじめに</h2>
 
-<p>In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.</p>
+<p>本節では前節においてビルドしたアプリケーション用に、ローカルの開発環境を構築していきます。
+イメージのビルドには Docker を利用し、全体を取り扱いやすくするために Docker Compose を利用していきます。</p>
 
-<h2 id="run-a-database-in-a-container">Run a database in a container</h2>
+<h2 id="run-a-database-in-a-container">コンテナー内でのデータベース実行</h2>
 
-<p>First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.</p>
+<p>まずはコンテナー内でデータベースを動作させます。
+ボリュームやネットワークを使ってデータの保存を行い、アプリケーションとデータベースのやりとりを実現します。
+そしてこのすべてをとりまとめて Compose ファイルに収めます。
+こうすることで、たった 1 つのコマンド実行によってローカル開発環境を構築して実行できるようにします。
+最後に、コンテナー内で動作しているアプリケーションに対してデバッガー接続を行ってみます。</p>
 
-<p>Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.</p>
+<p>MySQL をダウンロード、インストールして、MySQL データベースをサービスとして起動するようなことはしません。
+そうではなく Docker の公式イメージの中から MySQL 用のイメージを利用し、コンテナーとしてこれを実行します。</p>
 
-<p>Before we run MySQL in a container, we’ll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about <a href="/docs.docker.jp.onthefly/storage/volumes/">Using volumes</a> in our documentation.</p>
+<p>MySQL をコンテナーとして実行するにあたって、いくつかボリュームを生成して Docker がデータや設定の保存ができるようにします。
+バインドマウントは利用せず、管理されたボリューム機能を利用します。
+ボリュームに関しては本ドキュメントの <a href="/docs.docker.jp.onthefly/storage/volumes/">ボリュームの利用</a> において詳しく説明しています。</p>
 
-<p>Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.</p>
+<p>それではここでボリュームを生成します。
+作り出すボリュームは 1 つは MySQL のデータ用、そしてもう 1 つは MySQL の設定用です。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker volume create mysql
 <span class="nv">$ </span>docker volume create mysql_config
 </code></pre></div></div>
 
-<p>Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.</p>
+<p>またここでネットワークを生成して、アプリケーションとデータベースが互いにやりとりできるようにします。
+ネットワークはユーザー定義によるブリッジネットワークであり、DNS 検索サービスが提供されるため、接続文字列を使った設定が利用可能になります。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create mysqlnet
 </code></pre></div></div>
 
-<p>Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and run it for you locally.</p>
+<p>コンテナーとして MySQL を実行します。
+そして上で生成したボリュームとネットワークをこれに結びつけます。
+Docker はイメージを Docker Hub からプルして、ローカル環境において実行します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mysql:/var/lib/mysql <span class="se">\</span>
   <span class="nt">-v</span> mysql_config:/etc/mysql <span class="nt">-p</span> 3306:3306 <span class="se">\</span>
@@ -143,7 +155,8 @@
   mysql
 </code></pre></div></div>
 
-<p>Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command:</p>
+<p>MySQL データベースが起動されていて、そこに接続できることを確認します。
+コンテナー内部から以下のコマンドを実行して、実行中の MySQL データベースに接続します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--network</span> mysqlnet <span class="nt">--rm</span> mysql mysql <span class="nt">-hmysqldb</span>
 Enter password: <span class="k">********</span>
@@ -163,13 +176,18 @@ Type <span class="s1">'help;'</span> or <span class="s1">'\h'</span> <span class
 mysql&gt;
 </code></pre></div></div>
 
-<h3 id="connect-the-application-to-the-database">Connect the application to the database</h3>
+<h3 id="connect-the-application-to-the-database">アプリケーションからのデータベース接続</h3>
 
-<p>In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the <code class="language-plaintext highlighter-rouge">-h</code> flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.</p>
+<p>上のコマンドにおいては、これまでと同じ MySQL イメージを使ってデータベースに接続しました。
+ただし今回は、コンテナーに対して ‘mysql’コマンドを受け渡し、<code class="language-plaintext highlighter-rouge">-h</code>フラグを通じて MySQL コンテナー名を指定する方法をとりました。
+CTRL-D を入力して MySQL のインタラクティブターミナルから抜け出てください。</p>
 
-<p>Next, we’ll update the sample application we created in the <a href="/docs.docker.jp.onthefly/language/python/build-images/#sample-application">Build images</a> module. To see the directory structure of the Python app, see <a href="/docs.docker.jp.onthefly/language/python/build-images/#directory-structure">Python application directory structure</a>.</p>
+<p>次は <a href="/docs.docker.jp.onthefly/language/python/build-images/#sample-application">イメージのビルド</a> の節において生成したサンプルアプリケーションを更新します。
+Python アプリのディレクトリ構造を確認するには、<a href="/docs.docker.jp.onthefly/language/python/build-images/#directory-structure">Python アプリケーションのディレクトリ構造</a> を参照してください。</p>
 
-<p>Okay, now that we have a running MySQL, let’s update the<code class="language-plaintext highlighter-rouge">app.py</code> to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.</p>
+<p>さて MySQL が動作したので、<code class="language-plaintext highlighter-rouge">app.py</code>を修正しデータ保存先を MySQL とします。
+さらにサーバーへの接続内容も追加することにします。
+1 つはレコード取得であり、1 つはレコード挿入です。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import mysql.connector
 import json
@@ -236,20 +254,24 @@ def db_init<span class="o">()</span>:
   app.run<span class="o">(</span>host <span class="o">=</span><span class="s1">'0.0.0.0'</span><span class="o">)</span>
 </code></pre></div></div>
 
-<p>We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.</p>
+<p>ここでは MySQL モジュールを追加して、データベースサーバーに接続するようなコードに変更しました。
+データベースとテーブルも生成しています。
+またサーバーへのアクセス方法として、レコード保存のためのウィジェット、レコード取得のためのウィジェットを生成しました。
+そこでこの変更を含むイメージを再ビルドします。</p>
 
-<p>First, let’s add the <code class="language-plaintext highlighter-rouge">mysql-connector-python </code>module to our application using pip.</p>
+<p>まずは pip を使ってアプリケーションに<code class="language-plaintext highlighter-rouge">mysql-connector-python</code>モジュールを追加します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip3 <span class="nb">install </span>mysql-connector-python
 <span class="nv">$ </span>pip3 freeze <span class="nt">-r</span> requirements.txt
 </code></pre></div></div>
 
-<p>Now we can build our image.</p>
+<p>そしてイメージをビルドします。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">--tag</span> python-docker <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.</p>
+<p>ではこのコンテナーをデータベースのネットワークに追加して実行します。
+これによってデータベースへのアクセスは、コンテナー名を使って行えるようになります。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
   <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
@@ -259,7 +281,7 @@ def db_init<span class="o">()</span>:
   python-docker
 </code></pre></div></div>
 
-<p>Let’s test that our application is connected to the database and is able to add a note.</p>
+<p>アプリケーションがデータベースに接続されていて、メモ書き（note）が追加できることを確認します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:5000/initdb
 <span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
@@ -269,16 +291,18 @@ def db_init<span class="o">()</span>:
   <span class="nt">--data</span> <span class="s1">'description=this is a test widget'</span>
 </code></pre></div></div>
 
-<p>You should receive the following JSON back from our service.</p>
+<p>サービスからは以下のような JSON データが返ってくるはずです。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[{</span><span class="s2">"name"</span>: <span class="s2">"widget01"</span>, <span class="s2">"description"</span>: <span class="s2">"this is a test widget"</span><span class="o">}]</span>
 </code></pre></div></div>
 
-<h2 id="use-compose-to-develop-locally">Use Compose to develop locally</h2>
+<h2 id="use-compose-to-develop-locally">Compose を使ったローカル開発環境</h2>
 
-<p>In this section, we’ll create a Compose file to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the <code class="language-plaintext highlighter-rouge">python-docker</code> application in debug mode so that we can connect a debugger to the running process.</p>
+<p>ここでは Compose ファイルを生成して、1 つのコマンド実行から python-docker と MySQL を起動できるようにします。
+なお<code class="language-plaintext highlighter-rouge">python-docker</code>はデバッグモードで起動するような Compose ファイルとして、稼働するノードプロセスに対してデバッガーを接続できるようにしておきます。</p>
 
-<p>Open the <code class="language-plaintext highlighter-rouge">python-docker</code> code in your IDE or a text editor and create a new file named <code class="language-plaintext highlighter-rouge">docker-compose.dev.yml</code>. Copy and paste the following commands into the file.</p>
+<p>IDE あるいはテキストエディターにおいて<code class="language-plaintext highlighter-rouge">python-docker</code>を開いて、<code class="language-plaintext highlighter-rouge">docker-compose.dev.yml</code>というファイルを新規生成します。
+そのファイルに以下の記述をコピーおよび貼りつけます。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
 
@@ -306,42 +330,54 @@ def db_init<span class="o">()</span>:
   <span class="na">mysql_config</span><span class="pi">:</span>
 </code></pre></div></div>
 
-<p>This Compose file is super convenient as we do not have to type all the parameters to pass to the <code class="language-plaintext highlighter-rouge">docker run</code> command. We can declaratively do that using a Compose file.</p>
+<p>この Compose ファイルは非常に便利なものです。
+<code class="language-plaintext highlighter-rouge">docker run</code>コマンドの実行にあたって、パラメーターすべてを記述する必要はありません。
+それは Compose ファイル内に宣言という形で行います。</p>
 
-<p>We expose port 5000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.</p>
+<p>ポート 5000 を公開することで、コンテナー内部にある開発ウェブサーバーにアクセスできるようにします。
+またローカルにあるソースコードを実行コンテナー内にもマッピングして、テキストエディター上での変更を可能とし、その変更をコンテナー内に反映されるようにします。</p>
 
-<p>Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we’ve named our MySQL service as in the Compose file.</p>
+<p>Compose ファイルを利用する理由となるもう一つ優れているのは、サービス名を使ってサービス設定の解決を行うことができる点です。
+だから接続文字列の中で「mysqldb」という名称を用いることができるのです。
+「mysqldb」という名称をなぜ用いるかと言えば、Compose ファイル内にて MySQL サービスに対してそのような名前づけを行ったからです。</p>
 
-<p>Now, to start our application and to confirm that it is running properly, run the following command:</p>
+<p>アプリケーションを起動して正常に動作していることを確認するために、以下のコマンドを実行します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
 </code></pre></div></div>
 
-<p>We pass the <code class="language-plaintext highlighter-rouge">--build</code> flag so Docker will compile our image and then starts the containers.</p>
+<p>ここでは<code class="language-plaintext highlighter-rouge">--build</code>フラグを指定しました。
+これによって Docker はイメージをコンパイルした上で起動を行います。</p>
 
-<p>Now let’s test our API endpoint. Run the following curl command:</p>
+<p>では API エンドポイントを確認します。
+以下の curl コマンドを実行してみましょう。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/widgets
 </code></pre></div></div>
 
-<p>You should receive the following response:</p>
+<p>以下のようなレスポンスが返ってくるはずです。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[]</span>
 </code></pre></div></div>
 
-<p>This is because our database is empty.</p>
+<p>この結果になったのは、データベースが空であるからです。</p>
 
-<h2 id="next-steps">Next steps</h2>
+<h2 id="next-steps">次のステップ</h2>
 
-<p>In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.</p>
+<p>本節では汎用的な開発イメージを生成しました。
+このイメージは、ふだんのコマンドラインツールと何ら変わらずに実行できました。
+また Compose ファイルを生成してソースコードを実行コンテナー内にマッピングし、デバッグ用のポートを公開しました。</p>
 
-<p>In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:</p>
+<p>次節では GitHub アクションを使って CI/CD パイプラインを設定する方法を見ていきます。
+以下を参照してください。</p>
 
-<p><a href="/docs.docker.jp.onthefly/language/python/configure-ci-cd/" class="button outline-btn">Configure CI/CD</a></p>
+<p><a href="/docs.docker.jp.onthefly/language/python/configure-ci-cd/" class="button outline-btn">CI/CD の設定</a></p>
 
-<h2 id="feedback">Feedback</h2>
+<h2 id="feedback">フィードバック</h2>
 
-<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+<p>本トピック改善のためにフィードバックをお寄せください。
+お気づきの点があれば <a href="https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> の GitHub リポジトリに issue をあげてください。
+あるいは <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">PR の生成</a> により変更の提案を行ってください。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=python">python</a>, <a href="/docs.docker.jp.onthefly/search/?q=local">local</a>, <a href="/docs.docker.jp.onthefly/search/?q=development">development</a>, <a href="/docs.docker.jp.onthefly/search/?q=run">run</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -375,16 +411,16 @@ def db_init<span class="o">()</span>:
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
-  <li><a href="#introduction" class="nomunge">Introduction</a></li>
-  <li><a href="#run-a-database-in-a-container" class="nomunge">Run a database in a container</a>
+  <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
+  <li><a href="#introduction" class="nomunge">はじめに</a></li>
+  <li><a href="#run-a-database-in-a-container" class="nomunge">コンテナー内でのデータベース実行</a>
     <ul>
-      <li><a href="#connect-the-application-to-the-database" class="nomunge">Connect the application to the database</a></li>
+      <li><a href="#connect-the-application-to-the-database" class="nomunge">アプリケーションからのデータベース接続</a></li>
     </ul>
   </li>
-  <li><a href="#use-compose-to-develop-locally" class="nomunge">Use Compose to develop locally</a></li>
-  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
-  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+  <li><a href="#use-compose-to-develop-locally" class="nomunge">Compose を使ったローカル開発環境</a></li>
+  <li><a href="#next-steps" class="nomunge">次のステップ</a></li>
+  <li><a href="#feedback" class="nomunge">フィードバック</a></li>
 </ul>
 
 </div>

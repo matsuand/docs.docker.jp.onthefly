@@ -9,7 +9,7 @@ description: Learn how to develop your application locally.
 ---
 @y
 ---
-title: "Use containers for development"
+title: "開発向けのコンテナー利用"
 keywords: python, local, development, run,
 description: Learn how to develop your application locally.
 ---
@@ -24,55 +24,67 @@ description: Learn how to develop your application locally.
 @x
 ## Prerequisites
 @y
-## Prerequisites
+{: #prerequisites }
+## 前提条件
 @z
 
 @x
 Work through the steps to build an image and run it as a containerized application in [Run your image as a container](run-containers.md).
 @y
-Work through the steps to build an image and run it as a containerized application in [Run your image as a container](run-containers.md).
+[コンテナーとしてのイメージ実行](run-containers.md) において、イメージビルドを行いコンテナー化アプリケーションを実行していること。
 @z
 
 @x
 ## Introduction
 @y
-## Introduction
+{: #introduction }
+## はじめに
 @z
 
 @x
 In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
 @y
-In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
+本節では前節においてビルドしたアプリケーション用に、ローカルの開発環境を構築していきます。
+イメージのビルドには Docker を利用し、全体を取り扱いやすくするために Docker Compose を利用していきます。
 @z
 
 @x
 ## Run a database in a container
 @y
-## Run a database in a container
+{: #run-a-database-in-a-container }
+## コンテナー内でのデータベース実行
 @z
 
 @x
 First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
 @y
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+まずはコンテナー内でデータベースを動作させます。
+ボリュームやネットワークを使ってデータの保存を行い、アプリケーションとデータベースのやりとりを実現します。
+そしてこのすべてをとりまとめて Compose ファイルに収めます。
+こうすることで、たった 1 つのコマンド実行によってローカル開発環境を構築して実行できるようにします。
+最後に、コンテナー内で動作しているアプリケーションに対してデバッガー接続を行ってみます。
 @z
 
 @x
 Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.
 @y
-Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.
+MySQL をダウンロード、インストールして、MySQL データベースをサービスとして起動するようなことはしません。
+そうではなく Docker の公式イメージの中から MySQL 用のイメージを利用し、コンテナーとしてこれを実行します。
 @z
 
 @x
 Before we run MySQL in a container, we'll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about [Using volumes](../../storage/volumes.md) in our documentation.
 @y
-Before we run MySQL in a container, we'll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about [Using volumes](../../storage/volumes.md) in our documentation.
+MySQL をコンテナーとして実行するにあたって、いくつかボリュームを生成して Docker がデータや設定の保存ができるようにします。
+バインドマウントは利用せず、管理されたボリューム機能を利用します。
+ボリュームに関しては本ドキュメントの [ボリュームの利用](../../storage/volumes.md) において詳しく説明しています。
 @z
 
 @x
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
 @y
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+それではここでボリュームを生成します。
+作り出すボリュームは 1 つは MySQL のデータ用、そしてもう 1 つは MySQL の設定用です。
 @z
 
 @x
@@ -90,7 +102,8 @@ $ docker volume create mysql_config
 @x
 Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
 @y
-Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
+またここでネットワークを生成して、アプリケーションとデータベースが互いにやりとりできるようにします。
+ネットワークはユーザー定義によるブリッジネットワークであり、DNS 検索サービスが提供されるため、接続文字列を使った設定が利用可能になります。
 @z
 
 @x
@@ -106,7 +119,9 @@ $ docker network create mysqlnet
 @x
 Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and run it for you locally.
 @y
-Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and run it for you locally.
+コンテナーとして MySQL を実行します。
+そして上で生成したボリュームとネットワークをこれに結びつけます。
+Docker はイメージを Docker Hub からプルして、ローカル環境において実行します。
 @z
 
 @x
@@ -132,55 +147,46 @@ $ docker run -it --rm -d -v mysql:/var/lib/mysql \
 @x
 Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command:
 @y
-Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command:
+MySQL データベースが起動されていて、そこに接続できることを確認します。
+コンテナー内部から以下のコマンドを実行して、実行中の MySQL データベースに接続します。
 @z
 
 @x
 ```shell
 $ docker run -it --network mysqlnet --rm mysql mysql -hmysqldb
 Enter password: ********
-@y
-```shell
-$ docker run -it --network mysqlnet --rm mysql mysql -hmysqldb
-Enter password: ********
-@z
 
-@x
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
 Server version: 8.0.23 MySQL Community Server - GPL
-@y
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 8
-Server version: 8.0.23 MySQL Community Server - GPL
-@z
 
-@x
 Copyright (c) 2000, 2021, Oracle and/or its affiliates.
-@y
-Copyright (c) 2000, 2021, Oracle and/or its affiliates.
-@z
 
-@x
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
 owners.
-@y
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-@z
 
-@x
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-@y
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-@z
 
-@x
 mysql>
 ```
 @y
+```shell
+$ docker run -it --network mysqlnet --rm mysql mysql -hmysqldb
+Enter password: ********
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.23 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
 mysql>
 ```
 @z
@@ -188,25 +194,31 @@ mysql>
 @x
 ### Connect the application to the database
 @y
-### Connect the application to the database
+{: #connect-the-application-to-the-database }
+### アプリケーションからのデータベース接続
 @z
 
 @x
 In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.
 @y
-In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.
+上のコマンドにおいては、これまでと同じ MySQL イメージを使ってデータベースに接続しました。
+ただし今回は、コンテナーに対して ‘mysql’コマンドを受け渡し、`-h`フラグを通じて MySQL コンテナー名を指定する方法をとりました。
+CTRL-D を入力して MySQL のインタラクティブターミナルから抜け出てください。
 @z
 
 @x
 Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
 @y
-Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
+次は [イメージのビルド](build-images.md#sample-application) の節において生成したサンプルアプリケーションを更新します。
+Python アプリのディレクトリ構造を確認するには、[Python アプリケーションのディレクトリ構造](build-images.md#directory-structure) を参照してください。
 @z
 
 @x
 Okay, now that we have a running MySQL, let’s update the`app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
 @y
-Okay, now that we have a running MySQL, let’s update the`app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
+さて MySQL が動作したので、`app.py`を修正しデータ保存先を MySQL とします。
+さらにサーバーへの接続内容も追加することにします。
+1 つはレコード取得であり、1 つはレコード挿入です。
 @z
 
 @x
@@ -214,16 +226,14 @@ Okay, now that we have a running MySQL, let’s update the`app.py` to use MySQL 
 import mysql.connector
 import json
 from flask import Flask
-@y
-```shell
-import mysql.connector
-import json
-from flask import Flask
-@z
 
-@x
 app = Flask(__name__)
 @y
+```shell
+import mysql.connector
+import json
+from flask import Flask
+
 app = Flask(__name__)
 @z
 
@@ -372,13 +382,16 @@ if __name__ == "__main__":
 @x
 We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.
 @y
-We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.
+ここでは MySQL モジュールを追加して、データベースサーバーに接続するようなコードに変更しました。
+データベースとテーブルも生成しています。
+またサーバーへのアクセス方法として、レコード保存のためのウィジェット、レコード取得のためのウィジェットを生成しました。
+そこでこの変更を含むイメージを再ビルドします。
 @z
 
 @x
 First, let’s add the `mysql-connector-python `module to our application using pip.
 @y
-First, let’s add the `mysql-connector-python `module to our application using pip.
+まずは pip を使ってアプリケーションに`mysql-connector-python`モジュールを追加します。
 @z
 
 @x
@@ -396,7 +409,7 @@ $ pip3 freeze -r requirements.txt
 @x
 Now we can build our image.
 @y
-Now we can build our image.
+そしてイメージをビルドします。
 @z
 
 @x
@@ -412,7 +425,8 @@ $ docker build --tag python-docker .
 @x
 Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
 @y
-Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
+ではこのコンテナーをデータベースのネットワークに追加して実行します。
+これによってデータベースへのアクセスは、コンテナー名を使って行えるようになります。
 @z
 
 @x
@@ -438,7 +452,7 @@ $ docker run \
 @x
 Let’s test that our application is connected to the database and is able to add a note.
 @y
-Let’s test that our application is connected to the database and is able to add a note.
+アプリケーションがデータベースに接続されていて、メモ書き（note）が追加できることを確認します。
 @z
 
 @x
@@ -464,7 +478,7 @@ $ curl --request POST \
 @x
 You should receive the following JSON back from our service.
 @y
-You should receive the following JSON back from our service.
+サービスからは以下のような JSON データが返ってくるはずです。
 @z
 
 @x
@@ -480,19 +494,22 @@ You should receive the following JSON back from our service.
 @x
 ## Use Compose to develop locally
 @y
-## Use Compose to develop locally
+{: #use-compose-to-develop-locally }
+## Compose を使ったローカル開発環境
 @z
 
 @x
 In this section, we’ll create a Compose file to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
 @y
-In this section, we’ll create a Compose file to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
+ここでは Compose ファイルを生成して、1 つのコマンド実行から python-docker と MySQL を起動できるようにします。
+なお`python-docker`はデバッグモードで起動するような Compose ファイルとして、稼働するノードプロセスに対してデバッガーを接続できるようにしておきます。
 @z
 
 @x
 Open the `python-docker` code in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 @y
-Open the `python-docker` code in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
+IDE あるいはテキストエディターにおいて`python-docker`を開いて、`docker-compose.dev.yml`というファイルを新規生成します。
+そのファイルに以下の記述をコピーおよび貼りつけます。
 @z
 
 @x
@@ -560,25 +577,30 @@ volumes:
 @x
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that using a Compose file.
 @y
-This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that using a Compose file.
+この Compose ファイルは非常に便利なものです。
+`docker run`コマンドの実行にあたって、パラメーターすべてを記述する必要はありません。
+それは Compose ファイル内に宣言という形で行います。
 @z
 
 @x
 We expose port 5000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
 @y
-We expose port 5000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
+ポート 5000 を公開することで、コンテナー内部にある開発ウェブサーバーにアクセスできるようにします。
+またローカルにあるソースコードを実行コンテナー内にもマッピングして、テキストエディター上での変更を可能とし、その変更をコンテナー内に反映されるようにします。
 @z
 
 @x
 Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we've named our MySQL service as in the Compose file.
 @y
-Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we've named our MySQL service as in the Compose file.
+Compose ファイルを利用する理由となるもう一つ優れているのは、サービス名を使ってサービス設定の解決を行うことができる点です。
+だから接続文字列の中で「mysqldb」という名称を用いることができるのです。
+「mysqldb」という名称をなぜ用いるかと言えば、Compose ファイル内にて MySQL サービスに対してそのような名前づけを行ったからです。
 @z
 
 @x
 Now, to start our application and to confirm that it is running properly, run the following command:
 @y
-Now, to start our application and to confirm that it is running properly, run the following command:
+アプリケーションを起動して正常に動作していることを確認するために、以下のコマンドを実行します。
 @z
 
 @x
@@ -594,13 +616,15 @@ $ docker-compose -f docker-compose.dev.yml up --build
 @x
 We pass the `--build` flag so Docker will compile our image and then starts the containers.
 @y
-We pass the `--build` flag so Docker will compile our image and then starts the containers.
+ここでは`--build`フラグを指定しました。
+これによって Docker はイメージをコンパイルした上で起動を行います。
 @z
 
 @x
 Now let’s test our API endpoint. Run the following curl command:
 @y
-Now let’s test our API endpoint. Run the following curl command:
+では API エンドポイントを確認します。
+以下の curl コマンドを実行してみましょう。
 @z
 
 @x
@@ -616,7 +640,7 @@ $ curl --request GET --url http://localhost:8080/widgets
 @x
 You should receive the following response:
 @y
-You should receive the following response:
+以下のようなレスポンスが返ってくるはずです。
 @z
 
 @x
@@ -632,41 +656,48 @@ You should receive the following response:
 @x
 This is because our database is empty.
 @y
-This is because our database is empty.
+この結果になったのは、データベースが空であるからです。
 @z
 
 @x
 ## Next steps
 @y
-## Next steps
+{: #next-steps }
+## 次のステップ
 @z
 
 @x
 In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.
 @y
-In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.
+本節では汎用的な開発イメージを生成しました。
+このイメージは、ふだんのコマンドラインツールと何ら変わらずに実行できました。
+また Compose ファイルを生成してソースコードを実行コンテナー内にマッピングし、デバッグ用のポートを公開しました。
 @z
 
 @x
 In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
 @y
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+次節では GitHub アクションを使って CI/CD パイプラインを設定する方法を見ていきます。
+以下を参照してください。
 @z
 
 @x
 [Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
 @y
-[Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
+[CI/CD の設定](configure-ci-cd.md){: .button .outline-btn}
 @z
 
 @x
 ## Feedback
 @y
-## Feedback
+{: #feedback } 
+## フィードバック
 @z
 
 @x
 Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 @y
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+本トピック改善のためにフィードバックをお寄せください。
+お気づきの点があれば [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} の GitHub リポジトリに issue をあげてください。
+あるいは [PR の生成](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} により変更の提案を行ってください。
 @z
