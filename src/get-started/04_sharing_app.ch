@@ -190,9 +190,9 @@ new instance that has never seen this container image! To do this, we will use P
 @z
 
 @x
-1. Open your browser to [Play with Docker](http://play-with-docker.com){:target="_blank" rel="noopener" class="_"}.
+1. Open your browser to [Play with Docker](https://www.docker.com/play-with-docker){:target="_blank" rel="noopener" class="_"}.
 @y
-1.  ブラウザーを開いて [Play with Docker](http://play-with-docker.com){:target="_blank" rel="noopener" class="_"} にアクセスします。
+1.  ブラウザーを開いて [Play with Docker](https://www.docker.com/play-with-docker){:target="_blank" rel="noopener" class="_"} にアクセスします。
 @z
 
 @x

@@ -427,11 +427,11 @@ Also see the [full list of compose features supported by ACI](aci-compose-featur
 @z
 
 @x
-  By default, `docker compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the working directory using the  --workdir  flag or specify the Compose file directly using the `--file` flag.
+  By default, `docker compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the working directory using the --workdir flag or specify the Compose file directly using `docker compose --file mycomposefile.yaml up`.
 @y
   デフォルトにおいて`docker compose up`は、カレントフォルダーの`docker-compose.yaml`ファイルを利用します。
   ワーキングディレクトリは --workdir フラグにより指定することができます。
-  また Compose ファイルを直接`--file`フラグを使って指定することもできます。
+  また Compose ファイルを直接`docker compose --file mycomposefile.yaml up`と指定することもできます。
 @z
 
 @x
@@ -474,9 +474,9 @@ Also see the [full list of compose features supported by ACI](aci-compose-featur
 @z
 
 @x
-From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose up --project-name PROJECT`.
+From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose --project-name PROJECT up`.
 @y
-デプロイされた Compose アプリケーションに対しては、同一のプロジェクト名を用いて、`docker compose up --project-name PROJECT`のようにアプリケーションの再デプロイを行い、アプリケーションの更新を行うことができます。
+デプロイされた Compose アプリケーションに対しては、同一のプロジェクト名を用いて、`docker compose --project-name PROJECT up`のようにアプリケーションの再デプロイを行い、アプリケーションの更新を行うことができます。
 @z
 
 @x

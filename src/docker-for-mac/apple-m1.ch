@@ -71,7 +71,10 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
 
 @x
 - The tech preview build does not update automatically. You must manually install any future versions of Docker Desktop.
-- You must install Rosetta 2 as some binaries are still Darwin/AMD64.
+- You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line use this command:
+    ```
+    softwareupdate --install-rosetta
+    ```
 - The DNS name `host.docker.internal` only works if you add `--add-host=host.docker.internal:host-gateway` to the `docker run` command
 - The DNS name `vm.docker.internal` does not work.
 - Kubernetes does not initialize because of a missing DNS name.
@@ -82,6 +85,10 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
 - 技術プレビュービルドは自動アップデートされません。
   最新バージョンは手動インストールすることが必要です。
 - 実行バイナリが Darwin/AMD64 向けのものがあるため、Rosetta 2 をインストールする必要があります。
+  Rosetta 2 をコマンドラインから手動でインストールする場合は、以下のコマンドを実行します。
+    ```
+    softwareupdate --install-rosetta
+    ```
 - DNS 名`host.docker.internal`は、`docker run`コマンドに対して`--add-host=host.docker.internal:host-gateway`をつけた場合にのみ動作します。
 - DNS 名`vm.docker.internal`は動作しません。
 - Kubernetes は DNS 名がないため初期化されません。

@@ -302,11 +302,11 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
 
 @x
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
+> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
 {: .important}
 @y
 > `alpine`では以下に示す依存パッケージが必要です。
-> `py-pip`、`python-dev`、`libffi-dev`、`openssl-dev`、`gcc`、`libc-dev`、`make`
+> `py-pip`、`python-dev`、`libffi-dev`、`openssl-dev`、`gcc`、`libc-dev`、`rust`、`cargo`、`make`
 {: .important}
 @z
 

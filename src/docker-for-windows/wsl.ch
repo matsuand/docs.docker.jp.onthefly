@@ -217,9 +217,9 @@ Docker Desktop 安定版 2.3.0.2 をインストールする **前に**、上の
 @z
 
 @x
-    WSL Integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`.
+    The Docker-WSL integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`.
 @y
-    WSL 統合環境が、デフォルトの WSL ディストリビューション上において有効になります。
+    Docker-WSL 統合環境が、デフォルトの WSL ディストリビューション上において有効になります。
     デフォルトの WSL ディストリビューションを変更するには `wsl --set-default <ディストリビューション名>` を実行します。
 @z
 
@@ -230,20 +230,20 @@ Docker Desktop 安定版 2.3.0.2 をインストールする **前に**、上の
 @z
 
 @x
-    Optionally, select any additional distributions you would like to enable WSL 2 on.
+    Optionally, select any additional distributions you would like to enable the Docker-WSL integration on.
 @y
-    他に WSL 2 を有効にしたいディストリビューションがあれば、その設定を行います。
+    他に Docker-WSL 統合環境を有効にしたいディストリビューションがあれば、その設定を行います。
 @z
 
 @x
     > **Note**
     >
-    > WSL Integration components running in your distro depend on glibc. This can cause issues when running WSL 2 on musl-based distros such as Alpine Linux. Alpine users can use the [alpine-pkg-glibc(https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} package to deploy glibc alongside musl to run the integration.
+    > The Docker-WSL integration components running in your distro depend on glibc. This can cause issues when running musl-based distros such as Alpine Linux. Alpine users can use the [alpine-pkg-glibc](https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} package to deploy glibc alongside musl to run the integration.
 @y
     > **メモ**
     >
-    > ディストリビューション内で稼働する WSL 統合環境は glibc に依存しています。
-    > したがって Alpine Linux のような musl ベースのディストリビューションにおいて WSL 2 を動作させる場合には、問題が発生することがあります。
+    > ディストリビューション内で稼働する Docker-WSL 統合環境は glibc に依存しています。
+    > したがって Alpine Linux のような musl ベースのディストリビューションを動作させる場合には、問題が発生することがあります。
     > Alpine ユーザーが統合環境を動作させる際には [alpine-pkg-glibc(https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} パッケージを導入し、musl に合わせた glibc を用いることが必要かもしれません。
 @z
 

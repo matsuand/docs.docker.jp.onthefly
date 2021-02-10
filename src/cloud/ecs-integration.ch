@@ -332,11 +332,11 @@ stop a full Compose application.
 
 @x
   By default, `docker compose up` uses the `compose.yaml` or `docker-compose.yaml` file in
-  the current folder. You can specify the Compose file directly using the
-  `--file` flag.
+  the current folder. You can specify the working directory using the --workdir flag or
+  specify the Compose file directly using `docker compose --file mycomposefile.yaml up`.
 @y
   デフォルトにおいて`docker compose up`は、カレントフォルダーの`compose.yaml`ファイルまたは`docker-compose.yaml`ファイルを利用します。
-  Compose ファイルを直接`--file`フラグを使って指定することもできます。
+  --workdir フラグを使ってワーキングディレクトリを指定するか、あるいは Compose ファイルを直接する`docker compose --file mycomposefile.yaml up`のような実行方法も可能です。
 @z
 
 @x
@@ -449,10 +449,10 @@ Compose アプリケーションログの確認は、デフォルトではロー
 docker compose logs
 
 # specify compose project name
-docker compose logs --project-name PROJECT
+docker compose --project-name PROJECT logs
 
 # specify compose file
-docker compose logs --file /path/to/docker-compose.yaml
+docker compose --file /path/to/docker-compose.yaml logs
 ```
 @y
 ```console
@@ -460,10 +460,10 @@ docker compose logs --file /path/to/docker-compose.yaml
 docker compose logs
 
 # Compose プロジェクト名を指定します。
-docker compose logs --project-name PROJECT
+docker compose --project-name PROJECT logs
 
 # Compose ファイルを指定します。
-docker compose logs --file /path/to/docker-compose.yaml
+docker compose --file /path/to/docker-compose.yaml logs
 ```
 @z
 
