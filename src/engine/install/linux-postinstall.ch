@@ -362,7 +362,7 @@ the [Docker CLI Reference](/engine/reference/commandline/dockerd/) article.
 > understand the security implications of opening docker to the network. If steps are not taken to secure the connection, 
 > it is possible for remote non-root users to gain root access on the host. For more information on how to use TLS 
 > certificates to secure this connection, check this article on 
-> [how to protect the Docker daemon socket](../security/https.md).
+> [how to protect the Docker daemon socket](../security/protect-access.md).
 {: .warning}
 @y
 > セキュアな接続
@@ -370,7 +370,7 @@ the [Docker CLI Reference](/engine/reference/commandline/dockerd/) article.
 > Docker においてリモートホストからの接続を許可する設定を行うには、十分に理解しておくべきことがあります。
 > ネットワークに向けて Docker をオープンなものにするということは、セキュリティに関する問題を大いに含んでいるということです。
 > 設定を誤ってセキュアな接続が確保されていなかったら、それはつまり、リモートの root ユーザー以外がホスト上の root 権限を奪取してしまいます。
-> TLS 証明書を使ってセキュアな接続を行う方法については、[Docker デーモンソケットを守る方法](../security/https/) の説明を参照してください。
+> TLS 証明書を使ってセキュアな接続を行う方法については、[Docker デーモンソケットを守る方法](../security/protect-access.md) の説明を参照してください。
 {: .warning}
 @z
 

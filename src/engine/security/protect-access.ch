@@ -3,47 +3,199 @@
 
 @x
 ---
-description: How to setup and run Docker with HTTPS
-keywords: docker, docs, article, example, https, daemon, tls, ca,  certificate
+description: How to setup and run Docker with SSH or HTTPS
+keywords: docker, docs, article, example, ssh, https, daemon, tls, ca,  certificate
 redirect_from:
 - /engine/articles/https/
 - /articles/https/
+- /engine/https/
 title: Protect the Docker daemon socket
 ---
 @y
 ---
-description: HTTPS により Docker を起動します。
-keywords: docker, docs, article, example, https, daemon, tls, ca,  certificate
+description: SSH や HTTPS により Docker を設定し実行します。
+keywords: docker, docs, article, example, ssh, https, daemon, tls, ca,  certificate
 redirect_from:
 - /engine/articles/https/
 - /articles/https/
+- /engine/https/
 title: Docker デーモンソケットの保護
 ---
 @z
 
 @x
 By default, Docker runs through a non-networked UNIX socket. It can also
-optionally communicate using an HTTP socket.
+optionally communicate using SSH or a TLS (HTTPS) socket.
 @y
-{% comment %}
-By default, Docker runs through a non-networked UNIX socket. It can also
-optionally communicate using an HTTP socket.
-{% endcomment %}
 デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。
-HTTPS ソケットを用いた通信を行うこともできます。
+SSH や TLS（HTTPS）ソケットを用いた通信を行うこともできます。
 @z
 
 @x
-If you need Docker to be reachable through the network in a safe manner, you can
-enable TLS by specifying the `tlsverify` flag and pointing Docker's
+## Use SSH to protect the Docker daemon socket
+@y
+{: #use-ssh-to-protect-the-docker-daemon-socket }
+## SSH を用いた Docker デーモンソケットの保護
+@z
+
+@x
+> **Note**
+>
+> The given `USERNAME` must have permissions to access the docker socket on the
+> remote machine. Refer to [manage Docker as a non-root user](../../install/linux-postinstall/#manage-docker-as-a-non-root-user)
+> to learn how to give a non-root user access to the docker socket.
+@y
+> **メモ**
+>
+> 説明に用いる`USERNAME`は、リモートマシン上において Docker ソケットにアクセスする権限を持っていなければなりません。
+> root ではないユーザーにより Docker ソケットへアクセスする方法に関しては [root ユーザー以外で Docker を管理する](../../install/linux-postinstall/#manage-docker-as-a-non-root-user) を参照してください。
+@z
+
+@x
+The following example creates a [`docker context`](../../context/working-with-contexts.md)
+to connect with a remote `dockerd` daemon on `host1.example.com` using SSH, and
+as the `docker-user` user on the remote machine:
+@y
+以下の例では [`docker context`](../../context/working-with-contexts.md) を生成し、リモートホスト`host1.example.com`上の`dockerd`デーモンに対して SSH を使って接続します。
+その際にはリモートホスト上のユーザー`docker-user`によりアクセスします。
+@z
+
+@x
+```console
+$ docker context create \
+    --docker host=ssh://docker-user@host1.example.com \
+    --description="Remote engine" \
+    my-remote-engine
+
+my-remote-engine
+Successfully created context "my-remote-engine"
+```
+@y
+```console
+$ docker context create \
+    --docker host=ssh://docker-user@host1.example.com \
+    --description="Remote engine" \
+    my-remote-engine
+
+my-remote-engine
+Successfully created context "my-remote-engine"
+```
+@z
+
+@x
+After creating the context, use `docker context use` to switch the `docker` CLI
+to use it, and to connect to the remote engine:
+@y
+コンテキストを生成したら、`docker context use`を実行して`docker` CLI がこれを用いるようにします。
+そしてリモートエンジンにアクセスします。
+@z
+
+@x
+```console
+$ docker context use my-remote-engine
+my-remote-engine
+Current context is now "my-remote-engine"
+
+$ docker info
+<prints output of the remote engine>
+```
+@y
+```console
+$ docker context use my-remote-engine
+my-remote-engine
+Current context is now "my-remote-engine"
+
+$ docker info
+<リモートエンジンに関する情報の出力>
+```
+@z
+
+@x
+Use the `default` context to switch back to the default (local) daemon:
+@y
+`default`コンテキストを用いると、デフォルトの（ローカルの）デーモンに切り替わります。
+@z
+
+@x
+```console
+$ docker context use default
+default
+Current context is now "default"
+```
+@y
+```console
+$ docker context use default
+default
+Current context is now "default"
+```
+@z
+
+@x
+Alternatively, use the `DOCKER_HOST` environment variable to temporarily switch
+the `docker` CLI to connect to the remote host using SSH. This does not require
+creating a context, and can be useful to create an ad-hoc connection with a different
+engine:
+@y
+あるいは環境変数`DOCKER_HOST`を用いることで、`docker` CLI によりリモートホストへの SSH 接続設定を一時的に切り替えることもできます。
+この場合はコンテキストを生成する必要がなく、接続切り替えを簡単にできるので便利です。
+@z
+
+@x
+```console
+$ export DOCKER_HOST=ssh://docker-user@host1.example.com
+$ docker info
+<prints output of the remote engine>
+```
+@y
+```console
+$ export DOCKER_HOST=ssh://docker-user@host1.example.com
+$ docker info
+<リモートエンジンに関する情報の出力>
+```
+@z
+
+@x
+### SSH Tips
+@y
+{: #ssh-tips }
+### SSH に関するヒント
+@z
+
+@x
+For the best user experience with SSH, configure `~/.ssh/config` as follows to allow
+reusing a SSH connection for multiple invocations of the `docker` CLI:
+@y
+SSH の利用を最大限活用するには、以下のようにして`~/.ssh/config`を設定します。
+これは、何度も呼び出される`docker` CLI コマンドに対して、SSH 接続を再利用するものです。
+@z
+
+@x
+```
+ControlMaster     auto
+ControlPath       ~/.ssh/control-%C
+ControlPersist    yes
+```
+@y
+```
+ControlMaster     auto
+ControlPath       ~/.ssh/control-%C
+ControlPersist    yes
+```
+@z
+
+@x
+## Use TLS (HTTPS) to protect the Docker daemon socket
+@y
+{: #use-tls-https-to-protect-the-docker-daemon-socket }
+## TLS (HTTPS) を使った Docker デーモンソケットの保護
+@z
+
+@x
+If you need Docker to be reachable through HTTP rather than SSH in a safe manner,
+you can enable TLS (HTTPS) by specifying the `tlsverify` flag and pointing Docker's
 `tlscacert` flag to a trusted CA certificate.
 @y
-{% comment %}
-If you need Docker to be reachable through the network in a safe manner, you can
-enable TLS by specifying the `tlsverify` flag and pointing Docker's
-`tlscacert` flag to a trusted CA certificate.
-{% endcomment %}
-Docker がネットワークから接続される際に安全性を確保するには、`tlsverify` フラグを指定して TLS を有効にし、`tlscacert` フラグを使って信頼された CA 証明書を指定します。
+Docker がネットワークから接続される際に SSH でなく HTTP を用いて安全性を確保するには、`tlsverify`フラグを指定して TLS（HTTPS）を有効にし、`tlscacert`フラグを使って信頼された CA 証明書を指定します。
 @z
 
 @x
@@ -51,11 +203,6 @@ In the daemon mode, it only allows connections from clients
 authenticated by a certificate signed by that CA. In the client mode,
 it only connects to servers with a certificate signed by that CA.
 @y
-{% comment %}
-In the daemon mode, it only allows connections from clients
-authenticated by a certificate signed by that CA. In the client mode,
-it only connects to servers with a certificate signed by that CA.
-{% endcomment %}
 デーモンモードにおいては、CA によって署名された証明書を用いて認証されたクライアントからのみ、接続を許可します。
 クライアントモードでは、その CA によって署名された証明書を利用するサーバーに対してのみ、接続を可能にします。
 @z
@@ -67,13 +214,6 @@ it only connects to servers with a certificate signed by that CA.
 > with OpenSSL, x509, and TLS before using it in production.
 {:.important}
 @y
-{% comment %}
-> Advanced topic
->
-> Using TLS and managing a CA is an advanced topic. Please familiarize yourself
-> with OpenSSL, x509, and TLS before using it in production.
-{:.important}
-{% endcomment %}
 > 高度なトピック
 >
 > TLS 利用と CA 管理は高度なトピックです。
@@ -82,33 +222,23 @@ it only connects to servers with a certificate signed by that CA.
 @z
 
 @x
-## Create a CA, server and client keys with OpenSSL
+### Create a CA, server and client keys with OpenSSL
 @y
-{% comment %}
-## Create a CA, server and client keys with OpenSSL
-{% endcomment %}
 {: #create-a-ca-server-and-client-keys-with-openssl }
-## OpenSSL を用いた CA、サーバー鍵、クライアント鍵の生成
+### OpenSSL を用いた CA、サーバー鍵、クライアント鍵の生成
 @z
 
 @x
 > **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 @y
-{% comment %}
-> **Note**: Replace all instances of `$HOST` in the following example with the
-> DNS name of your Docker daemon's host.
-{% endcomment %}
 > **メモ**:
-> 以下に示す例において `$HOST` と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。
+> 以下に示す例において`$HOST`と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。
 @z
 
 @x
 First, on the **Docker daemon's host machine**, generate CA private and public keys:
 @y
-{% comment %}
-First, on the **Docker daemon's host machine**, generate CA private and public keys:
-{% endcomment %}
 まず **Docker デーモンが起動するホストマシン** において、CA 秘密鍵と公開鍵を生成します。
 @z
 
@@ -171,11 +301,6 @@ Now that you have a CA, you can create a server key and certificate
 signing request (CSR). Make sure that "Common Name" matches the hostname you use
 to connect to Docker:
 @y
-{% comment %}
-Now that you have a CA, you can create a server key and certificate
-signing request (CSR). Make sure that "Common Name" matches the hostname you use
-to connect to Docker:
-{% endcomment %}
 CA を生成したので、次にサーバー鍵と証明書署名要求（certificate signing request; CSR）を生成します。
 「Common Name」欄には、Docker に接続するホストの名前となっていることを確認してください。
 @z
@@ -184,12 +309,8 @@ CA を生成したので、次にサーバー鍵と証明書署名要求（certi
 > **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 @y
-{% comment %}
-> **Note**: Replace all instances of `$HOST` in the following example with the
-> DNS name of your Docker daemon's host.
-{% endcomment %}
 > **メモ**:
-> 以下に示す例において `$HOST` と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。
+> 以下に示す例において`$HOST`と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。
 @z
 
 @x
@@ -215,9 +336,6 @@ CA を生成したので、次にサーバー鍵と証明書署名要求（certi
 @x
 Next, we're going to sign the public key with our CA:
 @y
-{% comment %}
-Next, we're going to sign the public key with our CA:
-{% endcomment %}
 次に公開鍵を CA を使って署名します。
 @z
 
@@ -226,13 +344,8 @@ Since TLS connections can be made through IP address as well as DNS name, the IP
 need to be specified when creating the certificate. For example, to allow connections
 using `10.10.10.20` and `127.0.0.1`:
 @y
-{% comment %}
-Since TLS connections can be made through IP address as well as DNS name, the IP addresses
-need to be specified when creating the certificate. For example, to allow connections
-using `10.10.10.20` and `127.0.0.1`:
-{% endcomment %}
 TLS 接続は DNS 名だけでなく IP アドレスを使っても行われるため、証明書の生成時には IP アドレスが必要になります。
-たとえば `10.10.10.20` と `127.0.0.1` を使って接続を許可するには、以下のようにします。
+たとえば`10.10.10.20`と`127.0.0.1`を使って接続を許可するには、以下のようにします。
 @z
 
 @x
@@ -245,10 +358,6 @@ TLS 接続は DNS 名だけでなく IP アドレスを使っても行われる�
 Set the Docker daemon key's extended usage attributes to be used only for
 server authentication:
 @y
-{% comment %}
-Set the Docker daemon key's extended usage attributes to be used only for
-server authentication:
-{% endcomment %}
 Docker デーモンの拡張属性は、サーバー認証に対してのみ利用するものとして設定します。
 @z
 
@@ -261,9 +370,6 @@ Docker デーモンの拡張属性は、サーバー認証に対してのみ利�
 @x
 Now, generate the signed certificate:
 @y
-{% comment %}
-Now, generate the signed certificate:
-{% endcomment %}
 そこで署名された証明書を生成します。
 @z
 
@@ -290,13 +396,6 @@ to other information described in the above document, authorization plugins
 running on a Docker daemon receive the certificate information for connecting
 Docker clients.
 @y
-{% comment %}
-[Authorization plugins](/engine/extend/plugins_authorization/) offer more
-fine-grained control to supplement authentication from mutual TLS. In addition
-to other information described in the above document, authorization plugins
-running on a Docker daemon receive the certificate information for connecting
-Docker clients.
-{% endcomment %}
 [認証プラグイン](/engine/extend/plugins_authorization/) は、相互 TLS からの認証を補完する、きめ細かな制御を可能にします。
 上記のドキュメント内の説明内容に加えて、Docker デーモン上で動作する認証プラグインは、Docker クライアントに接続するための認証情報を受け取ります。
 @z
@@ -305,10 +404,6 @@ Docker clients.
 For client authentication, create a client key and certificate signing
 request:
 @y
-{% comment %}
-For client authentication, create a client key and certificate signing
-request:
-{% endcomment %}
 クライアント認証に対しては、クライアント鍵と証明書署名要求を生成します。
 @z
 
@@ -316,10 +411,6 @@ request:
 > **Note**: For simplicity of the next couple of steps, you may perform this
 > step on the Docker daemon's host machine as well.
 @y
-{% comment %}
-> **Note**: For simplicity of the next couple of steps, you may perform this
-> step on the Docker daemon's host machine as well.
-{% endcomment %}
 > **メモ**: ここから続く手順を簡単にするために、以下の手順は Docker デーモンが稼動するホストマシン上で行ってもかまいません。
 @z
 
@@ -347,10 +438,6 @@ request:
 To make the key suitable for client authentication, create a new extensions
 config file:
 @y
-{% comment %}
-To make the key suitable for client authentication, create a new extensions
-config file:
-{% endcomment %}
 生成した鍵をクライアント認証用とするために、新たな拡張設定ファイルを生成します。
 @z
 
@@ -363,9 +450,6 @@ config file:
 @x
 Now, generate the signed certificate:
 @y
-{% comment %}
-Now, generate the signed certificate:
-{% endcomment %}
 そこで署名された証明書を生成します。
 @z
 
@@ -389,11 +473,7 @@ Now, generate the signed certificate:
 After generating `cert.pem` and `server-cert.pem` you can safely remove the
 two certificate signing requests and extensions config files:
 @y
-{% comment %}
-After generating `cert.pem` and `server-cert.pem` you can safely remove the
-two certificate signing requests and extensions config files:
-{% endcomment %}
-`cert.pem` と `server-cert.pem` を生成したら、証明書署名要求と拡張設定ファイルの 2 つは、安全に削除することができます。
+`cert.pem`と`server-cert.pem`を生成したら、証明書署名要求と拡張設定ファイルの 2 つは、安全に削除することができます。
 @z
 
 @x
@@ -406,21 +486,13 @@ two certificate signing requests and extensions config files:
 With a default `umask` of 022, your secret keys are *world-readable* and
 writable for you and your group.
 @y
-{% comment %}
-With a default `umask` of 022, your secret keys are *world-readable* and
-writable for you and your group.
-{% endcomment %}
-`umask` をデフォルトの 022 のまま使ってしまうと、秘密鍵は **誰もが読み込み可能** となり、また所有者とグループが書き込み可能となってしまいます。
+`umask`をデフォルトの 022 のまま使ってしまうと、秘密鍵は **誰もが読み込み可能** となり、また所有者とグループが書き込み可能となってしまいます。
 @z
 
 @x
 To protect your keys from accidental damage, remove their
 write permissions. To make them only readable by you, change file modes as follows:
 @y
-{% comment %}
-To protect your keys from accidental damage, remove their
-write permissions. To make them only readable by you, change file modes as follows:
-{% endcomment %}
 秘密鍵を保護し、予期しない被害を受けないために、書き込み権限は削除してください。
 読み込み権限は所有者のみとするように、以下のようにしてファイルモードの変更を行います。
 @z
@@ -435,10 +507,6 @@ write permissions. To make them only readable by you, change file modes as follo
 Certificates can be world-readable, but you might want to remove write access to
 prevent accidental damage:
 @y
-{% comment %}
-Certificates can be world-readable, but you might want to remove write access to
-prevent accidental damage:
-{% endcomment %}
 証明書は誰でも読み込めるようにするのでもかまいません。
 ただし書き込み権限は、被害を避ける意味で削除するようにしてください。
 @z
@@ -453,10 +521,6 @@ prevent accidental damage:
 Now you can make the Docker daemon only accept connections from clients
 providing a certificate trusted by your CA:
 @y
-{% comment %}
-Now you can make the Docker daemon only accept connections from clients
-providing a certificate trusted by your CA:
-{% endcomment %}
 このようにして Docker デーモンが接続を受け入れるクライアントは、CA に信頼された証明書を利用するクライアントのみとすることができました。
 @z
 
@@ -472,10 +536,6 @@ providing a certificate trusted by your CA:
 To connect to Docker and validate its certificate, provide your client keys,
 certificates and trusted CA:
 @y
-{% comment %}
-To connect to Docker and validate its certificate, provide your client keys,
-certificates and trusted CA:
-{% endcomment %}
 Docker に接続して証明書を確認します。
 クライアント鍵、証明書、信頼された CA を指定してください。
 @z
@@ -487,13 +547,6 @@ Docker に接続して証明書を確認します。
 > need to copy your CA certificate, your server certificate, and your client
 > certificate to that machine.
 @y
-{% comment %}
-> Run it on the client machine
->
-> This step should be run on your Docker client machine. As such, you
-> need to copy your CA certificate, your server certificate, and your client
-> certificate to that machine.
-{% endcomment %}
 > クライアントマシン上での実行
 >
 > ここでの手順は Docker クライアントマシン上で行います。
@@ -504,12 +557,8 @@ Docker に接続して証明書を確認します。
 > **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 @y
-{% comment %}
-> **Note**: Replace all instances of `$HOST` in the following example with the
-> DNS name of your Docker daemon's host.
-{% endcomment %}
 > **メモ**:
-> 以下に示す例において `$HOST` と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。
+> 以下に示す例において`$HOST`と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。
 @z
 
 @x
@@ -524,10 +573,6 @@ Docker に接続して証明書を確認します。
 > **Note**:
 > Docker over TLS should run on TCP port 2376.
 @y
-{% comment %}
-> **Note**:
-> Docker over TLS should run on TCP port 2376.
-{% endcomment %}
 > **メモ**:
 > Docker over TLS は TCP ポート 2376 上を使って動作させる必要があります。
 @z
@@ -541,30 +586,18 @@ Docker に接続して証明書を確認します。
 > these keys as you would a root password!
 {:.warning}
 @y
-{% comment %}
-> **Warning**:
-> As shown in the example above, you don't need to run the `docker` client
-> with `sudo` or the `docker` group when you use certificate authentication.
-> That means anyone with the keys can give any instructions to your Docker
-> daemon, giving them root access to the machine hosting the daemon. Guard
-> these keys as you would a root password!
-{:.warning}
-{% endcomment %}
 > **警告**
-> 上の例に示したように、証明書認証操作を行う際の `docker` クライアント実行において `sudo` を使ったり `docker` グループに属していたりする必要はありません。
+> 上の例に示したように、証明書認証操作を行う際の`docker`クライアント実行において`sudo`を使ったり`docker`グループに属していたりする必要はありません。
 > つまり鍵を使うのであれば、Docker デーモンに対して指示を出すのは、デーモンホストのマシンに root 権限を持っていれば誰でもよいということです。
 > したがってこの鍵データは root パスワードと同じように、しっかりと管理してください。
 {:.warning}
 @z
 
 @x
-## Secure by default
+### Secure by default
 @y
-{% comment %}
-## Secure by default
-{% endcomment %}
 {: #secure-by-default }
-## セキュアな接続のデフォルト設定
+### セキュアな接続のデフォルト設定
 @z
 
 @x
@@ -573,15 +606,9 @@ the files to the `.docker` directory in your home directory --- and set the
 `DOCKER_HOST` and `DOCKER_TLS_VERIFY` variables as well (instead of passing
 `-H=tcp://$HOST:2376` and `--tlsverify` on every call).
 @y
-{% comment %}
-If you want to secure your Docker client connections by default, you can move
-the files to the `.docker` directory in your home directory --- and set the
-`DOCKER_HOST` and `DOCKER_TLS_VERIFY` variables as well (instead of passing
-`-H=tcp://$HOST:2376` and `--tlsverify` on every call).
-{% endcomment %}
-Docker クライアント接続を、デフォルトで安全なものとしたい場合は、ホームディレクトリ内の `.docker` ディレクトリに、各ファイルを移動させます。
-これに合わせて `DOCKER_HOST` と `DOCKER_TLS_VERIFY` の変数も設定します
-（これはコマンド実行時に `-H=tcp://$HOST:2376` と `--tlsverify` を指定しない代わりとして行うものです）。
+Docker クライアント接続を、デフォルトで安全なものとしたい場合は、ホームディレクトリ内の`.docker`ディレクトリに、各ファイルを移動させます。
+これに合わせて`DOCKER_HOST`と`DOCKER_TLS_VERIFY`の変数も設定します
+（これはコマンド実行時に`-H=tcp://$HOST:2376`と`--tlsverify`を指定しない代わりとして行うものです）。
 @z
 
 @x
@@ -601,9 +628,6 @@ Docker クライアント接続を、デフォルトで安全なものとした�
 @x
 Docker now connects securely by default:
 @y
-{% comment %}
-Docker now connects securely by default:
-{% endcomment %}
 Docker はデフォルトで安全な接続を行うようになります。
 @z
 
@@ -614,56 +638,39 @@ Docker はデフォルトで安全な接続を行うようになります。
 @z
 
 @x
-## Other modes
+### Other modes
 @y
-{% comment %}
-## Other modes
-{% endcomment %}
 {: #other-modes }
-## その他のモード
+### その他のモード
 @z
 
 @x
 If you don't want to have complete two-way authentication, you can run
 Docker in various other modes by mixing the flags.
 @y
-{% comment %}
-If you don't want to have complete two-way authentication, you can run
-Docker in various other modes by mixing the flags.
-{% endcomment %}
 完全な双方向認証は行う必要がない場合は、他にもあるさまざまなモードや各種フラグを組み合わせて Docker を実行することができます。
 @z
 
 @x
-### Daemon modes
+#### Daemon modes
 @y
-{% comment %}
-### Daemon modes
-{% endcomment %}
 {: #daemon-modes }
-### デーモンモード
+#### デーモンモード
 @z
 
 @x
  - `tlsverify`, `tlscacert`, `tlscert`, `tlskey` set: Authenticate clients
  - `tls`, `tlscert`, `tlskey`: Do not authenticate clients
 @y
- {% comment %}
- - `tlsverify`, `tlscacert`, `tlscert`, `tlskey` set: Authenticate clients
- - `tls`, `tlscert`, `tlskey`: Do not authenticate clients
- {% endcomment %}
- - `tlsverify`、`tlscacert`、`tlscert`、`tlskey` の各設定は、クライアント認証を行います。
+ - `tlsverify`、`tlscacert`、`tlscert`、`tlskey`の各設定は、クライアント認証を行います。
  - `tls`、`tlscert`、`tlskey`はクライアント認証を行いません。
 @z
 
 @x
-### Client modes
+#### Client modes
 @y
-{% comment %}
-### Client modes
-{% endcomment %}
 {: #client-modes }
-### クライアントモード
+#### クライアントモード
 @z
 
 @x
@@ -674,18 +681,10 @@ Docker in various other modes by mixing the flags.
  - `tlsverify`, `tlscacert`, `tlscert`, `tlskey`: Authenticate with client
    certificate and authenticate server based on given CA
 @y
- {% comment %}
- - `tls`: Authenticate server based on public/default CA pool
- - `tlsverify`, `tlscacert`: Authenticate server based on given CA
- - `tls`, `tlscert`, `tlskey`: Authenticate with client certificate, do not
-   authenticate server based on given CA
- - `tlsverify`, `tlscacert`, `tlscert`, `tlskey`: Authenticate with client
-   certificate and authenticate server based on given CA
- {% endcomment %}
- - `tls` は、公開またはデフォルトの CA プールに基づくサーバーを認証します。
- - `tlsverify`、`tlscacert` は、指定された CA に基づくサーバーを認証します。
- - `tls`、`tlscert``、`tlskey` は、クライアント証明書を使って認証します。指定の CA に基づたサーバー認証は行いません。
- - `tlsverify`、`tlscacert`、`tlscert`、`tlskey` は、クライアント証明書を使って認証します。
+ - `tls`は、公開またはデフォルトの CA プールに基づくサーバーを認証します。
+ - `tlsverify`、`tlscacert`は、指定された CA に基づくサーバーを認証します。
+ - `tls`、`tlscert``、`tlskey`は、クライアント証明書を使って認証します。指定の CA に基づたサーバー認証は行いません。
+ - `tlsverify`、`tlscacert`、`tlscert`、`tlskey`は、クライアント証明書を使って認証します。
    そして指定の CA に基づいたサーバー認証を行います。
 @z
 
@@ -695,14 +694,8 @@ to drop your keys into `~/.docker/{ca,cert,key}.pem`. Alternatively,
 if you want to store your keys in another location, you can specify that
 location using the environment variable `DOCKER_CERT_PATH`.
 @y
-{% comment %}
-If found, the client sends its client certificate, so you just need
-to drop your keys into `~/.docker/{ca,cert,key}.pem`. Alternatively,
-if you want to store your keys in another location, you can specify that
-location using the environment variable `DOCKER_CERT_PATH`.
-{% endcomment %}
-クライアントに証明書があればクライアントはそれを送信するので、鍵データは `~/.docker/{ca,cert,key}.pem` に配置しておくことが必要です。
-あるいは鍵データを別のディレクトリに保持しておきたい場合は、環境変数 `DOCKER_CERT_PATH` にそのディレクトリを指定します。
+クライアントに証明書があればクライアントはそれを送信するので、鍵データは`~/.docker/{ca,cert,key}.pem`に配置しておくことが必要です。
+あるいは鍵データを別のディレクトリに保持しておきたい場合は、環境変数`DOCKER_CERT_PATH`にそのディレクトリを指定します。
 @z
 
 @x
@@ -714,24 +707,17 @@ location using the environment variable `DOCKER_CERT_PATH`.
 @z
 
 @x
-### Connecting to the secure Docker port using `curl`
+#### Connecting to the secure Docker port using `curl`
 @y
-{% comment %}
-### Connecting to the secure Docker port using `curl`
-{% endcomment %}
 {: #connecting-to-the-secure-docker-port-using-curl }
-### `curl` を用いたセキュアな Docker ポートへの接続
+#### `curl`を用いたセキュアな Docker ポートへの接続
 @z
 
 @x
 To use `curl` to make test API requests, you need to use three extra command line
 flags:
 @y
-{% comment %}
-To use `curl` to make test API requests, you need to use three extra command line
-flags:
-{% endcomment %}
-`curl` を使って API リクエストを行ってみるなら、指定を 3 つ追加したコマンドライン実行を行います。
+`curl`を使って API リクエストを行ってみるなら、指定を 3 つ追加したコマンドライン実行を行います。
 @z
 
 @x
@@ -749,9 +735,6 @@ flags:
 @x
 ## Related information
 @y
-{% comment %}
-## Related information
-{% endcomment %}
 {: #related-information }
 ## 関連情報
 @z
@@ -760,10 +743,6 @@ flags:
 * [Using certificates for repository client verification](certificates.md)
 * [Use trusted images](trust/index.md)
 @y
-{% comment %}
-* [Using certificates for repository client verification](certificates.md)
-* [Use trusted images](trust/index.md)
-{% endcomment %}
 * [証明書を使ったリポジトリクライアントの確認](certificates.md)
 * [信頼できるイメージの利用](trust/index.md)
 @z

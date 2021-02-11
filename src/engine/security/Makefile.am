@@ -15,14 +15,14 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	antivirus \
-	apparmor \
-	certificates \
-	https \
-	index \
-	non-events \
-	rootless \
-	seccomp \
+	antivirus      \
+	apparmor       \
+	certificates   \
+	index          \
+	non-events     \
+	protect-access \
+	rootless       \
+	seccomp        \
 	userns-remap
 
 ch_mds = $(bases:=.ch) # ch means change files

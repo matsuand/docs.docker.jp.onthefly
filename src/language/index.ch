@@ -116,9 +116,9 @@ Docker 環境の構築とアプリケーションのコンテナー化につい�
 @z
 
 @x
-To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
+To request a guide in other programming languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
 @y
-他の言語に対するガイドをご要望であれば、[Docker Docs github リポジトリ](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"} に issue をあげてください。
+他のプログラミング言語に対するガイドをご要望であれば、[Docker Docs github リポジトリ](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"} に issue をあげてください。
 @z
 
 @x
