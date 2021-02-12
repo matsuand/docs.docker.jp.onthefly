@@ -51,9 +51,9 @@ Click the following link to download the Apple M1 tech preview build:
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/m1preview/Docker-AppleSilicon-Preview7.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/60984/Docker.dmg)
 @y
-> [ダウンロード](https://desktop.docker.com/mac/m1preview/Docker-AppleSilicon-Preview7.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/stable/arm64/60984/Docker.dmg)
 @z
 
 @x
@@ -75,10 +75,6 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
     ```
     softwareupdate --install-rosetta
     ```
-- The DNS name `host.docker.internal` only works if you add `--add-host=host.docker.internal:host-gateway` to the `docker run` command
-- The DNS name `vm.docker.internal` does not work.
-- Kubernetes does not initialize because of a missing DNS name.
-- osxfs file sharing does not work.
 - The HTTP proxy is not enabled.
 - Not all images are available for ARM64. You can add `--platform linux/amd64` to run an Intel image under emulation.
 @y
@@ -89,10 +85,6 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
     ```
     softwareupdate --install-rosetta
     ```
-- DNS 名`host.docker.internal`は、`docker run`コマンドに対して`--add-host=host.docker.internal:host-gateway`をつけた場合にのみ動作します。
-- DNS 名`vm.docker.internal`は動作しません。
-- Kubernetes は DNS 名がないため初期化されません。
-- osxfs ファイル共有は動作しません。
 - HTTP プロキシーは利用できません。
 - ARM64 向けのイメージはすべてが利用可能ではありません。
   Intel イメージはエミュレーションのもと、`--platform linux/amd64`をつけて実行することができます。
@@ -101,13 +93,46 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
 @x
     In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
-- The **Restart** option in the Docker menu may not work.
 @y
     特に [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} イメージは ARM64 において利用できません。
     この状況は [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} イメージを利用すれば解消されます。
 - カーネルがパニックを発生させるかもしれません。
   その場合は`~/Library/Containers/com.docker.docker/Data/vms/0/console.log`の内容から、バグなのかカーネルパニックなのかを確認し報告してください。
-- Docker メニューの **Restart**（再起動）オプションは動作しない場合があります。
+@z
+
+@x
+## Fixes since the Apple Silicon preview 7
+@y
+{: #fixes-since-the-apple-silicon-preview-7 }
+## Apple Silicon プレビュー 7 以降の修正
+@z
+
+@x
+**Docker Desktop preview 3.1.0 (60984)**
+
+2021-02-11
+@y
+**Docker Desktop プレビュー 3.1.0 (60984)**
+
+2021-02-11
+@z
+
+@x
+- Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
+- osxfs file sharing works.
+- The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve.
+- Removed hard-coded IP addresses: Docker Desktop now dynamically discovers the IP allocated by macOS.
+- The updated version includes a  change that should improve disk performance.
+- The **Restart** option in the Docker menu works.
+@y
+- Kubernetes は動作するようになりました。
+  （ただし証明書を再生成した際には、Troubleshoot メニューからクラスターの再起動が必要になる場合があります。）
+- osxfs ファイル共有は動作するようになりました。
+- DNS エントリ`host.docker.internal`、`vm.docker.internal`は解決できるようになりました。
+- ハードコーディングされた IP アドレスを除きました。
+  したがって Docker Desktop は macOS から割り当てられた IP アドレスを動的に検出します。
+- 更新バージョンには、ディスク性能を向上させる変更を含んでいます。
+- Docker メニューの **Restart**（再起動）オプションは動作するようになりました。
 @z
 
 @x
