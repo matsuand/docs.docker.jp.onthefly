@@ -23,6 +23,7 @@ bases = \
 	extends               \
 	faq                   \
 	gettingstarted        \
+	gpu-support           \
 	index                 \
 	install               \
 	networking            \

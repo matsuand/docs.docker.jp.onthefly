@@ -22,6 +22,20 @@ sitemap: false
 @z
 
 @x
+>**Deprecated**
+>
+> Docker Compose file version 1 has been deprecated. We recommend that you move to the latest Compose specification. For more information, see [Compose file reference](index.md).
+{: .warning }
+@y
+>**非推奨**
+>
+> Docker Compose ファイルバージョン 1 は非推奨とされています。
+> 最新の Compose 仕様への移行をお勧めしています。
+> 詳しくは [Compose ファイルリファレンス](index.md) を参照してください。
+{: .warning }
+@z
+
+@x
 ## Reference and guidelines
 @y
 ## リファレンスとガイドライン
@@ -100,7 +114,7 @@ As with `docker run`, options specified in the Dockerfile, such as `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 @y
-`docker run`に関しても同じことが言えますが、Dockerfile にて指定された `CMD`、`EXPOSE`、`VOLUME`、`ENV` のようなオプションはデフォルトでは維持されます。したがって`docker-compose.yml`の中で再度設定する必要はありません。
+`docker run`に関しても同じことが言えますが、Dockerfile にて指定された `CMD`、`EXPOSE`、`VOLUME`、`ENV`のようなオプションはデフォルトでは維持されます。したがって`docker-compose.yml`の中で再度設定する必要はありません。
 @z
 
 @x
@@ -1252,8 +1266,8 @@ log_driver: syslog
 @x
 Specify logging options as key-value pairs. An example of `syslog` options:
 @y
-ロギングオプションはキーバリューのペアで設定します。
-たとえば `syslog` オプションは以下のようになります。
+ログオプションはキーバリューのペアで設定します。
+たとえば`syslog`オプションは以下のようになります。
 @z
 
 @x
@@ -1288,8 +1302,8 @@ The `container:...` form can take a service name instead of a container name or
 id.
 @y
 ネットワークモードを設定します。
-Docker クライアントの `--net` パラメーターと同じ値を設定します。
-`container:...` という書式を使えば、コンテナー名や ID ではなく、サービス名を指定することができます。
+Docker クライアントの`--net`パラメーターと同じ値を設定します。
+`container:...`という書式を使えば、コンテナー名や ID ではなく、サービス名を指定することができます。
 @z
 
 @x
@@ -1374,8 +1388,8 @@ port (an ephemeral host port is chosen).
 > parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 @y
-> **メモ**: `HOST:CONTAINER` の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
-> これは YAML パーサーが `xx:yy` の書式内にある数値を 60 進数値として解釈するからです。
+> **メモ**: `HOST:CONTAINER`の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
+> これは YAML パーサーが`xx:yy`の書式内にある数値を 60 進数値として解釈するからです。
 > このことからポートマッピングを指定する際には、常に文字列として設定することをお勧めします。
 @z
 
@@ -1445,8 +1459,8 @@ SIGTERM. Setting an alternative signal using `stop_signal` causes
 `stop` to send that signal instead.
 @y
 コンテナーに対して別の停止シグナルを設定します。
-デフォルトにおいて `stop` は SIGTERM を用います。
-`stop_signal` を使って別のシグナルを設定すると `stop` にはそのシグナルが代わりに送信されます。
+デフォルトにおいて`stop`は SIGTERM を用います。
+`stop_signal`を使って別のシグナルを設定すると`stop`にはそのシグナルが代わりに送信されます。
 @z
 
 @x
@@ -1507,7 +1521,7 @@ volume automatically if it doesn't exist.
 @y
 パスまたは名前つきボリュームをマウントします。
 任意の設定としてホストマシン上のパスを指定したり（`HOST:CONTAINER`）、アクセスモードを指定したり(`HOST:CONTAINER:ro`)することができます。
-[ファイルフォーマットバージョン 2](compose-versioning.md#version-2) における名前つきボリュームは、[最上位の `volumes` キー](compose-file-v2.md#volume-configuration-reference) において指定しておく必要があります。
+[ファイルフォーマットバージョン 2](compose-versioning.md#version-2) における名前つきボリュームは、[最上位の`volumes`キー](compose-file-v2.md#volume-configuration-reference) において指定しておく必要があります。
 [バージョン 1](compose-versioning.md#version-1) を利用している場合、名前つきボリュームが存在しないときは Docker Engine が自動的に生成します。
 @z
 
@@ -1518,7 +1532,7 @@ should always begin with `.` or `..`.
 @y
 ホスト上の相対パスをマウントすることができます。
 これは、用いられている Compose 設定ファイルのディレクトリからの相対パスとして展開されます。
-相対パスは `.` または `..` で書き始める必要があります。
+相対パスは`.`または`..`で書き始める必要があります。
 @z
 
 @x
@@ -1562,7 +1576,7 @@ volumes:
 @x
 If you do not use a host path, you may specify a `volume_driver`.
 @y
-ホストパスを利用せずに `volume_driver` を設定することもできます。
+ホストパスを利用せずに`volume_driver`を設定することもできます。
 @z
 
 @x
@@ -1594,9 +1608,9 @@ There are several things to note, depending on which
   For example, if you specify a mapping of `./foo:/data`, the `./foo` part
   is passed straight to the volume driver without being expanded.
 @y
-- `volume_driver` も合わせて指定していた場合、パスの解釈は行われません。
-  たとえばパスのマッピングを `./foo:/data` としたとします。
-  このとき `./foo` の部分はボリュームドライバーにそのまま引き渡され、パスが展開されることはありません。
+- `volume_driver`も合わせて指定していた場合、パスの解釈は行われません。
+  たとえばパスのマッピングを`./foo:/data`としたとします。
+  このとき`./foo`の部分はボリュームドライバーにそのまま引き渡され、パスが展開されることはありません。
 @z
 
 @x
