@@ -1,7 +1,7 @@
-<!-- Page generated 2021-02-11 11:57:51 +0900-->
+<!-- Page generated 2021-02-14 20:26:26 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Using profiles with Compose | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose でのプロファイル利用 | Docker ドキュメント</title>
   <meta name="description" content="" />
   <meta name="keywords" content="cli, compose, profile, profiles reference">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/profiles/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Using profiles with Compose"/>
+  <meta name="twitter:title" itemprop="title name" content="Compose でのプロファイル利用"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Using profiles with Compose" />
+  <meta property="og:title" content="Compose でのプロファイル利用" />
   <meta property="og:description" content="" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-14T20:26:26+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/profiles/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-11T11:57:51+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Using profiles with Compose","description":null,"url":"https://docs.docker.com/compose/profiles/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-14T20:26:26+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose でのプロファイル利用","description":null,"url":"https://docs.docker.com/compose/profiles/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,21 +98,18 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Using profiles with Compose</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><p>Profiles allow adjusting the Compose application model for various usages and
-environments by selectively enabling services.
-This is achieved by assigning each service to zero or more profiles. If
-unassigned, the service is <em>always</em> started but if assigned, it is only started
-if the profile is activated.</p>
+                        <section class="section"><h1>Compose でのプロファイル利用</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>プロファイル（profile）は Compose アプリケーションモデルをさまざまな利用方法に合わせて調整するものです。
+また有効とするサービスを選択した環境実現も行います。
+具体的には各サービスに対して、プロファイルを割り当てない状態も含め、複数のプロファイルを割り当てます。
+割り当てを行わなかった場合、そのサービスは <strong>常に</strong> 起動します。
+一方割り当てを行った場合は、そのプロファイルがアクティブになった場合にのみサービスが起動します。</p>
 
-<p>This allows one to define additional services in a single <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file
-that should only be started in specific scenarios, e.g. for debugging or
-development tasks.</p>
+<p>こういった機能があると、たとえばデバッグ時や開発タスク作業時といった特定の状況下においてのみ起動する追加のサービスを、同一の<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイル内に定義して実現することができます。</p>
 
-<h2 id="assigning-profiles-to-services">Assigning profiles to services</h2>
+<h2 id="assigning-profiles-to-services">サービスへのプロファイルの割り当て</h2>
 
-<p>Services are associated with profiles through the
-<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#profiles"><code class="language-plaintext highlighter-rouge">profiles</code> attribute</a> which takes an
-array of profile names:</p>
+<p>サービスに対しては <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#profiles"><code class="language-plaintext highlighter-rouge">profiles</code>属性</a> を通じてプロファイルを関連づけることができます。
+この属性にはプロファイル名の配列を指定します。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -134,48 +131,44 @@ array of profile names:</p>
     <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>
 </code></pre></div></div>
 
-<p>Here the services <code class="language-plaintext highlighter-rouge">frontend</code> and <code class="language-plaintext highlighter-rouge">phpmyadmin</code> are assigned to the profiles
-<code class="language-plaintext highlighter-rouge">frontend</code> and <code class="language-plaintext highlighter-rouge">debug</code> respectively and as such are only started when their
-respective profiles are enabled.</p>
+<p>ここでサービス<code class="language-plaintext highlighter-rouge">frontend</code>と<code class="language-plaintext highlighter-rouge">phpmyadmin</code>に対しては、それぞれ<code class="language-plaintext highlighter-rouge">frontend</code>と<code class="language-plaintext highlighter-rouge">debug</code>というプロファイルを割り当てています。
+したがって個々のプロファイルが有効になっている場合にのみ、そのサービスが起動するものとなります。</p>
 
-<p>Services without a <code class="language-plaintext highlighter-rouge">profiles</code> attribute will <em>always</em> be enabled, i.e. in this
-case running <code class="language-plaintext highlighter-rouge">docker-compose up</code> would only start <code class="language-plaintext highlighter-rouge">backend</code> and <code class="language-plaintext highlighter-rouge">db</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">profiles</code>属性が指定されていないサービスは <strong>常に</strong> 有効になります。
+つまり上の例においては<code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行すると、<code class="language-plaintext highlighter-rouge">backend</code>と<code class="language-plaintext highlighter-rouge">db</code>だけは必ず起動します。</p>
 
-<p>Valid profile names follow the regex format of <code class="language-plaintext highlighter-rouge">[a-zA-Z0-9][a-zA-Z0-9_.-]+</code>.</p>
+<p>プロファイルに対する適切な名称は、正規表現<code class="language-plaintext highlighter-rouge">[a-zA-Z0-9][a-zA-Z0-9_.-]+</code>に従います。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>The core services of your application should not be assigned <code class="language-plaintext highlighter-rouge">profiles</code> so
-they will always be enabled and automatically started.</p>
+  <p>アプリケーションにおいて中心的となるサービスに対しては、<code class="language-plaintext highlighter-rouge">profiles</code>を指定するべきではありません。
+指定しなければ、そのサービスは常に有効であり、自動的に起動されます。</p>
 </blockquote>
 
-<h2 id="enabling-profiles">Enabling profiles</h2>
+<h2 id="enabling-profiles">プロファイルの有効化</h2>
 
-<p>To enable a profile supply the <code class="language-plaintext highlighter-rouge">--profile</code> <a href="/docs.docker.jp.onthefly/compose/reference/overview/">command-line option</a> or
-use the <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_profiles"><code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code> environment variable</a>:</p>
+<p>プロファイルを有効にするには、<a href="/docs.docker.jp.onthefly/compose/reference/overview/">コマンドラインオプション</a><code class="language-plaintext highlighter-rouge">--profile</code>を指定するか、あるいは <a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_profiles">環境変数<code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code></a>を利用します。</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">--profile</span> debug up
 <span class="nv">$ COMPOSE_PROFILES</span><span class="o">=</span>debug docker-compose up
 </code></pre></div></div>
 
-<p>The above command would both start your application with the <code class="language-plaintext highlighter-rouge">debug</code> profile enabled.
-Using the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file above, this would start the services <code class="language-plaintext highlighter-rouge">backend</code>,
-<code class="language-plaintext highlighter-rouge">db</code> and <code class="language-plaintext highlighter-rouge">phpmyadmin</code>.</p>
+<p>上のコマンド 2 つは、いずれもプロファイル<code class="language-plaintext highlighter-rouge">debug</code>を有効にしてアプリケーションを起動します。
+前述の<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイルを利用している場合、これは<code class="language-plaintext highlighter-rouge">backend</code>、<code class="language-plaintext highlighter-rouge">db</code>、<code class="language-plaintext highlighter-rouge">phpmyadmin</code>の各サービスが起動することになります。</p>
 
-<p>Multiple profiles can be specified by passing multiple <code class="language-plaintext highlighter-rouge">--profile</code> flags or
-a comma-separated list for the <code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code> environment variable:</p>
+<p>プロファイルは複数指定することができます。
+その場合は<code class="language-plaintext highlighter-rouge">--profile</code>フラグを複数指定するか、あるいは環境変数<code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code>に対してカンマ区切りのリストを指定します。</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">--profile</span> frontend <span class="nt">--profile</span> debug up
 <span class="nv">$ COMPOSE_PROFILES</span><span class="o">=</span>frontend,debug docker-compose up
 </code></pre></div></div>
 
-<h2 id="auto-enabling-profiles-and-dependency-resolution">Auto-enabling profiles and dependency resolution</h2>
+<h2 id="auto-enabling-profiles-and-dependency-resolution">プロファイルの自動有効化と依存関係の解決</h2>
 
-<p>When a service with assigned <code class="language-plaintext highlighter-rouge">profiles</code> is explicitly targeted on the command
-line its profiles will be enabled automatically so you don’t need to enable them
-manually. This can be used for one-off services and debugging tools.
-As an example consider this configuration:</p>
+<p><code class="language-plaintext highlighter-rouge">profiles</code>が割り当てられているサービスに対して、コマンドラインからの明示的なプロファイル指定が行われた場合、そのプロファイルは自動的に有効になるため、手動で有効にするような操作は必要ありません。
+手動操作が必要になるのは、一時的なサービスやデバッグツールを利用するような場合です。
+ここでは例として以下の設定を行います。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -194,19 +187,18 @@ As an example consider this configuration:</p>
       <span class="pi">-</span> <span class="s">tools</span>
 </code></pre></div></div>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># will only start backend and db</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># これはbackendとdbのみを起動します。</span>
 <span class="nv">$ </span>docker-compose up <span class="nt">-d</span>
 
-<span class="c"># this will run db-migrations (and - if necessary - start db)</span>
-<span class="c"># by implicitly enabling profile `tools`</span>
+<span class="c"># これはプロファイル`tools`は暗に有効化した上で、</span>
+<span class="c"># db-migrationsを実行します（必要に応じてdbも起動します）。</span>
 <span class="nv">$ </span>docker-compose run db-migrations
 </code></pre></div></div>
 
-<p>But keep in mind that <code class="language-plaintext highlighter-rouge">docker-compose</code> will only automatically enable the
-profiles of the services on the command line and not of any dependencies. This
-means that all services the targeted service <code class="language-plaintext highlighter-rouge">depends_on</code> must have a common
-profile with it, be always enabled (by omitting <code class="language-plaintext highlighter-rouge">profiles</code>) or have a matching
-profile enabled explicitly:</p>
+<p>ただしここで注意しておくことがあります。
+<code class="language-plaintext highlighter-rouge">docker-compose</code>が有効化するプロファイルは、コマンドライン上から指定されたサービスに対するもののみです。
+そこに依存するものに対しては有効化を行いません。
+したがって指定された<code class="language-plaintext highlighter-rouge">depends_on</code>サービスに関連するサービスは、すべて共通のプロファイルに関連づいているか、常に有効化されるか（<code class="language-plaintext highlighter-rouge">profiles</code>を省略するか）、該当するプロファイルを明示的に有効化するといったことが必要になります。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -230,42 +222,42 @@ profile enabled explicitly:</p>
       <span class="pi">-</span> <span class="s">db</span>
 </code></pre></div></div>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># will only start "web"</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># これは"web"のみを起動します。</span>
 <span class="nv">$ </span>docker-compose up <span class="nt">-d</span>
 
-<span class="c"># this will start mock-backend (and - if necessary - db)</span>
-<span class="c"># by implicitly enabling profile `dev`</span>
+<span class="c"># これはプロファイル`dev`は暗に有効化した上で、</span>
+<span class="c"># mock-backendを実行します（必要に応じてdbも起動します）。</span>
 <span class="nv">$ </span>docker-compose up <span class="nt">-d</span> mock-backend
 
-<span class="c"># this will fail because profile "dev" is disabled</span>
+<span class="c"># プロファイル"dev"が無効なためこのコマンドは失敗します。</span>
 <span class="nv">$ </span>docker-compose up phpmyadmin
 </code></pre></div></div>
 
-<p>Although targeting <code class="language-plaintext highlighter-rouge">phpmyadmin</code> will automatically enable its profiles - i.e.
-<code class="language-plaintext highlighter-rouge">debug</code> - it will not automatically enable the profile(s) required by <code class="language-plaintext highlighter-rouge">db</code> -
-i.e. <code class="language-plaintext highlighter-rouge">dev</code>. To fix this you either have to add the <code class="language-plaintext highlighter-rouge">debug</code> profile to the <code class="language-plaintext highlighter-rouge">db</code> service:</p>
+<p><code class="language-plaintext highlighter-rouge">phpmyadmin</code>を指定して実行すれば、割り当てられているプロファイルつまり<code class="language-plaintext highlighter-rouge">debug</code>は自動的に有効になります。
+しかし<code class="language-plaintext highlighter-rouge">db</code>に割り当てられているプロファイルつまり<code class="language-plaintext highlighter-rouge">dev</code>までは自動的に有効にはしません。
+これを正しくするには、<code class="language-plaintext highlighter-rouge">db</code>サービスに対しても<code class="language-plaintext highlighter-rouge">debug</code>プロファイルを追加しなければなりません。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">db</span><span class="pi">:</span>
   <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>
   <span class="na">profiles</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">debug"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">dev"</span><span class="pi">]</span>
 </code></pre></div></div>
 
-<p>or enable a profile of <code class="language-plaintext highlighter-rouge">db</code> explicitly:</p>
+<p>または<code class="language-plaintext highlighter-rouge">db</code>のプロファイルを明示的に有効化する方法とします。</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># profile "debug" is enabled automatically by targeting phpmyadmin</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># phpmyadmin指定に際してプロファイル"debug"を有効にします。</span>
 <span class="nv">$ </span>docker-compose <span class="nt">--profile</span> dev up phpmyadmin
 <span class="nv">$ COMPOSE_PROFILES</span><span class="o">=</span>dev docker-compose up phpmyadmin
 </code></pre></div></div>
 
-<h2 id="compose-documentation">Compose documentation</h2>
+<h2 id="compose-documentation">Compose ドキュメント</h2>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/compose/">User guide</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/install/">Installing Compose</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/gettingstarted/">Getting Started</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/reference/">Command line reference</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/">Compose file reference</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/samples-for-compose/">Sample apps with Compose</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/">ユーザーガイド</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/install/">Compose のインストール</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/gettingstarted/">はじめよう</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/reference/">コマンドラインリファレンス</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/">Compose ファイルリファレンス</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/samples-for-compose/">Compose を使ったサンプルアプリ</a></li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=profile">profile</a>, <a href="/docs.docker.jp.onthefly/search/?q=profiles reference">profiles reference</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
@@ -300,10 +292,10 @@ i.e. <code class="language-plaintext highlighter-rouge">dev</code>. To fix this 
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#assigning-profiles-to-services" class="nomunge">Assigning profiles to services</a></li>
-  <li><a href="#enabling-profiles" class="nomunge">Enabling profiles</a></li>
-  <li><a href="#auto-enabling-profiles-and-dependency-resolution" class="nomunge">Auto-enabling profiles and dependency resolution</a></li>
-  <li><a href="#compose-documentation" class="nomunge">Compose documentation</a></li>
+  <li><a href="#assigning-profiles-to-services" class="nomunge">サービスへのプロファイルの割り当て</a></li>
+  <li><a href="#enabling-profiles" class="nomunge">プロファイルの有効化</a></li>
+  <li><a href="#auto-enabling-profiles-and-dependency-resolution" class="nomunge">プロファイルの自動有効化と依存関係の解決</a></li>
+  <li><a href="#compose-documentation" class="nomunge">Compose ドキュメント</a></li>
 </ul>
 
 </div>
