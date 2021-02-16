@@ -16,10 +16,10 @@ title: Compose における GPU アクセスの有効化
 @z
 
 @x
-Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure to install the [prerequisites](../_data/engine-cli/docker_run.yaml) if you have not already done so.
+Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure to install the [prerequisites](../config/containers/resource_constraints.md#gpu) if you have not already done so.
 @y
 Docker ホストに GPU デバイスがあり、これに合わせて Docker デーモンを適切に設定していれば、Compose サービスにおいて GPU デバイスの予約設定を定義することができます。
-その実現には [前提条件](../_data/engine-cli/docker_run.yaml) があるため、まだ実施していない場合は実施しておいてください。
+その実現には [前提条件](../config/containers/resource_constraints.md#gpu) があるため、まだ実施していない場合は実施しておいてください。
 @z
 
 @x

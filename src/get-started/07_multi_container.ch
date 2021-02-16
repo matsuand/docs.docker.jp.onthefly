@@ -439,7 +439,7 @@ Todo アプリは環境変数をいくつか設定することによって MySQL
 >
 > While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
 > when running applications in production. Diogo Monica, the former lead of security at Docker,
-> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/):target="_blank" rel="noopener" class="_"}
+> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"}
 > explaining why.
 >
 > A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
@@ -455,9 +455,11 @@ Todo アプリは環境変数をいくつか設定することによって MySQL
 > 環境変数を使って接続設定を行うことは、開発環境においては問題ありません。
 > しかし本番環境において動作させるアプリケーションに、そうした設定を行うことは **極めて不適切** です。
 > Docker の前セキュリティリーダー Diogo Monica 氏が [すばらしいブログ投稿](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"} においてその理由を説明してくれています。
+>
 > コンテナーオーケストレーションのメカニズムにおいては、よりセキュアなものとして Secret 機能がサポートされています。
 > たいていの場合、この Secret というものは実行コンテナーに対してファイルの形でマウントされます。
 > 多くのアプリケーション（MySQL イメージや Todo アプリを含む）でも、環境変数の末尾に`_FILE`をつけて、変数を含んだファイルを指し示しているものがあります。
+>
 > たとえば`MYSQL_PASSWORD_FILE`という変数を設定することで、そこから参照できるファイル内容が接続時のパスワードであるものとして、アプリが利用するようにできます。
 > Docker はそういった変数の受け渡しをサポートする機能はありません。
 > この変数を求めたりファイル内容を得たりするのは、アプリが行わなければならないことです。

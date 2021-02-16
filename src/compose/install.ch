@@ -26,8 +26,8 @@ Docker Compose は macOS、Windows、64 ビット Linux で動作します。
 @x
 ## Prerequisites
 @y
-## 前提条件
 {: #prerequisites }
+## 前提条件
 @z
 
 @x
@@ -302,11 +302,11 @@ Linux の場合は、[GitHub 上の Compose リポジトリのリリースペー
 
 @x
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
+> `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
 {: .important}
 @y
 > `alpine`では以下に示す依存パッケージが必要です。
-> `py-pip`、`python-dev`、`libffi-dev`、`openssl-dev`、`gcc`、`libc-dev`、`rust`、`cargo`、`make`
+> `py-pip`、`python3-dev`、`libffi-dev`、`openssl-dev`、`gcc`、`libc-dev`、`rust`、`cargo`、`make`
 {: .important}
 @z
 
@@ -433,11 +433,11 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 @x
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
+> `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo`, and `make`.
 {: .important}
 @y
 > `alpine`では、以下に示す依存パッケージが必要です。
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`,  `make`
+> `py-pip`、`python3-dev`、`libffi-dev`、`openssl-dev`、`gcc`、`libc-dev`、`rust`、`cargo`、`make`
 {: .important}
 @z
 
