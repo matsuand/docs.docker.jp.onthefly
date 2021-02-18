@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-11 11:57:51 +0900-->
+<!-- Page generated 2021-02-18 13:52:47 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node.js と Mocha フレームワークを用いたテスト実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node.js と Mocha フレームワークを用いたテスト実行" />
   <meta property="og:description" content="How to Build and Run your Tests using Node.js and Mocha frameworks" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-18T13:52:47+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/run-tests/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-18T13:52:47+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node.js と Mocha フレームワークを用いたテスト実行","description":"How to Build and Run your Tests using Node.js and Mocha frameworks","url":"https://docs.docker.com/language/nodejs/run-tests/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -107,26 +107,50 @@
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/deploy/">アプリのデプロイ</a></li>
 </ul>
 
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Work through the steps to build an image and run it as a containerized application in <a href="/docs.docker.jp.onthefly/language/nodejs/develop/">Use your container for development</a>.</p>
+
+<h2 id="introduction">はじめに</h2>
+
 <p>最近のソフトウェア開発においてテストは重要な工程です。
 テストは、さまざまな開発チームによって実に多くのことを実施します。
 ユニットテスト、結合テスト、総合テスト（end-to-end testing）です。
 本ガイドでは Docker においてユニットテストを実行していきます。
 前提として、アプリケーション内の<code class="language-plaintext highlighter-rouge">./test</code>フォルダーには Mocha テストが定義されているものとします。</p>
 
+<h2 id="create-a-test">テストの生成</h2>
+
+<p>そこでアプリケーション内の<code class="language-plaintext highlighter-rouge">./test</code>ディレクトリに Mocha テストを定義します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nb">test</span>
+</code></pre></div></div>
+
+<p>以下のコードを<code class="language-plaintext highlighter-rouge">./test/test.js</code>として保存します。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">assert</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">Array</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">#indexOf()</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should return -1 when the value is not present</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
 <h3 id="running-locally-and-testing-the-application">アプリケーションのローカル実行とテスト</h3>
 
-<p>ローカル環境にはサンプルアプリケーションを構築しているので、Docker イメージをビルドして正常動作することを確認します。
+<p>Docker イメージをビルドして正常動作することを確認します。
 以下のコマンドを入力して、Docker イメージをコンテナーとして実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nb">.</span>
-<span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> app <span class="nt">-p</span> 8080:80 node-docker
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
 </code></pre></div></div>
 
 <p>そこでアプリケーションに対して JSON データを POST して、HTTP GET リクエストを取得します。
 これによって JSON データが正しく返ってくることを確認します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
-  <span class="nt">--url</span> http://localhost:8080/services/test <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost:8000/test <span class="se">\</span>
   <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
   <span class="nt">--data</span> <span class="s1">'{
 	"msg": "testing"
@@ -136,7 +160,7 @@
 <p>同じエンドポイントに対して GET リクエストを実行して、JSON データが正しく返されることを確認します。
 以下において「id」や「createDate」は、処理環境によって異なります。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8080/services/test
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:8000/test
 
 <span class="o">{</span><span class="s2">"code"</span>:<span class="s2">"success"</span>,<span class="s2">"payload"</span>:[<span class="o">{</span><span class="s2">"msg"</span>:<span class="s2">"testing"</span>,<span class="s2">"id"</span>:<span class="s2">"e88acedb-203d-4a7d-8269-1df6c1377512"</span>,<span class="s2">"createDate"</span>:<span class="s2">"2020-10-11T23:21:16.378Z"</span><span class="o">}]}</span>
 </code></pre></div></div>
@@ -149,7 +173,7 @@
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--save-dev</span> mocha
 </code></pre></div></div>
 
-<h2 id="refactor-dockerfile-to-run-tests">テスト用 Dockerfile への変更</h2>
+<h2 id="update-package-json-and-dockerfile-to-run-tests">テスト実行のための package.json と Dockerfile の変更</h2>
 
 <p>さて、アプリケーションは正しく動作することがわかりました。
 そこでコンテナー内部においてテストを実行してみます。
@@ -157,61 +181,40 @@
 このコマンドは、package.json ファイルの「script」セクションのもとにあるコマンドを起動します。
 以下を見てください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
-...
-  <span class="s2">"scripts"</span>: <span class="o">{</span>
-    <span class="s2">"test"</span>: <span class="s2">"mocha ./**/*.js"</span>,
-    <span class="s2">"start"</span>: <span class="s2">"nodemon server.js"</span>
-  <span class="o">}</span>,
-...
-<span class="o">}</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+<span class="p">...</span>
+  <span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">test</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">mocha ./**/*.js</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">start</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">nodemon --inspect=0.0.0.0:9229 server.js</span><span class="dl">"</span>
+  <span class="p">},</span>
+<span class="p">...</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>そして以下の Docker コマンドによって、コンテナーを起動してテストを実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> app <span class="nt">-p</span> 8080:80 node-docker npm run <span class="nb">test</span>
-<span class="o">&gt;</span> node-docker@0.1.0 <span class="nb">test</span> /code
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml run notes npm run <span class="nb">test
+</span>Creating node-docker_notes_run ...
+
+<span class="o">&gt;</span> node-docker@1.0.0 <span class="nb">test</span> /code
 <span class="o">&gt;</span> mocha ./<span class="k">**</span>/<span class="k">*</span>.js
 
-sh: 1: mocha: not found
+
+
+  Array
+    <span class="c">#indexOf()</span>
+      ✓ should <span class="k">return</span> <span class="nt">-1</span> when the value is not present
+
+
+  1 passing <span class="o">(</span>11ms<span class="o">)</span>
+
 </code></pre></div></div>
-
-<p>上を見てわかるようにエラーが発生しました。
-このエラーは実行モジュール mocha が見つからなったということです。
-Dockerfile を確認します。</p>
-
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:14.15.4</span>
-
-<span class="k">WORKDIR</span><span class="s"> /code</span>
-
-<span class="k">COPY</span><span class="s"> package.json package.json</span>
-<span class="k">COPY</span><span class="s"> package-lock.json package-lock.json</span>
-
-<span class="k">RUN </span>npm ci <span class="nt">--production</span>
-<span class="k">COPY</span><span class="s"> . .</span>
-
-<span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
-</code></pre></div></div>
-
-<p>エラーが発生した理由は、npm ci コマンドを使って依存パッケージをインストールする際に<code class="language-plaintext highlighter-rouge">--production</code>フラグを指定していたからです。
-こうしてしまうと npm に対して、package.json ファイル内の「devDependencies」セクションにあるパッケージはインストールしない指示となってしまいます。
-したがってイメージ内に Mocha がインストールされなかったことから、実行しても見つからないことになったわけです。</p>
-
-<p>ベストプラクティスを守って、アプリケーションの実行に必要のないものはコンテナー内にいっさい含めたくありません。
-したがって<code class="language-plaintext highlighter-rouge">--production</code>フラグを取り除くということはできません。
-これに対処する方法はいくつかあります。
-その 1 つは、テストを実行するために利用する 2 つめの Dockerfile を生成することです。
-ただしこれには問題があります。
-2 つの Dockerfile を常に更新していかなければなりません。
-そこで 2 つめの選択肢となるのがマルチステージビルドです。
-ビルドステージを 1 つは本番用、1 つはテスト用として生成します。
-こちらの方が適切な解決策です。</p>
 
 <h3 id="multi-stage-dockerfile-for-testing">テスト用 Dockerfile のマルチステージ化</h3>
 
-<p>以下に示すのがマルチステージビルド化を行っている Dockerfile です。
-これにより本番用イメージとテスト用イメージのビルドを行います。
-以下でハイライト表示されている行を Dockerfile に追加してください。</p>
+<p>テスト起動をコマンドから行うことに加えて、イメージビルドも同じものから行っていきます。
+つまりマルチステージビルドによる  Dockerfile を利用します。
+以下に示す Dockerfile は、テストの実行と本番環境用イメージのビルドを行います。</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:14.15.4 as base</span>
 
@@ -231,7 +234,7 @@ Dockerfile を確認します。</p>
 <span class="k">CMD</span><span class="s"> [ "node", "server.js" ]</span>
 </code></pre></div></div>
 
-<p>ここではまずはじめに<code class="language-plaintext highlighter-rouge">FROM node:14.15.4</code>行にラベルをつけます。
+<p>ここではまずはじめに<code class="language-plaintext highlighter-rouge">FROM node:14.15.4</code>行に対して、<code class="language-plaintext highlighter-rouge">as base</code>によりラベルをつけます。
 これを行うと、このビルドステージを他のビルドステージにおいて参照することができます。
 次に新たなビルドステージに対して test というラベルをつけます。
 このステージはテスト実行用に利用します。</p>
@@ -241,27 +244,28 @@ Dockerfile を確認します。</p>
 これによってテストビルドステージを指定してビルドします。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
-<span class="o">[</span>+] Building 0.7s <span class="o">(</span>11/11<span class="o">)</span> FINISHED
+Sending build context to Docker daemon  22.35MB
 ...
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> writing image sha256:049b37303e3355f...9b8a954f
- <span class="o">=&gt;</span> <span class="o">=&gt;</span> naming to docker.io/library/node-docker
+Successfully built fa583b97c4dd
+Successfully tagged node-docker:latest
 </code></pre></div></div>
 
 <p>テストイメージがビルドできたので、これをコンテナー内において実行しテストが実施できるかどうかを見てみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--name</span> app <span class="nt">-p</span> 8080:80 node-docker
-<span class="o">&gt;</span> node-docker@0.1.0 <span class="nb">test</span> /code
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-p</span> 8000:8000 node-docker
+
+<span class="o">&gt;</span> node-docker@1.0.0 <span class="nb">test</span> /code
 <span class="o">&gt;</span> mocha ./<span class="k">**</span>/<span class="k">*</span>.js
 
-  Calculator
-    adding
-      ✓ should <span class="k">return </span>4 when adding 2 + 2
-      ✓ should <span class="k">return </span>0 when adding zeros
-    subtracting
-      ✓ should <span class="k">return </span>4 when subtracting 4 from 8
-      ✓ should <span class="k">return </span>0 when subtracting 8 from 8
 
-  4 passing <span class="o">(</span>11ms<span class="o">)</span>
+
+  Array
+    <span class="c">#indexOf()</span>
+      ✓ should <span class="k">return</span> <span class="nt">-1</span> when the value is not present
+
+
+  1 passing <span class="o">(</span>12ms<span class="o">)</span>
+
 </code></pre></div></div>
 
 <p>ビルド処理の結果は上では省略しましたが、Mocha test runner の実行は完了し、テストが正常終了していることがわかります。</p>
@@ -295,77 +299,101 @@ CMD 命令はイメージビルド時には実行されません。
 
 <p>テストを実行するには、先ほどと同様に docker build コマンドを実行する必要があります。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker build -t node-docker --target test .
-[+] Building 1.2s (13/13) FINISHED
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t node-docker --target test .
+Sending build context to Docker daemon  22.35MB
+Step 1/8 : FROM node:14.15.4 as base
+ ---&gt; f5be1883c8e0
 ...
- =&gt; CACHED [base 2/4] WORKDIR /code
- =&gt; CACHED [base 3/4] COPY package.json package.json
- =&gt; CACHED [base 4/4] COPY package-lock.json package-lock.json
- =&gt; CACHED [test 1/3] RUN npm ci
- =&gt; CACHED [test 2/3] COPY . .
- =&gt; CACHED [test 3/3] RUN npm run test
- =&gt; exporting to image
- =&gt; =&gt; exporting layers
- =&gt; =&gt; writing image sha256:bcedeeb7d9dd13d...18ca0a05034ed4dd4
+Step 6/8 : RUN npm ci
+ ---&gt; Using cache
+ ---&gt; bcc5cd4a6a1e
+Step 7/8 : COPY . .
+ ---&gt; 1528ebcb73fa
+Step 8/8 : RUN npm run test
+ ---&gt; Running in beadc36b293a
+
+&gt; node-docker@1.0.0 test /code
+&gt; mocha ./**/*.js
+
+
+
+  Array
+    <span class="c">#indexOf()</span>
+      ✓ should return -1 when the value is not present
+
+
+  1 passing (9ms)
+
+Removing intermediate container beadc36b293a
+ ---&gt; 445b80e59acd
+Successfully built 445b80e59acd
+Successfully tagged node-docker:latest
 </code></pre></div></div>
 
 <p>ここでもわかりやすくなるように、ビルド結果の出力は省略しましたが、テストの実行と正常終了が見てとれます。
 そこでテストが失敗したときにはどうなるかを見るために、ブレークポイントを設定して出力結果を確認します。</p>
 
-<p>util/math.js ファイルを開いて 12 行めを以下のように変更します。</p>
+<p>test/test.js ファイルを開いて 5 行めを以下のように変更します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>11 <span class="k">function </span>subtract<span class="o">(</span> num1, num2 <span class="o">)</span> <span class="o">{</span>
-12   <span class="k">return </span>num2 - num1
-13 <span class="o">}</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     1	var assert <span class="o">=</span> require<span class="o">(</span><span class="s1">'assert'</span><span class="o">)</span><span class="p">;</span>
+     2	describe<span class="o">(</span><span class="s1">'Array'</span>, <span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+     3	  describe<span class="o">(</span><span class="s1">'#indexOf()'</span>, <span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+     4	    it<span class="o">(</span><span class="s1">'should return -1 when the value is not present'</span>, <span class="k">function</span><span class="o">()</span> <span class="o">{</span>
+     5	      assert.equal<span class="o">([</span>1, 2, 3].indexOf<span class="o">(</span>3<span class="o">)</span>, <span class="nt">-1</span><span class="o">)</span><span class="p">;</span>
+     6	    <span class="o">})</span><span class="p">;</span>
+     7	  <span class="o">})</span><span class="p">;</span>
+     8	<span class="o">})</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>そして先ほどと同じ docker build コマンドを実行します。
 ビルド処理は失敗して、失敗したテストに関する情報がコンソールに出力されます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
- <span class="o">&gt;</span> <span class="o">[</span><span class="nb">test </span>3/3] RUN npm run <span class="nb">test</span>:
-<span class="c">#11 0.509</span>
-<span class="c">#11 0.509 &gt; node-docker@0.1.0 test /code</span>
-<span class="c">#11 0.509 &gt; mocha ./**/*.js</span>
-<span class="c">#11 0.509</span>
-<span class="c">#11 0.811</span>
-<span class="c">#11 0.813</span>
-<span class="c">#11 0.815   Calculator</span>
-<span class="c">#11 0.815     adding</span>
-<span class="c">#11 0.817       ✓ should return 4 when adding 2 + 2</span>
-<span class="c">#11 0.818       ✓ should return 0 when adding zeros</span>
-<span class="c">#11 0.818     subtracting</span>
-<span class="c">#11 0.822       1) should return 4 when subtracting 4 from 8</span>
-<span class="c">#11 0.823       ✓ should return 0 when subtracting 8 from 8</span>
-<span class="c">#11 0.823</span>
-<span class="c">#11 0.824</span>
-<span class="c">#11 0.824   3 passing (14ms)</span>
-<span class="c">#11 0.824   1 failing</span>
-<span class="c">#11 0.824</span>
-<span class="c">#11 0.827   1) Calculator</span>
-<span class="c">#11 0.827        subtracting</span>
-<span class="c">#11 0.827          should return 4 when subtracting 4 from 8:</span>
-<span class="c">#11 0.827</span>
-<span class="c">#11 0.827       AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:</span>
-<span class="c">#11 0.827</span>
-<span class="c">#11 0.827 -4 !== 4</span>
-<span class="c">#11 0.827</span>
-<span class="c">#11 0.827       + expected - actual</span>
-<span class="c">#11 0.827</span>
-<span class="c">#11 0.827       --4</span>
-<span class="c">#11 0.827       +4</span>
-<span class="c">#11 0.827</span>
-<span class="c">#11 0.827       at Context.&lt;anonymous&gt; (util/math.test.js:18:14)</span>
-<span class="c">#11 0.827       at processImmediate (internal/timers.js:461:21)</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
+Sending build context to Docker daemon  22.35MB
+Step 1/8 : FROM node:14.15.4 as base
+ <span class="nt">---</span><span class="o">&gt;</span> 995ff80c793e
 ...
-executor failed running <span class="o">[</span>/bin/sh <span class="nt">-c</span> npm run <span class="nb">test</span><span class="o">]</span>: <span class="nb">exit </span>code: 1
+Step 8/8 : RUN npm run <span class="nb">test</span>
+ <span class="nt">---</span><span class="o">&gt;</span> Running <span class="k">in </span>b96d114a336b
+
+<span class="o">&gt;</span> node-docker@1.0.0 <span class="nb">test</span> /code
+<span class="o">&gt;</span> mocha ./<span class="k">**</span>/<span class="k">*</span>.js
+
+
+
+  Array
+    <span class="c">#indexOf()</span>
+      1<span class="o">)</span> should <span class="k">return</span> <span class="nt">-1</span> when the value is not present
+
+
+  0 passing <span class="o">(</span>12ms<span class="o">)</span>
+  1 failing
+
+  1<span class="o">)</span> Array
+       <span class="c">#indexOf()</span>
+         should <span class="k">return</span> <span class="nt">-1</span> when the value is not present:
+
+      AssertionError <span class="o">[</span>ERR_ASSERTION]: 2 <span class="o">==</span> <span class="nt">-1</span>
+      + expected - actual
+
+      <span class="nt">-2</span>
+      +-1
+
+      at Context.&lt;anonymous&gt; <span class="o">(</span><span class="nb">test</span>/test.js:5:14<span class="o">)</span>
+      at processImmediate <span class="o">(</span>internal/timers.js:461:21<span class="o">)</span>
+
+
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! node-docker@1.0.0 <span class="nb">test</span>: <span class="sb">`</span>mocha ./<span class="k">**</span>/<span class="k">*</span>.js<span class="sb">`</span>
+npm ERR! Exit status 1
+...
 </code></pre></div></div>
 
 <h2 id="next-steps">次のステップ</h2>
 
-<p>本節では汎用的な開発イメージを生成しました。
-このイメージは、ふだんのコマンドラインツールと何ら変わらずに実行できました。
-また Compose ファイルを生成してソースコードを実行コンテナー内にマッピングし、デバッグ用のポートを公開しました。</p>
+<p>本節では Docker イメージのビルド処理の一部分として、テスト実行を行いました。</p>
 
 <p>次節では GitHub アクションを使って CI/CD パイプラインを設定する方法を見ていきます。
 以下を参照してください。</p>
@@ -412,9 +440,15 @@ executor failed running <span class="o">[</span>/bin/sh <span class="nt">-c</spa
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#running-locally-and-testing-the-application" class="nomunge">アプリケーションのローカル実行とテスト</a></li>
+  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="#introduction" class="nomunge">はじめに</a></li>
+  <li><a href="#create-a-test" class="nomunge">テストの生成</a>
+    <ul>
+      <li><a href="#running-locally-and-testing-the-application" class="nomunge">アプリケーションのローカル実行とテスト</a></li>
+    </ul>
+  </li>
   <li><a href="#install-mocha" class="nomunge">Mocha のインストール</a></li>
-  <li><a href="#refactor-dockerfile-to-run-tests" class="nomunge">テスト用 Dockerfile への変更</a>
+  <li><a href="#update-package-json-and-dockerfile-to-run-tests" class="nomunge">テスト実行のための package.json と Dockerfile の変更</a>
     <ul>
       <li><a href="#multi-stage-dockerfile-for-testing" class="nomunge">テスト用 Dockerfile のマルチステージ化</a></li>
     </ul>

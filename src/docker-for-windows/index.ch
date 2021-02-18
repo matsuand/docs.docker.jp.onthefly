@@ -266,7 +266,7 @@ Note that configuring file sharing is not necessary for Windows containers, only
 File sharing（ファイル共有）を利用すると、Windows 内のローカルディレクトリを Linux コンテナー間で共有できるようになります。
 たとえばホストにある IDE 環境上でソースコードを編集し、コードの実行やテストはコンテナー内で行うような場合に、大変便利なものです。
 ちなみにファイル共有の設定は Windows コンテナーでは不要であり、[Linux コンテナー](#switch-between-windows-and-linux-containers) だけに必要となるものです。
-あるディレクトリが Linux コンテナーに共有されるものでないならば、実行時に `file not found` か `cannot start service` というエラーが発生するかもしれません。
+あるディレクトリが Linux コンテナーに共有されるものでないならば、実行時に`file not found`か`cannot start service`というエラーが発生するかもしれません。
 [ボリュームマウントには Linux コンテナーの共有フォルダーが必要](troubleshoot.md#volume-mounting-requires-shared-folders-for-linux-containers) を参照してください。
 @z
 
@@ -279,7 +279,7 @@ File share settings are:
 @x
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
 @y
-- **Add a Directory**（ディレクトリの追加）: `+` をクリックして、追加したいディレクトリを指定します。
+- **Add a Directory**（ディレクトリの追加）: `+`をクリックして、追加したいディレクトリを指定します。
 @z
 
 @x
@@ -323,7 +323,7 @@ File share settings are:
 >
  * Windows では、アプリケーションが参照するファイルシステムは英字の大文字小文字を区別しません。
    一方で Linux は大文字小文字を区別します。
-   Linux 上においては `test` と `Test` というファイルは別々のものとして生成可能ですが、Windows ではこの 2 つは同一のファイルを参照します。
+   Linux 上においては`test`と`Test`というファイルは別々のものとして生成可能ですが、Windows ではこの 2 つは同一のファイルを参照します。
    このことが問題になる場合があります。
    Windows の開発マシン上では（2 つのファイル内容が共有されているとして）、アプリケーションが正しく動作するにも関わらず、Linux の本番環境（2 つのファイルを別々に取り扱う）が実行に失敗してしまうケースです。
    こういったことを避けるためには、Docker Desktop が共有ファイルにアクセスする際に、大文字小文字をそのまま扱うようにします。
@@ -470,9 +470,9 @@ encounter this, reset the DNS server to use the Google DNS fixed address:
 > **メモ**
 >
 > Docker Desktop を使って Docker Hub に接続する際に、問題が発生するとの報告があります。
-> これは `docker` コマンドの実行時に発生するものです。
-> Docker Hub からイメージをプルする際に、それまでダウンロードしていないイメージであったとき、たとえば `docker run hello-world` を初めて実行したような場合に発生します。
-> この症状が発生した場合は、DNS サーバーをリセットして Google DNS 固定アドレス `8.8.8.8` を設定してみてください。
+> これは`docker`コマンドの実行時に発生するものです。
+> Docker Hub からイメージをプルする際に、それまでダウンロードしていないイメージであったとき、たとえば`docker run hello-world`を初めて実行したような場合に発生します。
+> この症状が発生した場合は、DNS サーバーをリセットして Google DNS 固定アドレス`8.8.8.8`を設定してみてください。
 > 詳しくはトラブルシューティングの [ネットワークの問題](troubleshoot.md#networking-issues) を参照してください。
 @z
 
@@ -733,7 +733,7 @@ By default, Kubernetes containers are hidden from commands like `docker
 service ls`, because managing them manually is not supported. To make them
 visible, select **Show system containers (advanced)**. Most users do not need this option.
 @y
-デフォルトで Kubernetes コンテナーは `docker service ls` などのコマンドには現れません。
+デフォルトで Kubernetes コンテナーは`docker service ls`などのコマンドには現れません。
 手動で管理することがサポートされていないためです。
 コマンド上に表示させるためには、**Show system containers (advanced)** を実行します。
 ただしたいていのユーザーにとって、このオプションは不要です。
@@ -752,7 +752,7 @@ at the bottom right of the Docker Desktop Settings dialog. The status of Kuberne
   `docker-desktop`.
 @y
 - Kubernetes が有効になって稼動していると、Docker Desktop の Settings 画面の下段右側に、新たにステータスバーが表示されます。
-  Kubernetes の状態は Docker メニューに表示され、context が `docker-desktop` を指します。
+  Kubernetes の状態は Docker メニューに表示され、context が`docker-desktop`を指します。
 @z
 
 @x
@@ -762,7 +762,7 @@ at the bottom right of the Docker Desktop Settings dialog. The status of Kuberne
 @y
 - どの時点でも Kubernetes サポートを無効にするには、**Enable Kubernetes** チェックボックスをオフにします。
   Kubernetes コンテナーが停止して削除されます。
-  そして `/usr/local/bin/kubectl` コマンドも削除されます。
+  そして`/usr/local/bin/kubectl`コマンドも削除されます。
 @z
 
 @x
@@ -775,13 +775,24 @@ at the bottom right of the Docker Desktop Settings dialog. The status of Kuberne
 - If you installed `kubectl` by another method, and
 experience conflicts, remove it.
 @y
-- `kubectl` を別の方法でインストールしていて何か支障が発生したら、これを削除してください。
+- `kubectl`を別の方法でインストールしていて何か支障が発生したら、これを削除してください。
 @z
 
 @x
   For more information on using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
 @y
   Docker Desktop における Kubernetes 利用の詳細については [Kubernetes へのデプロイ](kubernetes.md) を参照してください。
+@z
+
+@x
+> Upgrade Kubernetes
+>
+> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
+@y
+> Kubernetes のアップグレード
+>
+> Docker Desktop を最新版に更新しても、Kubernetes クラスターは自動更新されません。
+> これを最新版にアップグレードするには **Reset Kubernetes Cluster**（Kubernetes クラスターのリセット）を実行してください。
 @z
 
 @x
@@ -881,7 +892,7 @@ Windows コンテナーについての詳細は、以下のドキュメントを
 - To understand how to connect to Windows containers from the local host, see
   [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
 @y
-- ローカルホストから Windows コンテナーへの接続方法を理解するには、[`localhost` や公開ポートに対する Windows コンテナーの制約](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports) を参照してください。
+- ローカルホストから Windows コンテナーへの接続方法を理解するには、[`localhost`や公開ポートに対する Windows コンテナーの制約](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports) を参照してください。
 @z
 
 @x

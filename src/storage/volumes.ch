@@ -87,7 +87,7 @@ writable layer.
 Volumes use `rprivate` bind propagation, and bind propagation is not
 configurable for volumes.
 @y
-ボリュームはバインドプロパゲーションの 1 つである `rprivate` を利用します。
+ボリュームはバインドプロパゲーションの 1 つである`rprivate`を利用します。
 ただしボリュームにおいてバインドプロパゲーションを設定することはできません。
 @z
 
@@ -104,14 +104,14 @@ the `-v` syntax combines all the options together in one field, while the `--mou
 syntax separates them. Here is a comparison of the syntax for each flag.
 @y
 全般に`--mount`の方がわかりやすいものですが、記述は増えます。
-両者の最大の違いは、`-v`の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、`--mount` の文法はそれを 1 つずつ個別に分けている点です。
+両者の最大の違いは、`-v`の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、`--mount`の文法はそれを 1 つずつ個別に分けている点です。
 以下に両フラグにおける文法を比較します。
 @z
 
 @x
 If you need to specify volume driver options, you must use `--mount`.
 @y
-ボリュームドライバーのオプションを指定する必要がある場合は、`--mount` を用いなければなりません。
+ボリュームドライバーのオプションを指定する必要がある場合は、`--mount`を用いなければなりません。
 @z
 
 @x
@@ -126,7 +126,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`. These options are discussed below.
 @y
-- **`-v` または `--volume`**: 3 つの項目から構成され、それぞれをコロン（`:`）で区切ります。
+- **`-v`または`--volume`**: 3 つの項目から構成され、それぞれをコロン（`:`）で区切ります。
   各項目は正しい順に記述する必要があります。
   各項目の意味は、そのときどきによって変わります。
   - 名前つきボリュームの場合、1 つめの項目は、そのボリューム名です。
@@ -134,7 +134,7 @@ If you need to specify volume driver options, you must use `--mount`.
     匿名ボリュームの場合、1 つめの項目は省略されます。
   - 2 つめは、コンテナー内にマウントされるファイルまたディレクトリのパスです。
   - 3 つめは任意の指定項目であり、オプション指定をカンマ区切りで指定します。
-    指定内容には `ro` などがあります。
+    指定内容には`ro`などがあります。
     このオプションに関しては後に説明しています。
 @z
 
@@ -158,19 +158,19 @@ If you need to specify volume driver options, you must use `--mount`.
     key-value pair consisting of the option name and its value.
 @y
 - **`--mount`**: 複数のキーバリューペアを指定し、各ペアはカンマにより区切ります。
-  そしてそれぞれのペアは `<key>=<value>` という記述を行います。
-  `--mount` における記述は `-v` や `--volume` におけるものよりも長くなります。
+  そしてそれぞれのペアは`<key>=<value>`という記述を行います。
+  `--mount`における記述は`-v`や`--volume`におけるものよりも長くなります。
   しかしキーの並び順に意味はなく、このフラグに与えられたキーバリューの内容は容易に理解することができます。
-  - `type` はマウントのタイプであり、[`bind`](bind-mounts.md), `volume`, [`tmpfs`](tmpfs.md) といった値を指定します。
-    ここで説明しているのはボリュームであるため、常に `volume` であるものとします。
-  - `source` はマウント元です。
+  - `type`はマウントのタイプであり、[`bind`](bind-mounts.md), `volume`, [`tmpfs`](tmpfs.md) といった値を指定します。
+    ここで説明しているのはボリュームであるため、常に`volume`であるものとします。
+  - `source`はマウント元です。
     名前つきボリュームの場合は、そのボリューム名です。
     匿名ボリュームの場合、この項目は省略します。
-    `source` あるいは `src` といった指定がよく用いられます。
-  - `destination` には、コンテナー上にてマウントするファイルまたはディレクトリのパスを指定します。
-    `destination`, `dst`, `target` といった指定がよく用いられます。
-  - オプション `readonly` が指定されると、そのボリュームが [コンテナーにおける読み込み専用マウント](#use-a-read-only-volume) としてマウントされます。
-  - `volume-opt` オプションは複数の指定が可能です。
+    `source`あるいは`src`といった指定がよく用いられます。
+  - `destination`には、コンテナー上にてマウントするファイルまたはディレクトリのパスを指定します。
+    `destination`、`dst`、`target`といった指定がよく用いられます。
+  - オプション`readonly`が指定されると、そのボリュームが [コンテナーにおける読み込み専用マウント](#use-a-read-only-volume) としてマウントされます。
+  - `volume-opt`オプションは複数の指定が可能です。
     オプション名とその値からなるキーバリューペアを指定します。
 @z
 
@@ -194,9 +194,9 @@ If you need to specify volume driver options, you must use `--mount`.
 > 上位レベルの CSV 解析をエスケープする
 >
 > 利用するボリュームドライバーが、オプションとしてカンマ区切りリストを受け取る場合、そのリストが上位レベルの CSV として解析されないようにエスケープすることが必要になります。
-> `volume-opt` をエスケープするには、そのオプションをダブルクォート（`"`）で囲み、かつマウントパラメーター全体の文字列をシングルクォート（`'`）で囲みます。
+> `volume-opt`をエスケープするには、そのオプションをダブルクォート（`"`）で囲み、かつマウントパラメーター全体の文字列をシングルクォート（`'`）で囲みます。
 >
-> たとえば `local` ドライバーは `o` パラメーターにおいて、マウントオプションにカンマ区切りリストを受けつけます。
+> たとえば`local`ドライバーは`o`パラメーターにおいて、マウントオプションにカンマ区切りリストを受けつけます。
 > ここに示す例は、そのリストを正しくエスケープする方法を示しています。
 >
 >     $ docker service create \
@@ -210,28 +210,28 @@ If you need to specify volume driver options, you must use `--mount`.
 The examples below show both the `--mount` and `-v` syntax where possible, and
     `--mount` is presented first.
 @y
-これ以降においては、可能なら `--mount` と `-v` の両方の例を示していきます。
-先に示すのは `--mount` とします。
+これ以降においては、可能なら`--mount`と`-v`の両方の例を示していきます。
+先に示すのは`--mount`とします。
 @z
 
 @x
 ### Differences between `-v` and `--mount` behavior
 @y
 {: #differences-between--v-and---mount-behavior }
-### `-v` と `--mount` の動作の違い
+### `-v`と`--mount`の動作の違い
 @z
 
 @x
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.
 @y
-バインドマウントの場合とは違い、ボリュームのオプションは、`--mount` と `-v` フラグの両方においてすべて利用できます。
+バインドマウントの場合とは違い、ボリュームのオプションは、`--mount`と`-v`フラグの両方においてすべて利用できます。
 @z
 
 @x
 When using volumes with services, only `--mount` is supported.
 @y
-サービスにおいてボリュームを利用する場合は `--mount` のみがサポートされます。
+サービスにおいてボリュームを利用する場合は`--mount`のみがサポートされます。
 @z
 
 @x
@@ -351,7 +351,7 @@ the volume for you. The following example mounts the volume `myvol2` into
 `/app/` in the container.
 @y
 ボリュームがまだ存在していない状態で、そのボリュームを使ったコンテナーを起動すると、Docker はその際にボリュームを生成します。
-以下の例はボリューム `myvol2` をコンテナー内の `/app/` にマウントするものです。
+以下の例はボリューム`myvol2`をコンテナー内の`/app/`にマウントするものです。
 @z
 
 @x
@@ -359,9 +359,9 @@ The `-v` and `--mount` examples below produce the same result. You can't run
 them both unless you remove the `devtest` container and the `myvol2` volume
 after running the first one.
 @y
-`--mount` と `-v` によるそれぞれの例は、同一の結果になります。
+`--mount`と`-v`によるそれぞれの例は、同一の結果になります。
 ただし 2 つの例を同時に実行することはできません。
-実行するためには、実行前に `devtest` コンテナーと `myvol2` ボリュームを削除しておくことが必要になります。
+実行するためには、実行前に`devtest`コンテナーと`myvol2`ボリュームを削除しておくことが必要になります。
 @z
 
 @x
@@ -432,8 +432,8 @@ $ docker run -d \
 Use `docker inspect devtest` to verify that the volume was created and mounted
 correctly. Look for the `Mounts` section:
 @y
-ボリュームが正しく生成されたかどうかを `docker inspect devtest` により確認します。
-出力の中で `Mounts` の項目を見てみます。
+ボリュームが正しく生成されたかどうかを`docker inspect devtest`により確認します。
+出力の中で`Mounts`の項目を見てみます。
 @z
 
 @x
@@ -602,7 +602,7 @@ volume driver, but some volume drivers do support shared storage. Docker for AWS
 Docker for Azure both support persistent storage using the Cloudstor plugin.
 @y
 サービスを起動してボリュームを定義すると、各サービスそれぞれは固有のローカルボリュームを利用します。
-`local` ボリュームドライバーを利用する場合は、コンテナー間でデータが共有されることはありません。
+`local`ボリュームドライバーを利用する場合は、コンテナー間でデータが共有されることはありません。
 一方、ボリュームドライバーの中には、ストレージの共有をサポートするものがあります。
 Docker for AWS と Docker for Azure では、Cloudstor プラグインを利用して恒常的なストレージをサポートしています。
 @z
@@ -611,7 +611,7 @@ Docker for AWS と Docker for Azure では、Cloudstor プラグインを利用�
 The following example starts a `nginx` service with four replicas, each of which
 uses a local volume called `myvol2`.
 @y
-以下の例は `nginx` サービスを 4 つのレプリカを使って起動し、そのレプリカの個々が `myvol2` というローカルボリュームを利用します。
+以下の例は`nginx`サービスを 4 つのレプリカを使って起動し、そのレプリカの個々が`myvol2`というローカルボリュームを利用します。
 @z
 
 @x
@@ -635,7 +635,7 @@ $ docker service create -d \
 @x
 Use `docker service ps devtest-service` to verify that the service is running:
 @y
-`docker service ps devtest-service` を実行して、サービスが起動していることを確認します。
+`docker service ps devtest-service`を実行して、サービスが起動していることを確認します。
 @z
 
 @x
@@ -693,8 +693,8 @@ The `docker service create` command does not support the `-v` or `--volume` flag
 When mounting a volume into a service's containers, you must use the `--mount`
 flag.
 @y
-`docker service create` コマンドは `-v` フラグや `--volume` フラグをサポートしていません。
-サービスコンテナー内にボリュームをマウントするには、`--mount` フラグを使う必要があります。
+`docker service create`コマンドは`-v`フラグや`--volume`フラグをサポートしていません。
+サービスコンテナー内にボリュームをマウントするには、`--mount`フラグを使う必要があります。
 @z
 
 @x
@@ -712,7 +712,7 @@ mounts and uses the volume, and other containers which use the volume also
 have access to the pre-populated content.
 @y
 上で示したように起動するコンテナーが、新たなボリュームを生成するとします。
-そして（上でいうと `/app` のように）マウントされるディレクトリ内に、すでにファイルやサブディレクトリが存在していた場合、このディレクトリの内容はボリュームにコピーされます。
+そして（上でいうと`/app`のように）マウントされるディレクトリ内に、すでにファイルやサブディレクトリが存在していた場合、このディレクトリの内容はボリュームにコピーされます。
 そうしてからコンテナーは、ボリュームをマウントして利用していきます。
 このボリュームを利用する別のコンテナーは、コピーを済ませた内容にアクセスすることになります。
 @z
@@ -723,14 +723,14 @@ new volume `nginx-vol` with the contents of the container's
 `/usr/share/nginx/html` directory, which is where Nginx stores its default HTML
 content.
 @y
-この状況を示すために、以下では `nginx` コンテナーを起動して、コンテナー内の `/usr/share/nginx/html` の内容を、新たなボリューム `nginx-vol` にコピーする例を示します。
-`/usr/share/nginx/html` 内には、Nginx によるデフォルトの HTML ファイルが保存されています。
+この状況を示すために、以下では`nginx`コンテナーを起動して、コンテナー内の`/usr/share/nginx/html`の内容を、新たなボリューム`nginx-vol`にコピーする例を示します。
+`/usr/share/nginx/html`内には、Nginx によるデフォルトの HTML ファイルが保存されています。
 @z
 
 @x
 The `--mount` and `-v` examples have the same end result.
 @y
-`--mount` と `-v` の例は、いずれも同一の結果となります。
+`--mount`と`-v`の例は、いずれも同一の結果となります。
 @z
 
 @x
@@ -853,14 +853,14 @@ mount point within the container. Where multiple options are present, separate
 them by commas.
 @y
 上の例を修正して次の例では、ディレクトリを読み込み専用ボリュームとしてマウントします。
-これを実現するには、コンテナー内のマウントポイントの指定に続けて（デフォルトでは空の）オプションリストに `ro` を加えます。
+これを実現するには、コンテナー内のマウントポイントの指定に続けて（デフォルトでは空の）オプションリストに`ro`を加えます。
 複数のオプション指定がある場合は、カンマで区切ります。
 @z
 
 @x
 The `--mount` and `-v` examples have the same result.
 @y
-`--mount` と `-v` の例は、いずれも同一の結果となります。
+`--mount`と`-v`の例は、いずれも同一の結果となります。
 @z
 
 @x
@@ -931,8 +931,8 @@ $ docker run -d \
 Use `docker inspect nginxtest` to verify that the readonly mount was created
 correctly. Look for the `Mounts` section:
 @y
-`docker inspect nginxtest` を実行して、読み込み専用のマウントが正しく生成されていることを確認します。
-確認するのは `Mounts` の項です。
+`docker inspect nginxtest`を実行して、読み込み専用のマウントが正しく生成されていることを確認します。
+確認するのは`Mounts`の項です。
 @z
 
 @x
@@ -1055,8 +1055,8 @@ The following examples use the `vieux/sshfs` volume driver, first when creating
 a standalone volume, and then when starting a container which creates a new
 volume.
 @y
-`docker volume create` を実行してボリュームを生成する場合、あるいはコンテナーを起動した際にボリュームがまだ生成されていない場合に、ボリュームドライバーを指定することができます。
-以下の例では `vieux/sshfs` ボリュームドライバーというものを利用しています。
+`docker volume create`を実行してボリュームを生成する場合、あるいはコンテナーを起動した際にボリュームがまだ生成されていない場合に、ボリュームドライバーを指定することができます。
+以下の例では`vieux/sshfs`ボリュームドライバーというものを利用しています。
 はじめはスタンドアロンのボリュームを生成する場合であり、次はコンテナー起動時に新たなボリュームが生成される場合です。
 @z
 
@@ -1078,7 +1078,7 @@ host and can connect to the second using SSH.
 @x
 On the Docker host, install the `vieux/sshfs` plugin:
 @y
-Docker ホストでは `vieux/sshfs` プラグインをインストールします。
+Docker ホストでは`vieux/sshfs`プラグインをインストールします。
 @z
 
 @x
@@ -1105,7 +1105,7 @@ configurable options, each of which is specified using an `-o` flag.
 @y
 この例では SSH パスワードを指定することにしていますが、2 つのホスト間で鍵を共有する設定しているのであれば、パスワードは省略可能です。
 各ボリュームドライバーは、設定可能なオプションを持つことがあります。
-オプションの指定には `-o` フラグを用います。
+オプションの指定には`-o`フラグを用います。
 @z
 
 @x
@@ -1139,7 +1139,7 @@ must use the `--mount` flag to mount the volume, rather than `-v`.**
 @y
 この例では SSH パスワードを指定することにしていますが、2 つのホスト間で鍵を共有する設定しているのであれば、パスワードは省略可能です。
 各ボリュームドライバーは、設定可能なオプションを持つことがあります。
-**ボリュームドライバーにオプション指定が必要な場合、ボリュームマウントを行うには `-v` フラグではなく `--mount` フラグを用いなければなりません。**
+**ボリュームドライバーにオプション指定が必要な場合、ボリュームマウントを行うには`-v`フラグではなく`--mount`フラグを用いなければなりません。**
 @z
 
 @x
@@ -1171,8 +1171,8 @@ $ docker run -d \
 This example shows how you can create an NFS volume when creating a service. This example uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
 @y
 この例は、サービス生成時に NFS ボリュームを生成する方法を示すものです。
-ここでは NFS サーバーとして `10.0.0.10` を利用し、NFS サーバーにエクスポートするディレクトリ を `/var/docker-nfs` とします。
-指定するボリュームドライバーは `local` です。
+ここでは NFS サーバーとして`10.0.0.10`を利用し、NFS サーバーにエクスポートするディレクトリを`/var/docker-nfs`とします。
+指定するボリュームドライバーは`local`です。
 @z
 
 @x
@@ -1217,6 +1217,46 @@ docker service create -d \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=addr=10.0.0.10,rw,nfsvers=4,async"' \
     nginx:latest
 ```
+@z
+
+@x
+### Create CIFS/Samba volumes
+@y
+{: #create-cifssamba-volumes }
+### CIFS/Samba ボリュームの生成
+@z
+
+@x
+You can mount a Samba share directly in docker without configuring a mount point on your host.
+@y
+Samba 共有は、ホスト上でのマウントポイントを設定することなく、直接マウントすることができます。
+@z
+
+@x
+```bash
+docker volume create \
+	--driver local \
+	--opt type=cifs \
+	--opt device=//uxxxxx.your-server.de/backup \
+	--opt o=addr=uxxxxx.your-server.de,username=uxxxxxxx,password=*****,file_mode=0777,dir_mode=0777 \
+	--name cif-volume
+```
+@y
+```bash
+docker volume create \
+	--driver local \
+	--opt type=cifs \
+	--opt device=//uxxxxx.your-server.de/backup \
+	--opt o=addr=uxxxxx.your-server.de,username=uxxxxxxx,password=*****,file_mode=0777,dir_mode=0777 \
+	--name cif-volume
+```
+@z
+
+@x
+Notice the `addr` option is required if using a hostname instead of an IP so docker can perform the hostname lookup.
+@y
+なお IP アドレスのかわりにホスト名を利用する場合には`addr`オプションの指定が必要です。
+これにより Docker はホスト名による名前解決が可能になります。
 @z
 
 @x
@@ -1231,7 +1271,7 @@ Volumes are useful for backups, restores, and migrations. Use the
 `--volumes-from` flag to create a new container that mounts that volume.
 @y
 ボリュームはバックアップ、復元、移行が簡単にできます。
-`--volumes-from` フラグを使うと、ボリュームをマウントする新たなコンテナーが生成されます。
+`--volumes-from`フラグを使うと、ボリュームをマウントする新たなコンテナーが生成されます。
 @z
 
 @x
@@ -1244,7 +1284,7 @@ Volumes are useful for backups, restores, and migrations. Use the
 @x
 For example, create a new container named `dbstore`:
 @y
-たとえば `dbstore` という名のコンテナーを新規生成します。
+たとえば`dbstore`という名のコンテナーを新規生成します。
 @z
 
 @x
@@ -1268,9 +1308,9 @@ Then in the next command, we:
 - Mount a local host directory as `/backup`
 - Pass a command that tars the contents of the `dbdata` volume to a `backup.tar` file inside our `/backup` directory.
 @y
-- 新規のコンテナーを起動し、`dbstore` コンテナーからボリュームをマウントします。
-- ホストディレクトリを `/backup` としてマウントします。
-- `/backup` ディレクトリ内に入って、`dbdata` ボリュームの内容を tar コマンドにより `backup.tar` ファイルとして生成します。
+- 新規のコンテナーを起動し、`dbstore`コンテナーからボリュームをマウントします。
+- ホストディレクトリを`/backup`としてマウントします。
+- `/backup`ディレクトリ内に入って、`dbdata`ボリュームの内容を tar コマンドにより`backup.tar`ファイルとして生成します。
 @z
 
 @x
@@ -1288,7 +1328,7 @@ When the command completes and the container stops, we are left with a backup of
 our `dbdata` volume.
 @y
 コマンドが正常終了すると、コンテナーは停止されます。
-そして `dbdata` ボリュームのバックアップを得ることができます。
+そして`dbdata`ボリュームのバックアップを得ることができます。
 @z
 
 @x
@@ -1309,7 +1349,7 @@ another that you made elsewhere.
 @x
 For example, create a new container named `dbstore2`:
 @y
-たとえば `dbstore2` という名の新たなコンテナーを生成します。
+たとえば`dbstore2`という名の新たなコンテナーを生成します。
 @z
 
 @x
@@ -1365,7 +1405,7 @@ Docker データボリュームは、コンテナーが削除された後も残�
 - **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
 @y
 - **名前つきボリューム** には、コンテナー外部から得られた所定の名称があります。
-  たとえば `awesome:/bar` と表わされます。
+  たとえば`awesome:/bar`と表わされます。
 - **匿名ボリューム** には名称がありません。
   したがってコンテナーが削除されたときには Docker Engine に対して、匿名ボリュームの削除を指示する必要があります。
 @z
@@ -1382,10 +1422,10 @@ To automatically remove anonymous volumes, use the `--rm` option. For example,
 this command creates an anonymous `/foo` volume. When the container is removed,
 the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 @y
-匿名ボリュームを自動的に削除するには `--rm` オプションを利用します。
-たとえば以下のコマンドは、匿名の `/foo` というボリュームを生成します。
-コンテナーが削除されると Docker Engine は `/foo` を削除します。
-ただし `awesome` ボリュームは削除しません。
+匿名ボリュームを自動的に削除するには`--rm`オプションを利用します。
+たとえば以下のコマンドは、匿名の`/foo`というボリュームを生成します。
+コンテナーが削除されると Docker Engine は`/foo`を削除します。
+ただし`awesome`ボリュームは削除しません。
 @z
 
 @x

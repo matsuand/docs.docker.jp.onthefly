@@ -324,10 +324,10 @@ services:
   build:
    context: .
   ports:
-   - 8080:8080
+   - 8000:8000
    - 9229:9229
   environment:
-   - SERVER_PORT=8080
+   - SERVER_PORT=8000
    - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
    - ./:/code
@@ -341,10 +341,10 @@ services:
   build:
    context: .
   ports:
-   - 8080:8080
+   - 8000:8000
    - 9229:9229
   environment:
-   - SERVER_PORT=8080
+   - SERVER_PORT=8000
    - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
    - ./:/code
@@ -486,11 +486,11 @@ Now let’s test our API endpoint. Run the following curl command:
 
 @x
 ```shell
-$ curl --request GET --url http://localhost:8080/services/m/notes
+$ curl --request GET --url http://localhost:8000/notes
 ```
 @y
 ```shell
-$ curl --request GET --url http://localhost:8080/services/m/notes
+$ curl --request GET --url http://localhost:8000/notes
 ```
 @z
 
@@ -556,9 +556,9 @@ Let’s change the source code and then set a breakpoint.
 @z
 
 @x
-Add the following code to the server.js file on line 19 and save the file.
+Add the following code above the existing `server.use()` statement, and save the file.
 @y
-server.js ファイルの 19 行めに以下のコードを追加して、ファイルを保存します。
+すでにある`server.use()`行の上に以下のコードを追加して、ファイルを保存します。
 @z
 
 @x
@@ -588,26 +588,26 @@ Compose アプリケーションを実行したターミナルを見てみると
 @z
 
 @x
-Navigate back to the Chrome DevTools and set a breakpoint on line 20 and then run the following curl command to trigger the breakpoint.
+Navigate back to the Chrome DevTools and set a breakpoint on the line containing the `return res.json({ "foo": "bar" })` statement, and then run the following curl command to trigger the breakpoint.
 @y
-Chrome の DevTools 画面に戻り、20 行めにブレークポイントを設定します。
+Chrome の DevTools 画面に戻り、`return res.json({ "foo": "bar" })`がある行にブレークポイントを設定します。
 そして以下の curl コマンドを実行してブレークポイントまで実行されるようにします。
 @z
 
 @x
 ```shell
-$ curl --request GET --url http://localhost:8080/foo
+$ curl --request GET --url http://localhost:8000/foo
 ```
 @y
 ```shell
-$ curl --request GET --url http://localhost:8080/foo
+$ curl --request GET --url http://localhost:8000/foo
 ```
 @z
 
 @x
-You should have seen the code break on line 20 and now you are able to use the debugger just like you would normally. You can inspect and watch variables, set conditional breakpoints, view stack traces, etc.
+You should have seen the code stop at the breakpoint and now you are able to use the debugger just like you would normally. You can inspect and watch variables, set conditional breakpoints, view stack traces, etc.
 @y
-コード実行が 20 行めでブレークされて、ふだん利用している際と同じようにしてデバッガーを利用することができます。
+コード実行がブレークポイント行において停止するので、ふだん利用している際と同じようにしてデバッガーを利用することができます。
 変数内容の確認、条件つきブレークポイントの設定、スタックトレースの参照、などなどです。
 @z
 

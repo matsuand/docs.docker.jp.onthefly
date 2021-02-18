@@ -190,21 +190,27 @@ new instance that has never seen this container image! To do this, we will use P
 @z
 
 @x
-1. Open your browser to [Play with Docker](https://www.docker.com/play-with-docker){:target="_blank" rel="noopener" class="_"}.
+1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
 @y
-1.  ブラウザーを開いて [Play with Docker](https://www.docker.com/play-with-docker){:target="_blank" rel="noopener" class="_"} にアクセスします。
+1. ブラウザーを開いて [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"} にアクセスします。
 @z
 
 @x
-2. Log in with your Docker Hub account.
+2. Click **Login** and then select **docker** from the drop-down list.
 @y
-2. Docker Hub アカウントを使ってログインします。
+2. **login** をクリックしてドロップダウンリストから **docker** を選びます。
 @z
 
 @x
-3. Once you're logged in, click on the "+ ADD NEW INSTANCE" link in the left side bar. (If you don't see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.
+3. Connect with your Docker Hub account.
 @y
-3. ログインを行ったら、左サイドバーにある「+ ADD NEW INSTANCE」（新たなインスタンス追加）リンクをクリックします。
+3. Docker Hub アカウントに接続します。
+@z
+
+@x
+4. Once you're logged in, click on the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
+@y
+4. ログインを行ったら、左サイドバーにある **ADD NEW INSTANCE**（新たなインスタンス追加）オプションをクリックします。
    （このリンクが見えなかったらブラウザー画面をもう少し広げてください。）
    数秒してブラウザーの中にターミナル画面が開きます。
 @z
@@ -216,9 +222,9 @@ new instance that has never seen this container image! To do this, we will use P
 @z
 
 @x
-4. In the terminal, start your freshly pushed app.
+5. In the terminal, start your freshly pushed app.
 @y
-4. ターミナルからプッシュした新しいアプリを起動します。
+5. ターミナルからプッシュした新しいアプリを起動します。
 @z
 
 @x

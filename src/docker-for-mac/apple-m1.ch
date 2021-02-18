@@ -71,31 +71,59 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
 
 @x
 - The tech preview build does not update automatically. You must manually install any future versions of Docker Desktop.
-- You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line use this command:
-    ```
-    softwareupdate --install-rosetta
-    ```
-- The HTTP proxy is not enabled.
-- Not all images are available for ARM64. You can add `--platform linux/amd64` to run an Intel image under emulation.
+- You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, use this command:
 @y
 - 技術プレビュービルドは自動アップデートされません。
   最新バージョンは手動インストールすることが必要です。
 - 実行バイナリが Darwin/AMD64 向けのものがあるため、Rosetta 2 をインストールする必要があります。
   Rosetta 2 をコマンドラインから手動でインストールする場合は、以下のコマンドを実行します。
-    ```
-    softwareupdate --install-rosetta
-    ```
-- HTTP プロキシーは利用できません。
-- ARM64 向けのイメージはすべてが利用可能ではありません。
-  Intel イメージはエミュレーションのもと、`--platform linux/amd64`をつけて実行することができます。
 @z
 
 @x
-    In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
+    ```
+    softwareupdate --install-rosetta
+    ```
+@y
+    ```
+    softwareupdate --install-rosetta
+    ```
+@z
+
+@x
+- The HTTP proxy is not enabled.
+@y
+- HTTP プロキシーは利用できません。
+@x
+
+@x
+- Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
+@y
+- ARM64 アーキテクチャー向けのイメージはすべてが利用可能ではありません。
+  Intel イメージはエミュレーションのもと、`--platform linux/amd64`をつけて実行することができます。
+  特に [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} イメージは ARM64 において利用できません。
+  この状況は [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} イメージを利用すれば解消されます。
+@z
+
+@x
+   However, attempts to run Intel-based containers on Apple M1 machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on M1 machines. These containers are also faster and use less memory than Intel-based containers.
+@y
+   ただし Apple M1 マシン上において Intel ベースのコンテナーを起動しようとするとクラッシュします。
+   これは QEMU がコンテナーの起動に失敗することがあるためです。
+   したがって M1 マシン上においては ARM64 コンテナーの起動をお勧めします。
+   そういったコンテナーであれば、Intel ベースのコンテナーに比べて、より早くメモリ消費も少なくて済みます。
+@z
+
+@x
+- Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208){: target="blank" rel="noopener" class=“”}.
+@y
+- Docker が動作する VM において VPN クライアントがホストとの通信を妨げるものがあります。
+  Docker Desktop が適正に起動しなくなります。
+  [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208){: target="blank" rel="noopener" class=“”} を参照してください。
+@z
+
+@x
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
 @y
-    特に [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} イメージは ARM64 において利用できません。
-    この状況は [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} イメージを利用すれば解消されます。
 - カーネルがパニックを発生させるかもしれません。
   その場合は`~/Library/Containers/com.docker.docker/Data/vms/0/console.log`の内容から、バグなのかカーネルパニックなのかを確認し報告してください。
 @z

@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-11 11:57:51 +0900-->
+<!-- Page generated 2021-02-18 13:52:47 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>開発向けのコンテナー利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="開発向けのコンテナー利用" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-18T13:52:47+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-18T13:52:47+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"開発向けのコンテナー利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/nodejs/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -228,10 +228,10 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
   <span class="na">build</span><span class="pi">:</span>
    <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
   <span class="na">ports</span><span class="pi">:</span>
-   <span class="pi">-</span> <span class="s">8080:8080</span>
+   <span class="pi">-</span> <span class="s">8000:8000</span>
    <span class="pi">-</span> <span class="s">9229:9229</span>
   <span class="na">environment</span><span class="pi">:</span>
-   <span class="pi">-</span> <span class="s">SERVER_PORT=8080</span>
+   <span class="pi">-</span> <span class="s">SERVER_PORT=8000</span>
    <span class="pi">-</span> <span class="s">CONNECTIONSTRING=mongodb://mongo:27017/notes</span>
   <span class="na">volumes</span><span class="pi">:</span>
    <span class="pi">-</span> <span class="s">./:/code</span>
@@ -291,7 +291,7 @@ Nodemon はサーバーをデバッグモードで起動した上で、変更さ
 <p>では API エンドポイントを確認します。
 以下の curl コマンドを実行してみましょう。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/services/m/notes
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/notes
 </code></pre></div></div>
 
 <p>以下のようなレスポンスが返ってくるはずです。</p>
@@ -315,7 +315,7 @@ DevTools が開いて、コンテナー内部で稼働する Node.js プロセ�
 
 <p>ソースコードに修正を加えて、ブレークポイント設定を行います。</p>
 
-<p>server.js ファイルの 19 行めに以下のコードを追加して、ファイルを保存します。</p>
+<p>すでにある<code class="language-plaintext highlighter-rouge">server.use()</code>行の上に以下のコードを追加して、ファイルを保存します。</p>
 
 <pre><code class="language-node"> server.use( '/foo', (req, res) =&gt; {
    return res.json({ "foo": "bar" })
@@ -326,13 +326,13 @@ DevTools が開いて、コンテナー内部で稼働する Node.js プロセ�
 
 <p><img src="/docs.docker.jp.onthefly/language/nodejs/images/nodemon.png" alt="nodemon" width="800px" /></p>
 
-<p>Chrome の DevTools 画面に戻り、20 行めにブレークポイントを設定します。
+<p>Chrome の DevTools 画面に戻り、<code class="language-plaintext highlighter-rouge">return res.json({ "foo": "bar" })</code>がある行にブレークポイントを設定します。
 そして以下の curl コマンドを実行してブレークポイントまで実行されるようにします。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/foo
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8000/foo
 </code></pre></div></div>
 
-<p>コード実行が 20 行めでブレークされて、ふだん利用している際と同じようにしてデバッガーを利用することができます。
+<p>コード実行がブレークポイント行において停止するので、ふだん利用している際と同じようにしてデバッガーを利用することができます。
 変数内容の確認、条件つきブレークポイントの設定、スタックトレースの参照、などなどです。</p>
 
 <h2 id="next-steps">次のステップ</h2>
