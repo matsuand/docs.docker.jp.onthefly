@@ -22,6 +22,96 @@ redirect_from:
 @z
 
 @x
+## 1.28.4
+(2021-02-18)
+@y
+## 1.28.4
+(2021-02-18)
+@z
+
+@x
+### Bug fixes
+@y
+{: #bug-fixes }
+### バグフィックス
+@z
+
+@x
+- Fixed SSH port parsing by bumping docker-py to 4.4.3.
+@y
+- docker-py を 4.4.3 にアップデートすることで、SSH ポート解析処理を修正しました。
+@z
+
+@x
+### Miscellaneous
+@y
+{: #miscellaneous }
+### その他
+@z
+
+@x
+- Bumped Python to 3.7.10.
+@y
+- Python を 3.7.10 に。
+@z
+
+@x
+## 1.28.3
+(2021-02-17)
+@y
+## 1.28.3
+(2021-02-17)
+@z
+
+@x
+### Bug fixes
+@y
+{: #bug-fixes }
+### バグフィックス
+@z
+
+@x
+- Fixed SSH hostname parsing when it contains a leading 's'/'h', and removed the quiet option that was hiding the error (via docker-py bump to 4.4.2).
+
+- Fixed key error for `--no-log-prefix` option.
+
+- Fixed incorrect CLI environment variable name for service profiles: `COMPOSE_PROFILES` instead of `COMPOSE_PROFILE`.
+
+- Fixed the fish completion.
+@y
+- SSH ホスト名が 's' や 'h' で始まる場合の解析処理を修正しました。
+  またエラー発生を隠蔽してしまうため quiet オプションを（docker-py の 4.4.2 へのアップデートを通じて）取り除きました。
+
+- `--no-log-prefix`オプションにおけるキーエラーを修正しました。
+
+- サービスプロファイルに対する CLI 環境変数名の誤りを修正しました。
+  `COMPOSE_PROFILE`ではなく`COMPOSE_PROFILES`。
+
+- fish 補完を修正しました。
+@z
+
+@x
+### Miscellaneous
+@y
+{: #miscellaneous }
+### その他
+@z
+
+@x
+- Bumped cryptography to 3.3.2.
+
+- Removed the log driver filter.
+
+For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https://github.com/docker/compose/milestone/53?closed=1){:target="_blank" rel="noopener" class="_"}.
+@y
+- cryptography を 3.3.2 に。
+
+- ログドライバーフィルターを削除しました。
+
+本リリースにおいて修正された PR や issue の一覧は [Compose 1.28.3](https://github.com/docker/compose/milestone/53?closed=1){:target="_blank" rel="noopener" class="_"} を参照してください。
+@z
+
+@x
 ## 1.28.2
 (2021-01-26)
 @y
