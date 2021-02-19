@@ -265,13 +265,13 @@ docker run -dp 3000:3000 `
 
 @x
 3. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
-   [short syntax](../compose/compose-file/index.md#short-syntax-1) here, but there is also a more verbose
-   [long syntax](../compose/compose-file/index.md#long-syntax-1) available as well.
+   [short syntax](../compose/compose-file/compose-file-v3.md#short-syntax-1) here, but there is also a more verbose
+   [long syntax](../compose/compose-file/compose-file-v3.md#long-syntax-1) available as well.
 @y
 3. `-p 3000:3000`というコマンド部分を作ります。
    サービスに対する`ports`を定義するものです。
-   ここでは [短い文法](../compose/compose-file/index.md#short-syntax-1) で記述することにします。
-   もちろん [長い文法](../compose/compose-file/index.md#long-syntax-1) で記述することもできます。
+   ここでは [短い文法](../compose/compose-file/compose-file-v3.md#short-syntax-1) で記述することにします。
+   もちろん [長い文法](../compose/compose-file/compose-file-v3.md#long-syntax-1) で記述することもできます。
 @z
 
 @x
@@ -300,11 +300,11 @@ docker run -dp 3000:3000 `
 
 @x
 4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
-   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/index.md#short-syntax-3) and [long](../compose/compose-file/index.md#long-syntax-3) syntax.
+   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/compose-file-v3.md#short-syntax-3) and [long](../compose/compose-file/compose-file-v3.md#long-syntax-3) syntax.
 @y
 4. 次はワーキングディレクトリ（`-w /app`）とボリュームマッピング（`-v "$(pwd):/app"`）です。
    それぞれ`working_dir`と`volumes`の定義を行います。
-   ボリュームにも [短い文法](../compose/compose-file/index.md#short-syntax-3) と [長い文法](../compose/compose-file/index.md#long-syntax-3) があります。
+   ボリュームにも [短い文法](../compose/compose-file/compose-file-v3.md#short-syntax-3) と [長い文法](../compose/compose-file/compose-file-v3.md#long-syntax-3) があります。
 @z
 
 @x

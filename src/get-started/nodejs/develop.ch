@@ -24,9 +24,6 @@ description: Learn how to develop your application locally.
 @x
 ## Prerequisites
 @y
-{% comment %}
-## Prerequisites
-{% endcomment %}
 {: #prerequisites }
 ## 前提条件
 @z
@@ -34,18 +31,12 @@ description: Learn how to develop your application locally.
 @x
 Work through the steps to build an image and run it as a containerized application in [Run your image as a container](run-containers.md).
 @y
-{% comment %}
-Work through the steps to build an image and run it as a containerized application in [Run your image as a container](run-containers.md).
-{% endcomment %}
 [イメージのコンテナーとしての実行](run-containers.md) を通じて、コンテナー化したアプリケーションであるイメージのビルドと実行を行っていること。
 @z
 
 @x
 ## Introduction
 @y
-{% comment %}
-## Introduction
-{% endcomment %}
 {: #introduction }
 ## はじめに
 @z
@@ -53,9 +44,6 @@ Work through the steps to build an image and run it as a containerized applicati
 @x
 In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
 @y
-{% comment %}
-In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
-{% endcomment %}
 このチュートリアルでは、その前で作ったアプリケーションの開発環境をローカルに構築する手順を進めていきます。
 Docker を使ってイメージをビルドするとともに Docker Compose を使って、あらゆるものを簡単に取り扱っていきます。
 @z
@@ -63,9 +51,6 @@ Docker を使ってイメージをビルドするとともに Docker Compose を
 @x
 ## Local Database and Containers
 @y
-{% comment %}
-## Local Database and Containers
-{% endcomment %}
 {: #local-database-and-containers }
 ## ローカルデータベースとコンテナー
 @z
@@ -73,9 +58,6 @@ Docker を使ってイメージをビルドするとともに Docker Compose を
 @x
 First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
 @y
-{% comment %}
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
-{% endcomment %}
 まずはコンテナー内でデータベースが起動することを確認します。
 そしてボリュームやネットワークを通じてデータを保存する方法、アプリケーションがデータベースとアクセスする方法を見ていきます。
 これらを 1 つの Compose ファイルにまとめ上げて、ローカル開発環境上においてたった 1 つのコマンドから設定と実行を行うようにします。
@@ -85,9 +67,6 @@ First, we’ll take a look at running a database in a container and how we use v
 @x
 Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
 @y
-{% comment %}
-Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
-{% endcomment %}
 MongoDB をダウンロード、インストール、諸設定、サービスとして Mongo データベースの実行、これらは行いません。
 MongoDB 用の Docker 公式イメージがあるので、これをコンテナー内で実行します。
 @z
@@ -95,9 +74,6 @@ MongoDB 用の Docker 公式イメージがあるので、これをコンテナ�
 @x
 Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
 @y
-{% comment %}
-Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
-{% endcomment %}
 コンテナー内で MongoDB を実行するにあたっては、利用データや設定を保存するためのボリュームをいくつか生成します。
 バインドマウントは利用せずに、Docker が提供しているボリューム管理機能を利用します。
 ボリュームに関することは本書のいたるところですべて説明しています。
@@ -106,9 +82,6 @@ Before we run MongoDB in a container, we want to create a couple of volumes that
 @x
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
 @y
-{% comment %}
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
-{% endcomment %}
 ボリュームを生成します。
 1 つは MongoDB のデータ用、1 つは MongoDB の設定用です。
 @z
@@ -128,9 +101,6 @@ $ docker volume create mongodb_config
 @x
 Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
 @y
-{% comment %}
-Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
-{% endcomment %}
 次にアプリケーションとデータベースが互いにやりとりを行うためのネットワークを生成します。
 このネットワークはユーザー定義のブリッジネットワークと呼ばれるもので、接続設定文字列を適切に使えば DNS ルックアップサービスを簡単に提供してくれます。
 @z
@@ -148,9 +118,6 @@ $ docker network create mongodb
 @x
 Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
 @y
-{% comment %}
-Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
-{% endcomment %}
 MongoDB をコンテナーにおいて実行し、上で生成したボリュームとネットワークを割り当てます。
 Docker が Hub からイメージをプルして、ローカルでこれを実行します。
 @z
@@ -176,9 +143,6 @@ $ docker run -it --rm -d -v mongodb:/data/db \
 @x
 Okay, now that we have a running mongodb, let’s update `server.js` to use a the MongoDB and not an in-memory data store.
 @y
-{% comment %}
-Okay, now that we have a running mongodb, let’s update `server.js` to use a the MongoDB and not an in-memory data store.
-{% endcomment %}
 さあ、MongoDB を動かすことができました。
 そこで`server.js`を書き換えて、データ保存をインメモリでなく MongoDB を用いるようにします。
 @z
@@ -210,9 +174,6 @@ server.start()
 @x
 We’ve add the ronin-database module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
 @y
-{% comment %}
-We’ve add the ronin-database module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
-{% endcomment %}
 上では ronin-database モジュールを追加し、データベースへの接続コードを変更した上で、インメモリフラグを false にしています。
 この変更を反映させるためイメージを再ビルドする必要があります。
 @z
@@ -220,9 +181,6 @@ We’ve add the ronin-database module and we updated the code to connect to the 
 @x
 First let’s add the ronin-database module to our application using npm.
 @y
-{% comment %}
-First let’s add the ronin-database module to our application using npm.
-{% endcomment %}
 その前に npm を使ってアプリケーションに ronin-database モジュールを追加します。
 @z
 
@@ -239,9 +197,6 @@ $ npm install ronin-database
 @x
 Now we can build our image.
 @y
-{% comment %}
-Now we can build our image.
-{% endcomment %}
 イメージをビルドします。
 @z
 
@@ -258,9 +213,6 @@ $ docker build --tag node-docker .
 @x
 Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
 @y
-{% comment %}
-Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
-{% endcomment %}
 コンテナーを起動させます。
 ただし今回は環境変数`CONNECTIONSTRING`を設定することが必要です。
 アプリケーションがどういった接続文字列を使ってデータベースにアクセスするかを伝えるためです。
@@ -292,9 +244,6 @@ $ docker run \
 @x
 Let’s test that our application is connected to the database and is able to add a note.
 @y
-{% comment %}
-Let’s test that our application is connected to the database and is able to add a note.
-{% endcomment %}
 アプリケーションがデータベースに接続できること、メモ（note）を追加できることを確認します。
 @z
 
@@ -325,9 +274,6 @@ $ curl --request POST \
 @x
 You should receive the following json back from our service.
 @y
-{% comment %}
-You should receive the following json back from our service.
-{% endcomment %}
 サービスからの戻り値として以下のような JSON データを受け取るはずです。
 @z
 
@@ -344,9 +290,6 @@ You should receive the following json back from our service.
 @x
 ## Use Compose to develop locally
 @y
-{% comment %}
-## Use Compose to develop locally
-{% endcomment %}
 {: #use-compose-to-develop-locally }
 ## Compose を使ったローカル開発
 @z
@@ -354,9 +297,6 @@ You should receive the following json back from our service.
 %@x
 %The notes-service project uses MongoDB as its data store. If you remember from Part I of this series, we had to start the Mongo container manually and connect it to the same network that our notes-service is running on. We also had to create a couple of volumes so we could persist our data across restarts of our application and MongoDB.
 %@y
-%{% comment %}
-%The notes-service project uses MongoDB as its data store. If you remember from Part I of this series, we had to start the Mongo container manually and connect it to the same network that our notes-service is running on. We also had to create a couple of volumes so we could persist our data across restarts of our application and MongoDB.
-%{% endcomment %}
 %notes-service プロジェクトは、データストアとして MongoDB を利用します。
 %本チュートリアルの 1 部からわかるように、Mongo コンテナーは手動で起動して、notes-service が起動している同一のネットワークに接続しなければなりません。
 %またボリュームをいくつか生成してデータ保存を行います。
@@ -366,9 +306,6 @@ You should receive the following json back from our service.
 @x
 In this section, we’ll create a Compose file to start our node-docker and the MongoDB with one command. We’ll also set up the Compose file to start the node-docker in debug mode so that we can connect a debugger to the running node process.
 @y
-{% comment %}
-In this section, we’ll create a Compose file to start our node-docker and the MongoDB with one command. We’ll also set up the Compose file to start the node-docker in debug mode so that we can connect a debugger to the running node process.
-{% endcomment %}
 本節では Compose ファイルを生成して node-docker と MongoDB を 1 つのコマンドで起動していきます。
 さらに Compose ファイルにおいては node-docker をデバッグモードで起動するように設定して、実行中のノードプロセスにデバッガーから接続します。
 @z
@@ -376,9 +313,6 @@ In this section, we’ll create a Compose file to start our node-docker and the 
 @x
 Open the notes-service in your IDE or text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the below commands into the file.
 @y
-{% comment %}
-Open the notes-service in your IDE or text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the below commands into the file.
-{% endcomment %}
 IDE またはテキストエディターにより notes-service を開いて、`docker-compose.dev.yml`という新規ファイルを生成します。
 そしてそのファイルに以下のコードをコピーペーストしてください。
 @z
@@ -403,7 +337,7 @@ services:
    - SERVER_PORT=8080
    - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
-   - ./:/code
+   - ./:/app
   command: npm run debug
 @y
 services:
@@ -417,7 +351,7 @@ services:
    - SERVER_PORT=8080
    - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
-   - ./:/code
+   - ./:/app
   command: npm run debug
 @z
 
@@ -451,9 +385,6 @@ volumes:
 @x
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Compose file.
 @y
-{% comment %}
-This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Compose file.
-{% endcomment %}
 この Compose ファイルはとても優れていて、`docker run`コマンドにパラメーターを入力する面倒をなくしてくれます。
 Compose ファイル内では、すべてを宣言的に記述していきます。
 @z
@@ -461,9 +392,6 @@ Compose ファイル内では、すべてを宣言的に記述していきます
 @x
 We are exposing port 9229 so that we can attach a debugger. We are also mapping our local source code into the running container so that we can make changes in our text editor and have those changes picked up in the container.
 @y
-{% comment %}
-We are exposing port 9229 so that we can attach a debugger. We are also mapping our local source code into the running container so that we can make changes in our text editor and have those changes picked up in the container.
-{% endcomment %}
 デバッガーをアタッチできるように、ポート 9229 を公開します。
 さらにローカルにあるソースコードを実行中のコンテナーにマッピングして、テキストエディター上でのソース変更を可能とし、さらにその変更をコンテナーが察知できるようにします。
 @z
@@ -471,9 +399,6 @@ We are exposing port 9229 so that we can attach a debugger. We are also mapping 
 @x
 One other really cool feature of using a Compose file, is that we have service resolution set up to use the service names. So we are now able to use `“mongo”` in our connection string. The reason we use mongo is because that is what we have named our mongo service in the Compose file as.
 @y
-{% comment %}
-One other really cool feature of using a Compose file, is that we have service resolution set up to use the service names. So we are now able to use `“mongo”` in our connection string. The reason we use mongo is because that is what we have named our mongo service in the Compose file as.
-{% endcomment %}
 Compose ファイルを利用する際の優れた機能として、サービスの名前を使っただけでサービス指定ができる点が挙げられます。
 そこで指定文字として「mongo」を利用します。
 mongo という文字を使うのは、Compose ファイルにおいて mongo サービスに対して、そのように命名したからです。
@@ -482,9 +407,6 @@ mongo という文字を使うのは、Compose ファイルにおいて mongo �
 @x
 Let’s start our application and confirm that it is running properly.
 @y
-{% comment %}
-Let’s start our application and confirm that it is running properly.
-{% endcomment %}
 アプリケーションを起動して、正常に動作することを確認します。
 @z
 
@@ -501,9 +423,6 @@ $ docker-compose -f docker-compose.dev.yml up --build
 @x
 We pass the `--build` flag so Docker will compile our image and then starts it.
 @y
-{% comment %}
-We pass the `--build` flag so Docker will compile our image and then starts it.
-{% endcomment %}
 ここで`--build`フラグを与えています。
 これは Docker がイメージをコンパイルした上で起動するようにします。
 @z
@@ -511,9 +430,6 @@ We pass the `--build` flag so Docker will compile our image and then starts it.
 @x
 If all goes will you should see something similar:
 @y
-{% comment %}
-If all goes will you should see something similar:
-{% endcomment %}
 うまく動作すれば、以下と同様に表示されます。
 @z
 
@@ -526,9 +442,6 @@ If all goes will you should see something similar:
 @x
 Now let’s test our API endpoint. Run the following curl command:
 @y
-{% comment %}
-Now let’s test our API endpoint. Run the following curl command:
-{% endcomment %}
 API エンドポイントをテストしてみます。
 以下の curl コマンドを実行してください。
 @z
@@ -546,9 +459,6 @@ $ curl --request GET --url http://localhost:8080/services/m/notes
 @x
 You should receive the following response:
 @y
-{% comment %}
-You should receive the following response:
-{% endcomment %}
 以下のようなレスポンスが返ってくるはずです。
 @z
 
@@ -565,9 +475,6 @@ You should receive the following response:
 @x
 ## Connect a debugger
 @y
-{% comment %}
-## Connect a debugger
-{% endcomment %}
 {: #connect-a-debugger }
 ## デバッガーへの接続
 @z
@@ -575,9 +482,6 @@ You should receive the following response:
 @x
 We’ll use the debugger that comes with the Chrome browser. Open Chrome on your machine and then type the following into the address bar.
 @y
-{% comment %}
-We’ll use the debugger that comes with the Chrome browser. Open Chrome on your machine and then type the following into the address bar.
-{% endcomment %}
 ここで Chrome ブラウザーに付属しているデバッガーを利用することにします。
 マシン上において Chrome ブラウザーを開き、アドレスバーに以下を入力します。
 @z
@@ -591,9 +495,6 @@ We’ll use the debugger that comes with the Chrome browser. Open Chrome on your
 @x
 It opens the following screen.
 @y
-{% comment %}
-It opens the following screen.
-{% endcomment %}
 以下の画面が開きます。
 @z
 
@@ -606,9 +507,6 @@ It opens the following screen.
 @x
 Click the **Open dedicated DevTools for Node** link. This opens the DevTools that are connected to the running Node.js process inside our container.
 @y
-{% comment %}
-Click the **Open dedicated DevTools for Node** link. This opens the DevTools that are connected to the running Node.js process inside our container.
-{% endcomment %}
 **Open dedicated DevTools for Node**（Node 専用の DevTools を開く）リンクをクリックします。
 これにより DevTools が開きます。
 このツールは、コンテナー内部で稼動している Node.js プロセスに接続されています。
@@ -617,18 +515,12 @@ Click the **Open dedicated DevTools for Node** link. This opens the DevTools tha
 @x
 Let’s change the source code and then set a breakpoint.
 @y
-{% comment %}
-Let’s change the source code and then set a breakpoint.
-{% endcomment %}
 ソースコードを変更し、ブレークポイントを設定してみます。
 @z
 
 @x
 Add the following code to the server.js file on line 19 and save the file.
 @y
-{% comment %}
-Add the following code to the server.js file on line 19 and save the file.
-{% endcomment %}
 server.js ファイルの 19 行めに以下のコードを追加して、ファイルを保存します。
 @z
 
@@ -649,9 +541,6 @@ server.js ファイルの 19 行めに以下のコードを追加して、ファ
 @x
 If you take a look at the terminal where our Compose application is running, you’ll see that nodemon noticed the changes and reloaded our application.
 @y
-{% comment %}
-If you take a look at the terminal where our Compose application is running, you’ll see that nodemon noticed the changes and reloaded our application.
-{% endcomment %}
 Compose アプリケーションを実行しているターミナルを確認してみると、nodemon が変更を検出して、アプリケーションをリロードしているのがわかります。
 @z
 
@@ -664,9 +553,6 @@ Compose アプリケーションを実行しているターミナルを確認し
 @x
 Navigate back to the Chrome DevTools and set a breakpoint on line 20 and then run the following curl command to trigger the breakpoint.
 @y
-{% comment %}
-Navigate back to the Chrome DevTools and set a breakpoint on line 20 and then run the following curl command to trigger the breakpoint.
-{% endcomment %}
 Chrome のDevTools 画面に戻って、20 行目にブレークポイントを設定します。
 そして以下の curl コマンドを実行してブレークポイントまで進めます。
 @z
@@ -684,9 +570,6 @@ $ curl --request GET --url http://localhost:8080/foo
 @x
 You should have seen the code break on line 20 and now you are able to use the debugger just like you would normally. You can inspect and watch variables, set conditional breakpoints, view stack traces, etc.
 @y
-{% comment %}
-You should have seen the code break on line 20 and now you are able to use the debugger just like you would normally. You can inspect and watch variables, set conditional breakpoints, view stack traces, etc.
-{% endcomment %}
 コードの 20 行目でブレークされたはずです。
 ここから普段使っている方法でデバッガーを操作できるようになります。
 変数を詳細に確認しウォッチすることや条件つきブレークポイントの設定、スタックトレースの確認などを行うことができます。
@@ -695,9 +578,6 @@ You should have seen the code break on line 20 and now you are able to use the d
 @x
 ## Conclusion
 @y
-{% comment %}
-## Conclusion
-{% endcomment %}
 {: #conclusion }
 ## まとめ
 @z
@@ -705,9 +585,6 @@ You should have seen the code break on line 20 and now you are able to use the d
 @x
 In this article, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.
 @y
-{% comment %}
-In this article, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.
-{% endcomment %}
 本稿を通じて、汎用的な開発イメージの生成方法を見てきました。
 それは普通のコマンドラインから実行することと全く同じことです。
 Compose ファイルを生成して、ソースコードを実行コンテナー内にマッピングし、デバッグ用のポート公開も行いました。
