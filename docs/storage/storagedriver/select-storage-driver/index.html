@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-11 11:57:51 +0900-->
+<!-- Page generated 2021-02-20 22:30:19 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker ストレージドライバー | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker ストレージドライバー" />
   <meta property="og:description" content="Learn how to select the proper storage driver for your container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-20T22:30:19+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/select-storage-driver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-20T22:30:19+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker ストレージドライバー","description":"Learn how to select the proper storage driver for your container.","url":"https://docs.docker.com/storage/storagedriver/select-storage-driver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,8 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker ストレージドライバー</h1><p><em class="reading-time">読む時間の目安: 8 分</em></p>
-<p>理想を言えば、コンテナーの書き込みレイヤーへのデータの書き込みは最小とし、データ出力先には Docker ボリュームを利用します。
+                        <section class="section"><h1>Docker ストレージドライバー</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><p>理想を言えば、コンテナーの書き込みレイヤーへのデータの書き込みは最小とし、データ出力先には Docker ボリュームを利用します。
 しかし処理内容によっては、書き込みレイヤーにデータを書き込めるようにする必要が出てきます。
 これがあるからこそストレージドライバーが必要になります。</p>
 
@@ -117,29 +116,28 @@
 <p>Docker は以下のストレージドライバーをサポートします。</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">overlay2</code> は、現在サポートしている Linux ディストリビューションの中で、よく用いられているストレージドライバーです。
+  <li><code class="language-plaintext highlighter-rouge">overlay2</code>は、現在サポートしている Linux ディストリビューションの中で、よく用いられているストレージドライバーです。
  特別な設定は必要ありません。</li>
-  <li><code class="language-plaintext highlighter-rouge">aufs</code> は Docker 18.06 あるいはそれ以前においては、よく用いられていました。
- そのときはカーネル 3.13 を利用する Ubuntu 14.04 において稼動しており、<code class="language-plaintext highlighter-rouge">overlay2</code> がサポートされていないときでした。</li>
+  <li><code class="language-plaintext highlighter-rouge">aufs</code>は Docker 18.06 あるいはそれ以前においては、よく用いられていました。
+ これはカーネル 3.13 を利用する Ubuntu 14.04 において稼動していて、<code class="language-plaintext highlighter-rouge">overlay2</code>がサポートされていないときでした。</li>
   <li>rootless の<code class="language-plaintext highlighter-rouge">overlay2</code>をサポートしていないホスト上において rootless Docker だけを実行するのであれば、<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>が推奨されます。
 Ubuntu や Debian 10 の場合、<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>ドライバーは rootless モードであっても、<code class="language-plaintext highlighter-rouge">overlay2</code>が動作している必要はありません。
 詳しくは <a href="/docs.docker.jp.onthefly/engine/security/rootless/">rootless モードのドキュメント</a> を参照してください。</li>
-  <li><code class="language-plaintext highlighter-rouge">devicemapper</code> はサポートされているものですが、本番環境において <code class="language-plaintext highlighter-rouge">direct-lvm</code> が必要となります。
- というのも <code class="language-plaintext highlighter-rouge">loopback-lvm</code> は何も設定する必要がないのですが、処理性能が極めて低いためです。
- <code class="language-plaintext highlighter-rouge">devicemapper</code> は CentOS や RHEL において推奨されていました。
- これらのカーネルバージョンが <code class="language-plaintext highlighter-rouge">overlay2</code> をサポートしていなかったためです。
- 最新の CentOS と RHEL においては <code class="language-plaintext highlighter-rouge">overlay2</code> がサポートされ、今では <code class="language-plaintext highlighter-rouge">overlay2</code> が推奨ドライバーとなっています。</li>
-  <li><code class="language-plaintext highlighter-rouge">btrfs</code> と <code class="language-plaintext highlighter-rouge">zfs</code> というストレージドライバーは、その名前が示すファイルシステム上において利用します。
+  <li><code class="language-plaintext highlighter-rouge">devicemapper</code>はサポートされていますが、本番環境においては<code class="language-plaintext highlighter-rouge">direct-lvm</code>を必要とします。
+ というのも<code class="language-plaintext highlighter-rouge">loopback-lvm</code>は何も設定する必要がないのですが、処理性能が極めて低いためです。
+ <code class="language-plaintext highlighter-rouge">devicemapper</code>は CentOS や RHEL において<code class="language-plaintext highlighter-rouge">overlay2</code>をサポートしていなかったときには、利用が推奨されていました。
+ 最新の CentOS と RHEL においては<code class="language-plaintext highlighter-rouge">overlay2</code>がサポートされ、今では<code class="language-plaintext highlighter-rouge">overlay2</code>が推奨ドライバーとなっています。</li>
+  <li><code class="language-plaintext highlighter-rouge">btrfs</code>と<code class="language-plaintext highlighter-rouge">zfs</code>というストレージドライバーは、その名前が示すファイルシステム上において利用します。
 （ファイルシステムは Docker がインストールされているホスト上のファイルシステムを表わします。）
 このファイルシステムに対しては「snapshots」を生成するような高度なオプションがありますが、他に比べて設定と保守を必要とします。
 このドライバーを利用するためには、それぞれのファイルシステムが適切に設定できていることが必要です。</li>
-  <li><code class="language-plaintext highlighter-rouge">vfs</code> ストレージドライバーはテスト目的を意図しています。
+  <li><code class="language-plaintext highlighter-rouge">vfs</code>ストレージドライバーはテスト目的で利用します。
 またはコピーオンライト方式のファイルシステムを利用しなくて構わない状況での利用を意図しています。
 このストレージドライバーの性能は低く、一般に本番環境での利用は推奨されません。</li>
 </ul>
 
 <p>Docker のソースコードにおいては優先順位を定義しています。
-その順番は <a href="https://github.com/docker/docker-ce/blob/20.10/components/engine/daemon/graphdriver/driver_linux.go#L50">Docker Engine - Community 20.10 のソースコード</a> を見ればわかります。</p>
+その順番は <a href="https://github.com/moby/moby/blob/20.10/daemon/graphdriver/driver_linux.go#L52-L53">Docker Engine 20.10 のソースコード</a> を見ればわかります。</p>
 
 <p id="storage-driver-order">上のサイトのファイル参照画面において Docker バージョンが利用するものと異なっている場合は、画面上部にあるブランチ切り替えボタンを使って、利用しているバージョンブランチに切り替えてください。</p>
 
@@ -151,20 +149,20 @@ Ubuntu や Debian 10 の場合、<code class="language-plaintext highlighter-rou
 <a href="#other-considerations">その他の考慮事項</a> を参考にして、最終的な決定を行ってください。</p>
 
 <blockquote>
-  <p><strong><em>メモ</em></strong>: ドライバーの選択はオペレーティングシステム、ディストリビューションにより限定されることがあります。
-たとえば <code class="language-plaintext highlighter-rouge">aufs</code> は Ubuntu と Debian においてのみサポートされるものであって、しかも追加パッケージのインストールを必要とします。
-また <code class="language-plaintext highlighter-rouge">btrfs</code> は SLES に対してのみサポートされ、さらに Docker Enterprise にしか対応していません。
+  <p><strong>メモ</strong></p>
+
+  <p>ドライバーの選択はオペレーティングシステム、ディストリビューションにより限定されることがあります。
+たとえば<code class="language-plaintext highlighter-rouge">aufs</code>は Ubuntu と Debian においてのみサポートされるものであって、しかも追加パッケージのインストールを必要とします。
+また<code class="language-plaintext highlighter-rouge">btrfs</code>は SLES に対してのみサポートされ、さらに Docker Enterprise にしか対応していません。
 詳しくは <a href="#supported-storage-drivers-per-linux-distribution">Linux ディストリビューションがサポートするストレージドライバー</a> を参照してください。</p>
 </blockquote>
 
 <h2 id="supported-storage-drivers-per-linux-distribution">Linux ディストリビューションがサポートするストレージドライバー</h2>
 
-<p>At a high level, the storage drivers you can use is partially determined by
-the Docker edition you use.</p>
+<p>高度なレベルでの利用を考えると、利用できるストレージドライバーは Docker エディションによってほぼ決まります。</p>
 
-<p>In addition, Docker does not recommend any configuration that requires you to
-disable security features of your operating system, such as the need to disable
-<code class="language-plaintext highlighter-rouge">selinux</code> if you use the <code class="language-plaintext highlighter-rouge">overlay</code> or <code class="language-plaintext highlighter-rouge">overlay2</code> driver on CentOS.</p>
+<p>また Docker では、オペレーティングシステムのセキュリティ機能を無効にしなければならないような設定は推奨しません。
+たとえば CentOS において<code class="language-plaintext highlighter-rouge">overlay</code>や<code class="language-plaintext highlighter-rouge">overlay2</code>を利用するために<code class="language-plaintext highlighter-rouge">selinux</code>を無効にするような場合です。</p>
 
 <h3 id="docker-engine---community">Docker Engine - Community</h3>
 
@@ -175,47 +173,46 @@ configurations work on recent versions of the Linux distribution:</p>
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">Linux distribution</th>
-      <th style="text-align: left">Recommended storage drivers</th>
-      <th style="text-align: left">Alternative drivers</th>
+      <th style="text-align: left">Linux ディストリビューション</th>
+      <th style="text-align: left">推奨ストレージドライバー</th>
+      <th style="text-align: left">その他のドライバー</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Docker Engine - Community on Ubuntu</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code> or <code class="language-plaintext highlighter-rouge">aufs</code> (for Ubuntu 14.04 running on kernel 3.13)</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">zfs</code>, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td style="text-align: left">Docker Engine - Community、Ubuntu</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code>または<code class="language-plaintext highlighter-rouge">aufs</code>（Ubuntu 14.04、カーネル 3.13）</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">devicemapper</code>²、<code class="language-plaintext highlighter-rouge">zfs</code>、<code class="language-plaintext highlighter-rouge">vfs</code></td>
     </tr>
     <tr>
-      <td style="text-align: left">Docker Engine - Community on Debian</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code> (Debian Stretch), <code class="language-plaintext highlighter-rouge">aufs</code> or <code class="language-plaintext highlighter-rouge">devicemapper</code> (older versions)</td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td style="text-align: left">Docker Engine - Community、Debian</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code>（Debian Stretch）、<code class="language-plaintext highlighter-rouge">aufs</code>、<code class="language-plaintext highlighter-rouge">devicemapper</code>（旧版の場合）</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">vfs</code></td>
     </tr>
     <tr>
-      <td style="text-align: left">Docker Engine - Community on CentOS</td>
+      <td style="text-align: left">Docker Engine - Community、CentOS</td>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">zfs</code>, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">devicemapper</code>²、<code class="language-plaintext highlighter-rouge">zfs</code>、<code class="language-plaintext highlighter-rouge">vfs</code></td>
     </tr>
     <tr>
-      <td style="text-align: left">Docker Engine - Community on Fedora</td>
+      <td style="text-align: left">Docker Engine - Community、Fedora</td>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹, <code class="language-plaintext highlighter-rouge">devicemapper</code>², <code class="language-plaintext highlighter-rouge">zfs</code>, <code class="language-plaintext highlighter-rouge">vfs</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay</code>¹、<code class="language-plaintext highlighter-rouge">devicemapper</code>²、<code class="language-plaintext highlighter-rouge">zfs</code>、<code class="language-plaintext highlighter-rouge">vfs</code></td>
     </tr>
   </tbody>
 </table>
 
-<p>¹) The <code class="language-plaintext highlighter-rouge">overlay</code> storage driver is deprecated, and will be removed in a future
-release. It is recommended that users of the <code class="language-plaintext highlighter-rouge">overlay</code> storage driver migrate to <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
+<p>¹) ストレージドライバー<code class="language-plaintext highlighter-rouge">overlay</code>は非推奨であり、将来のリリースにおいて削除されます。
+   ストレージドライバー<code class="language-plaintext highlighter-rouge">overlay</code>のユーザーは<code class="language-plaintext highlighter-rouge">overlay2</code>に移行することが推奨されています。</p>
 
-<p>²) The <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver is deprecated, and will be removed in a future
-release. It is recommended that users of the <code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver migrate
-to <code class="language-plaintext highlighter-rouge">overlay2</code>.</p>
+<p>²) ストレージドライバー<code class="language-plaintext highlighter-rouge">devicemapper</code>は非推奨であり、将来のリリースにおいて削除されます。
+   ストレージドライバー<code class="language-plaintext highlighter-rouge">devicemapper</code>のユーザーは<code class="language-plaintext highlighter-rouge">overlay2</code>に移行することが推奨されています。</p>
 
 <blockquote>
-  <p><strong>Note</strong></p>
+  <p><strong>メモ</strong></p>
 
-  <p>The comparison table above is not applicable for Rootless mode.
-For the drivers available in Rootless mode, see <a href="/docs.docker.jp.onthefly/engine/security/rootless/">the Rootless mode documentation</a>.</p>
+  <p>上記の一覧表は Rootless モードに対しては当てはまりません。
+Rootless モードにおいて利用可能なドライバーは、<a href="/docs.docker.jp.onthefly/engine/security/rootless/">Rootless モードのドキュメント</a> を参照してください。</p>
 </blockquote>
 
 <p>When possible, <code class="language-plaintext highlighter-rouge">overlay2</code> is the recommended storage driver. When installing
@@ -259,7 +256,7 @@ configuration.</p>
 than production. Modifying the storage driver on these platforms is not
 possible.</p>
 
-<h2 id="supported-backing-filesystems">Supported backing filesystems</h2>
+<h2 id="supported-backing-filesystems">サポートされているファイルシステム</h2>
 
 <p>With regard to Docker, the backing filesystem is the filesystem where
 <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> is located. Some storage drivers only work with specific
@@ -269,13 +266,13 @@ backing filesystems.</p>
   <thead>
     <tr>
       <th style="text-align: left">ストレージドライバー</th>
-      <th style="text-align: left">Supported backing filesystems</th>
+      <th style="text-align: left">サポートするファイルシステム</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">overlay2</code>, <code class="language-plaintext highlighter-rouge">overlay</code></td>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">xfs</code> with ftype=1, <code class="language-plaintext highlighter-rouge">ext4</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">xfs</code> ftype=1 利用時、 <code class="language-plaintext highlighter-rouge">ext4</code></td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">aufs</code></td>
@@ -295,7 +292,7 @@ backing filesystems.</p>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">vfs</code></td>
-      <td style="text-align: left">どのファイルシステムでも</td>
+      <td style="text-align: left">どのファイルシステムでも可。</td>
     </tr>
   </tbody>
 </table>
@@ -342,7 +339,7 @@ specific shared storage system.</p>
 
 <p>ユーザーにとっては、処理性能よりも安定性が重要視されることがあります。
 ここに説明するストレージドライバーはすべて安定していると考えられますが、中には更新され活発に開発中であるものもあります。
-一般に <code class="language-plaintext highlighter-rouge">overlay2</code>, <code class="language-plaintext highlighter-rouge">aufs</code>, <code class="language-plaintext highlighter-rouge">overlay</code>, <code class="language-plaintext highlighter-rouge">devicemapper</code> は最も安定したものとして選ぶことができます。</p>
+一般に<code class="language-plaintext highlighter-rouge">overlay2</code>、<code class="language-plaintext highlighter-rouge">aufs</code>、<code class="language-plaintext highlighter-rouge">overlay</code>、<code class="language-plaintext highlighter-rouge">devicemapper</code>は最も安定したものとして選ぶことができます。</p>
 
 <h3 id="test-with-your-own-workloads">Test with your own workloads</h3>
 
@@ -373,22 +370,22 @@ driver. Some drivers require additional configuration, including configuration
 to physical or logical disks on the Docker host.</p>
 
 <blockquote class="important">
-  <p><strong>Important</strong>: When you change the storage driver, any existing images and
-containers become inaccessible. This is because their layers cannot be used
-by the new storage driver. If you revert your changes, you can
-access the old images and containers again, but any that you pulled or
-created using the new driver are then inaccessible.</p>
+  <p><strong>重要</strong></p>
+
+  <p>ストレージドライバーを変更すると、既存のイメージやコンテナーは接続不能になります。
+新しいストレージドライバーからは、元々あるレイヤーを利用できないためです。
+変更を元に戻すことで、元々のイメージやコンテナーにアクセスできるようになりますが、今度は、新たなドライバーを使って行ったプルや生成処理内容にアクセスできなくなります。</p>
 </blockquote>
 
 <h2 id="related-information">関連情報</h2>
 
 <ul>
   <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/">About images, containers, and storage drivers</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/"><code class="language-plaintext highlighter-rouge">aufs</code> storage driver in practice</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/"><code class="language-plaintext highlighter-rouge">devicemapper</code> storage driver in practice</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/"><code class="language-plaintext highlighter-rouge">overlay</code> and <code class="language-plaintext highlighter-rouge">overlay2</code> storage drivers in practice</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/"><code class="language-plaintext highlighter-rouge">btrfs</code> storage driver in practice</a></li>
-  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/"><code class="language-plaintext highlighter-rouge">zfs</code> storage driver in practice</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/aufs-driver/"><code class="language-plaintext highlighter-rouge">aufs</code>ストレージドライバーの利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/device-mapper-driver/"><code class="language-plaintext highlighter-rouge">devicemapper</code>ストレージドライバーの利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/overlayfs-driver/"><code class="language-plaintext highlighter-rouge">overlay</code>と<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーの利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/btrfs-driver/"><code class="language-plaintext highlighter-rouge">btrfs</code>ストレージドライバーの利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/storage/storagedriver/zfs-driver/"><code class="language-plaintext highlighter-rouge">zfs</code>ストレージドライバーの利用</a></li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=container">container</a>, <a href="/docs.docker.jp.onthefly/search/?q=storage">storage</a>, <a href="/docs.docker.jp.onthefly/search/?q=driver">driver</a>, <a href="/docs.docker.jp.onthefly/search/?q=aufs">aufs</a>, <a href="/docs.docker.jp.onthefly/search/?q=btrfs">btrfs</a>, <a href="/docs.docker.jp.onthefly/search/?q=devicemapper">devicemapper</a>, <a href="/docs.docker.jp.onthefly/search/?q=zfs">zfs</a>, <a href="/docs.docker.jp.onthefly/search/?q=overlay">overlay</a>, <a href="/docs.docker.jp.onthefly/search/?q=overlay2">overlay2</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
@@ -429,7 +426,7 @@ created using the new driver are then inaccessible.</p>
       <li><a href="#docker-desktop-for-mac-and-docker-desktop-for-windows" class="nomunge">Docker Desktop for Mac and Docker Desktop for Windows</a></li>
     </ul>
   </li>
-  <li><a href="#supported-backing-filesystems" class="nomunge">Supported backing filesystems</a></li>
+  <li><a href="#supported-backing-filesystems" class="nomunge">サポートされているファイルシステム</a></li>
   <li><a href="#other-considerations" class="nomunge">その他の考慮事項</a>
     <ul>
       <li><a href="#suitability-for-your-workload" class="nomunge">Suitability for your workload</a></li>
