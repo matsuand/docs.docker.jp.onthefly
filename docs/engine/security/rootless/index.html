@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-11 11:57:51 +0900-->
+<!-- Page generated 2021-02-26 13:55:31 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>root ユーザー以外による Docker デーモン起動（rootless モード） | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="root ユーザー以外による Docker デーモン起動（rootless モード）" />
   <meta property="og:description" content="root ユーザー以外によって Docker デーモンを起動します（rootless モード）。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-26T13:55:31+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-11T11:57:51+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-02-26T13:55:31+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"root ユーザー以外による Docker デーモン起動（rootless モード）","description":"root ユーザー以外によって Docker デーモンを起動します（rootless モード）。","url":"https://docs.docker.com/engine/security/rootless/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,8 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>root ユーザー以外による Docker デーモン起動（rootless モード）</h1><p><em class="reading-time">読む時間の目安: 12 分</em></p>
-<p>rootless モードとは、root 以外のユーザーによって Docker デーモンやコンテナーを起動するものであり、デーモンや起動コンテナーにおける潜在的なぜい弱性を軽減します。</p>
+                        <section class="section"><h1>root ユーザー以外による Docker デーモン起動（rootless モード）</h1><p><em class="reading-time">読む時間の目安: 16 分</em></p><p>rootless モードとは、root 以外のユーザーによって Docker デーモンやコンテナーを起動するものであり、デーモンや起動コンテナーにおける潜在的なぜい弱性を軽減します。</p>
 
 <p>rootless モードは root 権限を必要としません。
 しかも <a href="#prerequisites">前提条件</a> を満たしていれば、Docker デーモンのインストール時も必要としません。</p>
@@ -147,109 +146,106 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
   <p>メモ: ここでは Ubuntu カーネルの利用をお勧めします。</p>
 </blockquote>
 
-<h4 id="ubuntu">Ubuntu</h4>
-
-<ul>
-  <li>
-    <p>事前準備するものは何もありません。</p>
-  </li>
-  <li>
-    <p>デフォルトで<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーが有効になっています。
-(<a href="https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144">Ubuntu 固有のカーネルパッチ</a>)</p>
-  </li>
-  <li>
-    <p>Ubuntu 16.04、18.04、20.04 において動作します。</p>
-  </li>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
+  <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
+  <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos8-and-fedora">CentOS 8 and Fedora</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos7">CentOS 7</a></li>
 </ul>
-
-<h4 id="debian-gnulinux">Debian GNU/Linux</h4>
-
-<ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバー（推奨）を利用するには、<code class="language-plaintext highlighter-rouge">sudo modprobe overlay permit_mounts_in_userns=1</code>を実行してください。
+<div class="tab-content">
+  <div id="hint-ubuntu" class="tab-pane fade in active">
+    <ul>
+      <li>
+        <p>事前準備するものは何もありません。</p>
+      </li>
+      <li>
+        <p>デフォルトで<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーが有効になっています。
+(<a href="https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144">Ubuntu 固有のカーネルパッチ</a>)</p>
+      </li>
+      <li>
+        <p>Ubuntu 16.04、18.04、20.04 において動作します。</p>
+      </li>
+    </ul>
+  </div>
+  <div id="hint-debian" class="tab-pane fade in">
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバー（推奨）を利用するには、<code class="language-plaintext highlighter-rouge">sudo modprobe overlay permit_mounts_in_userns=1</code>を実行してください。
  (<a href="https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch">Debian 固有のカーネルパッチ、Debian 10 において導入</a>)
  そして<code class="language-plaintext highlighter-rouge">/etc/modprobe.d</code>に設定を追加してください。</p>
-  </li>
-  <li>
-    <p>Debian 9 と 10 において動作します。
-<code class="language-plaintext highlighter-rouge">overlay2</code>がサポートされるのは Debian 10 からであり、上に示した<code class="language-plaintext highlighter-rouge">modprobe</code>の設定が必要です。</p>
-  </li>
-</ul>
-
-<h4 id="arch-linux">Arch Linux</h4>
-
-<ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
+      </li>
+    </ul>
+  </div>
+  <div id="hint-arch" class="tab-pane fade in">
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
 その場合は<code class="language-plaintext highlighter-rouge">sudo pacman -S fuse-overlayfs</code>を実行します。</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
-  </li>
-</ul>
-
-<h4 id="opensuse">openSUSE</h4>
-
-<ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">kernel.unprivileged_userns_clone=1</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
+      </li>
+    </ul>
+  </div>
+  <div id="hint-opensuse" class="tab-pane fade in">
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
 その場合は<code class="language-plaintext highlighter-rouge">sudo zypper install -y fuse-overlayfs</code>を実行します。</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter</code>を実行することが必要です。
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter</code>を実行することが必要です。
 設定方法によっては他のディストリビューションにおいても必要なことかもしれません。</p>
-  </li>
-  <li>
-    <p>openSUSE 15 において動作します。</p>
-  </li>
-</ul>
-
-<h4 id="centos-8-and-fedora">CentOS 8 と Fedora</h4>
-
-<ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
+      </li>
+      <li>
+        <p>openSUSE 15 において動作します。</p>
+      </li>
+    </ul>
+  </div>
+  <div id="hint-centos8-and-fedora" class="tab-pane fade in">
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>をインストールすることが推奨されます。
 その場合は<code class="language-plaintext highlighter-rouge">sudo dnf install -y fuse-overlayfs</code>を実行します。</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">sudo dnf install -y iptables</code>が必要かもしれません。</p>
-  </li>
-  <li>
-    <p>CentOS 8 と Fedora 32 において動作します。</p>
-  </li>
-</ul>
-
-<h4 id="centos-7">CentOS 7</h4>
-
-<ul>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">user.max_user_namespaces=28633</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
-  </li>
-  <li>
-    <p>デフォルトでは<code class="language-plaintext highlighter-rouge">systemctl --user</code>は動作しません。
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">sudo dnf install -y iptables</code>が必要かもしれません。</p>
+      </li>
+      <li>
+        <p>When SELinux is enabled, you may face <code class="language-plaintext highlighter-rouge">can't open lock file /run/xtables.lock: Permission denied</code> error.
+A workaround for this is to <code class="language-plaintext highlighter-rouge">sudo dnf install -y policycoreutils-python-utils &amp;&amp; sudo semanage permissive -a iptables_t</code>.
+This issue is tracked in <a href="https://github.com/moby/moby/issues/41230">moby/moby#41230</a>.</p>
+      </li>
+      <li>
+        <p>Known to work on CentOS 8 and Fedora 33.</p>
+      </li>
+    </ul>
+  </div>
+  <div id="hint-centos7" class="tab-pane fade in">
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（または<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">user.max_user_namespaces=28633</code>を追加して、<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行してください。</p>
+      </li>
+      <li>
+        <p>デフォルトでは<code class="language-plaintext highlighter-rouge">systemctl --user</code>は動作しません。
 デーモンは sysmted を使わずに直接<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>を起動してください。</p>
-  </li>
-  <li>
-    <p>CentOS 7.7 において動作します。
-これより古いリリースにおいては、追加の設定手順が必要になります。</p>
-  </li>
-  <li>
-    <p>CentOS 7.6 やこれ以前のリリースにおいては、<a href="https://copr.fedorainfracloud.org/coprs/vbatts/shadow-utils-newxidmap/">COPR パッケージの<code class="language-plaintext highlighter-rouge">vbatts/shadow-utils-newxidmap</code></a> をインストールしていることが必要です。</p>
-  </li>
-  <li>
-    <p>CentOS 7.5 やこれ以前のリリースにおいては<code class="language-plaintext highlighter-rouge">sudo grubby --update-kernel=ALL --args="user_namespace.enable=1"</code>の実行と、その後にシステムを再起動することが必要です。</p>
-  </li>
-</ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<p><!-- tab-content --></p>
 
 <h2 id="known-limitations">既知の制約</h2>
 
 <ul>
   <li>以下のストレージドライバーのみがサポートされます。
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">overlay2</code>（Ubuntu ホストおよび Debian 10 ホストのみ。）</li>
+      <li><code class="language-plaintext highlighter-rouge">overlay2</code>（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系および Debian 系カーネルのみ。）</li>
       <li><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>（カーネル 4.18 またはそれ以降の稼動時、そして<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>インストール時のみ。）</li>
       <li><code class="language-plaintext highlighter-rouge">vfs</code></li>
     </ul>
@@ -272,126 +268,172 @@ rootless モードの場合は、デーモンとコンテナーがそれぞれ r
 </ul>
 
 <h2 id="install">インストール</h2>
+<blockquote>
+  <p><strong>メモ</strong></p>
 
-<p><a href="https://get.docker.com/rootless" target="_blank" rel="noopener" class="_">https://get.docker.com/rootless</a> から、インストールスクリプトを入手することができます。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com/rootless | sh
-</code></pre></div></div>
-
-<p>スクリプトの実行は root 以外のユーザーで行います。
-Rootless Docker を root ユーザーがインストールする場合は <a href="#manual-installation">手動インストール</a> の手順を参照してください。</p>
-
-<p>このスクリプトを実行すると、必要となる環境変数が表示されます。</p>
+  <p>If the system-wide Docker daemon is already running, consider disabling it:
+<code class="language-plaintext highlighter-rouge">$ sudo systemctl disable --now docker.service</code></p>
+</blockquote>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#origin1">画面表記</a></li>
-  <li><a data-toggle="tab" href="#japanese1">日本語訳</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#install-with-packages">With packages (RPM/DEB)</a></li>
+  <li><a data-toggle="tab" data-target="#install-without-packages">Without packages</a></li>
 </ul>
 <div class="tab-content">
-  <div id="origin1" class="tab-pane fade in active">
-    <div class="language-console highlighter-rouge">
-      <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl -fsSL https://get.docker.com/rootless | sh
-...
-# Docker binaries are installed in /home/testuser/bin
-# WARN: dockerd is not in your current PATH or pointing to /home/testuser/bin/dockerd
-# Make sure the following environment variables are set (or add them to ~/.bashrc):
+  <div id="install-with-packages" class="tab-pane fade in active">
+    <p>If you installed Docker 20.10 or later with <a href="/engine/install">RPM/DEB packages</a>, you should have <code class="language-plaintext highlighter-rouge">dockerd-rootless-setuptool.sh</code> in <code class="language-plaintext highlighter-rouge">/usr/bin</code>.</p>
 
-export PATH=/home/testuser/bin:$PATH
-export PATH=$PATH:/sbin
-export DOCKER_HOST=unix:///run/user/1001/docker.sock
+    <p>Run <code class="language-plaintext highlighter-rouge">dockerd-rootless-setuptool.sh install</code> as a non-root user to set up the daemon:</p>
 
-#
-# To control docker service run:
-# systemctl --user (start|stop|restart) docker
-#
-</code></pre></div>        </div>
-      </div>
-    </div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd-rootless-setuptool.sh <span class="nb">install</span>
+<span class="go">[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+</span><span class="c">...
+</span><span class="go">[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
+
+</span><span class="gp">export PATH=/usr/bin:$</span>PATH
+<span class="go">export DOCKER_HOST=unix:///run/user/1000/docker.sock
+</span></code></pre></div>    </div>
+
+    <p>If <code class="language-plaintext highlighter-rouge">dockerd-rootless-setuptool.sh</code> is not present, you may need to install the <code class="language-plaintext highlighter-rouge">docker-ce-rootless-extras</code> package manually, e.g.,</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> docker-ce-rootless-extras
+</code></pre></div>    </div>
   </div>
-  <div id="japanese1" class="tab-pane fade">
+  <div id="install-without-packages" class="tab-pane fade in">
+    <p>If you do not have permission to run package managers like <code class="language-plaintext highlighter-rouge">apt-get</code> and <code class="language-plaintext highlighter-rouge">dnf</code>,
+consider using the installation script available at <a href="https://get.docker.com/rootless" target="_blank" rel="noopener" class="_">https://get.docker.com/rootless</a>.</p>
 
-    <div class="language-console highlighter-rouge">
-      <div class="highlight">
-        <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl -fsSL https://get.docker.com/rootless | sh
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#origin1">画面表記</a></li>
+      <li><a data-toggle="tab" href="#japanese1">日本語訳</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="origin1" class="tab-pane fade in active">
+        <div class="language-console highlighter-rouge">
+          <div class="highlight">
+            <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl -fsSL https://get.docker.com/rootless | sh
 ...
-# Docker バイナリが /home/testuser/bin にインストールされました。
-# 警告: dockerd が現在の PATH にない、あるいは /home/testuser/bin/dockerd を指していません。
-# 以下の環境変数を設定してください。(あるいは ~/.bashrc に追加してください):
+[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+...
+[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
 
 export PATH=/home/testuser/bin:$PATH
-export PATH=$PATH:/sbin
-export DOCKER_HOST=unix:///run/user/1001/docker.sock
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
+</code></pre></div>            </div>
+          </div>
+        </div>
+      </div>
+      <div id="japanese1" class="tab-pane fade">
 
-#
-# Docker サービスは以下により制御します:
-# systemctl --user (start|stop|restart) docker
-#
-</code></pre></div>        </div>
+        <div class="language-console highlighter-rouge">
+          <div class="highlight">
+            <div class="language-plaintext highlight highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl -fsSL https://get.docker.com/rootless | sh
+...
+[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+...
+[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
+
+export PATH=/home/testuser/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
+</code></pre></div>            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
+    <p>The binaries will be installed at <code class="language-plaintext highlighter-rouge">~/bin</code>.</p>
   </div>
 </div>
+<p><!-- tab-content --></p>
 
-<h3 id="manual-installation">手動インストール</h3>
+<p>See <a href="#troubleshooting">Troubleshooting</a> if you faced an error.</p>
 
-<p>インストーラーを利用せずに手動でバイナリをインストールする場合は、<code class="language-plaintext highlighter-rouge">docker-&lt;version&gt;.tar.gz</code>とともに配布されている<code class="language-plaintext highlighter-rouge">docker-rootless-extras-&lt;version&gt;.tar.gz</code>を抽出します。
-これは <a href="https://download.docker.com/linux/static/stable/x86_64/" target="_blank" rel="noopener" class="_">https://download.docker.com/linux/static/stable/x86_64/</a> から入手します。</p>
+<h2 id="uninstall">アンインストール</h2>
 
-<p>Docker デーモンをすでに root で実行している場合は、<code class="language-plaintext highlighter-rouge">docker-rootless-extras-&lt;version&gt;.tgz</code>を入手するだけです。
-このアーカイブを<code class="language-plaintext highlighter-rouge">$PATH</code>上のいずれかのディレクトリに伸張(解凍)します。
-たとえば<code class="language-plaintext highlighter-rouge">/usr/local/bin</code>や<code class="language-plaintext highlighter-rouge">$HOME/bin</code>などです。</p>
+<p>To remove the systemd service of the Docker daemon, run <code class="language-plaintext highlighter-rouge">dockerd-rootless-setuptool.sh uninstall</code>:</p>
 
-<h3 id="nightly-channel">最新版チャネル</h3>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd-rootless-setuptool.sh uninstall
+<span class="go">+ systemctl --user stop docker.service
++ systemctl --user disable docker.service
+Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
+[INFO] Uninstalled docker.service
+[INFO] This uninstallation tool does NOT remove Docker binaries and data.
+[INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
+</span></code></pre></div></div>
 
-<p>Rootless Docker の最新版（Nightly）をインストールするには、インストールスクリプトにおいて<code class="language-plaintext highlighter-rouge">CHANNEL="nightly"</code>を指定します。</p>
+<p>To remove the data directory, run <code class="language-plaintext highlighter-rouge">rootlesskit rm -rf ~/.local/share/docker</code>.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com/rootless | <span class="nv">CHANNEL</span><span class="o">=</span><span class="s2">"nightly"</span> sh
+<p>To remove the binaries, remove <code class="language-plaintext highlighter-rouge">docker-ce-rootless-extras</code> package if you installed Docker with package managers.
+If you installed Docker with https://get.docker.com/rootless (<a href="#install">Install without packages</a>),
+remove the binary files under <code class="language-plaintext highlighter-rouge">~/bin</code>:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> ~/bin
+<span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-f</span> containerd containerd-shim containerd-shim-runc-v2 ctr docker docker-init docker-proxy dockerd dockerd-rootless-setuptool.sh dockerd-rootless.sh rootlesskit rootlesskit-docker-proxy runc vpnkit
 </code></pre></div></div>
-
-<p>実行バイナリのアーカイブは以下から入手できます。</p>
-<ul>
-  <li>https://master.dockerproject.org/linux/x86_64/docker-rootless-extras.tgz</li>
-  <li>https://master.dockerproject.org/linux/x86_64/docker.tgz</li>
-</ul>
 
 <h2 id="usage">利用方法</h2>
 
 <h3 id="daemon">デーモン</h3>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#usage-with-systemd">With systemd (Highly recommended)</a></li>
+  <li><a data-toggle="tab" data-target="#usage-without-systemd">Without systemd</a></li>
+</ul>
+<div class="tab-content">
+  <div id="usage-with-systemd" class="tab-pane fade in active">
+    <p>The systemd unit file is installed as  <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service</code>.</p>
 
-<p>Use <code class="language-plaintext highlighter-rouge">systemctl --user</code> to manage the lifecycle of the daemon:</p>
+    <p>Use <code class="language-plaintext highlighter-rouge">systemctl --user</code> to manage the lifecycle of the daemon:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> start docker
-</code></pre></div></div>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> start docker
+</code></pre></div>    </div>
 
-<p>システム起動時にデーモンを起動するには、Systemd サービスに対して linger を有効にします。</p>
+    <p>システム起動時にデーモンを起動するには、Systemd サービスに対して linger を有効にします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> <span class="nb">enable </span>docker
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nt">--user</span> <span class="nb">enable </span>docker
 <span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>loginctl enable-linger <span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span>
-</code></pre></div></div>
+</code></pre></div>    </div>
 
-<p>Systemd を使わずにデーモンを直接起動するには、<code class="language-plaintext highlighter-rouge">dockerd</code>の代わりに<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>を起動する必要があります。</p>
+    <p>Starting Rootless Docker as a systemd-wide service (<code class="language-plaintext highlighter-rouge">/etc/systemd/system/docker.service</code>)
+is not supported, even with the <code class="language-plaintext highlighter-rouge">User=</code> directive.</p>
 
-<p>Docker 19.03 において<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>を実行する際には<code class="language-plaintext highlighter-rouge">--experimental</code>の指定が必要でした。
-Docker 20.10 からは<code class="language-plaintext highlighter-rouge">--experimental</code>フラグを不要になりました。</p>
+  </div>
+  <div id="usage-without-systemd" class="tab-pane fade in">
+    <p>To run the daemon directly without systemd, you need to run <code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code> instead of <code class="language-plaintext highlighter-rouge">dockerd</code>.</p>
+
+    <p>The following environment variables must be set:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">$HOME</code>: the home directory</li>
+      <li><code class="language-plaintext highlighter-rouge">$XDG_RUNTIME_DIR</code>: an ephemeral directory that is only accessible by the expected user, e,g, <code class="language-plaintext highlighter-rouge">~/.docker/run</code>.
+The directory should be removed on every host shutdown.
+The directory can be on tmpfs, however, should not be under <code class="language-plaintext highlighter-rouge">/tmp</code>.
+Locating this directory under <code class="language-plaintext highlighter-rouge">/tmp</code> might be vulnerable to TOCTOU attack.</li>
+    </ul>
+
+  </div>
+</div>
+<p><!-- tab-content --></p>
 
 <p>ディレクトリパスについて触れておきます。</p>
 
 <ul>
   <li>ソケットパスはデフォルトで<code class="language-plaintext highlighter-rouge">$XDG_RUNTIME_DIR/docker.sock</code>に設定されます。
 <code class="language-plaintext highlighter-rouge">$XDG_RUNTIME_DIR</code>は通常<code class="language-plaintext highlighter-rouge">/run/user/$UID</code>に設定されます。</li>
-  <li>データディレクトリはデフォルトで<code class="language-plaintext highlighter-rouge">~/.local/share/docker</code>に設定されます。</li>
-  <li>実行ディレクトリはデフォルトで<code class="language-plaintext highlighter-rouge">$XDG_RUNTIME_DIR/docker</code>に設定されます。</li>
-  <li>デーモン設定ディレクトリはデフォルトで（クライアントが利用する<code class="language-plaintext highlighter-rouge">~/.docker</code>でなく）<code class="language-plaintext highlighter-rouge">~/.config/docker</code>に設定されます。</li>
-</ul>
-
-<p>その他についてです。</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>スクリプトは、これが有するユーザー、マウント、ネットワーク名前空間のもとで<code class="language-plaintext highlighter-rouge">dockerd</code>を実行します。
-その名前空間に入るには<code class="language-plaintext highlighter-rouge">nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)</code>を実行します。</li>
-  <li><code class="language-plaintext highlighter-rouge">docker info</code>を実行すると<code class="language-plaintext highlighter-rouge">SecurityOptions</code>欄に<code class="language-plaintext highlighter-rouge">rootless</code>と表示されます。</li>
+  <li>データディレクトリはデフォルトで<code class="language-plaintext highlighter-rouge">~/.local/share/docker</code>に設定されます。
+The data dir should not be on NFS.</li>
+  <li>The daemon config dir is set to <code class="language-plaintext highlighter-rouge">~/.config/docker</code> by default.
+This directory is different from <code class="language-plaintext highlighter-rouge">~/.docker</code> that is used by the client.</li>
 </ul>
 
 <h3 id="client">クライアント</h3>
@@ -427,17 +469,12 @@ Current context is now "rootless"
 <p><code class="language-plaintext highlighter-rouge">docker:&lt;version&gt;-dind-rootless</code>イメージは非 root ユーザー（UID 1000）により動作します。
 ただし seccomp、AppArmor、マウントマスクを無効化するには<code class="language-plaintext highlighter-rouge">--privileged</code>の指定が必要です。</p>
 
-<p>Docker 19.03 においては<code class="language-plaintext highlighter-rouge">--experimental</code>フラグの指定が必要です。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">--name</span> dind-rootless <span class="nt">--privileged</span> docker:19.03-dind-rootless <span class="nt">--experimental</span>
-</code></pre></div></div>
-
 <h3 id="expose-docker-api-socket-through-tcp">TCP を通じた Docker API ソケットの公開</h3>
 
 <p>TCP を通じて Docker API ソケットを公開するには、<code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>の実行にあたって<code class="language-plaintext highlighter-rouge">DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"</code>を指定する必要があります。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nv">DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS</span><span class="o">=</span><span class="s2">"-p 0.0.0.0:2376:2376/tcp"</span> <span class="se">\</span>
-  dockerd-rootless.sh <span class="nt">--experimental</span> <span class="se">\</span>
+  dockerd-rootless.sh <span class="se">\</span>
   <span class="nt">-H</span> tcp://0.0.0.0:2376 <span class="se">\</span>
   <span class="nt">--tlsverify</span> <span class="nt">--tlscacert</span><span class="o">=</span>ca.pem <span class="nt">--tlscert</span><span class="o">=</span>cert.pem <span class="nt">--tlskey</span><span class="o">=</span>key.pem
 </code></pre></div></div>
@@ -467,7 +504,6 @@ Current context is now "rootless"
 <p>または<code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code>（あるいは<code class="language-plaintext highlighter-rouge">/etc/sysctl.d</code>）に<code class="language-plaintext highlighter-rouge">net.ipv4.ip_unprivileged_port_start=0</code>を追加して<code class="language-plaintext highlighter-rouge">sudo sysctl --system</code>を実行します。</p>
 
 <h3 id="limiting-resources">リソースの利用制限</h3>
-
 <p>Limiting resources with cgroup-related <code class="language-plaintext highlighter-rouge">docker run</code> flags such as <code class="language-plaintext highlighter-rouge">--cpus</code>, <code class="language-plaintext highlighter-rouge">--memory</code>, <code class="language-plaintext highlighter-rouge">--pids-limit</code>
 is supported only when running with cgroup v2 and systemd.
 See <a href="/docs.docker.jp.onthefly/config/containers/runmetrics/">Changing cgroup version</a> to enable cgroup v2.</p>
@@ -513,16 +549,6 @@ and can be arbitrarily disabled by the container process.</p>
   </li>
   <li>（<code class="language-plaintext highlighter-rouge">docker run --pids-limit=100</code>と同じように）最大プロセス数を UID 2000 の名前空間ごとに 100 とするには<code class="language-plaintext highlighter-rouge">docker run --user 2000 --ulimit nproc=100 &lt;IMAGE&gt; &lt;COMMAND&gt;</code>を実行します。</li>
 </ul>
-
-<h3 id="changing-the-network-stack">ネットワーク関連ソフトウェアの変更</h3>
-
-<p><code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code>では、ネットワーク関連ソフトウェアとしてデフォルトで <a href="https://github.com/rootless-containers/slirp4netns">slirp4netns</a>（インストール時）または <a href="https://github.com/moby/vpnkit">VPNKit</a> を利用します。</p>
-
-<p>このネットワークソフトウエアはユーザー空間内で動作するため、性能オーバーヘッドを招く場合があります。
-より詳しくは <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#network-drivers">RootlessKit ドキュメント</a> を参照してください。</p>
-
-<p>最適な性能を得るために、上の代わりに<code class="language-plaintext highlighter-rouge">lxc-user-nic</code>を利用することもできます。
-<code class="language-plaintext highlighter-rouge">lxc-user-nic</code>を利用するには<a href="https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#--netlxc-user-nic-experimental"><code class="language-plaintext highlighter-rouge">/etc/lxc/lxc-usernet</code></a> を編集し<code class="language-plaintext highlighter-rouge">$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic</code>を設定する必要があります。</p>
 
 <h2 id="troubleshooting">トラブルシューティング</h2>
 
@@ -596,12 +622,15 @@ The value is automatically set to <code class="language-plaintext highlighter-ro
 <p>You need <code class="language-plaintext highlighter-rouge">sudo loginctl enable-linger $(whoami)</code> to enable the daemon to start
 up automatically. See <a href="#usage">Usage</a>.</p>
 
-<p><strong><code class="language-plaintext highlighter-rouge">dockerd</code> fails with “rootless mode is supported only when running in experimental mode”</strong></p>
+<p><strong>iptables failed: iptables -t nat -N DOCKER: Fatal: can’t open lock file /run/xtables.lock: Permission denied</strong></p>
 
-<p>This error occurs when the daemon is launched without the <code class="language-plaintext highlighter-rouge">--experimental</code> flag on Docker 19.03.
-See <a href="#usage">Usage</a>.</p>
+<p>This error may happen when SELinux is enabled on the host.</p>
 
-<p><code class="language-plaintext highlighter-rouge">--experimental</code>フラグは Docker 20.10 からは不要になりました。</p>
+<p>A known workaround is to run the following commands to disable SELinux for <code class="language-plaintext highlighter-rouge">iptables</code>:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>dnf <span class="nb">install</span> <span class="nt">-y</span> policycoreutils-python-utils <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>semanage permissive <span class="nt">-a</span> iptables_t
+</code></pre></div></div>
+
+<p>This issue is tracked in <a href="https://github.com/moby/moby/issues/41230">moby/moby#41230</a>.</p>
 
 <h3 id="docker-pull-errors"><code class="language-plaintext highlighter-rouge">docker pull</code> errors</h3>
 
@@ -612,6 +641,14 @@ See <a href="#usage">Usage</a>.</p>
 images. However, 65,536 entries are sufficient for most images. See
 <a href="#prerequisites">Prerequisites</a>.</p>
 
+<p><strong>docker: failed to register layer: ApplyLayer exit status 1 stdout:  stderr: lchown &lt;FILE&gt;: operation not permitted</strong></p>
+
+<p>This error occurs mostly when <code class="language-plaintext highlighter-rouge">~/.local/share/docker</code> is located on NFS.</p>
+
+<p>A workaround is to specify non-NFS <code class="language-plaintext highlighter-rouge">data-root</code> directory in <code class="language-plaintext highlighter-rouge">~/.config/docker/daemon.json</code> as follows:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"data-root"</span><span class="p">:</span><span class="s2">"/somewhere-out-of-nfs"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
 <h3 id="docker-run-errors"><code class="language-plaintext highlighter-rouge">docker run</code> errors</h3>
 
 <p><strong><code class="language-plaintext highlighter-rouge">--cpus</code>, <code class="language-plaintext highlighter-rouge">--memory</code>, and <code class="language-plaintext highlighter-rouge">--pids-limit</code> are ignored</strong></p>
@@ -619,12 +656,6 @@ images. However, 65,536 entries are sufficient for most images. See
 <p>This is an expected behavior on cgroup v1 mode.
 To use these flags, the host needs to be configured for enabling cgroup v2.
 For more information, see <a href="#limiting-resources">Limiting resources</a>.</p>
-
-<p><strong>Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.</strong></p>
-
-<p>This error occurs mostly when the host is running in cgroup v2. See the section
-<a href="#fedora-31-or-later">Fedora 31 or later</a> for information on switching the host
-to use cgroup v1.</p>
 
 <h3 id="networking-errors">Networking errors</h3>
 
@@ -662,6 +693,34 @@ network namespace. Use <code class="language-plaintext highlighter-rouge">docker
 
 <p>This is an expected behavior, as the daemon is namespaced inside RootlessKit’s
 network namespace. Use <code class="language-plaintext highlighter-rouge">docker run -p</code> instead.</p>
+
+<p><strong>Network is slow</strong></p>
+
+<p>Docker with rootless mode uses <a href="https://github.com/rootless-containers/slirp4netns">slirp4netns</a> as the default network stack if slirp4netns v0.4.0 or later is installed.
+If slirp4netns is not installed, Docker falls back to <a href="https://github.com/moby/vpnkit">VPNKit</a>.</p>
+
+<p>Installing slirp4netns may improve the network throughput.
+See <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#network-drivers">RootlessKit documentation</a> for the benchmark result.</p>
+
+<p>Also, changing MTU value may improve the throughput.
+The MTU value can be specified by adding <code class="language-plaintext highlighter-rouge">Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=&lt;INTEGER&gt;"</code>
+to <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service</code> and then running <code class="language-plaintext highlighter-rouge">systemctl --user daemon-reload</code>.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">docker run -p</code> does not propagate source IP addresses</strong></p>
+
+<p>The source IP addresses can be propagated by adding <code class="language-plaintext highlighter-rouge">Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"</code>
+to <code class="language-plaintext highlighter-rouge">~/.config/systemd/user/docker.service</code> and then running <code class="language-plaintext highlighter-rouge">systemctl --user daemon-reload</code>.</p>
+
+<p>Note that this configuration decreases throughput.
+See <a href="https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#port-drivers">RootlessKit documentation</a> for the benchmark result.</p>
+
+<h3 id="tips-for-debugging">Tips for debugging</h3>
+<p><strong>Entering into <code class="language-plaintext highlighter-rouge">dockerd</code> namespaces</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">dockerd-rootless.sh</code> script executes <code class="language-plaintext highlighter-rouge">dockerd</code> in its own user, mount, and network namespaces.</p>
+
+<p>For debugging, you can enter the namespaces by running
+<code class="language-plaintext highlighter-rouge">nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)</code>.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=security">security</a>, <a href="/docs.docker.jp.onthefly/search/?q=namespaces">namespaces</a>, <a href="/docs.docker.jp.onthefly/search/?q=rootless">rootless</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -702,12 +761,8 @@ network namespace. Use <code class="language-plaintext highlighter-rouge">docker
     </ul>
   </li>
   <li><a href="#known-limitations" class="nomunge">既知の制約</a></li>
-  <li><a href="#install" class="nomunge">インストール</a>
-    <ul>
-      <li><a href="#manual-installation" class="nomunge">手動インストール</a></li>
-      <li><a href="#nightly-channel" class="nomunge">最新版チャネル</a></li>
-    </ul>
-  </li>
+  <li><a href="#install" class="nomunge">インストール</a></li>
+  <li><a href="#uninstall" class="nomunge">アンインストール</a></li>
   <li><a href="#usage" class="nomunge">利用方法</a>
     <ul>
       <li><a href="#daemon" class="nomunge">デーモン</a></li>
@@ -722,7 +777,6 @@ network namespace. Use <code class="language-plaintext highlighter-rouge">docker
       <li><a href="#routing-ping-packets" class="nomunge">ping パケットのルーティング</a></li>
       <li><a href="#exposing-privileged-ports" class="nomunge">特権ポートの公開</a></li>
       <li><a href="#limiting-resources" class="nomunge">リソースの利用制限</a></li>
-      <li><a href="#changing-the-network-stack" class="nomunge">ネットワーク関連ソフトウェアの変更</a></li>
     </ul>
   </li>
   <li><a href="#troubleshooting" class="nomunge">トラブルシューティング</a>
@@ -731,6 +785,7 @@ network namespace. Use <code class="language-plaintext highlighter-rouge">docker
       <li><a href="#docker-pull-errors" class="nomunge">docker pull errors</a></li>
       <li><a href="#docker-run-errors" class="nomunge">docker run errors</a></li>
       <li><a href="#networking-errors" class="nomunge">Networking errors</a></li>
+      <li><a href="#tips-for-debugging" class="nomunge">Tips for debugging</a></li>
     </ul>
   </li>
 </ul>
@@ -758,6 +813,7 @@ network namespace. Use <code class="language-plaintext highlighter-rouge">docker
                         <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
                         <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
                         <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/roadmap">Docker 製品ロードマップ</a></li>
                         <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
                         <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
                         <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
