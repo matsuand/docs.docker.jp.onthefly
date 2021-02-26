@@ -15,9 +15,12 @@ ctie:
 bases = \
 	about                \
 	apple-silicon        \
+	attack-surface       \
 	buildkit             \
 	compose-native-build \
-	formatting
+	daemon-access        \
+	formatting           \
+	rootless
 
 ch_mds = $(bases:=.ch)
 tr_mds = $(bases:=.md)

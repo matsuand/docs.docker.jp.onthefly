@@ -20,11 +20,6 @@ Rootless mode allows running the Docker daemon and containers as a non-root
 user to mitigate potential vulnerabilities in the daemon and
 the container runtime.
 @y
-{% comment %}
-Rootless mode allows running the Docker daemon and containers as a non-root
-user to mitigate potential vulnerabilities in the daemon and
-the container runtime.
-{% endcomment %}
 rootless モードとは、root 以外のユーザーによって Docker デーモンやコンテナーを起動するものであり、デーモンや起動コンテナーにおける潜在的なぜい弱性を軽減します。
 @z
 
@@ -32,10 +27,6 @@ rootless モードとは、root 以外のユーザーによって Docker デー�
 Rootless mode does not require root privileges even during the installation of
 the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
 @y
-{% comment %}
-Rootless mode does not require root privileges even during the installation of
-the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
-{% endcomment %}
 rootless モードは root 権限を必要としません。
 しかも [前提条件](#prerequisites) を満たしていれば、Docker デーモンのインストール時も必要としません。
 @z
@@ -44,10 +35,6 @@ rootless モードは root 権限を必要としません。
 Rootless mode was introduced in Docker Engine v19.03 as an experimental feature.
 Rootless mode graduated from experimental in Docker Engine v20.10.
 @y
-{% comment %}
-Rootless mode was introduced in Docker Engine v19.03 as an experimental feature.
-Rootless mode graduated from experimental in Docker Engine v20.10.
-{% endcomment %}
 rootless モードは Docker Engine v19.03 において試験的機能として導入されました。
 rootless モードは Docker Engine v20.10 から正規機能となりました。
 @z
@@ -55,9 +42,6 @@ rootless モードは Docker Engine v20.10 から正規機能となりました�
 @x
 ## How it works
 @y
-{% comment %}
-## How it works
-{% endcomment %}
 {: #how-it-works }
 ## どのように動作するか
 @z
@@ -69,13 +53,6 @@ with `userns-remap` mode, the daemon itself is running with root privileges,
 whereas in rootless mode, both the daemon and the container are running without
 root privileges.
 @y
-{% comment %}
-Rootless mode executes the Docker daemon and containers inside a user namespace.
-This is very similar to [`userns-remap` mode](userns-remap.md), except that
-with `userns-remap` mode, the daemon itself is running with root privileges,
-whereas in rootless mode, both the daemon and the container are running without
-root privileges.
-{% endcomment %}
 rootless モードは、Docker デーモンやコンテナーをユーザー名前空間の内部で実行します。
 これは [`userns-remap` モード](userns-remap.md) に非常によく似ています。
 ただし`userns-remap`モードにおいては、デーモンだけは root 権限で起動します。
@@ -87,11 +64,6 @@ Rootless mode does not use binaries with `SETUID` bits or file capabilities,
 except `newuidmap` and `newgidmap`, which are needed to allow multiple
 UIDs/GIDs to be used in the user namespace.
 @y
-{% comment %}
-Rootless mode does not use binaries with `SETUID` bits or file capabilities,
-except `newuidmap` and `newgidmap`, which are needed to allow multiple
-UIDs/GIDs to be used in the user namespace.
-{% endcomment %}
 rootless モードは、実行モジュールの`SETUID`ビットやファイルケーパビリティーは利用しません。
 ただし`newuidmap`と`newgidmap`は利用します。
 これらはユーザー名前空間内において、複数の UID/GID を利用するために必要となるものです。
@@ -100,9 +72,6 @@ rootless モードは、実行モジュールの`SETUID`ビットやファイル
 @x
 ## Prerequisites
 @y
-{% comment %}
-## Prerequisites
-{% endcomment %}
 {: #prerequisites }
 ## 前提条件
 @z
@@ -111,10 +80,6 @@ rootless モードは、実行モジュールの`SETUID`ビットやファイル
 -  You must install `newuidmap` and `newgidmap` on the host. These commands
   are provided by the `uidmap` package on most distros.
 @y
-{% comment %}
--  You must install `newuidmap` and `newgidmap` on the host. These commands
-  are provided by the `uidmap` package on most distros.
-{% endcomment %}
 -  ホスト上に`newuidmap`と`newgidmap`をインストールすることが必要です。
    このコマンドは、たいていのディストリビューションにおいて`uidmap`パッケージとして提供されています。
 @z
@@ -124,11 +89,6 @@ rootless モードは、実行モジュールの`SETUID`ビットやファイル
   UIDs/GIDs for the user. In the following example, the user `testuser` has
   65,536 subordinate UIDs/GIDs (231072-296607).
 @y
-{% comment %}
-- `/etc/subuid` and `/etc/subgid` should contain at least 65,536 subordinate
-  UIDs/GIDs for the user. In the following example, the user `testuser` has
-  65,536 subordinate UIDs/GIDs (231072-296607).
-{% endcomment %}
 - `/etc/subuid`と`/etc/subgid`では、ユーザーに対して最低でも 65,536 個のサブ UID/サブ GIDを許容しておくことが必要です。
   以下の例において`testuser`ユーザーには 65,536 個のサブ UID/サブ GID (231072-296607) が与えられています。
 @z
@@ -160,9 +120,6 @@ testuser:231072:65536
 @x
 ### Distribution-specific hint
 @y
-{% comment %}
-### Distribution-specific hint
-{% endcomment %}
 {: #distribution-specific-hint }
 ### ディストリビューション固有の情報
 @z
@@ -170,24 +127,38 @@ testuser:231072:65536
 @x
 > Note: We recommend that you use the Ubuntu kernel.
 @y
-{% comment %}
-> Note: We recommend that you use the Ubuntu kernel.
-{% endcomment %}
 > メモ: ここでは Ubuntu カーネルの利用をお勧めします。
 @z
 
 @x
-#### Ubuntu
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
+  <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
+  <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos8-and-fedora">CentOS 8 and Fedora</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos7">CentOS 7</a></li>
+</ul>
+<div class="tab-content">
+
+<div id="hint-ubuntu" class="tab-pane fade in active" markdown="1">
 @y
-#### Ubuntu
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
+  <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
+  <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos8-and-fedora">CentOS 8 and Fedora</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos7">CentOS 7</a></li>
+</ul>
+<div class="tab-content">
+
+<div id="hint-ubuntu" class="tab-pane fade in active" markdown="1">
 @z
 
 @x
 - No preparation is needed.
 @y
-{% comment %}
-- No preparation is needed.
-{% endcomment %}
 - 事前準備するものは何もありません。
 @z
 
@@ -195,10 +166,6 @@ testuser:231072:65536
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
 @y
-{% comment %}
-- `overlay2` storage driver  is enabled by default
-  ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
-{% endcomment %}
 - デフォルトで`overlay2`ストレージドライバーが有効になっています。
   ([Ubuntu 固有のカーネルパッチ](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144))
 @z
@@ -206,26 +173,21 @@ testuser:231072:65536
 @x
 - Known to work on Ubuntu 16.04, 18.04, and 20.04.
 @y
-{% comment %}
-- Known to work on Ubuntu 16.04, 18.04, and 20.04.
-{% endcomment %}
 - Ubuntu 16.04、18.04、20.04 において動作します。
 @z
 
 @x
-#### Debian GNU/Linux
+</div>
+<div id="hint-debian" class="tab-pane fade in" markdown="1">
 @y
-#### Debian GNU/Linux
+</div>
+<div id="hint-debian" class="tab-pane fade in" markdown="1">
 @z
 
 @x
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`.
 @y
-{% comment %}
-- Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
-  `/etc/sysctl.d`) and run `sudo sysctl --system`.
-{% endcomment %}
 - `/etc/sysctl.conf`（または`/etc/sysctl.d`）に`kernel.unprivileged_userns_clone=1`を追加して、`sudo sysctl --system`を実行してください。
 @z
 
@@ -235,43 +197,22 @@ testuser:231072:65536
    ([Debian-specific kernel patch, introduced in Debian 10](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)).
    Add the configuration to `/etc/modprobe.d` for persistence.
 @y
-{% comment %}
-- To use the `overlay2` storage driver (recommended), run
-  `sudo modprobe overlay permit_mounts_in_userns=1`
-   ([Debian-specific kernel patch, introduced in Debian 10](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)).
-   Add the configuration to `/etc/modprobe.d` for persistence.
-{% endcomment %}
 - `overlay2`ストレージドライバー（推奨）を利用するには、`sudo modprobe overlay permit_mounts_in_userns=1`を実行してください。
    ([Debian 固有のカーネルパッチ、Debian 10 において導入](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch))
    そして`/etc/modprobe.d`に設定を追加してください。
 @z
 
 @x
-- Known to work on Debian 9 and 10.
-  `overlay2` is only supported since Debian 10 and needs `modprobe`
-  configuration described above.
+</div>
+<div id="hint-arch" class="tab-pane fade in" markdown="1">
 @y
-{% comment %}
-- Known to work on Debian 9 and 10.
-  `overlay2` is only supported since Debian 10 and needs `modprobe`
-  configuration described above.
-{% endcomment %}
-- Debian 9 と 10 において動作します。
-  `overlay2`がサポートされるのは Debian 10 からであり、上に示した`modprobe`の設定が必要です。
-@z
-
-@x
-#### Arch Linux
-@y
-#### Arch Linux
+</div>
+<div id="hint-arch" class="tab-pane fade in" markdown="1">
 @z
 
 @x
 - Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
 @y
-{% comment %}
-- Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
-{% endcomment %}
 - `fuse-overlayfs`をインストールすることが推奨されます。
   その場合は`sudo pacman -S fuse-overlayfs`を実行します。
 @z
@@ -280,25 +221,20 @@ testuser:231072:65536
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 @y
-{% comment %}
-- Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
-  `/etc/sysctl.d`) and run `sudo sysctl --system`
-{% endcomment %}
 - `/etc/sysctl.conf`（または`/etc/sysctl.d`）に`kernel.unprivileged_userns_clone=1`を追加して、`sudo sysctl --system`を実行してください。
 @z
 
 @x
-#### openSUSE
+</div>
+<div id="hint-opensuse" class="tab-pane fade in" markdown="1">
 @y
-#### openSUSE
+</div>
+<div id="hint-opensuse" class="tab-pane fade in" markdown="1">
 @z
 
 @x
 - Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
 @y
-{% comment %}
-- Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
-{% endcomment %}
 - `fuse-overlayfs`をインストールすることが推奨されます。
   その場合は`sudo zypper install -y fuse-overlayfs`を実行します。
 @z
@@ -307,10 +243,6 @@ testuser:231072:65536
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
   This might be required on other distros as well depending on the configuration.
 @y
-{% comment %}
-- `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
-  This might be required on other distros as well depending on the configuration.
-{% endcomment %}
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter`を実行することが必要です。
   設定方法によっては他のディストリビューションにおいても必要なことかもしれません。
 @z
@@ -318,28 +250,20 @@ testuser:231072:65536
 @x
 - Known to work on openSUSE 15.
 @y
-{% comment %}
-- Known to work on openSUSE 15.
-{% endcomment %}
 - openSUSE 15 において動作します。
 @z
 
 @x
-#### CentOS 8 and Fedora
+</div>
+<div id="hint-centos8-and-fedora" class="tab-pane fade in" markdown="1">
 @y
-{% comment %}
-#### CentOS 8 and Fedora
-{% endcomment %}
-{: #centos-8-and-fedora }
-#### CentOS 8 と Fedora
+</div>
+<div id="hint-centos8-and-fedora" class="tab-pane fade in" markdown="1">
 @z
 
 @x
 - Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
 @y
-{% comment %}
-- Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
-{% endcomment %}
 - `fuse-overlayfs`をインストールすることが推奨されます。
   その場合は`sudo dnf install -y fuse-overlayfs`を実行します。
 @z
@@ -347,35 +271,37 @@ testuser:231072:65536
 @x
 - You might need `sudo dnf install -y iptables`.
 @y
-{% comment %}
-- You might need `sudo dnf install -y iptables`.
-{% endcomment %}
 - `sudo dnf install -y iptables`が必要かもしれません。
 @z
 
 @x
-- Known to work on CentOS 8 and Fedora 32.
+- When SELinux is enabled, you may face `can't open lock file /run/xtables.lock: Permission denied` error.
+  A workaround for this is to `sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t`.
+  This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
 @y
-{% comment %}
-- Known to work on CentOS 8 and Fedora 32.
-{% endcomment %}
-- CentOS 8 と Fedora 32 において動作します。
+- When SELinux is enabled, you may face `can't open lock file /run/xtables.lock: Permission denied` error.
+  A workaround for this is to `sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t`.
+  This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
 @z
 
 @x
-#### CentOS 7
+- Known to work on CentOS 8 and Fedora 33.
 @y
-#### CentOS 7
+- Known to work on CentOS 8 and Fedora 33.
+@z
+
+@x
+</div>
+<div id="hint-centos7" class="tab-pane fade in" markdown="1">
+@y
+</div>
+<div id="hint-centos7" class="tab-pane fade in" markdown="1">
 @z
 
 @x
 - Add `user.max_user_namespaces=28633` to `/etc/sysctl.conf` (or 
   `/etc/sysctl.d`) and run `sudo sysctl --system`.
 @y
-{% comment %}
-- Add `user.max_user_namespaces=28633` to `/etc/sysctl.conf` (or 
-  `/etc/sysctl.d`) and run `sudo sysctl --system`.
-{% endcomment %}
 - `/etc/sysctl.conf`（または`/etc/sysctl.d`）に`user.max_user_namespaces=28633`を追加して、`sudo sysctl --system`を実行してください。
 @z
 
@@ -383,59 +309,28 @@ testuser:231072:65536
 - `systemctl --user` does not work by default. 
   Run `dockerd-rootless.sh` directly without systemd.
 @y
-{% comment %}
-- `systemctl --user` does not work by default. 
-  Run `dockerd-rootless.sh` directly without systemd.
-{% endcomment %}
 - デフォルトでは`systemctl --user`は動作しません。
   デーモンは sysmted を使わずに直接`dockerd-rootless.sh`を起動してください。
 @z
 
 @x
-- Known to work on CentOS 7.7. Older releases require additional configuration
-  steps.
+</div>
+</div> <!-- tab-content -->
 @y
-{% comment %}
-- Known to work on CentOS 7.7. Older releases require additional configuration
-  steps.
-{% endcomment %}
-- CentOS 7.7 において動作します。
-  これより古いリリースにおいては、追加の設定手順が必要になります。
-@z
-
-@x
-- CentOS 7.6 and older releases require [COPR package `vbatts/shadow-utils-newxidmap`](https://copr.fedorainfracloud.org/coprs/vbatts/shadow-utils-newxidmap/) to be installed.
-@y
-{% comment %}
-- CentOS 7.6 and older releases require [COPR package `vbatts/shadow-utils-newxidmap`](https://copr.fedorainfracloud.org/coprs/vbatts/shadow-utils-newxidmap/) to be installed.
-{% endcomment %}
-- CentOS 7.6 やこれ以前のリリースにおいては、[COPR パッケージの`vbatts/shadow-utils-newxidmap`](https://copr.fedorainfracloud.org/coprs/vbatts/shadow-utils-newxidmap/) をインストールしていることが必要です。
-@z
-
-@x
-- CentOS 7.5 and older releases require running
-  `sudo grubby --update-kernel=ALL --args="user_namespace.enable=1"` and a reboot following this.
-@y
-{% comment %}
-- CentOS 7.5 and older releases require running
-  `sudo grubby --update-kernel=ALL --args="user_namespace.enable=1"` and a reboot following this.
-{% endcomment %}
-- CentOS 7.5 やこれ以前のリリースにおいては`sudo grubby --update-kernel=ALL --args="user_namespace.enable=1"`の実行と、その後にシステムを再起動することが必要です。
+</div>
+</div> <!-- tab-content -->
 @z
 
 @x
 ## Known limitations
 @y
-{% comment %}
-## Known limitations
-{% endcomment %}
 {: #known-limitations }
 ## 既知の制約
 @z
 
 @x
 - Only the following storage drivers are supported:
-  - `overlay2` (only on Ubuntu and Debian 10 hosts)
+  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
   - `vfs`
 - Cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](#limiting-resources).
@@ -450,25 +345,8 @@ testuser:231072:65536
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
 @y
-{% comment %}
-- Only the following storage drivers are supported:
-  - `overlay2` (only on Ubuntu and Debian 10 hosts)
-  - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
-  - `vfs`
-- Cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](#limiting-resources).
-- Following features are not supported:
-  - AppArmor
-  - Checkpoint
-  - Overlay network
-  - Exposing SCTP ports
-- To use the `ping` command, see [Routing ping packets](#routing-ping-packets).
-- To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](#exposing-privileged-ports).
-- `IPAddress` shown in `docker inspect` and is namespaced inside RootlessKit's network namespace.
-  This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
-- Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
-{% endcomment %}
 - 以下のストレージドライバーのみがサポートされます。
-  - `overlay2`（Ubuntu ホストおよび Debian 10 ホストのみ。）
+  - `overlay2`（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系および Debian 系カーネルのみ。）
   - `fuse-overlayfs`（カーネル 4.18 またはそれ以降の稼動時、そして`fuse-overlayfs`インストール時のみ。）
   - `vfs`
 - cgroup は cgroup v2 および systemd を用いて実行するときのみサポートされます。
@@ -488,69 +366,124 @@ testuser:231072:65536
 @x
 ## Install
 @y
-{% comment %}
-## Install
-{% endcomment %}
 {: #install }
 ## インストール
 @z
 
 @x
-The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
+> **Note**
+>
+> If the system-wide Docker daemon is already running, consider disabling it:
+> `$ sudo systemctl disable --now docker.service`
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#install-with-packages">With packages (RPM/DEB)</a></li>
+  <li><a data-toggle="tab" data-target="#install-without-packages">Without packages</a></li>
+</ul>
+<div class="tab-content">
 @y
-{% comment %}
-The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
-	{% endcomment %}
-[https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" } から、インストールスクリプトを入手することができます。
+> **メモ**
+>
+> If the system-wide Docker daemon is already running, consider disabling it:
+> `$ sudo systemctl disable --now docker.service`
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#install-with-packages">With packages (RPM/DEB)</a></li>
+  <li><a data-toggle="tab" data-target="#install-without-packages">Without packages</a></li>
+</ul>
+<div class="tab-content">
+@z
+
+@x
+<div id="install-with-packages" class="tab-pane fade in active" markdown="1">
+If you installed Docker 20.10 or later with [RPM/DEB packages](/engine/install), you should have `dockerd-rootless-setuptool.sh` in `/usr/bin`.
+@y
+<div id="install-with-packages" class="tab-pane fade in active" markdown="1">
+If you installed Docker 20.10 or later with [RPM/DEB packages](/engine/install), you should have `dockerd-rootless-setuptool.sh` in `/usr/bin`.
+@z
+
+@x
+Run `dockerd-rootless-setuptool.sh install` as a non-root user to set up the daemon:
+@y
+Run `dockerd-rootless-setuptool.sh install` as a non-root user to set up the daemon:
 @z
 
 @x
 ```console
-$ curl -fsSL https://get.docker.com/rootless | sh
+$ dockerd-rootless-setuptool.sh install
+[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+...
+[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
+
+export PATH=/usr/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 @y
 ```console
-$ curl -fsSL https://get.docker.com/rootless | sh
+$ dockerd-rootless-setuptool.sh install
+[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+...
+[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
+
+export PATH=/usr/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 @z
 
 @x
-Make sure to run the script as a non-root user.
-To install Rootless Docker as the root user, see the [Manual installation](#manual-installation) steps.
+If `dockerd-rootless-setuptool.sh` is not present, you may need to install the `docker-ce-rootless-extras` package manually, e.g.,
 @y
-{% comment %}
-Make sure to run the script as a non-root user.
-To install Rootless Docker as the root user, see the [Manual installation](#manual-installation) steps.
-{% endcomment %}
-スクリプトの実行は root 以外のユーザーで行います。
-Rootless Docker を root ユーザーがインストールする場合は [手動インストール](#manual-installation) の手順を参照してください。
+If `dockerd-rootless-setuptool.sh` is not present, you may need to install the `docker-ce-rootless-extras` package manually, e.g.,
 @z
 
 @x
-The script shows environment variables that are required:
+```console
+$ sudo apt-get install -y docker-ce-rootless-extras
+```
 @y
-{% comment %}
-The script shows environment variables that are required:
-{% endcomment %}
-このスクリプトを実行すると、必要となる環境変数が表示されます。
+```console
+$ sudo apt-get install -y docker-ce-rootless-extras
+```
+@z
+
+@x
+</div>
+<div id="install-without-packages" class="tab-pane fade in" markdown="1">
+@y
+</div>
+<div id="install-without-packages" class="tab-pane fade in" markdown="1">
+@z
+
+@x
+If you do not have permission to run package managers like `apt-get` and `dnf`,
+consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
+@y
+If you do not have permission to run package managers like `apt-get` and `dnf`,
+consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
 @z
 
 @x
 ```console
 $ curl -fsSL https://get.docker.com/rootless | sh
 ...
-# Docker binaries are installed in /home/testuser/bin
-# WARN: dockerd is not in your current PATH or pointing to /home/testuser/bin/dockerd
-# Make sure the following environment variables are set (or add them to ~/.bashrc):
+[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+...
+[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
 
 export PATH=/home/testuser/bin:$PATH
-export PATH=$PATH:/sbin
-export DOCKER_HOST=unix:///run/user/1001/docker.sock
-
-#
-# To control docker service run:
-# systemctl --user (start|stop|restart) docker
-#
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 @y
 <ul class="nav nav-tabs">
@@ -563,18 +496,16 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 ```console
 $ curl -fsSL https://get.docker.com/rootless | sh
 ...
-# Docker binaries are installed in /home/testuser/bin
-# WARN: dockerd is not in your current PATH or pointing to /home/testuser/bin/dockerd
-# Make sure the following environment variables are set (or add them to ~/.bashrc):
+[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+...
+[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
 
 export PATH=/home/testuser/bin:$PATH
-export PATH=$PATH:/sbin
-export DOCKER_HOST=unix:///run/user/1001/docker.sock
-
-#
-# To control docker service run:
-# systemctl --user (start|stop|restart) docker
-#
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 {% endcapture %}
 {{ original-content | markdownify }}
@@ -584,18 +515,16 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 ```console
 $ curl -fsSL https://get.docker.com/rootless | sh
 ...
-# Docker バイナリが /home/testuser/bin にインストールされました。
-# 警告: dockerd が現在の PATH にない、あるいは /home/testuser/bin/dockerd を指していません。
-# 以下の環境変数を設定してください。(あるいは ~/.bashrc に追加してください):
+[INFO] Creating /home/testuser/.config/systemd/user/docker.service
+...
+[INFO] Installed docker.service successfully.
+[INFO] To control docker.service, run: `systemctl --user (start|stop|restart) docker.service`
+[INFO] To run docker.service on system startup, run: `sudo loginctl enable-linger testuser`
+
+[INFO] Make sure the following environment variables are set (or add them to ~/.bashrc):
 
 export PATH=/home/testuser/bin:$PATH
-export PATH=$PATH:/sbin
-export DOCKER_HOST=unix:///run/user/1001/docker.sock
-
-#
-# Docker サービスは以下により制御します:
-# systemctl --user (start|stop|restart) docker
-#
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 ```
 {% endcapture %}
 {{ japanese-content | markdownify }}
@@ -604,98 +533,91 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 @z
 
 @x
-### Manual installation
+The binaries will be installed at `~/bin`.
 @y
-{% comment %}
-### Manual installation
-{% endcomment %}
-{: #manual-installation }
-### 手動インストール
+The binaries will be installed at `~/bin`.
 @z
 
 @x
-To install the binaries manually without using the installer, extract
-`docker-rootless-extras-<version>.tgz` along with `docker-<version>.tgz`
-from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" rel="noopener" class="_" }
+</div>
+</div> <!-- tab-content -->
 @y
-{% comment %}
-To install the binaries manually without using the installer, extract
-`docker-rootless-extras-<version>.tgz` along with `docker-<version>.tgz`
-from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" rel="noopener" class="_" }
-{% endcomment %}
-インストーラーを利用せずに手動でバイナリをインストールする場合は、`docker-<version>.tar.gz`とともに配布されている`docker-rootless-extras-<version>.tar.gz`を抽出します。
-これは [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" rel="noopener" class="_" } から入手します。
+</div>
+</div> <!-- tab-content -->
 @z
 
 @x
-If you already have the Docker daemon running as the root, you only need to
-extract `docker-rootless-extras-<version>.tgz`. The archive can be extracted
-under an arbitrary directory listed in the `$PATH`. For example, `/usr/local/bin`,
-or `$HOME/bin`.
+See [Troubleshooting](#troubleshooting) if you faced an error.
 @y
-{% comment %}
-If you already have the Docker daemon running as the root, you only need to
-extract `docker-rootless-extras-<version>.tgz`. The archive can be extracted
-under an arbitrary directory listed in the `$PATH`. For example, `/usr/local/bin`,
-or `$HOME/bin`.
-{% endcomment %}
-Docker デーモンをすでに root で実行している場合は、`docker-rootless-extras-<version>.tgz`を入手するだけです。
-このアーカイブを`$PATH`上のいずれかのディレクトリに伸張(解凍)します。
-たとえば`/usr/local/bin`や`$HOME/bin`などです。
+See [Troubleshooting](#troubleshooting) if you faced an error.
 @z
 
 @x
-### Nightly channel
+## Uninstall
 @y
-{% comment %}
-### Nightly channel
-{% endcomment %}
-{: #nightly-channel }
-### 最新版チャネル
+{: #uninstall }
+## アンインストール
 @z
 
 @x
-To install a nightly version of the Rootless Docker, run the installation script
-using `CHANNEL="nightly"`:
+To remove the systemd service of the Docker daemon, run `dockerd-rootless-setuptool.sh uninstall`:
 @y
-{% comment %}
-To install a nightly version of the Rootless Docker, run the installation script
-using `CHANNEL="nightly"`:
-{% endcomment %}
-Rootless Docker の最新版（Nightly）をインストールするには、インストールスクリプトにおいて`CHANNEL="nightly"`を指定します。
+To remove the systemd service of the Docker daemon, run `dockerd-rootless-setuptool.sh uninstall`:
 @z
 
 @x
 ```console
-$ curl -fsSL https://get.docker.com/rootless | CHANNEL="nightly" sh
+$ dockerd-rootless-setuptool.sh uninstall
++ systemctl --user stop docker.service
++ systemctl --user disable docker.service
+Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
+[INFO] Uninstalled docker.service
+[INFO] This uninstallation tool does NOT remove Docker binaries and data.
+[INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
 ```
 @y
 ```console
-$ curl -fsSL https://get.docker.com/rootless | CHANNEL="nightly" sh
+$ dockerd-rootless-setuptool.sh uninstall
++ systemctl --user stop docker.service
++ systemctl --user disable docker.service
+Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
+[INFO] Uninstalled docker.service
+[INFO] This uninstallation tool does NOT remove Docker binaries and data.
+[INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
 ```
 @z
 
 @x
-The raw binary archives are available at:
-- https://master.dockerproject.org/linux/x86\_64/docker-rootless-extras.tgz
-- https://master.dockerproject.org/linux/x86\_64/docker.tgz
+To remove the data directory, run `rootlesskit rm -rf ~/.local/share/docker`.
 @y
-{% comment %}
-The raw binary archives are available at:
-- https://master.dockerproject.org/linux/x86\_64/docker-rootless-extras.tgz
-- https://master.dockerproject.org/linux/x86\_64/docker.tgz
-{% endcomment %}
-実行バイナリのアーカイブは以下から入手できます。
-- https://master.dockerproject.org/linux/x86\_64/docker-rootless-extras.tgz
-- https://master.dockerproject.org/linux/x86\_64/docker.tgz
+To remove the data directory, run `rootlesskit rm -rf ~/.local/share/docker`.
+@z
+
+@x
+To remove the binaries, remove `docker-ce-rootless-extras` package if you installed Docker with package managers.
+If you installed Docker with https://get.docker.com/rootless ([Install without packages](#install)),
+remove the binary files under `~/bin`:
+@y
+To remove the binaries, remove `docker-ce-rootless-extras` package if you installed Docker with package managers.
+If you installed Docker with https://get.docker.com/rootless ([Install without packages](#install)),
+remove the binary files under `~/bin`:
+@z
+
+@x
+```console
+$ cd ~/bin
+$ rm -f containerd containerd-shim containerd-shim-runc-v2 ctr docker docker-init docker-proxy dockerd dockerd-rootless-setuptool.sh dockerd-rootless.sh rootlesskit rootlesskit-docker-proxy runc vpnkit
+```
+@y
+```console
+$ cd ~/bin
+$ rm -f containerd containerd-shim containerd-shim-runc-v2 ctr docker docker-init docker-proxy dockerd dockerd-rootless-setuptool.sh dockerd-rootless.sh rootlesskit rootlesskit-docker-proxy runc vpnkit
+```
 @z
 
 @x
 ## Usage
 @y
-{% comment %}
-## Usage
-{% endcomment %}
 {: #usage }
 ## 利用方法
 @z
@@ -703,19 +625,37 @@ The raw binary archives are available at:
 @x
 ### Daemon
 @y
-{% comment %}
-### Daemon
-{% endcomment %}
 {: #daemon }
 ### デーモン
 @z
 
 @x
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#usage-with-systemd">With systemd (Highly recommended)</a></li>
+  <li><a data-toggle="tab" data-target="#usage-without-systemd">Without systemd</a></li>
+</ul>
+<div class="tab-content">
+
+<div id="usage-with-systemd" class="tab-pane fade in active" markdown="1">
+@y
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#usage-with-systemd">With systemd (Highly recommended)</a></li>
+  <li><a data-toggle="tab" data-target="#usage-without-systemd">Without systemd</a></li>
+</ul>
+<div class="tab-content">
+
+<div id="usage-with-systemd" class="tab-pane fade in active" markdown="1">
+@z
+
+@x
+The systemd unit file is installed as  `~/.config/systemd/user/docker.service`.
+@y
+The systemd unit file is installed as  `~/.config/systemd/user/docker.service`.
+@z
+
+@x
 Use `systemctl --user` to manage the lifecycle of the daemon:
 @y
-{% comment %}
-Use `systemctl --user` to manage the lifecycle of the daemon:
-{% endcomment %}
 Use `systemctl --user` to manage the lifecycle of the daemon:
 @z
 
@@ -732,9 +672,6 @@ $ systemctl --user start docker
 @x
 To launch the daemon on system startup, enable the systemd service and lingering:
 @y
-{% comment %}
-To launch the daemon on system startup, enable the systemd service and lingering:
-{% endcomment %}
 システム起動時にデーモンを起動するには、Systemd サービスに対して linger を有効にします。
 @z
 
@@ -751,34 +688,48 @@ $ sudo loginctl enable-linger $(whoami)
 @z
 
 @x
-To run the daemon directly without systemd, you need to run
-`dockerd-rootless.sh` instead of `dockerd`:
+Starting Rootless Docker as a systemd-wide service (`/etc/systemd/system/docker.service`)
+is not supported, even with the `User=` directive.
 @y
-{% comment %}
-To run the daemon directly without systemd, you need to run
-`dockerd-rootless.sh` instead of `dockerd`:
-{% endcomment %}
-Systemd を使わずにデーモンを直接起動するには、`dockerd`の代わりに`dockerd-rootless.sh`を起動する必要があります。
+Starting Rootless Docker as a systemd-wide service (`/etc/systemd/system/docker.service`)
+is not supported, even with the `User=` directive.
 @z
 
 @x
-On Docker 19.03, you had to run `dockerd-rootless.sh` with `--experimental`.
-The `--experimental` flag is no longer needed since Docker 20.10.
+</div>
+<div id="usage-without-systemd" class="tab-pane fade in" markdown="1">
 @y
-{% comment %}
-On Docker 19.03, you had to run `dockerd-rootless.sh` with `--experimental`.
-The `--experimental` flag is no longer needed since Docker 20.10.
-{% endcomment %}
-Docker 19.03 において`dockerd-rootless.sh`を実行する際には`--experimental`の指定が必要でした。
-Docker 20.10 からは`--experimental`フラグを不要になりました。
+</div>
+<div id="usage-without-systemd" class="tab-pane fade in" markdown="1">
+@z
+
+@x
+The following environment variables must be set:
+- `$HOME`: the home directory
+- `$XDG_RUNTIME_DIR`: an ephemeral directory that is only accessible by the expected user, e,g, `~/.docker/run`.
+  The directory should be removed on every host shutdown.
+  The directory can be on tmpfs, however, should not be under `/tmp`.
+  Locating this directory under `/tmp` might be vulnerable to TOCTOU attack.
+@y
+The following environment variables must be set:
+- `$HOME`: the home directory
+- `$XDG_RUNTIME_DIR`: an ephemeral directory that is only accessible by the expected user, e,g, `~/.docker/run`.
+  The directory should be removed on every host shutdown.
+  The directory can be on tmpfs, however, should not be under `/tmp`.
+  Locating this directory under `/tmp` might be vulnerable to TOCTOU attack.
+@z
+
+@x
+</div>
+</div> <!-- tab-content -->
+@y
+</div>
+</div> <!-- tab-content -->
 @z
 
 @x
 Remarks about directory paths:
 @y
-{% comment %}
-Remarks about directory paths:
-{% endcomment %}
 ディレクトリパスについて触れておきます。
 @z
 
@@ -786,57 +737,21 @@ Remarks about directory paths:
 - The socket path is set to `$XDG_RUNTIME_DIR/docker.sock` by default.
   `$XDG_RUNTIME_DIR` is typically set to `/run/user/$UID`.
 - The data dir is set to `~/.local/share/docker` by default.
-- The exec dir is set to `$XDG_RUNTIME_DIR/docker` by default.
-- The daemon config dir is set to `~/.config/docker` (not `~/.docker`, which is
-  used by the client) by default.
+  The data dir should not be on NFS.
+- The daemon config dir is set to `~/.config/docker` by default.
+  This directory is different from `~/.docker` that is used by the client.
 @y
-{% comment %}
-- The socket path is set to `$XDG_RUNTIME_DIR/docker.sock` by default.
-  `$XDG_RUNTIME_DIR` is typically set to `/run/user/$UID`.
-- The data dir is set to `~/.local/share/docker` by default.
-- The exec dir is set to `$XDG_RUNTIME_DIR/docker` by default.
-- The daemon config dir is set to `~/.config/docker` (not `~/.docker`, which is
-  used by the client) by default.
-{% endcomment %}
 - ソケットパスはデフォルトで`$XDG_RUNTIME_DIR/docker.sock`に設定されます。
   `$XDG_RUNTIME_DIR`は通常`/run/user/$UID`に設定されます。
 - データディレクトリはデフォルトで`~/.local/share/docker`に設定されます。
-- 実行ディレクトリはデフォルトで`$XDG_RUNTIME_DIR/docker`に設定されます。
-- デーモン設定ディレクトリはデフォルトで（クライアントが利用する`~/.docker`でなく）`~/.config/docker`に設定されます。
-@z
-
-@x
-Other remarks:
-@y
-{% comment %}
-Other remarks:
-{% endcomment %}
-その他についてです。
-@z
-
-@x
-- The `dockerd-rootless.sh` script executes `dockerd` in its own user, mount,
-  and network namespaces. You can enter the namespaces by running
-  `nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`.
-- `docker info` shows `rootless` in `SecurityOptions`
-@y
-{% comment %}
-- The `dockerd-rootless.sh` script executes `dockerd` in its own user, mount,
-  and network namespaces. You can enter the namespaces by running
-  `nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`.
-- `docker info` shows `rootless` in `SecurityOptions`
-{% endcomment %}
-- `dockerd-rootless.sh`スクリプトは、これが有するユーザー、マウント、ネットワーク名前空間のもとで`dockerd`を実行します。
-  その名前空間に入るには`nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`を実行します。
-- `docker info`を実行すると`SecurityOptions`欄に`rootless`と表示されます。
+  The data dir should not be on NFS.
+- The daemon config dir is set to `~/.config/docker` by default.
+  This directory is different from `~/.docker` that is used by the client.
 @z
 
 @x
 ### Client
 @y
-{% comment %}
-### Client
-{% endcomment %}
 {: #client }
 ### クライアント
 @z
@@ -844,18 +759,12 @@ Other remarks:
 @x
 You need to specify the socket path explicitly.
 @y
-{% comment %}
-You need to specify the socket path explicitly.
-{% endcomment %}
 ソケットパスは明示的に指定する必要があります。
 @z
 
 @x
 To specify the socket path using `$DOCKER_HOST`:
 @y
-{% comment %}
-To specify the socket path using `$DOCKER_HOST`:
-{% endcomment %}
 `$DOCKER_HOST`を用いてソケットパス指定するには以下のようにします。
 @z
 
@@ -874,9 +783,6 @@ $ docker run -d -p 8080:80 nginx
 @x
 To specify the socket path using `docker context`:
 @y
-{% comment %}
-To specify the socket path using `docker context`:
-{% endcomment %}
 `docker context`を用いてソケットパスを指定するには以下のようにします。
 @z
 
@@ -905,9 +811,6 @@ $ docker run -d -p 8080:80 nginx
 @x
 ## Best practices
 @y
-{% comment %}
-## Best practices
-{% endcomment %}
 {: #best-practices }
 ## ベストプラクティス
 @z
@@ -915,9 +818,6 @@ $ docker run -d -p 8080:80 nginx
 @x
 ### Rootless Docker in Docker
 @y
-{% comment %}
-### Rootless Docker in Docker
-{% endcomment %}
 {: #rootless-docker-in-docker }
 ### Rootless Docker in Docker
 @z
@@ -926,10 +826,6 @@ $ docker run -d -p 8080:80 nginx
 To run Rootless Docker inside "rootful" Docker, use the `docker:<version>-dind-rootless`
 image instead of `docker:<version>-dind`.
 @y
-{% comment %}
-To run Rootless Docker inside "rootful" Docker, use the `docker:<version>-dind-rootless`
-image instead of `docker:<version>-dind`.
-{% endcomment %}
 「完全な root」で動作する Docker 内において Rootless Docker を起動するには、`docker:<version>-dind`イメージの代わりに`docker:<version>-dind-rootless`イメージを利用します。
 @z
 
@@ -948,40 +844,13 @@ The `docker:<version>-dind-rootless` image runs as a non-root user (UID 1000).
 However, `--privileged` is required for disabling seccomp, AppArmor, and mount
 masks.
 @y
-{% comment %}
-The `docker:<version>-dind-rootless` image runs as a non-root user (UID 1000).
-However, `--privileged` is required for disabling seccomp, AppArmor, and mount
-masks.
-{% endcomment %}
 `docker:<version>-dind-rootless`イメージは非 root ユーザー（UID 1000）により動作します。
 ただし seccomp、AppArmor、マウントマスクを無効化するには`--privileged`の指定が必要です。
 @z
 
 @x
-To run Docker 19.03 in Docker, the `--experimental` flag is needed:
-@y
-{% comment %}
-To run Docker 19.03 in Docker, the `--experimental` flag is needed:
-{% endcomment %}
-Docker 19.03 においては`--experimental`フラグの指定が必要です。
-@z
-
-@x
-```console
-$ docker run -d --name dind-rootless --privileged docker:19.03-dind-rootless --experimental
-```
-@y
-```console
-$ docker run -d --name dind-rootless --privileged docker:19.03-dind-rootless --experimental
-```
-@z
-
-@x
 ### Expose Docker API socket through TCP
 @y
-{% comment %}
-### Expose Docker API socket through TCP
-{% endcomment %}
 {: #expose-docker-api-socket-through-tcp }
 ### TCP を通じた Docker API ソケットの公開
 @z
@@ -990,24 +859,20 @@ $ docker run -d --name dind-rootless --privileged docker:19.03-dind-rootless --e
 To expose the Docker API socket through TCP, you need to launch `dockerd-rootless.sh`
 with `DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"`.
 @y
-{% comment %}
-To expose the Docker API socket through TCP, you need to launch `dockerd-rootless.sh`
-with `DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"`.
-{% endcomment %}
 TCP を通じて Docker API ソケットを公開するには、`dockerd-rootless.sh`の実行にあたって`DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"`を指定する必要があります。
 @z
 
 @x
 ```console
 $ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
-  dockerd-rootless.sh --experimental \
+  dockerd-rootless.sh \
   -H tcp://0.0.0.0:2376 \
   --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem
 ```
 @y
 ```console
 $ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
-  dockerd-rootless.sh --experimental \
+  dockerd-rootless.sh \
   -H tcp://0.0.0.0:2376 \
   --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem
 ```
@@ -1016,9 +881,6 @@ $ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
 @x
 ### Expose Docker API socket through SSH
 @y
-{% comment %}
-### Expose Docker API socket through SSH
-{% endcomment %}
 {: #expose-docker-api-socket-through-ssh }
 ### SSH を通じた Docker API ソケットの公開
 @z
@@ -1027,10 +889,6 @@ $ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
 To expose the Docker API socket through SSH, you need to make sure `$DOCKER_HOST`
 is set on the remote host.
 @y
-{% comment %}
-To expose the Docker API socket through SSH, you need to make sure `$DOCKER_HOST`
-is set on the remote host.
-{% endcomment %}
 SSH を通じて Docker API ソケットを公開するには、リモートホスト上において`$DOCKER_HOST`を設定することが必要です。
 @z
 
@@ -1051,9 +909,6 @@ $ docker -H ssh://<REMOTEUSER>@<REMOTEHOST> run ...
 @x
 ### Routing ping packets
 @y
-{% comment %}
-### Routing ping packets
-{% endcomment %}
 {: #routing-ping-packets }
 ### ping パケットのルーティング
 @z
@@ -1061,9 +916,6 @@ $ docker -H ssh://<REMOTEUSER>@<REMOTEHOST> run ...
 @x
 On some distributions, `ping` does not work by default.
 @y
-{% comment %}
-On some distributions, `ping` does not work by default.
-{% endcomment %}
 ディストリビューションの中には、デフォルトで`ping`が動作しないものがあります。
 @z
 
@@ -1071,19 +923,12 @@ On some distributions, `ping` does not work by default.
 Add `net.ipv4.ping_group_range = 0   2147483647` to `/etc/sysctl.conf` (or
 `/etc/sysctl.d`) and run `sudo sysctl --system` to allow using `ping`.
 @y
-{% comment %}
-Add `net.ipv4.ping_group_range = 0   2147483647` to `/etc/sysctl.conf` (or
-`/etc/sysctl.d`) and run `sudo sysctl --system` to allow using `ping`.
-{% endcomment %}
 `ping`を利用するためには`/etc/sysctl.conf`に（あるいは`/etc/sysctl.d`に）`net.ipv4.ping_group_range = 0   2147483647`を追加して`sudo sysctl --system`を実行します。
 @z
 
 @x
 ### Exposing privileged ports
 @y
-{% comment %}
-### Exposing privileged ports
-{% endcomment %}
 {: #exposing-privileged-ports }
 ### 特権ポートの公開
 @z
@@ -1091,9 +936,6 @@ Add `net.ipv4.ping_group_range = 0   2147483647` to `/etc/sysctl.conf` (or
 @x
 To expose privileged ports (< 1024), set `CAP_NET_BIND_SERVICE` on `rootlesskit` binary.
 @y
-{% comment %}
-To expose privileged ports (< 1024), set `CAP_NET_BIND_SERVICE` on `rootlesskit` binary.
-{% endcomment %}
 特権ポート（1024 未満）を公開するには、`rootlesskit`バイナリに対して`CAP_NET_BIND_SERVICE`を設定します。
 @z
 
@@ -1111,19 +953,12 @@ $ sudo setcap cap_net_bind_service=ep $HOME/bin/rootlesskit
 Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 `/etc/sysctl.d`) and run `sudo sysctl --system`.
 @y
-{% comment %}
-Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
-`/etc/sysctl.d`) and run `sudo sysctl --system`.
-{% endcomment %}
 または`/etc/sysctl.conf`（あるいは`/etc/sysctl.d`）に`net.ipv4.ip_unprivileged_port_start=0`を追加して`sudo sysctl --system`を実行します。
 @z
 
 @x
 ### Limiting resources
 @y
-{% comment %}
-### Limiting resources
-{% endcomment %}
 {: #limiting-resources }
 ### リソースの利用制限
 @z
@@ -1133,11 +968,6 @@ Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--m
 is supported only when running with cgroup v2 and systemd.
 See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
 @y
-{% comment %}
-Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
-is supported only when running with cgroup v2 and systemd.
-See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
-{% endcomment %}
 Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
 is supported only when running with cgroup v2 and systemd.
 See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
@@ -1148,11 +978,6 @@ If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfi
 When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.
 See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for workarounds.
 @y
-{% comment %}
-If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfied.
-When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.
-See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for workarounds.
-{% endcomment %}
 If `docker info` shows `none` as `Cgroup Driver`, the conditions are not satisfied.
 When these conditions are not satisfied, rootless mode ignores the cgroup-related `docker run` flags.
 See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for workarounds.
@@ -1162,10 +987,6 @@ See [Limiting resources without cgroup](#limiting-resources-without-cgroup) for 
 If `docker info` shows `systemd` as `Cgroup Driver`, the conditions are satisfied.
 However, typically, only `memory` and `pids` controllers are delegated to non-root users by default.
 @y
-{% comment %}
-If `docker info` shows `systemd` as `Cgroup Driver`, the conditions are satisfied.
-However, typically, only `memory` and `pids` controllers are delegated to non-root users by default.
-{% endcomment %}
 If `docker info` shows `systemd` as `Cgroup Driver`, the conditions are satisfied.
 However, typically, only `memory` and `pids` controllers are delegated to non-root users by default.
 @z
@@ -1185,9 +1006,6 @@ memory pids
 @x
 To allow delegation of all controllers, you need to change the systemd configuration as follows:
 @y
-{% comment %}
-To allow delegation of all controllers, you need to change the systemd configuration as follows:
-{% endcomment %}
 To allow delegation of all controllers, you need to change the systemd configuration as follows:
 @z
 
@@ -1216,11 +1034,6 @@ EOF
 >
 > Delegating `cpuset` requires systemd 244 or later.
 @y
-{% comment %}
-> **Note**
->
-> Delegating `cpuset` requires systemd 244 or later.
-{% endcomment %}
 > **メモ**
 >
 > `cpuset`のデリゲートには systemd 244 またはそれ以降が必要です。
@@ -1245,9 +1058,6 @@ and can be arbitrarily disabled by the container process.
 @x
 For example:
 @y
-{% comment %}
-For example:
-{% endcomment %}
 たとえば以下です。
 @z
 
@@ -1257,12 +1067,6 @@ For example:
 - To limit max VSZ to 64MiB (similar to `docker run --memory 64m`):
   `docker run <IMAGE> sh -c "ulimit -v 65536; <COMMAND>"`
 @y
-{% comment %}
-- To limit CPU usage to 0.5 cores (similar to `docker run --cpus 0.5`):
-  `docker run <IMAGE> cpulimit --limit=50 --include-children <COMMAND>`
-- To limit max VSZ to 64MiB (similar to `docker run --memory 64m`):
-  `docker run <IMAGE> sh -c "ulimit -v 65536; <COMMAND>"`
-{% endcomment %}
 - （`docker run --cpus 0.5`と同じように）CPU 利用量を 0.5 コアに制限するには、`docker run <IMAGE> cpulimit --limit=50 --include-children <COMMAND>` を実行します。
 - （`docker run --memory 64m`と同じように）VSZ の最大値を 64 MiB に制限するには、`docker run <IMAGE> sh -c "ulimit -v 65536; <COMMAND>"`を実行します。
 @z
@@ -1272,69 +1076,12 @@ For example:
   (similar to `docker run --pids-limit=100`):
   `docker run --user 2000 --ulimit nproc=100 <IMAGE> <COMMAND>`
 @y
-{% comment %}
-- To limit max number of processes to 100 per namespaced UID 2000
-  (similar to `docker run --pids-limit=100`):
-  `docker run --user 2000 --ulimit nproc=100 <IMAGE> <COMMAND>`
-{% endcomment %}
 - （`docker run --pids-limit=100`と同じように）最大プロセス数を UID 2000 の名前空間ごとに 100 とするには`docker run --user 2000 --ulimit nproc=100 <IMAGE> <COMMAND>`を実行します。
 @z
 
 @x
-### Changing the network stack
-@y
-{% comment %}
-### Changing the network stack
-{% endcomment %}
-{: #changing-the-network-stack }
-### ネットワーク関連ソフトウェアの変更
-@z
-
-@x
-`dockerd-rootless.sh` uses [slirp4netns](https://github.com/rootless-containers/slirp4netns)
-(if installed) or [VPNKit](https://github.com/moby/vpnkit) as the network stack
-by default.
-@y
-{% comment %}
-`dockerd-rootless.sh` uses [slirp4netns](https://github.com/rootless-containers/slirp4netns)
-(if installed) or [VPNKit](https://github.com/moby/vpnkit) as the network stack
-by default.
-{% endcomment %}
-`dockerd-rootless.sh`では、ネットワーク関連ソフトウェアとしてデフォルトで [slirp4netns](https://github.com/rootless-containers/slirp4netns)（インストール時）または [VPNKit](https://github.com/moby/vpnkit) を利用します。
-@z
-
-@x
-These network stacks run in userspace and might have performance overhead.
-See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#network-drivers) for further information.
-@y
-{% comment %}
-These network stacks run in userspace and might have performance overhead.
-See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#network-drivers) for further information.
-{% endcomment %}
-このネットワークソフトウエアはユーザー空間内で動作するため、性能オーバーヘッドを招く場合があります。
-より詳しくは [RootlessKit ドキュメント](https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#network-drivers) を参照してください。
-@z
-
-@x
-Optionally, you can use `lxc-user-nic` instead for the best performance.
-To use `lxc-user-nic`, you need to edit [`/etc/lxc/lxc-usernet`](https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#--netlxc-user-nic-experimental)
-and set `$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic`.
-@y
-{% comment %}
-Optionally, you can use `lxc-user-nic` instead for the best performance.
-To use `lxc-user-nic`, you need to edit [`/etc/lxc/lxc-usernet`](https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#--netlxc-user-nic-experimental)
-and set `$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic`.
-{% endcomment %}
-最適な性能を得るために、上の代わりに`lxc-user-nic`を利用することもできます。
-`lxc-user-nic`を利用するには[`/etc/lxc/lxc-usernet`](https://github.com/rootless-containers/rootlesskit/tree/v0.9.5#--netlxc-user-nic-experimental) を編集し`$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic`を設定する必要があります。
-@z
-
-@x
 ## Troubleshooting
 @y
-{% comment %}
-## Troubleshooting
-{% endcomment %}
 {: #troubleshooting }
 ## トラブルシューティング
 @z
@@ -1342,27 +1089,18 @@ and set `$DOCKERD_ROOTLESS_ROOTLESSKIT_NET=lxc-user-nic`.
 @x
 ### Errors when starting the Docker daemon
 @y
-{% comment %}
-### Errors when starting the Docker daemon
-{% endcomment %}
 ### Errors when starting the Docker daemon
 @z
 
 @x
 **[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
 @y
-{% comment %}
-**[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
-{% endcomment %}
 **[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
 @z
 
 @x
 This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone ` is set to 0:
 @y
-{% comment %}
-This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone ` is set to 0:
-{% endcomment %}
 This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone ` is set to 0:
 @z
 
@@ -1382,10 +1120,6 @@ $ cat /proc/sys/kernel/unprivileged_userns_clone
 To fix this issue, add  `kernel.unprivileged_userns_clone=1` to
 `/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
 @y
-{% comment %}
-To fix this issue, add  `kernel.unprivileged_userns_clone=1` to
-`/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
-{% endcomment %}
 To fix this issue, add  `kernel.unprivileged_userns_clone=1` to
 `/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
 @z
@@ -1393,18 +1127,12 @@ To fix this issue, add  `kernel.unprivileged_userns_clone=1` to
 @x
 **[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: no space left on device**
 @y
-{% comment %}
-**[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: no space left on device**
-{% endcomment %}
 **[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: no space left on device**
 @z
 
 @x
 This error occurs mostly when the value of `/proc/sys/user/max_user_namespaces` is too small:
 @y
-{% comment %}
-This error occurs mostly when the value of `/proc/sys/user/max_user_namespaces` is too small:
-{% endcomment %}
 This error occurs mostly when the value of `/proc/sys/user/max_user_namespaces` is too small:
 @z
 
@@ -1424,10 +1152,6 @@ $ cat /proc/sys/user/max_user_namespaces
 To fix this issue, add  `user.max_user_namespaces=28633` to
 `/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
 @y
-{% comment %}
-To fix this issue, add  `user.max_user_namespaces=28633` to
-`/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
-{% endcomment %}
 To fix this issue, add  `user.max_user_namespaces=28633` to
 `/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
 @z
@@ -1435,45 +1159,30 @@ To fix this issue, add  `user.max_user_namespaces=28633` to
 @x
 **[rootlesskit:parent] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1001 ("testuser")**
 @y
-{% comment %}
-**[rootlesskit:parent] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1001 ("testuser")**
-{% endcomment %}
 **[rootlesskit:parent] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1001 ("testuser")**
 @z
 
 @x
 This error occurs when `/etc/subuid` and `/etc/subgid` are not configured. See [Prerequisites](#prerequisites).
 @y
-{% comment %}
-This error occurs when `/etc/subuid` and `/etc/subgid` are not configured. See [Prerequisites](#prerequisites).
-{% endcomment %}
 This error occurs when `/etc/subuid` and `/etc/subgid` are not configured. See [Prerequisites](#prerequisites).
 @z
 
 @x
 **could not get XDG_RUNTIME_DIR**
 @y
-{% comment %}
-**could not get XDG_RUNTIME_DIR**
-{% endcomment %}
 **could not get XDG_RUNTIME_DIR**
 @z
 
 @x
 This error occurs when `$XDG_RUNTIME_DIR` is not set.
 @y
-{% comment %}
-This error occurs when `$XDG_RUNTIME_DIR` is not set.
-{% endcomment %}
 This error occurs when `$XDG_RUNTIME_DIR` is not set.
 @z
 
 @x
 On a non-systemd host, you need to create a directory and then set the path:
 @y
-{% comment %}
-On a non-systemd host, you need to create a directory and then set the path:
-{% endcomment %}
 On a non-systemd host, you need to create a directory and then set the path:
 @z
 
@@ -1497,10 +1206,6 @@ $ dockerd-rootless.sh
 > **Note**:
 > You must remove the directory every time you log out.
 @y
-{% comment %}
-> **Note**:
-> You must remove the directory every time you log out.
-{% endcomment %}
 > **Note**:
 > You must remove the directory every time you log out.
 @z
@@ -1509,10 +1214,6 @@ $ dockerd-rootless.sh
 On a systemd host, log into the host using `pam_systemd` (see below).
 The value is automatically set to `/run/user/$UID` and cleaned up on every logout.
 @y
-{% comment %}
-On a systemd host, log into the host using `pam_systemd` (see below).
-The value is automatically set to `/run/user/$UID` and cleaned up on every logout.
-{% endcomment %}
 On a systemd host, log into the host using `pam_systemd` (see below).
 The value is automatically set to `/run/user/$UID` and cleaned up on every logout.
 @z
@@ -1520,18 +1221,12 @@ The value is automatically set to `/run/user/$UID` and cleaned up on every logou
 @x
 **`systemctl --user` fails with "Failed to connect to bus: No such file or directory"**
 @y
-{% comment %}
-**`systemctl --user` fails with "Failed to connect to bus: No such file or directory"**
-{% endcomment %}
 **`systemctl --user` fails with "Failed to connect to bus: No such file or directory"**
 @z
 
 @x
 This error occurs mostly when you switch from the root user to an non-root user with `sudo`:
 @y
-{% comment %}
-This error occurs mostly when you switch from the root user to an non-root user with `sudo`:
-{% endcomment %}
 This error occurs mostly when you switch from the root user to an non-root user with `sudo`:
 @z
 
@@ -1552,9 +1247,6 @@ Failed to connect to bus: No such file or directory
 @x
 Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For example:
 @y
-{% comment %}
-Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For example:
-{% endcomment %}
 Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For example:
 @z
 
@@ -1563,11 +1255,6 @@ Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For ex
 - `ssh <USERNAME>@localhost`
 - `machinectl shell <USERNAME>@`
 @y
-{% comment %}
-- Log in through the graphic console
-- `ssh <USERNAME>@localhost`
-- `machinectl shell <USERNAME>@`
-{% endcomment %}
 - Log in through the graphic console
 - `ssh <USERNAME>@localhost`
 - `machinectl shell <USERNAME>@`
@@ -1576,9 +1263,6 @@ Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For ex
 @x
 **The daemon does not start up automatically**
 @y
-{% comment %}
-**The daemon does not start up automatically**
-{% endcomment %}
 **The daemon does not start up automatically**
 @z
 
@@ -1586,59 +1270,53 @@ Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For ex
 You need `sudo loginctl enable-linger $(whoami)` to enable the daemon to start
 up automatically. See [Usage](#usage).
 @y
-{% comment %}
-You need `sudo loginctl enable-linger $(whoami)` to enable the daemon to start
-up automatically. See [Usage](#usage).
-{% endcomment %}
 You need `sudo loginctl enable-linger $(whoami)` to enable the daemon to start
 up automatically. See [Usage](#usage).
 @z
 
 @x
-**`dockerd` fails with "rootless mode is supported only when running in experimental mode"**
+**iptables failed: iptables -t nat -N DOCKER: Fatal: can't open lock file /run/xtables.lock: Permission denied**
 @y
-{% comment %}
-**`dockerd` fails with "rootless mode is supported only when running in experimental mode"**
-{% endcomment %}
-**`dockerd` fails with "rootless mode is supported only when running in experimental mode"**
+**iptables failed: iptables -t nat -N DOCKER: Fatal: can't open lock file /run/xtables.lock: Permission denied**
 @z
 
 @x
-This error occurs when the daemon is launched without the `--experimental` flag on Docker 19.03.
-See [Usage](#usage).
+This error may happen when SELinux is enabled on the host.
 @y
-{% comment %}
-This error occurs when the daemon is launched without the `--experimental` flag on Docker 19.03.
-See [Usage](#usage).
-{% endcomment %}
-This error occurs when the daemon is launched without the `--experimental` flag on Docker 19.03.
-See [Usage](#usage).
+This error may happen when SELinux is enabled on the host.
 @z
 
 @x
-The `--experimental` flag is no longer needed since Docker 20.10.
+A known workaround is to run the following commands to disable SELinux for `iptables`:
 @y
-{% comment %}
-The `--experimental` flag is no longer needed since Docker 20.10.
-{% endcomment %}
-`--experimental`フラグは Docker 20.10 からは不要になりました。
+A known workaround is to run the following commands to disable SELinux for `iptables`:
+@z
+
+@x
+```console
+$ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t
+```
+@y
+```console
+$ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t
+```
+@z
+
+@x
+This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
+@y
+This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
 @z
 
 @x
 ### `docker pull` errors
 @y
-{% comment %}
-### `docker pull` errors
-{% endcomment %}
 ### `docker pull` errors
 @z
 
 @x
 **docker: failed to register layer: Error processing tar file(exit status 1): lchown &lt;FILE&gt;: invalid argument**
 @y
-{% comment %}
-**docker: failed to register layer: Error processing tar file(exit status 1): lchown &lt;FILE&gt;: invalid argument**
-{% endcomment %}
 **docker: failed to register layer: Error processing tar file(exit status 1): lchown &lt;FILE&gt;: invalid argument**
 @z
 
@@ -1648,12 +1326,6 @@ This error occurs when the number of available entries in `/etc/subuid` or
 images. However, 65,536 entries are sufficient for most images. See
 [Prerequisites](#prerequisites).
 @y
-{% comment %}
-This error occurs when the number of available entries in `/etc/subuid` or
-`/etc/subgid` is not sufficient. The number of entries required vary across
-images. However, 65,536 entries are sufficient for most images. See
-[Prerequisites](#prerequisites).
-{% endcomment %}
 This error occurs when the number of available entries in `/etc/subuid` or
 `/etc/subgid` is not sufficient. The number of entries required vary across
 images. However, 65,536 entries are sufficient for most images. See
@@ -1661,20 +1333,42 @@ images. However, 65,536 entries are sufficient for most images. See
 @z
 
 @x
+**docker: failed to register layer: ApplyLayer exit status 1 stdout:  stderr: lchown &lt;FILE&gt;: operation not permitted**
+@y
+**docker: failed to register layer: ApplyLayer exit status 1 stdout:  stderr: lchown &lt;FILE&gt;: operation not permitted**
+@z
+
+@x
+This error occurs mostly when `~/.local/share/docker` is located on NFS.
+@y
+This error occurs mostly when `~/.local/share/docker` is located on NFS.
+@z
+
+@x
+A workaround is to specify non-NFS `data-root` directory in `~/.config/docker/daemon.json` as follows:
+@y
+A workaround is to specify non-NFS `data-root` directory in `~/.config/docker/daemon.json` as follows:
+@z
+
+@x
+```json
+{"data-root":"/somewhere-out-of-nfs"}
+```
+@y
+```json
+{"data-root":"/somewhere-out-of-nfs"}
+```
+@z
+
+@x
 ### `docker run` errors
 @y
-{% comment %}
-### `docker run` errors
-{% endcomment %}
 ### `docker run` errors
 @z
 
 @x
 **`--cpus`, `--memory`, and `--pids-limit` are ignored**
 @y
-{% comment %}
-**`--cpus`, `--memory`, and `--pids-limit` are ignored**
-{% endcomment %}
 **`--cpus`, `--memory`, and `--pids-limit` are ignored**
 @z
 
@@ -1683,64 +1377,26 @@ This is an expected behavior on cgroup v1 mode.
 To use these flags, the host needs to be configured for enabling cgroup v2.
 For more information, see [Limiting resources](#limiting-resources).
 @y
-{% comment %}
 This is an expected behavior on cgroup v1 mode.
 To use these flags, the host needs to be configured for enabling cgroup v2.
 For more information, see [Limiting resources](#limiting-resources).
-{% endcomment %}
-This is an expected behavior on cgroup v1 mode.
-To use these flags, the host needs to be configured for enabling cgroup v2.
-For more information, see [Limiting resources](#limiting-resources).
-@z
-
-@x
-**Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.**
-@y
-{% comment %}
-**Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.**
-{% endcomment %}
-**Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.**
-@z
-
-@x
-This error occurs mostly when the host is running in cgroup v2. See the section
-[Fedora 31 or later](#fedora-31-or-later) for information on switching the host
-to use cgroup v1.
-@y
-{% comment %}
-This error occurs mostly when the host is running in cgroup v2. See the section
-[Fedora 31 or later](#fedora-31-or-later) for information on switching the host
-to use cgroup v1.
-{% endcomment %}
-This error occurs mostly when the host is running in cgroup v2. See the section
-[Fedora 31 or later](#fedora-31-or-later) for information on switching the host
-to use cgroup v1.
 @z
 
 @x
 ### Networking errors
 @y
-{% comment %}
-### Networking errors
-{% endcomment %}
 ### Networking errors
 @z
 
 @x
 **`docker run -p` fails with `cannot expose privileged port`**
 @y
-{% comment %}
-**`docker run -p` fails with `cannot expose privileged port`**
-{% endcomment %}
 **`docker run -p` fails with `cannot expose privileged port`**
 @z
 
 @x
 `docker run -p` fails with this error when a privileged port (< 1024) is specified as the host port.
 @y
-{% comment %}
-`docker run -p` fails with this error when a privileged port (< 1024) is specified as the host port.
-{% endcomment %}
 `docker run -p` fails with this error when a privileged port (< 1024) is specified as the host port.
 @z
 
@@ -1759,9 +1415,6 @@ docker: Error response from daemon: driver failed programming external connectiv
 @x
 When you experience this error, consider using an unprivileged port instead. For example, 8080 instead of 80.
 @y
-{% comment %}
-When you experience this error, consider using an unprivileged port instead. For example, 8080 instead of 80.
-{% endcomment %}
 When you experience this error, consider using an unprivileged port instead. For example, 8080 instead of 80.
 @z
 
@@ -1778,27 +1431,18 @@ $ docker run -p 8080:80 nginx:alpine
 @x
 To allow exposing privileged ports, see [Exposing privileged ports](#exposing-privileged-ports).
 @y
-{% comment %}
-To allow exposing privileged ports, see [Exposing privileged ports](#exposing-privileged-ports).
-{% endcomment %}
 To allow exposing privileged ports, see [Exposing privileged ports](#exposing-privileged-ports).
 @z
 
 @x
 **ping doesn't work**
 @y
-{% comment %}
-**ping doesn't work**
-{% endcomment %}
 **ping doesn't work**
 @z
 
 @x
 Ping does not work when `/proc/sys/net/ipv4/ping_group_range` is set to `1 0`:
 @y
-{% comment %}
-Ping does not work when `/proc/sys/net/ipv4/ping_group_range` is set to `1 0`:
-{% endcomment %}
 Ping does not work when `/proc/sys/net/ipv4/ping_group_range` is set to `1 0`:
 @z
 
@@ -1817,18 +1461,12 @@ $ cat /proc/sys/net/ipv4/ping_group_range
 @x
 For details, see [Routing ping packets](#routing-ping-packets).
 @y
-{% comment %}
-For details, see [Routing ping packets](#routing-ping-packets).
-{% endcomment %}
 For details, see [Routing ping packets](#routing-ping-packets).
 @z
 
 @x
 **`IPAddress` shown in `docker inspect` is unreachable**
 @y
-{% comment %}
-**`IPAddress` shown in `docker inspect` is unreachable**
-{% endcomment %}
 **`IPAddress` shown in `docker inspect` is unreachable**
 @z
 
@@ -1836,10 +1474,6 @@ For details, see [Routing ping packets](#routing-ping-packets).
 This is an expected behavior, as the daemon is namespaced inside RootlessKit's
 network namespace. Use `docker run -p` instead.
 @y
-{% comment %}
-This is an expected behavior, as the daemon is namespaced inside RootlessKit's
-network namespace. Use `docker run -p` instead.
-{% endcomment %}
 This is an expected behavior, as the daemon is namespaced inside RootlessKit's
 network namespace. Use `docker run -p` instead.
 @z
@@ -1847,9 +1481,6 @@ network namespace. Use `docker run -p` instead.
 @x
 **`--net=host` doesn't listen ports on the host network namespace**
 @y
-{% comment %}
-**`--net=host` doesn't listen ports on the host network namespace**
-{% endcomment %}
 **`--net=host` doesn't listen ports on the host network namespace**
 @z
 
@@ -1857,10 +1488,92 @@ network namespace. Use `docker run -p` instead.
 This is an expected behavior, as the daemon is namespaced inside RootlessKit's
 network namespace. Use `docker run -p` instead.
 @y
-{% comment %}
 This is an expected behavior, as the daemon is namespaced inside RootlessKit's
 network namespace. Use `docker run -p` instead.
-{% endcomment %}
-This is an expected behavior, as the daemon is namespaced inside RootlessKit's
-network namespace. Use `docker run -p` instead.
+@z
+
+@x
+**Network is slow**
+@y
+**Network is slow**
+@z
+
+@x
+Docker with rootless mode uses [slirp4netns](https://github.com/rootless-containers/slirp4netns) as the default network stack if slirp4netns v0.4.0 or later is installed.
+If slirp4netns is not installed, Docker falls back to [VPNKit](https://github.com/moby/vpnkit).
+@y
+Docker with rootless mode uses [slirp4netns](https://github.com/rootless-containers/slirp4netns) as the default network stack if slirp4netns v0.4.0 or later is installed.
+If slirp4netns is not installed, Docker falls back to [VPNKit](https://github.com/moby/vpnkit).
+@z
+
+@x
+Installing slirp4netns may improve the network throughput.
+See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#network-drivers) for the benchmark result.
+@y
+Installing slirp4netns may improve the network throughput.
+See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#network-drivers) for the benchmark result.
+@z
+
+@x
+Also, changing MTU value may improve the throughput.
+The MTU value can be specified by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"`
+to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+@y
+Also, changing MTU value may improve the throughput.
+The MTU value can be specified by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"`
+to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+@z
+
+@x
+**`docker run -p` does not propagate source IP addresses**
+@y
+**`docker run -p` does not propagate source IP addresses**
+@z
+
+@x
+This is because Docker with rootless mode uses RootlessKit's builtin port driver by default.
+@y
+@z
+
+@x
+The source IP addresses can be propagated by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"`
+to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+@y
+The source IP addresses can be propagated by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"`
+to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+@z
+
+@x
+Note that this configuration decreases throughput.
+See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#port-drivers) for the benchmark result.
+@y
+Note that this configuration decreases throughput.
+See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#port-drivers) for the benchmark result.
+@z
+
+@x
+### Tips for debugging
+@y
+{: #tips-for-debugging }
+### Tips for debugging
+@z
+
+@x
+**Entering into `dockerd` namespaces**
+@y
+**Entering into `dockerd` namespaces**
+@z
+
+@x
+The `dockerd-rootless.sh` script executes `dockerd` in its own user, mount, and network namespaces.
+@y
+The `dockerd-rootless.sh` script executes `dockerd` in its own user, mount, and network namespaces.
+@z
+
+@x
+For debugging, you can enter the namespaces by running
+`nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`.
+@y
+For debugging, you can enter the namespaces by running
+`nsenter -U --preserve-credentials -n -m -t $(cat $XDG_RUNTIME_DIR/docker.pid)`.
 @z

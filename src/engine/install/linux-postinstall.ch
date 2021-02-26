@@ -76,14 +76,10 @@ Docker デーモンが起動したときに生成される Unix ソケットは�
 >
 > To run Docker without root privileges, see
 > [Run the Docker daemon as a non-root user (Rootless mode)](../security/rootless.md).
->
-> Rootless mode is currently available as an experimental feature.
 @y
-> **メモ**:
+> **メモ**
 >
 > ルート権限なしに Docker をインストールする場合は [非ルートユーザーとして Docker デーモンを起動する (rootless モード)](../security/rootless.md) を参照してください。
->
-> rootless モードは現時点では、試験的機能として利用できます。
 @z
 
 @x
