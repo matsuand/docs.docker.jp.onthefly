@@ -93,7 +93,7 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
 - The HTTP proxy is not enabled.
 @y
 - HTTP プロキシーは利用できません。
-@x
+@z
 
 @x
 - Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
