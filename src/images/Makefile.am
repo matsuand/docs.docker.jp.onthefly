@@ -62,6 +62,7 @@ images = \
 	icon-ucp@2X.png \
 	icon-windows@2X.png \
 	important-admonition-example.png \
+	language-guides.svg \
 	laptop.svg \
 	linux_48.svg \
 	linuxn_48.svg \
