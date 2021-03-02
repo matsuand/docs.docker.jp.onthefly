@@ -47,17 +47,114 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop Community 3.1.0
+## Docker Desktop 3.2.0
+2021-03-01
+@y
+## Docker Desktop 3.2.0
+2021-03-01
+@z
+
+@x
+> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+@y
+> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+- The Docker Dashboard opens automatically when you start Docker Desktop.
+- The Docker Dashboard displays a tip once a week.
+- Docker Desktop uses iTerm2 to launch the container's terminal if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
+- Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
+@y
+- Docker Desktop 起動時に、自動的に Docker Dashboard を開くようにしました。
+- Docker Dashboard では 1 週間に 1 回、ヒント（tip）を表示するようにしました。
+- iTerm2 がインストールされている場合 Docker Desktop はコンテナー画面として iTerm2 を開くようにしました。
+  それ以外の場合はデフォルトの Terminal アプリを起動します。
+  [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
+- 新しい Apple 仮想フレームワークを利用した試験的サポートを追加しました。
+  （macOS Big Sur 11.1 またはそれ以降を必要とします。）
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine 20.10.3](https://docs.docker.com/engine/release-notes/#20103)
+- [Docker Compose 1.28.5](https://github.com/docker/compose/releases/tag/1.28.5)
+- [Compose CLI v1.0.9](https://github.com/docker/compose-cli/tree/v1.0.9)
+- [Docker Hub Tool v0.3.0](https://github.com/docker/hub-tool/releases/tag/v0.3.0)
+- [QEMU 5.0.1](https://wiki.qemu.org/ChangeLog/5.0)
+- [Amazon ECR Credential Helper v0.5.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.5.0)
+- [Alpine 3.13](https://alpinelinux.org/posts/Alpine-3.13.0-released.html)
+- [Kubernetes 1.19.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.7)
+- [Go 1.16](https://golang.org/doc/go1.16)
+@y
+- [Docker Engine 20.10.3](https://docs.docker.com/engine/release-notes/#20103)
+- [Docker Compose 1.28.5](https://github.com/docker/compose/releases/tag/1.28.5)
+- [Compose CLI v1.0.9](https://github.com/docker/compose-cli/tree/v1.0.9)
+- [Docker Hub Tool v0.3.0](https://github.com/docker/hub-tool/releases/tag/v0.3.0)
+- [QEMU 5.0.1](https://wiki.qemu.org/ChangeLog/5.0)
+- [Amazon ECR Credential Helper v0.5.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.5.0)
+- [Alpine 3.13](https://alpinelinux.org/posts/Alpine-3.13.0-released.html)
+- [Kubernetes 1.19.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.7)
+- [Go 1.16](https://golang.org/doc/go1.16)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue on the container detail screen where the buttons would disappear when scrolling the logs. Fixes [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290)
+- Fixed an issue when port forwarding multiple ports with an IPv6 container network. Fixes [docker/for-mac#5247](https://github.com/docker/for-mac/issues/5247)
+- Fixed a regression where `docker load` could not use an xz archive anymore. Fixes [docker/for-mac#5271](https://github.com/docker/for-mac/issues/5271)
+- Fixed a navigation issue in the **Containers / Apps** view. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160#issuecomment-764660660)
+- Fixed container instance view with long container/image name. Fixes [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290)
+- Fixed an issue when binding ports on specific IPs. Note: It may now take a bit of time before the `docker inspect` command shows the open ports. Fixes [docker/for-mac#4541](https://github.com/docker/for-mac/issues/4541)
+- Fixed an issue where an image deleted from the Docker dashboard was still displayed on the **Images** view.
+@y
+- コンテナーの詳細表示画面において、ログをスクロールするとボタンが消失してしまう問題を修正しました。
+  [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290) を Fix に。
+- IPv6 によるコンテナーネットワークにおいて、複数ポートに向けてのポートフォワーディングが行われる際の問題を修正しました。
+  [docker/for-mac#5247](https://github.com/docker/for-mac/issues/5247) を Fix に。
+- `docker load`において xz アーカイブが利用できなくなってしまった機能低下を修正しました。
+  [docker/for-mac#5271](https://github.com/docker/for-mac/issues/5271) を Fix に。
+- **Containers / Apps** 画面におけるナビゲーション処理を修正しました。
+  [docker/for-win#10160](https://github.com/docker/for-win/issues/10160#issuecomment-764660660) を Fix に。
+- コンテナー名やイメージ名が長い場合のコンテナーインスタンス画面を修正しました。
+  [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290) を Fix に。
+- 特定の IP アドレスにポートバインディングする際の問題を修正しました。
+  メモ： これにより`docker inspect`コマンドが公開ポートを表示するのに時間を要するかもしれません。
+  [docker/for-mac#4541](https://github.com/docker/for-mac/issues/4541) を Fix に。
+- Docker Dashboard からイメージを削除しても **Images** 画面に表示されたままとなる問題を修正しました。
+@z
+
+@x
+## Docker Desktop 3.1.0
 2021-01-14
 @y
-## Docker Desktop Community 3.1.0
+## Docker Desktop 3.1.0
 2021-01-14
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/51484/Docker.dmg)
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/Docker.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/stable/51484/Docker.dmg)
 @z
 
 @x
@@ -105,10 +202,10 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop Community 3.0.4
+## Docker Desktop 3.0.4
 2021-01-06
 @y
-## Docker Desktop Community 3.0.4
+## Docker Desktop 3.0.4
 2021-01-06
 @z
 
@@ -163,10 +260,10 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop Community 3.0.3
+## Docker Desktop 3.0.3
 2020-12-21
 @y
-## Docker Desktop Community 3.0.3
+## Docker Desktop 3.0.3
 2020-12-21
 @z
 
@@ -209,10 +306,10 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop Community 3.0.2
+## Docker Desktop 3.0.2
 2020-12-18
 @y
-## Docker Desktop Community 3.0.2
+## Docker Desktop 3.0.2
 2020-12-18
 @z
 
@@ -259,10 +356,10 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop Community 3.0.1
+## Docker Desktop 3.0.1
 2020-12-11
 @y
-## Docker Desktop Community 3.0.1
+## Docker Desktop 3.0.1
 2020-12-11
 @z
 
@@ -308,10 +405,10 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop Community 3.0.0
+## Docker Desktop 3.0.0
 2020-12-10
 @y
-## Docker Desktop Community 3.0.0
+## Docker Desktop 3.0.0
 2020-12-10
 @z
 

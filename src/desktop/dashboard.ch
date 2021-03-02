@@ -227,11 +227,13 @@ Now that you can see the list of running containers and applications on the Dash
 
 @x
 - Click **Port** to open the port exposed by the container in a browser.
-- Click **CLI** to open a terminal and run commands on the container.
+- Click **CLI** to open a terminal and run commands on the container. If you have installed iTerm2 on your Mac, the CLI option opens an iTerm2 terminal. Otherwise, it opens the Terminal app on Mac, or a Command Prompt on Windows.
 - Click **Stop**, **Start**, **Restart**, or **Delete** to perform lifecycle operations on the container.
 @y
 - **Port** をクリックすると、コンテナーが開放しているそのポートをブラウザー上にて確認することができます。
 - **CLI** をクリックすると端末画面が開くので、コンテナー上でのコマンド実行が可能です。
+  Mac 上に iTerm2 をインストールしている場合、CLI オプションからは iTerm2 ターミナルが開きます。
+  それ以外であれば、Mac なら Terminal アプリ、Windows ならコマンドプロンプトが開きます。
 - **Stop**、**Start**、**Restart**、**Delete** をクリックすることで、コンテナーのライフサイクルを制御する操作を実行できます。
 @z
 

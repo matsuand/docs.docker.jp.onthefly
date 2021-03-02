@@ -208,9 +208,9 @@ obj/
 @z
 
 @x
-    This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Addittionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
+    This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Additionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
 @y
-    This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Addittionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
+    This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Additionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
 @z
 
 @x

@@ -22,6 +22,40 @@ redirect_from:
 @z
 
 @x
+## 1.28.5 
+(2021-02-26)
+@y
+## 1.28.5 
+(2021-02-26)
+@z
+
+@x
+### Bugs
+@y
+{: #bugs }
+### バグ
+@z
+
+@x
+- Fixed the OpenSSL version mismatch error when shelling out to the SSH client (via bump to docker-py 4.4.4 which contains the fix).
+
+- Added missing build flags to the native builder: `platform`, `isolation` and `extra_hosts`.
+
+- Removed info message on native build.
+
+- Fixed the log fetching bug when service logging driver is set to 'none'.
+@y
+- SSH クライアントの起動時における OpenSSL バージョンの不一致によるエラーを修正しました。
+  （docker-py 4.4.4 経由による実行によりこの修正が有効になります。）
+
+- ネイティブビルダーに含まれていなかったビルドフラグ`platform`、`isolation`、`extra_hosts`を追加しました。
+
+- ネイティブビルドにおける情報メッセージを削除しました。
+
+- サービスログドライバーが`none`に設定されているときのログ取得バグを修正しました。
+@z
+
+@x
 ## 1.28.4
 (2021-02-18)
 @y

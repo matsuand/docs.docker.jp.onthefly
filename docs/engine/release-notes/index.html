@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-26 13:55:31 +0900-->
+<!-- Page generated 2021-03-02 12:02:59 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine リリースノート | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine リリースノート" />
   <meta property="og:description" content="Learn about the new features, bug fixes, and breaking changes for Docker Engine" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-02T12:02:59+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/release-notes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-02T12:02:59+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine リリースノート","description":"Learn about the new features, bug fixes, and breaking changes for Docker Engine","url":"https://docs.docker.com/engine/release-notes/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,11 +98,10 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Engine リリースノート</h1>
-<p>このドキュメントは Docker Engine における最新の変更、追加、既知の問題、バグフィックスについて示します。</p>
+                        <section class="section"><h1>Docker Engine リリースノート</h1><p>このドキュメントは Docker Engine における最新の変更、追加、既知の問題、バグフィックスについて示します。</p>
 
 <blockquote>
-  <p><strong>メモ:</strong>
+  <p><strong>メモ</strong>
 クライアントとコンテナーランタイムは、Docker Engine 18.09 からデーモンとは別パッケージになりました。
 ユーザーがインストールおよびアップデートをする際には、同時に 3 つのパッケージを入手して行い、最新のパッチリリースを合わせるようにします。
 たとえば Ubuntu においては <code class="language-plaintext highlighter-rouge">sudo apt install docker-ce docker-ce-cli containerd.io</code> を実行します。
@@ -110,6 +109,109 @@
 </blockquote>
 
 <h1 id="version-2010">Version 20.10</h1>
+
+<h2 id="20104">20.10.4</h2>
+<p>2021-02-26</p>
+
+<h3 id="builder">Builder</h3>
+
+<ul>
+  <li>空のレイヤーがあるインラインキャッシュのインポートにおいて、間違ったキャッシュがマッチしてしまう誤りを修正しました。
+<a href="https://github.com/moby/moby/pull/42061">moby/moby#42061</a></li>
+  <li>BuildKit v0.8.2 へのアップデート。<a href="https://github.com/moby/moby/pull/42061">moby/moby#42061</a>
+    <ul>
+      <li>resolver: トークンフェッチ時のキャッシング不備を回避しました。</li>
+      <li>fileop: 入力インデックスがキャッシュ不備を起こさないようにチェックサムを修正しました。</li>
+      <li>マウント参照に関して出力される参照数の出力不備を修正しました。
+（<code class="language-plaintext highlighter-rouge">invalid mutable ref</code>のエラーを修正しました。）</li>
+      <li>git: 異なる資格情報を使ってサブモジュールのクローンが可能となるように、メインのリモートアクセスについてのみトークンを設定するようにしました。</li>
+    </ul>
+  </li>
+  <li>プル処理を行った後に /var/lib/docker/buildkit/content/blobs/sha256 にある blob データが確実に削除されるようにしました。
+古い状態を更新するには<code class="language-plaintext highlighter-rouge">builder prune</code>を実行します。
+<a href="https://github.com/moby/moby/pull/42065">moby/moby#42065</a></li>
+  <li>同時並行で行ったプル処理の同期に関して、機能退化を修正しました。」
+<a href="https://github.com/moby/moby/pull/42049">moby/moby#42049</a></li>
+  <li>libnetwork の状態ファイルの扱いが漏れのないようにしました。
+<a href="https://github.com/moby/moby/pull/41972">moby/moby#41972</a></li>
+</ul>
+
+<h3 id="client">クライアント</h3>
+
+<ul>
+  <li>config ファイル不在時に<code class="language-plaintext highlighter-rouge">docker login</code>が panic となるのを修正しました。
+<a href="https://github.com/docker/cli/pull/2959">docker/cli#2959</a></li>
+  <li><code class="language-plaintext highlighter-rouge">WARNING: Error loading config file: .dockercfg: $HOME is not defined</code>を修正しました。
+<a href="https://github.com/docker/cli/pull/2958">docker/cli#2958</a></li>
+</ul>
+
+<h3 id="runtime">ランタイム</h3>
+
+<ul>
+  <li>docker info: 対処不要の警告メッセージを除きました。
+<a href="https://github.com/moby/moby/pull/41958">moby/moby#41958</a></li>
+  <li>XGlobalHeader において親ディレクトリ生成を回避しました。
+<a href="https://github.com/moby/moby/pull/42017">moby/moby#42017</a></li>
+  <li>存在しないディレクトリの生成時にはパーミッション 0755 を利用するようにしました。
+<a href="https://github.com/moby/moby/pull/42017">moby/moby#42017</a></li>
+  <li>イメージ設定内のプラットフォームが不適切である場合には、改めてマニフェストリストを見るようにしました。
+<a href="https://github.com/moby/moby/pull/42045">moby/moby#42045</a> <a href="https://github.com/moby/moby/pull/41873">moby/moby#41873</a></li>
+  <li>カスタムのデフォルトランタイムを設定した際のデーモンパニック発生を修正しました。
+<a href="https://github.com/moby/moby/pull/41974">moby/moby#41974</a></li>
+  <li>デーモン設定が空であるときのパニック発生を修正しました。
+<a href="https://github.com/moby/moby/pull/41976">moby/moby#41976</a></li>
+  <li>不正な device cgroup rule によりコンテナー起動した際に発生するデーモンパニックを修正しました。
+<a href="https://github.com/moby/moby/pull/42001">moby/moby#42001</a></li>
+  <li>ユーザー名あるいは UID がマッチしたときの userns-remap オプションを修正しました。
+<a href="https://github.com/moby/moby/pull/42013">moby/moby#42013</a></li>
+  <li>static: runc バイナリを v1.0.0-rc93 に更新しました。
+<a href="https://github.com/moby/moby/pull/42014">moby/moby#42014</a></li>
+</ul>
+
+<h3 id="logger">Logger</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">labels</code>が設定されていなくても<code class="language-plaintext highlighter-rouge">labels-regex</code>の設定を用いることにしました。
+<a href="https://github.com/moby/moby/pull/42046">moby/moby#42046</a></li>
+  <li>長いログメッセージを適切に扱うようにしました。
+これにより non-blocking モードの awslogs において 16 KB 以上のイベントログが分割されないようにしました。
+<a href="https://github.com/moby/moby/pull/41975">mobymoby#41975</a></li>
+</ul>
+
+<h3 id="rootless">Rootless</h3>
+
+<ul>
+  <li>systemd の KillMode を mixed に設定することで、サービスが停止する際にハングしないようにしました。
+<a href="https://github.com/moby/moby/pull/41956">moby/moby#41956</a></li>
+  <li>dockerd-rootless.sh: タイポ確認を行うようにしました。
+<a href="https://github.com/moby/moby/pull/42070">moby/moby#42070</a></li>
+  <li>rootlesskit を v0.13.1 に更新し IPv6 アドレスの扱いを修正しました。
+<a href="https://github.com/moby/moby/pull/42025">moby/moby#42025</a></li>
+  <li>ユーザー空間内部において FIFO の mknod を可能にしました。
+<a href="https://github.com/moby/moby/pull/41957">moby/moby#41957</a></li>
+</ul>
+
+<h3 id="security">セキュリティ</h3>
+
+<ul>
+  <li>profiles: seccomp: syscall リストを Linux 5.11 に更新しました。
+<a href="https://github.com/moby/moby/pull/41971">moby/moby#41971</a></li>
+</ul>
+
+<h3 id="swarm">Swarm</h3>
+
+<ul>
+  <li>再起動時にハートビートが維持されない問題を修正しました。
+<a href="https://github.com/moby/moby/pull/42060">moby/moby#42060</a></li>
+  <li>タスクが停止してしまう可能性を修正しました。
+<a href="https://github.com/moby/moby/pull/42060">moby/moby#42060</a></li>
+  <li>Fix <code class="language-plaintext highlighter-rouge">--update-order</code> and <code class="language-plaintext highlighter-rouge">--rollback-order</code> flags when only <code class="language-plaintext highlighter-rouge">--update-order</code> or <code class="language-plaintext highlighter-rouge">--rollback-order</code> is provided
+<a href="https://github.com/docker/cli/pull/2963">docker/cli#2963</a></li>
+  <li>Fix <code class="language-plaintext highlighter-rouge">docker service rollback</code> returning a non-zero exit code in some situations
+<a href="https://github.com/docker/cli/pull/2964">docker/cli#2964</a></li>
+  <li>Fix inconsistent progress-bar direction on <code class="language-plaintext highlighter-rouge">docker service rollback</code>
+<a href="https://github.com/docker/cli/pull/2964">docker/cli#2964</a></li>
+</ul>
 
 <h2 id="20103">20.10.3</h2>
 <p>2021-02-01</p>
@@ -135,7 +237,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <h2 id="20102">20.10.2</h2>
 <p>2021-01-04</p>
 
-<h3 id="runtime">Runtime</h3>
+<h3 id="runtime">ランタイム</h3>
 
 <ul>
   <li>再起動ポリシーに従ってコンテナーを復元する際に再起動の失敗が続き、デーモン起動がハングする状態を修正。
@@ -154,7 +256,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/libnetwork/pull/2604">moby/libnetwork#2604</a></li>
 </ul>
 
-<h3 id="swarm">Swarm</h3>
+<h3 id="swarm-1">Swarm</h3>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">replicated-job</code>と<code class="language-plaintext highlighter-rouge">global-job</code>のサービスモードに対するフィルタリングを修正。
@@ -171,7 +273,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <h2 id="20101">20.10.1</h2>
 <p>2020-12-14</p>
 
-<h3 id="builder">Builder</h3>
+<h3 id="builder-1">Builder</h3>
 
 <ul>
   <li>buildkit: <a href="https://github.com/moby/buildkit/releases/tag/v0.8.1">v0.8.1</a> へのアップデート。
@@ -249,7 +351,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <a href="https://github.com/moby/moby/pull/39882">moby/moby#39882</a></li>
 </ul>
 
-<h3 id="builder-1">Builder</h3>
+<h3 id="builder-2">Builder</h3>
 
 <ul>
   <li>buildkit,dockerfile: Support for <code class="language-plaintext highlighter-rouge">RUN --mount</code> options without needing to specify experimental dockerfile <code class="language-plaintext highlighter-rouge">#syntax</code> directive. <a href="https://github.com/moby/buildkit/pull/1717">moby/buildkit#1717</a></li>
@@ -388,7 +490,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>seccomp: Remove dependency in dockerd on libseccomp <a href="https://github.com/moby/moby/pull/41395">moby/moby#41395</a></li>
 </ul>
 
-<h3 id="rootless">Rootless</h3>
+<h3 id="rootless-1">Rootless</h3>
 
 <ul>
   <li>rootless: 試験的機能から格上げ。
@@ -412,7 +514,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
   <li>Fix seccomp profile for clone syscall <a href="https://github.com/moby/moby/pull/39308">moby/moby#39308</a></li>
 </ul>
 
-<h3 id="swarm-1">Swarm</h3>
+<h3 id="swarm-2">Swarm</h3>
 
 <ul>
   <li>Swarm ジョブへのサポートを追加。
@@ -466,6 +568,7 @@ Docker デーモンがクラッシュしても不正なイメージとならな�
 <ul id="my_toc" class="inline_toc">
   <li><a href="#version-2010" class="nomunge">Version 20.10</a>
     <ul>
+      <li><a href="#20104" class="nomunge">20.10.4</a></li>
       <li><a href="#20103" class="nomunge">20.10.3</a></li>
       <li><a href="#20102" class="nomunge">20.10.2</a></li>
       <li><a href="#20101" class="nomunge">20.10.1</a></li>
