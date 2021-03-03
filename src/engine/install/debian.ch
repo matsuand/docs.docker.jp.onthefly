@@ -69,7 +69,7 @@ Docker Engine をインストールするには、Debian か Raspbian の 64 ビ
 @x
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 @y
-Docker Engine は `x86_64`（または `amd64`）、`armhf`、`arm64` の各アーキテクチャーをサポートします。
+Docker Engine は`x86_64`（または`amd64`）、`armhf`、`arm64`の各アーキテクチャーをサポートします。
 @z
 
 @x
@@ -83,16 +83,16 @@ Docker Engine は `x86_64`（または `amd64`）、`armhf`、`arm64` の各ア�
 Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 @y
-Docker のかつてのバージョンは、`docker`、`docker.io`、`docker-engine` と呼ばれていました。
+Docker のかつてのバージョンは、`docker`、`docker.io`、`docker-engine`と呼ばれていました。
 これがインストールされている場合はアンインストールしてください。
 @z
 
 @x
-```bash
+```console
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 @y
-```bash
+```console
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 @z
@@ -100,15 +100,15 @@ $ sudo apt-get remove docker docker-engine docker.io containerd runc
 @x
 It's OK if `apt-get` reports that none of these packages are installed.
 @y
-`apt-get` を実行したときに、上のパッケージがインストールされていないと表示されれば OK です。
+`apt-get`を実行したときに、上のパッケージがインストールされていないと表示されれば OK です。
 @z
 
 @x
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker Engine package is now called `docker-ce`.
 @y
-`/var/lib/docker/` にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
-なお Docker Engine パッケージは、今は `docker-ce` と呼ばれます。
+`/var/lib/docker/`にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
+なお Docker Engine パッケージは、今は`docker-ce`と呼ばれます。
 @z
 
 @x
@@ -202,12 +202,12 @@ from the repository.
 1.  Update the `apt` package index and install packages to allow `apt` to use a
     repository over HTTPS:
 @y
-1.  `apt` のパッケージインデックスを更新します。
-    そして `apt` が HTTPS 経由でリポジトリにアクセスしパッケージをインストールできるようにします。
+1.  `apt`のパッケージインデックスを更新します。
+    そして`apt`が HTTPS 経由でリポジトリにアクセスしパッケージをインストールできるようにします。
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo apt-get update
 
     $ sudo apt-get install \
@@ -217,7 +217,7 @@ from the repository.
         gnupg
     ```
 @y
-    ```bash
+    ```console
     $ sudo apt-get update
 
     $ sudo apt-get install \
@@ -235,14 +235,12 @@ from the repository.
 @z
 
 @x
-    ```bash
+    ```console
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
     ```
 @y
-    ```bash
+    ```console
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
     ```
 @z
 
@@ -252,7 +250,7 @@ from the repository.
     after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
 @y
 3.  以下のコマンドを使って**安定版**（stable）リポジトリをセットアップします。
-    **最新版**（nightly）、**テスト版**（test）の各リポジトリを追加する場合は、以下のコマンドにおける `stable` の文字に続けて `nightly` や `test` の文字を加えてください。
+    **最新版**（nightly）、**テスト版**（test）の各リポジトリを追加する場合は、以下のコマンドにおける`stable`の文字に続けて`nightly`や`test`の文字を加えてください。
     [**最新版**と**テスト版**チャンネルを学ぶにはこちら](index.md)。
 @z
 
@@ -266,9 +264,9 @@ from the repository.
 @y
     > **メモ**
     >
-    > サブコマンド `lsb_release -cs` は Debian ディストリビューションの名前、たとえば `helium` といったものを返します。
-    > BunsenLabs Linux のようなディストリビューションなどでは、`$(lsb_release -cs)` とする必要があります。
-    > たとえば `BunsenLabs Linux Helium` を使っている場合、`stretch` を利用することになります。
+    > サブコマンド`lsb_release -cs`は Debian ディストリビューションの名前、たとえば`helium`といったものを返します。
+    > BunsenLabs Linux のようなディストリビューションなどでは、`$(lsb_release -cs)`とする必要があります。
+    > たとえば`BunsenLabs Linux Helium`を使っている場合、`stretch`を利用することになります。
     > テスト対象外、サポート対象外の Debian ディストリビューションに対して Docker は何ら動作保証しません。
 @z
 
@@ -291,13 +289,13 @@ from the repository.
 @z
 
 @x
-    ```bash
+    ```console
     $ echo \
       "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 @y
-    ```bash
+    ```console
     $ echo \
       "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -313,13 +311,13 @@ from the repository.
 @z
 
 @x
-    ```bash
+    ```console
     $ echo \
       "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 @y
-    ```bash
+    ```console
     $ echo \
       "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -335,13 +333,13 @@ from the repository.
 @z
 
 @x
-    ```bash
+    ```console
     $ echo \
       "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 @y
-    ```bash
+    ```console
     $ echo \
       "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -359,32 +357,29 @@ from the repository.
 @x
 #### Install Docker Engine
 @y
-{: #install-docker-engine }
 #### Docker Engine のインストール
+{: #install-docker-engine }
 @z
 
 @x
-> **Note**: This procedure works for Debian on `x86_64` / `amd64`, Debian ARM,
-> or Raspbian.
+This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Raspbian.
 @y
-> **メモ**
->
-> この手順は Debian `x86_64` / `amd64`、Debian ARM、Raspbian 向けです。
+この手順は`x86_64`、`amd64`、`armhf`、`arm64`上における Debian と Raspbian 向けです。
 @z
 
 @x
 1. Update the `apt` package index, and install the _latest version_ of Docker
 @y
-1.  `apt` のパッケージインデックスを更新し、**最新版の** Docker をインストールします。
+1.  `apt`のパッケージインデックスを更新し、**最新版の** Docker をインストールします。
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo apt-get update
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 @y
-    ```bash
+    ```console
     $ sudo apt-get update
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
@@ -400,8 +395,8 @@ from the repository.
 @y
     > 複数リポジトリからの取得？
     >
-    > Docker リポジトリを複数有効にしていて、バージョン指定をせずに `apt-get install`
-    > によるインストール、または `apt-get update` によるアップデートを行うと、入手可能な最新版がインストールされます。
+    > Docker リポジトリを複数有効にしていて、バージョン指定をせずに`apt-get install`
+    > によるインストール、または`apt-get update`によるアップデートを行うと、入手可能な最新版がインストールされます。
     > 安定した版が必要である場合には、適切でない場合があります。
 @z
 
@@ -419,10 +414,10 @@ from the repository.
 @z
 
 @x
-    ```bash
+    ```console
     $ apt-cache madison docker-ce
 @y
-    ```bash
+    ```console
     $ apt-cache madison docker-ce
 @z
 
@@ -431,14 +426,12 @@ from the repository.
       docker-ce | 5:18.09.0~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 18.06.1~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 18.06.0~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
-      ...
     ```
 @y
       docker-ce | 5:18.09.1~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 5:18.09.0~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 18.06.1~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 18.06.0~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
-      ...
     ```
 @z
 
@@ -447,15 +440,15 @@ from the repository.
        for example, `5:18.09.1~3-0~debian-stretch `.
 @y
     b. 特定のバージョンをインストールする場合は、2 項目めにあるバージョン文字列を使ってインストールします。
-       たとえば `5:18.09.1~3-0~debian-stretch` となります。
+       たとえば`5:18.09.1~3-0~debian-stretch`となります。
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 @y
-    ```bash
+    ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 @z
@@ -464,15 +457,15 @@ from the repository.
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 @y
-3.  Docker Engine が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
+3.  Docker Engine が正しくインストールされているのを確認するため、`hello-world`イメージを実行します。
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 @y
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 @z
@@ -492,8 +485,8 @@ Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
 users to run Docker commands and for other optional configuration steps.
 @y
 Docker Engine がインストールされ、実行できました。
-グループ `docker` が生成されていますが、このグループにはまだユーザーが存在していない状態です。
-Docker コマンドの実行には ``sudo`` が必要になります。
+グループ`docker`が生成されていますが、このグループにはまだユーザーが存在していない状態です。
+Docker コマンドの実行には`sudo`が必要になります。
 続いて [Linux のインストール後](linux-postinstall.md) に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 @z
 
@@ -509,7 +502,7 @@ To upgrade Docker Engine, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-using-the-repository), choosing the new
 version you want to install.
 @y
-Docker Engine をアップグレードするには、まず `sudo apt-get update` を実行します。
+Docker Engine をアップグレードするには、まず`sudo apt-get update`を実行します。
 そして[インストール手順](#install-using-the-repository) に従って、インストールしたい新たなバージョンを選んでください。
 @z
 
@@ -525,19 +518,19 @@ If you cannot use Docker's repository to install Docker Engine, you can download
 `.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 @y
-Docker リポジトリを利用した Docker Engine のインストールができない場合は、目的とするリリースの `.deb` ファイルをダウンロードして、手動でインストールする方法があります。
-この場合 Docker をアップグレードするには、毎回新たな `.deb` ファイルをダウンロードして利用することになります
+Docker リポジトリを利用した Docker Engine のインストールができない場合は、目的とするリリースの`.deb`ファイルをダウンロードして、手動でインストールする方法があります。
+この場合 Docker をアップグレードするには、毎回新たな`.deb`ファイルをダウンロードして利用することになります
 @z
 
 @x
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Debian version, then browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64` and download the `.deb` file for the Docker version
-    you want to install.
+    `armhf`, or `arm64`, and download the `.deb` file for the Docker Engine
+    version you want to install.
 @y
 1.  [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" }
     にアクセスして、インストールしたい Debian バージョンを選びます。
-    そして `pool/stable/` にアクセスし、`amd64`、`armhf`、`arm64` のいずれかを選び、インストールしたいバージョンの Docker Engine に対応する `.deb` ファイルをダウンロードします。
+    そして`pool/stable/`にアクセスし、`amd64`、`armhf`、`arm64`のいずれかを選び、インストールしたいバージョンの Docker Engine に対応する`.deb`ファイルをダウンロードします。
 @z
 
 @x
@@ -545,8 +538,10 @@ Docker リポジトリを利用した Docker Engine のインストールがで�
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 @y
-    > **メモ**: **最新版**（nightly）や **テスト版**（test）パッケージをインストールする場合は、
-    > URL 内の `stable` を `nightly` や `test` に変更してください。
+    > **メモ**
+    >
+    > **最新版**（nightly）や **テスト版**（test）パッケージをインストールする場合は、
+    > URL 内の`stable`を`nightly`や`test`に変更してください。
     > [**最新版** と **テスト版** チャンネルを学ぶにはこちら](index.md)。
 @z
 
@@ -559,11 +554,11 @@ Docker リポジトリを利用した Docker Engine のインストールがで�
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo dpkg -i /path/to/package.deb
     ```
 @y
-    ```bash
+    ```console
     $ sudo dpkg -i /path/to/package.deb
     ```
 @z
@@ -578,15 +573,15 @@ Docker リポジトリを利用した Docker Engine のインストールがで�
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 @y
-3.  Docker Engine が正しくインストールされているのを確認するため `hello-world` イメージを実行します。
+3.  Docker Engine が正しくインストールされているのを確認するため`hello-world`イメージを実行します。
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 @y
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 @z
@@ -607,8 +602,8 @@ non-privileged users to run Docker commands and for other optional configuration
 steps.
 @y
 Docker Engine がインストールされ、実行できました。
-グループ `docker` が生成されていますが、このグループにはまだユーザーが存在していない状態です。
-Docker コマンドの実行には ``sudo`` が必要になります。
+グループ`docker`が生成されていますが、このグループにはまだユーザーが存在していない状態です。
+Docker コマンドの実行には`sudo`が必要になります。
 続いて [Linux のインストール後](linux-postinstall.md) に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 @z
 
@@ -646,11 +641,11 @@ Docker Engine をアップグレードするには、[インストール手順](
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
     ```
 @y
-    ```bash
+    ```console
     $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
     ```
 @z
@@ -665,12 +660,12 @@ Docker Engine をアップグレードするには、[インストール手順](
 @z
 
 @x
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker
     $ sudo rm -rf /var/lib/containerd
     ```
 @y
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker
     $ sudo rm -rf /var/lib/containerd
     ```

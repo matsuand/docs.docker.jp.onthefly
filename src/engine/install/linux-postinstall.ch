@@ -414,13 +414,13 @@ systemd を利用していない Linux ディストリビューションでは�
 @z
 
 @x
-    ```none
+    ```systemd
     [Service]
     ExecStart=
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
     ```
 @y
-    ```none
+    ```systemd
     [Service]
     ExecStart=
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
@@ -708,22 +708,20 @@ RHEL、CentOS、Fedora においてこれを回避するには、Docker ホス�
 @z
 
 @x
-```
+```systemd
 [Network]
 ...
 IPForward=kernel
 # OR
 IPForward=true
-...
 ```
 @y
-```
+```systemd
 [Network]
 ...
 IPForward=kernel
 # または
 IPForward=true
-...
 ```
 @z
 

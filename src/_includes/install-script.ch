@@ -26,7 +26,7 @@ them:
 @y
 Docker では [get.docker.com](https://get.docker.com/) と [test.docker.com](https://test.docker.com/) において便利なスクリプトを提供しています。
 これは Docker Engine - Community の安定版あるいはテスト版を、開発機にすばやく対話形式をとらずにインストールするものです。
-このスクリプトのソースコードは [`docker-install` リポジトリ](https://github.com/docker/docker-install)にあります。 
+このスクリプトのソースコードは [`docker-install`リポジトリ](https://github.com/docker/docker-install)にあります。 
 このスクリプトを本番環境において利用することはお勧めしません。
 またこのスクリプトの潜在的リスクについては、十分理解した上で利用してください。
 @z
@@ -47,7 +47,7 @@ Docker では [get.docker.com](https://get.docker.com/) と [test.docker.com](ht
 - Do not use the convenience script if Docker has already been installed on the
   host machine using another mechanism.
 @y
-- スクリプトを実行するには ``root`` 権限か ``sudo`` が必要です。
+- スクリプトを実行するには`root`権限か`sudo`が必要です。
   したがって十分に内容を確認してからスクリプトを実行するようにしてください。
 - スクリプトは自動的に情報取得を行い、利用している Linux ディストリビューション、そのバージョン、そしてパッケージ管理システムの設定を行います。
   なおこのスクリプトは、インストール時にパラメーターを受け渡すような設定はできないものになっています。
@@ -70,7 +70,7 @@ each of the commands below, replace each occurrence of `get` with `test`.
 @y
 次の例は Linux に Docker Engine - Community の最新安定版リリースのインストールに [get.docker.com](https://get.docker.com/) のスクリプトを使います。
 最新テスト版を使いたい場合は、代わりに [test.docker.com](https://test.docker.com/) を指定します。
-その場合はコマンド中の `get` を `test` に置き換えて実行します。
+その場合はコマンド中の`get`を`test`に置き換えて実行します。
 @z
 
 @x
@@ -87,20 +87,16 @@ Always examine scripts downloaded from the internet before
 @z
 
 @x
-```bash
+```console
 $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
-@y
-```bash
-$ curl -fsSL https://get.docker.com -o get-docker.sh
-$ sudo sh get-docker.sh
-@z
-
-@x
-<output truncated>
+<...>
 ```
 @y
-<output truncated>
+```console
+$ curl -fsSL https://get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh
+<...>
 ```
 @z
 
@@ -113,12 +109,12 @@ adding your user to the "docker" group with something like:
 @z
 
 @x
-```bash
-  sudo usermod -aG docker <your-user>
+```console
+$ sudo usermod -aG docker <your-user>
 ```
 @y
-```bash
-  sudo usermod -aG docker <your-user>
+```console
+$ sudo usermod -aG docker <your-user>
 ```
 @z
 
@@ -154,8 +150,8 @@ Docker Engine - Community is installed. It starts automatically on `DEB`-based d
 run Docker commands by default.
 @y
 Docker Engine - Community がインストールされました。
-`DEB` ベースのディストリビューションでは Docker が自動的に開始されます。
-`RPM` ベースの場合は手動での実行が必要となるため、 `systemctl` か `service` のいずれか適当なものを実行します。
+`DEB`ベースのディストリビューションでは Docker が自動的に開始されます。
+`RPM`ベースの場合は手動での実行が必要となるため、 `systemctl`か`service`のいずれか適当なものを実行します。
 上の出力メッセージに示されているように、デフォルトで非 root ユーザーは Docker コマンドを実行できません。
 @z
 

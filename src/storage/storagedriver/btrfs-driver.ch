@@ -309,7 +309,7 @@ This procedure is essentially identical on SLES and Ubuntu.
     Storage Driver: btrfs
      Build Version: Btrfs v4.4
      Library Version: 101
-    <output truncated>
+    <...>
     ```
 @y
     Containers: 0
@@ -321,7 +321,7 @@ This procedure is essentially identical on SLES and Ubuntu.
     Storage Driver: btrfs
      Build Version: Btrfs v4.4
      Library Version: 101
-    <output truncated>
+    <...>
     ```
 @z
 

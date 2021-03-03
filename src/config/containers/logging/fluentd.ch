@@ -142,14 +142,14 @@ Restart Docker for the changes to take effect.
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for
-> `fluentd-async-connect` or `fluentd-max-retries`) must therefore be enclosed
+> `fluentd-async` or `fluentd-max-retries`) must therefore be enclosed
 > in quotes (`"`).
 @y
 > **Note**
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for
-> `fluentd-async-connect` or `fluentd-max-retries`) must therefore be enclosed
+> `fluentd-async` or `fluentd-max-retries`) must therefore be enclosed
 > in quotes (`"`).
 @z
 
@@ -185,10 +185,10 @@ connects to this daemon through `localhost:24224` by default. Use the
 
 @x
 If container cannot connect to the Fluentd daemon, the container stops
-immediately unless the `fluentd-async-connect` option is used.
+immediately unless the `fluentd-async` option is used.
 @y
 If container cannot connect to the Fluentd daemon, the container stops
-immediately unless the `fluentd-async-connect` option is used.
+immediately unless the `fluentd-async` option is used.
 @z
 
 @x
@@ -280,9 +280,9 @@ logging-related environment variables and labels. It is used for advanced
 @z
 
 @x
-### fluentd-async-connect
+### fluentd-async
 @y
-### fluentd-async-connect
+### fluentd-async
 @z
 
 @x

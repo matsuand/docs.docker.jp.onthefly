@@ -280,7 +280,7 @@ need to use the legacy `overlay` driver, specify it instead.
      Backing Filesystem: xfs
      Supports d_type: true
      Native Overlay Diff: true
-    <output truncated>
+    <...>
     ```
 @y
     Containers: 0
@@ -289,7 +289,7 @@ need to use the legacy `overlay` driver, specify it instead.
      Backing Filesystem: xfs
      Supports d_type: true
      Native Overlay Diff: true
-    <output truncated>
+    <...>
     ```
 @z
 

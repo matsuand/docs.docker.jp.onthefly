@@ -249,7 +249,7 @@ For production systems, see
       Data loop file: /var/lib/docker/devicemapper/data
       Metadata loop file: /var/lib/docker/devicemapper/metadata
       Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 @y
       Containers: 0
@@ -279,7 +279,7 @@ For production systems, see
       Data loop file: /var/lib/docker/devicemapper/data
       Metadata loop file: /var/lib/docker/devicemapper/metadata
       Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 @z
 
@@ -951,7 +951,7 @@ assumes that the Docker daemon is in the `stopped` state.
      Deferred Deletion Enabled: true
      Deferred Deleted Device Count: 0
      Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 @y
     Containers: 0
@@ -979,7 +979,7 @@ assumes that the Docker daemon is in the `stopped` state.
      Deferred Deletion Enabled: true
      Deferred Deleted Device Count: 0
      Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 @z
 
@@ -1554,7 +1554,7 @@ block device and other parameters to suit your situation.
      Metadata Space Used: 286.7 kB
      Metadata Space Total: 1.07 GB
      Metadata Space Available: 1.069 GB
-    <output truncated>
+    <...>
     ```
 @y
     ```bash
@@ -1571,7 +1571,7 @@ block device and other parameters to suit your situation.
      Metadata Space Used: 286.7 kB
      Metadata Space Total: 1.07 GB
      Metadata Space Available: 1.069 GB
-    <output truncated>
+    <...>
     ```
 @z
 

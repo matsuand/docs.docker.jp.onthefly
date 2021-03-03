@@ -545,14 +545,14 @@ Containers: 0
 Images: 0
 Storage Driver: overlay2
  Backing Filesystem: xfs
-<output truncated>
+<...>
 ```
 @y
 Containers: 0
 Images: 0
 Storage Driver: overlay2
  Backing Filesystem: xfs
-<output truncated>
+<...>
 ```
 @z
 

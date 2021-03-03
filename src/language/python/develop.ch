@@ -306,7 +306,7 @@ def get_widgets() :
 @z
 
 @x
-@app.route('/db')
+@app.route('/initdb')
 def db_init():
   mydb = mysql.connector.connect(
     host="mysqldb",
@@ -315,7 +315,7 @@ def db_init():
   )
   cursor = mydb.cursor()
 @y
-@app.route('/db')
+@app.route('/initdb')
 def db_init():
   mydb = mysql.connector.connect(
     host="mysqldb",
