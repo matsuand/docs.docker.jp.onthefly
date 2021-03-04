@@ -34,14 +34,18 @@ Docker Desktop の Apple M1 向け技術プレビューへようこそ。
 > **メモ**
 >
 > Apple M1 チップ上の Docker Desktop は現在開発中です。
-> ですから技術プレビュービルドは本番環境での利用をお勧めしません。
+> そのため技術プレビュービルドは本番環境での利用をお勧めしません。
 @z
 
 @x
-## Download
+## Docker Desktop preview 3.1.0
+
+2021-02-11
 @y
-{: #download }
-## ダウンロード
+## Docker Desktop プレビュー 3.1.0
+{: #docker-desktop-preview-310 }
+
+2021-02-11
 @z
 
 @x
