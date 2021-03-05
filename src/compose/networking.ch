@@ -46,13 +46,13 @@ identical to the container name.
 >
 > アプリのネットワークには「プロジェクト名」に基づいた名前がつけられます。
 > そしてプロジェクト名はこれが稼動しているディレクトリ名に基づいて定まります。
-> プロジェクト名は [`--project-name` フラグ](reference/overview.md) あるいは [`COMPOSE_PROJECT_NAME` 環境変数](reference/envvars.md#compose_project_name) を使って上書きすることができます。
+> プロジェクト名は [`--project-name`フラグ](reference/overview.md) あるいは [`COMPOSE_PROJECT_NAME`環境変数](reference/envvars.md#compose_project_name) を使って上書きすることができます。
 @z
 
 @x
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 @y
-たとえばアプリが `myapp` というディレクトリにあって、`docker-compose.yml` が以下のような内容であるとします。
+たとえばアプリが`myapp`というディレクトリにあって、`docker-compose.yml`が以下のような内容であるとします。
 @z
 
 @x
@@ -86,7 +86,7 @@ services:
 @x
 When you run `docker-compose up`, the following happens:
 @y
-`docker-compose up` を実行すると以下の結果になります。
+`docker-compose up`を実行すると以下の結果になります。
 @z
 
 @x
@@ -96,11 +96,11 @@ When you run `docker-compose up`, the following happens:
 3.  A container is created using `db`'s configuration. It joins the network
     `myapp_default` under the name `db`.
 @y
-1.  `myapp_default` というネットワークが生成されます。
-2.  `web` に関する設定に従って 1 つのコンテナーが生成されます。
-    そしてそのコンテナーは `web` という名前でネットワーク `myapp_default` に参加します。
-3.  `db` に関する設定に従って 1 つのコンテナーが生成されます。
-    そしてそのコンテナーは `db` という名前でネットワーク `myapp_default` に参加します。
+1.  `myapp_default`というネットワークが生成されます。
+2.  `web`に関する設定に従って 1 つのコンテナーが生成されます。
+    そしてそのコンテナーは`web`という名前でネットワーク`myapp_default`に参加します。
+3.  `db`に関する設定に従って 1 つのコンテナーが生成されます。
+    そしてそのコンテナーは`db`という名前でネットワーク`myapp_default`に参加します。
 @z
 
 @x
@@ -113,11 +113,11 @@ When you run `docker-compose up`, the following happens:
 > In Compose file format 3.x, you can optionally set the `attachable` property
 > to `false`.
 @y
-> **v2.1 以降、overlay ネットワークは常に `attachable` に**
+> **v2.1 以降、overlay ネットワークは常に`attachable`に**
 >
-> Compose ファイルフォーマット 2.1 から、overlay ネットワークは常に `attachable` として生成されるようになりましたが、これを変更することはできません。
-> `attachable` として生成されるため、スタンドアロンのコンテナーでも overlay ネットワークに接続することができます。
-> Compose ファイルフォーマット 3.x においては、必要に応じて `attachable` プロパティに `false` を設定できます。
+> Compose ファイルフォーマット 2.1 から、overlay ネットワークは常に`attachable`として生成されるようになりましたが、これを変更することはできません。
+> `attachable`として生成されるため、スタンドアロンのコンテナーでも overlay ネットワークに接続することができます。
+> Compose ファイルフォーマット 3.x においては、必要に応じて`attachable`プロパティに`false`を設定できます。
 @z
 
 @x
@@ -126,8 +126,8 @@ get back the appropriate container's IP address. For example, `web`'s
 application code could connect to the URL `postgres://db:5432` and start
 using the Postgres database.
 @y
-各コンテナーはこれ以降、ホスト名 `web` と `db` を認識できるようになり、コンテナーの IP アドレスも適切に取得できるようになります。
-たとえば `web` のアプリケーションコードでは、URL `postgres://db:5432` を使ってのアクセスが可能となり、Postgres データベースの利用ができるようになります。
+各コンテナーはこれ以降、ホスト名`web`と`db`を認識できるようになり、コンテナーの IP アドレスも適切に取得できるようになります。
+たとえば`web`のアプリケーションコードでは、URL`postgres://db:5432`を使ってのアクセスが可能となり、Postgres データベースの利用ができるようになります。
 @z
 
 @x
@@ -137,10 +137,10 @@ In the above example, for `db`, the `HOST_PORT` is `8001` and the container port
 communication uses the `CONTAINER_PORT`. When `HOST_PORT` is defined,
 the service is accessible outside the swarm as well.
 @y
-`HOST_PORT` と `CONTAINER_PORT` の違いについては理解しておくことが重要です。
-上の例の `db` では、`HOST_PORT` が `8001`、コンテナーポートが `5432`（postgres のデフォルト） になっています。
-ネットワークにより接続されているサービス間の通信は `CONTAINER_PORT` を利用します。
-`HOST_PORT` を定義すると、このサービスはスウォームの外からもアクセスが可能になります。
+`HOST_PORT`と`CONTAINER_PORT`の違いについては理解しておくことが重要です。
+上の例の`db`では、`HOST_PORT`が`8001`、コンテナーポートが `5432`（postgres のデフォルト） になっています。
+ネットワークにより接続されているサービス間の通信は`CONTAINER_PORT`を利用します。
+`HOST_PORT`を定義すると、このサービスはスウォームの外からもアクセスが可能になります。
 @z
 
 @x
@@ -148,8 +148,8 @@ Within the `web` container, your connection string to `db` would look like
 `postgres://db:5432`, and from the host machine, the connection string would
 look like `postgres://{DOCKER_IP}:8001`.
 @y
-`web` コンテナー内では、`db` への接続文字列は `postgres://db:5432` といったものになります。
-そしてホストマシン上からは、その接続文字列は `postgres://{DOCKER_IP}:8001` となります。
+`web`コンテナー内では、`db`への接続文字列は`postgres://db:5432`といったものになります。
+そしてホストマシン上からは、その接続文字列は`postgres://{DOCKER_IP}:8001`となります。
 @z
 
 @x
@@ -162,7 +162,7 @@ look like `postgres://{DOCKER_IP}:8001`.
 @x
 If you make a configuration change to a service and run `docker-compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
 @y
-サービスに対する設定を変更して `docker-compose up` により更新を行うと、それまでのコンテナーは削除されて新しいコンテナーがネットワークに接続されます。
+サービスに対する設定を変更して`docker-compose up`により更新を行うと、それまでのコンテナーは削除されて新しいコンテナーがネットワークに接続されます。
 このとき IP アドレスは異なることになりますが、ホスト名は変わりません。
 コンテナーの実行によってホスト名による名前解決を行い、新たな IP アドレスへ接続します。
 それまでの古い IP アドレスは利用できなくなります。
@@ -187,31 +187,33 @@ Links allow you to define extra aliases by which a service is reachable from ano
 links は自サービスが他のサービスからアクセスできるように、追加でエイリアスを定義するものです。
 これはサービス間の通信を行うために必要となるわけではありません。
 デフォルトにおいてサービスは、サービス名を使って他サービスにアクセスできます。
-以下の例においては、`db` は `web` からアクセス可能であり、ホスト名 `db` あるいは `database` を使ってアクセスできます。
+以下の例においては、`db`は`web`からアクセス可能であり、ホスト名`db`あるいは`database`を使ってアクセスできます。
 @z
 
 @x
-    version: "3"
-    services:
-@y
-    version: "3"
-    services:
-@z
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
 
-@x
-      web:
-        build: .
-        links:
-          - "db:database"
-      db:
-        image: postgres
+  web:
+    build: .
+    links:
+      - "db:database"
+  db:
+    image: postgres
+```
 @y
-      web:
-        build: .
-        links:
-          - "db:database"
-      db:
-        image: postgres
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+
+  web:
+    build: .
+    links:
+      - "db:database"
+  db:
+    image: postgres
+```
 @z
 
 @x
@@ -254,7 +256,7 @@ to learn about multi-host overlay networks.
 Instead of just using the default app network, you can specify your own networks with the top-level `networks` key. This lets you create more complex topologies and specify [custom network drivers](/engine/extend/plugins_network/) and options. You can also use it to connect services to externally-created networks which aren't managed by Compose.
 @y
 デフォルトのアプリ用ネットワークを利用するのではなく、独自のネットワークを指定することができます。
-これは最上位の `networks` キーを使って行います。
+これは最上位の`networks`キーを使って行います。
 これを使えば、より複雑なネットワークトポロジーを生成したり、[独自のネットワークドライバー](/engine/extend/plugins_network/) とそのオプションを設定したりすることができます。
 さらには、Compose が管理していない、外部に生成されたネットワークに対してサービスを接続することもできます。
 @z
@@ -262,79 +264,79 @@ Instead of just using the default app network, you can specify your own networks
 @x
 Each service can specify what networks to connect to with the *service-level* `networks` key, which is a list of names referencing entries under the *top-level* `networks` key.
 @y
-サービスレベルの定義となる `networks` キーを利用すれば、サービスごとにどのネットワークに接続するかを指定できます。
-指定する値はサービス名のリストであり、最上位の `networks` キーに指定されている値を参照するものです。
+サービスレベルの定義となる`networks`キーを利用すれば、サービスごとにどのネットワークに接続するかを指定できます。
+指定する値はサービス名のリストであり、最上位の`networks`キーに指定されている値を参照するものです。
 @z
 
 @x
 Here's an example Compose file defining two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common - only `app` can talk to both.
 @y
 以下において Compose ファイルは、独自のネットワークを 2 つ定義しています。
-`proxy` サービスは `db` サービスから切り離されています。
+`proxy`サービスは`db`サービスから切り離されています。
 というのも両者はネットワークを共有しないためです。
-そして `app` だけがその両者と通信を行います。
+そして`app`だけがその両者と通信を行います。
 @z
 
 @x
-    version: "3"
-    services:
-@y
-    version: "3"
-    services:
-@z
+```yaml
+version: "{{ site.compose_file_v3 }}"
 
-@x
-      proxy:
-        build: ./proxy
-        networks:
-          - frontend
-      app:
-        build: ./app
-        networks:
-          - frontend
-          - backend
-      db:
-        image: postgres
-        networks:
-          - backend
-@y
-      proxy:
-        build: ./proxy
-        networks:
-          - frontend
-      app:
-        build: ./app
-        networks:
-          - frontend
-          - backend
-      db:
-        image: postgres
-        networks:
-          - backend
-@z
+services:
+   proxy:
+    build: ./proxy
+      networks:
+        - frontend
+   app:
+     build: ./app
+      networks:
+        - frontend
+        - backend
+   db:
+     image: postgres
+      networks:
+        - backend
 
-@x
-    networks:
-      frontend:
-        # Use a custom driver
-        driver: custom-driver-1
-      backend:
-        # Use a custom driver which takes special options
-        driver: custom-driver-2
-        driver_opts:
-          foo: "1"
-          bar: "2"
+networks:
+  frontend:
+    # Use a custom driver
+    driver: custom-driver-1
+  backend:
+    # Use a custom driver which takes special options
+    driver: custom-driver-2
+    driver_opts:
+    foo: "1"
+    bar: "2"
+```
 @y
-    networks:
-      frontend:
-        # 独自ドライバーの利用
-        driver: custom-driver-1
-      backend:
-        # 所定のオプションを用いる独自ドライバーの利用
-        driver: custom-driver-2
-        driver_opts:
-          foo: "1"
-          bar: "2"
+```yaml
+version: "{{ site.compose_file_v3 }}"
+
+services:
+   proxy:
+    build: ./proxy
+      networks:
+        - frontend
+   app:
+     build: ./app
+      networks:
+        - frontend
+        - backend
+   db:
+     image: postgres
+      networks:
+        - backend
+
+networks:
+  frontend:
+    # 独自ドライバーの利用
+    driver: custom-driver-1
+  backend:
+    # 所定のオプションを用いる独自ドライバーの利用
+    driver: custom-driver-2
+    driver_opts:
+    foo: "1"
+    bar: "2"
+```
 @z
 
 @x
@@ -351,17 +353,25 @@ Networks can also be given a [custom name](compose-file/compose-file-v3.md#netwo
 @z
 
 @x
-    version: "3.5"
-    networks:
-      frontend:
-        name: custom_frontend
-        driver: custom-driver-1
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  # ...
+networks:
+  frontend:
+    name: custom_frontend
+    driver: custom-driver-1
+```
 @y
-    version: "3.5"
-    networks:
-      frontend:
-        name: custom_frontend
-        driver: custom-driver-1
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  # ...
+networks:
+  frontend:
+    name: custom_frontend
+    driver: custom-driver-1
+```
 @z
 
 @x
@@ -374,8 +384,8 @@ For full details of the network configuration options available, see the followi
 - [Top-level `networks` key](compose-file/compose-file-v2.md#network-configuration-reference)
 - [Service-level `networks` key](compose-file/compose-file-v2.md#networks)
 @y
-- [最上位の `networks` キー](compose-file/compose-file-v2.md#network-configuration-reference)
-- [service レベルの `networks` キー](compose-file/compose-file-v2.md#networks)
+- [最上位の`networks`キー](compose-file/compose-file-v2.md#network-configuration-reference)
+- [service レベルの`networks`キー](compose-file/compose-file-v2.md#networks)
 @z
 
 @x
@@ -389,39 +399,41 @@ For full details of the network configuration options available, see the followi
 Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 @y
 独自のネットワーク設定は行わずに、あるいはそれを行った上でさらに、アプリに対するデフォルトネットワークの設定を変更することができます。
-これは `networks` のもとに `default` という項目を定義して行います。
+これは`networks`のもとに`default`という項目を定義して行います。
 @z
 
 @x
-    version: "3"
-    services:
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+ db:
+   image: postgres
 
-      web:
-        build: .
-        ports:
-          - "8000:8000"
-      db:
-        image: postgres
-
-    networks:
-      default:
-        # Use a custom driver
-        driver: custom-driver-1
+networks:
+  default:
+    # Use a custom driver
+    driver: custom-driver-1
+```
 @y
-    version: "3"
-    services:
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+ db:
+   image: postgres
 
-      web:
-        build: .
-        ports:
-          - "8000:8000"
-      db:
-        image: postgres
-
-    networks:
-      default:
-        # 独自のドライバーを利用
-        driver: custom-driver-1
+networks:
+  default:
+    # 独自のドライバーを利用
+    driver: custom-driver-1
+```
 @z
 
 @x
@@ -434,23 +446,31 @@ Instead of (or as well as) specifying your own networks, you can also change the
 @x
 If you want your containers to join a pre-existing network, use the [`external` option](compose-file/compose-file-v2.md#network-configuration-reference):
 @y
-コンテナーを既存のネットワークに接続したい場合は [`external` オプション](compose-file/compose-file-v2.md#network-configuration-reference) を利用します。
+コンテナーを既存のネットワークに接続したい場合は [`external`オプション](compose-file/compose-file-v2.md#network-configuration-reference) を利用します。
 @z
 
 @x
-    networks:
-      default:
-        external:
-          name: my-pre-existing-network
+```yaml
+services:
+  # ...
+networks:
+  default:
+    external:
+      name: my-pre-existing-network
+```
 @y
-    networks:
-      default:
-        external:
-          name: my-pre-existing-network
+```yaml
+services:
+  # ...
+networks:
+  default:
+    external:
+      name: my-pre-existing-network
+```
 @z
 
 @x
 Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connect your app's containers to it.
 @y
-Compose は `[projectname]_default` という名前のネットワークを生成しようとはせず、`my-pre-existing-network` というネットワークを探し出して、アプリのコンテナーをそこに接続します。
+Compose は`[projectname]_default`という名前のネットワークを生成しようとはせず、`my-pre-existing-network`というネットワークを探し出して、アプリのコンテナーをそこに接続します。
 @z

@@ -19,10 +19,6 @@ title: よくたずねられる質問
 If you don’t see your question here, feel free to drop by `#docker-compose` on
 freenode IRC and ask the community.
 @y
-{% comment %}
-If you don’t see your question here, feel free to drop by `#docker-compose` on
-freenode IRC and ask the community.
-{% endcomment %}
 If you don’t see your question here, feel free to drop by `#docker-compose` on
 freenode IRC and ask the community.
 @z
@@ -30,9 +26,6 @@ freenode IRC and ask the community.
 @x
 ## Can I control service startup order?
 @y
-{% comment %}
-## Can I control service startup order?
-{% endcomment %}
 ## サービスの起動順は制御できますか？
 {: #can-i-control-service-startup-order }
 @z
@@ -40,9 +33,6 @@ freenode IRC and ask the community.
 @x
 Yes - see [Controlling startup order](startup-order.md).
 @y
-{% comment %}
-Yes - see [Controlling startup order](startup-order.md).
-{% endcomment %}
 はい。
 [起動順の制御](startup-order.md) を参照してください。
 @z
@@ -50,9 +40,6 @@ Yes - see [Controlling startup order](startup-order.md).
 @x
 ## Why do my services take 10 seconds to recreate or stop?
 @y
-{% comment %}
-## Why do my services take 10 seconds to recreate or stop?
-{% endcomment %}
 ## サービスの再生成や停止に 10 秒もかかるのはなぜ？
 {: #why-do-my-services-take-10-seconds-to-recreate-or-stop }
 @z
@@ -64,13 +51,6 @@ a `SIGKILL` is sent to the container to forcefully kill it.  If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
 @y
-{% comment %}
-Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
-for a [default timeout of 10 seconds](reference/stop.md).  After the timeout,
-a `SIGKILL` is sent to the container to forcefully kill it.  If you
-are waiting for this timeout, it means that your containers aren't shutting down
-when they receive the `SIGTERM` signal.
-{% endcomment %}
 Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
 for a [default timeout of 10 seconds](reference/stop.md).  After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it.  If you
@@ -83,11 +63,6 @@ There has already been a lot written about this problem of
 [processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
 in containers.
 @y
-{% comment %}
-There has already been a lot written about this problem of
-[processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
-in containers.
-{% endcomment %}
 There has already been a lot written about this problem of
 [processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
 in containers.
@@ -96,9 +71,6 @@ in containers.
 @x
 To fix this problem, try the following:
 @y
-{% comment %}
-To fix this problem, try the following:
-{% endcomment %}
 To fix this problem, try the following:
 @z
 
@@ -106,10 +78,6 @@ To fix this problem, try the following:
 * Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 @y
-{% comment %}
-* Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
-in your Dockerfile.
-{% endcomment %}
 * Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 @z
@@ -120,12 +88,6 @@ in your Dockerfile.
   doesn't handle signals properly. Compose always uses the JSON form, so don't
   worry if you override the command or entrypoint in your Compose file.
 @y
-  {% comment %}
-  For example use `["program", "arg1", "arg2"]` not `"program arg1 arg2"`.
-  Using the string form causes Docker to run your process using `bash` which
-  doesn't handle signals properly. Compose always uses the JSON form, so don't
-  worry if you override the command or entrypoint in your Compose file.
-  {% endcomment %}
   For example use `["program", "arg1", "arg2"]` not `"program arg1 arg2"`.
   Using the string form causes Docker to run your process using `bash` which
   doesn't handle signals properly. Compose always uses the JSON form, so don't
@@ -136,10 +98,6 @@ in your Dockerfile.
 * If you are able, modify the application that you're running to
 add an explicit signal handler for `SIGTERM`.
 @y
-{% comment %}
-* If you are able, modify the application that you're running to
-add an explicit signal handler for `SIGTERM`.
-{% endcomment %}
 * If you are able, modify the application that you're running to
 add an explicit signal handler for `SIGTERM`.
 @z
@@ -147,20 +105,23 @@ add an explicit signal handler for `SIGTERM`.
 @x
 * Set the `stop_signal` to a signal which the application knows how to handle:
 @y
-{% comment %}
-* Set the `stop_signal` to a signal which the application knows how to handle:
-{% endcomment %}
 * Set the `stop_signal` to a signal which the application knows how to handle:
 @z
 
 @x
-      web:
-        build: .
-        stop_signal: SIGINT
+```yaml
+services:
+  web:
+    build: .
+    stop_signal: SIGINT
+```
 @y
-      web:
-        build: .
-        stop_signal: SIGINT
+```yaml
+services:
+  web:
+    build: .
+    stop_signal: SIGINT
+```
 @z
 
 @x
@@ -170,13 +131,6 @@ system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
 handling `SIGTERM` properly.
 @y
-{% comment %}
-* If you can't modify the application, wrap the application in a lightweight init
-system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
-[dumb-init](https://github.com/Yelp/dumb-init) or
-[tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
-handling `SIGTERM` properly.
-{% endcomment %}
 * If you can't modify the application, wrap the application in a lightweight init
 system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
@@ -187,9 +141,6 @@ handling `SIGTERM` properly.
 @x
 ## How do I run multiple copies of a Compose file on the same host?
 @y
-{% comment %}
-## How do I run multiple copies of a Compose file on the same host?
-{% endcomment %}
 ## 1 つのホスト上で Compose ファイルを複数稼動させるには？
 {: #how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host }
 @z
@@ -200,12 +151,6 @@ project's  containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line option](reference/overview.md)
 or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 @y
-{% comment %}
-Compose uses the project name to create unique identifiers for all of a
-project's  containers and other resources. To run multiple copies of a project,
-set a custom project name using the [`-p` command line option](reference/overview.md)
-or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
-{% endcomment %}
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line option](reference/overview.md)
@@ -215,9 +160,6 @@ or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compos
 @x
 ## What's the difference between `up`, `run`, and `start`?
 @y
-{% comment %}
-## What's the difference between `up`, `run`, and `start`?
-{% endcomment %}
 ## What's the difference between `up`, `run`, and `start`?
 {: #whats-the-difference-between-up-run-and-start }
 @z
@@ -281,12 +223,12 @@ specify the filename to use, for example:
 @z
 
 @x
-```bash
-docker-compose -f docker-compose.json up
+```console
+$ docker-compose -f docker-compose.json up
 ```
 @y
-```bash
-docker-compose -f docker-compose.json up
+```console
+$ docker-compose -f docker-compose.json up
 ```
 @z
 
@@ -338,18 +280,15 @@ the directory contents of the image.
 
 @x
 There are [many examples of Compose files on
-github](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
+GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
 @y
 There are [many examples of Compose files on
-github](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
+GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
 @z
 
 @x
 ## Compose documentation
 @y
-{% comment %}
-## Compose documentation
-{% endcomment %}
 {: #compose-documentation }
 ## Compose ドキュメント
 @z
@@ -362,14 +301,6 @@ github](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml
 - [Compose file reference](compose-file/index.md)
 - [Sample apps with Compose](samples-for-compose.md)
 @y
-{% comment %}
-- [User guide](index.md)
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
-{% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
 - [はじめよう](gettingstarted.md)

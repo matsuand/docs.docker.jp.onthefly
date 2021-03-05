@@ -61,13 +61,17 @@ available.
 @z
 
 @x
-    ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
-    ```
+   ```console
+   $ sudo curl \
+       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose \
+       -o /etc/bash_completion.d/docker-compose
+   ```
 @y
-    ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
-    ```
+   ```console
+   $ sudo curl \
+       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose \
+       -o /etc/bash_completion.d/docker-compose
+   ```
 @z
 
 @x
@@ -93,19 +97,23 @@ available.
 @z
 
 @x
-    For example, when running this command on Mac 10.13.2, place the completion script in `/usr/local/etc/bash_completion.d/`.
+   For example, place the completion script in `/usr/local/etc/bash_completion.d/`.
 @y
-    たとえば Mac 10.13.2 を利用している場合、補完スクリプトを`/usr/local/etc/bash_completion.d/`に置きます。
+    補完スクリプトはたとえば`/usr/local/etc/bash_completion.d/`に置きます。
 @z
 
 @x
-    ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /usr/local/etc/bash_completion.d/docker-compose
-    ```
+   ```console
+   $ sudo curl \
+       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose \
+       -o /usr/local/etc/bash_completion.d/docker-compose
+   ```
 @y
-    ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /usr/local/etc/bash_completion.d/docker-compose
-    ```
+   ```console
+   $ sudo curl \
+       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose \
+       -o /usr/local/etc/bash_completion.d/docker-compose
+   ```
 @z
 
 @x
@@ -115,17 +123,17 @@ available.
 @z
 
 @x
-    ```shell
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-    fi
-    ```
+   ```shell
+   if [ -f $(brew --prefix)/etc/bash_completion ]; then
+       . $(brew --prefix)/etc/bash_completion
+   fi
+   ```
 @y
-    ```shell
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-    fi
-    ```
+   ```shell
+   if [ -f $(brew --prefix)/etc/bash_completion ]; then
+       . $(brew --prefix)/etc/bash_completion
+   fi
+   ```
 @z
 
 @x
@@ -155,17 +163,17 @@ completion.
 @z
 
 @x
-    ```shell
-    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-    . /opt/local/etc/profile.d/bash_completion.sh
-    fi
-    ```
+   ```shell
+   if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+       . /opt/local/etc/profile.d/bash_completion.sh
+   fi
+   ```
 @y
-    ```shell
-    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-    . /opt/local/etc/profile.d/bash_completion.sh
-    fi
-    ```
+   ```shell
+   if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+       . /opt/local/etc/profile.d/bash_completion.sh
+   fi
+   ```
 @z
 
 @x
@@ -195,7 +203,9 @@ Make sure you have [installed `oh-my-zsh`](https://ohmyz.sh/) on your computer.
 @z
 
 @x
-Add `docker` and `docker-compose` to the plugins list in `~/.zshrc` to run autocompletion within the oh-my-zsh shell. In the following example, `...` represent other Zsh plugins you may have installed.
+Add `docker` and `docker-compose` to the plugins list in `~/.zshrc` to run
+autocompletion within the oh-my-zsh shell. In the following example, `...`
+represent other Zsh plugins you may have installed.
 @y
 `~/.zshrc`内のプラグインリストに`docker`と`docker-compose`を加えます。
 これにより oh-my-zsh シェル内での自動補完機能を有効にします。
@@ -204,13 +214,11 @@ Add `docker` and `docker-compose` to the plugins list in `~/.zshrc` to run autoc
 
 @x
 ```shell
-plugins=(... docker docker-compose
-)
+plugins=(... docker docker-compose)
  ```
 @y
 ```shell
-plugins=(... docker docker-compose
-)
+plugins=(... docker docker-compose)
  ```
 @z
 
@@ -228,15 +236,19 @@ plugins=(... docker docker-compose
 @z
 
 @x
-    ```shell
-    $ mkdir -p ~/.zsh/completion
-    $ curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
-    ```
+   ```console
+   $ mkdir -p ~/.zsh/completion
+   $ curl \
+       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose \
+       -o ~/.zsh/completion/_docker-compose
+   ```
 @y
-    ```shell
-    $ mkdir -p ~/.zsh/completion
-    $ curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
-    ```
+   ```console
+   $ mkdir -p ~/.zsh/completion
+   $ curl \
+       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose \
+       -o ~/.zsh/completion/_docker-compose
+   ```
 @z
 
 @x
@@ -246,13 +258,13 @@ plugins=(... docker docker-compose
 @z
 
 @x
-    ```shell
-    fpath=(~/.zsh/completion $fpath)
-    ```
+   ```shell
+   fpath=(~/.zsh/completion $fpath)
+   ```
 @y
-    ```shell
-    fpath=(~/.zsh/completion $fpath)
-    ```
+   ```shell
+   fpath=(~/.zsh/completion $fpath)
+   ```
 @z
 
 @x
@@ -262,13 +274,13 @@ plugins=(... docker docker-compose
 @z
 
 @x
-    ```shell
-    autoload -Uz compinit && compinit -i
-    ```
+   ```shell
+   autoload -Uz compinit && compinit -i
+   ```
 @y
-    ```shell
-    autoload -Uz compinit && compinit -i
-    ```
+   ```shell
+   autoload -Uz compinit && compinit -i
+   ```
 @z
 
 @x
@@ -278,13 +290,13 @@ plugins=(... docker docker-compose
 @z
 
 @x
-    ```shell
-    exec $SHELL -l
-    ```
+   ```console
+   $ exec $SHELL -l
+   ```
 @y
-    ```shell
-    exec $SHELL -l
-    ```
+   ```console
+   $ exec $SHELL -l
+   ```
 @z
 
 @x

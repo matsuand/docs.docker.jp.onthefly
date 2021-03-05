@@ -46,13 +46,13 @@ purposes is to use the Docker compose file in the
 @z
 
 @x
-```bash
+```console
 $ git clone https://github.com/theupdateframework/notary.git
 $ cd notary
 $ docker-compose up
 ```
 @y
-```bash
+```console
 $ git clone https://github.com/theupdateframework/notary.git
 $ cd notary
 $ docker-compose up
@@ -96,11 +96,11 @@ For example, to connect using OpenSSL:
 @z
 
 @x
-```bash
+```console
 $ openssl s_client -connect <docker host>:4443 -CAfile fixtures/root-ca.crt -no_ssl3 -no_ssl2
 ```
 @y
-```bash
+```console
 $ openssl s_client -connect <docker host>:4443 -CAfile fixtures/root-ca.crt -no_ssl3 -no_ssl2
 ```
 @z
@@ -183,24 +183,24 @@ the following command line arguments:
 
 @x
 - `-debug` - Passing this flag enables the debugging server on `localhost:8080`.
-	The debugging server provides
-	[pprof](https://golang.org/pkg/net/http/pprof) and
-	[expvar](ttps://golang.org/pkg/expvar/) endpoints.
-	(Remember, this is localhost with respect to the running container - this endpoint is not
-	exposed from the container).
+    The debugging server provides
+    [pprof](https://golang.org/pkg/net/http/pprof) and
+    [expvar](ttps://golang.org/pkg/expvar/) endpoints.
+    (Remember, this is localhost with respect to the running container - this endpoint is not
+    exposed from the container).
 @y
 - `-debug` - Passing this flag enables the debugging server on `localhost:8080`.
-	The debugging server provides
-	[pprof](https://golang.org/pkg/net/http/pprof) and
-	[expvar](ttps://golang.org/pkg/expvar/) endpoints.
-	(Remember, this is localhost with respect to the running container - this endpoint is not
-	exposed from the container).
+    The debugging server provides
+    [pprof](https://golang.org/pkg/net/http/pprof) and
+    [expvar](ttps://golang.org/pkg/expvar/) endpoints.
+    (Remember, this is localhost with respect to the running container - this endpoint is not
+    exposed from the container).
 @z
 
 @x
-	This option can also be set in the configuration file.
+    This option can also be set in the configuration file.
 @y
-	This option can also be set in the configuration file.
+    This option can also be set in the configuration file.
 @z
 
 @x
@@ -271,16 +271,20 @@ configuration:
 
 @x
 ```json
-"storage": {
-  "backend": "mysql",
-  "db_url": "dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"
+{
+  "storage": {
+    "backend": "mysql",
+    "db_url": "dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"
+  }
 }
 ```
 @y
 ```json
-"storage": {
-  "backend": "mysql",
-  "db_url": "dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"
+{
+  "storage": {
+    "backend": "mysql",
+    "db_url": "dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"
+  }
 }
 ```
 @z
@@ -333,10 +337,10 @@ One way to do this would be:
 
 @x
 1. Generate your own TLS certificate and key as `server.crt` and `server.key`,
-	and put them in the directory `/tmp/server-configdir`.
+    and put them in the directory `/tmp/server-configdir`.
 @y
 1. Generate your own TLS certificate and key as `server.crt` and `server.key`,
-	and put them in the directory `/tmp/server-configdir`.
+    and put them in the directory `/tmp/server-configdir`.
 @z
 
 @x
@@ -346,57 +350,61 @@ One way to do this would be:
 @z
 
 @x
-		{
-		  "server": {
-		    "http_addr": ":4443",
-		    "tls_key_file": "./server.key",
-			"tls_cert_file": "./server.crt"
-		  },
-		  "trust_service": {
-		    "type": "remote",
-		    "hostname": "notarysigner",
-		    "port": "7899",
-		    "tls_ca_file": "./root-ca.crt",
-		    "key_algorithm": "ecdsa",
-		    "tls_client_cert": "./notary-server.crt",
-		    "tls_client_key": "./notary-server.key"
-		  },
-		  "storage": {
-		    "backend": "mysql",
-		    "db_url": "server@tcp(mysql:3306)/notaryserver?parseTime=True"
-		  }
-		}
+```json
+{
+  "server": {
+    "http_addr": ":4443",
+    "tls_key_file": "./server.key",
+    "tls_cert_file": "./server.crt"
+  },
+  "trust_service": {
+    "type": "remote",
+    "hostname": "notarysigner",
+    "port": "7899",
+    "tls_ca_file": "./root-ca.crt",
+    "key_algorithm": "ecdsa",
+    "tls_client_cert": "./notary-server.crt",
+    "tls_client_key": "./notary-server.key"
+  },
+  "storage": {
+    "backend": "mysql",
+    "db_url": "server@tcp(mysql:3306)/notaryserver?parseTime=True"
+  }
+}
+```
 @y
-		{
-		  "server": {
-		    "http_addr": ":4443",
-		    "tls_key_file": "./server.key",
-			"tls_cert_file": "./server.crt"
-		  },
-		  "trust_service": {
-		    "type": "remote",
-		    "hostname": "notarysigner",
-		    "port": "7899",
-		    "tls_ca_file": "./root-ca.crt",
-		    "key_algorithm": "ecdsa",
-		    "tls_client_cert": "./notary-server.crt",
-		    "tls_client_key": "./notary-server.key"
-		  },
-		  "storage": {
-		    "backend": "mysql",
-		    "db_url": "server@tcp(mysql:3306)/notaryserver?parseTime=True"
-		  }
-		}
+```json
+{
+  "server": {
+    "http_addr": ":4443",
+    "tls_key_file": "./server.key",
+    "tls_cert_file": "./server.crt"
+  },
+  "trust_service": {
+    "type": "remote",
+    "hostname": "notarysigner",
+    "port": "7899",
+    "tls_ca_file": "./root-ca.crt",
+    "key_algorithm": "ecdsa",
+    "tls_client_cert": "./notary-server.crt",
+    "tls_client_key": "./notary-server.key"
+  },
+  "storage": {
+    "backend": "mysql",
+    "db_url": "server@tcp(mysql:3306)/notaryserver?parseTime=True"
+  }
+}
+```
 @z
 
 @x
-	NWe include a remote trust service and a database storage
-	type to demonstrate how environment variables can override
-	configuration parameters.
+    NWe include a remote trust service and a database storage
+    type to demonstrate how environment variables can override
+    configuration parameters.
 @y
-	NWe include a remote trust service and a database storage
-	type to demonstrate how environment variables can override
-	configuration parameters.
+    NWe include a remote trust service and a database storage
+    type to demonstrate how environment variables can override
+    configuration parameters.
 @z
 
 @x
@@ -406,37 +414,45 @@ One way to do this would be:
 @z
 
 @x
-		$ docker run \
-			-p "4443:4443" \
-			-v /tmp/server-configdir:/etc/docker/notary-server/ \
-			-e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
-			-e NOTARY_SERVER_STORAGE_BACKEND=memory \
-			-e NOTARY_SERVER_LOGGING_LEVEL=debug \
-			notary_server \
-				-config=/etc/docker/notary-server/config.json \
-				-logf=json
-		{"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
+```console
+$ docker run \
+    -p "4443:4443" \
+    -v /tmp/server-configdir:/etc/docker/notary-server/ \
+    -e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
+    -e NOTARY_SERVER_STORAGE_BACKEND=memory \
+    -e NOTARY_SERVER_LOGGING_LEVEL=debug \
+    notary_server \
+        -config=/etc/docker/notary-server/config.json \
+        -logf=json
 @y
-		$ docker run \
-			-p "4443:4443" \
-			-v /tmp/server-configdir:/etc/docker/notary-server/ \
-			-e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
-			-e NOTARY_SERVER_STORAGE_BACKEND=memory \
-			-e NOTARY_SERVER_LOGGING_LEVEL=debug \
-			notary_server \
-				-config=/etc/docker/notary-server/config.json \
-				-logf=json
-		{"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
+```console
+$ docker run \
+    -p "4443:4443" \
+    -v /tmp/server-configdir:/etc/docker/notary-server/ \
+    -e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
+    -e NOTARY_SERVER_STORAGE_BACKEND=memory \
+    -e NOTARY_SERVER_LOGGING_LEVEL=debug \
+    notary_server \
+        -config=/etc/docker/notary-server/config.json \
+        -logf=json
+@z
+
+@x
+{"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
+```
+@y
+{"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
+```
 @z
 
 @x
@@ -516,11 +532,11 @@ the system's `ca-certificates` directory.
 @z
 
 @x
-```bash
+```console
 $ alias notary="notary -s https://<dtr-url> -d ~/.docker/trust --tlscacert /usr/local/share/ca-certificates/<dtr-url>.crt"
 ```
 @y
-```bash
+```console
 $ alias notary="notary -s https://<dtr-url> -d ~/.docker/trust --tlscacert /usr/local/share/ca-certificates/<dtr-url>.crt"
 ```
 @z

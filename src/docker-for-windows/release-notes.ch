@@ -47,6 +47,33 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 3.2.1
+2021-03-04
+@y
+## Docker Desktop 3.2.1
+2021-03-04
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+@y
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Engine 20.10.5](https://docs.docker.com/engine/release-notes/#20105)
+@y
+- [Docker Engine 20.10.5](https://docs.docker.com/engine/release-notes/#20105)
+@z
+
+@x
 ## Docker Desktop 3.2.0
 2021-03-01
 @y
@@ -55,9 +82,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe)
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe)
 @z
 
 @x

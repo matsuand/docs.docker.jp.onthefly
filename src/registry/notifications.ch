@@ -80,25 +80,29 @@ them to the configuration. A simple example follows:
 @z
 
 @x
-      notifications:
-        endpoints:
-          - name: alistener
-            url: https://mylistener.example.com/event
-            headers:
-              Authorization: [Bearer <your token, if needed>]
-            timeout: 500ms
-            threshold: 5
-            backoff: 1s
+```yaml
+notifications:
+  endpoints:
+    - name: alistener
+      url: https://mylistener.example.com/event
+      headers:
+      Authorization: [Bearer <your token, if needed>]
+      timeout: 500ms
+      threshold: 5
+      backoff: 1s
+```
 @y
-      notifications:
-        endpoints:
-          - name: alistener
-            url: https://mylistener.example.com/event
-            headers:
-              Authorization: [Bearer <your token, if needed>]
-            timeout: 500ms
-            threshold: 5
-            backoff: 1s
+```yaml
+notifications:
+  endpoints:
+    - name: alistener
+      url: https://mylistener.example.com/event
+      headers:
+      Authorization: [Bearer <your token, if needed>]
+      timeout: 500ms
+      threshold: 5
+      backoff: 1s
+```
 @z
 
 @x
@@ -208,67 +212,67 @@ manifest:
 @x
 ```json
 {
-   "events": [
-      {
-         "id": "320678d8-ca14-430f-8bb6-4ca139cd83f7",
-         "timestamp": "2016-03-09T14:44:26.402973972-08:00",
-         "action": "pull",
-         "target": {
-            "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-            "size": 708,
-            "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
-            "length": 708,
-            "repository": "hello-world",
-            "url": "http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
-            "tag": "latest"
-         },
-         "request": {
-            "id": "6df24a34-0959-4923-81ca-14f09767db19",
-            "addr": "192.168.64.11:42961",
-            "host": "192.168.100.227:5000",
-            "method": "GET",
-            "useragent": "curl/7.38.0"
-         },
-         "actor": {},
-         "source": {
-            "addr": "xtal.local:5000",
-            "instanceID": "a53db899-3b4b-4a62-a067-8dd013beaca4"
-         }
+  "events": [
+    {
+      "id": "320678d8-ca14-430f-8bb6-4ca139cd83f7",
+      "timestamp": "2016-03-09T14:44:26.402973972-08:00",
+      "action": "pull",
+      "target": {
+        "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+        "size": 708,
+        "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
+        "length": 708,
+        "repository": "hello-world",
+        "url": "http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
+        "tag": "latest"
+      },
+      "request": {
+        "id": "6df24a34-0959-4923-81ca-14f09767db19",
+        "addr": "192.168.64.11:42961",
+        "host": "192.168.100.227:5000",
+        "method": "GET",
+        "useragent": "curl/7.38.0"
+      },
+      "actor": {},
+      "source": {
+        "addr": "xtal.local:5000",
+        "instanceID": "a53db899-3b4b-4a62-a067-8dd013beaca4"
       }
-   ]
+    }
+  ]
 }
 ```
 @y
 ```json
 {
-   "events": [
-      {
-         "id": "320678d8-ca14-430f-8bb6-4ca139cd83f7",
-         "timestamp": "2016-03-09T14:44:26.402973972-08:00",
-         "action": "pull",
-         "target": {
-            "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-            "size": 708,
-            "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
-            "length": 708,
-            "repository": "hello-world",
-            "url": "http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
-            "tag": "latest"
-         },
-         "request": {
-            "id": "6df24a34-0959-4923-81ca-14f09767db19",
-            "addr": "192.168.64.11:42961",
-            "host": "192.168.100.227:5000",
-            "method": "GET",
-            "useragent": "curl/7.38.0"
-         },
-         "actor": {},
-         "source": {
-            "addr": "xtal.local:5000",
-            "instanceID": "a53db899-3b4b-4a62-a067-8dd013beaca4"
-         }
+  "events": [
+    {
+      "id": "320678d8-ca14-430f-8bb6-4ca139cd83f7",
+      "timestamp": "2016-03-09T14:44:26.402973972-08:00",
+      "action": "pull",
+      "target": {
+        "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+        "size": 708,
+        "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
+        "length": 708,
+        "repository": "hello-world",
+        "url": "http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
+        "tag": "latest"
+      },
+      "request": {
+        "id": "6df24a34-0959-4923-81ca-14f09767db19",
+        "addr": "192.168.64.11:42961",
+        "host": "192.168.100.227:5000",
+        "method": "GET",
+        "useragent": "curl/7.38.0"
+      },
+      "actor": {},
+      "source": {
+        "addr": "xtal.local:5000",
+        "instanceID": "a53db899-3b4b-4a62-a067-8dd013beaca4"
       }
-   ]
+    }
+  ]
 }
 ```
 @z
@@ -285,17 +289,21 @@ only the digest and repository are sent.
 
 @x
 ```json
-"target": {
-            "digest": "sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845",
-            "repository": "library/test"
-},
+{
+  "target": {
+    "digest": "sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845",
+    "repository": "library/test"
+  }
+}
 ```
 @y
 ```json
-"target": {
-            "digest": "sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845",
-            "repository": "library/test"
-},
+{
+  "target": {
+    "digest": "sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845",
+    "repository": "library/test"
+  }
+}
 ```
 @z
 
@@ -326,13 +334,13 @@ The envelope contains one or more events, with the following json structure:
 @x
 ```json
 {
-	"events": [ ... ],
+  "events": [ "..." ]
 }
 ```
 @y
 ```json
 {
-	"events": [ ... ],
+  "events": [ "..." ]
 }
 ```
 @z
@@ -366,14 +374,14 @@ An example of a full event may look as follows:
 @z
 
 @x
-```json
-GET /callback
+```
+GET /callback HTTP/1.1
 Host: application/vnd.docker.distribution.events.v1+json
 Authorization: Bearer <your token, if needed>
 Content-Type: application/vnd.docker.distribution.events.v1+json
 @y
-```json
-GET /callback
+```
+GET /callback HTTP/1.1
 Host: application/vnd.docker.distribution.events.v1+json
 Authorization: Bearer <your token, if needed>
 Content-Type: application/vnd.docker.distribution.events.v1+json
@@ -381,164 +389,164 @@ Content-Type: application/vnd.docker.distribution.events.v1+json
 
 @x
 {
-   "events": [
-      {
-         "id": "asdf-asdf-asdf-asdf-0",
-         "timestamp": "2006-01-02T15:04:05Z",
-         "action": "push",
-         "target": {
-            "mediaType": "application/vnd.docker.distribution.manifest.v1+json",
-            "length": 1,
-            "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
-            "repository": "library/test",
-            "url": "https://example.com/v2/library/test/manifests/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
-         },
-         "request": {
-            "id": "asdfasdf",
-            "addr": "client.local",
-            "host": "registrycluster.local",
-            "method": "PUT",
-            "useragent": "test/0.1"
-         },
-         "actor": {
-            "name": "test-actor"
-         },
-         "source": {
-            "addr": "hostname.local:port"
-         }
+  "events": [
+    {
+      "id": "asdf-asdf-asdf-asdf-0",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.distribution.manifest.v1+json",
+        "length": 1,
+        "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/manifests/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
       },
-      {
-         "id": "asdf-asdf-asdf-asdf-1",
-         "timestamp": "2006-01-02T15:04:05Z",
-         "action": "push",
-         "target": {
-            "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
-            "length": 2,
-            "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
-            "repository": "library/test",
-            "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
-         },
-         "request": {
-            "id": "asdfasdf",
-            "addr": "client.local",
-            "host": "registrycluster.local",
-            "method": "PUT",
-            "useragent": "test/0.1"
-         },
-         "actor": {
-            "name": "test-actor"
-         },
-         "source": {
-            "addr": "hostname.local:port"
-         }
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
       },
-      {
-         "id": "asdf-asdf-asdf-asdf-2",
-         "timestamp": "2006-01-02T15:04:05Z",
-         "action": "push",
-         "target": {
-            "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
-            "length": 3,
-            "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
-            "repository": "library/test",
-            "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
-         },
-         "request": {
-            "id": "asdfasdf",
-            "addr": "client.local",
-            "host": "registrycluster.local",
-            "method": "PUT",
-            "useragent": "test/0.1"
-         },
-         "actor": {
-            "name": "test-actor"
-         },
-         "source": {
-            "addr": "hostname.local:port"
-         }
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
       }
-   ]
+    },
+    {
+      "id": "asdf-asdf-asdf-asdf-1",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
+        "length": 2,
+        "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
+      },
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
+      },
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
+      }
+    },
+    {
+      "id": "asdf-asdf-asdf-asdf-2",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
+        "length": 3,
+        "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
+      },
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
+      },
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
+      }
+    }
+  ]
 }
 ```
 @y
 {
-   "events": [
-      {
-         "id": "asdf-asdf-asdf-asdf-0",
-         "timestamp": "2006-01-02T15:04:05Z",
-         "action": "push",
-         "target": {
-            "mediaType": "application/vnd.docker.distribution.manifest.v1+json",
-            "length": 1,
-            "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
-            "repository": "library/test",
-            "url": "https://example.com/v2/library/test/manifests/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
-         },
-         "request": {
-            "id": "asdfasdf",
-            "addr": "client.local",
-            "host": "registrycluster.local",
-            "method": "PUT",
-            "useragent": "test/0.1"
-         },
-         "actor": {
-            "name": "test-actor"
-         },
-         "source": {
-            "addr": "hostname.local:port"
-         }
+  "events": [
+    {
+      "id": "asdf-asdf-asdf-asdf-0",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.distribution.manifest.v1+json",
+        "length": 1,
+        "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/manifests/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
       },
-      {
-         "id": "asdf-asdf-asdf-asdf-1",
-         "timestamp": "2006-01-02T15:04:05Z",
-         "action": "push",
-         "target": {
-            "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
-            "length": 2,
-            "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
-            "repository": "library/test",
-            "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
-         },
-         "request": {
-            "id": "asdfasdf",
-            "addr": "client.local",
-            "host": "registrycluster.local",
-            "method": "PUT",
-            "useragent": "test/0.1"
-         },
-         "actor": {
-            "name": "test-actor"
-         },
-         "source": {
-            "addr": "hostname.local:port"
-         }
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
       },
-      {
-         "id": "asdf-asdf-asdf-asdf-2",
-         "timestamp": "2006-01-02T15:04:05Z",
-         "action": "push",
-         "target": {
-            "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
-            "length": 3,
-            "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
-            "repository": "library/test",
-            "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
-         },
-         "request": {
-            "id": "asdfasdf",
-            "addr": "client.local",
-            "host": "registrycluster.local",
-            "method": "PUT",
-            "useragent": "test/0.1"
-         },
-         "actor": {
-            "name": "test-actor"
-         },
-         "source": {
-            "addr": "hostname.local:port"
-         }
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
       }
-   ]
+    },
+    {
+      "id": "asdf-asdf-asdf-asdf-1",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
+        "length": 2,
+        "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
+      },
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
+      },
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
+      }
+    },
+    {
+      "id": "asdf-asdf-asdf-asdf-2",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
+        "length": 3,
+        "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
+      },
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
+      },
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
+      }
+    }
+  ]
 }
 ```
 @z
@@ -597,98 +605,98 @@ several failures and have since recovered:
 
 @x
 ```json
-"notifications":{
-   "endpoints":[
+{
+  "notifications": {
+    "endpoints": [
       {
-         "name":"local-5003",
-         "url":"http://localhost:5003/callback",
-         "Headers":{
-            "Authorization":[
-               "Bearer \u003can example token\u003e"
-            ]
-         },
-         "Timeout":1000000000,
-         "Threshold":10,
-         "Backoff":1000000000,
-         "Metrics":{
-            "Pending":76,
-            "Events":76,
-            "Successes":0,
-            "Failures":0,
-            "Errors":46,
-            "Statuses":{
-@y
-```json
-"notifications":{
-   "endpoints":[
-      {
-         "name":"local-5003",
-         "url":"http://localhost:5003/callback",
-         "Headers":{
-            "Authorization":[
-               "Bearer \u003can example token\u003e"
-            ]
-         },
-         "Timeout":1000000000,
-         "Threshold":10,
-         "Backoff":1000000000,
-         "Metrics":{
-            "Pending":76,
-            "Events":76,
-            "Successes":0,
-            "Failures":0,
-            "Errors":46,
-            "Statuses":{
-@z
-
-@x
-            }
-         }
+        "name": "local-5003",
+        "url": "http://localhost:5003/callback",
+        "Headers": {
+          "Authorization": [
+            "Bearer \u003can example token\u003e"
+          ]
+        },
+        "Timeout": 1000000000,
+        "Threshold": 10,
+        "Backoff": 1000000000,
+        "Metrics": {
+          "Pending": 76,
+          "Events": 76,
+          "Successes": 0,
+          "Failures": 0,
+          "Errors": 46,
+          "Statuses": {
+          }
+        }
       },
       {
-         "name":"local-8083",
-         "url":"http://localhost:8083/callback",
-         "Headers":null,
-         "Timeout":1000000000,
-         "Threshold":10,
-         "Backoff":1000000000,
-         "Metrics":{
-            "Pending":0,
-            "Events":76,
-            "Successes":76,
-            "Failures":0,
-            "Errors":28,
-            "Statuses":{
-               "202 Accepted":76
-            }
-         }
+        "name": "local-8083",
+        "url": "http://localhost:8083/callback",
+        "Headers": null,
+        "Timeout": 1000000000,
+        "Threshold": 10,
+        "Backoff": 1000000000,
+        "Metrics": {
+          "Pending": 0,
+          "Events": 76,
+          "Successes": 76,
+          "Failures": 0,
+          "Errors": 28,
+          "Statuses": {
+            "202 Accepted": 76
+          }
+        }
       }
-   ]
+    ]
+  }
 }
 ```
 @y
-            }
-         }
+```json
+{
+  "notifications": {
+    "endpoints": [
+      {
+        "name": "local-5003",
+        "url": "http://localhost:5003/callback",
+        "Headers": {
+          "Authorization": [
+            "Bearer \u003can example token\u003e"
+          ]
+        },
+        "Timeout": 1000000000,
+        "Threshold": 10,
+        "Backoff": 1000000000,
+        "Metrics": {
+          "Pending": 76,
+          "Events": 76,
+          "Successes": 0,
+          "Failures": 0,
+          "Errors": 46,
+          "Statuses": {
+          }
+        }
       },
       {
-         "name":"local-8083",
-         "url":"http://localhost:8083/callback",
-         "Headers":null,
-         "Timeout":1000000000,
-         "Threshold":10,
-         "Backoff":1000000000,
-         "Metrics":{
-            "Pending":0,
-            "Events":76,
-            "Successes":76,
-            "Failures":0,
-            "Errors":28,
-            "Statuses":{
-               "202 Accepted":76
-            }
-         }
+        "name": "local-8083",
+        "url": "http://localhost:8083/callback",
+        "Headers": null,
+        "Timeout": 1000000000,
+        "Threshold": 10,
+        "Backoff": 1000000000,
+        "Metrics": {
+          "Pending": 0,
+          "Events": 76,
+          "Successes": 76,
+          "Failures": 0,
+          "Errors": 28,
+          "Statuses": {
+            "202 Accepted": 76
+          }
+        }
       }
-   ]
+    ]
+  }
 }
 ```
 @z
