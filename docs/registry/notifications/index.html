@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-26 13:55:31 +0900-->
+<!-- Page generated 2021-03-05 12:01:01 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Work with notifications | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Work with notifications" />
   <meta property="og:description" content="Explains how to work with registry notifications" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-05T12:01:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/notifications/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-05T12:01:01+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Work with notifications","description":"Explains how to work with registry notifications","url":"https://docs.docker.com/registry/notifications/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Work with notifications</h1><p><em class="reading-time">読む時間の目安: 11 分</em></p><!-- This text will be included in the Docker Registry docs -->
+                        <section class="section"><h1>Work with notifications</h1><p><em class="reading-time">読む時間の目安: 10 分</em></p><!-- This text will be included in the Docker Registry docs -->
 
 <blockquote class="important">
 
@@ -131,15 +131,15 @@ order is not guaranteed.</p>
 <p>To setup a registry instance to send notifications to endpoints, one must add
 them to the configuration. A simple example follows:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  notifications:
-    endpoints:
-      - name: alistener
-        url: https://mylistener.example.com/event
-        headers:
-          Authorization: [Bearer &lt;your token, if needed&gt;]
-        timeout: 500ms
-        threshold: 5
-        backoff: 1s
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">notifications</span><span class="pi">:</span>
+  <span class="na">endpoints</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">alistener</span>
+      <span class="na">url</span><span class="pi">:</span> <span class="s">https://mylistener.example.com/event</span>
+      <span class="na">headers</span><span class="pi">:</span>
+      <span class="na">Authorization</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">Bearer &lt;your token</span><span class="pi">,</span> <span class="nv">if needed&gt;</span><span class="pi">]</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="s">500ms</span>
+      <span class="na">threshold</span><span class="pi">:</span> <span class="m">5</span>
+      <span class="na">backoff</span><span class="pi">:</span> <span class="s">1s</span>
 </code></pre></div></div>
 
 <p>The above would configure the registry with an endpoint to send events to
@@ -242,34 +242,34 @@ requests, if required. Along with that, an <em>action</em> is provided with a
 manifest:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"320678d8-ca14-430f-8bb6-4ca139cd83f7"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-09T14:44:26.402973972-08:00"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pull"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"mediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.docker.distribution.manifest.v2+json"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello-world"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6df24a34-0959-4923-81ca-14f09767db19"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.64.11:42961"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.100.227:5000"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"useragent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"curl/7.38.0"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-         </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xtal.local:5000"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"instanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a53db899-3b4b-4a62-a067-8dd013beaca4"</span><span class="w">
-         </span><span class="p">}</span><span class="w">
+  </span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"320678d8-ca14-430f-8bb6-4ca139cd83f7"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-09T14:44:26.402973972-08:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pull"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"mediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.docker.distribution.manifest.v2+json"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">708</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello-world"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.100.227:5000/v2/hello-world/manifests/sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latest"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6df24a34-0959-4923-81ca-14f09767db19"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.64.11:42961"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.100.227:5000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"useragent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"curl/7.38.0"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xtal.local:5000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"instanceID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a53db899-3b4b-4a62-a067-8dd013beaca4"</span><span class="w">
       </span><span class="p">}</span><span class="w">
-   </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -277,10 +277,12 @@ manifest:</p>
 contains a subset of the data contained in Get and Put events. Specifically,
 only the digest and repository are sent.</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"library/test"</span><span class="w">
-</span><span class="p">}</span><span class="err">,</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:d89e1bee20d9cb344674e213b581f14fbd8e70274ecf9d10c514bab78a307845"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"library/test"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <blockquote>
@@ -295,7 +297,7 @@ future. Newer code should favor <code class="language-plaintext highlighter-roug
 <p>The envelope contains one or more events, with the following json structure:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"..."</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -310,91 +312,91 @@ request coming to an endpoint.</p>
 
 <p>An example of a full event may look as follows:</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">GET</span><span class="w"> </span><span class="err">/callback</span><span class="w">
-</span><span class="err">Host:</span><span class="w"> </span><span class="err">application/vnd.docker.distribution.events.v</span><span class="mi">1</span><span class="err">+json</span><span class="w">
-</span><span class="err">Authorization:</span><span class="w"> </span><span class="err">Bearer</span><span class="w"> </span><span class="err">&lt;your</span><span class="w"> </span><span class="err">token,</span><span class="w"> </span><span class="err">if</span><span class="w"> </span><span class="err">needed&gt;</span><span class="w">
-</span><span class="err">Content-Type:</span><span class="w"> </span><span class="err">application/vnd.docker.distribution.events.v</span><span class="mi">1</span><span class="err">+json</span><span class="w">
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /callback HTTP/1.1
+Host: application/vnd.docker.distribution.events.v1+json
+Authorization: Bearer &lt;your token, if needed&gt;
+Content-Type: application/vnd.docker.distribution.events.v1+json
 
-</span><span class="p">{</span><span class="w">
-   </span><span class="nl">"events"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdf-asdf-asdf-asdf-0"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2006-01-02T15:04:05Z"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"mediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.docker.distribution.manifest.v1+json"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"library/test"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/v2/library/test/manifests/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfasdf"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client.local"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registrycluster.local"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"useragent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test/0.1"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-actor"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hostname.local:port"</span><span class="w">
-         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdf-asdf-asdf-asdf-1"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2006-01-02T15:04:05Z"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"mediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.docker.container.image.rootfs.diff+x-gtar"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"library/test"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfasdf"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client.local"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registrycluster.local"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"useragent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test/0.1"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-actor"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hostname.local:port"</span><span class="w">
-         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdf-asdf-asdf-asdf-2"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2006-01-02T15:04:05Z"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"mediaType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.docker.container.image.rootfs.diff+x-gtar"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"digest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"repository"</span><span class="p">:</span><span class="w"> </span><span class="s2">"library/test"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdfasdf"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client.local"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registrycluster.local"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"useragent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test/0.1"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test-actor"</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hostname.local:port"</span><span class="w">
-         </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-   </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
+{
+  "events": [
+    {
+      "id": "asdf-asdf-asdf-asdf-0",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.distribution.manifest.v1+json",
+        "length": 1,
+        "digest": "sha256:fea8895f450959fa676bcc1df0611ea93823a735a01205fd8622846041d0c7cf",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/manifests/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
+      },
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
+      },
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
+      }
+    },
+    {
+      "id": "asdf-asdf-asdf-asdf-1",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
+        "length": 2,
+        "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
+      },
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
+      },
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
+      }
+    },
+    {
+      "id": "asdf-asdf-asdf-asdf-2",
+      "timestamp": "2006-01-02T15:04:05Z",
+      "action": "push",
+      "target": {
+        "mediaType": "application/vnd.docker.container.image.rootfs.diff+x-gtar",
+        "length": 3,
+        "digest": "sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5",
+        "repository": "library/test",
+        "url": "https://example.com/v2/library/test/blobs/sha256:c3b3692957d439ac1928219a83fac91e7bf96c153725526874673ae1f2023f8d5"
+      },
+      "request": {
+        "id": "asdfasdf",
+        "addr": "client.local",
+        "host": "registrycluster.local",
+        "method": "PUT",
+        "useragent": "test/0.1"
+      },
+      "actor": {
+        "name": "test-actor"
+      },
+      "source": {
+        "addr": "hostname.local:port"
+      }
+    }
+  ]
+}
+</code></pre></div></div>
 
 <h2 id="responses">Responses</h2>
 
@@ -416,49 +418,50 @@ configuration and metrics are available by endpoint.</p>
 <p>The following provides an example of a few endpoints that have experienced
 several failures and have since recovered:</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"notifications"</span><span class="p">:{</span><span class="w">
-   </span><span class="nl">"endpoints"</span><span class="p">:[</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"local-5003"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"url"</span><span class="p">:</span><span class="s2">"http://localhost:5003/callback"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Headers"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"Authorization"</span><span class="p">:[</span><span class="w">
-               </span><span class="s2">"Bearer </span><span class="se">\u</span><span class="s2">003can example token</span><span class="se">\u</span><span class="s2">003e"</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-         </span><span class="p">},</span><span class="w">
-         </span><span class="nl">"Timeout"</span><span class="p">:</span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Threshold"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Backoff"</span><span class="p">:</span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Metrics"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"Pending"</span><span class="p">:</span><span class="mi">76</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Events"</span><span class="p">:</span><span class="mi">76</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Successes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Failures"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Errors"</span><span class="p">:</span><span class="mi">46</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Statuses"</span><span class="p">:{</span><span class="w">
-
-            </span><span class="p">}</span><span class="w">
-         </span><span class="p">}</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local-5003"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:5003/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Headers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Authorization"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Bearer </span><span class="se">\u</span><span class="s2">003can example token</span><span class="se">\u</span><span class="s2">003e"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"Timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Threshold"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Backoff"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Events"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"local-8083"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"url"</span><span class="p">:</span><span class="s2">"http://localhost:8083/callback"</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Headers"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Timeout"</span><span class="p">:</span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Threshold"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Backoff"</span><span class="p">:</span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
-         </span><span class="nl">"Metrics"</span><span class="p">:{</span><span class="w">
-            </span><span class="nl">"Pending"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Events"</span><span class="p">:</span><span class="mi">76</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Successes"</span><span class="p">:</span><span class="mi">76</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Failures"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Errors"</span><span class="p">:</span><span class="mi">28</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"Statuses"</span><span class="p">:{</span><span class="w">
-               </span><span class="nl">"202 Accepted"</span><span class="p">:</span><span class="mi">76</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-         </span><span class="p">}</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local-8083"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:8083/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Headers"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Threshold"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Backoff"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Pending"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Events"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Successes"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Failures"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Errors"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Statuses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"202 Accepted"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
-   </span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 

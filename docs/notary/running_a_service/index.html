@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-26 13:55:31 +0900-->
+<!-- Page generated 2021-03-05 12:01:01 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Run a Notary service | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Run a Notary service" />
   <meta property="og:description" content="Run your own notary service to host arbitrary content signing." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-05T12:01:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/notary/running_a_service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-05T12:01:01+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Run a Notary service","description":"Run your own notary service to host arbitrary content signing.","url":"https://docs.docker.com/notary/running_a_service/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -110,9 +110,9 @@ and <a href="/compose/">Docker Compose</a>.</p>
 purposes is to use the Docker compose file in the
 <a href="https://github.com/docker/notary">Notary project</a>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/theupdateframework/notary.git
-<span class="nv">$ </span><span class="nb">cd </span>notary
-<span class="nv">$ </span>docker-compose up
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git clone https://github.com/theupdateframework/notary.git
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd </span>notary
+<span class="gp">$</span><span class="w"> </span>docker-compose up
 </code></pre></div></div>
 
 <p>This builds the development Notary server and Notary signer images, and
@@ -129,7 +129,7 @@ it, you must use the root CA file in <code class="language-plaintext highlighter
 
 <p>For example, to connect using OpenSSL:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>openssl s_client <span class="nt">-connect</span> &lt;docker host&gt;:4443 <span class="nt">-CAfile</span> fixtures/root-ca.crt <span class="nt">-no_ssl3</span> <span class="nt">-no_ssl2</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl s_client <span class="nt">-connect</span> &lt;docker host&gt;:4443 <span class="nt">-CAfile</span> fixtures/root-ca.crt <span class="nt">-no_ssl3</span> <span class="nt">-no_ssl2</span>
 </code></pre></div></div>
 
 <p>To connect using the Notary Client CLI, see <a href="/docs.docker.jp.onthefly/notary/getting_started/">Getting Started</a>.
@@ -202,9 +202,11 @@ configuration JSON.</p>
 <p>For instance, if you wanted to override the storage URL of the Notary server
 configuration:</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"storage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"backend"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"db_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"storage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"backend"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"db_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -235,54 +237,57 @@ values are strings or numbers.</p>
   </li>
   <li>
     <p>Write the following configuration file to <code class="language-plaintext highlighter-rouge">/tmp/server-configdir/config.json</code>:</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {
-   "server": {
-     "http_addr": ":4443",
-     "tls_key_file": "./server.key",
-     "tls_cert_file": "./server.crt"
-   },
-   "trust_service": {
-     "type": "remote",
-     "hostname": "notarysigner",
-     "port": "7899",
-     "tls_ca_file": "./root-ca.crt",
-     "key_algorithm": "ecdsa",
-     "tls_client_cert": "./notary-server.crt",
-     "tls_client_key": "./notary-server.key"
-   },
-   "storage": {
-     "backend": "mysql",
-     "db_url": "server@tcp(mysql:3306)/notaryserver?parseTime=True"
-   }
- }
-</code></pre></div>    </div>
-
-    <p>NWe include a remote trust service and a database storage
- type to demonstrate how environment variables can override
- configuration parameters.</p>
-  </li>
-  <li>
-    <p>Run the following command (assuming you’ve already built or pulled a Notary server docker image):</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ docker run \
-     -p "4443:4443" \
-     -v /tmp/server-configdir:/etc/docker/notary-server/ \
-     -e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
-     -e NOTARY_SERVER_STORAGE_BACKEND=memory \
-     -e NOTARY_SERVER_LOGGING_LEVEL=debug \
-     notary_server \
-         -config=/etc/docker/notary-server/config.json \
-         -logf=json
- {"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
- {"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
- {"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
- {"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
- {"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
- {"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
-</code></pre></div>    </div>
   </li>
 </ol>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"server"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"http_addr"</span><span class="p">:</span><span class="w"> </span><span class="s2">":4443"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tls_key_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./server.key"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tls_cert_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./server.crt"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"trust_service"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"remote"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notarysigner"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7899"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tls_ca_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./root-ca.crt"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"key_algorithm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ecdsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tls_client_cert"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./notary-server.crt"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tls_client_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./notary-server.key"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"storage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"backend"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"db_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"server@tcp(mysql:3306)/notaryserver?parseTime=True"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NWe include a remote trust service and a database storage
+type to demonstrate how environment variables can override
+configuration parameters.
+</code></pre></div></div>
+
+<ol>
+  <li>Run the following command (assuming you’ve already built or pulled a Notary server docker image):</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="se">\</span>
+    <span class="nt">-p</span> <span class="s2">"4443:4443"</span> <span class="se">\</span>
+    <span class="nt">-v</span> /tmp/server-configdir:/etc/docker/notary-server/ <span class="se">\</span>
+    <span class="nt">-e</span> <span class="nv">NOTARY_SERVER_TRUST_SERVICE_TYPE</span><span class="o">=</span><span class="nb">local</span> <span class="se">\</span>
+    <span class="nt">-e</span> <span class="nv">NOTARY_SERVER_STORAGE_BACKEND</span><span class="o">=</span>memory <span class="se">\</span>
+    <span class="nt">-e</span> <span class="nv">NOTARY_SERVER_LOGGING_LEVEL</span><span class="o">=</span>debug <span class="se">\</span>
+    notary_server <span class="se">\</span>
+        <span class="nt">-config</span><span class="o">=</span>/etc/docker/notary-server/config.json <span class="se">\</span>
+        <span class="nt">-logf</span><span class="o">=</span>json
+<span class="go">
+{"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
+</span></code></pre></div></div>
 
 <p>You can do the same using
 <a href="/compose/">Docker Compose</a> by setting volumes,
@@ -313,7 +318,7 @@ user’s home directory, at <code class="language-plaintext highlighter-rouge">~
 the command line, create an alias that maps the user’s <code class="language-plaintext highlighter-rouge">trust</code> directory to
 the system’s <code class="language-plaintext highlighter-rouge">ca-certificates</code> directory.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">alias </span><span class="nv">notary</span><span class="o">=</span><span class="s2">"notary -s https://&lt;dtr-url&gt; -d ~/.docker/trust --tlscacert /usr/local/share/ca-certificates/&lt;dtr-url&gt;.crt"</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">alias </span><span class="nv">notary</span><span class="o">=</span><span class="s2">"notary -s https://&lt;dtr-url&gt; -d ~/.docker/trust --tlscacert /usr/local/share/ca-certificates/&lt;dtr-url&gt;.crt"</span>
 </code></pre></div></div>
 
 <h3 id="databases">Databases</h3>
