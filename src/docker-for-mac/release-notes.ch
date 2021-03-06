@@ -81,10 +81,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406). If you are still experiencing this issue when trying to update from 3.2.0 to 3.2.1, we recommend that you uninstall 3.2.0 and manually install Docker Desktop 3.2.1.
 @y
 - Docker Desktop バージョン 3.2.0 にアップグレードした後に、Docker Desktop の起動に失敗することがある問題を修正しました。
   [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406) を Fix に。
+  3.2.0 から 3.2.1 にアップデートしてもまだ問題が解決しない場合は、3.2.0 をアンインストールし手動で 3.2.1 をインストールすることをお勧めします。
 @z
 
 @x

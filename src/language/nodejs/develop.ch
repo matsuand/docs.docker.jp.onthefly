@@ -562,13 +562,13 @@ Add the following code above the existing `server.use()` statement, and save the
 @z
 
 @x
-```node
+```js
  server.use( '/foo', (req, res) => {
    return res.json({ "foo": "bar" })
  })
 ```
 @y
-```node
+```js
  server.use( '/foo', (req, res) => {
    return res.json({ "foo": "bar" })
  })

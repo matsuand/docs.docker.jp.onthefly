@@ -117,7 +117,7 @@ IDE 環境においてワーキングディレクトリを開きます。
 @z
 
 @x
-```node
+```js
 const ronin     = require( 'ronin-server' )
 const mocks     = require( 'ronin-mocks' )
 
@@ -127,7 +127,7 @@ server.use( '/', mocks.server( server.Router(), false, true ) )
 server.start()
 ```
 @y
-```node
+```js
 const ronin     = require( 'ronin-server' )
 const mocks     = require( 'ronin-mocks' )
 
@@ -212,12 +212,12 @@ Switch back to the terminal where our server is running. You should now see the 
 @z
 
 @x
-```node
+```
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
 @y
-```node
+```
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```

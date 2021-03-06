@@ -525,13 +525,13 @@ server.js ファイルの 19 行めに以下のコードを追加して、ファ
 @z
 
 @x
-```node
+```js
  server.use( '/foo', (req, res) => {
    return res.json({ "foo": "bar" })
  })
 ```
 @y
-```node
+```js
  server.use( '/foo', (req, res) => {
    return res.json({ "foo": "bar" })
  })

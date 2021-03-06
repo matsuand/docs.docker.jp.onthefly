@@ -72,10 +72,10 @@ for Docker Engine.
 @z
 
 @x
-* Revert [docker/cli#2960](https://github.com/docker/cli/pull/2960) to fix hanging in `docker start --attach` and remove spurious "Unsupported signal: <nil>. Discarding." messages [docker/cli#2987](https://github.com/docker/cli/pull/2987)
+* Revert [docker/cli#2960](https://github.com/docker/cli/pull/2960) to fix hanging in `docker start --attach` and remove spurious `Unsupported signal: <nil>. Discarding` messages. [docker/cli#2987](https://github.com/docker/cli/pull/2987).
 @y
 * [docker/cli#2960](https://github.com/docker/cli/pull/2960) を元に戻して`docker start --attach`がハングしないようにしました。
-  また不適当な「Unsupported signal: <nil>. Discarding.」というメッセージを削除しました。
+  また不適当な`Unsupported signal: <nil>. Discarding`というメッセージを削除しました。
   [docker/cli#2987](https://github.com/docker/cli/pull/2987)
 @z
 

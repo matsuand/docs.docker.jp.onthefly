@@ -20,7 +20,8 @@ bases = \
 	compose-native-build \
 	daemon-access        \
 	formatting           \
-	rootless
+	rootless             \
+	tip-scanning
 
 ch_mds = $(bases:=.ch)
 tr_mds = $(bases:=.md)

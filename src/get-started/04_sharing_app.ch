@@ -30,6 +30,18 @@ Docker イメージを共有するには Docker レジストリを使うこと�
 @z
 
 @x
+> **Docker ID**
+>
+> A Docker ID allows you to access Docker Hub which is the world's largest library and community for container images. Create a [Docker ID](https://hub.docker.com/signup){:target="_blank" rel="noopener" class="_"} for free if you don't have one.
+@y
+> **Docker ID**
+>
+> Docker ID を利用すれば Docker Hub にアクセスすることができます。
+> Docker Hub は世界規模のコンテナーイメージライブラリおよびコミュニティです。
+> まだ [Docker ID](https://hub.docker.com/signup){:target="_blank" rel="noopener" class="_"} を取得していない場合は、無料入手してください。
+@z
+
+@x
 ## Create a repo
 @y
 {: #create-a-repo }
@@ -43,9 +55,15 @@ To push an image, we first need to create a repository on Docker Hub.
 @z
 
 @x
-1. Go to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} and log in if you need to.
+1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} and share images using Docker Hub.
 @y
-1. [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} にアクセスしてログインします。
+1. Docker Hub でのイメージ共有を行うために [サインアップ](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} します。
+@z
+
+@x
+2. Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
+@y
+2. [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} にサインインします。
 @z
 
 @x
@@ -59,6 +77,17 @@ To push an image, we first need to create a repository on Docker Hub.
 @y
 3. リポジトリ名を`getting-started`とします。
    Visibility は`Public`としてください。
+@z
+
+@x
+    > **Private repositories**
+    >
+    > Did you know that Docker offers private repositories which allows you to restrict content to specific users or teams? Check out the details on the [Docker pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} page.
+@y
+    > **プライベートリポジトリ**
+    >
+    > Docker ではプライベートリポジトリが提供されていて、特定のユーザーやチームにのみアクセスを制限できることをご存じですか？
+    > 詳しくは [Docker 料金体系](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} のページを確認してください。
 @z
 
 @x

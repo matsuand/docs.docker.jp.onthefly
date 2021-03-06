@@ -182,6 +182,16 @@ The `gelf` logging driver supports the following options:
 @z
 
 @x
+> **Note**
+> 
+> The `gelf` driver does not support TLS for TCP connections. Messages sent to TLS-protected inputs can silently fail.
+@y
+> **Note**
+> 
+> The `gelf` driver does not support TLS for TCP connections. Messages sent to TLS-protected inputs can silently fail.
+@z
+
+@x
 ### Examples
 @y
 ### Examples

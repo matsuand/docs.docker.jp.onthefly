@@ -126,6 +126,13 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
 @z
 
 @x
+- Docker Desktop is incompatible with macOS Internet Sharing. See [docker/for-mac#5348](https://github.com/docker/for-mac/issues/5348){: target="blank" rel="noopener" class=“”}.
+@y
+- Docker Desktop は macOS のインターネット共有（Internet Sharing）とは互換性がありません。
+  [docker/for-mac#5348](https://github.com/docker/for-mac/issues/5348){: target="blank" rel="noopener" class=“”} を参照してください。
+@z
+
+@x
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
 @y
 - カーネルがパニックを発生させるかもしれません。

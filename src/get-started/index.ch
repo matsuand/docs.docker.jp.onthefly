@@ -126,9 +126,29 @@ Docker の使い方を学ぼうとしているみなさん。
 @z
 
 @x
-This page contains step-by-step instructions on how to get started with Docker.
+This page contains step-by-step instructions on how to get started with Docker. In this tutorial, you'll learn how to:
 @y
 このページでは順を追って手順を進めていくことで Docker を学んでいきます。
+本チュートリアルで学ぶのは以下の内容です。
+@z
+
+@x
+- Build and run an image as a container
+- Share images using Docker Hub
+- Deploy Docker applications using multiple containers with a database
+- Running applications using Docker Compose
+@y
+- イメージをビルドしてコンテナーとして実行します。
+- Docker Hub を使ってイメージを共有します。
+- 複数コンテナーによりデータベースを利用する Docker アプリケーションをデプロイします。
+- Docker Compose を使ってアプリケーションを実行します。
+@z
+
+@x
+In addition, you'll also learn about the best practices for building images, including instructions on how to scan your images for security vulnerabilities.
+@y
+さらにイメージビルドに関するベストプラクティスも学びます。
+またセキュリティぜい弱性を確認するためにイメージをスキャンする手順も学びます。
 @z
 
 @x
@@ -147,14 +167,6 @@ DockerCon 2020 のビデオウォークスルーもお勧めします。
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 @y
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-@z
-
-@x
-In this tutorial, you'll learn about creating and deploying Docker apps, including using multiple containers with a database, and using Docker Compose. You'll also deploy your containerized app to Azure.
-@y
-本チュートリアルでは Docker アプリの生成とデプロイについて学びます。
-その中ではデータベースを用いたマルチコンテナーや Docker Compose の利用も行います。
-またコンテナー化したアプリの Azure へのデプロイも行います。
 @z
 
 @x
@@ -264,12 +276,12 @@ You'll notice a few flags being used. Here's some more info on them:
 
 @x
 Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. It gives you quick
-access to container logs, lets you get a shell inside the container, and lets you
+you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows. 
+It gives you quick access to container logs, lets you get a shell inside the container, and lets you
 easily manage container lifecycle (stop, remove, etc.).
 @y
 この先に進む前に Docker ダッシュボードについて説明しておきたいと思います。
-これはマシン上に動作するコンテナーを簡単に参照できるものです。
+これはマシン上に動作するコンテナーを簡単に参照できるものであり、Mac と Windows において利用できます。
 これを使えばコンテナーログに簡単にアクセスしたり、コンテナー内のシェルを実行したりすることが可能です。
 さらにコンテナーのライフサイクル（停止や削除など）を簡単に管理することができます。
 @z
