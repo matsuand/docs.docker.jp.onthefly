@@ -288,7 +288,7 @@ section at the lower left.
 @x
     ![Granting access to GitHub organization manually](images/link-source-github-org.png)
 @y
-    ![GitHub 組織への手動によるアクセス許可(images/link-source-github-org.png)
+    ![GitHub 組織への手動によるアクセス許可](images/link-source-github-org.png)
 @z
 
 @x
