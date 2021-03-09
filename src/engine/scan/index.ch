@@ -120,16 +120,16 @@ Check your installation by running `docker scan --version`, it should print the 
 @x
 ```shell
 $ docker scan --version
-Version:    v0.3.3
-Git commit: 1bab774
-Provider:   Snyk (1.385.0)
+Version:    v0.5.0
+Git commit: 5a09266
+Provider:   Snyk (1.432.0)
 ```
 @y
 ```shell
 $ docker scan --version
-Version:    v0.3.3
-Git commit: 1bab774
-Provider:   Snyk (1.385.0)
+Version:    v0.5.0
+Git commit: 5a09266
+Provider:   Snyk (1.432.0)
 ```
 @z
 

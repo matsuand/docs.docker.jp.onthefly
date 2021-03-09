@@ -63,7 +63,7 @@ Compose を使うには、基本的に 3 つのステップを踏みます。
 1. Define your app's environment with a `Dockerfile` so it can be reproduced
 anywhere.
 @y
-1. アプリケーション環境を `Dockerfile` に定義します。
+1. アプリケーション環境を`Dockerfile`に定義します。
    これによりその環境は再構築が可能となります。
 @z
 
@@ -71,20 +71,22 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 @y
-2. アプリケーションを構成するサービスを `docker-compose.yml` ファイル内に定義します。
+2. アプリケーションを構成するサービスを`docker-compose.yml`ファイル内に定義します。
    各サービスは独立した環境において起動することになります。
 @z
 
 @x
-3. Run `docker-compose up` and Compose starts and runs your entire app.
+3. Run `docker compose up` and the [Docker compose command](cli-command.md) starts and runs your entire app. You can alternatively run `docker-compose up` using the docker-compose binary.
 @y
-3. 最後に `docker-compose up` を実行したら、Compose はアプリケーション全体を起動、実行します。
+3. `docker-compose up`を実行し [Docker compose コマンド](cli-command.md) を起動します。
+   そしてアプリケーション全体を実行します。
+   docker-compose の実行バイナリを使って`docker-compose up`を実行する方法もあります。
 @z
 
 @x
 A `docker-compose.yml` looks like this:
 @y
-`docker-compose.yml` は次のように記述します。
+`docker-compose.yml`は次のように記述します。
 @z
 
 @x
@@ -235,7 +237,7 @@ a custom project name by using the
 [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 @y
 プロジェクト名はデフォルトでは、プロジェクトが存在するディレクトリ名となります。
-プロジェクト名を指定するには、[コマンドラインオプション](reference/overview.md) の `-p` を指定するか、[環境変数 `COMPOSE_PROJECT_NAME`](reference/envvars.md#compose_project_name) を使って指定します。
+プロジェクト名を指定するには、[コマンドラインオプション](reference/overview.md) の`-p`を指定するか、[環境変数 `COMPOSE_PROJECT_NAME`](reference/envvars.md#compose_project_name) を使って指定します。
 @z
 
 @x
@@ -252,7 +254,7 @@ the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 @y
 Compose は、サービスによって利用されているボリュームをすべて維持します。
-`docker-compose up` が実行されたときに、コンテナーがそれ以前に実行されていれば、以前のコンテナーから現在のコンテナーに向けてボリュームをコピーします。
+`docker-compose up`が実行されたときに、コンテナーがそれ以前に実行されていれば、以前のコンテナーから現在のコンテナーに向けてボリュームをコピーします。
 この処理において、ボリューム内に作り出されていたデータは失われることはありません。
 @z
 
@@ -261,7 +263,7 @@ If you use `docker-compose` on a Windows machine, see
 [Environment variables](reference/envvars.md) and adjust the necessary environment
 variables for your specific needs.
 @y
-Windows 上において `docker-compose` を利用している場合には、[環境変数のページ](reference/envvars.md)を参考にし、状況に応じて必要となる環境変数を定めてください。
+Windows 上において`docker-compose`を利用している場合には、[環境変数のページ](reference/envvars.md)を参考にし、状況に応じて必要となる環境変数を定めてください。
 @z
 
 @x
@@ -304,7 +306,7 @@ Compose は Compose ファイル内での変数の利用をサポートしてい
 You can extend a Compose file using the `extends` field or by creating multiple
 Compose files. See [extends](extends.md) for more details.
 @y
-Compose ファイルは `extends` フィールドを使うことで、複数の Compose ファイルを作成できるように拡張できます。
+Compose ファイルは`extends`フィールドを使うことで、複数の Compose ファイルを作成できるように拡張できます。
 [extends](extends.md) をご覧ください。
 @z
 
@@ -455,7 +457,7 @@ Docker Compose は活発に開発中です。
 * To talk about the project with people in real time: join the
   `#docker-compose` channel on the Docker Community Slack.
 @y
-* プロジェクトのメンバーとリアルタイムに会話したければ、Docker Community Slack の `#docker-compose` チャネルに参加してください。
+* プロジェクトのメンバーとリアルタイムに会話したければ、Docker Community Slack の`#docker-compose`チャネルに参加してください。
 @z
 
 @x
