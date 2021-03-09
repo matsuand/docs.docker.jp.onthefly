@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-26 13:55:31 +0900-->
+<!-- Page generated 2021-03-09 22:18:01 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Compose の概要 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Compose の概要" />
   <meta property="og:description" content="Introduction and Overview of Compose" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-09T22:18:01+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-09T22:18:01+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Compose の概要","description":"Introduction and Overview of Compose","url":"https://docs.docker.com/compose/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Compose の概要</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><blockquote>
+                        <section class="section"><h1>Docker Compose の概要</h1><blockquote>
   <p><strong>Compose ファイルリファレンスをお探しですか？</strong></p>
 
   <p>その場合は<a href="/docs.docker.jp.onthefly/compose/compose-file/">最新版がこちら</a>。</p>
@@ -116,19 +116,21 @@ Compose の機能に関する詳細は、<a href="#features">機能一覧</a> �
 
 <ol>
   <li>
-    <p>アプリケーション環境を <code class="language-plaintext highlighter-rouge">Dockerfile</code> に定義します。
+    <p>アプリケーション環境を<code class="language-plaintext highlighter-rouge">Dockerfile</code>に定義します。
 これによりその環境は再構築が可能となります。</p>
   </li>
   <li>
-    <p>アプリケーションを構成するサービスを <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> ファイル内に定義します。
+    <p>アプリケーションを構成するサービスを<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>ファイル内に定義します。
 各サービスは独立した環境において起動することになります。</p>
   </li>
   <li>
-    <p>最後に <code class="language-plaintext highlighter-rouge">docker-compose up</code> を実行したら、Compose はアプリケーション全体を起動、実行します。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行し <a href="/docs.docker.jp.onthefly/compose/cli-command/">Docker compose コマンド</a> を起動します。
+そしてアプリケーション全体を実行します。
+docker-compose の実行バイナリを使って<code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行する方法もあります。</p>
   </li>
 </ol>
 
-<p><code class="language-plaintext highlighter-rouge">docker-compose.yml</code> は次のように記述します。</p>
+<p><code class="language-plaintext highlighter-rouge">docker-compose.yml</code>は次のように記述します。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>  <span class="c1"># v1.27.0 以降は任意</span>
 <span class="na">services</span><span class="pi">:</span>
@@ -194,15 +196,15 @@ Compose の機能に関する詳細は、<a href="#features">機能一覧</a> �
 </ul>
 
 <p>プロジェクト名はデフォルトでは、プロジェクトが存在するディレクトリ名となります。
-プロジェクト名を指定するには、<a href="/docs.docker.jp.onthefly/compose/reference/overview/">コマンドラインオプション</a> の <code class="language-plaintext highlighter-rouge">-p</code> を指定するか、<a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_project_name">環境変数 <code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code></a> を使って指定します。</p>
+プロジェクト名を指定するには、<a href="/docs.docker.jp.onthefly/compose/reference/overview/">コマンドラインオプション</a> の<code class="language-plaintext highlighter-rouge">-p</code>を指定するか、<a href="/docs.docker.jp.onthefly/compose/reference/envvars/#compose_project_name">環境変数 <code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code></a> を使って指定します。</p>
 
 <h3 id="preserve-volume-data-when-containers-are-created">コンテナー生成時はボリュームデータを維持</h3>
 
 <p>Compose は、サービスによって利用されているボリュームをすべて維持します。
-<code class="language-plaintext highlighter-rouge">docker-compose up</code> が実行されたときに、コンテナーがそれ以前に実行されていれば、以前のコンテナーから現在のコンテナーに向けてボリュームをコピーします。
+<code class="language-plaintext highlighter-rouge">docker-compose up</code>が実行されたときに、コンテナーがそれ以前に実行されていれば、以前のコンテナーから現在のコンテナーに向けてボリュームをコピーします。
 この処理において、ボリューム内に作り出されていたデータは失われることはありません。</p>
 
-<p>Windows 上において <code class="language-plaintext highlighter-rouge">docker-compose</code> を利用している場合には、<a href="/docs.docker.jp.onthefly/compose/reference/envvars/">環境変数のページ</a>を参考にし、状況に応じて必要となる環境変数を定めてください。</p>
+<p>Windows 上において<code class="language-plaintext highlighter-rouge">docker-compose</code>を利用している場合には、<a href="/docs.docker.jp.onthefly/compose/reference/envvars/">環境変数のページ</a>を参考にし、状況に応じて必要となる環境変数を定めてください。</p>
 
 <h3 id="only-recreate-containers-that-have-changed">変更のあったコンテナーのみ再作成</h3>
 
@@ -216,7 +218,7 @@ Compose の機能に関する詳細は、<a href="#features">機能一覧</a> �
 環境変数を使い、さまざまな環境、さまざまなユーザー向けに構成をカスタマイズできます。
 詳細は <a href="/docs.docker.jp.onthefly/compose/compose-file/#variable-substitution">環境変数のページ</a> をご覧ください。</p>
 
-<p>Compose ファイルは <code class="language-plaintext highlighter-rouge">extends</code> フィールドを使うことで、複数の Compose ファイルを作成できるように拡張できます。
+<p>Compose ファイルは<code class="language-plaintext highlighter-rouge">extends</code>フィールドを使うことで、複数の Compose ファイルを作成できるように拡張できます。
 <a href="/docs.docker.jp.onthefly/compose/extends/">extends</a> をご覧ください。</p>
 
 <h2 id="common-use-cases">一般的な利用例</h2>
@@ -268,7 +270,7 @@ Compose ではテストスイートに対応して、分離されたテスト環
     <p>バグ報告や機能リクエストは <a href="https://github.com/docker/compose/issues">GitHub の issue トラッカー</a>をご利用ください。</p>
   </li>
   <li>
-    <p>プロジェクトのメンバーとリアルタイムに会話したければ、Docker Community Slack の <code class="language-plaintext highlighter-rouge">#docker-compose</code> チャネルに参加してください。</p>
+    <p>プロジェクトのメンバーとリアルタイムに会話したければ、Docker Community Slack の<code class="language-plaintext highlighter-rouge">#docker-compose</code>チャネルに参加してください。</p>
   </li>
   <li>
     <p>コードやドキュメントの変更に貢献したい場合は、<a href="https://github.com/docker/compose/pulls">GitHub にプルリクエスト</a>を送ってください。</p>
