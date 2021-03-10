@@ -1,10 +1,10 @@
 <!-- Page generated 2021-03-10 13:41:21 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose CLI 技術プレビュー | Docker ドキュメント</title>
-  <meta name="description" content="Compose CLI 技術プレビュー" />
-  <meta name="keywords" content="documentation, docs, docker, compose, containers">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/cli-command/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>バックアップとリストア | Docker ドキュメント</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="Docker Desktop, backup, restore, migration, reinstall, containers, images, volumes">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/desktop/backup-and-restore/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Compose CLI 技術プレビュー"/>
+  <meta name="twitter:title" itemprop="title name" content="バックアップとリストア"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Compose CLI 技術プレビュー" />
-  <meta property="og:description" content="Compose CLI 技術プレビュー" />
+  <meta property="og:title" content="バックアップとリストア" />
+  <meta property="og:description" content="" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-10T13:41:21+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/cli-command/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/desktop/backup-and-restore/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2021-03-10T13:41:21+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose CLI 技術プレビュー","description":"Compose CLI 技術プレビュー","url":"https://docs.docker.com/compose/cli-command/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"バックアップとリストア","description":null,"url":"https://docs.docker.com/desktop/backup-and-restore/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,60 +98,63 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose CLI 技術プレビュー</h1><h2 id="new-docker-compose-command">新しい Docker compose コマンド</h2>
+                        <section class="section"><h1>バックアップとリストア</h1><p>以下の手順に従うと、イメージやコンテナーのデータバックアップを保存しリストアすることができます。
+たとえば VM ディスクを初期化する場合や Docker 環境を別のコンピューターに移行する場合などに利用します。</p>
 
-<blockquote class="important">
-  <p>重要</p>
+<h2 id="save-your-data">データの保存</h2>
 
-  <p>Docker CLI の<code class="language-plaintext highlighter-rouge">compose</code>コマンドが技術プレビュー版として利用可能になりました。
-このコマンドを本番環境において用いることは推奨しません。</p>
+<ol>
+  <li>
+    <p>コンテナー内にバックアップを必要とするデータが含まれる場合は、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/commit/"><code class="language-plaintext highlighter-rouge">docker container commit</code></a> を実行して、そのコンテナーをイメージにコミットします。</p>
 
-  <p>みなさんからのフィードバックを頂くことが重要と思っています。
-新しい ‘compose’ コマンドに対するフィードバックは、GitHub リポジトリ <a href="https://github.com/docker/compose-cli/issues" target="_blank" rel="noopener" class="_">Compose-CLI</a> において issue を生成してお知らせください。</p>
-</blockquote>
+    <p>コンテナーをコミットすると、コンテナー内のファイルシステムの変更内容やコンテナーの設定内容（ラベル、環境変数、コマンドやエンドポイントなど）がローカルイメージに保存されます。
+なお環境変数の中には、パスワードやプロキシー認証などの重要な情報が含まれているかもしれません。
+したがってこのイメージをレジストリにプッシュする場合には十分に注意してください。</p>
 
-<p>Docker CLI が<code class="language-plaintext highlighter-rouge">compose</code>コマンドをサポートするようになりました。
-<code class="language-plaintext highlighter-rouge">docker-compose</code>の機能やフラグを、個別のツールなしに利用できるようになります。</p>
+    <p>なおコンテナーにボリュームを割り当てていて、そのボリューム内のファイルシステムが変更されても、その変更はイメージには含まれませんから注意してください。
+その場合は個別にバックアップをとる必要があります（以下の手順 3 を参照のこと）。</p>
 
-<p>これまで<code class="language-plaintext highlighter-rouge">docker-compose</code>を利用する際のダッシュ（<code class="language-plaintext highlighter-rouge">-</code>）の部分を空白にするだけで<code class="language-plaintext highlighter-rouge">docker compose</code>に切り替えることができます。
-これは相互に切り替えが可能です。
-したがって新たな<code class="language-plaintext highlighter-rouge">compose</code>コマンドを必ず用いなければいけないというわけではありません。
-必要に応じて今でも<code class="language-plaintext highlighter-rouge">docker-compose</code>を用いることができます。</p>
+    <p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/commit/"><code class="language-plaintext highlighter-rouge">docker container commit</code></a> コマンドについては、Docker Engine コマンドラインリファレンス内の当コマンドの節を参照してください。</p>
 
-<p><a href="https://github.com/compose-spec/compose-spec" target="_blank" rel="noopener" class="_">Compose specification</a>（Compose 仕様）においては、Compose YAML ファイルモデルと<code class="language-plaintext highlighter-rouge">docker-compose</code>実装の違いについて説明しています。
-これを切り替えて利用することは数多くの拡張を可能にします。
-たとえば <a href="/docs.docker.jp.onthefly/cloud/ecs-integration">Amazon ECS</a> や <a href="/docs.docker.jp.onthefly/cloud/aci-integration">Microsoft ACI</a> の稼働にあたって、Docker コンテキストを切り替えるだけでクラウド上の Compose アプリケーションの「up」を行うことができます。
-compose コマンドが直接 Docker CLI に追加されています。
-Compose 仕様は進化を続けているので、Docker CLI への新たな機能の導入は素早く実現されます。
-<code class="language-plaintext highlighter-rouge">docker-compose</code>は今後もサポートされメンテナンスが行われます。
-ただし Docker CLI 内の compose を実現する Go 言語の実装は、compose-go バインディングに直接依存するものであり、これは Compose 仕様の一部としてメンテナンスされているものです。
-このためコミュニティによる提案、Docker CLI や Engine の試験的実装が容易になり、ユーザーへの機能提供を迅速にすることができます。
-Docker CLI における comose コマンドでは、プロファイルや GPU デバイスなどのように、Compose 仕様に新たに加えられた機能をすでにサポートしているものもあります。</p>
+    <blockquote>
+      <p>自分のコンテナーはバックアップが必要？</p>
 
-<p>新たな<code class="language-plaintext highlighter-rouge">compose</code>コマンドにおいて、またサポートされていないフラグに関しては <a href="/docs.docker.jp.onthefly/compose/cli-command-compatibility/">docker-compose 互換性一覧</a> を参照してください。</p>
+      <p>コンテナーデータの保存にボリュームやバインドマウントを利用している場合は、コンテナーのバックアップが不要になるかもしれません。
+ただし再インストールを行った後に同一の設定内容を使って再度コンテナー生成を行う場合は、最初に生成したときのオプション設定を覚えておいてください。
+あるいは同等の <a href="/docs.docker.jp.onthefly/compose/compose-file/">Docker Compose ファイル</a> を利用してください。</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>ローカルにおいてビルドしているイメージを <a href="/docs.docker.jp.onthefly/docker-hub/">Docker Hub レジストリ</a> に保存しておきたい場合は <a href="/docs.docker.jp.onthefly/engine/reference/commandline/push/"><code class="language-plaintext highlighter-rouge">docker push</code></a> を使ってイメージプッシュを行います。
+イメージを公開したくない場合は <a href="/docs.docker.jp.onthefly/docker-hub/repos/#private-repositories">リポジトリの visibility を「プライベート」</a> に設定してください。
+ <a href="/docs.docker.jp.onthefly/engine/reference/commandline/push/"><code class="language-plaintext highlighter-rouge">docker push</code></a> コマンドについては、Docker Engine コマンドラインリファレンス内の当コマンドの節を参照してください。</p>
 
-<h2 id="installing-the-compose-cli-tech-preview">Compose CLI 技術プレビューのインストール</h2>
+    <p>上の方法ではなく <a href="../engine/reference/commandline/save.md"><code class="language-plaintext highlighter-rouge">docker image save -o images.tar image1 [image2 ...]</code></a> を利用すれば、イメージをローカルの tar ファイルに保存することができます。
+<a href="/docs.docker.jp.onthefly/engine/reference/commandline/save/"><code class="language-plaintext highlighter-rouge">docker image  save</code></a> コマンドについては、Docker Engine コマンドラインリファレンス内の当コマンドの節を参照してください。</p>
+  </li>
+  <li>
+    <p><a href="/docs.docker.jp.onthefly/storage/#more-details-about-mount-types">名前つきボリューム</a> を利用してデータベースなどのコンテナーデータを保存している場合は、ストレージに関しての説明ページ、<a href="/docs.docker.jp.onthefly/storage/volumes/#backup-restore-or-migrate-data-volumes">データボリュームのバックアップ、復元、移行</a> を参照してください。</p>
+  </li>
+</ol>
 
-<h3 id="install-compose-cli-tech-preview-on-mac-and-windows">Mac または Windows における Compose CLI 技術プレビューのインストール</h3>
+<p>データのバックアップをとった後は、現状の Docker Desktop バージョンをアンインストールすることができます。
+そして（<a href="/docs.docker.jp.onthefly/docker-for-windows/install/">Windows</a> や <a href="/docs.docker.jp.onthefly/docker-for-mac/install/">macOS</a>）の別バージョンをインストールしたり、Docker Desktop の設定を初期化したりすることができます。</p>
 
-<p><strong>Docker Desktop for Mac および for Windows</strong> のバージョン 3.2.1 またはそれ以降には、Docker CLI に新たな compose コマンドが含まれます。
-したがって Windows と Mac のユーザーは、個別にインストールする必要はありません。</p>
+<h2 id="restore-your-data">データのリストア</h2>
 
-<p>Docker Desktop のインストール手順は以下を参照してください。</p>
+<ol>
+  <li>
+    <p><a href="(../engine/reference/commandline/load.md)"><code class="language-plaintext highlighter-rouge">docker pull</code></a> を実行します。
+これにより、<a href="#save-your-data">データの保存</a> の「手順 2」において Docker Hub にプッシュしたイメージを復元します。</p>
 
-<ul>
-  <li><a href="/docs.docker.jp.onthefly/docker-for-mac/install/">Docker Desktop の Mac へのンストール</a></li>
-  <li><a href="/docs.docker.jp.onthefly/docker-for-windows/install/">Docker Desktop の Windows へのンストール</a>.</li>
-</ul>
+    <p>イメージのバックアップをローカルの tar ファイルにとっている場合は、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/load/"><code class="language-plaintext highlighter-rouge">docker image load -i images.tar</code></a> を実行することで、保存していたイメージをリストアします。</p>
 
-<h3 id="install-compose-cli-tech-preview-on-linux">Linux における Compose CLI 技術プレビューのインストール</h3>
-
-<p>新たな Compose CLI コマンドをインストールするのであれば、技術プレビューが含まれます。
-インストールには以下のスクリプトを実行します。</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
-</span></code></pre></div></div>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+    <p><a href="/docs.docker.jp.onthefly/engine/reference/commandline/load/"><code class="language-plaintext highlighter-rouge">docker image load</code> page</a> コマンドについては、Docker Engine コマンドラインリファレンス内の当コマンドの節を参照してください。</p>
+  </li>
+  <li>ボリュームデータをリストアする方法については、ストレージに関しての説明ページ、<a href="/docs.docker.jp.onthefly/storage/volumes/#backup-restore-or-migrate-data-volumes">データボリュームのバックアップ、復元、移行</a> を参照してください。</li>
+  <li>コンテナーの再生成が必要である場合は <a href="/docs.docker.jp.onthefly/engine/reference/commandline/load/"><code class="language-plaintext highlighter-rouge">docker run</code></a> を実行するか <a href="/docs.docker.jp.onthefly/compose/">Docker Compose</a> を実行してください。</li>
+</ol>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker Desktop">Docker Desktop</a>, <a href="/docs.docker.jp.onthefly/search/?q=backup">backup</a>, <a href="/docs.docker.jp.onthefly/search/?q=restore">restore</a>, <a href="/docs.docker.jp.onthefly/search/?q=migration">migration</a>, <a href="/docs.docker.jp.onthefly/search/?q=reinstall">reinstall</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=volumes">volumes</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -165,7 +168,7 @@ Docker CLI における comose コマンドでは、プロファイルや GPU �
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/compose/cli-command.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [compose/cli-command.ch](https://matsuand.github.io/docs.docker.jp.onthefly/compose/cli-command/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/desktop/backup-and-restore.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [desktop/backup-and-restore.ch](https://matsuand.github.io/docs.docker.jp.onthefly/desktop/backup-and-restore/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -184,13 +187,8 @@ Docker CLI における comose コマンドでは、プロファイルや GPU �
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#new-docker-compose-command" class="nomunge">新しい Docker compose コマンド</a></li>
-  <li><a href="#installing-the-compose-cli-tech-preview" class="nomunge">Compose CLI 技術プレビューのインストール</a>
-    <ul>
-      <li><a href="#install-compose-cli-tech-preview-on-mac-and-windows" class="nomunge">Mac または Windows における Compose CLI 技術プレビューのインストール</a></li>
-      <li><a href="#install-compose-cli-tech-preview-on-linux" class="nomunge">Linux における Compose CLI 技術プレビューのインストール</a></li>
-    </ul>
-  </li>
+  <li><a href="#save-your-data" class="nomunge">データの保存</a></li>
+  <li><a href="#restore-your-data" class="nomunge">データのリストア</a></li>
 </ul>
 
 </div>
@@ -277,5 +275,5 @@ Docker CLI における comose コマンドでは、プロファイルや GPU �
     </div>
 
     </footer>
-    <script>const pageURL = "/compose/cli-command/";</script></body>
+    <script>const pageURL = "/desktop/backup-and-restore/";</script></body>
 </html>
