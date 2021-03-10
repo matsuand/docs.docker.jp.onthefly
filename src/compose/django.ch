@@ -552,9 +552,9 @@ In this section, you set up the database connection for Django.
 @z
 
 @x
-   In another terminal window, list the running Docker processes with the `docker container ls` command.
+   In another terminal window, list the running Docker processes with the `docker ps` or `docker container ls` command.
 @y
-   別の端末画面を開いて`docker container ls`コマンドを実行し、起動している Docker プロセスの一覧を表示します。
+   別の端末画面を開いて`docker ps`または`docker container ls`コマンドを実行し、起動している Docker プロセスの一覧を表示します。
 @z
 
 @x

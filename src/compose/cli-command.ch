@@ -43,16 +43,16 @@ title: Compose CLI 技術プレビュー
 @x
 The Docker CLI now supports the `compose` command, including most of the `docker-compose` features and flags, without the need for a separate tool.
 @y
-Docker CLI が `compose` コマンドをサポートするようになりました。
+Docker CLI が`compose`コマンドをサポートするようになりました。
 `docker-compose`の機能やフラグを、個別のツールなしに利用できるようになります。
 @z
 
 @x
-You can replace the dash (`-`) with a space when you use `docker-compose` to switch over to `docker compose`. You can also use them interchangeably, so that you are not locked-in with the new compose command and, if needed, can still use `docker-compose` if needed.
+You can replace the dash (`-`) with a space when you use `docker-compose` to switch over to `docker compose`. You can also use them interchangeably, so that you are not locked-in with the new `compose` command and, if needed, you can still use `docker-compose`.
 @y
 これまで`docker-compose`を利用する際のダッシュ（`-`）の部分を空白にするだけで`docker compose`に切り替えることができます。
 これは相互に切り替えが可能です。
-したがって新たな compose コマンドを必ず用いなければいけないというわけではありません。
+したがって新たな`compose`コマンドを必ず用いなければいけないというわけではありません。
 必要に応じて今でも`docker-compose`を用いることができます。
 @z
 
@@ -92,13 +92,24 @@ For more information about the flags that are not yet supported in the new `comp
 @z
 
 @x
-**Docker Desktop for Mac and for Windows** version 3.1.0 and above includes the new Compose command along
-with Docker cli, so Windows and Mac users do not need to install it separately.
-For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+**Docker Desktop for Mac and for Windows** version 3.2.1 and above includes the new Compose command along with the Docker CLI. Therefore, Windows and Mac users do not need to install the Compose CLI Tech Preview separately.
 @y
-**Docker Desktop for Mac および for Windows** のバージョン 3.1.0 またはそれ以降には、Docker CLI に新たな compose コマンドが含まれます。
+**Docker Desktop for Mac および for Windows** のバージョン 3.2.1 またはそれ以降には、Docker CLI に新たな compose コマンドが含まれます。
 したがって Windows と Mac のユーザーは、個別にインストールする必要はありません。
-インストール手順については [Docker Desktop の Mac へのンストール](../docker-for-mac/install.md) や [Docker Desktop の Windows へのインストール](../docker-for-windows/install.md) を参照してください。
+@z
+
+@x
+For Docker Desktop installation instructions, see:
+@y
+Docker Desktop のインストール手順は以下を参照してください。
+@z
+
+@x
+- [Install Docker Desktop on Mac](../docker-for-mac/install.md)
+- [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+@y
+- [Docker Desktop の Mac へのンストール](../docker-for-mac/install.md)
+- [Docker Desktop の Windows へのンストール](../docker-for-windows/install.md).
 @z
 
 @x
@@ -109,9 +120,10 @@ For installation instructions, see [Install Docker Desktop on Mac](../docker-for
 @z
 
 @x
-You can install the new Compose CLI including this Tech Preview using the install script:
+You can install the new Compose CLI, including this Tech Preview, using the following install script:
 @y
-技術プレビューを含む新たな Compose CLI コマンドをインストールするには、以下のインストールスクリプトを実行します。
+新たな Compose CLI コマンドをインストールするのであれば、技術プレビューが含まれます。
+インストールには以下のスクリプトを実行します。
 @z
 
 @x

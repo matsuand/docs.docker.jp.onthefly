@@ -15,9 +15,10 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	dashboard  \
-	faqs       \
-	index      \
+	backup-and-restore \
+	dashboard          \
+	faqs               \
+	index              \
 	opensource
 
 ch_mds = $(bases:=.ch) # ch means change files

@@ -214,7 +214,8 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg
+        gnupg \
+        lsb-release
     ```
 @y
     ```console
@@ -224,7 +225,8 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg
+        gnupg \
+        lsb-release
     ```
 @z
 
