@@ -31,6 +31,7 @@ AC_CONFIG_FILES([Makefile
 		 src/_data/Makefile
 		 src/_data/buildx/Makefile
 		 src/_data/cluster/Makefile
+		 src/_data/compose-cli/Makefile
 		 src/_data/docker-app/Makefile
 		 src/_data/docsarchive/Makefile
 		 src/_data/engine-cli/Makefile

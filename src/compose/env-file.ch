@@ -17,25 +17,30 @@ title: 環境変数のデフォルトをファイル内に定義する
 
 @x
 Compose supports declaring default environment variables in an environment file
-named `.env` placed in the folder where the `docker-compose` command is executed
-*(current working directory)*.
+named `.env` placed in the project directory. The project directory is specified by order of precedence:
+- `--project-dir` flag
+- Folder of the first `--file` flag
+- Current directory
 @y
 Compose では環境変数のデフォルトを定義しておくことができます。
-これは `.env` という名前の環境ファイルに環境変数を定義するもので、このファイルを
-`docker-compose` コマンドが実行されるディレクトリ（*カレントワーキングディレクトリ*）に置きます。
+これは`.env`という名前の環境ファイルに環境変数を定義するもので、プロジェクトディレクトリにおきます。
+プロジェクトディレクトリは以下の順に定められます。
+- `--project-dir`フラグ
+- `--file`フラグが初めて指定された際のフォルダー
+- カレントディレクトリ
 @z
 
 @x
 ## Syntax rules
 @y
-## 文法
 {: #syntax-rules }
+## 文法
 @z
 
 @x
 These syntax rules apply to the `.env` file:
 @y
-`.env` ファイルに適用される文法は以下のとおりです。
+`.env`ファイルに適用される文法は以下のとおりです。
 @z
 
 @x
@@ -45,8 +50,8 @@ These syntax rules apply to the `.env` file:
 * There is no special handling of quotation marks. This means that
   **they are part of the VAL**.
 @y
-* Compose は `env` ファイル内の各行が `変数=値` という形式で書かれているものとして扱います。
-* 先頭が `#` で始まる行は、コメント行となり無視されます。
+* Compose は`env`ファイル内の各行が`変数=値`という形式で書かれているものとして扱います。
+* 先頭が`#`で始まる行は、コメント行となり無視されます。
 * 空行は無視されます。
 * 引用符は特別に扱われません。
   つまりそれは**値の一部として扱われます**。
@@ -55,8 +60,8 @@ These syntax rules apply to the `.env` file:
 @x
 ## Compose file and CLI variables
 @y
-## Compose ファイルと CLI 変数
 {: #compose-file-and-cli-variables }
+## Compose ファイルと CLI 変数
 @z
 
 @x
@@ -108,10 +113,10 @@ in your Compose file, and can also be used to define the following
 @y
 > **メモ**
 >
-> * 実行時に環境から得られる値は、常に `.env` ファイルにて定義された値を上書きします。
+> * 実行時に環境から得られる値は、常に`.env`ファイルにて定義された値を上書きします。
 >   同じこととして、コマンドライン引数から与えられた値も、同様に優先され上書きされます。
 >
-> * `.env` ファイルにて定義された環境変数は、コンテナー内部では自動的に見えるものではありません。
+> * `.env`ファイルにて定義された環境変数は、コンテナー内部では自動的に見えるものではありません。
 >   コンテナーが認識できる環境変数として設定するには、[Compose における環境変数](environment-variables.md) に示されているガイドラインに従ってください。
 >   そこでは、シェル環境変数をコンテナーに受け渡す方法や、Compose ファイル内での環境変数の定義方法などを説明しています。
 @z
@@ -119,8 +124,8 @@ in your Compose file, and can also be used to define the following
 @x
 ## More Compose documentation
 @y
-## その他の Compose ドキュメント
 {: #more-compose-documentation }
+## その他の Compose ドキュメント
 @z
 
 @x

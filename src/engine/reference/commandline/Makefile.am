@@ -66,6 +66,27 @@ bases = \
 	cluster_update \
 	cluster_version \
 	commit \
+	compose \
+	compose_build \
+	compose_convert \
+	compose_create \
+	compose_down \
+	compose_events \
+	compose_exec \
+	compose_kill \
+	compose_logs \
+	compose_ls \
+	compose_pause \
+	compose_ps \
+	compose_pull \
+	compose_push \
+	compose_rm \
+	compose_run \
+	compose_start \
+	compose_stop \
+	compose_top \
+	compose_unpause \
+	compose_up \
 	config \
 	config_create \
 	config_inspect \
