@@ -1,10 +1,10 @@
 <!-- Page generated 2021-03-11 20:37:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>環境変数のデフォルトをファイル内に定義する | Docker ドキュメント</title>
-  <meta name="description" content="Declare default environment variables in a file" />
-  <meta name="keywords" content="fig, composition, compose, docker, orchestration, environment, env file">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/env-file/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker compose logs | Docker ドキュメント</title>
+  <meta name="description" content="docker compose logs: View output from containers" />
+  <meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/engine/reference/commandline/compose_logs/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,24 +28,24 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="環境変数のデフォルトをファイル内に定義する"/>
-  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:title" itemprop="title name" content="docker compose logs"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="docker compose logs: View output from containers" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="環境変数のデフォルトをファイル内に定義する" />
-  <meta property="og:description" content="Declare default environment variables in a file" />
+  <meta property="og:title" content="docker compose logs" />
+  <meta property="og:description" content="docker compose logs: View output from containers" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-11T20:37:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/env-file/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/compose_logs/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2021-03-11T20:37:43+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"環境変数のデフォルトをファイル内に定義する","description":"Declare default environment variables in a file","url":"https://docs.docker.com/compose/env-file/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker compose logs","description":"docker compose logs: View output from containers","url":"https://docs.docker.com/engine/reference/commandline/compose_logs/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,72 +98,247 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>環境変数のデフォルトをファイル内に定義する</h1><p>Compose では環境変数のデフォルトを定義しておくことができます。
-これは<code class="language-plaintext highlighter-rouge">.env</code>という名前の環境ファイルに環境変数を定義するもので、プロジェクトディレクトリにおきます。
-プロジェクトディレクトリは以下の順に定められます。</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">--project-dir</code>フラグ</li>
-  <li><code class="language-plaintext highlighter-rouge">--file</code>フラグが初めて指定された際のフォルダー</li>
-  <li>カレントディレクトリ</li>
-</ul>
+                        <section class="section"><h1>docker compose logs</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
+https://github.com/docker/compose-cli
+-->
+<!-- Make sure atom is using hard tabs -->
 
-<h2 id="syntax-rules">文法</h2>
+<h2 id="description">説明</h2>
 
-<p><code class="language-plaintext highlighter-rouge">.env</code>ファイルに適用される文法は以下のとおりです。</p>
+<p>View output from containers</p>
 
-<ul>
-  <li>Compose は<code class="language-plaintext highlighter-rouge">env</code>ファイル内の各行が<code class="language-plaintext highlighter-rouge">変数=値</code>という形式で書かれているものとして扱います。</li>
-  <li>先頭が<code class="language-plaintext highlighter-rouge">#</code>で始まる行は、コメント行となり無視されます。</li>
-  <li>空行は無視されます。</li>
-  <li>引用符は特別に扱われません。
-つまりそれは<strong>値の一部として扱われます</strong>。</li>
-</ul>
+<h2 id="usage">利用方法</h2>
 
-<h2 id="compose-file-and-cli-variables">Compose ファイルと CLI 変数</h2>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker compose logs [service...]
+</span></code></pre></div></div>
 
-<p>環境変数を定義すると Compose ファイル内では<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#variable-substitution">変数置換</a> が行われます。
-また以下の <a href="/docs.docker.jp.onthefly/compose/reference/envvars/">CLI 変数</a> の定義に利用することもできます。</p>
+<h2 id="options">オプション</h2>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">COMPOSE_API_VERSION</code></li>
-  <li><code class="language-plaintext highlighter-rouge">COMPOSE_CONVERT_WINDOWS_PATHS</code></li>
-  <li><code class="language-plaintext highlighter-rouge">COMPOSE_FILE</code></li>
-  <li><code class="language-plaintext highlighter-rouge">COMPOSE_HTTP_TIMEOUT</code></li>
-  <li><code class="language-plaintext highlighter-rouge">COMPOSE_PROFILES</code></li>
-  <li><code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code></li>
-  <li><code class="language-plaintext highlighter-rouge">COMPOSE_TLS_VERSION</code></li>
-  <li><code class="language-plaintext highlighter-rouge">DOCKER_CERT_PATH</code></li>
-  <li><code class="language-plaintext highlighter-rouge">DOCKER_HOST</code></li>
-  <li><code class="language-plaintext highlighter-rouge">DOCKER_TLS_VERIFY</code></li>
-</ul>
+<table>
+<thead>
+  <tr>
+    <td>名前／省略形</td>
+    <td>デフォルト</td>
+    <td>説明</td>
+  </tr>
+</thead>
+<tbody>
 
-<blockquote>
-  <p><strong>メモ</strong></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--follow , -f</code></td>
+    <td></td>
+    <td>Follow log output.</td>
+  </tr>
 
-  <ul>
-    <li>
-      <p>実行時に環境から得られる値は、常に<code class="language-plaintext highlighter-rouge">.env</code>ファイルにて定義された値を上書きします。
-同じこととして、コマンドライン引数から与えられた値も、同様に優先され上書きされます。</p>
-    </li>
-    <li>
-      <p><code class="language-plaintext highlighter-rouge">.env</code>ファイルにて定義された環境変数は、コンテナー内部では自動的に見えるものではありません。
-コンテナーが認識できる環境変数として設定するには、<a href="/docs.docker.jp.onthefly/compose/environment-variables/">Compose における環境変数</a> に示されているガイドラインに従ってください。
-そこでは、シェル環境変数をコンテナーに受け渡す方法や、Compose ファイル内での環境変数の定義方法などを説明しています。</p>
-    </li>
-  </ul>
-</blockquote>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--no-color</code></td>
+    <td></td>
+    <td>Produce monochrome output.</td>
+  </tr>
 
-<h2 id="more-compose-documentation">その他の Compose ドキュメント</h2>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--no-log-prefix</code></td>
+    <td></td>
+    <td>Don't print prefix in logs.</td>
+  </tr>
 
-<ul>
-  <li><a href="/docs.docker.jp.onthefly/compose/">ユーザーガイド</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/install/">Compose のインストール</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/gettingstarted/">はじめよう</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/reference/">コマンドラインリファレンス</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/">Compose ファイルリファレンス</a></li>
-  <li><a href="/docs.docker.jp.onthefly/compose/samples-for-compose/">Compose を使ったサンプルアプリ</a></li>
-</ul>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=fig">fig</a>, <a href="/docs.docker.jp.onthefly/search/?q=composition">composition</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=orchestration">orchestration</a>, <a href="/docs.docker.jp.onthefly/search/?q=environment">environment</a>, <a href="/docs.docker.jp.onthefly/search/?q=env file">env file</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+  
+  
+  
+  
+  
+  
+  
+  
+  <tr>
+    <td><code class="language-plaintext highlighter-rouge">--timestamps , -t</code></td>
+    <td></td>
+    <td>Show timestamps.</td>
+  </tr>
+ <!-- end for option -->
+</tbody>
+</table>
+<p><!-- end if options --></p>
+
+<h2 id="parent-command">上位コマンド</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>コマンド</th>
+      <th>説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose/">docker compose</a></td>
+      <td>Docker Compose</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="related-commands">関連コマンド</h2>
+
+<table>
+<thead>
+  <tr>
+    <td>コマンド</td>
+    <td>説明</td>
+  </tr>
+</thead>
+<tbody>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_build/">docker compose build</a></td>
+    <td>Build or rebuild services</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_convert/">docker compose convert</a></td>
+    <td>Converts the compose file to platform’s canonical format</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_create/">docker compose create</a></td>
+    <td>Creates containers for a service.</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_down/">docker compose down</a></td>
+    <td>Stop and remove containers, networks</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_events/">docker compose events</a></td>
+    <td>Receive real time events from containers.</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_exec/">docker compose exec</a></td>
+    <td>Execute a command in a running container.</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_kill/">docker compose kill</a></td>
+    <td>Force stop service containers.</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_logs/">docker compose logs</a></td>
+    <td>View output from containers</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_ls/">docker compose ls</a></td>
+    <td>List running compose projects</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_pause/">docker compose pause</a></td>
+    <td>pause services</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_ps/">docker compose ps</a></td>
+    <td>List containers</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_pull/">docker compose pull</a></td>
+    <td>Pull service images</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_push/">docker compose push</a></td>
+    <td>Push service images</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_rm/">docker compose rm</a></td>
+    <td>Removes stopped service containers</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_run/">docker compose run</a></td>
+    <td>Run a one-off command on a service.</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_start/">docker compose start</a></td>
+    <td>Start services</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_stop/">docker compose stop</a></td>
+    <td>Stop services</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_top/">docker compose top</a></td>
+    <td>Display the running processes</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_unpause/">docker compose unpause</a></td>
+    <td>unpause services</td>
+  </tr>
+
+  
+  <tr>
+    <td><a href="/docs.docker.jp.onthefly/engine/reference/commandline/compose_up/">docker compose up</a></td>
+    <td>Create and start containers</td>
+  </tr>
+
+</tbody>
+</table>
+
+<div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -177,7 +352,7 @@
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/compose/env-file.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [compose/env-file.ch](https://matsuand.github.io/docs.docker.jp.onthefly/compose/env-file/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/engine/reference/commandline/compose_logs.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [engine/reference/commandline/compose_logs.ch](https://matsuand.github.io/docs.docker.jp.onthefly/engine/reference/commandline/compose_logs/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -196,9 +371,11 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#syntax-rules" class="nomunge">文法</a></li>
-  <li><a href="#compose-file-and-cli-variables" class="nomunge">Compose ファイルと CLI 変数</a></li>
-  <li><a href="#more-compose-documentation" class="nomunge">その他の Compose ドキュメント</a></li>
+  <li><a href="#description" class="nomunge">説明</a></li>
+  <li><a href="#usage" class="nomunge">利用方法</a></li>
+  <li><a href="#options" class="nomunge">オプション</a></li>
+  <li><a href="#parent-command" class="nomunge">上位コマンド</a></li>
+  <li><a href="#related-commands" class="nomunge">関連コマンド</a></li>
 </ul>
 
 </div>
@@ -285,5 +462,5 @@
     </div>
 
     </footer>
-    <script>const pageURL = "/compose/env-file/";</script></body>
+    <script>const pageURL = "/engine/reference/commandline/compose_logs/";</script></body>
 </html>
