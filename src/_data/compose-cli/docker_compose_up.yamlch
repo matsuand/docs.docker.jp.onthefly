@@ -11,8 +11,8 @@ plink: docker_compose.yaml
 options:
 @y
 command: docker compose up
-short: Create and start containers
-long: Create and start containers
+short: コンテナーを生成して起動します。
+long: コンテナーを生成して起動します。
 usage: docker compose up [SERVICE...]
 pname: docker compose
 plink: docker_compose.yaml
@@ -23,27 +23,19 @@ options:
   - option: abort-on-container-exit
     value_type: bool
     default_value: "false"
+    description: |
+        Stops all containers if any container was stopped. Incompatible with -d
+    deprecated: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
 @y
   - option: abort-on-container-exit
     value_type: bool
     default_value: "false"
-@z
-
-@x
     description: |
-@y
-    description: |
-@z
-
-@x
-        Stops all containers if any container was stopped. Incompatible with -d
-    deprecated: false
-    experimental: false
-    experimentalcli: false
-    kubernetes: false
-    swarm: false
-@y
-        Stops all containers if any container was stopped. Incompatible with -d
+        1 つでもコンテナーが停止すれば全コンテナーを停止します。-d との併用はできません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -55,19 +47,7 @@ options:
   - option: always-recreate-deps
     value_type: bool
     default_value: "false"
-@y
-  - option: always-recreate-deps
-    value_type: bool
-    default_value: "false"
-@z
-
-@x
     description: |
-@y
-    description: |
-@z
-
-@x
         Recreate dependent containers. Incompatible with --no-recreate.
     deprecated: false
     experimental: false
@@ -75,7 +55,11 @@ options:
     kubernetes: false
     swarm: false
 @y
-        Recreate dependent containers. Incompatible with --no-recreate.
+  - option: always-recreate-deps
+    value_type: bool
+    default_value: "false"
+    description: |
+        依存コンテナーを再生成します。--no-recreate との併用はできません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -97,7 +81,7 @@ options:
   - option: attach-dependencies
     value_type: bool
     default_value: "false"
-    description: Attach to dependent containers.
+    description: 依存するコンテナーにアタッチします。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -119,7 +103,7 @@ options:
   - option: build
     value_type: bool
     default_value: "false"
-    description: Build images before starting containers.
+    description: コンテナー起動前にイメージをビルドします。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -143,7 +127,7 @@ options:
     shorthand: d
     value_type: bool
     default_value: "false"
-    description: 'Detached mode: Run containers in the background'
+    description: 'デタッチモード。コンテナーをバックグラウンドで起動します。'
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -167,7 +151,7 @@ options:
     shorthand: e
     value_type: stringArray
     default_value: '[]'
-    description: Environment variables
+    description: 環境変数。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -178,18 +162,7 @@ options:
 @x
   - option: exit-code-from
     value_type: string
-@y
-  - option: exit-code-from
-    value_type: string
-@z
-
-@x
     description: |
-@y
-    description: |
-@z
-
-@x
         Return the exit code of the selected service container. Implies --abort-on-container-exit
     deprecated: false
     experimental: false
@@ -197,7 +170,10 @@ options:
     kubernetes: false
     swarm: false
 @y
-        Return the exit code of the selected service container. Implies --abort-on-container-exit
+  - option: exit-code-from
+    value_type: string
+    description: |
+        指定されたサービスコンテナーの終了コードを返します。--abort-on-container-exit の指定を暗に含みます。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -209,13 +185,6 @@ options:
   - option: force-recreate
     value_type: bool
     default_value: "false"
-@y
-  - option: force-recreate
-    value_type: bool
-    default_value: "false"
-@z
-
-@x
     description: |
         Recreate containers even if their configuration and image haven't changed.
     deprecated: false
@@ -224,8 +193,11 @@ options:
     kubernetes: false
     swarm: false
 @y
+  - option: force-recreate
+    value_type: bool
+    default_value: "false"
     description: |
-        Recreate containers even if their configuration and image haven't changed.
+        コンテナーの設定やイメージに変更がなくてもコンテナーを再生成します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -247,7 +219,7 @@ options:
   - option: no-build
     value_type: bool
     default_value: "false"
-    description: Don't build an image, even if it's missing.
+    description: イメージがなかったとしてもイメージビルドしません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -269,7 +241,7 @@ options:
   - option: no-color
     value_type: bool
     default_value: "false"
-    description: Produce monochrome output.
+    description: モノクロ出力を行います。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -291,7 +263,7 @@ options:
   - option: no-deps
     value_type: bool
     default_value: "false"
-    description: Don't start linked services.
+    description: リンクされているサービスを起動しません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -313,7 +285,7 @@ options:
   - option: no-log-prefix
     value_type: bool
     default_value: "false"
-    description: Don't print prefix in logs.
+    description: ログ内にプレフィックスを出力しません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -325,19 +297,7 @@ options:
   - option: no-recreate
     value_type: bool
     default_value: "false"
-@y
-  - option: no-recreate
-    value_type: bool
-    default_value: "false"
-@z
-
-@x
     description: |
-@y
-    description: |
-@z
-
-@x
         If containers already exist, don't recreate them. Incompatible with --force-recreate.
     deprecated: false
     experimental: false
@@ -345,7 +305,11 @@ options:
     kubernetes: false
     swarm: false
 @y
-        If containers already exist, don't recreate them. Incompatible with --force-recreate.
+  - option: no-recreate
+    value_type: bool
+    default_value: "false"
+    description: |
+        コンテナーが存在していれば再生成しません。--force-recreate との併用はできません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -367,7 +331,7 @@ options:
   - option: no-start
     value_type: bool
     default_value: "false"
-    description: Don't start the services after creating them.
+    description: サービスの生成後にその起動は行いません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -379,13 +343,6 @@ options:
   - option: remove-orphans
     value_type: bool
     default_value: "false"
-@y
-  - option: remove-orphans
-    value_type: bool
-    default_value: "false"
-@z
-
-@x
     description: |
         Remove containers for services not defined in the Compose file.
     deprecated: false
@@ -394,8 +351,11 @@ options:
     kubernetes: false
     swarm: false
 @y
+  - option: remove-orphans
+    value_type: bool
+    default_value: "false"
     description: |
-        Remove containers for services not defined in the Compose file.
+        Compose ファイルに定義されていないサービスコンテナーを削除します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -408,24 +368,20 @@ options:
     shorthand: V
     value_type: bool
     default_value: "false"
+    description: |
+        Recreate anonymous volumes instead of retrieving data from the previous containers.
+    deprecated: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
 @y
   - option: renew-anon-volumes
     shorthand: V
     value_type: bool
     default_value: "false"
-@z
-
-@x
     description: |
-        Recreate anonymous volumes instead of retrieving data from the previous containers.
-    deprecated: false
-    experimental: false
-    experimentalcli: false
-    kubernetes: false
-    swarm: false
-@y
-    description: |
-        Recreate anonymous volumes instead of retrieving data from the previous containers.
+        前回のコンテナーからデータ抽出を行わずに、匿名ボリュームを再生成します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -437,13 +393,6 @@ options:
   - option: scale
     value_type: stringArray
     default_value: '[]'
-@y
-  - option: scale
-    value_type: stringArray
-    default_value: '[]'
-@z
-
-@x
     description: |
         Scale SERVICE to NUM instances. Overrides the `scale` setting in the Compose file if present.
     deprecated: false
@@ -452,8 +401,11 @@ options:
     kubernetes: false
     swarm: false
 @y
+  - option: scale
+    value_type: stringArray
+    default_value: '[]'
     description: |
-        Scale SERVICE to NUM instances. Overrides the `scale` setting in the Compose file if present.
+        SERVICE のインスタンス数を NUM とします。Compose ファイルに`scale`の設定があっても上書きされます。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -466,14 +418,6 @@ options:
     shorthand: t
     value_type: int
     default_value: "10"
-@y
-  - option: timeout
-    shorthand: t
-    value_type: int
-    default_value: "10"
-@z
-
-@x
     description: |
         Use this timeout in seconds for container shutdown when attached or when containers are already running.
     deprecated: false
@@ -481,19 +425,27 @@ options:
     experimentalcli: false
     kubernetes: false
     swarm: false
+@y
+  - option: timeout
+    shorthand: t
+    value_type: int
+    default_value: "10"
+    description: |
+        アタッチあるいは起動されているコンテナーのシャットダウンに要するタイムアウト時間を秒数で指定します。
+    deprecated: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-    description: |
-        Use this timeout in seconds for container shutdown when attached or when containers are already running.
-    deprecated: false
-    experimental: false
-    experimentalcli: false
-    kubernetes: false
-    swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false

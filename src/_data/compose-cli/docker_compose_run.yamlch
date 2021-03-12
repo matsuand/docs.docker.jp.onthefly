@@ -3,20 +3,12 @@
 
 @x
 command: docker compose run
+short: Run a one-off command on a service.
+long: Run a one-off command on a service.
 @y
 command: docker compose run
-@z
-
-@x
-short: Run a one-off command on a service.
-@y
-short: Run a one-off command on a service.
-@z
-
-@x
-long: Run a one-off command on a service.
-@y
-long: Run a one-off command on a service.
+short: サービスに対するワンタッチ（one-off）のコマンドを実行します。
+long: サービスに対するワンタッチ（one-off）のコマンドを実行します。
 @z
 
 @x
@@ -26,7 +18,7 @@ pname: docker compose
 plink: docker_compose.yaml
 options:
 @y
-usage: docker compose run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l
+usage: docker compose run [オプション] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l
     KEY=VALUE...] SERVICE [COMMAND] [ARGS...]
 pname: docker compose
 plink: docker_compose.yaml
@@ -49,7 +41,7 @@ options:
     shorthand: d
     value_type: bool
     default_value: "false"
-    description: Run container in background and print container ID
+    description: コンテナーをバックグラウンドで実行し、コンテナー ID を表示します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -69,7 +61,7 @@ options:
 @y
   - option: entrypoint
     value_type: string
-    description: Override the entrypoint of the image
+    description: イメージのエントリーポイントをオーバーライドします。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -93,7 +85,7 @@ options:
     shorthand: e
     value_type: stringArray
     default_value: '[]'
-    description: Set environment variables
+    description: 環境変数を設定します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -117,7 +109,7 @@ options:
     shorthand: l
     value_type: stringArray
     default_value: '[]'
-    description: Add or override a label
+    description: ラベルを追加またはオーバーライドします。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -137,7 +129,7 @@ options:
 @y
   - option: name
     value_type: string
-    description: ' Assign a name to the container'
+    description: 'コンテナーに対して名前を割り当てます。'
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -150,20 +142,7 @@ options:
     shorthand: T
     value_type: bool
     default_value: "false"
-@y
-  - option: no-TTY
-    shorthand: T
-    value_type: bool
-    default_value: "false"
-@z
-
-@x
     description: |
-@y
-    description: |
-@z
-
-@x
         Disable pseudo-tty allocation. By default docker compose run allocates a TTY
     deprecated: false
     experimental: false
@@ -171,7 +150,12 @@ options:
     kubernetes: false
     swarm: false
 @y
-        Disable pseudo-tty allocation. By default docker compose run allocates a TTY
+  - option: no-TTY
+    shorthand: T
+    value_type: bool
+    default_value: "false"
+    description: |
+        擬似 TTY への割り当てを無効にします。デフォルトにおいて docker-compose run には TTY が割り当てられます。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -193,7 +177,7 @@ options:
   - option: no-deps
     value_type: bool
     default_value: "false"
-    description: Don't start linked services.
+    description: リンクされているサービスは起動しません。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -217,7 +201,7 @@ options:
     shorthand: p
     value_type: stringArray
     default_value: '[]'
-    description: Publish a container's port(s) to the host.
+    description: ホストに対してコンテナーのポートを公開します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -239,7 +223,7 @@ options:
   - option: rm
     value_type: bool
     default_value: "false"
-    description: Automatically remove the container when it exits
+    description: コンテナーの終了時にはコンテナーを自動削除します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -251,23 +235,19 @@ options:
   - option: service-ports
     value_type: bool
     default_value: "false"
+    description: |
+        Run command with the service's ports enabled and mapped to the host.
+    deprecated: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
 @y
   - option: service-ports
     value_type: bool
     default_value: "false"
-@z
-
-@x
     description: |
-        Run command with the service's ports enabled and mapped to the host.
-    deprecated: false
-    experimental: false
-    experimentalcli: false
-    kubernetes: false
-    swarm: false
-@y
-    description: |
-        Run command with the service's ports enabled and mapped to the host.
+        サービスポートを有効にしホストへのマップを行ってコマンドを実行します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -279,13 +259,6 @@ options:
   - option: use-aliases
     value_type: bool
     default_value: "false"
-@y
-  - option: use-aliases
-    value_type: bool
-    default_value: "false"
-@z
-
-@x
     description: |
         Use the service's network useAliases in the network(s) the container connects to.
     deprecated: false
@@ -294,8 +267,11 @@ options:
     kubernetes: false
     swarm: false
 @y
+  - option: use-aliases
+    value_type: bool
+    default_value: "false"
     description: |
-        Use the service's network useAliases in the network(s) the container connects to.
+        コンテナーが接続するネットワークにおいて、サービスネットワークの useAliases を利用します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -317,7 +293,7 @@ options:
   - option: user
     shorthand: u
     value_type: string
-    description: Run as specified username or uid
+    description: 指定されたユーザーまたは UID によりコマンドを実行します。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -341,7 +317,7 @@ options:
     shorthand: v
     value_type: stringArray
     default_value: '[]'
-    description: Bind mount a volume.
+    description: ボリュームをバインドマウントします。
     deprecated: false
     experimental: false
     experimentalcli: false
@@ -359,21 +335,25 @@ options:
     experimentalcli: false
     kubernetes: false
     swarm: false
+@y
+  - option: workdir
+    shorthand: w
+    value_type: string
+    description: コンテナー内のワーキングディレクトリを指定します。
+    deprecated: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+@z
+
+@x
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 @y
-  - option: workdir
-    shorthand: w
-    value_type: string
-    description: Working directory inside the container
-    deprecated: false
-    experimental: false
-    experimentalcli: false
-    kubernetes: false
-    swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false

@@ -24,25 +24,29 @@ for f in $list; do
     if test -f $abs_publishdir/_data/engine-cli/docker_$base.yaml; then
       echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/engine-cli/docker_$base.yaml">>Makefile.sub
     else
-      if test -f $abs_publishdir/_data/application-template/docker_$base.yaml; then
-        echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/application-template/docker_$base.yaml">>Makefile.sub
+      if test -f $abs_publishdir/_data/compose-cli/docker_$base.yaml; then
+        echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/compose-cli/docker_$base.yaml">>Makefile.sub
       else
-        if test -f $abs_publishdir/_data/assemble/docker_$base.yaml; then
-          echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/assemble/docker_$base.yaml">>Makefile.sub
+        if test -f $abs_publishdir/_data/application-template/docker_$base.yaml; then
+          echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/application-template/docker_$base.yaml">>Makefile.sub
         else
-          if test -f $abs_publishdir/_data/buildx/docker_$base.yaml; then
-            echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/buildx/docker_$base.yaml">>Makefile.sub
+          if test -f $abs_publishdir/_data/assemble/docker_$base.yaml; then
+            echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/assemble/docker_$base.yaml">>Makefile.sub
           else
-            if test -f $abs_publishdir/_data/cluster/docker_$base.yaml; then
-              echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/cluster/docker_$base.yaml">>Makefile.sub
+            if test -f $abs_publishdir/_data/buildx/docker_$base.yaml; then
+              echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/buildx/docker_$base.yaml">>Makefile.sub
             else
-              if test -f $abs_publishdir/_data/docker-app/docker_$base.yaml; then
-                echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/docker-app/docker_$base.yaml">>Makefile.sub
+              if test -f $abs_publishdir/_data/cluster/docker_$base.yaml; then
+                echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/cluster/docker_$base.yaml">>Makefile.sub
               else
-                if test -f $abs_publishdir/_data/registry-cli/docker_$base.yaml; then
-                  echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/registry-cli/docker_$base.yaml">>Makefile.sub
+                if test -f $abs_publishdir/_data/docker-app/docker_$base.yaml; then
+                  echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/docker-app/docker_$base.yaml">>Makefile.sub
                 else
-                  echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change">>Makefile.sub
+                  if test -f $abs_publishdir/_data/registry-cli/docker_$base.yaml; then
+                    echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/_data/registry-cli/docker_$base.yaml">>Makefile.sub
+                  else
+                    echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change">>Makefile.sub
+                  fi
                 fi
               fi
             fi
