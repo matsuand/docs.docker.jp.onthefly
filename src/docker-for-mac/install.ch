@@ -49,20 +49,6 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @z
 
 @x
-- **Mac hardware must be a 2010 or a newer model with an Intel processor**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
-@y
-- **Mac ハードウェアは Intel プロセッサーを利用した 2010 あるいはそれより最新のモデルであること**。
-  そして Extended Page Tables (EPT) や Unrestricted モードを含んだ、MMU 仮想化に対する Intel ハードウェアサポートが必要です。
-  利用マシンがこれをサポートしているかどうかは、端末画面から `sysctl kern.hv_support` を実行してみればわかります。
-@z
-
-@x
-  If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
-@y
-  利用している Mac が Hypervisor フレームワークをサポートしている場合は、上のコマンドの出力に `kern.hv_support: 1` が表示されます。
-@z
-
-@x
 - **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
 @y
 - **macOS はバージョン 10.14 またはそれ以降であること**。

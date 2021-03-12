@@ -194,23 +194,66 @@ examples: |-
 @z
 
 @x
-  ```bash
-  $ docker rm $(docker ps -a -q)
+  Use the [`docker container prune`](container_prune.md) command to remove all
+  stopped containers, or refer to the [`docker system prune`](system_prune.md)
+  command to remove unused containers in addition to other Docker resources, such
+  as (unused) images and networks.
+@y
+  停止中のコンテナーをすべて削除するには [`docker container prune`](container_prune.md) コマンドを使います。
+  あるいは [`docker system prune`](system_prune.md) コマンドを使えば、未使用のコンテナー削除に加えて、（未使用の）イメージやネットワークといった Docker リソースも削除できます。
+@z
+
+@x
+  Alternatively, you can use the `docker ps` with the `-q` / `--quiet` option to
+  generate a list of container IDs to remove, and use that list as argument for
+  the `docker rm` command.
+@y
+  また`docker ps`コマンドにおいて`-q`または`--quiet`オプションを利用すると、コンテナー ID の一覧を取得できるため、この一覧を`docker rm`コマンドの引数として利用する方法もあります。
+@z
+
+@x
+  Combining commands can be more flexible, but is less portable as it depends
+  on features provided by the shell, and the exact syntax may differ depending on
+  what shell is used. To use this approach on Windows, consider using PowerShell
+  or Bash.
+@y
+  このようにコマンドを組み合わることは柔軟性を持った方法になりますが、シェルが提供する機能に依存するため可搬性に欠けます。
+  利用しているシェルによって細かな文法が異なるかもしれません。
+  Windows 上においてこの方法を利用する場合には PowerShell や Bash を用いるようにしてください。
+@z
+
+@x
+  The example below uses `docker ps -q` to print the IDs of all containers that
+  have exited (`--filter status=exited`), and removes those containers with
+  the `docker rm` command:
+@y
+  以下に示す利用例では`docker ps -q`によって、存在している（`--filter status=exited`）コンテナーの ID 一覧を取得して、`docker rm`コマンドを用いてそれらのコンテナーを削除するものです。
+@z
+
+@x
+  ```console
+  $ docker rm $(docker ps --filter status=exited -q)
   ```
 @y
-  ```bash
-  $ docker rm $(docker ps -a -q)
+  ```console
+  $ docker rm $(docker ps --filter status=exited -q)
   ```
 @z
 
 @x
-  This command deletes all stopped containers. The command
-  `docker ps -a -q` above returns all existing container IDs and passes them to
-  the `rm` command which deletes them. Running containers are not deleted.
+  Or, using the `xargs` Linux utility;
 @y
-  上のコマンドは停止しているコンテナーをすべて削除します。
-  上において`docker ps -a -q`コマンドが、存在するコンテナー ID すべてを取得し、それが`rm`コマンドに受け渡されコンテナーが削除されます。
-  実行中のコンテナーは削除されません。
+  あるいは Linux の`xargs`を使って以下のようにします。
+@z
+
+@x
+  ```console
+  $ docker ps --filter status=exited -q | xargs docker rm
+  ```
+@y
+  ```console
+  $ docker ps --filter status=exited -q | xargs docker rm
+  ```
 @z
 
 @x

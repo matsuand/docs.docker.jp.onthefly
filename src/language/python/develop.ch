@@ -81,7 +81,7 @@ MySQL をコンテナーとして実行するにあたって、いくつかボ�
 @z
 
 @x
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
 @y
 それではここでボリュームを生成します。
 作り出すボリュームは 1 つは MySQL のデータ用、そしてもう 1 つは MySQL の設定用です。

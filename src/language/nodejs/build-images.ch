@@ -468,6 +468,31 @@ CMD [ "node", "server.js" ]
 @z
 
 @x
+## Create a .dockerignore file
+@y
+{: #create-a-dockerignore-file }
+## .dockerignore ファイルの生成
+@z
+
+@x
+To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase the build’s performance, exclude files and directories by adding a .dockerignore file to the context directory. To improve the context load time create a `.dockerignore` file and add `node_modules` directory in it.
+@y
+ビルドコンテキスト内のファイルを利用するには、たとえば COPY 命令などのように Dockerfile 内の命令においてそのファイルを指定します。
+ビルド処理を効率化するためには、不要なファイルやディレクトリは .dockerignore ファイルに指定してコンテキストディレクトリに置きます。
+以下は、コンテキストのロード時間を改善するために`.dockerignore`を生成して、そこに`node_modules`ディレクトリを加える例です。
+@z
+
+@x
+```.dockerignore
+node_modules
+```
+@y
+```.dockerignore
+node_modules
+```
+@z
+
+@x
 ## Build image
 @y
 {: #build-image }

@@ -19,7 +19,7 @@ long: |-
 @y
 long: |-
   Swarm マネージャーが管理するノードを一覧表示します。
-  `-f` または `--filter` フラグを使ってフィルター検索を行うことができます。
+  `-f`または`--filter`フラグを使ってフィルター検索を行うことができます。
   フィルター検索時のオプションの詳細は [フィルター検索](#filtering) の節を参照してください。
 @z
 
@@ -146,7 +146,7 @@ examples: |-
 @y
   > **メモ**
   >
-  > 上の例における出力では、隠れ項目として `.Self` があります。
+  > 上の例における出力では、隠れ項目として`.Self`があります。
   > そのノードが、カレントな Docker デーモンとしてのノードであることを表わします。
   > アスタリスク `*`（例では `e216jshn25ckzbvmwlnh5jr3g *`）は、それがカレントな Docker デーモンのノードであることを意味しています。
 @z
@@ -162,9 +162,9 @@ examples: |-
   The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
 @y
-  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  フィルターフラグ（`-f`または`--filter`）の指定書式は「キー=値」というものです。
   複数のフィルターが必要な場合は、フラグを複数指定します。
-  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+  （たとえば`--filter "foo=bar" --filter "bif=baz"`など。）
 @z
 
 @x
@@ -176,12 +176,14 @@ examples: |-
 @x
   * [id](#id)
   * [label](#label)
+  * [node.label](#nodelabel)
   * [membership](#membership)
   * [name](#name)
   * [role](#role)
 @y
   * [id](#id)
   * [label](#label)
+  * [node.label](#nodelabel)
   * [membership](#membership)
   * [name](#name)
   * [role](#role)
@@ -197,7 +199,7 @@ examples: |-
 @x
   The `id` filter matches all or part of a node's id.
 @y
-  `id` フィルターは、ノード ID の全部または一部を検索します。
+  `id`フィルターは、ノード ID の全部または一部を検索します。
 @z
 
 @x
@@ -224,16 +226,20 @@ examples: |-
 @z
 
 @x
-  The `label` filter matches nodes based on engine labels and on the presence of a `label` alone or a `label` and a value. Node labels are currently not used for filtering.
+  The `label` filter matches nodes based on engine labels and on the presence of a
+  `label` alone or a `label` and a value. Engine labels are configured in
+  the [daemon configuration](dockerd.md#daemon-configuration-file). To filter on
+  Swarm `node` labels, use [`node.label` instead](#nodelabel).
 @y
-  `label` フィルターは、Engine の `label` だけが存在する、あるいは `label` とその値が存在するノードを検索します。
-  ノードラベルは、現在のところフィルター検索には用いられません。
+  `label`フィルターは、Engine の`label`だけが存在する、あるいは`label`とその値が存在するノードを検索します。
+  Engine ラベルは [デーモン設定](dockerd.md#daemon-configuration-file) において定めます。
+  Swarm の`node`ラベルに対しての検索は、これではなく [`node.label`](#nodelabel) を用います。
 @z
 
 @x
   The following filter matches nodes with the `foo` label regardless of its value.
 @y
-  以下の例では `foo` ラベルを持ったノードを抽出します。
+  以下の例では`foo`ラベルを持ったノードを抽出します。
   この場合、その値の内容は問いません。
 @z
 
@@ -254,6 +260,95 @@ examples: |-
 @z
 
 @x
+  #### node.label
+@y
+  {: #nodelabel }
+  #### node.label フィルター
+@z
+
+@x
+  The `node.label` filter matches nodes based on node labels and on the presence
+  of a `node.label` alone or a `node.label` and a value.
+@y
+  `node.label`フィルターはノードラベルに対応するノードを検索します。
+  `node.label`のみの場合と、`node.label`かつその値を指定した検索が可能です。
+@z
+
+@x
+  The following filter updates nodes to have a `region` node label:
+@y
+  以下のフィルターでは、各ノードに対して`region`というノードラベルを設定します。
+@z
+
+@x
+  ```console
+  $ docker node update --label-add region=region-a swarm-test-01
+  $ docker node update --label-add region=region-a swarm-test-02
+  $ docker node update --label-add region=region-b swarm-test-03
+  $ docker node update --label-add region=region-b swarm-test-04
+  ```
+@y
+  ```console
+  $ docker node update --label-add region=region-a swarm-test-01
+  $ docker node update --label-add region=region-a swarm-test-02
+  $ docker node update --label-add region=region-b swarm-test-03
+  $ docker node update --label-add region=region-b swarm-test-04
+  ```
+@z
+
+@x
+  Show all nodes that have a `region` node label set:
+@y
+  `region`というノードラベルを持つノードをすべて検索します。
+@z
+
+@x
+  ```console
+  $ docker node ls --filter node.label=region
+
+  ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+  yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+  2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
+  hc0pu7ntc7s4uvj4pv7z7pz15     swarm-test-03   Ready     Active         Reachable        20.10.2
+  n41b2cijmhifxxvz56vwrs12q     swarm-test-04   Ready     Active                          20.10.2
+  ```
+@y
+  ```console
+  $ docker node ls --filter node.label=region
+
+  ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+  yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+  2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
+  hc0pu7ntc7s4uvj4pv7z7pz15     swarm-test-03   Ready     Active         Reachable        20.10.2
+  n41b2cijmhifxxvz56vwrs12q     swarm-test-04   Ready     Active                          20.10.2
+  ```
+@z
+
+@x
+  Show all nodes that have a `region` node label, with value `region-a`:
+@y
+  `region`というノードラベルを持ち、かつ値として`region-a`を持つものを検索します。
+@z
+
+@x
+  ```console
+  $ docker node ls --filter node.label=region=region-a
+
+  ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+  yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+  2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
+  ```
+@y
+  ```console
+  $ docker node ls --filter node.label=region=region-a
+
+  ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+  yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+  2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
+  ```
+@z
+
+@x
   #### membership
 @y
   {: #membership }
@@ -264,13 +359,13 @@ examples: |-
   The `membership` filter matches nodes based on the presence of a `membership` and a value
   `accepted` or `pending`.
 @y
-  `membership` フィルターは、`membership` というラベルが存在するノードであって、その値が `accepted` か `pending` であるものを検索します。
+  `membership`フィルターは、`membership`というラベルが存在するノードであって、その値が`accepted`か`pending`であるものを検索します。
 @z
 
 @x
   The following filter matches nodes with the `membership` of `accepted`.
 @y
-  以下の例では、`membership` ラベルにおいて `accepted` が設定されているノードが抽出されます。
+  以下の例では、`membership`ラベルにおいて`accepted`が設定されているノードが抽出されます。
 @z
 
 @x
@@ -301,13 +396,13 @@ examples: |-
 @x
   The `name` filter matches on all or part of a node hostname.
 @y
-  `name` フィルターは、ノード名の全部または一部を検索します。
+  `name`フィルターは、ノード名の全部または一部を検索します。
 @z
 
 @x
   The following filter matches the nodes with a name equal to `swarm-master` string.
 @y
-  以下のフィルター指定では、`swarm-master` という名前に一致するノードすべてが検索されます。
+  以下のフィルター指定では、`swarm-master`という名前に一致するノードすべてが検索されます。
 @z
 
 @x
@@ -336,13 +431,13 @@ examples: |-
 @x
   The `role` filter matches nodes based on the presence of a `role` and a value `worker` or `manager`.
 @y
-  `role` フィルターは、`role` というラベルが存在するノードであって、その値が `worker` か `manager` であるものを検索します。
+  `role`フィルターは、`role`というラベルが存在するノードであって、その値が`worker`か`manager`であるものを検索します。
 @z
 
 @x
   The following filter matches nodes with the `manager` role.
 @y
-  以下の例では、`manager` ロールが設定されているノードが抽出されます。
+  以下の例では、`manager`ロールが設定されているノードが抽出されます。
 @z
 
 @x
