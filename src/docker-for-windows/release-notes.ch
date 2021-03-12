@@ -145,6 +145,14 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+- Removed the deprecated DNS name `docker.for.win.localhost`. Use DNS name `host.docker.internal` in a container to access services that are running on the host. [docker/for-win#10619](https://github.com/docker/for-win/issues/10619)
+@y
+- 非推奨の DNS 名`docker.for.win.localhost`を削除しました。
+  ホスト上に稼働するサービスにアクセスするには、コンテナー内から DNS 名`host.docker.internal`を使ってください。
+  [docker/for-win#10619](https://github.com/docker/for-win/issues/10619)
+@z
+
+@x
 ### Bug fixes and minor changes
 @y
 {: #bug-fixes-and-minor-changes }
