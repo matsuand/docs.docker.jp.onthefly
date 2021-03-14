@@ -276,7 +276,7 @@ Dockerfile の書き方の詳細については、[Docker ユーザーガイド]
 Create a file called `docker-compose.yml` in your project directory and paste
 the following:
 @y
-プロジェクト用のディレクトリ内で `Dockerfile` という名称のファイルを作成し、次の内容にします。
+プロジェクト用のディレクトリ内で`docker-compose.yml`という名称のファイルを作成し、次の内容にします。
 @z
 
 @x
