@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-26 13:55:31 +0900-->
+<!-- Page generated 2021-03-16 10:45:34 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker-compose run | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker-compose run" />
   <meta property="og:description" content="Runs a one-off command on a service." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-16T10:45:34+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/run/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-16T10:45:34+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker-compose run","description":"Runs a one-off command on a service.","url":"https://docs.docker.com/compose/reference/run/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,13 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>docker-compose run</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><pre><code class="language-none">Usage:
+                        <section class="section"><h1>docker-compose run</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+    <pre><code class="language-none">Usage:
     run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
         SERVICE [COMMAND] [ARGS...]
 
@@ -122,44 +128,84 @@ Options:
                           allocates a TTY.
     -w, --workdir=""      Working directory inside the container
 </code></pre>
+  </div>
+  <div id="japanese" class="tab-pane fade">
 
-<p>Runs a one-time command against a service. For example, the following command starts the <code class="language-plaintext highlighter-rouge">web</code> service and runs <code class="language-plaintext highlighter-rouge">bash</code> as its command.</p>
+    <pre><code class="language-none">利用方法:
+    run [オプション] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
+        SERVICE [COMMAND] [ARGS...]
+
+オプション:
+    -d, --detach          コンテナーをバックグラウンドで実行し、実行された新たな
+                          コンテナー ID を表示します。
+    --name NAME           コンテナーに対して名前を割り当てます。
+    --entrypoint CMD      イメージのエントリーポイントをオーバーライドします。
+    -e KEY=VAL            環境変数を設定します。（複数指定が可能）
+    -l, --label KEY=VAL   ラベルを追加またはオーバーライドします。（複数指定が可能）
+    -u, --user=""         指定されたユーザーまたは UID によりコマンドを実行します。
+    --no-deps             リンクされているサービスは起動しません。
+    --rm                  終了時にコンテナーを削除します。デタッチモードでは無視されます。
+    -p, --publish=[]      ホストに対してコンテナーのポートを公開します。
+    --service-ports       サービスポートを有効にしホストへのマップを行ってコマンドを実行します。
+    --use-aliases         コンテナーが接続するネットワークにおいて、サービスネットワークの
+                          エイリアスを利用します。
+    -v, --volume=[]       ボリュームをバインドマウントします。（デフォルト： []）
+    -T                    擬似 TTY への割り当てを無効にします。デフォルトにおいて
+                          `docker-compose run` には TTY が割り当てられます。
+    -w, --workdir=""      コンテナー内のワーキングディレクトリを指定します。
+</code></pre>
+
+  </div>
+</div>
+
+<p>1 つのサービスに対して、1 コマンドだけ実行します。
+たとえば以下のコマンドは<code class="language-plaintext highlighter-rouge">web</code>サービスを起動して、コマンドとして<code class="language-plaintext highlighter-rouge">bash</code>を実行します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run web bash
 </code></pre></div></div>
 
-<p>Commands you use with <code class="language-plaintext highlighter-rouge">run</code> start in new containers with configuration defined by that of the service, including volumes, links, and other details. However, there are two important differences.</p>
+<p><code class="language-plaintext highlighter-rouge">run</code>によって指定したコマンドは、定義されたサービス設定に基づいて生成された新たなコンテナー内において実行されます。
+定義内容にはボリューム、リンクなどその他の項目も含みます。
+ただしコマンド実行には大きな違いが 2 つあります。</p>
 
-<p>First, the command passed by <code class="language-plaintext highlighter-rouge">run</code> overrides the command defined in the service configuration. For example, if the  <code class="language-plaintext highlighter-rouge">web</code> service configuration is started with <code class="language-plaintext highlighter-rouge">bash</code>, then <code class="language-plaintext highlighter-rouge">docker-compose run web python app.py</code> overrides it with <code class="language-plaintext highlighter-rouge">python app.py</code>.</p>
+<p>1 つは、<code class="language-plaintext highlighter-rouge">run</code>によって指定されたコマンドは、サービス設定において定義されたコマンドをオーバーライドするということです。
+たとえば<code class="language-plaintext highlighter-rouge">web</code>サービスが、<code class="language-plaintext highlighter-rouge">bash</code>コマンドを実行するように設定されているとします。
+これに対して<code class="language-plaintext highlighter-rouge">docker-compose run web python app.py</code>を実行すると、コマンドはオーバーライドされて<code class="language-plaintext highlighter-rouge">python app.py</code>となります。</p>
 
-<p>The second difference is that the <code class="language-plaintext highlighter-rouge">docker-compose run</code> command does not create any of the ports specified in the service configuration. This prevents port collisions with already-open ports. If you <em>do want</em> the service’s ports to be created and mapped to the host, specify the <code class="language-plaintext highlighter-rouge">--service-ports</code> flag:</p>
+<p>2 つめの違いは<code class="language-plaintext highlighter-rouge">docker-compose run</code>コマンドを実行した場合、サービス設定においてポートが指定されていてもポート生成は行わない点です。
+これによりすでに開いているポートとの間での衝突が回避されます。
+サービスポートを生成してホストへマッピングされて欲しい場合には<code class="language-plaintext highlighter-rouge">--service-ports</code>フラグを指定します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --service-ports web python manage.py shell
 </code></pre></div></div>
 
-<p>Alternatively, manual port mapping can be specified with the <code class="language-plaintext highlighter-rouge">--publish</code> or <code class="language-plaintext highlighter-rouge">-p</code> options, just as when using <code class="language-plaintext highlighter-rouge">docker run</code>:</p>
+<p>別の方法として<code class="language-plaintext highlighter-rouge">--publish</code>または<code class="language-plaintext highlighter-rouge">-p</code>オプションを使って手動によるポートマッピングが指定できるので、<code class="language-plaintext highlighter-rouge">docker run</code>の実行時に以下のようにすることもできます。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --publish 8080:80 -p 2022:22 -p 127.0.0.1:2021:21 web python manage.py shell
 </code></pre></div></div>
 
-<p>If you start a service configured with links, the <code class="language-plaintext highlighter-rouge">run</code> command first checks to see if the linked service is running and starts the service if it is stopped.  Once all the linked services are running, the <code class="language-plaintext highlighter-rouge">run</code> executes the command you passed it. For example, you could run:</p>
+<p>リンクが設定されているサービスを起動すると、<code class="language-plaintext highlighter-rouge">run</code>コマンドの実行においては、まずそのリンクサービスが実行されているかどうかがチェックされ、停止中であった場合にはそれを起動します
+リンクサービスがすべて起動したら、指定されたコマンドが実行されます。
+たとえば以下のようなコマンドを実行したとします。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run db psql -h db -U docker
 </code></pre></div></div>
 
-<p>This opens an interactive PostgreSQL shell for the linked <code class="language-plaintext highlighter-rouge">db</code> container.</p>
+<p>上のコマンドはリンクされている<code class="language-plaintext highlighter-rouge">db</code>コンテナーにおいて PostgreSQL の対話シェルを開きます。</p>
 
-<p>If you do not want the <code class="language-plaintext highlighter-rouge">run</code> command to start linked containers, use the <code class="language-plaintext highlighter-rouge">--no-deps</code> flag:</p>
+<p><code class="language-plaintext highlighter-rouge">run</code>コマンド実行にあたってリンクコンテナーを起動したくない場合は<code class="language-plaintext highlighter-rouge">--no-deps</code>フラグを指定します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --no-deps web python manage.py shell
 </code></pre></div></div>
 
-<p>If you want to remove the container after running while overriding the container’s restart policy, use the <code class="language-plaintext highlighter-rouge">--rm</code> flag:</p>
+<p>コンテナーの再起動ポリシーをオーバーライドして実行していて、終了後はコンテナー削除を行いたい場合には<code class="language-plaintext highlighter-rouge">--rm</code>フラグを指定します。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run --rm web python manage.py db upgrade
 </code></pre></div></div>
 
-<p>This runs a database upgrade script, and removes the container when finished running, even if a restart policy is specified in the service configuration.</p>
+<p>上のコマンドはデータベースのアップデートスクリプトを実行します。
+そして終了時にはコンテナーを削除します。
+サービス設定において再起動ポリシーが設定されていても、その設定は無視されます。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=fig">fig</a>, <a href="/docs.docker.jp.onthefly/search/?q=composition">composition</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=orchestration">orchestration</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=run">run</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">

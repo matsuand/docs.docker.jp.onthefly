@@ -1,4 +1,4 @@
-<!-- Page generated 2021-02-26 13:55:31 +0900-->
+<!-- Page generated 2021-03-16 10:45:34 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>docker-compose scale | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="docker-compose scale" />
   <meta property="og:description" content="Sets the number of containers to run for a service." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-16T10:45:34+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/reference/scale/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-02-26T13:55:31+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-16T10:45:34+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"docker-compose scale","description":"Sets the number of containers to run for a service.","url":"https://docs.docker.com/compose/reference/scale/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -99,32 +99,50 @@
                 <div class="col-body">
                     <main class="col-content content">
                         <section class="section"><h1>docker-compose scale</h1><blockquote class="warning">
-  <p><strong>This command is deprecated.</strong> Use the <a href="/docs.docker.jp.onthefly/compose/reference/up/">up</a> command with the
-  <code class="language-plaintext highlighter-rouge">--scale</code> flag instead. Beware that using <code class="language-plaintext highlighter-rouge">up</code> with the <code class="language-plaintext highlighter-rouge">--scale</code> flag has
-  some <a href="https://github.com/docker/compose/issues/5251">subtle differences</a> with
-  the <code class="language-plaintext highlighter-rouge">scale</code> command, as it incorporates the behaviour of the <code class="language-plaintext highlighter-rouge">up</code> command.</p>
+  <p><strong>このコマンドは非推奨となっています</strong>。
+このかわりに <a href="/docs.docker.jp.onthefly/compose/reference/up/">up</a> コマンドに<code class="language-plaintext highlighter-rouge">--scale</code>フラグをつけて利用してください。
+<code class="language-plaintext highlighter-rouge">up</code>コマンドに<code class="language-plaintext highlighter-rouge">--scale</code>フラグをつけて実行するのは、<code class="language-plaintext highlighter-rouge">scale</code>コマンドとは <a href="https://github.com/docker/compose/issues/5251">微妙な違い</a> があります。
+  これは<code class="language-plaintext highlighter-rouge">up</code>コマンドによる動作が組み込まれているためです。</p>
 </blockquote>
 
-<pre><code class="language-none">Usage: scale [options] [SERVICE=NUM...]
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+    <pre><code class="language-none">Usage: scale [options] [SERVICE=NUM...]
 
 Options:
   -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.
                              (default: 10)
 </code></pre>
+  </div>
+  <div id="japanese" class="tab-pane fade">
 
-<p>Sets the number of containers to run for a service.</p>
+    <pre><code class="language-none">利用方法: scale [オプション] [SERVICE=NUM...]
 
-<p>Numbers are specified as arguments in the form <code class="language-plaintext highlighter-rouge">service=num</code>. For example:</p>
+オプション:
+  -t, --timeout TIMEOUT      シャットダウンに要するタイムアウト時間を秒数で指定します。
+                             （デフォルト: 10）
+</code></pre>
+
+  </div>
+</div>
+
+<p>1 つのサービス実行に対してのコンテナー数を設定します。</p>
+
+<p>コンテナー数は、<code class="language-plaintext highlighter-rouge">service=num</code>といった形の引数として指定します。
+たとえば以下のとおりです。</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose scale web=2 worker=3
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Tip</strong>: Alternatively, in
-<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/">Compose file version 3.x</a>, you can specify
-<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#replicas">replicas</a>
-under the <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#deploy">deploy</a> key as part of a
-service configuration for <a href="/engine/swarm/">Swarm mode</a>. The <code class="language-plaintext highlighter-rouge">deploy</code> key and its sub-options (including <code class="language-plaintext highlighter-rouge">replicas</code>) only works with the <code class="language-plaintext highlighter-rouge">docker stack deploy</code> command, not <code class="language-plaintext highlighter-rouge">docker-compose up</code> or <code class="language-plaintext highlighter-rouge">docker-compose run</code>.</p>
+  <p><strong>メモ</strong></p>
+
+  <p>これとは別に <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/">Compose ファイルバージョン 3.x</a> においては、<a href="/engine/swarm/">Swarm モード</a> に対するサービス設定の一部として、<a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#deploy">deploy</a> キー配下に <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#replicas">replicas</a> を指定することができます。
+ただし<code class="language-plaintext highlighter-rouge">deploy</code>キーとサブオプション（<code class="language-plaintext highlighter-rouge">replicas</code>を含む）は、<code class="language-plaintext highlighter-rouge">docker stack deploy</code>コマンドにおいてのみ動作するものであって、<code class="language-plaintext highlighter-rouge">docker-compose up</code>や<code class="language-plaintext highlighter-rouge">docker-compose run</code>では動作しません。</p>
 </blockquote>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=fig">fig</a>, <a href="/docs.docker.jp.onthefly/search/?q=composition">composition</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=orchestration">orchestration</a>, <a href="/docs.docker.jp.onthefly/search/?q=cli">cli</a>, <a href="/docs.docker.jp.onthefly/search/?q=scale">scale</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
