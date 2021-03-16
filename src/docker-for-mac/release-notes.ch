@@ -47,6 +47,43 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 3.2.2
+2021-03-15
+@y
+## Docker Desktop 3.2.2
+2021-03-15
+@z
+
+@x
+> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+@y
+> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue that stopped containers binding to port 53. Fixes [docker/for-mac#5416](https://github.com/docker/for-mac/issues/5416).
+- Fixed an issue that 32-bit Intel binaries were emulated on Intel CPUs. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
+- Fixed an issue related to high CPU consumption and frozen UI when the network connection is lost. Fixes [for-win/#10563](https://github.com/docker/for-win/issues/10563).
+- Fixed an issue opening a terminal in iTerm2 when it has no other windows open. Fixes [docker/roadmap#98](https://github.com/docker/roadmap/issues/98#issuecomment-791927788).
+@y
+- ポート 53 にバインドされている停止コンテナーに関しての問題を修正しました。
+  [docker/for-mac#5416](https://github.com/docker/for-mac/issues/5416) を Fix に。
+- 32 ビット Intel バイナリが Intel CPU にエミュレートされていた問題を修正しました。
+  [docker/for-win#10594](https://github.com/docker/for-win/issues/10594) を Fix に。
+- ネットワーク接続が切断された際に、CPU の異常消費および UI フリーズを引き起こす問題を修正しました。
+  [for-win/#10563](https://github.com/docker/for-win/issues/10563) を Fix に。
+- iTerm2 においてウィンドウが 1 つも開いていないときにターミナルを開いてしまう問題を修正しました。
+  [docker/roadmap#98](https://github.com/docker/roadmap/issues/98#issuecomment-791927788) を Fix に。
+@z
+
+@x
 ## Docker Desktop 3.2.1
 2021-03-05
 @y
@@ -55,9 +92,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
 @z
 
 @x
@@ -114,6 +151,12 @@ This page contains information about the new features, improvements, known issue
 - The Docker Dashboard displays a tip once a week.
 - Docker Desktop uses iTerm2 to launch the terminal on the container if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
 - Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
+- BuildKit is now the default builder for all users, not just for new installations. To turn this setting off, go to **Preferences** > **Docker Engine** and add the following block to the Docker daemon configuration file:
+```json
+"features": {
+    "buildkit": false
+}
+```
 @y
 - Docker Desktop 起動時に、自動的に Docker Dashboard を開くようにしました。
 - Docker Dashboard では 1 週間に 1 回、ヒント（tip）を表示するようにしました。
@@ -122,6 +165,13 @@ This page contains information about the new features, improvements, known issue
   [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
 - 新しい Apple 仮想フレームワークを利用した試験的サポートを追加しました。
   （macOS Big Sur 11.1 またはそれ以降を必要とします。）
+- BuildKit は新規インストール時だけでなく、すべてのユーザーにおいてデフォルトのビルダーとなりました。
+  この設定をオフにするには **Preferences** > **Docker Engine** を実行して、Docker デーモン設定ファイルに以下の記述を追加してください。
+```json
+"features": {
+    "buildkit": false
+}
+```
 @z
 
 @x

@@ -47,6 +47,40 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 3.2.2
+2021-03-15
+@y
+## Docker Desktop 3.2.2
+2021-03-15
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+@y
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue that stopped containers binding to port 53. Fixes [docker/for-win#10601](https://github.com/docker/for-win/issues/10601).
+- Fixed an issue that 32-bit Intel binaries were emulated on Intel CPUs. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
+- Fixed an issue related to high CPU consumption and frozen UI when the network connection is lost. Fixes [for-win/#10563](https://github.com/docker/for-win/issues/10563).
+@y
+- ポート 53 にバインドされている停止コンテナーに関しての問題を修正しました。
+  [docker/for-win#10601](https://github.com/docker/for-win/issues/10601) を Fix に。
+- 32 ビット Intel バイナリが Intel CPU にエミュレートされていた問題を修正しました。
+  [docker/for-win#10594](https://github.com/docker/for-win/issues/10594) を Fix に。
+- ネットワーク接続が切断された際に、CPU の異常消費および UI フリーズを引き起こす問題を修正しました。
+  [for-win/#10563](https://github.com/docker/for-win/issues/10563) を Fix に。
+@z
+
+@x
 ## Docker Desktop 3.2.1
 2021-03-05
 @y
@@ -55,9 +89,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe)
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe)
 @z
 
 @x
@@ -97,9 +131,22 @@ This page contains information about the new features, improvements, known issue
 @x
 - The Docker Dashboard opens automatically when you start Docker Desktop.
 - The Docker Dashboard displays a tip once a week.
+- BuildKit is now the default builder for all users, not just for new installations. To turn this setting off, go to **Settings** > **Docker Engine** and add the following block to the Docker daemon configuration file:
+```json
+"features": {
+    "buildkit": false
+}
+```
 @y
 - Docker Desktop 起動時に、自動的に Docker Dashboard を開くようにしました。
 - Docker Dashboard では 1 週間に 1 回、ヒント（tip）を表示するようにしました。
+- BuildKit は新規インストール時だけでなく、すべてのユーザーにおいてデフォルトのビルダーとなりました。
+  この設定をオフにするには **Settings** > **Docker Engine** を実行して、Docker デーモン設定ファイルに以下の記述を追加してください。
+```json
+"features": {
+    "buildkit": false
+}
+```
 @z
 
 @x
@@ -556,7 +603,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
 @x
 - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
 - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
-- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Settings** > **Docker Engine** and then disable the BuildKit feature.
 - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
 @y
 - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), ECS と ACI を通じて Compose とクラウドのボリューム利用が可能になりました。
@@ -565,7 +612,7 @@ Docker Desktop 2.4.0.0 には Kubernetes アップグレードが含まれます
   また不要で未使用のイメージの削除もできます。
   この新たな Images 画面にアクセスするには Docker メニューから **Dashboard** > **Images** を実行します。
 - Docker Desktop ではデフォルトにリセットした後に、BuildKit をデフォルト有効にしました。
-  それまでの古い`docker build`に切り替えるには、**Preferences** > **Docker Engine** にアクセスして BuildKit 機能を無効化します。
+  それまでの古い`docker build`に切り替えるには、**Settings** > **Docker Engine** にアクセスして BuildKit 機能を無効化します。
 - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
 @z
 
