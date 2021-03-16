@@ -20,12 +20,25 @@ notoc: true
 @x
 ```none
 Usage: pull [options] [SERVICE...]
+
+Options:
+    --ignore-pull-failures  Pull what it can and ignores images with pull failures.
+    --parallel              Deprecated, pull multiple images in parallel (enabled by default).
+    --no-parallel           Disable parallel pulling.
+    -q, --quiet             Pull without printing progress information
+    --include-deps          Also pull services declared as dependencies
+```
 @y
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
 ```none
 Usage: pull [options] [SERVICE...]
-@z
 
-@x
 Options:
     --ignore-pull-failures  Pull what it can and ignores images with pull failures.
     --parallel              Deprecated, pull multiple images in parallel (enabled by default).
@@ -33,26 +46,38 @@ Options:
     -q, --quiet             Pull without printing progress information
     --include-deps          Also pull services declared as dependencies
 ```
-@y
-Options:
-    --ignore-pull-failures  Pull what it can and ignores images with pull failures.
-    --parallel              Deprecated, pull multiple images in parallel (enabled by default).
-    --no-parallel           Disable parallel pulling.
-    -q, --quiet             Pull without printing progress information
-    --include-deps          Also pull services declared as dependencies
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
+```none
+利用方法: pull [オプション] [SERVICE...]
+
+オプション:
+    --ignore-pull-failures  可能なものはプルし、失敗するものは無視します。
+    --parallel              非推奨。マルチイメージを並行的にプルします。（デフォルトは有効）
+    --no-parallel           並行的なプルを無効にします。
+    -q, --quiet             処理過程に関する情報を表示せずにプルします。
+    --include-deps          依存するものとして宣言されたサービスもプルします。
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+</div>
 @z
 
 @x
 Pulls an image associated with a service defined in a `docker-compose.yml` or `docker-stack.yml` file, but does not start containers based on those images.
 @y
-Pulls an image associated with a service defined in a `docker-compose.yml` or `docker-stack.yml` file, but does not start containers based on those images.
+`docker-compose.yml`や`docker-stack.yml`ファイル内に定義されているサービスに関連したイメージをプルします。
+ただしそのイメージに基づいたコンテナーの起動は行いません。
 @z
 
 @x
 For example, suppose you have this `docker-compose.yml` file from the [Quickstart: Compose and Rails](../rails.md) sample.
 @y
-For example, suppose you have this `docker-compose.yml` file from the [Quickstart: Compose and Rails](../rails.md) sample.
+たとえば [クイックスタート： Compose と Rails](../rails.md) の例に示している、以下のような`docker-compose.yml`ファイルがあるとします。
 @z
 
 @x
@@ -92,7 +117,8 @@ services:
 @x
 If you run `docker-compose pull ServiceName` in the same directory as the `docker-compose.yml` file that defines the service, Docker pulls the associated image. For example, to call the `postgres` image configured as the `db` service in our example, you would run `docker-compose pull db`.
 @y
-If you run `docker-compose pull ServiceName` in the same directory as the `docker-compose.yml` file that defines the service, Docker pulls the associated image. For example, to call the `postgres` image configured as the `db` service in our example, you would run `docker-compose pull db`.
+サービス定義を行っている`docker-compose.yml`ファイルと同じディレクトリ内において`docker-compose pull ServiceName`を実行すると、Docker は関連するイメージをプルします。
+たとえばこの例において`db`サービスとして設定されている`postgres`イメージをプルするには`docker-compose pull db`を実行します。
 @z
 
 @x

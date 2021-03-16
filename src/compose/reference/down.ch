@@ -82,7 +82,6 @@ Options:
 {% endcapture %}
 {{ japanese-content | markdownify }}
 </div>
-<hr>
 </div>
 @z
 
@@ -90,20 +89,13 @@ Options:
 Stops containers and removes containers, networks, volumes, and images
 created by `up`.
 @y
-{% comment %}
-Stops containers and removes containers, networks, volumes, and images
-created by `up`.
-{% endcomment %}
 コンテナーを停止します。
-そして `up` コマンドによって生成されたコンテナー、ネットワーク、ボリューム、イメージを削除します。
+そして`up`コマンドによって生成されたコンテナー、ネットワーク、ボリューム、イメージを削除します。
 @z
 
 @x
 By default, the only things removed are:
 @y
-{% comment %}
-By default, the only things removed are:
-{% endcomment %}
 デフォルトで、削除されるものは以下に限ります。
 @z
 
@@ -112,11 +104,6 @@ By default, the only things removed are:
 - Networks defined in the `networks` section of the Compose file
 - The default network, if one is used
 @y
-{% comment %}
-- Containers for services defined in the Compose file
-- Networks defined in the `networks` section of the Compose file
-- The default network, if one is used
-{% endcomment %}
 - Compose ファイルにおいて定義されているサービスのコンテナー。
 - Compose ファイルの `networks` セクションに定義されているネットワーク。
 - デフォルトネットワーク。ただし利用されている場合に限る。
@@ -125,10 +112,7 @@ By default, the only things removed are:
 @x
 Networks and volumes defined as `external` are never removed.
 @y
-{% comment %}
-Networks and volumes defined as `external` are never removed.
-{% endcomment %}
-`external` として定義されているネットワークやボリュームは削除されません。
+`external`として定義されているネットワークやボリュームは削除されません。
 @z
 
 @x
@@ -137,12 +121,6 @@ have a stable name, they will not be automatically mounted by a subsequent
 `up`. For data that needs to persist between updates, use host or
 named volumes.
 @y
-{% comment %}
-Anonymous volumes are not removed by default. However, as they don't 
-have a stable name, they will not be automatically mounted by a subsequent
-`up`. For data that needs to persist between updates, use host or
-named volumes.
-{% endcomment %}
 匿名ボリュームはデフォルトでは削除されません。
 そしてこのボリュームには明確な名前がついていないため、この後に`up`コマンドが実行されても、自動的にマウントされることもありません。
 更新操作を通じて保存を必要とするデータであれば、ホストか名前つきボリュームを利用するようにしてください。

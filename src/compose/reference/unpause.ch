@@ -22,21 +22,32 @@ notoc: true
 Usage: unpause [SERVICE...]
 ```
 @y
-{% comment %}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
 ```none
 Usage: unpause [SERVICE...]
 ```
-{% endcomment %}
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
 ```none
 利用方法: unpause [SERVICE...]
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+</div>
 @z
 
 @x
 Unpauses paused containers of a service.
 @y
-{% comment %}
-Unpauses paused containers of a service.
-{% endcomment %}
 停止中のサービスコンテナーを再開します。
 @z

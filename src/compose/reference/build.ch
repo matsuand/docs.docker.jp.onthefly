@@ -7,17 +7,15 @@ description: Build or rebuild services.
 keywords: fig, composition, compose, docker, orchestration, cli, build
 title: docker-compose build
 notoc: true
+
+---
 @y
 ---
 description: サービスのビルドまたは再ビルド。
 keywords: fig, composition, compose, docker, orchestration, cli, build
 title: docker-compose build
 notoc: true
-@z
 
-@x
----
-@y
 ---
 @z
 
@@ -38,6 +36,33 @@ Options:
     -q, --quiet             Don't print anything to `STDOUT`.
 ```
 @y
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
+```none
+Usage: build [options] [--build-arg key=val...] [SERVICE...]
+
+Options:
+    --build-arg key=val     Set build-time variables for services.
+    --compress              Compress the build context using gzip.
+    --force-rm              Always remove intermediate containers.
+    -m, --memory MEM        Set memory limit for the build container.
+    --no-cache              Do not use cache when building the image.
+    --no-rm                 Do not remove intermediate containers after a successful build.
+    --parallel              Build images in parallel.
+    --progress string       Set type of progress output (`auto`, `plain`, `tty`).
+    --pull                  Always attempt to pull a newer version of the image.
+    -q, --quiet             Don't print anything to `STDOUT`.
+```
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
 ```none
 利用方法: build [オプション] [--build-arg key=val...] [SERVICE...]
 
@@ -53,6 +78,10 @@ Options:
     --pull                  プルを行う際に常に最新版のイメージの取得を試みます。
     -q, --quiet             `STDOUT` に何も出力しません。
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+</div>
 @z
 
 @x
@@ -62,8 +91,8 @@ example, `composetest_db`. If the Compose file specifies an
 tagged with that name, substituting any variables beforehand. See
 [variable substitution](../compose-file/compose-file-v3.md#variable-substitution).
 @y
-サービスは `プロジェクト名_サービス` として構築時にタグ付けられます。
-例えば `composetest_db` です。
+サービスは`プロジェクト名_サービス`として構築時にタグ付けられます。
+例えば`composetest_db`です。
 Compose ファイルが[イメージ](../compose-file/compose-file-v3.md#image) 名を指定している場合、イメージはその名称によってタグづけされます。変数が用いられている場合は、あらかじめ置換されます。
 これについては[変数置換](../compose-file/compose-file-v3.md#variable-substitution) を参照してください。
 @z
@@ -72,7 +101,7 @@ Compose ファイルが[イメージ](../compose-file/compose-file-v3.md#image) 
 If you change a service's Dockerfile or the contents of its
 build directory, run `docker-compose build` to rebuild it.
 @y
-サービスの Dockerfile やビルドディレクトリの内容を変更する場合は、`docker-compose build` を実行して再ビルドします。
+サービスの Dockerfile やビルドディレクトリの内容を変更する場合は、`docker-compose build`を実行して再ビルドします。
 @z
 
 @x
@@ -90,8 +119,8 @@ supported by Compose itself. BuildKit is enabled by default on Docker Desktop,
 but requires the `DOCKER_BUILDKIT=1` environment variable to be set on other
 platforms.
 @y
-Compose ではデフォルトで`docker` CLI を利用してビルドを実現しています（これは「ネイティブビルド」と呼ばれます）。
-`docker` CLI を利用することによって、[BuildKit](../../develop/develop-images/build_enhancements.md) のような機能を活用できることになります。
+Compose ではデフォルトで`docker`CLI を利用してビルドを実現しています（これは「ネイティブビルド」と呼ばれます）。
+`docker`CLI を利用することによって、[BuildKit](../../develop/develop-images/build_enhancements.md) のような機能を活用できることになります。
 そのような機能は Compose そのものにおいてはサポートされていません。
 BuildKit は Docker Desktop においてはデフォルトで有効になっています。
 しかしこれ以外のプラットフォームでは環境変数`DOCKER_BUILDKIT=1`を設定しておくことが必要になります。

@@ -89,8 +89,8 @@ can also be customized using `COMPOSE_PATH_SEPARATOR`.
 @y
 この変数は複数の Compose ファイルの指定をサポートしています。
 複数のパスはセパレーターで区切ります（パスセパレーターは Linux や macOS では `:`、Windows では `;`）。
-たとえば `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml` とします。
-パスセパレーターは `COMPOSE_PATH_SEPARATOR` を使って変更することもできます。
+たとえば`COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`とします。
+パスセパレーターは`COMPOSE_PATH_SEPARATOR`を使って変更することもできます。
 @z
 
 @x
@@ -110,9 +110,8 @@ Specify one or multiple active profiles to enable. Calling `docker-compose up`
 with `COMPOSE_PROFILES=frontend` will start the services with the profile
 `frontend` and services without specified profiles.
 @y
-Specify one or multiple active profiles to enable. Calling `docker-compose up`
-with `COMPOSE_PROFILES=frontend` will start the services with the profile
-`frontend` and services without specified profiles.
+有効にしたいプロファイルを複数指定します。
+`COMPOSE_PROFILES=frontend`を指定して`docker-compose up`を実行すると、プロファイル`frontend`を持ったサービスと、このプロファイルを持たないサービスが起動されます。
 @z
 
 @x
@@ -120,17 +119,16 @@ You can specify a list of profiles separated with a comma:
 `COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
 `debug`.
 @y
-You can specify a list of profiles separated with a comma:
-`COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
-`debug`.
+複数のプロファイルを指定する場合は、プロファイルをカンマで区切った一覧として指定します。
+たとえば`COMPOSE_PROFILES=frontend,debug`とすると、プロファイル`frontend`と`debug`が有効になります。
 @z
 
 @x
 See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
 [command-line option](overview.md).
 @y
-See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
-[command-line option](overview.md).
+[Compose でのプロファイル利用](../profiles.md) や [コマンドラインオプション](overview.md) の`--profile`も参照してください。
+.
 @z
 
 @x
@@ -356,7 +354,7 @@ which allows you to use [BuildKit](../../develop/develop-images/build_enhancemen
 to perform builds.
 @y
 イメージをビルドする際に Compose Python クライアントを利用するか、ネイティブ Docker CLI を利用するかを設定します。
-Compose のビルド処理は、デフォルトで `docker` CLI を用います。
+Compose のビルド処理は、デフォルトで `docker`CLI を用います。
 その場合には [BuildKit](../../develop/develop-images/build_enhancements.md#to-enable-buildkit-builds) を用いたビルド処理が可能です。
 @z
 

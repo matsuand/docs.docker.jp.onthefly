@@ -20,12 +20,25 @@ notoc: true
 @x
 ```none
 Usage: logs [options] [SERVICE...]
+
+Options:
+    --no-color          Produce monochrome output.
+    -f, --follow        Follow log output.
+    -t, --timestamps    Show timestamps.
+    --tail="all"        Number of lines to show from the end of the logs
+                        for each container.
+```
 @y
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
 ```none
 Usage: logs [options] [SERVICE...]
-@z
 
-@x
 Options:
     --no-color          Produce monochrome output.
     -f, --follow        Follow log output.
@@ -33,18 +46,29 @@ Options:
     --tail="all"        Number of lines to show from the end of the logs
                         for each container.
 ```
-@y
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
+```none
+利用方法: logs [オプション] [SERVICE...]
+
 Options:
-    --no-color          Produce monochrome output.
-    -f, --follow        Follow log output.
-    -t, --timestamps    Show timestamps.
-    --tail="all"        Number of lines to show from the end of the logs
-                        for each container.
+    --no-color          モノクロ出力を行います。
+    -f, --follow        ログ出力を監視します。
+    -t, --timestamps    タイムスタンプを表示します。
+    --tail="all"        各コンテナーにおいてログ最終行から何行を表示するか
+                        を指定します。
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+</div>
 @z
 
 @x
 Displays log output from services.
 @y
-Displays log output from services.
+サービスにログ出力を表示します。
 @z

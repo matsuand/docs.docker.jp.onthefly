@@ -25,28 +25,39 @@ Options:
     --json      Output events as a stream of json objects
 ```
 @y
-{% comment %}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
 ```none
 Usage: events [options] [SERVICE...]
 
 Options:
     --json      Output events as a stream of json objects
 ```
-{% endcomment %}
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
 ```none
 利用方法: events [オプション] [SERVICE...]
 
 オプション:
-    --json      Output events as a stream of json objects
+    --json      JSON オブジェクトのストリームとしてイベントを出力します。
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+</div>
 @z
 
 @x
 Stream container events for every container in the project.
 @y
-{% comment %}
-Stream container events for every container in the project.
-{% endcomment %}
 プロジェクト内のコンテナーすべてに対して、コンテナーイベントをストリーム出力します。
 @z
 
@@ -54,12 +65,7 @@ Stream container events for every container in the project.
 With the `--json` flag, a json object is printed one per line with the
 format:
 @y
-{% comment %}
-With the `--json` flag, a json object is printed one per line with the
-format:
-{% endcomment %}
-With the `--json` flag, a json object is printed one per line with the
-format:
+`--json`フラグが指定されている場合は、以下のような書式により各設定が 1 行ずつ出力されます。
 @z
 
 @x
@@ -95,8 +101,5 @@ format:
 @x
 The events that can be received using this can be seen [here](../../engine/reference/commandline/events.md#object-types).
 @y
-{% comment %}
-The events that can be received using this can be seen [here](../../engine/reference/commandline/events.md#object-types).
-{% endcomment %}
-The events that can be received using this can be seen [here](../../engine/reference/commandline/events.md#object-types).
+このコマンドを使って取得できるイベントの一覧は [こちら](../../engine/reference/commandline/events.md#object-types) に示しています。
 @z

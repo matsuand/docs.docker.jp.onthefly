@@ -43,15 +43,11 @@ Usage: help [COMMAND]
 {% endcapture %}
 {{ japanese-content | markdownify }}
 </div>
-<hr>
 </div>
 @z
 
 @x
 Displays help and usage instructions for a command.
 @y
-{% comment %}
-Displays help and usage instructions for a command.
-{% endcomment %}
 コマンドに対するヘルプと利用方法を表示します。
 @z

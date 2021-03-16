@@ -22,13 +22,8 @@ notoc: true
 instead.
 {: .warning }
 @y
-{% comment %}
-> **This command is deprecated.** Use the [up](up.md) command with `--no-start`
-instead.
-{: .warning }
-{% endcomment %}
 > **このコマンドは廃止予定（deprecated）です**。
-> このかわりに [up](up.md) コマンドに `--no-start` オプションをつけて実行してください。
+> このかわりに [up](up.md) コマンドに`--no-start`オプションをつけて実行してください。
 {: .warning }
 @z
 
@@ -73,15 +68,14 @@ Options:
 
 オプション:
     --force-recreate       設定やイメージに変更がなくてもコンテナーを再生成します。
-                           --no-recreate と同時には使えません。
+                           --no-recreate との併用はできません。
     --no-recreate          コンテナーが存在する場合は再生成しません。
-                           --force-recreate と同時には使えません。
+                           --force-recreate との併用はできません。
     --no-build             イメージが見つからなくてもイメージをビルドしません。
     --build                コンテナーの生成前にイメージをビルドします。
 ```
 {% endcapture %}
 {{ japanese-content | markdownify }}
 </div>
-<hr>
 </div>
 @z

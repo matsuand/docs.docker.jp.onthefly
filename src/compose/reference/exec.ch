@@ -79,7 +79,6 @@ Options:
 {% endcapture %}
 {{ japanese-content | markdownify }}
 </div>
-<hr>
 </div>
 @z
 
@@ -88,13 +87,8 @@ This is the equivalent of `docker exec`. With this subcommand you can run arbitr
 commands in your services. Commands are by default allocating a TTY, so you can
 use a command such as `docker-compose exec web sh` to get an interactive prompt.
 @y
-{% comment %}
-This is the equivalent of `docker exec`. With this subcommand you can run arbitrary
-commands in your services. Commands are by default allocating a TTY, so you can
-use a command such as `docker-compose exec web sh` to get an interactive prompt.
-{% endcomment %}
-このコマンドは `docker exec` と同じです。
+このコマンドは`docker exec`と同じです。
 このサブコマンドを使って、サービスに対する任意のコマンドを実行することができます。
 コマンドはデフォルトでは TTY が割り当てられます。
-したがって `docker-compose exec web sh` のようなコマンドを実行すると、対話可能なプロンプトを用いることができます。
+したがって`docker-compose exec web sh`のようなコマンドを実行すると、対話可能なプロンプトを用いることができます。
 @z
