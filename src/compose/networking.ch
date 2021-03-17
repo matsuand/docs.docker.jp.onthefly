@@ -16,10 +16,10 @@ title: Compose におけるネットワーク機能
 @z
 
 @x
-> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1.md).
+> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file version 1 (deprecated).
 @y
 > このページに示す内容は Compose ファイルフォーマットの [バージョン 2](compose-file/compose-file-v2.md) と [それ以降](compose-file/index.md) に適用されます。
-ネットワーク機能は[（古い）バージョン 1](compose-file/compose-file-v1.md) ではサポートされません。
+ネットワーク機能は（非推奨の）バージョン 1 ではサポートされません。
 @z
 
 @x

@@ -140,6 +140,14 @@ Docker Desktop の Apple M1 向け技術プレビュー版では、現在のと�
 @z
 
 @x
+- The new Apple Virtualization framework uses port 53 (DNS) when Docker Desktop starts. You cannot use this port to bind a container's port to the host. See [docker/for-mac#5335](https://github.com/docker/for-mac/issues/5335).
+@y
+- Apple の新しい仮想環境フレームワークでは Docker Desktop 起動時にポート 53（DNS）を利用します。
+ホストに向けたコンテナーボートとして、このポート番号を用いたバインドを行うことはできません。
+[docker/for-mac#5335](https://github.com/docker/for-mac/issues/5335) を参照してください。
+@z
+
+@x
 ## Fixes since the Apple Silicon preview 7
 @y
 {: #fixes-since-the-apple-silicon-preview-7 }

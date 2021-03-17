@@ -2444,12 +2444,8 @@ options:
 
 @x
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `network_mode` option replaces the version 1 [net](compose-file-v1.md#net) option.
 @y
 > ファイルフォーマット[バージョン 2](compose-versioning.md#version-2) において変更されました。
->
-> `network_mode`オプションは、バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
 @z
 
 @x
@@ -2503,12 +2499,8 @@ network_mode: "container:[container name/id]"
 
 @x
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `networks` option replaces the version 1 [net](compose-file-v1.md#net) option.
 @y
 > ファイルフォーマット[バージョン 2](compose-versioning.md#version-2) において変更されました。
->
-> `networks`オプションは、バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
 @z
 
 @x
@@ -3703,25 +3695,8 @@ volumes_from:
 
 @x
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `container:...` formats are only supported in the [version 2](compose-versioning.md#version-2)
-> file format. In [version 1](compose-versioning.md#version-1), you can use container
-> names without marking them as such:
->
->     - `service_name`
->     - `service_name:ro`
->     - `container_name`
->     - `container_name:rw`
 @y
 > ファイルフォーマット[バージョン 2](compose-versioning.md#version-2) において変更されました。
->
-> `container:...`という書式は [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) においてのみサポートされます。
-> [バージョン 1](compose-versioning.md#version-1) の場合、コンテナー名は以下のように`container:`をつけずに設定することができます。
->
->     - `service_name`
->     - `service_name:ro`
->     - `container_name`
->     - `container_name:rw`
 @z
 
 @x
@@ -4377,7 +4352,7 @@ driver: overlay
 @x
 > Changed in [version 2.1](compose-versioning.md#version-21) file format.
 >
-> Starting in Compose file format 2.1, overlay networks are always created as
+> Starting with Compose file format 2.1, overlay networks are always created as
 > `attachable`, and this is not configurable. This means that standalone
 > containers can connect to overlay networks.
 @y

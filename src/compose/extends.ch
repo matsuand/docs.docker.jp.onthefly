@@ -412,8 +412,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
 > **Note**
 >
 > The `extends` keyword is supported in earlier Compose file formats up to Compose
-> file version 2.1 (see [extends in v1](compose-file/compose-file-v1.md#extends)
-> and [extends in v2](compose-file/compose-file-v2.md#extends)), but is
+> file version 2.1 (see [extends in v2](compose-file/compose-file-v2.md#extends)), but is
 > not supported in Compose version 3.x. See the [Version 3 summary](compose-file/compose-versioning.md#version-3)
 > of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
 > See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
@@ -423,8 +422,8 @@ $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
 > **メモ**
 >
 > キーワード`extends`は、かつての Compose ファイルフォーマットバージョン 2.1 までにおいてサポートされます。
->（[バージョン 1 における extends](compose-file/compose-file-v1.md#extends) と [バージョン 2 における extends](compose-file/compose-file-v2.md#extends) を参照のこと。）
-これは Compose バージョン 3.x ではサポートされていません。
+> （[バージョン 2 における extends](compose-file/compose-file-v2.md#extends) を参照のこと。）
+> これは Compose バージョン 3.x ではサポートされていません。
 > キーワードの追加、削除に関しては [バージョン 3 のまとめ](compose-file/compose-versioning.md#version-3) や [アップグレード方法](compose-file/compose-versioning.md#upgrading) を参照してください。
 > また [moby/moby#31101](https://github.com/moby/moby/issues/31101) では、将来のバージョンにおいて何らかの形式で`extends`をサポートする可能性について議論するスレッドがありますので、確認してみてください。
 @z
@@ -793,31 +792,6 @@ services:
     # ...
     command: python otherapp.py
 ```
-@z
-
-@x
->  `build` and `image` in Compose file version 1
->
-> In the case of `build` and `image`, when using
-> [version 1 of the Compose file format](compose-file/compose-file-v1.md), using one
-> option in the local service causes Compose to discard the other option if it
-> was defined in the original service.
->
-> For example, if the original service defines `image: webapp` and the
-> local service defines `build: .` then the resulting service has a
-> `build: .` and no `image` option.
->
-> This is because `build` and `image` cannot be used together in a version 1
-> file.
-@y
->  Compose ファイルバージョン 1 における`build`と`image`
->
-> [Compose ファイルフォーマットバージョン 1](compose-file/compose-file-v1.md) における`build`と`image`の 2 つについて、ローカル定義に一方を用いた場合に、他方が元々のサービスに定義されていたとすると、その他方のオプションは無視されます。
->
-> たとえば元のサービスに`image: webapp`が定義されていて、ローカルサービスでは`build: .`が定義されているとします。
-> このときの結果は`build: .`となり、`image`オプションはなくなります。
->
-> これはファイルフォーマットバージョン 1 においては、`build`と`image`を同時に用いることができないためです。
 @z
 
 @x

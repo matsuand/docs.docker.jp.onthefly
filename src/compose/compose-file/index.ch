@@ -7,6 +7,7 @@ description: Compose file reference
 keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yml
+- /compose/compose-file/compose-file-v1/
 title: Compose file
 toc_max: 4
 toc_min: 1
@@ -17,6 +18,7 @@ description: Compose ファイルリファレンス
 keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yml
+- /compose/compose-file/compose-file-v1/
 title: Compose ファイル
 toc_max: 4
 toc_min: 1

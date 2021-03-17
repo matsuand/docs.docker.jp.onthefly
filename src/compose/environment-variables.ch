@@ -466,21 +466,3 @@ Docker Compose のコマンドラインからの処理設定を行うことが�
 そういった変数は先頭が`COMPOSE_`や`DOCKER_`で始まります。
 詳しくは [CLI 環境変数](reference/envvars.md)を参照してください。
 @z
-
-@x
-## Environment variables created by links
-@y
-## リンクから生成される環境変数
-{: #environment-variables-created-by-links }
-@z
-
-@x
-When using the ['links' option](compose-file/compose-file-v3.md#links) in a
-[v1 Compose file](compose-file/compose-file-v1.md#link-environment-variables),
-environment variables are created for each link. These variables are deprecated.
-Use the link alias as a hostname instead.
-@y
-[Compose ファイルバージョン 1](/compose/compose-file/compose-file-v1.md#link-environment-variables) における [`links`オプション](/compose/compose-file/compose-file-v3.md#links) を用いると、各リンクに対する環境変数が生成されます。
-ただしこの変数は廃止予定となっています。
-リンクはホスト名として利用するようにしてください。
-@z
