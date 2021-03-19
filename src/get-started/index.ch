@@ -293,7 +293,7 @@ To access the dashboard, follow the instructions for either
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 @y
-ダッシュボードにアクセスするには [Mac](../../docker-for-mac/dashboard/) 用または [Windows](../../docker-for-windows/dashboard/) 用の手順に従ってください。
+ダッシュボードにアクセスするには [Mac](../docker-for-mac/dashboard/) 用または [Windows](../docker-for-windows/dashboard/) 用の手順に従ってください。
 ダッシュボードを今開いている場合は、チュートリアルコンテナーが動作中であるのが見てとれるはずです。
 コンテナー名（以下では`jolly_bouman`）はランダムに生成されます。
 したがって手元のコンテナー名は、きっと別の名前になっているはずです。
