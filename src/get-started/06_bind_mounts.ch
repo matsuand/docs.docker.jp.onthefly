@@ -26,7 +26,7 @@ is stored.
 @z
 
 @x
-With **bind mounts**, we control the exact mountpoint on the host. We can use this to persist data, but is often
+With **bind mounts**, we control the exact mountpoint on the host. We can use this to persist data, but it's often
 used to provide additional data into containers. When working on an application, we can use a bind mount to
 mount our source code into the container to let it see code changes, respond, and let us see the changes right
 away.
@@ -135,7 +135,7 @@ So, let's do it!
 @z
 
 @x
-    If you are using PowerShell then use this command.
+    If you are using PowerShell then use this command:
 @y
     PowerShell を利用している場合は以下のコマンドとします。
 @z
@@ -178,7 +178,7 @@ So, let's do it!
 @z
 
 @x
-3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this...
+3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this:
 @y
 3. `docker logs -f <container-id>`を実行すればログ確認ができます。
    このログから準備万端であることがわかります。
@@ -216,7 +216,7 @@ So, let's do it!
 
 @x
 4. Now, let's make a change to the app. In the `src/static/js/app.js` file, let's change the "Add Item" button to simply say
-   "Add". This change will be on line 109.
+   "Add". This change will be on line 109:
 @y
 4. それではアプリに変更を加えてみます。
    `src/static/js/app.js`ファイルにおいて「Add Item」ボタン"の名前を単純に「Add」とします。

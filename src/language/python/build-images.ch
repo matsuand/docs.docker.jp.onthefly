@@ -392,9 +392,9 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 @z
 
 @x
-Just to recap, we created a directory in our local machine called `docker-python` and created a simple Python application using the Flask framework. We also used the `requirements.txt` file to gather our requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure would now look like:
+Just to recap, we created a directory in our local machine called `python-docker` and created a simple Python application using the Flask framework. We also used the `requirements.txt` file to gather our requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure would now look like:
 @y
-ここまでの作業をまとめてみると、ローカルマシン内に`docker-python`というディレクトリを生成して、Flask フレームワークを利用した簡単な Python アプリケーションを生成しました。
+ここまでの作業をまとめてみると、ローカルマシン内に`python-docker`というディレクトリを生成して、Flask フレームワークを利用した簡単な Python アプリケーションを生成しました。
 また`requirements.txt`ファイルを利用して依存パッケージを取得し、またイメージビルドのためのコマンドを記述した Dokerfile を生成しました。
 Python アプリケーションディレクトリは以下のような構造となります。
 @z

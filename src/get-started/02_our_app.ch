@@ -118,6 +118,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @x
     ```dockerfile
     FROM node:12-alpine
+    RUN apk add --no-cache python g++ make
     WORKDIR /app
     COPY . .
     RUN yarn install --production
@@ -126,6 +127,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @y
     ```dockerfile
     FROM node:12-alpine
+    RUN apk add --no-cache python g++ make
     WORKDIR /app
     COPY . .
     RUN yarn install --production

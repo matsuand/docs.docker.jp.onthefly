@@ -208,11 +208,11 @@ For now, we will create the network first and attach the MySQL container at star
 
 @x
     ```bash
-    docker exec -it <mysql-container-id> mysql -p
+    docker exec -it <mysql-container-id> mysql -u root -p
     ```
 @y
     ```bash
-    docker exec -it <mysql-container-id> mysql -p
+    docker exec -it <mysql-container-id> mysql -u root -p
     ```
 @z
 
