@@ -288,7 +288,7 @@ Now, we can add the steps required. The first one checks-out our repository unde
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
 @y
       - name: Build and push
         id: docker_build
@@ -297,7 +297,7 @@ Now, we can add the steps required. The first one checks-out our repository unde
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
 @z
 
 @x
@@ -415,7 +415,7 @@ buildx 処理の出力をビルダーにおいて利用するように設定し�
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
@@ -438,7 +438,7 @@ buildx 処理の出力をビルダーにおいて利用するように設定し�
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
