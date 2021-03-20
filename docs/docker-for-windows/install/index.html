@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-19 12:37:03 +0900-->
+<!-- Page generated 2021-03-20 13:41:25 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Windows への Docker Desktop のインストール | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Windows への Docker Desktop のインストール" />
   <meta property="og:description" content="How to install Docker Desktop for Windows" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-20T13:41:25+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/install/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-20T13:41:25+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Windows への Docker Desktop のインストール","description":"How to install Docker Desktop for Windows","url":"https://docs.docker.com/docker-for-windows/install/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -101,34 +101,52 @@
                         <section class="section"><h1>Windows への Docker Desktop のインストール</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>Docker Desktop for Windows は Microsoft Windows 向け Docker の <a href="https://www.docker.com/community-edition">コミュニティ</a> 版です。
 Docker Desktop for Windows は Docker Hub からダウンロードすることができます。</p>
 
-<p>このページでは Windows 10 Pro、Enterprise、Education に Docker Desktop をインストールする方法を示します。
-Windows 10 Home に Docker Desktop をインストールする方法については、<a href="/docs.docker.jp.onthefly/docker-for-windows/install-windows-home/">Windows Home への Docker Desktop のインストール</a> を参照してください。</p>
-
 <p><a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows/" class="button outline-btn">Docker Hub からダウンロード</a></p>
 
 <p>Docker Desktop をダウンロードすると、<a href="https://www.docker.com/legal/docker-software-end-user-license-agreement" target="_blank" rel="noopener" class="_">Docker Software End User License Agreement</a> と <a href="https://www.docker.com/legal/data-processing-agreement" target="_blank" rel="noopener" class="_">Docker Data Processing Agreement</a> の各規約に同意したものとなります。</p>
 
-<h2 id="what-to-know-before-you-install">インストール前に確認すべきこと</h2>
+<h2 id="system-requirements">システム要件</h2>
 
-<h3 id="system-requirements">システム要件</h3>
+<p>Docker Desktop を正常にインストールするためには Windows マシンが以下を満たしていることが必要です。</p>
+
+<h3 id="hyper-v-backend-and-windows-containers">Hyper-V バックエンドと Windows コンテナー</h3>
 
 <ul>
   <li>
-    <p>Windows 10 64 ビット: Pro、Enterprise、Education (Build 17134 またはそれ以降)</p>
+    <p>Windows 10 64 ビット: Pro、Enterprise、Education（Build 17134 またはそれ以降）</p>
 
-    <p>Windows 10 Home については <a href="/docs.docker.jp.onthefly/docker-for-windows/install-windows-home/">Windows Home への Docker Desktop のインストール</a> を参照してください。</p>
+    <p>Windows 10 Home については <a href="#system-requirements-for-wsl-2-backend">WSL 2 バックエンドにおけるシステム要件</a> を参照してください。</p>
   </li>
   <li>Hyper-V とコンテナー機能を有効にしていることが必要です。</li>
   <li>
     <p>Windows 10 上においてクライアント Hyper-V を正常に実行するには、以下のハードウェア要件を満たす必要があります。</p>
 
     <ul>
-      <li><a href="https://en.wikipedia.org/wiki/Second_Level_Address_Translation">第 2 レベルのアドレス変換（Second Level Address Translation; SLAT）</a> に対応した 64 ビットプロセッサー。</li>
+      <li><a href="https://en.wikipedia.org/wiki/Second_Level_Address_Translation" target="_blank" rel="noopener" class="_">第 2 レベルのアドレス変換</a>（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。</li>
       <li>4 GB のシステム RAM</li>
       <li>BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
-<a href="/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#virtualization-must-be-enabled">仮想化</a> を参照してください。</li>
+詳しくは <a href="/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#virtualization-must-be-enabled">仮想化機能</a> を参照してください。</li>
     </ul>
   </li>
+</ul>
+
+<h3 id="wsl-2-backend">WSL 2 バックエンド</h3>
+
+<ul>
+  <li>Windows 10 64 ビット: Home、Pro、Enterprise、Education、バージョン 1903（Build 18362 またはそれ以降）</li>
+  <li>Windows における WSL 2 機能の有効化。
+詳しくは <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank" rel="noopener" class="_">Microsoft のドキュメント</a> を参照してください。</li>
+  <li>
+    <p>Windows 10 上の WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。</p>
+
+    <ul>
+      <li>64-bit processor with <a href="https://en.wikipedia.org/wiki/Second_Level_Address_Translation" target="_blank" rel="noopener" class="_">第 2 レベルのアドレス変換</a>（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。</li>
+      <li>4 GB のシステム RAM</li>
+      <li>BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
+詳しくは <a href="/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/#virtualization-must-be-enabled">仮想化機能</a> を参照してください。</li>
+    </ul>
+  </li>
+  <li><a href="https://docs.microsoft.com/windows/wsl/wsl2-kernel" target="_blank" rel="noopener" class="_">Linux カーネルアップデートパッケージ</a> のダウンロードとインストール。</li>
 </ul>
 
 <blockquote>
@@ -172,7 +190,7 @@ Windows 10 Home に Docker Desktop をインストールする方法について
  あるいはウェブブラウザーの下段に表示される、最新のダウンロードバーから直接起動することもできます。</p>
   </li>
   <li>
-    <p>Configuration ページにおいてプロンプト画面が表示されたら、<strong>Enable Hyper-V Windows Features</strong> オプションが設定されていることを確認してください。</p>
+    <p>Configuration ページにおいてプロンプト画面が表示されたら、<strong>Enable Hyper-V Windows Features</strong> オプションまたは <strong>Install required Windows components for WSL 2</strong> オプションが設定されていることを確認してください。</p>
   </li>
   <li>
     <p>インストールウィザードの手順に従ってインストーラーを承認して、インストールを完了させます。</p>
@@ -244,10 +262,9 @@ Windows 上に Docker Desktop が正常に起動できるようになりまし�
   <li><a href="/docs.docker.jp.onthefly/docker-for-windows/">はじめよう</a> では Docker Desktop for Windows を紹介しています。</li>
   <li><a href="../../get-started/">Docker をはじめよう</a> はマルチサービススタックのデプロイ方法を説明するチュートリアルです。</li>
   <li><a href="/docs.docker.jp.onthefly/docker-for-windows/troubleshoot/">トラブルシューティング</a> では、一般的な問題、回避策、サポートの受け方などについて説明しています。</li>
-  <li><a href="/docs.docker.jp.onthefly/desktop/faqs/">FAQ</a> ではよく尋ねられる質問を示しています。</li>
+  <li><a href="/docs.docker.jp.onthefly/desktop/faqs/">FAQ</a> ではよくたずねられる質問を示しています。</li>
   <li><a href="/docs.docker.jp.onthefly/docker-for-windows/release-notes/">リリースノート</a> では、Docker Desktop リリースにおけるコンポーネントアップデート、新機能、改善項目を一覧にしています。</li>
-  <li><a href="/docs.docker.jp.onthefly/desktop/backup-and-restore/">Back up and restore data</a> provides instructions
-on backing up and restoring data related to Docker.</li>
+  <li><a href="/docs.docker.jp.onthefly/desktop/backup-and-restore/">データのバックアップとリストア</a> では Docker に関するデータのバックアップやリストアの手順を説明しています。</li>
 </ul>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=windows">windows</a>, <a href="/docs.docker.jp.onthefly/search/?q=install">install</a>, <a href="/docs.docker.jp.onthefly/search/?q=download">download</a>, <a href="/docs.docker.jp.onthefly/search/?q=run">run</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=local">local</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
@@ -282,9 +299,10 @@ on backing up and restoring data related to Docker.</li>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#what-to-know-before-you-install" class="nomunge">インストール前に確認すべきこと</a>
+  <li><a href="#system-requirements" class="nomunge">システム要件</a>
     <ul>
-      <li><a href="#system-requirements" class="nomunge">システム要件</a></li>
+      <li><a href="#hyper-v-backend-and-windows-containers" class="nomunge">Hyper-V バックエンドと Windows コンテナー</a></li>
+      <li><a href="#wsl-2-backend" class="nomunge">WSL 2 バックエンド</a></li>
       <li><a href="#whats-included-in-the-installer" class="nomunge">インストーラーに含まれるもの</a></li>
       <li><a href="#about-windows-containers" class="nomunge">Windows コンテナーについて</a></li>
     </ul>
