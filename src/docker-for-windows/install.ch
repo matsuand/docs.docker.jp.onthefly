@@ -6,12 +6,16 @@
 description: How to install Docker Desktop for Windows
 keywords: windows, install, download, run, docker, local
 title: Install Docker Desktop on Windows
+redirect_from:
+- /docker-for-windows/install-windows-home/
 ---
 @y
 ---
 description: How to install Docker Desktop for Windows
 keywords: windows, install, download, run, docker, local
 title: Windows への Docker Desktop のインストール
+redirect_from:
+- /docker-for-windows/install-windows-home/
 ---
 @z
 
@@ -21,13 +25,6 @@ You can download Docker Desktop for Windows from Docker Hub.
 @y
 Docker Desktop for Windows は Microsoft Windows 向け Docker の [コミュニティ](https://www.docker.com/community-edition) 版です。
 Docker Desktop for Windows は Docker Hub からダウンロードすることができます。
-@z
-
-@x
-This page contains information on installing Docker Desktop on Windows 10 Pro, Enterprise, and Education. If you are looking for information about installing Docker Desktop on Windows 10 Home, see [Install Docker Desktop on Windows Home](/install-windows-home.md).
-@y
-このページでは Windows 10 Pro、Enterprise、Education に Docker Desktop をインストールする方法を示します。
-Windows 10 Home に Docker Desktop をインストールする方法については、[Windows Home への Docker Desktop のインストール](/install-windows-home.md) を参照してください。
 @z
 
 @x
@@ -46,45 +43,90 @@ Docker Desktop をダウンロードすると、[Docker Software End User Licens
 @z
 
 @x
-## What to know before you install
+## System requirements
 @y
-## インストール前に確認すべきこと
-{: #what-to-know-before-you-install }
-@z
-
-@x
-### System Requirements
-@y
-### システム要件
 {: #system-requirements }
+## システム要件
 @z
 
 @x
-  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or later).
-  
-    For Windows 10 Home, see [Install Docker Desktop on Windows Home](install-windows-home.md).
-  - Hyper-V and Containers Windows features must be enabled.
-  - The following hardware prerequisites are required to successfully run Client
+Your Windows machine must meet the following requirements to successfully install Docker Desktop.
+@y
+Docker Desktop を正常にインストールするためには Windows マシンが以下を満たしていることが必要です。
+@z
+
+@x
+### Hyper-V backend and Windows containers
+@y
+{: #hyper-v-backend-and-windows-containers }
+### Hyper-V バックエンドと Windows コンテナー
+@z
+
+@x
+- Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or higher).
+
+  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
+@y
+- Windows 10 64 ビット: Pro、Enterprise、Education（Build 17134 またはそれ以降）
+
+  Windows 10 Home については [WSL 2 バックエンドにおけるシステム要件](#system-requirements-for-wsl-2-backend) を参照してください。
+@z
+
+@x
+- Hyper-V and Containers Windows features must be enabled.
+- The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
 @y
-  - Windows 10 64 ビット: Pro、Enterprise、Education (Build 17134 またはそれ以降)
-  
-    Windows 10 Home については [Windows Home への Docker Desktop のインストール](install-windows-home.md) を参照してください。
-  - Hyper-V とコンテナー機能を有効にしていることが必要です。
-  - Windows 10 上においてクライアント Hyper-V を正常に実行するには、以下のハードウェア要件を満たす必要があります。
+- Hyper-V とコンテナー機能を有効にしていることが必要です。
+- Windows 10 上においてクライアント Hyper-V を正常に実行するには、以下のハードウェア要件を満たす必要があります。
 @z
 
 @x
-     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
-     - 4GB system RAM
-    - BIOS-level hardware virtualization support must be enabled in the
+  - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
 @y
-     - [第 2 レベルのアドレス変換（Second Level Address Translation; SLAT）](https://en.wikipedia.org/wiki/Second_Level_Address_Translation) に対応した 64 ビットプロセッサー。
-     - 4 GB のシステム RAM
-     - BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
-       [仮想化](troubleshoot.md#virtualization-must-be-enabled) を参照してください。
+  - [第 2 レベルのアドレス変換](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。
+  - 4 GB のシステム RAM
+  - BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
+    詳しくは [仮想化機能](troubleshoot.md#virtualization-must-be-enabled) を参照してください。
+@z
+
+@x
+### WSL 2 backend
+@y
+{: #wsl-2-backend }
+### WSL 2 バックエンド
+@z
+
+@x
+- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
+- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
+- The following hardware prerequisites are required to successfully run
+WSL 2 on Windows 10:
+@y
+- Windows 10 64 ビット: Home、Pro、Enterprise、Education、バージョン 1903（Build 18362 またはそれ以降）
+- Windows における WSL 2 機能の有効化。
+  詳しくは [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"} を参照してください。
+- Windows 10 上の WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。
+@z
+
+@x
+  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
+    BIOS settings.  For more information, see
+    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
+@y
+  - 64-bit processor with [第 2 レベルのアドレス変換](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。
+  - 4 GB のシステム RAM
+  - BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
+    詳しくは [仮想化機能](troubleshoot.md#virtualization-must-be-enabled) を参照してください。
+- [Linux カーネルアップデートパッケージ](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"} のダウンロードとインストール。
 @z
 
 @x
@@ -188,9 +230,9 @@ Windows コンテナーの利用方法についてお探しの方は以下です
 @z
 
 @x
-2. When prompted, ensure the **Enable Hyper-V Windows Features** option is selected on the Configuration page.
+2. When prompted, ensure the **Enable Hyper-V Windows Features** or the **Install required Windows components for WSL 2** option is selected on the Configuration page.
 @y
-2. Configuration ページにおいてプロンプト画面が表示されたら、**Enable Hyper-V Windows Features** オプションが設定されていることを確認してください。
+2. Configuration ページにおいてプロンプト画面が表示されたら、**Enable Hyper-V Windows Features** オプションまたは **Install required Windows components for WSL 2** オプションが設定されていることを確認してください。
 @z
 
 @x
@@ -206,9 +248,7 @@ Windows コンテナーの利用方法についてお探しの方は以下です
 @z
 
 @x
-5. If your admin account is different to your user account, you must add the user to 
-the **docker-users** group. Run **Computer Management** as an administrator and navigate to 
-**Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
+5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
 Log out and log back in for the changes to take effect.
 @y
 5. 管理アカウントが利用しているアカウントと異なる場合、そのアカウントを **docker-users** グループに追加する必要があります。
@@ -278,8 +318,7 @@ Windows 上に Docker Desktop が正常に起動できるようになりまし�
 @z
 
 @x
-If you would like to rerun the tutorial, go to the Docker Desktop menu 
-and select **Learn**.
+If you would like to rerun the tutorial, go to the Docker Desktop menu and select **Learn**.
 @y
 チュートリアルに戻る場合は、Docker Desktop メニューから **Learn** を実行します。
 @z
@@ -356,12 +395,14 @@ Windows から Docker Desktop をアンインストールするには、以下�
   deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
-* [FAQs](../desktop/faqs.md) provides answers to frequently asked questions.
+* [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
 * [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+* [Back up and restore data](../desktop/backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.
 @y
 * [はじめよう](index.md) では Docker Desktop for Windows を紹介しています。
 * [Docker をはじめよう](../../get-started/) はマルチサービススタックのデプロイ方法を説明するチュートリアルです。
 * [トラブルシューティング](troubleshoot.md) では、一般的な問題、回避策、サポートの受け方などについて説明しています。
-* [FAQ](../desktop/faqs.md) ではよく尋ねられる質問を示しています。
+* [FAQ](../desktop/faqs.md) ではよくたずねられる質問を示しています。
 * [リリースノート](release-notes.md) では、Docker Desktop リリースにおけるコンポーネントアップデート、新機能、改善項目を一覧にしています。
+* [データのバックアップとリストア](../desktop/backup-and-restore.md) では Docker に関するデータのバックアップやリストアの手順を説明しています。
 @z

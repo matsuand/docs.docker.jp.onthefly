@@ -15,15 +15,14 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	docker-toolbox       \
-	edge-release-notes   \
-	index                \
-	install              \
-	install-windows-home \
-	kubernetes           \
-	networking           \
-	release-notes        \
-	troubleshoot         \
+	docker-toolbox     \
+	edge-release-notes \
+	index              \
+	install            \
+	kubernetes         \
+	networking         \
+	release-notes      \
+	troubleshoot       \
 	wsl
 
 ch_mds = $(bases:=.ch) # ch means change files
