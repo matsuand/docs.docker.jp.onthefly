@@ -16,11 +16,12 @@ title: Docker 有料プランの概要
 @z
 
 @x
-On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
+On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** subscriptions that include unlimited private repositories and up to 50,000 container pulls in a 24-hour period.
 @y
 2020年5月14日に Docker は [製品戦略](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} に連携して、新たにユーザーごとの料金体系を発表しました。
 これはクラウドネイティブな開発に向けた開発ワークフローを推進するためです。
-それまでのプライベートリポジトリと自動ビルドベースのプランは、**プロ**プランと**チーム**プランとして変更され、無制限のプライベートリポジトリを含むようになりました。
+それまでのプライベートリポジトリと自動ビルドベースのプランは、**プロ**サブスクリプションと**チーム**サブスクリプションとして変更され、無制限のプライベートリポジトリを含むようになりました。
+そして 24 時間以内にプルできるコンテナー数は 50,000 個までとなっています。
 @z
 
 @x

@@ -110,6 +110,8 @@ AC_CONFIG_FILES([Makefile
 		 src/docker-for-windows/images/Makefile
 		 src/docker-hub/Makefile
 		 src/docker-hub/2fa/Makefile
+		 src/docker-hub/api/Makefile
+		 src/docker-hub/api/latest/Makefile
 		 src/docker-hub/billing/Makefile
 		 src/docker-hub/builds/Makefile
 		 src/docker-hub/builds/images/Makefile

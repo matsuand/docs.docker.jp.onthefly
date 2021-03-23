@@ -14,6 +14,7 @@ ctie:
 
 htmlbases = \
 	archive-redirect \
+	hub-api    \
 	docs       \
 	engine-api \
 	landing    \

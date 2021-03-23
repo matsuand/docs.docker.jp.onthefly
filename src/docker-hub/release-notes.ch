@@ -28,6 +28,30 @@ known issues for each Docker Hub release.
 @z
 
 @x
+# 2021-03-22
+@y
+# 2021-03-22
+@z
+
+@x
+### New feature
+@y
+### New feature
+@z
+
+@x
+**Advanced Image Management dashboard**
+@y
+**Advanced Image Management dashboard**
+@z
+
+@x
+Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](/image-management.md).
+@y
+Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](/image-management.md).
+@z
+
+@x
 # 2021-01-25
 @y
 # 2021-01-25

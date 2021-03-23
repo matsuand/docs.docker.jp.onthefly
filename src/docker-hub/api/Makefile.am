@@ -1,6 +1,6 @@
-SUBDIRS = 2fa api billing builds images publish
+SUBDIRS = latest
 
-thisdir   = docker-hub
+thisdir   = docker-hub/api
 origdir   = @abs_origdir@/$(thisdir)
 srcdir    = @srcdir@
 mysrcdir  = $(shell cd $(srcdir) && pwd)
@@ -15,27 +15,19 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	access-tokens          \
-	audit-log              \
-	convert-account        \
-	deactivate-account     \
-	download-rate-limit    \
-	image-management       \
-	index                  \
-	official_images        \
-	orgs                   \
-	release-notes          \
-	repos                  \
-	slack_integration      \
-	vulnerability-scanning \
-	webhooks
+	latest
+
+yamls = \
+	latest
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files
-EXTRA_DIST = $(ch_mds)
+ch_yamls = $(yamls:=.yamlch) # ch means change files
+tr_yamls = $(yamls:=.yaml)   # tr means translated files
+EXTRA_DIST = $(ch_mds) $(ch_yamls)
 #DISTCLEANFILES = 
 
-srcs = $(tr_mds)
+srcs = $(tr_mds) $(tr_yamls)
 srcs_with_prefix = ${addprefix $(publishdir)/,$(srcs)}
 
 .PHONY: tgtdir
@@ -47,11 +39,8 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
 
 @MAINT@.PHONY: chbuild
-@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
+@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds)) $(addprefix $(mysrcdir)/, $(ch_yamls))
 @MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
-
-include $(top_srcdir)/rewriteurls.mk
-
-.PHONY: publishclean
-publishclean:
+@MAINT@$(addprefix $(mysrcdir)/, $(ch_yamls)):
+@MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.yamlch$$|.yaml|"` $@ yaml; fi
