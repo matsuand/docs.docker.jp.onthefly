@@ -17,15 +17,33 @@ title: 環境変数のデフォルトをファイル内に定義する
 
 @x
 Compose supports declaring default environment variables in an environment file
-named `.env` placed in the project directory. The project directory is specified by order of precedence:
-- `--project-dir` flag
-- Folder of the first `--file` flag
-- Current directory
+named `.env` placed in the project directory. Docker Compose versions earlier than `1.28`,
+load the `.env` file from the current working directory, where the command is executed, or from the
+project directory if this is explicitly set with the `--project-directory` option. This
+inconsistency has been addressed starting with `+v1.28` by limiting the default `.env` file path
+to the project directory. You can use the `--env-file` commandline option to override the default
+`.env` and specify the path to a custom environment file.
 @y
 Compose では環境変数のデフォルトを定義しておくことができます。
 これは`.env`という名前の環境ファイルに環境変数を定義するもので、プロジェクトディレクトリにおきます。
+Docker Compose のバージョンが`1.28`よりも古ければ`.env`ファイルは、コマンドが実行されたカレントなワーキングディレクトリにあるものがロードされます。
+あるいは`--project-directory`オプションが指定されていれば、そこに指定されたプロジェクトディレクトリから読み込まれます。
+この不整合は、`v1.28`以降においてデフォルトの`.env`ファイルパスをプロジェクトディレクトリに置くことで解消されます。
+コマンドラインオプション`--env-file`を利用すれば、デフォルトの`.env`をオーバーライドして、独自の環境ファイルへのパスを指定することができます。
+@z
+
+@x
+The project directory is specified by the order of precedence:
+@y
 プロジェクトディレクトリは以下の順に定められます。
-- `--project-dir`フラグ
+@z
+
+@x
+- `--project-directory` flag
+- Folder of the first `--file` flag
+- Current directory
+@y
+- `--project-directory`フラグ
 - `--file`フラグが初めて指定された際のフォルダー
 - カレントディレクトリ
 @z
@@ -38,22 +56,22 @@ Compose では環境変数のデフォルトを定義しておくことができ
 @z
 
 @x
-These syntax rules apply to the `.env` file:
+The following syntax rules apply to the `.env` file:
 @y
-`.env`ファイルに適用される文法は以下のとおりです。
+以下に示す文法規則が`.env`ファイルに適用されます。
 @z
 
 @x
-* Compose expects each line in an `env` file to be in `VAR=VAL` format.
-* Lines beginning with `#` are processed as comments and ignored.
-* Blank lines are ignored.
-* There is no special handling of quotation marks. This means that
+- Compose expects each line in an `env` file to be in `VAR=VAL` format.
+- Lines beginning with `#` are processed as comments and ignored.
+- Blank lines are ignored.
+- There is no special handling of quotation marks. This means that
   **they are part of the VAL**.
 @y
-* Compose は`env`ファイル内の各行が`変数=値`という形式で書かれているものとして扱います。
-* 先頭が`#`で始まる行は、コメント行となり無視されます。
-* 空行は無視されます。
-* 引用符は特別に扱われません。
+- Compose は`env`ファイル内の各行が`変数=値`という形式で書かれているものとして扱います。
+- 先頭が`#`で始まる行は、コメント行となり無視されます。
+- 空行は無視されます。
+- 引用符は特別に扱われません。
   つまりそれは**値の一部として扱われます**。
 @z
 

@@ -241,6 +241,14 @@ a custom project name by using the
 @z
 
 @x
+The default project directory is the base directory of the Compose file. A custom value
+for it can be defined with the `--project-directory` command line option.
+@y
+デフォルトのプロジェクトディレクトリは Compose ファイルのベースとなるディレクトリです。
+これを変更するにはコマンドラインオプション`--project-directory`を利用します。
+@z
+
+@x
 ### Preserve volume data when containers are created
 @y
 ### コンテナー生成時はボリュームデータを維持

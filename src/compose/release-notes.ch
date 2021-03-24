@@ -22,6 +22,59 @@ redirect_from:
 @z
 
 @x
+## 1.28.6
+(2021-03-23)
+@y
+## 1.28.6
+(2021-03-23)
+@z
+
+@x
+### Bug fixes
+@y
+{: #bug-fixes }
+### バグフィックス
+@z
+
+@x
+- Made `--env-file` relative to the current working directory. Environment file paths set with `--env-file` are now relative to the current working directory and override the default `.env` file located in the project directory.
+@y
+- `--env-file`をカレントのワーキングディレクトリからの相対パスにしました。
+  `--env-file`によって指定される環境ファイルパスは、カレントなワーキングディレクトリからの相対パスとなり、プロジェクトディレクトリにあるデフォルトの`.env`ファイルをオーバーライドするようになります。
+@z
+
+@x
+- Fixed missing service property `storage_opt` by updating the Compose schema.
+@y
+- Compose スキーマのアップデートにより、不足していたサービスプロパティ`storage_opt`を修正しました。
+@z
+
+@x
+- Fixed build `extra_hosts` list format.
+@y
+- `extra_hosts`の一覧書式を修正しました。
+@z
+
+@x
+- Removed additional error message on `exec`.
+@y
+- `exec`における余計なエラーメッセージを削除しました。
+@z
+
+@x
+### Miscellaneous
+@y
+{: #miscellaneous }
+### その他
+@z
+
+@x
+- Added `compose.yml` and `compose.yaml` to the default filename list.
+@y
+- デフォルトのファイル名リストに`compose.yml`と`compose.yaml`を追加しました。
+@z
+
+@x
 ## 1.28.5 
 (2021-02-26)
 @y

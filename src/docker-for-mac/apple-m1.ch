@@ -101,10 +101,11 @@ The following issues are not expected to be resolved in the final GA build for A
 @z
 
 @x
-   However, attempts to run Intel-based containers on Apple Silicon machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on Apple Silicon machines. These containers are also faster and use less memory than Intel-based containers.
+   However, attempts to run Intel-based containers on Apple Silicon machines can crash as QEMU sometimes fails to run the container. Filesystem change notification APIs (e.g. `inotify`) do not work under QEMU emulation, see [docker/for-mac#5321](https://github.com/docker/for-mac/issues/5321). Therefore, we recommend that you run ARM64 containers on Apple Silicon machines. These containers are also faster and use less memory than Intel-based containers.
 @y
    ただし Apple Silicon マシン上において Intel ベースのコンテナーを起動しようとするとクラッシュします。
    これは QEMU がコンテナーの起動に失敗することがあるためです。
+   ファイルシステムの変更通知 API（たとえば`inotify`など）は QEMU エミュレーションのもとでは動作しません。
    したがって Apple Silicon マシン上においては ARM64 コンテナーの起動をお勧めします。
    そういったコンテナーであれば、Intel ベースのコンテナーに比べて、より早くメモリ消費も少なくて済みます。
 @z
