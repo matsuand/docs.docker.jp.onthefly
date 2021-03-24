@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-19 12:37:03 +0900-->
+<!-- Page generated 2021-03-24 13:40:36 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose における環境変数 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Compose における環境変数" />
   <meta property="og:description" content="Compose において環境変数を設定、利用、管理する方法について説明。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-24T13:40:36+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/environment-variables/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-24T13:40:36+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose における環境変数","description":"Compose において環境変数を設定、利用、管理する方法について説明。","url":"https://docs.docker.com/compose/environment-variables/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose における環境変数</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>Compose の複数の場面において環境変数がさまざまに用いられています。
+                        <section class="section"><h1>Compose における環境変数</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><p>Compose の複数の場面において環境変数がさまざまに用いられています。
 このページでは環境変数について必要となる情報を示します。</p>
 
 <h2 id="substitute-environment-variables-in-compose-files">Compose ファイル内での環境変数の利用</h2>
@@ -109,14 +109,104 @@
   <span class="na">image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">webapp:${TAG}"</span>
 </code></pre></div></div>
 
-<p>環境変数が複数ある場合、環境変数ファイルへのパスを指定して利用することができます。
-<code class="language-plaintext highlighter-rouge">docker-compose</code>コマンドを実行すると、デフォルトでそのプロジェクトディレクトリ（Compose ファイルの親ディレクトリ）内の<code class="language-plaintext highlighter-rouge">.env</code>というファイルを探します。</p>
+<p>環境変数が複数ある場合、<code class="language-plaintext highlighter-rouge">.env</code>という名前のファイルに環境変数のデフォルト値を設定することができます。
+あるいはコマンドラインオプション<code class="language-plaintext highlighter-rouge">--env-file</code>を使って環境変数ファイルへのパスを指定して利用することもできます。</p>
 
-<p>ファイル名を引数に与えれば、どこの何というファイルでも指定できます。
-たとえば <code class="language-plaintext highlighter-rouge">.env.ci</code>、<code class="language-plaintext highlighter-rouge">.env.dev</code>、<code class="language-plaintext highlighter-rouge">.env.prod</code> などとすることができます。
-ファイルパスの指定は <code class="language-plaintext highlighter-rouge">--env-file</code> オプションを使って行います。</p>
+<h3 id="the-env-file"><code class="language-plaintext highlighter-rouge">.env</code>ファイル</h3>
+
+<p>Compose ファイルが参照する環境変数、あるいは Compose の設定に用いられる環境変数のデフォルト値を設定することができます。
+これは<code class="language-plaintext highlighter-rouge">.env</code>という <a href="/docs.docker.jp.onthefly/compose/env-file/">環境ファイル</a> にて行います。
+<code class="language-plaintext highlighter-rouge">.env</code>ファイルのパスは以下のとおりです。</p>
+
+<ul>
+  <li>Compose バージョン<code class="language-plaintext highlighter-rouge">v1.28</code>以降は、<code class="language-plaintext highlighter-rouge">.env.</code>ファイルはプロジェクトのベースディレクトリに置くようになりました。</li>
+  <li>それ以前のバージョンの場合は、Docker Compose コマンドが実行されたカレントワーキングディレクトリに置きます。
+ただし<code class="language-plaintext highlighter-rouge">--project-directory</code>を指定すれば<code class="language-plaintext highlighter-rouge">.env</code>ファイルへのパスをオーバーライドすることができます。
+この不整合は、<code class="language-plaintext highlighter-rouge">v1.28</code>以降においてそのファイルパスをプロジェクトディレクトリに置くことで解消されます。</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> .env
+<span class="nv">TAG</span><span class="o">=</span>v1.5
+
+<span class="nv">$ </span><span class="nb">cat </span>docker-compose.yml
+version: <span class="s1">'3'</span>
+services:
+  web:
+    image: <span class="s2">"webapp:</span><span class="k">${</span><span class="nv">TAG</span><span class="k">}</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行すると、上で定義されている<code class="language-plaintext highlighter-rouge">web</code>サービスは<code class="language-plaintext highlighter-rouge">webapp:v1.5</code>というイメージを利用します。
+このことは <a href="/docs.docker.jp.onthefly/compose/reference/config/">config コマンド</a>を使って確認できます。
+このコマンドは変数を置換した後のアプリケーション設定を端末画面に出力します。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose config
+
+version: <span class="s1">'3'</span>
+services:
+  web:
+    image: <span class="s1">'webapp:v1.5'</span>
+</code></pre></div></div>
+
+<p>シェル内にて設定される値は、<code class="language-plaintext highlighter-rouge">.env</code>ファイル内のものよりも優先されます。</p>
+
+<p>たとえばシェル上において<code class="language-plaintext highlighter-rouge">TAG</code>を異なる値に設定していたら、それを使って変数置換された<code class="language-plaintext highlighter-rouge">image</code>が用いられることになります。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">TAG</span><span class="o">=</span>v2.0
+<span class="nv">$ </span>docker-compose config
+
+version: <span class="s1">'3'</span>
+services:
+  web:
+    image: <span class="s1">'webapp:v2.0'</span>
+</code></pre></div></div>
+
+<p>環境ファイルへのパスは、コマンドライン引数に<code class="language-plaintext highlighter-rouge">--env-file</code>を指定することでオーバーライドすることができます。</p>
+
+<h3 id="using-the---env-file--option"><code class="language-plaintext highlighter-rouge">--env-file</code>オプションの利用</h3>
+
+<p>ファイル名を引数に与えれば、どこにある何というファイルであっても指定できます。
+たとえば<code class="language-plaintext highlighter-rouge">.env.ci</code>、<code class="language-plaintext highlighter-rouge">.env.dev</code>、<code class="language-plaintext highlighter-rouge">.env.prod</code>などでも可能です。
+ファイルパスの指定は<code class="language-plaintext highlighter-rouge">--env-file</code>オプションを使って行います。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose <span class="nt">--env-file</span> ./config/.env.dev up
+</code></pre></div></div>
+<p>このファイルパスは、Docker Compose コマンドを実行したカレントなワーキングディレクトリからの相対パスです。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> .env
+<span class="nv">TAG</span><span class="o">=</span>v1.5
+
+<span class="nv">$ </span><span class="nb">cat</span> ./config/.env.dev
+<span class="nv">TAG</span><span class="o">=</span>v1.6
+
+
+<span class="nv">$ </span><span class="nb">cat </span>docker-compose.yml
+version: <span class="s1">'3'</span>
+services:
+  web:
+    image: <span class="s2">"webapp:</span><span class="k">${</span><span class="nv">TAG</span><span class="k">}</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>デフォルトでは<code class="language-plaintext highlighter-rouge">.env</code>ファイルがロードされます。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose config
+version: <span class="s1">'3'</span>
+services:
+  web:
+    image: <span class="s1">'webapp:v1.5'</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">--env-file </code>引数を受け渡せば、デフォルトのファイルパスをオーバーライドします。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nt">--env-file</span> ./config/.env.dev config
+version: <span class="s1">'3'</span>
+services:
+  web:
+    image: <span class="s1">'webapp:v1.6'</span>
+</code></pre></div></div>
+
+<p>ファイルパスとして不適切なものが<code class="language-plaintext highlighter-rouge">--env-file</code>引数として指定された場合、Compopse は以下のようなエラーを返します。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker-compose --env-file ./doesnotexist/.env.dev  config
+ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 </code></pre></div></div>
 
 <p>詳しくは Compose ファイルリファレンスの <a href="/docs.docker.jp.onthefly/compose/compose-file/compose-file-v3/#variable-substitution">変数の置換</a> の項を参照してください。</p>
@@ -156,54 +246,16 @@
 
 <p><code class="language-plaintext highlighter-rouge">docker run -e</code>と同じように、<code class="language-plaintext highlighter-rouge">docker-compose run -e</code>の実行によるコンテナーに対しても環境変数を実行することができます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">-e</span> <span class="nv">DEBUG</span><span class="o">=</span>1 web python console.py
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">-e</span> <span class="nv">DEBUG</span><span class="o">=</span>1 web python console.py
 </code></pre></div></div>
 
 <p>シェル変数を受け渡す際には、値は直接受け渡さずに以下のようにできます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">-e</span> DEBUG web python console.py
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">-e</span> DEBUG web python console.py
 </code></pre></div></div>
 
 <p>コンテナー内の<code class="language-plaintext highlighter-rouge">DEBUG</code>変数は、シェル内の<code class="language-plaintext highlighter-rouge">DEBUG</code>変数の値が用いられます。
 このシェルとは Compose が起動しているシェルのことです。</p>
-
-<h2 id="the-env-file"><code class="language-plaintext highlighter-rouge">.env</code>ファイル</h2>
-
-<p>Compose ファイルが参照する環境変数、あるいは Compose の設定に用いられる環境変数のデフォルト値を設定することができます。これは<code class="language-plaintext highlighter-rouge">.env</code>という<a href="/docs.docker.jp.onthefly/compose/env-file/">環境ファイル</a>にて行います。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> .env
-<span class="nv">TAG</span><span class="o">=</span>v1.5
-
-<span class="nv">$ </span><span class="nb">cat </span>docker-compose.yml
-version: <span class="s1">'3'</span>
-services:
-  web:
-    image: <span class="s2">"webapp:</span><span class="k">${</span><span class="nv">TAG</span><span class="k">}</span><span class="s2">"</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行すると、上で定義されている<code class="language-plaintext highlighter-rouge">web</code>サービスは<code class="language-plaintext highlighter-rouge">webapp:v1.5</code>というイメージを利用します。
-このことは <a href="/docs.docker.jp.onthefly/compose/reference/config/">config コマンド</a>を使って確認できます。
-このコマンドは変数を置換した後のアプリケーション設定を端末画面に出力します。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose config
-
-version: <span class="s1">'3'</span>
-services:
-  web:
-    image: <span class="s1">'webapp:v1.5'</span>
-</code></pre></div></div>
-
-<p>シェル内にて設定される値は、<code class="language-plaintext highlighter-rouge">.env</code>ファイル内のものよりも優先されます。
-たとえばシェル上において<code class="language-plaintext highlighter-rouge">TAG</code>を異なる値に設定していたら、それを使って変数置換された<code class="language-plaintext highlighter-rouge">image</code>が用いられることになります。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">TAG</span><span class="o">=</span>v2.0
-<span class="nv">$ </span>docker-compose config
-
-version: <span class="s1">'3'</span>
-services:
-  web:
-    image: <span class="s1">'webapp:v2.0'</span>
-</code></pre></div></div>
 
 <p>環境変数を複数のファイルなどに設定していた場合に、Compose が値を採用する優先順位は以下のとおりです。</p>
 
@@ -217,7 +269,7 @@ services:
 
 <p>以下の例では同一の環境変数を、環境ファイルと Compose ファイルに設定しています。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> ./Docker/api/api.env
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> ./Docker/api/api.env
 <span class="nv">NODE_ENV</span><span class="o">=</span><span class="nb">test</span>
 
 <span class="nv">$ </span><span class="nb">cat </span>docker-compose.yml
@@ -233,7 +285,7 @@ services:
 
 <p>コンテナーを実行すると Compose ファイルに定義された環境変数が優先されます。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nb">exec </span>api node
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose <span class="nb">exec </span>api node
 
 <span class="o">&gt;</span> process.env.NODE_ENV
 <span class="s1">'production'</span>
@@ -285,12 +337,16 @@ services:
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#substitute-environment-variables-in-compose-files" class="nomunge">Compose ファイル内での環境変数の利用</a></li>
+  <li><a href="#substitute-environment-variables-in-compose-files" class="nomunge">Compose ファイル内での環境変数の利用</a>
+    <ul>
+      <li><a href="#the-env-file" class="nomunge">.envファイル</a></li>
+      <li><a href="#using-the---env-file--option" class="nomunge">--env-fileオプションの利用</a></li>
+    </ul>
+  </li>
   <li><a href="#set-environment-variables-in-containers" class="nomunge">コンテナー内での環境変数の設定</a></li>
   <li><a href="#pass-environment-variables-to-containers" class="nomunge">コンテナーへの環境変数の受け渡し</a></li>
   <li><a href="#the-env_file-configuration-option" class="nomunge">設定オプションenv_file</a></li>
   <li><a href="#set-environment-variables-with-docker-compose-run" class="nomunge">docker-compose run実行時の環境変数の設定</a></li>
-  <li><a href="#the-env-file" class="nomunge">.envファイル</a></li>
   <li><a href="#configure-compose-using-environment-variables" class="nomunge">環境変数を用いた Compose の設定</a></li>
 </ul>
 
