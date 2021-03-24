@@ -12,3 +12,6 @@ s|    Response Schema|    レスポンススキーマ|g
 s| Request Body | リクエスト本体 |g
 s|Server URL|サーバー URL|g
 s|\"Search\"|\"検索\"|g
+s|Valid values:|有効な値:|g
+#s|class\=\"param\-nullable\">Nullable<|class\=\"param\-nullable\">Null可<|g
+#s|class\=\"param\-required\">Required<|class\=\"param\-required\">必須<|g

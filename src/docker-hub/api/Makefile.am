@@ -1,12 +1,14 @@
 SUBDIRS = latest
 
-thisdir   = docker-hub/api
-origdir   = @abs_origdir@/$(thisdir)
-srcdir    = @srcdir@
-mysrcdir  = $(shell cd $(srcdir) && pwd)
-targetdir = @abs_targetdir@/$(thisdir)
-publishdir = @abs_publishdir@/$(thisdir)
-uploaddir  = @UPLOADDIR@/$(thisdir)
+thisdir     = docker-hub/api
+origdir     = @abs_origdir@/$(thisdir)
+srcdir      = @srcdir@
+mysrcdir    = $(shell cd $(srcdir) && pwd)
+targetdir   = @abs_targetdir@/$(thisdir)
+publishdir  = @abs_publishdir@/$(thisdir)
+publishurl  = @PUBLISHURL@
+publishbase = @PUBLISHBASE@
+uploaddir   = @UPLOADDIR@/$(thisdir)
 
 .PHONY: all
 all: ctie tgtdir $(srcs_with_prefix)
@@ -35,8 +37,11 @@ tgtdir:
 	$(MKDIR_P) $(publishdir)
 
 -include Makefile.sub
-Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
-	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
+# Call ctiemake2.sh in this case because of the dependency for its yaml file
+# Be care ctiemake2.sh has three arguments!
+Makefile.sub: $(top_srcdir)/bin/ctiemake2.sh $(top_builddir)/config.log
+	@$(top_srcdir)/bin/ctiemake2.sh $(abs_publishdir) $(publishdir) $(srcs)
+	@sed -i -e "/latest.yamlch >\/dev\/null$$/a\\\t@sed -i -e \"s|__URL__|${publishurl}|g\" -e \"s|__BASEURL__|${publishbase}|g\" $$\\@" $@
 
 @MAINT@.PHONY: chbuild
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds)) $(addprefix $(mysrcdir)/, $(ch_yamls))

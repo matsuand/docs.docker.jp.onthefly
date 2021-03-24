@@ -9,9 +9,9 @@ consumes:
   - application/json
 info:
   title: Docker HUB API
-  version: 'beta'
+  version: 'ベータ'
   x-logo:
-    url: https://docs.docker.com/images/logo-docker-main.png
+    url: https://matsuand.github.io/docs.docker.jp.onthefly/images/logo-docker-main.png
   description: |
     Docker Hub is a service provided by Docker for finding and sharing container images with your team.
     It is the world's largest library and community for container images.
@@ -21,29 +21,29 @@ info:
 tags:
   # Primary objects
   - name: Authentication
-    x-displayName: Authentication
+    x-displayName: 認証
     description: |
-      Most Docker Hub API endpoints require you to authenticate using your Docker credentials.
+      Docker Hub API のほとんどのエンドポイントでは、Docker 資格情報（credentials）を利用して認証されていることが必要になります。
 
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Free, Pro, or Team) and your account's permissions.
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
   - name: Images
-    x-displayName: Advanced image management
+    x-displayName: 拡張イメージ管理
     description: |
-      The Advanced Image Management API endpoints allow you to manage Docker images across all repositories.
-      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
+      拡張イメージ管理（Advanced Image Management）の API エンドポイントを使うと、あらゆるリポジトリにわたっての Docker イメージ管理を行うことができます。
+      詳しくは [拡張イメージ管理ダッシュボード](https://matsuand.github.io/docs.docker.jp.onthefly/docker-hub/image-management/) を参照してください。
 definitions:
   UsersLoginRequest:
-    description: User login details
+    description: ユーザーログイン情報の詳細
     type: object
     required: [username, password]
     properties:
       username:
-        description: The username of the Docker Hub account to authenticate with.
+        description: 認証済 Docker Hub アカウントのユーザー名。
         type: string
         example: myusername
       password:
-        description: The password of the Docker Hub account to authenticate with.
+        description: 認証済 Docker Hub アカウントのパスワード。
         type: string
         example: hunter2
   PostUsersLoginSuccessResponse:
@@ -52,8 +52,8 @@ definitions:
     properties:
       token:
         description: |
-          Created authentication token.
-          This token can be used in the HTTP Authentication header as a JWT to authenticate with the Docker Hub APIs.
+          生成された認証トークン。
+          このトークンは Docker Hub API での認証のために、HTTP 認証ヘッダー内において JWT として利用されます。
         type: string
         x-nullable: false
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
@@ -62,126 +62,126 @@ definitions:
     type: object
     properties:
       details:
-        description: Description of the error.
+        description: エラー内容。
         type: string
         x-nullable: false
         example: Incorrect authentication credentials
   ErrorInfo:
-    description: Context information for an error used for diagnostics.
+    description: 診断に利用されるエラーコンテキスト情報。
     type: object
     properties:
       api_call_docker_id:
-        description: ID of docker user.
+        description: Docker ユーザーの ID。
         type: string
       api_call_name:
-        description: Name of the API operation called.
+        description: 呼び出された API 処理名。
         type: string
       api_call_start:
-        description: Date/time of call start.
+        description: 呼び出しが開始された日付時刻。
         type: string
       api_call_txnid:
-        description: Unique ID for this call.
+        description: 本呼び出しに固有の ID。
         type: string
   ErrorResponse:
-    description: Represents an error.
+    description: エラー。
     type: object
     properties:
       txnid:
-        description: Unique ID for this call.
+        description: 本呼び出しに固有の ID。
         type: string
       message:
-        description: The error message.
+        description: エラーメッセージ。
         type: string
       errinfo:
         $ref: '#/definitions/ErrorInfo'
   GetNamespaceRepositoryImagesSummaryResponse:
-    description: Summary information for images in a repository.
+    description: 1 つのリポジトリ内のイメージに対する概要情報。
     type: object
     properties:
       active_from:
-        description: Time from which an image must have been pushed or pulled to be counted as active.
+        description: イメージがプッシュまたはプルされて以降、アクティブとしてカウントされるための経過時間。
         type: string
         example: '2021-01-25T14:25:37.076343059Z'
       statistics:
         type: object
         properties:
           total:
-            description: Number of images in this repository.
+            description: このリポジトリ内にあるイメージ数。
             type: integer
             example: 3
           active:
-            description: Number of images counted as active in this repository.
+            description: このリポジトリ内にてアクティブとしてカウントされたイメージ数。
             type: integer
             example: 2
           inactive:
-            description: Number of images counted as inactive in this repository.
+            description: このリポジトリ内にて非アクティブとしてカウントされたイメージ数。
             type: integer
             example: 1
   GetNamespaceRepositoryImagesResponse:
-    description: Paginated list of images in a repository.
+    description: 1 つのリポジトリ内においてページ分けされたイメージ一覧。
     type: object
     properties:
       count:
-        description: Total count of images in the repository.
+        description: リポジトリ内のイメージ総数。
         type: integer
         example: 100
       next:
-        description: Link to the next page with the same query parameters if there are more images.
+        description: 同一クエリーパラメーターによるイメージがまだ存在する場合の次ページへのリンク。
         type: string
         example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=4&page_size=20
         x-nullable: true
       previous:
-        description: Link to the previous page with the same query parameters if not on first page.
+        description: 同一クエリーパラメーターによるイメージ一覧の 2 ページめ以降である場合の前ページへのリンク。
         type: string
         example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=2&page_size=20
         x-nullable: true
       results:
         type: array
-        description: Image details.
+        description: イメージの詳細。
         items:
           type: object
           properties:
             namespace:
-              description: The repository namespace.
+              description: リポジトリの名前空間。
               type: string
               example: mynamespace
             repository:
-              description: The repository name.
+              description: リポジトリ名。
               type: string
               example: myrepo
             digest:
-              description: The image's digest.
+              description: イメージのダイジェスト値。
               type: string
               example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
             tags:
-              description: The current and historical tags for this image.
+              description: このイメージに対する現在と過去のタグ。
               type: array
               items:
                 type: object
                 properties:
                   tag:
-                    description: The tag.
+                    description: タグ。
                     type: string
                     example: latest
                   is_current:
                     description: |
-                      `true` if the tag currently points to this image.
+                      このタグがそのイメージを指し示している場合に`true`。
 
-                      `false` if it has been overwritten to point at a different image.
+                      別イメージを指し示すようにオーバーライドされている場合は`false`。
                     type: boolean
                     example: true
             last_pushed:
-              description: Time when this image was last pushed.
+              description: イメージが最後にプッシュされた時刻。
               type: string
               x-nullable: true
               example: '2021-02-24T22:05:27.526308Z'
             last_pulled:
-              description: Time when this image was last pulled. Note this is updated at most once per hour.
+              description: イメージが最後にプルされた時刻。これは少なくとも 1 時間ごとに更新されます。
               type: string
               x-nullable: true
               example: '2021-02-24T23:16:10.200008Z'
             status:
-              description: The status of the image based on its last activity against the `active_from` time.
+              description: "`active_from` にて定まる時間によらず、最後の操作に基づいて決まるイメージ状態。"
               type: string
               enum: [active, inactive]
               example: active
@@ -282,10 +282,10 @@ definitions:
     type: object
     properties:
       txnid:
-        description: Unique ID for this call.
+        description: 本呼び出しの固有 ID。
         type: string
       message:
-        description: The error message.
+        description: エラーメッセージ。
         type: string
       errinfo:
         allOf:
@@ -356,18 +356,18 @@ paths:
   /v2/users/login:
     post:
       tags: [Authentication]
-      summary: Create authentication token
+      summary: 認証トークンの生成
       operationId: PostUsersLogin
       description: |
-        Creates an authentication token that can be used to authenticate with the Docker Hub APIs.
+        Docker Hub API の利用にあたっての認証を行うための認証トークンを生成します。
 
-        The returned token is used in the HTTP Authentication header like `Authentication: JWT {TOKEN}`.
+        返されるトークンは、`Authentication: JWT {TOKEN}`のように HTTP 認証ヘッダーにおいて利用されます。
 
-        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
+        Docker Hub API のほとんどにおいて、このトークンは消費および詳細情報取得に利用されます。たとえばプライベートリポジトリ内のイメージ一覧を取得する際に利用されます。
       parameters:
         - name: body
           in: body
-          description: Login details.
+          description: ログイン情報の詳細
           required: true
           schema:
             $ref: '#/definitions/UsersLoginRequest'
@@ -383,9 +383,9 @@ paths:
   /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
     get:
       tags: [Images]
-      summary: Get summary of repository's images
+      summary: リポジトリ内イメージの概要取得
       description: |
-        Gets the number of images in a repository and the number of images counted as active and inactive.
+        1 つのリポジトリ内のイメージ数、およびアクティブ、非アクティブのイメージ数を取得します。
       operationId: GetNamespacesRepositoriesImagesSummary
       produces:
         - application/json
@@ -393,20 +393,20 @@ paths:
         - name: namespace
           in: path
           required: true
-          description: Namespace of the repository.
+          description: リポジトリの名前空間。
           type: string
         - name: repository
           in: path
           required: true
-          description: Name of the repository.
+          description: リポジトリ名。
           type: string
         - name: active_from
           in: query
           required: false
           description: |
-            Sets the time from which an image must have been pushed or pulled to be counted as active.
+            イメージをアクティブ状態としてカウントするのは、プッシュまたはプルされてからどれだけ経過したものであるのかを時間設定します。
 
-            Defaults to 1 month before the current time.
+            デフォルトは現在時刻から 1 ヵ月前。
           type: string
       responses:
         200:
@@ -420,8 +420,8 @@ paths:
   /v2/namespaces/{namespace}/repositories/{repository}/images:
     get:
       tags: [Images]
-      summary: Get details of repository's images
-      description: Gets details on the images in a repository.
+      summary: リポジトリイメージの詳細取得
+      description: 1 つのリポジトリ内にあるイメージの詳細情報を取得します。
       operationId: GetNamespacesRepositoriesImages
       produces:
         - application/json
@@ -429,45 +429,45 @@ paths:
         - name: namespace
           in: path
           required: true
-          description: Namespace of the repository.
+          description: リポジトリの名前空間。
           type: string
         - name: repository
           in: path
           required: true
-          description: Name of the repository.
+          description: リポジトリ名。
           type: string
         - name: status
           in: query
           required: false
-          description: Filters to only show images of this status.
+          description: ここで指定するイメージのみを検索するためのフィルター。
           type: string
           enum: [active, inactive]
         - name: ordering
           in: query
           required: false
           description: |
-            Orders the results by this property.
+            このプロパティにより結果の並び替えを行います。
 
-            Prefixing with `-` sorts by descending order.
+            先頭に`-`をつけると降順で並び替えを行います。
           type: string
           enum: [last_activity, -last_activity, digest, -digest]
         - name: active_from
           in: query
           required: false
           description: |
-            Sets the time from which an image must have been pushed or pulled to be counted as active.
+            イメージをアクティブ状態としてカウントするのは、プッシュまたはプルされてからどれだけ経過したものであるのかを時間設定します。
 
-            Defaults to 1 month before the current time.
+            デフォルトは現在時刻から 1 ヵ月前。
           type: string
         - name: page
           in: query
           required: false
-          description: Page number to get. Defaults to 1.
+          description: 取得するページ数。デフォルトは 1。
           type: integer
         - name: page_size
           in: query
           required: false
-          description: Number of images to get per page. Defaults to 10. Max of 100.
+          description: 各ページごとに取得するイメージ数。デフォルトは 10。最大値は 100。
           type: integer
       responses:
         200:
@@ -485,24 +485,24 @@ paths:
   /v2/namespaces/{namespace}/delete-images:
     post:
       tags: [Images]
-      summary: Delete images
+      summary: イメージの削除
       operationId: PostNamespacesDeleteImages
       description: |
-        Deletes one or more images within a namespace. This is currently limited to a single repostiory.
+        1 つの名前空間内にある 1 つまたは複数のイメージを削除します。現在のところこの機能は 1 つのリポジトリ内に限定されています。
 
-        If you attempt to delete images that are marked as active or are currently tagged, the deletion does not happen and it displays the warnings.
-        To continue with the deletion, you must ignore these warnings by putting them in the `ignore_warnings` property.
+        アクティブなイメージまたは現在カレントなタグとなっているイメージを削除しようとした場合、削除処理は行われず警告メッセージが出力されます。
+        削除を継続して行いたい場合は、`ignore_warnings`プロパティに各種の値を設定すれば警告を無視して削除ができます。
 
-        Deleting a currently tagged image deletes the tag from the repository.
+        現在タグづけされているイメージを削除すると、このリポジトリからそのタグが削除されます。
 
-        You cannot ignore errors. It is not possible to directly delete children of multi-arch images.
+        エラーを無視することはできません。マルチアーキテクチャーイメージの子イメージを直接削除することはできません。
       parameters:
         - name: namespace
           in: path
           required: true
-          description: Namespace of the repository.
+          description: リポジトリの名前空間。
           type: string
-        - description: Delete request.
+        - description: 削除リクエスト。
           in: body
           name: body
           required: true
