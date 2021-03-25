@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-22 22:06:42 +0900-->
+<!-- Page generated 2021-03-25 18:42:48 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>コンテナーとしてのイメージ実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="コンテナーとしてのイメージ実行" />
   <meta property="og:description" content="Learn how to run the image as a container." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-22T22:06:42+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-25T18:42:48+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/run-containers/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-22T22:06:42+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-25T18:42:48+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"コンテナーとしてのイメージ実行","description":"Learn how to run the image as a container.","url":"https://docs.docker.com/language/python/run-containers/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>コンテナーとしてのイメージ実行</h1><p><em class="reading-time">読む時間の目安: 3 分</em></p><ul class="pagination">
+                        <section class="section"><h1>コンテナーとしてのイメージ実行</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/python/build-images/">イメージビルド</a></li>
   <li class="active"><a href="/docs.docker.jp.onthefly/language/python/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/python/develop/">開発向けコンテナー利用</a></li>
@@ -133,37 +133,40 @@
 この理由は、実行したアプリケーションが REST サーバーであって、入ってくる要求を待ち受けるためのループ内で実行されるからです。
 つまり OS へ戻る制御はなく、戻るためにはコンテナーを停止させることになります。</p>
 
-<p>さてそこでこのサーバーに対して、<code class="language-plaintext highlighter-rouge">curl</code>コマンドを使って<code class="language-plaintext highlighter-rouge">GET</code>リクエストを行ってみます。</p>
+<p>さてそこで新たなターミナルを開いて、このサーバーに対して<code class="language-plaintext highlighter-rouge">curl</code>コマンドを使って<code class="language-plaintext highlighter-rouge">GET</code>リクエストを行ってみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
-curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to localhost port 8000: Connection refused
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:5000
+curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to localhost port 5000: Connection refused
 </code></pre></div></div>
 
 <p>上の<code class="language-plaintext highlighter-rouge">curl</code>コマンドは、サーバーへの接続が拒否されたために失敗しました。
-localhost のポート 8000 には接続できなかったということです。
+localhost のポート 5000 には接続できなかったということです。
 この動作は期待どおりであって、コンテナーはネットワークも含めて隔離された環境内で実行されているからです。
-一度コンテナーを停止させて、今度はローカルネットワーク上にポート<code class="language-plaintext highlighter-rouge">8000</code>を公開した上で再起動してみます。</p>
+一度コンテナーを停止させて、今度はローカルネットワーク上にポート<code class="language-plaintext highlighter-rouge">5000</code>を公開した上で再起動してみます。</p>
 
 <p>コンテナーを停止するには Ctrl-C を入力します。
 これによってターミナルのコマンドプロンプトが入力状態に戻ります。</p>
 
 <p>コンテナーのポートを公開するには、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドにおいて<code class="language-plaintext highlighter-rouge">--publish</code>フラグ（あるいは<code class="language-plaintext highlighter-rouge">-p</code>フラグ）を指定します。
 <code class="language-plaintext highlighter-rouge">--publish</code>フラグの書式は<code class="language-plaintext highlighter-rouge">[ホストポート]:[コンテナーポート]</code>です。
-そこでコンテナー内部のポート 8000 をコンテナー外部のポート 3000 として公開するには、<code class="language-plaintext highlighter-rouge">--publish</code>フラグに<code class="language-plaintext highlighter-rouge">3000:8000</code>と指定します。</p>
+そこでコンテナー内部のポート 3000 をコンテナー外部のポート 5000 として公開するには、<code class="language-plaintext highlighter-rouge">--publish</code>フラグに<code class="language-plaintext highlighter-rouge">3000:5000</code>と指定します。</p>
 
-<p>コンテナーを起動させ、ポート 8000 をホスト上のポート 8000 として公開します。</p>
+<p>コンテナー内の flask アプリケーションの起動にあたっては公開ポートを指定していませんでした。
+そこで公開ポートはデフォルトの 5000 となります。
+これまでのリクエストをポート 5000 に向けるには、ホストのポート 5000 をコンテナーのポート 5000 に割り当てます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 8000:5000 python-docker
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--publish</span> 5000:5000 python-docker
 </code></pre></div></div>
 
-<p>そこで先ほどの curl コマンドを再度実行してみます。</p>
+<p>そこで先ほどの curl コマンドを再度実行してみます。
+新しいターミナルを開くことを忘れないでください。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:5000
 Hello, Docker!
 </code></pre></div></div>
 
 <p>成功しました。
-コンテナー内部で実行されているアプリケーションに対して、ポート 8000 による接続ができました。
+コンテナー内部で実行されているアプリケーションに対して、ポート 5000 による接続ができました。
 コンテナーを実行させたターミナルに戻ってみると、コンソール上に POST リクエストのログが出力されているはずです。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>31/Jan/2021 23:39:31] <span class="s2">"GET / HTTP/1.1"</span> 200 -
@@ -179,7 +182,7 @@ Docker ではコンテナーをデタッチモード（detached mode）、つま
 これを行うには<code class="language-plaintext highlighter-rouge">--detach</code>フラグ、あるいは短く<code class="language-plaintext highlighter-rouge">-d</code>フラグを指定します。
 Docker は先ほどと同じようにコンテナーを起動させますが、今回はコンテナーから「デタッチされた」つまり切り離されて実行されるので、ターミナルにプロンプトが戻ってきます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:5000 python-docker
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 </code></pre></div></div>
 
@@ -188,7 +191,7 @@ ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 <p>同じようにコンテナーが適切に動作していることを確認します。
 前とまったく同じ curl コマンドを実行してみます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:8000
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl localhost:5000
 Hello, Docker!
 </code></pre></div></div>
 
@@ -202,7 +205,7 @@ Linux 上であれば、マシン上のプロセス一覧を確認するには<c
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   6 minutes ago       Up 6 minutes        0.0.0.0:8000-&gt;5000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         <span class="s2">"python3 -m flask ru…"</span>   6 minutes ago       Up 6 minutes        0.0.0.0:5000-&gt;5000/tcp   wonderful_kalam
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドは実行中コンテナーに関して、いろいろな情報を表示します。
@@ -235,9 +238,9 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">-a</span>
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
-ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   16 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 5 minutes ago                        wonderful_kalam
-ec45285c456d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   28 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 20 minutes ago                       agitated_moser
-fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   37 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 36 minutes ago                       goofy_khayyam
+ce02b3179f0f        python-docker         <span class="s2">"python3 -m flask ru…"</span>   16 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 5 minutes ago                        wonderful_kalam
+ec45285c456d        python-docker         <span class="s2">"python3 -m flask ru…"</span>   28 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 20 minutes ago                       agitated_moser
+fb7a41809e5d        python-docker         <span class="s2">"python3 -m flask ru…"</span>   37 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 36 minutes ago                       goofy_khayyam
 </code></pre></div></div>
 
 <p>コンテナーがいくつか出力されたはずです。
@@ -253,12 +256,12 @@ fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s�
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;8000/tcp   wonderful_kalam
-ec45285c456d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   31 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 23 minutes ago                            agitated_moser
-fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
+ce02b3179f0f        python-docker         <span class="s2">"python3 -m flask ru…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:5000-&gt;5000/tcp   wonderful_kalam
+ec45285c456d        python-docker         <span class="s2">"python3 -m flask ru…"</span>   31 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 23 minutes ago                            agitated_moser
+fb7a41809e5d        python-docker         <span class="s2">"python3 -m flask ru…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
 </code></pre></div></div>
 
-<p>上で再起動したコンテナーはデタッチモードで起動され、ポート 8000 が公開されています。
+<p>上で再起動したコンテナーはデタッチモードで起動され、ポート 5000 が公開されています。
 またコンテナーのステータスを見てみると「Up X seconds」（起動後 X 秒）となっています。
 コンテナーを再起動したときには、はじめに起動したときと同じフラグ、同じコマンドによって起動されます。</p>
 
@@ -277,9 +280,9 @@ wonderful_kalam
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps <span class="nt">--all</span>
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:8000-&gt;5000/tcp   wonderful_kalam
-ec45285c456d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   31 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 23 minutes ago                            agitated_moser
-fb7a41809e5d        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
+ce02b3179f0f        python-docker         <span class="s2">"python3 -m flask ru…"</span>   19 minutes ago      Up 8 seconds                0.0.0.0:5000-&gt;5000/tcp   wonderful_kalam
+ec45285c456d        python-docker         <span class="s2">"python3 -m flask ru…"</span>   31 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 23 minutes ago                            agitated_moser
+fb7a41809e5d        python-docker         <span class="s2">"python3 -m flask ru…"</span>   40 minutes ago      Exited <span class="o">(</span>0<span class="o">)</span> 39 minutes ago                            goofy_khayyam
 </code></pre></div></div>
 
 <p>コンテナーを削除するには、<code class="language-plaintext highlighter-rouge">docker rm</code>コマンドにコンテナー名を与えて実行します。
@@ -301,11 +304,11 @@ goofy_khayyam
 
 <p>コンテナー名をつけるには<code class="language-plaintext highlighter-rouge">docker run</code>コマンドに<code class="language-plaintext highlighter-rouge">--name</code>フラグをつけます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8000:5000 <span class="nt">--name</span> rest-server python-docker
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5000:5000 <span class="nt">--name</span> rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 <span class="nv">$ </span>docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        python-docker         <span class="s2">"docker-entrypoint.s…"</span>   3 seconds ago       Up 3 seconds        0.0.0.0:8000-&gt;5000/tcp   rest-server
+1aa5d46418a6        python-docker         <span class="s2">"python3 -m flask ru…"</span>   3 seconds ago       Up 3 seconds        0.0.0.0:5000-&gt;5000/tcp   rest-server
 </code></pre></div></div>
 
 <p>わかりやすくなりました。

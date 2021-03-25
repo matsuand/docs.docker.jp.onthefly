@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-19 12:37:03 +0900-->
+<!-- Page generated 2021-03-25 18:42:48 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker ローカルイメージに対するぜい弱性スキャン | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker ローカルイメージに対するぜい弱性スキャン" />
   <meta property="og:description" content="Dockerローカルイメージに対するぜい弱性スキャン。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-25T18:42:48+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/scan/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-25T18:42:48+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker ローカルイメージに対するぜい弱性スキャン","description":"Dockerローカルイメージに対するぜい弱性スキャン。","url":"https://docs.docker.com/engine/scan/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -99,126 +99,23 @@
                 <div class="col-body">
                     <main class="col-content content">
                         <section class="section"><h1>Docker ローカルイメージに対するぜい弱性スキャン</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><blockquote>
-  <p>Snyk ぜい弱性スキャン結果は、Docker Desktop 上から、あるいは Docker プロやチームを購入している場合は Docker Hub ダッシュボードから見ることができます。
-詳しくは <a href="https://www.docker.com/pricing?utm_source=docker&amp;utm_medium=webreferral&amp;utm_campaign=docs_driven_upgrade" target="_blank" rel="noopener" class="_">Docker 料金プラン</a> のページを確認してください。</p>
+  <p>開発サイクルを早めたいと思いませんか？
+CVE をすばやく検出して修復する方法として<code class="language-plaintext highlighter-rouge">docker scan IMAGE_NAME</code>を実行してください。
+詳しくは <a href="#how-to-scan-images">イメージのスキャン方法</a> を確認してください。</p>
 </blockquote>
 
-<h2 id="overview">概要</h2>
+<p>Docker のローカルイメージに対するぜい弱性スキャンは、開発者および開発チームにおいてコンテナーイメージのセキュリティ状況を明らかにするものであり、スキャン中に発覚した問題への対処につながります。
+結果としてより安全なデプロイを実現するものです。
+Docker スキャンは Snyk エンジンを使って動作します。
+ローカルの Dockerfile やローカルイメージに対して、セキュリティ状況を可視化して示します。</p>
 
-<p>Docker のローカルイメージに対するぜい弱性スキャンは、Snyk エンジンを使って動作します。
-ローカルの Dockerfile やローカルイメージに対して、セキュリティ状況を可視化して示します。
-ぜい弱性スキャンは CLI から起動し、CLI を使ってスキャン結果を確認します。
-スキャン機能は CVE 形式の一覧を生成し、また CVE 修復に対する推奨書式を提供します。</p>
+<p>ぜい弱性スキャンは CLI から起動し、CLI を使ってスキャン結果を確認します。
+スキャン結果は、ぜい弱性情報データベース CVE（Common Vulnerabilities and Exposures）の一覧として構成され、そこにはぜい弱性の発生源、つまり OS パッケージやライブラリなど、またぜい弱性が発生したバージョン、CVE によって検出された問題を修復するための推奨される修正バージョン（入手可能である場合）が示されます。</p>
+
+<p>ぜい弱性スキャンの実行に必要となるシステム要件については <a href="#prerequisites">前提条件</a> を参照してください。</p>
 
 <p>本ページでは CLI コマンド<code class="language-plaintext highlighter-rouge">docker scan</code>の情報を示します。
 Docker Hub を通じて Docker イメージを自動スキャンする情報に関しては <a href="/docs.docker.jp.onthefly/docker-hub/vulnerability-scanning/">Docker Hub のぜい弱性スキャン</a> を参照してください。</p>
-
-<blockquote class="important">
-  <p><strong>メモ</strong></p>
-
-  <p>ローカルイメージに対するぜい弱性スキャンは、今のところベータ版です。
-各コマンドやフラグは、今後のリリースにおいて変更される場合があります。</p>
-</blockquote>
-
-<h2 id="prerequisites">前提条件</h2>
-
-<p>Docker イメージに対してぜい弱性スキャンを実行するには、以下を満たしていることが必要です。</p>
-
-<ol>
-  <li>
-    <p>Docker Desktop 最新版（Edge）バージョン 2.3.6.0 またはそれ以降をダウンロードしインストールしていること。</p>
-
-    <ul>
-      <li><a href="https://desktop.docker.com/mac/edge/Docker.dmg" target="_blank" rel="noopener" class="_">Download for Mac</a></li>
-      <li><a href="https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe" target="_blank" rel="noopener" class="_">Download for Windows</a></li>
-    </ul>
-  </li>
-  <li>
-    <p><a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> にサインインしていること。</p>
-  </li>
-  <li>
-    <p>Docker Desktop メニューにおいて <strong>Sign in/ Create Docker ID</strong> を選択していること。
-あるいはターミナル画面を開いて<code class="language-plaintext highlighter-rouge">docker login</code>を実行していること。</p>
-  </li>
-  <li>
-    <p>（任意作業）スキャンを行うために <a href="https://dockr.ly/3ePqVcp" target="_blank" rel="noopener" class="_">Snyk アカウント</a> を生成していること。
-または Docker Hub アカウントとともに利用できるものとして Snyk 社が提供する、月単位の追加無償スキャンを利用していること。</p>
-  </li>
-</ol>
-
-<p>インストールができているかどうかを<code class="language-plaintext highlighter-rouge">docker scan --version</code>を実行して確認してください。
-コマンド実行によって、docker scan の現行バージョン、および Snyk エンジンのバージョンを表示されます。
-たとえば以下のとおりです。</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker scan <span class="nt">--version</span>
-Version:    v0.5.0
-Git commit: 5a09266
-Provider:   Snyk <span class="o">(</span>1.432.0<span class="o">)</span>
-</code></pre></div></div>
-
-<blockquote>
-  <p><strong>メモ</strong></p>
-
-  <p>Docker Scan はデフォルトで、インストールされている Snyk バイナリを利用します。
-これが利用できなかった場合は、Docker Desktop に埋め込まれている Snyk バイナリが利用されます。
-必要となる Snyk の最低バージョンは<code class="language-plaintext highlighter-rouge">1.385.0</code>です。</p>
-</blockquote>
-
-<h2 id="supported-options">サポートされているオプション</h2>
-
-<p>高度なコマンド<code class="language-plaintext highlighter-rouge">docker scan</code>では、イメージの名前または ID を使ってローカルイメージをスキャンします。
-このコマンドは以下のオプションをサポートしています。</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">オプション</th>
-      <th style="text-align: left">内容説明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--accept license</code></td>
-      <td style="text-align: left">サードパーティー製プロバイダーのライセンスを承認します。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--dependency-tree</code></td>
-      <td style="text-align: left">スキャン結果において依存パッケージのツリーを表示します。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--exclude-base</code></td>
-      <td style="text-align: left">スキャンにあたってベースイメージは取り除きます。このオプションには --file オプションの設定が必要です。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-f</code>, <code class="language-plaintext highlighter-rouge">--file string</code></td>
-      <td style="text-align: left">イメージに対応する Dockerfile を指定します。このオプションはスキャンの詳細結果を表示します。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--json</code></td>
-      <td style="text-align: left">スキャン結果を JSON 書式により表示します。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--login</code></td>
-      <td style="text-align: left">任意に指定されたトークン（--token フラグ利用）を使って Snyk にログインします。あるいはウェブベースのトークンを利用します。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--reject-license</code></td>
-      <td style="text-align: left">サードパーティー製プロバイダーのライセンスを否認します。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--severity string</code></td>
-      <td style="text-align: left">指定されたレベル以上のぜい弱性のみを表示します。(low、medium、high)</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--token string</code></td>
-      <td style="text-align: left">認証トークンを使ってサードパーティー製スキャンプロバイダーにログインします。</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--version</code></td>
-      <td style="text-align: left">Docker Scan プラグインのバージョンを表示します。</td>
-    </tr>
-  </tbody>
-</table>
 
 <h2 id="how-to-scan-images">イメージのスキャン方法</h2>
 
@@ -240,7 +137,7 @@ Provider:   Snyk <span class="o">(</span>1.432.0<span class="o">)</span>
   Note that we <span class="k">do </span>not currently have vulnerability data <span class="k">for </span>your image.
 </code></pre></div></div>
 
-<h3 id="gettingva-detailed-scan-report">スキャン結果詳細</h3>
+<h3 id="get-a-detailed-scan-report">スキャン結果詳細</h3>
 
 <p>イメージを作り出すために用いられた Dockerfile を指定することで、Docker イメージに関する詳細なスキャン結果を得ることができます。
 コマンド文法は<code class="language-plaintext highlighter-rouge">docker scan --file &lt;Dockerfileへのパス&gt; &lt;Dockerイメージ&gt;</code>というものです。</p>
@@ -533,6 +430,106 @@ Your account has been authenticated. Snyk is now ready to be used.
 
 <p>トークンを指定せずに<code class="language-plaintext highlighter-rouge">--login</code>フラグを用いた場合、Snyk のウェブサイトにリダイレクトされてログインを行います。</p>
 
+<h2 id="prerequisites">前提条件</h2>
+
+<p>Docker イメージに対してぜい弱性スキャンを実行するには、以下を満たしていることが必要です。</p>
+
+<ol>
+  <li>
+    <p>Docker Desktop 最新版（Edge）バージョン 2.3.6.0 またはそれ以降をダウンロードしインストールしていること。</p>
+
+    <ul>
+      <li><a href="https://desktop.docker.com/mac/edge/Docker.dmg" target="_blank" rel="noopener" class="_">Download for Mac</a></li>
+      <li><a href="https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe" target="_blank" rel="noopener" class="_">Download for Windows</a></li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="https://hub.docker.com" target="_blank" rel="noopener" class="_">Docker Hub</a> にサインインしていること。</p>
+  </li>
+  <li>
+    <p>Docker Desktop メニューにおいて <strong>Sign in/ Create Docker ID</strong> を選択していること。
+あるいはターミナル画面を開いて<code class="language-plaintext highlighter-rouge">docker login</code>を実行していること。</p>
+  </li>
+  <li>
+    <p>（任意作業）スキャンを行うために <a href="https://dockr.ly/3ePqVcp" target="_blank" rel="noopener" class="_">Snyk アカウント</a> を生成していること。
+または Docker Hub アカウントとともに利用できるものとして Snyk 社が提供する、月単位の追加無償スキャンを利用していること。</p>
+  </li>
+</ol>
+
+<p>インストールができているかどうかを<code class="language-plaintext highlighter-rouge">docker scan --version</code>を実行して確認してください。
+コマンド実行によって、docker scan の現行バージョン、および Snyk エンジンのバージョンを表示されます。
+たとえば以下のとおりです。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker scan <span class="nt">--version</span>
+Version:    v0.5.0
+Git commit: 5a09266
+Provider:   Snyk <span class="o">(</span>1.432.0<span class="o">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>メモ</strong></p>
+
+  <p>Docker Scan はデフォルトで、インストールされている Snyk バイナリを利用します。
+これが利用できなかった場合は、Docker Desktop に埋め込まれている Snyk バイナリが利用されます。
+必要となる Snyk の最低バージョンは<code class="language-plaintext highlighter-rouge">1.385.0</code>です。</p>
+</blockquote>
+
+<h2 id="supported-options">サポートされているオプション</h2>
+
+<p>高度なコマンド<code class="language-plaintext highlighter-rouge">docker scan</code>では、イメージの名前または ID を使ってローカルイメージをスキャンします。
+このコマンドは以下のオプションをサポートしています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">オプション</th>
+      <th style="text-align: left">内容説明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--accept license</code></td>
+      <td style="text-align: left">サードパーティー製プロバイダーのライセンスを承認します。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--dependency-tree</code></td>
+      <td style="text-align: left">スキャン結果において依存パッケージのツリーを表示します。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--exclude-base</code></td>
+      <td style="text-align: left">スキャンにあたってベースイメージは取り除きます。このオプションには --file オプションの設定が必要です。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">-f</code>, <code class="language-plaintext highlighter-rouge">--file string</code></td>
+      <td style="text-align: left">イメージに対応する Dockerfile を指定します。このオプションはスキャンの詳細結果を表示します。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--json</code></td>
+      <td style="text-align: left">スキャン結果を JSON 書式により表示します。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--login</code></td>
+      <td style="text-align: left">任意に指定されたトークン（--token フラグ利用）を使って Snyk にログインします。あるいはウェブベースのトークンを利用します。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--reject-license</code></td>
+      <td style="text-align: left">サードパーティー製プロバイダーのライセンスを否認します。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--severity string</code></td>
+      <td style="text-align: left">指定されたレベル以上のぜい弱性のみを表示します。(low、medium、high)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--token string</code></td>
+      <td style="text-align: left">認証トークンを使ってサードパーティー製スキャンプロバイダーにログインします。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">--version</code></td>
+      <td style="text-align: left">Docker Scan プラグインのバージョンを表示します。</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="known-issues">既知の問題</h2>
 
 <p><strong>WSL 2 の場合</strong></p>
@@ -544,8 +541,8 @@ Your account has been authenticated. Snyk is now ready to be used.
 
 <h2 id="feedback">フィードバック</h2>
 
-<p>Docker ローカルイメージに対するぜい弱性スキャン機能のベータ版をご利用いただき、ありがとうございます。
-みなさんからのフィードバックを頂くことが重要です。
+<p>Docker ローカルイメージに対するぜい弱性スキャン機能をご利用いただき、ありがとうございます。
+みなさんからのフィードバックを頂くことが重要と考えています。
 フィードバックは GitHub リポジトリ内の <a href="https://github.com/docker/cli-scan-feedback/issues/new" target="_blank" rel="noopener" class="_">scan-cli-plugin</a> において issue を生成してお知らせください。</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=scan">scan</a>, <a href="/docs.docker.jp.onthefly/search/?q=Snyk">Snyk</a>, <a href="/docs.docker.jp.onthefly/search/?q=images">images</a>, <a href="/docs.docker.jp.onthefly/search/?q=local">local</a>, <a href="/docs.docker.jp.onthefly/search/?q=CVE">CVE</a>, <a href="/docs.docker.jp.onthefly/search/?q=vulnerability">vulnerability</a>, <a href="/docs.docker.jp.onthefly/search/?q=security">security</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
@@ -580,12 +577,11 @@ Your account has been authenticated. Snyk is now ready to be used.
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#overview" class="nomunge">概要</a>
+  <li><a href="#how-to-scan-images" class="nomunge">イメージのスキャン方法</a>
     <ul>
+      <li><a href="#provider-authentication" class="nomunge">プロバイダー認証</a></li>
       <li><a href="#prerequisites" class="nomunge">前提条件</a></li>
       <li><a href="#supported-options" class="nomunge">サポートされているオプション</a></li>
-      <li><a href="#how-to-scan-images" class="nomunge">イメージのスキャン方法</a></li>
-      <li><a href="#provider-authentication" class="nomunge">プロバイダー認証</a></li>
       <li><a href="#known-issues" class="nomunge">既知の問題</a></li>
       <li><a href="#feedback" class="nomunge">フィードバック</a></li>
     </ul>

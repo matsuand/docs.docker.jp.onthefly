@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-19 12:37:03 +0900-->
+<!-- Page generated 2021-03-25 18:42:48 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Desktop for Mac ユーザーマニュアル | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Desktop for Mac ユーザーマニュアル" />
   <meta property="og:description" content="はじめよう。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-25T18:42:48+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-25T18:42:48+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop for Mac ユーザーマニュアル","description":"はじめよう。","url":"https://docs.docker.com/docker-for-mac/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -305,55 +305,10 @@ Client: Docker Engine - Community
 <h3 id="kubernetes">Kubernetes タブ</h3>
 
 <p>Docker Desktop には、Mac 上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。
-したがって Kubernetes 上に構築した Docker アプリをデプロイするテストができます。</p>
+したがって Kubernetes 上に構築した Docker アプリをデプロイするテストができます。
+Kubernetes サポートの有効化と、Docker コンテナーとして起動するスタンドアロン Kubernetes インスタンスのインストールを行うためには、<strong>Enable Kubernetes</strong>（Kubernetes の有効化）を実行します。</p>
 
-<p>Kubernetes のクライアントコマンドである<code class="language-plaintext highlighter-rouge">kubectl</code>が提供されていて、ローカルの Kubernetes サーバーへの接続するように設定されています。
-<code class="language-plaintext highlighter-rouge">kubectl</code>をすでにインストールしていて、<code class="language-plaintext highlighter-rouge">minikube</code>や GKE クラスターといった別の環境に向いている場合は、その内容を変更して、<code class="language-plaintext highlighter-rouge">kubectl</code>が<code class="language-plaintext highlighter-rouge">docker-desktop</code>を向くようにしてください。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl config get-contexts
-<span class="nv">$ </span>kubectl config use-context docker-desktop
-</code></pre></div></div>
-
-<p>Homebrew あるいは別の方法により<code class="language-plaintext highlighter-rouge">kubectl</code>をインストールしていて、衝突が起きていたら<code class="language-plaintext highlighter-rouge">/usr/local/bin/kubectl</code>を削除してください。</p>
-
-<ul>
-  <li>
-    <p>Kubernetes サポートを有効にし、Docker コンテナーとして起動するスタンドアロンの Kubernetes インスタンスをインストールするには、<strong>Enable Kubernetes</strong> を選択します。
-Kubernetes を <a href="/docs.docker.jp.onthefly/docker-for-mac/kubernetes/#override-the-default-orchestrator">デフォルトのオーケストレーター</a> として設定する場合は、<strong>Deploy Docker Stacks to Kubernetes by default</strong> を選択します。</p>
-
-    <p><strong>Apply &amp; Restart</strong> をクリックして設定を保存します。
- これによって、Kubernetes サーバーをコンテナーとして起動するためのイメージがインスタンス化されます。
- そして Mac 内に<code class="language-plaintext highlighter-rouge">/usr/local/bin/kubectl</code>コマンドがインストールされます。</p>
-
-    <p><img src="/docs.docker.jp.onthefly/docker-for-mac/images/kubernetes/kube.png" alt="Kubernetes の有効化" width="750px" /></p>
-
-    <p>Kubernetes が有効になって稼動していると、Docker Desktop の Settings 画面の下段右側に、新たにステータスバーが表示されます。</p>
-
-    <p>Kubernetes の状態は Docker メニューに表示され、context が<code class="language-plaintext highlighter-rouge">docker-desktop</code>を指します。</p>
-
-    <p><img src="/docs.docker.jp.onthefly/docker-for-mac/images/kubernetes/kube-context.png" alt="Docker メニュー上の Kubernetes" width="400px" /></p>
-  </li>
-  <li>
-    <p>デフォルトで Kubernetes コンテナーは<code class="language-plaintext highlighter-rouge">docker service ls</code>などのコマンドには現れません。
-手動で管理することがサポートされていないためです。
-コマンド上に表示させるためには、<strong>Show system containers (advanced)</strong> を選択して <strong>Apply and Restart</strong> をクリックします。
-ただしたいていのユーザーにとって、このオプションは不要です。</p>
-  </li>
-  <li>
-    <p>どの時点でも Kubernetes サポートを無効にするには、<strong>Enable Kubernetes</strong> チェックボックスをオフにします。
-Kubernetes コンテナーが停止して削除されます。
-そして<code class="language-plaintext highlighter-rouge">/usr/local/bin/kubectl</code>コマンドも削除されます。</p>
-
-    <p>Docker Desktop における Kubernetes 利用の詳細については <a href="/docs.docker.jp.onthefly/docker-for-mac/kubernetes/" target="_blank" rel="noopener" class="_">Kubernetes へのデプロイ</a> を参照してください。</p>
-  </li>
-</ul>
-
-<blockquote>
-  <p>Kubernetes のアップグレード</p>
-
-  <p>Docker Desktop を最新版に更新しても、Kubernetes クラスターは自動更新されません。
-これを最新版にアップグレードするには <strong>Reset the Kubernetes Cluster</strong>（Kubernetes クラスターのリセット）を実行してください。</p>
-</blockquote>
+<p>Docker Desktop における Kubernetes 統合機能の利用方法については <a href="/docs.docker.jp.onthefly/desktop/kubernetes/" target="_blank" rel="noopener" class="_">Kubernetes へのデプロイ</a> を参照してください。</p>
 
 <h3 id="reset">Reset タブ</h3>
 

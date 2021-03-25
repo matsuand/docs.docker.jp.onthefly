@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-19 12:37:03 +0900-->
+<!-- Page generated 2021-03-25 18:42:48 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>開発向けのコンテナー利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="開発向けのコンテナー利用" />
   <meta property="og:description" content="Learn how to develop your application locally." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-25T18:42:48+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/python/develop/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-25T18:42:48+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"開発向けのコンテナー利用","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/python/develop/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -147,20 +147,20 @@
 そして上で生成したボリュームとネットワークをこれに結びつけます。
 Docker はイメージを Docker Hub からプルして、ローカル環境において実行します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mysql:/var/lib/mysql <span class="se">\</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mysql:/var/lib/mysql <span class="se">\</span>
   <span class="nt">-v</span> mysql_config:/etc/mysql <span class="nt">-p</span> 3306:3306 <span class="se">\</span>
   <span class="nt">--network</span> mysqlnet <span class="se">\</span>
   <span class="nt">--name</span> mysqldb <span class="se">\</span>
-  <span class="nt">-e</span> <span class="nv">MYSQL_ALLOW_EMPTY_PASSWORD</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+  <span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>p@ssw0rd1 <span class="se">\</span>
   mysql
 </code></pre></div></div>
 
 <p>MySQL データベースが起動されていて、そこに接続できることを確認します。
-コンテナー内部から以下のコマンドを実行して、実行中の MySQL データベースに接続します。</p>
+コンテナー内部から以下のコマンドを実行して、実行中の MySQL データベースに接続します。
+なおパスワードプロンプトには「p@ssw0rd1」を入力します。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--network</span> mysqlnet <span class="nt">--rm</span> mysql mysql <span class="nt">-hmysqldb</span>
-Enter password: <span class="k">********</span>
-
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> mysqldb mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+Enter password:
 Welcome to the MySQL monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span><span class="nb">.</span>
 Your MySQL connection <span class="nb">id </span>is 8
 Server version: 8.0.23 MySQL Community Server - GPL
@@ -178,8 +178,7 @@ mysql&gt;
 
 <h3 id="connect-the-application-to-the-database">アプリケーションからのデータベース接続</h3>
 
-<p>上のコマンドにおいては、これまでと同じ MySQL イメージを使ってデータベースに接続しました。
-ただし今回は、コンテナーに対して ‘mysql’コマンドを受け渡し、<code class="language-plaintext highlighter-rouge">-h</code>フラグを通じて MySQL コンテナー名を指定する方法をとりました。
+<p>上のコマンドにおいては、<code class="language-plaintext highlighter-rouge">mysqldb</code>コンテナーに対して<code class="language-plaintext highlighter-rouge">mysql</code>コマンドを実行して MySQL データベースにログインしました。
 CTRL-D を入力して MySQL のインタラクティブターミナルから抜け出てください。</p>
 
 <p>次は <a href="/docs.docker.jp.onthefly/language/python/build-images/#sample-application">イメージのビルド</a> の節において生成したサンプルアプリケーションを更新します。
@@ -262,7 +261,7 @@ def db_init<span class="o">()</span>:
 <p>まずは pip を使ってアプリケーションに<code class="language-plaintext highlighter-rouge">mysql-connector-python</code>モジュールを追加します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip3 <span class="nb">install </span>mysql-connector-python
-<span class="nv">$ </span>pip3 freeze <span class="nt">-r</span> requirements.txt
+<span class="nv">$ </span>pip3 freeze <span class="o">&gt;</span> requirements.txt
 </code></pre></div></div>
 
 <p>そしてイメージをビルドします。</p>
@@ -274,7 +273,7 @@ def db_init<span class="o">()</span>:
 これによってデータベースへのアクセスは、コンテナー名を使って行えるようになります。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="se">\</span>
-  <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
+  <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">--network</span> mysqlnet <span class="se">\</span>
   <span class="nt">--name</span> rest-server <span class="se">\</span>
   <span class="nt">-p</span> 5000:5000 <span class="se">\</span>
@@ -284,16 +283,12 @@ def db_init<span class="o">()</span>:
 <p>アプリケーションがデータベースに接続されていて、メモ書き（note）が追加できることを確認します。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:5000/initdb
-<span class="nv">$ </span>curl <span class="nt">--request</span> POST <span class="se">\</span>
-  <span class="nt">--url</span> http://localhost:5000/widgets <span class="se">\</span>
-  <span class="nt">--header</span> <span class="s1">'Content-Type: application/x-www-form-urlencoded'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'name=widget01'</span> <span class="se">\</span>
-  <span class="nt">--data</span> <span class="s1">'description=this is a test widget'</span>
+<span class="nv">$ </span>curl http://localhost:5000/widgets
 </code></pre></div></div>
 
 <p>サービスからは以下のような JSON データが返ってくるはずです。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[{</span><span class="s2">"name"</span>: <span class="s2">"widget01"</span>, <span class="s2">"description"</span>: <span class="s2">"this is a test widget"</span><span class="o">}]</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[]</span>
 </code></pre></div></div>
 
 <h2 id="use-compose-to-develop-locally">Compose を使ったローカル開発環境</h2>
@@ -352,7 +347,8 @@ def db_init<span class="o">()</span>:
 <p>では API エンドポイントを確認します。
 以下の curl コマンドを実行してみましょう。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/widgets
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:5000/initdb
+<span class="nv">$ </span>curl http://localhost:5000/widgets
 </code></pre></div></div>
 
 <p>以下のようなレスポンスが返ってくるはずです。</p>

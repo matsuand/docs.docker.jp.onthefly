@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-19 12:37:03 +0900-->
+<!-- Page generated 2021-03-25 18:42:48 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Desktop for Windows ユーザーマニュアル | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Desktop for Windows ユーザーマニュアル" />
   <meta property="og:description" content="Getting Started" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-25T18:42:48+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-windows/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-19T12:37:03+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-03-25T18:42:48+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop for Windows ユーザーマニュアル","description":"Getting Started","url":"https://docs.docker.com/docker-for-windows/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Desktop for Windows ユーザーマニュアル</h1><p><em class="reading-time">読む時間の目安: 7 分</em></p><p>Docker Desktop へようこそ！
+                        <section class="section"><h1>Docker Desktop for Windows ユーザーマニュアル</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>Docker Desktop へようこそ！
 Docker Desktop for Windows ユーザーマニュアルでは Docker Desktop 設定をどのように行い、管理していくのかを説明しています。</p>
 
 <p>Docker Desktop のダウンロード、システム要件、インストール手順については <a href="/docs.docker.jp.onthefly/docker-for-windows/install/">Docker Desktop のインストール</a> を参照してください。</p>
@@ -383,56 +383,11 @@ Client: Docker Engine - Community
   <p>Kubernetes タブは Windows コンテナーモードでは利用できません。</p>
 </blockquote>
 
-<p>Docker Desktop には、Windows ホスト上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。
-したがって Kubernetes 上に構築した Docker アプリをデプロイするテストができます。</p>
+<p>Docker Desktop には、Windows マシン上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。
+したがって Kubernetes 上に構築した Docker アプリをデプロイするテストができます。
+Kubernetes サポートの有効化と、Docker コンテナーとして起動するスタンドアロン Kubernetes インスタンスのインストールを行うためには、<strong>Enable Kubernetes</strong>（Kubernetes の有効化）を実行します。</p>
 
-<p><img src="/docs.docker.jp.onthefly/docker-for-windows/images/settings-kubernetes.png" alt="Kubernetes の有効化" width="750px" /></p>
-
-<p>Kubernetes のクライアントコマンドである<code class="language-plaintext highlighter-rouge">kubectl</code>が提供されていて、ローカルの Kubernetes サーバーへの接続するように設定されています。
-<code class="language-plaintext highlighter-rouge">kubectl</code>をすでにインストールしていて、<code class="language-plaintext highlighter-rouge">minikube</code>や GKE クラスターといった別の環境に向いている場合は、その内容を変更して、<code class="language-plaintext highlighter-rouge">kubectl</code>が<code class="language-plaintext highlighter-rouge">docker-desktop</code>を向くようにしてください。</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> kubectl config get-contexts
-<span class="o">&gt;</span> kubectl config use-context docker-desktop
-</code></pre></div></div>
-
-<p>Kubernetes サポートを有効にし、Docker コンテナーとして起動するスタンドアロンの Kubernetes インスタンスをインストールするには、<strong>Enable Kubernetes</strong> を選択します。</p>
-
-<p>Kubernetes を <a href="kubernetes/#override-the-default-orchestrator">デフォルトオーケストレーター</a> に設定するには、<strong>Deploy Docker Stacks to Kubernetes by default</strong>（Docker スタックをデフォルトで Kubernetes にデプロイ） を実行します。</p>
-
-<p>デフォルトで Kubernetes コンテナーは<code class="language-plaintext highlighter-rouge">docker service ls</code>などのコマンドには現れません。
-手動で管理することがサポートされていないためです。
-コマンド上に表示させるためには、<strong>Show system containers (advanced)</strong> を実行します。
-ただしたいていのユーザーにとって、このオプションは不要です。</p>
-
-<p><strong>Apply &amp; Restart</strong> をクリックして設定を保存します。
-これによって Kubernetes サーバーをコンテナーとして実行するために必要となるイメージが初期化され、コマンド<code class="language-plaintext highlighter-rouge">kubectl.exe</code>が実行パスにインストールされます。</p>
-
-<ul>
-  <li>
-    <p>Kubernetes が有効になって稼動していると、Docker Desktop の Settings 画面の下段右側に、新たにステータスバーが表示されます。
-Kubernetes の状態は Docker メニューに表示され、context が<code class="language-plaintext highlighter-rouge">docker-desktop</code>を指します。</p>
-  </li>
-  <li>
-    <p>どの時点でも Kubernetes サポートを無効にするには、<strong>Enable Kubernetes</strong> チェックボックスをオフにします。
-Kubernetes コンテナーが停止して削除されます。
-そして<code class="language-plaintext highlighter-rouge">/usr/local/bin/kubectl</code>コマンドも削除されます。</p>
-  </li>
-  <li>
-    <p>インストールされたスタックや Kubernetes リソースを削除するには、<strong>Reset Kubernetes Cluster</strong>（Kubernetes クラスターのリセット） を実行します。</p>
-  </li>
-  <li>
-    <p><code class="language-plaintext highlighter-rouge">kubectl</code>を別の方法でインストールしていて何か支障が発生したら、これを削除してください。</p>
-
-    <p>Docker Desktop における Kubernetes 利用の詳細については <a href="/docs.docker.jp.onthefly/docker-for-windows/kubernetes/">Kubernetes へのデプロイ</a> を参照してください。</p>
-  </li>
-</ul>
-
-<blockquote>
-  <p>Kubernetes のアップグレード</p>
-
-  <p>Docker Desktop を最新版に更新しても、Kubernetes クラスターは自動更新されません。
-これを最新版にアップグレードするには <strong>Reset Kubernetes Cluster</strong>（Kubernetes クラスターのリセット）を実行してください。</p>
-</blockquote>
+<p>Docker Desktop における Kubernetes 統合機能の利用方法については <a href="/docs.docker.jp.onthefly/desktop/kubernetes/" target="_blank" rel="noopener" class="_">Kubernetes へのデプロイ</a> を参照してください。</p>
 
 <h3 id="reset">Reset タブ</h3>
 
