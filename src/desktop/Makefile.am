@@ -19,6 +19,7 @@ bases = \
 	dashboard          \
 	faqs               \
 	index              \
+	kubernetes         \
 	opensource
 
 ch_mds = $(bases:=.ch) # ch means change files

@@ -104,7 +104,6 @@ AC_CONFIG_FILES([Makefile
 		 src/develop/sdk/Makefile
 		 src/docker-for-mac/Makefile
 		 src/docker-for-mac/images/Makefile
-		 src/docker-for-mac/images/kubernetes/Makefile
 		 src/docker-for-mac/images/menu/Makefile
 		 src/docker-for-windows/Makefile
 		 src/docker-for-windows/images/Makefile

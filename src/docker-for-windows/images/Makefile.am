@@ -27,7 +27,6 @@ images = \
 	settings-daemon-advanced.png \
 	settings-daemon-basic.png \
 	settings-general.png \
-	settings-kubernetes.png \
 	settings-network.png \
 	settings-proxies.png \
 	settings-reset.png \

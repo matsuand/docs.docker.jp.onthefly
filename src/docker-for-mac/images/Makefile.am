@@ -1,4 +1,4 @@
-SUBDIRS = kubernetes menu
+SUBDIRS = menu
 
 thisdir   = docker-for-mac/images
 origdir   = @abs_origdir@/$(thisdir)

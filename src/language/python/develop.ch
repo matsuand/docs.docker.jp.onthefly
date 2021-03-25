@@ -117,7 +117,7 @@ $ docker network create mysqlnet
 @z
 
 @x
-Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and run it for you locally.
+Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
 @y
 コンテナーとして MySQL を実行します。
 そして上で生成したボリュームとネットワークをこれに結びつけます。
@@ -126,36 +126,36 @@ Docker はイメージを Docker Hub からプルして、ローカル環境に�
 
 @x
 ```shell
-$ docker run -it --rm -d -v mysql:/var/lib/mysql \
+$ docker run --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
   --name mysqldb \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  -e MYSQL_ROOT_PASSWORD=p@ssw0rd1 \
   mysql
 ```
 @y
 ```shell
-$ docker run -it --rm -d -v mysql:/var/lib/mysql \
+$ docker run --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
   --name mysqldb \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  -e MYSQL_ROOT_PASSWORD=p@ssw0rd1 \
   mysql
 ```
 @z
 
 @x
-Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command:
+Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command and enter "p@ssw0rd1" when prompted for the password:
 @y
 MySQL データベースが起動されていて、そこに接続できることを確認します。
 コンテナー内部から以下のコマンドを実行して、実行中の MySQL データベースに接続します。
+なおパスワードプロンプトには「p@ssw0rd1」を入力します。
 @z
 
 @x
 ```shell
-$ docker run -it --network mysqlnet --rm mysql mysql -hmysqldb
-Enter password: ********
-
+$ docker exec -ti mysqldb mysql -u root -p
+Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
 Server version: 8.0.23 MySQL Community Server - GPL
@@ -172,9 +172,8 @@ mysql>
 ```
 @y
 ```shell
-$ docker run -it --network mysqlnet --rm mysql mysql -hmysqldb
-Enter password: ********
-
+$ docker exec -ti mysqldb mysql -u root -p
+Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
 Server version: 8.0.23 MySQL Community Server - GPL
@@ -199,10 +198,9 @@ mysql>
 @z
 
 @x
-In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.
+In the above command, we logged in to the MySQL database by passing the ‘mysql’ command to the `mysqldb` container. Press CTRL-D to exit the MySQL interactive terminal.
 @y
-上のコマンドにおいては、これまでと同じ MySQL イメージを使ってデータベースに接続しました。
-ただし今回は、コンテナーに対して ‘mysql’コマンドを受け渡し、`-h`フラグを通じて MySQL コンテナー名を指定する方法をとりました。
+上のコマンドにおいては、`mysqldb`コンテナーに対して`mysql`コマンドを実行して MySQL データベースにログインしました。
 CTRL-D を入力して MySQL のインタラクティブターミナルから抜け出てください。
 @z
 
@@ -214,7 +212,7 @@ Python アプリのディレクトリ構造を確認するには、[Python ア�
 @z
 
 @x
-Okay, now that we have a running MySQL, let’s update the`app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
+Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
 @y
 さて MySQL が動作したので、`app.py`を修正しデータ保存先を MySQL とします。
 さらにサーバーへの接続内容も追加することにします。
@@ -389,7 +387,7 @@ We’ve added the MySQL module and updated the code to connect to the database s
 @z
 
 @x
-First, let’s add the `mysql-connector-python `module to our application using pip.
+First, let’s add the `mysql-connector-python` module to our application using pip.
 @y
 まずは pip を使ってアプリケーションに`mysql-connector-python`モジュールを追加します。
 @z
@@ -397,12 +395,12 @@ First, let’s add the `mysql-connector-python `module to our application using 
 @x
 ```shell
 $ pip3 install mysql-connector-python
-$ pip3 freeze -r requirements.txt
+$ pip3 freeze > requirements.txt
 ```
 @y
 ```shell
 $ pip3 install mysql-connector-python
-$ pip3 freeze -r requirements.txt
+$ pip3 freeze > requirements.txt
 ```
 @z
 
@@ -432,7 +430,7 @@ Now, let’s add the container to the database network and then run our containe
 @x
 ```shell
 $ docker run \
-  -it --rm -d \
+  --rm -d \
   --network mysqlnet \
   --name rest-server \
   -p 5000:5000 \
@@ -441,7 +439,7 @@ $ docker run \
 @y
 ```shell
 $ docker run \
-  -it --rm -d \
+  --rm -d \
   --network mysqlnet \
   --name rest-server \
   -p 5000:5000 \
@@ -458,20 +456,12 @@ Let’s test that our application is connected to the database and is able to ad
 @x
 ```shell
 $ curl http://localhost:5000/initdb
-$ curl --request POST \
-  --url http://localhost:5000/widgets \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data 'name=widget01' \
-  --data 'description=this is a test widget'
+$ curl http://localhost:5000/widgets
 ```
 @y
 ```shell
 $ curl http://localhost:5000/initdb
-$ curl --request POST \
-  --url http://localhost:5000/widgets \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data 'name=widget01' \
-  --data 'description=this is a test widget'
+$ curl http://localhost:5000/widgets
 ```
 @z
 
@@ -483,11 +473,11 @@ You should receive the following JSON back from our service.
 
 @x
 ```shell
-[{"name": "widget01", "description": "this is a test widget"}]
+[]
 ```
 @y
 ```shell
-[{"name": "widget01", "description": "this is a test widget"}]
+[]
 ```
 @z
 
@@ -621,7 +611,7 @@ We pass the `--build` flag so Docker will compile our image and then starts the 
 @z
 
 @x
-Now let’s test our API endpoint. Run the following curl command:
+Now let’s test our API endpoint. Run the following curl commands:
 @y
 では API エンドポイントを確認します。
 以下の curl コマンドを実行してみましょう。
@@ -629,11 +619,13 @@ Now let’s test our API endpoint. Run the following curl command:
 
 @x
 ```shell
-$ curl --request GET --url http://localhost:8080/widgets
+$ curl http://localhost:5000/initdb
+$ curl http://localhost:5000/widgets
 ```
 @y
 ```shell
-$ curl --request GET --url http://localhost:8080/widgets
+$ curl http://localhost:5000/initdb
+$ curl http://localhost:5000/widgets
 ```
 @z
 

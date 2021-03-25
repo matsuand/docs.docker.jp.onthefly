@@ -13,6 +13,8 @@ images = \
 	app-dashboard-view.png       \
 	example-app-architecture.png \
 	image-details.png            \
+	kube-context.png             \
+	kube-enable.png              \
 	mac-application-view.png     \
 	mac-browser-view.png         \
 	mac-container-view.png       \

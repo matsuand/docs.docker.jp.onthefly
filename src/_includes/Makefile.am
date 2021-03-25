@@ -21,7 +21,6 @@ bases = \
 	experimental-feature \
 	github-pr            \
 	install-script       \
-	kubernetes-mac-win   \
 	registry
 htmlbases = \
 	footer           \
@@ -59,27 +58,3 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 
 $(publishdir)/jatrans.md: $(srcdir)/jatrans.md.in
 	@cp -p $^ $@
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(targetdir)/,$(srcs))
-#	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(targetdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-#	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-include $(top_srcdir)/rewriteurls.mk
-
-.PHONY: publishclean
-publishclean:
-	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-	@for f in $(srcs); do rm -f ${publishdir}/$$f; done
-	@rm -fr $(thisdir)

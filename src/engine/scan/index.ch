@@ -20,26 +20,33 @@ toc_max: 2
 @z
 
 @x
-> You can view the Snyk vulnerability scan results on the Docker Desktop or Hub dashboards with Docker Pro or Team subscriptions. Check out the [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} page for details.
+> Looking to speed up your development cycles? Quickly detect and learn how to remediate CVEs in your images by running `docker scan IMAGE_NAME`. Check out [How to scan images](#how-to-scan-images) for details.
 @y
-> Snyk ぜい弱性スキャン結果は、Docker Desktop 上から、あるいは Docker プロやチームを購入している場合は Docker Hub ダッシュボードから見ることができます。
-> 詳しくは [Docker 料金プラン](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} のページを確認してください。
+> 開発サイクルを早めたいと思いませんか？
+> CVE をすばやく検出して修復する方法として`docker scan IMAGE_NAME`を実行してください。
+> 詳しくは [イメージのスキャン方法](#how-to-scan-images) を確認してください。
 @z
 
 @x
-## Overview
+Vulnerability scanning for Docker local images  allows developers and development teams to review the security state of the container images and take actions to fix issues identified during the scan, resulting in more secure deployments. Docker Scan runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images.
 @y
-{: #overview }
-## 概要
-@z
-
-@x
-Vulnerability scanning for Docker local images runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images. Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results.  The scanning function creates the list of Common Vulnerabilities and Exposures (CVEs), and provides recommendations for CVE remediations.
-@y
-Docker のローカルイメージに対するぜい弱性スキャンは、Snyk エンジンを使って動作します。
+Docker のローカルイメージに対するぜい弱性スキャンは、開発者および開発チームにおいてコンテナーイメージのセキュリティ状況を明らかにするものであり、スキャン中に発覚した問題への対処につながります。
+結果としてより安全なデプロイを実現するものです。
+Docker スキャンは Snyk エンジンを使って動作します。
 ローカルの Dockerfile やローカルイメージに対して、セキュリティ状況を可視化して示します。
+@z
+
+@x
+Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan result contains a list of Common Vulnerabilities and Exposures (CVEs), the source of the vulnerability, such as OS packages and libraries, version in which it was introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
+@y
 ぜい弱性スキャンは CLI から起動し、CLI を使ってスキャン結果を確認します。
-スキャン機能は CVE 形式の一覧を生成し、また CVE 修復に対する推奨書式を提供します。
+スキャン結果は、ぜい弱性情報データベース CVE（Common Vulnerabilities and Exposures）の一覧として構成され、そこにはぜい弱性の発生源、つまり OS パッケージやライブラリなど、またぜい弱性が発生したバージョン、CVE によって検出された問題を修復するための推奨される修正バージョン（入手可能である場合）が示されます。
+@z
+
+@x
+For information about the system requirements to run vulnerability scanning, see [Prerequisites](#prerequisites).
+@y
+ぜい弱性スキャンの実行に必要となるシステム要件については [前提条件](#prerequisites) を参照してください。
 @z
 
 @x
@@ -50,147 +57,7 @@ Docker Hub を通じて Docker イメージを自動スキャンする情報に�
 @z
 
 @x
->**Note**
->
-> Docker vulnerability scanning for local images  is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-@y
->**メモ**
->
-> ローカルイメージに対するぜい弱性スキャンは、今のところベータ版です。
-> 各コマンドやフラグは、今後のリリースにおいて変更される場合があります。
-{:.important}
-@z
-
-@x
-## Prerequisites
-@y
-{: #prerequisites }
-## 前提条件
-@z
-
-@x
-To run vulnerability scanning on your Docker images, you must meet the following requirements:
-@y
-Docker イメージに対してぜい弱性スキャンを実行するには、以下を満たしていることが必要です。
-@z
-
-@x
-1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
-@y
-1. Docker Desktop 最新版（Edge）バージョン 2.3.6.0 またはそれ以降をダウンロードしインストールしていること。
-@z
-
-@x
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
-@y
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
-@z
-
-@x
-2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-@y
-2. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} にサインインしていること。
-@z
-
-@x
-3. From the Docker Desktop menu, select **Sign in/ Create Docker ID**. Alternatively, open a terminal and run the command `docker login`.
-@y
-3. Docker Desktop メニューにおいて **Sign in/ Create Docker ID** を選択していること。
-   あるいはターミナル画面を開いて`docker login`を実行していること。
-@z
-
-@x
-4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
-@y
-4. （任意作業）スキャンを行うために [Snyk アカウント](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} を生成していること。
-   または Docker Hub アカウントとともに利用できるものとして Snyk 社が提供する、月単位の追加無償スキャンを利用していること。
-@z
-
-@x
-Check your installation by running `docker scan --version`, it should print the current version of docker scan and the Snyk engine version. For example:
-@y
-インストールができているかどうかを`docker scan --version`を実行して確認してください。
-コマンド実行によって、docker scan の現行バージョン、および Snyk エンジンのバージョンを表示されます。
-たとえば以下のとおりです。
-@z
-
-@x
-```shell
-$ docker scan --version
-Version:    v0.5.0
-Git commit: 5a09266
-Provider:   Snyk (1.432.0)
-```
-@y
-```shell
-$ docker scan --version
-Version:    v0.5.0
-Git commit: 5a09266
-Provider:   Snyk (1.432.0)
-```
-@z
-
-@x
-> **Note:**
->
-> Docker Scan uses the Snyk binary installed in your environment by default. If 
-this is not available, it uses the Snyk binary embedded in Docker Desktop.
-> The minimum version required for Snyk is `1.385.0`.
-@y
-> **メモ**
->
-> Docker Scan はデフォルトで、インストールされている Snyk バイナリを利用します。
-> これが利用できなかった場合は、Docker Desktop に埋め込まれている Snyk バイナリが利用されます。
-> 必要となる Snyk の最低バージョンは`1.385.0`です。
-@z
-
-@x
-## Supported options
-@y
-{: #supported-options }
-## サポートされているオプション
-@z
-
-@x
-The high-level `docker scan` command scans local images using the image name or the image ID. It supports the following options:
-@y
-高度なコマンド`docker scan`では、イメージの名前または ID を使ってローカルイメージをスキャンします。
-このコマンドは以下のオプションをサポートしています。
-@z
-
-@x
-| Option                                                       | Description                                   |
-|:------------------------------------------------------------------ :------------------------------------------------|
-| `--accept license` | Accept the license agreement of the third-party scanning provider    |
-| `--dependency-tree` | Display the dependency tree of the image along with scan results |
-| `--exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
-| `-f`, `--file string` | Specify the location of the Dockerfile associated with the image. This option displays a detailed scan result |
-| `--json` | Display the result of the scan in JSON format|
-| `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
-| `--reject-license` | Reject the license agreement of the third-party scanning provider |
-| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
-| `--token string`  | Use the authentication token to log into the third-party scanning provider |
-| `--version` | Display the Docker Scan plugin version |
-@y
-| オプション                                                   | 内容説明                                             |
-|:------------------------------------------------------------ :------------------------------------------------|
-| `--accept license` | サードパーティー製プロバイダーのライセンスを承認します。|
-| `--dependency-tree` | スキャン結果において依存パッケージのツリーを表示します。|
-| `--exclude-base` | スキャンにあたってベースイメージは取り除きます。このオプションには --file オプションの設定が必要です。|
-| `-f`, `--file string` | イメージに対応する Dockerfile を指定します。このオプションはスキャンの詳細結果を表示します。|
-| `--json` | スキャン結果を JSON 書式により表示します。|
-| `--login` | 任意に指定されたトークン（--token フラグ利用）を使って Snyk にログインします。あるいはウェブベースのトークンを利用します。|
-| `--reject-license` | サードパーティー製プロバイダーのライセンスを否認します。|
-| `--severity string` | 指定されたレベル以上のぜい弱性のみを表示します。(low、medium、high) |
-| `--token string`  | 認証トークンを使ってサードパーティー製スキャンプロバイダーにログインします。|
-| `--version` | Docker Scan プラグインのバージョンを表示します。|
-@z
-
-@x
-## How to Scan images
+## How to scan images
 @y
 {: #how-to-scan-images }
 ## イメージのスキャン方法
@@ -238,9 +105,9 @@ $  docker scan hello-world
 @z
 
 @x
-### Getting a detailed scan report
+### Get a detailed scan report
 @y
-{: #gettingva-detailed-scan-report }
+{: #get-a-detailed-scan-report }
 ### スキャン結果詳細
 @z
 
@@ -887,6 +754,133 @@ If you use the `--login` flag without any token, you will be redirected to the S
 @z
 
 @x
+## Prerequisites
+@y
+{: #prerequisites }
+## 前提条件
+@z
+
+@x
+To run vulnerability scanning on your Docker images, you must meet the following requirements:
+@y
+Docker イメージに対してぜい弱性スキャンを実行するには、以下を満たしていることが必要です。
+@z
+
+@x
+1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
+@y
+1. Docker Desktop 最新版（Edge）バージョン 2.3.6.0 またはそれ以降をダウンロードしインストールしていること。
+@z
+
+@x
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+@y
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+@z
+
+@x
+2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+@y
+2. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} にサインインしていること。
+@z
+
+@x
+3. From the Docker Desktop menu, select **Sign in/ Create Docker ID**. Alternatively, open a terminal and run the command `docker login`.
+@y
+3. Docker Desktop メニューにおいて **Sign in/ Create Docker ID** を選択していること。
+   あるいはターミナル画面を開いて`docker login`を実行していること。
+@z
+
+@x
+4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
+@y
+4. （任意作業）スキャンを行うために [Snyk アカウント](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} を生成していること。
+   または Docker Hub アカウントとともに利用できるものとして Snyk 社が提供する、月単位の追加無償スキャンを利用していること。
+@z
+
+@x
+Check your installation by running `docker scan --version`, it should print the current version of docker scan and the Snyk engine version. For example:
+@y
+インストールができているかどうかを`docker scan --version`を実行して確認してください。
+コマンド実行によって、docker scan の現行バージョン、および Snyk エンジンのバージョンを表示されます。
+たとえば以下のとおりです。
+@z
+
+@x
+```shell
+$ docker scan --version
+Version:    v0.5.0
+Git commit: 5a09266
+Provider:   Snyk (1.432.0)
+```
+@y
+```shell
+$ docker scan --version
+Version:    v0.5.0
+Git commit: 5a09266
+Provider:   Snyk (1.432.0)
+```
+@z
+
+@x
+> **Note:**
+>
+> Docker Scan uses the Snyk binary installed in your environment by default. If 
+this is not available, it uses the Snyk binary embedded in Docker Desktop.
+> The minimum version required for Snyk is `1.385.0`.
+@y
+> **メモ**
+>
+> Docker Scan はデフォルトで、インストールされている Snyk バイナリを利用します。
+> これが利用できなかった場合は、Docker Desktop に埋め込まれている Snyk バイナリが利用されます。
+> 必要となる Snyk の最低バージョンは`1.385.0`です。
+@z
+
+@x
+## Supported options
+@y
+{: #supported-options }
+## サポートされているオプション
+@z
+
+@x
+The high-level `docker scan` command scans local images using the image name or the image ID. It supports the following options:
+@y
+高度なコマンド`docker scan`では、イメージの名前または ID を使ってローカルイメージをスキャンします。
+このコマンドは以下のオプションをサポートしています。
+@z
+
+@x
+| Option                                                       | Description                                   |
+|:------------------------------------------------------------------ :------------------------------------------------|
+| `--accept license` | Accept the license agreement of the third-party scanning provider    |
+| `--dependency-tree` | Display the dependency tree of the image along with scan results |
+| `--exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
+| `-f`, `--file string` | Specify the location of the Dockerfile associated with the image. This option displays a detailed scan result |
+| `--json` | Display the result of the scan in JSON format|
+| `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
+| `--reject-license` | Reject the license agreement of the third-party scanning provider |
+| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
+| `--token string`  | Use the authentication token to log into the third-party scanning provider |
+| `--version` | Display the Docker Scan plugin version |
+@y
+| オプション                                                   | 内容説明                                             |
+|:------------------------------------------------------------ :------------------------------------------------|
+| `--accept license` | サードパーティー製プロバイダーのライセンスを承認します。|
+| `--dependency-tree` | スキャン結果において依存パッケージのツリーを表示します。|
+| `--exclude-base` | スキャンにあたってベースイメージは取り除きます。このオプションには --file オプションの設定が必要です。|
+| `-f`, `--file string` | イメージに対応する Dockerfile を指定します。このオプションはスキャンの詳細結果を表示します。|
+| `--json` | スキャン結果を JSON 書式により表示します。|
+| `--login` | 任意に指定されたトークン（--token フラグ利用）を使って Snyk にログインします。あるいはウェブベースのトークンを利用します。|
+| `--reject-license` | サードパーティー製プロバイダーのライセンスを否認します。|
+| `--severity string` | 指定されたレベル以上のぜい弱性のみを表示します。(low、medium、high) |
+| `--token string`  | 認証トークンを使ってサードパーティー製スキャンプロバイダーにログインします。|
+| `--version` | Docker Scan プラグインのバージョンを表示します。|
+@z
+
+@x
 ## Known issues
 @y
 {: #known-issues }
@@ -915,9 +909,9 @@ If you use the `--login` flag without any token, you will be redirected to the S
 @z
 
 @x
-Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out the vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
-Docker ローカルイメージに対するぜい弱性スキャン機能のベータ版をご利用いただき、ありがとうございます。
-みなさんからのフィードバックを頂くことが重要です。
+Docker ローカルイメージに対するぜい弱性スキャン機能をご利用いただき、ありがとうございます。
+みなさんからのフィードバックを頂くことが重要と考えています。
 フィードバックは GitHub リポジトリ内の [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} において issue を生成してお知らせください。
 @z

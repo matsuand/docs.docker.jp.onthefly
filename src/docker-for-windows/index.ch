@@ -680,119 +680,18 @@ Server: Docker Engine - Community
 @z
 
 @x
-Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
+Docker Desktop includes a standalone Kubernetes server that runs on your Windows machince, so
+that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 @y
-Docker Desktop には、Windows ホスト上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。
+Docker Desktop には、Windows マシン上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。
 したがって Kubernetes 上に構築した Docker アプリをデプロイするテストができます。
+Kubernetes サポートの有効化と、Docker コンテナーとして起動するスタンドアロン Kubernetes インスタンスのインストールを行うためには、**Enable Kubernetes**（Kubernetes の有効化）を実行します。
 @z
 
 @x
-![Enable Kubernetes](images/settings-kubernetes.png){:width="750px"}
+For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 @y
-![Kubernetes の有効化](images/settings-kubernetes.png){:width="750px"}
-@z
-
-@x
-The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server. If you have `kubectl` already installed and
-pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-desktop`:
-@y
-Kubernetes のクライアントコマンドである`kubectl`が提供されていて、ローカルの Kubernetes サーバーへの接続するように設定されています。
-`kubectl`をすでにインストールしていて、`minikube`や GKE クラスターといった別の環境に向いている場合は、その内容を変更して、`kubectl`が`docker-desktop`を向くようにしてください。
-@z
-
-@x
-```bash
-> kubectl config get-contexts
-> kubectl config use-context docker-desktop
-```
-@y
-```bash
-> kubectl config get-contexts
-> kubectl config use-context docker-desktop
-```
-@z
-
-@x
- To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes**.
-@y
- Kubernetes サポートを有効にし、Docker コンテナーとして起動するスタンドアロンの Kubernetes インスタンスをインストールするには、**Enable Kubernetes** を選択します。
-@z
-
-@x
-To set Kubernetes as the
-  [default orchestrator](/docker-for-windows/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
-@y
-Kubernetes を [デフォルトオーケストレーター](kubernetes/#override-the-default-orchestrator) に設定するには、**Deploy Docker Stacks to Kubernetes by default**（Docker スタックをデフォルトで Kubernetes にデプロイ） を実行します。
-@z
-
-@x
-By default, Kubernetes containers are hidden from commands like `docker
-service ls`, because managing them manually is not supported. To make them
-visible, select **Show system containers (advanced)**. Most users do not need this option.
-@y
-デフォルトで Kubernetes コンテナーは`docker service ls`などのコマンドには現れません。
-手動で管理することがサポートされていないためです。
-コマンド上に表示させるためには、**Show system containers (advanced)** を実行します。
-ただしたいていのユーザーにとって、このオプションは不要です。
-@z
-
-@x
-Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
-@y
-**Apply & Restart** をクリックして設定を保存します。
-これによって Kubernetes サーバーをコンテナーとして実行するために必要となるイメージが初期化され、コマンド`kubectl.exe`が実行パスにインストールされます。
-@z
-
-@x
-- When Kubernetes is enabled and running, an additional status bar item displays
-at the bottom right of the Docker Desktop Settings dialog. The status of Kubernetes shows in the Docker menu and the context points to
-  `docker-desktop`.
-@y
-- Kubernetes が有効になって稼動していると、Docker Desktop の Settings 画面の下段右側に、新たにステータスバーが表示されます。
-  Kubernetes の状態は Docker メニューに表示され、context が`docker-desktop`を指します。
-@z
-
-@x
-- To disable Kubernetes support at any time, clear the **Enable Kubernetes** check box.
-  The Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
-@y
-- どの時点でも Kubernetes サポートを無効にするには、**Enable Kubernetes** チェックボックスをオフにします。
-  Kubernetes コンテナーが停止して削除されます。
-  そして`/usr/local/bin/kubectl`コマンドも削除されます。
-@z
-
-@x
-- To delete all stacks and Kubernetes resources, select **Reset Kubernetes Cluster**.
-@y
-- インストールされたスタックや Kubernetes リソースを削除するには、**Reset Kubernetes Cluster**（Kubernetes クラスターのリセット） を実行します。
-@z
-
-@x
-- If you installed `kubectl` by another method, and
-experience conflicts, remove it.
-@y
-- `kubectl`を別の方法でインストールしていて何か支障が発生したら、これを削除してください。
-@z
-
-@x
-  For more information on using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
-@y
-  Docker Desktop における Kubernetes 利用の詳細については [Kubernetes へのデプロイ](kubernetes.md) を参照してください。
-@z
-
-@x
-> Upgrade Kubernetes
->
-> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
-@y
-> Kubernetes のアップグレード
->
-> Docker Desktop を最新版に更新しても、Kubernetes クラスターは自動更新されません。
-> これを最新版にアップグレードするには **Reset Kubernetes Cluster**（Kubernetes クラスターのリセット）を実行してください。
+Docker Desktop における Kubernetes 統合機能の利用方法については [Kubernetes へのデプロイ](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x

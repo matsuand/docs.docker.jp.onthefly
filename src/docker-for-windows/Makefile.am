@@ -19,7 +19,6 @@ bases = \
 	edge-release-notes \
 	index              \
 	install            \
-	kubernetes         \
 	networking         \
 	release-notes      \
 	troubleshoot       \

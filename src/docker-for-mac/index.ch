@@ -525,123 +525,17 @@ Server: Docker Engine - Community
 
 @x
 Docker Desktop includes a standalone Kubernetes server that runs on your Mac, so
-that you can test deploying your Docker workloads on Kubernetes.
+that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 @y
 Docker Desktop には、Mac 上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。
 したがって Kubernetes 上に構築した Docker アプリをデプロイするテストができます。
+Kubernetes サポートの有効化と、Docker コンテナーとして起動するスタンドアロン Kubernetes インスタンスのインストールを行うためには、**Enable Kubernetes**（Kubernetes の有効化）を実行します。
 @z
 
 @x
-The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server. If you have `kubectl` already installed and
-pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-desktop`:
+For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 @y
-Kubernetes のクライアントコマンドである`kubectl`が提供されていて、ローカルの Kubernetes サーバーへの接続するように設定されています。
-`kubectl`をすでにインストールしていて、`minikube`や GKE クラスターといった別の環境に向いている場合は、その内容を変更して、`kubectl`が`docker-desktop`を向くようにしてください。
-@z
-
-@x
-```bash
-$ kubectl config get-contexts
-$ kubectl config use-context docker-desktop
-```
-@y
-```bash
-$ kubectl config get-contexts
-$ kubectl config use-context docker-desktop
-```
-@z
-
-@x
-If you installed `kubectl` with Homebrew, or by some other method, and
-experience conflicts, remove `/usr/local/bin/kubectl`.
-@y
-Homebrew あるいは別の方法により`kubectl`をインストールしていて、衝突が起きていたら`/usr/local/bin/kubectl`を削除してください。
-@z
-
-@x
-- To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes**. To set Kubernetes as the
-  [default orchestrator](kubernetes.md#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
-@y
-- Kubernetes サポートを有効にし、Docker コンテナーとして起動するスタンドアロンの Kubernetes インスタンスをインストールするには、**Enable Kubernetes** を選択します。
-  Kubernetes を [デフォルトのオーケストレーター](kubernetes.md#override-the-default-orchestrator) として設定する場合は、**Deploy Docker Stacks to Kubernetes by default** を選択します。
-@z
-
-@x
-   Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the
-  `/usr/local/bin/kubectl` command on your Mac.
-@y
-   **Apply & Restart** をクリックして設定を保存します。
-   これによって、Kubernetes サーバーをコンテナーとして起動するためのイメージがインスタンス化されます。
-   そして Mac 内に`/usr/local/bin/kubectl`コマンドがインストールされます。
-@z
-
-@x
-  ![Enable Kubernetes](images/kubernetes/kube.png){:width="750px"}
-@y
-  ![Kubernetes の有効化](images/kubernetes/kube.png){:width="750px"}
-@z
-
-@x
-  When Kubernetes is enabled and running, an additional status bar item displays
-  at the bottom right of the Docker Desktop Settings dialog.
-@y
-  Kubernetes が有効になって稼動していると、Docker Desktop の Settings 画面の下段右側に、新たにステータスバーが表示されます。
-@z
-
-@x
-  The status of Kubernetes shows in the Docker menu and the context points to
-  `docker-desktop`.
-@y
-  Kubernetes の状態は Docker メニューに表示され、context が`docker-desktop`を指します。
-@z
-
-@x
-  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
-@y
-  ![Docker メニュー上の Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
-@z
-
-@x
-- By default, Kubernetes containers are hidden from commands like `docker
-  service ls`, because managing them manually is not supported. To make them
-  visible, select **Show system containers (advanced)** and click **Apply and
-  Restart**. Most users do not need this option.
-@y
-- デフォルトで Kubernetes コンテナーは`docker service ls`などのコマンドには現れません。
-  手動で管理することがサポートされていないためです。
-  コマンド上に表示させるためには、**Show system containers (advanced)** を選択して **Apply and Restart** をクリックします。
-  ただしたいていのユーザーにとって、このオプションは不要です。
-@z
-
-@x
-- To disable Kubernetes support at any time, clear the **Enable Kubernetes** check box. The
-  Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
-@y
-- どの時点でも Kubernetes サポートを無効にするには、**Enable Kubernetes** チェックボックスをオフにします。
-  Kubernetes コンテナーが停止して削除されます。
-  そして`/usr/local/bin/kubectl`コマンドも削除されます。
-@z
-
-@x
-  For more about using the Kubernetes integration with Docker Desktop, see
-  [Deploy on Kubernetes](kubernetes.md){:target="_blank" rel="noopener" class="_"}.
-@y
-  Docker Desktop における Kubernetes 利用の詳細については [Kubernetes へのデプロイ](kubernetes.md){:target="_blank" rel="noopener" class="_"} を参照してください。
-@z
-
-@x
-> Upgrade Kubernetes
->
-> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset the Kubernetes Cluster**.
-@y
-> Kubernetes のアップグレード
->
-> Docker Desktop を最新版に更新しても、Kubernetes クラスターは自動更新されません。
-> これを最新版にアップグレードするには **Reset the Kubernetes Cluster**（Kubernetes クラスターのリセット）を実行してください。
+Docker Desktop における Kubernetes 統合機能の利用方法については [Kubernetes へのデプロイ](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"} を参照してください。
 @z
 
 @x
