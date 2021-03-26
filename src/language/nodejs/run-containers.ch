@@ -90,9 +90,9 @@ When you run this command, you’ll notice that you were not returned to the com
 @z
 
 @x
-Let’s make a GET request to the server using the curl command.
+Let’s open a new terminal then make a GET request to the server using the curl command.
 @y
-さてそこでこのサーバーに対して、curl コマンドを使って GET リクエストを行ってみます。
+さてそこで新たなターミナルを開いて、このサーバーに対して`curl`コマンドを使って`GET`リクエストを行ってみます。
 @z
 
 @x
@@ -158,9 +158,10 @@ $ docker run --publish 8000:8000 node-docker
 @z
 
 @x
-Now let’s rerun the curl command from above.
+Now let’s rerun the curl command from above. Remember to open a new terminal.
 @y
 そこで先ほどの curl コマンドを再度実行してみます。
+新しいターミナルを開くことを忘れないでください。
 @z
 
 @x

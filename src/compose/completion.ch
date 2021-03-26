@@ -25,8 +25,8 @@ Compose には bash 用あるいは zsh 用の [コマンド補完](https://en.w
 @x
 ## Install command completion
 @y
-## コマンド補完のインストール
 {: #install-command-completion }
+## コマンド補完のインストール
 @z
 
 @x
@@ -75,6 +75,13 @@ available.
 @z
 
 @x
+3. Reload your terminal. You can close and then open a new terminal, or reload your setting with `source ~/.bashrc` command in your current terminal.
+@y
+3. ターミナルを一新します。
+   具体的にはいったん閉じてから新たなターミナルを起動するか、あるいは現在のターミナルにおいて`source ~/.bashrc`コマンドを実行して設定をリロードします。
+@z
+
+@x
 #### Mac
 @y
 #### Mac
@@ -83,8 +90,8 @@ available.
 @x
 ##### Install via Homebrew
 @y
-##### Homebrew によるインストール
 {: #install-via-homebrew }
+##### Homebrew によるインストール
 @z
 
 @x
@@ -225,8 +232,8 @@ plugins=(... docker docker-compose)
 @x
 #### Without oh-my-zsh shell
 @y
-#### oh-my-zsh シェルがない場合
 {: #without-oh-my-zsh-shell }
+#### oh-my-zsh シェルがない場合
 @z
 
 @x
@@ -302,8 +309,8 @@ plugins=(... docker docker-compose)
 @x
 ## Available completions
 @y
-## 利用できる補完機能
 {: #available-completions }
+## 利用できる補完機能
 @z
 
 @x
@@ -322,9 +329,9 @@ Depending on what you typed on the command line so far, it completes:
  - 特定のコマンドにて利用可能なオプション。
  - 指定されているコンテキストにおいて用いられるサービス名。
    たとえば実行中サービス、停止中のインスタンス、イメージに基づくサービス、Dockerfile に基づくサービスなどです。
-   `docker-compose scale` では、サービス名が補完されると自動的に "=" が追加されます。
+   `docker-compose scale`では、サービス名が補完されると自動的に「=」が追加されます。
  - 指定されたオプションへの引数。
-   たとえば `docker-compose kill -s` に対して、シグナル名、たとえば SIGHUP や SIGUSR1 が補完されます。
+   たとえば`docker-compose kill -s`に対して、シグナル名、たとえば SIGHUP や SIGUSR1 が補完されます。
 @z
 
 @x
@@ -336,8 +343,8 @@ Compose での作業を、入力は速くミスは少なく！
 @x
 ## Compose documentation
 @y
-## Compose ドキュメント
 {: #compose-documentation }
+## Compose ドキュメント
 @z
 
 @x

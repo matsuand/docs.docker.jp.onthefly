@@ -120,7 +120,7 @@ To stop the container, press ctrl-c. This will return you to the terminal prompt
 @z
 
 @x
-To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 5000 inside the container to port 5000 outside the container, we would pass `3000:5000` to the `--publish` flag.
+To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 5000 inside the container to port 3000 outside the container, we would pass `3000:5000` to the `--publish` flag.
 @y
 コンテナーのポートを公開するには、`docker run`コマンドにおいて`--publish`フラグ（あるいは`-p`フラグ）を指定します。
 `--publish`フラグの書式は`[ホストポート]:[コンテナーポート]`です。

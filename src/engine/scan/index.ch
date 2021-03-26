@@ -37,7 +37,7 @@ Docker スキャンは Snyk エンジンを使って動作します。
 @z
 
 @x
-Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan result contains a list of Common Vulnerabilities and Exposures (CVEs), the source of the vulnerability, such as OS packages and libraries, version in which it was introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
+Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan results contain a list of Common Vulnerabilities and Exposures (CVEs), the sources, such as OS packages and libraries, versions in which they were introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
 @y
 ぜい弱性スキャンは CLI から起動し、CLI を使ってスキャン結果を確認します。
 スキャン結果は、ぜい弱性情報データベース CVE（Common Vulnerabilities and Exposures）の一覧として構成され、そこにはぜい弱性の発生源、つまり OS パッケージやライブラリなど、またぜい弱性が発生したバージョン、CVE によって検出された問題を修復するための推奨される修正バージョン（入手可能である場合）が示されます。

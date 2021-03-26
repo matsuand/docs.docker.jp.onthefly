@@ -1099,21 +1099,6 @@ look out for.
 @z
 
 @x
-Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
-packages from the parent images cannot upgrade inside an
-[unprivileged container](../../engine/reference/run.md#security-configuration). If a package
-contained in the parent image is out-of-date, contact its maintainers. If you
-know there is a particular package, `foo`, that needs to be updated, use
-`apt-get install -y foo` to update automatically.
-@y
-`RUN apt-get upgrade`や`dist-upgrade`の実行は避けてください。
-親イメージに含まれる重要パッケージは、[権限が与えられていないコンテナー](../../engine/reference/run.md#security-configuration) 内ではほとんど更新できないからです。
-親イメージ内のパッケージが古くなっていたら、開発者に連絡をとってください。
-`foo`というパッケージを更新する必要があれば`apt-get install -y foo`を利用してください。
-これによってパッケージは自動的に更新されます。
-@z
-
-@x
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 @y
