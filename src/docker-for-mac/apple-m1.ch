@@ -36,14 +36,14 @@ Docker Desktop の Apple Silicon 向け技術プレビューへようこそ。
 @z
 
 @x
-## Docker Desktop RC 1
+## Docker Desktop RC 2
 
-2021-03-18
+2021-03-26
 @y
-{: #docker-desktop-rc-1 }
-## Docker Desktop RC 1
+{: #docker-desktop-rc-2 }
+## Docker Desktop RC 2
 
-2021-03-18
+2021-03-26
 @z
 
 @x
@@ -53,9 +53,27 @@ Click on the following link to download the latest release candidate of Docker D
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/arm64/62029/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/arm64/62029/Docker.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
+@z
+
+@x
+In this build, we have defaulted to a `qemu`-based virtual machine, which we believe resolves some of the issues noted as known issues in the previous release candidate. You can switch between `qemu`-based and `virtualization.framework`-based virtual machines using the **Preferences** > **Experimental** tab.
+@y
+本ビルドにおいて`qemu`ベースの仮想マシンをデフォルトにしました。
+これによって前回のリリース候補において既知として示した問題をある程度解消できると考えています。
+`qemu`ベースと`virtualization.framework`ベースの仮想マシンは、**Preferences** > **Experimental** タブから変更できます。
+@z
+
+@x
+The backend that we choose for the GA release will depend on user feedback and bug reports. We are interested in your feedback on whether the known issues noted below are resolved with the `qemu` backend. We are equally interested in whether the `qemu` backend introduces other issues that we have not discovered in our in-house testing. Please help us by reporting any issues you have with this build, particularly in areas where your experience with the `qemu` backend is worse than the `virtualization.framework` backend.
+@y
+正規リリース版（GA release）に向けてどちらのバックエンドを選ぶかは、みなさんからのフィードバックやバグ報告の状況によって定めます。
+以降に示している既知の問題が`qemu`バックエンドの利用によって解消されるかどうか、みなさんからのフィードバックを見守っています。
+同じく`qemu`バックエンドを利用することにより、社内テストでは検出できていない別の問題が発生しないかどうかも注意しています。
+本ビルドによって問題が発生した場合には、ぜひ報告をお寄せください。
+特に`qemu`バックエンドが`virtualization.framework`バックエンドよりも劣る状況を見つけた場合にはご報告をよろしくお願いします。
 @z
 
 @x
@@ -66,10 +84,9 @@ Click on the following link to download the latest release candidate of Docker D
 @z
 
 @x
-The following issues are not expected to be resolved in the final GA build for Apple Silicon. We are working with our partners on these.
+The following issues are not expected to be resolved in the final GA build for Apple Silicon.
 @y
 以下に示す問題は、Apple Silicon 向けの最終的な正規安定版（general availability; GA）に含めることができない可能性があります。
-これらについては開発関係者とともに鋭意作業中です。
 @z
 
 @x
@@ -114,6 +131,12 @@ The following issues are not expected to be resolved in the final GA build for A
    We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
 @y
    [複数アーキテクチャーへのサポート](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/) が今後増えていくことが予想されるため、この問題はいずれ一般的なものではなくなると考えています。
+@z
+
+@x
+The following issues are seen when using the `virtualization.framework` back end.
+@y
+以下の問題は`virtualization.framework`バックエンドの利用時に発生すると思われます。
 @z
 
 @x
@@ -188,6 +211,20 @@ nux.
 @z
 
 @x
+### Fixes since Docker Desktop RC 1
+@y
+{: #fixes-since-docker-desktop-rc-1 }
+### Docker Desktop RC 1 以降の修正
+@z
+
+@x
+- Inter-container HTTP and HTTPS traffic is now routed correctly. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+@y
+- コンテナー間での HTTP および HTTPS トラフィックが正常にルーティングされるようになりました。
+  [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476) を Fix に。
+@z
+
+@x
 ### Fixes since Docker Desktop preview 3.1.0
 @y
 {: #fixes-since-docker-desktop-preview-310 }
@@ -202,6 +239,31 @@ nux.
 - HTTP プロキシー対応が機能するようになりました。
   TLS SNI による`no_proxy`ルールに基づいたドメイン名もサポートされます。
   [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732) を Fix に。
+@z
+
+@x
+### Fixes since the Apple Silicon preview 7
+@y
+{: #fixes-since-the-apple-silicon-preview-7 }
+### Apple Silicon プレビュー 7 以降の修正
+@z
+
+@x
+- Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
+- osxfs file sharing works.
+- The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve.
+- Removed hard-coded IP addresses: Docker Desktop now dynamically discovers the IP allocated by macOS.
+- The updated version includes a  change that should improve disk performance.
+- The **Restart** option in the Docker menu works.
+@y
+- Kubernetes が動作するようになりました。
+  （ただし資格情報を再生成するために、一度は Troubleshoot メニューにおいてクラスターをリセットする必要があるかもしれません。）
+- osxfs ファイル共有が動作するようになりました。
+- `host.docker.internal`と`vm.docker.internal`の DNS エントリーが解決されるようになりました。
+- ハードコーディングされていた IP アドレスを削除しました。
+  したがって Docker Desktop では macOS によって割り当てられた IP アドレスを動的に検出するようになりました。
+- 更新バージョンにはディスク性能を改善する変更を含みます。
+- Docker メニューの **Restart** オプションが動作するようになりました。
 @z
 
 @x
