@@ -211,6 +211,20 @@ nux.
 @z
 
 @x
+The following issues are seen when using the `qemu` backend.
+@y
+`qemu`バックエンドの利用時に以下の問題が発生します。
+@z
+
+@x
+- `ping` from inside a container to the Internet does not work as expected. To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+@y
+- コンテナー内部からインターネットに向けた`ping`が期待どおりには動作しません。
+  ネットワーク接続の確認には`curl`または`wget`を用いるようにしてください。
+  [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861) を参照のこと。
+@z
+
+@x
 ### Fixes since Docker Desktop RC 1
 @y
 {: #fixes-since-docker-desktop-rc-1 }
