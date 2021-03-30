@@ -48,7 +48,11 @@ for f in $list; do
                     if test -f $abs_publishdir/docker-hub/api/$base.yaml; then
                       echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/docker-hub/api/$base.yaml">>Makefile.sub
                     else
-                      echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change">>Makefile.sub
+                      if test -f $abs_publishdir/engine/api/$base.yaml; then
+                        echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change \$(abs_publishdir)/engine/api/$base.yaml">>Makefile.sub
+                      else
+                        echo "$dirname/$f: \$(origdir)/$f \$(srcdir)/$base.$change">>Makefile.sub
+                      fi
                     fi
                   fi
                 fi

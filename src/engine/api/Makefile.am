@@ -42,13 +42,17 @@ bases = \
 	v1.40 \
 	v1.41 \
 	version-history
+yamlbases = \
+	v1.41
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files
-EXTRA_DIST = $(ch_mds)
+ch_yamls = $(yamlbases:=.yamlch)
+tr_yamls = $(yamlbases:=.yaml)
+EXTRA_DIST = $(ch_mds) $(ch_yamls)
 #DISTCLEANFILES = 
 
-srcs = $(tr_mds)
+srcs = $(tr_mds) $(tr_yamls)
 srcs_with_prefix = ${addprefix $(publishdir)/,$(srcs)}
 
 .PHONY: tgtdir
@@ -56,32 +60,17 @@ tgtdir:
 	$(MKDIR_P) $(publishdir)
 
 -include Makefile.sub
-Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
-	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
+# Call ctiemake2.sh in this case because of the dependency for its yaml file
+# Be care ctiemake2.sh has three arguments!
+Makefile.sub: $(top_srcdir)/bin/ctiemake2.sh $(top_builddir)/config.log
+	@$(top_srcdir)/bin/ctiemake2.sh $(abs_publishdir) $(publishdir) $(srcs)
+	for f in $(yamlbases); do \
+	  sed -i -e "/$$f.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/$$f.yaml" $@; \
+	done
 
 @MAINT@.PHONY: chbuild
-@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
+@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds)) $(addprefix $(mysrcdir)/, $(ch_yamls))
 @MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(targetdir)/,$(srcs))
-#	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(targetdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-#	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-include $(top_srcdir)/rewriteurls.mk
-
-.PHONY: publishclean
-publishclean:
-	@for f in $(srcs); do rm -f ${publishdir}/$$f; done
+@MAINT@$(addprefix $(mysrcdir)/, $(ch_yamls)):
+@MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.yamlch$$|.yaml|"` $@; fi
