@@ -637,6 +637,7 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
 	sed -i -e "/docker_build.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_build.yaml" $@
 	sed -i -e "/docker_export.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_export.yaml" $@
+	sed -i -e "/docker_logs.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_logs.yaml" $@
 	sed -i -e "/docker_network_create.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_network_create.yaml" $@
 	sed -i -e "/docker_node_demote.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_demote.yaml" $@
 	sed -i -e "/docker_node_promote.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_node_promote.yaml" $@
@@ -651,34 +652,20 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	sed -i -e "/docker_secret_inspect.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_secret_inspect.yaml" $@
 	sed -i -e "/docker_secret_ls.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_secret_ls.yaml" $@
 	sed -i -e "/docker_secret_rm.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_secret_rm.yaml" $@
+	sed -i -e "/docker_service.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service.yaml" $@
+	sed -i -e "/docker_service_create.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_create.yaml" $@
 	sed -i -e "/docker_service_ls.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_ls.yaml" $@
+	sed -i -e "/docker_service_logs.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_logs.yaml" $@
+	sed -i -e "/docker_service_rm.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_rm.yaml" $@
+	sed -i -e "/docker_service_rollback.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_rollback.yaml" $@
+	sed -i -e "/docker_service_update.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_update.yaml" $@
+	sed -i -e "/docker_service_scale.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_service_scale.yaml" $@
 	sed -i -e "/docker_tag.yamlch >\/dev\/null/a \\\tsed -i -e \"s|__HOSTURL__|${HOSTURL}|g\" ${publishdir}\/docker_tag.yaml" $@
 
 @MAINT@.PHONY: chbuild
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_yamls))
 @MAINT@$(addprefix $(mysrcdir)/, $(ch_yamls)):
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.yamlch$$|.yaml|"` $@ yaml; fi
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(targetdir)/,$(srcs))
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(targetdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-.PHONY: rewriteurls
-rewriteurls:
-
-.PHONY: publishclean
-publishclean:
-	@for f in $(srcs); do rm -f ${publishdir}/$$f; done
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

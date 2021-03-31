@@ -6,7 +6,7 @@ command: docker service ps
 short: List the tasks of one or more services
 @y
 command: docker service ps
-short: List the tasks of one or more services
+short: 1 つまたは複数サービスのタスクを一覧表示します。
 @z
 
 @x
@@ -14,7 +14,7 @@ long: |-
   Lists the tasks that are running as part of the specified services.
 @y
 long: |-
-  Lists the tasks that are running as part of the specified services.
+  指定したサービスの一部として稼働しているタスクを一覧表示します。
 @z
 
 @x
@@ -25,12 +25,11 @@ long: |-
   > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
   > documentation.
 @y
-  > **Note**
+  > **メモ**
   >
-  > This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
-  > documentation.
+  > これはクラスター管理コマンドです。
+  > したがって Swarm 上のマネージャーノードにおいて実行する必要があります。
+  > マネージャーノードやワーカーノードについては、[Swarm モード](__HOSTURL__/engine/swarm/) を参照してください。
 @z
 
 @x
@@ -101,7 +100,7 @@ options:
 - option: no-resolve
   value_type: bool
   default_value: "false"
-  description: Do not map IDs to Names
+  description: ID から名前へのマッピングは行わないようにします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -160,24 +159,20 @@ examples: |-
   ### List the tasks that are part of a service
 @y
 examples: |-
-  ### List the tasks that are part of a service
+  {: #list-the-tasks-that-are-part-of-a-service }
+  ### 1 つのサービスに属するタスクの一覧表示
 @z
 
 @x
   The following command shows all the tasks that are part of the `redis` service:
 @y
-  The following command shows all the tasks that are part of the `redis` service:
+  以下のコマンドは`redis`サービスに属するタスクをすべて表示します。
 @z
 
 @x
   ```bash
   $ docker service ps redis
-@y
-  ```bash
-  $ docker service ps redis
-@z
 
-@x
   ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE          ERROR  PORTS
   0qihejybwf1x   redis.1   redis:3.0.5  manager1  Running        Running 8 seconds
   bk658fpbex0d   redis.2   redis:3.0.5  worker2   Running        Running 9 seconds
@@ -191,6 +186,9 @@ examples: |-
   8eaxrb2fqpbn   redis.10  redis:3.0.5  manager1  Running        Running 8 seconds
   ```
 @y
+  ```bash
+  $ docker service ps redis
+
   ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE          ERROR  PORTS
   0qihejybwf1x   redis.1   redis:3.0.5  manager1  Running        Running 8 seconds
   bk658fpbex0d   redis.2   redis:3.0.5  worker2   Running        Running 9 seconds
@@ -210,20 +208,14 @@ examples: |-
   example, after updating the service to use the `redis:3.0.6` image, the output
   may look like this:
 @y
-  In addition to _running_ tasks, the output also shows the task history. For
-  example, after updating the service to use the `redis:3.0.6` image, the output
-  may look like this:
+  **実行中の** タスクだけでなく、この出力にはタスク履歴も示されます。
+  たとえば`redis:3.0.6`イメージを利用するようにサービスを更新した後では、その出力は以下のようになります。
 @z
 
 @x
   ```bash
   $ docker service ps redis
-@y
-  ```bash
-  $ docker service ps redis
-@z
 
-@x
   ID            NAME         IMAGE        NODE      DESIRED STATE  CURRENT STATE                   ERROR  PORTS
   50qe8lfnxaxk  redis.1      redis:3.0.6  manager1  Running        Running 6 seconds ago
   ky2re9oz86r9   \_ redis.1  redis:3.0.5  manager1  Shutdown       Shutdown 8 seconds ago
@@ -236,6 +228,9 @@ examples: |-
   blkttv7zs8ee   \_ redis.4  redis:3.0.5  worker1   Shutdown       Shutdown 11 seconds ago
   ```
 @y
+  ```bash
+  $ docker service ps redis
+
   ID            NAME         IMAGE        NODE      DESIRED STATE  CURRENT STATE                   ERROR  PORTS
   50qe8lfnxaxk  redis.1      redis:3.0.6  manager1  Running        Running 6 seconds ago
   ky2re9oz86r9   \_ redis.1  redis:3.0.5  manager1  Shutdown       Shutdown 8 seconds ago
@@ -255,10 +250,8 @@ examples: |-
   change the task history retention limit using the
   [`docker swarm update`](swarm_update.md) command.
 @y
-  The number of items in the task history is determined by the
-  `--task-history-limit` option that was set when initializing the swarm. You can
-  change the task history retention limit using the
-  [`docker swarm update`](swarm_update.md) command.
+  タスク履歴内の項目数は、Swarm を初期化する際の`--task-history-limit`オプションによって設定されます。
+  タスク履歴を保持する制限は [`docker swarm update`](swarm_update.md) コマンドを使って変更することができます。
 @z
 
 @x
@@ -267,21 +260,17 @@ examples: |-
   default, but is printed if `--no-trunc` is used. The `--no-trunc` option
   also shows the non-truncated task ID, and error-messages, as can be seen below;
 @y
-  When deploying a service, docker resolves the digest for the service's
-  image, and pins the service to that digest. The digest is not shown by
-  default, but is printed if `--no-trunc` is used. The `--no-trunc` option
-  also shows the non-truncated task ID, and error-messages, as can be seen below;
+  サービスがデプロイされると、Docker はサービスイメージに対してのダイジェスト値を算出して、そのサービスのダイジェスト値を確定させます。
+  ダイジェスト値はデフォルトでは表示されません。
+  `--no-trunc`を用いれば表示されます。
+  `--no-trunc`オプションでは、省略されていないタスク ID、エラーメッセージも表示されます。
+  たとえば以下のとおりです。
 @z
 
 @x
   ```bash
   $ docker service ps --no-trunc redis
-@y
-  ```bash
-  $ docker service ps --no-trunc redis
-@z
 
-@x
   ID                          NAME         IMAGE                                                                                NODE      DESIRED STATE  CURRENT STATE            ERROR                                                                                           PORTS
   50qe8lfnxaxksi9w2a704wkp7   redis.1      redis:3.0.6@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842  manager1  Running        Running 5 minutes ago
   ky2re9oz86r9556i2szb8a8af   \_ redis.1   redis:3.0.5@sha256:f8829e00d95672c48c60f468329d6693c4bdd28d1f057e755f8ba8b40008682e  worker2   Shutdown       Shutdown 5 minutes ago
@@ -289,6 +278,9 @@ examples: |-
   nvjljf7rmor4htv7l8rwcx7i7   \_ redis.2   redis:3.0.6@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842  worker2   Shutdown       Rejected 5 minutes ago   "No such image: redis@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842"
   ```
 @y
+  ```bash
+  $ docker service ps --no-trunc redis
+
   ID                          NAME         IMAGE                                                                                NODE      DESIRED STATE  CURRENT STATE            ERROR                                                                                           PORTS
   50qe8lfnxaxksi9w2a704wkp7   redis.1      redis:3.0.6@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842  manager1  Running        Running 5 minutes ago
   ky2re9oz86r9556i2szb8a8af   \_ redis.1   redis:3.0.5@sha256:f8829e00d95672c48c60f468329d6693c4bdd28d1f057e755f8ba8b40008682e  worker2   Shutdown       Shutdown 5 minutes ago
@@ -310,11 +302,11 @@ examples: |-
   Multiple filter flags are combined as an `OR` filter. For example,
   `-f name=redis.1 -f name=redis.7` returns both `redis.1` and `redis.7` tasks.
 @y
-  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  フィルターフラグ（`-f`または`--filter`）の指定書式は「キー=値」というものです。
   複数のフィルターが必要な場合は、フラグを複数指定します。
-  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
-  複数のフィルターフラグは `OR` フィルターとして結合されます。
-  たとえば `-f name=redis.1 -f name=redis.7` は `redis.1` と `redis.7` の 2 つのタスクを返します。
+  （たとえば`--filter "foo=bar" --filter "bif=baz"`など。）
+  複数のフィルターフラグは`OR`フィルターとして結合されます。
+  たとえば`-f name=redis.1 -f name=redis.7`は`redis.1`と`redis.7`の 2 つのタスクを返します。
 @z
 
 @x
@@ -349,23 +341,21 @@ examples: |-
 @x
   The `id` filter matches on all or a prefix of a task's ID.
 @y
-  `id` フィルターは、タスク ID の全部またはそのプリフィックス部分を検索します。
+  `id`フィルターは、タスク ID の全部またはそのプリフィックス部分を検索します。
 @z
 
 @x
   ```bash
   $ docker service ps -f "id=8" redis
-@y
-  ```bash
-  $ docker service ps -f "id=8" redis
-@z
 
-@x
   ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE      ERROR  PORTS
   8ryt076polmc   redis.4   redis:3.0.6  worker1   Running        Running 9 seconds
   8eaxrb2fqpbn   redis.10  redis:3.0.6  manager1  Running        Running 8 seconds
   ```
 @y
+  ```bash
+  $ docker service ps -f "id=8" redis
+
   ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE      ERROR  PORTS
   8ryt076polmc   redis.4   redis:3.0.6  worker1   Running        Running 9 seconds
   8eaxrb2fqpbn   redis.10  redis:3.0.6  manager1  Running        Running 8 seconds
@@ -382,7 +372,7 @@ examples: |-
 @x
   The `name` filter matches on task names.
 @y
-  `name` フィルターは、タスク名を検索します。
+  `name`フィルターは、タスク名を検索します。
 @z
 
 @x
@@ -402,13 +392,14 @@ examples: |-
 @x
   #### node
 @y
-  #### node
+  {: #node }
+  #### node フィルター
 @z
 
 @x
   The `node` filter matches on a node name or a node ID.
 @y
-  The `node` filter matches on a node name or a node ID.
+  `node`フィルターはノード名またはノード ID を検索します。
 @z
 
 @x
@@ -434,13 +425,14 @@ examples: |-
 @x
   #### desired-state
 @y
-  #### desired-state
+  {: #desired-state }
+  #### desired-state フィルター
 @z
 
 @x
   The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
 @y
-  The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
+  `desired-state`フィルターには`running`、`shutdown`、`accepted`のいずれかを指定します。
 @z
 
 @x
@@ -477,14 +469,14 @@ examples: |-
 @y
   プレースホルダー | 内容説明
   ----------------|------------------------------------------------------------------------------------------
-  `.ID`           | Task ID
-  `.Name`         | Task name
-  `.Image`        | Task image
-  `.Node`         | Node ID
-  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
-  `.CurrentState` | Current state of the task
-  `.Error`        | Error
-  `.Ports`        | Task published ports
+  `.ID`           | タスク ID
+  `.Name`         | タスク名
+  `.Image`        | タスクイメージ
+  `.Node`         | ノード ID
+  `.DesiredState` | 期待されるタスク状態（`running`、`shutdown`、`accepted`）
+  `.CurrentState` | タスクの現在の状態
+  `.Error`        | エラー
+  `.Ports`        | タスクの公開ポート
 @z
 
 @x
@@ -492,15 +484,15 @@ examples: |-
   output the data exactly as the template declares or, when using the
   `table` directive, includes column headers as well.
 @y
-  `--format` オプションを利用すると `service ps` コマンドは、テンプレートが定めるデータを直接出力します。
-  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
+  `--format`オプションを利用すると`service ps`コマンドは、テンプレートが定めるデータを直接出力します。
+  また`table`ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 @z
 
 @x
   The following example uses a template without headers and outputs the
   `Name` and `Image` entries separated by a colon (`:`) for all tasks:
 @y
-  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける `Name`、`Image` の各項目がコロン（`:`）で区切って表示されます。
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける`Name`、`Image`の各項目がコロン（`:`）で区切って表示されます。
 @z
 
 @x

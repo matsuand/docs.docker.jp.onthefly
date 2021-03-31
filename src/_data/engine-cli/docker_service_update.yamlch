@@ -6,7 +6,7 @@ command: docker service update
 short: Update a service
 @y
 command: docker service update
-short: Update a service
+short: サービスを更新します。
 @z
 
 @x
@@ -16,31 +16,23 @@ long: |-
   there for further information.
 @y
 long: |-
-  Updates a service as described by the specified parameters. The parameters are
-  the same as [`docker service create`](service_create.md). Refer to the description
-  there for further information.
+  指定されたパラメーターによって表されるサービスのアップデートを行います。
+  このパラメーターは [`docker service create`](__HOSTURL__/engine/reference/commandline/service_create/) のものと同じです。
+  詳しい情報はそこでの説明を参照してください。
 @z
 
 @x
   Normally, updating a service will only cause the service's tasks to be replaced with new ones if a change to the
   service requires recreating the tasks for it to take effect. For example, only changing the
-@y
-  Normally, updating a service will only cause the service's tasks to be replaced with new ones if a change to the
-  service requires recreating the tasks for it to take effect. For example, only changing the
-@z
-
-@x
   `--update-parallelism` setting will not recreate the tasks, because the individual tasks are not affected by this
-@y
-  `--update-parallelism` setting will not recreate the tasks, because the individual tasks are not affected by this
-@z
-
-@x
   setting. However, the `--force` flag will cause the tasks to be recreated anyway. This can be used to perform a
   rolling restart without any changes to the service parameters.
 @y
-  setting. However, the `--force` flag will cause the tasks to be recreated anyway. This can be used to perform a
-  rolling restart without any changes to the service parameters.
+  サービスへの変更がタスクの再生成を必要とする場合、普通はサービスのアップデートを行うと、それまでのタスクが新たなタスクに置き換わるだけです。
+  たとえば`--update-parallelism`の設定を変更しただけであれば、タスクは再生成されません。
+  個々のタスクはこの設定に影響されないためです。
+  一方`--force`フラグであれば、タスクの再生成が発生します。
+  このフラグはローリングリスタート（rolling restart）を実施するために用いられるものなので、サービスパラメーターの変更の有無は関係がありません。
 @z
 
 @x
@@ -51,12 +43,11 @@ long: |-
   > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
   > documentation.
 @y
-  > **Note**
+  > **メモ**
   >
-  > This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
-  > documentation.
+  > これはクラスター管理コマンドです。
+  > したがって Swarm のマネージャーノード上で実行する必要があります。
+  > マネージャーノードとワーカーノードについては [Swarm モード](__HOSTURL__/engine/swarm/) の節を参照してください。
 @z
 
 @x
@@ -83,7 +74,7 @@ options:
 @y
 - option: args
   value_type: command
-  description: Service command args
+  description: サービスに対するコマンド引数
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -148,7 +139,7 @@ options:
 @y
 - option: config-add
   value_type: config
-  description: Add or update a config file on a service
+  description: サービスに対する設定ファイルを追加または更新します。
   deprecated: false
   min_api_version: "1.30"
   experimental: false
@@ -170,7 +161,7 @@ options:
 @y
 - option: config-rm
   value_type: list
-  description: Remove a configuration file
+  description: 設定ファイルを削除します。
   deprecated: false
   min_api_version: "1.30"
   experimental: false
@@ -191,7 +182,7 @@ options:
 @y
 - option: constraint-add
   value_type: list
-  description: Add or update a placement constraint
+  description: 配置に関する制約（placement constraint）を追加または更新します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -211,7 +202,7 @@ options:
 @y
 - option: constraint-rm
   value_type: list
-  description: Remove a constraint
+  description: 制約（constraint）を削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -272,7 +263,7 @@ options:
 @y
 - option: credential-spec
   value_type: credential-spec
-  description: Credential spec for managed service account (Windows only)
+  description: 管理サービスアカウントに対する資格情報スペック（Credential spec）。（Windows のみ）
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -300,7 +291,7 @@ options:
   value_type: bool
   default_value: "false"
   description: |
-    Exit immediately instead of waiting for the service to converge
+    サービス処理を待たずに即座に戻ります。
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -322,7 +313,7 @@ options:
 @y
 - option: dns-add
   value_type: list
-  description: Add or update a custom DNS server
+  description: カスタム DNS サーバーを追加または更新します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -344,7 +335,7 @@ options:
 @y
 - option: dns-option-add
   value_type: list
-  description: Add or update a DNS option
+  description: DNS オプションを追加または更新します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -366,7 +357,7 @@ options:
 @y
 - option: dns-option-rm
   value_type: list
-  description: Remove a DNS option
+  description: DNS オプションを削除します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -388,7 +379,7 @@ options:
 @y
 - option: dns-rm
   value_type: list
-  description: Remove a custom DNS server
+  description: カスタム DNS サーバーを削除します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -410,7 +401,7 @@ options:
 @y
 - option: dns-search-add
   value_type: list
-  description: Add or update a custom DNS search domain
+  description: カスタム DNS 検索ドメインを追加または削除します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -432,7 +423,7 @@ options:
 @y
 - option: dns-search-rm
   value_type: list
-  description: Remove a DNS search domain
+  description: DNS 検索ドメインを削除します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -453,7 +444,7 @@ options:
 @y
 - option: endpoint-mode
   value_type: string
-  description: Endpoint mode (vip or dnsrr)
+  description: エンドポイントモード（vip または dnsrr）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -513,7 +504,7 @@ options:
 @y
 - option: env-rm
   value_type: list
-  description: Remove an environment variable
+  description: 環境変数を削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -536,7 +527,7 @@ options:
 - option: force
   value_type: bool
   default_value: "false"
-  description: Force update even if no changes require it
+  description: 変更が不要であっても強制的に更新します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -557,7 +548,7 @@ options:
 @y
 - option: generic-resource-add
   value_type: list
-  description: Add a Generic resource
+  description: ジェネリックリソース（Generic resource）を追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -577,7 +568,7 @@ options:
 @y
 - option: generic-resource-rm
   value_type: list
-  description: Remove a Generic resource
+  description: ジェネリックリソース（Generic resource）を削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -622,7 +613,7 @@ options:
 - option: group-rm
   value_type: list
   description: |
-    Remove a previously added supplementary user group from the container
+    すでに追加されている補助ユーザーグループをコンテナーから削除します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -715,7 +706,6 @@ options:
   value_type: duration
   description: |
     ヘルスチェックのリトライを数え始める前の、コンテナー初期化を行う開始時間。(ms|s|m|h)
-    Start period for the container to initialize before counting retries towards unstable (ms|s|m|h)
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -759,7 +749,7 @@ options:
 @y
 - option: host-add
   value_type: list
-  description: Add a custom host-to-IP mapping (host:ip)
+  description: カスタムのホスト－IP 間マッピングを追加します。（host:ip）
   deprecated: false
   min_api_version: "1.32"
   experimental: false
@@ -781,7 +771,7 @@ options:
 @y
 - option: host-rm
   value_type: list
-  description: Remove a custom host-to-IP mapping (host:ip)
+  description: カスタムのホスト－IP 間マッピングを削除します。（host:ip）
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -803,7 +793,7 @@ options:
 @y
 - option: hostname
   value_type: string
-  description: Container hostname
+  description: コンテナーホスト名。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -824,7 +814,7 @@ options:
 @y
 - option: image
   value_type: string
-  description: Service image tag
+  description: サービスイメージタグ。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -892,7 +882,7 @@ options:
 @y
 - option: label-add
   value_type: list
-  description: Add or update a service label
+  description: サービスラベルを追加または更新します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -912,7 +902,7 @@ options:
 @y
 - option: label-rm
   value_type: list
-  description: Remove a label by its key
+  description: ラベルをそのキーを用いて削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -932,7 +922,7 @@ options:
 @y
 - option: limit-cpu
   value_type: decimal
-  description: Limit CPUs
+  description: CPU 数を制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -954,7 +944,7 @@ options:
 - option: limit-memory
   value_type: bytes
   default_value: "0"
-  description: Limit Memory
+  description: メモリ容量を制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1062,7 +1052,7 @@ options:
 @y
 - option: mount-add
   value_type: mount
-  description: Add or update a mount on a service
+  description: サービス上のマウントを追加または更新します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1082,7 +1072,7 @@ options:
 @y
 - option: mount-rm
   value_type: list
-  description: Remove a mount by its target path
+  description: マウントをそのターゲットパスを使って削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1103,7 +1093,7 @@ options:
 @y
 - option: network-add
   value_type: network
-  description: Add a network
+  description: ネットワークを追加します。
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -1125,7 +1115,7 @@ options:
 @y
 - option: network-rm
   value_type: list
-  description: Remove a network
+  description: ネットワークを削除します。
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -1175,7 +1165,7 @@ options:
   value_type: bool
   default_value: "false"
   description: |
-    Do not query the registry to resolve image digest and supported platforms
+    レジストリに対してイメージダイジェスト値や対応プラットフォームを確認しません。
   deprecated: false
   min_api_version: "1.30"
   experimental: false
@@ -1197,7 +1187,7 @@ options:
 @y
 - option: placement-pref-add
   value_type: pref
-  description: Add a placement preference
+  description: 配置設定（placement preference）を追加します。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1219,7 +1209,7 @@ options:
 @y
 - option: placement-pref-rm
   value_type: pref
-  description: Remove a placement preference
+  description: 配置設定（placement preference）を削除します。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1240,7 +1230,7 @@ options:
 @y
 - option: publish-add
   value_type: port
-  description: Add or update a published port
+  description: 公開ポートの追加または更新を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1260,7 +1250,7 @@ options:
 @y
 - option: publish-rm
   value_type: port
-  description: Remove a published port by its target port
+  description: 公開ポートをそのポート番号を指定して削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1328,7 +1318,7 @@ options:
 @y
 - option: replicas
   value_type: uint
-  description: Number of tasks
+  description: タスク数。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1351,7 +1341,7 @@ options:
 - option: replicas-max-per-node
   value_type: uint64
   default_value: "0"
-  description: Maximum number of tasks per node (default 0 = unlimited)
+  description: 各ノードごとの最大タスク数（デフォルトは 0 ＝無制限）。
   deprecated: false
   min_api_version: "1.40"
   experimental: false
@@ -1372,7 +1362,7 @@ options:
 @y
 - option: reserve-cpu
   value_type: decimal
-  description: Reserve CPUs
+  description: CPU の予約数。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1394,7 +1384,7 @@ options:
 - option: reserve-memory
   value_type: bytes
   default_value: "0"
-  description: Reserve Memory
+  description: メモリの予約容量。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1434,7 +1424,7 @@ options:
 @y
 - option: restart-delay
   value_type: duration
-  description: Delay between restart attempts (ns|us|ms|s|m|h)
+  description: 再起動実施の遅延時間（ns|us|ms|s|m|h）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1454,7 +1444,7 @@ options:
 @y
 - option: restart-max-attempts
   value_type: uint
-  description: Maximum number of restarts before giving up
+  description: 再起動の最大リトライ回数。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1474,7 +1464,7 @@ options:
 @y
 - option: restart-window
   value_type: duration
-  description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
+  description: 再起動ポリシーの評価に利用されるウィンドウ（ns|us|ms|s|m|h）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1497,7 +1487,7 @@ options:
 - option: rollback
   value_type: bool
   default_value: "false"
-  description: Rollback to previous specification
+  description: 前回スペックへのロールバック。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -1521,7 +1511,7 @@ options:
 - option: rollback-delay
   value_type: duration
   default_value: 0s
-  description: Delay between task rollbacks (ns|us|ms|s|m|h)
+  description: タスクロールバック時の遅延時間（ns|us|ms|s|m|h）。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1543,7 +1533,7 @@ options:
 @y
 - option: rollback-failure-action
   value_type: string
-  description: Action on rollback failure ("pause"|"continue")
+  description: ロールバック失敗時の処理（「pause」|「continue」）。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1567,7 +1557,7 @@ options:
 - option: rollback-max-failure-ratio
   value_type: float
   default_value: "0"
-  description: Failure rate to tolerate during a rollback
+  description: ロールバック時に許容される失敗率。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1593,7 +1583,7 @@ options:
   value_type: duration
   default_value: 0s
   description: |
-    Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h)
+    各タスクのロールバックが失敗しないかを監視する時間間隔（ns|us|ms|s|m|h）。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1615,7 +1605,7 @@ options:
 @y
 - option: rollback-order
   value_type: string
-  description: Rollback order ("start-first"|"stop-first")
+  description: ロールバック順（「start-first」|「stop-first」）。
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -1641,7 +1631,7 @@ options:
   value_type: uint64
   default_value: "0"
   description: |
-    Maximum number of tasks rolled back simultaneously (0 to roll back all at once)
+    同時にロールバックする最大タスク数（0 は全タスク同時）。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1663,7 +1653,7 @@ options:
 @y
 - option: secret-add
   value_type: secret
-  description: Add or update a secret on a service
+  description: サービスに Secret（機密情報）を追加または更新します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -1685,7 +1675,7 @@ options:
 @y
 - option: secret-rm
   value_type: list
-  description: Remove a secret
+  description: Secret（機密情報）を削除します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -1708,7 +1698,7 @@ options:
 - option: stop-grace-period
   value_type: duration
   description: |
-    Time to wait before force killing a container (ns|us|ms|s|m|h)
+    強制的にコンテナーを kill する際の待機時間（ns|us|ms|s|m|h）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1729,7 +1719,7 @@ options:
 @y
 - option: stop-signal
   value_type: string
-  description: Signal to stop the container
+  description: コンテナーを停止するためのシグナル。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -1868,7 +1858,7 @@ options:
 - option: update-delay
   value_type: duration
   default_value: 0s
-  description: Delay between updates (ns|us|ms|s|m|h)
+  description: 更新間の遅延時間（ns|us|ms|s|m|h）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1888,7 +1878,7 @@ options:
 @y
 - option: update-failure-action
   value_type: string
-  description: Action on update failure ("pause"|"continue"|"rollback")
+  description: 更新失敗時のアクション（「pause」|「continue」|「rollback」）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1911,7 +1901,7 @@ options:
 - option: update-max-failure-ratio
   value_type: float
   default_value: "0"
-  description: Failure rate to tolerate during an update
+  description: 更新時に許容される失敗率。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -1937,7 +1927,7 @@ options:
   value_type: duration
   default_value: 0s
   description: |
-    Duration after each task update to monitor for failure (ns|us|ms|s|m|h)
+    各タスクの更新が失敗しないかを監視する時間間隔（ns|us|ms|s|m|h）。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -1959,7 +1949,7 @@ options:
 @y
 - option: update-order
   value_type: string
-  description: Update order ("start-first"|"stop-first")
+  description: 更新順（「start-first」|「stop-first」）。
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -1984,7 +1974,7 @@ options:
   value_type: uint64
   default_value: "0"
   description: |
-    Maximum number of tasks updated simultaneously (0 to update all at once)
+    同時に更新する最大タスク数（0 は全タスク同時）。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -2006,7 +1996,7 @@ options:
 - option: user
   shorthand: u
   value_type: string
-  description: 'ユーザー名または UID。（記述書式t: <name|uid>[:<group|gid>]）'
+  description: 'ユーザー名または UID。（記述書式: <name|uid>[:<group|gid>]）'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -2028,7 +2018,7 @@ options:
 - option: with-registry-auth
   value_type: bool
   default_value: "false"
-  description: Send registry authentication details to swarm agents
+  description: レジストリ認証情報の詳細を Swarm エージェントに送信します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -2063,7 +2053,8 @@ examples: |-
   ### Update a service
 @y
 examples: |-
-  ### Update a service
+  {: #update-a-service }
+  ### サービスのアップデート
 @z
 
 @x
@@ -2079,7 +2070,8 @@ examples: |-
 @x
   ### Perform a rolling restart with no parameter changes
 @y
-  ### Perform a rolling restart with no parameter changes
+  {: #perform-a-rolling-restart-with-no-parameter-changes }
+  ### パラメーター変更が不要なローリングアップデート
 @z
 
 @x
@@ -2095,145 +2087,101 @@ examples: |-
 @x
   In this example, the `--force` flag causes the service's tasks to be shut down
   and replaced with new ones even though none of the other parameters would
-@y
-  In this example, the `--force` flag causes the service's tasks to be shut down
-  and replaced with new ones even though none of the other parameters would
-@z
-
-@x
   normally cause that to happen. The `--update-parallelism 1` setting ensures
   that only one task is replaced at a time (this is the default behavior). The
-@y
-  normally cause that to happen. The `--update-parallelism 1` setting ensures
-  that only one task is replaced at a time (this is the default behavior). The
-@z
-
-@x
   `--update-delay 30s` setting introduces a 30 second delay between tasks, so
   that the rolling restart happens gradually.
 @y
-  `--update-delay 30s` setting introduces a 30 second delay between tasks, so
-  that the rolling restart happens gradually.
+  上のコマンド例では`--force`フラグを利用することで、サービスタスクがいったん停止した上で、新たなものに置き換わります。
+  その他のパラメーターではこのようなことは発生しません。
+  `--update-parallelism 1`を指定すると、一度に置き換わるタスクはただ 1 つになります（これがデフォルトです）。
+  `--update-delay 30s`を指定すると、タスク処理間において 30 秒の遅延を生じさせます。
+  したがってローリングアップデートは徐々に行われることになります。
 @z
 
 @x
   ### Add or remove mounts
 @y
-  ### Add or remove mounts
+  {: #add-or-remove-mounts }
+  ### マウントの追加と削除
 @z
 
 @x
   Use the `--mount-add` or `--mount-rm` options add or remove a service's bind mounts
   or volumes.
 @y
-  Use the `--mount-add` or `--mount-rm` options add or remove a service's bind mounts
-  or volumes.
+  `--mount-add`または`--mount-rm`オプションは、サービスのバインドマウントやボリュームを追加または削除します。
 @z
 
 @x
   The following example creates a service which mounts the `test-data` volume to
-@y
-  The following example creates a service which mounts the `test-data` volume to
-@z
-
-@x
   `/somewhere`. The next step updates the service to also mount the `other-volume`
-@y
-  `/somewhere`. The next step updates the service to also mount the `other-volume`
-@z
-
-@x
   volume to `/somewhere-else`volume, The last step unmounts the `/somewhere` mount
-@y
-  volume to `/somewhere-else`volume, The last step unmounts the `/somewhere` mount
-@z
-
-@x
   point, effectively removing the `test-data` volume. Each command returns the
   service name.
 @y
-  point, effectively removing the `test-data` volume. Each command returns the
-  service name.
+  以下の例では、`test-data`ボリュームを`/somewhere`にマウントしたサービスが生成されます。
+  次の処理によって`other-volume`ボリュームを`/somewhere-else`ボリュームにマウントすることも行います。
+  そして最後にマウントポイント`/somewhere`をアンマウントします。
+  こうして`test-data`ボリュームを実際に削除します。
+  各コマンドでは戻り値としてサービス名が返されます。
 @z
 
 @x
   - The `--mount-add` flag takes the same parameters as the `--mount` flag on
-@y
-  - The `--mount-add` flag takes the same parameters as the `--mount` flag on
-@z
-
-@x
     `service create`. Refer to the [volumes and bind mounts](service_create.md#add-bind-mounts-volumes-or-memory-filesystems)
     section in the `service create` reference for details.
 @y
-    `service create`. Refer to the [volumes and bind mounts](service_create.md#add-bind-mounts-volumes-or-memory-filesystems)
-    section in the `service create` reference for details.
+  - `--mount-add`フラグは、`service create`コマンドにおける`--mount`フラグと同じパラメーターを指定します。
+    詳しくはコマンドリファレンス`service create`の [ボリュームとバインドマウント](__HOSTURL__/engine/reference/commandline/service_create/#add-bind-mounts-volumes-or-memory-filesystems) の節を参照してください。
 @z
 
 @x
   - The `--mount-rm` flag takes the `target` path of the mount.
 @y
-  - The `--mount-rm` flag takes the `target` path of the mount.
+  - `--mount-rm`フラグはマウントの`target`パスを引数に指定します。
 @z
 
 @x
   ```bash
   $ docker service create \
+      --name=myservice \
+      --mount type=volume,source=test-data,target=/somewhere \
+      nginx:alpine
+
+  myservice
 @y
   ```bash
   $ docker service create \
-@z
-
-@x
       --name=myservice \
-@y
-      --name=myservice \
-@z
-
-@x
       --mount type=volume,source=test-data,target=/somewhere \
       nginx:alpine
-@y
-      --mount type=volume,source=test-data,target=/somewhere \
-      nginx:alpine
-@z
 
-@x
-  myservice
-@y
   myservice
 @z
 
 @x
   $ docker service update \
+      --mount-add type=volume,source=other-volume,target=/somewhere-else \
+      myservice
+
+  myservice
 @y
   $ docker service update \
-@z
-
-@x
       --mount-add type=volume,source=other-volume,target=/somewhere-else \
       myservice
-@y
-      --mount-add type=volume,source=other-volume,target=/somewhere-else \
-      myservice
-@z
 
-@x
-  myservice
-@y
   myservice
 @z
 
 @x
   $ docker service update --mount-rm /somewhere myservice
-@y
-  $ docker service update --mount-rm /somewhere myservice
-@z
 
-@x
   myservice
   ```
 @y
+  $ docker service update --mount-rm /somewhere myservice
+
   myservice
   ```
 @z
@@ -2241,44 +2189,35 @@ examples: |-
 @x
   ### Add or remove published service ports
 @y
-  ### Add or remove published service ports
+  {: #add-or-remove-published-service-ports }
+  ### サービス公開ポートの追加と削除
 @z
 
 @x
   Use the `--publish-add` or `--publish-rm` flags to add or remove a published
   port for a service. You can use the short or long syntax discussed in the
-@y
-  Use the `--publish-add` or `--publish-rm` flags to add or remove a published
-  port for a service. You can use the short or long syntax discussed in the
-@z
-
-@x
   [docker service create](service_create.md#publish-service-ports-externally-to-the-swarm--p---publish)
   reference.
 @y
-  [docker service create](service_create.md#publish-service-ports-externally-to-the-swarm--p---publish)
-  reference.
+  `--publish-add`または`--publish-rm`フラグは、サービスの公開ポートを追加または削除します。
+  [docker service create](__HOSTURL__/engine/reference/commandline/service_create/#publish-service-ports-externally-to-the-swarm--p---publish) において示しているように、このときには短い文法と長い文法が利用できます。
 @z
 
 @x
   The following example adds a published service port to an existing service.
 @y
-  The following example adds a published service port to an existing service.
+  以下に示す例では、既存のサービスに対して公開ポートを追加します。
 @z
 
 @x
   ```bash
   $ docker service update \
-@y
-  ```bash
-  $ docker service update \
-@z
-
-@x
     --publish-add published=8080,target=80 \
     myservice
   ```
 @y
+  ```bash
+  $ docker service update \
     --publish-add published=8080,target=80 \
     myservice
   ```
@@ -2287,50 +2226,37 @@ examples: |-
 @x
   ### Add or remove network
 @y
-  ### Add or remove network
+  {: #add-or-remove-network }
+  ### ネットワークの追加と削除
 @z
 
 @x
   Use the `--network-add` or `--network-rm` flags to add or remove a network for
   a service. You can use the short or long syntax discussed in the
-@y
-  Use the `--network-add` or `--network-rm` flags to add or remove a network for
-  a service. You can use the short or long syntax discussed in the
-@z
-
-@x
   [docker service create](service_create.md#attach-a-service-to-an-existing-network---network)
   reference.
 @y
-  [docker service create](service_create.md#attach-a-service-to-an-existing-network---network)
-  reference.
+  `--network-add`または`--network-rm`フラグは、サービスに対してネットワークを追加または削除します。
+  [docker service create](__HOSTURL__/engine/reference/commandline/service_create/#attach-a-service-to-an-existing-network---network) において示しているように、このときには短い文法と長い文法が利用できます。
 @z
 
 @x
   The following example adds a new alias name to an existing service already connected to network my-network:
 @y
-  The following example adds a new alias name to an existing service already connected to network my-network:
+  以下の例では、すでに my-network というネットワークに接続済のサービスに対して、新たにエイリアス名を追加します。
 @z
 
 @x
   ```bash
   $ docker service update \
-@y
-  ```bash
-  $ docker service update \
-@z
-
-@x
     --network-rm my-network \
-@y
-    --network-rm my-network \
-@z
-
-@x
     --network-add name=my-network,alias=web1 \
     myservice
   ```
 @y
+  ```bash
+  $ docker service update \
+    --network-rm my-network \
     --network-add name=my-network,alias=web1 \
     myservice
   ```
@@ -2339,202 +2265,146 @@ examples: |-
 @x
   ### Roll back to the previous version of a service
 @y
-  ### Roll back to the previous version of a service
+  {: #roll-back-to-the-previous-version-of-a-service }
+  ### サービスの前バージョンへのロールバック
 @z
 
 @x
   Use the `--rollback` option to roll back to the previous version of the service.
 @y
-  Use the `--rollback` option to roll back to the previous version of the service.
+  `--rollback`オプションは、サービスの前バージョンへのロールバックを行います。
 @z
 
 @x
   This will revert the service to the configuration that was in place before the most recent `docker service update` command.
 @y
-  This will revert the service to the configuration that was in place before the most recent `docker service update` command.
+  このコマンドの実行後は、最後に`docker service update`コマンドを実行した直前の設定状態に戻ります。
 @z
 
 @x
   The following example updates the number of replicas for the service from 4 to 5, and then rolls back to the previous configuration.
 @y
-  The following example updates the number of replicas for the service from 4 to 5, and then rolls back to the previous configuration.
+  以下の例では、サービスのレプリカ数を 4 から 5 に変更します。
+  その次に元の設定状態にロールバックします。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker service update --replicas=5 web
-@y
-  $ docker service update --replicas=5 web
-@z
 
-@x
   web
-@y
-  web
-@z
 
-@x
   $ docker service ls
-@y
-  $ docker service ls
-@z
 
-@x
   ID            NAME  MODE        REPLICAS  IMAGE
   80bvrzp6vxf3  web   replicated  0/5       nginx:alpine
+
+  ```
 @y
+  ```bash
+  $ docker service update --replicas=5 web
+
+  web
+
+  $ docker service ls
+
   ID            NAME  MODE        REPLICAS  IMAGE
   80bvrzp6vxf3  web   replicated  0/5       nginx:alpine
+
+  ```
 @z
 
 @x
-  ```
   Roll back the `web` service...
 @y
-  ```
-  Roll back the `web` service...
+  `web`サービスをロールバックします。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker service update --rollback web
-@y
-  $ docker service update --rollback web
-@z
 
-@x
   web
-@y
-  web
-@z
 
-@x
   $ docker service ls
-@y
-  $ docker service ls
-@z
 
-@x
   ID            NAME  MODE        REPLICAS  IMAGE
   80bvrzp6vxf3  web   replicated  0/4       nginx:alpine
-@y
-  ID            NAME  MODE        REPLICAS  IMAGE
-  80bvrzp6vxf3  web   replicated  0/4       nginx:alpine
-@z
 
-@x
   ```
 @y
+  ```bash
+  $ docker service update --rollback web
+
+  web
+
+  $ docker service ls
+
+  ID            NAME  MODE        REPLICAS  IMAGE
+  80bvrzp6vxf3  web   replicated  0/4       nginx:alpine
+
   ```
 @z
 
 @x
   Other options can be combined with `--rollback` as well, for example, `--update-delay 0s` to execute the rollback without a delay between tasks:
 @y
-  Other options can be combined with `--rollback` as well, for example, `--update-delay 0s` to execute the rollback without a delay between tasks:
+  `--rollback`オプションでは別のオプションを併用することができます。
+  たとえば`--update-delay 0s`を指定すると、タスクごとのロールバック処理を遅延なく実施します。
 @z
 
 @x
   ```bash
   $ docker service update \
-@y
-  ```bash
-  $ docker service update \
-@z
-
-@x
     --rollback \
-@y
-    --rollback \
-@z
-
-@x
     --update-delay 0s
     web
-@y
-    --update-delay 0s
-    web
-@z
 
-@x
   web
-@y
-  web
-@z
 
-@x
   ```
 @y
+  ```bash
+  $ docker service update \
+    --rollback \
+    --update-delay 0s
+    web
+
+  web
+
   ```
 @z
 
 @x
   Services can also be set up to roll back to the previous version automatically
   when an update fails. To set up a service for automatic rollback, use
-@y
-  Services can also be set up to roll back to the previous version automatically
-  when an update fails. To set up a service for automatic rollback, use
-@z
-
-@x
   `--update-failure-action=rollback`. A rollback will be triggered if the fraction
   of the tasks which failed to update successfully exceeds the value given with
-@y
-  `--update-failure-action=rollback`. A rollback will be triggered if the fraction
-  of the tasks which failed to update successfully exceeds the value given with
-@z
-
-@x
   `--update-max-failure-ratio`.
 @y
-  `--update-max-failure-ratio`.
+  サービスが更新に失敗したときには、自動的に前バージョンにロールバックするように設定することもできます。
+  サービスを自動ロールバックするように設定するには`--update-failure-action=rollback`を指定します。
+  タスクの一部に更新に失敗するものが発生した際に、その数が`--update-max-failure-ratio`により指定した値を超えた場合には、ロールバック処理が起動します。
 @z
 
 @x
   The rate, parallelism, and other parameters of a rollback operation are
   determined by the values passed with the following flags:
 @y
-  The rate, parallelism, and other parameters of a rollback operation are
-  determined by the values passed with the following flags:
+  ロールバック処理においては発生率、並行処理などに関するパラメーターがあり、以下に示すフラグ値により制御されます。
 @z
 
 @x
   - `--rollback-delay`
-@y
-  - `--rollback-delay`
-@z
-
-@x
   - `--rollback-failure-action`
-@y
-  - `--rollback-failure-action`
-@z
-
-@x
   - `--rollback-max-failure-ratio`
-@y
-  - `--rollback-max-failure-ratio`
-@z
-
-@x
   - `--rollback-monitor`
-@y
-  - `--rollback-monitor`
-@z
-
-@x
   - `--rollback-parallelism`
 @y
+  - `--rollback-delay`
+  - `--rollback-failure-action`
+  - `--rollback-max-failure-ratio`
+  - `--rollback-monitor`
   - `--rollback-parallelism`
 @z
 
@@ -2542,57 +2412,43 @@ examples: |-
   For example, a service set up with `--update-parallelism 1 --rollback-parallelism 3`
   will update one task at a time during a normal update, but during a rollback, 3
   tasks at a time will get rolled back. These rollback parameters are respected both
-@y
-  For example, a service set up with `--update-parallelism 1 --rollback-parallelism 3`
-  will update one task at a time during a normal update, but during a rollback, 3
-  tasks at a time will get rolled back. These rollback parameters are respected both
-@z
-
-@x
   during automatic rollbacks and for rollbacks initiated manually using `--rollback`.
 @y
-  during automatic rollbacks and for rollbacks initiated manually using `--rollback`.
+  たとえば`--update-parallelism 1 --rollback-parallelism 3`として設定されたサービスでは、通常のアップデート間隔において一度に 1 つのタスクのみ更新され、ロールバック処理時には 3 つのタスクが同時にロールバックされます。
+  これらのパラメーターは、自動ロールバック時および`--rollback`を指定した手動ロールバック時のいずれにおいても作用します。
 @z
 
 @x
   ### Add or remove secrets
 @y
-  ### Add or remove secrets
+  {: #add-or-remove-secrets }
+  ### Secret の追加と削除
 @z
 
 @x
   Use the `--secret-add` or `--secret-rm` options add or remove a service's
   secrets.
 @y
-  Use the `--secret-add` or `--secret-rm` options add or remove a service's
-  secrets.
+  `--secret-add`および`--secret-rm`オプションは、サービスの Secret（機密情報）の追加または削除を行います。
 @z
 
 @x
   The following example adds a secret named `ssh-2` and removes `ssh-1`:
 @y
-  The following example adds a secret named `ssh-2` and removes `ssh-1`:
+  以下に示す例は`ssh-2`という Secret を追加し、`ssh-1`という Secret を削除します。
 @z
 
 @x
   ```bash
   $ docker service update \
-@y
-  ```bash
-  $ docker service update \
-@z
-
-@x
       --secret-add source=ssh-2,target=ssh-2 \
-@y
-      --secret-add source=ssh-2,target=ssh-2 \
-@z
-
-@x
       --secret-rm ssh-1 \
       myservice
   ```
 @y
+  ```bash
+  $ docker service update \
+      --secret-add source=ssh-2,target=ssh-2 \
       --secret-rm ssh-1 \
       myservice
   ```
@@ -2601,39 +2457,42 @@ examples: |-
 @x
   ### Update services using templates
 @y
-  ### Update services using templates
+  {: #update-services-using-templates }
+  ### テンプレート利用によるサービスアップデート
 @z
 
 @x
   Some flags of `service update` support the use of templating.
 @y
-  Some flags of `service update` support the use of templating.
+  `service update`のフラグの中にはテンプレートの利用をサポートするものがあります。
 @z
 
 @x
   See [`service create`](service_create.md#create-services-using-templates) for the reference.
 @y
-  See [`service create`](service_create.md#create-services-using-templates) for the reference.
+  詳しくは [`service create`](__HOSTURL__/engine/reference/commandline/service_create/#create-services-using-templates) を参照してください。
 @z
 
 @x
   ### Specify isolation mode (Windows)
 @y
-  ### Specify isolation mode (Windows)
+  {: #specify-isolation-mode-windows }
+  ### 分離モードの設定（Windows）
 @z
 
 @x
   `service update` supports the same `--isolation` flag as `service create`
   See [`service create`](service_create.md) for the reference.
 @y
-  `service update` supports the same `--isolation` flag as `service create`
-  See [`service create`](service_create.md) for the reference.
+  `service update`では`service create`と同様に`--isolation`フラグをサポートしています。
+  その利用方法は [`service create`](__HOSTURL__/engine/reference/commandline/service_create/) を参照してください。
 @z
 
 @x
   ### Updating Jobs
 @y
-  ### Updating Jobs
+  {: #updating-jobs }
+  ### ジョブのアップデート
 @z
 
 @x
@@ -2641,9 +2500,8 @@ examples: |-
   to `global-job` when doing `service create`, options for updating it are
   limited.
 @y
-  When a service is created as a job, by setting its mode to `replicated-job` or
-  to `global-job` when doing `service create`, options for updating it are
-  limited.
+  サービスがジョブとして生成されるのは、`service create`の実行時にサービスモードが`replicated-job`か`global-job`に設定されたときです。
+  このときにはサービス更新を行うオプションが制限されます。
 @z
 
 @x
@@ -2652,26 +2510,24 @@ examples: |-
   status. If any Tasks were running before the update, they are stopped, and new
   Tasks are created.
 @y
-  Updating a Job immediately stops any Tasks that are in progress. The operation
-  creates a new set of Tasks for the job and effectively resets its completion
-  status. If any Tasks were running before the update, they are stopped, and new
-  Tasks are created.
+  ジョブを更新すると、実行中のタスクは即座に停止します。
+  この処理によってジョブに対する新たなタスクが生成され、各タスクの完了ステータスが初期化されます。
+  更新処理前に稼働していたタスクは停止され、新たなタスクとして再生成されます。
 @z
 
 @x
   Jobs cannot be rolled out or rolled back. None of the flags for configuring
   update or rollback settings are valid with job modes.
 @y
-  Jobs cannot be rolled out or rolled back. None of the flags for configuring
-  update or rollback settings are valid with job modes.
+  ジョブはロールアウトやロールバックを行うことはできません。
+  更新やロールバックを設定する各種設定は、ジョブモードにおいては無効となります。
 @z
 
 @x
   To run a job again with the same parameters that it was run previously, it can
   be force updated with the `--force` flag.
 @y
-  To run a job again with the same parameters that it was run previously, it can
-  be force updated with the `--force` flag.
+  それまで稼働していたジョブを同一パラメーターにより再起動するには、`--force`フラグをつけて更新操作を行います。
 @z
 
 @x

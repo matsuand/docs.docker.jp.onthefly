@@ -6,7 +6,7 @@ command: docker service rollback
 short: Revert changes to a service's configuration
 @y
 command: docker service rollback
-short: Revert changes to a service's configuration
+short: サービス設定に対しての変更を元に戻します。
 @z
 
 @x
@@ -14,7 +14,7 @@ long: |-
   Roll back a specified service to its previous version from the swarm.
 @y
 long: |-
-  Roll back a specified service to its previous version from the swarm.
+  Swarm 内の指定したサービスを、以前のバージョンにロールバックします。
 @z
 
 @x
@@ -24,18 +24,21 @@ long: |-
   > manager node. To learn about managers and workers, refer to the
   > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
   > documentation.
+@y
+  > **メモ**
+  >
+  > これはクラスター管理コマンドです。
+  > したがって Swarm のマネージャーノード上で実行する必要があります。
+  > マネージャーノードとワーカーノードについては [Swarm モード](__HOSTURL__/engine/swarm/) の節を参照してください。
+@z
+
+@x
 usage: docker service rollback [OPTIONS] SERVICE
 pname: docker service
 plink: docker_service.yaml
 options:
 @y
-  > **Note**
-  >
-  > This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
-  > documentation.
-usage: docker service rollback [OPTIONS] SERVICE
+usage: docker service rollback [オプション] SERVICE
 pname: docker service
 plink: docker_service.yaml
 options:
@@ -46,14 +49,6 @@ options:
   shorthand: d
   value_type: bool
   default_value: "false"
-@y
-- option: detach
-  shorthand: d
-  value_type: bool
-  default_value: "false"
-@z
-
-@x
   description: |
     Exit immediately instead of waiting for the service to converge
   deprecated: false
@@ -63,8 +58,12 @@ options:
   kubernetes: false
   swarm: false
 @y
+- option: detach
+  shorthand: d
+  value_type: bool
+  default_value: "false"
   description: |
-    Exit immediately instead of waiting for the service to converge
+    サービス終了を待たずに即座に戻ります。
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -102,7 +101,8 @@ examples: |-
   ### Roll back to the previous version of a service
 @y
 examples: |-
-  ### Roll back to the previous version of a service
+  {: #roll-back-to-the-previous-version-of-a-service }
+  ### サービスの前バージョンへのロールバック
 @z
 
 @x
@@ -111,10 +111,8 @@ examples: |-
   configuration that was in place before the most recent `docker service update`
   command.
 @y
-  Use the `docker service rollback` command to roll back to the previous version
-  of a service. After executing this command, the service is reverted to the
-  configuration that was in place before the most recent `docker service update`
-  command.
+  `docker service rollback`コマンドを使えば、サービスを前バージョンに戻すことができます。
+  このコマンドの実行後は、最後に`docker service update`コマンドを実行した直前の設定状態に戻ります。
 @z
 
 @x
@@ -122,27 +120,24 @@ examples: |-
   service to use three replicas, and then rolls back the service to the
   previous version, having one replica.
 @y
-  The following example creates a service with a single replica, updates the
-  service to use three replicas, and then rolls back the service to the
-  previous version, having one replica.
+  以下の利用例では、1 つのレプリカからなる 1 つのサービスを生成します。
+  そして 3 つのレプリカを利用するようにアップデートします。
+  その後に、このサービスを前バージョンにロールバックします。
+  これによりレプリカ数は 1 に戻ります。
 @z
 
 @x
   Create a service with a single replica:
 @y
-  Create a service with a single replica:
+  まず 1 つのレプリカからなる 1 つのサービスを生成します。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker service create --name my-service -p 8080:80 nginx:alpine
   ```
 @y
+  ```bash
   $ docker service create --name my-service -p 8080:80 nginx:alpine
   ```
 @z
@@ -150,27 +145,21 @@ examples: |-
 @x
   Confirm that the service is running with a single replica:
 @y
-  Confirm that the service is running with a single replica:
+  このサービスが 1 つのレプリカにより実行していることを確認します。
 @z
 
 @x
   ```bash
   $ docker service ls
-@y
-  ```bash
-  $ docker service ls
-@z
 
-@x
   ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-@y
-  ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-@z
-
-@x
   xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        *:8080->80/tcp
   ```
 @y
+  ```bash
+  $ docker service ls
+
+  ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
   xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        *:8080->80/tcp
   ```
 @z
@@ -178,37 +167,25 @@ examples: |-
 @x
   Update the service to use three replicas:
 @y
-  Update the service to use three replicas:
+  次にこのサービスのレプリカ数を 3 にアップデートします。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker service update --replicas=3 my-service
-@y
-  $ docker service update --replicas=3 my-service
-@z
 
-@x
   $ docker service ls
-@y
-  $ docker service ls
-@z
 
-@x
   ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-@y
-  ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-@z
-
-@x
   xbw728mf6q0d        my-service          replicated          3/3                 nginx:alpine        *:8080->80/tcp
   ```
 @y
+  ```bash
+  $ docker service update --replicas=3 my-service
+
+  $ docker service ls
+
+  ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
   xbw728mf6q0d        my-service          replicated          3/3                 nginx:alpine        *:8080->80/tcp
   ```
 @z
@@ -217,37 +194,31 @@ examples: |-
   Now roll back the service to its previous version, and confirm it is
   running a single replica again:
 @y
-  Now roll back the service to its previous version, and confirm it is
-  running a single replica again:
+  そしてこのサービスを前バージョンにロールバックします。
+  確認してみると、再度レプリカ数が 1 になっていることがわかります。
 @z
 
 @x
   ```bash
-@y
-  ```bash
-@z
-
-@x
   $ docker service rollback my-service
-@y
-  $ docker service rollback my-service
-@z
 
-@x
   $ docker service ls
-@y
-  $ docker service ls
-@z
 
-@x
   ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-@y
-  ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-@z
-
-@x
   xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        *:8080->80/tcp
   ```
+@y
+  ```bash
+  $ docker service rollback my-service
+
+  $ docker service ls
+
+  ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+  xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        *:8080->80/tcp
+  ```
+@z
+
+@x
 deprecated: false
 min_api_version: "1.31"
 experimental: false
@@ -255,8 +226,6 @@ experimentalcli: false
 kubernetes: false
 swarm: true
 @y
-  xbw728mf6q0d        my-service          replicated          1/1                 nginx:alpine        *:8080->80/tcp
-  ```
 deprecated: false
 min_api_version: "1.31"
 experimental: false

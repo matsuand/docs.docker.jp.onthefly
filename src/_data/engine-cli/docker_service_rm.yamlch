@@ -8,7 +8,7 @@ short: Remove one or more services
 @y
 command: docker service rm
 aliases: remove
-short: Remove one or more services
+short: 1 つまたは複数のサービスを削除します。
 @z
 
 @x
@@ -16,7 +16,7 @@ long: |-
   Removes the specified services from the swarm.
 @y
 long: |-
-  Removes the specified services from the swarm.
+  Swarm から指定したサービスを削除します。
 @z
 
 @x
@@ -26,16 +26,19 @@ long: |-
   > manager node. To learn about managers and workers, refer to the
   > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
   > documentation.
+@y
+  > **メモ**
+  >
+  > これはクラスター管理コマンドです。
+  > したがって Swarm のマネージャーノード上で実行する必要があります。
+  > マネージャーノードとワーカーノードについては [Swarm モード](__HOSTURL__/engine/swarm/) の節を参照してください。
+@z
+
+@x
 usage: docker service rm SERVICE [SERVICE...]
 pname: docker service
 plink: docker_service.yaml
 @y
-  > **Note**
-  >
-  > This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
-  > documentation.
 usage: docker service rm SERVICE [SERVICE...]
 pname: docker service
 plink: docker_service.yaml
@@ -46,33 +49,27 @@ examples: |-
   Remove the `redis` service:
 @y
 examples: |-
-  Remove the `redis` service:
+  以下は`redis`サービスを削除します。
 @z
 
 @x
   ```bash
   $ docker service rm redis
-@y
-  ```bash
-  $ docker service rm redis
-@z
 
-@x
   redis
-@y
-  redis
-@z
 
-@x
   $ docker service ls
-@y
-  $ docker service ls
-@z
 
-@x
   ID  NAME  MODE  REPLICAS  IMAGE
   ```
 @y
+  ```bash
+  $ docker service rm redis
+
+  redis
+
+  $ docker service ls
+
   ID  NAME  MODE  REPLICAS  IMAGE
   ```
 @z
@@ -82,6 +79,13 @@ examples: |-
   >
   > Unlike `docker rm`, this command does not ask for confirmation before removing
   > a running service.
+@y
+  > **警告**
+  >
+  > `docker rm`の場合と違って、このコマンドは実行サービスを削除する際に削除確認を行いません。
+@z
+
+@x
 deprecated: false
 min_api_version: "1.24"
 experimental: false
@@ -89,10 +93,6 @@ experimentalcli: false
 kubernetes: false
 swarm: true
 @y
-  > **Warning**
-  >
-  > Unlike `docker rm`, this command does not ask for confirmation before removing
-  > a running service.
 deprecated: false
 min_api_version: "1.24"
 experimental: false
