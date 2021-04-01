@@ -7,7 +7,7 @@ title: View the docs archives
 ---
 @y
 ---
-title: View the docs archives
+title: ドキュメントアーカイブの参照
 ---
 @z
 
@@ -15,14 +15,13 @@ title: View the docs archives
 This page lists the various ways you can view the docs as they were when a
 prior version of Docker was shipped.
 @y
-This page lists the various ways you can view the docs as they were when a
-prior version of Docker was shipped.
+ここでは、かつて Docker が公開した過去のドキュメントを参照する方法について説明します。
 @z
 
 @x
 To view the docs offline on your local machine, run:
 @y
-To view the docs offline on your local machine, run:
+ローカルマシンにおいてオフラインでドキュメントを参照するには以下を実行します。
 @z
 
 @x
@@ -31,22 +30,22 @@ docker run -ti -p 4000:4000 {{ archive.image }}
 ```
 @y
 ```
-docker run -ti -p 4000:4000 {{ archive.image }}
+docker run -ti -p 4000:4000 docs/docker.github.io:latest
 ```
 @z
 
 @x
 ## Accessing unsupported archived documentation
 @y
-## Accessing unsupported archived documentation
+{: #accessing-unsupported-archived-documentation }
+## サポートされていないアーカイブドキュメントへのアクセス
 @z
 
 @x
 If you are using a version of the documentation that is no longer supported,
 you can still access that documentation in the following ways:
 @y
-If you are using a version of the documentation that is no longer supported,
-you can still access that documentation in the following ways:
+利用するドキュメントがもうサポートされていない場合でも、以下の方法によってそういったドキュメントにアクセスすることができます。
 @z
 
 @x
@@ -55,10 +54,11 @@ you can still access that documentation in the following ways:
 - By running a container of the specific [tag for your documentation version](https://hub.docker.com/r/docs/docker.github.io)
   in Docker Hub. For example, run the following to access `v1.9`:
 @y
-- By entering your version number and selecting it from the branch selection list for this repo
-- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9`
-- By running a container of the specific [tag for your documentation version](https://hub.docker.com/r/docs/docker.github.io)
-  in Docker Hub. For example, run the following to access `v1.9`:
+- バージョン番号を入力することで、リポジトリのブランチリストの中からそのバージョンを選びます。
+- GitHub URL に対してそのバージョンを直接アクセスします。
+  たとえば`v1.9`であれば https://github.com/docker/docker.github.io/tree/v1.9 とします。
+- Docker Hub の中から、[そのドキュメントバージョンのタグ](https://hub.docker.com/r/docs/docker.github.io) を指定したコンテナーを起動します。
+  たとえば`v1.9`であれば以下のように実行します。
 @z
 
 @x
