@@ -36,14 +36,14 @@ Docker Desktop の Apple Silicon 向け技術プレビューへようこそ。
 @z
 
 @x
-## Docker Desktop RC 2
+## Docker Desktop RC 3
 
-2021-03-26
+2021-04-01
 @y
-{: #docker-desktop-rc-2 }
-## Docker Desktop RC 2
+{: #docker-desktop-rc-3 }
+## Docker Desktop RC 3
 
-2021-03-26
+2021-04-01
 @z
 
 @x
@@ -53,9 +53,9 @@ Click on the following link to download the latest release candidate of Docker D
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/62632/Docker.dmg)
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/stable/arm64/62632/Docker.dmg)
 @z
 
 @x
@@ -222,6 +222,19 @@ The following issues are seen when using the `qemu` backend.
 - コンテナー内部からインターネットに向けた`ping`が期待どおりには動作しません。
   ネットワーク接続の確認には`curl`または`wget`を用いるようにしてください。
   [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861) を参照のこと。
+@z
+
+@x
+### Fixes since Docker Desktop RC 2
+@y
+{: #fixes-since-docker-desktop-rc-2 }
+### Docker Desktop RC 2 以降の修正
+@z
+
+@x
+- Update to [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo) to improve reliability.
+@y
+- 信頼性を向上させるため [Linux カーネル 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo) にアップデートしました。
 @z
 
 @x
