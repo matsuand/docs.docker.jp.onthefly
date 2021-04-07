@@ -22,6 +22,60 @@ redirect_from:
 @z
 
 @x
+## 1.29.0
+(2021-04-06)
+@y
+## 1.29.0
+(2021-04-06)
+@z
+
+@x
+### Features
+@y
+{: #features }
+### 機能
+@z
+
+@x
+- Added profile filter to `docker-compose config`.
+
+- Added a `depends_on` condition to wait for successful service completion.
+@y
+- `docker-compose config`に profile フィルターを追加しました。
+
+- `depends_on`条件を追加し、サービスの正常完了を待つようにしました。
+@z
+
+@x
+### Miscellaneous
+@y
+{: #miscellaneous }
+### その他
+@z
+
+@x
+- Added an image scan message on build.
+
+- Updated warning message for `--no-ansi` to mention `--ansi never` as alternative.
+
+- Bumped docker-py to 5.0.0.
+
+- Bumped PyYAML to 5.4.1.
+
+- Bumped python-dotenv to 0.17.0.
+@y
+- ビルド時にイメージスキャンに関するメッセージを追加しました。
+
+- 警告メッセージ`--no-ansi`において、選択肢として`--ansi never`があることを示すようにしました。
+
+- docker-py を 5.0.0 に。
+
+- PyYAML を 5.4.1 に。
+
+- python-dotenv を 0.17.0 に。
+@z
+
+@x
 ## 1.28.6
 (2021-03-23)
 @y
