@@ -22,10 +22,12 @@ bases = \
 	docker_buildx_imagetools_create  \
 	docker_buildx_imagetools_inspect \
 	docker_buildx_inspect            \
+	docker_buildx_install            \
 	docker_buildx_ls                 \
 	docker_buildx_prune              \
 	docker_buildx_rm                 \
 	docker_buildx_stop               \
+	docker_buildx_uninstall          \
 	docker_buildx_use                \
 	docker_buildx_version
 

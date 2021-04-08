@@ -45,10 +45,12 @@ bases = \
 	buildx_imagetools_create \
 	buildx_imagetools_inspect \
 	buildx_inspect \
+	buildx_install \
 	buildx_ls \
 	buildx_prune \
 	buildx_rm \
 	buildx_stop \
+	buildx_uninstall \
 	buildx_use \
 	buildx_version \
 	checkpoint \
