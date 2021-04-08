@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-08 13:18:00 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Buildx | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Buildx" />
   <meta property="og:description" content="Docker Buildx の利用" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-08T13:18:00+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-08T13:18:00+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Buildx","description":"Docker Buildx の利用","url":"https://docs.docker.com/buildx/working-with-buildx/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,53 +98,40 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Buildx</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p>
-<blockquote>
-  <p>これは試験的な（experimental）機能です。</p>
-
-  <!-- This text will be included in the CLI plugin docs that are marked as experimental in Docker Enterprise 3.0 release -->
-  <p>試験的な機能は、将来の製品に搭載される機能をいち早く試すことができるものです。
-ただし現段階でのこの機能は、テストとフィードバックのためだけを意図しています。
-したがってリリース時には予告なく変更される場合があり、将来のリリースでは完全に削除されることもあります。
-試験的な機能は本番環境では利用しないでください。
-Docker ではこの試験的機能に対するサポートは行っていません。</p>
-</blockquote>
-
-<p>Docker CLI における現時点での試験的機能については <a href="https://github.com/docker/cli/blob/master/experimental/README.md">Docker CLI 試験的機能</a> の一覧を参照してください。</p>
-
-<h2 id="overview">概要</h2>
+                        <section class="section"><h1>Docker Buildx</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="overview">概要</h2>
 
 <p>Docker Buildx は Docker コマンドを拡張する CLI プラグインであり、<a href="https://github.com/moby/buildkit">Moby BuildKit</a> ビルダーツールキットにより提供される機能に完全対応するものです。
 Docker ビルドと同様のユーザー操作を提供し、さらにスコープ化されたビルダーインスタンス、複数ノードへの同時ビルドなど、数多くの新機能を提供します。</p>
 
 <h2 id="install">インストール</h2>
 
-<p>Docker Buildx は Docker 19.03 に含まれます。
-また以下に示す Docker デスクトップリリースにもバンドルされています。
-なお Docker Buildx を利用するには「Experimental features」オプションを有効にする必要があります。</p>
+<p>Docker Buildx は Docker Desktop に含まれます。
+また <a href="/docs.docker.jp.onthefly/engine/install/">DEB または RPM パッケージ</a> により Linux 上にインストールする Docker パッケージに含まれます。</p>
 
-<ul>
-  <li>Docker Desktop Enterprise バージョン 2.1.0</li>
-  <li>Docker Desktop Edge バージョン 2.0.4.0 またはそれ以降</li>
-</ul>
+<p>また最新の<code class="language-plaintext highlighter-rouge">buildx</code>バイナリを GitHub 上の <a href="https://github.com/docker/buildx/">Docker buildx</a> リポジトリからダウンロードすることもできます。</p>
 
-<p><a href="https://github.com/docker/buildx/">Docker buildx</a> リポジトリから、最新の <code class="language-plaintext highlighter-rouge">buildx</code> バイナリをダウンロードすることもできます。</p>
+<h2 id="set-buildx-as-the-default-builder">Set buildx as the default builder</h2>
 
-<h2 id="build-with-buildx"><code class="language-plaintext highlighter-rouge">buildx</code> を使ったビルド</h2>
+<p>コマンド <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_install/"><code class="language-plaintext highlighter-rouge">docker buildx install</code></a> を実行すれば builder コマンドが<code class="language-plaintext highlighter-rouge">docker buildx</code>へのエイリアスとして設定されます。
+これによって <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/"><code class="language-plaintext highlighter-rouge">docker build</code></a> が現時点での buildx builder を利用するようになります。</p>
 
-<p>新たなビルドを行うには  <code class="language-plaintext highlighter-rouge">docker buildx build</code> を実行します。</p>
+<p>このエイリアスを削除するには <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_uninstall/"><code class="language-plaintext highlighter-rouge">docker buildx uninstall</code></a> を実行します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker buildx build .
-[+] Building 8.4s (23/32)
- =&gt; ...
+<h2 id="build-with-buildx">buildx を使ったビルド</h2>
+
+<p>新たなビルドを行うには<code class="language-plaintext highlighter-rouge">docker buildx build</code>を実行します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker buildx build <span class="nb">.</span>
+<span class="go">[+] Building 8.4s (23/32)
+</span><span class="gp"> =&gt;</span><span class="w"> </span>...
 </code></pre></div></div>
 
 <p>Buildx は Buildx エンジンを使ってビルドを行います。
-ビルドを行うにあたって、環境変数 <code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code> を設定する必要はありません。</p>
+ビルドを行うにあたって、環境変数<code class="language-plaintext highlighter-rouge">DOCKER_BUILDKIT=1</code>を設定する必要はありません。</p>
 
-<p><code class="language-plaintext highlighter-rouge">docker buildx build</code> コマンドは <code class="language-plaintext highlighter-rouge">docker build</code> によって利用できる機能はすべて対応しています。
-つまり Docker 19.03 における新機能である、出力設定、インラインビルドキャッシング、ターゲットプラットフォーム指定にも対応します。
-さらに Buildx では、いつもの <code class="language-plaintext highlighter-rouge">docker build</code> では実現できない新機能として、マニフェスト一覧の生成、分散キャッシング、ビルド結果の OCI イメージ tarball への出力も実現します。</p>
+<p><code class="language-plaintext highlighter-rouge">docker buildx build</code>コマンドは<code class="language-plaintext highlighter-rouge">docker build</code>によって利用できる機能はすべて対応しています。
+つまり出力設定、インラインビルドキャッシング、ターゲットプラットフォーム指定といったシ機能にも対応します。
+さらに Buildx では、いつもの<code class="language-plaintext highlighter-rouge">docker build</code>では実現できない新機能として、マニフェスト一覧の生成、分散キャッシング、ビルド結果の OCI イメージ tarball への出力も実現します。</p>
 
 <p>Buildx の実行においては、ドライバーの仕様に基づいて提供されるさまざまな設定を行うことができます。
 現時点にて Docker がサポートするドライバーは以下のとおりです。
@@ -155,7 +142,7 @@ Docker ビルドと同様のユーザー操作を提供し、さらにスコー�
 ただし現在のところ「docker」ドライバーが対応していない機能もあります。
 これは Docker デーモンにバンドルされる BuildKit ライブラリが、さまざまなストレージコンポーネントを利用するためです。
 「docker」ドライバーによりビルドされたイメージは、デフォルトではすべて自動的に「docker images」の一覧に加えられます。
-一方で別のドライバーを用いる場合には、イメージの出力方法を <code class="language-plaintext highlighter-rouge">--output</code> により選択することが必要です。</p>
+一方で別のドライバーを用いる場合には、イメージの出力方法を<code class="language-plaintext highlighter-rouge">--output</code>により選択することが必要です。</p>
 
 <h2 id="work-with-builder-instances">ビルダーインスタンスを使った操作</h2>
 
@@ -163,32 +150,49 @@ Docker ビルドと同様のユーザー操作を提供し、さらにスコー�
 ユーザー操作は、ネイティブな Docker ビルドと非常によく似ています。
 アプリケーションをビルドするには、ローカルで稼動する共有デーモンを利用する必要があります。</p>
 
-<p>Buildx allows you to create new instances of isolated builders. You can use this to get a scoped environment for your CI builds that does not change the state of the shared daemon, or for isolating builds for different projects. You can create a new instance for a set of remote nodes, forming a build farm, and quickly switch between them.</p>
+<p>Buildx allows you to create new instances of isolated builders. You can use this
+to get a scoped environment for your CI builds that does not change the state of
+the shared daemon, or for isolating builds for different projects. You can create
+a new instance for a set of remote nodes, forming a build farm, and quickly
+switch between them.</p>
 
-<p>新たなインスタンスを生成するには <code class="language-plaintext highlighter-rouge">docker buildx create</code> コマンドを利用します。
+<p>新たなインスタンスを生成するには <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_create/"><code class="language-plaintext highlighter-rouge">docker buildx create</code></a> コマンドを利用します。
 このコマンドを実行すると、現時点の設定に基づいて、単一ノードを持つ新たなビルダーインスタンスが生成されます。</p>
 
-<p>新たなビルダーの生成時にリモートノードを利用するには、<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code> を設定するか、あるいはリモートコンテキスト名を指定します。
-新たなインスタンスが生成された後は、inspect、stop、rm コマンドを利用していき、そのライフサイクルを管理していきます。
-利用可能なビルダーを一覧表示するには ls を利用します。
+<p>新たなビルダーの生成時にリモートノードを利用するには、<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code>を設定するか、あるいはリモートコンテキスト名を指定します。
+新たなインスタンスが生成された後は、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_inspect/"><code class="language-plaintext highlighter-rouge">docker buildx inspect</code></a>、<a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_stop/"><code class="language-plaintext highlighter-rouge">docker buildx stop</code></a>、
+<a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_rm/"><code class="language-plaintext highlighter-rouge">docker buildx rm</code></a> コマンドを利用していき、そのライフサイクルを管理していきます。
+利用可能なビルダーを一覧表示するには <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_ls/"><code class="language-plaintext highlighter-rouge">docker buildx ls</code></a> を利用します。
 新しいビルダーを生成したら、そこに新たなノードを追加していくことができます。</p>
 
-<p>To switch between different builders use <code class="language-plaintext highlighter-rouge">docker buildx use &lt;name&gt;</code>. After running this command, the build commands will automatically use this builder.</p>
+<p>To switch between different builders, use <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_use/"><code class="language-plaintext highlighter-rouge">docker buildx use &lt;name&gt;</code></a>.
+After running this command, the build commands will automatically use this
+builder.</p>
 
-<p>Docker 19.03 also features a new docker context command that you can use to provide names for remote Docker API endpoints. Buildx integrates with docker context to ensure all the contexts automatically get a default builder instance. You can also set the context name as the target when you  create a new builder instance or when you add a node to it.</p>
+<p>Docker also features a <a href="/docs.docker.jp.onthefly/engine/reference/commandline/context/"><code class="language-plaintext highlighter-rouge">docker context</code></a>
+command that you can use to provide names for remote Docker API endpoints. Buildx
+integrates with docker context to ensure all the contexts automatically get a
+default builder instance. You can also set the context name as the target when
+you  create a new builder instance or when you add a node to it.</p>
 
 <h2 id="build-multi-platform-images">マルチプラットフォームのイメージビルド</h2>
 
 <p>BuildKit はマルチプラットフォームのビルドを得意とするものとして設計されています。
 対象となるプラットフォームは、ユーザーがビルド時に実行することになるアーキテクチャーやオペレーティングシステムに限りません。</p>
 
-<p>ビルド実行する際には <code class="language-plaintext highlighter-rouge">--platform</code> フラグを用います。
+<p>ビルド実行する際には<code class="language-plaintext highlighter-rouge">--platform</code>フラグを用います。
 このフラグにターゲットプラットフォームを指定しビルド出力します。
-（たとえば linux/amd64, linux/arm64, darwin/amd64）</p>
+（たとえば<code class="language-plaintext highlighter-rouge">linux/amd64</code>、<code class="language-plaintext highlighter-rouge">linux/arm64</code>、darwin/amd64`）</p>
 
-<p>When the current builder instance is backed by the “docker-container” driver, you can specify multiple platforms together. In this case, it builds a manifest list which contains images for all of the specified architectures. When you use this image in <code class="language-plaintext highlighter-rouge">docker run</code> or <code class="language-plaintext highlighter-rouge">docker service</code>, Docker picks the correct image based on the node’s platform.</p>
+<p>When the current builder instance is backed by the “docker-container” driver,
+you can specify multiple platforms together. In this case, it builds a manifest
+list which contains images for all specified architectures. When you use this
+image in <a href="/docs.docker.jp.onthefly/engine/reference/commandline/run/"><code class="language-plaintext highlighter-rouge">docker run</code></a> or
+<a href="/docs.docker.jp.onthefly/engine/reference/commandline/service/"><code class="language-plaintext highlighter-rouge">docker service</code></a>, Docker picks
+the correct image based on the node’s platform.</p>
 
-<p>You can build multi-platform images using three different strategies that are supported by Buildx and Dockerfiles:</p>
+<p>You can build multi-platform images using three different strategies that are
+supported by Buildx and Dockerfiles:</p>
 
 <ol>
   <li>カーネルにおいて QEMU エミュレーションサポートを利用します。</li>
@@ -196,41 +200,56 @@ Docker ビルドと同様のユーザー操作を提供し、さらにスコー�
   <li>Dockerfile 内の 1 つのステージから、さまざまなアーキテクチャーに対するクロスコンパイルを行います。</li>
 </ol>
 
-<p>QEMU is the easiest way to get started if your node already supports it (for example. if you are using Docker Desktop). It requires no changes to your Dockerfile and BuildKit automatically detects the secondary architectures that are available. When BuildKit needs to run a binary for a different architecture, it automatically loads it through a binary registered in the <code class="language-plaintext highlighter-rouge">binfmt_misc</code> handler.</p>
+<p>QEMU is the easiest way to get started if your node already supports it (for
+example. if you are using Docker Desktop). It requires no changes to your
+Dockerfile and BuildKit automatically detects the secondary architectures that
+are available. When BuildKit needs to run a binary for a different architecture,
+it automatically loads it through a binary registered in the <code class="language-plaintext highlighter-rouge">binfmt_misc</code>
+handler.</p>
 
-<p>Using multiple native nodes provide better support for more complicated cases that are not handled by QEMU and generally have better performance. You can add additional nodes to the builder instance using the <code class="language-plaintext highlighter-rouge">--append</code> flag.</p>
+<p>Using multiple native nodes provide better support for more complicated cases
+that are not handled by QEMU and generally have better performance. You can
+add additional nodes to the builder instance using the <code class="language-plaintext highlighter-rouge">--append</code> flag.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># assuming contexts node-amd64 and node-arm64 exist in "docker context ls"</span>
-<span class="nv">$ </span>docker buildx create <span class="nt">--use</span> <span class="nt">--name</span> mybuild node-amd64
-mybuild
-<span class="nv">$ </span>docker buildx create <span class="nt">--append</span> <span class="nt">--name</span> mybuild node-arm64
-<span class="nv">$ </span>docker buildx build <span class="nt">--platform</span> linux/amd64,linux/arm64 <span class="nb">.</span>
+<p>Assuming contexts node-amd64 and node-arm64 exist in <code class="language-plaintext highlighter-rouge">docker context ls</code>;</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker buildx create <span class="nt">--use</span> <span class="nt">--name</span> mybuild node-amd64
+<span class="go">mybuild
+</span><span class="gp">$</span><span class="w"> </span>docker buildx create <span class="nt">--append</span> <span class="nt">--name</span> mybuild node-arm64
+<span class="gp">$</span><span class="w"> </span>docker buildx build <span class="nt">--platform</span> linux/amd64,linux/arm64 <span class="nb">.</span>
 </code></pre></div></div>
 
-<p>Finally, depending on your project, the language that you use may have good support for cross-compilation. In that case, multi-stage builds in Dockerfiles can be effectively used to build binaries for the platform specified with <code class="language-plaintext highlighter-rouge">--platform</code> using the native architecture of the build node. A list of build arguments like <code class="language-plaintext highlighter-rouge">BUILDPLATFORM</code> and <code class="language-plaintext highlighter-rouge">TARGETPLATFORM</code> is available automatically inside your Dockerfile and can be leveraged by the processes running as part of your build.</p>
+<p>Finally, depending on your project, the language that you use may have good
+support for cross-compilation. In that case, multi-stage builds in Dockerfiles
+can be effectively used to build binaries for the platform specified with
+<code class="language-plaintext highlighter-rouge">--platform</code> using the native architecture of the build node. A list of build
+arguments like <code class="language-plaintext highlighter-rouge">BUILDPLATFORM</code> and <code class="language-plaintext highlighter-rouge">TARGETPLATFORM</code> is available automatically
+inside your Dockerfile and can be leveraged by the processes running as part
+of your build.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM --platform=$BUILDPLATFORM golang:alpine AS build
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
-RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" &gt; /log
-FROM alpine
-COPY --from=build /log /log
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> --platform=$BUILDPLATFORM golang:alpine AS build</span>
+<span class="k">ARG</span><span class="s"> TARGETPLATFORM</span>
+<span class="k">ARG</span><span class="s"> BUILDPLATFORM</span>
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"I am running on </span><span class="nv">$BUILDPLATFORM</span><span class="s2">, building for </span><span class="nv">$TARGETPLATFORM</span><span class="s2">"</span> <span class="o">&gt;</span> /log
+<span class="k">FROM</span><span class="s"> alpine</span>
+<span class="k">COPY</span><span class="s"> --from=build /log /log</span>
 </code></pre></div></div>
 
 <h2 id="high-level-build-options">High-level build options</h2>
 
-<p>Buildx also aims to provide support for high-level build concepts that go beyond invoking a single build command.</p>
+<p>Buildx also aims to provide support for high-level build concepts that go beyond
+invoking a single build command.</p>
 
-<p>BuildKit efficiently handles multiple concurrent build requests and deduplicating work. The build commands can be combined with general-purpose command runners (for example, <code class="language-plaintext highlighter-rouge">make</code>). However, these tools generally invoke builds in sequence and therefore cannot leverage the full potential of BuildKit parallelization, or combine BuildKit’s output for the user. For this use case, we have added a command called <code class="language-plaintext highlighter-rouge">docker buildx bake</code>.</p>
+<p>BuildKit efficiently handles multiple concurrent build requests and de-duplicating
+work. The build commands can be combined with general-purpose command runners
+(for example, <code class="language-plaintext highlighter-rouge">make</code>). However, these tools generally invoke builds in sequence
+and therefore cannot leverage the full potential of BuildKit parallelization,
+or combine BuildKit’s output for the user. For this use case, we have added a
+command called <a href="/docs.docker.jp.onthefly/engine/reference/commandline/buildx_bake/"><code class="language-plaintext highlighter-rouge">docker buildx bake</code></a>.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">bake</code> command supports building images from compose files, similar to a compose build, but allowing all the services to be built concurrently as part of a single request.</p>
-
-<h2 id="set-buildx-as-the-default-builder"><code class="language-plaintext highlighter-rouge">buildx</code> のデフォルトビルダー設定</h2>
-
-<p><code class="language-plaintext highlighter-rouge">docker buildx install</code> コマンドを実行すると、Docker ビルドコマンドのエイリアスとして <code class="language-plaintext highlighter-rouge">docker buildx</code> を設定します。
-これにより <code class="language-plaintext highlighter-rouge">docker build</code> が、現在の buildx ビルダーを利用するようになります。</p>
-
-<p>このエイリアスを削除するには <code class="language-plaintext highlighter-rouge">docker buildx uninstall</code> を実行します。</p>
+<p>The <code class="language-plaintext highlighter-rouge">bake</code> command supports building images from compose files, similar to
+<a href="/docs.docker.jp.onthefly/compose/reference/build/"><code class="language-plaintext highlighter-rouge">docker-compose build</code></a>, but allowing all the
+services to be built concurrently as part of a single request.</p>
 <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Docker">Docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=buildx">buildx</a>, <a href="/docs.docker.jp.onthefly/search/?q=multi-arch">multi-arch</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
@@ -266,11 +285,11 @@ COPY --from=build /log /log
 <ul id="my_toc" class="inline_toc">
   <li><a href="#overview" class="nomunge">概要</a></li>
   <li><a href="#install" class="nomunge">インストール</a></li>
+  <li><a href="#set-buildx-as-the-default-builder" class="nomunge">Set buildx as the default builder</a></li>
   <li><a href="#build-with-buildx" class="nomunge">buildx を使ったビルド</a></li>
   <li><a href="#work-with-builder-instances" class="nomunge">ビルダーインスタンスを使った操作</a></li>
   <li><a href="#build-multi-platform-images" class="nomunge">マルチプラットフォームのイメージビルド</a></li>
   <li><a href="#high-level-build-options" class="nomunge">High-level build options</a></li>
-  <li><a href="#set-buildx-as-the-default-builder" class="nomunge">buildx のデフォルトビルダー設定</a></li>
 </ul>
 
 </div>
