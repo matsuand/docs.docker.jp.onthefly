@@ -23,16 +23,8 @@ images = \
 	issue-template.png \
 	nginx-homepage.png \
 	redis-container.png \
-	settings-advanced.png \
-	settings-daemon-advanced.png \
-	settings-daemon-basic.png \
 	settings-general.png \
-	settings-network.png \
-	settings-proxies.png \
-	settings-reset.png \
 	settings-resources.png \
-	settings-shared-drives.png \
-	shared-drive-firewall-blocked.png \
 	shared-folder-on-demand.png \
 	troubleshoot.png \
 	virtualization-enabled.png \

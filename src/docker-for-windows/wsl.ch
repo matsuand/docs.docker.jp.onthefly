@@ -220,13 +220,13 @@ Docker Desktop 安定版 2.3.0.2 をインストールする **前に**、上の
     The Docker-WSL integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`.
 @y
     Docker-WSL 統合環境が、デフォルトの WSL ディストリビューション上において有効になります。
-    デフォルトの WSL ディストリビューションを変更するには `wsl --set-default <ディストリビューション名>` を実行します。
+    デフォルトの WSL ディストリビューションを変更するには`wsl --set-default <ディストリビューション名>`を実行します。
 @z
 
 @x
     For example, to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`.
 @y
-    たとえばデフォルトの WSL ディストリビューションとして Ubuntu を設定する場合は `wsl --set-default ubuntu` を実行します。
+    たとえばデフォルトの WSL ディストリビューションとして Ubuntu を設定する場合は`wsl --set-default ubuntu`を実行します。
 @z
 
 @x
@@ -334,14 +334,14 @@ WSL 2 GPU 準仮想化を有効にするためには以下が必要です。
 - A machine with an NVIDIA GPU
 - The latest Windows Insider version from the Dev Preview ring
 - [Beta drivers](https://developer.nvidia.com/cuda/wsl){:target="_blank" rel="noopener" class="_"} from NVIDIA supporting WSL 2 GPU Paravirtualization
-- Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated commmand prompt
+- Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated command prompt
 - Make sure the WSL 2 backend is enabled in Docker Desktop
 @y
 - NVIDIA GPU を搭載するマシン。
 - 開発プレビューリング（Dev Preview ring）から最新の Windows Insider 版。
 - WSL 2 GPU 準仮想化をサポートする NVIDIA の [ベータドライバー](https://developer.nvidia.com/cuda/wsl){:target="_blank" rel="noopener" class="_"}。
 - WSL 2 Linux カーネルの最新版への更新。
-  昇格権限によるコマンドプロンプトから `wsl --update` を実行。
+  昇格権限によるコマンドプロンプトから`wsl --update`を実行。
 - Docker Desktop において WSL 2 バックエンドの有効化。
 @z
 

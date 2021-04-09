@@ -32,32 +32,127 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> **Important**
->
-> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
-{: .important }
+## Docker Desktop 3.3.0
+2021-04-08
 @y
-> **重要**
->
-> Docker Desktop 3.0.0 から安定版（stable）と最新版（edge）のリリースは、どのユーザーに対しても 1 つのリリースとして統合されました。
-> Docker Desktop のアップデートは、旧バージョンからのデルタアップデートとして自動的に適用されます。
-> つまり Docker Desktop の新バージョンがリリースされると、自動的にマシンにダウンロードされます。
-> そのときには Docker メニューから **Update and restart**（アップデートと再起動）をクリックするだけです。
-{: .important }
-@z
-
-@x
-## Docker Desktop 3.2.2
-2021-03-15
-@y
-## Docker Desktop 3.2.2
-2021-03-15
+## Docker Desktop 3.3.0
+2021-04-08
 @z
 
 @x
 > [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
 @y
 > [ダウンロード](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
+@y
+Docker Desktop のアップデートに対して、ダウンロードとインストールをいつ行うかを指定できるようになりました。
+アップデートが利用可能になると Docker Desktop は、最新バージョンの入手が可能であることを示すアイコンを表示します。
+アップデートはお好きなときに開始すれば、バックグラウンドでダウンロードが始まります。
+アップデートのダウンロードを終えたら Update and restart（アップデートと再起動）をクリックするだけで、最新アップデートをインストールできます。
+@z
+
+@x
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+@y
+本格的な開発目的で Docker Desktop を利用する開発者は、特定のアップデートをスキップしなければならない場合もあります。
+こういった状況があるため、プロプランとチームプランへの加入者は、アップデートのリマインダーが表示された際に特定アップデートの通知をスキップすることができます。
+@z
+
+@x
+For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
+@y
+IT 管理環境下での開発者の Docker ID がチームプランに属していれば、Docker Desktop アップデートのインストール権限がない場合に、Docker Desktop アップデートの通知を完全に行わないように Settings メニューから指定できるようになりました。
+@z
+
+@x
+### Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Docker Compose 1.29.0](https://github.com/docker/compose/releases/tag/1.29.0)
+- [Compose CLI v1.0.12](https://github.com/docker/compose-cli/tree/v1.0.12)
+- [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo)
+- [Snyk v1.461.0](https://github.com/snyk/snyk/releases/tag/v1.461.0)
+- [Docker Hub Tool v0.3.1](https://github.com/docker/hub-tool/releases/tag/v0.3.1)
+- [containerd v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4)
+- [runc v1.0.0-rc93](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc93)
+@y
+- [Docker Compose 1.29.0](https://github.com/docker/compose/releases/tag/1.29.0)
+- [Compose CLI v1.0.12](https://github.com/docker/compose-cli/tree/v1.0.12)
+- [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo)
+- [Snyk v1.461.0](https://github.com/snyk/snyk/releases/tag/v1.461.0)
+- [Docker Hub Tool v0.3.1](https://github.com/docker/hub-tool/releases/tag/v0.3.1)
+- [containerd v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4)
+- [runc v1.0.0-rc93](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc93)
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed an issue when viewing compose applications that have been started with an explicit project name. Fixes [docker/for-win#10564](https://github.com/docker/for-win/issues/10564).
+- Fixed a bug that `--add-host host.docker.internal:host-gateway` caused `host.docker.internal` to resolve to the wrong IP address. See [docker/for-linux#264](https://github.com/docker/for-linux/issues/264#issuecomment-785137844).
+- Fixed a bug that caused inter-container HTTP traffic to be misrouted to the external HTTP proxy. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+- Fixed a bug that could cause other files in the same folder as the VM disk to be deleted when the disk was resized. Fixes [docker/for-mac#5486](https://github.com/docker/for-mac/issues/5486).
+- Fixed an issue where delta downloads caused an `Illegal instruction exception`. Fixes [docker/for-mac#5459](https://github.com/docker/for-mac/issues/5459).
+- Apply domain-based HTTPS proxy `no_proxy` rules for encrypted connections. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
+- Fixed missing text in reset to factory defaults dialog. Fixes [docker/for-mac#5457](https://github.com/docker/for-mac/issues/5457).
+- Fixed an issue where running a container with a random port on the host caused Docker Desktop dashboard to incorrectly open a browser with port 0, instead of using the allocated port.
+- Fixed an issue where pulling an image from Docker Hub using the Docker Desktop dashboard was failing silently.
+- Removed unused DNS name `docker.for.mac.http.internal`.
+- Perform a filesystem check when starting the Linux VM.
+- Detect Linux kernel crashes and escalate them to the user.
+@y
+- 明示的にプロジェクト名を指定して起動された Compose アプリケーションに対して、これを参照する際の問題を修正しました。
+  [docker/for-win#10564](https://github.com/docker/for-win/issues/10564) を Fix に。
+- `--add-host host.docker.internal:host-gateway`を指定すると`host.docker.internal`が誤った IP アドレスに変換されてしまうバグを修正しました。
+  [docker/for-linux#264](https://github.com/docker/for-linux/issues/264#issuecomment-785137844) 参照のこと。
+- コンテナー間での HTTP トラフィックが外部 HTTP プロキシーに対して誤って送信されてしまうバグを修正しました。
+  [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476) を Fix に。
+- VM ディスクの容量変更を行うと、ディスクファイルと同じフォルダー内の別のファイルが削除されてしまうバグを修正しました。
+  [docker/for-mac#5486](https://github.com/docker/for-mac/issues/5486) を Fix に。
+- デルタダウンロードが`Illegal instruction exception`を発生させる問題を修正しました。
+  [docker/for-mac#5459](https://github.com/docker/for-mac/issues/5459) を Fix に。
+- ドメインベースの HTTPS プロキシーにおける暗号化接続に対して`no_proxy`ルールを適用しました。
+  [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732) を Fix に。
+- リセット操作時の factory defaults ダイアログ画面でのテキスト不備を修正しました。
+  [docker/for-mac#5457](https://github.com/docker/for-mac/issues/5457) を Fix に。
+- ホスト上のランダムポートを使ってコンテナーを実行すると、Docker Desktop ダッシュボードが、その割り当てられたポートでなく間違ってポート 0 としてブラウザー表示してしまう問題を修正しました。
+- Docker Desktop ダッシュボードを使って Docker Hub からイメージをプルすると、何も表示されずに処理失敗する問題を修正しました。
+- 未使用の DNS 名`docker.for.mac.http.internal`を削除しました。
+- Linux VM 起動時にファイルシステムのチェックを実行するようにしました。
+- Linux カーネルのクラッシュを検知して、これをユーザーにエスカレートします。
+@z
+
+@x
+## Docker Desktop 3.2.2
+2021-03-15
+@y
+## Docker Desktop 3.2.2
+2021-03-15
+@z
+
+@x
+> [Download](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
+@y
+> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
 @z
 
 @x

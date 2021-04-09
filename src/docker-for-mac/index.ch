@@ -109,30 +109,50 @@ On the **General** tab, you can configure when to start and update Docker:
 @z
 
 @x
+- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
+@y
+- **Automatically check for updates**（アップデートの自動チェック）＝ デフォルトで Docker Desktop は新たなバージョンがあるかどうかを自動的に確認するように設定されています。
+  組織に属する一人として Docker Desktop をインストールしている場合、自分では Docker Desktop の更新が許可されていないことがあるかもしれません。
+  その場合は [既存組織のチームプランへのアップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) を行って、このチェックボックスをオフとし、更新の自動チェックを無効にしてください。
+@z
+
+@x
 - **Start Docker Desktop when you log in**: Automatically starts Docker Desktop when you open your session.
 @y
-- **Start Docker Desktop when you log in**（ログイン時に Docker Desktop を起動） セッションを開始したときに自動的に Docker Desktop を起動します。
+- **Start Docker Desktop when you log in**（ログイン時に Docker Desktop を起動）＝ セッションを開始したときに自動的に Docker Desktop を起動します。
 @z
 
 @x
 - **Include VM in Time Machine backups**: Select this option to back up the Docker Desktop virtual machine. This option is disabled by default.
 @y
-- **Include VM in Time Machine backups**（Time Machine バックアップに VM を含める） Docker Desktop 仮想マシンのバックアップに関するオプションを設定します。
+- **Include VM in Time Machine backups**（Time Machine バックアップに VM を含める）＝ Docker Desktop 仮想マシンのバックアップに関するオプションを設定します。
   このオプションはデフォルトでは無効になっています。
 @z
 
 @x
-- **Securely store Docker logins in macOS keychain**: Docker Desktop stores your Docker login credentials in macOS keychain by default.
+- **Use gRPC FUSE for file sharing**: Clear this checkbox to use the legacy osxfs file sharing instead.
 @y
-- **Securely store Docker logins in macOS keychain**（macOS キーチェーンに Docker ログイン情報を安全に保存） Docker Desktop はデフォルトで、macOS キーチェーン内に Docker ログイン情報を保存します。
+- **Use gRPC FUSE for file sharing**（ファイル共有での gRPC FUSE の利用）＝ このチェックボックスをオフにすると、ファイル共有として従来の osxfs を利用します。
 @z
 
 @x
 - **Send usage statistics**: Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
 @y
-- **Send usage statistics**（利用統計の送信） Docker Desktop は、診断情報、クラッシュレポート、利用状況の各情報を送信します。
+- **Send usage statistics**（利用統計の送信）＝ Docker Desktop は、診断情報、クラッシュレポート、利用状況の各情報を送信します。
   この情報を通じて Docker は改良を行い、アプリケーションのトラブルシューティングに役立てています。
   チェックボックスをオフにすれば、データ送信を行いません。
+@z
+
+@x
+- **Show weekly tips**: Displays useful advice and suggestions about using Docker.
+@y
+- **Show weekly tips**（1 週間ごとのアドバイス表示）＝ Docker 利用に関して便利なアドバイスや提案を表示します。
+@z
+
+@x
+- **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
+@y
+- **Open Docker Desktop dashboard at startup**（起動時の Docker Desktop ダッシュボードの自動起動）＝ Docker Desktop の起動時にダッシュボードを自動的に開きます。
 @z
 
 @x
@@ -176,42 +196,42 @@ Advanced settings are:
 @z
 
 @x
-**CPUs**: By default, Docker Desktop is set to use half the number of processors
+- **CPUs**: By default, Docker Desktop is set to use half the number of processors
 available on the host machine. To increase processing power, set this to a
 higher number; to decrease, lower the number.
 @y
-**CPU** デフォルトにおいて Docker Desktop は、ホストマシン上で利用可能なプロセッサー数の半分を利用するものとして設定されています。
+- **CPU** ＝ デフォルトにおいて Docker Desktop は、ホストマシン上で利用可能なプロセッサー数の半分を利用するものとして設定されています。
 プロセッサー性能を向上させるには、この設定値を大きくします。
 逆に抑止するには設定値を小さくします。
 @z
 
 @x
-**Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
+- **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
 allocated from the total available memory on your Mac. To increase the RAM, set this to a higher number. To decrease it, lower the number.
 @y
-**メモリ**  デフォルトにおいて Docker Desktop は、実行時メモリとして`2`GB を利用するものとして設定されています。
+- **メモリ** ＝ デフォルトにおいて Docker Desktop は、実行時メモリとして`2`GB を利用するものとして設定されています。
 この値は Mac 上において利用可能な全メモリ容量の中から割り当てられます。
 RAM 容量を増やすには、この設定値を大きくします。
 逆に減らすには、この設定値を小さくします。
 @z
 
 @x
-**Swap**: Configure swap file size as needed. The default is 1 GB.
+- **Swap**: Configure swap file size as needed. The default is 1 GB.
 @y
-**スワップ**: 必要に応じてスワップファイルサイズを設定します。
+- **スワップ** ＝ 必要に応じてスワップファイルサイズを設定します。
 デフォルトは 1 GB です。
 @z
 
 @x
-**Disk image size**: Specify the size of the disk image.
+- **Disk image size**: Specify the size of the disk image.
 @y
-**ディスクイメージサイズ**: ディスクイメージのサイズを指定します。
+- **ディスクイメージサイズ** ＝ ディスクイメージのサイズを指定します。
 @z
 
 @x
-**Disk image location**: Specify the location of the Linux volume where containers and images are stored.
+- **Disk image location**: Specify the location of the Linux volume where containers and images are stored.
 @y
-**ディスクイメージの保存場所**: コンテナーやイメージが保存される Linux ボリュームの場所を指定します。
+- **ディスクイメージの保存場所** ＝ コンテナーやイメージが保存される Linux ボリュームの場所を指定します。
 @z
 
 @x
@@ -251,14 +271,14 @@ File share の設定には以下のものがあります。
 @x
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
 @y
-- **Add a Directory**（ディレクトリの追加）: `+`をクリックして、追加したいディレクトリを指定します。
+- **Add a Directory**（ディレクトリの追加）＝ `+`をクリックして、追加したいディレクトリを指定します。
 @z
 
 @x
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 @y
-- **Apply & Restart**（適用および再起動）:  Docker のバインドマウント（`-v`）機能を利用して、コンテナー間でのディレクトリ共有を可能にします。
+- **Apply & Restart**（適用および再起動）＝  Docker のバインドマウント（`-v`）機能を利用して、コンテナー間でのディレクトリ共有を可能にします。
 @z
 
 @x

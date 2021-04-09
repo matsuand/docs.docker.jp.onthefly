@@ -338,11 +338,17 @@ Docker Desktop 3.0.0 から Docker Desktop のアップデータが自動的に�
 @z
 
 @x
-When an update is available, Docker Desktop automatically downloads it to your machine and displays an icon to indicate the availability of a newer version. All you need to do now is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. Whenever convenient, you can start the download of the update in the background.
 @y
-アップデートが利用可能になると、Docker Desktop は自動的にアップデートをマシンにダウンロードして、新たなバージョンが利用可能であることを示すアイコンを表示します。
-そのときには Docker メニューから **Update and restart**（アップデートと再起動）をクリックするだけです。
-これによって最新のアップデートがインストールされて、変更を適用するため Docker Desktop が再起動されます。
+アップデートが利用可能になると Docker Desktop は、最新バージョンの入手が可能であることを示すアイコンを表示します。
+アップデートはお好きなときに開始すれば、バックグラウンドでダウンロードが始まります。
+@z
+
+@x
+When the download finishes, all you need to do is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+@y
+アップデートのダウンロードを終えたら、Docker メニューの **Update and restart**（アップデートと再起動）をクリックするだけです。
+これにより最新アップデートがインストールされ、アップデートを有効にするために Docker Desktop が再起動します。
 @z
 
 @x

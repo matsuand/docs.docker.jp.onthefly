@@ -235,10 +235,10 @@ docker run -dp 3000:3000 `
 @z
 
 @x
-2. Typically, you will see the command close to the `image` definition, although there is no requirement on ordering.
+2. Typically, you will see the `command` close to the `image` definition, although there is no requirement on ordering.
    So, let's go ahead and move that into our file.
 @y
-2. `image`定義のすぐ近くに、コマンド記述があるのが普通です。
+2. `image`定義のすぐ近くに`command`があるのが普通です。
    ただし記述順はどちらを先にしてもかまいません。
    そこでさらにこの先に進みます。
 @z

@@ -116,28 +116,55 @@ Settings ダイアログの **General** タブにおいて、Docker の起動や
 @z
 
 @x
-* **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
+- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
 @y
-* **Start Docker when you log in**（ログイン時に Docker を起動） - Windows にログインしたときに自動的に Docker Desktop を起動します。
+- **Automatically check for updates**（アップデートの自動チェック）＝ デフォルトで Docker Desktop は新たなバージョンがあるかどうかを自動的に確認するように設定されています。
+  組織に属する一人として Docker Desktop をインストールしている場合、自分では Docker Desktop の更新が許可されていないことがあるかもしれません。
+  その場合は [既存組織のチームプランへのアップグレード](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) を行って、このチェックボックスをオフとし、更新の自動チェックを無効にしてください。
 @z
 
 @x
-* **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+- **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
 @y
-* **Expose daemon on tcp://localhost:2375 without TLS**（TLS なしにデーモンを tcp://localhost:2375 で公開） - このオプションをクリックすることで、古いクライアントが Docker デーモンに接続できるようにします。
+- **Start Docker when you log in**（ログイン時に Docker を起動）＝ このオプションを選択することで Windows にログインしたときに自動的に Docker Desktop を起動するようにします。
+@z
+
+@x
+- **Expose daemon on tcp://localhost:2375 without TLS**: Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+@y
+- **Expose daemon on tcp://localhost:2375 without TLS**（TLS なしにデーモンを tcp://localhost:2375 で公開）＝ このオプションをクリックすることで、古いクライアントが Docker デーモンに接続できるようにします。
    このオプションに利用には十分注意しなければなりません。
    TLS を用いずにデーモンを公開するということは、リモートコードの実行攻撃を受ける可能性があります。
 @z
 
 @x
-* **Send usage statistics** - By default, Docker Desktop sends diagnostics,
+- **Use the WSL 2 based engine**: WSL 2 provides better performance than the legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
+@y
+- **Use the WSL 2 based engine**（WSL 2 ベースのエンジン利用）＝ WSL 2 は従来の Hyper-V バックエンドよりも高性能です。
+  詳しくは [Docker Desktop WSL 2 バックエンド](wsl.md) を参照してください。
+@z
+
+@x
+- **Send usage statistics**: By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
 @y
-* **Send usage statistics**（利用統計の送信） - Docker Desktop では診断情報、クラッシュレポート、利用データを、デフォルトで送信するようになっています。
+- **Send usage statistics**（利用統計の送信）＝ Docker Desktop では診断情報、クラッシュレポート、利用データを、デフォルトで送信するようになっています。
 こういった情報は Docker の改善や、アプリケーションにおける問題解決に役立てることができます。
 チェックボックスをオフにすれば、情報を送信しないようにすることができます。
 Docker では定期的に情報確認を行うことがあります。
+@z
+
+@x
+- **Show weekly tips**: Displays useful advice and suggestions about using Docker.
+@y
+- **Show weekly tips**（1 週間ごとのアドバイス表示）＝ Docker 利用に関して便利なアドバイスや提案を表示します。
+@z
+
+@x
+- **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
+@y
+- **Open Docker Desktop dashboard at startup**（起動時の Docker Desktop ダッシュボードの自動起動）＝ Docker Desktop の起動時にダッシュボードを自動的に開きます。
 @z
 
 @x
@@ -192,42 +219,42 @@ Advanced タブでは、Docker におけるリソースの利用制限を設定�
 @z
 
 @x
-**CPUs**: By default, Docker Desktop is set to use half the number of processors
+- **CPUs**: By default, Docker Desktop is set to use half the number of processors
 available on the host machine. To increase processing power, set this to a
 higher number; to decrease, lower the number.
 @y
-**CPU** デフォルトにおいて Docker Desktop は、ホストマシン上で利用可能なプロセッサー数の半分を利用するものとして設定されています。
+- **CPU** ＝ デフォルトにおいて Docker Desktop は、ホストマシン上で利用可能なプロセッサー数の半分を利用するものとして設定されています。
 プロセッサー性能を向上させるには、この設定値を大きくします。
 逆に抑止するには設定値を小さくします。
 @z
 
 @x
-**Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
+- **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
 allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
 @y
-**メモリ**  デフォルトにおいて Docker Desktop は、実行時メモリとして`2`GB を利用するものとして設定されています。
+- **メモリ** ＝ デフォルトにおいて Docker Desktop は、実行時メモリとして`2`GB を利用するものとして設定されています。
 この値はマシン上において利用可能な全メモリ容量の中から割り当てられます。
 RAM 容量を増やすには、この設定値を大きくします。
 逆に減らすには、この設定値を小さくします。
 @z
 
 @x
-**Swap**: Configure swap file size as needed. The default is 1 GB.
+- **Swap**: Configure swap file size as needed. The default is 1 GB.
 @y
-**スワップ**: 必要に応じてスワップファイルサイズを設定します。
+- **スワップ** ＝ 必要に応じてスワップファイルサイズを設定します。
 デフォルトは 1 GB です。
 @z
 
 @x
-**Disk image size**: Specify the size of the disk image.
+- **Disk image size**: Specify the size of the disk image.
 @y
-**ディスクイメージサイズ**: ディスクイメージのサイズを指定します。
+- **ディスクイメージサイズ** ＝ ディスクイメージのサイズを指定します。
 @z
 
 @x
-**Disk image location**: Specify the location of the Linux volume where containers and images are stored.
+- **Disk image location**: Specify the location of the Linux volume where containers and images are stored.
 @y
-**ディスクイメージの保存場所**: コンテナーやイメージが保存される Linux ボリュームの場所を指定します。
+- **ディスクイメージの保存場所** ＝ コンテナーやイメージが保存される Linux ボリュームの場所を指定します。
 @z
 
 @x
@@ -279,14 +306,14 @@ File share settings are:
 @x
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
 @y
-- **Add a Directory**（ディレクトリの追加）: `+`をクリックして、追加したいディレクトリを指定します。
+- **Add a Directory**（ディレクトリの追加）＝ `+`をクリックして、追加したいディレクトリを指定します。
 @z
 
 @x
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 @y
-- **Apply & Restart**（適用および再起動）:  Docker のバインドマウント（`-v`）機能を利用して、コンテナー間でのディレクトリ共有を可能にします。
+- **Apply & Restart**（適用および再起動）＝  Docker のバインドマウント（`-v`）機能を利用して、コンテナー間でのディレクトリ共有を可能にします。
 @z
 
 @x
