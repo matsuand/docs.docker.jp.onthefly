@@ -203,13 +203,13 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 > The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
 > Windows container mode these resources are managed by Windows. In WSL 2 
 > mode, you can configure limits on the memory, CPU, and swap size allocated
-> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 @y
 > **メモ**
 >
 > Advanced タブは Hyper-V モードにおいてのみ利用可能です。
 > WSL 2 モードや Windows コンテナーモードでは、ここで扱うリソースは Windows において管理されます。
-> WSL 2 モードでは、[WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
+> WSL 2 モードでは、[WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
 @z
 
 @x
