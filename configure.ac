@@ -111,6 +111,7 @@ AC_CONFIG_FILES([Makefile
 		 src/docker-hub/api/Makefile
 		 src/docker-hub/api/latest/Makefile
 		 src/docker-hub/billing/Makefile
+		 src/docker-hub/billing/images/Makefile
 		 src/docker-hub/builds/Makefile
 		 src/docker-hub/builds/images/Makefile
 		 src/docker-hub/images/Makefile

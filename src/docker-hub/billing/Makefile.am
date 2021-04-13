@@ -1,3 +1,5 @@
+SUBDIRS = images
+
 thisdir   = docker-hub/billing
 origdir   = @abs_origdir@/$(thisdir)
 srcdir    = @srcdir@
