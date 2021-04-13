@@ -57,6 +57,161 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.6
+2021-04-12
+@y
+## 20.10.6
+2021-04-12
+@z
+
+@x
+### Client
+@y
+{: #client }
+### クライアント
+@z
+
+@x
+* Apple Silicon (darwin/arm64) support for Docker CLI [docker/cli#3042](https://github.com/docker/cli/pull/3042)
+* config: print deprecation warning when falling back to pre-v1.7.0 config file `~/.dockercfg`. Support for this file will be removed in a future release [docker/cli#3000](https://github.com/docker/cli/pull/3000)
+@y
+* Docker CLI において Apple Silicon (darwin/arm64) をサポートしました。
+  [docker/cli#3042](https://github.com/docker/cli/pull/3042)
+* config: pre-v1.7.0 の設定ファイル`~/.dockercfg`になっている場合に、書式が古い旨のメッセージを表示します。
+  [docker/cli#3000](https://github.com/docker/cli/pull/3000)
+@z
+
+@x
+### Builder
+@y
+### Builder
+@z
+
+@x
+* Fix classic builder silently ignoring unsupported Dockerfile options and prompt to enable BuildKit instead [moby/moby#42197](https://github.com/moby/moby/pull/42197)
+@y
+* 古いビルダーが Dockerfile オプションのうちサポートされていないものを、何も表示せずにやり過ごす点を修正し、代わりに BuildKit を有効にする方法を示すことにしました。
+  [moby/moby#42197](https://github.com/moby/moby/pull/42197)
+@z
+
+@x
+### Logging
+@y
+{: #logging }
+### ログ処理
+@z
+
+@x
+* json-file: fix sporadic unexpected EOF errors [moby/moby#42174](https://github.com/moby/moby/pull/42174)
+@y
+* json-file: 散発的に発生する unexpected EOF エラーを修正しました。
+  [moby/moby#42174](https://github.com/moby/moby/pull/42174)
+@z
+
+@x
+### Networking
+@y
+{: #networking }
+### ネットワーク処理
+@z
+
+@x
+* Fix a regression in docker 20.10, causing  IPv6 addresses no longer to be bound by default when mapping ports [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+* Fix implicit IPv6 port-mappings not included in API response. Before docker 20.10, published ports were accessible through both IPv4 and IPv6 by default, but the API only included information about the IPv4 (0.0.0.0) mapping [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+* Fix a regression in docker 20.10, causing the docker-proxy  to not be terminated in all cases [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+* Fix iptables forwarding rules not being cleaned up upon container removal [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+@y
+* Docker 20.10 における処理後退を修正し、ポートマッピング時に IPv6 アドレスがデフォルトでバインドされなくなるようにしました。
+  [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+* API レスポンスに含まれない暗黙の IPv6 ポートマッピングを修正しました。
+  Docker 20.10 よりも前であれば、公開ポートはデフォルトで IPv4、IPv6 のいずれからでもアクセス可能でした。
+  しかし API には IPv4（0.0.0.0）のマッピング情報しか含まれていませんでした。
+  [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+* Docker 20.10 における処理後退を修正し、あらゆる状況において docker-proxy が停止しないようにしました。
+  [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+* コンテナー削除に際して iptables のフォワードルールがクリーンアップされない問題を修正しました。
+  [moby/moby#42205](https://github.com/moby/moby/pull/42205)
+@z
+
+@x
+### Packaging
+@y
+{: #packaging }
+### パッケージ
+@z
+
+@x
+* Update containerd to [v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4) for static binaries. The containerd.io package on apt/yum repos already had this update out of band. Includes a fix for [CVE-2021-21334](https://github.com/containerd/containerd/security/advisories/GHSA-6g2q-w5j3-fwh4). [moby/moby#42124](https://github.com/moby/moby/pull/42124)
+* Packages for Debian/Raspbian 11 Bullseye, Ubuntu 21.04 Hirsute Hippo and Fedora 34 [docker/docker-ce-packaging#521](https://github.com/docker/docker-ce-packaging/pull/521) [docker/docker-ce-packaging#522](https://github.com/docker/docker-ce-packaging/pull/522) [docker/docker-ce-packaging#533](https://github.com/docker/docker-ce-packaging/pull/533)
+* Provide the [Docker Scan CLI](https://github.com/docker/scan-cli-plugin) plugin on Linux amd64 via a `docker-scan-plugin` package as a recommended dependency for the `docker-ce-cli` package [docker/docker-ce-packaging#537](https://github.com/docker/docker-ce-packaging/pull/537)
+* Include VPNKit binary for arm64 [moby/moby#42141](https://github.com/moby/moby/pull/42141)
+@y
+* 安定版バイナリとして containerd を [v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4) に更新しました。
+  containerd.io パッケージの更新版は、これまで apt/yum リポジトリの対象外になっていました。
+  [CVE-2021-21334](https://github.com/containerd/containerd/security/advisories/GHSA-6g2q-w5j3-fwh4) に対する修正を含みます。
+  [moby/moby#42124](https://github.com/moby/moby/pull/42124)
+* Debian/Raspbian 11 Bullseye、Ubuntu 21.04 Hirsute Hippo、Fedora 34 へのパッケージ対応。
+  [docker/docker-ce-packaging#521](https://github.com/docker/docker-ce-packaging/pull/521)、
+  [docker/docker-ce-packaging#522](https://github.com/docker/docker-ce-packaging/pull/522)、
+  [docker/docker-ce-packaging#533](https://github.com/docker/docker-ce-packaging/pull/533)
+* Linux amd64 において`docker-ce-cli`の推奨パッケージに`docker-scan-plugin`を加え、これを通じて [Docker スキャン CLI](https://github.com/docker/scan-cli-plugin) プラグインを提供しました。
+  [docker/docker-ce-packaging#537](https://github.com/docker/docker-ce-packaging/pull/537)
+* arm64 に対して VPNKit バイナリを含めました。
+  [moby/moby#42141](https://github.com/moby/moby/pull/42141)
+@z
+
+@x
+### Plugins
+@y
+{: #plugins }
+### プラグイン
+@z
+
+@x
+* Fix docker plugin create making plugins that were incompatible with older versions of Docker [moby/moby#42256](https://github.com/moby/moby/pull/42256)
+@y
+* Docker プラグインから生成されるプラグインが、Docker の旧バージョンと非互換となってしまう問題を修正しました。
+  [moby/moby#42256](https://github.com/moby/moby/pull/42256)
+@z
+
+@x
+### Rootless
+@y
+### Rootless
+@z
+
+@x
+* Update RootlessKit to [v0.14.1](https://github.com/rootless-containers/rootlesskit/releases/tag/v0.14.1) (see also [v0.14.0](https://github.com/rootless-containers/rootlesskit/releases/tag/v0.14.0) [v0.13.2](https://github.com/rootless-containers/rootlesskit/releases/tag/v0.13.2)) [moby/moby#42186](https://github.com/moby/moby/pull/42186) [moby/moby#42232](https://github.com/moby/moby/pull/42232)
+* dockerd-rootless-setuptool.sh: create CLI context "rootless" [moby/moby#42109](https://github.com/moby/moby/pull/42109)
+* dockerd-rootless.sh: prohibit running as root [moby/moby#42072](https://github.com/moby/moby/pull/42072)
+* Fix "operation not permitted" when bind mounting existing mounts [moby/moby#42233](https://github.com/moby/moby/pull/42233)
+* overlay2: fix "createDirWithOverlayOpaque(...) ... input/output error" [moby/moby#42235](https://github.com/moby/moby/pull/42235)
+* overlay2: support "userxattr" option (kernel 5.11) [moby/moby#42168](https://github.com/moby/moby/pull/42168)
+* btrfs: allow unprivileged user to delete subvolumes (kernel >= 4.18) [moby/moby#42253](https://github.com/moby/moby/pull/42253)
+* cgroup2: Move cgroup v2 out of experimental [moby/moby#42263](https://github.com/moby/moby/pull/42263)
+@y
+* RootlessKit を [v0.14.1](https://github.com/rootless-containers/rootlesskit/releases/tag/v0.14.1) に更新しました。
+  （[v0.14.0](https://github.com/rootless-containers/rootlesskit/releases/tag/v0.14.0)、
+  [v0.13.2](https://github.com/rootless-containers/rootlesskit/releases/tag/v0.13.2) も参照してください。)
+  [moby/moby#42186](https://github.com/moby/moby/pull/42186)、
+  [moby/moby#42232](https://github.com/moby/moby/pull/42232)
+* dockerd-rootless-setuptool.sh: CLI コンテキスト「rootless」を生成しました。
+  [moby/moby#42109](https://github.com/moby/moby/pull/42109)
+* dockerd-rootless.sh: root としての実行を禁止しました。
+  [moby/moby#42072](https://github.com/moby/moby/pull/42072)
+* 既存のマウントをバインドマウントする際の「operation not permitted」を修正しました。
+  [moby/moby#42233](https://github.com/moby/moby/pull/42233)
+* overlay2: 「createDirWithOverlayOpaque(...) ... input/output error」を修正しました。
+  [moby/moby#42235](https://github.com/moby/moby/pull/42235)
+* overlay2: 「userxattr」オプションに対応しました（カーネル 5.11）。
+  [moby/moby#42168](https://github.com/moby/moby/pull/42168)
+* btrfs: 非特権ユーザーがサブボリュームを削除できるようにしました（カーネル 4.18 以上）。
+  [moby/moby#42253](https://github.com/moby/moby/pull/42253)
+* cgroup2: cgroup v2 を試験的機能から格上げしました。
+  [moby/moby#42263](https://github.com/moby/moby/pull/42263)
+@z
+
+@x
 ## 20.10.5
 2021-03-02
 @y
@@ -179,7 +334,8 @@ for Docker Engine.
 @x
 ### Logger
 @y
-### Logger
+{: #logger }
+### ログ処理
 @z
 
 @x
