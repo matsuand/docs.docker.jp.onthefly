@@ -53,26 +53,10 @@ Let us know if these commands are a higher priority for your usecases.
 
 @x
 * `compose build --memory`
-* `compose build --no-cache`
-* `compose config --no-interpolate`
-* `compose config --services`
-* `compose config --volumes`
-* `compose config --hash`
-* `compose images`
-* `compose port`
-* `compose pull --ignore-pull-failures`
-* `compose push --ignore-push-failures`
+* `compose config --profiles`
 @y
 * `compose build --memory`
-* `compose build --no-cache`
-* `compose config --no-interpolate`
-* `compose config --services`
-* `compose config --volumes`
-* `compose config --hash`
-* `compose images`
-* `compose port`
-* `compose pull --ignore-pull-failures`
-* `compose push --ignore-push-failures`
+* `compose config --profiles`
 @z
 
 @x
