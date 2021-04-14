@@ -332,6 +332,7 @@ testuser:231072:65536
 - Only the following storage drivers are supported:
   - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
+  - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
 - Cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](#limiting-resources).
 - Following features are not supported:
@@ -348,6 +349,7 @@ testuser:231072:65536
 - 以下のストレージドライバーのみがサポートされます。
   - `overlay2`（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系および Debian 系カーネルのみ。）
   - `fuse-overlayfs`（カーネル 4.18 またはそれ以降の稼動時、そして`fuse-overlayfs`インストール時のみ。）
+  - `btrfs`（カーネル 4.18 またはそれ以降で利用する場合のみ。あるいは`user_subvol_rm_allowed`マウントオプションを使って`~/.local/share/docker`をマウントしている場合。）
   - `vfs`
 - cgroup は cgroup v2 および systemd を用いて実行するときのみサポートされます。
   [リソースの利用制限](#limiting-resources) を参照してください。
@@ -757,9 +759,9 @@ Remarks about directory paths:
 @z
 
 @x
-You need to specify the socket path explicitly.
+You need to specify either the socket path or the CLI context explicitly.
 @y
-ソケットパスは明示的に指定する必要があります。
+ソケットパスまたは CLI コンテキストを明示的に指定する必要があります。
 @z
 
 @x
@@ -781,16 +783,13 @@ $ docker run -d -p 8080:80 nginx
 @z
 
 @x
-To specify the socket path using `docker context`:
+To specify the CLI context using `docker context`:
 @y
-`docker context`を用いてソケットパスを指定するには以下のようにします。
+`docker context`を用いて CLI コンテキストを指定するには以下のようにします。
 @z
 
 @x
 ```console
-$ docker context create rootless --description "for rootless mode" --docker "host=unix://$XDG_RUNTIME_DIR/docker.sock"
-rootless
-Successfully created context "rootless"
 $ docker context use rootless
 rootless
 Current context is now "rootless"
@@ -798,9 +797,6 @@ $ docker run -d -p 8080:80 nginx
 ```
 @y
 ```console
-$ docker context create rootless --description "for rootless mode" --docker "host=unix://$XDG_RUNTIME_DIR/docker.sock"
-rootless
-Successfully created context "rootless"
 $ docker context use rootless
 rootless
 Current context is now "rootless"

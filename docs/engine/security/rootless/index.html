@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-14 19:33:43 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>root ユーザー以外による Docker デーモン起動（rootless モード） | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="root ユーザー以外による Docker デーモン起動（rootless モード）" />
   <meta property="og:description" content="root ユーザー以外によって Docker デーモンを起動します（rootless モード）。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-14T19:33:43+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/rootless/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-14T19:33:43+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"root ユーザー以外による Docker デーモン起動（rootless モード）","description":"root ユーザー以外によって Docker デーモンを起動します（rootless モード）。","url":"https://docs.docker.com/engine/security/rootless/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -247,6 +247,7 @@ This issue is tracked in <a href="https://github.com/moby/moby/issues/41230">mob
     <ul>
       <li><code class="language-plaintext highlighter-rouge">overlay2</code>（カーネル 5.11 およびこれ以降が稼働する場合のみ。または Ubuntu 系および Debian 系カーネルのみ。）</li>
       <li><code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>（カーネル 4.18 またはそれ以降の稼動時、そして<code class="language-plaintext highlighter-rouge">fuse-overlayfs</code>インストール時のみ。）</li>
+      <li><code class="language-plaintext highlighter-rouge">btrfs</code>（カーネル 4.18 またはそれ以降で利用する場合のみ。あるいは<code class="language-plaintext highlighter-rouge">user_subvol_rm_allowed</code>マウントオプションを使って<code class="language-plaintext highlighter-rouge">~/.local/share/docker</code>をマウントしている場合。）</li>
       <li><code class="language-plaintext highlighter-rouge">vfs</code></li>
     </ul>
   </li>
@@ -438,7 +439,7 @@ This directory is different from <code class="language-plaintext highlighter-rou
 
 <h3 id="client">クライアント</h3>
 
-<p>ソケットパスは明示的に指定する必要があります。</p>
+<p>ソケットパスまたは CLI コンテキストを明示的に指定する必要があります。</p>
 
 <p><code class="language-plaintext highlighter-rouge">$DOCKER_HOST</code>を用いてソケットパス指定するには以下のようにします。</p>
 
@@ -446,12 +447,9 @@ This directory is different from <code class="language-plaintext highlighter-rou
 <span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:80 nginx
 </code></pre></div></div>
 
-<p><code class="language-plaintext highlighter-rouge">docker context</code>を用いてソケットパスを指定するには以下のようにします。</p>
+<p><code class="language-plaintext highlighter-rouge">docker context</code>を用いて CLI コンテキストを指定するには以下のようにします。</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context create rootless <span class="nt">--description</span> <span class="s2">"for rootless mode"</span> <span class="nt">--docker</span> <span class="s2">"host=unix://</span><span class="nv">$XDG_RUNTIME_DIR</span><span class="s2">/docker.sock"</span>
-<span class="go">rootless
-Successfully created context "rootless"
-</span><span class="gp">$</span><span class="w"> </span>docker context use rootless
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context use rootless
 <span class="go">rootless
 Current context is now "rootless"
 </span><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 8080:80 nginx
