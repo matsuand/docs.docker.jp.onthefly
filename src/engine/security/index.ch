@@ -178,11 +178,11 @@ started in 2006, and initially merged in kernel 2.6.24.
 @x
 Running containers (and applications) with Docker implies running the
 Docker daemon. This daemon requires `root` privileges unless you opt-in
-to [Rootless mode](rootless.md) (experimental), and you should therefore
-be aware of some important details.
+to [Rootless mode](rootless.md), and you should therefore be aware of
+some important details.
 @y
 コンテナー（およびアプリケーション）を Docker とともに動作させるということは、暗に Docker デーモンを動作させるということです。
-デーモンの起動には [rootless モード](rootless.md) (試験的機能) を用いるのでない限りは`root`権限を必要とします。
+デーモンの起動には [rootless モード](rootless.md) を用いるのでない限りは`root`権限を必要とします。
 したがって重要な点をいくつか意識しておく必要があります。
 @z
 
