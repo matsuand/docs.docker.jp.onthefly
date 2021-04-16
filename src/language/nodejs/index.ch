@@ -55,9 +55,9 @@ Let's get started!
 @z
 
 @x
-[Build your Node.js image](build-images.md){: .button .outline-btn}
+[Build your Node.js image](build-images.md){: .button .primary-btn}
 @y
-[Node.js イメージのビルド](build-images.md){: .button .outline-btn}
+[Node.js イメージのビルド](build-images.md){: .button .primary-btn}
 @z
 
 @x

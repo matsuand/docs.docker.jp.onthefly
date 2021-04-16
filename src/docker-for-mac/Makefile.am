@@ -16,6 +16,7 @@ ctie:
 
 bases = \
 	apple-m1           \
+	apple-silicon      \
 	docker-toolbox     \
 	edge-release-notes \
 	index              \

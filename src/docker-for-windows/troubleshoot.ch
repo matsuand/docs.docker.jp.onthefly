@@ -985,6 +985,7 @@ Docker Desktop excludes support for the following types of issues:
 @x
 * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 * Running on unsupported operating systems, including beta/preview versions of operating systems
+* Running containers of a different architecture using emulation
 * Support for the Docker engine, Docker CLI, or other bundled Linux components
 * Support for Kubernetes
 * Features labeled as experimental
@@ -1001,6 +1002,7 @@ Docker Desktop excludes support for the following types of issues:
 @y
 * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 * Running on unsupported operating systems, including beta/preview versions of operating systems
+* Running containers of a different architecture using emulation
 * Support for the Docker engine, Docker CLI, or other bundled Linux components
 * Support for Kubernetes
 * Features labeled as experimental

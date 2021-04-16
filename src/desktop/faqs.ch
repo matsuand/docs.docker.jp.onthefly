@@ -433,16 +433,11 @@ Docker 社は診断情報内のデータを、特定の問題を調査するた�
 @z
 
 @x
-At the moment, Docker Desktop is compatible with Intel processors only. For more information, see [Apple M1 Tech preview](../docker-for-mac/apple-m1.md).
+Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](../docker-for-mac/apple-silicon.md).
 @y
-現時点において Docker Desktop は Intel プロセッサーのみ互換性があります。
-詳しくは [Apple M1 技術プレビュー](../docker-for-mac/apple-m1.md) を参照してください。
-@z
-
-@x
-You can also follow the status of Apple Silicon support in our [Roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
-@y
-あるいは [ロードマップ](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"} から Apple シリコンサポートの状況を確認することができます。
+はい。
+Docker Desktop for Mac は Apple silicon 上にインストールできます。
+詳しくは [Docker Desktop for Apple silicon](../docker-for-mac/apple-silicon.md) を参照してください。
 @z
 
 @x

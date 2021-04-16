@@ -16,17 +16,24 @@ title: Docker Desktop の Mac へのインストール
 @z
 
 @x
-Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
-You can download Docker Desktop for Mac from Docker Hub.
+Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, installation instructions, and automatic updates.
 @y
-Docker Desktop for Mac は Mac 向け Docker の[Community](https://www.docker.com/community-edition) バージョンです。
-Docker Desktop for Mac のダウンロードは Docker Hub からダウンロードすることができます。
+Docker Desktop for Mac へようこそ。
+このページでは Docker Desktop for Mac のシステム要件、ダウンロード URL、インストール手順、自動アップデートについて説明します。
 @z
 
 @x
-[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/){: .button .outline-btn}
+Download Docker Desktop for Mac:
 @y
-[Docker Hub からのダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-mac/){: .button .outline-btn}
+Docker Desktop for Mac は以下からダウンロードします。
+@z
+
+@x
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@y
+[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 @z
 
 @x
@@ -43,9 +50,32 @@ Docker Desktop のダウンロードによって、[Docker Software End User Lic
 @z
 
 @x
-Your Mac must meet the following requirements to successfully install Docker Desktop:
+Your Mac must meet the following requirements to successfully install Docker Desktop.
 @y
 Docker Desktop を Mac に正常にインストールするには、以下のシステム要件が満たされている必要があります。
+@z
+
+@x
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#mac-intel">Mac with Intel chip</a></li>
+<li><a data-toggle="tab" data-target="#mac-apple-silicon">Mac with Apple silicon</a></li>
+</ul>
+<div class="tab-content">
+<div id="mac-intel" class="tab-pane fade in active" markdown="1">
+@y
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#mac-intel">Intel チップの Mac</a></li>
+<li><a data-toggle="tab" data-target="#mac-apple-silicon">Apple silicon の Mac</a></li>
+</ul>
+<div class="tab-content">
+<div id="mac-intel" class="tab-pane fade in active" markdown="1">
+@z
+
+@x
+### Mac with Intel chip
+@y
+{: #mac-with-Intel-chip }
+### Intel チップの Mac
 @z
 
 @x
@@ -86,6 +116,52 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 @y
 - VirtualBox バージョン 4.3.30 以前はインストールしないでください。
   Docker Desktop との互換性がないからです。
+@z
+
+@x
+</div>
+<div id="mac-apple-silicon" class="tab-pane fade" markdown="1">
+@y
+</div>
+<div id="mac-apple-silicon" class="tab-pane fade" markdown="1">
+@z
+
+@x
+### Mac with Apple silicon
+@y
+{: #mac-with-apple-silicon }
+### Apple silicon の Mac
+@z
+
+@x
+- You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
+@y
+- バイナリの中に Darwin/AMD64 向けのものが残っているため **Rosetta 2** のインストールが必要です。
+  Rosetta 2 のインストールはコマンドラインから手動で、以下のようにして行います。
+@z
+
+@x
+  ```bash
+    softwareupdate --install-rosetta
+  ```
+@y
+  ```bash
+    softwareupdate --install-rosetta
+  ```
+@z
+
+@x
+ For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+@y
+ 詳しくは [Docker Desktop for Apple silicon](apple-silicon.md) を参照してください。
+@z
+
+@x
+</div>
+</div>
+@y
+</div>
+</div>
 @z
 
 @x
@@ -262,6 +338,7 @@ Mac から Docker Desktop をアンインストールするには以下を実行
 
 @x
 - [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
+- [Docker Desktop for Apple silicon](apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
@@ -271,6 +348,7 @@ Mac から Docker Desktop をアンインストールするには以下を実行
   on backing up and restoring data related to Docker.
 @y
 - [はじめよう](index.md)では Mac 上での Docker Desktop の概要、基本的な Docker コマンド例、ヘルプを得たりフィードバックを行う方法、また Mac 上の Docker Desktop に関する他のトピックへのリンクを示しています。
+- [Docker Desktop for Apple silicon](apple-silicon.md) では、Docker Desktop for Apple silicon について詳細に説明しています。
 - [トラブルシューティング](troubleshoot.md) では一般的な質問、解決方法、診断実行や課題送信などを示しています。
 - [FAQ](../desktop/faqs.md) はよくたずねられる質問とその回答を示します。
 - [リリースノート](release-notes.md) では Docker Desktop リリースに関連したコンポーネントのアップデート、新機能、改善機能を示しています。

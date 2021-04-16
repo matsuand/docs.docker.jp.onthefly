@@ -32,6 +32,84 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 3.3.1
+2021-04-15
+@y
+## Docker Desktop 3.3.1
+2021-04-15
+@z
+
+@x
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@y
+[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@z
+
+@x
+### New
+@y
+{: #new }
+### 新機能
+@z
+
+@x
+Docker Desktop is now available for Apple silicon as well as Intel chips. This enables developers with their choice of local development environments, and extends development pipelines for ARM-based applications. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+@y
+Docker Desktop は Intel チップに加えて Apple silicon においても利用できるようになりました。
+開発者によるローカル開発環境の選択肢が広がったことになります。
+また ARM ベースアプリケーション開発に拡張することができます。
+詳しくは [Docker Desktop for Apple silicon](apple-silicon.md) を参照してください。
+@z
+
+@x
+### Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Docker Desktop now ensures the permissions of `/dev/null` and other devices are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527)
+- Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
+@y
+- `--privileged`が指定されたコンテナー内において、`/dev/null`などのデバイスが、適切に`0666`（`rw-rw-rw-`）となりようにしました。
+  [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527) を Fix に。
+- Docker Hub に対するバックエンドによる接続ができなかった場合、Docker Desktop が起動に失敗する問題を修正しました。
+  [docker/for-win#10896](https://github.com/docker/for-win/issues/10896) を Fix に。
+@z
+
+@x
+- **Mac with Apple silicon**: Docker Desktop now reduces the idle CPU consumption.
+@y
+- **Apple silicon の Mac** ＝ Docker Desktop にてアイドル時の CPU 消費を減少させました。
+@z
+
+@x
+### Known issues
+@y
+{: #known-issues }
+### 既知の問題
+@z
+
+@x
+**Apple silicon**
+@y
+**Apple silicon**
+@z
+
+@x
+- `ping` from inside a container to the Internet does not work as expected. To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+- Users may occasionally experience data drop when a TCP stream is half-closed.
+@y
+- コンテナー内からインターネットに向けての`ping`が期待どおりに動作しません。
+  ネットワークの確認にあたっては`curl`や`wget`を利用してください。
+  [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861) を参照のこと。
+- TCP ストリームがハーフクロース（half-closed）された際に、たまにデータが欠損する場合があります。
+@z
+
+@x
 ## Docker Desktop 3.3.0
 2021-04-08
 @y
@@ -40,9 +118,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
 @y
-> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [ダウンロード](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
 @z
 
 @x

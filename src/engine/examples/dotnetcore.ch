@@ -113,11 +113,11 @@ tutorial](https://www.asp.net/get-started) to initialize a project or clone our 
 
 @x
 ```dockerfile
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 @y
 ```dockerfile
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 @z
 
@@ -143,14 +143,14 @@ RUN dotnet publish -c Release -o out
 
 @x
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 @y
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
@@ -215,14 +215,14 @@ obj/
 
 @x
       ```dockerfile
-      FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+      FROM mcr.microsoft.com/dotnet/aspnet:5.0
       COPY bin/Release/netcoreapp3.1/publish/ App/
       WORKDIR /App
       ENTRYPOINT ["dotnet", "aspnetapp.dll"]
       ```
 @y
       ```dockerfile
-      FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+      FROM mcr.microsoft.com/dotnet/aspnet:5.0
       COPY bin/Release/netcoreapp3.1/publish/ App/
       WORKDIR /App
       ENTRYPOINT ["dotnet", "aspnetapp.dll"]
@@ -303,12 +303,12 @@ $ docker run -d -p 8080:80 --name myapp aspnetapp
 
 @x
   - [ASP.NET Core](https://docs.microsoft.com/aspnet/core/)
-  - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/r/microsoft/dotnet/)
+  - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/_/microsoft-dotnet-sdk/)
   - [Building Docker Images for ASP.NET Core](https://docs.microsoft.com/aspnet/core/host-and-deploy/docker/building-net-docker-images)
   - [Docker Tools for Visual Studio](https://docs.microsoft.com/dotnet/articles/core/docker/visual-studio-tools-for-docker)
 @y
   - [ASP.NET Core](https://docs.microsoft.com/aspnet/core/)
-  - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/r/microsoft/dotnet/)
+  - [Microsoft ASP.NET Core on Docker Hub](https://hub.docker.com/_/microsoft-dotnet-sdk/)
   - [Building Docker Images for ASP.NET Core](https://docs.microsoft.com/aspnet/core/host-and-deploy/docker/building-net-docker-images)
   - [Docker Tools for Visual Studio](https://docs.microsoft.com/dotnet/articles/core/docker/visual-studio-tools-for-docker)
 @z

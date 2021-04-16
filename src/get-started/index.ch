@@ -185,27 +185,9 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 @z
 
 @x
-- [Download Docker Desktop for Mac](https://desktop.docker.com/mac/stable/Docker.dmg)
-@y
-- [Docker Desktop for Mac](https://desktop.docker.com/mac/stable/Docker.dmg) のダウンロード。
-@z
-
-@x
-- [Download Docker Desktop for Windows](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
-@y
-- [Docker Desktop for Windows](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe) のダウンロード。
-@z
-
-@x
-- [Install Docker Engine on Linux](../engine/install/index.md)
-@y
-- [Docker Engine on Linux](../engine/install/index.md) のインストール。
-@z
-
-@x
 For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 @y
-Docker Desktop のインストール手順については、[Mac 上での Docker Desktop のインストール](../docker-for-mac/install.md) や [Windows 上での Docker Desktop のインストール](../docker-for-windows/install.md) を参照してください。
+Docker Desktop のインストール手順については [Docker Desktop の Mac へのインストール](../docker-for-mac/install.md) か [Docker Desktop の Windows へのインストール](../docker-for-windows/install.md) を参照してください。
 @z
 
 @x

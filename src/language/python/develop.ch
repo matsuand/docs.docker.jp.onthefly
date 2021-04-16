@@ -674,9 +674,9 @@ In the next module, we’ll take a look at how to set up a CI/CD pipeline using 
 @z
 
 @x
-[Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
+[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
 @y
-[CI/CD の設定](configure-ci-cd.md){: .button .outline-btn}
+[CI/CD の設定](configure-ci-cd.md){: .button .primary-btn}
 @z
 
 @x

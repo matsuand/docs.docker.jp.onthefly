@@ -33,8 +33,8 @@ better with Docker.
 @x
 ## Manage Docker as a non-root user
 @y
-## root ユーザー以外で Docker を管理する
 {: #manage-docker-as-a-non-root-user }
+## root ユーザー以外で Docker を管理する
 @z
 
 @x
@@ -227,8 +227,8 @@ To create the `docker` group and add your user:
 @x
 ## Configure Docker to start on boot
 @y
-## システムブート時の Docker 起動設定
 {: #configure-docker-to-start-on-boot }
+## システムブート時の Docker 起動設定
 @z
 
 @x
@@ -286,8 +286,8 @@ HTTP プロキシーを加える必要がある場合、Docker の起動に関�
 @x
 ## Use a different storage engine
 @y
-## 異なるストレージドライバーの利用
 {: #use-a-different-storage-engine }
+## 異なるストレージドライバーの利用
 @z
 
 @x
@@ -303,8 +303,8 @@ your host's Linux distribution and available kernel drivers.
 @x
 ## Configure default logging driver
 @y
-## デフォルトのログドライバーの設定
 {: #configure-default-logging-driver }
+## デフォルトのログドライバーの設定
 @z
 
 @x
@@ -334,8 +334,8 @@ logs to a remote logging aggregator.
 @x
 ## Configure where the Docker daemon listens for connections
 @y
-## Docker デーモンがどこからの接続待ちをするかの設定
 {: #configure-where-the-docker-daemon-listens-for-connections }
+## Docker デーモンがどこからの接続待ちをするかの設定
 @z
 
 @x
@@ -396,8 +396,8 @@ systemd を利用していない Linux ディストリビューションでは�
 @x
 ### Configuring remote access with `systemd` unit file
 @y
-### `systemd`ユニットファイルによるリモートアクセスの設定
 {: #configuring-remote-access-with-systemd-unit-file }
+### `systemd`ユニットファイルによるリモートアクセスの設定
 @z
 
 @x
@@ -487,8 +487,8 @@ systemd を利用していない Linux ディストリビューションでは�
 @x
 ### Configuring remote access with `daemon.json`
 @y
-### `daemon.json`によるリモートアクセスの設定
 {: #configuring-remote-access-with-daemonjson }
+### `daemon.json`によるリモートアクセスの設定
 @z
 
 @x
@@ -539,8 +539,8 @@ systemd を利用していない Linux ディストリビューションでは�
 @x
 ## Enable IPv6 on the Docker daemon
 @y
-## Docker デーモンの IPv6 利用
 {: #enable-ipv6-on-the-docker-daemon }
+## Docker デーモンの IPv6 利用
 @z
 
 @x
@@ -553,15 +553,15 @@ Docker デーモンに対して IPv6 を有効にするには、[IPv6 サポー�
 @x
 ## Troubleshooting
 @y
-## トラブルシューティング
 {: #troubleshooting }
+## トラブルシューティング
 @z
 
 @x
 ### Kernel compatibility
 @y
-### カーネルの条件
 {: #kernel-compatibility }
+### カーネルの条件
 @z
 
 @x
@@ -600,8 +600,8 @@ macOS では動作しません。
 @x
 ### `Cannot connect to the Docker daemon`
 @y
-### `Cannot connect to the Docker daemon`
 {: #cannot-connect-to-the-docker-daemon }
+### `Cannot connect to the Docker daemon`
 @z
 
 @x
@@ -679,8 +679,8 @@ from connecting.
 @x
 ### IP forwarding problems
 @y
-### IP フォワーディングに関する問題
 {: #ip-forwarding-problems }
+### IP フォワーディングに関する問題
 @z
 
 @x
@@ -734,8 +734,8 @@ This configuration allows IP forwarding from the container as expected.
 @x
 ### `DNS resolver found in resolv.conf and containers can't use it`
 @y
-### `DNS resolver found in resolv.conf and containers can't use it`
 {: #dns-resolver-found-in-resolvconf-and-containers-cant-use-it }
+### `DNS resolver found in resolv.conf and containers can't use it`
 @z
 
 @x
@@ -821,8 +821,8 @@ public nameservers are not adequate. You have two choices:
 @x
 ### Specify DNS servers for Docker
 @y
-### Docker が利用する DNS サーバーの指定
 {: #specify-dns-servers-for-docker }
+### Docker が利用する DNS サーバーの指定
 @z
 
 @x
@@ -959,8 +959,8 @@ at `/etc/docker/daemon.json`.
 @x
 #### Disable `dnsmasq`
 @y
-#### `dnsmasq`の無効化
 {: #disable-dnsmasq }
+#### `dnsmasq`の無効化
 @z
 
 @x
@@ -1015,21 +1015,21 @@ Docker デーモンが特定の IP アドレスを利用するような設定を
 
 @x
     ```console
-    $ sudo restart network-manager
-    $ sudo restart docker
+    $ sudo systemctl restart network-manager
+    $ sudo systemctl restart docker
     ```
 @y
     ```console
-    $ sudo restart network-manager
-    $ sudo restart docker
+    $ sudo systemctl restart network-manager
+    $ sudo systemctl restart docker
     ```
 @z
 
 @x
 ##### RHEL, CentOS, or Fedora
 @y
-##### RHEL、CentOS、Fedora
 {: #rhel-centos-or-fedora }
+##### RHEL、CentOS、Fedora
 @z
 
 @x
@@ -1046,16 +1046,12 @@ RHEL、CentOS、Fedora において`dnsmasq`を無効にするには以下のよ
 
 @x
     ```console
-    $ sudo service dnsmasq stop
-@y
-    ```console
-    $ sudo service dnsmasq stop
-@z
-
-@x
+    $ sudo systemctl stop dnsmasq
     $ sudo systemctl disable dnsmasq
     ```
 @y
+    ```console
+    $ sudo systemctl stop dnsmasq
     $ sudo systemctl disable dnsmasq
     ```
 @z
@@ -1070,8 +1066,8 @@ RHEL、CentOS、Fedora において`dnsmasq`を無効にするには以下のよ
 @x
 ### Allow access to the remote API through a firewall
 @y
-### ファイアーウォール越しにリモート API へのアクセスを許可する
 {: #allow-access-to-the-remote-api-through-a-firewall }
+### ファイアーウォール越しにリモート API へのアクセスを許可する
 @z
 
 @x
@@ -1237,6 +1233,7 @@ Ubuntu や Debian においてこの機能を有効にするには以下の手�
 @x
 ## Next steps
 @y
+{: #next-steps }
 ## 次のステップ
 @z
 

@@ -1199,7 +1199,7 @@ the service's task containers.
 @z
 
 @x
-- `source`: The name of the config as it exists in Docker.
+- `source`: The identifier of the config as it is defined in this configuration.
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the mounted config file
@@ -1214,13 +1214,13 @@ the service's task containers.
   [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 @y
-- `source`: Docker 内に設定する config 名。
-- `target`: サービスのタスクコンテナー内にマウントされるファイルパス名。
+- `source`＝ この設定ファイル内において定義される config の識別子。
+- `target`＝ サービスのタスクコンテナー内にマウントされるファイルパス名。
   指定されない場合のデフォルトは `/<source>`。
-- `uid`と`gid`: サービスのタスクコンテナー内にマウントされる config ファイルの所有者を表わす UID 値および GID 値。
+- `uid`と`gid`＝ サービスのタスクコンテナー内にマウントされる config ファイルの所有者を表わす UID 値および GID 値。
   指定されない場合のデフォルトは、Linux においては `0`。
   Windows においてはサポートされません。
-- `mode`: サービスのタスクコンテナー内にマウントされる config ファイルのパーミッション。
+- `mode`＝ サービスのタスクコンテナー内にマウントされる config ファイルのパーミッション。
   8 進数表記。
   たとえば`0444`であればすべて読み込み可。
   デフォルトは `0444`。
@@ -4224,7 +4224,7 @@ the service's task containers.
 @z
 
 @x
-- `source`: The name of the secret as it exists in Docker.
+- `source`: The identifier of the secret as it is defined in this configuration.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task containers. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the file within
@@ -4240,7 +4240,7 @@ the service's task containers.
   [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 @y
-- `source`: Docker 内に存在している secret 名。
+- `source`＝ この設定ファイル内において定義される secret の識別子。
 - `target`: サービスのタスクコンテナーにおいて`/run/secrets/`にマウントされるファイル名。
   指定されなかった場合のデフォルトは`source`となる。
 - `uid`と`gid`: サービスのタスクコンテナーにおいて`/run/secrets/`内のファイルを所有する UID 値と GID 値。

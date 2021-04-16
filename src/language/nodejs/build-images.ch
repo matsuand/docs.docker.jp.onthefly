@@ -750,9 +750,9 @@ In this module, we took a look at setting up our example Node application that w
 @z
 
 @x
-[Run your image as a container](run-containers.md){: .button .outline-btn}
+[Run your image as a container](run-containers.md){: .button .primary-btn}
 @y
-[コンテナーとしてイメージ実行](run-containers.md){: .button .outline-btn}
+[コンテナーとしてイメージ実行](run-containers.md){: .button .primary-btn}
 @z
 
 @x

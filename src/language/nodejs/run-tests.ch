@@ -24,13 +24,14 @@ description: How to Build and Run your Tests using Node.js and Mocha frameworks
 @x
 ## Prerequisites
 @y
-## Prerequisites
+{: #prerequisites }
+## 前提条件
 @z
 
 @x
 Work through the steps to build an image and run it as a containerized application in [Use your container for development](develop.md).
 @y
-Work through the steps to build an image and run it as a containerized application in [Use your container for development](develop.md).
+[開発向けコンテナーの利用](develop.md) において、イメージビルドを行いコンテナー化アプリケーションを実行していること。
 @z
 
 @x
@@ -707,9 +708,9 @@ In the next module, we’ll take a look at how to set up a CI/CD pipeline using 
 @z
 
 @x
-[Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
+[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
 @y
-[CI/CD の設定](configure-ci-cd.md){: .button .outline-btn}
+[CI/CD の設定](configure-ci-cd.md){: .button .primary-btn}
 @z
 
 @x

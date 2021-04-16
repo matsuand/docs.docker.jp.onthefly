@@ -20,20 +20,18 @@ redirect_from:
 @z
 
 @x
-Docker Desktop for Windows is the [Community](https://www.docker.com/community-edition) version of Docker for Microsoft Windows.
-You can download Docker Desktop for Windows from Docker Hub.
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, installation instructions, and automatic updates.
 @y
-Docker Desktop for Windows は Microsoft Windows 向け Docker の [コミュニティ](https://www.docker.com/community-edition) 版です。
-Docker Desktop for Windows は Docker Hub からダウンロードすることができます。
+Docker Desktop for Windows へようこそ。
+このページでは Docker Desktop for Windows のシステム要件、ダウンロード URL、インストール手順、自動アップデートについて説明します。
 @z
 
 @x
-[Download from Docker
-Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
-.button .outline-btn}
+[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
+.button .primary-btn}
 @y
-[Docker Hub からダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
-.button .outline-btn}
+[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
+.button .primary-btn}
 @z
 
 @x
@@ -53,6 +51,65 @@ Docker Desktop をダウンロードすると、[Docker Software End User Licens
 Your Windows machine must meet the following requirements to successfully install Docker Desktop.
 @y
 Docker Desktop を正常にインストールするためには Windows マシンが以下を満たしていることが必要です。
+@z
+
+@x
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 backend</a></li>
+<li><a data-toggle="tab" data-target="#win-hyper-v">Hyper-V backend and Windows containers</a></li>
+</ul>
+<div class="tab-content">
+<div id="win-wsl2" class="tab-pane fade in active" markdown="1">
+@y
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 バックエンド</a></li>
+<li><a data-toggle="tab" data-target="#win-hyper-v">Hyper-V バックエンドと Windows コンテナー</a></li>
+</ul>
+<div class="tab-content">
+<div id="win-wsl2" class="tab-pane fade in active" markdown="1">
+@z
+
+@x
+### WSL 2 backend
+@y
+{: #wsl-2-backend }
+### WSL 2 バックエンド
+@z
+
+@x
+- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
+- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
+- The following hardware prerequisites are required to successfully run
+WSL 2 on Windows 10:
+@y
+- Windows 10 64 ビット: Home、Pro、Enterprise、Education、バージョン 1903（Build 18362 またはそれ以降）
+- Windows における WSL 2 機能の有効化。
+  詳しくは [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"} を参照してください。
+- Windows 10 上の WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。
+@z
+
+@x
+  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
+    BIOS settings.  For more information, see
+    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
+@y
+  - 64-bit processor with [第 2 レベルのアドレス変換](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。
+  - 4 GB のシステム RAM
+  - BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
+    詳しくは [仮想化機能](troubleshoot.md#virtualization-must-be-enabled) を参照してください。
+- [Linux カーネルアップデートパッケージ](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"} のダウンロードとインストール。
+@z
+
+@x
+</div>
+<div id="win-hyper-v" class="tab-pane fade" markdown="1">
+@y
+</div>
+<div id="win-hyper-v" class="tab-pane fade" markdown="1">
 @z
 
 @x
@@ -95,38 +152,11 @@ Hyper-V on Windows 10:
 @z
 
 @x
-### WSL 2 backend
+</div>
+</div>
 @y
-{: #wsl-2-backend }
-### WSL 2 バックエンド
-@z
-
-@x
-- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
-- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
-    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
-- The following hardware prerequisites are required to successfully run
-WSL 2 on Windows 10:
-@y
-- Windows 10 64 ビット: Home、Pro、Enterprise、Education、バージョン 1903（Build 18362 またはそれ以降）
-- Windows における WSL 2 機能の有効化。
-  詳しくは [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"} を参照してください。
-- Windows 10 上の WSL 2 を正常に実行するには、以下のハードウェア要件を満たす必要があります。
-@z
-
-@x
-  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
-  - 4GB system RAM
-  - BIOS-level hardware virtualization support must be enabled in the
-    BIOS settings.  For more information, see
-    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
-- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
-@y
-  - 64-bit processor with [第 2 レベルのアドレス変換](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}（Second Level Address Translation; SLAT）に対応した 64 ビットプロセッサー。
-  - 4 GB のシステム RAM
-  - BIOS 設定において BIOS レベルのハードウェア仮想化サポートが有効であること。
-    詳しくは [仮想化機能](troubleshoot.md#virtualization-must-be-enabled) を参照してください。
-- [Linux カーネルアップデートパッケージ](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"} のダウンロードとインストール。
+</div>
+</div>
 @z
 
 @x

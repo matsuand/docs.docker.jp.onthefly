@@ -11,7 +11,7 @@ redirect_from:
 ---
 @y
 ---
-title: "開発向けのコンテナー利用"
+title: "開発向けコンテナーの利用"
 keywords: get started, NodeJS, local, development
 description: Learn how to develop your application locally.
 redirect_from:
@@ -634,9 +634,9 @@ In the next module, we’ll take a look at how to run unit tests in Docker. See:
 @z
 
 @x
-[Run your tests](run-tests.md){: .button .outline-btn}
+[Run your tests](run-tests.md){: .button .primary-btn}
 @y
-[テストの実行](run-tests.md){: .button .outline-btn}
+[テストの実行](run-tests.md){: .button .primary-btn}
 @z
 
 @x

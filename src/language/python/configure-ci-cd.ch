@@ -665,9 +665,9 @@ You can also consider deploying your application to the cloud. For detailed inst
 @z
 
 @x
-[Deploy your application to the cloud](deploy.md){: .button .outline-btn}
+[Deploy your application to the cloud](deploy.md){: .button .primary-btn}
 @y
-[クラウドへのアプリのデプロイ](deploy.md){: .button .outline-btn}
+[クラウドへのアプリのデプロイ](deploy.md){: .button .primary-btn}
 @z
 
 @x

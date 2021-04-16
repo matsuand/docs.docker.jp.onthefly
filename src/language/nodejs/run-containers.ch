@@ -582,9 +582,9 @@ In this module, we took a look at running containers, publishing ports, and runn
 @z
 
 @x
-[How to develop your application](develop.md){: .button .outline-btn}
+[How to develop your application](develop.md){: .button .primary-btn}
 @y
-[アプリケーションの開発方法](develop.md){: .button .outline-btn}
+[アプリケーションの開発方法](develop.md){: .button .primary-btn}
 @z
 
 @x

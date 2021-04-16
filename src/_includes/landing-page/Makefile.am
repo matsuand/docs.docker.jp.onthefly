@@ -13,6 +13,7 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 htmlbases = \
+	apple-silicon           \
 	community-banner        \
 	develop-with-docker     \
 	docker-aci              \

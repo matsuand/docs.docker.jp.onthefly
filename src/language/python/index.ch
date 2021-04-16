@@ -59,9 +59,9 @@ Let's get started!
 @z
 
 @x
-[Build your first Python image](build-images.md){: .button .outline-btn}
+[Build your first Python image](build-images.md){: .button .primary-btn}
 @y
-[Python イメージのビルド](build-images.md){: .button .outline-btn}
+[Python イメージのビルド](build-images.md){: .button .primary-btn}
 @z
 
 @x

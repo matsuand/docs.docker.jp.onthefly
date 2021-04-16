@@ -401,18 +401,6 @@ ways, and create reports.
 @z
 
 @x
-### Support for Apple silicon processors
-@y
-### Support for Apple silicon processors
-@z
-
-@x
-At the moment, Docker Desktop is compatible with Intel processors only. You can learn more about the technical preview for Apple silicon in our [docs](apple-m1.md).
-@y
-At the moment, Docker Desktop is compatible with Intel processors only. You can learn more about the technical preview for Apple silicon in our [docs](apple-m1.md).
-@z
-
-@x
 ### Make sure certificates are set up correctly
 @y
 ### Make sure certificates are set up correctly
@@ -871,6 +859,7 @@ Docker Desktop excludes support for the following types of issues:
 @x
 * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 * Running on unsupported operating systems, including beta/preview versions of operating systems
+* Running containers of a different architecture using emulation
 * Support for the Docker engine, Docker CLI, or other bundled Linux components
 * Support for Kubernetes
 * Features labeled as experimental
@@ -887,6 +876,7 @@ Docker Desktop excludes support for the following types of issues:
 @y
 * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 * Running on unsupported operating systems, including beta/preview versions of operating systems
+* Running containers of a different architecture using emulation
 * Support for the Docker engine, Docker CLI, or other bundled Linux components
 * Support for Kubernetes
 * Features labeled as experimental

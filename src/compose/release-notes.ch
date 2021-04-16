@@ -22,6 +22,39 @@ redirect_from:
 @z
 
 @x
+## 1.29.1
+(2021-04-13)
+@y
+## 1.29.1
+(2021-04-13)
+@z
+
+@x
+### Bugs
+@y
+{: #bugs }
+### バグ
+@z
+
+@x
+- Fixed invalid handler warning on Windows builds.
+
+- Fixed config hash to trigger container re-creation on IPC mode updates.
+
+- Fixed conversion map for `placement.max_replicas_per_node`.
+
+- Removed extra scan suggestion on build.
+@y
+- Windows ビルドにおいて誤ったハンドラー警告を修正しました。
+
+- IPC モードの更新時に config ハッシュがコンテナー再生成を引き起こしてしまう問題を修正しました。
+
+- `placement.max_replicas_per_node`に対する変換マップを修正しました。
+
+- ビルド時の余計なスキャン提案を削除しました。
+@z
+
+@x
 ## 1.29.0
 (2021-04-06)
 @y
