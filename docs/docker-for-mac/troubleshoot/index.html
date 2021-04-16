@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-16 15:03:16 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ログ機能とトラブルシューティング | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ログ機能とトラブルシューティング" />
   <meta property="og:description" content="Troubleshooting, logs, and known issues" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-16T15:03:16+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/troubleshoot/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-16T15:03:16+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ログ機能とトラブルシューティング","description":"Troubleshooting, logs, and known issues","url":"https://docs.docker.com/docker-for-mac/troubleshoot/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ログ機能とトラブルシューティング</h1><p><em class="reading-time">読む時間の目安: 14 分</em></p><blockquote>
+                        <section class="section"><h1>ログ機能とトラブルシューティング</h1><p><em class="reading-time">読む時間の目安: 16 分</em></p><blockquote>
   <p>Docker Desktop では、プロプランやチームプランを購入している開発者に向けてのサポートを提供しているのをご存知ですか？
 詳しくは <a href="#support">こちら</a> を参照してください。</p>
 </blockquote>
@@ -258,10 +258,6 @@ ways, and create reports.</p>
 <p><a name="troubleshoot"></a></p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 
-<h3 id="support-for-apple-silicon-processors">Support for Apple silicon processors</h3>
-
-<p>At the moment, Docker Desktop is compatible with Intel processors only. You can learn more about the technical preview for Apple silicon in our <a href="/docs.docker.jp.onthefly/docker-for-mac/apple-m1/">docs</a>.</p>
-
 <h3 id="make-sure-certificates-are-set-up-correctly">Make sure certificates are set up correctly</h3>
 
 <p>Docker Desktop ignores certificates listed under insecure registries, and does
@@ -371,6 +367,37 @@ your docker app.</p>
 
 <ul>
   <li>
+    <p>The following issues are seen when using the <code class="language-plaintext highlighter-rouge">virtualization.framework</code> experimental feature:</p>
+
+    <ul>
+      <li>
+        <p>Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See <a href="https://github.com/docker/for-mac/issues/5208">docker/for-mac#5208</a>.</p>
+
+        <p>This is an interaction between <code class="language-plaintext highlighter-rouge">vmnet.framework</code> (as used by <code class="language-plaintext highlighter-rouge">virtualization.framework</code> in Big Sur) and the VPN clients.</p>
+      </li>
+      <li>
+        <p>Docker Desktop is incompatible with macOS Internet Sharing. See <a href="https://github.com/docker/for-mac/issues/5348">docker/for-mac#5348</a>.</p>
+
+        <p>This is an interaction between <code class="language-plaintext highlighter-rouge">vmnet.framework</code> (as used by <code class="language-plaintext highlighter-rouge">virtualization.framework</code> in Big Sur) and macOS Internet Sharing. At the moment it is not possible to use Docker Desktop and macOS Internet Sharing at the same time.</p>
+      </li>
+      <li>
+        <p>Some container disk I/O is much slower than expected. See <a href="https://github.com/docker/for-mac/issues/5389">docker/for-mac#5389</a>. Disk flushes are particularly slow due to the need to guarantee data is written to stable storage on the host.</p>
+
+        <p>This is an artifact of the new <code class="language-plaintext highlighter-rouge">virtualization.framework</code> in Big Sur.</p>
+      </li>
+      <li>
+        <p>TCP and UDP port 53 (DNS) are bound on the host when Docker Desktop starts. Therefore you cannot bind to port 53 on all interfaces with a command like <code class="language-plaintext highlighter-rouge">docker run -p 53:53</code>. See <a href="https://github.com/docker/for-mac/issues/5335">docker/for-mac#5335</a>.</p>
+
+        <p>This is an artifact of the new <code class="language-plaintext highlighter-rouge">virtualization.framework</code> in Big Sur. A workaround is to bind to a specific IP address e.g. <code class="language-plaintext highlighter-rouge">docker run -p 127.0.0.1:53:53</code>.</p>
+      </li>
+      <li>
+        <p>The Linux Kernel may occasionally crash. Docker now detects this problem and pops up an error dialog offering the user the ability to quickly restart Linux.</p>
+
+        <p>We are still gathering data and testing alternate kernel versions.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
     <p>IPv6 is not (yet) supported on Docker Desktop.</p>
   </li>
   <li>
@@ -478,6 +505,7 @@ techniques.  To learn more, see the <a href="https://github.com/docker/roadmap/i
 <ul>
   <li>Use on or in conjunction with hardware or software other than that specified in the applicable documentation</li>
   <li>Running on unsupported operating systems, including beta/preview versions of operating systems</li>
+  <li>Running containers of a different architecture using emulation</li>
   <li>Support for the Docker engine, Docker CLI, or other bundled Linux components</li>
   <li>Support for Kubernetes</li>
   <li>Features labeled as experimental</li>
