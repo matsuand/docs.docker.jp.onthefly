@@ -11,20 +11,21 @@ title: Understand the Notary service architecture
 ---
 description: How the three requisite notary components interact
 keywords: docker, notary, notary-client, docker content trust, content trust, notary-server, notary server, notary-signer, notary signer, notary architecture
-title: Understand the Notary service architecture
+title: Notary サービスアーキテクチャーへの理解
 ---
 @z
 
 @x
 On this page, you get an overview of the Notary service architecture.
 @y
-On this page, you get an overview of the Notary service architecture.
+このページでは Notary サービスのアーキテクチャーについての概要を示します。
 @z
 
 @x
 ## Brief overview of TUF keys and roles
 @y
-## Brief overview of TUF keys and roles
+{: #brief-overview-of-tuf-keys-and-roles }
+## TUF 鍵とロールについての概要
 @z
 
 @x
@@ -32,15 +33,14 @@ This document assumes familiarity with
 [The Update Framework](https://www.theupdateframework.com/){:target="_blank" rel="noopener" class="_"},
 but here is a brief recap of the TUF roles and corresponding key hierarchy:
 @y
-This document assumes familiarity with
-[The Update Framework](https://www.theupdateframework.com/){:target="_blank" rel="noopener" class="_"},
-but here is a brief recap of the TUF roles and corresponding key hierarchy:
+ここにおいては [Update Framework](https://www.theupdateframework.com/){:target="_blank" rel="noopener" class="_"} については理解できているものとして説明していきます。
+ただし TUF のロールと対応する鍵階層については概要を示します。
 @z
 
 @x
 ![TUF Key Hierarchy](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg){:width="400px"}
 @y
-![TUF Key Hierarchy](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg){:width="400px"}
+![TUF 鍵階層](https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg){:width="400px"}
 @z
 
 @x
@@ -51,12 +51,11 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   in the repository. This key is held by a collection owner, and should be kept offline
   and safe, more so than any other key.
 @y
-- The root key is the root of all trust. It signs the
-  [root metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" rel="noopener" class="_"},
-  which lists the IDs of the root, targets, snapshot, and timestamp public keys.
-  Clients use these public keys to verify the signatures on all the metadata files
-  in the repository. This key is held by a collection owner, and should be kept offline
-  and safe, more so than any other key.
+- root 鍵は全トラスト鍵のルートとなるものです。
+  この鍵は [root メタデータファイル](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489){:target="_blank" rel="noopener" class="_"} を署名します。
+  そのファイルは root、ターゲット、スナップショット、タイムスタンプといった公開鍵の ID 一覧を示すものです。
+  クライアントはこれらの公開鍵を利用して、リポジトリ内のメタデータファイル上の署名を確認します。
+  公開鍵はコレクションの所有者が保持しており、オフラインが維持されるため、他の鍵以上に安全です。
 @z
 
 @x
@@ -68,13 +67,11 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   either a collection owner/administrator, or held by the Notary service to facilitate
   [signing by multiple collaborators via delegation roles](advanced_usage.md#working-with-delegation-roles).
 @y
-- The snapshot key signs the
-  [snapshot metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604){:target="_blank" rel="noopener" class="_"},
-  which enumerates the filenames, sizes, and hashes of the root,
-  targets, and delegation metadata files for the collection. This file is used to
-  verify the integrity of the other metadata files. The snapshot key is held by
-  either a collection owner/administrator, or held by the Notary service to facilitate
-  [signing by multiple collaborators via delegation roles](advanced_usage.md#working-with-delegation-roles).
+- スナップショット鍵は [スナップショットメタデータファイル](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604){:target="_blank" rel="noopener" class="_"} を署名します。
+  そのファイルは root、ターゲット、委任（delegation）メタデータファイルのファイル名、ファイルサイズ、ファイルハッシュを一覧列記するものです。
+  このファイルを使って、他のメタデータファイルの完全性がチェックされます。
+  スナップショット鍵はコレクションの所有者または管理者によって保持されます。
+  あるいは Notary サービスが保持し、[委任ロールを通じた複数協力者による署名](advanced_usage.md#working-with-delegation-roles) を実現します。
 @z
 
 @x
@@ -124,7 +121,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   These files are used to verify the integrity of some or all of the actual contents of the repository.
   They are also used to
-  [delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
+  delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
   Delegation keys are held by anyone from the collection owner or administrator to
   collection collaborators.
 @y
@@ -134,7 +131,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   These files are used to verify the integrity of some or all of the actual contents of the repository.
   They are also used to
-  [delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
+  delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
   Delegation keys are held by anyone from the collection owner or administrator to
   collection collaborators.
 @z
@@ -142,7 +139,8 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
 @x
 ## Architecture and components
 @y
-## Architecture and components
+{: #architecture-and-components }
+## アーキテクチャーとコンポーネント
 @z
 
 @x
@@ -172,7 +170,7 @@ diagram illustrates this architecture:
 @x
 ![Notary Service Architecture Diagram](/notary/images/service-architecture.svg)
 @y
-![Notary Service Architecture Diagram](/notary/images/service-architecture.svg)
+![Notary Service Architecture Diagram](/images/service-architecture.svg)
 @z
 
 @x

@@ -1,7 +1,7 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-17 11:14:07 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Understand the Notary service architecture | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Notary サービスアーキテクチャーへの理解 | Docker ドキュメント</title>
   <meta name="description" content="How the three requisite notary components interact" />
   <meta name="keywords" content="docker, notary, notary-client, docker content trust, content trust, notary-server, notary server, notary-signer, notary signer, notary architecture">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/notary/service_architecture/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Understand the Notary service architecture"/>
+  <meta name="twitter:title" itemprop="title name" content="Notary サービスアーキテクチャーへの理解"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Understand the Notary service architecture" />
+  <meta property="og:title" content="Notary サービスアーキテクチャーへの理解" />
   <meta property="og:description" content="How the three requisite notary components interact" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-17T11:14:07+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/notary/service_architecture/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Understand the Notary service architecture","description":"How the three requisite notary components interact","url":"https://docs.docker.com/notary/service_architecture/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-17T11:14:07+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Notary サービスアーキテクチャーへの理解","description":"How the three requisite notary components interact","url":"https://docs.docker.com/notary/service_architecture/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,33 +98,29 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Understand the Notary service architecture</h1><p><em class="reading-time">読む時間の目安: 15 分</em></p><p>On this page, you get an overview of the Notary service architecture.</p>
+                        <section class="section"><h1>Notary サービスアーキテクチャーへの理解</h1><p><em class="reading-time">読む時間の目安: 15 分</em></p><p>このページでは Notary サービスのアーキテクチャーについての概要を示します。</p>
 
-<h2 id="brief-overview-of-tuf-keys-and-roles">Brief overview of TUF keys and roles</h2>
+<h2 id="brief-overview-of-tuf-keys-and-roles">TUF 鍵とロールについての概要</h2>
 
-<p>This document assumes familiarity with
-<a href="https://www.theupdateframework.com/" target="_blank" rel="noopener" class="_">The Update Framework</a>,
-but here is a brief recap of the TUF roles and corresponding key hierarchy:</p>
+<p>ここにおいては <a href="https://www.theupdateframework.com/" target="_blank" rel="noopener" class="_">Update Framework</a> については理解できているものとして説明していきます。
+ただし TUF のロールと対応する鍵階層については概要を示します。</p>
 
-<p><img src="https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg" alt="TUF Key Hierarchy" width="400px" /></p>
+<p><img src="https://cdn.rawgit.com/docker/notary/09f81717080f53276e6881ece57cbbbf91b8e2a7/docs/images/key-hierarchy.svg" alt="TUF 鍵階層" width="400px" /></p>
 
 <ul>
   <li>
-    <p>The root key is the root of all trust. It signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank" rel="noopener" class="_">root metadata file</a>,
-which lists the IDs of the root, targets, snapshot, and timestamp public keys.
-Clients use these public keys to verify the signatures on all the metadata files
-in the repository. This key is held by a collection owner, and should be kept offline
-and safe, more so than any other key.</p>
+    <p>root 鍵は全トラスト鍵のルートとなるものです。
+この鍵は <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L489" target="_blank" rel="noopener" class="_">root メタデータファイル</a> を署名します。
+そのファイルは root、ターゲット、スナップショット、タイムスタンプといった公開鍵の ID 一覧を示すものです。
+クライアントはこれらの公開鍵を利用して、リポジトリ内のメタデータファイル上の署名を確認します。
+公開鍵はコレクションの所有者が保持しており、オフラインが維持されるため、他の鍵以上に安全です。</p>
   </li>
   <li>
-    <p>The snapshot key signs the
-<a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank" rel="noopener" class="_">snapshot metadata file</a>,
-which enumerates the filenames, sizes, and hashes of the root,
-targets, and delegation metadata files for the collection. This file is used to
-verify the integrity of the other metadata files. The snapshot key is held by
-either a collection owner/administrator, or held by the Notary service to facilitate
-<a href="/docs.docker.jp.onthefly/notary/advanced_usage/#working-with-delegation-roles">signing by multiple collaborators via delegation roles</a>.</p>
+    <p>スナップショット鍵は <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L604" target="_blank" rel="noopener" class="_">スナップショットメタデータファイル</a> を署名します。
+そのファイルは root、ターゲット、委任（delegation）メタデータファイルのファイル名、ファイルサイズ、ファイルハッシュを一覧列記するものです。
+このファイルを使って、他のメタデータファイルの完全性がチェックされます。
+スナップショット鍵はコレクションの所有者または管理者によって保持されます。
+あるいは Notary サービスが保持し、<a href="/docs.docker.jp.onthefly/notary/advanced_usage/#working-with-delegation-roles">委任ロールを通じた複数協力者による署名</a> を実現します。</p>
   </li>
   <li>
     <p>The timestamp key signs the
@@ -153,13 +149,13 @@ which lists filenames in the collection, and their sizes and respective
 <a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" target="_blank" rel="noopener" class="_">hashes</a>.
 These files are used to verify the integrity of some or all of the actual contents of the repository.
 They are also used to
-[delegate trust to other collaborators via lower level <a href="/docs.docker.jp.onthefly/notary/advanced_usage/#work-with-delegation-roles">delegation roles</a>.
+delegate trust to other collaborators via lower level <a href="/docs.docker.jp.onthefly/notary/advanced_usage/#work-with-delegation-roles">delegation roles</a>.
 Delegation keys are held by anyone from the collection owner or administrator to
 collection collaborators.</p>
   </li>
 </ul>
 
-<h2 id="architecture-and-components">Architecture and components</h2>
+<h2 id="architecture-and-components">アーキテクチャーとコンポーネント</h2>
 
 <p>Notary clients pull metadata from one or more (remote) Notary services. Some
 Notary clients push metadata to one or more Notary services.</p>
@@ -171,7 +167,7 @@ for multiple trusted collections in an associated database, and a Notary signer,
 stores private keys for and signs metadata for the Notary server. The following
 diagram illustrates this architecture:</p>
 
-<p><img src="/notary/images/service-architecture.svg" alt="Notary Service Architecture Diagram" /></p>
+<p><img src="/docs.docker.jp.onthefly/notary/images/service-architecture.svg" alt="Notary Service Architecture Diagram" /></p>
 
 <p>Root, targets, and (sometimes) snapshot metadata are generated and signed by
 clients, who upload the metadata to the Notary server. The server is
@@ -683,8 +679,8 @@ changed immediately.</p>
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#brief-overview-of-tuf-keys-and-roles" class="nomunge">Brief overview of TUF keys and roles</a></li>
-  <li><a href="#architecture-and-components" class="nomunge">Architecture and components</a></li>
+  <li><a href="#brief-overview-of-tuf-keys-and-roles" class="nomunge">TUF 鍵とロールについての概要</a></li>
+  <li><a href="#architecture-and-components" class="nomunge">アーキテクチャーとコンポーネント</a></li>
   <li><a href="#example-client-server-signer-interaction" class="nomunge">Example client-server-signer interaction</a></li>
   <li><a href="#threat-model" class="nomunge">Threat model</a>
     <ul>
