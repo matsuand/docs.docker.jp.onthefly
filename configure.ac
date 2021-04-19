@@ -148,7 +148,6 @@ AC_CONFIG_FILES([Makefile
 		 src/engine/api/v1.39/Makefile
 		 src/engine/api/v1.40/Makefile
 		 src/engine/context/Makefile
-		 src/engine/examples/Makefile
 		 src/engine/extend/Makefile
 		 src/engine/extend/images/Makefile
 		 src/engine/images/Makefile
@@ -203,6 +202,7 @@ AC_CONFIG_FILES([Makefile
 		 src/registry/storage-drivers/Makefile
 		 src/release-notes/Makefile
 		 src/samples/Makefile
+		 src/samples/images/Makefile
 		 src/storage/Makefile
 		 src/storage/images/Makefile
 		 src/storage/storagedriver/Makefile

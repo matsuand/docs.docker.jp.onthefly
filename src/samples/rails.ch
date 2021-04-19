@@ -6,28 +6,32 @@
 description: Getting started with Docker Compose and Rails
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: "Quickstart: Compose and Rails"
+redirect_from:
+  - /compose/rails/
 ---
 @y
 ---
 description: Rails を使って Docker Compose をはじめる。
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: "クィックスタート: Compose と Rails"
+redirect_from:
+  - /compose/rails/
 ---
 @z
 
 @x
 This Quickstart guide shows you how to use Docker Compose to set up and run
-a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
+a Rails/PostgreSQL app. Before starting, [install Compose](../compose/install.md).
 @y
 このクィックスタートガイドでは Docker Compose を使って、簡単な Rails/PostgreSQL アプリを設定し実行する手順を示します。
-はじめるには [Compose のインストール](install.md) が必要です。
+はじめるには [Compose のインストール](../compose/install.md) が必要です。
 @z
 
 @x
 ### Define the project
 @y
-### プロジェクトの定義
 {: #define-the-project }
+### プロジェクトの定義
 @z
 
 @x
@@ -49,7 +53,7 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY ../compose /myapp
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
@@ -68,7 +72,7 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY ../compose /myapp
 
 # コンテナー起動時に毎回実行されるスクリプトを追加
 COPY entrypoint.sh /usr/bin/
@@ -229,8 +233,8 @@ services:
 @x
 ### Build the project
 @y
-### プロジェクトのビルド
 {: #build-the-project }
+### プロジェクトのビルド
 @z
 
 @x
@@ -369,8 +373,8 @@ $ docker-compose build
 @x
 ### Connect the database
 @y
-### データベースの接続設定
 {: #connect-the-database }
+### データベースの接続設定
 @z
 
 @x
@@ -527,8 +531,8 @@ Created database 'myapp_test'
 @x
 ### View the Rails welcome page!
 @y
+{: #view-the-rails-welcome-page }
 ### Rails の「ようこそ」ページの確認
-{: # }
 @z
 
 @x
@@ -554,17 +558,17 @@ Docker Desktop for Mac や Docker Desktop for Windows の場合は、ウェブ�
 @x
 ### Stop the application
 @y
-### アプリケーションの停止
 {: #stop-the-application }
+### アプリケーションの停止
 @z
 
 @x
-To stop the application, run [docker-compose down](reference/down.md) in
+To stop the application, run [docker-compose down](../compose/reference/down.md) in
 your project directory. You can use the same terminal window in which you
 started the database, or another one where you have access to a command prompt.
 This is a clean way to stop the application.
 @y
-アプリケーションを停止するには、プロジェクトディレクトリにおいて [docker-compose down](reference/down.md) を実行します。
+アプリケーションを停止するには、プロジェクトディレクトリにおいて [docker-compose down](../compose/reference/down.md) を実行します。
 この場合に用いる端末画面は、データベースを起動したときと同じものを用いるか、あるいはコマンドプロンプトにアクセスできる別画面であっても構いません。
 これがアプリケーションを適切に停止する方法です。
 @z
@@ -600,8 +604,8 @@ Removing network rails_default
 @x
 ### Restart the application
 @y
-### アプリケーションの再起動
 {: #restart-the-application }
+### アプリケーションの再起動
 @z
 
 @x
@@ -613,8 +617,8 @@ To restart the application run `docker-compose up` in the project directory.
 @x
 ### Rebuild the application
 @y
-### アプリケーションの再ビルド
 {: #rebuild-the-application }
+### アプリケーションの再ビルド
 @z
 
 @x
@@ -670,22 +674,22 @@ host.
 @x
 ## More Compose documentation
 @y
-## Compose ドキュメント
 {: #more-compose-documentation }
+## その他のCompose ドキュメント
 @z
 
 @x
-- [User guide](index.md)
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [Docker Compose overview](../compose/index.md)
+- [Install Docker Compose](../compose/install.md)
+- [Getting Started with Docker Compose](../compose/gettingstarted.md)
+- [Docker Compose Command line reference](../compose/reference/index.md)
+- [Compose file reference](../compose/compose-file/index.md)
+- [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @y
-- [ユーザーガイド](index.md)
-- [Compose のインストール](install.md)
-- [はじめよう](gettingstarted.md)
-- [コマンドラインリファレンス](reference/index.md)
-- [Compose ファイルリファレンス](compose-file/index.md)
-- [Compose を使ったサンプルアプリ](samples-for-compose.md)
+- [Docker Compose 概要](../compose/index.md)
+- [Docker Compose のインストール](../compose/install.md)
+- [Docker Compose をはじめよう](../compose/gettingstarted.md)
+- [Docker Compose コマンドラインリファレンス](../compose/reference/index.md)
+- [Compose ファイルリファレンス](../compose/compose-file/index.md)
+- [Awesome Compose サンプル](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @z

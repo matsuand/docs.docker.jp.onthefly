@@ -34,7 +34,9 @@ Docker command-line client. If you're using `docker-machine`, then the `eval "$(
 > **Note**: Some of these variables can also be provided using an
 > [environment file](../env-file.md).
 @y
-> **メモ**： ここに示す環境変数の中には、[環境ファイル](../env-file.md) を用いて設定できるものもあります。
+> **メモ**
+>
+> ここに示す環境変数の中には、[環境ファイル](../env-file.md) を用いて設定できるものもあります。
 @z
 
 @x
@@ -58,11 +60,11 @@ Compose がコンテナーを起動したときにつける名前は、それぞ
 @x
 Setting this is optional. If you do not set this, the `COMPOSE_PROJECT_NAME`
 defaults to the `basename` of the project directory. See also the `-p`
-[command-line option](overview.md).
+[command-line option](index.md).
 @y
 この変数を設定するのは任意です。
 変数を設定しなかった場合`COMPOSE_PROJECT_NAME`のデフォルトは、プロジェクトディレクトリの`basename`となります。
-[コマンドラインオプション](overview.md) の`-p`も参照してください。
+[コマンドラインオプション](index.md) の`-p`も参照してください。
 @z
 
 @x
@@ -94,9 +96,9 @@ can also be customized using `COMPOSE_PATH_SEPARATOR`.
 @z
 
 @x
-See also the `-f` [command-line option](overview.md).
+See also the `-f` [command-line option](index.md).
 @y
-[コマンドラインオプション](overview.md) `-f`も参照してください。
+[コマンドラインオプション](index.md)`-f`も参照してください。
 @z
 
 @x
@@ -125,9 +127,9 @@ You can specify a list of profiles separated with a comma:
 
 @x
 See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
-[command-line option](overview.md).
+[command-line option](index.md#use---profile-to-specify-one-or-more-active-profiles).
 @y
-[Compose でのプロファイル利用](../profiles.md) や [コマンドラインオプション](overview.md) の`--profile`も参照してください。
+[Compose でのプロファイル利用](../profiles.md) や [コマンドラインオプション](index.md#use---profile-to-specify-one-or-more-active-profiles) の`--profile`も参照してください。
 .
 @z
 

@@ -76,12 +76,12 @@ the rules described in
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
 the order they're specified on the command line. See the
-[`docker-compose` command reference](reference/overview.md) for more information
+[`docker-compose` command reference](reference/index.md) for more information
 about using `-f`.
 @y
 複数の上書きファイルがある場合、あるいは上書きファイルが 1 つであってもその名前を別にしている場合、`-f`オプションを使って、ファイル名を列記して指定することができます。
 Compose はコマンドライン上に指定された順に、設定ファイルをマージします。
-詳細は [`docker-compose`コマンドリファレンス](reference/overview.md) の`-f`オプションに関する情報を参照してください。
+詳細は [`docker-compose`コマンドリファレンス](reference/index.md) の`-f`オプションに関する情報を参照してください。
 @z
 
 @x

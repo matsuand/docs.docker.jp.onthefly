@@ -140,10 +140,10 @@ Valid profile names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 @z
 
 @x
-To enable a profile supply the `--profile` [command-line option](reference/overview.md) or
+To enable a profile supply the `--profile` [command-line option](reference/index.md) or
 use the [`COMPOSE_PROFILES` environment variable](reference/envvars.md#compose_profiles):
 @y
-プロファイルを有効にするには、[コマンドラインオプション](reference/overview.md)`--profile`を指定するか、あるいは [環境変数`COMPOSE_PROFILES`](reference/envvars.md#compose_profiles)を利用します。
+プロファイルを有効にするには、[コマンドラインオプション](reference/index.md)`--profile`を指定するか、あるいは [環境変数`COMPOSE_PROFILES`](reference/envvars.md#compose_profiles)を利用します。
 @z
 
 @x

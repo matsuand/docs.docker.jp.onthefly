@@ -66,24 +66,24 @@ These samples focus specifically on Docker Compose:
 @z
 
 @x
-- [Quickstart: Compose and Django](django.md) - Shows how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
+- [Quickstart: Compose and Django](../samples/django.md) - Shows how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
 @y
-- [クイックスタート: Compose と Django](django.md) - Docker Compose を使って、簡単な Django/PostgreSQL アプリのセットアップと実行方法を示します。
+- [クイックスタート: Compose と Django](../samples/django.md) - Docker Compose を使って、簡単な Django/PostgreSQL アプリのセットアップと実行方法を示します。
 @z
 
 @x
-- [Quickstart: Compose and Rails](rails.md) - Shows how to use
+- [Quickstart: Compose and Rails](../samples/rails.md) - Shows how to use
 Docker Compose to set up and run a Rails/PostgreSQL app.
 @y
-- [クイックスタート: Compose と Rails](rails.md) - Docker Compose を使って、Rails/PostgreSQL アプリのセットアップと実行方法を示します。
+- [クイックスタート: Compose と Rails](../samples/rails.md) - Docker Compose を使って、Rails/PostgreSQL アプリのセットアップと実行方法を示します。
 @z
 
 @x
-- [Quickstart: Compose and WordPress](wordpress.md) - Shows how to
+- [Quickstart: Compose and WordPress](../samples/wordpress.md) - Shows how to
 use Docker Compose to set up and run WordPress in an isolated environment
 with Docker containers.
 @y
-- [クイックスタート: Compose と WordPress](wordpress.md) - Docker コンテナーを使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。
+- [クイックスタート: Compose と WordPress](../samples/wordpress.md) - Docker コンテナーを使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。
 @z
 
 @x

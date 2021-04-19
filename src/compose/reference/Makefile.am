@@ -13,31 +13,30 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	build \
-	config \
-	create \
-	down \
+	build   \
+	config  \
+	create  \
+	down    \
 	envvars \
-	events \
-	exec \
-	help \
-	images \
-	index \
-	kill \
-	logs \
-	overview \
-	pause \
-	port \
-	ps \
-	pull \
-	push \
+	events  \
+	exec    \
+	help    \
+	images  \
+	index   \
+	kill    \
+	logs    \
+	pause   \
+	port    \
+	ps      \
+	pull    \
+	push    \
 	restart \
-	rm \
-	run \
-	scale \
-	start \
-	stop \
-	top \
+	rm      \
+	run     \
+	scale   \
+	start   \
+	stop    \
+	top     \
 	unpause \
 	up
 
@@ -61,22 +60,3 @@ Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 @MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
 @MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
 @MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(targetdir)/,$(srcs))
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(targetdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-include $(top_srcdir)/rewriteurls.mk
-
-.PHONY: publishclean
-publishclean:

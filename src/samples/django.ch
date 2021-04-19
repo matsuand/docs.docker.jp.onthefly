@@ -6,28 +6,32 @@
 description: Getting started with Docker Compose and Django
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "Quickstart: Compose and Django"
+redirect_from:
+  - /compose/django/
 ---
 @y
 ---
 description: Django を使って Docker Compose をはじめる。
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "クィックスタート: Compose と Django"
+redirect_from:
+  - /compose/django/
 ---
 @z
 
 @x
 This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting,
-[install Compose](install.md).
+[install Compose](../compose/install.md).
 @y
 このクィックスタートガイドでは Docker Compose を使って、簡単な Django/PostgreSQL アプリを設定し実行する手順を示します。
-はじめるには [Compose のインストール](install.md) が必要です。
+はじめるには [Compose のインストール](../compose/install.md) が必要です。
 @z
 
 @x
 ### Define the project components
 @y
-### プロジェクトのコンポーネントを定義
 {: #define-the-project-components }
+### プロジェクトのコンポーネントを定義
 @z
 
 @x
@@ -154,7 +158,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     also describes which Docker images these services use, how they link
     together, any volumes they might need to be mounted inside the containers.
     Finally, the `docker-compose.yml` file describes which ports these services
-    expose. See the [`docker-compose.yml` reference](compose-file/index.md) for more
+    expose. See the [`docker-compose.yml` reference](../compose/compose-file/index.md) for more
     information on how this file works.
 @y
     `docker-compose.yml`ファイルは、アプリケーションを作り出すサービスを記述するものです。
@@ -162,7 +166,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     Compose ファイルはまた、各サービスが利用する Docker イメージを記述します。
     そしてどのように互いにリンクし合い、コンテナー内部にマウントすべきボリュームはどのようなものかを定義します。
     そして`docker-compose.yml`ファイルには、各サービスが公開するポート番号が何かも記述します。
-    このファイルがどのようにして動作するかの詳細は [`docker-compose.yml`リファレンス](compose-file/index.md)を参照してください。
+    このファイルがどのようにして動作するかの詳細は [`docker-compose.yml`リファレンス](../compose/compose-file/index.md)を参照してください。
 @z
 
 @x
@@ -248,8 +252,8 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 @x
 ### Create a Django project
 @y
-### Django プロジェクトの生成
 {: #create-a-django-project }
+### Django プロジェクトの生成
 @z
 
 @x
@@ -265,10 +269,10 @@ In this step, you create a Django starter project by building the image from the
 @z
 
 @x
-2. Create the Django project by running the [docker-compose run](reference/run.md)
+2. Create the Django project by running the [docker-compose run](../compose/reference/run.md)
    command as follows.
 @y
-2. Django プロジェクトを生成するために [docker-compose run](reference/run.md) コマンドを以下のように実行します。
+2. Django プロジェクトを生成するために [docker-compose run](../compose/reference/run.md) コマンドを以下のように実行します。
 @z
 
 @x
@@ -386,8 +390,8 @@ In this step, you create a Django starter project by building the image from the
 @x
 ### Connect the database
 @y
-### データベースへの接続設定
 {: #connect-the-database }
+### データベースへの接続設定
 @z
 
 @x
@@ -455,9 +459,9 @@ In this section, you set up the database connection for Django.
 @z
 
 @x
-4. Run the [docker-compose up](reference/up.md) command from the top level directory for your project.
+4. Run the [docker-compose up](../compose/reference/up.md) command from the top level directory for your project.
 @y
-4. プロジェクトのトップディレクトリにおいてコマンド [docker-compose up](reference/up.md) を実行します。
+4. プロジェクトのトップディレクトリにおいてコマンド [docker-compose up](../compose/reference/up.md) を実行します。
 @z
 
 @x
@@ -608,10 +612,10 @@ In this section, you set up the database connection for Django.
 
 @x
     * Or, for a more elegant shutdown, switch to a different shell, and run
-      [docker-compose down](reference/down.md) from the top level of your
+      [docker-compose down](../compose/reference/down.md) from the top level of your
       Django sample project directory.
 @y
-    * もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて [docker-compose down](reference/down.md) を実行します。
+    * もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて [docker-compose down](../compose/reference/down.md) を実行します。
 @z
 
 @x
@@ -648,22 +652,22 @@ In this section, you set up the database connection for Django.
 @x
 ## More Compose documentation
 @y
-## その他の Compose ドキュメント
 {: #more-compose-documentation }
+## その他の Compose ドキュメント
 @z
 
 @x
-- [User guide](index.md)
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [Docker Compose overview](../compose/index.md)
+- [Install Docker Compose](../compose/install.md)
+- [Getting Started with Docker Compose](../compose/gettingstarted.md)
+- [Docker Compose Command line reference](../compose/reference/index.md)
+- [Compose file reference](../compose/compose-file/index.md)
+- [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @y
-- [ユーザーガイド](index.md)
-- [Compose のインストール](install.md)
-- [はじめよう](gettingstarted.md)
-- [コマンドラインリファレンス](reference/index.md)
-- [Compose ファイルリファレンス](compose-file/index.md)
-- [Compose を使ったサンプルアプリ](samples-for-compose.md)
+- [Docker Compose 概要](../compose/index.md)
+- [Docker Compose のインストール](../compose/install.md)
+- [Docker Compose をはじめよう](../compose/gettingstarted.md)
+- [Docker Compose コマンドラインリファレンス](../compose/reference/index.md)
+- [Compose ファイルリファレンス](../compose/compose-file/index.md)
+- [Awesome Compose サンプル](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @z

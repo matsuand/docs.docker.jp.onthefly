@@ -1,3 +1,5 @@
+SUBDIRS = images
+
 thisdir    = samples
 origdir    = @abs_origdir@/$(thisdir)
 srcdir     = @srcdir@
@@ -13,7 +15,17 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	index
+	apt-cacher-ng        \
+	aspnet-mssql-compose \
+	couchdb_data_volumes \
+	django               \
+	dotnetcore           \
+	index                \
+	postgresql_service   \
+	rails                \
+	running_riak_service \
+	running_ssh_service  \
+	wordpress
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files

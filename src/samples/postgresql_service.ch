@@ -6,21 +6,22 @@
 description: Running and installing a PostgreSQL service
 keywords: docker, example, package installation, postgresql
 title: Dockerize PostgreSQL
+redirect_from:
+  - /engine/examples/postgresql_service/
 ---
 @y
 ---
 description: Running and installing a PostgreSQL service
 keywords: docker, example, package installation, postgresql
 title: PostgreSQL を Docker 化する
+redirect_from:
+  - /engine/examples/postgresql_service/
 ---
 @z
 
 @x
 ## Install PostgreSQL on Docker
 @y
-{% comment %}
-## Install PostgreSQL on Docker
-{% endcomment %}
 {: #install-postgresql-on-Docker }
 ## Docker での PostgreSQL インストール
 @z
@@ -29,20 +30,13 @@ title: PostgreSQL を Docker 化する
 Assuming there is no Docker image that suits your needs on the [Docker
 Hub](https://hub.docker.com), you can create one yourself.
 @y
-{% comment %}
-Assuming there is no Docker image that suits your needs on the [Docker
-Hub](https://hub.docker.com), you can create one yourself.
-{% endcomment %}
 条件に合う Docker イメージが [Docker Hub](https://hub.docker.com) にはなかったと仮定して、自分で作ることにします。
 @z
 
 @x
 Start by creating a new `Dockerfile`:
 @y
-{% comment %}
-Start by creating a new `Dockerfile`:
-{% endcomment %}
-新たに `Dockerfile` を作るところから始めます。
+新たに`Dockerfile`を作るところから始めます。
 @z
 
 @x
@@ -51,18 +45,13 @@ This PostgreSQL setup is for development-only purposes. Refer to the
 PostgreSQL documentation to fine-tune these settings so that it is
 suitably secure.
 @y
-{% comment %}
-> **Note**:
-This PostgreSQL setup is for development-only purposes. Refer to the
-PostgreSQL documentation to fine-tune these settings so that it is
-suitably secure.
-{% endcomment %}
-> **メモ**:
-この PostgreSQL 環境の構築は、単に開発目的で行うものです。
-PostgreSQL に対する設定が、適切に安全なものに
-Refer to the
-PostgreSQL documentation to fine-tune these settings so that it is
-suitably secure.
+> **メモ**
+>
+> この PostgreSQL 環境の構築は、単に開発目的で行うものです。
+> PostgreSQL に対する設定が、適切に安全なものに
+> Refer to the
+> PostgreSQL documentation to fine-tune these settings so that it is
+> suitably secure.
 @z
 
 @x
@@ -196,9 +185,6 @@ CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main
 @x
 Build an image from the Dockerfile and assign it a name.
 @y
-{% comment %}
-Build an image from the Dockerfile and assign it a name.
-{% endcomment %}
 Dockerfile からイメージをビルドして名前を与えます。
 @z
 
@@ -215,9 +201,6 @@ $ docker build -t eg_postgresql .
 @x
 Run the PostgreSQL server container (in the foreground):
 @y
-{% comment %}
-Run the PostgreSQL server container (in the foreground):
-{% endcomment %}
 PostgreSQL サーバーコンテナーを（フォアグラウンドで）実行します。
 @z
 
@@ -233,35 +216,25 @@ $ docker run --rm -P --name pg_test eg_postgresql
 
 @x
 There are two ways to connect to the PostgreSQL server. We can use
-[*Link Containers*](../../network/links.md),
+[*Link Containers*](../network/links.md),
 or we can access it from our host (or the network).
 @y
-{% comment %}
-There are two ways to connect to the PostgreSQL server. We can use
-[*Link Containers*](../../network/links.md),
-or we can access it from our host (or the network).
-{% endcomment %}
 PostgreSQL サーバーへの接続方法は２通りあります。
-[**リンクコンテナー**](../../network/links.md) を使うか、ホスト（あるいはネットワーク）からアクセスします。
+[**リンクコンテナー**](../network/links.md) を使うか、ホスト（あるいはネットワーク）からアクセスします。
 @z
 
 @x
 > **Note**: The `--rm` removes the container and its image when
 the container exits successfully.
 @y
-{% comment %}
-> **Note**: The `--rm` removes the container and its image when
-the container exits successfully.
-{% endcomment %}
-> **メモ**: `--rm` は、コンテナーが正常終了したときに、コンテナーとそのイメージを削除するものです。
+> **メモ**
+>
+> `--rm`は、コンテナーが正常終了したときに、コンテナーとそのイメージを削除するものです。
 @z
 
 @x
 ### Use container linking
 @y
-{% comment %}
-### Use container linking
-{% endcomment %}
 {: #use-container-linking }
 ### コンテナーリンクの利用
 @z
@@ -272,12 +245,6 @@ Containers can be linked to another container's ports directly using
 `docker run`. This sets a number of environment
 variables that can then be used to connect:
 @y
-{% comment %}
-Containers can be linked to another container's ports directly using
-`--link remote_name:local_alias` in the client's
-`docker run`. This sets a number of environment
-variables that can then be used to connect:
-{% endcomment %}
 Containers can be linked to another container's ports directly using
 `--link remote_name:local_alias` in the client's
 `docker run`. This sets a number of environment
@@ -303,9 +270,6 @@ postgres@7ef98b1b7243:/$ psql -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_POR
 @x
 ### Connect from your host system
 @y
-{% comment %}
-### Connect from your host system
-{% endcomment %}
 {: #connect-from-your-host-system }
 ### ホストシステムからの接続
 @z
@@ -316,12 +280,6 @@ host-mapped port to test as well. You need to use `docker ps`
 to find out what local host port the container is mapped to
 first:
 @y
-{% comment %}
-Assuming you have the postgresql-client installed, you can use the
-host-mapped port to test as well. You need to use `docker ps`
-to find out what local host port the container is mapped to
-first:
-{% endcomment %}
 Assuming you have the postgresql-client installed, you can use the
 host-mapped port to test as well. You need to use `docker ps`
 to find out what local host port the container is mapped to
@@ -355,9 +313,6 @@ $ psql -h localhost -p 49153 -d docker -U docker --password
 @x
 ### Test the database
 @y
-{% comment %}
-### Test the database
-{% endcomment %}
 {: #test-the-database }
 ### データベースの動作確認
 @z
@@ -366,10 +321,6 @@ $ psql -h localhost -p 49153 -d docker -U docker --password
 Once you have authenticated and have a `docker =#`
 prompt, you can create a table and populate it.
 @y
-{% comment %}
-Once you have authenticated and have a `docker =#`
-prompt, you can create a table and populate it.
-{% endcomment %}
 Once you have authenticated and have a `docker =#`
 prompt, you can create a table and populate it.
 @z
@@ -417,9 +368,6 @@ $ docker=# select * from cities;
 @x
 ### Use the container volumes
 @y
-{% comment %}
-### Use the container volumes
-{% endcomment %}
 {: #use-the-container-volumes }
 ### コンテナーボリュームの利用
 @z
@@ -428,10 +376,6 @@ $ docker=# select * from cities;
 You can use the defined volumes to inspect the PostgreSQL log files and
 to backup your configuration and data:
 @y
-{% comment %}
-You can use the defined volumes to inspect the PostgreSQL log files and
-to backup your configuration and data:
-{% endcomment %}
 You can use the defined volumes to inspect the PostgreSQL log files and
 to backup your configuration and data:
 @z

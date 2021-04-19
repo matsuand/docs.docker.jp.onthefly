@@ -6,23 +6,27 @@
 description: Sharing data between 2 couchdb databases
 keywords: docker, example, package installation, networking, couchdb,  data volumes
 title: Dockerize a CouchDB service
+redirect_from:
+  - /engine/examples/couchdb_data_volumes/
 ---
 @y
 ---
 description: Sharing data between 2 couchdb databases
 keywords: docker, example, package installation, networking, couchdb,  data volumes
 title: Dockerize a CouchDB service
+redirect_from:
+  - /engine/examples/couchdb_data_volumes/
 ---
 @z
 
 @x
 > **Note**
 >
-> **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
+> **If you don't like sudo** then see [*Giving non-root access*](../engine/install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 @y
 > **Note**
 >
-> **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
+> **If you don't like sudo** then see [*Giving non-root access*](../engine/install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 @z
 
 @x

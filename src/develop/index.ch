@@ -74,14 +74,14 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 - [Docker for Java developers lab](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" rel="noopener" class="_"} 
 - [Port a node.js app to Docker lab](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" rel="noopener" class="_"}
 - [Ruby on Rails app on Docker lab](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" rel="noopener" class="_"}
-- [Dockerize a .Net Core application](../engine/examples/dotnetcore.md){: target="_blank" rel="noopener" class="_"}
-- [Dockerize an ASP.NET Core application with SQL Server on Linux](../compose/aspnet-mssql-compose.md){: target="_blank" rel="noopener" class="_"} using Docker Compose
+- [Dockerize a .Net Core application](../samples/dotnetcore.md){: target="_blank" rel="noopener" class="_"}
+- [Dockerize an ASP.NET Core application with SQL Server on Linux](../samples/aspnet-mssql-compose.md){: target="_blank" rel="noopener" class="_"} using Docker Compose
 @y
 - Java 開発者向けの [Docker for Java developers ラボ](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" rel="noopener" class="_"}
 - [node.js アプリの Docker ラボへのポート](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" rel="noopener" class="_"}
 - [Docker ラボの Ruby on Rails アプリ](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" rel="noopener" class="_"}
-- [.Net Core アプリケーションの Docker 化](../engine/examples/dotnetcore.md){: target="_blank" rel="noopener" class="_"}
-- Docker Compose 利用により [SQL Server on Linux を用いた ASP.NET Core アプリケーションの Docker 化](../compose/aspnet-mssql-compose.md){: target="_blank" rel="noopener" class="_"}
+- [.Net Core アプリケーションの Docker 化](../samples/dotnetcore.md){: target="_blank" rel="noopener" class="_"}
+- Docker Compose 利用により [SQL Server on Linux を用いた ASP.NET Core アプリケーションの Docker 化](../samples/aspnet-mssql-compose.md){: target="_blank" rel="noopener" class="_"}
 @z
 
 @x

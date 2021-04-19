@@ -1,4 +1,4 @@
-SUBDIRS = api context examples extend images install reference \
+SUBDIRS = api context extend images install reference \
 	release-notes scan security swarm tutorials
 
 thisdir    = engine

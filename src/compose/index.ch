@@ -155,25 +155,25 @@ Compose には、アプリケーションのライフサイクルを管理する
 @x
 ## Compose documentation
 @y
-## Compose のドキュメント
 {: #compose-documentation }
+## Compose のドキュメント
 @z
 
 @x
 - [Installing Compose](install.md)
 - [Getting started with Compose](gettingstarted.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
+- [Get started with Django](../samples/django.md)
+- [Get started with Rails](../samples/rails.md)
+- [Get started with WordPress](../samples/wordpress.md)
 - [Frequently asked questions](faq.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
 @y
 - [Compose のインストール](install.md)
 - [Compose を使ってはじめよう](gettingstarted.md)
-- [Django を使ってはじめよう](django.md)
-- [Rails を使ってはじめよう](rails.md)
-- [WordPress を使ってはじめよう](wordpress.md)
+- [Django を使ってはじめよう](../samples/django.md)
+- [Rails を使ってはじめよう](../samples/rails.md)
+- [WordPress を使ってはじめよう](../samples/wordpress.md)
 - [よくたずねられる質問](faq.md)
 - [コマンドラインリファレンス](reference/index.md)
 - [Compose ファイルリファレンス](compose-file/index.md)
@@ -182,8 +182,8 @@ Compose には、アプリケーションのライフサイクルを管理する
 @x
 ## Features
 @y
-## 機能
 {: #features }
+## 機能
 @z
 
 @x
@@ -207,8 +207,8 @@ Compose には特徴的な以下の機能があります。
 @x
 ### Multiple isolated environments on a single host
 @y
-### 1 つのホスト上で分離された環境を複数実現
 {: #multiple-isolated-environments-on-a-single-host }
+### 1 つのホスト上で分離された環境を複数実現
 @z
 
 @x
@@ -233,11 +233,11 @@ Compose はプロジェクト名というものを用いて各環境を分離し
 @x
 The default project name is the basename of the project directory. You can set
 a custom project name by using the
-[`-p` command line option](reference/overview.md) or the
+[`-p` command line option](reference/index.md) or the
 [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 @y
 プロジェクト名はデフォルトでは、プロジェクトが存在するディレクトリ名となります。
-プロジェクト名を指定するには、[コマンドラインオプション](reference/overview.md) の`-p`を指定するか、[環境変数 `COMPOSE_PROJECT_NAME`](reference/envvars.md#compose_project_name) を使って指定します。
+プロジェクト名を指定するには、[コマンドラインオプション](reference/index.md) の`-p`を指定するか、[環境変数 `COMPOSE_PROJECT_NAME`](reference/envvars.md#compose_project_name) を使って指定します。
 @z
 
 @x
@@ -251,8 +251,8 @@ for it can be defined with the `--project-directory` command line option.
 @x
 ### Preserve volume data when containers are created
 @y
-### コンテナー生成時はボリュームデータを維持
 {: #preserve-volume-data-when-containers-are-created }
+### コンテナー生成時はボリュームデータを維持
 @z
 
 @x
@@ -277,8 +277,8 @@ Windows 上において`docker-compose`を利用している場合には、[環�
 @x
 ### Only recreate containers that have changed
 @y
-### 変更のあったコンテナーのみ再作成
 {: #only-recreate-containers-that-have-changed }
+### 変更のあったコンテナーのみ再作成
 @z
 
 @x
@@ -295,8 +295,8 @@ Compose はコンテナーが生成されたときの設定情報をキャッシ
 @x
 ### Variables and moving a composition between environments
 @y
-### 変数と環境間の移行
 {: #variables-and-moving-a-composition-between-environments }
+### 変数と環境間の移行
 @z
 
 @x
@@ -321,8 +321,8 @@ Compose ファイルは`extends`フィールドを使うことで、複数の Co
 @x
 ## Common use cases
 @y
-## 一般的な利用例
 {: #common-use-cases }
+## 一般的な利用例
 @z
 
 @x
@@ -336,8 +336,8 @@ Compose はさまざまな使い方があります。
 @x
 ### Development environments
 @y
-### 開発環境
 {: #development-environments }
+### 開発環境
 @z
 
 @x
@@ -372,8 +372,8 @@ Compose は、分厚く仕上がっている「開発者向け導入手順書」
 @x
 ### Automated testing environments
 @y
-### 自動テスト環境
 {: #automated-testing-environments }
+### 自動テスト環境
 @z
 
 @x
@@ -405,8 +405,8 @@ $ docker-compose down
 @x
 ### Single host deployments
 @y
-### ただ 1 つのホストからのデプロイ
 {: #single-host-deployments }
+### ただ 1 つのホストからのデプロイ
 @z
 
 @x
@@ -427,8 +427,8 @@ For details on using production-oriented features, see
 @x
 ## Release notes
 @y
-## リリースノート
 {: #release-notes }
+## リリースノート
 @z
 
 @x
@@ -442,8 +442,8 @@ Docker Compose のこれまでのリリースにおける変更点の一覧は [
 @x
 ## Getting help
 @y
-## ヘルプを得るには
 {: #getting-help }
+## ヘルプを得るには
 @z
 
 @x

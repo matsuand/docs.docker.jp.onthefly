@@ -10,14 +10,9 @@ uploaddir  = @UPLOADDIR@/$(thisdir)
 all: tgtdir $(srcs_with_prefix)
 
 images = \
-	django-it-worked.png \
 	quick-hello-world-1.png \
 	quick-hello-world-2.png \
-	quick-hello-world-3.png \
-	rails-welcome.png \
-	wordpress-files.png \
-	wordpress-lang.png \
-	wordpress-welcome.png
+	quick-hello-world-3.png
 
 srcs = $(images)
 srcs_with_prefix = ${addprefix $(publishdir)/,$(srcs)}

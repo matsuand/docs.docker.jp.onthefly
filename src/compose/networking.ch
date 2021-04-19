@@ -39,14 +39,14 @@ identical to the container name.
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/overview.md)
+> project name with either the [`--project-name` flag](reference/index.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 @y
 > **メモ**
 >
 > アプリのネットワークには「プロジェクト名」に基づいた名前がつけられます。
 > そしてプロジェクト名はこれが稼動しているディレクトリ名に基づいて定まります。
-> プロジェクト名は [`--project-name`フラグ](reference/overview.md) あるいは [`COMPOSE_PROJECT_NAME`環境変数](reference/envvars.md#compose_project_name) を使って上書きすることができます。
+> プロジェクト名は [`--project-name`フラグ](reference/index.md) あるいは [`COMPOSE_PROJECT_NAME`環境変数](reference/envvars.md#compose_project_name) を使って上書きすることができます。
 @z
 
 @x

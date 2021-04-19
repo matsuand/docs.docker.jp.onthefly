@@ -15,11 +15,9 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	aspnet-mssql-compose      \
 	cli-command               \
 	cli-command-compatibility \
 	completion                \
-	django                    \
 	env-file                  \
 	environment-variables     \
 	extends                   \
@@ -31,11 +29,9 @@ bases = \
 	networking                \
 	production                \
 	profiles                  \
-	rails                     \
 	release-notes             \
 	samples-for-compose       \
-	startup-order             \
-	wordpress
+	startup-order
 
 ch_mds = $(bases:=.ch) # ch means change files
 tr_mds = $(bases:=.md) # tr means translated files

@@ -40,8 +40,8 @@ Yes - see [Controlling startup order](startup-order.md).
 @x
 ## Why do my services take 10 seconds to recreate or stop?
 @y
-## サービスの再生成や停止に 10 秒もかかるのはなぜ？
 {: #why-do-my-services-take-10-seconds-to-recreate-or-stop }
+## サービスの再生成や停止に 10 秒もかかるのはなぜ？
 @z
 
 @x
@@ -141,27 +141,27 @@ handling `SIGTERM` properly.
 @x
 ## How do I run multiple copies of a Compose file on the same host?
 @y
-## 1 つのホスト上で Compose ファイルを複数稼動させるには？
 {: #how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host }
+## 1 つのホスト上で Compose ファイルを複数稼動させるには？
 @z
 
 @x
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
-set a custom project name using the [`-p` command line option](reference/overview.md)
+set a custom project name using the [`-p` command line option](reference/index.md)
 or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 @y
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
-set a custom project name using the [`-p` command line option](reference/overview.md)
+set a custom project name using the [`-p` command line option](reference/index.md)
 or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 @z
 
 @x
 ## What's the difference between `up`, `run`, and `start`?
 @y
-## What's the difference between `up`, `run`, and `start`?
 {: #whats-the-difference-between-up-run-and-start }
+## What's the difference between `up`, `run`, and `start`?
 @z
 
 @x

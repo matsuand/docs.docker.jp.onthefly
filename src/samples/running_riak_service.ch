@@ -6,12 +6,16 @@
 description: Build a Docker image with Riak pre-installed
 keywords: docker, example, package installation, networking,  riak
 title: Dockerize a Riak service
+redirect_from:
+  - /engine/examples/running_riak_service/
 ---
 @y
 ---
 description: Build a Docker image with Riak pre-installed
 keywords: docker, example, package installation, networking,  riak
 title: Dockerize a Riak service
+redirect_from:
+  - /engine/examples/running_riak_service/
 ---
 @z
 

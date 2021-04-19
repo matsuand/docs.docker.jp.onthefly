@@ -75,9 +75,9 @@ Pulls an image associated with a service defined in a `docker-compose.yml` or `d
 @z
 
 @x
-For example, suppose you have this `docker-compose.yml` file from the [Quickstart: Compose and Rails](../rails.md) sample.
+For example, suppose you have this `docker-compose.yml` file from the [Quickstart: Compose and Rails](../../samples/rails.md) sample.
 @y
-たとえば [クイックスタート： Compose と Rails](../rails.md) の例に示している、以下のような`docker-compose.yml`ファイルがあるとします。
+たとえば [クイックスタート： Compose と Rails](../../samples/rails.md) の例に示している、以下のような`docker-compose.yml`ファイルがあるとします。
 @z
 
 @x

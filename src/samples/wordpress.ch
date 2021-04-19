@@ -6,12 +6,16 @@
 description: Getting started with Compose and WordPress
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "Quickstart: Compose and WordPress"
+redirect_from:
+  - /compose/wordpress/
 ---
 @y
 ---
 description: WordPress を使って Compose をはじめる。
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "クィックスタート: Compose と WordPress"
+redirect_from:
+  - /compose/wordpress/
 ---
 @z
 
@@ -19,18 +23,18 @@ title: "クィックスタート: Compose と WordPress"
 You can use Docker Compose to easily run WordPress in an isolated environment
 built with Docker containers. This quick-start guide demonstrates how to use
 Compose to set up and run WordPress. Before starting, make sure you have
-[Compose installed](install.md).
+[Compose installed](../compose/install.md).
 @y
 Docker Compose を使うと、Docker コンテナーとして生成される独立した環境内にて WordPress を簡単に実現することができます。
 このクイックスタートガイドは、Docker Compose を使った WordPress の設定と実行方法を示すものです。
-はじめるには [Compose のインストール](install.md) が必要です。
+はじめるには [Compose のインストール](../compose/install.md) が必要です。
 @z
 
 @x
 ### Define the project
 @y
-### プロジェクトの定義
 {: #define-the-project }
+### プロジェクトの定義
 @z
 
 @x
@@ -182,8 +186,8 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
 @x
 ### Build the project
 @y
-### プロジェクトのビルド
 {: #build-the-project }
+### プロジェクトのビルド
 @z
 
 @x
@@ -193,11 +197,11 @@ Now, run `docker-compose up -d` from your project directory.
 @z
 
 @x
-This runs [`docker-compose up`](reference/up.md) in detached mode, pulls
+This runs [`docker-compose up`](../compose/reference/up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 @y
-これはデタッチモードにより [`docker-compose up`](reference/up.md) を実行し、必要な Docker イメージがあれば取得します。
+これはデタッチモードにより [`docker-compose up`](../compose/reference/up.md) を実行し、必要な Docker イメージがあれば取得します。
 そして WordPress と データベースの両コンテナーを起動します。
 たとえば以下のようになります。
 @z
@@ -263,8 +267,8 @@ configured for WordPress is already in use by another service.
 @x
 ### Bring up WordPress in a web browser
 @y
-### ウェブブラウザー上での WordPress の起動
 {: #bring-up-wordpress-in-a-web-browser }
+### ウェブブラウザー上での WordPress の起動
 @z
 
 @x
@@ -316,15 +320,15 @@ Docker Desktop for Mac や Docker Desktop for Windows を利用している場�
 @x
 ### Shutdown and cleanup
 @y
-### シャットダウンとクリーンアップ
 {: #shutdown-and-cleanup }
+### シャットダウンとクリーンアップ
 @z
 
 @x
-The command [`docker-compose down`](reference/down.md) removes the
+The command [`docker-compose down`](../compose/reference/down.md) removes the
 containers and default network, but preserves your WordPress database.
 @y
-[`docker-compose down`](reference/down.md) コマンドを実行すると、コンテナーとデフォルトネットワークが削除されます。
+[`docker-compose down`](../compose/reference/down.md) コマンドを実行すると、コンテナーとデフォルトネットワークが削除されます。
 ただし WordPress データベースは残ります。
 @z
 
@@ -338,22 +342,22 @@ network, and the WordPress database.
 @x
 ## More Compose documentation
 @y
-## Compose ドキュメント
 {: #more-compose-documentation }
+## その他の Compose ドキュメント
 @z
 
 @x
-- [User guide](index.md)
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [Docker Compose overview](../compose/index.md)
+- [Install Docker Compose](../compose/install.md)
+- [Getting Started with Docker Compose](../compose/gettingstarted.md)
+- [Docker Compose Command line reference](../compose/reference/index.md)
+- [Compose file reference](../compose/compose-file/index.md)
+- [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @y
-- [ユーザーガイド](index.md)
-- [Compose のインストール](install.md)
-- [はじめよう](gettingstarted.md)
-- [コマンドラインリファレンス](reference/index.md)
-- [Compose ファイルリファレンス](compose-file/index.md)
-- [Compose を使ったサンプルアプリ](samples-for-compose.md)
+- [Docker Compose 概要](../compose/index.md)
+- [Docker Compose のインストール](../compose/install.md)
+- [Docker Compose をはじめよう](../compose/gettingstarted.md)
+- [Docker Compose コマンドラインリファレンス](../compose/reference/index.md)
+- [Compose ファイルリファレンス](../compose/compose-file/index.md)
+- [Awesome Compose サンプル](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}
 @z

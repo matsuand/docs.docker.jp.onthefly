@@ -87,7 +87,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-subdir = src/engine/examples
+subdir = src/samples/images
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/progs.m4 \
 	$(top_srcdir)/configure.ac
@@ -118,7 +118,7 @@ am__can_run_installinfo = \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
-am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/rewriteurls.mk
+am__DIST_COMMON = $(srcdir)/Makefile.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
@@ -234,31 +234,24 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-thisdir = engine/examples
+thisdir = samples/images
 origdir = @abs_origdir@/$(thisdir)
 mysrcdir = $(shell cd $(srcdir) && pwd)
 targetdir = @abs_targetdir@/$(thisdir)
 publishdir = @abs_publishdir@/$(thisdir)
 uploaddir = @UPLOADDIR@/$(thisdir)
-bases = \
-	apt-cacher-ng \
-	couchdb_data_volumes \
-	dotnetcore \
-	index \
-	postgresql_service \
-	running_riak_service \
-	running_ssh_service
+images = \
+	django-it-worked.png  \
+	rails-welcome.png     \
+	wordpress-lang.png    \
+	wordpress-welcome.png
 
-ch_mds = $(bases:=.ch) # ch means change files
-tr_mds = $(bases:=.md) # tr means translated files
-EXTRA_DIST = $(ch_mds)
-#DISTCLEANFILES = 
-srcs = $(tr_mds)
+srcs = $(images)
 srcs_with_prefix = ${addprefix $(publishdir)/,$(srcs)}
 all: all-am
 
 .SUFFIXES:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir)/rewriteurls.mk $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -267,9 +260,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/engine/examples/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/samples/images/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/engine/examples/Makefile
+	  $(AUTOMAKE) --gnu src/samples/images/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -278,7 +271,6 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__maybe_remake_depfiles);; \
 	esac;
-$(top_srcdir)/rewriteurls.mk $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
@@ -445,52 +437,15 @@ uninstall-am:
 
 
 .PHONY: all
-all: ctie tgtdir $(srcs_with_prefix)
-
-ctie:
-	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
+all: tgtdir $(srcs_with_prefix)
 
 .PHONY: tgtdir
 tgtdir:
 	$(MKDIR_P) $(publishdir)
 
--include Makefile.sub
-Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
-	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
-
-@MAINT@.PHONY: chbuild
-@MAINT@chbuild: $(addprefix $(mysrcdir)/, $(ch_mds))
-@MAINT@$(addprefix $(mysrcdir)/, $(ch_mds)):
-@MAINT@	@if test ! -f $@; then $(top_srcdir)/bin/buildch.perl `echo $@ | sed -e "s|^$(mysrcdir)|$(origdir)|" -e "s|\.ch$$|.md|"` $@; fi
-.PHONY: rewriteurls
-rewriteurls:
-	@for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-	@for d in $(bases); do \
-	  if test "x$$d" = "xindex"; then \
-	    b="" ; \
-	  else \
-	    b="$$d/" ; \
-	  fi ; \
-	  sed -i -e "s|a href=\"#|a href=\"$(uploadurl)/$$d.md#|g" $(uploaddir)/$${b}index.html ; \
-	done
-
-#.PHONY: install
-#install: all install.sub $(addprefix $(targetdir)/,$(srcs))
-
-#-include install.sub
-#install.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh install $(targetdir) $(srcs)
-
-#.PHONY: publishinstall
-#publishinstall: all publishinstall.sub $(addprefix $(publishdir)/,$(srcs))
-
-#-include publishinstall.sub
-#publishinstall.sub: $(top_srcdir)/bin/copyinstall.sh $(top_builddir)/config.log
-#	@$(top_srcdir)/bin/copyinstall.sh publishinstall $(publishdir) $(srcs)
-
-.PHONY: publishclean
-publishclean:
-	@for f in $(srcs); do rm -f ${publishdir}/$$f; done
+-include copyimages.sub
+copyimages.sub: $(top_srcdir)/bin/copymake.sh $(top_builddir)/config.log
+	@$(top_srcdir)/bin/copymake.sh copyimages $(publishdir) $(srcs)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
