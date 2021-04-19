@@ -1,0 +1,492 @@
+<!-- Page generated 2021-04-19 20:19:32 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>クィックスタート: Compose と Rails | Docker ドキュメント</title>
+  <meta name="description" content="Rails を使って Docker Compose をはじめる。" />
+  <meta name="keywords" content="documentation, docs, docker, compose, orchestration, containers">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/samples/rails/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="クィックスタート: Compose と Rails"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="クィックスタート: Compose と Rails" />
+  <meta property="og:description" content="Rails を使って Docker Compose をはじめる。" />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-19T20:19:32+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/rails/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-19T20:19:32+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"クィックスタート: Compose と Rails","description":"Rails を使って Docker Compose をはじめる。","url":"https://docs.docker.com/samples/rails/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>クィックスタート: Compose と Rails</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>このクィックスタートガイドでは Docker Compose を使って、簡単な Rails/PostgreSQL アプリを設定し実行する手順を示します。
+はじめるには <a href="/docs.docker.jp.onthefly/compose/install/">Compose のインストール</a> が必要です。</p>
+
+<h3 id="define-the-project">プロジェクトの定義</h3>
+
+<p>アプリのビルドに必要となるファイルを作るところから始めます。
+アプリの依存パッケージも含め、アプリは Docker コンテナー内で実行するものとします。
+依存パッケージは<code class="language-plaintext highlighter-rouge">Dockerfile</code>というファイル内に定義します。
+まずは Dockerfile を以下のようにします。</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ruby:2.5</span>
+<span class="k">RUN </span>apt-get update <span class="nt">-qq</span> <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> nodejs postgresql-client
+<span class="k">WORKDIR</span><span class="s"> /myapp</span>
+<span class="k">COPY</span><span class="s"> Gemfile /myapp/Gemfile</span>
+<span class="k">COPY</span><span class="s"> Gemfile.lock /myapp/Gemfile.lock</span>
+<span class="k">RUN </span>bundle <span class="nb">install</span>
+<span class="k">COPY</span><span class="s"> ../compose /myapp</span>
+
+<span class="c"># コンテナー起動時に毎回実行されるスクリプトを追加</span>
+<span class="k">COPY</span><span class="s"> entrypoint.sh /usr/bin/</span>
+<span class="k">RUN </span><span class="nb">chmod</span> +x /usr/bin/entrypoint.sh
+<span class="k">ENTRYPOINT</span><span class="s"> ["entrypoint.sh"]</span>
+<span class="k">EXPOSE</span><span class="s"> 3000</span>
+
+<span class="c"># イメージ実行時に起動させる主プロセスを設定</span>
+<span class="k">CMD</span><span class="s"> ["rails", "server", "-b", "0.0.0.0"]</span>
+</code></pre></div></div>
+
+<p>上の設定はイメージ内部にアプリケーションコードを置きます。
+このイメージは Ruby、Bundler などの依存パッケージすべてをコンテナー内部に含めてビルドされます。
+Dockerfile の記述方法の詳細は <a href="/docs.docker.jp.onthefly/get-started/">Docker ユーザーガイド</a> や <a href="/engine/reference/builder/">Dockerfile リファレンス</a> を参照してください。</p>
+
+<p>次にブートストラップを行うファイル<code class="language-plaintext highlighter-rouge">Gemfile</code>を生成して、Rails をロードできるようにします。
+このファイルは<code class="language-plaintext highlighter-rouge">rails new</code>を行ったタイミングで書き換わります。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>source 'https://rubygems.org'
+gem 'rails', '~&gt;5'
+</code></pre></div></div>
+
+<p>空のファイル<code class="language-plaintext highlighter-rouge">Gemfile.lock</code>を生成して<code class="language-plaintext highlighter-rouge">Dockerfile</code>のビルドができるようにします。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">touch </span>Gemfile.lock
+</code></pre></div></div>
+<p>次にエントリーポイントの実行スクリプトを生成して、Rails 特有の問題へ対処します。
+これはサーバー内に<code class="language-plaintext highlighter-rouge">server.pid</code>というファイルが先に存在していたときに、サーバーが再起動できなくなる問題を回避するものです。
+このスクリプトは、コンテナーが起動されるたびに実行されることになります。
+<code class="language-plaintext highlighter-rouge">entrypoint.sh</code>というこのスクリプトを、以下のように生成します。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">set</span> <span class="nt">-e</span>
+
+<span class="c"># Rails に対応したファイル server.pid が存在しているかもしれないので削除する。</span>
+<span class="nb">rm</span> <span class="nt">-f</span> /myapp/tmp/pids/server.pid
+
+<span class="c"># コンテナーのプロセスを実行する。（Dockerfile 内の CMD に設定されているもの。）</span>
+<span class="nb">exec</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>最後に<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>が取りまとめてくれます。
+このファイルには、データベースとウェブという 2 つのアプリを含んだサービスが定義されています。
+そしてそれぞれの Docker イメージをどう作るかが示されています。
+（データベースは既存の PostgreSQL イメージにより動作します。ウェブアプリはカレントディレクトリ内に生成されます。）
+また、リンクによってそれを結び合わせることが設定されていて、ウェブアプリのポートは外部に公開されています。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.9"</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./tmp/db:/var/lib/postgresql/data</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">bash -c "rm -f tmp/pids/server.pid &amp;&amp; bundle exec rails s -p 3000 -b '0.0.0.0'"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">.:/myapp</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">3000:3000"</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>ヒント</strong></p>
+
+  <p>このファイルの拡張子は<code class="language-plaintext highlighter-rouge">.yml</code>と<code class="language-plaintext highlighter-rouge">.yaml</code>のどちらでも構いません。</p>
+</blockquote>
+
+<h3 id="build-the-project">プロジェクトのビルド</h3>
+
+<p>ここまでのファイルを使って <a href="reference/run.md">docker-compose run</a> を実行し、Rails アプリのひながたを生成します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose run <span class="nt">--no-deps</span> web rails new <span class="nb">.</span> <span class="nt">--force</span> <span class="nt">--database</span><span class="o">=</span>postgresql
+</code></pre></div></div>
+
+<p>最初に Compose は<code class="language-plaintext highlighter-rouge">Dockerfile</code>を用いて<code class="language-plaintext highlighter-rouge">web</code>サービスに対するイメージをビルドします。
+<code class="language-plaintext highlighter-rouge">--no-deps</code>フラグは Compose に対してリンクサービスは起動しないように指示します。
+そしてこのイメージを利用して、新たに生成されたコンテナー内にて<code class="language-plaintext highlighter-rouge">rails new</code>を実行します。
+処理が完了すれば、できたてのアプリが生成されているはずです。</p>
+
+<p>ファイル一覧を見てみます。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span>
+<span class="go">
+total 64
+-rw-r--r--   1 vmb  staff   222 Jun  7 12:05 Dockerfile
+-rw-r--r--   1 vmb  staff  1738 Jun  7 12:09 Gemfile
+-rw-r--r--   1 vmb  staff  4297 Jun  7 12:09 Gemfile.lock
+-rw-r--r--   1 vmb  staff   374 Jun  7 12:09 README.md
+-rw-r--r--   1 vmb  staff   227 Jun  7 12:09 Rakefile
+drwxr-xr-x  10 vmb  staff   340 Jun  7 12:09 app
+drwxr-xr-x   8 vmb  staff   272 Jun  7 12:09 bin
+drwxr-xr-x  14 vmb  staff   476 Jun  7 12:09 config
+-rw-r--r--   1 vmb  staff   130 Jun  7 12:09 config.ru
+drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 db
+-rw-r--r--   1 vmb  staff   211 Jun  7 12:06 docker-compose.yml
+-rw-r--r--   1 vmb  staff   184 Jun  7 12:08 entrypoint.sh
+drwxr-xr-x   4 vmb  staff   136 Jun  7 12:09 lib
+drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 log
+-rw-r--r--   1 vmb  staff    63 Jun  7 12:09 package.json
+drwxr-xr-x   9 vmb  staff   306 Jun  7 12:09 public
+drwxr-xr-x   9 vmb  staff   306 Jun  7 12:09 test
+drwxr-xr-x   4 vmb  staff   136 Jun  7 12:09 tmp
+drwxr-xr-x   3 vmb  staff   102 Jun  7 12:09 vendor
+</span></code></pre></div></div>
+
+<p>Linux 上で Docker を利用している場合、<code class="language-plaintext highlighter-rouge">rails new</code>により生成されたファイルの所有者は root になります。
+これはコンテナーが root ユーザーにより実行されているためです。
+この場合は、生成されたファイルの所有者を以下のように変更してください。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo chown</span> <span class="nt">-R</span> <span class="nv">$USER</span>:<span class="nv">$USER</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Docker on Mac あるいは Docker on Windows を利用している場合、<code class="language-plaintext highlighter-rouge">rails new</code>により生成されたファイルも含め、すべてのファイルに対しての所有権は、正しく設定されているはずです。</p>
+
+<p>ここに新たな Gemfile が作成されたので、イメージを再ビルドすることが必要です。
+（再ビルドが必要になるのは、今の時点、あるいは<code class="language-plaintext highlighter-rouge">Gemfile</code>や Dockerfile を修正したときだけです。）</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose build
+</code></pre></div></div>
+
+<h3 id="connect-the-database">データベースの接続設定</h3>
+
+<p>アプリは実行可能ですが、実行するのはまだです。
+デフォルトで Rails は<code class="language-plaintext highlighter-rouge">localhost</code>において実行されているデータベースを用います。
+したがってここでは<code class="language-plaintext highlighter-rouge">db</code>コンテナーを用いるように書き換える必要があります。
+また<code class="language-plaintext highlighter-rouge">postgres</code>イメージにおいて設定されているデフォルトのデータベース名、ユーザー名を変更することも必要です。</p>
+
+<p><code class="language-plaintext highlighter-rouge">config/database.yml</code>の記述内容を以下のように書き換えます。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">default</span><span class="pi">:</span> <span class="nl">&amp;default</span>
+  <span class="na">adapter</span><span class="pi">:</span> <span class="s">postgresql</span>
+  <span class="na">encoding</span><span class="pi">:</span> <span class="s">unicode</span>
+  <span class="na">host</span><span class="pi">:</span> <span class="s">db</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">postgres</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">password</span>
+  <span class="na">pool</span><span class="pi">:</span> <span class="m">5</span>
+
+<span class="na">development</span><span class="pi">:</span>
+  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*default</span>
+  <span class="na">database</span><span class="pi">:</span> <span class="s">myapp_development</span>
+
+
+<span class="na">test</span><span class="pi">:</span>
+  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*default</span>
+  <span class="na">database</span><span class="pi">:</span> <span class="s">myapp_test</span>
+</code></pre></div></div>
+
+<p><a href="reference/up.md">docker-compose up</a> によりアプリを起動します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose up
+</code></pre></div></div>
+<p>正常に動作すれば、PostgreSQL による出力が確認できるはずです。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails_db_1 is up-to-date
+Creating rails_web_1 ... <span class="k">done
+</span>Attaching to rails_db_1, rails_web_1
+db_1   | PostgreSQL init process <span class="nb">complete</span><span class="p">;</span> ready <span class="k">for </span>start up.
+db_1   |
+db_1   | 2018-03-21 20:18:37.437 UTC <span class="o">[</span>1] LOG:  listening on IPv4 address <span class="s2">"0.0.0.0"</span>, port 5432
+db_1   | 2018-03-21 20:18:37.437 UTC <span class="o">[</span>1] LOG:  listening on IPv6 address <span class="s2">"::"</span>, port 5432
+db_1   | 2018-03-21 20:18:37.443 UTC <span class="o">[</span>1] LOG:  listening on Unix socket <span class="s2">"/var/run/postgresql/.s.PGSQL.5432"</span>
+db_1   | 2018-03-21 20:18:37.726 UTC <span class="o">[</span>55] LOG:  database system was shut down at 2018-03-21 20:18:37 UTC
+db_1   | 2018-03-21 20:18:37.772 UTC <span class="o">[</span>1] LOG:  database system is ready to accept connections
+</code></pre></div></div>
+
+<p>最後にデータベースを生成することが必要です。
+別の端末から以下を実行します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose run web rake db:create
+</code></pre></div></div>
+<p>コマンドから出力される結果は、たとえば以下のようになります。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose run web rake db:create
+<span class="go">
+Starting rails_db_1 ... done
+Created database 'myapp_development'
+Created database 'myapp_test'
+</span></code></pre></div></div>
+
+<h3 id="view-the-rails-welcome-page">Rails の「ようこそ」ページの確認</h3>
+
+<p>以上です。
+Docker デーモンを通じて、アプリがポート 3000 番を使って実行されています。</p>
+
+<p>Docker Desktop for Mac や Docker Desktop for Windows の場合は、ウェブブラウザーから<code class="language-plaintext highlighter-rouge">http://localhost:3000</code>にアクセスすれば Rails のようこそページを確認できます。</p>
+
+<p><img src="/docs.docker.jp.onthefly/samples/images/rails-welcome.png" alt="Rails の例" /></p>
+
+<h3 id="stop-the-application">アプリケーションの停止</h3>
+
+<p>アプリケーションを停止するには、プロジェクトディレクトリにおいて <a href="/docs.docker.jp.onthefly/compose/reference/down/">docker-compose down</a> を実行します。
+この場合に用いる端末画面は、データベースを起動したときと同じものを用いるか、あるいはコマンドプロンプトにアクセスできる別画面であっても構いません。
+これがアプリケーションを適切に停止する方法です。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose down
+<span class="go">
+Stopping rails_web_1 ... done
+Stopping rails_db_1 ... done
+Removing rails_web_run_1 ... done
+Removing rails_web_1 ... done
+Removing rails_db_1 ... done
+Removing network rails_default
+
+</span></code></pre></div></div>
+
+<h3 id="restart-the-application">アプリケーションの再起動</h3>
+
+<p>アプリケーションを再起動する場合は、プロジェクトディレクトリにて<code class="language-plaintext highlighter-rouge">docker-compose up</code>を実行します。</p>
+
+<h3 id="rebuild-the-application">アプリケーションの再ビルド</h3>
+
+<p>Gemfile や Compose ファイルを編集して、いろいろと別の設定とした場合には、再ビルドが必要になります。
+変更内容によっては<code class="language-plaintext highlighter-rouge">docker-compose up --build</code>だけで済む場合もあります。
+しかし完全に再ビルドを行うには、<code class="language-plaintext highlighter-rouge">docker-compose run web bundle install</code>を再度実行して、ホストにおける<code class="language-plaintext highlighter-rouge">Gemfile.lock</code>の変更と同期を取ることが必要になります。
+その後に<code class="language-plaintext highlighter-rouge">docker-compose up --build</code>を実行します。</p>
+
+<p>以下に示すのは前者、つまり完全な再ビルドは必要としない例です。
+ローカルホスト側の公開ポートを<code class="language-plaintext highlighter-rouge">3000</code>から<code class="language-plaintext highlighter-rouge">3001</code>に変更する場合を取り上げます。
+Compose ファイルにおいて、コンテナー側にて<code class="language-plaintext highlighter-rouge">3000</code>としているポートを新たなポート<code class="language-plaintext highlighter-rouge">3001</code>に変更します。
+そしてこの変更を保存します。</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ports</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">3001:3000"</span>
+</code></pre></div></div>
+
+<p>再ビルドとアプリの再起動は<code class="language-plaintext highlighter-rouge">docker-compose up --build</code>により行います。</p>
+
+<p>コンテナー内部において、アプリはそれまでと変わらないポート3000<code class="language-plaintext highlighter-rouge">で稼動していますが、ローカルホスト上から Rails ようこそページにアクセスするのは</code>http://localhost:3001`となります。</p>
+
+<h2 id="more-compose-documentation">その他のCompose ドキュメント</h2>
+
+<ul>
+  <li><a href="/docs.docker.jp.onthefly/compose/">Docker Compose 概要</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/install/">Docker Compose のインストール</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/gettingstarted/">Docker Compose をはじめよう</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/reference/">Docker Compose コマンドラインリファレンス</a></li>
+  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/">Compose ファイルリファレンス</a></li>
+  <li><a href="https://github.com/docker/awesome-compose/" target="_blank" rel="noopener" class="_">Awesome Compose サンプル</a></li>
+</ul>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=orchestration">orchestration</a>, <a href="/docs.docker.jp.onthefly/search/?q=containers">containers</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/samples/rails.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [samples/rails.ch](https://matsuand.github.io/docs.docker.jp.onthefly/samples/rails/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#define-the-project" class="nomunge">プロジェクトの定義</a>
+    <ul>
+      <li><a href="#build-the-project" class="nomunge">プロジェクトのビルド</a></li>
+      <li><a href="#connect-the-database" class="nomunge">データベースの接続設定</a></li>
+      <li><a href="#view-the-rails-welcome-page" class="nomunge">Rails の「ようこそ」ページの確認</a></li>
+      <li><a href="#stop-the-application" class="nomunge">アプリケーションの停止</a></li>
+      <li><a href="#restart-the-application" class="nomunge">アプリケーションの再起動</a></li>
+      <li><a href="#rebuild-the-application" class="nomunge">アプリケーションの再ビルド</a></li>
+    </ul>
+  </li>
+  <li><a href="#more-compose-documentation" class="nomunge">その他のCompose ドキュメント</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/roadmap">Docker 製品ロードマップ</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/samples/rails/";</script></body>
+</html>

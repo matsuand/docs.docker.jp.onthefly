@@ -1,10 +1,10 @@
 <!-- Page generated 2021-04-19 20:19:32 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose を使ったサンプルアプリ | Docker ドキュメント</title>
-  <meta name="description" content="Compose に関するサンプルの概要。" />
-  <meta name="keywords" content="documentation, docs, docker, compose, samples">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/samples-for-compose/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize a Riak service | Docker ドキュメント</title>
+  <meta name="description" content="Build a Docker image with Riak pre-installed" />
+  <meta name="keywords" content="docker, example, package installation, networking,  riak">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/samples/running_riak_service/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Compose を使ったサンプルアプリ"/>
+  <meta name="twitter:title" itemprop="title name" content="Dockerize a Riak service"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Compose を使ったサンプルアプリ" />
-  <meta property="og:description" content="Compose に関するサンプルの概要。" />
+  <meta property="og:title" content="Dockerize a Riak service" />
+  <meta property="og:description" content="Build a Docker image with Riak pre-installed" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-19T20:19:32+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/samples-for-compose/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/running_riak_service/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2021-04-19T20:19:32+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose を使ったサンプルアプリ","description":"Compose に関するサンプルの概要。","url":"https://docs.docker.com/compose/samples-for-compose/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize a Riak service","description":"Build a Docker image with Riak pre-installed","url":"https://docs.docker.com/samples/running_riak_service/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,41 +98,111 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose を使ったサンプルアプリ</h1><p>以下に示すサンプルは、Docker Compose の利用によりどのような動作が行われるかを、さまざまな観点から示すものです。
-前提として、まだ <a href="/docs.docker.jp.onthefly/compose/install/">Docker Compose のインストール</a> を行っていなければ、これを行ってください。</p>
+                        <section class="section"><h1>Dockerize a Riak service</h1><p><em class="reading-time">読む時間の目安: 2 分</em></p><p>The goal of this example is to show you how to build a Docker image with
+Riak pre-installed.</p>
 
-<h2 id="key-concepts-these-samples-cover">サンプルが示す重要な考え方</h2>
+<h2 id="create-a-dockerfile">Create a Dockerfile</h2>
 
-<p>このサンプルでは以下のことを行います。</p>
+<p>Create an empty file called <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">touch </span>Dockerfile
+</code></pre></div></div>
+
+<p>Next, define the parent image you want to use to build your image on top
+of. We use <a href="https://hub.docker.com/_/ubuntu/">Ubuntu</a> (tag:
+<code class="language-plaintext highlighter-rouge">trusty</code>), which is available on <a href="https://hub.docker.com">Docker Hub</a>:</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Riak</span>
+<span class="c">#</span>
+<span class="c"># VERSION       0.1.1</span>
+
+<span class="c"># Use the Ubuntu parent image provided by dotCloud</span>
+<span class="k">FROM</span><span class="s"> ubuntu:trusty</span>
+</code></pre></div></div>
+
+<p>After that, we install the curl which is used to download the repository setup
+script and we download the setup script and run it.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Riak repository before we do apt-get update, so that update happens</span>
+<span class="c"># in a single step</span>
+<span class="k">RUN </span>apt-get <span class="nb">install</span> <span class="nt">-q</span> <span class="nt">-y</span> curl <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    curl <span class="nt">-fsSL</span> https://packagecloud.io/install/repositories/basho/riak/script.deb | <span class="nb">sudo </span>bash
+</code></pre></div></div>
+
+<p>Then we install and setup a few dependencies:</p>
 
 <ul>
-  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/">Compose ファイル</a> である <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> と <code class="language-plaintext highlighter-rouge">docker-stack.yml</code> ファイルを利用して Docker イメージにもとづくサービスを定義します。</li>
-  <li><code class="language-plaintext highlighter-rouge">docker-compose.yml</code> と <a href="/engine/reference/builder/">Dockerfiles</a> の関係について理解します。</li>
-  <li>Compose ファイルからアプリケーションサービスに向けて、呼び出し処理を行う方法を説明します。</li>
-  <li>アプリケーションやサービスを <a href="/docs.docker.jp.onthefly/engine/swarm/">Swarm</a> にデプロイする方法を説明します。</li>
+  <li><code class="language-plaintext highlighter-rouge">supervisor</code> is used manage the Riak processes</li>
+  <li><code class="language-plaintext highlighter-rouge">riak=2.0.5-1</code> is the Riak package coded to version 2.0.5</li>
 </ul>
 
-<h2 id="samples-tailored-to-demo-compose">Compose のデモを含めたサンプル</h2>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install and setup project dependencies</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> <span class="se">\
+</span>    apt-get <span class="nb">install</span> <span class="nt">-y</span> supervisor <span class="nv">riak</span><span class="o">=</span>2.0.5-1
 
-<p>以下のサンプルは特に Docker Compose に着目しています。</p>
+<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/supervisor
 
-<ul>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/samples/django/">クイックスタート: Compose と Django</a> - Docker Compose を使って、簡単な Django/PostgreSQL アプリのセットアップと実行方法を示します。</p>
-  </li>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/samples/rails/">クイックスタート: Compose と Rails</a> - Docker Compose を使って、Rails/PostgreSQL アプリのセットアップと実行方法を示します。</p>
-  </li>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/samples/wordpress/">クイックスタート: Compose と WordPress</a> - Docker コンテナーを使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。</p>
-  </li>
-</ul>
+<span class="k">RUN </span>locale-gen en_US en_US.UTF-8
 
-<h2 id="awesome-compose-samples">Awesome Compose サンプル</h2>
+<span class="k">COPY</span><span class="s"> supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span>
+</code></pre></div></div>
 
-<p>Awesome Compose サンプルでは Docker Compose の利用方法として、さまざまなフレームワークや技術の統合方法を紹介しています。
-サンプルは <a href="https://github.com/docker/awesome-compose" target="_blank" rel="noopener" class="_">Awesome-compose GitHub repo</a> から入手することができます。</p>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=samples">samples</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+<p>After that, we modify Riak’s configuration:</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Configure Riak to accept connections from any host</span>
+<span class="k">RUN </span><span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s|listener.http.internal = 127.0.0.1:8098|listener.http.internal = 0.0.0.0:8098|"</span> /etc/riak/riak.conf
+<span class="k">RUN </span><span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s|listener.protobuf.internal = 127.0.0.1:8087|listener.protobuf.internal = 0.0.0.0:8087|"</span> /etc/riak/riak.conf
+</code></pre></div></div>
+
+<p>Then, we expose the Riak Protocol Buffers and HTTP interfaces:</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Expose Riak Protocol Buffers and HTTP interfaces</span>
+<span class="k">EXPOSE</span><span class="s"> 8087 8098</span>
+</code></pre></div></div>
+
+<p>Finally, run <code class="language-plaintext highlighter-rouge">supervisord</code> so that Riak is started:</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> ["/usr/bin/supervisord"]</span>
+</code></pre></div></div>
+
+<h2 id="create-a-supervisord-configuration-file">Create a supervisord configuration file</h2>
+
+<p>Create an empty file called <code class="language-plaintext highlighter-rouge">supervisord.conf</code>. Make
+sure it’s at the same directory level as your <code class="language-plaintext highlighter-rouge">Dockerfile</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>supervisord.conf
+</code></pre></div></div>
+
+<p>Populate it with the following program definitions:</p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[supervisord]</span>
+<span class="py">nodaemon</span><span class="p">=</span><span class="s">true</span>
+
+<span class="nn">[program:riak]</span>
+<span class="py">command</span><span class="p">=</span><span class="s">bash -c "/usr/sbin/riak console"</span>
+<span class="py">numprocs</span><span class="p">=</span><span class="s">1</span>
+<span class="py">autostart</span><span class="p">=</span><span class="s">true</span>
+<span class="py">autorestart</span><span class="p">=</span><span class="s">true</span>
+<span class="py">user</span><span class="p">=</span><span class="s">riak</span>
+<span class="py">environment</span><span class="p">=</span><span class="s">HOME="/var/lib/riak"</span>
+<span class="py">stdout_logfile</span><span class="p">=</span><span class="s">/var/log/supervisor/%(program_name)s.log</span>
+<span class="py">stderr_logfile</span><span class="p">=</span><span class="s">/var/log/supervisor/%(program_name)s.log</span>
+</code></pre></div></div>
+
+<h2 id="build-the-docker-image-for-riak">Build the Docker image for Riak</h2>
+
+<p>Now you can build a Docker image for Riak:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> <span class="s2">"&lt;yourname&gt;/riak"</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>Riak is a distributed database. Many production deployments consist of
+<a href="https://riak.com/why-your-riak-cluster-should-have-at-least-five-nodes/">at least five nodes</a>.
+See the <a href="https://github.com/hectcastro/docker-riak">docker-riak</a> project
+details on how to deploy a Riak cluster using Docker and Pipework.</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=example">example</a>, <a href="/docs.docker.jp.onthefly/search/?q=package installation">package installation</a>, <a href="/docs.docker.jp.onthefly/search/?q=networking">networking</a>, <a href="/docs.docker.jp.onthefly/search/?q=riak">riak</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -146,7 +216,7 @@
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/compose/samples-for-compose.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [compose/samples-for-compose.ch](https://matsuand.github.io/docs.docker.jp.onthefly/compose/samples-for-compose/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/samples/running_riak_service.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [samples/running_riak_service.ch](https://matsuand.github.io/docs.docker.jp.onthefly/samples/running_riak_service/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -165,9 +235,10 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#key-concepts-these-samples-cover" class="nomunge">サンプルが示す重要な考え方</a></li>
-  <li><a href="#samples-tailored-to-demo-compose" class="nomunge">Compose のデモを含めたサンプル</a></li>
-  <li><a href="#awesome-compose-samples" class="nomunge">Awesome Compose サンプル</a></li>
+  <li><a href="#create-a-dockerfile" class="nomunge">Create a Dockerfile</a></li>
+  <li><a href="#create-a-supervisord-configuration-file" class="nomunge">Create a supervisord configuration file</a></li>
+  <li><a href="#build-the-docker-image-for-riak" class="nomunge">Build the Docker image for Riak</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
 </ul>
 
 </div>
@@ -253,5 +324,5 @@
     </div>
 
     </footer>
-    <script>const pageURL = "/compose/samples-for-compose/";</script></body>
+    <script>const pageURL = "/samples/running_riak_service/";</script></body>
 </html>

@@ -1,10 +1,10 @@
 <!-- Page generated 2021-04-19 20:19:32 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Compose を使ったサンプルアプリ | Docker ドキュメント</title>
-  <meta name="description" content="Compose に関するサンプルの概要。" />
-  <meta name="keywords" content="documentation, docs, docker, compose, samples">
-  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/compose/samples-for-compose/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerize a CouchDB service | Docker ドキュメント</title>
+  <meta name="description" content="Sharing data between 2 couchdb databases" />
+  <meta name="keywords" content="docker, example, package installation, networking, couchdb,  data volumes">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/samples/couchdb_data_volumes/" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="Compose を使ったサンプルアプリ"/>
+  <meta name="twitter:title" itemprop="title name" content="Dockerize a CouchDB service"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="Compose を使ったサンプルアプリ" />
-  <meta property="og:description" content="Compose に関するサンプルの概要。" />
+  <meta property="og:title" content="Dockerize a CouchDB service" />
+  <meta property="og:description" content="Sharing data between 2 couchdb databases" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-19T20:19:32+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
-  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/compose/samples-for-compose/" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/samples/couchdb_data_volumes/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
   <meta property="article:published_time" itemprop="datePublished" content="2021-04-19T20:19:32+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Compose を使ったサンプルアプリ","description":"Compose に関するサンプルの概要。","url":"https://docs.docker.com/compose/samples-for-compose/"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerize a CouchDB service","description":"Sharing data between 2 couchdb databases","url":"https://docs.docker.com/samples/couchdb_data_volumes/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,41 +98,50 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Compose を使ったサンプルアプリ</h1><p>以下に示すサンプルは、Docker Compose の利用によりどのような動作が行われるかを、さまざまな観点から示すものです。
-前提として、まだ <a href="/docs.docker.jp.onthefly/compose/install/">Docker Compose のインストール</a> を行っていなければ、これを行ってください。</p>
+                        <section class="section"><h1>Dockerize a CouchDB service</h1><blockquote>
+  <p><strong>Note</strong></p>
 
-<h2 id="key-concepts-these-samples-cover">サンプルが示す重要な考え方</h2>
+  <p><strong>If you don’t like sudo</strong> then see <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user"><em>Giving non-root access</em></a></p>
+</blockquote>
 
-<p>このサンプルでは以下のことを行います。</p>
+<p>Here’s an example of using data volumes to share the same data between
+two CouchDB containers. This could be used for hot upgrades, testing
+different versions of CouchDB on the same data, etc.</p>
 
-<ul>
-  <li><a href="/docs.docker.jp.onthefly/compose/compose-file/">Compose ファイル</a> である <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> と <code class="language-plaintext highlighter-rouge">docker-stack.yml</code> ファイルを利用して Docker イメージにもとづくサービスを定義します。</li>
-  <li><code class="language-plaintext highlighter-rouge">docker-compose.yml</code> と <a href="/engine/reference/builder/">Dockerfiles</a> の関係について理解します。</li>
-  <li>Compose ファイルからアプリケーションサービスに向けて、呼び出し処理を行う方法を説明します。</li>
-  <li>アプリケーションやサービスを <a href="/docs.docker.jp.onthefly/engine/swarm/">Swarm</a> にデプロイする方法を説明します。</li>
-</ul>
+<h2 id="create-first-database">Create first database</h2>
 
-<h2 id="samples-tailored-to-demo-compose">Compose のデモを含めたサンプル</h2>
+<p>We’re marking <code class="language-plaintext highlighter-rouge">/var/lib/couchdb</code> as a data volume.</p>
 
-<p>以下のサンプルは特に Docker Compose に着目しています。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ COUCH1</span><span class="o">=</span><span class="si">$(</span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5984 <span class="nt">-v</span> /var/lib/couchdb shykes/couchdb:2013-05-03<span class="si">)</span>
+</code></pre></div></div>
 
-<ul>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/samples/django/">クイックスタート: Compose と Django</a> - Docker Compose を使って、簡単な Django/PostgreSQL アプリのセットアップと実行方法を示します。</p>
-  </li>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/samples/rails/">クイックスタート: Compose と Rails</a> - Docker Compose を使って、Rails/PostgreSQL アプリのセットアップと実行方法を示します。</p>
-  </li>
-  <li>
-    <p><a href="/docs.docker.jp.onthefly/samples/wordpress/">クイックスタート: Compose と WordPress</a> - Docker コンテナーを使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。</p>
-  </li>
-</ul>
+<h2 id="add-data-to-the-first-database">Add data to the first database</h2>
 
-<h2 id="awesome-compose-samples">Awesome Compose サンプル</h2>
+<p>We’re assuming your Docker host is reachable at <code class="language-plaintext highlighter-rouge">localhost</code>. If not,
+replace <code class="language-plaintext highlighter-rouge">localhost</code> with the public IP of your Docker host.</p>
 
-<p>Awesome Compose サンプルでは Docker Compose の利用方法として、さまざまなフレームワークや技術の統合方法を紹介しています。
-サンプルは <a href="https://github.com/docker/awesome-compose" target="_blank" rel="noopener" class="_">Awesome-compose GitHub repo</a> から入手することができます。</p>
-<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=documentation">documentation</a>, <a href="/docs.docker.jp.onthefly/search/?q=docs">docs</a>, <a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=compose">compose</a>, <a href="/docs.docker.jp.onthefly/search/?q=samples">samples</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ HOST</span><span class="o">=</span>localhost
+<span class="nv">$ URL</span><span class="o">=</span><span class="s2">"http://</span><span class="nv">$HOST</span><span class="s2">:</span><span class="si">$(</span>docker port <span class="nv">$COUCH1</span> 5984 | <span class="nb">grep</span> <span class="nt">-o</span> <span class="s1">'[1-9][0-9]*$'</span><span class="si">)</span><span class="s2">/_utils/"</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Navigate to </span><span class="nv">$URL</span><span class="s2"> in your browser, and use the couch interface to add data"</span>
+</code></pre></div></div>
+
+<h2 id="create-second-database">Create second database</h2>
+
+<p>This time, we’re requesting shared access to <code class="language-plaintext highlighter-rouge">$COUCH1</code>’s volumes.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ COUCH2</span><span class="o">=</span><span class="si">$(</span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5984 <span class="nt">--volumes-from</span> <span class="nv">$COUCH1</span> shykes/couchdb:2013-05-03<span class="si">)</span>
+</code></pre></div></div>
+
+<h2 id="browse-data-on-the-second-database">Browse data on the second database</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ HOST</span><span class="o">=</span>localhost
+<span class="nv">$ URL</span><span class="o">=</span><span class="s2">"http://</span><span class="nv">$HOST</span><span class="s2">:</span><span class="si">$(</span>docker port <span class="nv">$COUCH2</span> 5984 | <span class="nb">grep</span> <span class="nt">-o</span> <span class="s1">'[1-9][0-9]*$'</span><span class="si">)</span><span class="s2">/_utils/"</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Navigate to </span><span class="nv">$URL</span><span class="s2"> in your browser. You should see the same data as in the first database"</span><span class="s1">'!'</span>
+</code></pre></div></div>
+
+<p>Congratulations, you are now running two Couchdb containers, completely
+isolated from each other <em>except</em> for their data.</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=docker">docker</a>, <a href="/docs.docker.jp.onthefly/search/?q=example">example</a>, <a href="/docs.docker.jp.onthefly/search/?q=package installation">package installation</a>, <a href="/docs.docker.jp.onthefly/search/?q=networking">networking</a>, <a href="/docs.docker.jp.onthefly/search/?q=couchdb">couchdb</a>, <a href="/docs.docker.jp.onthefly/search/?q=data volumes">data volumes</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
@@ -146,7 +155,7 @@
                         <div class="sidebar hidden-xs hidden-sm">
                             <div class="toc-nav">
                                 <div class="feedback-links">
-                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/compose/samples-for-compose.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [compose/samples-for-compose.ch](https://matsuand.github.io/docs.docker.jp.onthefly/compose/samples-for-compose/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/samples/couchdb_data_volumes.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [samples/couchdb_data_volumes.ch](https://matsuand.github.io/docs.docker.jp.onthefly/samples/couchdb_data_volumes/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
                                         <li><div class="toggle-mode">
   <div class="icon">
       <i class="fa fa-sun-o" aria-hidden="true"></i>
@@ -165,9 +174,10 @@
                                     </ul>
                                 </div><div id="side-toc-title">本ページ内:</div>
 <ul id="my_toc" class="inline_toc">
-  <li><a href="#key-concepts-these-samples-cover" class="nomunge">サンプルが示す重要な考え方</a></li>
-  <li><a href="#samples-tailored-to-demo-compose" class="nomunge">Compose のデモを含めたサンプル</a></li>
-  <li><a href="#awesome-compose-samples" class="nomunge">Awesome Compose サンプル</a></li>
+  <li><a href="#create-first-database" class="nomunge">Create first database</a></li>
+  <li><a href="#add-data-to-the-first-database" class="nomunge">Add data to the first database</a></li>
+  <li><a href="#create-second-database" class="nomunge">Create second database</a></li>
+  <li><a href="#browse-data-on-the-second-database" class="nomunge">Browse data on the second database</a></li>
 </ul>
 
 </div>
@@ -253,5 +263,5 @@
     </div>
 
     </footer>
-    <script>const pageURL = "/compose/samples-for-compose/";</script></body>
+    <script>const pageURL = "/samples/couchdb_data_volumes/";</script></body>
 </html>
