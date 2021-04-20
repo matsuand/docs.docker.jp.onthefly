@@ -28,6 +28,7 @@ redirect_from:
 @x
 ## Use-case
 @y
+{: #use-case }
 ## Use-case
 @z
 
@@ -46,6 +47,16 @@ there, to avoid this extra internet traffic.
 @z
 
 @x
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images to third parties without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+@y
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images to third parties without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+@z
+
+@x
 ### Alternatives
 @y
 ### Alternatives
@@ -79,6 +90,16 @@ Hub can be mirrored.
 @y
 It's currently not possible to mirror another private registry. Only the central
 Hub can be mirrored.
+@z
+
+@x
+> **Note**
+>
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}. 
+@y
+> **Note**
+>
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}. 
 @z
 
 @x
