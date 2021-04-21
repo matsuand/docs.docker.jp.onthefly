@@ -1,4 +1,4 @@
-<!-- Page generated 2021-04-16 15:03:16 +0900-->
+<!-- Page generated 2021-04-21 21:33:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node イメージのビルド | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node イメージのビルド" />
   <meta property="og:description" content="Learn how to build your first Docker image by writing a Dockerfile" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-16T15:03:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/build-images/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-04-16T15:03:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node イメージのビルド","description":"Learn how to build your first Docker image by writing a Dockerfile","url":"https://docs.docker.com/language/nodejs/build-images/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -203,9 +203,17 @@ Docker に対して<code class="language-plaintext highlighter-rouge">docker bui
 したがってここではこのファイル名を用いていくことにします。</p>
 </blockquote>
 
-<p>まず初めに行うべきなのは、アプリケーションに利用したいベースイメージが何であるのかを Docker に伝えるための 1 行を Dockerfile に記述することです。</p>
+<p>Docker ファイルの 1 行めに書くのは <a href="/docs.docker.jp.onthefly/engine/reference/builder/#syntax"><code class="language-plaintext highlighter-rouge"># syntax</code>パーサーディレクティブ</a> です。
+これは <strong>任意の記述</strong> ではありますが、Dockerfile の解析にあたって Docker ビルダーがどの文法を採用するのかを指示します。
+また古い Docker バージョンにおいて BuildKit を利用する際に、ビルド前にパーサーをアップグレードするようになります。
+<a href="/docs.docker.jp.onthefly/engine/reference/builder/#parser-directives">パーサーディレクティブ</a> は Dockerfile において、いずれのコメント、空行、Dockerfile 命令よりも前に、つまり第一に記述することが必要です。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12.18.1</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+</code></pre></div></div>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="k">FROM</span><span class="s"> node:12.18.1</span>
 </code></pre></div></div>
 
 <p>Docker イメージというものは、別のイメージを継承することができます。
@@ -277,7 +285,9 @@ Node ランタイムはそこから必要なパッケージを探し出せるよ
 
 <p>以下が完全な Dockerfile です。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:12.18.1</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="k">FROM</span><span class="s"> node:12.18.1</span>
 <span class="k">ENV</span><span class="s"> NODE_ENV=production</span>
 
 <span class="k">WORKDIR</span><span class="s"> /app</span>

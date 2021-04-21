@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-21 21:33:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ストレージドライバーについて | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="ストレージドライバーについて" />
   <meta property="og:description" content="Learn the technologies that support storage drivers." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/storage/storagedriver/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"ストレージドライバーについて","description":"Learn the technologies that support storage drivers.","url":"https://docs.docker.com/storage/storagedriver/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,8 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>ストレージドライバーについて</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p>
-<p>ストレージドライバーを効率よく利用するためには、Docker がどのようにしてイメージをビルドし保存するのか、またそのイメージをコンテナーがどのように利用するのかを理解しておくことが重要です。
+                        <section class="section"><h1>ストレージドライバーについて</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>ストレージドライバーを効率よく利用するためには、Docker がどのようにしてイメージをビルドし保存するのか、またそのイメージをコンテナーがどのように利用するのかを理解しておくことが重要です。
 これがわかっていれば、その知識に基づいた判断として、アプリケーションデータの適切な保存方法や、アプリケーション稼動中のパフォーマンス問題に対して、最良の方策をとることができます。</p>
 
 <p>ストレージドライバーは、コンテナー内の書き込み可能なレイヤーにデータを保存するものです。
@@ -120,7 +119,8 @@
 一番最後にあるレイヤーを除き、これ以外はすべて読み込み専用のレイヤーです。
 たとえば以下のような Dockerfile を考えてみます。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
 <span class="k">COPY</span><span class="s"> . /app</span>
 <span class="k">RUN </span>make /app
 <span class="k">CMD</span><span class="s"> python /app/app.py</span>
@@ -128,9 +128,9 @@
 
 <p>この Dockerfile には 4 つのコマンドがあります。
 コマンドのそれぞれが 1 つのレイヤーを生成します。
-まずは <code class="language-plaintext highlighter-rouge">FROM</code> 命令によって <code class="language-plaintext highlighter-rouge">ubuntu:18.04</code> イメージから 1 つのレイヤーが生成されるところから始まります。
-<code class="language-plaintext highlighter-rouge">COPY</code> 命令は Docker クライアントのカレントディレクトリから複数のファイルを追加します。
-<code class="language-plaintext highlighter-rouge">RUN</code> 命令は <code class="language-plaintext highlighter-rouge">make</code> コマンドを実行してアプリケーションをビルドします。
+まずは<code class="language-plaintext highlighter-rouge">FROM</code>命令によって<code class="language-plaintext highlighter-rouge">ubuntu:18.04</code>イメージから 1 つのレイヤーが生成されるところから始まります。
+<code class="language-plaintext highlighter-rouge">COPY</code>命令は Docker クライアントのカレントディレクトリから複数のファイルを追加します。
+<code class="language-plaintext highlighter-rouge">RUN</code>命令は<code class="language-plaintext highlighter-rouge">make</code>コマンドを実行してアプリケーションをビルドします。
 そして最後のレイヤーが、コンテナー内にて実行するべきコマンドを指定しています。</p>
 
 <p>各レイヤーは、その直前のレイヤーからの差異だけを保持します。
@@ -159,7 +159,9 @@
 <p><img src="/docs.docker.jp.onthefly/storage/storagedriver/images/sharing-layers.jpg" alt="同一のイメージを共有する複数コンテナー" /></p>
 
 <blockquote>
-  <p><strong>メモ</strong>: 複数イメージを必要としていて、さらに同一のデータを共有してアクセスしたい場合は、そのデータを Docker ボリュームに保存して、コンテナー内でそれをマウントします。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>複数イメージを必要としていて、さらに同一のデータを共有してアクセスしたい場合は、そのデータを Docker ボリュームに保存して、コンテナー内でそれをマウントします。</p>
 </blockquote>
 
 <p>Docker はストレージドライバーを利用して、イメージレイヤーと書き込み可能なコンテナーレイヤーの各内容を管理します。
@@ -168,31 +170,31 @@
 
 <h2 id="container-size-on-disk">ディスク上のコンテナーサイズ</h2>
 
-<p>稼働中コンテナーの概算サイズを確認するには <code class="language-plaintext highlighter-rouge">docker ps -s</code> コマンドを実行します。
+<p>稼働中コンテナーの概算サイズを確認するには<code class="language-plaintext highlighter-rouge">docker ps -s</code>コマンドを実行します。
 サイズに関連した 2 つのデータがカラム表示されます。</p>
 
 <ul>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">size</code>: （ディスク上の）データ総量。
+    <p><code class="language-plaintext highlighter-rouge">size</code>＝（ディスク上の）データ総量。
 各コンテナーの書き込みレイヤーが利用するデータ部分です。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">virtual size</code>: コンテナーにおいて利用されている読み込み専用のイメージデータと、コンテナーの書き込みレイヤーの <code class="language-plaintext highlighter-rouge">size</code> を足し合わせたデータ総量。
+    <p><code class="language-plaintext highlighter-rouge">virtual size</code>＝ コンテナーにおいて利用されている読み込み専用のイメージデータと、コンテナーの書き込みレイヤーの<code class="language-plaintext highlighter-rouge">size</code>を足し合わせたデータ総量。
 複数コンテナーにおいては、読み込み専用イメージデータの全部または一部を共有しているかもしれません。
 1 つのイメージをベースとして作った 2 つのコンテナーでは、読み込み専用データを 100% 共有します。
 一方で 2 つの異なるイメージが一部に共通するレイヤーを持っていて、そこからそれぞれに 2 つのコンテナーを作ったとすると、共有するのはその共通レイヤー部分のみです。
-したがって <code class="language-plaintext highlighter-rouge">virtual size</code> は単純に足し合わせで計算できるものではありません。
+したがって<code class="language-plaintext highlighter-rouge">virtual size</code>は単純に足し合わせで計算できるものではありません。
 これはディスク総量を多く見積もってしまい、その量は無視できないほどになることがあります。</p>
   </li>
 </ul>
 
-<p>起動しているコンテナーすべてが利用するディスク総量は、各コンテナーの <code class="language-plaintext highlighter-rouge">size</code> と <code class="language-plaintext highlighter-rouge">virtual size</code> を適宜組み合わせた値になります。
-1 つのイメージだけに基づいた複数コンテナーの場合、そのディスク総量は、すべての <code class="language-plaintext highlighter-rouge">size</code> の合計に 1 つのイメージサイズ（<code class="language-plaintext highlighter-rouge">virtual size</code>- <code class="language-plaintext highlighter-rouge">size</code>）を加えて得られます。</p>
+<p>起動しているコンテナーすべてが利用するディスク総量は、各コンテナーの<code class="language-plaintext highlighter-rouge">size</code>と<code class="language-plaintext highlighter-rouge">virtual size</code>を適宜組み合わせた値になります。
+1 つのイメージだけに基づいた複数コンテナーの場合、そのディスク総量は、すべての<code class="language-plaintext highlighter-rouge">size</code>の合計に 1 つのイメージサイズ（<code class="language-plaintext highlighter-rouge">virtual size</code>- <code class="language-plaintext highlighter-rouge">size</code>）を加えて得られます。</p>
 
 <p>またコンテナーがディスク領域を消費するものであっても、以下に示す状況はディスク総量の算定には含まれません。</p>
 
 <ul>
-  <li>ロギングドライバー <code class="language-plaintext highlighter-rouge">json-file</code> を利用している場合に、そのログファイルが利用するディスク量。
+  <li>ログドライバー<code class="language-plaintext highlighter-rouge">json-file</code>を利用している場合に、そのログファイルが利用するディスク量。
 コンテナーにおいてログ出力を大量に行っていて、ログローテーションを用いていない場合には、このディスク量は無視できないものになります。</li>
   <li>コンテナーが利用するボリュームやバインドマウント。</li>
   <li>コンテナーの設定ファイルが利用するディスク領域。
@@ -212,7 +214,7 @@
 
 <h3 id="sharing-promotes-smaller-images">共有によりイメージサイズはより小さく</h3>
 
-<p><code class="language-plaintext highlighter-rouge">docker pull</code> を実行してリポジトリからイメージをプルするとき、あるいはイメージから新たにコンテナーを生成するにあたってそのイメージがまだローカルに生成されていないとき、各レイヤーはプルによって個別に取得されて、Docker のローカル保存領域、たとえば Linux では通常 <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> に保存されます。
+<p><code class="language-plaintext highlighter-rouge">docker pull</code>を実行してリポジトリからイメージをプルするとき、あるいはイメージから新たにコンテナーを生成するにあたってそのイメージがまだローカルに生成されていないとき、各レイヤーはプルによって個別に取得されて、Docker のローカル保存領域、たとえば Linux では通常<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>に保存されます。
 取得された各レイヤーは、以下の例のようにして確認することができます。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu:18.04
@@ -226,8 +228,8 @@ Status: Downloaded newer image <span class="k">for </span>ubuntu:18.04
 </code></pre></div></div>
 
 <p>各レイヤーは、Docker ホストのローカル保存領域内にて、それぞれのディレクトリ配下に保存されます。
-ファイルシステム上のレイヤーデータを確認するなら、<code class="language-plaintext highlighter-rouge">/var/lib/docker/&lt;storage-driver&gt;</code> の内容を一覧表示します。
-以下は <code class="language-plaintext highlighter-rouge">overlay2</code> ストレージドライバーに対する例です。</p>
+ファイルシステム上のレイヤーデータを確認するなら、<code class="language-plaintext highlighter-rouge">/var/lib/docker/&lt;storage-driver&gt;</code>の内容を一覧表示します。
+以下は<code class="language-plaintext highlighter-rouge">overlay2</code>ストレージドライバーに対する例です。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> /var/lib/docker/overlay2
 16802227a96c24dcbeab5b37821e2b67a9f921749cd9a2e386d5a6d5bc6fc6d3
@@ -241,30 +243,32 @@ l
 （Docker 1.10 以前は対応づいていました。）</p>
 
 <p>ここで 2 つの異なる Dockerfile を利用している状況を考えます。
-1 つめの Dockerfile からは <code class="language-plaintext highlighter-rouge">acme/my-base-image:1.0</code> というイメージが作られるものとします。</p>
+1 つめの Dockerfile からは<code class="language-plaintext highlighter-rouge">acme/my-base-image:1.0</code>というイメージが作られるものとします。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
 <span class="k">COPY</span><span class="s"> . /app</span>
 </code></pre></div></div>
 
-<p>2 つめの Dockerfile は <code class="language-plaintext highlighter-rouge">acme/my-base-image:1.0</code> をベースとして、さらにレイヤーを追加するものとします。</p>
+<p>2 つめの Dockerfile は<code class="language-plaintext highlighter-rouge">acme/my-base-image:1.0</code>をベースとして、さらにレイヤーを追加するものとします。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> acme/my-base-image:1.0</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> acme/my-base-image:1.0</span>
 <span class="k">CMD</span><span class="s"> /app/hello.sh</span>
 </code></pre></div></div>
 
-<p>2 つめのイメージには 1 つめのイメージが持つレイヤーがすべて含まれ、さらに <code class="language-plaintext highlighter-rouge">CMD</code> 命令による新たなレイヤーと、読み書き可能なコンテナーレイヤーが加わっています。
+<p>2 つめのイメージには 1 つめのイメージが持つレイヤーがすべて含まれ、さらに<code class="language-plaintext highlighter-rouge">CMD</code>命令による新たなレイヤーと、読み書き可能なコンテナーレイヤーが加わっています。
 Docker にとって 1 つめのイメージにおけるレイヤーはすべて取得済であるため、再度プルによって取得する必要がありません。
 2 つのイメージにおいて共通して存在しているレイヤーは、すべて共有します。</p>
 
-<p>この 2 つの Dockerfile からイメージをビルドした場合、<code class="language-plaintext highlighter-rouge">docker image ls</code> や <code class="language-plaintext highlighter-rouge">docker history</code> コマンドを使ってみると、共有されているレイヤーに対する暗号化 ID は同一になっていることがわかります。</p>
+<p>この 2 つの Dockerfile からイメージをビルドした場合、<code class="language-plaintext highlighter-rouge">docker image ls</code>や<code class="language-plaintext highlighter-rouge">docker history</code>コマンドを使ってみると、共有されているレイヤーに対する暗号化 ID は同一になっていることがわかります。</p>
 
 <ol>
   <li>
-    <p>新規に <code class="language-plaintext highlighter-rouge">cow-test/</code> というディレクトリを生成して移動します。</p>
+    <p>新規に<code class="language-plaintext highlighter-rouge">cow-test/</code>というディレクトリを生成して移動します。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">cow-test/</code> ディレクトリにて、以下の内容で新規ファイル <code class="language-plaintext highlighter-rouge">hello.sh</code> を生成します。</p>
+    <p><code class="language-plaintext highlighter-rouge">cow-test/</code>ディレクトリにて、以下の内容で新規ファイル<code class="language-plaintext highlighter-rouge">hello.sh</code>を生成します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 <span class="nb">echo</span> <span class="s2">"Hello world"</span>
@@ -276,87 +280,89 @@ Docker にとって 1 つめのイメージにおけるレイヤーはすべて�
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>前述した 1 つめの Dockerfile の内容を、新規ファイル <code class="language-plaintext highlighter-rouge">Dockerfile.base</code> にコピーします。</p>
+    <p>前述した 1 つめの Dockerfile の内容を、新規ファイル<code class="language-plaintext highlighter-rouge">Dockerfile.base</code>にコピーします。</p>
   </li>
   <li>
-    <p>前述した 2 つめの Dockerfile の内容を、新規ファイル <code class="language-plaintext highlighter-rouge">Dockerfile</code> にコピーします。</p>
+    <p>前述した 2 つめの Dockerfile の内容を、新規ファイル<code class="language-plaintext highlighter-rouge">Dockerfile</code>にコピーします。</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">cow-test/</code> ディレクトリ内にて 1 つめのイメージをビルドします。
-コマンドでは最後の <code class="language-plaintext highlighter-rouge">.</code> を記述するのを忘れないでください。
-これは <code class="language-plaintext highlighter-rouge">PATH</code> を指定するものであり、イメージに対してファイルの追加が必要となる場合に、そのファイルを探し出す場所を Docker に指示するものです。</p>
+    <p><code class="language-plaintext highlighter-rouge">cow-test/</code>ディレクトリ内にて 1 つめのイメージをビルドします。
+コマンドでは最後の<code class="language-plaintext highlighter-rouge">.</code>を記述するのを忘れないでください。
+これは<code class="language-plaintext highlighter-rouge">PATH</code>を指定するものであり、イメージに対してファイルの追加が必要となる場合に、そのファイルを探し出す場所を Docker に指示するものです。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> acme/my-base-image:1.0 <span class="nt">-f</span> Dockerfile.base <span class="nb">.</span>
-Sending build context to Docker daemon  812.4MB
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> acme/my-base-image:1.0 <span class="nt">-f</span> Dockerfile.base <span class="nb">.</span>
+<span class="go">Sending build context to Docker daemon  812.4MB
 Step 1/2 : FROM ubuntu:18.04
- <span class="nt">---</span><span class="o">&gt;</span> d131e0fa2585
-Step 2/2 : COPY <span class="nb">.</span> /app
- <span class="nt">---</span><span class="o">&gt;</span> Using cache
- <span class="nt">---</span><span class="o">&gt;</span> bd09118bcef6
-Successfully built bd09118bcef6
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>d131e0fa2585
+<span class="go">Step 2/2 : COPY . /app
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>Using cache
+<span class="gp"> ---&gt;</span><span class="w"> </span>bd09118bcef6
+<span class="go">Successfully built bd09118bcef6
 Successfully tagged acme/my-base-image:1.0
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>2 つめのイメージをビルドします。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> acme/my-final-image:1.0 <span class="nt">-f</span> Dockerfile <span class="nb">.</span>
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> acme/my-final-image:1.0 <span class="nt">-f</span> Dockerfile <span class="nb">.</span>
+<span class="go">
 Sending build context to Docker daemon  4.096kB
 Step 1/2 : FROM acme/my-base-image:1.0
- <span class="nt">---</span><span class="o">&gt;</span> bd09118bcef6
-Step 2/2 : CMD /app/hello.sh
- <span class="nt">---</span><span class="o">&gt;</span> Running <span class="k">in </span>a07b694759ba
- <span class="nt">---</span><span class="o">&gt;</span> dbf995fc07ff
-Removing intermediate container a07b694759ba
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>bd09118bcef6
+<span class="go">Step 2/2 : CMD /app/hello.sh
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>Running <span class="k">in </span>a07b694759ba
+<span class="gp"> ---&gt;</span><span class="w"> </span>dbf995fc07ff
+<span class="go">Removing intermediate container a07b694759ba
 Successfully built dbf995fc07ff
 Successfully tagged acme/my-final-image:1.0
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>2 つのイメージのサイズを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image <span class="nb">ls
-
-</span>REPOSITORY                         TAG                     IMAGE ID            CREATED             SIZE
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker image <span class="nb">ls</span>
+<span class="go">
+REPOSITORY                         TAG                     IMAGE ID            CREATED             SIZE
 acme/my-final-image                1.0                     dbf995fc07ff        58 seconds ago      103MB
 acme/my-base-image                 1.0                     bd09118bcef6        3 minutes ago       103MB
-</code></pre></div>    </div>
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>それぞれのイメージに含まれるレイヤーを確認します。</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">history </span>bd09118bcef6
-IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-bd09118bcef6        4 minutes ago       /bin/sh <span class="nt">-c</span> <span class="c">#(nop) COPY dir:35a7eb158c1504e...   100B</span>
-d131e0fa2585        3 months ago        /bin/sh <span class="nt">-c</span> <span class="c">#(nop)  CMD ["/bin/bash"]            0B</span>
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /run/systemd <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'...   7B
-&lt;missing&gt;           3 months ago        /bin/sh -c sed -i '</span>s/^#<span class="se">\s</span><span class="k">*</span><span class="se">\(</span>deb.<span class="k">*</span>universe<span class="se">\.</span>..   2.78kB
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>          0B
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">set</span> <span class="nt">-xe</span>   <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'#!/bin/sh'</span> <span class="o">&gt;</span>...   745B
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="c">#(nop) ADD file:eef57983bd66e3a...   103MB</span>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">history </span>bd09118bcef6
+<span class="go">IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+</span><span class="gp">bd09118bcef6        4 minutes ago       /bin/sh -c #</span><span class="o">(</span>nop<span class="o">)</span> COPY <span class="nb">dir</span>:35a7eb158c1504e...   100B
+<span class="gp">d131e0fa2585        3 months ago        /bin/sh -c #</span><span class="o">(</span>nop<span class="o">)</span>  CMD <span class="o">[</span><span class="s2">"/bin/bash"</span><span class="o">]</span>            0B
+<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /run/systemd <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'...   7B
+</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s1">3 months ago        /bin/sh -c sed -i '</span>s/^#<span class="se">\s</span><span class="k">*</span><span class="se">\(</span>deb.<span class="k">*</span>universe<span class="se">\.</span>..   2.78kB
+<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>          0B
+<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">set</span> <span class="nt">-xe</span>   <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'#!/bin/sh'</span> <span class="o">&gt;</span>...   745B
+<span class="gp">&lt;missing&gt;</span><span class="w">           </span>3 months ago        /bin/sh <span class="nt">-c</span> <span class="c">#(nop) ADD file:eef57983bd66e3a...   103MB</span>
 </code></pre></div>    </div>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">history </span>dbf995fc07ff
-
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nb">history </span>dbf995fc07ff
+<span class="go">
 IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-dbf995fc07ff        3 minutes ago       /bin/sh <span class="nt">-c</span> <span class="c">#(nop)  CMD ["/bin/sh" "-c" "/a...   0B</span>
-bd09118bcef6        5 minutes ago       /bin/sh <span class="nt">-c</span> <span class="c">#(nop) COPY dir:35a7eb158c1504e...   100B</span>
-d131e0fa2585        3 months ago        /bin/sh <span class="nt">-c</span> <span class="c">#(nop)  CMD ["/bin/bash"]            0B</span>
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /run/systemd <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'...   7B
-&lt;missing&gt;           3 months ago        /bin/sh -c sed -i '</span>s/^#<span class="se">\s</span><span class="k">*</span><span class="se">\(</span>deb.<span class="k">*</span>universe<span class="se">\.</span>..   2.78kB
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/lib/apt/lists/<span class="k">*</span>          0B
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="nb">set</span> <span class="nt">-xe</span>   <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">'#!/bin/sh'</span> <span class="o">&gt;</span>...   745B
-&lt;missing&gt;           3 months ago        /bin/sh <span class="nt">-c</span> <span class="c">#(nop) ADD file:eef57983bd66e3a...   103MB</span>
-</code></pre></div>    </div>
+</span><span class="gp">dbf995fc07ff        3 minutes ago       /bin/sh -c #</span><span class="o">(</span>nop<span class="o">)</span>  CMD <span class="o">[</span><span class="s2">"/bin/sh"</span> <span class="s2">"-c"</span> <span class="s2">"/a...   0B
+</span><span class="gp">bd09118bcef6        5 minutes ago       /bin/sh -c #</span><span class="s2">(nop) COPY dir:35a7eb158c1504e...   100B
+</span><span class="gp">d131e0fa2585        3 months ago        /bin/sh -c #</span><span class="s2">(nop)  CMD ["</span>/bin/bash<span class="s2">"]            0B
+</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c mkdir -p /run/systemd &amp;&amp; echo '...   7B
+</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c sed -i 's/^#</span><span class="se">\s</span><span class="s2">*</span><span class="se">\(</span><span class="s2">deb.*universe</span><span class="se">\.</span><span class="s2">..   2.78kB
+</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c rm -rf /var/lib/apt/lists/*          0B
+</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c set -xe   &amp;&amp; echo '#!/bin/sh' &gt;...   745B
+</span><span class="gp">&lt;missing&gt;</span><span class="w">           </span><span class="s2">3 months ago        /bin/sh -c #(nop) ADD file:eef57983bd66e3a...   103MB
+</span></code></pre></div>    </div>
 
     <p>ほぼすべてのレイヤーが同一であって、ただ 2 つめのイメージの最上位レイヤーだけが違うのがわかります。
-これを除けば、すべてのレイヤーが 2 つのイメージ間で共有されているので、各レイヤーは <code class="language-plaintext highlighter-rouge">/var/lib/docker/</code> には一度しか保存されません。
+これを除けば、すべてのレイヤーが 2 つのイメージ間で共有されているので、各レイヤーは<code class="language-plaintext highlighter-rouge">/var/lib/docker/</code>には一度しか保存されません。
 新たにできたレイヤーは、まったくと言ってよいほどに容量をとっていません。
 というのも、そのレイヤーは何かのファイルを変更するわけでなく、単にコマンドを実行するだけのものであるからです。</p>
 
     <blockquote>
-      <p><strong>メモ</strong>: <code class="language-plaintext highlighter-rouge">docker history</code> の出力において <code class="language-plaintext highlighter-rouge">&lt;missing&gt;</code> として示される行は、そのレイヤーが他のシステムにおいてビルドされていることを示しています。
+      <p><strong>メモ</strong></p>
+
+      <p><code class="language-plaintext highlighter-rouge">docker history</code>の出力において<code class="language-plaintext highlighter-rouge">&lt;missing&gt;</code>として示される行は、そのレイヤーが他のシステムにおいてビルドされていることを示しています。
 したがってローカルシステム上では利用することができません。
 この表示は無視して構いません。</p>
     </blockquote>
@@ -372,7 +378,7 @@ d131e0fa2585        3 months ago        /bin/sh <span class="nt">-c</span> <span
 
 <p>コンテナー内にあるファイルが修正されると、ストレージドライバーはコピーオンライト方式により動作します。
 そこで実行される各処理は、ストレージドライバーによってさまざまです。
-<code class="language-plaintext highlighter-rouge">aufs</code>, <code class="language-plaintext highlighter-rouge">overlay</code>, <code class="language-plaintext highlighter-rouge">overlay2</code> といったドライバーの場合、だいたい以下のような順にコピーオンライト方式による処理が行われます。</p>
+<code class="language-plaintext highlighter-rouge">aufs</code>、<code class="language-plaintext highlighter-rouge">overlay</code>、<code class="language-plaintext highlighter-rouge">overlay2</code>といったドライバーの場合、だいたい以下のような順にコピーオンライト方式による処理が行われます。</p>
 
 <ul>
   <li>
@@ -381,7 +387,7 @@ d131e0fa2585        3 months ago        /bin/sh <span class="nt">-c</span> <span
 ファイルが見つかるとこれをキャッシュに加えて、次回以降の処理スピードを上げることに備えます。</p>
   </li>
   <li>
-    <p>見つかったファイルを初めてコピーするときには <code class="language-plaintext highlighter-rouge">copy_up</code> という処理が行われます。
+    <p>見つかったファイルを初めてコピーするときには<code class="language-plaintext highlighter-rouge">copy_up</code>という処理が行われます。
 これによってそのファイルをコンテナーの書き込みレイヤーにコピーします。</p>
   </li>
   <li>
@@ -403,21 +409,23 @@ Docker ボリュームは起動されるコンテナーからは独立してい�
 さらにボリュームは複数のコンテナー間での共有が可能であり、書き込みレイヤーのサイズを増加させることもありません。</p>
 </blockquote>
 
-<p><code class="language-plaintext highlighter-rouge">copy_up</code> 処理は際立った性能のオーバーヘッドを招きます。
+<p><code class="language-plaintext highlighter-rouge">copy_up</code>処理は際立った性能のオーバーヘッドを招きます。
 このオーバーヘッドは、利用しているストレージドライバーによってさまざまです。
 大容量ファイル、多数のレイヤー、深いディレクトリ階層といったものが、さらに影響します。
-<code class="language-plaintext highlighter-rouge">copy_up</code> 処理は対象となるファイルが初めて修正されたときにだけ実行されるので、オーバーヘッドはそれでも最小限に抑えられています。</p>
+<code class="language-plaintext highlighter-rouge">copy_up</code>処理は対象となるファイルが初めて修正されたときにだけ実行されるので、オーバーヘッドはそれでも最小限に抑えられています。</p>
 
-<p>コピーオンライトが動作している様子を確認するため、以下の例においては、前述した <code class="language-plaintext highlighter-rouge">acme/my-final-image:1.0</code> イメージをベースとする 5 つのコンテナーを見ていきます。
+<p>コピーオンライトが動作している様子を確認するため、以下の例においては、前述した<code class="language-plaintext highlighter-rouge">acme/my-final-image:1.0</code>イメージをベースとする 5 つのコンテナーを見ていきます。
 そして各コンテナーがどれだけの容量を消費しているかを確認します。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>: 以下の手順は Docker Desktop for Mac または Docker Desktop for Windows では動作しません。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>以下の手順は Docker Desktop for Mac または Docker Desktop for Windows では動作しません。</p>
 </blockquote>
 
 <ol>
   <li>
-    <p>Docker ホスト上の端末画面から、以下のような <code class="language-plaintext highlighter-rouge">docker run</code> コマンドを実行します。
+    <p>Docker ホスト上の端末画面から、以下のような<code class="language-plaintext highlighter-rouge">docker run</code>コマンドを実行します。
 各行の終わりには、各コンテナーの ID を入力します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-dit</span> <span class="nt">--name</span> my_container_1 acme/my-final-image:1.0 bash <span class="se">\</span>
@@ -434,7 +442,7 @@ Docker ボリュームは起動されるコンテナーからは独立してい�
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">docker ps</code> コマンドを実行して、5 つのコンテナーが実行中であることを確認します。</p>
+    <p><code class="language-plaintext highlighter-rouge">docker ps</code>コマンドを実行して、5 つのコンテナーが実行中であることを確認します。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID      IMAGE                     COMMAND     CREATED              STATUS              PORTS      NAMES
 1a174fc216cc      acme/my-final-image:1.0   <span class="s2">"bash"</span>      About a minute ago   Up About a minute              my_container_5

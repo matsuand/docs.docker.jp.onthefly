@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-21 21:33:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>BuildKit によるイメージ構築 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="BuildKit によるイメージ構築" />
   <meta property="og:description" content="BuildKit により Docker ビルドについて学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"BuildKit によるイメージ構築","description":"BuildKit により Docker ビルドについて学びます。","url":"https://docs.docker.com/develop/develop-images/build_enhancements/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,8 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>BuildKit によるイメージ構築</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p>
-<p>Docker によるビルドは、Docker Engine においてもっとも利用されている機能と言えます。
+                        <section class="section"><h1>BuildKit によるイメージ構築</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>Docker によるビルドは、Docker Engine においてもっとも利用されている機能と言えます。
 開発者、ビルドチーム、リリースチームなど幅広いユーザーがこの Docker ビルドを行います。</p>
 
 <p>Docker 18.09 のリリースにおいて行われたビルド機能の拡張は、ビルドアーキテクチャーの総見直しにより必要となる機能を導入しています。
@@ -111,7 +110,7 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
   <li>新しくコマンドラインオプション<code class="language-plaintext highlighter-rouge">--secret</code>が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。</li>
 </ul>
 
-<p>ビルド時のオプションに関しては <a href="/engine/reference/commandline/build/">コマンドライン build オプション</a> を参照してください。</p>
+<p>ビルド時のオプションに関しては <a href="/docs.docker.jp.onthefly/engine/reference/commandline/build/">コマンドライン build オプション</a> および <a href="/engine/reference/builder/">Dockerfile リファレンス</a> を参照してください。</p>
 
 <h2 id="requirements">システム要件</h2>
 
@@ -199,11 +198,17 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 
 <h2 id="overriding-default-frontends">デフォルトフロントエンドの上書き設定</h2>
 
-<p><code class="language-plaintext highlighter-rouge">Dockerfile</code> における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
+<p><code class="language-plaintext highlighter-rouge">Dockerfile</code>における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
 これを行うには<code class="language-plaintext highlighter-rouge">Dockerfile</code>の先頭行に、コメントとして特定のフロントエンドイメージを指定します。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax = &lt;frontend image&gt;, e.g. # syntax = docker/dockerfile:1.0-experimental</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=&lt;frontend image&gt;, e.g. # syntax=docker/dockerfile:1</span>
 </code></pre></div></div>
+
+<p>本ページに示す利用例においては <code class="language-plaintext highlighter-rouge">docker/dockerfile</code> バージョン 1.2.0 およびそれ以降で利用可能となる機能を用いています。
+これに対しては<code class="language-plaintext highlighter-rouge">docker/dockerfile:1</code>と指定することを推奨します。
+これはバージョン 1 の最新リリースを常に指し示すものです。
+BuildKit ではビルド前に文法が更新されているかどうか、利用するバージョンが最新であるかどうかが自動的にチェックされます。
+<code class="language-plaintext highlighter-rouge">syntax</code>ディレクティブについては <a href="/engine/reference/builder/#syntax">Dockerfile リファレンス</a> を参照してください。</p>
 
 <h2 id="new-docker-build-secret-information">新たな Docker ビルドにおける機密情報の扱い</h2>
 
@@ -222,11 +227,9 @@ Docker では Dockerfile の外に保持されている機密情報のファイ�
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s1">'WARMACHINEROX'</span> <span class="o">&gt;</span> mysecret.txt
 </code></pre></div></div>
 
-<p>そして BuildKit フロントエンド<code class="language-plaintext highlighter-rouge">docker/dockerfile:1.0-experimental</code>を指定した Dockerfile を使えば、機密情報にアクセスすることができます。</p>
+<p>BuildKit フロントエンド<code class="language-plaintext highlighter-rouge">docker/dockerfile:1.2</code>またはこれ以上を利用する Dockerfile 内では、Secret は<code class="language-plaintext highlighter-rouge">--mount</code>オプションを使ってアクセスすることができます。</p>
 
-<p>たとえば以下のとおりです。</p>
-
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax = docker/dockerfile:1.0-experimental</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> alpine</span>
 
 <span class="c"># shows secret from default secret location:</span>
@@ -282,7 +285,7 @@ SSH エージェントについては <a href="https://man.openbsd.org/ssh-agent
 
 <p>Docker ファイル内にてコンテナーが SSH を利用する例が以下です。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:experimental</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 <span class="k">FROM</span><span class="s"> alpine</span>
 
 <span class="c"># ssh クライアントと git のインストール</span>

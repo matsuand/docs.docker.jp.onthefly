@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-21 21:33:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>マルチステージビルドの利用 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="マルチステージビルドの利用" />
   <meta property="og:description" content="マルチステージイメージを使って、イメージサイズを小さく維持する。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/multistage-build/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"マルチステージビルドの利用","description":"マルチステージイメージを使って、イメージサイズを小さく維持する。","url":"https://docs.docker.com/develop/develop-images/multistage-build/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -124,7 +124,8 @@ Dockerfile 内の各命令は、イメージに対してレイヤーを追加し
 
 <p><strong><code class="language-plaintext highlighter-rouge">Dockerfile.build</code></strong>:</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.7.3</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> golang:1.16</span>
 <span class="k">WORKDIR</span><span class="s"> /go/src/github.com/alexellis/href-counter/</span>
 <span class="k">COPY</span><span class="s"> app.go .</span>
 <span class="k">RUN </span>go get <span class="nt">-d</span> <span class="nt">-v</span> golang.org/x/net/html <span class="se">\
@@ -138,7 +139,8 @@ Dockerfile 内の各命令は、イメージに対してレイヤーを追加し
 
 <p><strong><code class="language-plaintext highlighter-rouge">Dockerfile</code></strong>:</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine:latest</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> alpine:latest</span>
 <span class="k">RUN </span>apk <span class="nt">--no-cache</span> add ca-certificates
 <span class="k">WORKDIR</span><span class="s"> /root/</span>
 <span class="k">COPY</span><span class="s"> app .</span>
@@ -179,7 +181,8 @@ docker build <span class="nt">--no-cache</span> <span class="nt">-t</span> alexe
 
 <p><strong><code class="language-plaintext highlighter-rouge">Dockerfile</code></strong>:</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.7.3</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> golang:1.16</span>
 <span class="k">WORKDIR</span><span class="s"> /go/src/github.com/alexellis/href-counter/</span>
 <span class="k">RUN </span>go get <span class="nt">-d</span> <span class="nt">-v</span> golang.org/x/net/html
 <span class="k">COPY</span><span class="s"> app.go .</span>
@@ -218,7 +221,8 @@ Go 言語の SDK やその他の中間生成物は取り残されていて、最
 以下の例はこれまでのものをさらに充実させて、ステージに名前をつけ、<code class="language-plaintext highlighter-rouge">COPY</code>命令においてその名前を利用します。
 これはつまり、Dockerfile 内の命令の記述順が、後々変更になったとしても、<code class="language-plaintext highlighter-rouge">COPY</code>は確実に動作するということです。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.7.3 AS builder</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> golang:1.16 AS builder</span>
 <span class="k">WORKDIR</span><span class="s"> /go/src/github.com/alexellis/href-counter/</span>
 <span class="k">RUN </span>go get <span class="nt">-d</span> <span class="nt">-v</span> golang.org/x/net/html
 <span class="k">COPY</span><span class="s"> app.go    .</span>
@@ -265,14 +269,15 @@ Docker クライアントは必要なときにはイメージを取得します�
 <p>前にビルドしたステージを参照して用いることができます。
 それには<code class="language-plaintext highlighter-rouge">FROM</code>ディレクティブを用いて、たとえば以下のようにします。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine:latest as builder</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> alpine:latest AS builder</span>
 <span class="k">RUN </span>apk <span class="nt">--no-cache</span> add build-base
 
-<span class="k">FROM</span><span class="s"> builder as build1</span>
+<span class="k">FROM</span><span class="s"> builder AS build1</span>
 <span class="k">COPY</span><span class="s"> source1.cpp source.cpp</span>
 <span class="k">RUN </span>g++ <span class="nt">-o</span> /binary source.cpp
 
-<span class="k">FROM</span><span class="s"> builder as build2</span>
+<span class="k">FROM</span><span class="s"> builder AS build2</span>
 <span class="k">COPY</span><span class="s"> source2.cpp source.cpp</span>
 <span class="k">RUN </span>g++ <span class="nt">-o</span> /binary source.cpp
 </code></pre></div></div>

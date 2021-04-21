@@ -1,4 +1,4 @@
-<!-- Page generated 2021-04-16 15:03:16 +0900-->
+<!-- Page generated 2021-04-21 21:33:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Node.js と Mocha フレームワークを用いたテスト実行 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Node.js と Mocha フレームワークを用いたテスト実行" />
   <meta property="og:description" content="How to Build and Run your Tests using Node.js and Mocha frameworks" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-16T15:03:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/nodejs/run-tests/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-04-16T15:03:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Node.js と Mocha フレームワークを用いたテスト実行","description":"How to Build and Run your Tests using Node.js and Mocha frameworks","url":"https://docs.docker.com/language/nodejs/run-tests/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Node.js と Mocha フレームワークを用いたテスト実行</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><ul class="pagination">
+                        <section class="section"><h1>Node.js と Mocha フレームワークを用いたテスト実行</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><ul class="pagination">
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/build-images/">イメージビルド</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/run-containers/">コンテナーとしてのイメージ実行</a></li>
   <li><a href="/docs.docker.jp.onthefly/language/nodejs/develop/">開発向けコンテナー利用</a></li>
@@ -216,7 +216,8 @@
 つまりマルチステージビルドによる  Dockerfile を利用します。
 以下に示す Dockerfile は、テストの実行と本番環境用イメージのビルドを行います。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:14.15.4 as base</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> node:14.15.4 as base</span>
 
 <span class="k">WORKDIR</span><span class="s"> /code</span>
 
@@ -279,7 +280,8 @@ CMD 命令はイメージビルド時には実行されません。
 
 <p>以下の Dockerfile においてハイライト表示されている行を修正してください。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> node:14.15.4 as base</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> node:14.15.4 as base</span>
 
 <span class="k">WORKDIR</span><span class="s"> /code</span>
 
@@ -299,36 +301,36 @@ CMD 命令はイメージビルド時には実行されません。
 
 <p>テストを実行するには、先ほどと同様に docker build コマンドを実行する必要があります。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t node-docker --target test .
-Sending build context to Docker daemon  22.35MB
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
+<span class="go">Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
- ---&gt; f5be1883c8e0
-...
-Step 6/8 : RUN npm ci
- ---&gt; Using cache
- ---&gt; bcc5cd4a6a1e
-Step 7/8 : COPY . .
- ---&gt; 1528ebcb73fa
-Step 8/8 : RUN npm run test
- ---&gt; Running in beadc36b293a
-
-&gt; node-docker@1.0.0 test /code
-&gt; mocha ./**/*.js
-
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>f5be1883c8e0
+<span class="c">...
+</span><span class="go">Step 6/8 : RUN npm ci
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>Using cache
+<span class="gp"> ---&gt;</span><span class="w"> </span>bcc5cd4a6a1e
+<span class="go">Step 7/8 : COPY . .
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>1528ebcb73fa
+<span class="go">Step 8/8 : RUN npm run test
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>Running <span class="k">in </span>beadc36b293a
+<span class="go">
+</span><span class="gp">&gt;</span><span class="w"> </span>node-docker@1.0.0 <span class="nb">test</span> /code
+<span class="gp">&gt;</span><span class="w"> </span>mocha ./<span class="k">**</span>/<span class="k">*</span>.js
+<span class="go">
 
 
   Array
-    <span class="c">#indexOf()</span>
-      ✓ should return -1 when the value is not present
+</span><span class="gp">    #</span>indexOf<span class="o">()</span>
+<span class="go">      ✓ should return -1 when the value is not present
 
 
   1 passing (9ms)
 
 Removing intermediate container beadc36b293a
- ---&gt; 445b80e59acd
-Successfully built 445b80e59acd
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>445b80e59acd
+<span class="go">Successfully built 445b80e59acd
 Successfully tagged node-docker:latest
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>ここでもわかりやすくなるように、ビルド結果の出力は省略しましたが、テストの実行と正常終了が見てとれます。
 そこでテストが失敗したときにはどうなるかを見るために、ブレークポイントを設定して出力結果を確認します。</p>
@@ -348,48 +350,48 @@ Successfully tagged node-docker:latest
 <p>そして先ほどと同じ docker build コマンドを実行します。
 ビルド処理は失敗して、失敗したテストに関する情報がコンソールに出力されます。</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
-Sending build context to Docker daemon  22.35MB
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">-t</span> node-docker <span class="nt">--target</span> <span class="nb">test</span> <span class="nb">.</span>
+<span class="go">Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
- <span class="nt">---</span><span class="o">&gt;</span> 995ff80c793e
-...
-Step 8/8 : RUN npm run <span class="nb">test</span>
- <span class="nt">---</span><span class="o">&gt;</span> Running <span class="k">in </span>b96d114a336b
-
-<span class="o">&gt;</span> node-docker@1.0.0 <span class="nb">test</span> /code
-<span class="o">&gt;</span> mocha ./<span class="k">**</span>/<span class="k">*</span>.js
-
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>995ff80c793e
+<span class="c">...
+</span><span class="go">Step 8/8 : RUN npm run test
+</span><span class="gp"> ---&gt;</span><span class="w"> </span>Running <span class="k">in </span>b96d114a336b
+<span class="go">
+</span><span class="gp">&gt;</span><span class="w"> </span>node-docker@1.0.0 <span class="nb">test</span> /code
+<span class="gp">&gt;</span><span class="w"> </span>mocha ./<span class="k">**</span>/<span class="k">*</span>.js
+<span class="go">
 
 
   Array
-    <span class="c">#indexOf()</span>
-      1<span class="o">)</span> should <span class="k">return</span> <span class="nt">-1</span> when the value is not present
+</span><span class="gp">    #</span>indexOf<span class="o">()</span>
+<span class="go">      1) should return -1 when the value is not present
 
 
-  0 passing <span class="o">(</span>12ms<span class="o">)</span>
+  0 passing (12ms)
   1 failing
 
-  1<span class="o">)</span> Array
-       <span class="c">#indexOf()</span>
-         should <span class="k">return</span> <span class="nt">-1</span> when the value is not present:
+  1) Array
+</span><span class="gp">       #</span>indexOf<span class="o">()</span>
+<span class="go">         should return -1 when the value is not present:
 
-      AssertionError <span class="o">[</span>ERR_ASSERTION]: 2 <span class="o">==</span> <span class="nt">-1</span>
+      AssertionError [ERR_ASSERTION]: 2 == -1
       + expected - actual
 
-      <span class="nt">-2</span>
+      -2
       +-1
 
-      at Context.&lt;anonymous&gt; <span class="o">(</span><span class="nb">test</span>/test.js:5:14<span class="o">)</span>
-      at processImmediate <span class="o">(</span>internal/timers.js:461:21<span class="o">)</span>
+</span><span class="gp">      at Context.&lt;anonymous&gt;</span><span class="w"> </span><span class="o">(</span><span class="nb">test</span>/test.js:5:14<span class="o">)</span>
+<span class="go">      at processImmediate (internal/timers.js:461:21)
 
 
 
 npm ERR! code ELIFECYCLE
 npm ERR! errno 1
-npm ERR! node-docker@1.0.0 <span class="nb">test</span>: <span class="sb">`</span>mocha ./<span class="k">**</span>/<span class="k">*</span>.js<span class="sb">`</span>
+npm ERR! node-docker@1.0.0 test: `mocha ./**/*.js`
 npm ERR! Exit status 1
-...
-</code></pre></div></div>
+</span><span class="c">...
+</span></code></pre></div></div>
 
 <h2 id="next-steps">次のステップ</h2>
 

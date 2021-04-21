@@ -1,4 +1,4 @@
-<!-- Page generated 2021-04-16 15:03:16 +0900-->
+<!-- Page generated 2021-04-21 21:33:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -40,12 +40,12 @@
   <meta property="og:title" content="Testing page" />
   <meta property="og:description" content="Smoketest page" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-16T15:03:16+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/test/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-04-16T15:03:16+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Testing page","description":"Smoketest page","url":"https://docs.docker.com/test/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -941,36 +941,38 @@ syntax for comments in JSON!</p>
 <p>To enable syntax highlighting for Dockerfiles, use the <code class="language-plaintext highlighter-rouge">conf</code> lexer, for now.
 In the future, native Dockerfile support is coming to Rouge.</p>
 
-<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#
-# example Dockerfile for https://docs.docker.com/examples/postgresql_service/
-#
-</span>
-<span class="n">FROM</span> <span class="n">ubuntu</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
 
-<span class="n">RUN</span> <span class="n">apt</span>-<span class="n">key</span> <span class="n">adv</span> --<span class="n">keyserver</span> <span class="n">hkp</span>://<span class="n">p80</span>.<span class="n">pool</span>.<span class="n">sks</span>-<span class="n">keyservers</span>.<span class="n">net</span>:<span class="m">80</span> --<span class="n">recv</span>-<span class="n">keys</span> <span class="n">B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8</span>
+<span class="c">#</span>
+<span class="c"># example Dockerfile for https://docs.docker.com/examples/postgresql_service/</span>
+<span class="c">#</span>
 
-<span class="n">RUN</span> <span class="n">echo</span> <span class="s2">"deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"</span> &gt; /<span class="n">etc</span>/<span class="n">apt</span>/<span class="n">sources</span>.<span class="n">list</span>.<span class="n">d</span>/<span class="n">pgdg</span>.<span class="n">list</span>
+<span class="k">FROM</span><span class="s"> ubuntu</span>
 
-<span class="n">RUN</span> <span class="n">apt</span>-<span class="n">get</span> <span class="n">update</span> &amp;&amp; <span class="n">apt</span>-<span class="n">get</span> <span class="n">install</span> -<span class="n">y</span> <span class="n">python</span>-<span class="n">software</span>-<span class="n">properties</span> <span class="n">software</span>-<span class="n">properties</span>-<span class="n">common</span> <span class="n">postgresql</span>-<span class="m">9</span>.<span class="m">3</span> <span class="n">postgresql</span>-<span class="n">client</span>-<span class="m">9</span>.<span class="m">3</span> <span class="n">postgresql</span>-<span class="n">contrib</span>-<span class="m">9</span>.<span class="m">3</span>
+<span class="k">RUN </span>apt-key adv <span class="nt">--keyserver</span> hkp://p80.pool.sks-keyservers.net:80 <span class="nt">--recv-keys</span> B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 
-<span class="c"># Note: The official Debian and Ubuntu images automatically ``apt-get clean``
-# after each ``apt-get``
-</span>
-<span class="n">USER</span> <span class="n">postgres</span>
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"</span> <span class="o">&gt;</span> /etc/apt/sources.list.d/pgdg.list
 
-<span class="n">RUN</span>    /<span class="n">etc</span>/<span class="n">init</span>.<span class="n">d</span>/<span class="n">postgresql</span> <span class="n">start</span> &amp;&amp;\
-    <span class="n">psql</span> --<span class="n">command</span> <span class="s2">"CREATE USER docker WITH SUPERUSER PASSWORD 'docker';"</span> &amp;&amp;\
-    <span class="n">createdb</span> -<span class="n">O</span> <span class="n">docker</span> <span class="n">docker</span>
+<span class="k">RUN </span>apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
 
-<span class="n">RUN</span> <span class="n">echo</span> <span class="s2">"host all  all    0.0.0.0/0  md5"</span> &gt;&gt; /<span class="n">etc</span>/<span class="n">postgresql</span>/<span class="m">9</span>.<span class="m">3</span>/<span class="n">main</span>/<span class="n">pg_hba</span>.<span class="n">conf</span>
+<span class="c"># Note: The official Debian and Ubuntu images automatically ``apt-get clean``</span>
+<span class="c"># after each ``apt-get``</span>
 
-<span class="n">RUN</span> <span class="n">echo</span> <span class="s2">"listen_addresses='*'"</span> &gt;&gt; /<span class="n">etc</span>/<span class="n">postgresql</span>/<span class="m">9</span>.<span class="m">3</span>/<span class="n">main</span>/<span class="n">postgresql</span>.<span class="n">conf</span>
+<span class="k">USER</span><span class="s"> postgres</span>
 
-<span class="n">EXPOSE</span> <span class="m">5432</span>
+<span class="k">RUN    </span>/etc/init.d/postgresql start <span class="o">&amp;&amp;</span><span class="se">\
+</span>    psql <span class="nt">--command</span> <span class="s2">"CREATE USER docker WITH SUPERUSER PASSWORD 'docker';"</span> <span class="o">&amp;&amp;</span><span class="se">\
+</span>    createdb <span class="nt">-O</span> docker docker
 
-<span class="n">VOLUME</span>  [<span class="s2">"/etc/postgresql"</span>, <span class="s2">"/var/log/postgresql"</span>, <span class="s2">"/var/lib/postgresql"</span>]
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"host all  all    0.0.0.0/0  md5"</span> <span class="o">&gt;&gt;</span> /etc/postgresql/9.3/main/pg_hba.conf
 
-<span class="n">CMD</span> [<span class="s2">"/usr/lib/postgresql/9.3/bin/postgres"</span>, <span class="s2">"-D"</span>, <span class="s2">"/var/lib/postgresql/9.3/main"</span>, <span class="s2">"-c"</span>, <span class="s2">"config_file=/etc/postgresql/9.3/main/postgresql.conf"</span>]
+<span class="k">RUN </span><span class="nb">echo</span> <span class="s2">"listen_addresses='*'"</span> <span class="o">&gt;&gt;</span> /etc/postgresql/9.3/main/postgresql.conf
+
+<span class="k">EXPOSE</span><span class="s"> 5432</span>
+
+<span class="k">VOLUME</span><span class="s">  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]</span>
+
+<span class="k">CMD</span><span class="s"> ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]</span>
 </code></pre></div></div>
 
 <h3 id="yaml">YAML</h3>

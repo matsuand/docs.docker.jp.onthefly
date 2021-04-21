@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-21 21:33:15 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Dockerfile 記述のベストプラクティス | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Dockerfile 記述のベストプラクティス" />
   <meta property="og:description" content="Hints, tips and guidelines for writing clean, reliable Dockerfiles" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Dockerfile 記述のベストプラクティス","description":"Hints, tips and guidelines for writing clean, reliable Dockerfiles","url":"https://docs.docker.com/develop/develop-images/dockerfile_best-practices/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Dockerfile 記述のベストプラクティス</h1><p><em class="reading-time">読む時間の目安: 13 分</em></p><p>このドキュメントは、効果的なイメージを構築する方法、お勧めのベストプラクティスについて示します。</p>
+                        <section class="section"><h1>Dockerfile 記述のベストプラクティス</h1><p><em class="reading-time">読む時間の目安: 14 分</em></p><p>このドキュメントは、効果的なイメージを構築する方法、お勧めのベストプラクティスについて示します。</p>
 
 <p>Docker は<code class="language-plaintext highlighter-rouge">Dockerfile</code>に書かれた指示を読み込んで、自動的にイメージを構築します。
 このファイルはあらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。
@@ -110,7 +110,8 @@
 レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。
 以下のような<code class="language-plaintext highlighter-rouge">Dockerfile</code>を見てみます。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
 <span class="k">COPY</span><span class="s"> . /app</span>
 <span class="k">RUN </span>make /app
 <span class="k">CMD</span><span class="s"> python /app/app.py</span>
@@ -339,7 +340,8 @@ COPY hello.c .
 
 <p>たとえば Go 言語アプリケーションの Dockerfile は以下のようになります。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> golang:1.11-alpine AS build</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> golang:1.16-alpine AS build</span>
 
 <span class="c"># 本プロジェクトに必要なツールをインストール。</span>
 <span class="c"># `docker build --no-cache .`を実行して依存パッケージのアップデート。</span>
@@ -538,7 +540,8 @@ Docker 1.10 以前のバージョンでは、ラベルをすべてまとめて 1
 <p>１つの<code class="language-plaintext highlighter-rouge">RUN</code>コマンド内で<code class="language-plaintext highlighter-rouge">apt-get update</code>だけを使うとキャッシュに問題が発生し、その後の<code class="language-plaintext highlighter-rouge">apt-get install</code>コマンドが失敗します。
 たとえば Dockerfile を以下のように記述したとします。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
 <span class="k">RUN </span>apt-get update
 <span class="k">RUN </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> curl
 </code></pre></div></div>
@@ -546,7 +549,8 @@ Docker 1.10 以前のバージョンでは、ラベルをすべてまとめて 1
 <p>イメージが構築されると、レイヤーがすべて Docker のキャッシュに入ります。
 この次に<code class="language-plaintext highlighter-rouge">apt-get install</code>を編集して別のパッケージを追加したとします。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> ubuntu:18.04</span>
 <span class="k">RUN </span>apt-get update
 <span class="k">RUN </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> curl nginx
 </code></pre></div></div>
@@ -688,7 +692,8 @@ Docker のリンク機能においては環境変数が利用できます。
 ということはつまり、環境変数を先々のレイヤーにおいて無効化したとしても、その中間レイヤーに変数データは残ることになり、この値を引き出すことができてしまいます。
 このことを確認するには、以下のような Dockerfile を生成してビルドを行ってみればわかります。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> alpine</span>
 <span class="k">ENV</span><span class="s"> ADMIN_USER="mark"</span>
 <span class="k">RUN </span><span class="nb">echo</span> <span class="nv">$ADMIN_USER</span> <span class="o">&gt;</span> ./mark
 <span class="k">RUN </span><span class="nb">unset </span>ADMIN_USER
@@ -707,7 +712,8 @@ mark
 Linux における Dockerfile では行継続文字を表わす<code class="language-plaintext highlighter-rouge">\</code>を用いると、読みやすくなります。
 あるいは実行する命令をすべてシェルスクリプトに書き入れて、<code class="language-plaintext highlighter-rouge">RUN</code>コマンドによってそのシェルスクリプトを実行するようなこともできます。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> alpine</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="s"> alpine</span>
 <span class="k">RUN </span><span class="nb">export </span><span class="nv">ADMIN_USER</span><span class="o">=</span><span class="s2">"mark"</span> <span class="se">\
 </span>    <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nv">$ADMIN_USER</span> <span class="o">&gt;</span> ./mark <span class="se">\
 </span>    <span class="o">&amp;&amp;</span> <span class="nb">unset </span>ADMIN_USER
