@@ -305,6 +305,7 @@ In addition to running the tests on command, we can run them when we build our i
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:14.15.4 as base
 
 WORKDIR /code
@@ -324,6 +325,7 @@ CMD [ "node", "server.js" ]
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:14.15.4 as base
 
 WORKDIR /code
@@ -443,6 +445,7 @@ Update your Dockerfile with the highlighted line below.
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:14.15.4 as base
 
 WORKDIR /code
@@ -462,6 +465,7 @@ CMD [ "node", "server.js" ]
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:14.15.4 as base
 
 WORKDIR /code
@@ -488,8 +492,8 @@ Now to run our tests, we just need to run the docker build command as above.
 @z
 
 @x
-```dockerfile
-docker build -t node-docker --target test .
+```console
+$ docker build -t node-docker --target test .
 Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
  ---> f5be1883c8e0
@@ -520,8 +524,8 @@ Successfully built 445b80e59acd
 Successfully tagged node-docker:latest
  ```
 @y
-```dockerfile
-docker build -t node-docker --target test .
+```console
+$ docker build -t node-docker --target test .
 Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
  ---> f5be1883c8e0
@@ -598,8 +602,8 @@ Now, run the same docker build command from above and observe that the build fai
 @z
 
 @x
-```shell
-docker build -t node-docker --target test .
+```console
+$ docker build -t node-docker --target test .
 Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
  ---> 995ff80c793e
@@ -642,8 +646,8 @@ npm ERR! Exit status 1
 ...
 ```
 @y
-```shell
-docker build -t node-docker --target test .
+```console
+$ docker build -t node-docker --target test .
 Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
  ---> 995ff80c793e

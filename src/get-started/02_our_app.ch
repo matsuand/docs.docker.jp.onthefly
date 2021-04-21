@@ -117,6 +117,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 
 @x
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM node:12-alpine
     RUN apk add --no-cache python g++ make
     WORKDIR /app
@@ -126,6 +127,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
     ```
 @y
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM node:12-alpine
     RUN apk add --no-cache python g++ make
     WORKDIR /app

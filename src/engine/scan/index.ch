@@ -909,9 +909,9 @@ The high-level `docker scan` command scans local images using the image name or 
 @z
 
 @x
-Thank you for trying out the vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/scan-cli-plugin/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
 @y
 Docker ローカルイメージに対するぜい弱性スキャン機能をご利用いただき、ありがとうございます。
 みなさんからのフィードバックを頂くことが重要と考えています。
-フィードバックは GitHub リポジトリ内の [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} において issue を生成してお知らせください。
+フィードバックは GitHub リポジトリ内の [scan-cli-plugin](https://github.com/docker/scan-cli-plugin/issues/new){: target="_blank" rel="noopener" class="_"} において issue を生成してお知らせください。
 @z

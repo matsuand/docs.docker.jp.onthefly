@@ -273,6 +273,7 @@ counter whenever you visit it.
 
 @x
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM python:3.4-alpine
     ADD . /code
     WORKDIR /code
@@ -281,6 +282,7 @@ counter whenever you visit it.
     ```
 @y
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM python:3.4-alpine
     ADD . /code
     WORKDIR /code

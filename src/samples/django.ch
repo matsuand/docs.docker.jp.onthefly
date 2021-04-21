@@ -80,6 +80,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 @x
    ```dockerfile
+   # syntax=docker/dockerfile:1
    FROM python:3
    ENV PYTHONUNBUFFERED=1
    WORKDIR /code
@@ -89,6 +90,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    ```
 @y
    ```dockerfile
+   # syntax=docker/dockerfile:1
    FROM python:3
    ENV PYTHONUNBUFFERED=1
    WORKDIR /code

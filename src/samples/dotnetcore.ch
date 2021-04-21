@@ -117,10 +117,12 @@ clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/m
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 @z
@@ -219,6 +221,7 @@ obj/
 
 @x
       ```dockerfile
+      # syntax=docker/dockerfile:1
       FROM mcr.microsoft.com/dotnet/aspnet:5.0
       COPY bin/Release/netcoreapp3.1/publish/ App/
       WORKDIR /App
@@ -226,6 +229,7 @@ obj/
       ```
 @y
       ```dockerfile
+      # syntax=docker/dockerfile:1
       FROM mcr.microsoft.com/dotnet/aspnet:5.0
       COPY bin/Release/netcoreapp3.1/publish/ App/
       WORKDIR /App

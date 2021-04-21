@@ -262,6 +262,7 @@ Let's look at the Dockerfile we were using one more time...
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12-alpine
 WORKDIR /app
 COPY . .
@@ -270,6 +271,7 @@ CMD ["node", "src/index.js"]
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12-alpine
 WORKDIR /app
 COPY . .
@@ -311,6 +313,7 @@ Node ベースのアプリケーションの場合、そういった依存パッ
 
 @x
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM node:12-alpine
     WORKDIR /app
     COPY package.json yarn.lock ./
@@ -320,6 +323,7 @@ Node ベースのアプリケーションの場合、そういった依存パッ
     ```
 @y
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM node:12-alpine
     WORKDIR /app
     COPY package.json yarn.lock ./
@@ -573,6 +577,7 @@ Java ベースのアプリケーションをビルドするには、ソースコ
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM maven AS build
 WORKDIR /app
 COPY . .
@@ -583,6 +588,7 @@ COPY --from=build /app/target/file.war /usr/local/tomcat/webapps
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM maven AS build
 WORKDIR /app
 COPY . .
@@ -622,6 +628,7 @@ React アプリケーションをビルドするには JS コード（通常 JSX
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12 AS build
 WORKDIR /app
 COPY package* yarn.lock ./
@@ -635,6 +642,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12 AS build
 WORKDIR /app
 COPY package* yarn.lock ./

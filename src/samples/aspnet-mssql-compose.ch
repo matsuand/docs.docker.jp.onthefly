@@ -115,6 +115,7 @@ configure this app to use our SQL Server database, and then create a
 
 @x
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM microsoft/dotnet:2.1-sdk
     COPY . /app
     WORKDIR /app
@@ -126,6 +127,7 @@ configure this app to use our SQL Server database, and then create a
     ```
 @y
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM microsoft/dotnet:2.1-sdk
     COPY . /app
     WORKDIR /app

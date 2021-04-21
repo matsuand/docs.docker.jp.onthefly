@@ -584,10 +584,14 @@ Dockerfile 内にてはじめにビルド引数を指定します。
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG buildno
 ARG gitcommithash
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG buildno
 ARG gitcommithash
 @z

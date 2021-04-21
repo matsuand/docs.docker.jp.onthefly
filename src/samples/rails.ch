@@ -47,6 +47,7 @@ a file called `Dockerfile`. To begin with, the  Dockerfile consists of:
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ruby:2.5
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /myapp
@@ -66,6 +67,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ruby:2.5
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /myapp

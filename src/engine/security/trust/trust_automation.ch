@@ -20,11 +20,6 @@ It is very common for Docker Content Trust to be built into existing automation
 systems. To allow tools to wrap Docker and push trusted content, there are 
 environment variables that can be passed through to the client. 
 @y
-{% comment %}
-It is very common for Docker Content Trust to be built into existing automation
-systems. To allow tools to wrap Docker and push trusted content, there are 
-environment variables that can be passed through to the client. 
-{% endcomment %}
 既存の自動化システムに Docker コンテントトラストを組み入れて構築することは、ごく普通に行われています。
 そのシステムから Docker を通じ、信頼できるコンテントをプッシュできるようにするために、環境変数が用意されています。
 これがクライアントに受け渡されます。
@@ -35,11 +30,6 @@ This guide follows the steps as described
 [here](index.md#signing-images-with-docker-content-trust) so please read 
 that and understand its prerequisites. 
 @y
-{% comment %}
-This guide follows the steps as described 
-[here](index.md#signing-images-with-docker-content-trust) so please read 
-that and understand its prerequisites. 
-{% endcomment %}
 本節では [DCT によるイメージへのサイン](index.md#signing-images-with-docker-content-trust) に示した手順を行っているものとします。
 したがってその内容はよく読んで、前提条件を理解しておいてください。
 @z
@@ -47,18 +37,12 @@ that and understand its prerequisites.
 @x
 When working directly with the Notary client, it uses its [own set of environment variables](../../../notary/reference/client-config.md#environment-variables-optional).
 @y
-{% comment %}
-When working directly with the Notary client, it uses its [own set of environment variables](../../../notary/reference/client-config.md#environment-variables-optional).
-{% endcomment %}
 Notary クライアントを直接操作する場合は、[独自の環境変数のセット](../../../notary/reference/client-config.md#environment-variables-optional) を利用します。
 @z
 
 @x
 ## Add a delegation private key
 @y
-{% comment %}
-## Add a delegation private key
-{% endcomment %}
 {: #add-a-delegation-private-key }
 ## 委任鍵ペアの秘密鍵の追加
 @z
@@ -68,11 +52,6 @@ To automate importing a delegation private key to the local Docker trust store, 
 need to pass a passphrase for the new key. This passphrase will be required 
 everytime that delegation signs a tag. 
 @y
-{% comment %}
-To automate importing a delegation private key to the local Docker trust store, we 
-need to pass a passphrase for the new key. This passphrase will be required 
-everytime that delegation signs a tag. 
-{% endcomment %}
 ローカルの Docker トラストの保存場所に向けて、委任鍵ペアの秘密鍵のインポートを自動化するには、新たな鍵に対するパスフレーズを与える必要があります。
 このパスフレーズは、委任鍵ペアによってタグにサインを行う際に、毎回必要となるものです。
 @z
@@ -100,9 +79,6 @@ Successfully imported key from delegation.key
 @x
 ## Add a delegation public key
 @y
-{% comment %}
-## Add a delegation public key
-{% endcomment %}
 {: #add-a-delegation-public-key }
 ## 委任鍵ペアの公開鍵の追加
 @z
@@ -113,12 +89,6 @@ public key, then you will need to use the local Notary Canonical Root Key's
 passphrase to create the repositories trust data. If the repository has already 
 been initiated then you only need the repositories passphrase. 
 @y
-{% comment %}
-If you initialising a repository at the same time as adding a Delegation
-public key, then you will need to use the local Notary Canonical Root Key's 
-passphrase to create the repositories trust data. If the repository has already 
-been initiated then you only need the repositories passphrase. 
-{% endcomment %}
 リポジトリを初期化する際には、同時に委任鍵ペアの公開鍵の登録を行います。
 その後にリポジトリ内にトラストデータを生成するわけですが、その際にはローカルの Notary 標準ルート鍵のパスフレーズが必要になります。
 リポジトリをすでに初期化済みであれば、リポジトリのパスフレーズだけが必要になります。
@@ -163,9 +133,6 @@ Successfully added signer: registry.example.com/admin/demo
 @x
 ## Sign an image
 @y
-{% comment %}
-## Sign an image
-{% endcomment %}
 {: #sign-an-image }
 ## イメージへのサイン
 @z
@@ -175,13 +142,8 @@ Finally when signing an image, we will need to export the passphrase of the
 signing key. This was created when the key was loaded into the local Docker 
 trust store with `$ docker trust key load`.
 @y
-{% comment %}
-Finally when signing an image, we will need to export the passphrase of the 
-signing key. This was created when the key was loaded into the local Docker 
-trust store with `$ docker trust key load`.
-{% endcomment %}
 最後に、イメージへのサインを行うには、サインする鍵のパスフレーズを環境変数に設定することが必要です。
-`docker trust key load` を実行していますから、ローカルの Docker トラストの保存場所に、すでに鍵はロードされ生成されています。
+`docker trust key load`を実行していますから、ローカルの Docker トラストの保存場所に、すでに鍵はロードされ生成されています。
 @z
 
 @x
@@ -215,9 +177,6 @@ Successfully signed registry.example.com/admin/demo:1
 @x
 ## Build with content trust
 @y
-{% comment %}
-## Build with content trust
-{% endcomment %}
 {: #build-with-content-trust }
 ## コンテントトラストを使ったイメージビルド
 @z
@@ -227,23 +186,20 @@ You can also build with content trust. Before running the `docker build` command
 you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or 
 in a scripted fashion. Consider the simple Dockerfile below.
 @y
-{% comment %}
-You can also build with content trust. Before running the `docker build` command, 
-you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or 
-in a scripted fashion. Consider the simple Dockerfile below.
-{% endcomment %}
 イメージをビルドする際に、コンテントトラストを利用することもできます。
-`docker build` コマンドを実行する前に、環境変数 `DOCKER_CONTENT_TRUST` を手動で設定しておくか、あるいはスクリプトを用意して設定します。
+`docker build`コマンドを実行する前に、環境変数`DOCKER_CONTENT_TRUST`を手動で設定しておくか、あるいはスクリプトを用意して設定します。
 以下のような単純な Dockerfile を例にして説明します。
 @z
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM docker/trusttest:latest
 RUN echo
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM docker/trusttest:latest
 RUN echo
 ```
@@ -254,14 +210,9 @@ The `FROM` tag is pulling a signed image. You cannot build an image that has a
 `FROM` that is not either present locally or signed. Given that content trust
 data exists for the tag `latest`, the following build should succeed:
 @y
-{% comment %}
-The `FROM` tag is pulling a signed image. You cannot build an image that has a
-`FROM` that is not either present locally or signed. Given that content trust
-data exists for the tag `latest`, the following build should succeed:
-{% endcomment %}
-`FROM` タグによって、サイン済みのイメージをプルします。
-`FROM` に指定されたイメージがローカルに存在しない場合、あるいはサインされていない場合、そのイメージをビルドすることはできません。
-`latest` タグに対するコンテントトラストデータがある場合、以下のビルドは成功します。
+`FROM`タグによって、サイン済みのイメージをプルします。
+`FROM`に指定されたイメージがローカルに存在しない場合、あるいはサインされていない場合、そのイメージをビルドすることはできません。
+`latest`タグに対するコンテントトラストデータがある場合、以下のビルドは成功します。
 @z
 
 @x
@@ -292,10 +243,6 @@ Digest: sha256:d149ab53f871
 If content trust is enabled, building from a Dockerfile that relies on tag 
 without trust data, causes the build command to fail:
 @y
-{% comment %}
-If content trust is enabled, building from a Dockerfile that relies on tag 
-without trust data, causes the build command to fail:
-{% endcomment %}
 コンテントトラストが有効である場合、トラストデータを用いていない Dockerfile によってビルドを行うと、ビルドコマンドは失敗します。
 @z
 
@@ -314,9 +261,6 @@ unable to process Dockerfile: No trust data for notrust
 @x
 ## Related information
 @y
-{% comment %}
-## Related information
-{% endcomment %}
 {: #related-information }
 ## 関連情報
 @z
@@ -327,12 +271,6 @@ unable to process Dockerfile: No trust data for notrust
 * [Manage keys for content trust](trust_key_mng.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
 @y
-{% comment %}
-* [Delegations for content trust](trust_delegation.md)
-* [Content trust in Docker](index.md)
-* [Manage keys for content trust](trust_key_mng.md)
-* [Play in a content trust sandbox](trust_sandbox.md)
-{% endcomment %}
 * [コンテントトラストの委任鍵ペア](trust_delegation.md)
 * [Docker のコンテントトラスト](index.md)
 * [コンテントトラストにおける鍵の管理](trust_key_mng.md)

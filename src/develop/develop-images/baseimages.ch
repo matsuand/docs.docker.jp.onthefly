@@ -156,12 +156,14 @@ Docker Hub 上の Docker リポジトリとして `scratch` が登場したこ�
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM scratch
 ADD hello /
 CMD ["/hello"]
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM scratch
 ADD hello /
 CMD ["/hello"]

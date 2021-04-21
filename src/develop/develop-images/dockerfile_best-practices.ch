@@ -59,6 +59,7 @@ Docker イメージは読み取り専用のレイヤーにより構成されま�
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -66,6 +67,7 @@ CMD python /app/app.py
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -631,7 +633,8 @@ A Dockerfile for a Go application could look like:
 
 @x
 ```dockerfile
-FROM golang:1.11-alpine AS build
+# syntax=docker/dockerfile:1
+FROM golang:1.16-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -658,7 +661,8 @@ CMD ["--help"]
 ```
 @y
 ```dockerfile
-FROM golang:1.11-alpine AS build
+# syntax=docker/dockerfile:1
+FROM golang:1.16-alpine AS build
 
 # 本プロジェクトに必要なツールをインストール。
 # `docker build --no-cache .`を実行して依存パッケージのアップデート。
@@ -1135,12 +1139,14 @@ Dockerfile:
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
@@ -1157,12 +1163,14 @@ modify `apt-get install` by adding extra package:
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
@@ -1526,6 +1534,7 @@ creating a Dockerfile like the following, and then building it.
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
@@ -1533,6 +1542,7 @@ RUN unset ADMIN_USER
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
@@ -1576,6 +1586,7 @@ Linux における Dockerfile では行継続文字を表わす`\`を用いる�
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \
@@ -1584,6 +1595,7 @@ CMD sh
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \

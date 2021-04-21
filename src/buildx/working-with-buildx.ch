@@ -354,6 +354,7 @@ of your build.
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM --platform=$BUILDPLATFORM golang:alpine AS build
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
@@ -363,6 +364,7 @@ COPY --from=build /log /log
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM --platform=$BUILDPLATFORM golang:alpine AS build
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM

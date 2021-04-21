@@ -154,7 +154,7 @@ To start the application, navigate to the directory containing the example votin
 @z
 
 @x
-```shell
+```console
 $ docker-compose up --build
 Creating network "example-voting-app-master_front-tier" with the default driver
 Creating network "example-voting-app-master_back-tier" with the default driver
@@ -179,7 +179,7 @@ Attaching to db, redis, example-voting-app-master_result_1, example-voting-app-m
 ...
 ```
 @y
-```shell
+```console
 $ docker-compose up --build
 Creating network "example-voting-app-master_front-tier" with the default driver
 Creating network "example-voting-app-master_back-tier" with the default driver

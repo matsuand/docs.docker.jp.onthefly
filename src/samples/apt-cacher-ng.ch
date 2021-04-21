@@ -51,7 +51,13 @@ Use the following Dockerfile:
 
 @x
 ```dockerfile
-#
+# syntax=docker/dockerfile:1
+@y
+```dockerfile
+# syntax=docker/dockerfile:1
+@z
+
+@x
 # Build: docker build -t apt-cacher .
 # Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
 #
@@ -61,29 +67,31 @@ Use the following Dockerfile:
 # Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
 # which acts as an APT proxy server.
 FROM   ubuntu
+@y
+# Build: docker build -t apt-cacher .
+# Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
+#
+# and then you can run containers with:
+#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
+#
+# Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
+# which acts as an APT proxy server.
+FROM   ubuntu
+@z
 
+@x
 VOLUME ["/var/cache/apt-cacher-ng"]
 RUN    apt-get update && apt-get install -y apt-cacher-ng
+@y
+VOLUME ["/var/cache/apt-cacher-ng"]
+RUN    apt-get update && apt-get install -y apt-cacher-ng
+@z
 
+@x
 EXPOSE 3142
 CMD    chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
 ```
 @y
-```dockerfile
-#
-# Build: docker build -t apt-cacher .
-# Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
-#
-# and then you can run containers with:
-#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
-#
-# Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
-# which acts as an APT proxy server.
-FROM   ubuntu
-
-VOLUME ["/var/cache/apt-cacher-ng"]
-RUN    apt-get update && apt-get install -y apt-cacher-ng
-
 EXPOSE 3142
 CMD    chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
 ```
@@ -181,18 +189,22 @@ a local version of a common base:
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu
 RUN echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
 RUN apt-get update && apt-get install -y vim git
+@y
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM ubuntu
+RUN echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
+RUN apt-get update && apt-get install -y vim git
+@z
 
+@x
 # docker build -t my_ubuntu .
 ```
 @y
-```dockerfile
-FROM ubuntu
-RUN echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
-RUN apt-get update && apt-get install -y vim git
-
 # docker build -t my_ubuntu .
 ```
 @z
@@ -272,7 +284,12 @@ instruction, and the image we built to run the service:
 @x
 ```bash
 $ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
+@y
+```bash
+$ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
+@z
 
+@x
 root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
 Scanning /var/cache/apt-cacher-ng, please wait...
 Found distributions:
@@ -282,37 +299,40 @@ bla, taggedcount: 0
      3. precise-updates (36 index files)
      4. precise (36 index files)
      5. wheezy-updates (18 index files)
+@y
+root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
+Scanning /var/cache/apt-cacher-ng, please wait...
+Found distributions:
+bla, taggedcount: 0
+     1. precise-security (36 index files)
+     2. wheezy (25 index files)
+     3. precise-updates (36 index files)
+     4. precise (36 index files)
+     5. wheezy-updates (18 index files)
+@z
 
+@x
 Found architectures:
      6. amd64 (36 index files)
      7. i386 (24 index files)
+@y
+Found architectures:
+     6. amd64 (36 index files)
+     7. i386 (24 index files)
+@z
 
+@x
 WARNING: The removal action may wipe out whole directories containing
          index files. Select d to see detailed list.
+@y
+WARNING: The removal action may wipe out whole directories containing
+         index files. Select d to see detailed list.
+@z
 
+@x
 (Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
 ```
 @y
-```bash
-$ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
-
-root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
-Scanning /var/cache/apt-cacher-ng, please wait...
-Found distributions:
-bla, taggedcount: 0
-     1. precise-security (36 index files)
-     2. wheezy (25 index files)
-     3. precise-updates (36 index files)
-     4. precise (36 index files)
-     5. wheezy-updates (18 index files)
-
-Found architectures:
-     6. amd64 (36 index files)
-     7. i386 (24 index files)
-
-WARNING: The removal action may wipe out whole directories containing
-         index files. Select d to see detailed list.
-
 (Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
 ```
 @z

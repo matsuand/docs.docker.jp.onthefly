@@ -1970,12 +1970,18 @@ In the future, native Dockerfile support is coming to Rouge.
 @z
 
 @x
-```conf
+```dockerfile
+# syntax=docker/dockerfile:1
+@y
+```dockerfile
+# syntax=docker/dockerfile:1
+@z
+
+@x
 #
 # example Dockerfile for https://docs.docker.com/examples/postgresql_service/
 #
 @y
-```conf
 #
 # example Dockerfile for https://docs.docker.com/examples/postgresql_service/
 #

@@ -61,11 +61,13 @@ of. We use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
 # Riak
 #
 # VERSION       0.1.1
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
 # Riak
 #
 # VERSION       0.1.1

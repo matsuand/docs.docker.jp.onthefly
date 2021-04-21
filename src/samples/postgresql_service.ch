@@ -56,19 +56,11 @@ suitably secure.
 
 @x
 ```dockerfile
-#
-# example Dockerfile for https://docs.docker.com/engine/examples/postgresql_service/
-#
-@y
-```dockerfile
-#
-# example Dockerfile for https://docs.docker.com/engine/examples/postgresql_service/
-#
-@z
-
-@x
+# syntax=docker/dockerfile:1
 FROM ubuntu:16.04
 @y
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:16.04
 @z
 

@@ -261,17 +261,57 @@ Let’s walk through the process of creating a Dockerfile for our application. I
 @z
 
 @x
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
+While _optional_, this directive instructs the Docker builder what syntax to use
+when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
+to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
+must appear before any other comment, whitespace, or Dockerfile instruction in
+your Dockerfile, should be the first line in Dockerfiles.
 @y
-まずはじめに行うのは、Docker に対してアプリケーションのベースイメージとして何を使うのか、これを Docker に対して指示する行を Dockerfile に記述します。
+Docker ファイルの 1 行めに書くのは [`# syntax`パーサーディレクティブ]({{ site.baseurl }}/engine/reference/builder/#syntax) です。
+これは **任意の記述** ではありますが、Dockerfile の解析にあたって Docker ビルダーがどの文法を採用するのかを指示します。
+また古い Docker バージョンにおいて BuildKit を利用する際に、ビルド前にパーサーをアップグレードするようになります。
+[パーサーディレクティブ]({{ site.baseurl }}/engine/reference/builder/#parser-directives) は Dockerfile において、いずれのコメント、空行、Dockerfile 命令よりも前に、つまり第一に記述することが必要です。
 @z
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
+```
+@y
+```dockerfile
+# syntax=docker/dockerfile:1
+```
+@z
+
+@x
+We recommend using `docker/dockerfile:1`, which always points to the latest release
+of the version 1 syntax. BuildKit automatically checks for updates of the syntax
+before building, making sure you are using the most current version.
+@y
+この指定にあたっては`docker/dockerfile:1`とすることを推奨します。
+これはバージョン 1 の最新リリースを常に指し示すものです。
+BuildKit ではビルド前に文法が更新されているかどうか、利用するバージョンが最新であるかどうかが自動的にチェックされます。
+@z
+
+@x
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
+@y
+Dockerfile にその次に加えるのは、ベースイメージに何を用いるのかを指定します。
+そのベースイメージを利用してアプリケーションを構築します。
+@z
+
+@x
+```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ```
 @z
@@ -438,6 +478,8 @@ Here's the complete Dockerfile.
 
 @x
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ENV NODE_ENV=production
 
@@ -453,6 +495,8 @@ CMD [ "node", "server.js" ]
 ```
 @y
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ENV NODE_ENV=production
 
