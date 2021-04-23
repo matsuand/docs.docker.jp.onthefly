@@ -1,4 +1,4 @@
-<!-- Page generated 2021-04-21 21:33:15 +0900-->
+<!-- Page generated 2021-04-23 21:15:08 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>BuildKit によるイメージ構築 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="BuildKit によるイメージ構築" />
   <meta property="og:description" content="BuildKit により Docker ビルドについて学びます。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-21T21:33:15+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-23T21:15:08+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/build_enhancements/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-04-21T21:33:15+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-23T21:15:08+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"BuildKit によるイメージ構築","description":"BuildKit により Docker ビルドについて学びます。","url":"https://docs.docker.com/develop/develop-images/build_enhancements/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -201,7 +201,7 @@ BuildKit を統合したことによって、処理性能、ストレージ管�
 <p><code class="language-plaintext highlighter-rouge">Dockerfile</code>における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
 これを行うには<code class="language-plaintext highlighter-rouge">Dockerfile</code>の先頭行に、コメントとして特定のフロントエンドイメージを指定します。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=&lt;frontend image&gt;, e.g. # syntax=docker/dockerfile:1</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=&lt;frontend image&gt;, e.g. # syntax=docker/dockerfile:1.2</span>
 </code></pre></div></div>
 
 <p>本ページに示す利用例においては <code class="language-plaintext highlighter-rouge">docker/dockerfile</code> バージョン 1.2.0 およびそれ以降で利用可能となる機能を用いています。
@@ -227,9 +227,10 @@ Docker では Dockerfile の外に保持されている機密情報のファイ�
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo</span> <span class="s1">'WARMACHINEROX'</span> <span class="o">&gt;</span> mysecret.txt
 </code></pre></div></div>
 
-<p>BuildKit フロントエンド<code class="language-plaintext highlighter-rouge">docker/dockerfile:1.2</code>またはこれ以上を利用する Dockerfile 内では、Secret は<code class="language-plaintext highlighter-rouge">--mount</code>オプションを使ってアクセスすることができます。</p>
+<p>BuildKit フロントエンド<code class="language-plaintext highlighter-rouge">docker/dockerfile:1.2</code>を利用する Dockerfile では、Secret は以下のように<code class="language-plaintext highlighter-rouge">RUN</code>を実行する際にアクセスすることができます。</p>
 
-<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1</span>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># syntax=docker/dockerfile:1.2</span>
+
 <span class="k">FROM</span><span class="s"> alpine</span>
 
 <span class="c"># shows secret from default secret location:</span>
@@ -239,7 +240,8 @@ Docker では Dockerfile の外に保持されている機密情報のファイ�
 <span class="k">RUN </span><span class="nt">--mount</span><span class="o">=</span><span class="nb">type</span><span class="o">=</span>secret,id<span class="o">=</span>mysecret,dst<span class="o">=</span>/foobar <span class="nb">cat</span> /foobar
 </code></pre></div></div>
 
-<p>この Dockerfile は、単に機密情報にアクセスできる例を示したにすぎません。
+<p>secret はビルドの際に<code class="language-plaintext highlighter-rouge">--secret</code>フラグを使って受け渡すことが必要です。
+この Dockerfile は、単に機密情報にアクセスできる例を示したにすぎません。
 機密情報はビルド時の出力に表示されます。
 最終的にビルドされるイメージに、この機密情報ファイルは含まれません。</p>
 

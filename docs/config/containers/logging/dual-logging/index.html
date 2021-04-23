@@ -1,7 +1,7 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-23 21:15:08 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>リモートログドライバーに対する docker logs の利用 | Docker ドキュメント</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>リモートログドライバーを使った docker logs の利用 | Docker ドキュメント</title>
   <meta name="description" content="Learn how to read container logs locally when using a third party logging solution." />
   <meta name="keywords" content="docker, logging, driver">
   <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/config/containers/logging/dual-logging/" />
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="リモートログドライバーに対する docker logs の利用"/>
+  <meta name="twitter:title" itemprop="title name" content="リモートログドライバーを使った docker logs の利用"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="" />
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:domain" content="matsuand.github.io"/>
@@ -36,16 +36,16 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker ドキュメント"/>
-  <meta property="og:title" content="リモートログドライバーに対する docker logs の利用" />
+  <meta property="og:title" content="リモートログドライバーを使った docker logs の利用" />
   <meta property="og:description" content="Learn how to read container logs locally when using a third party logging solution." />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-23T21:15:08+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/config/containers/logging/dual-logging/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"リモートログドライバーに対する docker logs の利用","description":"Learn how to read container logs locally when using a third party logging solution.","url":"https://docs.docker.com/config/containers/logging/dual-logging/"}</script>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-23T21:15:08+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"リモートログドライバーを使った docker logs の利用","description":"Learn how to read container logs locally when using a third party logging solution.","url":"https://docs.docker.com/config/containers/logging/dual-logging/"}</script>
   <!-- END SEO STUFF -->
 </head>
 <body class="colums">
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>リモートログドライバーに対する docker logs の利用</h1><h2 id="overview">概要</h2>
+                        <section class="section"><h1>リモートログドライバーを使った docker logs の利用</h1><p><em class="reading-time">読む時間の目安: 4 分</em></p><h2 id="overview">概要</h2>
 
 <p>Docker Engine 20.10 より前は、<code class="language-plaintext highlighter-rouge">docker logs</code>を実行してコンテナーログを参照する際には、ログドライバーとして<code class="language-plaintext highlighter-rouge">local</code>、<code class="language-plaintext highlighter-rouge">json-file</code>、<code class="language-plaintext highlighter-rouge">journald</code>しかサポートされていませんでした。
 他にもサードパーティー製のログドライバーはあったのですが、<code class="language-plaintext highlighter-rouge">docker logs</code>を使ってローカルでログを参照することはサポートされていませんでした。</p>
@@ -110,7 +110,13 @@
 この機能は「デュアルログ」（dual logging）と呼ばれることがあります。
 この機能を利用すると、リモートログドライバーが利用されていたとしても、<code class="language-plaintext highlighter-rouge">docker logs</code>を実行してローカルなコンテナーログを参照するだけでよく、一定の書式でログが得られることになります。
 というのも、Engine が「ローカルな」ログドライバーに合わせて、ログ情報を設定してくれるからです。
-詳細な情報については <a href="/docs.docker.jp.onthefly/config/containers/logging/configure">デフォルトのログドライバーの設定</a> を参照してください。</p>
+詳細な情報については <a href="/docs.docker.jp.onthefly/config/containers/logging/configure/">デフォルトのログドライバーの設定</a> を参照してください。</p>
+
+<p>デュアルログでは <a href="/docs.docker.jp.onthefly/config/containers/logging/local/"><code class="language-plaintext highlighter-rouge">local</code></a> ログドライバーが利用され、これを使ってコンテナーの最新ログを読み込むキャッシュとして動作します。
+デフォルトでそのキャッシュは、ログファイルのローテーションを有効にしており、このログファイルはコンテナーごとに最大 5 ファイルまで、また各ファイルは（圧縮前サイズとして）20 MB までの範囲で利用可能です。</p>
+
+<p>このデフォルトを変更する方法は <a href="#configuration-options">設定オプション</a> の節を参照してください。
+またこの機能を無効にする方法は <a href="#disable-the-dual-logging-cache">デュアルログの無効化</a> の節を参照してください。</p>
 
 <h2 id="prerequisites">前提条件</h2>
 
@@ -121,7 +127,7 @@ Docker Engine 20.10 またはそれ以降においては、設定されたログ
 
 <h3 id="without-dual-logging-capability">デュアルログ機能がない場合</h3>
 
-<p>コンテナーあるいは<code class="language-plaintext highlighter-rouge">dockerd</code>に対して、<code class="language-plaintext highlighter-rouge">splunk</code>のようなリモートログドライバーを設定していた場合、ローカルのコンテナーログを参照しようとすると、エラーが表示されます。</p>
+<p>コンテナーに対して<code class="language-plaintext highlighter-rouge">splunk</code>のようなリモートログドライバーが設定されていて、さらにデュアルログが無効化されている場合、ローカルのコンテナーログを参照しようとすると、エラーが表示されます。</p>
 
 <ul>
   <li>
@@ -131,8 +137,9 @@ Docker Engine 20.10 またはそれ以降においては、設定されたログ
 <span class="go">  {
     "log-driver": "splunk",
     "log-opts": {
-</span><span class="c">      ...
-</span><span class="go">    }
+      "cache-disabled": "true",
+      ... （"splunk" ログドライバーのオプション指定）
+    }
   }
 </span></code></pre></div>    </div>
   </li>
@@ -153,7 +160,9 @@ Docker Engine 20.10 またはそれ以降においては、設定されたログ
 
 <h3 id="with-dual-logging-capability">デュアルログ機能がある場合</h3>
 
-<p>コンテナーあるいはデーモンに、splunk のようなリモートログドライバーを設定するには、以下のようにします。</p>
+<p>デュアルログによるキャッシュを有効にしていれば<code class="language-plaintext highlighter-rouge">docker logs</code>によってログを参照できます。
+これはログドライバーがログ読み込みに対応していなくても可能になります。
+以下の例は、デーモン設定においてデフォルトとして<code class="language-plaintext highlighter-rouge">リモートログドライバーにsplunk</code>を利用し、デュアルログキャッシュを有効にするものです。</p>
 
 <ul>
   <li>
@@ -163,8 +172,8 @@ Docker Engine 20.10 またはそれ以降においては、設定されたログ
 <span class="go">  {
     "log-driver": "splunk",
     "log-opts": {
-</span><span class="c">      ...
-</span><span class="go">    }
+      ... （"splunk" ログドライバーのオプション指定）
+    }
   }
 </span></code></pre></div>    </div>
   </li>
@@ -192,14 +201,87 @@ Docker Engine 20.10 またはそれ以降においては、設定されたログ
 <blockquote>
   <p><strong>メモ</strong></p>
 
-  <p>デュアルログ機能を有効にする前後において、<code class="language-plaintext highlighter-rouge">json-file</code>や<code class="language-plaintext highlighter-rouge">journald</code>のようなローカルドライバーの機能は何も変わりません。
-ローカルのログは、上のどちらのケースにおいても参照可能です。</p>
+  <p>デュアルログ機能を有効にする前後において、ログ読み込みに対応する<code class="language-plaintext highlighter-rouge">local</code>、<code class="language-plaintext highlighter-rouge">json-file</code>、<code class="language-plaintext highlighter-rouge">journald</code>といったローカルドライバーの機能は何も変わりません。
+そのドライバーにおいてローカルのログは、上のどちらのケースにおいても参照可能です。</p>
+</blockquote>
+
+<h3 id="configuration-options">Configuration options</h3>
+
+<p>The “dual logging” cache accepts the same configuration options as the
+<a href="/docs.docker.jp.onthefly/config/containers/logging/local/"><code class="language-plaintext highlighter-rouge">local</code> logging driver</a>, but with a <code class="language-plaintext highlighter-rouge">cache-</code> prefix. These options
+can be specified per container, and defaults for new containers can be set using
+the <a href="/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon configuration file</a>.</p>
+
+<p>By default, the cache has log-file rotation enabled, and is limited to a maximum
+of 5 files of 20MB each (before compression) per container. Use the configuration
+options described below to customize these defaults.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Option</th>
+      <th style="text-align: left">Default</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">cache-disabled</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">"false"</code></td>
+      <td style="text-align: left">Disable local caching. Boolean value passed as a string (<code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">0</code>, or <code class="language-plaintext highlighter-rouge">false</code>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">cache-max-size</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">"20m"</code></td>
+      <td style="text-align: left">The maximum size of the cache before it is rotated. A positive integer plus a modifier representing the unit of measure (<code class="language-plaintext highlighter-rouge">k</code>, <code class="language-plaintext highlighter-rouge">m</code>, or <code class="language-plaintext highlighter-rouge">g</code>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">cache-max-file</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">"5"</code></td>
+      <td style="text-align: left">The maximum number of cache files that can be present. If rotating the logs creates excess files, the oldest file is removed. A positive integer.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">cache-compress</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">"true"</code></td>
+      <td style="text-align: left">Enable or disable compression of rotated log files. Boolean value passed as a string (<code class="language-plaintext highlighter-rouge">true</code>, <code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">0</code>, or <code class="language-plaintext highlighter-rouge">false</code>).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="disable-the-dual-logging-cache">Disable the dual logging cache</h2>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">cache-disabled</code> option to disable the dual logging cache. Disabling the
+cache can be useful to save storage space in situations where logs are only read
+through a remote logging system, and if there is no need to read logs through
+<code class="language-plaintext highlighter-rouge">docker logs</code> for debugging purposes.</p>
+
+<p>Caching can be disabled for individual containers or by default for new containers,
+when using the <a href="/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon configuration file</a>.</p>
+
+<p>The following example uses the daemon configuration file to use the <a href="/docs.docker.jp.onthefly/config/containers/logging/splunk/">“splunk’</a>
+logging driver as a default, with caching disabled:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/docker/daemon.json
+<span class="go">{
+  "log-driver": "splunk",
+  "log-opts": {
+    "cache-disabled": "true",
+    ... (options for "splunk" logging driver)
+  }
+}
+</span></code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+
+  <p>For logging drivers that support reading logs, such as the <code class="language-plaintext highlighter-rouge">local</code>, <code class="language-plaintext highlighter-rouge">json-file</code>
+and <code class="language-plaintext highlighter-rouge">journald</code> drivers, dual logging is not used, and disabling the option has
+no effect.</p>
 </blockquote>
 
 <h2 id="limitations">制限事項</h2>
 
 <ul>
-  <li>複数のログドライバーを指定することはできません。</li>
   <li>コンテナーにおいて利用するログドライバーやプラグインが、リモートに向けてログ送信を行うものである場合、突然「ネットワーク的な」問題や、ローカルキャッシュへの書き込み不能となる事態が発生する場合があります。</li>
   <li><code class="language-plaintext highlighter-rouge">logdriver</code>への書き込みが何らかの理由（ファイルシステムがいっぱい、書き込み権限消失）により失敗した場合、キャッシュの書き込みが失敗し、このことはデーモンのログに記録されます。
 キャッシュへのログエントリーは、リトライされることはありません。ed.</li>
@@ -245,8 +327,10 @@ Docker Engine 20.10 またはそれ以降においては、設定されたログ
     <ul>
       <li><a href="#without-dual-logging-capability" class="nomunge">デュアルログ機能がない場合</a></li>
       <li><a href="#with-dual-logging-capability" class="nomunge">デュアルログ機能がある場合</a></li>
+      <li><a href="#configuration-options" class="nomunge">Configuration options</a></li>
     </ul>
   </li>
+  <li><a href="#disable-the-dual-logging-cache" class="nomunge">Disable the dual logging cache</a></li>
   <li><a href="#limitations" class="nomunge">制限事項</a></li>
 </ul>
 

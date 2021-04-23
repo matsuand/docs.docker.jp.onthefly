@@ -1,4 +1,4 @@
-<!-- Page generated 2021-03-26 10:14:47 +0900-->
+<!-- Page generated 2021-04-23 21:15:08 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Registry サーバーのデプロイ | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Registry サーバーのデプロイ" />
   <meta property="og:description" content="Explains how to deploy a registry" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-23T21:15:08+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/registry/deploying/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-03-26T10:14:47+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-23T21:15:08+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Registry サーバーのデプロイ","description":"Explains how to deploy a registry","url":"https://docs.docker.com/registry/deploying/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -109,7 +109,7 @@ Docker Hub はホスト提供込みの Registry であり、さまざまな機�
 </blockquote>
 
 <p>Registry をデプロイするには、まずホスト上に Docker をインストールする必要があります。
-Registry は <code class="language-plaintext highlighter-rouge">registry</code> イメージのインスタンスの 1 つであり、Docker の内部において稼動します。</p>
+Registry は<code class="language-plaintext highlighter-rouge">registry</code>イメージのインスタンスの 1 つであり、Docker の内部において稼動します。</p>
 
 <p>このトピックでは Registry のデプロイと設定方法に関する基本的な情報を示します。
 設定オプションの全一覧については <a href="/docs.docker.jp.onthefly/registry/configuration/">設定リファレンス</a> を参照してください。</p>
@@ -126,7 +126,9 @@ Registry は <code class="language-plaintext highlighter-rouge">registry</code> 
 <p>Registry がこうして利用できるようになります。</p>
 
 <blockquote>
-  <p><strong>警告</strong>: ここに例としていくつか示す Registry の設定は、テスト環境向けにしか考慮していません。
+  <p><strong>警告</strong></p>
+
+  <p>ここに例としていくつか示す Registry の設定は、テスト環境向けにしか考慮していません。
 本番環境向けの Registry であれば、TLS によって保護することが必要であり、理想的にはアクセス制御システムの利用が求められます。
 ここでの説明を読み終えたら、本番環境向け Registry をデプロイするための <a href="/docs.docker.jp.onthefly/registry/configuration/">設定ガイド</a> に進んでください。</p>
 </blockquote>
@@ -134,19 +136,19 @@ Registry は <code class="language-plaintext highlighter-rouge">registry</code> 
 <h2 id="copy-an-image-from-docker-hub-to-your-registry">Docker Hub から Registry へのイメージコピー</h2>
 
 <p>イメージは Docker Hub からプルして、それを Registry にプッシュすることができます。
-以下の例では Docker Hub から <code class="language-plaintext highlighter-rouge">ubuntu:16.04</code> イメージをプルして、そこに <code class="language-plaintext highlighter-rouge">my-ubuntu</code> というタグをつけ直します。
+以下の例では Docker Hub から<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>イメージをプルして、そこに<code class="language-plaintext highlighter-rouge">my-ubuntu</code>というタグをつけ直します。
 そしてローカルな Registry にプッシュします。
-その後にローカル上から <code class="language-plaintext highlighter-rouge">ubuntu:16.04</code> と <code class="language-plaintext highlighter-rouge">my-ubuntu</code> のイメージを削除した上で、ローカル Registry から <code class="language-plaintext highlighter-rouge">my-ubuntu</code> イメージをプルします。</p>
+その後にローカル上から<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>と<code class="language-plaintext highlighter-rouge">my-ubuntu</code>のイメージを削除した上で、ローカル Registry から<code class="language-plaintext highlighter-rouge">my-ubuntu</code>イメージをプルします。</p>
 
 <ol>
   <li>
-    <p>Docker Hub から <code class="language-plaintext highlighter-rouge">ubuntu:16.04</code> イメージをプルします。</p>
+    <p>Docker Hub から<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>イメージをプルします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull ubuntu:16.04
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>イメージに <code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code> というタグをつけます。
+    <p>イメージに<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>というタグをつけます。
 このようにすることで、既存のイメージに追加のタグがつけられます。
 タグ名のはじめにあるのがホスト名とポート番号です。
 Docker はプッシュ処理時に、その名前部分を Registry の場所として解釈します。</p>
@@ -155,22 +157,22 @@ Docker はプッシュ処理時に、その名前部分を Registry の場所と
 </code></pre></div>    </div>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">localhost:5000</code> として起動しているローカルの Registry にイメージをプッシュします。</p>
+    <p><code class="language-plaintext highlighter-rouge">localhost:5000</code>として起動しているローカルの Registry にイメージをプッシュします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker push localhost:5000/my-ubuntu
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>ローカルにキャッシュされている <code class="language-plaintext highlighter-rouge">ubuntu:16.04</code> と <code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code> イメージを削除します。
+    <p>ローカルにキャッシュされている<code class="language-plaintext highlighter-rouge">ubuntu:16.04</code>と<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>イメージを削除します。
 この後には、ローカル Registry からイメージをプルしてみることができます。
-Registry からは <code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code> イメージは削除されません。</p>
+Registry からは<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>イメージは削除されません。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker image remove ubuntu:16.04
 <span class="nv">$ </span>docker image remove localhost:5000/my-ubuntu
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>ローカルの Registry から <code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code> イメージをプルします。</p>
+    <p>ローカルの Registry から<code class="language-plaintext highlighter-rouge">localhost:5000/my-ubuntu</code>イメージをプルします。</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker pull localhost:5000/my-ubuntu
 </code></pre></div>    </div>
@@ -179,19 +181,19 @@ Registry からは <code class="language-plaintext highlighter-rouge">localhost:
 
 <h2 id="stop-a-local-registry">ローカル Registry の停止</h2>
 
-<p>Registry を停止するには、コンテナーの場合と同じように <code class="language-plaintext highlighter-rouge">docker container stop</code> コマンドを実行します。</p>
+<p>Registry を停止するには、コンテナーの場合と同じように<code class="language-plaintext highlighter-rouge">docker container stop</code>コマンドを実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop registry
 </code></pre></div></div>
 
-<p>コンテナーを削除するには <code class="language-plaintext highlighter-rouge">docker container rm</code> を実行します。</p>
+<p>コンテナーを削除するには<code class="language-plaintext highlighter-rouge">docker container rm</code>を実行します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker container stop registry <span class="o">&amp;&amp;</span> docker container <span class="nb">rm</span> <span class="nt">-v</span> registry
 </code></pre></div></div>
 
 <h2 id="basic-configuration">基本的な設定</h2>
 
-<p>コンテナーを設定するには、<code class="language-plaintext highlighter-rouge">docker run</code> コマンドの実行時に、追加のまたは修正のオプションを指定します。</p>
+<p>コンテナーを設定するには、<code class="language-plaintext highlighter-rouge">docker run</code>コマンドの実行時に、追加のまたは修正のオプションを指定します。</p>
 
 <p>以下の節では、Registry 設定に関する基本的なガイドラインを示します。
 詳しくは <a href="/docs.docker.jp.onthefly/registry/configuration/">Registry 設定リファレンス</a> を参照してください。</p>
@@ -199,7 +201,7 @@ Registry からは <code class="language-plaintext highlighter-rouge">localhost:
 <h3 id="start-the-registry-automatically">Registry の自動起動</h3>
 
 <p>常用するインフラストラクチャーの一部として Registry を利用したい場合には、Docker の再起動時あるいは Registry 終了時に、Registry を自動的に再起動することが必要になります。
-以下の例では <code class="language-plaintext highlighter-rouge">--restart always</code> フラグを用いて、Registry に対して再起動ポリシーを設定します。</p>
+以下の例では<code class="language-plaintext highlighter-rouge">--restart always</code>フラグを用いて、Registry に対して再起動ポリシーを設定します。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-p</span> 5000:5000 <span class="se">\</span>
@@ -211,9 +213,9 @@ Registry からは <code class="language-plaintext highlighter-rouge">localhost:
 <h3 id="customize-the-published-port">公開ポートの変更</h3>
 
 <p>すでにポート 5000 を利用している場合、またはローカル Registry を各作業向けに切り分けて複数起動したい場合は、Registry のポート設定を変更します。
-以下の例では Registry をポート 5001 で起動し、同時にその名称を <code class="language-plaintext highlighter-rouge">registry-test</code> とします。
-ここで <code class="language-plaintext highlighter-rouge">-p</code> フラグの値の 1 つめはホストのポートであり、2 つめはコンテナー内のポートです。
-コンテナーの内部にて Registry は、ポート <code class="language-plaintext highlighter-rouge">5000</code> を利用するのがデフォルトです。</p>
+以下の例では Registry をポート 5001 で起動し、同時にその名称を<code class="language-plaintext highlighter-rouge">registry-test</code>とします。
+ここで<code class="language-plaintext highlighter-rouge">-p</code>フラグの値の 1 つめはホストのポートであり、2 つめはコンテナー内のポートです。
+コンテナーの内部にて Registry は、ポート<code class="language-plaintext highlighter-rouge">5000</code>を利用するのがデフォルトです。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="se">\</span>
   <span class="nt">-p</span> 5001:5000 <span class="se">\</span>
@@ -221,7 +223,7 @@ Registry からは <code class="language-plaintext highlighter-rouge">localhost:
   registry:2
 </code></pre></div></div>
 
-<p>コンテナーの内部にて Registry が待ち受けるポートは、環境変数 <code class="language-plaintext highlighter-rouge">REGISTRY_HTTP_ADDR</code> を使って変更することができます。
+<p>コンテナーの内部にて Registry が待ち受けるポートは、環境変数<code class="language-plaintext highlighter-rouge">REGISTRY_HTTP_ADDR</code>を使って変更することができます。
 以下のコマンドは、コンテナーの内部にて Registry はポート 5001 を待ち受けるようになります。</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="se">\</span>
@@ -507,8 +509,13 @@ authentication to work.</p>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>auth
 <span class="nv">$ </span>docker run <span class="se">\</span>
   <span class="nt">--entrypoint</span> htpasswd <span class="se">\</span>
-  registry:2 <span class="nt">-Bbn</span> testuser testpassword <span class="o">&gt;</span> auth/htpasswd
+  httpd:2 <span class="nt">-Bbn</span> testuser testpassword <span class="o">&gt;</span> auth/htpasswd
 </code></pre></div>    </div>
+
+    <p>On Windows, make sure the output file is correctly encoded:</p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">--rm</span><span class="w"> </span><span class="nt">--entrypoint</span><span class="w"> </span><span class="nx">htpasswd</span><span class="w"> </span><span class="nx">httpd:2</span><span class="w"> </span><span class="nt">-Bbn</span><span class="w"> </span><span class="nx">testuser</span><span class="w"> </span><span class="nx">testpassword</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">Set-Content</span><span class="w"> </span><span class="nt">-Encoding</span><span class="w"> </span><span class="nx">ASCII</span><span class="w"> </span><span class="nx">auth/htpasswd</span><span class="w">
+</span></code></pre></div>    </div>
   </li>
   <li>
     <p>Stop the registry.</p>
