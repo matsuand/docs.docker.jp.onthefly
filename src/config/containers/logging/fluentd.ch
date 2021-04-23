@@ -300,11 +300,15 @@ connection is established. Defaults to `false`.
 @z
 
 @x
-The amount of data to buffer before flushing to disk. Defaults to the amount of RAM
-available to the container.
+Sets the number of events buffered on the memory. Records will be stored in memory
+up to this number. If the buffer is full, the call to record logs will fail.
+The default is 8192.
+(https://github.com/fluent/fluent-logger-golang/tree/master#bufferlimit)
 @y
-The amount of data to buffer before flushing to disk. Defaults to the amount of RAM
-available to the container.
+Sets the number of events buffered on the memory. Records will be stored in memory
+up to this number. If the buffer is full, the call to record logs will fail.
+The default is 8192.
+(https://github.com/fluent/fluent-logger-golang/tree/master#bufferlimit)
 @z
 
 @x

@@ -270,9 +270,9 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 @z
 
 @x
-2. Stop the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
+2. Stop and remove the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
 @y
-2. ダッシュボード上から再度 Todo アプリコンテナーを停止させます（あるいは`docker rm -f <id>`を実行します）。
+2. ダッシュボード上から再度 Todo アプリコンテナーを停止させ削除します（あるいは`docker rm -f <id>`を実行します）。
    なぜならデータ保存を行うボリュームを利用しない状態で、アプリコンテナーがまだ実行しているからです。
 @z
 
@@ -311,9 +311,9 @@ Docker はディスク上の物理的なディレクトリ位置を管理しま�
 @z
 
 @x
-5. Remove the container for the todo app. Use the Dashboard or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
+5. Stop and remove the container for the todo app. Use the Dashboard or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
 @y
-5. Todo アプリを実現するコンテナーを削除します。
+5. Todo アプリを実現するコンテナーを停止して削除します。
    それにはダッシュボードを利用するか、あるいは`docker ps`によって ID を得た上で`docker rm -f <id>`を実行します。
 @z
 

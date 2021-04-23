@@ -267,7 +267,7 @@ $ docker build --progress=plain .
 @x
 The new syntax features in `Dockerfile` are available if you override the default
 frontend. To override the default frontend, set the first line of the
-`Dockerfile` as a comment with a specific frontend image: 
+`Dockerfile` as a comment with a specific frontend image:
 @y
 `Dockerfile`における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
 これを行うには`Dockerfile`の先頭行に、コメントとして特定のフロントエンドイメージを指定します。
@@ -275,11 +275,11 @@ frontend. To override the default frontend, set the first line of the
 
 @x
 ```dockerfile
-# syntax=<frontend image>, e.g. # syntax=docker/dockerfile:1
+# syntax=<frontend image>, e.g. # syntax=docker/dockerfile:1.2
 ```
 @y
 ```dockerfile
-# syntax=<frontend image>, e.g. # syntax=docker/dockerfile:1
+# syntax=<frontend image>, e.g. # syntax=docker/dockerfile:1.2
 ```
 @z
 
@@ -350,15 +350,16 @@ $ echo 'WARMACHINEROX' > mysecret.txt
 @z
 
 @x
-Within a Dockerfile that uses BuildKit frontend `docker/dockerfile:1.2` or up,
-the secret can be accessed using the `--mount` option:
+And with a Dockerfile that specifies use of a BuildKit frontend
+`docker/dockerfile:1.2`, the secret can be accessed when performing a `RUN`:
 @y
-BuildKit フロントエンド`docker/dockerfile:1.2`またはこれ以上を利用する Dockerfile 内では、Secret は`--mount`オプションを使ってアクセスすることができます。
+BuildKit フロントエンド`docker/dockerfile:1.2`を利用する Dockerfile では、Secret は以下のように`RUN`を実行する際にアクセスすることができます。
 @z
 
 @x
 ```dockerfile
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1.2
+
 FROM alpine
 
 # shows secret from default secret location:
@@ -369,7 +370,8 @@ RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 ```
 @y
 ```dockerfile
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1.2
+
 FROM alpine
 
 # shows secret from default secret location:
@@ -381,10 +383,12 @@ RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 @z
 
 @x
+The secret needs to be passed to the build using the `--secret` flag.
 This Dockerfile is only to demonstrate that the secret can be accessed. As you
 can see the secret printed in the build output. The final image built will not
 have the secret file:
 @y
+secret はビルドの際に`--secret`フラグを使って受け渡すことが必要です。
 この Dockerfile は、単に機密情報にアクセスできる例を示したにすぎません。
 機密情報はビルド時の出力に表示されます。
 最終的にビルドされるイメージに、この機密情報ファイルは含まれません。

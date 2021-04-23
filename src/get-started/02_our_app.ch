@@ -22,7 +22,7 @@ description: overview of our simple applicaiton for learning docker
 @x
 For the rest of this tutorial, we will be working with a simple todo
 list manager that is running in Node.js. If you're not familiar with Node.js,
-don't worry! No real JavaScript experience is needed!
+don't worry. No real JavaScript experience is needed.
 @y
 ここからのチュートリアルでは、Node.js において稼動する単純な ToDo リストマネージャーを作っていくことにします。
 Node.js をよくわかっていなくても心配ありません。
@@ -100,7 +100,7 @@ we have created a ZIP file containing the application.
 In order to build the application, we need to use a `Dockerfile`. A
 Dockerfile is simply a text-based script of instructions that is used to
 create a container image. If you've created Dockerfiles before, you might
-see a few flaws in the Dockerfile below. But, don't worry! We'll go over them.
+see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
 @y
 アプリケーションをビルドするためには`Dockerfile`を利用する必要があります。
 Dockerfile とは単純なテキストベースのスクリプトファイルであり、コンテナーイメージを生成するための命令を記述するものです。
@@ -206,7 +206,7 @@ Dockerfile を作ったことがある方なら、以下に示す Dockerfile は
 @z
 
 @x
-Now that we have an image, let's run the application! To do so, we will use the `docker run`
+Now that we have an image, let's run the application. To do so, we will use the `docker run`
 command (remember that from earlier?).
 @y
 イメージを作り出したのでアプリケーションを実行してみます。
@@ -243,7 +243,7 @@ command (remember that from earlier?).
 
 @x
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
-    You should see our app!
+    You should see our app.
 @y
 2. 数秒待ってから、ブラウザーを使って [http://localhost:3000](http://localhost:3000) にアクセスします。
     アプリケーションが表示されるはずです。
@@ -259,7 +259,7 @@ command (remember that from earlier?).
 
 @x
 3. Go ahead and add an item or two and see that it works as you expect. You can mark items as
-   complete and remove items. Your frontend is successfully storing items in the backend!
+   complete and remove items. Your frontend is successfully storing items in the backend.
    Pretty quick and easy, huh?
 @y
 3. 作業を行ってみます。
@@ -270,7 +270,7 @@ command (remember that from earlier?).
 @z
 
 @x
-At this point, you should have a running todo list manager with a few items, all built by you!
+At this point, you should have a running todo list manager with a few items, all built by you.
 Now, let's make a few changes and learn about managing our containers.
 @y
 ここまでに Todo リストマネージャーを実行してアイテムをいくつか追加しました。
@@ -280,7 +280,7 @@ Now, let's make a few changes and learn about managing our containers.
 
 @x
 If you take a quick look at the Docker Dashboard, you should see your two containers running now 
-(this tutorial and your freshly launched app container)!
+(this tutorial and your freshly launched app container).
 @y
 Docker ダッシュボードを覗いてみれば、今の時点で 2 つのコンテナーが実行していることがわかります。
 （本チュートリアルのコンテナーと新たに実行したアプリコンテナーです。）
@@ -301,7 +301,7 @@ Docker ダッシュボードを覗いてみれば、今の時点で 2 つのコ�
 
 @x
 In this short section, we learned the very basics about building a container image and created a
-Dockerfile to do so. Once we built an image, we started the container and saw the running app!
+Dockerfile to do so. Once we built an image, we started the container and saw the running app.
 @y
 本節ではコンテナーイメージのビルド方法の基本について学びました。
 またこれを行うために Dockerfile を生成しました。

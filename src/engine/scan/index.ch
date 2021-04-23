@@ -855,7 +855,7 @@ The high-level `docker scan` command scans local images using the image name or 
 @x
 | Option                                                       | Description                                   |
 |:------------------------------------------------------------------ :------------------------------------------------|
-| `--accept license` | Accept the license agreement of the third-party scanning provider    |
+| `--accept-license` | Accept the license agreement of the third-party scanning provider    |
 | `--dependency-tree` | Display the dependency tree of the image along with scan results |
 | `--exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
 | `-f`, `--file string` | Specify the location of the Dockerfile associated with the image. This option displays a detailed scan result |
@@ -868,7 +868,7 @@ The high-level `docker scan` command scans local images using the image name or 
 @y
 | オプション                                                   | 内容説明                                             |
 |:------------------------------------------------------------ :------------------------------------------------|
-| `--accept license` | サードパーティー製プロバイダーのライセンスを承認します。|
+| `--accept-license` | サードパーティー製プロバイダーのライセンスを承認します。|
 | `--dependency-tree` | スキャン結果において依存パッケージのツリーを表示します。|
 | `--exclude-base` | スキャンにあたってベースイメージは取り除きます。このオプションには --file オプションの設定が必要です。|
 | `-f`, `--file string` | イメージに対応する Dockerfile を指定します。このオプションはスキャンの詳細結果を表示します。|

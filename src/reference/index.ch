@@ -33,12 +33,12 @@ various APIs, CLIs, and file formats.
 | File format                                                         | Description                                                     |
 |:--------------------------------------------------------------------|:----------------------------------------------------------------|
 | [Dockerfile](/engine/reference/builder/)                            | Defines the contents and startup behavior of a single container |
-| [Compose file](/compose/compose-file/index.md)                      | Defines a multi-container application                           |
+| [Compose file](/compose/compose-file/)                              | Defines a multi-container application                           |
 @y
-| ファイルフォーマット                                                 | 内容説明                                                        |
-|:---------------------------------------------------------------------|:----------------------------------------------------------------|
-| [Dockerfile]({{ site.baseurl }}/engine/reference/builder/)           | 1 つのコンテナーの内容と起動時の動作を定義します。              |
-| [Compose ファイル]({{ site.baseurl }}/compose/compose-file/index.md) | 複数コンテナーによるアプリケーションを定義します。              |
+| ファイルフォーマット                                                | 内容説明                                                        |
+|:--------------------------------------------------------------------|:----------------------------------------------------------------|
+| [Dockerfile]({{ site.baseurl }}/engine/reference/builder/)          | 1 つのコンテナーの内容と起動時の動作を定義します。              |
+| [Compose ファイル]({{ site.baseurl }}/compose/compose-file/)        | 複数コンテナーによるアプリケーションを定義します。              |
 @z
 
 @x
@@ -52,13 +52,13 @@ various APIs, CLIs, and file formats.
 | CLI                                                            | Description                                                                                |
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
 | [Docker CLI](/engine/reference/commandline/cli/)               | The main CLI for Docker, includes all `docker` commands                                    |
-| [Compose CLI](/compose/reference/index.md)                     | The CLI for Docker Compose, which allows you to build and run multi-container applications |
+| [Compose CLI](/compose/reference/)                             | The CLI for Docker Compose, which allows you to build and run multi-container applications |
 | [Daemon CLI (dockerd)](/engine/reference/commandline/dockerd/) | Persistent process that manages containers                                                 |
 @y
 | CLI                                                                              | 内容説明                                                                                        |
 |:---------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------|
 | [Docker CLI]({{ site.baseurl }}/engine/reference/commandline/cli/)               | Docker の主要な CLI です。`docker` コマンドすべてがここにあります。                             |
-| [Compose CLI]({{ site.baseurl }}/compose/reference/index.md)                     | Docker Compose の CLI です。これにより複数コンテナーのアプリケーションのビルドと実行ができます。|
+| [Compose CLI]({{ site.baseurl }}/compose/reference/)                             | Docker Compose の CLI です。これにより複数コンテナーのアプリケーションのビルドと実行ができます。|
 | [Daemon CLI (dockerd)]({{ site.baseurl }}/engine/reference/commandline/dockerd/) | コンテナーを管理する常駐プロセスです。                                                          |
 @z
 
