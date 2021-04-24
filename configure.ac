@@ -186,6 +186,7 @@ AC_CONFIG_FILES([Makefile
 		 src/machine/img/Makefile
 		 src/machine/reference/Makefile
 		 src/network/Makefile
+		 src/network/images/Makefile
 		 src/notary/Makefile
 		 src/notary/images/Makefile
 		 src/notary/reference/Makefile

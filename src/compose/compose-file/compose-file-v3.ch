@@ -22,7 +22,7 @@ toc_min: 1
 @x
 ## Reference and guidelines
 @y
-{: id="reference-and-guidelines" }
+{: #reference-and-guidelines }
 ## リファレンスとガイドライン
 @z
 
@@ -37,7 +37,7 @@ version.
 @x
 ## Compose and Docker compatibility matrix
 @y
-{: id="compose-and-docker-compatibility-matrix" }
+{: #compose-and-docker-compatibility-matrix" }
 ## Compose と Docker の互換マトリックス
 @z
 
@@ -60,7 +60,7 @@ Compose ファイルフォーマットには 1、2、2.x、3.x という複数�
 @x
 ## Compose file structure and examples
 @y
-{: id="compose-file-structure-and-examples" }
+{: #compose-file-structure-and-examples }
 ## Compose ファイルの構造と記述例
 @z
 
@@ -3896,6 +3896,16 @@ Expose ports.
 > **メモ**
 >
 > ポートマッピングは`network_mode: host`とは互換性がありません。
+@z
+
+@x
+> **Note**
+>
+> `docker-compose run` ignores `ports` unless you include `--service-ports`.
+@y
+> **メモ**
+>
+> `docker-compose run`は`--service-ports`を指定しない限り`ports`を無視します。
 @z
 
 @x

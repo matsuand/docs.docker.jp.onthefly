@@ -1,3 +1,5 @@
+SUBDIRS = images
+
 thisdir    = network
 origdir    = @abs_origdir@/$(thisdir)
 srcdir     = @srcdir@
@@ -17,6 +19,7 @@ bases = \
 	host \
 	index \
 	iptables \
+	ipvlan \
 	links \
 	macvlan \
 	network-tutorial-host \

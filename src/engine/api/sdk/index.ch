@@ -27,12 +27,6 @@ Engine API), as well as SDKs for Go and Python. The SDKs allow you to build and
 scale Docker apps and solutions quickly and easily. If Go or Python don't work
 for you, you can use the Docker Engine API directly.
 @y
-{% comment %}
-Docker provides an API for interacting with the Docker daemon (called the Docker
-Engine API), as well as SDKs for Go and Python. The SDKs allow you to build and
-scale Docker apps and solutions quickly and easily. If Go or Python don't work
-for you, you can use the Docker Engine API directly.
-{% endcomment %}
 Docker には、Docker デーモンとの対話的な処理を行うための API が提供されています。
 （これを Docker Engine API と呼びます。）
 Go 言語や Python における SDK のようなものです。
@@ -44,10 +38,6 @@ Go 言語や Python ではうまく動作しない場合には、Docker Engine A
 The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget` or
 `curl`, or the HTTP library which is part of most modern programming languages.
 @y
-{% comment %}
-The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget` or
-`curl`, or the HTTP library which is part of most modern programming languages.
-{% endcomment %}
 Docker Engine API は、`wget` や `curl` といった HTTP クライアントからアクセスできる RESTful API です。
 あるいは、今日あるほとんどのプログラミング言語に組み入れられる HTTP ライブラリです。
 @z
@@ -55,9 +45,6 @@ Docker Engine API は、`wget` や `curl` といった HTTP クライアント�
 @x
 ## Install the SDKs
 @y
-{% comment %}
-## Install the SDKs
-{% endcomment %}
 {: #install-the-sdks }
 ## SDK のインストール
 @z
@@ -66,10 +53,6 @@ Docker Engine API は、`wget` や `curl` といった HTTP クライアント�
 Use the following commands to install the Go or Python SDK. Both SDKs can be
 installed and coexist together.
 @y
-{% comment %}
-Use the following commands to install the Go or Python SDK. Both SDKs can be
-installed and coexist together.
-{% endcomment %}
 Use the following commands to install the Go or Python SDK. Both SDKs can be
 installed and coexist together.
 @z
@@ -77,9 +60,6 @@ installed and coexist together.
 @x
 ### Go SDK
 @y
-{% comment %}
-### Go SDK
-{% endcomment %}
 {: #go-sdk }
 ### Go 言語の SDK
 @z
@@ -98,10 +78,6 @@ go get github.com/docker/docker/client
 The client requires a recent version of Go. Run `go version` and ensure that you 
 are running a currently supported version of Go
 @y
-{% comment %}
-The client requires a recent version of Go. Run `go version` and ensure that you 
-are running a currently supported version of Go
-{% endcomment %}
 The client requires a recent version of Go. Run `go version` and ensure that you 
 are running a currently supported version of Go
 @z
@@ -109,9 +85,6 @@ are running a currently supported version of Go
 @x
 [Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
 @y
-{% comment %}
-[Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
-{% endcomment %}
 [Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
 @z
 
@@ -124,18 +97,12 @@ are running a currently supported version of Go
 @x
 - **Recommended**: Run `pip install docker`.
 @y
-{% comment %}
-- **Recommended**: Run `pip install docker`.
-{% endcomment %}
-- **推奨**: `pip install docker` を実行します。
+- **推奨** ＝ `pip install docker` を実行します。
 @z
 
 @x
 - **If you can't use `pip`**:
 @y
-{% comment %}
-- **If you can't use `pip`**:
-{% endcomment %}
 - **`pip` を利用できない場合は以下を行います。**
 @z
 
@@ -144,11 +111,6 @@ are running a currently supported version of Go
   2.  Extract it and change to the extracted directory,
   3.  Run `python setup.py install`.
 @y
-  {% comment %}
-  1.  [Download the package directly](https://pypi.python.org/pypi/docker/).
-  2.  Extract it and change to the extracted directory,
-  3.  Run `python setup.py install`.
-  {% endcomment %}
   1.  [パッケージを直接ダウンロード](https://pypi.python.org/pypi/docker/) します。
   2.  パッケージを伸張（解凍）して、生成されたディレクトリに移動します。
   3.  `python setup.py install` を実行します。
@@ -157,18 +119,12 @@ are running a currently supported version of Go
 @x
 [Read the full Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
 @y
-{% comment %}
-[Read the full Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
-{% endcomment %}
 [Read the full Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
 @z
 
 @x
 ## View the API reference
 @y
-{% comment %}
-## View the API reference
-{% endcomment %}
 {: #view-the-api-reference }
 ## API リファレンスの参照
 @z
@@ -178,11 +134,6 @@ You can
 [view the reference for the latest version of the API](/engine/api/latest/)
 or [choose a specific version](/engine/api/version-history/).
 @y
-{% comment %}
-You can
-[view the reference for the latest version of the API](/engine/api/latest/)
-or [choose a specific version](/engine/api/version-history/).
-{% endcomment %}
 You can
 [view the reference for the latest version of the API](/engine/api/latest/)
 or [choose a specific version](/engine/api/version-history/).
@@ -191,8 +142,6 @@ or [choose a specific version](/engine/api/version-history/).
 @x
 ## Versioned API and SDK
 @y
-{% comment %}
-{% endcomment %}
 ## Versioned API and SDK
 @z
 
@@ -201,8 +150,6 @@ The version of the Docker Engine API you should use depends upon the version of
 your Docker daemon and Docker client. Refer to the [versioned API and SDK](/engine/api/#versioned-api-and-sdk)
 section in the API documentation for details.
 @y
-{% comment %}
-{% endcomment %}
 The version of the Docker Engine API you should use depends upon the version of
 your Docker daemon and Docker client. Refer to the [versioned API and SDK](/engine/api/#versioned-api-and-sdk)
 section in the API documentation for details.
@@ -211,8 +158,6 @@ section in the API documentation for details.
 @x
 ## SDK and API quickstart
 @y
-{% comment %}
-{% endcomment %}
 ## SDK and API quickstart
 @z
 
@@ -220,8 +165,6 @@ section in the API documentation for details.
 Use the following guidelines to choose the SDK or API version to use in your
 code:
 @y
-{% comment %}
-{% endcomment %}
 Use the following guidelines to choose the SDK or API version to use in your
 code:
 @z
@@ -234,8 +177,6 @@ code:
   that supports the feature, and prefer the latest version you can use.
 - Otherwise, continue to use the version that your code is already using.
 @y
-{% comment %}
-{% endcomment %}
 - If you're starting a new project, use the [latest version](/engine/api/latest/),
   but use API version negotiation or specify the version you are using. This
   helps prevent surprises.
@@ -248,8 +189,6 @@ code:
 As an example, the `docker run` command can be easily implemented using the
 Docker API directly, or using the Python or Go SDK.
 @y
-{% comment %}
-{% endcomment %}
 As an example, the `docker run` command can be easily implemented using the
 Docker API directly, or using the Python or Go SDK.
 @z
@@ -344,7 +283,7 @@ func main() {
     resp, err := cli.ContainerCreate(ctx, &container.Config{
         Image: "alpine",
         Cmd:   []string{"echo", "hello world"},
-    }, nil, nil, "")
+    }, nil, nil, nil, "")
     if err != nil {
         panic(err)
     }
@@ -352,7 +291,7 @@ func main() {
     resp, err := cli.ContainerCreate(ctx, &container.Config{
         Image: "alpine",
         Cmd:   []string{"echo", "hello world"},
-    }, nil, nil, "")
+    }, nil, nil, nil, "")
     if err != nil {
         panic(err)
     }
@@ -519,16 +458,12 @@ examples above use `localhost`, but any hostname would work.
 @x
 For more examples, take a look at the [SDK examples](examples.md).
 @y
-{% comment %}
-{% endcomment %}
 For more examples, take a look at the [SDK examples](examples.md).
 @z
 
 @x
 ## Unofficial libraries
 @y
-{% comment %}
-{% endcomment %}
 ## Unofficial libraries
 @z
 
@@ -537,8 +472,6 @@ There are a number of community supported libraries available for other
 languages. They have not been tested by Docker, so if you run into any issues,
 file them with the library maintainers.
 @y
-{% comment %}
-{% endcomment %}
 There are a number of community supported libraries available for other
 languages. They have not been tested by Docker, so if you run into any issues,
 file them with the library maintainers.
@@ -572,34 +505,6 @@ file them with the library maintainers.
 | Scala                 | [reactive-docker](https://github.com/almoehi/reactive-docker)               |
 | Swift                 | [docker-client-swift](https://github.com/valeriomazzeo/docker-client-swift) |
 @y
-{% comment %}
-| Language              | Library                                                                     |
-|:----------------------|:----------------------------------------------------------------------------|
-| C                     | [libdocker](https://github.com/danielsuo/libdocker)                         |
-| C#                    | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet)            |
-| C++                   | [lasote/docker_client](https://github.com/lasote/docker_client)             |
-| Clojure               | [clj-docker-client](https://github.com/into-docker/clj-docker-client)       |
-| Dart                  | [bwu_docker](https://github.com/bwu-dart/bwu_docker)                        |
-| Erlang                | [erldocker](https://github.com/proger/erldocker)                            |
-| Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin)    |
-| Groovy                | [docker-client](https://github.com/gesellix/docker-client)                  |
-| Haskell               | [docker-hs](https://github.com/denibertovic/docker-hs)                      |
-| HTML (Web Components) | [docker-elements](https://github.com/kapalhq/docker-elements)               |
-| Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
-| Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
-| Java                  | [docker-java-api](https://github.com/amihaiemil/docker-java-api)            |
-| Java                  | [jocker](https://github.com/ndeloof/jocker)                                 |
-| NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
-| NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
-| Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |
-| PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
-| Ruby                  | [docker-api](https://github.com/swipely/docker-api)                         |
-| Rust                  | [docker-rust](https://github.com/abh1nav/docker-rust)                       |
-| Rust                  | [shiplift](https://github.com/softprops/shiplift)                           |
-| Scala                 | [tugboat](https://github.com/softprops/tugboat)                             |
-| Scala                 | [reactive-docker](https://github.com/almoehi/reactive-docker)               |
-| Swift                 | [docker-client-swift](https://github.com/valeriomazzeo/docker-client-swift) |
-{% endcomment %}
 | 言語                  | ライブラリ                                                                  |
 |:----------------------|:----------------------------------------------------------------------------|
 | C                     | [libdocker](https://github.com/danielsuo/libdocker)                         |
