@@ -101,46 +101,10 @@ $ sudo sh get-docker.sh
 @z
 
 @x
-If you would like to use Docker as a non-root user, you should now consider
-adding your user to the "docker" group with something like:
+If you would like to use Docker as a non-root user please see the
+[post-installation steps for Linux](linux-postinstall.md#manage-docker-as-a-non-root-user).
 @y
-非 root ユーザーから Docker を利用したい場合、"docker" グループに属するユーザーを追加することを考えてください。
-たとえば以下のとおりです。
-@z
-
-@x
-```console
-$ sudo usermod -aG docker <your-user>
-```
-@y
-```console
-$ sudo usermod -aG docker <your-user>
-```
-@z
-
-@x
-Remember to log out and back in for this to take effect!
-@y
-いったんログアウトしてこのユーザーでのログインを行い、正しくログインできることを確認してください。
-@z
-
-@x
-> **Warning**:
->
-> Adding a user to the "docker" group grants them the ability to run containers
-> which can be used to obtain root privileges on the Docker host. Refer to
-> [Docker Daemon Attack Surface](/engine/security/#docker-daemon-attack-surface)
-> for more information.
-{:.warning}
-@y
-> **警告**
->
-> "docker" グループにユーザーを追加すれば、そのユーザーはコンテナーを実行できるようになります。
-> このユーザーは Docker ホスト上では root 権限を得るために利用されます。
-> 詳細については
-> [Docker Daemon Attack Surface](/engine/security/#docker-daemon-attack-surface)
-> を参照してください。
-{:.warning}
+非 root ユーザーから Docker を利用したい場合は [Linux インストール後の作業](linux-postinstall.md#manage-docker-as-a-non-root-user) を参照してください。
 @z
 
 @x
@@ -153,17 +117,6 @@ Docker Engine - Community がインストールされました。
 `DEB`ベースのディストリビューションでは Docker が自動的に開始されます。
 `RPM`ベースの場合は手動での実行が必要となるため、 `systemctl`か`service`のいずれか適当なものを実行します。
 上の出力メッセージに示されているように、デフォルトで非 root ユーザーは Docker コマンドを実行できません。
-@z
-
-@x
-> **Note**:
->
-> To install Docker without root privileges, see
-> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless/).
-@y
-> **メモ**
->
-> ルート権限なしに Docker をインストールする場合は [非ルートユーザーとして Docker デーモンを起動する (rootless モード)](/engine/security/rootless/) を参照してください。
 @z
 
 @x
