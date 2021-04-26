@@ -1,0 +1,413 @@
+<!-- Page generated 2021-04-26 19:23:45 +0900-->
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Use containers for development | Docker ドキュメント</title>
+  <meta name="description" content="Learn how to develop your application locally." />
+  <meta name="keywords" content="Java, local, development, run,">
+  <link rel="canonical" href="https://localhost:4000{{ site.baseurl }}/language/java/develop/" />
+
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/docs.docker.jp.onthefly/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico">
+  <meta property="og:image" content="/docs.docker.jp.onthefly/favicons/docs@2x.ico"/>
+  <meta name="theme-color" content="#2496ed" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><script defer src="/docs.docker.jp.onthefly/js/theme-switcher.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/anchorlinks.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/jquery.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/bootstrap.min.js"></script>
+  <script defer src="/docs.docker.jp.onthefly/js/docs.js"></script><script defer src="/docs.docker.jp.onthefly/js/search.js"></script><link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/docs.docker.jp.onthefly/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/docs.docker.jp.onthefly/css/style.css" id="pagestyle">
+
+  <!-- SEO stuff -->
+  <meta name="twitter:title" itemprop="title name" content="Use containers for development"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="" />
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:domain" content="matsuand.github.io"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:image:src" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker ドキュメント"/>
+  <meta property="og:title" content="Use containers for development" />
+  <meta property="og:description" content="Learn how to develop your application locally." />
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-04-26T19:23:45+09:00"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/language/java/develop/" />
+  <meta property="og:site_name" content="Docker ドキュメント" />
+  <meta property="article:published_time" itemprop="datePublished" content="2021-04-26T19:23:45+09:00"/>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Use containers for development","description":"Learn how to develop your application locally.","url":"https://docs.docker.com/language/java/develop/"}</script>
+  <!-- END SEO STUFF -->
+</head>
+<body class="colums">
+    <header>
+        <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/docs.docker.jp.onthefly/">
+                <img class="logo" src="/docs.docker.jp.onthefly/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+            </a>
+        </div>
+        <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+            <div class="logo-mobile">
+    <a href="/docs.docker.jp.onthefly/">
+        <img src="/docs.docker.jp.onthefly/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
+    </a>
+</div>
+<div class="search-form" id="search-div">
+    <form class="search-form form-inline" id="searchForm" action="/docs.docker.jp.onthefly/search/" method="get">
+        <label for="st-search-input" class="sr-only">検索</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="文書内検索" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
+        <!-- <button type="submit" class="search-submit btn btn-default">検索</button> -->
+    </form>
+</div>
+<div class="sidebar-toggle">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
+<div class="nav-container hidden-sm hidden-xs">
+    <div id="tabs">
+        <ul class="tabs jsTOCHorizontal"><li><a href="/docs.docker.jp.onthefly/" id="home">ホーム</a></li><li><a href="/docs.docker.jp.onthefly/get-started/overview/" id="guides">ガイド</a></li><li><a href="/docs.docker.jp.onthefly/engine/" id="manuals">製品マニュアル</a></li><li><a href="/docs.docker.jp.onthefly/reference/" id="reference">リファレンス</a></li><li><a href="/docs.docker.jp.onthefly/samples/" id="samples">サンプル</a></li></ul>
+    </div>
+    <div class="ctrl-right">
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="現在ページのメニュートグル"><i class="fa fa-indent" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section"><h1>Use containers for development</h1><p><em class="reading-time">読む時間の目安: 9 分</em></p><ul class="pagination">
+  <li><a href="/docs.docker.jp.onthefly/language/java/build-images/">イメージのビルド</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/java/run-containers/">コンテナーとしてイメージ実行</a></li>
+  <li class="active"><a href="/docs.docker.jp.onthefly/language/java/develop/">コンテナーの開発利用</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/java/run-tests/">テストの実行</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/java/configure-ci-cd/">CI/CD の設定</a></li>
+  <li><a href="/docs.docker.jp.onthefly/language/java/deploy/">アプリのデプロイ</a></li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Work through the steps to build an image and run it as a containerized application in <a href="/docs.docker.jp.onthefly/language/java/run-containers/">Run your image as a container</a>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.</p>
+
+<h2 id="run-a-database-in-a-container">Run a database in a container</h2>
+
+<p>First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.</p>
+
+<p>Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.</p>
+
+<p>Before we run MySQL in a container, we’ll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about <a href="/docs.docker.jp.onthefly/storage/volumes/">Using volumes</a> in our documentation.</p>
+
+<p>Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker volume create mysql
+<span class="gp">$</span><span class="w"> </span>docker volume create mysql_config
+</code></pre></div></div>
+
+<p>Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker network create mysqlnet
+</code></pre></div></div>
+
+<p>Now, let’s run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it locally.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">-d</span> <span class="nt">-v</span> mysql_data:/var/lib/mysql <span class="se">\</span>
+<span class="nt">-v</span> mysql_config:/etc/mysql/conf.d <span class="se">\</span>
+<span class="nt">--network</span> mysqlnet <span class="se">\</span>
+<span class="nt">--name</span> mysqlserver <span class="se">\</span>
+<span class="nt">-e</span> <span class="nv">MYSQL_USER</span><span class="o">=</span>petclinic <span class="nt">-e</span> <span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>petclinic <span class="se">\</span>
+<span class="nt">-e</span> <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root <span class="nt">-e</span> <span class="nv">MYSQL_DATABASE</span><span class="o">=</span>petclinic <span class="se">\</span>
+<span class="nt">-p</span> 3306:3306 mysql:8.0.23
+</code></pre></div></div>
+
+<p>Okay, now that we have a running MySQL, let’s update our Dockerfile to activate the MySQL Spring profile defined in the application and switch from an in-memory H2 database to the MySQL server we just created.</p>
+
+<p>We only need to add the MySQL profil as an argument to the <code class="language-plaintext highlighter-rouge">CMD</code> definition.</p>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CMD</span><span class="s"> ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]</span>
+</code></pre></div></div>
+
+<p>Let’s build our image</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker build <span class="nt">--tag</span> java-docker <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Now, let’s run our container. This time, we need to set the <code class="language-plaintext highlighter-rouge">MYSQL_URL</code> environment variable so that our application knows what connection string to use to access the database. We’ll do this using the <code class="language-plaintext highlighter-rouge">docker run</code> command.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-d</span> <span class="se">\</span>
+<span class="nt">--name</span> springboot-server <span class="se">\</span>
+<span class="nt">--network</span> mysqlnet <span class="se">\</span>
+<span class="nt">-e</span> <span class="nv">MYSQL_URL</span><span class="o">=</span>jdbc:mysql://mysqlserver/petclinic <span class="se">\</span>
+<span class="nt">-p</span> 8080:8080 java-docker
+</code></pre></div></div>
+
+<p>Let’s test that our application is connected to the database and is able to list Veterinarians.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl  <span class="nt">--request</span> GET <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost:8080/vets <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span>
+</code></pre></div></div>
+
+<p>You should receive the following json back from our service.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"vetList"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"James"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Carter"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Helen"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Leary"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"radiology"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Linda"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Douglas"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"dentistry"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"surgery"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Rafael"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Ortega"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"surgery"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Henry"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Stevens"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"radiology"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Sharon"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Jenkins"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}]}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="use-compose-to-develop-locally">Use Compose to develop locally</h2>
+
+<p>In this section, we’ll create a Compose file to start our <code class="language-plaintext highlighter-rouge">java-docker</code> and the MySQL database using a single command. We’ll also set up the Compose file to start the <code class="language-plaintext highlighter-rouge">java-docker</code> application in debug mode so that we can connect a debugger to the running Java process.</p>
+
+<p>Open the <code class="language-plaintext highlighter-rouge">petclinic</code> in your IDE or a text editor and create a new file named <code class="language-plaintext highlighter-rouge">docker-compose.dev.yml</code>. Copy and paste the following commands into the file.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">petclinic</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">8000:8000</span>
+      <span class="pi">-</span> <span class="s">8080:8080</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">SERVER_PORT=8080</span>
+      <span class="pi">-</span> <span class="s">MYSQL_URL=jdbc:mysql://mysqlserver/petclinic</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./:/app</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"</span>
+
+  <span class="na">mysqlserver</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:8.0.23</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">3306:3306</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">MYSQL_ROOT_PASSWORD=</span>
+      <span class="pi">-</span> <span class="s">MYSQL_ALLOW_EMPTY_PASSWORD=true</span>
+      <span class="pi">-</span> <span class="s">MYSQL_USER=petclinic</span>
+      <span class="pi">-</span> <span class="s">MYSQL_PASSWORD=petclinic</span>
+      <span class="pi">-</span> <span class="s">MYSQL_DATABASE=petclinic</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">mysql_data:/var/lib/mysql</span>
+      <span class="pi">-</span> <span class="s">mysql_config:/etc/mysql/conf.d</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">mysql_data</span><span class="pi">:</span>
+  <span class="na">mysql_config</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>This Compose file is super convenient as we do not have to type all the parameters to pass to the <code class="language-plaintext highlighter-rouge">docker run</code> command. We can declaratively do that using a Compose file.</p>
+
+<p>We expose port 8000 and declare the debug configuration for the JVM so that we can attach a debugger.</p>
+
+<p>Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use <code class="language-plaintext highlighter-rouge">mysqlserver</code> in our connection string. The reason we use <code class="language-plaintext highlighter-rouge">mysqlserver</code> is because that is what we’ve named our MySQL service as in the Compose file.</p>
+
+<p>Now, to start our application and to confirm that it is running properly.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker-compose <span class="nt">-f</span> docker-compose.dev.yml up <span class="nt">--build</span>
+</code></pre></div></div>
+
+<p>We pass the <code class="language-plaintext highlighter-rouge">--build</code> flag so Docker will compile our image and then starts the containers. You should see similar output if it runs successfully:</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/java/images/java-compose-output.png" alt="Java Compose output" /></p>
+
+<p>Now let’s test our API endpoint. Run the following curl commands:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl  <span class="nt">--request</span> GET <span class="se">\</span>
+  <span class="nt">--url</span> http://localhost:8080/vets <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'content-type: application/json'</span>
+</code></pre></div></div>
+
+<p>You should receive the following response:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"vetList"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"James"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Carter"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Helen"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Leary"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"radiology"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Linda"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Douglas"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"dentistry"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"surgery"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Rafael"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Ortega"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"surgery"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Henry"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Stevens"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"name"</span><span class="p">:</span><span class="s2">"radiology"</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"id"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="nl">"firstName"</span><span class="p">:</span><span class="s2">"Sharon"</span><span class="p">,</span><span class="nl">"lastName"</span><span class="p">:</span><span class="s2">"Jenkins"</span><span class="p">,</span><span class="nl">"specialties"</span><span class="p">:[],</span><span class="nl">"nrOfSpecialties"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"new"</span><span class="p">:</span><span class="kc">false</span><span class="p">}]}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="connect-a-debugger">Connect a Debugger</h2>
+
+<p>We’ll use the debugger that comes with the IntelliJ IDEA. You can use the community version of this IDE. Open your project in IntelliJ IDEA and then go to the <strong>Run</strong> menu &gt; <strong>Edit Configuration</strong>. Add a new Remote JVM Debug configuration similar to the following:</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/java/images/connect-debugger.png" alt="Java Connect a Debugger" /></p>
+
+<p>Let’s set a breakpoint</p>
+
+<p>Open the following file <code class="language-plaintext highlighter-rouge">src/main/java/org/springframework/samples/petclinic/vet/VetController.java</code> and add a breakpoint inside the <code class="language-plaintext highlighter-rouge">showResourcesVetList</code> function, line 54 for example.</p>
+
+<p>Start your debug session, <strong>Run</strong> menu and then <strong>Debug <em>NameOfYourConfiguration</em></strong></p>
+
+<p><img src="/docs.docker.jp.onthefly/language/java/images/debug-menu.png" alt="Debug menu" /></p>
+
+<p>You should now see the connection in the logs of your Compose application.</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/java/images/compose-logs.png" alt="Compose log file " /></p>
+
+<p>We can now call the server endpoint.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">--request</span> GET <span class="nt">--url</span> http://localhost:8080/vets
+</code></pre></div></div>
+
+<p>You should have seen the code break on line 54 and now you are able to use the debugger just like you would normally. You can also inspect and watch variables, set conditional breakpoints, view stack traces and a do bunch of other stuff.</p>
+
+<p><img src="/docs.docker.jp.onthefly/language/java/images/debugger-breakpoint.png" alt="Debugger code breakpoint" /></p>
+
+<p>You can also activate the live reload option provided by SpringBoot Dev Tools. Check out the <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools-remote" target="_blank" rel="noopener" class="_">SpringBoot documentation</a> for information on how to connect to a remote application.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to expose the debugging port and configure Spring Boot to live reload our changes.</p>
+
+<p>In the next module, we’ll take a look at how to run unit tests in Docker. See</p>
+
+<p><a href="/docs.docker.jp.onthefly/language/java/run-tests/" class="button primary-btn">Run your tests</a></p>
+
+<h2 id="feedback">Feedback</h2>
+
+<p>Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the <a href="https://github.com/docker/docker.github.io/issues/new?title=[Java%20docs%20feedback]" target="_blank" rel="noopener" class="_">Docker Docs</a> GitHub repository. Alternatively, <a href="https://github.com/docker/docker.github.io/pulls" target="_blank" rel="noopener" class="_">create a PR</a> to suggest updates.</p>
+<span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px"><a href="/docs.docker.jp.onthefly/search/?q=Java">Java</a>, <a href="/docs.docker.jp.onthefly/search/?q=local">local</a>, <a href="/docs.docker.jp.onthefly/search/?q=development">development</a>, <a href="/docs.docker.jp.onthefly/search/?q=run">run</a></span><div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div></section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/edit/master/src/language/java/develop.ch"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 本ページの編集</a></li><li><a href="https://github.com/matsuand/docs.docker.jp.onthefly/issues/new?body=File: [language/java/develop.ch](https://matsuand.github.io/docs.docker.jp.onthefly/language/java/develop/)" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> 変更リクエスト</a></li>
+                                        <li><div class="toggle-mode">
+  <div class="icon">
+      <i class="fa fa-sun-o" aria-hidden="true"></i>
+  </div>
+  <div class="toggle-switch">
+      <label class="switch">
+          <input type="checkbox" id="switch-style">
+          <span class="slider round"></span>
+      </label>
+  </div>
+  <div class="icon">
+      <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </div>
+</div>
+</li>
+                                    </ul>
+                                </div><div id="side-toc-title">本ページ内:</div>
+<ul id="my_toc" class="inline_toc">
+  <li><a href="#prerequisites" class="nomunge">Prerequisites</a></li>
+  <li><a href="#introduction" class="nomunge">Introduction</a></li>
+  <li><a href="#run-a-database-in-a-container" class="nomunge">Run a database in a container</a></li>
+  <li><a href="#use-compose-to-develop-locally" class="nomunge">Use Compose to develop locally</a></li>
+  <li><a href="#connect-a-debugger" class="nomunge">Connect a Debugger</a></li>
+  <li><a href="#next-steps" class="nomunge">Next steps</a></li>
+  <li><a href="#feedback" class="nomunge">Feedback</a></li>
+</ul>
+
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+          
+    <div class="container">
+        <div class="top_footer">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/why-docker">なぜ Docker なのか？</a></b></li>
+                        <li><a href="https://www.docker.com/what-container">コンテナーって何？</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/overview">製品</a></b></li>
+                        <li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+                        <li><a href="https://www.docker.com/products/docker-hub">Docker Hub</a></li>
+                        <li><a href="https://www.docker.com/roadmap">Docker 製品ロードマップ</a></li>
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">機能</a></b></li>
+                        <li><a href="https://www.docker.com/products/container-runtime">コンテナーランタイム</a></li>
+                        <li><a href="https://www.docker.com/products/developer-tools">開発ツール</a></li>
+                        <li><a href="https://www.docker.com/products/kubernetes">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/products/docker-desktop">開発者</a></b></li>
+                        <li><a href="https://www.docker.com/use-cases">利用例</a></li>
+                        <li><a href="https://www.docker.com/play-with-docker">Docker で遊ぶ</a></li>
+                        <li><a href="https://www.docker.com/docker-community">コミュニティ</a></li>
+                        <li><a href="https://www.docker.com/open-source">オープンソース</a></li>
+                        <li><a href="https://www.docker.com/community/docker-captains">Docker キャプテン</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <ul class="footer_links">
+                        <li><b><a href="https://www.docker.com/company" target="_blank" rel="noopener">会社</a></b></li>
+                        <li><a href="https://www.docker.com/company">概要</a></li>
+                        <li><a href="https://www.docker.com/blog/" target="_blank" rel="noopener">ブログ</a></li>
+                        <li><a href="https://www.docker.com/customers">顧客</a></li>
+                        <li><a href="https://www.docker.com/partners">パートナー</a></li>
+                        <li><a href="https://www.docker.com/company/newsroom">ニュースルーム</a></li>
+                        <li><a href="https://www.docker.com/careers">採用情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡先</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <nav class="footer_sub_nav">
+                    <ul class="menu">
+                        <li><a href="http://status.docker.com/">ステータス</a></li>
+                        <li><a href="https://www.docker.com/legal">法的情報</a></li>
+                        <li><a href="https://www.docker.com/company/contact">連絡</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="footer-copyright col-xs-12 col-md-8">
+                <p class="copyright">
+                    Copyright &copy; 2013-2021 Docker Inc. All rights reserved. </p>
+            </div>
+            <div class="footer_social_nav">
+                <ul class="nav-social">
+                    <li class="fa fa-twitter"><a href="http://twitter.com/docker">Twitter</a></li>
+                    <li class="fa fa-youtube"><a href="http://www.youtube.com/user/dockerrun">Youtube</a></li>
+                    <li class="fa fa-github"><a href="https://github.com/docker">GitHub</a></li>
+                    <li class="fa fa-linkedin"><a href="https://www.linkedin.com/company/docker">Linkedin</a></li>
+                    <li class="fa fa-facebook"><a href="https://www.facebook.com/docker.run">Facebook</a></li>
+                    <li class="fa fa-slideshare"><a href="https://www.slideshare.net/docker">Slideshare</a></li>
+                    <li class="fa fa-reddit"><a href="https://www.reddit.com/r/docker">Reddit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </footer>
+    <script>const pageURL = "/language/java/develop/";</script></body>
+</html>
