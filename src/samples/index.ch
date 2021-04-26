@@ -96,7 +96,6 @@ Docker を使って人気のあるソフトウェアを実行します。
 | [PostgreSQL](postgresql_service.md)                           | Run a Dockerized PostgreSQL instance.                     |
 | [Rails + PostgreSQL](rails.md)                                | Run a Dockerized Rails + PostgreSQL environment.          |
 | [Riak](running_riak_service.md)                               | Run a Dockerized Riak instance.                           |
-| [SSHd](running_ssh_service.md)                                | Run a Dockerized SSHd instance.                           |
 | [WordPress](wordpress.md)                                     | Quickstart: Compose and WordPress.                        |
 @y
 | サンプル                                                      | 内容説明                                                          |
@@ -109,7 +108,6 @@ Docker を使って人気のあるソフトウェアを実行します。
 | [PostgreSQL](postgresql_service.md)                           | Docker 化された PostgreSQL インスタンスを実行します。             |
 | [Rails + PostgreSQL](rails.md)                                | Docker 化された Rails および PostgreSQL 環境を実行します。        |
 | [Riak](running_riak_service.md)                               | Docker 化された Riak インスタンスを実行します。                   |
-| [SSHd](running_ssh_service.md)                                | Docker 化された SSHd インスタンスを実行します。                   |
 | [WordPress](wordpress.md)                                     | クイックスタート: Compose と WordPress。                          |
 @z
 
