@@ -1,4 +1,4 @@
-SUBDIRS = images nodejs
+SUBDIRS = images
 
 thisdir    = get-started
 origdir    = @abs_origdir@/$(thisdir)

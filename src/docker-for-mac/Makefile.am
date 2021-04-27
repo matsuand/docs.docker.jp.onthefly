@@ -15,7 +15,6 @@ ctie:
 	@$(MAKE) -C $(top_builddir)/$@ $@ >/dev/null
 
 bases = \
-	apple-m1           \
 	apple-silicon      \
 	docker-toolbox     \
 	edge-release-notes \

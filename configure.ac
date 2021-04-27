@@ -168,8 +168,6 @@ AC_CONFIG_FILES([Makefile
 		 src/go/Makefile
 		 src/get-started/Makefile
 		 src/get-started/images/Makefile
-		 src/get-started/nodejs/Makefile
-		 src/get-started/nodejs/images/Makefile
 		 src/images/Makefile
 		 src/js/Makefile
 		 src/kitematic/Makefile

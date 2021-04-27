@@ -52,11 +52,12 @@ Let us know if these commands are a higher priority for your usecases.
 @z
 
 @x
-* `compose build --memory`
-* `compose config --profiles`
+`compose build --memory`. This option is not yet supported by buildkit. The flag is currently supported but is hidden to avoid breaking existing Compose usage. It does not have any effect.
 @y
-* `compose build --memory`
-* `compose config --profiles`
+`compose build --memory`
+このオプションはまだ buildkit によってサポートされていません。
+このオプションは Compose においては今のところサポートされていますが、既存の Compose 利用に悪影響を及ぼさないように、このオプションは隠し機能とされています。
+これを利用しても何の効果も発生しません。
 @z
 
 @x
@@ -76,23 +77,11 @@ either because they are already deprecated in `docker-compose`, or because they 
 @z
 
 @x
-* `compose build --compress` Not relevant as the 'compose' command uses buildkit by default.
-* `compose build --force-rm` Not relevant as commpose command is using buildkit by default.
-* `compose build --no-rm` Not relevant as commpose command is using buildkit by default.
-* `compose build --parallel` Not relevant as commpose command is using buildkit by default.
 * `compose ps --filter KEY-VALUE` Not relevant due to its complicated usage with the `service` command and also because it is not documented properly in `docker-compose`.
-* `compose pull --parallel` Deprecated in docker-compose
-* `compose pull --no-parallel` Deprecated in docker-compose
 * `compose rm --all` Deprecated in docker-compose.
 * `compose scale` Deprecated in docker-compose (use `compose up --scale` instead)
 @y
-* `compose build --compress` 'compose' コマンドはデフォルトで buildkit を利用するため不適当。
-* `compose build --force-rm` 'compose' コマンドはデフォルトで buildkit を利用するため不適当。
-* `compose build --no-rm` 'compose' コマンドはデフォルトで buildkit を利用するため不適当。
-* `compose build --parallel` 'compose' コマンドはデフォルトで buildkit を利用するため不適当。
 * `compose ps --filter KEY-VALUE` `service`コマンドとともに利用するのが複雑であり`docker-compose`において説明が適切ではないため不適当。
-* `compose pull --parallel` docker-compose において非推奨。
-* `compose pull --no-parallel` docker-compose において非推奨。
 * `compose rm --all` docker-compose において非推奨。
 * `compose scale` docker-compose において非推奨。（代わりに`compose up --scale`を利用）
 @z
@@ -104,9 +93,7 @@ Global flags:
 @z
 
 @x
-* `compose --no-ansi` Deprecated in docker-compose.
 * `compose --compatibility` Deprecated in docker-compose.
 @y
-* `compose --no-ansi` docker-compose において非推奨。
 * `compose --compatibility` docker-compose において非推奨。
 @z
