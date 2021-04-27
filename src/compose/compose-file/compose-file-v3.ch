@@ -1560,7 +1560,6 @@ services:
 >   starting `web` - only until they have been started. If you need to wait
 >   for a service to be ready, see [Controlling startup order](../startup-order.md)
 >   for more on this problem and strategies for solving it.
-> - Version 3 no longer supports the `condition` form of `depends_on`.
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
@@ -1569,7 +1568,6 @@ services:
 >
 > - `depends_on`では`db`や`redis`が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに`web`を起動します。
 >   準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](../startup-order.md)にて示す内容と解決方法を確認してください。
-> - バージョン 3 では`depends_on`の`condition`形式はサポートされなくなりました。
 > - Compose ファイルバージョン 3 において`depends_on`オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 @z
 
