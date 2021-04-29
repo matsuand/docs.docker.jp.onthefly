@@ -74,11 +74,13 @@ various APIs, CLIs, and file formats.
 |:------------------------------------------------------|:---------------------------------------------------------------------------------------|
 | [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a daemon                      |
 | [Registry API](/registry/spec/api/)                   | Facilitates distribution of images to the engine                                       |
+| [Docker Hub API](/docker-hub/api/latest/)             | API to interact with Docker Hub                                                        | 
 @y
 | API                                                           | 内容説明                                                              |
 |:--------------------------------------------------------------|:----------------------------------------------------------------------|
 | [Engine API]({{ site.baseurl }}/engine/api/)                  | Docker の主要な API です。プログラムを通じてデーモンにアクセスします。|
 | [Registry API]({{ site.baseurl }}/registry/spec/api/)         | Docker Engine に対してイメージ配布の機能を提供します。                |
+| [Docker Hub API]({{ site.baseurl }}/docker-hub/api/latest/)   | Docker Hub とやりとりするための API。                                 |
 @z
 
 @x

@@ -23,10 +23,10 @@ scsss = \
 	_notes.scss         \
 	_overrides.scss     \
 	_perldoc.scss       \
+	_typography.scss    \
 	_variables.scss
 scss_mods = \
 	_landing    \
-	_typography \
 	_utilities
 ch_scsss = $(scss_mods:=.scssch) # ch means change files
 tr_scsss = $(scss_mods:=.scss)   # tr means translated files
@@ -49,10 +49,6 @@ $(publishdir)/_landing.scss: $(origdir)/_landing.scss _landing.scssch
 	@$(top_builddir)/$(CTIE) -m $@ $(origdir)/_landing.scss _landing.scssch >/dev/null
 _landing.scssch: $(srcdir)/_landing.scssch.in
 	@sed -e "s|__BASEURL__|$(publishbase)|g" $(srcdir)/_landing.scssch.in > $@
-
-$(publishdir)/_typography.scss: $(origdir)/_typography.scss $(srcdir)/_typography.scssch
-	@echo Processing _typography.scss...
-	@$(top_builddir)/$(CTIE) -m $@ $(origdir)/_typography.scss $(srcdir)/_typography.scssch >/dev/null
 
 $(publishdir)/_utilities.scss: $(origdir)/_utilities.scss _utilities.scssch
 	@echo Processing _utilities.scss...

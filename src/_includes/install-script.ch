@@ -102,9 +102,9 @@ $ sudo sh get-docker.sh
 
 @x
 If you would like to use Docker as a non-root user please see the
-[post-installation steps for Linux](linux-postinstall.md#manage-docker-as-a-non-root-user).
+[post-installation steps for Linux](../linux-postinstall#manage-docker-as-a-non-root-user).
 @y
-非 root ユーザーから Docker を利用したい場合は [Linux インストール後の作業](linux-postinstall.md#manage-docker-as-a-non-root-user) を参照してください。
+非 root ユーザーから Docker を利用したい場合は [Linux インストール後の作業](../linux-postinstall#manage-docker-as-a-non-root-user) を参照してください。
 @z
 
 @x
