@@ -92,12 +92,6 @@ Kubernetes サポートの有効化と、Docker コンテナーとして起動�
 @z
 
 @x
-To set Kubernetes as the default orchestrator, select **Deploy Docker Stacks to Kubernetes by default**.
-@y
-Kubernetes をデフォルトのオーケストレーターに設定するには **Deploy Docker Stacks to Kubernetes by default**（Docker スタックをデフォルトで Kubernetes にデプロイ）を選んでください。
-@z
-
-@x
 By default, Kubernetes containers are hidden from commands like `docker
 service ls`, because managing them manually is not supported. To see these internal containers, select **Show system containers (advanced)**. Most users do not need this option.
 @y

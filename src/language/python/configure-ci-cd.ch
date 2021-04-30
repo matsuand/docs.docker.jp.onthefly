@@ -585,7 +585,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
-        registry: ghcr.io
+          registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
 ```
@@ -596,7 +596,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
-        registry: ghcr.io
+          registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
 ```
