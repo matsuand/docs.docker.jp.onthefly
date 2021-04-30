@@ -56,6 +56,13 @@ You can also download the latest `buildx` binary from the
 @z
 
 @x
+## Set buildx as the default builder
+@y
+{: #set-buildx-as-the-default-builder }
+## デフォルトビルダーとして buildx を設定
+@z
+
+@x
 Running the command [`docker buildx install`](../engine/reference/commandline/buildx_install.md)
 sets up docker builder command as an alias to `docker buildx`. This results in
 the ability to have [`docker build`](../engine/reference/commandline/build.md)
@@ -192,7 +199,7 @@ while creating the new builder. After creating a new instance, you can manage it
 lifecycle using the [`docker buildx inspect`](../engine/reference/commandline/buildx_inspect.md),
 [`docker buildx stop`](../engine/reference/commandline/buildx_stop.md), and
 [`docker buildx rm`](../engine/reference/commandline/buildx_rm.md) commands.
-To list all available builders, use [`docker buildx ls`](../engine/reference/commandline/buildx_ls.md].
+To list all available builders, use [`docker buildx ls`](../engine/reference/commandline/buildx_ls.md).
 After creating a new builder you can also append new nodes to it.
 @y
 新たなビルダーの生成時にリモートノードを利用するには、`DOCKER_HOST`を設定するか、あるいはリモートコンテキスト名を指定します。
