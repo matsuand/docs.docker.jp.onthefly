@@ -58,7 +58,7 @@ What you'll see is that the files created in one container aren't available in a
 @z
 
 @x
-1. Start a `ubuntu` container that will create a file named `/data.txt` with a random number
+1. Start an `ubuntu` container that will create a file named `/data.txt` with a random number
    between 1 and 10000.
 @y
 1. `ubuntu`コンテナーを起動させます。

@@ -99,10 +99,9 @@ Dockerfile の記述方法の詳細は [Docker ユーザーガイド](../get-sta
 @z
 
 @x
-Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
-in a moment by `rails new`.
+Next, open an editor and create a bootstrap `Gemfile` which just loads Rails. This will be overwritten in a moment by `rails new`.
 @y
-次にブートストラップを行うファイル`Gemfile`を生成して、Rails をロードできるようにします。
+次にテキストエディターを開き、ブートストラップを行うファイル`Gemfile`を生成して、Rails をロードできるようにします。
 このファイルは`rails new`を行ったタイミングで書き換わります。
 @z
 
@@ -115,7 +114,7 @@ in a moment by `rails new`.
 @z
 
 @x
-Create an empty `Gemfile.lock` to build our `Dockerfile`.
+Create an empty `Gemfile.lock` file to build our `Dockerfile`.
 @y
 空のファイル`Gemfile.lock`を生成して`Dockerfile`のビルドができるようにします。
 @z
