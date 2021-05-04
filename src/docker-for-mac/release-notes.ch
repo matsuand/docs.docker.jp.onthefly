@@ -32,11 +32,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 3.3.1
-2021-04-15
+## Docker Desktop 3.3.2
+2021-05-03
 @y
-## Docker Desktop 3.3.1
-2021-04-15
+## Docker Desktop 3.3.2
+2021-05-03
 @z
 
 @x
@@ -45,6 +45,76 @@ This page contains information about the new features, improvements, known issue
 @y
 [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@z
+
+@x
+## Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+@y
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+@z
+
+@x
+## Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a bug with an Apple chip where the last byte in a network transfer was occasionally lost.
+- Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
+- Fixed a leak of ephemeral ports. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
+- Emulate a more modern Intel CPU with `qemu` on an Apple chip, for better image compatibility. See [docker/for-mac#5561](https://github.com/docker/for-mac/issues/5561).
+- Enable buildkit garbage collection by default.
+- Fixed a bug which blocked binding to port 123. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
+- Disable the HTTP and HTTPS transparent proxies when there is no upstream proxy set. Fixes [docker/for-mac#5572](https://github.com/docker/for-mac/issues/5572).
+- Revert to the HTTP and HTTPS proxy implementation used in 3.2.2.
+- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. The component was removed in 2.4.0.0 but we forgot to remove the setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
+@y
+- Apple チップにおいて、ネットワーク転送時の最終バイトがときどき欠損してしまうバグを修正しました。
+- Engine の`daemon.json`において定義された`metrics-port`が、アプリケーションの再起動をブロックしてしまうバグを修正しました。
+- エフェメラルポートの漏れを修正しました。
+  [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611) を Fix に。
+- Apple チップ上において`qemu`を利用したより最新の Intel CPU をエミュレートし、イメージの互換性を高めました。
+  [docker/for-mac#5561](https://github.com/docker/for-mac/issues/5561) を参照のこと。
+- デフォルトで buildkit のガーベージコレクションを有効にしました。
+- ポート 123 へのバインディングを阻止するバグを修正しました。
+  [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589) を Fixに。
+- HTTP および HTTPS 透過プロキシーにおいて、上流のプロキシーセットがない場合には無効としました。
+  [docker/for-mac#5572](https://github.com/docker/for-mac/issues/5572) を Fix に。
+- HTTP および HTTPS プロキシーの実装を 3.2.2 のものに戻しました。
+- Kubernetes の設定「Deploy Docker Stacks to Kubernetes by default」を削除しました。
+  コンポーネントはすでに 2.4.0.0 において削除していましたが、設定の削除を忘れていたものです。
+  [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966) を Fix に。
+@z
+
+@x
+## Docker Desktop 3.3.1
+2021-04-15
+@y
+## Docker Desktop 3.3.1
+2021-04-15
+@z
+
+@x
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@y
+[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 @z
 
 @x

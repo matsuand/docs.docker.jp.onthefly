@@ -32,6 +32,64 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+## Docker Desktop 3.3.2
+2021-05-03
+@y
+## Docker Desktop 3.3.2
+2021-05-03
+@z
+
+@x
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+@y
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+@z
+
+@x
+## Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+@y
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+@z
+
+@x
+## Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
+- Fixed a leak of ephemeral ports. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
+- Enable buildkit garbage collection by default.
+- Fixed a bug which blocked binding to port 123. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
+- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. The component was removed in 2.4.0.0 but we forgot to remove the setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
+@y
+- Engine の`daemon.json`において定義された`metrics-port`が、アプリケーションの再起動をブロックしてしまうバグを修正しました。
+- エフェメラルポートの漏れを修正しました。
+  [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611) を Fix に。
+- デフォルトで buildkit のガーベージコレクションを有効にしました。
+- ポート 123 へのバインディングを阻止するバグを修正しました。
+  [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589) を Fixに。
+- Kubernetes の設定「Deploy Docker Stacks to Kubernetes by default」を削除しました。
+  コンポーネントはすでに 2.4.0.0 において削除していましたが、設定の削除を忘れていたものです。
+  [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966) を Fix に。
+@z
+
+@x
 ## Docker Desktop 3.3.1
 2021-04-15
 @y
@@ -40,9 +98,9 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 @y
-> [ダウンロード](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [ダウンロード](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 @z
 
 @x
