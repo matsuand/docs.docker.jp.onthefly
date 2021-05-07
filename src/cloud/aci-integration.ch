@@ -284,22 +284,22 @@ docker --context myacicontext run -p 80:80 nginx
 @z
 
 @x
-Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an ngnix container:
+Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an Nginx container:
 @y
 もう 1 つは`docker context use`を使ってコンテキストを切り替える方法です。
 Docker コマンドの実行にあたって、対象とするコンテキストを ACI コンテキストとします。
-たとえば`docker context use`コマンドを利用して、nginx コンテナーをデプロイしてみます。
+たとえば`docker context use`コマンドを利用して、Nginx コンテナーをデプロイしてみます。
 @z
 
 @x
 ```console
 docker context use myacicontext
-docker run -p 80:80 nginx
+docker run -p 80:80 Nginx
 ```
 @y
 ```console
 docker context use myacicontext
-docker run -p 80:80 nginx
+docker run -p 80:80 Nginx
 ```
 @z
 
@@ -310,11 +310,11 @@ After you've switched to the `myacicontext` context, you can use `docker ps` to 
 @z
 
 @x
-In the case of the demonstration nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the nginx welcome page by browsing `http://52.154.202.35`.
+In the case of the demonstration Nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the Nginx welcome page by browsing `http://52.154.202.35`.
 @y
-上に示した nginx コンテナーの利用例において ps コマンドの出力結果にある "PORTS" カラムには、コンテナーが動作している IP アドレスとポートが表示されます。
+上に示した Nginx コンテナーの利用例において ps コマンドの出力結果にある「PORTS」カラムには、コンテナーが動作している IP アドレスとポートが表示されます。
 たとえば`52.154.202.35:80->80/tcp`のような表示です。
-そしてブラウザーから`http://52.154.202.35`にアクセスすれば、nginx の Welcome ページが開きます。
+そしてブラウザーから`http://52.154.202.35`にアクセスすれば、Nginx の Welcome ページが開きます。
 @z
 
 @x

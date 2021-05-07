@@ -97,10 +97,10 @@ Each instruction creates one layer:
 When you run an image and generate a container, you add a new _writable layer_
 (the "container layer") on top of the underlying layers. All changes made to
 the running container, such as writing new files, modifying existing files, and
-deleting files, are written to this thin writable container layer.
+deleting files, are written to this writable container layer.
 @y
-イメージを実行してコンテナーが生成されると、それまであったレイヤーの上に_書き込み可能なレイヤー（"コンテナーレイヤー"）が加えられます。
-実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、その薄くできあがった書き込みレイヤーに書き込まれます。
+イメージを実行してコンテナーが生成されると、それまであったレイヤーの上に **書き込み可能なレイヤー**（「コンテナーレイヤー」）が加えられます。
+実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、この書き込みレイヤーに書き込まれます。
 @z
 
 @x

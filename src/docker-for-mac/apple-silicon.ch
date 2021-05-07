@@ -235,7 +235,7 @@ We expect to fix this in a future release.
 @z
 
 @x
-Your feedback is important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues)repository.
+Your feedback is important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
 @y
 みなさんからのフィードバックが重要と考えています。
 GitHub リポジトリ [Docker Desktop for Mac](https://github.com/docker/for-mac/issues) に issue を生成してフィードバックをお寄せください。

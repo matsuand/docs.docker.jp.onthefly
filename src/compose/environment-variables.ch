@@ -82,13 +82,13 @@ Compose ファイルが参照する環境変数、あるいは Compose の設定
 @z
 
 @x
-  - Starting with `+v1.28`, `.env.` file is placed at the base of the project directory 
+  - Starting with `+v1.28`, `.env` file is placed at the base of the project directory 
   - For previous versions, it is placed in the current working directory where the
   Docker Compose command is executed unless a `--project-directory` is defined which
   overrides the path for the `.env` file. This inconsistency is addressed
   in `+v1.28` by limiting the filepath to the project directory.
 @y
-  - Compose バージョン`v1.28`以降は、`.env.`ファイルはプロジェクトのベースディレクトリに置くようになりました。
+  - Compose バージョン`v1.28`以降は、`.env`ファイルはプロジェクトのベースディレクトリに置くようになりました。
   - それ以前のバージョンの場合は、Docker Compose コマンドが実行されたカレントワーキングディレクトリに置きます。
     ただし`--project-directory`を指定すれば`.env`ファイルへのパスをオーバーライドすることができます。
     この不整合は、`v1.28`以降においてそのファイルパスをプロジェクトディレクトリに置くことで解消されます。

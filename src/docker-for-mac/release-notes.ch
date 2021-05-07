@@ -32,11 +32,11 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
-## Docker Desktop 3.3.2
-2021-05-03
+## Docker Desktop 3.3.3
+2021-05-06
 @y
-## Docker Desktop 3.3.2
-2021-05-03
+## Docker Desktop 3.3.3
+2021-05-06
 @z
 
 @x
@@ -45,6 +45,50 @@ This page contains information about the new features, improvements, known issue
 @y
 [Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@z
+
+@x
+## Upgrades
+@y
+{: #upgrades }
+### アップグレード
+@z
+
+@x
+- [Snyk v1.563.0](https://github.com/snyk/snyk/releases/tag/v1.563.0)
+- [Docker Scan v0.8.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.8.0)
+@y
+- [Snyk v1.563.0](https://github.com/snyk/snyk/releases/tag/v1.563.0)
+- [Docker Scan v0.8.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.8.0)
+@z
+
+@x
+## Bug fixes and minor changes
+@y
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+@z
+
+@x
+- Fixed the diagnostics failing to upload from the Troubleshoot screen.
+@y
+- Troubleshoot 画面にて診断情報のアップロードに失敗するのを修正しました。
+@z
+
+@x
+## Docker Desktop 3.3.2
+2021-05-03
+@y
+## Docker Desktop 3.3.2
+2021-05-03
+@z
+
+@x
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@y
+[Intel チップの Mac](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Apple チップの Mac](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 @z
 
 @x

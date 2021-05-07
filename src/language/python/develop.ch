@@ -118,10 +118,13 @@ $ docker network create mysqlnet
 
 @x
 Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
+In the following command, option `-v` is for starting the container with volumes. For more information, see [Docker volumes](../../storage/volumes.md).
 @y
 コンテナーとして MySQL を実行します。
 そして上で生成したボリュームとネットワークをこれに結びつけます。
 Docker はイメージを Docker Hub からプルして、ローカル環境において実行します。
+以下のコマンドにおいては`-v`オプションの指定により、ボリュームを使ってコンテナーを起動します。
+詳しくは [Docker ボリューム](../../storage/volumes.md) を参照してください。
 @z
 
 @x
@@ -489,9 +492,9 @@ You should receive the following JSON back from our service.
 @z
 
 @x
-In this section, we’ll create a Compose file to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
+In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
 @y
-ここでは Compose ファイルを生成して、1 つのコマンド実行から python-docker と MySQL を起動できるようにします。
+ここでは [Compose ファイル](../../compose/index.md) を生成して、1 つのコマンド実行から python-docker と MySQL を起動できるようにします。
 なお`python-docker`はデバッグモードで起動するような Compose ファイルとして、稼働するノードプロセスに対してデバッガーを接続できるようにしておきます。
 @z
 

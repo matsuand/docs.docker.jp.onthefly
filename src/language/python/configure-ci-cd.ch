@@ -54,7 +54,7 @@ This guide contains instructions on how to:
 @z
 
 @x
-Let’s get started. This guide uses a simple Docker project as an example. The [SimpleWhaleDemo](https://github.com/usha-mandya/SimpleWhaleDemo){:target="_blank" rel="noopener" class="_"} repository contains an Ngnix alpine image. You can either clone this repository, or use your own Docker project.
+Let’s get started. This guide uses a simple Docker project as an example. The [SimpleWhaleDemo](https://github.com/usha-mandya/SimpleWhaleDemo){:target="_blank" rel="noopener" class="_"} repository contains an Nginx alpine image. You can either clone this repository, or use your own Docker project.
 @y
 でははじめていきます。
 本ガイドでは例として簡単な Docker プロジェクトを使います。
