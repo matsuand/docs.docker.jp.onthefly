@@ -25,7 +25,6 @@ This table shows which Compose file versions support specific Docker releases.
 |      2.2                |       1.13.0+             |
 |      2.1                |       1.12.0+             |
 |      2.0                |       1.10.0+             |
-|      1.0                |       1.9.1.+             |
 @y
 | **Compose ファイルフォーマット** | **Docker Engine リリース** |
 |  -------------------    |    ------------------     |
@@ -44,7 +43,6 @@ This table shows which Compose file versions support specific Docker releases.
 |      2.2                |       1.13.0 以上         |
 |      2.1                |       1.12.0 以上         |
 |      2.0                |       1.10.0 以上         |
-|      1.0                |       1.9.1. 以上         |
 @z
 
 @x

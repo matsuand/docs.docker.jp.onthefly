@@ -50,11 +50,11 @@ Compose 仕様はファイルフォーマット 2.x と 3.x を統合したも�
 @z
 
 @x
-There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. The
+There are several versions of the Compose file format – 2, 2.x, and 3.x. The
 table below provides a snapshot of various versions. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 @y
-Compose ファイルフォーマットは 1、2、2.x、3.x と複数バージョンがあります。
+Compose ファイルフォーマットは 2、2.x、3.x と複数バージョンがあります。
 以下に示す表においてこれをわかりやすく示します。
 各バージョンに含まれる内容やアップグレード方法についての詳細は **[バージョンとアップグレード](compose-versioning.md)** を参照してください。
 @z
