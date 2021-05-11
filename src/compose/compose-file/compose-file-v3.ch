@@ -1497,7 +1497,7 @@ behaviors:
   example, `db` and `redis` are started before `web`.
 @y
 - `docker-compose up`は依存関係の順にサービスを起動します。
-  以下の例において`db`と`redis`は`web`の前に起動します。
+  以下の例において`db`と`redis`は`web`の前に起動されます。
 @z
 
 @x
