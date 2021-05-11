@@ -37,9 +37,9 @@ Docker Desktop for Mac は以下からダウンロードします。
 @z
 
 @x
-By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
+{% include eula.md %}
 @y
-Docker Desktop のダウンロードによって、[Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} と [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"} に同意したことになります。
+{% include eula.md %}
 @z
 
 @x
@@ -267,31 +267,16 @@ and select **Learn**.
 @z
 
 @x
-## Automatic updates
+## Updates
 @y
-{: #automatic-updates }
-## 自動アップデート
+{: #updates }
+## アップデート
 @z
 
 @x
-Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
+{% include desktop-update.md %}
 @y
-Docker Desktop 3.0.0 から Docker Desktop のアップデータが自動的に行われるようになりました。
-その場合には旧バージョンからのデルタアップデートが行われます。
-@z
-
-@x
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. You can start downloading the update in the background whenever it is convenient for you.
-@y
-アップデートが利用可能になると Docker Desktop は、最新バージョンの入手が可能であることを示すアイコンを表示します。
-アップデートはお好きなときに開始すれば、バックグラウンドでダウンロードが始まります。
-@z
-
-@x
-After downloading the update, all you need to do is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
-@y
-アップデートのダウンロードを終えたら、Docker メニューの **Update and restart**（アップデートと再起動）をクリックするだけです。
-これにより最新アップデートがインストールされ、アップデートを有効にするために Docker Desktop が再起動します。
+{% include desktop-update.md %}
 @z
 
 @x
@@ -317,14 +302,14 @@ Mac から Docker Desktop をアンインストールするには以下を実行
 
 @x
 > **Important**
-> 
+>
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker related data local to the machine, and removes the files generated
 > by the application. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
 @y
 > **重要**
-> 
+>
 > Docker Desktop をアンインストールすると、ローカルにある Docker コンテナー、イメージ、ボリューム、その他 Docker 関連データは破棄され、アプリケーションが生成したファイルは削除されます。
 > アンインストールによって大切なデータを失わないように、[バックアップとリストア](../desktop/backup-and-restore.md) の手順を確認してください。
 @z

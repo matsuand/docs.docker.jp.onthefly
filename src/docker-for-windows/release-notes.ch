@@ -32,6 +32,12 @@ This page contains information about the new features, improvements, known issue
 @z
 
 @x
+{% include eula.md %}
+@y
+{% include eula.md %}
+@z
+
+@x
 ## Docker Desktop 3.3.3
 2021-05-06
 @y

@@ -17,12 +17,15 @@ ctie:
 bases = \
 	api-version-matrix   \
 	cli                  \
+	desktop-update       \
+	eula                 \
 	experimental         \
 	experimental-feature \
 	github-pr            \
 	install-script       \
 	registry
 htmlbases = \
+	breadcrumbs      \
 	footer           \
 	head             \
 	header           \

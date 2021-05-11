@@ -20,11 +20,9 @@ bases = \
 	docker_app_inspect \
 	docker_app_install \
 	docker_app_list \
-	docker_app_merge \
 	docker_app_pull \
 	docker_app_push \
 	docker_app_render \
-	docker_app_split \
 	docker_app_status \
 	docker_app_uninstall \
 	docker_app_upgrade \

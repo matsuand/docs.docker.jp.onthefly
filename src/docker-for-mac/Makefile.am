@@ -20,7 +20,6 @@ bases = \
 	edge-release-notes \
 	index              \
 	install            \
-	multi-arch         \
 	networking         \
 	release-notes      \
 	space              \

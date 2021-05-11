@@ -21,11 +21,9 @@ bases = \
 	app_inspect \
 	app_install \
 	app_list \
-	app_merge \
 	app_pull \
 	app_push \
 	app_render \
-	app_split \
 	app_status \
 	app_uninstall \
 	app_upgrade \

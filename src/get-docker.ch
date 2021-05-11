@@ -31,14 +31,6 @@ the same ways you manage your applications. By taking advantage of Docker’s
 methodologies for shipping, testing, and deploying code quickly, you can
 significantly reduce the delay between writing code and running it in production.
 @y
-{% comment %}
-Docker is an open platform for developing, shipping, and running applications.
-Docker enables you to separate your applications from your infrastructure so you
-can deliver software quickly. With Docker, you can manage your infrastructure in
-the same ways you manage your applications. By taking advantage of Docker’s
-methodologies for shipping, testing, and deploying code quickly, you can
-significantly reduce the delay between writing code and running it in production.
-{% endcomment %}
 Docker はアプリケーションの開発、導入、実行を行うためのオープンなプラットフォームです。
 Docker を使えば、アプリケーションをインフラストラクチャーから切り離すことができるため、ソフトウエアをすばやく提供することができます。
 Docker であれば、アプリケーションを管理する手法をそのまま、インフラストラクチャーの管理にも適用できます。
@@ -49,10 +41,6 @@ Docker が採用する方法を最大限利用して、アプリケーション�
 You can download and install Docker on multiple platforms. Refer to the following
 section and choose the best installation path for you.
 @y
-{% comment %}
-You can download and install Docker on multiple platforms. Refer to the following
-section and choose the best installation path for you.
-{% endcomment %}
 Docker はさまざまなプラットフォームにダウンロードしインストールすることができます。
 以下の説明の中から、自分に合うインストール手順をお選びください。
 @z
@@ -94,4 +82,10 @@ Docker はさまざまなプラットフォームにダウンロードしイン�
 @y
                 <h2 id="docker-for-linux"><a href="{{ site.baseurl }}/engine/install/">Docker for Linux</a></h2>
                 <p>インストール済みの Linux ディストリビューション上に Docker をインストールします。</p>
+@z
+
+@x
+{% include eula.md %}
+@y
+{% include eula.md %}
 @z

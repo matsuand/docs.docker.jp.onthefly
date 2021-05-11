@@ -35,9 +35,9 @@ Docker Desktop for Windows へようこそ。
 @z
 
 @x
-By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
+{% include eula.md %}
 @y
-Docker Desktop をダウンロードすると、[Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} と [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"} の各規約に同意したものとなります。
+{% include eula.md %}
 @z
 
 @x
@@ -354,31 +354,16 @@ If you would like to rerun the tutorial, go to the Docker Desktop menu and selec
 @z
 
 @x
-## Automatic updates
+## Updates
 @y
-## 自動アップデート
-{: #automatic-updates }
+{: #updates }
+## アップデート
 @z
 
 @x
-Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
+{% include desktop-update.md %}
 @y
-Docker Desktop 3.0.0 から Docker Desktop のアップデータが自動的に行われるようになりました。
-その場合には旧バージョンからのデルタアップデートが行われます。
-@z
-
-@x
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. Whenever convenient, you can start the download of the update in the background.
-@y
-アップデートが利用可能になると Docker Desktop は、最新バージョンの入手が可能であることを示すアイコンを表示します。
-アップデートはお好きなときに開始すれば、バックグラウンドでダウンロードが始まります。
-@z
-
-@x
-When the download finishes, all you need to do is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
-@y
-アップデートのダウンロードを終えたら、Docker メニューの **Update and restart**（アップデートと再起動）をクリックするだけです。
-これにより最新アップデートがインストールされ、アップデートを有効にするために Docker Desktop が再起動します。
+{% include desktop-update.md %}
 @z
 
 @x

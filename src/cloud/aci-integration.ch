@@ -293,13 +293,13 @@ Docker コマンドの実行にあたって、対象とするコンテキスト�
 
 @x
 ```console
-docker context use myacicontext
-docker run -p 80:80 Nginx
+$ docker context use myacicontext
+$ docker run -p 80:80 nginx
 ```
 @y
 ```console
-docker context use myacicontext
-docker run -p 80:80 Nginx
+$ docker context use myacicontext
+$ docker run -p 80:80 nginx
 ```
 @z
 

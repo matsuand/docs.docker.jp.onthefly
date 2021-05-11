@@ -709,7 +709,7 @@ Server: Docker Engine - Community
 @z
 
 @x
-Docker Desktop includes a standalone Kubernetes server that runs on your Windows machince, so
+Docker Desktop includes a standalone Kubernetes server that runs on your Windows machine, so
 that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 @y
 Docker Desktop には、Windows マシン上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。

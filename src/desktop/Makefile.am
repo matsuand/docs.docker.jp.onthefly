@@ -20,6 +20,7 @@ bases = \
 	faqs               \
 	index              \
 	kubernetes         \
+	multi-arch         \
 	opensource
 
 ch_mds = $(bases:=.ch) # ch means change files

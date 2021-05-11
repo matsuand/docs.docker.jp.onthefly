@@ -455,8 +455,8 @@ services:
   # ...
 networks:
   default:
-    external:
-      name: my-pre-existing-network
+    external: true
+    name: my-pre-existing-network
 ```
 @y
 ```yaml
@@ -464,8 +464,8 @@ services:
   # ...
 networks:
   default:
-    external:
-      name: my-pre-existing-network
+    external: true
+    name: my-pre-existing-network
 ```
 @z
 

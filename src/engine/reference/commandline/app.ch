@@ -6,6 +6,9 @@
 datafolder: docker-app
 datafile: docker_app
 title: docker app
+redirect_from:
+  - /engine/reference/commandline/app_merge/
+  - /engine/reference/commandline/app_split/
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
@@ -16,6 +19,9 @@ in the source repository on GitHub:
 datafolder: docker-app
 datafile: docker_app
 title: docker app
+redirect_from:
+  - /engine/reference/commandline/app_merge/
+  - /engine/reference/commandline/app_split/
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

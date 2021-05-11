@@ -14,7 +14,6 @@ all: tgtdir $(srcs_with_prefix)
 images = \
 	changelog-placeholder.png \
 	console.png \
-	desktop-buildx-version.png \
 	docker-app-drag.png \
 	docker-app-in-apps.png \
 	docker-for-mac-and-toolbox.png \
@@ -25,6 +24,7 @@ images = \
 	hello-world-nginx.png \
 	localhost-arm.png \
 	proxy-settings.png \
+	snooze-update.png \
 	toolbox-install.png \
 	whale-in-menu-bar.png \
 	whale-x.png

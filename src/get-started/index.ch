@@ -195,6 +195,12 @@ Docker Desktop のインストール手順については [Docker Desktop の Ma
 @z
 
 @x
+{% include eula.md %}
+@y
+{% include eula.md %}
+@z
+
+@x
 ## Start the tutorial
 @y
 {: #start-the-tutorial }
