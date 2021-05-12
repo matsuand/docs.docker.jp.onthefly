@@ -71,7 +71,6 @@ tgtdir:
 Makefile.sub: $(top_srcdir)/bin/ctiemake.sh $(top_builddir)/config.log
 	@$(top_srcdir)/bin/ctiemake.sh $(publishdir) $(srcs)
 	@sed -i -e "/glossary\.md\:/s|$$|& $(publishdir)/_data/glossary.yaml|" $@
-	@sed -i -e "/glossary\.md\:/s|$$|& $(publishdir)/js/menu.js|" $@
 
 -include copyfiles.sub
 copyfiles.sub: $(top_srcdir)/bin/copymake.sh $(top_builddir)/config.log
