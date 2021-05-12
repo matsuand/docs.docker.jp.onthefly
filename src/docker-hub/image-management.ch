@@ -32,7 +32,7 @@ The **Advanced Image Management** dashboard allows you to manage Docker images a
 @z
 
 @x
-The Advanced Image Management dashboard provides a snapshot of your existing images and allows you to view, sort and filter images by tags, activity status and date, and contains options to clean up your workspace by deleting images that are no longer required.
+The Advanced Image Management dashboard provides a snapshot of your existing images and allows you to view, sort, and filter images by tags, activity status, and date, and contains options to clean up your workspace by deleting images that are no longer required.
 @y
 拡張イメージ管理ダッシュボードでは、既存イメージのスナップショットを提供し、イメージの一覧表示や並べ替えや、タグ、アクティビティ状態、日付などによるフィルター検索を可能にします。
 また作業スペースをすっきりさせるために、不要なイメージを削除する機能もあります。
@@ -82,7 +82,7 @@ To access the  Advanced Image Management dashboard:
 @x
 1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. Click **Repositories** from the main menu and select a repository from the list. This displays a banner indicating the number of inactive images in the repository.
-3. Click **View inactive images**. This displays the Advanced Image Management dashboard. It lists images in your repository and allows you to sort and filter images by activity status and last activity date.
+3. Click **View inactive images**. This displays the Advanced Image Management dashboard. It lists images in your repository and allows you to sort and filter images by tags, activity status, and the last activity date.
 @y
 1. [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} にログインします。
 2. メインメニューから **Repositories**（リポジトリ）をクリックして、一覧の中からリポジトリを 1 つ選択します。
@@ -90,7 +90,7 @@ To access the  Advanced Image Management dashboard:
 3. **View inactive images**（非アクティブイメージの表示）をクリックします。
    すると拡張イメージ管理ダッシュボードが開きます。
    ここにはリポジトリ内のイメージが一覧表示されます。
-   この一覧では並べ替えを行ったり、アクティビティ状態や最終アクティビティ日付を使ってフィルター検索を行ったりすることができます。
+   この一覧では並べ替えを行ったり、タグ、アクティビティ状態、最終アクティビティ日付を使ってフィルター検索を行うことができます。
 @z
 
 @x
