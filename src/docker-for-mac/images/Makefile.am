@@ -16,8 +16,6 @@ images = \
 	console.png \
 	docker-app-drag.png \
 	docker-app-in-apps.png \
-	docker-for-mac-and-toolbox.png \
-	docker-for-mac-install.png \
 	diagnose-support.png \
 	docker-tutorial-mac.png \
 	desktop-mac-2fa.png \
@@ -25,7 +23,6 @@ images = \
 	localhost-arm.png \
 	proxy-settings.png \
 	snooze-update.png \
-	toolbox-install.png \
 	whale-in-menu-bar.png \
 	whale-x.png
 

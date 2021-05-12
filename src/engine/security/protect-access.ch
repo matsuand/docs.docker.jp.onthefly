@@ -42,21 +42,21 @@ SSH や TLS（HTTPS）ソケットを用いた通信を行うこともできま�
 > **Note**
 >
 > The given `USERNAME` must have permissions to access the docker socket on the
-> remote machine. Refer to [manage Docker as a non-root user](../../install/linux-postinstall/#manage-docker-as-a-non-root-user)
+> remote machine. Refer to [manage Docker as a non-root user](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 > to learn how to give a non-root user access to the docker socket.
 @y
 > **メモ**
 >
 > 説明に用いる`USERNAME`は、リモートマシン上において Docker ソケットにアクセスする権限を持っていなければなりません。
-> root ではないユーザーにより Docker ソケットへアクセスする方法に関しては [root ユーザー以外で Docker を管理する](../../install/linux-postinstall/#manage-docker-as-a-non-root-user) を参照してください。
+> root ではないユーザーにより Docker ソケットへアクセスする方法に関しては [root ユーザー以外で Docker を管理する](../install/linux-postinstall.md#manage-docker-as-a-non-root-user) を参照してください。
 @z
 
 @x
-The following example creates a [`docker context`](../../context/working-with-contexts.md)
+The following example creates a [`docker context`](../context/working-with-contexts.md)
 to connect with a remote `dockerd` daemon on `host1.example.com` using SSH, and
 as the `docker-user` user on the remote machine:
 @y
-以下の例では [`docker context`](../../context/working-with-contexts.md) を生成し、リモートホスト`host1.example.com`上の`dockerd`デーモンに対して SSH を使って接続します。
+以下の例では [`docker context`](../context/working-with-contexts.md) を生成し、リモートホスト`host1.example.com`上の`dockerd`デーモンに対して SSH を使って接続します。
 その際にはリモートホスト上のユーザー`docker-user`によりアクセスします。
 @z
 
@@ -243,57 +243,59 @@ First, on the **Docker daemon's host machine**, generate CA private and public k
 @z
 
 @x
-    $ openssl genrsa -aes256 -out ca-key.pem 4096
-    Generating RSA private key, 4096 bit long modulus
-    ............................................................................................................................................................................................++
-    ........++
-    e is 65537 (0x10001)
-    Enter pass phrase for ca-key.pem:
-    Verifying - Enter pass phrase for ca-key.pem:
-@y
-    $ openssl genrsa -aes256 -out ca-key.pem 4096
-    Generating RSA private key, 4096 bit long modulus
-    ............................................................................................................................................................................................++
-    ........++
-    e is 65537 (0x10001)
-    Enter pass phrase for ca-key.pem:
-    Verifying - Enter pass phrase for ca-key.pem:
-@z
+```console
+$ openssl genrsa -aes256 -out ca-key.pem 4096
+Generating RSA private key, 4096 bit long modulus
+..............................................................................++
+........++
+e is 65537 (0x10001)
+Enter pass phrase for ca-key.pem:
+Verifying - Enter pass phrase for ca-key.pem:
 
-@x
-    $ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
-    Enter pass phrase for ca-key.pem:
-    You are about to be asked to enter information that will be incorporated
-    into your certificate request.
-    What you are about to enter is what is called a Distinguished Name or a DN.
-    There are quite a few fields but you can leave some blank
-    For some fields there will be a default value,
-    If you enter '.', the field will be left blank.
-    -----
-    Country Name (2 letter code) [AU]:
-    State or Province Name (full name) [Some-State]:Queensland
-    Locality Name (eg, city) []:Brisbane
-    Organization Name (eg, company) [Internet Widgits Pty Ltd]:Docker Inc
-    Organizational Unit Name (eg, section) []:Sales
-    Common Name (e.g. server FQDN or YOUR name) []:$HOST
-    Email Address []:Sven@home.org.au
+$ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
+Enter pass phrase for ca-key.pem:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:Queensland
+Locality Name (eg, city) []:Brisbane
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Docker Inc
+Organizational Unit Name (eg, section) []:Sales
+Common Name (e.g. server FQDN or YOUR name) []:$HOST
+Email Address []:Sven@home.org.au
+```
 @y
-    $ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
-    Enter pass phrase for ca-key.pem:
-    You are about to be asked to enter information that will be incorporated
-    into your certificate request.
-    What you are about to enter is what is called a Distinguished Name or a DN.
-    There are quite a few fields but you can leave some blank
-    For some fields there will be a default value,
-    If you enter '.', the field will be left blank.
-    -----
-    Country Name (2 letter code) [AU]:
-    State or Province Name (full name) [Some-State]:Queensland
-    Locality Name (eg, city) []:Brisbane
-    Organization Name (eg, company) [Internet Widgits Pty Ltd]:Docker Inc
-    Organizational Unit Name (eg, section) []:Sales
-    Common Name (e.g. server FQDN or YOUR name) []:$HOST
-    Email Address []:Sven@home.org.au
+```console
+$ openssl genrsa -aes256 -out ca-key.pem 4096
+Generating RSA private key, 4096 bit long modulus
+..............................................................................++
+........++
+e is 65537 (0x10001)
+Enter pass phrase for ca-key.pem:
+Verifying - Enter pass phrase for ca-key.pem:
+
+$ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
+Enter pass phrase for ca-key.pem:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:Queensland
+Locality Name (eg, city) []:Brisbane
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Docker Inc
+Organizational Unit Name (eg, section) []:Sales
+Common Name (e.g. server FQDN or YOUR name) []:$HOST
+Email Address []:Sven@home.org.au
+```
 @z
 
 @x
@@ -309,28 +311,31 @@ CA を生成したので、次にサーバー鍵と証明書署名要求（certi
 > **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 @y
-> **メモ**:
+> **メモ**
+>
 > 以下に示す例において`$HOST`と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。
 @z
 
 @x
-    $ openssl genrsa -out server-key.pem 4096
-    Generating RSA private key, 4096 bit long modulus
-    .....................................................................++
-    .................................................................................................++
-    e is 65537 (0x10001)
-@y
-    $ openssl genrsa -out server-key.pem 4096
-    Generating RSA private key, 4096 bit long modulus
-    .....................................................................++
-    .................................................................................................++
-    e is 65537 (0x10001)
-@z
+```console
+$ openssl genrsa -out server-key.pem 4096
+Generating RSA private key, 4096 bit long modulus
+.....................................................................++
+.................................................................................................++
+e is 65537 (0x10001)
 
-@x
-    $ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
+$ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
+```
 @y
-    $ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
+```console
+$ openssl genrsa -out server-key.pem 4096
+Generating RSA private key, 4096 bit long modulus
+.....................................................................++
+.................................................................................................++
+e is 65537 (0x10001)
+
+$ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
+```
 @z
 
 @x
@@ -349,9 +354,13 @@ TLS 接続は DNS 名だけでなく IP アドレスを使っても行われる�
 @z
 
 @x
-    $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
+```console
+$ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
+```
 @y
-    $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
+```console
+$ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
+```
 @z
 
 @x
@@ -374,19 +383,23 @@ Now, generate the signed certificate:
 @z
 
 @x
-    $ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
-      -CAcreateserial -out server-cert.pem -extfile extfile.cnf
-    Signature ok
-    subject=/CN=your.host.com
-    Getting CA Private Key
-    Enter pass phrase for ca-key.pem:
+```console
+$ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
+  -CAcreateserial -out server-cert.pem -extfile extfile.cnf
+Signature ok
+subject=/CN=your.host.com
+Getting CA Private Key
+Enter pass phrase for ca-key.pem:
+```
 @y
-    $ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
-      -CAcreateserial -out server-cert.pem -extfile extfile.cnf
-    Signature ok
-    subject=/CN=your.host.com
-    Getting CA Private Key
-    Enter pass phrase for ca-key.pem:
+```console
+$ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
+  -CAcreateserial -out server-cert.pem -extfile extfile.cnf
+Signature ok
+subject=/CN=your.host.com
+Getting CA Private Key
+Enter pass phrase for ca-key.pem:
+```
 @z
 
 @x
@@ -415,23 +428,25 @@ request:
 @z
 
 @x
-    $ openssl genrsa -out key.pem 4096
-    Generating RSA private key, 4096 bit long modulus
-    .........................................................++
-    ................++
-    e is 65537 (0x10001)
-@y
-    $ openssl genrsa -out key.pem 4096
-    Generating RSA private key, 4096 bit long modulus
-    .........................................................++
-    ................++
-    e is 65537 (0x10001)
-@z
+```console
+$ openssl genrsa -out key.pem 4096
+Generating RSA private key, 4096 bit long modulus
+.........................................................++
+................++
+e is 65537 (0x10001)
 
-@x
-    $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
+$ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
+```
 @y
-    $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
+```console
+$ openssl genrsa -out key.pem 4096
+Generating RSA private key, 4096 bit long modulus
+.........................................................++
+................++
+e is 65537 (0x10001)
+
+$ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
+```
 @z
 
 @x
@@ -454,19 +469,23 @@ Now, generate the signed certificate:
 @z
 
 @x
-    $ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
-      -CAcreateserial -out cert.pem -extfile extfile-client.cnf
-    Signature ok
-    subject=/CN=client
-    Getting CA Private Key
-    Enter pass phrase for ca-key.pem:
+```console
+$ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
+  -CAcreateserial -out cert.pem -extfile extfile-client.cnf
+Signature ok
+subject=/CN=client
+Getting CA Private Key
+Enter pass phrase for ca-key.pem:
+```
 @y
-    $ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
-      -CAcreateserial -out cert.pem -extfile extfile-client.cnf
-    Signature ok
-    subject=/CN=client
-    Getting CA Private Key
-    Enter pass phrase for ca-key.pem:
+```console
+$ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
+  -CAcreateserial -out cert.pem -extfile extfile-client.cnf
+Signature ok
+subject=/CN=client
+Getting CA Private Key
+Enter pass phrase for ca-key.pem:
+```
 @z
 
 @x
@@ -477,9 +496,13 @@ two certificate signing requests and extensions config files:
 @z
 
 @x
-    $ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
+```console
+$ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
+```
 @y
-    $ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
+```console
+$ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
+```
 @z
 
 @x
@@ -498,9 +521,13 @@ write permissions. To make them only readable by you, change file modes as follo
 @z
 
 @x
-    $ chmod -v 0400 ca-key.pem key.pem server-key.pem
+```console
+$ chmod -v 0400 ca-key.pem key.pem server-key.pem
+```
 @y
-    $ chmod -v 0400 ca-key.pem key.pem server-key.pem
+```console
+$ chmod -v 0400 ca-key.pem key.pem server-key.pem
+```
 @z
 
 @x
@@ -512,9 +539,13 @@ prevent accidental damage:
 @z
 
 @x
-    $ chmod -v 0444 ca.pem server-cert.pem cert.pem
+```console
+$ chmod -v 0444 ca.pem server-cert.pem cert.pem
+```
 @y
-    $ chmod -v 0444 ca.pem server-cert.pem cert.pem
+```console
+$ chmod -v 0444 ca.pem server-cert.pem cert.pem
+```
 @z
 
 @x
@@ -525,11 +556,23 @@ providing a certificate trusted by your CA:
 @z
 
 @x
-    $ dockerd --tlsverify --tlscacert=ca.pem --tlscert=server-cert.pem --tlskey=server-key.pem \
-      -H=0.0.0.0:2376
+```console
+$ dockerd \
+    --tlsverify \
+    --tlscacert=ca.pem \
+    --tlscert=server-cert.pem \
+    --tlskey=server-key.pem \
+    -H=0.0.0.0:2376
+```
 @y
-    $ dockerd --tlsverify --tlscacert=ca.pem --tlscert=server-cert.pem --tlskey=server-key.pem \
-      -H=0.0.0.0:2376
+```console
+$ dockerd \
+    --tlsverify \
+    --tlscacert=ca.pem \
+    --tlscert=server-cert.pem \
+    --tlskey=server-key.pem \
+    -H=0.0.0.0:2376
+```
 @z
 
 @x
@@ -562,18 +605,29 @@ Docker に接続して証明書を確認します。
 @z
 
 @x
-    $ docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem \
-      -H=$HOST:2376 version
+```console
+$ docker --tlsverify \
+    --tlscacert=ca.pem \
+    --tlscert=cert.pem \
+    --tlskey=key.pem \
+    -H=$HOST:2376 version
+```
 @y
-    $ docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem \
-      -H=$HOST:2376 version
+```console
+$ docker --tlsverify \
+    --tlscacert=ca.pem \
+    --tlscert=cert.pem \
+    --tlskey=key.pem \
+    -H=$HOST:2376 version
+```
 @z
 
 @x
 > **Note**:
 > Docker over TLS should run on TCP port 2376.
 @y
-> **メモ**:
+> **メモ**
+>
 > Docker over TLS は TCP ポート 2376 上を使って動作させる必要があります。
 @z
 
@@ -612,17 +666,19 @@ Docker クライアント接続を、デフォルトで安全なものとした�
 @z
 
 @x
-    $ mkdir -pv ~/.docker
-    $ cp -v {ca,cert,key}.pem ~/.docker
-@y
-    $ mkdir -pv ~/.docker
-    $ cp -v {ca,cert,key}.pem ~/.docker
-@z
+```console
+$ mkdir -pv ~/.docker
+$ cp -v {ca,cert,key}.pem ~/.docker
 
-@x
-    $ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
+$ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
+```
 @y
-    $ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
+```console
+$ mkdir -pv ~/.docker
+$ cp -v {ca,cert,key}.pem ~/.docker
+
+$ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
+```
 @z
 
 @x
@@ -699,11 +755,15 @@ location using the environment variable `DOCKER_CERT_PATH`.
 @z
 
 @x
-    $ export DOCKER_CERT_PATH=~/.docker/zone1/
-    $ docker --tlsverify ps
+```console
+$ export DOCKER_CERT_PATH=~/.docker/zone1/
+$ docker --tlsverify ps
+```
 @y
-    $ export DOCKER_CERT_PATH=~/.docker/zone1/
-    $ docker --tlsverify ps
+```console
+$ export DOCKER_CERT_PATH=~/.docker/zone1/
+$ docker --tlsverify ps
+```
 @z
 
 @x
@@ -721,15 +781,19 @@ flags:
 @z
 
 @x
-    $ curl https://$HOST:2376/images/json \
-      --cert ~/.docker/cert.pem \
-      --key ~/.docker/key.pem \
-      --cacert ~/.docker/ca.pem
+```console
+$ curl https://$HOST:2376/images/json \
+  --cert ~/.docker/cert.pem \
+  --key ~/.docker/key.pem \
+  --cacert ~/.docker/ca.pem
+```
 @y
-    $ curl https://$HOST:2376/images/json \
-      --cert ~/.docker/cert.pem \
-      --key ~/.docker/key.pem \
-      --cacert ~/.docker/ca.pem
+```console
+$ curl https://$HOST:2376/images/json \
+  --cert ~/.docker/cert.pem \
+  --key ~/.docker/key.pem \
+  --cacert ~/.docker/ca.pem
+```
 @z
 
 @x

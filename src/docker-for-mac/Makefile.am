@@ -16,7 +16,6 @@ ctie:
 
 bases = \
 	apple-silicon      \
-	docker-toolbox     \
 	edge-release-notes \
 	index              \
 	install            \

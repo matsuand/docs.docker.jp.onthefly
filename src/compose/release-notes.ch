@@ -22,6 +22,33 @@ redirect_from:
 @z
 
 @x
+## 1.29.2
+(2021-05-10)
+@y
+## 1.29.2
+(2021-05-10)
+@z
+
+@x
+### Miscellaneous
+@y
+{: #miscellaneous }
+### その他
+@z
+
+@x
+- Removed the prompt to use `docker compose` in the `up` command.
+@y
+- `up`コマンド内において`docker compose`利用を促す説明を削除しました。
+@z
+
+@x
+- Bumped `py` to `1.10.0` in `requirements-indirect.txt`.
+@y
+- `requirements-indirect.txt`内の`py`を`1.10.0`に。
+@z
+
+@x
 ## 1.29.1
 (2021-04-13)
 @y

@@ -206,5 +206,6 @@ AC_CONFIG_FILES([Makefile
 		 src/storage/Makefile
 		 src/storage/images/Makefile
 		 src/storage/storagedriver/Makefile
-		 src/storage/storagedriver/images/Makefile])
+		 src/storage/storagedriver/images/Makefile
+		 src/toolbox/Makefile])
 AC_OUTPUT

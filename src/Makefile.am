@@ -3,7 +3,8 @@ SUBDIRS = _data _includes _layouts _samples _scss app buildx \
 	datacenter desktop develop docker-for-mac \
 	docker-for-windows docker-hub docker-id ee engine get-started \
 	go images js language kitematic machine network notary \
-	opensource reference registry release-notes samples storage
+	opensource reference registry release-notes samples storage \
+	toolbox
 
 origdir     = @abs_origdir@
 srcdir      = @srcdir@
