@@ -1,4 +1,4 @@
-<!-- Page generated 2021-05-11 13:45:22 +0900-->
+<!-- Page generated 2021-05-12 12:11:42 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker デーモンソケットの保護 | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker デーモンソケットの保護" />
   <meta property="og:description" content="SSH や HTTPS により Docker を設定し実行します。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-05-11T13:45:22+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-05-12T12:11:42+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/security/protect-access/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-05-11T13:45:22+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-05-12T12:11:42+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker デーモンソケットの保護","description":"SSH や HTTPS により Docker を設定し実行します。","url":"https://docs.docker.com/engine/security/protect-access/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker デーモンソケットの保護</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。
+                        <section class="section"><h1>Docker デーモンソケットの保護</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>デフォルトで Docker は、インターネットを介さない UNIX ソケットを通じて実行されます。
 SSH や TLS（HTTPS）ソケットを用いた通信を行うこともできます。</p>
 
 <h2 id="use-ssh-to-protect-the-docker-daemon-socket">SSH を用いた Docker デーモンソケットの保護</h2>
@@ -112,10 +112,10 @@ SSH や TLS（HTTPS）ソケットを用いた通信を行うこともできま�
   <p><strong>メモ</strong></p>
 
   <p>説明に用いる<code class="language-plaintext highlighter-rouge">USERNAME</code>は、リモートマシン上において Docker ソケットにアクセスする権限を持っていなければなりません。
-root ではないユーザーにより Docker ソケットへアクセスする方法に関しては <a href="../../install/linux-postinstall/#manage-docker-as-a-non-root-user">root ユーザー以外で Docker を管理する</a> を参照してください。</p>
+root ではないユーザーにより Docker ソケットへアクセスする方法に関しては <a href="/docs.docker.jp.onthefly/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">root ユーザー以外で Docker を管理する</a> を参照してください。</p>
 </blockquote>
 
-<p>以下の例では <a href="../../context/working-with-contexts.md"><code class="language-plaintext highlighter-rouge">docker context</code></a> を生成し、リモートホスト<code class="language-plaintext highlighter-rouge">host1.example.com</code>上の<code class="language-plaintext highlighter-rouge">dockerd</code>デーモンに対して SSH を使って接続します。
+<p>以下の例では <a href="/docs.docker.jp.onthefly/engine/context/working-with-contexts/"><code class="language-plaintext highlighter-rouge">docker context</code></a> を生成し、リモートホスト<code class="language-plaintext highlighter-rouge">host1.example.com</code>上の<code class="language-plaintext highlighter-rouge">dockerd</code>デーモンに対して SSH を使って接続します。
 その際にはリモートホスト上のユーザー<code class="language-plaintext highlighter-rouge">docker-user</code>によりアクセスします。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker context create <span class="se">\</span>
@@ -186,16 +186,16 @@ ControlPersist    yes
 
 <p>まず <strong>Docker デーモンが起動するホストマシン</strong> において、CA 秘密鍵と公開鍵を生成します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -aes256 -out ca-key.pem 4096
-Generating RSA private key, 4096 bit long modulus
-............................................................................................................................................................................................++
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-aes256</span> <span class="nt">-out</span> ca-key.pem 4096
+<span class="go">Generating RSA private key, 4096 bit long modulus
+..............................................................................++
 ........++
 e is 65537 (0x10001)
 Enter pass phrase for ca-key.pem:
 Verifying - Enter pass phrase for ca-key.pem:
 
-$ openssl req -new -x509 -days 365 -key ca-key.pem -sha256 -out ca.pem
-Enter pass phrase for ca-key.pem:
+</span><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-new</span> <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-key</span> ca-key.pem <span class="nt">-sha256</span> <span class="nt">-out</span> ca.pem
+<span class="go">Enter pass phrase for ca-key.pem:
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -208,25 +208,26 @@ State or Province Name (full name) [Some-State]:Queensland
 Locality Name (eg, city) []:Brisbane
 Organization Name (eg, company) [Internet Widgits Pty Ltd]:Docker Inc
 Organizational Unit Name (eg, section) []:Sales
-Common Name (e.g. server FQDN or YOUR name) []:$HOST
-Email Address []:Sven@home.org.au
-</code></pre></div></div>
+</span><span class="gp">Common Name (e.g. server FQDN or YOUR name) []:$</span>HOST
+<span class="go">Email Address []:Sven@home.org.au
+</span></code></pre></div></div>
 
 <p>CA を生成したので、次にサーバー鍵と証明書署名要求（certificate signing request; CSR）を生成します。
 「Common Name」欄には、Docker に接続するホストの名前となっていることを確認してください。</p>
 
 <blockquote>
-  <p><strong>メモ</strong>:
-以下に示す例において<code class="language-plaintext highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>以下に示す例において<code class="language-plaintext highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -out server-key.pem 4096
-Generating RSA private key, 4096 bit long modulus
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-out</span> server-key.pem 4096
+<span class="go">Generating RSA private key, 4096 bit long modulus
 .....................................................................++
 .................................................................................................++
 e is 65537 (0x10001)
 
-$ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
+</span><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-subj</span> <span class="s2">"/CN=</span><span class="nv">$HOST</span><span class="s2">"</span> <span class="nt">-sha256</span> <span class="nt">-new</span> <span class="nt">-key</span> server-key.pem <span class="nt">-out</span> server.csr
 </code></pre></div></div>
 
 <p>次に公開鍵を CA を使って署名します。</p>
@@ -234,7 +235,7 @@ $ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
 <p>TLS 接続は DNS 名だけでなく IP アドレスを使っても行われるため、証明書の生成時には IP アドレスが必要になります。
 たとえば<code class="language-plaintext highlighter-rouge">10.10.10.20</code>と<code class="language-plaintext highlighter-rouge">127.0.0.1</code>を使って接続を許可するには、以下のようにします。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 &gt;&gt; extfile.cnf
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">echo </span>subjectAltName <span class="o">=</span> DNS:<span class="nv">$HOST</span>,IP:10.10.10.20,IP:127.0.0.1 <span class="o">&gt;&gt;</span> extfile.cnf
 </code></pre></div></div>
 
 <p>Docker デーモンの拡張属性は、サーバー認証に対してのみ利用するものとして設定します。</p>
@@ -244,13 +245,13 @@ $ openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
 
 <p>そこで署名された証明書を生成します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
-  -CAcreateserial -out server-cert.pem -extfile extfile.cnf
-Signature ok
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-sha256</span> <span class="nt">-in</span> server.csr <span class="nt">-CA</span> ca.pem <span class="nt">-CAkey</span> ca-key.pem <span class="se">\</span>
+  <span class="nt">-CAcreateserial</span> <span class="nt">-out</span> server-cert.pem <span class="nt">-extfile</span> extfile.cnf
+<span class="go">Signature ok
 subject=/CN=your.host.com
 Getting CA Private Key
 Enter pass phrase for ca-key.pem:
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><a href="/engine/extend/plugins_authorization/">認証プラグイン</a> は、相互 TLS からの認証を補完する、きめ細かな制御を可能にします。
 上記のドキュメント内の説明内容に加えて、Docker デーモン上で動作する認証プラグインは、Docker クライアントに接続するための認証情報を受け取ります。</p>
@@ -261,13 +262,13 @@ Enter pass phrase for ca-key.pem:
   <p><strong>メモ</strong>: ここから続く手順を簡単にするために、以下の手順は Docker デーモンが稼動するホストマシン上で行ってもかまいません。</p>
 </blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl genrsa -out key.pem 4096
-Generating RSA private key, 4096 bit long modulus
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl genrsa <span class="nt">-out</span> key.pem 4096
+<span class="go">Generating RSA private key, 4096 bit long modulus
 .........................................................++
 ................++
 e is 65537 (0x10001)
 
-$ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
+</span><span class="gp">$</span><span class="w"> </span>openssl req <span class="nt">-subj</span> <span class="s1">'/CN=client'</span> <span class="nt">-new</span> <span class="nt">-key</span> key.pem <span class="nt">-out</span> client.csr
 </code></pre></div></div>
 
 <p>生成した鍵をクライアント認証用とするために、新たな拡張設定ファイルを生成します。</p>
@@ -277,17 +278,17 @@ $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 
 <p>そこで署名された証明書を生成します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ openssl x509 -req -days 365 -sha256 -in client.csr -CA ca.pem -CAkey ca-key.pem \
-  -CAcreateserial -out cert.pem -extfile extfile-client.cnf
-Signature ok
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>openssl x509 <span class="nt">-req</span> <span class="nt">-days</span> 365 <span class="nt">-sha256</span> <span class="nt">-in</span> client.csr <span class="nt">-CA</span> ca.pem <span class="nt">-CAkey</span> ca-key.pem <span class="se">\</span>
+  <span class="nt">-CAcreateserial</span> <span class="nt">-out</span> cert.pem <span class="nt">-extfile</span> extfile-client.cnf
+<span class="go">Signature ok
 subject=/CN=client
 Getting CA Private Key
 Enter pass phrase for ca-key.pem:
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">cert.pem</code>と<code class="language-plaintext highlighter-rouge">server-cert.pem</code>を生成したら、証明書署名要求と拡張設定ファイルの 2 つは、安全に削除することができます。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rm -v client.csr server.csr extfile.cnf extfile-client.cnf
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">rm</span> <span class="nt">-v</span> client.csr server.csr extfile.cnf extfile-client.cnf
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">umask</code>をデフォルトの 022 のまま使ってしまうと、秘密鍵は <strong>誰もが読み込み可能</strong> となり、また所有者とグループが書き込み可能となってしまいます。</p>
@@ -295,19 +296,23 @@ Enter pass phrase for ca-key.pem:
 <p>秘密鍵を保護し、予期しない被害を受けないために、書き込み権限は削除してください。
 読み込み権限は所有者のみとするように、以下のようにしてファイルモードの変更を行います。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod -v 0400 ca-key.pem key.pem server-key.pem
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod</span> <span class="nt">-v</span> 0400 ca-key.pem key.pem server-key.pem
 </code></pre></div></div>
 
 <p>証明書は誰でも読み込めるようにするのでもかまいません。
 ただし書き込み権限は、被害を避ける意味で削除するようにしてください。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod -v 0444 ca.pem server-cert.pem cert.pem
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">chmod</span> <span class="nt">-v</span> 0444 ca.pem server-cert.pem cert.pem
 </code></pre></div></div>
 
 <p>このようにして Docker デーモンが接続を受け入れるクライアントは、CA に信頼された証明書を利用するクライアントのみとすることができました。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ dockerd --tlsverify --tlscacert=ca.pem --tlscert=server-cert.pem --tlskey=server-key.pem \
-  -H=0.0.0.0:2376
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>dockerd <span class="se">\</span>
+    <span class="nt">--tlsverify</span> <span class="se">\</span>
+    <span class="nt">--tlscacert</span><span class="o">=</span>ca.pem <span class="se">\</span>
+    <span class="nt">--tlscert</span><span class="o">=</span>server-cert.pem <span class="se">\</span>
+    <span class="nt">--tlskey</span><span class="o">=</span>server-key.pem <span class="se">\</span>
+    <span class="nt">-H</span><span class="o">=</span>0.0.0.0:2376
 </code></pre></div></div>
 
 <p>Docker に接続して証明書を確認します。
@@ -325,13 +330,17 @@ Enter pass phrase for ca-key.pem:
 以下に示す例において<code class="language-plaintext highlighter-rouge">$HOST</code>と示されている箇所はすべて、利用している Docker デーモンホストの DNS 名に置き換えてください。</p>
 </blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem \
-  -H=$HOST:2376 version
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker <span class="nt">--tlsverify</span> <span class="se">\</span>
+    <span class="nt">--tlscacert</span><span class="o">=</span>ca.pem <span class="se">\</span>
+    <span class="nt">--tlscert</span><span class="o">=</span>cert.pem <span class="se">\</span>
+    <span class="nt">--tlskey</span><span class="o">=</span>key.pem <span class="se">\</span>
+    <span class="nt">-H</span><span class="o">=</span><span class="nv">$HOST</span>:2376 version
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>メモ</strong>:
-Docker over TLS は TCP ポート 2376 上を使って動作させる必要があります。</p>
+  <p><strong>メモ</strong></p>
+
+  <p>Docker over TLS は TCP ポート 2376 上を使って動作させる必要があります。</p>
 </blockquote>
 
 <blockquote class="warning">
@@ -347,10 +356,10 @@ Docker over TLS は TCP ポート 2376 上を使って動作させる必要が�
 これに合わせて<code class="language-plaintext highlighter-rouge">DOCKER_HOST</code>と<code class="language-plaintext highlighter-rouge">DOCKER_TLS_VERIFY</code>の変数も設定します
 （これはコマンド実行時に<code class="language-plaintext highlighter-rouge">-H=tcp://$HOST:2376</code>と<code class="language-plaintext highlighter-rouge">--tlsverify</code>を指定しない代わりとして行うものです）。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mkdir -pv ~/.docker
-$ cp -v {ca,cert,key}.pem ~/.docker
-
-$ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">mkdir</span> <span class="nt">-pv</span> ~/.docker
+<span class="gp">$</span><span class="w"> </span><span class="nb">cp</span> <span class="nt">-v</span> <span class="o">{</span>ca,cert,key<span class="o">}</span>.pem ~/.docker
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_HOST</span><span class="o">=</span>tcp://<span class="nv">$HOST</span>:2376 <span class="nv">DOCKER_TLS_VERIFY</span><span class="o">=</span>1
 </code></pre></div></div>
 
 <p>Docker はデフォルトで安全な接続を行うようになります。</p>
@@ -382,18 +391,18 @@ $ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
 <p>クライアントに証明書があればクライアントはそれを送信するので、鍵データは<code class="language-plaintext highlighter-rouge">~/.docker/{ca,cert,key}.pem</code>に配置しておくことが必要です。
 あるいは鍵データを別のディレクトリに保持しておきたい場合は、環境変数<code class="language-plaintext highlighter-rouge">DOCKER_CERT_PATH</code>にそのディレクトリを指定します。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ export DOCKER_CERT_PATH=~/.docker/zone1/
-$ docker --tlsverify ps
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">DOCKER_CERT_PATH</span><span class="o">=</span>~/.docker/zone1/
+<span class="gp">$</span><span class="w"> </span>docker <span class="nt">--tlsverify</span> ps
 </code></pre></div></div>
 
 <h4 id="connecting-to-the-secure-docker-port-using-curl"><code class="language-plaintext highlighter-rouge">curl</code>を用いたセキュアな Docker ポートへの接続</h4>
 
 <p><code class="language-plaintext highlighter-rouge">curl</code>を使って API リクエストを行ってみるなら、指定を 3 つ追加したコマンドライン実行を行います。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl https://$HOST:2376/images/json \
-  --cert ~/.docker/cert.pem \
-  --key ~/.docker/key.pem \
-  --cacert ~/.docker/ca.pem
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl https://<span class="nv">$HOST</span>:2376/images/json <span class="se">\</span>
+  <span class="nt">--cert</span> ~/.docker/cert.pem <span class="se">\</span>
+  <span class="nt">--key</span> ~/.docker/key.pem <span class="se">\</span>
+  <span class="nt">--cacert</span> ~/.docker/ca.pem
 </code></pre></div></div>
 
 <h2 id="related-information">関連情報</h2>
