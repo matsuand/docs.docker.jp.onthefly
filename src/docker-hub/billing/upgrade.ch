@@ -30,16 +30,12 @@ You can upgrade to a Pro or a Team plan from a Free plan, or from your current l
 @x
 >**Note:**
 >
-> - If you are on a legacy per-repository plan, you cannot upgrade to another legacy plan. You can only upgrade your legacy plan to the new Pro or Team monthly plan.
-> - It is not possible to upgrade from an existing legacy plan to an annual plan.
->
-> - Once you’ve upgraded your current legacy plan to a monthly Pro or a Team plan, it is not possible to switch back to the legacy per-repository plan.
+If you were previously on a legacy per-repository plan, your plan has been converted to a new Pro or Team monthly plan. For details, see [Pricing FAQ](faq.md).
 @y
 >**メモ**
 >
-> - 従来のリポジトリ単位のプランを購入している場合、別の従来プランにアップグレードすることはできません。古いプランからアップデートできるのは、月額による新しいプロプランかチームプランです。
-> - 古いプランは年額プランにアップグレードすることはできません。
-> - 従来の古いプランから月額によるプロプランかチームプランにアップグレードした後は、元のリポジトリ単位のプランに戻すことはできません。
+> これまでにリポジトリごとの古いプランを購入していた方は、Pro や Team の月額プランにすでに変更されています。
+> 詳しくは [価格に関する FAQ](faq.md) を参照してください。
 @z
 
 @x

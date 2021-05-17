@@ -17,18 +17,19 @@ title: Docker 有料プランの概要
 
 @x
 On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** subscriptions that include unlimited private repositories and up to 50,000 container pulls in a 24-hour period.
+Starting with May 14, 2020, new customers who sign up for Docker can choose between the new Free, Pro, and Team plans.
 @y
 2020年5月14日に Docker は [製品戦略](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} に連携して、新たにユーザーごとの料金体系を発表しました。
 これはクラウドネイティブな開発に向けた開発ワークフローを推進するためです。
 それまでのプライベートリポジトリと自動ビルドベースのプランは、**プロ**サブスクリプションと**チーム**サブスクリプションとして変更され、無制限のプライベートリポジトリを含むようになりました。
 そして 24 時間以内にプルできるコンテナー数は 50,000 個までとなっています。
+2020年5月14日からは、Docker にサインアップした新規ユーザーの方は、この Free、Pro、Team の各プランを選択できるようになりました。
 @z
 
 @x
-Existing Docker customers subscribed to a paid plan before May 14, 2020 must upgrade to the new Pro or Team plan by January 31, 2021. Starting with May 14, 2020, new customers who sign up for Docker can choose between the new Free, Pro, and Team plans.
+Existing Docker customers who had subscribed to a paid plan before May 14, 2020 have been converted to the new Pro or Team plan after January 31, 2021. 
 @y
 2020年5月14日以前に有料プランを購入していた Docker ユーザーは、2021年1月31日までに新たなプロプランまたはチームプランへアップグレードすることが必要です。
-2020年5月14日以降、Docker にサインアップした新規ユーザーは、新たな無料プラン、プロプラン、チームプランを選択できるようになっています。
 @z
 
 @x
@@ -121,10 +122,9 @@ For frequently asked questions about pricing, see [Docker pricing FAQ](https://w
 @z
 
 @x
-The following section contains information on how to purchase a Pro plan for new customers. If you are already subscribed to a legacy plan and would like to upgrade to Pro, see [Upgrade to Pro from a legacy plan](upgrade.md#upgrade-to-a-pro-plan).
+The following section contains information on how to purchase a Pro plan for new customers.
 @y
 この節では、プロプランを新たに購入する方法について説明します。
-すでに従来のプランを購入していて、そこからプロプランにアップグレードしたい場合は [従来プランからプロプランへのアップグレード](upgrade.md#upgrade-to-a-pro-plan) を参照してください。
 @z
 
 @x
@@ -190,10 +190,9 @@ To purchase a Pro plan:
 @z
 
 @x
-The following section contains information on how to purchase a Team plan for new organizations. If you are already subscribed to a legacy plan and would like to upgrade to the Team plan, see [Upgrade to Team from a legacy plan](upgrade.md#upgrade-to-a-team-plan).
+The following section contains information on how to purchase a Team plan for new organizations.
 @y
 この節では、新たな組織に対してチームプランを購入する方法について説明します。
-すでに従来のプランを購入していて、そこからチームプランにアップグレードしたい場合は [従来プランからチームプランへのアップグレード](upgrade.md#upgrade-to-a-team-plan) を参照してください。
 @z
 
 @x
