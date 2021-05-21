@@ -140,11 +140,11 @@ Run the following commands to log into Azure:
 
 @x
 ```console
-docker login azure
+$ docker login azure
 ```
 @y
 ```console
-docker login azure
+$ docker login azure
 ```
 @z
 
@@ -208,11 +208,11 @@ ACI コンテキストの生成には Azure サブスクリプション、[リ�
 
 @x
 ```console
-docker context create aci myacicontext
+$ docker context create aci myacicontext
 ```
 @y
 ```console
-docker context create aci myacicontext
+$ docker context create aci myacicontext
 ```
 @z
 
@@ -275,11 +275,11 @@ There are two ways to use your new ACI context. You can use the `--context` flag
 
 @x
 ```console
-docker --context myacicontext run -p 80:80 nginx
+$ docker --context myacicontext run -p 80:80 nginx
 ```
 @y
 ```console
-docker --context myacicontext run -p 80:80 nginx
+$ docker --context myacicontext run -p 80:80 nginx
 ```
 @z
 
@@ -325,11 +325,11 @@ To view logs from your container, run:
 
 @x
 ```console
-docker logs <CONTAINER_ID>
+$ docker logs <CONTAINER_ID>
 ```
 @y
 ```console
-docker logs <コンテナーID>
+$ docker logs <コンテナーID>
 ```
 @z
 
@@ -341,11 +341,11 @@ To execute a command in a running container, run:
 
 @x
 ```console
-docker exec -t <CONTAINER_ID> COMMAND
+$ docker exec -t <CONTAINER_ID> COMMAND
 ```
 @y
 ```console
-docker exec -t <コンテナーID> COMMAND
+$ docker exec -t <コンテナーID> COMMAND
 ```
 @z
 
@@ -357,13 +357,13 @@ ACI 上のコンテナーを停止して削除するには、以下のように�
 
 @x
 ```console
-docker stop <CONTAINER_ID>
-docker rm <CONTAINER_ID>
+$ docker stop <CONTAINER_ID>
+$ docker rm <CONTAINER_ID>
 ```
 @y
 ```console
-docker stop <コンテナーID>
-docker rm <コンテナーID>
+$ docker stop <コンテナーID>
+$ docker rm <コンテナーID>
 ```
 @z
 
@@ -679,11 +679,11 @@ command as follows:
 
 @x
 ```console
-docker run -v mystorageaccount/myfileshare:/target/path myimage
+$ docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 @y
 ```console
-docker run -v mystorageaccount/myfileshare:/target/path myimage
+$ docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 @z
 
@@ -944,11 +944,11 @@ Example using `docker run`:
 
 @x
 ```console
-docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+$ docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
 ```
 @y
 ```console
-docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+$ docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
 ```
 @z
 
@@ -1066,11 +1066,11 @@ You can install the new CLI using the install script:
 
 @x
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 @y
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 @z
 
@@ -1096,11 +1096,11 @@ You will then need to make it executable:
 
 @x
 ```console
-chmod +x docker-aci
+$ chmod +x docker-aci
 ```
 @y
 ```console
-chmod +x docker-aci
+$ chmod +x docker-aci
 ```
 @z
 
@@ -1115,11 +1115,11 @@ CLI:
 
 @x
 ```console
-ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
+$ ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
 ```
 @y
 ```console
-ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
+$ ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
 ```
 @z
 
@@ -1259,11 +1259,11 @@ Docker Azure 統合の CLI を削除する場合は、ダウンロードした�
 
 @x
 ```console
-sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
+$ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 ```
 @y
 ```console
-sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
+$ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 ```
 @z
 

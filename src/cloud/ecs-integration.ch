@@ -446,24 +446,24 @@ Compose アプリケーションログの確認は、デフォルトではロー
 @x
 ```console
 # fetch logs for application in current working directory
-docker compose logs
+$ docker compose logs
 
 # specify compose project name
-docker compose --project-name PROJECT logs
+$ docker compose --project-name PROJECT logs
 
 # specify compose file
-docker compose --file /path/to/docker-compose.yaml logs
+$ docker compose --file /path/to/docker-compose.yaml logs
 ```
 @y
 ```console
 # アプリケーションログをカレントなワーキングディレクトリに取り出します。
-docker compose logs
+$ docker compose logs
 
 # Compose プロジェクト名を指定します。
-docker compose --project-name PROJECT logs
+$ docker compose --project-name PROJECT logs
 
 # Compose ファイルを指定します。
-docker compose --file /path/to/docker-compose.yaml logs
+$ docker compose --file /path/to/docker-compose.yaml logs
 ```
 @z
 
@@ -551,12 +551,12 @@ You can then create a secret from this file using `docker secret`:
 
 @x
 ```console
-docker secret create dockerhubAccessToken token.json
+$ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 @y
 ```console
-docker secret create dockerhubAccessToken token.json
+$ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 @z
@@ -1662,11 +1662,11 @@ You can install the new CLI using the install script:
 
 @x
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 @y
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 @z
 
