@@ -6,13 +6,16 @@
 description: Instructions for installing Docker Engine on Ubuntu
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 redirect_from:
-- /engine/installation/ubuntulinux/
-- /installation/ubuntulinux/
+- /ee/docker-ee/ubuntu/
+- /engine/installation/linux/docker-ce/ubuntu/
+- /engine/installation/linux/docker-ee/ubuntu/
 - /engine/installation/linux/ubuntu/
 - /engine/installation/linux/ubuntulinux/
-- /engine/installation/linux/docker-ce/ubuntu/
-- /install/linux/ubuntu/
+- /engine/installation/ubuntulinux/
 - /install/linux/docker-ce/ubuntu/
+- /install/linux/docker-ee/ubuntu/
+- /install/linux/ubuntu/
+- /installation/ubuntulinux/
 title: Install Docker Engine on Ubuntu
 toc_max: 4
 ---
@@ -21,13 +24,16 @@ toc_max: 4
 description: Ubuntu 上に Docker Engine をインストールする手順を説明。
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 redirect_from:
-- /engine/installation/ubuntulinux/
-- /installation/ubuntulinux/
+- /ee/docker-ee/ubuntu/
+- /engine/installation/linux/docker-ce/ubuntu/
+- /engine/installation/linux/docker-ee/ubuntu/
 - /engine/installation/linux/ubuntu/
 - /engine/installation/linux/ubuntulinux/
-- /engine/installation/linux/docker-ce/ubuntu/
-- /install/linux/ubuntu/
+- /engine/installation/ubuntulinux/
 - /engine/installation/linux/ubuntu/
+- /install/linux/docker-ee/ubuntu/
+- /install/linux/ubuntu/
+- /installation/ubuntulinux/
 title: Docker Engine インストール（Ubuntu 向け）
 toc_max: 4
 ---

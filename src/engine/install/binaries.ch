@@ -30,7 +30,9 @@ redirect_from:
 > **Note**: You may have been redirected to this page because there is no longer
 > a dynamically-linked Docker package for your Linux distribution.
 @y
-> **メモ**: このページへはリダイレクトによりやってきたかもしれません。
+> **メモ**
+>
+> このページへはリダイレクトによりやってきたかもしれません。
 > お使いの Linux ディストリビューションでは、ダイナミックリンクによる Docker パッケージが提供されていないためです。
 @z
 
@@ -345,11 +347,58 @@ macOS のバイナリには Docker クライアントのみが提供されます
 @z
 
 @x
-3.  **Optional**: Move the binary to a directory on your executable path, such
+3.  Clear the extended attributes to allow it run.
+@y
+3.  拡張属性をクリアして実行できるようにします。
+@z
+
+@x
+    In case executing `docker/docker` you get the error message: *'docker' is*
+    *damaged and cannot be opened. You should move it to the bin.*
+@y
+    `docker/docker`を実行している場合には、*'docker' is* *damaged and cannot be opened. You should move it to the bin.*（'docker' は壊れていて開くことができません。bin ディレクトリに移動させてください。） というエラーになります。
+@z
+
+@x
+    Apple takes care about our security. Hence, we need to remove the security 
+    mechanism preventing us running the executable.
+@y
+    Apple はセキュリティのことを考慮してくれています。
+    したがってモジュールを実行するためには、それを妨害しているセキュリティメカニズムを取り除かなければなりません。
+@z
+
+@x
+    ```console
+    $ sudo xattr -rc docker
+    ```
+@y
+    ```console
+    $ sudo xattr -rc docker
+    ```
+@z
+
+@x
+    Now, when you run the following command, you can see the Docker CLI usage instructions:
+@y
+    この後に以下のコマンドを実行すれば、Docker CLI の利用方法を示す出力が行われます。
+@z
+
+@x
+    ```console
+    $ docker/docker
+    ```
+@y
+    ```console
+    $ docker/docker
+    ```
+@z
+
+@x
+4.  **Optional**: Move the binary to a directory on your executable path, such
     as `/usr/local/bin/`. If you skip this step, you must provide the path to the
     executable when you invoke `docker` or `dockerd` commands.
 @y
-3.  **任意の作業** 上のバイナリを実行パスの通ったディレクトリ、たとえば `/usr/local/bin/` などに移動させます。
+4.  **任意の作業** 上のバイナリを実行パスの通ったディレクトリ、たとえば `/usr/local/bin/` などに移動させます。
     この作業を行わない場合、`docker`や`dockerd`コマンドを起動する際には、常に実行ファイルへのパスも指定する必要があります。
 @z
 
@@ -364,11 +413,11 @@ macOS のバイナリには Docker クライアントのみが提供されます
 @z
 
 @x
-4.  Verify that Docker is installed correctly by running the `hello-world`
+5.  Verify that Docker is installed correctly by running the `hello-world`
     image. The value of `<hostname>` is a hostname or IP address running the
     Docker daemon and accessible to the client.
 @y
-4.  Docker が正しくインストールされたことを確認するために`hello-world`イメージを実行します。
+5.  Docker が正しくインストールされたことを確認するために`hello-world`イメージを実行します。
     `<hostname>`にはホスト名かその IP アドレスを指定します。
     このホストは Docker デーモンが起動しているマシンのことであり、クライアントからアクセス可能であるものです。
 @z

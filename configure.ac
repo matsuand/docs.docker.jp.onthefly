@@ -122,8 +122,6 @@ AC_CONFIG_FILES([Makefile
 		 src/ee/Makefile
 		 src/ee/admin/Makefile
 		 src/ee/admin/backup/Makefile
-		 src/ee/docker-ee/Makefile
-		 src/ee/docker-ee/windows/Makefile
 		 src/ee/ucp/Makefile
 		 src/ee/ucp/admin/Makefile
 		 src/ee/ucp/admin/monitor-and-troubleshoot/Makefile

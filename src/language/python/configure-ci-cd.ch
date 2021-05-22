@@ -522,9 +522,9 @@ on:
 @z
 
 @x
-This ensures that the main CI will only trigger if we tag our commits with `V.n.n.n.` Let’s test this. For example, run the following command:
+This ensures that the main CI will only trigger if we tag our commits with `Vn.n.n.` Let’s test this. For example, run the following command:
 @y
-上のようにすると CI コマンドからは`V.n.n.n.`というタグづけを行っているコミットのみが処理されます。
+上のようにすると CI コマンドからは`Vn.n.n.`というタグづけを行っているコミットのみが処理されます。
 確認してみましょう。
 たとえば以下のようなコマンドを実行します。
 @z

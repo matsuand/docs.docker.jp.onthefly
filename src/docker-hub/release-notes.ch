@@ -27,6 +27,32 @@ known issues for each Docker Hub release.
 @z
 
 @x
+# 2021-05-05
+@y
+# 2021-05-05
+@z
+
+@x
+### Enhancement
+@y
+{: #enhancement }
+### 拡張
+@z
+
+@x
+When managing the content of your repositories, you can now filter the results based on the currentness of the tags and more easily identify your untagged images.
+For more information, see  [Advanced Management Dashboard](/image-management.md).
+@y
+リポジトリ内容を管理するにあたって、最新タグに基づいた検索や、タグなしイメージを容易に識別できるようにしました。詳しくは [拡張イメージ管理ダッシュボード](/image-management.md) を参照してください。
+@z
+
+@x
+For Docker Hub API documentation, see [Docker Hub API Reference](../api/latest/#operation/GetNamespacesRepositoriesImages).
+@y
+Docker Hub API については、[Docker Hub API リファレンス]({{ site.baseurl }}/docker-hub/api/latest/#operation/GetNamespacesRepositoriesImages) を参照してください。
+@z
+
+@x
 # 2021-04-13
 @y
 # 2021-04-13

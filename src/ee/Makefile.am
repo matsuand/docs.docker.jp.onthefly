@@ -1,4 +1,4 @@
-SUBDIRS = admin docker-ee ucp
+SUBDIRS = admin ucp
 
 thisdir   = ee
 origdir   = @abs_origdir@/$(thisdir)
@@ -16,7 +16,6 @@ ctie:
 
 bases = \
 	index \
-	supported-platforms \
 	telemetry \
 	upgrade
 

@@ -6,11 +6,21 @@
 description: Instructions for installing Docker Engine on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
+- /ee/docker-ee/centos/
+- /ee/docker-ee/rhel/
 - /engine/installation/centos/
+- /engine/installation/centos/
+- /engine/installation/linux/centos/
 - /engine/installation/linux/docker-ce/centos/
+- /engine/installation/linux/docker-ee/centos/
+- /engine/installation/linux/docker-ee/rhel/
+- /engine/installation/linux/rhel/
+- /engine/installation/rhel/
 - /install/linux/centos/
 - /install/linux/docker-ce/centos/
-- /engine/installation/linux/centos/
+- /install/linux/docker-ee/centos/
+- /install/linux/docker-ee/rhel/
+- /installation/rhel/
 title: Install Docker Engine on CentOS
 toc_max: 4
 ---
@@ -19,11 +29,21 @@ toc_max: 4
 description: CentOS 上に Docker Engine をインストールする手順を説明。
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
+- /ee/docker-ee/centos/
+- /ee/docker-ee/rhel/
 - /engine/installation/centos/
+- /engine/installation/centos/
+- /engine/installation/linux/centos/
 - /engine/installation/linux/docker-ce/centos/
+- /engine/installation/linux/docker-ee/centos/
+- /engine/installation/linux/docker-ee/rhel/
+- /engine/installation/linux/rhel/
+- /engine/installation/rhel/
 - /install/linux/centos/
 - /install/linux/docker-ce/centos/
-- /engine/installation/linux/centos/
+- /install/linux/docker-ee/centos/
+- /install/linux/docker-ee/rhel/
+- /installation/rhel/
 title: Docker Engine インストール（CentOS 向け）
 toc_max: 4
 ---
