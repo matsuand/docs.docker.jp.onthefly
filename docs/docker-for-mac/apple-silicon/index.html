@@ -1,4 +1,4 @@
-<!-- Page generated 2021-05-22 10:49:46 +0900-->
+<!-- Page generated 2021-05-25 09:13:18 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Desktop for Apple silicon | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Desktop for Apple silicon" />
   <meta property="og:description" content="Docker Desktop for Apple silicon" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-05-22T10:49:46+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-05-25T09:13:18+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/docker-for-mac/apple-silicon/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-05-22T10:49:46+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-05-25T09:13:18+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Desktop for Apple silicon","description":"Docker Desktop for Apple silicon","url":"https://docs.docker.com/docker-for-mac/apple-silicon/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -141,13 +141,14 @@ Intel イメージの実行には、エミュレーションのもとで<code cl
 特に <a href="https://hub.docker.com/_/mysql?tab=tags&amp;page=1&amp;ordering=last_updated">mysql</a> イメージは ARM64 向けには利用できません。
 これに対する当面の対処としては <a href="https://hub.docker.com/_/mariadb?tab=tags&amp;page=1&amp;ordering=last_updated">mariadb</a> イメージを利用してください。</p>
 
-    <p>しかし Apple silicon 上において Intel ベースのコンテナーを実行しようとしても、QEMU によるコンテナー実行が失敗することがあるため、クラッシュすることがあります。
- QEMU エミュレーションのもとでは、ファイルシステム変更通知 API（たとえば<code class="language-plaintext highlighter-rouge">inotify</code>）は動作しません。
- <a href="https://github.com/docker/for-mac/issues/5321">docker/for-mac#5321</a> を参照してください。
- したがって Apple Silicon マシン上では ARM64 コンテナーを実行することをお勧めします。
- そのコンテナーであれば、Intel ベースのコンテナーに比べて高速であり、メモリ消費も抑えることができます。</p>
+    <p>しかし Apple silicon 上において Intel ベースのコンテナーを実行しようとしても、qemu によるコンテナー実行が失敗することがあるため、エミュレーションがクラッシュすることがあります。
+ さらに qemu エミュレーションのもとでは、ファイルシステム変更通知 API（たとえば<code class="language-plaintext highlighter-rouge">inotify</code>）は動作しません。
+ エミュレーションのもとで適正にコンテナーが動作しない状況であっても、それでもコンテナーは動作し続けますが、それは通常のネイティブな環境に比べて、非常に遅くメモリもたくさん消費します。</p>
 
-    <p>この問題は時が経つにつれて、また <a href="https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/">マルチアーキテクチャーをサポートする</a> イメージが今後さらに再ビルドされていくにつれて、まれな問題となっていくものと考えられます。</p>
+    <p>上のことをまとめると、Arm ベースのマシン上において Intel ベースのコンテナーを動作させているのは「ベストエフォート」にすぎない、言い換えればできる範囲での対応でしかない、ということです。
+ したがって Apple Silicon 上では可能なら arm64 コンテナーの実行をお勧めします。
+ またコンテナーを制作する方は arm64 やこれを含むマルチアーキテクチャーのコンテナーとすることをお勧めします。
+ この問題は時が経つにつれて、また <a href="https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/">マルチアーキテクチャーをサポートする</a> イメージが今後さらに再ビルドされていくにつれて、まれな問題となっていくものと考えています。</p>
   </li>
   <li>コンテナー内からインターネットに向けての<code class="language-plaintext highlighter-rouge">ping</code>が期待どおりに動作しません。
 ネットワークの確認にあたっては<code class="language-plaintext highlighter-rouge">curl</code>や<code class="language-plaintext highlighter-rouge">wget</code>を利用してください。

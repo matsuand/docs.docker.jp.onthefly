@@ -117,19 +117,20 @@ We expect to fix this in a future release.
 @z
 
 @x
-   However, attempts to run Intel-based containers on Apple Silicon machines can crash as QEMU sometimes fails to run the container. Filesystem change notification APIs (e.g. `inotify`) do not work under QEMU emulation, see [docker/for-mac#5321](https://github.com/docker/for-mac/issues/5321). Therefore, we recommend that you run ARM64 containers on Apple Silicon machines. These containers are also faster and use less memory than Intel-based containers.
+   However, attempts to run Intel-based containers on Apple Silicon machines under emulation can crash as qemu sometimes fails to run the container. In addition, filesystem change notification APIs (`inotify`) do not work under qemu emulation. Even when the containers do run correctly under emulation, they will be slower and use more memory than the native equivalent.
 @y
-   しかし Apple silicon 上において Intel ベースのコンテナーを実行しようとしても、QEMU によるコンテナー実行が失敗することがあるため、クラッシュすることがあります。
-   QEMU エミュレーションのもとでは、ファイルシステム変更通知 API（たとえば`inotify`）は動作しません。
-   [docker/for-mac#5321](https://github.com/docker/for-mac/issues/5321) を参照してください。
-   したがって Apple Silicon マシン上では ARM64 コンテナーを実行することをお勧めします。
-   そのコンテナーであれば、Intel ベースのコンテナーに比べて高速であり、メモリ消費も抑えることができます。
+   しかし Apple silicon 上において Intel ベースのコンテナーを実行しようとしても、qemu によるコンテナー実行が失敗することがあるため、エミュレーションがクラッシュすることがあります。
+   さらに qemu エミュレーションのもとでは、ファイルシステム変更通知 API（たとえば`inotify`）は動作しません。
+   エミュレーションのもとで適正にコンテナーが動作しない状況であっても、それでもコンテナーは動作し続けますが、それは通常のネイティブな環境に比べて、非常に遅くメモリもたくさん消費します。
 @z
 
 @x
-   We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
+   In summary, running Intel-based containers on Arm-based machines should be regarded as "best effort" only. We recommend running arm64 containers on Apple Silicon machines whenever possible, and encouraging container authors to produce arm64, or multi-arch, versions of their containers. We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
 @y
-   この問題は時が経つにつれて、また [マルチアーキテクチャーをサポートする](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/) イメージが今後さらに再ビルドされていくにつれて、まれな問題となっていくものと考えられます。
+   上のことをまとめると、Arm ベースのマシン上において Intel ベースのコンテナーを動作させているのは「ベストエフォート」にすぎない、言い換えればできる範囲での対応でしかない、ということです。
+   したがって Apple Silicon 上では可能なら arm64 コンテナーの実行をお勧めします。
+   またコンテナーを制作する方は arm64 やこれを含むマルチアーキテクチャーのコンテナーとすることをお勧めします。
+   この問題は時が経つにつれて、また [マルチアーキテクチャーをサポートする](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/) イメージが今後さらに再ビルドされていくにつれて、まれな問題となっていくものと考えています。
 @z
 
 @x
