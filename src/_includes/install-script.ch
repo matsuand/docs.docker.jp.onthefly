@@ -10,113 +10,186 @@
 @x
 ### Install using the convenience script
 @y
-### 便利スクリプトを使ったインストール
 {: #install-using-the-convenience-script }
+### 便利スクリプトを使ったインストール
 @z
 
 @x
-Docker provides convenience scripts at [get.docker.com](https://get.docker.com/)
-and [test.docker.com](https://test.docker.com/) for installing edge and
-testing versions of Docker Engine - Community into development environments quickly and
-non-interactively. The source code for the scripts is in the
-[`docker-install` repository](https://github.com/docker/docker-install).
-**Using these scripts is not recommended for production
-environments**, and you should understand the potential risks before you use
-them:
+Docker provides a convenience script at [get.docker.com](https://get.docker.com/)
+to install Docker into development environments quickly and non-interactively.
+The convenience script is not recommended for production environments, but can be
+used as an example to create a provisioning script that is tailored to your needs.
+Also refer to the [install using the repository](#install-using-the-repository)
+steps to learn about installation steps to install using the package repository.
+The source code for the script is open source, and can be found in the
+[`docker-install` repository on GitHub](https://github.com/docker/docker-install){:target="_blank" rel="noopener" class="_"}.
 @y
-Docker では [get.docker.com](https://get.docker.com/) と [test.docker.com](https://test.docker.com/) において便利なスクリプトを提供しています。
-これは Docker Engine - Community の安定版あるいはテスト版を、開発機にすばやく対話形式をとらずにインストールするものです。
-このスクリプトのソースコードは [`docker-install`リポジトリ](https://github.com/docker/docker-install)にあります。 
-このスクリプトを本番環境において利用することはお勧めしません。
-またこのスクリプトの潜在的リスクについては、十分理解した上で利用してください。
+Docker では [get.docker.com](https://get.docker.com/) において便利なスクリプトを提供しています。
+これは Docker を開発マシンに対話形式をとらずにすばやくインストールするものです。
+このスクリプトを本番環境において利用することはお勧めしませんが、環境に適したプロビジョニングを行うサンプルとして活用することはできます。
+また [リポジトリを利用したインストール](#install-using-the-repository) における作業手順に従うことで、パッケージリポジトリを利用したインストール手順を身につけることができます。
+このスクリプトのソースコードはオープンソースであり、[GitHub 上の`docker-install`リポジトリ](https://github.com/docker/docker-install){:target="_blank" rel="noopener" class="_"} から入手可能です。
 @z
 
 @x
-- The scripts require `root` or `sudo` privileges to run. Therefore,
-  you should carefully examine and audit the scripts before running them.
-- The scripts attempt to detect your Linux distribution and version and
-  configure your package management system for you. In addition, the scripts do
-  not allow you to customize any installation parameters. This may lead to an
-  unsupported configuration, either from Docker's point of view or from your own
-  organization's guidelines and standards.
-- The scripts install all dependencies and recommendations of the package
-  manager without asking for confirmation. This may install a large number of
-  packages, depending on the current configuration of your host machine.
-- The script does not provide options to specify which version of Docker to install,
-  and installs the latest version that is released in the "edge" channel.
-- Do not use the convenience script if Docker has already been installed on the
-  host machine using another mechanism.
+Always examine scripts downloaded from the internet before running them locally.
+Before installing, make yourself familiar with potential risks and limitations
+of the convenience script:
+{:.warning}
+@y
+インターネットからスクリプトをダウンロードしたら、まず内容を十分確認してからローカル実行してください。
+インストールにあたっては、この便利スクリプトの潜在的リスクや制限について、よく理解してください。
+{:.warning}
+@z
+
+@x
+- The script requires `root` or `sudo` privileges to run.
+- The script attempts to detect your Linux distribution and version and
+  configure your package management system for you, and does not allow you to
+  customize most installation parameters.
+- The script installs dependencies and recommendations without asking for
+  confirmation. This may install a large number of packages, depending on the
+  current configuration of your host machine.
+- By default, the script installs the latest stable release of Docker, containerd,
+  and runc. When using this script to provision a machine, this may result in
+  unexpected major version upgrades of Docker. Always test (major) upgrades in
+  a test environment before deploying to your production systems.
+- The script is not designed to upgrade an existing Docker installation. When
+  using the script to update an existing installation, dependencies may not be
+  updated to the expected version, causing outdated versions to be used.
 @y
 - スクリプトを実行するには`root`権限か`sudo`が必要です。
-  したがって十分に内容を確認してからスクリプトを実行するようにしてください。
 - スクリプトは自動的に情報取得を行い、利用している Linux ディストリビューション、そのバージョン、そしてパッケージ管理システムの設定を行います。
   なおこのスクリプトは、インストール時にパラメーターを受け渡すような設定はできないものになっています。
-  このことから時には、不適切な設定となる場合があります。
-  それは Docker の観点の場合もあれば、開発現場のガイドラインや標準に対しての場合もあります。
-- スクリプトはパッケージマネージャーによって、依存パッケージや推奨パッケージをすべてインストールします。
+- スクリプトは依存パッケージや推奨パッケージをすべてインストールします。
   その際にはインストールして良いかどうかを問いません。
   したがって相当数のパッケージがインストールされることもあります。
   これはホストマシンのその時点での設定によります。
-- スクリプトには、インストールする Docker のバージョンを指定するようなオプションはありません。
-  "エッジ" チャネルにてリリースされている最新版がインストールされます。
-- ホストマシンに別の方法ですでに Docker をインストールしているのであれば、この便利スクリプトは使わないでください。
+- このスクリプトはデフォルトでは、最新版の Docker、containerd、runc をインストールします。
+  このスクリプトを使ってマシンをプロビジョニングした場合、Docker のメジャーバージョンへのアップグレードにより、予期しない結果を引き起こすことがあります。
+  本番環境へのデプロイを行う際には、必ず (メジャーバージョンへの) アップグレードをテスト環境においてテストしておいてください。
+- このスクリプトは、既にインストールされている Docker をアップグレードするように設計されていません。
+  このスクリプトを利用して既存インストールをアップデートする際には、依存パッケージが思いどおりにアップデートされない場合があります。
+  それによって古いバージョンのまま利用する状況となる場合があります。
 @z
 
 @x
-This example uses the script at [get.docker.com](https://get.docker.com/) to
-install the latest release of Docker Engine - Community on Linux. To install the latest
-testing version, use [test.docker.com](https://test.docker.com/) instead. In
-each of the commands below, replace each occurrence of `get` with `test`.
-@y
-次の例は Linux に Docker Engine - Community の最新安定版リリースのインストールに [get.docker.com](https://get.docker.com/) のスクリプトを使います。
-最新テスト版を使いたい場合は、代わりに [test.docker.com](https://test.docker.com/) を指定します。
-その場合はコマンド中の`get`を`test`に置き換えて実行します。
-@z
-
-@x
-> **Warning**:
+> Tip: preview script steps before running
 >
-Always examine scripts downloaded from the internet before
-> running them locally.
-{:.warning}
+> You can run the script with the `DRY_RUN=1` option to learn what steps the
+> script will execute during installation:
+>
+> ```console
+> $ curl -fsSL https://get.docker.com -o get-docker.sh
+> $ DRY_RUN=1 sh ./get-docker.sh
+> ```
 @y
-> **警告**
-> 
-> インターネットからスクリプトをダウンロードしたら、まず内容を十分確認してから実行してください。
-{:.warning}
+> ヒント：  スクリプト実行前のインストールステップ確認
+>
+> 本スクリプトの実行にあたって`DRY_RUN=1`オプションを指定すると、このスクリプトのインストールステップを確認することができます。
+>
+> ```console
+> $ curl -fsSL https://get.docker.com -o get-docker.sh
+> $ DRY_RUN=1 sh ./get-docker.sh
+> ```
+@z
+
+@x
+This example downloads the script from [get.docker.com](https://get.docker.com/)
+and runs it to install the latest stable release of Docker on Linux:
+@y
+以下は、このスクリプトを [get.docker.com](https://get.docker.com/) からダウンロードして実行することで、Linux 上に最新安定版をインストールする例です。
 @z
 
 @x
 ```console
 $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
+Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b2737
 <...>
 ```
 @y
 ```console
 $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
+Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b2737
 <...>
 ```
 @z
 
 @x
-If you would like to use Docker as a non-root user please see the
-[post-installation steps for Linux](../linux-postinstall#manage-docker-as-a-non-root-user).
+Docker is installed. The `docker` service starts automatically on Debian based
+distributions. On `RPM` based distributions, such as CentOS or Fedora, you need
+to start it manually using the appropriate `systemctl` or `service` command.
+As the message indicates, non-root users cannot run Docker commands by default.
 @y
-非 root ユーザーから Docker を利用したい場合は [Linux インストール後の作業](../linux-postinstall#manage-docker-as-a-non-root-user) を参照してください。
-@z
-
-@x
-Docker Engine - Community is installed. It starts automatically on `DEB`-based distributions. On
-`RPM`-based distributions, you need to start it manually using the appropriate
-`systemctl` or `service` command. As the message indicates, non-root users can't
-run Docker commands by default.
-@y
-Docker Engine - Community がインストールされました。
-`DEB`ベースのディストリビューションでは Docker が自動的に開始されます。
+上により Docker がインストールされます。
+Debian ベースのディストリビューションでは Docker が自動的に開始されます。
 `RPM`ベースの場合は手動での実行が必要となるため、 `systemctl`か`service`のいずれか適当なものを実行します。
-上の出力メッセージに示されているように、デフォルトで非 root ユーザーは Docker コマンドを実行できません。
+上の出力メッセージに示されているように、デフォルトでは非 root ユーザーによる Docker コマンド実行はできません。
+@z
+
+@x
+> **Use Docker as a non-privileged user, or install in rootless mode?**
+>
+> The installation script requires `root` or `sudo` privileges to install and
+> use Docker. If you want to grant non-root users access to Docker, refer to the
+> [post-installation steps for Linux](/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
+> Docker can also be installed without `root` privileges, or configured to run
+> in rootless mode. For instructions on running Docker in rootless mode, refer to
+> [run the Docker daemon as a non-root user (rootless mode)](/engine/security/rootless/).
+@y
+> **非特権ユーザーでの Docker 利用、rootless モードでのインストール？**
+>
+> このインストールスクリプトでは、Docker をインストールして利用するために`root`あるいは`sudo`を用いた権限が必要です。
+> 非 root ユーザーに Docker の利用を許可する場合は、[Linux インストール後の作業](/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) を参照してください。
+> Docker は`root`権限がなくてもインストールできます。
+> つまり rootless モードにより実行することができます。
+> rootless モードにより Docker を実行する手順については [root ユーザー以外による Docker デーモン起動（rootless モード）]({{ site.baseurl }}/engine/security/rootless/) を参照してください。
+@z
+
+@x
+#### Install pre-releases
+@y
+{: #install-pre-releases }
+#### プレリリース版のインストール
+@z
+
+@x
+Docker also provides a convenience script at [test.docker.com](https://test.docker.com/)
+to install pre-releases of Docker on Linux. This script is equivalent to the
+script at `get.docker.com`, but configures your package manager to enable the
+"test" channel from our package repository, which includes both stable and
+pre-releases (beta versions, release-candidates) of Docker. Use this script to
+get early access to new releases, and to evaluate them in a testing environment
+before they are released as stable.
+@y
+Docker ではこの便利スクリプトを [test.docker.com](https://test.docker.com/) からも提供しています。
+これを使って Linux 上にプレリリース版の Docker をインストールできます。
+このスクリプトは`get.docker.com`から入手するものと同等ですが、パッケージリポジトリ内の「テスト」チャネルから、パッケージマネージャーがインストールするものとして設定されています。
+このスクリプトには Docker の安定版とプレリリース版（ベータ版、リリース候補版）が含まれています。
+このスクリプトを利用すれば、新規リリース機能をいち早く利用できます。
+またそういった機能が安定版として提供されるよりも前に、テスト環境において評価することができます。
+@z
+
+@x
+To install the latest version of Docker on Linux from the "test" channel, run:
+@y
+Linux への Docker 最新版のインストールを「テスト」チャネルから行うには、以下を実行します。
+@z
+
+@x
+```console
+$ curl -fsSL https://test.docker.com -o test-docker.sh
+$ sudo sh test-docker.sh
+<...>
+```
+@y
+```console
+$ curl -fsSL https://test.docker.com -o test-docker.sh
+$ sudo sh test-docker.sh
+<...>
+```
 @z
 
 @x

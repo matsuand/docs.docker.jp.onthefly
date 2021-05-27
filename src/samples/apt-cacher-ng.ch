@@ -161,7 +161,7 @@ container.
 
 @x
 1. Add an apt Proxy setting
-   `echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/conf.d/01proxy`
+   `echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy`
 2. Set an environment variable:
    `http_proxy=http://dockerhost:3142/`
 3. Change your `sources.list` entries to start with
@@ -170,7 +170,7 @@ container.
 5. Create a custom network of an APT proxy container with Debian-based containers.
 @y
 1. Add an apt Proxy setting
-   `echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/conf.d/01proxy`
+   `echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy`
 2. Set an environment variable:
    `http_proxy=http://dockerhost:3142/`
 3. Change your `sources.list` entries to start with
