@@ -1,4 +1,4 @@
-<!-- Page generated 2021-05-22 10:49:46 +0900-->
+<!-- Page generated 2021-05-27 18:53:05 +0900-->
 <!DOCTYPE html>
 <html lang="ja"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Docker Engine インストール（Debian 向け） | Docker ドキュメント</title>
@@ -39,12 +39,12 @@
   <meta property="og:title" content="Docker Engine インストール（Debian 向け）" />
   <meta property="og:description" content="Debian 上に Docker Engine をインストールする手順を説明。" />
   <meta property="og:type" content="website"/>
-  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-05-22T10:49:46+09:00"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="2021-05-27T18:53:05+09:00"/>
   <meta property="og:image" itemprop="image primaryImageOfPage" content="/docs.docker.jp.onthefly/images/docs@2x.png"/>
   <meta property="og:locale" content="ja_JP" />
   <meta property="og:url" content="https://matsuand.github.io/docs.docker.jp.onthefly/engine/install/debian/" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <meta property="article:published_time" itemprop="datePublished" content="2021-05-22T10:49:46+09:00"/>
+  <meta property="article:published_time" itemprop="datePublished" content="2021-05-27T18:53:05+09:00"/>
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"Docker Engine インストール（Debian 向け）","description":"Debian 上に Docker Engine をインストールする手順を説明。","url":"https://docs.docker.com/engine/install/debian/"}</script>
   <!-- END SEO STUFF -->
 </head>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-body">
                     <main class="col-content content">
-                        <section class="section"><h1>Docker Engine インストール（Debian 向け）</h1><p><em class="reading-time">読む時間の目安: 5 分</em></p><p>Debian 向けに Docker Engine を始めるには、<a href="#prerequisites">前提条件を満たしているか</a>を確認してから、<a href="#installation-methods">インストール手順</a> に進んでください。</p>
+                        <section class="section"><h1>Docker Engine インストール（Debian 向け）</h1><p><em class="reading-time">読む時間の目安: 6 分</em></p><p>Debian 向けに Docker Engine を始めるには、<a href="#prerequisites">前提条件を満たしているか</a>を確認してから、<a href="#installation-methods">インストール手順</a> に進んでください。</p>
 
 <h2 id="prerequisites">前提条件</h2>
 
@@ -353,49 +353,79 @@ Docker コマンドの実行には<code class="language-plaintext highlighter-ro
 
 <h3 id="install-using-the-convenience-script">便利スクリプトを使ったインストール</h3>
 
-<p>Docker では <a href="https://get.docker.com/">get.docker.com</a> と <a href="https://test.docker.com/">test.docker.com</a> において便利なスクリプトを提供しています。
-これは Docker Engine - Community の安定版あるいはテスト版を、開発機にすばやく対話形式をとらずにインストールするものです。
-このスクリプトのソースコードは <a href="https://github.com/docker/docker-install"><code class="language-plaintext highlighter-rouge">docker-install</code>リポジトリ</a>にあります。
-このスクリプトを本番環境において利用することはお勧めしません。
-またこのスクリプトの潜在的リスクについては、十分理解した上で利用してください。</p>
+<p>Docker では <a href="https://get.docker.com/">get.docker.com</a> において便利なスクリプトを提供しています。
+これは Docker を開発マシンに対話形式をとらずにすばやくインストールするものです。
+このスクリプトを本番環境において利用することはお勧めしませんが、環境に適したプロビジョニングを行うサンプルとして活用することはできます。
+また <a href="#install-using-the-repository">リポジトリを利用したインストール</a> における作業手順に従うことで、パッケージリポジトリを利用したインストール手順を身につけることができます。
+このスクリプトのソースコードはオープンソースであり、<a href="https://github.com/docker/docker-install" target="_blank" rel="noopener" class="_">GitHub 上の<code class="language-plaintext highlighter-rouge">docker-install</code>リポジトリ</a> から入手可能です。</p>
+
+<p class="warning">インターネットからスクリプトをダウンロードしたら、まず内容を十分確認してからローカル実行してください。
+インストールにあたっては、この便利スクリプトの潜在的リスクや制限について、よく理解してください。</p>
 
 <ul>
-  <li>スクリプトを実行するには<code class="language-plaintext highlighter-rouge">root</code>権限か<code class="language-plaintext highlighter-rouge">sudo</code>が必要です。
-したがって十分に内容を確認してからスクリプトを実行するようにしてください。</li>
+  <li>スクリプトを実行するには<code class="language-plaintext highlighter-rouge">root</code>権限か<code class="language-plaintext highlighter-rouge">sudo</code>が必要です。</li>
   <li>スクリプトは自動的に情報取得を行い、利用している Linux ディストリビューション、そのバージョン、そしてパッケージ管理システムの設定を行います。
-なおこのスクリプトは、インストール時にパラメーターを受け渡すような設定はできないものになっています。
-このことから時には、不適切な設定となる場合があります。
-それは Docker の観点の場合もあれば、開発現場のガイドラインや標準に対しての場合もあります。</li>
-  <li>スクリプトはパッケージマネージャーによって、依存パッケージや推奨パッケージをすべてインストールします。
+なおこのスクリプトは、インストール時にパラメーターを受け渡すような設定はできないものになっています。</li>
+  <li>スクリプトは依存パッケージや推奨パッケージをすべてインストールします。
 その際にはインストールして良いかどうかを問いません。
 したがって相当数のパッケージがインストールされることもあります。
 これはホストマシンのその時点での設定によります。</li>
-  <li>スクリプトには、インストールする Docker のバージョンを指定するようなオプションはありません。
-“エッジ” チャネルにてリリースされている最新版がインストールされます。</li>
-  <li>ホストマシンに別の方法ですでに Docker をインストールしているのであれば、この便利スクリプトは使わないでください。</li>
+  <li>このスクリプトはデフォルトでは、最新版の Docker、containerd、runc をインストールします。
+このスクリプトを使ってマシンをプロビジョニングした場合、Docker のメジャーバージョンへのアップグレードにより、予期しない結果を引き起こすことがあります。
+本番環境へのデプロイを行う際には、必ず (メジャーバージョンへの) アップグレードをテスト環境においてテストしておいてください。</li>
+  <li>このスクリプトは、既にインストールされている Docker をアップグレードするように設計されていません。
+このスクリプトを利用して既存インストールをアップデートする際には、依存パッケージが思いどおりにアップデートされない場合があります。
+それによって古いバージョンのまま利用する状況となる場合があります。</li>
 </ul>
 
-<p>次の例は Linux に Docker Engine - Community の最新安定版リリースのインストールに <a href="https://get.docker.com/">get.docker.com</a> のスクリプトを使います。
-最新テスト版を使いたい場合は、代わりに <a href="https://test.docker.com/">test.docker.com</a> を指定します。
-その場合はコマンド中の<code class="language-plaintext highlighter-rouge">get</code>を<code class="language-plaintext highlighter-rouge">test</code>に置き換えて実行します。</p>
+<blockquote>
+  <p>ヒント：  スクリプト実行前のインストールステップ確認</p>
 
-<blockquote class="warning">
-  <p><strong>警告</strong></p>
+  <p>本スクリプトの実行にあたって<code class="language-plaintext highlighter-rouge">DRY_RUN=1</code>オプションを指定すると、このスクリプトのインストールステップを確認することができます。</p>
 
-  <p>インターネットからスクリプトをダウンロードしたら、まず内容を十分確認してから実行してください。</p>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
+<span class="gp">$</span><span class="w"> </span><span class="nv">DRY_RUN</span><span class="o">=</span>1 sh ./get-docker.sh
+</code></pre></div>  </div>
 </blockquote>
+
+<p>以下は、このスクリプトを <a href="https://get.docker.com/">get.docker.com</a> からダウンロードして実行することで、Linux 上に最新安定版をインストールする例です。</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://get.docker.com <span class="nt">-o</span> get-docker.sh
 <span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh get-docker.sh
-<span class="c">&lt;...&gt;
+<span class="go">Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b2737
+</span><span class="c">&lt;...&gt;
 </span></code></pre></div></div>
 
-<p>非 root ユーザーから Docker を利用したい場合は <a href="../linux-postinstall#manage-docker-as-a-non-root-user">Linux インストール後の作業</a> を参照してください。</p>
-
-<p>Docker Engine - Community がインストールされました。
-<code class="language-plaintext highlighter-rouge">DEB</code>ベースのディストリビューションでは Docker が自動的に開始されます。
+<p>上により Docker がインストールされます。
+Debian ベースのディストリビューションでは Docker が自動的に開始されます。
 <code class="language-plaintext highlighter-rouge">RPM</code>ベースの場合は手動での実行が必要となるため、 <code class="language-plaintext highlighter-rouge">systemctl</code>か<code class="language-plaintext highlighter-rouge">service</code>のいずれか適当なものを実行します。
-上の出力メッセージに示されているように、デフォルトで非 root ユーザーは Docker コマンドを実行できません。</p>
+上の出力メッセージに示されているように、デフォルトでは非 root ユーザーによる Docker コマンド実行はできません。</p>
+
+<blockquote>
+  <p><strong>非特権ユーザーでの Docker 利用、rootless モードでのインストール？</strong></p>
+
+  <p>このインストールスクリプトでは、Docker をインストールして利用するために<code class="language-plaintext highlighter-rouge">root</code>あるいは<code class="language-plaintext highlighter-rouge">sudo</code>を用いた権限が必要です。
+非 root ユーザーに Docker の利用を許可する場合は、<a href="/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">Linux インストール後の作業</a> を参照してください。
+Docker は<code class="language-plaintext highlighter-rouge">root</code>権限がなくてもインストールできます。
+つまり rootless モードにより実行することができます。
+rootless モードにより Docker を実行する手順については <a href="/docs.docker.jp.onthefly/engine/security/rootless/">root ユーザー以外による Docker デーモン起動（rootless モード）</a> を参照してください。</p>
+</blockquote>
+
+<h4 id="install-pre-releases">プレリリース版のインストール</h4>
+
+<p>Docker ではこの便利スクリプトを <a href="https://test.docker.com/">test.docker.com</a> からも提供しています。
+これを使って Linux 上にプレリリース版の Docker をインストールできます。
+このスクリプトは<code class="language-plaintext highlighter-rouge">get.docker.com</code>から入手するものと同等ですが、パッケージリポジトリ内の「テスト」チャネルから、パッケージマネージャーがインストールするものとして設定されています。
+このスクリプトには Docker の安定版とプレリリース版（ベータ版、リリース候補版）が含まれています。
+このスクリプトを利用すれば、新規リリース機能をいち早く利用できます。
+またそういった機能が安定版として提供されるよりも前に、テスト環境において評価することができます。</p>
+
+<p>Linux への Docker 最新版のインストールを「テスト」チャネルから行うには、以下を実行します。</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>curl <span class="nt">-fsSL</span> https://test.docker.com <span class="nt">-o</span> test-docker.sh
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>sh test-docker.sh
+<span class="c">&lt;...&gt;
+</span></code></pre></div></div>
 
 <h4 id="upgrade-docker-after-using-the-convenience-script">便利スクリプトを使った後の Docker のアップグレード</h4>
 
@@ -486,6 +516,7 @@ Docker を使ったアプリケーションの構築方法を学びます。</li
       </li>
       <li><a href="#install-using-the-convenience-script" class="nomunge">便利スクリプトを使ったインストール</a>
         <ul>
+          <li><a href="#install-pre-releases" class="nomunge">プレリリース版のインストール</a></li>
           <li><a href="#upgrade-docker-after-using-the-convenience-script" class="nomunge">便利スクリプトを使った後の Docker のアップグレード</a></li>
         </ul>
       </li>
