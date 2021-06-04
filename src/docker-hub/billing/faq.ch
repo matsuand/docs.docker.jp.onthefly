@@ -382,6 +382,42 @@ If you have any questions about how the new seat-based pricing impacts you that 
 @z
 
 @x
+### I’m on an annual plan. Where did my monthly seats go?
+@y
+### I’m on an annual plan. Where did my monthly seats go?
+@z
+
+@x
+Docker no longer supports hybrid accounts with both monthly and annual seats. As of June 1, 2021, all monthly seats that were part of an existing annual plan have been converted to annual seats.
+@y
+Docker no longer supports hybrid accounts with both monthly and annual seats. As of June 1, 2021, all monthly seats that were part of an existing annual plan have been converted to annual seats.
+@z
+
+@x
+### How is Docker charging me for the monthly seats that were converted into annual seats?
+@y
+### How is Docker charging me for the monthly seats that were converted into annual seats?
+@z
+
+@x
+Docker will not charge you for any monthly seats that were converted to annual seats for the remainder of your current annual subscription.  We will charge you for the total number of seats included in your account at the time of the renewal of your annual subscription.
+@y
+Docker will not charge you for any monthly seats that were converted to annual seats for the remainder of your current annual subscription.  We will charge you for the total number of seats included in your account at the time of the renewal of your annual subscription.
+@z
+
+@x
+### Wait, so you’re saying I won’t be charged for my monthly seats for the remainder of my annual subscription?
+@y
+### Wait, so you’re saying I won’t be charged for my monthly seats for the remainder of my annual subscription?
+@z
+
+@x
+That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021.
+@y
+That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021.
+@z
+
+@x
 ## Pull Rate Limiting FAQs
 @y
 ## Pull Rate Limiting FAQs
@@ -827,6 +863,30 @@ For more information, view our blogs on [inactive image retention](https://www.d
         "text": "If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you."
       }
     },
+       {
+      "@type": "Question",
+      "name": "I’m on an annual plan. Where did my monthly seats go? ",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Docker no longer supports hybrid accounts with both monthly and annual seats. As of June 1, 2021, all monthly seats that were part of an existing annual plan have been converted to annual seats. "
+      }
+    },
+      {
+      "@type": "Question",
+      "name": "How is Docker charging me for the monthly seats that were converted into annual seats?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Docker will not charge you for any monthly seats that were converted to annual seats for the remainder of your current annual subscription.  We will charge you for the total number of seats included in your account at the time of the renewal of your annual subscription. "
+      }
+    },
+      {
+      "@type": "Question",
+      "name": "Wait, so you’re saying I won’t be charged for my monthly seats for the remainder of my annual subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021. "
+          }
+      },
     {
       "@type": "Question",
       "name": "What are the Docker Terms of Service?",
@@ -1172,6 +1232,30 @@ For more information, view our blogs on [inactive image retention](https://www.d
         "text": "If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you."
       }
     },
+       {
+      "@type": "Question",
+      "name": "I’m on an annual plan. Where did my monthly seats go? ",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Docker no longer supports hybrid accounts with both monthly and annual seats. As of June 1, 2021, all monthly seats that were part of an existing annual plan have been converted to annual seats. "
+      }
+    },
+      {
+      "@type": "Question",
+      "name": "How is Docker charging me for the monthly seats that were converted into annual seats?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Docker will not charge you for any monthly seats that were converted to annual seats for the remainder of your current annual subscription.  We will charge you for the total number of seats included in your account at the time of the renewal of your annual subscription. "
+      }
+    },
+      {
+      "@type": "Question",
+      "name": "Wait, so you’re saying I won’t be charged for my monthly seats for the remainder of my annual subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021. "
+          }
+      },
     {
       "@type": "Question",
       "name": "What are the Docker Terms of Service?",

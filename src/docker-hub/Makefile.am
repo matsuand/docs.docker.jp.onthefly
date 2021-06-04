@@ -26,6 +26,7 @@ bases = \
 	orgs                   \
 	release-notes          \
 	repos                  \
+	service-accounts       \
 	slack_integration      \
 	vulnerability-scanning \
 	webhooks

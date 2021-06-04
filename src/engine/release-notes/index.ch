@@ -57,6 +57,156 @@ for Docker Engine.
 @z
 
 @x
+## 20.10.7
+2021-06-02
+@y
+## 20.10.7
+2021-06-02
+@z
+
+@x
+### Client
+@y
+{: #client }
+### クライアント
+@z
+
+@x
+* Suppress warnings for deprecated cgroups [docker/cli#3099](https://github.com/docker/cli/pull/3099).
+* Prevent sending `SIGURG` signals to container on Linux and macOS. The Go runtime
+  (starting with Go 1.14) uses `SIGURG` signals internally as an interrupt to
+  support preemptable syscalls. In situations where the Docker CLI was attached
+  to a container, these interrupts were forwarded to the container. This fix
+  changes the Docker CLI to ignore `SIGURG` signals [docker/cli#3107](https://github.com/docker/cli/pull/3107),
+  [moby/moby#42421](https://github.com/moby/moby/pull/42421).
+@y
+* 廃止予定の cgroup に対する警告を除きました。
+  [docker/cli#3099](https://github.com/docker/cli/pull/3099) 参照。
+* Linux や macOS において、シグナル`SIGURG`がコンテナーに送信されないようにしました。
+  Go 言語のランタイム (Go 1.14 以降) では、プリエンプティブなシステムコールのサポートを阻止するものとして、`SIGURG`シグナルが内部的に呼び出されます。
+  Docker CLI がコンテナーにアタッチされる状況では、そういった阻止がコンテナーに対して転送されます。
+  これによって Docker CLI が`SIGURG`シグナルを無視するような変更につながりました。
+  [docker/cli#3107](https://github.com/docker/cli/pull/3107),
+  [moby/moby#42421](https://github.com/moby/moby/pull/42421) 参照。
+@z
+
+@x
+### Builder
+@y
+### Builder
+@z
+
+@x
+* Update BuildKit to version v0.8.3-3-g244e8cde [moby/moby#42448](https://github.com/moby/moby/pull/42448):
+    * Transform relative mountpoints for exec mounts in the executor to work around
+      a breaking change in runc v1.0.0-rc94 and up. [moby/buildkit#2137](https://github.com/moby/buildkit/pull/2137).
+    * Add retry on image push 5xx errors. [moby/buildkit#2043](https://github.com/moby/buildkit/pull/2043).
+    * Fix build-cache not being invalidated when renaming a file that is copied using
+      a `COPY` command with a wildcard. Note that this change invalidates
+      existing build caches for copy commands that use a wildcard. [moby/buildkit#2018](https://github.com/moby/buildkit/pull/2018).
+    * Fix build-cache not being invalidated when using mounts [moby/buildkit#2076](https://github.com/moby/buildkit/pull/2076).
+* Fix build failures when `FROM` image is not cached when using legacy schema 1 images [moby/moby#42382](https://github.com/moby/moby/pull/42382).
+@y
+* BuildKit をバージョン v0.8.3-3-g244e8cde に更新しました。
+  [moby/moby#42448](https://github.com/moby/moby/pull/42448)。
+    * Transform relative mountpoints for exec mounts in the executor to work around
+      a breaking change in runc v1.0.0-rc94 and up. [moby/buildkit#2137](https://github.com/moby/buildkit/pull/2137).
+    * Add retry on image push 5xx errors. [moby/buildkit#2043](https://github.com/moby/buildkit/pull/2043).
+    * `COPY`コマンドにワイルドカードをつけてファイル名変更を行った際に、ビルドキャッシュが不正にならないように修正しました。
+      この変更によって、そのようなコピーを行った既存のビルドキャッシュは不正なものとなります。
+      [moby/buildkit#2018](https://github.com/moby/buildkit/pull/2018)
+    * マウントを利用した場合にビルドキャッシュが不正にならないように修正しました。
+      [moby/buildkit#2076](https://github.com/moby/buildkit/pull/2076)
+* 古いスキーマ 1 イメージを用いていて`FROM`イメージがキャッシュされていない場合に、ビルドに失敗する状況を修正しました。
+  [moby/moby#42382](https://github.com/moby/moby/pull/42382)
+@z
+
+@x
+### Logging
+@y
+{: #logging }
+### ログ処理
+@z
+
+@x
+* Update the hcsshim SDK to make daemon logs on Windows less verbose [moby/moby#42292](https://github.com/moby/moby/pull/42292).
+@y
+* Update the hcsshim SDK to make daemon logs on Windows less verbose [moby/moby#42292](https://github.com/moby/moby/pull/42292).
+@z
+
+@x
+### Rootless
+@y
+### Rootless
+@z
+
+@x
+* Fix capabilities not being honored when an image was built on a daemon with
+  user-namespaces enabled [moby/moby#42352](https://github.com/moby/moby/pull/42352).
+@y
+* Fix capabilities not being honored when an image was built on a daemon with
+  user-namespaces enabled [moby/moby#42352](https://github.com/moby/moby/pull/42352).
+@z
+
+@x
+### Networking
+@y
+{: #networking }
+### ネットワーク処理
+@z
+
+@x
+* Update libnetwork to fix publishing ports on environments with kernel boot
+  parameter `ipv6.disable=1`, and to fix a deadlock causing internal DNS lookups
+  to fail [moby/moby#42413](https://github.com/moby/moby/pull/42413).
+@y
+* Update libnetwork to fix publishing ports on environments with kernel boot
+  parameter `ipv6.disable=1`, and to fix a deadlock causing internal DNS lookups
+  to fail [moby/moby#42413](https://github.com/moby/moby/pull/42413).
+@z
+
+@x
+### Contrib
+@y
+### Contrib
+@z
+
+@x
+* Update rootlesskit to v0.14.2 to fix a timeout when starting the userland proxy
+  with the `slirp4netns` port driver [moby/moby#42294](https://github.com/moby/moby/pull/42294).
+* Fix "Device or resource busy" errors when running docker-in-docker on a rootless
+  daemon [moby/moby#42342](https://github.com/moby/moby/pull/42342).
+@y
+* Update rootlesskit to v0.14.2 to fix a timeout when starting the userland proxy
+  with the `slirp4netns` port driver [moby/moby#42294](https://github.com/moby/moby/pull/42294).
+* Fix "Device or resource busy" errors when running docker-in-docker on a rootless
+  daemon [moby/moby#42342](https://github.com/moby/moby/pull/42342).
+@z
+
+@x
+### Packaging
+@y
+{: #packaging }
+### パッケージ
+@z
+
+@x
+* Update containerd to v1.4.6, runc v1.0.0-rc95 to address [CVE-2021-30465](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30465)
+  [moby/moby#42398](https://github.com/moby/moby/pull/42398), [moby/moby#42395](https://github.com/moby/moby/pull/42395),
+  [ocker/containerd-packaging#234](https://github.com/docker/containerd-packaging/pull/234)
+* Update containerd to v1.4.5, runc v1.0.0-rc94 [moby/moby#42372](https://github.com/moby/moby/pull/42372),
+  [moby/moby#42388](https://github.com/moby/moby/pull/42388), [docker/containerd-packaging#232](https://github.com/docker/containerd-packaging/pull/232).
+* Update Docker Scan plugin packages (`docker-scan-plugin`) to v0.8 [docker/docker-ce-packaging#545](https://github.com/docker/docker-ce-packaging/pull/545).
+@y
+* Update containerd to v1.4.6, runc v1.0.0-rc95 to address [CVE-2021-30465](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30465)
+  [moby/moby#42398](https://github.com/moby/moby/pull/42398), [moby/moby#42395](https://github.com/moby/moby/pull/42395),
+  [ocker/containerd-packaging#234](https://github.com/docker/containerd-packaging/pull/234)
+* Update containerd to v1.4.5, runc v1.0.0-rc94 [moby/moby#42372](https://github.com/moby/moby/pull/42372),
+  [moby/moby#42388](https://github.com/moby/moby/pull/42388), [docker/containerd-packaging#232](https://github.com/docker/containerd-packaging/pull/232).
+* Update Docker Scan plugin packages (`docker-scan-plugin`) to v0.8 [docker/docker-ce-packaging#545](https://github.com/docker/docker-ce-packaging/pull/545).
+@z
+
+@x
 ## 20.10.6
 2021-04-12
 @y

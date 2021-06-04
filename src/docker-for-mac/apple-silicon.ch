@@ -41,27 +41,21 @@ Docker Desktop for Apple silicon はマルチプラットフォームイメー�
 @z
 
 @x
-## Docker Desktop 3.3.1
+Download Docker Desktop for Mac on Apple silicon:
 @y
-## Docker Desktop 3.3.1
-@z
-
-@x
-2021-04-15
-@y
-2021-04-15
-@z
-
-@x
-Click the following link to download Docker Desktop.
-@y
-Docker Desktop のダウンロードは、以下のリンクをクリックしてください。
+Apple silicon 向け Docker Desktop for Mac のダウンロード
 @z
 
 @x
 [Download](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 @y
 [ダウンロード](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+@z
+
+@x
+{% include eula.md %}
+@y
+{% include eula.md %}
 @z
 
 @x
@@ -85,11 +79,11 @@ Rosetta 2 のインストールはコマンドラインから手動で、以下�
 @z
 
 @x
-```
+```shell
 softwareupdate --install-rosetta
 ```
 @y
-```
+```shell
 softwareupdate --install-rosetta
 ```
 @z

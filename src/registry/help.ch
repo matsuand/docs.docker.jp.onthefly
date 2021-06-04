@@ -22,19 +22,9 @@ title: Get help
 @z
 
 @x
-If you need help, or just want to chat, you can reach us:
+If you need help, or just want to chat about development, you can reach us on the #distribution channel in the CNCF Slack.
 @y
-If you need help, or just want to chat, you can reach us:
-@z
-
-@x
-- on the [Docker forums](https://forums.docker.com/c/open-source-projects/opensrcreg).
-- on the [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
-- on the [mailing list](https://groups.google.com/a/dockerproject.org/forum/#!forum/distribution) (mail at <distribution@dockerproject.org>).
-@y
-- on the [Docker forums](https://forums.docker.com/c/open-source-projects/opensrcreg).
-- on the [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
-- on the [mailing list](https://groups.google.com/a/dockerproject.org/forum/#!forum/distribution) (mail at <distribution@dockerproject.org>).
+If you need help, or just want to chat about development, you can reach us on the #distribution channel in the CNCF Slack.
 @z
 
 @x
@@ -44,11 +34,11 @@ If you want to report a bug:
 @z
 
 @x
-- be sure to first read about [how to contribute](https://github.com/docker/distribution/blob/master/CONTRIBUTING.md).
-- you can then do so on the [GitHub project bugtracker](https://github.com/docker/distribution/issues).
+- be sure to first read about [how to contribute](https://github.com/distribution/distribution/blob/master/CONTRIBUTING.md).
+- you can then do so on the [GitHub project bugtracker](https://github.com/distribution/distribution/issues).
 @y
-- be sure to first read about [how to contribute](https://github.com/docker/distribution/blob/master/CONTRIBUTING.md).
-- you can then do so on the [GitHub project bugtracker](https://github.com/docker/distribution/issues).
+- be sure to first read about [how to contribute](https://github.com/distribution/distribution/blob/master/CONTRIBUTING.md).
+- you can then do so on the [GitHub project bugtracker](https://github.com/distribution/distribution/issues).
 @z
 
 @x
